@@ -4,6 +4,41 @@
  */
 
 export interface paths {
+    "/v1/admin/role-grants/{grant_id}/revoke": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Revoke Role */
+        post: operations["revoke_role_v1_admin_role_grants__grant_id__revoke_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/admin/users/{user_id}/roles": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List Roles */
+        get: operations["list_roles_v1_admin_users__user_id__roles_get"];
+        put?: never;
+        /** Grant Role */
+        post: operations["grant_role_v1_admin_users__user_id__roles_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/books/{book_id}": {
         parameters: {
             query?: never;
@@ -65,6 +100,74 @@ export interface paths {
         /** The book for one grade+subject */
         get: operations["book_for_v1_grades__grade__subjects__subject__book_get"];
         put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/me": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** The signed-in account, its roles, profile and consents */
+        get: operations["me_v1_me_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/me/consents": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Accept a versioned document */
+        post: operations["accept_consent_v1_me_consents_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/me/consents/{document}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        /** Withdraw an optional consent */
+        delete: operations["withdraw_consent_v1_me_consents__document__delete"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/me/profile": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** Save onboarding/learning preferences */
+        put: operations["put_profile_v1_me_profile_put"];
         post?: never;
         delete?: never;
         options?: never;
@@ -241,6 +344,30 @@ export interface components {
             /** Visual Count */
             visual_count: number;
         };
+        /** ConsentIn */
+        ConsentIn: {
+            /**
+             * Document
+             * @enum {string}
+             */
+            document: "terms" | "privacy" | "marketing_messages";
+            /** Version */
+            version: string;
+        };
+        /** ConsentOut */
+        ConsentOut: {
+            /**
+             * Accepted At
+             * Format: date-time
+             */
+            accepted_at: string;
+            /** Document */
+            document: string;
+            /** Version */
+            version: string;
+            /** Withdrawn At */
+            withdrawn_at: string | null;
+        };
         /** GradeCatalogue */
         GradeCatalogue: {
             grade: components["schemas"]["GradeOut"];
@@ -265,6 +392,121 @@ export interface components {
         HTTPValidationError: {
             /** Detail */
             detail?: components["schemas"]["ValidationError"][];
+        };
+        /** MeOut */
+        MeOut: {
+            /** Consents */
+            consents: components["schemas"]["ConsentOut"][];
+            /** Display Name */
+            display_name: string | null;
+            /** Email */
+            email: string | null;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Mfa Session */
+            mfa_session: boolean;
+            profile: components["schemas"]["ProfileOut"] | null;
+            /** Roles */
+            roles: components["schemas"]["Role"][];
+            /** Status */
+            status: string;
+        };
+        /**
+         * ProfileIn
+         * @description Onboarding answers (P04.S3.T1). Everything can be corrected later; no identity documents are collected.
+         */
+        ProfileIn: {
+            /** Daily Minutes */
+            daily_minutes?: number | null;
+            /**
+             * Explanation Language
+             * @default en
+             * @enum {string}
+             */
+            explanation_language: "en" | "ur" | "roman_ur";
+            /** Grade */
+            grade?: (11 | 12) | null;
+            /** Stream */
+            stream?: ("pre_medical" | "pre_engineering" | "ics") | null;
+            /** Subjects */
+            subjects?: ("biology" | "chemistry" | "physics" | "computer_science" | "mathematics")[];
+            /** Target Exams */
+            target_exams?: ("mdcat" | "ecat")[];
+            /** Target Year */
+            target_year?: number | null;
+        };
+        /** ProfileOut */
+        ProfileOut: {
+            /** Daily Minutes */
+            daily_minutes?: number | null;
+            /**
+             * Explanation Language
+             * @default en
+             * @enum {string}
+             */
+            explanation_language: "en" | "ur" | "roman_ur";
+            /** Grade */
+            grade?: (11 | 12) | null;
+            /** Stream */
+            stream?: ("pre_medical" | "pre_engineering" | "ics") | null;
+            /** Subjects */
+            subjects?: ("biology" | "chemistry" | "physics" | "computer_science" | "mathematics")[];
+            /** Target Exams */
+            target_exams?: ("mdcat" | "ecat")[];
+            /** Target Year */
+            target_year?: number | null;
+            /** Updated At */
+            updated_at?: string | null;
+        };
+        /** RevokeIn */
+        RevokeIn: {
+            /** Reason */
+            reason: string;
+        };
+        /**
+         * Role
+         * @enum {string}
+         */
+        Role: "student" | "content_author" | "subject_reviewer" | "academic_adjudicator" | "publisher" | "support" | "finance" | "platform_operator" | "owner_admin";
+        /** RoleGrantIn */
+        RoleGrantIn: {
+            /** Reason */
+            reason: string;
+            role: components["schemas"]["Role"];
+            /** Scope */
+            scope?: {
+                [key: string]: unknown;
+            };
+        };
+        /** RoleGrantOut */
+        RoleGrantOut: {
+            /**
+             * Granted At
+             * Format: date-time
+             */
+            granted_at: string;
+            /** Granted By */
+            granted_by: string | null;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Reason */
+            reason: string;
+            /** Revoke Reason */
+            revoke_reason: string | null;
+            /** Revoked At */
+            revoked_at: string | null;
+            /** Role */
+            role: string;
+            /** Scope */
+            scope: {
+                [key: string]: unknown;
+            };
         };
         /** RuntimeConfig */
         RuntimeConfig: {
@@ -411,6 +653,107 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
+    revoke_role_v1_admin_role_grants__grant_id__revoke_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                grant_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["RevokeIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RoleGrantOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_roles_v1_admin_users__user_id__roles_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                user_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RoleGrantOut"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    grant_role_v1_admin_users__user_id__roles_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                user_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["RoleGrantIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RoleGrantOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     book_v1_books__book_id__get: {
         parameters: {
             query?: never;
@@ -512,6 +855,121 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["BookOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    me_v1_me_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MeOut"];
+                };
+            };
+        };
+    };
+    accept_consent_v1_me_consents_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ConsentIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ConsentOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    withdraw_consent_v1_me_consents__document__delete: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                document: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    put_profile_v1_me_profile_put: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ProfileIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProfileOut"];
                 };
             };
             /** @description Validation Error */
