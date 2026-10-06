@@ -37,7 +37,10 @@ class Settings(BaseSettings):
     public_api_origin: str = "http://127.0.0.1:8100"
     public_media_origin: str = ""
     build_id: str = "local"
-    cors_origins: list[str] = Field(default_factory=lambda: ["http://localhost:3100", "http://127.0.0.1:3100"])
+    cors_origins: list[str] = Field(
+        # Development defaults: web app (3100) and the Expo web target (8190). Deployed roles must set their own.
+        default_factory=lambda: ["http://localhost:3100", "http://127.0.0.1:3100", "http://localhost:8190"]
+    )
     db_pool_size: int = 10  # per-process pool; multiplied by process count in the §5.8 budget
     db_max_overflow: int = 0
     db_statement_timeout_ms: int = 5000

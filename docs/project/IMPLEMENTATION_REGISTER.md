@@ -27,6 +27,7 @@ Source plan: `Road Map/Punjab_Learning_Portal_Master_Roadmap_v2.2_Integrated_Wri
 | P03.S4.T2 Correlation ID | IMPLEMENTED (API + web→API) | `observability.py`; web sends `X-Correlation-ID` | test_correlation_id… | Jobs/outbox propagation |
 | P03.S4.T3 Clean install | IN_PROGRESS | migrations from empty DB in tests; disposable-only reset guard | test DB reset each run | Documented fresh-checkout run in CI |
 | P05.S1 (curriculum model, catalogue) | IMPLEMENTED (structure) | importer (dry-run default, idempotent upsert, no deletes, validation, batch record); read API; trigram search with grade labels | `test_importer.py` (4), `test_catalogue_api.py` (9) | Outcome mapping, board inclusion, exam profiles (P05.S2/S3) |
+| P13.S1 Native app shell | IN_PROGRESS | `apps/mobile`: Expo SDK 57 + expo-router; Learn (XI/XII separate), book, chapter (topic tree, source pages), Search; loading/error-retry/not-found states; variant identities + required API origin (IMPL-06) | typecheck, expo lint, expo-doctor 21/21; journey verified on the **Expo web target** against the real API | **No native device/emulator evidence yet**: no Android SDK on this machine; iOS needs macOS/EAS (B07, B09). Secure storage/OIDC/billing/attestation spikes (P01.S4.T1) |
 | P11 (web Learn/Search screens, partial) | IN_PROGRESS | `apps/web` pages with loading/empty/error/not-found states | E2E | Auth, lessons, practice |
 
 ## Gates
