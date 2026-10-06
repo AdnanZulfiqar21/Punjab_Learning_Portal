@@ -22,6 +22,21 @@ class NotFound(AppError):
     code = "NOT_FOUND"
 
 
+class Unauthorized(AppError):
+    status = 401
+    code = "UNAUTHENTICATED"
+
+
+class Forbidden(AppError):
+    status = 403
+    code = "FORBIDDEN"
+
+
+class Conflict(AppError):
+    status = 409
+    code = "CONFLICT"
+
+
 def _problem(request: Request, status: int, code: str, detail: str, **extra: object) -> JSONResponse:
     body = {
         "type": f"https://errors.portal.invalid/{code.lower()}",
@@ -37,7 +52,10 @@ def _problem(request: Request, status: int, code: str, detail: str, **extra: obj
 def install(app: FastAPI) -> None:
     @app.exception_handler(AppError)
     async def _app_error(request: Request, exc: AppError) -> JSONResponse:
-        return _problem(request, exc.status, exc.code, exc.detail)
+        response = _problem(request, exc.status, exc.code, exc.detail)
+        if exc.status == 401:
+            response.headers["WWW-Authenticate"] = 'Bearer realm="portal"'
+        return response
 
     @app.exception_handler(RequestValidationError)
     async def _validation(request: Request, exc: RequestValidationError) -> JSONResponse:

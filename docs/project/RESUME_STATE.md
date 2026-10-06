@@ -23,7 +23,7 @@ cd ../mobile && npx expo start --web --port 8190            # mobile screens on 
 
 ## Next unblocked tasks (in order)
 1. **Mobile native evidence (P13.S1/P01.S4.T1):** install the Android SDK/emulator or use EAS development builds (B07) and run the existing journey on a device; then the native capability spikes.
-2. **Identity (P04.S1–S2):** account, session and role model with a dev-only local auth adapter refused in production; Cognito adapter contract. Live tenant waits on B04.
+2. **Identity clients (P04.S1.T2/T3):** web sign-in via HTTP-only cookie BFF (+CSRF) and onboarding screens; mobile PKCE + secure token storage; session list/revoke. API identity core is done (IMPL-07).
 3. **CMS foundations (P06):** staff roles, authoring/review workflow (author ≠ approver), import batch UI, publication validation. This lets reviewers work as soon as they are named.
 4. **Question bank/attempt engine models (P08/P10):** MCQ versioning, immutable attempt snapshots, durable save protocol (§10.5) with tests. These can be built and tested with technical fixtures; no academic content is published.
 5. **P01.S4.T2 rendering spike:** render real equations, chemistry and Urdu/English from source figures through the block registry.

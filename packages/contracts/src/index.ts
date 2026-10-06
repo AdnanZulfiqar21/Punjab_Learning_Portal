@@ -14,6 +14,11 @@ export type SourceRef = S["SourceRef"];
 export type SearchResult = S["SearchOut"];
 export type SearchHit = S["SearchHit"];
 export type RuntimeConfig = S["RuntimeConfig"];
+export type Me = S["MeOut"];
+export type Profile = S["ProfileOut"];
+export type ProfileInput = S["ProfileIn"];
+export type Consent = S["ConsentOut"];
+export type RoleGrant = S["RoleGrantOut"];
 
 /** RFC 9457 problem details returned by every API error. */
 export interface Problem {

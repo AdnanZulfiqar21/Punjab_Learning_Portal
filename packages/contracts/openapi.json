@@ -424,6 +424,69 @@
         "title": "ChapterSummary",
         "type": "object"
       },
+      "ConsentIn": {
+        "additionalProperties": false,
+        "properties": {
+          "document": {
+            "enum": [
+              "terms",
+              "privacy",
+              "marketing_messages"
+            ],
+            "title": "Document",
+            "type": "string"
+          },
+          "version": {
+            "maxLength": 40,
+            "minLength": 1,
+            "title": "Version",
+            "type": "string"
+          }
+        },
+        "required": [
+          "document",
+          "version"
+        ],
+        "title": "ConsentIn",
+        "type": "object"
+      },
+      "ConsentOut": {
+        "properties": {
+          "accepted_at": {
+            "format": "date-time",
+            "title": "Accepted At",
+            "type": "string"
+          },
+          "document": {
+            "title": "Document",
+            "type": "string"
+          },
+          "version": {
+            "title": "Version",
+            "type": "string"
+          },
+          "withdrawn_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Withdrawn At"
+          }
+        },
+        "required": [
+          "document",
+          "version",
+          "accepted_at",
+          "withdrawn_at"
+        ],
+        "title": "ConsentOut",
+        "type": "object"
+      },
       "GradeCatalogue": {
         "properties": {
           "grade": {
@@ -484,6 +547,425 @@
           }
         },
         "title": "HTTPValidationError",
+        "type": "object"
+      },
+      "MeOut": {
+        "properties": {
+          "consents": {
+            "items": {
+              "$ref": "#/components/schemas/ConsentOut"
+            },
+            "title": "Consents",
+            "type": "array"
+          },
+          "display_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Display Name"
+          },
+          "email": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Email"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "mfa_session": {
+            "title": "Mfa Session",
+            "type": "boolean"
+          },
+          "profile": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ProfileOut"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "roles": {
+            "items": {
+              "$ref": "#/components/schemas/Role"
+            },
+            "title": "Roles",
+            "type": "array"
+          },
+          "status": {
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "email",
+          "display_name",
+          "status",
+          "roles",
+          "mfa_session",
+          "profile",
+          "consents"
+        ],
+        "title": "MeOut",
+        "type": "object"
+      },
+      "ProfileIn": {
+        "additionalProperties": false,
+        "description": "Onboarding answers (P04.S3.T1). Everything can be corrected later; no identity documents are collected.",
+        "properties": {
+          "daily_minutes": {
+            "anyOf": [
+              {
+                "maximum": 600.0,
+                "minimum": 10.0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Daily Minutes"
+          },
+          "explanation_language": {
+            "default": "en",
+            "enum": [
+              "en",
+              "ur",
+              "roman_ur"
+            ],
+            "title": "Explanation Language",
+            "type": "string"
+          },
+          "grade": {
+            "anyOf": [
+              {
+                "enum": [
+                  11,
+                  12
+                ],
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Grade"
+          },
+          "stream": {
+            "anyOf": [
+              {
+                "enum": [
+                  "pre_medical",
+                  "pre_engineering",
+                  "ics"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Stream"
+          },
+          "subjects": {
+            "items": {
+              "enum": [
+                "biology",
+                "chemistry",
+                "physics",
+                "computer_science",
+                "mathematics"
+              ],
+              "type": "string"
+            },
+            "maxItems": 5,
+            "title": "Subjects",
+            "type": "array"
+          },
+          "target_exams": {
+            "items": {
+              "enum": [
+                "mdcat",
+                "ecat"
+              ],
+              "type": "string"
+            },
+            "maxItems": 2,
+            "title": "Target Exams",
+            "type": "array"
+          },
+          "target_year": {
+            "anyOf": [
+              {
+                "maximum": 2035.0,
+                "minimum": 2026.0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Target Year"
+          }
+        },
+        "title": "ProfileIn",
+        "type": "object"
+      },
+      "ProfileOut": {
+        "properties": {
+          "daily_minutes": {
+            "anyOf": [
+              {
+                "maximum": 600.0,
+                "minimum": 10.0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Daily Minutes"
+          },
+          "explanation_language": {
+            "default": "en",
+            "enum": [
+              "en",
+              "ur",
+              "roman_ur"
+            ],
+            "title": "Explanation Language",
+            "type": "string"
+          },
+          "grade": {
+            "anyOf": [
+              {
+                "enum": [
+                  11,
+                  12
+                ],
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Grade"
+          },
+          "stream": {
+            "anyOf": [
+              {
+                "enum": [
+                  "pre_medical",
+                  "pre_engineering",
+                  "ics"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Stream"
+          },
+          "subjects": {
+            "items": {
+              "enum": [
+                "biology",
+                "chemistry",
+                "physics",
+                "computer_science",
+                "mathematics"
+              ],
+              "type": "string"
+            },
+            "maxItems": 5,
+            "title": "Subjects",
+            "type": "array"
+          },
+          "target_exams": {
+            "items": {
+              "enum": [
+                "mdcat",
+                "ecat"
+              ],
+              "type": "string"
+            },
+            "maxItems": 2,
+            "title": "Target Exams",
+            "type": "array"
+          },
+          "target_year": {
+            "anyOf": [
+              {
+                "maximum": 2035.0,
+                "minimum": 2026.0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Target Year"
+          },
+          "updated_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Updated At"
+          }
+        },
+        "title": "ProfileOut",
+        "type": "object"
+      },
+      "RevokeIn": {
+        "additionalProperties": false,
+        "properties": {
+          "reason": {
+            "maxLength": 500,
+            "minLength": 5,
+            "title": "Reason",
+            "type": "string"
+          }
+        },
+        "required": [
+          "reason"
+        ],
+        "title": "RevokeIn",
+        "type": "object"
+      },
+      "Role": {
+        "enum": [
+          "student",
+          "content_author",
+          "subject_reviewer",
+          "academic_adjudicator",
+          "publisher",
+          "support",
+          "finance",
+          "platform_operator",
+          "owner_admin"
+        ],
+        "title": "Role",
+        "type": "string"
+      },
+      "RoleGrantIn": {
+        "additionalProperties": false,
+        "properties": {
+          "reason": {
+            "maxLength": 500,
+            "minLength": 5,
+            "title": "Reason",
+            "type": "string"
+          },
+          "role": {
+            "$ref": "#/components/schemas/Role"
+          },
+          "scope": {
+            "additionalProperties": true,
+            "title": "Scope",
+            "type": "object"
+          }
+        },
+        "required": [
+          "role",
+          "reason"
+        ],
+        "title": "RoleGrantIn",
+        "type": "object"
+      },
+      "RoleGrantOut": {
+        "properties": {
+          "granted_at": {
+            "format": "date-time",
+            "title": "Granted At",
+            "type": "string"
+          },
+          "granted_by": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Granted By"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "reason": {
+            "title": "Reason",
+            "type": "string"
+          },
+          "revoke_reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Revoke Reason"
+          },
+          "revoked_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Revoked At"
+          },
+          "role": {
+            "title": "Role",
+            "type": "string"
+          },
+          "scope": {
+            "additionalProperties": true,
+            "title": "Scope",
+            "type": "object"
+          }
+        },
+        "required": [
+          "id",
+          "role",
+          "scope",
+          "granted_by",
+          "granted_at",
+          "reason",
+          "revoked_at",
+          "revoke_reason"
+        ],
+        "title": "RoleGrantOut",
         "type": "object"
       },
       "RuntimeConfig": {
@@ -913,6 +1395,160 @@
   },
   "openapi": "3.1.0",
   "paths": {
+    "/v1/admin/role-grants/{grant_id}/revoke": {
+      "post": {
+        "operationId": "revoke_role_v1_admin_role_grants__grant_id__revoke_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "grant_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Grant Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RevokeIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RoleGrantOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Revoke Role",
+        "tags": [
+          "identity",
+          "admin"
+        ]
+      }
+    },
+    "/v1/admin/users/{user_id}/roles": {
+      "get": {
+        "operationId": "list_roles_v1_admin_users__user_id__roles_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "user_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "User Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/RoleGrantOut"
+                  },
+                  "title": "Response List Roles V1 Admin Users  User Id  Roles Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "List Roles",
+        "tags": [
+          "identity",
+          "admin"
+        ]
+      },
+      "post": {
+        "operationId": "grant_role_v1_admin_users__user_id__roles_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "user_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "User Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RoleGrantIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RoleGrantOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Grant Role",
+        "tags": [
+          "identity",
+          "admin"
+        ]
+      }
+    },
     "/v1/books/{book_id}": {
       "get": {
         "operationId": "book_v1_books__book_id__get",
@@ -1072,6 +1708,144 @@
         "summary": "The book for one grade+subject",
         "tags": [
           "curriculum"
+        ]
+      }
+    },
+    "/v1/me": {
+      "get": {
+        "operationId": "me_v1_me_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MeOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "The signed-in account, its roles, profile and consents",
+        "tags": [
+          "identity"
+        ]
+      }
+    },
+    "/v1/me/consents": {
+      "post": {
+        "operationId": "accept_consent_v1_me_consents_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConsentIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConsentOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Accept a versioned document",
+        "tags": [
+          "identity"
+        ]
+      }
+    },
+    "/v1/me/consents/{document}": {
+      "delete": {
+        "operationId": "withdraw_consent_v1_me_consents__document__delete",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "document",
+            "required": true,
+            "schema": {
+              "title": "Document",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Withdraw an optional consent",
+        "tags": [
+          "identity"
+        ]
+      }
+    },
+    "/v1/me/profile": {
+      "put": {
+        "operationId": "put_profile_v1_me_profile_put",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProfileIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfileOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Save onboarding/learning preferences",
+        "tags": [
+          "identity"
         ]
       }
     },

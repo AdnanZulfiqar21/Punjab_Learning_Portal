@@ -5,7 +5,9 @@ from __future__ import annotations
 from alembic import context
 from sqlalchemy import create_engine, pool
 
-import portal_api.modules.curriculum.models  # noqa: F401  (register tables)
+import portal_api.modules.audit.models
+import portal_api.modules.curriculum.models
+import portal_api.modules.identity.models  # noqa: F401
 from portal_api.config import get_settings
 from portal_api.db import Base
 

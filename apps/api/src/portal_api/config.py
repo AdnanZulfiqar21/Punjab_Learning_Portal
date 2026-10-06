@@ -45,6 +45,16 @@ class Settings(BaseSettings):
     db_max_overflow: int = 0
     db_statement_timeout_ms: int = 5000
 
+    # Identity (P04). Production trusts exactly one managed OIDC issuer (Cognito proposed; BLOCKERS B04).
+    oidc_issuer: str | None = None
+    oidc_audience: str | None = None
+    oidc_jwks_url: str | None = None  # defaults to <issuer>/.well-known/jwks.json
+    # Development/test-only local issuer (email + password). Refused in staging/production by the validator.
+    dev_auth_enabled: bool = True
+    dev_auth_issuer: str = "urn:portal:dev-local-issuer"
+    dev_auth_audience: str = "portal-api"
+    dev_auth_token_ttl_s: int = 900
+
     @model_validator(mode="after")
     def _validate_role(self) -> Settings:
         if self.role in (Role.production, Role.staging):
@@ -58,11 +68,26 @@ class Settings(BaseSettings):
                 problems.append("cors_origins contains development/staging origins")
             if self.build_id == "local":
                 problems.append("build_id must identify the immutable artifact")
+            if self.dev_auth_enabled:
+                problems.append("dev_auth_enabled must be false (development identity adapter)")
+            if not (self.oidc_issuer and self.oidc_audience):
+                problems.append("oidc_issuer and oidc_audience are required")
+            elif (
+                any(m in self.oidc_issuer.lower() for m in DEV_MARKERS if m != "staging")
+                or "dev-local" in self.oidc_issuer
+            ):
+                problems.append("oidc_issuer points at a development issuer")
             if problems:
                 raise ConfigurationError(f"refusing to start role={self.role.value}: " + "; ".join(problems))
         if self.db_max_overflow != 0 and self.role is Role.production:
             raise ConfigurationError("db_max_overflow must be 0 in production (connection budget, roadmap §5.8)")
         return self
+
+    @property
+    def jwks_url(self) -> str | None:
+        if self.oidc_jwks_url:
+            return self.oidc_jwks_url
+        return f"{self.oidc_issuer.rstrip('/')}/.well-known/jwks.json" if self.oidc_issuer else None
 
 
 @lru_cache
