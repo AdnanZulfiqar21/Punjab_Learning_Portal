@@ -1,0 +1,16 @@
+{
+  "name": "@portal/contracts",
+  "version": "0.1.0",
+  "private": true,
+  "description": "API contract types generated from the backend OpenAPI document (do not edit generated files).",
+  "types": "./src/index.ts",
+  "exports": { ".": "./src/index.ts" },
+  "scripts": {
+    "generate": "openapi-typescript ./openapi.json -o ./src/generated.ts",
+    "check": "openapi-typescript ./openapi.json -o ./src/generated.ts && git diff --exit-code -- ./src/generated.ts ./openapi.json"
+  },
+  "devDependencies": {
+    "openapi-typescript": "7.13.0",
+    "typescript": "5.9.3"
+  }
+}
