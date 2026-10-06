@@ -1,6 +1,6 @@
 # RESUME STATE
 
-**Updated:** 2026-10-07 · **Branch:** `feat/foundation-catalogue` (PR to `main`) · **Base:** `main` @ `e026e67`
+**Updated:** 2026-10-07 · **Branches:** `feat/foundation-catalogue` (PR #1 → `main`), `feat/mobile-shell` (stacked on it) · **Base:** `main` @ `e026e67`
 
 ## Where we are
 Waves A/B/D/E are in progress (roadmap §18). Done:
@@ -18,10 +18,11 @@ cd apps/api && uv sync && uv run alembic upgrade head && uv run portal-import-ca
 uv run uvicorn portal_api.main:app --host 127.0.0.1 --port 8100
 cd ../web && pnpm install && pnpm build && pnpm start      # http://localhost:3100
 pnpm exec playwright test                                   # needs API + web running
+cd ../mobile && npx expo start --web --port 8190            # mobile screens on the web target (not native evidence)
 ```
 
 ## Next unblocked tasks (in order)
-1. **Mobile shell (P13.S1 / Wave E):** Expo app (pinned SDK) on the same catalogue API, with runtime config and the three variant identities.
+1. **Mobile native evidence (P13.S1/P01.S4.T1):** install the Android SDK/emulator or use EAS development builds (B07) and run the existing journey on a device; then the native capability spikes.
 2. **Identity (P04.S1–S2):** account, session and role model with a dev-only local auth adapter refused in production; Cognito adapter contract. Live tenant waits on B04.
 3. **CMS foundations (P06):** staff roles, authoring/review workflow (author ≠ approver), import batch UI, publication validation. This lets reviewers work as soon as they are named.
 4. **Question bank/attempt engine models (P08/P10):** MCQ versioning, immutable attempt snapshots, durable save protocol (§10.5) with tests. These can be built and tested with technical fixtures; no academic content is published.

@@ -20,6 +20,7 @@ jobs:
       api: ${{ steps.f.outputs.api }}
       web: ${{ steps.f.outputs.web }}
       content: ${{ steps.f.outputs.content }}
+      mobile: ${{ steps.f.outputs.mobile }}
     steps:
       - uses: actions/checkout@v7
         with:
@@ -37,6 +38,7 @@ jobs:
           echo "api=$(has '^(apps/api/|content/|packages/contracts/|\.github/)')" >> "$GITHUB_OUTPUT"
           echo "web=$(has '^(apps/web/|packages/contracts/|apps/api/|content/|pnpm-lock\.yaml|package\.json|\.github/)')" >> "$GITHUB_OUTPUT"
           echo "content=$(has '^(content/|education_knowledge/indexes/|\.github/)')" >> "$GITHUB_OUTPUT"
+          echo "mobile=$(has '^(apps/mobile/|packages/contracts/|pnpm-lock\.yaml|\.github/)')" >> "$GITHUB_OUTPUT"
 
   content:
     needs: changes
@@ -92,6 +94,42 @@ jobs:
         run: |
           uv run python -m portal_api.export_openapi ../../packages/contracts/openapi.json
           git diff --exit-code -- ../../packages/contracts/openapi.json
+
+  mobile:
+    needs: changes
+    if: needs.changes.outputs.mobile == 'true'
+    runs-on: ubuntu-latest
+    env:
+      CI: "1"
+      EXPO_NO_TELEMETRY: "1"
+    defaults:
+      run:
+        working-directory: apps/mobile
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm typecheck
+      - run: pnpm lint
+      - name: Expo dependency/config checks
+        run: pnpm doctor
+      - name: Production variant refuses to build without an explicit API origin
+        run: |
+          if APP_VARIANT=production npx expo config --type public > /dev/null 2>&1; then
+            echo "expected failure without PORTAL_API_ORIGIN"; exit 1
+          fi
+          APP_VARIANT=production PORTAL_API_ORIGIN=https://api.example.invalid npx expo config --type public --json > /tmp/prod.json
+          APP_VARIANT=preview PORTAL_API_ORIGIN=https://api.example.invalid npx expo config --type public --json > /tmp/preview.json
+          node -e '
+            const p = require("/tmp/prod.json"), v = require("/tmp/preview.json");
+            if (p.ios.bundleIdentifier !== "pk.punjablearningportal.student") throw new Error("production id");
+            if (v.ios.bundleIdentifier === p.ios.bundleIdentifier) throw new Error("preview must not share the production identity");
+            if (p.extra.apiOrigin !== "https://api.example.invalid") throw new Error("api origin");
+          '
 
   web:
     needs: changes
