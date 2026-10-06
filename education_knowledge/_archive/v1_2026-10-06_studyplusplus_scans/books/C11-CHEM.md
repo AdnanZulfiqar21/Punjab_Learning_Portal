@@ -1,0 +1,1247 @@
+# C11-CHEM — Chemistry (Class 11)
+
+## 1. Book metadata
+
+| Field | Value |
+|---|---|
+| Book ID | C11-CHEM |
+| Class | 11 |
+| Subject | Chemistry |
+| Title as printed | CHEMISTRY 11 (cover); credits page: 'This textbook is based on updated / Revised National Curriculum of Pakistan 2023 and has been approved by PECTAA' |
+| Authority | Punjab Education, Curriculum, Training and Assessment Authority (PECTAA) |
+| Curriculum basis | Updated/Revised National Curriculum of Pakistan 2023 (NCP-2023) |
+| Edition/impression/date/copies/price | Experimental Edition; Edition 1st; Impression 1st; Date of printing June 2025; 12,000 copies; Price Rs 310.00 |
+| Publisher & printer | Published by Ilmi Book House; Printed by Muhammadi Printers |
+| Authors | Prof. (R) Dr. Jamil Anwar; Prof. (R) Dr. Abid Zia; Prof. Dr. Hafiz Muhammad Farooq; Prof. (R) Syed Ghulam Akbar; Prof. (R) Mr. Muhammad Shoaib Jahangir; Prof. Dr. Abdul Rauf |
+| Editors/reviewers (short) | Editors: Dr. Saman Jamil; Prof. (R) Dr. Muhammad Abdul Qadir; Prof. (R) Ch. Sana Ullah; Prof. (R) Naseem Asghar Ginai; Mr. Atta Dastgeer; Dr. Syed Umar Farooq Rizvi; Dr. Azmat Mehmood Asim; Prof. Dr. M. Monim-ul-Mehboob; Dr. Bushra Maliha. Reviewers: Mr. Tafazzal Hussain Bhutta; Mr. Muhammad Zaheer Mirza. Coordinator: Ms. Samina Gull; Incharge Art Cell: Ms. Aisha Sadiq; Illustrators/composing: Prof. (R) Dr. Imtiaz Hussain, Ms. Samina Gull, Mr. Zunnorain Ahmed, Mr. Tahir Sarfraz Butt, Sadia Naz (names from OCR of PDF 2) |
+| Language | English |
+| File | 11 Class Data/11 Chemistry Book Punjab Board.pdf |
+| PDF pages | 360 |
+| Printed page range | 1–340 (Ch 1 starts printed 1 = PDF 5; Bibliography printed 340 = PDF 360); front matter unnumbered |
+| Material type | Textbook (scanned page images, no text layer) |
+| Watermark/source | 'studyplusplus.com (study++)' diagonal watermark on every page; OCR text: education_knowledge/source_text/C11-CHEM.ocr.txt |
+
+## 2. Page mapping and file integrity
+
+- **Offset rules:** PDF 5–128: pdf = printed + 4 (printed 1–124). PDF 129–160: printed 125–140 each appear twice (see below). PDF 161–360: pdf = printed + 20 (printed 141–340). Verified from rendered folios (e.g. PDF 126→122, 128→124, 129→125, 131→125, 145→133, 147→133, 157→139, 159→139, 161→141, 163→143) and from chapter openers (PDF 24→20, 47→43, 74→70, 95→91, 116→112, 183→163, 205→185, 227→207, 256→236, 285→265, 303→283, 317→297, 334→314, 346→326).
+- **Duplicated pages (exact list, render-verified):** printed 125 = PDF 129 & 131; 126 = 130 & 132; 127 = 133 & 135; 128 = 134 & 136; 129 = 137 & 139; 130 = 138 & 140; 131 = 141 & 143; 132 = 142 & 144; 133 = 145 & 147; 134 = 146 & 148; 135 = 149 & 151; 136 = 150 & 152; 137 = 153 & 155; 138 = 154 & 156; 139 = 157 & 159; 140 (Ch 7 opener) = 158 & 160. Pattern: each two-page spread was scanned, then re-scanned (spread 1, spread 1 again, spread 2, spread 2 again …). 16 duplicate PDF pages in total (PDF 131–132, 135–136, 139–140, 143–144, 147–148, 151–152, 155–156, 159–160 are the second copies).
+- **Missing pages:** none — every printed page 125–140 is present (twice); printed sequence 1–340 is otherwise continuous.
+- **Better reading copy:** both copies are essentially identical, fully legible scans (compared visually at PDF 129–132 and 153–156); no systematic quality difference. OCR occasionally differs slightly (e.g. second copy PDF 160 of the Ch 7 opener has cleaner OCR of the SLO code; first copies 129/133 lose a few symbols). Recommendation: treat the first copy (odd spread: 129–130, 133–134, 137–138, 141–142, 145–146, 149–150, 153–154, 157–158) as canonical and the second as backup.
+- **Front matter:** PDF 1 cover; PDF 2 credits/imprint; PDF 3–4 Table of Contents (two pages). Chapter 1 opener begins on PDF 5 (printed 1); no preface/foreword.
+- **Back matter:** PDF 360 Bibliography (printed 340). No answers, glossary, index, periodic table appendix, pairing scheme or model paper.
+- **Other anomalies:** no blank, out-of-order or unreadable pages found outside the duplicated block. Chapter 6 therefore occupies PDF 116–159 (44 PDF pages for 28 printed pages) and Chapter 7 starts at PDF 158 (duplicate 160).
+- **OCR quality notes:** prose good; equations, sub/superscripts, Greek symbols (Δ shown as 'A', σ/π lost), tables, MCQ option letters and IUPAC structures are often garbled; some question labels dropped. SLO codes, ambiguous counts and anomalies were checked visually (PDF 5, 24, 47, 74, 93–94, 95, 116, 126–163 footers, 158, 181–183, 203–204, 227, 256, 285, 303, 316, 317, 327, 334, 346).
+
+## 3. Official Table of Contents (as printed)
+
+| Ch | Title | Printed start | Printed end | PDF start | PDF end |
+|---|---|---|---|---|---|
+| 1 | Periodic Table and Periodic Properties | 1 | 19 | 5 | 23 |
+| 2 | Atomic Structure | 20 | 42 | 24 | 46 |
+| 3 | Chemical Bonding | 43 | 69 | 47 | 73 |
+| 4 | Stoichiometry | 70 | 90 | 74 | 94 |
+| 5 | States and Phases of Matter | 91 | 111 | 95 | 115 |
+| 6 | Chemical Energetics | 112 | 139 | 116 | 159 |
+| 7 | Reaction Kinetics | 140 | 162 | 158 | 182 |
+| 8 | Chemical Equilibrium | 163 | 184 | 183 | 204 |
+| 9 | Acid-Base Chemistry | 185 | 206 | 205 | 226 |
+| 10 | Electrochemistry | 207 | 235 | 227 | 255 |
+| 11 | Hydrocarbons | 236 | 264 | 256 | 284 |
+| 12 | Nitrogen and Sulfur | 265 | 282 | 285 | 302 |
+| 13 | Halogens | 283 | 296 | 303 | 316 |
+| 14 | Atmosphere | 297 | 313 | 317 | 333 |
+| 15 | Basic Separation Techniques | 314 | 325 | 334 | 345 |
+| 16 | Lab Safety and Practical Skills | 326 | 339 | 346 | 359 |
+| — | Bibliography | 340 | 340 | 360 | 360 |
+
+Printed TOC page ranges (PDF 3–4) match the actual chapter pages exactly. Because of the duplicated block, Ch 6 spans PDF 116–159 (printed 139 also on PDF 157) and Ch 7 starts PDF 158 (duplicate opener PDF 160; first new page PDF 161). OCR of the TOC drops '297' for Ch 14 but the start is confirmed on PDF 317.
+
+## 4. Chapter index
+
+### Chapter 1 — Periodic Table and Periodic Properties
+- **Pages:** printed 1–19 · PDF 5–23
+- **SLO codes:** [C-11-B-01 to C-11-B-18]
+- **Main concept:** Organisation of the modern periodic table (periods, groups, blocks, families) and the periodic trends in atomic/ionic radius, ionization energy, electron affinity, electronegativity and metallic character, applied to Period-3 elements (Na, Mg reactions; bonding, acid-base behaviour and oxidation numbers of oxides and chlorides).
+- **Student Learning Outcomes:** 18 (approx. count of printed bullets/code range). Paraphrased:
+  - Explain the arrangement of elements and positions of metals, non-metals and metalloids
+  - Relate the four blocks (s, p, d, f) to sublevels; period number = outermost occupied shell
+  - Deduce electron configuration from position in the table and vice versa; identify unknown elements from properties
+  - Predict properties within a group using periodicity
+  - Explain vertical/horizontal trends in atomic radius, ionic radius, ionization energy, electron affinity, electronegativity
+  - Explain IE and EA trends of Group 1 and Group 17
+  - Relate metallic/non-metallic behaviour to valence electrons
+  - Suggest bonding type in Period-3 oxides and chlorides from their properties
+  - Write equations for oxides/chlorides with water (likely pH), acid/base and amphoteric behaviour
+  - Explain variation of oxidation number in oxides and chlorides
+  - Write equations for Na and Mg with oxygen, chlorine and water
+- **Topic hierarchy:**
+  - 1.1 Historical Background (PDF 6)
+  - 1.2 Modern Periodic Table - Main Features (PDF 7)
+  - 1.3 Metals, Non-metals and Metalloids (PDF 7)
+  - 1.4 Blocks in Periodic Table (PDF 8)
+  - 1.5 Families in Periodic Table (PDF 8)
+    - i) Alkali metals (PDF 8) (unnumbered)
+    - ii) Alkaline earth metals (PDF 8) (unnumbered)
+    - iii) Transition metals (PDF 8) (unnumbered)
+    - iv) Chalcogens (PDF 9) (unnumbered)
+    - v) Halogens (PDF 9) (unnumbered)
+    - vi) Noble gases (PDF 9) (unnumbered)
+  - 1.6 Periodic Arrangement and Electronic Configuration (PDF 9)
+  - 1.7 Periodicity of Properties (PDF 10)
+    - 1.7.1 Atomic Radius (PDF 10)
+      - Periodic trends in atomic radius (PDF 10) (unnumbered)
+    - 1.7.2 Ionic Radius (PDF 11)
+    - 1.7.3 Ionization Energy (PDF 12)
+      - Factors affecting the ionization energy (nuclear charge, size, electronic arrangement, shielding, spin-pair repulsion) (PDF 12) (unnumbered)
+      - Periodic trends in ionization energy (PDF 13) (unnumbered)
+    - 1.7.4 Electron Affinity (PDF 14)
+      - Factors affecting electron affinity (PDF 14) (unnumbered)
+      - Periodic trends in electron affinity (PDF 15) (unnumbered)
+    - 1.7.5 Electronegativity (PDF 15)
+      - Factors affecting electronegativity (PDF 15) (unnumbered)
+      - Periodic trends in electronegativity (PDF 16) (unnumbered)
+    - 1.7.6 Variation in Metallic Character (PDF 17)
+  - 1.8 Reactions of Sodium and Magnesium (PDF 17)
+    - 1.8.1 With Water (PDF 17)
+    - 1.8.2 With Oxygen (PDF 18)
+    - 1.8.3 With Chlorine (PDF 18)
+  - 1.9 Trends in Bonding in Oxides and Chlorides of Period 3 (PDF 18)
+    - 1.9.1 Classification of Oxides (PDF 19)
+      - i) Basic oxides (PDF 19) (unnumbered)
+      - ii) Acidic oxides (PDF 19) (unnumbered)
+      - iii) Amphoteric oxides (PDF 19) (unnumbered)
+    - 1.9.2 Classification of Chlorides (PDF 20)
+      - i) Neutral chlorides (PDF 20) (unnumbered)
+      - ii) Acidic chlorides (PDF 20) (unnumbered)
+  - 1.10 Variation in Oxidation Number in Oxides and Chlorides (PDF 20)
+- **Key terms / definitions:** periodic law (modern), period, group, metals, non-metals, metalloids (semimetals), s/p/d/f-block, alkali metals, alkaline earth metals, transition metals, chalcogens, halogens, noble gases, atomic radius, ionic radius, first/second/third ionization energy, effective nuclear charge, shielding effect, spin-pair repulsion, first/second electron affinity, electronegativity (Pauling scale), metallic character, basic oxide, acidic oxide, amphoteric oxide, neutral chloride, acidic chloride, hydration, hydrolysis, oxidation number
+- **Formulas / equations / laws / processes:**
+  - Na(g) -> Na+(g) + e-  dHi1 = +494 kJ/mol
+  - Ca: dHi1 = 590, dHi2 = 1150, dHi3 = 4940 kJ/mol
+  - Cl(g) + e- -> Cl-(g)  dHea1 = -348.8 kJ/mol
+  - O: dHea1 ~ -141 kJ/mol; O- + e- -> O2-  (endothermic, ~+798 kJ/mol as printed)
+  - 2Na + 2H2O -> 2NaOH + H2; Mg + 2H2O -> Mg(OH)2 + H2; Mg + H2O(g) -> MgO + H2
+  - 2Na + O2 -> Na2O2; 4Na + O2 -> 2Na2O; 2Mg + O2 -> 2MgO
+  - 2Na + Cl2 -> 2NaCl; Mg + Cl2 -> MgCl2
+  - Na2O + H2O -> 2NaOH; CaO + H2O -> Ca(OH)2
+  - P4O6/P4O10, SO2, SO3 + H2O -> oxyacids (e.g. SO2 + H2O -> H2SO3)
+  - SiO2 + 2NaOH -> Na2SiO3 + H2O; SO2 + 2NaOH -> Na2SO3 + H2O
+  - Al2O3 + 6HCl -> 2AlCl3 + 3H2O; Al2O3 + 2NaOH -> 2NaAlO2 + H2O
+  - AlCl3 + 3H2O -> Al(OH)3 + 3HCl; SiCl4 + 2H2O -> SiO2 + 4HCl; PCl3 + 3H2O -> H3PO3 + 3HCl
+- **Worked examples / sample problems:** No numbered sample problems; worked configuration examples in 1.6 (PDF 9-10).
+- **Figures / tables:** Figures 1.1-1.8 (PDF 7-17); Tables 1.1 (EA of Group 1 & 17, PDF 15), 1.2 (oxidation numbers in Period-3 oxides/chlorides, PDF 21).
+- **In-text features:** Quick Check boxes ~8 (PDF 9, 10, 11, 14, 15, 17, 18, 20, 21; numbering garbled in OCR); Keep in Mind x1 (noble gas compounds, PDF 9); Did You Know x1 (Linus Pauling, PDF 15); side box on Mg flares (PDF 17).
+- **End-of-chapter assessment:** EXERCISE, PDF 21–23
+  - Multiple Choice Questions (Q.1 I-XI): 11 questions (PDF 21-23)
+  - Short Answer Questions (Q.2 a-m): 13 questions (PDF 23)
+  - Descriptive Questions (Q.3-Q.6): 4 questions (PDF 23)
+- **Answer key availability:** No answer key printed (none in chapter or at end of book).
+- **Practical / lab content:** None (descriptive reactions of Na/Mg could be demonstrated).
+- **Cross-links:** Ch 2 (electronic configuration, successive IE), Ch 3 (electronegativity & bond type), Ch 6 (electron affinity, lattice energy), Ch 13 (halogens). Physics: atomic structure; C12-CHEM inorganic/d-block chapter (if present) - not verified.
+- **Notes / Requires Review:**
+  - Electron-affinity values for O are inconsistent: text gives second EA ~+798 kJ/mol (PDF 14) while Quick Check gives +844 kJ/mol (PDF 15); first EA printed as -141 and -142.
+  - OCR garbles MCQ options and equations on PDF 18-22; counts checked against labels.
+
+### Chapter 2 — Atomic Structure
+- **Pages:** printed 20–42 · PDF 24–46
+- **SLO codes:** [C-11-A-01 to C-11-A-25] (as printed; identical code range also printed for Ch 3, 4 and 7 - likely a printing error)
+- **Main concept:** Fundamental particles and atomic identity, experimental evidence for electronic structure (atomic spectra and ionization energies), quantum numbers, orbital shapes and the rules for writing electronic configurations of atoms, ions and free radicals, with an application to P- and N-type semiconductors.
+- **Student Learning Outcomes:** 25 (approx. count of printed bullets/code range). Paraphrased:
+  - Describe protons, neutrons, electrons (relative charge/mass); atomic = proton number; mass = nucleon number
+  - Behaviour of beams of p, n, e in an electric field
+  - Determine numbers of p, n, e in atoms and ions
+  - Relate quantum numbers to electron distribution; define shells, subshells, orbitals
+  - Order of subshell energies; degenerate orbitals; capacities of s, p, d, f
+  - Apply Aufbau, Pauli exclusion and Hund's rule; write configurations of atoms and ions
+  - Shapes of s, p and d orbitals
+  - Define free radicals
+  - Electronic configuration and semiconductors (Si, doping)
+  - Use successive ionization energy data to deduce configuration and position in the table
+  - Explain factors influencing ionization energies (nuclear charge, radius, shielding, spin-pair repulsion)
+- **Topic hierarchy:**
+  - 2.1 Atomic Number, Proton Number and Nucleon Number; Identity of an Element (PDF 25)
+  - 2.2 Effect of Electric Field on Fundamental Particles (PDF 26)
+    - 2.2.1 Properties of Fundamental Particles (PDF 27)
+  - 2.3 Experimental Evidences for the Electronic Configuration (PDF 27)
+    - 2.3.1 Atomic Spectra (PDF 28)
+    - 2.3.2 Ionization Energy and Energy Levels (Electronic Shells) (PDF 29)
+      - i) Successive ionization energies of the same element (PDF 29) (unnumbered)
+      - ii) First ionization energies of different elements (PDF 30) (unnumbered)
+  - 2.4 Quantum Numbers (PDF 31)
+    - 2.4.1 Principal Quantum Number (n) (PDF 31)
+    - 2.4.2 Azimuthal Quantum Number (l) (PDF 32)
+    - 2.4.3 Magnetic Quantum Number (m) (PDF 32)
+    - Spin Quantum Number (s) (PDF 33) (unnumbered)
+  - 2.5 Shapes of Atomic Orbitals (PDF 34)
+    - 2.5.1 s-orbital (PDF 34)
+    - 2.5.2 p-orbitals (PDF 34)
+    - 2.5.3 d and f orbitals (PDF 34)
+  - 2.6 Electronic Configuration (PDF 35)
+    - 2.6.1 Distribution of Electrons in Shells (PDF 35)
+    - 2.6.2 Distribution of Electrons in Subshells (PDF 35)
+      - Aufbau principle and (n + l) rule (PDF 36) (unnumbered)
+    - 2.6.3 Distribution of Electrons in Orbitals (PDF 37)
+      - i) Pauli's exclusion principle (PDF 37) (unnumbered)
+      - ii) Hund's rule (PDF 38) (unnumbered)
+  - 2.7 Electronic Configuration and the Periodic Table (PDF 39)
+    - 2.7.1 Valence electrons (PDF 39)
+    - 2.7.2 Classification of elements of periodic table (PDF 40)
+  - 2.8 Electronic Configuration of Ions and Free Radicals (PDF 41)
+    - 2.8.1 Ions (PDF 41)
+    - 2.8.2 Free radicals (PDF 42)
+  - 2.9 Electronic Configuration and the Formation of Semiconductors (PDF 42)
+    - 2.9.1 P-type semiconductor formation (PDF 42)
+    - 2.9.2 N-type semiconductor formation (PDF 43)
+- **Key terms / definitions:** atomic number (proton number), mass number (nucleon number), fundamental particles, angle of deflection, radius of deflection, atomic emission spectrum, atomic absorption spectrum, successive ionization energies, quantum numbers (principal, azimuthal, magnetic, spin), shell, subshell, orbital, degenerate orbitals, atomic orbital, electronic configuration, Aufbau principle, (n + l) rule, Pauli's exclusion principle, Hund's rule, valence electrons, representative elements, transition / inner-transition elements, free radical, semiconductor, P-type semiconductor, N-type semiconductor, doping
+- **Formulas / equations / laws / processes:**
+  - A = Z + N
+  - Moseley: sqrt(frequency of X-rays) proportional to Z
+  - Deflection proportional to charge/mass (radius of deflection proportional to mass/charge)
+  - Max electrons in shell = 2n^2; orbitals in shell = n^2
+  - l = 0 ... (n-1); m = -l ... +l (2l+1 values); s = +1/2 or -1/2
+  - Electrons in subshell = 2(2l + 1)
+  - Filling order: 1s<2s<2p<3s<3p<4s<3d<4p<5s<4d<5p<6s<4f<5d<6p<7s
+- **Worked examples / sample problems:** No numbered sample problems; worked examples for Al/Al3+, Cl- (PDF 26) and Table 2.1.
+- **Figures / tables:** Figures 2.1-2.14 (PDF 27-43); Tables 2.1-2.9 (PDF 26-40).
+- **In-text features:** Quick Check 2.1-2.7 (~7; PDF 27, 31, 34, 35, 39, 41, 42); Did You Know x2 (PDF 32, 33).
+- **End-of-chapter assessment:** EXERCISE, PDF 44–46
+  - Multiple Choice Questions (Q.1 I-XI): 11 questions (PDF 44-45)
+  - Short Answer Questions (Q.2 a-j): 10 questions (PDF 45-46)
+  - Descriptive Questions (Q.3-Q.5): 3 questions (PDF 46)
+- **Answer key availability:** No answer key printed.
+- **Practical / lab content:** None.
+- **Cross-links:** Ch 1 (periodic trends, IE), Ch 3 (orbitals in bonding, hybridization, MOT). Physics (atomic spectra, semiconductors).
+- **Notes / Requires Review:**
+  - SLO code block printed as [C-11-A-01 to C-11-A-25] (PDF 24, render-verified) - same as Ch 3, 4, 7.
+  - Short-answer labels partly lost in OCR (f, h); 10 items counted (a-j).
+
+### Chapter 3 — Chemical Bonding
+- **Pages:** printed 43–69 · PDF 47–73
+- **SLO codes:** [C-11-A-01 to C-11-A-25] (as printed; same as Ch 2, 4, 7)
+- **Main concept:** Types of chemical bonds (ionic, covalent, dative, expanded octets), electronegativity and polarity, bond energy/length, and the bonding theories VBT, hybridization, VSEPR (with drug-design application) and MOT.
+- **Student Learning Outcomes:** 20 (approx. count of printed bullets/code range). Paraphrased:
+  - Analyse dative bonds in CO, O3 and H3O+
+  - Recognise expanded octets in polyatomic ions (sulfate, nitrate)
+  - Use Pauling electronegativity differences to predict ionic/covalent bonds; bond polarity and dipole moment
+  - VSEPR: shapes and bond angles; importance in drug design
+  - Valence bond theory; hybridization (sp, sp2, sp3)
+  - Molecular orbital theory; paramagnetism of O2; bond orders of N2, O2, F2, He2
+  - Types of van der Waals forces; hydrogen bonding (NH3, H2O) and anomalous properties of water
+  - Bond energy and bond length vs reactivity; bonds stronger than intermolecular forces
+  - Define electronegativity; factors and trends
+- **Topic hierarchy:**
+  - 3.1 Types of Bonding (PDF 48)
+    - 3.1.1 Ionic Bond (PDF 48)
+    - 3.1.2 Covalent Bond (Electron Pair Bond) (PDF 49)
+    - 3.1.3 Dative Bond (Coordinate Covalent Bond) (PDF 49)
+    - 3.1.4 Expanded Octet in Polyatomic Ions (PDF 50)
+  - 3.2 Electronegativity and the Type of Bond (PDF 51)
+    - 3.2.1 Dipole Moment and Polarity of Molecules (PDF 52)
+  - 3.3 Intermolecular Forces (PDF 53)
+  - 3.4 Bond Energy and Bond Length (PDF 53)
+  - 3.5 A Comparison among Ionic, Covalent, Metallic Bonds and Intermolecular Forces (PDF 55)
+  - 3.6 Valence Bond Theory (VBT) (PDF 55)
+    - 3.6.1 Formation of Sigma Bond (PDF 56)
+      - s-s overlap (PDF 56) (unnumbered)
+      - s-p overlap (PDF 56) (unnumbered)
+      - p-p overlap (PDF 56) (unnumbered)
+      - Formation of pi bond (PDF 57) (unnumbered)
+  - 3.7 Atomic Orbital Hybridization (PDF 57)
+    - 3.7.1 Types of Hybridization (PDF 58)
+      - sp hybridization (PDF 58) (unnumbered)
+      - sp2 hybridization (PDF 58) (unnumbered)
+      - sp3 hybridization (PDF 59) (unnumbered)
+  - 3.8 Valence Shell Electron Pair Repulsion Model (VSEPR) (PDF 60)
+    - Postulates (PDF 60) (unnumbered)
+    - 3.8.1 Predicting the Shapes of Molecules (PDF 61)
+      - Steps to determine the shapes of molecules (PDF 61) (unnumbered)
+      - AB2 type (linear) (PDF 62) (unnumbered)
+      - AB3 type (trigonal planar); AB3 type with multiple bonds (PDF 62) (unnumbered)
+      - AB4 type (tetrahedral): CH4, NH3, NF3, H2O, H3O+, NH2- (PDF 63) (unnumbered)
+      - AB5 type (trigonal bipyramidal): PCl5, I3- (PDF 65) (unnumbered)
+      - AB6 type (octahedral): SF6, XeF4 (PDF 65) (unnumbered)
+    - 3.8.2 Applications of VSEPR Model in Drug Designing (PDF 66)
+  - 3.9 Molecular Orbital Theory (MOT) (PDF 67)
+    - s-s overlap; head-on and sideways overlap of p orbitals (PDF 67) (unnumbered)
+    - 3.9.1 Molecular Orbital Diagrams of Some Diatomic Molecules (PDF 68)
+      - i) Helium (He2) (PDF 68) (unnumbered)
+      - ii) Nitrogen (N2) (PDF 69) (unnumbered)
+      - iii) Oxygen (O2) (PDF 69) (unnumbered)
+- **Key terms / definitions:** chemical bond, Lewis concept, octet, ionic bond, covalent bond, polar / non-polar covalent bond, dative (coordinate covalent) bond, expanded octet, polyatomic ion, dipole, dipole moment (Debye), intermolecular forces, van der Waals forces, bond energy, bond length, valence bond theory, sigma bond, pi bond, hybridization, sp/sp2/sp3 hybrid orbitals, VSEPR, lone pair / bond pair, electron-pair geometry, molecular shape, ligand, receptor, drug specificity, molecular orbital theory, bonding / antibonding molecular orbital, bond order, paramagnetism
+- **Formulas / equations / laws / processes:**
+  - EN difference: ~0 pure covalent; 0.4-1.8 polar covalent; >1.8 ionic
+  - Repulsion order: lp-lp > lp-bp > bp-bp
+  - Bond order = (bonding electrons - antibonding electrons)/2; He2 = 0, N2 = 3, O2 = 2
+  - Bond angles: linear 180; trigonal 120; tetrahedral 109.5; NH3 107; H2O 104.5; NF3 102.5; H2S 92; octahedral 90
+  - Dipole moments: H2O 1.85 D; SO2 1.61 D; BeCl2, BF3, CCl4 = 0
+  - Valence electrons around S in SO4^2- = 12; around I in I3- = 10
+- **Worked examples / sample problems:** No numbered sample problems; worked electron-pair counts (NH3, SO4^2-, I3-).
+- **Figures / tables:** Figures 3.1-3.35 (PDF 48-70); Tables 3.1 (bond energies), 3.2 (bond lengths), 3.3 (relative strengths), 3.4 (VSEPR geometries).
+- **In-text features:** Quick Check 3.1-3.8 (~8); Keep in Mind x2 (PDF 58, 62); Interesting Information x1 (PDF 56); Did You Know x1 (PDF 60).
+- **End-of-chapter assessment:** EXERCISE, PDF 70–73
+  - Multiple Choice Questions (Q.1 I-XII): 12 questions (PDF 70-71)
+  - Short Answer Questions (Q.2 a-p): 16 questions (PDF 72-73)
+  - Descriptive Questions (Q.3-Q.7): 5 questions (PDF 73)
+- **Answer key availability:** No answer key printed.
+- **Practical / lab content:** None.
+- **Cross-links:** Ch 1 (electronegativity), Ch 2 (orbitals), Ch 5 (intermolecular forces, hydrogen bonding - detailed there), Ch 11 (hybridization in alkanes/alkenes), Ch 12 (N2 triple bond). Biology (drug-receptor binding).
+- **Notes / Requires Review:**
+  - SLO list on PDF 47 has ~20 bullets although code range says 01-25.
+  - Hydrogen bonding is only named here; detail deferred to Ch 5.
+
+### Chapter 4 — Stoichiometry
+- **Pages:** printed 70–90 · PDF 74–94
+- **SLO codes:** [C-11-A-01 to C-11-A-25] (as printed; same as Ch 2, 3, 7)
+- **Main concept:** Quantitative relationships in chemical reactions using the mole concept (Avogadro's number, molar mass, molar volume, molar concentration), limiting/excess reactants, yields, and applications in medicine.
+- **Student Learning Outcomes:** 10 (approx. count of printed bullets/code range). Paraphrased:
+  - Derive mass, volume and number of particles using moles
+  - Molar volume at STP and mole-volume problems
+  - Molar mass of a gas from density at STP
+  - Interpret balanced equations in moles, particles, masses and gas volumes
+  - Limiting reagent; maximum product and unreacted excess
+  - Theoretical, actual and percentage yield
+  - Reacting masses, gas volumes, solution concentrations
+  - Importance of stoichiometry in production and dosage of medicine
+- **Topic hierarchy:**
+  - 4.1 Concept of Mole (PDF 75)
+  - 4.2 Relationship between Mole, Molar Mass and Avogadro's Number (PDF 76)
+  - 4.3 Molar Volume (PDF 78)
+  - 4.4 Molar Mass and Density of Gases (PDF 79)
+  - 4.5 Molar Concentration (PDF 80)
+  - 4.6 Stoichiometric Relationships (PDF 81)
+    - Approach to do stoichiometric calculations (PDF 82) (unnumbered)
+    - Mole-mole, mass-mass, volume-volume, mole-mass, mass-mole, mass-volume conversions (Sample Problems 4.11-4.16) (PDF 82) (unnumbered)
+  - 4.7 Limiting and Excess Reactant (PDF 85)
+    - 4.7.1 Strategy for the identification of limiting reactant (PDF 86)
+    - 4.7.2 Amount of Product and Unreacted Excess Reagent (PDF 87)
+  - 4.8 Theoretical Yield and Actual Yield (PDF 89)
+  - 4.9 Importance of Stoichiometry in Production and Dosage of Medicine (PDF 91)
+    - 4.9.1 Significance of Stoichiometry in Medicine (PDF 91)
+- **Key terms / definitions:** stoichiometry, law of conservation of mass, law of definite proportions, mole, Avogadro's number, molar mass, molar volume, STP, Avogadro's law, gas density, molar concentration, stoichiometric relationships, limiting reactant, excess reactant, theoretical yield, actual yield, percentage yield
+- **Formulas / equations / laws / processes:**
+  - n = mass / molar mass
+  - n = number of particles / NA; NA = 6.02 x 10^23 mol^-1
+  - V(gas, STP) = n x 22.4 dm3 (22.414 dm3)
+  - Molar mass = density (g/dm3) x 22.4 dm3/mol
+  - C = n / V (mol dm^-3)
+  - % yield = (actual yield / theoretical yield) x 100
+  - N2 + 3H2 -> 2NH3 interpreted in moles, molecules, volumes, masses
+- **Worked examples / sample problems:** Sample Problems 4.1-4.20 (PDF 76-90): moles/mass 4.1-4.6, gas volume 4.7-4.8, density 4.9, concentration 4.10, conversions 4.11-4.16, limiting reactant 4.17-4.18, excess 4.19, % yield 4.20.
+- **Figures / tables:** Few figures (flow chart of mole relationships PDF 77, 80); no numbered tables.
+- **In-text features:** Quick Check 4.1-4.10 (~10); Did You Know x2 (PDF 75, 86); Interesting Information x2 (PDF 78); Keep in Mind x1 (PDF 82).
+- **End-of-chapter assessment:** EXERCISE, PDF 92–94
+  - Multiple Choice Questions (Q.1 I-XII): 12 questions (PDF 92-93)
+  - Short-Answer Questions (Q.2 a-i; label g printed twice): 10 questions (PDF 93-94)
+  - Descriptive Questions (Q.3-Q.4): 2 questions (PDF 94)
+  - Numerical Problems (Q.5-Q.8): 4 questions (PDF 94)
+- **Answer key availability:** No answer key printed.
+- **Practical / lab content:** None.
+- **Cross-links:** Ch 5 (ideal gas equation, molar mass), Ch 9 (concentrations, titration), Ch 10 (Faraday calculations), Ch 16 (titration calculation M1V1/n1 = M2V2/n2). Biology/pharmacology (dosage).
+- **Notes / Requires Review:**
+  - Short-answer list labels run a-i but 'g)' is printed twice (PDF 93 and 94; render-verified) giving 10 questions.
+  - Sample Problem 4.17 uses 18.1 g NH3 in solution vs 1.81 g in statement (PDF 86) - printing inconsistency.
+  - Sample Problem 4.20 mixes actual yield 3.15 g (statement) and 2.85 g (solution) (PDF 90).
+
+### Chapter 5 — States and Phases of Matter
+- **Pages:** printed 91–111 · PDF 95–115
+- **SLO codes:** [C-11-A-79 to C-11-A-92]
+- **Main concept:** Behaviour of gases (ideal gas equation), liquids (intermolecular forces, hydrogen bonding, surface tension, viscosity, vapour pressure, boiling) and solids (crystalline vs amorphous), energetics of phase changes, and liquid crystals.
+- **Student Learning Outcomes:** 17 (approx. count of printed bullets/code range). Paraphrased:
+  - Physical properties of gases; origin of pressure; ideal gases have zero particle volume
+  - Use PV = nRT including determination of Mr
+  - Properties of liquids from kinetic molecular theory
+  - Types, strength and applications of intermolecular forces (dipole-dipole, H-bonding, London)
+  - Evaporation, vapour pressure, boiling point, viscosity, surface tension
+  - H-bonding and anomalous properties of water
+  - Molar heats of fusion and vaporization; importance of heat of fusion for glaciers/ice caps
+  - Liquid crystals: description, uses, comparison with liquids and solids
+  - Properties of solids; crystalline vs amorphous; geometrical shape, melting point, habit, cleavage, crystal growth
+- **Topic hierarchy:**
+  - 5.1 Properties of Gases (PDF 96)
+  - 5.2 Ideal Gas Equation (PDF 96)
+    - Calculation of Relative Molecular Mass (Mr) of a Gas (PDF 97) (unnumbered)
+  - 5.3 Properties of Liquids (PDF 98)
+  - 5.4 Intermolecular Forces (PDF 98)
+    - 5.4.1 Instantaneous dipole-induced dipole forces (id-id) (PDF 98)
+      - Factors: molecular mass and size; surface area (shape) (PDF 99) (unnumbered)
+    - 5.4.2 Permanent dipole-permanent dipole forces (pd-pd) (PDF 100)
+    - 5.4.3 Hydrogen Bonding (PDF 101)
+    - 5.4.4 Influence of Hydrogen Bonding on the Properties of Water (PDF 102)
+      - i) Structure and low density of ice (PDF 102) (unnumbered)
+      - ii) High heat capacity (PDF 102) (unnumbered)
+      - iii) Anomalous heat of vaporization and boiling point (PDF 102) (unnumbered)
+      - iv) Surface tension and viscosity (PDF 103) (unnumbered)
+  - 5.5 Surface Tension of Liquids (PDF 103)
+    - Factors affecting surface tension (PDF 104) (unnumbered)
+  - 5.6 Viscosity of Liquids (PDF 104)
+    - 5.6.1 Factors affecting viscosity (PDF 104)
+  - 5.7 Evaporation (PDF 105)
+  - 5.8 Vapour Pressure (PDF 105)
+  - 5.9 Boiling Point (PDF 106)
+    - 5.9.1 Factors affecting boiling points of liquids (PDF 107)
+  - 5.10 Energetics of Phase Changes (PDF 108)
+    - Molar heat of fusion (PDF 108) (unnumbered)
+    - Molar heat of vaporization (PDF 108) (unnumbered)
+    - Effect of molar heats of vaporization and fusion on matter particles (PDF 108) (unnumbered)
+  - 5.11 Solids (PDF 109)
+    - 5.11.1 General Properties of Solids (PDF 109)
+  - 5.12 Types of Solids (PDF 110)
+    - 5.12.1 Crystalline Solids (PDF 110)
+      - Crystal lattice; properties: geometrical shape, melting point, cleavage planes, growing of a crystal, habit of a crystal (PDF 110) (unnumbered)
+    - 5.12.2 Amorphous solids (PDF 111)
+  - 5.13 Liquid Crystals (PDF 112)
+    - 5.13.1 General properties of liquid crystals (PDF 112)
+    - 5.13.2 Uses of liquid crystals in daily life (PDF 112)
+- **Key terms / definitions:** kinetic molecular theory, compressibility, Joule-Thomson effect, Boyle's law, Charles' law, Avogadro's law, ideal gas equation, gas constant R, relative molecular mass, diffusion, London dispersion force (id-id), polarizability, permanent dipole-permanent dipole force, hydrogen bond, surface tension, viscosity, evaporation, vapour pressure, condensation, boiling point, molar heat of fusion, molar heat of vaporization, crystal lattice, crystalline solid, cleavage plane, habit of a crystal, crystal growth / seeding, amorphous solid, crystallites, anisotropic / isotropic, liquid crystal, LCD
+- **Formulas / equations / laws / processes:**
+  - V proportional to 1/P (Boyle); V proportional to T (Charles); V proportional to n (Avogadro)
+  - PV = nRT; R = 0.0821 atm dm3 K^-1 mol^-1 (8.314 J K^-1 mol^-1)
+  - M = mRT / PV
+  - H2O(l) -> H2O(g) dHvap = 40.6 kJ/mol at 100 C (41 kJ/mol quoted for trend)
+  - Specific heat capacity of water 4.18 J g^-1 C^-1
+- **Worked examples / sample problems:** Sample Problem 5.1 (PDF 97); no others.
+- **Figures / tables:** Figures 5.1-5.10; Tables 5.1 (bp of groups 17/18), 5.2 (surface tensions), 5.3 (boiling points), 5.4 (crystalline vs amorphous).
+- **In-text features:** Quick Check 5.1-5.8 (8; PDF 97, 100, 103, 105, 106, 108, 111, 113).
+- **End-of-chapter assessment:** EXERCISE, PDF 113–115
+  - Multiple Choice Questions (Q.1 I-XI): 11 questions (PDF 113-114)
+  - Short Answer Questions (Q.2 a-m): 13 questions (PDF 114-115)
+  - Descriptive Questions (Q.3-Q.7): 5 questions (PDF 115)
+  - Numerical Problems (Q.8-Q.9): 2 questions (PDF 115)
+- **Answer key availability:** No answer key printed.
+- **Practical / lab content:** None.
+- **Cross-links:** Ch 3 (intermolecular forces introduced), Ch 4 (molar volume), Ch 8 (vapour-pressure equilibrium), Ch 13 (volatility of halogens, London forces), Ch 15 (boiling point and distillation). Physics (kinetic theory of gases).
+- **Notes / Requires Review:**
+  - Section 5.7 'Evaporation' heading number garbled in OCR (PDF 105); molar heat of fusion value for ice garbled in OCR (PDF 108) - Requires Review against page.
+
+### Chapter 6 — Chemical Energetics
+- **Pages:** printed 112–139 · PDF 116–159
+- **SLO codes:** [C-11-A-93 to C-11-A-123]
+- **Main concept:** Enthalpy changes (standard enthalpies, bond energies, calorimetry, calorie content), Hess's law, energetics of solution (hydration, lattice energy, Born-Haber cycle), entropy and Gibbs free energy as criteria of spontaneity.
+- **Student Learning Outcomes:** 31 (approx. count of printed bullets/code range). Paraphrased:
+  - Exothermic/endothermic enthalpy changes; reaction pathway diagrams and activation energy
+  - Standard conditions; enthalpy changes of reaction, formation, combustion, neutralization, atomization; lattice energy; first electron affinity
+  - Bond breaking/making; exact vs average bond energies; dH from bond energies
+  - q = mc dT and dH = -mc dT/n from experimental results
+  - Born-Haber cycles and calculations; effect of ionic charge/radius on lattice energy and hydration enthalpy
+  - Energy cycles for enthalpy of solution and hydration
+  - Entropy as number of arrangements; sign of dS for state/temperature/gas-mole changes; calculate dS
+  - Hess's law in multistep reactions
+  - Gibbs free energy and feasibility
+  - Enthalpy change and calorie content of food
+- **Topic hierarchy:**
+  - 6.1 Enthalpy Change (PDF 117)
+  - 6.2 Energy Profile Diagram (PDF 118)
+  - 6.3 Standard Enthalpy Changes (PDF 119)
+    - 6.3.1 Enthalpy Change of Reaction (PDF 119)
+    - 6.3.2 Enthalpy Change of Combustion (PDF 119)
+    - 6.3.3 Enthalpy Change of Formation (PDF 119)
+    - 6.3.4 Enthalpy Change of Atomization (PDF 120)
+    - 6.3.5 Enthalpy Change of Neutralization (PDF 120)
+    - 6.3.6 Electron Affinity (PDF 120)
+  - 6.4 Bond Energy (Bond Dissociation Energy) and Enthalpy Changes (PDF 121)
+  - 6.5 Enthalpy Change of Reaction and Chemical Bonds (PDF 121)
+  - 6.6 Measurement of Enthalpy Change of a Reaction (PDF 122)
+    - 6.6.1 Glass Calorimeter (PDF 122)
+  - 6.7 Enthalpy Change and Calorie Content of Food (PDF 124)
+    - 6.7.1 Relation between Enthalpy Change and Calorie Content (PDF 124)
+  - 6.8 Hess' Law of Heat Summation (PDF 124)
+    - i) Enthalpy of formation from enthalpies of combustion (PDF 125) (unnumbered)
+    - ii) Enthalpy of reaction from enthalpies of formation (PDF 125) (unnumbered)
+    - iii) Enthalpy of formation from combustion and other formation data (PDF 126) (unnumbered)
+    - iv) Enthalpy of reaction from bond energies (PDF 127) (unnumbered)
+  - 6.9 Energetics of Solution (PDF 128)
+    - Standard enthalpy change of solution (PDF 128) (unnumbered)
+    - 6.9.1 Hydration (PDF 129; dup 131)
+      - Factors affecting the magnitude of hydration energy (PDF 129; dup 131) (unnumbered)
+    - 6.9.2 Lattice Energy (PDF 129; dup 131)
+      - Factors affecting the magnitude of lattice energy (size, charge) (PDF 130; dup 132) (unnumbered)
+      - Solubility trends of group 2 hydroxides and sulphates (PDF 130; dup 132) (unnumbered)
+    - 6.9.3 Calculating Enthalpy Change of Solution (PDF 133; dup 135)
+  - 6.10 Born-Haber Cycle (PDF 134; dup 136)
+    - Calculation of dHx and lattice energy of NaCl (PDF 137; dup 139) (unnumbered)
+  - 6.11 Entropy (PDF 137; dup 139)
+    - 6.11.1 Entropy, Diffusion and Number of Ways of Arrangement (PDF 137; dup 139)
+    - 6.11.2 Comparison of Entropy Values (PDF 138; dup 140)
+    - 6.11.3 Entropy Changes in Reactions (PDF 141; dup 143)
+    - 6.11.4 Calculating the Entropy Change of the System (Reaction) (PDF 141; dup 143)
+    - 6.11.5 Total Entropy Change (PDF 142; dup 144)
+  - 6.12 The Free Energy Change, dG (PDF 145; dup 147)
+    - 6.12.1 Calculating dG for a Reaction (PDF 146; dup 148)
+    - Spontaneity and Temperature Change (Table 6.3) (PDF 146; dup 148) (unnumbered)
+- **Key terms / definitions:** thermodynamics, thermochemistry (energetics), enthalpy, enthalpy change, exothermic, endothermic, energy profile diagram, activation energy, standard conditions, standard state, standard enthalpy of reaction, enthalpy of combustion, enthalpy of formation, enthalpy of atomization, enthalpy of neutralization, electron affinity, bond dissociation energy (exact / average), calorimeter, specific heat capacity, calorie content, Hess's law, enthalpy (Hess) cycle, dissolution, enthalpy of solution, hydration, enthalpy of hydration, charge density, lattice energy, Born-Haber cycle, entropy, number of ways of arrangement, entropy of system / surroundings / total, spontaneity, Gibbs free energy
+- **Formulas / equations / laws / processes:**
+  - dH = H(products) - H(reactants)
+  - dHr = sum E(bonds broken) - sum E(bonds formed)
+  - q = m c dT; dH = -m c dT / n
+  - Calorie content (kcal/g) = dHc (kJ/g) / 4.184
+  - Hess: dH(direct) = dH1 + dH2 = dH3 + dH4 + dH5
+  - dHsol = dHhyd(cation + anion) - dHlatt  (i.e. dHlatt + dHsol = dHhyd)
+  - Born-Haber: dHf = dHat(M) + IE + dHat(X) + EA + dHlatt (NaCl: dHlatt = -787 kJ/mol; NaF dHf = -585 kJ/mol)
+  - Number of arrangements = x^y (x places, y particles)
+  - dS(system) = sum S(products) - sum S(reactants)
+  - dS(surroundings) = -dH / T
+  - dS(total) = dS(system) + dS(surroundings) (> 0 spontaneous)
+  - dG = dH - T dS (dG < 0 spontaneous; = 0 equilibrium)
+  - dHneut (strong acid/base) ~ -57 kJ/mol
+- **Worked examples / sample problems:** Sample Problems 6.1-6.13 (PDF 122-149/151); number 6.6 is used twice by the book (bond-energy HCl PDF 127; NaF enthalpy of solution PDF 133/135).
+- **Figures / tables:** Figures 6.1-6.11; Tables 6.1 (average bond energies), 6.2 (heats of solution), 6.3 (effect of temperature on spontaneity).
+- **In-text features:** Quick Check 6.1-6.9 (~9); Interesting Information x1 (cold packs, PDF 118); Did You Know x1 (standard state, PDF 119); Extend your knowledge x1 (PDF 145/147); energy-balance box (PDF 124).
+- **End-of-chapter assessment:** EXERCISE, PDF 150–159
+  - Multiple Choice Questions (Q.1 I-XII): 12 questions (PDF 150, 153 (dup 152, 155))
+  - Short-Answer Questions (Q.2 a-l): 12 questions (PDF 154 (dup 156))
+  - Descriptive Questions (Q.3-Q.4): 2 questions (PDF 154 (dup 156))
+  - Numerical Problems (Q.5-Q.10): 6 questions (PDF 154, 157 (dup 156, 159))
+- **Answer key availability:** No answer key printed.
+- **Practical / lab content:** Glass calorimeter determination of enthalpy of neutralization (Sample Problem 6.2, PDF 122-123).
+- **Cross-links:** Ch 1 (IE, EA), Ch 7 (activation energy, energy profiles), Ch 8 (dG and equilibrium), Ch 10 (feasibility), Ch 12 (dH of contact process). Biology (food energy). Physics (heat, specific heat capacity).
+- **Notes / Requires Review:**
+  - PDF 129-160 contain printed pp. 125-140 scanned twice (pairs of two-page spreads); see Section 2. Topic pages above give the first copy; dup_pdf_page gives the second copy.
+  - Q.5 of Numerical Problems has only part (a) printed (PDF 154/156).
+
+### Chapter 7 — Reaction Kinetics
+- **Pages:** printed 140–162 · PDF 158–182
+- **SLO codes:** [C-11-A-01 to C-11-A-25] (as printed; same as Ch 2, 3, 4 - evidently erroneous; numbering sequence suggests C-11-A-124 to C-11-A-134)
+- **Main concept:** Rates of reactions: collision theory, measuring rates, factors (concentration, temperature via Boltzmann distribution, catalysts), rate laws and orders, determination of rate constants (initial-rate and half-life methods) and reaction mechanisms with rate-determining steps.
+- **Student Learning Outcomes:** 11 (approx. count of printed bullets/code range). Paraphrased:
+  - Explain rate of reaction and rate constant; calculate rates from data
+  - Boltzmann distribution and effect of temperature on rate constant and rate
+  - Activation energy; catalysts lower activation energy; reaction pathway diagrams with/without catalyst
+  - Rate equations, orders and rate constant; initial-rate and half-life methods
+  - Suggest mechanisms consistent with rate equation and rate-determining step
+  - Relationship between dG and feasibility
+- **Topic hierarchy:**
+  - 7.1 Collision Theory (PDF 161)
+  - 7.2 Rate of Reaction (PDF 161)
+    - 7.2.1 Instantaneous and Average Rate (PDF 162)
+    - 7.2.2 Measuring the Rate of a Chemical Reaction (PDF 163)
+    - 7.2.3 Measurement of Concentration (PDF 164)
+      - a) Chemical method (PDF 164) (unnumbered)
+      - b) Physical methods: spectrophotometry/colorimetry, electrical conductivity, volume change (PDF 165) (unnumbered)
+  - 7.3 Factors Affecting Rate of a Chemical Reaction (PDF 166)
+    - 7.3.1 Concentration (PDF 166)
+    - 7.3.2 Temperature (Maxwell-Boltzmann distribution curve) (PDF 166)
+    - 7.3.3 Catalyst (PDF 167)
+      - Types of catalysis: homogeneous, heterogeneous (PDF 168) (unnumbered)
+  - 7.4 Rate Law, Rate Constant and Order of Reaction (PDF 170)
+    - 7.4.1 Rate Law and Rate Constant (PDF 170)
+    - 7.4.2 Reaction Order (PDF 170)
+    - 7.4.3 Types of Reaction Order (PDF 171)
+      - Zero, first, second, third and fractional order reactions (PDF 171) (unnumbered)
+    - 7.4.4 Units of Rate Constant (PDF 173)
+  - 7.5 Determination of Rate Constant (PDF 174)
+    - 7.5.1 Initial Concentration Method (PDF 174)
+    - 7.5.2 Half-Life Method (PDF 175)
+  - 7.6 Reaction Mechanism (PDF 176)
+    - Molecularity (uni-, bi-, termolecular); intermediates (PDF 176) (unnumbered)
+    - Rate Determining Step (PDF 176) (unnumbered)
+- **Key terms / definitions:** reaction kinetics, collision theory, effective collision, activation energy, rate of reaction, instantaneous rate, average rate, colorimetry / spectrophotometry, conductivity method, stopped-flow spectrophotometry, Boltzmann distribution, catalyst, catalysis (homogeneous / heterogeneous), enzyme, rate law (rate equation), rate constant (specific rate), order of reaction (zero, first, second, third, fractional), half-life, initial-rate method, reaction mechanism, elementary step, molecularity, intermediate, rate-determining step
+- **Formulas / equations / laws / processes:**
+  - Rate = dx/dt = -d[A]/dt = +d[B]/dt (mol dm^-3 s^-1)
+  - Rate = k[A]^x[B]^y; overall order = x + y
+  - Units of k = (mol dm^-3)^(1-n) s^-1 (zero: mol dm^-3 s^-1; first: s^-1; second: dm3 mol^-1 s^-1; third: dm6 mol^-2 s^-1)
+  - t1/2 = 0.693 / k (first order)
+  - Rate roughly doubles per 10 C rise
+  - 2NO + 2H2 -> N2 + 2H2O: rate = k[NO]^2[H2] (third order)
+- **Worked examples / sample problems:** Sample Problems 7.1 (PDF 162-163), 7.2 (PDF 175-176) plus worked k calculations (initial-rate, H2O2 half-life PDF 174-175).
+- **Figures / tables:** Figures 7.1-7.8; Tables 7.1 (HI decomposition data), 7.2 (initial-rate data), 7.3 (NO/H2 data).
+- **In-text features:** Quick Check boxes ~8 (7.1-7.8); Did You Know x2 (pressure PDF 166; enzymes PDF 169); Interesting Information x2 (stopped-flow PDF 165; vitamins PDF 169); Keep in Mind x1 (PDF 171).
+- **End-of-chapter assessment:** EXERCISE, PDF 178–182
+  - Multiple Choice Questions (Q.1 I-XIII): 13 questions (PDF 178-180)
+  - Short Answer Questions (Q.2 a-o): 15 questions (PDF 180-181)
+  - Descriptive Questions (Q.3-Q.6): 4 questions (PDF 181)
+  - Numerical Problems ('Q.6' [duplicate number], Q.7, Q.8): 3 questions (PDF 181-182)
+- **Answer key availability:** No answer key printed.
+- **Practical / lab content:** Chemical (titration) and physical methods of following a reaction described (PDF 164-165).
+- **Cross-links:** Ch 6 (activation energy, dG), Ch 8 (rates at equilibrium), Ch 12 (catalytic converter, contact process catalyst). Biology (enzymes).
+- **Notes / Requires Review:**
+  - Opening page (printed 140) occurs twice: PDF 158 and PDF 160 (second copy has slightly better OCR).
+  - Numerical Problems restart at 'Q.6' although Descriptive Q.6 exists (PDF 181).
+  - PDF 182 top carries a temperature vs rate-constant table (500-700 K) with no question stem - orphan data, probably belongs to a missing question (Requires Review).
+
+### Chapter 8 — Chemical Equilibrium
+- **Pages:** printed 163–184 · PDF 183–204
+- **SLO codes:** [C-11-A-135 to C-11-A-148]
+- **Main concept:** Reversible reactions and dynamic equilibrium (macroscopic/microscopic view), the law of mass action and equilibrium constants (Kc, Kp, Kn, Kx), Le Chatelier's principle and its industrial applications (Haber process, SO3 manufacture).
+- **Student Learning Outcomes:** 14 (approx. count of printed bullets/code range). Paraphrased:
+  - Microscopic vs macroscopic events at equilibrium
+  - Reversible reactions and dynamic equilibrium (rates equal, concentrations constant); physical equilibria
+  - Deduce Kc expressions; relationships between Kc, Kp, Kn, Kx
+  - Conditions for equilibrium and how it is recognised
+  - Le Chatelier's principle: concentration, pressure, temperature, catalyst; effect of temperature on Kc
+  - Industrial applications: Haber and contact processes; optimising yields
+  - Hydrolysis of salts (acidic/basic solutions)
+- **Topic hierarchy:**
+  - 8.1 Macroscopic Events and Microscopic Events (PDF 184)
+    - 8.1.1 Macroscopic Events (PDF 184)
+    - 8.1.2 Microscopic Events (PDF 184)
+  - 8.2 Reversible Reactions, Microscopic Events and Dynamic Equilibrium (PDF 184)
+  - 8.3 Relation between Macroscopic and Microscopic Events (PDF 186)
+  - 8.4 Dynamic Equilibrium between Two Physical States (PDF 186)
+    - Relationship between dynamic equilibrium and vapour pressure (PDF 186) (unnumbered)
+  - 8.5 Conditions for Equilibrium (PDF 187)
+  - 8.6 Characteristics of Chemical Equilibrium (PDF 188)
+  - 8.7 Types of Equilibrium (homogeneous, heterogeneous) (PDF 188)
+  - 8.8 Equilibrium Constant and Position of Equilibrium (PDF 189)
+    - Law of mass action (PDF 189) (unnumbered)
+    - 8.8.1 Equilibrium Constant Expressions of Some Important Reactions (PDF 190)
+    - Units of equilibrium constant (PDF 192) (unnumbered)
+  - 8.9 Relationships between Various Equilibrium Constants (PDF 192)
+  - 8.10 Position of Equilibrium and Reaction Conditions (PDF 195)
+  - 8.11 Le-Chatelier's Principle (PDF 195)
+    - 8.11.1 Applications of Le-Chatelier's Principle (PDF 195)
+  - 8.12 The Effect of Change of Concentrations (PDF 195)
+    - 8.12.1 Hydrolysis of BiCl3 (PDF 196)
+  - 8.13 The Effect of Change in Pressure or Volume (PDF 196)
+  - 8.14 The Effect of Change in Temperature (PDF 197)
+  - 8.15 Effect of Catalyst on Equilibrium (PDF 198)
+  - 8.16 Industrial Applications of Chemical Equilibrium (PDF 199)
+    - 8.16.1 Synthesis of Ammonia by Haber's Process (PDF 199)
+      - Optimum conditions to get best yield of ammonia (PDF 200) (unnumbered)
+    - 8.16.2 Preparation of Sulphur Trioxide (PDF 200)
+      - Optimum conditions (PDF 200) (unnumbered)
+- **Key terms / definitions:** irreversible reaction, reversible reaction, chemical equilibrium, dynamic equilibrium, macroscopic event, microscopic event, physical equilibrium, homogeneous equilibrium, heterogeneous equilibrium, law of mass action, active mass, rate constant (forward/reverse), equilibrium constant Kc, Kp, Kn, Kx, position of equilibrium, Le Chatelier's principle, Haber process, contact process, optimum conditions
+- **Formulas / equations / laws / processes:**
+  - aA + bB <=> cC + dD: Kc = [C]^c[D]^d / [A]^a[B]^b = kf/kr
+  - Kp = Kc (RT)^dn; Kp = Kx P^dn; Kn related via total moles (as printed); dn = 0 => all constants equal
+  - Pure solids/liquids omitted from K expressions
+  - N2 + 3H2 <=> 2NH3 dH = -92 kJ; optimum 200-300 atm, ~400 C (673 K), Fe catalyst
+  - 2SO2 + O2 <=> 2SO3 dH = -197.9 kJ (per 2 mol); V2O5 catalyst, 1 atm, 400-500 C
+- **Worked examples / sample problems:** Sample Problems 8.1-8.4 (PDF 190-194).
+- **Figures / tables:** Figures 8.1-8.5; Tables 8.1 (Kc vs T for NH3), 8.2 (SO3 yield vs T).
+- **In-text features:** Quick Check 8.1-8.7 (7); Keep in Mind x1 (PDF 188); portrait box Le Chatelier (PDF 195).
+- **End-of-chapter assessment:** EXERCISE, PDF 201–204
+  - Multiple Choice Questions (Q.1 I-X): 10 questions (PDF 201-203)
+  - Short Answer Questions (Q.2 a-i): 9 questions (PDF 203)
+  - Descriptive Questions (Q.3-Q.9; Q.7-Q.9 are numerical, no separate 'Numerical Problems' heading): 7 questions (PDF 203-204)
+- **Answer key availability:** No answer key printed.
+- **Practical / lab content:** None.
+- **Cross-links:** Ch 5 (vapour pressure), Ch 7 (rate constants), Ch 9 (ionic equilibria, Ka, Ksp, hydrolysis), Ch 12 (Haber and contact processes).
+- **Notes / Requires Review:**
+  - No 'Numerical Problems' heading in this exercise; Q.7-Q.9 (PDF 204) are numerical and are counted as numericals in the inventory (render-verified).
+  - SLO on salt hydrolysis is treated in Ch 9 (9.9).
+
+### Chapter 9 — Acid-Base Chemistry
+- **Pages:** printed 185–206 · PDF 205–226
+- **SLO codes:** [C-11-A-149 to C-11-A-165]
+- **Main concept:** Bronsted-Lowry and Lewis acid-base concepts, ionic product of water and pH/pOH, acid dissociation constants, common ion effect, buffers (Henderson equation), solubility product, salt hydrolysis, indicators and titration curves.
+- **Student Learning Outcomes:** 17 (approx. count of printed bullets/code range). Paraphrased:
+  - Conjugate acid-base pairs (Bronsted-Lowry); Lewis acids/bases and coordinate bonds
+  - Define and use Kw, pH, Ka, pKa; [H+] and pH for strong/weak acids and alkalis
+  - [H3O+] from Ka and concentration
+  - Common ion effect on solubility
+  - pH of buffer solutions
+  - Ksp expressions and calculations including common ion; concentrations of ions of sparingly soluble salts
+  - Salt hydrolysis using conjugate acid/base ideas
+  - Select indicators for acid-alkali titrations; perform titrations to find molarity
+- **Topic hierarchy:**
+  - 9.1 Bronsted-Lowry Concept (PDF 206)
+  - 9.2 Lewis Concept of Acids and Bases (PDF 207)
+  - 9.3 Ionic Product of Water (PDF 208)
+  - 9.4 pH and pOH (PDF 209)
+  - 9.5 Ionization Constants of Acids (Ka) (PDF 211)
+    - 9.5.1 Calculating H3O+ Ions from Ka (PDF 212)
+  - 9.6 Common Ion Effect (PDF 213)
+    - More examples of common ion effect (KClO3/KCl, H2S/HCl, NH4Cl/NH3 in salt analysis) (PDF 214) (unnumbered)
+  - 9.7 Buffer Solutions (PDF 215)
+    - 9.7.1 Calculating the pH of a Buffer (PDF 216)
+  - 9.8 Solubility Product (PDF 217)
+    - 9.8.1 Applications of solubility product (PDF 218)
+      - a) Determination of solubility from Ksp (PDF 218) (unnumbered)
+      - b) Common ion effect (PDF 218) (unnumbered)
+      - c) Predicting precipitation (PDF 219) (unnumbered)
+  - 9.9 Salt Hydrolysis (PDF 220)
+    - 9.9.1 Salts of Strong Acids and Strong Bases (PDF 220)
+    - 9.9.2 Salts of Strong Acids and Weak Bases (PDF 220)
+    - 9.9.3 Salts of Weak Acids and Strong Bases (PDF 220)
+    - 9.9.4 Salts of Weak Acids and Weak Bases (PDF 221)
+  - 9.10 Acid-Base Indicators (PDF 221)
+    - 9.10.1 Selecting a Suitable Indicator (PDF 222)
+    - 9.10.2 Titration Curve and Equivalence Point (PDF 222)
+      - 1. Strong acid-strong base titration curve (PDF 222) (unnumbered)
+      - 2. Strong acid-weak base titration curve (PDF 223) (unnumbered)
+- **Key terms / definitions:** Arrhenius concept, Bronsted-Lowry acid/base, conjugate acid/base pair, amphoteric, Lewis acid/base, acid-base adduct, ionic product of water (Kw), pH, pOH, acid dissociation constant (Ka), pKa, strong / weak acid, common ion effect, buffer (acidic / basic), Henderson equation, solubility product (Ksp), ionic product, salt hydrolysis, acid-base indicator, indicator range, end point, equivalence point, titration curve
+- **Formulas / equations / laws / processes:**
+  - Kw = [H+][OH-] = 1.0 x 10^-14 at 25 C
+  - pH = -log[H+]; pOH = -log[OH-]; pH + pOH = 14
+  - Ka = [H3O+][A-]/[HA]; [H3O+] = sqrt(Ka C)
+  - pH = pKa + log([salt]/[acid]) (Henderson)
+  - Ksp(PbSO4) = [Pb2+][SO4^2-]; Ksp(Ca(OH)2) = 4S^3
+  - Precipitation when ionic product > Ksp
+  - NH4+ + H2O <=> NH3 + H3O+ (acidic); CH3COO- + H2O <=> CH3COOH + OH- (basic)
+- **Worked examples / sample problems:** Sample Problems 9.1-9.4 (PDF 209-218).
+- **Figures / tables:** Figures 9.1-9.5; Tables 9.1-9.7 (conjugate pairs, Kw vs T, Ka values, buffer pH, Ksp values, solubility vs Ksp, indicator ranges).
+- **In-text features:** Quick Check boxes ~7 (PDF 208, 211, 213, 216, 219, 224); Interesting Information x4 (stomach acidity PDF 205, negative pH PDF 209, blood buffers PDF 216, nautilus shell PDF 220).
+- **End-of-chapter assessment:** EXERCISE, PDF 224–226
+  - Multiple Choice Questions (Q.1 I-XI): 11 questions (PDF 224-225)
+  - Short Answer Questions (Q.2 a-l): 12 questions (PDF 225-226)
+  - Descriptive Questions (Q.3-Q.7): 5 questions (PDF 226)
+  - Numerical Problems (Q.8-Q.10): 3 questions (PDF 226)
+- **Answer key availability:** No answer key printed.
+- **Practical / lab content:** Indicator selection and titration curves (links to titration practical in Ch 16).
+- **Cross-links:** Ch 8 (equilibrium constants), Ch 16 (acid-base titration, salt analysis group reagents), Ch 3 (dative bond / Lewis acids). Biology (blood buffers).
+- **Notes / Requires Review:**
+  - Table 9.7 indicator data partly garbled in OCR (PDF 223).
+
+### Chapter 10 — Electrochemistry
+- **Pages:** printed 207–235 · PDF 227–255
+- **SLO codes:** [C-11-A-56 to C-11-B-78] (as printed - mixed A/B strand letters, render-verified)
+- **Main concept:** Redox chemistry (oxidation numbers, disproportionation, balancing), electrolysis and Faraday calculations (including Avogadro constant), electrode potentials (SHE, standard potentials, galvanic cells, feasibility, Nernst equation), activity series, photovoltaic cells and the Winkler method for dissolved oxygen/BOD.
+- **Student Learning Outcomes:** 22 (approx. count of printed bullets/code range). Paraphrased:
+  - Define redox, oxidation, reduction, disproportionation (electron transfer and oxidation number)
+  - Use oxidation numbers; identify oxidizing/reducing agents; balance redox equations
+  - Electrolytic cells; predict products of electrolysis
+  - Faraday constant, Avogadro constant and electron charge; quantity of charge and mass/volume liberated; Avogadro constant by electrolysis
+  - Standard electrode and cell potentials; SHE; predict feasibility and electron flow
+  - Relative oxidizing/reducing strength from E values; redox equations from half-equations
+  - Voltaic (galvanic) cells, e.g. Cu-Zn
+  - Variation of E with concentration; Nernst equation
+  - Activity series and feasibility
+  - Photovoltaic cells; Winkler method for BOD/DO
+- **Topic hierarchy:**
+  - 10.1 Oxidation, Reduction and Redox Reactions (PDF 228)
+  - 10.2 Oxidation Number and its Significance (PDF 229)
+    - 10.2.1 Oxidation Number Rules (PDF 229)
+    - 10.2.2 Finding Oxidation Number of an Element in a Compound or a Radical (PDF 230)
+  - 10.3 Disproportionation Reaction (PDF 231)
+  - 10.4 Oxidizing Agent (Oxidant) and Reducing Agent (Reductant) (PDF 231)
+  - 10.5 Balancing of Redox Equations by Oxidation Number Method (PDF 232)
+  - 10.6 Electrolytic Cell (PDF 234)
+  - 10.7 Redox Reactions in Electrolysis (PDF 235)
+  - 10.8 Mass of a Substance Deposited during Electrolysis (PDF 236)
+  - 10.9 Amount of Substance Produced during Electrolysis (PDF 236)
+  - 10.10 Avogadro's Constant by the Electrolytic Method (PDF 237)
+    - 10.10.1 Finding the Charge on 1 Mole of Electrons (PDF 237)
+    - 10.10.2 Calculating charge on an electron (PDF 238)
+  - 10.11 Electrode Potentials (PDF 239)
+    - Electrical double layer (PDF 240) (unnumbered)
+  - 10.12 Standard Hydrogen Electrode (SHE) (PDF 240)
+  - 10.13 Standard Electrode Potential (E) (PDF 241)
+  - 10.14 Measuring Standard Electrode Potentials (PDF 241)
+  - 10.15 Electrochemical Cell (Galvanic Cell) (PDF 243)
+  - 10.16 Applications of E Values (PDF 244)
+    - 10.16.1 Direction of Electron Flow (PDF 244)
+    - 10.16.2 Feasibility of a Reaction Using E Values (PDF 244)
+    - 10.16.3 Oxidising and Reducing Agents Using E Values (PDF 246)
+  - 10.17 Variation of E with Ion Concentration (PDF 246)
+  - 10.18 Nernst Equation (PDF 247)
+  - 10.19 Activity Series of Metals (PDF 248)
+  - 10.20 Feasibility of Redox Reactions from Activity Series or Reaction Data (PDF 250)
+  - 10.21 Photovoltaic Cells (PDF 251)
+    - 10.21.1 Principle of Photovoltaic Cells (PDF 251)
+    - 10.22.2 Merits of Photovoltaic Cell as Sustainable Source of Energy (printed as 10.22.2; should be 10.21.2) (PDF 251)
+  - 10.22 Winkler Method, BOD and DO (PDF 251)
+    - Winkler method (PDF 252) (unnumbered)
+- **Key terms / definitions:** electrochemistry, oxidation, reduction, redox reaction, oxidation number (state), disproportionation, oxidizing agent, reducing agent, oxidation-number method, electrolytic cell, electrolysis, cathode, anode, electrolyte, Faraday (F), Avogadro constant, electrode potential, electrical double layer, standard hydrogen electrode, standard electrode potential, half-cell, galvanic (voltaic) cell, salt bridge, standard cell potential, Nernst equation, activity (reactivity) series, photovoltaic cell / effect, biochemical oxygen demand (BOD), dissolved oxygen (DO), Winkler method
+- **Formulas / equations / laws / processes:**
+  - Q = I x t
+  - 1 F = 96500 C mol^-1; number of Faradays = moles of electrons transferred
+  - NA = charge on 1 mol electrons / charge on 1 electron (1.60 x 10^-19 C)
+  - E(cell) = E(cathode) - E(anode); Zn-Cu: 0.34 - (-0.76) = +1.10 V
+  - E = E + (RT/zF) ln([oxidized]/[reduced]); at 298 K E = E + (0.059/z) log([ox]/[red])
+  - Positive E(cell) => feasible reaction
+  - DO normally 5-8 mg/dm3; < 5 mg/dm3 indicates pollution
+- **Worked examples / sample problems:** Sample Problems 10.1, 10.2, 10.4, 10.5 and a Nernst sample problem (PDF 230-248); Sample Problem 10.3 not found (numbering skip?) - Requires Review.
+- **Figures / tables:** Figures 10.1-10.10; Tables 10.1 (E vs concentration), 10.2 (activity series).
+- **In-text features:** Quick Check 10.1-10.7 (~8); Keep in Mind x2 (PDF 230, 233); Did You Know x1 (PDF 234); Interesting Information x1 (PDF 228).
+- **End-of-chapter assessment:** EXERCISE, PDF 252–255
+  - Multiple Choice Questions (Q.1 I-XII): 12 questions (PDF 252-253)
+  - Short Answer Questions (Q.2 a-k): 11 questions (PDF 254)
+  - Descriptive Questions (Q.3-Q.6): 4 questions (PDF 254)
+  - Numerical Problems (Q.7-Q.9): 3 questions (PDF 255)
+- **Answer key availability:** No answer key printed.
+- **Practical / lab content:** Electrolytic determination of Avogadro's constant using copper electrodes (PDF 237-238); Winkler titration for DO (PDF 252).
+- **Cross-links:** Ch 1 (oxidation numbers of oxides/chlorides), Ch 4 (mole calculations), Ch 13 (E values of halogens), Ch 14 (water/air quality). Physics (current, charge, photovoltaic/semiconductors).
+- **Notes / Requires Review:**
+  - Heading for merits of PV cells printed '10.22.2' inside 10.21 (PDF 251).
+  - SLO code range '[C-11-A-56 to C-11-B-78]' mixes strand letters (render-verified).
+  - Text cites 'Figure 10.13' and 'Figure 10.9' inconsistently with figure numbering (PDF 244-246).
+
+### Chapter 11 — Hydrocarbons
+- **Pages:** printed 236–264 · PDF 256–284
+- **SLO codes:** [C-11-D-01 to C-11-D-17]
+- **Main concept:** Aliphatic and aromatic hydrocarbons; IUPAC naming, shapes and properties of alkanes and cycloalkanes; bond fission and free-radical substitution; alkenes (naming, preparation, structure, carbocation stability, electrophilic addition and other reactions, polymerization); conjugated dienes; isomerism; organic redox.
+- **Student Learning Outcomes:** 17 (approx. count of printed bullets/code range). Paraphrased:
+  - Classify hydrocarbons as aliphatic/aromatic; nomenclature of alkanes and cycloalkanes
+  - Shapes of alkanes and cycloalkanes (ethane, cyclopropane); unreactivity of alkanes
+  - Homolytic/heterolytic fission; free radical substitution mechanism (initiation, propagation, termination)
+  - Identify organic redox reactions
+  - Nomenclature, structure (sigma/pi) and reactivity of alkenes; preparation of ethene (dehydration, dehydrohalogenation)
+  - Reactions of ethene: hydrogenation, hydrohalogenation, hydration, halogenation, halohydration, epoxidation, ozonolysis, polymerization
+  - Conjugation in dienes
+  - Electrophilic addition mechanism (Br2/ethene, HBr/propene); inductive effect, carbocation stability, Markovnikov's rule
+  - Isomerism: structural and stereoisomerism
+- **Topic hierarchy:**
+  - 11.1 Aliphatic and Aromatic Hydrocarbons (PDF 257)
+  - 11.2 Nomenclature (PDF 258)
+    - 11.2.1 Alkanes or Paraffins (PDF 258)
+    - 11.2.2 Nomenclature of Alkanes (PDF 259)
+      - IUPAC rules 1-8 (PDF 259) (unnumbered)
+    - 11.2.3 Nomenclature of cycloalkanes (PDF 261)
+    - 11.2.4 Shapes of Alkanes and Cycloalkanes (PDF 261)
+    - 11.2.5 Physical Properties of Alkanes (PDF 263)
+  - 11.3 Reaction Mechanism and Modes of Bond Breaking (PDF 263)
+    - (a) Homolytic fission (PDF 264) (unnumbered)
+    - (b) Heterolytic fission (PDF 264) (unnumbered)
+  - 11.4 Unreactive Nature of Alkanes towards Polar Reagents (PDF 264)
+  - 11.5 Reactions of Alkanes (PDF 265)
+    - 11.5.1 Free radical Substitution Reactions (PDF 265)
+      - Initiation, propagation, termination (PDF 265) (unnumbered)
+  - 11.6 Alkenes (PDF 267)
+    - 11.6.1 Nomenclature of Alkenes (PDF 267)
+    - 11.6.2 Preparation of Alkenes (PDF 267)
+      - i) Dehydration of alcohols (PDF 268) (unnumbered)
+      - ii) Dehydrohalogenation of alkyl halides (PDF 268) (unnumbered)
+    - 11.6.3 Physical Properties (PDF 268)
+  - 11.7 Structure and Reactivity of Alkenes (PDF 268)
+    - 11.7.1 Structure of Alkenes (PDF 268)
+    - 11.7.2 Reactivity of pi bond (PDF 269)
+    - 11.7.3 Carbocation Stability and Inductive Effect of Alkyl group (PDF 270)
+    - 11.7.4 Electron Withdrawing Inductive Effect (PDF 271)
+  - 11.8 Reactions of Alkenes (PDF 271)
+    - 11.8.1 Electrophilic Addition Reactions (PDF 271)
+      - Mechanism of electrophilic addition in alkenes (PDF 271) (unnumbered)
+      - 1. Halogenation (PDF 272) (unnumbered)
+      - 2. Hydrohalogenation (symmetrical / unsymmetrical alkenes; Markovnikov's rule) (PDF 273) (unnumbered)
+      - 3. Hydrogenation (PDF 274) (unnumbered)
+      - 4. Hydration (PDF 275) (unnumbered)
+      - 5. Halohydration (PDF 275) (unnumbered)
+      - 6. Epoxidation (PDF 275) (unnumbered)
+      - 7. Ozonolysis (PDF 275) (unnumbered)
+      - 8. Polymerization; deducing repeating units (PDF 276) (unnumbered)
+  - 11.9 Conjugated Dienes (PDF 277)
+  - 11.10 Isomerism (PDF 278)
+    - 11.10.1 Types of Isomerism (PDF 278)
+      - A. Structural isomerism: chain, position, functional group, metamerism, tautomerism (PDF 278) (unnumbered)
+      - B. Stereoisomerism: geometrical (cis-trans), optical (PDF 280) (unnumbered)
+  - 11.11 Organic Redox Reactions (PDF 280)
+    - 11.11.1 Oxidation (PDF 280)
+    - 11.11.2 Reduction (PDF 281)
+- **Key terms / definitions:** hydrocarbon, aliphatic, aromatic, alkane (paraffin), cycloalkane, homologous series, alkyl group, IUPAC nomenclature, homolytic fission, heterolytic fission, free radical, free radical substitution, initiation / propagation / termination, alkene, elimination reaction, dehydration, dehydrohalogenation, pi bond, electrophile, nucleophile, carbocation (methyl, 1, 2, 3 degree), inductive effect (+I / -I), electrophilic addition, Markovnikov's rule, hydrogenation, hydration, halohydration, epoxidation, ozonolysis, addition polymerization, repeating unit, conjugated diene, isomerism, chain / position / functional group isomerism, metamerism, tautomerism, stereoisomerism, organic oxidation / reduction
+- **Formulas / equations / laws / processes:**
+  - Alkanes CnH2n+2; alkenes CnH2n
+  - CH4 + Cl2 --hv--> CH3Cl + HCl (-> CH2Cl2 -> CHCl3 -> CCl4); Cl2 --hv--> 2Cl.
+  - C2H5OH --conc H2SO4, 180 C--> C2H4 + H2O
+  - C2H5Br + KOH(alc) --heat--> C2H4 + KBr + H2O
+  - C2H4 + Br2 -> CH2BrCH2Br; C2H4 + HBr -> C2H5Br
+  - CH3CH=CH2 + HBr -> CH3CHBrCH3 (major) + CH3CH2CH2Br (minor)
+  - C2H4 + H2 --Ni/Pt, 250-300 C--> C2H6; C2H4 + H2O --H2SO4--> C2H5OH
+  - C2H4 + Br2 + H2O -> BrCH2CH2OH + HBr
+  - C2H4 + O2 --Ag--> epoxide --H+/H2O--> ethane-1,2-diol
+  - Alkene + O3 -> ozonide --Zn/H2O--> carbonyl compounds
+  - n CH2=CH2 -> -(CH2-CH2)n-; carbocation stability 3 > 2 > 1 > methyl
+- **Worked examples / sample problems:** No numbered sample problems; worked naming examples (PDF 259-261, 267).
+- **Figures / tables:** Figures 11.1-11.16; Tables 11.1-11.5 (alkanes, alkyl groups, shapes).
+- **In-text features:** Quick Check 11.1-11.10 (~10); Interesting Information x4 (PDF 257, 266, 269, 276); Did You Know x3 (PDF 258, 264, 269).
+- **End-of-chapter assessment:** EXERCISE, PDF 281–284
+  - Multiple Choice Questions (Q.1 I-XII): 12 questions (PDF 281-283)
+  - Short Answer Questions (Q.2 a-l; k has 12 structures, l has ~10 names): 12 questions (PDF 283-284)
+  - Descriptive Questions (Q.3-Q.6): 4 questions (PDF 284)
+- **Answer key availability:** No answer key printed.
+- **Practical / lab content:** None (test for unsaturation with bromine water mentioned, PDF 272).
+- **Cross-links:** Ch 3 (hybridization, sigma/pi), Ch 10 (redox), Ch 12 (sulfur in organic synthesis), Ch 14 (hydrocarbon pollutants, PAHs). C12-CHEM organic chapters (alcohols, carbonyls, polymers) - not verified.
+- **Notes / Requires Review:**
+  - IUPAC name examples in OCR heavily garbled (PDF 259-261, 267, 284) - verify against page.
+  - MCQ VII/VIII options garbled in OCR (PDF 282).
+
+### Chapter 12 — Nitrogen and Sulfur
+- **Pages:** printed 265–282 · PDF 285–302
+- **SLO codes:** [C-11-B-30 to C-11-B-41]
+- **Main concept:** Chemistry of nitrogen (inertness of N2, ammonia and ammonium, oxides of nitrogen, smog/PAN, catalytic converters, nitrogen cycle) and sulfur (catenation, oxidation states, reactions, uses, organic sulfur compounds, contact process and properties/uses of sulfuric acid).
+- **Student Learning Outcomes:** 12 (approx. count of printed bullets/code range). Paraphrased:
+  - Lack of reactivity of N2 (triple bond, non-polarity)
+  - Basicity of ammonia (Bronsted-Lowry); ammonium ion structure; displacement of NH3 from ammonium salts
+  - Natural and man-made NOx; catalytic removal from exhaust
+  - NO/NO2 in photochemical smog and PAN
+  - Nitrification vs denitrification
+  - Low reactivity of sulfur; oxidation states and their stability
+  - Properties, production and uses of sulfuric acid
+  - Reactions of sulfur; uses of sulfur compounds (fertilizers, gunpowder, rubber, dyes, drugs, fragrances)
+- **Topic hierarchy:**
+  - Nitrogen (introduction; Table 12.1 physical properties) (PDF 285) (unnumbered)
+  - 12.1 Reactivity of Nitrogen (N2) (PDF 286)
+  - 12.2 Ammonia (NH3) (PDF 286)
+    - 12.2.1 Basicity of Ammonia (PDF 286)
+    - 12.2.2 Structure of Ammonium (NH4+) (PDF 287)
+    - 12.2.3 Synthesis of Ammonia from Ammonium salts (PDF 287)
+  - 12.3 Oxides of Nitrogen (PDF 288)
+  - 12.4 Sources of Oxides of Nitrogen (PDF 289)
+    - 12.4.1 Natural Sources (PDF 289)
+    - 12.4.2 Anthropogenic (Man-made) Sources (PDF 289)
+  - 12.5 Role of NO and NO2 in Smog and PAN Formation (PDF 289)
+    - 12.5.1 Photochemical Smog (PDF 289)
+    - 12.5.2 Formation of Peroxyacyl Nitrates (PANs) (PDF 289)
+  - 12.6 Catalytic Converter (PDF 290)
+  - 12.7 Nitrification and Denitrification (PDF 291)
+  - 12.8 Sulfur (PDF 292)
+    - 12.8.1 Reactivity of Sulfur (PDF 292)
+    - 12.8.2 Oxidation States of Sulfur (PDF 292)
+  - 12.9 Stability of Oxidation States of Sulfur (PDF 293)
+    - Thermodynamics and kinetics; nature of the compound; catalyst (PDF 293) (unnumbered)
+  - 12.10 Reactions of Sulfur (PDF 294)
+  - 12.11 Uses of Sulfur and its Compounds (PDF 295)
+    - 12.11.1 Vulcanisation (PDF 295)
+    - 12.11.2 Fertilizer (PDF 295)
+    - 12.11.3 Gun powder (PDF 295)
+  - 12.12 Role of Sulfur in Organic Synthesis (PDF 295)
+    - 12.12.1 Drugs (PDF 295)
+    - 12.12.2 Dyes (PDF 295)
+    - 12.12.3 Odorants/Fragrances (PDF 296)
+  - 12.13 Sulfuric Acid (H2SO4) (PDF 296)
+    - 12.13.1 Contact Process (PDF 296)
+      - Sulfur/pyrite burners; purification unit; contact tower and heat exchangers; absorption tower (oleum) (PDF 297) (unnumbered)
+    - 12.13.2 Physical Properties (PDF 298)
+    - 12.13.3 Chemical Properties (PDF 298)
+    - 12.13.4 Uses and Industrial Applications (PDF 299)
+- **Key terms / definitions:** inertness of nitrogen, triple bond enthalpy, Bronsted-Lowry base, ammonium ion, Haber-Bosch process, oxides of nitrogen (N2O, NO, NO2, N2O4, N2O5), NOx, photochemical smog, peroxyacyl nitrates (PAN), peroxybenzoyl nitrate (PBN), three-way catalytic converter, nitrification, denitrification, Anammox, catenation, cyclo-octasulfur (S8), oxidation states of sulfur, vulcanisation, gunpowder, sulfa drugs, sulfur dyes, mercaptans (thiols), contact process, oleum (fuming sulfuric acid), autoprotolysis, dehydrating agent
+- **Formulas / equations / laws / processes:**
+  - N2 bond enthalpy +944 kJ/mol
+  - N2 + 3H2 <=> 2NH3; NH3 + H2O <=> NH4+ + OH- (Kb = 1.8 x 10^-5)
+  - 2NH4Cl + Ca(OH)2 -> CaCl2 + 2H2O + 2NH3
+  - N2 + O2 -> 2NO; 2NO + O2 -> 2NO2; NO2 --hv--> NO + O; O + O2 -> O3
+  - 2NO + 2CO -> N2 + 2CO2; 2CO + O2 -> 2CO2; C2H4 + 3O2 -> 2CO2 + 2H2O (catalytic converter)
+  - 2NH4+ + 3O2 -> 2NO2- + 4H+ + 2H2O; 2NO2- + O2 -> 2NO3-
+  - S + O2 -> SO2 (dH = -297 kJ/mol); 4FeS2 + 11O2 -> 2Fe2O3 + 8SO2
+  - 2SO2 + O2 <=> 2SO3 (V2O5, 420-450 C, 1-2 atm); SO3 + H2SO4 -> H2S2O7; H2S2O7 + H2O -> 2H2SO4
+  - 2KNO3 + 3C + S -> K2S + 3CO2 + N2 (gunpowder, as typically written)
+  - C12H22O11 + H2SO4 -> 12C + 11H2O (dehydration); Cu + 2H2SO4(hot conc) -> CuSO4 + SO2 + 2H2O
+  - 2H2SO4 <=> H3SO4+ + HSO4- (K = 2.7 x 10^-4)
+- **Worked examples / sample problems:** No numbered sample problems.
+- **Figures / tables:** Figures 12.1-12.11; Tables 12.1 (N2 properties), 12.2 (oxides of N), 12.3 (nitrification vs denitrification; text calls it 12.2), 12.4 (S properties), 12.5 (H2SO4 properties).
+- **In-text features:** Quick Check 12.1-12.7 (7); Interesting Information x2 (PDF 286, 299); Did You Know x3 (PDF 288, 289, 300); safety note on H2SO4 (PDF 298).
+- **End-of-chapter assessment:** EXERCISE, PDF 300–302
+  - Multiple Choice Questions (Q.1 I-XII): 12 questions (PDF 300-302)
+  - Short Answer Questions (Q.2 a-p): 16 questions (PDF 302)
+  - Descriptive Questions (Q.3-Q.6): 4 questions (PDF 302)
+- **Answer key availability:** No answer key printed.
+- **Practical / lab content:** Laboratory preparation/test of ammonia (Fig 12.3, PDF 287); sugar dehydration demonstration (PDF 299).
+- **Cross-links:** Ch 8 (Haber and contact process equilibria), Ch 9 (ammonia as base), Ch 14 (smog, PAN, acid rain, catalytic converters), Ch 16 (NH4+ test). Biology (nitrogen cycle).
+- **Notes / Requires Review:**
+  - Text refers to nitrification table as 'Table 12.2' but caption is Table 12.3 (PDF 291).
+  - Gunpowder equation garbled in OCR (PDF 295).
+
+### Chapter 13 — Halogens
+- **Pages:** printed 283–296 · PDF 303–316
+- **SLO codes:** [C-11-B-19 to C-11-B-41] (as printed; overlaps Ch 12's B-30 to B-41 - likely should end at B-29)
+- **Main concept:** Group 17 trends: colour and volatility (London forces), bond strength (F2 anomaly), oxidizing power of halogens, reactions with hydrogen and thermal stability of HX, reducing power of halide ions (AgNO3/NH3 tests, conc. H2SO4 reactions), disproportionation of Cl2 in NaOH and chlorination of water.
+- **Student Learning Outcomes:** 11 (approx. count of printed bullets/code range). Paraphrased:
+  - Colours and volatility trend of Cl2, Br2, I2; interpret via instantaneous dipole-induced dipole forces
+  - Trend in bond strength of halogen molecules
+  - Relative reactivity of halogens as oxidizing agents
+  - Reactions with hydrogen; thermal stability of hydrogen halides (bond strength)
+  - Halide ions as reducing agents; reactions with AgNO3/aqueous NH3 and with concentrated H2SO4
+  - Chlorine with cold and hot NaOH as disproportionation
+  - Chlorine in water purification (HOCl, OCl-)
+- **Topic hierarchy:**
+  - Introduction: Group 17 elements, physical states and colours (Table 13.1) (PDF 303) (unnumbered)
+  - 13.1 Volatility of Chlorine, Bromine and Iodine (PDF 305)
+  - 13.1 Trend in Volatility of the Halogens (printed as 13.1 again; should be 13.2) (PDF 305)
+  - 13.3 The Bond Strength of Halogen Molecules (PDF 306)
+  - 13.4 Relative Reactivities of the Halogens as Oxidizing Agents (PDF 306)
+  - 13.5 Reactions of the Halogens with Hydrogen (PDF 307)
+  - 13.6 Relative Thermal Stabilities of Hydrogen Halides in terms of their Bond Strength (PDF 308)
+  - 13.7 Relative Reactivity of Halide Ions as Reducing Agents (PDF 309)
+  - 13.8 Reactions of Halides with Aqueous Silver Ion followed by Aqueous Ammonia (PDF 309)
+    - 13.8.1 Reactions of halides with aqueous silver ion (PDF 309)
+    - 13.8.2 Reaction of silver halides (AgX) with aqueous ammonia (PDF 310)
+  - 13.9 Reactions of Halides with Concentrated Sulfuric Acid (PDF 311)
+  - 13.10 Reactions of Chlorine with Cold and Hot Aqueous Sodium Hydroxide (PDF 312)
+    - 13.10.1 Reaction with cold aqueous sodium hydroxide (PDF 312)
+    - 13.10.2 Reaction with hot aqueous sodium hydroxide (PDF 312)
+  - 13.11 Use of Chlorine in Water Purification (PDF 313)
+    - 13.11.1 Chlorine Addition to Water (PDF 313)
+    - 13.11.2 Disinfection Activity (PDF 313)
+    - 13.11.3 Factors Affecting Disinfection (pH, chlorine dose, contact time) (PDF 313)
+- **Key terms / definitions:** halogens, volatility, instantaneous dipole-induced dipole (London) forces, polarizability, bond strength / bond energy, lone-pair repulsion in F2, oxidizing power, standard electrode potential, hydrogen halides, hydrohalic acids, thermal stability, bond dissociation energy, reducing power of halide ions, silver nitrate test, diamminesilver(I) complex, disproportionation, sodium chlorate(I) (hypochlorite), sodium chlorate(V), chlorination, hypochlorous acid (HOCl), hypochlorite ion (OCl-)
+- **Formulas / equations / laws / processes:**
+  - Bond energies (kJ/mol): F2 ~156-158, Cl2 243, Br2 193, I2 151
+  - E(X2/X-): F2 +2.87, Cl2 +1.36, Br2 +1.07, I2 +0.54 V
+  - H-X bond dissociation: HF 569, HCl 431, HBr 366, HI 299 kJ/mol
+  - H2 + X2 -> 2HX (F2 explosive in dark; Cl2 with UV; Br2 on heating; I2 reversible with catalyst)
+  - Cl2 + 2Br- -> 2Cl- + Br2; Br2 + 2I- -> 2Br- + I2
+  - Ag+ + X- -> AgX (AgCl white, AgBr cream, AgI yellow); AgCl + 2NH3 -> [Ag(NH3)2]+ + Cl-
+  - NaX + H2SO4 -> NaHSO4 + HX; 2HBr + H2SO4 -> Br2 + SO2 + 2H2O; 8HI + H2SO4 -> 4I2 + H2S + 4H2O
+  - Cl2 + 2NaOH(cold) -> NaCl + NaClO + H2O; 3Cl2 + 6NaOH(hot) -> 5NaCl + NaClO3 + 3H2O
+  - Cl2 + H2O -> HCl + HOCl; HOCl <=> H+ + OCl-
+- **Worked examples / sample problems:** No numbered sample problems.
+- **Figures / tables:** Figures 13.1-13.3; Tables 13.1-13.6 (properties, London forces, bond energies, E values, H-X BDE, Ag+/NH3 tests).
+- **In-text features:** Quick Check 13.1-13.6 (6); Did You Know x1 (PDF 304); Interesting Information x2 (PDF 305, 313); Keep in Mind x1 (PDF 312).
+- **End-of-chapter assessment:** EXERCISE, PDF 314–316
+  - Multiple Choice Questions (Q.1 I-X): 10 questions (PDF 314-315)
+  - Short Answer Questions (Q.2 a-o): 15 questions (PDF 315-316)
+  - Descriptive Questions (Q.3-Q.5): 3 questions (PDF 316)
+- **Answer key availability:** No answer key printed.
+- **Practical / lab content:** Silver nitrate / ammonia test for halides (Table 13.6, PDF 311) - repeated as practical in Ch 16 (16.6 b).
+- **Cross-links:** Ch 1 (halogen family trends), Ch 5 (London forces), Ch 10 (E values, disproportionation), Ch 16 (halide tests), Ch 14 (water/air), Biology (disinfection).
+- **Notes / Requires Review:**
+  - Section number 13.1 is printed twice (13.2 missing) (PDF 305).
+  - Text (13.1) wrongly calls chlorine 'a liquid' (PDF 305).
+  - SLO code range overlaps Ch 12 (render-verified).
+
+### Chapter 14 — Atmosphere
+- **Pages:** printed 297–313 · PDF 317–333
+- **SLO codes:** [C-11-C-01 to C-11-B-14] (as printed - mixed strand letters, render-verified; OCR missed it)
+- **Main concept:** Composition and layers of the atmosphere, primary and secondary air pollutants and their sources, human impacts, smog, acid rain, greenhouse effect, air-quality index and health, monitoring methods, control technologies, Pakistani laws, and socio-economic/political issues.
+- **Student Learning Outcomes:** 14 (approx. count of printed bullets/code range). Paraphrased:
+  - Properties, composition and four layers of the atmosphere
+  - Sources and effects of air pollutants (GHGs, CFCs, ozone, VOCs, PAHs, POPs, heavy metals)
+  - Impact of fossil-fuel burning and deforestation
+  - Atmospheric reactions: smog, acid rain; global warming and greenhouse effect
+  - Factors affecting air quality; air quality and human health risks
+  - Methods to measure/monitor air quality; design experiments and analyse data
+  - Technologies/strategies to reduce air pollution; laws and regulations; economic, social and political issues
+- **Topic hierarchy:**
+  - Introduction: major, minor and trace components (PDF 317) (unnumbered)
+  - 14.1 Layers of the Atmosphere (troposphere, stratosphere, mesosphere, thermosphere) (PDF 318)
+  - 14.2 Air Pollutants (primary/secondary; list of 11) (PDF 318)
+  - 14.3 Sources of Air Pollution (PDF 319)
+    - 14.3.1 Natural Sources (PDF 319)
+    - 14.3.2 Human-Made Sources (PDF 319)
+  - 14.4 Sources of Air Pollutants (PDF 320)
+    - 14.4.1 Oxides of Carbon (PDF 320)
+    - 14.4.2 Oxides of Nitrogen (NOx) (PDF 320)
+    - 14.4.3 Oxides of Sulphur (SOx) (PDF 320)
+    - 14.4.4 Hydrocarbons (PDF 320)
+    - 14.4.5 Low-Altitude Ozone (O3) (PDF 321)
+    - 14.4.6 Chlorofluorocarbons (CFCs) (PDF 321)
+    - 14.4.7 Polycyclic Aromatic Hydrocarbon (PAHs) (PDF 321)
+    - 14.4.8 Persistent Organic Pollutants (POPs) (PDF 321)
+    - 14.4.9 Volatile Organic Compounds (VOCs) (PDF 322)
+    - 14.4.10 Particulate Matter (PM) (PDF 322)
+    - 14.4.11 Heavy Metals (Lead, Mercury and Cadmium) (PDF 322)
+  - 14.5 Impact of Human Activities on Atmosphere (PDF 323)
+    - 14.5.1 Impact of Burning Fossil Fuels on the Atmosphere (PDF 323)
+    - 14.5.2 Impact of Deforestation on the Atmosphere (PDF 323)
+  - 14.6 Effects of Air Pollutants (PDF 324)
+    - 14.6.1 Formation of Smog (industrial/classical; photochemical) (PDF 324)
+    - 14.6.2 Acid Rain (PDF 325)
+  - 14.7 Greenhouse Effect and Global Warming (PDF 325)
+  - 14.8 Air Quality (AQI) (PDF 326)
+    - 14.8.1 Factors Affecting Air Quality (i emission sources, ii meteorological conditions, iv natural events, v seasonal changes - item iii not printed) (PDF 326)
+  - 14.9 Air Quality and Human Health (PDF 327)
+    - 14.9.1 Major Air Pollutants and their Health Effects (PDF 327)
+  - 14.10 Air Pollution and Health Risk (PDF 327)
+    - 14.10.1 Main Health Risks Associated with Air Pollutions (PDF 327)
+  - 14.11 Methods and Techniques to Measure and Monitor Air Quality (PDF 328)
+    - 14.11.1 Direct Measurement Methods (CEMS, AQMS, remote sensing) (PDF 328)
+  - 14.12 Experiments and Data Collection to Test Hypothesis about Air Quality (PDF 329)
+  - 14.13 Analyze Data and Interpret Air Quality (PDF 329)
+  - 14.14 Strategies Used to Reduce Air Pollution (catalytic converter, DPF, SCR, scrubbers) (PDF 329)
+  - 14.15 Laws and Regulations Related to Atmosphere (PDF 330)
+    - 14.15.1 Laws and Regulations (PDF 330)
+    - 14.15.2 Measures to Control Air Pollutions (PDF 330)
+  - 14.16 Economic, Social and Political Issues (PDF 331)
+    - 14.16.1 Economic Issues (PDF 331)
+    - 14.16.2 Social Issues (PDF 331)
+    - 14.16.3 Political Issues (PDF 331)
+- **Key terms / definitions:** atmosphere, troposphere, stratosphere, mesosphere, thermosphere, ozone layer, primary pollutant, secondary pollutant, oxides of carbon, NOx, SOx, low-altitude ozone, chlorofluorocarbons (CFCs), ozone depletion, PAHs, POPs, VOCs, particulate matter (PM2.5, PM10), heavy metals, deforestation, classical (London) smog, photochemical (Los Angeles) smog, acid rain, greenhouse effect, global warming, Air Quality Index (AQI), nephelometer, CEMS, AQMS, remote sensing, catalytic converter, diesel particulate filter, selective catalytic reduction, scrubber, PEPA 1997, NEQS, Punjab Environmental Protection (Amendment) Act 2012
+- **Formulas / equations / laws / processes:**
+  - Air: N2 78%, O2 21%, Ar 0.93%, CO2 0.04%
+  - 2C + O2 -> 2CO; N2 + O2 --high T--> 2NO; 2NO + O2 -> 2NO2
+  - CFC --UV--> Cl.; Cl. + O3 -> ClO. + O2; ClO. + O -> Cl. + O2 (chain)
+  - 2SO2 + O2 -> 2SO3; SO3 + H2O -> H2SO4
+  - 3NO2 + H2O -> 2HNO3 + NO; acid rain pH < 5.6
+  - AQI: 0-50 good (green), 51-100 moderate (yellow), ... >300 hazardous
+- **Worked examples / sample problems:** No numbered sample problems.
+- **Figures / tables:** Figures 14.1-14.6; Tables 14.1 (POPs and uses), 14.2 (AQI and health concern).
+- **In-text features:** Quick Check 14.1-14.4 (4); Did You Know x1 (CO poisoning, PDF 320); Interesting Information x1 (CFCs, PDF 321).
+- **End-of-chapter assessment:** EXERCISE, PDF 331–333
+  - Multiple Choice Questions (Q.1 I-XI): 11 questions (PDF 331-332)
+  - Short Answer Questions (Q.2 a-m): 13 questions (PDF 332-333)
+  - Descriptive Questions (Q.3-Q.6; Q.5 number not legible in OCR): 4 questions (PDF 333)
+- **Answer key availability:** No answer key printed.
+- **Practical / lab content:** Designing an experiment/data collection to test an air-quality hypothesis (14.12-14.13, PDF 329).
+- **Cross-links:** Ch 12 (NOx, smog, PAN, catalytic converter, sulfur oxides), Ch 11 (hydrocarbons, PAHs), Ch 10 (BOD/DO - water quality), Biology/Environmental science (ecology, health). Geography (atmosphere layers).
+- **Notes / Requires Review:**
+  - Factor list in 14.8.1 jumps from ii) to iv) (PDF 326-327, render-verified).
+  - Heading 14.15 printed without dot ('1415') in OCR (PDF 330).
+
+### Chapter 15 — Basic Separation Techniques
+- **Pages:** printed 314–325 · PDF 334–345
+- **SLO codes:** [C-11-E-01 to C-11-E-08]
+- **Main concept:** Physical separation and purification methods used in the laboratory - filtration (filter paper, fluted paper, Gooch and sintered crucibles), crystallization, simple and fractional distillation, paper chromatography (Rf, locating agents) - and checking product purity (melting point, mixed melting point, chromatography).
+- **Student Learning Outcomes:** 8 (approx. count of printed bullets/code range). Paraphrased:
+  - Define solvent, solute, solution, residue, filtrate
+  - Explain filtration, crystallization, simple and fractional distillation
+  - Assess purity using melting/boiling points; suggest suitable separation techniques
+  - Paper chromatography of soluble substances; locating agents for colourless substances
+  - Interpret chromatograms; state and use Rf
+- **Topic hierarchy:**
+  - Introduction: analytical chemistry, qualitative vs quantitative analysis, steps of analysis (PDF 334) (unnumbered)
+  - 15.1 Methods of Separation of Mixtures (PDF 335)
+    - 15.1.1 Filtration (PDF 335)
+      - a) By using filter paper (ordinary and fluted) (PDF 335) (unnumbered)
+      - b) By using crucible (Gooch crucible, sintered glass crucible) (PDF 336) (unnumbered)
+  - 15.2 Crystallization (PDF 337)
+    - 15.2.1 Choice of a Solvent (PDF 337)
+    - 15.2.2 Steps of crystallization (incl. decolourization with animal charcoal; drying in vacuum desiccator) (PDF 338)
+  - 15.3 Separation through Distillation (PDF 339)
+    - 15.3.1 Distillation Process (1. simple distillation; 2. fractional distillation) (PDF 339)
+  - 15.4 Chromatography (adsorption vs partition) (PDF 340)
+    - 15.4.1 Paper Chromatography (PDF 341)
+    - 15.4.2 Locating agents for colorless substances (PDF 341)
+    - 15.4.3 Use of Retardation Factor (PDF 342)
+    - 15.4.4 Applications of Paper Chromatography (PDF 342)
+  - 15.5 How to Check the Purity of the Product? (aspirin example) (PDF 343)
+- **Key terms / definitions:** analytical chemistry, qualitative analysis, quantitative analysis, solute, solvent, solution, filtrate, residue, filtration, filter medium, fluted filter paper, Gooch crucible, sintered glass crucible, crystallization, mother liquor, hot water funnel, animal charcoal, vacuum desiccator, simple distillation, distillate, fractional distillation, fractionating column, chromatography, stationary phase, mobile phase, adsorption chromatography, partition chromatography, paper chromatography (ascending/descending/radial), chromatogram, locating agent (ninhydrin, UV), retardation factor (Rf), purity, melting point, mixed melting point
+- **Formulas / equations / laws / processes:**
+  - Rf = distance travelled by component / distance travelled by solvent front
+  - Fractional distillation needs ~25 C difference in b.p. (ethanol 78 C, water 100 C)
+  - Aspirin m.p. 136 C (pure)
+- **Worked examples / sample problems:** No numbered sample problems.
+- **Figures / tables:** Figures 15.1-15.10 (filtration, folding, crucibles, crystallization, distillation, chromatography).
+- **In-text features:** Quick Check 15.1-15.5 (5); Keep in Mind x2 (PDF 337, 338); Interesting Information x2 (petroleum PDF 340; Whatman paper PDF 342).
+- **End-of-chapter assessment:** EXERCISE, PDF 344–345
+  - Multiple Choice Questions (Q.1 I-VIII): 8 questions (PDF 344-345)
+  - Short Answer Questions (Q.2 a-m): 13 questions (PDF 345)
+  - Descriptive Questions (Q.3-Q.5): 3 questions (PDF 345)
+- **Answer key availability:** No answer key printed.
+- **Practical / lab content:** Lab procedures: filtration (gravity/vacuum), crystallization steps, simple and fractional distillation of sea water / ethanol-water, ascending paper chromatography with Rf, purity check of aspirin (PDF 335-343).
+- **Cross-links:** Ch 5 (boiling point, vapour pressure), Ch 16 (practical skills), Ch 4 (yield/purity). Biology (chromatography of pigments).
+- **Notes / Requires Review:**
+  - Figure numbering inconsistent: distillation figures labelled 15.6/15.1/15.7 in OCR (PDF 340).
+  - MCQ VIII says simple distillation needs b.p. difference while text gives ~25 C for fractional distillation (PDF 339, 345).
+
+### Chapter 16 — Lab Safety and Practical Skills
+- **Pages:** printed 326–339 · PDF 346–359
+- **SLO codes:** [C-11-F-01 to C-11-F-21]
+- **Main concept:** Laboratory safety (instructions, hazard types, waste disposal, first aid) and core practical skills: acid-base titration (HCl vs NaOH) and qualitative salt analysis tests for anions and cations.
+- **Student Learning Outcomes:** 21 (approx. count of printed bullets/code range). Paraphrased:
+  - Identify chemical, physical, biological and safety hazards; check equipment; keep work space uncrowded and safe distance
+  - Ask instructor for help with unfamiliar apparatus; proper waste disposal
+  - Set up apparatus from instructions; collect data; make observations and measurements (pipette, burette, cylinder, thermometer)
+  - Decide number of tests; repeat/replicate readings; confirmatory tests
+  - Select reagents to distinguish ions
+  - Acid-base titration with burette, pipette and indicator; identify end point
+  - Tests for anions (CO3^2-, halides, NO3-, SO4^2-)
+  - Tests for cations with aqueous NaOH and NH3 (Al3+, NH4+, Ca2+, Cr3+, Cu2+, Fe2+, Fe3+, Zn2+)
+- **Topic hierarchy:**
+  - 16.1 General Instructions to the Students (PDF 347)
+  - 16.2 Common Types of Hazards in a Laboratory (PDF 347)
+    - 16.2.1 Physical Hazards (PDF 347)
+    - 16.2.2 Chemical Hazards (hazard pictograms) (PDF 348)
+    - 16.2.3 Biological Hazards (PDF 348)
+  - 16.3 Waste Disposal System for Chemicals (PDF 348)
+  - 16.4 First Aid in Laboratory (Table 16.1: cuts, eye injuries, burns, poisons, fire) (PDF 348)
+  - 16.5 Acid-Base Titration (PDF 350)
+    - Materials required; procedure of titration (i-xiii) (PDF 350) (unnumbered)
+    - Observations table; chemical equation; calculation (molarity equation) (PDF 351) (unnumbered)
+  - 16.6 Tests for Identification of Anions (PDF 352)
+    - a) Carbonate (CO3^2-) (PDF 352) (unnumbered)
+    - b) Chloride, bromide, iodide (AgNO3 test) (PDF 353) (unnumbered)
+    - c) Nitrate (NO3-) - Al/NaOH ammonia test (PDF 353) (unnumbered)
+    - d) Sulphate (SO4^2-) - Ba(NO3)2 test (PDF 354) (unnumbered)
+  - 16.7 Tests for Identification of Basic Radicals (PDF 354)
+    - a) Aluminium (Al3+) (PDF 354) (unnumbered)
+    - b) Ammonium (NH4+) (PDF 355) (unnumbered)
+    - c) Calcium (Ca2+) (PDF 355) (unnumbered)
+    - d) Chromium (Cr3+) (PDF 355) (unnumbered)
+    - e) Copper (Cu2+) (PDF 356) (unnumbered)
+    - f) Iron(II) (Fe2+) (PDF 356) (unnumbered)
+    - g) Iron(III) (Fe3+) (PDF 356) (unnumbered)
+    - h) Zinc (Zn2+) (PDF 357) (unnumbered)
+- **Key terms / definitions:** lab safety, physical hazard, chemical hazard, biological hazard, hazard pictogram, chemical waste disposal (EPA), first aid, volumetric analysis, titration, standard solution, titrant, indicator, end point, concordant readings, anti-parallax card, molarity equation, salt analysis, acid radical (anion), basic radical (cation), confirmatory test, effervescence, precipitate
+- **Formulas / equations / laws / processes:**
+  - HCl + NaOH -> NaCl + H2O
+  - M1V1/n1 = M2V2/n2 (acid / base)
+  - CO3^2- + 2H+ -> CO2 + H2O; Ca(OH)2 + CO2 -> CaCO3 (milky) + H2O
+  - Ag+ + Cl- -> AgCl (white, soluble in aq NH3); AgBr cream-yellow; AgI bright yellow
+  - 3NO3- + 8Al + 5OH- + 18H2O -> 3NH3 + 8[Al(OH)4]-
+  - Ba2+ + SO4^2- -> BaSO4 (white)
+  - Al3+ + 3OH- -> Al(OH)3 (white gelatinous); NH4+ + OH- -> NH3 + H2O
+  - Ca2+ + 2OH- -> Ca(OH)2 (white); Cr3+ + 3OH- -> Cr(OH)3 (green)
+  - Cu2+ + 2OH- -> Cu(OH)2 (light blue; deep blue solution with excess NH3)
+  - Fe2+ + 2OH- -> Fe(OH)2 (green -> brown); Fe3+ + 3OH- -> Fe(OH)3 (orange-brown); Zn2+ + 2OH- -> Zn(OH)2 (white, soluble in excess)
+- **Worked examples / sample problems:** No numbered sample problems; worked titration observation/calculation template (PDF 351-352).
+- **Figures / tables:** Figures 16.1-16.3; Table 16.1 (accidents and first aid, PDF 349-350); observation tables for each test.
+- **In-text features:** Quick Check 16.1-16.4 (4); Did You Know x3 (phenolphthalein PDF 350; HNO3 in halide test PDF 353; HNO3 in sulphate test PDF 354).
+- **End-of-chapter assessment:** EXERCISE, PDF 358–359
+  - Multiple Choice Questions (Q.1 I-VII): 7 questions (PDF 358-359)
+  - Short Answer Questions (Q.2 a-k): 11 questions (PDF 359)
+  - Descriptive Questions (Q.3-Q.6): 4 questions (PDF 359)
+- **Answer key availability:** No answer key printed.
+- **Practical / lab content:** Core practical chapter: (1) Lab safety rules, hazards, EPA waste disposal, first aid table; (2) Acid-base titration of NaOH (10 cm3 pipetted) with HCl using phenolphthalein, three concordant readings within 0.1 cm3, molarity by M1V1/n1 = M2V2/n2; (3) Anion tests: CO3^2- (dil HCl, lime water), Cl-/Br-/I- (dil HNO3 + AgNO3; solubility in NH3), NO3- (NaOH + Al powder -> NH3), SO4^2- (dil HNO3 + Ba(NO3)2); (4) Cation tests with NaOH and aq NH3: Al3+, NH4+, Ca2+, Cr3+, Cu2+, Fe2+, Fe3+, Zn2+.
+- **Cross-links:** Ch 9 (indicators, titration curves), Ch 4 (molarity), Ch 13 (halide/AgNO3 tests), Ch 12 (NH4+ test), Ch 15 (separation techniques). C11-BIO/C11-PHY lab safety sections (if any).
+- **Notes / Requires Review:**
+  - MCQs VI-VII refer to chromyl chloride and brown-ring tests, and QC 16.3/16.4 ask about ring test and lake test, which are not described in the chapter text (PDF 354, 357-359).
+  - Fe2+ with aqueous ammonia described as 'white gelatinous' precipitate while NaOH gives green (PDF 356) - check.
+  - Observation table in 16.5 is a blank template (PDF 351).
+
+## 5. Back matter / supplementary material
+
+- **Cover** (front matter, PDF 1–1): Title 'CHEMISTRY 11', PECTAA logo.
+- **Credits / imprint** (front matter, PDF 2–2): Approval note (NCP 2023), copyright, authors, editors, reviewers, coordinator, illustrators, composer, publisher/printer, date, edition, copies, price.
+- **Table of Contents** (front matter, PDF 3–4): Two pages listing 16 chapters with printed page ranges.
+- **Bibliography** (PDF 360): Printed p. 340; list of ~30 reference textbooks (Cambridge A-Level chemistry texts, Atkins, Chang, Zumdahl, Brown/LeMay, J.D. Lee, Shriver & Atkins, Miessler & Tarr, Solomons, Carey, Skoog, Vogel, Wark & Warner on air pollution, etc.).
+- No answer keys, glossary, index, periodic-table appendix, pairing scheme, paper pattern or model paper are included in this PDF.
+
+## 6. Question inventory (for test generation)
+
+| Ch | MCQs | Short | Long/Descriptive | Numericals/Problems | Other | Exercise PDF pages | Answers available? |
+|---|---|---|---|---|---|---|---|
+| 1 | 11 | 13 | 4 | 0 | 0 | 21–23 | No |
+| 2 | 11 | 10 | 3 | 0 | 0 | 44–46 | No |
+| 3 | 12 | 16 | 5 | 0 | 0 | 70–73 | No |
+| 4 | 12 | 10 | 2 | 4 | 0 | 92–94 | No |
+| 5 | 11 | 13 | 5 | 2 | 0 | 113–115 | No |
+| 6 | 12 | 12 | 2 | 6 | 0 | 150–159 (incl. duplicate pages 152, 155, 156, 159) | No |
+| 7 | 13 | 15 | 4 | 3 | 0 | 178–182 | No |
+| 8 | 10 | 9 | 4 | 3 | 0 | 201–204 (Q.7–Q.9 numerical, under Descriptive heading) | No |
+| 9 | 11 | 12 | 5 | 3 | 0 | 224–226 | No |
+| 10 | 12 | 11 | 4 | 3 | 0 | 252–255 | No |
+| 11 | 12 | 12 | 4 | 0 | 0 | 281–284 | No |
+| 12 | 12 | 16 | 4 | 0 | 0 | 300–302 | No |
+| 13 | 10 | 15 | 3 | 0 | 0 | 314–316 | No |
+| 14 | 11 | 13 | 4 | 0 | 0 | 331–333 | No |
+| 15 | 8 | 13 | 3 | 0 | 0 | 344–345 | No |
+| 16 | 7 | 11 | 4 | 0 | 0 | 358–359 | No |
+| **TOTAL** | **175** | **201** | **60** | **24** | **0** | — | No |
+
+Notes: counts are numbered questions (sub-parts not counted separately). Many short-answer items have several sub-parts (e.g. Ch 11 Q.2 k has 12 structures). Quick Check boxes (~120 across the book) and Sample Problems (≈ 4: 20, 5: 1, 6: 13, 7: 2, 8: 4, 9: 4, 10: ~5) are additional practice sources not included above.
+
+## 7. Issues, uncertainties and Requires Review list
+
+- Duplicated pages: printed pp. 125-140 (PDF 129-160) were scanned twice as consecutive two-page spreads: 125-126 = PDF 129-130 & 131-132; 127-128 = 133-134 & 135-136; 129-130 = 137-138 & 139-140; 131-132 = 141-142 & 143-144; 133-134 = 145-146 & 147-148; 135-136 = 149-150 & 151-152; 137-138 = 153-154 & 155-156; 139-140 = 157-158 & 159-160. Folios render-verified; no printed page missing. Offset changes from +4 to +20.
+- SLO code blocks for Ch 2, 3, 4 and 7 are all printed '[C-11-A-01 to C-11-A-25]' (PDF 24, 47, 74, 158; render-verified) - evident printing error; Ch 7 range should logically be A-124 to A-134.
+- Ch 10 SLO code '[C-11-A-56 to C-11-B-78]' and Ch 14 '[C-11-C-01 to C-11-B-14]' mix strand letters; Ch 13 '[C-11-B-19 to C-11-B-41]' overlaps Ch 12 '[C-11-B-30 to C-11-B-41]' (render-verified).
+- No answer keys for MCQs, short questions or numericals anywhere in the book.
+- Heading numbering anomalies: Ch 13 has two sections numbered 13.1 (no 13.2) (PDF 305); Ch 10 sub-heading '10.22.2' under 10.21 (PDF 251); Ch 14 factor list skips iii) (PDF 326-327); Ch 6 Sample Problem 6.6 used twice (PDF 127, 133); Ch 7 numerical questions restart at Q.6 (PDF 181); Ch 4 short-question label g) printed twice (PDF 93-94).
+- Ch 7: orphan temperature vs rate-constant table at top of PDF 182 without a question stem (Requires Review).
+- Ch 8 exercise has no 'Numerical Problems' heading; Q.7-Q.9 are numerical (PDF 204).
+- Ch 16 MCQs/Quick Checks refer to chromyl chloride, brown-ring and lake tests not described in the text (PDF 354-359).
+- Data inconsistencies: O second electron affinity +798 vs +844 kJ/mol (Ch 1, PDF 14-15); Sample Problem 4.17 NH3 mass 1.81 g vs 18.1 g and SP 4.20 actual yield 3.15 g vs 2.85 g (PDF 86, 90).
+- OCR garbles equations, subscripts, tables, MCQ options and IUPAC names throughout (especially Ch 6, 8, 11); OCR missed SLO code on PDF 317 (Ch 14).
+- Ch 1: Electron-affinity values for O are inconsistent: text gives second EA ~+798 kJ/mol (PDF 14) while Quick Check gives +844 kJ/mol (PDF 15); first EA printed as -141 and -142.
+- Ch 1: OCR garbles MCQ options and equations on PDF 18-22; counts checked against labels.
+- Ch 2: SLO code block printed as [C-11-A-01 to C-11-A-25] (PDF 24, render-verified) - same as Ch 3, 4, 7.
+- Ch 2: Short-answer labels partly lost in OCR (f, h); 10 items counted (a-j).
+- Ch 3: SLO list on PDF 47 has ~20 bullets although code range says 01-25.
+- Ch 3: Hydrogen bonding is only named here; detail deferred to Ch 5.
+- Ch 4: Short-answer list labels run a-i but 'g)' is printed twice (PDF 93 and 94; render-verified) giving 10 questions.
+- Ch 4: Sample Problem 4.17 uses 18.1 g NH3 in solution vs 1.81 g in statement (PDF 86) - printing inconsistency.
+- Ch 4: Sample Problem 4.20 mixes actual yield 3.15 g (statement) and 2.85 g (solution) (PDF 90).
+- Ch 5: Section 5.7 'Evaporation' heading number garbled in OCR (PDF 105); molar heat of fusion value for ice garbled in OCR (PDF 108) - Requires Review against page.
+- Ch 6: PDF 129-160 contain printed pp. 125-140 scanned twice (pairs of two-page spreads); see Section 2. Topic pages above give the first copy; dup_pdf_page gives the second copy.
+- Ch 6: Q.5 of Numerical Problems has only part (a) printed (PDF 154/156).
+- Ch 7: Opening page (printed 140) occurs twice: PDF 158 and PDF 160 (second copy has slightly better OCR).
+- Ch 7: Numerical Problems restart at 'Q.6' although Descriptive Q.6 exists (PDF 181).
+- Ch 7: PDF 182 top carries a temperature vs rate-constant table (500-700 K) with no question stem - orphan data, probably belongs to a missing question (Requires Review).
+- Ch 8: No 'Numerical Problems' heading in this exercise; Q.7-Q.9 (PDF 204) are numerical and are counted as numericals in the inventory (render-verified).
+- Ch 8: SLO on salt hydrolysis is treated in Ch 9 (9.9).
+- Ch 9: Table 9.7 indicator data partly garbled in OCR (PDF 223).
+- Ch 10: Heading for merits of PV cells printed '10.22.2' inside 10.21 (PDF 251).
+- Ch 10: SLO code range '[C-11-A-56 to C-11-B-78]' mixes strand letters (render-verified).
+- Ch 10: Text cites 'Figure 10.13' and 'Figure 10.9' inconsistently with figure numbering (PDF 244-246).
+- Ch 11: IUPAC name examples in OCR heavily garbled (PDF 259-261, 267, 284) - verify against page.
+- Ch 11: MCQ VII/VIII options garbled in OCR (PDF 282).
+- Ch 12: Text refers to nitrification table as 'Table 12.2' but caption is Table 12.3 (PDF 291).
+- Ch 12: Gunpowder equation garbled in OCR (PDF 295).
+- Ch 13: Section number 13.1 is printed twice (13.2 missing) (PDF 305).
+- Ch 13: Text (13.1) wrongly calls chlorine 'a liquid' (PDF 305).
+- Ch 13: SLO code range overlaps Ch 12 (render-verified).
+- Ch 14: Factor list in 14.8.1 jumps from ii) to iv) (PDF 326-327, render-verified).
+- Ch 14: Heading 14.15 printed without dot ('1415') in OCR (PDF 330).
+- Ch 15: Figure numbering inconsistent: distillation figures labelled 15.6/15.1/15.7 in OCR (PDF 340).
+- Ch 15: MCQ VIII says simple distillation needs b.p. difference while text gives ~25 C for fractional distillation (PDF 339, 345).
+- Ch 16: MCQs VI-VII refer to chromyl chloride and brown-ring tests, and QC 16.3/16.4 ask about ring test and lake test, which are not described in the chapter text (PDF 354, 357-359).
+- Ch 16: Fe2+ with aqueous ammonia described as 'white gelatinous' precipitate while NaOH gives green (PDF 356) - check.
+- Ch 16: Observation table in 16.5 is a blank template (PDF 351).

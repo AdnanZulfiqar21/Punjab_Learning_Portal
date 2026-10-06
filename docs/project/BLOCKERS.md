@@ -1,0 +1,18 @@
+# BLOCKERS — genuine external inputs
+
+A blocker here is a missing **external** input (person, account, approval, decision) that prevents a specific piece of mandatory work. It is never counted as passing evidence (roadmap §7.2). Everything not named here proceeds.
+
+| ID | Missing input | State | First genuinely blocked work | Work that proceeds meanwhile | Owner of input |
+|---|---|---|---|---|---|
+| B01 | **Named subject reviewers** (Biology, Chemistry, Physics, Mathematics, Computer Science) and an **academic production lead** | BLOCKED_EXTERNAL | Approving any lesson/question/rubric. Without approval, nothing can be published, so P22.S2 RCS, P21 Platform Ready, P22.S3 Content Ready and W01 rubric approval all wait. | Catalogue/source intake, CMS, authoring/review workflow, drafting queues, every software module. Drafts are labelled `DRAFT — not reviewed`. | Owner |
+| B02 | **Official exam-profile verification** (PMDC MDCAT 2026 notice, UET ECAT 2026) by two reviewers | BLOCKED_EXTERNAL | Publishing a selectable MDCAT/ECAT profile (P05.S3.T3) | Versioned profile engine, five-subject section practice, honest "full mock unavailable" states | Owner + reviewers |
+| B03 | Cloud account + funded budget (AWS proposed), region decision D14 | BLOCKED_EXTERNAL | P17 real infra, P20 load evidence, staging/production deploys | Local Docker services, IaC drafts, CI | Owner |
+| B04 | Identity provider tenant (Cognito proposed), email/SMS sender | BLOCKED_EXTERNAL | Live P04 identity verification | Local auth adapter (clearly dev-only, refused in production by startup validator) | Owner |
+| B05 | Media provider (Cloudflare Stream proposed) + reviewed videos | BLOCKED_EXTERNAL | P07 playback evidence | Archive/asset model, upload pipeline against local object storage | Owner |
+| B06 | Merchant/web payment provider (D03), pricing (D02) | BLOCKED_EXTERNAL / BLOCKED_DECISION (default applies) | Live P14 web payments | Product/entitlement model, sandbox adapter, 30-day trial ledger | Owner |
+| B07 | Apple Developer + Google Play accounts, store test tracks, signing | BLOCKED_EXTERNAL | P13 installable variants, store billing, DeviceCheck/App Attest, Play Integrity | Expo source, development builds on emulators | Owner |
+| B08 | Android device recall beta approval (D10) | BLOCKED_EXTERNAL | Optional-strength Android recall adapter | Shared trial ledger and explicit fallback | Owner |
+| B09 | Named physical reference devices (low/mid Android, oldest supported iPhone) | BLOCKED_EXTERNAL | P02.S4.T1 budgets, P13.S4, P20.S3.T3 evidence | Emulator work; budgets provisional | Owner |
+| B10 | Written-assessment: approved reading/assessment provider (W00.S2.T4 PROCESSOR_APPROVED), consented real handwritten scripts, independent teacher labels | BLOCKED_EXTERNAL | Any real student script sent to a provider; W02.S3 spike; W10 qualification | W03–W08 software, teacher-review route, allowance ledger, private evidence storage | Owner + reviewers |
+| B11 | Product name/brand, domain | BLOCKED_DECISION (neutral tokens apply) | Final P02/P23 assets | All functional work | Owner |
+| B12 | Repository visibility: the repo is **public** | OPEN RISK (not blocking) | Committing licensed source material (deliberately avoided; see IMPL-01) | Everything; sources stay local | Owner |
