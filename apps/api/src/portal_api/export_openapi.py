@@ -1,6 +1,6 @@
 """Write the OpenAPI document used to generate web/mobile client types (P01.S3.T1 contract-drift check).
 
-    uv run python -m portal_api.export_openapi ../../packages/contracts/openapi.json
+uv run python -m portal_api.export_openapi ../../packages/contracts/openapi.json
 """
 
 from __future__ import annotations
