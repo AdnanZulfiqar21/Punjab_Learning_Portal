@@ -1,0 +1,159 @@
+# Change checks (P03.S3.T1). Path filters keep CI minutes down without skipping the checks a change needs.
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      api: ${{ steps.f.outputs.api }}
+      web: ${{ steps.f.outputs.web }}
+      content: ${{ steps.f.outputs.content }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - id: f
+        shell: bash
+        run: |
+          base="${{ github.event.pull_request.base.sha || github.event.before }}"
+          if [ -z "$base" ] || ! git cat-file -e "$base" 2>/dev/null || [ "$base" = "0000000000000000000000000000000000000000" ]; then
+            changed="$(git ls-files)"
+          else
+            changed="$(git diff --name-only "$base" HEAD)"
+          fi
+          has() { echo "$changed" | grep -qE "$1" && echo true || echo false; }
+          echo "api=$(has '^(apps/api/|content/|packages/contracts/|\.github/)')" >> "$GITHUB_OUTPUT"
+          echo "web=$(has '^(apps/web/|packages/contracts/|apps/api/|content/|pnpm-lock\.yaml|package\.json|\.github/)')" >> "$GITHUB_OUTPUT"
+          echo "content=$(has '^(content/|education_knowledge/indexes/|\.github/)')" >> "$GITHUB_OUTPUT"
+
+  content:
+    needs: changes
+    if: needs.changes.outputs.content == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.13"
+      - name: Catalogue is reproducible from the committed indexes
+        run: |
+          python content/tools/build_catalogue.py
+          git diff --exit-code -- content/
+
+  api:
+    needs: changes
+    if: needs.changes.outputs.api == 'true'
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17-alpine
+        env:
+          POSTGRES_USER: portal
+          POSTGRES_PASSWORD: portal-ci-only
+          POSTGRES_DB: portal_test
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U portal -d portal_test" --health-interval 3s --health-timeout 3s --health-retries 20
+    env:
+      PORTAL_TEST_DATABASE_URL: postgresql+psycopg://portal:portal-ci-only@127.0.0.1:5432/portal_test
+    defaults:
+      run:
+        working-directory: apps/api
+    steps:
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v10
+        with:
+          version: "0.12.23"
+          enable-cache: true
+      - run: uv sync --locked
+      - run: uv run ruff check .
+      - run: uv run ruff format --check .
+      - run: uv run mypy src
+      - run: uv run pytest
+      - name: Models and migrations agree
+        env:
+          PORTAL_DATABASE_URL: postgresql+psycopg://portal:portal-ci-only@127.0.0.1:5432/portal_test
+        run: |
+          uv run alembic upgrade head
+          uv run alembic check
+      - name: OpenAPI contract has no drift
+        run: |
+          uv run python -m portal_api.export_openapi ../../packages/contracts/openapi.json
+          git diff --exit-code -- ../../packages/contracts/openapi.json
+
+  web:
+    needs: changes
+    if: needs.changes.outputs.web == 'true'
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17-alpine
+        env:
+          POSTGRES_USER: portal
+          POSTGRES_PASSWORD: portal-ci-only
+          POSTGRES_DB: portal
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U portal -d portal" --health-interval 3s --health-timeout 3s --health-retries 20
+    env:
+      NEXT_TELEMETRY_DISABLED: "1"
+      PORTAL_DATABASE_URL: postgresql+psycopg://portal:portal-ci-only@127.0.0.1:5432/portal
+      PORTAL_API_INTERNAL_ORIGIN: http://127.0.0.1:8100
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Generated contract types are current
+        run: |
+          pnpm --filter @portal/contracts generate
+          git diff --exit-code -- packages/contracts/src/generated.ts
+      - run: pnpm --filter web lint
+      - run: pnpm --filter web typecheck
+      - name: Production build (no API needed at build time)
+        run: pnpm --filter web build
+      - uses: astral-sh/setup-uv@v10
+        with:
+          version: "0.12.23"
+          enable-cache: true
+      - name: Start API on the real imported catalogue
+        working-directory: apps/api
+        run: |
+          uv sync --locked
+          uv run alembic upgrade head
+          uv run portal-import-catalogue --apply
+          nohup uv run uvicorn portal_api.main:app --host 127.0.0.1 --port 8100 > /tmp/api.log 2>&1 &
+          for i in $(seq 1 60); do curl -sf http://127.0.0.1:8100/readyz && break; sleep 1; done
+      - name: Start web
+        working-directory: apps/web
+        run: |
+          nohup pnpm start > /tmp/web.log 2>&1 &
+          for i in $(seq 1 60); do curl -sf -o /dev/null http://localhost:3100/ && break; sleep 1; done
+      - run: pnpm --filter web exec playwright install --with-deps chromium
+      - name: End-to-end journeys
+        run: pnpm --filter web exec playwright test
+        env:
+          CI: "1"
+      - if: failure()
+        run: tail -n 100 /tmp/api.log /tmp/web.log
+      - if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: playwright-report
+          path: apps/web/playwright-report
+          retention-days: 7

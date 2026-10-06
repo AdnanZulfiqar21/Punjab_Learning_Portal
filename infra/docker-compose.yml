@@ -1,0 +1,36 @@
+# Local development services (P03.S1.T2). Development-only credentials; never used outside a laptop/CI.
+# Start:  docker compose -f infra/docker-compose.yml up -d
+# Reset:  docker compose -f infra/docker-compose.yml down -v   (destroys ONLY these local volumes)
+name: punjab-portal-dev
+
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: portal
+      POSTGRES_PASSWORD: portal-dev-only
+      POSTGRES_DB: portal
+    ports:
+      - "127.0.0.1:55432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./postgres/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U portal -d portal"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  valkey:
+    image: valkey/valkey:8-alpine
+    ports:
+      - "127.0.0.1:56379:6379"
+
+  queue:
+    # SQS-compatible local queue emulator (stand-in for Amazon SQS in development only)
+    image: softwaremill/elasticmq-native:latest
+    ports:
+      - "127.0.0.1:59324:9324"
+
+volumes:
+  pgdata:

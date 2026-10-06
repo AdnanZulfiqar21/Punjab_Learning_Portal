@@ -1,0 +1,87 @@
+@import "tailwindcss";
+
+/* Design tokens (P02.S2.T1). Neutral palette until the owner settles brand (BLOCKERS B11).
+   Contrast pairs are chosen for ≥4.5:1 body text in both themes. */
+:root {
+  --background: #f7f8fa;
+  --surface: #ffffff;
+  --surface-muted: #eef1f5;
+  --foreground: #14181f;
+  --muted: #4b5563;
+  --border: #d9dee6;
+  --accent: #0b5d73;
+  --accent-strong: #08485a;
+  --accent-soft: #e3f1f5;
+  --warn: #8a4b00;
+  --warn-soft: #fff4e2;
+  --danger: #a31d1d;
+  --danger-soft: #fdecec;
+  --ok: #1d6b3a;
+  --ok-soft: #e7f5ec;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0f1318;
+    --surface: #161b22;
+    --surface-muted: #1e252e;
+    --foreground: #e8ecf1;
+    --muted: #a7b0bc;
+    --border: #2c3542;
+    --accent: #6cc4dc;
+    --accent-strong: #9ad8ea;
+    --accent-soft: #143440;
+    --warn: #f3b765;
+    --warn-soft: #3a2a12;
+    --danger: #f19a9a;
+    --danger-soft: #3d1717;
+    --ok: #7fd3a0;
+    --ok-soft: #13301f;
+  }
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-accent-soft: var(--accent-soft);
+  --color-warn: var(--warn);
+  --color-warn-soft: var(--warn-soft);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-ok: var(--ok);
+  --color-ok-soft: var(--ok-soft);
+  --font-sans: var(--font-sans-ui);
+  --font-mono: var(--font-mono-ui);
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans-ui), system-ui, sans-serif;
+  line-height: 1.55;
+}
+
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
