@@ -19,8 +19,8 @@ Checked **2026-10-06/07** against the official registries (npm, PyPI, Docker Hub
 | Web | ESLint / eslint-config-next | 9.39.5 / 16.4.0 | ESLint 10 exists; the template pins 9 for compatibility |
 | Web test | @playwright/test | 1.63.0 | Chromium; desktop + Pixel 7 projects |
 | Contracts | openapi-typescript | 7.13.0 | `packages/contracts` generated from the API OpenAPI document |
-| Mobile | Expo / React Native | not yet scaffolded (latest seen: expo 57.0.27, RN 0.87.1) | P13.S1 / P01.S4.T1 |
+| Mobile | Expo SDK / expo-router / React Native / React / TypeScript | 57.0.27 / 57.0.25 / 0.86.3 / 19.2.3 / ~6.0.3 | Versions are dictated by the SDK (use `npx expo install`); `expo-doctor` 21/21 passing. RN 0.87.1 exists but is not part of SDK 57. Read `apps/mobile/AGENTS.md` (versioned Expo docs) before changing patterns |
 | CI | actions/checkout v7, setup-node v7, setup-python v7, pnpm/action-setup v6, astral-sh/setup-uv v10.2.0 (no floating major tag), upload-artifact v7 | | |
 
 ## Local ports
-API `127.0.0.1:8100`, web `localhost:3100`, PostgreSQL `127.0.0.1:55432`, Valkey `56379`, queue `59324`. Ports 8000 and 3000 are used by another project on this machine.
+API `127.0.0.1:8100`, web `localhost:3100`, Expo web target `localhost:8190`, PostgreSQL `127.0.0.1:55432`, Valkey `56379`, queue `59324`. Ports 8000 and 3000 are used by another project on this machine.
