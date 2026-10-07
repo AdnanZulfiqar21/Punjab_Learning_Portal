@@ -7,6 +7,8 @@ import { GRADE_LABEL } from "@/lib/format";
 import { SUBJECTS } from "@/lib/practice";
 import { currentUser } from "@/lib/session";
 import { getWrittenAvailability } from "@/lib/written";
+import { getAccess } from "@/lib/access";
+import { PlanStatus } from "@/components/plan-status";
 import { WrittenBuilder } from "./written-builder";
 
 export const metadata: Metadata = { title: "Written practice", robots: { index: false } };
@@ -36,7 +38,7 @@ async function Builder({ grade: rawGrade, subject: rawSubject }: { grade?: strin
   const profile = user.me.profile;
   const grade = rawGrade === "11" || rawGrade === "12" ? Number(rawGrade) : (profile?.grade ?? 11);
   const subject = SUBJECTS.some(([c]) => c === rawSubject) ? rawSubject! : (profile?.subjects?.[0] ?? "biology");
-  const av = await getWrittenAvailability(user.token, grade, subject);
+  const [av, access] = await Promise.all([getWrittenAvailability(user.token, grade, subject), getAccess(user.token)]);
   const total = av?.chapters.reduce((n, c) => n + c.questions, 0) ?? 0;
   const name = SUBJECTS.find(([c]) => c === subject)?.[1];
   return (
@@ -58,7 +60,8 @@ async function Builder({ grade: rawGrade, subject: rawSubject }: { grade?: strin
           }),
         )}
       </nav>
-      {!av || !av.review_staffed ? (
+      {access && <PlanStatus access={access} purpose="Written practice" />}
+      {access && !access.has_access ? null : !av || !av.review_staffed ? (
         <Notice title="Written practice isn't offered for this subject yet">
           Written answers are marked by teachers, and no teacher reviewer is available for {GRADE_LABEL[grade]} {name} yet.
         </Notice>

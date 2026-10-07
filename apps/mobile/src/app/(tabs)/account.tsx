@@ -5,6 +5,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import type { AppSession, Me } from "@portal/contracts";
 
 import { Button, Field, FormError } from "@/components/form";
+import { PlanCard } from "@/components/plan-card";
 import { Badge, Card, ErrorState, Loading, Notice, T } from "@/components/ui";
 import { Space, TAB_SCREEN_TOP } from "@/constants/theme";
 import { useRequest } from "@/hooks/use-request";
@@ -122,6 +123,7 @@ function SignedIn({ token, me }: { token: string; me: Me }) {
   const c = useTheme();
   const { signOut, handleError } = useAuth();
   const sessions = useRequest((signal) => api.sessions(token, signal), [token]);
+  const access = useRequest((signal) => api.access(token, signal), [token]);
   const [busy, setBusy] = useState<string | null>(null);
   const p = me.profile;
 
@@ -175,6 +177,15 @@ function SignedIn({ token, me }: { token: string; me: Me }) {
           />
         </View>
       </Card>
+
+      <View style={{ gap: Space.sm }}>
+        <T variant="heading" accessibilityRole="header">
+          Your plan
+        </T>
+        {access.state.status === "loading" && <Loading label="Loading your plan" />}
+        {access.state.status === "error" && <ErrorState error={access.state.error} onRetry={access.retry} />}
+        {access.state.status === "success" && <PlanCard access={access.state.data} token={token} onChange={() => access.retry()} />}
+      </View>
 
       <View style={{ gap: Space.sm }}>
         <T variant="heading" accessibilityRole="header">

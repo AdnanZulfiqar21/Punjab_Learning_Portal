@@ -4,6 +4,7 @@ import { Pressable, ScrollView, Switch, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { Button, Choices, Field, FormError } from "@/components/form";
+import { PlanCard } from "@/components/plan-card";
 import { ErrorState, Loading, Notice, T } from "@/components/ui";
 import { Radius, Space, TAB_SCREEN_TOP } from "@/constants/theme";
 import { useRequest } from "@/hooks/use-request";
@@ -38,7 +39,7 @@ export default function PracticeScreen() {
           </View>
         )}
         {state.status === "signed_in" && (
-          <Builder
+          <Gate
             token={state.token}
             initialGrade={(state.me.profile?.grade as 11 | 12 | undefined) ?? 11}
             initialSubject={(state.me.profile?.subjects?.[0] as SubjectCode | undefined) ?? "biology"}
@@ -46,6 +47,19 @@ export default function PracticeScreen() {
         )}
       </ScrollView>
     </SafeAreaView>
+  );
+}
+
+/** New practice needs a plan (P14): show the plan, and the builder only when access is active. */
+function Gate({ token, initialGrade, initialSubject }: { token: string; initialGrade: 11 | 12; initialSubject: SubjectCode }) {
+  const access = useRequest((signal) => api.access(token, signal), [token]);
+  if (access.state.status === "loading") return <Loading label="Checking your plan" />;
+  if (access.state.status === "error") return <ErrorState error={access.state.error} onRetry={access.retry} />;
+  return (
+    <View style={{ gap: Space.lg }}>
+      <PlanCard access={access.state.data} token={token} onChange={() => access.retry()} purpose="Practice tests" />
+      {access.state.data.has_access && <Builder token={token} initialGrade={initialGrade} initialSubject={initialSubject} />}
+    </View>
   );
 }
 

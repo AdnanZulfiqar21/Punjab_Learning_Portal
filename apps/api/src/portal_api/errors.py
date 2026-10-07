@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import logging
+
 from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
@@ -91,4 +93,14 @@ def install(app: FastAPI) -> None:
 
     @app.exception_handler(OperationalError)
     async def _db_unavailable(request: Request, exc: OperationalError) -> JSONResponse:
+        # Log the driver error class and first line (no parameters, which may hold user data) with the correlation id.
+        orig = getattr(exc, "orig", exc)
+        first_line = str(orig).splitlines()[0][:200] if str(orig) else ""
+        logging.getLogger("portal_api.db").warning(
+            "database unavailable: %s: %s path=%s cid=%s",
+            type(orig).__name__,
+            first_line,
+            request.url.path,
+            getattr(request.state, "correlation_id", None),
+        )
         return _problem(request, 503, "SERVICE_UNAVAILABLE", "The service is temporarily unavailable. Please retry.")

@@ -54,6 +54,10 @@ export type MarkingCaseSummary = S["CaseSummary"];
 export type MarkingCase = S["CaseDetail"];
 export type MarkingScore = S["StaffScore"];
 export type WrittenResult = S["WrittenResultOut"];
+export type Access = S["AccessOut"];
+export type TrialStatus = S["TrialOut"];
+export type WrittenAllowance = S["AllowanceOut"];
+export type EntitlementInfo = S["EntitlementOut"];
 
 /** RFC 9457 problem details returned by every API error. */
 export interface Problem {

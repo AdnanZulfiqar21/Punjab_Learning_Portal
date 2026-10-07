@@ -35,6 +35,7 @@ class Permission(StrEnum):
     manage_roles = "manage_roles"
     view_audit = "view_audit"
     confirm_source_rights = "confirm_source_rights"
+    grant_entitlements = "grant_entitlements"
 
 
 ROLE_PERMISSIONS: dict[Role, frozenset[Permission]] = {
@@ -44,9 +45,16 @@ ROLE_PERMISSIONS: dict[Role, frozenset[Permission]] = {
     Role.academic_adjudicator: frozenset({Permission.adjudicate, Permission.review_content}),
     Role.publisher: frozenset({Permission.publish_content, Permission.quarantine_content}),
     Role.support: frozenset({Permission.view_support_context}),
-    Role.finance: frozenset({Permission.finance_operations}),
+    Role.finance: frozenset({Permission.finance_operations, Permission.grant_entitlements}),
     Role.platform_operator: frozenset({Permission.operate_platform}),
-    Role.owner_admin: frozenset({Permission.manage_roles, Permission.view_audit, Permission.confirm_source_rights}),
+    Role.owner_admin: frozenset(
+        {
+            Permission.manage_roles,
+            Permission.view_audit,
+            Permission.confirm_source_rights,
+            Permission.grant_entitlements,
+        }
+    ),
 }
 
 # Sensitive operations need an MFA session (roadmap P04.S2.T2: publishing, finance, quarantine/regrade, administration).
@@ -60,6 +68,7 @@ MFA_REQUIRED: frozenset[Permission] = frozenset(
         Permission.manage_roles,
         Permission.view_audit,
         Permission.confirm_source_rights,
+        Permission.grant_entitlements,
     }
 )
 

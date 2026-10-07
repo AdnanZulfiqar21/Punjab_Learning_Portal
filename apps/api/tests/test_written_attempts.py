@@ -15,8 +15,7 @@ from sqlalchemy import text
 
 from portal_api.db import get_sessionmaker
 from portal_api.modules.written import validate
-from tests.test_content_workflow import Staff, _chapter, _confirm_rights, _post, _refs
-from tests.test_written_records import QUESTION, R_CHECKS, W_CHECKS, _rubric
+from tests.test_content_workflow import Staff
 
 
 def _png(w: int = 1200, h: int = 1600, seed: int = 0) -> bytes:
@@ -51,68 +50,12 @@ def test_file_validation_is_signature_based_and_bounded() -> None:
 
 
 # ------------------------------------------------------------------ fixtures
-@pytest.fixture(scope="module")
-def published_written(client: TestClient) -> dict[str, Any]:
-    """Publish two written questions (with rubrics) in one Class XII Chemistry chapter, plus a scoped reviewer."""
-    with get_sessionmaker()() as db:
-        scope = {"grades": [12], "subjects": ["chemistry"]}
-        author = Staff(client, db, ["content_author"], scope)
-        reviewer = Staff(client, db, ["subject_reviewer"], scope)
-        publisher = Staff(client, db, ["publisher"], scope, mfa=True)
-        chapter, doc = _chapter(db, 12, "chemistry", 2)
-        _confirm_rights(client, db, doc)
-        for _ in range(2):
-            q = client.post(
-                "/v1/studio/items",
-                headers=author.headers,
-                json={"kind": "written", "chapter_id": str(chapter.id), "title": "Fixture"},
-            ).json()
-            client.put(
-                f"/v1/studio/items/{q['id']}/draft",
-                headers=author.headers,
-                json={"revision": q["working"]["revision"], "body": QUESTION, "source_refs": _refs(chapter, doc)},
-            )
-            assert _post(client, author, q["id"], "submit").status_code == 200
-            q = _post(
-                client,
-                reviewer,
-                q["id"],
-                "review",
-                {"decision": "approve", "comment": "Fixture check", "checklist": W_CHECKS},
-            ).json()
-            r = client.post(
-                "/v1/studio/items",
-                headers=author.headers,
-                json={"kind": "rubric", "parent_item_id": q["id"], "title": "Rubric"},
-            ).json()
-            client.put(
-                f"/v1/studio/items/{r['id']}/draft",
-                headers=author.headers,
-                json={
-                    "revision": r["working"]["revision"],
-                    "body": _rubric(q["working"]["id"]),
-                    "source_refs": _refs(chapter, doc),
-                },
-            )
-            assert _post(client, author, r["id"], "submit").status_code == 200
-            assert (
-                _post(
-                    client,
-                    reviewer,
-                    r["id"],
-                    "review",
-                    {"decision": "approve", "comment": "Fixture check", "checklist": R_CHECKS},
-                ).status_code
-                == 200
-            )
-            assert _post(client, publisher, r["id"], "publish").status_code == 200
-            assert _post(client, publisher, q["id"], "publish").status_code == 200
-        return {"chapter": str(chapter.id)}
-
-
 def _learner(client: TestClient) -> Staff:
+    """A learner with the one-time free trial started (practice and written tests need an active plan)."""
     with get_sessionmaker()() as db:
-        return Staff(client, db, [])
+        who = Staff(client, db, [])
+    assert client.post("/v1/me/trial", headers=who.headers).status_code == 200
+    return who
 
 
 def _form(client: TestClient, who: Staff, chapter: str, **extra: Any) -> Any:

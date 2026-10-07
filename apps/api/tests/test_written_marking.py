@@ -1,4 +1,3 @@
-# ruff: noqa: F811  (pytest fixture imported from test_written_attempts and used as an argument)
 """Teacher marking (W06.S1, §20.10): scoped queue without learner identity, leases, expected-version decisions,
 rubric-bound awards, immutable score versions and learner-visible results only after release. Fixture content only."""
 
@@ -11,7 +10,7 @@ from fastapi.testclient import TestClient
 
 from portal_api.db import get_sessionmaker
 from tests.test_content_workflow import Staff
-from tests.test_written_attempts import _learner, _map, _png, _seal, _start, _upload, published_written  # noqa: F401
+from tests.test_written_attempts import _learner, _map, _png, _seal, _start, _upload
 
 
 def _reviewer(client: TestClient, grade: int = 12, subject: str = "chemistry") -> Staff:

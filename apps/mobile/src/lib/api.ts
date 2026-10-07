@@ -2,6 +2,7 @@
 // and authorisation stay on the server (roadmap §5.3). Authenticated calls send the app session token as a bearer.
 import Constants from "expo-constants";
 import type {
+  Access,
   AppSession,
   AttemptResult,
   Book,
@@ -123,6 +124,11 @@ export const api = {
   revokeOthers: (token: string) => request<void>("/v1/me/sessions/revoke-others", { method: "POST", token }),
   signOut: (token: string) => request<void>("/v1/me/session", { method: "DELETE", token }),
   saveProfile: (token: string, body: ProfileInput) => request<unknown>("/v1/me/profile", { method: "PUT", token, body }),
+
+  // Plans (P14): trial status, entitlements and the written allowance; the trial is one-time and idempotent.
+  access: (token: string, signal?: AbortSignal) => request<Access>("/v1/me/access", { token, signal }),
+  startTrial: (token: string) =>
+    request<Access>("/v1/me/trial", { method: "POST", token, headers: { "X-Portal-Client": "native" } }),
 
   // Practice (P09/P10). Attempt payloads never contain keys; results release them after submission.
   practiceAvailability: (token: string, grade: number, subject: string, signal?: AbortSignal) =>
