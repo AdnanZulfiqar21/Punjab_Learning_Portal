@@ -6,6 +6,7 @@ import { revokeOtherSessions, revokeSession, signOut } from "@/app/actions/auth"
 import { Badge, Breadcrumbs, Notice, SkeletonLines } from "@/components/ui";
 import { GRADE_LABEL } from "@/lib/format";
 import { currentUser, listSessions } from "@/lib/session";
+import { STUDIO_ROLES } from "@/lib/studio";
 
 export const metadata: Metadata = { title: "Your account", robots: { index: false } };
 
@@ -52,9 +53,16 @@ async function Account() {
         ) : (
           <Notice title="Finish setting up">Tell us your class and subjects so we can show the right books.</Notice>
         )}
-        <Link href="/onboarding" className="inline-block text-sm text-accent underline-offset-2 hover:underline">
-          {p ? "Edit learning preferences" : "Set up learning preferences"}
-        </Link>
+        <div className="flex flex-wrap gap-4">
+          <Link href="/onboarding" className="inline-block text-sm text-accent underline-offset-2 hover:underline">
+            {p ? "Edit learning preferences" : "Set up learning preferences"}
+          </Link>
+          {me.roles.some((r) => STUDIO_ROLES.has(r)) && (
+            <Link href="/studio" className="inline-block text-sm text-accent underline-offset-2 hover:underline">
+              Content studio
+            </Link>
+          )}
+        </div>
       </section>
 
       <section aria-labelledby="sessions-heading" className="space-y-3">

@@ -20,9 +20,11 @@ export async function signInWithPassword(_prev: FormState, form: FormData): Prom
   const email = String(form.get("email") ?? "").trim();
   const password = String(form.get("password") ?? "");
   if (!email || !password) return { error: "Enter your email and password." };
+  // Development adapter only: lets staff simulate an MFA sign-in so MFA-gated actions can be exercised locally.
+  const mfa = form.get("mfa") === "on";
   const tok = await api<{ access_token: string }>("/v1/dev-auth/token", {
     method: "POST",
-    body: JSON.stringify({ email, password }),
+    body: JSON.stringify({ email, password, mfa }),
   });
   if (!tok.ok) {
     return { error: tok.status === 401 ? "Email or password is incorrect." : "Sign-in is unavailable right now." };
