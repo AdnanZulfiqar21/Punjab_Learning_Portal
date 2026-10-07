@@ -4,7 +4,7 @@
 // uploaded but NOT submitted, and submitted (sealed with a receipt). Nothing is marked until it is submitted.
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import type { WrittenAttempt, WrittenPage } from "@portal/contracts";
+import type { WrittenAttempt, WrittenPage, WrittenResult } from "@portal/contracts";
 import { saveMapping, sealScript } from "@/app/actions/written";
 import { LessonBlocks } from "@/components/lesson-blocks";
 import { Notice } from "@/components/ui";
@@ -33,7 +33,7 @@ function uploadFile(attemptId: string, file: File, onProgress: (p: number) => vo
   });
 }
 
-export function WrittenRunner({ attempt }: { attempt: WrittenAttempt }) {
+export function WrittenRunner({ attempt, result = null }: { attempt: WrittenAttempt; result?: WrittenResult | null }) {
   const router = useRouter();
   const [pages, setPages] = useState<WrittenPage[]>(attempt.pages);
   const [uploads, setUploads] = useState<Upload[]>([]);
@@ -195,6 +195,42 @@ export function WrittenRunner({ attempt }: { attempt: WrittenAttempt }) {
           </dl>
         )}
       </header>
+
+      {attempt.status === "sealed" && (
+        <section aria-labelledby="result-h" className="space-y-3">
+          <h2 id="result-h" className="text-lg font-semibold">
+            Your marks
+          </h2>
+          {!result || result.status === "pending" ? (
+            <Notice title="Waiting for a teacher">Your script is in the marking queue. Marks appear here once a teacher releases them.</Notice>
+          ) : (
+            <div className="space-y-3">
+              <p className="text-lg">
+                <span className="text-3xl font-semibold tabular-nums">{marks(result.total_units ?? 0)}</span> / {marks(result.max_units)}
+                <span className="ml-2 text-sm text-muted">marked by a teacher</span>
+              </p>
+              {result.questions.map((q) => (
+                <div key={q.position} className="space-y-2 rounded-xl border border-border bg-surface p-4">
+                  <p className="font-semibold">
+                    Question {q.position}: {marks(q.earned_units)} / {marks(q.max_units)}
+                  </p>
+                  <ul className="space-y-1 text-sm">
+                    {q.criteria.map((c) => (
+                      <li key={c.id}>
+                        <span className="font-medium">
+                          {marks(c.earned_units)} / {marks(c.max_units)}
+                        </span>{" "}
+                        {c.description}
+                        {c.reason && <span className="block text-muted">{c.reason}</span>}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          )}
+        </section>
+      )}
 
       <section aria-labelledby="questions-h" className="space-y-4">
         <h2 id="questions-h" className="text-lg font-semibold">

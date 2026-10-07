@@ -24,12 +24,17 @@ export default function StudioPage({ searchParams }: PageProps<"/studio">) {
           <h1 className="text-2xl font-semibold tracking-tight">Content studio</h1>
           <p className="text-muted">Drafts stay private until an independent reviewer approves them and they are published.</p>
         </div>
+        <div className="flex gap-2">
+        <Link href="/studio/marking" className="rounded-lg border border-border bg-surface px-4 py-2.5 font-medium hover:border-accent">
+          Written marking
+        </Link>
         <Link
           href="/studio/new"
           className="rounded-lg bg-accent px-4 py-2.5 font-medium text-white hover:bg-accent-strong dark:text-background"
         >
           New draft
         </Link>
+        </div>
       </div>
       <Suspense fallback={<SkeletonLines lines={6} label="Loading the work queue" />}>
         {searchParams.then((sp) => (

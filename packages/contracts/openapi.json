@@ -413,6 +413,239 @@
         "title": "Breadcrumb",
         "type": "object"
       },
+      "CaseDetail": {
+        "properties": {
+          "case_kind": {
+            "enum": [
+              "initial",
+              "recheck"
+            ],
+            "title": "Case Kind",
+            "type": "string"
+          },
+          "grade": {
+            "title": "Grade",
+            "type": "integer"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "latest": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/StaffScore"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "lease_expires_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Lease Expires At"
+          },
+          "leased_by_me": {
+            "title": "Leased By Me",
+            "type": "boolean"
+          },
+          "leased_by_other": {
+            "title": "Leased By Other",
+            "type": "boolean"
+          },
+          "manifest": {
+            "additionalProperties": true,
+            "title": "Manifest",
+            "type": "object"
+          },
+          "max_units": {
+            "title": "Max Units",
+            "type": "integer"
+          },
+          "opened_at": {
+            "format": "date-time",
+            "title": "Opened At",
+            "type": "string"
+          },
+          "pages": {
+            "items": {
+              "$ref": "#/components/schemas/PageOut"
+            },
+            "title": "Pages",
+            "type": "array"
+          },
+          "questions": {
+            "items": {
+              "$ref": "#/components/schemas/CaseQuestion"
+            },
+            "title": "Questions",
+            "type": "array"
+          },
+          "reference": {
+            "description": "Short script reference; learner identity is not shown to markers",
+            "title": "Reference",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "queued",
+              "released"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "subject": {
+            "title": "Subject",
+            "type": "string"
+          },
+          "version": {
+            "title": "Version",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id",
+          "reference",
+          "grade",
+          "subject",
+          "case_kind",
+          "opened_at",
+          "status",
+          "version",
+          "leased_by_me",
+          "leased_by_other",
+          "max_units",
+          "manifest",
+          "questions",
+          "pages",
+          "lease_expires_at",
+          "latest"
+        ],
+        "title": "CaseDetail",
+        "type": "object"
+      },
+      "CaseQuestion": {
+        "properties": {
+          "max_units": {
+            "title": "Max Units",
+            "type": "integer"
+          },
+          "position": {
+            "title": "Position",
+            "type": "integer"
+          },
+          "question": {
+            "additionalProperties": true,
+            "title": "Question",
+            "type": "object"
+          },
+          "rubric": {
+            "additionalProperties": true,
+            "title": "Rubric",
+            "type": "object"
+          },
+          "rubric_version_id": {
+            "format": "uuid",
+            "title": "Rubric Version Id",
+            "type": "string"
+          },
+          "slots": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Slots",
+            "type": "array"
+          }
+        },
+        "required": [
+          "position",
+          "max_units",
+          "slots",
+          "question",
+          "rubric",
+          "rubric_version_id"
+        ],
+        "title": "CaseQuestion",
+        "type": "object"
+      },
+      "CaseSummary": {
+        "properties": {
+          "case_kind": {
+            "enum": [
+              "initial",
+              "recheck"
+            ],
+            "title": "Case Kind",
+            "type": "string"
+          },
+          "grade": {
+            "title": "Grade",
+            "type": "integer"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "leased_by_me": {
+            "title": "Leased By Me",
+            "type": "boolean"
+          },
+          "leased_by_other": {
+            "title": "Leased By Other",
+            "type": "boolean"
+          },
+          "opened_at": {
+            "format": "date-time",
+            "title": "Opened At",
+            "type": "string"
+          },
+          "reference": {
+            "description": "Short script reference; learner identity is not shown to markers",
+            "title": "Reference",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "queued",
+              "released"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "subject": {
+            "title": "Subject",
+            "type": "string"
+          },
+          "version": {
+            "title": "Version",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id",
+          "reference",
+          "grade",
+          "subject",
+          "case_kind",
+          "opened_at",
+          "status",
+          "version",
+          "leased_by_me",
+          "leased_by_other"
+        ],
+        "title": "CaseSummary",
+        "type": "object"
+      },
       "CatalogueOut": {
         "properties": {
           "grades": {
@@ -795,6 +1028,89 @@
           "withdrawn_at"
         ],
         "title": "ConsentOut",
+        "type": "object"
+      },
+      "CriterionResult": {
+        "properties": {
+          "description": {
+            "title": "Description",
+            "type": "string"
+          },
+          "earned_units": {
+            "title": "Earned Units",
+            "type": "integer"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          },
+          "max_units": {
+            "title": "Max Units",
+            "type": "integer"
+          },
+          "reason": {
+            "title": "Reason",
+            "type": "string"
+          },
+          "subpart_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Subpart Id"
+          }
+        },
+        "required": [
+          "id",
+          "subpart_id",
+          "description",
+          "earned_units",
+          "max_units",
+          "reason"
+        ],
+        "title": "CriterionResult",
+        "type": "object"
+      },
+      "DecisionIn": {
+        "properties": {
+          "awards": {
+            "additionalProperties": {
+              "additionalProperties": {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              "type": "object"
+            },
+            "description": "{\"1\": {\"a1\": {\"units\": 100, \"reason\": \"\u2026\"}}}",
+            "title": "Awards",
+            "type": "object"
+          },
+          "expected_version": {
+            "minimum": 0.0,
+            "title": "Expected Version",
+            "type": "integer"
+          },
+          "reason": {
+            "default": "",
+            "maxLength": 1000,
+            "title": "Reason",
+            "type": "string"
+          },
+          "release": {
+            "default": false,
+            "title": "Release",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "expected_version",
+          "awards"
+        ],
+        "title": "DecisionIn",
         "type": "object"
       },
       "DraftIn": {
@@ -2419,6 +2735,37 @@
         "title": "QuarantineIn",
         "type": "object"
       },
+      "QuestionResult": {
+        "properties": {
+          "criteria": {
+            "items": {
+              "$ref": "#/components/schemas/CriterionResult"
+            },
+            "title": "Criteria",
+            "type": "array"
+          },
+          "earned_units": {
+            "title": "Earned Units",
+            "type": "integer"
+          },
+          "max_units": {
+            "title": "Max Units",
+            "type": "integer"
+          },
+          "position": {
+            "title": "Position",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "position",
+          "max_units",
+          "earned_units",
+          "criteria"
+        ],
+        "title": "QuestionResult",
+        "type": "object"
+      },
       "ReceiptOut": {
         "properties": {
           "admitted_at": {
@@ -3393,6 +3740,59 @@
         "title": "SourceRef",
         "type": "object"
       },
+      "StaffScore": {
+        "properties": {
+          "awards": {
+            "additionalProperties": true,
+            "title": "Awards",
+            "type": "object"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "max_units": {
+            "title": "Max Units",
+            "type": "integer"
+          },
+          "question_units": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "title": "Question Units",
+            "type": "object"
+          },
+          "reason": {
+            "title": "Reason",
+            "type": "string"
+          },
+          "released": {
+            "title": "Released",
+            "type": "boolean"
+          },
+          "total_units": {
+            "title": "Total Units",
+            "type": "integer"
+          },
+          "version": {
+            "title": "Version",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "version",
+          "total_units",
+          "max_units",
+          "question_units",
+          "awards",
+          "released",
+          "reason",
+          "created_at"
+        ],
+        "title": "StaffScore",
+        "type": "object"
+      },
       "SubjectInGrade": {
         "properties": {
           "books": {
@@ -4273,6 +4673,85 @@
           "unanswered_slots"
         ],
         "title": "WrittenReceiptOut",
+        "type": "object"
+      },
+      "WrittenResultOut": {
+        "properties": {
+          "decision_method": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Decision Method"
+          },
+          "max_units": {
+            "title": "Max Units",
+            "type": "integer"
+          },
+          "questions": {
+            "items": {
+              "$ref": "#/components/schemas/QuestionResult"
+            },
+            "title": "Questions",
+            "type": "array"
+          },
+          "released_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Released At"
+          },
+          "status": {
+            "enum": [
+              "pending",
+              "released"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "total_units": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Total Units"
+          },
+          "version": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Version"
+          }
+        },
+        "required": [
+          "status",
+          "version",
+          "total_units",
+          "max_units",
+          "released_at",
+          "decision_method",
+          "questions"
+        ],
+        "title": "WrittenResultOut",
         "type": "object"
       },
       "portal_api__modules__assessment__schemas__SubmitIn": {
@@ -6398,6 +6877,221 @@
         ]
       }
     },
+    "/v1/studio/written/cases/{case_id}": {
+      "get": {
+        "operationId": "case_detail_v1_studio_written_cases__case_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "case_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Case Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CaseDetail"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Case Detail",
+        "tags": [
+          "written marking"
+        ]
+      }
+    },
+    "/v1/studio/written/cases/{case_id}/decision": {
+      "post": {
+        "operationId": "decision_v1_studio_written_cases__case_id__decision_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "case_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Case Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DecisionIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CaseDetail"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Save or release marks (expected-version CAS; awards must be permitted rubric levels)",
+        "tags": [
+          "written marking"
+        ]
+      }
+    },
+    "/v1/studio/written/cases/{case_id}/lease": {
+      "post": {
+        "operationId": "take_lease_v1_studio_written_cases__case_id__lease_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "case_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Case Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CaseDetail"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Take or renew the marking lease",
+        "tags": [
+          "written marking"
+        ]
+      }
+    },
+    "/v1/studio/written/cases/{case_id}/pages/{page_id}": {
+      "get": {
+        "operationId": "case_page_v1_studio_written_cases__case_id__pages__page_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "case_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Case Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "page_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Page Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Submitted evidence page (markers in scope)",
+        "tags": [
+          "written marking"
+        ]
+      }
+    },
+    "/v1/studio/written/queue": {
+      "get": {
+        "operationId": "marking_queue_v1_studio_written_queue_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/CaseSummary"
+                  },
+                  "title": "Response Marking Queue V1 Studio Written Queue Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Scripts awaiting marking in your scope",
+        "tags": [
+          "written marking"
+        ]
+      }
+    },
     "/v1/written-attempts/{attempt_id}": {
       "get": {
         "operationId": "get_attempt_v1_written_attempts__attempt_id__get",
@@ -6585,6 +7279,49 @@
         "summary": "Your own uploaded page (private)",
         "tags": [
           "written practice"
+        ]
+      }
+    },
+    "/v1/written-attempts/{attempt_id}/result": {
+      "get": {
+        "operationId": "my_result_v1_written_attempts__attempt_id__result_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "attempt_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Attempt Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WrittenResultOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Your marks, once a teacher has released them",
+        "tags": [
+          "written marking"
         ]
       }
     },

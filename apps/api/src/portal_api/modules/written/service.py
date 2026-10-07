@@ -32,7 +32,7 @@ from portal_api.modules.curriculum.models import BookEdition, Chapter, Grade, Su
 from portal_api.modules.identity.deps import Principal
 from portal_api.modules.identity.models import StaffRoleGrant
 from portal_api.modules.identity.permissions import Permission, Role, permissions_for
-from portal_api.modules.written import storage, validate
+from portal_api.modules.written import review, storage, validate
 from portal_api.modules.written.models import (
     WrittenAttempt,
     WrittenForm,
@@ -500,6 +500,7 @@ def seal(
     db.add(receipt)
     attempt.status = "sealed"
     attempt.sealed_at = now
+    review.open_initial_case(db, attempt)  # enters the teacher marking queue in the same transaction
     record(
         db,
         actor=who.user.id,

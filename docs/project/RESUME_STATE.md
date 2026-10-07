@@ -1,6 +1,6 @@
 # RESUME STATE
 
-**Updated:** 2026-10-07 · **Branch:** `feat/written-attempts` · PRs #6–#15 merged to `main`
+**Updated:** 2026-10-07 · **Branch:** `feat/written-marking` · PRs #6–#16 merged to `main`
 
 ## Where we are
 Waves A/B/D/E are in progress (roadmap §18). Merged to `main`:
@@ -39,7 +39,7 @@ cd ../mobile && npx expo start --web --port 8190            # mobile screens on 
 1. **Merge `feat/attempt-engine`** (merge `main` in; never rebase or force-push pushed branches, GIT-01).
 2. *(done: native auth/onboarding, IMPL-13; PKCE waits for B04)*
 3. **CMS (P06):** engine (IMPL-14) and studio UI (IMPL-15) done. Next: preview surfaces (P06.S3.T1), import batches (P06.S2), releases/rollback, export, catalogue editing.
-4. **Teacher marking (W06):** a review queue of sealed scripts, per-criterion awards in hundredths against the pinned rubric, justification, result release and learner result view. Written attempts done (IMPL-20). Then trial/entitlement/allowance and support.
+4. **Trial, entitlement and allowance (P14, W08) and support (P15):** typed allowance ledger, entitlement checks before attempts, support tickets. Teacher marking done (IMPL-21); recheck flow (W06.S2) follows.
 5. **Written assessment (W tasks):** question/rubric records, private scan upload, page mapping, receipts, reviewer workflow.
 6. **Native evidence:** JDK 17 and Android cmdline-tools are in `%USERPROFILE%\devtools`. Installing SDK packages needs the owner to accept the Android SDK licence (BLOCKERS).
 
