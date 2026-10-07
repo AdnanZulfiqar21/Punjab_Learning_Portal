@@ -3,22 +3,29 @@
 import Constants from "expo-constants";
 import type {
   AppSession,
+  AttemptResult,
   Book,
   Catalogue,
   Chapter,
   Lesson,
   Me,
+  PracticeAttempt,
+  PracticeAvailability,
+  PracticeForm,
   Problem,
   ProfileInput,
+  RevealResult,
   RuntimeConfig,
+  SaveResult,
   SearchResult,
   SessionCreated,
+  SubmitResult,
 } from "@portal/contracts";
 
 export class ApiError extends Error {
   constructor(
     message: string,
-    readonly kind: "offline" | "not_found" | "server" | "unauthorized" | "invalid",
+    readonly kind: "offline" | "not_found" | "server" | "unauthorized" | "invalid" | "conflict",
     readonly correlationId?: string | null,
     readonly problem?: Problem | null,
   ) {
@@ -37,7 +44,13 @@ function correlationId(): string {
   return Array.from({ length: 32 }, () => Math.floor(Math.random() * 16).toString(16)).join("");
 }
 
-type RequestOptions = { method?: string; body?: unknown; token?: string | null; signal?: AbortSignal };
+type RequestOptions = {
+  method?: string;
+  body?: unknown;
+  token?: string | null;
+  signal?: AbortSignal;
+  headers?: Record<string, string>;
+};
 
 async function request<T>(path: string, opts: RequestOptions = {}): Promise<T> {
   const cid = correlationId();
@@ -50,6 +63,7 @@ async function request<T>(path: string, opts: RequestOptions = {}): Promise<T> {
         "X-Correlation-ID": cid,
         ...(opts.body !== undefined ? { "Content-Type": "application/json" } : {}),
         ...(opts.token ? { Authorization: `Bearer ${opts.token}` } : {}),
+        ...opts.headers,
       },
       body: opts.body !== undefined ? JSON.stringify(opts.body) : undefined,
       signal: opts.signal ?? AbortSignal.timeout(15_000),
@@ -66,6 +80,7 @@ async function request<T>(path: string, opts: RequestOptions = {}): Promise<T> {
   if (res.status === 404 || res.status === 410) throw new ApiError(detail ?? "Not found.", "not_found", ref, problem);
   if (res.status === 401) throw new ApiError(detail ?? "Please sign in again.", "unauthorized", ref, problem);
   if (res.status === 422) throw new ApiError(detail ?? "Please check your entries.", "invalid", ref, problem);
+  if (res.status === 409) throw new ApiError(detail ?? "This changed elsewhere.", "conflict", ref, problem);
   throw new ApiError(detail ?? `Service error (${res.status}).`, "server", ref, problem);
 }
 
@@ -108,6 +123,31 @@ export const api = {
   revokeOthers: (token: string) => request<void>("/v1/me/sessions/revoke-others", { method: "POST", token }),
   signOut: (token: string) => request<void>("/v1/me/session", { method: "DELETE", token }),
   saveProfile: (token: string, body: ProfileInput) => request<unknown>("/v1/me/profile", { method: "PUT", token, body }),
+
+  // Practice (P09/P10). Attempt payloads never contain keys; results release them after submission.
+  practiceAvailability: (token: string, grade: number, subject: string, signal?: AbortSignal) =>
+    request<PracticeAvailability>(`/v1/practice/availability?grade=${grade}&subject=${encodeURIComponent(subject)}`, {
+      token,
+      signal,
+    }),
+  createPracticeForm: (token: string, idempotencyKey: string, body: Record<string, unknown>) =>
+    request<PracticeForm>("/v1/practice/forms", { method: "POST", token, body, headers: { "Idempotency-Key": idempotencyKey } }),
+  startAttempt: (token: string, formId: string) =>
+    request<PracticeAttempt>(`/v1/practice/forms/${encodeURIComponent(formId)}/attempt`, { method: "POST", token }),
+  attempt: (token: string, id: string, signal?: AbortSignal) =>
+    request<PracticeAttempt>(`/v1/attempts/${encodeURIComponent(id)}`, { token, signal }),
+  saveAnswers: (token: string, id: string, ops: unknown[]) =>
+    request<SaveResult>(`/v1/attempts/${encodeURIComponent(id)}/answers`, { method: "POST", token, body: { ops } }),
+  submitAttempt: (token: string, id: string, idempotencyKey: string, ops: unknown[]) =>
+    request<SubmitResult>(`/v1/attempts/${encodeURIComponent(id)}/submit`, {
+      method: "POST",
+      token,
+      body: { idempotency_key: idempotencyKey, ops },
+    }),
+  reveal: (token: string, id: string, position: number) =>
+    request<RevealResult>(`/v1/attempts/${encodeURIComponent(id)}/items/${position}/reveal`, { method: "POST", token }),
+  result: (token: string, id: string, signal?: AbortSignal) =>
+    request<AttemptResult>(`/v1/attempts/${encodeURIComponent(id)}/result`, { token, signal }),
 };
 
 export const GRADE_LABEL: Record<number, string> = { 11: "Class XI", 12: "Class XII" };

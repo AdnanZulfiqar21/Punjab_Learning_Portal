@@ -43,7 +43,7 @@ export default function SearchScreen() {
               <Pressable
                 key={g.label}
                 accessibilityRole="radio"
-                accessibilityState={{ checked: selected }}
+                aria-checked={selected}
                 onPress={() => setGrade(g.value)}
                 style={{ borderWidth: 1, borderColor: selected ? c.accent : c.border, backgroundColor: selected ? c.accentSoft : c.surface, borderRadius: Radius.pill, paddingHorizontal: Space.md, minHeight: 40, justifyContent: "center" }}>
                 <T variant="small" style={{ color: selected ? c.accent : c.text }}>

@@ -61,7 +61,8 @@ export function Button({
     <Pressable
       accessibilityRole="button"
       accessibilityLabel={label}
-      accessibilityState={{ busy: !!busy, disabled: !!inactive }}
+      aria-busy={!!busy}
+      aria-disabled={!!inactive}
       onPress={onPress}
       disabled={inactive}
       style={({ pressed }) => ({
@@ -108,7 +109,7 @@ export function Choices<V extends string | number>({
             <Pressable
               key={String(value)}
               accessibilityRole={multiple ? "checkbox" : "radio"}
-              accessibilityState={{ checked: on }}
+              aria-checked={on}
               accessibilityLabel={text}
               onPress={() => onToggle(value)}
               style={{

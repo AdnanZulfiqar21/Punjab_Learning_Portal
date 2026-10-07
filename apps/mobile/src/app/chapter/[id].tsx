@@ -127,7 +127,7 @@ function TopicRow({ topic, depth = 0 }: { topic: TopicNode; depth?: number }) {
     <View style={{ marginLeft: depth * Space.md }}>
       <Pressable
         accessibilityRole={expandable ? "button" : "text"}
-        accessibilityState={expandable ? { expanded: open } : undefined}
+        aria-expanded={expandable ? open : undefined}
         disabled={!expandable}
         onPress={() => setOpen((o) => !o)}
         style={{ flexDirection: "row", gap: Space.sm, paddingVertical: Space.sm, borderBottomWidth: 1, borderBottomColor: c.border }}>

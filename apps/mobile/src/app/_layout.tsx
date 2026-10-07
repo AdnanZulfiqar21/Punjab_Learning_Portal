@@ -24,6 +24,8 @@ export default function RootLayout() {
         <Stack.Screen name="book/[grade]/[subject]" options={{ title: "Chapters" }} />
         <Stack.Screen name="chapter/[id]" options={{ title: "Chapter" }} />
         <Stack.Screen name="onboarding" options={{ title: "Learning preferences" }} />
+        <Stack.Screen name="attempt/[id]" options={{ title: "Practice test", gestureEnabled: false }} />
+        <Stack.Screen name="result/[id]" options={{ title: "Your result" }} />
       </Stack>
     </ThemeProvider>
     </AuthProvider>
