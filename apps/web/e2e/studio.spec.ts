@@ -38,10 +38,10 @@ test("the studio is for signed-in staff only", async ({ page }) => {
 test("an author drafts with autosave and submits for review", async ({ browser }) => {
   title = `Fixture lesson ${Date.now()}`; // unique per run; later tests in this serial group use it
   const page = await signIn(browser, "studio-author@example.com");
-  await page.getByRole("link", { name: "New lesson" }).click();
+  await page.getByRole("link", { name: "New draft" }).click();
   await page.getByLabel("Book").selectOption({ label: "Class XI Biology" });
   await page.getByLabel("Chapter", { exact: true }).selectOption({ index: 1 });
-  await page.getByLabel("Lesson title").fill(title);
+  await page.getByLabel("Title").fill(title);
   await page.getByRole("button", { name: "Create draft" }).click();
   await expect(page).toHaveURL(/\/studio\/items\/[0-9a-f-]{36}$/, AUTH);
   itemUrl = new URL(page.url()).pathname;
@@ -87,10 +87,10 @@ test("an independent reviewer approves; the rights gate blocks publication", asy
 
 test("concurrent edits never overwrite each other", async ({ browser }) => {
   const a = await signIn(browser, "studio-author@example.com");
-  await a.getByRole("link", { name: "New lesson" }).click();
+  await a.getByRole("link", { name: "New draft" }).click();
   await a.getByLabel("Book").selectOption({ label: "Class XI Biology" });
   await a.getByLabel("Chapter", { exact: true }).selectOption({ index: 2 });
-  await a.getByLabel("Lesson title").fill(`${title} (concurrency)`);
+  await a.getByLabel("Title").fill(`${title} (concurrency)`);
   await a.getByRole("button", { name: "Create draft" }).click();
   await expect(a).toHaveURL(/\/studio\/items\//, AUTH);
   const url = new URL(a.url()).pathname;
@@ -110,4 +110,48 @@ test("concurrent edits never overwrite each other", async ({ browser }) => {
   await b.getByRole("button", { name: "Use their version (discard mine)" }).click();
   await b.getByRole("tab", { name: "Preview" }).click();
   await expect(b.getByText("Author A's fixture text.")).toBeVisible(AUTH);
+});
+
+test("a question needs every review check before it can be approved", async ({ browser }) => {
+  const qTitle = `Fixture question ${Date.now()}`;
+  const author = await signIn(browser, "studio-author@example.com");
+  await author.getByRole("link", { name: "New draft" }).click();
+  await author.getByLabel("Multiple-choice question").check();
+  await author.getByLabel("Book").selectOption({ label: "Class XI Biology" });
+  await author.getByLabel("Chapter", { exact: true }).selectOption({ index: 1 });
+  await author.getByLabel("Title").fill(qTitle);
+  await author.getByRole("button", { name: "Create draft" }).click();
+  await expect(author).toHaveURL(/\/studio\/items\//, AUTH);
+
+  const stem = author.getByRole("region", { name: "Question stem" });
+  await stem.getByRole("button", { name: "+ Paragraph" }).click();
+  await stem.getByLabel("Paragraph text").fill("Fixture stem for the question journey.");
+  const options = author.getByRole("region", { name: "Options" });
+  for (const id of ["o1", "o2", "o3", "o4"]) {
+    const option = options.locator("div.rounded-xl").filter({ hasText: `Option ${id}` });
+    await option.getByRole("button", { name: "+ Paragraph" }).click();
+    await option.getByLabel("Paragraph text").fill(`Fixture option ${id}`);
+  }
+  await options.getByLabel(/^Option o3/).check();
+  const why = author.getByRole("region", { name: "Why the correct answer is correct" });
+  await why.getByRole("button", { name: "+ Paragraph" }).first().click();
+  await why.getByLabel("Paragraph text").first().fill("Fixture reasoning for option o3.");
+  await author.getByRole("button", { name: "+ Add page reference" }).click();
+  await expect(author.getByRole("status")).toHaveText(/Saved · revision \d+/, AUTH);
+  await author.getByRole("button", { name: "Submit for review" }).click();
+  await expect(author.getByText("In review · version 1")).toBeVisible(AUTH);
+
+  const reviewer = await signIn(browser, "studio-reviewer@example.com");
+  await reviewer.getByRole("link", { name: qTitle }).click();
+  await reviewer.getByRole("tab", { name: "Preview" }).click();
+  await expect(reviewer.getByText("KEY")).toBeVisible(); // staff preview shows the key; learners never receive it
+  await reviewer.getByLabel("Review comment").fill("Checked the fixture against the referenced pages.");
+  const approve = reviewer.getByRole("button", { name: "Approve" });
+  await expect(approve).toBeDisabled();
+  for (const check of ["accuracy", "ambiguity", "units", "diagrams", "grammar", "mapping"]) {
+    await reviewer.getByLabel(check, { exact: true }).check();
+  }
+  await expect(approve).toBeEnabled();
+  await approve.click();
+  await expect(reviewer.getByText("Approved · version 1")).toBeVisible(AUTH);
 });

@@ -11,7 +11,7 @@ type ProblemWithExtras = Problem & { warnings?: string[]; current?: ConflictStat
 export type ConflictState = {
   revision: number;
   title: string;
-  body: { blocks: Block[] };
+  body: Record<string, unknown>;
   source_refs: SourceRef[];
   updated_at: string;
   updated_by: string | null;
@@ -56,13 +56,14 @@ async function call(path: string, method: "POST" | "PUT", body?: unknown): Promi
 
 const item = (id: string, action: string) => `/v1/studio/items/${encodeURIComponent(id)}/${action}`;
 
-export async function createLesson(_prev: unknown, form: FormData): Promise<{ error?: string } | undefined> {
+export async function createItem(_prev: unknown, form: FormData): Promise<{ error?: string } | undefined> {
+  const kind = form.get("kind") === "mcq" ? "mcq" : "lesson";
   const chapter_id = String(form.get("chapter_id") ?? "");
   const topic_id = String(form.get("topic_id") ?? "") || null;
   const title = String(form.get("title") ?? "").trim();
   if (!chapter_id) return { error: "Choose a chapter." };
-  if (title.length < 3) return { error: "Give the lesson a title of at least 3 characters." };
-  const res = await call("/v1/studio/items", "POST", { chapter_id, topic_id, title });
+  if (title.length < 3) return { error: "Give it a title of at least 3 characters." };
+  const res = await call("/v1/studio/items", "POST", { kind, chapter_id, topic_id, title });
   if (!res.ok) return { error: [res.error, ...(res.errors ?? [])].join(" ") };
   redirect(`/studio/items/${res.item.id}`);
 }
@@ -71,7 +72,7 @@ export async function saveDraft(
   id: string,
   revision: number,
   title: string,
-  body: { blocks: Block[] },
+  body: Record<string, unknown>,
   sourceRefs: SourceRef[],
 ): Promise<ActionResult> {
   return call(item(id, "draft"), "PUT", { revision, title, body, source_refs: sourceRefs });
@@ -86,8 +87,13 @@ export async function withdrawItem(id: string): Promise<ActionResult> {
 export async function claimItem(id: string, myId: string): Promise<ActionResult> {
   return call(item(id, "assign"), "POST", { reviewer_id: myId });
 }
-export async function reviewItem(id: string, decision: "approve" | "request_changes", comment: string): Promise<ActionResult> {
-  return call(item(id, "review"), "POST", { decision, comment });
+export async function reviewItem(
+  id: string,
+  decision: "approve" | "request_changes",
+  comment: string,
+  checklist: Record<string, boolean> = {},
+): Promise<ActionResult> {
+  return call(item(id, "review"), "POST", { decision, comment, checklist });
 }
 export async function publishItem(id: string): Promise<ActionResult> {
   return call(item(id, "publish"), "POST");
@@ -95,8 +101,8 @@ export async function publishItem(id: string): Promise<ActionResult> {
 export async function reviseItem(id: string, reason: string): Promise<ActionResult> {
   return call(item(id, "revise"), "POST", { reason });
 }
-export async function quarantineItem(id: string, reason: string): Promise<ActionResult> {
-  return call(item(id, "quarantine"), "POST", { reason });
+export async function quarantineItem(id: string, reason: string, level: string | null = null): Promise<ActionResult> {
+  return call(item(id, "quarantine"), "POST", { reason, level });
 }
 export async function releaseItem(id: string, reason: string): Promise<ActionResult> {
   return call(item(id, "release"), "POST", { reason });

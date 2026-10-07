@@ -12,7 +12,7 @@ from sqlalchemy.orm import Session
 from portal_api.db import get_session
 from portal_api.errors import Forbidden, NotFound
 from portal_api.modules.audit.models import AuditEvent
-from portal_api.modules.content import blocks, workflow
+from portal_api.modules.content import blocks, kinds, workflow
 from portal_api.modules.content.models import Availability, ContentItem, ContentVersion, ItemState
 from portal_api.modules.content.schemas import (
     Actions,
@@ -24,6 +24,7 @@ from portal_api.modules.content.schemas import (
     ItemDetail,
     ItemSummary,
     LessonOut,
+    QuarantineIn,
     ReviewIn,
     ReviewOut,
     RightsIn,
@@ -101,6 +102,7 @@ def _version_out(v: ContentVersion, email: _Emails) -> VersionOut:
                 reviewer=email(r.reviewer_id),
                 decision=r.decision,  # type: ignore[arg-type]
                 comment=r.comment,
+                checklist=r.checklist or {},
                 created_at=r.created_at,
             )
             for r in v.reviews
@@ -136,6 +138,8 @@ def _summary_fields(db: Session, item: ContentItem, email: _Emails) -> dict[str,
         "assigned_reviewer_id": item.assigned_reviewer_id,
         "updated_at": item.updated_at,
         "open_feedback": _open_feedback(item),
+        "family_id": item.family_id,
+        "quarantine_level": item.quarantine_level,
     }
 
 
@@ -215,6 +219,8 @@ def _detail(db: Session, item: ContentItem, who: Principal) -> ItemDetail:
         chapter_pdf_end=chapter.pdf_end,
         actions=actions,
         blockers=blockers,
+        review_checklist=list(kinds.get(item.kind).review_checklist),
+        quarantine_levels=list(kinds.get(item.kind).quarantine_levels),
     )
 
 
@@ -252,6 +258,7 @@ def queue(
     state: Annotated[str | None, Query(pattern="^(draft|submitted|changes_requested|approved|published)$")] = None,
     availability: Annotated[str | None, Query(pattern="^(unpublished|live|quarantined|retired)$")] = None,
     grade: Annotated[int | None, Query(ge=11, le=12)] = None,
+    kind: Annotated[str | None, Query(pattern="^(lesson|mcq)$")] = None,
     subject: Annotated[str | None, Query(max_length=40)] = None,
     mine: bool = False,
     limit: Annotated[int, Query(ge=1, le=200)] = 100,
@@ -266,6 +273,8 @@ def queue(
         stmt = stmt.where(ContentItem.availability != Availability.retired.value)
     if grade:
         stmt = stmt.where(ContentItem.grade_number == grade)
+    if kind:
+        stmt = stmt.where(ContentItem.kind == kind)
     if subject:
         stmt = stmt.where(ContentItem.subject_code == subject)
     if mine:
@@ -315,14 +324,24 @@ def sources(db: DB, _: Member, response: Response) -> list[SourceOut]:
 @router.post("/validate", response_model=ValidationOut, summary="Dry-run validation for the editor (writes nothing)")
 def validate(db: DB, _: Member, body: ValidateIn) -> ValidationOut:
     return ValidationOut(
-        **workflow.validate_draft(db, body.chapter_id, body.body, body.source_refs, body.for_publication)
+        **workflow.validate_draft(
+            db, body.chapter_id, body.body, body.source_refs, body.for_publication, kind=body.kind
+        )
     )
 
 
 # ------------------------------------------------------------------ studio: transitions
 @router.post("/items", response_model=ItemDetail, status_code=201)
 def create(db: DB, who: Author, body: ItemCreateIn) -> ItemDetail:
-    item = workflow.create_item(db, who, chapter_id=body.chapter_id, topic_id=body.topic_id, title=body.title)
+    item = workflow.create_item(
+        db,
+        who,
+        chapter_id=body.chapter_id,
+        topic_id=body.topic_id,
+        title=body.title,
+        kind=body.kind,
+        family_of=body.family_of,
+    )
     return _detail(db, item, who)
 
 
@@ -351,7 +370,8 @@ def assign(db: DB, who: Member, item_id: uuid.UUID, body: AssignIn) -> ItemDetai
 
 @router.post("/items/{item_id}/review", response_model=ItemDetail)
 def review(db: DB, who: Reviewer, item_id: uuid.UUID, body: ReviewIn) -> ItemDetail:
-    return _detail(db, workflow.review(db, who, item_id, decision=body.decision, comment=body.comment), who)
+    item = workflow.review(db, who, item_id, decision=body.decision, comment=body.comment, checklist=body.checklist)
+    return _detail(db, item, who)
 
 
 @router.post("/items/{item_id}/publish", response_model=ItemDetail)
@@ -365,8 +385,8 @@ def revise(db: DB, who: Author, item_id: uuid.UUID, body: ChangeReasonIn) -> Ite
 
 
 @router.post("/items/{item_id}/quarantine", response_model=ItemDetail)
-def quarantine(db: DB, who: Quarantiner, item_id: uuid.UUID, body: ChangeReasonIn) -> ItemDetail:
-    return _detail(db, workflow.quarantine(db, who, item_id, body.reason), who)
+def quarantine(db: DB, who: Quarantiner, item_id: uuid.UUID, body: QuarantineIn) -> ItemDetail:
+    return _detail(db, workflow.quarantine(db, who, item_id, body.reason, body.level), who)
 
 
 @router.post("/items/{item_id}/release", response_model=ItemDetail)
@@ -402,7 +422,12 @@ def chapter_lessons(db: DB, chapter_id: uuid.UUID, response: Response) -> list[L
     rows = db.execute(
         select(ContentItem, ContentVersion)
         .join(ContentVersion, ContentVersion.id == ContentItem.published_version_id)
-        .where(ContentItem.chapter_id == chapter_id, ContentItem.availability == Availability.live.value)
+        .where(
+            ContentItem.chapter_id == chapter_id,
+            ContentItem.availability == Availability.live.value,
+            # Key isolation (P08.S2.T3): questions are never served here, even when published.
+            ContentItem.kind.in_([k.name for k in kinds.KINDS.values() if k.learner_readable]),
+        )
         .order_by(ContentVersion.published_at, ContentItem.id)
     ).all()
     return [

@@ -881,6 +881,17 @@ export interface components {
              * Format: uuid
              */
             chapter_id: string;
+            /**
+             * Family Of
+             * @description Create a reviewed variant in this question's family
+             */
+            family_of?: string | null;
+            /**
+             * Kind
+             * @default lesson
+             * @enum {string}
+             */
+            kind: "lesson" | "mcq";
             /** Title */
             title: string;
             /** Topic Id */
@@ -918,6 +929,8 @@ export interface components {
             chapter_title: string;
             /** Created By */
             created_by: string | null;
+            /** Family Id */
+            family_id: string | null;
             /** Grade Number */
             grade_number: number;
             /**
@@ -925,8 +938,11 @@ export interface components {
              * Format: uuid
              */
             id: string;
-            /** Kind */
-            kind: string;
+            /**
+             * Kind
+             * @enum {string}
+             */
+            kind: "lesson" | "mcq";
             /**
              * Open Feedback
              * @description Change requests on the working version not yet addressed.
@@ -935,6 +951,18 @@ export interface components {
             published: components["schemas"]["VersionOut"] | null;
             /** Published Version */
             published_version: number | null;
+            /** Quarantine Level */
+            quarantine_level: ("SOFT" | "VOID" | "KEY_ERROR") | null;
+            /**
+             * Quarantine Levels
+             * @description Levels a publisher chooses from when quarantining this kind
+             */
+            quarantine_levels: string[];
+            /**
+             * Review Checklist
+             * @description Checks a reviewer must confirm to approve this kind
+             */
+            review_checklist: string[];
             source: components["schemas"]["SourceOut"];
             /**
              * State
@@ -978,6 +1006,8 @@ export interface components {
             chapter_title: string;
             /** Created By */
             created_by: string | null;
+            /** Family Id */
+            family_id: string | null;
             /** Grade Number */
             grade_number: number;
             /**
@@ -985,8 +1015,11 @@ export interface components {
              * Format: uuid
              */
             id: string;
-            /** Kind */
-            kind: string;
+            /**
+             * Kind
+             * @enum {string}
+             */
+            kind: "lesson" | "mcq";
             /**
              * Open Feedback
              * @description Change requests on the working version not yet addressed.
@@ -994,6 +1027,8 @@ export interface components {
             open_feedback: number;
             /** Published Version */
             published_version: number | null;
+            /** Quarantine Level */
+            quarantine_level: ("SOFT" | "VOID" | "KEY_ERROR") | null;
             /**
              * State
              * @enum {string}
@@ -1114,8 +1149,25 @@ export interface components {
             /** Updated At */
             updated_at?: string | null;
         };
+        /** QuarantineIn */
+        QuarantineIn: {
+            /**
+             * Level
+             * @description Required for questions (§5.7); not used for lessons
+             */
+            level?: ("SOFT" | "VOID" | "KEY_ERROR") | null;
+            /** Reason */
+            reason: string;
+        };
         /** ReviewIn */
         ReviewIn: {
+            /**
+             * Checklist
+             * @description Checks confirmed by the reviewer; questions require every check to approve
+             */
+            checklist?: {
+                [key: string]: boolean;
+            };
             /** Comment */
             comment: string;
             /**
@@ -1126,6 +1178,10 @@ export interface components {
         };
         /** ReviewOut */
         ReviewOut: {
+            /** Checklist */
+            checklist: {
+                [key: string]: boolean;
+            };
             /** Comment */
             comment: string;
             /**
@@ -1428,6 +1484,12 @@ export interface components {
              * @default false
              */
             for_publication: boolean;
+            /**
+             * Kind
+             * @default lesson
+             * @enum {string}
+             */
+            kind: "lesson" | "mcq";
             /** Source Refs */
             source_refs?: {
                 [key: string]: unknown;
@@ -2282,7 +2344,7 @@ export interface operations {
         };
         requestBody: {
             content: {
-                "application/json": components["schemas"]["ChangeReasonIn"];
+                "application/json": components["schemas"]["QuarantineIn"];
             };
         };
         responses: {
@@ -2518,6 +2580,7 @@ export interface operations {
                 state?: string | null;
                 availability?: string | null;
                 grade?: number | null;
+                kind?: string | null;
                 subject?: string | null;
                 mine?: boolean;
                 limit?: number;

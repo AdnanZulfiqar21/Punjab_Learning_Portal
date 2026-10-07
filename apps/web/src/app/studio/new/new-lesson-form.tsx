@@ -1,7 +1,7 @@
 "use client";
 
 import { useActionState, useState, useTransition } from "react";
-import { createLesson } from "@/app/actions/studio";
+import { createItem } from "@/app/actions/studio";
 import { chapterTopics, type TopicChoice } from "@/app/actions/studio-read";
 
 export type BookChoice = { key: string; label: string; chapters: { id: string; label: string }[] };
@@ -9,7 +9,7 @@ export type BookChoice = { key: string; label: string; chapters: { id: string; l
 const field = "w-full rounded-lg border border-border bg-surface px-3 py-2.5";
 
 export function NewLessonForm({ books }: { books: BookChoice[] }) {
-  const [state, action, pending] = useActionState(createLesson, undefined);
+  const [state, action, pending] = useActionState(createItem, undefined);
   const [bookKey, setBookKey] = useState(books[0]?.key ?? "");
   const [chapterId, setChapterId] = useState("");
   const [topics, setTopics] = useState<TopicChoice[]>([]);
@@ -24,6 +24,17 @@ export function NewLessonForm({ books }: { books: BookChoice[] }) {
 
   return (
     <form action={action} className="space-y-5">
+      <fieldset className="space-y-2">
+        <legend className="font-medium">What are you writing?</legend>
+        <div className="flex flex-wrap gap-3">
+          <label className="flex items-center gap-2 rounded-lg border border-border bg-surface px-3 py-2">
+            <input type="radio" name="kind" value="lesson" defaultChecked /> Lesson
+          </label>
+          <label className="flex items-center gap-2 rounded-lg border border-border bg-surface px-3 py-2">
+            <input type="radio" name="kind" value="mcq" /> Multiple-choice question
+          </label>
+        </div>
+      </fieldset>
       <div className="space-y-1">
         <label htmlFor="book" className="font-medium">
           Book
@@ -74,7 +85,7 @@ export function NewLessonForm({ books }: { books: BookChoice[] }) {
       </div>
       <div className="space-y-1">
         <label htmlFor="title" className="font-medium">
-          Lesson title
+          Title
         </label>
         <input id="title" name="title" required minLength={3} maxLength={200} className={field} />
       </div>

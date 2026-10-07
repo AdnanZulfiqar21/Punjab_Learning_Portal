@@ -23,6 +23,7 @@ import { LessonBlocks } from "@/components/lesson-blocks";
 import { Badge, Notice } from "@/components/ui";
 import { GRADE_LABEL } from "@/lib/format";
 import { BlockEditor, normaliseBlocks, SourceRefsEditor } from "./block-editor";
+import { McqEditor, McqPreview, mcqSections, normaliseMcq } from "./mcq-editor";
 
 const STATE_LABEL: Record<string, string> = {
   draft: "Draft",
@@ -40,7 +41,35 @@ const AVAILABILITY_LABEL: Record<string, string> = {
 const AUTOSAVE_MS = 1500;
 const when = (iso: string) => new Date(iso).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" });
 
-type Draft = { title: string; blocks: Block[]; refs: SourceRef[] };
+type Body = Record<string, unknown>;
+type Draft = { title: string; body: Body; refs: SourceRef[] };
+
+const blocksOf = (body: Body) => (Array.isArray(body.blocks) ? (body.blocks as Block[]) : []);
+
+function normaliseBody(kind: string, body: Body): Body {
+  return kind === "mcq" ? normaliseMcq(body) : { blocks: normaliseBlocks(blocksOf(body)) };
+}
+
+function sections(kind: string, body: Body): { label: string; text: string }[] {
+  if (kind === "mcq") return mcqSections(body);
+  return blocksOf(body).map((b, i) => ({ label: `Block ${i + 1}`, text: JSON.stringify(b) }));
+}
+
+function summarise(kind: string, label: string, text: string | undefined): string {
+  if (text === undefined) return "(none)";
+  if (kind !== "mcq" || label === "Correct answer") {
+    try {
+      const b = JSON.parse(text) as Block;
+      if (b && typeof b === "object" && "type" in b) {
+        return `${b.type}: ${String(b.text ?? b.caption ?? b.latex ?? (Array.isArray(b.items) ? b.items.join(", ") : "")).slice(0, 160)}`;
+      }
+    } catch {
+      /* plain value */
+    }
+    return text.slice(0, 160);
+  }
+  return text.replace(/[{}"[\]]/g, " ").replace(/\s+/g, " ").slice(0, 160);
+}
 type SaveStatus = { kind: "saved" | "dirty" | "saving" | "error"; message?: string; errors?: string[] };
 
 // ------------------------------------------------------------------ local recovery (P06.S1.T3)
@@ -68,7 +97,7 @@ export function Workspace({ item, history, myId }: { item: StudioItem; history: 
   const editable = item.actions.edit && !!working;
   const initial: Draft = {
     title: item.title,
-    blocks: (working?.body.blocks as Block[] | undefined) ?? [],
+    body: (working?.body as Body | undefined) ?? {},
     refs: (working?.source_refs as SourceRef[] | undefined) ?? [],
   };
   const [draft, setDraft] = useState<Draft>(initial);
@@ -86,7 +115,7 @@ export function Workspace({ item, history, myId }: { item: StudioItem; history: 
     if (!editable || recoveryDismissed || !stored) return null;
     try {
       const parsed = JSON.parse(stored) as Draft & { baseRevision: number; at: string };
-      const same = JSON.stringify([parsed.title, parsed.blocks, parsed.refs]) === JSON.stringify([initial.title, initial.blocks, initial.refs]);
+      const same = JSON.stringify([parsed.title, parsed.body, parsed.refs]) === JSON.stringify([initial.title, initial.body, initial.refs]);
       return parsed.baseRevision === working?.revision && !same ? parsed : null;
     } catch {
       return null;
@@ -98,7 +127,7 @@ export function Workspace({ item, history, myId }: { item: StudioItem; history: 
   const save = useCallback(
     async (next: Draft, rev: number): Promise<boolean> => {
       setStatus({ kind: "saving" });
-      const res = await saveDraft(item.id, rev, next.title, { blocks: normaliseBlocks(next.blocks) }, next.refs);
+      const res = await saveDraft(item.id, rev, next.title, normaliseBody(item.kind, next.body), next.refs);
       if (res.ok) {
         revisionRef.current = res.item.working?.revision ?? rev + 1;
         setRevision(revisionRef.current);
@@ -114,7 +143,7 @@ export function Workspace({ item, history, myId }: { item: StudioItem; history: 
       }
       return false;
     },
-    [item.id],
+    [item.id, item.kind],
   );
 
   function change(next: Draft) {
@@ -185,7 +214,7 @@ export function Workspace({ item, history, myId }: { item: StudioItem; history: 
           <Notice tone="warn" title="Unsaved changes from an earlier session">
             <span className="block">Saved in this browser at {when(recovery.at)} but never reached the server.</span>
             <span className="mt-2 flex gap-2">
-              <button type="button" className="underline" onClick={() => { setRecoveryDismissed(true); change({ title: recovery.title, blocks: recovery.blocks, refs: recovery.refs }); }}>
+              <button type="button" className="underline" onClick={() => { setRecoveryDismissed(true); change({ title: recovery.title, body: recovery.body, refs: recovery.refs }); }}>
                 Restore them
               </button>
               <button type="button" className="underline" onClick={() => { writeLocal(item.id, null); setRecoveryDismissed(true); }}>
@@ -194,7 +223,7 @@ export function Workspace({ item, history, myId }: { item: StudioItem; history: 
             </span>
           </Notice>
         )}
-        {conflict && <ConflictPanel conflict={conflict} mine={draft} onResolve={resolveConflict} />}
+        {conflict && <ConflictPanel kind={item.kind} conflict={conflict} mine={draft} onResolve={resolveConflict} />}
         <div role="tablist" aria-label="View" className="flex gap-2">
           {(["edit", "preview"] as const).map((t) => (
             <button
@@ -226,7 +255,11 @@ export function Workspace({ item, history, myId }: { item: StudioItem; history: 
               </label>
               <input id="title" value={draft.title} onChange={(e) => change({ ...draft, title: e.target.value })} className="w-full rounded-lg border border-border bg-surface px-3 py-2" maxLength={200} />
             </div>
-            <BlockEditor blocks={draft.blocks} onChange={(blocks) => change({ ...draft, blocks })} />
+            {item.kind === "mcq" ? (
+              <McqEditor body={draft.body} onChange={(body) => change({ ...draft, body })} />
+            ) : (
+              <BlockEditor blocks={blocksOf(draft.body)} onChange={(blocks) => change({ ...draft, body: { blocks } })} />
+            )}
             <SourceRefsEditor
               refs={draft.refs}
               onChange={(refs) => change({ ...draft, refs })}
@@ -239,7 +272,7 @@ export function Workspace({ item, history, myId }: { item: StudioItem; history: 
         ) : (
           <article className="space-y-4 rounded-xl border border-border bg-surface p-5">
             <h2 className="text-2xl font-semibold tracking-tight">{draft.title}</h2>
-            <LessonBlocks blocks={draft.blocks} headingOffset={1} />
+            {item.kind === "mcq" ? <McqPreview body={draft.body} /> : <LessonBlocks blocks={blocksOf(draft.body)} headingOffset={1} />}
             <SourceList refs={draft.refs} label={item.source.source_id} />
           </article>
         )}
@@ -247,7 +280,11 @@ export function Workspace({ item, history, myId }: { item: StudioItem; history: 
           <details className="rounded-xl border border-border bg-surface p-4">
             <summary className="cursor-pointer font-medium">Learners currently see version {item.published.number}</summary>
             <div className="mt-4">
-              <LessonBlocks blocks={item.published.body.blocks as Block[]} headingOffset={1} />
+              {item.kind === "mcq" ? (
+                <McqPreview body={item.published.body as Body} />
+              ) : (
+                <LessonBlocks blocks={blocksOf(item.published.body as Body)} headingOffset={1} />
+              )}
             </div>
           </details>
         )}
@@ -311,13 +348,21 @@ function SourceList({ refs, label }: { refs: SourceRef[]; label: string }) {
   );
 }
 
-function ConflictPanel({ conflict, mine, onResolve }: { conflict: ConflictState; mine: Draft; onResolve: (k: "theirs" | "mine") => void }) {
-  const theirs = conflict.body.blocks;
-  const n = Math.max(theirs.length, mine.blocks.length);
-  const rows = Array.from({ length: n }, (_, i) => ({ i, a: theirs[i], b: mine.blocks[i] })).filter(
-    (r) => JSON.stringify(r.a) !== JSON.stringify(r.b),
-  );
-  const summary = (b?: Block) => (b ? `${b.type}: ${String(b.text ?? b.caption ?? b.latex ?? (Array.isArray(b.items) ? b.items.join(", ") : "")).slice(0, 160)}` : "(none)");
+function ConflictPanel({
+  kind,
+  conflict,
+  mine,
+  onResolve,
+}: {
+  kind: string;
+  conflict: ConflictState;
+  mine: Draft;
+  onResolve: (k: "theirs" | "mine") => void;
+}) {
+  const theirs = new Map(sections(kind, conflict.body as Body).map((x) => [x.label, x.text]));
+  const yours = new Map(sections(kind, mine.body).map((x) => [x.label, x.text]));
+  const labels = [...new Set([...theirs.keys(), ...yours.keys()])];
+  const rows = labels.filter((l) => theirs.get(l) !== yours.get(l)).map((l) => ({ l, a: theirs.get(l), b: yours.get(l) }));
   return (
     <section role="alert" className="space-y-3 rounded-xl border border-warn bg-warn-soft p-4">
       <h2 className="font-semibold">Someone else saved a newer version</h2>
@@ -331,14 +376,14 @@ function ConflictPanel({ conflict, mine, onResolve }: { conflict: ConflictState;
         </p>
       )}
       <ul className="space-y-2 text-sm">
-        {rows.length === 0 && <li>The blocks are identical; only source references or the title differ.</li>}
+        {rows.length === 0 && <li>The content is identical; only source references or the title differ.</li>}
         {rows.map((r) => (
-          <li key={r.i} className="grid gap-1 rounded-lg bg-surface p-2 sm:grid-cols-2">
+          <li key={r.l} className="grid gap-1 rounded-lg bg-surface p-2 sm:grid-cols-2">
             <span>
-              <span className="font-medium">Block {r.i + 1}, theirs:</span> {summary(r.a)}
+              <span className="font-medium">{r.l}, theirs:</span> {summarise(kind, r.l, r.a)}
             </span>
             <span>
-              <span className="font-medium">Yours:</span> {summary(r.b)}
+              <span className="font-medium">Yours:</span> {summarise(kind, r.l, r.b)}
             </span>
           </li>
         ))}
@@ -361,7 +406,10 @@ function ActionsPanel({ item, myId, flush }: { item: StudioItem; myId: string; f
   const [pending, start] = useTransition();
   const [result, setResult] = useState<Extract<ActionResult, { ok: false }> | null>(null);
   const [text, setText] = useState("");
+  const [checks, setChecks] = useState<Record<string, boolean>>({});
+  const [level, setLevel] = useState("");
   const a = item.actions;
+  const checklistDone = item.review_checklist.every((c) => checks[c]);
 
   function run(fn: () => Promise<ActionResult>, needsFlush = false) {
     setResult(null);
@@ -400,6 +448,28 @@ function ActionsPanel({ item, myId, flush }: { item: StudioItem; myId: string; f
           ))}
         </ul>
       )}
+      {a.review && item.review_checklist.length > 0 && (
+        <fieldset className="space-y-1 rounded-lg border border-border p-2 text-sm">
+          <legend className="px-1 font-medium">Checks before approving</legend>
+          {item.review_checklist.map((c) => (
+            <label key={c} className="flex items-center gap-2 capitalize">
+              <input type="checkbox" checked={!!checks[c]} onChange={(e) => setChecks({ ...checks, [c]: e.target.checked })} />
+              {c}
+            </label>
+          ))}
+        </fieldset>
+      )}
+      {a.quarantine && item.quarantine_levels.length > 0 && (
+        <label className="block space-y-1 text-sm">
+          <span className="font-medium">Quarantine level</span>
+          <select value={level} onChange={(e) => setLevel(e.target.value)} className="w-full rounded-lg border border-border bg-surface px-2 py-1.5">
+            <option value="">Choose…</option>
+            <option value="SOFT">Soft: suspected defect, under review</option>
+            <option value="VOID">Void: no valid answer</option>
+            <option value="KEY_ERROR">Key error: published key is wrong</option>
+          </select>
+        </label>
+      )}
       {(commentNeeded || reasonNeeded) && (
         <div className="space-y-1">
           <label htmlFor="action-text" className="text-sm font-medium">
@@ -426,10 +496,10 @@ function ActionsPanel({ item, myId, flush }: { item: StudioItem; myId: string; f
         )}
         {a.review && (
           <>
-            <button type="button" className={primary} disabled={pending || short} onClick={() => run(() => reviewItem(item.id, "approve", text.trim()))}>
+            <button type="button" className={primary} disabled={pending || short || !checklistDone} onClick={() => run(() => reviewItem(item.id, "approve", text.trim(), checks))}>
               Approve
             </button>
-            <button type="button" className={secondary} disabled={pending || short} onClick={() => run(() => reviewItem(item.id, "request_changes", text.trim()))}>
+            <button type="button" className={secondary} disabled={pending || short} onClick={() => run(() => reviewItem(item.id, "request_changes", text.trim(), checks))}>
               Request changes
             </button>
           </>
@@ -445,7 +515,12 @@ function ActionsPanel({ item, myId, flush }: { item: StudioItem; myId: string; f
           </button>
         )}
         {a.quarantine && (
-          <button type="button" className={danger} disabled={pending || short} onClick={() => run(() => quarantineItem(item.id, text.trim()))}>
+          <button
+            type="button"
+            className={danger}
+            disabled={pending || short || (item.quarantine_levels.length > 0 && !level)}
+            onClick={() => run(() => quarantineItem(item.id, text.trim(), level || null))}
+          >
             Quarantine (hide from learners)
           </button>
         )}

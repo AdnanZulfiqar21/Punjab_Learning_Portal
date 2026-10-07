@@ -49,7 +49,8 @@ class VersionStatus(StrEnum):
     superseded = "superseded"  # an older published version, or a draft abandoned by retirement
 
 
-ITEM_KINDS = ("lesson",)  # questions and rubrics get their own modules (P08, W-tasks) on the same workflow rules
+ITEM_KINDS = ("lesson", "mcq")  # see kinds.py; written questions and rubrics follow (W-tasks)
+QUARANTINE_LEVELS = ("SOFT", "VOID", "KEY_ERROR")  # §5.7, questions only
 
 
 class ContentItem(Base):
@@ -63,6 +64,10 @@ class ContentItem(Base):
         CheckConstraint(
             "availability not in ('live','quarantined') or published_version_id is not null",
             name="content_item_live_has_version",
+        ),
+        CheckConstraint(
+            f"quarantine_level is null or quarantine_level in ({', '.join(repr(q) for q in QUARANTINE_LEVELS)})",
+            name="content_item_quarantine_level",
         ),
         Index("ix_content_item_queue", "state", "grade_number", "subject_code"),
         Index("ix_content_item_live", "chapter_id", postgresql_where=text("availability = 'live'")),
@@ -88,6 +93,10 @@ class ContentItem(Base):
         ForeignKey("content_version.id", ondelete="RESTRICT", use_alter=True, name="fk_item_published_version")
     )
     availability_reason: Mapped[str | None] = mapped_column(Text)  # quarantine/retirement reason
+    quarantine_level: Mapped[str | None] = mapped_column(String(12))  # SOFT / VOID / KEY_ERROR for questions (§5.7)
+    # Canonical question family (P08.S3.T1): reviewed variants/translations share one family, so sampling and exposure
+    # caps treat them as one underlying item. Null for lessons.
+    family_id: Mapped[uuid.UUID | None] = mapped_column(UUID(as_uuid=True), index=True)
 
     versions: Mapped[list[ContentVersion]] = relationship(
         back_populates="item", foreign_keys="ContentVersion.item_id", order_by="ContentVersion.number"
@@ -148,6 +157,8 @@ class ReviewDecision(Base):
     reviewer_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("app_user.id", ondelete="RESTRICT"))
     decision: Mapped[str] = mapped_column(String(20))
     comment: Mapped[str] = mapped_column(Text)
+    # Checks the reviewer confirmed (e.g. accuracy, ambiguity, units, diagrams, grammar, mapping for questions).
+    checklist: Mapped[dict[str, bool]] = mapped_column(JSONB, default=dict, server_default="{}")
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
 
     version: Mapped[ContentVersion] = relationship(back_populates="reviews")
