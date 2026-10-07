@@ -1,6 +1,6 @@
 # RESUME STATE
 
-**Updated:** 2026-10-07 · **Branch:** `feat/web-auth` (from `main` @ `69f9567`) · PR #6 (`fix/search-e2e-flake`) open against `main`
+**Updated:** 2026-10-07 · **Branch:** `feat/mobile-auth` · PR #6 and PR #7 (web sessions) merged to `main`
 
 ## Where we are
 Waves A/B/D/E are in progress (roadmap §18). Merged to `main`:
@@ -9,7 +9,9 @@ Waves A/B/D/E are in progress (roadmap §18). Merged to `main`:
 - Next.js catalogue journey with build-once runtime config (IMPL-10).
 - Expo mobile shell, contracts package, CI.
 
-On `feat/web-auth`: app sessions and the web BFF with sign-in, sign-out, protected routes, session list/revoke and onboarding (IMPL-12).
+Also merged: app sessions and the web BFF with sign-in, sign-out, protected routes, session list/revoke and onboarding (IMPL-12).
+
+On `feat/mobile-auth`: native Account tab, secure-store sessions and onboarding (IMPL-13).
 
 Reviewed teaching content does not exist yet (BLOCKERS B01), so learner pages stop at textbook structure.
 
@@ -24,8 +26,8 @@ cd ../mobile && npx expo start --web --port 8190            # mobile screens on 
 ```
 
 ## Next unblocked tasks (in order)
-1. **Merge PR #6, then `feat/web-auth`** (merge `main` in; never rebase or force-push pushed branches, GIT-01).
-2. **Native auth/onboarding (P04.S1.T2/P04.S3.T1 mobile):** dev sign-in → `POST /v1/sessions` (kind `native`), token in `expo-secure-store`, profile screens. PKCE waits for B04.
+1. **Merge `feat/mobile-auth`** (merge `main` in; never rebase or force-push pushed branches, GIT-01).
+2. *(done: native auth/onboarding, IMPL-13; PKCE waits for B04)*
 3. **CMS foundations (P06):** staff workspace, import batch UI, draft editing, independent review (author ≠ approver), publication controls, audit history.
 4. **Question bank/attempt engine (P08/P10):** versioned items and forms, MCQ runtime, durable saves (§10.5), deadlines, receipts. Technical fixtures only.
 5. **Written assessment (W tasks):** question/rubric records, private scan upload, page mapping, receipts, reviewer workflow.

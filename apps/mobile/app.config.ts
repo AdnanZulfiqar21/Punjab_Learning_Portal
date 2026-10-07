@@ -61,6 +61,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   web: { output: "static", favicon: "./assets/images/favicon.png" },
   plugins: [
     "expo-router",
+    "expo-secure-store",
     ["expo-splash-screen", { backgroundColor: "#0B5D73", image: "./assets/images/splash-icon.png", imageWidth: 76 }],
   ],
   experiments: { typedRoutes: true, reactCompiler: true },
