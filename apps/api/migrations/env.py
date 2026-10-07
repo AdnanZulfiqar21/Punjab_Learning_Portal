@@ -12,6 +12,7 @@ import portal_api.modules.content.models
 import portal_api.modules.curriculum.models
 import portal_api.modules.identity.models
 import portal_api.modules.identity.sessions
+import portal_api.modules.support.models
 import portal_api.modules.written.models
 import portal_api.modules.written.review  # noqa: F401
 from portal_api.config import get_settings

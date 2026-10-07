@@ -94,6 +94,24 @@ class QuestionResult(BaseModel):
     criteria: list[CriterionResult]
 
 
+class RecheckOut(BaseModel):
+    status: Literal["unavailable", "available", "requested", "closed"]
+    window_ends_at: datetime | None
+    reason: str | None
+
+
+class HistoryEntry(BaseModel):
+    version: int
+    total_units: int
+    case_kind: str
+    released_at: datetime
+
+
+class RecheckIn(BaseModel):
+    reason: str = Field(min_length=10, max_length=2000)
+    positions: list[int] = Field(min_length=1, max_length=20)
+
+
 class WrittenResultOut(BaseModel):
     status: Literal["pending", "released"]
     version: int | None
@@ -102,6 +120,10 @@ class WrittenResultOut(BaseModel):
     released_at: datetime | None
     decision_method: str | None
     questions: list[QuestionResult]
+    recheck: RecheckOut
+    history: list[HistoryEntry] = Field(
+        description="Every released version, oldest first; corrections never erase history"
+    )
 
 
 def _summary(case: review.WrittenReviewCase, who: Principal) -> dict[str, Any]:
@@ -231,6 +253,8 @@ def my_result(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, response: Re
             released_at=None,
             decision_method=None,
             questions=[],
+            recheck=RecheckOut(**review.recheck_state(db, attempt.id)),
+            history=[],
         )
     ctx_questions = {str(fi.position): fi for fi in form.items}
     questions = []
@@ -258,6 +282,10 @@ def my_result(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, response: Re
                 ],
             )
         )
+    history = [
+        HistoryEntry(version=h.version, total_units=h.total_units, case_kind=h.case_kind, released_at=h.created_at)
+        for h in review.released_history(db, attempt.id)
+    ]
     return WrittenResultOut(
         status="released",
         version=sv.version,
@@ -266,4 +294,19 @@ def my_result(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, response: Re
         released_at=sv.created_at,
         decision_method=sv.decision_method,
         questions=questions,
+        recheck=RecheckOut(**review.recheck_state(db, attempt.id)),
+        history=history,
     )
+
+
+@router.post(
+    "/written-attempts/{attempt_id}/recheck",
+    response_model=RecheckOut,
+    summary="Ask a teacher to recheck released marks (same evidence; no extra allowance)",
+)
+def request_recheck(
+    db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, body: RecheckIn, response: Response
+) -> RecheckOut:
+    _private(response)
+    review.request_recheck(db, who, attempt_id, body.reason, body.positions)
+    return RecheckOut(**review.recheck_state(db, attempt_id))

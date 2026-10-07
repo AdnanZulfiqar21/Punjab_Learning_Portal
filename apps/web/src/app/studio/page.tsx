@@ -25,6 +25,9 @@ export default function StudioPage({ searchParams }: PageProps<"/studio">) {
           <p className="text-muted">Drafts stay private until an independent reviewer approves them and they are published.</p>
         </div>
         <div className="flex gap-2">
+        <Link href="/studio/support" className="rounded-lg border border-border bg-surface px-4 py-2.5 font-medium hover:border-accent">
+          Support queue
+        </Link>
         <Link href="/studio/marking" className="rounded-lg border border-border bg-surface px-4 py-2.5 font-medium hover:border-accent">
           Written marking
         </Link>

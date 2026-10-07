@@ -174,6 +174,13 @@ def lease(db: Session, who: Principal, case_id: uuid.UUID) -> WrittenReviewCase:
     case = _case(db, who, case_id, lock=True)
     if case.status != "queued":
         raise Conflict("This case has already been released.")
+    if case.case_kind == "recheck" and db.scalar(
+        select(WrittenScoreVersion.id).where(
+            WrittenScoreVersion.attempt_id == case.attempt_id, WrittenScoreVersion.assessor_id == who.user.id
+        )
+    ):
+        # W06.S2.T1: a recheck is an independent second look, never the original marker grading their own work.
+        raise Forbidden("A recheck must be marked by a teacher who has not marked this script before.")
     now = _now(db)
     if case.lease_holder not in (None, who.user.id) and case.lease_expires_at and case.lease_expires_at > now:
         raise Conflict("Another teacher is marking this script.", lease_expires_at=case.lease_expires_at.isoformat())
@@ -352,4 +359,85 @@ def released_result(db: Session, attempt_id: uuid.UUID) -> WrittenScoreVersion |
         .where(WrittenScoreVersion.attempt_id == attempt_id, WrittenScoreVersion.released.is_(True))
         .order_by(WrittenScoreVersion.version.desc())
         .limit(1)
+    )
+
+
+RECHECK_WINDOW = timedelta(days=14)
+
+
+def recheck_state(db: Session, attempt_id: uuid.UUID) -> dict[str, Any]:
+    """Whether the learner can ask for a recheck of their released result (W06.S2.T1, §20.10: 14-day window)."""
+    released = released_result(db, attempt_id)
+    open_case = db.scalar(
+        select(WrittenReviewCase).where(
+            WrittenReviewCase.attempt_id == attempt_id,
+            WrittenReviewCase.case_kind == "recheck",
+            WrittenReviewCase.status == "queued",
+        )
+    )
+    if released is None:
+        return {"status": "unavailable", "window_ends_at": None, "reason": None}
+    first_release = db.scalar(
+        select(WrittenScoreVersion.created_at)
+        .where(WrittenScoreVersion.attempt_id == attempt_id, WrittenScoreVersion.released.is_(True))
+        .order_by(WrittenScoreVersion.version)
+        .limit(1)
+    )
+    assert first_release is not None
+    ends = first_release + RECHECK_WINDOW
+    if open_case is not None:
+        return {"status": "requested", "window_ends_at": ends, "reason": open_case.reason}
+    if _now(db) > ends:
+        return {"status": "closed", "window_ends_at": ends, "reason": None}
+    return {"status": "available", "window_ends_at": ends, "reason": None}
+
+
+def request_recheck(db: Session, who: Principal, attempt_id: uuid.UUID, reason: str, positions: list[int]) -> None:
+    """Open a recheck case for the same original evidence. No new allowance is charged (consumption happens once)."""
+    attempt = db.scalar(select(WrittenAttempt).where(WrittenAttempt.id == attempt_id).with_for_update())
+    if attempt is None or attempt.user_id != who.user.id:
+        raise NotFound("Attempt not found.")
+    state = recheck_state(db, attempt_id)
+    if state["status"] == "requested":
+        raise Conflict("A recheck is already in progress for this script.")
+    if state["status"] != "available":
+        raise Conflict("Rechecks are available for 14 days after your marks are released.")
+    form = db.get(WrittenForm, attempt.form_id)
+    assert form is not None
+    valid = {fi.position for fi in form.items}
+    if not positions or not set(positions) <= valid:
+        raise Unprocessable("Choose the question(s) you want rechecked.")
+    seq = db.scalar(
+        select(func.max(WrittenReviewCase.opened_seq)).where(
+            WrittenReviewCase.attempt_id == attempt_id, WrittenReviewCase.case_kind == "recheck"
+        )
+    )
+    db.add(
+        WrittenReviewCase(
+            attempt_id=attempt_id,
+            case_kind="recheck",
+            opened_seq=(seq or 0) + 1,
+            grade_number=form.grade_number,
+            subject_code=form.subject_code,
+            reason=f"Questions {', '.join(map(str, sorted(set(positions))))}: {reason.strip()}",
+        )
+    )
+    record(
+        db,
+        actor=who.user.id,
+        action="written.recheck_requested",
+        target_type="written_attempt",
+        target_id=str(attempt_id),
+        details={"positions": sorted(set(positions))},
+    )
+    db.commit()
+
+
+def released_history(db: Session, attempt_id: uuid.UUID) -> list[WrittenScoreVersion]:
+    return list(
+        db.scalars(
+            select(WrittenScoreVersion)
+            .where(WrittenScoreVersion.attempt_id == attempt_id, WrittenScoreVersion.released.is_(True))
+            .order_by(WrittenScoreVersion.version)
+        )
     )

@@ -21,6 +21,16 @@ export async function requireStaff(next: string): Promise<{ me: Me; token: strin
   return user;
 }
 
+const SUPPORT_ROLES = new Set(["support", "subject_reviewer", "academic_adjudicator"]);
+
+// Support staff see every request; subject reviewers see academic reports in their scope (the API filters).
+export async function requireSupportStaff(next: string): Promise<{ me: Me; token: string; isSupport: boolean }> {
+  const user = await currentUser();
+  if (!user) redirect(`/signin?next=${encodeURIComponent(next)}`);
+  if (!user.me.roles.some((r) => SUPPORT_ROLES.has(r))) throw new StudioForbiddenError();
+  return { ...user, isSupport: user.me.roles.includes("support") };
+}
+
 export type QueueFilters = { state?: string; availability?: string; grade?: string; subject?: string; mine?: string };
 
 export async function getQueue(token: string, filters: QueueFilters): Promise<StudioItemSummary[]> {

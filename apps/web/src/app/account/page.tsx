@@ -64,6 +64,11 @@ async function Account() {
               Content studio
             </Link>
           )}
+          {me.roles.some((r) => ["support", "subject_reviewer", "academic_adjudicator"].includes(r)) && (
+            <Link href="/studio/support" className="inline-block text-sm text-accent underline-offset-2 hover:underline">
+              Support queue
+            </Link>
+          )}
         </div>
       </section>
 

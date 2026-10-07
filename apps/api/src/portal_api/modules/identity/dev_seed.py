@@ -28,6 +28,7 @@ FIXTURES: list[tuple[str, list[str]]] = [
     ("studio-author2@example.com", ["content_author"]),
     ("studio-reviewer@example.com", ["subject_reviewer"]),
     ("studio-publisher@example.com", ["publisher"]),
+    ("studio-support@example.com", ["support"]),
 ]
 
 

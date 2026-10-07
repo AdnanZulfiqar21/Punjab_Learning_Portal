@@ -197,4 +197,14 @@ test("a teacher marks a submitted script and the learner sees the released marks
   await expect(page.getByText(/marked by a teacher/)).toBeVisible(AUTH);
   await expect(page.getByText("Question 1: 1 / 5")).toBeVisible();
   await expect(page.getByText("Fixture reason: half the expected points.")).toBeVisible();
+
+  // A recheck is asked for once, inside the window, for named questions; it doesn't use more allowance.
+  await page.getByText("Ask for a recheck").click();
+  await page.getByRole("group", { name: "Which questions?" }).getByLabel("Question 1").check();
+  await page.getByLabel("Why should it be marked again?").fill("Fixture reason: please look at part (a) again.");
+  await page.getByRole("button", { name: "Request recheck" }).click();
+  await expect(page.getByText("Recheck requested")).toBeVisible(AUTH);
+  await expect(page.getByText("Ask for a recheck")).toHaveCount(0);
+  await teacher.goto("/studio/marking");
+  await expect(teacher.getByRole("listitem").filter({ hasText: `Script ${attemptId.slice(0, 8)}` }).getByText("Recheck")).toBeVisible(AUTH);
 });

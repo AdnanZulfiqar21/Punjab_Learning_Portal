@@ -7,6 +7,7 @@ import { useEffect, useRef, useState } from "react";
 import type { WrittenAttempt, WrittenPage, WrittenResult } from "@portal/contracts";
 import { saveMapping, sealScript } from "@/app/actions/written";
 import { LessonBlocks } from "@/components/lesson-blocks";
+import { RecheckPanel } from "./recheck-panel";
 import { Notice } from "@/components/ui";
 
 type Slot = { pages: string[]; unanswered: boolean };
@@ -227,6 +228,7 @@ export function WrittenRunner({ attempt, result = null }: { attempt: WrittenAtte
                   </ul>
                 </div>
               ))}
+              <RecheckPanel attemptId={attempt.id} result={result} marks={marks} />
             </div>
           )}
         </section>
