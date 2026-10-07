@@ -111,3 +111,35 @@ test("timed practice shows the countdown and the tolerance rule", async ({ page 
   await expect(page).toHaveURL(/:\d+\/practice\/attempt\/[0-9a-f-]{36}$/, AUTH);
   await expect(page.getByLabel("Time remaining")).toHaveText(/^[45]:\d\d$/, AUTH);
 });
+
+test("written practice: upload a page, map it, declare a part unanswered and submit once", async ({ page }) => {
+  await newLearner(page);
+  await page.goto("/practice/written?grade=11&subject=biology");
+  await page.getByRole("group", { name: "Chapters" }).getByRole("checkbox").first().check();
+  await page.getByRole("button", { name: "Start written test" }).click();
+  await expect(page).toHaveURL(/:\d+\/practice\/written\/[0-9a-f-]{36}$/, AUTH);
+  await expect(page.getByText(/Technical fixture written question/)).toBeVisible();
+  await expect(page.getByText("Upload and submit by")).toBeVisible();
+
+  await page.getByLabel("Add photos or a PDF").setInputFiles("e2e/fixtures/synthetic-page.png");
+  const uploaded = page.getByRole("list", { name: "Uploaded pages" });
+  await expect(uploaded.getByText("Page 1 · uploaded, not yet submitted")).toBeVisible(AUTH);
+
+  await page.getByRole("group", { name: /Question 1 \(a\)/ }).getByLabel("Page 1").check();
+  await page.getByRole("group", { name: /Question 1 \(b\)/ }).getByLabel("I didn't answer this").check();
+  await expect(page.getByRole("status").filter({ hasText: /Saved · revision \d+/ })).toBeVisible(AUTH);
+  await page.getByRole("button", { name: "Submit for marking" }).click();
+  await expect(page.getByText("Submitted for marking")).toBeVisible(AUTH);
+  await expect(page.getByText(/1 answered, 1 marked not answered/)).toBeVisible();
+  await expect(uploaded.getByText("Page 1 · submitted")).toBeVisible();
+  await expect(page.getByLabel("Add photos or a PDF")).toHaveCount(0); // no edits after submission
+});
+
+test("uploads are refused from other sites", async ({ page }) => {
+  await newLearner(page);
+  const res = await page.request.post("/practice/written/00000000-0000-0000-0000-000000000000/upload", {
+    data: "x",
+    headers: { Origin: "https://evil.example" },
+  });
+  expect(res.status()).toBe(403);
+});

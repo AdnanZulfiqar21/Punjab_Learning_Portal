@@ -26,6 +26,7 @@ from portal_api.modules.identity.models import AppUser
 
 FIXTURE_PREFIX = "[FIXTURE]"
 COUNT = 8
+WRITTEN_COUNT = 2
 NAMESPACE = uuid.UUID("6f0f3a52-7d0f-4a8b-9c1e-0c5b8a0d4e11")  # deterministic fixture IDs
 
 
@@ -56,35 +57,33 @@ def main(argv: list[str] | None = None) -> int:
         book = db.get(BookEdition, chapter.book_id)
         assert book is not None
         created = 0
-        for i in range(1, COUNT + 1):
-            item_id = uuid.uuid5(NAMESPACE, f"practice-fixture-{i}")
-            if db.get(ContentItem, item_id) is not None:
-                continue
-            key = f"o{(i - 1) % 4 + 1}"
-            body = {
-                "stem": _p(f"Technical fixture question {i}. This is not academic content. Which option is {key}?"),
-                "options": [{"id": f"o{n}", "blocks": _p(f"Fixture option o{n}")} for n in range(1, 5)],
-                "correct_option_id": key,
-                "marks": 1,
-                "shuffle_options": True,
-                "explanation": {"correct": _p(f"Fixture explanation: the fixture key is {key}."), "distractors": {}},
-                "metadata": {},
-                "origin": "original_practice",
-                "language": "en",
+        refs = [
+            {
+                "source_document_id": str(book.source_document_id),
+                "pdf_from": chapter.pdf_start or 1,
+                "pdf_to": chapter.pdf_start or 1,
+                "note": "technical fixture",
             }
-            version_id = uuid.uuid5(NAMESPACE, f"practice-fixture-{i}-v1")
+        ]
+
+        def publish(name: str, kind: str, title: str, body: dict[str, object], parent: uuid.UUID | None = None) -> bool:
+            item_id = uuid.uuid5(NAMESPACE, name)
+            if db.get(ContentItem, item_id) is not None:
+                return False
+            version_id = uuid.uuid5(NAMESPACE, f"{name}-v1")
             db.add(
                 ContentItem(
                     id=item_id,
-                    kind="mcq",
+                    kind=kind,
                     chapter_id=chapter.id,
                     grade_number=11,
                     subject_code="biology",
-                    title=f"{FIXTURE_PREFIX} Practice question {i}",
+                    title=f"{FIXTURE_PREFIX} {title}",
                     state="published",
                     availability="unpublished",  # becomes live once its version exists (constraint order)
                     created_by=author.id,
-                    family_id=item_id,
+                    family_id=item_id if kind in ("mcq", "written") else None,
+                    parent_item_id=parent,
                 )
             )
             db.flush()
@@ -97,15 +96,8 @@ def main(argv: list[str] | None = None) -> int:
                     revision=1,
                     content_schema_version=blocks.CONTENT_SCHEMA_VERSION,
                     body=body,
-                    block_types=["paragraph"],
-                    source_refs=[
-                        {
-                            "source_document_id": str(book.source_document_id),
-                            "pdf_from": chapter.pdf_start or 1,
-                            "pdf_to": chapter.pdf_start or 1,
-                            "note": "technical fixture",
-                        }
-                    ],
+                    block_types=["paragraph"] if kind != "rubric" else [],
+                    source_refs=refs,
                     change_reason=None,
                     created_by=author.id,
                     contributors=[str(author.id)],
@@ -129,9 +121,74 @@ def main(argv: list[str] | None = None) -> int:
                     "note": "technical fixture; bypasses review in dev/test only",
                 },
             )
-            created += 1
+            return True
+
+        for i in range(1, COUNT + 1):
+            key = f"o{(i - 1) % 4 + 1}"
+            body: dict[str, object] = {
+                "stem": _p(f"Technical fixture question {i}. This is not academic content. Which option is {key}?"),
+                "options": [{"id": f"o{n}", "blocks": _p(f"Fixture option o{n}")} for n in range(1, 5)],
+                "correct_option_id": key,
+                "marks": 1,
+                "shuffle_options": True,
+                "explanation": {"correct": _p(f"Fixture explanation: the fixture key is {key}."), "distractors": {}},
+                "metadata": {},
+                "origin": "original_practice",
+                "language": "en",
+            }
+            created += publish(f"practice-fixture-{i}", "mcq", f"Practice question {i}", body)
+
+        # Written questions with reconciled rubrics, so the written-practice journey can run in dev/CI.
+        for i in range(1, WRITTEN_COUNT + 1):
+            q_name = f"written-fixture-{i}"
+            q_body: dict[str, object] = {
+                "question_type": "short",
+                "stem": _p(f"Technical fixture written question {i}. This is not academic content."),
+                "subparts": [
+                    {"id": "a", "label": "(a)", "blocks": _p("Fixture part a."), "max_units": 200},
+                    {"id": "b", "label": "(b)", "blocks": _p("Fixture part b."), "max_units": 300},
+                ],
+                "max_units": 500,
+                "answer_language": "en",
+                "expected_structures": [],
+                "origin": "original_practice",
+            }
+            created += publish(q_name, "written", f"Written question {i}", q_body)
+            r_body: dict[str, object] = {
+                "question_version_id": str(uuid.uuid5(NAMESPACE, f"{q_name}-v1")),
+                "authority": "practice_rubric",
+                "increment_units": 50,
+                "criteria": [
+                    {
+                        "id": "a1",
+                        "subpart_id": "a",
+                        "description": "Fixture criterion for part a",
+                        "max_units": 200,
+                        "levels": [0, 100, 200],
+                        "depends_on": [],
+                    },
+                    {
+                        "id": "b1",
+                        "subpart_id": "b",
+                        "description": "Fixture criterion for part b",
+                        "max_units": 300,
+                        "levels": [0, 150, 300],
+                        "depends_on": [],
+                    },
+                ],
+                "expected_concepts": ["Fixture concept"],
+                "alternative_routes": [],
+            }
+            created += publish(
+                f"{q_name}-rubric",
+                "rubric",
+                f"Rubric for written question {i}",
+                r_body,
+                parent=uuid.uuid5(NAMESPACE, q_name),
+            )
         db.commit()
-    print(f"practice fixtures: {created} created, {COUNT - created} already present (Class XI Biology, first chapter)")
+    total = COUNT + 2 * WRITTEN_COUNT
+    print(f"practice fixtures: {created} created, {total - created} already present (Class XI Biology, first chapter)")
     return 0
 
 
