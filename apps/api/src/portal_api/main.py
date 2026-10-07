@@ -9,6 +9,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from portal_api import errors, observability
 from portal_api.config import get_settings
+from portal_api.modules.assessment.router import router as assessment_router
 from portal_api.modules.content import router as content
 from portal_api.modules.curriculum.router import router as curriculum_router
 from portal_api.modules.identity import dev_auth
@@ -41,6 +42,7 @@ def create_app() -> FastAPI:
     app.include_router(identity_router)
     app.include_router(content.router)
     app.include_router(content.public)
+    app.include_router(assessment_router)
     if settings.dev_auth_enabled:  # refused in staging/production by the startup validator
         app.include_router(dev_auth.router)
     return app

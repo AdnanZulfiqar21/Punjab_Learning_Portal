@@ -39,6 +39,91 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/attempts/{attempt_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Resume: questions, saved answers, timing */
+        get: operations["get_attempt_v1_attempts__attempt_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/attempts/{attempt_id}/answers": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Save answer operations (§10.5) */
+        post: operations["save_answers_v1_attempts__attempt_id__answers_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/attempts/{attempt_id}/items/{position}/reveal": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Immediate-feedback practice: check one saved answer (locks it) */
+        post: operations["reveal_v1_attempts__attempt_id__items__position__reveal_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/attempts/{attempt_id}/result": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Score and review after submission */
+        get: operations["result_v1_attempts__attempt_id__result_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/attempts/{attempt_id}/submit": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Final submission (idempotent) */
+        post: operations["submit_v1_attempts__attempt_id__submit_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/books/{book_id}": {
         parameters: {
             query?: never;
@@ -255,6 +340,57 @@ export interface paths {
         post?: never;
         /** Revoke Session */
         delete: operations["revoke_session_v1_me_sessions__session_id__delete"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/practice/availability": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Approved questions per chapter */
+        get: operations["availability_v1_practice_availability_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/practice/forms": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Generate and freeze a practice test */
+        post: operations["create_form_v1_practice_forms_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/practice/forms/{form_id}/attempt": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Start (or resume) the attempt */
+        post: operations["start_attempt_v1_practice_forms__form_id__attempt_post"];
+        delete?: never;
         options?: never;
         head?: never;
         patch?: never;
@@ -650,10 +786,93 @@ export interface components {
             /** Withdraw */
             withdraw: boolean;
         };
+        /** AnswerOut */
+        AnswerOut: {
+            /**
+             * Op Id
+             * Format: uuid
+             */
+            op_id: string;
+            /** Option Id */
+            option_id: string | null;
+            /** Position */
+            position: number;
+            /** Revealed */
+            revealed: boolean;
+            /** Revision */
+            revision: number;
+            /**
+             * Saved At
+             * Format: date-time
+             */
+            saved_at: string;
+        };
         /** AssignIn */
         AssignIn: {
             /** Reviewer Id */
             reviewer_id: string | null;
+        };
+        /** AttemptOut */
+        AttemptOut: {
+            /** Answers */
+            answers: components["schemas"]["AnswerOut"][];
+            /**
+             * Cutoff At
+             * @description C = D + T: the server admits no writes after this
+             */
+            cutoff_at: string | null;
+            /**
+             * Deadline At
+             * @description D: editing closes
+             */
+            deadline_at: string | null;
+            /**
+             * Feedback Mode
+             * @enum {string}
+             */
+            feedback_mode: "deferred" | "immediate";
+            /**
+             * Form Id
+             * Format: uuid
+             */
+            form_id: string;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Items */
+            items: components["schemas"]["ItemSnapshot"][];
+            receipt: components["schemas"]["ReceiptOut"] | null;
+            /**
+             * Server Now
+             * Format: date-time
+             */
+            server_now: string;
+            /**
+             * Started At
+             * Format: date-time
+             */
+            started_at: string;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "active" | "finalised" | "void";
+            /**
+             * Tolerance Ms
+             * @description T, pinned at start
+             */
+            tolerance_ms: number;
+        };
+        /** AvailabilityOut */
+        AvailabilityOut: {
+            /** Chapters */
+            chapters: components["schemas"]["ChapterAvailability"][];
+            /** Grade */
+            grade: number;
+            /** Subject */
+            subject: string;
         };
         /** BookOut */
         BookOut: {
@@ -716,6 +935,23 @@ export interface components {
         ChangeReasonIn: {
             /** Reason */
             reason: string;
+        };
+        /** ChapterAvailability */
+        ChapterAvailability: {
+            /**
+             * Chapter Id
+             * Format: uuid
+             */
+            chapter_id: string;
+            /** Number */
+            number: number;
+            /**
+             * Questions
+             * @description Approved, published question families available for practice
+             */
+            questions: number;
+            /** Title */
+            title: string;
         };
         /** ChapterOut */
         ChapterOut: {
@@ -832,6 +1068,64 @@ export interface components {
             }[];
             /** Title */
             title?: string | null;
+        };
+        /** FormCreateIn */
+        FormCreateIn: {
+            /** Chapter Ids */
+            chapter_ids: string[];
+            /**
+             * Feedback Mode
+             * @default deferred
+             * @enum {string}
+             */
+            feedback_mode: "deferred" | "immediate";
+            /**
+             * Grade
+             * @enum {integer}
+             */
+            grade: 11 | 12;
+            /** Question Count */
+            question_count: number;
+            /** Subject */
+            subject: string;
+            /** Timed Minutes */
+            timed_minutes?: number | null;
+            /** Topic Ids */
+            topic_ids?: string[];
+        };
+        /** FormOut */
+        FormOut: {
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /** Duration S */
+            duration_s: number | null;
+            /**
+             * Feedback Mode
+             * @enum {string}
+             */
+            feedback_mode: "deferred" | "immediate";
+            /** Grade */
+            grade: number;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Late Write Tolerance Ms */
+            late_write_tolerance_ms: number;
+            /** Negative Marks */
+            negative_marks: number;
+            /** Question Count */
+            question_count: number;
+            /** Scope */
+            scope: {
+                [key: string]: unknown;
+            };
+            /** Subject */
+            subject: string;
         };
         /** GradeCatalogue */
         GradeCatalogue: {
@@ -986,6 +1280,49 @@ export interface components {
             /** Working Version */
             working_version: number | null;
         };
+        /** ItemReview */
+        ItemReview: {
+            /** Chosen */
+            chosen: string | null;
+            /** Correct */
+            correct: boolean | null;
+            /** Correct Option Id */
+            correct_option_id: string;
+            /** Earned */
+            earned: number;
+            /** Explanation */
+            explanation: {
+                [key: string]: unknown;
+            };
+            /** Marks */
+            marks: number;
+            /** Options */
+            options: components["schemas"]["OptionSnapshot"][];
+            /** Position */
+            position: number;
+            /** Stem */
+            stem: {
+                [key: string]: unknown;
+            }[];
+            /** Treatment */
+            treatment: string;
+        };
+        /**
+         * ItemSnapshot
+         * @description What a learner sees during an attempt. Keys and explanations are never part of this payload.
+         */
+        ItemSnapshot: {
+            /** Marks */
+            marks: number;
+            /** Options */
+            options: components["schemas"]["OptionSnapshot"][];
+            /** Position */
+            position: number;
+            /** Stem */
+            stem: {
+                [key: string]: unknown;
+            }[];
+        };
         /** ItemSummary */
         ItemSummary: {
             /** Assigned Reviewer */
@@ -1102,6 +1439,70 @@ export interface components {
             /** Status */
             status: string;
         };
+        /** OpIn */
+        OpIn: {
+            /**
+             * Op Id
+             * Format: uuid
+             * @description Client-generated idempotency key for this operation
+             */
+            op_id: string;
+            /**
+             * Option Id
+             * @description null clears the answer
+             */
+            option_id?: string | null;
+            /** Position */
+            position: number;
+            /**
+             * Revision
+             * @description Monotonic per position on the client
+             */
+            revision: number;
+        };
+        /** OpResult */
+        OpResult: {
+            /**
+             * Admitted At
+             * Format: date-time
+             */
+            admitted_at: string;
+            /**
+             * Disposition
+             * @enum {string}
+             */
+            disposition: "accepted" | "stale" | "invalid" | "late" | "finalised" | "locked" | "conflict";
+            /**
+             * Op Id
+             * Format: uuid
+             */
+            op_id: string;
+            /** Option Id */
+            option_id: string | null;
+            /** Position */
+            position: number;
+            /**
+             * Replay
+             * @description True when this is the stored result of an earlier identical request
+             */
+            replay: boolean;
+            /** Revision */
+            revision: number;
+        };
+        /** OpsIn */
+        OpsIn: {
+            /** Ops */
+            ops: components["schemas"]["OpIn"][];
+        };
+        /** OptionSnapshot */
+        OptionSnapshot: {
+            /** Blocks */
+            blocks: {
+                [key: string]: unknown;
+            }[];
+            /** Id */
+            id: string;
+        };
         /**
          * ProfileIn
          * @description Onboarding answers (P04.S3.T1). Everything can be corrected later; no identity documents are collected.
@@ -1158,6 +1559,77 @@ export interface components {
             level?: ("SOFT" | "VOID" | "KEY_ERROR") | null;
             /** Reason */
             reason: string;
+        };
+        /** ReceiptOut */
+        ReceiptOut: {
+            /**
+             * Admitted At
+             * Format: date-time
+             */
+            admitted_at: string;
+            /** Answered Count */
+            answered_count: number;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Ledger Hash */
+            ledger_hash: string;
+            /** Question Count */
+            question_count: number;
+            /**
+             * Reason
+             * @enum {string}
+             */
+            reason: "manual" | "expiry";
+        };
+        /** ResultOut */
+        ResultOut: {
+            /** Answered */
+            answered: number;
+            /**
+             * Attempt Id
+             * Format: uuid
+             */
+            attempt_id: string;
+            /**
+             * Finalise Reason
+             * @enum {string}
+             */
+            finalise_reason: "manual" | "expiry";
+            /** Items */
+            items: components["schemas"]["ItemReview"][];
+            /** Maximum */
+            maximum: number;
+            /** Percentage */
+            percentage: string | null;
+            /** Question Count */
+            question_count: number;
+            /** Raw */
+            raw: number;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "scored" | "not_scorable";
+            /** Version */
+            version: number;
+        };
+        /** RevealOut */
+        RevealOut: {
+            /** Chosen */
+            chosen: string | null;
+            /** Correct */
+            correct: boolean;
+            /** Correct Option Id */
+            correct_option_id: string;
+            /** Explanation */
+            explanation: {
+                [key: string]: unknown;
+            };
+            /** Position */
+            position: number;
         };
         /** ReviewIn */
         ReviewIn: {
@@ -1277,6 +1749,18 @@ export interface components {
             scope_decision: string;
             /** Sign In Methods */
             sign_in_methods: string[];
+        };
+        /** SaveOut */
+        SaveOut: {
+            /** Receipt Id */
+            receipt_id: string | null;
+            /** Results */
+            results: components["schemas"]["OpResult"][];
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "active" | "finalised" | "void";
         };
         /** SearchHit */
         SearchHit: {
@@ -1443,10 +1927,19 @@ export interface components {
             /** Name */
             name: string;
         };
-        /** SubmitIn */
-        SubmitIn: {
-            /** Note */
-            note?: string | null;
+        /** SubmitOut */
+        SubmitOut: {
+            receipt: components["schemas"]["ReceiptOut"];
+            /**
+             * Reconciliation
+             * @description Operations presented after finalisation, with their outcome
+             */
+            reconciliation: components["schemas"]["OpResult"][];
+            /**
+             * Same Request
+             * @description False when the attempt was finalised by another request or by expiry
+             */
+            same_request: boolean;
         };
         /** TopicNode */
         TopicNode: {
@@ -1573,6 +2066,18 @@ export interface components {
             /** Updated By */
             updated_by: string | null;
         };
+        /** SubmitIn */
+        portal_api__modules__assessment__schemas__SubmitIn: {
+            /** Idempotency Key */
+            idempotency_key: string;
+            /** Ops */
+            ops?: components["schemas"]["OpIn"][];
+        };
+        /** SubmitIn */
+        portal_api__modules__content__schemas__SubmitIn: {
+            /** Note */
+            note?: string | null;
+        };
     };
     responses: never;
     parameters: never;
@@ -1670,6 +2175,170 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["RoleGrantOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_attempt_v1_attempts__attempt_id__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                attempt_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AttemptOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    save_answers_v1_attempts__attempt_id__answers_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                attempt_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["OpsIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SaveOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    reveal_v1_attempts__attempt_id__items__position__reveal_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                attempt_id: string;
+                position: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RevealOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    result_v1_attempts__attempt_id__result_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                attempt_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ResultOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    submit_v1_attempts__attempt_id__submit_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                attempt_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["portal_api__modules__assessment__schemas__SubmitIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SubmitOut"];
                 };
             };
             /** @description Validation Error */
@@ -2016,6 +2685,104 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    availability_v1_practice_availability_get: {
+        parameters: {
+            query: {
+                grade: number;
+                subject: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AvailabilityOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    create_form_v1_practice_forms_post: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["FormCreateIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["FormOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    start_attempt_v1_practice_forms__form_id__attempt_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                form_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AttemptOut"];
+                };
             };
             /** @description Validation Error */
             422: {
@@ -2519,7 +3286,7 @@ export interface operations {
         };
         requestBody: {
             content: {
-                "application/json": components["schemas"]["SubmitIn"];
+                "application/json": components["schemas"]["portal_api__modules__content__schemas__SubmitIn"];
             };
         };
         responses: {

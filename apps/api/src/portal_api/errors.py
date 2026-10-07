@@ -43,6 +43,12 @@ class Conflict(AppError):
     code = "CONFLICT"
 
 
+class AttemptFinalised(Conflict):
+    """A genuinely new answer write for an attempt that has already been finalised (§10.5)."""
+
+    code = "ATTEMPT_FINALISED"
+
+
 class Unprocessable(AppError):
     """The request is well-formed but breaks a domain rule (e.g. content fails publication validation)."""
 
@@ -50,22 +56,25 @@ class Unprocessable(AppError):
     code = "RULE_FAILED"
 
 
-def _problem(request: Request, status: int, code: str, detail: str, **extra: object) -> JSONResponse:
+def _problem(
+    request: Request, status: int, code: str, detail: str, extra: dict[str, object] | None = None
+) -> JSONResponse:
+    extra = extra or {}
     body = {
         "type": f"https://errors.portal.invalid/{code.lower()}",
         "title": code,
         "status": status,
         "detail": detail,
         "correlation_id": getattr(request.state, "correlation_id", None),
-        **extra,
     }
+    body.update({k: v for k, v in extra.items() if k not in body})  # extras never override the standard members
     return JSONResponse(body, status_code=status, media_type="application/problem+json")
 
 
 def install(app: FastAPI) -> None:
     @app.exception_handler(AppError)
     async def _app_error(request: Request, exc: AppError) -> JSONResponse:
-        response = _problem(request, exc.status, exc.code, exc.detail, **exc.extra)
+        response = _problem(request, exc.status, exc.code, exc.detail, exc.extra)
         if exc.status == 401:
             response.headers["WWW-Authenticate"] = 'Bearer realm="portal"'
         return response
@@ -73,7 +82,7 @@ def install(app: FastAPI) -> None:
     @app.exception_handler(RequestValidationError)
     async def _validation(request: Request, exc: RequestValidationError) -> JSONResponse:
         errs = [{"loc": list(e.get("loc", [])), "msg": e.get("msg")} for e in exc.errors()]
-        return _problem(request, 422, "VALIDATION_FAILED", "The request is invalid.", errors=errs)
+        return _problem(request, 422, "VALIDATION_FAILED", "The request is invalid.", {"errors": errs})
 
     @app.exception_handler(OperationalError)
     async def _db_unavailable(request: Request, exc: OperationalError) -> JSONResponse:
