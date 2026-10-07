@@ -1,6 +1,6 @@
 # RESUME STATE
 
-**Updated:** 2026-10-07 · **Branch:** `feat/mcq-items` · PRs #6–#11 merged to `main`
+**Updated:** 2026-10-07 · **Branch:** `feat/attempt-engine` · PRs #6–#12 merged to `main`
 
 ## Where we are
 Waves A/B/D/E are in progress (roadmap §18). Merged to `main`:
@@ -17,7 +17,9 @@ Also merged: editorial workflow API with scoped roles, independent review, revis
 
 Also merged: staff studio web UI (IMPL-15), dev staff fixtures, and published-lesson rendering on web and mobile chapter pages.
 
-On `feat/mcq-items`: questions as content kind `mcq` with schema, review checklist, families, quarantine levels and key isolation (IMPL-16), plus the studio question editor.
+Also merged: questions as content kind `mcq` with schema, review checklist, families, quarantine levels and key isolation (IMPL-16), plus the studio question editor.
+
+On `feat/attempt-engine`: practice forms and the §10.5 attempt protocol, with receipts, expiry and deterministic scoring (IMPL-17).
 
 Reviewed teaching content does not exist yet (BLOCKERS B01), so learner pages stop at textbook structure.
 
@@ -33,10 +35,10 @@ cd ../mobile && npx expo start --web --port 8190            # mobile screens on 
 ```
 
 ## Next unblocked tasks (in order)
-1. **Merge `feat/mcq-items`** (merge `main` in; never rebase or force-push pushed branches, GIT-01).
+1. **Merge `feat/attempt-engine`** (merge `main` in; never rebase or force-push pushed branches, GIT-01).
 2. *(done: native auth/onboarding, IMPL-13; PKCE waits for B04)*
 3. **CMS (P06):** engine (IMPL-14) and studio UI (IMPL-15) done. Next: preview surfaces (P06.S3.T1), import batches (P06.S2), releases/rollback, export, catalogue editing.
-4. **Forms and attempts (P09/P10):** frozen practice forms from published questions, attempt runtime with the §10.5 durable save protocol, deadlines and tolerance, submission receipts, deterministic scoring, results. Technical fixtures only.
+4. **Learner practice UI (web, then mobile):** builder with availability counts, attempt screen with a durable local op queue (pending vs saved), D−5 s pre-flush and closing at D, submit confirmation with answered/pending counts, results review. API engine done (IMPL-17).
 5. **Written assessment (W tasks):** question/rubric records, private scan upload, page mapping, receipts, reviewer workflow.
 6. **Native evidence:** JDK 17 and Android cmdline-tools are in `%USERPROFILE%\devtools`. Installing SDK packages needs the owner to accept the Android SDK licence (BLOCKERS).
 

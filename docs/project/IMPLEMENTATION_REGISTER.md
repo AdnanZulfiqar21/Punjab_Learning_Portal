@@ -47,6 +47,16 @@ Source plan: `Road Map/Punjab_Learning_Portal_Master_Roadmap_v2.2_Integrated_Wri
 | P08.S2.T3 Key isolation | IN_PROGRESS | Questions excluded from learner content APIs; staff-only previews | `test_review_checklist_publication_and_key_isolation` | Exam payloads from keyless snapshots (P10), log/export review |
 | P08.S3.T1 Canonical families | IN_PROGRESS | `family_id` on items; variants via `family_of` (same class/subject) | variant test | Duplicate/near-duplicate detection |
 | P08.S4.T1 Quarantine by defect type | IN_PROGRESS | SOFT/VOID/KEY_ERROR level required for questions; audited | quarantine test | AdjudicationRecords + affected-attempt routing (P10.S3.T4) |
+| P09.S1.T1 Topic and chapter tests | IMPLEMENTED (API) | `assessment/forms.py`: chapter/topic scope, count, timed or untimed, immediate or deferred feedback; availability counts per chapter | `test_availability_and_honest_pool_shortage` | Learner UI; written routing (W04) |
+| P09.S3.T1 Constrained selection | IN_PROGRESS | Seeded, auditable sampling; one question per canonical family; quarantined/retired excluded | form tests | Outcome/difficulty allocation for blueprints |
+| P09.S3.T2 Insufficient pools | IMPLEMENTED | 422 with available and requested counts; never silently shrinks | shortage test | UI offers a labelled smaller alternative |
+| P09.S3.T3 Freeze forms | IMPLEMENTED | Versions, order, option permutations (stable IDs), marks, timing, tolerance, scoring policy frozen at creation | form/attempt tests | Comparable fixed forms for mocks |
+| P10.S1.T1 Attempt state machine | IN_PROGRESS | active → finalised (manual/expiry); idempotent start; one logical receipt; NOT_SCORABLE | attempt tests | scoring-pending/void/superseded states with async grading |
+| P10.S1.T2 Deadlines | IMPLEMENTED (server) | D, pinned T, C = D + T; admission by locked DB clock; expiry only after C | deadline/tolerance/expiry tests | Client pre-flush at D−5 s and editing close at D (UI) |
+| P10.S2.T1 Answer revisions and receipts | IMPLEMENTED | Op ledger with dispositions; exact replay receipts; payload-conflict detection; stale never overwrites newer | `test_save_dispositions` | — |
+| P10.S3.T1 Atomic submission and expiry | IMPLEMENTED | One locked transaction; durable receipt with ledger hash; reconciliation for later ops; 409 ATTEMPT_FINALISED | submit, late-submit and race tests | — |
+| P10.S3.T2 Deterministic grading | IMPLEMENTED | Pure scorer with adjudication overlays and NOT_SCORABLE | `test_scoring_rules` | Adjudication records (P10.S3.T4) |
+| P10.S4.T2 Timing and serialisation boundaries | IN_PROGRESS | Save-vs-submit race (8 iterations), tolerance window, lock-then-clock admission | race test | Lock waits straddling C under load; duplicate tabs in UI |
 | P22.S1 Rights gate (software) | IMPLEMENTED | `source_document.publication_rights` (owner-only, MFA, audited, import-safe) | `test_publication_rights_survive_reimport` | Owner decision per source (B01) |
 | P04.S4.T2 Consent records | IMPLEMENTED (API) | Versioned consent accept/withdraw; terms/privacy only end via account closure | tests | Reviewed policy texts (legal review) |
 | P11 (web Learn/Search screens, partial) | IN_PROGRESS | `apps/web` pages with loading/empty/error/not-found states | E2E | Auth, lessons, practice |
