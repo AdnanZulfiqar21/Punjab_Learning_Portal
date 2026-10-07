@@ -28,6 +28,8 @@ class RuntimeConfig(BaseModel):
     active_grades: list[int]
     active_subjects: list[str]
     scope_decision: str
+    # Only methods this deployment can actually perform. dev_password exists only in development/test (IMPL-09).
+    sign_in_methods: list[str]
 
 
 @router.get("/healthz", include_in_schema=False)
@@ -60,4 +62,6 @@ def runtime_config(settings: Annotated[Settings, Depends(get_settings)]) -> Runt
         active_grades=[11, 12],
         active_subjects=["biology", "chemistry", "physics", "computer_science", "mathematics"],
         scope_decision="SCOPE-01",
+        sign_in_methods=(["oidc"] if settings.oidc_issuer else [])
+        + (["dev_password"] if settings.dev_auth_enabled else []),
     )

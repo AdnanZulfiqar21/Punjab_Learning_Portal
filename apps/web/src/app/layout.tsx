@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Link from "next/link";
+import { Suspense } from "react";
+import { AccountNav } from "@/components/account-nav";
 import "./globals.css";
 
 const sans = Geist({ variable: "--font-sans-ui", subsets: ["latin"] });
@@ -49,6 +51,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
                 <Link href="/search" className="rounded-md px-3 py-2 text-muted hover:bg-surface-muted hover:text-foreground">
                   Search
                 </Link>
+              </li>
+              <li>
+                <Suspense fallback={<span className="px-3 py-2 text-muted">&nbsp;</span>}>
+                  <AccountNav />
+                </Suspense>
               </li>
             </ul>
           </nav>

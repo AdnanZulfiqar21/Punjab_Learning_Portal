@@ -107,3 +107,27 @@ class TokenOut(BaseModel):
     access_token: str
     token_type: Literal["Bearer"] = "Bearer"  # noqa: S105 (OAuth token type, not a secret)
     expires_in: int
+
+
+class SessionCreateIn(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    kind: Literal["web", "native"]
+    device_label: str | None = Field(default=None, max_length=120)
+
+
+class SessionOut(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+    id: uuid.UUID
+    kind: str
+    device_label: str | None
+    user_agent: str | None
+    mfa: bool
+    created_at: datetime
+    last_seen_at: datetime
+    expires_at: datetime
+    current: bool = False
+
+
+class SessionCreatedOut(BaseModel):
+    session_token: str
+    session: SessionOut

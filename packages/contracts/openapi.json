@@ -1007,6 +1007,13 @@
           "scope_decision": {
             "title": "Scope Decision",
             "type": "string"
+          },
+          "sign_in_methods": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Sign In Methods",
+            "type": "array"
           }
         },
         "required": [
@@ -1017,7 +1024,8 @@
           "region",
           "active_grades",
           "active_subjects",
-          "scope_decision"
+          "scope_decision",
+          "sign_in_methods"
         ],
         "title": "RuntimeConfig",
         "type": "object"
@@ -1144,6 +1152,124 @@
           "hits"
         ],
         "title": "SearchOut",
+        "type": "object"
+      },
+      "SessionCreateIn": {
+        "additionalProperties": false,
+        "properties": {
+          "device_label": {
+            "anyOf": [
+              {
+                "maxLength": 120,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Device Label"
+          },
+          "kind": {
+            "enum": [
+              "web",
+              "native"
+            ],
+            "title": "Kind",
+            "type": "string"
+          }
+        },
+        "required": [
+          "kind"
+        ],
+        "title": "SessionCreateIn",
+        "type": "object"
+      },
+      "SessionCreatedOut": {
+        "properties": {
+          "session": {
+            "$ref": "#/components/schemas/SessionOut"
+          },
+          "session_token": {
+            "title": "Session Token",
+            "type": "string"
+          }
+        },
+        "required": [
+          "session_token",
+          "session"
+        ],
+        "title": "SessionCreatedOut",
+        "type": "object"
+      },
+      "SessionOut": {
+        "properties": {
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "current": {
+            "default": false,
+            "title": "Current",
+            "type": "boolean"
+          },
+          "device_label": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Device Label"
+          },
+          "expires_at": {
+            "format": "date-time",
+            "title": "Expires At",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "kind": {
+            "title": "Kind",
+            "type": "string"
+          },
+          "last_seen_at": {
+            "format": "date-time",
+            "title": "Last Seen At",
+            "type": "string"
+          },
+          "mfa": {
+            "title": "Mfa",
+            "type": "boolean"
+          },
+          "user_agent": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "User Agent"
+          }
+        },
+        "required": [
+          "id",
+          "kind",
+          "device_label",
+          "user_agent",
+          "mfa",
+          "created_at",
+          "last_seen_at",
+          "expires_at"
+        ],
+        "title": "SessionOut",
         "type": "object"
       },
       "SourceRef": {
@@ -1849,6 +1975,99 @@
         ]
       }
     },
+    "/v1/me/session": {
+      "delete": {
+        "operationId": "sign_out_v1_me_session_delete",
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Sign out (revoke the current session)",
+        "tags": [
+          "identity",
+          "sessions"
+        ]
+      }
+    },
+    "/v1/me/sessions": {
+      "get": {
+        "operationId": "list_sessions_v1_me_sessions_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/SessionOut"
+                  },
+                  "title": "Response List Sessions V1 Me Sessions Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "List Sessions",
+        "tags": [
+          "identity",
+          "sessions"
+        ]
+      }
+    },
+    "/v1/me/sessions/revoke-others": {
+      "post": {
+        "operationId": "revoke_other_sessions_v1_me_sessions_revoke_others_post",
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Revoke Other Sessions",
+        "tags": [
+          "identity",
+          "sessions"
+        ]
+      }
+    },
+    "/v1/me/sessions/{session_id}": {
+      "delete": {
+        "operationId": "revoke_session_v1_me_sessions__session_id__delete",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "session_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Session Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Revoke Session",
+        "tags": [
+          "identity",
+          "sessions"
+        ]
+      }
+    },
     "/v1/runtime-config": {
       "get": {
         "operationId": "runtime_config_v1_runtime_config_get",
@@ -1958,6 +2177,49 @@
         "summary": "Search chapters and topics; every hit is labelled with its grade",
         "tags": [
           "curriculum"
+        ]
+      }
+    },
+    "/v1/sessions": {
+      "post": {
+        "description": "Exchange a verified identity-provider access token for a revocable application session.",
+        "operationId": "create_session_v1_sessions_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SessionCreateIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SessionCreatedOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Create Session",
+        "tags": [
+          "identity",
+          "sessions"
         ]
       }
     }

@@ -13,6 +13,7 @@ from sqlalchemy.orm import Session
 from portal_api.db import get_session
 from portal_api.errors import Conflict, Forbidden, NotFound
 from portal_api.modules.audit.models import record
+from portal_api.modules.identity import sessions
 from portal_api.modules.identity.deps import CurrentPrincipal, Principal, require
 from portal_api.modules.identity.models import AppUser, ConsentRecord, StaffRoleGrant, StudentProfile
 from portal_api.modules.identity.permissions import STAFF_ROLES, Permission
@@ -25,6 +26,9 @@ from portal_api.modules.identity.schemas import (
     RevokeIn,
     RoleGrantIn,
     RoleGrantOut,
+    SessionCreatedOut,
+    SessionCreateIn,
+    SessionOut,
 )
 
 router = APIRouter(prefix="/v1", tags=["identity"])
@@ -187,3 +191,74 @@ def revoke_role(grant_id: uuid.UUID, body: RevokeIn, admin: ManageRoles, db: DB,
         db.commit()
         db.refresh(grant)
     return RoleGrantOut.model_validate(grant)
+
+
+# ---------------------------------------------------------------- sessions (P04.S1.T2/T3)
+@router.post("/sessions", response_model=SessionCreatedOut, status_code=201, tags=["sessions"])
+def create_session(
+    body: SessionCreateIn, principal: CurrentPrincipal, db: DB, request: Request, response: Response
+) -> SessionCreatedOut:
+    """Exchange a verified identity-provider access token for a revocable application session."""
+    response.headers["Cache-Control"] = "no-store"
+    if principal.session is not None:
+        raise Forbidden("A session cannot create another session; sign in with the identity provider.")
+    row, token = sessions.create(
+        db,
+        user_id=principal.user.id,
+        kind=body.kind,
+        mfa=principal.claims.mfa,
+        device_label=body.device_label,
+        user_agent=request.headers.get("User-Agent"),
+    )
+    db.commit()
+    return SessionCreatedOut(session_token=token, session=SessionOut.model_validate(row))
+
+
+@router.get("/me/sessions", response_model=list[SessionOut], tags=["sessions"])
+def list_sessions(principal: CurrentPrincipal, db: DB, response: Response) -> list[SessionOut]:
+    response.headers["Cache-Control"] = PRIVATE
+    rows = db.scalars(
+        select(sessions.UserSession)
+        .where(sessions.UserSession.user_id == principal.user.id, sessions.UserSession.revoked_at.is_(None))
+        .order_by(sessions.UserSession.last_seen_at.desc())
+    ).all()
+    now = datetime.now(UTC)
+    current_id = principal.session.id if principal.session else None
+    return [
+        SessionOut.model_validate(r).model_copy(update={"current": r.id == current_id})
+        for r in rows
+        if r.expires_at > now
+    ]
+
+
+@router.delete("/me/sessions/{session_id}", status_code=204, tags=["sessions"])
+def revoke_session(session_id: uuid.UUID, principal: CurrentPrincipal, db: DB) -> Response:
+    row = db.get(sessions.UserSession, session_id)
+    if row is None or row.user_id != principal.user.id:  # never reveal other users' sessions
+        raise NotFound("Session not found.")
+    sessions.revoke(db, row, "user_revoked")
+    db.commit()
+    return Response(status_code=204)
+
+
+@router.post("/me/sessions/revoke-others", status_code=204, tags=["sessions"])
+def revoke_other_sessions(principal: CurrentPrincipal, db: DB) -> Response:
+    keep = principal.session.id if principal.session else None
+    for row in db.scalars(
+        select(sessions.UserSession).where(
+            sessions.UserSession.user_id == principal.user.id, sessions.UserSession.revoked_at.is_(None)
+        )
+    ):
+        if row.id != keep:
+            sessions.revoke(db, row, "user_revoked_others")
+    db.commit()
+    return Response(status_code=204)
+
+
+@router.delete("/me/session", status_code=204, tags=["sessions"], summary="Sign out (revoke the current session)")
+def sign_out(principal: CurrentPrincipal, db: DB) -> Response:
+    if principal.session is None:
+        raise Conflict("Not signed in with an application session.")
+    sessions.revoke(db, principal.session, "signed_out")
+    db.commit()
+    return Response(status_code=204)

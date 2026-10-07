@@ -15,7 +15,7 @@ from sqlalchemy.orm import Session
 
 from portal_api.db import get_session
 from portal_api.errors import Forbidden, Unauthorized
-from portal_api.modules.identity import tokens
+from portal_api.modules.identity import sessions, tokens
 from portal_api.modules.identity.models import AppUser, StaffRoleGrant
 from portal_api.modules.identity.permissions import MFA_REQUIRED, Permission, Role, permissions_for
 
@@ -26,6 +26,7 @@ class Principal:
     claims: tokens.Claims
     roles: frozenset[Role]
     permissions: frozenset[Permission]
+    session: sessions.UserSession | None = None  # set when authenticated with an application session token
 
 
 def _bearer(request: Request) -> str:
@@ -36,11 +37,38 @@ def _bearer(request: Request) -> str:
     return value.strip()
 
 
+EXPIRED = "Your session is invalid or has expired. Please sign in again."
+
+
+def _from_session(db: Session, token: str) -> tuple[AppUser, tokens.Claims, sessions.UserSession]:
+    row = sessions.resolve(db, token)
+    if row is None:
+        raise Unauthorized(EXPIRED)
+    user = db.get(AppUser, row.user_id)
+    if user is None:
+        raise Unauthorized(EXPIRED)
+    claims = tokens.Claims(
+        issuer=user.issuer,
+        subject=user.subject,
+        email=user.email,
+        token_id=str(row.id),
+        expires_at=int(row.expires_at.timestamp()),
+        mfa=row.mfa,
+    )
+    return user, claims, row
+
+
 def current_principal(request: Request, db: Annotated[Session, Depends(get_session)]) -> Principal:
+    token = _bearer(request)
+    if token.startswith(sessions.PREFIX):
+        session_user, session_claims, session_row = _from_session(db, token)
+        if session_user.status != "active":
+            raise Forbidden("This account is not active. Contact support.")
+        return _principal(request, db, session_user, session_claims, session_row)
     try:
-        claims = tokens.verify(_bearer(request))
+        claims = tokens.verify(token)
     except tokens.InvalidToken as e:
-        raise Unauthorized("Your session is invalid or has expired. Please sign in again.") from e
+        raise Unauthorized(EXPIRED) from e
     user = db.scalar(select(AppUser).where(AppUser.issuer == claims.issuer, AppUser.subject == claims.subject))
     if user is None:
         # First authenticated request from a verified identity creates the application account (no trial is granted
@@ -61,12 +89,20 @@ def current_principal(request: Request, db: Annotated[Session, Depends(get_sessi
     if claims.email and user.email != claims.email:
         user.email = claims.email
     db.commit()
+    return _principal(request, db, user, claims, None)
+
+
+def _principal(
+    request: Request, db: Session, user: AppUser, claims: tokens.Claims, session_row: sessions.UserSession | None
+) -> Principal:
     grants = db.scalars(
         select(StaffRoleGrant.role).where(StaffRoleGrant.user_id == user.id, StaffRoleGrant.revoked_at.is_(None))
     ).all()
     roles = frozenset(Role(r) for r in grants)
     request.state.user_id = user.id
-    return Principal(user=user, claims=claims, roles=roles, permissions=permissions_for(set(roles)))
+    return Principal(
+        user=user, claims=claims, roles=roles, permissions=permissions_for(set(roles)), session=session_row
+    )
 
 
 CurrentPrincipal = Annotated[Principal, Depends(current_principal)]
