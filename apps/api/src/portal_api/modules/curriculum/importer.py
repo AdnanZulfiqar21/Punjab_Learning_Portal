@@ -19,7 +19,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
-from sqlalchemy import select
+from sqlalchemy import select, update
 from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.orm import Session
 
@@ -86,6 +86,9 @@ def validate(catalogue: dict[str, Any], registry: dict[str, Any]) -> list[str]:
     return errors
 
 
+INSERT_ONLY = {"content_state"}
+
+
 def _upsert(session: Session, model: type[Any], rows: list[dict[str, Any]], key: str = "id") -> int:
     if not rows:
         return 0
@@ -93,7 +96,7 @@ def _upsert(session: Session, model: type[Any], rows: list[dict[str, Any]], key:
     for i in range(0, len(rows), 500):
         chunk = rows[i : i + 500]
         stmt = insert(table).values(chunk)
-        update_cols = {c: stmt.excluded[c] for c in chunk[0] if c != key}
+        update_cols = {c: stmt.excluded[c] for c in chunk[0] if c != key and c not in INSERT_ONLY}
         session.execute(stmt.on_conflict_do_update(index_elements=[key], set_=update_cols))
     return len(rows)
 
@@ -209,7 +212,8 @@ def run_import(session: Session, catalogue_path: Path, registry_path: Path, appl
                     "key_terms": ch.get("key_terms", []),
                     "visual_count": ch.get("visual_count", 0),
                     "assessment_counts": ch.get("assessment_counts", {}),
-                    "content_state": "SOURCE_INDEXED",
+                    "content_state": "SOURCE_INDEXED",  # insert-only: re-imports never reset academic state
+                    "retired_at": None,
                 }
             )
             for order, (t, parent) in enumerate(_flatten(ch["topics"]), start=1):
@@ -225,11 +229,14 @@ def run_import(session: Session, catalogue_path: Path, registry_path: Path, appl
                         "depth": t["depth"],
                         "pdf_page": t.get("pdf_page"),
                         "points": t.get("points", []),
+                        "retired_at": None,
                     }
                 )
 
     existing_topics = set(session.scalars(select(Topic.id)))
     existing_chapters = set(session.scalars(select(Chapter.id)))
+    retired_topics_db = set(session.scalars(select(Topic.id).where(Topic.retired_at.is_not(None))))
+    retired_chapters_db = set(session.scalars(select(Chapter.id).where(Chapter.retired_at.is_not(None))))
     new_topic_ids = {t["id"] for t in topics}
     new_chapter_ids = {c["id"] for c in chapters}
     counts = {
@@ -242,8 +249,11 @@ def run_import(session: Session, catalogue_path: Path, registry_path: Path, appl
         "topics": len(topics),
         "chapters_new": len(new_chapter_ids - existing_chapters),
         "topics_new": len(new_topic_ids - existing_topics),
-        "orphan_chapters": len(existing_chapters - new_chapter_ids),
-        "orphan_topics": len(existing_topics - new_topic_ids),
+        # Present in the database but no longer in the catalogue: retired (kept for history, hidden from learners).
+        "retire_chapters": len((existing_chapters - new_chapter_ids) - retired_chapters_db),
+        "retire_topics": len((existing_topics - new_topic_ids) - retired_topics_db),
+        "reactivate_chapters": len(new_chapter_ids & retired_chapters_db),
+        "reactivate_topics": len(new_topic_ids & retired_topics_db),
     }
     batch.counts = counts
     if not apply:
@@ -258,6 +268,20 @@ def run_import(session: Session, catalogue_path: Path, registry_path: Path, appl
         (BookEdition, books, "id"),
         (Chapter, chapters, "id"),
     ]
+    # Active display orders are unique per parent. Move the affected rows' orders out of the way first so that
+    # reordering within one import never collides mid-statement (same transaction, so nothing is visible).
+    book_ids = [b["id"] for b in books]
+    chapter_ids = [c["id"] for c in chapters]
+    session.execute(
+        update(Chapter)
+        .where(Chapter.book_id.in_(book_ids), Chapter.retired_at.is_(None))
+        .values(display_order=-Chapter.display_order - 1000)
+    )
+    session.execute(
+        update(Topic)
+        .where(Topic.chapter_id.in_(chapter_ids), Topic.retired_at.is_(None))
+        .values(display_order=-Topic.display_order - 100000)
+    )
     for model, rows, key in model_rows:
         if model is SourceDocument:
             rows = [
@@ -266,6 +290,19 @@ def run_import(session: Session, catalogue_path: Path, registry_path: Path, appl
         _upsert(session, model, rows, key)
     # Parents before children (flatten order guarantees it within a chapter).
     _upsert(session, Topic, topics)
+    now = datetime.now(UTC)
+    if existing_topics - new_topic_ids:
+        session.execute(
+            update(Topic)
+            .where(Topic.id.in_(existing_topics - new_topic_ids), Topic.retired_at.is_(None))
+            .values(retired_at=now)
+        )
+    if existing_chapters - new_chapter_ids:
+        session.execute(
+            update(Chapter)
+            .where(Chapter.id.in_(existing_chapters - new_chapter_ids), Chapter.retired_at.is_(None))
+            .values(retired_at=now)
+        )
     batch.status, batch.finished_at = "APPLIED", datetime.now(UTC)
     session.add(batch)
     session.commit()

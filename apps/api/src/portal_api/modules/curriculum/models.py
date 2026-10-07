@@ -21,6 +21,7 @@ from sqlalchemy import (
     Text,
     UniqueConstraint,
     func,
+    text,
 )
 from sqlalchemy.dialects.postgresql import JSONB, UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
@@ -100,7 +101,13 @@ class BookEdition(Base):
 class Chapter(Base):
     __tablename__ = "chapter"
     __table_args__ = (
-        UniqueConstraint("book_id", "display_order"),
+        Index(
+            "uq_chapter_order_active",
+            "book_id",
+            "display_order",
+            unique=True,
+            postgresql_where=text("retired_at is null"),
+        ),
         CheckConstraint("status in ('complete','partial','missing')", name="chapter_status"),
         Index("ix_chapter_title_trgm", "title", postgresql_using="gin", postgresql_ops={"title": "gin_trgm_ops"}),
     )
@@ -123,6 +130,9 @@ class Chapter(Base):
     assessment_counts: Mapped[dict[str, int]] = mapped_column(JSONB, default=dict)
     # Academic state of derived teaching material for this chapter. Source indexing is not academic approval.
     content_state: Mapped[str] = mapped_column(String(40), default="SOURCE_INDEXED")
+    # Retired entities stay in place for historical references (attempts, notes, mappings) but are hidden from
+    # learners (IMPL-08). They are never deleted.
+    retired_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
 
     book: Mapped[BookEdition] = relationship(back_populates="chapters")
     topics: Mapped[list[Topic]] = relationship(back_populates="chapter", order_by="Topic.display_order")
@@ -131,7 +141,13 @@ class Chapter(Base):
 class Topic(Base):
     __tablename__ = "topic"
     __table_args__ = (
-        UniqueConstraint("chapter_id", "display_order"),
+        Index(
+            "uq_topic_order_active",
+            "chapter_id",
+            "display_order",
+            unique=True,
+            postgresql_where=text("retired_at is null"),
+        ),
         Index("ix_topic_title_trgm", "title", postgresql_using="gin", postgresql_ops={"title": "gin_trgm_ops"}),
     )
     id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True)
@@ -144,6 +160,7 @@ class Topic(Base):
     depth: Mapped[int] = mapped_column(SmallInteger)
     pdf_page: Mapped[int | None] = mapped_column(Integer)
     points: Mapped[list[str]] = mapped_column(JSONB, default=list)
+    retired_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
 
     chapter: Mapped[Chapter] = relationship(back_populates="topics")
 
