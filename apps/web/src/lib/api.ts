@@ -2,7 +2,7 @@
 // the build (roadmap §5.5: one immutable artifact promoted between environments).
 import { connection } from "next/server";
 import { cache } from "react";
-import type { Book, Catalogue, Chapter, Problem, SearchResult } from "@portal/contracts";
+import type { Book, Catalogue, Chapter, Lesson, Problem, SearchResult } from "@portal/contracts";
 import { readRuntimeConfig } from "@/lib/runtime-config";
 
 export class ApiUnavailableError extends Error {
@@ -49,6 +49,10 @@ export const getBookFor = cache((grade: number, subject: string) =>
   getJSON<Book>(`/v1/grades/${grade}/subjects/${encodeURIComponent(subject)}/book`),
 );
 export const getChapter = cache((id: string) => getJSON<Chapter>(`/v1/chapters/${encodeURIComponent(id)}`));
+/** Published, live lessons for a chapter. Only independently reviewed and published versions are ever returned. */
+export const getLessons = cache((chapterId: string) =>
+  getJSON<Lesson[]>(`/v1/chapters/${encodeURIComponent(chapterId)}/lessons`),
+);
 export const searchCatalogue = cache((q: string, grade?: number) => {
   const params = new URLSearchParams({ q });
   if (grade) params.set("grade", String(grade));

@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
-import type { TopicNode } from "@portal/contracts";
-import { getChapter } from "@/lib/api";
+import type { Lesson, TopicNode } from "@portal/contracts";
+import { LessonBlocks } from "@/components/lesson-blocks";
+import { getChapter, getLessons } from "@/lib/api";
 import { CONTENT_STATE_TEXT, GRADE_LABEL, assessmentSummary, pageRange } from "@/lib/format";
 import { Badge, Breadcrumbs, Notice, SkeletonLines } from "@/components/ui";
 
@@ -54,6 +55,10 @@ async function ChapterView({ id }: { id: string }) {
           Some pages are missing from the source. Topics from missing pages are not listed.
         </Notice>
       )}
+
+      <Suspense fallback={<SkeletonLines lines={3} label="Loading lessons" />}>
+        <Lessons chapterId={ch.id} topics={ch.topics} />
+      </Suspense>
 
       <section aria-labelledby="topics-heading" className="space-y-3">
         <h2 id="topics-heading" className="text-lg font-semibold">
@@ -128,6 +133,56 @@ async function ChapterView({ id }: { id: string }) {
         )}
       </nav>
     </article>
+  );
+}
+
+function topicTitles(nodes: TopicNode[], out = new Map<string, string>()): Map<string, string> {
+  for (const n of nodes) {
+    out.set(n.id, n.number ? `${n.number} ${n.title}` : n.title);
+    topicTitles(n.children, out);
+  }
+  return out;
+}
+
+const published = (iso: string) => new Date(iso).toLocaleDateString("en-GB", { dateStyle: "medium" });
+
+async function Lessons({ chapterId, topics }: { chapterId: string; topics: TopicNode[] }) {
+  const res = await getLessons(chapterId);
+  const lessons: Lesson[] = res.ok ? res.data : [];
+  const titles = topicTitles(topics);
+  return (
+    <section aria-labelledby="lessons-heading" className="space-y-4">
+      <h2 id="lessons-heading" className="text-lg font-semibold">
+        Lessons
+      </h2>
+      {lessons.length === 0 ? (
+        <p className="text-muted">
+          No reviewed lessons are published for this chapter yet. Lessons appear here only after an independent subject
+          reviewer approves them. Until then, use the topic outline and your textbook pages below.
+        </p>
+      ) : (
+        lessons.map((l) => (
+          <article key={l.id} aria-labelledby={`lesson-${l.id}`} className="space-y-4 rounded-xl border border-border bg-surface p-5">
+            <header className="space-y-1">
+              <h3 id={`lesson-${l.id}`} className="text-xl font-semibold tracking-tight">
+                {l.title}
+              </h3>
+              <p className="text-sm text-muted">
+                {l.topic_id && titles.get(l.topic_id) ? `${titles.get(l.topic_id)} · ` : ""}Reviewed lesson · version {l.version} ·
+                published {published(l.published_at)}
+              </p>
+            </header>
+            <LessonBlocks blocks={l.body.blocks as { type: string }[]} headingOffset={2} />
+            <p className="border-t border-border pt-3 text-sm text-muted">
+              Textbook pages (PDF):{" "}
+              {(l.source_refs as { pdf_from: number; pdf_to: number }[])
+                .map((r) => (r.pdf_from === r.pdf_to ? `${r.pdf_from}` : `${r.pdf_from}–${r.pdf_to}`))
+                .join(", ")}
+            </p>
+          </article>
+        ))
+      )}
+    </section>
   );
 }
 

@@ -6,6 +6,7 @@ import type {
   Book,
   Catalogue,
   Chapter,
+  Lesson,
   Me,
   Problem,
   ProfileInput,
@@ -83,6 +84,9 @@ export const api = {
     return getJSON<SearchResult>(`/v1/search?${params.toString()}`, signal);
   },
   runtimeConfig: (signal?: AbortSignal) => getJSON<RuntimeConfig>("/v1/runtime-config", signal),
+  /** Published, live lessons only (independently reviewed); drafts never reach the app. */
+  lessons: (chapterId: string, signal?: AbortSignal) =>
+    getJSON<Lesson[]>(`/v1/chapters/${encodeURIComponent(chapterId)}/lessons`, signal),
 
   // Development identity adapter: the API exposes it only in development/test and keeps it out of the contract.
   devRegister: (email: string, password: string) =>

@@ -239,7 +239,7 @@ export function Workspace({ item, history, myId }: { item: StudioItem; history: 
         ) : (
           <article className="space-y-4 rounded-xl border border-border bg-surface p-5">
             <h2 className="text-2xl font-semibold tracking-tight">{draft.title}</h2>
-            <LessonBlocks blocks={draft.blocks} />
+            <LessonBlocks blocks={draft.blocks} headingOffset={1} />
             <SourceList refs={draft.refs} label={item.source.source_id} />
           </article>
         )}
@@ -247,7 +247,7 @@ export function Workspace({ item, history, myId }: { item: StudioItem; history: 
           <details className="rounded-xl border border-border bg-surface p-4">
             <summary className="cursor-pointer font-medium">Learners currently see version {item.published.number}</summary>
             <div className="mt-4">
-              <LessonBlocks blocks={item.published.body.blocks as Block[]} />
+              <LessonBlocks blocks={item.published.body.blocks as Block[]} headingOffset={1} />
             </div>
           </details>
         )}

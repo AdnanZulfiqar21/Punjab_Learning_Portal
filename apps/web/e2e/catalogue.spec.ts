@@ -19,6 +19,9 @@ test("learner browses Class XII Biology to a chapter and its topics", async ({ p
   const topics = page.getByRole("region", { name: "Topics" });
   await expect(topics.getByText("13.1", { exact: true })).toBeVisible();
   await expect(page.getByRole("link", { name: /Next chapter/ })).toBeVisible();
+  // Only independently reviewed, published lessons are ever shown; none exist yet, and the page says so honestly.
+  const lessons = page.getByRole("region", { name: "Lessons" });
+  await expect(lessons).toContainText("No reviewed lessons are published for this chapter yet");
 });
 
 test("Class XI and Class XII lists stay separate", async ({ page }) => {
