@@ -75,3 +75,7 @@ def test_deployed_roles_refuse_to_start_with_the_dev_adapter(monkeypatch: pytest
     finally:
         monkeypatch.undo()
         _clear_caches()
+
+
+def test_deployed_runtime_config_never_offers_dev_sign_in(deployed_client: TestClient) -> None:
+    assert deployed_client.get("/v1/runtime-config").json()["sign_in_methods"] == ["oidc"]

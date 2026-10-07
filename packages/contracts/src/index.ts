@@ -19,6 +19,8 @@ export type Profile = S["ProfileOut"];
 export type ProfileInput = S["ProfileIn"];
 export type Consent = S["ConsentOut"];
 export type RoleGrant = S["RoleGrantOut"];
+export type AppSession = S["SessionOut"];
+export type SessionCreated = S["SessionCreatedOut"];
 
 /** RFC 9457 problem details returned by every API error. */
 export interface Problem {
