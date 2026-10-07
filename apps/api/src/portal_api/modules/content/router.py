@@ -139,6 +139,7 @@ def _summary_fields(db: Session, item: ContentItem, email: _Emails) -> dict[str,
         "updated_at": item.updated_at,
         "open_feedback": _open_feedback(item),
         "family_id": item.family_id,
+        "parent_item_id": item.parent_item_id,
         "quarantine_level": item.quarantine_level,
     }
 
@@ -258,7 +259,7 @@ def queue(
     state: Annotated[str | None, Query(pattern="^(draft|submitted|changes_requested|approved|published)$")] = None,
     availability: Annotated[str | None, Query(pattern="^(unpublished|live|quarantined|retired)$")] = None,
     grade: Annotated[int | None, Query(ge=11, le=12)] = None,
-    kind: Annotated[str | None, Query(pattern="^(lesson|mcq)$")] = None,
+    kind: Annotated[str | None, Query(pattern="^(lesson|mcq|written|rubric)$")] = None,
     subject: Annotated[str | None, Query(max_length=40)] = None,
     mine: bool = False,
     limit: Annotated[int, Query(ge=1, le=200)] = 100,
@@ -341,6 +342,7 @@ def create(db: DB, who: Author, body: ItemCreateIn) -> ItemDetail:
         title=body.title,
         kind=body.kind,
         family_of=body.family_of,
+        parent_item_id=body.parent_item_id,
     )
     return _detail(db, item, who)
 

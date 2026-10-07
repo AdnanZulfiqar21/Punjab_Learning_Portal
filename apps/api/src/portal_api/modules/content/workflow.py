@@ -30,7 +30,7 @@ from sqlalchemy.orm import Session
 
 from portal_api.errors import Conflict, Forbidden, NotFound, Unprocessable
 from portal_api.modules.audit.models import record
-from portal_api.modules.content import blocks, kinds
+from portal_api.modules.content import blocks, kinds, links
 from portal_api.modules.content.models import (
     Availability,
     ContentItem,
@@ -127,7 +127,7 @@ def _validate(db: Session, item: ContentItem, version: ContentVersion, *, for_pu
     assert chapter is not None
     result = kinds.get(item.kind).validate(version.body, for_publication)
     s_err, s_warn, _ = check_sources(db, chapter, version.source_refs)
-    errors = result.errors + s_err
+    errors = result.errors + s_err + links.check(db, item, version, for_publication=for_publication)
     warnings = result.warnings + s_warn
     if not version.source_refs:
         errors.append("Add at least one source page reference.")
@@ -215,13 +215,22 @@ def create_item(
     db: Session,
     who: Principal,
     *,
-    chapter_id: uuid.UUID,
+    chapter_id: uuid.UUID | None,
     topic_id: uuid.UUID | None,
     title: str,
     kind: str = "lesson",
     family_of: uuid.UUID | None = None,
+    parent_item_id: uuid.UUID | None = None,
 ) -> ContentItem:
     spec = kinds.get(kind)
+    parent: ContentItem | None = None
+    if kind == "rubric":
+        parent = links.rubric_parent(db, parent_item_id)
+        chapter_id, topic_id = parent.chapter_id, parent.topic_id  # a rubric lives with its question
+    elif parent_item_id is not None:
+        raise Unprocessable("Only rubrics are attached to another item.")
+    if chapter_id is None:
+        raise Unprocessable("Choose a chapter.")
     chapter = _active_chapter(db, chapter_id)
     book = db.get(BookEdition, chapter.book_id)
     assert book is not None
@@ -246,13 +255,14 @@ def create_item(
         created_by=who.user.id,
     )
     _require_scoped(db, who, Permission.draft_content, item)
-    if kind == "mcq":
+    item.parent_item_id = parent.id if parent else None
+    if kind in ("mcq", "written"):
         item.family_id = item.id
         if family_of is not None:
             sibling = db.get(ContentItem, family_of)
             if (
                 sibling is None
-                or sibling.kind != "mcq"
+                or sibling.kind != kind
                 or (sibling.grade_number, sibling.subject_code)
                 != (
                     item.grade_number,

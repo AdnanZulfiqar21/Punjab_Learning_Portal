@@ -33,6 +33,9 @@ export function NewLessonForm({ books }: { books: BookChoice[] }) {
           <label className="flex items-center gap-2 rounded-lg border border-border bg-surface px-3 py-2">
             <input type="radio" name="kind" value="mcq" /> Multiple-choice question
           </label>
+          <label className="flex items-center gap-2 rounded-lg border border-border bg-surface px-3 py-2">
+            <input type="radio" name="kind" value="written" /> Written question
+          </label>
         </div>
       </fieldset>
       <div className="space-y-1">

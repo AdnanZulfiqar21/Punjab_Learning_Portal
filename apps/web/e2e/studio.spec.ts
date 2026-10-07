@@ -155,3 +155,47 @@ test("a question needs every review check before it can be approved", async ({ b
   await approve.click();
   await expect(reviewer.getByText("Approved · version 1")).toBeVisible(AUTH);
 });
+
+test("a written question gets a rubric that must reconcile with its marks", async ({ browser }) => {
+  const wTitle = `Fixture written ${Date.now()}`;
+  const author = await signIn(browser, "studio-author@example.com");
+  await author.getByRole("link", { name: "New draft" }).click();
+  await author.getByLabel("Written question").check();
+  await author.getByLabel("Book").selectOption({ label: "Class XI Biology" });
+  await author.getByLabel("Chapter", { exact: true }).selectOption({ index: 3 });
+  await author.getByLabel("Title").fill(wTitle);
+  await author.getByRole("button", { name: "Create draft" }).click();
+  await expect(author).toHaveURL(/\/studio\/items\//, AUTH);
+
+  await author.getByRole("region", { name: "Question" }).getByRole("button", { name: "+ Paragraph" }).click();
+  await author.getByRole("region", { name: "Question" }).getByLabel("Paragraph text").fill("Fixture written stem.");
+  const parts = author.getByRole("region", { name: "Subparts" });
+  await parts.getByRole("button", { name: "+ Add subpart" }).click();
+  await parts.getByRole("button", { name: "+ Add subpart" }).click();
+  await parts.getByLabel("Marks").nth(0).fill("2");
+  await parts.getByLabel("Marks").nth(1).fill("3");
+  await expect(author.getByLabel("Total marks")).toHaveValue("5");
+  await author.getByRole("button", { name: "+ Add page reference" }).click();
+  await expect(author.getByRole("status")).toHaveText(/Saved · revision \d+/, AUTH);
+
+  await author.getByRole("button", { name: "Add a marking rubric" }).click();
+  await expect(author.getByRole("heading", { name: `Rubric: ${wTitle}` })).toBeVisible(AUTH);
+  await author.getByLabel("Question version this rubric marks").selectOption({ index: 1 });
+  const crit = author.getByRole("region", { name: "Criteria" });
+  await crit.getByRole("button", { name: "+ Add criterion" }).click();
+  await crit.getByRole("button", { name: "+ Add criterion" }).click();
+  await crit.getByLabel("Slot").nth(1).selectOption({ label: "(b)" });
+  await crit.getByLabel("Maximum").nth(0).fill("2");
+  await crit.getByLabel(/Permitted awards/).nth(0).fill("0, 1, 2");
+  await crit.getByLabel(/What earns credit/).nth(0).fill("Fixture criterion for part a");
+  await crit.getByLabel("Maximum").nth(1).fill("3");
+  await crit.getByLabel(/Permitted awards/).nth(1).fill("0, 1.5, 3");
+  await crit.getByLabel(/What earns credit/).nth(1).fill("Fixture criterion for part b");
+  const rec = author.getByRole("table", { name: "Reconciliation with the question" });
+  await expect(rec.getByRole("row", { name: /\(a\)/ })).toContainText("2 ✓");
+  await expect(rec.getByRole("row", { name: /\(b\)/ })).toContainText("3 ✓");
+  await author.getByRole("button", { name: "+ Add page reference" }).click();
+  await expect(author.getByRole("status")).toHaveText(/Saved · revision \d+/, AUTH);
+  await author.getByRole("button", { name: "Submit for review" }).click();
+  await expect(author.getByText("In review · version 1")).toBeVisible(AUTH);
+});

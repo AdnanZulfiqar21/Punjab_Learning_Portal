@@ -57,7 +57,8 @@ async function call(path: string, method: "POST" | "PUT", body?: unknown): Promi
 const item = (id: string, action: string) => `/v1/studio/items/${encodeURIComponent(id)}/${action}`;
 
 export async function createItem(_prev: unknown, form: FormData): Promise<{ error?: string } | undefined> {
-  const kind = form.get("kind") === "mcq" ? "mcq" : "lesson";
+  const raw = String(form.get("kind") ?? "lesson");
+  const kind = raw === "mcq" || raw === "written" ? raw : "lesson";
   const chapter_id = String(form.get("chapter_id") ?? "");
   const topic_id = String(form.get("topic_id") ?? "") || null;
   const title = String(form.get("title") ?? "").trim();
@@ -109,4 +110,14 @@ export async function releaseItem(id: string, reason: string): Promise<ActionRes
 }
 export async function retireItem(id: string, reason: string): Promise<ActionResult> {
   return call(item(id, "retire"), "POST", { reason });
+}
+
+export async function createRubric(questionId: string, title: string): Promise<{ error?: string } | undefined> {
+  const res = await call("/v1/studio/items", "POST", {
+    kind: "rubric",
+    parent_item_id: questionId, // a rubric lives with its question; the API takes the chapter from it
+    title: `Rubric: ${title}`.slice(0, 200),
+  });
+  if (!res.ok) return { error: [res.error, ...(res.errors ?? [])].join(" ") };
+  redirect(`/studio/items/${res.item.id}`);
 }
