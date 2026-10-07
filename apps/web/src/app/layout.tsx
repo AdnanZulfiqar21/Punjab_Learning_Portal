@@ -48,6 +48,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
                 </Link>
               </li>
               <li>
+                <Link href="/practice" className="rounded-md px-3 py-2 text-muted hover:bg-surface-muted hover:text-foreground">
+                  Practice
+                </Link>
+              </li>
+              <li>
                 <Link href="/search" className="rounded-md px-3 py-2 text-muted hover:bg-surface-muted hover:text-foreground">
                   Search
                 </Link>

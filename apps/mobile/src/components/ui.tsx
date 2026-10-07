@@ -62,7 +62,7 @@ export function Notice({ title, children, tone = "info" }: { title: string; chil
 export function Loading({ label }: { label: string }) {
   const c = useTheme();
   return (
-    <View style={styles.center} accessible accessibilityLabel={label} accessibilityState={{ busy: true }}>
+    <View style={styles.center} accessible accessibilityLabel={label} aria-busy>
       <ActivityIndicator color={c.accent} size="large" />
       <T variant="muted" style={{ marginTop: Space.md }}>
         {label}
