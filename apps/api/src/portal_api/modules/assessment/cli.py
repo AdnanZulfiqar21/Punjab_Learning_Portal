@@ -12,12 +12,14 @@ import sys
 
 from portal_api.db import get_sessionmaker
 from portal_api.modules.assessment.attempts import expire_due
+from portal_api.modules.written.service import expire_due as expire_written
 
 
 def main(argv: list[str] | None = None) -> int:
     with get_sessionmaker()() as db:
         done = expire_due(db)
-    print(f"expired {done} attempt(s)")
+        written = expire_written(db)  # unsealed written scripts past U; never partially sealed
+    print(f"expired {done} MCQ attempt(s) and {written} written attempt(s)")
     return 0
 
 

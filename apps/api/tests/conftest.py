@@ -7,6 +7,7 @@ environment). Negative tests use isolated malformed copies of the input files, n
 from __future__ import annotations
 
 import os
+import tempfile
 
 TEST_URL = os.environ.get(
     "PORTAL_TEST_DATABASE_URL", "postgresql+psycopg://portal:portal-dev-only@127.0.0.1:55432/portal_test"
@@ -14,6 +15,8 @@ TEST_URL = os.environ.get(
 assert TEST_URL.rsplit("/", 1)[-1].endswith("_test"), "refusing to run tests against a non-test database"
 os.environ["PORTAL_DATABASE_URL"] = TEST_URL
 os.environ["PORTAL_ROLE"] = "test"
+# Uploaded evidence from tests goes to a throwaway directory, never the development store.
+os.environ.setdefault("PORTAL_EVIDENCE_DIR", tempfile.mkdtemp(prefix="portal-evidence-test-"))
 
 from collections.abc import Iterator  # noqa: E402
 

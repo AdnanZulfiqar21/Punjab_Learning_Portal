@@ -27,6 +27,7 @@ DEPLOYED_ENV = {
     "PORTAL_DEV_AUTH_ENABLED": "false",
     "PORTAL_OIDC_ISSUER": "https://idp.example.org/pool",
     "PORTAL_OIDC_AUDIENCE": "client-1",
+    "PORTAL_EVIDENCE_STORE": "s3",
 }
 
 

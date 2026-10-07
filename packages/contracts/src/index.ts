@@ -42,6 +42,14 @@ export type SubmissionReceipt = S["ReceiptOut"];
 export type AttemptResult = S["ResultOut"];
 export type ItemReview = S["ItemReview"];
 export type RevealResult = S["RevealOut"];
+export type WrittenAvailability = S["WrittenAvailabilityOut"];
+export type WrittenForm = S["WrittenFormOut"];
+export type WrittenAttempt = S["WrittenAttemptOut"];
+export type WrittenItem = S["WrittenItemOut"];
+export type WrittenPage = S["PageOut"];
+export type WrittenUpload = S["UploadOut"];
+export type WrittenReceipt = S["WrittenReceiptOut"];
+export type WrittenSeal = S["SealOut"];
 
 /** RFC 9457 problem details returned by every API error. */
 export interface Problem {

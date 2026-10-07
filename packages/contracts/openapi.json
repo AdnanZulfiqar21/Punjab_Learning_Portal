@@ -1871,6 +1871,30 @@
         "title": "LessonOut",
         "type": "object"
       },
+      "ManifestIn": {
+        "properties": {
+          "expected_revision": {
+            "minimum": 0.0,
+            "title": "Expected Revision",
+            "type": "integer"
+          },
+          "slots": {
+            "additionalProperties": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "description": "{\"1:a\": {\"pages\": [page_id], \"unanswered\": false}}",
+            "title": "Slots",
+            "type": "object"
+          }
+        },
+        "required": [
+          "expected_revision",
+          "slots"
+        ],
+        "title": "ManifestIn",
+        "type": "object"
+      },
       "MeOut": {
         "properties": {
           "consents": {
@@ -2088,6 +2112,65 @@
           "blocks"
         ],
         "title": "OptionSnapshot",
+        "type": "object"
+      },
+      "PageOut": {
+        "properties": {
+          "content_type": {
+            "title": "Content Type",
+            "type": "string"
+          },
+          "height": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Height"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "pdf_pages": {
+            "title": "Pdf Pages",
+            "type": "integer"
+          },
+          "size": {
+            "title": "Size",
+            "type": "integer"
+          },
+          "uploaded_at": {
+            "format": "date-time",
+            "title": "Uploaded At",
+            "type": "string"
+          },
+          "width": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Width"
+          }
+        },
+        "required": [
+          "id",
+          "size",
+          "content_type",
+          "width",
+          "height",
+          "pdf_pages",
+          "uploaded_at"
+        ],
+        "title": "PageOut",
         "type": "object"
       },
       "ProfileIn": {
@@ -2836,6 +2919,44 @@
         "title": "SaveOut",
         "type": "object"
       },
+      "SealIn": {
+        "properties": {
+          "expected_revision": {
+            "minimum": 0.0,
+            "title": "Expected Revision",
+            "type": "integer"
+          },
+          "idempotency_key": {
+            "maxLength": 80,
+            "minLength": 8,
+            "title": "Idempotency Key",
+            "type": "string"
+          }
+        },
+        "required": [
+          "idempotency_key",
+          "expected_revision"
+        ],
+        "title": "SealIn",
+        "type": "object"
+      },
+      "SealOut": {
+        "properties": {
+          "receipt": {
+            "$ref": "#/components/schemas/WrittenReceiptOut"
+          },
+          "replay": {
+            "title": "Replay",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "receipt",
+          "replay"
+        ],
+        "title": "SealOut",
+        "type": "object"
+      },
       "SearchHit": {
         "properties": {
           "chapter_id": {
@@ -3076,6 +3197,29 @@
           "expires_at"
         ],
         "title": "SessionOut",
+        "type": "object"
+      },
+      "SlotOut": {
+        "properties": {
+          "key": {
+            "title": "Key",
+            "type": "string"
+          },
+          "label": {
+            "title": "Label",
+            "type": "string"
+          },
+          "max_units": {
+            "title": "Max Units",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "key",
+          "label",
+          "max_units"
+        ],
+        "title": "SlotOut",
         "type": "object"
       },
       "SourceOut": {
@@ -3392,6 +3536,32 @@
         "title": "TopicNode",
         "type": "object"
       },
+      "UploadOut": {
+        "properties": {
+          "duplicate": {
+            "description": "The same file was already uploaded to this script; it was reused",
+            "title": "Duplicate",
+            "type": "boolean"
+          },
+          "page": {
+            "$ref": "#/components/schemas/PageOut"
+          },
+          "warnings": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Warnings",
+            "type": "array"
+          }
+        },
+        "required": [
+          "page",
+          "duplicate",
+          "warnings"
+        ],
+        "title": "UploadOut",
+        "type": "object"
+      },
       "ValidateIn": {
         "properties": {
           "body": {
@@ -3698,6 +3868,411 @@
           "reviews"
         ],
         "title": "VersionOut",
+        "type": "object"
+      },
+      "WrittenAttemptOut": {
+        "properties": {
+          "caps": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "title": "Caps",
+            "type": "object"
+          },
+          "form_id": {
+            "format": "uuid",
+            "title": "Form Id",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/WrittenItemOut"
+            },
+            "title": "Items",
+            "type": "array"
+          },
+          "manifest": {
+            "additionalProperties": true,
+            "title": "Manifest",
+            "type": "object"
+          },
+          "manifest_revision": {
+            "title": "Manifest Revision",
+            "type": "integer"
+          },
+          "max_units": {
+            "title": "Max Units",
+            "type": "integer"
+          },
+          "pages": {
+            "items": {
+              "$ref": "#/components/schemas/PageOut"
+            },
+            "title": "Pages",
+            "type": "array"
+          },
+          "receipt": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/WrittenReceiptOut"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "server_now": {
+            "format": "date-time",
+            "title": "Server Now",
+            "type": "string"
+          },
+          "started_at": {
+            "format": "date-time",
+            "title": "Started At",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "active",
+              "sealed",
+              "expired"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "upload_allowance_s": {
+            "title": "Upload Allowance S",
+            "type": "integer"
+          },
+          "upload_cutoff_at": {
+            "description": "U = D + G: nothing is admitted after this",
+            "format": "date-time",
+            "title": "Upload Cutoff At",
+            "type": "string"
+          },
+          "writing_deadline_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "D: writing should stop (not enforceable at home)",
+            "title": "Writing Deadline At"
+          }
+        },
+        "required": [
+          "id",
+          "form_id",
+          "status",
+          "started_at",
+          "writing_deadline_at",
+          "upload_cutoff_at",
+          "upload_allowance_s",
+          "server_now",
+          "max_units",
+          "caps",
+          "items",
+          "pages",
+          "manifest",
+          "manifest_revision",
+          "receipt"
+        ],
+        "title": "WrittenAttemptOut",
+        "type": "object"
+      },
+      "WrittenAvailabilityOut": {
+        "properties": {
+          "caps": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "title": "Caps",
+            "type": "object"
+          },
+          "chapters": {
+            "items": {
+              "$ref": "#/components/schemas/WrittenChapter"
+            },
+            "title": "Chapters",
+            "type": "array"
+          },
+          "grade": {
+            "title": "Grade",
+            "type": "integer"
+          },
+          "review_staffed": {
+            "description": "False means no teacher reviewer is available, so nothing is offered",
+            "title": "Review Staffed",
+            "type": "boolean"
+          },
+          "subject": {
+            "title": "Subject",
+            "type": "string"
+          },
+          "upload_allowance_s": {
+            "title": "Upload Allowance S",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "grade",
+          "subject",
+          "review_staffed",
+          "upload_allowance_s",
+          "caps",
+          "chapters"
+        ],
+        "title": "WrittenAvailabilityOut",
+        "type": "object"
+      },
+      "WrittenChapter": {
+        "properties": {
+          "chapter_id": {
+            "format": "uuid",
+            "title": "Chapter Id",
+            "type": "string"
+          },
+          "number": {
+            "title": "Number",
+            "type": "integer"
+          },
+          "questions": {
+            "description": "Reviewed written questions with a published rubric",
+            "title": "Questions",
+            "type": "integer"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "chapter_id",
+          "number",
+          "title",
+          "questions"
+        ],
+        "title": "WrittenChapter",
+        "type": "object"
+      },
+      "WrittenFormIn": {
+        "properties": {
+          "chapter_ids": {
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "maxItems": 40,
+            "minItems": 1,
+            "title": "Chapter Ids",
+            "type": "array"
+          },
+          "grade": {
+            "enum": [
+              11,
+              12
+            ],
+            "title": "Grade",
+            "type": "integer"
+          },
+          "question_count": {
+            "maximum": 10.0,
+            "minimum": 1.0,
+            "title": "Question Count",
+            "type": "integer"
+          },
+          "question_type": {
+            "default": "mixed",
+            "enum": [
+              "short",
+              "long",
+              "mixed"
+            ],
+            "title": "Question Type",
+            "type": "string"
+          },
+          "subject": {
+            "maxLength": 40,
+            "minLength": 2,
+            "title": "Subject",
+            "type": "string"
+          },
+          "writing_minutes": {
+            "anyOf": [
+              {
+                "maximum": 180.0,
+                "minimum": 5.0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "None = untimed practice",
+            "title": "Writing Minutes"
+          }
+        },
+        "required": [
+          "grade",
+          "subject",
+          "chapter_ids",
+          "question_count"
+        ],
+        "title": "WrittenFormIn",
+        "type": "object"
+      },
+      "WrittenFormOut": {
+        "properties": {
+          "caps": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "title": "Caps",
+            "type": "object"
+          },
+          "capture_policy_version": {
+            "title": "Capture Policy Version",
+            "type": "integer"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "max_units": {
+            "title": "Max Units",
+            "type": "integer"
+          },
+          "question_count": {
+            "title": "Question Count",
+            "type": "integer"
+          },
+          "upload_allowance_s": {
+            "title": "Upload Allowance S",
+            "type": "integer"
+          },
+          "writing_s": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Writing S"
+          }
+        },
+        "required": [
+          "id",
+          "question_count",
+          "max_units",
+          "writing_s",
+          "upload_allowance_s",
+          "capture_policy_version",
+          "caps",
+          "created_at"
+        ],
+        "title": "WrittenFormOut",
+        "type": "object"
+      },
+      "WrittenItemOut": {
+        "description": "What the learner sees: the question and its marks. Rubrics are never part of this payload.",
+        "properties": {
+          "answer_language": {
+            "title": "Answer Language",
+            "type": "string"
+          },
+          "max_units": {
+            "title": "Max Units",
+            "type": "integer"
+          },
+          "position": {
+            "title": "Position",
+            "type": "integer"
+          },
+          "slots": {
+            "items": {
+              "$ref": "#/components/schemas/SlotOut"
+            },
+            "title": "Slots",
+            "type": "array"
+          },
+          "stem": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Stem",
+            "type": "array"
+          },
+          "subparts": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Subparts",
+            "type": "array"
+          }
+        },
+        "required": [
+          "position",
+          "max_units",
+          "stem",
+          "subparts",
+          "slots",
+          "answer_language"
+        ],
+        "title": "WrittenItemOut",
+        "type": "object"
+      },
+      "WrittenReceiptOut": {
+        "properties": {
+          "admitted_at": {
+            "format": "date-time",
+            "title": "Admitted At",
+            "type": "string"
+          },
+          "answered_slots": {
+            "title": "Answered Slots",
+            "type": "integer"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "manifest_revision": {
+            "title": "Manifest Revision",
+            "type": "integer"
+          },
+          "unanswered_slots": {
+            "title": "Unanswered Slots",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id",
+          "admitted_at",
+          "manifest_revision",
+          "answered_slots",
+          "unanswered_slots"
+        ],
+        "title": "WrittenReceiptOut",
         "type": "object"
       },
       "portal_api__modules__assessment__schemas__SubmitIn": {
@@ -5820,6 +6395,401 @@
         "summary": "Dry-run validation for the editor (writes nothing)",
         "tags": [
           "studio"
+        ]
+      }
+    },
+    "/v1/written-attempts/{attempt_id}": {
+      "get": {
+        "operationId": "get_attempt_v1_written_attempts__attempt_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "attempt_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Attempt Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WrittenAttemptOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Attempt",
+        "tags": [
+          "written practice"
+        ]
+      }
+    },
+    "/v1/written-attempts/{attempt_id}/manifest": {
+      "put": {
+        "operationId": "put_manifest_v1_written_attempts__attempt_id__manifest_put",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "attempt_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Attempt Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ManifestIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WrittenAttemptOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Put Manifest",
+        "tags": [
+          "written practice"
+        ]
+      }
+    },
+    "/v1/written-attempts/{attempt_id}/pages": {
+      "post": {
+        "operationId": "upload_v1_written_attempts__attempt_id__pages_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "attempt_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Attempt Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UploadOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Upload one page (raw JPEG, PNG or PDF body; bounded)",
+        "tags": [
+          "written practice"
+        ]
+      }
+    },
+    "/v1/written-attempts/{attempt_id}/pages/{page_id}": {
+      "get": {
+        "operationId": "get_page_v1_written_attempts__attempt_id__pages__page_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "attempt_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Attempt Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "page_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Page Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Your own uploaded page (private)",
+        "tags": [
+          "written practice"
+        ]
+      }
+    },
+    "/v1/written-attempts/{attempt_id}/seal": {
+      "post": {
+        "operationId": "seal_v1_written_attempts__attempt_id__seal_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "attempt_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Attempt Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SealIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SealOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Submit the answer script (\u00a720.7.2)",
+        "tags": [
+          "written practice"
+        ]
+      }
+    },
+    "/v1/written/availability": {
+      "get": {
+        "operationId": "availability_v1_written_availability_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "grade",
+            "required": true,
+            "schema": {
+              "maximum": 12,
+              "minimum": 11,
+              "title": "Grade",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "subject",
+            "required": true,
+            "schema": {
+              "maxLength": 40,
+              "minLength": 2,
+              "title": "Subject",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WrittenAvailabilityOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Availability",
+        "tags": [
+          "written practice"
+        ]
+      }
+    },
+    "/v1/written/forms": {
+      "post": {
+        "operationId": "create_form_v1_written_forms_post",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "maxLength": 80,
+              "minLength": 8,
+              "title": "Idempotency-Key",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WrittenFormIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WrittenFormOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Create Form",
+        "tags": [
+          "written practice"
+        ]
+      }
+    },
+    "/v1/written/forms/{form_id}/attempt": {
+      "post": {
+        "operationId": "start_v1_written_forms__form_id__attempt_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "form_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Form Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WrittenAttemptOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Start",
+        "tags": [
+          "written practice"
         ]
       }
     }
