@@ -10,15 +10,18 @@ ItemStateName = Literal["draft", "submitted", "changes_requested", "approved", "
 AvailabilityName = Literal["unpublished", "live", "quarantined", "retired"]
 
 
-KindName = Literal["lesson", "mcq"]
+KindName = Literal["lesson", "mcq", "written", "rubric"]
 
 
 class ItemCreateIn(BaseModel):
     kind: KindName = "lesson"
-    chapter_id: uuid.UUID
+    chapter_id: uuid.UUID | None = Field(
+        default=None, description="Required except for rubrics (taken from the question)"
+    )
     topic_id: uuid.UUID | None = None
     title: str = Field(min_length=3, max_length=200)
     family_of: uuid.UUID | None = Field(default=None, description="Create a reviewed variant in this question's family")
+    parent_item_id: uuid.UUID | None = Field(default=None, description="For a rubric: the written question it marks")
 
 
 class DraftIn(BaseModel):
@@ -138,6 +141,7 @@ class ItemSummary(BaseModel):
     updated_at: datetime
     open_feedback: int = Field(description="Change requests on the working version not yet addressed.")
     family_id: uuid.UUID | None
+    parent_item_id: uuid.UUID | None
     quarantine_level: Literal["SOFT", "VOID", "KEY_ERROR"] | None
 
 

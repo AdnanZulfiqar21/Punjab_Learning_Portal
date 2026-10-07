@@ -24,6 +24,16 @@ import { Badge, Notice } from "@/components/ui";
 import { GRADE_LABEL } from "@/lib/format";
 import { BlockEditor, normaliseBlocks, SourceRefsEditor } from "./block-editor";
 import { McqEditor, McqPreview, mcqSections, normaliseMcq } from "./mcq-editor";
+import {
+  normaliseRubric,
+  normaliseWritten,
+  RubricEditor,
+  RubricPreview,
+  WrittenEditor,
+  WrittenPreview,
+  writtenSections,
+  type QuestionVersionChoice,
+} from "./written-editor";
 
 const STATE_LABEL: Record<string, string> = {
   draft: "Draft",
@@ -47,11 +57,22 @@ type Draft = { title: string; body: Body; refs: SourceRef[] };
 const blocksOf = (body: Body) => (Array.isArray(body.blocks) ? (body.blocks as Block[]) : []);
 
 function normaliseBody(kind: string, body: Body): Body {
-  return kind === "mcq" ? normaliseMcq(body) : { blocks: normaliseBlocks(blocksOf(body)) };
+  if (kind === "mcq") return normaliseMcq(body);
+  if (kind === "written") return normaliseWritten(body);
+  if (kind === "rubric") return normaliseRubric(body);
+  return { blocks: normaliseBlocks(blocksOf(body)) };
+}
+
+function Preview({ kind, body }: { kind: string; body: Body }) {
+  if (kind === "mcq") return <McqPreview body={body} />;
+  if (kind === "written") return <WrittenPreview body={body} />;
+  if (kind === "rubric") return <RubricPreview body={body} />;
+  return <LessonBlocks blocks={blocksOf(body)} headingOffset={1} />;
 }
 
 function sections(kind: string, body: Body): { label: string; text: string }[] {
   if (kind === "mcq") return mcqSections(body);
+  if (kind === "written" || kind === "rubric") return writtenSections(kind, body);
   return blocksOf(body).map((b, i) => ({ label: `Block ${i + 1}`, text: JSON.stringify(b) }));
 }
 
@@ -91,7 +112,17 @@ function writeLocal(id: string, value: string | null) {
 }
 const noopSubscribe = () => () => {};
 
-export function Workspace({ item, history, myId }: { item: StudioItem; history: StudioHistoryEvent[]; myId: string }) {
+export function Workspace({
+  item,
+  history,
+  myId,
+  questionVersions = [],
+}: {
+  item: StudioItem;
+  history: StudioHistoryEvent[];
+  myId: string;
+  questionVersions?: QuestionVersionChoice[];
+}) {
   const router = useRouter();
   const working = item.working;
   const editable = item.actions.edit && !!working;
@@ -257,6 +288,10 @@ export function Workspace({ item, history, myId }: { item: StudioItem; history: 
             </div>
             {item.kind === "mcq" ? (
               <McqEditor body={draft.body} onChange={(body) => change({ ...draft, body })} />
+            ) : item.kind === "written" ? (
+              <WrittenEditor body={draft.body} onChange={(body) => change({ ...draft, body })} />
+            ) : item.kind === "rubric" ? (
+              <RubricEditor body={draft.body} onChange={(body) => change({ ...draft, body })} versions={questionVersions} />
             ) : (
               <BlockEditor blocks={blocksOf(draft.body)} onChange={(blocks) => change({ ...draft, body: { blocks } })} />
             )}
@@ -272,7 +307,7 @@ export function Workspace({ item, history, myId }: { item: StudioItem; history: 
         ) : (
           <article className="space-y-4 rounded-xl border border-border bg-surface p-5">
             <h2 className="text-2xl font-semibold tracking-tight">{draft.title}</h2>
-            {item.kind === "mcq" ? <McqPreview body={draft.body} /> : <LessonBlocks blocks={blocksOf(draft.body)} headingOffset={1} />}
+            <Preview kind={item.kind} body={draft.body} />
             <SourceList refs={draft.refs} label={item.source.source_id} />
           </article>
         )}
@@ -280,11 +315,7 @@ export function Workspace({ item, history, myId }: { item: StudioItem; history: 
           <details className="rounded-xl border border-border bg-surface p-4">
             <summary className="cursor-pointer font-medium">Learners currently see version {item.published.number}</summary>
             <div className="mt-4">
-              {item.kind === "mcq" ? (
-                <McqPreview body={item.published.body as Body} />
-              ) : (
-                <LessonBlocks blocks={blocksOf(item.published.body as Body)} headingOffset={1} />
-              )}
+              <Preview kind={item.kind} body={item.published.body as Body} />
             </div>
           </details>
         )}

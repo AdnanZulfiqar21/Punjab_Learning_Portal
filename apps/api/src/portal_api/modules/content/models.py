@@ -49,7 +49,7 @@ class VersionStatus(StrEnum):
     superseded = "superseded"  # an older published version, or a draft abandoned by retirement
 
 
-ITEM_KINDS = ("lesson", "mcq")  # see kinds.py; written questions and rubrics follow (W-tasks)
+ITEM_KINDS = ("lesson", "mcq", "written", "rubric")  # see kinds.py
 QUARANTINE_LEVELS = ("SOFT", "VOID", "KEY_ERROR")  # §5.7, questions only
 
 
@@ -97,6 +97,10 @@ class ContentItem(Base):
     # Canonical question family (P08.S3.T1): reviewed variants/translations share one family, so sampling and exposure
     # caps treat them as one underlying item. Null for lessons.
     family_id: Mapped[uuid.UUID | None] = mapped_column(UUID(as_uuid=True), index=True)
+    # A rubric belongs to one written question (§20.6.2); other kinds have no parent.
+    parent_item_id: Mapped[uuid.UUID | None] = mapped_column(
+        ForeignKey("content_item.id", ondelete="RESTRICT", name="fk_content_item_parent"), index=True
+    )
 
     versions: Mapped[list[ContentVersion]] = relationship(
         back_populates="item", foreign_keys="ContentVersion.item_id", order_by="ContentVersion.number"

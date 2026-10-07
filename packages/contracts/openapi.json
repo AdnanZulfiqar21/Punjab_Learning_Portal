@@ -1087,9 +1087,17 @@
       "ItemCreateIn": {
         "properties": {
           "chapter_id": {
-            "format": "uuid",
-            "title": "Chapter Id",
-            "type": "string"
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Required except for rubrics (taken from the question)",
+            "title": "Chapter Id"
           },
           "family_of": {
             "anyOf": [
@@ -1108,10 +1116,25 @@
             "default": "lesson",
             "enum": [
               "lesson",
-              "mcq"
+              "mcq",
+              "written",
+              "rubric"
             ],
             "title": "Kind",
             "type": "string"
+          },
+          "parent_item_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "For a rubric: the written question it marks",
+            "title": "Parent Item Id"
           },
           "title": {
             "maxLength": 200,
@@ -1133,7 +1156,6 @@
           }
         },
         "required": [
-          "chapter_id",
           "title"
         ],
         "title": "ItemCreateIn",
@@ -1262,7 +1284,9 @@
           "kind": {
             "enum": [
               "lesson",
-              "mcq"
+              "mcq",
+              "written",
+              "rubric"
             ],
             "title": "Kind",
             "type": "string"
@@ -1271,6 +1295,18 @@
             "description": "Change requests on the working version not yet addressed.",
             "title": "Open Feedback",
             "type": "integer"
+          },
+          "parent_item_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Parent Item Id"
           },
           "published": {
             "anyOf": [
@@ -1417,6 +1453,7 @@
           "updated_at",
           "open_feedback",
           "family_id",
+          "parent_item_id",
           "quarantine_level",
           "availability_reason",
           "working",
@@ -1627,7 +1664,9 @@
           "kind": {
             "enum": [
               "lesson",
-              "mcq"
+              "mcq",
+              "written",
+              "rubric"
             ],
             "title": "Kind",
             "type": "string"
@@ -1636,6 +1675,18 @@
             "description": "Change requests on the working version not yet addressed.",
             "title": "Open Feedback",
             "type": "integer"
+          },
+          "parent_item_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Parent Item Id"
           },
           "published_version": {
             "anyOf": [
@@ -1743,6 +1794,7 @@
           "updated_at",
           "open_feedback",
           "family_id",
+          "parent_item_id",
           "quarantine_level"
         ],
         "title": "ItemSummary",
@@ -3361,7 +3413,9 @@
             "default": "lesson",
             "enum": [
               "lesson",
-              "mcq"
+              "mcq",
+              "written",
+              "rubric"
             ],
             "title": "Kind",
             "type": "string"
@@ -5568,7 +5622,7 @@
             "schema": {
               "anyOf": [
                 {
-                  "pattern": "^(lesson|mcq)$",
+                  "pattern": "^(lesson|mcq|written|rubric)$",
                   "type": "string"
                 },
                 {

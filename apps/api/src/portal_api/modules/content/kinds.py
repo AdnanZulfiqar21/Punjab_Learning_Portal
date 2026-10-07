@@ -8,7 +8,7 @@ from collections.abc import Callable
 from dataclasses import dataclass
 from typing import Any
 
-from portal_api.modules.content import blocks, mcq
+from portal_api.modules.content import blocks, mcq, written
 
 
 @dataclass(frozen=True)
@@ -30,6 +30,20 @@ def _lesson_parse(body: object) -> tuple[dict[str, Any] | None, list[str], list[
     if parsed is None:
         return None, errors, []
     return parsed.model_dump(mode="json", exclude_none=True), [], sorted({b.type for b in parsed.blocks})
+
+
+def _written_parse(body: object) -> tuple[dict[str, Any] | None, list[str], list[str]]:
+    q, errors = written.parse_written(body)
+    if q is None:
+        return None, errors, []
+    return q.model_dump(mode="json", exclude_none=True), [], written.written_block_types(q)
+
+
+def _rubric_parse(body: object) -> tuple[dict[str, Any] | None, list[str], list[str]]:
+    r, errors = written.parse_rubric(body)
+    if r is None:
+        return None, errors, []
+    return r.model_dump(mode="json", exclude_none=True), [], []
 
 
 def _mcq_parse(body: object) -> tuple[dict[str, Any] | None, list[str], list[str]]:
@@ -59,6 +73,26 @@ KINDS: dict[str, KindSpec] = {
         review_checklist=mcq.REVIEW_CHECKLIST,
         quarantine_levels=("SOFT", "VOID", "KEY_ERROR"),
         learner_readable=False,
+    ),
+    "written": KindSpec(
+        name="written",
+        label="Written question",
+        empty_body=lambda: dict(written.WRITTEN_EMPTY),
+        parse_draft=_written_parse,
+        validate=lambda body, pub: written.validate_written(body, for_publication=pub),
+        review_checklist=written.WRITTEN_CHECKLIST,
+        quarantine_levels=("SOFT", "VOID"),
+        learner_readable=False,
+    ),
+    "rubric": KindSpec(
+        name="rubric",
+        label="Marking rubric",
+        empty_body=lambda: dict(written.RUBRIC_EMPTY),
+        parse_draft=_rubric_parse,
+        validate=lambda body, pub: written.validate_rubric(body, for_publication=pub),
+        review_checklist=written.RUBRIC_CHECKLIST,
+        quarantine_levels=("SOFT",),
+        learner_readable=False,  # rubrics are marking secrets until a result is released
     ),
 }
 

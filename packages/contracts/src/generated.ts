@@ -1172,9 +1172,9 @@ export interface components {
         ItemCreateIn: {
             /**
              * Chapter Id
-             * Format: uuid
+             * @description Required except for rubrics (taken from the question)
              */
-            chapter_id: string;
+            chapter_id?: string | null;
             /**
              * Family Of
              * @description Create a reviewed variant in this question's family
@@ -1185,7 +1185,12 @@ export interface components {
              * @default lesson
              * @enum {string}
              */
-            kind: "lesson" | "mcq";
+            kind: "lesson" | "mcq" | "written" | "rubric";
+            /**
+             * Parent Item Id
+             * @description For a rubric: the written question it marks
+             */
+            parent_item_id?: string | null;
             /** Title */
             title: string;
             /** Topic Id */
@@ -1236,12 +1241,14 @@ export interface components {
              * Kind
              * @enum {string}
              */
-            kind: "lesson" | "mcq";
+            kind: "lesson" | "mcq" | "written" | "rubric";
             /**
              * Open Feedback
              * @description Change requests on the working version not yet addressed.
              */
             open_feedback: number;
+            /** Parent Item Id */
+            parent_item_id: string | null;
             published: components["schemas"]["VersionOut"] | null;
             /** Published Version */
             published_version: number | null;
@@ -1356,12 +1363,14 @@ export interface components {
              * Kind
              * @enum {string}
              */
-            kind: "lesson" | "mcq";
+            kind: "lesson" | "mcq" | "written" | "rubric";
             /**
              * Open Feedback
              * @description Change requests on the working version not yet addressed.
              */
             open_feedback: number;
+            /** Parent Item Id */
+            parent_item_id: string | null;
             /** Published Version */
             published_version: number | null;
             /** Quarantine Level */
@@ -1982,7 +1991,7 @@ export interface components {
              * @default lesson
              * @enum {string}
              */
-            kind: "lesson" | "mcq";
+            kind: "lesson" | "mcq" | "written" | "rubric";
             /** Source Refs */
             source_refs?: {
                 [key: string]: unknown;
