@@ -756,6 +756,91 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/studio/written/cases/{case_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Case Detail */
+        get: operations["case_detail_v1_studio_written_cases__case_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/studio/written/cases/{case_id}/decision": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Save or release marks (expected-version CAS; awards must be permitted rubric levels) */
+        post: operations["decision_v1_studio_written_cases__case_id__decision_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/studio/written/cases/{case_id}/lease": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Take or renew the marking lease */
+        post: operations["take_lease_v1_studio_written_cases__case_id__lease_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/studio/written/cases/{case_id}/pages/{page_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Submitted evidence page (markers in scope) */
+        get: operations["case_page_v1_studio_written_cases__case_id__pages__page_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/studio/written/queue": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Scripts awaiting marking in your scope */
+        get: operations["marking_queue_v1_studio_written_queue_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/written-attempts/{attempt_id}": {
         parameters: {
             query?: never;
@@ -816,6 +901,23 @@ export interface paths {
         };
         /** Your own uploaded page (private) */
         get: operations["get_page_v1_written_attempts__attempt_id__pages__page_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/written-attempts/{attempt_id}/result": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Your marks, once a teacher has released them */
+        get: operations["my_result_v1_written_attempts__attempt_id__result_get"];
         put?: never;
         post?: never;
         delete?: never;
@@ -1058,6 +1160,117 @@ export interface components {
             source_id: string;
             subject: components["schemas"]["SubjectOut"];
         };
+        /** CaseDetail */
+        CaseDetail: {
+            /**
+             * Case Kind
+             * @enum {string}
+             */
+            case_kind: "initial" | "recheck";
+            /** Grade */
+            grade: number;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            latest: components["schemas"]["StaffScore"] | null;
+            /** Lease Expires At */
+            lease_expires_at: string | null;
+            /** Leased By Me */
+            leased_by_me: boolean;
+            /** Leased By Other */
+            leased_by_other: boolean;
+            /** Manifest */
+            manifest: {
+                [key: string]: unknown;
+            };
+            /** Max Units */
+            max_units: number;
+            /**
+             * Opened At
+             * Format: date-time
+             */
+            opened_at: string;
+            /** Pages */
+            pages: components["schemas"]["PageOut"][];
+            /** Questions */
+            questions: components["schemas"]["CaseQuestion"][];
+            /**
+             * Reference
+             * @description Short script reference; learner identity is not shown to markers
+             */
+            reference: string;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "queued" | "released";
+            /** Subject */
+            subject: string;
+            /** Version */
+            version: number;
+        };
+        /** CaseQuestion */
+        CaseQuestion: {
+            /** Max Units */
+            max_units: number;
+            /** Position */
+            position: number;
+            /** Question */
+            question: {
+                [key: string]: unknown;
+            };
+            /** Rubric */
+            rubric: {
+                [key: string]: unknown;
+            };
+            /**
+             * Rubric Version Id
+             * Format: uuid
+             */
+            rubric_version_id: string;
+            /** Slots */
+            slots: string[];
+        };
+        /** CaseSummary */
+        CaseSummary: {
+            /**
+             * Case Kind
+             * @enum {string}
+             */
+            case_kind: "initial" | "recheck";
+            /** Grade */
+            grade: number;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Leased By Me */
+            leased_by_me: boolean;
+            /** Leased By Other */
+            leased_by_other: boolean;
+            /**
+             * Opened At
+             * Format: date-time
+             */
+            opened_at: string;
+            /**
+             * Reference
+             * @description Short script reference; learner identity is not shown to markers
+             */
+            reference: string;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "queued" | "released";
+            /** Subject */
+            subject: string;
+            /** Version */
+            version: number;
+        };
         /** CatalogueOut */
         CatalogueOut: {
             /** Grades */
@@ -1186,6 +1399,47 @@ export interface components {
             version: string;
             /** Withdrawn At */
             withdrawn_at: string | null;
+        };
+        /** CriterionResult */
+        CriterionResult: {
+            /** Description */
+            description: string;
+            /** Earned Units */
+            earned_units: number;
+            /** Id */
+            id: string;
+            /** Max Units */
+            max_units: number;
+            /** Reason */
+            reason: string;
+            /** Subpart Id */
+            subpart_id: string | null;
+        };
+        /** DecisionIn */
+        DecisionIn: {
+            /**
+             * Awards
+             * @description {"1": {"a1": {"units": 100, "reason": "…"}}}
+             */
+            awards: {
+                [key: string]: {
+                    [key: string]: {
+                        [key: string]: unknown;
+                    };
+                };
+            };
+            /** Expected Version */
+            expected_version: number;
+            /**
+             * Reason
+             * @default
+             */
+            reason: string;
+            /**
+             * Release
+             * @default false
+             */
+            release: boolean;
         };
         /** DraftIn */
         DraftIn: {
@@ -1742,6 +1996,17 @@ export interface components {
             /** Reason */
             reason: string;
         };
+        /** QuestionResult */
+        QuestionResult: {
+            /** Criteria */
+            criteria: components["schemas"]["CriterionResult"][];
+            /** Earned Units */
+            earned_units: number;
+            /** Max Units */
+            max_units: number;
+            /** Position */
+            position: number;
+        };
         /** ReceiptOut */
         ReceiptOut: {
             /**
@@ -2111,6 +2376,32 @@ export interface components {
             /** Source Id */
             source_id: string;
         };
+        /** StaffScore */
+        StaffScore: {
+            /** Awards */
+            awards: {
+                [key: string]: unknown;
+            };
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /** Max Units */
+            max_units: number;
+            /** Question Units */
+            question_units: {
+                [key: string]: number;
+            };
+            /** Reason */
+            reason: string;
+            /** Released */
+            released: boolean;
+            /** Total Units */
+            total_units: number;
+            /** Version */
+            version: number;
+        };
         /** SubjectInGrade */
         SubjectInGrade: {
             /** Books */
@@ -2468,6 +2759,26 @@ export interface components {
             manifest_revision: number;
             /** Unanswered Slots */
             unanswered_slots: number;
+        };
+        /** WrittenResultOut */
+        WrittenResultOut: {
+            /** Decision Method */
+            decision_method: string | null;
+            /** Max Units */
+            max_units: number;
+            /** Questions */
+            questions: components["schemas"]["QuestionResult"][];
+            /** Released At */
+            released_at: string | null;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "pending" | "released";
+            /** Total Units */
+            total_units: number | null;
+            /** Version */
+            version: number | null;
         };
         /** SubmitIn */
         portal_api__modules__assessment__schemas__SubmitIn: {
@@ -3869,6 +4180,155 @@ export interface operations {
             };
         };
     };
+    case_detail_v1_studio_written_cases__case_id__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                case_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CaseDetail"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    decision_v1_studio_written_cases__case_id__decision_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                case_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["DecisionIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CaseDetail"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    take_lease_v1_studio_written_cases__case_id__lease_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                case_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CaseDetail"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    case_page_v1_studio_written_cases__case_id__pages__page_id__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                case_id: string;
+                page_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": unknown;
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    marking_queue_v1_studio_written_queue_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CaseSummary"][];
+                };
+            };
+        };
+    };
     get_attempt_v1_written_attempts__attempt_id__get: {
         parameters: {
             query?: never;
@@ -3985,6 +4445,37 @@ export interface operations {
                 };
                 content: {
                     "application/json": unknown;
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    my_result_v1_written_attempts__attempt_id__result_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                attempt_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["WrittenResultOut"];
                 };
             };
             /** @description Validation Error */

@@ -413,3 +413,15 @@ def test_publication_rights_survive_reimport(client: TestClient, db: Session) ->
     assert fresh.publication_rights_evidence == "Test fixture: owner decision record TEST-2"
     who = db.get(AppUser, fresh.publication_rights_set_by)
     assert who is not None and who.email == owner.email
+
+
+def test_queue_scope_is_applied_before_the_limit(client: TestClient, db: Session) -> None:
+    bio = Staff(client, db, ["content_author"], {"grades": [11], "subjects": ["biology"]})
+    chem = Staff(client, db, ["content_author"], {"grades": [11], "subjects": ["chemistry"]})
+    bio_chapter, _ = _chapter(db, 11, "biology")
+    chem_chapter, _ = _chapter(db, 11, "chemistry")
+    mine = _create(client, bio, bio_chapter, "Scoped item")
+    for i in range(3):  # newer items outside the biology author's scope must not crowd it out of a small page
+        _create(client, chem, chem_chapter, f"Other scope {i}")
+    page = client.get("/v1/studio/queue?limit=1", headers=bio.headers).json()
+    assert [i["id"] for i in page] == [mine["id"]]

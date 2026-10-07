@@ -50,6 +50,10 @@ export type WrittenPage = S["PageOut"];
 export type WrittenUpload = S["UploadOut"];
 export type WrittenReceipt = S["WrittenReceiptOut"];
 export type WrittenSeal = S["SealOut"];
+export type MarkingCaseSummary = S["CaseSummary"];
+export type MarkingCase = S["CaseDetail"];
+export type MarkingScore = S["StaffScore"];
+export type WrittenResult = S["WrittenResultOut"];
 
 /** RFC 9457 problem details returned by every API error. */
 export interface Problem {

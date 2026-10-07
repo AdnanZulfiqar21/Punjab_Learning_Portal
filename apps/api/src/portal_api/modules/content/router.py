@@ -7,7 +7,7 @@ from typing import Annotated
 
 from fastapi import APIRouter, Depends, Query, Response
 from sqlalchemy import select
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, selectinload
 
 from portal_api.db import get_session
 from portal_api.errors import Forbidden, NotFound
@@ -116,9 +116,17 @@ def _open_feedback(item: ContentItem) -> int:
     return sum(1 for r in item.working.reviews if r.decision == "request_changes")
 
 
-def _summary_fields(db: Session, item: ContentItem, email: _Emails) -> dict[str, object]:
-    chapter = db.get(Chapter, item.chapter_id)
-    topic = db.get(Topic, item.topic_id) if item.topic_id else None
+def _summary_fields(
+    db: Session,
+    item: ContentItem,
+    email: _Emails,
+    chapters: dict[uuid.UUID, Chapter] | None = None,
+    topics: dict[uuid.UUID, Topic] | None = None,
+) -> dict[str, object]:
+    chapter = chapters.get(item.chapter_id) if chapters is not None else db.get(Chapter, item.chapter_id)
+    topic = None
+    if item.topic_id:
+        topic = topics.get(item.topic_id) if topics is not None else db.get(Topic, item.topic_id)
     return {
         "id": item.id,
         "kind": item.kind,
@@ -265,7 +273,17 @@ def queue(
     limit: Annotated[int, Query(ge=1, le=200)] = 100,
 ) -> list[ItemSummary]:
     _no_store(response)
-    stmt = select(ContentItem).order_by(ContentItem.updated_at.desc()).limit(limit)
+    # Scope is applied in SQL before LIMIT, and related rows are batch-loaded (no per-item queries).
+    stmt = (
+        select(ContentItem)
+        .where(workflow.scope_clause(db, who.user.id, CONTENT_ROLES))
+        .options(
+            selectinload(ContentItem.working).selectinload(ContentVersion.reviews),
+            selectinload(ContentItem.published),
+        )
+        .order_by(ContentItem.updated_at.desc())
+        .limit(limit)
+    )
     if state:
         stmt = stmt.where(ContentItem.state == state)
     if availability:
@@ -280,14 +298,12 @@ def queue(
         stmt = stmt.where(ContentItem.subject_code == subject)
     if mine:
         stmt = stmt.where((ContentItem.created_by == who.user.id) | (ContentItem.assigned_reviewer_id == who.user.id))
+    items = list(db.scalars(stmt))
+    chapters = {c.id: c for c in db.scalars(select(Chapter).where(Chapter.id.in_({i.chapter_id for i in items})))}
+    topic_ids = {i.topic_id for i in items if i.topic_id}
+    topics = {t.id: t for t in db.scalars(select(Topic).where(Topic.id.in_(topic_ids)))} if topic_ids else {}
     email = _Emails(db)
-    out: list[ItemSummary] = []
-    for item in db.scalars(stmt):
-        # Staff see only items inside the scope of their content roles.
-        if not workflow.roles_in_scope(db, who.user.id, item.grade_number, item.subject_code) & CONTENT_ROLES:
-            continue
-        out.append(ItemSummary(**_summary_fields(db, item, email)))  # type: ignore[arg-type]
-    return out
+    return [ItemSummary(**_summary_fields(db, i, email, chapters, topics)) for i in items]  # type: ignore[arg-type]
 
 
 def _scoped_item(db: Session, who: Principal, item_id: uuid.UUID) -> ContentItem:

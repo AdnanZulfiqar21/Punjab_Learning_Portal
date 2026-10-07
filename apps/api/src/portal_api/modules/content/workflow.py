@@ -68,6 +68,32 @@ def roles_in_scope(db: Session, user_id: uuid.UUID, grade: int, subject: str) ->
     return held
 
 
+def scope_clause(db: Session, user_id: uuid.UUID, roles: set[Role]) -> Any:
+    """SQL filter for items inside the user's grants of `roles` (one query for grants, applied before LIMIT).
+    Returns True for unrestricted access and False when the user holds none of the roles."""
+    from sqlalchemy import and_, false, or_, true
+
+    clauses = []
+    for grant in db.scalars(
+        select(StaffRoleGrant).where(
+            StaffRoleGrant.user_id == user_id,
+            StaffRoleGrant.revoked_at.is_(None),
+            StaffRoleGrant.role.in_([r.value for r in roles]),
+        )
+    ):
+        scope = grant.scope or {}
+        grades, subjects = scope.get("grades"), scope.get("subjects")
+        if grades is None and subjects is None:
+            return true()
+        parts = []
+        if grades is not None:
+            parts.append(ContentItem.grade_number.in_(grades))
+        if subjects is not None:
+            parts.append(ContentItem.subject_code.in_(subjects))
+        clauses.append(and_(*parts))
+    return or_(*clauses) if clauses else false()
+
+
 def _require_scoped(db: Session, who: Principal, permission: Permission, item: ContentItem) -> None:
     perms = permissions_for(roles_in_scope(db, who.user.id, item.grade_number, item.subject_code))
     if permission not in perms:

@@ -64,6 +64,9 @@ Source plan: `Road Map/Punjab_Learning_Portal_Master_Roadmap_v2.2_Integrated_Wri
 | W04.S1.T1–T3 Written forms and start terms | IMPLEMENTED | Rubric-backed, staffed-review-only pool; frozen versions; D/G/U disclosed before start | API tests; E2E | Choice sections; entitlement permit (P14) |
 | W04.S2.T1–T3 Deadline-safe sealing | IMPLEMENTED | Lock-then-clock admission ≤ U; one receipt; exact retry after U; changed payload conflicts; post-seal edits refused | API tests | Parent/child composite (R3) |
 | W04.S3.T1 Expired drafts | IMPLEMENTED | Expiry after U without a receipt; honest received-pages list | API test | Recovery practice policy |
+| W06.S1.T1 Evidence and rubric context | IMPLEMENTED | Marking workspace: submitted pages, mapping, pinned question and rubric, no learner identity (IMPL-21) | API + E2E | Region zoom, reading alternatives |
+| W06.S1.T2 Safe assignment and decisions | IMPLEMENTED | Leases, expected-version CAS, rubric-bound awards, immutable score versions with assessor and reasons | `test_written_marking.py` | Reassignment by a lead |
+| W07.S1.T1 Marks presentation | IN_PROGRESS | Released per-question and per-criterion marks with reasons; pending state until release | E2E | Completeness states (pending/unavailable) per question |
 | P10.S2.T2 Local recovery queues | IMPLEMENTED (web) | Persisted pending ops shown as pending, re-sent on reload/reconnect with jittered backoff; receipts reconcile (IMPL-18) | practice E2E (offline then reconnect, reload) | Mobile secure-storage queue |
 | P10.S2.T3 Offline fairness and tolerance | IMPLEMENTED (server + web notice) | T pinned at start; tolerance rule shown before a timed test; late ops reported as not counted | deadline tests; E2E notice | Outage/reschedule policy (ops) |
 | P11 Practice journey (web) | IN_PROGRESS | `/practice` builder, attempt runner, result review | `e2e/practice.spec.ts` | Progress history, revision notebook (P12) |
