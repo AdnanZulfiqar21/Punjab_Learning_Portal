@@ -6,6 +6,9 @@ export default defineConfig({
   testDir: "./e2e",
   timeout: 30_000,
   retries: process.env.CI ? 1 : 0,
+  // The suite drives one local API process; auth journeys run deliberate argon2 hashes. Bounded parallelism keeps
+  // results about the product, not about saturating a laptop or CI runner.
+  workers: process.env.CI ? 2 : 3,
   // A retry is diagnostic only: a test that needs one fails CI (it hid a real form-swap defect once).
   failOnFlakyTests: !!process.env.CI,
   reporter: process.env.CI ? [["list"], ["html", { open: "never" }]] : "list",
