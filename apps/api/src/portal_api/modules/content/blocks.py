@@ -139,15 +139,13 @@ def _loc(loc: tuple[int | str, ...]) -> str:
     return "".join(f"[{p}]" if isinstance(p, int) else f".{p}" for p in parts)
 
 
-def validate_body(body: object, *, for_publication: bool) -> Validation:
-    parsed, errors = parse(body)
-    if parsed is None:
-        return Validation(errors, [], [])
-    types: list[str] = sorted({b.type for b in parsed.blocks})
+def check_renderers(
+    block_list: list[Heading | Paragraph | ListBlock | Callout | Table | Equation], *, for_publication: bool, where: str
+) -> tuple[list[str], list[str]]:
+    """§5.4 rule 4 for any list of blocks (a lesson body, a question stem, an option…). Returns (errors, warnings)."""
+    errors: list[str] = []
     warnings: list[str] = []
-    if not parsed.blocks:
-        errors.append("Add at least one block.")
-    for i, block in enumerate(parsed.blocks):
+    for i, block in enumerate(block_list):
         spec = REGISTRY[block.type]
         needs = [p for p in PLATFORMS if spec.min_renderer[p] > SUPPORTED_RENDERER[p]]
         if not needs:
@@ -157,11 +155,40 @@ def validate_body(body: object, *, for_publication: bool) -> Validation:
         if usable:
             continue
         msg = (
-            f"blocks[{i}] ({block.type}): supported {', '.join(needs)} clients can't render this block yet; "
+            f"{where}[{i}] ({block.type}): supported {', '.join(needs)} clients can't render this block yet; "
             "attach a reviewed fallback (static rendering, alt text and text equivalent)."
         )
         (errors if for_publication and spec.fallback_required_below else warnings).append(msg)
-    return Validation(errors, warnings, types)
+    return errors, warnings
+
+
+def validate_body(body: object, *, for_publication: bool) -> Validation:
+    parsed, errors = parse(body)
+    if parsed is None:
+        return Validation(errors, [], [])
+    types: list[str] = sorted({b.type for b in parsed.blocks})
+    if not parsed.blocks:
+        errors.append("Add at least one block.")
+    r_err, warnings = check_renderers(parsed.blocks, for_publication=for_publication, where="blocks")
+    return Validation(errors + r_err, warnings, types)
+
+
+def text_of(block_list: list[Heading | Paragraph | ListBlock | Callout | Table | Equation]) -> str:
+    """Canonical plain text of blocks, for duplicate detection (never for display)."""
+    parts: list[str] = []
+    for b in block_list:
+        for attr in ("text", "title", "caption", "latex", "text_alt"):
+            v = getattr(b, attr, None)
+            if isinstance(v, str):
+                parts.append(v)
+        for attr in ("items", "header"):
+            v = getattr(b, attr, None)
+            if isinstance(v, list):
+                parts.extend(str(x) for x in v)
+        rows = getattr(b, "rows", None)
+        if isinstance(rows, list):
+            parts.extend(str(c) for r in rows for c in r)
+    return " ".join(" ".join(parts).lower().split())
 
 
 def registry_document() -> dict[str, object]:

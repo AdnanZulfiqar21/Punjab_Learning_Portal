@@ -6,13 +6,13 @@ import { GRADE_LABEL } from "@/lib/format";
 import { requireStaff, StudioForbiddenError, SUBJECT_LABEL } from "@/lib/studio";
 import { NewLessonForm, type BookChoice } from "./new-lesson-form";
 
-export const metadata: Metadata = { title: "New lesson", robots: { index: false } };
+export const metadata: Metadata = { title: "New draft", robots: { index: false } };
 
 export default function NewLessonPage() {
   return (
     <div className="mx-auto max-w-2xl space-y-6">
-      <Breadcrumbs items={[{ href: "/studio", label: "Studio" }, { label: "New lesson" }]} />
-      <h1 className="text-2xl font-semibold tracking-tight">New lesson draft</h1>
+      <Breadcrumbs items={[{ href: "/studio", label: "Studio" }, { label: "New draft" }]} />
+      <h1 className="text-2xl font-semibold tracking-tight">New draft</h1>
       <Suspense fallback={<SkeletonLines lines={5} label="Loading books" />}>
         <Form />
       </Suspense>

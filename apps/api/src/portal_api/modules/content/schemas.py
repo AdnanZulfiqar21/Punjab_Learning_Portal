@@ -10,10 +10,15 @@ ItemStateName = Literal["draft", "submitted", "changes_requested", "approved", "
 AvailabilityName = Literal["unpublished", "live", "quarantined", "retired"]
 
 
+KindName = Literal["lesson", "mcq"]
+
+
 class ItemCreateIn(BaseModel):
+    kind: KindName = "lesson"
     chapter_id: uuid.UUID
     topic_id: uuid.UUID | None = None
     title: str = Field(min_length=3, max_length=200)
+    family_of: uuid.UUID | None = Field(default=None, description="Create a reviewed variant in this question's family")
 
 
 class DraftIn(BaseModel):
@@ -38,9 +43,20 @@ class AssignIn(BaseModel):
 class ReviewIn(BaseModel):
     decision: Literal["approve", "request_changes"]
     comment: str = Field(min_length=3, max_length=4000)
+    checklist: dict[str, bool] = Field(
+        default_factory=dict, description="Checks confirmed by the reviewer; questions require every check to approve"
+    )
+
+
+class QuarantineIn(BaseModel):
+    reason: str = Field(min_length=5, max_length=1000)
+    level: Literal["SOFT", "VOID", "KEY_ERROR"] | None = Field(
+        default=None, description="Required for questions (§5.7); not used for lessons"
+    )
 
 
 class ValidateIn(BaseModel):
+    kind: KindName = "lesson"
     chapter_id: uuid.UUID
     body: dict[str, Any]
     source_refs: list[dict[str, Any]] = Field(default_factory=list, max_length=40)
@@ -76,6 +92,7 @@ class ReviewOut(BaseModel):
     reviewer: str | None
     decision: Literal["approve", "request_changes"]
     comment: str
+    checklist: dict[str, bool]
     created_at: datetime
 
 
@@ -103,7 +120,7 @@ class VersionOut(BaseModel):
 
 class ItemSummary(BaseModel):
     id: uuid.UUID
-    kind: str
+    kind: KindName
     title: str
     state: ItemStateName
     availability: AvailabilityName
@@ -120,6 +137,8 @@ class ItemSummary(BaseModel):
     assigned_reviewer_id: uuid.UUID | None
     updated_at: datetime
     open_feedback: int = Field(description="Change requests on the working version not yet addressed.")
+    family_id: uuid.UUID | None
+    quarantine_level: Literal["SOFT", "VOID", "KEY_ERROR"] | None
 
 
 class Actions(BaseModel):
@@ -146,6 +165,8 @@ class ItemDetail(ItemSummary):
     chapter_pdf_end: int | None
     actions: Actions
     blockers: list[str] = Field(description="Why the next step can't happen yet (e.g. rights unverified).")
+    review_checklist: list[str] = Field(description="Checks a reviewer must confirm to approve this kind")
+    quarantine_levels: list[str] = Field(description="Levels a publisher chooses from when quarantining this kind")
 
 
 class HistoryEvent(BaseModel):

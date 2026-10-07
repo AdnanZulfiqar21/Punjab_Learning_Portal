@@ -28,7 +28,7 @@ export default function StudioPage({ searchParams }: PageProps<"/studio">) {
           href="/studio/new"
           className="rounded-lg bg-accent px-4 py-2.5 font-medium text-white hover:bg-accent-strong dark:text-background"
         >
-          New lesson
+          New draft
         </Link>
       </div>
       <Suspense fallback={<SkeletonLines lines={6} label="Loading the work queue" />}>
@@ -101,6 +101,7 @@ function QueueRow({ item: i }: { item: StudioItemSummary }) {
         </p>
       </div>
       <div className="flex flex-wrap gap-2">
+        <Badge>{i.kind === "mcq" ? "Question" : "Lesson"}</Badge>
         <Badge tone={STATE_TONE[i.state]}>
           {STATE_LABEL[i.state]}
           {i.working_version ? ` · v${i.working_version}` : ""}

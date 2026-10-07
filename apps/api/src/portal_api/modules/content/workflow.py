@@ -30,7 +30,7 @@ from sqlalchemy.orm import Session
 
 from portal_api.errors import Conflict, Forbidden, NotFound, Unprocessable
 from portal_api.modules.audit.models import record
-from portal_api.modules.content import blocks
+from portal_api.modules.content import blocks, kinds
 from portal_api.modules.content.models import (
     Availability,
     ContentItem,
@@ -125,7 +125,7 @@ def check_sources(db: Session, chapter: Chapter, refs: object) -> tuple[list[str
 def _validate(db: Session, item: ContentItem, version: ContentVersion, *, for_publication: bool) -> dict[str, Any]:
     chapter = db.get(Chapter, item.chapter_id)
     assert chapter is not None
-    result = blocks.validate_body(version.body, for_publication=for_publication)
+    result = kinds.get(item.kind).validate(version.body, for_publication)
     s_err, s_warn, _ = check_sources(db, chapter, version.source_refs)
     errors = result.errors + s_err
     warnings = result.warnings + s_warn
@@ -149,11 +149,11 @@ validate_version = _validate
 
 
 def validate_draft(
-    db: Session, chapter_id: uuid.UUID, body: object, refs: object, for_publication: bool
+    db: Session, chapter_id: uuid.UUID, body: object, refs: object, for_publication: bool, kind: str = "lesson"
 ) -> dict[str, Any]:
     """Dry validation for the editor (nothing is written)."""
     chapter = _active_chapter(db, chapter_id)
-    result = blocks.validate_body(body, for_publication=for_publication)
+    result = kinds.get(kind).validate(body, for_publication)
     s_err, s_warn, _ = check_sources(db, chapter, refs)
     errors = result.errors + s_err
     if isinstance(refs, list) and not refs:
@@ -212,8 +212,16 @@ def _independent(version: ContentVersion, who: Principal, act: str) -> None:
 
 # ------------------------------------------------------------------ operations
 def create_item(
-    db: Session, who: Principal, *, chapter_id: uuid.UUID, topic_id: uuid.UUID | None, title: str, kind: str = "lesson"
+    db: Session,
+    who: Principal,
+    *,
+    chapter_id: uuid.UUID,
+    topic_id: uuid.UUID | None,
+    title: str,
+    kind: str = "lesson",
+    family_of: uuid.UUID | None = None,
 ) -> ContentItem:
+    spec = kinds.get(kind)
     chapter = _active_chapter(db, chapter_id)
     book = db.get(BookEdition, chapter.book_id)
     assert book is not None
@@ -238,6 +246,23 @@ def create_item(
         created_by=who.user.id,
     )
     _require_scoped(db, who, Permission.draft_content, item)
+    if kind == "mcq":
+        item.family_id = item.id
+        if family_of is not None:
+            sibling = db.get(ContentItem, family_of)
+            if (
+                sibling is None
+                or sibling.kind != "mcq"
+                or (sibling.grade_number, sibling.subject_code)
+                != (
+                    item.grade_number,
+                    item.subject_code,
+                )
+            ):
+                raise Unprocessable("A variant must belong to a question of the same class and subject.")
+            item.family_id = sibling.family_id
+    elif family_of is not None:
+        raise Unprocessable("Only questions have variant families.")
     version = ContentVersion(
         id=uuid.uuid4(),
         item_id=item.id,
@@ -245,7 +270,7 @@ def create_item(
         status=VersionStatus.draft.value,
         revision=1,
         content_schema_version=blocks.CONTENT_SCHEMA_VERSION,
-        body={"blocks": []},
+        body=spec.empty_body(),
         block_types=[],
         source_refs=[],
         created_by=who.user.id,
@@ -257,7 +282,16 @@ def create_item(
     db.add(version)
     db.flush()
     item.working_version_id = version.id
-    _audit(db, who, "created", item, version=1, chapter_id=str(chapter.id))
+    _audit(
+        db,
+        who,
+        "created",
+        item,
+        version=1,
+        kind=kind,
+        chapter_id=str(chapter.id),
+        family_id=str(item.family_id) if item.family_id else None,
+    )
     db.commit()
     db.refresh(item)
     return item
@@ -290,16 +324,16 @@ def save_draft(
                 "updated_by": editor.email if editor else None,
             },
         )
-    parsed, errors = blocks.parse(body)
-    if parsed is None:
-        raise Unprocessable("The content doesn't match the block schema.", errors=errors)
+    normalised, errors, types = kinds.get(item.kind).parse_draft(body)
+    if normalised is None:
+        raise Unprocessable("The content doesn't match the schema.", errors=errors)
     chapter = db.get(Chapter, item.chapter_id)
     assert chapter is not None
     s_err, _, refs = check_sources(db, chapter, source_refs)
     if s_err:
         raise Unprocessable("Some source references are invalid.", errors=s_err)
-    version.body = parsed.model_dump(mode="json", exclude_none=True)
-    version.block_types = sorted({b.type for b in parsed.blocks})
+    version.body = normalised
+    version.block_types = types
     version.source_refs = refs
     version.revision += 1
     version.updated_by = who.user.id
@@ -374,7 +408,15 @@ def assign_reviewer(db: Session, who: Principal, item_id: uuid.UUID, reviewer_id
     return item
 
 
-def review(db: Session, who: Principal, item_id: uuid.UUID, *, decision: str, comment: str) -> ContentItem:
+def review(
+    db: Session,
+    who: Principal,
+    item_id: uuid.UUID,
+    *,
+    decision: str,
+    comment: str,
+    checklist: dict[str, bool] | None = None,
+) -> ContentItem:
     item = get_item(db, item_id, for_update=True)
     _require_scoped(db, who, Permission.review_content, item)
     _expect(item, ItemState.submitted)
@@ -382,7 +424,14 @@ def review(db: Session, who: Principal, item_id: uuid.UUID, *, decision: str, co
     _independent(version, who, "approve or review")
     if item.assigned_reviewer_id is not None and item.assigned_reviewer_id != who.user.id:
         raise Forbidden("Another reviewer is assigned to this item.")
+    required = kinds.get(item.kind).review_checklist
+    checks = {k: bool(v) for k, v in (checklist or {}).items() if k in required}
     if decision == "approve":
+        unconfirmed = [k for k in required if not checks.get(k)]
+        if unconfirmed:
+            raise Unprocessable(
+                "Confirm every review check before approving.", errors=[f"Not confirmed: {', '.join(unconfirmed)}."]
+            )
         v = _validate(db, item, version, for_publication=False)
         if not v["ok"]:
             raise Unprocessable("This version no longer passes validation.", errors=v["errors"])
@@ -393,7 +442,11 @@ def review(db: Session, who: Principal, item_id: uuid.UUID, *, decision: str, co
     else:
         version.status = VersionStatus.changes_requested.value
         item.state = ItemState.changes_requested.value
-    db.add(ReviewDecision(version_id=version.id, reviewer_id=who.user.id, decision=decision, comment=comment.strip()))
+    db.add(
+        ReviewDecision(
+            version_id=version.id, reviewer_id=who.user.id, decision=decision, comment=comment.strip(), checklist=checks
+        )
+    )
     item.updated_at = _now()
     _audit(db, who, "approved" if decision == "approve" else "changes_requested", item, version=version.number)
     db.commit()
@@ -422,6 +475,7 @@ def publish(db: Session, who: Principal, item_id: uuid.UUID) -> ContentItem:
     item.state = ItemState.published.value
     item.availability = Availability.live.value
     item.availability_reason = None
+    item.quarantine_level = None
     item.updated_at = _now()
     _audit(
         db,
@@ -473,17 +527,23 @@ def revise(db: Session, who: Principal, item_id: uuid.UUID, reason: str) -> Cont
     return item
 
 
-def quarantine(db: Session, who: Principal, item_id: uuid.UUID, reason: str) -> ContentItem:
+def quarantine(db: Session, who: Principal, item_id: uuid.UUID, reason: str, level: str | None = None) -> ContentItem:
     """Hide live content from learners while a suspected defect is investigated (§5.7). Editorial work on a corrected
     version continues independently."""
     item = get_item(db, item_id, for_update=True)
     _require_scoped(db, who, Permission.quarantine_content, item)
     if item.availability != Availability.live.value:
         raise Conflict("Only live content can be quarantined.", availability=item.availability)
+    levels = kinds.get(item.kind).quarantine_levels
+    if levels and level not in levels:
+        raise Unprocessable(f"Choose a quarantine level: {', '.join(levels)}.")
+    if not levels and level is not None:
+        raise Unprocessable("This kind of content has no quarantine levels.")
+    item.quarantine_level = level
     item.availability = Availability.quarantined.value
     item.availability_reason = reason.strip()
     item.updated_at = _now()
-    _audit(db, who, "quarantined", item, reason=reason.strip())
+    _audit(db, who, "quarantined", item, reason=reason.strip(), level=level)
     db.commit()
     db.refresh(item)
     return item
@@ -495,10 +555,12 @@ def release(db: Session, who: Principal, item_id: uuid.UUID, reason: str) -> Con
     _require_scoped(db, who, Permission.quarantine_content, item)
     if item.availability != Availability.quarantined.value:
         raise Conflict("Only quarantined content can be released.", availability=item.availability)
+    released_level = item.quarantine_level
     item.availability = Availability.live.value
     item.availability_reason = None
+    item.quarantine_level = None
     item.updated_at = _now()
-    _audit(db, who, "released", item, reason=reason.strip())
+    _audit(db, who, "released", item, reason=reason.strip(), level=released_level)
     db.commit()
     db.refresh(item)
     return item
