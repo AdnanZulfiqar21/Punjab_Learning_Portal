@@ -3,6 +3,7 @@
 import { connection } from "next/server";
 import { cache } from "react";
 import type { Book, Catalogue, Chapter, Problem, SearchResult } from "@portal/contracts";
+import { readRuntimeConfig } from "@/lib/runtime-config";
 
 export class ApiUnavailableError extends Error {
   constructor(
@@ -14,18 +15,11 @@ export class ApiUnavailableError extends Error {
   }
 }
 
-export type Result<T> = { ok: true; data: T } | { ok: false; status: 404; problem: Problem };
-
-const DEPLOYED_ROLES = new Set(["staging", "production"]);
+// 404 = never existed / not in the catalogue; 410 = intentionally retired from the catalogue (kept for history).
+export type Result<T> = { ok: true; data: T } | { ok: false; status: 404 | 410; problem: Problem };
 
 function apiOrigin(): string {
-  const origin = process.env.PORTAL_API_INTERNAL_ORIGIN;
-  if (origin) return origin;
-  // A deployed server must be told where the API is; it never falls back to a development default.
-  if (DEPLOYED_ROLES.has(process.env.PORTAL_ROLE ?? "")) {
-    throw new Error("PORTAL_API_INTERNAL_ORIGIN must be set for staging/production web servers");
-  }
-  return "http://127.0.0.1:8100";
+  return readRuntimeConfig().apiOrigin; // read per request from the process environment, never baked into the build
 }
 
 async function getJSON<T>(path: string): Promise<Result<T>> {
@@ -40,8 +34,8 @@ async function getJSON<T>(path: string): Promise<Result<T>> {
   } catch {
     throw new ApiUnavailableError("The learning service could not be reached.", correlationId);
   }
-  if (res.status === 404) {
-    return { ok: false, status: 404, problem: (await res.json()) as Problem };
+  if (res.status === 404 || res.status === 410) {
+    return { ok: false, status: res.status, problem: (await res.json()) as Problem };
   }
   if (!res.ok) {
     const problem = (await res.json().catch(() => null)) as Problem | null;

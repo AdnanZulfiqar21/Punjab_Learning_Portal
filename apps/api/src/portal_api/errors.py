@@ -22,6 +22,11 @@ class NotFound(AppError):
     code = "NOT_FOUND"
 
 
+class Gone(AppError):
+    status = 410
+    code = "GONE"
+
+
 class Unauthorized(AppError):
     status = 401
     code = "UNAUTHENTICATED"

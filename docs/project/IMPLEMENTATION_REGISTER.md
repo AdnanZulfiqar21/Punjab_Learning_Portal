@@ -12,6 +12,8 @@ Source plan: `Road Map/Punjab_Learning_Portal_Master_Roadmap_v2.2_Integrated_Wri
 | P00.S2.T2 Content responsibility | BLOCKED_EXTERNAL | BLOCKERS B01 (reviewers), LAUNCH_MANIFEST rights UNVERIFIED | — | Named reviewers; rights confirmation |
 | P00.S3.T1 Implementation register + control files | IMPLEMENTED | this file, RESUME_STATE, DECISIONS, BLOCKERS, DEPENDENCIES, RELEASE_CHECKLIST | — | Keep current |
 | P00.S3.T4 Dependencies / gate scopes | IMPLEMENTED | DEPENDENCIES (Section 18 waves) | — | Per-task effort estimates after spikes |
+| P22.S1 (identity & metadata hardening) | IMPLEMENTED | Stable ID registry + retirement (IMPL-08); exact edition/curriculum/session/numbering metadata (IMPL-11); public-repo audit (`PUBLIC_REPO_AUDIT.md`) | `content/tools/test_identity.py` 8/8; `test_catalogue_identity.py`; no-reset re-import of dev DB 0/0/0 | Reviewer confirmation of XII Physics display mapping; source rights |
+| P01.S1.T4 (web runtime config) | VERIFIED (local) | `instrumentation.ts` startup validator, exit 78; per-request origin (IMPL-10) | Same build → two origins (12 vs 11 chapters); prod without/with dev origin → 78; CI repeats refusal checks | Staging/production deploy evidence (B03) |
 | P22.S1 Source intake (books) | IMPLEMENTED | `content/source_registry.json` (10 sources, SHA-256, completeness, rights note); `education_knowledge/` v2 indexes; `content/tools/build_catalogue.py --check` | checksums OK ×10 (2026-10-06) | Rights confirmation; named reviewers; RCS selection (P22.S1.T3) |
 | P01.S1.T1 Pin stack | IMPLEMENTED | docs/project/STACK.md, lockfiles | — | Mobile stack at P13.S1 |
 | P01.S1.T2 Module boundaries | IN_PROGRESS | `apps/api/src/portal_api/modules/{curriculum,system}` | — | Remaining domains as built |
@@ -46,4 +48,4 @@ Source plan: `Road Map/Punjab_Learning_Portal_Master_Roadmap_v2.2_Integrated_Wri
 
 ## Measured
 - 10 sources registered (2,488 PDF pages); catalogue 122 chapters, 1,868 navigable topics; import 1.9k rows idempotent.
-- API tests 17/17; mypy strict clean; ruff clean. Web lint/typecheck/build clean; E2E 10/10.
+- API tests 40/40 (order-independent); mypy strict clean; ruff clean. Content identity tests 8/8. Web lint/typecheck/build clean; E2E 12/12 (desktop + phone).

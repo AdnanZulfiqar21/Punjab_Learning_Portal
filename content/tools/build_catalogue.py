@@ -20,12 +20,19 @@ import json
 import re
 import sys
 import uuid
+from datetime import date
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from identity import default_new_id, empty_registry, reconcile  # noqa: E402
 
 PROJ = Path(__file__).resolve().parents[2]
 INDEXES = PROJ / "education_knowledge" / "indexes"
 OUT_REGISTRY = PROJ / "content" / "source_registry.json"
 OUT_CATALOGUE = PROJ / "content" / "catalogue" / "catalogue.json"
+ID_REGISTRY = PROJ / "content" / "catalogue" / "id_registry.json"
+ID_OVERRIDES = PROJ / "content" / "catalogue" / "id_overrides.json"
+SOURCE_METADATA = PROJ / "content" / "source_metadata.json"
 
 # Fixed namespace for this product's curriculum identifiers. Never change it.
 NAMESPACE = uuid.UUID("6f1d4c52-7a0b-5c1e-9a55-2b8f3d0e4a10")
@@ -85,7 +92,7 @@ def build_topics(topics: list, parent_key: str, depth: int, seen: dict[str, int]
         key = f"{parent_key}/{frag}"
         points = [s for s in (t.get("subtopics") or []) if isinstance(s, str)]
         out.append({
-            "id": sid(key),
+            "id": None,  # assigned by identity.reconcile against the ID registry
             "natural_key": key,
             "number": number,
             "title": clean_title(str(t.get("title", ""))),
@@ -95,6 +102,30 @@ def build_topics(topics: list, parent_key: str, depth: int, seen: dict[str, int]
             "children": build_topics([s for s in (t.get("subtopics") or []) if isinstance(s, dict)], parent_key, depth + 1, seen),
         })
     return out
+
+
+def bootstrap_registry() -> dict:
+    """First run: seed the ID registry from the currently published catalogue so existing IDs are preserved."""
+    reg = empty_registry()
+    if not OUT_CATALOGUE.exists():
+        return reg
+    old = json.loads(OUT_CATALOGUE.read_text(encoding="utf-8"))
+
+    def walk(ts):
+        for t in ts:
+            yield t
+            yield from walk(t.get("children") or [])
+
+    for b in old["books"]:
+        for ch in b["chapters"]:
+            reg["entities"][ch["id"]] = {"kind": "chapter", "parent": b["id"], "key": ch["natural_key"], "aliases": [],
+                                         "number": ch["number"], "title": ch["title"], "status": "active",
+                                         "first_seen": "2026-10-06"}
+            for t in walk(ch["topics"]):
+                reg["entities"][t["id"]] = {"kind": "topic", "parent": ch["id"], "key": t["natural_key"], "aliases": [],
+                                            "number": t.get("number"), "title": t["title"], "status": "active",
+                                            "first_seen": "2026-10-06"}
+    return reg
 
 
 def count_assessment(ch: dict) -> dict[str, int]:
@@ -109,6 +140,7 @@ def count_assessment(ch: dict) -> dict[str, int]:
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--check", action="store_true", help="only verify local PDFs against the committed registry")
+    ap.add_argument("--today", default=date.today().isoformat(), help="date recorded for new/retired entities")
     args = ap.parse_args()
 
     if args.check:
@@ -142,6 +174,7 @@ def main() -> int:
         books.append(b)
     books.sort(key=lambda b: (int(b["class"]), SUBJECT_ORDER.index(b["_subject"])))
 
+    metadata = json.loads(SOURCE_METADATA.read_text(encoding="utf-8"))
     sources, cat_books = [], []
     for b in books:
         cls, subj, bid = int(b["class"]), b["_subject"], b["book_id"]
@@ -178,6 +211,8 @@ def main() -> int:
             "index_json": b["_index_json"],
             "text_layer_local": "education_knowledge/" + str(b.get("text_layer", "")).replace("education_knowledge/", ""),
             "status": "ACCEPTED_FOR_INTAKE",
+            **{k: v for k, v in metadata["sources"][bid].items()},
+            "extraction_qc": metadata["extraction_qc"],
         }
         sources.append(src)
 
@@ -215,6 +250,20 @@ def main() -> int:
             "chapters": chapters,
         })
 
+    # ---- stable identity (IMPL-08): reconcile with the committed ID registry instead of deriving IDs from text
+    if ID_REGISTRY.exists():
+        id_registry = json.loads(ID_REGISTRY.read_text(encoding="utf-8"))
+    else:
+        id_registry = bootstrap_registry()
+    overrides = json.loads(ID_OVERRIDES.read_text(encoding="utf-8")).get("by_key", {}) if ID_OVERRIDES.exists() else {}
+    stats = reconcile(cat_books, id_registry, overrides, default_new_id(NAMESPACE), today=args.today)
+    ID_REGISTRY.write_text(json.dumps(id_registry, ensure_ascii=False, indent=1, sort_keys=True) + "\n", encoding="utf-8")
+    retired = {
+        i: {"kind": e["kind"], "key": e["key"], "retired_on": e.get("retired_on")}
+        for i, e in id_registry["entities"].items()
+        if e.get("status") == "retired"
+    }
+
     grades = [{"id": sid(REGION, g["code"]), "grade": n, **g} for n, g in GRADES.items()]
     subjects = [{"id": sid(REGION, "subject", k), "code": k, "order": i, **v} for i, (k, v) in enumerate(SUBJECTS.items())]
     catalogue = {
@@ -224,6 +273,7 @@ def main() -> int:
         "grades": grades,
         "subjects": subjects,
         "books": cat_books,
+        "retired": retired,
     }
     registry = {"schema_version": SCHEMA_VERSION, "region": REGION, "scope_decision": "SCOPE-01", "sources": sources}
 
@@ -243,6 +293,10 @@ def main() -> int:
         print(f"{bk['source_id']:9} grade {bk['grade']} {bk['subject']:16} chapters {len(bk['chapters']):2} "
               f"topics {sum(1 for c in bk['chapters'] for _ in all_topics(c['topics']))}")
     print(f"registry: {len(sources)} sources · catalogue: {len(ids)} chapters, {len(tids)} topics")
+    print(f"identity: key {stats.by_key}, override {stats.by_override}, number {stats.by_number}, title {stats.by_title}, "
+          f"new {stats.new}, retired {stats.retired}, reactivated {stats.reactivated}")
+    for line in stats.changes[:50]:
+        print("  ", line)
     return 0
 
 

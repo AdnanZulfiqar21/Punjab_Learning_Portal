@@ -55,6 +55,14 @@ test("unknown or out-of-scope catalogue URLs show an honest not-found page that 
   }
 });
 
+test("routes that match no page return a real HTTP 404", async ({ page }) => {
+  for (const url of ["/no-such-page", "/learn/11/biology/extra/segment"]) {
+    const res = await page.goto(url);
+    expect(res?.status(), url).toBe(404);
+    await expect(page.getByRole("heading", { name: "This page isn’t available" }), url).toBeVisible();
+  }
+});
+
 test("the maths alias resolves to the Class XI Mathematics book", async ({ page }) => {
   await page.goto("/learn/11/maths");
   await expect(page.getByRole("heading", { level: 1, name: "Mathematics" })).toBeVisible();

@@ -49,9 +49,12 @@ jobs:
       - uses: actions/setup-python@v7
         with:
           python-version: "3.13"
-      - name: Catalogue is reproducible from the committed indexes
+      - run: pip install pytest==9.1.1
+      - name: Stable catalogue identity rules
+        run: python -m pytest content/tools -q
+      - name: Catalogue is reproducible from the committed indexes (same IDs, nothing retired)
         run: |
-          python content/tools/build_catalogue.py
+          python content/tools/build_catalogue.py --today 2026-10-07
           git diff --exit-code -- content/
 
   api:
@@ -165,6 +168,14 @@ jobs:
       - run: pnpm --filter web typecheck
       - name: Production build (no API needed at build time)
         run: pnpm --filter web build
+      - name: The same build refuses missing or development configuration for production (exit 78)
+        working-directory: apps/web
+        run: |
+          set +e
+          PORTAL_ROLE=production PORTAL_API_INTERNAL_ORIGIN= timeout 60 npx next start -p 3199; a=$?
+          PORTAL_ROLE=production PORTAL_API_INTERNAL_ORIGIN=http://localhost:8100 timeout 60 npx next start -p 3198; b=$?
+          echo "exit codes: missing=$a dev-host=$b"
+          test "$a" = 78 && test "$b" = 78
       - uses: astral-sh/setup-uv@v10.2.0
         with:
           version: "0.12.23"

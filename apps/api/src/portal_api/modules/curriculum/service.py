@@ -8,7 +8,7 @@ from collections import defaultdict
 from sqlalchemy import func, select, text
 from sqlalchemy.orm import Session
 
-from portal_api.errors import NotFound
+from portal_api.errors import Gone, NotFound
 from portal_api.modules.curriculum.models import BookEdition, Chapter, Grade, Subject, Topic
 from portal_api.modules.curriculum.schemas import (
     BookOut,
@@ -58,7 +58,10 @@ def get_catalogue(session: Session) -> CatalogueOut:
     grades = session.scalars(select(Grade).order_by(Grade.number)).all()
     subjects = session.scalars(select(Subject).where(Subject.active).order_by(Subject.display_order)).all()
     counts: dict[uuid.UUID, int] = {
-        bid: n for bid, n in session.execute(select(Chapter.book_id, func.count()).group_by(Chapter.book_id))
+        bid: n
+        for bid, n in session.execute(
+            select(Chapter.book_id, func.count()).where(Chapter.retired_at.is_(None)).group_by(Chapter.book_id)
+        )
     }
     by_key: dict[tuple[uuid.UUID, uuid.UUID], list[BookEdition]] = defaultdict(list)
     for b in session.scalars(select(BookEdition)).unique().all():
@@ -111,6 +114,7 @@ def _chapter_summaries(session: Session, book: BookEdition) -> list[ChapterSumma
             content_state=c.content_state,
         )
         for c in book.chapters
+        if c.retired_at is None
     ]
 
 
@@ -153,12 +157,16 @@ def get_chapter(session: Session, chapter_id: uuid.UUID) -> ChapterOut:
     ch = session.get(Chapter, chapter_id)
     if ch is None:
         raise NotFound("Chapter not found.")
+    if ch.retired_at is not None:
+        raise Gone("This chapter is no longer part of the current textbook catalogue.")
     book = ch.book
-    siblings = [c.id for c in book.chapters]
+    siblings = [c.id for c in book.chapters if c.retired_at is None]
     i = siblings.index(ch.id)
     nodes: dict[uuid.UUID, TopicNode] = {}
     roots: list[TopicNode] = []
     for t in ch.topics:  # ordered by display_order; parents precede children
+        if t.retired_at is not None:
+            continue
         node = TopicNode(
             id=t.id, number=t.number, title=t.title, depth=t.depth, pdf_page=t.pdf_page, points=t.points, children=[]
         )
@@ -208,7 +216,8 @@ SELECT kind, id, chapter_id, title, number, chapter_title, grade, subject_code, 
          CASE WHEN t.title ILIKE '%' || q.q || '%' THEN 1.0 ELSE strict_word_similarity(q.q, t.title) END AS score
     FROM topic t JOIN chapter c ON c.id = t.chapter_id JOIN book_edition b ON b.id = c.book_id
     JOIN grade g ON g.id = b.grade_id JOIN subject s ON s.id = b.subject_id, q
-   WHERE s.active AND (t.title ILIKE '%' || q.q || '%' OR strict_word_similarity(q.q, t.title) >= :fuzzy)
+   WHERE s.active AND t.retired_at IS NULL AND c.retired_at IS NULL
+         AND (t.title ILIKE '%' || q.q || '%' OR strict_word_similarity(q.q, t.title) >= :fuzzy)
          AND (CAST(:grade AS int) IS NULL OR g.number = CAST(:grade AS int))
          AND (CAST(:subject AS text) IS NULL OR s.code = CAST(:subject AS text))
   UNION ALL
@@ -216,7 +225,8 @@ SELECT kind, id, chapter_id, title, number, chapter_title, grade, subject_code, 
          CASE WHEN c.title ILIKE '%' || q.q || '%' THEN 1.05 ELSE strict_word_similarity(q.q, c.title) + 0.05 END
     FROM chapter c JOIN book_edition b ON b.id = c.book_id JOIN grade g ON g.id = b.grade_id
     JOIN subject s ON s.id = b.subject_id, q
-   WHERE s.active AND (c.title ILIKE '%' || q.q || '%' OR strict_word_similarity(q.q, c.title) >= :fuzzy)
+   WHERE s.active AND c.retired_at IS NULL
+         AND (c.title ILIKE '%' || q.q || '%' OR strict_word_similarity(q.q, c.title) >= :fuzzy)
          AND (CAST(:grade AS int) IS NULL OR g.number = CAST(:grade AS int))
          AND (CAST(:subject AS text) IS NULL OR s.code = CAST(:subject AS text))
 ) hits ORDER BY score DESC, grade, title LIMIT :limit
