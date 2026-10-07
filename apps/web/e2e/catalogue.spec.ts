@@ -41,6 +41,17 @@ test("search tolerates a typo and labels the class of each result", async ({ pag
   await expect(hit).toContainText("Class XI · Biology");
 });
 
+test("search keeps the query typed while results are still streaming and reflects the URL", async ({ page }) => {
+  await page.goto("/search?q=enzyme&grade=11");
+  // The form is part of the static shell: it is filled from the URL and never swapped out.
+  await expect(page.getByLabel("Topic or chapter")).toHaveValue("enzyme");
+  await expect(page.getByLabel("Class", { exact: true })).toHaveValue("11");
+  await page.getByLabel("Topic or chapter").fill("kinetic theory");
+  await page.getByRole("button", { name: "Search" }).click();
+  await expect(page).toHaveURL(/q=kinetic\+theory/);
+  await expect(page.getByLabel("Topic or chapter")).toHaveValue("kinetic theory");
+});
+
 test("unknown or out-of-scope catalogue URLs show an honest not-found page that is not indexable", async ({ page }) => {
   // With Cache Components the page shell streams first, so notFound() keeps HTTP 200 but adds noindex (Next 16 docs).
   for (const url of [

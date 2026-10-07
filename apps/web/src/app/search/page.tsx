@@ -4,6 +4,7 @@ import { Suspense } from "react";
 import { searchCatalogue } from "@/lib/api";
 import { GRADE_LABEL, parseGrade } from "@/lib/format";
 import { Breadcrumbs, Notice, SkeletonLines } from "@/components/ui";
+import { QuerySync } from "./query-sync";
 
 export const metadata: Metadata = { title: "Search" };
 
@@ -12,10 +13,10 @@ export default function SearchPage({ searchParams }: PageProps<"/search">) {
     <div>
       <Breadcrumbs items={[{ href: "/", label: "Home" }, { label: "Search" }]} />
       <h1 className="mb-4 text-2xl font-semibold tracking-tight">Search chapters and topics</h1>
-      <Suspense fallback={<SearchForm q="" grade="" />}>
-        {searchParams.then((sp) => (
-          <SearchForm q={one(sp.q)} grade={one(sp.grade)} />
-        ))}
+      {/* One static form in the shell (never swapped), filled from the URL after hydration. */}
+      <SearchForm />
+      <Suspense fallback={null}>
+        <QuerySync formId={FORM_ID} />
       </Suspense>
       <div className="mt-6">
         <Suspense fallback={<SkeletonLines lines={5} label="Searching" />}>
@@ -32,9 +33,11 @@ function one(v: string | string[] | undefined): string {
   return (Array.isArray(v) ? v[0] : v)?.trim() ?? "";
 }
 
-function SearchForm({ q, grade }: { q: string; grade: string }) {
+const FORM_ID = "catalogue-search";
+
+function SearchForm() {
   return (
-    <form action="/search" method="get" role="search" className="flex flex-col gap-3 sm:flex-row">
+    <form id={FORM_ID} action="/search" method="get" role="search" className="flex flex-col gap-3 sm:flex-row">
       <label className="sr-only" htmlFor="q">
         Topic or chapter
       </label>
@@ -42,7 +45,6 @@ function SearchForm({ q, grade }: { q: string; grade: string }) {
         id="q"
         name="q"
         type="search"
-        defaultValue={q}
         minLength={2}
         maxLength={100}
         required
@@ -52,7 +54,7 @@ function SearchForm({ q, grade }: { q: string; grade: string }) {
       <label className="sr-only" htmlFor="grade">
         Class
       </label>
-      <select id="grade" name="grade" defaultValue={grade} className="rounded-lg border border-border bg-surface px-3 py-3">
+      <select id="grade" name="grade" defaultValue="" className="rounded-lg border border-border bg-surface px-3 py-3">
         <option value="">Class XI and XII</option>
         <option value="11">Class XI only</option>
         <option value="12">Class XII only</option>
