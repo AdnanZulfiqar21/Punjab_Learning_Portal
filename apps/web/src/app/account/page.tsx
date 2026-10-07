@@ -7,6 +7,8 @@ import { Badge, Breadcrumbs, Notice, SkeletonLines } from "@/components/ui";
 import { GRADE_LABEL } from "@/lib/format";
 import { currentUser, listSessions } from "@/lib/session";
 import { STUDIO_ROLES } from "@/lib/studio";
+import { getAccess } from "@/lib/access";
+import { PlanStatus } from "@/components/plan-status";
 
 export const metadata: Metadata = { title: "Your account", robots: { index: false } };
 
@@ -28,7 +30,7 @@ async function Account() {
   const user = await currentUser();
   if (!user) redirect("/signin?next=/account");
   const { me, token } = user;
-  const sessions = await listSessions(token);
+  const [sessions, access] = await Promise.all([listSessions(token), getAccess(token)]);
   const p = me.profile;
   return (
     <div className="space-y-8">
@@ -64,6 +66,15 @@ async function Account() {
           )}
         </div>
       </section>
+
+      {access && (
+        <section aria-labelledby="plan-heading" className="space-y-3">
+          <h2 id="plan-heading" className="font-semibold">
+            Your plan
+          </h2>
+          <PlanStatus access={access} />
+        </section>
+      )}
 
       <section aria-labelledby="sessions-heading" className="space-y-3">
         <div className="flex items-center justify-between gap-3">

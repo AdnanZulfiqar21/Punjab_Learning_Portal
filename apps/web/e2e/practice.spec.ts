@@ -12,6 +12,9 @@ async function newLearner(page: Page) {
   await page.getByLabel("Password").fill("practice-fixture-pass-1");
   await page.getByRole("button", { name: "Create account" }).click();
   await expect(page).toHaveURL(/:\d+\/practice\?/, AUTH);
+  // New learners start the one-time free trial before practising (P14.S5).
+  await page.getByRole("button", { name: "Start my free 30-day trial" }).click();
+  await expect(page.getByText(/Free trial until/)).toBeVisible(AUTH);
 }
 
 async function startTest(page: Page, count: number, feedback: "deferred" | "immediate" = "deferred", timed = false) {
@@ -39,6 +42,21 @@ async function answer(page: Page, correct: boolean) {
 
 test.describe.configure({ mode: "serial" });
 test.skip(({ isMobile }) => isMobile, "Practice journeys run on desktop");
+
+test("practice needs a plan, and the free trial is offered once", async ({ page }) => {
+  const email = `e2e-trial-${Date.now()}@example.com`;
+  await page.goto("/signin?next=/practice");
+  await page.getByRole("button", { name: "New here? Create an account" }).click();
+  await page.getByLabel("Email").fill(email);
+  await page.getByLabel("Password").fill("practice-fixture-pass-1");
+  await page.getByRole("button", { name: "Create account" }).click();
+  await expect(page.getByText("Practice tests needs a plan")).toBeVisible(AUTH);
+  await expect(page.getByText(/doesn't ask for payment details/)).toBeVisible();
+  await page.getByRole("button", { name: "Start my free 30-day trial" }).click();
+  await expect(page.getByText(/Free trial until/)).toBeVisible(AUTH);
+  await page.goto("/account");
+  await expect(page.getByRole("region", { name: "Your plan" })).toContainText(/Free trial until .* Written marking allowance: 10 of 10 units left/);
+});
 
 test("a learner sees only reviewed-question availability and builds a test", async ({ page }) => {
   await newLearner(page);

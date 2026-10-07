@@ -24,6 +24,7 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from portal_api.errors import Conflict, NotFound, Unprocessable
+from portal_api.modules.access import service as access
 from portal_api.modules.audit.models import record
 from portal_api.modules.content import written as wq
 from portal_api.modules.content.models import Availability, ContentItem, ContentVersion
@@ -182,6 +183,7 @@ def create_form(
         if existing.request_hash != rhash:
             raise Conflict("This request key was already used for a different test.")
         return existing
+    access.require_access(db, who.user.id, purpose="Written practice")
     valid = {c.id for c in _chapters(db, grade, subject)}
     if not chapter_ids or not set(chapter_ids) <= valid:
         raise Unprocessable("Choose chapters from this class and subject's book.")
@@ -263,10 +265,18 @@ def start(db: Session, who: Principal, form_id: uuid.UUID) -> WrittenAttempt:
     now = db_now(db)
     deadline = now + timedelta(seconds=form.writing_s) if form.writing_s else None
     cutoff = (deadline or now) + timedelta(seconds=form.upload_allowance_s)
-    db.execute(
+    attempt_id = uuid.uuid4()
+    open_permits = db.scalar(
+        select(func.count())
+        .select_from(WrittenAttempt)
+        .where(WrittenAttempt.user_id == who.user.id, WrittenAttempt.status == "active")
+    )
+    # §20.13.4: reserve the maximum weighted units for this form, atomically with the attempt.
+    access.reserve(db, who.user.id, attempt_id, _form_units(db, form), open_permits=int(open_permits or 0))
+    inserted = db.execute(
         insert(WrittenAttempt)
         .values(
-            id=uuid.uuid4(),
+            id=attempt_id,
             form_id=form.id,
             user_id=who.user.id,
             status="active",
@@ -278,13 +288,26 @@ def start(db: Session, who: Principal, form_id: uuid.UUID) -> WrittenAttempt:
             manifest_revision=0,
         )
         .on_conflict_do_nothing(constraint="uq_written_attempt_form_user")
-    )
-    db.commit()
+        .returning(WrittenAttempt.id)
+    ).first()
+    if inserted is None:
+        db.rollback()  # a concurrent start won: drop this reservation and return the existing attempt
+    else:
+        db.commit()
     attempt = db.scalar(
         select(WrittenAttempt).where(WrittenAttempt.form_id == form_id, WrittenAttempt.user_id == who.user.id)
     )
     assert attempt is not None
     return attempt
+
+
+def _question_type(db: Session, fi: WrittenFormItem) -> str | None:
+    qv = db.get(ContentVersion, fi.question_version_id)
+    return qv.body.get("question_type") if qv is not None else None
+
+
+def _form_units(db: Session, form: WrittenForm) -> int:
+    return sum(access.weight_of(_question_type(db, fi)) for fi in form.items)
 
 
 def _lock(db: Session, attempt_id: uuid.UUID, who: Principal) -> WrittenAttempt:
@@ -298,6 +321,7 @@ def _expire_if_due(db: Session, attempt: WrittenAttempt, now: datetime) -> bool:
     if attempt.status == "active" and now > attempt.upload_cutoff_at:
         attempt.status = "expired"
         attempt.expired_at = now
+        access.release(db, attempt.id, "unsealed expiry")
         record(
             db,
             actor=None,
@@ -501,6 +525,11 @@ def seal(
     attempt.status = "sealed"
     attempt.sealed_at = now
     review.open_initial_case(db, attempt)  # enters the teacher marking queue in the same transaction
+    answered_positions = sorted({int(k.split(":")[0]) for k, v in slots.items() if v.get("pages")})
+    units = sum(
+        access.weight_of(_question_type(db, fi)) for fi in attempt.form.items if fi.position in answered_positions
+    )
+    access.accept(db, attempt.id, units, {"positions": answered_positions})
     record(
         db,
         actor=who.user.id,

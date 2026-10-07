@@ -301,6 +301,7 @@ def decide(
     if errors:
         raise Unprocessable("Some awards don't follow the rubric.", errors=errors)
     prior = latest(db, case.attempt_id)
+    first_release = release and released_result(db, case.attempt_id) is None
     sv = WrittenScoreVersion(
         attempt_id=case.attempt_id,
         case_id=case.id,
@@ -323,6 +324,10 @@ def decide(
     )
     db.add(sv)
     case.version += 1
+    if first_release:
+        from portal_api.modules.access import service as access
+
+        access.consume(db, case.attempt_id)  # once, on the first released marks for this original work
     if release:
         case.status = "released"
         case.released_at = now

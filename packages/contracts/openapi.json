@@ -1,6 +1,51 @@
 {
   "components": {
     "schemas": {
+      "AccessOut": {
+        "properties": {
+          "device_check": {
+            "description": "How the trial decision was made on this platform",
+            "title": "Device Check",
+            "type": "string"
+          },
+          "entitlements": {
+            "items": {
+              "$ref": "#/components/schemas/EntitlementOut"
+            },
+            "title": "Entitlements",
+            "type": "array"
+          },
+          "has_access": {
+            "description": "True when a current entitlement allows new practice and written tests",
+            "title": "Has Access",
+            "type": "boolean"
+          },
+          "trial": {
+            "$ref": "#/components/schemas/TrialOut"
+          },
+          "weights": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "description": "Written allowance units per question type",
+            "title": "Weights",
+            "type": "object"
+          },
+          "written_allowance": {
+            "$ref": "#/components/schemas/AllowanceOut"
+          }
+        },
+        "required": [
+          "has_access",
+          "entitlements",
+          "trial",
+          "written_allowance",
+          "weights",
+          "device_check"
+        ],
+        "title": "AccessOut",
+        "type": "object"
+      },
       "Actions": {
         "description": "What the caller may do now. Advisory for the UI; the server re-checks every action.",
         "properties": {
@@ -58,6 +103,39 @@
           "retire"
         ],
         "title": "Actions",
+        "type": "object"
+      },
+      "AllowanceOut": {
+        "properties": {
+          "accepted": {
+            "title": "Accepted",
+            "type": "integer"
+          },
+          "available": {
+            "title": "Available",
+            "type": "integer"
+          },
+          "consumed": {
+            "title": "Consumed",
+            "type": "integer"
+          },
+          "granted": {
+            "title": "Granted",
+            "type": "integer"
+          },
+          "reserved": {
+            "title": "Reserved",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "granted",
+          "reserved",
+          "accepted",
+          "consumed",
+          "available"
+        ],
+        "title": "AllowanceOut",
         "type": "object"
       },
       "AnswerOut": {
@@ -1156,6 +1234,59 @@
         "title": "DraftIn",
         "type": "object"
       },
+      "EntitlementOut": {
+        "properties": {
+          "ends_at": {
+            "format": "date-time",
+            "title": "Ends At",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "source": {
+            "enum": [
+              "trial",
+              "paid",
+              "scholarship",
+              "promotional",
+              "pilot"
+            ],
+            "title": "Source",
+            "type": "string"
+          },
+          "starts_at": {
+            "format": "date-time",
+            "title": "Starts At",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "active",
+              "revoked",
+              "refunded"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "written_units": {
+            "title": "Written Units",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id",
+          "source",
+          "starts_at",
+          "ends_at",
+          "status",
+          "written_units"
+        ],
+        "title": "EntitlementOut",
+        "type": "object"
+      },
       "FormCreateIn": {
         "properties": {
           "chapter_ids": {
@@ -1348,6 +1479,52 @@
           "name"
         ],
         "title": "GradeOut",
+        "type": "object"
+      },
+      "GrantIn": {
+        "properties": {
+          "days": {
+            "maximum": 366.0,
+            "minimum": 1.0,
+            "title": "Days",
+            "type": "integer"
+          },
+          "email": {
+            "maxLength": 320,
+            "minLength": 3,
+            "title": "Email",
+            "type": "string"
+          },
+          "reason": {
+            "maxLength": 1000,
+            "minLength": 10,
+            "title": "Reason",
+            "type": "string"
+          },
+          "source": {
+            "enum": [
+              "scholarship",
+              "promotional",
+              "pilot"
+            ],
+            "title": "Source",
+            "type": "string"
+          },
+          "written_units": {
+            "maximum": 500.0,
+            "minimum": 0.0,
+            "title": "Written Units",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "email",
+          "source",
+          "days",
+          "written_units",
+          "reason"
+        ],
+        "title": "GrantIn",
         "type": "object"
       },
       "HTTPValidationError": {
@@ -3009,22 +3186,6 @@
         "title": "ReviewOut",
         "type": "object"
       },
-      "RevokeIn": {
-        "additionalProperties": false,
-        "properties": {
-          "reason": {
-            "maxLength": 500,
-            "minLength": 5,
-            "title": "Reason",
-            "type": "string"
-          }
-        },
-        "required": [
-          "reason"
-        ],
-        "title": "RevokeIn",
-        "type": "object"
-      },
       "RightsIn": {
         "properties": {
           "evidence": {
@@ -3936,6 +4097,75 @@
         "title": "TopicNode",
         "type": "object"
       },
+      "TrialOut": {
+        "properties": {
+          "eligible": {
+            "title": "Eligible",
+            "type": "boolean"
+          },
+          "ends_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Ends At"
+          },
+          "granted_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Granted At"
+          },
+          "program": {
+            "title": "Program",
+            "type": "string"
+          },
+          "reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reason"
+          },
+          "status": {
+            "enum": [
+              "available",
+              "not_eligible",
+              "active",
+              "ended",
+              "converted",
+              "revoked"
+            ],
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "program",
+          "eligible",
+          "status",
+          "granted_at",
+          "ends_at",
+          "reason"
+        ],
+        "title": "TrialOut",
+        "type": "object"
+      },
       "UploadOut": {
         "properties": {
           "duplicate": {
@@ -4754,6 +4984,21 @@
         "title": "WrittenResultOut",
         "type": "object"
       },
+      "portal_api__modules__access__router__RevokeIn": {
+        "properties": {
+          "reason": {
+            "maxLength": 1000,
+            "minLength": 10,
+            "title": "Reason",
+            "type": "string"
+          }
+        },
+        "required": [
+          "reason"
+        ],
+        "title": "RevokeIn",
+        "type": "object"
+      },
       "portal_api__modules__assessment__schemas__SubmitIn": {
         "properties": {
           "idempotency_key": {
@@ -4794,6 +5039,22 @@
         },
         "title": "SubmitIn",
         "type": "object"
+      },
+      "portal_api__modules__identity__schemas__RevokeIn": {
+        "additionalProperties": false,
+        "properties": {
+          "reason": {
+            "maxLength": 500,
+            "minLength": 5,
+            "title": "Reason",
+            "type": "string"
+          }
+        },
+        "required": [
+          "reason"
+        ],
+        "title": "RevokeIn",
+        "type": "object"
       }
     }
   },
@@ -4804,6 +5065,100 @@
   },
   "openapi": "3.1.0",
   "paths": {
+    "/v1/admin/entitlements": {
+      "post": {
+        "operationId": "grant_v1_admin_entitlements_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GrantIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EntitlementOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Grant scholarship, promotional or pilot access (audited, MFA)",
+        "tags": [
+          "access"
+        ]
+      }
+    },
+    "/v1/admin/entitlements/{entitlement_id}/revoke": {
+      "post": {
+        "operationId": "revoke_v1_admin_entitlements__entitlement_id__revoke_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "entitlement_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Entitlement Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/portal_api__modules__access__router__RevokeIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EntitlementOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Revoke an entitlement (recorded, never deleted)",
+        "tags": [
+          "access"
+        ]
+      }
+    },
     "/v1/admin/role-grants/{grant_id}/revoke": {
       "post": {
         "operationId": "revoke_role_v1_admin_role_grants__grant_id__revoke_post",
@@ -4823,7 +5178,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/RevokeIn"
+                "$ref": "#/components/schemas/portal_api__modules__identity__schemas__RevokeIn"
               }
             }
           },
@@ -5432,6 +5787,27 @@
         ]
       }
     },
+    "/v1/me/access": {
+      "get": {
+        "operationId": "my_access_v1_me_access_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccessOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Plans, trial status and written allowance",
+        "tags": [
+          "access"
+        ]
+      }
+    },
     "/v1/me/consents": {
       "post": {
         "operationId": "accept_consent_v1_me_consents_post",
@@ -5639,6 +6015,53 @@
         "tags": [
           "identity",
           "sessions"
+        ]
+      }
+    },
+    "/v1/me/trial": {
+      "post": {
+        "operationId": "start_trial_v1_me_trial_post",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "X-Portal-Client",
+            "required": false,
+            "schema": {
+              "default": "web",
+              "enum": [
+                "web",
+                "native"
+              ],
+              "title": "X-Portal-Client",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccessOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Start the one-time 30-day free trial (idempotent)",
+        "tags": [
+          "access"
         ]
       }
     },

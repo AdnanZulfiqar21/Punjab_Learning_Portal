@@ -126,6 +126,9 @@ def create_form(
             raise Conflict("This request key was already used for a different test.")
         return existing
 
+    from portal_api.modules.access import service as access
+
+    access.require_access(db, who.user.id, purpose="Practice tests")
     valid = {c.id for c in _book_chapters(db, grade, subject)}
     if not chapter_ids or not set(chapter_ids) <= valid:
         raise Unprocessable("Choose chapters from this class and subject's book.")

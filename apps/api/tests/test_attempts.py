@@ -61,8 +61,11 @@ def physics(client: TestClient) -> dict[str, Any]:
 
 
 def _learner(client: TestClient) -> Staff:
+    """A learner with the one-time free trial started (practice and written tests need an active plan)."""
     with get_sessionmaker()() as db:
-        return Staff(client, db, [])
+        who = Staff(client, db, [])
+    assert client.post("/v1/me/trial", headers=who.headers).status_code == 200
+    return who
 
 
 def _form(client: TestClient, who: Staff, chapter: str, count: int = 4, key: str | None = None, **extra: Any) -> Any:

@@ -4,6 +4,40 @@
  */
 
 export interface paths {
+    "/v1/admin/entitlements": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Grant scholarship, promotional or pilot access (audited, MFA) */
+        post: operations["grant_v1_admin_entitlements_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/admin/entitlements/{entitlement_id}/revoke": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Revoke an entitlement (recorded, never deleted) */
+        post: operations["revoke_v1_admin_entitlements__entitlement_id__revoke_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/admin/role-grants/{grant_id}/revoke": {
         parameters: {
             query?: never;
@@ -226,6 +260,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/me/access": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Plans, trial status and written allowance */
+        get: operations["my_access_v1_me_access_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/me/consents": {
         parameters: {
             query?: never;
@@ -340,6 +391,23 @@ export interface paths {
         post?: never;
         /** Revoke Session */
         delete: operations["revoke_session_v1_me_sessions__session_id__delete"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/me/trial": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Start the one-time 30-day free trial (idempotent) */
+        post: operations["start_trial_v1_me_trial_post"];
+        delete?: never;
         options?: never;
         head?: never;
         patch?: never;
@@ -998,6 +1066,30 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
+        /** AccessOut */
+        AccessOut: {
+            /**
+             * Device Check
+             * @description How the trial decision was made on this platform
+             */
+            device_check: string;
+            /** Entitlements */
+            entitlements: components["schemas"]["EntitlementOut"][];
+            /**
+             * Has Access
+             * @description True when a current entitlement allows new practice and written tests
+             */
+            has_access: boolean;
+            trial: components["schemas"]["TrialOut"];
+            /**
+             * Weights
+             * @description Written allowance units per question type
+             */
+            weights: {
+                [key: string]: number;
+            };
+            written_allowance: components["schemas"]["AllowanceOut"];
+        };
         /**
          * Actions
          * @description What the caller may do now. Advisory for the UI; the server re-checks every action.
@@ -1023,6 +1115,19 @@ export interface components {
             submit: boolean;
             /** Withdraw */
             withdraw: boolean;
+        };
+        /** AllowanceOut */
+        AllowanceOut: {
+            /** Accepted */
+            accepted: number;
+            /** Available */
+            available: number;
+            /** Consumed */
+            consumed: number;
+            /** Granted */
+            granted: number;
+            /** Reserved */
+            reserved: number;
         };
         /** AnswerOut */
         AnswerOut: {
@@ -1459,6 +1564,36 @@ export interface components {
             /** Title */
             title?: string | null;
         };
+        /** EntitlementOut */
+        EntitlementOut: {
+            /**
+             * Ends At
+             * Format: date-time
+             */
+            ends_at: string;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /**
+             * Source
+             * @enum {string}
+             */
+            source: "trial" | "paid" | "scholarship" | "promotional" | "pilot";
+            /**
+             * Starts At
+             * Format: date-time
+             */
+            starts_at: string;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "active" | "revoked" | "refunded";
+            /** Written Units */
+            written_units: number;
+        };
         /** FormCreateIn */
         FormCreateIn: {
             /** Chapter Ids */
@@ -1536,6 +1671,22 @@ export interface components {
             name: string;
             /** Number */
             number: number;
+        };
+        /** GrantIn */
+        GrantIn: {
+            /** Days */
+            days: number;
+            /** Email */
+            email: string;
+            /** Reason */
+            reason: string;
+            /**
+             * Source
+             * @enum {string}
+             */
+            source: "scholarship" | "promotional" | "pilot";
+            /** Written Units */
+            written_units: number;
         };
         /** HTTPValidationError */
         HTTPValidationError: {
@@ -2116,11 +2267,6 @@ export interface components {
             /** Reviewer */
             reviewer: string | null;
         };
-        /** RevokeIn */
-        RevokeIn: {
-            /** Reason */
-            reason: string;
-        };
         /** RightsIn */
         RightsIn: {
             /**
@@ -2456,6 +2602,24 @@ export interface components {
             /** Title */
             title: string;
         };
+        /** TrialOut */
+        TrialOut: {
+            /** Eligible */
+            eligible: boolean;
+            /** Ends At */
+            ends_at: string | null;
+            /** Granted At */
+            granted_at: string | null;
+            /** Program */
+            program: string;
+            /** Reason */
+            reason: string | null;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "available" | "not_eligible" | "active" | "ended" | "converted" | "revoked";
+        };
         /** UploadOut */
         UploadOut: {
             /**
@@ -2780,6 +2944,11 @@ export interface components {
             /** Version */
             version: number | null;
         };
+        /** RevokeIn */
+        portal_api__modules__access__router__RevokeIn: {
+            /** Reason */
+            reason: string;
+        };
         /** SubmitIn */
         portal_api__modules__assessment__schemas__SubmitIn: {
             /** Idempotency Key */
@@ -2792,6 +2961,11 @@ export interface components {
             /** Note */
             note?: string | null;
         };
+        /** RevokeIn */
+        portal_api__modules__identity__schemas__RevokeIn: {
+            /** Reason */
+            reason: string;
+        };
     };
     responses: never;
     parameters: never;
@@ -2801,6 +2975,74 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
+    grant_v1_admin_entitlements_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["GrantIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EntitlementOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    revoke_v1_admin_entitlements__entitlement_id__revoke_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                entitlement_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["portal_api__modules__access__router__RevokeIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EntitlementOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     revoke_role_v1_admin_role_grants__grant_id__revoke_post: {
         parameters: {
             query?: never;
@@ -2812,7 +3054,7 @@ export interface operations {
         };
         requestBody: {
             content: {
-                "application/json": components["schemas"]["RevokeIn"];
+                "application/json": components["schemas"]["portal_api__modules__identity__schemas__RevokeIn"];
             };
         };
         responses: {
@@ -3231,6 +3473,26 @@ export interface operations {
             };
         };
     };
+    my_access_v1_me_access_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AccessOut"];
+                };
+            };
+        };
+    };
     accept_consent_v1_me_consents_post: {
         parameters: {
             query?: never;
@@ -3399,6 +3661,37 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    start_trial_v1_me_trial_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                "X-Portal-Client"?: "web" | "native";
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AccessOut"];
+                };
             };
             /** @description Validation Error */
             422: {

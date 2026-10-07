@@ -6,6 +6,8 @@ import { Notice, SkeletonLines } from "@/components/ui";
 import { GRADE_LABEL } from "@/lib/format";
 import { getAvailability, SUBJECTS } from "@/lib/practice";
 import { currentUser } from "@/lib/session";
+import { getAccess } from "@/lib/access";
+import { PlanStatus } from "@/components/plan-status";
 import { PracticeBuilder } from "./practice-builder";
 
 export const metadata: Metadata = { title: "Practice", robots: { index: false } };
@@ -39,7 +41,7 @@ async function Builder({ grade: rawGrade, subject: rawSubject }: { grade?: strin
   const profile = user.me.profile;
   const grade = rawGrade === "11" || rawGrade === "12" ? Number(rawGrade) : (profile?.grade ?? 11);
   const subject = SUBJECTS.some(([c]) => c === rawSubject) ? rawSubject! : (profile?.subjects?.[0] ?? "biology");
-  const availability = await getAvailability(user.token, grade, subject);
+  const [availability, access] = await Promise.all([getAvailability(user.token, grade, subject), getAccess(user.token)]);
   const total = availability?.chapters.reduce((n, c) => n + c.questions, 0) ?? 0;
   return (
     <div className="space-y-6">
@@ -60,7 +62,8 @@ async function Builder({ grade: rawGrade, subject: rawSubject }: { grade?: strin
           }),
         )}
       </nav>
-      {!availability || total === 0 ? (
+      {access && <PlanStatus access={access} purpose="Practice tests" />}
+      {access && !access.has_access ? null : !availability || total === 0 ? (
         <Notice title="No approved practice questions yet">
           Questions for {GRADE_LABEL[grade]} {SUBJECTS.find(([c]) => c === subject)?.[1]} appear here once a subject reviewer approves
           them and they are published. Nothing unreviewed is ever used in a test.
