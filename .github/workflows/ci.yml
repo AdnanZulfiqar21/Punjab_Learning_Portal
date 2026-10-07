@@ -187,6 +187,7 @@ jobs:
           uv run alembic upgrade head
           uv run portal-import-catalogue --apply
           uv run portal-dev-seed-staff   # development-only staff fixtures for the studio journeys
+          uv run portal-dev-seed-practice   # development-only technical-fixture questions for practice journeys
           nohup uv run uvicorn portal_api.main:app --host 127.0.0.1 --port 8100 > /tmp/api.log 2>&1 &
           for i in $(seq 1 60); do curl -sf http://127.0.0.1:8100/readyz && break; sleep 1; done
       - name: Start web
