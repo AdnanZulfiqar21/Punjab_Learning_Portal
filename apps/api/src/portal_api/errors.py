@@ -49,6 +49,11 @@ class AttemptFinalised(Conflict):
     code = "ATTEMPT_FINALISED"
 
 
+class TooLarge(AppError):
+    status = 413
+    code = "PAYLOAD_TOO_LARGE"
+
+
 class Unprocessable(AppError):
     """The request is well-formed but breaks a domain rule (e.g. content fails publication validation)."""
 

@@ -756,6 +756,142 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/written-attempts/{attempt_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Attempt */
+        get: operations["get_attempt_v1_written_attempts__attempt_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/written-attempts/{attempt_id}/manifest": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** Put Manifest */
+        put: operations["put_manifest_v1_written_attempts__attempt_id__manifest_put"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/written-attempts/{attempt_id}/pages": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Upload one page (raw JPEG, PNG or PDF body; bounded) */
+        post: operations["upload_v1_written_attempts__attempt_id__pages_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/written-attempts/{attempt_id}/pages/{page_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Your own uploaded page (private) */
+        get: operations["get_page_v1_written_attempts__attempt_id__pages__page_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/written-attempts/{attempt_id}/seal": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Submit the answer script (§20.7.2) */
+        post: operations["seal_v1_written_attempts__attempt_id__seal_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/written/availability": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Availability */
+        get: operations["availability_v1_written_availability_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/written/forms": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Create Form */
+        post: operations["create_form_v1_written_forms_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/written/forms/{form_id}/attempt": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Start */
+        post: operations["start_v1_written_forms__form_id__attempt_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -1427,6 +1563,20 @@ export interface components {
             /** Version */
             version: number;
         };
+        /** ManifestIn */
+        ManifestIn: {
+            /** Expected Revision */
+            expected_revision: number;
+            /**
+             * Slots
+             * @description {"1:a": {"pages": [page_id], "unanswered": false}}
+             */
+            slots: {
+                [key: string]: {
+                    [key: string]: unknown;
+                };
+            };
+        };
         /** MeOut */
         MeOut: {
             /** Consents */
@@ -1511,6 +1661,29 @@ export interface components {
             }[];
             /** Id */
             id: string;
+        };
+        /** PageOut */
+        PageOut: {
+            /** Content Type */
+            content_type: string;
+            /** Height */
+            height: number | null;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Pdf Pages */
+            pdf_pages: number;
+            /** Size */
+            size: number;
+            /**
+             * Uploaded At
+             * Format: date-time
+             */
+            uploaded_at: string;
+            /** Width */
+            width: number | null;
         };
         /**
          * ProfileIn
@@ -1771,6 +1944,19 @@ export interface components {
              */
             status: "active" | "finalised" | "void";
         };
+        /** SealIn */
+        SealIn: {
+            /** Expected Revision */
+            expected_revision: number;
+            /** Idempotency Key */
+            idempotency_key: string;
+        };
+        /** SealOut */
+        SealOut: {
+            receipt: components["schemas"]["WrittenReceiptOut"];
+            /** Replay */
+            replay: boolean;
+        };
         /** SearchHit */
         SearchHit: {
             /**
@@ -1864,6 +2050,15 @@ export interface components {
             mfa: boolean;
             /** User Agent */
             user_agent: string | null;
+        };
+        /** SlotOut */
+        SlotOut: {
+            /** Key */
+            key: string;
+            /** Label */
+            label: string;
+            /** Max Units */
+            max_units: number;
         };
         /** SourceOut */
         SourceOut: {
@@ -1970,6 +2165,17 @@ export interface components {
             /** Title */
             title: string;
         };
+        /** UploadOut */
+        UploadOut: {
+            /**
+             * Duplicate
+             * @description The same file was already uploaded to this script; it was reused
+             */
+            duplicate: boolean;
+            page: components["schemas"]["PageOut"];
+            /** Warnings */
+            warnings: string[];
+        };
         /** ValidateIn */
         ValidateIn: {
             /** Body */
@@ -2074,6 +2280,194 @@ export interface components {
             updated_at: string;
             /** Updated By */
             updated_by: string | null;
+        };
+        /** WrittenAttemptOut */
+        WrittenAttemptOut: {
+            /** Caps */
+            caps: {
+                [key: string]: number;
+            };
+            /**
+             * Form Id
+             * Format: uuid
+             */
+            form_id: string;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Items */
+            items: components["schemas"]["WrittenItemOut"][];
+            /** Manifest */
+            manifest: {
+                [key: string]: unknown;
+            };
+            /** Manifest Revision */
+            manifest_revision: number;
+            /** Max Units */
+            max_units: number;
+            /** Pages */
+            pages: components["schemas"]["PageOut"][];
+            receipt: components["schemas"]["WrittenReceiptOut"] | null;
+            /**
+             * Server Now
+             * Format: date-time
+             */
+            server_now: string;
+            /**
+             * Started At
+             * Format: date-time
+             */
+            started_at: string;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "active" | "sealed" | "expired";
+            /** Upload Allowance S */
+            upload_allowance_s: number;
+            /**
+             * Upload Cutoff At
+             * Format: date-time
+             * @description U = D + G: nothing is admitted after this
+             */
+            upload_cutoff_at: string;
+            /**
+             * Writing Deadline At
+             * @description D: writing should stop (not enforceable at home)
+             */
+            writing_deadline_at: string | null;
+        };
+        /** WrittenAvailabilityOut */
+        WrittenAvailabilityOut: {
+            /** Caps */
+            caps: {
+                [key: string]: number;
+            };
+            /** Chapters */
+            chapters: components["schemas"]["WrittenChapter"][];
+            /** Grade */
+            grade: number;
+            /**
+             * Review Staffed
+             * @description False means no teacher reviewer is available, so nothing is offered
+             */
+            review_staffed: boolean;
+            /** Subject */
+            subject: string;
+            /** Upload Allowance S */
+            upload_allowance_s: number;
+        };
+        /** WrittenChapter */
+        WrittenChapter: {
+            /**
+             * Chapter Id
+             * Format: uuid
+             */
+            chapter_id: string;
+            /** Number */
+            number: number;
+            /**
+             * Questions
+             * @description Reviewed written questions with a published rubric
+             */
+            questions: number;
+            /** Title */
+            title: string;
+        };
+        /** WrittenFormIn */
+        WrittenFormIn: {
+            /** Chapter Ids */
+            chapter_ids: string[];
+            /**
+             * Grade
+             * @enum {integer}
+             */
+            grade: 11 | 12;
+            /** Question Count */
+            question_count: number;
+            /**
+             * Question Type
+             * @default mixed
+             * @enum {string}
+             */
+            question_type: "short" | "long" | "mixed";
+            /** Subject */
+            subject: string;
+            /**
+             * Writing Minutes
+             * @description None = untimed practice
+             */
+            writing_minutes?: number | null;
+        };
+        /** WrittenFormOut */
+        WrittenFormOut: {
+            /** Caps */
+            caps: {
+                [key: string]: number;
+            };
+            /** Capture Policy Version */
+            capture_policy_version: number;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Max Units */
+            max_units: number;
+            /** Question Count */
+            question_count: number;
+            /** Upload Allowance S */
+            upload_allowance_s: number;
+            /** Writing S */
+            writing_s: number | null;
+        };
+        /**
+         * WrittenItemOut
+         * @description What the learner sees: the question and its marks. Rubrics are never part of this payload.
+         */
+        WrittenItemOut: {
+            /** Answer Language */
+            answer_language: string;
+            /** Max Units */
+            max_units: number;
+            /** Position */
+            position: number;
+            /** Slots */
+            slots: components["schemas"]["SlotOut"][];
+            /** Stem */
+            stem: {
+                [key: string]: unknown;
+            }[];
+            /** Subparts */
+            subparts: {
+                [key: string]: unknown;
+            }[];
+        };
+        /** WrittenReceiptOut */
+        WrittenReceiptOut: {
+            /**
+             * Admitted At
+             * Format: date-time
+             */
+            admitted_at: string;
+            /** Answered Slots */
+            answered_slots: number;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Manifest Revision */
+            manifest_revision: number;
+            /** Unanswered Slots */
+            unanswered_slots: number;
         };
         /** SubmitIn */
         portal_api__modules__assessment__schemas__SubmitIn: {
@@ -3462,6 +3856,268 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["ValidationOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_attempt_v1_written_attempts__attempt_id__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                attempt_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["WrittenAttemptOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    put_manifest_v1_written_attempts__attempt_id__manifest_put: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                attempt_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ManifestIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["WrittenAttemptOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    upload_v1_written_attempts__attempt_id__pages_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                attempt_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UploadOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_page_v1_written_attempts__attempt_id__pages__page_id__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                attempt_id: string;
+                page_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": unknown;
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    seal_v1_written_attempts__attempt_id__seal_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                attempt_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SealIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SealOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    availability_v1_written_availability_get: {
+        parameters: {
+            query: {
+                grade: number;
+                subject: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["WrittenAvailabilityOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    create_form_v1_written_forms_post: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["WrittenFormIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["WrittenFormOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    start_v1_written_forms__form_id__attempt_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                form_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["WrittenAttemptOut"];
                 };
             };
             /** @description Validation Error */

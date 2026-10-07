@@ -7,7 +7,12 @@ import pytest
 from portal_api.config import ConfigurationError, Role, Settings
 
 PROD_DB = "postgresql+psycopg://app@db.internal.example:5432/portal"
-OIDC = {"dev_auth_enabled": False, "oidc_issuer": "https://idp.example.org/pool", "oidc_audience": "client-1"}
+OIDC = {
+    "dev_auth_enabled": False,
+    "oidc_issuer": "https://idp.example.org/pool",
+    "oidc_audience": "client-1",
+    "evidence_store": "s3",
+}
 
 
 def test_production_refuses_development_database_url() -> None:
@@ -93,4 +98,16 @@ def test_production_refuses_the_development_identity_adapter() -> None:
             build_id="sha-abc",
             cors_origins=["https://example.org"],
             dev_auth_enabled=False,
+        )
+
+
+def test_production_refuses_the_local_evidence_directory() -> None:
+    with pytest.raises(ConfigurationError, match="evidence_store"):
+        Settings(
+            **{**OIDC, "evidence_store": "local"},
+            role=Role.production,
+            database_url=PROD_DB,
+            public_api_origin="https://api.example.org",
+            build_id="sha-abc",
+            cors_origins=["https://example.org"],
         )

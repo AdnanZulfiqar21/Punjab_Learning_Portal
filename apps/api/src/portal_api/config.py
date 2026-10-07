@@ -9,6 +9,7 @@ from __future__ import annotations
 
 from enum import StrEnum
 from functools import lru_cache
+from typing import Literal
 
 from pydantic import Field, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
@@ -55,6 +56,11 @@ class Settings(BaseSettings):
     dev_auth_audience: str = "portal-api"
     dev_auth_token_ttl_s: int = 900
 
+    # Handwritten-answer evidence (W03). "local" is a private directory for development/test only (never web-served);
+    # deployed roles need private object storage (S3 proposed, BLOCKERS B03), whose adapter lands with that account.
+    evidence_store: Literal["local", "s3"] = "local"
+    evidence_dir: str = "var/evidence"
+
     @model_validator(mode="after")
     def _validate_role(self) -> Settings:
         if self.role in (Role.production, Role.staging):
@@ -77,6 +83,8 @@ class Settings(BaseSettings):
                 or "dev-local" in self.oidc_issuer
             ):
                 problems.append("oidc_issuer points at a development issuer")
+            if self.evidence_store == "local":
+                problems.append("evidence_store must be private object storage, not the local development directory")
             if problems:
                 raise ConfigurationError(f"refusing to start role={self.role.value}: " + "; ".join(problems))
         if self.db_max_overflow != 0 and self.role is Role.production:
