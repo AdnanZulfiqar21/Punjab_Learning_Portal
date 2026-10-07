@@ -61,6 +61,11 @@ class SourceDocument(Base):
     """An owner-supplied original (P22.S1). The file itself stays outside the repository; we keep its checksum."""
 
     __tablename__ = "source_document"
+    __table_args__ = (
+        CheckConstraint(
+            "publication_rights in ('UNVERIFIED','CONFIRMED','DENIED')", name="source_document_publication_rights"
+        ),
+    )
     id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True)
     source_id: Mapped[str] = mapped_column(String(40), unique=True)
     grade_number: Mapped[int] = mapped_column(SmallInteger)
@@ -79,6 +84,14 @@ class SourceDocument(Base):
     rights: Mapped[str] = mapped_column(Text)
     status: Mapped[str] = mapped_column(String(30))
     metadata_json: Mapped[dict[str, Any]] = mapped_column("metadata", JSONB, default=dict)
+    # Publication-rights gate for material derived from this source. Set only by the owner (audited, MFA); imports never
+    # touch it. UNVERIFIED blocks publication of derived academic content; it does not block drafting or review.
+    publication_rights: Mapped[str] = mapped_column(String(12), default="UNVERIFIED", server_default="UNVERIFIED")
+    publication_rights_evidence: Mapped[str | None] = mapped_column(Text)
+    publication_rights_set_by: Mapped[uuid.UUID | None] = mapped_column(
+        ForeignKey("app_user.id", ondelete="RESTRICT", name="fk_source_document_rights_set_by")
+    )
+    publication_rights_set_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
 
 
 class BookEdition(Base):

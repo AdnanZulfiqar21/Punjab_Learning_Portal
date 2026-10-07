@@ -12,9 +12,10 @@ class AppError(Exception):
     status = 500
     code = "INTERNAL"
 
-    def __init__(self, detail: str) -> None:
+    def __init__(self, detail: str, **extra: object) -> None:
         super().__init__(detail)
         self.detail = detail
+        self.extra = extra  # additional problem members, e.g. validation errors or the current state on a conflict
 
 
 class NotFound(AppError):
@@ -42,6 +43,13 @@ class Conflict(AppError):
     code = "CONFLICT"
 
 
+class Unprocessable(AppError):
+    """The request is well-formed but breaks a domain rule (e.g. content fails publication validation)."""
+
+    status = 422
+    code = "RULE_FAILED"
+
+
 def _problem(request: Request, status: int, code: str, detail: str, **extra: object) -> JSONResponse:
     body = {
         "type": f"https://errors.portal.invalid/{code.lower()}",
@@ -57,7 +65,7 @@ def _problem(request: Request, status: int, code: str, detail: str, **extra: obj
 def install(app: FastAPI) -> None:
     @app.exception_handler(AppError)
     async def _app_error(request: Request, exc: AppError) -> JSONResponse:
-        response = _problem(request, exc.status, exc.code, exc.detail)
+        response = _problem(request, exc.status, exc.code, exc.detail, **exc.extra)
         if exc.status == 401:
             response.headers["WWW-Authenticate"] = 'Bearer realm="portal"'
         return response

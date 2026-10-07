@@ -34,6 +34,7 @@ class Permission(StrEnum):
     operate_platform = "operate_platform"
     manage_roles = "manage_roles"
     view_audit = "view_audit"
+    confirm_source_rights = "confirm_source_rights"
 
 
 ROLE_PERMISSIONS: dict[Role, frozenset[Permission]] = {
@@ -45,7 +46,7 @@ ROLE_PERMISSIONS: dict[Role, frozenset[Permission]] = {
     Role.support: frozenset({Permission.view_support_context}),
     Role.finance: frozenset({Permission.finance_operations}),
     Role.platform_operator: frozenset({Permission.operate_platform}),
-    Role.owner_admin: frozenset({Permission.manage_roles, Permission.view_audit}),
+    Role.owner_admin: frozenset({Permission.manage_roles, Permission.view_audit, Permission.confirm_source_rights}),
 }
 
 # Sensitive operations need an MFA session (roadmap P04.S2.T2: publishing, finance, quarantine/regrade, administration).
@@ -58,6 +59,7 @@ MFA_REQUIRED: frozenset[Permission] = frozenset(
         Permission.operate_platform,
         Permission.manage_roles,
         Permission.view_audit,
+        Permission.confirm_source_rights,
     }
 )
 
