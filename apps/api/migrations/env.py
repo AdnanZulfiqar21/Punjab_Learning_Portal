@@ -5,6 +5,7 @@ from __future__ import annotations
 from alembic import context
 from sqlalchemy import create_engine, pool
 
+import portal_api.modules.assessment.models
 import portal_api.modules.audit.models
 import portal_api.modules.content.models
 import portal_api.modules.curriculum.models

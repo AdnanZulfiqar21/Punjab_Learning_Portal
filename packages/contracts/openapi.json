@@ -60,6 +60,53 @@
         "title": "Actions",
         "type": "object"
       },
+      "AnswerOut": {
+        "properties": {
+          "op_id": {
+            "format": "uuid",
+            "title": "Op Id",
+            "type": "string"
+          },
+          "option_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Option Id"
+          },
+          "position": {
+            "title": "Position",
+            "type": "integer"
+          },
+          "revealed": {
+            "title": "Revealed",
+            "type": "boolean"
+          },
+          "revision": {
+            "title": "Revision",
+            "type": "integer"
+          },
+          "saved_at": {
+            "format": "date-time",
+            "title": "Saved At",
+            "type": "string"
+          }
+        },
+        "required": [
+          "position",
+          "option_id",
+          "revision",
+          "op_id",
+          "saved_at",
+          "revealed"
+        ],
+        "title": "AnswerOut",
+        "type": "object"
+      },
       "AssignIn": {
         "properties": {
           "reviewer_id": {
@@ -79,6 +126,144 @@
           "reviewer_id"
         ],
         "title": "AssignIn",
+        "type": "object"
+      },
+      "AttemptOut": {
+        "properties": {
+          "answers": {
+            "items": {
+              "$ref": "#/components/schemas/AnswerOut"
+            },
+            "title": "Answers",
+            "type": "array"
+          },
+          "cutoff_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "C = D + T: the server admits no writes after this",
+            "title": "Cutoff At"
+          },
+          "deadline_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "D: editing closes",
+            "title": "Deadline At"
+          },
+          "feedback_mode": {
+            "enum": [
+              "deferred",
+              "immediate"
+            ],
+            "title": "Feedback Mode",
+            "type": "string"
+          },
+          "form_id": {
+            "format": "uuid",
+            "title": "Form Id",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ItemSnapshot"
+            },
+            "title": "Items",
+            "type": "array"
+          },
+          "receipt": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ReceiptOut"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "server_now": {
+            "format": "date-time",
+            "title": "Server Now",
+            "type": "string"
+          },
+          "started_at": {
+            "format": "date-time",
+            "title": "Started At",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "active",
+              "finalised",
+              "void"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "tolerance_ms": {
+            "description": "T, pinned at start",
+            "title": "Tolerance Ms",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id",
+          "form_id",
+          "status",
+          "started_at",
+          "deadline_at",
+          "cutoff_at",
+          "tolerance_ms",
+          "server_now",
+          "feedback_mode",
+          "items",
+          "answers",
+          "receipt"
+        ],
+        "title": "AttemptOut",
+        "type": "object"
+      },
+      "AvailabilityOut": {
+        "properties": {
+          "chapters": {
+            "items": {
+              "$ref": "#/components/schemas/ChapterAvailability"
+            },
+            "title": "Chapters",
+            "type": "array"
+          },
+          "grade": {
+            "title": "Grade",
+            "type": "integer"
+          },
+          "subject": {
+            "title": "Subject",
+            "type": "string"
+          }
+        },
+        "required": [
+          "grade",
+          "subject",
+          "chapters"
+        ],
+        "title": "AvailabilityOut",
         "type": "object"
       },
       "BookOut": {
@@ -267,6 +452,36 @@
           "reason"
         ],
         "title": "ChangeReasonIn",
+        "type": "object"
+      },
+      "ChapterAvailability": {
+        "properties": {
+          "chapter_id": {
+            "format": "uuid",
+            "title": "Chapter Id",
+            "type": "string"
+          },
+          "number": {
+            "title": "Number",
+            "type": "integer"
+          },
+          "questions": {
+            "description": "Approved, published question families available for practice",
+            "title": "Questions",
+            "type": "integer"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "chapter_id",
+          "number",
+          "title",
+          "questions"
+        ],
+        "title": "ChapterAvailability",
         "type": "object"
       },
       "ChapterOut": {
@@ -623,6 +838,151 @@
           "body"
         ],
         "title": "DraftIn",
+        "type": "object"
+      },
+      "FormCreateIn": {
+        "properties": {
+          "chapter_ids": {
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "maxItems": 40,
+            "minItems": 1,
+            "title": "Chapter Ids",
+            "type": "array"
+          },
+          "feedback_mode": {
+            "default": "deferred",
+            "enum": [
+              "deferred",
+              "immediate"
+            ],
+            "title": "Feedback Mode",
+            "type": "string"
+          },
+          "grade": {
+            "enum": [
+              11,
+              12
+            ],
+            "title": "Grade",
+            "type": "integer"
+          },
+          "question_count": {
+            "maximum": 100.0,
+            "minimum": 1.0,
+            "title": "Question Count",
+            "type": "integer"
+          },
+          "subject": {
+            "maxLength": 40,
+            "minLength": 2,
+            "title": "Subject",
+            "type": "string"
+          },
+          "timed_minutes": {
+            "anyOf": [
+              {
+                "maximum": 300.0,
+                "minimum": 1.0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Timed Minutes"
+          },
+          "topic_ids": {
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "maxItems": 100,
+            "title": "Topic Ids",
+            "type": "array"
+          }
+        },
+        "required": [
+          "grade",
+          "subject",
+          "chapter_ids",
+          "question_count"
+        ],
+        "title": "FormCreateIn",
+        "type": "object"
+      },
+      "FormOut": {
+        "properties": {
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "duration_s": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Duration S"
+          },
+          "feedback_mode": {
+            "enum": [
+              "deferred",
+              "immediate"
+            ],
+            "title": "Feedback Mode",
+            "type": "string"
+          },
+          "grade": {
+            "title": "Grade",
+            "type": "integer"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "late_write_tolerance_ms": {
+            "title": "Late Write Tolerance Ms",
+            "type": "integer"
+          },
+          "negative_marks": {
+            "title": "Negative Marks",
+            "type": "integer"
+          },
+          "question_count": {
+            "title": "Question Count",
+            "type": "integer"
+          },
+          "scope": {
+            "additionalProperties": true,
+            "title": "Scope",
+            "type": "object"
+          },
+          "subject": {
+            "title": "Subject",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "grade",
+          "subject",
+          "scope",
+          "question_count",
+          "duration_s",
+          "late_write_tolerance_ms",
+          "feedback_mode",
+          "negative_marks",
+          "created_at"
+        ],
+        "title": "FormOut",
         "type": "object"
       },
       "GradeCatalogue": {
@@ -1072,6 +1432,122 @@
         "title": "ItemDetail",
         "type": "object"
       },
+      "ItemReview": {
+        "properties": {
+          "chosen": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Chosen"
+          },
+          "correct": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Correct"
+          },
+          "correct_option_id": {
+            "title": "Correct Option Id",
+            "type": "string"
+          },
+          "earned": {
+            "title": "Earned",
+            "type": "integer"
+          },
+          "explanation": {
+            "additionalProperties": true,
+            "title": "Explanation",
+            "type": "object"
+          },
+          "marks": {
+            "title": "Marks",
+            "type": "integer"
+          },
+          "options": {
+            "items": {
+              "$ref": "#/components/schemas/OptionSnapshot"
+            },
+            "title": "Options",
+            "type": "array"
+          },
+          "position": {
+            "title": "Position",
+            "type": "integer"
+          },
+          "stem": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Stem",
+            "type": "array"
+          },
+          "treatment": {
+            "title": "Treatment",
+            "type": "string"
+          }
+        },
+        "required": [
+          "position",
+          "marks",
+          "stem",
+          "options",
+          "chosen",
+          "correct_option_id",
+          "correct",
+          "earned",
+          "treatment",
+          "explanation"
+        ],
+        "title": "ItemReview",
+        "type": "object"
+      },
+      "ItemSnapshot": {
+        "description": "What a learner sees during an attempt. Keys and explanations are never part of this payload.",
+        "properties": {
+          "marks": {
+            "title": "Marks",
+            "type": "integer"
+          },
+          "options": {
+            "items": {
+              "$ref": "#/components/schemas/OptionSnapshot"
+            },
+            "title": "Options",
+            "type": "array"
+          },
+          "position": {
+            "title": "Position",
+            "type": "integer"
+          },
+          "stem": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Stem",
+            "type": "array"
+          }
+        },
+        "required": [
+          "position",
+          "marks",
+          "stem",
+          "options"
+        ],
+        "title": "ItemSnapshot",
+        "type": "object"
+      },
       "ItemSummary": {
         "properties": {
           "assigned_reviewer": {
@@ -1418,6 +1894,150 @@
         "title": "MeOut",
         "type": "object"
       },
+      "OpIn": {
+        "properties": {
+          "op_id": {
+            "description": "Client-generated idempotency key for this operation",
+            "format": "uuid",
+            "title": "Op Id",
+            "type": "string"
+          },
+          "option_id": {
+            "anyOf": [
+              {
+                "maxLength": 12,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "null clears the answer",
+            "title": "Option Id"
+          },
+          "position": {
+            "maximum": 200.0,
+            "minimum": 1.0,
+            "title": "Position",
+            "type": "integer"
+          },
+          "revision": {
+            "description": "Monotonic per position on the client",
+            "minimum": 1.0,
+            "title": "Revision",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "op_id",
+          "position",
+          "revision"
+        ],
+        "title": "OpIn",
+        "type": "object"
+      },
+      "OpResult": {
+        "properties": {
+          "admitted_at": {
+            "format": "date-time",
+            "title": "Admitted At",
+            "type": "string"
+          },
+          "disposition": {
+            "enum": [
+              "accepted",
+              "stale",
+              "invalid",
+              "late",
+              "finalised",
+              "locked",
+              "conflict"
+            ],
+            "title": "Disposition",
+            "type": "string"
+          },
+          "op_id": {
+            "format": "uuid",
+            "title": "Op Id",
+            "type": "string"
+          },
+          "option_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Option Id"
+          },
+          "position": {
+            "title": "Position",
+            "type": "integer"
+          },
+          "replay": {
+            "description": "True when this is the stored result of an earlier identical request",
+            "title": "Replay",
+            "type": "boolean"
+          },
+          "revision": {
+            "title": "Revision",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "op_id",
+          "position",
+          "revision",
+          "option_id",
+          "disposition",
+          "admitted_at",
+          "replay"
+        ],
+        "title": "OpResult",
+        "type": "object"
+      },
+      "OpsIn": {
+        "properties": {
+          "ops": {
+            "items": {
+              "$ref": "#/components/schemas/OpIn"
+            },
+            "maxItems": 50,
+            "minItems": 1,
+            "title": "Ops",
+            "type": "array"
+          }
+        },
+        "required": [
+          "ops"
+        ],
+        "title": "OpsIn",
+        "type": "object"
+      },
+      "OptionSnapshot": {
+        "properties": {
+          "blocks": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Blocks",
+            "type": "array"
+          },
+          "id": {
+            "title": "Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "blocks"
+        ],
+        "title": "OptionSnapshot",
+        "type": "object"
+      },
       "ProfileIn": {
         "additionalProperties": false,
         "description": "Onboarding answers (P04.S3.T1). Everything can be corrected later; no identity documents are collected.",
@@ -1662,6 +2282,169 @@
           "reason"
         ],
         "title": "QuarantineIn",
+        "type": "object"
+      },
+      "ReceiptOut": {
+        "properties": {
+          "admitted_at": {
+            "format": "date-time",
+            "title": "Admitted At",
+            "type": "string"
+          },
+          "answered_count": {
+            "title": "Answered Count",
+            "type": "integer"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "ledger_hash": {
+            "title": "Ledger Hash",
+            "type": "string"
+          },
+          "question_count": {
+            "title": "Question Count",
+            "type": "integer"
+          },
+          "reason": {
+            "enum": [
+              "manual",
+              "expiry"
+            ],
+            "title": "Reason",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "reason",
+          "admitted_at",
+          "answered_count",
+          "question_count",
+          "ledger_hash"
+        ],
+        "title": "ReceiptOut",
+        "type": "object"
+      },
+      "ResultOut": {
+        "properties": {
+          "answered": {
+            "title": "Answered",
+            "type": "integer"
+          },
+          "attempt_id": {
+            "format": "uuid",
+            "title": "Attempt Id",
+            "type": "string"
+          },
+          "finalise_reason": {
+            "enum": [
+              "manual",
+              "expiry"
+            ],
+            "title": "Finalise Reason",
+            "type": "string"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ItemReview"
+            },
+            "title": "Items",
+            "type": "array"
+          },
+          "maximum": {
+            "title": "Maximum",
+            "type": "integer"
+          },
+          "percentage": {
+            "anyOf": [
+              {
+                "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Percentage"
+          },
+          "question_count": {
+            "title": "Question Count",
+            "type": "integer"
+          },
+          "raw": {
+            "title": "Raw",
+            "type": "integer"
+          },
+          "status": {
+            "enum": [
+              "scored",
+              "not_scorable"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "version": {
+            "title": "Version",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "attempt_id",
+          "version",
+          "status",
+          "raw",
+          "maximum",
+          "percentage",
+          "answered",
+          "question_count",
+          "finalise_reason",
+          "items"
+        ],
+        "title": "ResultOut",
+        "type": "object"
+      },
+      "RevealOut": {
+        "properties": {
+          "chosen": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Chosen"
+          },
+          "correct": {
+            "title": "Correct",
+            "type": "boolean"
+          },
+          "correct_option_id": {
+            "title": "Correct Option Id",
+            "type": "string"
+          },
+          "explanation": {
+            "additionalProperties": true,
+            "title": "Explanation",
+            "type": "object"
+          },
+          "position": {
+            "title": "Position",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "position",
+          "chosen",
+          "correct_option_id",
+          "correct",
+          "explanation"
+        ],
+        "title": "RevealOut",
         "type": "object"
       },
       "ReviewIn": {
@@ -1960,6 +2743,45 @@
           "sign_in_methods"
         ],
         "title": "RuntimeConfig",
+        "type": "object"
+      },
+      "SaveOut": {
+        "properties": {
+          "receipt_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Receipt Id"
+          },
+          "results": {
+            "items": {
+              "$ref": "#/components/schemas/OpResult"
+            },
+            "title": "Results",
+            "type": "array"
+          },
+          "status": {
+            "enum": [
+              "active",
+              "finalised",
+              "void"
+            ],
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "status",
+          "results",
+          "receipt_id"
+        ],
+        "title": "SaveOut",
         "type": "object"
       },
       "SearchHit": {
@@ -2427,22 +3249,31 @@
         "title": "SubjectOut",
         "type": "object"
       },
-      "SubmitIn": {
+      "SubmitOut": {
         "properties": {
-          "note": {
-            "anyOf": [
-              {
-                "maxLength": 1000,
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Note"
+          "receipt": {
+            "$ref": "#/components/schemas/ReceiptOut"
+          },
+          "reconciliation": {
+            "description": "Operations presented after finalisation, with their outcome",
+            "items": {
+              "$ref": "#/components/schemas/OpResult"
+            },
+            "title": "Reconciliation",
+            "type": "array"
+          },
+          "same_request": {
+            "description": "False when the attempt was finalised by another request or by expiry",
+            "title": "Same Request",
+            "type": "boolean"
           }
         },
-        "title": "SubmitIn",
+        "required": [
+          "receipt",
+          "same_request",
+          "reconciliation"
+        ],
+        "title": "SubmitOut",
         "type": "object"
       },
       "TopicNode": {
@@ -2814,6 +3645,47 @@
         ],
         "title": "VersionOut",
         "type": "object"
+      },
+      "portal_api__modules__assessment__schemas__SubmitIn": {
+        "properties": {
+          "idempotency_key": {
+            "maxLength": 80,
+            "minLength": 8,
+            "title": "Idempotency Key",
+            "type": "string"
+          },
+          "ops": {
+            "items": {
+              "$ref": "#/components/schemas/OpIn"
+            },
+            "maxItems": 50,
+            "title": "Ops",
+            "type": "array"
+          }
+        },
+        "required": [
+          "idempotency_key"
+        ],
+        "title": "SubmitIn",
+        "type": "object"
+      },
+      "portal_api__modules__content__schemas__SubmitIn": {
+        "properties": {
+          "note": {
+            "anyOf": [
+              {
+                "maxLength": 1000,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Note"
+          }
+        },
+        "title": "SubmitIn",
+        "type": "object"
       }
     }
   },
@@ -2975,6 +3847,250 @@
         "tags": [
           "identity",
           "admin"
+        ]
+      }
+    },
+    "/v1/attempts/{attempt_id}": {
+      "get": {
+        "operationId": "get_attempt_v1_attempts__attempt_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "attempt_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Attempt Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AttemptOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Resume: questions, saved answers, timing",
+        "tags": [
+          "practice"
+        ]
+      }
+    },
+    "/v1/attempts/{attempt_id}/answers": {
+      "post": {
+        "operationId": "save_answers_v1_attempts__attempt_id__answers_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "attempt_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Attempt Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OpsIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SaveOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Save answer operations (\u00a710.5)",
+        "tags": [
+          "practice"
+        ]
+      }
+    },
+    "/v1/attempts/{attempt_id}/items/{position}/reveal": {
+      "post": {
+        "operationId": "reveal_v1_attempts__attempt_id__items__position__reveal_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "attempt_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Attempt Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "position",
+            "required": true,
+            "schema": {
+              "title": "Position",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RevealOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Immediate-feedback practice: check one saved answer (locks it)",
+        "tags": [
+          "practice"
+        ]
+      }
+    },
+    "/v1/attempts/{attempt_id}/result": {
+      "get": {
+        "operationId": "result_v1_attempts__attempt_id__result_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "attempt_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Attempt Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResultOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Score and review after submission",
+        "tags": [
+          "practice"
+        ]
+      }
+    },
+    "/v1/attempts/{attempt_id}/submit": {
+      "post": {
+        "operationId": "submit_v1_attempts__attempt_id__submit_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "attempt_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Attempt Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/portal_api__modules__assessment__schemas__SubmitIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubmitOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Final submission (idempotent)",
+        "tags": [
+          "practice"
         ]
       }
     },
@@ -3415,6 +4531,158 @@
         "tags": [
           "identity",
           "sessions"
+        ]
+      }
+    },
+    "/v1/practice/availability": {
+      "get": {
+        "operationId": "availability_v1_practice_availability_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "grade",
+            "required": true,
+            "schema": {
+              "maximum": 12,
+              "minimum": 11,
+              "title": "Grade",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "subject",
+            "required": true,
+            "schema": {
+              "maxLength": 40,
+              "minLength": 2,
+              "title": "Subject",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AvailabilityOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Approved questions per chapter",
+        "tags": [
+          "practice"
+        ]
+      }
+    },
+    "/v1/practice/forms": {
+      "post": {
+        "operationId": "create_form_v1_practice_forms_post",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "maxLength": 80,
+              "minLength": 8,
+              "title": "Idempotency-Key",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FormCreateIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FormOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Generate and freeze a practice test",
+        "tags": [
+          "practice"
+        ]
+      }
+    },
+    "/v1/practice/forms/{form_id}/attempt": {
+      "post": {
+        "operationId": "start_attempt_v1_practice_forms__form_id__attempt_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "form_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Form Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AttemptOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Start (or resume) the attempt",
+        "tags": [
+          "practice"
         ]
       }
     },
@@ -4160,7 +5428,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/SubmitIn"
+                "$ref": "#/components/schemas/portal_api__modules__content__schemas__SubmitIn"
               }
             }
           },

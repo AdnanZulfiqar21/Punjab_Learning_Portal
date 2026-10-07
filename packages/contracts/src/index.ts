@@ -30,6 +30,18 @@ export type SourceInfo = S["SourceOut"];
 export type StudioHistoryEvent = S["HistoryEvent"];
 export type ContentValidation = S["ValidationOut"];
 export type Lesson = S["LessonOut"];
+export type PracticeAvailability = S["AvailabilityOut"];
+export type PracticeForm = S["FormOut"];
+export type PracticeAttempt = S["AttemptOut"];
+export type AttemptItem = S["ItemSnapshot"];
+export type AttemptAnswer = S["AnswerOut"];
+export type AnswerOpResult = S["OpResult"];
+export type SaveResult = S["SaveOut"];
+export type SubmitResult = S["SubmitOut"];
+export type SubmissionReceipt = S["ReceiptOut"];
+export type AttemptResult = S["ResultOut"];
+export type ItemReview = S["ItemReview"];
+export type RevealResult = S["RevealOut"];
 
 /** RFC 9457 problem details returned by every API error. */
 export interface Problem {
