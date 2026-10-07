@@ -86,7 +86,14 @@ def validate(catalogue: dict[str, Any], registry: dict[str, Any]) -> list[str]:
     return errors
 
 
-INSERT_ONLY = {"content_state"}
+# Columns owned by people, never by imports: academic state and the owner's publication-rights decision.
+INSERT_ONLY = {
+    "content_state",
+    "publication_rights",
+    "publication_rights_evidence",
+    "publication_rights_set_by",
+    "publication_rights_set_at",
+}
 
 
 def _upsert(session: Session, model: type[Any], rows: list[dict[str, Any]], key: str = "id") -> int:

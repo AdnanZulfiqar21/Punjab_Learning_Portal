@@ -1,6 +1,86 @@
 {
   "components": {
     "schemas": {
+      "Actions": {
+        "description": "What the caller may do now. Advisory for the UI; the server re-checks every action.",
+        "properties": {
+          "claim": {
+            "title": "Claim",
+            "type": "boolean"
+          },
+          "edit": {
+            "title": "Edit",
+            "type": "boolean"
+          },
+          "publish": {
+            "title": "Publish",
+            "type": "boolean"
+          },
+          "quarantine": {
+            "title": "Quarantine",
+            "type": "boolean"
+          },
+          "release": {
+            "title": "Release",
+            "type": "boolean"
+          },
+          "retire": {
+            "title": "Retire",
+            "type": "boolean"
+          },
+          "review": {
+            "title": "Review",
+            "type": "boolean"
+          },
+          "revise": {
+            "title": "Revise",
+            "type": "boolean"
+          },
+          "submit": {
+            "title": "Submit",
+            "type": "boolean"
+          },
+          "withdraw": {
+            "title": "Withdraw",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "edit",
+          "submit",
+          "withdraw",
+          "review",
+          "claim",
+          "publish",
+          "revise",
+          "quarantine",
+          "release",
+          "retire"
+        ],
+        "title": "Actions",
+        "type": "object"
+      },
+      "AssignIn": {
+        "properties": {
+          "reviewer_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reviewer Id"
+          }
+        },
+        "required": [
+          "reviewer_id"
+        ],
+        "title": "AssignIn",
+        "type": "object"
+      },
       "BookOut": {
         "properties": {
           "authority": {
@@ -172,6 +252,21 @@
           "grades"
         ],
         "title": "CatalogueOut",
+        "type": "object"
+      },
+      "ChangeReasonIn": {
+        "properties": {
+          "reason": {
+            "maxLength": 1000,
+            "minLength": 5,
+            "title": "Reason",
+            "type": "string"
+          }
+        },
+        "required": [
+          "reason"
+        ],
+        "title": "ChangeReasonIn",
         "type": "object"
       },
       "ChapterOut": {
@@ -487,6 +582,49 @@
         "title": "ConsentOut",
         "type": "object"
       },
+      "DraftIn": {
+        "properties": {
+          "body": {
+            "additionalProperties": true,
+            "title": "Body",
+            "type": "object"
+          },
+          "revision": {
+            "description": "The revision this edit started from; a stale value returns 409.",
+            "minimum": 1.0,
+            "title": "Revision",
+            "type": "integer"
+          },
+          "source_refs": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "maxItems": 40,
+            "title": "Source Refs",
+            "type": "array"
+          },
+          "title": {
+            "anyOf": [
+              {
+                "maxLength": 200,
+                "minLength": 3,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Title"
+          }
+        },
+        "required": [
+          "revision",
+          "body"
+        ],
+        "title": "DraftIn",
+        "type": "object"
+      },
       "GradeCatalogue": {
         "properties": {
           "grade": {
@@ -547,6 +685,554 @@
           }
         },
         "title": "HTTPValidationError",
+        "type": "object"
+      },
+      "HistoryEvent": {
+        "properties": {
+          "action": {
+            "title": "Action",
+            "type": "string"
+          },
+          "actor": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Actor"
+          },
+          "at": {
+            "format": "date-time",
+            "title": "At",
+            "type": "string"
+          },
+          "details": {
+            "additionalProperties": true,
+            "title": "Details",
+            "type": "object"
+          }
+        },
+        "required": [
+          "at",
+          "action",
+          "actor",
+          "details"
+        ],
+        "title": "HistoryEvent",
+        "type": "object"
+      },
+      "ItemCreateIn": {
+        "properties": {
+          "chapter_id": {
+            "format": "uuid",
+            "title": "Chapter Id",
+            "type": "string"
+          },
+          "title": {
+            "maxLength": 200,
+            "minLength": 3,
+            "title": "Title",
+            "type": "string"
+          },
+          "topic_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Topic Id"
+          }
+        },
+        "required": [
+          "chapter_id",
+          "title"
+        ],
+        "title": "ItemCreateIn",
+        "type": "object"
+      },
+      "ItemDetail": {
+        "properties": {
+          "actions": {
+            "$ref": "#/components/schemas/Actions"
+          },
+          "assigned_reviewer": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Assigned Reviewer"
+          },
+          "assigned_reviewer_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Assigned Reviewer Id"
+          },
+          "availability": {
+            "enum": [
+              "unpublished",
+              "live",
+              "quarantined",
+              "retired"
+            ],
+            "title": "Availability",
+            "type": "string"
+          },
+          "availability_reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Availability Reason"
+          },
+          "blockers": {
+            "description": "Why the next step can't happen yet (e.g. rights unverified).",
+            "items": {
+              "type": "string"
+            },
+            "title": "Blockers",
+            "type": "array"
+          },
+          "chapter_id": {
+            "format": "uuid",
+            "title": "Chapter Id",
+            "type": "string"
+          },
+          "chapter_pdf_end": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Chapter Pdf End"
+          },
+          "chapter_pdf_start": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Chapter Pdf Start"
+          },
+          "chapter_title": {
+            "title": "Chapter Title",
+            "type": "string"
+          },
+          "created_by": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Created By"
+          },
+          "grade_number": {
+            "title": "Grade Number",
+            "type": "integer"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "kind": {
+            "title": "Kind",
+            "type": "string"
+          },
+          "open_feedback": {
+            "description": "Change requests on the working version not yet addressed.",
+            "title": "Open Feedback",
+            "type": "integer"
+          },
+          "published": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/VersionOut"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "published_version": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Published Version"
+          },
+          "source": {
+            "$ref": "#/components/schemas/SourceOut"
+          },
+          "state": {
+            "enum": [
+              "draft",
+              "submitted",
+              "changes_requested",
+              "approved",
+              "published"
+            ],
+            "title": "State",
+            "type": "string"
+          },
+          "subject_code": {
+            "title": "Subject Code",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "topic_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Topic Id"
+          },
+          "topic_title": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Topic Title"
+          },
+          "updated_at": {
+            "format": "date-time",
+            "title": "Updated At",
+            "type": "string"
+          },
+          "working": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/VersionOut"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "working_version": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Working Version"
+          }
+        },
+        "required": [
+          "id",
+          "kind",
+          "title",
+          "state",
+          "availability",
+          "grade_number",
+          "subject_code",
+          "chapter_id",
+          "chapter_title",
+          "topic_id",
+          "topic_title",
+          "working_version",
+          "published_version",
+          "created_by",
+          "assigned_reviewer",
+          "assigned_reviewer_id",
+          "updated_at",
+          "open_feedback",
+          "availability_reason",
+          "working",
+          "published",
+          "source",
+          "chapter_pdf_start",
+          "chapter_pdf_end",
+          "actions",
+          "blockers"
+        ],
+        "title": "ItemDetail",
+        "type": "object"
+      },
+      "ItemSummary": {
+        "properties": {
+          "assigned_reviewer": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Assigned Reviewer"
+          },
+          "assigned_reviewer_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Assigned Reviewer Id"
+          },
+          "availability": {
+            "enum": [
+              "unpublished",
+              "live",
+              "quarantined",
+              "retired"
+            ],
+            "title": "Availability",
+            "type": "string"
+          },
+          "chapter_id": {
+            "format": "uuid",
+            "title": "Chapter Id",
+            "type": "string"
+          },
+          "chapter_title": {
+            "title": "Chapter Title",
+            "type": "string"
+          },
+          "created_by": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Created By"
+          },
+          "grade_number": {
+            "title": "Grade Number",
+            "type": "integer"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "kind": {
+            "title": "Kind",
+            "type": "string"
+          },
+          "open_feedback": {
+            "description": "Change requests on the working version not yet addressed.",
+            "title": "Open Feedback",
+            "type": "integer"
+          },
+          "published_version": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Published Version"
+          },
+          "state": {
+            "enum": [
+              "draft",
+              "submitted",
+              "changes_requested",
+              "approved",
+              "published"
+            ],
+            "title": "State",
+            "type": "string"
+          },
+          "subject_code": {
+            "title": "Subject Code",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "topic_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Topic Id"
+          },
+          "topic_title": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Topic Title"
+          },
+          "updated_at": {
+            "format": "date-time",
+            "title": "Updated At",
+            "type": "string"
+          },
+          "working_version": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Working Version"
+          }
+        },
+        "required": [
+          "id",
+          "kind",
+          "title",
+          "state",
+          "availability",
+          "grade_number",
+          "subject_code",
+          "chapter_id",
+          "chapter_title",
+          "topic_id",
+          "topic_title",
+          "working_version",
+          "published_version",
+          "created_by",
+          "assigned_reviewer",
+          "assigned_reviewer_id",
+          "updated_at",
+          "open_feedback"
+        ],
+        "title": "ItemSummary",
+        "type": "object"
+      },
+      "LessonOut": {
+        "properties": {
+          "block_types": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Block Types",
+            "type": "array"
+          },
+          "body": {
+            "additionalProperties": true,
+            "title": "Body",
+            "type": "object"
+          },
+          "content_schema_version": {
+            "title": "Content Schema Version",
+            "type": "integer"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "published_at": {
+            "format": "date-time",
+            "title": "Published At",
+            "type": "string"
+          },
+          "source_refs": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Source Refs",
+            "type": "array"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "topic_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Topic Id"
+          },
+          "version": {
+            "title": "Version",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "topic_id",
+          "version",
+          "published_at",
+          "content_schema_version",
+          "block_types",
+          "body",
+          "source_refs"
+        ],
+        "title": "LessonOut",
         "type": "object"
       },
       "MeOut": {
@@ -838,6 +1524,70 @@
         "title": "ProfileOut",
         "type": "object"
       },
+      "ReviewIn": {
+        "properties": {
+          "comment": {
+            "maxLength": 4000,
+            "minLength": 3,
+            "title": "Comment",
+            "type": "string"
+          },
+          "decision": {
+            "enum": [
+              "approve",
+              "request_changes"
+            ],
+            "title": "Decision",
+            "type": "string"
+          }
+        },
+        "required": [
+          "decision",
+          "comment"
+        ],
+        "title": "ReviewIn",
+        "type": "object"
+      },
+      "ReviewOut": {
+        "properties": {
+          "comment": {
+            "title": "Comment",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "decision": {
+            "enum": [
+              "approve",
+              "request_changes"
+            ],
+            "title": "Decision",
+            "type": "string"
+          },
+          "reviewer": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reviewer"
+          }
+        },
+        "required": [
+          "reviewer",
+          "decision",
+          "comment",
+          "created_at"
+        ],
+        "title": "ReviewOut",
+        "type": "object"
+      },
       "RevokeIn": {
         "additionalProperties": false,
         "properties": {
@@ -852,6 +1602,32 @@
           "reason"
         ],
         "title": "RevokeIn",
+        "type": "object"
+      },
+      "RightsIn": {
+        "properties": {
+          "evidence": {
+            "description": "Where the owner's decision is documented.",
+            "maxLength": 2000,
+            "minLength": 10,
+            "title": "Evidence",
+            "type": "string"
+          },
+          "rights": {
+            "enum": [
+              "UNVERIFIED",
+              "CONFIRMED",
+              "DENIED"
+            ],
+            "title": "Rights",
+            "type": "string"
+          }
+        },
+        "required": [
+          "rights",
+          "evidence"
+        ],
+        "title": "RightsIn",
         "type": "object"
       },
       "Role": {
@@ -1272,6 +2048,93 @@
         "title": "SessionOut",
         "type": "object"
       },
+      "SourceOut": {
+        "properties": {
+          "grade_number": {
+            "title": "Grade Number",
+            "type": "integer"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "missing_pages": {
+            "items": {},
+            "title": "Missing Pages",
+            "type": "array"
+          },
+          "pdf_pages": {
+            "title": "Pdf Pages",
+            "type": "integer"
+          },
+          "publication_rights": {
+            "enum": [
+              "UNVERIFIED",
+              "CONFIRMED",
+              "DENIED"
+            ],
+            "title": "Publication Rights",
+            "type": "string"
+          },
+          "publication_rights_evidence": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Publication Rights Evidence"
+          },
+          "publication_rights_set_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Publication Rights Set At"
+          },
+          "source_id": {
+            "title": "Source Id",
+            "type": "string"
+          },
+          "subject_code": {
+            "title": "Subject Code",
+            "type": "string"
+          },
+          "title": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Title"
+          }
+        },
+        "required": [
+          "id",
+          "source_id",
+          "title",
+          "grade_number",
+          "subject_code",
+          "pdf_pages",
+          "missing_pages",
+          "publication_rights",
+          "publication_rights_evidence",
+          "publication_rights_set_at"
+        ],
+        "title": "SourceOut",
+        "type": "object"
+      },
       "SourceRef": {
         "description": "Where a chapter/topic lives in the owner's original file (PDF pages are 1-based file indices).",
         "properties": {
@@ -1408,6 +2271,24 @@
         "title": "SubjectOut",
         "type": "object"
       },
+      "SubmitIn": {
+        "properties": {
+          "note": {
+            "anyOf": [
+              {
+                "maxLength": 1000,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Note"
+          }
+        },
+        "title": "SubmitIn",
+        "type": "object"
+      },
       "TopicNode": {
         "properties": {
           "children": {
@@ -1472,6 +2353,40 @@
         "title": "TopicNode",
         "type": "object"
       },
+      "ValidateIn": {
+        "properties": {
+          "body": {
+            "additionalProperties": true,
+            "title": "Body",
+            "type": "object"
+          },
+          "chapter_id": {
+            "format": "uuid",
+            "title": "Chapter Id",
+            "type": "string"
+          },
+          "for_publication": {
+            "default": false,
+            "title": "For Publication",
+            "type": "boolean"
+          },
+          "source_refs": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "maxItems": 40,
+            "title": "Source Refs",
+            "type": "array"
+          }
+        },
+        "required": [
+          "chapter_id",
+          "body"
+        ],
+        "title": "ValidateIn",
+        "type": "object"
+      },
       "ValidationError": {
         "properties": {
           "ctx": {
@@ -1510,6 +2425,229 @@
           "type"
         ],
         "title": "ValidationError",
+        "type": "object"
+      },
+      "ValidationOut": {
+        "properties": {
+          "block_types": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Block Types",
+            "type": "array"
+          },
+          "errors": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Errors",
+            "type": "array"
+          },
+          "ok": {
+            "title": "Ok",
+            "type": "boolean"
+          },
+          "warnings": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Warnings",
+            "type": "array"
+          }
+        },
+        "required": [
+          "ok",
+          "errors",
+          "warnings",
+          "block_types"
+        ],
+        "title": "ValidationOut",
+        "type": "object"
+      },
+      "VersionOut": {
+        "properties": {
+          "approved_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Approved At"
+          },
+          "approved_by": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Approved By"
+          },
+          "block_types": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Block Types",
+            "type": "array"
+          },
+          "body": {
+            "additionalProperties": true,
+            "title": "Body",
+            "type": "object"
+          },
+          "change_reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Change Reason"
+          },
+          "content_schema_version": {
+            "title": "Content Schema Version",
+            "type": "integer"
+          },
+          "contributors": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Contributors",
+            "type": "array"
+          },
+          "created_by": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Created By"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "number": {
+            "title": "Number",
+            "type": "integer"
+          },
+          "published_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Published At"
+          },
+          "published_by": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Published By"
+          },
+          "reviews": {
+            "items": {
+              "$ref": "#/components/schemas/ReviewOut"
+            },
+            "title": "Reviews",
+            "type": "array"
+          },
+          "revision": {
+            "title": "Revision",
+            "type": "integer"
+          },
+          "source_refs": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Source Refs",
+            "type": "array"
+          },
+          "status": {
+            "enum": [
+              "draft",
+              "submitted",
+              "changes_requested",
+              "approved",
+              "published",
+              "superseded"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "submitted_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Submitted At"
+          },
+          "updated_at": {
+            "format": "date-time",
+            "title": "Updated At",
+            "type": "string"
+          },
+          "updated_by": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Updated By"
+          }
+        },
+        "required": [
+          "id",
+          "number",
+          "status",
+          "revision",
+          "content_schema_version",
+          "body",
+          "block_types",
+          "source_refs",
+          "change_reason",
+          "created_by",
+          "contributors",
+          "updated_by",
+          "updated_at",
+          "submitted_at",
+          "approved_by",
+          "approved_at",
+          "published_by",
+          "published_at",
+          "reviews"
+        ],
+        "title": "VersionOut",
         "type": "object"
       }
     }
@@ -1779,6 +2917,53 @@
         "summary": "Chapter",
         "tags": [
           "curriculum"
+        ]
+      }
+    },
+    "/v1/chapters/{chapter_id}/lessons": {
+      "get": {
+        "operationId": "chapter_lessons_v1_chapters__chapter_id__lessons_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "chapter_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Chapter Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/LessonOut"
+                  },
+                  "title": "Response Chapter Lessons V1 Chapters  Chapter Id  Lessons Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Published, live lessons for a chapter (academically approved; never drafts)",
+        "tags": [
+          "lessons"
         ]
       }
     },
@@ -2220,6 +3405,917 @@
         "tags": [
           "identity",
           "sessions"
+        ]
+      }
+    },
+    "/v1/studio/block-registry": {
+      "get": {
+        "operationId": "block_registry_v1_studio_block_registry_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Block Registry V1 Studio Block Registry Get",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Block types, schema version and renderer requirements (\u00a75.4)",
+        "tags": [
+          "studio"
+        ]
+      }
+    },
+    "/v1/studio/items": {
+      "post": {
+        "operationId": "create_v1_studio_items_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ItemCreateIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemDetail"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Create",
+        "tags": [
+          "studio"
+        ]
+      }
+    },
+    "/v1/studio/items/{item_id}": {
+      "get": {
+        "operationId": "item_detail_v1_studio_items__item_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "item_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Item Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemDetail"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Item Detail",
+        "tags": [
+          "studio"
+        ]
+      }
+    },
+    "/v1/studio/items/{item_id}/assign": {
+      "post": {
+        "operationId": "assign_v1_studio_items__item_id__assign_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "item_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Item Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssignIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemDetail"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Assign",
+        "tags": [
+          "studio"
+        ]
+      }
+    },
+    "/v1/studio/items/{item_id}/draft": {
+      "put": {
+        "operationId": "save_draft_v1_studio_items__item_id__draft_put",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "item_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Item Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DraftIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemDetail"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Autosave with a revision check (P06.S1.T3)",
+        "tags": [
+          "studio"
+        ]
+      }
+    },
+    "/v1/studio/items/{item_id}/history": {
+      "get": {
+        "operationId": "item_history_v1_studio_items__item_id__history_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "item_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Item Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/HistoryEvent"
+                  },
+                  "title": "Response Item History V1 Studio Items  Item Id  History Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Audit history for one item",
+        "tags": [
+          "studio"
+        ]
+      }
+    },
+    "/v1/studio/items/{item_id}/publish": {
+      "post": {
+        "operationId": "publish_v1_studio_items__item_id__publish_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "item_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Item Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemDetail"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Publish",
+        "tags": [
+          "studio"
+        ]
+      }
+    },
+    "/v1/studio/items/{item_id}/quarantine": {
+      "post": {
+        "operationId": "quarantine_v1_studio_items__item_id__quarantine_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "item_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Item Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangeReasonIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemDetail"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Quarantine",
+        "tags": [
+          "studio"
+        ]
+      }
+    },
+    "/v1/studio/items/{item_id}/release": {
+      "post": {
+        "operationId": "release_v1_studio_items__item_id__release_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "item_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Item Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangeReasonIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemDetail"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Release",
+        "tags": [
+          "studio"
+        ]
+      }
+    },
+    "/v1/studio/items/{item_id}/retire": {
+      "post": {
+        "operationId": "retire_v1_studio_items__item_id__retire_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "item_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Item Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangeReasonIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemDetail"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Retire",
+        "tags": [
+          "studio"
+        ]
+      }
+    },
+    "/v1/studio/items/{item_id}/review": {
+      "post": {
+        "operationId": "review_v1_studio_items__item_id__review_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "item_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Item Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReviewIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemDetail"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Review",
+        "tags": [
+          "studio"
+        ]
+      }
+    },
+    "/v1/studio/items/{item_id}/revise": {
+      "post": {
+        "operationId": "revise_v1_studio_items__item_id__revise_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "item_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Item Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangeReasonIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemDetail"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Revise",
+        "tags": [
+          "studio"
+        ]
+      }
+    },
+    "/v1/studio/items/{item_id}/submit": {
+      "post": {
+        "operationId": "submit_v1_studio_items__item_id__submit_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "item_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Item Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SubmitIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemDetail"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Submit",
+        "tags": [
+          "studio"
+        ]
+      }
+    },
+    "/v1/studio/items/{item_id}/withdraw": {
+      "post": {
+        "operationId": "withdraw_v1_studio_items__item_id__withdraw_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "item_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Item Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemDetail"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Withdraw",
+        "tags": [
+          "studio"
+        ]
+      }
+    },
+    "/v1/studio/queue": {
+      "get": {
+        "operationId": "queue_v1_studio_queue_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "state",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "pattern": "^(draft|submitted|changes_requested|approved|published)$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "State"
+            }
+          },
+          {
+            "in": "query",
+            "name": "availability",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "pattern": "^(unpublished|live|quarantined|retired)$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Availability"
+            }
+          },
+          {
+            "in": "query",
+            "name": "grade",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "maximum": 12,
+                  "minimum": 11,
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Grade"
+            }
+          },
+          {
+            "in": "query",
+            "name": "subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "maxLength": 40,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Subject"
+            }
+          },
+          {
+            "in": "query",
+            "name": "mine",
+            "required": false,
+            "schema": {
+              "default": false,
+              "title": "Mine",
+              "type": "boolean"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 100,
+              "maximum": 200,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/ItemSummary"
+                  },
+                  "title": "Response Queue V1 Studio Queue Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Editorial work queue (P06.S1.T2)",
+        "tags": [
+          "studio"
+        ]
+      }
+    },
+    "/v1/studio/sources": {
+      "get": {
+        "operationId": "sources_v1_studio_sources_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/SourceOut"
+                  },
+                  "title": "Response Sources V1 Studio Sources Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Source documents and their publication-rights state",
+        "tags": [
+          "studio"
+        ]
+      }
+    },
+    "/v1/studio/sources/{source_id}/publication-rights": {
+      "put": {
+        "operationId": "set_rights_v1_studio_sources__source_id__publication_rights_put",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "source_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Source Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RightsIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SourceOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Owner's publication-rights decision for material derived from a source (audited, MFA)",
+        "tags": [
+          "studio"
+        ]
+      }
+    },
+    "/v1/studio/validate": {
+      "post": {
+        "operationId": "validate_v1_studio_validate_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ValidateIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Dry-run validation for the editor (writes nothing)",
+        "tags": [
+          "studio"
         ]
       }
     }

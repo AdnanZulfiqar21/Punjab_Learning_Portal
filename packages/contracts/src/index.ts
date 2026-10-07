@@ -21,6 +21,15 @@ export type Consent = S["ConsentOut"];
 export type RoleGrant = S["RoleGrantOut"];
 export type AppSession = S["SessionOut"];
 export type SessionCreated = S["SessionCreatedOut"];
+export type StudioItemSummary = S["ItemSummary"];
+export type StudioItem = S["ItemDetail"];
+export type StudioActions = S["Actions"];
+export type ContentVersion = S["VersionOut"];
+export type ContentReview = S["ReviewOut"];
+export type SourceInfo = S["SourceOut"];
+export type StudioHistoryEvent = S["HistoryEvent"];
+export type ContentValidation = S["ValidationOut"];
+export type Lesson = S["LessonOut"];
 
 /** RFC 9457 problem details returned by every API error. */
 export interface Problem {
