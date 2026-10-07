@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Pressable, ScrollView, View } from "react-native";
 import type { TopicNode } from "@portal/contracts";
 
+import { LessonBlocks } from "@/components/lesson-blocks";
 import { Badge, Card, ErrorState, Loading, Notice, T } from "@/components/ui";
 import { Space } from "@/constants/theme";
 import { useRequest } from "@/hooks/use-request";
@@ -39,6 +40,7 @@ export default function ChapterScreen() {
             Topics from missing pages are not listed.
           </Notice>
         )}
+        <Lessons chapterId={ch.id} />
         <View style={{ gap: Space.sm }}>
           <T variant="heading" accessibilityRole="header">
             Topics
@@ -73,6 +75,47 @@ export default function ChapterScreen() {
         </View>
       </ScrollView>
     </>
+  );
+}
+
+function Lessons({ chapterId }: { chapterId: string }) {
+  const { state, retry } = useRequest((signal) => api.lessons(chapterId, signal), [chapterId]);
+  return (
+    <View style={{ gap: Space.sm }}>
+      <T variant="heading" accessibilityRole="header">
+        Lessons
+      </T>
+      {state.status === "loading" && <T variant="muted">Loading lessons…</T>}
+      {state.status === "error" && (
+        <Pressable accessibilityRole="button" onPress={retry}>
+          <T variant="muted">Lessons couldn’t load. Tap to try again.</T>
+        </Pressable>
+      )}
+      {state.status === "success" && state.data.length === 0 && (
+        <T variant="muted">
+          No reviewed lessons are published for this chapter yet. Lessons appear only after an independent subject reviewer
+          approves them.
+        </T>
+      )}
+      {state.status === "success" &&
+        state.data.map((l) => (
+          <Card key={l.id}>
+            <T variant="heading" accessibilityRole="header">
+              {l.title}
+            </T>
+            <T variant="small">Reviewed lesson · version {l.version}</T>
+            <View style={{ marginTop: Space.sm }}>
+              <LessonBlocks blocks={l.body.blocks as { type: string }[]} />
+            </View>
+            <T variant="small" style={{ marginTop: Space.sm }}>
+              Textbook pages (PDF):{" "}
+              {(l.source_refs as { pdf_from: number; pdf_to: number }[])
+                .map((r) => (r.pdf_from === r.pdf_to ? `${r.pdf_from}` : `${r.pdf_from}–${r.pdf_to}`))
+                .join(", ")}
+            </T>
+          </Card>
+        ))}
+    </View>
   );
 }
 

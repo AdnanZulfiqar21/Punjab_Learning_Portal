@@ -12,24 +12,24 @@ const CALLOUT_STYLE: Record<string, string> = {
   warning: "border-warn bg-warn-soft",
 };
 
-export function LessonBlocks({ blocks }: { blocks: Block[] }) {
+/** `headingOffset` shifts block headings down so they nest under the page's own headings (level 2 → h{2+offset}). */
+export function LessonBlocks({ blocks, headingOffset = 0 }: { blocks: Block[]; headingOffset?: number }) {
   return (
     <div className="space-y-4 leading-relaxed">
       {blocks.map((b, i) => (
-        <BlockView key={i} block={b} />
+        <BlockView key={i} block={b} headingOffset={headingOffset} />
       ))}
     </div>
   );
 }
 
-function BlockView({ block: b }: { block: Block }) {
+function BlockView({ block: b, headingOffset }: { block: Block; headingOffset: number }) {
   switch (b.type) {
-    case "heading":
-      return b.level === 3 ? (
-        <h3 className="text-lg font-semibold">{str(b.text)}</h3>
-      ) : (
-        <h2 className="text-xl font-semibold tracking-tight">{str(b.text)}</h2>
-      );
+    case "heading": {
+      const level = Math.min(6, (b.level === 3 ? 3 : 2) + headingOffset);
+      const Tag = `h${level}` as "h2" | "h3" | "h4" | "h5" | "h6";
+      return <Tag className={b.level === 3 ? "text-lg font-semibold" : "text-xl font-semibold tracking-tight"}>{str(b.text)}</Tag>;
+    }
     case "paragraph":
       return <p className="whitespace-pre-line">{str(b.text)}</p>;
     case "list": {
