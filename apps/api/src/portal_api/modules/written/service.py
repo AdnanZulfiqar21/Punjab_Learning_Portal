@@ -264,17 +264,33 @@ def start(db: Session, who: Principal, form_id: uuid.UUID) -> WrittenAttempt:
     )
     if existing is not None:
         return existing
-    now = db_now(db)
+    # Review R03: admission is serialized per account, and everything that decides it is read after the lock.
+    access.lock_permit_admission(db, who.user.id)
+    existing = db.scalar(
+        select(WrittenAttempt).where(WrittenAttempt.form_id == form_id, WrittenAttempt.user_id == who.user.id)
+    )
+    if existing is not None:  # a concurrent start of the same form won while we waited
+        db.commit()
+        return existing
+    now = db_now(db)  # the authoritative start: after waiting for admission, never before
+    open_permits = 0
+    for open_attempt in db.scalars(
+        select(WrittenAttempt)
+        .where(WrittenAttempt.user_id == who.user.id, WrittenAttempt.status == "active")
+        .order_by(WrittenAttempt.id)
+        .with_for_update()
+    ):
+        if not _expire_if_due(db, open_attempt, now):  # a closed upload window releases its permit by the same rules
+            open_permits += 1
     deadline = now + timedelta(seconds=form.writing_s) if form.writing_s else None
     cutoff = (deadline or now) + timedelta(seconds=form.upload_allowance_s)
     attempt_id = uuid.uuid4()
-    open_permits = db.scalar(
-        select(func.count())
-        .select_from(WrittenAttempt)
-        .where(WrittenAttempt.user_id == who.user.id, WrittenAttempt.status == "active")
-    )
     # §20.13.4: reserve the maximum weighted units for this form, atomically with the attempt.
-    access.reserve(db, who.user.id, attempt_id, _form_units(db, form), open_permits=int(open_permits or 0))
+    try:
+        access.reserve(db, who.user.id, attempt_id, _form_units(db, form), open_permits=open_permits)
+    except access.AllowanceExhausted:
+        db.commit()  # keep any expiries made above; nothing was reserved
+        raise
     inserted = db.execute(
         insert(WrittenAttempt)
         .values(
