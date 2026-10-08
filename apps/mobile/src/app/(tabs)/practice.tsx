@@ -5,6 +5,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import { Button, Choices, Field, FormError } from "@/components/form";
 import { PlanCard } from "@/components/plan-card";
+import { WrittenBuilder } from "@/components/written-builder";
 import { ErrorState, Loading, Notice, T } from "@/components/ui";
 import { Radius, Space, TAB_SCREEN_TOP } from "@/constants/theme";
 import { useRequest } from "@/hooks/use-request";
@@ -67,6 +68,7 @@ function Builder({ token, initialGrade, initialSubject }: { token: string; initi
   const c = useTheme();
   const [grade, setGrade] = useState<11 | 12>(initialGrade);
   const [subject, setSubject] = useState<SubjectCode>(initialSubject);
+  const [kind, setKind] = useState<"mcq" | "written">("mcq");
   const availability = useRequest((signal) => api.practiceAvailability(token, grade, subject, signal), [token, grade, subject]);
   const [chapters, setChapters] = useState<string[]>([]);
   const [count, setCount] = useState("10");
@@ -110,6 +112,20 @@ function Builder({ token, initialGrade, initialSubject }: { token: string; initi
     <View style={{ gap: Space.lg }}>
       <Choices label="Class" options={[[11, GRADE_LABEL[11]], [12, GRADE_LABEL[12]]] as const} selected={[grade]} onToggle={(g) => { setGrade(g); setChapters([]); }} />
       <Choices label="Subject" options={SUBJECTS} selected={[subject]} onToggle={(s) => { setSubject(s); setChapters([]); }} />
+      <Choices
+        label="Kind of test"
+        options={[["mcq", "Multiple choice"], ["written", "Written answers"]] as const}
+        selected={[kind]}
+        onToggle={setKind}
+      />
+      {kind === "written" ? <WrittenBuilder token={token} grade={grade} subject={subject} /> : mcqBody()}
+    </View>
+  );
+
+  // A render function (not a component), so text fields keep focus across renders.
+  function mcqBody() {
+    return (
+      <View style={{ gap: Space.lg }}>
       {availability.state.status === "loading" && <Loading label="Loading chapters" />}
       {availability.state.status === "error" && <ErrorState error={availability.state.error} onRetry={availability.retry} />}
       {availability.state.status === "success" && availability.state.data.chapters.every((ch) => ch.questions === 0) && (
@@ -173,6 +189,7 @@ function Builder({ token, initialGrade, initialSubject }: { token: string; initi
           <Button label="Start test" onPress={start} busy={busy} disabled={chapters.length === 0} />
         </View>
       )}
-    </View>
-  );
+      </View>
+    );
+  }
 }

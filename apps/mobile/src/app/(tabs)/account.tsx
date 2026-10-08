@@ -169,12 +169,13 @@ function SignedIn({ token, me }: { token: string; me: Me }) {
             Tell us your class and subjects so we can show the right books.
           </T>
         )}
-        <View style={{ marginTop: Space.md }}>
+        <View style={{ marginTop: Space.md, gap: Space.sm }}>
           <Button
             variant="secondary"
             label={p ? "Edit learning preferences" : "Set up learning preferences"}
             onPress={() => router.push("/onboarding")}
           />
+          <Button variant="secondary" label="Help and support" onPress={() => router.push("/help")} />
         </View>
       </Card>
 

@@ -22,7 +22,13 @@ import type {
   SearchResult,
   SessionCreated,
   SubmitResult,
+  SupportTicket,
   TrialDecision,
+  WrittenAttempt,
+  WrittenAvailability,
+  WrittenForm,
+  WrittenResult,
+  WrittenSeal,
 } from "@portal/contracts";
 
 import { installToken } from "@/lib/install-token";
@@ -59,6 +65,8 @@ type RequestOptions = {
   token?: string | null;
   signal?: AbortSignal;
   headers?: Record<string, string>;
+  /** A raw upload body (a photo or PDF); sent as application/octet-stream. */
+  raw?: Blob;
 };
 
 // Every request says which client it is and carries this installation's opaque token, so the server can apply the
@@ -79,11 +87,12 @@ async function request<T>(path: string, opts: RequestOptions = {}): Promise<T> {
         "X-Portal-Client": CLIENT,
         "X-Portal-Install": install,
         ...(opts.body !== undefined ? { "Content-Type": "application/json" } : {}),
+        ...(opts.raw !== undefined ? { "Content-Type": "application/octet-stream" } : {}),
         ...(opts.token ? { Authorization: `Bearer ${opts.token}` } : {}),
         ...opts.headers,
       },
-      body: opts.body !== undefined ? JSON.stringify(opts.body) : undefined,
-      signal: opts.signal ?? AbortSignal.timeout(15_000),
+      body: opts.raw ?? (opts.body !== undefined ? JSON.stringify(opts.body) : undefined),
+      signal: opts.signal ?? AbortSignal.timeout(opts.raw !== undefined ? 120_000 : 15_000),
     });
   } catch (e) {
     if ((e as Error).name === "AbortError" && opts.signal?.aborted) throw e;
@@ -178,6 +187,55 @@ export const api = {
     request<RevealResult>(`/v1/attempts/${encodeURIComponent(id)}/items/${position}/reveal`, { method: "POST", token }),
   result: (token: string, id: string, signal?: AbortSignal) =>
     request<AttemptResult>(`/v1/attempts/${encodeURIComponent(id)}/result`, { token, signal }),
+
+  // Written practice (W03/W04/W06). Uploads are raw files; the server validates them, seals once with a receipt and
+  // never marks anything before submission. Marks come from teachers (the supported route until B10).
+  writtenAvailability: (token: string, grade: number, subject: string, signal?: AbortSignal) =>
+    request<WrittenAvailability>(`/v1/written/availability?grade=${grade}&subject=${encodeURIComponent(subject)}`, { token, signal }),
+  createWrittenForm: (token: string, idempotencyKey: string, body: Record<string, unknown>) =>
+    request<WrittenForm>("/v1/written/forms", { method: "POST", token, body, headers: { "Idempotency-Key": idempotencyKey } }),
+  startWritten: (token: string, formId: string) =>
+    request<WrittenAttempt>(`/v1/written/forms/${encodeURIComponent(formId)}/attempt`, { method: "POST", token }),
+  writtenAttempt: (token: string, id: string, signal?: AbortSignal) =>
+    request<WrittenAttempt>(`/v1/written-attempts/${encodeURIComponent(id)}`, { token, signal }),
+  uploadWritten: (token: string, id: string, file: Blob) =>
+    request<{ pages: WrittenAttempt["pages"]; duplicate: boolean; warnings: string[] }>(
+      `/v1/written-attempts/${encodeURIComponent(id)}/pages`,
+      { method: "POST", token, raw: file },
+    ),
+  saveMapping: (token: string, id: string, expectedRevision: number, slots: Record<string, { pages: string[]; unanswered: boolean }>) =>
+    request<WrittenAttempt>(`/v1/written-attempts/${encodeURIComponent(id)}/manifest`, {
+      method: "PUT",
+      token,
+      body: { expected_revision: expectedRevision, slots },
+    }),
+  sealWritten: (token: string, id: string, idempotencyKey: string, expectedRevision: number) =>
+    request<WrittenSeal>(`/v1/written-attempts/${encodeURIComponent(id)}/seal`, {
+      method: "POST",
+      token,
+      body: { idempotency_key: idempotencyKey, expected_revision: expectedRevision },
+    }),
+  writtenResult: (token: string, id: string, signal?: AbortSignal) =>
+    request<WrittenResult>(`/v1/written-attempts/${encodeURIComponent(id)}/result`, { token, signal }),
+  requestRecheck: (token: string, id: string, reason: string, positions: number[]) =>
+    request<unknown>(`/v1/written-attempts/${encodeURIComponent(id)}/recheck`, { method: "POST", token, body: { reason, positions } }),
+  /** A clearer copy of one pending answer. One key per chosen file, so a retry never makes a second copy (RS31-01). */
+  rescan: (token: string, id: string, position: number, file: Blob, idempotencyKey: string) =>
+    request<{ id: string; replay: boolean; post_cutoff: boolean }>(
+      `/v1/written-attempts/${encodeURIComponent(id)}/questions/${position}/rescan?note=${encodeURIComponent("Clearer copy")}`,
+      { method: "POST", token, raw: file, headers: { "Idempotency-Key": idempotencyKey } },
+    ),
+  confirmUnanswered: (token: string, id: string, position: number) =>
+    request<void>(`/v1/written-attempts/${encodeURIComponent(id)}/questions/${position}/confirm-unanswered`, { method: "POST", token }),
+
+  // Help (P15.S3): the learner's own requests and replies.
+  tickets: (token: string, signal?: AbortSignal) => request<SupportTicket[]>("/v1/support/tickets", { token, signal }),
+  ticket: (token: string, id: string, signal?: AbortSignal) =>
+    request<SupportTicket>(`/v1/support/tickets/${encodeURIComponent(id)}`, { token, signal }),
+  openTicket: (token: string, body: { category: string; subject: string; body: string; reference?: Record<string, unknown> }) =>
+    request<SupportTicket>("/v1/support/tickets", { method: "POST", token, body }),
+  replyTicket: (token: string, id: string, body: string) =>
+    request<SupportTicket>(`/v1/support/tickets/${encodeURIComponent(id)}/messages`, { method: "POST", token, body: { body } }),
 };
 
 export const GRADE_LABEL: Record<number, string> = { 11: "Class XI", 12: "Class XII" };
