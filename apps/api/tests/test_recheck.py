@@ -106,17 +106,18 @@ def test_recheck_marks_only_requested_questions_and_appeals_follow_corrections(
     access = client.get("/v1/me/access", headers=learner.headers).json()["written_allowance"]
     assert access["consumed"] == consumed  # no second charge for the same original work
 
-    # The correction changed question 1 only, so only question 1 can be appealed against it.
+    # Q1 can be appealed against its correction; Q2's appeal was never used and stays open in its first window
+    # (OCT8-04: one question's recheck doesn't use another's appeal).
     state = after["recheck"]
-    assert state["status"] == "available" and state["eligible_positions"] == [1] and state["target_version"] == 2
-    again = _ask(client, learner, a["id"], [2])
-    assert again.status_code == 422 and again.json()["eligible_positions"] == [1]
+    assert state["status"] == "available" and state["eligible_positions"] == [1, 2] and state["target_version"] == 2
+    assert state["windows"]["2"] < state["windows"]["1"]  # Q2's window still runs from the first release
     assert _ask(client, learner, a["id"], [1]).status_code == 200
     assert _mark(client, second, a["id"], "recheck", _awards(q1=200)).status_code == 403  # marked it before
     upheld = {"1": {**_awards(q1=200)["1"], "a1": {"units": 200, "reason": "Fixture: reworded feedback"}}}
     assert _mark(client, third, a["id"], "recheck", upheld).status_code == 200  # upheld; only feedback reworded
     final = _result(client, learner, a["id"])
-    assert final["recheck"]["status"] == "closed" and final["recheck"]["closed_reason"] == "no_corrected_questions"
+    # Q1's appeal against its correction is used and upheld (wording only), so Q1 is closed; Q2's stays open.
+    assert final["recheck"]["status"] == "available" and final["recheck"]["eligible_positions"] == [2]
     assert [h["case_kind"] for h in final["history"]] == ["initial", "recheck", "recheck"]
 
 

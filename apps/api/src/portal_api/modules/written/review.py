@@ -67,6 +67,12 @@ class WrittenReviewCase(Base):
     reason: Mapped[str | None] = mapped_column(Text)  # learner's recheck reason (recheck cases)
     positions: Mapped[list[int] | None] = mapped_column(JSONB)  # completion cases: the questions still pending
     due_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))  # service obligation for accepted work
+    # OCT8-03: the released version the marker saw when taking the lease; a later change to this case's questions
+    # by another publication makes the decision a recoverable conflict instead of a silent overwrite.
+    base_version: Mapped[int | None] = mapped_column(SmallInteger)
+    predecessor_id: Mapped[uuid.UUID | None] = mapped_column(
+        ForeignKey("written_review_case.id", ondelete="RESTRICT")
+    )  # completion successor of a partially resolved completion case (OCT8-02)
 
 
 class WrittenScoreVersion(Base):
@@ -141,6 +147,7 @@ class WrittenRecheckRequest(Base):
     resolved_version_id: Mapped[uuid.UUID | None] = mapped_column(
         ForeignKey("written_score_version.id", ondelete="RESTRICT")
     )
+    rebases: Mapped[list[dict[str, Any]]] = mapped_column(JSONB, default=list, server_default="[]")  # OCT8-03 audit
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
 
 
@@ -323,6 +330,8 @@ def lease(db: Session, who: Principal, case_id: uuid.UUID) -> WrittenReviewCase:
         raise Conflict("Another teacher is marking this script.", lease_expires_at=case.lease_expires_at.isoformat())
     case.lease_holder = who.user.id
     case.lease_expires_at = now + LEASE
+    current = released_result(db, case.attempt_id)
+    case.base_version = current.version if current else None
     db.commit()
     db.refresh(case)
     return case
@@ -438,7 +447,16 @@ def decide(
     expansion_reason: str = "",
     question_status: dict[str, dict[str, Any]] | None = None,
 ) -> WrittenScoreVersion:
-    case = _case(db, who, case_id, lock=True)
+    # One publication per attempt at a time (OCT8-03). Lock order everywhere: attempt row, then case rows.
+    visible = _case(db, who, case_id)
+    db.scalar(select(WrittenAttempt.id).where(WrittenAttempt.id == visible.attempt_id).with_for_update())
+    case = db.scalar(
+        select(WrittenReviewCase)
+        .where(WrittenReviewCase.id == case_id)
+        .with_for_update()
+        .execution_options(populate_existing=True)
+    )
+    assert case is not None
     now = _now(db)
     if case.status != "queued":
         raise Conflict("This case has already been released.")
@@ -451,18 +469,10 @@ def decide(
         )
     ctx = case_context(db, case)
     req: WrittenRecheckRequest | None = ctx["recheck"]
-    carried_awards: dict[str, Any] = {}
-    carried_units: dict[str, int] = {}
     scope: set[str] | None = None
+    current = released_result(db, case.attempt_id)  # authoritative under the attempt lock
     if req is not None:
-        target = db.get(WrittenScoreVersion, req.target_version_id)
-        current = released_result(db, case.attempt_id)
-        assert target is not None
-        if current is None or current.id != target.id:
-            raise Conflict(
-                "The released result changed after this recheck was requested. It needs academic review.",
-                code_reason="RECHECK_TARGET_STALE",
-            )
+        assert current is not None
         extra = sorted({int(p) for p in (expand_positions or [])} - set(req.positions))
         valid = {q["position"] for q in ctx["questions"]}
         if set(extra) - valid:
@@ -473,22 +483,29 @@ def decide(
             if len(expansion_reason.strip()) < 10:
                 raise Unprocessable("Give a reason for widening the recheck.")
         scope = {str(p) for p in [*req.positions, *req.expanded_positions, *extra]}
+        if req.target_version_id != current.id:
+            target = db.get(WrittenScoreVersion, req.target_version_id)
+            assert target is not None
+            changed = sorted(p for p in scope if _question_state(target, p) != _question_state(current, p))
+            if changed:
+                raise Conflict(
+                    "Questions in this recheck changed after it was requested. An academic adjudicator must rebase it.",
+                    code_reason="RECHECK_TARGET_CHANGED",
+                    changed_positions=[int(p) for p in changed],
+                )
+            _rebase(db, req, current, None, "only questions outside the recheck changed")
         outside = sorted(set(awards) - scope, key=int)
         if outside:
             raise Unprocessable(
                 "This recheck covers only the requested questions. Unaffected marks are carried forward.",
                 errors=[f"Question {p} is outside the recheck." for p in outside],
             )
-        carried_awards = {p: a for p, a in target.awards.items() if p not in scope}
-        carried_units = {p: u for p, u in target.question_units.items() if p not in scope}
         if extra:
             req.expanded_positions = sorted({*req.expanded_positions, *extra})
             req.expansion_reason = expansion_reason.strip()
             req.expanded_by = who.user.id
-    carried_status: dict[str, Any] = {}
     if case.case_kind == "completion":
-        # Only the questions still pending are marked; everything else is carried from the current released result.
-        current = released_result(db, case.attempt_id)
+        # Only questions that are still pending in the current result are marked here.
         assert current is not None
         scope = {str(p) for p in (case.positions or [])}
         outside = sorted(set(awards) - scope, key=int)
@@ -497,13 +514,41 @@ def decide(
                 "This case covers only the questions that were pending.",
                 errors=[f"Question {p} is outside this case." for p in outside],
             )
+        no_longer = sorted(p for p in scope if _status_of(current, p) != "pending")
+        if no_longer:
+            raise Conflict(
+                "Some of these questions were resolved by another decision. Reload the script.",
+                code_reason="RESULT_CHANGED",
+                changed_positions=[int(p) for p in no_longer],
+            )
+    if (
+        scope is not None
+        and current is not None
+        and case.base_version is not None
+        and case.base_version != current.version
+    ):
+        base = db.scalar(
+            select(WrittenScoreVersion).where(
+                WrittenScoreVersion.attempt_id == case.attempt_id,
+                WrittenScoreVersion.version == case.base_version,
+                WrittenScoreVersion.released.is_(True),
+            )
+        )
+        moved = sorted(p for p in scope if base is not None and _question_state(base, p) != _question_state(current, p))
+        if moved and req is None:
+            raise Conflict(
+                "This script's result changed since you opened it. Reload before saving.",
+                code_reason="RESULT_CHANGED",
+                changed_positions=[int(p) for p in moved],
+            )
+    # Everything outside this case's questions is carried forward from the *current* released result (OCT8-03).
+    carried_awards: dict[str, Any] = {}
+    carried_units: dict[str, int] = {}
+    carried_status: dict[str, Any] = {}
+    if scope is not None and current is not None:
         carried_awards = {p: a for p, a in current.awards.items() if p not in scope}
         carried_units = {p: u for p, u in current.question_units.items() if p not in scope}
-        carried_status = {p: s for p, s in current.question_status.items() if p not in scope}
-    elif req is not None:
-        pinned = db.get(WrittenScoreVersion, req.target_version_id)
-        assert pinned is not None
-        carried_status = {p: s for p, s in (pinned.question_status or {}).items() if p not in (scope or set())}
+        carried_status = {p: st for p, st in (current.question_status or {}).items() if p not in scope}
 
     # R05: each question in scope is scored, pending (e.g. unreadable, awaiting the learner) or unavailable (the
     # service can't assess it). Pending and unavailable questions get no awards and no invented zero.
@@ -572,6 +617,13 @@ def decide(
     )
     db.add(sv)
     case.version += 1
+    try:
+        db.flush()
+    except IntegrityError as e:
+        db.rollback()
+        raise Conflict(
+            "Another decision was published at the same time. Reload the script.", code_reason="RESULT_CHANGED"
+        ) from e
     if release:
         from portal_api.modules.access import service as access
 
@@ -583,33 +635,11 @@ def decide(
             [int(p) for p, st in statuses.items() if st["status"] == "unavailable"],
             "question unavailable: could not be assessed",
         )
-        if pending and not db.scalar(
-            select(WrittenReviewCase.id).where(
-                WrittenReviewCase.attempt_id == case.attempt_id,
-                WrittenReviewCase.case_kind == "completion",
-                WrittenReviewCase.status == "queued",
-            )
-        ):
-            seq = db.scalar(
-                select(func.max(WrittenReviewCase.opened_seq)).where(
-                    WrittenReviewCase.attempt_id == case.attempt_id, WrittenReviewCase.case_kind == "completion"
-                )
-            )
-            db.add(
-                WrittenReviewCase(
-                    attempt_id=case.attempt_id,
-                    case_kind="completion",
-                    opened_seq=(seq or 0) + 1,
-                    grade_number=case.grade_number,
-                    subject_code=case.subject_code,
-                    positions=pending,
-                    reason="; ".join(f"Q{p}: {all_status[str(p)]['reason']}" for p in pending)[:1000],
-                    due_at=now + REVIEW_DUE,
-                )
-            )
     if release:
         case.status = "released"
         case.released_at = now
+        _sync_pending(db, case, set(pending), all_status, now)
+    if release:
         if req is not None:
             db.flush()
             req.status = "resolved"
@@ -636,6 +666,195 @@ def decide(
     return sv
 
 
+def _status_of(sv: WrittenScoreVersion, pos: str) -> str:
+    return str((sv.question_status or {}).get(pos, {"status": "scored"}).get("status", "scored"))
+
+
+def _question_state(sv: WrittenScoreVersion, pos: str) -> tuple[str, dict[str, int]]:
+    """What a learner or marker sees for one question: its status and awarded units per criterion (not wording)."""
+    return _status_of(sv, pos), {c: int(a.get("units", 0)) for c, a in sv.awards.get(pos, {}).items()}
+
+
+def _rebase(
+    db: Session, req: WrittenRecheckRequest, to: WrittenScoreVersion, actor: uuid.UUID | None, reason: str
+) -> None:
+    """Move an open recheck to the current result, keeping its questions, reason and time (OCT8-03). Audited."""
+    old = db.get(WrittenScoreVersion, req.target_version_id)
+    req.rebases = [
+        *req.rebases,
+        {
+            "from_version": old.version if old else None,
+            "to_version": to.version,
+            "at": _now(db).isoformat(),
+            "by": str(actor) if actor else "system",
+            "reason": reason,
+        },
+    ]
+    req.target_version_id = to.id
+    record(
+        db,
+        actor=actor,
+        action="written.recheck_rebased",
+        target_type="written_attempt",
+        target_id=str(req.attempt_id),
+        details={"request": str(req.id), "to_version": to.version, "reason": reason},
+    )
+
+
+def rebase_recheck(db: Session, who: Principal, case_id: uuid.UUID, reason: str) -> WrittenReviewCase:
+    """Academic adjudicator path for a recheck whose disputed questions changed after it was requested."""
+    visible = _case(db, who, case_id)
+    if not can_adjudicate(db, who, visible):
+        raise Forbidden("Only an academic adjudicator can rebase a recheck.")
+    if len(reason.strip()) < 10:
+        raise Unprocessable("Give a reason for rebasing the recheck.")
+    db.scalar(select(WrittenAttempt.id).where(WrittenAttempt.id == visible.attempt_id).with_for_update())
+    case = db.scalar(
+        select(WrittenReviewCase)
+        .where(WrittenReviewCase.id == case_id)
+        .with_for_update()
+        .execution_options(populate_existing=True)
+    )
+    assert case is not None
+    req = recheck_request(db, case)
+    current = released_result(db, case.attempt_id)
+    if req is None or case.status != "queued" or current is None:
+        raise Conflict("Only an open recheck can be rebased.")
+    if req.target_version_id != current.id:
+        _rebase(db, req, current, who.user.id, reason.strip())
+    db.commit()
+    db.refresh(case)
+    return case
+
+
+def _sync_pending(
+    db: Session, closing: WrittenReviewCase, pending: set[int], status: dict[str, Any], now: datetime
+) -> None:
+    """After a release, every pending question has exactly one queued completion case (OCT8-02). Questions resolved
+    elsewhere leave older cases (closed when empty); uncovered ones get a successor that keeps the original due time."""
+    covered: set[int] = set()
+    for c in db.scalars(
+        select(WrittenReviewCase)
+        .where(
+            WrittenReviewCase.attempt_id == closing.attempt_id,
+            WrittenReviewCase.case_kind == "completion",
+            WrittenReviewCase.status == "queued",
+            WrittenReviewCase.id != closing.id,
+        )
+        .order_by(WrittenReviewCase.opened_at)
+        .with_for_update()
+    ):
+        keep = sorted(p for p in (c.positions or []) if p in pending and p not in covered)
+        if keep != sorted(c.positions or []):
+            c.positions = keep
+            c.version += 1  # an in-flight lease on it must reload
+            if not keep:
+                c.status = "released"
+                c.released_at = now
+                c.lease_holder = None
+                c.lease_expires_at = None
+            record(
+                db,
+                actor=None,
+                action="written.completion_rescoped",
+                target_type="written_review_case",
+                target_id=str(c.id),
+                details={"positions": keep},
+            )
+        covered |= set(keep)
+    uncovered = sorted(pending - covered)
+    if not uncovered:
+        return
+    seq = db.scalar(
+        select(func.max(WrittenReviewCase.opened_seq)).where(
+            WrittenReviewCase.attempt_id == closing.attempt_id, WrittenReviewCase.case_kind == "completion"
+        )
+    )
+    inherited = closing.due_at if closing.case_kind == "completion" else None
+    db.add(
+        WrittenReviewCase(
+            attempt_id=closing.attempt_id,
+            case_kind="completion",
+            opened_seq=(seq or 0) + 1,
+            grade_number=closing.grade_number,
+            subject_code=closing.subject_code,
+            positions=uncovered,
+            reason="; ".join(f"Q{p}: {status[str(p)].get('reason', '')}" for p in uncovered)[:1000],
+            due_at=inherited or now + REVIEW_DUE,  # partial progress never resets the service obligation
+            predecessor_id=closing.id if closing.case_kind == "completion" else None,
+        )
+    )
+
+
+def repair_pending_obligations(db: Session) -> list[str]:
+    """Idempotent repair for OCT8-02: give every pending question of a current released result a queued completion
+    case. Returns the attempts repaired; each repair is audited. Nothing existing is rewritten."""
+    repaired = []
+    latest_released = (
+        select(WrittenScoreVersion.attempt_id, func.max(WrittenScoreVersion.version).label("v"))
+        .where(WrittenScoreVersion.released.is_(True))
+        .group_by(WrittenScoreVersion.attempt_id)
+        .subquery()
+    )
+    rows = db.execute(
+        select(WrittenScoreVersion)
+        .join(
+            latest_released,
+            (latest_released.c.attempt_id == WrittenScoreVersion.attempt_id)
+            & (latest_released.c.v == WrittenScoreVersion.version),
+        )
+        .where(WrittenScoreVersion.completeness == "partial_pending")
+    ).scalars()
+    for sv in rows:
+        db.scalar(select(WrittenAttempt.id).where(WrittenAttempt.id == sv.attempt_id).with_for_update())
+        pending = {int(p) for p in (sv.question_status or {}) if _status_of(sv, p) == "pending"}
+        covered = {
+            p
+            for c in db.scalars(
+                select(WrittenReviewCase).where(
+                    WrittenReviewCase.attempt_id == sv.attempt_id,
+                    WrittenReviewCase.case_kind == "completion",
+                    WrittenReviewCase.status == "queued",
+                )
+            )
+            for p in (c.positions or [])
+        }
+        missing = sorted(pending - covered)
+        if not missing:
+            continue
+        case = db.get(WrittenReviewCase, sv.case_id)
+        assert case is not None
+        seq = db.scalar(
+            select(func.max(WrittenReviewCase.opened_seq)).where(
+                WrittenReviewCase.attempt_id == sv.attempt_id, WrittenReviewCase.case_kind == "completion"
+            )
+        )
+        now = _now(db)
+        db.add(
+            WrittenReviewCase(
+                attempt_id=sv.attempt_id,
+                case_kind="completion",
+                opened_seq=(seq or 0) + 1,
+                grade_number=case.grade_number,
+                subject_code=case.subject_code,
+                positions=missing,
+                reason="Repair (OCT8-02): pending questions had no open case",
+                due_at=now + REVIEW_DUE,
+            )
+        )
+        record(
+            db,
+            actor=None,
+            action="written.pending_repaired",
+            target_type="written_attempt",
+            target_id=str(sv.attempt_id),
+            details={"positions": missing, "version": sv.version},
+        )
+        db.commit()
+        repaired.append(str(sv.attempt_id))
+    return repaired
+
+
 def released_result(db: Session, attempt_id: uuid.UUID) -> WrittenScoreVersion | None:
     return db.scalar(
         select(WrittenScoreVersion)
@@ -658,31 +877,41 @@ def _released(db: Session, attempt_id: uuid.UUID) -> list[WrittenScoreVersion]:
     )
 
 
-def _eligible_positions(db: Session, attempt_id: uuid.UUID, released: list[WrittenScoreVersion]) -> list[int]:
-    """Questions a learner may dispute on the current result (RECHECK-01).
+def appeal_windows(db: Session, attempt_id: uuid.UUID, released: list[WrittenScoreVersion]) -> dict[int, datetime]:
+    """Per question: the end of its open appeal window, for questions that may be disputed now (OCT8-04).
 
-    A first result: every question. A corrected result: the questions whose awards that correction changed. Unchanged
-    questions already had an independent second look, so asking again would be a duplicate, not a new appeal.
+    A question's window runs 14 days from the release that last changed its awarded units (its first score counts).
+    It closes for that release once a recheck covering it targeted that release or a later one. A completion that
+    leaves a question unchanged neither uses nor restarts its appeal; a newly scored question gets its first one.
     """
+    if not released:
+        return {}
     current = released[-1]
-
-    def scored(pos: int) -> bool:  # a pending or unavailable question has no mark to dispute (R05)
-        return bool((current.question_status or {}).get(str(pos), {"status": "scored"})["status"] == "scored")
-
-    if len(released) == 1:
-        attempt = db.get(WrittenAttempt, attempt_id)
-        assert attempt is not None
-        form = db.get(WrittenForm, attempt.form_id)
-        assert form is not None
-        return sorted(fi.position for fi in form.items if scored(fi.position))
-    prev = released[-2]
-
-    def units(sv: WrittenScoreVersion, pos: str) -> dict[str, int]:
-        return {c: int(a.get("units", 0)) for c, a in sv.awards.get(pos, {}).items()}
-
-    # Only a change in awarded marks opens a new appeal; reworded feedback on an upheld mark does not.
-    keys = set(current.awards) | set(prev.awards)
-    return sorted(int(p) for p in keys if units(current, p) != units(prev, p) and scored(int(p)))
+    reqs = list(db.scalars(select(WrittenRecheckRequest).where(WrittenRecheckRequest.attempt_id == attempt_id)))
+    version_of = {v.id: v.version for v in released}
+    out: dict[int, datetime] = {}
+    now = _now(db)
+    for pos in sorted({str(p) for v in released for p in (*v.awards, *(v.question_status or {}))}, key=int):
+        if _status_of(current, pos) != "scored":
+            continue  # pending or unavailable: nothing to dispute yet
+        last_change: WrittenScoreVersion | None = None
+        prev: tuple[str, dict[str, int]] | None = None
+        for v in released:
+            state = _question_state(v, pos)
+            if state[0] == "scored" and state != prev:
+                last_change = v
+            prev = state
+        if last_change is None:
+            continue
+        used = any(
+            int(pos) in {*r.positions, *r.expanded_positions}
+            and version_of.get(r.target_version_id, 0) >= last_change.version
+            for r in reqs
+        )
+        ends = last_change.created_at + RECHECK_WINDOW
+        if not used and now <= ends:
+            out[int(pos)] = ends
+    return out
 
 
 def recheck_request(db: Session, case: WrittenReviewCase) -> WrittenRecheckRequest | None:
@@ -692,10 +921,7 @@ def recheck_request(db: Session, case: WrittenReviewCase) -> WrittenRecheckReque
 
 
 def recheck_state(db: Session, attempt_id: uuid.UUID) -> dict[str, Any]:
-    """Whether and for which questions the learner can ask for a recheck (W06.S2.T1, §20.10, RECHECK-01).
-
-    The window is 14 days from the release of the result being disputed, so a later correction can itself be appealed.
-    """
+    """Whether and for which questions the learner can ask for a recheck (W06.S2.T1, §20.10, RECHECK-01, OCT8-04)."""
     base: dict[str, Any] = {
         "window_ends_at": None,
         "reason": None,
@@ -703,12 +929,12 @@ def recheck_state(db: Session, attempt_id: uuid.UUID) -> dict[str, Any]:
         "positions": [],
         "target_version": None,
         "closed_reason": None,
+        "windows": {},
     }
     released = _released(db, attempt_id)
     if not released:
         return {**base, "status": "unavailable"}
     current = released[-1]
-    ends = current.created_at + RECHECK_WINDOW
     open_req = db.scalar(
         select(WrittenRecheckRequest).where(
             WrittenRecheckRequest.attempt_id == attempt_id, WrittenRecheckRequest.status == "open"
@@ -719,20 +945,25 @@ def recheck_state(db: Session, attempt_id: uuid.UUID) -> dict[str, Any]:
         return {
             **base,
             "status": "requested",
-            "window_ends_at": ends,
             "reason": open_req.reason,
             "positions": open_req.positions,
             "target_version": target.version if target else None,
         }
-    base = {**base, "window_ends_at": ends, "target_version": current.version}
-    if db.scalar(select(WrittenRecheckRequest.id).where(WrittenRecheckRequest.target_version_id == current.id)):
-        return {**base, "status": "closed", "closed_reason": "already_rechecked"}
-    eligible = _eligible_positions(db, attempt_id, released)
-    if not eligible:
-        return {**base, "status": "closed", "closed_reason": "no_corrected_questions"}
-    if _now(db) > ends:
-        return {**base, "status": "closed", "closed_reason": "window_ended"}
-    return {**base, "status": "available", "eligible_positions": eligible}
+    windows = appeal_windows(db, attempt_id, released)
+    base = {**base, "target_version": current.version}
+    if windows:
+        return {
+            **base,
+            "status": "available",
+            "eligible_positions": sorted(windows),
+            "window_ends_at": max(windows.values()),
+            "windows": {str(p): w for p, w in windows.items()},
+        }
+    scored = [p for p in {*current.awards, *(current.question_status or {})} if _status_of(current, p) == "scored"]
+    if not scored:
+        return {**base, "status": "closed", "closed_reason": "nothing_scored"}
+    appealed = db.scalar(select(WrittenRecheckRequest.id).where(WrittenRecheckRequest.attempt_id == attempt_id))
+    return {**base, "status": "closed", "closed_reason": "already_rechecked" if appealed else "window_ended"}
 
 
 def request_recheck(
@@ -750,7 +981,7 @@ def request_recheck(
     state = recheck_state(db, attempt_id)
     if state["status"] == "requested":
         raise Conflict("A recheck is already in progress for this script.", code_reason="RECHECK_OPEN")
-    if state["status"] == "closed" and state["closed_reason"] == "window_ended":
+    if state["status"] == "closed" and state["closed_reason"] in ("window_ended", "nothing_scored"):
         raise Conflict("Rechecks are available for 14 days after your marks are released.", code_reason="WINDOW_ENDED")
     if state["status"] != "available":
         raise Conflict(

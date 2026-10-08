@@ -133,7 +133,10 @@ class RecheckOut(BaseModel):
     eligible_positions: list[int] = Field(description="Questions that can be disputed now (when available)")
     positions: list[int] = Field(description="Questions in the open request (when requested)")
     target_version: int | None = Field(description="The released version a request targets")
-    closed_reason: Literal["window_ended", "already_rechecked", "no_corrected_questions"] | None
+    closed_reason: Literal["window_ended", "already_rechecked", "no_corrected_questions", "nothing_scored"] | None
+    windows: dict[str, datetime] = Field(
+        default_factory=dict, description="Per eligible question: when its appeal window ends (OCT8-04)"
+    )
 
 
 class HistoryEntry(BaseModel):
@@ -461,3 +464,17 @@ def backlog(db: DB, who: Operator, response: Response) -> list[BacklogRow]:
         )
     ).all()
     return [_backlog_row(db, g, s) for g, s in sorted(scopes)]
+
+
+class RebaseIn(BaseModel):
+    reason: str = Field(min_length=10, max_length=1000)
+
+
+@router.post(
+    "/studio/written/cases/{case_id}/rebase",
+    response_model=CaseDetail,
+    summary="Rebase an open recheck onto the current result (academic adjudicators; audited)",
+)
+def rebase(db: DB, who: Reviewer, case_id: uuid.UUID, body: RebaseIn, response: Response) -> CaseDetail:
+    _private(response)
+    return _detail(db, review.rebase_recheck(db, who, case_id, body.reason), who)

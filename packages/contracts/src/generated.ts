@@ -1084,6 +1084,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/studio/written/cases/{case_id}/rebase": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Rebase an open recheck onto the current result (academic adjudicators; audited) */
+        post: operations["rebase_v1_studio_written_cases__case_id__rebase_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/studio/written/queue": {
         parameters: {
             query?: never;
@@ -2674,6 +2691,11 @@ export interface components {
              */
             status_reason: string;
         };
+        /** RebaseIn */
+        RebaseIn: {
+            /** Reason */
+            reason: string;
+        };
         /** ReceiptOut */
         ReceiptOut: {
             /**
@@ -2715,7 +2737,7 @@ export interface components {
         /** RecheckOut */
         RecheckOut: {
             /** Closed Reason */
-            closed_reason: ("window_ended" | "already_rechecked" | "no_corrected_questions") | null;
+            closed_reason: ("window_ended" | "already_rechecked" | "no_corrected_questions" | "nothing_scored") | null;
             /**
              * Eligible Positions
              * @description Questions that can be disputed now (when available)
@@ -2743,6 +2765,13 @@ export interface components {
              * @description 14 days after the disputed result was released
              */
             window_ends_at: string | null;
+            /**
+             * Windows
+             * @description Per eligible question: when its appeal window ends (OCT8-04)
+             */
+            windows?: {
+                [key: string]: string;
+            };
         };
         /** RecheckScope */
         RecheckScope: {
@@ -5832,6 +5861,41 @@ export interface operations {
                 };
                 content: {
                     "application/json": unknown;
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    rebase_v1_studio_written_cases__case_id__rebase_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                case_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["RebaseIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CaseDetail"];
                 };
             };
             /** @description Validation Error */
