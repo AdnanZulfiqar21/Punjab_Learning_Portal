@@ -1,10 +1,10 @@
 # RESUME STATE
 
-**Updated:** 2026-10-08 (after PR #34 merged; regenerated from `git log origin/main` and `gh pr list`). Regenerated from `git log origin/main`, `gh pr list` and test runs.
+**Updated:** 2026-10-08 (PR #34 review corrections on `fix/w06-review`; regenerated from `git log origin/main`, `gh pr list` and test runs).
 
 ## Repository state
-- `main` = PRs #1 and #3–#34 merged (PR #2 closed unmerged). Latest: #31 `87c720f` (W06.S2.T4 rescans + RS31 corrections; CI run 37791799813 on head `27e9f84`), #32 `2277a6a` (W04.S3.T3 linked practice; CI run 37810869785 on head `dad3222`), #33 `41ac6d9` (PR32 review corrections; CI run 37834522031 on head `f5ccdf0`), #34 `c29f144` (W06.S2.T3 rubric adjudications; CI run 37841162827 green on head `662bf87`; the first run 37840600136 failed `alembic check` because `migrations/env.py` didn't import the new models, fixed in `662bf87`).
-- **Open:** none (records-only branch `docs/records-after-pr34` while it merges).
+- `main` = PRs #1 and #3–#34 merged (PR #2 closed unmerged). Latest: #31 `87c720f` (W06.S2.T4 rescans + RS31 corrections; CI run 37791799813 on head `27e9f84`), #32 `2277a6a` (W04.S3.T3 linked practice; CI run 37810869785 on head `dad3222`), #33 `41ac6d9` (PR32 review corrections; CI run 37834522031 on head `f5ccdf0`), #34 `c29f144` (W06.S2.T3 rubric adjudications; CI run 37841162827 green on head `662bf87`; the first run 37840600136 failed `alembic check` because `migrations/env.py` didn't import the new models, fixed in `662bf87`), #35 `844adbd` (records only).
+- **Open:** `fix/w06-review` (REVIEW-W06: PR #34 review W06-01..W06-10). Merge on a green CI run of its exact head.
 - **Gate:** `main` has no branch protection or ruleset. The CI workflow is the only check and is not marked required. Merge only on a green run of the exact head being merged. CI `mobile`/`content` jobs skip when their paths are unchanged; a skip is not mobile or content qualification.
 - **Git rules (GIT-01):** never rebase, amend pushed commits or force-push (including `--force-with-lease`). Merge `main` into feature branches.
 
@@ -47,6 +47,16 @@ No academic content is published: B01 (reviewers) and rights confirmation block 
 | PR32-02 incomplete staff drafts | Fixed and merged (#33), REVIEW-PR32 (`draft_intent`, `draft` projection, workspace restore; proposals never applied). |
 | PR32-03 linked-form autoflush race | Reproduced (UniqueViolation via autoflush at linked.py:132) and fixed; merged (#33). |
 | PR32-04 cutoff label, records | Fixed and merged (#33) (`cutoff_timing`; records refreshed). |
+| W06-01 adjudication without MFA | Reproduced (201 without MFA); fixed on `fix/w06-review`: `require(Permission.adjudicate)` plus a service check. |
+| W06-02 active attempts re-targeted | Reproduced; fixed: sealed attempts only, seal queues the correction, `CORRECTION_PENDING` until applied. No mid-attempt overlay (policy decision open). |
+| W06-03 provenance not immutable | Fixed: `effective_adjudication` + `adjudication_hash` on every new score version; unique SYSTEM carry-forward per hash. |
+| W06-04 integrity errors as success | Reproduced; fixed: only the two regrade uniqueness constraints count as done; failures recorded and retryable. |
+| W06-05 supersede race | Fixed: shared per-rubric lock; chain from the pinned basis; multi-supersede; `ChainError`. Race test passes. |
+| W06-06 synchronous regrade | Fixed: durable `written_regrade_job` + `portal-written-worker`; UI polls. |
+| W06-07 chain selection UI | Fixed: source versions and replaced corrections chosen explicitly. |
+| W06-08 remaining label | Fixed: total/processed/remaining/failed/unaffected returned and shown separately. |
+| W06-09 unbounded preview | Fixed: fixed-count aggregate queries (verified 1 vs 4 scripts); paginated drill-down. **Latency/memory at large history not measured.** |
+| W06-10 no browser journey | Fixed: `e2e/adjudication.spec.ts` full journey (dev-only fixture command publishes the corrected rubric). |
 
 ## Test evidence (local, this machine; CI runs are on each PR)
 | Commit / branch | Command | Result |
@@ -60,6 +70,8 @@ No academic content is published: B01 (reviewers) and rights confirmation block 
 | same | `npx playwright test` in `apps/web` (API and web running) | 46 passed, 22 skipped, 0 failed |
 | `feat/rubric-adjudication` | `uv run pytest -q` in `apps/api` (run alone; real exit code) | 220 passed, exit 0 (an earlier run showed 4 false failures because a second pytest session reset `portal_test` mid-run) |
 | same | `npx playwright test` (API and web running, nothing else) | 47 passed, 23 skipped, exit 0 |
+| `fix/w06-review` (final code) | `uv run pytest -q` in `apps/api` (run alone; real exit code) | 228 passed, exit 0 (pre-fix probe reproduced W06-01/02/04, then deleted) |
+| same | `npx playwright test` (API, web and `portal-written-worker` running; nothing else) | 48 passed, 24 skipped, exit 0 (`adjudication.spec.ts` 41 s on its own) |
 | PR #25 body (159) vs final report (172) | 159 was on `fix/pool-saturation` alone; 172 after merging #24 into it | Both correct for their commit |
 
 ## Intermittent test failures (bounded record; not fixed)
@@ -69,9 +81,9 @@ No academic content is published: B01 (reviewers) and rights confirmation block 
 | 2026-10-08, full E2E on `feat/rubric-adjudication` while a second pytest run was loading the machine | `catalogue.spec.ts:3` Class XII region not visible; `lessons.spec.ts:20` timeout | Did not recur in the next full run made alone (47 passed) | **Not proven** to be load-related; re-examine if seen without concurrent load. |
 
 ## Next actions
-1. Next unblocked engineering: native written capture, results, rescans and mobile help (see 3).
-2. Deployment prerequisites (when B03 exists): run `portal-written-previews` and `portal-written-repair` once; schedule `portal-written-sweep-orphans` and `portal-written-learner-deadlines` (hourly); set review capacity per scope; set `PORTAL_TRIAL_DEVICE_EVIDENCE` and a secret `PORTAL_TRIAL_REF_PEPPER`. Production must not silently use `fallback` as the anti-repeat-trial implementation.
-3. Roadmap continuation, in order: (done: linked new practice attempts, W04.S3.T3, LINKED-01); (done and merged #34: rubric adjudications across attempts, W06.S2.T3, ADJ-01; run `portal-written-regrade` after each approved correction); native written capture, results, rescans (with the `Idempotency-Key` header) and mobile help (**next unblocked**); notifications (P15.S1); CMS import batches, previews, release/rollback, export (P06); source-grounded drafting and media (P07, drafts only); automatic written-assessment contracts (W05; no real script calls until B10).
+1. Merge `fix/w06-review` on green CI of its exact head; then the next unblocked engineering: native written capture, results, rescans and mobile help (see 3).
+2. Deployment prerequisites (when B03 exists): run `portal-written-previews` and `portal-written-repair` once; run `portal-written-worker` as its own process (written/regrade sub-pool); schedule `portal-written-sweep-orphans` and `portal-written-learner-deadlines` (hourly); set review capacity per scope; set `PORTAL_TRIAL_DEVICE_EVIDENCE` and a secret `PORTAL_TRIAL_REF_PEPPER`. Production must not silently use `fallback` as the anti-repeat-trial implementation.
+3. Roadmap continuation, in order: (done: linked new practice attempts, W04.S3.T3, LINKED-01); (done and merged #34: rubric adjudications across attempts, W06.S2.T3, ADJ-01; applying a correction queues a job for `portal-written-worker`); native written capture, results, rescans (with the `Idempotency-Key` header) and mobile help (**next unblocked**); notifications (P15.S1); CMS import batches, previews, release/rollback, export (P06); source-grounded drafting and media (P07, drafts only); automatic written-assessment contracts (W05; no real script calls until B10).
 4. Outstanding, not met: native repeat-device protection (R06; B07/B08/B13), native Android/iOS verification, approved academic content (B01), automatic-marking qualification (B10), production load evidence, and the original unexplained OperationalError (R08).
 
 ## Run locally
@@ -79,6 +91,7 @@ No academic content is published: B01 (reviewers) and rights confirmation block 
 docker compose -f infra/docker-compose.yml up -d
 cd apps/api && uv sync && uv run alembic upgrade head && uv run portal-import-catalogue --apply
 uv run uvicorn portal_api.main:app --host 127.0.0.1 --port 8100
+uv run portal-written-worker                                # regrade jobs (W06-06); E2E needs it
 cd ../web && pnpm install && pnpm build && pnpm start      # http://localhost:3100
 pnpm exec playwright test                                   # needs API + web running
 uv run portal-dev-seed-staff && uv run portal-dev-seed-practice   # (in apps/api) dev-only fixtures

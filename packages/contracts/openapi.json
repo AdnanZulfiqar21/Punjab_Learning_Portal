@@ -177,18 +177,14 @@
             "title": "Rubric Item Id",
             "type": "string"
           },
-          "supersedes_id": {
-            "anyOf": [
-              {
-                "format": "uuid",
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "The active correction this one replaces",
-            "title": "Supersedes Id"
+          "supersedes_ids": {
+            "description": "Every active correction this one replaces (must match the overlap exactly)",
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "title": "Supersedes Ids",
+            "type": "array"
           }
         },
         "required": [
@@ -228,10 +224,27 @@
             "type": "string"
           },
           "impact": {
-            "additionalProperties": true,
-            "description": "Affected forms, attempts, released results, rescans, planned question outcomes and progress",
-            "title": "Impact",
-            "type": "object"
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "total_attempts, processed, remaining, failed, unaffected, forms, released_results, evidence_revisions, applied_outcomes (detail view only; computed with bounded aggregate queries)",
+            "title": "Impact"
+          },
+          "latest_job": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/RegradeJobOut"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "reason": {
             "title": "Reason",
@@ -254,7 +267,7 @@
             "title": "Subject",
             "type": "string"
           },
-          "supersedes_id": {
+          "superseded_by_id": {
             "anyOf": [
               {
                 "format": "uuid",
@@ -264,7 +277,14 @@
                 "type": "null"
               }
             ],
-            "title": "Supersedes Id"
+            "title": "Superseded By Id"
+          },
+          "supersedes_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Supersedes Ids",
+            "type": "array"
           },
           "to_version_id": {
             "format": "uuid",
@@ -281,12 +301,63 @@
           "to_version_id",
           "reason",
           "status",
-          "supersedes_id",
+          "supersedes_ids",
+          "superseded_by_id",
           "approved_at",
-          "compatibility",
-          "impact"
+          "compatibility"
         ],
         "title": "AdjudicationOut",
+        "type": "object"
+      },
+      "AdjudicationSourcesOut": {
+        "properties": {
+          "active": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Active",
+            "type": "array"
+          },
+          "published_number": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Published Number"
+          },
+          "published_version_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Published Version Id"
+          },
+          "versions": {
+            "description": "Earlier published versions: compatibility, denominator check, claiming corrections, scripts",
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Versions",
+            "type": "array"
+          }
+        },
+        "required": [
+          "published_version_id",
+          "published_number",
+          "versions",
+          "active"
+        ],
+        "title": "AdjudicationSourcesOut",
         "type": "object"
       },
       "AllowanceOut": {
@@ -4222,34 +4293,139 @@
         "title": "ReferenceIn",
         "type": "object"
       },
-      "RegradeRunOut": {
+      "RegradeAttemptsOut": {
         "properties": {
-          "outcomes": {
-            "additionalProperties": {
-              "type": "integer"
+          "items": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
             },
-            "title": "Outcomes",
-            "type": "object"
+            "title": "Items",
+            "type": "array"
+          },
+          "total": {
+            "title": "Total",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "total",
+          "items"
+        ],
+        "title": "RegradeAttemptsOut",
+        "type": "object"
+      },
+      "RegradeJobOut": {
+        "properties": {
+          "adjudication_id": {
+            "format": "uuid",
+            "title": "Adjudication Id",
+            "type": "string"
+          },
+          "batches": {
+            "title": "Batches",
+            "type": "integer"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "failed": {
+            "title": "Failed",
+            "type": "integer"
+          },
+          "finished_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Finished At"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "last_error": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last Error"
           },
           "processed": {
             "title": "Processed",
             "type": "integer"
           },
-          "remaining": {
-            "title": "Remaining",
+          "regraded": {
+            "title": "Regraded",
             "type": "integer"
           },
-          "superseded": {
-            "title": "Superseded",
-            "type": "boolean"
+          "remaining": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Remaining"
+          },
+          "started_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Started At"
+          },
+          "status": {
+            "enum": [
+              "queued",
+              "running",
+              "succeeded",
+              "failed",
+              "superseded"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "unaffected": {
+            "title": "Unaffected",
+            "type": "integer"
           }
         },
         "required": [
+          "id",
+          "adjudication_id",
+          "status",
           "processed",
+          "regraded",
+          "unaffected",
+          "failed",
           "remaining",
-          "superseded"
+          "batches",
+          "last_error",
+          "created_at",
+          "started_at",
+          "finished_at"
         ],
-        "title": "RegradeRunOut",
+        "title": "RegradeJobOut",
         "type": "object"
       },
       "RemedyIn": {
@@ -6821,6 +6997,14 @@
       },
       "WrittenResultOut": {
         "properties": {
+          "awaiting_regrade": {
+            "description": "Questions a teacher will re-mark under a corrected marking guide (current marks stand until then)",
+            "items": {
+              "type": "integer"
+            },
+            "title": "Awaiting Regrade",
+            "type": "array"
+          },
           "completeness": {
             "anyOf": [
               {
@@ -9887,6 +10071,49 @@
         ]
       }
     },
+    "/v1/studio/written/adjudication-sources": {
+      "get": {
+        "operationId": "adjudication_sources_v1_studio_written_adjudication_sources_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "rubric_item_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Rubric Item Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdjudicationSourcesOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "What a correction of this rubric could apply to: versions, compatibility and active corrections",
+        "tags": [
+          "written marking"
+        ]
+      }
+    },
     "/v1/studio/written/adjudications": {
       "get": {
         "operationId": "list_adjudications_v1_studio_written_adjudications_get",
@@ -9945,7 +10172,7 @@
             "description": "Validation Error"
           }
         },
-        "summary": "Apply a published rubric correction to earlier work (academic adjudicators in scope; audited)",
+        "summary": "Apply a published rubric correction to earlier work (academic adjudicators in scope, MFA; audited)",
         "tags": [
           "written marking"
         ]
@@ -9994,9 +10221,9 @@
         ]
       }
     },
-    "/v1/studio/written/adjudications/{adjudication_id}/run": {
-      "post": {
-        "operationId": "run_adjudication_v1_studio_written_adjudications__adjudication_id__run_post",
+    "/v1/studio/written/adjudications/{adjudication_id}/attempts": {
+      "get": {
+        "operationId": "adjudication_attempts_v1_studio_written_adjudications__adjudication_id__attempts_get",
         "parameters": [
           {
             "in": "path",
@@ -10010,11 +10237,22 @@
           },
           {
             "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "minimum": 0,
+              "title": "Offset",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
             "name": "limit",
             "required": false,
             "schema": {
-              "default": 50,
-              "maximum": 200,
+              "default": 25,
+              "maximum": 100,
               "minimum": 1,
               "title": "Limit",
               "type": "integer"
@@ -10026,7 +10264,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/RegradeRunOut"
+                  "$ref": "#/components/schemas/RegradeAttemptsOut"
                 }
               }
             },
@@ -10043,7 +10281,50 @@
             "description": "Validation Error"
           }
         },
-        "summary": "Process the next bounded batch of affected attempts (resumable; safe to repeat)",
+        "summary": "Adjudication Attempts",
+        "tags": [
+          "written marking"
+        ]
+      }
+    },
+    "/v1/studio/written/adjudications/{adjudication_id}/run": {
+      "post": {
+        "operationId": "run_adjudication_v1_studio_written_adjudications__adjudication_id__run_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adjudication_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Adjudication Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RegradeJobOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Queue the regrade for the worker (one open job per correction; repeating returns it)",
         "tags": [
           "written marking"
         ]
@@ -10382,6 +10663,92 @@
           }
         },
         "summary": "Scripts awaiting marking in your scope",
+        "tags": [
+          "written marking"
+        ]
+      }
+    },
+    "/v1/studio/written/regrade-jobs/{job_id}": {
+      "get": {
+        "operationId": "get_regrade_job_v1_studio_written_regrade_jobs__job_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "job_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Job Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RegradeJobOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Regrade Job",
+        "tags": [
+          "written marking"
+        ]
+      }
+    },
+    "/v1/studio/written/regrade-jobs/{job_id}/retry": {
+      "post": {
+        "operationId": "retry_regrade_job_v1_studio_written_regrade_jobs__job_id__retry_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "job_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Job Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RegradeJobOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Retry Regrade Job",
         "tags": [
           "written marking"
         ]

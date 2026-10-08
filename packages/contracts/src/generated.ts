@@ -1016,6 +1016,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/studio/written/adjudication-sources": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** What a correction of this rubric could apply to: versions, compatibility and active corrections */
+        get: operations["adjudication_sources_v1_studio_written_adjudication_sources_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/studio/written/adjudications": {
         parameters: {
             query?: never;
@@ -1026,7 +1043,7 @@ export interface paths {
         /** List Adjudications */
         get: operations["list_adjudications_v1_studio_written_adjudications_get"];
         put?: never;
-        /** Apply a published rubric correction to earlier work (academic adjudicators in scope; audited) */
+        /** Apply a published rubric correction to earlier work (academic adjudicators in scope, MFA; audited) */
         post: operations["create_adjudication_v1_studio_written_adjudications_post"];
         delete?: never;
         options?: never;
@@ -1051,6 +1068,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/studio/written/adjudications/{adjudication_id}/attempts": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Adjudication Attempts */
+        get: operations["adjudication_attempts_v1_studio_written_adjudications__adjudication_id__attempts_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/studio/written/adjudications/{adjudication_id}/run": {
         parameters: {
             query?: never;
@@ -1060,7 +1094,7 @@ export interface paths {
         };
         get?: never;
         put?: never;
-        /** Process the next bounded batch of affected attempts (resumable; safe to repeat) */
+        /** Queue the regrade for the worker (one open job per correction; repeating returns it) */
         post: operations["run_adjudication_v1_studio_written_adjudications__adjudication_id__run_post"];
         delete?: never;
         options?: never;
@@ -1181,6 +1215,40 @@ export interface paths {
         get: operations["marking_queue_v1_studio_written_queue_get"];
         put?: never;
         post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/studio/written/regrade-jobs/{job_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Regrade Job */
+        get: operations["get_regrade_job_v1_studio_written_regrade_jobs__job_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/studio/written/regrade-jobs/{job_id}/retry": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Retry Regrade Job */
+        post: operations["retry_regrade_job_v1_studio_written_regrade_jobs__job_id__retry_post"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1563,10 +1631,10 @@ export interface components {
              */
             rubric_item_id: string;
             /**
-             * Supersedes Id
-             * @description The active correction this one replaces
+             * Supersedes Ids
+             * @description Every active correction this one replaces (must match the overlap exactly)
              */
-            supersedes_id?: string | null;
+            supersedes_ids?: string[];
         };
         /** AdjudicationOut */
         AdjudicationOut: {
@@ -1593,11 +1661,12 @@ export interface components {
             id: string;
             /**
              * Impact
-             * @description Affected forms, attempts, released results, rescans, planned question outcomes and progress
+             * @description total_attempts, processed, remaining, failed, unaffected, forms, released_results, evidence_revisions, applied_outcomes (detail view only; computed with bounded aggregate queries)
              */
-            impact: {
+            impact?: {
                 [key: string]: unknown;
-            };
+            } | null;
+            latest_job?: components["schemas"]["RegradeJobOut"] | null;
             /** Reason */
             reason: string;
             /**
@@ -1612,13 +1681,33 @@ export interface components {
             status: "active" | "superseded";
             /** Subject */
             subject: string;
-            /** Supersedes Id */
-            supersedes_id: string | null;
+            /** Superseded By Id */
+            superseded_by_id: string | null;
+            /** Supersedes Ids */
+            supersedes_ids: string[];
             /**
              * To Version Id
              * Format: uuid
              */
             to_version_id: string;
+        };
+        /** AdjudicationSourcesOut */
+        AdjudicationSourcesOut: {
+            /** Active */
+            active: {
+                [key: string]: unknown;
+            }[];
+            /** Published Number */
+            published_number: number | null;
+            /** Published Version Id */
+            published_version_id: string | null;
+            /**
+             * Versions
+             * @description Earlier published versions: compatibility, denominator check, claiming corrections, scripts
+             */
+            versions: {
+                [key: string]: unknown;
+            }[];
         };
         /** AllowanceOut */
         AllowanceOut: {
@@ -3193,18 +3282,55 @@ export interface components {
             /** Position */
             position?: number | null;
         };
-        /** RegradeRunOut */
-        RegradeRunOut: {
-            /** Outcomes */
-            outcomes?: {
-                [key: string]: number;
-            };
+        /** RegradeAttemptsOut */
+        RegradeAttemptsOut: {
+            /** Items */
+            items: {
+                [key: string]: unknown;
+            }[];
+            /** Total */
+            total: number;
+        };
+        /** RegradeJobOut */
+        RegradeJobOut: {
+            /**
+             * Adjudication Id
+             * Format: uuid
+             */
+            adjudication_id: string;
+            /** Batches */
+            batches: number;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /** Failed */
+            failed: number;
+            /** Finished At */
+            finished_at: string | null;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Last Error */
+            last_error: string | null;
             /** Processed */
             processed: number;
+            /** Regraded */
+            regraded: number;
             /** Remaining */
-            remaining: number;
-            /** Superseded */
-            superseded: boolean;
+            remaining: number | null;
+            /** Started At */
+            started_at: string | null;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "queued" | "running" | "succeeded" | "failed" | "superseded";
+            /** Unaffected */
+            unaffected: number;
         };
         /** RemedyIn */
         RemedyIn: {
@@ -4251,6 +4377,11 @@ export interface components {
         };
         /** WrittenResultOut */
         WrittenResultOut: {
+            /**
+             * Awaiting Regrade
+             * @description Questions a teacher will re-mark under a corrected marking guide (current marks stand until then)
+             */
+            awaiting_regrade?: number[];
             /**
              * Completeness
              * @description Not complete means no final total: some questions are pending or could not be assessed
@@ -6214,6 +6345,37 @@ export interface operations {
             };
         };
     };
+    adjudication_sources_v1_studio_written_adjudication_sources_get: {
+        parameters: {
+            query: {
+                rubric_item_id: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AdjudicationSourcesOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     list_adjudications_v1_studio_written_adjudications_get: {
         parameters: {
             query?: never;
@@ -6298,9 +6460,10 @@ export interface operations {
             };
         };
     };
-    run_adjudication_v1_studio_written_adjudications__adjudication_id__run_post: {
+    adjudication_attempts_v1_studio_written_adjudications__adjudication_id__attempts_get: {
         parameters: {
             query?: {
+                offset?: number;
                 limit?: number;
             };
             header?: never;
@@ -6317,7 +6480,38 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["RegradeRunOut"];
+                    "application/json": components["schemas"]["RegradeAttemptsOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    run_adjudication_v1_studio_written_adjudications__adjudication_id__run_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                adjudication_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            202: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RegradeJobOut"];
                 };
             };
             /** @description Validation Error */
@@ -6546,6 +6740,68 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["CaseSummary"][];
+                };
+            };
+        };
+    };
+    get_regrade_job_v1_studio_written_regrade_jobs__job_id__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                job_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RegradeJobOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    retry_regrade_job_v1_studio_written_regrade_jobs__job_id__retry_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                job_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RegradeJobOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
                 };
             };
         };

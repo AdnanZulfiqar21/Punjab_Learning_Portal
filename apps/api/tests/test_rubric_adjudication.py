@@ -29,7 +29,7 @@ class Team:
             self.author = Staff(client, db, ["content_author"], SCOPE)
             self.reviewer = Staff(client, db, ["subject_reviewer"], SCOPE)
             self.publisher = Staff(client, db, ["publisher"], SCOPE, mfa=True)
-            self.adjudicator = Staff(client, db, ["academic_adjudicator"], SCOPE)
+            self.adjudicator = Staff(client, db, ["academic_adjudicator"], SCOPE, mfa=True)  # W06-01
             self.marker = Staff(client, db, ["subject_reviewer"], SCOPE)
             chapter, doc = _chapter(db, 12, "chemistry", chapter_index)
             _confirm_rights(client, db, doc)
@@ -142,9 +142,16 @@ class Team:
         )
 
     def run(self, adj_id: str) -> dict[str, Any]:
+        """Queue the correction (MFA adjudicator), let the worker drain the queue, and return the job's final state."""
+        from portal_api.modules.written import regrade_jobs
+
         r = self.client.post(f"/v1/studio/written/adjudications/{adj_id}/run", headers=self.adjudicator.headers)
-        assert r.status_code == 200, r.text
-        return dict(r.json())
+        assert r.status_code == 202, r.text
+        with get_sessionmaker()() as db:
+            regrade_jobs.work(db, batch=50)
+        job = self.client.get(f"/v1/studio/written/regrade-jobs/{r.json()['id']}", headers=self.adjudicator.headers)
+        assert job.status_code == 200, job.text
+        return dict(job.json())
 
 
 AW = {"1": {"a1": {"units": 100, "reason": "Fixture"}, "b1": {"units": 150, "reason": "Fixture"}, "b2": {"units": 0}}}
@@ -182,7 +189,7 @@ def test_an_identical_scoring_basis_carries_human_marks_forward_once(
     assert adj.status_code == 201, adj.text
     body = adj.json()
     assert [c["carry_forward"] for c in body["compatibility"].values()] == [True]
-    assert body["impact"]["attempts"] >= 1 and body["impact"]["question_outcomes"].get("carried", 0) >= 1
+    assert body["impact"]["total_attempts"] >= 1 and body["impact"]["remaining"] == body["impact"]["total_attempts"]
 
     out = team.run(body["id"])
     assert out["processed"] >= 1 and out["remaining"] == 0
@@ -269,7 +276,7 @@ def test_pending_and_unmarked_questions_are_retargeted_and_superseding_is_explic
     assert team.case(b["id"], "completion")["questions"][0]["rubric_version_id"] == v3
     assert _result(client, learner, a["id"])["status"] == "pending"
     # the chained correction's own run finds nothing left to change for these attempts
-    assert team.run(chained.json()["id"])["outcomes"].get("regraded", 0) == 0
+    assert team.run(chained.json()["id"])["regraded"] == 0
 
 
 def test_concurrent_runs_regrade_each_attempt_once(client: TestClient, published_written: dict[str, Any]) -> None:
@@ -287,7 +294,7 @@ def test_concurrent_runs_regrade_each_attempt_once(client: TestClient, published
     def worker() -> None:
         with get_sessionmaker()() as db:
             barrier.wait(timeout=10)
-            results.append(adjudication.run(db, adj_id, 50))
+            results.append(adjudication.process_batch(db, adj_id, 50))
 
     threads = [threading.Thread(target=worker) for _ in range(2)]
     for th in threads:

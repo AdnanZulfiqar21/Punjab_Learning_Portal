@@ -16,6 +16,7 @@ import portal_api.modules.identity.sessions
 import portal_api.modules.support.models
 import portal_api.modules.written.adjudication
 import portal_api.modules.written.models
+import portal_api.modules.written.regrade_jobs
 import portal_api.modules.written.rescans
 import portal_api.modules.written.review  # noqa: F401
 from portal_api.config import get_settings
