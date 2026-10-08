@@ -26,7 +26,7 @@ No academic content is published: B01 (reviewers) and rights confirmation block 
 |---|---|---|
 | R01 | Upload validator accepts invalid PNG/PDF, rejects valid object-stream PDF | **Fixed** on `fix/written-evidence` (EVIDENCE-01) |
 | R02 | Page cap counts files, not PDF pages; storage I/O under the attempt lock | **Fixed** on `fix/written-evidence` |
-| R03 | Concurrent starts can pass the two-permit check | Open; reproduce on PostgreSQL first |
+| R03 | Concurrent starts can pass the two-permit check | **Reproduced and fixed** on `fix/permit-admission` (ADMIT-01) |
 | R04 | Recheck policy vs implementation | **Fixed and merged** (PR #19, RECHECK-01) |
 | R05 | Whole-script consumption; no per-question allocations | Open |
 | R06 | Same-device trial protection not built | Open; account-level only |
@@ -37,7 +37,7 @@ No academic content is published: B01 (reviewers) and rights confirmation block 
 ## Next actions (in order)
 1. Merge `fix/written-evidence` after a green CI run on its final head. After deploying: run `portal-written-previews` once.
 2. Schedule `portal-written-sweep-orphans` hourly wherever evidence is stored.
-3. R03: serialized per-account permit admission, with real concurrent PostgreSQL tests.
+3. Merge `fix/permit-admission` (R03, stacked on PR #20) after PR #20.
 4. R07, then R05, then R06 contracts.
 5. R08 search 503: bounded mixed-load reproduction.
 6. Roadmap: rescan classification and regrades (W06.S2.T3/T4); native written capture and mobile help; notifications; CMS import/preview/release/export; media/storyboard; production adapters as prerequisites allow; automatic written-assessment contracts (no real provider calls until B10).
