@@ -393,6 +393,48 @@ def staff_page(db: Session, who: Principal, case_id: uuid.UUID, page_id: uuid.UU
     return storage.get_store().get(page.preview_key), "image/png"
 
 
+def staff_page_detail(
+    db: Session,
+    who: Principal,
+    case_id: uuid.UUID,
+    page_id: uuid.UUID,
+    region: tuple[float, float, float, float] | None,
+) -> tuple[bytes, dict[str, str]]:
+    """OCT8-06: a higher-detail rendition of a submitted page for markers in scope, rendered from the immutable
+    original after an integrity check. Returns the PNG and provenance headers."""
+    from portal_api.modules.written import evidence
+    from portal_api.modules.written.models import WrittenFile
+
+    case = _case(db, who, case_id)
+    receipt = db.scalar(select(WrittenReceipt).where(WrittenReceipt.attempt_id == case.attempt_id))
+    page = db.get(WrittenPage, page_id)
+    if receipt is None or page is None or str(page_id) not in receipt.page_hashes:
+        raise NotFound("Page not found.")
+    f = db.get(WrittenFile, page.file_id)
+    assert f is not None
+    key, sha, kind, index = f.storage_key, f.sha256, f.content_type, page.page_index
+    pinned = receipt.page_hashes[str(page_id)]
+    db.rollback()  # no connection held while reading and rendering (OCT8-01)
+    if sha != pinned:
+        raise Conflict("This page's original doesn't match the submitted receipt.", code_reason="EVIDENCE_MISMATCH")
+    data = storage.get_store().get(key)
+    import hashlib
+
+    if hashlib.sha256(data).hexdigest() != sha:
+        raise Conflict("This page's original failed its integrity check.", code_reason="EVIDENCE_MISMATCH")
+    try:
+        d = evidence.render_detail(data, kind, index, region)
+    except evidence.Rejected as e:
+        raise Unprocessable(e.reason) from e
+    provenance = {
+        "X-Evidence-Sha256": sha,
+        "X-Evidence-Page": str(index),
+        "X-Derivative": f"detail; region={','.join(f'{v:.4f}' for v in region) if region else 'page'}; "
+        f"scale={d.scale:.4f}; size={d.width}x{d.height}",
+    }
+    return d.png, provenance
+
+
 def _check_awards(
     ctx: dict[str, Any], awards: dict[str, dict[str, dict[str, Any]]], scope: set[str] | None = None
 ) -> tuple[dict[str, int], list[str]]:

@@ -1,50 +1,56 @@
 # RESUME STATE
 
-**Updated:** 2026-10-08 · regenerated from `git log origin/main` and open PRs (review R09).
+**Updated:** 2026-10-08 (after the second review, "OCT8"). Regenerated from `git log origin/main`, open PRs and test runs.
 
 ## Repository state
-- `main` = PRs #1 and #3–#24 merged (PR #2 closed unmerged).
-- PR #19 (support, RECHECK-01, REL-01) merged as `7933843`; PR #20 (R01/R02, EVIDENCE-01) merged as `5df22fd` on 2026-10-08.
-- PR #21 (R03) `0f402d8`; PR #22 (R07) `ac2220d`; PR #23 (R05) `cea5a25`; PR #24 (R06 contracts) `0989b51`.
-- **Open:** PR #25 `fix/pool-saturation` (R08, REL-02).
-- **Gate:** `main` has no branch protection or ruleset (checked 2026-10-08 with the GitHub API). The CI workflow (changes, api, web, mobile, content jobs) is the only check, and it is not marked required. Merge only on a green run of the exact head being merged.
-- **Git rules (GIT-01):** never rebase, amend pushed commits or force-push (including `--force-with-lease`). Merge `main` into feature branches. Merge stacked PRs base-first.
+- `main` = PRs #1 and #3–#27 merged (PR #2 closed unmerged), plus whatever of the stack below has merged since. Latest confirmed merges: #25 `1426388` (R08 pool), #26 `0759801` (OCT8-01), #27 `bd5fc3c` (OCT8-02/03/04).
+- **Stack, merge in this order:** PR #28 `fix/oct8-empty-seal` (OCT8-05) → `fix/oct8-start-clock` (OCT8-07) → `feat/oct8-detail-view` (OCT8-06 and these records). Merge `main` into the next branch after each merge.
+- **Gate:** `main` has no branch protection or ruleset. The CI workflow is the only check and is not marked required. Merge only on a green run of the exact head being merged. CI `mobile`/`content` jobs skip when their paths are unchanged; a skip is not mobile or content qualification.
+- **Git rules (GIT-01):** never rebase, amend pushed commits or force-push (including `--force-with-lease`). Merge `main` into feature branches.
 
 ## What is merged (by area)
 | Area | Records | Verification |
 |---|---|---|
-| Source registry, stable-ID catalogue, catalogue web journey | IMPL-08, IMPL-10, IMPL-11 | CI verified |
-| Identity core, roles, MFA gating, audit; app sessions and web BFF; native auth | IMPL-07, IMPL-09, IMPL-12, IMPL-13 | CI verified; native = Expo web only |
-| Editorial workflow, studio UI, lessons on web/mobile | IMPL-14, IMPL-15 | CI verified |
-| MCQ items, attempt protocol §10.5, practice UI web/mobile | IMPL-16 to IMPL-18 | CI verified; mobile = Expo web only |
-| Written records, attempts, teacher marking | IMPL-19 to IMPL-21 | CI verified; upload validation defective (R01/R02) |
-| Trial, entitlements, allowance ledger | IMPL-22 | CI verified; R03/R05/R06 gaps open |
+| Source registry, stable-ID catalogue, catalogue web journey | IMPL-08, IMPL-10, IMPL-11 | CI |
+| Identity, roles, MFA, audit; sessions and web BFF; native auth | IMPL-07, IMPL-09, IMPL-12, IMPL-13, REL-01 | CI; native = Expo web only |
+| Editorial workflow, studio UI, lessons web/mobile; premium lessons and previews | IMPL-14, IMPL-15, ACCESS-02 | CI |
+| MCQ items, attempt protocol §10.5, practice UI web/mobile | IMPL-16 to IMPL-18 | CI; mobile = Expo web only |
+| Written records, attempts, evidence parsing, logical pages, no connection held during slow work | IMPL-19, IMPL-20, EVIDENCE-01, DBHOLD-01 | CI |
+| Teacher marking, rechecks, per-question outcomes, completion cases, serialised publication, per-question appeals | IMPL-21, RECHECK-01, ALLOC-01, PUB-01 | CI |
+| Trial, entitlements, per-question allowance, permit admission, capacity | IMPL-22, ADMIT-01, ALLOC-01 | CI |
+| Trial claims and device contracts (fixture-tested only) | TRIAL-02 | CI; **same-device requirement not met** |
+| Support, question reports, staff queue | IMPL-23 | CI |
+| One engine per process; pool saturation answered as 503 | REL-02 | CI |
 
-No academic content is published: B01 (reviewers) and rights confirmation block it. Readiness gates: **Platform Ready, Content Ready and Public Launch Ready are all unmet.**
+No academic content is published: B01 (reviewers) and rights confirmation block it. **Platform Ready, Content Ready and Public Launch Ready are all unmet.**
 
-## Review findings (2026-10-08) and status
-| ID | Finding | Status |
+## Review findings and status
+| ID | Status |
+|---|---|
+| R01, R02 (uploads, logical pages) | Fixed and merged (#20). The connection-hold claim in EVIDENCE-01 was wrong; corrected by DBHOLD-01 (#26). |
+| R03 (two-permit race) | Fixed and merged (#21). Clock placement refined by ADMIT-02 (OCT8-07). |
+| R04 (recheck policy) | Fixed (#19); publication and appeal gaps fixed by PUB-01 (#27). |
+| R05 (per-question allowance) | Fixed (#23); all-unanswered settlement in ALLOC-02 (OCT8-05, PR #28). |
+| R06 (repeat trials on a device) | Contracts merged (#24). **Not met**: no real device evidence (B07/B08/B13), no per-request attestation. |
+| R07 (all lessons public) | Fixed and merged (#22). Future media must use the same check. |
+| R08 (401; search 503) | 401 fixed (REL-01). Pool saturation and cold-start engine race fixed (REL-02). **The original driver OperationalError 503 is still unexplained**; 503s log class and correlation ID. |
+| OCT8-01 connection holds | Fixed and merged (#26), DBHOLD-01. Also fixed a late-upload admission found while reproducing. |
+| OCT8-02/03/04 publication, pending work, appeals | Fixed and merged (#27), PUB-01. |
+| OCT8-05 empty seal | Fixed, PR #28, ALLOC-02. |
+| OCT8-06 detail view | Built, DETAIL-01. Readability with real scripts not qualified. |
+| OCT8-07 start clock | Fixed, ADMIT-02. |
+
+## Test evidence (local, this machine; CI runs are on each PR)
+| Commit / branch | Command | Result |
 |---|---|---|
-| R01 | Upload validator accepts invalid PNG/PDF, rejects valid object-stream PDF | **Fixed and merged** (PR #20, EVIDENCE-01) |
-| R02 | Page cap counts files, not PDF pages; storage I/O under the attempt lock | **Fixed and merged** (PR #20) |
-| R03 | Concurrent starts can pass the two-permit check | **Fixed and merged** (PR #21, ADMIT-01) |
-| R04 | Recheck policy vs implementation | **Fixed and merged** (PR #19, RECHECK-01) |
-| R05 | Whole-script consumption; no per-question allocations | **Fixed and merged** (PR #23, ALLOC-01) |
-| R06 | Same-device trial protection not built | Contracts merged (PR #24, TRIAL-02); real device evidence blocked (B07/B08/B13); requirement **not met** |
-| R07 | All published lessons public | **Fixed and merged** (PR #22, ACCESS-02) |
-| R08 | 401 after sign-up; search 503 | 401 fixed (REL-01); pool saturation and cold-start engine race reproduced and fixed on `fix/pool-saturation` (REL-02); the original OperationalError 503 still unexplained |
-| R09 | Stale records | This file regenerated; register labels reconciled |
+| `feat/oct8-detail-view` @ `758b8dc` (stack top) | `uv run pytest -q` in `apps/api` | 190 passed |
+| same | `npx playwright test` in `apps/web` (API and web running) | 45 passed, 21 skipped (desktop-only tests on the phone project) |
+| PR #25 body (159) vs final report (172) | 159 was on `fix/pool-saturation` alone; 172 after merging #24 into it | Both correct for their commit |
 
-## Next actions (in order)
-1. Merge PR #25 (R08, REL-02) after green CI on its final head.
-2. Deployment prerequisites (when an environment exists, B03): run `portal-written-previews` once; schedule `portal-written-sweep-orphans` hourly; set review capacity per scope (`PUT /v1/ops/written-capacity/{grade}/{subject}`); set `PORTAL_TRIAL_DEVICE_EVIDENCE` and a secret `PORTAL_TRIAL_REF_PEPPER`.
-3. Roadmap continuation (review §5), in dependency order:
-   - Written rescan classification and learner actions on pending questions (W06.S2.T4), administrative regrades/adjudication (W06.S2.T3), finite remedy deadlines and escalation.
-   - Native written capture, results and rechecks; mobile help screens; notifications with delivery preferences (P15.S1).
-   - CMS import batches, preview surfaces, release/rollback and export (P06).
-   - Reviewed-content drafting and source-grounded media/storyboard workflows on the ten books (P07), labelled drafts only.
-   - Automatic written-assessment contracts, job lifecycle and provider interfaces (W05); no real script calls until B10.
-4. Still open from the review: the original OperationalError 503 (R08); real device evidence for trials (R06, B07/B08/B13).
+## Next actions
+1. Merge PR #28, then open and merge the start-clock and detail-view PRs on green CI.
+2. Deployment prerequisites (when B03 exists): run `portal-written-previews` and `portal-written-repair` once; schedule `portal-written-sweep-orphans`; set review capacity per scope; set `PORTAL_TRIAL_DEVICE_EVIDENCE` and a secret `PORTAL_TRIAL_REF_PEPPER`. Production must not silently use `fallback` as the anti-repeat-trial implementation.
+3. Roadmap continuation, in order: learner actions on pending questions and rescan classification (W06.S2.T4); administrative regrades and adjudication (W06.S2.T3, same lock order and rebase path as PUB-01); native written capture, results, rechecks and mobile help; notifications (P15.S1); CMS import batches, previews, release/rollback, export (P06); source-grounded drafting and media (P07, drafts only); automatic written-assessment contracts (W05; no real script calls until B10).
 
 ## Run locally
 ```bash
@@ -53,23 +59,20 @@ cd apps/api && uv sync && uv run alembic upgrade head && uv run portal-import-ca
 uv run uvicorn portal_api.main:app --host 127.0.0.1 --port 8100
 cd ../web && pnpm install && pnpm build && pnpm start      # http://localhost:3100
 pnpm exec playwright test                                   # needs API + web running
-uv run portal-dev-seed-staff                                # (in apps/api) dev-only staff fixtures incl. reviewer2 and support
-uv run portal-dev-seed-practice                             # (in apps/api) dev-only labelled fixture questions
-cd ../mobile && npx expo start --web --port 8190            # mobile screens on the web target (not native evidence)
+uv run portal-dev-seed-staff && uv run portal-dev-seed-practice   # (in apps/api) dev-only fixtures
+cd ../mobile && npx expo start --web --port 8190            # Expo web target (not native evidence)
 ```
 
 ## Gotchas
-- The original E2E search 503 (driver OperationalError) is still unexplained; 503s log the error class and correlation ID (`portal_api.db`). Pool saturation is now a 503 SERVICE_BUSY with Retry-After, not a 500 (REL-02).
-- Stopping a background task can leave its uvicorn or Expo child running and still holding the port; check with Get-NetTCPConnection and stop the PID.
-- The API has no auto-reload in these runs; restart it after API code changes before E2E.
-- `curl localhost` on this machine adds about 250 ms (IPv6 fallback); use `127.0.0.1` for timings.
-- Run Expo without `CI=1`: CI mode turns off Metro's file watching and serves stale bundles.
-- Playwright `toHaveURL(/\/x$/)` also matches `/signin?next=/x`; anchor on `:\d+\/x`.
+- Stopping a background task can leave its uvicorn or Expo child holding the port; check `Get-NetTCPConnection -LocalPort <port>` and stop that PID.
+- The API runs without auto-reload here; restart it after API changes before E2E.
+- `git push` can hang on the Windows credential manager; use `git -c credential.helper= -c credential.helper='!gh auth git-credential' push`.
 - Git Bash heredocs break on some quoting; write scripts to the scratchpad instead.
-- `git push` can hang on the Windows credential manager; push with `git -c credential.helper= -c credential.helper='!gh auth git-credential' push`.
+- `curl localhost` adds about 250 ms (IPv6 fallback); use `127.0.0.1` for timings.
+- Run Expo without `CI=1` (no file watching otherwise).
 
 ## Do not redo
-Book indexing (v2, `education_knowledge/`), OCR layers (local only, `source_text/`, git-ignored), source checksums.
+Book indexing (v2, `education_knowledge/`), OCR layers (local only), source checksums.
 
 ## Owner inputs that block dependent work
-B01 reviewers and rights confirmation (academic publication), B03 cloud/object storage, B04 identity tenant, B05 media provider, B06 payments, B07 store accounts, B10 written-assessment provider, B13 Android SDK licence acceptance (native builds).
+B01 reviewers and rights confirmation (academic publication), B03 cloud and object storage, B04 identity tenant, B05 media provider, B06 payments, B07 store accounts, B08 Android recall approval, B10 written-assessment provider, B13 Android SDK licence acceptance (native builds).

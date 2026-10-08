@@ -251,6 +251,12 @@ test("a teacher marks a submitted script and the learner sees the released marks
   await teacher.getByRole("link", { name: `Script ${attemptId.slice(0, 8)}` }).click();
   await expect(teacher.getByAltText("Submitted page 1")).toBeVisible(AUTH);
   await expect(teacher.getByText("learner declared this part unanswered")).toBeVisible();
+  // OCT8-06: a higher-detail rendition from the original, for small symbols and labels.
+  const detailHref = await teacher.getByRole("link", { name: "Open in full detail" }).first().getAttribute("href");
+  const detail = await teacher.request.get(detailHref!);
+  expect(detail.status()).toBe(200);
+  expect(detail.headers()["content-type"]).toBe("image/png");
+  expect(detail.headers()["x-evidence-page"]).toBe("1");
   await teacher.getByRole("button", { name: "Start marking" }).click();
   await teacher.getByRole("radiogroup", { name: "Award for a1" }).getByLabel("1", { exact: true }).check();
   await teacher.getByLabel("Reason for a1").fill("Fixture reason: half the expected points.");

@@ -31,6 +31,9 @@ MIN_LONG_EDGE_PX = 800  # below this, small writing is unlikely to be legible: w
 PDF_MAX_PAGES = 10
 PDF_MAX_SIDE_PT = 14_400  # 200 inches; PDFium's own limit, and far beyond any paper size
 PREVIEW_LONG_EDGE_PX = 2_000
+DETAIL_PAGE_LONG_EDGE_PX = 4_000  # OCT8-06: full-page detail for marking small symbols and labels
+DETAIL_REGION_LONG_EDGE_PX = 3_000  # a requested region is rendered up to this size
+DETAIL_MAX_PDF_DPI = 600
 WORKER_TIMEOUT_S = 30
 WORKER_MEMORY_BYTES = 1024 * 1024 * 1024
 WORKER_CPU_S = 25
@@ -97,6 +100,58 @@ def inspect(data: bytes) -> Inspected:
         raise WorkersBusy("evidence workers are busy")
     try:
         return _run_worker(data, kind)
+    finally:
+        _slots.release()
+
+
+@dataclass(frozen=True)
+class Detail:
+    png: bytes
+    width: int
+    height: int
+    scale: float  # output pixels per original pixel (images) or per PDF point (PDF)
+
+
+def render_detail(data: bytes, kind: str, page_index: int, region: tuple[float, float, float, float] | None) -> Detail:
+    """A higher-detail PNG of one logical page (or a region of it, as fractions x, y, w, h of the upright page),
+    rendered from the retained original in the same isolated, bounded worker. The original is never served."""
+    if region is not None:
+        x, y, w, h = region
+        if not (
+            0 <= x < 1 and 0 <= y < 1 and 0.02 <= w <= 1 and 0.02 <= h <= 1 and x + w <= 1.0001 and y + h <= 1.0001
+        ):
+            raise Rejected("That region isn't inside the page.")
+    if not _slots.acquire(timeout=WORKER_QUEUE_WAIT_S):
+        raise WorkersBusy("evidence workers are busy")
+    try:
+        with tempfile.TemporaryDirectory(prefix="portal-detail-") as tmp:
+            work = Path(tmp)
+            (work / "input").write_bytes(data)
+            spec = {"page_index": page_index, "region": list(region) if region else None}
+            (work / "detail.json").write_text(json.dumps(spec), encoding="utf8")
+            env = {k: v for k, v in os.environ.items() if k in ("PATH", "SYSTEMROOT", "TEMP", "TMP")}
+            try:
+                proc = subprocess.run(  # noqa: S603 - fixed interpreter and module, no shell
+                    [sys.executable, "-I", "-m", "portal_api.modules.written.evidence", str(work), kind, "detail"],
+                    capture_output=True,
+                    timeout=WORKER_TIMEOUT_S,
+                    env=env,
+                    check=False,
+                )
+            except subprocess.TimeoutExpired as e:
+                raise Rejected("This page took too long to render in detail.") from e
+            out = work / "result.json"
+            if proc.returncode != 0 or not out.is_file():
+                raise Rejected("This page couldn't be rendered in detail.")
+            result = json.loads(out.read_text(encoding="utf8"))
+            if "rejected" in result:
+                raise Rejected(str(result["rejected"]))
+            return Detail(
+                png=(work / "detail.png").read_bytes(),
+                width=int(result["width"]),
+                height=int(result["height"]),
+                scale=float(result["scale"]),
+            )
     finally:
         _slots.release()
 
@@ -219,6 +274,66 @@ def _inspect_pdf(data: bytes) -> dict[str, Any]:
         doc.close()
 
 
+def _detail_worker(work: Path, kind: str) -> None:
+    import warnings
+
+    from PIL import Image, ImageOps
+
+    spec = json.loads((work / "detail.json").read_text(encoding="utf8"))
+    region = spec["region"]
+    limit = DETAIL_REGION_LONG_EDGE_PX if region else DETAIL_PAGE_LONG_EDGE_PX
+    data = (work / "input").read_bytes()
+    if kind == "application/pdf":
+        import pypdfium2 as pdfium
+
+        doc = pdfium.PdfDocument(data)
+        try:
+            idx = int(spec["page_index"]) - 1
+            if not 0 <= idx < len(doc):
+                result: dict[str, Any] = {"rejected": "That page doesn't exist in this file."}
+            else:
+                page = doc[idx]
+                try:
+                    w_pt, h_pt = page.get_size()
+                    rw, rh = (region[2] * w_pt, region[3] * h_pt) if region else (w_pt, h_pt)
+                    scale = min(limit / max(rw, rh), DETAIL_MAX_PDF_DPI / 72)
+                    crop = (0.0, 0.0, 0.0, 0.0)
+                    if region:  # pypdfium2 crop: points removed from left, bottom, right, top
+                        x, y, w, h = region
+                        crop = (x * w_pt, (1 - y - h) * h_pt, (1 - x - w) * w_pt, y * h_pt)
+                    image = page.render(scale=scale, crop=crop, may_draw_forms=False).to_pil()
+                finally:
+                    page.close()
+                image.convert("RGB").save(work / "detail.png", format="PNG")
+                result = {"width": image.width, "height": image.height, "scale": scale}
+        finally:
+            doc.close()
+    else:
+        Image.MAX_IMAGE_PIXELS = MAX_IMAGE_PIXELS
+        warnings.simplefilter("error", Image.DecompressionBombWarning)
+        with Image.open(io.BytesIO(data), formats=["JPEG"] if kind == "image/jpeg" else ["PNG"]) as im:
+            im.load()
+            upright = ImageOps.exif_transpose(im)
+        if region:
+            x, y, w, h = region
+            box = (
+                int(x * upright.width),
+                int(y * upright.height),
+                max(int((x + w) * upright.width), int(x * upright.width) + 1),
+                max(int((y + h) * upright.height), int(y * upright.height) + 1),
+            )
+            upright = upright.crop(box)
+        scale = min(1.0, limit / max(upright.size))  # never enlarge beyond the photo's own pixels
+        if scale < 1.0:
+            upright = upright.resize(
+                (max(1, round(upright.width * scale)), max(1, round(upright.height * scale))), Image.Resampling.LANCZOS
+            )
+        out = upright.convert("L" if upright.mode in ("1", "L", "LA", "I", "I;16") else "RGB")
+        out.save(work / "detail.png", format="PNG")
+        result = {"width": out.width, "height": out.height, "scale": scale}
+    (work / "result.json").write_text(json.dumps(result), encoding="utf8")
+
+
 def _worker(work: Path, kind: str) -> None:
     _limit_resources()
     data = (work / "input").read_bytes()
@@ -229,4 +344,8 @@ def _worker(work: Path, kind: str) -> None:
 
 
 if __name__ == "__main__":
-    _worker(Path(sys.argv[1]), sys.argv[2])
+    if len(sys.argv) > 3 and sys.argv[3] == "detail":
+        _limit_resources()
+        _detail_worker(Path(sys.argv[1]), sys.argv[2])
+    else:
+        _worker(Path(sys.argv[1]), sys.argv[2])

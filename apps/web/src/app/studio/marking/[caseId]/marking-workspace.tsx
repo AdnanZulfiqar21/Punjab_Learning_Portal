@@ -147,9 +147,29 @@ export function MarkingWorkspace({ initial }: { initial: MarkingCase }) {
             <figure key={p.id} className="rounded-lg border border-border bg-surface p-2">
               {/* eslint-disable-next-line @next/next/no-img-element -- validated private preview served by our own route */}
               <img src={`/studio/marking/${c.id}/pages/${p.id}`} alt={`Submitted page ${i + 1}`} className="w-full rounded" />
-              <figcaption className="mt-1 text-sm text-muted">
-                Page {i + 1}
-                {p.file_pages > 1 && ` · PDF page ${p.page_index} of ${p.file_pages}`}
+              <figcaption className="mt-1 space-y-1 text-sm text-muted">
+                <span>
+                  Page {i + 1}
+                  {p.file_pages > 1 && ` · PDF page ${p.page_index} of ${p.file_pages}`} ·{" "}
+                  <a href={`/studio/marking/${c.id}/pages/${p.id}/detail`} target="_blank" rel="noreferrer" className="text-accent underline">
+                    Open in full detail
+                  </a>
+                </span>
+                {/* Higher-detail regions rendered from the original: small symbols, subscripts and labels (OCT8-06). */}
+                <span className="grid w-28 grid-cols-3 gap-0.5" aria-label={`Zoom into part of page ${i + 1}`}>
+                  {[0, 1, 2].flatMap((row) =>
+                    [0, 1, 2].map((col) => (
+                      <a
+                        key={`${row}-${col}`}
+                        href={`/studio/marking/${c.id}/pages/${p.id}/detail?region=${(col / 3).toFixed(4)},${(row / 3).toFixed(4)},0.3333,0.3333`}
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label={`Zoom: row ${row + 1}, column ${col + 1}`}
+                        className="block h-6 rounded border border-border bg-surface hover:border-accent"
+                      />
+                    )),
+                  )}
+                </span>
               </figcaption>
             </figure>
           ))}
