@@ -417,6 +417,58 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/me/trial/claims": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Activate or recover the one free trial for this account (idempotent per key; roadmap §16.2/16.4) */
+        post: operations["trial_claim_v1_me_trial_claims_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/me/trial/devices": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Devices registered for your trial */
+        get: operations["trial_devices_list_v1_me_trial_devices_get"];
+        put?: never;
+        /** Authorize this device for your active trial (first trial use; limits and review apply) */
+        post: operations["trial_device_v1_me_trial_devices_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/me/trial/devices/{device_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        /** Remove a device from your trial */
+        delete: operations["trial_device_remove_v1_me_trial_devices__device_id__delete"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/ops/written-backlog": {
         parameters: {
             query?: never;
@@ -601,6 +653,23 @@ export interface paths {
         put?: never;
         /** Staff Reply */
         post: operations["staff_reply_v1_staff_support_tickets__ticket_id__messages_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/staff/trial/exceptions": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Shared or second-hand device exception: account-scoped and time-bounded (support review, MFA, audited) */
+        post: operations["trial_exception_v1_staff_trial_exceptions_post"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1265,6 +1334,11 @@ export interface components {
              * @description How the trial decision was made on this platform
              */
             device_check: string;
+            /**
+             * Device State
+             * @description Set when this app installation must be added to the trial before protected trial use
+             */
+            device_state: "device_authorization_required" | null;
             /** Entitlements */
             entitlements: components["schemas"]["EntitlementOut"][];
             /**
@@ -1730,6 +1804,29 @@ export interface components {
             /** Visual Count */
             visual_count: number;
         };
+        /** ClaimIn */
+        ClaimIn: {
+            /** Idempotency Key */
+            idempotency_key: string;
+            /**
+             * Label
+             * @description A name the learner recognises, e.g. 'My phone'
+             * @default
+             */
+            label: string;
+            /**
+             * Proof
+             * @description Provider evidence (DeviceCheck/App Attest or Play Integrity), when available
+             */
+            proof?: {
+                [key: string]: unknown;
+            };
+            /**
+             * Surface
+             * @enum {string}
+             */
+            surface: "web" | "ios" | "android";
+        };
         /** CompletionScope */
         CompletionScope: {
             /**
@@ -1831,6 +1928,28 @@ export interface components {
              */
             release: boolean;
         };
+        /** DeviceIn */
+        DeviceIn: {
+            /**
+             * Label
+             * @default
+             */
+            label: string;
+            /** Proof */
+            proof?: {
+                [key: string]: unknown;
+            };
+            /**
+             * Replaces
+             * @description Self-service replacement of a registered device
+             */
+            replaces?: string | null;
+            /**
+             * Surface
+             * @enum {string}
+             */
+            surface: "web" | "ios" | "android";
+        };
         /** DraftIn */
         DraftIn: {
             /** Body */
@@ -1878,6 +1997,20 @@ export interface components {
             status: "active" | "revoked" | "refunded";
             /** Written Units */
             written_units: number;
+        };
+        /** ExceptionIn */
+        ExceptionIn: {
+            /** Days */
+            days: number;
+            /** Email */
+            email: string;
+            /** Reason */
+            reason: string;
+            /**
+             * Surface
+             * @enum {string}
+             */
+            surface: "web" | "ios" | "android";
         };
         /** FormCreateIn */
         FormCreateIn: {
@@ -3246,6 +3379,57 @@ export interface components {
             /** Title */
             title: string;
         };
+        /** TrialDecisionOut */
+        TrialDecisionOut: {
+            /** Claim Status */
+            claim_status: string | null;
+            /** Device Id */
+            device_id: string | null;
+            /**
+             * Ends At
+             * @description The trial's original end; never extended by a device decision
+             */
+            ends_at: string | null;
+            /**
+             * Evidence
+             * @description What device evidence was available, e.g. provider_unconfigured
+             */
+            evidence: string | null;
+            /**
+             * Message
+             * @description The notice to show (roadmap §16.5)
+             */
+            message: string;
+            /**
+             * State
+             * @enum {string}
+             */
+            state: "eligible" | "granted" | "active" | "device_authorized" | "paid_active" | "account_trial_used" | "prior_paid" | "device_used" | "review_required" | "verification_pending" | "device_limit";
+        };
+        /** TrialDeviceOut */
+        TrialDeviceOut: {
+            /**
+             * Authorized At
+             * Format: date-time
+             */
+            authorized_at: string;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Label */
+            label: string;
+            /**
+             * Method
+             * @enum {string}
+             */
+            method: "first_use" | "recovery" | "exception" | "fallback" | "web";
+            /** Surface */
+            surface: string;
+            /** This Device */
+            this_device: boolean;
+        };
         /** TrialOut */
         TrialOut: {
             /** Eligible */
@@ -4373,6 +4557,139 @@ export interface operations {
             };
         };
     };
+    trial_claim_v1_me_trial_claims_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description Opaque per-install token */
+                "X-Portal-Install"?: string | null;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ClaimIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TrialDecisionOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    trial_devices_list_v1_me_trial_devices_get: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description Opaque per-install token */
+                "X-Portal-Install"?: string | null;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TrialDeviceOut"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    trial_device_v1_me_trial_devices_post: {
+        parameters: {
+            query?: never;
+            header?: {
+                /** @description Opaque per-install token */
+                "X-Portal-Install"?: string | null;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["DeviceIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TrialDecisionOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    trial_device_remove_v1_me_trial_devices__device_id__delete: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                device_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     backlog_v1_ops_written_backlog_get: {
         parameters: {
             query?: never;
@@ -4699,6 +5016,41 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["StaffTicketOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    trial_exception_v1_staff_trial_exceptions_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ExceptionIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        [key: string]: unknown;
+                    };
                 };
             };
             /** @description Validation Error */

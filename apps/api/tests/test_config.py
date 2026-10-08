@@ -12,6 +12,8 @@ OIDC = {
     "oidc_issuer": "https://idp.example.org/pool",
     "oidc_audience": "client-1",
     "evidence_store": "s3",
+    "trial_device_evidence": "fallback",
+    "trial_ref_pepper": "deployment-secret-fixture",
 }
 
 
@@ -111,3 +113,18 @@ def test_production_refuses_the_local_evidence_directory() -> None:
             build_id="sha-abc",
             cors_origins=["https://example.org"],
         )
+
+
+def test_deployed_roles_must_choose_trial_evidence_and_a_pepper() -> None:
+    base = {
+        "role": Role.production,
+        "database_url": PROD_DB,
+        "public_api_origin": "https://api.example.org",
+        "build_id": "sha-abc",
+        "cors_origins": ["https://example.org"],
+    }
+    with pytest.raises(ConfigurationError, match="trial_device_evidence"):
+        Settings(**{**OIDC, "trial_device_evidence": None}, **base)
+    with pytest.raises(ConfigurationError, match="trial_ref_pepper"):
+        Settings(**{**OIDC, "trial_ref_pepper": "dev-only-trial-pepper"}, **base)
+    assert Settings(**OIDC, **base).trial_device_evidence == "fallback"  # an explicit, recorded choice is accepted

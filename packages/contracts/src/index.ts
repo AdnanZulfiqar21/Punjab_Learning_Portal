@@ -59,6 +59,8 @@ export type TrialStatus = S["TrialOut"];
 export type WrittenAllowance = S["AllowanceOut"];
 export type EntitlementInfo = S["EntitlementOut"];
 export type SupportTicket = S["TicketOut"];
+export type TrialDecision = S["TrialDecisionOut"];
+export type TrialDevice = S["TrialDeviceOut"];
 export type StaffSupportTicket = S["StaffTicketOut"];
 export type RecheckState = S["RecheckOut"];
 

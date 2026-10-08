@@ -6,6 +6,7 @@ from alembic import context
 from sqlalchemy import create_engine, pool
 
 import portal_api.modules.access.models
+import portal_api.modules.access.trial_devices
 import portal_api.modules.assessment.models
 import portal_api.modules.audit.models
 import portal_api.modules.content.models

@@ -69,8 +69,28 @@ def active_entitlements(db: Session, user_id: uuid.UUID, now: datetime) -> list[
     )
 
 
+class DeviceAuthorizationRequired(AppError):
+    status = 403
+    code = "DEVICE_AUTHORIZATION_REQUIRED"
+
+
+def device_gate(db: Session, user_id: uuid.UUID) -> str | None:
+    """None when this request may use trial access, else the device state (roadmap §16.4; see trial_devices)."""
+    from portal_api.modules.access import trial_devices
+
+    client, install = trial_devices.CLIENT_CONTEXT.get()
+    return trial_devices.device_allows(db, user_id, client=client, install_token=install)
+
+
 def require_access(db: Session, user_id: uuid.UUID, *, purpose: str) -> None:
-    """New protected starts need a currently valid entitlement. Already-started attempts are never checked again."""
+    """New protected starts need a currently valid entitlement, and trial use on a native device needs that device's
+    authorization. Already-started attempts are never checked again."""
+    blocked = device_gate(db, user_id)
+    if blocked is not None:
+        raise DeviceAuthorizationRequired(
+            "This device isn't set up for your free trial yet. Open the trial screen to add it, or contact support.",
+            device_state=blocked,
+        )
     if not active_entitlements(db, user_id, db_now(db)):
         trial = db.scalar(select(TrialGrant).where(TrialGrant.user_id == user_id, TrialGrant.program == TRIAL_PROGRAM))
         raise AccessRequired(
@@ -120,6 +140,18 @@ def start_trial(db: Session, user_id: uuid.UUID, *, client: str) -> TrialGrant:
         return existing  # retries and second activations return the original dates; no second trial
     if _has_paid_history(db, user_id):
         raise Conflict("The free trial is for new learners. Your account has had a paid plan.")
+    grant = create_trial_grant(db, user_id, client=client)
+    db.commit()
+    db.refresh(grant)
+    return grant
+
+
+def create_trial_grant(db: Session, user_id: uuid.UUID, *, client: str) -> TrialGrant:
+    """The one grant per account and program, starting at this commit and ending exactly 30 x 24 h later. Callers
+    hold the decision (claims re-check history under the account lock first) and commit."""
+    existing = db.scalar(select(TrialGrant).where(TrialGrant.user_id == user_id, TrialGrant.program == TRIAL_PROGRAM))
+    if existing is not None:
+        return existing
     now = db_now(db)
     grant = TrialGrant(
         id=uuid.uuid4(),
@@ -160,11 +192,9 @@ def start_trial(db: Session, user_id: uuid.UUID, *, client: str) -> TrialGrant:
             "program": TRIAL_PROGRAM,
             "ends_at": grant.ends_at.isoformat(),
             "client": client,
-            "device_check": "unavailable (B07/B08); account history only",
         },
     )
-    db.commit()
-    db.refresh(grant)
+    db.flush()
     return grant
 
 

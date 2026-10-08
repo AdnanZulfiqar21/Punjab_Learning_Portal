@@ -454,7 +454,11 @@ def chapter_lessons(db: DB, who: OptionalPrincipal, chapter_id: uuid.UUID, respo
     chapter = db.get(Chapter, chapter_id)
     if chapter is None or chapter.retired_at is not None:
         raise NotFound("Chapter not found.")
-    entitled = who is not None and bool(access.active_entitlements(db, who.user.id, access.db_now(db)))
+    entitled = (
+        who is not None
+        and bool(access.active_entitlements(db, who.user.id, access.db_now(db)))
+        and access.device_gate(db, who.user.id) is None  # trial use on a native device needs its authorization
+    )
     if who is None:
         # The anonymous response holds preview bodies only, identical for every anonymous caller: safe to share.
         response.headers["Cache-Control"] = "public, max-age=60, stale-while-revalidate=300"
