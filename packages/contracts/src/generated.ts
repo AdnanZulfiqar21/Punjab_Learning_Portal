@@ -1255,6 +1255,40 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/written-attempts/{attempt_id}/questions/{position}/confirm-unanswered": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Confirm you didn't answer a question the teacher found blank (resolved as unanswered; allowance returned) */
+        post: operations["confirm_unanswered_v1_written_attempts__attempt_id__questions__position__confirm_unanswered_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/written-attempts/{attempt_id}/questions/{position}/rescan": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Send a clearer copy of one pending answer (raw JPEG/PNG/PDF body; kept beside the sealed original) */
+        post: operations["rescan_v1_written_attempts__attempt_id__questions__position__rescan_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/written-attempts/{attempt_id}/recheck": {
         parameters: {
             query?: never;
@@ -1659,6 +1693,11 @@ export interface components {
              */
             reference: string;
             /**
+             * Revisions
+             * @description Learner rescans for questions in this case (W06.S2.T4)
+             */
+            revisions: components["schemas"]["RevisionOut"][];
+            /**
              * Status
              * @enum {string}
              */
@@ -1931,6 +1970,22 @@ export interface components {
                 };
             };
             /**
+             * Classifications
+             * @description Per learner rescan: {"<revision id>": {"class": "READABILITY"|"NEW_CONTENT"|"INDETERMINATE", "reason": "…"}}. Required for every unclassified rescan of a question in this case before release.
+             */
+            classifications?: {
+                [key: string]: {
+                    [key: string]: unknown;
+                };
+            };
+            /**
+             * Evidence
+             * @description Per marked question, the READABILITY rescans used as evidence: {"2": ["<revision id>"]}. Unnamed questions were marked from the sealed original.
+             */
+            evidence?: {
+                [key: string]: string[];
+            };
+            /**
              * Expand Positions
              * @description Recheck only: questions to add (academic adjudicators)
              */
@@ -1944,7 +1999,7 @@ export interface components {
             expected_version: number;
             /**
              * Question Status
-             * @description Optional per question: {"2": {"status": "pending"|"unavailable"|"scored", "reason": "…"}}. Unlisted questions are scored. Pending and unavailable questions take no awards.
+             * @description Optional per question: {"2": {"status": "pending"|"unavailable"|"scored", "reason": "…", "learner_action": "rescan"|"confirm_or_rescan"}}. Unlisted questions are scored. Pending and unavailable questions take no awards. A learner action gives the learner 7 days to act.
              */
             question_status?: {
                 [key: string]: {
@@ -2415,6 +2470,21 @@ export interface components {
             /** Working Version */
             working_version: number | null;
         };
+        /** LearnerRevision */
+        LearnerRevision: {
+            /** Classification */
+            classification: ("READABILITY" | "NEW_CONTENT" | "INDETERMINATE") | null;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+        };
         /** LessonOut */
         LessonOut: {
             /**
@@ -2686,6 +2756,8 @@ export interface components {
         };
         /** QuestionResult */
         QuestionResult: {
+            /** Action Deadline */
+            action_deadline?: string | null;
             /** Criteria */
             criteria: components["schemas"]["CriterionResult"][];
             /**
@@ -2693,10 +2765,20 @@ export interface components {
              * @description Null unless scored; no mark is invented for unassessed work
              */
             earned_units: number | null;
+            /**
+             * Learner Action
+             * @description What the teacher asked you to do for this pending question
+             */
+            learner_action?: ("rescan" | "confirm_or_rescan") | null;
             /** Max Units */
             max_units: number;
             /** Position */
             position: number;
+            /**
+             * Revisions
+             * @description Clearer copies you sent
+             */
+            revisions?: components["schemas"]["LearnerRevision"][];
             /**
              * Status
              * @enum {string}
@@ -2974,6 +3056,37 @@ export interface components {
             decision: "approve" | "request_changes";
             /** Reviewer */
             reviewer: string | null;
+        };
+        /** RevisionOut */
+        RevisionOut: {
+            /** Class Reason */
+            class_reason: string | null;
+            /** Classification */
+            classification: ("READABILITY" | "NEW_CONTENT" | "INDETERMINATE") | null;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Note */
+            note: string;
+            /**
+             * Pages
+             * @description The clearer copy's own pages (shown beside the originals)
+             */
+            pages: components["schemas"]["PageOut"][];
+            /** Position */
+            position: number;
+            /**
+             * Prior Page Ids
+             * @description The sealed pages this clearer copy relates to
+             */
+            prior_page_ids: string[];
         };
         /** RightsIn */
         RightsIn: {
@@ -6216,6 +6329,74 @@ export interface operations {
                 };
                 content: {
                     "application/json": unknown;
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    confirm_unanswered_v1_written_attempts__attempt_id__questions__position__confirm_unanswered_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                attempt_id: string;
+                position: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    rescan_v1_written_attempts__attempt_id__questions__position__rescan_post: {
+        parameters: {
+            query?: {
+                note?: string;
+            };
+            header?: {
+                "Idempotency-Key"?: string | null;
+            };
+            path: {
+                attempt_id: string;
+                position: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        [key: string]: unknown;
+                    };
                 };
             };
             /** @description Validation Error */

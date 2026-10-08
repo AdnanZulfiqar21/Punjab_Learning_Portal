@@ -1,10 +1,10 @@
 # RESUME STATE
 
-**Updated:** 2026-10-08 (after the second review, "OCT8"). Regenerated from `git log origin/main`, open PRs and test runs.
+**Updated:** 2026-10-08 (after the PR #31 review, "RS31"). Regenerated from `git log origin/main`, `gh pr list` and test runs.
 
 ## Repository state
-- `main` = PRs #1 and #3–#27 merged (PR #2 closed unmerged), plus whatever of the stack below has merged since. Latest confirmed merges: #25 `1426388` (R08 pool), #26 `0759801` (OCT8-01), #27 `bd5fc3c` (OCT8-02/03/04).
-- **Stack, merge in this order:** PR #28 `fix/oct8-empty-seal` (OCT8-05) → `fix/oct8-start-clock` (OCT8-07) → `feat/oct8-detail-view` (OCT8-06 and these records). Merge `main` into the next branch after each merge.
+- `main` = PRs #1 and #3–#30 merged (PR #2 closed unmerged). Latest: #28 `36b4612` (OCT8-05), #29 `2fb73cc` (OCT8-07), #30 `c6ffa04` (OCT8-06 and records).
+- **Open:** PR #31 `feat/written-rescans` (W04.S3.T2/W06.S2.T4, RESCAN-01, plus the RS31 corrections in RESCAN-02). Merge on a green CI run of its exact head.
 - **Gate:** `main` has no branch protection or ruleset. The CI workflow is the only check and is not marked required. Merge only on a green run of the exact head being merged. CI `mobile`/`content` jobs skip when their paths are unchanged; a skip is not mobile or content qualification.
 - **Git rules (GIT-01):** never rebase, amend pushed commits or force-push (including `--force-with-lease`). Merge `main` into feature branches.
 
@@ -36,21 +36,27 @@ No academic content is published: B01 (reviewers) and rights confirmation block 
 | R08 (401; search 503) | 401 fixed (REL-01). Pool saturation and cold-start engine race fixed (REL-02). **The original driver OperationalError 503 is still unexplained**; 503s log class and correlation ID. |
 | OCT8-01 connection holds | Fixed and merged (#26), DBHOLD-01. Also fixed a late-upload admission found while reproducing. |
 | OCT8-02/03/04 publication, pending work, appeals | Fixed and merged (#27), PUB-01. |
-| OCT8-05 empty seal | Fixed, PR #28, ALLOC-02. |
-| OCT8-06 detail view | Built, DETAIL-01. Readability with real scripts not qualified. |
-| OCT8-07 start clock | Fixed, ADMIT-02. |
+| OCT8-05 empty seal | Fixed and merged (#28), ALLOC-02. |
+| OCT8-06 detail view | Built and merged (#30), DETAIL-01. Readability with real scripts not qualified. |
+| OCT8-07 start clock | Fixed and merged (#29), ADMIT-02. |
+| RS31-01 rescan retry/race | Fixed, PR #31, RESCAN-02 (idempotency key; 409 `SAME_FILE`, never 500). |
+| RS31-02 learner deadline | Fixed, PR #31, RESCAN-02 (durable obligation; deadline fixed at first release). |
+| RS31-03 `post_cutoff` | Fixed, PR #31, RESCAN-02; one dev record corrected by `portal-written-repair`. |
+| RS31 section 4 evidence provenance | Built, PR #31: `evidence_revisions` on each score version. |
 
 ## Test evidence (local, this machine; CI runs are on each PR)
 | Commit / branch | Command | Result |
 |---|---|---|
-| `feat/oct8-detail-view` @ `758b8dc` (stack top) | `uv run pytest -q` in `apps/api` | 190 passed |
-| same | `npx playwright test` in `apps/web` (API and web running) | 45 passed, 21 skipped (desktop-only tests on the phone project) |
+| `feat/oct8-detail-view` @ `758b8dc` | `uv run pytest -q` in `apps/api` | 190 passed |
+| `feat/written-rescans` (RS31 corrections) | `uv run pytest -q` in `apps/api` | 204 passed |
+| same | `npx playwright test` in `apps/web` (API and web running) | 41 passed, 22 skipped, 2 failed, 3 did not run. Both failures (studio concurrent edits, support question report) passed when rerun alone (2 passed); treated as load flakiness, not as passing evidence |
 | PR #25 body (159) vs final report (172) | 159 was on `fix/pool-saturation` alone; 172 after merging #24 into it | Both correct for their commit |
 
 ## Next actions
-1. Merge PR #28, then open and merge the start-clock and detail-view PRs on green CI.
-2. Deployment prerequisites (when B03 exists): run `portal-written-previews` and `portal-written-repair` once; schedule `portal-written-sweep-orphans`; set review capacity per scope; set `PORTAL_TRIAL_DEVICE_EVIDENCE` and a secret `PORTAL_TRIAL_REF_PEPPER`. Production must not silently use `fallback` as the anti-repeat-trial implementation.
-3. Roadmap continuation, in order: learner actions on pending questions and rescan classification (W06.S2.T4); administrative regrades and adjudication (W06.S2.T3, same lock order and rebase path as PUB-01); native written capture, results, rechecks and mobile help; notifications (P15.S1); CMS import batches, previews, release/rollback, export (P06); source-grounded drafting and media (P07, drafts only); automatic written-assessment contracts (W05; no real script calls until B10).
+1. Merge PR #31 on green CI of its exact head.
+2. Deployment prerequisites (when B03 exists): run `portal-written-previews` and `portal-written-repair` once; schedule `portal-written-sweep-orphans` and `portal-written-learner-deadlines` (hourly); set review capacity per scope; set `PORTAL_TRIAL_DEVICE_EVIDENCE` and a secret `PORTAL_TRIAL_REF_PEPPER`. Production must not silently use `fallback` as the anti-repeat-trial implementation.
+3. Roadmap continuation, in order: linked new practice attempts (W04.S3.T3, **next unblocked**); administrative regrades and adjudication (W06.S2.T3, same lock order and rebase path as PUB-01); native written capture, results, rescans (with the `Idempotency-Key` header) and mobile help; notifications (P15.S1); CMS import batches, previews, release/rollback, export (P06); source-grounded drafting and media (P07, drafts only); automatic written-assessment contracts (W05; no real script calls until B10).
+4. Outstanding, not met: native repeat-device protection (R06; B07/B08/B13), native Android/iOS verification, approved academic content (B01), automatic-marking qualification (B10), production load evidence, and the original unexplained OperationalError (R08).
 
 ## Run locally
 ```bash

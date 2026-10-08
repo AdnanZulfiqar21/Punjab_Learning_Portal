@@ -66,6 +66,20 @@ def repair(argv: list[str] | None = None) -> int:
     with get_sessionmaker()() as db:
         fixed = review.repair_pending_obligations(db)
         settled = review.repair_empty_reservations(db)
+        from portal_api.modules.written import rescans
+
+        flags = rescans.repair_post_cutoff_flags(db)
     print(f"pending-question obligations repaired: {len(fixed)}")
     print(f"unsettled empty-seal reservations repaired: {len(settled)}")
+    print(f"rescan post-cutoff flags corrected: {len(flags)}")
+    return 0
+
+
+def learner_deadlines(argv: list[str] | None = None) -> int:
+    """portal-written-learner-deadlines: resolve questions whose 7-day learner action passed (schedule hourly)."""
+    from portal_api.modules.written import rescans
+
+    with get_sessionmaker()() as db:
+        n = rescans.expire_learner_actions(db)
+    print(f"questions resolved unavailable after the learner deadline: {n}")
     return 0

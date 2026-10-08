@@ -39,7 +39,16 @@ export function MarkingWorkspace({ initial }: { initial: MarkingCase }) {
   const [added, setAdded] = useState<number[]>([]);
   const [expansionReason, setExpansionReason] = useState("");
   // R05: each question in scope is scored, pending (e.g. unreadable) or unavailable (can't be assessed).
-  const [status, setStatus] = useState<Record<string, { status: "scored" | "pending" | "unavailable"; reason: string }>>({});
+  const [status, setStatus] = useState<Record<string, { status: "scored" | "pending" | "unavailable"; reason: string; learner_action?: string }>>({});
+  const [classes, setClasses] = useState<Record<string, { class: string; reason: string }>>({});
+  // Section 4 (PR #31 review): which READABILITY copies supplied each marked answer; none means the sealed original.
+  const [used, setUsed] = useState<Record<string, boolean>>({});
+  const readable = (r: { id: string; classification?: string | null }) => (r.classification ?? classes[r.id]?.class) === "READABILITY";
+  const evidence = () => {
+    const out: Record<string, string[]> = {};
+    for (const r of c.revisions) if (used[r.id] && readable(r)) (out[String(r.position)] ??= []).push(r.id);
+    return out;
+  };
   const statusOf = (pos: string) => status[pos]?.status ?? "scored";
   const carried = rc?.carried_forward ?? cp?.carried_forward ?? {};
   const scope = rc
@@ -141,6 +150,67 @@ export function MarkingWorkspace({ initial }: { initial: MarkingCase }) {
         </section>
       )}
 
+      {c.revisions.length > 0 && (
+        <section aria-label="Clearer copies from the learner" className="space-y-3 rounded-xl border border-border bg-surface p-4 text-sm">
+          <h2 className="font-semibold">Clearer copies (compare with the original pages)</h2>
+          {c.revisions.map((r) => (
+            <div key={r.id} className="space-y-2 border-t border-border pt-2">
+              <p>
+                Question {r.position} · sent {new Date(r.created_at).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" })} · after the upload deadline
+                {r.note ? ` · “${r.note}”` : ""}
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {r.pages.map((p, i) => (
+                  // eslint-disable-next-line @next/next/no-img-element -- private evidence served by our own route
+                  <img key={p.id} src={`/studio/marking/${c.id}/pages/${p.id}`} alt={`Clearer copy ${i + 1} for question ${r.position}`} className="h-48 rounded border border-border" />
+                ))}
+              </div>
+              {r.classification ? (
+                <p className="text-muted">
+                  Classified {r.classification}: {r.class_reason}
+                </p>
+              ) : (
+                <div className="flex flex-wrap items-center gap-2">
+                  <select
+                    aria-label={`Classify the clearer copy for question ${r.position}`}
+                    value={classes[r.id]?.class ?? ""}
+                    disabled={!canMark}
+                    onChange={(e) => setClasses((all) => ({ ...all, [r.id]: { class: e.target.value, reason: all[r.id]?.reason ?? "" } }))}
+                    className="rounded border border-border bg-surface px-2 py-1"
+                  >
+                    <option value="">Choose…</option>
+                    <option value="READABILITY">Same answer, easier to read</option>
+                    <option value="NEW_CONTENT">New or changed work</option>
+                    <option value="INDETERMINATE">Can&apos;t tell (original too unclear)</option>
+                  </select>
+                  <input
+                    aria-label={`Reason for the classification of question ${r.position}`}
+                    placeholder="Reason (recorded)"
+                    value={classes[r.id]?.reason ?? ""}
+                    disabled={!canMark}
+                    onChange={(e) => setClasses((all) => ({ ...all, [r.id]: { class: all[r.id]?.class ?? "", reason: e.target.value } }))}
+                    className="min-w-60 flex-1 rounded border border-border bg-surface px-2 py-1"
+                    maxLength={1000}
+                  />
+                </div>
+              )}
+            </div>
+          ))}
+          {c.revisions.some(readable) && (
+            <fieldset className="space-y-1">
+              <legend className="font-medium">Which copies did you use to mark?</legend>
+              {c.revisions.filter(readable).map((r) => (
+                <label key={r.id} className="flex items-center gap-2">
+                  <input type="checkbox" checked={!!used[r.id]} disabled={!canMark} onChange={(e) => setUsed((u) => ({ ...u, [r.id]: e.target.checked }))} />
+                  Used the clearer copy for question {r.position} (recorded with the mark)
+                </label>
+              ))}
+            </fieldset>
+          )}
+          <p className="text-muted">Only a copy you classify as the same answer may be used to mark it. Nothing is classified automatically.</p>
+        </section>
+      )}
+
       <div className="grid gap-6 lg:grid-cols-2">
         <section aria-label="Submitted pages" className="space-y-3">
           {c.pages.map((p, i) => (
@@ -224,13 +294,26 @@ export function MarkingWorkspace({ initial }: { initial: MarkingCase }) {
                         <option value="unavailable">Can&apos;t be assessed (allowance returned)</option>
                       </select>
                     </label>
+                    {statusOf(pos) === "pending" && (
+                      <select
+                        aria-label={`Ask the learner about question ${pos}`}
+                        value={status[pos]?.learner_action ?? ""}
+                        disabled={!canMark}
+                        onChange={(e) => setStatus((s) => ({ ...s, [pos]: { ...s[pos], status: "pending", reason: s[pos]?.reason ?? "", learner_action: e.target.value || undefined } }))}
+                        className="rounded border border-border bg-surface px-2 py-1"
+                      >
+                        <option value="">Don&apos;t ask the learner</option>
+                        <option value="rescan">Ask for a clearer copy (7 days)</option>
+                        <option value="confirm_or_rescan">Looks blank: confirm or clearer copy (7 days)</option>
+                      </select>
+                    )}
                     {statusOf(pos) !== "scored" && (
                       <input
                         aria-label={`Reason for question ${pos}`}
                         placeholder="Reason shown to the learner"
                         value={status[pos]?.reason ?? ""}
                         disabled={!canMark}
-                        onChange={(e) => setStatus((s) => ({ ...s, [pos]: { status: statusOf(pos), reason: e.target.value } }))}
+                        onChange={(e) => setStatus((s) => ({ ...s, [pos]: { ...s[pos], status: statusOf(pos), reason: e.target.value } }))}
                         className="min-w-60 flex-1 rounded border border-border bg-surface px-2 py-1"
                         maxLength={500}
                       />
@@ -304,10 +387,10 @@ export function MarkingWorkspace({ initial }: { initial: MarkingCase }) {
             </span>
             {canMark ? (
               <div className="flex gap-2">
-                <button type="button" disabled={pending} onClick={() => run(() => saveMarks(c.id, c.version, sent(), false, expansion(), sentStatus()))} className="rounded-lg border border-border px-4 py-2 font-medium disabled:opacity-60">
+                <button type="button" disabled={pending} onClick={() => run(() => saveMarks(c.id, c.version, sent(), false, expansion(), sentStatus(), classes, evidence()))} className="rounded-lg border border-border px-4 py-2 font-medium disabled:opacity-60">
                   Save marks
                 </button>
-                <button type="button" disabled={pending} onClick={() => run(() => saveMarks(c.id, c.version, sent(), true, expansion(), sentStatus()))} className="rounded-lg bg-accent px-4 py-2 font-medium text-white disabled:opacity-60 dark:text-background">
+                <button type="button" disabled={pending} onClick={() => run(() => saveMarks(c.id, c.version, sent(), true, expansion(), sentStatus(), classes, evidence()))} className="rounded-lg bg-accent px-4 py-2 font-medium text-white disabled:opacity-60 dark:text-background">
                   Release result
                 </button>
               </div>
