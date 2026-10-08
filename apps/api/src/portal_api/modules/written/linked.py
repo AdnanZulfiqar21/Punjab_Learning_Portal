@@ -97,26 +97,10 @@ def create_linked_form(
         i.id: i for i in db.scalars(select(ContentItem).where(ContentItem.id.in_([by_pos[p].item_id for p in chosen])))
     }
     rubrics = service._live_rubric_versions(db, [i for i in items.values() if i.published_version_id is not None])
-    form = WrittenForm(
-        id=uuid.uuid4(),
-        owner_id=who.user.id,
-        idempotency_key=idempotency_key,
-        request_hash=rhash,
-        grade_number=origin_form.grade_number,
-        subject_code=origin_form.subject_code,
-        scope=origin_form.scope,
-        seed=origin_form.seed,
-        question_type=origin_form.question_type,
-        writing_s=origin_form.writing_s,
-        upload_allowance_s=origin_form.upload_allowance_s,
-        caps=service.CAPS,
-        max_units=0,
-        linked_from_attempt_id=origin.id,
-        link_reason=reason,
-        link_revision_id=revision_id,
-        link_positions=chosen,
-    )
-    db.add(form)
+    # PR32-03: read everything first, then add the new rows and flush them inside the one guarded unit of work, so no
+    # read can autoflush a conflicting insert outside the idempotency handling.
+    form_id = uuid.uuid4()
+    rows: list[WrittenFormItem] = []
     total = 0
     changed: list[int] = []
     for new_pos, old_pos in enumerate(chosen, start=1):
@@ -134,11 +118,11 @@ def create_linked_form(
         q, _ = wq.parse_written(qv.body)
         assert q is not None
         if qv.id != fi.question_version_id:
-            changed.append(old_pos)
+            changed.append(old_pos)  # the new attempt uses the corrected version; the original keeps its pinned one
         total += q.max_units
-        db.add(
+        rows.append(
             WrittenFormItem(
-                form_id=form.id,
+                form_id=form_id,
                 position=new_pos,
                 item_id=item.id,
                 family_id=fi.family_id,
@@ -148,19 +132,42 @@ def create_linked_form(
                 slots=[service.slot_key(new_pos, s) for s in wq.subpart_maxima(q)],
             )
         )
-    form.max_units = total
-    record(
-        db,
-        actor=who.user.id,
-        action="written.linked_form",
-        target_type="written_form",
-        target_id=str(form.id),
-        details={**req, "updated_questions": changed},
+    form = WrittenForm(
+        id=form_id,
+        owner_id=who.user.id,
+        idempotency_key=idempotency_key,
+        request_hash=rhash,
+        grade_number=origin_form.grade_number,
+        subject_code=origin_form.subject_code,
+        scope=origin_form.scope,
+        seed=origin_form.seed,
+        question_type=origin_form.question_type,
+        writing_s=origin_form.writing_s,
+        upload_allowance_s=origin_form.upload_allowance_s,
+        caps=service.CAPS,
+        max_units=total,
+        linked_from_attempt_id=origin.id,
+        link_reason=reason,
+        link_revision_id=revision_id,
+        link_positions=chosen,
     )
     try:
+        db.add(form)
+        db.flush()  # the form first: only it carries the owner/key constraint
+        db.add_all(rows)
+        record(
+            db,
+            actor=who.user.id,
+            action="written.linked_form",
+            target_type="written_form",
+            target_id=str(form.id),
+            details={**req, "updated_questions": changed},
+        )
         db.commit()
-    except IntegrityError:
+    except IntegrityError as e:
         db.rollback()
+        if getattr(getattr(e.orig, "diag", None), "constraint_name", None) != "uq_written_form_idempotency":
+            raise  # any other integrity failure is a real error, never a replay
         winner = db.scalar(
             select(WrittenForm).where(
                 WrittenForm.owner_id == who.user.id, WrittenForm.idempotency_key == idempotency_key

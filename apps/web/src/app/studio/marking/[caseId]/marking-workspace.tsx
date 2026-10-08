@@ -16,6 +16,13 @@ type Question = { stem: { type: string }[]; subparts: { id: string; label: strin
 type Awards = Record<string, Record<string, { units: number; reason: string }>>;
 const marks = (u: number) => String(u / 100);
 
+// RS31-03 / PR32-04: the API's authoritative timing; sent after submission is not necessarily after the upload deadline.
+const TIMING: Record<string, string> = {
+  before_cutoff: "before the upload deadline",
+  at_cutoff: "at the upload deadline (within the window)",
+  after_cutoff: "after the upload deadline",
+};
+
 export function MarkingWorkspace({ initial }: { initial: MarkingCase }) {
   const router = useRouter();
   const [c, setC] = useState(initial);
@@ -39,10 +46,17 @@ export function MarkingWorkspace({ initial }: { initial: MarkingCase }) {
   const [added, setAdded] = useState<number[]>([]);
   const [expansionReason, setExpansionReason] = useState("");
   // R05: each question in scope is scored, pending (e.g. unreadable) or unavailable (can't be assessed).
-  const [status, setStatus] = useState<Record<string, { status: "scored" | "pending" | "unavailable"; reason: string; learner_action?: string }>>({});
-  const [classes, setClasses] = useState<Record<string, { class: string; reason: string }>>({});
+  // PR32-02: a saved draft reopens with everything it intended, not just its awards.
+  const [status, setStatus] = useState<Record<string, { status: "scored" | "pending" | "unavailable"; reason: string; learner_action?: string }>>(
+    () => (initial.draft?.question_status ?? {}) as Record<string, { status: "scored" | "pending" | "unavailable"; reason: string; learner_action?: string }>,
+  );
+  const [classes, setClasses] = useState<Record<string, { class: string; reason: string }>>(
+    () => (initial.draft?.classifications ?? {}) as Record<string, { class: string; reason: string }>,
+  );
   // Section 4 (PR #31 review): which READABILITY copies supplied each marked answer; none means the sealed original.
-  const [used, setUsed] = useState<Record<string, boolean>>({});
+  const [used, setUsed] = useState<Record<string, boolean>>(() =>
+    Object.fromEntries(Object.values(initial.draft?.evidence ?? {}).flatMap((ids) => ids.map((id) => [id, true]))),
+  );
   const readable = (r: { id: string; classification?: string | null }) => (r.classification ?? classes[r.id]?.class) === "READABILITY";
   const evidence = () => {
     const out: Record<string, string[]> = {};
@@ -156,7 +170,7 @@ export function MarkingWorkspace({ initial }: { initial: MarkingCase }) {
           {c.revisions.map((r) => (
             <div key={r.id} className="space-y-2 border-t border-border pt-2">
               <p>
-                Question {r.position} · sent {new Date(r.created_at).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" })} · after the upload deadline
+                Question {r.position} · sent {new Date(r.created_at).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" })} · {TIMING[r.cutoff_timing]}
                 {r.note ? ` · “${r.note}”` : ""}
               </p>
               <div className="flex flex-wrap gap-2">

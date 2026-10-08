@@ -1686,6 +1686,8 @@ export interface components {
              */
             case_kind: "initial" | "recheck" | "completion";
             completion: components["schemas"]["CompletionScope"] | null;
+            /** @description This case's saved draft, if the latest version is one */
+            draft?: components["schemas"]["StaffDraft"] | null;
             /**
              * Due At
              * @description Service obligation for accepted work (proposed 48 h)
@@ -3194,6 +3196,12 @@ export interface components {
              */
             created_at: string;
             /**
+             * Cutoff Timing
+             * @description When the copy was admitted relative to the cutoff; at the cutoff counts as within the window
+             * @enum {string}
+             */
+            cutoff_timing: "before_cutoff" | "at_cutoff" | "after_cutoff";
+            /**
              * Id
              * Format: uuid
              */
@@ -3208,10 +3216,20 @@ export interface components {
             /** Position */
             position: number;
             /**
+             * Post Cutoff
+             * @description Admitted strictly after the attempt's pinned upload cutoff (RS31-03)
+             */
+            post_cutoff: boolean;
+            /**
              * Prior Page Ids
              * @description The sealed pages this clearer copy relates to
              */
             prior_page_ids: string[];
+            /**
+             * Upload Cutoff At
+             * Format: date-time
+             */
+            upload_cutoff_at: string;
         };
         /** RightsIn */
         RightsIn: {
@@ -3467,6 +3485,37 @@ export interface components {
             sha256: string;
             /** Source Id */
             source_id: string;
+        };
+        /**
+         * StaffDraft
+         * @description PR32-02: everything a saved, unreleased draft of this case intends, restored when the workspace reopens.
+         */
+        StaffDraft: {
+            /**
+             * Classifications
+             * @description Proposed (not applied) rescan classifications
+             */
+            classifications: {
+                [key: string]: {
+                    [key: string]: string;
+                };
+            };
+            /**
+             * Evidence
+             * @description Copies selected as evidence per question
+             */
+            evidence: {
+                [key: string]: string[];
+            };
+            /**
+             * Question Status
+             * @description Questions in this case saved as pending or unavailable, with reason and any learner action
+             */
+            question_status: {
+                [key: string]: {
+                    [key: string]: unknown;
+                };
+            };
         };
         /** StaffMessageIn */
         StaffMessageIn: {

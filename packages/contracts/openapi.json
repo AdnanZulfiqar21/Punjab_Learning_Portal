@@ -623,6 +623,17 @@
               }
             ]
           },
+          "draft": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/StaffDraft"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "This case's saved draft, if the latest version is one"
+          },
           "due_at": {
             "anyOf": [
               {
@@ -4358,6 +4369,16 @@
             "title": "Created At",
             "type": "string"
           },
+          "cutoff_timing": {
+            "description": "When the copy was admitted relative to the cutoff; at the cutoff counts as within the window",
+            "enum": [
+              "before_cutoff",
+              "at_cutoff",
+              "after_cutoff"
+            ],
+            "title": "Cutoff Timing",
+            "type": "string"
+          },
           "id": {
             "format": "uuid",
             "title": "Id",
@@ -4379,6 +4400,11 @@
             "title": "Position",
             "type": "integer"
           },
+          "post_cutoff": {
+            "description": "Admitted strictly after the attempt's pinned upload cutoff (RS31-03)",
+            "title": "Post Cutoff",
+            "type": "boolean"
+          },
           "prior_page_ids": {
             "description": "The sealed pages this clearer copy relates to",
             "items": {
@@ -4387,6 +4413,11 @@
             },
             "title": "Prior Page Ids",
             "type": "array"
+          },
+          "upload_cutoff_at": {
+            "format": "date-time",
+            "title": "Upload Cutoff At",
+            "type": "string"
           }
         },
         "required": [
@@ -4397,7 +4428,10 @@
           "prior_page_ids",
           "pages",
           "classification",
-          "class_reason"
+          "class_reason",
+          "post_cutoff",
+          "upload_cutoff_at",
+          "cutoff_timing"
         ],
         "title": "RevisionOut",
         "type": "object"
@@ -5115,6 +5149,49 @@
           "page_rule"
         ],
         "title": "SourceRef",
+        "type": "object"
+      },
+      "StaffDraft": {
+        "description": "PR32-02: everything a saved, unreleased draft of this case intends, restored when the workspace reopens.",
+        "properties": {
+          "classifications": {
+            "additionalProperties": {
+              "additionalProperties": {
+                "type": "string"
+              },
+              "type": "object"
+            },
+            "description": "Proposed (not applied) rescan classifications",
+            "title": "Classifications",
+            "type": "object"
+          },
+          "evidence": {
+            "additionalProperties": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "description": "Copies selected as evidence per question",
+            "title": "Evidence",
+            "type": "object"
+          },
+          "question_status": {
+            "additionalProperties": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "description": "Questions in this case saved as pending or unavailable, with reason and any learner action",
+            "title": "Question Status",
+            "type": "object"
+          }
+        },
+        "required": [
+          "question_status",
+          "classifications",
+          "evidence"
+        ],
+        "title": "StaffDraft",
         "type": "object"
       },
       "StaffMessageIn": {

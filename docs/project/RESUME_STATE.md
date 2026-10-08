@@ -1,10 +1,10 @@
 # RESUME STATE
 
-**Updated:** 2026-10-08 (after the PR #31 review, "RS31"). Regenerated from `git log origin/main`, `gh pr list` and test runs.
+**Updated:** 2026-10-08 (after the PR #32 review, "PR32"). Regenerated from `git log origin/main`, `gh pr list` and test runs.
 
 ## Repository state
-- `main` = PRs #1 and #3–#31 merged (PR #2 closed unmerged). Latest: #29 `2fb73cc` (OCT8-07), #30 `c6ffa04` (OCT8-06), #31 `87c720f` (W06.S2.T4 rescans + RS31 corrections, CI green on head `27e9f84`).
-- **Open:** `feat/linked-practice-attempts` (W04.S3.T3, LINKED-01). Merge on a green CI run of its exact head.
+- `main` = PRs #1 and #3–#32 merged (PR #2 closed unmerged). Latest: #31 `87c720f` (W06.S2.T4 rescans + RS31 corrections; CI run 37791799813 green on head `27e9f84`), #32 `2277a6a` (W04.S3.T3 linked practice; CI run 37810869785 green on head `dad3222`).
+- **Open:** `fix/pr32-review` (REVIEW-PR32). Merge on a green CI run of its exact head.
 - **Gate:** `main` has no branch protection or ruleset. The CI workflow is the only check and is not marked required. Merge only on a green run of the exact head being merged. CI `mobile`/`content` jobs skip when their paths are unchanged; a skip is not mobile or content qualification.
 - **Git rules (GIT-01):** never rebase, amend pushed commits or force-push (including `--force-with-lease`). Merge `main` into feature branches.
 
@@ -43,6 +43,10 @@ No academic content is published: B01 (reviewers) and rights confirmation block 
 | RS31-02 learner deadline | Fixed and merged (#31), RESCAN-02 (durable obligation; deadline fixed at first release). |
 | RS31-03 `post_cutoff` | Fixed and merged (#31), RESCAN-02; one dev record corrected by `portal-written-repair`. |
 | RS31 section 4 evidence provenance | Built and merged (#31): `evidence_revisions` on each score version. |
+| PR32-01 omitted learner action | Fixed on `fix/pr32-review`, REVIEW-PR32 (obligation authoritative; no silent withdrawal). |
+| PR32-02 incomplete staff drafts | Fixed on `fix/pr32-review`, REVIEW-PR32 (`draft_intent`, `draft` projection, workspace restore; proposals never applied). |
+| PR32-03 linked-form autoflush race | Reproduced (UniqueViolation via autoflush at linked.py:132) and fixed on `fix/pr32-review`. |
+| PR32-04 cutoff label, records | Fixed on `fix/pr32-review` (`cutoff_timing`; records refreshed). |
 
 ## Test evidence (local, this machine; CI runs are on each PR)
 | Commit / branch | Command | Result |
@@ -51,10 +55,18 @@ No academic content is published: B01 (reviewers) and rights confirmation block 
 | `feat/written-rescans` (RS31 corrections) | `uv run pytest -q` in `apps/api` | 204 passed |
 | `feat/linked-practice-attempts` | `uv run pytest -q`; `npx playwright test` (API and web running) | API suite passed (exit 0; includes 3 new tests); E2E 46 passed, 22 skipped |
 | `feat/written-rescans` @ `27e9f84` | `npx playwright test` in `apps/web` (API and web running) | 41 passed, 22 skipped, 2 failed, 3 did not run. Both failures (studio concurrent edits, support question report) passed when rerun alone (2 passed); treated as load flakiness, not as passing evidence |
+| `fix/pr32-review` | `uv run pytest -q tests/test_pr32_corrections.py` | before the fix: 7 failed, 1 passed; after: 8 passed |
+| same | `uv run pytest -q` in `apps/api` | 215 passed, 0 failed |
+| same | `npx playwright test` in `apps/web` (API and web running) | 46 passed, 22 skipped, 0 failed |
 | PR #25 body (159) vs final report (172) | 159 was on `fix/pool-saturation` alone; 172 after merging #24 into it | Both correct for their commit |
 
+## Intermittent test failures (bounded record; not fixed)
+| Seen | Tests | Observation | Status |
+|---|---|---|---|
+| 2026-10-08, full E2E on `feat/written-rescans` @ `27e9f84` (3 workers) | `studio.spec.ts:88` concurrent edits; `support.spec.ts:66` question report | Failed in the full run, passed when rerun alone and in the next two full runs | **Root cause unknown.** Later green runs are not a fix. Re-examine if either fails again (capture the trace; suspect shared fixture accounts under parallel workers). |
+
 ## Next actions
-1. Merge the W04.S3.T3 PR on green CI of its exact head.
+1. Merge `fix/pr32-review` on green CI of its exact head.
 2. Deployment prerequisites (when B03 exists): run `portal-written-previews` and `portal-written-repair` once; schedule `portal-written-sweep-orphans` and `portal-written-learner-deadlines` (hourly); set review capacity per scope; set `PORTAL_TRIAL_DEVICE_EVIDENCE` and a secret `PORTAL_TRIAL_REF_PEPPER`. Production must not silently use `fallback` as the anti-repeat-trial implementation.
 3. Roadmap continuation, in order: (done: linked new practice attempts, W04.S3.T3, LINKED-01); administrative regrades and adjudication (W06.S2.T3, **next unblocked**, same lock order and rebase path as PUB-01); native written capture, results, rescans (with the `Idempotency-Key` header) and mobile help; notifications (P15.S1); CMS import batches, previews, release/rollback, export (P06); source-grounded drafting and media (P07, drafts only); automatic written-assessment contracts (W05; no real script calls until B10).
 4. Outstanding, not met: native repeat-device protection (R06; B07/B08/B13), native Android/iOS verification, approved academic content (B01), automatic-marking qualification (B10), production load evidence, and the original unexplained OperationalError (R08).
