@@ -207,11 +207,14 @@ def open_permits(db: Session, grade: int, subject: str) -> int:
 def lock_capacity(db: Session, grade: int, subject: str) -> None:
     """Serialize capacity admission for one class and subject until the transaction ends (different learners
     starting at the same moment must not both take the last place)."""
+    db.execute(select(func.pg_advisory_xact_lock(capacity_lock_key(grade, subject))))
+
+
+def capacity_lock_key(grade: int, subject: str) -> int:
     import hashlib
 
     digest = hashlib.sha256(f"written-capacity:{grade}:{subject}".encode()).digest()
-    key = int.from_bytes(digest[:8], "big", signed=True)
-    db.execute(select(func.pg_advisory_xact_lock(key)))
+    return int.from_bytes(digest[:8], "big", signed=True)
 
 
 def capacity_state(db: Session, grade: int, subject: str) -> dict[str, Any]:
