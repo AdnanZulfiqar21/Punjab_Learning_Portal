@@ -379,6 +379,12 @@ def accept(db: Session, attempt_id: uuid.UUID, units_by_position: dict[int, int]
     res = _reservation(db, attempt_id)
     if res is None:
         return
+    if not units_by_position:
+        # OCT8-05: every question was declared unanswered, so nothing is accepted. Settle the reservation explicitly;
+        # declared-unanswered work is never charged, and the attempt is sealed so expiry cleanup won't release it.
+        release(db, attempt_id, "sealed with every question declared unanswered")
+        db.flush()
+        return
     budget = res.units
     for pos in sorted(units_by_position):
         if _event(db, attempt_id, "ACCEPTED", pos) is not None:

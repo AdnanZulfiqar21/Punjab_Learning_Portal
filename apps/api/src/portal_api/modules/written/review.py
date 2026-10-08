@@ -786,6 +786,43 @@ def _sync_pending(
     )
 
 
+def repair_empty_reservations(db: Session) -> list[str]:
+    """Idempotent repair for OCT8-05: sealed attempts whose reservation was never settled because no question was
+    answered. Adds one RELEASED event each (append-only; nothing existing is edited) and audits it."""
+    from portal_api.modules.access import service as access
+    from portal_api.modules.access.models import AllowanceEvent
+
+    stuck = db.scalars(
+        select(WrittenAttempt.id).where(
+            WrittenAttempt.status == "sealed",
+            select(AllowanceEvent.id)
+            .where(AllowanceEvent.attempt_id == WrittenAttempt.id, AllowanceEvent.kind == "RESERVED")
+            .exists(),
+            ~select(AllowanceEvent.id)
+            .where(
+                AllowanceEvent.attempt_id == WrittenAttempt.id,
+                AllowanceEvent.kind.in_(["ACCEPTED", "RELEASED"]),
+            )
+            .exists(),
+        )
+    ).all()
+    repaired = []
+    for attempt_id in stuck:
+        db.scalar(select(WrittenAttempt.id).where(WrittenAttempt.id == attempt_id).with_for_update())
+        access.release(db, attempt_id, "repair (OCT8-05): sealed with no answered questions")
+        record(
+            db,
+            actor=None,
+            action="written.reservation_repaired",
+            target_type="written_attempt",
+            target_id=str(attempt_id),
+            details={"finding": "OCT8-05"},
+        )
+        db.commit()
+        repaired.append(str(attempt_id))
+    return repaired
+
+
 def repair_pending_obligations(db: Session) -> list[str]:
     """Idempotent repair for OCT8-02: give every pending question of a current released result a queued completion
     case. Returns the attempts repaired; each repair is audited. Nothing existing is rewritten."""
