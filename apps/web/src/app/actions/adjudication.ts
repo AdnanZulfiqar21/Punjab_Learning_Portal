@@ -15,7 +15,7 @@ async function token(next: string): Promise<string> {
 
 const detail = (p: unknown, status: number) => (p as Problem | null)?.detail ?? `Request failed (${status}).`;
 
-export type AdjudicationFormState = { error?: string; active?: string[] } | undefined;
+export type AdjudicationFormState = { error?: string; active?: string[]; descendants?: string[] } | undefined;
 
 export async function createAdjudication(_prev: AdjudicationFormState, form: FormData): Promise<AdjudicationFormState> {
   const rubric = String(form.get("rubric_item_id") ?? "");
@@ -30,11 +30,12 @@ export async function createAdjudication(_prev: AdjudicationFormState, form: For
       reason: String(form.get("reason") ?? ""),
       from_version_ids: from,
       supersedes_ids: form.getAll("supersedes_ids").map(String),
+      retain_descendant_ids: form.getAll("retain_descendant_ids").map(String),
     }),
   });
   if (!res.ok) {
-    const p = res.problem as (Problem & { active?: string[] }) | null;
-    return { error: detail(p, res.status), active: p?.active };
+    const p = res.problem as (Problem & { active?: string[]; descendants?: string[] }) | null;
+    return { error: detail(p, res.status), active: p?.active, descendants: p?.descendants };
   }
   redirect(`/studio/adjudications/${res.data.id}`);
 }

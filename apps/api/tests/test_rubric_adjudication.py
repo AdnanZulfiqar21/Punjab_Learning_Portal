@@ -16,29 +16,29 @@ from sqlalchemy import text
 from portal_api.db import get_sessionmaker
 from portal_api.modules.written import adjudication
 from tests.test_content_workflow import Staff, _chapter, _confirm_rights, _post, _refs
-from tests.test_written_attempts import _learner, _map, _png, _seal, _start, _upload
+from tests.test_written_attempts import _learner, _map, _png, _seal, _upload
 from tests.test_written_records import QUESTION, R_CHECKS, W_CHECKS, _rubric
 
 SCOPE = {"grades": [12], "subjects": ["chemistry"]}
 
 
 class Team:
-    def __init__(self, client: TestClient, chapter_index: int) -> None:
+    def __init__(self, client: TestClient, chapter_index: int, subject: str = "chemistry") -> None:
         self.client = client
+        self.subject = subject
+        self.scope = scope = {"grades": [12], "subjects": [subject]}
         with get_sessionmaker()() as db:
-            self.author = Staff(client, db, ["content_author"], SCOPE)
-            self.reviewer = Staff(client, db, ["subject_reviewer"], SCOPE)
-            self.publisher = Staff(client, db, ["publisher"], SCOPE, mfa=True)
-            self.adjudicator = Staff(client, db, ["academic_adjudicator"], SCOPE, mfa=True)  # W06-01
-            self.marker = Staff(client, db, ["subject_reviewer"], SCOPE)
-            chapter, doc = _chapter(db, 12, "chemistry", chapter_index)
+            self.author = Staff(client, db, ["content_author"], scope)
+            self.reviewer = Staff(client, db, ["subject_reviewer"], scope)
+            self.publisher = Staff(client, db, ["publisher"], scope, mfa=True)
+            self.adjudicator = Staff(client, db, ["academic_adjudicator"], scope, mfa=True)  # W06-01
+            self.marker = Staff(client, db, ["subject_reviewer"], scope)
+            chapter, doc = _chapter(db, 12, subject, chapter_index)
             _confirm_rights(client, db, doc)
             from portal_api.modules.written.review import ReviewCapacity
 
-            if db.get(ReviewCapacity, (12, "chemistry")) is None:
-                db.add(
-                    ReviewCapacity(grade_number=12, subject_code="chemistry", max_open_cases=10_000, reason="fixture")
-                )
+            if db.get(ReviewCapacity, (12, subject)) is None:
+                db.add(ReviewCapacity(grade_number=12, subject_code=subject, max_open_cases=10_000, reason="fixture"))
                 db.commit()
         self.chapter, self.doc = chapter, doc
         q = client.post(
@@ -111,7 +111,15 @@ class Team:
 
     def sealed(self, seed: int) -> tuple[Staff, dict[str, Any]]:
         learner = _learner(self.client)
-        a = _start(self.client, learner, str(self.chapter.id), question_count=1)
+        f = self.client.post(
+            "/v1/written/forms",
+            headers={**learner.headers, "Idempotency-Key": uuid.uuid4().hex},
+            json={"grade": 12, "subject": self.subject, "chapter_ids": [str(self.chapter.id)], "question_count": 1},
+        )
+        assert f.status_code == 201, f.text
+        started = self.client.post(f"/v1/written/forms/{f.json()['id']}/attempt", headers=learner.headers)
+        assert started.status_code == 200, started.text
+        a = dict(started.json())
         page = _upload(self.client, learner, a["id"], _png(seed=seed)).json()["pages"][0]["id"]
         m = _map(self.client, learner, a, {k: {"pages": [page]} for k in ("1:a", "1:b")}).json()
         assert _seal(self.client, learner, a["id"], m["manifest_revision"]).status_code == 200

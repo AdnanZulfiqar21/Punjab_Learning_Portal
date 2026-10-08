@@ -19,9 +19,9 @@ from tests.test_written_attempts import _learner, _map, _png, _seal, _start, _up
 SCOPE = {"grades": [12], "subjects": ["chemistry"]}
 
 
-def _staff(client: TestClient, roles: list[str]) -> Staff:
+def _staff(client: TestClient, roles: list[str], mfa: bool = False) -> Staff:
     with get_sessionmaker()() as db:
-        return Staff(client, db, roles, SCOPE)
+        return Staff(client, db, roles, SCOPE, mfa=mfa)
 
 
 def _sealed(client: TestClient, chapter: str, seed: int) -> tuple[Staff, dict[str, Any]]:
@@ -214,7 +214,7 @@ def test_an_adjudicator_expansion_into_a_pending_question_supersedes_its_complet
 ) -> None:
     learner, a = _sealed(client, published_written["chapter"], seed=904)
     first = _staff(client, ["subject_reviewer"])
-    adjudicator = _staff(client, ["academic_adjudicator"])
+    adjudicator = _staff(client, ["academic_adjudicator"], mfa=True)  # NEW-11
     assert _mark(client, first, a["id"], "initial", awards=_aw(q1=100), question_status=_pending(2)).status_code == 200
     assert (
         client.post(
@@ -240,7 +240,7 @@ def test_an_adjudicator_expansion_into_a_pending_question_supersedes_its_complet
 
 def test_a_stale_lease_gets_a_recoverable_conflict(client: TestClient, published_written: dict[str, Any]) -> None:
     learner, a = _sealed(client, published_written["chapter"], seed=905)
-    first, second = _staff(client, ["subject_reviewer"]), _staff(client, ["academic_adjudicator"])
+    first, second = _staff(client, ["subject_reviewer"]), _staff(client, ["academic_adjudicator"], mfa=True)  # NEW-11
     assert _mark(client, first, a["id"], "initial", awards=_aw(q1=100), question_status=_pending(2)).status_code == 200
     assert (
         client.post(
