@@ -4,6 +4,7 @@ about roles or entitlements; those are application data."""
 
 from __future__ import annotations
 
+import threading
 import time
 import uuid
 from dataclasses import dataclass
@@ -62,12 +63,31 @@ class DevIssuer:
         return jwt.encode(claims, self._key, algorithm="RS256", headers={"kid": self.kid})
 
 
-@lru_cache
+_dev_issuer: DevIssuer | None = None
+_dev_issuer_lock = threading.Lock()
+
+
 def get_dev_issuer() -> DevIssuer:
-    s = get_settings()
-    if not s.dev_auth_enabled:
-        raise RuntimeError("development issuer is disabled")
-    return DevIssuer(s.dev_auth_issuer, s.dev_auth_audience, s.dev_auth_token_ttl_s)
+    """One issuer per process. Built under a lock: `lru_cache` let concurrent first calls each generate a key, and
+    tokens signed with a discarded key then failed verification (R08, a 401 right after sign-up)."""
+    global _dev_issuer
+    issuer = _dev_issuer
+    if issuer is not None:
+        return issuer
+    with _dev_issuer_lock:
+        if _dev_issuer is None:
+            s = get_settings()
+            if not s.dev_auth_enabled:
+                raise RuntimeError("development issuer is disabled")
+            _dev_issuer = DevIssuer(s.dev_auth_issuer, s.dev_auth_audience, s.dev_auth_token_ttl_s)
+        return _dev_issuer
+
+
+def reset_dev_issuer() -> None:
+    """Tests only: forget the process issuer (its tokens stop verifying)."""
+    global _dev_issuer
+    with _dev_issuer_lock:
+        _dev_issuer = None
 
 
 @lru_cache
