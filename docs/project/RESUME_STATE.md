@@ -1,10 +1,10 @@
 # RESUME STATE
 
-**Updated:** 2026-10-08 (native written journey on `feat/native-written`; regenerated from `git log origin/main`, `gh pr list` and test runs).
+**Updated:** 2026-10-08 (after PR #38 merged; regenerated from `git log origin/main`, `gh pr list` and test runs).
 
 ## Repository state
-- `main` = PRs #1 and #3–#37 merged (PR #2 closed unmerged). Latest: #31 `87c720f` (W06.S2.T4 rescans + RS31 corrections; CI run 37791799813 on head `27e9f84`), #32 `2277a6a` (W04.S3.T3 linked practice; CI run 37810869785 on head `dad3222`), #33 `41ac6d9` (PR32 review corrections; CI run 37834522031 on head `f5ccdf0`), #34 `c29f144` (W06.S2.T3 rubric adjudications; CI run 37841162827 green on head `662bf87`; the first run 37840600136 failed `alembic check` because `migrations/env.py` didn't import the new models, fixed in `662bf87`), #35 `844adbd` (records only), #36 `2326bd8` (REVIEW-W06; CI run 37849487770 green on head `0238a25`, including `adjudication.spec.ts` on Linux with the worker).
-- **Open:** `feat/native-written` (NATIVE-W01). Merge on a green CI run of its exact head.
+- `main` = PRs #1 and #3–#38 merged (PR #2 closed unmerged). Latest: #31 `87c720f` (W06.S2.T4 rescans + RS31 corrections; CI run 37791799813 on head `27e9f84`), #32 `2277a6a` (W04.S3.T3 linked practice; CI run 37810869785 on head `dad3222`), #33 `41ac6d9` (PR32 review corrections; CI run 37834522031 on head `f5ccdf0`), #34 `c29f144` (W06.S2.T3 rubric adjudications; CI run 37841162827 green on head `662bf87`; the first run 37840600136 failed `alembic check` because `migrations/env.py` didn't import the new models, fixed in `662bf87`), #35 `844adbd` (records only), #36 `2326bd8` (REVIEW-W06; CI run 37849487770 green on head `0238a25`, including `adjudication.spec.ts` on Linux with the worker), #37 `a3959cb` (records), #38 (NATIVE-W01; CI run 37851925400 green on head `ee275ab`; mobile CI = typecheck/lint/doctor/variants, not device evidence).
+- **Open:** none (records-only branch `docs/records-after-pr38` while it merges).
 - **Gate:** `main` has no branch protection or ruleset. The CI workflow is the only check and is not marked required. Merge only on a green run of the exact head being merged. CI `mobile`/`content` jobs skip when their paths are unchanged; a skip is not mobile or content qualification.
 - **Git rules (GIT-01):** never rebase, amend pushed commits or force-push (including `--force-with-lease`). Merge `main` into feature branches.
 
@@ -81,9 +81,9 @@ No academic content is published: B01 (reviewers) and rights confirmation block 
 | 2026-10-08, full E2E on `feat/rubric-adjudication` while a second pytest run was loading the machine | `catalogue.spec.ts:3` Class XII region not visible; `lessons.spec.ts:20` timeout | Did not recur in the next full run made alone (47 passed) | **Not proven** to be load-related; re-examine if seen without concurrent load. |
 
 ## Next actions
-1. Merge `feat/native-written`; then the next unblocked engineering: notifications (P15.S1), see 3.
+1. Next unblocked engineering: notifications (P15.S1), see 3.
 2. Deployment prerequisites (when B03 exists): run `portal-written-previews` and `portal-written-repair` once; run `portal-written-worker` as its own process (written/regrade sub-pool); schedule `portal-written-sweep-orphans` and `portal-written-learner-deadlines` (hourly); set review capacity per scope; set `PORTAL_TRIAL_DEVICE_EVIDENCE` and a secret `PORTAL_TRIAL_REF_PEPPER`. Production must not silently use `fallback` as the anti-repeat-trial implementation.
-3. Roadmap continuation, in order: (done: linked new practice attempts, W04.S3.T3, LINKED-01); (done and merged #34: rubric adjudications across attempts, W06.S2.T3, ADJ-01; applying a correction queues a job for `portal-written-worker`); (done on `feat/native-written`: native written capture, results, rescans with `Idempotency-Key` and mobile help, NATIVE-W01; Expo web only, devices still B07/B08/B13); notifications (P15.S1, **next unblocked**); CMS import batches, previews, release/rollback, export (P06); source-grounded drafting and media (P07, drafts only); automatic written-assessment contracts (W05; no real script calls until B10).
+3. Roadmap continuation, in order: (done: linked new practice attempts, W04.S3.T3, LINKED-01); (done and merged #34: rubric adjudications across attempts, W06.S2.T3, ADJ-01; applying a correction queues a job for `portal-written-worker`); (done and merged #38: native written capture, results, rescans with `Idempotency-Key` and mobile help, NATIVE-W01; Expo web only, devices still B07/B08/B13); notifications (P15.S1, **next unblocked**); CMS import batches, previews, release/rollback, export (P06); source-grounded drafting and media (P07, drafts only); automatic written-assessment contracts (W05; no real script calls until B10).
 4. Outstanding, not met: native repeat-device protection (R06; B07/B08/B13), native Android/iOS verification, approved academic content (B01), automatic-marking qualification (B10), production load evidence, and the original unexplained OperationalError (R08).
 
 ## Run locally
