@@ -328,6 +328,19 @@ test("a teacher marks a submitted script and the learner sees the released marks
   await page.getByRole("button", { name: "Request recheck" }).click();
   await expect(page.getByText("Recheck requested")).toBeVisible(AUTH);
   await expect(page.getByText("Ask for a recheck")).toHaveCount(0);
+
+  // W04.S3.T3: answering again is a separate linked test. Preparing it charges nothing; the cost is shown before the
+  // start, and the released marks above never change.
+  await page.getByRole("button", { name: "Prepare a new practice test" }).click();
+  await expect(page).toHaveURL(/\/practice\/written\/linked\/[0-9a-f-]{36}$/, AUTH);
+  await expect(page.getByText("Your earlier result stays as it is")).toBeVisible();
+  await expect(page.getByText(/\d+ units? \(you have \d+\)/)).toBeVisible();
+  await page.getByRole("button", { name: "Start the new test" }).click();
+  await expect(page.getByText("Linked to an earlier test")).toBeVisible(AUTH);
+  expect(page.url()).not.toContain(attemptId);
+  await page.goto(`/practice/written/${attemptId}`);
+  await expect(page.getByText("Question 1: 1 / 5")).toBeVisible(AUTH);
+  await expect(page.getByRole("link", { name: /^Questions 1/ })).toBeVisible();
   await teacher.goto("/studio/marking");
   const recheckRow = teacher.getByRole("listitem").filter({ hasText: `Script ${attemptId.slice(0, 8)}` }).filter({ hasText: "Recheck" });
   await expect(recheckRow).toBeVisible(AUTH);

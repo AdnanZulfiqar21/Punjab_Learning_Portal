@@ -3,8 +3,8 @@
 **Updated:** 2026-10-08 (after the PR #31 review, "RS31"). Regenerated from `git log origin/main`, `gh pr list` and test runs.
 
 ## Repository state
-- `main` = PRs #1 and #3–#30 merged (PR #2 closed unmerged). Latest: #28 `36b4612` (OCT8-05), #29 `2fb73cc` (OCT8-07), #30 `c6ffa04` (OCT8-06 and records).
-- **Open:** PR #31 `feat/written-rescans` (W04.S3.T2/W06.S2.T4, RESCAN-01, plus the RS31 corrections in RESCAN-02). Merge on a green CI run of its exact head.
+- `main` = PRs #1 and #3–#31 merged (PR #2 closed unmerged). Latest: #29 `2fb73cc` (OCT8-07), #30 `c6ffa04` (OCT8-06), #31 `87c720f` (W06.S2.T4 rescans + RS31 corrections, CI green on head `27e9f84`).
+- **Open:** `feat/linked-practice-attempts` (W04.S3.T3, LINKED-01). Merge on a green CI run of its exact head.
 - **Gate:** `main` has no branch protection or ruleset. The CI workflow is the only check and is not marked required. Merge only on a green run of the exact head being merged. CI `mobile`/`content` jobs skip when their paths are unchanged; a skip is not mobile or content qualification.
 - **Git rules (GIT-01):** never rebase, amend pushed commits or force-push (including `--force-with-lease`). Merge `main` into feature branches.
 
@@ -39,23 +39,24 @@ No academic content is published: B01 (reviewers) and rights confirmation block 
 | OCT8-05 empty seal | Fixed and merged (#28), ALLOC-02. |
 | OCT8-06 detail view | Built and merged (#30), DETAIL-01. Readability with real scripts not qualified. |
 | OCT8-07 start clock | Fixed and merged (#29), ADMIT-02. |
-| RS31-01 rescan retry/race | Fixed, PR #31, RESCAN-02 (idempotency key; 409 `SAME_FILE`, never 500). |
-| RS31-02 learner deadline | Fixed, PR #31, RESCAN-02 (durable obligation; deadline fixed at first release). |
-| RS31-03 `post_cutoff` | Fixed, PR #31, RESCAN-02; one dev record corrected by `portal-written-repair`. |
-| RS31 section 4 evidence provenance | Built, PR #31: `evidence_revisions` on each score version. |
+| RS31-01 rescan retry/race | Fixed and merged (#31), RESCAN-02 (idempotency key; 409 `SAME_FILE`, never 500). |
+| RS31-02 learner deadline | Fixed and merged (#31), RESCAN-02 (durable obligation; deadline fixed at first release). |
+| RS31-03 `post_cutoff` | Fixed and merged (#31), RESCAN-02; one dev record corrected by `portal-written-repair`. |
+| RS31 section 4 evidence provenance | Built and merged (#31): `evidence_revisions` on each score version. |
 
 ## Test evidence (local, this machine; CI runs are on each PR)
 | Commit / branch | Command | Result |
 |---|---|---|
 | `feat/oct8-detail-view` @ `758b8dc` | `uv run pytest -q` in `apps/api` | 190 passed |
 | `feat/written-rescans` (RS31 corrections) | `uv run pytest -q` in `apps/api` | 204 passed |
-| same | `npx playwright test` in `apps/web` (API and web running) | 41 passed, 22 skipped, 2 failed, 3 did not run. Both failures (studio concurrent edits, support question report) passed when rerun alone (2 passed); treated as load flakiness, not as passing evidence |
+| `feat/linked-practice-attempts` | `uv run pytest -q`; `npx playwright test` (API and web running) | API suite passed (exit 0; includes 3 new tests); E2E 46 passed, 22 skipped |
+| `feat/written-rescans` @ `27e9f84` | `npx playwright test` in `apps/web` (API and web running) | 41 passed, 22 skipped, 2 failed, 3 did not run. Both failures (studio concurrent edits, support question report) passed when rerun alone (2 passed); treated as load flakiness, not as passing evidence |
 | PR #25 body (159) vs final report (172) | 159 was on `fix/pool-saturation` alone; 172 after merging #24 into it | Both correct for their commit |
 
 ## Next actions
-1. Merge PR #31 on green CI of its exact head.
+1. Merge the W04.S3.T3 PR on green CI of its exact head.
 2. Deployment prerequisites (when B03 exists): run `portal-written-previews` and `portal-written-repair` once; schedule `portal-written-sweep-orphans` and `portal-written-learner-deadlines` (hourly); set review capacity per scope; set `PORTAL_TRIAL_DEVICE_EVIDENCE` and a secret `PORTAL_TRIAL_REF_PEPPER`. Production must not silently use `fallback` as the anti-repeat-trial implementation.
-3. Roadmap continuation, in order: linked new practice attempts (W04.S3.T3, **next unblocked**); administrative regrades and adjudication (W06.S2.T3, same lock order and rebase path as PUB-01); native written capture, results, rescans (with the `Idempotency-Key` header) and mobile help; notifications (P15.S1); CMS import batches, previews, release/rollback, export (P06); source-grounded drafting and media (P07, drafts only); automatic written-assessment contracts (W05; no real script calls until B10).
+3. Roadmap continuation, in order: (done: linked new practice attempts, W04.S3.T3, LINKED-01); administrative regrades and adjudication (W06.S2.T3, **next unblocked**, same lock order and rebase path as PUB-01); native written capture, results, rescans (with the `Idempotency-Key` header) and mobile help; notifications (P15.S1); CMS import batches, previews, release/rollback, export (P06); source-grounded drafting and media (P07, drafts only); automatic written-assessment contracts (W05; no real script calls until B10).
 4. Outstanding, not met: native repeat-device protection (R06; B07/B08/B13), native Android/iOS verification, approved academic content (B01), automatic-marking qualification (B10), production load evidence, and the original unexplained OperationalError (R08).
 
 ## Run locally

@@ -3,7 +3,7 @@
 // Written-practice mutations through the BFF. The API enforces timing (U), revision concurrency, completeness and
 // the one-receipt seal; these actions forward the learner's session and translate outcomes for the UI.
 import { redirect } from "next/navigation";
-import type { Problem, WrittenAttempt, WrittenForm, WrittenSeal } from "@portal/contracts";
+import type { LinkedForm, Problem, WrittenAttempt, WrittenForm, WrittenSeal } from "@portal/contracts";
 import { api, sessionToken } from "@/lib/session";
 
 async function token(next: string): Promise<string> {
@@ -22,6 +22,36 @@ export async function confirmUnanswered(attemptId: string, position: number): Pr
     token: t,
   });
   return res.ok ? { ok: true } : { ok: false, error: (res.problem as Problem | null)?.detail ?? "Couldn't confirm." };
+}
+
+/**
+ * W04.S3.T3: prepare a linked new practice test. Nothing is reserved yet; the confirmation page shows the allowance it
+ * will use. The key comes from the panel, so a double click or retry returns the same prepared test.
+ */
+export async function prepareLinkedPractice(
+  attemptId: string,
+  key: string,
+  reason: "REWRITE" | "NEW_CONTENT" | "INDETERMINATE",
+  positions: number[],
+  revisionId: string | null,
+): Promise<{ error?: string }> {
+  const t = await token(`/practice/written/${attemptId}`);
+  const res = await api<LinkedForm>(`/v1/written-attempts/${encodeURIComponent(attemptId)}/linked-forms`, {
+    method: "POST",
+    token: t,
+    headers: { "Idempotency-Key": key },
+    body: JSON.stringify({ reason, positions, revision_id: revisionId }),
+  });
+  if (!res.ok) return { error: (res.problem as Problem | null)?.detail ?? "Couldn't prepare the new practice test." };
+  redirect(`/practice/written/linked/${res.data.form_id}`);
+}
+
+/** Starts a prepared linked test through the ordinary admission path (its own reservation). Idempotent per test. */
+export async function startLinkedPractice(formId: string): Promise<void> {
+  const t = await token(`/practice/written/linked/${formId}`);
+  const attempt = await api<WrittenAttempt>(`/v1/written/forms/${encodeURIComponent(formId)}/attempt`, { method: "POST", token: t });
+  if (!attempt.ok) redirect(`/practice/written/linked/${formId}?error=${attempt.status}`);
+  redirect(`/practice/written/${attempt.data.id}`);
 }
 
 export async function createWrittenPractice(_prev: WrittenBuilderState, form: FormData): Promise<WrittenBuilderState> {

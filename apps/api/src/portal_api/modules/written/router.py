@@ -11,13 +11,17 @@ from sqlalchemy.orm import Session
 from starlette.concurrency import run_in_threadpool
 
 from portal_api.db import get_session
-from portal_api.errors import TooLarge
+from portal_api.errors import NotFound, TooLarge
+from portal_api.modules.access import service as access
 from portal_api.modules.content import written as wq
 from portal_api.modules.content.models import ContentVersion
 from portal_api.modules.identity.deps import CurrentPrincipal
-from portal_api.modules.written import evidence, service
+from portal_api.modules.written import evidence, linked, service
 from portal_api.modules.written.models import WrittenAttempt, WrittenFile, WrittenForm, WrittenPage, WrittenReceipt
 from portal_api.modules.written.schemas import (
+    LinkedFormIn,
+    LinkedFormOut,
+    LinkedFromOut,
     ManifestIn,
     PageOut,
     SealIn,
@@ -111,6 +115,7 @@ def _attempt_out(db: Session, a: WrittenAttempt) -> WrittenAttemptOut:
     return WrittenAttemptOut(
         id=a.id,
         form_id=a.form_id,
+        linked_from=_linked_from(form),
         status=a.status,  # type: ignore[arg-type]
         started_at=a.started_at,
         writing_deadline_at=a.writing_deadline_at,
@@ -125,6 +130,67 @@ def _attempt_out(db: Session, a: WrittenAttempt) -> WrittenAttemptOut:
         manifest_revision=a.manifest_revision,
         receipt=_receipt_out(receipt) if receipt else None,
     )
+
+
+def _linked_from(form: WrittenForm) -> LinkedFromOut | None:
+    if form.linked_from_attempt_id is None:
+        return None
+    return LinkedFromOut(
+        attempt_id=form.linked_from_attempt_id,
+        reason=form.link_reason,  # type: ignore[arg-type]
+        positions=form.link_positions or [],
+    )
+
+
+def _linked_form_out(db: Session, who: CurrentPrincipal, form: WrittenForm) -> LinkedFormOut:
+    started = db.scalar(select(WrittenAttempt.id).where(WrittenAttempt.form_id == form.id))
+    linked_from = _linked_from(form)
+    assert linked_from is not None
+    return LinkedFormOut(
+        form_id=form.id,
+        question_count=len(form.items),
+        max_units=form.max_units,
+        allowance_units=linked.allowance_units(db, form),
+        allowance_available=access.allowance(db, who.user.id)["available"],
+        linked_from=linked_from,
+        started_attempt_id=started,
+    )
+
+
+@router.post(
+    "/written-attempts/{attempt_id}/linked-forms",
+    response_model=LinkedFormOut,
+    status_code=201,
+    summary="Prepare a new practice test linked to this one (W04.S3.T3); starting it uses allowance like any test",
+)
+def create_linked_form(
+    db: DB,
+    who: CurrentPrincipal,
+    attempt_id: uuid.UUID,
+    body: LinkedFormIn,
+    response: Response,
+    idempotency_key: Annotated[str, Header(alias="Idempotency-Key", min_length=8, max_length=80)],
+) -> LinkedFormOut:
+    _private(response)
+    form = linked.create_linked_form(
+        db,
+        who,
+        attempt_id,
+        reason=body.reason,
+        positions=body.positions,
+        revision_id=body.revision_id,
+        idempotency_key=idempotency_key,
+    )
+    return _linked_form_out(db, who, form)
+
+
+@router.get("/written/linked-forms/{form_id}", response_model=LinkedFormOut)
+def get_linked_form(db: DB, who: CurrentPrincipal, form_id: uuid.UUID, response: Response) -> LinkedFormOut:
+    _private(response)
+    form = db.get(WrittenForm, form_id)
+    if form is None or form.owner_id != who.user.id or form.linked_from_attempt_id is None:
+        raise NotFound("Test not found.")
+    return _linked_form_out(db, who, form)
 
 
 @router.get("/written/availability", response_model=WrittenAvailabilityOut)
