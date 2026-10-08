@@ -55,7 +55,7 @@ class WrittenReviewCase(Base):
     __table_args__ = (
         UniqueConstraint("attempt_id", "case_kind", "opened_seq", name="uq_written_case"),
         CheckConstraint("status in ('queued','released')", name="written_case_status"),
-        CheckConstraint("case_kind in ('initial','recheck','completion')", name="written_case_kind"),
+        CheckConstraint("case_kind in ('initial','recheck','completion','regrade')", name="written_case_kind"),
     )
     id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     attempt_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("written_attempt.id", ondelete="RESTRICT"), index=True)
@@ -78,6 +78,10 @@ class WrittenReviewCase(Base):
     predecessor_id: Mapped[uuid.UUID | None] = mapped_column(
         ForeignKey("written_review_case.id", ondelete="RESTRICT")
     )  # completion successor of a partially resolved completion case (OCT8-02)
+    # W06.S2.T3: the rubric correction a regrade case re-marks under (regrade cases only).
+    adjudication_id: Mapped[uuid.UUID | None] = mapped_column(
+        ForeignKey("written_rubric_adjudication.id", ondelete="RESTRICT", use_alter=True, name="fk_case_adjudication")
+    )
 
 
 class WrittenScoreVersion(Base):
@@ -106,6 +110,8 @@ class WrittenScoreVersion(Base):
     # PR32-02: an unreleased draft's remaining editable intent: proposed rescan classifications (never applied until
     # release) and the copies selected as evidence. Null on released versions.
     draft_intent: Mapped[dict[str, Any] | None] = mapped_column(JSONB)
+    # W06.S2.T3: for a SYSTEM regrade, the adjudication and the human decisions carried forward with their evidence.
+    regrade_detail: Mapped[dict[str, Any] | None] = mapped_column(JSONB)
     # R05: position -> {"status": scored|pending|unavailable, "reason": str}. Missing entries mean scored (pre-R05).
     question_status: Mapped[dict[str, Any]] = mapped_column(JSONB, default=dict, server_default="{}")
     completeness: Mapped[str] = mapped_column(String(20), default="complete", server_default="complete")
@@ -359,10 +365,13 @@ def case_context(db: Session, case: WrittenReviewCase) -> dict[str, Any]:
     assert attempt is not None and receipt is not None
     form = db.get(WrittenForm, attempt.form_id)
     assert form is not None
+    from portal_api.modules.written import adjudication
+
+    over = adjudication.targets(db, attempt.id)  # W06.S2.T3: an approved correction is the marking basis from now on
     questions = []
     for fi in form.items:
         qv = db.get(ContentVersion, fi.question_version_id)
-        rv = db.get(ContentVersion, fi.rubric_version_id)
+        rv = db.get(ContentVersion, over.get(fi.position, fi.rubric_version_id))
         assert qv is not None and rv is not None
         questions.append(
             {
@@ -570,6 +579,23 @@ def decide(
             req.expanded_positions = sorted({*req.expanded_positions, *extra})
             req.expansion_reason = expansion_reason.strip()
             req.expanded_by = who.user.id
+    if case.case_kind == "regrade":
+        # W06.S2.T3: a teacher re-marks only the questions whose scoring basis a rubric correction changed.
+        assert current is not None
+        scope = {str(p) for p in (case.positions or [])}
+        outside = sorted(set(awards) - scope, key=int)
+        if outside:
+            raise Unprocessable(
+                "This regrade covers only the questions the rubric correction changed.",
+                errors=[f"Question {p} is outside this case." for p in outside],
+            )
+        not_scored = sorted(p for p in scope if _status_of(current, p) != "scored")
+        if not_scored:
+            raise Conflict(
+                "Some of these questions are no longer scored. Reload the script.",
+                code_reason="RESULT_CHANGED",
+                changed_positions=[int(p) for p in not_scored],
+            )
     if case.case_kind == "completion":
         # Only questions that are still pending in the current result are marked here.
         assert current is not None
@@ -625,8 +651,8 @@ def decide(
         kind = st.get("status", "scored")
         if kind not in QUESTION_STATUSES:
             raise Unprocessable(f"Question {pos}: unknown status {kind!r}.")
-        if case.case_kind == "recheck" and kind != "scored":
-            raise Unprocessable("A recheck re-marks questions; it can't mark them pending or unavailable.")
+        if case.case_kind in ("recheck", "regrade") and kind != "scored":
+            raise Unprocessable(f"A {case.case_kind} re-marks questions; it can't mark them pending or unavailable.")
         why = str(st.get("reason", "")).strip()
         if kind != "scored" and len(why) < 5:
             raise Unprocessable(f"Question {pos}: give the learner a reason it is {kind}.")

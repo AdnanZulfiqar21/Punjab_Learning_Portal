@@ -30,6 +30,7 @@ FIXTURES: list[tuple[str, list[str]]] = [
     ("studio-reviewer2@example.com", ["subject_reviewer"]),  # independent rechecks need a second marker
     ("studio-publisher@example.com", ["publisher"]),
     ("studio-support@example.com", ["support"]),
+    ("studio-adjudicator@example.com", ["academic_adjudicator"]),  # applies rubric corrections (W06.S2.T3)
 ]
 
 

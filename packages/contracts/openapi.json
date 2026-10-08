@@ -148,6 +148,147 @@
         "title": "Actions",
         "type": "object"
       },
+      "AdjudicationIn": {
+        "properties": {
+          "from_version_ids": {
+            "anyOf": [
+              {
+                "items": {
+                  "format": "uuid",
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Earlier published versions to correct; default: all of them for the same question",
+            "title": "From Version Ids"
+          },
+          "reason": {
+            "maxLength": 2000,
+            "minLength": 20,
+            "title": "Reason",
+            "type": "string"
+          },
+          "rubric_item_id": {
+            "format": "uuid",
+            "title": "Rubric Item Id",
+            "type": "string"
+          },
+          "supersedes_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The active correction this one replaces",
+            "title": "Supersedes Id"
+          }
+        },
+        "required": [
+          "rubric_item_id",
+          "reason"
+        ],
+        "title": "AdjudicationIn",
+        "type": "object"
+      },
+      "AdjudicationOut": {
+        "properties": {
+          "approved_at": {
+            "format": "date-time",
+            "title": "Approved At",
+            "type": "string"
+          },
+          "compatibility": {
+            "additionalProperties": true,
+            "description": "Per corrected version: criterion diff and whether human marks carry forward unchanged",
+            "title": "Compatibility",
+            "type": "object"
+          },
+          "from_version_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "From Version Ids",
+            "type": "array"
+          },
+          "grade": {
+            "title": "Grade",
+            "type": "integer"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "impact": {
+            "additionalProperties": true,
+            "description": "Affected forms, attempts, released results, rescans, planned question outcomes and progress",
+            "title": "Impact",
+            "type": "object"
+          },
+          "reason": {
+            "title": "Reason",
+            "type": "string"
+          },
+          "rubric_item_id": {
+            "format": "uuid",
+            "title": "Rubric Item Id",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "active",
+              "superseded"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "subject": {
+            "title": "Subject",
+            "type": "string"
+          },
+          "supersedes_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Supersedes Id"
+          },
+          "to_version_id": {
+            "format": "uuid",
+            "title": "To Version Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "rubric_item_id",
+          "grade",
+          "subject",
+          "from_version_ids",
+          "to_version_id",
+          "reason",
+          "status",
+          "supersedes_id",
+          "approved_at",
+          "compatibility",
+          "impact"
+        ],
+        "title": "AdjudicationOut",
+        "type": "object"
+      },
       "AllowanceOut": {
         "properties": {
           "accepted": {
@@ -608,7 +749,8 @@
             "enum": [
               "initial",
               "recheck",
-              "completion"
+              "completion",
+              "regrade"
             ],
             "title": "Case Kind",
             "type": "string"
@@ -729,6 +871,17 @@
             "title": "Reference",
             "type": "string"
           },
+          "regrade": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CompletionScope"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Regrade cases: the questions a rubric correction changed, and why (W06.S2.T3)"
+          },
           "revisions": {
             "description": "Learner rescans for questions in this case (W06.S2.T4)",
             "items": {
@@ -829,7 +982,8 @@
             "enum": [
               "initial",
               "recheck",
-              "completion"
+              "completion",
+              "regrade"
             ],
             "title": "Case Kind",
             "type": "string"
@@ -3179,6 +3333,38 @@
         "title": "MessageOut",
         "type": "object"
       },
+      "NoticeOut": {
+        "properties": {
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "kind": {
+            "title": "Kind",
+            "type": "string"
+          },
+          "message": {
+            "title": "Message",
+            "type": "string"
+          },
+          "positions": {
+            "items": {
+              "type": "integer"
+            },
+            "title": "Positions",
+            "type": "array"
+          }
+        },
+        "required": [
+          "kind",
+          "positions",
+          "message",
+          "created_at"
+        ],
+        "title": "NoticeOut",
+        "type": "object"
+      },
       "OpIn": {
         "properties": {
           "op_id": {
@@ -4034,6 +4220,36 @@
           "id"
         ],
         "title": "ReferenceIn",
+        "type": "object"
+      },
+      "RegradeRunOut": {
+        "properties": {
+          "outcomes": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "title": "Outcomes",
+            "type": "object"
+          },
+          "processed": {
+            "title": "Processed",
+            "type": "integer"
+          },
+          "remaining": {
+            "title": "Remaining",
+            "type": "integer"
+          },
+          "superseded": {
+            "title": "Superseded",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "processed",
+          "remaining",
+          "superseded"
+        ],
+        "title": "RegradeRunOut",
         "type": "object"
       },
       "RemedyIn": {
@@ -6652,6 +6868,14 @@
           "max_units": {
             "title": "Max Units",
             "type": "integer"
+          },
+          "notices": {
+            "description": "Changes to this result's basis, such as a marking-guide correction",
+            "items": {
+              "$ref": "#/components/schemas/NoticeOut"
+            },
+            "title": "Notices",
+            "type": "array"
           },
           "questions": {
             "items": {
@@ -9660,6 +9884,168 @@
         "summary": "Dry-run validation for the editor (writes nothing)",
         "tags": [
           "studio"
+        ]
+      }
+    },
+    "/v1/studio/written/adjudications": {
+      "get": {
+        "operationId": "list_adjudications_v1_studio_written_adjudications_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/AdjudicationOut"
+                  },
+                  "title": "Response List Adjudications V1 Studio Written Adjudications Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "List Adjudications",
+        "tags": [
+          "written marking"
+        ]
+      },
+      "post": {
+        "operationId": "create_adjudication_v1_studio_written_adjudications_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdjudicationIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdjudicationOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Apply a published rubric correction to earlier work (academic adjudicators in scope; audited)",
+        "tags": [
+          "written marking"
+        ]
+      }
+    },
+    "/v1/studio/written/adjudications/{adjudication_id}": {
+      "get": {
+        "operationId": "get_adjudication_v1_studio_written_adjudications__adjudication_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adjudication_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Adjudication Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdjudicationOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Adjudication",
+        "tags": [
+          "written marking"
+        ]
+      }
+    },
+    "/v1/studio/written/adjudications/{adjudication_id}/run": {
+      "post": {
+        "operationId": "run_adjudication_v1_studio_written_adjudications__adjudication_id__run_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adjudication_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Adjudication Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 50,
+              "maximum": 200,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RegradeRunOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Process the next bounded batch of affected attempts (resumable; safe to repeat)",
+        "tags": [
+          "written marking"
         ]
       }
     },

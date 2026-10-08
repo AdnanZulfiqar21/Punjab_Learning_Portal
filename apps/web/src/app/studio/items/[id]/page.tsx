@@ -53,6 +53,11 @@ async function Item({ id }: { id: string }) {
           ← The question this rubric marks
         </Link>
       )}
+      {item.kind === "rubric" && item.availability === "live" && (item.published?.number ?? item.working?.number ?? 1) > 1 && auth.me.roles.includes("academic_adjudicator") && (
+        <Link href={`/studio/adjudications/new?rubric=${item.id}`} className="block text-sm text-accent underline-offset-2 hover:underline">
+          Apply this published correction to work already marked
+        </Link>
+      )}
       <Workspace key={key} item={item} history={history} myId={auth.me.id} questionVersions={questionVersions} />
     </div>
   );

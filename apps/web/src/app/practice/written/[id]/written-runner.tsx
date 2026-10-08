@@ -220,7 +220,11 @@ export function WrittenRunner({ attempt, result = null }: { attempt: WrittenAtte
               {result.completeness === "complete" ? (
                 <p className="text-lg">
                   <span className="text-3xl font-semibold tabular-nums">{marks(result.total_units ?? 0)}</span> / {marks(result.max_units)}
-                  <span className="ml-2 text-sm text-muted">marked by a teacher</span>
+                  <span className="ml-2 text-sm text-muted">
+                    {result.decision_method === "SYSTEM" && result.history.at(-1)?.case_kind === "regrade"
+                      ? "marked by a teacher; carried forward unchanged after a marking-guide correction"
+                      : "marked by a teacher"}
+                  </span>
                 </p>
               ) : (
                 <Notice tone="warn" title={result.completeness === "partial_pending" ? "Marking isn't finished yet" : "Some questions couldn't be assessed"}>
@@ -228,6 +232,11 @@ export function WrittenRunner({ attempt, result = null }: { attempt: WrittenAtte
                   every question is resolved, and nothing is counted as zero just because it wasn&apos;t assessed.
                 </Notice>
               )}
+              {(result.notices ?? []).map((n) => (
+                <Notice key={`${n.kind}:${n.created_at}`} title="Marking guide corrected">
+                  {n.message}
+                </Notice>
+              ))}
               {result.questions.map((q) => (
                 <div key={q.position} className="space-y-2 rounded-xl border border-border bg-surface p-4">
                   <p className="font-semibold">

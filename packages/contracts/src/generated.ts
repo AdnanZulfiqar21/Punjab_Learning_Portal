@@ -1016,6 +1016,58 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/studio/written/adjudications": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List Adjudications */
+        get: operations["list_adjudications_v1_studio_written_adjudications_get"];
+        put?: never;
+        /** Apply a published rubric correction to earlier work (academic adjudicators in scope; audited) */
+        post: operations["create_adjudication_v1_studio_written_adjudications_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/studio/written/adjudications/{adjudication_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Adjudication */
+        get: operations["get_adjudication_v1_studio_written_adjudications__adjudication_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/studio/written/adjudications/{adjudication_id}/run": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Process the next bounded batch of affected attempts (resumable; safe to repeat) */
+        post: operations["run_adjudication_v1_studio_written_adjudications__adjudication_id__run_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/studio/written/cases/{case_id}": {
         parameters: {
             query?: never;
@@ -1496,6 +1548,78 @@ export interface components {
             /** Withdraw */
             withdraw: boolean;
         };
+        /** AdjudicationIn */
+        AdjudicationIn: {
+            /**
+             * From Version Ids
+             * @description Earlier published versions to correct; default: all of them for the same question
+             */
+            from_version_ids?: string[] | null;
+            /** Reason */
+            reason: string;
+            /**
+             * Rubric Item Id
+             * Format: uuid
+             */
+            rubric_item_id: string;
+            /**
+             * Supersedes Id
+             * @description The active correction this one replaces
+             */
+            supersedes_id?: string | null;
+        };
+        /** AdjudicationOut */
+        AdjudicationOut: {
+            /**
+             * Approved At
+             * Format: date-time
+             */
+            approved_at: string;
+            /**
+             * Compatibility
+             * @description Per corrected version: criterion diff and whether human marks carry forward unchanged
+             */
+            compatibility: {
+                [key: string]: unknown;
+            };
+            /** From Version Ids */
+            from_version_ids: string[];
+            /** Grade */
+            grade: number;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /**
+             * Impact
+             * @description Affected forms, attempts, released results, rescans, planned question outcomes and progress
+             */
+            impact: {
+                [key: string]: unknown;
+            };
+            /** Reason */
+            reason: string;
+            /**
+             * Rubric Item Id
+             * Format: uuid
+             */
+            rubric_item_id: string;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "active" | "superseded";
+            /** Subject */
+            subject: string;
+            /** Supersedes Id */
+            supersedes_id: string | null;
+            /**
+             * To Version Id
+             * Format: uuid
+             */
+            to_version_id: string;
+        };
         /** AllowanceOut */
         AllowanceOut: {
             /** Accepted */
@@ -1684,7 +1808,7 @@ export interface components {
              * Case Kind
              * @enum {string}
              */
-            case_kind: "initial" | "recheck" | "completion";
+            case_kind: "initial" | "recheck" | "completion" | "regrade";
             completion: components["schemas"]["CompletionScope"] | null;
             /** @description This case's saved draft, if the latest version is one */
             draft?: components["schemas"]["StaffDraft"] | null;
@@ -1728,6 +1852,8 @@ export interface components {
              * @description Short script reference; learner identity is not shown to markers
              */
             reference: string;
+            /** @description Regrade cases: the questions a rubric correction changed, and why (W06.S2.T3) */
+            regrade?: components["schemas"]["CompletionScope"] | null;
             /**
              * Revisions
              * @description Learner rescans for questions in this case (W06.S2.T4)
@@ -1771,7 +1897,7 @@ export interface components {
              * Case Kind
              * @enum {string}
              */
-            case_kind: "initial" | "recheck" | "completion";
+            case_kind: "initial" | "recheck" | "completion" | "regrade";
             /**
              * Due At
              * @description Service obligation for accepted work (proposed 48 h)
@@ -2708,6 +2834,20 @@ export interface components {
             /** From Staff */
             from_staff: boolean;
         };
+        /** NoticeOut */
+        NoticeOut: {
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /** Kind */
+            kind: string;
+            /** Message */
+            message: string;
+            /** Positions */
+            positions: number[];
+        };
         /** OpIn */
         OpIn: {
             /**
@@ -3052,6 +3192,19 @@ export interface components {
             kind: "attempt" | "written_attempt";
             /** Position */
             position?: number | null;
+        };
+        /** RegradeRunOut */
+        RegradeRunOut: {
+            /** Outcomes */
+            outcomes?: {
+                [key: string]: number;
+            };
+            /** Processed */
+            processed: number;
+            /** Remaining */
+            remaining: number;
+            /** Superseded */
+            superseded: boolean;
         };
         /** RemedyIn */
         RemedyIn: {
@@ -4117,6 +4270,11 @@ export interface components {
             linked_attempts?: components["schemas"]["LinkedAttemptOut"][];
             /** Max Units */
             max_units: number;
+            /**
+             * Notices
+             * @description Changes to this result's basis, such as a marking-guide correction
+             */
+            notices?: components["schemas"]["NoticeOut"][];
             /** Questions */
             questions: components["schemas"]["QuestionResult"][];
             recheck: components["schemas"]["RecheckOut"];
@@ -6043,6 +6201,123 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["ValidationOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_adjudications_v1_studio_written_adjudications_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AdjudicationOut"][];
+                };
+            };
+        };
+    };
+    create_adjudication_v1_studio_written_adjudications_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["AdjudicationIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AdjudicationOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_adjudication_v1_studio_written_adjudications__adjudication_id__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                adjudication_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AdjudicationOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    run_adjudication_v1_studio_written_adjudications__adjudication_id__run_post: {
+        parameters: {
+            query?: {
+                limit?: number;
+            };
+            header?: never;
+            path: {
+                adjudication_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RegradeRunOut"];
                 };
             };
             /** @description Validation Error */
