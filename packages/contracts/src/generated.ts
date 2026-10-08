@@ -1204,6 +1204,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/written-attempts/{attempt_id}/linked-forms": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Prepare a new practice test linked to this one (W04.S3.T3); starting it uses allowance like any test */
+        post: operations["create_linked_form_v1_written_attempts__attempt_id__linked_forms_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/written-attempts/{attempt_id}/manifest": {
         parameters: {
             query?: never;
@@ -1385,6 +1402,23 @@ export interface paths {
         put?: never;
         /** Start */
         post: operations["start_v1_written_forms__form_id__attempt_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/written/linked-forms/{form_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Linked Form */
+        get: operations["get_linked_form_v1_written_linked_forms__form_id__get"];
+        put?: never;
+        post?: never;
         delete?: never;
         options?: never;
         head?: never;
@@ -2528,6 +2562,97 @@ export interface components {
             topic_id: string | null;
             /** Version */
             version: number;
+        };
+        /** LinkedAttemptOut */
+        LinkedAttemptOut: {
+            /** Attempt Id */
+            attempt_id: string | null;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /**
+             * Form Id
+             * Format: uuid
+             */
+            form_id: string;
+            /** Positions */
+            positions: number[];
+            /**
+             * Reason
+             * @enum {string}
+             */
+            reason: "NEW_CONTENT" | "INDETERMINATE" | "REWRITE";
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "not_started" | "active" | "sealed" | "expired";
+        };
+        /** LinkedFormIn */
+        LinkedFormIn: {
+            /**
+             * Positions
+             * @description Questions of the original test to repeat
+             */
+            positions: number[];
+            /**
+             * Reason
+             * @enum {string}
+             */
+            reason: "NEW_CONTENT" | "INDETERMINATE" | "REWRITE";
+            /**
+             * Revision Id
+             * @description The classified rescan, required for NEW_CONTENT and INDETERMINATE
+             */
+            revision_id?: string | null;
+        };
+        /** LinkedFormOut */
+        LinkedFormOut: {
+            /**
+             * Allowance Available
+             * @description Your available allowance units now
+             */
+            allowance_available: number;
+            /**
+             * Allowance Units
+             * @description Weighted allowance units starting this test reserves
+             */
+            allowance_units: number;
+            /**
+             * Form Id
+             * Format: uuid
+             */
+            form_id: string;
+            linked_from: components["schemas"]["LinkedFromOut"];
+            /** Max Units */
+            max_units: number;
+            /** Question Count */
+            question_count: number;
+            /**
+             * Started Attempt Id
+             * @description Set once this test has been started
+             */
+            started_attempt_id: string | null;
+        };
+        /** LinkedFromOut */
+        LinkedFromOut: {
+            /**
+             * Attempt Id
+             * Format: uuid
+             */
+            attempt_id: string;
+            /**
+             * Positions
+             * @description The original test's question numbers this test repeats, in order
+             */
+            positions: number[];
+            /**
+             * Reason
+             * @enum {string}
+             */
+            reason: "NEW_CONTENT" | "INDETERMINATE" | "REWRITE";
         };
         /** ManifestIn */
         ManifestIn: {
@@ -3745,6 +3870,8 @@ export interface components {
             id: string;
             /** Items */
             items: components["schemas"]["WrittenItemOut"][];
+            /** @description Set when this is a new practice attempt linked to an earlier test */
+            linked_from?: components["schemas"]["LinkedFromOut"] | null;
             /** Manifest */
             manifest: {
                 [key: string]: unknown;
@@ -3934,6 +4061,11 @@ export interface components {
              * @description Every released version, oldest first; corrections never erase history
              */
             history: components["schemas"]["HistoryEntry"][];
+            /**
+             * Linked Attempts
+             * @description New practice tests linked to this one (W04.S3.T3); they never change this result
+             */
+            linked_attempts?: components["schemas"]["LinkedAttemptOut"][];
             /** Max Units */
             max_units: number;
             /** Questions */
@@ -6244,6 +6376,43 @@ export interface operations {
             };
         };
     };
+    create_linked_form_v1_written_attempts__attempt_id__linked_forms_post: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+            };
+            path: {
+                attempt_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["LinkedFormIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["LinkedFormOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     put_manifest_v1_written_attempts__attempt_id__manifest_put: {
         parameters: {
             query?: never;
@@ -6596,6 +6765,37 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["WrittenAttemptOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_linked_form_v1_written_linked_forms__form_id__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                form_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["LinkedFormOut"];
                 };
             };
             /** @description Validation Error */

@@ -2839,6 +2839,197 @@
         "title": "LessonOut",
         "type": "object"
       },
+      "LinkedAttemptOut": {
+        "properties": {
+          "attempt_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Attempt Id"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "form_id": {
+            "format": "uuid",
+            "title": "Form Id",
+            "type": "string"
+          },
+          "positions": {
+            "items": {
+              "type": "integer"
+            },
+            "title": "Positions",
+            "type": "array"
+          },
+          "reason": {
+            "enum": [
+              "NEW_CONTENT",
+              "INDETERMINATE",
+              "REWRITE"
+            ],
+            "title": "Reason",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "not_started",
+              "active",
+              "sealed",
+              "expired"
+            ],
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "form_id",
+          "attempt_id",
+          "status",
+          "reason",
+          "positions",
+          "created_at"
+        ],
+        "title": "LinkedAttemptOut",
+        "type": "object"
+      },
+      "LinkedFormIn": {
+        "properties": {
+          "positions": {
+            "description": "Questions of the original test to repeat",
+            "items": {
+              "type": "integer"
+            },
+            "maxItems": 50,
+            "minItems": 1,
+            "title": "Positions",
+            "type": "array"
+          },
+          "reason": {
+            "enum": [
+              "NEW_CONTENT",
+              "INDETERMINATE",
+              "REWRITE"
+            ],
+            "title": "Reason",
+            "type": "string"
+          },
+          "revision_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The classified rescan, required for NEW_CONTENT and INDETERMINATE",
+            "title": "Revision Id"
+          }
+        },
+        "required": [
+          "reason",
+          "positions"
+        ],
+        "title": "LinkedFormIn",
+        "type": "object"
+      },
+      "LinkedFormOut": {
+        "properties": {
+          "allowance_available": {
+            "description": "Your available allowance units now",
+            "title": "Allowance Available",
+            "type": "integer"
+          },
+          "allowance_units": {
+            "description": "Weighted allowance units starting this test reserves",
+            "title": "Allowance Units",
+            "type": "integer"
+          },
+          "form_id": {
+            "format": "uuid",
+            "title": "Form Id",
+            "type": "string"
+          },
+          "linked_from": {
+            "$ref": "#/components/schemas/LinkedFromOut"
+          },
+          "max_units": {
+            "title": "Max Units",
+            "type": "integer"
+          },
+          "question_count": {
+            "title": "Question Count",
+            "type": "integer"
+          },
+          "started_attempt_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Set once this test has been started",
+            "title": "Started Attempt Id"
+          }
+        },
+        "required": [
+          "form_id",
+          "question_count",
+          "max_units",
+          "allowance_units",
+          "allowance_available",
+          "linked_from",
+          "started_attempt_id"
+        ],
+        "title": "LinkedFormOut",
+        "type": "object"
+      },
+      "LinkedFromOut": {
+        "properties": {
+          "attempt_id": {
+            "format": "uuid",
+            "title": "Attempt Id",
+            "type": "string"
+          },
+          "positions": {
+            "description": "The original test's question numbers this test repeats, in order",
+            "items": {
+              "type": "integer"
+            },
+            "title": "Positions",
+            "type": "array"
+          },
+          "reason": {
+            "enum": [
+              "NEW_CONTENT",
+              "INDETERMINATE",
+              "REWRITE"
+            ],
+            "title": "Reason",
+            "type": "string"
+          }
+        },
+        "required": [
+          "attempt_id",
+          "reason",
+          "positions"
+        ],
+        "title": "LinkedFromOut",
+        "type": "object"
+      },
       "ManifestIn": {
         "properties": {
           "expected_revision": {
@@ -5939,6 +6130,17 @@
             "title": "Items",
             "type": "array"
           },
+          "linked_from": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/LinkedFromOut"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Set when this is a new practice attempt linked to an earlier test"
+          },
           "manifest": {
             "additionalProperties": true,
             "title": "Manifest",
@@ -6360,6 +6562,14 @@
               "$ref": "#/components/schemas/HistoryEntry"
             },
             "title": "History",
+            "type": "array"
+          },
+          "linked_attempts": {
+            "description": "New practice tests linked to this one (W04.S3.T3); they never change this result",
+            "items": {
+              "$ref": "#/components/schemas/LinkedAttemptOut"
+            },
+            "title": "Linked Attempts",
             "type": "array"
           },
           "max_units": {
@@ -9917,6 +10127,70 @@
         ]
       }
     },
+    "/v1/written-attempts/{attempt_id}/linked-forms": {
+      "post": {
+        "operationId": "create_linked_form_v1_written_attempts__attempt_id__linked_forms_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "attempt_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Attempt Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "maxLength": 80,
+              "minLength": 8,
+              "title": "Idempotency-Key",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LinkedFormIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LinkedFormOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Prepare a new practice test linked to this one (W04.S3.T3); starting it uses allowance like any test",
+        "tags": [
+          "written practice"
+        ]
+      }
+    },
     "/v1/written-attempts/{attempt_id}/manifest": {
       "put": {
         "operationId": "put_manifest_v1_written_attempts__attempt_id__manifest_put",
@@ -10488,6 +10762,49 @@
           }
         },
         "summary": "Start",
+        "tags": [
+          "written practice"
+        ]
+      }
+    },
+    "/v1/written/linked-forms/{form_id}": {
+      "get": {
+        "operationId": "get_linked_form_v1_written_linked_forms__form_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "form_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Form Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LinkedFormOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Linked Form",
         "tags": [
           "written practice"
         ]

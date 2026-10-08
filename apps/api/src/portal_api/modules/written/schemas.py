@@ -83,9 +83,45 @@ class WrittenReceiptOut(BaseModel):
     unanswered_slots: int
 
 
+class LinkedFromOut(BaseModel):
+    attempt_id: uuid.UUID
+    reason: Literal["NEW_CONTENT", "INDETERMINATE", "REWRITE"]
+    positions: list[int] = Field(description="The original test's question numbers this test repeats, in order")
+
+
+class LinkedFormIn(BaseModel):
+    reason: Literal["NEW_CONTENT", "INDETERMINATE", "REWRITE"]
+    positions: list[int] = Field(min_length=1, max_length=50, description="Questions of the original test to repeat")
+    revision_id: uuid.UUID | None = Field(
+        default=None, description="The classified rescan, required for NEW_CONTENT and INDETERMINATE"
+    )
+
+
+class LinkedFormOut(BaseModel):
+    form_id: uuid.UUID
+    question_count: int
+    max_units: int
+    allowance_units: int = Field(description="Weighted allowance units starting this test reserves")
+    allowance_available: int = Field(description="Your available allowance units now")
+    linked_from: LinkedFromOut
+    started_attempt_id: uuid.UUID | None = Field(description="Set once this test has been started")
+
+
+class LinkedAttemptOut(BaseModel):
+    form_id: uuid.UUID
+    attempt_id: uuid.UUID | None
+    status: Literal["not_started", "active", "sealed", "expired"]
+    reason: Literal["NEW_CONTENT", "INDETERMINATE", "REWRITE"]
+    positions: list[int]
+    created_at: datetime
+
+
 class WrittenAttemptOut(BaseModel):
     id: uuid.UUID
     form_id: uuid.UUID
+    linked_from: LinkedFromOut | None = Field(
+        default=None, description="Set when this is a new practice attempt linked to an earlier test"
+    )
     status: Literal["active", "sealed", "expired"]
     started_at: datetime
     writing_deadline_at: datetime | None = Field(description="D: writing should stop (not enforceable at home)")

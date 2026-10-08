@@ -63,6 +63,8 @@ export type TrialDecision = S["TrialDecisionOut"];
 export type TrialDevice = S["TrialDeviceOut"];
 export type StaffSupportTicket = S["StaffTicketOut"];
 export type RecheckState = S["RecheckOut"];
+export type LinkedForm = S["LinkedFormOut"];
+export type LinkedAttempt = S["LinkedAttemptOut"];
 
 /** RFC 9457 problem details returned by every API error. */
 export interface Problem {

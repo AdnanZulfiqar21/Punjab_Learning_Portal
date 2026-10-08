@@ -16,10 +16,10 @@ from portal_api.modules.content import written as wq
 from portal_api.modules.content.models import ContentVersion
 from portal_api.modules.identity.deps import CurrentPrincipal, Principal, require
 from portal_api.modules.identity.permissions import Permission
-from portal_api.modules.written import review
+from portal_api.modules.written import linked, review
 from portal_api.modules.written.models import WrittenAttempt, WrittenForm
 from portal_api.modules.written.router import pages_out
-from portal_api.modules.written.schemas import PageOut
+from portal_api.modules.written.schemas import LinkedAttemptOut, PageOut
 
 router = APIRouter(prefix="/v1", tags=["written marking"])
 DB = Annotated[Session, Depends(get_session)]
@@ -203,6 +203,10 @@ class WrittenResultOut(BaseModel):
     recheck: RecheckOut
     history: list[HistoryEntry] = Field(
         description="Every released version, oldest first; corrections never erase history"
+    )
+    linked_attempts: list[LinkedAttemptOut] = Field(
+        default_factory=list,
+        description="New practice tests linked to this one (W04.S3.T3); they never change this result",
     )
 
 
@@ -390,6 +394,7 @@ def my_result(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, response: Re
             questions=[],
             recheck=RecheckOut(**review.recheck_state(db, attempt.id)),
             history=[],
+            linked_attempts=[LinkedAttemptOut(**x) for x in linked.linked_attempts(db, attempt.id)],
         )
     ctx_questions = {str(fi.position): fi for fi in form.items}
     from portal_api.modules.written import rescans
@@ -450,6 +455,7 @@ def my_result(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, response: Re
         questions=questions,
         recheck=RecheckOut(**review.recheck_state(db, attempt.id)),
         history=history,
+        linked_attempts=[LinkedAttemptOut(**x) for x in linked.linked_attempts(db, attempt.id)],
     )
 
 

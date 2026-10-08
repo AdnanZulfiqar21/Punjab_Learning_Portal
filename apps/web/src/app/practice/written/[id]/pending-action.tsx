@@ -2,18 +2,17 @@
 
 // What a learner can do about a pending question within the teacher's 7-day window (W06.S2.T4): send a clearer copy
 // of the same answer, or (for blank-looking evidence) confirm it wasn't answered. Neither replaces the sealed original.
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 import type { WrittenResult } from "@portal/contracts";
-import { confirmUnanswered } from "@/app/actions/written";
+import { confirmUnanswered, prepareLinkedPractice } from "@/app/actions/written";
 
 type Question = WrittenResult["questions"][number];
 const when = (s: string) => new Date(s).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" });
 const CLASS_TEXT: Record<string, string> = {
   READABILITY: "A teacher used your clearer copy to mark this answer.",
-  NEW_CONTENT: "Your copy showed new or changed work, so the original result stands. You can start a new practice test to have new work marked.",
-  INDETERMINATE: "The original was too unclear to compare with your copy.",
+  NEW_CONTENT: "Your copy showed new or changed work, so the original result stands. New work can be marked as a new practice test.",
+  INDETERMINATE: "The original was too unclear to compare with your copy, so the original result stands.",
 };
 
 export function PendingAction({ attemptId, q }: { attemptId: string; q: Question }) {
@@ -22,7 +21,17 @@ export function PendingAction({ attemptId, q }: { attemptId: string; q: Question
   const [pending, start] = useTransition();
   const [busy, setBusy] = useState(false);
   const [note, setNote] = useState<string | null>(null);
+  const [linkKey] = useState(() => crypto.randomUUID());
   const open = q.status === "pending" && q.learner_action && q.action_deadline && new Date(q.action_deadline) > new Date();
+
+  // W04.S3.T3: new or unclear work is answered again as a separate, linked practice test (its own allowance use).
+  async function linkNew(reason: "NEW_CONTENT" | "INDETERMINATE", revisionId: string) {
+    setBusy(true);
+    setError(null);
+    const out = await prepareLinkedPractice(attemptId, linkKey, reason, [q.position], revisionId);
+    setBusy(false);
+    if (out?.error) setError(out.error);
+  }
 
   // One key per chosen file: a network retry of the same send reuses it, so the server returns the original
   // acknowledgement instead of making a second copy (RS31-01).
@@ -58,12 +67,17 @@ export function PendingAction({ attemptId, q }: { attemptId: string; q: Question
       {(q.revisions ?? []).map((r) => (
         <p key={r.id} className="rounded bg-surface-muted px-2 py-1">
           Clearer copy sent {when(r.created_at)}: {r.classification ? CLASS_TEXT[r.classification] : "waiting for a teacher to compare it with your original."}
-          {r.classification === "NEW_CONTENT" && (
+          {(r.classification === "NEW_CONTENT" || r.classification === "INDETERMINATE") && (
             <>
               {" "}
-              <Link href="/practice/written" className="text-accent underline">
-                Start a new practice test
-              </Link>
+              <button
+                type="button"
+                className="text-accent underline disabled:opacity-60"
+                disabled={busy}
+                onClick={() => void linkNew(r.classification as "NEW_CONTENT" | "INDETERMINATE", r.id)}
+              >
+                Answer question {q.position} again as a new practice test
+              </button>
             </>
           )}
         </p>

@@ -8,6 +8,7 @@ import type { WrittenAttempt, WrittenPage, WrittenResult } from "@portal/contrac
 import { saveMapping, sealScript } from "@/app/actions/written";
 import { LessonBlocks } from "@/components/lesson-blocks";
 import { PendingAction } from "./pending-action";
+import { PractiseAgain } from "./practise-again";
 import { RecheckPanel } from "./recheck-panel";
 import { Notice } from "@/components/ui";
 
@@ -167,7 +168,16 @@ export function WrittenRunner({ attempt, result = null }: { attempt: WrittenAtte
   return (
     <div className="space-y-6">
       <header className="space-y-2">
-        <h1 className="text-2xl font-semibold tracking-tight">Written test</h1>
+        <h1 className="text-2xl font-semibold tracking-tight">{attempt.linked_from ? "New practice test" : "Written test"}</h1>
+        {attempt.linked_from && (
+          <Notice title="Linked to an earlier test">
+            New answers to question {attempt.linked_from.positions.join(", ")} of{" "}
+            <a className="text-accent underline" href={`/practice/written/${attempt.linked_from.attempt_id}`}>
+              your earlier test
+            </a>
+            . This test is marked on its own; the earlier result doesn&apos;t change.
+          </Notice>
+        )}
         {attempt.status === "sealed" && attempt.receipt && (
           <Notice tone="ok" title="Submitted for marking">
             Receipt {attempt.receipt.id.slice(0, 8)} · {attempt.receipt.answered_slots} answered, {attempt.receipt.unanswered_slots} marked not answered ·
@@ -245,6 +255,7 @@ export function WrittenRunner({ attempt, result = null }: { attempt: WrittenAtte
                 </div>
               ))}
               <RecheckPanel attemptId={attempt.id} result={result} marks={marks} />
+              <PractiseAgain attemptId={attempt.id} result={result} />
             </div>
           )}
         </section>

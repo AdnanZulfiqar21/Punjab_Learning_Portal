@@ -34,7 +34,14 @@ CAPTURE_POLICY_VERSION = 1
 
 class WrittenForm(Base):
     __tablename__ = "written_form"
-    __table_args__ = (UniqueConstraint("owner_id", "idempotency_key", name="uq_written_form_idempotency"),)
+    __table_args__ = (
+        UniqueConstraint("owner_id", "idempotency_key", name="uq_written_form_idempotency"),
+        CheckConstraint(
+            "(linked_from_attempt_id is null) = (link_reason is null) and "
+            "(link_reason is null or link_reason in ('NEW_CONTENT','INDETERMINATE','REWRITE'))",
+            name="written_form_link",
+        ),
+    )
     id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     owner_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("app_user.id", ondelete="RESTRICT"), index=True)
     idempotency_key: Mapped[str] = mapped_column(String(80))
@@ -50,6 +57,15 @@ class WrittenForm(Base):
     caps: Mapped[dict[str, int]] = mapped_column(JSONB)  # max pages, aggregate bytes, per-file bytes
     max_units: Mapped[int] = mapped_column(Integer)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+    # W04.S3.T3: a linked new practice attempt names the attempt it follows, why, and which of its questions it repeats.
+    # The original is never changed by it; this test has its own attempt, reservation and result.
+    linked_from_attempt_id: Mapped[uuid.UUID | None] = mapped_column(
+        ForeignKey("written_attempt.id", ondelete="RESTRICT", use_alter=True, name="fk_written_form_linked_from"),
+        index=True,
+    )
+    link_reason: Mapped[str | None] = mapped_column(String(14))
+    link_revision_id: Mapped[uuid.UUID | None] = mapped_column(UUID(as_uuid=True))
+    link_positions: Mapped[list[int] | None] = mapped_column(JSONB)
 
     items: Mapped[list[WrittenFormItem]] = relationship(back_populates="form", order_by="WrittenFormItem.position")
 
@@ -90,7 +106,7 @@ class WrittenAttempt(Base):
     manifest: Mapped[dict[str, Any]] = mapped_column(JSONB, default=dict)
     manifest_revision: Mapped[int] = mapped_column(Integer, default=0)
 
-    form: Mapped[WrittenForm] = relationship()
+    form: Mapped[WrittenForm] = relationship(foreign_keys=[form_id])
 
 
 class WrittenFile(Base):
