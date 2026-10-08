@@ -322,28 +322,39 @@ def lock_permit_admission(db: Session, user_id: uuid.UUID) -> None:
     db.execute(select(func.pg_advisory_xact_lock(permit_lock_key(user_id))))
 
 
-def reserve(db: Session, user_id: uuid.UUID, attempt_id: uuid.UUID, units: int, *, open_permits: int) -> None:
-    """Inside the written start transaction, after `lock_permit_admission` and an open count taken under it.
-    Also locks the funding entitlement so starts from different paths can't overspend it."""
+def lock_funding(db: Session, user_id: uuid.UUID) -> list[Entitlement]:
+    """Lock every possibly-funding entitlement row of the account (no time filter: validity is decided afterwards,
+    at the authoritative time read after the last admission wait; OCT8-07). Lock order: account, scope capacity,
+    attempts, entitlements."""
+    return list(
+        db.scalars(
+            select(Entitlement)
+            .where(Entitlement.user_id == user_id, Entitlement.status == "active", Entitlement.written_units > 0)
+            .order_by(Entitlement.id)
+            .with_for_update()
+            .execution_options(populate_existing=True)
+        )
+    )
+
+
+def reserve(
+    db: Session,
+    user_id: uuid.UUID,
+    attempt_id: uuid.UUID,
+    units: int,
+    *,
+    open_permits: int,
+    now: datetime,
+    funding: list[Entitlement],
+) -> None:
+    """Inside the written start transaction, with every admission lock already held and `now` read after them."""
     if open_permits >= MAX_OPEN_WRITTEN_PERMITS:
         raise AllowanceExhausted(
             f"Finish or submit your open written tests first (at most {MAX_OPEN_WRITTEN_PERMITS})."
         )
-    now = db_now(db)
-    ents = list(
-        db.scalars(
-            select(Entitlement)
-            .where(
-                Entitlement.user_id == user_id,
-                Entitlement.status == "active",
-                Entitlement.starts_at <= now,
-                Entitlement.ends_at > now,
-                Entitlement.written_units > 0,
-            )
-            .order_by(Entitlement.ends_at)
-            .with_for_update()
-        )
-    )
+    ents = sorted((e for e in funding if e.starts_at <= now < e.ends_at), key=lambda e: e.ends_at)
+    if not ents:
+        raise AccessRequired("Written practice needs an active plan. Your plan ended before this test could start.")
     for ent in ents:  # use the bucket that expires first
         reserved, accepted, consumed, remedy = _holds(_events(db, [ent.id]))
         if ent.written_units + remedy - reserved - accepted - consumed >= units:

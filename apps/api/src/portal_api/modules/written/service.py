@@ -277,30 +277,39 @@ def start(db: Session, who: Principal, form_id: uuid.UUID) -> WrittenAttempt:
     if existing is not None:  # a concurrent start of the same form won while we waited
         db.commit()
         return existing
-    now = db_now(db)  # the authoritative start: after waiting for admission, never before
-    review.lock_capacity(db, form.grade_number, form.subject_code)  # after the account lock: one fixed order
+    # OCT8-07: take every admission lock first, in one fixed order (account, scope capacity, the account's active
+    # attempts, its funding entitlements), and only then read the authoritative time that decides everything.
+    review.lock_capacity(db, form.grade_number, form.subject_code)
+    active = list(
+        db.scalars(
+            select(WrittenAttempt)
+            .where(WrittenAttempt.user_id == who.user.id, WrittenAttempt.status == "active")
+            .order_by(WrittenAttempt.id)
+            .with_for_update()
+            .execution_options(populate_existing=True)
+        )
+    )
+    funding = access.lock_funding(db, who.user.id)
+    now = db_now(db)  # the authoritative start: after the last admission wait, never before
+    open_permits = 0
+    for open_attempt in active:
+        if not _expire_if_due(db, open_attempt, now):  # a closed upload window releases its permit by the same rules
+            open_permits += 1
     if not review.capacity_state(db, form.grade_number, form.subject_code)["accepting"]:
-        db.commit()
+        db.commit()  # keep any expiries made above
         raise Conflict(
             "Teacher marking for this subject is full right now, so new written tests can't start. Try again later.",
             code_reason="REVIEW_AT_CAPACITY",
         )
-    open_permits = 0
-    for open_attempt in db.scalars(
-        select(WrittenAttempt)
-        .where(WrittenAttempt.user_id == who.user.id, WrittenAttempt.status == "active")
-        .order_by(WrittenAttempt.id)
-        .with_for_update()
-    ):
-        if not _expire_if_due(db, open_attempt, now):  # a closed upload window releases its permit by the same rules
-            open_permits += 1
     deadline = now + timedelta(seconds=form.writing_s) if form.writing_s else None
     cutoff = (deadline or now) + timedelta(seconds=form.upload_allowance_s)
     attempt_id = uuid.uuid4()
     # §20.13.4: reserve the maximum weighted units for this form, atomically with the attempt.
     try:
-        access.reserve(db, who.user.id, attempt_id, _form_units(db, form), open_permits=open_permits)
-    except access.AllowanceExhausted:
+        access.reserve(
+            db, who.user.id, attempt_id, _form_units(db, form), open_permits=open_permits, now=now, funding=funding
+        )
+    except (access.AllowanceExhausted, access.AccessRequired):
         db.commit()  # keep any expiries made above; nothing was reserved
         raise
     inserted = db.execute(
