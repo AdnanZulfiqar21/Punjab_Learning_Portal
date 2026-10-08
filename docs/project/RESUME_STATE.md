@@ -3,9 +3,9 @@
 **Updated:** 2026-10-08 · regenerated from `git log origin/main` and open PRs (review R09).
 
 ## Repository state
-- `main` = PRs #1 and #3–#19 merged (PR #2 closed unmerged).
-- PR #19 (support, RECHECK-01, REL-01) merged as `7933843` on 2026-10-08.
-- **Open:** `fix/written-evidence`: R01/R02 (EVIDENCE-01).
+- `main` = PRs #1 and #3–#20 merged (PR #2 closed unmerged).
+- PR #19 (support, RECHECK-01, REL-01) merged as `7933843`; PR #20 (R01/R02, EVIDENCE-01) merged as `5df22fd` on 2026-10-08.
+- **Open:** PR #21 `fix/permit-admission` (R03, ADMIT-01); `fix/lesson-access` (R07, ACCESS-02).
 - **Gate:** `main` has no branch protection or ruleset (checked 2026-10-08 with the GitHub API). The CI workflow (changes, api, web, mobile, content jobs) is the only check, and it is not marked required. Merge only on a green run of the exact head being merged.
 - **Git rules (GIT-01):** never rebase, amend pushed commits or force-push (including `--force-with-lease`). Merge `main` into feature branches. Merge stacked PRs base-first.
 
@@ -24,21 +24,21 @@ No academic content is published: B01 (reviewers) and rights confirmation block 
 ## Review findings (2026-10-08) and status
 | ID | Finding | Status |
 |---|---|---|
-| R01 | Upload validator accepts invalid PNG/PDF, rejects valid object-stream PDF | **Fixed** on `fix/written-evidence` (EVIDENCE-01) |
-| R02 | Page cap counts files, not PDF pages; storage I/O under the attempt lock | **Fixed** on `fix/written-evidence` |
-| R03 | Concurrent starts can pass the two-permit check | Open; reproduce on PostgreSQL first |
+| R01 | Upload validator accepts invalid PNG/PDF, rejects valid object-stream PDF | **Fixed and merged** (PR #20, EVIDENCE-01) |
+| R02 | Page cap counts files, not PDF pages; storage I/O under the attempt lock | **Fixed and merged** (PR #20) |
+| R03 | Concurrent starts can pass the two-permit check | **Reproduced and fixed** in PR #21 (ADMIT-01) |
 | R04 | Recheck policy vs implementation | **Fixed and merged** (PR #19, RECHECK-01) |
 | R05 | Whole-script consumption; no per-question allocations | Open |
 | R06 | Same-device trial protection not built | Open; account-level only |
-| R07 | All published lessons public | Open; needs preview/premium classification |
+| R07 | All published lessons public | **Fixed** on `fix/lesson-access` (ACCESS-02) |
 | R08 | 401 after sign-up; search 503 | 401 **fixed and merged** (REL-01); 503 open |
 | R09 | Stale records | This file regenerated; register labels reconciled |
 
 ## Next actions (in order)
-1. Merge `fix/written-evidence` after a green CI run on its final head. After deploying: run `portal-written-previews` once.
+1. After deploying PR #20: run `portal-written-previews` once.
 2. Schedule `portal-written-sweep-orphans` hourly wherever evidence is stored.
-3. R03: serialized per-account permit admission, with real concurrent PostgreSQL tests.
-4. R07, then R05, then R06 contracts.
+3. Merge PR #21 (R03, ADMIT-01) and the R07 PR (ACCESS-02) after green CI on their final heads.
+4. R05, then R06 contracts.
 5. R08 search 503: bounded mixed-load reproduction.
 6. Roadmap: rescan classification and regrades (W06.S2.T3/T4); native written capture and mobile help; notifications; CMS import/preview/release/export; media/storyboard; production adapters as prerequisites allow; automatic written-assessment contracts (no real provider calls until B10).
 
