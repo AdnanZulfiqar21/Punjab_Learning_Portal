@@ -58,7 +58,7 @@ async function Result({ id }: { id: string }) {
       </div>
       <ol className="space-y-4">
         {result.items.map((it) => (
-          <ReviewItem key={it.position} item={it} />
+          <ReviewItem key={it.position} item={it} attemptId={id} />
         ))}
       </ol>
       <Link href="/practice" className="inline-block rounded-lg border border-border bg-surface px-4 py-2 hover:border-accent">
@@ -68,7 +68,7 @@ async function Result({ id }: { id: string }) {
   );
 }
 
-function ReviewItem({ item }: { item: ItemReview }) {
+function ReviewItem({ item, attemptId }: { item: ItemReview; attemptId: string }) {
   const explanation = item.explanation as { correct?: Blocks; distractors?: Record<string, string>; worked_steps?: Blocks };
   return (
     <li className="space-y-3 rounded-xl border border-border bg-surface p-5">
@@ -107,6 +107,12 @@ function ReviewItem({ item }: { item: ItemReview }) {
           {(explanation.worked_steps?.length ?? 0) > 0 && <LessonBlocks blocks={explanation.worked_steps ?? []} headingOffset={3} />}
         </div>
       )}
+      <Link
+        href={`/help/new?category=academic_report&kind=attempt&id=${attemptId}&position=${item.position}`}
+        className="inline-block text-sm text-muted underline underline-offset-2 hover:text-foreground"
+      >
+        Report a problem with question {item.position}
+      </Link>
     </li>
   );
 }

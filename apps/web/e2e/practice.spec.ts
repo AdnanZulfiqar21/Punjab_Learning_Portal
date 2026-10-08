@@ -197,4 +197,38 @@ test("a teacher marks a submitted script and the learner sees the released marks
   await expect(page.getByText(/marked by a teacher/)).toBeVisible(AUTH);
   await expect(page.getByText("Question 1: 1 / 5")).toBeVisible();
   await expect(page.getByText("Fixture reason: half the expected points.")).toBeVisible();
+
+  // A recheck is asked for once, inside the window, for named questions; it doesn't use more allowance.
+  await page.getByText("Ask for a recheck").click();
+  await page.getByRole("group", { name: "Which questions?" }).getByLabel("Question 1").check();
+  await page.getByLabel("Why should it be marked again?").fill("Fixture reason: please look at part (a) again.");
+  await page.getByRole("button", { name: "Request recheck" }).click();
+  await expect(page.getByText("Recheck requested")).toBeVisible(AUTH);
+  await expect(page.getByText("Ask for a recheck")).toHaveCount(0);
+  await teacher.goto("/studio/marking");
+  const recheckRow = teacher.getByRole("listitem").filter({ hasText: `Script ${attemptId.slice(0, 8)}` }).filter({ hasText: "Recheck" });
+  await expect(recheckRow).toBeVisible(AUTH);
+
+  // The first marker can't recheck their own marking; a second teacher re-marks only the disputed question.
+  await recheckRow.getByRole("link").click();
+  await teacher.getByRole("button", { name: "Start marking" }).click();
+  await expect(teacher.getByText(/not marked this script before/)).toBeVisible(AUTH);
+  const second = await (await browser.newContext()).newPage();
+  await second.goto("/signin?next=/studio/marking");
+  await second.getByLabel("Email").fill("studio-reviewer2@example.com");
+  await second.getByLabel("Password").fill("studio-fixture-pass-1");
+  await second.getByRole("button", { name: "Sign in", exact: true }).click();
+  await expect(second).toHaveURL(/:\d+\/studio\/marking$/, AUTH);
+  await second.getByRole("listitem").filter({ hasText: `Script ${attemptId.slice(0, 8)}` }).filter({ hasText: "Recheck" }).getByRole("link").click();
+  await expect(second.getByRole("region", { name: "Recheck request" })).toContainText("The learner disputes version 1: question 1");
+  await expect(second.getByText("Fixture reason: please look at part (a) again.")).toBeVisible();
+  await second.getByRole("button", { name: "Start marking" }).click();
+  await second.getByRole("radiogroup", { name: "Award for a1" }).getByLabel("1", { exact: true }).check();
+  await second.getByLabel("Reason for a1").fill("Fixture reason: upheld after recheck.");
+  await second.getByRole("button", { name: "Release result" }).click();
+  await expect(second.getByText("Result released")).toBeVisible(AUTH);
+
+  await page.reload();
+  await expect(page.getByText(/Version 2: 1 · after recheck/)).toBeVisible(AUTH);
+  await expect(page.getByText(/already been rechecked/)).toBeVisible(); // upheld unchanged, so nothing new to appeal
 });

@@ -58,6 +58,9 @@ export type Access = S["AccessOut"];
 export type TrialStatus = S["TrialOut"];
 export type WrittenAllowance = S["AllowanceOut"];
 export type EntitlementInfo = S["EntitlementOut"];
+export type SupportTicket = S["TicketOut"];
+export type StaffSupportTicket = S["StaffTicketOut"];
+export type RecheckState = S["RecheckOut"];
 
 /** RFC 9457 problem details returned by every API error. */
 export interface Problem {

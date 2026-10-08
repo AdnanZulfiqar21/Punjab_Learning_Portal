@@ -518,6 +518,57 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/staff/support/tickets": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Support queue (scoped) */
+        get: operations["staff_queue_v1_staff_support_tickets_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/staff/support/tickets/{ticket_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Staff One */
+        get: operations["staff_one_v1_staff_support_tickets__ticket_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/staff/support/tickets/{ticket_id}/messages": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Staff Reply */
+        post: operations["staff_reply_v1_staff_support_tickets__ticket_id__messages_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/studio/block-registry": {
         parameters: {
             query?: never;
@@ -909,6 +960,58 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/support/tickets": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Mine */
+        get: operations["mine_v1_support_tickets_get"];
+        put?: never;
+        /** Ask for help or report a question */
+        post: operations["create_v1_support_tickets_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/support/tickets/{ticket_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** One */
+        get: operations["one_v1_support_tickets__ticket_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/support/tickets/{ticket_id}/messages": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Reply */
+        post: operations["reply_v1_support_tickets__ticket_id__messages_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/written-attempts/{attempt_id}": {
         parameters: {
             query?: never;
@@ -971,6 +1074,23 @@ export interface paths {
         get: operations["get_page_v1_written_attempts__attempt_id__pages__page_id__get"];
         put?: never;
         post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/written-attempts/{attempt_id}/recheck": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Ask a teacher to recheck released marks (same evidence; no extra allowance) */
+        post: operations["request_recheck_v1_written_attempts__attempt_id__recheck_post"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1301,6 +1421,7 @@ export interface components {
             pages: components["schemas"]["PageOut"][];
             /** Questions */
             questions: components["schemas"]["CaseQuestion"][];
+            recheck: components["schemas"]["RecheckScope"] | null;
             /**
              * Reference
              * @description Short script reference; learner identity is not shown to markers
@@ -1533,6 +1654,16 @@ export interface components {
                     };
                 };
             };
+            /**
+             * Expand Positions
+             * @description Recheck only: questions to add (academic adjudicators)
+             */
+            expand_positions?: number[];
+            /**
+             * Expansion Reason
+             * @default
+             */
+            expansion_reason: string;
             /** Expected Version */
             expected_version: number;
             /**
@@ -1692,6 +1823,20 @@ export interface components {
         HTTPValidationError: {
             /** Detail */
             detail?: components["schemas"]["ValidationError"][];
+        };
+        /** HistoryEntry */
+        HistoryEntry: {
+            /** Case Kind */
+            case_kind: string;
+            /**
+             * Released At
+             * Format: date-time
+             */
+            released_at: string;
+            /** Total Units */
+            total_units: number;
+            /** Version */
+            version: number;
         };
         /** HistoryEvent */
         HistoryEvent: {
@@ -2003,6 +2148,23 @@ export interface components {
             /** Status */
             status: string;
         };
+        /** MessageIn */
+        MessageIn: {
+            /** Body */
+            body: string;
+        };
+        /** MessageOut */
+        MessageOut: {
+            /** Body */
+            body: string;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /** From Staff */
+            from_staff: boolean;
+        };
         /** OpIn */
         OpIn: {
             /**
@@ -2181,6 +2343,106 @@ export interface components {
              * @enum {string}
              */
             reason: "manual" | "expiry";
+        };
+        /** RecheckIn */
+        RecheckIn: {
+            /**
+             * Criteria
+             * @description Optional: disputed criterion ids per question position
+             */
+            criteria?: {
+                [key: string]: string[];
+            };
+            /** Positions */
+            positions: number[];
+            /** Reason */
+            reason: string;
+        };
+        /** RecheckOut */
+        RecheckOut: {
+            /** Closed Reason */
+            closed_reason: ("window_ended" | "already_rechecked" | "no_corrected_questions") | null;
+            /**
+             * Eligible Positions
+             * @description Questions that can be disputed now (when available)
+             */
+            eligible_positions: number[];
+            /**
+             * Positions
+             * @description Questions in the open request (when requested)
+             */
+            positions: number[];
+            /** Reason */
+            reason: string | null;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "unavailable" | "available" | "requested" | "closed";
+            /**
+             * Target Version
+             * @description The released version a request targets
+             */
+            target_version: number | null;
+            /**
+             * Window Ends At
+             * @description 14 days after the disputed result was released
+             */
+            window_ends_at: string | null;
+        };
+        /** RecheckScope */
+        RecheckScope: {
+            /**
+             * Can Expand
+             * @description Whether you may widen the recheck (academic adjudicators only)
+             */
+            can_expand: boolean;
+            /**
+             * Carried Forward
+             * @description Earned units kept unchanged for questions outside the scope
+             */
+            carried_forward: {
+                [key: string]: number;
+            };
+            /**
+             * Criteria
+             * @description Optional disputed criteria per question
+             */
+            criteria: {
+                [key: string]: string[];
+            };
+            /**
+             * Expanded Positions
+             * @description Questions an adjudicator added, with a recorded reason
+             */
+            expanded_positions: number[];
+            /**
+             * Positions
+             * @description Questions the learner asked to be rechecked
+             */
+            positions: number[];
+            /** Reason */
+            reason: string;
+            /**
+             * Target Version
+             * @description The released version the learner disputes
+             */
+            target_version: number;
+        };
+        /** ReferenceIn */
+        ReferenceIn: {
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /**
+             * Kind
+             * @enum {string}
+             */
+            kind: "attempt" | "written_attempt";
+            /** Position */
+            position?: number | null;
         };
         /** ResultOut */
         ResultOut: {
@@ -2522,6 +2784,32 @@ export interface components {
             /** Source Id */
             source_id: string;
         };
+        /** StaffMessageIn */
+        StaffMessageIn: {
+            /** Body */
+            body: string;
+            /**
+             * Internal
+             * @default false
+             */
+            internal: boolean;
+            /** Status */
+            status?: ("open" | "in_progress" | "waiting_learner" | "resolved") | null;
+        };
+        /** StaffMessageOut */
+        StaffMessageOut: {
+            /** Body */
+            body: string;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /** From Staff */
+            from_staff: boolean;
+            /** Internal */
+            internal: boolean;
+        };
         /** StaffScore */
         StaffScore: {
             /** Awards */
@@ -2547,6 +2835,46 @@ export interface components {
             total_units: number;
             /** Version */
             version: number;
+        };
+        /** StaffTicketOut */
+        StaffTicketOut: {
+            /**
+             * Category
+             * @enum {string}
+             */
+            category: "account" | "access" | "technical" | "academic_report" | "other";
+            /** Context */
+            context: {
+                [key: string]: unknown;
+            };
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Messages */
+            messages: components["schemas"]["StaffMessageOut"][];
+            /** Reference */
+            reference: {
+                [key: string]: unknown;
+            };
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "open" | "in_progress" | "waiting_learner" | "resolved";
+            /** Subject */
+            subject: string;
+            /**
+             * Updated At
+             * Format: date-time
+             */
+            updated_at: string;
         };
         /** SubjectInGrade */
         SubjectInGrade: {
@@ -2581,6 +2909,55 @@ export interface components {
              * @description False when the attempt was finalised by another request or by expiry
              */
             same_request: boolean;
+        };
+        /** TicketIn */
+        TicketIn: {
+            /** Body */
+            body: string;
+            /**
+             * Category
+             * @enum {string}
+             */
+            category: "account" | "access" | "technical" | "academic_report" | "other";
+            reference?: components["schemas"]["ReferenceIn"] | null;
+            /** Subject */
+            subject: string;
+        };
+        /** TicketOut */
+        TicketOut: {
+            /**
+             * Category
+             * @enum {string}
+             */
+            category: "account" | "access" | "technical" | "academic_report" | "other";
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Messages */
+            messages: components["schemas"]["MessageOut"][];
+            /** Reference */
+            reference: {
+                [key: string]: unknown;
+            };
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "open" | "in_progress" | "waiting_learner" | "resolved";
+            /** Subject */
+            subject: string;
+            /**
+             * Updated At
+             * Format: date-time
+             */
+            updated_at: string;
         };
         /** TopicNode */
         TopicNode: {
@@ -2928,10 +3305,16 @@ export interface components {
         WrittenResultOut: {
             /** Decision Method */
             decision_method: string | null;
+            /**
+             * History
+             * @description Every released version, oldest first; corrections never erase history
+             */
+            history: components["schemas"]["HistoryEntry"][];
             /** Max Units */
             max_units: number;
             /** Questions */
             questions: components["schemas"]["QuestionResult"][];
+            recheck: components["schemas"]["RecheckOut"];
             /** Released At */
             released_at: string | null;
             /**
@@ -3889,6 +4272,104 @@ export interface operations {
             };
         };
     };
+    staff_queue_v1_staff_support_tickets_get: {
+        parameters: {
+            query?: {
+                status?: ("open" | "in_progress" | "waiting_learner" | "resolved") | null;
+                category?: ("account" | "access" | "technical" | "academic_report" | "other") | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StaffTicketOut"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    staff_one_v1_staff_support_tickets__ticket_id__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                ticket_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StaffTicketOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    staff_reply_v1_staff_support_tickets__ticket_id__messages_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                ticket_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["StaffMessageIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StaffTicketOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     block_registry_v1_studio_block_registry_get: {
         parameters: {
             query?: never;
@@ -4622,6 +5103,125 @@ export interface operations {
             };
         };
     };
+    mine_v1_support_tickets_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TicketOut"][];
+                };
+            };
+        };
+    };
+    create_v1_support_tickets_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["TicketIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TicketOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    one_v1_support_tickets__ticket_id__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                ticket_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TicketOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    reply_v1_support_tickets__ticket_id__messages_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                ticket_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["MessageIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TicketOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     get_attempt_v1_written_attempts__attempt_id__get: {
         parameters: {
             query?: never;
@@ -4738,6 +5338,41 @@ export interface operations {
                 };
                 content: {
                     "application/json": unknown;
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    request_recheck_v1_written_attempts__attempt_id__recheck_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                attempt_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["RecheckIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RecheckOut"];
                 };
             };
             /** @description Validation Error */

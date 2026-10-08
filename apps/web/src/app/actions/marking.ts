@@ -29,11 +29,14 @@ export async function saveMarks(
   expectedVersion: number,
   awards: Record<string, Record<string, { units: number; reason: string }>>,
   release: boolean,
+  expansion?: { positions: number[]; reason: string },
 ): Promise<MarkingOutcome> {
   return call(`/v1/studio/written/cases/${encodeURIComponent(caseId)}/decision`, {
     expected_version: expectedVersion,
     awards,
     release,
     reason: release ? "Released by the marking teacher" : "Saved by the marking teacher",
+    expand_positions: expansion?.positions ?? [],
+    expansion_reason: expansion?.reason ?? "",
   });
 }

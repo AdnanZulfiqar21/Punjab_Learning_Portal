@@ -568,6 +568,16 @@
             "title": "Questions",
             "type": "array"
           },
+          "recheck": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/RecheckScope"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "reference": {
             "description": "Short script reference; learner identity is not shown to markers",
             "title": "Reference",
@@ -606,7 +616,8 @@
           "questions",
           "pages",
           "lease_expires_at",
-          "latest"
+          "latest",
+          "recheck"
         ],
         "title": "CaseDetail",
         "type": "object"
@@ -1167,6 +1178,21 @@
             "title": "Awards",
             "type": "object"
           },
+          "expand_positions": {
+            "description": "Recheck only: questions to add (academic adjudicators)",
+            "items": {
+              "type": "integer"
+            },
+            "maxItems": 20,
+            "title": "Expand Positions",
+            "type": "array"
+          },
+          "expansion_reason": {
+            "default": "",
+            "maxLength": 1000,
+            "title": "Expansion Reason",
+            "type": "string"
+          },
           "expected_version": {
             "minimum": 0.0,
             "title": "Expected Version",
@@ -1538,6 +1564,35 @@
           }
         },
         "title": "HTTPValidationError",
+        "type": "object"
+      },
+      "HistoryEntry": {
+        "properties": {
+          "case_kind": {
+            "title": "Case Kind",
+            "type": "string"
+          },
+          "released_at": {
+            "format": "date-time",
+            "title": "Released At",
+            "type": "string"
+          },
+          "total_units": {
+            "title": "Total Units",
+            "type": "integer"
+          },
+          "version": {
+            "title": "Version",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "version",
+          "total_units",
+          "case_kind",
+          "released_at"
+        ],
+        "title": "HistoryEntry",
         "type": "object"
       },
       "HistoryEvent": {
@@ -2463,6 +2518,45 @@
         "title": "MeOut",
         "type": "object"
       },
+      "MessageIn": {
+        "properties": {
+          "body": {
+            "maxLength": 4000,
+            "minLength": 1,
+            "title": "Body",
+            "type": "string"
+          }
+        },
+        "required": [
+          "body"
+        ],
+        "title": "MessageIn",
+        "type": "object"
+      },
+      "MessageOut": {
+        "properties": {
+          "body": {
+            "title": "Body",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "from_staff": {
+            "title": "From Staff",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "from_staff",
+          "body",
+          "created_at"
+        ],
+        "title": "MessageOut",
+        "type": "object"
+      },
       "OpIn": {
         "properties": {
           "op_id": {
@@ -2985,6 +3079,235 @@
           "ledger_hash"
         ],
         "title": "ReceiptOut",
+        "type": "object"
+      },
+      "RecheckIn": {
+        "properties": {
+          "criteria": {
+            "additionalProperties": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "description": "Optional: disputed criterion ids per question position",
+            "title": "Criteria",
+            "type": "object"
+          },
+          "positions": {
+            "items": {
+              "type": "integer"
+            },
+            "maxItems": 20,
+            "minItems": 1,
+            "title": "Positions",
+            "type": "array"
+          },
+          "reason": {
+            "maxLength": 2000,
+            "minLength": 10,
+            "title": "Reason",
+            "type": "string"
+          }
+        },
+        "required": [
+          "reason",
+          "positions"
+        ],
+        "title": "RecheckIn",
+        "type": "object"
+      },
+      "RecheckOut": {
+        "properties": {
+          "closed_reason": {
+            "anyOf": [
+              {
+                "enum": [
+                  "window_ended",
+                  "already_rechecked",
+                  "no_corrected_questions"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Closed Reason"
+          },
+          "eligible_positions": {
+            "description": "Questions that can be disputed now (when available)",
+            "items": {
+              "type": "integer"
+            },
+            "title": "Eligible Positions",
+            "type": "array"
+          },
+          "positions": {
+            "description": "Questions in the open request (when requested)",
+            "items": {
+              "type": "integer"
+            },
+            "title": "Positions",
+            "type": "array"
+          },
+          "reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reason"
+          },
+          "status": {
+            "enum": [
+              "unavailable",
+              "available",
+              "requested",
+              "closed"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "target_version": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The released version a request targets",
+            "title": "Target Version"
+          },
+          "window_ends_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "14 days after the disputed result was released",
+            "title": "Window Ends At"
+          }
+        },
+        "required": [
+          "status",
+          "window_ends_at",
+          "reason",
+          "eligible_positions",
+          "positions",
+          "target_version",
+          "closed_reason"
+        ],
+        "title": "RecheckOut",
+        "type": "object"
+      },
+      "RecheckScope": {
+        "properties": {
+          "can_expand": {
+            "description": "Whether you may widen the recheck (academic adjudicators only)",
+            "title": "Can Expand",
+            "type": "boolean"
+          },
+          "carried_forward": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "description": "Earned units kept unchanged for questions outside the scope",
+            "title": "Carried Forward",
+            "type": "object"
+          },
+          "criteria": {
+            "additionalProperties": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "description": "Optional disputed criteria per question",
+            "title": "Criteria",
+            "type": "object"
+          },
+          "expanded_positions": {
+            "description": "Questions an adjudicator added, with a recorded reason",
+            "items": {
+              "type": "integer"
+            },
+            "title": "Expanded Positions",
+            "type": "array"
+          },
+          "positions": {
+            "description": "Questions the learner asked to be rechecked",
+            "items": {
+              "type": "integer"
+            },
+            "title": "Positions",
+            "type": "array"
+          },
+          "reason": {
+            "title": "Reason",
+            "type": "string"
+          },
+          "target_version": {
+            "description": "The released version the learner disputes",
+            "title": "Target Version",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "target_version",
+          "positions",
+          "criteria",
+          "reason",
+          "expanded_positions",
+          "can_expand",
+          "carried_forward"
+        ],
+        "title": "RecheckScope",
+        "type": "object"
+      },
+      "ReferenceIn": {
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "kind": {
+            "enum": [
+              "attempt",
+              "written_attempt"
+            ],
+            "title": "Kind",
+            "type": "string"
+          },
+          "position": {
+            "anyOf": [
+              {
+                "maximum": 200.0,
+                "minimum": 1.0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Position"
+          }
+        },
+        "required": [
+          "kind",
+          "id"
+        ],
+        "title": "ReferenceIn",
         "type": "object"
       },
       "ResultOut": {
@@ -3901,6 +4224,72 @@
         "title": "SourceRef",
         "type": "object"
       },
+      "StaffMessageIn": {
+        "properties": {
+          "body": {
+            "maxLength": 4000,
+            "minLength": 1,
+            "title": "Body",
+            "type": "string"
+          },
+          "internal": {
+            "default": false,
+            "title": "Internal",
+            "type": "boolean"
+          },
+          "status": {
+            "anyOf": [
+              {
+                "enum": [
+                  "open",
+                  "in_progress",
+                  "waiting_learner",
+                  "resolved"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Status"
+          }
+        },
+        "required": [
+          "body"
+        ],
+        "title": "StaffMessageIn",
+        "type": "object"
+      },
+      "StaffMessageOut": {
+        "properties": {
+          "body": {
+            "title": "Body",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "from_staff": {
+            "title": "From Staff",
+            "type": "boolean"
+          },
+          "internal": {
+            "title": "Internal",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "from_staff",
+          "body",
+          "created_at",
+          "internal"
+        ],
+        "title": "StaffMessageOut",
+        "type": "object"
+      },
       "StaffScore": {
         "properties": {
           "awards": {
@@ -3952,6 +4341,80 @@
           "created_at"
         ],
         "title": "StaffScore",
+        "type": "object"
+      },
+      "StaffTicketOut": {
+        "properties": {
+          "category": {
+            "enum": [
+              "account",
+              "access",
+              "technical",
+              "academic_report",
+              "other"
+            ],
+            "title": "Category",
+            "type": "string"
+          },
+          "context": {
+            "additionalProperties": true,
+            "title": "Context",
+            "type": "object"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "messages": {
+            "items": {
+              "$ref": "#/components/schemas/StaffMessageOut"
+            },
+            "title": "Messages",
+            "type": "array"
+          },
+          "reference": {
+            "additionalProperties": true,
+            "title": "Reference",
+            "type": "object"
+          },
+          "status": {
+            "enum": [
+              "open",
+              "in_progress",
+              "waiting_learner",
+              "resolved"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "subject": {
+            "title": "Subject",
+            "type": "string"
+          },
+          "updated_at": {
+            "format": "date-time",
+            "title": "Updated At",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "category",
+          "subject",
+          "status",
+          "reference",
+          "created_at",
+          "updated_at",
+          "messages",
+          "context"
+        ],
+        "title": "StaffTicketOut",
         "type": "object"
       },
       "SubjectInGrade": {
@@ -4031,6 +4494,118 @@
           "reconciliation"
         ],
         "title": "SubmitOut",
+        "type": "object"
+      },
+      "TicketIn": {
+        "properties": {
+          "body": {
+            "maxLength": 4000,
+            "minLength": 5,
+            "title": "Body",
+            "type": "string"
+          },
+          "category": {
+            "enum": [
+              "account",
+              "access",
+              "technical",
+              "academic_report",
+              "other"
+            ],
+            "title": "Category",
+            "type": "string"
+          },
+          "reference": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ReferenceIn"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "subject": {
+            "maxLength": 200,
+            "minLength": 3,
+            "title": "Subject",
+            "type": "string"
+          }
+        },
+        "required": [
+          "category",
+          "subject",
+          "body"
+        ],
+        "title": "TicketIn",
+        "type": "object"
+      },
+      "TicketOut": {
+        "properties": {
+          "category": {
+            "enum": [
+              "account",
+              "access",
+              "technical",
+              "academic_report",
+              "other"
+            ],
+            "title": "Category",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "messages": {
+            "items": {
+              "$ref": "#/components/schemas/MessageOut"
+            },
+            "title": "Messages",
+            "type": "array"
+          },
+          "reference": {
+            "additionalProperties": true,
+            "title": "Reference",
+            "type": "object"
+          },
+          "status": {
+            "enum": [
+              "open",
+              "in_progress",
+              "waiting_learner",
+              "resolved"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "subject": {
+            "title": "Subject",
+            "type": "string"
+          },
+          "updated_at": {
+            "format": "date-time",
+            "title": "Updated At",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "category",
+          "subject",
+          "status",
+          "reference",
+          "created_at",
+          "updated_at",
+          "messages"
+        ],
+        "title": "TicketOut",
         "type": "object"
       },
       "TopicNode": {
@@ -4918,6 +5493,14 @@
             ],
             "title": "Decision Method"
           },
+          "history": {
+            "description": "Every released version, oldest first; corrections never erase history",
+            "items": {
+              "$ref": "#/components/schemas/HistoryEntry"
+            },
+            "title": "History",
+            "type": "array"
+          },
           "max_units": {
             "title": "Max Units",
             "type": "integer"
@@ -4928,6 +5511,9 @@
             },
             "title": "Questions",
             "type": "array"
+          },
+          "recheck": {
+            "$ref": "#/components/schemas/RecheckOut"
           },
           "released_at": {
             "anyOf": [
@@ -4979,7 +5565,9 @@
           "max_units",
           "released_at",
           "decision_method",
-          "questions"
+          "questions",
+          "recheck",
+          "history"
         ],
         "title": "WrittenResultOut",
         "type": "object"
@@ -6372,6 +6960,184 @@
         ]
       }
     },
+    "/v1/staff/support/tickets": {
+      "get": {
+        "operationId": "staff_queue_v1_staff_support_tickets_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "status",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "open",
+                    "in_progress",
+                    "waiting_learner",
+                    "resolved"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Status"
+            }
+          },
+          {
+            "in": "query",
+            "name": "category",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "account",
+                    "access",
+                    "technical",
+                    "academic_report",
+                    "other"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Category"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/StaffTicketOut"
+                  },
+                  "title": "Response Staff Queue V1 Staff Support Tickets Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Support queue (scoped)",
+        "tags": [
+          "support"
+        ]
+      }
+    },
+    "/v1/staff/support/tickets/{ticket_id}": {
+      "get": {
+        "operationId": "staff_one_v1_staff_support_tickets__ticket_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ticket_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Ticket Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StaffTicketOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Staff One",
+        "tags": [
+          "support"
+        ]
+      }
+    },
+    "/v1/staff/support/tickets/{ticket_id}/messages": {
+      "post": {
+        "operationId": "staff_reply_v1_staff_support_tickets__ticket_id__messages_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ticket_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Ticket Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StaffMessageIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StaffTicketOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Staff Reply",
+        "tags": [
+          "support"
+        ]
+      }
+    },
     "/v1/studio/block-registry": {
       "get": {
         "operationId": "block_registry_v1_studio_block_registry_get",
@@ -7515,6 +8281,166 @@
         ]
       }
     },
+    "/v1/support/tickets": {
+      "get": {
+        "operationId": "mine_v1_support_tickets_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/TicketOut"
+                  },
+                  "title": "Response Mine V1 Support Tickets Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Mine",
+        "tags": [
+          "support"
+        ]
+      },
+      "post": {
+        "operationId": "create_v1_support_tickets_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TicketIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TicketOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Ask for help or report a question",
+        "tags": [
+          "support"
+        ]
+      }
+    },
+    "/v1/support/tickets/{ticket_id}": {
+      "get": {
+        "operationId": "one_v1_support_tickets__ticket_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ticket_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Ticket Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TicketOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "One",
+        "tags": [
+          "support"
+        ]
+      }
+    },
+    "/v1/support/tickets/{ticket_id}/messages": {
+      "post": {
+        "operationId": "reply_v1_support_tickets__ticket_id__messages_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ticket_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Ticket Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MessageIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TicketOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Reply",
+        "tags": [
+          "support"
+        ]
+      }
+    },
     "/v1/written-attempts/{attempt_id}": {
       "get": {
         "operationId": "get_attempt_v1_written_attempts__attempt_id__get",
@@ -7702,6 +8628,59 @@
         "summary": "Your own uploaded page (private)",
         "tags": [
           "written practice"
+        ]
+      }
+    },
+    "/v1/written-attempts/{attempt_id}/recheck": {
+      "post": {
+        "operationId": "request_recheck_v1_written_attempts__attempt_id__recheck_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "attempt_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Attempt Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RecheckIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecheckOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Ask a teacher to recheck released marks (same evidence; no extra allowance)",
+        "tags": [
+          "written marking"
         ]
       }
     },
