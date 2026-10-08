@@ -272,8 +272,21 @@ def weight_of(question_type: str | None) -> int:
     return QUESTION_WEIGHTS.get(question_type or "short", 1)
 
 
+def permit_lock_key(user_id: uuid.UUID | str) -> int:
+    """Transaction advisory-lock key that serializes written permit admission per account (review R03)."""
+    v = uuid.UUID(str(user_id)).int >> 64
+    return v - (1 << 64) if v >= (1 << 63) else v  # signed 64-bit for pg_advisory_xact_lock
+
+
+def lock_permit_admission(db: Session, user_id: uuid.UUID) -> None:
+    """Serialize every permit admission for this account until the transaction ends. Held only for the short
+    admission transaction; a key collision between two accounts only adds waiting, never a wrong decision."""
+    db.execute(select(func.pg_advisory_xact_lock(permit_lock_key(user_id))))
+
+
 def reserve(db: Session, user_id: uuid.UUID, attempt_id: uuid.UUID, units: int, *, open_permits: int) -> None:
-    """Inside the written start transaction. Locks the funding entitlement so concurrent starts can't overspend."""
+    """Inside the written start transaction, after `lock_permit_admission` and an open count taken under it.
+    Also locks the funding entitlement so starts from different paths can't overspend it."""
     if open_permits >= MAX_OPEN_WRITTEN_PERMITS:
         raise AllowanceExhausted(
             f"Finish or submit your open written tests first (at most {MAX_OPEN_WRITTEN_PERMITS})."
