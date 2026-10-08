@@ -27,6 +27,8 @@ DEPLOYED_ENV = {
     "PORTAL_OIDC_ISSUER": "https://idp.example.org/pool",
     "PORTAL_OIDC_AUDIENCE": "client-1",
     "PORTAL_EVIDENCE_STORE": "s3",
+    "PORTAL_TRIAL_DEVICE_EVIDENCE": "fallback",
+    "PORTAL_TRIAL_REF_PEPPER": "deployment-secret-fixture",
 }
 
 

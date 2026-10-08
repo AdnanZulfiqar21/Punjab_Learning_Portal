@@ -3,12 +3,14 @@
 from __future__ import annotations
 
 import logging
+from collections.abc import Awaitable, Callable
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
 
 from portal_api import errors, observability
 from portal_api.config import get_settings
+from portal_api.modules.access import trial_devices
 from portal_api.modules.access.router import router as access_router
 from portal_api.modules.assessment.router import router as assessment_router
 from portal_api.modules.content import router as content
@@ -36,10 +38,28 @@ def create_app() -> FastAPI:
         allow_origins=settings.cors_origins,
         allow_credentials=True,
         allow_methods=["GET", "POST", "PUT", "PATCH", "DELETE"],
-        allow_headers=["Content-Type", "Authorization", "Idempotency-Key", "X-Portal-Client", observability.HEADER],
+        allow_headers=[
+            "Content-Type",
+            "Authorization",
+            "Idempotency-Key",
+            "X-Portal-Client",
+            "X-Portal-Install",
+            observability.HEADER,
+        ],
         expose_headers=[observability.HEADER],
     )
     observability.install(app)
+
+    @app.middleware("http")
+    async def client_context(request: Request, call_next: Callable[[Request], Awaitable[Response]]) -> Response:
+        token = trial_devices.CLIENT_CONTEXT.set(
+            (request.headers.get("x-portal-client"), request.headers.get("x-portal-install"))
+        )
+        try:
+            return await call_next(request)
+        finally:
+            trial_devices.CLIENT_CONTEXT.reset(token)
+
     errors.install(app)
     app.include_router(system_router)
     app.include_router(curriculum_router)

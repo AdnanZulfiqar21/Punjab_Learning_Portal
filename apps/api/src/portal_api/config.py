@@ -61,6 +61,12 @@ class Settings(BaseSettings):
     evidence_store: Literal["local", "s3"] = "local"
     evidence_dir: str = "var/evidence"
 
+    # Trial device evidence (roadmap §16, review R06). "required": unknown native evidence never completes a claim.
+    # "fallback": while a device provider is unconfigured (B07/B08), native activation uses account history alone and
+    # records that it did. Deployed roles must choose explicitly. The pepper salts opaque installation references.
+    trial_device_evidence: Literal["required", "fallback"] | None = None
+    trial_ref_pepper: str = "dev-only-trial-pepper"
+
     @model_validator(mode="after")
     def _validate_role(self) -> Settings:
         if self.role in (Role.production, Role.staging):
@@ -85,6 +91,10 @@ class Settings(BaseSettings):
                 problems.append("oidc_issuer points at a development issuer")
             if self.evidence_store == "local":
                 problems.append("evidence_store must be private object storage, not the local development directory")
+            if self.trial_device_evidence is None:
+                problems.append("trial_device_evidence must be set explicitly (required or fallback; roadmap §16)")
+            if self.trial_ref_pepper.startswith("dev-only"):
+                problems.append("trial_ref_pepper must be a deployment secret")
             if problems:
                 raise ConfigurationError(f"refusing to start role={self.role.value}: " + "; ".join(problems))
         if self.db_max_overflow != 0 and self.role is Role.production:
