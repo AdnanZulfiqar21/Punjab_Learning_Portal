@@ -18,6 +18,7 @@ import os
 import subprocess
 import sys
 import tempfile
+import threading
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
@@ -80,9 +81,27 @@ def precheck(data: bytes) -> str:
     return kind
 
 
+class WorkersBusy(RuntimeError):
+    """Every evidence worker slot stayed busy for the wait limit: answered as a retryable 503."""
+
+
+MAX_WORKERS = 4  # concurrent child processes per API process (memory bound), independent of the DB pool
+WORKER_QUEUE_WAIT_S = 20
+_slots = threading.BoundedSemaphore(MAX_WORKERS)
+
+
 def inspect(data: bytes) -> Inspected:
     """Validate and render previews in an isolated child process. Raises Rejected with a learner-facing reason."""
     kind = precheck(data)
+    if not _slots.acquire(timeout=WORKER_QUEUE_WAIT_S):
+        raise WorkersBusy("evidence workers are busy")
+    try:
+        return _run_worker(data, kind)
+    finally:
+        _slots.release()
+
+
+def _run_worker(data: bytes, kind: str) -> Inspected:
     with tempfile.TemporaryDirectory(prefix="portal-evidence-") as tmp:
         work = Path(tmp)
         (work / "input").write_bytes(data)

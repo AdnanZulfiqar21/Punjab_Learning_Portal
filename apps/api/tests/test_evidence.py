@@ -194,7 +194,7 @@ def test_a_refused_admission_leaves_no_stored_objects(
 
     def second_check_fails(*args: Any) -> None:
         calls["n"] += 1
-        if calls["n"] == 2:  # the authoritative check under the lock, after storing
+        if calls["n"] == 1:  # the authoritative check under the lock, after storing (the early check uses plain values)
             from portal_api.errors import Unprocessable
 
             raise Unprocessable("Fixture: another upload filled the script.", code_reason="PAGE_LIMIT")

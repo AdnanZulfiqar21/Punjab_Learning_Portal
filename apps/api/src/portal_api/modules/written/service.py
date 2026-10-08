@@ -341,7 +341,12 @@ def _form_units(db: Session, form: WrittenForm) -> int:
 
 
 def _lock(db: Session, attempt_id: uuid.UUID, who: Principal) -> WrittenAttempt:
-    attempt = db.scalar(select(WrittenAttempt).where(WrittenAttempt.id == attempt_id).with_for_update())
+    attempt = db.scalar(
+        select(WrittenAttempt)
+        .where(WrittenAttempt.id == attempt_id)
+        .with_for_update()
+        .execution_options(populate_existing=True)  # never decide on attributes loaded before the lock (OCT8-01)
+    )
     if attempt is None or attempt.user_id != who.user.id:
         raise NotFound("Attempt not found.")
     return attempt
@@ -381,12 +386,21 @@ def _files(db: Session, attempt_id: uuid.UUID) -> list[WrittenFile]:
     )
 
 
+def _usage(db: Session, attempt_id: uuid.UUID) -> tuple[int, int, int]:
+    """(files, logical pages, bytes) already admitted to this attempt, as plain numbers."""
+    files = _files(db, attempt_id)
+    return len(files), len(_pages(db, attempt_id)), sum(f.size for f in files)
+
+
 def _check_caps(db: Session, attempt: WrittenAttempt, new_pages: int, new_bytes: int) -> None:
-    caps = attempt.form.caps
+    _check_cap_values(dict(attempt.form.caps), *_usage(db, attempt.id), new_pages, new_bytes)
+
+
+def _check_cap_values(
+    caps: dict[str, Any], files: int, pages: int, used_bytes: int, new_pages: int, new_bytes: int
+) -> None:
     max_files = int(caps.get("max_files", caps["max_pages"]))
-    files = _files(db, attempt.id)
-    pages = len(_pages(db, attempt.id))
-    if len(files) >= max_files:
+    if files >= max_files:
         raise Unprocessable(f"An answer script can have at most {max_files} files.", code_reason="FILE_LIMIT")
     if pages + new_pages > caps["max_pages"]:
         raise Unprocessable(
@@ -394,7 +408,7 @@ def _check_caps(db: Session, attempt: WrittenAttempt, new_pages: int, new_bytes:
             f"{pages} are already uploaded.",
             code_reason="PAGE_LIMIT",
         )
-    if sum(f.size for f in files) + new_bytes > caps["max_total_bytes"]:
+    if used_bytes + new_bytes > caps["max_total_bytes"]:
         raise Unprocessable(
             f"The script would exceed {caps['max_total_bytes'] // (1024 * 1024)} MB in total.", code_reason="BYTE_LIMIT"
         )
@@ -437,31 +451,37 @@ def upload_page(
     3. Under the attempt lock (short): the clock, expiry, status, duplicates and every cap are checked again, then rows
        are committed. A refused admission removes the objects it stored, so nothing unreferenced is left behind.
     """
+    sha = hashlib.sha256(data).hexdigest()
     attempt = db.get(WrittenAttempt, attempt_id)
     if attempt is None or attempt.user_id != who.user.id:
         raise NotFound("Attempt not found.")
-    sha = hashlib.sha256(data).hexdigest()
     if attempt.status == "active" and (dup := _existing(db, attempt.id, sha)) is not None:
         return dup, pages_of_file(db, dup.id), True, []  # exact duplicate within this attempt: reuse, never re-store
     _require_open(attempt)
+    # OCT8-01: copy what the slow steps need into plain values, then end the read transaction so no pooled connection
+    # is held while parsing, storing or hashing. ORM objects are not touched again until the admission lock below.
+    key_prefix = str(attempt.id)
+    caps = dict(attempt.form.caps)
+    usage = _usage(db, attempt.id)
+    db.rollback()
+
     try:
-        inspected = evidence.inspect(data)
+        inspected = evidence.inspect(data)  # bounded child process; its own concurrency limit, not the pool's
     except evidence.Rejected as e:
         raise Unprocessable(e.reason, code_reason="UNSUPPORTED_FILE") from e
-    _check_caps(db, attempt, len(inspected.pages), len(data))  # early, honest refusal before storing anything
-    db.rollback()  # no snapshot or lock is held while storing
+    _check_cap_values(caps, *usage, len(inspected.pages), len(data))  # early, honest refusal before storing anything
 
     store = storage.get_store()
     file_id = uuid.uuid4()
     stored_keys: list[str] = []
     try:
-        original = store.put(f"{attempt.id}/{file_id}/original", data)
+        original = store.put(f"{key_prefix}/{file_id}/original", data)
         stored_keys.append(original.key)
         if original.sha256 != sha:
             raise Conflict("The upload changed while it was being stored. Upload it again.")
         previews = []
         for i, lp in enumerate(inspected.pages, start=1):
-            pv = store.put(f"{attempt.id}/{file_id}/page-{i}.png", lp.preview_png)
+            pv = store.put(f"{key_prefix}/{file_id}/page-{i}.png", lp.preview_png)
             stored_keys.append(pv.key)
             previews.append((lp, pv))
 
@@ -616,22 +636,36 @@ def seal(
     # Pre-validate referenced objects outside the admission transaction (bounded I/O, no lock held).
     store = storage.get_store()
     referenced = {p for slot in attempt.manifest.get("slots", {}).values() for p in slot.get("pages", [])}
+    # OCT8-01: read every reference as plain values, end the transaction, then hash with no connection held.
+    refs = [
+        (str(pid), fid, pkey, psha, fkey, fsha)
+        for pid, fid, pkey, psha, fkey, fsha in db.execute(
+            select(
+                WrittenPage.id,
+                WrittenPage.file_id,
+                WrittenPage.preview_key,
+                WrittenPage.preview_sha256,
+                WrittenFile.storage_key,
+                WrittenFile.sha256,
+            )
+            .join(WrittenFile, WrittenFile.id == WrittenPage.file_id)
+            .where(WrittenPage.attempt_id == attempt.id, WrittenPage.status == "uploaded")
+        ).all()
+        if str(pid) in referenced
+    ]
+    db.rollback()
     verified: dict[str, str] = {}
     preview_verified: dict[str, str] = {}
     file_ok: dict[uuid.UUID, str] = {}
-    for page in _pages(db, attempt.id):
-        if str(page.id) not in referenced:
-            continue
-        if page.file_id not in file_ok:
-            f = db.get(WrittenFile, page.file_id)
-            if f is None or store.sha256(f.storage_key) != f.sha256:
-                raise Conflict(f"An uploaded file failed its integrity check; upload it again ({page.file_id}).")
-            file_ok[page.file_id] = f.sha256
-        if page.preview_key is None or store.sha256(page.preview_key) != page.preview_sha256:
-            raise Conflict(f"A page preview is missing or damaged; upload that page again ({page.id}).")
-        verified[str(page.id)] = file_ok[page.file_id]
-        preview_verified[str(page.id)] = page.preview_sha256 or ""
-    db.rollback()  # release the read snapshot before taking the lock
+    for pid, fid, pkey, psha, fkey, fsha in refs:
+        if fid not in file_ok:
+            if store.sha256(fkey) != fsha:
+                raise Conflict(f"An uploaded file failed its integrity check; upload it again ({fid}).")
+            file_ok[fid] = fsha
+        if pkey is None or store.sha256(pkey) != psha:
+            raise Conflict(f"A page preview is missing or damaged; upload that page again ({pid}).")
+        verified[pid] = file_ok[fid]
+        preview_verified[pid] = psha or ""
 
     attempt = _lock(db, attempt_id, who)
     now = db_now(db)
