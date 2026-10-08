@@ -2702,10 +2702,23 @@
         "type": "object"
       },
       "PageOut": {
+        "description": "One logical page: a photo, or one page of a PDF. Mapping and the page cap count these.",
         "properties": {
           "content_type": {
+            "description": "Type of the uploaded original; the page itself is served as a PNG preview",
             "title": "Content Type",
             "type": "string"
+          },
+          "file_id": {
+            "description": "The uploaded file this page came from",
+            "format": "uuid",
+            "title": "File Id",
+            "type": "string"
+          },
+          "file_pages": {
+            "description": "How many pages the file has (1 for a photo)",
+            "title": "File Pages",
+            "type": "integer"
           },
           "height": {
             "anyOf": [
@@ -2716,6 +2729,7 @@
                 "type": "null"
               }
             ],
+            "description": "Preview height in pixels",
             "title": "Height"
           },
           "id": {
@@ -2723,11 +2737,13 @@
             "title": "Id",
             "type": "string"
           },
-          "pdf_pages": {
-            "title": "Pdf Pages",
+          "page_index": {
+            "description": "1-based position within its file",
+            "title": "Page Index",
             "type": "integer"
           },
           "size": {
+            "description": "Size of the uploaded file in bytes",
             "title": "Size",
             "type": "integer"
           },
@@ -2745,16 +2761,19 @@
                 "type": "null"
               }
             ],
+            "description": "Preview width in pixels",
             "title": "Width"
           }
         },
         "required": [
           "id",
+          "file_id",
+          "page_index",
+          "file_pages",
           "size",
           "content_type",
           "width",
           "height",
-          "pdf_pages",
           "uploaded_at"
         ],
         "title": "PageOut",
@@ -4748,8 +4767,13 @@
             "title": "Duplicate",
             "type": "boolean"
           },
-          "page": {
-            "$ref": "#/components/schemas/PageOut"
+          "pages": {
+            "description": "The logical pages this file added, in order",
+            "items": {
+              "$ref": "#/components/schemas/PageOut"
+            },
+            "title": "Pages",
+            "type": "array"
           },
           "warnings": {
             "items": {
@@ -4760,7 +4784,7 @@
           }
         },
         "required": [
-          "page",
+          "pages",
           "duplicate",
           "warnings"
         ],
@@ -8574,7 +8598,7 @@
             "description": "Validation Error"
           }
         },
-        "summary": "Upload one page (raw JPEG, PNG or PDF body; bounded)",
+        "summary": "Upload one file (raw JPEG, PNG or PDF body); it is validated in an isolated worker",
         "tags": [
           "written practice"
         ]
@@ -8625,7 +8649,7 @@
             "description": "Validation Error"
           }
         },
-        "summary": "Your own uploaded page (private)",
+        "summary": "Your own page as its validated PNG preview (private; originals are never served)",
         "tags": [
           "written practice"
         ]

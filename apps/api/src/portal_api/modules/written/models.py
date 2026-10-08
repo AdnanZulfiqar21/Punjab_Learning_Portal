@@ -93,13 +93,14 @@ class WrittenAttempt(Base):
     form: Mapped[WrittenForm] = relationship()
 
 
-class WrittenPage(Base):
-    """An uploaded evidence object: immutable, never overwritten. Exact duplicates are reused within one attempt."""
+class WrittenFile(Base):
+    """An uploaded original (photo or PDF): private, immutable, never shown directly. Exact duplicates within one
+    attempt are reused. Its logical pages carry the validated previews that people actually see (review R01/R02)."""
 
-    __tablename__ = "written_page"
+    __tablename__ = "written_file"
     __table_args__ = (
-        UniqueConstraint("attempt_id", "sha256", name="uq_written_page_attempt_hash"),
-        CheckConstraint("status in ('uploaded','withdrawn')", name="written_page_status"),
+        UniqueConstraint("attempt_id", "sha256", name="uq_written_file_attempt_hash"),
+        CheckConstraint("status in ('uploaded','withdrawn')", name="written_file_status"),
     )
     id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     attempt_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("written_attempt.id", ondelete="RESTRICT"), index=True)
@@ -107,11 +108,31 @@ class WrittenPage(Base):
     sha256: Mapped[str] = mapped_column(String(64))
     size: Mapped[int] = mapped_column(Integer)
     content_type: Mapped[str] = mapped_column(String(40))
-    width: Mapped[int | None] = mapped_column(Integer)
-    height: Mapped[int | None] = mapped_column(Integer)
-    pdf_pages: Mapped[int] = mapped_column(SmallInteger, default=1)
+    page_count: Mapped[int] = mapped_column(SmallInteger)
     uploaded_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
-    after_cutoff: Mapped[bool] = mapped_column(default=False)
+    status: Mapped[str] = mapped_column(String(10), default="uploaded")
+
+
+class WrittenPage(Base):
+    """One logical page: a photo, or one page of a PDF. Answer mapping and the page cap count these, not files.
+
+    Its preview is a fresh PNG rendered by the isolated evidence worker. The first page of a file shares the file's id
+    (pages migrated from before R02 kept their ids, so existing mappings still resolve)."""
+
+    __tablename__ = "written_page"
+    __table_args__ = (
+        UniqueConstraint("file_id", "page_index", name="uq_written_page_file_index"),
+        CheckConstraint("status in ('uploaded','withdrawn')", name="written_page_status"),
+    )
+    id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    attempt_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("written_attempt.id", ondelete="RESTRICT"), index=True)
+    file_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("written_file.id", ondelete="RESTRICT"), index=True)
+    page_index: Mapped[int] = mapped_column(SmallInteger)  # 1-based within the file
+    width: Mapped[int | None] = mapped_column(Integer)  # preview pixels
+    height: Mapped[int | None] = mapped_column(Integer)
+    preview_key: Mapped[str | None] = mapped_column(Text)  # null only for pages migrated before previews existed
+    preview_sha256: Mapped[str | None] = mapped_column(String(64))
+    uploaded_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
     status: Mapped[str] = mapped_column(String(10), default="uploaded")
 
 
@@ -126,7 +147,10 @@ class WrittenReceipt(Base):
     admitted_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
     manifest_revision: Mapped[int] = mapped_column(Integer)
     manifest: Mapped[dict[str, Any]] = mapped_column(JSONB)
-    page_hashes: Mapped[dict[str, str]] = mapped_column(JSONB)  # page id -> sha256 verified at seal
+    page_hashes: Mapped[dict[str, str]] = mapped_column(JSONB)  # logical page id -> its file's sha256 at seal
+    preview_hashes: Mapped[dict[str, str]] = mapped_column(
+        JSONB, default=dict, server_default="{}"
+    )  # logical page id -> the exact preview teachers mark from
     answered_slots: Mapped[int] = mapped_column(SmallInteger)
     unanswered_slots: Mapped[int] = mapped_column(SmallInteger)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())

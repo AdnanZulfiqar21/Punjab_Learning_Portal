@@ -153,6 +153,24 @@ test("written practice: upload a page, map it, declare a part unanswered and sub
   await expect(page.getByLabel("Add photos or a PDF")).toHaveCount(0); // no edits after submission
 });
 
+test("a PDF becomes one page per PDF page, and each page maps on its own", async ({ page }) => {
+  await newLearner(page);
+  await page.goto("/practice/written?grade=11&subject=biology");
+  await page.getByRole("group", { name: "Chapters" }).getByRole("checkbox").first().check();
+  await page.getByRole("button", { name: "Start written test" }).click();
+  await expect(page).toHaveURL(/:\d+\/practice\/written\/[0-9a-f-]{36}$/, AUTH);
+  await page.getByLabel("Add photos or a PDF").setInputFiles("e2e/fixtures/synthetic-3-pages.pdf");
+  const uploaded = page.getByRole("list", { name: "Uploaded pages" });
+  await expect(uploaded.getByText("PDF page 3 of 3")).toBeVisible(AUTH);
+  await expect(uploaded.getByRole("img")).toHaveCount(3); // every page is shown as its validated preview
+  await page.getByRole("group", { name: /Question 1 \(a\)/ }).getByLabel("Page 2").check();
+  await page.getByRole("group", { name: /Question 1 \(b\)/ }).getByLabel("Page 3").check();
+  await expect(page.getByRole("status").filter({ hasText: /Saved · revision \d+/ })).toBeVisible(AUTH);
+  await page.getByRole("button", { name: "Submit for marking" }).click();
+  await expect(page.getByText("Submitted for marking")).toBeVisible(AUTH);
+  await expect(page.getByText(/2 answered, 0 marked not answered/)).toBeVisible();
+});
+
 test("uploads are refused from other sites", async ({ page }) => {
   await newLearner(page);
   const res = await page.request.post("/practice/written/00000000-0000-0000-0000-000000000000/upload", {

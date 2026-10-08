@@ -18,6 +18,7 @@ from portal_api.modules.identity.deps import CurrentPrincipal, Principal, requir
 from portal_api.modules.identity.permissions import Permission
 from portal_api.modules.written import review
 from portal_api.modules.written.models import WrittenAttempt, WrittenForm
+from portal_api.modules.written.router import pages_out
 from portal_api.modules.written.schemas import PageOut
 
 router = APIRouter(prefix="/v1", tags=["written marking"])
@@ -187,18 +188,7 @@ def _detail(db: Session, case: review.WrittenReviewCase, who: Principal) -> Case
         max_units=ctx["max_units"],
         manifest=ctx["manifest"],
         questions=[CaseQuestion(**q) for q in ctx["questions"]],
-        pages=[
-            PageOut(
-                id=p.id,
-                size=p.size,
-                content_type=p.content_type,
-                width=p.width,
-                height=p.height,
-                pdf_pages=p.pdf_pages,
-                uploaded_at=p.uploaded_at,
-            )
-            for p in ctx["pages"]
-        ],
+        pages=pages_out(db, ctx["pages"]),
         lease_expires_at=case.lease_expires_at,
         latest=_staff_score(review.latest(db, case.attempt_id)),
         recheck=_recheck_scope(db, ctx["recheck"], case, who),

@@ -79,9 +79,9 @@ export function WrittenRunner({ attempt, result = null }: { attempt: WrittenAtte
       setUploads((u) => [...u, { id: tmp, name: file.name, progress: 0, status: "uploading" }]);
       const res = await uploadFile(attempt.id, file, (p) => setUploads((u) => u.map((x) => (x.id === tmp ? { ...x, progress: p } : x))));
       if (res.status === 201) {
-        const body = res.body as { page: WrittenPage; duplicate: boolean; warnings: string[] };
+        const body = res.body as { pages: WrittenPage[]; duplicate: boolean; warnings: string[] };
         setUploads((u) => u.filter((x) => x.id !== tmp));
-        setPages((p) => (p.some((x) => x.id === body.page.id) ? p : [...p, body.page]));
+        setPages((p) => [...p, ...body.pages.filter((n) => !p.some((x) => x.id === n.id))]); // a PDF adds one page per PDF page
         setNotes((n) => [...n, ...(body.duplicate ? [`${file.name} was already uploaded.`] : []), ...body.warnings.map((w) => `${file.name}: ${w}`)]);
       } else {
         const detail = (res.body as { detail?: string } | null)?.detail;
@@ -281,17 +281,16 @@ export function WrittenRunner({ attempt, result = null }: { attempt: WrittenAtte
         <ul className="grid gap-3 sm:grid-cols-3" aria-label="Uploaded pages">
           {pages.map((p, i) => (
             <li key={p.id} className="space-y-1 rounded-lg border border-border bg-surface p-2 text-sm">
-              {p.content_type.startsWith("image/") ? (
-                // eslint-disable-next-line @next/next/no-img-element -- private, uncached evidence served by our own route
-                <img src={`/practice/written/${attempt.id}/pages/${p.id}`} alt={`Page ${i + 1}`} className="h-40 w-full rounded object-contain" />
-              ) : (
-                <a href={`/practice/written/${attempt.id}/pages/${p.id}`} target="_blank" rel="noreferrer" className="flex h-40 items-center justify-center rounded bg-surface-muted underline">
-                  PDF, {p.pdf_pages} page(s)
-                </a>
-              )}
+              {/* eslint-disable-next-line @next/next/no-img-element -- private, uncached preview served by our own route */}
+              <img src={`/practice/written/${attempt.id}/pages/${p.id}`} alt={`Page ${i + 1}`} className="h-40 w-full rounded object-contain" />
               <p>
                 Page {i + 1} · {attempt.status === "sealed" ? "submitted" : "uploaded, not yet submitted"}
               </p>
+              {p.file_pages > 1 && (
+                <p className="text-muted">
+                  PDF page {p.page_index} of {p.file_pages}
+                </p>
+              )}
             </li>
           ))}
           {uploads.map((u) => (

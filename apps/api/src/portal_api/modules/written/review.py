@@ -257,7 +257,7 @@ def case_context(db: Session, case: WrittenReviewCase) -> dict[str, Any]:
         "recheck": recheck_request(db, case),
         "manifest": receipt.manifest,
         "questions": questions,
-        "pages": sorted(pages, key=lambda p: (p.uploaded_at, str(p.id))),
+        "pages": sorted(pages, key=lambda p: (p.uploaded_at, str(p.file_id), p.page_index)),
         "max_units": form.max_units,
     }
 
@@ -277,7 +277,9 @@ def staff_page(db: Session, who: Principal, case_id: uuid.UUID, page_id: uuid.UU
     page = db.get(WrittenPage, page_id)
     if receipt is None or page is None or str(page_id) not in receipt.page_hashes:
         raise NotFound("Page not found.")
-    return storage.get_store().get(page.storage_key), page.content_type
+    if page.preview_key is None:
+        raise Conflict("This page's preview hasn't been generated yet.", code_reason="PREVIEW_MISSING")
+    return storage.get_store().get(page.preview_key), "image/png"
 
 
 def _check_awards(

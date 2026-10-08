@@ -21,7 +21,7 @@ def _reviewer(client: TestClient, grade: int = 12, subject: str = "chemistry") -
 def _sealed_script(client: TestClient, chapter: str) -> tuple[Staff, dict[str, Any]]:
     learner = _learner(client)
     a = _start(client, learner, chapter)
-    page = _upload(client, learner, a["id"], _png(seed=int(uuid.uuid4().int % 250))).json()["page"]["id"]
+    page = _upload(client, learner, a["id"], _png(seed=int(uuid.uuid4().int % 250))).json()["pages"][0]["id"]
     m = _map(client, learner, a, {"1:a": {"pages": [page]}, "1:b": {"unanswered": True}}).json()
     assert _seal(client, learner, a["id"], m["manifest_revision"]).status_code == 200
     return learner, a

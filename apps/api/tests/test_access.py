@@ -133,7 +133,7 @@ def test_written_allowance_ledger(client: TestClient, published_written: dict[st
     a = _start_written(client, who, chapter).json()
     al = _access(client, who)["written_allowance"]
     assert (al["reserved"], al["available"]) == (1, 9)  # one short question reserved at start
-    page = _upload(client, who, a["id"], _png(seed=41)).json()["page"]["id"]
+    page = _upload(client, who, a["id"], _png(seed=41)).json()["pages"][0]["id"]
     m = _map(client, who, a, {"1:a": {"pages": [page]}, "1:b": {"unanswered": True}}).json()
     assert _seal(client, who, a["id"], m["manifest_revision"]).status_code == 200
     al = _access(client, who)["written_allowance"]

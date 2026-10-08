@@ -113,19 +113,16 @@ export function MarkingWorkspace({ initial }: { initial: MarkingCase }) {
 
       <div className="grid gap-6 lg:grid-cols-2">
         <section aria-label="Submitted pages" className="space-y-3">
-          {c.pages.map((p, i) =>
-            p.content_type.startsWith("image/") ? (
-              <figure key={p.id} className="rounded-lg border border-border bg-surface p-2">
-                {/* eslint-disable-next-line @next/next/no-img-element -- private evidence served by our own route */}
-                <img src={`/studio/marking/${c.id}/pages/${p.id}`} alt={`Submitted page ${i + 1}`} className="w-full rounded" />
-                <figcaption className="mt-1 text-sm text-muted">Page {i + 1}</figcaption>
-              </figure>
-            ) : (
-              <a key={p.id} href={`/studio/marking/${c.id}/pages/${p.id}`} target="_blank" rel="noreferrer" className="block rounded-lg border border-border bg-surface p-4 underline">
-                Page {i + 1}: PDF, {p.pdf_pages} page(s)
-              </a>
-            ),
-          )}
+          {c.pages.map((p, i) => (
+            <figure key={p.id} className="rounded-lg border border-border bg-surface p-2">
+              {/* eslint-disable-next-line @next/next/no-img-element -- validated private preview served by our own route */}
+              <img src={`/studio/marking/${c.id}/pages/${p.id}`} alt={`Submitted page ${i + 1}`} className="w-full rounded" />
+              <figcaption className="mt-1 text-sm text-muted">
+                Page {i + 1}
+                {p.file_pages > 1 && ` · PDF page ${p.page_index} of ${p.file_pages}`}
+              </figcaption>
+            </figure>
+          ))}
         </section>
 
         <section aria-label="Marks" className="space-y-4">
