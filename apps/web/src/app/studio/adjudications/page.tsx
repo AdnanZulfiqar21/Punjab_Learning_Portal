@@ -48,9 +48,13 @@ async function List() {
           </div>
           <div className="flex gap-2">
             <Badge tone={a.status === "active" ? "ok" : "info"}>{a.status === "active" ? "Active" : "Superseded"}</Badge>
-            <Badge>
-              {String(a.impact.processed_attempts)} processed · {String(a.impact.attempts)} still to apply
-            </Badge>
+            {a.latest_job ? (
+              <Badge tone={a.latest_job.status === "failed" ? "warn" : "info"}>
+                Last run: {a.latest_job.status} · {a.latest_job.processed} processed · {a.latest_job.failed} failed
+              </Badge>
+            ) : (
+              <Badge>Not applied yet</Badge>
+            )}
           </div>
         </li>
       ))}

@@ -189,6 +189,7 @@ jobs:
           uv run portal-dev-seed-staff   # development-only staff fixtures for the studio journeys
           uv run portal-dev-seed-practice   # development-only technical-fixture questions for practice journeys
           nohup uv run uvicorn portal_api.main:app --host 127.0.0.1 --port 8100 > /tmp/api.log 2>&1 &
+          nohup uv run portal-written-worker --interval 1 > /tmp/worker.log 2>&1 &   # written regrade jobs (W06-06)
           for i in $(seq 1 60); do curl -sf http://127.0.0.1:8100/readyz && break; sleep 1; done
       - name: Start web
         working-directory: apps/web
@@ -201,7 +202,7 @@ jobs:
         env:
           CI: "1"
       - if: failure()
-        run: tail -n 100 /tmp/api.log /tmp/web.log
+        run: tail -n 100 /tmp/api.log /tmp/web.log /tmp/worker.log
       - if: failure()
         uses: actions/upload-artifact@v7
         with:

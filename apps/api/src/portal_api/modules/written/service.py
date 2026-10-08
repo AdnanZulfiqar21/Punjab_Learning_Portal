@@ -723,6 +723,12 @@ def seal(
     attempt.status = "sealed"
     attempt.sealed_at = now
     review.open_initial_case(db, attempt)  # enters the teacher marking queue in the same transaction
+    # W06-02: a rubric correction approved while this script was being written applies once it is sealed; queue it
+    # for this script in the same transaction (marking on the old basis is refused until it has run).
+    from portal_api.modules.written import adjudication, regrade_jobs
+
+    for adj in adjudication.corrections_for_sealed(db, attempt):
+        regrade_jobs.enqueue(db, adj.id, adj.approved_by, "script sealed after the correction was approved")
     answered_positions = sorted({int(k.split(":")[0]) for k, v in slots.items() if v.get("pages")})
     access.accept(
         db,

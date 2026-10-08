@@ -221,9 +221,11 @@ export function WrittenRunner({ attempt, result = null }: { attempt: WrittenAtte
                 <p className="text-lg">
                   <span className="text-3xl font-semibold tabular-nums">{marks(result.total_units ?? 0)}</span> / {marks(result.max_units)}
                   <span className="ml-2 text-sm text-muted">
-                    {result.decision_method === "SYSTEM" && result.history.at(-1)?.case_kind === "regrade"
-                      ? "marked by a teacher; carried forward unchanged after a marking-guide correction"
-                      : "marked by a teacher"}
+                    {(result.awaiting_regrade ?? []).length > 0
+                      ? `marked by a teacher; question ${(result.awaiting_regrade ?? []).join(", ")} is waiting to be re-marked under a corrected marking guide`
+                      : result.decision_method === "SYSTEM" && result.history.at(-1)?.case_kind === "regrade"
+                        ? "marked by a teacher; carried forward unchanged after a marking-guide correction"
+                        : "marked by a teacher"}
                   </span>
                 </p>
               ) : (

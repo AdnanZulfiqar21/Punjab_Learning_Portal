@@ -17,6 +17,7 @@ from sqlalchemy import (
     CheckConstraint,
     DateTime,
     ForeignKey,
+    Index,
     Integer,
     SmallInteger,
     String,
@@ -24,6 +25,7 @@ from sqlalchemy import (
     UniqueConstraint,
     func,
     select,
+    text,
 )
 from sqlalchemy.dialects.postgresql import JSONB, UUID
 from sqlalchemy.exc import IntegrityError
@@ -86,7 +88,17 @@ class WrittenReviewCase(Base):
 
 class WrittenScoreVersion(Base):
     __tablename__ = "written_score_version"
-    __table_args__ = (UniqueConstraint("attempt_id", "version"),)
+    __table_args__ = (
+        UniqueConstraint("attempt_id", "version"),
+        # W06-03: one SYSTEM carry-forward per attempt and effective correction set (duplicate runs add nothing).
+        Index(
+            "uq_written_regrade_version",
+            "attempt_id",
+            "adjudication_hash",
+            unique=True,
+            postgresql_where=text("case_kind = 'regrade' and decision_method = 'SYSTEM'"),
+        ),
+    )
     id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     attempt_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("written_attempt.id", ondelete="RESTRICT"), index=True)
     case_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("written_review_case.id", ondelete="RESTRICT"))
@@ -112,6 +124,11 @@ class WrittenScoreVersion(Base):
     draft_intent: Mapped[dict[str, Any] | None] = mapped_column(JSONB)
     # W06.S2.T3: for a SYSTEM regrade, the adjudication and the human decisions carried forward with their evidence.
     regrade_detail: Mapped[dict[str, Any] | None] = mapped_column(JSONB)
+    # W06-03: position -> the authorised rubric corrections behind the rubric it was marked under ([] = the pinned
+    # rubric), with a hash of the whole set. Written once with the version; later corrections never change it.
+    # Null only on versions released before this was recorded.
+    effective_adjudication: Mapped[dict[str, list[str]] | None] = mapped_column(JSONB)
+    adjudication_hash: Mapped[str | None] = mapped_column(String(64))
     # R05: position -> {"status": scored|pending|unavailable, "reason": str}. Missing entries mean scored (pre-R05).
     question_status: Mapped[dict[str, Any]] = mapped_column(JSONB, default=dict, server_default="{}")
     completeness: Mapped[str] = mapped_column(String(20), default="complete", server_default="complete")
@@ -346,6 +363,13 @@ def lease(db: Session, who: Principal, case_id: uuid.UUID) -> WrittenReviewCase:
     ):
         # W06.S2.T1: a recheck is an independent second look, never the original marker grading their own work.
         raise Forbidden("A recheck must be marked by a teacher who has not marked this script before.")
+    if case.case_kind == "regrade" and case.adjudication_id is not None:
+        from portal_api.modules.written.adjudication import RubricAdjudication
+
+        adj = db.get(RubricAdjudication, case.adjudication_id)
+        if adj is not None and adj.approved_by == who.user.id:
+            # §20.10: the adjudicator authorises the changed basis; the re-marking is an independent teacher's.
+            raise Forbidden("The adjudicator who approved this correction can't also mark the regrade it caused.")
     now = _now(db)
     if case.lease_holder not in (None, who.user.id) and case.lease_expires_at and case.lease_expires_at > now:
         raise Conflict("Another teacher is marking this script.", lease_expires_at=case.lease_expires_at.isoformat())
@@ -695,6 +719,22 @@ def decide(
     pending = sorted(int(p) for p, st in all_status.items() if st["status"] == "pending")
     unavailable = sorted(int(p) for p, st in all_status.items() if st["status"] == "unavailable")
     completeness = "partial_pending" if pending else "partial_unavailable" if unavailable else "complete"
+    from portal_api.modules.written import adjudication
+
+    # W06-03: the rubric each marked question uses must be its current effective basis, and the authorised
+    # correction chain behind it is recorded immutably with the version.
+    attempt_row = db.get(WrittenAttempt, case.attempt_id)
+    assert attempt_row is not None
+    ctx_rubrics = {str(q["position"]): q["rubric_version_id"] for q in ctx["questions"]}
+    basis = adjudication.basis_for_decision(db, attempt_row, ctx_rubrics, set(in_scope))
+    kept = {p for p in ctx_rubrics if scope is not None and p not in scope and current is not None}
+    rubric_ids = {
+        p: (current.rubric_version_ids.get(p, r) if p in kept and current else r) for p, r in ctx_rubrics.items()
+    }
+    eff = {
+        **{p: e for p, e in ((current.effective_adjudication or {}) if current else {}).items() if p in kept},
+        **basis,
+    }
     prior = latest(db, case.attempt_id)
     sv = WrittenScoreVersion(
         attempt_id=case.attempt_id,
@@ -705,7 +745,9 @@ def decide(
         case_kind=case.case_kind,
         assessor_id=who.user.id,
         receipt_id=ctx["receipt"].id,
-        rubric_version_ids={str(q["position"]): q["rubric_version_id"] for q in ctx["questions"]},
+        rubric_version_ids=rubric_ids,
+        effective_adjudication=eff,
+        adjudication_hash=adjudication.provenance_hash(eff),
         awards={
             **carried_awards,
             **{
@@ -1059,6 +1101,8 @@ def publish_resolution(
         assessor_id=assessor_id,
         receipt_id=current.receipt_id,
         rubric_version_ids=current.rubric_version_ids,
+        effective_adjudication=current.effective_adjudication,
+        adjudication_hash=current.adjudication_hash,
         awards={**current.awards, **award_updates},
         question_units={p: u for p, u in units.items() if status.get(p, {}).get("status") == "scored"},
         question_status=status,

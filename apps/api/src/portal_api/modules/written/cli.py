@@ -83,28 +83,3 @@ def learner_deadlines(argv: list[str] | None = None) -> int:
         n = rescans.expire_learner_actions(db)
     print(f"questions resolved unavailable after the learner deadline: {n}")
     return 0
-
-
-def regrade(argv: list[str] | None = None) -> int:
-    """portal-written-regrade ADJUDICATION_ID [--batch N] [--once]: apply an approved rubric correction to affected
-    attempts in bounded, resumable batches (W06.S2.T3). Safe to re-run; already processed attempts are skipped."""
-    import argparse
-    import uuid as _uuid
-
-    from portal_api.modules.written import adjudication
-
-    p = argparse.ArgumentParser(prog="portal-written-regrade")
-    p.add_argument("adjudication_id")
-    p.add_argument("--batch", type=int, default=50)
-    p.add_argument("--once", action="store_true", help="process one batch and stop")
-    args = p.parse_args(argv)
-    total = 0
-    with get_sessionmaker()() as db:
-        while True:
-            out = adjudication.run(db, _uuid.UUID(args.adjudication_id), args.batch)
-            total += out["processed"]
-            print(f"processed {out['processed']} ({out.get('outcomes', {})}); remaining {out['remaining']}")
-            if args.once or out["superseded"] or out["processed"] == 0 or out["remaining"] == 0:
-                break
-    print(f"attempts processed: {total}")
-    return 0

@@ -66,7 +66,9 @@ export type RecheckState = S["RecheckOut"];
 export type LinkedForm = S["LinkedFormOut"];
 export type LinkedAttempt = S["LinkedAttemptOut"];
 export type Adjudication = S["AdjudicationOut"];
-export type RegradeRun = S["RegradeRunOut"];
+export type RegradeJob = S["RegradeJobOut"];
+export type AdjudicationSources = S["AdjudicationSourcesOut"];
+export type RegradeAttempts = S["RegradeAttemptsOut"];
 export type WrittenNotice = S["NoticeOut"];
 
 /** RFC 9457 problem details returned by every API error. */

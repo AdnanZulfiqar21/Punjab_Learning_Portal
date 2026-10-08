@@ -233,6 +233,10 @@ class WrittenResultOut(BaseModel):
     notices: list[NoticeOut] = Field(
         default_factory=list, description="Changes to this result's basis, such as a marking-guide correction"
     )
+    awaiting_regrade: list[int] = Field(
+        default_factory=list,
+        description="Questions a teacher will re-mark under a corrected marking guide (current marks stand until then)",
+    )
     linked_attempts: list[LinkedAttemptOut] = Field(
         default_factory=list,
         description="New practice tests linked to this one (W04.S3.T3); they never change this result",
@@ -318,7 +322,8 @@ def _revisions(db: Session, attempt_id: uuid.UUID, positions: set[int] | None) -
     cutoff = attempt.upload_cutoff_at
     for r in rescans.revisions_for(db, attempt_id, positions):
         pages = list(db.scalars(sa_select(WrittenPage).where(WrittenPage.file_id == r.file_id)))
-        timing = "after_cutoff" if r.post_cutoff else "at_cutoff" if r.created_at == cutoff else "before_cutoff"
+        # The stored flag is authoritative for "after"; at-or-before is split only for display.
+        timing = "after_cutoff" if r.post_cutoff else "at_cutoff" if r.created_at >= cutoff else "before_cutoff"
         out.append(
             RevisionOut(
                 id=r.id,
@@ -449,6 +454,7 @@ def my_result(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, response: Re
             recheck=RecheckOut(**review.recheck_state(db, attempt.id)),
             history=[],
             notices=_notices(db, attempt.id),
+            awaiting_regrade=_awaiting_regrade(db, attempt.id),
             linked_attempts=[LinkedAttemptOut(**x) for x in linked.linked_attempts(db, attempt.id)],
         )
     ctx_questions = {str(fi.position): fi for fi in form.items}
@@ -512,8 +518,22 @@ def my_result(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, response: Re
         recheck=RecheckOut(**review.recheck_state(db, attempt.id)),
         history=history,
         notices=_notices(db, attempt.id),
+        awaiting_regrade=_awaiting_regrade(db, attempt.id),
         linked_attempts=[LinkedAttemptOut(**x) for x in linked.linked_attempts(db, attempt.id)],
     )
+
+
+def _awaiting_regrade(db: Session, attempt_id: uuid.UUID) -> list[int]:
+    from sqlalchemy import select as sa_select
+
+    rows = db.scalars(
+        sa_select(review.WrittenReviewCase.positions).where(
+            review.WrittenReviewCase.attempt_id == attempt_id,
+            review.WrittenReviewCase.case_kind == "regrade",
+            review.WrittenReviewCase.status == "queued",
+        )
+    )
+    return sorted({p for ps in rows for p in (ps or [])})
 
 
 def _notices(db: Session, attempt_id: uuid.UUID) -> list[NoticeOut]:
@@ -709,13 +729,20 @@ def confirm_unanswered(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, pos
 
 
 # ------------------------------------------------------------------ W06.S2.T3 rubric adjudications across attempts
+# W06-01: every mutation needs the adjudicate permission with an MFA session (the matrix's MFA_REQUIRED); reading is
+# open to scoped academic staff so markers can see why a regrade case exists.
+Adjudicator = Annotated[Principal, Depends(require(Permission.adjudicate))]
+
+
 class AdjudicationIn(BaseModel):
     rubric_item_id: uuid.UUID
     reason: str = Field(min_length=20, max_length=2000)
     from_version_ids: list[uuid.UUID] | None = Field(
         default=None, description="Earlier published versions to correct; default: all of them for the same question"
     )
-    supersedes_id: uuid.UUID | None = Field(default=None, description="The active correction this one replaces")
+    supersedes_ids: list[uuid.UUID] = Field(
+        default_factory=list, description="Every active correction this one replaces (must match the overlap exactly)"
+    )
 
 
 class AdjudicationOut(BaseModel):
@@ -727,26 +754,79 @@ class AdjudicationOut(BaseModel):
     to_version_id: uuid.UUID
     reason: str
     status: Literal["active", "superseded"]
-    supersedes_id: uuid.UUID | None
+    supersedes_ids: list[str]
+    superseded_by_id: uuid.UUID | None
     approved_at: datetime
     compatibility: dict[str, Any] = Field(
         description="Per corrected version: criterion diff and whether human marks carry forward unchanged"
     )
-    impact: dict[str, Any] = Field(
-        description="Affected forms, attempts, released results, rescans, planned question outcomes and progress"
+    impact: dict[str, Any] | None = Field(
+        default=None,
+        description="total_attempts, processed, remaining, failed, unaffected, forms, released_results, "
+        "evidence_revisions, applied_outcomes (detail view only; computed with bounded aggregate queries)",
+    )
+    latest_job: RegradeJobOut | None = None
+
+
+class RegradeJobOut(BaseModel):
+    id: uuid.UUID
+    adjudication_id: uuid.UUID
+    status: Literal["queued", "running", "succeeded", "failed", "superseded"]
+    processed: int
+    regraded: int
+    unaffected: int
+    failed: int
+    remaining: int | None
+    batches: int
+    last_error: str | None
+    created_at: datetime
+    started_at: datetime | None
+    finished_at: datetime | None
+
+
+class AdjudicationSourcesOut(BaseModel):
+    published_version_id: str | None
+    published_number: int | None
+    versions: list[dict[str, Any]] = Field(
+        description="Earlier published versions: compatibility, denominator check, claiming corrections, scripts"
+    )
+    active: list[dict[str, Any]]
+
+
+class RegradeAttemptsOut(BaseModel):
+    total: int
+    items: list[dict[str, Any]]
+
+
+def _job_out(j: Any) -> RegradeJobOut:
+    return RegradeJobOut(
+        id=j.id,
+        adjudication_id=j.adjudication_id,
+        status=j.status,
+        processed=j.processed,
+        regraded=j.regraded,
+        unaffected=j.unaffected,
+        failed=j.failed,
+        remaining=j.remaining,
+        batches=j.batches,
+        last_error=j.last_error,
+        created_at=j.created_at,
+        started_at=j.started_at,
+        finished_at=j.finished_at,
     )
 
 
-class RegradeRunOut(BaseModel):
-    processed: int
-    remaining: int
-    superseded: bool
-    outcomes: dict[str, int] = Field(default_factory=dict)
+def _adj_out(db: Session, a: Any, *, detail: bool) -> AdjudicationOut:
+    from sqlalchemy import select as sa_select
 
+    from portal_api.modules.written import adjudication, regrade_jobs
 
-def _adj_out(db: Session, a: Any) -> AdjudicationOut:
-    from portal_api.modules.written import adjudication
-
+    job = db.scalar(
+        sa_select(regrade_jobs.RegradeJob)
+        .where(regrade_jobs.RegradeJob.adjudication_id == a.id)
+        .order_by(regrade_jobs.RegradeJob.created_at.desc())
+        .limit(1)
+    )
     return AdjudicationOut(
         id=a.id,
         rubric_item_id=a.rubric_item_id,
@@ -756,20 +836,36 @@ def _adj_out(db: Session, a: Any) -> AdjudicationOut:
         to_version_id=a.to_version_id,
         reason=a.reason,
         status=a.status,
-        supersedes_id=a.supersedes_id,
+        supersedes_ids=a.supersedes_ids or [],
+        superseded_by_id=a.superseded_by_id,
         approved_at=a.approved_at,
         compatibility=a.compatibility,
-        impact=adjudication.preview(db, a),
+        impact=adjudication.preview(db, a) if detail else None,
+        latest_job=_job_out(job) if job else None,
     )
+
+
+@router.get(
+    "/studio/written/adjudication-sources",
+    response_model=AdjudicationSourcesOut,
+    summary="What a correction of this rubric could apply to: versions, compatibility and active corrections",
+)
+def adjudication_sources(
+    db: DB, who: Reviewer, rubric_item_id: uuid.UUID, response: Response
+) -> AdjudicationSourcesOut:
+    from portal_api.modules.written import adjudication
+
+    _private(response)
+    return AdjudicationSourcesOut(**adjudication.sources(db, who, rubric_item_id))
 
 
 @router.post(
     "/studio/written/adjudications",
     response_model=AdjudicationOut,
     status_code=201,
-    summary="Apply a published rubric correction to earlier work (academic adjudicators in scope; audited)",
+    summary="Apply a published rubric correction to earlier work (academic adjudicators in scope, MFA; audited)",
 )
-def create_adjudication(db: DB, who: Reviewer, body: AdjudicationIn, response: Response) -> AdjudicationOut:
+def create_adjudication(db: DB, who: Adjudicator, body: AdjudicationIn, response: Response) -> AdjudicationOut:
     from portal_api.modules.written import adjudication
 
     _private(response)
@@ -779,9 +875,9 @@ def create_adjudication(db: DB, who: Reviewer, body: AdjudicationIn, response: R
         rubric_item_id=body.rubric_item_id,
         reason=body.reason,
         from_version_ids=body.from_version_ids,
-        supersedes_id=body.supersedes_id,
+        supersedes_ids=body.supersedes_ids,
     )
-    return _adj_out(db, a)
+    return _adj_out(db, a, detail=True)
 
 
 @router.get("/studio/written/adjudications", response_model=list[AdjudicationOut])
@@ -789,7 +885,7 @@ def list_adjudications(db: DB, who: Reviewer, response: Response) -> list[Adjudi
     from portal_api.modules.written import adjudication
 
     _private(response)
-    return [_adj_out(db, a) for a in adjudication.visible(db, who)]
+    return [_adj_out(db, a, detail=False) for a in adjudication.visible(db, who)]
 
 
 @router.get("/studio/written/adjudications/{adjudication_id}", response_model=AdjudicationOut)
@@ -797,23 +893,50 @@ def get_adjudication(db: DB, who: Reviewer, adjudication_id: uuid.UUID, response
     from portal_api.modules.written import adjudication
 
     _private(response)
-    return _adj_out(db, adjudication.get(db, who, adjudication_id))
+    return _adj_out(db, adjudication.get(db, who, adjudication_id), detail=True)
 
 
-@router.post(
-    "/studio/written/adjudications/{adjudication_id}/run",
-    response_model=RegradeRunOut,
-    summary="Process the next bounded batch of affected attempts (resumable; safe to repeat)",
-)
-def run_adjudication(
+@router.get("/studio/written/adjudications/{adjudication_id}/attempts", response_model=RegradeAttemptsOut)
+def adjudication_attempts(
     db: DB,
     who: Reviewer,
     adjudication_id: uuid.UUID,
     response: Response,
-    limit: Annotated[int, Query(ge=1, le=200)] = 50,
-) -> RegradeRunOut:
+    offset: Annotated[int, Query(ge=0)] = 0,
+    limit: Annotated[int, Query(ge=1, le=100)] = 25,
+) -> RegradeAttemptsOut:
     from portal_api.modules.written import adjudication
 
     _private(response)
-    adjudication.get(db, who, adjudication_id)  # scope check
-    return RegradeRunOut(**adjudication.run(db, adjudication_id, limit))
+    return RegradeAttemptsOut(
+        **adjudication.attempts_page(db, adjudication.get(db, who, adjudication_id), offset, limit)
+    )
+
+
+@router.post(
+    "/studio/written/adjudications/{adjudication_id}/run",
+    response_model=RegradeJobOut,
+    status_code=202,
+    summary="Queue the regrade for the worker (one open job per correction; repeating returns it)",
+)
+def run_adjudication(db: DB, who: Adjudicator, adjudication_id: uuid.UUID, response: Response) -> RegradeJobOut:
+    from portal_api.modules.written import regrade_jobs
+
+    _private(response)
+    return _job_out(regrade_jobs.request_run(db, who, adjudication_id))
+
+
+@router.get("/studio/written/regrade-jobs/{job_id}", response_model=RegradeJobOut)
+def get_regrade_job(db: DB, who: Reviewer, job_id: uuid.UUID, response: Response) -> RegradeJobOut:
+    from portal_api.modules.written import regrade_jobs
+
+    _private(response)
+    return _job_out(regrade_jobs.get(db, who, job_id))
+
+
+@router.post("/studio/written/regrade-jobs/{job_id}/retry", response_model=RegradeJobOut)
+def retry_regrade_job(db: DB, who: Adjudicator, job_id: uuid.UUID, response: Response) -> RegradeJobOut:
+    from portal_api.modules.written import regrade_jobs
+
+    _private(response)
+    return _job_out(regrade_jobs.retry(db, who, job_id))
