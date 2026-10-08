@@ -9,6 +9,7 @@ import { Space } from "@/constants/theme";
 import { useRequest } from "@/hooks/use-request";
 import { useTheme } from "@/hooks/use-theme";
 import { api, GRADE_LABEL, pageRange } from "@/lib/api";
+import { useAuth } from "@/lib/auth";
 
 export default function ChapterScreen() {
   const c = useTheme();
@@ -79,7 +80,13 @@ export default function ChapterScreen() {
 }
 
 function Lessons({ chapterId }: { chapterId: string }) {
-  const { state, retry } = useRequest((signal) => api.lessons(chapterId, signal), [chapterId]);
+  const auth = useAuth();
+  if (auth.state.status === "loading") return <T variant="muted">Loading lessons…</T>; // wait for the stored session
+  return <LessonList chapterId={chapterId} token={auth.state.status === "signed_in" ? auth.state.token : null} />;
+}
+
+function LessonList({ chapterId, token }: { chapterId: string; token: string | null }) {
+  const { state, retry } = useRequest((signal) => api.lessons(chapterId, token, signal), [chapterId, token]);
   return (
     <View style={{ gap: Space.sm }}>
       <T variant="heading" accessibilityRole="header">
@@ -103,9 +110,17 @@ function Lessons({ chapterId }: { chapterId: string }) {
             <T variant="heading" accessibilityRole="header">
               {l.title}
             </T>
-            <T variant="small">Reviewed lesson · version {l.version}</T>
+            <T variant="small">
+              {l.access_tier === "preview" ? "Free preview · " : ""}Reviewed lesson · version {l.version}
+            </T>
             <View style={{ marginTop: Space.sm }}>
-              <LessonBlocks blocks={l.body.blocks as { type: string }[]} />
+              {l.locked || !l.body ? (
+                <Notice title="Included with a plan or the free 30-day trial">
+                  Start your free trial from the Account tab to read this lesson.
+                </Notice>
+              ) : (
+                <LessonBlocks blocks={l.body.blocks as { type: string }[]} />
+              )}
             </View>
             <T variant="small" style={{ marginTop: Space.sm }}>
               Textbook pages (PDF):{" "}

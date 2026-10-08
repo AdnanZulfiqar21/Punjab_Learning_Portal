@@ -46,6 +46,30 @@
         "title": "AccessOut",
         "type": "object"
       },
+      "AccessTierIn": {
+        "properties": {
+          "reason": {
+            "maxLength": 1000,
+            "minLength": 5,
+            "title": "Reason",
+            "type": "string"
+          },
+          "tier": {
+            "enum": [
+              "preview",
+              "premium"
+            ],
+            "title": "Tier",
+            "type": "string"
+          }
+        },
+        "required": [
+          "tier",
+          "reason"
+        ],
+        "title": "AccessTierIn",
+        "type": "object"
+      },
       "Actions": {
         "description": "What the caller may do now. Advisory for the UI; the server re-checks every action.",
         "properties": {
@@ -81,6 +105,10 @@
             "title": "Revise",
             "type": "boolean"
           },
+          "set_access_tier": {
+            "title": "Set Access Tier",
+            "type": "boolean"
+          },
           "submit": {
             "title": "Submit",
             "type": "boolean"
@@ -100,7 +128,8 @@
           "revise",
           "quarantine",
           "release",
-          "retire"
+          "retire",
+          "set_access_tier"
         ],
         "title": "Actions",
         "type": "object"
@@ -1711,6 +1740,15 @@
       },
       "ItemDetail": {
         "properties": {
+          "access_tier": {
+            "description": "Lessons: free preview or needs a plan (R07)",
+            "enum": [
+              "preview",
+              "premium"
+            ],
+            "title": "Access Tier",
+            "type": "string"
+          },
           "actions": {
             "$ref": "#/components/schemas/Actions"
           },
@@ -1987,6 +2025,7 @@
           "title",
           "state",
           "availability",
+          "access_tier",
           "grade_number",
           "subject_code",
           "chapter_id",
@@ -2135,6 +2174,15 @@
       },
       "ItemSummary": {
         "properties": {
+          "access_tier": {
+            "description": "Lessons: free preview or needs a plan (R07)",
+            "enum": [
+              "preview",
+              "premium"
+            ],
+            "title": "Access Tier",
+            "type": "string"
+          },
           "assigned_reviewer": {
             "anyOf": [
               {
@@ -2328,6 +2376,7 @@
           "title",
           "state",
           "availability",
+          "access_tier",
           "grade_number",
           "subject_code",
           "chapter_id",
@@ -2350,6 +2399,14 @@
       },
       "LessonOut": {
         "properties": {
+          "access_tier": {
+            "enum": [
+              "preview",
+              "premium"
+            ],
+            "title": "Access Tier",
+            "type": "string"
+          },
           "block_types": {
             "items": {
               "type": "string"
@@ -2358,9 +2415,17 @@
             "type": "array"
           },
           "body": {
-            "additionalProperties": true,
-            "title": "Body",
-            "type": "object"
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Null when locked",
+            "title": "Body"
           },
           "content_schema_version": {
             "title": "Content Schema Version",
@@ -2370,6 +2435,11 @@
             "format": "uuid",
             "title": "Id",
             "type": "string"
+          },
+          "locked": {
+            "description": "True when the caller has no active plan or trial; body and pages are withheld",
+            "title": "Locked",
+            "type": "boolean"
           },
           "published_at": {
             "format": "date-time",
@@ -2411,6 +2481,8 @@
           "topic_id",
           "version",
           "published_at",
+          "access_tier",
+          "locked",
           "content_schema_version",
           "block_types",
           "body",
@@ -6278,6 +6350,7 @@
     },
     "/v1/chapters/{chapter_id}/lessons": {
       "get": {
+        "description": "Every live lesson is listed. Premium bodies go only to callers with an active plan or trial (review R07);\nothers see the title marked locked. Free previews are readable by everyone.",
         "operationId": "chapter_lessons_v1_chapters__chapter_id__lessons_get",
         "parameters": [
           {
@@ -7264,6 +7337,59 @@
           }
         },
         "summary": "Item Detail",
+        "tags": [
+          "studio"
+        ]
+      }
+    },
+    "/v1/studio/items/{item_id}/access-tier": {
+      "post": {
+        "operationId": "access_tier_v1_studio_items__item_id__access_tier_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "item_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Item Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AccessTierIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemDetail"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Mark a lesson as a free preview or premium (publishers, MFA, audited with a reason)",
         "tags": [
           "studio"
         ]

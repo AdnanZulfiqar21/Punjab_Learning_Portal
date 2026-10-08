@@ -66,7 +66,14 @@ def main(argv: list[str] | None = None) -> int:
             }
         ]
 
-        def publish(name: str, kind: str, title: str, body: dict[str, object], parent: uuid.UUID | None = None) -> bool:
+        def publish(
+            name: str,
+            kind: str,
+            title: str,
+            body: dict[str, object],
+            parent: uuid.UUID | None = None,
+            access_tier: str = "premium",
+        ) -> bool:
             item_id = uuid.uuid5(NAMESPACE, name)
             if db.get(ContentItem, item_id) is not None:
                 return False
@@ -84,6 +91,7 @@ def main(argv: list[str] | None = None) -> int:
                     created_by=author.id,
                     family_id=item_id if kind in ("mcq", "written") else None,
                     parent_item_id=parent,
+                    access_tier=access_tier,
                 )
             )
             db.flush()
@@ -186,8 +194,17 @@ def main(argv: list[str] | None = None) -> int:
                 r_body,
                 parent=uuid.uuid5(NAMESPACE, q_name),
             )
+        # One free-preview and one premium lesson, so lesson access (review R07) can be exercised end to end.
+        for tier in ("preview", "premium"):
+            created += publish(
+                f"lesson-fixture-{tier}",
+                "lesson",
+                f"{tier.capitalize()} lesson",
+                {"blocks": _p(f"Technical fixture {tier} lesson text. This is not academic content.")},
+                access_tier=tier,
+            )
         db.commit()
-    total = COUNT + 2 * WRITTEN_COUNT
+    total = COUNT + 2 * WRITTEN_COUNT + 2
     print(f"practice fixtures: {created} created, {total - created} already present (Class XI Biology, first chapter)")
     return 0
 

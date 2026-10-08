@@ -216,7 +216,11 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Published, live lessons for a chapter (academically approved; never drafts) */
+        /**
+         * Published, live lessons for a chapter (academically approved; never drafts)
+         * @description Every live lesson is listed. Premium bodies go only to callers with an active plan or trial (review R07);
+         *     others see the title marked locked. Free previews are readable by everyone.
+         */
         get: operations["chapter_lessons_v1_chapters__chapter_id__lessons_get"];
         put?: never;
         post?: never;
@@ -614,6 +618,23 @@ export interface paths {
         get: operations["item_detail_v1_studio_items__item_id__get"];
         put?: never;
         post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/studio/items/{item_id}/access-tier": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Mark a lesson as a free preview or premium (publishers, MFA, audited with a reason) */
+        post: operations["access_tier_v1_studio_items__item_id__access_tier_post"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1210,6 +1231,16 @@ export interface components {
             };
             written_allowance: components["schemas"]["AllowanceOut"];
         };
+        /** AccessTierIn */
+        AccessTierIn: {
+            /** Reason */
+            reason: string;
+            /**
+             * Tier
+             * @enum {string}
+             */
+            tier: "preview" | "premium";
+        };
         /**
          * Actions
          * @description What the caller may do now. Advisory for the UI; the server re-checks every action.
@@ -1231,6 +1262,8 @@ export interface components {
             review: boolean;
             /** Revise */
             revise: boolean;
+            /** Set Access Tier */
+            set_access_tier: boolean;
             /** Submit */
             submit: boolean;
             /** Withdraw */
@@ -1884,6 +1917,12 @@ export interface components {
         };
         /** ItemDetail */
         ItemDetail: {
+            /**
+             * Access Tier
+             * @description Lessons: free preview or needs a plan (R07)
+             * @enum {string}
+             */
+            access_tier: "preview" | "premium";
             actions: components["schemas"]["Actions"];
             /** Assigned Reviewer */
             assigned_reviewer: string | null;
@@ -2018,6 +2057,12 @@ export interface components {
         };
         /** ItemSummary */
         ItemSummary: {
+            /**
+             * Access Tier
+             * @description Lessons: free preview or needs a plan (R07)
+             * @enum {string}
+             */
+            access_tier: "preview" | "premium";
             /** Assigned Reviewer */
             assigned_reviewer: string | null;
             /** Assigned Reviewer Id */
@@ -2084,12 +2129,20 @@ export interface components {
         };
         /** LessonOut */
         LessonOut: {
+            /**
+             * Access Tier
+             * @enum {string}
+             */
+            access_tier: "preview" | "premium";
             /** Block Types */
             block_types: string[];
-            /** Body */
+            /**
+             * Body
+             * @description Null when locked
+             */
             body: {
                 [key: string]: unknown;
-            };
+            } | null;
             /** Content Schema Version */
             content_schema_version: number;
             /**
@@ -2097,6 +2150,11 @@ export interface components {
              * Format: uuid
              */
             id: string;
+            /**
+             * Locked
+             * @description True when the caller has no active plan or trial; body and pages are withheld
+             */
+            locked: boolean;
             /**
              * Published At
              * Format: date-time
@@ -4468,6 +4526,41 @@ export interface operations {
             cookie?: never;
         };
         requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ItemDetail"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    access_tier_v1_studio_items__item_id__access_tier_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                item_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["AccessTierIn"];
+            };
+        };
         responses: {
             /** @description Successful Response */
             200: {

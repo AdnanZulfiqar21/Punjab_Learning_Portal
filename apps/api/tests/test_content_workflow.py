@@ -306,6 +306,11 @@ def test_full_lifecycle_publish_revise_quarantine_retire(
     assert published.json()["state"] == "published" and published.json()["availability"] == "live"
     lessons = client.get(f"/v1/chapters/{chapter.id}/lessons").json()
     assert [(lesson["id"], lesson["version"]) for lesson in lessons if lesson["id"] == item["id"]] == [(item["id"], 1)]
+    # R07: premium by default, so an anonymous reader sees the title only until a publisher marks a preview.
+    mine = next(x for x in lessons if x["id"] == item["id"])
+    assert mine["locked"] and mine["body"] is None and mine["access_tier"] == "premium"
+    tier = _post(client, team["publisher"], item["id"], "access-tier", {"tier": "preview", "reason": "Fixture preview"})
+    assert tier.status_code == 200 and tier.json()["access_tier"] == "preview"
 
     # A revision needs a reason; learners keep seeing version 1 until version 2 is published.
     assert _post(client, team["author"], item["id"], "revise", {"reason": "x"}).status_code == 422
@@ -349,6 +354,7 @@ def test_full_lifecycle_publish_revise_quarantine_retire(
         "content.submitted",
         "content.approved",
         "content.published",
+        "content.access_tier_changed",
         "content.revision_started",
         "content.quarantined",
         "content.submitted",
@@ -358,7 +364,7 @@ def test_full_lifecycle_publish_revise_quarantine_retire(
         "content.released",
         "content.retired",
     ]
-    assert history[8]["details"]["resolved_quarantine"] is True and history[8]["details"]["superseded"] == 1
+    assert history[9]["details"]["resolved_quarantine"] is True and history[9]["details"]["superseded"] == 1
 
 
 def test_publisher_who_edited_cannot_publish(client: TestClient, db: Session, team: dict[str, Staff]) -> None:

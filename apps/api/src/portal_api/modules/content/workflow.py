@@ -585,6 +585,26 @@ def quarantine(db: Session, who: Principal, item_id: uuid.UUID, reason: str, lev
     return item
 
 
+def set_access_tier(db: Session, who: Principal, item_id: uuid.UUID, tier: str, reason: str) -> ContentItem:
+    """Mark a lesson as a free preview or premium (R07). Publishers in scope, with MFA (the permission is MFA-gated);
+    every change is audited with its reason. Questions and rubrics are never readable through lessons at any tier."""
+    item = get_item(db, item_id, for_update=True)
+    _require_scoped(db, who, Permission.publish_content, item)
+    if not kinds.get(item.kind).learner_readable:
+        raise Unprocessable("Only lessons have a reading tier; questions are never shown as lessons.")
+    if tier not in ("preview", "premium"):
+        raise Unprocessable("Choose preview or premium.")
+    if item.access_tier == tier:
+        return item
+    previous = item.access_tier
+    item.access_tier = tier
+    item.updated_at = _now()
+    _audit(db, who, "access_tier_changed", item, reason=reason.strip(), previous=previous, tier=tier)
+    db.commit()
+    db.refresh(item)
+    return item
+
+
 def release(db: Session, who: Principal, item_id: uuid.UUID, reason: str) -> ContentItem:
     """Return quarantined content to learners unchanged (the suspected defect was not confirmed)."""
     item = get_item(db, item_id, for_update=True)
