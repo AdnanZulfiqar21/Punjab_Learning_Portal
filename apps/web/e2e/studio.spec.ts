@@ -199,3 +199,12 @@ test("a written question gets a rubric that must reconcile with its marks", asyn
   await author.getByRole("button", { name: "Submit for review" }).click();
   await expect(author.getByText("In review · version 1")).toBeVisible(AUTH);
 });
+
+test("an academic adjudicator reaches rubric corrections from the studio", async ({ browser }) => {
+  // W06.S2.T3: the regrade itself is covered by API tests against real PostgreSQL (test_rubric_adjudication.py);
+  // this checks the studio wiring and scope for the seeded adjudicator.
+  const adjudicator = await signIn(browser, "studio-adjudicator@example.com");
+  await adjudicator.getByRole("link", { name: "Rubric corrections" }).click();
+  await expect(adjudicator.getByRole("heading", { name: "Rubric corrections" })).toBeVisible(AUTH);
+  await expect(adjudicator.getByRole("list", { name: "Rubric corrections" }).or(adjudicator.getByText("None yet"))).toBeVisible(AUTH);
+});

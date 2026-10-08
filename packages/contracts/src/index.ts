@@ -65,6 +65,9 @@ export type StaffSupportTicket = S["StaffTicketOut"];
 export type RecheckState = S["RecheckOut"];
 export type LinkedForm = S["LinkedFormOut"];
 export type LinkedAttempt = S["LinkedAttemptOut"];
+export type Adjudication = S["AdjudicationOut"];
+export type RegradeRun = S["RegradeRunOut"];
+export type WrittenNotice = S["NoticeOut"];
 
 /** RFC 9457 problem details returned by every API error. */
 export interface Problem {

@@ -1,10 +1,10 @@
 # RESUME STATE
 
-**Updated:** 2026-10-08 (after the PR #32 review, "PR32"). Regenerated from `git log origin/main`, `gh pr list` and test runs.
+**Updated:** 2026-10-08 (after PR #33; W06.S2.T3 in progress). Regenerated from `git log origin/main`, `gh pr list` and test runs.
 
 ## Repository state
-- `main` = PRs #1 and #3–#32 merged (PR #2 closed unmerged). Latest: #31 `87c720f` (W06.S2.T4 rescans + RS31 corrections; CI run 37791799813 green on head `27e9f84`), #32 `2277a6a` (W04.S3.T3 linked practice; CI run 37810869785 green on head `dad3222`).
-- **Open:** `fix/pr32-review` (REVIEW-PR32). Merge on a green CI run of its exact head.
+- `main` = PRs #1 and #3–#33 merged (PR #2 closed unmerged). Latest: #31 `87c720f` (W06.S2.T4 rescans + RS31 corrections; CI run 37791799813 on head `27e9f84`), #32 `2277a6a` (W04.S3.T3 linked practice; CI run 37810869785 on head `dad3222`), #33 `41ac6d9` (PR32 review corrections; CI run 37834522031 on head `f5ccdf0`).
+- **Open:** `feat/rubric-adjudication` (W06.S2.T3, ADJ-01). Merge on a green CI run of its exact head.
 - **Gate:** `main` has no branch protection or ruleset. The CI workflow is the only check and is not marked required. Merge only on a green run of the exact head being merged. CI `mobile`/`content` jobs skip when their paths are unchanged; a skip is not mobile or content qualification.
 - **Git rules (GIT-01):** never rebase, amend pushed commits or force-push (including `--force-with-lease`). Merge `main` into feature branches.
 
@@ -43,10 +43,10 @@ No academic content is published: B01 (reviewers) and rights confirmation block 
 | RS31-02 learner deadline | Fixed and merged (#31), RESCAN-02 (durable obligation; deadline fixed at first release). |
 | RS31-03 `post_cutoff` | Fixed and merged (#31), RESCAN-02; one dev record corrected by `portal-written-repair`. |
 | RS31 section 4 evidence provenance | Built and merged (#31): `evidence_revisions` on each score version. |
-| PR32-01 omitted learner action | Fixed on `fix/pr32-review`, REVIEW-PR32 (obligation authoritative; no silent withdrawal). |
-| PR32-02 incomplete staff drafts | Fixed on `fix/pr32-review`, REVIEW-PR32 (`draft_intent`, `draft` projection, workspace restore; proposals never applied). |
-| PR32-03 linked-form autoflush race | Reproduced (UniqueViolation via autoflush at linked.py:132) and fixed on `fix/pr32-review`. |
-| PR32-04 cutoff label, records | Fixed on `fix/pr32-review` (`cutoff_timing`; records refreshed). |
+| PR32-01 omitted learner action | Fixed and merged (#33), REVIEW-PR32 (obligation authoritative; no silent withdrawal). |
+| PR32-02 incomplete staff drafts | Fixed and merged (#33), REVIEW-PR32 (`draft_intent`, `draft` projection, workspace restore; proposals never applied). |
+| PR32-03 linked-form autoflush race | Reproduced (UniqueViolation via autoflush at linked.py:132) and fixed; merged (#33). |
+| PR32-04 cutoff label, records | Fixed and merged (#33) (`cutoff_timing`; records refreshed). |
 
 ## Test evidence (local, this machine; CI runs are on each PR)
 | Commit / branch | Command | Result |
@@ -58,17 +58,20 @@ No academic content is published: B01 (reviewers) and rights confirmation block 
 | `fix/pr32-review` | `uv run pytest -q tests/test_pr32_corrections.py` | before the fix: 7 failed, 1 passed; after: 8 passed |
 | same | `uv run pytest -q` in `apps/api` | 215 passed, 0 failed |
 | same | `npx playwright test` in `apps/web` (API and web running) | 46 passed, 22 skipped, 0 failed |
+| `feat/rubric-adjudication` | `uv run pytest -q` in `apps/api` (run alone; real exit code) | 220 passed, exit 0 (an earlier run showed 4 false failures because a second pytest session reset `portal_test` mid-run) |
+| same | `npx playwright test` (API and web running, nothing else) | 47 passed, 23 skipped, exit 0 |
 | PR #25 body (159) vs final report (172) | 159 was on `fix/pool-saturation` alone; 172 after merging #24 into it | Both correct for their commit |
 
 ## Intermittent test failures (bounded record; not fixed)
 | Seen | Tests | Observation | Status |
 |---|---|---|---|
 | 2026-10-08, full E2E on `feat/written-rescans` @ `27e9f84` (3 workers) | `studio.spec.ts:88` concurrent edits; `support.spec.ts:66` question report | Failed in the full run, passed when rerun alone and in the next two full runs | **Root cause unknown.** Later green runs are not a fix. Re-examine if either fails again (capture the trace; suspect shared fixture accounts under parallel workers). |
+| 2026-10-08, full E2E on `feat/rubric-adjudication` while a second pytest run was loading the machine | `catalogue.spec.ts:3` Class XII region not visible; `lessons.spec.ts:20` timeout | Did not recur in the next full run made alone (47 passed) | **Not proven** to be load-related; re-examine if seen without concurrent load. |
 
 ## Next actions
-1. Merge `fix/pr32-review` on green CI of its exact head.
+1. Merge `feat/rubric-adjudication` on green CI of its exact head.
 2. Deployment prerequisites (when B03 exists): run `portal-written-previews` and `portal-written-repair` once; schedule `portal-written-sweep-orphans` and `portal-written-learner-deadlines` (hourly); set review capacity per scope; set `PORTAL_TRIAL_DEVICE_EVIDENCE` and a secret `PORTAL_TRIAL_REF_PEPPER`. Production must not silently use `fallback` as the anti-repeat-trial implementation.
-3. Roadmap continuation, in order: (done: linked new practice attempts, W04.S3.T3, LINKED-01); administrative regrades and adjudication (W06.S2.T3, **next unblocked**, same lock order and rebase path as PUB-01); native written capture, results, rescans (with the `Idempotency-Key` header) and mobile help; notifications (P15.S1); CMS import batches, previews, release/rollback, export (P06); source-grounded drafting and media (P07, drafts only); automatic written-assessment contracts (W05; no real script calls until B10).
+3. Roadmap continuation, in order: (done: linked new practice attempts, W04.S3.T3, LINKED-01); (done on `feat/rubric-adjudication`: rubric adjudications across attempts, W06.S2.T3, ADJ-01; run `portal-written-regrade` after each approved correction); native written capture, results, rescans (with the `Idempotency-Key` header) and mobile help (**next unblocked**); notifications (P15.S1); CMS import batches, previews, release/rollback, export (P06); source-grounded drafting and media (P07, drafts only); automatic written-assessment contracts (W05; no real script calls until B10).
 4. Outstanding, not met: native repeat-device protection (R06; B07/B08/B13), native Android/iOS verification, approved academic content (B01), automatic-marking qualification (B10), production load evidence, and the original unexplained OperationalError (R08).
 
 ## Run locally
@@ -89,6 +92,7 @@ cd ../mobile && npx expo start --web --port 8190            # Expo web target (n
 - Git Bash heredocs break on some quoting; write scripts to the scratchpad instead.
 - `curl localhost` adds about 250 ms (IPv6 fallback); use `127.0.0.1` for timings.
 - Run Expo without `CI=1` (no file watching otherwise).
+- Never run two `pytest` sessions at once: conftest resets the shared `portal_test` database at session start, so a second run wipes the first one's data mid-run (this caused 4 false failures on 2026-10-08). Read pytest's real exit code; `| tail` hides it.
 
 ## Do not redo
 Book indexing (v2, `education_knowledge/`), OCR layers (local only), source checksums.

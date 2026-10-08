@@ -6,6 +6,12 @@ import type { WrittenResult } from "@portal/contracts";
 import { requestRecheck } from "@/app/actions/support";
 import { Notice } from "@/components/ui";
 
+const HISTORY_LABEL: Record<string, string> = {
+  initial: "first marking",
+  recheck: "after recheck",
+  completion: "after completing pending questions",
+  regrade: "after a marking-guide correction",
+};
 const date = (s: string) => new Date(s).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" });
 
 // Learners may ask once, inside the window, for named questions to be marked again by a different teacher. A recheck
@@ -26,7 +32,7 @@ export function RecheckPanel({ attemptId, result, marks }: { attemptId: string; 
           <ul>
             {result.history.map((h) => (
               <li key={h.version}>
-                Version {h.version}: {marks(h.total_units)} · {h.case_kind === "recheck" ? "after recheck" : "first marking"} · released {date(h.released_at)}
+                Version {h.version}: {marks(h.total_units)} · {HISTORY_LABEL[h.case_kind] ?? h.case_kind} · released {date(h.released_at)}
               </li>
             ))}
           </ul>

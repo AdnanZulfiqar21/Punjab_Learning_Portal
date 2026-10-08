@@ -23,6 +23,13 @@ const TIMING: Record<string, string> = {
   after_cutoff: "after the upload deadline",
 };
 
+const KIND_LABEL: Record<string, string> = {
+  initial: "First marking",
+  recheck: "Recheck",
+  completion: "Completion",
+  regrade: "Regrade after a rubric correction",
+};
+
 export function MarkingWorkspace({ initial }: { initial: MarkingCase }) {
   const router = useRouter();
   const [c, setC] = useState(initial);
@@ -43,6 +50,7 @@ export function MarkingWorkspace({ initial }: { initial: MarkingCase }) {
   // A recheck re-marks only the learner's questions (plus any an adjudicator adds with a reason); the rest carry forward.
   const rc = c.recheck;
   const cp = c.completion;
+  const rg = c.regrade; // W06.S2.T3: questions a rubric correction changed
   const [added, setAdded] = useState<number[]>([]);
   const [expansionReason, setExpansionReason] = useState("");
   // R05: each question in scope is scored, pending (e.g. unreadable) or unavailable (can't be assessed).
@@ -64,11 +72,13 @@ export function MarkingWorkspace({ initial }: { initial: MarkingCase }) {
     return out;
   };
   const statusOf = (pos: string) => status[pos]?.status ?? "scored";
-  const carried = rc?.carried_forward ?? cp?.carried_forward ?? {};
+  const carried = rc?.carried_forward ?? cp?.carried_forward ?? rg?.carried_forward ?? {};
   const scope = rc
     ? new Set([...rc.positions, ...rc.expanded_positions, ...added].map(String))
     : cp
       ? new Set(cp.positions.map(String))
+      : rg
+        ? new Set(rg.positions.map(String))
       : null;
   const inScope = (pos: string) => !scope || scope.has(pos);
   const slots = (c.manifest as { slots?: Record<string, { pages?: string[]; unanswered?: boolean }> }).slots ?? {};
@@ -104,7 +114,7 @@ export function MarkingWorkspace({ initial }: { initial: MarkingCase }) {
         <div>
           <h1 className="text-2xl font-semibold tracking-tight">Script {c.reference}</h1>
           <p className="text-sm text-muted">
-            {c.case_kind === "recheck" ? "Recheck" : "First marking"} · out of {marks(c.max_units)} marks · version {c.version}
+            {KIND_LABEL[c.case_kind] ?? c.case_kind} · out of {marks(c.max_units)} marks · version {c.version}
           </p>
         </div>
         <div className="flex gap-2">
@@ -154,6 +164,13 @@ export function MarkingWorkspace({ initial }: { initial: MarkingCase }) {
           <p className="whitespace-pre-line">{rc.reason}</p>
           {rc.expanded_positions.length > 0 && <p>Added by an adjudicator: question {rc.expanded_positions.join(", ")}</p>}
           <p className="text-muted">Re-mark only these questions. Every other question keeps its released marks.</p>
+        </section>
+      )}
+      {rg && (
+        <section aria-label="Rubric correction" className="space-y-1 rounded-xl border border-warn bg-warn-soft p-4 text-sm">
+          <p className="font-semibold">Re-mark question{rg.positions.length > 1 ? "s" : ""} {rg.positions.join(", ")} under the corrected rubric</p>
+          <p className="whitespace-pre-line">{rg.reason}</p>
+          <p className="text-muted">The rubric shown is the corrected one. Every other question keeps its released marks.</p>
         </section>
       )}
       {cp && (
@@ -292,7 +309,7 @@ export function MarkingWorkspace({ initial }: { initial: MarkingCase }) {
                   </span>
                 </div>
                 <LessonBlocks blocks={body.stem} headingOffset={2} />
-                {c.case_kind !== "recheck" && (
+                {c.case_kind !== "recheck" && c.case_kind !== "regrade" && (
                   <div className="flex flex-wrap items-center gap-3 rounded-lg bg-surface-muted p-2 text-sm">
                     <label className="flex items-center gap-2">
                       Outcome

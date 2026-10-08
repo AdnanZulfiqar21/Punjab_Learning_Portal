@@ -36,7 +36,7 @@ class CaseSummary(BaseModel):
     reference: str = Field(description="Short script reference; learner identity is not shown to markers")
     grade: int
     subject: str
-    case_kind: Literal["initial", "recheck", "completion"]
+    case_kind: Literal["initial", "recheck", "completion", "regrade"]
     opened_at: datetime
     due_at: datetime | None = Field(description="Service obligation for accepted work (proposed 48 h)")
     status: Literal["queued", "released"]
@@ -117,6 +117,9 @@ class CaseDetail(CaseSummary):
     draft: StaffDraft | None = Field(default=None, description="This case's saved draft, if the latest version is one")
     recheck: RecheckScope | None
     completion: CompletionScope | None
+    regrade: CompletionScope | None = Field(
+        default=None, description="Regrade cases: the questions a rubric correction changed, and why (W06.S2.T3)"
+    )
     revisions: list[RevisionOut] = Field(description="Learner rescans for questions in this case (W06.S2.T4)")
 
 
@@ -204,6 +207,13 @@ class RecheckIn(BaseModel):
     )
 
 
+class NoticeOut(BaseModel):
+    kind: str
+    positions: list[int]
+    message: str
+    created_at: datetime
+
+
 class WrittenResultOut(BaseModel):
     status: Literal["pending", "released"]
     version: int | None
@@ -219,6 +229,9 @@ class WrittenResultOut(BaseModel):
     recheck: RecheckOut
     history: list[HistoryEntry] = Field(
         description="Every released version, oldest first; corrections never erase history"
+    )
+    notices: list[NoticeOut] = Field(
+        default_factory=list, description="Changes to this result's basis, such as a marking-guide correction"
     )
     linked_attempts: list[LinkedAttemptOut] = Field(
         default_factory=list,
@@ -288,6 +301,7 @@ def _detail(db: Session, case: review.WrittenReviewCase, who: Principal) -> Case
         draft=_draft(review.latest(db, case.attempt_id), case),
         recheck=_recheck_scope(db, ctx["recheck"], case, who),
         completion=_completion_scope(db, case),
+        regrade=_completion_scope(db, case, kind="regrade"),
         revisions=_revisions(db, case.attempt_id, {int(p) for p in (case.positions or [])} if case.positions else None),
     )
 
@@ -323,8 +337,8 @@ def _revisions(db: Session, attempt_id: uuid.UUID, positions: set[int] | None) -
     return out
 
 
-def _completion_scope(db: Session, case: review.WrittenReviewCase) -> CompletionScope | None:
-    if case.case_kind != "completion":
+def _completion_scope(db: Session, case: review.WrittenReviewCase, kind: str = "completion") -> CompletionScope | None:
+    if case.case_kind != kind:
         return None
     current = review.released_result(db, case.attempt_id)
     scope = {str(p) for p in (case.positions or [])}
@@ -434,6 +448,7 @@ def my_result(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, response: Re
             questions=[],
             recheck=RecheckOut(**review.recheck_state(db, attempt.id)),
             history=[],
+            notices=_notices(db, attempt.id),
             linked_attempts=[LinkedAttemptOut(**x) for x in linked.linked_attempts(db, attempt.id)],
         )
     ctx_questions = {str(fi.position): fi for fi in form.items}
@@ -444,7 +459,7 @@ def my_result(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, response: Re
         revisions_by_pos.setdefault(r.position, []).append(r)
     questions = []
     for pos, fi in sorted(ctx_questions.items(), key=lambda kv: int(kv[0])):
-        rv = db.get(ContentVersion, fi.rubric_version_id)
+        rv = db.get(ContentVersion, uuid.UUID(str(sv.rubric_version_ids.get(pos, fi.rubric_version_id))))
         assert rv is not None
         rubric, _ = wq.parse_rubric(rv.body)
         assert rubric is not None
@@ -496,8 +511,18 @@ def my_result(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, response: Re
         questions=questions,
         recheck=RecheckOut(**review.recheck_state(db, attempt.id)),
         history=history,
+        notices=_notices(db, attempt.id),
         linked_attempts=[LinkedAttemptOut(**x) for x in linked.linked_attempts(db, attempt.id)],
     )
+
+
+def _notices(db: Session, attempt_id: uuid.UUID) -> list[NoticeOut]:
+    from portal_api.modules.written import adjudication
+
+    return [
+        NoticeOut(kind=n.kind, positions=n.positions, message=n.message, created_at=n.created_at)
+        for n in adjudication.notices(db, attempt_id)
+    ]
 
 
 @router.post(
@@ -681,3 +706,114 @@ def confirm_unanswered(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, pos
 
     rescans.confirm_unanswered(db, who, attempt_id, position)
     return Response(status_code=204, headers={"Cache-Control": "private, no-store"})
+
+
+# ------------------------------------------------------------------ W06.S2.T3 rubric adjudications across attempts
+class AdjudicationIn(BaseModel):
+    rubric_item_id: uuid.UUID
+    reason: str = Field(min_length=20, max_length=2000)
+    from_version_ids: list[uuid.UUID] | None = Field(
+        default=None, description="Earlier published versions to correct; default: all of them for the same question"
+    )
+    supersedes_id: uuid.UUID | None = Field(default=None, description="The active correction this one replaces")
+
+
+class AdjudicationOut(BaseModel):
+    id: uuid.UUID
+    rubric_item_id: uuid.UUID
+    grade: int
+    subject: str
+    from_version_ids: list[str]
+    to_version_id: uuid.UUID
+    reason: str
+    status: Literal["active", "superseded"]
+    supersedes_id: uuid.UUID | None
+    approved_at: datetime
+    compatibility: dict[str, Any] = Field(
+        description="Per corrected version: criterion diff and whether human marks carry forward unchanged"
+    )
+    impact: dict[str, Any] = Field(
+        description="Affected forms, attempts, released results, rescans, planned question outcomes and progress"
+    )
+
+
+class RegradeRunOut(BaseModel):
+    processed: int
+    remaining: int
+    superseded: bool
+    outcomes: dict[str, int] = Field(default_factory=dict)
+
+
+def _adj_out(db: Session, a: Any) -> AdjudicationOut:
+    from portal_api.modules.written import adjudication
+
+    return AdjudicationOut(
+        id=a.id,
+        rubric_item_id=a.rubric_item_id,
+        grade=a.grade_number,
+        subject=a.subject_code,
+        from_version_ids=a.from_version_ids,
+        to_version_id=a.to_version_id,
+        reason=a.reason,
+        status=a.status,
+        supersedes_id=a.supersedes_id,
+        approved_at=a.approved_at,
+        compatibility=a.compatibility,
+        impact=adjudication.preview(db, a),
+    )
+
+
+@router.post(
+    "/studio/written/adjudications",
+    response_model=AdjudicationOut,
+    status_code=201,
+    summary="Apply a published rubric correction to earlier work (academic adjudicators in scope; audited)",
+)
+def create_adjudication(db: DB, who: Reviewer, body: AdjudicationIn, response: Response) -> AdjudicationOut:
+    from portal_api.modules.written import adjudication
+
+    _private(response)
+    a = adjudication.create(
+        db,
+        who,
+        rubric_item_id=body.rubric_item_id,
+        reason=body.reason,
+        from_version_ids=body.from_version_ids,
+        supersedes_id=body.supersedes_id,
+    )
+    return _adj_out(db, a)
+
+
+@router.get("/studio/written/adjudications", response_model=list[AdjudicationOut])
+def list_adjudications(db: DB, who: Reviewer, response: Response) -> list[AdjudicationOut]:
+    from portal_api.modules.written import adjudication
+
+    _private(response)
+    return [_adj_out(db, a) for a in adjudication.visible(db, who)]
+
+
+@router.get("/studio/written/adjudications/{adjudication_id}", response_model=AdjudicationOut)
+def get_adjudication(db: DB, who: Reviewer, adjudication_id: uuid.UUID, response: Response) -> AdjudicationOut:
+    from portal_api.modules.written import adjudication
+
+    _private(response)
+    return _adj_out(db, adjudication.get(db, who, adjudication_id))
+
+
+@router.post(
+    "/studio/written/adjudications/{adjudication_id}/run",
+    response_model=RegradeRunOut,
+    summary="Process the next bounded batch of affected attempts (resumable; safe to repeat)",
+)
+def run_adjudication(
+    db: DB,
+    who: Reviewer,
+    adjudication_id: uuid.UUID,
+    response: Response,
+    limit: Annotated[int, Query(ge=1, le=200)] = 50,
+) -> RegradeRunOut:
+    from portal_api.modules.written import adjudication
+
+    _private(response)
+    adjudication.get(db, who, adjudication_id)  # scope check
+    return RegradeRunOut(**adjudication.run(db, adjudication_id, limit))

@@ -49,7 +49,7 @@ async function Queue() {
             </p>
           </div>
           <div className="flex gap-2">
-            <Badge>{c.case_kind === "recheck" ? "Recheck" : c.case_kind === "completion" ? "Completion" : "First marking"}</Badge>
+            <Badge>{{ recheck: "Recheck", completion: "Completion", regrade: "Regrade" }[c.case_kind as string] ?? "First marking"}</Badge>
             {c.leased_by_me && <Badge tone="ok">You are marking</Badge>}
             {c.leased_by_other && <Badge tone="warn">Another teacher is marking</Badge>}
           </div>
