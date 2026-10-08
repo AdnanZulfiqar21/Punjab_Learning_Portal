@@ -36,6 +36,7 @@ class Permission(StrEnum):
     view_audit = "view_audit"
     confirm_source_rights = "confirm_source_rights"
     grant_entitlements = "grant_entitlements"
+    review_trial_eligibility = "review_trial_eligibility"  # §16.7: private shared-device review and exceptions
 
 
 ROLE_PERMISSIONS: dict[Role, frozenset[Permission]] = {
@@ -44,7 +45,7 @@ ROLE_PERMISSIONS: dict[Role, frozenset[Permission]] = {
     Role.subject_reviewer: frozenset({Permission.review_content}),
     Role.academic_adjudicator: frozenset({Permission.adjudicate, Permission.review_content}),
     Role.publisher: frozenset({Permission.publish_content, Permission.quarantine_content}),
-    Role.support: frozenset({Permission.view_support_context}),
+    Role.support: frozenset({Permission.view_support_context, Permission.review_trial_eligibility}),
     Role.finance: frozenset({Permission.finance_operations, Permission.grant_entitlements}),
     Role.platform_operator: frozenset({Permission.operate_platform}),
     Role.owner_admin: frozenset(
@@ -69,6 +70,7 @@ MFA_REQUIRED: frozenset[Permission] = frozenset(
         Permission.view_audit,
         Permission.confirm_source_rights,
         Permission.grant_entitlements,
+        Permission.review_trial_eligibility,
     }
 )
 

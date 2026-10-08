@@ -8,6 +8,19 @@
             "title": "Device Check",
             "type": "string"
           },
+          "device_state": {
+            "anyOf": [
+              {
+                "const": "device_authorization_required",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Set when this app installation must be added to the trial before protected trial use",
+            "title": "Device State"
+          },
           "entitlements": {
             "items": {
               "$ref": "#/components/schemas/EntitlementOut"
@@ -41,7 +54,8 @@
           "trial",
           "written_allowance",
           "weights",
-          "device_check"
+          "device_check",
+          "device_state"
         ],
         "title": "AccessOut",
         "type": "object"
@@ -1194,6 +1208,44 @@
         "title": "ChapterSummary",
         "type": "object"
       },
+      "ClaimIn": {
+        "properties": {
+          "idempotency_key": {
+            "maxLength": 80,
+            "minLength": 8,
+            "title": "Idempotency Key",
+            "type": "string"
+          },
+          "label": {
+            "default": "",
+            "description": "A name the learner recognises, e.g. 'My phone'",
+            "maxLength": 80,
+            "title": "Label",
+            "type": "string"
+          },
+          "proof": {
+            "additionalProperties": true,
+            "description": "Provider evidence (DeviceCheck/App Attest or Play Integrity), when available",
+            "title": "Proof",
+            "type": "object"
+          },
+          "surface": {
+            "enum": [
+              "web",
+              "ios",
+              "android"
+            ],
+            "title": "Surface",
+            "type": "string"
+          }
+        },
+        "required": [
+          "surface",
+          "idempotency_key"
+        ],
+        "title": "ClaimIn",
+        "type": "object"
+      },
       "CompletionScope": {
         "properties": {
           "carried_forward": {
@@ -1395,6 +1447,48 @@
         "title": "DecisionIn",
         "type": "object"
       },
+      "DeviceIn": {
+        "properties": {
+          "label": {
+            "default": "",
+            "maxLength": 80,
+            "title": "Label",
+            "type": "string"
+          },
+          "proof": {
+            "additionalProperties": true,
+            "title": "Proof",
+            "type": "object"
+          },
+          "replaces": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Self-service replacement of a registered device",
+            "title": "Replaces"
+          },
+          "surface": {
+            "enum": [
+              "web",
+              "ios",
+              "android"
+            ],
+            "title": "Surface",
+            "type": "string"
+          }
+        },
+        "required": [
+          "surface"
+        ],
+        "title": "DeviceIn",
+        "type": "object"
+      },
       "DraftIn": {
         "properties": {
           "body": {
@@ -1489,6 +1583,45 @@
           "written_units"
         ],
         "title": "EntitlementOut",
+        "type": "object"
+      },
+      "ExceptionIn": {
+        "properties": {
+          "days": {
+            "maximum": 30.0,
+            "minimum": 1.0,
+            "title": "Days",
+            "type": "integer"
+          },
+          "email": {
+            "maxLength": 320,
+            "minLength": 3,
+            "title": "Email",
+            "type": "string"
+          },
+          "reason": {
+            "maxLength": 1000,
+            "minLength": 10,
+            "title": "Reason",
+            "type": "string"
+          },
+          "surface": {
+            "enum": [
+              "web",
+              "ios",
+              "android"
+            ],
+            "title": "Surface",
+            "type": "string"
+          }
+        },
+        "required": [
+          "email",
+          "surface",
+          "days",
+          "reason"
+        ],
+        "title": "ExceptionIn",
         "type": "object"
       },
       "FormCreateIn": {
@@ -5036,6 +5169,137 @@
         "title": "TopicNode",
         "type": "object"
       },
+      "TrialDecisionOut": {
+        "properties": {
+          "claim_status": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Claim Status"
+          },
+          "device_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Device Id"
+          },
+          "ends_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The trial's original end; never extended by a device decision",
+            "title": "Ends At"
+          },
+          "evidence": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "What device evidence was available, e.g. provider_unconfigured",
+            "title": "Evidence"
+          },
+          "message": {
+            "description": "The notice to show (roadmap \u00a716.5)",
+            "title": "Message",
+            "type": "string"
+          },
+          "state": {
+            "enum": [
+              "eligible",
+              "granted",
+              "active",
+              "device_authorized",
+              "paid_active",
+              "account_trial_used",
+              "prior_paid",
+              "device_used",
+              "review_required",
+              "verification_pending",
+              "device_limit"
+            ],
+            "title": "State",
+            "type": "string"
+          }
+        },
+        "required": [
+          "state",
+          "message",
+          "claim_status",
+          "ends_at",
+          "device_id",
+          "evidence"
+        ],
+        "title": "TrialDecisionOut",
+        "type": "object"
+      },
+      "TrialDeviceOut": {
+        "properties": {
+          "authorized_at": {
+            "format": "date-time",
+            "title": "Authorized At",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "label": {
+            "title": "Label",
+            "type": "string"
+          },
+          "method": {
+            "enum": [
+              "first_use",
+              "recovery",
+              "exception",
+              "fallback",
+              "web"
+            ],
+            "title": "Method",
+            "type": "string"
+          },
+          "surface": {
+            "title": "Surface",
+            "type": "string"
+          },
+          "this_device": {
+            "title": "This Device",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "surface",
+          "label",
+          "method",
+          "authorized_at",
+          "this_device"
+        ],
+        "title": "TrialDeviceOut",
+        "type": "object"
+      },
       "TrialOut": {
         "properties": {
           "eligible": {
@@ -7060,6 +7324,217 @@
         ]
       }
     },
+    "/v1/me/trial/claims": {
+      "post": {
+        "operationId": "trial_claim_v1_me_trial_claims_post",
+        "parameters": [
+          {
+            "description": "Opaque per-install token",
+            "in": "header",
+            "name": "X-Portal-Install",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Opaque per-install token",
+              "title": "X-Portal-Install"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClaimIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TrialDecisionOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Activate or recover the one free trial for this account (idempotent per key; roadmap \u00a716.2/16.4)",
+        "tags": [
+          "access"
+        ]
+      }
+    },
+    "/v1/me/trial/devices": {
+      "get": {
+        "operationId": "trial_devices_list_v1_me_trial_devices_get",
+        "parameters": [
+          {
+            "description": "Opaque per-install token",
+            "in": "header",
+            "name": "X-Portal-Install",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Opaque per-install token",
+              "title": "X-Portal-Install"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/TrialDeviceOut"
+                  },
+                  "title": "Response Trial Devices List V1 Me Trial Devices Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Devices registered for your trial",
+        "tags": [
+          "access"
+        ]
+      },
+      "post": {
+        "operationId": "trial_device_v1_me_trial_devices_post",
+        "parameters": [
+          {
+            "description": "Opaque per-install token",
+            "in": "header",
+            "name": "X-Portal-Install",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Opaque per-install token",
+              "title": "X-Portal-Install"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeviceIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TrialDecisionOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Authorize this device for your active trial (first trial use; limits and review apply)",
+        "tags": [
+          "access"
+        ]
+      }
+    },
+    "/v1/me/trial/devices/{device_id}": {
+      "delete": {
+        "operationId": "trial_device_remove_v1_me_trial_devices__device_id__delete",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "device_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Device Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Remove a device from your trial",
+        "tags": [
+          "access"
+        ]
+      }
+    },
     "/v1/ops/written-backlog": {
       "get": {
         "operationId": "backlog_v1_ops_written_backlog_get",
@@ -7628,6 +8103,49 @@
         "summary": "Staff Reply",
         "tags": [
           "support"
+        ]
+      }
+    },
+    "/v1/staff/trial/exceptions": {
+      "post": {
+        "operationId": "trial_exception_v1_staff_trial_exceptions_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExceptionIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Trial Exception V1 Staff Trial Exceptions Post",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Shared or second-hand device exception: account-scoped and time-bounded (support review, MFA, audited)",
+        "tags": [
+          "access"
         ]
       }
     },

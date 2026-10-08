@@ -3,10 +3,10 @@
 **Updated:** 2026-10-08 · regenerated from `git log origin/main` and open PRs (review R09).
 
 ## Repository state
-- `main` = PRs #1 and #3–#22 merged (PR #2 closed unmerged).
+- `main` = PRs #1 and #3–#23 merged (PR #2 closed unmerged).
 - PR #19 (support, RECHECK-01, REL-01) merged as `7933843`; PR #20 (R01/R02, EVIDENCE-01) merged as `5df22fd` on 2026-10-08.
-- PR #21 (R03, ADMIT-01) merged as `0f402d8`; PR #22 (R07, ACCESS-02) merged as `ac2220d`.
-- **Open:** `fix/written-allocations` (R05, ALLOC-01).
+- PR #21 (R03) `0f402d8`; PR #22 (R07) `ac2220d`; PR #23 (R05) `cea5a25`.
+- **Open:** `feat/trial-claims` (R06 contracts, TRIAL-02).
 - **Gate:** `main` has no branch protection or ruleset (checked 2026-10-08 with the GitHub API). The CI workflow (changes, api, web, mobile, content jobs) is the only check, and it is not marked required. Merge only on a green run of the exact head being merged.
 - **Git rules (GIT-01):** never rebase, amend pushed commits or force-push (including `--force-with-lease`). Merge `main` into feature branches. Merge stacked PRs base-first.
 
@@ -29,8 +29,8 @@ No academic content is published: B01 (reviewers) and rights confirmation block 
 | R02 | Page cap counts files, not PDF pages; storage I/O under the attempt lock | **Fixed and merged** (PR #20) |
 | R03 | Concurrent starts can pass the two-permit check | **Fixed and merged** (PR #21, ADMIT-01) |
 | R04 | Recheck policy vs implementation | **Fixed and merged** (PR #19, RECHECK-01) |
-| R05 | Whole-script consumption; no per-question allocations | **Fixed** on `fix/written-allocations` (ALLOC-01) |
-| R06 | Same-device trial protection not built | Open; account-level only |
+| R05 | Whole-script consumption; no per-question allocations | **Fixed and merged** (PR #23, ALLOC-01) |
+| R06 | Same-device trial protection not built | Contracts built on `feat/trial-claims` (TRIAL-02); real device evidence blocked (B07/B08/B13); requirement **not met** |
 | R07 | All published lessons public | **Fixed and merged** (PR #22, ACCESS-02) |
 | R08 | 401 after sign-up; search 503 | 401 **fixed and merged** (REL-01); 503 open |
 | R09 | Stale records | This file regenerated; register labels reconciled |
@@ -38,8 +38,8 @@ No academic content is published: B01 (reviewers) and rights confirmation block 
 ## Next actions (in order)
 1. After deploying PR #20: run `portal-written-previews` once.
 2. Schedule `portal-written-sweep-orphans` hourly wherever evidence is stored.
-3. Merge the R05 PR after green CI. Operators must set review capacity (`PUT /v1/ops/written-capacity/{grade}/{subject}`) before written practice is offered in a scope.
-4. R06 contracts (trial claims, device authorization, recovery).
+3. Operators must set review capacity (`PUT /v1/ops/written-capacity/{grade}/{subject}`) before written practice is offered in a scope. Deployed roles must set `PORTAL_TRIAL_DEVICE_EVIDENCE` and `PORTAL_TRIAL_REF_PEPPER`.
+4. Merge the R06 PR after green CI; then R08 search 503 investigation.
 5. R08 search 503: bounded mixed-load reproduction.
 6. Roadmap: rescan classification and regrades (W06.S2.T3/T4); native written capture and mobile help; notifications; CMS import/preview/release/export; media/storyboard; production adapters as prerequisites allow; automatic written-assessment contracts (no real provider calls until B10).
 

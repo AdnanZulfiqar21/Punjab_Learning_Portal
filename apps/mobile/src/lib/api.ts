@@ -1,6 +1,7 @@
 // Mobile API client. The API origin is variant configuration (app.config.ts → extra.apiOrigin); grading, entitlements
 // and authorisation stay on the server (roadmap §5.3). Authenticated calls send the app session token as a bearer.
 import Constants from "expo-constants";
+import { Platform } from "react-native";
 import type {
   Access,
   AppSession,
@@ -21,7 +22,14 @@ import type {
   SearchResult,
   SessionCreated,
   SubmitResult,
+  TrialDecision,
 } from "@portal/contracts";
+
+import { installToken } from "@/lib/install-token";
+
+function deviceName(): string {
+  return Platform.OS === "ios" ? "iPhone or iPad" : Platform.OS === "android" ? "Android device" : "Web browser";
+}
 
 export class ApiError extends Error {
   constructor(
@@ -53,8 +61,14 @@ type RequestOptions = {
   headers?: Record<string, string>;
 };
 
+// Every request says which client it is and carries this installation's opaque token, so the server can apply the
+// trial device rules (roadmap §16.4). Until request attestation exists (B07) these are asserted by the app.
+export const CLIENT = Platform.OS === "web" ? "web" : "native";
+export const SURFACE: "web" | "ios" | "android" = Platform.OS === "ios" ? "ios" : Platform.OS === "android" ? "android" : "web";
+
 async function request<T>(path: string, opts: RequestOptions = {}): Promise<T> {
   const cid = correlationId();
+  const install = await installToken();
   let res: Response;
   try {
     res = await fetch(`${origin()}${path}`, {
@@ -62,6 +76,8 @@ async function request<T>(path: string, opts: RequestOptions = {}): Promise<T> {
       headers: {
         Accept: "application/json",
         "X-Correlation-ID": cid,
+        "X-Portal-Client": CLIENT,
+        "X-Portal-Install": install,
         ...(opts.body !== undefined ? { "Content-Type": "application/json" } : {}),
         ...(opts.token ? { Authorization: `Bearer ${opts.token}` } : {}),
         ...opts.headers,
@@ -128,8 +144,15 @@ export const api = {
 
   // Plans (P14): trial status, entitlements and the written allowance; the trial is one-time and idempotent.
   access: (token: string, signal?: AbortSignal) => request<Access>("/v1/me/access", { token, signal }),
-  startTrial: (token: string) =>
-    request<Access>("/v1/me/trial", { method: "POST", token, headers: { "X-Portal-Client": "native" } }),
+  // Trial activation is a durable, idempotent claim (roadmap §16.4): retries with the same key recover the same claim.
+  claimTrial: async (token: string) =>
+    request<TrialDecision>("/v1/me/trial/claims", {
+      method: "POST",
+      token,
+      body: { surface: SURFACE, idempotency_key: `trial-${(await installToken()).slice(0, 40)}`, proof: {}, label: deviceName() },
+    }),
+  authorizeDevice: (token: string) =>
+    request<TrialDecision>("/v1/me/trial/devices", { method: "POST", token, body: { surface: SURFACE, proof: {}, label: deviceName() } }),
 
   // Practice (P09/P10). Attempt payloads never contain keys; results release them after submission.
   practiceAvailability: (token: string, grade: number, subject: string, signal?: AbortSignal) =>
