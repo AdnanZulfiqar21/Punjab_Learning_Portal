@@ -15,6 +15,7 @@ import portal_api.modules.identity.models
 import portal_api.modules.identity.sessions
 import portal_api.modules.support.models
 import portal_api.modules.written.models
+import portal_api.modules.written.rescans
 import portal_api.modules.written.review  # noqa: F401
 from portal_api.config import get_settings
 from portal_api.db import Base

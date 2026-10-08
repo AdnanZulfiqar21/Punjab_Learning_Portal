@@ -7,6 +7,7 @@ import { useEffect, useRef, useState } from "react";
 import type { WrittenAttempt, WrittenPage, WrittenResult } from "@portal/contracts";
 import { saveMapping, sealScript } from "@/app/actions/written";
 import { LessonBlocks } from "@/components/lesson-blocks";
+import { PendingAction } from "./pending-action";
 import { RecheckPanel } from "./recheck-panel";
 import { Notice } from "@/components/ui";
 
@@ -229,6 +230,7 @@ export function WrittenRunner({ attempt, result = null }: { attempt: WrittenAtte
                       {q.status === "unavailable" && " The allowance for this question was returned to your plan."}
                     </p>
                   )}
+                  <PendingAction attemptId={attempt.id} q={q} />
                   <ul className="space-y-1 text-sm">
                     {q.criteria.map((c) => (
                       <li key={c.id}>

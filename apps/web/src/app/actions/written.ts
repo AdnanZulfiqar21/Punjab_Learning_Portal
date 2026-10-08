@@ -14,6 +14,16 @@ async function token(next: string): Promise<string> {
 
 export type WrittenBuilderState = { error?: string } | undefined;
 
+/** W06.S2.T4: the learner confirms a seemingly blank answer was not attempted (resolved like a declared one). */
+export async function confirmUnanswered(attemptId: string, position: number): Promise<{ ok: boolean; error?: string }> {
+  const t = await token(`/practice/written/${attemptId}`);
+  const res = await api<null>(`/v1/written-attempts/${encodeURIComponent(attemptId)}/questions/${position}/confirm-unanswered`, {
+    method: "POST",
+    token: t,
+  });
+  return res.ok ? { ok: true } : { ok: false, error: (res.problem as Problem | null)?.detail ?? "Couldn't confirm." };
+}
+
 export async function createWrittenPractice(_prev: WrittenBuilderState, form: FormData): Promise<WrittenBuilderState> {
   const t = await token("/practice/written");
   const chapterIds = form.getAll("chapter_ids").map(String);

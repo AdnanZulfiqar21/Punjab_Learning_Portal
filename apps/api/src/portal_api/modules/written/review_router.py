@@ -6,7 +6,7 @@ import uuid
 from datetime import datetime
 from typing import Annotated, Any, Literal
 
-from fastapi import APIRouter, Depends, Query, Response
+from fastapi import APIRouter, Depends, Query, Request, Response
 from pydantic import BaseModel, Field
 from sqlalchemy.orm import Session
 
@@ -81,6 +81,17 @@ class CompletionScope(BaseModel):
     carried_forward: dict[str, int] = Field(description="Earned units kept for the questions already resolved")
 
 
+class RevisionOut(BaseModel):
+    id: uuid.UUID
+    position: int
+    note: str
+    created_at: datetime
+    prior_page_ids: list[uuid.UUID] = Field(description="The sealed pages this clearer copy relates to")
+    pages: list[PageOut] = Field(description="The clearer copy's own pages (shown beside the originals)")
+    classification: Literal["READABILITY", "NEW_CONTENT", "INDETERMINATE"] | None
+    class_reason: str | None
+
+
 class CaseDetail(CaseSummary):
     max_units: int
     manifest: dict[str, Any]
@@ -90,6 +101,7 @@ class CaseDetail(CaseSummary):
     latest: StaffScore | None
     recheck: RecheckScope | None
     completion: CompletionScope | None
+    revisions: list[RevisionOut] = Field(description="Learner rescans for questions in this case (W06.S2.T4)")
 
 
 class DecisionIn(BaseModel):
@@ -103,8 +115,14 @@ class DecisionIn(BaseModel):
     expansion_reason: str = Field(default="", max_length=1000)
     question_status: dict[str, dict[str, Any]] = Field(
         default_factory=dict,
-        description='Optional per question: {"2": {"status": "pending"|"unavailable"|"scored", "reason": "…"}}. '
-        "Unlisted questions are scored. Pending and unavailable questions take no awards.",
+        description='Optional per question: {"2": {"status": "pending"|"unavailable"|"scored", "reason": "…", '
+        '"learner_action": "rescan"|"confirm_or_rescan"}}. Unlisted questions are scored. Pending and unavailable '
+        "questions take no awards. A learner action gives the learner 7 days to act.",
+    )
+    classifications: dict[str, dict[str, Any]] = Field(
+        default_factory=dict,
+        description='Per learner rescan: {"<revision id>": {"class": "READABILITY"|"NEW_CONTENT"|"INDETERMINATE", '
+        '"reason": "…"}}. Required for every unclassified rescan of a question in this case before release.',
     )
 
 
@@ -117,11 +135,22 @@ class CriterionResult(BaseModel):
     reason: str
 
 
+class LearnerRevision(BaseModel):
+    id: uuid.UUID
+    created_at: datetime
+    classification: Literal["READABILITY", "NEW_CONTENT", "INDETERMINATE"] | None
+
+
 class QuestionResult(BaseModel):
     position: int
     max_units: int
     status: Literal["scored", "pending", "unavailable"]
     status_reason: str = Field(description="Why a question is pending or unavailable")
+    learner_action: Literal["rescan", "confirm_or_rescan"] | None = Field(
+        default=None, description="What the teacher asked you to do for this pending question"
+    )
+    action_deadline: datetime | None = None
+    revisions: list[LearnerRevision] = Field(default_factory=list, description="Clearer copies you sent")
     earned_units: int | None = Field(description="Null unless scored; no mark is invented for unassessed work")
     criteria: list[CriterionResult]
 
@@ -217,7 +246,32 @@ def _detail(db: Session, case: review.WrittenReviewCase, who: Principal) -> Case
         latest=_staff_score(review.latest(db, case.attempt_id)),
         recheck=_recheck_scope(db, ctx["recheck"], case, who),
         completion=_completion_scope(db, case),
+        revisions=_revisions(db, case.attempt_id, {int(p) for p in (case.positions or [])} if case.positions else None),
     )
+
+
+def _revisions(db: Session, attempt_id: uuid.UUID, positions: set[int] | None) -> list[RevisionOut]:
+    from sqlalchemy import select as sa_select
+
+    from portal_api.modules.written import rescans
+    from portal_api.modules.written.models import WrittenPage
+
+    out = []
+    for r in rescans.revisions_for(db, attempt_id, positions):
+        pages = list(db.scalars(sa_select(WrittenPage).where(WrittenPage.file_id == r.file_id)))
+        out.append(
+            RevisionOut(
+                id=r.id,
+                position=r.position,
+                note=r.note,
+                created_at=r.created_at,
+                prior_page_ids=[uuid.UUID(p) for p in r.prior_page_ids],
+                pages=pages_out(db, pages),
+                classification=r.classification,  # type: ignore[arg-type]
+                class_reason=r.class_reason,
+            )
+        )
+    return out
 
 
 def _completion_scope(db: Session, case: review.WrittenReviewCase) -> CompletionScope | None:
@@ -299,6 +353,7 @@ def decision(db: DB, who: Reviewer, case_id: uuid.UUID, body: DecisionIn, respon
         expand_positions=body.expand_positions,
         expansion_reason=body.expansion_reason,
         question_status=body.question_status,
+        classifications=body.classifications,
     )
     return _detail(db, review.get_case(db, who, case_id), who)
 
@@ -331,6 +386,11 @@ def my_result(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, response: Re
             history=[],
         )
     ctx_questions = {str(fi.position): fi for fi in form.items}
+    from portal_api.modules.written import rescans
+
+    revisions_by_pos: dict[int, list[Any]] = {}
+    for r in rescans.revisions_for(db, attempt.id):
+        revisions_by_pos.setdefault(r.position, []).append(r)
     questions = []
     for pos, fi in sorted(ctx_questions.items(), key=lambda kv: int(kv[0])):
         rv = db.get(ContentVersion, fi.rubric_version_id)
@@ -346,6 +406,12 @@ def my_result(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, response: Re
                 max_units=fi.max_units,
                 status=st["status"],
                 status_reason=st.get("reason", ""),
+                learner_action=st.get("learner_action") if st["status"] == "pending" else None,
+                action_deadline=st.get("action_deadline") if st["status"] == "pending" else None,
+                revisions=[
+                    LearnerRevision(id=r.id, created_at=r.created_at, classification=r.classification)
+                    for r in revisions_by_pos.get(fi.position, [])
+                ],
                 earned_units=sv.question_units.get(pos, 0) if scored else None,
                 criteria=[]
                 if not scored
@@ -500,3 +566,48 @@ def case_page_detail(
         media_type="image/png",
         headers={"Cache-Control": "private, no-store", "X-Content-Type-Options": "nosniff", **provenance},
     )
+
+
+# ------------------------------------------------------------------ learner actions on pending questions (W06.S2.T4)
+RESCAN_LIMIT = 15 * 1024 * 1024
+
+
+@router.post(
+    "/written-attempts/{attempt_id}/questions/{position}/rescan",
+    status_code=201,
+    summary="Send a clearer copy of one pending answer (raw JPEG/PNG/PDF body; kept beside the sealed original)",
+)
+async def rescan(
+    db: DB,
+    who: CurrentPrincipal,
+    attempt_id: uuid.UUID,
+    position: int,
+    request: Request,
+    response: Response,
+    note: Annotated[str, Query(max_length=500)] = "",
+) -> dict[str, Any]:
+    from starlette.concurrency import run_in_threadpool
+
+    from portal_api.errors import TooLarge
+    from portal_api.modules.written import rescans
+
+    _private(response)
+    buf = bytearray()
+    async for chunk in request.stream():
+        buf.extend(chunk)
+        if len(buf) > RESCAN_LIMIT:
+            raise TooLarge("This file is larger than any accepted page.")
+    rev = await run_in_threadpool(rescans.submit_rescan, db, who, attempt_id, position, bytes(buf), note)
+    return {"id": str(rev.id), "position": rev.position, "created_at": rev.created_at.isoformat()}
+
+
+@router.post(
+    "/written-attempts/{attempt_id}/questions/{position}/confirm-unanswered",
+    status_code=204,
+    summary="Confirm you didn't answer a question the teacher found blank (resolved as unanswered; allowance returned)",
+)
+def confirm_unanswered(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, position: int) -> Response:
+    from portal_api.modules.written import rescans
+
+    rescans.confirm_unanswered(db, who, attempt_id, position)
+    return Response(status_code=204, headers={"Cache-Control": "private, no-store"})

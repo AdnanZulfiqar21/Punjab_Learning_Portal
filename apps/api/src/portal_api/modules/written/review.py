@@ -41,7 +41,12 @@ from portal_api.modules.written import storage
 from portal_api.modules.written.models import WrittenAttempt, WrittenForm, WrittenPage, WrittenReceipt
 
 LEASE = timedelta(minutes=20)
-REVIEW_DUE = timedelta(hours=48)  # §20.10 proposed staffed target (99% within 48 h); a service obligation, not a mark
+REVIEW_DUE = timedelta(hours=48)
+LEARNER_ACTION_WINDOW = timedelta(days=7)  # §20.10 finite remedy: a requested learner action has a 7-day deadline
+LEARNER_ACTIONS = (
+    "rescan",
+    "confirm_or_rescan",
+)  # §20.10 proposed staffed target (99% within 48 h); a service obligation, not a mark
 QUESTION_STATUSES = ("scored", "pending", "unavailable")
 
 
@@ -87,7 +92,8 @@ class WrittenScoreVersion(Base):
     )
     decision_method: Mapped[str] = mapped_column(String(10), default="TEACHER")
     case_kind: Mapped[str] = mapped_column(String(10))
-    assessor_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("app_user.id", ondelete="RESTRICT"))
+    # TEACHER decisions name the teacher; LEARNER confirmations name the learner; SYSTEM deadline resolutions have none.
+    assessor_id: Mapped[uuid.UUID | None] = mapped_column(ForeignKey("app_user.id", ondelete="RESTRICT"))
     receipt_id: Mapped[uuid.UUID] = mapped_column(
         ForeignKey("written_receipt.id", ondelete="RESTRICT")
     )  # evidence epoch
@@ -386,11 +392,18 @@ def staff_page(db: Session, who: Principal, case_id: uuid.UUID, page_id: uuid.UU
     case = _case(db, who, case_id)
     receipt = db.scalar(select(WrittenReceipt).where(WrittenReceipt.attempt_id == case.attempt_id))
     page = db.get(WrittenPage, page_id)
-    if receipt is None or page is None or str(page_id) not in receipt.page_hashes:
+    if receipt is None or page is None or not _marker_may_see(receipt, page, case):
         raise NotFound("Page not found.")
     if page.preview_key is None:
         raise Conflict("This page's preview hasn't been generated yet.", code_reason="PREVIEW_MISSING")
     return storage.get_store().get(page.preview_key), "image/png"
+
+
+def _marker_may_see(receipt: WrittenReceipt, page: WrittenPage, case: WrittenReviewCase) -> bool:
+    """Sealed pages of the receipt, or rescan revision pages of the same attempt (W06.S2.T4)."""
+    if str(page.id) in receipt.page_hashes:
+        return True
+    return page.status == "revision" and page.attempt_id == case.attempt_id
 
 
 def staff_page_detail(
@@ -408,12 +421,12 @@ def staff_page_detail(
     case = _case(db, who, case_id)
     receipt = db.scalar(select(WrittenReceipt).where(WrittenReceipt.attempt_id == case.attempt_id))
     page = db.get(WrittenPage, page_id)
-    if receipt is None or page is None or str(page_id) not in receipt.page_hashes:
+    if receipt is None or page is None or not _marker_may_see(receipt, page, case):
         raise NotFound("Page not found.")
     f = db.get(WrittenFile, page.file_id)
     assert f is not None
     key, sha, kind, index = f.storage_key, f.sha256, f.content_type, page.page_index
-    pinned = receipt.page_hashes[str(page_id)]
+    pinned = receipt.page_hashes.get(str(page_id), sha)  # revision pages are pinned by their own file hash
     db.rollback()  # no connection held while reading and rendering (OCT8-01)
     if sha != pinned:
         raise Conflict("This page's original doesn't match the submitted receipt.", code_reason="EVIDENCE_MISMATCH")
@@ -491,6 +504,7 @@ def decide(
     expand_positions: list[int] | None = None,
     expansion_reason: str = "",
     question_status: dict[str, dict[str, Any]] | None = None,
+    classifications: dict[str, dict[str, Any]] | None = None,
 ) -> WrittenScoreVersion:
     # One publication per attempt at a time (OCT8-03). Lock order everywhere: attempt row, then case rows.
     visible = _case(db, who, case_id)
@@ -610,6 +624,17 @@ def decide(
         if kind != "scored" and len(why) < 5:
             raise Unprocessable(f"Question {pos}: give the learner a reason it is {kind}.")
         statuses[pos] = {"status": kind, "reason": why[:500]}
+        action = st.get("learner_action")
+        if action is not None:
+            if kind != "pending" or action not in LEARNER_ACTIONS:
+                raise Unprocessable(f"Question {pos}: a learner action can only be asked for a pending question.")
+            previous = (current.question_status or {}).get(pos, {}) if current is not None else {}
+            same = previous.get("learner_action") == action and previous.get("action_deadline")
+            statuses[pos]["learner_action"] = action
+            # §20.10: one finite deadline per request; re-saving the same request never extends it.
+            statuses[pos]["action_deadline"] = (
+                previous["action_deadline"] if same else (now + LEARNER_ACTION_WINDOW).isoformat()
+            )
     unknown = sorted(set(question_status or {}) - set(in_scope), key=int)
     if unknown:
         raise Unprocessable("Statuses were given for questions outside this case.", errors=unknown)
@@ -622,6 +647,11 @@ def decide(
     totals, errors = _check_awards(ctx, awards, scored)
     if errors:
         raise Unprocessable("Some awards don't follow the rubric.", errors=errors)
+    if release:
+        from portal_api.modules.written import rescans
+
+        # W06.S2.T4: every learner rescan for these questions is classified by the deciding reviewer first.
+        rescans.classify_for_decision(db, who, case, set(in_scope), classifications or {}, now)
     totals = {**carried_units, **totals}
     all_status = {**carried_status, **statuses}
     for q in ctx["questions"]:  # pre-R05 carried questions without an explicit status were scored
@@ -773,22 +803,26 @@ def rebase_recheck(db: Session, who: Principal, case_id: uuid.UUID, reason: str)
 
 
 def _sync_pending(
-    db: Session, closing: WrittenReviewCase, pending: set[int], status: dict[str, Any], now: datetime
+    db: Session,
+    closing: WrittenReviewCase | None,
+    pending: set[int],
+    status: dict[str, Any],
+    now: datetime,
+    attempt_id: uuid.UUID | None = None,
 ) -> None:
     """After a release, every pending question has exactly one queued completion case (OCT8-02). Questions resolved
     elsewhere leave older cases (closed when empty); uncovered ones get a successor that keeps the original due time."""
     covered: set[int] = set()
-    for c in db.scalars(
-        select(WrittenReviewCase)
-        .where(
-            WrittenReviewCase.attempt_id == closing.attempt_id,
-            WrittenReviewCase.case_kind == "completion",
-            WrittenReviewCase.status == "queued",
-            WrittenReviewCase.id != closing.id,
-        )
-        .order_by(WrittenReviewCase.opened_at)
-        .with_for_update()
-    ):
+    attempt = closing.attempt_id if closing is not None else attempt_id
+    assert attempt is not None
+    stmt = select(WrittenReviewCase).where(
+        WrittenReviewCase.attempt_id == attempt,
+        WrittenReviewCase.case_kind == "completion",
+        WrittenReviewCase.status == "queued",
+    )
+    if closing is not None:
+        stmt = stmt.where(WrittenReviewCase.id != closing.id)
+    for c in db.scalars(stmt.order_by(WrittenReviewCase.opened_at).with_for_update()):
         keep = sorted(p for p in (c.positions or []) if p in pending and p not in covered)
         if keep != sorted(c.positions or []):
             c.positions = keep
@@ -808,8 +842,8 @@ def _sync_pending(
             )
         covered |= set(keep)
     uncovered = sorted(pending - covered)
-    if not uncovered:
-        return
+    if not uncovered or closing is None:
+        return  # a learner or system resolution only ever reduces pending work
     seq = db.scalar(
         select(func.max(WrittenReviewCase.opened_seq)).where(
             WrittenReviewCase.attempt_id == closing.attempt_id, WrittenReviewCase.case_kind == "completion"
@@ -935,6 +969,60 @@ def repair_pending_obligations(db: Session) -> list[str]:
         db.commit()
         repaired.append(str(sv.attempt_id))
     return repaired
+
+
+def publish_resolution(
+    db: Session,
+    attempt_id: uuid.UUID,
+    *,
+    case: WrittenReviewCase,
+    method: str,
+    assessor_id: uuid.UUID | None,
+    updates: dict[str, dict[str, Any]],
+    award_updates: dict[str, dict[str, Any]],
+    unit_updates: dict[str, int],
+    reason: str,
+) -> WrittenScoreVersion:
+    """Publish a released version resolving pending questions outside a teacher decision (a learner confirmation or
+    a deadline expiry). The caller holds the attempt lock. Same ledger and pending-work rules as decide."""
+    current = released_result(db, attempt_id)
+    assert current is not None
+    attempt = db.get(WrittenAttempt, attempt_id)
+    assert attempt is not None
+    form = db.get(WrittenForm, attempt.form_id)
+    assert form is not None
+    status = {**(current.question_status or {}), **updates}
+    for fi in form.items:
+        status.setdefault(str(fi.position), {"status": "scored", "reason": ""})
+    units = {**current.question_units, **unit_updates}
+    pending = sorted(int(p) for p, st in status.items() if st["status"] == "pending")
+    unavailable = sorted(int(p) for p, st in status.items() if st["status"] == "unavailable")
+    maxima = {str(fi.position): fi.max_units for fi in form.items}
+    prior = latest(db, attempt_id)
+    sv = WrittenScoreVersion(
+        attempt_id=attempt_id,
+        case_id=case.id,
+        version=(prior.version + 1) if prior else 1,
+        prior_version_id=prior.id if prior else None,
+        decision_method=method,
+        case_kind="completion",
+        assessor_id=assessor_id,
+        receipt_id=current.receipt_id,
+        rubric_version_ids=current.rubric_version_ids,
+        awards={**current.awards, **award_updates},
+        question_units={p: u for p, u in units.items() if status.get(p, {}).get("status") == "scored"},
+        question_status=status,
+        completeness="partial_pending" if pending else "partial_unavailable" if unavailable else "complete",
+        scored_max_units=sum(m for p, m in maxima.items() if status[p]["status"] == "scored"),
+        total_units=sum(u for p, u in units.items() if status.get(p, {}).get("status") == "scored"),
+        max_units=current.max_units,
+        released=True,
+        reason=reason,
+    )
+    db.add(sv)
+    db.flush()
+    _sync_pending(db, None, set(pending), status, _now(db), attempt_id=attempt_id)
+    return sv
 
 
 def released_result(db: Session, attempt_id: uuid.UUID) -> WrittenScoreVersion | None:

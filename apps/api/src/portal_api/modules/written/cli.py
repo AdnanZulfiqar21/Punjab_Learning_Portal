@@ -69,3 +69,13 @@ def repair(argv: list[str] | None = None) -> int:
     print(f"pending-question obligations repaired: {len(fixed)}")
     print(f"unsettled empty-seal reservations repaired: {len(settled)}")
     return 0
+
+
+def learner_deadlines(argv: list[str] | None = None) -> int:
+    """portal-written-learner-deadlines: resolve questions whose 7-day learner action passed (schedule hourly)."""
+    from portal_api.modules.written import rescans
+
+    with get_sessionmaker()() as db:
+        n = rescans.expire_learner_actions(db)
+    print(f"questions resolved unavailable after the learner deadline: {n}")
+    return 0

@@ -4,7 +4,7 @@
 
 ## Repository state
 - `main` = PRs #1 and #3–#27 merged (PR #2 closed unmerged), plus whatever of the stack below has merged since. Latest confirmed merges: #25 `1426388` (R08 pool), #26 `0759801` (OCT8-01), #27 `bd5fc3c` (OCT8-02/03/04).
-- **Stack, merge in this order:** PR #28 `fix/oct8-empty-seal` (OCT8-05) → `fix/oct8-start-clock` (OCT8-07) → `feat/oct8-detail-view` (OCT8-06 and these records). Merge `main` into the next branch after each merge.
+- **Stack, merge in this order:** PR #28 (OCT8-05, merged `36b4612`) → PR #29 `fix/oct8-start-clock` (OCT8-07) → `feat/oct8-detail-view` (OCT8-06, records) → `feat/written-rescans` (W06.S2.T4). Merge `main` into the next branch after each merge.
 - **Gate:** `main` has no branch protection or ruleset. The CI workflow is the only check and is not marked required. Merge only on a green run of the exact head being merged. CI `mobile`/`content` jobs skip when their paths are unchanged; a skip is not mobile or content qualification.
 - **Git rules (GIT-01):** never rebase, amend pushed commits or force-push (including `--force-with-lease`). Merge `main` into feature branches.
 
@@ -43,14 +43,16 @@ No academic content is published: B01 (reviewers) and rights confirmation block 
 ## Test evidence (local, this machine; CI runs are on each PR)
 | Commit / branch | Command | Result |
 |---|---|---|
-| `feat/oct8-detail-view` @ `758b8dc` (stack top) | `uv run pytest -q` in `apps/api` | 190 passed |
+| `feat/oct8-detail-view` @ `758b8dc` | `uv run pytest -q` in `apps/api` | 190 passed |
+| `feat/written-rescans` (stack top) | `uv run pytest -q` | 196 passed |
+| same | `npx playwright test` | 46 passed, 22 skipped |
 | same | `npx playwright test` in `apps/web` (API and web running) | 45 passed, 21 skipped (desktop-only tests on the phone project) |
 | PR #25 body (159) vs final report (172) | 159 was on `fix/pool-saturation` alone; 172 after merging #24 into it | Both correct for their commit |
 
 ## Next actions
 1. Merge PR #28, then open and merge the start-clock and detail-view PRs on green CI.
 2. Deployment prerequisites (when B03 exists): run `portal-written-previews` and `portal-written-repair` once; schedule `portal-written-sweep-orphans`; set review capacity per scope; set `PORTAL_TRIAL_DEVICE_EVIDENCE` and a secret `PORTAL_TRIAL_REF_PEPPER`. Production must not silently use `fallback` as the anti-repeat-trial implementation.
-3. Roadmap continuation, in order: learner actions on pending questions and rescan classification (W06.S2.T4); administrative regrades and adjudication (W06.S2.T3, same lock order and rebase path as PUB-01); native written capture, results, rechecks and mobile help; notifications (P15.S1); CMS import batches, previews, release/rollback, export (P06); source-grounded drafting and media (P07, drafts only); automatic written-assessment contracts (W05; no real script calls until B10).
+3. Roadmap continuation, in order: (done on `feat/written-rescans`: learner actions and rescan classification, RESCAN-01; schedule `portal-written-learner-deadlines` hourly); linked new practice attempts (W04.S3.T3); administrative regrades and adjudication (W06.S2.T3, same lock order and rebase path as PUB-01); native written capture, results, rechecks and mobile help; notifications (P15.S1); CMS import batches, previews, release/rollback, export (P06); source-grounded drafting and media (P07, drafts only); automatic written-assessment contracts (W05; no real script calls until B10).
 
 ## Run locally
 ```bash

@@ -100,7 +100,7 @@ class WrittenFile(Base):
     __tablename__ = "written_file"
     __table_args__ = (
         UniqueConstraint("attempt_id", "sha256", name="uq_written_file_attempt_hash"),
-        CheckConstraint("status in ('uploaded','withdrawn')", name="written_file_status"),
+        CheckConstraint("status in ('uploaded','withdrawn','revision')", name="written_file_status"),
     )
     id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     attempt_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("written_attempt.id", ondelete="RESTRICT"), index=True)
@@ -122,7 +122,7 @@ class WrittenPage(Base):
     __tablename__ = "written_page"
     __table_args__ = (
         UniqueConstraint("file_id", "page_index", name="uq_written_page_file_index"),
-        CheckConstraint("status in ('uploaded','withdrawn')", name="written_page_status"),
+        CheckConstraint("status in ('uploaded','withdrawn','revision')", name="written_page_status"),
     )
     id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     attempt_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("written_attempt.id", ondelete="RESTRICT"), index=True)

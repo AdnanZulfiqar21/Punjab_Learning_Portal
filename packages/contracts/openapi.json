@@ -718,6 +718,14 @@
             "title": "Reference",
             "type": "string"
           },
+          "revisions": {
+            "description": "Learner rescans for questions in this case (W06.S2.T4)",
+            "items": {
+              "$ref": "#/components/schemas/RevisionOut"
+            },
+            "title": "Revisions",
+            "type": "array"
+          },
           "status": {
             "enum": [
               "queued",
@@ -754,7 +762,8 @@
           "lease_expires_at",
           "latest",
           "recheck",
-          "completion"
+          "completion",
+          "revisions"
         ],
         "title": "CaseDetail",
         "type": "object"
@@ -1399,6 +1408,15 @@
             "title": "Awards",
             "type": "object"
           },
+          "classifications": {
+            "additionalProperties": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "description": "Per learner rescan: {\"<revision id>\": {\"class\": \"READABILITY\"|\"NEW_CONTENT\"|\"INDETERMINATE\", \"reason\": \"\u2026\"}}. Required for every unclassified rescan of a question in this case before release.",
+            "title": "Classifications",
+            "type": "object"
+          },
           "expand_positions": {
             "description": "Recheck only: questions to add (academic adjudicators)",
             "items": {
@@ -1424,7 +1442,7 @@
               "additionalProperties": true,
               "type": "object"
             },
-            "description": "Optional per question: {\"2\": {\"status\": \"pending\"|\"unavailable\"|\"scored\", \"reason\": \"\u2026\"}}. Unlisted questions are scored. Pending and unavailable questions take no awards.",
+            "description": "Optional per question: {\"2\": {\"status\": \"pending\"|\"unavailable\"|\"scored\", \"reason\": \"\u2026\", \"learner_action\": \"rescan\"|\"confirm_or_rescan\"}}. Unlisted questions are scored. Pending and unavailable questions take no awards. A learner action gives the learner 7 days to act.",
             "title": "Question Status",
             "type": "object"
           },
@@ -2679,6 +2697,43 @@
         "title": "ItemSummary",
         "type": "object"
       },
+      "LearnerRevision": {
+        "properties": {
+          "classification": {
+            "anyOf": [
+              {
+                "enum": [
+                  "READABILITY",
+                  "NEW_CONTENT",
+                  "INDETERMINATE"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Classification"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "created_at",
+          "classification"
+        ],
+        "title": "LearnerRevision",
+        "type": "object"
+      },
       "LessonOut": {
         "properties": {
           "access_tier": {
@@ -3381,6 +3436,18 @@
       },
       "QuestionResult": {
         "properties": {
+          "action_deadline": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Action Deadline"
+          },
           "criteria": {
             "items": {
               "$ref": "#/components/schemas/CriterionResult"
@@ -3400,6 +3467,22 @@
             "description": "Null unless scored; no mark is invented for unassessed work",
             "title": "Earned Units"
           },
+          "learner_action": {
+            "anyOf": [
+              {
+                "enum": [
+                  "rescan",
+                  "confirm_or_rescan"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "What the teacher asked you to do for this pending question",
+            "title": "Learner Action"
+          },
           "max_units": {
             "title": "Max Units",
             "type": "integer"
@@ -3407,6 +3490,14 @@
           "position": {
             "title": "Position",
             "type": "integer"
+          },
+          "revisions": {
+            "description": "Clearer copies you sent",
+            "items": {
+              "$ref": "#/components/schemas/LearnerRevision"
+            },
+            "title": "Revisions",
+            "type": "array"
           },
           "status": {
             "enum": [
@@ -4029,6 +4120,84 @@
           "created_at"
         ],
         "title": "ReviewOut",
+        "type": "object"
+      },
+      "RevisionOut": {
+        "properties": {
+          "class_reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Class Reason"
+          },
+          "classification": {
+            "anyOf": [
+              {
+                "enum": [
+                  "READABILITY",
+                  "NEW_CONTENT",
+                  "INDETERMINATE"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Classification"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "note": {
+            "title": "Note",
+            "type": "string"
+          },
+          "pages": {
+            "description": "The clearer copy's own pages (shown beside the originals)",
+            "items": {
+              "$ref": "#/components/schemas/PageOut"
+            },
+            "title": "Pages",
+            "type": "array"
+          },
+          "position": {
+            "title": "Position",
+            "type": "integer"
+          },
+          "prior_page_ids": {
+            "description": "The sealed pages this clearer copy relates to",
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "title": "Prior Page Ids",
+            "type": "array"
+          }
+        },
+        "required": [
+          "id",
+          "position",
+          "note",
+          "created_at",
+          "prior_page_ids",
+          "pages",
+          "classification",
+          "class_reason"
+        ],
+        "title": "RevisionOut",
         "type": "object"
       },
       "RightsIn": {
@@ -9881,6 +10050,116 @@
         "summary": "Your own page as its validated PNG preview (private; originals are never served)",
         "tags": [
           "written practice"
+        ]
+      }
+    },
+    "/v1/written-attempts/{attempt_id}/questions/{position}/confirm-unanswered": {
+      "post": {
+        "operationId": "confirm_unanswered_v1_written_attempts__attempt_id__questions__position__confirm_unanswered_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "attempt_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Attempt Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "position",
+            "required": true,
+            "schema": {
+              "title": "Position",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Confirm you didn't answer a question the teacher found blank (resolved as unanswered; allowance returned)",
+        "tags": [
+          "written marking"
+        ]
+      }
+    },
+    "/v1/written-attempts/{attempt_id}/questions/{position}/rescan": {
+      "post": {
+        "operationId": "rescan_v1_written_attempts__attempt_id__questions__position__rescan_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "attempt_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Attempt Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "position",
+            "required": true,
+            "schema": {
+              "title": "Position",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "note",
+            "required": false,
+            "schema": {
+              "default": "",
+              "maxLength": 500,
+              "title": "Note",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Rescan V1 Written Attempts  Attempt Id  Questions  Position  Rescan Post",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Send a clearer copy of one pending answer (raw JPEG/PNG/PDF body; kept beside the sealed original)",
+        "tags": [
+          "written marking"
         ]
       }
     },
