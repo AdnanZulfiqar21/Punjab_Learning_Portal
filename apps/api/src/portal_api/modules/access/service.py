@@ -22,7 +22,7 @@ from sqlalchemy import func, select
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
-from portal_api.errors import AppError, Conflict
+from portal_api.errors import AppError, Conflict, NotFound, Unprocessable
 from portal_api.modules.access.models import (
     OFFER_TERMS_VERSION,
     TRIAL_PROGRAM,
@@ -234,24 +234,32 @@ def _events(db: Session, entitlement_ids: list[uuid.UUID]) -> list[AllowanceEven
 
 
 def _holds(events: list[AllowanceEvent]) -> tuple[int, int, int, int]:
-    """(reserved_open, accepted_unconsumed, consumed, remedy) across the given events."""
-    by_attempt: dict[uuid.UUID, dict[str, int]] = {}
+    """(reserved_open, accepted_unconsumed, consumed, remedy) across the given events.
+
+    Per attempt: once anything is accepted, the reservation no longer holds units. Each accepted question is then
+    consumed, released, or still held. Attempts sealed before R05 use attempt-level events (position null)."""
+    by_attempt: dict[uuid.UUID, list[AllowanceEvent]] = {}
     remedy = 0
     for e in events:
         if e.kind == "REMEDY_CREDIT":
             remedy += e.units
             continue
-        by_attempt.setdefault(e.attempt_id, {})[e.kind] = e.units
+        by_attempt.setdefault(e.attempt_id, []).append(e)
     reserved = accepted = consumed = 0
-    for kinds in by_attempt.values():
-        if "CONSUMED" in kinds:
-            consumed += kinds["CONSUMED"]
-        elif "RELEASED" in kinds and "ACCEPTED" not in kinds:
+    for evs in by_attempt.values():
+        kinds = {(e.kind, e.position): e.units for e in evs}
+        accepted_q = {pos: u for (k, pos), u in kinds.items() if k == "ACCEPTED"}
+        if not accepted_q:
+            if ("RESERVED", None) in kinds and ("RELEASED", None) not in kinds:
+                reserved += kinds[("RESERVED", None)]
             continue
-        elif "ACCEPTED" in kinds:
-            accepted += kinds["ACCEPTED"]
-        elif "RESERVED" in kinds:
-            reserved += kinds["RESERVED"]
+        for pos, units in accepted_q.items():
+            if ("CONSUMED", pos) in kinds:
+                consumed += kinds[("CONSUMED", pos)]
+            elif ("RELEASED", pos) in kinds:
+                continue
+            else:
+                accepted += units
     return reserved, accepted, consumed, remedy
 
 
@@ -323,45 +331,165 @@ def reserve(db: Session, user_id: uuid.UUID, attempt_id: uuid.UUID, units: int, 
     )
 
 
-def accept(db: Session, attempt_id: uuid.UUID, units: int, detail: dict[str, Any]) -> None:
-    """Inside the seal transaction: bind the submitted questions; the rest of the reservation is released."""
-    res = db.scalar(
+def _reservation(db: Session, attempt_id: uuid.UUID) -> AllowanceEvent | None:
+    return db.scalar(
         select(AllowanceEvent).where(AllowanceEvent.attempt_id == attempt_id, AllowanceEvent.kind == "RESERVED")
     )
-    if res is None or db.scalar(
-        select(AllowanceEvent).where(AllowanceEvent.attempt_id == attempt_id, AllowanceEvent.kind == "ACCEPTED")
-    ):
-        return
-    db.add(
-        AllowanceEvent(
-            user_id=res.user_id,
-            entitlement_id=res.entitlement_id,
-            attempt_id=attempt_id,
-            kind="ACCEPTED",
-            units=min(units, res.units),
-            detail=detail,
-        )
-    )
 
 
-def consume(db: Session, attempt_id: uuid.UUID) -> None:
-    """Inside the first result release: consume the accepted units exactly once."""
-    acc = db.scalar(
-        select(AllowanceEvent).where(AllowanceEvent.attempt_id == attempt_id, AllowanceEvent.kind == "ACCEPTED")
-    )
-    if acc is None or db.scalar(
-        select(AllowanceEvent).where(AllowanceEvent.attempt_id == attempt_id, AllowanceEvent.kind == "CONSUMED")
-    ):
+def _event(db: Session, attempt_id: uuid.UUID, kind: str, position: int | None) -> AllowanceEvent | None:
+    stmt = select(AllowanceEvent).where(AllowanceEvent.attempt_id == attempt_id, AllowanceEvent.kind == kind)
+    stmt = stmt.where(AllowanceEvent.position.is_(None) if position is None else AllowanceEvent.position == position)
+    return db.scalar(stmt)
+
+
+def accept(db: Session, attempt_id: uuid.UUID, units_by_position: dict[int, int], detail: dict[str, Any]) -> None:
+    """Inside the seal transaction: one ACCEPTED event per answered question (its weighted units). Unanswered
+    questions accept nothing, and the rest of the reservation stops holding units."""
+    res = _reservation(db, attempt_id)
+    if res is None:
         return
-    db.add(
-        AllowanceEvent(
-            user_id=acc.user_id,
-            entitlement_id=acc.entitlement_id,
-            attempt_id=attempt_id,
-            kind="CONSUMED",
-            units=acc.units,
+    budget = res.units
+    for pos in sorted(units_by_position):
+        if _event(db, attempt_id, "ACCEPTED", pos) is not None:
+            continue
+        units = min(units_by_position[pos], budget)
+        budget -= units
+        db.add(
+            AllowanceEvent(
+                user_id=res.user_id,
+                entitlement_id=res.entitlement_id,
+                attempt_id=attempt_id,
+                kind="ACCEPTED",
+                position=pos,
+                units=units,
+                detail=detail,
+            )
+        )
+    db.flush()
+
+
+def _legacy(db: Session, attempt_id: uuid.UUID) -> AllowanceEvent | None:
+    """An attempt sealed before R05 (one attempt-level ACCEPTED event)."""
+    return _event(db, attempt_id, "ACCEPTED", None)
+
+
+def consume(db: Session, attempt_id: uuid.UUID, positions: list[int] | None = None) -> list[int]:
+    """When marks are released: consume each scored question's accepted units exactly once. Returns the positions
+    consumed now. Attempts sealed before R05 consume their attempt-level units once, as before."""
+    legacy = _legacy(db, attempt_id)
+    if legacy is not None:
+        if _event(db, attempt_id, "CONSUMED", None) is None:
+            db.add(
+                AllowanceEvent(
+                    user_id=legacy.user_id,
+                    entitlement_id=legacy.entitlement_id,
+                    attempt_id=attempt_id,
+                    kind="CONSUMED",
+                    units=legacy.units,
+                )
+            )
+        return []
+    done = []
+    for pos in sorted(set(positions or [])):
+        acc = _event(db, attempt_id, "ACCEPTED", pos)
+        if acc is None or _event(db, attempt_id, "CONSUMED", pos) or _event(db, attempt_id, "RELEASED", pos):
+            continue
+        db.add(
+            AllowanceEvent(
+                user_id=acc.user_id,
+                entitlement_id=acc.entitlement_id,
+                attempt_id=attempt_id,
+                kind="CONSUMED",
+                position=pos,
+                units=acc.units,
+            )
+        )
+        done.append(pos)
+    db.flush()
+    return done
+
+
+def release_questions(db: Session, attempt_id: uuid.UUID, positions: list[int], reason: str) -> list[int]:
+    """A question resolved unavailable (the service could not assess it): its unconsumed units return to the bucket.
+    Consumed units are never released this way."""
+    done = []
+    for pos in sorted(set(positions)):
+        acc = _event(db, attempt_id, "ACCEPTED", pos)
+        if acc is None or _event(db, attempt_id, "CONSUMED", pos) or _event(db, attempt_id, "RELEASED", pos):
+            continue
+        db.add(
+            AllowanceEvent(
+                user_id=acc.user_id,
+                entitlement_id=acc.entitlement_id,
+                attempt_id=attempt_id,
+                kind="RELEASED",
+                position=pos,
+                units=acc.units,
+                detail={"reason": reason},
+            )
+        )
+        done.append(pos)
+    db.flush()
+    return done
+
+
+def remedy_credit(
+    db: Session,
+    actor: uuid.UUID,
+    *,
+    attempt_id: uuid.UUID,
+    position: int | None,
+    units: int,
+    reason: str,
+    defect_ref: str,
+    idempotency_key: str,
+) -> AllowanceEvent:
+    """An authorised remedy for a service defect: a separate credit event, never an edit of earlier events. Retrying
+    with the same key returns the original credit; reusing a key for a different remedy is a conflict."""
+    existing = db.scalar(
+        select(AllowanceEvent).where(
+            AllowanceEvent.kind == "REMEDY_CREDIT", AllowanceEvent.idempotency_key == idempotency_key
         )
     )
+    wanted = {"attempt_id": str(attempt_id), "position": position, "units": units, "defect_ref": defect_ref}
+    if existing is not None:
+        same = {
+            "attempt_id": str(existing.attempt_id),
+            "position": existing.position,
+            "units": existing.units,
+            "defect_ref": existing.detail.get("defect_ref"),
+        }
+        if same != wanted:
+            raise Conflict("This remedy key was already used for a different remedy.")
+        return existing
+    res = _reservation(db, attempt_id)
+    if res is None:
+        raise NotFound("No written allowance is recorded for this attempt.")
+    if units <= 0 or units > 20:
+        raise Unprocessable("A remedy credit must be between 1 and 20 units.")
+    event = AllowanceEvent(
+        user_id=res.user_id,
+        entitlement_id=res.entitlement_id,
+        attempt_id=attempt_id,
+        kind="REMEDY_CREDIT",
+        position=position,
+        idempotency_key=idempotency_key,
+        units=units,
+        detail={"reason": reason.strip(), "defect_ref": defect_ref, "granted_by": str(actor)},
+    )
+    db.add(event)
+    record(
+        db,
+        actor=actor,
+        action="access.remedy_credited",
+        target_type="written_attempt",
+        target_id=str(attempt_id),
+        details={"units": units, "position": position, "defect_ref": defect_ref, "reason": reason.strip()},
+    )
+    db.commit()
+    db.refresh(event)
+    return event
 
 
 def release(db: Session, attempt_id: uuid.UUID, reason: str) -> None:
@@ -373,10 +501,11 @@ def release(db: Session, attempt_id: uuid.UUID, reason: str) -> None:
         return
     done = db.scalar(
         select(AllowanceEvent).where(
-            AllowanceEvent.attempt_id == attempt_id, AllowanceEvent.kind.in_(["ACCEPTED", "RELEASED"])
+            AllowanceEvent.attempt_id == attempt_id,
+            AllowanceEvent.kind.in_(["ACCEPTED", "RELEASED"]),
         )
     )
-    if done is not None:
+    if done is not None:  # sealed work (accepted) or already released: nothing to return here
         return
     db.add(
         AllowanceEvent(

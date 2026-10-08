@@ -128,4 +128,10 @@ def published_written(client: TestClient) -> dict[str, Any]:
             )
             assert _post(client, publisher, r["id"], "publish").status_code == 200
             assert _post(client, publisher, q["id"], "publish").status_code == 200
+        # Funded review capacity for the fixture scope (R05): written starts need it.
+        from portal_api.modules.written.review import ReviewCapacity
+
+        if db.get(ReviewCapacity, (12, "chemistry")) is None:
+            db.add(ReviewCapacity(grade_number=12, subject_code="chemistry", max_open_cases=10_000, reason="fixture"))
+            db.commit()
         return {"chapter": str(chapter.id)}

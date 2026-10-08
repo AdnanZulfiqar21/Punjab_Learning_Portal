@@ -79,6 +79,19 @@ def main(argv: list[str] | None = None) -> int:
                         details={"grant_id": str(grant.id), "role": role, "scope": SCOPE, "via": "dev-seed"},
                     )
             print(f"{email}: {', '.join(roles)} (Class XI Biology)")
+        # Development-only funded review capacity for the fixture scope (R05). Real capacity is an operator decision.
+        from portal_api.modules.written.review import ReviewCapacity
+
+        if db.get(ReviewCapacity, (11, "biology")) is None:
+            db.add(
+                ReviewCapacity(
+                    grade_number=11,
+                    subject_code="biology",
+                    max_open_cases=500,
+                    reason="development fixture (portal-dev-seed-staff)",
+                )
+            )
+            print("review capacity: Class XI Biology, 500 open cases (development fixture)")
         db.commit()
     return 0
 

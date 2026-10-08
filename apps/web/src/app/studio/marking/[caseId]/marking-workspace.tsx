@@ -34,17 +34,28 @@ export function MarkingWorkspace({ initial }: { initial: MarkingCase }) {
   });
   // A recheck re-marks only the learner's questions (plus any an adjudicator adds with a reason); the rest carry forward.
   const rc = c.recheck;
+  const cp = c.completion;
   const [added, setAdded] = useState<number[]>([]);
   const [expansionReason, setExpansionReason] = useState("");
-  const scope = rc ? new Set([...rc.positions, ...rc.expanded_positions, ...added].map(String)) : null;
+  // R05: each question in scope is scored, pending (e.g. unreadable) or unavailable (can't be assessed).
+  const [status, setStatus] = useState<Record<string, { status: "scored" | "pending" | "unavailable"; reason: string }>>({});
+  const statusOf = (pos: string) => status[pos]?.status ?? "scored";
+  const carried = rc?.carried_forward ?? cp?.carried_forward ?? {};
+  const scope = rc
+    ? new Set([...rc.positions, ...rc.expanded_positions, ...added].map(String))
+    : cp
+      ? new Set(cp.positions.map(String))
+      : null;
   const inScope = (pos: string) => !scope || scope.has(pos);
   const slots = (c.manifest as { slots?: Record<string, { pages?: string[]; unanswered?: boolean }> }).slots ?? {};
   const pageNo = (id: string) => c.pages.findIndex((p) => p.id === id) + 1;
   const total = Object.entries(awards).reduce(
-    (n, [pos, q]) => n + (inScope(pos) ? Object.values(q).reduce((m, a) => m + a.units, 0) : (rc?.carried_forward[pos] ?? 0)),
+    (n, [pos, q]) =>
+      n + (inScope(pos) ? (statusOf(pos) === "scored" ? Object.values(q).reduce((m, a) => m + a.units, 0) : 0) : (carried[pos] ?? 0)),
     0,
   );
-  const sent = () => Object.fromEntries(Object.entries(awards).filter(([pos]) => inScope(pos)));
+  const sent = () => Object.fromEntries(Object.entries(awards).filter(([pos]) => inScope(pos) && statusOf(pos) === "scored"));
+  const sentStatus = () => Object.fromEntries(Object.entries(status).filter(([pos, st]) => inScope(pos) && st.status !== "scored"));
   const expansion = () => (added.length ? { positions: added, reason: expansionReason.trim() } : undefined);
   const canMark = c.leased_by_me && c.status === "queued";
 
@@ -110,6 +121,13 @@ export function MarkingWorkspace({ initial }: { initial: MarkingCase }) {
           <p className="text-muted">Re-mark only these questions. Every other question keeps its released marks.</p>
         </section>
       )}
+      {cp && (
+        <section aria-label="Pending questions" className="space-y-1 rounded-xl border border-warn bg-warn-soft p-4 text-sm">
+          <p className="font-semibold">Complete the pending question{cp.positions.length > 1 ? "s" : ""}: {cp.positions.join(", ")}</p>
+          <p className="whitespace-pre-line">{cp.reason}</p>
+          <p className="text-muted">Questions already released keep their marks.</p>
+        </section>
+      )}
 
       <div className="grid gap-6 lg:grid-cols-2">
         <section aria-label="Submitted pages" className="space-y-3">
@@ -137,7 +155,7 @@ export function MarkingWorkspace({ initial }: { initial: MarkingCase }) {
                   <div>
                     <h2 className="font-semibold">Question {pos}</h2>
                     <p className="text-sm text-muted">
-                      Carried forward unchanged: {marks(rc?.carried_forward[pos] ?? 0)} / {marks(q.max_units)}
+                      Carried forward unchanged: {pos in carried ? `${marks(carried[pos])} / ${marks(q.max_units)}` : "not scored"}
                     </p>
                   </div>
                   {rc?.can_expand && canMark && (
@@ -158,7 +176,36 @@ export function MarkingWorkspace({ initial }: { initial: MarkingCase }) {
                   </span>
                 </div>
                 <LessonBlocks blocks={body.stem} headingOffset={2} />
-                {(body.subparts.length ? body.subparts : [{ id: "*", label: "Answer", blocks: [], max_units: q.max_units }]).map((sp) => {
+                {c.case_kind !== "recheck" && (
+                  <div className="flex flex-wrap items-center gap-3 rounded-lg bg-surface-muted p-2 text-sm">
+                    <label className="flex items-center gap-2">
+                      Outcome
+                      <select
+                        aria-label={`Outcome for question ${pos}`}
+                        value={statusOf(pos)}
+                        disabled={!canMark}
+                        onChange={(e) => setStatus((s) => ({ ...s, [pos]: { status: e.target.value as "scored", reason: s[pos]?.reason ?? "" } }))}
+                        className="rounded border border-border bg-surface px-2 py-1"
+                      >
+                        <option value="scored">Mark it</option>
+                        <option value="pending">Pending (e.g. unreadable; needs the learner)</option>
+                        <option value="unavailable">Can&apos;t be assessed (allowance returned)</option>
+                      </select>
+                    </label>
+                    {statusOf(pos) !== "scored" && (
+                      <input
+                        aria-label={`Reason for question ${pos}`}
+                        placeholder="Reason shown to the learner"
+                        value={status[pos]?.reason ?? ""}
+                        disabled={!canMark}
+                        onChange={(e) => setStatus((s) => ({ ...s, [pos]: { status: statusOf(pos), reason: e.target.value } }))}
+                        className="min-w-60 flex-1 rounded border border-border bg-surface px-2 py-1"
+                        maxLength={500}
+                      />
+                    )}
+                  </div>
+                )}
+                {statusOf(pos) === "scored" && (body.subparts.length ? body.subparts : [{ id: "*", label: "Answer", blocks: [], max_units: q.max_units }]).map((sp) => {
                   const slot = slots[`${pos}:${sp.id}`] ?? {};
                   const crit = r.criteria.filter((cr) => (cr.subpart_id ?? "*") === sp.id);
                   return (
@@ -225,10 +272,10 @@ export function MarkingWorkspace({ initial }: { initial: MarkingCase }) {
             </span>
             {canMark ? (
               <div className="flex gap-2">
-                <button type="button" disabled={pending} onClick={() => run(() => saveMarks(c.id, c.version, sent(), false, expansion()))} className="rounded-lg border border-border px-4 py-2 font-medium disabled:opacity-60">
+                <button type="button" disabled={pending} onClick={() => run(() => saveMarks(c.id, c.version, sent(), false, expansion(), sentStatus()))} className="rounded-lg border border-border px-4 py-2 font-medium disabled:opacity-60">
                   Save marks
                 </button>
-                <button type="button" disabled={pending} onClick={() => run(() => saveMarks(c.id, c.version, sent(), true, expansion()))} className="rounded-lg bg-accent px-4 py-2 font-medium text-white disabled:opacity-60 dark:text-background">
+                <button type="button" disabled={pending} onClick={() => run(() => saveMarks(c.id, c.version, sent(), true, expansion(), sentStatus()))} className="rounded-lg bg-accent px-4 py-2 font-medium text-white disabled:opacity-60 dark:text-background">
                   Release result
                 </button>
               </div>

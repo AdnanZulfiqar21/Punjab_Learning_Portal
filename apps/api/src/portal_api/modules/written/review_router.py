@@ -24,6 +24,7 @@ from portal_api.modules.written.schemas import PageOut
 router = APIRouter(prefix="/v1", tags=["written marking"])
 DB = Annotated[Session, Depends(get_session)]
 Reviewer = Annotated[Principal, Depends(require(Permission.review_content))]
+Operator = Annotated[Principal, Depends(require(Permission.operate_platform))]
 
 
 def _private(response: Response) -> None:
@@ -35,8 +36,9 @@ class CaseSummary(BaseModel):
     reference: str = Field(description="Short script reference; learner identity is not shown to markers")
     grade: int
     subject: str
-    case_kind: Literal["initial", "recheck"]
+    case_kind: Literal["initial", "recheck", "completion"]
     opened_at: datetime
+    due_at: datetime | None = Field(description="Service obligation for accepted work (proposed 48 h)")
     status: Literal["queued", "released"]
     version: int
     leased_by_me: bool
@@ -73,6 +75,12 @@ class RecheckScope(BaseModel):
     carried_forward: dict[str, int] = Field(description="Earned units kept unchanged for questions outside the scope")
 
 
+class CompletionScope(BaseModel):
+    positions: list[int] = Field(description="Questions still pending from the released result")
+    reason: str
+    carried_forward: dict[str, int] = Field(description="Earned units kept for the questions already resolved")
+
+
 class CaseDetail(CaseSummary):
     max_units: int
     manifest: dict[str, Any]
@@ -81,6 +89,7 @@ class CaseDetail(CaseSummary):
     lease_expires_at: datetime | None
     latest: StaffScore | None
     recheck: RecheckScope | None
+    completion: CompletionScope | None
 
 
 class DecisionIn(BaseModel):
@@ -92,6 +101,11 @@ class DecisionIn(BaseModel):
         default_factory=list, max_length=20, description="Recheck only: questions to add (academic adjudicators)"
     )
     expansion_reason: str = Field(default="", max_length=1000)
+    question_status: dict[str, dict[str, Any]] = Field(
+        default_factory=dict,
+        description='Optional per question: {"2": {"status": "pending"|"unavailable"|"scored", "reason": "…"}}. '
+        "Unlisted questions are scored. Pending and unavailable questions take no awards.",
+    )
 
 
 class CriterionResult(BaseModel):
@@ -106,7 +120,9 @@ class CriterionResult(BaseModel):
 class QuestionResult(BaseModel):
     position: int
     max_units: int
-    earned_units: int
+    status: Literal["scored", "pending", "unavailable"]
+    status_reason: str = Field(description="Why a question is pending or unavailable")
+    earned_units: int | None = Field(description="Null unless scored; no mark is invented for unassessed work")
     criteria: list[CriterionResult]
 
 
@@ -142,6 +158,10 @@ class WrittenResultOut(BaseModel):
     max_units: int
     released_at: datetime | None
     decision_method: str | None
+    completeness: Literal["complete", "partial_pending", "partial_unavailable"] | None = Field(
+        description="Not complete means no final total: some questions are pending or could not be assessed"
+    )
+    scored_max_units: int | None = Field(description="Maximum of the questions that were scored")
     questions: list[QuestionResult]
     recheck: RecheckOut
     history: list[HistoryEntry] = Field(
@@ -159,6 +179,7 @@ def _summary(case: review.WrittenReviewCase, who: Principal) -> dict[str, Any]:
         "subject": case.subject_code,
         "case_kind": case.case_kind,
         "opened_at": case.opened_at,
+        "due_at": case.due_at,
         "status": case.status,
         "version": case.version,
         "leased_by_me": leased and case.lease_holder == who.user.id,
@@ -192,6 +213,19 @@ def _detail(db: Session, case: review.WrittenReviewCase, who: Principal) -> Case
         lease_expires_at=case.lease_expires_at,
         latest=_staff_score(review.latest(db, case.attempt_id)),
         recheck=_recheck_scope(db, ctx["recheck"], case, who),
+        completion=_completion_scope(db, case),
+    )
+
+
+def _completion_scope(db: Session, case: review.WrittenReviewCase) -> CompletionScope | None:
+    if case.case_kind != "completion":
+        return None
+    current = review.released_result(db, case.attempt_id)
+    scope = {str(p) for p in (case.positions or [])}
+    return CompletionScope(
+        positions=case.positions or [],
+        reason=case.reason or "",
+        carried_forward={p: u for p, u in (current.question_units if current else {}).items() if p not in scope},
     )
 
 
@@ -261,6 +295,7 @@ def decision(db: DB, who: Reviewer, case_id: uuid.UUID, body: DecisionIn, respon
         reason=body.reason,
         expand_positions=body.expand_positions,
         expansion_reason=body.expansion_reason,
+        question_status=body.question_status,
     )
     return _detail(db, review.get_case(db, who, case_id), who)
 
@@ -286,6 +321,8 @@ def my_result(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, response: Re
             max_units=form.max_units,
             released_at=None,
             decision_method=None,
+            completeness=None,
+            scored_max_units=None,
             questions=[],
             recheck=RecheckOut(**review.recheck_state(db, attempt.id)),
             history=[],
@@ -298,12 +335,18 @@ def my_result(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, response: Re
         rubric, _ = wq.parse_rubric(rv.body)
         assert rubric is not None
         given = sv.awards.get(pos, {})
+        st = (sv.question_status or {}).get(pos, {"status": "scored", "reason": ""})
+        scored = st["status"] == "scored"
         questions.append(
             QuestionResult(
                 position=fi.position,
                 max_units=fi.max_units,
-                earned_units=sv.question_units.get(pos, 0),
-                criteria=[
+                status=st["status"],
+                status_reason=st.get("reason", ""),
+                earned_units=sv.question_units.get(pos, 0) if scored else None,
+                criteria=[]
+                if not scored
+                else [
                     CriterionResult(
                         id=c.id,
                         subpart_id=c.subpart_id,
@@ -327,6 +370,8 @@ def my_result(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, response: Re
         max_units=sv.max_units,
         released_at=sv.created_at,
         decision_method=sv.decision_method,
+        completeness=sv.completeness,  # type: ignore[arg-type]
+        scored_max_units=sv.scored_max_units if sv.scored_max_units is not None else sv.max_units,
         questions=questions,
         recheck=RecheckOut(**review.recheck_state(db, attempt.id)),
         history=history,
@@ -344,3 +389,75 @@ def request_recheck(
     _private(response)
     review.request_recheck(db, who, attempt_id, body.reason, body.positions, body.criteria)
     return RecheckOut(**review.recheck_state(db, attempt_id))
+
+
+# ------------------------------------------------------------------ operations (R05: funded capacity, obligations)
+class CapacityIn(BaseModel):
+    max_open_cases: int = Field(ge=0, le=100_000, description="0 stops new written starts in this scope")
+    reason: str = Field(min_length=5, max_length=1000)
+
+
+class BacklogRow(BaseModel):
+    grade: int
+    subject: str
+    max_open_cases: int
+    open_cases: int
+    open_permits: int = Field(description="Started, unsubmitted written tests that may still become cases")
+    accepting: bool
+    overdue_cases: int = Field(description="Queued cases past their due time (service obligation missed)")
+
+
+@router.put(
+    "/ops/written-capacity/{grade}/{subject}",
+    response_model=BacklogRow,
+    summary="Set funded teacher-review capacity for a class and subject (operators, MFA, audited)",
+)
+def set_capacity(db: DB, who: Operator, grade: int, subject: str, body: CapacityIn, response: Response) -> BacklogRow:
+    _private(response)
+    if grade not in (11, 12):
+        raise NotFound("Unknown class.")
+    review.set_capacity(db, who, grade, subject, body.max_open_cases, body.reason)
+    return _backlog_row(db, grade, subject)
+
+
+def _backlog_row(db: Session, grade: int, subject: str) -> BacklogRow:
+    from sqlalchemy import func, select
+
+    cap = review.capacity_state(db, grade, subject)
+    overdue = db.scalar(
+        select(func.count())
+        .select_from(review.WrittenReviewCase)
+        .where(
+            review.WrittenReviewCase.status == "queued",
+            review.WrittenReviewCase.grade_number == grade,
+            review.WrittenReviewCase.subject_code == subject,
+            review.WrittenReviewCase.due_at < func.now(),
+        )
+    )
+    return BacklogRow(
+        grade=grade,
+        subject=subject,
+        max_open_cases=cap["max_open_cases"],
+        open_cases=cap["open_cases"],
+        open_permits=cap["open_permits"],
+        accepting=cap["accepting"],
+        overdue_cases=int(overdue or 0),
+    )
+
+
+@router.get(
+    "/ops/written-backlog", response_model=list[BacklogRow], summary="Review capacity, backlog and overdue work"
+)
+def backlog(db: DB, who: Operator, response: Response) -> list[BacklogRow]:
+    _private(response)
+    from sqlalchemy import select, union
+
+    scopes = db.execute(
+        union(
+            select(review.ReviewCapacity.grade_number, review.ReviewCapacity.subject_code),
+            select(review.WrittenReviewCase.grade_number, review.WrittenReviewCase.subject_code).where(
+                review.WrittenReviewCase.status == "queued"
+            ),
+        )
+    ).all()
+    return [_backlog_row(db, g, s) for g, s in sorted(scopes)]

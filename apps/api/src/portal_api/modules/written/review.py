@@ -41,6 +41,8 @@ from portal_api.modules.written import storage
 from portal_api.modules.written.models import WrittenAttempt, WrittenForm, WrittenPage, WrittenReceipt
 
 LEASE = timedelta(minutes=20)
+REVIEW_DUE = timedelta(hours=48)  # §20.10 proposed staffed target (99% within 48 h); a service obligation, not a mark
+QUESTION_STATUSES = ("scored", "pending", "unavailable")
 
 
 class WrittenReviewCase(Base):
@@ -48,7 +50,7 @@ class WrittenReviewCase(Base):
     __table_args__ = (
         UniqueConstraint("attempt_id", "case_kind", "opened_seq", name="uq_written_case"),
         CheckConstraint("status in ('queued','released')", name="written_case_status"),
-        CheckConstraint("case_kind in ('initial','recheck')", name="written_case_kind"),
+        CheckConstraint("case_kind in ('initial','recheck','completion')", name="written_case_kind"),
     )
     id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     attempt_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("written_attempt.id", ondelete="RESTRICT"), index=True)
@@ -63,6 +65,8 @@ class WrittenReviewCase(Base):
     opened_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
     released_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     reason: Mapped[str | None] = mapped_column(Text)  # learner's recheck reason (recheck cases)
+    positions: Mapped[list[int] | None] = mapped_column(JSONB)  # completion cases: the questions still pending
+    due_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))  # service obligation for accepted work
 
 
 class WrittenScoreVersion(Base):
@@ -83,12 +87,30 @@ class WrittenScoreVersion(Base):
     )  # evidence epoch
     rubric_version_ids: Mapped[dict[str, str]] = mapped_column(JSONB)  # position -> rubric version id
     awards: Mapped[dict[str, Any]] = mapped_column(JSONB)  # position -> criterion -> {units, reason}
-    question_units: Mapped[dict[str, int]] = mapped_column(JSONB)  # position -> earned units
+    question_units: Mapped[dict[str, int]] = mapped_column(JSONB)  # position -> earned units (scored only)
+    # R05: position -> {"status": scored|pending|unavailable, "reason": str}. Missing entries mean scored (pre-R05).
+    question_status: Mapped[dict[str, Any]] = mapped_column(JSONB, default=dict, server_default="{}")
+    completeness: Mapped[str] = mapped_column(String(20), default="complete", server_default="complete")
+    scored_max_units: Mapped[int | None] = mapped_column(Integer)  # sum of maxima of scored questions
     total_units: Mapped[int] = mapped_column(Integer)
     max_units: Mapped[int] = mapped_column(Integer)
     released: Mapped[bool] = mapped_column(default=False)
     reason: Mapped[str] = mapped_column(Text)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+
+
+class ReviewCapacity(Base):
+    """Funded teacher-review capacity for one class and subject (review R05, §20.13.3). A reviewer role grant alone is
+    not evidence that review is funded: new written starts are admitted only while queued cases are below this limit.
+    Work already accepted (rechecks, completion cases) is never refused by it."""
+
+    __tablename__ = "written_review_capacity"
+    grade_number: Mapped[int] = mapped_column(SmallInteger, primary_key=True)
+    subject_code: Mapped[str] = mapped_column(String(40), primary_key=True)
+    max_open_cases: Mapped[int] = mapped_column(Integer)
+    reason: Mapped[str] = mapped_column(Text)
+    updated_by: Mapped[uuid.UUID | None] = mapped_column(ForeignKey("app_user.id", ondelete="RESTRICT"))
+    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
 
 
 class WrittenRecheckRequest(Base):
@@ -138,8 +160,85 @@ def open_initial_case(db: Session, attempt: WrittenAttempt) -> None:
             opened_seq=1,
             grade_number=form.grade_number,
             subject_code=form.subject_code,
+            due_at=_now(db) + REVIEW_DUE,
         )
     )
+
+
+def open_cases(db: Session, grade: int, subject: str) -> int:
+    return int(
+        db.scalar(
+            select(func.count())
+            .select_from(WrittenReviewCase)
+            .where(
+                WrittenReviewCase.status == "queued",
+                WrittenReviewCase.grade_number == grade,
+                WrittenReviewCase.subject_code == subject,
+            )
+        )
+        or 0
+    )
+
+
+def open_permits(db: Session, grade: int, subject: str) -> int:
+    """Started, unsealed written attempts in this scope: each may become a case, so each counts as committed load."""
+    return int(
+        db.scalar(
+            select(func.count())
+            .select_from(WrittenAttempt)
+            .join(WrittenForm, WrittenForm.id == WrittenAttempt.form_id)
+            .where(
+                WrittenAttempt.status == "active",
+                WrittenForm.grade_number == grade,
+                WrittenForm.subject_code == subject,
+            )
+        )
+        or 0
+    )
+
+
+def lock_capacity(db: Session, grade: int, subject: str) -> None:
+    """Serialize capacity admission for one class and subject until the transaction ends (different learners
+    starting at the same moment must not both take the last place)."""
+    import hashlib
+
+    digest = hashlib.sha256(f"written-capacity:{grade}:{subject}".encode()).digest()
+    key = int.from_bytes(digest[:8], "big", signed=True)
+    db.execute(select(func.pg_advisory_xact_lock(key)))
+
+
+def capacity_state(db: Session, grade: int, subject: str) -> dict[str, Any]:
+    cap = db.get(ReviewCapacity, (grade, subject))
+    n = open_cases(db, grade, subject)
+    permits = open_permits(db, grade, subject)
+    return {
+        "configured": cap is not None and cap.max_open_cases > 0,
+        "max_open_cases": cap.max_open_cases if cap else 0,
+        "open_cases": n,
+        "open_permits": permits,
+        "accepting": cap is not None and n + permits < cap.max_open_cases,
+    }
+
+
+def set_capacity(db: Session, who: Principal, grade: int, subject: str, max_open_cases: int, reason: str) -> None:
+    cap = db.get(ReviewCapacity, (grade, subject))
+    if cap is None:
+        cap = ReviewCapacity(grade_number=grade, subject_code=subject, max_open_cases=max_open_cases, reason=reason)
+        db.add(cap)
+    previous = cap.max_open_cases if cap.updated_at else None
+    cap.max_open_cases = max_open_cases
+    cap.reason = reason.strip()
+    cap.updated_by = who.user.id
+    cap.updated_at = _now(db)
+    record(
+        db,
+        actor=who.user.id,
+        action="written.capacity_set",
+        target_type="review_capacity",
+        target_id=f"{grade}:{subject}",
+        details={"max_open_cases": max_open_cases, "previous": previous, "reason": reason.strip()},
+    )
+    db.commit()
 
 
 def _can_review(db: Session, who: Principal, case: WrittenReviewCase) -> bool:
@@ -337,6 +436,7 @@ def decide(
     reason: str,
     expand_positions: list[int] | None = None,
     expansion_reason: str = "",
+    question_status: dict[str, dict[str, Any]] | None = None,
 ) -> WrittenScoreVersion:
     case = _case(db, who, case_id, lock=True)
     now = _now(db)
@@ -385,12 +485,62 @@ def decide(
             req.expanded_positions = sorted({*req.expanded_positions, *extra})
             req.expansion_reason = expansion_reason.strip()
             req.expanded_by = who.user.id
-    totals, errors = _check_awards(ctx, awards, scope)
+    carried_status: dict[str, Any] = {}
+    if case.case_kind == "completion":
+        # Only the questions still pending are marked; everything else is carried from the current released result.
+        current = released_result(db, case.attempt_id)
+        assert current is not None
+        scope = {str(p) for p in (case.positions or [])}
+        outside = sorted(set(awards) - scope, key=int)
+        if outside:
+            raise Unprocessable(
+                "This case covers only the questions that were pending.",
+                errors=[f"Question {p} is outside this case." for p in outside],
+            )
+        carried_awards = {p: a for p, a in current.awards.items() if p not in scope}
+        carried_units = {p: u for p, u in current.question_units.items() if p not in scope}
+        carried_status = {p: s for p, s in current.question_status.items() if p not in scope}
+    elif req is not None:
+        pinned = db.get(WrittenScoreVersion, req.target_version_id)
+        assert pinned is not None
+        carried_status = {p: s for p, s in (pinned.question_status or {}).items() if p not in (scope or set())}
+
+    # R05: each question in scope is scored, pending (e.g. unreadable, awaiting the learner) or unavailable (the
+    # service can't assess it). Pending and unavailable questions get no awards and no invented zero.
+    in_scope = [str(q["position"]) for q in ctx["questions"] if scope is None or str(q["position"]) in scope]
+    statuses: dict[str, dict[str, Any]] = {}
+    for pos in in_scope:
+        st = (question_status or {}).get(pos, {"status": "scored"})
+        kind = st.get("status", "scored")
+        if kind not in QUESTION_STATUSES:
+            raise Unprocessable(f"Question {pos}: unknown status {kind!r}.")
+        if case.case_kind == "recheck" and kind != "scored":
+            raise Unprocessable("A recheck re-marks questions; it can't mark them pending or unavailable.")
+        why = str(st.get("reason", "")).strip()
+        if kind != "scored" and len(why) < 5:
+            raise Unprocessable(f"Question {pos}: give the learner a reason it is {kind}.")
+        statuses[pos] = {"status": kind, "reason": why[:500]}
+    unknown = sorted(set(question_status or {}) - set(in_scope), key=int)
+    if unknown:
+        raise Unprocessable("Statuses were given for questions outside this case.", errors=unknown)
+    scored = {p for p, st in statuses.items() if st["status"] == "scored"}
+    not_scored_awarded = sorted(set(awards) - scored, key=int)
+    if not_scored_awarded:
+        raise Unprocessable(
+            "Pending or unavailable questions can't have awards.", errors=[f"Question {p}" for p in not_scored_awarded]
+        )
+    totals, errors = _check_awards(ctx, awards, scored)
     if errors:
         raise Unprocessable("Some awards don't follow the rubric.", errors=errors)
     totals = {**carried_units, **totals}
+    all_status = {**carried_status, **statuses}
+    for q in ctx["questions"]:  # pre-R05 carried questions without an explicit status were scored
+        all_status.setdefault(str(q["position"]), {"status": "scored", "reason": ""})
+    maxima = {str(q["position"]): int(q["max_units"]) for q in ctx["questions"]}
+    pending = sorted(int(p) for p, st in all_status.items() if st["status"] == "pending")
+    unavailable = sorted(int(p) for p, st in all_status.items() if st["status"] == "unavailable")
+    completeness = "partial_pending" if pending else "partial_unavailable" if unavailable else "complete"
     prior = latest(db, case.attempt_id)
-    first_release = release and released_result(db, case.attempt_id) is None
     sv = WrittenScoreVersion(
         attempt_id=case.attempt_id,
         case_id=case.id,
@@ -411,18 +561,52 @@ def decide(
                 for p, a in awards.items()
             },
         },
-        question_units=totals,
-        total_units=sum(totals.values()),
+        question_units={p: u for p, u in totals.items() if all_status.get(p, {}).get("status") == "scored"},
+        question_status=all_status,
+        completeness=completeness,
+        scored_max_units=sum(m for p, m in maxima.items() if all_status[p]["status"] == "scored"),
+        total_units=sum(u for p, u in totals.items() if all_status.get(p, {}).get("status") == "scored"),
         max_units=ctx["max_units"],
         released=release,
         reason=reason.strip() or case.case_kind,
     )
     db.add(sv)
     case.version += 1
-    if first_release:
+    if release:
         from portal_api.modules.access import service as access
 
-        access.consume(db, case.attempt_id)  # once, on the first released marks for this original work
+        # Allowance (R05): scored questions consume their units once; unavailable ones return theirs; pending hold.
+        access.consume(db, case.attempt_id, [int(p) for p in scored])
+        access.release_questions(
+            db,
+            case.attempt_id,
+            [int(p) for p, st in statuses.items() if st["status"] == "unavailable"],
+            "question unavailable: could not be assessed",
+        )
+        if pending and not db.scalar(
+            select(WrittenReviewCase.id).where(
+                WrittenReviewCase.attempt_id == case.attempt_id,
+                WrittenReviewCase.case_kind == "completion",
+                WrittenReviewCase.status == "queued",
+            )
+        ):
+            seq = db.scalar(
+                select(func.max(WrittenReviewCase.opened_seq)).where(
+                    WrittenReviewCase.attempt_id == case.attempt_id, WrittenReviewCase.case_kind == "completion"
+                )
+            )
+            db.add(
+                WrittenReviewCase(
+                    attempt_id=case.attempt_id,
+                    case_kind="completion",
+                    opened_seq=(seq or 0) + 1,
+                    grade_number=case.grade_number,
+                    subject_code=case.subject_code,
+                    positions=pending,
+                    reason="; ".join(f"Q{p}: {all_status[str(p)]['reason']}" for p in pending)[:1000],
+                    due_at=now + REVIEW_DUE,
+                )
+            )
     if release:
         case.status = "released"
         case.released_at = now
@@ -438,7 +622,14 @@ def decide(
         action="written.marked" + (".released" if release else ".saved"),
         target_type="written_attempt",
         target_id=str(case.attempt_id),
-        details={"case": str(case.id), "version": sv.version, "total_units": sv.total_units},
+        details={
+            "case": str(case.id),
+            "version": sv.version,
+            "total_units": sv.total_units,
+            "completeness": completeness,
+            "pending": pending,
+            "unavailable": unavailable,
+        },
     )
     db.commit()
     db.refresh(sv)
@@ -474,12 +665,16 @@ def _eligible_positions(db: Session, attempt_id: uuid.UUID, released: list[Writt
     questions already had an independent second look, so asking again would be a duplicate, not a new appeal.
     """
     current = released[-1]
+
+    def scored(pos: int) -> bool:  # a pending or unavailable question has no mark to dispute (R05)
+        return (current.question_status or {}).get(str(pos), {"status": "scored"})["status"] == "scored"
+
     if len(released) == 1:
         attempt = db.get(WrittenAttempt, attempt_id)
         assert attempt is not None
         form = db.get(WrittenForm, attempt.form_id)
         assert form is not None
-        return sorted(fi.position for fi in form.items)
+        return sorted(fi.position for fi in form.items if scored(fi.position))
     prev = released[-2]
 
     def units(sv: WrittenScoreVersion, pos: str) -> dict[str, int]:
@@ -487,7 +682,7 @@ def _eligible_positions(db: Session, attempt_id: uuid.UUID, released: list[Writt
 
     # Only a change in awarded marks opens a new appeal; reworded feedback on an upheld mark does not.
     keys = set(current.awards) | set(prev.awards)
-    return sorted(int(p) for p in keys if units(current, p) != units(prev, p))
+    return sorted(int(p) for p in keys if units(current, p) != units(prev, p) and scored(int(p)))
 
 
 def recheck_request(db: Session, case: WrittenReviewCase) -> WrittenRecheckRequest | None:
@@ -602,6 +797,7 @@ def request_recheck(
         grade_number=form.grade_number,
         subject_code=form.subject_code,
         reason=reason.strip(),
+        due_at=_now(db) + REVIEW_DUE,
     )
     db.add(case)
     db.flush()
