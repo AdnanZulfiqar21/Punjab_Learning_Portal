@@ -107,6 +107,21 @@ def install(app: FastAPI) -> None:
         response.headers["Retry-After"] = "5"
         return response
 
+    from portal_api.modules.written.evidence import WorkersBusy
+
+    @app.exception_handler(WorkersBusy)
+    async def _workers_busy(request: Request, exc: WorkersBusy) -> JSONResponse:
+        logging.getLogger("portal_api.evidence").warning(
+            "evidence workers saturated: path=%s cid=%s",
+            request.url.path,
+            getattr(request.state, "correlation_id", None),
+        )
+        response = _problem(
+            request, 503, "SERVICE_BUSY", "We're checking a lot of uploads right now. Please try this file again."
+        )
+        response.headers["Retry-After"] = "10"
+        return response
+
     @app.exception_handler(OperationalError)
     async def _db_unavailable(request: Request, exc: OperationalError) -> JSONResponse:
         # Log the driver error class and first line (no parameters, which may hold user data) with the correlation id.
