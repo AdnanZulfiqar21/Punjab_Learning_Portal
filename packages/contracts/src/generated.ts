@@ -1084,6 +1084,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/studio/written/cases/{case_id}/pages/{page_id}/detail": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Higher-detail rendition of a submitted page, or a region of it (markers in scope; private) */
+        get: operations["case_page_detail_v1_studio_written_cases__case_id__pages__page_id__detail_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/studio/written/cases/{case_id}/rebase": {
         parameters: {
             query?: never;
@@ -5845,6 +5862,41 @@ export interface operations {
     case_page_v1_studio_written_cases__case_id__pages__page_id__get: {
         parameters: {
             query?: never;
+            header?: never;
+            path: {
+                case_id: string;
+                page_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": unknown;
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    case_page_detail_v1_studio_written_cases__case_id__pages__page_id__detail_get: {
+        parameters: {
+            query?: {
+                /** @description x,y,w,h as page fractions */
+                region?: string | null;
+            };
             header?: never;
             path: {
                 case_id: string;

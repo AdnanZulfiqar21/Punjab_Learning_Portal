@@ -6,7 +6,7 @@ import uuid
 from datetime import datetime
 from typing import Annotated, Any, Literal
 
-from fastapi import APIRouter, Depends, Response
+from fastapi import APIRouter, Depends, Query, Response
 from pydantic import BaseModel, Field
 from sqlalchemy.orm import Session
 
@@ -478,3 +478,25 @@ class RebaseIn(BaseModel):
 def rebase(db: DB, who: Reviewer, case_id: uuid.UUID, body: RebaseIn, response: Response) -> CaseDetail:
     _private(response)
     return _detail(db, review.rebase_recheck(db, who, case_id, body.reason), who)
+
+
+@router.get(
+    "/studio/written/cases/{case_id}/pages/{page_id}/detail",
+    summary="Higher-detail rendition of a submitted page, or a region of it (markers in scope; private)",
+)
+def case_page_detail(
+    db: DB,
+    who: Reviewer,
+    case_id: uuid.UUID,
+    page_id: uuid.UUID,
+    region: Annotated[
+        str | None, Query(pattern=r"^[0-9.]+,[0-9.]+,[0-9.]+,[0-9.]+$", description="x,y,w,h as page fractions")
+    ] = None,
+) -> Response:
+    box = tuple(float(v) for v in region.split(",")) if region else None
+    png, provenance = review.staff_page_detail(db, who, case_id, page_id, box)  # type: ignore[arg-type]
+    return Response(
+        content=png,
+        media_type="image/png",
+        headers={"Cache-Control": "private, no-store", "X-Content-Type-Options": "nosniff", **provenance},
+    )
