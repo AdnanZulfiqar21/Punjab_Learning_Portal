@@ -8,6 +8,7 @@ from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 from sqlalchemy.exc import OperationalError
+from sqlalchemy.exc import TimeoutError as SATimeoutError
 
 
 class AppError(Exception):
@@ -90,6 +91,21 @@ def install(app: FastAPI) -> None:
     async def _validation(request: Request, exc: RequestValidationError) -> JSONResponse:
         errs = [{"loc": list(e.get("loc", [])), "msg": e.get("msg")} for e in exc.errors()]
         return _problem(request, 422, "VALIDATION_FAILED", "The request is invalid.", {"errors": errs})
+
+    @app.exception_handler(SATimeoutError)
+    async def _pool_saturated(request: Request, exc: SATimeoutError) -> JSONResponse:
+        # Every pooled connection stayed checked out for the whole pool timeout: overload, answered honestly and
+        # quickly as a retryable 503 instead of an unhandled 500 (review R08).
+        logging.getLogger("portal_api.db").warning(
+            "connection pool saturated: path=%s cid=%s",
+            request.url.path,
+            getattr(request.state, "correlation_id", None),
+        )
+        response = _problem(
+            request, 503, "SERVICE_BUSY", "The service is busy right now. Please retry in a few seconds."
+        )
+        response.headers["Retry-After"] = "5"
+        return response
 
     @app.exception_handler(OperationalError)
     async def _db_unavailable(request: Request, exc: OperationalError) -> JSONResponse:

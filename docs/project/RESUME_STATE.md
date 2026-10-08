@@ -32,7 +32,7 @@ No academic content is published: B01 (reviewers) and rights confirmation block 
 | R05 | Whole-script consumption; no per-question allocations | **Fixed** on `fix/written-allocations` (ALLOC-01) |
 | R06 | Same-device trial protection not built | Open; account-level only |
 | R07 | All published lessons public | **Fixed and merged** (PR #22, ACCESS-02) |
-| R08 | 401 after sign-up; search 503 | 401 **fixed and merged** (REL-01); 503 open |
+| R08 | 401 after sign-up; search 503 | 401 fixed (REL-01); pool saturation and cold-start engine race reproduced and fixed on `fix/pool-saturation` (REL-02); the original OperationalError 503 still unexplained |
 | R09 | Stale records | This file regenerated; register labels reconciled |
 
 ## Next actions (in order)
@@ -56,7 +56,8 @@ cd ../mobile && npx expo start --web --port 8190            # mobile screens on 
 ```
 
 ## Gotchas
-- Search 503 under 3-worker local E2E load is unexplained (R08). 503s log the DB error class and correlation ID (`portal_api.db`).
+- The original E2E search 503 (driver OperationalError) is still unexplained; 503s log the error class and correlation ID (`portal_api.db`). Pool saturation is now a 503 SERVICE_BUSY with Retry-After, not a 500 (REL-02).
+- Stopping a background task can leave its uvicorn or Expo child running and still holding the port; check with Get-NetTCPConnection and stop the PID.
 - The API has no auto-reload in these runs; restart it after API code changes before E2E.
 - `curl localhost` on this machine adds about 250 ms (IPv6 fallback); use `127.0.0.1` for timings.
 - Run Expo without `CI=1`: CI mode turns off Metro's file watching and serves stale bundles.

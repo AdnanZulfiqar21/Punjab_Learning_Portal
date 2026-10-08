@@ -100,6 +100,9 @@ def _principal(
     ).all()
     roles = frozenset(Role(r) for r in grants)
     request.state.user_id = user.id
+    # End the authentication transaction now (read-only unless last_seen changed): the pooled connection goes back
+    # before the endpoint waits for a worker thread. Holding it "idle in transaction" starved the pool (review R08).
+    db.commit()
     return Principal(
         user=user, claims=claims, roles=roles, permissions=permissions_for(set(roles)), session=session_row
     )

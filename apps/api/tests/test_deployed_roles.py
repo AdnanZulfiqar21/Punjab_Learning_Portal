@@ -8,15 +8,14 @@ import pytest
 from fastapi.testclient import TestClient
 
 from portal_api.config import get_settings
-from portal_api.db import get_engine, get_sessionmaker
+from portal_api.db import reset_engine
 from portal_api.modules.identity import tokens
 
 
 def _clear_caches() -> None:
     """Settings, engine and sessionmaker are process-cached; isolate them so no test inherits another's config."""
     get_settings.cache_clear()
-    get_sessionmaker.cache_clear()
-    get_engine.cache_clear()
+    reset_engine()
 
 
 DEPLOYED_ENV = {

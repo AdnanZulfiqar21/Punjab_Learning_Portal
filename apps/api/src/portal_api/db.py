@@ -1,7 +1,7 @@
 from __future__ import annotations
 
+import threading
 from collections.abc import Iterator
-from functools import lru_cache
 
 from sqlalchemy import Engine, create_engine, event
 from sqlalchemy.orm import DeclarativeBase, Session, sessionmaker
@@ -13,8 +13,12 @@ class Base(DeclarativeBase):
     pass
 
 
-@lru_cache
-def get_engine() -> Engine:
+_engine: Engine | None = None
+_maker: sessionmaker[Session] | None = None
+_lock = threading.Lock()
+
+
+def _build_engine() -> Engine:
     s = get_settings()
     engine = create_engine(
         s.database_url,
@@ -33,9 +37,38 @@ def get_engine() -> Engine:
     return engine
 
 
-@lru_cache
+def get_engine() -> Engine:
+    """One engine (one pool) per process. Built under a lock: `lru_cache` let concurrent first calls each create an
+    engine with its own pool, exceeding the per-process connection budget on a cold start (review R08)."""
+    global _engine
+    engine = _engine
+    if engine is not None:
+        return engine
+    with _lock:
+        if _engine is None:
+            _engine = _build_engine()
+        return _engine
+
+
 def get_sessionmaker() -> sessionmaker[Session]:
-    return sessionmaker(bind=get_engine(), expire_on_commit=False)
+    global _maker
+    maker = _maker
+    if maker is not None:
+        return maker
+    engine = get_engine()
+    with _lock:
+        if _maker is None:
+            _maker = sessionmaker(bind=engine, expire_on_commit=False)
+        return _maker
+
+
+def reset_engine() -> None:
+    """Tests only: dispose of the process engine so the next use builds a fresh one."""
+    global _engine, _maker
+    with _lock:
+        if _engine is not None:
+            _engine.dispose()
+        _engine, _maker = None, None
 
 
 def get_session() -> Iterator[Session]:
