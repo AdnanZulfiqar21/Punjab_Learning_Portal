@@ -63,6 +63,15 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     "expo-router",
     "expo-secure-store",
     ["expo-splash-screen", { backgroundColor: "#0B5D73", image: "./assets/images/splash-icon.png", imageWidth: 76 }],
+    [
+      "expo-image-picker",
+      {
+        // Written practice: learners photograph the pages they wrote (W04). No video or audio is captured.
+        photosPermission: "Choose photos of the pages you wrote for a written practice test.",
+        cameraPermission: "Photograph the pages you wrote for a written practice test.",
+        microphonePermission: false,
+      },
+    ],
   ],
   experiments: { typedRoutes: true, reactCompiler: true },
   extra: { variant, apiOrigin: apiOrigin() },
