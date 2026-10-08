@@ -30,6 +30,7 @@ export async function saveMarks(
   awards: Record<string, Record<string, { units: number; reason: string }>>,
   release: boolean,
   expansion?: { positions: number[]; reason: string },
+  questionStatus: Record<string, { status: string; reason: string }> = {},
 ): Promise<MarkingOutcome> {
   return call(`/v1/studio/written/cases/${encodeURIComponent(caseId)}/decision`, {
     expected_version: expectedVersion,
@@ -38,5 +39,6 @@ export async function saveMarks(
     reason: release ? "Released by the marking teacher" : "Saved by the marking teacher",
     expand_positions: expansion?.positions ?? [],
     expansion_reason: expansion?.reason ?? "",
+    question_status: questionStatus,
   });
 }

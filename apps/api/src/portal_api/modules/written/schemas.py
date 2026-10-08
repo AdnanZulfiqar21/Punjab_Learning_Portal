@@ -17,7 +17,8 @@ class WrittenChapter(BaseModel):
 class WrittenAvailabilityOut(BaseModel):
     grade: int
     subject: str
-    review_staffed: bool = Field(description="False means no teacher reviewer is available, so nothing is offered")
+    review_staffed: bool = Field(description="False means no funded teacher review exists, so nothing is offered")
+    review_accepting: bool = Field(description="False means teacher marking is at capacity; new tests can't start now")
     upload_allowance_s: int
     caps: dict[str, int]
     chapters: list[WrittenChapter]

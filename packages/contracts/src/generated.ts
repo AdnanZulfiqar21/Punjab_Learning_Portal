@@ -417,6 +417,40 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/ops/written-backlog": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Review capacity, backlog and overdue work */
+        get: operations["backlog_v1_ops_written_backlog_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/ops/written-capacity/{grade}/{subject}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** Set funded teacher-review capacity for a class and subject (operators, MFA, audited) */
+        put: operations["set_capacity_v1_ops_written_capacity__grade___subject__put"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/practice/availability": {
         parameters: {
             query?: never;
@@ -567,6 +601,23 @@ export interface paths {
         put?: never;
         /** Staff Reply */
         post: operations["staff_reply_v1_staff_support_tickets__ticket_id__messages_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/staff/written-remedies": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Credit written allowance for a service defect (separate idempotent event; MFA, audited) */
+        post: operations["remedy_v1_staff_written_remedies_post"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1370,6 +1421,29 @@ export interface components {
             /** Subject */
             subject: string;
         };
+        /** BacklogRow */
+        BacklogRow: {
+            /** Accepting */
+            accepting: boolean;
+            /** Grade */
+            grade: number;
+            /** Max Open Cases */
+            max_open_cases: number;
+            /** Open Cases */
+            open_cases: number;
+            /**
+             * Open Permits
+             * @description Started, unsubmitted written tests that may still become cases
+             */
+            open_permits: number;
+            /**
+             * Overdue Cases
+             * @description Queued cases past their due time (service obligation missed)
+             */
+            overdue_cases: number;
+            /** Subject */
+            subject: string;
+        };
         /** BookOut */
         BookOut: {
             /** Authority */
@@ -1418,13 +1492,29 @@ export interface components {
             source_id: string;
             subject: components["schemas"]["SubjectOut"];
         };
+        /** CapacityIn */
+        CapacityIn: {
+            /**
+             * Max Open Cases
+             * @description 0 stops new written starts in this scope
+             */
+            max_open_cases: number;
+            /** Reason */
+            reason: string;
+        };
         /** CaseDetail */
         CaseDetail: {
             /**
              * Case Kind
              * @enum {string}
              */
-            case_kind: "initial" | "recheck";
+            case_kind: "initial" | "recheck" | "completion";
+            completion: components["schemas"]["CompletionScope"] | null;
+            /**
+             * Due At
+             * @description Service obligation for accepted work (proposed 48 h)
+             */
+            due_at: string | null;
             /** Grade */
             grade: number;
             /**
@@ -1498,7 +1588,12 @@ export interface components {
              * Case Kind
              * @enum {string}
              */
-            case_kind: "initial" | "recheck";
+            case_kind: "initial" | "recheck" | "completion";
+            /**
+             * Due At
+             * @description Service obligation for accepted work (proposed 48 h)
+             */
+            due_at: string | null;
             /** Grade */
             grade: number;
             /**
@@ -1635,6 +1730,23 @@ export interface components {
             /** Visual Count */
             visual_count: number;
         };
+        /** CompletionScope */
+        CompletionScope: {
+            /**
+             * Carried Forward
+             * @description Earned units kept for the questions already resolved
+             */
+            carried_forward: {
+                [key: string]: number;
+            };
+            /**
+             * Positions
+             * @description Questions still pending from the released result
+             */
+            positions: number[];
+            /** Reason */
+            reason: string;
+        };
         /** ConsentIn */
         ConsentIn: {
             /**
@@ -1699,6 +1811,15 @@ export interface components {
             expansion_reason: string;
             /** Expected Version */
             expected_version: number;
+            /**
+             * Question Status
+             * @description Optional per question: {"2": {"status": "pending"|"unavailable"|"scored", "reason": "…"}}. Unlisted questions are scored. Pending and unavailable questions take no awards.
+             */
+            question_status?: {
+                [key: string]: {
+                    [key: string]: unknown;
+                };
+            };
             /**
              * Reason
              * @default
@@ -2400,12 +2521,25 @@ export interface components {
         QuestionResult: {
             /** Criteria */
             criteria: components["schemas"]["CriterionResult"][];
-            /** Earned Units */
-            earned_units: number;
+            /**
+             * Earned Units
+             * @description Null unless scored; no mark is invented for unassessed work
+             */
+            earned_units: number | null;
             /** Max Units */
             max_units: number;
             /** Position */
             position: number;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "scored" | "pending" | "unavailable";
+            /**
+             * Status Reason
+             * @description Why a question is pending or unavailable
+             */
+            status_reason: string;
         };
         /** ReceiptOut */
         ReceiptOut: {
@@ -2530,6 +2664,52 @@ export interface components {
             kind: "attempt" | "written_attempt";
             /** Position */
             position?: number | null;
+        };
+        /** RemedyIn */
+        RemedyIn: {
+            /**
+             * Attempt Id
+             * Format: uuid
+             */
+            attempt_id: string;
+            /**
+             * Defect Ref
+             * @description Incident, support request or case reference
+             */
+            defect_ref: string;
+            /** Idempotency Key */
+            idempotency_key: string;
+            /**
+             * Position
+             * @description The affected question, if one
+             */
+            position?: number | null;
+            /** Reason */
+            reason: string;
+            /** Units */
+            units: number;
+        };
+        /** RemedyOut */
+        RemedyOut: {
+            /**
+             * Attempt Id
+             * Format: uuid
+             */
+            attempt_id: string;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Position */
+            position: number | null;
+            /** Units */
+            units: number;
         };
         /** ResultOut */
         ResultOut: {
@@ -3273,8 +3453,13 @@ export interface components {
             /** Grade */
             grade: number;
             /**
+             * Review Accepting
+             * @description False means teacher marking is at capacity; new tests can't start now
+             */
+            review_accepting: boolean;
+            /**
              * Review Staffed
-             * @description False means no teacher reviewer is available, so nothing is offered
+             * @description False means no funded teacher review exists, so nothing is offered
              */
             review_staffed: boolean;
             /** Subject */
@@ -3394,6 +3579,11 @@ export interface components {
         };
         /** WrittenResultOut */
         WrittenResultOut: {
+            /**
+             * Completeness
+             * @description Not complete means no final total: some questions are pending or could not be assessed
+             */
+            completeness: ("complete" | "partial_pending" | "partial_unavailable") | null;
             /** Decision Method */
             decision_method: string | null;
             /**
@@ -3408,6 +3598,11 @@ export interface components {
             recheck: components["schemas"]["RecheckOut"];
             /** Released At */
             released_at: string | null;
+            /**
+             * Scored Max Units
+             * @description Maximum of the questions that were scored
+             */
+            scored_max_units: number | null;
             /**
              * Status
              * @enum {string}
@@ -4178,6 +4373,62 @@ export interface operations {
             };
         };
     };
+    backlog_v1_ops_written_backlog_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BacklogRow"][];
+                };
+            };
+        };
+    };
+    set_capacity_v1_ops_written_capacity__grade___subject__put: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                grade: number;
+                subject: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CapacityIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BacklogRow"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     availability_v1_practice_availability_get: {
         parameters: {
             query: {
@@ -4448,6 +4699,39 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["StaffTicketOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    remedy_v1_staff_written_remedies_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["RemedyIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RemedyOut"];
                 };
             };
             /** @description Validation Error */

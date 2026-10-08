@@ -373,6 +373,51 @@
         "title": "AvailabilityOut",
         "type": "object"
       },
+      "BacklogRow": {
+        "properties": {
+          "accepting": {
+            "title": "Accepting",
+            "type": "boolean"
+          },
+          "grade": {
+            "title": "Grade",
+            "type": "integer"
+          },
+          "max_open_cases": {
+            "title": "Max Open Cases",
+            "type": "integer"
+          },
+          "open_cases": {
+            "title": "Open Cases",
+            "type": "integer"
+          },
+          "open_permits": {
+            "description": "Started, unsubmitted written tests that may still become cases",
+            "title": "Open Permits",
+            "type": "integer"
+          },
+          "overdue_cases": {
+            "description": "Queued cases past their due time (service obligation missed)",
+            "title": "Overdue Cases",
+            "type": "integer"
+          },
+          "subject": {
+            "title": "Subject",
+            "type": "string"
+          }
+        },
+        "required": [
+          "grade",
+          "subject",
+          "max_open_cases",
+          "open_cases",
+          "open_permits",
+          "accepting",
+          "overdue_cases"
+        ],
+        "title": "BacklogRow",
+        "type": "object"
+      },
       "BookOut": {
         "properties": {
           "authority": {
@@ -520,15 +565,62 @@
         "title": "Breadcrumb",
         "type": "object"
       },
+      "CapacityIn": {
+        "properties": {
+          "max_open_cases": {
+            "description": "0 stops new written starts in this scope",
+            "maximum": 100000.0,
+            "minimum": 0.0,
+            "title": "Max Open Cases",
+            "type": "integer"
+          },
+          "reason": {
+            "maxLength": 1000,
+            "minLength": 5,
+            "title": "Reason",
+            "type": "string"
+          }
+        },
+        "required": [
+          "max_open_cases",
+          "reason"
+        ],
+        "title": "CapacityIn",
+        "type": "object"
+      },
       "CaseDetail": {
         "properties": {
           "case_kind": {
             "enum": [
               "initial",
-              "recheck"
+              "recheck",
+              "completion"
             ],
             "title": "Case Kind",
             "type": "string"
+          },
+          "completion": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CompletionScope"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "due_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Service obligation for accepted work (proposed 48 h)",
+            "title": "Due At"
           },
           "grade": {
             "title": "Grade",
@@ -636,6 +728,7 @@
           "subject",
           "case_kind",
           "opened_at",
+          "due_at",
           "status",
           "version",
           "leased_by_me",
@@ -646,7 +739,8 @@
           "pages",
           "lease_expires_at",
           "latest",
-          "recheck"
+          "recheck",
+          "completion"
         ],
         "title": "CaseDetail",
         "type": "object"
@@ -700,10 +794,24 @@
           "case_kind": {
             "enum": [
               "initial",
-              "recheck"
+              "recheck",
+              "completion"
             ],
             "title": "Case Kind",
             "type": "string"
+          },
+          "due_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Service obligation for accepted work (proposed 48 h)",
+            "title": "Due At"
           },
           "grade": {
             "title": "Grade",
@@ -756,6 +864,7 @@
           "subject",
           "case_kind",
           "opened_at",
+          "due_at",
           "status",
           "version",
           "leased_by_me",
@@ -1085,6 +1194,37 @@
         "title": "ChapterSummary",
         "type": "object"
       },
+      "CompletionScope": {
+        "properties": {
+          "carried_forward": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "description": "Earned units kept for the questions already resolved",
+            "title": "Carried Forward",
+            "type": "object"
+          },
+          "positions": {
+            "description": "Questions still pending from the released result",
+            "items": {
+              "type": "integer"
+            },
+            "title": "Positions",
+            "type": "array"
+          },
+          "reason": {
+            "title": "Reason",
+            "type": "string"
+          }
+        },
+        "required": [
+          "positions",
+          "reason",
+          "carried_forward"
+        ],
+        "title": "CompletionScope",
+        "type": "object"
+      },
       "ConsentIn": {
         "additionalProperties": false,
         "properties": {
@@ -1226,6 +1366,15 @@
             "minimum": 0.0,
             "title": "Expected Version",
             "type": "integer"
+          },
+          "question_status": {
+            "additionalProperties": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "description": "Optional per question: {\"2\": {\"status\": \"pending\"|\"unavailable\"|\"scored\", \"reason\": \"\u2026\"}}. Unlisted questions are scored. Pending and unavailable questions take no awards.",
+            "title": "Question Status",
+            "type": "object"
           },
           "reason": {
             "default": "",
@@ -3107,8 +3256,16 @@
             "type": "array"
           },
           "earned_units": {
-            "title": "Earned Units",
-            "type": "integer"
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Null unless scored; no mark is invented for unassessed work",
+            "title": "Earned Units"
           },
           "max_units": {
             "title": "Max Units",
@@ -3117,11 +3274,27 @@
           "position": {
             "title": "Position",
             "type": "integer"
+          },
+          "status": {
+            "enum": [
+              "scored",
+              "pending",
+              "unavailable"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "status_reason": {
+            "description": "Why a question is pending or unavailable",
+            "title": "Status Reason",
+            "type": "string"
           }
         },
         "required": [
           "position",
           "max_units",
+          "status",
+          "status_reason",
           "earned_units",
           "criteria"
         ],
@@ -3399,6 +3572,106 @@
           "id"
         ],
         "title": "ReferenceIn",
+        "type": "object"
+      },
+      "RemedyIn": {
+        "properties": {
+          "attempt_id": {
+            "format": "uuid",
+            "title": "Attempt Id",
+            "type": "string"
+          },
+          "defect_ref": {
+            "description": "Incident, support request or case reference",
+            "maxLength": 120,
+            "minLength": 3,
+            "title": "Defect Ref",
+            "type": "string"
+          },
+          "idempotency_key": {
+            "maxLength": 80,
+            "minLength": 8,
+            "title": "Idempotency Key",
+            "type": "string"
+          },
+          "position": {
+            "anyOf": [
+              {
+                "maximum": 50.0,
+                "minimum": 1.0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The affected question, if one",
+            "title": "Position"
+          },
+          "reason": {
+            "maxLength": 1000,
+            "minLength": 10,
+            "title": "Reason",
+            "type": "string"
+          },
+          "units": {
+            "maximum": 20.0,
+            "minimum": 1.0,
+            "title": "Units",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "attempt_id",
+          "units",
+          "reason",
+          "defect_ref",
+          "idempotency_key"
+        ],
+        "title": "RemedyIn",
+        "type": "object"
+      },
+      "RemedyOut": {
+        "properties": {
+          "attempt_id": {
+            "format": "uuid",
+            "title": "Attempt Id",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "position": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Position"
+          },
+          "units": {
+            "title": "Units",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id",
+          "attempt_id",
+          "position",
+          "units",
+          "created_at"
+        ],
+        "title": "RemedyOut",
         "type": "object"
       },
       "ResultOut": {
@@ -5310,8 +5583,13 @@
             "title": "Grade",
             "type": "integer"
           },
+          "review_accepting": {
+            "description": "False means teacher marking is at capacity; new tests can't start now",
+            "title": "Review Accepting",
+            "type": "boolean"
+          },
           "review_staffed": {
-            "description": "False means no teacher reviewer is available, so nothing is offered",
+            "description": "False means no funded teacher review exists, so nothing is offered",
             "title": "Review Staffed",
             "type": "boolean"
           },
@@ -5328,6 +5606,7 @@
           "grade",
           "subject",
           "review_staffed",
+          "review_accepting",
           "upload_allowance_s",
           "caps",
           "chapters"
@@ -5578,6 +5857,23 @@
       },
       "WrittenResultOut": {
         "properties": {
+          "completeness": {
+            "anyOf": [
+              {
+                "enum": [
+                  "complete",
+                  "partial_pending",
+                  "partial_unavailable"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Not complete means no final total: some questions are pending or could not be assessed",
+            "title": "Completeness"
+          },
           "decision_method": {
             "anyOf": [
               {
@@ -5623,6 +5919,18 @@
             ],
             "title": "Released At"
           },
+          "scored_max_units": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Maximum of the questions that were scored",
+            "title": "Scored Max Units"
+          },
           "status": {
             "enum": [
               "pending",
@@ -5661,6 +5969,8 @@
           "max_units",
           "released_at",
           "decision_method",
+          "completeness",
+          "scored_max_units",
           "questions",
           "recheck",
           "history"
@@ -6750,6 +7060,92 @@
         ]
       }
     },
+    "/v1/ops/written-backlog": {
+      "get": {
+        "operationId": "backlog_v1_ops_written_backlog_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/BacklogRow"
+                  },
+                  "title": "Response Backlog V1 Ops Written Backlog Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Review capacity, backlog and overdue work",
+        "tags": [
+          "written marking"
+        ]
+      }
+    },
+    "/v1/ops/written-capacity/{grade}/{subject}": {
+      "put": {
+        "operationId": "set_capacity_v1_ops_written_capacity__grade___subject__put",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "grade",
+            "required": true,
+            "schema": {
+              "title": "Grade",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "path",
+            "name": "subject",
+            "required": true,
+            "schema": {
+              "title": "Subject",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CapacityIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BacklogRow"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Set funded teacher-review capacity for a class and subject (operators, MFA, audited)",
+        "tags": [
+          "written marking"
+        ]
+      }
+    },
     "/v1/practice/availability": {
       "get": {
         "operationId": "availability_v1_practice_availability_get",
@@ -7232,6 +7628,47 @@
         "summary": "Staff Reply",
         "tags": [
           "support"
+        ]
+      }
+    },
+    "/v1/staff/written-remedies": {
+      "post": {
+        "operationId": "remedy_v1_staff_written_remedies_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RemedyIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RemedyOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Credit written allowance for a service defect (separate idempotent event; MFA, audited)",
+        "tags": [
+          "access"
         ]
       }
     },

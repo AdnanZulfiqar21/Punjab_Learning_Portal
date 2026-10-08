@@ -143,3 +143,40 @@ def grant(db: DB, who: Granter, body: GrantIn) -> EntitlementOut:
 )
 def revoke(db: DB, who: Granter, entitlement_id: uuid.UUID, body: RevokeIn) -> EntitlementOut:
     return _ent(service.revoke_entitlement(db, who.user.id, entitlement_id, body.reason))
+
+
+class RemedyIn(BaseModel):
+    attempt_id: uuid.UUID
+    position: int | None = Field(default=None, ge=1, le=50, description="The affected question, if one")
+    units: int = Field(ge=1, le=20)
+    reason: str = Field(min_length=10, max_length=1000)
+    defect_ref: str = Field(min_length=3, max_length=120, description="Incident, support request or case reference")
+    idempotency_key: str = Field(min_length=8, max_length=80)
+
+
+class RemedyOut(BaseModel):
+    id: uuid.UUID
+    attempt_id: uuid.UUID
+    position: int | None
+    units: int
+    created_at: datetime
+
+
+@router.post(
+    "/staff/written-remedies",
+    response_model=RemedyOut,
+    summary="Credit written allowance for a service defect (separate idempotent event; MFA, audited)",
+)
+def remedy(db: DB, who: Granter, body: RemedyIn, response: Response) -> RemedyOut:
+    response.headers["Cache-Control"] = "private, no-store"
+    e = service.remedy_credit(
+        db,
+        who.user.id,
+        attempt_id=body.attempt_id,
+        position=body.position,
+        units=body.units,
+        reason=body.reason,
+        defect_ref=body.defect_ref,
+        idempotency_key=body.idempotency_key,
+    )
+    return RemedyOut(id=e.id, attempt_id=e.attempt_id, position=e.position, units=e.units, created_at=e.created_at)

@@ -171,6 +171,53 @@ test("a PDF becomes one page per PDF page, and each page maps on its own", async
   await expect(page.getByText(/2 answered, 0 marked not answered/)).toBeVisible();
 });
 
+test("a pending question shows no invented mark, and a completion case finishes it", async ({ page, browser }) => {
+  test.slow(); // two marking rounds across two browser contexts
+  await newLearner(page);
+  await page.goto("/practice/written?grade=11&subject=biology");
+  await page.getByRole("group", { name: "Chapters" }).getByRole("checkbox").first().check();
+  await page.getByRole("button", { name: "Start written test" }).click();
+  await expect(page).toHaveURL(/:\d+\/practice\/written\/[0-9a-f-]{36}$/, AUTH);
+  const attemptId = page.url().split("/").pop()!;
+  await page.getByLabel("Add photos or a PDF").setInputFiles("e2e/fixtures/synthetic-page.png");
+  await expect(page.getByRole("list", { name: "Uploaded pages" }).getByText(/Page 1 ·/)).toBeVisible(AUTH);
+  await page.getByRole("group", { name: /Question 1 \(a\)/ }).getByLabel("Page 1").check();
+  await page.getByRole("group", { name: /Question 1 \(b\)/ }).getByLabel("Page 1").check();
+  await expect(page.getByRole("status").filter({ hasText: /Saved · revision \d+/ })).toBeVisible(AUTH);
+  await page.getByRole("button", { name: "Submit for marking" }).click();
+  await expect(page.getByText("Waiting for a teacher")).toBeVisible(AUTH);
+
+  const teacher = await (await browser.newContext()).newPage();
+  await teacher.goto("/signin?next=/studio/marking");
+  await teacher.getByLabel("Email").fill("studio-reviewer@example.com");
+  await teacher.getByLabel("Password").fill("studio-fixture-pass-1");
+  await teacher.getByRole("button", { name: "Sign in", exact: true }).click();
+  await expect(teacher).toHaveURL(/:\d+\/studio\/marking$/, AUTH);
+  await teacher.getByRole("link", { name: `Script ${attemptId.slice(0, 8)}` }).click();
+  await teacher.getByRole("button", { name: "Start marking" }).click();
+  await teacher.getByLabel("Outcome for question 1").selectOption("pending");
+  await teacher.getByLabel("Reason for question 1").fill("Fixture: part (b) is too faint to read.");
+  await teacher.getByRole("button", { name: "Release result" }).click();
+  await expect(teacher.getByText("Result released")).toBeVisible(AUTH);
+
+  await page.reload();
+  await expect(page.getByText("Marking isn't finished yet")).toBeVisible(AUTH);
+  await expect(page.getByText(/Question 1: pending/)).toBeVisible();
+  await expect(page.getByText("Fixture: part (b) is too faint to read.")).toBeVisible();
+
+  await teacher.goto("/studio/marking");
+  await teacher.getByRole("listitem").filter({ hasText: `Script ${attemptId.slice(0, 8)}` }).filter({ hasText: "Completion" }).getByRole("link").click();
+  await expect(teacher.getByRole("region", { name: "Pending questions" })).toContainText("question: 1");
+  await teacher.getByRole("button", { name: "Start marking" }).click();
+  await teacher.getByRole("radiogroup", { name: "Award for a1" }).getByLabel("1", { exact: true }).check();
+  await teacher.getByRole("button", { name: "Release result" }).click();
+  await expect(teacher.getByText("Result released")).toBeVisible(AUTH);
+
+  await page.reload();
+  await expect(page.getByText(/marked by a teacher/)).toBeVisible(AUTH);
+  await expect(page.getByText("Question 1: 1 / 5")).toBeVisible();
+});
+
 test("uploads are refused from other sites", async ({ page }) => {
   await newLearner(page);
   const res = await page.request.post("/practice/written/00000000-0000-0000-0000-000000000000/upload", {

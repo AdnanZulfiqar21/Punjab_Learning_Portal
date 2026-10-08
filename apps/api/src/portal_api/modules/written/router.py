@@ -141,6 +141,7 @@ def availability(
         grade=grade,
         subject=subject,
         review_staffed=out["review_staffed"],
+        review_accepting=out["review_accepting"],
         upload_allowance_s=out["upload_allowance_s"],
         caps=out["caps"],
         chapters=[WrittenChapter(**c) for c in out["chapters"]],

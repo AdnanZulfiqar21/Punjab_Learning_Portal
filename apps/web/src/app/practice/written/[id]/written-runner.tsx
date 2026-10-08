@@ -206,15 +206,29 @@ export function WrittenRunner({ attempt, result = null }: { attempt: WrittenAtte
             <Notice title="Waiting for a teacher">Your script is in the marking queue. Marks appear here once a teacher releases them.</Notice>
           ) : (
             <div className="space-y-3">
-              <p className="text-lg">
-                <span className="text-3xl font-semibold tabular-nums">{marks(result.total_units ?? 0)}</span> / {marks(result.max_units)}
-                <span className="ml-2 text-sm text-muted">marked by a teacher</span>
-              </p>
+              {result.completeness === "complete" ? (
+                <p className="text-lg">
+                  <span className="text-3xl font-semibold tabular-nums">{marks(result.total_units ?? 0)}</span> / {marks(result.max_units)}
+                  <span className="ml-2 text-sm text-muted">marked by a teacher</span>
+                </p>
+              ) : (
+                <Notice tone="warn" title={result.completeness === "partial_pending" ? "Marking isn't finished yet" : "Some questions couldn't be assessed"}>
+                  So far {marks(result.total_units ?? 0)} out of {marks(result.scored_max_units ?? 0)} on the questions a teacher marked. There is no final total until
+                  every question is resolved, and nothing is counted as zero just because it wasn&apos;t assessed.
+                </Notice>
+              )}
               {result.questions.map((q) => (
                 <div key={q.position} className="space-y-2 rounded-xl border border-border bg-surface p-4">
                   <p className="font-semibold">
-                    Question {q.position}: {marks(q.earned_units)} / {marks(q.max_units)}
+                    Question {q.position}:{" "}
+                    {q.status === "scored" ? `${marks(q.earned_units ?? 0)} / ${marks(q.max_units)}` : q.status === "pending" ? "pending" : "couldn't be assessed"}
                   </p>
+                  {q.status !== "scored" && (
+                    <p className="text-sm text-muted">
+                      {q.status_reason}
+                      {q.status === "unavailable" && " The allowance for this question was returned to your plan."}
+                    </p>
+                  )}
                   <ul className="space-y-1 text-sm">
                     {q.criteria.map((c) => (
                       <li key={c.id}>

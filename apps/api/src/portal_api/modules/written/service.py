@@ -112,7 +112,10 @@ def _pool(
 
 
 def review_staffed(db: Session, grade: int, subject: str) -> bool:
-    """Is there at least one teacher reviewer for this class and subject (§20.4: no unstaffed review route)?"""
+    """Is review staffed *and funded* for this class and subject (§20.4 no unstaffed route; R05 capacity)? Needs at
+    least one teacher reviewer in scope and a configured capacity. Whether a new start fits is checked at admission."""
+    if not review.capacity_state(db, grade, subject)["configured"]:
+        return False
     users = db.scalars(
         select(StaffRoleGrant.user_id).where(
             StaffRoleGrant.revoked_at.is_(None),
@@ -145,8 +148,10 @@ def availability(db: Session, grade: int, subject: str) -> dict[str, Any]:
     per_chapter: dict[uuid.UUID, int] = defaultdict(int)
     for members in pool.values():
         per_chapter[members[0][0].chapter_id] += 1
+    cap = review.capacity_state(db, grade, subject)
     return {
         "review_staffed": review_staffed(db, grade, subject),
+        "review_accepting": cap["accepting"],
         "upload_allowance_s": UPLOAD_ALLOWANCE_S,
         "caps": CAPS,
         "chapters": [
@@ -273,6 +278,13 @@ def start(db: Session, who: Principal, form_id: uuid.UUID) -> WrittenAttempt:
         db.commit()
         return existing
     now = db_now(db)  # the authoritative start: after waiting for admission, never before
+    review.lock_capacity(db, form.grade_number, form.subject_code)  # after the account lock: one fixed order
+    if not review.capacity_state(db, form.grade_number, form.subject_code)["accepting"]:
+        db.commit()
+        raise Conflict(
+            "Teacher marking for this subject is full right now, so new written tests can't start. Try again later.",
+            code_reason="REVIEW_AT_CAPACITY",
+        )
     open_permits = 0
     for open_attempt in db.scalars(
         select(WrittenAttempt)
@@ -669,10 +681,16 @@ def seal(
     attempt.sealed_at = now
     review.open_initial_case(db, attempt)  # enters the teacher marking queue in the same transaction
     answered_positions = sorted({int(k.split(":")[0]) for k, v in slots.items() if v.get("pages")})
-    units = sum(
-        access.weight_of(_question_type(db, fi)) for fi in attempt.form.items if fi.position in answered_positions
+    access.accept(
+        db,
+        attempt.id,
+        {
+            fi.position: access.weight_of(_question_type(db, fi))
+            for fi in attempt.form.items
+            if fi.position in answered_positions
+        },
+        {"positions": answered_positions},
     )
-    access.accept(db, attempt.id, units, {"positions": answered_positions})
     record(
         db,
         actor=who.user.id,
