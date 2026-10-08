@@ -3434,6 +3434,21 @@
         "title": "QuestionResult",
         "type": "object"
       },
+      "RebaseIn": {
+        "properties": {
+          "reason": {
+            "maxLength": 1000,
+            "minLength": 10,
+            "title": "Reason",
+            "type": "string"
+          }
+        },
+        "required": [
+          "reason"
+        ],
+        "title": "RebaseIn",
+        "type": "object"
+      },
       "ReceiptOut": {
         "properties": {
           "admitted_at": {
@@ -3522,7 +3537,8 @@
                 "enum": [
                   "window_ended",
                   "already_rechecked",
-                  "no_corrected_questions"
+                  "no_corrected_questions",
+                  "nothing_scored"
                 ],
                 "type": "string"
               },
@@ -3593,6 +3609,15 @@
             ],
             "description": "14 days after the disputed result was released",
             "title": "Window Ends At"
+          },
+          "windows": {
+            "additionalProperties": {
+              "format": "date-time",
+              "type": "string"
+            },
+            "description": "Per eligible question: when its appeal window ends (OCT8-04)",
+            "title": "Windows",
+            "type": "object"
           }
         },
         "required": [
@@ -9356,6 +9381,59 @@
           }
         },
         "summary": "Submitted evidence page (markers in scope)",
+        "tags": [
+          "written marking"
+        ]
+      }
+    },
+    "/v1/studio/written/cases/{case_id}/rebase": {
+      "post": {
+        "operationId": "rebase_v1_studio_written_cases__case_id__rebase_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "case_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Case Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RebaseIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CaseDetail"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Rebase an open recheck onto the current result (academic adjudicators; audited)",
         "tags": [
           "written marking"
         ]

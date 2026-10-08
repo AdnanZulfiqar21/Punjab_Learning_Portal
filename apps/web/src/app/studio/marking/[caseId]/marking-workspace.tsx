@@ -6,7 +6,7 @@
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 import type { MarkingCase } from "@portal/contracts";
-import { saveMarks, takeLease } from "@/app/actions/marking";
+import { rebaseRecheck, saveMarks, takeLease } from "@/app/actions/marking";
 import { LessonBlocks } from "@/components/lesson-blocks";
 import { Badge, Notice } from "@/components/ui";
 
@@ -20,7 +20,8 @@ export function MarkingWorkspace({ initial }: { initial: MarkingCase }) {
   const router = useRouter();
   const [c, setC] = useState(initial);
   const [pending, start] = useTransition();
-  const [error, setError] = useState<{ text: string; list?: string[]; conflict?: boolean } | null>(null);
+  const [error, setError] = useState<{ text: string; list?: string[]; conflict?: boolean; code?: string } | null>(null);
+  const [rebaseReason, setRebaseReason] = useState("");
   const [awards, setAwards] = useState<Awards>(() => {
     const prior = (c.latest?.awards ?? {}) as Awards;
     const out: Awards = {};
@@ -70,7 +71,7 @@ export function MarkingWorkspace({ initial }: { initial: MarkingCase }) {
       if (out.ok) {
         setC(out.case);
         router.refresh();
-      } else setError({ text: out.error, list: out.errors, conflict: out.conflict });
+      } else setError({ text: out.error, list: out.errors, conflict: out.conflict, code: out.code });
     });
   }
 
@@ -107,6 +108,17 @@ export function MarkingWorkspace({ initial }: { initial: MarkingCase }) {
             <button type="button" className="underline" onClick={() => router.refresh()}>
               Reload the latest version
             </button>
+          )}
+          {error.code === "RECHECK_TARGET_CHANGED" && c.recheck?.can_expand && (
+            <div className="space-y-1 pt-2">
+              <label htmlFor="rebase-reason" className="font-medium">
+                Rebase this recheck onto the current result (reason recorded)
+              </label>
+              <textarea id="rebase-reason" value={rebaseReason} onChange={(e) => setRebaseReason(e.target.value)} rows={2} maxLength={1000} className="w-full rounded border border-border bg-surface px-2 py-1" />
+              <button type="button" disabled={pending || rebaseReason.trim().length < 10} onClick={() => run(() => rebaseRecheck(c.id, rebaseReason.trim()))} className="rounded-lg border border-border bg-surface px-3 py-1.5 disabled:opacity-60">
+                Rebase recheck
+              </button>
+            </div>
           )}
         </div>
       )}

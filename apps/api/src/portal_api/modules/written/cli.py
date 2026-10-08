@@ -57,3 +57,13 @@ def sweep(argv: list[str] | None = None) -> int:
         removed = service.sweep_orphans(db)
     print(f"orphaned objects removed: {len(removed)}")
     return 0
+
+
+def repair(argv: list[str] | None = None) -> int:
+    """portal-written-repair: idempotent, audited repairs for review findings (OCT8-02 pending obligations)."""
+    from portal_api.modules.written import review
+
+    with get_sessionmaker()() as db:
+        fixed = review.repair_pending_obligations(db)
+    print(f"pending-question obligations repaired: {len(fixed)}")
+    return 0

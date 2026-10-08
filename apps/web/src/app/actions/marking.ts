@@ -11,13 +11,17 @@ async function token(): Promise<string> {
   return t;
 }
 
-export type MarkingOutcome = { ok: true; case: MarkingCase } | { ok: false; error: string; errors?: string[]; conflict?: boolean };
+export type MarkingOutcome = { ok: true; case: MarkingCase } | { ok: false; error: string; errors?: string[]; conflict?: boolean; code?: string };
 
 async function call(path: string, body?: unknown): Promise<MarkingOutcome> {
   const res = await api<MarkingCase>(path, { method: "POST", token: await token(), body: JSON.stringify(body ?? {}) });
   if (res.ok) return { ok: true, case: res.data };
-  const p = res.problem as (Problem & { errors?: string[] }) | null;
-  return { ok: false, error: p?.detail ?? `Request failed (${res.status}).`, errors: p?.errors, conflict: res.status === 409 };
+  const p = res.problem as (Problem & { errors?: string[]; code_reason?: string }) | null;
+  return { ok: false, error: p?.detail ?? `Request failed (${res.status}).`, errors: p?.errors, conflict: res.status === 409, code: p?.code_reason };
+}
+
+export async function rebaseRecheck(caseId: string, reason: string): Promise<MarkingOutcome> {
+  return call(`/v1/studio/written/cases/${encodeURIComponent(caseId)}/rebase`, { reason });
 }
 
 export async function takeLease(caseId: string): Promise<MarkingOutcome> {
