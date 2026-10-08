@@ -1055,7 +1055,7 @@ export interface paths {
         };
         get?: never;
         put?: never;
-        /** Upload one page (raw JPEG, PNG or PDF body; bounded) */
+        /** Upload one file (raw JPEG, PNG or PDF body); it is validated in an isolated worker */
         post: operations["upload_v1_written_attempts__attempt_id__pages_post"];
         delete?: never;
         options?: never;
@@ -1070,7 +1070,7 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Your own uploaded page (private) */
+        /** Your own page as its validated PNG preview (private; originals are never served) */
         get: operations["get_page_v1_written_attempts__attempt_id__pages__page_id__get"];
         put?: never;
         post?: never;
@@ -2229,27 +2229,56 @@ export interface components {
             /** Id */
             id: string;
         };
-        /** PageOut */
+        /**
+         * PageOut
+         * @description One logical page: a photo, or one page of a PDF. Mapping and the page cap count these.
+         */
         PageOut: {
-            /** Content Type */
+            /**
+             * Content Type
+             * @description Type of the uploaded original; the page itself is served as a PNG preview
+             */
             content_type: string;
-            /** Height */
+            /**
+             * File Id
+             * Format: uuid
+             * @description The uploaded file this page came from
+             */
+            file_id: string;
+            /**
+             * File Pages
+             * @description How many pages the file has (1 for a photo)
+             */
+            file_pages: number;
+            /**
+             * Height
+             * @description Preview height in pixels
+             */
             height: number | null;
             /**
              * Id
              * Format: uuid
              */
             id: string;
-            /** Pdf Pages */
-            pdf_pages: number;
-            /** Size */
+            /**
+             * Page Index
+             * @description 1-based position within its file
+             */
+            page_index: number;
+            /**
+             * Size
+             * @description Size of the uploaded file in bytes
+             */
             size: number;
             /**
              * Uploaded At
              * Format: date-time
              */
             uploaded_at: string;
-            /** Width */
+            /**
+             * Width
+             * @description Preview width in pixels
+             */
             width: number | null;
         };
         /**
@@ -3004,7 +3033,11 @@ export interface components {
              * @description The same file was already uploaded to this script; it was reused
              */
             duplicate: boolean;
-            page: components["schemas"]["PageOut"];
+            /**
+             * Pages
+             * @description The logical pages this file added, in order
+             */
+            pages: components["schemas"]["PageOut"][];
             /** Warnings */
             warnings: string[];
         };

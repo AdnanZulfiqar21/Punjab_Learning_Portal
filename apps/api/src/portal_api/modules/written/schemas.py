@@ -61,12 +61,16 @@ class WrittenItemOut(BaseModel):
 
 
 class PageOut(BaseModel):
+    """One logical page: a photo, or one page of a PDF. Mapping and the page cap count these."""
+
     id: uuid.UUID
-    size: int
-    content_type: str
-    width: int | None
-    height: int | None
-    pdf_pages: int
+    file_id: uuid.UUID = Field(description="The uploaded file this page came from")
+    page_index: int = Field(description="1-based position within its file")
+    file_pages: int = Field(description="How many pages the file has (1 for a photo)")
+    size: int = Field(description="Size of the uploaded file in bytes")
+    content_type: str = Field(description="Type of the uploaded original; the page itself is served as a PNG preview")
+    width: int | None = Field(description="Preview width in pixels")
+    height: int | None = Field(description="Preview height in pixels")
     uploaded_at: datetime
 
 
@@ -97,7 +101,7 @@ class WrittenAttemptOut(BaseModel):
 
 
 class UploadOut(BaseModel):
-    page: PageOut
+    pages: list[PageOut] = Field(description="The logical pages this file added, in order")
     duplicate: bool = Field(description="The same file was already uploaded to this script; it was reused")
     warnings: list[str]
 

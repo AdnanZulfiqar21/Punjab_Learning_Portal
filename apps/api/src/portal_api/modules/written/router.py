@@ -6,6 +6,7 @@ import uuid
 from typing import Annotated
 
 from fastapi import APIRouter, Depends, Header, Query, Request, Response
+from sqlalchemy import select
 from sqlalchemy.orm import Session
 from starlette.concurrency import run_in_threadpool
 
@@ -14,8 +15,8 @@ from portal_api.errors import TooLarge
 from portal_api.modules.content import written as wq
 from portal_api.modules.content.models import ContentVersion
 from portal_api.modules.identity.deps import CurrentPrincipal
-from portal_api.modules.written import service, validate
-from portal_api.modules.written.models import WrittenAttempt, WrittenForm, WrittenPage, WrittenReceipt
+from portal_api.modules.written import evidence, service
+from portal_api.modules.written.models import WrittenAttempt, WrittenFile, WrittenForm, WrittenPage, WrittenReceipt
 from portal_api.modules.written.schemas import (
     ManifestIn,
     PageOut,
@@ -34,23 +35,30 @@ from portal_api.modules.written.schemas import (
 
 router = APIRouter(prefix="/v1", tags=["written practice"])
 DB = Annotated[Session, Depends(get_session)]
-UPLOAD_LIMIT = max(validate.IMAGE_MAX_BYTES, validate.PDF_MAX_BYTES)
+UPLOAD_LIMIT = max(evidence.IMAGE_MAX_BYTES, evidence.PDF_MAX_BYTES)
 
 
 def _private(response: Response) -> None:
     response.headers["Cache-Control"] = "private, no-store"
 
 
-def _page_out(p: WrittenPage) -> PageOut:
+def page_out(p: WrittenPage, f: WrittenFile) -> PageOut:
     return PageOut(
         id=p.id,
-        size=p.size,
-        content_type=p.content_type,
+        file_id=f.id,
+        page_index=p.page_index,
+        file_pages=f.page_count,
+        size=f.size,
+        content_type=f.content_type,
         width=p.width,
         height=p.height,
-        pdf_pages=p.pdf_pages,
         uploaded_at=p.uploaded_at,
     )
+
+
+def pages_out(db: Session, pages: list[WrittenPage]) -> list[PageOut]:
+    files = {f.id: f for f in db.scalars(select(WrittenFile).where(WrittenFile.id.in_({p.file_id for p in pages})))}
+    return [page_out(p, files[p.file_id]) for p in pages]
 
 
 def _receipt_out(r: WrittenReceipt) -> WrittenReceiptOut:
@@ -112,7 +120,7 @@ def _attempt_out(db: Session, a: WrittenAttempt) -> WrittenAttemptOut:
         max_units=form.max_units,
         caps=form.caps,
         items=items,
-        pages=[_page_out(p) for p in service.pages_of(db, a.id)],
+        pages=pages_out(db, service.pages_of(db, a.id)),
         manifest=a.manifest,
         manifest_revision=a.manifest_revision,
         receipt=_receipt_out(receipt) if receipt else None,
@@ -188,7 +196,7 @@ def get_attempt(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, response: 
     "/written-attempts/{attempt_id}/pages",
     response_model=UploadOut,
     status_code=201,
-    summary="Upload one page (raw JPEG, PNG or PDF body; bounded)",
+    summary="Upload one file (raw JPEG, PNG or PDF body); it is validated in an isolated worker",
 )
 async def upload(
     db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, request: Request, response: Response
@@ -202,11 +210,14 @@ async def upload(
         buf.extend(chunk)
         if len(buf) > UPLOAD_LIMIT:
             raise TooLarge("This file is larger than any accepted page.")
-    page, duplicate, warnings = await run_in_threadpool(service.upload_page, db, who, attempt_id, bytes(buf))
-    return UploadOut(page=_page_out(page), duplicate=duplicate, warnings=warnings)
+    file, pages, duplicate, warnings = await run_in_threadpool(service.upload_page, db, who, attempt_id, bytes(buf))
+    return UploadOut(pages=[page_out(p, file) for p in pages], duplicate=duplicate, warnings=warnings)
 
 
-@router.get("/written-attempts/{attempt_id}/pages/{page_id}", summary="Your own uploaded page (private)")
+@router.get(
+    "/written-attempts/{attempt_id}/pages/{page_id}",
+    summary="Your own page as its validated PNG preview (private; originals are never served)",
+)
 def get_page(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, page_id: uuid.UUID) -> Response:
     data, content_type = service.page_bytes(db, who, attempt_id, page_id)
     return Response(

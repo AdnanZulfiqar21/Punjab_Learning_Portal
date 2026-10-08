@@ -26,7 +26,7 @@ def _staff(client: TestClient, roles: list[str]) -> Staff:
 def _sealed_two_question_script(client: TestClient, chapter: str, seed: int) -> tuple[Staff, dict[str, Any]]:
     learner = _learner(client)
     a = _start(client, learner, chapter, question_count=2)
-    page = _upload(client, learner, a["id"], _png(seed=seed)).json()["page"]["id"]
+    page = _upload(client, learner, a["id"], _png(seed=seed)).json()["pages"][0]["id"]
     slots = {k: {"pages": [page]} for k in ("1:a", "1:b", "2:a", "2:b")}
     m = _map(client, learner, a, slots).json()
     assert _seal(client, learner, a["id"], m["manifest_revision"]).status_code == 200

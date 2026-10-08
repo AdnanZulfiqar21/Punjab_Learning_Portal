@@ -47,6 +47,19 @@ class LocalEvidenceStore:
             f.write(data)
         return Stored(key=key, sha256=hashlib.sha256(data).hexdigest(), size=len(data))
 
+    def discard_uncommitted(self, key: str) -> None:
+        """Remove an object whose database row was never committed (a refused or failed admission). Committed
+        evidence is never passed here; immutability applies to everything a row references."""
+        self._path(key).unlink(missing_ok=True)
+
+    def list_objects(self) -> list[tuple[str, float]]:
+        """Every stored key with its modification time (orphan sweeps)."""
+        out = []
+        for path in self.root.rglob("*"):
+            if path.is_file():
+                out.append((path.relative_to(self.root).as_posix(), path.stat().st_mtime))
+        return out
+
     def get(self, key: str) -> bytes:
         return self._path(key).read_bytes()
 

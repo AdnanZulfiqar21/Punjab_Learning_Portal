@@ -33,9 +33,10 @@ from portal_api.modules.curriculum.models import BookEdition, Chapter, Grade, Su
 from portal_api.modules.identity.deps import Principal
 from portal_api.modules.identity.models import StaffRoleGrant
 from portal_api.modules.identity.permissions import Permission, Role, permissions_for
-from portal_api.modules.written import review, storage, validate
+from portal_api.modules.written import evidence, review, storage
 from portal_api.modules.written.models import (
     WrittenAttempt,
+    WrittenFile,
     WrittenForm,
     WrittenFormItem,
     WrittenPage,
@@ -45,10 +46,11 @@ from portal_api.modules.written.models import (
 UPLOAD_ALLOWANCE_S = 10 * 60  # proposed G for chapter practice (§20.7.2); pinned per form and disclosed before start
 UNTIMED_PERMIT_S = 24 * 60 * 60  # untimed practice still has a finite upload permit
 CAPS = {
-    "max_pages": 10,
+    "max_pages": 10,  # logical pages: each photo is one, each PDF page is one (review R02)
+    "max_files": 10,
     "max_total_bytes": 60 * 1024 * 1024,
-    "image_bytes": validate.IMAGE_MAX_BYTES,
-    "pdf_bytes": validate.PDF_MAX_BYTES,
+    "image_bytes": evidence.IMAGE_MAX_BYTES,
+    "pdf_bytes": evidence.PDF_MAX_BYTES,
 }
 
 
@@ -335,13 +337,39 @@ def _expire_if_due(db: Session, attempt: WrittenAttempt, now: datetime) -> bool:
 
 
 def _pages(db: Session, attempt_id: uuid.UUID) -> list[WrittenPage]:
+    """Logical pages in upload order, then page order within each file."""
     return list(
         db.scalars(
             select(WrittenPage)
             .where(WrittenPage.attempt_id == attempt_id, WrittenPage.status == "uploaded")
-            .order_by(WrittenPage.uploaded_at, WrittenPage.id)
+            .order_by(WrittenPage.uploaded_at, WrittenPage.file_id, WrittenPage.page_index)
         )
     )
+
+
+def _files(db: Session, attempt_id: uuid.UUID) -> list[WrittenFile]:
+    return list(
+        db.scalars(select(WrittenFile).where(WrittenFile.attempt_id == attempt_id, WrittenFile.status == "uploaded"))
+    )
+
+
+def _check_caps(db: Session, attempt: WrittenAttempt, new_pages: int, new_bytes: int) -> None:
+    caps = attempt.form.caps
+    max_files = int(caps.get("max_files", caps["max_pages"]))
+    files = _files(db, attempt.id)
+    pages = len(_pages(db, attempt.id))
+    if len(files) >= max_files:
+        raise Unprocessable(f"An answer script can have at most {max_files} files.", code_reason="FILE_LIMIT")
+    if pages + new_pages > caps["max_pages"]:
+        raise Unprocessable(
+            f"An answer script can have at most {caps['max_pages']} pages in total; this upload has {new_pages} and "
+            f"{pages} are already uploaded.",
+            code_reason="PAGE_LIMIT",
+        )
+    if sum(f.size for f in files) + new_bytes > caps["max_total_bytes"]:
+        raise Unprocessable(
+            f"The script would exceed {caps['max_total_bytes'] // (1024 * 1024)} MB in total.", code_reason="BYTE_LIMIT"
+        )
 
 
 def _require_open(attempt: WrittenAttempt) -> None:
@@ -363,56 +391,145 @@ def load(db: Session, who: Principal, attempt_id: uuid.UUID) -> WrittenAttempt:
 
 
 # ------------------------------------------------------------------ evidence
-def upload_page(db: Session, who: Principal, attempt_id: uuid.UUID, data: bytes) -> tuple[WrittenPage, bool, list[str]]:
-    """Validate (bounded, before the lock), then admit under the lock. Returns (page, duplicate, warnings)."""
-    try:
-        checked = validate.check(data)
-    except validate.Rejected as e:
-        raise Unprocessable(e.reason, code_reason="UNSUPPORTED_FILE") from e
+def _existing(db: Session, attempt_id: uuid.UUID, sha: str) -> WrittenFile | None:
+    return db.scalar(select(WrittenFile).where(WrittenFile.attempt_id == attempt_id, WrittenFile.sha256 == sha))
+
+
+def pages_of_file(db: Session, file_id: uuid.UUID) -> list[WrittenPage]:
+    return list(db.scalars(select(WrittenPage).where(WrittenPage.file_id == file_id).order_by(WrittenPage.page_index)))
+
+
+def upload_page(
+    db: Session, who: Principal, attempt_id: uuid.UUID, data: bytes
+) -> tuple[WrittenFile, list[WrittenPage], bool, list[str]]:
+    """Admit one uploaded file. Returns (file, its logical pages, duplicate, warnings).
+
+    1. Without any lock: ownership, an early status/duplicate check, and bounded inspection in the evidence worker.
+    2. Without any lock: store the original and its previews under fresh keys (immutable, exclusive create).
+    3. Under the attempt lock (short): the clock, expiry, status, duplicates and every cap are checked again, then rows
+       are committed. A refused admission removes the objects it stored, so nothing unreferenced is left behind.
+    """
+    attempt = db.get(WrittenAttempt, attempt_id)
+    if attempt is None or attempt.user_id != who.user.id:
+        raise NotFound("Attempt not found.")
     sha = hashlib.sha256(data).hexdigest()
-    attempt = _lock(db, attempt_id, who)
-    now = db_now(db)
-    if _expire_if_due(db, attempt, now):
-        db.commit()
+    if attempt.status == "active" and (dup := _existing(db, attempt.id, sha)) is not None:
+        return dup, pages_of_file(db, dup.id), True, []  # exact duplicate within this attempt: reuse, never re-store
     _require_open(attempt)
-    existing = db.scalar(select(WrittenPage).where(WrittenPage.attempt_id == attempt.id, WrittenPage.sha256 == sha))
-    if existing is not None:
+    try:
+        inspected = evidence.inspect(data)
+    except evidence.Rejected as e:
+        raise Unprocessable(e.reason, code_reason="UNSUPPORTED_FILE") from e
+    _check_caps(db, attempt, len(inspected.pages), len(data))  # early, honest refusal before storing anything
+    db.rollback()  # no snapshot or lock is held while storing
+
+    store = storage.get_store()
+    file_id = uuid.uuid4()
+    stored_keys: list[str] = []
+    try:
+        original = store.put(f"{attempt.id}/{file_id}/original", data)
+        stored_keys.append(original.key)
+        if original.sha256 != sha:
+            raise Conflict("The upload changed while it was being stored. Upload it again.")
+        previews = []
+        for i, lp in enumerate(inspected.pages, start=1):
+            pv = store.put(f"{attempt.id}/{file_id}/page-{i}.png", lp.preview_png)
+            stored_keys.append(pv.key)
+            previews.append((lp, pv))
+
+        attempt = _lock(db, attempt_id, who)
+        now = db_now(db)
+        if _expire_if_due(db, attempt, now):
+            db.commit()
+        _require_open(attempt)
+        dup = _existing(db, attempt.id, sha)
+        if dup is not None:  # the same file was admitted concurrently
+            db.commit()
+            for key in stored_keys:
+                store.discard_uncommitted(key)
+            return dup, pages_of_file(db, dup.id), True, inspected.warnings
+        _check_caps(db, attempt, len(previews), len(data))
+        db.add(
+            WrittenFile(
+                id=file_id,
+                attempt_id=attempt.id,
+                storage_key=original.key,
+                sha256=sha,
+                size=original.size,
+                content_type=inspected.content_type,
+                page_count=len(previews),
+                uploaded_at=now,
+            )
+        )
+        db.flush()
+        pages = []
+        for i, (lp, pv) in enumerate(previews, start=1):
+            page = WrittenPage(
+                id=file_id if i == 1 else uuid.uuid4(),
+                attempt_id=attempt.id,
+                file_id=file_id,
+                page_index=i,
+                width=lp.width,
+                height=lp.height,
+                preview_key=pv.key,
+                preview_sha256=pv.sha256,
+                uploaded_at=now,
+            )
+            db.add(page)
+            pages.append(page)
+        attempt.manifest = {
+            **attempt.manifest,
+            "order": [*attempt.manifest.get("order", []), *[str(p.id) for p in pages]],
+        }
         db.commit()
-        return existing, True, checked.warnings  # exact duplicate within this attempt only: reuse, never re-store
-    pages = _pages(db, attempt.id)
-    caps = attempt.form.caps
-    if len(pages) >= caps["max_pages"]:
-        raise Unprocessable(f"An answer script can have at most {caps['max_pages']} files.")
-    if sum(p.size for p in pages) + len(data) > caps["max_total_bytes"]:
-        raise Unprocessable(f"The script would exceed {caps['max_total_bytes'] // (1024 * 1024)} MB in total.")
-    page_id = uuid.uuid4()
-    stored = storage.get_store().put(f"{attempt.id}/{page_id}", data)
-    assert stored.sha256 == sha
-    page = WrittenPage(
-        id=page_id,
-        attempt_id=attempt.id,
-        storage_key=stored.key,
-        sha256=sha,
-        size=stored.size,
-        content_type=checked.content_type,
-        width=checked.width,
-        height=checked.height,
-        pdf_pages=checked.pages,
-        uploaded_at=now,
-    )
-    db.add(page)
-    attempt.manifest = {**attempt.manifest, "order": [*attempt.manifest.get("order", []), str(page_id)]}
-    db.commit()
-    db.refresh(page)
-    return page, False, checked.warnings
+    except BaseException:
+        db.rollback()
+        for key in stored_keys:
+            store.discard_uncommitted(key)
+        raise
+    for page in pages:
+        db.refresh(page)
+    file = db.get(WrittenFile, file_id)
+    assert file is not None
+    return file, pages, False, inspected.warnings
 
 
 def page_bytes(db: Session, who: Principal, attempt_id: uuid.UUID, page_id: uuid.UUID) -> tuple[bytes, str]:
+    """The learner's own page, as its validated preview (originals are never served)."""
     attempt = db.get(WrittenAttempt, attempt_id)
     page = db.get(WrittenPage, page_id)
     if attempt is None or attempt.user_id != who.user.id or page is None or page.attempt_id != attempt.id:
         raise NotFound("Page not found.")
-    return storage.get_store().get(page.storage_key), page.content_type
+    if page.preview_key is None:
+        raise Conflict("This page's preview hasn't been generated yet.", code_reason="PREVIEW_MISSING")
+    return storage.get_store().get(page.preview_key), "image/png"
+
+
+def sweep_orphans(db: Session, older_than_s: int = 3600) -> list[str]:
+    """Remove stored objects that no committed row references (a crash between storing and admitting). Recent
+    objects are left alone because an upload may still be admitting them."""
+    import time
+
+    referenced = set(db.scalars(select(WrittenFile.storage_key)).all())
+    referenced |= {k for k in db.scalars(select(WrittenPage.preview_key)).all() if k}
+    store = storage.get_store()
+    removed = []
+    cutoff = time.time() - older_than_s
+    for key, mtime in store.list_objects():
+        if key not in referenced and mtime < cutoff:
+            store.discard_uncommitted(key)
+            removed.append(key)
+    if removed:
+        record(
+            db,
+            actor=None,
+            action="written.orphans_swept",
+            target_type="evidence_store",
+            target_id="local",
+            details={"removed": len(removed)},
+        )
+        db.commit()
+    return removed
 
 
 def update_manifest(
@@ -472,11 +589,20 @@ def seal(
     store = storage.get_store()
     referenced = {p for slot in attempt.manifest.get("slots", {}).values() for p in slot.get("pages", [])}
     verified: dict[str, str] = {}
+    preview_verified: dict[str, str] = {}
+    file_ok: dict[uuid.UUID, str] = {}
     for page in _pages(db, attempt.id):
-        if str(page.id) in referenced:
-            if store.sha256(page.storage_key) != page.sha256:
-                raise Conflict(f"An uploaded page failed its integrity check; upload it again ({page.id}).")
-            verified[str(page.id)] = page.sha256
+        if str(page.id) not in referenced:
+            continue
+        if page.file_id not in file_ok:
+            f = db.get(WrittenFile, page.file_id)
+            if f is None or store.sha256(f.storage_key) != f.sha256:
+                raise Conflict(f"An uploaded file failed its integrity check; upload it again ({page.file_id}).")
+            file_ok[page.file_id] = f.sha256
+        if page.preview_key is None or store.sha256(page.preview_key) != page.preview_sha256:
+            raise Conflict(f"A page preview is missing or damaged; upload that page again ({page.id}).")
+        verified[str(page.id)] = file_ok[page.file_id]
+        preview_verified[str(page.id)] = page.preview_sha256 or ""
     db.rollback()  # release the read snapshot before taking the lock
 
     attempt = _lock(db, attempt_id, who)
@@ -518,6 +644,7 @@ def seal(
         manifest_revision=attempt.manifest_revision,
         manifest=attempt.manifest,
         page_hashes={p: verified[p] for p in sorted(used)},
+        preview_hashes={p: preview_verified[p] for p in sorted(used)},
         answered_slots=sum(1 for s in slots.values() if s.get("pages")),
         unanswered_slots=sum(1 for s in slots.values() if s.get("unanswered")),
     )
