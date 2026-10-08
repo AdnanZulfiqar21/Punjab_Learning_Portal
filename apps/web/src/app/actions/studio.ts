@@ -108,6 +108,9 @@ export async function quarantineItem(id: string, reason: string, level: string |
 export async function releaseItem(id: string, reason: string): Promise<ActionResult> {
   return call(item(id, "release"), "POST", { reason });
 }
+export async function setAccessTier(id: string, tier: "preview" | "premium", reason: string): Promise<ActionResult> {
+  return call(item(id, "access-tier"), "POST", { tier, reason });
+}
 export async function retireItem(id: string, reason: string): Promise<ActionResult> {
   return call(item(id, "retire"), "POST", { reason });
 }

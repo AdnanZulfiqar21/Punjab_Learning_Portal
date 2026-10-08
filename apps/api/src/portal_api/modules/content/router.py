@@ -11,10 +11,12 @@ from sqlalchemy.orm import Session, selectinload
 
 from portal_api.db import get_session
 from portal_api.errors import Forbidden, NotFound
+from portal_api.modules.access import service as access
 from portal_api.modules.audit.models import AuditEvent
 from portal_api.modules.content import blocks, kinds, workflow
 from portal_api.modules.content.models import Availability, ContentItem, ContentVersion, ItemState
 from portal_api.modules.content.schemas import (
+    AccessTierIn,
     Actions,
     AssignIn,
     ChangeReasonIn,
@@ -35,7 +37,7 @@ from portal_api.modules.content.schemas import (
     VersionOut,
 )
 from portal_api.modules.curriculum.models import BookEdition, Chapter, SourceDocument, Topic
-from portal_api.modules.identity.deps import CurrentPrincipal, Principal, require
+from portal_api.modules.identity.deps import CurrentPrincipal, OptionalPrincipal, Principal, require
 from portal_api.modules.identity.models import AppUser, StaffRoleGrant
 from portal_api.modules.identity.permissions import Permission, Role, permissions_for
 
@@ -149,6 +151,7 @@ def _summary_fields(
         "family_id": item.family_id,
         "parent_item_id": item.parent_item_id,
         "quarantine_level": item.quarantine_level,
+        "access_tier": item.access_tier,
     }
 
 
@@ -205,6 +208,10 @@ def _detail(db: Session, item: ContentItem, who: Principal) -> ItemDetail:
         quarantine=Permission.quarantine_content in perms and mfa and item.availability == Availability.live.value,
         release=Permission.quarantine_content in perms and mfa and item.availability == Availability.quarantined.value,
         retire=Permission.publish_content in perms and mfa and not retired,
+        set_access_tier=Permission.publish_content in perms
+        and mfa
+        and not retired
+        and kinds.get(item.kind).learner_readable,
     )
     blockers: list[str] = []
     if item.working is not None and not retired:
@@ -407,6 +414,15 @@ def quarantine(db: DB, who: Quarantiner, item_id: uuid.UUID, body: QuarantineIn)
     return _detail(db, workflow.quarantine(db, who, item_id, body.reason, body.level), who)
 
 
+@router.post(
+    "/items/{item_id}/access-tier",
+    response_model=ItemDetail,
+    summary="Mark a lesson as a free preview or premium (publishers, MFA, audited with a reason)",
+)
+def access_tier(db: DB, who: Publisher, item_id: uuid.UUID, body: AccessTierIn) -> ItemDetail:
+    return _detail(db, workflow.set_access_tier(db, who, item_id, body.tier, body.reason), who)
+
+
 @router.post("/items/{item_id}/release", response_model=ItemDetail)
 def release(db: DB, who: Quarantiner, item_id: uuid.UUID, body: ChangeReasonIn) -> ItemDetail:
     return _detail(db, workflow.release(db, who, item_id, body.reason), who)
@@ -432,11 +448,19 @@ def set_rights(db: DB, who: RightsOwner, source_id: uuid.UUID, body: RightsIn) -
     response_model=list[LessonOut],
     summary="Published, live lessons for a chapter (academically approved; never drafts)",
 )
-def chapter_lessons(db: DB, chapter_id: uuid.UUID, response: Response) -> list[LessonOut]:
+def chapter_lessons(db: DB, who: OptionalPrincipal, chapter_id: uuid.UUID, response: Response) -> list[LessonOut]:
+    """Every live lesson is listed. Premium bodies go only to callers with an active plan or trial (review R07);
+    others see the title marked locked. Free previews are readable by everyone."""
     chapter = db.get(Chapter, chapter_id)
     if chapter is None or chapter.retired_at is not None:
         raise NotFound("Chapter not found.")
-    response.headers["Cache-Control"] = "public, max-age=60, stale-while-revalidate=300"
+    entitled = who is not None and bool(access.active_entitlements(db, who.user.id, access.db_now(db)))
+    if who is None:
+        # The anonymous response holds preview bodies only, identical for every anonymous caller: safe to share.
+        response.headers["Cache-Control"] = "public, max-age=60, stale-while-revalidate=300"
+    else:
+        response.headers["Cache-Control"] = "private, no-store"  # personalised: never stored by shared caches
+    response.headers["Vary"] = "Authorization"
     rows = db.execute(
         select(ContentItem, ContentVersion)
         .join(ContentVersion, ContentVersion.id == ContentItem.published_version_id)
@@ -448,17 +472,22 @@ def chapter_lessons(db: DB, chapter_id: uuid.UUID, response: Response) -> list[L
         )
         .order_by(ContentVersion.published_at, ContentItem.id)
     ).all()
-    return [
-        LessonOut(
-            id=i.id,
-            title=i.title,
-            topic_id=i.topic_id,
-            version=v.number,
-            published_at=v.published_at or v.updated_at,  # always set for published versions
-            content_schema_version=v.content_schema_version,
-            block_types=v.block_types,
-            body=v.body,
-            source_refs=v.source_refs,
+    out = []
+    for i, v in rows:
+        locked = i.access_tier != "preview" and not entitled
+        out.append(
+            LessonOut(
+                id=i.id,
+                title=i.title,
+                topic_id=i.topic_id,
+                version=v.number,
+                published_at=v.published_at or v.updated_at,  # always set for published versions
+                access_tier=i.access_tier,  # type: ignore[arg-type]
+                locked=locked,
+                content_schema_version=v.content_schema_version,
+                block_types=[] if locked else v.block_types,
+                body=None if locked else v.body,
+                source_refs=v.source_refs,  # textbook page references are not premium content
+            )
         )
-        for i, v in rows
-    ]
+    return out

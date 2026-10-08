@@ -4,6 +4,7 @@ import { connection } from "next/server";
 import { cache } from "react";
 import type { Book, Catalogue, Chapter, Lesson, Problem, SearchResult } from "@portal/contracts";
 import { readRuntimeConfig } from "@/lib/runtime-config";
+import { sessionToken } from "@/lib/session";
 
 export class ApiUnavailableError extends Error {
   constructor(
@@ -22,13 +23,18 @@ function apiOrigin(): string {
   return readRuntimeConfig().apiOrigin; // read per request from the process environment, never baked into the build
 }
 
-async function getJSON<T>(path: string): Promise<Result<T>> {
+async function getJSON<T>(path: string, token?: string): Promise<Result<T>> {
   await connection(); // request-time data: builds never depend on a live API
   const correlationId = crypto.randomUUID().replaceAll("-", "");
   let res: Response;
   try {
     res = await fetch(`${apiOrigin()}${path}`, {
-      headers: { Accept: "application/json", "X-Correlation-ID": correlationId },
+      headers: {
+        Accept: "application/json",
+        "X-Correlation-ID": correlationId,
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      },
+      cache: "no-store", // lesson responses can be personalised (R07); never kept in a shared data cache
       signal: AbortSignal.timeout(8000),
     });
   } catch {
@@ -49,9 +55,10 @@ export const getBookFor = cache((grade: number, subject: string) =>
   getJSON<Book>(`/v1/grades/${grade}/subjects/${encodeURIComponent(subject)}/book`),
 );
 export const getChapter = cache((id: string) => getJSON<Chapter>(`/v1/chapters/${encodeURIComponent(id)}`));
-/** Published, live lessons for a chapter. Only independently reviewed and published versions are ever returned. */
-export const getLessons = cache((chapterId: string) =>
-  getJSON<Lesson[]>(`/v1/chapters/${encodeURIComponent(chapterId)}/lessons`),
+/** Published, live lessons for a chapter. Premium bodies come back only for a learner with an active plan or
+ * trial (review R07), so the learner's session is forwarded when present. */
+export const getLessons = cache(async (chapterId: string) =>
+  getJSON<Lesson[]>(`/v1/chapters/${encodeURIComponent(chapterId)}/lessons`, await sessionToken()),
 );
 export const searchCatalogue = cache((q: string, grade?: number) => {
   const params = new URLSearchParams({ q });

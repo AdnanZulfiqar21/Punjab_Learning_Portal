@@ -7,6 +7,7 @@ import {
   claimItem,
   publishItem,
   quarantineItem,
+  setAccessTier,
   releaseItem,
   retireItem,
   reviewItem,
@@ -457,7 +458,7 @@ function ActionsPanel({ item, myId, flush }: { item: StudioItem; myId: string; f
     });
   }
 
-  const reasonNeeded = a.revise || a.quarantine || a.release || a.retire;
+  const reasonNeeded = a.revise || a.quarantine || a.release || a.retire || a.set_access_tier;
   const commentNeeded = a.review || a.submit;
   const btn = "w-full rounded-lg px-3 py-2 text-sm font-medium disabled:opacity-50";
   const primary = `${btn} bg-accent text-white hover:bg-accent-strong dark:text-background`;
@@ -558,6 +559,16 @@ function ActionsPanel({ item, myId, flush }: { item: StudioItem; myId: string; f
         {a.release && (
           <button type="button" className={secondary} disabled={pending || short} onClick={() => run(() => releaseItem(item.id, text.trim()))}>
             Release from quarantine
+          </button>
+        )}
+        {a.set_access_tier && (
+          <button
+            type="button"
+            className={secondary}
+            disabled={pending || short}
+            onClick={() => run(() => setAccessTier(item.id, item.access_tier === "preview" ? "premium" : "preview", text.trim()))}
+          >
+            {item.access_tier === "preview" ? "Make premium (plan or trial needed)" : "Make a free preview"}
           </button>
         )}
         {a.retire && (

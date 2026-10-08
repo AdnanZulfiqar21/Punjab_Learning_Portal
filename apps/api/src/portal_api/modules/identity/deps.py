@@ -108,6 +108,16 @@ def _principal(
 CurrentPrincipal = Annotated[Principal, Depends(current_principal)]
 
 
+def optional_principal(request: Request, db: Annotated[Session, Depends(get_session)]) -> Principal | None:
+    """The caller if they sent credentials, else None. Invalid credentials are still a 401, never anonymous."""
+    if not request.headers.get("authorization"):
+        return None
+    return current_principal(request, db)
+
+
+OptionalPrincipal = Annotated[Principal | None, Depends(optional_principal)]
+
+
 def require(permission: Permission) -> Callable[[Principal], Principal]:
     """Dependency factory: the caller must hold `permission`, with an MFA session where the matrix requires it."""
 

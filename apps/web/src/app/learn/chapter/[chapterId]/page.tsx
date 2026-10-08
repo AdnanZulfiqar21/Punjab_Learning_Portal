@@ -168,11 +168,24 @@ async function Lessons({ chapterId, topics }: { chapterId: string; topics: Topic
                 {l.title}
               </h3>
               <p className="text-sm text-muted">
-                {l.topic_id && titles.get(l.topic_id) ? `${titles.get(l.topic_id)} · ` : ""}Reviewed lesson · version {l.version} ·
+                {l.topic_id && titles.get(l.topic_id) ? `${titles.get(l.topic_id)} · ` : ""}
+                {l.access_tier === "preview" ? "Free preview · " : ""}Reviewed lesson · version {l.version} ·
                 published {published(l.published_at)}
               </p>
             </header>
-            <LessonBlocks blocks={l.body.blocks as { type: string }[]} headingOffset={2} />
+            {l.locked || !l.body ? (
+              <div className="rounded-lg bg-surface-muted p-4 text-sm">
+                <p className="font-medium">This lesson is included with a plan or the free 30-day trial.</p>
+                <p className="text-muted">
+                  <Link href="/account" className="text-accent underline underline-offset-2">
+                    Start your free trial or sign in
+                  </Link>{" "}
+                  to read it.
+                </p>
+              </div>
+            ) : (
+              <LessonBlocks blocks={l.body.blocks as { type: string }[]} headingOffset={2} />
+            )}
             <p className="border-t border-border pt-3 text-sm text-muted">
               Textbook pages (PDF):{" "}
               {(l.source_refs as { pdf_from: number; pdf_to: number }[])

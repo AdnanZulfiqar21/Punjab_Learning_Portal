@@ -51,6 +51,11 @@ class ReviewIn(BaseModel):
     )
 
 
+class AccessTierIn(BaseModel):
+    tier: Literal["preview", "premium"]
+    reason: str = Field(min_length=5, max_length=1000)
+
+
 class QuarantineIn(BaseModel):
     reason: str = Field(min_length=5, max_length=1000)
     level: Literal["SOFT", "VOID", "KEY_ERROR"] | None = Field(
@@ -127,6 +132,7 @@ class ItemSummary(BaseModel):
     title: str
     state: ItemStateName
     availability: AvailabilityName
+    access_tier: Literal["preview", "premium"] = Field(description="Lessons: free preview or needs a plan (R07)")
     grade_number: int
     subject_code: str
     chapter_id: uuid.UUID
@@ -158,6 +164,7 @@ class Actions(BaseModel):
     quarantine: bool
     release: bool
     retire: bool
+    set_access_tier: bool
 
 
 class ItemDetail(ItemSummary):
@@ -186,7 +193,9 @@ class LessonOut(BaseModel):
     topic_id: uuid.UUID | None
     version: int
     published_at: datetime
+    access_tier: Literal["preview", "premium"]
+    locked: bool = Field(description="True when the caller has no active plan or trial; body and pages are withheld")
     content_schema_version: int
     block_types: list[str]
-    body: dict[str, Any]
+    body: dict[str, Any] | None = Field(description="Null when locked")
     source_refs: list[dict[str, Any]]
