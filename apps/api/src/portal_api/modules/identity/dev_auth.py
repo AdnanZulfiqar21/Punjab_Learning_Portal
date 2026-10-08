@@ -33,6 +33,9 @@ _DUMMY_HASH = _hasher.hash("not-a-real-password-placeholder")
 @router.post("/register", status_code=202, summary="Create a development account (always 202)")
 def register(body: DevRegisterIn, db: DB) -> dict[str, str]:
     email = body.email.lower()
+    # Hash before touching the database: argon2 is deliberately slow, and holding a pooled connection during it
+    # starved the pool under load (review R08).
+    password_hash = _hasher.hash(body.password)
     exists = db.scalar(select(DevCredential.user_id).where(DevCredential.email == email))
     if exists is None:
         issuer = get_settings().dev_auth_issuer
@@ -42,7 +45,7 @@ def register(body: DevRegisterIn, db: DB) -> dict[str, str]:
             db.flush()
             db.execute(
                 insert(DevCredential)
-                .values(user_id=user.id, email=email, password_hash=_hasher.hash(body.password))
+                .values(user_id=user.id, email=email, password_hash=password_hash)
                 .on_conflict_do_nothing(index_elements=["email"])
             )
             db.commit()
@@ -55,8 +58,10 @@ def register(body: DevRegisterIn, db: DB) -> dict[str, str]:
 def token(body: DevTokenIn, db: DB, response: Response) -> TokenOut:
     response.headers["Cache-Control"] = "no-store"
     cred = db.scalar(select(DevCredential).where(DevCredential.email == body.email.lower()))
+    stored = cred.password_hash if cred else _DUMMY_HASH
+    db.rollback()  # return the connection to the pool before the slow verify (R08)
     try:
-        _hasher.verify(cred.password_hash if cred else _DUMMY_HASH, body.password)
+        _hasher.verify(stored, body.password)
     except VerificationError as e:
         raise Unauthorized("Email or password is incorrect.") from e
     if cred is None:

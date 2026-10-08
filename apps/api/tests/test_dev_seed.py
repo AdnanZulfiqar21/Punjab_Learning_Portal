@@ -8,15 +8,14 @@ from sqlalchemy import func, select
 from sqlalchemy.orm import Session
 
 from portal_api.config import get_settings
-from portal_api.db import get_engine, get_sessionmaker
+from portal_api.db import reset_engine
 from portal_api.modules.identity import dev_seed
 from portal_api.modules.identity.models import AppUser, StaffRoleGrant
 
 
 def _clear() -> None:
     get_settings.cache_clear()
-    get_sessionmaker.cache_clear()
-    get_engine.cache_clear()
+    reset_engine()
 
 
 def test_seed_is_idempotent_and_scoped(client: TestClient, db: Session) -> None:
