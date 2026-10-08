@@ -54,12 +54,17 @@ export async function staffReply(id: string, body: string, internal: boolean, st
   return res.ok ? { ok: true } : { ok: false, error: detail(res.problem, "Couldn't send the reply.") };
 }
 
-export async function requestRecheck(attemptId: string, positions: number[], reason: string): Promise<{ ok: boolean; error?: string }> {
+export async function requestRecheck(
+  attemptId: string,
+  positions: number[],
+  reason: string,
+  criteria: Record<string, string[]> = {},
+): Promise<{ ok: boolean; error?: string }> {
   const t = await token(`/practice/written/${attemptId}`);
   const res = await api<RecheckState>(`/v1/written-attempts/${encodeURIComponent(attemptId)}/recheck`, {
     method: "POST",
     token: t,
-    body: JSON.stringify({ positions, reason }),
+    body: JSON.stringify({ positions, reason, criteria }),
   });
   return res.ok ? { ok: true } : { ok: false, error: detail(res.problem, "Couldn't request a recheck.") };
 }

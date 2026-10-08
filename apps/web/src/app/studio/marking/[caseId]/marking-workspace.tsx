@@ -32,9 +32,20 @@ export function MarkingWorkspace({ initial }: { initial: MarkingCase }) {
     }
     return out;
   });
+  // A recheck re-marks only the learner's questions (plus any an adjudicator adds with a reason); the rest carry forward.
+  const rc = c.recheck;
+  const [added, setAdded] = useState<number[]>([]);
+  const [expansionReason, setExpansionReason] = useState("");
+  const scope = rc ? new Set([...rc.positions, ...rc.expanded_positions, ...added].map(String)) : null;
+  const inScope = (pos: string) => !scope || scope.has(pos);
   const slots = (c.manifest as { slots?: Record<string, { pages?: string[]; unanswered?: boolean }> }).slots ?? {};
   const pageNo = (id: string) => c.pages.findIndex((p) => p.id === id) + 1;
-  const total = Object.values(awards).reduce((n, q) => n + Object.values(q).reduce((m, a) => m + a.units, 0), 0);
+  const total = Object.entries(awards).reduce(
+    (n, [pos, q]) => n + (inScope(pos) ? Object.values(q).reduce((m, a) => m + a.units, 0) : (rc?.carried_forward[pos] ?? 0)),
+    0,
+  );
+  const sent = () => Object.fromEntries(Object.entries(awards).filter(([pos]) => inScope(pos)));
+  const expansion = () => (added.length ? { positions: added, reason: expansionReason.trim() } : undefined);
   const canMark = c.leased_by_me && c.status === "queued";
 
   function set(pos: string, id: string, patch: Partial<{ units: number; reason: string }>) {
@@ -89,6 +100,17 @@ export function MarkingWorkspace({ initial }: { initial: MarkingCase }) {
         </div>
       )}
 
+      {rc && (
+        <section aria-label="Recheck request" className="space-y-1 rounded-xl border border-warn bg-warn-soft p-4 text-sm">
+          <p className="font-semibold">
+            The learner disputes version {rc.target_version}: question{rc.positions.length > 1 ? "s" : ""} {rc.positions.join(", ")}
+          </p>
+          <p className="whitespace-pre-line">{rc.reason}</p>
+          {rc.expanded_positions.length > 0 && <p>Added by an adjudicator: question {rc.expanded_positions.join(", ")}</p>}
+          <p className="text-muted">Re-mark only these questions. Every other question keeps its released marks.</p>
+        </section>
+      )}
+
       <div className="grid gap-6 lg:grid-cols-2">
         <section aria-label="Submitted pages" className="space-y-3">
           {c.pages.map((p, i) =>
@@ -112,6 +134,24 @@ export function MarkingWorkspace({ initial }: { initial: MarkingCase }) {
             const r = q.rubric as unknown as Rubric;
             const body = q.question as unknown as Question;
             const qTotal = Object.values(awards[pos] ?? {}).reduce((n, a) => n + a.units, 0);
+            if (!inScope(pos)) {
+              return (
+                <article key={pos} aria-label={`Question ${pos}, carried forward`} className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-border bg-surface-muted p-4">
+                  <div>
+                    <h2 className="font-semibold">Question {pos}</h2>
+                    <p className="text-sm text-muted">
+                      Carried forward unchanged: {marks(rc?.carried_forward[pos] ?? 0)} / {marks(q.max_units)}
+                    </p>
+                  </div>
+                  {rc?.can_expand && canMark && (
+                    <button type="button" onClick={() => setAdded((a) => [...a, q.position].sort((x, y) => x - y))} className="rounded-lg border border-border bg-surface px-3 py-1.5 text-sm hover:border-accent">
+                      Add to recheck
+                    </button>
+                  )}
+                </article>
+              );
+            }
+            const disputed = new Set(rc?.criteria[pos] ?? []);
             return (
               <article key={pos} className="space-y-3 rounded-xl border border-border bg-surface p-4">
                 <div className="flex justify-between">
@@ -136,6 +176,7 @@ export function MarkingWorkspace({ initial }: { initial: MarkingCase }) {
                         <fieldset key={cr.id} className="space-y-1 rounded-lg bg-surface-muted p-2" disabled={!canMark}>
                           <legend className="text-sm">
                             <span className="font-mono text-xs text-muted">{cr.id}</span> {cr.description}
+                            {disputed.has(cr.id) && <Badge tone="warn">Disputed</Badge>}
                             {cr.alternative_group ? <span className="text-xs text-muted"> (alternative route {cr.alternative_group})</span> : null}
                           </legend>
                           <div className="flex flex-wrap gap-3 text-sm" role="radiogroup" aria-label={`Award for ${cr.id}`}>
@@ -170,16 +211,27 @@ export function MarkingWorkspace({ initial }: { initial: MarkingCase }) {
               </article>
             );
           })}
+          {added.length > 0 && (
+            <div className="space-y-1 rounded-xl border border-warn bg-surface p-3">
+              <label htmlFor="expansion-reason" className="text-sm font-medium">
+                Why are you adding question {added.join(", ")} to this recheck?
+              </label>
+              <textarea id="expansion-reason" value={expansionReason} onChange={(e) => setExpansionReason(e.target.value)} rows={2} maxLength={1000} className="w-full rounded border border-border bg-surface px-2 py-1 text-sm" />
+              <button type="button" onClick={() => setAdded([])} className="text-sm underline">
+                Undo additions
+              </button>
+            </div>
+          )}
           <div className="sticky bottom-0 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-border bg-surface p-3">
             <span className="font-semibold">
               Total {marks(total)} / {marks(c.max_units)}
             </span>
             {canMark ? (
               <div className="flex gap-2">
-                <button type="button" disabled={pending} onClick={() => run(() => saveMarks(c.id, c.version, awards, false))} className="rounded-lg border border-border px-4 py-2 font-medium disabled:opacity-60">
+                <button type="button" disabled={pending} onClick={() => run(() => saveMarks(c.id, c.version, sent(), false, expansion()))} className="rounded-lg border border-border px-4 py-2 font-medium disabled:opacity-60">
                   Save marks
                 </button>
-                <button type="button" disabled={pending} onClick={() => run(() => saveMarks(c.id, c.version, awards, true))} className="rounded-lg bg-accent px-4 py-2 font-medium text-white disabled:opacity-60 dark:text-background">
+                <button type="button" disabled={pending} onClick={() => run(() => saveMarks(c.id, c.version, sent(), true, expansion()))} className="rounded-lg bg-accent px-4 py-2 font-medium text-white disabled:opacity-60 dark:text-background">
                   Release result
                 </button>
               </div>

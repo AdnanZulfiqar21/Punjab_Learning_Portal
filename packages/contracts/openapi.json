@@ -568,6 +568,16 @@
             "title": "Questions",
             "type": "array"
           },
+          "recheck": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/RecheckScope"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "reference": {
             "description": "Short script reference; learner identity is not shown to markers",
             "title": "Reference",
@@ -606,7 +616,8 @@
           "questions",
           "pages",
           "lease_expires_at",
-          "latest"
+          "latest",
+          "recheck"
         ],
         "title": "CaseDetail",
         "type": "object"
@@ -1166,6 +1177,21 @@
             "description": "{\"1\": {\"a1\": {\"units\": 100, \"reason\": \"\u2026\"}}}",
             "title": "Awards",
             "type": "object"
+          },
+          "expand_positions": {
+            "description": "Recheck only: questions to add (academic adjudicators)",
+            "items": {
+              "type": "integer"
+            },
+            "maxItems": 20,
+            "title": "Expand Positions",
+            "type": "array"
+          },
+          "expansion_reason": {
+            "default": "",
+            "maxLength": 1000,
+            "title": "Expansion Reason",
+            "type": "string"
           },
           "expected_version": {
             "minimum": 0.0,
@@ -3057,6 +3083,17 @@
       },
       "RecheckIn": {
         "properties": {
+          "criteria": {
+            "additionalProperties": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "description": "Optional: disputed criterion ids per question position",
+            "title": "Criteria",
+            "type": "object"
+          },
           "positions": {
             "items": {
               "type": "integer"
@@ -3082,6 +3119,38 @@
       },
       "RecheckOut": {
         "properties": {
+          "closed_reason": {
+            "anyOf": [
+              {
+                "enum": [
+                  "window_ended",
+                  "already_rechecked",
+                  "no_corrected_questions"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Closed Reason"
+          },
+          "eligible_positions": {
+            "description": "Questions that can be disputed now (when available)",
+            "items": {
+              "type": "integer"
+            },
+            "title": "Eligible Positions",
+            "type": "array"
+          },
+          "positions": {
+            "description": "Questions in the open request (when requested)",
+            "items": {
+              "type": "integer"
+            },
+            "title": "Positions",
+            "type": "array"
+          },
           "reason": {
             "anyOf": [
               {
@@ -3103,6 +3172,18 @@
             "title": "Status",
             "type": "string"
           },
+          "target_version": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The released version a request targets",
+            "title": "Target Version"
+          },
           "window_ends_at": {
             "anyOf": [
               {
@@ -3113,15 +3194,84 @@
                 "type": "null"
               }
             ],
+            "description": "14 days after the disputed result was released",
             "title": "Window Ends At"
           }
         },
         "required": [
           "status",
           "window_ends_at",
-          "reason"
+          "reason",
+          "eligible_positions",
+          "positions",
+          "target_version",
+          "closed_reason"
         ],
         "title": "RecheckOut",
+        "type": "object"
+      },
+      "RecheckScope": {
+        "properties": {
+          "can_expand": {
+            "description": "Whether you may widen the recheck (academic adjudicators only)",
+            "title": "Can Expand",
+            "type": "boolean"
+          },
+          "carried_forward": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "description": "Earned units kept unchanged for questions outside the scope",
+            "title": "Carried Forward",
+            "type": "object"
+          },
+          "criteria": {
+            "additionalProperties": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "description": "Optional disputed criteria per question",
+            "title": "Criteria",
+            "type": "object"
+          },
+          "expanded_positions": {
+            "description": "Questions an adjudicator added, with a recorded reason",
+            "items": {
+              "type": "integer"
+            },
+            "title": "Expanded Positions",
+            "type": "array"
+          },
+          "positions": {
+            "description": "Questions the learner asked to be rechecked",
+            "items": {
+              "type": "integer"
+            },
+            "title": "Positions",
+            "type": "array"
+          },
+          "reason": {
+            "title": "Reason",
+            "type": "string"
+          },
+          "target_version": {
+            "description": "The released version the learner disputes",
+            "title": "Target Version",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "target_version",
+          "positions",
+          "criteria",
+          "reason",
+          "expanded_positions",
+          "can_expand",
+          "carried_forward"
+        ],
+        "title": "RecheckScope",
         "type": "object"
       },
       "ReferenceIn": {

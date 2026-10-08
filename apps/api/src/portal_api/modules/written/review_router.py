@@ -62,6 +62,16 @@ class StaffScore(BaseModel):
     created_at: datetime
 
 
+class RecheckScope(BaseModel):
+    target_version: int = Field(description="The released version the learner disputes")
+    positions: list[int] = Field(description="Questions the learner asked to be rechecked")
+    criteria: dict[str, list[str]] = Field(description="Optional disputed criteria per question")
+    reason: str
+    expanded_positions: list[int] = Field(description="Questions an adjudicator added, with a recorded reason")
+    can_expand: bool = Field(description="Whether you may widen the recheck (academic adjudicators only)")
+    carried_forward: dict[str, int] = Field(description="Earned units kept unchanged for questions outside the scope")
+
+
 class CaseDetail(CaseSummary):
     max_units: int
     manifest: dict[str, Any]
@@ -69,6 +79,7 @@ class CaseDetail(CaseSummary):
     pages: list[PageOut]
     lease_expires_at: datetime | None
     latest: StaffScore | None
+    recheck: RecheckScope | None
 
 
 class DecisionIn(BaseModel):
@@ -76,6 +87,10 @@ class DecisionIn(BaseModel):
     awards: dict[str, dict[str, dict[str, Any]]] = Field(description='{"1": {"a1": {"units": 100, "reason": "…"}}}')
     release: bool = False
     reason: str = Field(default="", max_length=1000)
+    expand_positions: list[int] = Field(
+        default_factory=list, max_length=20, description="Recheck only: questions to add (academic adjudicators)"
+    )
+    expansion_reason: str = Field(default="", max_length=1000)
 
 
 class CriterionResult(BaseModel):
@@ -96,8 +111,12 @@ class QuestionResult(BaseModel):
 
 class RecheckOut(BaseModel):
     status: Literal["unavailable", "available", "requested", "closed"]
-    window_ends_at: datetime | None
+    window_ends_at: datetime | None = Field(description="14 days after the disputed result was released")
     reason: str | None
+    eligible_positions: list[int] = Field(description="Questions that can be disputed now (when available)")
+    positions: list[int] = Field(description="Questions in the open request (when requested)")
+    target_version: int | None = Field(description="The released version a request targets")
+    closed_reason: Literal["window_ended", "already_rechecked", "no_corrected_questions"] | None
 
 
 class HistoryEntry(BaseModel):
@@ -110,6 +129,9 @@ class HistoryEntry(BaseModel):
 class RecheckIn(BaseModel):
     reason: str = Field(min_length=10, max_length=2000)
     positions: list[int] = Field(min_length=1, max_length=20)
+    criteria: dict[str, list[str]] = Field(
+        default_factory=dict, description="Optional: disputed criterion ids per question position"
+    )
 
 
 class WrittenResultOut(BaseModel):
@@ -179,6 +201,26 @@ def _detail(db: Session, case: review.WrittenReviewCase, who: Principal) -> Case
         ],
         lease_expires_at=case.lease_expires_at,
         latest=_staff_score(review.latest(db, case.attempt_id)),
+        recheck=_recheck_scope(db, ctx["recheck"], case, who),
+    )
+
+
+def _recheck_scope(
+    db: Session, req: review.WrittenRecheckRequest | None, case: review.WrittenReviewCase, who: Principal
+) -> RecheckScope | None:
+    if req is None:
+        return None
+    target = db.get(review.WrittenScoreVersion, req.target_version_id)
+    assert target is not None
+    scope = {str(p) for p in [*req.positions, *req.expanded_positions]}
+    return RecheckScope(
+        target_version=target.version,
+        positions=req.positions,
+        criteria=req.criteria,
+        reason=req.reason,
+        expanded_positions=req.expanded_positions,
+        can_expand=review.can_adjudicate(db, who, case),
+        carried_forward={p: u for p, u in target.question_units.items() if p not in scope},
     )
 
 
@@ -227,6 +269,8 @@ def decision(db: DB, who: Reviewer, case_id: uuid.UUID, body: DecisionIn, respon
         awards=body.awards,
         release=body.release,
         reason=body.reason,
+        expand_positions=body.expand_positions,
+        expansion_reason=body.expansion_reason,
     )
     return _detail(db, review.get_case(db, who, case_id), who)
 
@@ -308,5 +352,5 @@ def request_recheck(
     db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, body: RecheckIn, response: Response
 ) -> RecheckOut:
     _private(response)
-    review.request_recheck(db, who, attempt_id, body.reason, body.positions)
+    review.request_recheck(db, who, attempt_id, body.reason, body.positions, body.criteria)
     return RecheckOut(**review.recheck_state(db, attempt_id))

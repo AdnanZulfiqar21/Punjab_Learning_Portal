@@ -1421,6 +1421,7 @@ export interface components {
             pages: components["schemas"]["PageOut"][];
             /** Questions */
             questions: components["schemas"]["CaseQuestion"][];
+            recheck: components["schemas"]["RecheckScope"] | null;
             /**
              * Reference
              * @description Short script reference; learner identity is not shown to markers
@@ -1653,6 +1654,16 @@ export interface components {
                     };
                 };
             };
+            /**
+             * Expand Positions
+             * @description Recheck only: questions to add (academic adjudicators)
+             */
+            expand_positions?: number[];
+            /**
+             * Expansion Reason
+             * @default
+             */
+            expansion_reason: string;
             /** Expected Version */
             expected_version: number;
             /**
@@ -2335,6 +2346,13 @@ export interface components {
         };
         /** RecheckIn */
         RecheckIn: {
+            /**
+             * Criteria
+             * @description Optional: disputed criterion ids per question position
+             */
+            criteria?: {
+                [key: string]: string[];
+            };
             /** Positions */
             positions: number[];
             /** Reason */
@@ -2342,6 +2360,18 @@ export interface components {
         };
         /** RecheckOut */
         RecheckOut: {
+            /** Closed Reason */
+            closed_reason: ("window_ended" | "already_rechecked" | "no_corrected_questions") | null;
+            /**
+             * Eligible Positions
+             * @description Questions that can be disputed now (when available)
+             */
+            eligible_positions: number[];
+            /**
+             * Positions
+             * @description Questions in the open request (when requested)
+             */
+            positions: number[];
             /** Reason */
             reason: string | null;
             /**
@@ -2349,8 +2379,55 @@ export interface components {
              * @enum {string}
              */
             status: "unavailable" | "available" | "requested" | "closed";
-            /** Window Ends At */
+            /**
+             * Target Version
+             * @description The released version a request targets
+             */
+            target_version: number | null;
+            /**
+             * Window Ends At
+             * @description 14 days after the disputed result was released
+             */
             window_ends_at: string | null;
+        };
+        /** RecheckScope */
+        RecheckScope: {
+            /**
+             * Can Expand
+             * @description Whether you may widen the recheck (academic adjudicators only)
+             */
+            can_expand: boolean;
+            /**
+             * Carried Forward
+             * @description Earned units kept unchanged for questions outside the scope
+             */
+            carried_forward: {
+                [key: string]: number;
+            };
+            /**
+             * Criteria
+             * @description Optional disputed criteria per question
+             */
+            criteria: {
+                [key: string]: string[];
+            };
+            /**
+             * Expanded Positions
+             * @description Questions an adjudicator added, with a recorded reason
+             */
+            expanded_positions: number[];
+            /**
+             * Positions
+             * @description Questions the learner asked to be rechecked
+             */
+            positions: number[];
+            /** Reason */
+            reason: string;
+            /**
+             * Target Version
+             * @description The released version the learner disputes
+             */
+            target_version: number;
         };
         /** ReferenceIn */
         ReferenceIn: {
