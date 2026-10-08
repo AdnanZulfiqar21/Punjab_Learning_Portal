@@ -298,6 +298,15 @@ def can_adjudicate(db: Session, who: Principal, case: WrittenReviewCase) -> bool
     )
 
 
+def require_adjudication(db: Session, who: Principal, case: WrittenReviewCase, action: str) -> None:
+    """NEW-11: every adjudication (correction, rebase, widening a recheck) needs the adjudicate permission in scope
+    and an MFA session, the same boundary as the matrix's MFA_REQUIRED."""
+    if not can_adjudicate(db, who, case):
+        raise Forbidden(f"Only an academic adjudicator can {action}.")
+    if not who.claims.mfa:
+        raise Forbidden("This action needs a multi-factor authenticated session. Sign in again with MFA.")
+
+
 def _case(db: Session, who: Principal, case_id: uuid.UUID, *, lock: bool = False) -> WrittenReviewCase:
     stmt = select(WrittenReviewCase).where(WrittenReviewCase.id == case_id)
     if lock:
@@ -363,13 +372,13 @@ def lease(db: Session, who: Principal, case_id: uuid.UUID) -> WrittenReviewCase:
     ):
         # W06.S2.T1: a recheck is an independent second look, never the original marker grading their own work.
         raise Forbidden("A recheck must be marked by a teacher who has not marked this script before.")
-    if case.case_kind == "regrade" and case.adjudication_id is not None:
-        from portal_api.modules.written.adjudication import RubricAdjudication
+    if case.case_kind == "regrade":
+        from portal_api.modules.written import adjudication
 
-        adj = db.get(RubricAdjudication, case.adjudication_id)
-        if adj is not None and adj.approved_by == who.user.id:
-            # §20.10: the adjudicator authorises the changed basis; the re-marking is an independent teacher's.
-            raise Forbidden("The adjudicator who approved this correction can't also mark the regrade it caused.")
+        # §20.10 / NEW-13: the adjudicators authorise the changed basis; re-marking is an independent teacher's.
+        # Checked against every approver in the effective correction chain of the case's questions.
+        if who.user.id in adjudication.chain_approvers(db, case):
+            raise Forbidden("An adjudicator who approved this correction can't also mark the regrade it caused.")
     now = _now(db)
     if case.lease_holder not in (None, who.user.id) and case.lease_expires_at and case.lease_expires_at > now:
         raise Conflict("Another teacher is marking this script.", lease_expires_at=case.lease_expires_at.isoformat())
@@ -577,8 +586,7 @@ def decide(
         if set(extra) - valid:
             raise Unprocessable("Only questions on this form can be added to a recheck.")
         if extra:
-            if not can_adjudicate(db, who, case):
-                raise Forbidden("Only an academic adjudicator can widen a recheck beyond the learner's questions.")
+            require_adjudication(db, who, case, "widen a recheck beyond the learner's questions")
             if len(expansion_reason.strip()) < 10:
                 raise Unprocessable("Give a reason for widening the recheck.")
         scope = {str(p) for p in [*req.positions, *req.expanded_positions, *extra]}
@@ -871,8 +879,7 @@ def _rebase(
 def rebase_recheck(db: Session, who: Principal, case_id: uuid.UUID, reason: str) -> WrittenReviewCase:
     """Academic adjudicator path for a recheck whose disputed questions changed after it was requested."""
     visible = _case(db, who, case_id)
-    if not can_adjudicate(db, who, visible):
-        raise Forbidden("Only an academic adjudicator can rebase a recheck.")
+    require_adjudication(db, who, visible, "rebase a recheck")
     if len(reason.strip()) < 10:
         raise Unprocessable("Give a reason for rebasing the recheck.")
     db.scalar(select(WrittenAttempt.id).where(WrittenAttempt.id == visible.attempt_id).with_for_update())

@@ -98,6 +98,9 @@ class RubricAdjudication(Base):
     compatibility: Mapped[dict[str, Any]] = mapped_column(JSONB)
     status: Mapped[str] = mapped_column(String(10), default="active")
     supersedes_ids: Mapped[list[str]] = mapped_column(JSONB, default=list, server_default="[]")
+    # NEW-14: active descendants of a superseded correction that the approver chose to keep (they go on serving
+    # scripts pinned on their own source versions). Every descendant is either superseded or listed here.
+    retained_descendant_ids: Mapped[list[str]] = mapped_column(JSONB, default=list, server_default="[]")
     superseded_by_id: Mapped[uuid.UUID | None] = mapped_column(
         ForeignKey("written_rubric_adjudication.id", ondelete="RESTRICT")
     )
@@ -119,6 +122,8 @@ class RubricRegrade(Base):
     )
     attempt_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("written_attempt.id", ondelete="RESTRICT"))
     job_id: Mapped[uuid.UUID | None] = mapped_column(UUID(as_uuid=True))
+    # NEW-15: the correction whose run applied this one as part of a cumulative chain (null: its own run).
+    applied_via: Mapped[uuid.UUID | None] = mapped_column(UUID(as_uuid=True))
     status: Mapped[str] = mapped_column(String(10), default="done")
     outcomes: Mapped[dict[str, str]] = mapped_column(JSONB, default=dict)  # position -> carried|review|...
     error: Mapped[str | None] = mapped_column(Text)
@@ -328,6 +333,12 @@ def sources(db: Session, who: Principal, rubric_item_id: uuid.UUID) -> dict[str,
             )
         )
     )
+    numbers = {
+        str(i): n
+        for i, n in db.execute(
+            select(ContentVersion.id, ContentVersion.number).where(ContentVersion.item_id == item.id)
+        )
+    }
     counts: dict[str, int] = dict(
         db.execute(
             text(
@@ -353,7 +364,15 @@ def sources(db: Session, who: Principal, rubric_item_id: uuid.UUID) -> dict[str,
             for v in versions
         ],
         "active": [
-            {"id": str(a.id), "from_version_ids": a.from_version_ids, "to_version_id": str(a.to_version_id)}
+            {
+                "id": str(a.id),
+                "from_version_ids": a.from_version_ids,
+                "from_numbers": sorted(numbers.get(v, 0) for v in a.from_version_ids),
+                "to_version_id": str(a.to_version_id),
+                "to_number": numbers.get(str(a.to_version_id)),
+                "approved_at": a.approved_at.isoformat(),
+                "reason": a.reason,
+            }
             for a in active
         ],
     }
@@ -367,6 +386,7 @@ def create(
     reason: str,
     from_version_ids: list[uuid.UUID] | None = None,
     supersedes_ids: list[uuid.UUID] | None = None,
+    retain_descendant_ids: list[uuid.UUID] | None = None,
 ) -> RubricAdjudication:
     item = db.get(ContentItem, rubric_item_id)
     if item is None or item.kind != "rubric":
@@ -431,6 +451,23 @@ def create(
             code_reason="NOT_SUPERSEDABLE",
             errors=sorted(str(a) for a in named - overlapping),
         )
+    # NEW-14: superseding a correction must not silently orphan its active descendants (corrections from the version it
+    # led to, and theirs). Each must be superseded too (cover its source versions here) or explicitly retained.
+    descendants = _descendants(active, overlapping)
+    retained = {uuid.UUID(str(r)) for r in (retain_descendant_ids or [])}
+    if retained - descendants:
+        raise Unprocessable(
+            "Only an active descendant of a correction you replace can be retained.",
+            code_reason="NOT_A_DESCENDANT",
+            errors=sorted(str(r) for r in retained - descendants),
+        )
+    if descendants - retained:
+        raise Conflict(
+            "Replacing these corrections affects later corrections that follow them. Replace those too (include "
+            "their source versions) or keep them explicitly.",
+            code_reason="DESCENDANTS_UNRESOLVED",
+            descendants=sorted(str(d) for d in descendants - retained),
+        )
     adj = RubricAdjudication(
         id=uuid.uuid4(),
         rubric_item_id=item.id,
@@ -441,6 +478,7 @@ def create(
         reason=reason.strip()[:2000],
         compatibility=compat,
         supersedes_ids=sorted(str(a) for a in overlapping),
+        retained_descendant_ids=sorted(str(r) for r in retained),
         approved_by=who.user.id,
     )
     remaining = [a for a in active if a.id not in overlapping] + [adj]
@@ -467,12 +505,49 @@ def create(
             "from": chosen,
             "to": str(to.id),
             "supersedes": adj.supersedes_ids,
+            "retained_descendants": adj.retained_descendant_ids,
             "carry_forward": {v: c["carry_forward"] for v, c in compat.items()},
         },
     )
     db.commit()
     db.refresh(adj)
     return adj
+
+
+def _descendants(active: list[RubricAdjudication], superseded: set[uuid.UUID]) -> set[uuid.UUID]:
+    """Active corrections reachable from the versions the superseded ones led to (transitively), not themselves
+    being superseded."""
+    frontier = {str(a.to_version_id) for a in active if a.id in superseded}
+    found: set[uuid.UUID] = set()
+    changed = True
+    while changed:
+        changed = False
+        for a in active:
+            if a.id in superseded or a.id in found:
+                continue
+            if frontier & set(a.from_version_ids):
+                found.add(a.id)
+                frontier.add(str(a.to_version_id))
+                changed = True
+    return found
+
+
+def chain_approvers(db: Session, case: Any) -> set[uuid.UUID]:
+    """NEW-13: everyone who approved a correction in the effective chain of a regrade case's questions (plus the
+    case's own correction). None of them may mark that regrade."""
+    attempt = db.get(WrittenAttempt, case.attempt_id)
+    assert attempt is not None
+    ids = {
+        uuid.UUID(i)
+        for pos, (_, _, applied) in effective(db, attempt).items()
+        if pos in (case.positions or [])
+        for i in applied
+    }
+    if case.adjudication_id is not None:
+        ids.add(case.adjudication_id)
+    if not ids:
+        return set()
+    return set(db.scalars(select(RubricAdjudication.approved_by).where(RubricAdjudication.id.in_(ids))))
 
 
 def get(db: Session, who: Principal, adjudication_id: uuid.UUID) -> RubricAdjudication:
@@ -482,9 +557,48 @@ def get(db: Session, who: Principal, adjudication_id: uuid.UUID) -> RubricAdjudi
     return adj
 
 
-def visible(db: Session, who: Principal) -> list[RubricAdjudication]:
-    rows = db.scalars(select(RubricAdjudication).order_by(RubricAdjudication.approved_at.desc()).limit(200))
-    return [a for a in rows if _may_read(db, who, a.grade_number, a.subject_code)]
+def visible(db: Session, who: Principal, offset: int = 0, limit: int = 50) -> list[RubricAdjudication]:
+    """Corrections in the caller's academic scope, newest first. Scope is applied in SQL before the page limit, so
+    nothing in scope is hidden behind out-of-scope rows."""
+    return list(
+        db.scalars(
+            select(RubricAdjudication)
+            .where(_scope_clause(db, who))
+            .order_by(RubricAdjudication.approved_at.desc(), RubricAdjudication.id)
+            .offset(offset)
+            .limit(limit)
+        )
+    )
+
+
+def _scope_clause(db: Session, who: Principal) -> Any:
+    from sqlalchemy import and_, false, or_, true
+
+    from portal_api.modules.identity.models import StaffRoleGrant
+    from portal_api.modules.identity.permissions import ROLE_PERMISSIONS
+
+    readers = [
+        r.value for r, perms in ROLE_PERMISSIONS.items() if {Permission.adjudicate, Permission.review_content} & perms
+    ]
+    clauses = []
+    for grant in db.scalars(
+        select(StaffRoleGrant).where(
+            StaffRoleGrant.user_id == who.user.id,
+            StaffRoleGrant.revoked_at.is_(None),
+            StaffRoleGrant.role.in_(readers),
+        )
+    ):
+        scope = grant.scope or {}
+        grades, subjects = scope.get("grades"), scope.get("subjects")
+        if grades is None and subjects is None:
+            return true()
+        parts = []
+        if grades is not None:
+            parts.append(RubricAdjudication.grade_number.in_(grades))
+        if subjects is not None:
+            parts.append(RubricAdjudication.subject_code.in_(subjects))
+        clauses.append(and_(*parts))
+    return or_(*clauses) if clauses else false()
 
 
 # ------------------------------------------------------------------ impact (bounded; W06-08/09)
@@ -515,7 +629,9 @@ def preview(db: Session, adj: RubricAdjudication) -> dict[str, Any]:
             "(select count(*) from c) as total, (select count(distinct form_id) from c) as forms, "
             "(select count(*) from c where exists (select 1 from written_score_version s "
             " where s.attempt_id = c.attempt_id and s.released)) as released, "
-            "(select count(*) from written_evidence_revision r join c on c.attempt_id = r.attempt_id) as revisions, "
+            "(select count(distinct r.id) from written_evidence_revision r join c on c.attempt_id = r.attempt_id "
+            " join written_form_item fi on fi.form_id = c.form_id and fi.position = r.position "
+            " and fi.rubric_version_id = any(cast(:versions as uuid[]))) as revisions, "
             "(select count(*) from written_rubric_regrade g join c on c.attempt_id = g.attempt_id "
             " where g.adjudication_id = :adj and g.status = 'done') as processed, "
             "(select count(*) from written_rubric_regrade g join c on c.attempt_id = g.attempt_id "
@@ -664,7 +780,9 @@ def _record_failure(
             outcomes={},
             error=error,
         )
-        .on_conflict_do_update(constraint="uq_written_regrade", set_={"status": "failed", "error": error})
+        .on_conflict_do_update(
+            constraint="uq_written_regrade", set_={"status": "failed", "error": error, "job_id": job_id}
+        )
     )
     record(
         db,
@@ -743,6 +861,18 @@ def _regrade_attempt(
         if covering:
             for c in covering:
                 c.version += 1  # an in-flight lease on it must reload and mark under the corrected rubric
+                if c.case_kind == "regrade" and c.adjudication_id != adj.id:
+                    # NEW-13: the case now re-marks under this correction; the earlier identity stays in the audit.
+                    record(
+                        db,
+                        actor=None,
+                        action="written.regrade_case_retargeted",
+                        target_type="written_review_case",
+                        target_id=str(c.id),
+                        details={"from": str(c.adjudication_id), "to": str(adj.id), "attempt": str(attempt.id)},
+                    )
+                    c.adjudication_id = adj.id
+                    c.reason = f"Rubric correction: {adj.reason}"[:1000]
             if kind == "review":
                 kind = "review_in_open_case"
         outcomes[str(pos)] = kind
@@ -772,6 +902,33 @@ def _regrade_attempt(
             "version": sv.version if sv else None,
         },
     )
+    # NEW-15: this run applied the complete chain, so every correction in it is done for this script, whichever job
+    # reaches it first. Its outcome records which run applied it; its own job then finds nothing left to do.
+    chain_members: dict[str, dict[str, str]] = {}
+    for pos, (_, _, applied) in affected.items():
+        for member in applied:
+            if member != str(adj.id):
+                chain_members.setdefault(member, {})[str(pos)] = outcomes[str(pos)]
+    for member, member_outcomes in chain_members.items():
+        db.execute(
+            insert(RubricRegrade)
+            .values(
+                id=uuid.uuid4(),
+                adjudication_id=uuid.UUID(member),
+                attempt_id=attempt.id,
+                job_id=job_id,
+                status="done",
+                outcomes=member_outcomes,
+                applied_via=adj.id,
+                score_version_id=sv.id if sv else None,
+                case_id=case.id if case else None,
+            )
+            .on_conflict_do_update(
+                constraint="uq_written_regrade",
+                set_={"status": "done", "outcomes": member_outcomes, "applied_via": adj.id, "error": None},
+                where=text("written_rubric_regrade.status <> 'done'"),
+            )
+        )
     row = existing or RubricRegrade(adjudication_id=adj.id, attempt_id=attempt.id)
     row.status = "done"
     row.error = None
@@ -931,8 +1088,19 @@ def notices(db: Session, attempt_id: uuid.UUID) -> list[WrittenNotice]:
 
 
 def corrections_for_sealed(db: Session, attempt: WrittenAttempt) -> list[RubricAdjudication]:
-    """Active corrections that move this just-sealed script's basis (W06-02): sealing queues them for it."""
-    ids = {aid for _, target_, applied in effective(db, attempt).values() for aid in applied if target_}
-    if not ids:
+    """Active corrections that move this just-sealed script's basis (W06-02), in chain order (ancestors first, by
+    question): sealing queues them for it in that order (NEW-15)."""
+    ordered: list[str] = []
+    for _, (_, _, applied) in sorted(effective(db, attempt).items()):
+        for aid in applied:
+            if aid not in ordered:
+                ordered.append(aid)
+    if not ordered:
         return []
-    return list(db.scalars(select(RubricAdjudication).where(RubricAdjudication.id.in_([uuid.UUID(i) for i in ids]))))
+    by_id = {
+        str(a.id): a
+        for a in db.scalars(
+            select(RubricAdjudication).where(RubricAdjudication.id.in_([uuid.UUID(i) for i in ordered]))
+        )
+    }
+    return [by_id[i] for i in ordered]

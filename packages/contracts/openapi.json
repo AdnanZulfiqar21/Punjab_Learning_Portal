@@ -172,6 +172,15 @@
             "title": "Reason",
             "type": "string"
           },
+          "retain_descendant_ids": {
+            "description": "Active descendants of the replaced corrections to keep (each descendant is replaced or kept)",
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "title": "Retain Descendant Ids",
+            "type": "array"
+          },
           "rubric_item_id": {
             "format": "uuid",
             "title": "Rubric Item Id",
@@ -249,6 +258,13 @@
           "reason": {
             "title": "Reason",
             "type": "string"
+          },
+          "retained_descendant_ids": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Retained Descendant Ids",
+            "type": "array"
           },
           "rubric_item_id": {
             "format": "uuid",
@@ -10117,6 +10133,31 @@
     "/v1/studio/written/adjudications": {
       "get": {
         "operationId": "list_adjudications_v1_studio_written_adjudications_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "minimum": 0,
+              "title": "Offset",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 50,
+              "maximum": 100,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "content": {
@@ -10131,6 +10172,16 @@
               }
             },
             "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
           }
         },
         "summary": "List Adjudications",

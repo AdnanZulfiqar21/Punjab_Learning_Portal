@@ -78,7 +78,13 @@ def enqueue(db: Session, adj_id: uuid.UUID, requested_by: uuid.UUID, reason: str
     """Queue the correction's regrade, or return the job already open for it. The caller commits."""
     db.execute(
         insert(RegradeJob)
-        .values(id=uuid.uuid4(), adjudication_id=adj_id, requested_by=requested_by, reason=reason[:500])
+        .values(
+            id=uuid.uuid4(),
+            adjudication_id=adj_id,
+            requested_by=requested_by,
+            reason=reason[:500],
+            created_at=func.clock_timestamp(),  # distinct per insert: jobs queued together keep their order (NEW-15)
+        )
         .on_conflict_do_nothing(index_elements=["adjudication_id"], index_where=text("status in ('queued','running')"))
     )
     job = db.scalar(
@@ -186,13 +192,11 @@ def run_one_batch(db: Session, owner: str, batch: int = 50) -> dict[str, Any] | 
     job = db.scalar(select(RegradeJob).where(RegradeJob.id == job_id).with_for_update())
     assert job is not None
     now = _now(db)
-    job.processed += out["processed"]
-    job.regraded += out["regraded"]
-    job.unaffected += out["unaffected"]
-    job.failed += out["failed"]
+    # NEW-12: progress is read back from the durable per-script rows this job wrote, never accumulated in memory,
+    # so a worker that died after committing scripts but before this update can't leave false counts or success.
+    _reconcile(db, job)
     job.remaining = out["remaining"]
     job.batches += 1
-    job.last_error = out["last_error"] or job.last_error
     job.updated_at = now
     job.lease_owner, job.lease_expires_at = None, None
     if out["superseded"]:
@@ -204,6 +208,22 @@ def run_one_batch(db: Session, owner: str, batch: int = 50) -> dict[str, Any] | 
         job.status = "queued"  # more to do: back in the queue for the next claim (any worker)
     db.commit()
     return {"job": str(job_id), "status": job.status, **out}
+
+
+def _reconcile(db: Session, job: RegradeJob) -> None:
+    row = db.execute(
+        text(
+            "select count(*) filter (where status = 'done'), "
+            "count(*) filter (where status = 'done' and outcomes <> '{}'::jsonb), "
+            "count(*) filter (where status = 'done' and outcomes = '{}'::jsonb), "
+            "count(*) filter (where status = 'failed'), "
+            "(array_agg(error order by created_at desc) filter (where status = 'failed'))[1] "
+            "from written_rubric_regrade where job_id = :j and adjudication_id = :a"
+        ),
+        {"j": str(job.id), "a": str(job.adjudication_id)},
+    ).one()
+    job.processed, job.regraded, job.unaffected, job.failed = (int(x or 0) for x in row[:4])
+    job.last_error = row[4] if job.failed else None
 
 
 def work(db: Session, batch: int = 50, max_batches: int | None = None, owner: str | None = None) -> int:

@@ -106,6 +106,8 @@ test("an adjudicator applies a rubric correction; a teacher re-marks; the learne
   // A second correction claiming the same version is refused until it names the one it replaces.
   await adj.goto(`/studio/adjudications/new?rubric=${fx.rubric_item_id}`);
   await expect(adj.getByText("Already covered by an active correction")).toBeVisible(AUTH);
+  // The replace option says which correction it is: versions, approval time and reason (not just an id).
+  await expect(adj.getByText(/Replace the correction for version 1 → 2 · approved .* · “Fixture: the published guide misdescribed a1\.”/)).toBeVisible();
   await adj.getByLabel("Why does this correction apply to work already marked?").fill("Fixture: a competing correction for the same version.");
   await adj.getByRole("button", { name: "Approve the correction" }).click();
   await expect(adj.getByRole("alert").filter({ hasText: "name each one you replace" })).toBeVisible(AUTH);

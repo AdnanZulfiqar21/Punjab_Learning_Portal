@@ -1626,6 +1626,11 @@ export interface components {
             /** Reason */
             reason: string;
             /**
+             * Retain Descendant Ids
+             * @description Active descendants of the replaced corrections to keep (each descendant is replaced or kept)
+             */
+            retain_descendant_ids?: string[];
+            /**
              * Rubric Item Id
              * Format: uuid
              */
@@ -1669,6 +1674,8 @@ export interface components {
             latest_job?: components["schemas"]["RegradeJobOut"] | null;
             /** Reason */
             reason: string;
+            /** Retained Descendant Ids */
+            retained_descendant_ids?: string[];
             /**
              * Rubric Item Id
              * Format: uuid
@@ -6378,7 +6385,10 @@ export interface operations {
     };
     list_adjudications_v1_studio_written_adjudications_get: {
         parameters: {
-            query?: never;
+            query?: {
+                offset?: number;
+                limit?: number;
+            };
             header?: never;
             path?: never;
             cookie?: never;
@@ -6392,6 +6402,15 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["AdjudicationOut"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
                 };
             };
         };

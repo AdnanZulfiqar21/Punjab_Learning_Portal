@@ -18,9 +18,9 @@ from tests.test_written_attempts import _learner, _map, _png, _seal, _start, _up
 SCOPE = {"grades": [12], "subjects": ["chemistry"]}
 
 
-def _staff(client: TestClient, roles: list[str]) -> Staff:
+def _staff(client: TestClient, roles: list[str], mfa: bool = False) -> Staff:
     with get_sessionmaker()() as db:
-        return Staff(client, db, roles, SCOPE)
+        return Staff(client, db, roles, SCOPE, mfa=mfa)
 
 
 def _sealed_two_question_script(client: TestClient, chapter: str, seed: int) -> tuple[Staff, dict[str, Any]]:
@@ -145,7 +145,25 @@ def test_adjudicator_widens_a_recheck_only_with_a_reason(client: TestClient, pub
         == 200
     )
     assert _ask(client, learner, a["id"], [1]).status_code == 200
-    adjudicator = _staff(client, ["academic_adjudicator"])
+    # NEW-11: widening a recheck is an adjudication, so it needs an MFA session like every other one.
+    plain = _staff(client, ["academic_adjudicator"])
+    no_mfa = _mark(
+        client,
+        plain,
+        a["id"],
+        "recheck",
+        _awards(q1=100, q2=0),
+        expand_positions=[2],
+        expansion_reason="Fixture: the same unit error appears in question 2.",
+    )
+    assert no_mfa.status_code == 403 and "multi-factor" in no_mfa.json()["detail"], no_mfa.text
+    with get_sessionmaker()() as db:  # the refused adjudicator's marking lease would block the next one
+        db.execute(
+            text("update written_review_case set lease_holder = null, lease_expires_at = null where attempt_id = :a"),
+            {"a": a["id"]},
+        )
+        db.commit()
+    adjudicator = _staff(client, ["academic_adjudicator"], mfa=True)
     no_reason = _mark(client, adjudicator, a["id"], "recheck", _awards(q1=100, q2=0), expand_positions=[2])
     assert no_reason.status_code == 422
     ok = _mark(

@@ -4,6 +4,8 @@ import { useActionState, useState } from "react";
 import type { AdjudicationSources } from "@portal/contracts";
 import { createAdjudication, type AdjudicationFormState } from "@/app/actions/adjudication";
 
+type Active = { id: string; from_numbers: number[]; to_number: number | null; approved_at: string; reason: string };
+const when = (iso: string) => new Date(iso).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" });
 type Version = { id: string; number: number; denominator_compatible: boolean; compatibility: { carry_forward: boolean; criteria: Record<string, string> }; claimed_by: string[]; submitted_scripts: number };
 
 // W06-07: the adjudicator chooses exactly which earlier versions this correction covers and which active corrections
@@ -11,6 +13,14 @@ type Version = { id: string; number: number; denominator_compatible: boolean; co
 export function NewAdjudicationForm({ rubricId, sources }: { rubricId: string; sources: AdjudicationSources }) {
   const [state, action, pending] = useActionState<AdjudicationFormState, FormData>(createAdjudication, undefined);
   const versions = sources.versions as unknown as Version[];
+  const active = Object.fromEntries((sources.active as unknown as Active[]).map((a) => [a.id, a]));
+  // Who, when, why and which versions: enough to tell corrections apart before replacing one (review gap).
+  const describe = (id: string) => {
+    const a = active[id];
+    return a
+      ? `version ${a.from_numbers.join(", ")} → ${a.to_number ?? "?"} · approved ${when(a.approved_at)} · “${a.reason}”`
+      : id.slice(0, 8);
+  };
   const [chosen, setChosen] = useState<string[]>(versions.filter((v) => v.denominator_compatible).map((v) => v.id));
   const overlapping = [...new Set(versions.filter((v) => chosen.includes(v.id)).flatMap((v) => v.claimed_by))];
   const scripts = versions.filter((v) => chosen.includes(v.id)).reduce((n, v) => n + v.submitted_scripts, 0);
@@ -52,7 +62,22 @@ export function NewAdjudicationForm({ rubricId, sources }: { rubricId: string; s
           {overlapping.map((id) => (
             <label key={id} className="flex items-center gap-2">
               <input type="checkbox" name="supersedes_ids" value={id} />
-              Replace correction {id.slice(0, 8)}
+              Replace the correction for {describe(id)}
+            </label>
+          ))}
+        </fieldset>
+      )}
+      {state?.descendants && state.descendants.length > 0 && (
+        <fieldset className="space-y-1 rounded-lg border border-warn bg-warn-soft p-3 text-sm">
+          <legend className="font-medium">Later corrections that follow the ones you replace</legend>
+          <p>
+            Each must be replaced too (select its source versions above) or kept. A kept correction goes on applying to scripts written on its own
+            source version; scripts on the versions you replace follow this correction instead.
+          </p>
+          {state.descendants.map((id) => (
+            <label key={id} className="flex items-center gap-2">
+              <input type="checkbox" name="retain_descendant_ids" value={id} />
+              Keep the correction for {describe(id)}
             </label>
           ))}
         </fieldset>

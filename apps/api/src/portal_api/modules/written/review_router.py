@@ -25,6 +25,8 @@ router = APIRouter(prefix="/v1", tags=["written marking"])
 DB = Annotated[Session, Depends(get_session)]
 Reviewer = Annotated[Principal, Depends(require(Permission.review_content))]
 Operator = Annotated[Principal, Depends(require(Permission.operate_platform))]
+# NEW-11: rebasing a recheck is an adjudication: the adjudicate permission with an MFA session (MFA_REQUIRED).
+RebaseAdjudicator = Annotated[Principal, Depends(require(Permission.adjudicate))]
 
 
 def _private(response: Response) -> None:
@@ -368,7 +370,7 @@ def _recheck_scope(
         criteria=req.criteria,
         reason=req.reason,
         expanded_positions=req.expanded_positions,
-        can_expand=review.can_adjudicate(db, who, case),
+        can_expand=review.can_adjudicate(db, who, case) and who.claims.mfa,
         carried_forward={p: u for p, u in target.question_units.items() if p not in scope},
     )
 
@@ -639,7 +641,7 @@ class RebaseIn(BaseModel):
     response_model=CaseDetail,
     summary="Rebase an open recheck onto the current result (academic adjudicators; audited)",
 )
-def rebase(db: DB, who: Reviewer, case_id: uuid.UUID, body: RebaseIn, response: Response) -> CaseDetail:
+def rebase(db: DB, who: RebaseAdjudicator, case_id: uuid.UUID, body: RebaseIn, response: Response) -> CaseDetail:
     _private(response)
     return _detail(db, review.rebase_recheck(db, who, case_id, body.reason), who)
 
@@ -743,6 +745,10 @@ class AdjudicationIn(BaseModel):
     supersedes_ids: list[uuid.UUID] = Field(
         default_factory=list, description="Every active correction this one replaces (must match the overlap exactly)"
     )
+    retain_descendant_ids: list[uuid.UUID] = Field(
+        default_factory=list,
+        description="Active descendants of the replaced corrections to keep (each descendant is replaced or kept)",
+    )
 
 
 class AdjudicationOut(BaseModel):
@@ -755,6 +761,7 @@ class AdjudicationOut(BaseModel):
     reason: str
     status: Literal["active", "superseded"]
     supersedes_ids: list[str]
+    retained_descendant_ids: list[str] = Field(default_factory=list)
     superseded_by_id: uuid.UUID | None
     approved_at: datetime
     compatibility: dict[str, Any] = Field(
@@ -837,6 +844,7 @@ def _adj_out(db: Session, a: Any, *, detail: bool) -> AdjudicationOut:
         reason=a.reason,
         status=a.status,
         supersedes_ids=a.supersedes_ids or [],
+        retained_descendant_ids=a.retained_descendant_ids or [],
         superseded_by_id=a.superseded_by_id,
         approved_at=a.approved_at,
         compatibility=a.compatibility,
@@ -876,16 +884,23 @@ def create_adjudication(db: DB, who: Adjudicator, body: AdjudicationIn, response
         reason=body.reason,
         from_version_ids=body.from_version_ids,
         supersedes_ids=body.supersedes_ids,
+        retain_descendant_ids=body.retain_descendant_ids,
     )
     return _adj_out(db, a, detail=True)
 
 
 @router.get("/studio/written/adjudications", response_model=list[AdjudicationOut])
-def list_adjudications(db: DB, who: Reviewer, response: Response) -> list[AdjudicationOut]:
+def list_adjudications(
+    db: DB,
+    who: Reviewer,
+    response: Response,
+    offset: Annotated[int, Query(ge=0)] = 0,
+    limit: Annotated[int, Query(ge=1, le=100)] = 50,
+) -> list[AdjudicationOut]:
     from portal_api.modules.written import adjudication
 
     _private(response)
-    return [_adj_out(db, a, detail=False) for a in adjudication.visible(db, who)]
+    return [_adj_out(db, a, detail=False) for a in adjudication.visible(db, who, offset, limit)]
 
 
 @router.get("/studio/written/adjudications/{adjudication_id}", response_model=AdjudicationOut)
