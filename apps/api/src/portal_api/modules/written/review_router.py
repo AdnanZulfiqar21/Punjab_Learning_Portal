@@ -65,6 +65,16 @@ class StaffScore(BaseModel):
     created_at: datetime
 
 
+class StaffDraft(BaseModel):
+    """PR32-02: everything a saved, unreleased draft of this case intends, restored when the workspace reopens."""
+
+    question_status: dict[str, dict[str, Any]] = Field(
+        description="Questions in this case saved as pending or unavailable, with reason and any learner action"
+    )
+    classifications: dict[str, dict[str, str]] = Field(description="Proposed (not applied) rescan classifications")
+    evidence: dict[str, list[str]] = Field(description="Copies selected as evidence per question")
+
+
 class RecheckScope(BaseModel):
     target_version: int = Field(description="The released version the learner disputes")
     positions: list[int] = Field(description="Questions the learner asked to be rechecked")
@@ -90,6 +100,11 @@ class RevisionOut(BaseModel):
     pages: list[PageOut] = Field(description="The clearer copy's own pages (shown beside the originals)")
     classification: Literal["READABILITY", "NEW_CONTENT", "INDETERMINATE"] | None
     class_reason: str | None
+    post_cutoff: bool = Field(description="Admitted strictly after the attempt's pinned upload cutoff (RS31-03)")
+    upload_cutoff_at: datetime
+    cutoff_timing: Literal["before_cutoff", "at_cutoff", "after_cutoff"] = Field(
+        description="When the copy was admitted relative to the cutoff; at the cutoff counts as within the window"
+    )
 
 
 class CaseDetail(CaseSummary):
@@ -99,6 +114,7 @@ class CaseDetail(CaseSummary):
     pages: list[PageOut]
     lease_expires_at: datetime | None
     latest: StaffScore | None
+    draft: StaffDraft | None = Field(default=None, description="This case's saved draft, if the latest version is one")
     recheck: RecheckScope | None
     completion: CompletionScope | None
     revisions: list[RevisionOut] = Field(description="Learner rescans for questions in this case (W06.S2.T4)")
@@ -243,6 +259,22 @@ def _staff_score(sv: review.WrittenScoreVersion | None) -> StaffScore | None:
     )
 
 
+def _draft(sv: review.WrittenScoreVersion | None, case: review.WrittenReviewCase) -> StaffDraft | None:
+    if sv is None or sv.released or sv.case_id != case.id:
+        return None
+    scope = {str(p) for p in case.positions} if case.positions else None
+    intent = sv.draft_intent or {}
+    return StaffDraft(
+        question_status={
+            p: {k: v for k, v in st.items() if k in ("status", "reason", "learner_action")}
+            for p, st in (sv.question_status or {}).items()
+            if (scope is None or p in scope) and st.get("status") != "scored"
+        },
+        classifications=intent.get("classifications", {}),
+        evidence=intent.get("evidence", {}),
+    )
+
+
 def _detail(db: Session, case: review.WrittenReviewCase, who: Principal) -> CaseDetail:
     ctx = review.case_context(db, case)
     return CaseDetail(
@@ -253,6 +285,7 @@ def _detail(db: Session, case: review.WrittenReviewCase, who: Principal) -> Case
         pages=pages_out(db, ctx["pages"]),
         lease_expires_at=case.lease_expires_at,
         latest=_staff_score(review.latest(db, case.attempt_id)),
+        draft=_draft(review.latest(db, case.attempt_id), case),
         recheck=_recheck_scope(db, ctx["recheck"], case, who),
         completion=_completion_scope(db, case),
         revisions=_revisions(db, case.attempt_id, {int(p) for p in (case.positions or [])} if case.positions else None),
@@ -266,8 +299,12 @@ def _revisions(db: Session, attempt_id: uuid.UUID, positions: set[int] | None) -
     from portal_api.modules.written.models import WrittenPage
 
     out = []
+    attempt = db.get(WrittenAttempt, attempt_id)
+    assert attempt is not None
+    cutoff = attempt.upload_cutoff_at
     for r in rescans.revisions_for(db, attempt_id, positions):
         pages = list(db.scalars(sa_select(WrittenPage).where(WrittenPage.file_id == r.file_id)))
+        timing = "after_cutoff" if r.post_cutoff else "at_cutoff" if r.created_at == cutoff else "before_cutoff"
         out.append(
             RevisionOut(
                 id=r.id,
@@ -278,6 +315,9 @@ def _revisions(db: Session, attempt_id: uuid.UUID, positions: set[int] | None) -
                 pages=pages_out(db, pages),
                 classification=r.classification,  # type: ignore[arg-type]
                 class_reason=r.class_reason,
+                post_cutoff=r.post_cutoff,
+                upload_cutoff_at=cutoff,
+                cutoff_timing=timing,  # type: ignore[arg-type]
             )
         )
     return out
@@ -411,14 +451,15 @@ def my_result(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, response: Re
         given = sv.awards.get(pos, {})
         st = (sv.question_status or {}).get(pos, {"status": "scored", "reason": ""})
         scored = st["status"] == "scored"
+        req = rescans.effective_request(db, attempt.id, fi.position, st)  # PR32-01: same source as admission/expiry
         questions.append(
             QuestionResult(
                 position=fi.position,
                 max_units=fi.max_units,
                 status=st["status"],
                 status_reason=st.get("reason", ""),
-                learner_action=st.get("learner_action") if st["status"] == "pending" else None,
-                action_deadline=st.get("action_deadline") if st["status"] == "pending" else None,
+                learner_action=req[0] if req else None,  # type: ignore[arg-type]
+                action_deadline=req[1] if req else None,
                 revisions=[
                     LearnerRevision(id=r.id, created_at=r.created_at, classification=r.classification)
                     for r in revisions_by_pos.get(fi.position, [])

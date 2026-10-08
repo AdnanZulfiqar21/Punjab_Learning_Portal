@@ -7,7 +7,9 @@ A teacher may leave a question pending and ask the learner to act within 7 days:
 * ``confirm_or_rescan``: the mapped evidence looks blank. The learner may confirm they didn't answer, or rescan.
 
 A rescan never replaces the sealed original. It is a linked, immutable :class:`EvidenceRevision` (hashes, the prior
-pages it relates to, actor, note, time, always post-cutoff). The next completion reviewer compares original and
+pages it relates to, actor, note, admission time and a ``post_cutoff`` flag that compares that time with the
+attempt's pinned upload cutoff; a clearer copy sent after sealing is not necessarily after the cutoff). The next
+completion reviewer compares original and
 revision side by side and records READABILITY, NEW_CONTENT or INDETERMINATE with a reason; nothing classifies a
 revision automatically. Only a READABILITY revision may be used to assess the original answer. NEW_CONTENT leaves the
 original result as it is and the learner is offered a separate new practice attempt; INDETERMINATE keeps the question
@@ -128,13 +130,20 @@ def open_obligation(db: Session, attempt_id: uuid.UUID, position: int) -> Learne
 def request_actions(
     db: Session, attempt_id: uuid.UUID, status: dict[str, dict[str, Any]], now: datetime, *, persist: bool
 ) -> None:
-    """Give each requested learner action its durable deadline (creating the obligation on first release)."""
+    """Give each requested learner action its durable deadline (creating the obligation on first release).
+
+    PR32-01: a question that stays pending keeps its open request even when a later decision leaves the action out,
+    so the learner's control, response admission and the deadline job always agree. Only resolving the question
+    (scored or unavailable) closes the request; there is no silent withdrawal and so no way to restart its clock."""
     from portal_api.modules.written.review import LEARNER_ACTION_WINDOW
 
     for pos, st in status.items():
         action = st.get("learner_action")
         if not action:
-            continue
+            carried = open_obligation(db, attempt_id, int(pos)) if st.get("status") == "pending" else None
+            if carried is None:
+                continue
+            st["learner_action"] = action = carried.action
         ob = open_obligation(db, attempt_id, int(pos))
         if ob is None and persist:
             ob = LearnerObligation(
@@ -147,7 +156,26 @@ def request_actions(
             db.add(ob)
         elif ob is not None and persist:
             ob.action = action  # changing the action never moves the deadline
-        st["action_deadline"] = (ob.deadline if ob is not None else now + LEARNER_ACTION_WINDOW).isoformat()
+        if ob is not None:
+            st["action_deadline"] = ob.deadline.isoformat()
+        else:
+            st.pop("action_deadline", None)  # a draft starts no clock and shows none
+
+
+def effective_request(
+    db: Session, attempt_id: uuid.UUID, position: int, st: dict[str, Any]
+) -> tuple[str, datetime] | None:
+    """The learner request in force for a pending question: the open obligation when there is one (authoritative),
+    else the action recorded on the released status (pre-obligation records)."""
+    if st.get("status") != "pending":
+        return None
+    ob = open_obligation(db, attempt_id, position)
+    if ob is not None:
+        return ob.action, ob.deadline
+    action = st.get("learner_action")
+    if action in ("rescan", "confirm_or_rescan") and st.get("action_deadline"):
+        return str(action), datetime.fromisoformat(st["action_deadline"])
+    return None
 
 
 def close_obligations(
@@ -191,13 +219,13 @@ def _requested_action(db: Session, attempt_id: uuid.UUID, position: int, now: da
 
     current = review.released_result(db, attempt_id)
     st = (current.question_status or {}).get(str(position), {}) if current else {}
-    if st.get("status") != "pending" or st.get("learner_action") not in ("rescan", "confirm_or_rescan"):
+    req = effective_request(db, attempt_id, position, st)  # PR32-01: the open obligation decides, not the last save
+    if req is None:
         raise Conflict("No action is needed for this question.", code_reason="NO_LEARNER_ACTION")
-    ob = open_obligation(db, attempt_id, position)
-    deadline = ob.deadline if ob is not None else datetime.fromisoformat(st["action_deadline"])
+    action, deadline = req
     if now > deadline:
         raise Conflict("The 7 days to act on this question have passed.", code_reason="ACTION_DEADLINE_PASSED")
-    return dict(st)
+    return {**st, "learner_action": action, "action_deadline": deadline.isoformat()}
 
 
 def revisions_for(db: Session, attempt_id: uuid.UUID, positions: set[int] | None = None) -> list[EvidenceRevision]:
@@ -500,8 +528,31 @@ def classify_for_decision(
         )
 
 
+def draft_proposals(
+    db: Session, case: Any, in_scope: set[str], classifications: dict[str, dict[str, Any]]
+) -> dict[str, dict[str, str]]:
+    """PR32-02: classification proposals saved with a draft. They must name unclassified copies of this case's
+    questions and a known class (or none yet); nothing is applied, audited as a decision or shown to the learner."""
+    known = {
+        str(r.id) for r in revisions_for(db, case.attempt_id, {int(p) for p in in_scope}) if r.classification is None
+    }
+    out: dict[str, dict[str, str]] = {}
+    for rid, c in classifications.items():
+        if rid not in known:
+            raise Unprocessable(f"Clearer copy {rid} isn't awaiting classification in this case.")
+        cls = str(c.get("class", ""))
+        if cls and cls not in CLASSES:
+            raise Unprocessable(f"Choose READABILITY, NEW_CONTENT or INDETERMINATE for {rid}.")
+        out[rid] = {"class": cls, "reason": str(c.get("reason", ""))[:1000]}
+    return out
+
+
 def evidence_for_decision(
-    db: Session, attempt_id: uuid.UUID, evidence: dict[str, list[str]], scored: set[str]
+    db: Session,
+    attempt_id: uuid.UUID,
+    evidence: dict[str, list[str]],
+    scored: set[str],
+    proposed: dict[str, str] | None = None,
 ) -> dict[str, list[dict[str, str]]]:
     """Section 4 (PR #31 review): which clearer copies supplied each marked answer. Only READABILITY revisions of the
     same attempt and question may be named, and only for questions this decision scores. Questions not named here were
@@ -523,7 +574,10 @@ def evidence_for_decision(
                 raise Unprocessable(
                     f"Copy {rid} doesn't belong to question {pos}.", code_reason="EVIDENCE_NOT_ELIGIBLE"
                 )
-            if rev.classification != "READABILITY":
+            # PR32-02: a draft may rely on its own READABILITY *proposal* for a copy nobody has classified yet; release
+            # applies (and audits) the classification before this check, so a proposal never stands in for it there.
+            effective = rev.classification or (proposed or {}).get(str(rev.id))
+            if effective != "READABILITY":
                 raise Unprocessable(
                     f"Copy {rid} is classified {rev.classification or 'not yet'}; only a READABILITY copy may be used.",
                     code_reason="EVIDENCE_NOT_ELIGIBLE",
@@ -571,6 +625,16 @@ def expire_learner_actions(db: Session) -> int:
         if not overdue:
             db.rollback()
             continue
+        responded = {
+            ob.position
+            for ob in db.scalars(
+                select(LearnerObligation).where(
+                    LearnerObligation.attempt_id == attempt_id,
+                    LearnerObligation.status == "open",
+                    LearnerObligation.responded_at.is_not(None),
+                )
+            )
+        }
         case = _completion_case_for(db, attempt_id, overdue[0])
         review.publish_resolution(
             db,
@@ -581,8 +645,13 @@ def expire_learner_actions(db: Session) -> int:
             updates={
                 str(p): {
                     "status": "unavailable",
-                    "reason": "No clearer copy arrived within 7 days, so this question couldn't be assessed. "
-                    "Its allowance was returned.",
+                    "reason": (
+                        "The copies you sent couldn't establish this answer within 7 days, so it couldn't be "
+                        "assessed. Its allowance was returned."
+                        if p in responded
+                        else "No clearer copy arrived within 7 days, so this question couldn't be assessed. "
+                        "Its allowance was returned."
+                    ),
                 }
                 for p in overdue
             },
@@ -605,7 +674,7 @@ def expire_learner_actions(db: Session) -> int:
             action="written.learner_action_expired",
             target_type="written_attempt",
             target_id=str(attempt_id),
-            details={"positions": overdue},
+            details={"positions": overdue, "responded": sorted(responded & set(overdue))},
         )
         db.commit()
         done += len(overdue)

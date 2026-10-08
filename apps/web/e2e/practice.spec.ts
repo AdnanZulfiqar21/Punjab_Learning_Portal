@@ -218,6 +218,17 @@ test("a pending question shows no invented mark, and a completion case finishes 
   await expect(page.getByText("Question 1: 1 / 5")).toBeVisible();
 });
 
+/** Save a marking draft, leave the case, and open it again (a real navigation, not client state). */
+async function saveAndReopen(teacher: Page) {
+  const caseUrl = teacher.url();
+  const header = teacher.getByText(/· version \d+/);
+  const before = await header.textContent();
+  await teacher.getByRole("button", { name: "Save marks" }).click();
+  await expect(header).not.toHaveText(before!, AUTH);
+  await teacher.goto("/studio/marking");
+  await teacher.goto(caseUrl);
+}
+
 test("a teacher asks for a clearer copy, the learner sends one, and it is classified before marking", async ({ page, browser }) => {
   test.slow(); // two marking rounds across two browser contexts
   await newLearner(page);
@@ -245,6 +256,11 @@ test("a teacher asks for a clearer copy, the learner sends one, and it is classi
   await teacher.getByLabel("Outcome for question 1").selectOption("pending");
   await teacher.getByLabel("Ask the learner about question 1").selectOption("rescan");
   await teacher.getByLabel("Reason for question 1").fill("Fixture: the photo is too dark to read.");
+  // PR32-02: a saved draft reopens with its outcome, reason and learner action, not as "scored".
+  await saveAndReopen(teacher);
+  await expect(teacher.getByLabel("Outcome for question 1")).toHaveValue("pending");
+  await expect(teacher.getByLabel("Ask the learner about question 1")).toHaveValue("rescan");
+  await expect(teacher.getByLabel("Reason for question 1")).toHaveValue("Fixture: the photo is too dark to read.");
   await teacher.getByRole("button", { name: "Release result" }).click();
   await expect(teacher.getByText("Result released")).toBeVisible(AUTH);
 
@@ -257,11 +273,18 @@ test("a teacher asks for a clearer copy, the learner sends one, and it is classi
   await teacher.goto("/studio/marking");
   await teacher.getByRole("listitem").filter({ hasText: `Script ${attemptId.slice(0, 8)}` }).filter({ hasText: "Completion" }).getByRole("link").click();
   await expect(teacher.getByAltText("Clearer copy 1 for question 1")).toBeVisible(AUTH);
+  await expect(teacher.getByText(/before the upload deadline/)).toBeVisible(); // the authoritative timing, not a blanket label
   await teacher.getByRole("button", { name: "Start marking" }).click();
   await teacher.getByLabel("Classify the clearer copy for question 1").selectOption("READABILITY");
   await teacher.getByLabel("Reason for the classification of question 1").fill("Fixture: same working, brighter photo.");
   await teacher.getByLabel("Used the clearer copy for question 1 (recorded with the mark)").check();
   await teacher.getByRole("radiogroup", { name: "Award for a1" }).getByLabel("1", { exact: true }).check();
+  // PR32-02: a draft may propose READABILITY and use that copy; the proposal and evidence choice survive a reload.
+  await saveAndReopen(teacher);
+  await expect(teacher.getByLabel("Classify the clearer copy for question 1")).toHaveValue("READABILITY");
+  await expect(teacher.getByLabel("Reason for the classification of question 1")).toHaveValue("Fixture: same working, brighter photo.");
+  await expect(teacher.getByLabel("Used the clearer copy for question 1 (recorded with the mark)")).toBeChecked();
+  await expect(teacher.getByRole("radiogroup", { name: "Award for a1" }).getByLabel("1", { exact: true })).toBeChecked();
   await teacher.getByRole("button", { name: "Release result" }).click();
   await expect(teacher.getByText("Result released")).toBeVisible(AUTH);
 

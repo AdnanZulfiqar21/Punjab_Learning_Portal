@@ -103,6 +103,9 @@ class WrittenScoreVersion(Base):
     # Section 4 (PR #31 review): position -> the READABILITY rescans that supplied the marked answer, pinned by id,
     # file and hash. Absent means the sealed original (this version's receipt) was the only evidence.
     evidence_revisions: Mapped[dict[str, Any]] = mapped_column(JSONB, default=dict, server_default="{}")
+    # PR32-02: an unreleased draft's remaining editable intent: proposed rescan classifications (never applied until
+    # release) and the copies selected as evidence. Null on released versions.
+    draft_intent: Mapped[dict[str, Any] | None] = mapped_column(JSONB)
     # R05: position -> {"status": scored|pending|unavailable, "reason": str}. Missing entries mean scored (pre-R05).
     question_status: Mapped[dict[str, Any]] = mapped_column(JSONB, default=dict, server_default="{}")
     completeness: Mapped[str] = mapped_column(String(20), default="complete", server_default="complete")
@@ -649,10 +652,15 @@ def decide(
 
     # RS31-02: a requested action's deadline is set once, on first release, and never moved by later saves.
     rescans.request_actions(db, case.attempt_id, statuses, now, persist=release)
+    proposals: dict[str, dict[str, str]] = {}
     if release:
         # W06.S2.T4: every learner rescan for these questions is classified by the deciding reviewer first.
         rescans.classify_for_decision(db, who, case, set(in_scope), classifications or {}, now)
-    used = rescans.evidence_for_decision(db, case.attempt_id, evidence or {}, scored)
+    else:
+        proposals = rescans.draft_proposals(db, case, set(in_scope), classifications or {})
+    used = rescans.evidence_for_decision(
+        db, case.attempt_id, evidence or {}, scored, {r: p["class"] for r, p in proposals.items()}
+    )
     totals = {**carried_units, **totals}
     all_status = {**carried_status, **statuses}
     for q in ctx["questions"]:  # pre-R05 carried questions without an explicit status were scored
@@ -691,6 +699,12 @@ def decide(
                 if scope is not None and p not in scope
             },
             **used,
+        },
+        draft_intent=None
+        if release
+        else {
+            "classifications": proposals,
+            "evidence": {p: list(dict.fromkeys(ids)) for p, ids in (evidence or {}).items()},
         },
         completeness=completeness,
         scored_max_units=sum(m for p, m in maxima.items() if all_status[p]["status"] == "scored"),
