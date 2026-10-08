@@ -14,6 +14,7 @@ import portal_api.modules.curriculum.models
 import portal_api.modules.identity.models
 import portal_api.modules.identity.sessions
 import portal_api.modules.support.models
+import portal_api.modules.written.adjudication
 import portal_api.modules.written.models
 import portal_api.modules.written.rescans
 import portal_api.modules.written.review  # noqa: F401
