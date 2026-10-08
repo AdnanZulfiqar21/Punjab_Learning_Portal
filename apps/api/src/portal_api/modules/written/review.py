@@ -667,7 +667,7 @@ def _eligible_positions(db: Session, attempt_id: uuid.UUID, released: list[Writt
     current = released[-1]
 
     def scored(pos: int) -> bool:  # a pending or unavailable question has no mark to dispute (R05)
-        return (current.question_status or {}).get(str(pos), {"status": "scored"})["status"] == "scored"
+        return bool((current.question_status or {}).get(str(pos), {"status": "scored"})["status"] == "scored")
 
     if len(released) == 1:
         attempt = db.get(WrittenAttempt, attempt_id)
