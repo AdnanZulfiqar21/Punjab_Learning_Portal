@@ -100,6 +100,9 @@ class WrittenScoreVersion(Base):
     rubric_version_ids: Mapped[dict[str, str]] = mapped_column(JSONB)  # position -> rubric version id
     awards: Mapped[dict[str, Any]] = mapped_column(JSONB)  # position -> criterion -> {units, reason}
     question_units: Mapped[dict[str, int]] = mapped_column(JSONB)  # position -> earned units (scored only)
+    # Section 4 (PR #31 review): position -> the READABILITY rescans that supplied the marked answer, pinned by id,
+    # file and hash. Absent means the sealed original (this version's receipt) was the only evidence.
+    evidence_revisions: Mapped[dict[str, Any]] = mapped_column(JSONB, default=dict, server_default="{}")
     # R05: position -> {"status": scored|pending|unavailable, "reason": str}. Missing entries mean scored (pre-R05).
     question_status: Mapped[dict[str, Any]] = mapped_column(JSONB, default=dict, server_default="{}")
     completeness: Mapped[str] = mapped_column(String(20), default="complete", server_default="complete")
@@ -505,6 +508,7 @@ def decide(
     expansion_reason: str = "",
     question_status: dict[str, dict[str, Any]] | None = None,
     classifications: dict[str, dict[str, Any]] | None = None,
+    evidence: dict[str, list[str]] | None = None,
 ) -> WrittenScoreVersion:
     # One publication per attempt at a time (OCT8-03). Lock order everywhere: attempt row, then case rows.
     visible = _case(db, who, case_id)
@@ -628,13 +632,7 @@ def decide(
         if action is not None:
             if kind != "pending" or action not in LEARNER_ACTIONS:
                 raise Unprocessable(f"Question {pos}: a learner action can only be asked for a pending question.")
-            previous = (current.question_status or {}).get(pos, {}) if current is not None else {}
-            same = previous.get("learner_action") == action and previous.get("action_deadline")
-            statuses[pos]["learner_action"] = action
-            # §20.10: one finite deadline per request; re-saving the same request never extends it.
-            statuses[pos]["action_deadline"] = (
-                previous["action_deadline"] if same else (now + LEARNER_ACTION_WINDOW).isoformat()
-            )
+            statuses[pos]["learner_action"] = action  # its deadline comes from the durable obligation below
     unknown = sorted(set(question_status or {}) - set(in_scope), key=int)
     if unknown:
         raise Unprocessable("Statuses were given for questions outside this case.", errors=unknown)
@@ -647,11 +645,14 @@ def decide(
     totals, errors = _check_awards(ctx, awards, scored)
     if errors:
         raise Unprocessable("Some awards don't follow the rubric.", errors=errors)
-    if release:
-        from portal_api.modules.written import rescans
+    from portal_api.modules.written import rescans
 
+    # RS31-02: a requested action's deadline is set once, on first release, and never moved by later saves.
+    rescans.request_actions(db, case.attempt_id, statuses, now, persist=release)
+    if release:
         # W06.S2.T4: every learner rescan for these questions is classified by the deciding reviewer first.
         rescans.classify_for_decision(db, who, case, set(in_scope), classifications or {}, now)
+    used = rescans.evidence_for_decision(db, case.attempt_id, evidence or {}, scored)
     totals = {**carried_units, **totals}
     all_status = {**carried_status, **statuses}
     for q in ctx["questions"]:  # pre-R05 carried questions without an explicit status were scored
@@ -683,6 +684,14 @@ def decide(
         },
         question_units={p: u for p, u in totals.items() if all_status.get(p, {}).get("status") == "scored"},
         question_status=all_status,
+        evidence_revisions={
+            **{
+                p: e
+                for p, e in ((current.evidence_revisions or {}) if current is not None else {}).items()
+                if scope is not None and p not in scope
+            },
+            **used,
+        },
         completeness=completeness,
         scored_max_units=sum(m for p, m in maxima.items() if all_status[p]["status"] == "scored"),
         total_units=sum(u for p, u in totals.items() if all_status.get(p, {}).get("status") == "scored"),
@@ -714,6 +723,7 @@ def decide(
         case.status = "released"
         case.released_at = now
         _sync_pending(db, case, set(pending), all_status, now)
+        rescans.close_obligations(db, case.attempt_id, all_status, now, "resolved_by_review")
     if release:
         if req is not None:
             db.flush()
@@ -1012,6 +1022,7 @@ def publish_resolution(
         awards={**current.awards, **award_updates},
         question_units={p: u for p, u in units.items() if status.get(p, {}).get("status") == "scored"},
         question_status=status,
+        evidence_revisions={p: e for p, e in (current.evidence_revisions or {}).items() if p not in updates},
         completeness="partial_pending" if pending else "partial_unavailable" if unavailable else "complete",
         scored_max_units=sum(m for p, m in maxima.items() if status[p]["status"] == "scored"),
         total_units=sum(u for p, u in units.items() if status.get(p, {}).get("status") == "scored"),

@@ -6,7 +6,7 @@ import uuid
 from datetime import datetime
 from typing import Annotated, Any, Literal
 
-from fastapi import APIRouter, Depends, Query, Request, Response
+from fastapi import APIRouter, Depends, Header, Query, Request, Response
 from pydantic import BaseModel, Field
 from sqlalchemy.orm import Session
 
@@ -123,6 +123,11 @@ class DecisionIn(BaseModel):
         default_factory=dict,
         description='Per learner rescan: {"<revision id>": {"class": "READABILITY"|"NEW_CONTENT"|"INDETERMINATE", '
         '"reason": "…"}}. Required for every unclassified rescan of a question in this case before release.',
+    )
+    evidence: dict[str, list[str]] = Field(
+        default_factory=dict,
+        description='Per marked question, the READABILITY rescans used as evidence: {"2": ["<revision id>"]}. '
+        "Unnamed questions were marked from the sealed original.",
     )
 
 
@@ -354,6 +359,7 @@ def decision(db: DB, who: Reviewer, case_id: uuid.UUID, body: DecisionIn, respon
         expansion_reason=body.expansion_reason,
         question_status=body.question_status,
         classifications=body.classifications,
+        evidence=body.evidence,
     )
     return _detail(db, review.get_case(db, who, case_id), who)
 
@@ -585,6 +591,7 @@ async def rescan(
     request: Request,
     response: Response,
     note: Annotated[str, Query(max_length=500)] = "",
+    idempotency_key: Annotated[str | None, Header(alias="Idempotency-Key", min_length=8, max_length=80)] = None,
 ) -> dict[str, Any]:
     from starlette.concurrency import run_in_threadpool
 
@@ -597,8 +604,24 @@ async def rescan(
         buf.extend(chunk)
         if len(buf) > RESCAN_LIMIT:
             raise TooLarge("This file is larger than any accepted page.")
-    rev = await run_in_threadpool(rescans.submit_rescan, db, who, attempt_id, position, bytes(buf), note)
-    return {"id": str(rev.id), "position": rev.position, "created_at": rev.created_at.isoformat()}
+    if not idempotency_key:
+        from portal_api.errors import Unprocessable
+
+        raise Unprocessable(
+            "Send an Idempotency-Key so a retry can't create a second copy.", code_reason="KEY_REQUIRED"
+        )
+    rev, replay = await run_in_threadpool(
+        rescans.submit_rescan, db, who, attempt_id, position, bytes(buf), note, idempotency_key
+    )
+    if replay:
+        response.status_code = 200  # already accepted: the original acknowledgement, nothing new created
+    return {
+        "id": str(rev.id),
+        "position": rev.position,
+        "created_at": rev.created_at.isoformat(),
+        "post_cutoff": rev.post_cutoff,
+        "replay": replay,
+    }
 
 
 @router.post(

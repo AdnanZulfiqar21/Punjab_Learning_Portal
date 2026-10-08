@@ -1979,6 +1979,13 @@ export interface components {
                 };
             };
             /**
+             * Evidence
+             * @description Per marked question, the READABILITY rescans used as evidence: {"2": ["<revision id>"]}. Unnamed questions were marked from the sealed original.
+             */
+            evidence?: {
+                [key: string]: string[];
+            };
+            /**
              * Expand Positions
              * @description Recheck only: questions to add (academic adjudicators)
              */
@@ -6370,7 +6377,9 @@ export interface operations {
             query?: {
                 note?: string;
             };
-            header?: never;
+            header?: {
+                "Idempotency-Key"?: string | null;
+            };
             path: {
                 attempt_id: string;
                 position: number;

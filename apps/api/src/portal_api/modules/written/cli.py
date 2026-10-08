@@ -66,8 +66,12 @@ def repair(argv: list[str] | None = None) -> int:
     with get_sessionmaker()() as db:
         fixed = review.repair_pending_obligations(db)
         settled = review.repair_empty_reservations(db)
+        from portal_api.modules.written import rescans
+
+        flags = rescans.repair_post_cutoff_flags(db)
     print(f"pending-question obligations repaired: {len(fixed)}")
     print(f"unsettled empty-seal reservations repaired: {len(settled)}")
+    print(f"rescan post-cutoff flags corrected: {len(flags)}")
     return 0
 
 

@@ -25,6 +25,7 @@ export async function POST(request: NextRequest, ctx: RouteContext<"/practice/wr
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/octet-stream",
+        ...(request.headers.get("idempotency-key") ? { "Idempotency-Key": request.headers.get("idempotency-key")! } : {}),
         ...(request.headers.get("content-length") ? { "Content-Length": request.headers.get("content-length")! } : {}),
       },
       body: request.body,

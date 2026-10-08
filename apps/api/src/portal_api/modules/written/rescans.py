@@ -26,8 +26,21 @@ import uuid
 from datetime import datetime
 from typing import Any
 
-from sqlalchemy import CheckConstraint, DateTime, ForeignKey, SmallInteger, String, Text, func, select
+from sqlalchemy import (
+    CheckConstraint,
+    DateTime,
+    ForeignKey,
+    Index,
+    SmallInteger,
+    String,
+    Text,
+    UniqueConstraint,
+    func,
+    select,
+    text,
+)
 from sqlalchemy.dialects.postgresql import JSONB, UUID
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Mapped, Session, mapped_column
 
 from portal_api.db import Base
@@ -51,6 +64,7 @@ class EvidenceRevision(Base):
             "classification is null or classification in ('READABILITY','NEW_CONTENT','INDETERMINATE')",
             name="written_revision_class",
         ),
+        UniqueConstraint("attempt_id", "idempotency_key", name="uq_written_revision_key"),
     )
     id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     attempt_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("written_attempt.id", ondelete="RESTRICT"), index=True)
@@ -60,13 +74,98 @@ class EvidenceRevision(Base):
     prior_hashes: Mapped[dict[str, str]] = mapped_column(JSONB)  # page id -> sealed original file hash
     actor_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("app_user.id", ondelete="RESTRICT"))
     note: Mapped[str] = mapped_column(Text, default="")
-    post_cutoff: Mapped[bool] = mapped_column(default=True)  # always after the upload cutoff U: the receipt is sealed
-    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+    # Always post-seal. Post-cutoff only if admitted after the attempt's pinned upload cutoff U (RS31-03); at exactly U
+    # it is not post-cutoff, matching the admission rule "at or before U".
+    post_cutoff: Mapped[bool] = mapped_column()
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))  # the post-lock admission time
+    idempotency_key: Mapped[str] = mapped_column(String(80))  # RS31-01: exact retries return this revision
+    request_hash: Mapped[str] = mapped_column(String(64))
     classification: Mapped[str | None] = mapped_column(String(14))
     class_reason: Mapped[str | None] = mapped_column(Text)
     classified_by: Mapped[uuid.UUID | None] = mapped_column(ForeignKey("app_user.id", ondelete="RESTRICT"))
     classified_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     case_id: Mapped[uuid.UUID | None] = mapped_column(ForeignKey("written_review_case.id", ondelete="RESTRICT"))
+
+
+class LearnerObligation(Base):
+    """RS31-02: one durable record per unresolved learner request on a question. Its deadline is set once, when first
+    released, and survives action-type changes, omissions and repeated releases. Waiting on the learner and waiting on
+    staff (a timely rescan not yet classified) are distinguished by `responded_at` and unclassified revisions."""
+
+    __tablename__ = "written_learner_obligation"
+    __table_args__ = (
+        Index(
+            "uq_written_obligation_open",
+            "attempt_id",
+            "position",
+            unique=True,
+            postgresql_where=text("status = 'open'"),
+        ),
+        CheckConstraint("status in ('open','resolved')", name="written_obligation_status"),
+    )
+    id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    attempt_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("written_attempt.id", ondelete="RESTRICT"), index=True)
+    position: Mapped[int] = mapped_column(SmallInteger)
+    action: Mapped[str] = mapped_column(String(20))  # the latest requested action (may change; the deadline doesn't)
+    requested_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+    deadline: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+    responded_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    status: Mapped[str] = mapped_column(String(10), default="open")
+    resolved_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    resolution: Mapped[str | None] = mapped_column(String(30))
+
+
+def open_obligation(db: Session, attempt_id: uuid.UUID, position: int) -> LearnerObligation | None:
+    return db.scalar(
+        select(LearnerObligation).where(
+            LearnerObligation.attempt_id == attempt_id,
+            LearnerObligation.position == position,
+            LearnerObligation.status == "open",
+        )
+    )
+
+
+def request_actions(
+    db: Session, attempt_id: uuid.UUID, status: dict[str, dict[str, Any]], now: datetime, *, persist: bool
+) -> None:
+    """Give each requested learner action its durable deadline (creating the obligation on first release)."""
+    from portal_api.modules.written.review import LEARNER_ACTION_WINDOW
+
+    for pos, st in status.items():
+        action = st.get("learner_action")
+        if not action:
+            continue
+        ob = open_obligation(db, attempt_id, int(pos))
+        if ob is None and persist:
+            ob = LearnerObligation(
+                attempt_id=attempt_id,
+                position=int(pos),
+                action=action,
+                requested_at=now,
+                deadline=now + LEARNER_ACTION_WINDOW,
+            )
+            db.add(ob)
+        elif ob is not None and persist:
+            ob.action = action  # changing the action never moves the deadline
+        st["action_deadline"] = (ob.deadline if ob is not None else now + LEARNER_ACTION_WINDOW).isoformat()
+
+
+def close_obligations(
+    db: Session, attempt_id: uuid.UUID, status: dict[str, dict[str, Any]], now: datetime, resolution: str
+) -> None:
+    """Resolve open obligations for questions that are no longer pending."""
+    for ob in db.scalars(
+        select(LearnerObligation).where(LearnerObligation.attempt_id == attempt_id, LearnerObligation.status == "open")
+    ):
+        if status.get(str(ob.position), {}).get("status") != "pending":
+            ob.status = "resolved"
+            ob.resolved_at = now
+            ob.resolution = resolution
+
+
+def is_post_cutoff(admitted_at: datetime, upload_cutoff_at: datetime) -> bool:
+    """Admission at or before U is within the window; only strictly later is post-cutoff (RS31-03)."""
+    return admitted_at > upload_cutoff_at
 
 
 def _now(db: Session) -> datetime:
@@ -94,7 +193,9 @@ def _requested_action(db: Session, attempt_id: uuid.UUID, position: int, now: da
     st = (current.question_status or {}).get(str(position), {}) if current else {}
     if st.get("status") != "pending" or st.get("learner_action") not in ("rescan", "confirm_or_rescan"):
         raise Conflict("No action is needed for this question.", code_reason="NO_LEARNER_ACTION")
-    if now > datetime.fromisoformat(st["action_deadline"]):
+    ob = open_obligation(db, attempt_id, position)
+    deadline = ob.deadline if ob is not None else datetime.fromisoformat(st["action_deadline"])
+    if now > deadline:
         raise Conflict("The 7 days to act on this question have passed.", code_reason="ACTION_DEADLINE_PASSED")
     return dict(st)
 
@@ -106,14 +207,46 @@ def revisions_for(db: Session, attempt_id: uuid.UUID, positions: set[int] | None
     return list(db.scalars(stmt.order_by(EvidenceRevision.created_at)))
 
 
+def _fingerprint(position: int, sha: str, note: str) -> str:
+    return hashlib.sha256(f"{position}:{sha}:{note.strip()[:500]}".encode()).hexdigest()
+
+
+def _by_key(db: Session, attempt_id: uuid.UUID, key: str) -> EvidenceRevision | None:
+    return db.scalar(
+        select(EvidenceRevision).where(
+            EvidenceRevision.attempt_id == attempt_id, EvidenceRevision.idempotency_key == key
+        )
+    )
+
+
+def _replay(rev: EvidenceRevision, fingerprint: str) -> EvidenceRevision:
+    if rev.request_hash != fingerprint:
+        raise Conflict("This request key was already used for a different copy.", code_reason="KEY_REUSED")
+    return rev
+
+
 def submit_rescan(
-    db: Session, who: Principal, attempt_id: uuid.UUID, position: int, data: bytes, note: str
-) -> EvidenceRevision:
-    """Store a clearer copy of one pending answer as a linked revision. No connection is held while parsing or storing
-    (DBHOLD-01); the request is re-checked under the attempt lock before anything is committed."""
+    db: Session,
+    who: Principal,
+    attempt_id: uuid.UUID,
+    position: int,
+    data: bytes,
+    note: str,
+    idempotency_key: str,
+) -> tuple[EvidenceRevision, bool]:
+    """Store a clearer copy of one pending answer as a linked revision. Returns (revision, replay).
+
+    RS31-01: an exact retry with the same key returns the original revision (even after the deadline) and adds
+    nothing; the same key with different content conflicts. Duplicate checks repeat under the attempt lock, and the
+    one uniqueness race left is answered as a domain outcome. Only this request's unreferenced objects are removed.
+    No connection is held while parsing or storing (DBHOLD-01)."""
     attempt = db.get(WrittenAttempt, attempt_id)
     if attempt is None or attempt.user_id != who.user.id:
         raise NotFound("Attempt not found.")
+    sha = hashlib.sha256(data).hexdigest()
+    fingerprint = _fingerprint(position, sha, note)
+    if (prior := _by_key(db, attempt_id, idempotency_key)) is not None:
+        return _replay(prior, fingerprint), True
     if attempt.status != "sealed":
         raise Conflict("Rescans are for submitted scripts.")
     _requested_action(db, attempt_id, position, _now(db))
@@ -122,7 +255,6 @@ def submit_rescan(
             f"You can send at most {MAX_REVISIONS_PER_QUESTION} clearer copies of one answer.",
             code_reason="RESCAN_LIMIT",
         )
-    sha = hashlib.sha256(data).hexdigest()
     if db.scalar(select(WrittenFile.id).where(WrittenFile.attempt_id == attempt_id, WrittenFile.sha256 == sha)):
         raise Conflict(
             "This is the same file that was already sent. Take a new, clearer photo of the answer.",
@@ -149,13 +281,24 @@ def submit_rescan(
             previews.append((lp, pv))
         attempt = _lock_attempt(db, attempt_id, who)
         now = _now(db)
+        # Everything decided above is decided again under the lock.
+        if (prior := _by_key(db, attempt_id, idempotency_key)) is not None:
+            db.rollback()
+            for key in keys:
+                store.discard_uncommitted(key)
+            return _replay(prior, fingerprint), True
         _requested_action(db, attempt_id, position, now)
         if len(revisions_for(db, attempt_id, {position})) >= MAX_REVISIONS_PER_QUESTION:
             raise Conflict("Too many clearer copies for this answer.", code_reason="RESCAN_LIMIT")
+        if db.scalar(select(WrittenFile.id).where(WrittenFile.attempt_id == attempt_id, WrittenFile.sha256 == sha)):
+            raise Conflict("This copy was already received.", code_reason="SAME_FILE")
         receipt = db.scalar(select(WrittenReceipt).where(WrittenReceipt.attempt_id == attempt_id))
         assert receipt is not None
         slots = receipt.manifest.get("slots", {})
-        prior = sorted({p for k, v in slots.items() if k.split(":")[0] == str(position) for p in v.get("pages", [])})
+        prior_pages = sorted(
+            {p for k, v in slots.items() if k.split(":")[0] == str(position) for p in v.get("pages", [])}
+        )
+        late = is_post_cutoff(now, attempt.upload_cutoff_at)
         db.add(
             WrittenFile(
                 id=file_id,
@@ -189,29 +332,56 @@ def submit_rescan(
             attempt_id=attempt_id,
             position=position,
             file_id=file_id,
-            prior_page_ids=prior,
-            prior_hashes={p: receipt.page_hashes[p] for p in prior if p in receipt.page_hashes},
+            prior_page_ids=prior_pages,
+            prior_hashes={p: receipt.page_hashes[p] for p in prior_pages if p in receipt.page_hashes},
             actor_id=who.user.id,
             note=note.strip()[:500],
+            post_cutoff=late,
             created_at=now,
+            idempotency_key=idempotency_key,
+            request_hash=fingerprint,
         )
         db.add(rev)
+        ob = open_obligation(db, attempt_id, position)
+        if ob is not None and ob.responded_at is None:
+            ob.responded_at = now  # the learner answered in time; now waiting on staff
         record(
             db,
             actor=who.user.id,
             action="written.rescan_submitted",
             target_type="written_attempt",
             target_id=str(attempt_id),
-            details={"position": position, "file": str(file_id), "sha256": sha, "post_cutoff": True},
+            details={
+                "position": position,
+                "file": str(file_id),
+                "sha256": sha,
+                "admitted_at": now.isoformat(),
+                "upload_cutoff_at": attempt.upload_cutoff_at.isoformat(),
+                "post_cutoff": late,
+                "post_seal": True,
+            },
         )
+        db.flush()
         db.commit()
+    except IntegrityError as e:
+        db.rollback()
+        for key in keys:
+            store.discard_uncommitted(key)
+        constraint = getattr(getattr(e.orig, "diag", None), "constraint_name", None)
+        if constraint == "uq_written_revision_key":
+            prior = _by_key(db, attempt_id, idempotency_key)
+            if prior is not None:
+                return _replay(prior, fingerprint), True
+        if constraint == "uq_written_file_attempt_hash":
+            raise Conflict("This copy was already received.", code_reason="SAME_FILE") from e
+        raise
     except BaseException:
         db.rollback()
         for key in keys:
             store.discard_uncommitted(key)
         raise
     db.refresh(rev)
-    return rev
+    return rev, False
 
 
 def confirm_unanswered(db: Session, who: Principal, attempt_id: uuid.UUID, position: int) -> None:
@@ -222,6 +392,16 @@ def confirm_unanswered(db: Session, who: Principal, attempt_id: uuid.UUID, posit
 
     attempt = _lock_attempt(db, attempt_id, who)
     now = _now(db)
+    done = db.scalar(
+        select(LearnerObligation).where(
+            LearnerObligation.attempt_id == attempt_id,
+            LearnerObligation.position == position,
+            LearnerObligation.resolution == "confirmed_unanswered",
+        )
+    )
+    if done is not None:  # RS31-01: a repeated confirmation is answered without a second resolution
+        db.rollback()
+        return
     st = _requested_action(db, attempt_id, position, now)
     if st["learner_action"] != "confirm_or_rescan":
         raise Conflict("This question needs a clearer copy, not a confirmation.", code_reason="CONFIRM_NOT_OFFERED")
@@ -247,6 +427,9 @@ def confirm_unanswered(db: Session, who: Principal, attempt_id: uuid.UUID, posit
         reason=f"learner confirmed question {position} unanswered",
     )
     access.release_questions(db, attempt_id, [position], "learner confirmed unanswered after seal")
+    ob = open_obligation(db, attempt_id, position)
+    if ob is not None:
+        ob.status, ob.resolved_at, ob.resolution = "resolved", now, "confirmed_unanswered"
     record(
         db,
         actor=who.user.id,
@@ -317,33 +500,73 @@ def classify_for_decision(
         )
 
 
+def evidence_for_decision(
+    db: Session, attempt_id: uuid.UUID, evidence: dict[str, list[str]], scored: set[str]
+) -> dict[str, list[dict[str, str]]]:
+    """Section 4 (PR #31 review): which clearer copies supplied each marked answer. Only READABILITY revisions of the
+    same attempt and question may be named, and only for questions this decision scores. Questions not named here were
+    marked from the sealed original, which stays possible even when another copy is NEW_CONTENT or INDETERMINATE."""
+    out: dict[str, list[dict[str, str]]] = {}
+    for pos, ids in evidence.items():
+        if pos not in scored:
+            raise Unprocessable(
+                f"Question {pos} isn't being marked in this decision, so it can't name evidence.",
+                code_reason="EVIDENCE_NOT_ELIGIBLE",
+            )
+        entries = []
+        for rid in dict.fromkeys(ids):
+            try:
+                rev = db.get(EvidenceRevision, uuid.UUID(rid))
+            except ValueError:
+                rev = None
+            if rev is None or rev.attempt_id != attempt_id or str(rev.position) != pos:
+                raise Unprocessable(
+                    f"Copy {rid} doesn't belong to question {pos}.", code_reason="EVIDENCE_NOT_ELIGIBLE"
+                )
+            if rev.classification != "READABILITY":
+                raise Unprocessable(
+                    f"Copy {rid} is classified {rev.classification or 'not yet'}; only a READABILITY copy may be used.",
+                    code_reason="EVIDENCE_NOT_ELIGIBLE",
+                )
+            f = db.get(WrittenFile, rev.file_id)
+            assert f is not None
+            entries.append({"id": str(rev.id), "file_id": str(f.id), "sha256": f.sha256})
+        if entries:
+            out[pos] = entries
+    return out
+
+
 def expire_learner_actions(db: Session) -> int:
-    """Deadline job: questions still awaiting the learner after 7 days, with no clearer copy awaiting review, are
-    resolved unavailable and their allowance returned. Never a zero; audited; idempotent."""
+    """Deadline job: open obligations past their durable deadline, whose question is still pending and with no
+    timely clearer copy awaiting review, are resolved unavailable with allowance returned. Never a zero; idempotent."""
     from portal_api.modules.access import service as access
     from portal_api.modules.written import review
 
     now = _now(db)
     done = 0
-    candidates = db.scalars(
-        select(review.WrittenReviewCase.attempt_id)
-        .where(review.WrittenReviewCase.case_kind == "completion", review.WrittenReviewCase.status == "queued")
+    attempts = db.scalars(
+        select(LearnerObligation.attempt_id)
+        .where(LearnerObligation.status == "open", LearnerObligation.deadline < now)
         .distinct()
     ).all()
-    for attempt_id in candidates:
+    for attempt_id in attempts:
         db.scalar(select(WrittenAttempt.id).where(WrittenAttempt.id == attempt_id).with_for_update())
         current = review.released_result(db, attempt_id)
         if current is None:
             db.rollback()
             continue
-        waiting = {r.position for r in revisions_for(db, attempt_id) if r.classification is None}
+        waiting_on_staff = {r.position for r in revisions_for(db, attempt_id) if r.classification is None}
         overdue = sorted(
-            int(p)
-            for p, st in (current.question_status or {}).items()
-            if st.get("status") == "pending"
-            and st.get("learner_action")
-            and now > datetime.fromisoformat(st["action_deadline"])
-            and int(p) not in waiting
+            ob.position
+            for ob in db.scalars(
+                select(LearnerObligation).where(
+                    LearnerObligation.attempt_id == attempt_id,
+                    LearnerObligation.status == "open",
+                    LearnerObligation.deadline < now,
+                )
+            )
+            if (current.question_status or {}).get(str(ob.position), {}).get("status") == "pending"
+            and ob.position not in waiting_on_staff
         )
         if not overdue:
             db.rollback()
@@ -368,6 +591,14 @@ def expire_learner_actions(db: Session) -> int:
             reason="learner action deadline passed",
         )
         access.release_questions(db, attempt_id, overdue, "learner action deadline passed")
+        for ob in db.scalars(
+            select(LearnerObligation).where(
+                LearnerObligation.attempt_id == attempt_id,
+                LearnerObligation.status == "open",
+                LearnerObligation.position.in_(overdue),
+            )
+        ):
+            ob.status, ob.resolved_at, ob.resolution = "resolved", now, "deadline_unavailable"
         record(
             db,
             actor=None,
@@ -379,3 +610,34 @@ def expire_learner_actions(db: Session) -> int:
         db.commit()
         done += len(overdue)
     return done
+
+
+def repair_post_cutoff_flags(db: Session) -> list[str]:
+    """RS31-03 repair: revisions recorded post-cutoff although admitted at or before the attempt's upload cutoff.
+    Corrects the derived flag and audits old and new values; evidence and ledger are untouched. Idempotent."""
+    fixed = []
+    rows = db.execute(
+        select(EvidenceRevision, WrittenAttempt.upload_cutoff_at)
+        .join(WrittenAttempt, WrittenAttempt.id == EvidenceRevision.attempt_id)
+        .where(EvidenceRevision.post_cutoff.is_(True), EvidenceRevision.created_at <= WrittenAttempt.upload_cutoff_at)
+    ).all()
+    for rev, cutoff in rows:
+        rev.post_cutoff = False
+        record(
+            db,
+            actor=None,
+            action="written.revision_flag_corrected",
+            target_type="written_evidence_revision",
+            target_id=str(rev.id),
+            details={
+                "field": "post_cutoff",
+                "old": True,
+                "new": False,
+                "admitted_at": rev.created_at.isoformat(),
+                "upload_cutoff_at": cutoff.isoformat(),
+                "finding": "RS31-03",
+            },
+        )
+        fixed.append(str(rev.id))
+    db.commit()
+    return fixed

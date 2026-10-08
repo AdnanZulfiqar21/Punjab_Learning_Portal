@@ -1417,6 +1417,17 @@
             "title": "Classifications",
             "type": "object"
           },
+          "evidence": {
+            "additionalProperties": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "description": "Per marked question, the READABILITY rescans used as evidence: {\"2\": [\"<revision id>\"]}. Unnamed questions were marked from the sealed original.",
+            "title": "Evidence",
+            "type": "object"
+          },
           "expand_positions": {
             "description": "Recheck only: questions to add (academic adjudicators)",
             "items": {
@@ -10130,6 +10141,24 @@
               "maxLength": 500,
               "title": "Note",
               "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "maxLength": 80,
+                  "minLength": 8,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Idempotency-Key"
             }
           }
         ],

@@ -65,7 +65,7 @@ def _rescan(client: TestClient, learner: Staff, attempt_id: str, seed: int, posi
     return client.post(
         f"/v1/written-attempts/{attempt_id}/questions/{position}/rescan",
         params={"note": "Fixture: clearer photo of the same page"},
-        headers={**learner.headers, "Content-Type": "application/octet-stream"},
+        headers={**learner.headers, "Content-Type": "application/octet-stream", "Idempotency-Key": uuid.uuid4().hex},
         content=_png(seed=seed),
     )
 
@@ -178,10 +178,10 @@ def test_the_deadline_resolves_unanswered_requests_as_unavailable_without_a_zero
     t = _staff(client)
     assert _decide(client, t, a["id"], "initial", awards=_aw(q1=100), question_status=_ask("rescan")).status_code == 200
     with get_sessionmaker()() as db:
-        db.execute(
+        db.execute(  # the durable obligation's deadline (RS31-02) has passed
             text(
-                "update written_score_version set question_status = jsonb_set(question_status, '{2,action_deadline}', "
-                "to_jsonb((clock_timestamp() - interval '1 hour')::text)) where attempt_id = :a"
+                "update written_learner_obligation set deadline = clock_timestamp() - interval '1 hour' "
+                "where attempt_id = :a"
             ),
             {"a": a["id"]},
         )

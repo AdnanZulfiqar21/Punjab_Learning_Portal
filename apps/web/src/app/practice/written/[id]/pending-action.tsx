@@ -21,19 +21,36 @@ export function PendingAction({ attemptId, q }: { attemptId: string; q: Question
   const [error, setError] = useState<string | null>(null);
   const [pending, start] = useTransition();
   const [busy, setBusy] = useState(false);
+  const [note, setNote] = useState<string | null>(null);
   const open = q.status === "pending" && q.learner_action && q.action_deadline && new Date(q.action_deadline) > new Date();
 
+  // One key per chosen file: a network retry of the same send reuses it, so the server returns the original
+  // acknowledgement instead of making a second copy (RS31-01).
   async function send(file: File) {
     setBusy(true);
     setError(null);
-    const res = await fetch(`/practice/written/${attemptId}/questions/${q.position}/rescan?note=${encodeURIComponent("Clearer copy")}`, {
-      method: "POST",
-      headers: { "Content-Type": "application/octet-stream" },
-      body: file,
-    });
+    setNote(null);
+    const key = crypto.randomUUID();
+    const url = `/practice/written/${attemptId}/questions/${q.position}/rescan?note=${encodeURIComponent("Clearer copy")}`;
+    const post = () => fetch(url, { method: "POST", headers: { "Content-Type": "application/octet-stream", "Idempotency-Key": key }, body: file });
+    let res: Response;
+    try {
+      res = await post();
+    } catch {
+      try {
+        res = await post(); // one retry with the same key after a dropped connection
+      } catch {
+        setBusy(false);
+        setError("Connection lost. Your copy may not have arrived; try again.");
+        return;
+      }
+    }
     setBusy(false);
-    if (res.ok) router.refresh();
-    else setError(((await res.json().catch(() => null)) as { detail?: string } | null)?.detail ?? "That didn't upload.");
+    if (res.ok) {
+      const body = (await res.json().catch(() => null)) as { replay?: boolean } | null;
+      if (body?.replay) setNote("This copy was already received. Nothing more to do.");
+      router.refresh();
+    } else setError(((await res.json().catch(() => null)) as { detail?: string } | null)?.detail ?? "That didn't upload.");
   }
 
   return (
@@ -79,6 +96,7 @@ export function PendingAction({ attemptId, q }: { attemptId: string; q: Question
               I didn&apos;t answer this question
             </button>
           )}
+          {note && <p role="status">{note}</p>}
           {error && (
             <p role="alert" className="text-danger">
               {error}

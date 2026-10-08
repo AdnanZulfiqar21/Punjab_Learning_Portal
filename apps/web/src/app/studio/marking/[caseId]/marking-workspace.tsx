@@ -41,6 +41,14 @@ export function MarkingWorkspace({ initial }: { initial: MarkingCase }) {
   // R05: each question in scope is scored, pending (e.g. unreadable) or unavailable (can't be assessed).
   const [status, setStatus] = useState<Record<string, { status: "scored" | "pending" | "unavailable"; reason: string; learner_action?: string }>>({});
   const [classes, setClasses] = useState<Record<string, { class: string; reason: string }>>({});
+  // Section 4 (PR #31 review): which READABILITY copies supplied each marked answer; none means the sealed original.
+  const [used, setUsed] = useState<Record<string, boolean>>({});
+  const readable = (r: { id: string; classification?: string | null }) => (r.classification ?? classes[r.id]?.class) === "READABILITY";
+  const evidence = () => {
+    const out: Record<string, string[]> = {};
+    for (const r of c.revisions) if (used[r.id] && readable(r)) (out[String(r.position)] ??= []).push(r.id);
+    return out;
+  };
   const statusOf = (pos: string) => status[pos]?.status ?? "scored";
   const carried = rc?.carried_forward ?? cp?.carried_forward ?? {};
   const scope = rc
@@ -188,6 +196,17 @@ export function MarkingWorkspace({ initial }: { initial: MarkingCase }) {
               )}
             </div>
           ))}
+          {c.revisions.some(readable) && (
+            <fieldset className="space-y-1">
+              <legend className="font-medium">Which copies did you use to mark?</legend>
+              {c.revisions.filter(readable).map((r) => (
+                <label key={r.id} className="flex items-center gap-2">
+                  <input type="checkbox" checked={!!used[r.id]} disabled={!canMark} onChange={(e) => setUsed((u) => ({ ...u, [r.id]: e.target.checked }))} />
+                  Used the clearer copy for question {r.position} (recorded with the mark)
+                </label>
+              ))}
+            </fieldset>
+          )}
           <p className="text-muted">Only a copy you classify as the same answer may be used to mark it. Nothing is classified automatically.</p>
         </section>
       )}
@@ -368,10 +387,10 @@ export function MarkingWorkspace({ initial }: { initial: MarkingCase }) {
             </span>
             {canMark ? (
               <div className="flex gap-2">
-                <button type="button" disabled={pending} onClick={() => run(() => saveMarks(c.id, c.version, sent(), false, expansion(), sentStatus(), classes))} className="rounded-lg border border-border px-4 py-2 font-medium disabled:opacity-60">
+                <button type="button" disabled={pending} onClick={() => run(() => saveMarks(c.id, c.version, sent(), false, expansion(), sentStatus(), classes, evidence()))} className="rounded-lg border border-border px-4 py-2 font-medium disabled:opacity-60">
                   Save marks
                 </button>
-                <button type="button" disabled={pending} onClick={() => run(() => saveMarks(c.id, c.version, sent(), true, expansion(), sentStatus(), classes))} className="rounded-lg bg-accent px-4 py-2 font-medium text-white disabled:opacity-60 dark:text-background">
+                <button type="button" disabled={pending} onClick={() => run(() => saveMarks(c.id, c.version, sent(), true, expansion(), sentStatus(), classes, evidence()))} className="rounded-lg bg-accent px-4 py-2 font-medium text-white disabled:opacity-60 dark:text-background">
                   Release result
                 </button>
               </div>
