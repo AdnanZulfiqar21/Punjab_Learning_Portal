@@ -40,6 +40,10 @@ export default function PracticePage({ searchParams }: PageProps<"/practice">) {
           <Link href="/practice/evidence" className="text-accent underline-offset-2 hover:underline">
             What you&apos;ve shown →
           </Link>
+          {" · "}
+          <Link href="/practice/plan" className="text-accent underline-offset-2 hover:underline">
+            Study plan →
+          </Link>
         </p>
       </div>
       <Suspense fallback={<SkeletonLines lines={6} label="Loading practice options" />}>

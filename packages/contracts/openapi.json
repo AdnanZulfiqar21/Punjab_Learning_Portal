@@ -8220,6 +8220,84 @@
         "title": "StatusOut",
         "type": "object"
       },
+      "StudyPlanOut": {
+        "properties": {
+          "assumptions": {
+            "additionalProperties": true,
+            "title": "Assumptions",
+            "type": "object"
+          },
+          "available_minutes": {
+            "title": "Available Minutes",
+            "type": "integer"
+          },
+          "daily_minutes": {
+            "title": "Daily Minutes",
+            "type": "integer"
+          },
+          "days": {
+            "title": "Days",
+            "type": "integer"
+          },
+          "feasible": {
+            "title": "Feasible",
+            "type": "boolean"
+          },
+          "required_minutes": {
+            "title": "Required Minutes",
+            "type": "integer"
+          },
+          "rules_version": {
+            "title": "Rules Version",
+            "type": "string"
+          },
+          "schedule": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Schedule",
+            "type": "array"
+          },
+          "scheduled_minutes": {
+            "title": "Scheduled Minutes",
+            "type": "integer"
+          },
+          "shortfall_minutes": {
+            "title": "Shortfall Minutes",
+            "type": "integer"
+          },
+          "target_date": {
+            "title": "Target Date",
+            "type": "string"
+          },
+          "today": {
+            "title": "Today",
+            "type": "string"
+          },
+          "unscheduled_topics": {
+            "title": "Unscheduled Topics",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "today",
+          "target_date",
+          "days",
+          "daily_minutes",
+          "required_minutes",
+          "available_minutes",
+          "shortfall_minutes",
+          "feasible",
+          "scheduled_minutes",
+          "unscheduled_topics",
+          "schedule",
+          "assumptions",
+          "rules_version"
+        ],
+        "title": "StudyPlanOut",
+        "type": "object"
+      },
       "SubjectInGrade": {
         "properties": {
           "books": {
@@ -12344,6 +12422,89 @@
         "tags": [
           "identity",
           "sessions"
+        ]
+      }
+    },
+    "/v1/me/study-plan": {
+      "get": {
+        "operationId": "my_study_plan_v1_me_study_plan_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "grade",
+            "required": true,
+            "schema": {
+              "maximum": 12,
+              "minimum": 11,
+              "title": "Grade",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "subject",
+            "required": true,
+            "schema": {
+              "maxLength": 40,
+              "minLength": 2,
+              "title": "Subject",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "target_date",
+            "required": true,
+            "schema": {
+              "format": "date",
+              "title": "Target Date",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "daily_minutes",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "maximum": 600,
+                  "minimum": 10,
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Daily Minutes"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StudyPlanOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "A time-budgeted plan for one book: shortfall shown honestly, weakest evidence first",
+        "tags": [
+          "practice"
         ]
       }
     },
