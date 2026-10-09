@@ -32,6 +32,13 @@ export default function PracticeScreen() {
       <ScrollView keyboardShouldPersistTaps="handled" contentContainerStyle={{ padding: Space.lg, paddingTop: TAB_SCREEN_TOP, gap: Space.lg }}>
         <T variant="title">Practice</T>
         <T variant="muted">Build a test from your textbook chapters. Only questions approved by an independent subject reviewer are used.</T>
+        {state.status === "signed_in" && (
+          <View style={{ flexDirection: "row", flexWrap: "wrap", gap: Space.sm }}>
+            <Button variant="link" label="Mock tests" onPress={() => router.push("/mocks")} />
+            <Button variant="link" label="Mistake notebook" onPress={() => router.push("/notebook")} />
+            <Button variant="link" label="Progress" onPress={() => router.push("/progress")} />
+          </View>
+        )}
         {state.status === "loading" && <Loading label="Checking your sign-in" />}
         {(state.status === "signed_out" || state.status === "unavailable") && (
           <View style={{ gap: Space.md }}>
