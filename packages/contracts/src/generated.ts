@@ -1600,6 +1600,40 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/support/tickets/{ticket_id}/attachments": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Add a screenshot (raw JPEG or PNG, at most 5 MB); it is validated and re-encoded in isolation */
+        post: operations["add_screenshot_v1_support_tickets__ticket_id__attachments_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/support/tickets/{ticket_id}/attachments/{attachment_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** A screenshot (owner or scoped staff) */
+        get: operations["get_screenshot_v1_support_tickets__ticket_id__attachments__attachment_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/support/tickets/{ticket_id}/messages": {
         parameters: {
             query?: never;
@@ -2114,6 +2148,25 @@ export interface components {
         AssignIn: {
             /** Reviewer Id */
             reviewer_id: string | null;
+        };
+        /** AttachmentOut */
+        AttachmentOut: {
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /** Height */
+            height: number;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Size */
+            size: number;
+            /** Width */
+            width: number;
         };
         /** AttemptOut */
         AttemptOut: {
@@ -4394,6 +4447,8 @@ export interface components {
         };
         /** StaffTicketOut */
         StaffTicketOut: {
+            /** Attachments */
+            attachments?: components["schemas"]["AttachmentOut"][];
             /**
              * Category
              * @enum {string}
@@ -4507,6 +4562,11 @@ export interface components {
         };
         /** TicketOut */
         TicketOut: {
+            /**
+             * Attachments
+             * @description Screenshots you added
+             */
+            attachments?: components["schemas"]["AttachmentOut"][];
             /**
              * Category
              * @enum {string}
@@ -8146,6 +8206,69 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["TicketOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    add_screenshot_v1_support_tickets__ticket_id__attachments_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                ticket_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AttachmentOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_screenshot_v1_support_tickets__ticket_id__attachments__attachment_id__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                ticket_id: string;
+                attachment_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": unknown;
                 };
             };
             /** @description Validation Error */

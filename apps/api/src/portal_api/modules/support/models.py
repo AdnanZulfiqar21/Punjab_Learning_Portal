@@ -10,7 +10,7 @@ import uuid
 from datetime import datetime
 from typing import Any
 
-from sqlalchemy import CheckConstraint, DateTime, ForeignKey, SmallInteger, String, Text, func
+from sqlalchemy import CheckConstraint, DateTime, ForeignKey, Integer, SmallInteger, String, Text, func
 from sqlalchemy.dialects.postgresql import JSONB, UUID
 from sqlalchemy.orm import Mapped, mapped_column
 
@@ -54,4 +54,22 @@ class SupportMessage(Base):
     from_staff: Mapped[bool] = mapped_column(default=False)
     internal: Mapped[bool] = mapped_column(default=False)  # staff-only note; never shown to the learner
     body: Mapped[str] = mapped_column(Text)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+
+
+class SupportAttachment(Base):
+    """A screenshot attached to a help request (P15.S3.T1). Quarantined by construction: the upload is decoded in the
+    isolated evidence worker and only its re-encoded PNG (no metadata, bounded size) is stored and ever served; the
+    original bytes are never kept. Visible to the request's owner and to staff who can see the request."""
+
+    __tablename__ = "support_attachment"
+    id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    ticket_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("support_ticket.id", ondelete="RESTRICT"), index=True)
+    uploaded_by: Mapped[uuid.UUID] = mapped_column(ForeignKey("app_user.id", ondelete="RESTRICT"))
+    storage_key: Mapped[str] = mapped_column(Text)
+    sha256: Mapped[str] = mapped_column(String(64))  # of the stored (re-encoded) PNG
+    original_sha256: Mapped[str] = mapped_column(String(64))  # of the upload, for duplicate detection only
+    size: Mapped[int] = mapped_column(Integer)
+    width: Mapped[int] = mapped_column(Integer)
+    height: Mapped[int] = mapped_column(Integer)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())

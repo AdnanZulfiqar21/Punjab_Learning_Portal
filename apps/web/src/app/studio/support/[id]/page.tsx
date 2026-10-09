@@ -7,6 +7,7 @@ import { Badge, Breadcrumbs, Notice, SkeletonLines } from "@/components/ui";
 import { CATEGORY_LABEL, STATUS_LABEL, statusTone } from "@/app/help/status";
 import { api } from "@/lib/session";
 import { requireSupportStaff, StudioForbiddenError } from "@/lib/studio";
+import { ScreenshotList } from "@/app/help/[id]/screenshots";
 import { EscalateBox, StaffReplyBox } from "./staff-reply-box";
 
 export const metadata: Metadata = { title: "Support request", robots: { index: false } };
@@ -81,6 +82,7 @@ async function Ticket({ id }: { id: string }) {
         {!ctx.learner && !ctx.question && <p className="text-muted">No extra context.</p>}
         {!ctx.learner && ctx.question && <p className="text-muted">The learner&apos;s identity is not shown to reviewers.</p>}
       </section>
+      <ScreenshotList ticketId={t.id} shots={t.attachments ?? []} />
       <ol className="space-y-3" aria-label="Conversation">
         {t.messages.map((m, i) => (
           <li key={i} className={`rounded-xl border p-3 ${m.internal ? "border-warn bg-warn-soft" : m.from_staff ? "border-accent bg-accent-soft" : "border-border bg-surface"}`}>

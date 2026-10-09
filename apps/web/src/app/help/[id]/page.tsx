@@ -6,6 +6,7 @@ import { Badge, Breadcrumbs, SkeletonLines } from "@/components/ui";
 import { api, currentUser } from "@/lib/session";
 import { STATUS_LABEL, statusTone } from "../status";
 import { ReplyBox } from "./reply-box";
+import { AddScreenshot, ScreenshotList } from "./screenshots";
 
 export const metadata: Metadata = { title: "Help request", robots: { index: false } };
 
@@ -45,6 +46,8 @@ async function Ticket({ id }: { id: string }) {
           </li>
         ))}
       </ol>
+      <ScreenshotList ticketId={t.id} shots={t.attachments ?? []} />
+      {t.status !== "resolved" && <AddScreenshot ticketId={t.id} remaining={5 - (t.attachments?.length ?? 0)} />}
       <ReplyBox id={t.id} />
     </div>
   );
