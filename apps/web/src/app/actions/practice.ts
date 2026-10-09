@@ -46,6 +46,16 @@ export async function createPractice(_prev: BuilderState, form: FormData): Promi
   redirect(`/practice/attempt/${attempt.data.id}`);
 }
 
+/** P09.S2: build a mock from the current published test pattern, start it and open the attempt. */
+export async function startMock(code: string, idempotencyKey: string): Promise<{ error?: string } | undefined> {
+  const t = await token("/practice/mocks");
+  const created = await api<PracticeForm>("/v1/mocks", { method: "POST", token: t, body: JSON.stringify({ code }), headers: { "Idempotency-Key": idempotencyKey } });
+  if (!created.ok) return { error: (created.problem as Problem | null)?.detail ?? "The mock couldn't be prepared." };
+  const attempt = await api<PracticeAttempt>(`/v1/practice/forms/${created.data.id}/attempt`, { method: "POST", token: t });
+  if (!attempt.ok) return { error: (attempt.problem as Problem | null)?.detail ?? "The mock was prepared but couldn't be started. Try again." };
+  redirect(`/practice/attempt/${attempt.data.id}`);
+}
+
 export type Op = { op_id: string; position: number; revision: number; option_id: string | null };
 
 export type SaveOutcome =

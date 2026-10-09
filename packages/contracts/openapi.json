@@ -4441,6 +4441,58 @@
         "title": "MessageOut",
         "type": "object"
       },
+      "MockIn": {
+        "properties": {
+          "code": {
+            "maxLength": 40,
+            "minLength": 2,
+            "title": "Code",
+            "type": "string"
+          }
+        },
+        "required": [
+          "code"
+        ],
+        "title": "MockIn",
+        "type": "object"
+      },
+      "MockReadinessOut": {
+        "properties": {
+          "code": {
+            "title": "Code",
+            "type": "string"
+          },
+          "ready": {
+            "title": "Ready",
+            "type": "boolean"
+          },
+          "scheduled": {
+            "title": "Scheduled",
+            "type": "boolean"
+          },
+          "sections": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Sections",
+            "type": "array"
+          },
+          "version": {
+            "title": "Version",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "code",
+          "version",
+          "sections",
+          "ready",
+          "scheduled"
+        ],
+        "title": "MockReadinessOut",
+        "type": "object"
+      },
       "NoticeDecisionIn": {
         "properties": {
           "accept": {
@@ -11498,6 +11550,102 @@
         "summary": "Remove a device from your trial",
         "tags": [
           "access"
+        ]
+      }
+    },
+    "/v1/mocks": {
+      "post": {
+        "operationId": "create_mock_v1_mocks_post",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "maxLength": 80,
+              "minLength": 8,
+              "title": "Idempotency-Key",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MockIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FormOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Build and freeze a mock from the current published version of a test pattern",
+        "tags": [
+          "practice"
+        ]
+      }
+    },
+    "/v1/mocks/{code}/readiness": {
+      "get": {
+        "operationId": "mock_readiness_v1_mocks__code__readiness_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "code",
+            "required": true,
+            "schema": {
+              "title": "Code",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MockReadinessOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Whether every section of a published test pattern has enough approved questions (counts only)",
+        "tags": [
+          "practice"
         ]
       }
     },

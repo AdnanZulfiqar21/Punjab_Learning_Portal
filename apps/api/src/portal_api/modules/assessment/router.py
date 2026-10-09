@@ -384,3 +384,47 @@ def published_exam_profiles(db: DB, who: CurrentPrincipal) -> list[PublishedProf
         )
         for p, v in profiles.published(db)
     ]
+
+
+# ------------------------------------------------------------------ mocks from published profiles (P09.S2/S3, MOCK-01)
+class MockIn(BaseModel):
+    code: str = Field(min_length=2, max_length=40)
+
+
+class MockReadinessOut(BaseModel):
+    code: str
+    version: int
+    sections: list[dict[str, Any]]
+    ready: bool
+    scheduled: bool
+
+
+@router.get(
+    "/mocks/{code}/readiness",
+    response_model=MockReadinessOut,
+    summary="Whether every section of a published test pattern has enough approved questions (counts only)",
+)
+def mock_readiness(db: DB, who: CurrentPrincipal, code: str) -> MockReadinessOut:
+    from portal_api.modules.assessment import mocks
+
+    return MockReadinessOut(**mocks.readiness(db, code))
+
+
+@router.post(
+    "/mocks",
+    response_model=FormOut,
+    status_code=201,
+    summary="Build and freeze a mock from the current published version of a test pattern",
+    dependencies=[Depends(operations.requires("new_practice_tests"))],
+)
+def create_mock(
+    db: DB,
+    who: CurrentPrincipal,
+    body: MockIn,
+    response: Response,
+    idempotency_key: Annotated[str, Header(alias="Idempotency-Key", min_length=8, max_length=80)],
+) -> FormOut:
+    from portal_api.modules.assessment import mocks
+
+    _private(response)
+    return _form_out(mocks.build(db, who, body.code, idempotency_key))
