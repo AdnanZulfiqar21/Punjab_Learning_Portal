@@ -569,6 +569,9 @@ def sweep_orphans(db: Session, older_than_s: int = 3600) -> list[str]:
 
     referenced = set(db.scalars(select(WrittenFile.storage_key)).all())
     referenced |= {k for k in db.scalars(select(WrittenPage.preview_key)).all() if k}
+    from portal_api.modules.support.models import SupportAttachment  # help screenshots share the private store
+
+    referenced |= set(db.scalars(select(SupportAttachment.storage_key)).all())
     store = storage.get_store()
     removed = []
     cutoff = time.time() - older_than_s

@@ -593,6 +593,41 @@
         "title": "AssignIn",
         "type": "object"
       },
+      "AttachmentOut": {
+        "properties": {
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "height": {
+            "title": "Height",
+            "type": "integer"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "size": {
+            "title": "Size",
+            "type": "integer"
+          },
+          "width": {
+            "title": "Width",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id",
+          "width",
+          "height",
+          "size",
+          "created_at"
+        ],
+        "title": "AttachmentOut",
+        "type": "object"
+      },
       "AttemptOut": {
         "properties": {
           "answers": {
@@ -6232,6 +6267,13 @@
       },
       "StaffTicketOut": {
         "properties": {
+          "attachments": {
+            "items": {
+              "$ref": "#/components/schemas/AttachmentOut"
+            },
+            "title": "Attachments",
+            "type": "array"
+          },
           "category": {
             "enum": [
               "account",
@@ -6506,6 +6548,14 @@
       },
       "TicketOut": {
         "properties": {
+          "attachments": {
+            "description": "Screenshots you added",
+            "items": {
+              "$ref": "#/components/schemas/AttachmentOut"
+            },
+            "title": "Attachments",
+            "type": "array"
+          },
           "category": {
             "enum": [
               "account",
@@ -12482,6 +12532,100 @@
           }
         },
         "summary": "One",
+        "tags": [
+          "support"
+        ]
+      }
+    },
+    "/v1/support/tickets/{ticket_id}/attachments": {
+      "post": {
+        "operationId": "add_screenshot_v1_support_tickets__ticket_id__attachments_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ticket_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Ticket Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AttachmentOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Add a screenshot (raw JPEG or PNG, at most 5 MB); it is validated and re-encoded in isolation",
+        "tags": [
+          "support"
+        ]
+      }
+    },
+    "/v1/support/tickets/{ticket_id}/attachments/{attachment_id}": {
+      "get": {
+        "operationId": "get_screenshot_v1_support_tickets__ticket_id__attachments__attachment_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ticket_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Ticket Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "attachment_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Attachment Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "A screenshot (owner or scoped staff)",
         "tags": [
           "support"
         ]

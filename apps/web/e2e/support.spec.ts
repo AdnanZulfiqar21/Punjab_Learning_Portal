@@ -3,6 +3,7 @@ import { expect, test, type Browser, type Page } from "@playwright/test";
 // Help requests, question reports and the staff support queue (P15.S3) with the development fixtures from
 // `portal-dev-seed-staff` and `portal-dev-seed-practice`. Every question here is a technical fixture.
 const AUTH = { timeout: 20_000 };
+const SHOT = "e2e/fixtures/synthetic-page.png";
 
 test.describe.configure({ mode: "serial" });
 test.skip(({ isMobile }) => isMobile, "Support journeys run on desktop");
@@ -40,10 +41,13 @@ test("a learner asks for help, staff reply, and internal notes stay internal", a
   await expect(page).toHaveURL(/:\d+\/help\/[0-9a-f-]{36}$/, AUTH);
   await expect(page.getByRole("heading", { name: subject })).toBeVisible();
   await expect(page.getByText("Waiting for us")).toBeVisible();
+  await page.getByLabel(/Add a screenshot/).setInputFiles(SHOT); // a synthetic fixture image
+  await expect(page.getByRole("img", { name: "Screenshot 1" })).toBeVisible(AUTH);
 
   const agent = await staff(browser, "studio-support@example.com", "/studio/support");
   await agent.getByRole("link", { name: subject }).click();
   await expect(agent.getByText(`Learner: ${email}`)).toBeVisible(AUTH); // support staff see minimal identity
+  await expect(agent.getByRole("img", { name: "Screenshot 1" })).toBeVisible(AUTH);
   await agent.getByLabel("Message to the learner or note").fill("Fixture internal note: checked the audit log.");
   await agent.getByLabel(/Internal note/).check();
   await agent.getByRole("button", { name: "Add note" }).click();

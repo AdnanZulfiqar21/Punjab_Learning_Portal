@@ -6,7 +6,7 @@ import uuid
 from datetime import datetime
 from typing import Annotated, Any, Literal
 
-from fastapi import APIRouter, Depends, Query, Response
+from fastapi import APIRouter, Depends, Query, Request, Response
 from pydantic import BaseModel, Field
 from sqlalchemy.orm import Session
 
@@ -64,6 +64,14 @@ class StaffMessageOut(MessageOut):
     internal: bool
 
 
+class AttachmentOut(BaseModel):
+    id: uuid.UUID
+    width: int
+    height: int
+    size: int
+    created_at: datetime
+
+
 class TicketOut(BaseModel):
     id: uuid.UUID
     category: Category
@@ -73,6 +81,7 @@ class TicketOut(BaseModel):
     created_at: datetime
     updated_at: datetime
     messages: list[MessageOut]
+    attachments: list[AttachmentOut] = Field(default_factory=list, description="Screenshots you added")
 
 
 class StaffTicketOut(BaseModel):
@@ -84,6 +93,7 @@ class StaffTicketOut(BaseModel):
     created_at: datetime
     updated_at: datetime
     messages: list[StaffMessageOut]
+    attachments: list[AttachmentOut] = Field(default_factory=list)
     context: dict[str, Any]
     escalated_at: datetime | None = None
     escalation_reason: str | None = None
@@ -104,7 +114,15 @@ def _learner_view(db: Session, t: SupportTicket) -> TicketOut:
         created_at=t.created_at,
         updated_at=t.updated_at,
         messages=[MessageOut(from_staff=m.from_staff, body=m.body, created_at=m.created_at) for m in msgs],
+        attachments=_attachments(db, t),
     )
+
+
+def _attachments(db: Session, t: SupportTicket) -> list[AttachmentOut]:
+    return [
+        AttachmentOut(id=a.id, width=a.width, height=a.height, size=a.size, created_at=a.created_at)
+        for a in service.attachments(db, t.id)
+    ]
 
 
 def _staff_view(db: Session, who: Principal, t: SupportTicket, *, with_context: bool = True) -> StaffTicketOut:
@@ -121,6 +139,7 @@ def _staff_view(db: Session, who: Principal, t: SupportTicket, *, with_context: 
             StaffMessageOut(from_staff=m.from_staff, internal=m.internal, body=m.body, created_at=m.created_at)
             for m in msgs
         ],
+        attachments=_attachments(db, t),
         context=service.context(db, who, t) if with_context else {},
         escalated_at=t.escalated_at,
         escalation_reason=t.escalation_reason,
@@ -199,3 +218,40 @@ def staff_reply(db: DB, who: Staff, ticket_id: uuid.UUID, body: StaffMessageIn, 
 def escalate(db: DB, who: Staff, ticket_id: uuid.UUID, body: EscalateIn, response: Response) -> StaffTicketOut:
     _private(response)
     return _staff_view(db, who, service.escalate(db, who, ticket_id, body.reason))
+
+
+@router.post(
+    "/support/tickets/{ticket_id}/attachments",
+    response_model=AttachmentOut,
+    status_code=201,
+    summary="Add a screenshot (raw JPEG or PNG, at most 5 MB); it is validated and re-encoded in isolation",
+)
+async def add_screenshot(
+    db: DB, who: CurrentPrincipal, ticket_id: uuid.UUID, request: Request, response: Response
+) -> AttachmentOut:
+    from starlette.concurrency import run_in_threadpool
+
+    from portal_api.errors import TooLarge
+
+    _private(response)
+    buf = bytearray()
+    async for chunk in request.stream():
+        buf.extend(chunk)
+        if len(buf) > service.MAX_SCREENSHOT_BYTES:
+            raise TooLarge("Screenshots can be at most 5 MB.")
+    a = await run_in_threadpool(service.add_screenshot, db, who, ticket_id, bytes(buf))
+    return AttachmentOut(id=a.id, width=a.width, height=a.height, size=a.size, created_at=a.created_at)
+
+
+@router.get("/support/tickets/{ticket_id}/attachments/{attachment_id}", summary="A screenshot (owner or scoped staff)")
+def get_screenshot(db: DB, who: CurrentPrincipal, ticket_id: uuid.UUID, attachment_id: uuid.UUID) -> Response:
+    data = service.screenshot_bytes(db, who, ticket_id, attachment_id)
+    return Response(
+        content=data,
+        media_type="image/png",
+        headers={
+            "Cache-Control": "private, no-store",
+            "X-Content-Type-Options": "nosniff",
+            "Content-Disposition": "inline",
+        },
+    )

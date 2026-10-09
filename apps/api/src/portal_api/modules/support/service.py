@@ -341,3 +341,106 @@ def escalate(db: Session, who: Principal, ticket_id: uuid.UUID, reason: str) -> 
     db.commit()
     db.refresh(t)
     return t
+
+
+# ------------------------------------------------------------------ screenshots (P15.S3.T1)
+MAX_SCREENSHOT_BYTES = 5 * 1024 * 1024
+MAX_ATTACHMENTS_PER_TICKET = 5
+MAX_ATTACHMENTS_PER_DAY = 10
+
+
+def add_screenshot(db: Session, who: Principal, ticket_id: uuid.UUID, data: bytes) -> Any:
+    """Validate a screenshot in the isolated worker and store only its re-encoded PNG. No database connection is held
+    while the file is decoded or stored."""
+    import hashlib
+
+    from sqlalchemy import func as sa_func
+    from sqlalchemy import text as sql
+
+    from portal_api.errors import TooLarge, TooMany
+    from portal_api.modules.support.models import SupportAttachment
+    from portal_api.modules.written import evidence, storage
+
+    t = own_ticket(db, who, ticket_id)
+    if t.status == "resolved":
+        raise Conflict("This request is resolved; open a new one to add screenshots.")
+    count = db.scalar(sa_func.count(SupportAttachment.id).select().where(SupportAttachment.ticket_id == t.id))
+    today = db.execute(
+        sql("select count(*) from support_attachment where uploaded_by = :u and created_at > now() - interval '1 day'"),
+        {"u": str(who.user.id)},
+    ).scalar()
+    db.rollback()  # no connection held while the file is decoded and stored
+    if (count or 0) >= MAX_ATTACHMENTS_PER_TICKET:
+        raise Conflict(f"A request can have at most {MAX_ATTACHMENTS_PER_TICKET} screenshots.")
+    if (today or 0) >= MAX_ATTACHMENTS_PER_DAY:
+        raise TooMany("You've added a lot of screenshots today. Please try again tomorrow.")
+    if len(data) > MAX_SCREENSHOT_BYTES:
+        raise TooLarge(f"Screenshots can be at most {MAX_SCREENSHOT_BYTES // (1024 * 1024)} MB.")
+    try:
+        if evidence.sniff(data) == "application/pdf":
+            raise evidence.Rejected("Attach a screenshot (JPEG or PNG), not a PDF.")
+        inspected = evidence.inspect(data)
+    except evidence.Rejected as e:
+        raise Unprocessable(e.reason, code_reason="SCREENSHOT_REJECTED") from None
+    page = inspected.pages[0]
+    attachment_id = uuid.uuid4()
+    store = storage.get_store()
+    stored = store.put(f"support/{t.id}/{attachment_id}.png", page.preview_png)
+    try:
+        row = SupportAttachment(
+            id=attachment_id,
+            ticket_id=t.id,
+            uploaded_by=who.user.id,
+            storage_key=stored.key,
+            sha256=stored.sha256,
+            original_sha256=hashlib.sha256(data).hexdigest(),
+            size=stored.size,
+            width=page.width,
+            height=page.height,
+        )
+        db.add(row)
+        t = own_ticket(db, who, ticket_id)
+        t.updated_at = _now(db)
+        record(
+            db,
+            actor=who.user.id,
+            action="support.screenshot_added",
+            target_type="support_ticket",
+            target_id=str(t.id),
+            details={"attachment": str(attachment_id), "size": stored.size},
+        )
+        db.commit()
+    except Exception:
+        db.rollback()
+        store.discard_uncommitted(stored.key)
+        raise
+    db.refresh(row)
+    return row
+
+
+def attachments(db: Session, ticket_id: uuid.UUID) -> list[Any]:
+    from portal_api.modules.support.models import SupportAttachment
+
+    return list(
+        db.scalars(
+            select(SupportAttachment)
+            .where(SupportAttachment.ticket_id == ticket_id)
+            .order_by(SupportAttachment.created_at, SupportAttachment.id)
+        )
+    )
+
+
+def screenshot_bytes(db: Session, who: Principal, ticket_id: uuid.UUID, attachment_id: uuid.UUID) -> bytes:
+    """The stored PNG, for the request's owner or for staff who can see the request."""
+    from portal_api.modules.support.models import SupportAttachment
+    from portal_api.modules.written import storage
+
+    t = db.get(SupportTicket, ticket_id)
+    if t is None:
+        raise NotFound("Request not found.")
+    if t.user_id != who.user.id:
+        staff_ticket(db, who, ticket_id)  # raises NotFound outside the caller's staff scope
+    a = db.get(SupportAttachment, attachment_id)
+    if a is None or a.ticket_id != t.id:
+        raise NotFound("Screenshot not found.")
+    return storage.get_store().get(a.storage_key)
