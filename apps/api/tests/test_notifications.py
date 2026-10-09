@@ -129,7 +129,7 @@ def test_delivery_sends_email_and_reports_push_honestly(client: TestClient) -> N
     _no_quiet(client, a)
     assert _emit(a, "support.reply", {"subject": "Fixture"}, "d1")
     with get_sessionmaker()() as db:
-        delivery.deliver_due(db)
+        delivery.deliver_due(db, limit=100_000)
     by = {d.channel: d for d in _deliveries(a)}
     assert by["email"].status == "sent" and (by["email"].provider_ref or "").startswith("dev-outbox:")
     assert by["push"].status == "skipped" and by["push"].last_error == "no registered device"
@@ -143,7 +143,7 @@ def test_delivery_sends_email_and_reports_push_honestly(client: TestClient) -> N
     )
     assert _emit(a, "support.reply", {"subject": "Fixture"}, "d2")
     with get_sessionmaker()() as db:
-        delivery.deliver_due(db)
+        delivery.deliver_due(db, limit=100_000)
     push = [d for d in _deliveries(a) if d.channel == "push"][-1]
     assert push.status == "unavailable" and "B07" in (push.last_error or "")
     assert client.delete("/v1/me/push-tokens", params={"token": token}, headers=a.headers).status_code == 204
@@ -165,7 +165,7 @@ def test_quiet_hours_defer_ordinary_notices_but_not_urgent_ones(client: TestClie
     assert _emit(a, "support.reply", {"subject": "Fixture"}, "q1")  # ordinary
     assert _emit(a, "written.action_required", {"question": 1, "deadline": "tomorrow"}, "q2")  # urgent
     with get_sessionmaker()() as db:
-        delivery.deliver_due(db)
+        delivery.deliver_due(db, limit=100_000)
     ds = _deliveries(a)
     ordinary = next(d for d in ds if not d.urgent)
     urgent = next(d for d in ds if d.urgent)
@@ -185,7 +185,7 @@ def test_retries_back_off_then_stop_and_bursts_are_capped(client: TestClient, mo
     for _ in range(delivery.MAX_ATTEMPTS):
         _due_now(a)
         with get_sessionmaker()() as db:
-            delivery.deliver_due(db)
+            delivery.deliver_due(db, limit=100_000)
     d = _deliveries(a)[0]
     assert (d.status, d.attempts) == ("failed", delivery.MAX_ATTEMPTS) and "provider down" in (d.last_error or "")
     monkeypatch.undo()
@@ -193,7 +193,7 @@ def test_retries_back_off_then_stop_and_bursts_are_capped(client: TestClient, mo
     for i in range(delivery.HOURLY_CAP + 3):
         assert _emit(a, "support.reply", {"subject": f"Fixture {i}"}, f"burst-{i}")
     with get_sessionmaker()() as db:
-        delivery.deliver_due(db)
+        delivery.deliver_due(db, limit=100_000)
     sent = [d for d in _deliveries(a) if d.status == "sent"]
     queued = [d for d in _deliveries(a) if d.status == "queued"]
     assert len(sent) == delivery.HOURLY_CAP and len(queued) == 3

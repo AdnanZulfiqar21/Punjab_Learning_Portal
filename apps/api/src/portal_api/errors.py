@@ -57,6 +57,13 @@ class TooLarge(AppError):
     code = "PAYLOAD_TOO_LARGE"
 
 
+class TooMany(AppError):
+    """A per-account limit was reached (abuse prevention, P15.S4.T2). Retry later."""
+
+    status = 429
+    code = "RATE_LIMITED"
+
+
 class Unprocessable(AppError):
     """The request is well-formed but breaks a domain rule (e.g. content fails publication validation)."""
 

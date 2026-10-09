@@ -1762,6 +1762,53 @@
         "title": "CriterionResult",
         "type": "object"
       },
+      "DeadLetterOut": {
+        "properties": {
+          "attempts": {
+            "title": "Attempts",
+            "type": "integer"
+          },
+          "channel": {
+            "title": "Channel",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "event": {
+            "title": "Event",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "last_error": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last Error"
+          }
+        },
+        "required": [
+          "id",
+          "channel",
+          "event",
+          "attempts",
+          "last_error",
+          "created_at"
+        ],
+        "title": "DeadLetterOut",
+        "type": "object"
+      },
       "DecisionIn": {
         "properties": {
           "awards": {
@@ -1937,6 +1984,21 @@
           "written_units"
         ],
         "title": "EntitlementOut",
+        "type": "object"
+      },
+      "EscalateIn": {
+        "properties": {
+          "reason": {
+            "maxLength": 1000,
+            "minLength": 10,
+            "title": "Reason",
+            "type": "string"
+          }
+        },
+        "required": [
+          "reason"
+        ],
+        "title": "EscalateIn",
         "type": "object"
       },
       "ExceptionIn": {
@@ -6191,6 +6253,29 @@
             "title": "Created At",
             "type": "string"
           },
+          "escalated_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Escalated At"
+          },
+          "escalation_reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Escalation Reason"
+          },
           "id": {
             "format": "uuid",
             "title": "Id",
@@ -6341,6 +6426,38 @@
           "reconciliation"
         ],
         "title": "SubmitOut",
+        "type": "object"
+      },
+      "SuppressionIn": {
+        "properties": {
+          "channel": {
+            "enum": [
+              "email",
+              "push",
+              "sms"
+            ],
+            "title": "Channel",
+            "type": "string"
+          },
+          "destination": {
+            "maxLength": 320,
+            "minLength": 3,
+            "title": "Destination",
+            "type": "string"
+          },
+          "reason": {
+            "maxLength": 500,
+            "minLength": 5,
+            "title": "Reason",
+            "type": "string"
+          }
+        },
+        "required": [
+          "channel",
+          "destination",
+          "reason"
+        ],
+        "title": "SuppressionIn",
         "type": "object"
       },
       "TicketIn": {
@@ -9470,6 +9587,221 @@
         ]
       }
     },
+    "/v1/ops/notifications/dead-letters": {
+      "get": {
+        "operationId": "dead_letters_v1_ops_notifications_dead_letters_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 50,
+              "maximum": 200,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/DeadLetterOut"
+                  },
+                  "title": "Response Dead Letters V1 Ops Notifications Dead Letters Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Dead Letters",
+        "tags": [
+          "notifications"
+        ]
+      }
+    },
+    "/v1/ops/notifications/deliveries/{delivery_id}/requeue": {
+      "post": {
+        "operationId": "requeue_v1_ops_notifications_deliveries__delivery_id__requeue_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "delivery_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Delivery Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Requeue",
+        "tags": [
+          "notifications"
+        ]
+      }
+    },
+    "/v1/ops/notifications/metrics": {
+      "get": {
+        "operationId": "delivery_metrics_v1_ops_notifications_metrics_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "days",
+            "required": false,
+            "schema": {
+              "default": 7,
+              "maximum": 90,
+              "minimum": 1,
+              "title": "Days",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Delivery Metrics V1 Ops Notifications Metrics Get",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Delivery outcomes per channel and inbox read counts",
+        "tags": [
+          "notifications"
+        ]
+      }
+    },
+    "/v1/ops/notifications/suppressions": {
+      "delete": {
+        "operationId": "remove_suppression_v1_ops_notifications_suppressions_delete",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "channel",
+            "required": true,
+            "schema": {
+              "enum": [
+                "email",
+                "push",
+                "sms"
+              ],
+              "title": "Channel",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "destination",
+            "required": true,
+            "schema": {
+              "maxLength": 320,
+              "minLength": 3,
+              "title": "Destination",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Remove Suppression",
+        "tags": [
+          "notifications"
+        ]
+      },
+      "post": {
+        "operationId": "add_suppression_v1_ops_notifications_suppressions_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SuppressionIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Stop sending to a destination (audited)",
+        "tags": [
+          "notifications"
+        ]
+      }
+    },
     "/v1/ops/written-backlog": {
       "get": {
         "operationId": "backlog_v1_ops_written_backlog_get",
@@ -9983,6 +10315,59 @@
           }
         },
         "summary": "Staff One",
+        "tags": [
+          "support"
+        ]
+      }
+    },
+    "/v1/staff/support/tickets/{ticket_id}/escalate": {
+      "post": {
+        "operationId": "escalate_v1_staff_support_tickets__ticket_id__escalate_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ticket_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Ticket Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EscalateIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StaffTicketOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Escalate for senior attention (staff note; audited; listed first)",
         "tags": [
           "support"
         ]

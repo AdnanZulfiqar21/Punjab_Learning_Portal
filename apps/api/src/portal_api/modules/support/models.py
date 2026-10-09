@@ -40,6 +40,10 @@ class SupportTicket(Base):
     subject_code: Mapped[str | None] = mapped_column(String(40))
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
     updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+    # P15.S4.T2: staff escalation (to a senior or academic lead), with who, when and why; shown first in the queue.
+    escalated_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    escalated_by: Mapped[uuid.UUID | None] = mapped_column(ForeignKey("app_user.id", ondelete="RESTRICT"))
+    escalation_reason: Mapped[str | None] = mapped_column(Text)
 
 
 class SupportMessage(Base):

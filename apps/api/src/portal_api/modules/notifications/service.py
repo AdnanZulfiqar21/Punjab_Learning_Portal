@@ -23,6 +23,7 @@ from portal_api.modules.notifications.models import (
     Notification,
     NotificationDelivery,
     NotificationPreference,
+    NotificationSuppression,
     PushToken,
 )
 from portal_api.modules.notifications.templates import render
@@ -181,3 +182,129 @@ def remove_push_token(db: Session, user_id: uuid.UUID, token: str) -> None:
     if row is not None and row.user_id == user_id:
         db.delete(row)
         db.commit()
+
+
+# ------------------------------------------------------------------ operations (P15.S4.T1)
+def destination_hash(destination: str) -> str:
+    import hashlib
+
+    return hashlib.sha256(destination.strip().lower().encode()).hexdigest()
+
+
+def is_suppressed(db: Session, channel: str, destination: str) -> bool:
+    return (
+        db.scalar(
+            select(NotificationSuppression.id).where(
+                NotificationSuppression.channel == channel,
+                NotificationSuppression.destination_hash == destination_hash(destination),
+            )
+        )
+        is not None
+    )
+
+
+def suppress(db: Session, actor: uuid.UUID, channel: str, destination: str, reason: str) -> None:
+    from portal_api.modules.audit.models import record
+
+    db.execute(
+        insert(NotificationSuppression)
+        .values(channel=channel, destination_hash=destination_hash(destination), reason=reason[:500], created_by=actor)
+        .on_conflict_do_nothing(constraint="uq_notification_suppression")
+    )
+    record(
+        db,
+        actor=actor,
+        action="notification.suppressed",
+        target_type="notification_suppression",
+        target_id=destination_hash(destination)[:16],
+        details={"channel": channel, "reason": reason[:200]},
+    )
+    db.commit()
+
+
+def unsuppress(db: Session, actor: uuid.UUID, channel: str, destination: str) -> None:
+    from portal_api.modules.audit.models import record
+
+    row = db.scalar(
+        select(NotificationSuppression).where(
+            NotificationSuppression.channel == channel,
+            NotificationSuppression.destination_hash == destination_hash(destination),
+        )
+    )
+    if row is None:
+        raise NotFound("That destination isn't suppressed.")
+    db.delete(row)
+    record(
+        db,
+        actor=actor,
+        action="notification.unsuppressed",
+        target_type="notification_suppression",
+        target_id=destination_hash(destination)[:16],
+        details={"channel": channel},
+    )
+    db.commit()
+
+
+def dead_letters(db: Session, limit: int) -> list[tuple[NotificationDelivery, Notification]]:
+    """Deliveries that stopped as failed (after their retries), newest first, for inspection and requeueing."""
+    rows = db.execute(
+        select(NotificationDelivery, Notification)
+        .join(Notification, Notification.id == NotificationDelivery.notification_id)
+        .where(NotificationDelivery.status == "failed")
+        .order_by(NotificationDelivery.created_at.desc())
+        .limit(limit)
+    ).all()
+    return [(d, n) for d, n in rows]
+
+
+def requeue(db: Session, actor: uuid.UUID, delivery_id: uuid.UUID) -> NotificationDelivery:
+    from portal_api.errors import Conflict
+    from portal_api.modules.audit.models import record
+
+    d = db.scalar(select(NotificationDelivery).where(NotificationDelivery.id == delivery_id).with_for_update())
+    if d is None:
+        raise NotFound("Delivery not found.")
+    if d.status != "failed":
+        raise Conflict("Only a failed delivery can be retried.")
+    d.status, d.attempts, d.last_error = "queued", 0, None
+    d.next_attempt_at = func.now()
+    record(
+        db,
+        actor=actor,
+        action="notification.requeued",
+        target_type="notification_delivery",
+        target_id=str(d.id),
+        details={"channel": d.channel},
+    )
+    db.commit()
+    db.refresh(d)
+    return d
+
+
+def metrics(db: Session, days: int) -> dict[str, Any]:
+    """Delivery outcomes per channel, measured separately from whether people read the in-app notice (P15.S4.T1)."""
+    from sqlalchemy import text as sql
+
+    since = {"d": days}
+    delivered = db.execute(
+        sql(
+            "select channel, status, count(*) from notification_delivery "
+            "where created_at > now() - make_interval(days => :d) group by 1, 2"
+        ),
+        since,
+    ).all()
+    read = db.execute(
+        sql(
+            "select event, count(*), count(read_at) from notification "
+            "where created_at > now() - make_interval(days => :d) group by 1 order by 1"
+        ),
+        since,
+    ).all()
+    by_channel: dict[str, dict[str, int]] = {}
+    for channel, status, n in delivered:
+        by_channel.setdefault(channel, {})[status] = int(n)
+    return {
+        "days": days,
+        "deliveries": by_channel,
+        "inbox": {event: {"created": int(c), "read": int(r)} for event, c, r in read},
+    }

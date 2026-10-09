@@ -47,6 +47,8 @@ def _send_email(db: Session, d: NotificationDelivery, n: Notification) -> Outcom
     user = db.get(AppUser, d.user_id)
     if user is None or not user.email:
         return Outcome("skipped", error="no email address on the account")
+    if service.is_suppressed(db, "email", user.email):
+        return Outcome("skipped", error="address suppressed (bounce, complaint or request)")
     # dev_outbox: development/test only (refused in staging/production by the configuration validator).
     log.info("dev email to=%s subject=%r", user.email, n.title)
     return Outcome("sent", ref=f"dev-outbox:{n.id}")

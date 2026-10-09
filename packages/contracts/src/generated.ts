@@ -624,6 +624,75 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/ops/notifications/dead-letters": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Dead Letters */
+        get: operations["dead_letters_v1_ops_notifications_dead_letters_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/ops/notifications/deliveries/{delivery_id}/requeue": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Requeue */
+        post: operations["requeue_v1_ops_notifications_deliveries__delivery_id__requeue_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/ops/notifications/metrics": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Delivery outcomes per channel and inbox read counts */
+        get: operations["delivery_metrics_v1_ops_notifications_metrics_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/ops/notifications/suppressions": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Stop sending to a destination (audited) */
+        post: operations["add_suppression_v1_ops_notifications_suppressions_post"];
+        /** Remove Suppression */
+        delete: operations["remove_suppression_v1_ops_notifications_suppressions_delete"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/ops/written-backlog": {
         parameters: {
             query?: never;
@@ -791,6 +860,23 @@ export interface paths {
         get: operations["staff_one_v1_staff_support_tickets__ticket_id__get"];
         put?: never;
         post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/staff/support/tickets/{ticket_id}/escalate": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Escalate for senior attention (staff note; audited; listed first) */
+        post: operations["escalate_v1_staff_support_tickets__ticket_id__escalate_post"];
         delete?: never;
         options?: never;
         head?: never;
@@ -2488,6 +2574,27 @@ export interface components {
             /** Subpart Id */
             subpart_id: string | null;
         };
+        /** DeadLetterOut */
+        DeadLetterOut: {
+            /** Attempts */
+            attempts: number;
+            /** Channel */
+            channel: string;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /** Event */
+            event: string;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Last Error */
+            last_error: string | null;
+        };
         /** DecisionIn */
         DecisionIn: {
             /**
@@ -2600,6 +2707,11 @@ export interface components {
             status: "active" | "revoked" | "refunded";
             /** Written Units */
             written_units: number;
+        };
+        /** EscalateIn */
+        EscalateIn: {
+            /** Reason */
+            reason: string;
         };
         /** ExceptionIn */
         ExceptionIn: {
@@ -4296,6 +4408,10 @@ export interface components {
              * Format: date-time
              */
             created_at: string;
+            /** Escalated At */
+            escalated_at?: string | null;
+            /** Escalation Reason */
+            escalation_reason?: string | null;
             /**
              * Id
              * Format: uuid
@@ -4363,6 +4479,18 @@ export interface components {
              * @description False when the attempt was finalised by another request or by expiry
              */
             same_request: boolean;
+        };
+        /** SuppressionIn */
+        SuppressionIn: {
+            /**
+             * Channel
+             * @enum {string}
+             */
+            channel: "email" | "push" | "sms";
+            /** Destination */
+            destination: string;
+            /** Reason */
+            reason: string;
         };
         /** TicketIn */
         TicketIn: {
@@ -6124,6 +6252,160 @@ export interface operations {
             };
         };
     };
+    dead_letters_v1_ops_notifications_dead_letters_get: {
+        parameters: {
+            query?: {
+                limit?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DeadLetterOut"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    requeue_v1_ops_notifications_deliveries__delivery_id__requeue_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                delivery_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    delivery_metrics_v1_ops_notifications_metrics_get: {
+        parameters: {
+            query?: {
+                days?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        [key: string]: unknown;
+                    };
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    add_suppression_v1_ops_notifications_suppressions_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SuppressionIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    remove_suppression_v1_ops_notifications_suppressions_delete: {
+        parameters: {
+            query: {
+                channel: "email" | "push" | "sms";
+                destination: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     backlog_v1_ops_written_backlog_get: {
         parameters: {
             query?: never;
@@ -6407,6 +6689,41 @@ export interface operations {
             cookie?: never;
         };
         requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StaffTicketOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    escalate_v1_staff_support_tickets__ticket_id__escalate_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                ticket_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["EscalateIn"];
+            };
+        };
         responses: {
             /** @description Successful Response */
             200: {

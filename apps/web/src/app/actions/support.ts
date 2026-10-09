@@ -54,6 +54,17 @@ export async function staffReply(id: string, body: string, internal: boolean, st
   return res.ok ? { ok: true } : { ok: false, error: detail(res.problem, "Couldn't send the reply.") };
 }
 
+/** P15.S4.T2: escalate a request for senior attention (a staff note; audited; listed first). */
+export async function escalateTicket(id: string, reason: string): Promise<{ ok: boolean; error?: string }> {
+  const t = await token(`/studio/support/${id}`);
+  const res = await api<StaffSupportTicket>(`/v1/staff/support/tickets/${encodeURIComponent(id)}/escalate`, {
+    method: "POST",
+    token: t,
+    body: JSON.stringify({ reason }),
+  });
+  return res.ok ? { ok: true } : { ok: false, error: detail(res.problem, "Couldn't escalate the request.") };
+}
+
 export async function requestRecheck(
   attemptId: string,
   positions: number[],

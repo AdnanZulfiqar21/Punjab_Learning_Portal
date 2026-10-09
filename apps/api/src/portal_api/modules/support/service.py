@@ -29,6 +29,9 @@ from portal_api.modules.support.models import SupportMessage, SupportTicket
 from portal_api.modules.written.models import WrittenAttempt, WrittenFormItem
 
 MAX_OPEN_TICKETS = 5
+# P15.S4.T2: per-account limits on the support channel (requests plus messages a learner sends).
+MAX_NEW_TICKETS_PER_DAY = 10
+MAX_LEARNER_MESSAGES_PER_HOUR = 20
 
 
 def _now(db: Session) -> datetime:
@@ -88,6 +91,7 @@ def create_ticket(
         .select_from(SupportTicket)
         .where(SupportTicket.user_id == who.user.id, SupportTicket.status != "resolved")
     )
+    _rate_limit(db, who)
     if (open_count or 0) >= MAX_OPEN_TICKETS:
         raise Conflict(f"You already have {MAX_OPEN_TICKETS} open requests. We'll reply to those first.")
     fields: dict[str, Any] = {"reference": {}}
@@ -137,8 +141,28 @@ def messages(db: Session, ticket: SupportTicket, *, include_internal: bool) -> l
     return list(db.scalars(stmt))
 
 
+def _rate_limit(db: Session, who: Principal) -> None:
+    """P15.S4.T2: a learner can open at most 10 requests a day and send at most 20 messages an hour."""
+    from sqlalchemy import text as sql
+
+    row = db.execute(
+        sql(
+            "select (select count(*) from support_ticket "
+            " where user_id = :u and created_at > now() - interval '1 day'), "
+            "(select count(*) from support_message m join support_ticket t on t.id = m.ticket_id "
+            " where m.author_id = :u and not m.from_staff and m.created_at > now() - interval '1 hour')"
+        ),
+        {"u": str(who.user.id)},
+    ).one()
+    if row[0] >= MAX_NEW_TICKETS_PER_DAY or row[1] >= MAX_LEARNER_MESSAGES_PER_HOUR:
+        from portal_api.errors import TooMany
+
+        raise TooMany("You've sent a lot of messages recently. Please wait a while before sending more.")
+
+
 def learner_reply(db: Session, who: Principal, ticket_id: uuid.UUID, body: str) -> SupportTicket:
     t = own_ticket(db, who, ticket_id)
+    _rate_limit(db, who)
     now = _now(db)
     db.add(SupportMessage(ticket_id=t.id, author_id=who.user.id, from_staff=False, body=body.strip(), created_at=now))
     if t.status in ("waiting_learner", "resolved"):
@@ -184,7 +208,12 @@ def _reviewer_scope_clause(db: Session, who: Principal) -> Any:
 
 
 def staff_queue(db: Session, who: Principal, *, status: str | None, category: str | None) -> list[SupportTicket]:
-    stmt = select(SupportTicket).order_by(SupportTicket.updated_at.desc()).limit(200)
+    # Escalated requests first (P15.S4.T2), then the most recently active.
+    stmt = (
+        select(SupportTicket)
+        .order_by(SupportTicket.escalated_at.desc().nulls_last(), SupportTicket.updated_at.desc())
+        .limit(200)
+    )
     if not _is_support(who):
         stmt = stmt.where(_reviewer_scope_clause(db, who))
     if status:
@@ -251,6 +280,7 @@ def staff_reply(
     db: Session, who: Principal, ticket_id: uuid.UUID, body: str, *, internal: bool, status: str | None
 ) -> SupportTicket:
     t = staff_ticket(db, who, ticket_id)
+    was = t.status
     now = _now(db)
     db.add(
         SupportMessage(
@@ -266,12 +296,14 @@ def staff_reply(
         from portal_api.modules.notifications import service as notifications
 
         db.flush()
+        # P15.S3.T2: a resolution (including of an academic report) is announced once; a reply otherwise.
+        resolved = t.status == "resolved" and was != "resolved"
         notifications.notify(
             db,
             t.user_id,
-            "support.reply",
+            "support.resolved" if resolved else "support.reply",
             {"subject": t.subject},
-            dedupe_key=f"support-reply:{t.id}:{now.isoformat()}",
+            dedupe_key=f"support-{'resolved' if resolved else 'reply'}:{t.id}:{now.isoformat()}",
             link=f"/help/{t.id}",
         )
     record(
@@ -281,6 +313,30 @@ def staff_reply(
         target_type="support_ticket",
         target_id=str(t.id),
         details={"status": t.status},
+    )
+    db.commit()
+    db.refresh(t)
+    return t
+
+
+def escalate(db: Session, who: Principal, ticket_id: uuid.UUID, reason: str) -> SupportTicket:
+    """P15.S4.T2: mark a request for senior attention. Audited; shown first in the queue; the learner isn't told
+    (the reason is a staff note)."""
+    if len(reason.strip()) < 10:
+        raise Unprocessable("Say why this request needs escalating (10+ characters).")
+    t = staff_ticket(db, who, ticket_id)
+    if t.escalated_at is not None:
+        raise Conflict("This request is already escalated.")
+    now = _now(db)
+    t.escalated_at, t.escalated_by, t.escalation_reason = now, who.user.id, reason.strip()[:1000]
+    t.updated_at = now
+    record(
+        db,
+        actor=who.user.id,
+        action="support.escalated",
+        target_type="support_ticket",
+        target_id=str(t.id),
+        details={"reason": reason.strip()[:200]},
     )
     db.commit()
     db.refresh(t)
