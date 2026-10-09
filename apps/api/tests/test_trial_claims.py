@@ -218,6 +218,38 @@ def test_a_support_reviewer_can_issue_a_bounded_shared_device_exception(client: 
     assert any(d["method"] == "exception" for d in devices) and _grants(who) == 1
 
 
+def test_a_reviewed_exception_lets_a_new_account_claim_on_a_second_hand_device(client: TestClient) -> None:
+    """P15.S4.T3 rehearsal finding: a falsely blocked new account (second-hand phone) appeals; the reviewer's
+    account-scoped exception (§16.7) lets the next claim grant the trial without clearing the device marker."""
+    who, install = _user(client), _install()
+    blocked = _claim(client, who, install, verdict="consumed").json()
+    assert blocked["claim_status"] == "CLOSED_INELIGIBLE" and _grants(who) == 0
+    with get_sessionmaker()() as db:
+        email = db.execute(text("select email from app_user where id = :u"), {"u": str(who.id)}).scalar()
+    reviewer = _user(client, ["support"], mfa=True)
+    body = {"email": email, "surface": "android", "days": 7, "reason": "Fixture: second-hand phone, receipt seen"}
+    assert client.post("/v1/staff/trial/exceptions", headers=reviewer.headers, json=body).status_code == 201
+    other_surface = _user(client)
+    assert _claim(client, other_surface, _install(), verdict="consumed").json()["state"] == "device_used"
+    granted = _claim(client, who, install, verdict="consumed").json()  # a new claim after the review
+    assert granted["state"] == "granted" and _grants(who) == 1, granted
+    devices = client.get("/v1/me/trial/devices", headers=who.headers).json()
+    assert [d["method"] for d in devices] == ["exception"]
+    with get_sessionmaker()() as db:
+        reasons = (
+            db.execute(
+                text(
+                    "select e.reason from trial_claim_event e join trial_claim c on c.id = e.claim_id "
+                    "where c.user_id = :u order by e.at"
+                ),
+                {"u": str(who.id)},
+            )
+            .scalars()
+            .all()
+        )
+    assert any("exception" in r for r in reasons)  # the decision trail shows why this claim was allowed
+
+
 def test_prior_paid_customers_get_no_claim(client: TestClient) -> None:
     who = _user(client)
     with get_sessionmaker()() as db:
