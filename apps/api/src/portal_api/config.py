@@ -70,6 +70,9 @@ class Settings(BaseSettings):
     # Notifications (P15.S1). "dev_outbox" records rendered email locally (development/test only); "none" leaves email
     # deliveries visibly unavailable until an approved sender exists (BLOCKERS B04). Push has no provider until B07.
     notification_email_adapter: Literal["dev_outbox", "none"] = "dev_outbox"
+    # Automatic written assessment (W05). "none" until a qualified provider is approved (BLOCKERS B10); "fixture" is a
+    # deterministic technical fixture for development/test only.
+    written_assessor: Literal["none", "fixture"] = "none"
 
     @model_validator(mode="after")
     def _validate_role(self) -> Settings:
@@ -99,6 +102,8 @@ class Settings(BaseSettings):
                 problems.append("trial_device_evidence must be set explicitly (required or fallback; roadmap §16)")
             if self.notification_email_adapter == "dev_outbox":
                 problems.append("notification_email_adapter dev_outbox is development/test only")
+            if self.written_assessor == "fixture":
+                problems.append("written_assessor fixture is development/test only")
             if self.trial_ref_pepper.startswith("dev-only"):
                 problems.append("trial_ref_pepper must be a deployment secret")
             if problems:

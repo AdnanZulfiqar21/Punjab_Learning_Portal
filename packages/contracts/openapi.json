@@ -10555,6 +10555,65 @@
         ]
       }
     },
+    "/v1/ops/written/auto-assessments": {
+      "get": {
+        "operationId": "auto_assessments_v1_ops_written_auto_assessments_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Auto Assessments V1 Ops Written Auto Assessments Get",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Automatic-assessment job status and dead letters (operators)",
+        "tags": [
+          "notifications"
+        ]
+      }
+    },
+    "/v1/ops/written/auto-assessments/{job_id}/requeue": {
+      "post": {
+        "operationId": "requeue_auto_assessment_v1_ops_written_auto_assessments__job_id__requeue_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "job_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Job Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Requeue a failed job",
+        "tags": [
+          "notifications"
+        ]
+      }
+    },
     "/v1/practice/availability": {
       "get": {
         "operationId": "availability_v1_practice_availability_get",
