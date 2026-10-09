@@ -91,3 +91,11 @@ test("sign-in ignores off-site return addresses", async ({ page }) => {
   await register(page, newEmail("redirect-safe"), "//evil.example.com/");
   await expect(page).toHaveURL(/localhost:\d+\/account$/, AUTH);
 });
+
+for (const sneaky of ["/\t/evil.example.com/", "/\n/evil.example.com/", "/\\evil.example.com/", " //evil.example.com/"]) {
+  test(`sign-in ignores a disguised off-site return address (${JSON.stringify(sneaky)})`, async ({ page }) => {
+    // Browsers drop tabs and newlines inside URLs and treat backslashes as slashes, so these become //evil… .
+    await register(page, newEmail("redirect-sneaky"), sneaky);
+    await expect(page).toHaveURL(/localhost:\d+\/account$/, AUTH);
+  });
+}
