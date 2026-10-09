@@ -750,6 +750,7 @@ def my_evidence(
     subject: Annotated[str, Query(min_length=2, max_length=40)],
 ) -> EvidenceReport:
     from portal_api.modules.assessment import evidence
+    from portal_api.modules.content import completion
     from portal_api.modules.curriculum.models import Topic
 
     _private(response)
@@ -799,8 +800,8 @@ def my_evidence(
             "definition": "Unavailable until verified exam outcomes are mapped (B02).",
         },
         "content_completed": {
-            "value": None,
-            "definition": "Unavailable: lesson completion isn't recorded yet.",
+            "value": completion.meter(db, who.user.id, [c.id for c in chapters]),
+            "definition": "Completed published lessons / published lessons in this book (unavailable if none).",
         },
     }
     return EvidenceReport(
