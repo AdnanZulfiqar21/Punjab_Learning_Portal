@@ -220,7 +220,10 @@ def _finalise(
         included_ops=[{"op_id": str(r["op_id"]), "disposition": r["disposition"]} for r in results],
     )
     db.add(receipt)
-    _score(db, attempt, form, answers, reason=f"finalised ({reason})")
+    sv = _score(db, attempt, form, answers, reason=f"finalised ({reason})")
+    from portal_api.modules.assessment import notebook
+
+    notebook.record(db, attempt, form, sv.items, now)  # P12.S3: wrong answers join the mistake notebook
     record(
         db,
         actor=actor,

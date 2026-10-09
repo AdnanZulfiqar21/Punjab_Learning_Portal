@@ -580,3 +580,91 @@ def join_mock_session(db: DB, who: CurrentPrincipal, session_id: uuid.UUID, resp
 
     _private(response)
     return JoinOut(attempt_id=sessions.join(db, who, session_id))
+
+
+# ------------------------------------------------------------------ mistake notebook and review (P12.S3, NOTEBOOK-01)
+class NotebookEntryOut(BaseModel):
+    id: uuid.UUID
+    grade: int
+    subject: str
+    status: Literal["open", "mastered", "voided"]
+    note: str
+    misses: int
+    due_at: datetime
+    due: bool
+    why: str
+    source_attempt_id: uuid.UUID
+    position: int
+    stem: list[dict[str, Any]]
+
+
+class NoteIn(BaseModel):
+    note: str = Field(max_length=2000)
+
+
+class ReviewIn(BaseModel):
+    grade: Literal[11, 12]
+    subject: str = Field(min_length=2, max_length=40)
+    count: int = Field(default=10, ge=1, le=20)
+
+
+def _entry_out(db: Session, e: Any, now: datetime) -> NotebookEntryOut:
+    from portal_api.modules.assessment import notebook
+    from portal_api.modules.content.models import ContentVersion
+
+    v = db.get(ContentVersion, e.version_id)
+    return NotebookEntryOut(
+        id=e.id,
+        grade=e.grade_number,
+        subject=e.subject_code,
+        status=e.status,
+        note=e.note,
+        misses=e.misses,
+        due_at=e.due_at,
+        due=e.status == "open" and e.due_at <= now,
+        why=notebook.why(e, now),
+        source_attempt_id=e.source_attempt_id,
+        position=e.position,
+        stem=(v.body.get("stem") or []) if v else [],
+    )
+
+
+@router.get("/me/notebook", response_model=list[NotebookEntryOut], summary="Your mistake notebook, due entries first")
+def my_notebook(db: DB, who: CurrentPrincipal, response: Response) -> list[NotebookEntryOut]:
+    from portal_api.modules.assessment import notebook
+
+    _private(response)
+    now = db.execute(select(func.now())).scalar_one()
+    return [_entry_out(db, e, now) for e in notebook.entries(db, who.user.id)]
+
+
+@router.put("/me/notebook/{entry_id}", response_model=NotebookEntryOut, summary="Add or change your private note")
+def note_entry(db: DB, who: CurrentPrincipal, entry_id: uuid.UUID, body: NoteIn) -> NotebookEntryOut:
+    from portal_api.modules.assessment import notebook
+
+    e = notebook.set_note(db, who.user.id, entry_id, body.note)
+    return _entry_out(db, e, db.execute(select(func.now())).scalar_one())
+
+
+@router.post(
+    "/me/notebook/review",
+    response_model=FormOut,
+    status_code=201,
+    summary="Build a review test from due notebook entries (spaced 1/3/7/14 days)",
+    dependencies=[Depends(operations.requires("new_practice_tests"))],
+)
+def review_test(
+    db: DB,
+    who: CurrentPrincipal,
+    body: ReviewIn,
+    response: Response,
+    idempotency_key: Annotated[str, Header(alias="Idempotency-Key", min_length=8, max_length=80)],
+) -> FormOut:
+    from portal_api.modules.assessment import notebook
+
+    _private(response)
+    return _form_out(
+        notebook.build_review(
+            db, who, grade=body.grade, subject=body.subject, count=body.count, idempotency_key=idempotency_key
+        )
+    )

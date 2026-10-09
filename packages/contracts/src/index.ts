@@ -73,6 +73,7 @@ export type ExamProfileAdmin = S["ExamProfileOut"];
 export type PublishedExamProfile = S["PublishedProfileOut"];
 export type MockReadiness = S["MockReadinessOut"];
 export type MockSession = S["MockSessionOut"];
+export type NotebookEntry = S["NotebookEntryOut"];
 export type RecheckState = S["RecheckOut"];
 export type LinkedForm = S["LinkedFormOut"];
 export type LinkedAttempt = S["LinkedAttemptOut"];

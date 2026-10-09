@@ -588,6 +588,57 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/me/notebook": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Your mistake notebook, due entries first */
+        get: operations["my_notebook_v1_me_notebook_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/me/notebook/review": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Build a review test from due notebook entries (spaced 1/3/7/14 days) */
+        post: operations["review_test_v1_me_notebook_review_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/me/notebook/{entry_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** Add or change your private note */
+        put: operations["note_entry_v1_me_notebook__entry_id__put"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/me/notification-preferences": {
         parameters: {
             query?: never;
@@ -4570,6 +4621,52 @@ export interface components {
              */
             window_closes_at: string;
         };
+        /** NoteIn */
+        NoteIn: {
+            /** Note */
+            note: string;
+        };
+        /** NotebookEntryOut */
+        NotebookEntryOut: {
+            /** Due */
+            due: boolean;
+            /**
+             * Due At
+             * Format: date-time
+             */
+            due_at: string;
+            /** Grade */
+            grade: number;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Misses */
+            misses: number;
+            /** Note */
+            note: string;
+            /** Position */
+            position: number;
+            /**
+             * Source Attempt Id
+             * Format: uuid
+             */
+            source_attempt_id: string;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "open" | "mastered" | "voided";
+            /** Stem */
+            stem: {
+                [key: string]: unknown;
+            }[];
+            /** Subject */
+            subject: string;
+            /** Why */
+            why: string;
+        };
         /** NoticeDecisionIn */
         NoticeDecisionIn: {
             /** Accept */
@@ -5279,23 +5376,6 @@ export interface components {
             };
             /** Position */
             position: number;
-        };
-        /** ReviewIn */
-        ReviewIn: {
-            /**
-             * Checklist
-             * @description Checks confirmed by the reviewer; questions require every check to approve
-             */
-            checklist?: {
-                [key: string]: boolean;
-            };
-            /** Comment */
-            comment: string;
-            /**
-             * Decision
-             * @enum {string}
-             */
-            decision: "approve" | "request_changes";
         };
         /** ReviewOut */
         ReviewOut: {
@@ -6496,6 +6576,21 @@ export interface components {
             /** Reason */
             reason: string;
         };
+        /** ReviewIn */
+        portal_api__modules__assessment__router__ReviewIn: {
+            /**
+             * Count
+             * @default 10
+             */
+            count: number;
+            /**
+             * Grade
+             * @enum {integer}
+             */
+            grade: 11 | 12;
+            /** Subject */
+            subject: string;
+        };
         /** SubmitIn */
         portal_api__modules__assessment__schemas__SubmitIn: {
             /** Idempotency Key */
@@ -6520,6 +6615,23 @@ export interface components {
             }[];
             /** Title */
             title?: string | null;
+        };
+        /** ReviewIn */
+        portal_api__modules__content__schemas__ReviewIn: {
+            /**
+             * Checklist
+             * @description Checks confirmed by the reviewer; questions require every check to approve
+             */
+            checklist?: {
+                [key: string]: boolean;
+            };
+            /** Comment */
+            comment: string;
+            /**
+             * Decision
+             * @enum {string}
+             */
+            decision: "approve" | "request_changes";
         };
         /** SubmitIn */
         portal_api__modules__content__schemas__SubmitIn: {
@@ -7644,6 +7756,96 @@ export interface operations {
                     "application/json": {
                         [key: string]: string;
                     };
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    my_notebook_v1_me_notebook_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NotebookEntryOut"][];
+                };
+            };
+        };
+    };
+    review_test_v1_me_notebook_review_post: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["portal_api__modules__assessment__router__ReviewIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["FormOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    note_entry_v1_me_notebook__entry_id__put: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                entry_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["NoteIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NotebookEntryOut"];
                 };
             };
             /** @description Validation Error */
@@ -9977,7 +10179,7 @@ export interface operations {
         };
         requestBody: {
             content: {
-                "application/json": components["schemas"]["ReviewIn"];
+                "application/json": components["schemas"]["portal_api__modules__content__schemas__ReviewIn"];
             };
         };
         responses: {
