@@ -60,6 +60,7 @@ async function Queue({ status }: { status: string }) {
                 </p>
               </div>
               <Badge tone={statusTone(t.status)}>{STATUS_LABEL[t.status]}</Badge>
+              {t.escalated_at && <Badge tone="warn">Escalated</Badge>}
             </li>
           ))}
         </ul>

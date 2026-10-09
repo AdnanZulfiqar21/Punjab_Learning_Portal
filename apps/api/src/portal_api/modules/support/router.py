@@ -85,6 +85,12 @@ class StaffTicketOut(BaseModel):
     updated_at: datetime
     messages: list[StaffMessageOut]
     context: dict[str, Any]
+    escalated_at: datetime | None = None
+    escalation_reason: str | None = None
+
+
+class EscalateIn(BaseModel):
+    reason: str = Field(min_length=10, max_length=1000)
 
 
 def _learner_view(db: Session, t: SupportTicket) -> TicketOut:
@@ -116,6 +122,8 @@ def _staff_view(db: Session, who: Principal, t: SupportTicket, *, with_context: 
             for m in msgs
         ],
         context=service.context(db, who, t) if with_context else {},
+        escalated_at=t.escalated_at,
+        escalation_reason=t.escalation_reason,
     )
 
 
@@ -181,3 +189,13 @@ def staff_reply(db: DB, who: Staff, ticket_id: uuid.UUID, body: StaffMessageIn, 
     _private(response)
     t = service.staff_reply(db, who, ticket_id, body.body, internal=body.internal, status=body.status)
     return _staff_view(db, who, t)
+
+
+@router.post(
+    "/staff/support/tickets/{ticket_id}/escalate",
+    response_model=StaffTicketOut,
+    summary="Escalate for senior attention (staff note; audited; listed first)",
+)
+def escalate(db: DB, who: Staff, ticket_id: uuid.UUID, body: EscalateIn, response: Response) -> StaffTicketOut:
+    _private(response)
+    return _staff_view(db, who, service.escalate(db, who, ticket_id, body.reason))

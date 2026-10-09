@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
-import { staffReply } from "@/app/actions/support";
+import { escalateTicket, staffReply } from "@/app/actions/support";
 import { STATUS_LABEL } from "@/app/help/status";
 
 export function StaffReplyBox({ id, status }: { id: string; status: string }) {
@@ -63,5 +63,42 @@ export function StaffReplyBox({ id, status }: { id: string; status: string }) {
         {pending ? "Sending…" : internal ? "Add note" : "Send reply"}
       </button>
     </div>
+  );
+}
+
+
+// P15.S4.T2: escalate for senior attention with a reason (staff only; the learner isn't shown it).
+export function EscalateBox({ id }: { id: string }) {
+  const router = useRouter();
+  const [reason, setReason] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const [busy, setBusy] = useState(false);
+  return (
+    <details className="rounded-xl border border-border bg-surface p-3 text-sm">
+      <summary className="cursor-pointer font-medium">Escalate</summary>
+      <label className="mt-2 block space-y-1">
+        <span className="block">Why does this need senior attention?</span>
+        <textarea value={reason} onChange={(e) => setReason(e.target.value)} rows={3} maxLength={1000} className="w-full rounded border border-border bg-surface px-2 py-1" />
+      </label>
+      {error && (
+        <p role="alert" className="text-danger">
+          {error}
+        </p>
+      )}
+      <button
+        type="button"
+        disabled={busy || reason.trim().length < 10}
+        onClick={async () => {
+          setBusy(true);
+          const out = await escalateTicket(id, reason.trim());
+          setBusy(false);
+          if (out.ok) router.refresh();
+          else setError(out.error ?? "Couldn't escalate.");
+        }}
+        className="mt-2 rounded-lg border border-border px-3 py-1.5 font-medium disabled:opacity-60"
+      >
+        Escalate request
+      </button>
+    </details>
   );
 }

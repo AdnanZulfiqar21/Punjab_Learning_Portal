@@ -7,7 +7,7 @@ import { Badge, Breadcrumbs, Notice, SkeletonLines } from "@/components/ui";
 import { CATEGORY_LABEL, STATUS_LABEL, statusTone } from "@/app/help/status";
 import { api } from "@/lib/session";
 import { requireSupportStaff, StudioForbiddenError } from "@/lib/studio";
-import { StaffReplyBox } from "./staff-reply-box";
+import { EscalateBox, StaffReplyBox } from "./staff-reply-box";
 
 export const metadata: Metadata = { title: "Support request", robots: { index: false } };
 
@@ -55,6 +55,7 @@ async function Ticket({ id }: { id: string }) {
           </p>
         </div>
         <Badge tone={statusTone(t.status)}>{STATUS_LABEL[t.status]}</Badge>
+        {t.escalated_at && <Badge tone="warn">Escalated</Badge>}
       </div>
       <section aria-labelledby="ctx-h" className="space-y-1 rounded-xl border border-border bg-surface-muted p-4 text-sm">
         <h2 id="ctx-h" className="font-semibold">
@@ -90,6 +91,13 @@ async function Ticket({ id }: { id: string }) {
           </li>
         ))}
       </ol>
+      {t.escalated_at ? (
+        <Notice tone="warn" title="Escalated">
+          {t.escalation_reason}
+        </Notice>
+      ) : (
+        <EscalateBox id={t.id} />
+      )}
       <StaffReplyBox id={t.id} status={t.status} />
     </div>
   );

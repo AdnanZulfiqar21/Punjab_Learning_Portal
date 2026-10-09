@@ -83,6 +83,14 @@ TEMPLATES: dict[str, Template] = {
         "Reply to your help request",
         "Support replied to “{subject}”.",
     ),
+    "support.resolved": Template(
+        "service",
+        ("email", "push"),
+        False,
+        ("subject",),
+        "Your help request was resolved",
+        "Your help request \u201c{subject}\u201d was resolved. Reply if you still need help.",
+    ),
     # Schedule-driven (emitters land with their features)
     "mock.reminder": Template(
         "reminder", ("email", "push"), False, ("mock", "starts"), "Mock test reminder", "{mock} starts at {starts}."

@@ -90,6 +90,23 @@ class NotificationPreference(Base):
     updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
 
 
+class NotificationSuppression(Base):
+    """A destination that must not be sent to (P15.S4.T1): a bounced or complained address, or a user's request.
+    Stored as a SHA-256 of the normalised destination, never the address itself."""
+
+    __tablename__ = "notification_suppression"
+    __table_args__ = (
+        UniqueConstraint("channel", "destination_hash", name="uq_notification_suppression"),
+        CheckConstraint("channel in ('email','push','sms')", name="notification_suppression_channel"),
+    )
+    id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    channel: Mapped[str] = mapped_column(String(8))
+    destination_hash: Mapped[str] = mapped_column(String(64))
+    reason: Mapped[str] = mapped_column(Text)
+    created_by: Mapped[uuid.UUID | None] = mapped_column(ForeignKey("app_user.id", ondelete="RESTRICT"))
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+
+
 class PushToken(Base):
     """A device's push address (Expo push token). Registered by the native app; one row per token."""
 

@@ -219,7 +219,7 @@ def search(db: Session, q: str, locale: str, limit: int) -> list[tuple[HelpArtic
         stmt = stmt.where(doc.op("@@")(query)).order_by(func.ts_rank(doc, query).desc(), HelpArticleVersion.title)
     else:
         stmt = stmt.order_by(HelpArticleVersion.title)
-    return [(a, v) for a, v in db.execute(stmt.limit(limit)).tuples()]
+    return [(a, v) for a, v in db.execute(stmt.limit(limit)).all()]
 
 
 def read(db: Session, slug: str, locale: str) -> tuple[HelpArticle, HelpArticleVersion, bool]:

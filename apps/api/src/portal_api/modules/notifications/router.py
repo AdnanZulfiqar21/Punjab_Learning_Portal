@@ -4,17 +4,19 @@ from __future__ import annotations
 
 import uuid
 from datetime import datetime
-from typing import Annotated, Literal
+from typing import Annotated, Any, Literal
 
 from fastapi import APIRouter, Depends, Query, Response
 from pydantic import BaseModel, Field
 from sqlalchemy.orm import Session
 
 from portal_api.db import get_session
-from portal_api.modules.identity.deps import CurrentPrincipal
+from portal_api.modules.identity.deps import CurrentPrincipal, Principal, require
+from portal_api.modules.identity.permissions import Permission
 from portal_api.modules.notifications import service
 
 router = APIRouter(prefix="/v1", tags=["notifications"])
+Operator = Annotated[Principal, Depends(require(Permission.operate_platform))]
 DB = Annotated[Session, Depends(get_session)]
 
 
@@ -125,3 +127,68 @@ def add_push_token(db: DB, who: CurrentPrincipal, body: PushTokenIn) -> Response
 def delete_push_token(db: DB, who: CurrentPrincipal, token: Annotated[str, Query(max_length=200)]) -> Response:
     service.remove_push_token(db, who.user.id, token)
     return Response(status_code=204, headers={"Cache-Control": "private, no-store"})
+
+
+# ------------------------------------------------------------------ operations (P15.S4.T1; operators with MFA)
+class SuppressionIn(BaseModel):
+    channel: Literal["email", "push", "sms"]
+    destination: str = Field(min_length=3, max_length=320)
+    reason: str = Field(min_length=5, max_length=500)
+
+
+class DeadLetterOut(BaseModel):
+    id: uuid.UUID
+    channel: str
+    event: str
+    attempts: int
+    last_error: str | None
+    created_at: datetime
+
+
+@router.get("/ops/notifications/dead-letters", response_model=list[DeadLetterOut])
+def dead_letters(
+    db: DB, who: Operator, response: Response, limit: Annotated[int, Query(ge=1, le=200)] = 50
+) -> list[DeadLetterOut]:
+    _private(response)
+    return [
+        DeadLetterOut(
+            id=d.id,
+            channel=d.channel,
+            event=n.event,
+            attempts=d.attempts,
+            last_error=d.last_error,
+            created_at=d.created_at,
+        )
+        for d, n in service.dead_letters(db, limit)
+    ]
+
+
+@router.post("/ops/notifications/deliveries/{delivery_id}/requeue", status_code=204)
+def requeue(db: DB, who: Operator, delivery_id: uuid.UUID) -> Response:
+    service.requeue(db, who.user.id, delivery_id)
+    return Response(status_code=204, headers={"Cache-Control": "private, no-store"})
+
+
+@router.post("/ops/notifications/suppressions", status_code=204, summary="Stop sending to a destination (audited)")
+def add_suppression(db: DB, who: Operator, body: SuppressionIn) -> Response:
+    service.suppress(db, who.user.id, body.channel, body.destination, body.reason)
+    return Response(status_code=204, headers={"Cache-Control": "private, no-store"})
+
+
+@router.delete("/ops/notifications/suppressions", status_code=204)
+def remove_suppression(
+    db: DB,
+    who: Operator,
+    channel: Literal["email", "push", "sms"],
+    destination: Annotated[str, Query(min_length=3, max_length=320)],
+) -> Response:
+    service.unsuppress(db, who.user.id, channel, destination)
+    return Response(status_code=204, headers={"Cache-Control": "private, no-store"})
+
+
+@router.get("/ops/notifications/metrics", summary="Delivery outcomes per channel and inbox read counts")
+def delivery_metrics(
+    db: DB, who: Operator, response: Response, days: Annotated[int, Query(ge=1, le=90)] = 7
+) -> dict[str, Any]:
+    _private(response)
+    return service.metrics(db, days)
