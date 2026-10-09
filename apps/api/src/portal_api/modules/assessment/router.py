@@ -8,6 +8,7 @@ from typing import Annotated, Any, Literal
 
 from fastapi import APIRouter, Depends, Header, Query, Response
 from pydantic import BaseModel, Field
+from sqlalchemy import func, select
 from sqlalchemy.orm import Session
 
 from portal_api.db import get_session
@@ -190,6 +191,20 @@ def result(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, response: Respo
     score = attempts.latest_score(db, attempt.id)
     receipt = attempts.receipt_for(db, attempt.id)
     form = db.get(PracticeForm, attempt.form_id)
+    held = None
+    scope = (form.scope or {}) if form is not None else {}
+    if scope.get("session_id"):  # the session's current release time decides (staff may delay it for a correction)
+        from portal_api.modules.assessment.sessions import MockSession
+
+        session = db.get(MockSession, uuid.UUID(scope["session_id"]))
+        held = session.results_at.isoformat() if session is not None else None
+    if held and datetime.fromisoformat(held) > db.execute(select(func.now())).scalar_one():
+        # SCHEDULE-01: a scheduled mock's results (and so its keys) stay private until the release time.
+        raise Conflict(
+            "Your answers are saved. Results are released after the mock window closes.",
+            code_reason="RESULTS_PENDING",
+            available_at=held,
+        )
     if score is None or receipt is None or form is None:
         raise NotFound("The result is not available yet.")
     keys = forms.item_keys(db, form)
@@ -428,3 +443,140 @@ def create_mock(
 
     _private(response)
     return _form_out(mocks.build(db, who, body.code, idempotency_key))
+
+
+# ------------------------------------------------------------------ scheduled mock sessions (P09.S2.T3, SCHEDULE-01)
+class MockSessionIn(BaseModel):
+    profile_code: str = Field(min_length=2, max_length=40)
+    title: str = Field(min_length=3, max_length=200)
+    starts_at: datetime
+    entry_closes_at: datetime
+    window_closes_at: datetime
+    results_at: datetime
+    late_entry: Literal["fixed_end", "full_duration"] = "fixed_end"
+    timezone: str = Field(default="Asia/Karachi", max_length=60)
+
+
+class AccommodationIn(BaseModel):
+    email: str = Field(min_length=3, max_length=320)
+    extra_minutes: int = Field(ge=1, le=240)
+    reason: str = Field(min_length=10, max_length=1000)
+
+
+class CancelIn(BaseModel):
+    reason: str = Field(min_length=10, max_length=1000)
+
+
+class MockSessionOut(BaseModel):
+    id: uuid.UUID
+    title: str
+    profile_code: str
+    profile_name: str
+    profile_version: int
+    timezone: str
+    starts_at: datetime
+    entry_closes_at: datetime
+    window_closes_at: datetime
+    results_at: datetime
+    late_entry: Literal["fixed_end", "full_duration"]
+    duration_minutes: int
+    total_questions: int
+    state: Literal["upcoming", "open", "entry_closed"]
+
+
+def _sessions_out(db: Session) -> list[MockSessionOut]:
+    from portal_api.modules.assessment import profiles, sessions
+
+    now = db.execute(select(func.now())).scalar_one()
+    out = []
+    for s, p, v in sessions.upcoming(db):
+        state = "upcoming" if now < s.starts_at else "open" if now <= s.entry_closes_at else "entry_closed"
+        out.append(
+            MockSessionOut(
+                id=s.id,
+                title=s.title,
+                profile_code=p.code,
+                profile_name=p.name,
+                profile_version=v.version,
+                timezone=s.timezone,
+                starts_at=s.starts_at,
+                entry_closes_at=s.entry_closes_at,
+                window_closes_at=s.window_closes_at,
+                results_at=s.results_at,
+                late_entry=s.late_entry,  # type: ignore[arg-type]
+                duration_minutes=int(v.rules["duration_minutes"]),
+                total_questions=profiles.total_questions(v.rules),
+                state=state,  # type: ignore[arg-type]
+            )
+        )
+    return out
+
+
+@router.post(
+    "/admin/mock-sessions",
+    response_model=list[MockSessionOut],
+    status_code=201,
+    summary="Schedule a mock window for the current published version of a test pattern",
+)
+def schedule_mock(db: DB, who: ProfileManager, body: MockSessionIn) -> list[MockSessionOut]:
+    from portal_api.modules.assessment import sessions
+
+    sessions.schedule(
+        db,
+        who,
+        profile_code=body.profile_code,
+        title=body.title,
+        starts_at=body.starts_at,
+        entry_closes_at=body.entry_closes_at,
+        window_closes_at=body.window_closes_at,
+        results_at=body.results_at,
+        late_entry=body.late_entry,
+        timezone=body.timezone,
+    )
+    return _sessions_out(db)
+
+
+@router.post(
+    "/admin/mock-sessions/{session_id}/accommodations",
+    status_code=204,
+    summary="Give one learner extra minutes for one session (reason required; audited)",
+)
+def mock_accommodation(db: DB, who: ProfileManager, session_id: uuid.UUID, body: AccommodationIn) -> Response:
+    from portal_api.modules.assessment import sessions
+    from portal_api.modules.identity.models import AppUser
+
+    user = db.scalar(select(AppUser).where(func.lower(AppUser.email) == body.email.strip().lower()))
+    if user is None:
+        raise NotFound("No account with that email.")
+    sessions.accommodate(db, who, session_id, user.id, body.extra_minutes, body.reason)
+    return Response(status_code=204)
+
+
+@router.post("/admin/mock-sessions/{session_id}/cancel", status_code=204, summary="Cancel a session before it starts")
+def cancel_mock_session(db: DB, who: ProfileManager, session_id: uuid.UUID, body: CancelIn) -> Response:
+    from portal_api.modules.assessment import sessions
+
+    sessions.cancel(db, who, session_id, body.reason)
+    return Response(status_code=204)
+
+
+@router.get("/mock-sessions", response_model=list[MockSessionOut], summary="Scheduled mocks you can join")
+def mock_sessions(db: DB, who: CurrentPrincipal) -> list[MockSessionOut]:
+    return _sessions_out(db)
+
+
+class JoinOut(BaseModel):
+    attempt_id: uuid.UUID
+
+
+@router.post(
+    "/mock-sessions/{session_id}/join",
+    response_model=JoinOut,
+    summary="Join a scheduled mock (once): builds your frozen form and starts the attempt",
+    dependencies=[Depends(operations.requires("new_practice_tests"))],
+)
+def join_mock_session(db: DB, who: CurrentPrincipal, session_id: uuid.UUID, response: Response) -> JoinOut:
+    from portal_api.modules.assessment import sessions
+
+    _private(response)
+    return JoinOut(attempt_id=sessions.join(db, who, session_id))

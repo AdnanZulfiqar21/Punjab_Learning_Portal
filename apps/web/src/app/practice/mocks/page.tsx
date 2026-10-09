@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
-import type { MockReadiness, PublishedExamProfile } from "@portal/contracts";
+import type { MockReadiness, MockSession, PublishedExamProfile } from "@portal/contracts";
 import { Badge, Breadcrumbs, Notice, SkeletonLines } from "@/components/ui";
 import { api, currentUser } from "@/lib/session";
+import { JoinSession } from "./join-session";
 import { StartMock } from "./start-mock";
 
 export const metadata: Metadata = { title: "Mock tests", robots: { index: false } };
@@ -19,6 +20,9 @@ export default function MocksPage() {
           Full-length tests that follow an official test pattern, as verified by two reviewers. Taking a mock doesn&apos;t affect admission eligibility.
         </p>
       </div>
+      <Suspense fallback={<SkeletonLines lines={3} label="Loading scheduled mocks" />}>
+        <Sessions />
+      </Suspense>
       <Suspense fallback={<SkeletonLines lines={4} label="Loading test patterns" />}>
         <Patterns />
       </Suspense>
@@ -79,5 +83,43 @@ async function Patterns() {
         );
       })}
     </ul>
+  );
+}
+
+const when = (iso: string, tz: string) => new Date(iso).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short", timeZone: tz });
+
+async function Sessions() {
+  const user = await currentUser();
+  if (!user) redirect("/signin?next=/practice/mocks");
+  const res = await api<MockSession[]>("/v1/mock-sessions", { token: user.token });
+  if (!res.ok || res.data.length === 0) return null;
+  return (
+    <section aria-labelledby="sessions-h" className="space-y-3">
+      <h2 id="sessions-h" className="font-semibold">
+        Scheduled mocks
+      </h2>
+      <ul className="space-y-3" aria-label="Scheduled mocks">
+        {res.data.map((s) => (
+          <li key={s.id} className="space-y-1 rounded-xl border border-border bg-surface p-4 text-sm">
+            <p className="flex flex-wrap items-center gap-2">
+              <span className="font-medium">{s.title}</span>
+              <Badge tone={s.state === "open" ? "ok" : s.state === "upcoming" ? "info" : "warn"}>
+                {s.state === "open" ? "Open now" : s.state === "upcoming" ? "Upcoming" : "Entry closed"}
+              </Badge>
+            </p>
+            <p className="text-muted">
+              {s.profile_name} · {s.total_questions} questions · {s.duration_minutes} minutes · starts {when(s.starts_at, s.timezone)} · late entry until{" "}
+              {when(s.entry_closes_at, s.timezone)} · results {when(s.results_at, s.timezone)} ({s.timezone})
+            </p>
+            <p className="text-muted">
+              {s.late_entry === "fixed_end"
+                ? "Everyone finishes at the same time, so joining late leaves you less time."
+                : "You get the full time from when you join, until the window closes."}
+            </p>
+            {s.state === "open" && <JoinSession id={s.id} />}
+          </li>
+        ))}
+      </ul>
+    </section>
   );
 }
