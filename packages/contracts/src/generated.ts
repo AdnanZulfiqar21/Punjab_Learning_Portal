@@ -315,6 +315,75 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/me/notification-preferences": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Preferences */
+        get: operations["get_preferences_v1_me_notification_preferences_get"];
+        /** Put Preferences */
+        put: operations["put_preferences_v1_me_notification_preferences_put"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/me/notifications": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** My Notifications */
+        get: operations["my_notifications_v1_me_notifications_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/me/notifications/read-all": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Read All */
+        post: operations["read_all_v1_me_notifications_read_all_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/me/notifications/{notification_id}/read": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Read One */
+        post: operations["read_one_v1_me_notifications__notification_id__read_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/me/profile": {
         parameters: {
             query?: never;
@@ -327,6 +396,24 @@ export interface paths {
         put: operations["put_profile_v1_me_profile_put"];
         post?: never;
         delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/me/push-tokens": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Register this device for push notifications */
+        post: operations["add_push_token_v1_me_push_tokens_post"];
+        /** Delete Push Token */
+        delete: operations["delete_push_token_v1_me_push_tokens_delete"];
         options?: never;
         head?: never;
         patch?: never;
@@ -2488,6 +2575,13 @@ export interface components {
                 [key: string]: unknown;
             };
         };
+        /** InboxOut */
+        InboxOut: {
+            /** Items */
+            items: components["schemas"]["NotificationOut"][];
+            /** Unread */
+            unread: number;
+        };
         /** ItemCreateIn */
         ItemCreateIn: {
             /**
@@ -2944,6 +3038,34 @@ export interface components {
             /** Positions */
             positions: number[];
         };
+        /** NotificationOut */
+        NotificationOut: {
+            /** Body */
+            body: string;
+            /**
+             * Category
+             * @enum {string}
+             */
+            category: "service" | "reminder" | "promotional";
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /** Event */
+            event: string;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Link */
+            link: string | null;
+            /** Read At */
+            read_at: string | null;
+            /** Title */
+            title: string;
+        };
         /** OpIn */
         OpIn: {
             /**
@@ -3060,6 +3182,48 @@ export interface components {
              */
             width: number | null;
         };
+        /** PreferencesIO */
+        PreferencesIO: {
+            /**
+             * Email Enabled
+             * @default true
+             */
+            email_enabled: boolean;
+            /**
+             * Promotional Opt In
+             * @description Optional news; off unless chosen
+             * @default false
+             */
+            promotional_opt_in: boolean;
+            /**
+             * Push Enabled
+             * @default true
+             */
+            push_enabled: boolean;
+            /**
+             * Quiet End
+             * @default 07:00
+             */
+            quiet_end: string;
+            /**
+             * Quiet Start
+             * @description Local HH:MM; urgent notices still arrive
+             * @default 22:00
+             */
+            quiet_start: string;
+            /**
+             * Reminders Enabled
+             * @description Study reminders (mock and revision)
+             * @default true
+             */
+            reminders_enabled: boolean;
+            /**
+             * Timezone
+             * @description IANA timezone used to show times
+             * @default Asia/Karachi
+             */
+            timezone: string;
+        };
         /**
          * ProfileIn
          * @description Onboarding answers (P04.S3.T1). Everything can be corrected later; no identity documents are collected.
@@ -3106,6 +3270,16 @@ export interface components {
             target_year?: number | null;
             /** Updated At */
             updated_at?: string | null;
+        };
+        /** PushTokenIn */
+        PushTokenIn: {
+            /**
+             * Platform
+             * @enum {string}
+             */
+            platform: "ios" | "android";
+            /** Token */
+            token: string;
         };
         /** QuarantineIn */
         QuarantineIn: {
@@ -5044,6 +5218,138 @@ export interface operations {
             };
         };
     };
+    get_preferences_v1_me_notification_preferences_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PreferencesIO"];
+                };
+            };
+        };
+    };
+    put_preferences_v1_me_notification_preferences_put: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PreferencesIO"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PreferencesIO"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    my_notifications_v1_me_notifications_get: {
+        parameters: {
+            query?: {
+                offset?: number;
+                limit?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["InboxOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    read_all_v1_me_notifications_read_all_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    read_one_v1_me_notifications__notification_id__read_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                notification_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     put_profile_v1_me_profile_put: {
         parameters: {
             query?: never;
@@ -5065,6 +5371,66 @@ export interface operations {
                 content: {
                     "application/json": components["schemas"]["ProfileOut"];
                 };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    add_push_token_v1_me_push_tokens_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PushTokenIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    delete_push_token_v1_me_push_tokens_delete: {
+        parameters: {
+            query: {
+                token: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
             };
             /** @description Validation Error */
             422: {

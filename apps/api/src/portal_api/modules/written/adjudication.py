@@ -1052,6 +1052,16 @@ def _qs(ps: list[int]) -> str:
 
 
 def _notice(db: Session, adj: RubricAdjudication, attempt: WrittenAttempt, outcomes: dict[str, str]) -> None:
+    from portal_api.modules.notifications import service as notifications
+
+    notifications.notify(
+        db,
+        attempt.user_id,
+        "score.revised",
+        {"reason": "An academic reviewer corrected the marking guide for your written test."},
+        dedupe_key=f"correction:{adj.id}:{attempt.id}",
+        link=f"/practice/written/{attempt.id}",
+    )
     by_kind: dict[str, list[int]] = {}
     for p, k in outcomes.items():
         by_kind.setdefault(k, []).append(int(p))

@@ -28,6 +28,7 @@ export default function RootLayout() {
         <Stack.Screen name="result/[id]" options={{ title: "Your result" }} />
         <Stack.Screen name="written/[id]" options={{ title: "Written test" }} />
         <Stack.Screen name="help" options={{ title: "Help" }} />
+        <Stack.Screen name="notifications" options={{ title: "Notifications" }} />
       </Stack>
     </ThemeProvider>
     </AuthProvider>

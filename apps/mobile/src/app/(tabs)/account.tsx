@@ -175,6 +175,7 @@ function SignedIn({ token, me }: { token: string; me: Me }) {
             label={p ? "Edit learning preferences" : "Set up learning preferences"}
             onPress={() => router.push("/onboarding")}
           />
+          <Button variant="secondary" label="Notifications" onPress={() => router.push("/notifications")} />
           <Button variant="secondary" label="Help and support" onPress={() => router.push("/help")} />
         </View>
       </Card>

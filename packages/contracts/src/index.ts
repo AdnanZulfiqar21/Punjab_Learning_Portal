@@ -70,6 +70,9 @@ export type RegradeJob = S["RegradeJobOut"];
 export type AdjudicationSources = S["AdjudicationSourcesOut"];
 export type RegradeAttempts = S["RegradeAttemptsOut"];
 export type WrittenNotice = S["NoticeOut"];
+export type Inbox = S["InboxOut"];
+export type InboxItem = S["NotificationOut"];
+export type NotificationPreferences = S["PreferencesIO"];
 
 /** RFC 9457 problem details returned by every API error. */
 export interface Problem {

@@ -814,6 +814,7 @@ def decide(
         case.released_at = now
         _sync_pending(db, case, set(pending), all_status, now)
         rescans.close_obligations(db, case.attempt_id, all_status, now, "resolved_by_review")
+        _notify_release(db, case.attempt_id, sv, completeness, statuses)
     if release:
         if req is not None:
             db.flush()
@@ -839,6 +840,42 @@ def decide(
     db.commit()
     db.refresh(sv)
     return sv
+
+
+def _notify_release(
+    db: Session, attempt_id: uuid.UUID, sv: WrittenScoreVersion, completeness: str, statuses: dict[str, Any]
+) -> None:
+    """P15.S1: tell the learner a result was released, and about each newly requested action (with its deadline in
+    their timezone). Idempotent per score version and per action deadline."""
+    from portal_api.modules.notifications import service as notifications
+
+    attempt = db.get(WrittenAttempt, attempt_id)
+    assert attempt is not None
+    summary = {
+        "complete": "Your result is complete.",
+        "partial_pending": "Some questions are still being marked.",
+        "partial_unavailable": "Some questions couldn't be assessed; their allowance was returned.",
+    }.get(completeness, "")
+    link = f"/practice/written/{attempt_id}"
+    notifications.notify(
+        db,
+        attempt.user_id,
+        "written.result_released",
+        {"summary": summary},
+        dedupe_key=f"written-result:{sv.id}",
+        link=link,
+    )
+    for pos, st in sorted(statuses.items(), key=lambda kv: int(kv[0])):
+        if st.get("status") == "pending" and st.get("learner_action") and st.get("action_deadline"):
+            deadline = datetime.fromisoformat(st["action_deadline"])
+            notifications.notify(
+                db,
+                attempt.user_id,
+                "written.action_required",
+                {"question": pos, "deadline": notifications.local_time(db, attempt.user_id, deadline)},
+                dedupe_key=f"written-action:{attempt_id}:{pos}:{st['action_deadline']}",
+                link=link,
+            )
 
 
 def _status_of(sv: WrittenScoreVersion, pos: str) -> str:
@@ -1124,6 +1161,9 @@ def publish_resolution(
     db.add(sv)
     db.flush()
     _sync_pending(db, None, set(pending), status, _now(db), attempt_id=attempt_id)
+    if method == "SYSTEM":  # a deadline resolution the learner didn't make themselves
+        db.flush()
+        _notify_release(db, attempt_id, sv, sv.completeness, {})
     return sv
 
 
