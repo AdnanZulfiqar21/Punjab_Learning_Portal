@@ -4,6 +4,23 @@
  */
 
 export interface paths {
+    "/v1/admin/audit": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Search the audit trail (owner/admin, MFA; redacted) */
+        get: operations["search_v1_admin_audit_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/admin/entitlements": {
         parameters: {
             query?: never;
@@ -2693,6 +2710,40 @@ export interface components {
              * @description T, pinned at start
              */
             tolerance_ms: number;
+        };
+        /** AuditPage */
+        AuditPage: {
+            /** Events */
+            events: components["schemas"]["AuditRow"][];
+            /** Next Before */
+            next_before: string | null;
+        };
+        /** AuditRow */
+        AuditRow: {
+            /** Action */
+            action: string;
+            /** Actor */
+            actor: string | null;
+            /**
+             * At
+             * Format: date-time
+             */
+            at: string;
+            /** Correlation Id */
+            correlation_id: string | null;
+            /** Details */
+            details: {
+                [key: string]: unknown;
+            };
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Target Id */
+            target_id: string;
+            /** Target Type */
+            target_type: string;
         };
         /** AvailabilityOut */
         AvailabilityOut: {
@@ -5813,6 +5864,45 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
+    search_v1_admin_audit_get: {
+        parameters: {
+            query?: {
+                /** @description Exact action, or a prefix ending in '.' */
+                action?: string | null;
+                actor_email?: string | null;
+                target_type?: string | null;
+                target_id?: string | null;
+                since?: string | null;
+                until?: string | null;
+                before?: string | null;
+                limit?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AuditPage"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     grant_v1_admin_entitlements_post: {
         parameters: {
             query?: never;

@@ -162,7 +162,8 @@ def test_key_correction_regrades_and_supersedes_explicitly(client: TestClient, p
         void = _correct(client, adjudicator, item, defect="VOID", reason="Fixture: no valid option after all")
         assert void.status_code == 201 and void.json()["supersedes_id"] == first.json()["id"]
         history = client.get(f"/v1/studio/items/{item}/score-corrections", headers=adjudicator.headers).json()
-        assert [h["status"] for h in history] == ["superseded", "effective"]
+        mine = [h for h in history if h["id"] in (first.json()["id"], void.json()["id"])]  # the shared pool may
+        assert [h["status"] for h in mine] == ["superseded", "effective"]  # hold earlier corrections of this item
         r3 = _result(client, learner, a["id"])
         assert (r3["raw"], r3["maximum"], r3["version"]) == (POOL - 1, POOL - 1, 3)
     finally:

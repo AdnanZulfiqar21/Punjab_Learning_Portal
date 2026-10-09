@@ -13,6 +13,7 @@ from portal_api.config import get_settings
 from portal_api.modules.access import trial_devices
 from portal_api.modules.access.router import router as access_router
 from portal_api.modules.assessment.router import router as assessment_router
+from portal_api.modules.audit.router import router as audit_router
 from portal_api.modules.content import router as content
 from portal_api.modules.curriculum.router import router as curriculum_router
 from portal_api.modules.help.router import router as help_router
@@ -75,6 +76,7 @@ def create_app() -> FastAPI:
     app.include_router(support_router)
     app.include_router(notifications_router)
     app.include_router(help_router)
+    app.include_router(audit_router)
     if settings.dev_auth_enabled:  # refused in staging/production by the startup validator
         app.include_router(dev_auth.router)
     return app
