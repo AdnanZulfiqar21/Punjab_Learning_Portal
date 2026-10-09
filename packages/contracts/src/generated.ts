@@ -406,8 +406,11 @@ export interface paths {
         };
         /**
          * Published, live lessons for a chapter (academically approved; never drafts)
-         * @description Every live lesson is listed. Premium bodies go only to callers with an active plan or trial (review R07);
-         *     others see the title marked locked. Free previews are readable by everyone.
+         * @description Every live lesson concept is listed once. Premium bodies go only to callers with an active plan or trial (review
+         *     R07); others see the title marked locked. Free previews are readable by everyone.
+         *
+         *     P07.S1.T2: a concept's reviewed variant in `language` is shown when one is live. Otherwise another reviewed variant
+         *     (English first) is shown with `requested_language_missing`: a missing translation is explicit, never filled in.
          */
         get: operations["chapter_lessons_v1_chapters__chapter_id__lessons_get"];
         put?: never;
@@ -2141,6 +2144,23 @@ export interface paths {
         put?: never;
         /** Submit */
         post: operations["submit_v1_studio_items__item_id__submit_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/studio/items/{item_id}/variants": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** A lesson concept's language variants, each with its own review status */
+        get: operations["item_variants_v1_studio_items__item_id__variants_get"];
+        put?: never;
+        post?: never;
         delete?: never;
         options?: never;
         head?: never;
@@ -4377,6 +4397,12 @@ export interface components {
              */
             kind: "lesson" | "mcq" | "written" | "rubric" | "storyboard";
             /**
+             * Language
+             * @default en
+             * @enum {string}
+             */
+            language: "en" | "ur" | "roman_ur";
+            /**
              * Parent Item Id
              * @description For a rubric: the written question it marks
              */
@@ -4385,6 +4411,16 @@ export interface components {
             title: string;
             /** Topic Id */
             topic_id?: string | null;
+            /**
+             * Translation Of
+             * @description Lessons: create this as a language variant of that lesson's concept
+             */
+            translation_of?: string | null;
+            /**
+             * Translation Origin
+             * @description Variants: translated by a person, or a machine draft that a reviewer must check
+             */
+            translation_origin?: ("human" | "machine_draft") | null;
         };
         /** ItemDetail */
         ItemDetail: {
@@ -4422,6 +4458,11 @@ export interface components {
             chapter_pdf_start: number | null;
             /** Chapter Title */
             chapter_title: string;
+            /**
+             * Concept Id
+             * @description The lesson concept this is a language variant of
+             */
+            concept_id?: string | null;
             /** Created By */
             created_by: string | null;
             /** Family Id */
@@ -4438,6 +4479,12 @@ export interface components {
              * @enum {string}
              */
             kind: "lesson" | "mcq" | "written" | "rubric" | "storyboard";
+            /**
+             * Language
+             * @default en
+             * @enum {string}
+             */
+            language: "en" | "ur" | "roman_ur";
             /**
              * Open Feedback
              * @description Change requests on the working version not yet addressed.
@@ -4481,6 +4528,8 @@ export interface components {
             topic_id: string | null;
             /** Topic Title */
             topic_title: string | null;
+            /** Translation Origin */
+            translation_origin?: ("human" | "machine_draft") | null;
             /**
              * Updated At
              * Format: date-time
@@ -4557,6 +4606,11 @@ export interface components {
             chapter_id: string;
             /** Chapter Title */
             chapter_title: string;
+            /**
+             * Concept Id
+             * @description The lesson concept this is a language variant of
+             */
+            concept_id?: string | null;
             /** Created By */
             created_by: string | null;
             /** Family Id */
@@ -4573,6 +4627,12 @@ export interface components {
              * @enum {string}
              */
             kind: "lesson" | "mcq" | "written" | "rubric" | "storyboard";
+            /**
+             * Language
+             * @default en
+             * @enum {string}
+             */
+            language: "en" | "ur" | "roman_ur";
             /**
              * Open Feedback
              * @description Change requests on the working version not yet addressed.
@@ -4604,6 +4664,8 @@ export interface components {
             topic_id: string | null;
             /** Topic Title */
             topic_title: string | null;
+            /** Translation Origin */
+            translation_origin?: ("human" | "machine_draft") | null;
             /**
              * Updated At
              * Format: date-time
@@ -4663,6 +4725,11 @@ export interface components {
              * @enum {string}
              */
             access_tier: "preview" | "premium";
+            /**
+             * Available Languages
+             * @description Languages with a reviewed, published variant of this lesson
+             */
+            available_languages: string[];
             /** Block Types */
             block_types: string[];
             /**
@@ -4672,6 +4739,12 @@ export interface components {
             body: {
                 [key: string]: unknown;
             } | null;
+            /**
+             * Concept Id
+             * Format: uuid
+             * @description The lesson concept; its language variants share it
+             */
+            concept_id: string;
             /** Content Schema Version */
             content_schema_version: number;
             /**
@@ -4679,6 +4752,12 @@ export interface components {
              * Format: uuid
              */
             id: string;
+            /**
+             * Language
+             * @default en
+             * @enum {string}
+             */
+            language: "en" | "ur" | "roman_ur";
             /**
              * Locked
              * @description True when the caller has no active plan or trial; body and pages are withheld
@@ -4689,6 +4768,12 @@ export interface components {
              * Format: date-time
              */
             published_at: string;
+            /**
+             * Requested Language Missing
+             * @description True when the language asked for has no reviewed variant; another is shown
+             * @default false
+             */
+            requested_language_missing: boolean;
             /** Source Refs */
             source_refs: {
                 [key: string]: unknown;
@@ -4697,6 +4782,8 @@ export interface components {
             title: string;
             /** Topic Id */
             topic_id: string | null;
+            /** Translation Origin */
+            translation_origin?: ("human" | "machine_draft") | null;
             /** Version */
             version: number;
         };
@@ -6744,6 +6831,35 @@ export interface components {
             /** Warnings */
             warnings: string[];
         };
+        /** VariantOut */
+        VariantOut: {
+            /**
+             * Availability
+             * @enum {string}
+             */
+            availability: "unpublished" | "live" | "quarantined" | "retired";
+            /**
+             * Item Id
+             * Format: uuid
+             */
+            item_id: string;
+            /**
+             * Language
+             * @enum {string}
+             */
+            language: "en" | "ur" | "roman_ur";
+            /** Original */
+            original: boolean;
+            /**
+             * State
+             * @enum {string}
+             */
+            state: "draft" | "submitted" | "changes_requested" | "approved" | "published";
+            /** Title */
+            title: string;
+            /** Translation Origin */
+            translation_origin: ("human" | "machine_draft") | null;
+        };
         /** VerifyIn */
         VerifyIn: {
             /**
@@ -7950,7 +8066,9 @@ export interface operations {
     };
     chapter_lessons_v1_chapters__chapter_id__lessons_get: {
         parameters: {
-            query?: never;
+            query?: {
+                language?: ("en" | "ur" | "roman_ur") | null;
+            };
             header?: never;
             path: {
                 chapter_id: string;
@@ -11247,6 +11365,37 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["ItemDetail"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    item_variants_v1_studio_items__item_id__variants_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                item_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["VariantOut"][];
                 };
             };
             /** @description Validation Error */

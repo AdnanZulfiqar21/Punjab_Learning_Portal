@@ -25,7 +25,7 @@ from datetime import UTC, datetime
 from typing import Any
 
 from pydantic import BaseModel, ConfigDict, Field, ValidationError
-from sqlalchemy import select
+from sqlalchemy import or_, select
 from sqlalchemy.orm import Session
 
 from portal_api.errors import Conflict, Forbidden, NotFound, Unprocessable
@@ -247,9 +247,33 @@ def create_item(
     kind: str = "lesson",
     family_of: uuid.UUID | None = None,
     parent_item_id: uuid.UUID | None = None,
+    language: str = "en",
+    translation_of: uuid.UUID | None = None,
+    translation_origin: str | None = None,
 ) -> ContentItem:
     spec = kinds.get(kind)
     parent: ContentItem | None = None
+    source: ContentItem | None = None
+    if translation_of is not None:  # P07.S1.T2: a language variant of a lesson concept
+        source = db.get(ContentItem, translation_of)
+        if source is None or source.kind != kind or not spec.learner_readable:
+            raise Unprocessable("Only lessons have language variants, and only of another lesson.")
+        if translation_origin is None:
+            raise Unprocessable("Say how this translation is made: by a person, or a machine draft for review.")
+        concept = source.concept_id or source.id
+        taken = set(
+            db.scalars(
+                select(ContentItem.language).where(
+                    or_(ContentItem.id == concept, ContentItem.concept_id == concept),
+                    ContentItem.availability != Availability.retired.value,
+                )
+            )
+        )
+        if language in taken:
+            raise Conflict("This lesson already has a version in that language.", code_reason="LANGUAGE_TAKEN")
+        chapter_id, topic_id = source.chapter_id, source.topic_id  # a variant teaches the same point
+    elif translation_origin is not None:
+        raise Unprocessable("Only a language variant has a translation origin.")
     if kind == "rubric":
         parent = links.rubric_parent(db, parent_item_id)
         chapter_id, topic_id = parent.chapter_id, parent.topic_id  # a rubric lives with its question
@@ -279,6 +303,10 @@ def create_item(
         state=ItemState.draft.value,
         availability=Availability.unpublished.value,
         created_by=who.user.id,
+        language=language,
+        concept_id=(source.concept_id or source.id) if source is not None else None,
+        translation_origin=translation_origin,
+        access_tier=source.access_tier if source is not None else "premium",
     )
     _require_scoped(db, who, Permission.draft_content, item)
     item.parent_item_id = parent.id if parent else None
@@ -327,6 +355,9 @@ def create_item(
         kind=kind,
         chapter_id=str(chapter.id),
         family_id=str(item.family_id) if item.family_id else None,
+        language=language,
+        translation_of=str(translation_of) if translation_of else None,
+        translation_origin=translation_origin,
     )
     db.commit()
     db.refresh(item)

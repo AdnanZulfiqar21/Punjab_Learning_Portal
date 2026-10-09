@@ -92,6 +92,11 @@ class ContentItem(Base):
         Index("ix_content_item_live", "chapter_id", postgresql_where=text("availability = 'live'")),
         CheckConstraint("access_tier in ('preview','premium')", name="content_item_access_tier"),
         CheckConstraint("question_pool in ('practice','mock')", name="content_item_question_pool"),
+        CheckConstraint("language in ('en','ur','roman_ur')", name="content_item_language"),
+        CheckConstraint(
+            "translation_origin is null or translation_origin in ('human','machine_draft')",
+            name="content_item_translation_origin",
+        ),
     )
     id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     kind: Mapped[str] = mapped_column(String(20))
@@ -108,6 +113,10 @@ class ContentItem(Base):
     access_tier: Mapped[str] = mapped_column(String(10), default="premium", server_default="premium")
     # P08.S3.T3: questions reserved for mocks never appear in practice tests (publisher decision, audited).
     question_pool: Mapped[str] = mapped_column(String(10), default="practice", server_default="practice")
+    # P07.S1.T2 (LESSON-VARIANTS-01): one lesson concept, several languages, each its own item with its own review.
+    language: Mapped[str] = mapped_column(String(10), default="en", server_default="en")
+    concept_id: Mapped[uuid.UUID | None] = mapped_column(UUID(as_uuid=True), index=True)  # None: its own concept
+    translation_origin: Mapped[str | None] = mapped_column(String(14))  # variants: human | machine_draft
     created_by: Mapped[uuid.UUID] = mapped_column(ForeignKey("app_user.id", ondelete="RESTRICT"))
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
     updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())

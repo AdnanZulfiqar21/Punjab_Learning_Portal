@@ -8,7 +8,7 @@ from typing import Annotated, Any, Literal
 
 from fastapi import APIRouter, Depends, Query, Request, Response
 from pydantic import BaseModel, Field
-from sqlalchemy import select
+from sqlalchemy import or_, select
 from sqlalchemy.orm import Session, selectinload
 
 from portal_api.db import get_session
@@ -37,6 +37,7 @@ from portal_api.modules.content.schemas import (
     SubmitIn,
     ValidateIn,
     ValidationOut,
+    VariantOut,
     VersionOut,
 )
 from portal_api.modules.curriculum.models import BookEdition, Chapter, SourceDocument, Topic
@@ -154,6 +155,9 @@ def _summary_fields(
         "updated_at": item.updated_at,
         "open_feedback": _open_feedback(item),
         "family_id": item.family_id,
+        "language": item.language,
+        "concept_id": item.concept_id,
+        "translation_origin": item.translation_origin,
         "parent_item_id": item.parent_item_id,
         "quarantine_level": item.quarantine_level,
         "access_tier": item.access_tier,
@@ -397,6 +401,9 @@ def create(db: DB, who: Author, body: ItemCreateIn) -> ItemDetail:
         kind=body.kind,
         family_of=body.family_of,
         parent_item_id=body.parent_item_id,
+        language=body.language,
+        translation_of=body.translation_of,
+        translation_origin=body.translation_origin,
     )
     return _detail(db, item, who)
 
@@ -497,9 +504,18 @@ def set_rights(db: DB, who: RightsOwner, source_id: uuid.UUID, body: RightsIn) -
     response_model=list[LessonOut],
     summary="Published, live lessons for a chapter (academically approved; never drafts)",
 )
-def chapter_lessons(db: DB, who: OptionalPrincipal, chapter_id: uuid.UUID, response: Response) -> list[LessonOut]:
-    """Every live lesson is listed. Premium bodies go only to callers with an active plan or trial (review R07);
-    others see the title marked locked. Free previews are readable by everyone."""
+def chapter_lessons(
+    db: DB,
+    who: OptionalPrincipal,
+    chapter_id: uuid.UUID,
+    response: Response,
+    language: Literal["en", "ur", "roman_ur"] | None = None,
+) -> list[LessonOut]:
+    """Every live lesson concept is listed once. Premium bodies go only to callers with an active plan or trial (review
+    R07); others see the title marked locked. Free previews are readable by everyone.
+
+    P07.S1.T2: a concept's reviewed variant in `language` is shown when one is live. Otherwise another reviewed variant
+    (English first) is shown with `requested_language_missing`: a missing translation is explicit, never filled in."""
     chapter = db.get(Chapter, chapter_id)
     if chapter is None or chapter.retired_at is not None:
         raise NotFound("Chapter not found.")
@@ -525,13 +541,24 @@ def chapter_lessons(db: DB, who: OptionalPrincipal, chapter_id: uuid.UUID, respo
         )
         .order_by(ContentVersion.published_at, ContentItem.id)
     ).all()
+    concepts: dict[uuid.UUID, list[tuple[ContentItem, ContentVersion]]] = {}
+    for i, v in rows:  # published order: a concept is placed where its first variant was published
+        concepts.setdefault(i.concept_id or i.id, []).append((i, v))
     out = []
-    for i, v in rows:
+    for concept, variants in concepts.items():
+        langs = sorted({i.language for i, _ in variants})
+        wanted = [iv for iv in variants if iv[0].language == language] if language else []
+        i, v = wanted[0] if wanted else next((iv for iv in variants if iv[0].language == "en"), variants[0])
         locked = i.access_tier != "preview" and not entitled
         out.append(
             LessonOut(
                 id=i.id,
                 title=i.title,
+                language=i.language,  # type: ignore[arg-type]
+                concept_id=concept,
+                available_languages=langs,
+                requested_language_missing=bool(language) and i.language != language,
+                translation_origin=i.translation_origin,  # type: ignore[arg-type]
                 topic_id=i.topic_id,
                 version=v.number,
                 published_at=v.published_at or v.updated_at,  # always set for published versions
@@ -1050,3 +1077,32 @@ def completed_lessons(db: DB, who: CurrentPrincipal, chapter_id: uuid.UUID, resp
 
     _no_store(response)
     return sorted(completion.completed_in(db, who.user.id, [chapter_id]), key=str)
+
+
+# ------------------------------------------------------------------ lesson language variants (P07.S1.T2)
+@router.get(
+    "/items/{item_id}/variants",
+    response_model=list[VariantOut],
+    summary="A lesson concept's language variants, each with its own review status",
+)
+def item_variants(db: DB, who: Member, item_id: uuid.UUID, response: Response) -> list[VariantOut]:
+    _no_store(response)
+    item = _scoped_item(db, who, item_id)
+    concept = item.concept_id or item.id
+    rows = db.scalars(
+        select(ContentItem)
+        .where(or_(ContentItem.id == concept, ContentItem.concept_id == concept))
+        .order_by(ContentItem.created_at)
+    ).all()
+    return [
+        VariantOut(
+            item_id=r.id,
+            language=r.language,  # type: ignore[arg-type]
+            title=r.title,
+            state=r.state,  # type: ignore[arg-type]
+            availability=r.availability,  # type: ignore[arg-type]
+            translation_origin=r.translation_origin,  # type: ignore[arg-type]
+            original=r.id == concept,
+        )
+        for r in rows
+    ]
