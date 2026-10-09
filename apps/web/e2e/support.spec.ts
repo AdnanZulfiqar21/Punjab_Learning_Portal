@@ -122,7 +122,7 @@ test("help-centre staff publish an article with MFA and anyone can find it", asy
   await expect(visitor.getByText("No matching articles")).toBeVisible(AUTH); // drafts are never public
   const row = staffPage.getByRole("listitem").filter({ hasText: slug });
   await row.getByRole("button", { name: "Publish" }).click();
-  await expect(row.getByText("published", { exact: true })).toBeVisible(AUTH);
+  await expect(row.getByRole("link", { name: "published" })).toBeVisible(AUTH);
   await visitor.goto(`/help/articles?q=${word}`);
   await visitor.getByRole("link", { name: "Fixture help article" }).click();
   await expect(visitor.getByRole("heading", { name: "Steps" })).toBeVisible(AUTH);
