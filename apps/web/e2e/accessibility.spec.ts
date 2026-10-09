@@ -48,7 +48,7 @@ test("signed in: practice, help and account have no serious accessibility violat
   await page.getByLabel("Email").fill(email);
   await page.getByLabel("Password").fill("a11y-fixture-pass-1");
   await page.getByRole("button", { name: "Create account" }).click();
-  await expect(page).toHaveURL(/\/account$/, AUTH);
+  await expect(page).toHaveURL(/:\d+\/account$/, AUTH);
   for (const path of ["/account", "/practice", "/help", "/help/new", "/notifications"]) {
     await audit(page, path);
     expect(new URL(page.url()).pathname, `${path} should not redirect a signed-in learner`).toBe(path);
