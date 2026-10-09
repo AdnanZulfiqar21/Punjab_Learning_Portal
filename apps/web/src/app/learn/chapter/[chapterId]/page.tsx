@@ -3,10 +3,12 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import type { Lesson, TopicNode } from "@portal/contracts";
+import { setLessonCompleted } from "@/app/actions/lessons";
 import { LessonBlocks } from "@/components/lesson-blocks";
 import { getChapter, getLessons } from "@/lib/api";
 import { CONTENT_STATE_TEXT, GRADE_LABEL, assessmentSummary, pageRange } from "@/lib/format";
 import { Badge, Breadcrumbs, Notice, SkeletonLines } from "@/components/ui";
+import { api, sessionToken } from "@/lib/session";
 
 export const metadata: Metadata = { title: "Chapter" };
 
@@ -149,6 +151,9 @@ const published = (iso: string) => new Date(iso).toLocaleDateString("en-GB", { d
 async function Lessons({ chapterId, topics }: { chapterId: string; topics: TopicNode[] }) {
   const res = await getLessons(chapterId);
   const lessons: Lesson[] = res.ok ? res.data : [];
+  const token = await sessionToken();
+  const doneRes = token && lessons.some((l) => !l.locked) ? await api<string[]>(`/v1/me/chapters/${encodeURIComponent(chapterId)}/completed-lessons`, { token }) : null;
+  const done = new Set(doneRes?.ok ? doneRes.data : []);
   const titles = topicTitles(topics);
   return (
     <section aria-labelledby="lessons-heading" className="space-y-4">
@@ -185,6 +190,14 @@ async function Lessons({ chapterId, topics }: { chapterId: string; topics: Topic
               </div>
             ) : (
               <LessonBlocks blocks={l.body.blocks as { type: string }[]} headingOffset={2} />
+            )}
+            {token && !l.locked && l.body && (
+              <form action={setLessonCompleted.bind(null, l.id, chapterId, !done.has(l.id))} className="flex flex-wrap items-center gap-3">
+                <button type="submit" className="rounded-lg border border-border bg-surface px-4 py-2 text-sm font-medium hover:border-accent">
+                  {done.has(l.id) ? "✓ Completed: undo" : "Mark as completed"}
+                </button>
+                <span className="text-xs text-muted">Completion tracks your reading only. It isn&apos;t evidence of what you know.</span>
+              </form>
             )}
             <p className="border-t border-border pt-3 text-sm text-muted">
               Textbook pages (PDF):{" "}

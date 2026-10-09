@@ -1021,3 +1021,32 @@ def decide_notice(db: DB, who: Member, notice_id: uuid.UUID, body: NoticeDecisio
 
     updates.decide_notice(db, who, notice_id, body.accept, body.decision)
     return [SyllabusNoticeOut(**n) for n in updates.notices(db, who)]
+
+
+# ------------------------------------------------------------------ lesson completion (P07.S1.T3, LESSON-DONE-01)
+@public.post("/me/lessons/{item_id}/complete", status_code=204, summary="Mark a lesson you can read as completed")
+def complete_lesson(db: DB, who: CurrentPrincipal, item_id: uuid.UUID) -> Response:
+    from portal_api.modules.content import completion
+
+    completion.complete(db, who.user.id, item_id)
+    return Response(status_code=204)
+
+
+@public.delete("/me/lessons/{item_id}/complete", status_code=204, summary="Undo a lesson completion")
+def undo_lesson(db: DB, who: CurrentPrincipal, item_id: uuid.UUID) -> Response:
+    from portal_api.modules.content import completion
+
+    completion.undo(db, who.user.id, item_id)
+    return Response(status_code=204)
+
+
+@public.get(
+    "/me/chapters/{chapter_id}/completed-lessons",
+    response_model=list[uuid.UUID],
+    summary="Lessons in this chapter you have completed",
+)
+def completed_lessons(db: DB, who: CurrentPrincipal, chapter_id: uuid.UUID, response: Response) -> list[uuid.UUID]:
+    from portal_api.modules.content import completion
+
+    _no_store(response)
+    return sorted(completion.completed_in(db, who.user.id, [chapter_id]), key=str)

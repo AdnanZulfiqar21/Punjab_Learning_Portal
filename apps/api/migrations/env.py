@@ -12,6 +12,7 @@ import portal_api.modules.assessment.notebook
 import portal_api.modules.assessment.profiles
 import portal_api.modules.assessment.sessions
 import portal_api.modules.audit.models
+import portal_api.modules.content.completion
 import portal_api.modules.content.models
 import portal_api.modules.content.updates
 import portal_api.modules.curriculum.models

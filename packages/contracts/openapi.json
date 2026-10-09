@@ -11709,6 +11709,54 @@
         ]
       }
     },
+    "/v1/me/chapters/{chapter_id}/completed-lessons": {
+      "get": {
+        "operationId": "completed_lessons_v1_me_chapters__chapter_id__completed_lessons_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "chapter_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Chapter Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "format": "uuid",
+                    "type": "string"
+                  },
+                  "title": "Response Completed Lessons V1 Me Chapters  Chapter Id  Completed Lessons Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Lessons in this chapter you have completed",
+        "tags": [
+          "lessons"
+        ]
+      }
+    },
     "/v1/me/consents": {
       "post": {
         "operationId": "accept_consent_v1_me_consents_post",
@@ -11901,6 +11949,76 @@
         "summary": "Your learning evidence per topic under evidence_rules_v2 (versioned; with reasons)",
         "tags": [
           "practice"
+        ]
+      }
+    },
+    "/v1/me/lessons/{item_id}/complete": {
+      "delete": {
+        "operationId": "undo_lesson_v1_me_lessons__item_id__complete_delete",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "item_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Item Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Undo a lesson completion",
+        "tags": [
+          "lessons"
+        ]
+      },
+      "post": {
+        "operationId": "complete_lesson_v1_me_lessons__item_id__complete_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "item_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Item Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Mark a lesson you can read as completed",
+        "tags": [
+          "lessons"
         ]
       }
     },
