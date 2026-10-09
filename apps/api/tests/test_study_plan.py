@@ -56,3 +56,22 @@ def test_the_endpoint_needs_daily_minutes_and_a_future_date(client: TestClient) 
     assert body["rules_version"] == "evidence_rules_v2" and body["required_minutes"] > 0 and body["schedule"]
     past = {**q, "daily_minutes": 60, "target_date": (date.today() - timedelta(days=1)).isoformat()}
     assert client.get("/v1/me/study-plan", headers=learner.headers, params=past).status_code == 422
+
+
+def test_without_evidence_the_plan_follows_the_book_order(client: TestClient) -> None:
+    """Ties fall back to the book's chapter then topic order, never topic position across chapters."""
+    from tests.test_attempts import _learner
+
+    learner = _learner(client)
+    ev = client.get("/v1/me/evidence", headers=learner.headers, params={"grade": 11, "subject": "biology"}).json()
+    chapters = [o["chapter_number"] for o in ev["outcomes"]]
+    assert len(set(chapters)) > 1 and chapters == sorted(chapters)
+    q = {
+        "grade": 11,
+        "subject": "biology",
+        "daily_minutes": 600,
+        "target_date": (date.today() + timedelta(days=90)).isoformat(),
+    }
+    plan = client.get("/v1/me/study-plan", headers=learner.headers, params=q).json()
+    scheduled = [x["chapter_number"] for x in plan["schedule"]]
+    assert scheduled == sorted(scheduled)
