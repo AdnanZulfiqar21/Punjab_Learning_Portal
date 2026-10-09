@@ -157,3 +157,18 @@ def test_csv_template_and_file_checks(client: TestClient) -> None:
     with get_sessionmaker()() as db:
         reviewer = Staff(client, db, ["subject_reviewer"], SCOPE)
     assert _preview(client, reviewer, _doc(_row("x", chapter, refs, "x"))).status_code == 403
+
+
+def test_the_correction_report_cannot_carry_spreadsheet_formulas(client: TestClient) -> None:
+    """P16.S4.T2: values an author typed (external IDs, titles echoed in errors) must not run as formulas when the
+    report is opened in a spreadsheet."""
+    author = _author(client)
+    chapter, refs = _setup()
+    evil = _row('=HYPERLINK("http://example.invalid","x")', chapter, refs, "Fixture stem")
+    evil2 = _row("+cmd|' /C calc'!A0", "@bad-chapter", refs, "Fixture stem two")
+    batch = _preview(client, author, _doc(evil, evil2)).json()
+    report = client.get(f"/v1/studio/imports/{batch['id']}/report.csv", headers=author.headers).text
+    for line in report.splitlines()[1:]:
+        for cell in next(iter(__import__("csv").reader([line]))):
+            assert not cell.startswith(("=", "+", "-", "@", "\t", "\r")), cell
+    assert "'=HYPERLINK" in report  # kept readable, just neutralised
