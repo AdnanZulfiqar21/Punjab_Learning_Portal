@@ -5,6 +5,11 @@ import { Platform } from "react-native";
 import type {
   Access,
   AppSession,
+  MockReadiness,
+  MockSession,
+  NotebookEntry,
+  ProgressReport,
+  PublishedExamProfile,
   AssistedAccess,
   AttemptResult,
   Book,
@@ -181,6 +186,24 @@ export const api = {
     }),
   createPracticeForm: (token: string, idempotencyKey: string, body: Record<string, unknown>) =>
     request<PracticeForm>("/v1/practice/forms", { method: "POST", token, body, headers: { "Idempotency-Key": idempotencyKey } }),
+  // P09.S2/P12: mocks, scheduled sessions, the mistake notebook and the progress report.
+  examProfiles: (token: string, signal?: AbortSignal) => request<PublishedExamProfile[]>("/v1/exam-profiles", { token, signal }),
+  mockReadiness: (token: string, code: string, signal?: AbortSignal) =>
+    request<MockReadiness>(`/v1/mocks/${encodeURIComponent(code)}/readiness`, { token, signal }),
+  createMock: (token: string, idempotencyKey: string, code: string) =>
+    request<PracticeForm>("/v1/mocks", { method: "POST", token, body: { code }, headers: { "Idempotency-Key": idempotencyKey } }),
+  mockSessions: (token: string, signal?: AbortSignal) => request<MockSession[]>("/v1/mock-sessions", { token, signal }),
+  joinSession: (token: string, id: string) =>
+    request<{ attempt_id: string }>(`/v1/mock-sessions/${encodeURIComponent(id)}/join`, { method: "POST", token }),
+  notebook: (token: string, signal?: AbortSignal) => request<NotebookEntry[]>("/v1/me/notebook", { token, signal }),
+  reviewTest: (token: string, idempotencyKey: string, grade: number, subject: string) =>
+    request<PracticeForm>("/v1/me/notebook/review", {
+      method: "POST",
+      token,
+      body: { grade, subject, count: 10 },
+      headers: { "Idempotency-Key": idempotencyKey },
+    }),
+  progress: (token: string, signal?: AbortSignal) => request<ProgressReport>("/v1/me/progress", { token, signal }),
   startAttempt: (token: string, formId: string) =>
     request<PracticeAttempt>(`/v1/practice/forms/${encodeURIComponent(formId)}/attempt`, { method: "POST", token }),
   attempt: (token: string, id: string, signal?: AbortSignal) =>
