@@ -42,6 +42,7 @@ from portal_api.modules.curriculum.models import BookEdition, Chapter, SourceDoc
 from portal_api.modules.identity.deps import CurrentPrincipal, OptionalPrincipal, Principal, require
 from portal_api.modules.identity.models import AppUser, StaffRoleGrant
 from portal_api.modules.identity.permissions import Permission, Role, permissions_for
+from portal_api.modules.system import operations
 
 router = APIRouter(prefix="/v1/studio", tags=["studio"])
 public = APIRouter(prefix="/v1", tags=["lessons"])
@@ -648,6 +649,7 @@ def _batch_out(db: Session, b: Any, with_rows: bool = True) -> ImportBatchOut:
     "/imports",
     response_model=ImportBatchOut,
     status_code=201,
+    dependencies=[Depends(operations.requires("content_imports"))],
     summary="Preview an import (raw JSON or CSV body, at most 5 MB): validates every row, writes nothing to content",
 )
 async def preview_import(
@@ -701,6 +703,7 @@ def import_report(db: DB, who: Author, batch_id: uuid.UUID) -> Response:
 
 @router.post(
     "/imports/{batch_id}/commit",
+    dependencies=[Depends(operations.requires("content_imports"))],
     response_model=ImportBatchOut,
     summary="Commit a previewed import atomically: every valid row becomes or updates a draft, or nothing is written",
 )
@@ -720,6 +723,7 @@ def discard_import(db: DB, who: Author, batch_id: uuid.UUID) -> ImportBatchOut:
 # ------------------------------------------------------------------ portable export (P06.S4.T2, EXPORT-01)
 @router.get(
     "/export",
+    dependencies=[Depends(operations.requires("content_exports"))],
     summary="Portable JSON export of one class and subject: catalogue structure, every item and all versions "
     "(publishers in scope, MFA; audited)",
 )
@@ -770,6 +774,7 @@ def affected(db: DB, who: Member, item_id: uuid.UUID) -> list[AffectedOut]:
 # ------------------------------------------------------------ storyboard prompt package (P07.S4.T1, STORYBOARD-01)
 @router.get(
     "/items/{item_id}/prompt-package",
+    dependencies=[Depends(operations.requires("prompt_packages"))],
     summary="Export a storyboard as a prompt package for a production tool (teaching constraints apart from "
     "creative direction; audited)",
 )

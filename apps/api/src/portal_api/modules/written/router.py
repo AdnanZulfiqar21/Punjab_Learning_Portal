@@ -16,6 +16,7 @@ from portal_api.modules.access import service as access
 from portal_api.modules.content import written as wq
 from portal_api.modules.content.models import ContentVersion
 from portal_api.modules.identity.deps import CurrentPrincipal
+from portal_api.modules.system import operations
 from portal_api.modules.written import evidence, linked, service
 from portal_api.modules.written.models import WrittenAttempt, WrittenFile, WrittenForm, WrittenPage, WrittenReceipt
 from portal_api.modules.written.schemas import (
@@ -214,7 +215,12 @@ def availability(
     )
 
 
-@router.post("/written/forms", response_model=WrittenFormOut, status_code=201)
+@router.post(
+    "/written/forms",
+    response_model=WrittenFormOut,
+    status_code=201,
+    dependencies=[Depends(operations.requires("new_written_tests"))],
+)
 def create_form(
     db: DB,
     who: CurrentPrincipal,

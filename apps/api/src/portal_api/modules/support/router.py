@@ -16,6 +16,7 @@ from portal_api.modules.identity.deps import CurrentPrincipal, Principal, requir
 from portal_api.modules.identity.permissions import Permission
 from portal_api.modules.support import lookup, service
 from portal_api.modules.support.models import SupportMessage, SupportTicket
+from portal_api.modules.system import operations
 
 router = APIRouter(prefix="/v1", tags=["support"])
 DB = Annotated[Session, Depends(get_session)]
@@ -222,6 +223,7 @@ def escalate(db: DB, who: Staff, ticket_id: uuid.UUID, body: EscalateIn, respons
 
 @router.post(
     "/support/tickets/{ticket_id}/attachments",
+    dependencies=[Depends(operations.requires("support_screenshots"))],
     response_model=AttachmentOut,
     status_code=201,
     summary="Add a screenshot (raw JPEG or PNG, at most 5 MB); it is validated and re-encoded in isolation",

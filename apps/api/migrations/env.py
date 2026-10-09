@@ -16,6 +16,7 @@ import portal_api.modules.identity.models
 import portal_api.modules.identity.sessions
 import portal_api.modules.notifications.models
 import portal_api.modules.support.models
+import portal_api.modules.system.operations
 import portal_api.modules.written.adjudication
 import portal_api.modules.written.automatic
 import portal_api.modules.written.models
