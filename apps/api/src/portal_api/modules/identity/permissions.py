@@ -40,6 +40,7 @@ class Permission(StrEnum):
     manage_help = "manage_help"  # P15.S2: draft help articles (publishing also needs MFA)
     look_up_learners = "look_up_learners"  # P15.S3.T3: learner lookup, redacted timeline, assisted access
     manage_exam_profiles = "manage_exam_profiles"  # P05.S3: draft, verify (two people) and publish exam profiles
+    manage_catalogue = "manage_catalogue"  # P06.S1.T1: preview and apply catalogue changes (MFA)
 
 
 ROLE_PERMISSIONS: dict[Role, frozenset[Permission]] = {
@@ -67,6 +68,7 @@ ROLE_PERMISSIONS: dict[Role, frozenset[Permission]] = {
             Permission.confirm_source_rights,
             Permission.grant_entitlements,
             Permission.manage_exam_profiles,
+            Permission.manage_catalogue,
         }
     ),
 }
@@ -86,6 +88,7 @@ MFA_REQUIRED: frozenset[Permission] = frozenset(
         Permission.review_trial_eligibility,
         Permission.look_up_learners,
         Permission.manage_exam_profiles,
+        Permission.manage_catalogue,
     }
 )
 

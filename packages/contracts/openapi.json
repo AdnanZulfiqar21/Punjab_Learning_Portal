@@ -1620,6 +1620,92 @@
         "title": "CaseSummary",
         "type": "object"
       },
+      "CatalogueApplied": {
+        "properties": {
+          "batch_id": {
+            "format": "uuid",
+            "title": "Batch Id",
+            "type": "string"
+          },
+          "counts": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "title": "Counts",
+            "type": "object"
+          },
+          "status": {
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "batch_id",
+          "status",
+          "counts"
+        ],
+        "title": "CatalogueApplied",
+        "type": "object"
+      },
+      "CatalogueApplyIn": {
+        "properties": {
+          "acknowledge_dependencies": {
+            "default": false,
+            "title": "Acknowledge Dependencies",
+            "type": "boolean"
+          },
+          "input_sha256": {
+            "maxLength": 64,
+            "minLength": 64,
+            "title": "Input Sha256",
+            "type": "string"
+          }
+        },
+        "required": [
+          "input_sha256"
+        ],
+        "title": "CatalogueApplyIn",
+        "type": "object"
+      },
+      "CatalogueDependency": {
+        "properties": {
+          "availability": {
+            "title": "Availability",
+            "type": "string"
+          },
+          "item_id": {
+            "format": "uuid",
+            "title": "Item Id",
+            "type": "string"
+          },
+          "kind": {
+            "title": "Kind",
+            "type": "string"
+          },
+          "published": {
+            "title": "Published",
+            "type": "boolean"
+          },
+          "reason": {
+            "title": "Reason",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "item_id",
+          "kind",
+          "title",
+          "availability",
+          "published",
+          "reason"
+        ],
+        "title": "CatalogueDependency",
+        "type": "object"
+      },
       "CatalogueOut": {
         "properties": {
           "grades": {
@@ -1644,6 +1730,57 @@
           "grades"
         ],
         "title": "CatalogueOut",
+        "type": "object"
+      },
+      "CataloguePreview": {
+        "properties": {
+          "change_count": {
+            "title": "Change Count",
+            "type": "integer"
+          },
+          "changes": {
+            "additionalProperties": {
+              "items": {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "title": "Changes",
+            "type": "object"
+          },
+          "dependencies": {
+            "items": {
+              "$ref": "#/components/schemas/CatalogueDependency"
+            },
+            "title": "Dependencies",
+            "type": "array"
+          },
+          "errors": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Errors",
+            "type": "array"
+          },
+          "input_sha256": {
+            "title": "Input Sha256",
+            "type": "string"
+          },
+          "published_dependencies": {
+            "title": "Published Dependencies",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "input_sha256",
+          "errors",
+          "changes",
+          "dependencies",
+          "published_dependencies",
+          "change_count"
+        ],
+        "title": "CataloguePreview",
         "type": "object"
       },
       "ChangeReasonIn": {
@@ -10498,6 +10635,68 @@
         "summary": "Search the audit trail (owner/admin, MFA; redacted)",
         "tags": [
           "audit"
+        ]
+      }
+    },
+    "/v1/admin/catalogue/apply": {
+      "post": {
+        "operationId": "catalogue_apply_v1_admin_catalogue_apply_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CatalogueApplyIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CatalogueApplied"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Apply the previewed catalogue (MFA; audited)",
+        "tags": [
+          "catalogue admin"
+        ]
+      }
+    },
+    "/v1/admin/catalogue/preview": {
+      "post": {
+        "operationId": "catalogue_preview_v1_admin_catalogue_preview_post",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CataloguePreview"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "What applying the current catalogue would change",
+        "tags": [
+          "catalogue admin"
         ]
       }
     },

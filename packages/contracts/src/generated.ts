@@ -21,6 +21,40 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/admin/catalogue/apply": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Apply the previewed catalogue (MFA; audited) */
+        post: operations["catalogue_apply_v1_admin_catalogue_apply_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/admin/catalogue/preview": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** What applying the current catalogue would change */
+        post: operations["catalogue_preview_v1_admin_catalogue_preview_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/admin/entitlements": {
         parameters: {
             query?: never;
@@ -3536,6 +3570,48 @@ export interface components {
             /** Version */
             version: number;
         };
+        /** CatalogueApplied */
+        CatalogueApplied: {
+            /**
+             * Batch Id
+             * Format: uuid
+             */
+            batch_id: string;
+            /** Counts */
+            counts: {
+                [key: string]: number;
+            };
+            /** Status */
+            status: string;
+        };
+        /** CatalogueApplyIn */
+        CatalogueApplyIn: {
+            /**
+             * Acknowledge Dependencies
+             * @default false
+             */
+            acknowledge_dependencies: boolean;
+            /** Input Sha256 */
+            input_sha256: string;
+        };
+        /** CatalogueDependency */
+        CatalogueDependency: {
+            /** Availability */
+            availability: string;
+            /**
+             * Item Id
+             * Format: uuid
+             */
+            item_id: string;
+            /** Kind */
+            kind: string;
+            /** Published */
+            published: boolean;
+            /** Reason */
+            reason: string;
+            /** Title */
+            title: string;
+        };
         /** CatalogueOut */
         CatalogueOut: {
             /** Grades */
@@ -3544,6 +3620,25 @@ export interface components {
             region: string;
             /** Scope Decision */
             scope_decision: string;
+        };
+        /** CataloguePreview */
+        CataloguePreview: {
+            /** Change Count */
+            change_count: number;
+            /** Changes */
+            changes: {
+                [key: string]: {
+                    [key: string]: unknown;
+                }[];
+            };
+            /** Dependencies */
+            dependencies: components["schemas"]["CatalogueDependency"][];
+            /** Errors */
+            errors: string[];
+            /** Input Sha256 */
+            input_sha256: string;
+            /** Published Dependencies */
+            published_dependencies: number;
         };
         /** ChangeReasonIn */
         ChangeReasonIn: {
@@ -7092,6 +7187,59 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    catalogue_apply_v1_admin_catalogue_apply_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CatalogueApplyIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CatalogueApplied"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    catalogue_preview_v1_admin_catalogue_preview_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CataloguePreview"];
                 };
             };
         };
