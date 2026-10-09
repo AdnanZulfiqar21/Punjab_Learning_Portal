@@ -3,8 +3,9 @@
 1. The set of routes reachable without a principal is pinned. A new unauthenticated route fails this test until it
    is added here deliberately, with a reason.
 2. Every other route answers an anonymous request with 401, whatever the method, parameters or body.
-3. A signed-in learner with no staff role never gets a success, or a server error, from staff, studio, ops or admin
-   routes.
+3. A signed-in learner with no staff role gets exactly 403 from every staff, studio, ops or admin route, so
+   authorisation runs before object lookup or body validation (OCT9-06). `tests/test_staff_actions_authz.py` adds
+   valid-payload checks (scope, MFA, no state change).
 Object-level A/B checks (another learner's attempts, tickets, screenshots, imports and so on) live with each module's
 tests; this file guards the whole surface against regressions.
 """
@@ -105,6 +106,8 @@ def test_a_learner_never_succeeds_on_staff_routes(client: TestClient) -> None:
             continue
         for m in r.methods:
             status = _call(client, m, r.path, learner.headers)
-            if status < 400 or status >= 500 or status == 401:
+            # OCT9-06: exactly 403. A 404 or 422 would mean the request reached object lookup or body validation
+            # before authorisation, which proves nothing about whether the action itself is protected.
+            if status != 403:
                 wrong.append(f"{m} {r.path} -> {status}")
     assert wrong == []

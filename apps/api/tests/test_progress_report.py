@@ -7,11 +7,8 @@ from typing import Any
 
 from fastapi.testclient import TestClient
 
-from tests import test_attempts
 from tests.test_attempts import POOL, _form, _learner, _start
 from tests.test_mistake_notebook import _answer
-
-physics = test_attempts.physics
 
 
 def test_progress_counts_answered_and_correct_questions(client: TestClient, physics: dict[str, Any]) -> None:

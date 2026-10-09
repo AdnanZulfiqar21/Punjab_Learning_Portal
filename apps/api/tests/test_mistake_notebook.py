@@ -10,12 +10,9 @@ from fastapi.testclient import TestClient
 from sqlalchemy import text
 
 from portal_api.db import get_sessionmaker
-from tests import test_attempts
 from tests.test_attempts import POOL, _form, _form_item_ids, _learner, _op, _post, _save_ops, _start
 from tests.test_content_workflow import Staff
 from tests.test_mcq_corrections import _keys
-
-physics = test_attempts.physics
 
 
 def _submit(client: TestClient, who: Any, attempt_id: str) -> None:

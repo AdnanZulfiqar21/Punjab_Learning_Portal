@@ -212,6 +212,8 @@ def create_form(
                 version_id=version.id,
                 marks=int(version.body.get("marks", 1)),
                 option_order=option_ids,
+                grade_number=item.grade_number,
+                subject_code=item.subject_code,
             )
         )
     try:

@@ -7,6 +7,7 @@ from __future__ import annotations
 import uuid
 from typing import Any
 
+import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import select, text
 
@@ -18,7 +19,12 @@ from tests.test_attempts import POOL, _form, _form_item_ids, _learner, _op, _sav
 from tests.test_content_workflow import Staff, _post
 
 SCOPE = {"grades": [11], "subjects": ["physics"]}
-physics = test_attempts.physics  # this module's own fixture pool (module scope)
+
+
+@pytest.fixture(scope="module")
+def physics(client: TestClient) -> dict[str, Any]:
+    """This module changes question versions, so it publishes its own pool in another chapter (OCT9-05)."""
+    return test_attempts.publish_physics_pool(client, 1)
 
 
 def _adjudicator(client: TestClient, mfa: bool = True) -> Staff:

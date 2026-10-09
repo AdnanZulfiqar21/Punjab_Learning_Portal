@@ -12,12 +12,14 @@ from sqlalchemy.orm import Session
 
 from portal_api.db import get_session
 from portal_api.modules.help import service
-from portal_api.modules.identity.deps import CurrentPrincipal, Principal, require
+from portal_api.modules.identity.deps import Principal, require
 from portal_api.modules.identity.permissions import Permission
 
 router = APIRouter(prefix="/v1", tags=["help"])
 DB = Annotated[Session, Depends(get_session)]
 Operator = Annotated[Principal, Depends(require(Permission.operate_platform))]
+# OCT9-06: help authoring is authorised before the body is read (the service re-checks, including MFA to publish).
+HelpStaff = Annotated[Principal, Depends(require(Permission.manage_help))]
 
 
 class ArticleSummary(BaseModel):
@@ -118,7 +120,7 @@ def get_article(db: DB, slug: str, response: Response, locale: Literal["en", "ur
 
 
 @router.get("/studio/help/articles", response_model=list[StaffArticle])
-def staff_articles(db: DB, who: CurrentPrincipal, response: Response) -> list[StaffArticle]:
+def staff_articles(db: DB, who: HelpStaff, response: Response) -> list[StaffArticle]:
     response.headers["Cache-Control"] = "private, no-store"
     return [
         StaffArticle(
@@ -136,7 +138,7 @@ def staff_articles(db: DB, who: CurrentPrincipal, response: Response) -> list[St
 
 
 @router.put("/studio/help/articles", response_model=StaffArticle, summary="Save a draft (a new version)")
-def save_article(db: DB, who: CurrentPrincipal, body: DraftIn, response: Response) -> StaffArticle:
+def save_article(db: DB, who: HelpStaff, body: DraftIn, response: Response) -> StaffArticle:
     response.headers["Cache-Control"] = "private, no-store"
     a = service.save_draft(
         db,
@@ -152,13 +154,13 @@ def save_article(db: DB, who: CurrentPrincipal, body: DraftIn, response: Respons
 
 
 @router.post("/studio/help/articles/{article_id}/publish", response_model=StaffArticle, summary="Publish (MFA)")
-def publish_article(db: DB, who: CurrentPrincipal, article_id: uuid.UUID, response: Response) -> StaffArticle:
+def publish_article(db: DB, who: HelpStaff, article_id: uuid.UUID, response: Response) -> StaffArticle:
     service.publish(db, who, article_id)
     return next(x for x in staff_articles(db, who, response) if x.id == article_id)
 
 
 @router.post("/studio/help/articles/{article_id}/retire", response_model=StaffArticle, summary="Retire (MFA)")
-def retire_article(db: DB, who: CurrentPrincipal, article_id: uuid.UUID, response: Response) -> StaffArticle:
+def retire_article(db: DB, who: HelpStaff, article_id: uuid.UUID, response: Response) -> StaffArticle:
     service.retire(db, who, article_id)
     return next(x for x in staff_articles(db, who, response) if x.id == article_id)
 

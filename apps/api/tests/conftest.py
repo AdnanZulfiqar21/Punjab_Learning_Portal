@@ -27,6 +27,7 @@ from alembic.config import Config  # noqa: E402
 from fastapi.testclient import TestClient  # noqa: E402
 from sqlalchemy import create_engine, text  # noqa: E402
 from sqlalchemy.orm import Session  # noqa: E402
+from sqlalchemy.pool import NullPool  # noqa: E402
 
 from portal_api.db import get_sessionmaker  # noqa: E402
 from portal_api.modules.curriculum.importer import DEFAULT_CATALOGUE, DEFAULT_REGISTRY, run_import  # noqa: E402
@@ -34,7 +35,30 @@ from portal_api.modules.curriculum.importer import DEFAULT_CATALOGUE, DEFAULT_RE
 API_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
+_SESSION_LOCK: Any = None
+
+
+def _claim_database() -> None:
+    """OCT9-05: hold a session-long advisory lock so a second test process can't reset this database mid-run.
+
+    Run concurrent processes against different databases: set PORTAL_TEST_DATABASE_URL to another `*_test` name
+    (it is created if missing)."""
+    global _SESSION_LOCK
+    name = TEST_URL.rsplit("/", 1)[-1]
+    admin = create_engine(TEST_URL.rsplit("/", 1)[0] + "/postgres", isolation_level="AUTOCOMMIT")
+    with admin.connect() as conn:
+        if not conn.execute(text("select 1 from pg_database where datname = :n"), {"n": name}).scalar():
+            conn.execute(text(f'CREATE DATABASE "{name}"'))
+    admin.dispose()
+    _SESSION_LOCK = create_engine(TEST_URL, poolclass=NullPool).connect()
+    if not _SESSION_LOCK.execute(text("select pg_try_advisory_lock(7272727272)")).scalar():
+        raise pytest.UsageError(
+            f"Another test process is using {name}. Set PORTAL_TEST_DATABASE_URL to a different *_test database."
+        )
+
+
 def _reset_and_migrate() -> None:
+    _claim_database()
     engine = create_engine(TEST_URL)
     with engine.begin() as conn:
         conn.execute(text("DROP SCHEMA IF EXISTS public CASCADE"))
@@ -135,3 +159,16 @@ def published_written(client: TestClient) -> dict[str, Any]:
             db.add(ReviewCapacity(grade_number=12, subject_code="chemistry", max_open_cases=10_000, reason="fixture"))
             db.commit()
         return {"chapter": str(chapter.id)}
+
+
+@pytest.fixture(scope="session")
+def physics(client: TestClient) -> dict[str, Any]:
+    """POOL fixture questions in the first Class XI Physics chapter, published once per test session.
+
+    OCT9-05: this used to be module-scoped and re-imported by many modules, so every module published another POOL
+    questions into the same chapter and exact pool counts depended on module order. Tests that change these items
+    (pool, quarantine, corrections) restore them in `finally`; a module that changes question versions publishes its
+    own pool in another chapter (`publish_physics_pool(client, index)`)."""
+    from tests.test_attempts import publish_physics_pool
+
+    return publish_physics_pool(client, 0)

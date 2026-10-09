@@ -12,12 +12,9 @@ from sqlalchemy import text
 from sqlalchemy.orm import Session
 
 from portal_api.db import get_sessionmaker
-from tests import test_attempts
 from tests.test_attempts import _learner
 from tests.test_content_workflow import Staff
 from tests.test_mocks import _publish_profile
-
-physics = test_attempts.physics
 
 
 def _iso(dt: datetime) -> str:

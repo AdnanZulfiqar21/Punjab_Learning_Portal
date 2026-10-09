@@ -97,7 +97,7 @@ async function Report() {
             {r.recent.map((t) => (
               <li key={t.attempt_id} className="flex flex-wrap items-center justify-between gap-2 px-3 py-2">
                 <span>
-                  {day(t.finished_at)} · {t.kind === "mock" ? "Mock" : t.kind === "review" ? "Review" : "Practice"} · {GRADE_LABEL[t.grade]} {t.subject.replace("_", " ")}
+                  {day(t.finished_at)} · {t.kind === "mock" ? "Mock" : t.kind === "review" ? "Review" : "Practice"} · {t.parts.map((x) => `${GRADE_LABEL[x.grade]} ${x.subject.replace("_", " ")}`).join(" + ")}
                 </span>
                 <span className="tabular-nums">
                   {t.status === "not_scorable" ? "Not scorable" : `${t.raw} / ${t.maximum}${t.percentage === null ? "" : ` (${t.percentage}%)`}`}

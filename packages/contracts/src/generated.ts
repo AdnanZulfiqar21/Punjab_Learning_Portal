@@ -5300,6 +5300,8 @@ export interface components {
             maximum: number;
             /** Mode */
             mode: string;
+            /** Parts */
+            parts: components["schemas"]["ResultPart"][];
             /** Percentage */
             percentage: number | null;
             /** Raw */
@@ -5552,6 +5554,13 @@ export interface components {
             status: "scored" | "not_scorable";
             /** Version */
             version: number;
+        };
+        /** ResultPart */
+        ResultPart: {
+            /** Grade */
+            grade: number;
+            /** Subject */
+            subject: string;
         };
         /** RevealOut */
         RevealOut: {

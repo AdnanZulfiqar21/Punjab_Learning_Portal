@@ -10,7 +10,6 @@ from decimal import Decimal
 from types import SimpleNamespace
 from typing import Any
 
-import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import select, text
 from sqlalchemy.orm import Session
@@ -25,15 +24,14 @@ from tests.test_mcq_items import CHECKS, VALID, _new_mcq, _save
 POOL = 6
 
 
-@pytest.fixture(scope="module")
-def physics(client: TestClient) -> dict[str, Any]:
-    """Publish POOL fixture questions in one Class XI Physics chapter (keys rotate o1..o4)."""
+def publish_physics_pool(client: TestClient, index: int = 0) -> dict[str, Any]:
+    """Publish POOL fixture questions in Class XI Physics chapter `index` (keys rotate o1..o4)."""
     with get_sessionmaker()() as db:
         scope = {"grades": [11], "subjects": ["physics"]}
         author = Staff(client, db, ["content_author"], scope)
         reviewer = Staff(client, db, ["subject_reviewer"], scope)
         publisher = Staff(client, db, ["publisher"], scope, mfa=True)
-        chapter, doc = _chapter(db, 11, "physics")
+        chapter, doc = _chapter(db, 11, "physics", index)
         _confirm_rights(client, db, doc)
         keys: dict[str, str] = {}
         ids = []

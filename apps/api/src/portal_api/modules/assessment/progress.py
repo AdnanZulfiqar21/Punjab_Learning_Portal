@@ -15,11 +15,12 @@ from typing import Any
 from sqlalchemy import func, select
 from sqlalchemy.orm import Session
 
-from portal_api.modules.assessment.models import Attempt, PracticeForm, ScoreVersion
+from portal_api.modules.assessment.models import Attempt, FormItem, PracticeForm, ScoreVersion
 
 REPORT_VERSION = 1
 DEFINITIONS = {
-    "tests": "Submitted practice, mock and review tests.",
+    "tests": "Submitted practice, mock and review tests containing questions from this class and subject. A test "
+    "mixing classes or subjects counts once in each it contains; its overall result is shown once under recent tests.",
     "questions_answered": "Questions you chose an answer for, excluding questions withdrawn after review.",
     "correct": "Answered questions marked correct under the latest score version (corrected keys apply).",
     "accuracy": "Correct ÷ answered, as a percentage. Credited-to-everyone questions are not counted as answered.",
@@ -54,27 +55,42 @@ def report(db: Session, user_id: uuid.UUID) -> dict[str, Any]:
     rows = [r for r in rows if r[1].id not in held]
     subjects: dict[tuple[int, str], dict[str, Any]] = {}
     recent: list[dict[str, Any]] = []
+    form_ids = list({form.id for _, form, _ in rows})
+    bucket_of: dict[tuple[uuid.UUID, int], tuple[int, str]] = {
+        (f, p): (g, s)
+        for f, p, g, s in db.execute(
+            select(FormItem.form_id, FormItem.position, FormItem.grade_number, FormItem.subject_code).where(
+                FormItem.form_id.in_(form_ids)
+            )
+        ).all()
+    } if form_ids else {}  # fmt: skip
     for attempt, form, score in rows:
-        key = (form.grade_number, form.subject_code)
-        agg = subjects.setdefault(
-            key,
-            {
-                "grade": key[0],
-                "subject": key[1],
-                "tests": 0,
-                "questions_answered": 0,
-                "correct": 0,
-                "last_activity": None,
-            },
-        )
-        agg["tests"] += 1
+        parts = {
+            bucket_of[(form.id, int(r["position"]))] for r in score.items if (form.id, int(r["position"])) in bucket_of
+        }
+        for key in parts:
+            agg = subjects.setdefault(
+                key,
+                {
+                    "grade": key[0],
+                    "subject": key[1],
+                    "tests": 0,
+                    "questions_answered": 0,
+                    "correct": 0,
+                    "last_activity": None,
+                },
+            )
+            agg["tests"] += 1
+            if agg["last_activity"] is None or (attempt.finalised_at and attempt.finalised_at > agg["last_activity"]):
+                agg["last_activity"] = attempt.finalised_at
         for item in score.items:
             if item.get("treatment") in ("EXCLUDE", "CREDIT_ALL") or item.get("chosen") is None:
                 continue
-            agg["questions_answered"] += 1
-            agg["correct"] += 1 if item.get("correct") else 0
-        if agg["last_activity"] is None or (attempt.finalised_at and attempt.finalised_at > agg["last_activity"]):
-            agg["last_activity"] = attempt.finalised_at
+            bucket = bucket_of.get((form.id, int(item["position"])))
+            if bucket is None:
+                continue
+            subjects[bucket]["questions_answered"] += 1
+            subjects[bucket]["correct"] += 1 if item.get("correct") else 0
         if len(recent) < 30:
             recent.append(
                 {
@@ -89,6 +105,7 @@ def report(db: Session, user_id: uuid.UUID) -> dict[str, Any]:
                     "percentage": float(score.percentage) if score.percentage is not None else None,
                     "score_version": score.version,
                     "status": score.status,
+                    "parts": [{"grade": g, "subject": s} for g, s in sorted(parts)],
                 }
             )
     for agg in subjects.values():

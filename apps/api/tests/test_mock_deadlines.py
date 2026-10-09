@@ -13,13 +13,10 @@ from sqlalchemy.orm import Session
 
 from portal_api.db import get_sessionmaker
 from portal_api.modules.assessment import attempts as attempts_module
-from tests import test_attempts
 from tests.test_attempts import _learner
 from tests.test_content_workflow import Staff
 from tests.test_mock_sessions import _duration, _iso, _schedule, _shift
 from tests.test_mocks import _publish_profile
-
-physics = test_attempts.physics
 
 
 def _profile(client: TestClient, db: Session) -> tuple[str, Staff]:

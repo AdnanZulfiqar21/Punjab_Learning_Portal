@@ -6147,6 +6147,13 @@
             "title": "Mode",
             "type": "string"
           },
+          "parts": {
+            "items": {
+              "$ref": "#/components/schemas/ResultPart"
+            },
+            "title": "Parts",
+            "type": "array"
+          },
           "percentage": {
             "anyOf": [
               {
@@ -6186,7 +6193,8 @@
           "maximum",
           "percentage",
           "score_version",
-          "status"
+          "status",
+          "parts"
         ],
         "title": "RecentResult",
         "type": "object"
@@ -6765,6 +6773,24 @@
           "items"
         ],
         "title": "ResultOut",
+        "type": "object"
+      },
+      "ResultPart": {
+        "properties": {
+          "grade": {
+            "title": "Grade",
+            "type": "integer"
+          },
+          "subject": {
+            "title": "Subject",
+            "type": "string"
+          }
+        },
+        "required": [
+          "grade",
+          "subject"
+        ],
+        "title": "ResultPart",
         "type": "object"
       },
       "RevealOut": {
