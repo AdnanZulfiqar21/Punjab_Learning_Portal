@@ -8,7 +8,7 @@ from collections.abc import Callable
 from dataclasses import dataclass
 from typing import Any
 
-from portal_api.modules.content import blocks, mcq, written
+from portal_api.modules.content import blocks, mcq, storyboard, written
 
 
 @dataclass(frozen=True)
@@ -93,6 +93,16 @@ KINDS: dict[str, KindSpec] = {
         review_checklist=written.RUBRIC_CHECKLIST,
         quarantine_levels=("SOFT",),
         learner_readable=False,  # rubrics are marking secrets until a result is released
+    ),
+    "storyboard": KindSpec(
+        name="storyboard",
+        label="Video storyboard",
+        empty_body=lambda: dict(storyboard.EMPTY_BODY),
+        parse_draft=storyboard.parse_draft,
+        validate=storyboard.validate,
+        review_checklist=storyboard.REVIEW_CHECKLIST,
+        quarantine_levels=(),
+        learner_readable=False,  # a production record; learners see the reviewed video, never the storyboard
     ),
 }
 

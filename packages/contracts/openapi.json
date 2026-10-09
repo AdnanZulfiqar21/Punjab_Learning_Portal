@@ -2878,7 +2878,8 @@
               "lesson",
               "mcq",
               "written",
-              "rubric"
+              "rubric",
+              "storyboard"
             ],
             "title": "Kind",
             "type": "string"
@@ -3055,7 +3056,8 @@
               "lesson",
               "mcq",
               "written",
-              "rubric"
+              "rubric",
+              "storyboard"
             ],
             "title": "Kind",
             "type": "string"
@@ -3445,7 +3447,8 @@
               "lesson",
               "mcq",
               "written",
-              "rubric"
+              "rubric",
+              "storyboard"
             ],
             "title": "Kind",
             "type": "string"
@@ -7496,7 +7499,8 @@
               "lesson",
               "mcq",
               "written",
-              "rubric"
+              "rubric",
+              "storyboard"
             ],
             "title": "Kind",
             "type": "string"
@@ -12239,6 +12243,61 @@
           }
         },
         "summary": "Audit history for one item",
+        "tags": [
+          "studio"
+        ]
+      }
+    },
+    "/v1/studio/items/{item_id}/prompt-package": {
+      "get": {
+        "operationId": "prompt_package_v1_studio_items__item_id__prompt_package_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "item_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Item Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "version",
+            "required": false,
+            "schema": {
+              "default": "working",
+              "enum": [
+                "working",
+                "published"
+              ],
+              "title": "Version",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Export a storyboard as a prompt package for a production tool (teaching constraints apart from creative direction; audited)",
         "tags": [
           "studio"
         ]

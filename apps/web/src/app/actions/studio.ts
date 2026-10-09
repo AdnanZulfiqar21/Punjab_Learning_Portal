@@ -58,7 +58,7 @@ const item = (id: string, action: string) => `/v1/studio/items/${encodeURICompon
 
 export async function createItem(_prev: unknown, form: FormData): Promise<{ error?: string } | undefined> {
   const raw = String(form.get("kind") ?? "lesson");
-  const kind = raw === "mcq" || raw === "written" ? raw : "lesson";
+  const kind = raw === "mcq" || raw === "written" || raw === "storyboard" ? raw : "lesson";
   const chapter_id = String(form.get("chapter_id") ?? "");
   const topic_id = String(form.get("topic_id") ?? "") || null;
   const title = String(form.get("title") ?? "").trim();

@@ -48,6 +48,13 @@ async function Item({ id }: { id: string }) {
   return (
     <div className="space-y-4">
       {item.kind === "written" && auth.me.roles.includes("content_author") && <AddRubric questionId={item.id} title={item.title} />}
+      {item.kind === "storyboard" && (
+        <p>
+          <a href={`/studio/items/${item.id}/prompt-package`} className="text-accent underline underline-offset-2">
+            Download the prompt package (working version)
+          </a>
+        </p>
+      )}
       {item.kind === "rubric" && item.parent_item_id && (
         <Link href={`/studio/items/${item.parent_item_id}`} className="text-sm text-accent underline-offset-2 hover:underline">
           ← The question this rubric marks

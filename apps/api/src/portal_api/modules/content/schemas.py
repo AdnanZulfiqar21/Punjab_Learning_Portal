@@ -10,7 +10,7 @@ ItemStateName = Literal["draft", "submitted", "changes_requested", "approved", "
 AvailabilityName = Literal["unpublished", "live", "quarantined", "retired"]
 
 
-KindName = Literal["lesson", "mcq", "written", "rubric"]
+KindName = Literal["lesson", "mcq", "written", "rubric", "storyboard"]
 
 
 class ItemCreateIn(BaseModel):
