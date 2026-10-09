@@ -57,8 +57,8 @@ export const getBookFor = cache((grade: number, subject: string) =>
 export const getChapter = cache((id: string) => getJSON<Chapter>(`/v1/chapters/${encodeURIComponent(id)}`));
 /** Published, live lessons for a chapter. Premium bodies come back only for a learner with an active plan or
  * trial (review R07), so the learner's session is forwarded when present. */
-export const getLessons = cache(async (chapterId: string) =>
-  getJSON<Lesson[]>(`/v1/chapters/${encodeURIComponent(chapterId)}/lessons`, await sessionToken()),
+export const getLessons = cache(async (chapterId: string, language?: string) =>
+  getJSON<Lesson[]>(`/v1/chapters/${encodeURIComponent(chapterId)}/lessons${language ? `?language=${encodeURIComponent(language)}` : ""}`, await sessionToken()),
 );
 export const searchCatalogue = cache((q: string, grade?: number) => {
   const params = new URLSearchParams({ q });

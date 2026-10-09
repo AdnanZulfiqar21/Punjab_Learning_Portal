@@ -22,6 +22,13 @@ class ItemCreateIn(BaseModel):
     title: str = Field(min_length=3, max_length=200)
     family_of: uuid.UUID | None = Field(default=None, description="Create a reviewed variant in this question's family")
     parent_item_id: uuid.UUID | None = Field(default=None, description="For a rubric: the written question it marks")
+    language: Literal["en", "ur", "roman_ur"] = "en"
+    translation_of: uuid.UUID | None = Field(
+        default=None, description="Lessons: create this as a language variant of that lesson's concept"
+    )
+    translation_origin: Literal["human", "machine_draft"] | None = Field(
+        default=None, description="Variants: translated by a person, or a machine draft that a reviewer must check"
+    )
 
 
 class DraftIn(BaseModel):
@@ -159,6 +166,9 @@ class ItemSummary(BaseModel):
     family_id: uuid.UUID | None
     parent_item_id: uuid.UUID | None
     quarantine_level: Literal["SOFT", "VOID", "KEY_ERROR"] | None
+    language: Literal["en", "ur", "roman_ur"] = "en"
+    concept_id: uuid.UUID | None = Field(default=None, description="The lesson concept this is a language variant of")
+    translation_origin: Literal["human", "machine_draft"] | None = None
 
 
 class Actions(BaseModel):
@@ -204,6 +214,13 @@ class HistoryEvent(BaseModel):
 class LessonOut(BaseModel):
     id: uuid.UUID
     title: str
+    language: Literal["en", "ur", "roman_ur"] = "en"
+    concept_id: uuid.UUID = Field(description="The lesson concept; its language variants share it")
+    available_languages: list[str] = Field(description="Languages with a reviewed, published variant of this lesson")
+    requested_language_missing: bool = Field(
+        default=False, description="True when the language asked for has no reviewed variant; another is shown"
+    )
+    translation_origin: Literal["human", "machine_draft"] | None = None
     topic_id: uuid.UUID | None
     version: int
     published_at: datetime
@@ -213,3 +230,13 @@ class LessonOut(BaseModel):
     block_types: list[str]
     body: dict[str, Any] | None = Field(description="Null when locked")
     source_refs: list[dict[str, Any]]
+
+
+class VariantOut(BaseModel):
+    item_id: uuid.UUID
+    language: Literal["en", "ur", "roman_ur"]
+    title: str
+    state: ItemStateName
+    availability: AvailabilityName
+    translation_origin: Literal["human", "machine_draft"] | None
+    original: bool

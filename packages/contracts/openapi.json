@@ -3580,6 +3580,16 @@
             "title": "Kind",
             "type": "string"
           },
+          "language": {
+            "default": "en",
+            "enum": [
+              "en",
+              "ur",
+              "roman_ur"
+            ],
+            "title": "Language",
+            "type": "string"
+          },
           "parent_item_id": {
             "anyOf": [
               {
@@ -3610,6 +3620,35 @@
               }
             ],
             "title": "Topic Id"
+          },
+          "translation_of": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Lessons: create this as a language variant of that lesson's concept",
+            "title": "Translation Of"
+          },
+          "translation_origin": {
+            "anyOf": [
+              {
+                "enum": [
+                  "human",
+                  "machine_draft"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Variants: translated by a person, or a machine draft that a reviewer must check",
+            "title": "Translation Origin"
           }
         },
         "required": [
@@ -3715,6 +3754,19 @@
             "title": "Chapter Title",
             "type": "string"
           },
+          "concept_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The lesson concept this is a language variant of",
+            "title": "Concept Id"
+          },
           "created_by": {
             "anyOf": [
               {
@@ -3756,6 +3808,16 @@
               "storyboard"
             ],
             "title": "Kind",
+            "type": "string"
+          },
+          "language": {
+            "default": "en",
+            "enum": [
+              "en",
+              "ur",
+              "roman_ur"
+            ],
+            "title": "Language",
             "type": "string"
           },
           "open_feedback": {
@@ -3882,6 +3944,21 @@
               }
             ],
             "title": "Topic Title"
+          },
+          "translation_origin": {
+            "anyOf": [
+              {
+                "enum": [
+                  "human",
+                  "machine_draft"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Translation Origin"
           },
           "updated_at": {
             "format": "date-time",
@@ -4116,6 +4193,19 @@
             "title": "Chapter Title",
             "type": "string"
           },
+          "concept_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The lesson concept this is a language variant of",
+            "title": "Concept Id"
+          },
           "created_by": {
             "anyOf": [
               {
@@ -4157,6 +4247,16 @@
               "storyboard"
             ],
             "title": "Kind",
+            "type": "string"
+          },
+          "language": {
+            "default": "en",
+            "enum": [
+              "en",
+              "ur",
+              "roman_ur"
+            ],
+            "title": "Language",
             "type": "string"
           },
           "open_feedback": {
@@ -4254,6 +4354,21 @@
               }
             ],
             "title": "Topic Title"
+          },
+          "translation_origin": {
+            "anyOf": [
+              {
+                "enum": [
+                  "human",
+                  "machine_draft"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Translation Origin"
           },
           "updated_at": {
             "format": "date-time",
@@ -4414,6 +4529,14 @@
             "title": "Access Tier",
             "type": "string"
           },
+          "available_languages": {
+            "description": "Languages with a reviewed, published variant of this lesson",
+            "items": {
+              "type": "string"
+            },
+            "title": "Available Languages",
+            "type": "array"
+          },
           "block_types": {
             "items": {
               "type": "string"
@@ -4434,6 +4557,12 @@
             "description": "Null when locked",
             "title": "Body"
           },
+          "concept_id": {
+            "description": "The lesson concept; its language variants share it",
+            "format": "uuid",
+            "title": "Concept Id",
+            "type": "string"
+          },
           "content_schema_version": {
             "title": "Content Schema Version",
             "type": "integer"
@@ -4441,6 +4570,16 @@
           "id": {
             "format": "uuid",
             "title": "Id",
+            "type": "string"
+          },
+          "language": {
+            "default": "en",
+            "enum": [
+              "en",
+              "ur",
+              "roman_ur"
+            ],
+            "title": "Language",
             "type": "string"
           },
           "locked": {
@@ -4452,6 +4591,12 @@
             "format": "date-time",
             "title": "Published At",
             "type": "string"
+          },
+          "requested_language_missing": {
+            "default": false,
+            "description": "True when the language asked for has no reviewed variant; another is shown",
+            "title": "Requested Language Missing",
+            "type": "boolean"
           },
           "source_refs": {
             "items": {
@@ -4477,6 +4622,21 @@
             ],
             "title": "Topic Id"
           },
+          "translation_origin": {
+            "anyOf": [
+              {
+                "enum": [
+                  "human",
+                  "machine_draft"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Translation Origin"
+          },
           "version": {
             "title": "Version",
             "type": "integer"
@@ -4485,6 +4645,8 @@
         "required": [
           "id",
           "title",
+          "concept_id",
+          "available_languages",
           "topic_id",
           "version",
           "published_at",
@@ -9465,6 +9627,79 @@
         "title": "ValidationOut",
         "type": "object"
       },
+      "VariantOut": {
+        "properties": {
+          "availability": {
+            "enum": [
+              "unpublished",
+              "live",
+              "quarantined",
+              "retired"
+            ],
+            "title": "Availability",
+            "type": "string"
+          },
+          "item_id": {
+            "format": "uuid",
+            "title": "Item Id",
+            "type": "string"
+          },
+          "language": {
+            "enum": [
+              "en",
+              "ur",
+              "roman_ur"
+            ],
+            "title": "Language",
+            "type": "string"
+          },
+          "original": {
+            "title": "Original",
+            "type": "boolean"
+          },
+          "state": {
+            "enum": [
+              "draft",
+              "submitted",
+              "changes_requested",
+              "approved",
+              "published"
+            ],
+            "title": "State",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "translation_origin": {
+            "anyOf": [
+              {
+                "enum": [
+                  "human",
+                  "machine_draft"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Translation Origin"
+          }
+        },
+        "required": [
+          "item_id",
+          "language",
+          "title",
+          "state",
+          "availability",
+          "translation_origin",
+          "original"
+        ],
+        "title": "VariantOut",
+        "type": "object"
+      },
       "VerifyIn": {
         "properties": {
           "note": {
@@ -11718,7 +11953,7 @@
     },
     "/v1/chapters/{chapter_id}/lessons": {
       "get": {
-        "description": "Every live lesson is listed. Premium bodies go only to callers with an active plan or trial (review R07);\nothers see the title marked locked. Free previews are readable by everyone.",
+        "description": "Every live lesson concept is listed once. Premium bodies go only to callers with an active plan or trial (review\nR07); others see the title marked locked. Free previews are readable by everyone.\n\nP07.S1.T2: a concept's reviewed variant in `language` is shown when one is live. Otherwise another reviewed variant\n(English first) is shown with `requested_language_missing`: a missing translation is explicit, never filled in.",
         "operationId": "chapter_lessons_v1_chapters__chapter_id__lessons_get",
         "parameters": [
           {
@@ -11729,6 +11964,27 @@
               "format": "uuid",
               "title": "Chapter Id",
               "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "language",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "en",
+                    "ur",
+                    "roman_ur"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Language"
             }
           }
         ],
@@ -16455,6 +16711,53 @@
           }
         },
         "summary": "Submit",
+        "tags": [
+          "studio"
+        ]
+      }
+    },
+    "/v1/studio/items/{item_id}/variants": {
+      "get": {
+        "operationId": "item_variants_v1_studio_items__item_id__variants_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "item_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Item Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/VariantOut"
+                  },
+                  "title": "Response Item Variants V1 Studio Items  Item Id  Variants Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "A lesson concept's language variants, each with its own review status",
         "tags": [
           "studio"
         ]

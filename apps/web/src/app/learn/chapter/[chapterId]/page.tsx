@@ -14,17 +14,24 @@ export const metadata: Metadata = { title: "Chapter" };
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
-export default function ChapterPage({ params }: PageProps<"/learn/chapter/[chapterId]">) {
+const LANGUAGES: [string, string][] = [
+  ["en", "English"],
+  ["ur", "اردو"],
+  ["roman_ur", "Roman Urdu"],
+];
+const LANGUAGE_NAME: Record<string, string> = { en: "English", ur: "Urdu", roman_ur: "Roman Urdu" };
+
+export default function ChapterPage({ params, searchParams }: PageProps<"/learn/chapter/[chapterId]">) {
   return (
     <Suspense fallback={<SkeletonLines lines={8} label="Loading chapter" />}>
-      {params.then(({ chapterId }) => (
-        <ChapterView id={chapterId} />
+      {Promise.all([params, searchParams]).then(([{ chapterId }, sp]) => (
+        <ChapterView id={chapterId} lang={typeof sp.lang === "string" && LANGUAGES.some(([k]) => k === sp.lang) ? sp.lang : "en"} />
       ))}
     </Suspense>
   );
 }
 
-async function ChapterView({ id }: { id: string }) {
+async function ChapterView({ id, lang }: { id: string; lang: string }) {
   if (!UUID.test(id)) notFound();
   const res = await getChapter(id);
   if (!res.ok) notFound();
@@ -59,7 +66,7 @@ async function ChapterView({ id }: { id: string }) {
       )}
 
       <Suspense fallback={<SkeletonLines lines={3} label="Loading lessons" />}>
-        <Lessons chapterId={ch.id} topics={ch.topics} />
+        <Lessons chapterId={ch.id} topics={ch.topics} lang={lang} />
       </Suspense>
 
       <section aria-labelledby="topics-heading" className="space-y-3">
@@ -148,8 +155,8 @@ function topicTitles(nodes: TopicNode[], out = new Map<string, string>()): Map<s
 
 const published = (iso: string) => new Date(iso).toLocaleDateString("en-GB", { dateStyle: "medium" });
 
-async function Lessons({ chapterId, topics }: { chapterId: string; topics: TopicNode[] }) {
-  const res = await getLessons(chapterId);
+async function Lessons({ chapterId, topics, lang }: { chapterId: string; topics: TopicNode[]; lang: string }) {
+  const res = await getLessons(chapterId, lang);
   const lessons: Lesson[] = res.ok ? res.data : [];
   const token = await sessionToken();
   const doneRes = token && lessons.some((l) => !l.locked) ? await api<string[]>(`/v1/me/chapters/${encodeURIComponent(chapterId)}/completed-lessons`, { token }) : null;
@@ -157,9 +164,26 @@ async function Lessons({ chapterId, topics }: { chapterId: string; topics: Topic
   const titles = topicTitles(topics);
   return (
     <section aria-labelledby="lessons-heading" className="space-y-4">
-      <h2 id="lessons-heading" className="text-lg font-semibold">
-        Lessons
-      </h2>
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <h2 id="lessons-heading" className="text-lg font-semibold">
+          Lessons
+        </h2>
+        {lessons.length > 0 && (
+          <nav aria-label="Lesson language" className="flex gap-1 text-sm">
+            {LANGUAGES.map(([k, label]) => (
+              <Link
+                key={k}
+                href={`/learn/chapter/${chapterId}${k === "en" ? "" : `?lang=${k}`}`}
+                aria-current={k === lang ? "true" : undefined}
+                lang={k === "ur" ? "ur" : "en"}
+                className={`rounded-lg border px-3 py-1 ${k === lang ? "border-accent font-medium" : "border-border bg-surface hover:border-accent"}`}
+              >
+                {label}
+              </Link>
+            ))}
+          </nav>
+        )}
+      </div>
       {lessons.length === 0 ? (
         <p className="text-muted">
           No reviewed lessons are published for this chapter yet. Lessons appear here only after an independent subject
@@ -168,7 +192,12 @@ async function Lessons({ chapterId, topics }: { chapterId: string; topics: Topic
       ) : (
         lessons.map((l) => (
           <article key={l.id} aria-labelledby={`lesson-${l.id}`} className="space-y-4 rounded-xl border border-border bg-surface p-5">
-            <header className="space-y-1">
+            {l.requested_language_missing && (
+              <p className="rounded-lg bg-surface-muted px-3 py-2 text-sm">
+                This lesson isn&apos;t available in {LANGUAGE_NAME[lang]} yet, so it&apos;s shown in {LANGUAGE_NAME[l.language]}.
+              </p>
+            )}
+            <header className="space-y-1" lang={l.language === "ur" ? "ur" : "en"} dir={l.language === "ur" ? "rtl" : undefined}>
               <h3 id={`lesson-${l.id}`} className="text-xl font-semibold tracking-tight">
                 {l.title}
               </h3>
@@ -189,7 +218,9 @@ async function Lessons({ chapterId, topics }: { chapterId: string; topics: Topic
                 </p>
               </div>
             ) : (
-              <LessonBlocks blocks={l.body.blocks as { type: string }[]} headingOffset={2} />
+              <div lang={l.language === "ur" ? "ur" : "en"} dir={l.language === "ur" ? "rtl" : undefined}>
+                <LessonBlocks blocks={l.body.blocks as { type: string }[]} headingOffset={2} />
+              </div>
             )}
             {token && !l.locked && l.body && (
               <form action={setLessonCompleted.bind(null, l.id, chapterId, !done.has(l.id))} className="flex flex-wrap items-center gap-3">

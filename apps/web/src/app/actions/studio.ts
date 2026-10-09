@@ -136,3 +136,15 @@ export async function createRubric(questionId: string, title: string): Promise<{
   if (!res.ok) return { error: [res.error, ...(res.errors ?? [])].join(" ") };
   redirect(`/studio/items/${res.item.id}`);
 }
+
+/** P07.S1.T2: start a language variant of this lesson concept (its own draft, its own review). */
+export async function createLanguageVariant(
+  lessonId: string,
+  title: string,
+  language: string,
+  origin: string,
+): Promise<{ error?: string } | undefined> {
+  const res = await call("/v1/studio/items", "POST", { kind: "lesson", translation_of: lessonId, language, translation_origin: origin, title: title.slice(0, 200) });
+  if (!res.ok) return { error: [res.error, ...(res.errors ?? [])].join(" ") };
+  redirect(`/studio/items/${res.item.id}`);
+}
