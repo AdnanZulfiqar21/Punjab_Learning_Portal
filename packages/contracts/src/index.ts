@@ -71,6 +71,7 @@ export type AcademicOverview = S["AcademicOverview"];
 export type SyllabusNotice = S["SyllabusNoticeOut"];
 export type ExamProfileAdmin = S["ExamProfileOut"];
 export type PublishedExamProfile = S["PublishedProfileOut"];
+export type MockReadiness = S["MockReadinessOut"];
 export type RecheckState = S["RecheckOut"];
 export type LinkedForm = S["LinkedFormOut"];
 export type LinkedAttempt = S["LinkedAttemptOut"];
