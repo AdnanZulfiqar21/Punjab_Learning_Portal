@@ -54,3 +54,24 @@ test("signed in: practice, help and account have no serious accessibility violat
     expect(new URL(page.url()).pathname, `${path} should not redirect a signed-in learner`).toBe(path);
   }
 });
+
+test("staff: studio, import, overview, sources and support have no serious accessibility violations", async ({ page, isMobile }) => {
+  test.skip(isMobile, "Staff studio runs on desktop");
+  test.setTimeout(150_000);
+  for (const [email, paths] of [
+    ["studio-author@example.com", ["/studio", "/studio/new", "/studio/imports", "/studio/overview", "/studio/sources"]],
+    ["studio-support@example.com", ["/studio/support", "/studio/support/learners"]],
+  ] as const) {
+    await page.context().clearCookies();
+    await page.goto("/signin?next=/account");
+    await page.getByLabel("Email").fill(email);
+    await page.getByLabel("Password").fill("studio-fixture-pass-1");
+    await page.getByLabel(/Simulate a multi-factor sign-in/).check();
+    await page.getByRole("button", { name: "Sign in", exact: true }).click();
+    await expect(page).toHaveURL(/:\d+\/account$/, AUTH);
+    for (const path of paths) {
+      await audit(page, path);
+      expect(new URL(page.url()).pathname, `${path} should not redirect signed-in staff`).toBe(path);
+    }
+  }
+});
