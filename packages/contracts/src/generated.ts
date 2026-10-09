@@ -1668,6 +1668,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/studio/overview": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Coverage, pipeline, quarantines, open reports and pool sufficiency per chapter (staff in scope) */
+        get: operations["academic_overview_v1_studio_overview_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/studio/queue": {
         parameters: {
             query?: never;
@@ -2303,6 +2320,25 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
+        /** AcademicOverview */
+        AcademicOverview: {
+            /** Chapters */
+            chapters: components["schemas"]["OverviewChapter"][];
+            /** Chapters Pool Sufficient */
+            chapters_pool_sufficient: number;
+            /** Chapters With Lessons */
+            chapters_with_lessons: number;
+            /** Grade */
+            grade: number;
+            /** Pool Rule */
+            pool_rule: number;
+            /** Subject */
+            subject: string;
+            /** Totals */
+            totals: {
+                [key: string]: number;
+            };
+        };
         /** AccessOut */
         AccessOut: {
             /**
@@ -4157,6 +4193,38 @@ export interface components {
             }[];
             /** Id */
             id: string;
+        };
+        /** OverviewChapter */
+        OverviewChapter: {
+            /** Approved Unpublished */
+            approved_unpublished: number;
+            /**
+             * Chapter Id
+             * Format: uuid
+             */
+            chapter_id: string;
+            /** Drafts */
+            drafts: number;
+            /** In Review */
+            in_review: number;
+            /** Key */
+            key: string;
+            /** Live Lessons */
+            live_lessons: number;
+            /** Live Mcq Families */
+            live_mcq_families: number;
+            /** Live Written */
+            live_written: number;
+            /** Number */
+            number: number;
+            /** Open Reports */
+            open_reports: number;
+            /** Pool Sufficient */
+            pool_sufficient: boolean;
+            /** Quarantined */
+            quarantined: number;
+            /** Title */
+            title: string;
         };
         /**
          * PageOut
@@ -9034,6 +9102,38 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["ItemDetail"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    academic_overview_v1_studio_overview_get: {
+        parameters: {
+            query: {
+                grade: number;
+                subject: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AcademicOverview"];
                 };
             };
             /** @description Validation Error */

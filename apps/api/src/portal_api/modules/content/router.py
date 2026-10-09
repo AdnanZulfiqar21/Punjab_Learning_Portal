@@ -867,3 +867,52 @@ def prompt_package(
             "X-Content-SHA256": digest,
         },
     )
+
+
+# ------------------------------------------------------------------ academic overview (P16.S1.T2)
+class OverviewChapter(BaseModel):
+    chapter_id: uuid.UUID
+    key: str
+    number: int
+    title: str
+    live_lessons: int
+    live_mcq_families: int
+    live_written: int
+    drafts: int
+    in_review: int
+    approved_unpublished: int
+    quarantined: int
+    open_reports: int
+    pool_sufficient: bool
+
+
+class AcademicOverview(BaseModel):
+    grade: int
+    subject: str
+    pool_rule: int
+    chapters: list[OverviewChapter]
+    totals: dict[str, int]
+    chapters_with_lessons: int
+    chapters_pool_sufficient: int
+
+
+@router.get(
+    "/overview",
+    response_model=AcademicOverview,
+    summary="Coverage, pipeline, quarantines, open reports and pool sufficiency per chapter (staff in scope)",
+)
+def academic_overview(
+    db: DB,
+    who: Member,
+    grade: Annotated[int, Query(ge=11, le=12)],
+    subject: Annotated[str, Query(min_length=2, max_length=40)],
+) -> AcademicOverview:
+    from portal_api.modules.content import overview
+
+    if not permissions_for(workflow.roles_in_scope(db, who.user.id, grade, subject)) & {
+        Permission.draft_content,
+        Permission.review_content,
+        Permission.publish_content,
+    }:
+        raise Forbidden("This class and subject are outside your role's scope.")
+    return AcademicOverview(**overview.overview(db, grade, subject))
