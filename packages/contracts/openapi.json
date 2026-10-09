@@ -2056,6 +2056,33 @@
         "title": "DecisionIn",
         "type": "object"
       },
+      "DeletionIn": {
+        "properties": {
+          "confirm_email": {
+            "maxLength": 320,
+            "minLength": 3,
+            "title": "Confirm Email",
+            "type": "string"
+          },
+          "reason": {
+            "anyOf": [
+              {
+                "maxLength": 1000,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reason"
+          }
+        },
+        "required": [
+          "confirm_email"
+        ],
+        "title": "DeletionIn",
+        "type": "object"
+      },
       "DeviceIn": {
         "properties": {
           "label": {
@@ -9644,6 +9671,70 @@
           }
         },
         "summary": "Withdraw an optional consent",
+        "tags": [
+          "identity"
+        ]
+      }
+    },
+    "/v1/me/data-export": {
+      "get": {
+        "operationId": "data_export_v1_me_data_export_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Download the personal data the portal holds about you (JSON; audited)",
+        "tags": [
+          "identity"
+        ]
+      }
+    },
+    "/v1/me/deletion-request": {
+      "post": {
+        "operationId": "deletion_request_v1_me_deletion_request_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeletionIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "title": "Response Deletion Request V1 Me Deletion Request Post",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Ask for your account and data to be deleted (handled by support under the retention policy)",
         "tags": [
           "identity"
         ]

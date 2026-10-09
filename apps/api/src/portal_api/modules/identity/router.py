@@ -7,6 +7,7 @@ from datetime import UTC, datetime
 from typing import Annotated
 
 from fastapi import APIRouter, Depends, Request, Response
+from pydantic import BaseModel, Field
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
@@ -262,3 +263,34 @@ def sign_out(principal: CurrentPrincipal, db: DB) -> Response:
     sessions.revoke(db, principal.session, "signed_out")
     db.commit()
     return Response(status_code=204)
+
+
+# ------------------------------------------------------------------ data access and deletion requests (P18.S3.T2)
+class DeletionIn(BaseModel):
+    confirm_email: str = Field(min_length=3, max_length=320)
+    reason: str | None = Field(default=None, max_length=1000)
+
+
+@router.get("/me/data-export", summary="Download the personal data the portal holds about you (JSON; audited)")
+def data_export(db: Annotated[Session, Depends(get_session)], who: CurrentPrincipal) -> Response:
+    from portal_api.modules.identity import privacy
+
+    body, filename = privacy.export(db, who.user)
+    return Response(
+        content=body,
+        media_type="application/json",
+        headers={"Content-Disposition": f'attachment; filename="{filename}"', "Cache-Control": "private, no-store"},
+    )
+
+
+@router.post(
+    "/me/deletion-request",
+    status_code=202,
+    summary="Ask for your account and data to be deleted (handled by support under the retention policy)",
+)
+def deletion_request(
+    body: DeletionIn, db: Annotated[Session, Depends(get_session)], who: CurrentPrincipal
+) -> dict[str, str]:
+    from portal_api.modules.identity import privacy
+
+    return {"ticket_id": str(privacy.request_deletion(db, who.user, body.confirm_email, body.reason))}

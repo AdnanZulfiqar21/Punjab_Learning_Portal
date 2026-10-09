@@ -12,6 +12,7 @@ import { PlanStatus } from "@/components/plan-status";
 import { NotificationPreferences } from "@/components/notification-preferences";
 import type { AssistedAccess, NotificationPreferences as Prefs } from "@portal/contracts";
 import { AssistedAccessList } from "@/components/assisted-access";
+import { DeleteAccount } from "@/components/delete-account";
 import { api } from "@/lib/session";
 
 export const metadata: Metadata = { title: "Your account", robots: { index: false } };
@@ -113,6 +114,17 @@ async function Account() {
           <AssistedAccessList items={assists.data} now={new Date().toISOString()} />
         </section>
       )}
+
+      <section aria-labelledby="privacy-heading" className="space-y-3">
+        <h2 id="privacy-heading" className="font-semibold">
+          Your data
+        </h2>
+        <p className="text-sm text-muted">Download a copy of the personal data we hold about you, or ask us to delete your account.</p>
+        <a href="/account/data-export" className="inline-block rounded-lg border border-border bg-surface px-4 py-2 font-medium hover:border-accent">
+          Download my data
+        </a>
+        <DeleteAccount />
+      </section>
 
       <section aria-labelledby="sessions-heading" className="space-y-3">
         <div className="flex items-center justify-between gap-3">
