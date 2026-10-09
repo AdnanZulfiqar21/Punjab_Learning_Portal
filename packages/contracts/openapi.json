@@ -2224,6 +2224,27 @@
         "title": "HistoryEvent",
         "type": "object"
       },
+      "InboxOut": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/NotificationOut"
+            },
+            "title": "Items",
+            "type": "array"
+          },
+          "unread": {
+            "title": "Unread",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "items",
+          "unread"
+        ],
+        "title": "InboxOut",
+        "type": "object"
+      },
       "ItemCreateIn": {
         "properties": {
           "chapter_id": {
@@ -3452,6 +3473,76 @@
         "title": "NoticeOut",
         "type": "object"
       },
+      "NotificationOut": {
+        "properties": {
+          "body": {
+            "title": "Body",
+            "type": "string"
+          },
+          "category": {
+            "enum": [
+              "service",
+              "reminder",
+              "promotional"
+            ],
+            "title": "Category",
+            "type": "string"
+          },
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "event": {
+            "title": "Event",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "link": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Link"
+          },
+          "read_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Read At"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "event",
+          "category",
+          "title",
+          "body",
+          "link",
+          "created_at",
+          "read_at"
+        ],
+        "title": "NotificationOut",
+        "type": "object"
+      },
       "OpIn": {
         "properties": {
           "op_id": {
@@ -3674,6 +3765,52 @@
         "title": "PageOut",
         "type": "object"
       },
+      "PreferencesIO": {
+        "properties": {
+          "email_enabled": {
+            "default": true,
+            "title": "Email Enabled",
+            "type": "boolean"
+          },
+          "promotional_opt_in": {
+            "default": false,
+            "description": "Optional news; off unless chosen",
+            "title": "Promotional Opt In",
+            "type": "boolean"
+          },
+          "push_enabled": {
+            "default": true,
+            "title": "Push Enabled",
+            "type": "boolean"
+          },
+          "quiet_end": {
+            "default": "07:00",
+            "title": "Quiet End",
+            "type": "string"
+          },
+          "quiet_start": {
+            "default": "22:00",
+            "description": "Local HH:MM; urgent notices still arrive",
+            "title": "Quiet Start",
+            "type": "string"
+          },
+          "reminders_enabled": {
+            "default": true,
+            "description": "Study reminders (mock and revision)",
+            "title": "Reminders Enabled",
+            "type": "boolean"
+          },
+          "timezone": {
+            "default": "Asia/Karachi",
+            "description": "IANA timezone used to show times",
+            "maxLength": 60,
+            "title": "Timezone",
+            "type": "string"
+          }
+        },
+        "title": "PreferencesIO",
+        "type": "object"
+      },
       "ProfileIn": {
         "additionalProperties": false,
         "description": "Onboarding answers (P04.S3.T1). Everything can be corrected later; no identity documents are collected.",
@@ -3886,6 +4023,30 @@
           }
         },
         "title": "ProfileOut",
+        "type": "object"
+      },
+      "PushTokenIn": {
+        "properties": {
+          "platform": {
+            "enum": [
+              "ios",
+              "android"
+            ],
+            "title": "Platform",
+            "type": "string"
+          },
+          "token": {
+            "maxLength": 200,
+            "minLength": 10,
+            "title": "Token",
+            "type": "string"
+          }
+        },
+        "required": [
+          "token",
+          "platform"
+        ],
+        "title": "PushTokenIn",
         "type": "object"
       },
       "QuarantineIn": {
@@ -8059,6 +8220,172 @@
         ]
       }
     },
+    "/v1/me/notification-preferences": {
+      "get": {
+        "operationId": "get_preferences_v1_me_notification_preferences_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PreferencesIO"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Get Preferences",
+        "tags": [
+          "notifications"
+        ]
+      },
+      "put": {
+        "operationId": "put_preferences_v1_me_notification_preferences_put",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PreferencesIO"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PreferencesIO"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Put Preferences",
+        "tags": [
+          "notifications"
+        ]
+      }
+    },
+    "/v1/me/notifications": {
+      "get": {
+        "operationId": "my_notifications_v1_me_notifications_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "offset",
+            "required": false,
+            "schema": {
+              "default": 0,
+              "minimum": 0,
+              "title": "Offset",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 30,
+              "maximum": 100,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InboxOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "My Notifications",
+        "tags": [
+          "notifications"
+        ]
+      }
+    },
+    "/v1/me/notifications/read-all": {
+      "post": {
+        "operationId": "read_all_v1_me_notifications_read_all_post",
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Read All",
+        "tags": [
+          "notifications"
+        ]
+      }
+    },
+    "/v1/me/notifications/{notification_id}/read": {
+      "post": {
+        "operationId": "read_one_v1_me_notifications__notification_id__read_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "notification_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Notification Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Read One",
+        "tags": [
+          "notifications"
+        ]
+      }
+    },
     "/v1/me/profile": {
       "put": {
         "operationId": "put_profile_v1_me_profile_put",
@@ -8097,6 +8424,74 @@
         "summary": "Save onboarding/learning preferences",
         "tags": [
           "identity"
+        ]
+      }
+    },
+    "/v1/me/push-tokens": {
+      "delete": {
+        "operationId": "delete_push_token_v1_me_push_tokens_delete",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "token",
+            "required": true,
+            "schema": {
+              "maxLength": 200,
+              "title": "Token",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Delete Push Token",
+        "tags": [
+          "notifications"
+        ]
+      },
+      "post": {
+        "operationId": "add_push_token_v1_me_push_tokens_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PushTokenIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Register this device for push notifications",
+        "tags": [
+          "notifications"
         ]
       }
     },

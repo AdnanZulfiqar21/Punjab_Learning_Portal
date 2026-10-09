@@ -9,6 +9,9 @@ import { currentUser, listSessions } from "@/lib/session";
 import { STUDIO_ROLES } from "@/lib/studio";
 import { getAccess } from "@/lib/access";
 import { PlanStatus } from "@/components/plan-status";
+import { NotificationPreferences } from "@/components/notification-preferences";
+import type { NotificationPreferences as Prefs } from "@portal/contracts";
+import { api } from "@/lib/session";
 
 export const metadata: Metadata = { title: "Your account", robots: { index: false } };
 
@@ -30,7 +33,11 @@ async function Account() {
   const user = await currentUser();
   if (!user) redirect("/signin?next=/account");
   const { me, token } = user;
-  const [sessions, access] = await Promise.all([listSessions(token), getAccess(token)]);
+  const [sessions, access, prefs] = await Promise.all([
+    listSessions(token),
+    getAccess(token),
+    api<Prefs>("/v1/me/notification-preferences", { token }),
+  ]);
   const p = me.profile;
   return (
     <div className="space-y-8">
@@ -78,6 +85,20 @@ async function Account() {
             Your plan
           </h2>
           <PlanStatus access={access} />
+        </section>
+      )}
+
+      {prefs.ok && (
+        <section aria-labelledby="notifications-heading" className="space-y-3">
+          <div className="flex items-center justify-between gap-3">
+            <h2 id="notifications-heading" className="font-semibold">
+              Notifications
+            </h2>
+            <Link href="/notifications" className="text-sm text-accent underline-offset-2 hover:underline">
+              Open your notifications
+            </Link>
+          </div>
+          <NotificationPreferences initial={prefs.data} />
         </section>
       )}
 

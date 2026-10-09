@@ -67,6 +67,10 @@ class Settings(BaseSettings):
     trial_device_evidence: Literal["required", "fallback"] | None = None
     trial_ref_pepper: str = "dev-only-trial-pepper"
 
+    # Notifications (P15.S1). "dev_outbox" records rendered email locally (development/test only); "none" leaves email
+    # deliveries visibly unavailable until an approved sender exists (BLOCKERS B04). Push has no provider until B07.
+    notification_email_adapter: Literal["dev_outbox", "none"] = "dev_outbox"
+
     @model_validator(mode="after")
     def _validate_role(self) -> Settings:
         if self.role in (Role.production, Role.staging):
@@ -93,6 +97,8 @@ class Settings(BaseSettings):
                 problems.append("evidence_store must be private object storage, not the local development directory")
             if self.trial_device_evidence is None:
                 problems.append("trial_device_evidence must be set explicitly (required or fallback; roadmap §16)")
+            if self.notification_email_adapter == "dev_outbox":
+                problems.append("notification_email_adapter dev_outbox is development/test only")
             if self.trial_ref_pepper.startswith("dev-only"):
                 problems.append("trial_ref_pepper must be a deployment secret")
             if problems:

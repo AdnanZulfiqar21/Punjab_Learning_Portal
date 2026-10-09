@@ -22,6 +22,7 @@ import type {
   SearchResult,
   SessionCreated,
   SubmitResult,
+  Inbox,
   SupportTicket,
   TrialDecision,
   WrittenAttempt,
@@ -227,6 +228,12 @@ export const api = {
     ),
   confirmUnanswered: (token: string, id: string, position: number) =>
     request<void>(`/v1/written-attempts/${encodeURIComponent(id)}/questions/${position}/confirm-unanswered`, { method: "POST", token }),
+
+  // Notifications (P15.S1): the shared inbox. Push to this device needs builds and credentials (B07).
+  notifications: (token: string, signal?: AbortSignal) => request<Inbox>("/v1/me/notifications?limit=50", { token, signal }),
+  readNotification: (token: string, id: string) =>
+    request<void>(`/v1/me/notifications/${encodeURIComponent(id)}/read`, { method: "POST", token }),
+  readAllNotifications: (token: string) => request<void>("/v1/me/notifications/read-all", { method: "POST", token }),
 
   // Help (P15.S3): the learner's own requests and replies.
   tickets: (token: string, signal?: AbortSignal) => request<SupportTicket[]>("/v1/support/tickets", { token, signal }),

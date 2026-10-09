@@ -262,6 +262,18 @@ def staff_reply(
     elif not internal and t.status == "open":
         t.status = "waiting_learner"
     t.updated_at = now
+    if not internal:  # P15.S1: learners hear about replies; internal notes never reach them
+        from portal_api.modules.notifications import service as notifications
+
+        db.flush()
+        notifications.notify(
+            db,
+            t.user_id,
+            "support.reply",
+            {"subject": t.subject},
+            dedupe_key=f"support-reply:{t.id}:{now.isoformat()}",
+            link=f"/help/{t.id}",
+        )
     record(
         db,
         actor=who.user.id,
