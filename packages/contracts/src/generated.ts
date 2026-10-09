@@ -1736,6 +1736,58 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/studio/sources/{source_id}/review": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Record that a source was checked (reviewers) */
+        post: operations["review_source_v1_studio_sources__source_id__review_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/studio/syllabus-notices": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Official notices awaiting or after review */
+        get: operations["list_notices_v1_studio_syllabus_notices_get"];
+        put?: never;
+        /** Log an official syllabus or exam notice for human review (never applied automatically) */
+        post: operations["log_notice_v1_studio_syllabus_notices_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/studio/syllabus-notices/{notice_id}/decision": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Accept (action needed) or dismiss a notice (subject reviewers in scope; audited) */
+        post: operations["decide_notice_v1_studio_syllabus_notices__notice_id__decision_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/studio/validate": {
         parameters: {
             query?: never;
@@ -4088,6 +4140,26 @@ export interface components {
             /** From Staff */
             from_staff: boolean;
         };
+        /** NoticeDecisionIn */
+        NoticeDecisionIn: {
+            /** Accept */
+            accept: boolean;
+            /** Decision */
+            decision: string;
+        };
+        /** NoticeIn */
+        NoticeIn: {
+            /** Grade */
+            grade: number;
+            /** Source Url */
+            source_url?: string | null;
+            /** Subject */
+            subject: string;
+            /** Summary */
+            summary: string;
+            /** Title */
+            title: string;
+        };
         /** NoticeOut */
         NoticeOut: {
             /**
@@ -5081,6 +5153,8 @@ export interface components {
              * Format: uuid
              */
             id: string;
+            /** Last Reviewed At */
+            last_reviewed_at?: string | null;
             /** Missing Pages */
             missing_pages: unknown[];
             /** Pdf Pages */
@@ -5094,6 +5168,11 @@ export interface components {
             publication_rights_evidence: string | null;
             /** Publication Rights Set At */
             publication_rights_set_at: string | null;
+            /**
+             * Review Stale
+             * @default false
+             */
+            review_stale: boolean;
             /** Source Id */
             source_id: string;
             /** Subject Code */
@@ -5122,6 +5201,11 @@ export interface components {
             sha256: string;
             /** Source Id */
             source_id: string;
+        };
+        /** SourceReviewIn */
+        SourceReviewIn: {
+            /** Note */
+            note: string;
         };
         /** StaffArticle */
         StaffArticle: {
@@ -5332,6 +5416,42 @@ export interface components {
             destination: string;
             /** Reason */
             reason: string;
+        };
+        /** SyllabusNoticeOut */
+        SyllabusNoticeOut: {
+            /** Can Decide */
+            can_decide: boolean;
+            /** Decided At */
+            decided_at: string | null;
+            /** Decision */
+            decision: string | null;
+            /** Grade */
+            grade: number;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Live Items In Scope */
+            live_items_in_scope: number;
+            /**
+             * Logged At
+             * Format: date-time
+             */
+            logged_at: string;
+            /** Source Url */
+            source_url: string | null;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "open" | "accepted" | "dismissed";
+            /** Subject */
+            subject: string;
+            /** Summary */
+            summary: string;
+            /** Title */
+            title: string;
         };
         /** TicketIn */
         TicketIn: {
@@ -9226,6 +9346,127 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["SourceOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    review_source_v1_studio_sources__source_id__review_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                source_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SourceReviewIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_notices_v1_studio_syllabus_notices_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SyllabusNoticeOut"][];
+                };
+            };
+        };
+    };
+    log_notice_v1_studio_syllabus_notices_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["NoticeIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SyllabusNoticeOut"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    decide_notice_v1_studio_syllabus_notices__notice_id__decision_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                notice_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["NoticeDecisionIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SyllabusNoticeOut"][];
                 };
             };
             /** @description Validation Error */

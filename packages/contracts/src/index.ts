@@ -68,6 +68,7 @@ export type AssistedAccess = S["AssistOut"];
 export type ImportBatch = S["ImportBatchOut"];
 export type AuditPage = S["AuditPage"];
 export type AcademicOverview = S["AcademicOverview"];
+export type SyllabusNotice = S["SyllabusNoticeOut"];
 export type RecheckState = S["RecheckOut"];
 export type LinkedForm = S["LinkedFormOut"];
 export type LinkedAttempt = S["LinkedAttemptOut"];
