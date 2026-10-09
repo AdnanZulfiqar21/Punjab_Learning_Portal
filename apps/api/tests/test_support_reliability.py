@@ -99,7 +99,7 @@ def test_a_suppressed_address_is_never_sent_to(client: TestClient) -> None:
     with get_sessionmaker()() as db:
         service.notify(db, learner.id, "support.reply", {"subject": "Fixture"}, dedupe_key="supp-1")
         db.commit()
-        delivery.deliver_due(db)
+        delivery.deliver_due(db, limit=100_000)
         d = db.scalar(select(NotificationDelivery).where(NotificationDelivery.user_id == learner.id))
     assert d is not None and d.status == "skipped" and "suppressed" in (d.last_error or "")
     params = {"channel": "email", "destination": learner.email.upper()}  # normalised: case doesn't matter
@@ -131,7 +131,7 @@ def test_dead_letters_can_be_inspected_and_requeued(client: TestClient, monkeypa
                 .values(next_attempt_at=NotificationDelivery.created_at)
             )
             db.commit()
-            delivery.deliver_due(db)
+            delivery.deliver_due(db, limit=100_000)
     monkeypatch.undo()
     letters = client.get("/v1/ops/notifications/dead-letters", headers=operator.headers).json()
     mine = next(
@@ -142,7 +142,7 @@ def test_dead_letters_can_be_inspected_and_requeued(client: TestClient, monkeypa
     assert client.post(url, headers=operator.headers).status_code == 204
     assert client.post(url, headers=operator.headers).status_code == 409  # only failed ones
     with get_sessionmaker()() as db:
-        delivery.deliver_due(db)
+        delivery.deliver_due(db, limit=100_000)
     metrics = client.get("/v1/ops/notifications/metrics", headers=operator.headers).json()
     assert metrics["deliveries"]["email"].get("sent", 0) >= 1
     assert metrics["inbox"]["support.reply"]["created"] >= 1 and "read" in metrics["inbox"]["support.reply"]
