@@ -72,6 +72,13 @@ def start(db: Session, who: Principal, form_id: uuid.UUID) -> Attempt:
     existing = db.scalar(select(Attempt).where(Attempt.form_id == form_id, Attempt.user_id == who.user.id))
     if existing is not None:
         return existing  # starting is idempotent: one attempt per personal practice form
+    if forms.superseded_positions(db, form):
+        # §5.7 before start: a question was quarantined, corrected or replaced since this test was built. The shared
+        # original is never mutated; the learner builds a new test from the approved versions.
+        raise Conflict(
+            "A question in this test was corrected or is under review since it was built. Build a new test.",
+            code_reason="FORM_SUPERSEDED",
+        )
     now = db_now(db)
     deadline = now + timedelta(seconds=form.duration_s) if form.duration_s else None
     cutoff = deadline + timedelta(milliseconds=form.late_write_tolerance_ms) if deadline else None

@@ -37,6 +37,22 @@ export default function StudioPage({ searchParams }: PageProps<"/studio">) {
         <Link href="/studio/imports" className="rounded-lg border border-border bg-surface px-4 py-2.5 font-medium hover:border-accent">
           Import
         </Link>
+        <form action="/studio/export" method="get" className="flex items-center gap-1" aria-label="Export content">
+          <select name="grade" aria-label="Export class" className="rounded-lg border border-border bg-surface px-2 py-2.5">
+            <option value="11">XI</option>
+            <option value="12">XII</option>
+          </select>
+          <select name="subject" aria-label="Export subject" className="rounded-lg border border-border bg-surface px-2 py-2.5">
+            <option value="biology">Biology</option>
+            <option value="chemistry">Chemistry</option>
+            <option value="physics">Physics</option>
+            <option value="computer_science">Computer Science</option>
+            <option value="mathematics">Mathematics</option>
+          </select>
+          <button type="submit" className="rounded-lg border border-border bg-surface px-4 py-2.5 font-medium hover:border-accent">
+            Export
+          </button>
+        </form>
         <Link
           href="/studio/new"
           className="rounded-lg bg-accent px-4 py-2.5 font-medium text-white hover:bg-accent-strong dark:text-background"

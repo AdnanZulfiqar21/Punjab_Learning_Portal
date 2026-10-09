@@ -164,6 +164,39 @@ def affected_attempts(db: Session, version_id: uuid.UUID) -> list[uuid.UUID]:
     )
 
 
+def affected_report(db: Session, item_id: uuid.UUID) -> list[dict[str, Any]]:
+    """P08.S4.T2: per version of a question, the practice forms and attempts it reaches, grouped before start, active
+    and released (finalised). Counts only; no learner identities."""
+    from sqlalchemy import exists
+
+    versions = db.scalars(
+        select(ContentVersion).where(ContentVersion.item_id == item_id).order_by(ContentVersion.number)
+    ).all()
+    out = []
+    for v in versions:
+        form_ids = select(FormItem.form_id).where(FormItem.version_id == v.id)
+        before = db.scalar(
+            select(func.count())
+            .select_from(PracticeForm)
+            .where(PracticeForm.id.in_(form_ids), ~exists().where(Attempt.form_id == PracticeForm.id))
+        )
+        by_status = dict(
+            db.execute(
+                select(Attempt.status, func.count()).where(Attempt.form_id.in_(form_ids)).group_by(Attempt.status)
+            ).all()
+        )
+        out.append(
+            {
+                "version": v.number,
+                "status": v.status,
+                "before_start": int(before or 0),
+                "active": int(by_status.get("active", 0)),
+                "released": int(by_status.get("finalised", 0)),
+            }
+        )
+    return out
+
+
 def _reason_text(adjs: list[scoring.Adjudication]) -> str:
     kinds = {a.treatment for a in adjs}
     parts = []

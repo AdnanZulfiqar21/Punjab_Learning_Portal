@@ -219,6 +219,11 @@ def _detail(db: Session, item: ContentItem, who: Principal) -> ItemDetail:
         and mfa
         and item.availability == Availability.quarantined.value
         and bool(kinds.get(item.kind).quarantine_levels),
+        rollback=Permission.publish_content in perms
+        and mfa
+        and not retired
+        and item.published_version_id is not None
+        and workflow.previous_published(db, item) is not None,
         correct_score=Permission.adjudicate in perms
         and mfa
         and item.kind == "mcq"
@@ -438,6 +443,15 @@ def access_tier(db: DB, who: Publisher, item_id: uuid.UUID, body: AccessTierIn) 
 @router.post("/items/{item_id}/release", response_model=ItemDetail)
 def release(db: DB, who: Quarantiner, item_id: uuid.UUID, body: ChangeReasonIn) -> ItemDetail:
     return _detail(db, workflow.release(db, who, item_id, body.reason), who)
+
+
+@router.post(
+    "/items/{item_id}/rollback",
+    response_model=ItemDetail,
+    summary="Put the previously published version back (publishers, MFA; audited, nothing erased)",
+)
+def rollback(db: DB, who: Publisher, item_id: uuid.UUID, body: ChangeReasonIn) -> ItemDetail:
+    return _detail(db, workflow.rollback(db, who, item_id, body.reason), who)
 
 
 @router.post("/items/{item_id}/retire", response_model=ItemDetail)
@@ -701,3 +715,53 @@ def discard_import(db: DB, who: Author, batch_id: uuid.UUID) -> ImportBatchOut:
     from portal_api.modules.content import imports
 
     return _batch_out(db, imports.discard(db, who, batch_id), with_rows=False)
+
+
+# ------------------------------------------------------------------ portable export (P06.S4.T2, EXPORT-01)
+@router.get(
+    "/export",
+    summary="Portable JSON export of one class and subject: catalogue structure, every item and all versions "
+    "(publishers in scope, MFA; audited)",
+)
+def export_content(
+    db: DB,
+    who: Publisher,
+    grade: Annotated[int, Query(ge=11, le=12)],
+    subject: Annotated[str, Query(min_length=2, max_length=40)],
+) -> Response:
+    from portal_api.modules.content import export
+
+    body, filename = export.export(db, who, grade, subject)
+    return Response(
+        content=body,
+        media_type="application/json",
+        headers={"Content-Disposition": f'attachment; filename="{filename}"', "Cache-Control": "private, no-store"},
+    )
+
+
+class AffectedOut(BaseModel):
+    version: int
+    status: str
+    before_start: int = Field(description="Built practice tests not yet started (they will not start; §5.7)")
+    active: int = Field(description="Attempts in progress (keep their original contents; corrections apply at submit)")
+    released: int = Field(description="Submitted attempts (re-scored by a recorded correction)")
+
+
+@router.get(
+    "/items/{item_id}/affected",
+    response_model=list[AffectedOut],
+    summary="Practice tests and attempts each version of a question reaches, before start / active / released",
+)
+def affected(db: DB, who: Member, item_id: uuid.UUID) -> list[AffectedOut]:
+    from portal_api.modules.assessment import adjudications
+
+    item = workflow.get_item(db, item_id)
+    perms = permissions_for(workflow.roles_in_scope(db, who.user.id, item.grade_number, item.subject_code))
+    if not perms & {
+        Permission.review_content,
+        Permission.publish_content,
+        Permission.quarantine_content,
+        Permission.adjudicate,
+    }:
+        raise Forbidden("This item is outside the subjects and classes your role covers.")
+    return [AffectedOut(**r) for r in adjudications.affected_report(db, item.id)]

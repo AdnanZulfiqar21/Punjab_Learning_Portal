@@ -1070,6 +1070,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/studio/export": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Portable JSON export of one class and subject: catalogue structure, every item and all versions (publishers in scope, MFA; audited) */
+        get: operations["export_content_v1_studio_export_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/studio/help/articles": {
         parameters: {
             query?: never;
@@ -1259,6 +1276,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/studio/items/{item_id}/affected": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Practice tests and attempts each version of a question reaches, before start / active / released */
+        get: operations["affected_v1_studio_items__item_id__affected_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/studio/items/{item_id}/assign": {
         parameters: {
             query?: never;
@@ -1406,6 +1440,23 @@ export interface paths {
         put?: never;
         /** Revise */
         post: operations["revise_v1_studio_items__item_id__revise_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/studio/items/{item_id}/rollback": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Put the previously published version back (publishers, MFA; audited, nothing erased) */
+        post: operations["rollback_v1_studio_items__item_id__rollback_post"];
         delete?: never;
         options?: never;
         head?: never;
@@ -2169,6 +2220,11 @@ export interface components {
             review: boolean;
             /** Revise */
             revise: boolean;
+            /**
+             * Rollback
+             * @default false
+             */
+            rollback: boolean;
             /** Set Access Tier */
             set_access_tier: boolean;
             /** Submit */
@@ -2275,6 +2331,28 @@ export interface components {
             versions: {
                 [key: string]: unknown;
             }[];
+        };
+        /** AffectedOut */
+        AffectedOut: {
+            /**
+             * Active
+             * @description Attempts in progress (keep their original contents; corrections apply at submit)
+             */
+            active: number;
+            /**
+             * Before Start
+             * @description Built practice tests not yet started (they will not start; §5.7)
+             */
+            before_start: number;
+            /**
+             * Released
+             * @description Submitted attempts (re-scored by a recorded correction)
+             */
+            released: number;
+            /** Status */
+            status: string;
+            /** Version */
+            version: number;
         };
         /** AllowanceOut */
         AllowanceOut: {
@@ -7558,6 +7636,38 @@ export interface operations {
             };
         };
     };
+    export_content_v1_studio_export_get: {
+        parameters: {
+            query: {
+                grade: number;
+                subject: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": unknown;
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     staff_articles_v1_studio_help_articles_get: {
         parameters: {
             query?: never;
@@ -7948,6 +8058,37 @@ export interface operations {
             };
         };
     };
+    affected_v1_studio_items__item_id__affected_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                item_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AffectedOut"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     assign_v1_studio_items__item_id__assign_post: {
         parameters: {
             query?: never;
@@ -8221,6 +8362,41 @@ export interface operations {
         };
     };
     revise_v1_studio_items__item_id__revise_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                item_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ChangeReasonIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ItemDetail"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    rollback_v1_studio_items__item_id__rollback_post: {
         parameters: {
             query?: never;
             header?: never;
