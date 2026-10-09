@@ -22,6 +22,8 @@ import type {
   SearchResult,
   SessionCreated,
   SubmitResult,
+  HelpArticle,
+  HelpArticleSummary,
   Inbox,
   SupportTicket,
   TrialDecision,
@@ -234,6 +236,12 @@ export const api = {
   readNotification: (token: string, id: string) =>
     request<void>(`/v1/me/notifications/${encodeURIComponent(id)}/read`, { method: "POST", token }),
   readAllNotifications: (token: string) => request<void>("/v1/me/notifications/read-all", { method: "POST", token }),
+
+  // Help articles (P15.S2): published, public, searchable.
+  helpArticles: (q: string, signal?: AbortSignal) =>
+    getJSON<HelpArticleSummary[]>(`/v1/help/articles?q=${encodeURIComponent(q)}`, signal),
+  helpArticle: (slug: string, signal?: AbortSignal) =>
+    getJSON<HelpArticle>(`/v1/help/articles/${encodeURIComponent(slug)}`, signal),
 
   // Help (P15.S3): the learner's own requests and replies.
   tickets: (token: string, signal?: AbortSignal) => request<SupportTicket[]>("/v1/support/tickets", { token, signal }),

@@ -16,6 +16,11 @@ export default function HelpPage() {
         <div>
           <h1 className="text-2xl font-semibold tracking-tight">Help</h1>
           <p className="text-muted">Ask about your account, plan or a technical problem. To report a mistake in a question, use the link under it in your results.</p>
+          <p className="text-sm">
+            <Link href="/help/articles" className="text-accent underline">
+              Browse help articles
+            </Link>
+          </p>
         </div>
         <Link href="/help/new" className="rounded-lg bg-accent px-4 py-2.5 font-medium text-white hover:bg-accent-strong dark:text-background">
           New request

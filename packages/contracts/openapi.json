@@ -456,6 +456,122 @@
         "title": "AnswerOut",
         "type": "object"
       },
+      "ArticleOut": {
+        "properties": {
+          "body": {
+            "additionalProperties": true,
+            "description": "Content blocks (heading, paragraph, list, callout)",
+            "title": "Body",
+            "type": "object"
+          },
+          "fallback_locale": {
+            "description": "True when the requested language had no version, so English is shown",
+            "title": "Fallback Locale",
+            "type": "boolean"
+          },
+          "locale": {
+            "enum": [
+              "en",
+              "ur"
+            ],
+            "title": "Locale",
+            "type": "string"
+          },
+          "published_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Published At"
+          },
+          "slug": {
+            "title": "Slug",
+            "type": "string"
+          },
+          "summary": {
+            "title": "Summary",
+            "type": "string"
+          },
+          "tags": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Tags",
+            "type": "array"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "version": {
+            "title": "Version",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "slug",
+          "locale",
+          "title",
+          "summary",
+          "tags",
+          "version",
+          "body",
+          "published_at",
+          "fallback_locale"
+        ],
+        "title": "ArticleOut",
+        "type": "object"
+      },
+      "ArticleSummary": {
+        "properties": {
+          "locale": {
+            "enum": [
+              "en",
+              "ur"
+            ],
+            "title": "Locale",
+            "type": "string"
+          },
+          "slug": {
+            "title": "Slug",
+            "type": "string"
+          },
+          "summary": {
+            "title": "Summary",
+            "type": "string"
+          },
+          "tags": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Tags",
+            "type": "array"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "version": {
+            "title": "Version",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "slug",
+          "locale",
+          "title",
+          "summary",
+          "tags",
+          "version"
+        ],
+        "title": "ArticleSummary",
+        "type": "object"
+      },
       "AssignIn": {
         "properties": {
           "reviewer_id": {
@@ -1770,49 +1886,6 @@
         "title": "DeviceIn",
         "type": "object"
       },
-      "DraftIn": {
-        "properties": {
-          "body": {
-            "additionalProperties": true,
-            "title": "Body",
-            "type": "object"
-          },
-          "revision": {
-            "description": "The revision this edit started from; a stale value returns 409.",
-            "minimum": 1.0,
-            "title": "Revision",
-            "type": "integer"
-          },
-          "source_refs": {
-            "items": {
-              "additionalProperties": true,
-              "type": "object"
-            },
-            "maxItems": 40,
-            "title": "Source Refs",
-            "type": "array"
-          },
-          "title": {
-            "anyOf": [
-              {
-                "maxLength": 200,
-                "minLength": 3,
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Title"
-          }
-        },
-        "required": [
-          "revision",
-          "body"
-        ],
-        "title": "DraftIn",
-        "type": "object"
-      },
       "EntitlementOut": {
         "properties": {
           "ends_at": {
@@ -2243,6 +2316,151 @@
           "unread"
         ],
         "title": "InboxOut",
+        "type": "object"
+      },
+      "IncidentIn": {
+        "properties": {
+          "components": {
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 10,
+            "title": "Components",
+            "type": "array"
+          },
+          "message": {
+            "maxLength": 2000,
+            "minLength": 10,
+            "title": "Message",
+            "type": "string"
+          },
+          "title": {
+            "maxLength": 160,
+            "minLength": 5,
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "title",
+          "message"
+        ],
+        "title": "IncidentIn",
+        "type": "object"
+      },
+      "IncidentOut": {
+        "properties": {
+          "components": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Components",
+            "type": "array"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "resolved_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Resolved At"
+          },
+          "started_at": {
+            "format": "date-time",
+            "title": "Started At",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "investigating",
+              "identified",
+              "monitoring",
+              "resolved"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "updates": {
+            "items": {
+              "$ref": "#/components/schemas/IncidentUpdateOut"
+            },
+            "title": "Updates",
+            "type": "array"
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "status",
+          "components",
+          "started_at",
+          "resolved_at",
+          "updates"
+        ],
+        "title": "IncidentOut",
+        "type": "object"
+      },
+      "IncidentUpdateIn": {
+        "properties": {
+          "message": {
+            "maxLength": 2000,
+            "minLength": 5,
+            "title": "Message",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "investigating",
+              "identified",
+              "monitoring",
+              "resolved"
+            ],
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "status",
+          "message"
+        ],
+        "title": "IncidentUpdateIn",
+        "type": "object"
+      },
+      "IncidentUpdateOut": {
+        "properties": {
+          "at": {
+            "format": "date-time",
+            "title": "At",
+            "type": "string"
+          },
+          "message": {
+            "title": "Message",
+            "type": "string"
+          },
+          "status": {
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "status",
+          "message",
+          "at"
+        ],
+        "title": "IncidentUpdateOut",
         "type": "object"
       },
       "ItemCreateIn": {
@@ -5720,6 +5938,74 @@
         "title": "SourceRef",
         "type": "object"
       },
+      "StaffArticle": {
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "locale": {
+            "title": "Locale",
+            "type": "string"
+          },
+          "published": {
+            "title": "Published",
+            "type": "boolean"
+          },
+          "slug": {
+            "title": "Slug",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "draft",
+              "published",
+              "retired"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "title": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Title"
+          },
+          "unpublished_changes": {
+            "title": "Unpublished Changes",
+            "type": "boolean"
+          },
+          "working_version": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Working Version"
+          }
+        },
+        "required": [
+          "id",
+          "slug",
+          "locale",
+          "status",
+          "title",
+          "working_version",
+          "published",
+          "unpublished_changes"
+        ],
+        "title": "StaffArticle",
+        "type": "object"
+      },
       "StaffDraft": {
         "description": "PR32-02: everything a saved, unreleased draft of this case intends, restored when the workspace reopens.",
         "properties": {
@@ -5954,6 +6240,28 @@
           "context"
         ],
         "title": "StaffTicketOut",
+        "type": "object"
+      },
+      "StatusOut": {
+        "properties": {
+          "incidents": {
+            "items": {
+              "$ref": "#/components/schemas/IncidentOut"
+            },
+            "title": "Incidents",
+            "type": "array"
+          },
+          "operational": {
+            "description": "False while any incident is unresolved",
+            "title": "Operational",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "operational",
+          "incidents"
+        ],
+        "title": "StatusOut",
         "type": "object"
       },
       "SubjectInGrade": {
@@ -7357,6 +7665,49 @@
         "title": "SubmitIn",
         "type": "object"
       },
+      "portal_api__modules__content__schemas__DraftIn": {
+        "properties": {
+          "body": {
+            "additionalProperties": true,
+            "title": "Body",
+            "type": "object"
+          },
+          "revision": {
+            "description": "The revision this edit started from; a stale value returns 409.",
+            "minimum": 1.0,
+            "title": "Revision",
+            "type": "integer"
+          },
+          "source_refs": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "maxItems": 40,
+            "title": "Source Refs",
+            "type": "array"
+          },
+          "title": {
+            "anyOf": [
+              {
+                "maxLength": 200,
+                "minLength": 3,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Title"
+          }
+        },
+        "required": [
+          "revision",
+          "body"
+        ],
+        "title": "DraftIn",
+        "type": "object"
+      },
       "portal_api__modules__content__schemas__SubmitIn": {
         "properties": {
           "note": {
@@ -7373,6 +7724,55 @@
           }
         },
         "title": "SubmitIn",
+        "type": "object"
+      },
+      "portal_api__modules__help__router__DraftIn": {
+        "properties": {
+          "locale": {
+            "default": "en",
+            "enum": [
+              "en",
+              "ur"
+            ],
+            "title": "Locale",
+            "type": "string"
+          },
+          "markdown": {
+            "maxLength": 50000,
+            "minLength": 10,
+            "title": "Markdown",
+            "type": "string"
+          },
+          "slug": {
+            "maxLength": 80,
+            "minLength": 2,
+            "title": "Slug",
+            "type": "string"
+          },
+          "summary": {
+            "title": "Summary",
+            "type": "string"
+          },
+          "tags": {
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 20,
+            "title": "Tags",
+            "type": "array"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "slug",
+          "title",
+          "summary",
+          "markdown"
+        ],
+        "title": "DraftIn",
         "type": "object"
       },
       "portal_api__modules__identity__schemas__RevokeIn": {
@@ -8099,6 +8499,136 @@
         "summary": "The book for one grade+subject",
         "tags": [
           "curriculum"
+        ]
+      }
+    },
+    "/v1/help/articles": {
+      "get": {
+        "operationId": "list_articles_v1_help_articles_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "q",
+            "required": false,
+            "schema": {
+              "default": "",
+              "maxLength": 200,
+              "title": "Q",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "locale",
+            "required": false,
+            "schema": {
+              "default": "en",
+              "enum": [
+                "en",
+                "ur"
+              ],
+              "title": "Locale",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 30,
+              "maximum": 50,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/ArticleSummary"
+                  },
+                  "title": "Response List Articles V1 Help Articles Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Search published help articles",
+        "tags": [
+          "help"
+        ]
+      }
+    },
+    "/v1/help/articles/{slug}": {
+      "get": {
+        "operationId": "get_article_v1_help_articles__slug__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "slug",
+            "required": true,
+            "schema": {
+              "title": "Slug",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "locale",
+            "required": false,
+            "schema": {
+              "default": "en",
+              "enum": [
+                "en",
+                "ur"
+              ],
+              "title": "Locale",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArticleOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Article",
+        "tags": [
+          "help"
         ]
       }
     },
@@ -8846,6 +9376,100 @@
         ]
       }
     },
+    "/v1/ops/incidents": {
+      "post": {
+        "operationId": "open_incident_v1_ops_incidents_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IncidentIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IncidentOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Open Incident",
+        "tags": [
+          "help"
+        ]
+      }
+    },
+    "/v1/ops/incidents/{incident_id}/updates": {
+      "post": {
+        "operationId": "update_incident_v1_ops_incidents__incident_id__updates_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "incident_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Incident Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/IncidentUpdateIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IncidentOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Update Incident",
+        "tags": [
+          "help"
+        ]
+      }
+    },
     "/v1/ops/written-backlog": {
       "get": {
         "operationId": "backlog_v1_ops_written_backlog_get",
@@ -9501,6 +10125,27 @@
         ]
       }
     },
+    "/v1/status": {
+      "get": {
+        "operationId": "status_v1_status_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatusOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Known incidents (public; no sign-in needed)",
+        "tags": [
+          "help"
+        ]
+      }
+    },
     "/v1/studio/block-registry": {
       "get": {
         "operationId": "block_registry_v1_studio_block_registry_get",
@@ -9521,6 +10166,156 @@
         "summary": "Block types, schema version and renderer requirements (\u00a75.4)",
         "tags": [
           "studio"
+        ]
+      }
+    },
+    "/v1/studio/help/articles": {
+      "get": {
+        "operationId": "staff_articles_v1_studio_help_articles_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/StaffArticle"
+                  },
+                  "title": "Response Staff Articles V1 Studio Help Articles Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Staff Articles",
+        "tags": [
+          "help"
+        ]
+      },
+      "put": {
+        "operationId": "save_article_v1_studio_help_articles_put",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/portal_api__modules__help__router__DraftIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StaffArticle"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Save a draft (a new version)",
+        "tags": [
+          "help"
+        ]
+      }
+    },
+    "/v1/studio/help/articles/{article_id}/publish": {
+      "post": {
+        "operationId": "publish_article_v1_studio_help_articles__article_id__publish_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "article_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Article Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StaffArticle"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Publish (MFA)",
+        "tags": [
+          "help"
+        ]
+      }
+    },
+    "/v1/studio/help/articles/{article_id}/retire": {
+      "post": {
+        "operationId": "retire_article_v1_studio_help_articles__article_id__retire_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "article_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Article Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StaffArticle"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Retire (MFA)",
+        "tags": [
+          "help"
         ]
       }
     },
@@ -9733,7 +10528,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/DraftIn"
+                "$ref": "#/components/schemas/portal_api__modules__content__schemas__DraftIn"
               }
             }
           },

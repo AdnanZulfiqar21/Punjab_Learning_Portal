@@ -8,6 +8,7 @@ import { useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore
 import type { AnswerOpResult, PracticeAttempt, RevealResult } from "@portal/contracts";
 import { revealItem, saveAnswers, submitAttempt, type Op } from "@/app/actions/practice";
 import { LessonBlocks } from "@/components/lesson-blocks";
+import { HelpLink } from "@/components/help-link";
 
 const DEBOUNCE_MS = 400; // ≤ 500 ms (P10.S2.T1)
 const PRE_FLUSH_MS = 5000; // best-effort flush at D − 5 s
@@ -252,6 +253,7 @@ export function AttemptRunner({ attempt }: { attempt: PracticeAttempt }) {
                 ? `Saving ${pending}…`
                 : `${answered} answered · all saved`}
           </span>
+          {connection === "retrying" && <HelpLink slug="practice-timer-and-saving">About saving</HelpLink>}
           {deadline !== null && (
             <span aria-label="Time remaining" className={`font-mono tabular-nums ${remaining !== null && remaining < 60_000 ? "text-danger" : ""}`}>
               {remaining === null

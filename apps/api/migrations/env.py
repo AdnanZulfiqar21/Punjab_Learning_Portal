@@ -11,6 +11,7 @@ import portal_api.modules.assessment.models
 import portal_api.modules.audit.models
 import portal_api.modules.content.models
 import portal_api.modules.curriculum.models
+import portal_api.modules.help.models
 import portal_api.modules.identity.models
 import portal_api.modules.identity.sessions
 import portal_api.modules.notifications.models

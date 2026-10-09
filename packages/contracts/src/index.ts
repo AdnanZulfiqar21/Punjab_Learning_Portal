@@ -73,6 +73,10 @@ export type WrittenNotice = S["NoticeOut"];
 export type Inbox = S["InboxOut"];
 export type InboxItem = S["NotificationOut"];
 export type NotificationPreferences = S["PreferencesIO"];
+export type HelpArticleSummary = S["ArticleSummary"];
+export type HelpArticle = S["ArticleOut"];
+export type StaffHelpArticle = S["StaffArticle"];
+export type ServiceStatus = S["StatusOut"];
 
 /** RFC 9457 problem details returned by every API error. */
 export interface Problem {

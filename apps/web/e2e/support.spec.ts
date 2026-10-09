@@ -94,3 +94,37 @@ test("support pages are for staff only", async ({ page }) => {
   await newLearner(page, "/studio/support");
   await expect(page.getByText("Staff only")).toBeVisible(AUTH);
 });
+
+
+test("help-centre staff publish an article with MFA and anyone can find it", async ({ browser }) => {
+  // P15.S2.T1: drafts are private; publishing needs an MFA session; readers search published text without signing in.
+  const slug = `fixture-help-${Date.now()}`;
+  const word = `quokkaword${Date.now() % 100000}`;
+  const staffPage = await (await browser.newContext()).newPage();
+  await staffPage.goto("/signin?next=/studio/help");
+  await staffPage.getByLabel("Email").fill("studio-support@example.com");
+  await staffPage.getByLabel("Password").fill("studio-fixture-pass-1");
+  await staffPage.getByLabel(/Simulate a multi-factor sign-in/).check();
+  await staffPage.getByRole("button", { name: "Sign in", exact: true }).click();
+  await expect(staffPage).toHaveURL(/\/studio\/help$/, AUTH);
+  await staffPage.getByLabel("Slug (same slug updates that article)").fill(slug);
+  await staffPage.getByLabel("Title").fill("Fixture help article");
+  await staffPage.getByLabel("Summary").fill("A technical fixture for the help-centre journey.");
+  await staffPage.getByLabel(/^Text/).fill(`Technical fixture text with ${word}.
+
+# Steps
+- one
+- two`);
+  await staffPage.getByRole("button", { name: "Save draft" }).click();
+  await expect(staffPage.getByText("Draft saved.")).toBeVisible(AUTH);
+  const visitor = await (await browser.newContext()).newPage();
+  await visitor.goto(`/help/articles?q=${word}`);
+  await expect(visitor.getByText("No matching articles")).toBeVisible(AUTH); // drafts are never public
+  const row = staffPage.getByRole("listitem").filter({ hasText: slug });
+  await row.getByRole("button", { name: "Publish" }).click();
+  await expect(row.getByRole("link", { name: "published" })).toBeVisible(AUTH);
+  await visitor.goto(`/help/articles?q=${word}`);
+  await visitor.getByRole("link", { name: "Fixture help article" }).click();
+  await expect(visitor.getByRole("heading", { name: "Steps" })).toBeVisible(AUTH);
+  await expect(visitor.getByText("Version 1")).toBeVisible();
+});

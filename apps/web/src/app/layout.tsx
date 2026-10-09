@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import Link from "next/link";
 import { Suspense } from "react";
 import { AccountNav } from "@/components/account-nav";
+import { IncidentBanner } from "@/components/incident-banner";
 import "./globals.css";
 
 const sans = Geist({ variable: "--font-sans-ui", subsets: ["latin"] });
@@ -70,6 +71,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             </ul>
           </nav>
         </header>
+        <Suspense fallback={null}>
+          <IncidentBanner />
+        </Suspense>
         <main id="main" className="mx-auto w-full max-w-5xl flex-1 px-4 py-8">
           {children}
         </main>
