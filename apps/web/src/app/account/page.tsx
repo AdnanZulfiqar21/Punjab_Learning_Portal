@@ -133,6 +133,9 @@ async function Account() {
         <a href="/account/data-export" className="inline-block rounded-lg border border-border bg-surface px-4 py-2 font-medium hover:border-accent">
           Download my data
         </a>
+        <Link href="/account/exports" className="ml-2 inline-block rounded-lg border border-border bg-surface px-4 py-2 font-medium hover:border-accent">
+          Exports
+        </Link>
         <DeleteAccount />
       </section>
 
