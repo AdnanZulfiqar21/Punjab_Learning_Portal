@@ -270,6 +270,9 @@ def rescore(db: Session, attempt_id: uuid.UUID) -> ScoreVersion | None:
     )
     db.add(sv)
     db.flush()
+    from portal_api.modules.assessment import notebook
+
+    notebook.record(db, attempt, form, sv.items, _now(db))  # voided questions stay in the notebook with a reason
     record(
         db,
         actor=None,

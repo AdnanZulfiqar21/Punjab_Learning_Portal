@@ -64,6 +64,27 @@ export async function joinSession(id: string): Promise<{ error?: string } | unde
   redirect(`/practice/attempt/${res.data.attempt_id}`);
 }
 
+/** P12.S3: build a review test from due notebook entries and open it. */
+export async function startReview(grade: number, subject: string, idempotencyKey: string): Promise<{ error?: string } | undefined> {
+  const t = await token("/practice/notebook");
+  const created = await api<PracticeForm>("/v1/me/notebook/review", {
+    method: "POST",
+    token: t,
+    body: JSON.stringify({ grade, subject, count: 10 }),
+    headers: { "Idempotency-Key": idempotencyKey },
+  });
+  if (!created.ok) return { error: (created.problem as Problem | null)?.detail ?? "The review couldn't be prepared." };
+  const attempt = await api<PracticeAttempt>(`/v1/practice/forms/${created.data.id}/attempt`, { method: "POST", token: t });
+  if (!attempt.ok) return { error: (attempt.problem as Problem | null)?.detail ?? "The review was prepared but couldn't be started." };
+  redirect(`/practice/attempt/${attempt.data.id}`);
+}
+
+export async function saveNote(id: string, note: string): Promise<{ ok: boolean }> {
+  const t = await token("/practice/notebook");
+  const res = await api<unknown>(`/v1/me/notebook/${encodeURIComponent(id)}`, { method: "PUT", token: t, body: JSON.stringify({ note }) });
+  return { ok: res.ok };
+}
+
 export type Op = { op_id: string; position: number; revision: number; option_id: string | null };
 
 export type SaveOutcome =

@@ -4729,6 +4729,100 @@
         "title": "MockSessionOut",
         "type": "object"
       },
+      "NoteIn": {
+        "properties": {
+          "note": {
+            "maxLength": 2000,
+            "title": "Note",
+            "type": "string"
+          }
+        },
+        "required": [
+          "note"
+        ],
+        "title": "NoteIn",
+        "type": "object"
+      },
+      "NotebookEntryOut": {
+        "properties": {
+          "due": {
+            "title": "Due",
+            "type": "boolean"
+          },
+          "due_at": {
+            "format": "date-time",
+            "title": "Due At",
+            "type": "string"
+          },
+          "grade": {
+            "title": "Grade",
+            "type": "integer"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "misses": {
+            "title": "Misses",
+            "type": "integer"
+          },
+          "note": {
+            "title": "Note",
+            "type": "string"
+          },
+          "position": {
+            "title": "Position",
+            "type": "integer"
+          },
+          "source_attempt_id": {
+            "format": "uuid",
+            "title": "Source Attempt Id",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "open",
+              "mastered",
+              "voided"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "stem": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Stem",
+            "type": "array"
+          },
+          "subject": {
+            "title": "Subject",
+            "type": "string"
+          },
+          "why": {
+            "title": "Why",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "grade",
+          "subject",
+          "status",
+          "note",
+          "misses",
+          "due_at",
+          "due",
+          "why",
+          "source_attempt_id",
+          "position",
+          "stem"
+        ],
+        "title": "NotebookEntryOut",
+        "type": "object"
+      },
       "NoticeDecisionIn": {
         "properties": {
           "accept": {
@@ -6443,38 +6537,6 @@
           "explanation"
         ],
         "title": "RevealOut",
-        "type": "object"
-      },
-      "ReviewIn": {
-        "properties": {
-          "checklist": {
-            "additionalProperties": {
-              "type": "boolean"
-            },
-            "description": "Checks confirmed by the reviewer; questions require every check to approve",
-            "title": "Checklist",
-            "type": "object"
-          },
-          "comment": {
-            "maxLength": 4000,
-            "minLength": 3,
-            "title": "Comment",
-            "type": "string"
-          },
-          "decision": {
-            "enum": [
-              "approve",
-              "request_changes"
-            ],
-            "title": "Decision",
-            "type": "string"
-          }
-        },
-        "required": [
-          "decision",
-          "comment"
-        ],
-        "title": "ReviewIn",
         "type": "object"
       },
       "ReviewOut": {
@@ -9483,6 +9545,37 @@
         "title": "RevokeIn",
         "type": "object"
       },
+      "portal_api__modules__assessment__router__ReviewIn": {
+        "properties": {
+          "count": {
+            "default": 10,
+            "maximum": 20.0,
+            "minimum": 1.0,
+            "title": "Count",
+            "type": "integer"
+          },
+          "grade": {
+            "enum": [
+              11,
+              12
+            ],
+            "title": "Grade",
+            "type": "integer"
+          },
+          "subject": {
+            "maxLength": 40,
+            "minLength": 2,
+            "title": "Subject",
+            "type": "string"
+          }
+        },
+        "required": [
+          "grade",
+          "subject"
+        ],
+        "title": "ReviewIn",
+        "type": "object"
+      },
       "portal_api__modules__assessment__schemas__SubmitIn": {
         "properties": {
           "idempotency_key": {
@@ -9547,6 +9640,38 @@
           "body"
         ],
         "title": "DraftIn",
+        "type": "object"
+      },
+      "portal_api__modules__content__schemas__ReviewIn": {
+        "properties": {
+          "checklist": {
+            "additionalProperties": {
+              "type": "boolean"
+            },
+            "description": "Checks confirmed by the reviewer; questions require every check to approve",
+            "title": "Checklist",
+            "type": "object"
+          },
+          "comment": {
+            "maxLength": 4000,
+            "minLength": 3,
+            "title": "Comment",
+            "type": "string"
+          },
+          "decision": {
+            "enum": [
+              "approve",
+              "request_changes"
+            ],
+            "title": "Decision",
+            "type": "string"
+          }
+        },
+        "required": [
+          "decision",
+          "comment"
+        ],
+        "title": "ReviewIn",
         "type": "object"
       },
       "portal_api__modules__content__schemas__SubmitIn": {
@@ -11321,6 +11446,138 @@
         "summary": "Ask for your account and data to be deleted (handled by support under the retention policy)",
         "tags": [
           "identity"
+        ]
+      }
+    },
+    "/v1/me/notebook": {
+      "get": {
+        "operationId": "my_notebook_v1_me_notebook_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/NotebookEntryOut"
+                  },
+                  "title": "Response My Notebook V1 Me Notebook Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Your mistake notebook, due entries first",
+        "tags": [
+          "practice"
+        ]
+      }
+    },
+    "/v1/me/notebook/review": {
+      "post": {
+        "operationId": "review_test_v1_me_notebook_review_post",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Idempotency-Key",
+            "required": true,
+            "schema": {
+              "maxLength": 80,
+              "minLength": 8,
+              "title": "Idempotency-Key",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/portal_api__modules__assessment__router__ReviewIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FormOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Build a review test from due notebook entries (spaced 1/3/7/14 days)",
+        "tags": [
+          "practice"
+        ]
+      }
+    },
+    "/v1/me/notebook/{entry_id}": {
+      "put": {
+        "operationId": "note_entry_v1_me_notebook__entry_id__put",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "entry_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Entry Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NoteIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotebookEntryOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Add or change your private note",
+        "tags": [
+          "practice"
         ]
       }
     },
@@ -14633,7 +14890,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ReviewIn"
+                "$ref": "#/components/schemas/portal_api__modules__content__schemas__ReviewIn"
               }
             }
           },
