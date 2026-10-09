@@ -29,6 +29,11 @@ async function audit(page: Page, path: string) {
 
 test.describe.configure({ mode: "serial" });
 
+test("a signed-out visit to a new help request goes to sign-in, not round in circles", async ({ page }) => {
+  await page.goto("/help/new?category=account");
+  await expect(page).toHaveURL(/\/signin\?next=%2Fhelp%2Fnew%3Fcategory%3Daccount$/, AUTH);
+});
+
 for (const path of ["/", "/learn", "/search?q=cell", "/help", "/signin"]) {
   test(`signed out: ${path} has no serious accessibility violations`, async ({ page }) => {
     await audit(page, path);
@@ -46,5 +51,6 @@ test("signed in: practice, help and account have no serious accessibility violat
   await expect(page).toHaveURL(/\/account$/, AUTH);
   for (const path of ["/account", "/practice", "/help", "/help/new", "/notifications"]) {
     await audit(page, path);
+    expect(new URL(page.url()).pathname, `${path} should not redirect a signed-in learner`).toBe(path);
   }
 });

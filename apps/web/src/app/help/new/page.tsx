@@ -15,8 +15,11 @@ export default function NewTicketPage({ searchParams }: PageProps<"/help/new">) 
       <Suspense fallback={<SkeletonLines lines={5} label="Loading" />}>
         {searchParams.then(async (sp) => {
           const user = await currentUser();
-          if (!user) redirect("/help/new");
           const one = (k: string) => (typeof sp[k] === "string" ? (sp[k] as string) : "");
+          if (!user) {
+            const back = new URLSearchParams(Object.entries({ category: one("category"), kind: one("kind"), id: one("id"), position: one("position") }).filter(([, v]) => v));
+            redirect(`/signin?next=${encodeURIComponent(`/help/new${back.size ? `?${back.toString()}` : ""}`)}`); // never back to itself: that looped
+          }
           return <NewTicketForm category={one("category") || "technical"} refKind={one("kind")} refId={one("id")} refPosition={one("position")} />;
         })}
       </Suspense>
