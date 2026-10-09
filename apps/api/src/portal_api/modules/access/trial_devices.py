@@ -373,7 +373,14 @@ def claim(
     adapter = adapter_for(surface, proof)
     verdict = adapter.evaluate(proof)
     c.evidence = {"adapter": adapter.name, "verdict": verdict.status, "detail": verdict.detail, "mode": evidence_mode()}
-    if verdict.status == "consumed":
+    exception = _active_exception(db, user_id, surface, now) if verdict.status == "consumed" else None
+    if exception is not None:
+        # 5a. A reviewer's account-scoped exception (§16.7: shared or second-hand device). The device marker is left
+        # as it is; the grant is recorded as made under that exception.
+        c.evidence = {**c.evidence, "exception": str(exception.id)}
+        exception.used_at = now
+        _move(db, c, "MARK_CONFIRMED", f"device previously used; allowed by reviewed exception {exception.id}")
+    elif verdict.status == "consumed":
         # 5. A consumed marker with no grant on this account: no automatic repeat redemption (§16.4).
         _move(db, c, "CLOSED_INELIGIBLE", "prior promotional use recorded for this device", "device_used")
         record(
@@ -420,6 +427,8 @@ def _mark_and_grant(
     c.grant_id = grant.id
     _move(db, c, "GRANTED", "trial granted")
     method = "web" if c.surface == "web" else ("fallback" if c.evidence.get("verdict") == "unknown" else "first_use")
+    if c.evidence.get("exception"):
+        method = "exception"
     device = None
     if c.installation_ref:
         device = TrialDeviceUse(
