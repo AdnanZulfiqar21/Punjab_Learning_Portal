@@ -764,9 +764,13 @@ def my_evidence(
         .order_by(Topic.display_order)
     ).all()
     results = evidence.classify(evidence.learner_responses(db, who.user.id, now), now)
-    outcomes = [(c.id, c.number, f"Chapter {c.number}: {c.title} (whole chapter)") for c in chapters]
     number = {c.id: c.number for c in chapters}
-    outcomes += [(t.id, number[t.chapter_id], f"{t.number + ' ' if t.number else ''}{t.title}") for t in topics]
+    outcomes = []  # book order: each chapter's own row, then its topics (the plan's tie-break relies on this)
+    for c in chapters:
+        outcomes.append((c.id, c.number, f"Chapter {c.number}: {c.title} (whole chapter)"))
+        outcomes += [
+            (t.id, c.number, f"{t.number + ' ' if t.number else ''}{t.title}") for t in topics if t.chapter_id == c.id
+        ]
     rows = []
     for oid, chap, label in outcomes:
         r = results.get(oid)

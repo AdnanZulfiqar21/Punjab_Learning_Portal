@@ -10,17 +10,8 @@ import { ErrorState, Loading, Notice, T } from "@/components/ui";
 import { Radius, Space, TAB_SCREEN_TOP } from "@/constants/theme";
 import { useRequest } from "@/hooks/use-request";
 import { useTheme } from "@/hooks/use-theme";
-import { api, ApiError, GRADE_LABEL } from "@/lib/api";
+import { api, ApiError, GRADE_LABEL, SUBJECTS, type SubjectCode } from "@/lib/api";
 import { useAuth } from "@/lib/auth";
-
-const SUBJECTS = [
-  ["biology", "Biology"],
-  ["chemistry", "Chemistry"],
-  ["physics", "Physics"],
-  ["computer_science", "Computer Science"],
-  ["mathematics", "Mathematics"],
-] as const;
-type SubjectCode = (typeof SUBJECTS)[number][0];
 
 const newKey = () => `${Date.now().toString(36)}${Math.random().toString(36).slice(2, 12)}`;
 
@@ -37,6 +28,8 @@ export default function PracticeScreen() {
             <Button variant="link" label="Mock tests" onPress={() => router.push("/mocks")} />
             <Button variant="link" label="Mistake notebook" onPress={() => router.push("/notebook")} />
             <Button variant="link" label="Progress" onPress={() => router.push("/progress")} />
+            <Button variant="link" label="What you've shown" onPress={() => router.push("/evidence")} />
+            <Button variant="link" label="Study plan" onPress={() => router.push("/plan")} />
           </View>
         )}
         {state.status === "loading" && <Loading label="Checking your sign-in" />}

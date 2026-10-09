@@ -9,6 +9,8 @@ import type {
   MockSession,
   NotebookEntry,
   ProgressReport,
+  EvidenceReport,
+  StudyPlan,
   PublishedExamProfile,
   AssistedAccess,
   AttemptResult,
@@ -204,6 +206,13 @@ export const api = {
       headers: { "Idempotency-Key": idempotencyKey },
     }),
   progress: (token: string, signal?: AbortSignal) => request<ProgressReport>("/v1/me/progress", { token, signal }),
+  evidence: (token: string, grade: number, subject: string, signal?: AbortSignal) =>
+    request<EvidenceReport>(`/v1/me/evidence?grade=${grade}&subject=${encodeURIComponent(subject)}`, { token, signal }),
+  studyPlan: (token: string, q: { grade: number; subject: string; target_date: string; daily_minutes: number }, signal?: AbortSignal) =>
+    request<StudyPlan>(
+      `/v1/me/study-plan?grade=${q.grade}&subject=${encodeURIComponent(q.subject)}&target_date=${encodeURIComponent(q.target_date)}&daily_minutes=${q.daily_minutes}`,
+      { token, signal },
+    ),
   startAttempt: (token: string, formId: string) =>
     request<PracticeAttempt>(`/v1/practice/forms/${encodeURIComponent(formId)}/attempt`, { method: "POST", token }),
   attempt: (token: string, id: string, signal?: AbortSignal) =>
@@ -284,6 +293,15 @@ export const api = {
 };
 
 export const GRADE_LABEL: Record<number, string> = { 11: "Class XI", 12: "Class XII" };
+
+export const SUBJECTS = [
+  ["biology", "Biology"],
+  ["chemistry", "Chemistry"],
+  ["physics", "Physics"],
+  ["computer_science", "Computer Science"],
+  ["mathematics", "Mathematics"],
+] as const;
+export type SubjectCode = (typeof SUBJECTS)[number][0];
 
 export function pageRange(start?: number | null, end?: number | null): string {
   if (start == null && end == null) return "unknown";
