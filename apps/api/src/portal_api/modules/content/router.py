@@ -6,7 +6,7 @@ import uuid
 from datetime import datetime
 from typing import Annotated, Any, Literal
 
-from fastapi import APIRouter, Depends, Query, Response
+from fastapi import APIRouter, Depends, Query, Request, Response
 from pydantic import BaseModel, Field
 from sqlalchemy import select
 from sqlalchemy.orm import Session, selectinload
@@ -574,3 +574,130 @@ def list_score_corrections(db: DB, who: Member, item_id: uuid.UUID) -> list[Scor
 
     workflow.get_item(db, item_id)
     return [_correction_out(db, a) for a in adjudications.corrections(db, item_id)]
+
+
+# ------------------------------------------------------------------ structured import (P06.S2, IMPORT-01)
+class ImportRowOut(BaseModel):
+    row: int
+    external_id: str | None
+    action: Literal["create", "update", "unchanged", "skip", "error"]
+    errors: list[str]
+    warnings: list[str]
+    item_id: uuid.UUID | None
+
+
+class ImportBatchOut(BaseModel):
+    id: uuid.UUID
+    kind: str
+    format: Literal["json", "csv"]
+    filename: str
+    sha256: str
+    status: Literal["previewed", "committed", "discarded"]
+    counts: dict[str, int]
+    created_at: datetime
+    expires_at: datetime
+    committed_at: datetime | None
+    rows: list[ImportRowOut] = Field(default_factory=list)
+
+
+def _batch_out(db: Session, b: Any, with_rows: bool = True) -> ImportBatchOut:
+    from portal_api.modules.content import imports
+
+    return ImportBatchOut(
+        id=b.id,
+        kind=b.kind,
+        format=b.format,
+        filename=b.filename,
+        sha256=b.sha256,
+        status=b.status,
+        counts=b.counts,
+        created_at=b.created_at,
+        expires_at=b.expires_at,
+        committed_at=b.committed_at,
+        rows=[
+            ImportRowOut(
+                row=r.row_number,
+                external_id=r.external_id,
+                action=r.action,  # type: ignore[arg-type]
+                errors=r.errors,
+                warnings=r.warnings,
+                item_id=r.item_id,
+            )
+            for r in imports.rows(db, b.id)
+        ]
+        if with_rows
+        else [],
+    )
+
+
+@router.post(
+    "/imports",
+    response_model=ImportBatchOut,
+    status_code=201,
+    summary="Preview an import (raw JSON or CSV body, at most 5 MB): validates every row, writes nothing to content",
+)
+async def preview_import(
+    db: DB,
+    who: Author,
+    request: Request,
+    format: Annotated[Literal["json", "csv"], Query()] = "json",
+    filename: Annotated[str, Query(max_length=200)] = "import",
+) -> ImportBatchOut:
+    from starlette.concurrency import run_in_threadpool
+
+    from portal_api.errors import TooLarge
+    from portal_api.modules.content import imports
+
+    buf = bytearray()
+    async for chunk in request.stream():
+        buf.extend(chunk)
+        if len(buf) > imports.MAX_BYTES:
+            raise TooLarge("Import files can be at most 5 MB.")
+    batch = await run_in_threadpool(imports.preview, db, who, bytes(buf), fmt=format, filename=filename)
+    return _batch_out(db, batch)
+
+
+@router.get("/imports", response_model=list[ImportBatchOut], summary="Your recent imports")
+def list_imports(db: DB, who: Author) -> list[ImportBatchOut]:
+    from portal_api.modules.content import imports
+
+    return [_batch_out(db, b, with_rows=False) for b in imports.list_batches(db, who)]
+
+
+@router.get("/imports/{batch_id}", response_model=ImportBatchOut, summary="An import preview or result")
+def get_import(db: DB, who: Author, batch_id: uuid.UUID) -> ImportBatchOut:
+    from portal_api.modules.content import imports
+
+    return _batch_out(db, imports.get_batch(db, who, batch_id))
+
+
+@router.get("/imports/{batch_id}/report.csv", summary="Downloadable correction report (one line per row)")
+def import_report(db: DB, who: Author, batch_id: uuid.UUID) -> Response:
+    from portal_api.modules.content import imports
+
+    return Response(
+        content=imports.report_csv(db, who, batch_id),
+        media_type="text/csv; charset=utf-8",
+        headers={
+            "Content-Disposition": f'attachment; filename="import-{batch_id}.csv"',
+            "Cache-Control": "private, no-store",
+        },
+    )
+
+
+@router.post(
+    "/imports/{batch_id}/commit",
+    response_model=ImportBatchOut,
+    summary="Commit a previewed import atomically: every valid row becomes or updates a draft, or nothing is written",
+)
+def commit_import(db: DB, who: Author, batch_id: uuid.UUID) -> ImportBatchOut:
+    from portal_api.modules.content import imports
+
+    return _batch_out(db, imports.commit(db, who, batch_id))
+
+
+@router.post("/imports/{batch_id}/discard", response_model=ImportBatchOut, summary="Discard a preview")
+def discard_import(db: DB, who: Author, batch_id: uuid.UUID) -> ImportBatchOut:
+    from portal_api.modules.content import imports
+
+    return _batch_out(db, imports.discard(db, who, batch_id), with_rows=False)
