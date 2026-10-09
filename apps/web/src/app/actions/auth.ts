@@ -11,8 +11,10 @@ export type FormState = { error?: string; fieldErrors?: Record<string, string> }
 
 function safeNext(next: FormDataEntryValue | null): string {
   const n = typeof next === "string" ? next : "";
-  // Only same-site relative paths; never an open redirect.
-  return n.startsWith("/") && !n.startsWith("//") && !n.includes("\\") ? n : "/account";
+  // Only same-site relative paths; never an open redirect. Browsers drop tabs/newlines inside URLs and read "\" as
+  // "/", so "/\t/evil" or "/\evil" would become "//evil": any control character or backslash is refused outright.
+  if (/[\u0000-\u001f\u007f\\]/.test(n)) return "/account";
+  return /^\/(?!\/)/.test(n) ? n : "/account";
 }
 
 /** Development-only email/password sign-in (the API refuses this adapter outside development/test). */
