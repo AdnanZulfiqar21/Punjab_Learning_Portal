@@ -5,18 +5,11 @@ import { sessionToken } from "@/lib/session";
 export async function AccountNav() {
   const signedIn = Boolean(await sessionToken());
   return (
-    <>
-      {signedIn && (
-        <Link href="/notifications" className="rounded-md px-3 py-2 text-muted hover:bg-surface-muted hover:text-foreground">
-          Notifications
-        </Link>
-      )}
-      <Link
+    <Link
       href={signedIn ? "/account" : "/signin"}
       className="rounded-md px-3 py-2 text-muted hover:bg-surface-muted hover:text-foreground"
     >
       {signedIn ? "Account" : "Sign in"}
-      </Link>
-    </>
+    </Link>
   );
 }
