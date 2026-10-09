@@ -5,6 +5,7 @@ import { Platform } from "react-native";
 import type {
   Access,
   AppSession,
+  AssistedAccess,
   AttemptResult,
   Book,
   Catalogue,
@@ -151,6 +152,12 @@ export const api = {
   revokeSession: (token: string, id: string) =>
     request<void>(`/v1/me/sessions/${encodeURIComponent(id)}`, { method: "DELETE", token }),
   revokeOthers: (token: string) => request<void>("/v1/me/sessions/revoke-others", { method: "POST", token }),
+  // P15.S3.T3 / P18.S3.T2: support's assisted access to my activity, and account deletion requests.
+  assistedAccess: (token: string, signal?: AbortSignal) => request<AssistedAccess[]>("/v1/me/assisted-access", { token, signal }),
+  endAssistedAccess: (token: string, id: string) =>
+    request<void>(`/v1/me/assisted-access/${encodeURIComponent(id)}`, { method: "DELETE", token }),
+  requestDeletion: (token: string, confirmEmail: string, reason: string | null) =>
+    request<{ ticket_id: string }>("/v1/me/deletion-request", { method: "POST", token, body: { confirm_email: confirmEmail, reason } }),
   signOut: (token: string) => request<void>("/v1/me/session", { method: "DELETE", token }),
   saveProfile: (token: string, body: ProfileInput) => request<unknown>("/v1/me/profile", { method: "PUT", token, body }),
 

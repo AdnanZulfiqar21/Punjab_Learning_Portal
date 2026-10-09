@@ -230,9 +230,88 @@ function SignedIn({ token, me }: { token: string; me: Me }) {
         )}
       </View>
 
+      <YourData token={token} email={me.email ?? ""} />
+
       <View style={{ borderTopWidth: 1, borderColor: c.border, paddingTop: Space.lg }}>
         <Button variant="secondary" label="Sign out of this device" busy={busy === "signout"} onPress={() => act("signout", signOut)} />
       </View>
+    </View>
+  );
+}
+
+
+/** P15.S3.T3 / P18.S3.T2: support's assisted access to my activity, and asking for the account to be deleted. */
+function YourData({ token, email }: { token: string; email: string }) {
+  const { handleError } = useAuth();
+  const assists = useRequest((signal) => api.assistedAccess(token, signal), [token]);
+  const [busy, setBusy] = useState<string | null>(null);
+  const [confirm, setConfirm] = useState("");
+  const [reason, setReason] = useState("");
+  const [message, setMessage] = useState<{ ok: boolean; text: string } | null>(null);
+  const now = new Date().toISOString();
+
+  async function end(id: string) {
+    setBusy(id);
+    try {
+      await api.endAssistedAccess(token, id);
+      assists.retry();
+    } catch (e) {
+      handleError(e);
+    } finally {
+      setBusy(null);
+    }
+  }
+
+  async function requestDeletion() {
+    setBusy("delete");
+    setMessage(null);
+    try {
+      await api.requestDeletion(token, confirm.trim(), reason.trim() || null);
+      setMessage({ ok: true, text: "We've received your request. Our support team will contact you through your help requests." });
+    } catch (e) {
+      setMessage({ ok: false, text: e instanceof ApiError ? e.message : "We couldn't record your request." });
+    } finally {
+      setBusy(null);
+    }
+  }
+
+  return (
+    <View style={{ gap: Space.md }}>
+      <T variant="heading">Your data</T>
+      {assists.state.status === "success" && assists.state.data.length > 0 && (
+        <View style={{ gap: Space.sm }}>
+          <T variant="small">Times a support team member could see a summary of your activity to help with a request. They can never act as you.</T>
+          {assists.state.data.map((a) => {
+            const active = !a.revoked_at && a.expires_at > now;
+            return (
+              <Card key={a.id}>
+                <T>{a.reason}</T>
+                <T variant="small">
+                  {when(a.granted_at)} · {active ? `until ${when(a.expires_at)}` : "ended"}
+                </T>
+                {active && (
+                  <View style={{ marginTop: Space.sm, alignSelf: "flex-start" }}>
+                    <Button variant="secondary" label="End now" busy={busy === a.id} onPress={() => end(a.id)} />
+                  </View>
+                )}
+              </Card>
+            );
+          })}
+        </View>
+      )}
+      <T variant="small">To get a copy of your data, use Account on the website. To delete your account, confirm your email below.</T>
+      <Field label="Type your email address to confirm" value={confirm} onChangeText={setConfirm} autoCapitalize="none" keyboardType="email-address" />
+      <Field label="Reason (optional)" value={reason} onChangeText={setReason} multiline />
+      <View style={{ alignSelf: "flex-start" }}>
+        <Button
+          variant="secondary"
+          label="Ask us to delete my account"
+          busy={busy === "delete"}
+          disabled={!confirm.trim() || confirm.trim().toLowerCase() !== email.toLowerCase()}
+          onPress={requestDeletion}
+        />
+      </View>
+      {message && (message.ok ? <Notice title="Request received">{message.text}</Notice> : <FormError message={message.text} />)}
     </View>
   );
 }
