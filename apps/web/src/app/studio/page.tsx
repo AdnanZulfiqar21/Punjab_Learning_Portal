@@ -131,7 +131,7 @@ function QueueRow({ item: i }: { item: StudioItemSummary }) {
         </p>
       </div>
       <div className="flex flex-wrap gap-2">
-        <Badge>{{ mcq: "MCQ", written: "Written", rubric: "Rubric" }[i.kind as string] ?? "Lesson"}</Badge>
+        <Badge>{{ mcq: "MCQ", written: "Written", rubric: "Rubric", storyboard: "Storyboard" }[i.kind as string] ?? "Lesson"}</Badge>
         <Badge tone={STATE_TONE[i.state]}>
           {STATE_LABEL[i.state]}
           {i.working_version ? ` · v${i.working_version}` : ""}

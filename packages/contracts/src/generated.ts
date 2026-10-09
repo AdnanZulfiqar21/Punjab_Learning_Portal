@@ -1378,6 +1378,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/studio/items/{item_id}/prompt-package": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Export a storyboard as a prompt package for a production tool (teaching constraints apart from creative direction; audited) */
+        get: operations["prompt_package_v1_studio_items__item_id__prompt_package_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/studio/items/{item_id}/publish": {
         parameters: {
             query?: never;
@@ -3421,7 +3438,7 @@ export interface components {
              * @default lesson
              * @enum {string}
              */
-            kind: "lesson" | "mcq" | "written" | "rubric";
+            kind: "lesson" | "mcq" | "written" | "rubric" | "storyboard";
             /**
              * Parent Item Id
              * @description For a rubric: the written question it marks
@@ -3483,7 +3500,7 @@ export interface components {
              * Kind
              * @enum {string}
              */
-            kind: "lesson" | "mcq" | "written" | "rubric";
+            kind: "lesson" | "mcq" | "written" | "rubric" | "storyboard";
             /**
              * Open Feedback
              * @description Change requests on the working version not yet addressed.
@@ -3611,7 +3628,7 @@ export interface components {
              * Kind
              * @enum {string}
              */
-            kind: "lesson" | "mcq" | "written" | "rubric";
+            kind: "lesson" | "mcq" | "written" | "rubric" | "storyboard";
             /**
              * Open Feedback
              * @description Change requests on the working version not yet addressed.
@@ -5269,7 +5286,7 @@ export interface components {
              * @default lesson
              * @enum {string}
              */
-            kind: "lesson" | "mcq" | "written" | "rubric";
+            kind: "lesson" | "mcq" | "written" | "rubric" | "storyboard";
             /** Source Refs */
             source_refs?: {
                 [key: string]: unknown;
@@ -8262,6 +8279,39 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["HistoryEvent"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    prompt_package_v1_studio_items__item_id__prompt_package_get: {
+        parameters: {
+            query?: {
+                version?: "working" | "published";
+            };
+            header?: never;
+            path: {
+                item_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": unknown;
                 };
             };
             /** @description Validation Error */

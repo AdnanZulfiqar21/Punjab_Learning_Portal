@@ -61,7 +61,7 @@ class VersionStatus(StrEnum):
     superseded = "superseded"  # an older published version, or a draft abandoned by retirement
 
 
-ITEM_KINDS = ("lesson", "mcq", "written", "rubric")  # see kinds.py
+ITEM_KINDS = ("lesson", "mcq", "written", "rubric", "storyboard")  # see kinds.py
 QUARANTINE_LEVELS = ("SOFT", "VOID", "KEY_ERROR")  # §5.7, questions only
 
 

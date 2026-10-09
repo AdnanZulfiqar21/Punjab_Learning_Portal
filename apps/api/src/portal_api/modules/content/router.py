@@ -765,3 +765,100 @@ def affected(db: DB, who: Member, item_id: uuid.UUID) -> list[AffectedOut]:
     }:
         raise Forbidden("This item is outside the subjects and classes your role covers.")
     return [AffectedOut(**r) for r in adjudications.affected_report(db, item.id)]
+
+
+# ------------------------------------------------------------ storyboard prompt package (P07.S4.T1, STORYBOARD-01)
+@router.get(
+    "/items/{item_id}/prompt-package",
+    summary="Export a storyboard as a prompt package for a production tool (teaching constraints apart from "
+    "creative direction; audited)",
+)
+def prompt_package(
+    db: DB, who: Member, item_id: uuid.UUID, version: Annotated[Literal["working", "published"], Query()] = "working"
+) -> Response:
+    import hashlib
+    import json
+
+    from portal_api.modules.content import storyboard
+
+    item = workflow.get_item(db, item_id)
+    perms = permissions_for(workflow.roles_in_scope(db, who.user.id, item.grade_number, item.subject_code))
+    if not perms & {Permission.draft_content, Permission.review_content, Permission.publish_content}:
+        raise Forbidden("This item is outside the subjects and classes your role covers.")
+    if item.kind != "storyboard":
+        raise NotFound("Only storyboards have a prompt package.")
+    v = item.published if version == "published" else item.working
+    if v is None:
+        raise NotFound("That version doesn't exist.")
+    sb, errors = storyboard.parse(v.body)
+    if sb is None:
+        raise NotFound("This storyboard can't be read: " + "; ".join(errors))
+    chapter = db.get(Chapter, item.chapter_id)
+    topic = db.get(Topic, item.topic_id) if item.topic_id else None
+    docs = {r["source_document_id"]: db.get(SourceDocument, uuid.UUID(r["source_document_id"])) for r in v.source_refs}
+    sources = [
+        {
+            "ref": n + 1,
+            "source_id": docs[r["source_document_id"]].source_id if docs[r["source_document_id"]] else None,  # type: ignore[union-attr]
+            "pdf_from": r["pdf_from"],
+            "pdf_to": r["pdf_to"],
+            "note": r.get("note"),
+        }
+        for n, r in enumerate(v.source_refs)
+    ]
+    package = {
+        "format": "portal-storyboard-prompt-package",
+        "schema_version": 1,
+        "item": {
+            "id": str(item.id),
+            "title": item.title,
+            "grade": item.grade_number,
+            "subject": item.subject_code,
+            "chapter": {"key": chapter.natural_key, "title": chapter.title} if chapter else None,
+            "topic": {"key": topic.natural_key, "title": topic.title} if topic else None,
+        },
+        "version": {"number": v.number, "status": v.status},
+        "teaching_constraints": {
+            "note": "Facts, narration, on-screen text and equations are fixed by subject review. Do not add, change or "
+            "drop claims; every claim cites the listed source pages.",
+            "objective": sb.objective,
+            "outcome": sb.outcome,
+            "prerequisites": sb.prerequisites,
+            "duration_s": sb.duration_s,
+            "scenes": [
+                {
+                    "id": s.id,
+                    "start_s": s.start_s,
+                    "end_s": s.end_s,
+                    "narration": s.narration,
+                    "on_screen_text": s.on_screen_text,
+                    "equations": s.equations,
+                    "accessibility": s.accessibility,
+                    "claims": [{"text": c.text, "source_ref": c.source_ref + 1} for c in s.claims],
+                }
+                for s in sb.scenes
+            ],
+        },
+        "creative_direction": {
+            "overall": sb.creative_direction,
+            "scenes": [
+                {"id": s.id, "visual": s.visual, "transition": s.transition, "assets": s.assets} for s in sb.scenes
+            ],
+        },
+        "sources": sources,
+        "review": "Generated media must be reviewed against this package before release; generation success never "
+        "publishes anything (P07.S4.T3).",
+    }
+    body = json.dumps(package, ensure_ascii=False, indent=1).encode("utf-8")
+    digest = hashlib.sha256(body).hexdigest()
+    workflow._audit(db, who, "prompt_package_exported", item, version=v.number, sha256=digest)
+    db.commit()
+    return Response(
+        content=body,
+        media_type="application/json",
+        headers={
+            "Content-Disposition": f'attachment; filename="storyboard-{item.id}-v{v.number}.json"',
+            "Cache-Control": "private, no-store",
+            "X-Content-SHA256": digest,
+        },
+    )

@@ -43,7 +43,7 @@ from portal_api.modules.identity.deps import Principal
 from portal_api.modules.identity.permissions import Permission, permissions_for
 
 SCHEMA_VERSION = 1
-IMPORT_KINDS = ("mcq", "lesson", "written")
+IMPORT_KINDS = ("mcq", "lesson", "written", "storyboard")
 MAX_BYTES = 5 * 1024 * 1024
 MAX_ROWS = 2000
 PREVIEW_TTL = timedelta(hours=24)

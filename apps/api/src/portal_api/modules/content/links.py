@@ -17,6 +17,10 @@ def check(db: Session, item: ContentItem, version: ContentVersion, *, for_public
         return _rubric(db, item, version, for_publication=for_publication)
     if item.kind == "written" and for_publication:
         return _written_has_rubric(db, item, version)
+    if item.kind == "storyboard":
+        from portal_api.modules.content import storyboard
+
+        return storyboard.claim_errors(version.body, version.source_refs)
     return []
 
 

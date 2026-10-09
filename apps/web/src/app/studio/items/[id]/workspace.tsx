@@ -27,6 +27,7 @@ import { Badge, Notice } from "@/components/ui";
 import { GRADE_LABEL } from "@/lib/format";
 import { BlockEditor, normaliseBlocks, SourceRefsEditor } from "./block-editor";
 import { McqEditor, McqPreview, mcqSections, normaliseMcq } from "./mcq-editor";
+import { normaliseStoryboard, StoryboardEditor, StoryboardPreview } from "./storyboard-editor";
 import {
   normaliseRubric,
   normaliseWritten,
@@ -63,6 +64,7 @@ function normaliseBody(kind: string, body: Body): Body {
   if (kind === "mcq") return normaliseMcq(body);
   if (kind === "written") return normaliseWritten(body);
   if (kind === "rubric") return normaliseRubric(body);
+  if (kind === "storyboard") return normaliseStoryboard(body);
   return { blocks: normaliseBlocks(blocksOf(body)) };
 }
 
@@ -70,12 +72,14 @@ function Preview({ kind, body }: { kind: string; body: Body }) {
   if (kind === "mcq") return <McqPreview body={body} />;
   if (kind === "written") return <WrittenPreview body={body} />;
   if (kind === "rubric") return <RubricPreview body={body} />;
+  if (kind === "storyboard") return <StoryboardPreview body={body} />;
   return <LessonBlocks blocks={blocksOf(body)} headingOffset={1} />;
 }
 
 function sections(kind: string, body: Body): { label: string; text: string }[] {
   if (kind === "mcq") return mcqSections(body);
   if (kind === "written" || kind === "rubric") return writtenSections(kind, body);
+  if (kind === "storyboard") return Object.entries(body).map(([k, v]) => ({ label: k, text: JSON.stringify(v) }));
   return blocksOf(body).map((b, i) => ({ label: `Block ${i + 1}`, text: JSON.stringify(b) }));
 }
 
@@ -293,6 +297,8 @@ export function Workspace({
               <McqEditor body={draft.body} onChange={(body) => change({ ...draft, body })} />
             ) : item.kind === "written" ? (
               <WrittenEditor body={draft.body} onChange={(body) => change({ ...draft, body })} />
+            ) : item.kind === "storyboard" ? (
+              <StoryboardEditor body={draft.body} onChange={(body) => change({ ...draft, body })} refCount={draft.refs.length} />
             ) : item.kind === "rubric" ? (
               <RubricEditor body={draft.body} onChange={(body) => change({ ...draft, body })} versions={questionVersions} />
             ) : (
