@@ -94,6 +94,8 @@ class SourceOut(BaseModel):
     publication_rights: Literal["UNVERIFIED", "CONFIRMED", "DENIED"]
     publication_rights_evidence: str | None
     publication_rights_set_at: datetime | None
+    last_reviewed_at: datetime | None = None  # P16.S3.T3: latest recorded source review
+    review_stale: bool = False  # never reviewed, or not for a year
 
 
 class ReviewOut(BaseModel):

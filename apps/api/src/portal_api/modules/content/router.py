@@ -359,8 +359,18 @@ def item_history(db: DB, who: Member, item_id: uuid.UUID, response: Response) ->
 
 @router.get("/sources", response_model=list[SourceOut], summary="Source documents and their publication-rights state")
 def sources(db: DB, _: Member, response: Response) -> list[SourceOut]:
+    from portal_api.modules.content import updates
+
     _no_store(response)
-    return [_source_out(d) for d in db.scalars(select(SourceDocument).order_by(SourceDocument.source_id))]
+    last = updates.last_reviews(db)
+    now = workflow._now()
+    out = []
+    for d in db.scalars(select(SourceDocument).order_by(SourceDocument.source_id)):
+        s = _source_out(d)
+        s.last_reviewed_at = last.get(d.id)
+        s.review_stale = updates.is_stale(s.last_reviewed_at, now)
+        out.append(s)
+    return out
 
 
 @router.post("/validate", response_model=ValidationOut, summary="Dry-run validation for the editor (writes nothing)")
@@ -916,3 +926,86 @@ def academic_overview(
     }:
         raise Forbidden("This class and subject are outside your role's scope.")
     return AcademicOverview(**overview.overview(db, grade, subject))
+
+
+# ------------------------------------------------------------------ academic updates (P16.S3.T3)
+class SourceReviewIn(BaseModel):
+    note: str = Field(min_length=10, max_length=2000)
+
+
+class NoticeIn(BaseModel):
+    grade: int = Field(ge=11, le=12)
+    subject: str = Field(min_length=2, max_length=40)
+    title: str = Field(min_length=5, max_length=200)
+    source_url: str | None = Field(default=None, max_length=1000, pattern=r"^https?://")
+    summary: str = Field(min_length=10, max_length=4000)
+
+
+class NoticeDecisionIn(BaseModel):
+    accept: bool
+    decision: str = Field(min_length=10, max_length=2000)
+
+
+class SyllabusNoticeOut(BaseModel):
+    id: uuid.UUID
+    grade: int
+    subject: str
+    title: str
+    source_url: str | None
+    summary: str
+    status: Literal["open", "accepted", "dismissed"]
+    logged_at: datetime
+    decision: str | None
+    decided_at: datetime | None
+    live_items_in_scope: int
+    can_decide: bool
+
+
+@router.post("/sources/{source_id}/review", status_code=204, summary="Record that a source was checked (reviewers)")
+def review_source(db: DB, who: Member, source_id: uuid.UUID, body: SourceReviewIn) -> Response:
+    from portal_api.modules.content import updates
+
+    updates.review_source(db, who, source_id, body.note)
+    return Response(status_code=204)
+
+
+@router.get(
+    "/syllabus-notices", response_model=list[SyllabusNoticeOut], summary="Official notices awaiting or after review"
+)
+def list_notices(db: DB, who: Member) -> list[SyllabusNoticeOut]:
+    from portal_api.modules.content import updates
+
+    return [SyllabusNoticeOut(**n) for n in updates.notices(db, who)]
+
+
+@router.post(
+    "/syllabus-notices",
+    response_model=list[SyllabusNoticeOut],
+    status_code=201,
+    summary="Log an official syllabus or exam notice for human review (never applied automatically)",
+)
+def log_notice(db: DB, who: Member, body: NoticeIn) -> list[SyllabusNoticeOut]:
+    from portal_api.modules.content import updates
+
+    updates.log_notice(
+        db,
+        who,
+        grade=body.grade,
+        subject=body.subject,
+        title=body.title,
+        source_url=body.source_url,
+        summary=body.summary,
+    )
+    return [SyllabusNoticeOut(**n) for n in updates.notices(db, who)]
+
+
+@router.post(
+    "/syllabus-notices/{notice_id}/decision",
+    response_model=list[SyllabusNoticeOut],
+    summary="Accept (action needed) or dismiss a notice (subject reviewers in scope; audited)",
+)
+def decide_notice(db: DB, who: Member, notice_id: uuid.UUID, body: NoticeDecisionIn) -> list[SyllabusNoticeOut]:
+    from portal_api.modules.content import updates
+
+    updates.decide_notice(db, who, notice_id, body.accept, body.decision)
+    return [SyllabusNoticeOut(**n) for n in updates.notices(db, who)]
