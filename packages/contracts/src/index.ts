@@ -77,6 +77,7 @@ export type NotebookEntry = S["NotebookEntryOut"];
 export type ProgressReport = S["ProgressReport"];
 export type EvidenceReport = S["EvidenceReport"];
 export type StudyPlan = S["StudyPlanOut"];
+export type ExportJob = S["ExportOut"];
 export type RecheckState = S["RecheckOut"];
 export type LinkedForm = S["LinkedFormOut"];
 export type LinkedAttempt = S["LinkedAttemptOut"];
