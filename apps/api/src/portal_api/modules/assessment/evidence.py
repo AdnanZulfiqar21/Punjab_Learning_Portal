@@ -188,26 +188,30 @@ def learner_responses(db: Any, user_id: uuid.UUID, now: datetime) -> list[Respon
             Attempt.user_id == user_id, Attempt.status == "finalised", Attempt.finalised_at >= now - WINDOW - EXPOSURE
         )
     ).all()
+    rows = [(a, sc) for a, sc in rows if a.form_id not in held]
+    # One query for every form's items and their outcome (no per-attempt or per-item round trips).
+    meta: dict[tuple[uuid.UUID, int], tuple[uuid.UUID, uuid.UUID]] = {
+        (form_id, pos): (family, outcome)
+        for form_id, pos, family, outcome in db.execute(
+            select(
+                FormItem.form_id,
+                FormItem.position,
+                FormItem.family_id,
+                func.coalesce(ContentItem.topic_id, ContentItem.chapter_id),
+            )
+            .join(ContentItem, ContentItem.id == FormItem.item_id)
+            .where(FormItem.form_id.in_({a.form_id for a, _ in rows}))
+        ).all()
+    } if rows else {}  # fmt: skip
     out: list[Response] = []
     for attempt, score in rows:
-        if attempt.form_id in held:
-            continue
-        items = {fi.position: fi for fi in db.scalars(select(FormItem).where(FormItem.form_id == attempt.form_id))}
         for row in score.items:
             if row.get("treatment") in ("EXCLUDE", "CREDIT_ALL") or row.get("chosen") is None:
                 continue
-            fi = items.get(int(row["position"]))
-            if fi is None:
-                continue
-            item = db.get(ContentItem, fi.item_id)
-            if item is None:
+            m = meta.get((attempt.form_id, int(row["position"])))
+            if m is None:
                 continue
             out.append(
-                Response(
-                    family_id=fi.family_id,
-                    outcome_id=item.topic_id or item.chapter_id,
-                    at=attempt.finalised_at,
-                    correct=bool(row.get("correct")),
-                )
+                Response(family_id=m[0], outcome_id=m[1], at=attempt.finalised_at, correct=bool(row.get("correct")))
             )
     return out

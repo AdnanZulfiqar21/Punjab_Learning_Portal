@@ -9,10 +9,7 @@ from fastapi.testclient import TestClient
 
 from portal_api.db import get_sessionmaker
 from portal_api.modules.assessment.forms import _book_chapters
-from tests import test_attempts
 from tests.test_attempts import POOL, _learner
-
-physics = test_attempts.physics
 
 
 def _form(client: TestClient, who: Any, **body: Any) -> Any:

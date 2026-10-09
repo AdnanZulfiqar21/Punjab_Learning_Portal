@@ -17,11 +17,8 @@ from portal_api.db import get_sessionmaker
 from portal_api.modules.assessment import notebook
 from portal_api.modules.assessment.models import Attempt, FormItem, ScoreVersion
 from portal_api.modules.assessment.notebook import NO_LONGER_A_MISTAKE, MistakeEntry
-from tests import test_attempts
 from tests.test_attempts import POOL, _form, _learner, _start
 from tests.test_mistake_notebook import _answer, _make_due, _submit
-
-physics = test_attempts.physics
 
 
 def _rescore(attempt_id: str, flip: dict[int, bool]) -> None:

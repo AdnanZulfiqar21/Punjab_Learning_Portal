@@ -4,12 +4,13 @@ not academic content and are never published outside this test database."""
 
 from __future__ import annotations
 
+import time
 import uuid
 from typing import Any
 
 import pytest
 from fastapi.testclient import TestClient
-from sqlalchemy import select
+from sqlalchemy import select, text
 from sqlalchemy.orm import Session
 
 from portal_api.modules.curriculum.importer import DEFAULT_CATALOGUE, DEFAULT_REGISTRY, run_import
@@ -31,17 +32,31 @@ class Staff:
         self.email = f"staff-{uuid.uuid4().hex[:10]}@example.com"
         r = client.post("/v1/dev-auth/register", json={"email": self.email, "password": "correct-horse-battery"})
         assert r.status_code == 202
-        tok = client.post(
-            "/v1/dev-auth/token", json={"email": self.email, "password": "correct-horse-battery", "mfa": mfa}
-        )
-        assert tok.status_code == 200, tok.text
-        self.headers = {"Authorization": f"Bearer {tok.json()['access_token']}"}
+        self._client, self._mfa, self._issued = client, mfa, 0.0
         me = client.get("/v1/me", headers=self.headers)
         assert me.status_code == 200
         self.id = uuid.UUID(me.json()["id"])
         for role in roles:
             db.add(StaffRoleGrant(user_id=self.id, role=role, scope=scope or {}, reason="test fixture"))
         db.commit()
+
+    @property
+    def headers(self) -> dict[str, str]:
+        """A bearer token, re-issued after ten minutes or after the dev issuer was replaced (`test_dev_issuer_race`
+        resets it): session-scoped fixtures outlive both the 15-minute dev token and the issuer's keys."""
+        from portal_api.modules.identity import tokens
+
+        issuer = tokens.get_dev_issuer()
+        if time.monotonic() - self._issued > 600 or getattr(self, "_issuer", None) is not issuer:
+            self._issuer = issuer
+            tok = self._client.post(
+                "/v1/dev-auth/token",
+                json={"email": self.email, "password": "correct-horse-battery", "mfa": self._mfa},
+            )
+            assert tok.status_code == 200, tok.text
+            self._headers = {"Authorization": f"Bearer {tok.json()['access_token']}"}
+            self._issued = time.monotonic()
+        return self._headers
 
 
 def _chapter(db: Session, grade: int, subject: str, index: int = 0) -> tuple[Chapter, SourceDocument]:
@@ -283,7 +298,21 @@ def test_missing_reviewer_is_reported_as_a_blocker(client: TestClient, db: Sessi
     _save(client, author, item, refs=_refs(chapter, doc))
     sub = _post(client, author, item["id"], "submit")
     assert sub.status_code == 200
-    assert any("B01" in b for b in sub.json()["blockers"])  # stays private in review; nothing is invented
+    # OCT9-05: other modules may already have created reviewers covering this scope (e.g. unscoped ones), so the
+    # zero-reviewer path is checked in a transaction that sees no reviewers and is then rolled back.
+    from portal_api.modules.content.models import ContentItem
+    from portal_api.modules.content.router import _eligible_reviewers
+
+    row = db.get(ContentItem, uuid.UUID(item["id"]))
+    assert row is not None
+    db.execute(text("update staff_role_grant set revoked_at = now()"))  # any role that can review; rolled back
+    assert _eligible_reviewers(db, row) == 0
+    db.rollback()
+    reported = any("B01" in b for b in sub.json()["blockers"])  # stays private in review; nothing is invented
+    assert reported == (_eligible_reviewers(db, row) == 0)
+    Staff(client, db, ["subject_reviewer"], math12)
+    again = client.get(f"/v1/studio/items/{item['id']}", headers=author.headers).json()
+    assert not any("B01" in b for b in again["blockers"])
 
 
 def test_full_lifecycle_publish_revise_quarantine_retire(

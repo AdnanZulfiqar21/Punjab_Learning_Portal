@@ -11,11 +11,8 @@ from sqlalchemy import text
 from sqlalchemy.orm import Session
 
 from portal_api.db import get_sessionmaker
-from tests import test_attempts
 from tests.test_attempts import _learner, _post
 from tests.test_mocks import _mock, _publish_profile
-
-physics = test_attempts.physics
 
 
 def _practice_count(client: TestClient, who: Any, chapter: str) -> int:

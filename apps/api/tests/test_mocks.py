@@ -9,11 +9,8 @@ from typing import Any
 from fastapi.testclient import TestClient
 from sqlalchemy.orm import Session
 
-from tests import test_attempts
 from tests.test_attempts import _learner
 from tests.test_content_workflow import Staff
-
-physics = test_attempts.physics
 
 
 def _publish_profile(client: TestClient, db: Session, sections: list[dict[str, Any]], **rules: Any) -> str:

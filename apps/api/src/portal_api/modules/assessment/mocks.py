@@ -194,6 +194,8 @@ def build_from(
                     version_id=cv.id,
                     marks=int(rules.get("marks_per_question", 1)),
                     option_order=option_ids,
+                    grade_number=item.grade_number,
+                    subject_code=item.subject_code,
                 )
             )
         sections.append(

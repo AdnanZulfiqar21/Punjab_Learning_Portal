@@ -12,8 +12,9 @@ instead of disappearing.
 * At most `DAILY_CAP` entries are offered per review test. Missed days don't pile up: an overdue entry is simply due.
 
 **Reviewing:** a review test is a frozen practice form (`kind="review"`) built from due entries of one class and
-subject. It uses each family's current live question, preferring a variant other than the one originally missed, so
-the original attempt stays exactly as it was.
+subject. It uses each family's current live *practice* question (never a mock-reserved one), preferring a variant
+other than the one originally missed, so the original attempt stays exactly as it was. Reusing a request key with a
+different class, subject or count is refused.
 
 Learners can add a private note to any entry.
 
@@ -253,6 +254,7 @@ def _live_variant(
             func.coalesce(ContentItem.family_id, ContentItem.id) == family_id,
             ContentItem.kind == "mcq",
             ContentItem.availability == Availability.live.value,
+            ContentItem.question_pool == "practice",  # a review is practice: mock-reserved questions stay out
         )
     ).all()
     if not rows:
@@ -270,8 +272,10 @@ def build_review(db: Session, who: Any, *, grade: int, subject: str, count: int,
             PracticeForm.owner_id == who.user.id, PracticeForm.idempotency_key == idempotency_key
         )
     )
+    request_hash = f"review:{grade}:{subject}:{count}"
     if existing is not None:
-        if existing.kind != "review":
+        # Forms from before this check stored the bare hash "review"; they can only be replayed, not compared.
+        if existing.kind != "review" or existing.request_hash not in (request_hash, "review"):
             raise Conflict("This request key was already used for a different test.")
         return existing
     access.require_access(db, who.user.id, purpose="Review tests")
@@ -302,7 +306,7 @@ def build_review(db: Session, who: Any, *, grade: int, subject: str, count: int,
         id=uuid.uuid4(),
         owner_id=who.user.id,
         idempotency_key=idempotency_key,
-        request_hash="review",
+        request_hash=request_hash,
         kind="review",
         grade_number=grade,
         subject_code=subject,
@@ -329,6 +333,8 @@ def build_review(db: Session, who: Any, *, grade: int, subject: str, count: int,
                 version_id=version.id,
                 marks=int(version.body.get("marks", 1)),
                 option_order=option_ids,
+                grade_number=item.grade_number,
+                subject_code=item.subject_code,
             )
         )
     db.commit()

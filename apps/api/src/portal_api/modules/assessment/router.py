@@ -671,11 +671,16 @@ class SubjectProgress(BaseModel):
     last_activity: datetime | None
 
 
+class ResultPart(BaseModel):
+    grade: int
+    subject: str
+
+
 class RecentResult(BaseModel):
     attempt_id: uuid.UUID
     kind: str
     mode: str
-    grade: int
+    grade: int  # the form's label; `parts` lists every class and subject its questions came from (OCT9-03)
     subject: str
     finished_at: datetime | None
     raw: int
@@ -683,6 +688,7 @@ class RecentResult(BaseModel):
     percentage: float | None
     score_version: int
     status: str
+    parts: list[ResultPart]
 
 
 class ProgressReport(BaseModel):

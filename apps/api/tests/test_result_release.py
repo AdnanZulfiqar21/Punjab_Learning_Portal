@@ -17,14 +17,11 @@ from sqlalchemy import text
 from sqlalchemy.orm import Session
 
 from portal_api.db import get_sessionmaker
-from tests import test_attempts
 from tests.test_attempts import _learner, _op, _save_ops
 from tests.test_content_workflow import Staff
 from tests.test_mcq_corrections import _keys
 from tests.test_mock_sessions import _schedule, _shift
 from tests.test_mocks import _publish_profile
-
-physics = test_attempts.physics
 
 
 def _form_of(attempt_id: str) -> str:

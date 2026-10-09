@@ -78,6 +78,9 @@ class FormItem(Base):
     version_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("content_version.id", ondelete="RESTRICT"))
     marks: Mapped[int] = mapped_column(SmallInteger)
     option_order: Mapped[list[str]] = mapped_column(JSONB)  # frozen permutation of stable option IDs
+    # OCT9-03: the question's class and subject, frozen with the form, so reports never move between buckets later.
+    grade_number: Mapped[int] = mapped_column(SmallInteger)
+    subject_code: Mapped[str] = mapped_column(String(40))
 
     form: Mapped[PracticeForm] = relationship(back_populates="items")
 

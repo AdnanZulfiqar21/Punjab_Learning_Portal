@@ -12,11 +12,8 @@ from sqlalchemy import select
 from portal_api.db import get_sessionmaker
 from portal_api.modules.audit.models import AuditEvent
 from portal_api.modules.system import operations
-from tests import test_attempts
 from tests.test_attempts import _form, _learner, _start
 from tests.test_content_workflow import Staff
-
-physics = test_attempts.physics
 
 
 def _operator(client: TestClient, mfa: bool = True) -> Staff:
