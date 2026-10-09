@@ -129,6 +129,11 @@
             "title": "Revise",
             "type": "boolean"
           },
+          "rollback": {
+            "default": false,
+            "title": "Rollback",
+            "type": "boolean"
+          },
           "set_access_tier": {
             "title": "Set Access Tier",
             "type": "boolean"
@@ -384,6 +389,42 @@
           "active"
         ],
         "title": "AdjudicationSourcesOut",
+        "type": "object"
+      },
+      "AffectedOut": {
+        "properties": {
+          "active": {
+            "description": "Attempts in progress (keep their original contents; corrections apply at submit)",
+            "title": "Active",
+            "type": "integer"
+          },
+          "before_start": {
+            "description": "Built practice tests not yet started (they will not start; \u00a75.7)",
+            "title": "Before Start",
+            "type": "integer"
+          },
+          "released": {
+            "description": "Submitted attempts (re-scored by a recorded correction)",
+            "title": "Released",
+            "type": "integer"
+          },
+          "status": {
+            "title": "Status",
+            "type": "string"
+          },
+          "version": {
+            "title": "Version",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "version",
+          "status",
+          "before_start",
+          "active",
+          "released"
+        ],
+        "title": "AffectedOut",
         "type": "object"
       },
       "AllowanceOut": {
@@ -11353,6 +11394,59 @@
         ]
       }
     },
+    "/v1/studio/export": {
+      "get": {
+        "operationId": "export_content_v1_studio_export_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "grade",
+            "required": true,
+            "schema": {
+              "maximum": 12,
+              "minimum": 11,
+              "title": "Grade",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "subject",
+            "required": true,
+            "schema": {
+              "maxLength": 40,
+              "minLength": 2,
+              "title": "Subject",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Portable JSON export of one class and subject: catalogue structure, every item and all versions (publishers in scope, MFA; audited)",
+        "tags": [
+          "studio"
+        ]
+      }
+    },
     "/v1/studio/help/articles": {
       "get": {
         "operationId": "staff_articles_v1_studio_help_articles_get",
@@ -11891,6 +11985,53 @@
         ]
       }
     },
+    "/v1/studio/items/{item_id}/affected": {
+      "get": {
+        "operationId": "affected_v1_studio_items__item_id__affected_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "item_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Item Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/AffectedOut"
+                  },
+                  "title": "Response Affected V1 Studio Items  Item Id  Affected Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Practice tests and attempts each version of a question reaches, before start / active / released",
+        "tags": [
+          "studio"
+        ]
+      }
+    },
     "/v1/studio/items/{item_id}/assign": {
       "post": {
         "operationId": "assign_v1_studio_items__item_id__assign_post",
@@ -12347,6 +12488,59 @@
           }
         },
         "summary": "Revise",
+        "tags": [
+          "studio"
+        ]
+      }
+    },
+    "/v1/studio/items/{item_id}/rollback": {
+      "post": {
+        "operationId": "rollback_v1_studio_items__item_id__rollback_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "item_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Item Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangeReasonIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemDetail"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Put the previously published version back (publishers, MFA; audited, nothing erased)",
         "tags": [
           "studio"
         ]

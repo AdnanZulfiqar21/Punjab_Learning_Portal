@@ -198,3 +198,28 @@ def test_an_attempt_open_during_a_correction_gets_it_at_submission(client: TestC
             db.execute(text("update mcq_adjudication set status = 'superseded' where item_id = :i"), {"i": item})
             db.commit()
         _post(client, pub, item, "release", {"reason": "Fixture cleanup"})
+
+
+def test_an_unstarted_test_with_a_question_under_review_does_not_start(
+    client: TestClient, physics: dict[str, Any]
+) -> None:
+    """§5.7 before start, and the P08.S4.T2 affected report (counts only)."""
+    learner = _learner(client)
+    form = _form(client, learner, physics["chapter"], count=POOL).json()
+    item = _form_item_ids(form["id"])[1]
+    pub = physics["publisher"]
+    try:
+        assert (
+            _post(client, pub, item, "quarantine", {"reason": "Fixture: suspected", "level": "SOFT"}).status_code == 200
+        )
+        r = client.post(f"/v1/practice/forms/{form['id']}/attempt", headers=learner.headers)
+        assert r.status_code == 409 and r.json()["code_reason"] == "FORM_SUPERSEDED"
+        report = client.get(f"/v1/studio/items/{item}/affected", headers=pub.headers)
+        assert report.status_code == 200, report.text
+        assert report.json()[-1]["before_start"] >= 1
+        assert set(report.json()[-1]) == {"version", "status", "before_start", "active", "released"}
+        learner_view = client.get(f"/v1/studio/items/{item}/affected", headers=learner.headers)
+        assert learner_view.status_code == 403
+    finally:
+        _post(client, pub, item, "release", {"reason": "Fixture: not a defect"})
+    assert client.post(f"/v1/practice/forms/{form['id']}/attempt", headers=learner.headers).status_code == 200

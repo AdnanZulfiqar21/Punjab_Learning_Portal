@@ -527,6 +527,71 @@ def publish(db: Session, who: Principal, item_id: uuid.UUID) -> ContentItem:
     return item
 
 
+def previous_published(db: Session, item: ContentItem) -> ContentVersion | None:
+    """The most recent earlier version that was once published (a rollback target)."""
+    current = item.published
+    if current is None:
+        return None
+    return db.scalar(
+        select(ContentVersion)
+        .where(
+            ContentVersion.item_id == item.id,
+            ContentVersion.status == VersionStatus.superseded.value,
+            ContentVersion.published_at.is_not(None),
+            ContentVersion.number < current.number,
+        )
+        .order_by(ContentVersion.number.desc())
+        .limit(1)
+    )
+
+
+def rollback(db: Session, who: Principal, item_id: uuid.UUID, reason: str) -> ContentItem:
+    """Put the previously published version back in front of learners (P06.S3.T3). Nothing is erased: the rolled-back
+    version stays in the history as superseded, both moves are audited, attempts keep their pinned versions, and the
+    restored version must still pass today's publication gate (rights, renderer, links)."""
+    from portal_api.modules.assessment.models import McqAdjudication
+
+    item = get_item(db, item_id, for_update=True)
+    _require_scoped(db, who, Permission.publish_content, item)
+    if item.availability == Availability.retired.value:
+        raise Conflict("Retired content can't be rolled back.")
+    current = item.published
+    target = previous_published(db, item)
+    if current is None or target is None:
+        raise Conflict("There is no earlier published version to roll back to.")
+    if db.scalar(
+        select(McqAdjudication.id).where(McqAdjudication.version_id == target.id, McqAdjudication.status == "effective")
+    ):
+        raise Conflict("The earlier version has a recorded score correction; it can't go back to learners.")
+    v = _validate(db, item, target, for_publication=True)
+    if not v["ok"]:
+        raise Unprocessable("The earlier version can't be published today.", errors=v["errors"], warnings=v["warnings"])
+    current.status = VersionStatus.superseded.value
+    db.flush()  # free the one-published-version index
+    target.status = VersionStatus.published.value
+    if item.working_version_id == current.id:
+        item.working_version_id = target.id  # no revision in progress: the restored version is the working one
+    item.published_version_id = target.id
+    resolved = item.availability == Availability.quarantined.value
+    item.availability = Availability.live.value
+    item.availability_reason = None
+    item.quarantine_level = None
+    item.updated_at = _now()
+    _audit(
+        db,
+        who,
+        "rolled_back",
+        item,
+        reason=reason.strip(),
+        from_version=current.number,
+        to_version=target.number,
+        resolved_quarantine=resolved,
+    )
+    db.commit()
+    db.refresh(item)
+    return item
+
+
 def revise(db: Session, who: Principal, item_id: uuid.UUID, reason: str) -> ContentItem:
     """Start a new version of published content. Learners keep seeing the published version until the new one is
     approved and published (P06.S3.T3)."""

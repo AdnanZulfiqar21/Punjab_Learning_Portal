@@ -109,6 +109,10 @@ export async function quarantineItem(id: string, reason: string, level: string |
 export async function recordScoreCorrection(id: string, defect: "VOID" | "KEY_ERROR", reason: string, correctedOptionId: string | null): Promise<ActionResult> {
   return call(item(id, "score-corrections"), "POST", { defect, reason, corrected_option_id: correctedOptionId });
 }
+/** P06.S3.T3: put the previously published version back (history is kept; audited). */
+export async function rollbackItem(id: string, reason: string): Promise<ActionResult> {
+  return call(item(id, "rollback"), "POST", { reason });
+}
 export async function releaseItem(id: string, reason: string): Promise<ActionResult> {
   return call(item(id, "release"), "POST", { reason });
 }

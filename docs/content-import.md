@@ -78,3 +78,22 @@ Excel users: save as **CSV UTF-8**.
 - Marking rubrics. Attach them to a written question in the studio.
 - Media files.
 - Teacher labels, held-out evaluation evidence and student scripts. These stay private and separate (W01).
+
+## Export (P06.S4.T2, EXPORT-01)
+
+Publishers (with MFA) can download one class and subject at a time from **Studio → Export**
+(`GET /v1/studio/export?grade=11&subject=chemistry`). The download is a JSON document with:
+
+- `format: "portal-content-export"` and `schema_version: 1`;
+- the book: title, source ID and publication-rights status;
+- every chapter and topic, with its stable key, number and title, and whether it is retired;
+- every item in that scope, with:
+  - its `external_id` (if imported), kind, chapter and topic keys, state, availability, quarantine level and reading tier;
+  - **all versions**: number, status, content schema version, body, source references and publication time;
+  - any MCQ score corrections.
+
+Exports never include learner data, attempts, staff identities or internal notes. Each export is audited with its
+item count and size.
+
+To re-import an exported item as a new draft, put `chapter`, `title`, the chosen version's `body` and `source_refs`,
+and an `external_id` into an import file (see above).

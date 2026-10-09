@@ -215,6 +215,17 @@ def learner_items(db: Session, form: PracticeForm) -> list[dict[str, Any]]:
     return out
 
 
+def superseded_positions(db: Session, form: PracticeForm) -> list[int]:
+    """Positions whose frozen question version is no longer the live published version (quarantined, retired,
+    corrected or replaced since the form was built)."""
+    out = []
+    for fi in form.items:
+        item = db.get(ContentItem, fi.item_id)
+        if item is None or item.availability != Availability.live.value or item.published_version_id != fi.version_id:
+            out.append(fi.position)
+    return out
+
+
 def item_keys(db: Session, form: PracticeForm) -> dict[int, dict[str, Any]]:
     """Frozen keys and explanations per position. Server-side only: scoring and post-release review."""
     out: dict[int, dict[str, Any]] = {}

@@ -39,7 +39,7 @@ export async function createPractice(_prev: BuilderState, form: FormData): Promi
     return { error: p?.detail ?? "Could not create the test.", available: p?.available };
   }
   const attempt = await api<PracticeAttempt>(`/v1/practice/forms/${created.data.id}/attempt`, { method: "POST", token: t });
-  if (!attempt.ok) return { error: "The test was created but could not be started. Try again." };
+  if (!attempt.ok) return { error: (attempt.problem as Problem | null)?.detail ?? "The test was created but could not be started. Try again." };
   redirect(`/practice/attempt/${attempt.data.id}`);
 }
 
