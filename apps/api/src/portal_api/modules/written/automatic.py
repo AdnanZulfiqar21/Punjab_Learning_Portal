@@ -324,8 +324,9 @@ def enqueue(db: Session, attempt_id: uuid.UUID, assessor: Assessor | None = None
                 errors=[],
             )
             .on_conflict_do_nothing(constraint="uq_written_auto_assessment_unit")
+            .returning(AutoAssessment.id)
         )
-        created += res.rowcount or 0  # type: ignore[attr-defined]
+        created += len(res.all())
     return created
 
 
