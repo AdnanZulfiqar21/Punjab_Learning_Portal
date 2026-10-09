@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import uuid
-from datetime import datetime
+from datetime import date, datetime
 from typing import Annotated, Any, Literal
 
 from fastapi import APIRouter, Depends, Header, Query, Response
@@ -12,7 +12,7 @@ from sqlalchemy import func, select
 from sqlalchemy.orm import Session
 
 from portal_api.db import get_session
-from portal_api.errors import Conflict, NotFound
+from portal_api.errors import Conflict, NotFound, Unprocessable
 from portal_api.modules.assessment import attempts, forms
 from portal_api.modules.assessment.models import Attempt, PracticeForm, SubmissionReceipt
 from portal_api.modules.assessment.schemas import (
@@ -811,3 +811,49 @@ def my_evidence(
         meters=meters,
         outcomes=rows,
     )
+
+
+# ------------------------------------------------------------------ study plan (P12.S4.T1, STUDYPLAN-01)
+class StudyPlanOut(BaseModel):
+    today: str
+    target_date: str
+    days: int
+    daily_minutes: int
+    required_minutes: int
+    available_minutes: int
+    shortfall_minutes: int
+    feasible: bool
+    scheduled_minutes: int
+    unscheduled_topics: int
+    schedule: list[dict[str, Any]]
+    assumptions: dict[str, Any]
+    rules_version: str
+
+
+@router.get(
+    "/me/study-plan",
+    response_model=StudyPlanOut,
+    summary="A time-budgeted plan for one book: shortfall shown honestly, weakest evidence first",
+)
+def my_study_plan(
+    db: DB,
+    who: CurrentPrincipal,
+    response: Response,
+    grade: Annotated[int, Query(ge=11, le=12)],
+    subject: Annotated[str, Query(min_length=2, max_length=40)],
+    target_date: date,
+    daily_minutes: Annotated[int | None, Query(ge=10, le=600)] = None,
+) -> StudyPlanOut:
+    from portal_api.modules.assessment import evidence, plan
+    from portal_api.modules.identity.models import StudentProfile
+
+    profile = db.get(StudentProfile, who.user.id)
+    minutes = daily_minutes or (profile.daily_minutes if profile and profile.daily_minutes else None)
+    if not minutes:
+        raise Unprocessable("Tell us how many minutes a day you can study.", code_reason="DAILY_MINUTES_NEEDED")
+    today = db.execute(select(func.current_date())).scalar_one()
+    if target_date <= today:
+        raise Unprocessable("Choose a target date in the future.")
+    report = my_evidence(db, who, response, grade, subject)
+    out = plan.build(plan.outcome_rows(report), today=today, target=target_date, daily_minutes=minutes)
+    return StudyPlanOut(**out, rules_version=evidence.RULES_VERSION)
