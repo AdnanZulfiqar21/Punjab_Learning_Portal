@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 import type { WrittenResult } from "@portal/contracts";
 import { confirmUnanswered, prepareLinkedPractice } from "@/app/actions/written";
+import { HelpLink } from "@/components/help-link";
 
 type Question = WrittenResult["questions"][number];
 const when = (s: string) => new Date(s).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" });
@@ -88,7 +89,8 @@ export function PendingAction({ attemptId, q }: { attemptId: string; q: Question
             {q.learner_action === "confirm_or_rescan"
               ? "This answer looks blank to the teacher. Send a clearer photo of it, or tell us you didn't answer it."
               : "The teacher couldn't read this answer. Send a clearer photo of the same page (not a new answer)."}{" "}
-            Please act by {when(q.action_deadline!)}; after that the question is left unmarked and its allowance returned.
+            Please act by {when(q.action_deadline!)}; after that the question is left unmarked and its allowance returned.{" "}
+            <HelpLink slug="written-clearer-copy">About clearer copies</HelpLink>
           </p>
           <label className="inline-flex cursor-pointer items-center gap-2 rounded-lg border border-border bg-surface px-3 py-1.5 font-medium">
             <input type="file" accept="image/jpeg,image/png,application/pdf" className="sr-only" disabled={busy} onChange={(e) => e.target.files?.[0] && void send(e.target.files[0])} />

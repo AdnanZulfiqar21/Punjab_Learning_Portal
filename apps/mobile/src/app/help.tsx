@@ -1,7 +1,7 @@
 // Help on native (P15.S3): open a request, read replies and answer them. A question report opened from a written
 // result carries its reference; the server resolves it to the exact question version and keeps your identity from
 // the subject reviewer who handles it.
-import { Stack, useLocalSearchParams } from "expo-router";
+import { router, Stack, useLocalSearchParams } from "expo-router";
 import { useState } from "react";
 import { ScrollView, View } from "react-native";
 import type { SupportTicket } from "@portal/contracts";
@@ -32,6 +32,7 @@ export default function HelpScreen() {
   return (
     <ScrollView style={{ backgroundColor: c.background }} contentContainerStyle={{ padding: Space.lg, gap: Space.lg }} keyboardShouldPersistTaps="handled">
       <Stack.Screen options={{ title: "Help" }} />
+      <Articles />
       {state.status === "loading" && <Loading label="Checking your sign-in" />}
       {state.status !== "loading" && state.status !== "signed_in" && <Notice title="Sign in to get help">Open the Account tab to sign in.</Notice>}
       {state.status === "signed_in" && <Help token={state.token} attempt={params.attempt} position={params.position ? Number(params.position) : undefined} />}
@@ -131,6 +132,34 @@ function Ticket({ token, ticket, onChange }: { token: string; ticket: SupportTic
             <Button variant="secondary" label="Send reply" onPress={() => void send()} busy={busy} disabled={!reply.trim()} />
           </>
         )}
+      </View>
+    </Card>
+  );
+}
+
+/** P15.S2.T1: published help articles, readable without signing in. */
+function Articles() {
+  const [q, setQ] = useState("");
+  const [term, setTerm] = useState("");
+  const list = useRequest((signal) => api.helpArticles(term, signal), [term]);
+  return (
+    <Card label="Help articles">
+      <View style={{ gap: Space.sm }}>
+        <T style={{ fontWeight: "600" }}>Help articles</T>
+        <Field label="Search help" value={q} onChangeText={setQ} onSubmitEditing={() => setTerm(q.trim())} returnKeyType="search" />
+        <Button variant="secondary" label="Search" onPress={() => setTerm(q.trim())} />
+        {list.state.status === "loading" && <Loading label="Loading help articles" />}
+        {list.state.status === "error" && <ErrorState error={list.state.error} onRetry={list.retry} />}
+        {list.state.status === "success" && list.state.data.length === 0 && <T variant="muted">No matching articles.</T>}
+        {list.state.status === "success" &&
+          list.state.data.map((a) => (
+            <Button
+              key={a.slug}
+              variant="secondary"
+              label={a.title}
+              onPress={() => router.push({ pathname: "/help-article/[slug]", params: { slug: a.slug } })}
+            />
+          ))}
       </View>
     </Card>
   );

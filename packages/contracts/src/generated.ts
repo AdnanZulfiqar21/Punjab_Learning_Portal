@@ -247,6 +247,40 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/help/articles": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Search published help articles */
+        get: operations["list_articles_v1_help_articles_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/help/articles/{slug}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Article */
+        get: operations["get_article_v1_help_articles__slug__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/me": {
         parameters: {
             query?: never;
@@ -556,6 +590,40 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/ops/incidents": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Open Incident */
+        post: operations["open_incident_v1_ops_incidents_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/ops/incidents/{incident_id}/updates": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Update Incident */
+        post: operations["update_incident_v1_ops_incidents__incident_id__updates_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/ops/written-backlog": {
         parameters: {
             query?: never;
@@ -780,6 +848,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/status": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Known incidents (public; no sign-in needed) */
+        get: operations["status_v1_status_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/studio/block-registry": {
         parameters: {
             query?: never;
@@ -791,6 +876,58 @@ export interface paths {
         get: operations["block_registry_v1_studio_block_registry_get"];
         put?: never;
         post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/studio/help/articles": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Staff Articles */
+        get: operations["staff_articles_v1_studio_help_articles_get"];
+        /** Save a draft (a new version) */
+        put: operations["save_article_v1_studio_help_articles_put"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/studio/help/articles/{article_id}/publish": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Publish (MFA) */
+        post: operations["publish_article_v1_studio_help_articles__article_id__publish_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/studio/help/articles/{article_id}/retire": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Retire (MFA) */
+        post: operations["retire_article_v1_studio_help_articles__article_id__retire_post"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1837,6 +1974,56 @@ export interface components {
              */
             saved_at: string;
         };
+        /** ArticleOut */
+        ArticleOut: {
+            /**
+             * Body
+             * @description Content blocks (heading, paragraph, list, callout)
+             */
+            body: {
+                [key: string]: unknown;
+            };
+            /**
+             * Fallback Locale
+             * @description True when the requested language had no version, so English is shown
+             */
+            fallback_locale: boolean;
+            /**
+             * Locale
+             * @enum {string}
+             */
+            locale: "en" | "ur";
+            /** Published At */
+            published_at: string | null;
+            /** Slug */
+            slug: string;
+            /** Summary */
+            summary: string;
+            /** Tags */
+            tags: string[];
+            /** Title */
+            title: string;
+            /** Version */
+            version: number;
+        };
+        /** ArticleSummary */
+        ArticleSummary: {
+            /**
+             * Locale
+             * @enum {string}
+             */
+            locale: "en" | "ur";
+            /** Slug */
+            slug: string;
+            /** Summary */
+            summary: string;
+            /** Tags */
+            tags: string[];
+            /** Title */
+            title: string;
+            /** Version */
+            version: number;
+        };
         /** AssignIn */
         AssignIn: {
             /** Reviewer Id */
@@ -2384,24 +2571,6 @@ export interface components {
              */
             surface: "web" | "ios" | "android";
         };
-        /** DraftIn */
-        DraftIn: {
-            /** Body */
-            body: {
-                [key: string]: unknown;
-            };
-            /**
-             * Revision
-             * @description The revision this edit started from; a stale value returns 409.
-             */
-            revision: number;
-            /** Source Refs */
-            source_refs?: {
-                [key: string]: unknown;
-            }[];
-            /** Title */
-            title?: string | null;
-        };
         /** EntitlementOut */
         EntitlementOut: {
             /**
@@ -2581,6 +2750,63 @@ export interface components {
             items: components["schemas"]["NotificationOut"][];
             /** Unread */
             unread: number;
+        };
+        /** IncidentIn */
+        IncidentIn: {
+            /** Components */
+            components?: string[];
+            /** Message */
+            message: string;
+            /** Title */
+            title: string;
+        };
+        /** IncidentOut */
+        IncidentOut: {
+            /** Components */
+            components: string[];
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Resolved At */
+            resolved_at: string | null;
+            /**
+             * Started At
+             * Format: date-time
+             */
+            started_at: string;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "investigating" | "identified" | "monitoring" | "resolved";
+            /** Title */
+            title: string;
+            /** Updates */
+            updates: components["schemas"]["IncidentUpdateOut"][];
+        };
+        /** IncidentUpdateIn */
+        IncidentUpdateIn: {
+            /** Message */
+            message: string;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "investigating" | "identified" | "monitoring" | "resolved";
+        };
+        /** IncidentUpdateOut */
+        IncidentUpdateOut: {
+            /**
+             * At
+             * Format: date-time
+             */
+            at: string;
+            /** Message */
+            message: string;
+            /** Status */
+            status: string;
         };
         /** ItemCreateIn */
         ItemCreateIn: {
@@ -3946,6 +4172,31 @@ export interface components {
             /** Source Id */
             source_id: string;
         };
+        /** StaffArticle */
+        StaffArticle: {
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Locale */
+            locale: string;
+            /** Published */
+            published: boolean;
+            /** Slug */
+            slug: string;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "draft" | "published" | "retired";
+            /** Title */
+            title: string | null;
+            /** Unpublished Changes */
+            unpublished_changes: boolean;
+            /** Working Version */
+            working_version: number | null;
+        };
         /**
          * StaffDraft
          * @description PR32-02: everything a saved, unreleased draft of this case intends, restored when the workspace reopens.
@@ -4068,6 +4319,16 @@ export interface components {
              * Format: date-time
              */
             updated_at: string;
+        };
+        /** StatusOut */
+        StatusOut: {
+            /** Incidents */
+            incidents: components["schemas"]["IncidentOut"][];
+            /**
+             * Operational
+             * @description False while any incident is unresolved
+             */
+            operational: boolean;
         };
         /** SubjectInGrade */
         SubjectInGrade: {
@@ -4619,10 +4880,47 @@ export interface components {
             /** Ops */
             ops?: components["schemas"]["OpIn"][];
         };
+        /** DraftIn */
+        portal_api__modules__content__schemas__DraftIn: {
+            /** Body */
+            body: {
+                [key: string]: unknown;
+            };
+            /**
+             * Revision
+             * @description The revision this edit started from; a stale value returns 409.
+             */
+            revision: number;
+            /** Source Refs */
+            source_refs?: {
+                [key: string]: unknown;
+            }[];
+            /** Title */
+            title?: string | null;
+        };
         /** SubmitIn */
         portal_api__modules__content__schemas__SubmitIn: {
             /** Note */
             note?: string | null;
+        };
+        /** DraftIn */
+        portal_api__modules__help__router__DraftIn: {
+            /**
+             * Locale
+             * @default en
+             * @enum {string}
+             */
+            locale: "en" | "ur";
+            /** Markdown */
+            markdown: string;
+            /** Slug */
+            slug: string;
+            /** Summary */
+            summary: string;
+            /** Tags */
+            tags?: string[];
+            /** Title */
+            title: string;
         };
         /** RevokeIn */
         portal_api__modules__identity__schemas__RevokeIn: {
@@ -5103,6 +5401,72 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["BookOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_articles_v1_help_articles_get: {
+        parameters: {
+            query?: {
+                q?: string;
+                locale?: "en" | "ur";
+                limit?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ArticleSummary"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_article_v1_help_articles__slug__get: {
+        parameters: {
+            query?: {
+                locale?: "en" | "ur";
+            };
+            header?: never;
+            path: {
+                slug: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ArticleOut"];
                 };
             };
             /** @description Validation Error */
@@ -5692,6 +6056,74 @@ export interface operations {
             };
         };
     };
+    open_incident_v1_ops_incidents_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["IncidentIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["IncidentOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    update_incident_v1_ops_incidents__incident_id__updates_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                incident_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["IncidentUpdateIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["IncidentOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     backlog_v1_ops_written_backlog_get: {
         parameters: {
             query?: never;
@@ -6099,6 +6531,26 @@ export interface operations {
             };
         };
     };
+    status_v1_status_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StatusOut"];
+                };
+            };
+        };
+    };
     block_registry_v1_studio_block_registry_get: {
         parameters: {
             query?: never;
@@ -6117,6 +6569,121 @@ export interface operations {
                     "application/json": {
                         [key: string]: unknown;
                     };
+                };
+            };
+        };
+    };
+    staff_articles_v1_studio_help_articles_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StaffArticle"][];
+                };
+            };
+        };
+    };
+    save_article_v1_studio_help_articles_put: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["portal_api__modules__help__router__DraftIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StaffArticle"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    publish_article_v1_studio_help_articles__article_id__publish_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                article_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StaffArticle"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    retire_article_v1_studio_help_articles__article_id__retire_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                article_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StaffArticle"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
                 };
             };
         };
@@ -6266,7 +6833,7 @@ export interface operations {
         };
         requestBody: {
             content: {
-                "application/json": components["schemas"]["DraftIn"];
+                "application/json": components["schemas"]["portal_api__modules__content__schemas__DraftIn"];
             };
         };
         responses: {

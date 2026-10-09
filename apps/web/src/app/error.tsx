@@ -1,6 +1,7 @@
 "use client"; // Error boundaries must be Client Components
 
 import { useEffect } from "react";
+import { CopyDiagnostics } from "@/components/help-link";
 
 export default function ErrorPage({ error, retry }: { error: Error & { digest?: string }; retry: () => void }) {
   useEffect(() => {
@@ -13,6 +14,7 @@ export default function ErrorPage({ error, retry }: { error: Error & { digest?: 
         The learning service did not respond. Your progress is not affected. Please try again in a moment.
       </p>
       {error.digest && <p className="font-mono text-xs text-muted">Reference: {error.digest}</p>}
+      <CopyDiagnostics reference={error.digest} />
       <button
         type="button"
         onClick={() => retry()}

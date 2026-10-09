@@ -11,6 +11,7 @@ import { PendingAction } from "./pending-action";
 import { PractiseAgain } from "./practise-again";
 import { RecheckPanel } from "./recheck-panel";
 import { Notice } from "@/components/ui";
+import { HelpLink } from "@/components/help-link";
 
 type Slot = { pages: string[]; unanswered: boolean };
 type Upload = { id: string; name: string; progress: number; status: "uploading" | "failed"; error?: string };
@@ -186,7 +187,8 @@ export function WrittenRunner({ attempt, result = null }: { attempt: WrittenAtte
         )}
         {attempt.status === "expired" && (
           <Notice tone="warn" title="The upload window closed before you submitted">
-            {pages.length} page(s) reached the server but were not submitted, so they won&apos;t be marked. You can start a new practice test.
+            {pages.length} page(s) reached the server but were not submitted, so they won&apos;t be marked. You can start a new practice test.{" "}
+            <HelpLink slug="written-submission-receipt">How submitting and time limits work</HelpLink>
           </Notice>
         )}
         {active && (
@@ -334,7 +336,9 @@ export function WrittenRunner({ attempt, result = null }: { attempt: WrittenAtte
           {uploads.map((u) => (
             <li key={u.id} className="rounded-lg border border-dashed border-border p-2 text-sm" role="status">
               <p className="truncate">{u.name}</p>
-              {u.status === "uploading" ? <progress max={100} value={u.progress} className="w-full" aria-label={`Uploading ${u.name}`} /> : <p className="text-danger">{u.error}</p>}
+              {u.status === "uploading" ? <progress max={100} value={u.progress} className="w-full" aria-label={`Uploading ${u.name}`} /> : <p className="text-danger">
+                  {u.error} <HelpLink slug="written-upload-limits">What can I upload?</HelpLink>
+                </p>}
             </li>
           ))}
         </ul>
