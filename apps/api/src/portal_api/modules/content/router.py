@@ -3,9 +3,11 @@
 from __future__ import annotations
 
 import uuid
-from typing import Annotated
+from datetime import datetime
+from typing import Annotated, Any, Literal
 
 from fastapi import APIRouter, Depends, Query, Response
+from pydantic import BaseModel, Field
 from sqlalchemy import select
 from sqlalchemy.orm import Session, selectinload
 
@@ -61,6 +63,7 @@ Reviewer = Annotated[Principal, Depends(require(Permission.review_content))]
 Publisher = Annotated[Principal, Depends(require(Permission.publish_content))]
 Quarantiner = Annotated[Principal, Depends(require(Permission.quarantine_content))]
 RightsOwner = Annotated[Principal, Depends(require(Permission.confirm_source_rights))]
+Adjudicator = Annotated[Principal, Depends(require(Permission.adjudicate))]
 
 
 # ------------------------------------------------------------------ serialisation
@@ -212,6 +215,15 @@ def _detail(db: Session, item: ContentItem, who: Principal) -> ItemDetail:
         and mfa
         and not retired
         and kinds.get(item.kind).learner_readable,
+        change_quarantine_level=Permission.quarantine_content in perms
+        and mfa
+        and item.availability == Availability.quarantined.value
+        and bool(kinds.get(item.kind).quarantine_levels),
+        correct_score=Permission.adjudicate in perms
+        and mfa
+        and item.kind == "mcq"
+        and item.availability == Availability.quarantined.value
+        and item.quarantine_level in ("VOID", "KEY_ERROR"),
     )
     blockers: list[str] = []
     if item.working is not None and not retired:
@@ -495,3 +507,70 @@ def chapter_lessons(db: DB, who: OptionalPrincipal, chapter_id: uuid.UUID, respo
             )
         )
     return out
+
+
+# ------------------------------------------------------------------ MCQ score corrections (§5.7, P10.S3.T4)
+class ScoreCorrectionIn(BaseModel):
+    defect: Literal["VOID", "KEY_ERROR"]
+    corrected_option_id: str | None = Field(default=None, max_length=80, description="KEY_ERROR only")
+    reason: str = Field(min_length=10, max_length=2000)
+
+
+class ScoreCorrectionOut(BaseModel):
+    id: uuid.UUID
+    version_id: uuid.UUID
+    defect: Literal["VOID", "KEY_ERROR"]
+    corrected_option_id: str | None
+    reason: str
+    decided_at: datetime
+    status: Literal["effective", "superseded"]
+    supersedes_id: uuid.UUID | None
+    affected_attempts: int
+    rescored: int = Field(default=0, description="Attempts given a new score version by this request")
+
+
+def _correction_out(db: Session, a: Any, rescored: int = 0) -> ScoreCorrectionOut:
+    from portal_api.modules.assessment import adjudications
+
+    return ScoreCorrectionOut(
+        id=a.id,
+        version_id=a.version_id,
+        defect=a.defect,
+        corrected_option_id=a.corrected_option_id,
+        reason=a.reason,
+        decided_at=a.decided_at,
+        status=a.status,
+        supersedes_id=a.supersedes_id,
+        affected_attempts=len(adjudications.affected_attempts(db, a.version_id)),
+        rescored=rescored,
+    )
+
+
+@router.post(
+    "/items/{item_id}/score-corrections",
+    response_model=ScoreCorrectionOut,
+    status_code=201,
+    summary="Record a reviewed VOID or KEY_ERROR correction and re-score affected attempts (adjudicators, MFA)",
+)
+def record_score_correction(
+    db: DB, who: Adjudicator, item_id: uuid.UUID, body: ScoreCorrectionIn
+) -> ScoreCorrectionOut:
+    from portal_api.modules.assessment import adjudications
+
+    a = adjudications.record_adjudication(
+        db, who, item_id, defect=body.defect, reason=body.reason, corrected_option_id=body.corrected_option_id
+    )
+    rescored = adjudications.propagate(db, a.version_id)
+    return _correction_out(db, a, rescored)
+
+
+@router.get(
+    "/items/{item_id}/score-corrections",
+    response_model=list[ScoreCorrectionOut],
+    summary="Score corrections recorded for a question",
+)
+def list_score_corrections(db: DB, who: Member, item_id: uuid.UUID) -> list[ScoreCorrectionOut]:
+    from portal_api.modules.assessment import adjudications
+
+    workflow.get_item(db, item_id)
+    return [_correction_out(db, a) for a in adjudications.corrections(db, item_id)]

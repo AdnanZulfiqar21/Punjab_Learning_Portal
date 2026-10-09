@@ -7,7 +7,7 @@ audited. Each runbook is rehearsed by an automated test that walks the same step
 |---|---|---|---|
 | Learner paid but has no access | [missing-access.md](missing-access.md) | `apps/api/tests/test_incident_rehearsals.py::test_rehearsal_missing_paid_access` | Rehearsed. Interim remedy only: payments are not live (B06). |
 | Trial refused on a shared or second-hand device | [trial-false-block.md](trial-false-block.md) | `test_rehearsal_trial_false_block_appeal` | Rehearsed. The rehearsal found and fixed a gap: an exception did not help a brand-new account. |
-| Disputed question (soft, then void) | [disputed-question.md](disputed-question.md) | Soft: `tests/test_attempts.py::test_forms_are_frozen_idempotent_and_exclude_quarantined` | Soft quarantine works. **Void/key-error score propagation (§5.7) is not built yet**; it is the next task. |
+| Disputed question (soft, then void) | [disputed-question.md](disputed-question.md) | `apps/api/tests/test_mcq_corrections.py::test_rehearsal_disputed_question_soft_then_void` | Rehearsed: SOFT, then VOID with re-scoring as new score versions (§5.7). |
 | Interrupted mock exam | [interrupted-mock.md](interrupted-mock.md) | none | **Blocked**: timed mock exams are not built (P11). |
 
 Shared rules:

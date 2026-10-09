@@ -155,6 +155,8 @@ class ResultOut(BaseModel):
     question_count: int
     finalise_reason: Literal["manual", "expiry"]
     items: list[ItemReview]
+    revised_at: datetime | None = Field(default=None, description="When this score was revised after review (v2+)")
+    revision_reason: str | None = None
 
 
 class RevealOut(BaseModel):

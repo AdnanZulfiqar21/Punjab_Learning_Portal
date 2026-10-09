@@ -193,7 +193,7 @@ def result(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, response: Respo
                 stem=k["stem"],
                 options=[{"id": oid, "blocks": k["options"][oid]["blocks"]} for oid in fi.option_order],  # type: ignore[misc]
                 chosen=r["chosen"],
-                correct_option_id=k["correct_option_id"],
+                correct_option_id=r.get("corrected_key") or k["correct_option_id"],
                 correct=r["correct"],
                 earned=r["earned"],
                 treatment=r["treatment"],
@@ -211,4 +211,6 @@ def result(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, response: Respo
         question_count=receipt.question_count,
         finalise_reason=attempt.finalise_reason,  # type: ignore[arg-type]
         items=items,
+        revised_at=score.created_at if score.version > 1 else None,
+        revision_reason=score.reason if score.version > 1 else None,
     )

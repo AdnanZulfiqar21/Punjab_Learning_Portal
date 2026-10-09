@@ -7,6 +7,7 @@ import {
   claimItem,
   publishItem,
   quarantineItem,
+  recordScoreCorrection,
   setAccessTier,
   releaseItem,
   retireItem,
@@ -440,6 +441,7 @@ function ActionsPanel({ item, myId, flush }: { item: StudioItem; myId: string; f
   const [text, setText] = useState("");
   const [checks, setChecks] = useState<Record<string, boolean>>({});
   const [level, setLevel] = useState("");
+  const [correctedKey, setCorrectedKey] = useState("");
   const a = item.actions;
   const checklistDone = item.review_checklist.every((c) => checks[c]);
 
@@ -458,7 +460,8 @@ function ActionsPanel({ item, myId, flush }: { item: StudioItem; myId: string; f
     });
   }
 
-  const reasonNeeded = a.revise || a.quarantine || a.release || a.retire || a.set_access_tier;
+  const reasonNeeded = a.revise || a.quarantine || a.release || a.retire || a.set_access_tier || a.change_quarantine_level || a.correct_score;
+  const publishedOptions = ((item.published?.body as { options?: { id: string }[] } | undefined)?.options ?? []).map((o) => o.id);
   const commentNeeded = a.review || a.submit;
   const btn = "w-full rounded-lg px-3 py-2 text-sm font-medium disabled:opacity-50";
   const primary = `${btn} bg-accent text-white hover:bg-accent-strong dark:text-background`;
@@ -491,7 +494,7 @@ function ActionsPanel({ item, myId, flush }: { item: StudioItem; myId: string; f
           ))}
         </fieldset>
       )}
-      {a.quarantine && item.quarantine_levels.length > 0 && (
+      {(a.quarantine || a.change_quarantine_level) && item.quarantine_levels.length > 0 && (
         <label className="block space-y-1 text-sm">
           <span className="font-medium">Quarantine level</span>
           <select value={level} onChange={(e) => setLevel(e.target.value)} className="w-full rounded-lg border border-border bg-surface px-2 py-1.5">
@@ -554,6 +557,43 @@ function ActionsPanel({ item, myId, flush }: { item: StudioItem; myId: string; f
             onClick={() => run(() => quarantineItem(item.id, text.trim(), level || null))}
           >
             Quarantine (hide from learners)
+          </button>
+        )}
+        {a.change_quarantine_level && (
+          <button
+            type="button"
+            className={secondary}
+            disabled={pending || short || !level || level === item.quarantine_level}
+            onClick={() => run(() => quarantineItem(item.id, text.trim(), level))}
+          >
+            Change quarantine level
+          </button>
+        )}
+        {a.correct_score && item.quarantine_level === "KEY_ERROR" && (
+          <label className="block space-y-1 text-sm">
+            <span className="font-medium">Corrected answer</span>
+            <select value={correctedKey} onChange={(e) => setCorrectedKey(e.target.value)} className="w-full rounded-lg border border-border bg-surface px-2 py-1.5">
+              <option value="">Choose…</option>
+              {publishedOptions.map((o, i) => (
+                <option key={o} value={o}>
+                  Option {String.fromCharCode(65 + i)}
+                </option>
+              ))}
+            </select>
+          </label>
+        )}
+        {a.correct_score && (
+          <button
+            type="button"
+            className={danger}
+            disabled={pending || text.trim().length < 10 || (item.quarantine_level === "KEY_ERROR" && !correctedKey)}
+            onClick={() =>
+              run(() =>
+                recordScoreCorrection(item.id, item.quarantine_level === "KEY_ERROR" ? "KEY_ERROR" : "VOID", text.trim(), item.quarantine_level === "KEY_ERROR" ? correctedKey : null),
+              )
+            }
+          >
+            {item.quarantine_level === "KEY_ERROR" ? "Record key correction and re-score" : "Record void and re-score"}
           </button>
         )}
         {a.release && (
