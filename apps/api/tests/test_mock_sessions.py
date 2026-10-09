@@ -41,7 +41,7 @@ def _schedule(client: TestClient, admin: Staff, code: str, late_entry: str = "fi
 
 
 def _shift(session_id: str, **offsets_min: float) -> None:
-    sets = ", ".join(f"{k} = clock_timestamp() + make_interval(mins => :{k})" for k in offsets_min)
+    sets = ", ".join(f"{k} = clock_timestamp() + make_interval(secs => 60 * :{k})" for k in offsets_min)
     with get_sessionmaker()() as db:
         db.execute(text(f"update mock_session set {sets} where id = :id"), {"id": session_id, **offsets_min})  # noqa: S608
         db.commit()

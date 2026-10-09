@@ -40,13 +40,20 @@ async function Report() {
         </div>
         <PrintButton />
       </div>
+      {r.results_pending > 0 && (
+        <Notice title="Results on the way">
+          {r.results_pending} submitted scheduled mock{r.results_pending === 1 ? " is" : "s are"} waiting for the release time. They count here once released.
+        </Notice>
+      )}
       {r.subjects.length === 0 ? (
+        r.results_pending === 0 && (
         <Notice title="No submitted tests yet">
           <Link href="/practice" className="underline">
             Take a practice test
           </Link>{" "}
           to start your report.
         </Notice>
+        )
       ) : (
         <section aria-labelledby="subjects-h" className="space-y-2">
           <h2 id="subjects-h" className="font-semibold">

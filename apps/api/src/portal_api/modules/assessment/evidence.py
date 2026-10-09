@@ -172,6 +172,9 @@ def learner_responses(db: Any, user_id: uuid.UUID, now: datetime) -> list[Respon
         )
     ):
         return []  # staff and technical accounts contribute no knowledge evidence
+    from portal_api.modules.assessment.sessions import held_forms
+
+    held = held_forms(db, user_id)  # OCT9-01: a held scheduled mock is not evidence until its results are released
     latest = (
         select(ScoreVersion.attempt_id, func.max(ScoreVersion.version).label("v"))
         .group_by(ScoreVersion.attempt_id)
@@ -187,6 +190,8 @@ def learner_responses(db: Any, user_id: uuid.UUID, now: datetime) -> list[Respon
     ).all()
     out: list[Response] = []
     for attempt, score in rows:
+        if attempt.form_id in held:
+            continue
         items = {fi.position: fi for fi in db.scalars(select(FormItem).where(FormItem.form_id == attempt.form_id))}
         for row in score.items:
             if row.get("treatment") in ("EXCLUDE", "CREDIT_ALL") or row.get("chosen") is None:

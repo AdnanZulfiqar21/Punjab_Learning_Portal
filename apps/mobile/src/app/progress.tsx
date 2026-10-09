@@ -30,7 +30,12 @@ function Report({ token }: { token: string }) {
   return (
     <View style={{ gap: Space.md }}>
       <T variant="small">Prepared {when(r.generated_at)} · report version {r.report_version}</T>
-      {r.subjects.length === 0 && <Notice title="No submitted tests yet">Take a practice test to start your report.</Notice>}
+      {r.results_pending > 0 && (
+        <Notice title="Results on the way">
+          {r.results_pending} submitted scheduled mock{r.results_pending === 1 ? " is" : "s are"} waiting for the release time. They count here once released.
+        </Notice>
+      )}
+      {r.subjects.length === 0 && r.results_pending === 0 && <Notice title="No submitted tests yet">Take a practice test to start your report.</Notice>}
       {r.subjects.map((s) => (
         <Card key={`${s.grade}-${s.subject}`}>
           <T style={{ fontWeight: "600" }}>

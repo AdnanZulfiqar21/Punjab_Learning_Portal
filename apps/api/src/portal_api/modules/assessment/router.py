@@ -191,20 +191,10 @@ def result(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, response: Respo
     score = attempts.latest_score(db, attempt.id)
     receipt = attempts.receipt_for(db, attempt.id)
     form = db.get(PracticeForm, attempt.form_id)
-    held = None
-    scope = (form.scope or {}) if form is not None else {}
-    if scope.get("session_id"):  # the session's current release time decides (staff may delay it for a correction)
-        from portal_api.modules.assessment.sessions import MockSession
+    if form is not None:  # SCHEDULE-01/OCT9-01: the session's live release time decides, failing closed
+        from portal_api.modules.assessment.sessions import require_released
 
-        session = db.get(MockSession, uuid.UUID(scope["session_id"]))
-        held = session.results_at.isoformat() if session is not None else None
-    if held and datetime.fromisoformat(held) > db.execute(select(func.now())).scalar_one():
-        # SCHEDULE-01: a scheduled mock's results (and so its keys) stay private until the release time.
-        raise Conflict(
-            "Your answers are saved. Results are released after the mock window closes.",
-            code_reason="RESULTS_PENDING",
-            available_at=held,
-        )
+        require_released(db, form)
     if score is None or receipt is None or form is None:
         raise NotFound("The result is not available yet.")
     keys = forms.item_keys(db, form)
@@ -702,6 +692,7 @@ class ProgressReport(BaseModel):
     subjects: list[SubjectProgress]
     recent: list[RecentResult]
     notebook: dict[str, int]
+    results_pending: int
 
 
 @router.get("/me/progress", response_model=ProgressReport, summary="Your progress report, with metric definitions")
