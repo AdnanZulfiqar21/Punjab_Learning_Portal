@@ -81,6 +81,10 @@ def start(db: Session, who: Principal, form_id: uuid.UUID) -> Attempt:
         )
     now = db_now(db)
     deadline = now + timedelta(seconds=form.duration_s) if form.duration_s else None
+    if "session_id" in (form.scope or {}):  # OCT9-04: scheduled mocks are admitted against an absolute deadline
+        from portal_api.modules.assessment.sessions import admit
+
+        deadline = admit(db, form, who.user.id, now)
     cutoff = deadline + timedelta(milliseconds=form.late_write_tolerance_ms) if deadline else None
     db.execute(
         insert(Attempt)
@@ -220,10 +224,10 @@ def _finalise(
         included_ops=[{"op_id": str(r["op_id"]), "disposition": r["disposition"]} for r in results],
     )
     db.add(receipt)
-    sv = _score(db, attempt, form, answers, reason=f"finalised ({reason})")
+    _score(db, attempt, form, answers, reason=f"finalised ({reason})")
     from portal_api.modules.assessment import notebook
 
-    notebook.record(db, attempt, form, sv.items, now)  # P12.S3: wrong answers join the mistake notebook
+    notebook.apply_attempt(db, attempt, now)  # P12.S3: wrong answers join the mistake notebook (unless held)
     record(
         db,
         actor=actor,
@@ -367,6 +371,10 @@ def reveal(db: Session, who: Principal, attempt_id: uuid.UUID, position: int) ->
     assert form is not None
     if form.feedback_mode != "immediate" and attempt.status == "active":
         raise Conflict("Feedback for this test is shown after you submit.")
+    if attempt.status != "active":  # OCT9-01: a held scheduled mock's keys stay private after submission too
+        from portal_api.modules.assessment.sessions import require_released
+
+        require_released(db, form)
     answer = db.get(AttemptAnswer, (attempt.id, position))
     if attempt.status == "active":
         if answer is None or answer.option_id is None:

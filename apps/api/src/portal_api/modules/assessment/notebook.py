@@ -16,6 +16,17 @@ subject. It uses each family's current live question, preferring a variant other
 the original attempt stays exactly as it was.
 
 Learners can add a private note to any entry.
+
+**Derived by replay (OCT9-01, OCT9-02):** an entry's status, misses, interval and due date are never incremented in
+place. They are recomputed for the affected question families by replaying the learner's genuine responses in the
+order they were submitted (each attempt's `finalised_at`), using every attempt's *latest* score version. So:
+* a score correction is not another practice session: unchanged answers keep their misses, interval and due date;
+* wrong→correct, correct→wrong and void→restored corrections reconcile in the original chronology, including an old
+  attempt corrected after newer reviews; replaying the same correction changes nothing;
+* an entry that loses every mistake behind it is kept, `voided` with the reason, so private notes and history survive.
+A scheduled mock whose results are still held (`sessions.held_forms`) is left out of the replay until its release;
+`sync` applies released attempts once (`attempt.notebook_applied_at`). Replays for one learner are serialised with a
+transaction-scoped advisory lock, so concurrent submissions and corrections can't duplicate entries.
 """
 
 from __future__ import annotations
@@ -27,6 +38,7 @@ from datetime import datetime, timedelta
 from typing import Any
 
 from sqlalchemy import CheckConstraint, DateTime, ForeignKey, SmallInteger, String, Text, UniqueConstraint, func, select
+from sqlalchemy import true as sa_true
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped, Session, mapped_column
 
@@ -65,60 +77,137 @@ class MistakeEntry(Base):
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
 
 
-def record(db: Session, attempt: Attempt, form: PracticeForm, items: list[dict[str, Any]], now: datetime) -> None:
-    """Update the notebook from a score's item rows (inside the caller's transaction)."""
-    by_pos = {fi.position: fi for fi in db.scalars(select(FormItem).where(FormItem.form_id == form.id))}
-    for row in items:
-        fi = by_pos.get(int(row["position"]))
-        if fi is None:
-            continue
-        entry = db.scalar(
-            select(MistakeEntry).where(MistakeEntry.user_id == attempt.user_id, MistakeEntry.family_id == fi.family_id)
-        )
-        treatment = row.get("treatment", "NONE")
-        if treatment in ("EXCLUDE", "CREDIT_ALL"):
-            if entry is not None and entry.status != "voided":
-                entry.status = "voided"
-                entry.void_reason = "This question was withdrawn after academic review."
+NO_LONGER_A_MISTAKE = "Your answer was re-marked as correct after review, so this is no longer a mistake."
+WITHDRAWN = "This question was withdrawn after academic review."
+
+
+def _replay(events: list[tuple[datetime, str, dict[str, Any], FormItem, uuid.UUID]]) -> dict[str, Any] | None:
+    """One family's derived state from its responses in submission order (None: never a counted mistake)."""
+    st: dict[str, Any] | None = None
+    for at, kind, row, fi, attempt_id in events:
+        if row.get("treatment") in ("EXCLUDE", "CREDIT_ALL"):
+            if st is not None and st["status"] != "voided":
+                st["status"], st["void_reason"] = "voided", WITHDRAWN
             continue
         if row.get("correct") is False and row.get("chosen") is not None:
-            if entry is None:
-                item = db.get(ContentItem, fi.item_id)
-                assert item is not None
-                db.add(
-                    MistakeEntry(
-                        id=uuid.uuid4(),
-                        user_id=attempt.user_id,
-                        family_id=fi.family_id,
-                        item_id=fi.item_id,
-                        version_id=fi.version_id,
-                        source_attempt_id=attempt.id,
-                        position=fi.position,
-                        grade_number=item.grade_number,
-                        subject_code=item.subject_code,
-                        status="open",
-                        interval_index=0,
-                        misses=1,
-                        due_at=now + timedelta(days=INTERVALS[0]),
-                        last_event="missed",
-                        last_event_at=now,
-                        note="",
-                    )
-                )
-            elif entry.status != "voided":
-                entry.status, entry.interval_index = "open", 0
-                entry.misses += 1
-                entry.due_at = now + timedelta(days=INTERVALS[0])
-                entry.last_event, entry.last_event_at = "missed", now
-        elif row.get("correct") is True and form.kind == "review" and entry is not None and entry.status == "open":
-            nxt = entry.interval_index + 1
-            entry.last_event, entry.last_event_at = "reviewed", now
+            if st is None:
+                st = {"first": (attempt_id, fi), "misses": 0, "void_reason": None}
+            elif st["status"] == "voided":
+                continue
+            st.update(status="open", interval_index=0, last_event="missed", last_event_at=at)
+            st["misses"] += 1
+            st["due_at"] = at + timedelta(days=INTERVALS[0])
+        elif row.get("correct") is True and kind == "review" and st is not None and st["status"] == "open":
+            nxt = st["interval_index"] + 1
+            st["last_event"], st["last_event_at"] = "reviewed", at
             if nxt >= len(INTERVALS):
-                entry.status = "mastered"
+                st["status"] = "mastered"
             else:
-                entry.interval_index = nxt
-                entry.due_at = now + timedelta(days=INTERVALS[nxt])
-        db.flush()
+                st["interval_index"], st["due_at"] = nxt, at + timedelta(days=INTERVALS[nxt])
+    return st
+
+
+def reconcile(db: Session, user_id: uuid.UUID, family_ids: set[uuid.UUID]) -> None:
+    """Recompute these families' entries from the learner's released responses (inside the caller's transaction)."""
+    from portal_api.modules.assessment.models import ScoreVersion
+    from portal_api.modules.assessment.sessions import held_forms
+
+    if not family_ids:
+        return
+    db.execute(select(func.pg_advisory_xact_lock(func.hashtextextended(f"notebook:{user_id}", 0))))
+    held = held_forms(db, user_id)
+    latest = (
+        select(ScoreVersion.attempt_id, func.max(ScoreVersion.version).label("v"))
+        .group_by(ScoreVersion.attempt_id)
+        .subquery()
+    )
+    rows = db.execute(
+        select(Attempt, PracticeForm.kind, ScoreVersion.items, FormItem)
+        .join(PracticeForm, PracticeForm.id == Attempt.form_id)
+        .join(FormItem, FormItem.form_id == Attempt.form_id)
+        .join(latest, latest.c.attempt_id == Attempt.id)
+        .join(ScoreVersion, (ScoreVersion.attempt_id == Attempt.id) & (ScoreVersion.version == latest.c.v))
+        .where(
+            Attempt.user_id == user_id,
+            Attempt.status == "finalised",
+            FormItem.family_id.in_(family_ids),
+            Attempt.form_id.not_in(list(held)) if held else sa_true(),
+        )
+        .order_by(Attempt.finalised_at, Attempt.id, FormItem.position)
+    ).all()
+    events: dict[uuid.UUID, list[tuple[datetime, str, dict[str, Any], FormItem, uuid.UUID]]] = {}
+    for attempt, kind, items, fi in rows:
+        row = next((r for r in items if int(r["position"]) == fi.position), None)
+        if row is not None and attempt.finalised_at is not None:
+            events.setdefault(fi.family_id, []).append((attempt.finalised_at, kind, row, fi, attempt.id))
+    existing = {
+        e.family_id: e
+        for e in db.scalars(
+            select(MistakeEntry).where(MistakeEntry.user_id == user_id, MistakeEntry.family_id.in_(family_ids))
+        )
+    }
+    for family_id in family_ids:
+        st = _replay(events.get(family_id, []))
+        entry = existing.get(family_id)
+        if st is None:
+            withdrawn = any(e[2].get("treatment") in ("EXCLUDE", "CREDIT_ALL") for e in events.get(family_id, []))
+            if entry is not None:
+                entry.status, entry.void_reason = "voided", WITHDRAWN if withdrawn else NO_LONGER_A_MISTAKE
+            continue
+        source_attempt, fi = st["first"]
+        if entry is None:
+            item = db.get(ContentItem, fi.item_id)
+            assert item is not None
+            entry = MistakeEntry(
+                id=uuid.uuid4(),
+                user_id=user_id,
+                family_id=family_id,
+                grade_number=item.grade_number,
+                subject_code=item.subject_code,
+                note="",
+            )
+            db.add(entry)
+        entry.item_id, entry.version_id, entry.position = fi.item_id, fi.version_id, fi.position
+        entry.source_attempt_id = source_attempt
+        entry.status, entry.void_reason = st["status"], st["void_reason"]
+        entry.interval_index, entry.misses, entry.due_at = st["interval_index"], st["misses"], st["due_at"]
+        entry.last_event, entry.last_event_at = st["last_event"], st["last_event_at"]
+    db.flush()
+
+
+def apply_attempt(db: Session, attempt: Attempt, now: datetime) -> None:
+    """Reflect a finalised (or re-scored) attempt in the notebook, unless its results are still held."""
+    from portal_api.modules.assessment.sessions import held_forms
+
+    if attempt.form_id in held_forms(db, attempt.user_id):
+        return  # applied by `sync` once released
+    families = set(db.scalars(select(FormItem.family_id).where(FormItem.form_id == attempt.form_id)))
+    reconcile(db, attempt.user_id, families)
+    attempt.notebook_applied_at = attempt.notebook_applied_at or now
+    db.flush()
+
+
+def sync(db: Session, user_id: uuid.UUID) -> None:
+    """Apply finalised attempts not yet reflected (scheduled mocks whose results were released since); commits."""
+    from portal_api.modules.assessment.sessions import held_forms
+
+    pending = list(
+        db.scalars(
+            select(Attempt).where(
+                Attempt.user_id == user_id, Attempt.status == "finalised", Attempt.notebook_applied_at.is_(None)
+            )
+        )
+    )
+    if not pending:
+        return
+    held = held_forms(db, user_id)
+    ready = [a for a in pending if a.form_id not in held]
+    if not ready:
+        return
+    now = db.execute(select(func.now())).scalar_one()
+    for a in ready:
+        apply_attempt(db, a, now)
+    db.commit()
 
 
 def why(entry: MistakeEntry, now: datetime) -> str:
@@ -133,6 +222,7 @@ def why(entry: MistakeEntry, now: datetime) -> str:
 
 
 def entries(db: Session, user_id: uuid.UUID) -> list[MistakeEntry]:
+    sync(db, user_id)
     return list(
         db.scalars(
             select(MistakeEntry)
@@ -185,6 +275,7 @@ def build_review(db: Session, who: Any, *, grade: int, subject: str, count: int,
             raise Conflict("This request key was already used for a different test.")
         return existing
     access.require_access(db, who.user.id, purpose="Review tests")
+    sync(db, who.user.id)
     now = db.execute(select(func.now())).scalar_one()
     due = db.scalars(
         select(MistakeEntry)

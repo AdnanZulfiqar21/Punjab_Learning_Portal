@@ -25,11 +25,17 @@ DEFINITIONS = {
     "accuracy": "Correct ÷ answered, as a percentage. Credited-to-everyone questions are not counted as answered.",
     "score": "Marks earned ÷ marks available in that test's latest score version, after any reviewed corrections.",
     "notebook": "Questions you answered wrongly that are open, mastered after spaced review, or withdrawn.",
+    "results_pending": "Submitted scheduled mocks whose results aren't released yet; they count once released.",
 }
 
 
 def report(db: Session, user_id: uuid.UUID) -> dict[str, Any]:
+    from portal_api.modules.assessment import notebook
     from portal_api.modules.assessment.notebook import MistakeEntry
+    from portal_api.modules.assessment.sessions import held_forms
+
+    notebook.sync(db, user_id)
+    held = held_forms(db, user_id)  # OCT9-01: a held scheduled mock adds nothing until its results are released
 
     latest = (
         select(ScoreVersion.attempt_id, func.max(ScoreVersion.version).label("v"))
@@ -44,6 +50,8 @@ def report(db: Session, user_id: uuid.UUID) -> dict[str, Any]:
         .where(Attempt.user_id == user_id, Attempt.status == "finalised")
         .order_by(Attempt.finalised_at.desc())
     ).all()
+    pending = sum(1 for _, form, _ in rows if form.id in held)
+    rows = [r for r in rows if r[1].id not in held]
     subjects: dict[tuple[int, str], dict[str, Any]] = {}
     recent: list[dict[str, Any]] = []
     for attempt, form, score in rows:
@@ -86,7 +94,7 @@ def report(db: Session, user_id: uuid.UUID) -> dict[str, Any]:
     for agg in subjects.values():
         n = agg["questions_answered"]
         agg["accuracy"] = round(100 * agg["correct"] / n, 1) if n else None
-    notebook = dict(
+    book = dict(
         db.execute(
             select(MistakeEntry.status, func.count())
             .where(MistakeEntry.user_id == user_id)
@@ -100,5 +108,6 @@ def report(db: Session, user_id: uuid.UUID) -> dict[str, Any]:
         "definitions": DEFINITIONS,
         "subjects": sorted(subjects.values(), key=lambda a: (a["grade"], a["subject"])),
         "recent": recent,
-        "notebook": {s: int(notebook.get(s, 0)) for s in ("open", "mastered", "voided")},
+        "notebook": {s: int(book.get(s, 0)) for s in ("open", "mastered", "voided")},
+        "results_pending": pending,
     }

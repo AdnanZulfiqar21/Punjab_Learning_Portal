@@ -31,6 +31,25 @@ _STAFF = ("author_id", "assessor_id", "staff_id")  # other people (staff) are ne
 _EXCLUDED = ("hash", "token", "secret", "installation_ref", "evidence", "pepper", "storage_key", "provider_ref")
 
 
+# Every table holding one person's rows is either exported or excluded here with the reason (OCT9 coverage
+# inventory; `tests/test_privacy.py` fails when a new per-person table is in neither list).
+EXPORTED_TABLES = frozenset(
+    {
+        "allowance_event", "attempt", "consent_record", "entitlement", "lesson_completion", "mistake_entry",
+        "mock_accommodation", "notification", "notification_preference", "practice_form", "student_profile",
+        "support_assisted_access", "support_ticket", "trial_claim", "trial_device_use", "trial_exception",
+        "trial_grant", "user_session", "written_attempt", "written_form", "written_notice", "written_recheck_request",
+    }
+)  # fmt: skip
+NOT_EXPORTED = {
+    "dev_credential": "a development-only sign-in secret",
+    "push_token": "a device delivery secret",
+    "notification_delivery": "provider delivery log; the notifications themselves are exported",
+    "staff_role_grant": "staff authorisation, not learner data",
+    "written_regrade_job": "a staff-requested processing job",
+}
+
+
 def _row(obj: Any) -> dict[str, Any]:
     out: dict[str, Any] = {}
     for col in inspect(obj).mapper.column_attrs:
@@ -48,7 +67,11 @@ def _rows(db: Session, model: Any, *where: Any) -> list[dict[str, Any]]:
 def export(db: Session, user: AppUser) -> tuple[bytes, str]:
     from portal_api.modules.access.models import AllowanceEvent, Entitlement, TrialGrant
     from portal_api.modules.access.trial_devices import TrialClaim, TrialDeviceUse, TrialException
-    from portal_api.modules.assessment.models import Attempt, AttemptAnswer, ScoreVersion
+    from portal_api.modules.assessment import notebook
+    from portal_api.modules.assessment.models import Attempt, AttemptAnswer, PracticeForm, ScoreVersion
+    from portal_api.modules.assessment.notebook import MistakeEntry
+    from portal_api.modules.assessment.sessions import MockAccommodation, held_forms
+    from portal_api.modules.content.completion import LessonCompletion
     from portal_api.modules.identity.models import ConsentRecord, StudentProfile
     from portal_api.modules.identity.sessions import UserSession
     from portal_api.modules.notifications.models import Notification, NotificationPreference
@@ -58,16 +81,21 @@ def export(db: Session, user: AppUser) -> tuple[bytes, str]:
         SupportMessage,
         SupportTicket,
     )
-    from portal_api.modules.written.models import WrittenAttempt
-    from portal_api.modules.written.review import WrittenScoreVersion
+    from portal_api.modules.written.adjudication import WrittenNotice
+    from portal_api.modules.written.models import WrittenAttempt, WrittenForm
+    from portal_api.modules.written.review import WrittenRecheckRequest, WrittenScoreVersion
 
     uid = user.id
-    attempts = list(db.scalars(select(Attempt.id).where(Attempt.user_id == uid)))
+    notebook.sync(db, uid)
+    held = held_forms(db, uid)
+    attempt_forms = db.execute(select(Attempt.id, Attempt.form_id).where(Attempt.user_id == uid)).all()
+    attempts = [a for a, _ in attempt_forms]
+    released = [a for a, f in attempt_forms if f not in held]
     written = list(db.scalars(select(WrittenAttempt.id).where(WrittenAttempt.user_id == uid)))
     tickets = list(db.scalars(select(SupportTicket.id).where(SupportTicket.user_id == uid)))
     data = {
         "format": "portal-personal-data-export",
-        "schema_version": 1,
+        "schema_version": 2,
         "exported_at": datetime.now(UTC).isoformat(),
         "account": _row(user),
         "profile": _rows(db, StudentProfile, StudentProfile.user_id == uid),
@@ -82,12 +110,26 @@ def export(db: Session, user: AppUser) -> tuple[bytes, str]:
         "access": _rows(db, Entitlement, Entitlement.user_id == uid),
         "written_allowance": _rows(db, AllowanceEvent, AllowanceEvent.user_id == uid),
         "practice": {
+            "forms": _rows(db, PracticeForm, PracticeForm.owner_id == uid),
             "attempts": _rows(db, Attempt, Attempt.user_id == uid),
             "answers": _rows(db, AttemptAnswer, AttemptAnswer.attempt_id.in_(attempts)) if attempts else [],
-            "scores": _rows(db, ScoreVersion, ScoreVersion.attempt_id.in_(attempts)) if attempts else [],
+            # OCT9-01: a held scheduled mock's scores (marks, correctness, corrected keys) are exported once released
+            "scores": _rows(db, ScoreVersion, ScoreVersion.attempt_id.in_(released)) if released else [],
+            "results_pending": [
+                {"attempt_id": str(a), "available_at": at.isoformat() if at else None}
+                for a, f in attempt_forms
+                if f in held
+                for at in [held[f]]
+            ],
+            "notebook": _rows(db, MistakeEntry, MistakeEntry.user_id == uid),
+            "mock_accommodations": _rows(db, MockAccommodation, MockAccommodation.user_id == uid),
         },
+        "lesson_completions": _rows(db, LessonCompletion, LessonCompletion.user_id == uid),
         "written": {
+            "forms": _rows(db, WrittenForm, WrittenForm.owner_id == uid),
             "attempts": _rows(db, WrittenAttempt, WrittenAttempt.user_id == uid),
+            "notices": _rows(db, WrittenNotice, WrittenNotice.user_id == uid),
+            "recheck_requests": _rows(db, WrittenRecheckRequest, WrittenRecheckRequest.requested_by == uid),
             "released_results": _rows(
                 db,
                 WrittenScoreVersion,

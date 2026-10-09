@@ -69,3 +69,24 @@ def test_a_deletion_request_is_recorded_and_routed_to_support_without_erasing_an
     queue = client.get("/v1/staff/support/tickets", headers=agent.headers).json()
     assert any(t["id"] == ticket and t["subject"] == "Account deletion request" for t in queue)
     assert client.get("/v1/me", headers=me.headers).status_code == 200  # nothing erased automatically (B15)
+
+
+def test_every_per_person_table_is_exported_or_excluded_with_a_reason() -> None:
+    """OCT9 coverage inventory: a new table holding one person's rows can't be silently left out of the export."""
+    import importlib
+    import pkgutil
+
+    import portal_api
+    from portal_api.db import Base
+    from portal_api.modules.identity.privacy import EXPORTED_TABLES, NOT_EXPORTED
+
+    for m in pkgutil.walk_packages(portal_api.__path__, "portal_api."):
+        if not m.name.endswith(("__main__", "export_openapi")):
+            importlib.import_module(m.name)
+    personal = {
+        t.name
+        for t in Base.metadata.tables.values()
+        if {c.name for c in t.columns} & {"user_id", "owner_id", "requested_by"}
+    }
+    assert personal - EXPORTED_TABLES - set(NOT_EXPORTED) == set()
+    assert EXPORTED_TABLES & set(NOT_EXPORTED) == set()

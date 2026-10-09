@@ -5160,6 +5160,8 @@ export interface components {
             recent: components["schemas"]["RecentResult"][];
             /** Report Version */
             report_version: number;
+            /** Results Pending */
+            results_pending: number;
             /** Subjects */
             subjects: components["schemas"]["SubjectProgress"][];
         };

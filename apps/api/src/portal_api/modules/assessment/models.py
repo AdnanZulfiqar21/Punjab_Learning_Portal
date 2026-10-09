@@ -101,6 +101,8 @@ class Attempt(Base):
     cutoff_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     finalised_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     finalise_reason: Mapped[str | None] = mapped_column(String(10))
+    # OCT9-01/02: when the mistake notebook last reflected this attempt (None: not yet, e.g. results still held).
+    notebook_applied_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
 
     form: Mapped[PracticeForm] = relationship()
 

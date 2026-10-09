@@ -272,7 +272,7 @@ def rescore(db: Session, attempt_id: uuid.UUID) -> ScoreVersion | None:
     db.flush()
     from portal_api.modules.assessment import notebook
 
-    notebook.record(db, attempt, form, sv.items, _now(db))  # voided questions stay in the notebook with a reason
+    notebook.apply_attempt(db, attempt, _now(db))  # a correction re-derives, never counts as a new response
     record(
         db,
         actor=None,
@@ -281,9 +281,12 @@ def rescore(db: Session, attempt_id: uuid.UUID) -> ScoreVersion | None:
         target_id=str(attempt.id),
         details={"version": sv.version, "adjudication_hash": digest, "raw": sv.raw, "maximum": sv.maximum},
     )
-    notifications.notify(
-        db, attempt.user_id, "score.revised", {"reason": reason}, dedupe_key=f"mcq-score-{attempt.id}-{sv.version}"
-    )
+    from portal_api.modules.assessment.sessions import held_forms
+
+    if attempt.form_id not in held_forms(db, attempt.user_id):  # OCT9-01: a held result is released, not "revised"
+        notifications.notify(
+            db, attempt.user_id, "score.revised", {"reason": reason}, dedupe_key=f"mcq-score-{attempt.id}-{sv.version}"
+        )
     db.commit()
     return sv
 
