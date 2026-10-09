@@ -54,6 +54,18 @@ def create_app() -> FastAPI:
     observability.install(app)
 
     @app.middleware("http")
+    async def security_headers(request: Request, call_next: Callable[[Request], Awaitable[Response]]) -> Response:
+        # P18.S2.T1 (HEADERS-01): JSON API responses are never framed, sniffed or used as documents. The
+        # development-only /docs page needs its own scripts, so it keeps the browser defaults.
+        response = await call_next(request)
+        response.headers.setdefault("X-Content-Type-Options", "nosniff")
+        response.headers.setdefault("X-Frame-Options", "DENY")
+        response.headers.setdefault("Referrer-Policy", "no-referrer")
+        if not request.url.path.startswith(("/docs", "/openapi.json")):
+            response.headers.setdefault("Content-Security-Policy", "default-src 'none'; frame-ancestors 'none'")
+        return response
+
+    @app.middleware("http")
     async def client_context(request: Request, call_next: Callable[[Request], Awaitable[Response]]) -> Response:
         token = trial_devices.CLIENT_CONTEXT.set(
             (request.headers.get("x-portal-client"), request.headers.get("x-portal-install"))
