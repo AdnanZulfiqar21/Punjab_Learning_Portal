@@ -5635,6 +5635,57 @@
         "title": "ProfileVersionOut",
         "type": "object"
       },
+      "ProgressReport": {
+        "properties": {
+          "definitions": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "title": "Definitions",
+            "type": "object"
+          },
+          "generated_at": {
+            "format": "date-time",
+            "title": "Generated At",
+            "type": "string"
+          },
+          "notebook": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "title": "Notebook",
+            "type": "object"
+          },
+          "recent": {
+            "items": {
+              "$ref": "#/components/schemas/RecentResult"
+            },
+            "title": "Recent",
+            "type": "array"
+          },
+          "report_version": {
+            "title": "Report Version",
+            "type": "integer"
+          },
+          "subjects": {
+            "items": {
+              "$ref": "#/components/schemas/SubjectProgress"
+            },
+            "title": "Subjects",
+            "type": "array"
+          }
+        },
+        "required": [
+          "report_version",
+          "generated_at",
+          "definitions",
+          "subjects",
+          "recent",
+          "notebook"
+        ],
+        "title": "ProgressReport",
+        "type": "object"
+      },
       "PublishedProfileOut": {
         "properties": {
           "code": {
@@ -5920,6 +5971,85 @@
           "ledger_hash"
         ],
         "title": "ReceiptOut",
+        "type": "object"
+      },
+      "RecentResult": {
+        "properties": {
+          "attempt_id": {
+            "format": "uuid",
+            "title": "Attempt Id",
+            "type": "string"
+          },
+          "finished_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Finished At"
+          },
+          "grade": {
+            "title": "Grade",
+            "type": "integer"
+          },
+          "kind": {
+            "title": "Kind",
+            "type": "string"
+          },
+          "maximum": {
+            "title": "Maximum",
+            "type": "integer"
+          },
+          "mode": {
+            "title": "Mode",
+            "type": "string"
+          },
+          "percentage": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Percentage"
+          },
+          "raw": {
+            "title": "Raw",
+            "type": "integer"
+          },
+          "score_version": {
+            "title": "Score Version",
+            "type": "integer"
+          },
+          "status": {
+            "title": "Status",
+            "type": "string"
+          },
+          "subject": {
+            "title": "Subject",
+            "type": "string"
+          }
+        },
+        "required": [
+          "attempt_id",
+          "kind",
+          "mode",
+          "grade",
+          "subject",
+          "finished_at",
+          "raw",
+          "maximum",
+          "percentage",
+          "score_version",
+          "status"
+        ],
+        "title": "RecentResult",
         "type": "object"
       },
       "RecheckIn": {
@@ -8006,6 +8136,64 @@
           "aliases"
         ],
         "title": "SubjectOut",
+        "type": "object"
+      },
+      "SubjectProgress": {
+        "properties": {
+          "accuracy": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Accuracy"
+          },
+          "correct": {
+            "title": "Correct",
+            "type": "integer"
+          },
+          "grade": {
+            "title": "Grade",
+            "type": "integer"
+          },
+          "last_activity": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Last Activity"
+          },
+          "questions_answered": {
+            "title": "Questions Answered",
+            "type": "integer"
+          },
+          "subject": {
+            "title": "Subject",
+            "type": "string"
+          },
+          "tests": {
+            "title": "Tests",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "grade",
+          "subject",
+          "tests",
+          "questions_answered",
+          "correct",
+          "accuracy",
+          "last_activity"
+        ],
+        "title": "SubjectProgress",
         "type": "object"
       },
       "SubmitOut": {
@@ -11785,6 +11973,27 @@
         "summary": "Save onboarding/learning preferences",
         "tags": [
           "identity"
+        ]
+      }
+    },
+    "/v1/me/progress": {
+      "get": {
+        "operationId": "my_progress_v1_me_progress_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProgressReport"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Your progress report, with metric definitions",
+        "tags": [
+          "practice"
         ]
       }
     },

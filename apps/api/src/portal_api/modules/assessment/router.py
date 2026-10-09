@@ -668,3 +668,45 @@ def review_test(
             db, who, grade=body.grade, subject=body.subject, count=body.count, idempotency_key=idempotency_key
         )
     )
+
+
+# ------------------------------------------------------------------ progress report (P12.S4.T2, PROGRESS-01)
+class SubjectProgress(BaseModel):
+    grade: int
+    subject: str
+    tests: int
+    questions_answered: int
+    correct: int
+    accuracy: float | None
+    last_activity: datetime | None
+
+
+class RecentResult(BaseModel):
+    attempt_id: uuid.UUID
+    kind: str
+    mode: str
+    grade: int
+    subject: str
+    finished_at: datetime | None
+    raw: int
+    maximum: int
+    percentage: float | None
+    score_version: int
+    status: str
+
+
+class ProgressReport(BaseModel):
+    report_version: int
+    generated_at: datetime
+    definitions: dict[str, str]
+    subjects: list[SubjectProgress]
+    recent: list[RecentResult]
+    notebook: dict[str, int]
+
+
+@router.get("/me/progress", response_model=ProgressReport, summary="Your progress report, with metric definitions")
+def my_progress(db: DB, who: CurrentPrincipal, response: Response) -> ProgressReport:
+    from portal_api.modules.assessment import progress
+
+    _private(response)
+    return ProgressReport(**progress.report(db, who.user.id))

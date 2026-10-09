@@ -725,6 +725,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/me/progress": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Your progress report, with metric definitions */
+        get: operations["my_progress_v1_me_progress_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/me/push-tokens": {
         parameters: {
             query?: never;
@@ -5002,6 +5019,28 @@ export interface components {
             /** Year */
             year: number;
         };
+        /** ProgressReport */
+        ProgressReport: {
+            /** Definitions */
+            definitions: {
+                [key: string]: string;
+            };
+            /**
+             * Generated At
+             * Format: date-time
+             */
+            generated_at: string;
+            /** Notebook */
+            notebook: {
+                [key: string]: number;
+            };
+            /** Recent */
+            recent: components["schemas"]["RecentResult"][];
+            /** Report Version */
+            report_version: number;
+            /** Subjects */
+            subjects: components["schemas"]["SubjectProgress"][];
+        };
         /** PublishedProfileOut */
         PublishedProfileOut: {
             /** Code */
@@ -5119,6 +5158,34 @@ export interface components {
              * @enum {string}
              */
             reason: "manual" | "expiry";
+        };
+        /** RecentResult */
+        RecentResult: {
+            /**
+             * Attempt Id
+             * Format: uuid
+             */
+            attempt_id: string;
+            /** Finished At */
+            finished_at: string | null;
+            /** Grade */
+            grade: number;
+            /** Kind */
+            kind: string;
+            /** Maximum */
+            maximum: number;
+            /** Mode */
+            mode: string;
+            /** Percentage */
+            percentage: number | null;
+            /** Raw */
+            raw: number;
+            /** Score Version */
+            score_version: number;
+            /** Status */
+            status: string;
+            /** Subject */
+            subject: string;
         };
         /** RecheckIn */
         RecheckIn: {
@@ -5969,6 +6036,23 @@ export interface components {
             id: string;
             /** Name */
             name: string;
+        };
+        /** SubjectProgress */
+        SubjectProgress: {
+            /** Accuracy */
+            accuracy: number | null;
+            /** Correct */
+            correct: number;
+            /** Grade */
+            grade: number;
+            /** Last Activity */
+            last_activity: string | null;
+            /** Questions Answered */
+            questions_answered: number;
+            /** Subject */
+            subject: string;
+            /** Tests */
+            tests: number;
         };
         /** SubmitOut */
         SubmitOut: {
@@ -8020,6 +8104,26 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    my_progress_v1_me_progress_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProgressReport"];
                 };
             };
         };
