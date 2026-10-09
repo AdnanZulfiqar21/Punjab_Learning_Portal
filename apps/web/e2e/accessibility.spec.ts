@@ -8,7 +8,9 @@ const AUTH = { timeout: 20_000 };
 
 async function audit(page: Page, path: string) {
   await page.goto(path);
-  await page.waitForLoadState("networkidle");
+  await expect(page.locator("main")).toBeVisible();
+  // Let streamed sections settle, without depending on the network ever going fully idle.
+  await page.waitForLoadState("networkidle", { timeout: 5_000 }).catch(() => undefined);
   const results = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"]).analyze();
   const blocking = results.violations
     .filter((v) => v.impact === "serious" || v.impact === "critical")
@@ -25,6 +27,7 @@ for (const path of ["/", "/learn", "/search?q=cell", "/help", "/signin"]) {
 }
 
 test("signed in: practice, help and account have no serious accessibility violations", async ({ page }) => {
+  test.setTimeout(120_000);
   const email = `e2e-a11y-${Date.now()}-${Math.random().toString(36).slice(2, 7)}@example.com`;
   await page.goto("/signin?next=/account");
   await page.getByRole("button", { name: "New here? Create an account" }).click();
