@@ -8,7 +8,7 @@ import uuid
 from typing import Any
 
 from fastapi.testclient import TestClient
-from sqlalchemy import select
+from sqlalchemy import select, text
 
 from portal_api.db import get_sessionmaker
 from portal_api.modules.assessment import adjudications
@@ -26,6 +26,19 @@ def _adjudicator(client: TestClient, mfa: bool = True) -> Staff:
         return Staff(client, db, ["academic_adjudicator"], SCOPE, mfa=mfa)
 
 
+def _keys(form_id: str) -> dict[int, str]:
+    """The published key at each position of a frozen form (the chapter pool is shared with other test modules)."""
+    with get_sessionmaker()() as db:
+        rows = db.execute(
+            text(
+                "select fi.position, v.body->>'correct_option_id' from form_item fi "
+                "join content_version v on v.id = fi.version_id where fi.form_id = :f"
+            ),
+            {"f": form_id},
+        ).all()
+        return {int(p): str(k) for p, k in rows}
+
+
 def _finish_all_correct(
     client: TestClient, who: Staff, physics: dict[str, Any]
 ) -> tuple[dict[str, Any], dict[int, str]]:
@@ -33,13 +46,14 @@ def _finish_all_correct(
     form = _form(client, who, physics["chapter"], count=POOL).json()
     a = _start(client, who, form["id"])
     item_ids = _form_item_ids(form["id"])
-    ops = [_op(p, 1, physics["keys"][item_ids[p]]) for p in sorted(item_ids)]
+    keys = _keys(form["id"])
+    ops = [_op(p, 1, keys[p]) for p in sorted(item_ids)]
     assert _save_ops(client, who, a["id"], *ops).status_code == 200
     r = client.post(
         f"/v1/attempts/{a['id']}/submit", headers=who.headers, json={"idempotency_key": uuid.uuid4().hex, "ops": []}
     )
     assert r.status_code == 200, r.text
-    return a, item_ids
+    return {**a, "form_id": form["id"]}, item_ids
 
 
 def _result(client: TestClient, who: Staff, attempt_id: str) -> dict[str, Any]:
@@ -104,8 +118,6 @@ def test_rehearsal_disputed_question_soft_then_void(client: TestClient, physics:
         assert _post(client, pub, disputed, "release", {"reason": "Fixture: try release"}).status_code == 409
     finally:
         with get_sessionmaker()() as db:  # leave the shared fixture pool usable for other tests in this module
-            from sqlalchemy import text
-
             db.execute(text("update mcq_adjudication set status = 'superseded' where item_id = :i"), {"i": disputed})
             db.commit()
         _post(client, pub, disputed, "release", {"reason": "Fixture cleanup"})
@@ -115,7 +127,7 @@ def test_key_correction_regrades_and_supersedes_explicitly(client: TestClient, p
     learner = _learner(client)
     a, item_ids = _finish_all_correct(client, learner, physics)
     item = item_ids[2]
-    published_key = physics["keys"][item]
+    published_key = _keys(a["form_id"])[2]
     other = next(o for o in ("o1", "o2", "o3", "o4") if o != published_key)
     pub = physics["publisher"]
     adjudicator = _adjudicator(client)
@@ -155,8 +167,6 @@ def test_key_correction_regrades_and_supersedes_explicitly(client: TestClient, p
         assert (r3["raw"], r3["maximum"], r3["version"]) == (POOL - 1, POOL - 1, 3)
     finally:
         with get_sessionmaker()() as db:
-            from sqlalchemy import text
-
             db.execute(text("update mcq_adjudication set status = 'superseded' where item_id = :i"), {"i": item})
             db.commit()
         _post(client, pub, item, "release", {"reason": "Fixture cleanup"})
@@ -173,7 +183,8 @@ def test_an_attempt_open_during_a_correction_gets_it_at_submission(client: TestC
         assert _post(client, pub, item, "quarantine", {"reason": "Fixture: void", "level": "VOID"}).status_code == 200
         done = _correct(client, _adjudicator(client), item, defect="VOID", reason="Fixture: confirmed void")
         assert done.status_code == 201
-        ops = [_op(p, 1, physics["keys"][item_ids[p]]) for p in sorted(item_ids)]
+        keys = _keys(form["id"])
+        ops = [_op(p, 1, keys[p]) for p in sorted(item_ids)]
         assert _save_ops(client, learner, a["id"], *ops).status_code == 200
         client.post(
             f"/v1/attempts/{a['id']}/submit",
@@ -184,8 +195,6 @@ def test_an_attempt_open_during_a_correction_gets_it_at_submission(client: TestC
         assert (r["raw"], r["maximum"], r["version"]) == (POOL - 1, POOL - 1, 1) and r["revision_reason"] is None
     finally:
         with get_sessionmaker()() as db:
-            from sqlalchemy import text
-
             db.execute(text("update mcq_adjudication set status = 'superseded' where item_id = :i"), {"i": item})
             db.commit()
         _post(client, pub, item, "release", {"reason": "Fixture cleanup"})
