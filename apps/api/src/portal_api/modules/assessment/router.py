@@ -3,9 +3,11 @@
 from __future__ import annotations
 
 import uuid
-from typing import Annotated
+from datetime import datetime
+from typing import Annotated, Any, Literal
 
 from fastapi import APIRouter, Depends, Header, Query, Response
+from pydantic import BaseModel, Field
 from sqlalchemy.orm import Session
 
 from portal_api.db import get_session
@@ -31,7 +33,8 @@ from portal_api.modules.assessment.schemas import (
     SubmitIn,
     SubmitOut,
 )
-from portal_api.modules.identity.deps import CurrentPrincipal
+from portal_api.modules.identity.deps import CurrentPrincipal, Principal, require
+from portal_api.modules.identity.permissions import Permission
 from portal_api.modules.system import operations
 
 router = APIRouter(prefix="/v1", tags=["practice"])
@@ -223,3 +226,161 @@ def result(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, response: Respo
         revised_at=score.created_at if score.version > 1 else None,
         revision_reason=score.reason if score.version > 1 else None,
     )
+
+
+# ------------------------------------------------------------------ exam profiles (P05.S3, EXAMPROFILE-01)
+class ExamProfileIn(BaseModel):
+    code: str = Field(min_length=2, max_length=40, pattern=r"^[A-Za-z0-9-]+$")
+    name: str = Field(min_length=3, max_length=200)
+    eligibility_note: str = Field(default="", max_length=2000)
+
+
+class ProfileVersionIn(BaseModel):
+    year: int = Field(ge=2020, le=2100)
+    rules: dict[str, Any]
+
+
+class VerifyIn(BaseModel):
+    note: str = Field(min_length=10, max_length=2000, description="What you checked against the official source")
+
+
+class ProfileVersionOut(BaseModel):
+    id: uuid.UUID
+    version: int
+    year: int
+    status: Literal["draft", "verified", "published", "retired"]
+    rules: dict[str, Any]
+    total_questions: int
+    verifications: int
+    published_at: datetime | None
+
+
+class ExamProfileOut(BaseModel):
+    id: uuid.UUID
+    code: str
+    name: str
+    eligibility_note: str
+    versions: list[ProfileVersionOut]
+
+
+class PublishedProfileOut(BaseModel):
+    code: str
+    name: str
+    eligibility_note: str
+    version: int
+    year: int
+    duration_minutes: int
+    total_questions: int
+    sections: list[dict[str, Any]]
+    source_url: str
+
+
+def _pv(v: Any) -> ProfileVersionOut:
+    from portal_api.modules.assessment import profiles
+
+    return ProfileVersionOut(
+        id=v.id,
+        version=v.version,
+        year=v.year,
+        status=v.status,
+        rules=v.rules,
+        total_questions=profiles.total_questions(v.rules),
+        verifications=len(v.verifications),
+        published_at=v.published_at,
+    )
+
+
+def _profiles_out(db: Session) -> list[ExamProfileOut]:
+    from portal_api.modules.assessment import profiles
+
+    return [
+        ExamProfileOut(
+            id=p.id, code=p.code, name=p.name, eligibility_note=p.eligibility_note, versions=[_pv(v) for v in vs]
+        )
+        for p, vs in profiles.profiles(db)
+    ]
+
+
+ProfileManager = Annotated[Principal, Depends(require(Permission.manage_exam_profiles))]
+
+
+@router.get("/admin/exam-profiles", response_model=list[ExamProfileOut], summary="Exam profiles and all versions")
+def list_exam_profiles(db: DB, who: ProfileManager) -> list[ExamProfileOut]:
+    return _profiles_out(db)
+
+
+@router.post("/admin/exam-profiles", response_model=list[ExamProfileOut], status_code=201, summary="New exam profile")
+def create_exam_profile(db: DB, who: ProfileManager, body: ExamProfileIn) -> list[ExamProfileOut]:
+    from portal_api.modules.assessment import profiles
+
+    profiles.create_profile(db, who, body.code, body.name, body.eligibility_note)
+    return _profiles_out(db)
+
+
+@router.post(
+    "/admin/exam-profiles/{profile_id}/versions",
+    response_model=ProfileVersionOut,
+    status_code=201,
+    summary="Start a new draft version (duration, marking, correction policy, sections; source and year)",
+)
+def new_profile_version(
+    db: DB, who: ProfileManager, profile_id: uuid.UUID, body: ProfileVersionIn
+) -> ProfileVersionOut:
+    from portal_api.modules.assessment import profiles
+
+    return _pv(profiles.save_draft(db, who, profile_id, body.year, body.rules))
+
+
+@router.put(
+    "/admin/exam-profiles/{profile_id}/versions/{version_id}",
+    response_model=ProfileVersionOut,
+    summary="Edit a draft (clears its verifications)",
+)
+def edit_profile_version(
+    db: DB, who: ProfileManager, profile_id: uuid.UUID, version_id: uuid.UUID, body: ProfileVersionIn
+) -> ProfileVersionOut:
+    from portal_api.modules.assessment import profiles
+
+    return _pv(profiles.save_draft(db, who, profile_id, body.year, body.rules, version_id))
+
+
+@router.post(
+    "/admin/exam-profile-versions/{version_id}/verify",
+    response_model=ProfileVersionOut,
+    summary="Record one of two independent verifications (not the author)",
+)
+def verify_profile_version(db: DB, who: ProfileManager, version_id: uuid.UUID, body: VerifyIn) -> ProfileVersionOut:
+    from portal_api.modules.assessment import profiles
+
+    return _pv(profiles.verify(db, who, version_id, body.note))
+
+
+@router.post(
+    "/admin/exam-profile-versions/{version_id}/publish",
+    response_model=ProfileVersionOut,
+    summary="Publish a verified version; the previous one is retired for new mocks only",
+)
+def publish_profile_version(db: DB, who: ProfileManager, version_id: uuid.UUID) -> ProfileVersionOut:
+    from portal_api.modules.assessment import profiles
+
+    return _pv(profiles.publish(db, who, version_id))
+
+
+@router.get("/exam-profiles", response_model=list[PublishedProfileOut], summary="Published official test patterns")
+def published_exam_profiles(db: DB, who: CurrentPrincipal) -> list[PublishedProfileOut]:
+    from portal_api.modules.assessment import profiles
+
+    return [
+        PublishedProfileOut(
+            code=p.code,
+            name=p.name,
+            eligibility_note=p.eligibility_note,
+            version=v.version,
+            year=v.year,
+            duration_minutes=v.rules["duration_minutes"],
+            total_questions=profiles.total_questions(v.rules),
+            sections=v.rules["sections"],
+            source_url=v.rules["source_url"],
+        )
+        for p, v in profiles.published(db)
+    ]

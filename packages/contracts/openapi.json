@@ -2335,6 +2335,72 @@
         "title": "EscalateIn",
         "type": "object"
       },
+      "ExamProfileIn": {
+        "properties": {
+          "code": {
+            "maxLength": 40,
+            "minLength": 2,
+            "pattern": "^[A-Za-z0-9-]+$",
+            "title": "Code",
+            "type": "string"
+          },
+          "eligibility_note": {
+            "default": "",
+            "maxLength": 2000,
+            "title": "Eligibility Note",
+            "type": "string"
+          },
+          "name": {
+            "maxLength": 200,
+            "minLength": 3,
+            "title": "Name",
+            "type": "string"
+          }
+        },
+        "required": [
+          "code",
+          "name"
+        ],
+        "title": "ExamProfileIn",
+        "type": "object"
+      },
+      "ExamProfileOut": {
+        "properties": {
+          "code": {
+            "title": "Code",
+            "type": "string"
+          },
+          "eligibility_note": {
+            "title": "Eligibility Note",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "versions": {
+            "items": {
+              "$ref": "#/components/schemas/ProfileVersionOut"
+            },
+            "title": "Versions",
+            "type": "array"
+          }
+        },
+        "required": [
+          "id",
+          "code",
+          "name",
+          "eligibility_note",
+          "versions"
+        ],
+        "title": "ExamProfileOut",
+        "type": "object"
+      },
       "ExceptionIn": {
         "properties": {
           "days": {
@@ -5100,6 +5166,148 @@
           }
         },
         "title": "ProfileOut",
+        "type": "object"
+      },
+      "ProfileVersionIn": {
+        "properties": {
+          "rules": {
+            "additionalProperties": true,
+            "title": "Rules",
+            "type": "object"
+          },
+          "year": {
+            "maximum": 2100.0,
+            "minimum": 2020.0,
+            "title": "Year",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "year",
+          "rules"
+        ],
+        "title": "ProfileVersionIn",
+        "type": "object"
+      },
+      "ProfileVersionOut": {
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "published_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Published At"
+          },
+          "rules": {
+            "additionalProperties": true,
+            "title": "Rules",
+            "type": "object"
+          },
+          "status": {
+            "enum": [
+              "draft",
+              "verified",
+              "published",
+              "retired"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "total_questions": {
+            "title": "Total Questions",
+            "type": "integer"
+          },
+          "verifications": {
+            "title": "Verifications",
+            "type": "integer"
+          },
+          "version": {
+            "title": "Version",
+            "type": "integer"
+          },
+          "year": {
+            "title": "Year",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id",
+          "version",
+          "year",
+          "status",
+          "rules",
+          "total_questions",
+          "verifications",
+          "published_at"
+        ],
+        "title": "ProfileVersionOut",
+        "type": "object"
+      },
+      "PublishedProfileOut": {
+        "properties": {
+          "code": {
+            "title": "Code",
+            "type": "string"
+          },
+          "duration_minutes": {
+            "title": "Duration Minutes",
+            "type": "integer"
+          },
+          "eligibility_note": {
+            "title": "Eligibility Note",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "sections": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Sections",
+            "type": "array"
+          },
+          "source_url": {
+            "title": "Source Url",
+            "type": "string"
+          },
+          "total_questions": {
+            "title": "Total Questions",
+            "type": "integer"
+          },
+          "version": {
+            "title": "Version",
+            "type": "integer"
+          },
+          "year": {
+            "title": "Year",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "code",
+          "name",
+          "eligibility_note",
+          "version",
+          "year",
+          "duration_minutes",
+          "total_questions",
+          "sections",
+          "source_url"
+        ],
+        "title": "PublishedProfileOut",
         "type": "object"
       },
       "PushTokenIn": {
@@ -8177,6 +8385,22 @@
         "title": "ValidationOut",
         "type": "object"
       },
+      "VerifyIn": {
+        "properties": {
+          "note": {
+            "description": "What you checked against the official source",
+            "maxLength": 2000,
+            "minLength": 10,
+            "title": "Note",
+            "type": "string"
+          }
+        },
+        "required": [
+          "note"
+        ],
+        "title": "VerifyIn",
+        "type": "object"
+      },
       "VersionOut": {
         "properties": {
           "approved_at": {
@@ -9365,6 +9589,286 @@
         ]
       }
     },
+    "/v1/admin/exam-profile-versions/{version_id}/publish": {
+      "post": {
+        "operationId": "publish_profile_version_v1_admin_exam_profile_versions__version_id__publish_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "version_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Version Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfileVersionOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Publish a verified version; the previous one is retired for new mocks only",
+        "tags": [
+          "practice"
+        ]
+      }
+    },
+    "/v1/admin/exam-profile-versions/{version_id}/verify": {
+      "post": {
+        "operationId": "verify_profile_version_v1_admin_exam_profile_versions__version_id__verify_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "version_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Version Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VerifyIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfileVersionOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Record one of two independent verifications (not the author)",
+        "tags": [
+          "practice"
+        ]
+      }
+    },
+    "/v1/admin/exam-profiles": {
+      "get": {
+        "operationId": "list_exam_profiles_v1_admin_exam_profiles_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/ExamProfileOut"
+                  },
+                  "title": "Response List Exam Profiles V1 Admin Exam Profiles Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Exam profiles and all versions",
+        "tags": [
+          "practice"
+        ]
+      },
+      "post": {
+        "operationId": "create_exam_profile_v1_admin_exam_profiles_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExamProfileIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/ExamProfileOut"
+                  },
+                  "title": "Response Create Exam Profile V1 Admin Exam Profiles Post",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "New exam profile",
+        "tags": [
+          "practice"
+        ]
+      }
+    },
+    "/v1/admin/exam-profiles/{profile_id}/versions": {
+      "post": {
+        "operationId": "new_profile_version_v1_admin_exam_profiles__profile_id__versions_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "profile_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Profile Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProfileVersionIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfileVersionOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Start a new draft version (duration, marking, correction policy, sections; source and year)",
+        "tags": [
+          "practice"
+        ]
+      }
+    },
+    "/v1/admin/exam-profiles/{profile_id}/versions/{version_id}": {
+      "put": {
+        "operationId": "edit_profile_version_v1_admin_exam_profiles__profile_id__versions__version_id__put",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "profile_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Profile Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "version_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Version Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProfileVersionIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfileVersionOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Edit a draft (clears its verifications)",
+        "tags": [
+          "practice"
+        ]
+      }
+    },
     "/v1/admin/role-grants/{grant_id}/revoke": {
       "post": {
         "operationId": "revoke_role_v1_admin_role_grants__grant_id__revoke_post",
@@ -9915,6 +10419,31 @@
         "summary": "Published, live lessons for a chapter (academically approved; never drafts)",
         "tags": [
           "lessons"
+        ]
+      }
+    },
+    "/v1/exam-profiles": {
+      "get": {
+        "operationId": "published_exam_profiles_v1_exam_profiles_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/PublishedProfileOut"
+                  },
+                  "title": "Response Published Exam Profiles V1 Exam Profiles Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Published official test patterns",
+        "tags": [
+          "practice"
         ]
       }
     },
