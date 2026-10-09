@@ -79,6 +79,11 @@ async function Account() {
               Audit trail
             </Link>
           )}
+          {me.roles.includes("owner_admin") && (
+            <Link href="/admin/catalogue" className="inline-block text-sm text-accent underline-offset-2 hover:underline">
+              Catalogue
+            </Link>
+          )}
           {me.roles.some((r) => r === "owner_admin" || r === "academic_adjudicator") && (
             <Link href="/admin/exam-profiles" className="inline-block text-sm text-accent underline-offset-2 hover:underline">
               Exam profiles

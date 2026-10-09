@@ -108,27 +108,8 @@ def _upsert(session: Session, model: type[Any], rows: list[dict[str, Any]], key:
     return len(rows)
 
 
-def run_import(session: Session, catalogue_path: Path, registry_path: Path, apply: bool) -> ImportBatch:
-    raw = catalogue_path.read_bytes() + b"\n" + registry_path.read_bytes()
-    catalogue = json.loads(catalogue_path.read_text(encoding="utf-8"))
-    registry = json.loads(registry_path.read_text(encoding="utf-8"))
-    batch = ImportBatch(
-        id=uuid.uuid4(),
-        kind="curriculum_catalogue",
-        input_sha256=hashlib.sha256(raw).hexdigest(),
-        dry_run=not apply,
-        status="RUNNING",
-        counts={},
-        errors=[],
-    )
-    errors = validate(catalogue, registry)
-    if errors:
-        batch.status, batch.errors, batch.finished_at = "REJECTED", errors, datetime.now(UTC)
-        if apply:
-            session.add(batch)
-            session.commit()
-        return batch
-
+def _build_rows(catalogue: dict[str, Any], registry: dict[str, Any]) -> tuple[list[dict[str, Any]], ...]:
+    """The rows an import would upsert, from a validated catalogue and registry."""
     region = catalogue["region"]
     region_id = uuid.uuid5(uuid.NAMESPACE_URL, "region/" + region["code"])
     regions = [{"id": region_id, "code": region["code"], "name": region["name"]}]
@@ -240,6 +221,45 @@ def run_import(session: Session, catalogue_path: Path, registry_path: Path, appl
                     }
                 )
 
+    return regions, grades, subjects, sources, books, chapters, topics
+
+
+def plan(session: Session, catalogue_path: Path, registry_path: Path) -> dict[str, Any]:
+    """A read-only preview (P06.S1.T1): the input hash, validation errors, counts and the detailed changes."""
+    raw = catalogue_path.read_bytes() + b"\n" + registry_path.read_bytes()
+    catalogue = json.loads(catalogue_path.read_text(encoding="utf-8"))
+    registry = json.loads(registry_path.read_text(encoding="utf-8"))
+    sha = hashlib.sha256(raw).hexdigest()
+    errors = validate(catalogue, registry)
+    if errors:
+        return {"input_sha256": sha, "errors": errors, "changes": {}}
+    _, _, _, _, _, chapters, topics = _build_rows(catalogue, registry)
+    return {"input_sha256": sha, "errors": [], "changes": describe(session, chapters, topics)}
+
+
+def run_import(session: Session, catalogue_path: Path, registry_path: Path, apply: bool) -> ImportBatch:
+    raw = catalogue_path.read_bytes() + b"\n" + registry_path.read_bytes()
+    catalogue = json.loads(catalogue_path.read_text(encoding="utf-8"))
+    registry = json.loads(registry_path.read_text(encoding="utf-8"))
+    batch = ImportBatch(
+        id=uuid.uuid4(),
+        kind="curriculum_catalogue",
+        input_sha256=hashlib.sha256(raw).hexdigest(),
+        dry_run=not apply,
+        status="RUNNING",
+        counts={},
+        errors=[],
+    )
+    errors = validate(catalogue, registry)
+    if errors:
+        batch.status, batch.errors, batch.finished_at = "REJECTED", errors, datetime.now(UTC)
+        if apply:
+            session.add(batch)
+            session.commit()
+        return batch
+
+    regions, grades, subjects, sources, books, chapters, topics = _build_rows(catalogue, registry)
+
     existing_topics = set(session.scalars(select(Topic.id)))
     existing_chapters = set(session.scalars(select(Chapter.id)))
     retired_topics_db = set(session.scalars(select(Topic.id).where(Topic.retired_at.is_not(None))))
@@ -314,6 +334,61 @@ def run_import(session: Session, catalogue_path: Path, registry_path: Path, appl
     session.add(batch)
     session.commit()
     return batch
+
+
+def describe(session: Session, chapters: list[dict[str, Any]], topics: list[dict[str, Any]]) -> dict[str, Any]:
+    """Exactly what an import would change (P06.S1.T1): chapters and topics added, retired, reactivated, renamed,
+    moved and reordered, by stable ID with the current and new values. Nothing is written."""
+
+    def ref(row: Any) -> dict[str, Any]:
+        return {"id": str(row.id), "title": row.title}
+
+    db_ch = {c.id: c for c in session.scalars(select(Chapter))}
+    db_tp = {t.id: t for t in session.scalars(select(Topic))}
+    new_ch = {c["id"]: c for c in chapters}
+    new_tp = {t["id"]: t for t in topics}
+    out: dict[str, Any] = {k: [] for k in ("chapters_added", "chapters_retired", "chapters_reactivated",
+                                           "chapters_renamed", "chapters_reordered", "topics_added",
+                                           "topics_retired", "topics_reactivated", "topics_renamed",
+                                           "topics_moved")}  # fmt: skip
+    for cid, c in new_ch.items():
+        old = db_ch.get(cid)
+        if old is None:
+            out["chapters_added"].append({"id": str(cid), "title": c["title"]})
+            continue
+        if old.retired_at is not None:
+            out["chapters_reactivated"].append(ref(old))
+        if old.title != c["title"]:
+            out["chapters_renamed"].append({"id": str(cid), "from": old.title, "to": c["title"]})
+        if old.display_order != c["display_order"] and old.retired_at is None:
+            out["chapters_reordered"].append(
+                {"id": str(cid), "title": c["title"], "from": old.display_order, "to": c["display_order"]}
+            )
+    out["chapters_retired"] = [ref(c) for cid, c in db_ch.items() if cid not in new_ch and c.retired_at is None]
+    for tid, t in new_tp.items():
+        old_t = db_tp.get(tid)
+        if old_t is None:
+            out["topics_added"].append({"id": str(tid), "title": t["title"], "chapter_id": str(t["chapter_id"])})
+            continue
+        if old_t.retired_at is not None:
+            out["topics_reactivated"].append(ref(old_t))
+        if old_t.title != t["title"]:
+            out["topics_renamed"].append({"id": str(tid), "from": old_t.title, "to": t["title"]})
+        if old_t.chapter_id != t["chapter_id"] or old_t.parent_id != t["parent_id"]:
+            out["topics_moved"].append(
+                {
+                    "id": str(tid),
+                    "title": t["title"],
+                    "from_chapter": str(old_t.chapter_id),
+                    "to_chapter": str(t["chapter_id"]),
+                }
+            )
+    out["topics_retired"] = [
+        {**ref(t), "chapter_id": str(t.chapter_id)}
+        for tid, t in db_tp.items()
+        if tid not in new_tp and t.retired_at is None
+    ]
+    return out
 
 
 def main(argv: list[str] | None = None) -> int:
