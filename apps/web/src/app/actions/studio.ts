@@ -113,6 +113,10 @@ export async function recordScoreCorrection(id: string, defect: "VOID" | "KEY_ER
 export async function rollbackItem(id: string, reason: string): Promise<ActionResult> {
   return call(item(id, "rollback"), "POST", { reason });
 }
+/** P08.S3.T3: reserve a question for mocks (never in practice tests) or return it to practice. */
+export async function setQuestionPool(id: string, pool: "practice" | "mock", reason: string): Promise<ActionResult> {
+  return call(item(id, "question-pool"), "POST", { pool, reason });
+}
 export async function releaseItem(id: string, reason: string): Promise<ActionResult> {
   return call(item(id, "release"), "POST", { reason });
 }

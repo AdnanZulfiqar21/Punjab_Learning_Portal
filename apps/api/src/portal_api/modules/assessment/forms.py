@@ -30,7 +30,12 @@ SELF_PACED_TOLERANCE_MS = 3000  # §10.5 default for self-paced timed practice; 
 
 
 def _pool(
-    db: Session, grade: int, subject: str, chapter_ids: list[uuid.UUID], topic_ids: list[uuid.UUID]
+    db: Session,
+    grade: int,
+    subject: str,
+    chapter_ids: list[uuid.UUID],
+    topic_ids: list[uuid.UUID],
+    question_pool: str = "practice",
 ) -> dict[uuid.UUID, list[tuple[ContentItem, ContentVersion]]]:
     stmt = (
         select(ContentItem, ContentVersion)
@@ -43,6 +48,8 @@ def _pool(
             ContentItem.chapter_id.in_(chapter_ids),
         )
     )
+    if question_pool != "any":  # P08.S3.T3: mock-reserved questions never reach practice tests
+        stmt = stmt.where(ContentItem.question_pool == question_pool)
     if topic_ids:
         stmt = stmt.where(ContentItem.topic_id.in_(topic_ids))
     families: dict[uuid.UUID, list[tuple[ContentItem, ContentVersion]]] = defaultdict(list)
@@ -77,6 +84,7 @@ def availability(db: Session, grade: int, subject: str) -> list[dict[str, Any]]:
             .where(
                 ContentItem.kind == "mcq",
                 ContentItem.availability == Availability.live.value,
+                ContentItem.question_pool == "practice",
                 ContentItem.grade_number == grade,
                 ContentItem.subject_code == subject,
             )

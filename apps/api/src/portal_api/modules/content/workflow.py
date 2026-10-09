@@ -684,6 +684,26 @@ def set_access_tier(db: Session, who: Principal, item_id: uuid.UUID, tier: str, 
     return item
 
 
+def set_question_pool(db: Session, who: Principal, item_id: uuid.UUID, pool: str, reason: str) -> ContentItem:
+    """P08.S3.T3: reserve a question for mocks (never in practice tests) or return it to practice. Publishers in
+    scope (MFA); audited with a reason. Forms already built keep their questions."""
+    item = get_item(db, item_id, for_update=True)
+    _require_scoped(db, who, Permission.publish_content, item)
+    if item.kind != "mcq":
+        raise Unprocessable("Only multiple-choice questions belong to a question pool.")
+    if pool not in ("practice", "mock"):
+        raise Unprocessable("Choose practice or mock.")
+    if item.question_pool == pool:
+        return item
+    previous = item.question_pool
+    item.question_pool = pool
+    item.updated_at = _now()
+    _audit(db, who, "question_pool_changed", item, reason=reason.strip(), previous=previous, pool=pool)
+    db.commit()
+    db.refresh(item)
+    return item
+
+
 def _no_effective_correction(db: Session, item: ContentItem) -> None:
     """A confirmed defect with a recorded score correction stays quarantined: publish a corrected version instead."""
     from portal_api.modules.assessment.models import McqAdjudication
