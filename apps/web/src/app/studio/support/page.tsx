@@ -15,6 +15,9 @@ export default function SupportQueuePage({ searchParams }: PageProps<"/studio/su
       <div>
         <h1 className="text-2xl font-semibold tracking-tight">Support queue</h1>
         <p className="text-muted">Learner requests. Reviewers see question reports in their subjects without the learner&apos;s identity.</p>
+        <Link href="/studio/support/learners" className="text-sm text-accent underline-offset-2 hover:underline">
+          Find a learner (support staff)
+        </Link>
       </div>
       <Suspense fallback={<SkeletonLines lines={5} label="Loading requests" />}>
         {searchParams.then((sp) => (

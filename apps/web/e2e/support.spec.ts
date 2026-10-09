@@ -19,11 +19,12 @@ async function newLearner(page: Page, next: string): Promise<string> {
   return email;
 }
 
-async function staff(browser: Browser, email: string, path: string): Promise<Page> {
+async function staff(browser: Browser, email: string, path: string, mfa = false): Promise<Page> {
   const page = await (await browser.newContext()).newPage();
   await page.goto(`/signin?next=${encodeURIComponent(path)}`);
   await page.getByLabel("Email").fill(email);
   await page.getByLabel("Password").fill("studio-fixture-pass-1");
+  if (mfa) await page.getByLabel(/Simulate a multi-factor sign-in/).check();
   await page.getByRole("button", { name: "Sign in", exact: true }).click();
   await expect(page).toHaveURL(new RegExp(`:\\d+${path}$`), AUTH);
   return page;
@@ -131,4 +132,34 @@ test("help-centre staff publish an article with MFA and anyone can find it", asy
   await visitor.getByRole("link", { name: "Fixture help article" }).click();
   await expect(visitor.getByRole("heading", { name: "Steps" })).toBeVisible(AUTH);
   await expect(visitor.getByText("Version 1")).toBeVisible();
+});
+
+test("support finds a learner, sees a redacted timeline and takes assisted access the learner can end", async ({ page, browser }) => {
+  // P15.S3.T3: exact-email lookup with MFA; the learner is told about assisted access and can end it.
+  const email = await newLearner(page, "/help/new");
+  await page.getByLabel("What is it about?").selectOption("access");
+  await page.getByLabel("Summary").fill(`Fixture: access question ${Date.now()}`);
+  await page.getByLabel("Details").fill("Fixture: my practice tests will not open.");
+  await page.getByRole("button", { name: "Send" }).click();
+  await expect(page).toHaveURL(/:\d+\/help\/[0-9a-f-]{36}$/, AUTH);
+
+  const agent = await staff(browser, "studio-support@example.com", "/studio/support/learners", true);
+  await agent.getByLabel("Learner's email").fill(email.toUpperCase());
+  await agent.getByRole("button", { name: "Look up" }).click();
+  await expect(agent).toHaveURL(/\/studio\/support\/learners\/[0-9a-f-]{36}$/, AUTH);
+  await expect(agent.getByRole("heading", { name: email })).toBeVisible(AUTH);
+  const activity = agent.getByRole("list", { name: "Activity" });
+  await expect(activity.getByText("Help request opened")).toBeVisible();
+  await expect(agent.getByText("Fixture: my practice tests will not open.")).toHaveCount(0); // no message text
+  await agent.getByLabel("Reason (the learner sees this)").fill("Fixture: checking why practice will not open");
+  await agent.getByRole("button", { name: "Start assisted access" }).click();
+  await expect(agent.getByRole("button", { name: "End assisted access now" })).toBeVisible(AUTH);
+
+  await page.goto("/account");
+  const access = page.getByRole("list", { name: "Assisted access" });
+  await expect(access.getByText("Fixture: checking why practice will not open")).toBeVisible(AUTH);
+  await access.getByRole("button", { name: "End now" }).click();
+  await expect(access.getByRole("button", { name: "End now" })).toHaveCount(0, AUTH);
+  await agent.reload();
+  await expect(agent.getByRole("button", { name: "Start assisted access" })).toBeVisible(AUTH);
 });

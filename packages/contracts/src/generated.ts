@@ -315,6 +315,40 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/me/assisted-access": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Times support had assisted access to your activity */
+        get: operations["my_assisted_access_v1_me_assisted_access_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/me/assisted-access/{access_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        /** End support's assisted access now */
+        delete: operations["end_my_assisted_access_v1_me_assisted_access__access_id__delete"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/me/consents": {
         parameters: {
             query?: never;
@@ -826,6 +860,74 @@ export interface paths {
          * @description Exchange a verified identity-provider access token for a revocable application session.
          */
         post: operations["create_session_v1_sessions_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/staff/support/assisted-access/{access_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        /** End your assisted access */
+        delete: operations["end_assisted_access_v1_staff_support_assisted_access__access_id__delete"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/staff/support/learners/lookup": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Find a learner by exact email (support, MFA; audited) */
+        post: operations["find_learner_v1_staff_support_learners_lookup_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/staff/support/learners/{user_id}/assisted-access": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Start time-limited assisted access for one of the learner's open requests (learner is told; audited) */
+        post: operations["grant_assisted_access_v1_staff_support_learners__user_id__assisted_access_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/staff/support/learners/{user_id}/timeline": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** A learner's redacted activity timeline, including trial decisions (support, MFA; audited) */
+        get: operations["learner_timeline_v1_staff_support_learners__user_id__timeline_get"];
+        put?: never;
+        post?: never;
         delete?: never;
         options?: never;
         head?: never;
@@ -2149,6 +2251,49 @@ export interface components {
             /** Reviewer Id */
             reviewer_id: string | null;
         };
+        /** AssistIn */
+        AssistIn: {
+            /**
+             * Minutes
+             * @default 15
+             */
+            minutes: number;
+            /** Reason */
+            reason: string;
+            /**
+             * Ticket Id
+             * Format: uuid
+             * @description One of the learner's open requests
+             */
+            ticket_id: string;
+        };
+        /** AssistOut */
+        AssistOut: {
+            /**
+             * Expires At
+             * Format: date-time
+             */
+            expires_at: string;
+            /**
+             * Granted At
+             * Format: date-time
+             */
+            granted_at: string;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Reason */
+            reason: string;
+            /** Revoked At */
+            revoked_at: string | null;
+            /**
+             * Ticket Id
+             * Format: uuid
+             */
+            ticket_id: string;
+        };
         /** AttachmentOut */
         AttachmentOut: {
             /**
@@ -3213,6 +3358,27 @@ export interface components {
             /** Working Version */
             working_version: number | null;
         };
+        /** LearnerOut */
+        LearnerOut: {
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /** Display Name */
+            display_name: string | null;
+            /** Email */
+            email: string | null;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Open Requests */
+            open_requests: number;
+            /** Status */
+            status: string;
+        };
         /** LearnerRevision */
         LearnerRevision: {
             /** Classification */
@@ -3362,6 +3528,11 @@ export interface components {
              * @enum {string}
              */
             reason: "NEW_CONTENT" | "INDETERMINATE" | "REWRITE";
+        };
+        /** LookupIn */
+        LookupIn: {
+            /** Email */
+            email: string;
         };
         /** ManifestIn */
         ManifestIn: {
@@ -4601,6 +4772,28 @@ export interface components {
              */
             updated_at: string;
         };
+        /** TimelineEventOut */
+        TimelineEventOut: {
+            /**
+             * At
+             * Format: date-time
+             */
+            at: string;
+            /** Detail */
+            detail: {
+                [key: string]: unknown;
+            };
+            /** Kind */
+            kind: string;
+        };
+        /** TimelineOut */
+        TimelineOut: {
+            /** @description Your active assisted access, if any (adds result summaries) */
+            assisted_access: components["schemas"]["AssistOut"] | null;
+            /** Events */
+            events: components["schemas"]["TimelineEventOut"][];
+            learner: components["schemas"]["LearnerOut"];
+        };
         /** TopicNode */
         TopicNode: {
             /** Children */
@@ -5708,6 +5901,55 @@ export interface operations {
             };
         };
     };
+    my_assisted_access_v1_me_assisted_access_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AssistOut"][];
+                };
+            };
+        };
+    };
+    end_my_assisted_access_v1_me_assisted_access__access_id__delete: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                access_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     accept_consent_v1_me_consents_post: {
         parameters: {
             query?: never;
@@ -6694,6 +6936,134 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["SessionCreatedOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    end_assisted_access_v1_staff_support_assisted_access__access_id__delete: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                access_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    find_learner_v1_staff_support_learners_lookup_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["LookupIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["LearnerOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    grant_assisted_access_v1_staff_support_learners__user_id__assisted_access_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                user_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["AssistIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AssistOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    learner_timeline_v1_staff_support_learners__user_id__timeline_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                user_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TimelineOut"];
                 };
             };
             /** @description Validation Error */

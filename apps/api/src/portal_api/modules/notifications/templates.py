@@ -91,6 +91,15 @@ TEMPLATES: dict[str, Template] = {
         "Your help request was resolved",
         "Your help request \u201c{subject}\u201d was resolved. Reply if you still need help.",
     ),
+    "support.assisted_access": Template(
+        "service",
+        ("email",),
+        False,
+        ("subject", "minutes"),
+        "Support can see your activity for a short time",
+        "To help with \u201c{subject}\u201d, a support team member can see a summary of your activity for up to "
+        "{minutes} minutes. They cannot act as you. You can end this from your account at any time.",
+    ),
     # Schedule-driven (emitters land with their features)
     "mock.reminder": Template(
         "reminder", ("email", "push"), False, ("mock", "starts"), "Mock test reminder", "{mock} starts at {starts}."
