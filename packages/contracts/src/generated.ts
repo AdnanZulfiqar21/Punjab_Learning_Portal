@@ -845,6 +845,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/me/study-plan": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** A time-budgeted plan for one book: shortfall shown honestly, weakest evidence first */
+        get: operations["my_study_plan_v1_me_study_plan_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/me/trial": {
         parameters: {
             query?: never;
@@ -6087,6 +6104,39 @@ export interface components {
              */
             operational: boolean;
         };
+        /** StudyPlanOut */
+        StudyPlanOut: {
+            /** Assumptions */
+            assumptions: {
+                [key: string]: unknown;
+            };
+            /** Available Minutes */
+            available_minutes: number;
+            /** Daily Minutes */
+            daily_minutes: number;
+            /** Days */
+            days: number;
+            /** Feasible */
+            feasible: boolean;
+            /** Required Minutes */
+            required_minutes: number;
+            /** Rules Version */
+            rules_version: string;
+            /** Schedule */
+            schedule: {
+                [key: string]: unknown;
+            }[];
+            /** Scheduled Minutes */
+            scheduled_minutes: number;
+            /** Shortfall Minutes */
+            shortfall_minutes: number;
+            /** Target Date */
+            target_date: string;
+            /** Today */
+            today: string;
+            /** Unscheduled Topics */
+            unscheduled_topics: number;
+        };
         /** SubjectInGrade */
         SubjectInGrade: {
             /** Books */
@@ -8363,6 +8413,40 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    my_study_plan_v1_me_study_plan_get: {
+        parameters: {
+            query: {
+                grade: number;
+                subject: string;
+                target_date: string;
+                daily_minutes?: number | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StudyPlanOut"];
+                };
             };
             /** @description Validation Error */
             422: {
