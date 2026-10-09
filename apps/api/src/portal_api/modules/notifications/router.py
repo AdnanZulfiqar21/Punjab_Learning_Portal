@@ -192,3 +192,41 @@ def delivery_metrics(
 ) -> dict[str, Any]:
     _private(response)
     return service.metrics(db, days)
+
+
+# ------------------------------------------------------------------ automatic written assessment jobs (W05.S3)
+@router.get("/ops/written/auto-assessments", summary="Automatic-assessment job status and dead letters (operators)")
+def auto_assessments(db: DB, who: Operator) -> dict[str, Any]:
+    from sqlalchemy import select
+
+    from portal_api.modules.written import automatic
+
+    failed = db.scalars(
+        select(automatic.AutoAssessment)
+        .where(automatic.AutoAssessment.status.in_(("failed", "unavailable")))
+        .order_by(automatic.AutoAssessment.updated_at.desc())
+        .limit(100)
+    )
+    return {
+        **automatic.summary(db),
+        "dead_letters": [
+            {"id": str(r.id), "status": r.status, "attempts": r.attempts, "last_error": r.last_error} for r in failed
+        ],
+    }
+
+
+@router.post("/ops/written/auto-assessments/{job_id}/requeue", status_code=204, summary="Requeue a failed job")
+def requeue_auto_assessment(job_id: uuid.UUID, db: DB, who: Operator) -> Response:
+    from portal_api.modules.audit.models import record
+    from portal_api.modules.written import automatic
+
+    automatic.requeue(db, job_id)
+    record(
+        db,
+        actor=who.user.id,
+        action="written.auto_assessment_requeued",
+        target_type="written_auto_assessment",
+        target_id=str(job_id),
+    )
+    db.commit()
+    return Response(status_code=204)
