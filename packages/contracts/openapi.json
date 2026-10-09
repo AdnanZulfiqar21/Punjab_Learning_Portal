@@ -1,6 +1,55 @@
 {
   "components": {
     "schemas": {
+      "AcademicOverview": {
+        "properties": {
+          "chapters": {
+            "items": {
+              "$ref": "#/components/schemas/OverviewChapter"
+            },
+            "title": "Chapters",
+            "type": "array"
+          },
+          "chapters_pool_sufficient": {
+            "title": "Chapters Pool Sufficient",
+            "type": "integer"
+          },
+          "chapters_with_lessons": {
+            "title": "Chapters With Lessons",
+            "type": "integer"
+          },
+          "grade": {
+            "title": "Grade",
+            "type": "integer"
+          },
+          "pool_rule": {
+            "title": "Pool Rule",
+            "type": "integer"
+          },
+          "subject": {
+            "title": "Subject",
+            "type": "string"
+          },
+          "totals": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "title": "Totals",
+            "type": "object"
+          }
+        },
+        "required": [
+          "grade",
+          "subject",
+          "pool_rule",
+          "chapters",
+          "totals",
+          "chapters_with_lessons",
+          "chapters_pool_sufficient"
+        ],
+        "title": "AcademicOverview",
+        "type": "object"
+      },
       "AccessOut": {
         "properties": {
           "device_check": {
@@ -4544,6 +4593,80 @@
           "blocks"
         ],
         "title": "OptionSnapshot",
+        "type": "object"
+      },
+      "OverviewChapter": {
+        "properties": {
+          "approved_unpublished": {
+            "title": "Approved Unpublished",
+            "type": "integer"
+          },
+          "chapter_id": {
+            "format": "uuid",
+            "title": "Chapter Id",
+            "type": "string"
+          },
+          "drafts": {
+            "title": "Drafts",
+            "type": "integer"
+          },
+          "in_review": {
+            "title": "In Review",
+            "type": "integer"
+          },
+          "key": {
+            "title": "Key",
+            "type": "string"
+          },
+          "live_lessons": {
+            "title": "Live Lessons",
+            "type": "integer"
+          },
+          "live_mcq_families": {
+            "title": "Live Mcq Families",
+            "type": "integer"
+          },
+          "live_written": {
+            "title": "Live Written",
+            "type": "integer"
+          },
+          "number": {
+            "title": "Number",
+            "type": "integer"
+          },
+          "open_reports": {
+            "title": "Open Reports",
+            "type": "integer"
+          },
+          "pool_sufficient": {
+            "title": "Pool Sufficient",
+            "type": "boolean"
+          },
+          "quarantined": {
+            "title": "Quarantined",
+            "type": "integer"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "chapter_id",
+          "key",
+          "number",
+          "title",
+          "live_lessons",
+          "live_mcq_families",
+          "live_written",
+          "drafts",
+          "in_review",
+          "approved_unpublished",
+          "quarantined",
+          "open_reports",
+          "pool_sufficient"
+        ],
+        "title": "OverviewChapter",
         "type": "object"
       },
       "PageOut": {
@@ -13420,6 +13543,61 @@
           }
         },
         "summary": "Withdraw",
+        "tags": [
+          "studio"
+        ]
+      }
+    },
+    "/v1/studio/overview": {
+      "get": {
+        "operationId": "academic_overview_v1_studio_overview_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "grade",
+            "required": true,
+            "schema": {
+              "maximum": 12,
+              "minimum": 11,
+              "title": "Grade",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "subject",
+            "required": true,
+            "schema": {
+              "maxLength": 40,
+              "minLength": 2,
+              "title": "Subject",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AcademicOverview"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Coverage, pipeline, quarantines, open reports and pool sufficiency per chapter (staff in scope)",
         "tags": [
           "studio"
         ]
