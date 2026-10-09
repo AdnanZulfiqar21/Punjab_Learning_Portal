@@ -1,7 +1,7 @@
 """Deterministic scoring of a frozen final-answer ledger (roadmap P10.S3.T2, §5.7).
 
 Pure function: the same ledger, frozen keys, pinned marking rule and effective adjudication set always give the same
-result. Original keys and evidence are never mutated; adjudications are separate inputs (none exist yet in v1).
+result. Original keys and evidence are never mutated; adjudications are separate inputs (see `adjudications`).
 Percentages use decimal half-up rounding to 2 places. A zero remaining maximum is NOT_SCORABLE (no division by zero).
 """
 
@@ -86,7 +86,10 @@ def score(
         else:
             earned, correct = -negative_marks, False
         raw += earned
-        items.append(_row(k, chosen, correct, earned, k.marks, treatment))
+        row = _row(k, chosen, correct, earned, k.marks, treatment)
+        if treatment == "KEY_CORRECTION":
+            row["corrected_key"] = key
+        items.append(row)
     if maximum == 0:
         return Result("not_scorable", raw, 0, None, items)
     pct = (Decimal(raw) * 100 / Decimal(maximum)).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP)

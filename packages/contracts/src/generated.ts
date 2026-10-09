@@ -1326,6 +1326,24 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/studio/items/{item_id}/score-corrections": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Score corrections recorded for a question */
+        get: operations["list_score_corrections_v1_studio_items__item_id__score_corrections_get"];
+        put?: never;
+        /** Record a reviewed VOID or KEY_ERROR correction and re-score affected attempts (adjudicators, MFA) */
+        post: operations["record_score_correction_v1_studio_items__item_id__score_corrections_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/studio/items/{item_id}/submit": {
         parameters: {
             query?: never;
@@ -2039,8 +2057,18 @@ export interface components {
          * @description What the caller may do now. Advisory for the UI; the server re-checks every action.
          */
         Actions: {
+            /**
+             * Change Quarantine Level
+             * @default false
+             */
+            change_quarantine_level: boolean;
             /** Claim */
             claim: boolean;
+            /**
+             * Correct Score
+             * @default false
+             */
+            correct_score: boolean;
             /** Edit */
             edit: boolean;
             /** Publish */
@@ -4146,6 +4174,13 @@ export interface components {
             /** Raw */
             raw: number;
             /**
+             * Revised At
+             * @description When this score was revised after review (v2+)
+             */
+            revised_at?: string | null;
+            /** Revision Reason */
+            revision_reason?: string | null;
+            /**
              * Status
              * @enum {string}
              */
@@ -4340,6 +4375,63 @@ export interface components {
              * @enum {string}
              */
             status: "active" | "finalised" | "void";
+        };
+        /** ScoreCorrectionIn */
+        ScoreCorrectionIn: {
+            /**
+             * Corrected Option Id
+             * @description KEY_ERROR only
+             */
+            corrected_option_id?: string | null;
+            /**
+             * Defect
+             * @enum {string}
+             */
+            defect: "VOID" | "KEY_ERROR";
+            /** Reason */
+            reason: string;
+        };
+        /** ScoreCorrectionOut */
+        ScoreCorrectionOut: {
+            /** Affected Attempts */
+            affected_attempts: number;
+            /** Corrected Option Id */
+            corrected_option_id: string | null;
+            /**
+             * Decided At
+             * Format: date-time
+             */
+            decided_at: string;
+            /**
+             * Defect
+             * @enum {string}
+             */
+            defect: "VOID" | "KEY_ERROR";
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Reason */
+            reason: string;
+            /**
+             * Rescored
+             * @description Attempts given a new score version by this request
+             * @default 0
+             */
+            rescored: number;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "effective" | "superseded";
+            /** Supersedes Id */
+            supersedes_id: string | null;
+            /**
+             * Version Id
+             * Format: uuid
+             */
+            version_id: string;
         };
         /** SealIn */
         SealIn: {
@@ -7828,6 +7920,72 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["ItemDetail"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_score_corrections_v1_studio_items__item_id__score_corrections_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                item_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ScoreCorrectionOut"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    record_score_correction_v1_studio_items__item_id__score_corrections_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                item_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ScoreCorrectionIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ScoreCorrectionOut"];
                 };
             };
             /** @description Validation Error */

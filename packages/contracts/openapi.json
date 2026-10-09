@@ -87,8 +87,18 @@
       "Actions": {
         "description": "What the caller may do now. Advisory for the UI; the server re-checks every action.",
         "properties": {
+          "change_quarantine_level": {
+            "default": false,
+            "title": "Change Quarantine Level",
+            "type": "boolean"
+          },
           "claim": {
             "title": "Claim",
+            "type": "boolean"
+          },
+          "correct_score": {
+            "default": false,
+            "title": "Correct Score",
             "type": "boolean"
           },
           "edit": {
@@ -5218,6 +5228,30 @@
             "title": "Raw",
             "type": "integer"
           },
+          "revised_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "When this score was revised after review (v2+)",
+            "title": "Revised At"
+          },
+          "revision_reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Revision Reason"
+          },
           "status": {
             "enum": [
               "scored",
@@ -5707,6 +5741,128 @@
           "receipt_id"
         ],
         "title": "SaveOut",
+        "type": "object"
+      },
+      "ScoreCorrectionIn": {
+        "properties": {
+          "corrected_option_id": {
+            "anyOf": [
+              {
+                "maxLength": 80,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "KEY_ERROR only",
+            "title": "Corrected Option Id"
+          },
+          "defect": {
+            "enum": [
+              "VOID",
+              "KEY_ERROR"
+            ],
+            "title": "Defect",
+            "type": "string"
+          },
+          "reason": {
+            "maxLength": 2000,
+            "minLength": 10,
+            "title": "Reason",
+            "type": "string"
+          }
+        },
+        "required": [
+          "defect",
+          "reason"
+        ],
+        "title": "ScoreCorrectionIn",
+        "type": "object"
+      },
+      "ScoreCorrectionOut": {
+        "properties": {
+          "affected_attempts": {
+            "title": "Affected Attempts",
+            "type": "integer"
+          },
+          "corrected_option_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Corrected Option Id"
+          },
+          "decided_at": {
+            "format": "date-time",
+            "title": "Decided At",
+            "type": "string"
+          },
+          "defect": {
+            "enum": [
+              "VOID",
+              "KEY_ERROR"
+            ],
+            "title": "Defect",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "reason": {
+            "title": "Reason",
+            "type": "string"
+          },
+          "rescored": {
+            "default": 0,
+            "description": "Attempts given a new score version by this request",
+            "title": "Rescored",
+            "type": "integer"
+          },
+          "status": {
+            "enum": [
+              "effective",
+              "superseded"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "supersedes_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Supersedes Id"
+          },
+          "version_id": {
+            "format": "uuid",
+            "title": "Version Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "version_id",
+          "defect",
+          "corrected_option_id",
+          "reason",
+          "decided_at",
+          "status",
+          "supersedes_id",
+          "affected_attempts"
+        ],
+        "title": "ScoreCorrectionOut",
         "type": "object"
       },
       "SealIn": {
@@ -11786,6 +11942,104 @@
           }
         },
         "summary": "Revise",
+        "tags": [
+          "studio"
+        ]
+      }
+    },
+    "/v1/studio/items/{item_id}/score-corrections": {
+      "get": {
+        "operationId": "list_score_corrections_v1_studio_items__item_id__score_corrections_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "item_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Item Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/ScoreCorrectionOut"
+                  },
+                  "title": "Response List Score Corrections V1 Studio Items  Item Id  Score Corrections Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Score corrections recorded for a question",
+        "tags": [
+          "studio"
+        ]
+      },
+      "post": {
+        "operationId": "record_score_correction_v1_studio_items__item_id__score_corrections_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "item_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Item Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ScoreCorrectionIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScoreCorrectionOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Record a reviewed VOID or KEY_ERROR correction and re-score affected attempts (adjudicators, MFA)",
         "tags": [
           "studio"
         ]

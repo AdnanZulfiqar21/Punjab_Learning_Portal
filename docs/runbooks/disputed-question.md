@@ -1,8 +1,7 @@
 # Disputed question (soft, then void quarantine)
 
-**Owner:** subject reviewer (report triage), publisher (quarantine), academic adjudicator (scoring correction).
-**Status:** soft quarantine works and is tested. **Void and key-error score propagation (roadmap §5.7) is not built
-yet.** It is the next engineering task. Until it lands, do not tell learners their score will change.
+**Owner:** subject reviewer (report triage), publisher (quarantine), academic adjudicator (score correction).
+**Rehearsal:** `apps/api/tests/test_mcq_corrections.py::test_rehearsal_disputed_question_soft_then_void`.
 
 ## Steps
 
@@ -11,16 +10,32 @@ yet.** It is the next engineering task. Until it lands, do not tell learners the
 2. **Suspected defect → SOFT quarantine.** A publisher (MFA) quarantines the item at level `SOFT` with a reason
    citing the request (**Studio → item → Quarantine**).
    - The question version leaves new practice forms at once.
-   - Existing forms and attempts keep their original contents, and no score changes.
+   - Existing forms, open attempts and released scores stay as they are. Do not tell learners their score will change.
 3. **Review.** The subject reviewer checks the question against the approved source.
-   - **Not a defect:** release the quarantine with a reason (**Release**), then reply and resolve.
-   - **Confirmed, no valid answer:** quarantine at `VOID`. The pinned invalid-item treatment (EXCLUDE for practice)
-     must then be applied to existing scores as a new score version. *Not built yet.*
-   - **Confirmed, wrong key:** quarantine at `KEY_ERROR`. An adjudicator records the corrected key, and existing
-     attempts are re-scored as a new score version. *Not built yet.*
-4. **Tell the reporter.** Resolving the request sends one "request resolved" notice. Internal notes are never shown.
+   - **Not a defect:** release the quarantine with a reason (**Release from quarantine**), then reply and resolve.
+   - **Confirmed, no valid answer:** change the level to `VOID` (**Change quarantine level**). This does not return
+     the question to learners. Then an academic adjudicator (MFA) chooses **Record void and re-score**, with a reason
+     of at least 10 characters.
+   - **Confirmed, wrong key:** change the level to `KEY_ERROR`. The adjudicator picks the corrected answer and
+     chooses **Record key correction and re-score**.
+4. **What happens on re-score.** Every submitted attempt that contains this question version gets a new score version:
+   - VOID: the form's pinned treatment applies. For practice that is EXCLUDE, which removes the question from both
+     marks and maximum.
+   - KEY_ERROR: the attempt is marked against the corrected key.
+
+   Each affected learner gets one "result updated" notice. Their result shows the revision note, and earlier marks
+   stay in their history. Tests still open get the correction when they are submitted.
+5. **Re-classifying.** A VOID can become KEY_ERROR, or the reverse, by changing the level and recording a new
+   correction. The new correction supersedes the old one explicitly. A corrected question cannot go back to SOFT or
+   be released. Publish a corrected version instead.
+6. **Tell the reporter.** Resolve the request. Internal notes are never shown.
+
+If a re-score was interrupted, an operator runs `portal-mcq-regrade`. It is safe to repeat.
 
 ## Audit trail
 
-The audit log records `content.quarantined` and `content.released` with the actor, level and reason. The help request
-holds the conversation.
+The audit log records:
+
+- `content.quarantined` and `content.quarantine_level_changed`, with the level and reason;
+- `assessment.score_correction_recorded`, with the defect, version, any corrected key, what it supersedes, and the reason;
+- `attempt.rescored` for each new score version.

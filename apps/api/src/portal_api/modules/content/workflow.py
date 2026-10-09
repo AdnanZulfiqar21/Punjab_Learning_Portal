@@ -568,9 +568,23 @@ def quarantine(db: Session, who: Principal, item_id: uuid.UUID, reason: str, lev
     version continues independently."""
     item = get_item(db, item_id, for_update=True)
     _require_scoped(db, who, Permission.quarantine_content, item)
+    levels = kinds.get(item.kind).quarantine_levels
+    if item.availability == Availability.quarantined.value and levels and level in levels:
+        # A suspected defect confirmed (or re-classified) after review: change the level, never via release.
+        if level == item.quarantine_level:
+            raise Conflict("The question is already quarantined at that level.")
+        if level == "SOFT":
+            _no_effective_correction(db, item)  # a recorded correction is a confirmed defect, not a suspicion
+        previous = item.quarantine_level
+        item.quarantine_level = level
+        item.availability_reason = reason.strip()
+        item.updated_at = _now()
+        _audit(db, who, "quarantine_level_changed", item, reason=reason.strip(), level=level, previous=previous)
+        db.commit()
+        db.refresh(item)
+        return item
     if item.availability != Availability.live.value:
         raise Conflict("Only live content can be quarantined.", availability=item.availability)
-    levels = kinds.get(item.kind).quarantine_levels
     if levels and level not in levels:
         raise Unprocessable(f"Choose a quarantine level: {', '.join(levels)}.")
     if not levels and level is not None:
@@ -605,12 +619,25 @@ def set_access_tier(db: Session, who: Principal, item_id: uuid.UUID, tier: str, 
     return item
 
 
+def _no_effective_correction(db: Session, item: ContentItem) -> None:
+    """A confirmed defect with a recorded score correction stays quarantined: publish a corrected version instead."""
+    from portal_api.modules.assessment.models import McqAdjudication
+
+    if item.published_version_id and db.scalar(
+        select(McqAdjudication.id).where(
+            McqAdjudication.version_id == item.published_version_id, McqAdjudication.status == "effective"
+        )
+    ):
+        raise Conflict("A score correction is recorded for this version; publish a corrected version instead.")
+
+
 def release(db: Session, who: Principal, item_id: uuid.UUID, reason: str) -> ContentItem:
     """Return quarantined content to learners unchanged (the suspected defect was not confirmed)."""
     item = get_item(db, item_id, for_update=True)
     _require_scoped(db, who, Permission.quarantine_content, item)
     if item.availability != Availability.quarantined.value:
         raise Conflict("Only quarantined content can be released.", availability=item.availability)
+    _no_effective_correction(db, item)
     released_level = item.quarantine_level
     item.availability = Availability.live.value
     item.availability_reason = None

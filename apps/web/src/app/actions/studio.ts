@@ -105,6 +105,10 @@ export async function reviseItem(id: string, reason: string): Promise<ActionResu
 export async function quarantineItem(id: string, reason: string, level: string | null = null): Promise<ActionResult> {
   return call(item(id, "quarantine"), "POST", { reason, level });
 }
+/** §5.7: a reviewed VOID or KEY_ERROR correction; the API re-scores affected attempts as new score versions. */
+export async function recordScoreCorrection(id: string, defect: "VOID" | "KEY_ERROR", reason: string, correctedOptionId: string | null): Promise<ActionResult> {
+  return call(item(id, "score-corrections"), "POST", { defect, reason, corrected_option_id: correctedOptionId });
+}
 export async function releaseItem(id: string, reason: string): Promise<ActionResult> {
   return call(item(id, "release"), "POST", { reason });
 }

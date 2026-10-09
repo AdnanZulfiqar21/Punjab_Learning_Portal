@@ -165,6 +165,8 @@ class Actions(BaseModel):
     release: bool
     retire: bool
     set_access_tier: bool
+    change_quarantine_level: bool = False  # confirm or re-classify a quarantined question's defect (§5.7)
+    correct_score: bool = False  # record a VOID/KEY_ERROR score correction (adjudicators, MFA)
 
 
 class ItemDetail(ItemSummary):

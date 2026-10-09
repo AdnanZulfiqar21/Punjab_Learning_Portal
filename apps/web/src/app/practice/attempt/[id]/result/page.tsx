@@ -52,6 +52,11 @@ async function Result({ id }: { id: string }) {
             {result.percentage !== null && <span className="ml-2 text-muted">({String(result.percentage)}%)</span>}
           </p>
         )}
+        {result.revised_at && (
+          <Notice title={`Updated ${new Date(result.revised_at).toLocaleDateString("en-GB", { dateStyle: "medium" })}`}>
+            {result.revision_reason} Your earlier result stays in your history.
+          </Notice>
+        )}
         <p className="text-sm text-muted">
           {result.answered} of {result.question_count} answered · {result.finalise_reason === "expiry" ? "submitted when time ran out" : "submitted by you"}
         </p>

@@ -229,7 +229,10 @@ def _finalise(
 def _score(
     db: Session, attempt: Attempt, form: PracticeForm, answers: dict[int, str | None], *, reason: str
 ) -> ScoreVersion:
+    from portal_api.modules.assessment.adjudications import effective_for_form
+
     keys = forms.item_keys(db, form)
+    adjs = effective_for_form(db, form)  # corrections recorded while the attempt was open apply at submission
     result = scoring.score(
         [
             scoring.ItemKey(
@@ -239,13 +242,13 @@ def _score(
         ],
         answers,
         negative_marks=form.negative_marks,
-        adjudications=[],  # reviewed adjudication overlays arrive with P10.S3.T4
+        adjudications=adjs,
     )
     sv = ScoreVersion(
         attempt_id=attempt.id,
         version=1,
         scoring_policy_version=SCORING_POLICY_VERSION,
-        adjudication_hash=scoring.adjudication_hash([]),
+        adjudication_hash=scoring.adjudication_hash(adjs),
         status=result.status,
         raw=result.raw,
         maximum=result.maximum,

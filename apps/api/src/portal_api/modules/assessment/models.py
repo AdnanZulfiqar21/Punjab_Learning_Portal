@@ -175,3 +175,34 @@ class ScoreVersion(Base):
     items: Mapped[list[dict[str, Any]]] = mapped_column(JSONB)
     reason: Mapped[str] = mapped_column(Text)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+
+
+class McqAdjudication(Base):
+    """A reviewed score correction for one exact MCQ version (§5.7): VOID (pinned invalid-item treatment) or KEY_ERROR
+    (KEY_CORRECTION with the reviewed key). Never edits the question or any attempt; superseded explicitly."""
+
+    __tablename__ = "mcq_adjudication"
+    __table_args__ = (
+        CheckConstraint("defect in ('VOID','KEY_ERROR')", name="mcq_adjudication_defect"),
+        CheckConstraint("status in ('effective','superseded')", name="mcq_adjudication_status"),
+        CheckConstraint(
+            "(defect = 'KEY_ERROR') = (corrected_option_id is not null)", name="mcq_adjudication_corrected_key"
+        ),
+        Index(
+            "uq_mcq_adjudication_effective",
+            "version_id",
+            unique=True,
+            postgresql_where=text("status = 'effective'"),
+        ),
+    )
+    id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    item_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("content_item.id", ondelete="RESTRICT"), index=True)
+    version_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("content_version.id", ondelete="RESTRICT"), index=True)
+    defect: Mapped[str] = mapped_column(String(10))
+    corrected_option_id: Mapped[str | None] = mapped_column(String(80))
+    reason: Mapped[str] = mapped_column(Text)
+    decided_by: Mapped[uuid.UUID] = mapped_column(ForeignKey("app_user.id", ondelete="RESTRICT"))
+    decided_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+    status: Mapped[str] = mapped_column(String(12), default="effective")
+    supersedes_id: Mapped[uuid.UUID | None] = mapped_column(ForeignKey("mcq_adjudication.id", ondelete="RESTRICT"))
+    superseded_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
