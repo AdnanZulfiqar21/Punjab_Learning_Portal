@@ -58,7 +58,7 @@ def test_preview_reports_rows_and_commit_creates_drafts_once(client: TestClient)
         _row(f"FX-{run}-2", chapter, refs, f"Fixture stem two {run}"),
     ]
     bad_body = _row(f"FX-{run}-3", chapter, refs, f"Fixture stem three {run}")
-    bad_body["body"]["correct_option_id"] = "o9"
+    bad_body["body"] = ["not", "an", "object"]
     bad_chapter = _row(f"FX-{run}-4", "no-such-chapter", refs, "Fixture stem four")
     dup = _row(f"FX-{run}-1", chapter, refs, "Fixture duplicate id")
     r = _preview(client, author, _doc(*good, bad_body, bad_chapter, dup))

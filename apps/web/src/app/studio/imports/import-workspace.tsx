@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useRef, useState, useTransition } from "react";
+import { useRef, useState, useSyncExternalStore, useTransition } from "react";
 import type { ImportBatch } from "@portal/contracts";
 import { commitImport, discardImport } from "@/app/actions/imports";
 import { Badge } from "@/components/ui";
@@ -16,7 +16,11 @@ const ACTION_LABEL: Record<string, string> = {
 };
 
 /** Upload → preview (dry run) → commit. Shows every row's action, errors and warnings. */
+const subscribe = () => () => {};
+
 export function ImportWorkspace() {
+  // The picker appears only once the page is interactive, so a file chosen early is never silently ignored.
+  const hydrated = useSyncExternalStore(subscribe, () => true, () => false);
   const input = useRef<HTMLInputElement>(null);
   const [batch, setBatch] = useState<ImportBatch | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -51,6 +55,9 @@ export function ImportWorkspace() {
         <label htmlFor="import-file" className="font-medium">
           File to preview <span className="text-sm font-normal text-muted">(JSON or CSV, up to 5 MB)</span>
         </label>
+        {!hydrated ? (
+          <p className="text-sm text-muted">Loading…</p>
+        ) : (
         <input
           ref={input}
           id="import-file"
@@ -63,6 +70,7 @@ export function ImportWorkspace() {
           }}
           className="block text-sm"
         />
+        )}
         <p className="text-sm text-muted">The formats are described in the content import guide (docs/content-import.md).</p>
         {uploading && <p className="text-sm text-muted">Checking every row…</p>}
       </div>
