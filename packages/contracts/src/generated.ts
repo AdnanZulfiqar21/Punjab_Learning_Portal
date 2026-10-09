@@ -624,6 +624,40 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/ops/features": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Optional feature switches (operators) */
+        get: operations["ops_features_v1_ops_features_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/ops/features/{key}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** Turn an optional feature off or on (operators, MFA, reason; audited). Active work is never interrupted */
+        put: operations["ops_set_feature_v1_ops_features__key__put"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/ops/incidents": {
         parameters: {
             query?: never;
@@ -722,6 +756,23 @@ export interface paths {
         post: operations["add_suppression_v1_ops_notifications_suppressions_post"];
         /** Remove Suppression */
         delete: operations["remove_suppression_v1_ops_notifications_suppressions_delete"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/ops/signals": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Alert signals with thresholds (operators, MFA) */
+        get: operations["ops_signals_v1_ops_signals_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
         options?: never;
         head?: never;
         patch?: never;
@@ -3168,6 +3219,26 @@ export interface components {
              */
             surface: "web" | "ios" | "android";
         };
+        /** FeatureIn */
+        FeatureIn: {
+            /** Enabled */
+            enabled: boolean;
+            /** Reason */
+            reason: string;
+        };
+        /** FeatureOut */
+        FeatureOut: {
+            /** Description */
+            description: string;
+            /** Enabled */
+            enabled: boolean;
+            /** Key */
+            key: string;
+            /** Reason */
+            reason: string | null;
+            /** Updated At */
+            updated_at: string | null;
+        };
         /** FormCreateIn */
         FormCreateIn: {
             /** Chapter Ids */
@@ -4814,6 +4885,23 @@ export interface components {
             mfa: boolean;
             /** User Agent */
             user_agent: string | null;
+        };
+        /** SignalOut */
+        SignalOut: {
+            /** Alert At */
+            alert_at: number;
+            /** Level */
+            level: string;
+            /** Name */
+            name: string;
+            /** Owner */
+            owner: string;
+            /** Runbook */
+            runbook: string;
+            /** Value */
+            value: number;
+            /** Warn At */
+            warn_at: number;
         };
         /** SlotOut */
         SlotOut: {
@@ -6853,6 +6941,61 @@ export interface operations {
             };
         };
     };
+    ops_features_v1_ops_features_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["FeatureOut"][];
+                };
+            };
+        };
+    };
+    ops_set_feature_v1_ops_features__key__put: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                key: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["FeatureIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["FeatureOut"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     open_incident_v1_ops_incidents_post: {
         parameters: {
             query?: never;
@@ -7071,6 +7214,26 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    ops_signals_v1_ops_signals_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SignalOut"][];
                 };
             };
         };

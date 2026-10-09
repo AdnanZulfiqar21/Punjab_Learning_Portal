@@ -2205,6 +2205,74 @@
         "title": "ExceptionIn",
         "type": "object"
       },
+      "FeatureIn": {
+        "properties": {
+          "enabled": {
+            "title": "Enabled",
+            "type": "boolean"
+          },
+          "reason": {
+            "maxLength": 1000,
+            "minLength": 10,
+            "title": "Reason",
+            "type": "string"
+          }
+        },
+        "required": [
+          "enabled",
+          "reason"
+        ],
+        "title": "FeatureIn",
+        "type": "object"
+      },
+      "FeatureOut": {
+        "properties": {
+          "description": {
+            "title": "Description",
+            "type": "string"
+          },
+          "enabled": {
+            "title": "Enabled",
+            "type": "boolean"
+          },
+          "key": {
+            "title": "Key",
+            "type": "string"
+          },
+          "reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reason"
+          },
+          "updated_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Updated At"
+          }
+        },
+        "required": [
+          "key",
+          "description",
+          "enabled",
+          "reason",
+          "updated_at"
+        ],
+        "title": "FeatureOut",
+        "type": "object"
+      },
       "FormCreateIn": {
         "properties": {
           "chapter_ids": {
@@ -6343,6 +6411,49 @@
         "title": "SessionOut",
         "type": "object"
       },
+      "SignalOut": {
+        "properties": {
+          "alert_at": {
+            "title": "Alert At",
+            "type": "number"
+          },
+          "level": {
+            "title": "Level",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "owner": {
+            "title": "Owner",
+            "type": "string"
+          },
+          "runbook": {
+            "title": "Runbook",
+            "type": "string"
+          },
+          "value": {
+            "title": "Value",
+            "type": "number"
+          },
+          "warn_at": {
+            "title": "Warn At",
+            "type": "number"
+          }
+        },
+        "required": [
+          "name",
+          "value",
+          "level",
+          "warn_at",
+          "alert_at",
+          "owner",
+          "runbook"
+        ],
+        "title": "SignalOut",
+        "type": "object"
+      },
       "SlotOut": {
         "properties": {
           "key": {
@@ -10164,6 +10275,87 @@
         ]
       }
     },
+    "/v1/ops/features": {
+      "get": {
+        "operationId": "ops_features_v1_ops_features_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/FeatureOut"
+                  },
+                  "title": "Response Ops Features V1 Ops Features Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Optional feature switches (operators)",
+        "tags": [
+          "system"
+        ]
+      }
+    },
+    "/v1/ops/features/{key}": {
+      "put": {
+        "operationId": "ops_set_feature_v1_ops_features__key__put",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "key",
+            "required": true,
+            "schema": {
+              "title": "Key",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FeatureIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/FeatureOut"
+                  },
+                  "title": "Response Ops Set Feature V1 Ops Features  Key  Put",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Turn an optional feature off or on (operators, MFA, reason; audited). Active work is never interrupted",
+        "tags": [
+          "system"
+        ]
+      }
+    },
     "/v1/ops/incidents": {
       "post": {
         "operationId": "open_incident_v1_ops_incidents_post",
@@ -10470,6 +10662,31 @@
         "summary": "Stop sending to a destination (audited)",
         "tags": [
           "notifications"
+        ]
+      }
+    },
+    "/v1/ops/signals": {
+      "get": {
+        "operationId": "ops_signals_v1_ops_signals_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/SignalOut"
+                  },
+                  "title": "Response Ops Signals V1 Ops Signals Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Alert signals with thresholds (operators, MFA)",
+        "tags": [
+          "system"
         ]
       }
     },

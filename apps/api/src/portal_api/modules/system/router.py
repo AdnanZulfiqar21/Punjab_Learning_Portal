@@ -6,10 +6,11 @@ Nothing secret is ever returned.
 
 from __future__ import annotations
 
-from typing import Annotated
+from datetime import datetime
+from typing import Annotated, Any
 
 from fastapi import APIRouter, Depends, Response
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from sqlalchemy import text
 from sqlalchemy.orm import Session
 
@@ -65,3 +66,66 @@ def runtime_config(settings: Annotated[Settings, Depends(get_settings)]) -> Runt
         sign_in_methods=(["oidc"] if settings.oidc_issuer else [])
         + (["dev_password"] if settings.dev_auth_enabled else []),
     )
+
+
+# ------------------------------------------------------------------ operations (P17.S3.T1/T3, OPS-01)
+def _operator() -> object:
+    from portal_api.modules.identity.deps import require
+    from portal_api.modules.identity.permissions import Permission
+
+    return require(Permission.operate_platform)
+
+
+class SignalOut(BaseModel):
+    name: str
+    value: float
+    level: str
+    warn_at: float
+    alert_at: float
+    owner: str
+    runbook: str
+
+
+class FeatureOut(BaseModel):
+    key: str
+    description: str
+    enabled: bool
+    reason: str | None
+    updated_at: datetime | None
+
+
+class FeatureIn(BaseModel):
+    enabled: bool
+    reason: str = Field(min_length=10, max_length=1000)
+
+
+@router.get("/v1/ops/signals", response_model=list[SignalOut], summary="Alert signals with thresholds (operators, MFA)")
+def ops_signals(
+    db: Annotated[Session, Depends(get_session)], who: Annotated[Any, Depends(_operator())]
+) -> list[SignalOut]:
+    from portal_api.modules.system import operations
+
+    return [SignalOut(**s) for s in operations.signals(db)]
+
+
+@router.get("/v1/ops/features", response_model=list[FeatureOut], summary="Optional feature switches (operators)")
+def ops_features(
+    db: Annotated[Session, Depends(get_session)], who: Annotated[Any, Depends(_operator())]
+) -> list[FeatureOut]:
+    from portal_api.modules.system import operations
+
+    return [FeatureOut(**f) for f in operations.switches(db)]
+
+
+@router.put(
+    "/v1/ops/features/{key}",
+    response_model=list[FeatureOut],
+    summary="Turn an optional feature off or on (operators, MFA, reason; audited). Active work is never interrupted",
+)
+def ops_set_feature(
+    key: str, body: FeatureIn, db: Annotated[Session, Depends(get_session)], who: Annotated[Any, Depends(_operator())]
+) -> list[FeatureOut]:
+    from portal_api.modules.system import operations
+
+    operations.set_switch(db, who.user.id, key, body.enabled, body.reason)
+    return [FeatureOut(**f) for f in operations.switches(db)]

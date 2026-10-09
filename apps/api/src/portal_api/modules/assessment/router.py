@@ -32,6 +32,7 @@ from portal_api.modules.assessment.schemas import (
     SubmitOut,
 )
 from portal_api.modules.identity.deps import CurrentPrincipal
+from portal_api.modules.system import operations
 
 router = APIRouter(prefix="/v1", tags=["practice"])
 DB = Annotated[Session, Depends(get_session)]
@@ -104,7 +105,13 @@ def availability(
     return AvailabilityOut(grade=grade, subject=subject, chapters=[ChapterAvailability(**r) for r in rows])
 
 
-@router.post("/practice/forms", response_model=FormOut, status_code=201, summary="Generate and freeze a practice test")
+@router.post(
+    "/practice/forms",
+    response_model=FormOut,
+    status_code=201,
+    summary="Generate and freeze a practice test",
+    dependencies=[Depends(operations.requires("new_practice_tests"))],
+)
 def create_form(
     db: DB,
     who: CurrentPrincipal,
