@@ -14,6 +14,20 @@ from tests.test_content_workflow import Staff
 from tests.test_written_attempts import _png
 
 
+def _png_with_metadata() -> bytes:
+    """A synthetic PNG carrying a text chunk, standing in for metadata a real screenshot might hold."""
+    import io
+
+    from PIL import Image
+    from PIL.PngImagePlugin import PngInfo
+
+    info = PngInfo()
+    info.add_text("Comment", "fixture-location")
+    buf = io.BytesIO()
+    Image.new("L", (800, 600), color=101).save(buf, format="PNG", pnginfo=info)
+    return buf.getvalue()
+
+
 def _staff(client: TestClient, roles: list[str], scope: dict[str, Any] | None = None) -> Staff:
     with get_sessionmaker()() as db:
         return Staff(client, db, roles, scope)
@@ -42,7 +56,7 @@ def test_a_screenshot_is_re_encoded_and_visible_only_to_owner_and_scoped_staff(c
     support_staff = _staff(client, ["support"])
     reviewer = _staff(client, ["subject_reviewer"], {"grades": [11], "subjects": ["biology"]})
     t = _ticket(client, learner)
-    original = _png(seed=4101)
+    original = _png_with_metadata()
     r = _attach(client, learner, t["id"], original)
     assert r.status_code == 201, r.text
     a = r.json()
@@ -53,7 +67,8 @@ def test_a_screenshot_is_re_encoded_and_visible_only_to_owner_and_scoped_staff(c
     mine = client.get(url, headers=learner.headers)
     assert mine.status_code == 200 and mine.headers["content-type"] == "image/png"
     assert mine.headers["x-content-type-options"] == "nosniff" and mine.headers["cache-control"] == "private, no-store"
-    assert mine.content.startswith(b"\x89PNG") and mine.content != original  # re-encoded, never the upload itself
+    assert mine.content.startswith(b"\x89PNG")
+    assert b"fixture-location" in original and b"fixture-location" not in mine.content  # re-encoded: metadata gone
     assert client.get(url, headers=other.headers).status_code == 404
     assert client.get(url, headers=support_staff.headers).status_code == 200
     assert client.get(url, headers=reviewer.headers).status_code == 404  # reviewers see only academic reports
