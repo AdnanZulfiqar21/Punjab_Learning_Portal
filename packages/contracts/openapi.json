@@ -2384,6 +2384,49 @@
         "title": "EscalateIn",
         "type": "object"
       },
+      "EvidenceReport": {
+        "properties": {
+          "evaluated_at": {
+            "format": "date-time",
+            "title": "Evaluated At",
+            "type": "string"
+          },
+          "grade": {
+            "title": "Grade",
+            "type": "integer"
+          },
+          "meters": {
+            "additionalProperties": true,
+            "title": "Meters",
+            "type": "object"
+          },
+          "outcomes": {
+            "items": {
+              "$ref": "#/components/schemas/OutcomeEvidence"
+            },
+            "title": "Outcomes",
+            "type": "array"
+          },
+          "rules_version": {
+            "title": "Rules Version",
+            "type": "string"
+          },
+          "subject": {
+            "title": "Subject",
+            "type": "string"
+          }
+        },
+        "required": [
+          "rules_version",
+          "evaluated_at",
+          "grade",
+          "subject",
+          "meters",
+          "outcomes"
+        ],
+        "title": "EvidenceReport",
+        "type": "object"
+      },
       "ExamProfileIn": {
         "properties": {
           "code": {
@@ -5136,6 +5179,97 @@
           "blocks"
         ],
         "title": "OptionSnapshot",
+        "type": "object"
+      },
+      "OutcomeEvidence": {
+        "properties": {
+          "chapter_number": {
+            "title": "Chapter Number",
+            "type": "integer"
+          },
+          "families": {
+            "title": "Families",
+            "type": "integer"
+          },
+          "independent_accuracy": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Independent Accuracy"
+          },
+          "independent_families": {
+            "title": "Independent Families",
+            "type": "integer"
+          },
+          "independent_weight": {
+            "title": "Independent Weight",
+            "type": "number"
+          },
+          "label": {
+            "title": "Label",
+            "type": "string"
+          },
+          "outcome_id": {
+            "format": "uuid",
+            "title": "Outcome Id",
+            "type": "string"
+          },
+          "reasons": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Reasons",
+            "type": "array"
+          },
+          "recent_independent_correct_families": {
+            "title": "Recent Independent Correct Families",
+            "type": "integer"
+          },
+          "state": {
+            "enum": [
+              "insufficient_evidence",
+              "developing",
+              "demonstrated"
+            ],
+            "title": "State",
+            "type": "string"
+          },
+          "total_weight": {
+            "title": "Total Weight",
+            "type": "number"
+          },
+          "weighted_accuracy": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Weighted Accuracy"
+          }
+        },
+        "required": [
+          "outcome_id",
+          "chapter_number",
+          "label",
+          "state",
+          "reasons",
+          "total_weight",
+          "families",
+          "weighted_accuracy",
+          "independent_weight",
+          "independent_families",
+          "independent_accuracy",
+          "recent_independent_correct_families"
+        ],
+        "title": "OutcomeEvidence",
         "type": "object"
       },
       "OverviewChapter": {
@@ -11634,6 +11768,61 @@
         "summary": "Ask for your account and data to be deleted (handled by support under the retention policy)",
         "tags": [
           "identity"
+        ]
+      }
+    },
+    "/v1/me/evidence": {
+      "get": {
+        "operationId": "my_evidence_v1_me_evidence_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "grade",
+            "required": true,
+            "schema": {
+              "maximum": 12,
+              "minimum": 11,
+              "title": "Grade",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "subject",
+            "required": true,
+            "schema": {
+              "maxLength": 40,
+              "minLength": 2,
+              "title": "Subject",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvidenceReport"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Your learning evidence per topic under evidence_rules_v2 (versioned; with reasons)",
+        "tags": [
+          "practice"
         ]
       }
     },

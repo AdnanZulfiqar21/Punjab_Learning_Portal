@@ -710,3 +710,104 @@ def my_progress(db: DB, who: CurrentPrincipal, response: Response) -> ProgressRe
 
     _private(response)
     return ProgressReport(**progress.report(db, who.user.id))
+
+
+# ------------------------------------------------------------------ learning evidence (P12.S2, EVIDENCE-RULES-01)
+class OutcomeEvidence(BaseModel):
+    outcome_id: uuid.UUID
+    chapter_number: int
+    label: str
+    state: Literal["insufficient_evidence", "developing", "demonstrated"]
+    reasons: list[str]
+    total_weight: float
+    families: int
+    weighted_accuracy: float | None
+    independent_weight: float
+    independent_families: int
+    independent_accuracy: float | None
+    recent_independent_correct_families: int
+
+
+class EvidenceReport(BaseModel):
+    rules_version: str
+    evaluated_at: datetime
+    grade: int
+    subject: str
+    meters: dict[str, Any]
+    outcomes: list[OutcomeEvidence]
+
+
+@router.get(
+    "/me/evidence",
+    response_model=EvidenceReport,
+    summary="Your learning evidence per topic under evidence_rules_v2 (versioned; with reasons)",
+)
+def my_evidence(
+    db: DB,
+    who: CurrentPrincipal,
+    response: Response,
+    grade: Annotated[int, Query(ge=11, le=12)],
+    subject: Annotated[str, Query(min_length=2, max_length=40)],
+) -> EvidenceReport:
+    from portal_api.modules.assessment import evidence
+    from portal_api.modules.curriculum.models import Topic
+
+    _private(response)
+    now = db.execute(select(func.now())).scalar_one()
+    chapters = forms._book_chapters(db, grade, subject)
+    if not chapters:
+        raise NotFound("No book is available for this class and subject.")
+    topics = db.scalars(
+        select(Topic)
+        .where(Topic.chapter_id.in_([c.id for c in chapters]), Topic.retired_at.is_(None))
+        .order_by(Topic.display_order)
+    ).all()
+    results = evidence.classify(evidence.learner_responses(db, who.user.id, now), now)
+    outcomes = [(c.id, c.number, f"Chapter {c.number}: {c.title} (whole chapter)") for c in chapters]
+    number = {c.id: c.number for c in chapters}
+    outcomes += [(t.id, number[t.chapter_id], f"{t.number + ' ' if t.number else ''}{t.title}") for t in topics]
+    rows = []
+    for oid, chap, label in outcomes:
+        r = results.get(oid)
+        if r is None and oid in number:
+            continue  # a whole-chapter row is only shown when questions sit at chapter level
+        rows.append(
+            OutcomeEvidence(
+                outcome_id=oid,
+                chapter_number=chap,
+                label=label,
+                state=r.state if r else "insufficient_evidence",  # type: ignore[arg-type]
+                reasons=r.reasons if r else ["No answers on this topic in the last 90 days."],
+                total_weight=r.total_weight if r else 0.0,
+                families=r.families if r else 0,
+                weighted_accuracy=r.weighted_accuracy if r else None,
+                independent_weight=r.independent_weight if r else 0.0,
+                independent_families=r.independent_families if r else 0,
+                independent_accuracy=r.independent_accuracy if r else None,
+                recent_independent_correct_families=r.recent_independent_correct_families if r else 0,
+            )
+        )
+    topic_rows = [x for x in rows if x.outcome_id not in number]
+    demonstrated = sum(1 for x in topic_rows if x.state == "demonstrated")
+    meters = {
+        "demonstrated_knowledge": {
+            "value": round(100 * demonstrated / len(topic_rows), 1) if topic_rows else None,
+            "definition": "Topics classified demonstrated / topics in this book.",
+        },
+        "syllabus_coverage": {
+            "value": None,
+            "definition": "Unavailable until verified exam outcomes are mapped (B02).",
+        },
+        "content_completed": {
+            "value": None,
+            "definition": "Unavailable: lesson completion isn't recorded yet.",
+        },
+    }
+    return EvidenceReport(
+        rules_version=evidence.RULES_VERSION,
+        evaluated_at=now,
+        grade=grade,
+        subject=subject,
+        meters=meters,
+        outcomes=rows,
+    )

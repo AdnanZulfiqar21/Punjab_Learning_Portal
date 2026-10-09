@@ -588,6 +588,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/me/evidence": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Your learning evidence per topic under evidence_rules_v2 (versioned; with reasons) */
+        get: operations["my_evidence_v1_me_evidence_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/me/notebook": {
         parameters: {
             query?: never;
@@ -3711,6 +3728,26 @@ export interface components {
             /** Reason */
             reason: string;
         };
+        /** EvidenceReport */
+        EvidenceReport: {
+            /**
+             * Evaluated At
+             * Format: date-time
+             */
+            evaluated_at: string;
+            /** Grade */
+            grade: number;
+            /** Meters */
+            meters: {
+                [key: string]: unknown;
+            };
+            /** Outcomes */
+            outcomes: components["schemas"]["OutcomeEvidence"][];
+            /** Rules Version */
+            rules_version: string;
+            /** Subject */
+            subject: string;
+        };
         /** ExamProfileIn */
         ExamProfileIn: {
             /** Code */
@@ -4809,6 +4846,39 @@ export interface components {
             }[];
             /** Id */
             id: string;
+        };
+        /** OutcomeEvidence */
+        OutcomeEvidence: {
+            /** Chapter Number */
+            chapter_number: number;
+            /** Families */
+            families: number;
+            /** Independent Accuracy */
+            independent_accuracy: number | null;
+            /** Independent Families */
+            independent_families: number;
+            /** Independent Weight */
+            independent_weight: number;
+            /** Label */
+            label: string;
+            /**
+             * Outcome Id
+             * Format: uuid
+             */
+            outcome_id: string;
+            /** Reasons */
+            reasons: string[];
+            /** Recent Independent Correct Families */
+            recent_independent_correct_families: number;
+            /**
+             * State
+             * @enum {string}
+             */
+            state: "insufficient_evidence" | "developing" | "demonstrated";
+            /** Total Weight */
+            total_weight: number;
+            /** Weighted Accuracy */
+            weighted_accuracy: number | null;
         };
         /** OverviewChapter */
         OverviewChapter: {
@@ -7840,6 +7910,38 @@ export interface operations {
                     "application/json": {
                         [key: string]: string;
                     };
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    my_evidence_v1_me_evidence_get: {
+        parameters: {
+            query: {
+                grade: number;
+                subject: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EvidenceReport"];
                 };
             };
             /** @description Validation Error */
