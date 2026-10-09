@@ -26,7 +26,13 @@ class AvailabilityOut(BaseModel):
 class FormCreateIn(BaseModel):
     grade: Literal[11, 12]
     subject: str = Field(min_length=2, max_length=40)
-    chapter_ids: list[uuid.UUID] = Field(min_length=1, max_length=40)
+    scope: Literal["chapters", "half_book", "full_book", "combined"] = Field(
+        default="chapters",
+        description="chapters: the chosen chapters; half_book: first or second half of the book by chapter order; "
+        "full_book: every chapter of this class's book; combined: the same subject's Class XI and XII books",
+    )
+    half: Literal[1, 2] | None = Field(default=None, description="half_book only")
+    chapter_ids: list[uuid.UUID] = Field(default_factory=list, max_length=40)
     topic_ids: list[uuid.UUID] = Field(default_factory=list, max_length=100)
     question_count: int = Field(ge=1, le=100)
     timed_minutes: int | None = Field(default=None, ge=1, le=300)

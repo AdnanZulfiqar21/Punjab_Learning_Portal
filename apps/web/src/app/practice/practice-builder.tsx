@@ -19,14 +19,40 @@ export function PracticeBuilder({ grade, subject, chapters }: { grade: number; s
   }, undefined);
   const [selected, setSelected] = useState<string[]>([]);
   const [timed, setTimed] = useState(false);
-  const available = chapters.filter((c) => selected.includes(c.chapter_id)).reduce((n, c) => n + c.questions, 0);
+  // P09.S1.T2: halves follow the book's chapter order (first half = the first ceil(n/2) chapters).
+  const [scope, setScope] = useState<"chapters" | "half_1" | "half_2" | "full_book" | "combined">("chapters");
+  const split = Math.ceil(chapters.length / 2);
+  const inScope =
+    scope === "chapters" ? chapters.filter((c) => selected.includes(c.chapter_id)) : scope === "half_1" ? chapters.slice(0, split) : scope === "half_2" ? chapters.slice(split) : chapters;
+  // The other class's book isn't listed here, so a combined test can ask for more than this book alone holds.
+  const available = scope === "combined" ? 100 : inScope.reduce((n, c) => n + c.questions, 0);
   const field = "rounded-lg border border-border bg-surface px-3 py-2";
 
   return (
     <form action={action} className="space-y-6">
       <input type="hidden" name="grade" value={grade} />
       <input type="hidden" name="subject" value={subject} />
+      <input type="hidden" name="scope" value={scope.startsWith("half") ? "half_book" : scope} />
+      {scope.startsWith("half") && <input type="hidden" name="half" value={scope === "half_1" ? "1" : "2"} />}
       <fieldset className="space-y-2">
+        <legend className="font-medium">What to cover</legend>
+        <div className="flex flex-wrap gap-2">
+          {(
+            [
+              ["chapters", "Chosen chapters"],
+              ["half_1", "First half of the book"],
+              ["half_2", "Second half of the book"],
+              ["full_book", "Whole book"],
+              ["combined", "Class XI and XII together"],
+            ] as const
+          ).map(([value, label]) => (
+            <label key={value} className="flex items-center gap-2 rounded-lg border border-border bg-surface px-3 py-2">
+              <input type="radio" name="scope_choice" value={value} checked={scope === value} onChange={() => setScope(value)} /> {label}
+            </label>
+          ))}
+        </div>
+      </fieldset>
+      <fieldset className="space-y-2" hidden={scope !== "chapters"}>
         <legend className="font-medium">Chapters</legend>
         <ul className="divide-y divide-border rounded-xl border border-border bg-surface">
           {chapters.map((c) => (

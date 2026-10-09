@@ -2450,7 +2450,6 @@
               "type": "string"
             },
             "maxItems": 40,
-            "minItems": 1,
             "title": "Chapter Ids",
             "type": "array"
           },
@@ -2471,11 +2470,39 @@
             "title": "Grade",
             "type": "integer"
           },
+          "half": {
+            "anyOf": [
+              {
+                "enum": [
+                  1,
+                  2
+                ],
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "half_book only",
+            "title": "Half"
+          },
           "question_count": {
             "maximum": 100.0,
             "minimum": 1.0,
             "title": "Question Count",
             "type": "integer"
+          },
+          "scope": {
+            "default": "chapters",
+            "description": "chapters: the chosen chapters; half_book: first or second half of the book by chapter order; full_book: every chapter of this class's book; combined: the same subject's Class XI and XII books",
+            "enum": [
+              "chapters",
+              "half_book",
+              "full_book",
+              "combined"
+            ],
+            "title": "Scope",
+            "type": "string"
           },
           "subject": {
             "maxLength": 40,
@@ -2509,7 +2536,6 @@
         "required": [
           "grade",
           "subject",
-          "chapter_ids",
           "question_count"
         ],
         "title": "FormCreateIn",

@@ -3422,7 +3422,7 @@ export interface components {
         /** FormCreateIn */
         FormCreateIn: {
             /** Chapter Ids */
-            chapter_ids: string[];
+            chapter_ids?: string[];
             /**
              * Feedback Mode
              * @default deferred
@@ -3434,8 +3434,20 @@ export interface components {
              * @enum {integer}
              */
             grade: 11 | 12;
+            /**
+             * Half
+             * @description half_book only
+             */
+            half?: (1 | 2) | null;
             /** Question Count */
             question_count: number;
+            /**
+             * Scope
+             * @description chapters: the chosen chapters; half_book: first or second half of the book by chapter order; full_book: every chapter of this class's book; combined: the same subject's Class XI and XII books
+             * @default chapters
+             * @enum {string}
+             */
+            scope: "chapters" | "half_book" | "full_book" | "combined";
             /** Subject */
             subject: string;
             /** Timed Minutes */

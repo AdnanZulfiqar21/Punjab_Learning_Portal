@@ -16,12 +16,15 @@ export type BuilderState = { error?: string; available?: number } | undefined;
 
 export async function createPractice(_prev: BuilderState, form: FormData): Promise<BuilderState> {
   const t = await token("/practice");
-  const chapterIds = form.getAll("chapter_ids").map(String);
-  if (chapterIds.length === 0) return { error: "Choose at least one chapter." };
+  const scope = String(form.get("scope") ?? "chapters");
+  const chapterIds = scope === "chapters" ? form.getAll("chapter_ids").map(String) : [];
+  if (scope === "chapters" && chapterIds.length === 0) return { error: "Choose at least one chapter." };
   const timed = form.get("timed") === "on";
   const body = {
     grade: Number(form.get("grade")),
     subject: String(form.get("subject") ?? ""),
+    scope,
+    half: form.get("half") ? Number(form.get("half")) : null,
     chapter_ids: chapterIds,
     question_count: Number(form.get("question_count") ?? 10),
     timed_minutes: timed ? Number(form.get("timed_minutes") ?? 10) : null,

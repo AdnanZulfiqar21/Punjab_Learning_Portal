@@ -105,10 +105,14 @@ def create_form(
     question_count: int,
     timed_minutes: int | None,
     feedback_mode: str,
+    scope_mode: str = "chapters",
+    half: int | None = None,
 ) -> PracticeForm:
     req = {
         "grade": grade,
         "subject": subject,
+        "scope": scope_mode,
+        "half": half,
         "chapter_ids": sorted(map(str, chapter_ids)),
         "topic_ids": sorted(map(str, topic_ids)),
         "question_count": question_count,
@@ -129,14 +133,29 @@ def create_form(
     from portal_api.modules.access import service as access
 
     access.require_access(db, who.user.id, purpose="Practice tests")
-    valid = {c.id for c in _book_chapters(db, grade, subject)}
+    grades = [11, 12] if scope_mode == "combined" else [grade]
+    book = _book_chapters(db, grade, subject)
+    if scope_mode != "chapters" and topic_ids:
+        raise Unprocessable("Topics can only be chosen for a chapter test.")
+    if scope_mode == "full_book":
+        chapter_ids = [c.id for c in book]
+    elif scope_mode == "half_book":
+        if half not in (1, 2):
+            raise Unprocessable("Choose the first or second half of the book.")
+        split = (len(book) + 1) // 2  # by the book's own chapter order, never by page numbers
+        chapter_ids = [c.id for c in (book[:split] if half == 1 else book[split:])]
+    elif scope_mode == "combined":
+        chapter_ids = [c.id for g in grades for c in _book_chapters(db, g, subject)]
+    valid = {c.id for g in grades for c in _book_chapters(db, g, subject)}
     if not chapter_ids or not set(chapter_ids) <= valid:
         raise Unprocessable("Choose chapters from this class and subject's book.")
     if topic_ids:
         topics = db.scalars(select(Topic).where(Topic.id.in_(topic_ids), Topic.retired_at.is_(None))).all()
         if len(topics) != len(set(topic_ids)) or any(t.chapter_id not in set(chapter_ids) for t in topics):
             raise Unprocessable("Topics must belong to the chosen chapters.")
-    pool = _pool(db, grade, subject, chapter_ids, topic_ids)
+    pool: dict[uuid.UUID, list[tuple[ContentItem, ContentVersion]]] = {}
+    for g in grades:
+        pool.update(_pool(db, g, subject, chapter_ids, topic_ids))
     if len(pool) < question_count:
         raise Unprocessable(
             f"Only {len(pool)} approved question(s) are available for this selection; {question_count} were requested.",
@@ -155,7 +174,13 @@ def create_form(
         kind="practice",
         grade_number=grade,
         subject_code=subject,
-        scope={"chapter_ids": req["chapter_ids"], "topic_ids": req["topic_ids"]},
+        scope={
+            "mode": scope_mode,
+            "grades": grades,
+            "half": half,
+            "chapter_ids": sorted(map(str, chapter_ids)),
+            "topic_ids": req["topic_ids"],
+        },
         seed=seed,
         question_count=question_count,
         duration_s=timed_minutes * 60 if timed_minutes else None,
