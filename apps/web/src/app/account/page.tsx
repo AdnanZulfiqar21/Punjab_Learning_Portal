@@ -10,7 +10,8 @@ import { STUDIO_ROLES } from "@/lib/studio";
 import { getAccess } from "@/lib/access";
 import { PlanStatus } from "@/components/plan-status";
 import { NotificationPreferences } from "@/components/notification-preferences";
-import type { NotificationPreferences as Prefs } from "@portal/contracts";
+import type { AssistedAccess, NotificationPreferences as Prefs } from "@portal/contracts";
+import { AssistedAccessList } from "@/components/assisted-access";
 import { api } from "@/lib/session";
 
 export const metadata: Metadata = { title: "Your account", robots: { index: false } };
@@ -33,10 +34,11 @@ async function Account() {
   const user = await currentUser();
   if (!user) redirect("/signin?next=/account");
   const { me, token } = user;
-  const [sessions, access, prefs] = await Promise.all([
+  const [sessions, access, prefs, assists] = await Promise.all([
     listSessions(token),
     getAccess(token),
     api<Prefs>("/v1/me/notification-preferences", { token }),
+    api<AssistedAccess[]>("/v1/me/assisted-access", { token }),
   ]);
   const p = me.profile;
   return (
@@ -99,6 +101,16 @@ async function Account() {
             </Link>
           </div>
           <NotificationPreferences initial={prefs.data} />
+        </section>
+      )}
+
+      {assists.ok && assists.data.length > 0 && (
+        <section aria-labelledby="assist-heading" className="space-y-3">
+          <h2 id="assist-heading" className="font-semibold">
+            Support access to your activity
+          </h2>
+          <p className="text-sm text-muted">Times a support team member could see a summary of your activity to help with a request. They can never act as you.</p>
+          <AssistedAccessList items={assists.data} now={new Date().toISOString()} />
         </section>
       )}
 

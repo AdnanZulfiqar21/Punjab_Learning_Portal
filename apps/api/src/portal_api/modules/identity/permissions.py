@@ -38,6 +38,7 @@ class Permission(StrEnum):
     grant_entitlements = "grant_entitlements"
     review_trial_eligibility = "review_trial_eligibility"  # §16.7: private shared-device review and exceptions
     manage_help = "manage_help"  # P15.S2: draft help articles (publishing also needs MFA)
+    look_up_learners = "look_up_learners"  # P15.S3.T3: learner lookup, redacted timeline, assisted access
 
 
 ROLE_PERMISSIONS: dict[Role, frozenset[Permission]] = {
@@ -47,7 +48,12 @@ ROLE_PERMISSIONS: dict[Role, frozenset[Permission]] = {
     Role.academic_adjudicator: frozenset({Permission.adjudicate, Permission.review_content}),
     Role.publisher: frozenset({Permission.publish_content, Permission.quarantine_content}),
     Role.support: frozenset(
-        {Permission.view_support_context, Permission.review_trial_eligibility, Permission.manage_help}
+        {
+            Permission.view_support_context,
+            Permission.review_trial_eligibility,
+            Permission.manage_help,
+            Permission.look_up_learners,
+        }
     ),
     Role.finance: frozenset({Permission.finance_operations, Permission.grant_entitlements}),
     Role.platform_operator: frozenset({Permission.operate_platform}),
@@ -74,6 +80,7 @@ MFA_REQUIRED: frozenset[Permission] = frozenset(
         Permission.confirm_source_rights,
         Permission.grant_entitlements,
         Permission.review_trial_eligibility,
+        Permission.look_up_learners,
     }
 )
 

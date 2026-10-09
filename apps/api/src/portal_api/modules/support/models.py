@@ -73,3 +73,20 @@ class SupportAttachment(Base):
     width: Mapped[int] = mapped_column(Integer)
     height: Mapped[int] = mapped_column(Integer)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+
+
+class SupportAssistedAccess(Base):
+    """Explicit, time-limited, audited assisted access (P15.S3.T3): one support staff member may see result summaries
+    in a learner's activity timeline for at most 30 minutes, tied to one of that learner's open requests. The learner
+    is told and can end it. Read-only; it never lets staff act as the learner."""
+
+    __tablename__ = "support_assisted_access"
+    id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    user_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("app_user.id", ondelete="RESTRICT"), index=True)
+    staff_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("app_user.id", ondelete="RESTRICT"))
+    ticket_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("support_ticket.id", ondelete="RESTRICT"))
+    reason: Mapped[str] = mapped_column(Text)
+    granted_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+    expires_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+    revoked_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    revoked_by: Mapped[uuid.UUID | None] = mapped_column(ForeignKey("app_user.id", ondelete="RESTRICT"))

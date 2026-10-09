@@ -593,6 +593,85 @@
         "title": "AssignIn",
         "type": "object"
       },
+      "AssistIn": {
+        "properties": {
+          "minutes": {
+            "default": 15,
+            "maximum": 30.0,
+            "minimum": 5.0,
+            "title": "Minutes",
+            "type": "integer"
+          },
+          "reason": {
+            "maxLength": 500,
+            "minLength": 10,
+            "title": "Reason",
+            "type": "string"
+          },
+          "ticket_id": {
+            "description": "One of the learner's open requests",
+            "format": "uuid",
+            "title": "Ticket Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ticket_id",
+          "reason"
+        ],
+        "title": "AssistIn",
+        "type": "object"
+      },
+      "AssistOut": {
+        "properties": {
+          "expires_at": {
+            "format": "date-time",
+            "title": "Expires At",
+            "type": "string"
+          },
+          "granted_at": {
+            "format": "date-time",
+            "title": "Granted At",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "reason": {
+            "title": "Reason",
+            "type": "string"
+          },
+          "revoked_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Revoked At"
+          },
+          "ticket_id": {
+            "format": "uuid",
+            "title": "Ticket Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "ticket_id",
+          "reason",
+          "granted_at",
+          "expires_at",
+          "revoked_at"
+        ],
+        "title": "AssistOut",
+        "type": "object"
+      },
       "AttachmentOut": {
         "properties": {
           "created_at": {
@@ -3296,6 +3375,60 @@
         "title": "ItemSummary",
         "type": "object"
       },
+      "LearnerOut": {
+        "properties": {
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "display_name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Display Name"
+          },
+          "email": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Email"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "open_requests": {
+            "title": "Open Requests",
+            "type": "integer"
+          },
+          "status": {
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "email",
+          "display_name",
+          "status",
+          "created_at",
+          "open_requests"
+        ],
+        "title": "LearnerOut",
+        "type": "object"
+      },
       "LearnerRevision": {
         "properties": {
           "classification": {
@@ -3616,6 +3749,21 @@
           "positions"
         ],
         "title": "LinkedFromOut",
+        "type": "object"
+      },
+      "LookupIn": {
+        "properties": {
+          "email": {
+            "maxLength": 320,
+            "minLength": 3,
+            "title": "Email",
+            "type": "string"
+          }
+        },
+        "required": [
+          "email"
+        ],
+        "title": "LookupIn",
         "type": "object"
       },
       "ManifestIn": {
@@ -6622,6 +6770,63 @@
         "title": "TicketOut",
         "type": "object"
       },
+      "TimelineEventOut": {
+        "properties": {
+          "at": {
+            "format": "date-time",
+            "title": "At",
+            "type": "string"
+          },
+          "detail": {
+            "additionalProperties": true,
+            "title": "Detail",
+            "type": "object"
+          },
+          "kind": {
+            "title": "Kind",
+            "type": "string"
+          }
+        },
+        "required": [
+          "at",
+          "kind",
+          "detail"
+        ],
+        "title": "TimelineEventOut",
+        "type": "object"
+      },
+      "TimelineOut": {
+        "properties": {
+          "assisted_access": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AssistOut"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Your active assisted access, if any (adds result summaries)"
+          },
+          "events": {
+            "items": {
+              "$ref": "#/components/schemas/TimelineEventOut"
+            },
+            "title": "Events",
+            "type": "array"
+          },
+          "learner": {
+            "$ref": "#/components/schemas/LearnerOut"
+          }
+        },
+        "required": [
+          "learner",
+          "assisted_access",
+          "events"
+        ],
+        "title": "TimelineOut",
+        "type": "object"
+      },
       "TopicNode": {
         "properties": {
           "children": {
@@ -8841,6 +9046,67 @@
         ]
       }
     },
+    "/v1/me/assisted-access": {
+      "get": {
+        "operationId": "my_assisted_access_v1_me_assisted_access_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/AssistOut"
+                  },
+                  "title": "Response My Assisted Access V1 Me Assisted Access Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Times support had assisted access to your activity",
+        "tags": [
+          "support"
+        ]
+      }
+    },
+    "/v1/me/assisted-access/{access_id}": {
+      "delete": {
+        "operationId": "end_my_assisted_access_v1_me_assisted_access__access_id__delete",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "access_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Access Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "End support's assisted access now",
+        "tags": [
+          "support"
+        ]
+      }
+    },
     "/v1/me/consents": {
       "post": {
         "operationId": "accept_consent_v1_me_consents_post",
@@ -10242,6 +10508,179 @@
         "tags": [
           "identity",
           "sessions"
+        ]
+      }
+    },
+    "/v1/staff/support/assisted-access/{access_id}": {
+      "delete": {
+        "operationId": "end_assisted_access_v1_staff_support_assisted_access__access_id__delete",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "access_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Access Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "End your assisted access",
+        "tags": [
+          "support"
+        ]
+      }
+    },
+    "/v1/staff/support/learners/lookup": {
+      "post": {
+        "operationId": "find_learner_v1_staff_support_learners_lookup_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LookupIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LearnerOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Find a learner by exact email (support, MFA; audited)",
+        "tags": [
+          "support"
+        ]
+      }
+    },
+    "/v1/staff/support/learners/{user_id}/assisted-access": {
+      "post": {
+        "operationId": "grant_assisted_access_v1_staff_support_learners__user_id__assisted_access_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "user_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "User Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssistIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AssistOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Start time-limited assisted access for one of the learner's open requests (learner is told; audited)",
+        "tags": [
+          "support"
+        ]
+      }
+    },
+    "/v1/staff/support/learners/{user_id}/timeline": {
+      "get": {
+        "operationId": "learner_timeline_v1_staff_support_learners__user_id__timeline_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "user_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "User Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TimelineOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "A learner's redacted activity timeline, including trial decisions (support, MFA; audited)",
+        "tags": [
+          "support"
         ]
       }
     },

@@ -12,9 +12,9 @@ from sqlalchemy.orm import Session
 
 from portal_api.db import get_session
 from portal_api.errors import Forbidden
-from portal_api.modules.identity.deps import CurrentPrincipal, Principal
+from portal_api.modules.identity.deps import CurrentPrincipal, Principal, require
 from portal_api.modules.identity.permissions import Permission
-from portal_api.modules.support import service
+from portal_api.modules.support import lookup, service
 from portal_api.modules.support.models import SupportMessage, SupportTicket
 
 router = APIRouter(prefix="/v1", tags=["support"])
@@ -255,3 +255,126 @@ def get_screenshot(db: DB, who: CurrentPrincipal, ticket_id: uuid.UUID, attachme
             "Content-Disposition": "inline",
         },
     )
+
+
+# ------------------------------------------------------------------ support lookup and assisted access (P15.S3.T3)
+Lookup = Annotated[Principal, Depends(require(Permission.look_up_learners))]
+
+
+class LookupIn(BaseModel):
+    email: str = Field(min_length=3, max_length=320)
+
+
+class LearnerOut(BaseModel):
+    id: uuid.UUID
+    email: str | None
+    display_name: str | None
+    status: str
+    created_at: datetime
+    open_requests: int
+
+
+class AssistIn(BaseModel):
+    ticket_id: uuid.UUID = Field(description="One of the learner's open requests")
+    reason: str = Field(min_length=10, max_length=500)
+    minutes: int = Field(default=15, ge=5, le=lookup.MAX_ASSIST_MINUTES)
+
+
+class AssistOut(BaseModel):
+    id: uuid.UUID
+    ticket_id: uuid.UUID
+    reason: str
+    granted_at: datetime
+    expires_at: datetime
+    revoked_at: datetime | None
+
+
+class TimelineEventOut(BaseModel):
+    at: datetime
+    kind: str
+    detail: dict[str, Any]
+
+
+class TimelineOut(BaseModel):
+    learner: LearnerOut
+    assisted_access: AssistOut | None = Field(description="Your active assisted access, if any (adds result summaries)")
+    events: list[TimelineEventOut]
+
+
+def _learner_out(db: Session, u: Any) -> LearnerOut:
+    return LearnerOut(
+        id=u.id,
+        email=u.email,
+        display_name=u.display_name,
+        status=u.status,
+        created_at=u.created_at,
+        open_requests=lookup.open_requests(db, u.id),
+    )
+
+
+def _assist_out(a: Any) -> AssistOut:
+    return AssistOut(
+        id=a.id,
+        ticket_id=a.ticket_id,
+        reason=a.reason,
+        granted_at=a.granted_at,
+        expires_at=a.expires_at,
+        revoked_at=a.revoked_at,
+    )
+
+
+@router.post(
+    "/staff/support/learners/lookup",
+    response_model=LearnerOut,
+    summary="Find a learner by exact email (support, MFA; audited)",
+)
+def find_learner(body: LookupIn, db: DB, who: Lookup, response: Response) -> LearnerOut:
+    _private(response)
+    return _learner_out(db, lookup.find_learner(db, who, body.email))
+
+
+@router.get(
+    "/staff/support/learners/{user_id}/timeline",
+    response_model=TimelineOut,
+    summary="A learner's redacted activity timeline, including trial decisions (support, MFA; audited)",
+)
+def learner_timeline(user_id: uuid.UUID, db: DB, who: Lookup, response: Response) -> TimelineOut:
+    _private(response)
+    user, assist, events = lookup.timeline(db, who, user_id)
+    return TimelineOut(
+        learner=_learner_out(db, user),
+        assisted_access=_assist_out(assist) if assist else None,
+        events=[TimelineEventOut(**e) for e in events],
+    )
+
+
+@router.post(
+    "/staff/support/learners/{user_id}/assisted-access",
+    response_model=AssistOut,
+    status_code=201,
+    summary="Start time-limited assisted access for one of the learner's open requests (learner is told; audited)",
+)
+def grant_assisted_access(user_id: uuid.UUID, body: AssistIn, db: DB, who: Lookup) -> AssistOut:
+    return _assist_out(lookup.grant_assist(db, who, user_id, body.ticket_id, body.reason, body.minutes))
+
+
+@router.delete("/staff/support/assisted-access/{access_id}", status_code=204, summary="End your assisted access")
+def end_assisted_access(access_id: uuid.UUID, db: DB, who: Lookup) -> Response:
+    lookup.revoke_assist(db, who, access_id, as_learner=False)
+    return Response(status_code=204)
+
+
+@router.get(
+    "/me/assisted-access",
+    response_model=list[AssistOut],
+    summary="Times support had assisted access to your activity",
+)
+def my_assisted_access(db: DB, who: CurrentPrincipal, response: Response) -> list[AssistOut]:
+    _private(response)
+    return [_assist_out(a) for a in lookup.my_assists(db, who.user.id)]
+
+
+@router.delete("/me/assisted-access/{access_id}", status_code=204, summary="End support's assisted access now")
+def end_my_assisted_access(access_id: uuid.UUID, db: DB, who: CurrentPrincipal) -> Response:
+    lookup.revoke_assist(db, who, access_id, as_learner=True)
+    return Response(status_code=204)
