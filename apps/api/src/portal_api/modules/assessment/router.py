@@ -126,6 +126,8 @@ def create_form(
         idempotency_key=idempotency_key,
         grade=body.grade,
         subject=body.subject,
+        scope_mode=body.scope,
+        half=body.half,
         chapter_ids=body.chapter_ids,
         topic_ids=body.topic_ids,
         question_count=body.question_count,
