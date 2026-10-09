@@ -141,6 +141,57 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/admin/mock-sessions": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Schedule a mock window for the current published version of a test pattern */
+        post: operations["schedule_mock_v1_admin_mock_sessions_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/admin/mock-sessions/{session_id}/accommodations": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Give one learner extra minutes for one session (reason required; audited) */
+        post: operations["mock_accommodation_v1_admin_mock_sessions__session_id__accommodations_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/admin/mock-sessions/{session_id}/cancel": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Cancel a session before it starts */
+        post: operations["cancel_mock_session_v1_admin_mock_sessions__session_id__cancel_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/admin/role-grants/{grant_id}/revoke": {
         parameters: {
             query?: never;
@@ -773,6 +824,40 @@ export interface paths {
         post?: never;
         /** Remove a device from your trial */
         delete: operations["trial_device_remove_v1_me_trial_devices__device_id__delete"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/mock-sessions": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Scheduled mocks you can join */
+        get: operations["mock_sessions_v1_mock_sessions_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/mock-sessions/{session_id}/join": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Join a scheduled mock (once): builds your frozen form and starts the attempt */
+        post: operations["join_mock_session_v1_mock_sessions__session_id__join_post"];
+        delete?: never;
         options?: never;
         head?: never;
         patch?: never;
@@ -2584,6 +2669,15 @@ export interface components {
              */
             tier: "preview" | "premium";
         };
+        /** AccommodationIn */
+        AccommodationIn: {
+            /** Email */
+            email: string;
+            /** Extra Minutes */
+            extra_minutes: number;
+            /** Reason */
+            reason: string;
+        };
         /**
          * Actions
          * @description What the caller may do now. Advisory for the UI; the server re-checks every action.
@@ -3071,6 +3165,11 @@ export interface components {
             /** Source Id */
             source_id: string;
             subject: components["schemas"]["SubjectOut"];
+        };
+        /** CancelIn */
+        CancelIn: {
+            /** Reason */
+            reason: string;
         };
         /** CapacityIn */
         CapacityIn: {
@@ -4125,6 +4224,14 @@ export interface components {
             /** Working Version */
             working_version: number | null;
         };
+        /** JoinOut */
+        JoinOut: {
+            /**
+             * Attempt Id
+             * Format: uuid
+             */
+            attempt_id: string;
+        };
         /** LearnerOut */
         LearnerOut: {
             /**
@@ -4372,6 +4479,96 @@ export interface components {
             }[];
             /** Version */
             version: number;
+        };
+        /** MockSessionIn */
+        MockSessionIn: {
+            /**
+             * Entry Closes At
+             * Format: date-time
+             */
+            entry_closes_at: string;
+            /**
+             * Late Entry
+             * @default fixed_end
+             * @enum {string}
+             */
+            late_entry: "fixed_end" | "full_duration";
+            /** Profile Code */
+            profile_code: string;
+            /**
+             * Results At
+             * Format: date-time
+             */
+            results_at: string;
+            /**
+             * Starts At
+             * Format: date-time
+             */
+            starts_at: string;
+            /**
+             * Timezone
+             * @default Asia/Karachi
+             */
+            timezone: string;
+            /** Title */
+            title: string;
+            /**
+             * Window Closes At
+             * Format: date-time
+             */
+            window_closes_at: string;
+        };
+        /** MockSessionOut */
+        MockSessionOut: {
+            /** Duration Minutes */
+            duration_minutes: number;
+            /**
+             * Entry Closes At
+             * Format: date-time
+             */
+            entry_closes_at: string;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /**
+             * Late Entry
+             * @enum {string}
+             */
+            late_entry: "fixed_end" | "full_duration";
+            /** Profile Code */
+            profile_code: string;
+            /** Profile Name */
+            profile_name: string;
+            /** Profile Version */
+            profile_version: number;
+            /**
+             * Results At
+             * Format: date-time
+             */
+            results_at: string;
+            /**
+             * Starts At
+             * Format: date-time
+             */
+            starts_at: string;
+            /**
+             * State
+             * @enum {string}
+             */
+            state: "upcoming" | "open" | "entry_closed";
+            /** Timezone */
+            timezone: string;
+            /** Title */
+            title: string;
+            /** Total Questions */
+            total_questions: number;
+            /**
+             * Window Closes At
+             * Format: date-time
+             */
+            window_closes_at: string;
         };
         /** NoticeDecisionIn */
         NoticeDecisionIn: {
@@ -6659,6 +6856,105 @@ export interface operations {
             };
         };
     };
+    schedule_mock_v1_admin_mock_sessions_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["MockSessionIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MockSessionOut"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    mock_accommodation_v1_admin_mock_sessions__session_id__accommodations_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                session_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["AccommodationIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    cancel_mock_session_v1_admin_mock_sessions__session_id__cancel_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                session_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CancelIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     revoke_role_v1_admin_role_grants__grant_id__revoke_post: {
         parameters: {
             query?: never;
@@ -7823,6 +8119,57 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    mock_sessions_v1_mock_sessions_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MockSessionOut"][];
+                };
+            };
+        };
+    };
+    join_mock_session_v1_mock_sessions__session_id__join_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                session_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["JoinOut"];
+                };
             };
             /** @description Validation Error */
             422: {

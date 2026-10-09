@@ -44,3 +44,11 @@ export async function verifyVersion(versionId: string, note: string): Promise<Ou
 export async function publishVersion(versionId: string): Promise<Out> {
   return call(`/v1/admin/exam-profile-versions/${versionId}/publish`, "POST");
 }
+
+export async function scheduleSession(body: Record<string, string>): Promise<Out> {
+  return call("/v1/admin/mock-sessions", "POST", body);
+}
+
+export async function accommodate(sessionId: string, email: string, extraMinutes: number, reason: string): Promise<Out> {
+  return call(`/v1/admin/mock-sessions/${sessionId}/accommodations`, "POST", { email, extra_minutes: extraMinutes, reason });
+}

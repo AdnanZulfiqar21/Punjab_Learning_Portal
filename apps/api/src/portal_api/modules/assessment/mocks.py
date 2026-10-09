@@ -90,10 +90,25 @@ def readiness(db: Session, code: str) -> dict[str, Any]:
 
 
 def build(db: Session, who: Principal, code: str, idempotency_key: str) -> PracticeForm:
+    profile, version = _published(db, code)
+    return build_from(db, who, profile, version, idempotency_key=idempotency_key)
+
+
+def build_from(
+    db: Session,
+    who: Principal,
+    profile: ExamProfile,
+    version: ExamProfileVersion,
+    *,
+    idempotency_key: str,
+    duration_s: int | None = None,
+    extra_scope: dict[str, Any] | None = None,
+    allow_scheduled: bool = False,
+) -> PracticeForm:
+    """Build the frozen mock form. Scheduled sessions (SCHEDULE-01) pass their own time limit and window details."""
     from portal_api.modules.access import service as access
 
-    profile, version = _published(db, code)
-    req = {"mock": profile.code, "version_id": str(version.id)}
+    req = {"mock": profile.code, "version_id": str(version.id), "scope": extra_scope or {}}
     rhash = hashlib.sha256(json.dumps(req, sort_keys=True).encode()).hexdigest()
     existing = db.scalar(
         select(PracticeForm).where(
@@ -106,7 +121,7 @@ def build(db: Session, who: Principal, code: str, idempotency_key: str) -> Pract
         return existing
     access.require_access(db, who.user.id, purpose="Mock tests")
     rules = version.rules
-    if rules.get("solution_release") != "after_submission":
+    if rules.get("solution_release") != "after_submission" and not allow_scheduled:
         raise Conflict("Scheduled mocks with delayed solutions aren't available yet.", code_reason="MOCK_SCHEDULED")
     question_pool = rules.get("question_pool", "mock")
     pools = [(s, _section_pool(db, s["subject"], s["grades"], question_pool)) for s in rules["sections"]]
@@ -142,10 +157,11 @@ def build(db: Session, who: Principal, code: str, idempotency_key: str) -> Pract
             "year": version.year,
             "question_pool": question_pool,
             "sections": [],
+            **(extra_scope or {}),
         },
         seed=seed,
         question_count=total,
-        duration_s=int(rules["duration_minutes"]) * 60,
+        duration_s=duration_s if duration_s is not None else int(rules["duration_minutes"]) * 60,
         late_write_tolerance_ms=int(rules.get("late_write_tolerance_ms", 0)),
         feedback_mode="deferred",
         negative_marks=int(rules.get("negative_marks", 0)),

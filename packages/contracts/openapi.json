@@ -133,6 +133,35 @@
         "title": "AccessTierIn",
         "type": "object"
       },
+      "AccommodationIn": {
+        "properties": {
+          "email": {
+            "maxLength": 320,
+            "minLength": 3,
+            "title": "Email",
+            "type": "string"
+          },
+          "extra_minutes": {
+            "maximum": 240.0,
+            "minimum": 1.0,
+            "title": "Extra Minutes",
+            "type": "integer"
+          },
+          "reason": {
+            "maxLength": 1000,
+            "minLength": 10,
+            "title": "Reason",
+            "type": "string"
+          }
+        },
+        "required": [
+          "email",
+          "extra_minutes",
+          "reason"
+        ],
+        "title": "AccommodationIn",
+        "type": "object"
+      },
       "Actions": {
         "description": "What the caller may do now. Advisory for the UI; the server re-checks every action.",
         "properties": {
@@ -1233,6 +1262,21 @@
           "chapter_label"
         ],
         "title": "Breadcrumb",
+        "type": "object"
+      },
+      "CancelIn": {
+        "properties": {
+          "reason": {
+            "maxLength": 1000,
+            "minLength": 10,
+            "title": "Reason",
+            "type": "string"
+          }
+        },
+        "required": [
+          "reason"
+        ],
+        "title": "CancelIn",
         "type": "object"
       },
       "CapacityIn": {
@@ -3937,6 +3981,20 @@
         "title": "ItemSummary",
         "type": "object"
       },
+      "JoinOut": {
+        "properties": {
+          "attempt_id": {
+            "format": "uuid",
+            "title": "Attempt Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "attempt_id"
+        ],
+        "title": "JoinOut",
+        "type": "object"
+      },
       "LearnerOut": {
         "properties": {
           "created_at": {
@@ -4516,6 +4574,159 @@
           "scheduled"
         ],
         "title": "MockReadinessOut",
+        "type": "object"
+      },
+      "MockSessionIn": {
+        "properties": {
+          "entry_closes_at": {
+            "format": "date-time",
+            "title": "Entry Closes At",
+            "type": "string"
+          },
+          "late_entry": {
+            "default": "fixed_end",
+            "enum": [
+              "fixed_end",
+              "full_duration"
+            ],
+            "title": "Late Entry",
+            "type": "string"
+          },
+          "profile_code": {
+            "maxLength": 40,
+            "minLength": 2,
+            "title": "Profile Code",
+            "type": "string"
+          },
+          "results_at": {
+            "format": "date-time",
+            "title": "Results At",
+            "type": "string"
+          },
+          "starts_at": {
+            "format": "date-time",
+            "title": "Starts At",
+            "type": "string"
+          },
+          "timezone": {
+            "default": "Asia/Karachi",
+            "maxLength": 60,
+            "title": "Timezone",
+            "type": "string"
+          },
+          "title": {
+            "maxLength": 200,
+            "minLength": 3,
+            "title": "Title",
+            "type": "string"
+          },
+          "window_closes_at": {
+            "format": "date-time",
+            "title": "Window Closes At",
+            "type": "string"
+          }
+        },
+        "required": [
+          "profile_code",
+          "title",
+          "starts_at",
+          "entry_closes_at",
+          "window_closes_at",
+          "results_at"
+        ],
+        "title": "MockSessionIn",
+        "type": "object"
+      },
+      "MockSessionOut": {
+        "properties": {
+          "duration_minutes": {
+            "title": "Duration Minutes",
+            "type": "integer"
+          },
+          "entry_closes_at": {
+            "format": "date-time",
+            "title": "Entry Closes At",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "late_entry": {
+            "enum": [
+              "fixed_end",
+              "full_duration"
+            ],
+            "title": "Late Entry",
+            "type": "string"
+          },
+          "profile_code": {
+            "title": "Profile Code",
+            "type": "string"
+          },
+          "profile_name": {
+            "title": "Profile Name",
+            "type": "string"
+          },
+          "profile_version": {
+            "title": "Profile Version",
+            "type": "integer"
+          },
+          "results_at": {
+            "format": "date-time",
+            "title": "Results At",
+            "type": "string"
+          },
+          "starts_at": {
+            "format": "date-time",
+            "title": "Starts At",
+            "type": "string"
+          },
+          "state": {
+            "enum": [
+              "upcoming",
+              "open",
+              "entry_closed"
+            ],
+            "title": "State",
+            "type": "string"
+          },
+          "timezone": {
+            "title": "Timezone",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "total_questions": {
+            "title": "Total Questions",
+            "type": "integer"
+          },
+          "window_closes_at": {
+            "format": "date-time",
+            "title": "Window Closes At",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "profile_code",
+          "profile_name",
+          "profile_version",
+          "timezone",
+          "starts_at",
+          "entry_closes_at",
+          "window_closes_at",
+          "results_at",
+          "late_entry",
+          "duration_minutes",
+          "total_questions",
+          "state"
+        ],
+        "title": "MockSessionOut",
         "type": "object"
       },
       "NoticeDecisionIn": {
@@ -9970,6 +10181,143 @@
         ]
       }
     },
+    "/v1/admin/mock-sessions": {
+      "post": {
+        "operationId": "schedule_mock_v1_admin_mock_sessions_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MockSessionIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/MockSessionOut"
+                  },
+                  "title": "Response Schedule Mock V1 Admin Mock Sessions Post",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Schedule a mock window for the current published version of a test pattern",
+        "tags": [
+          "practice"
+        ]
+      }
+    },
+    "/v1/admin/mock-sessions/{session_id}/accommodations": {
+      "post": {
+        "operationId": "mock_accommodation_v1_admin_mock_sessions__session_id__accommodations_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "session_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Session Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AccommodationIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Give one learner extra minutes for one session (reason required; audited)",
+        "tags": [
+          "practice"
+        ]
+      }
+    },
+    "/v1/admin/mock-sessions/{session_id}/cancel": {
+      "post": {
+        "operationId": "cancel_mock_session_v1_admin_mock_sessions__session_id__cancel_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "session_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Session Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CancelIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Cancel a session before it starts",
+        "tags": [
+          "practice"
+        ]
+      }
+    },
     "/v1/admin/role-grants/{grant_id}/revoke": {
       "post": {
         "operationId": "revoke_role_v1_admin_role_grants__grant_id__revoke_post",
@@ -11599,6 +11947,74 @@
         "summary": "Remove a device from your trial",
         "tags": [
           "access"
+        ]
+      }
+    },
+    "/v1/mock-sessions": {
+      "get": {
+        "operationId": "mock_sessions_v1_mock_sessions_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/MockSessionOut"
+                  },
+                  "title": "Response Mock Sessions V1 Mock Sessions Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Scheduled mocks you can join",
+        "tags": [
+          "practice"
+        ]
+      }
+    },
+    "/v1/mock-sessions/{session_id}/join": {
+      "post": {
+        "operationId": "join_mock_session_v1_mock_sessions__session_id__join_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "session_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Session Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JoinOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Join a scheduled mock (once): builds your frozen form and starts the attempt",
+        "tags": [
+          "practice"
         ]
       }
     },

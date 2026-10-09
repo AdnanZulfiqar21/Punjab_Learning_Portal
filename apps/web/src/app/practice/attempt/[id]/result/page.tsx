@@ -28,6 +28,13 @@ async function Result({ id }: { id: string }) {
   if (!/^[0-9a-f-]{36}$/i.test(id)) notFound();
   const result = await getResult(user.token, id);
   if (result === null) notFound();
+  if (typeof result === "object" && "heldUntil" in result) {
+    return (
+      <Notice title="Your answers are saved">
+        Results for this scheduled mock are released on {new Date(result.heldUntil).toLocaleString("en-GB", { dateStyle: "full", timeStyle: "short" })}. Come back then.
+      </Notice>
+    );
+  }
   if (result === "pending") {
     return (
       <Notice title="Not submitted yet">

@@ -56,6 +56,14 @@ export async function startMock(code: string, idempotencyKey: string): Promise<{
   redirect(`/practice/attempt/${attempt.data.id}`);
 }
 
+/** P09.S2.T3: join a scheduled mock once and open the attempt. */
+export async function joinSession(id: string): Promise<{ error?: string } | undefined> {
+  const t = await token("/practice/mocks");
+  const res = await api<{ attempt_id: string }>(`/v1/mock-sessions/${encodeURIComponent(id)}/join`, { method: "POST", token: t });
+  if (!res.ok) return { error: (res.problem as Problem | null)?.detail ?? "Couldn't join this mock." };
+  redirect(`/practice/attempt/${res.data.attempt_id}`);
+}
+
 export type Op = { op_id: string; position: number; revision: number; option_id: string | null };
 
 export type SaveOutcome =

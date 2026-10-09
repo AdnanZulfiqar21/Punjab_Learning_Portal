@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
-import type { ExamProfileAdmin } from "@portal/contracts";
+import type { ExamProfileAdmin, MockSession } from "@portal/contracts";
 import { Badge, Breadcrumbs, Notice, SkeletonLines } from "@/components/ui";
 import { api, currentUser } from "@/lib/session";
 import { DraftEditor, NewProfile, RULES_TEMPLATE, VerifyPublish } from "./controls";
+import { Accommodation, ScheduleSession } from "./sessions";
 
 export const metadata: Metadata = { title: "Exam profiles", robots: { index: false } };
 
@@ -33,6 +34,7 @@ async function Profiles() {
     return <Notice tone="warn" title="Not available">Only the owner, admins and academic adjudicators manage exam profiles.</Notice>;
   }
   const res = await api<ExamProfileAdmin[]>("/v1/admin/exam-profiles", { token: user.token });
+  const sessions = await api<MockSession[]>("/v1/mock-sessions", { token: user.token });
   if (!res.ok) {
     return (
       <Notice tone="warn" title={res.status === 403 ? "Multi-factor sign-in needed" : "Couldn't load profiles"}>
@@ -68,6 +70,25 @@ async function Profiles() {
                 </li>
               ))}
             </ul>
+            {p.versions.some((v) => v.status === "published") && (
+              <details className="text-sm">
+                <summary className="cursor-pointer font-medium">Schedule a mock window</summary>
+                <div className="pt-2">
+                  <ScheduleSession code={p.code} />
+                </div>
+              </details>
+            )}
+            {sessions.ok &&
+              sessions.data
+                .filter((s) => s.profile_code === p.code)
+                .map((s) => (
+                  <div key={s.id} className="space-y-1 rounded-lg border border-border p-3 text-sm">
+                    <p className="font-medium">
+                      {s.title} · {s.state.replace("_", " ")}
+                    </p>
+                    <Accommodation sessionId={s.id} />
+                  </div>
+                ))}
             <details className="text-sm">
               <summary className="cursor-pointer font-medium">{draft ? `Edit draft version ${draft.version}` : "Start a new version"}</summary>
               <div className="pt-2">
