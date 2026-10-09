@@ -542,6 +542,12 @@ def _update(db: Session, who: Principal, batch: ContentImportBatch, r: ContentIm
     )
 
 
+def csv_safe(value: object) -> str:
+    """Neutralise a cell a spreadsheet would run as a formula (P16.S4.T2: CSV formula injection)."""
+    text = "" if value is None else str(value)
+    return "'" + text if text.startswith(("=", "+", "-", "@", "\t", "\r")) else text
+
+
 def report_csv(db: Session, who: Principal, batch_id: uuid.UUID) -> str:
     """The downloadable correction report: one line per row with its action, errors and warnings."""
     batch = _own_batch(db, who, batch_id)
@@ -550,6 +556,16 @@ def report_csv(db: Session, who: Principal, batch_id: uuid.UUID) -> str:
     w.writerow(["row", "external_id", "action", "errors", "warnings", "item_id"])
     for r in rows(db, batch.id):
         w.writerow(
-            [r.row_number, r.external_id or "", r.action, " | ".join(r.errors), " | ".join(r.warnings), r.item_id or ""]
+            [
+                csv_safe(c)
+                for c in (
+                    r.row_number,
+                    r.external_id,
+                    r.action,
+                    " | ".join(r.errors),
+                    " | ".join(r.warnings),
+                    r.item_id,
+                )
+            ]
         )
     return buf.getvalue()
