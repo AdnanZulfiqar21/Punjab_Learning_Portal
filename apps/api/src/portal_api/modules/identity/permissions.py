@@ -39,13 +39,16 @@ class Permission(StrEnum):
     review_trial_eligibility = "review_trial_eligibility"  # §16.7: private shared-device review and exceptions
     manage_help = "manage_help"  # P15.S2: draft help articles (publishing also needs MFA)
     look_up_learners = "look_up_learners"  # P15.S3.T3: learner lookup, redacted timeline, assisted access
+    manage_exam_profiles = "manage_exam_profiles"  # P05.S3: draft, verify (two people) and publish exam profiles
 
 
 ROLE_PERMISSIONS: dict[Role, frozenset[Permission]] = {
     Role.student: frozenset({Permission.read_own_account, Permission.edit_own_profile}),
     Role.content_author: frozenset({Permission.draft_content}),
     Role.subject_reviewer: frozenset({Permission.review_content}),
-    Role.academic_adjudicator: frozenset({Permission.adjudicate, Permission.review_content}),
+    Role.academic_adjudicator: frozenset(
+        {Permission.adjudicate, Permission.review_content, Permission.manage_exam_profiles}
+    ),
     Role.publisher: frozenset({Permission.publish_content, Permission.quarantine_content}),
     Role.support: frozenset(
         {
@@ -63,6 +66,7 @@ ROLE_PERMISSIONS: dict[Role, frozenset[Permission]] = {
             Permission.view_audit,
             Permission.confirm_source_rights,
             Permission.grant_entitlements,
+            Permission.manage_exam_profiles,
         }
     ),
 }
@@ -81,6 +85,7 @@ MFA_REQUIRED: frozenset[Permission] = frozenset(
         Permission.grant_entitlements,
         Permission.review_trial_eligibility,
         Permission.look_up_learners,
+        Permission.manage_exam_profiles,
     }
 )
 

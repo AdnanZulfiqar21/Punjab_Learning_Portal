@@ -55,6 +55,92 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/admin/exam-profile-versions/{version_id}/publish": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Publish a verified version; the previous one is retired for new mocks only */
+        post: operations["publish_profile_version_v1_admin_exam_profile_versions__version_id__publish_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/admin/exam-profile-versions/{version_id}/verify": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Record one of two independent verifications (not the author) */
+        post: operations["verify_profile_version_v1_admin_exam_profile_versions__version_id__verify_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/admin/exam-profiles": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Exam profiles and all versions */
+        get: operations["list_exam_profiles_v1_admin_exam_profiles_get"];
+        put?: never;
+        /** New exam profile */
+        post: operations["create_exam_profile_v1_admin_exam_profiles_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/admin/exam-profiles/{profile_id}/versions": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Start a new draft version (duration, marking, correction policy, sections; source and year) */
+        post: operations["new_profile_version_v1_admin_exam_profiles__profile_id__versions_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/admin/exam-profiles/{profile_id}/versions/{version_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** Edit a draft (clears its verifications) */
+        put: operations["edit_profile_version_v1_admin_exam_profiles__profile_id__versions__version_id__put"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/admin/role-grants/{grant_id}/revoke": {
         parameters: {
             query?: never;
@@ -239,6 +325,23 @@ export interface paths {
          *     others see the title marked locked. Free previews are readable by everyone.
          */
         get: operations["chapter_lessons_v1_chapters__chapter_id__lessons_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/exam-profiles": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Published official test patterns */
+        get: operations["published_exam_profiles_v1_exam_profiles_get"];
         put?: never;
         post?: never;
         delete?: never;
@@ -3385,6 +3488,34 @@ export interface components {
             /** Reason */
             reason: string;
         };
+        /** ExamProfileIn */
+        ExamProfileIn: {
+            /** Code */
+            code: string;
+            /**
+             * Eligibility Note
+             * @default
+             */
+            eligibility_note: string;
+            /** Name */
+            name: string;
+        };
+        /** ExamProfileOut */
+        ExamProfileOut: {
+            /** Code */
+            code: string;
+            /** Eligibility Note */
+            eligibility_note: string;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Name */
+            name: string;
+            /** Versions */
+            versions: components["schemas"]["ProfileVersionOut"][];
+        };
         /** ExceptionIn */
         ExceptionIn: {
             /** Days */
@@ -4450,6 +4581,65 @@ export interface components {
             target_year?: number | null;
             /** Updated At */
             updated_at?: string | null;
+        };
+        /** ProfileVersionIn */
+        ProfileVersionIn: {
+            /** Rules */
+            rules: {
+                [key: string]: unknown;
+            };
+            /** Year */
+            year: number;
+        };
+        /** ProfileVersionOut */
+        ProfileVersionOut: {
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Published At */
+            published_at: string | null;
+            /** Rules */
+            rules: {
+                [key: string]: unknown;
+            };
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "draft" | "verified" | "published" | "retired";
+            /** Total Questions */
+            total_questions: number;
+            /** Verifications */
+            verifications: number;
+            /** Version */
+            version: number;
+            /** Year */
+            year: number;
+        };
+        /** PublishedProfileOut */
+        PublishedProfileOut: {
+            /** Code */
+            code: string;
+            /** Duration Minutes */
+            duration_minutes: number;
+            /** Eligibility Note */
+            eligibility_note: string;
+            /** Name */
+            name: string;
+            /** Sections */
+            sections: {
+                [key: string]: unknown;
+            }[];
+            /** Source Url */
+            source_url: string;
+            /** Total Questions */
+            total_questions: number;
+            /** Version */
+            version: number;
+            /** Year */
+            year: number;
         };
         /** PushTokenIn */
         PushTokenIn: {
@@ -5696,6 +5886,14 @@ export interface components {
             /** Warnings */
             warnings: string[];
         };
+        /** VerifyIn */
+        VerifyIn: {
+            /**
+             * Note
+             * @description What you checked against the official source
+             */
+            note: string;
+        };
         /** VersionOut */
         VersionOut: {
             /** Approved At */
@@ -6171,6 +6369,196 @@ export interface operations {
             };
         };
     };
+    publish_profile_version_v1_admin_exam_profile_versions__version_id__publish_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                version_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProfileVersionOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    verify_profile_version_v1_admin_exam_profile_versions__version_id__verify_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                version_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["VerifyIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProfileVersionOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_exam_profiles_v1_admin_exam_profiles_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ExamProfileOut"][];
+                };
+            };
+        };
+    };
+    create_exam_profile_v1_admin_exam_profiles_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ExamProfileIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ExamProfileOut"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    new_profile_version_v1_admin_exam_profiles__profile_id__versions_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                profile_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ProfileVersionIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProfileVersionOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    edit_profile_version_v1_admin_exam_profiles__profile_id__versions__version_id__put: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                profile_id: string;
+                version_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ProfileVersionIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProfileVersionOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     revoke_role_v1_admin_role_grants__grant_id__revoke_post: {
         parameters: {
             query?: never;
@@ -6545,6 +6933,26 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    published_exam_profiles_v1_exam_profiles_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PublishedProfileOut"][];
                 };
             };
         };
