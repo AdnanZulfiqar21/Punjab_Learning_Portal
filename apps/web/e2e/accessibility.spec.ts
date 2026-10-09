@@ -11,11 +11,20 @@ async function audit(page: Page, path: string) {
   await expect(page.locator("main")).toBeVisible();
   // Let streamed sections settle, without depending on the network ever going fully idle.
   await page.waitForLoadState("networkidle", { timeout: 5_000 }).catch(() => undefined);
-  const results = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"]).analyze();
+  let results: Awaited<ReturnType<AxeBuilder["analyze"]>> | null = null;
+  for (let tries = 0; tries < 3 && !results; tries++) {
+    try {
+      results = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"]).analyze();
+    } catch (e) {
+      if (!String(e).includes("Execution context was destroyed")) throw e;
+      await page.waitForLoadState("load"); // the page navigated on its own (e.g. a client redirect): scan where it landed
+    }
+  }
+  if (!results) throw new Error(`${path}: the page kept navigating (now at ${page.url()})`);
   const blocking = results.violations
     .filter((v) => v.impact === "serious" || v.impact === "critical")
     .map((v) => `${v.id} (${v.impact}): ${v.help} — ${v.nodes.map((n) => n.target.join(" ")).slice(0, 3).join(" | ")}`);
-  expect(blocking, `${path} accessibility violations`).toEqual([]);
+  expect(blocking, `${path} (landed on ${page.url()}) accessibility violations`).toEqual([]);
 }
 
 test.describe.configure({ mode: "serial" });
