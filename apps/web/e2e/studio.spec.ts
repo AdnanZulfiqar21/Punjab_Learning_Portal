@@ -244,5 +244,5 @@ test("an author previews an import, sees row errors, and commits valid rows as d
   await author.getByRole("button", { name: "Import 1 row as drafts" }).click();
   await expect(author.getByRole("heading", { name: /^Imported:/ })).toBeVisible(AUTH);
   await rows.getByRole("link", { name: "Open" }).click();
-  await expect(author.getByText("Draft", { exact: true }).first()).toBeVisible(AUTH);
+  await expect(author.getByText(/^Draft · version 1/)).toBeVisible(AUTH);
 });
