@@ -70,8 +70,8 @@ def test_switching_new_practice_tests_off_keeps_active_attempts_going(
     assert _form(client, learner, physics["chapter"]).status_code == 201
     with get_sessionmaker()() as db:
         actions = db.scalars(
-            select(AuditEvent.details).where(
-                AuditEvent.action == "ops.feature_switched", AuditEvent.target_id == "new_practice_tests"
-            )
+            select(AuditEvent.details)
+            .where(AuditEvent.action == "ops.feature_switched", AuditEvent.target_id == "new_practice_tests")
+            .order_by(AuditEvent.at, AuditEvent.id)
         ).all()
     assert [d["enabled"] for d in actions][-2:] == [False, True]
