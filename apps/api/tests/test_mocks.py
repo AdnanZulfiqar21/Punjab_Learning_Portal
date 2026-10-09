@@ -29,6 +29,7 @@ def _publish_profile(client: TestClient, db: Session, sections: list[dict[str, A
         "negative_marks": 1,
         "marks_per_question": 2,
         "sections": sections,
+        "question_pool": "any",
         **rules,
     }
     vid = client.post(
@@ -61,7 +62,7 @@ def test_a_mock_freezes_the_profile_and_its_policies(client: TestClient, db: Ses
     form = r.json()
     assert form["question_count"] == 3 and form["duration_s"] == 1800 and form["negative_marks"] == 1
     assert form["late_write_tolerance_ms"] == 0 and form["scope"]["mode"] == "mock" and form["scope"]["profile"] == code
-    assert form["scope"]["sections"] == [{"subject": "physics", "grades": [11], "from": 1, "to": 3}]
+    assert form["scope"]["sections"] == [{"subject": "physics", "grades": [11], "from": 1, "to": 3, "reused": 0}]
     assert _mock(client, learner, code, key).json()["id"] == form["id"]  # idempotent
     attempt = client.post(f"/v1/practice/forms/{form['id']}/attempt", headers=learner.headers).json()
     assert len(attempt["items"]) == 3 and all(i["marks"] == 2 for i in attempt["items"]) and attempt["deadline_at"]

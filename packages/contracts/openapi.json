@@ -187,6 +187,11 @@
             "title": "Set Access Tier",
             "type": "boolean"
           },
+          "set_question_pool": {
+            "default": false,
+            "title": "Set Question Pool",
+            "type": "boolean"
+          },
           "submit": {
             "title": "Submit",
             "type": "boolean"
@@ -3453,6 +3458,16 @@
             "title": "Quarantine Levels",
             "type": "array"
           },
+          "question_pool": {
+            "default": "practice",
+            "description": "Questions: reserved for mocks (never in practice tests) or practice",
+            "enum": [
+              "practice",
+              "mock"
+            ],
+            "title": "Question Pool",
+            "type": "string"
+          },
           "review_checklist": {
             "description": "Checks a reviewer must confirm to approve this kind",
             "items": {
@@ -3825,6 +3840,16 @@
               }
             ],
             "title": "Quarantine Level"
+          },
+          "question_pool": {
+            "default": "practice",
+            "description": "Questions: reserved for mocks (never in practice tests) or practice",
+            "enum": [
+              "practice",
+              "mock"
+            ],
+            "title": "Question Pool",
+            "type": "string"
           },
           "state": {
             "enum": [
@@ -5416,6 +5441,30 @@
           "reason"
         ],
         "title": "QuarantineIn",
+        "type": "object"
+      },
+      "QuestionPoolIn": {
+        "properties": {
+          "pool": {
+            "enum": [
+              "practice",
+              "mock"
+            ],
+            "title": "Pool",
+            "type": "string"
+          },
+          "reason": {
+            "maxLength": 1000,
+            "minLength": 5,
+            "title": "Reason",
+            "type": "string"
+          }
+        },
+        "required": [
+          "pool",
+          "reason"
+        ],
+        "title": "QuestionPoolIn",
         "type": "object"
       },
       "QuestionResult": {
@@ -13985,6 +14034,59 @@
           }
         },
         "summary": "Quarantine",
+        "tags": [
+          "studio"
+        ]
+      }
+    },
+    "/v1/studio/items/{item_id}/question-pool": {
+      "post": {
+        "operationId": "question_pool_v1_studio_items__item_id__question_pool_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "item_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Item Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/QuestionPoolIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ItemDetail"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Reserve a question for mocks or return it to practice (publishers, MFA, audited with a reason)",
         "tags": [
           "studio"
         ]

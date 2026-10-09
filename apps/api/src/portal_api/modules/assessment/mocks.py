@@ -42,13 +42,24 @@ from portal_api.modules.identity.deps import Principal
 Pool = dict[uuid.UUID, list[tuple[ContentItem, ContentVersion]]]
 
 
-def _section_pool(db: Session, subject: str, grades: list[int]) -> Pool:
+def _section_pool(db: Session, subject: str, grades: list[int], question_pool: str) -> Pool:
     pool: Pool = {}
     for g in grades:
         chapters = [c.id for c in forms._book_chapters(db, g, subject)]
         if chapters:
-            pool.update(forms._pool(db, g, subject, chapters, []))
+            pool.update(forms._pool(db, g, subject, chapters, [], question_pool))
     return pool
+
+
+def _seen_families(db: Session, user_id: uuid.UUID) -> set[uuid.UUID]:
+    """Question families this learner has already met in earlier mocks (exposure, P08.S3.T3)."""
+    return set(
+        db.scalars(
+            select(FormItem.family_id)
+            .join(PracticeForm, PracticeForm.id == FormItem.form_id)
+            .where(PracticeForm.owner_id == user_id, PracticeForm.kind == "mock")
+        )
+    )
 
 
 def _published(db: Session, code: str) -> tuple[ExamProfile, ExamProfileVersion]:
@@ -67,7 +78,7 @@ def readiness(db: Session, code: str) -> dict[str, Any]:
     profile, version = _published(db, code)
     sections = []
     for s in version.rules["sections"]:
-        available = len(_section_pool(db, s["subject"], s["grades"]))
+        available = len(_section_pool(db, s["subject"], s["grades"], version.rules.get("question_pool", "mock")))
         sections.append({**s, "available": available, "enough": available >= int(s["questions"])})
     return {
         "code": profile.code,
@@ -97,7 +108,8 @@ def build(db: Session, who: Principal, code: str, idempotency_key: str) -> Pract
     rules = version.rules
     if rules.get("solution_release") != "after_submission":
         raise Conflict("Scheduled mocks with delayed solutions aren't available yet.", code_reason="MOCK_SCHEDULED")
-    pools = [(s, _section_pool(db, s["subject"], s["grades"])) for s in rules["sections"]]
+    question_pool = rules.get("question_pool", "mock")
+    pools = [(s, _section_pool(db, s["subject"], s["grades"], question_pool)) for s in rules["sections"]]
     short = [
         {"subject": s["subject"], "grades": s["grades"], "required": int(s["questions"]), "available": len(p)}
         for s, p in pools
@@ -128,6 +140,7 @@ def build(db: Session, who: Principal, code: str, idempotency_key: str) -> Pract
             "profile_version_id": str(version.id),
             "profile_version": version.version,
             "year": version.year,
+            "question_pool": question_pool,
             "sections": [],
         },
         seed=seed,
@@ -141,9 +154,16 @@ def build(db: Session, who: Principal, code: str, idempotency_key: str) -> Pract
     db.add(form)
     position = 0
     sections = []
+    seen = _seen_families(db, who.user.id)
     for s, pool in pools:
         start = position + 1
-        for family in rng.sample(sorted(pool, key=str), int(s["questions"])):
+        n = int(s["questions"])
+        unseen = sorted((f for f in pool if f not in seen), key=str)
+        picked = rng.sample(unseen, min(n, len(unseen)))
+        reused = n - len(picked)
+        if reused:  # not enough new questions: reuse some already seen, and say so on the form
+            picked += rng.sample(sorted((f for f in pool if f in seen), key=str), reused)
+        for family in picked:
             position += 1
             item, cv = rng.choice(sorted(pool[family], key=lambda iv: str(iv[0].id)))
             option_ids = [o["id"] for o in cv.body["options"]]
@@ -160,7 +180,9 @@ def build(db: Session, who: Principal, code: str, idempotency_key: str) -> Pract
                     option_order=option_ids,
                 )
             )
-        sections.append({"subject": s["subject"], "grades": s["grades"], "from": start, "to": position})
+        sections.append(
+            {"subject": s["subject"], "grades": s["grades"], "from": start, "to": position, "reused": reused}
+        )
     form.scope = {**form.scope, "sections": sections}
     try:
         db.commit()

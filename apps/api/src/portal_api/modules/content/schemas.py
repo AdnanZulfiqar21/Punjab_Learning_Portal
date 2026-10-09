@@ -51,6 +51,11 @@ class ReviewIn(BaseModel):
     )
 
 
+class QuestionPoolIn(BaseModel):
+    pool: Literal["practice", "mock"]
+    reason: str = Field(min_length=5, max_length=1000)
+
+
 class AccessTierIn(BaseModel):
     tier: Literal["preview", "premium"]
     reason: str = Field(min_length=5, max_length=1000)
@@ -135,6 +140,9 @@ class ItemSummary(BaseModel):
     state: ItemStateName
     availability: AvailabilityName
     access_tier: Literal["preview", "premium"] = Field(description="Lessons: free preview or needs a plan (R07)")
+    question_pool: Literal["practice", "mock"] = Field(
+        default="practice", description="Questions: reserved for mocks (never in practice tests) or practice"
+    )
     grade_number: int
     subject_code: str
     chapter_id: uuid.UUID
@@ -170,6 +178,7 @@ class Actions(BaseModel):
     change_quarantine_level: bool = False  # confirm or re-classify a quarantined question's defect (§5.7)
     correct_score: bool = False  # record a VOID/KEY_ERROR score correction (adjudicators, MFA)
     rollback: bool = False  # put the previously published version back (publishers, MFA)
+    set_question_pool: bool = False  # reserve a question for mocks or return it to practice (publishers, MFA)
 
 
 class ItemDetail(ItemSummary):

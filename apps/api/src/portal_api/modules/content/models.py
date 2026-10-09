@@ -91,6 +91,7 @@ class ContentItem(Base):
         Index("ix_content_item_queue", "state", "grade_number", "subject_code"),
         Index("ix_content_item_live", "chapter_id", postgresql_where=text("availability = 'live'")),
         CheckConstraint("access_tier in ('preview','premium')", name="content_item_access_tier"),
+        CheckConstraint("question_pool in ('practice','mock')", name="content_item_question_pool"),
     )
     id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     kind: Mapped[str] = mapped_column(String(20))
@@ -105,6 +106,8 @@ class ContentItem(Base):
     # Review R07: lessons are premium (needs an active plan or trial) unless a publisher explicitly marks a free
     # preview, with a recorded reason. Which lessons are previews is a product decision (ACCESS-02).
     access_tier: Mapped[str] = mapped_column(String(10), default="premium", server_default="premium")
+    # P08.S3.T3: questions reserved for mocks never appear in practice tests (publisher decision, audited).
+    question_pool: Mapped[str] = mapped_column(String(10), default="practice", server_default="practice")
     created_by: Mapped[uuid.UUID] = mapped_column(ForeignKey("app_user.id", ondelete="RESTRICT"))
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
     updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())

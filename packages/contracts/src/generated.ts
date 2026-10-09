@@ -1668,6 +1668,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/studio/items/{item_id}/question-pool": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Reserve a question for mocks or return it to practice (publishers, MFA, audited with a reason) */
+        post: operations["question_pool_v1_studio_items__item_id__question_pool_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/studio/items/{item_id}/release": {
         parameters: {
             query?: never;
@@ -2605,6 +2622,11 @@ export interface components {
             rollback: boolean;
             /** Set Access Tier */
             set_access_tier: boolean;
+            /**
+             * Set Question Pool
+             * @default false
+             */
+            set_question_pool: boolean;
             /** Submit */
             submit: boolean;
             /** Withdraw */
@@ -3947,6 +3969,13 @@ export interface components {
              */
             quarantine_levels: string[];
             /**
+             * Question Pool
+             * @description Questions: reserved for mocks (never in practice tests) or practice
+             * @default practice
+             * @enum {string}
+             */
+            question_pool: "practice" | "mock";
+            /**
              * Review Checklist
              * @description Checks a reviewer must confirm to approve this kind
              */
@@ -4068,6 +4097,13 @@ export interface components {
             published_version: number | null;
             /** Quarantine Level */
             quarantine_level: ("SOFT" | "VOID" | "KEY_ERROR") | null;
+            /**
+             * Question Pool
+             * @description Questions: reserved for mocks (never in practice tests) or practice
+             * @default practice
+             * @enum {string}
+             */
+            question_pool: "practice" | "mock";
             /**
              * State
              * @enum {string}
@@ -4712,6 +4748,16 @@ export interface components {
              * @description Required for questions (§5.7); not used for lessons
              */
             level?: ("SOFT" | "VOID" | "KEY_ERROR") | null;
+            /** Reason */
+            reason: string;
+        };
+        /** QuestionPoolIn */
+        QuestionPoolIn: {
+            /**
+             * Pool
+             * @enum {string}
+             */
+            pool: "practice" | "mock";
             /** Reason */
             reason: string;
         };
@@ -9445,6 +9491,41 @@ export interface operations {
         requestBody: {
             content: {
                 "application/json": components["schemas"]["QuarantineIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ItemDetail"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    question_pool_v1_studio_items__item_id__question_pool_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                item_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["QuestionPoolIn"];
             };
         };
         responses: {

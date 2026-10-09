@@ -29,6 +29,7 @@ from portal_api.modules.content.schemas import (
     ItemSummary,
     LessonOut,
     QuarantineIn,
+    QuestionPoolIn,
     ReviewIn,
     ReviewOut,
     RightsIn,
@@ -156,6 +157,7 @@ def _summary_fields(
         "parent_item_id": item.parent_item_id,
         "quarantine_level": item.quarantine_level,
         "access_tier": item.access_tier,
+        "question_pool": item.question_pool,
     }
 
 
@@ -220,6 +222,7 @@ def _detail(db: Session, item: ContentItem, who: Principal) -> ItemDetail:
         and mfa
         and item.availability == Availability.quarantined.value
         and bool(kinds.get(item.kind).quarantine_levels),
+        set_question_pool=Permission.publish_content in perms and mfa and not retired and item.kind == "mcq",
         rollback=Permission.publish_content in perms
         and mfa
         and not retired
@@ -449,6 +452,15 @@ def quarantine(db: DB, who: Quarantiner, item_id: uuid.UUID, body: QuarantineIn)
 )
 def access_tier(db: DB, who: Publisher, item_id: uuid.UUID, body: AccessTierIn) -> ItemDetail:
     return _detail(db, workflow.set_access_tier(db, who, item_id, body.tier, body.reason), who)
+
+
+@router.post(
+    "/items/{item_id}/question-pool",
+    response_model=ItemDetail,
+    summary="Reserve a question for mocks or return it to practice (publishers, MFA, audited with a reason)",
+)
+def question_pool(db: DB, who: Publisher, item_id: uuid.UUID, body: QuestionPoolIn) -> ItemDetail:
+    return _detail(db, workflow.set_question_pool(db, who, item_id, body.pool, body.reason), who)
 
 
 @router.post("/items/{item_id}/release", response_model=ItemDetail)

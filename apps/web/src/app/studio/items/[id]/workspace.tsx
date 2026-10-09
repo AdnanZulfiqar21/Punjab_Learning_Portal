@@ -9,6 +9,7 @@ import {
   quarantineItem,
   recordScoreCorrection,
   rollbackItem,
+  setQuestionPool,
   setAccessTier,
   releaseItem,
   retireItem,
@@ -467,7 +468,7 @@ function ActionsPanel({ item, myId, flush }: { item: StudioItem; myId: string; f
     });
   }
 
-  const reasonNeeded = a.revise || a.quarantine || a.release || a.retire || a.set_access_tier || a.change_quarantine_level || a.correct_score || a.rollback;
+  const reasonNeeded = a.revise || a.quarantine || a.release || a.retire || a.set_access_tier || a.change_quarantine_level || a.correct_score || a.rollback || a.set_question_pool;
   const publishedOptions = ((item.published?.body as { options?: { id: string }[] } | undefined)?.options ?? []).map((o) => o.id);
   const commentNeeded = a.review || a.submit;
   const btn = "w-full rounded-lg px-3 py-2 text-sm font-medium disabled:opacity-50";
@@ -611,6 +612,16 @@ function ActionsPanel({ item, myId, flush }: { item: StudioItem; myId: string; f
         {a.rollback && (
           <button type="button" className={secondary} disabled={pending || short} onClick={() => run(() => rollbackItem(item.id, text.trim()))}>
             Roll back to the previous version
+          </button>
+        )}
+        {a.set_question_pool && (
+          <button
+            type="button"
+            className={secondary}
+            disabled={pending || short}
+            onClick={() => run(() => setQuestionPool(item.id, item.question_pool === "mock" ? "practice" : "mock", text.trim()))}
+          >
+            {item.question_pool === "mock" ? "Return to the practice pool" : "Reserve for mocks only"}
           </button>
         )}
         {a.set_access_tier && (

@@ -106,6 +106,9 @@ class ProfileRules(BaseModel):
     negative_marks: int = Field(default=0, ge=0, le=10)
     invalid_item_treatment: Literal["EXCLUDE", "CREDIT_ALL"] = "EXCLUDE"
     solution_release: Literal["after_submission", "after_window"] = "after_submission"
+    question_pool: Literal["mock", "any"] = Field(
+        default="mock", description="mock: protected mock-only questions (P08.S3.T3); any: practice questions too"
+    )
     sections: list[Section] = Field(min_length=1, max_length=12)
 
 
