@@ -208,3 +208,41 @@ test("an academic adjudicator reaches rubric corrections from the studio", async
   await expect(adjudicator.getByRole("heading", { name: "Rubric corrections" })).toBeVisible(AUTH);
   await expect(adjudicator.getByRole("list", { name: "Rubric corrections" }).or(adjudicator.getByText("None yet"))).toBeVisible(AUTH);
 });
+
+test("an author previews an import, sees row errors, and commits valid rows as drafts", async ({ browser }) => {
+  // P06.S2: a dry-run preview writes nothing; only an error-free batch commits, and only as drafts.
+  const author = await signIn(browser, "studio-author@example.com");
+  await author.goto("/studio/new");
+  const chapterId = await author.getByLabel("Chapter", { exact: true }).locator("option").nth(4).getAttribute("value");
+  expect(chapterId).toBeTruthy();
+  const run = Date.now();
+  const p = (text: string) => [{ type: "paragraph", text }];
+  const row = (ext: string, chapter: string) => ({
+    external_id: ext,
+    chapter,
+    title: `Fixture import ${ext}`,
+    body: {
+      stem: p(`Fixture imported stem ${ext}`),
+      options: ["one", "two", "three", "four"].map((w, i) => ({ id: `o${i + 1}`, blocks: p(`Fixture option ${w}`) })),
+      correct_option_id: "o2",
+      explanation: { correct: p("Fixture reasoning.") },
+    },
+    source_refs: [],
+  });
+  const file = (...items: unknown[]) => ({
+    name: `fixture-${run}.json`,
+    mimeType: "application/json",
+    buffer: Buffer.from(JSON.stringify({ schema_version: 1, kind: "mcq", items })),
+  });
+  await author.goto("/studio/imports");
+  await author.getByLabel(/File to preview/).setInputFiles(file(row(`E2E-${run}-1`, chapterId!), row(`E2E-${run}-2`, "no-such-chapter")));
+  const rows = author.getByRole("list", { name: "Import rows" });
+  await expect(rows.getByText("Error")).toBeVisible(AUTH);
+  await expect(author.getByRole("button", { name: /Import 1 row as drafts/ })).toBeDisabled();
+  await author.getByLabel(/File to preview/).setInputFiles(file(row(`E2E-${run}-1`, chapterId!)));
+  await expect(rows.getByText("New draft")).toBeVisible(AUTH);
+  await author.getByRole("button", { name: "Import 1 row as drafts" }).click();
+  await expect(author.getByRole("heading", { name: /^Imported:/ })).toBeVisible(AUTH);
+  await rows.getByRole("link", { name: "Open" }).click();
+  await expect(author.getByText(/^Draft · version 1/)).toBeVisible(AUTH);
+});

@@ -13,7 +13,19 @@ from datetime import datetime
 from enum import StrEnum
 from typing import Any
 
-from sqlalchemy import CheckConstraint, DateTime, ForeignKey, Index, Integer, SmallInteger, String, Text, func, text
+from sqlalchemy import (
+    CheckConstraint,
+    DateTime,
+    ForeignKey,
+    Index,
+    Integer,
+    SmallInteger,
+    String,
+    Text,
+    UniqueConstraint,
+    func,
+    text,
+)
 from sqlalchemy.dialects.postgresql import JSONB, UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -69,6 +81,13 @@ class ContentItem(Base):
             f"quarantine_level is null or quarantine_level in ({', '.join(repr(q) for q in QUARANTINE_LEVELS)})",
             name="content_item_quarantine_level",
         ),
+        Index(
+            "uq_content_item_external_ref",
+            "kind",
+            "external_ref",
+            unique=True,
+            postgresql_where=text("external_ref is not null"),
+        ),
         Index("ix_content_item_queue", "state", "grade_number", "subject_code"),
         Index("ix_content_item_live", "chapter_id", postgresql_where=text("availability = 'live'")),
         CheckConstraint("access_tier in ('preview','premium')", name="content_item_access_tier"),
@@ -98,6 +117,10 @@ class ContentItem(Base):
     )
     availability_reason: Mapped[str | None] = mapped_column(Text)  # quarantine/retirement reason
     quarantine_level: Mapped[str | None] = mapped_column(String(12))  # SOFT / VOID / KEY_ERROR for questions (§5.7)
+    # P06.S2 (IMPORT-01): the author's stable row ID for imported items (unique per kind) and the hash of the last
+    # imported payload, so re-importing an unchanged file writes nothing.
+    external_ref: Mapped[str | None] = mapped_column(String(120))
+    import_hash: Mapped[str | None] = mapped_column(String(64))
     # Canonical question family (P08.S3.T1): reviewed variants/translations share one family, so sampling and exposure
     # caps treat them as one underlying item. Null for lessons.
     family_id: Mapped[uuid.UUID | None] = mapped_column(UUID(as_uuid=True), index=True)
@@ -170,3 +193,43 @@ class ReviewDecision(Base):
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
 
     version: Mapped[ContentVersion] = relationship(back_populates="reviews")
+
+
+class ContentImportBatch(Base):
+    """A structured import (P06.S2, IMPORT-01): previewed (dry run), then committed atomically, or discarded."""
+
+    __tablename__ = "content_import_batch"
+    __table_args__ = (
+        CheckConstraint("status in ('previewed','committed','discarded')", name="content_import_batch_status"),
+        CheckConstraint("format in ('json','csv')", name="content_import_batch_format"),
+    )
+    id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    kind: Mapped[str] = mapped_column(String(20))
+    format: Mapped[str] = mapped_column(String(8))
+    filename: Mapped[str] = mapped_column(String(200))
+    sha256: Mapped[str] = mapped_column(String(64))
+    schema_version: Mapped[int] = mapped_column(SmallInteger)
+    status: Mapped[str] = mapped_column(String(12), default="previewed")
+    counts: Mapped[dict[str, Any]] = mapped_column(JSONB, default=dict)
+    created_by: Mapped[uuid.UUID] = mapped_column(ForeignKey("app_user.id", ondelete="RESTRICT"), index=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+    expires_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+    committed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+
+
+class ContentImportRow(Base):
+    __tablename__ = "content_import_row"
+    __table_args__ = (
+        UniqueConstraint("batch_id", "row_number", name="uq_content_import_row"),
+        CheckConstraint("action in ('create','update','unchanged','skip','error')", name="content_import_row_action"),
+    )
+    id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    batch_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("content_import_batch.id", ondelete="CASCADE"), index=True)
+    row_number: Mapped[int] = mapped_column(Integer)
+    external_id: Mapped[str | None] = mapped_column(String(120))
+    action: Mapped[str] = mapped_column(String(10))
+    errors: Mapped[list[str]] = mapped_column(JSONB, default=list)
+    warnings: Mapped[list[str]] = mapped_column(JSONB, default=list)
+    payload: Mapped[dict[str, Any]] = mapped_column(JSONB, default=dict)
+    payload_hash: Mapped[str | None] = mapped_column(String(64))
+    item_id: Mapped[uuid.UUID | None] = mapped_column(ForeignKey("content_item.id", ondelete="RESTRICT"))

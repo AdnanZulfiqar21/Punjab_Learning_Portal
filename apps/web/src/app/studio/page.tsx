@@ -34,6 +34,9 @@ export default function StudioPage({ searchParams }: PageProps<"/studio">) {
         <Link href="/studio/adjudications" className="rounded-lg border border-border bg-surface px-4 py-2.5 font-medium hover:border-accent">
           Rubric corrections
         </Link>
+        <Link href="/studio/imports" className="rounded-lg border border-border bg-surface px-4 py-2.5 font-medium hover:border-accent">
+          Import
+        </Link>
         <Link
           href="/studio/new"
           className="rounded-lg bg-accent px-4 py-2.5 font-medium text-white hover:bg-accent-strong dark:text-background"
