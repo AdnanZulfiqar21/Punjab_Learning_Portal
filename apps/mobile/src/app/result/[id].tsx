@@ -42,6 +42,11 @@ function ResultView({ id, token }: { id: string; token: string }) {
           {r.percentage !== null && <T variant="muted">{String(r.percentage)}%</T>}
         </View>
       )}
+      {r.revised_at && (
+        <Notice title={`Updated ${new Date(r.revised_at).toLocaleDateString("en-GB", { dateStyle: "medium" })}`}>
+          {`${r.revision_reason ?? ""} Your earlier result stays in your history.`}
+        </Notice>
+      )}
       <T variant="small">
         {r.answered} of {r.question_count} answered · {r.finalise_reason === "expiry" ? "submitted when time ran out" : "submitted by you"}
       </T>
