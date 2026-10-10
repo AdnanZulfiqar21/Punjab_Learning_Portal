@@ -126,6 +126,15 @@ THRESHOLDS: dict[str, tuple[float, float, str, str]] = {
     "support_oldest_open_age_s": (86400, 3 * 86400, "support lead", "support-backlog"),
     "support_escalated_open": (1, 10, "support lead", "support-backlog"),
     "db_pool_in_use_ratio": (0.7, 0.9, "platform operator", "pool-saturation"),
+    # P16.S1.T3: this process's last five minutes of requests (observability.window_summary).
+    "http_server_error_ratio_5m": (0.01, 0.05, "platform operator", "error-rate"),
+    "http_latency_p95_ms_5m": (800, 2000, "platform operator", "latency"),
+    "submission_server_error_ratio_5m": (0.001, 0.01, "platform operator", "submission-failures"),
+}
+# Signals the service overview needs but nothing can measure yet: shown as unavailable with their blocker.
+UNAVAILABLE: dict[str, tuple[str, str, str]] = {
+    "video_playback_failure_ratio": ("B05", "platform operator", "video-failures"),
+    "device_journey_budget_breaches": ("B09", "platform operator", "device-journey-budgets"),
 }
 
 
@@ -168,6 +177,12 @@ def signals(db: Session) -> list[dict[str, Any]]:
         ),
         "db_pool_in_use_ratio": round(in_use / size, 3) if size else 0.0,
     }
+    from portal_api import observability
+
+    w = observability.window_summary()
+    values["http_server_error_ratio_5m"] = round(w["server_error_ratio"], 4)
+    values["http_latency_p95_ms_5m"] = round(w["latency_p95_ms"], 1)
+    values["submission_server_error_ratio_5m"] = round(w["submission_server_error_ratio"], 4)
     out = []
     for name, value in values.items():
         warn, alert, owner, anchor = THRESHOLDS[name]
@@ -181,6 +196,22 @@ def signals(db: Session) -> list[dict[str, Any]]:
                 "alert_at": alert,
                 "owner": owner,
                 "runbook": f"docs/runbooks/alerts.md#{anchor}",
+                "available": True,
+                "blocker": None,
+            }
+        )
+    for name, (blocker, owner, anchor) in UNAVAILABLE.items():
+        out.append(
+            {
+                "name": name,
+                "value": None,
+                "level": "unavailable",
+                "warn_at": None,
+                "alert_at": None,
+                "owner": owner,
+                "runbook": f"docs/runbooks/alerts.md#{anchor}",
+                "available": False,
+                "blocker": blocker,
             }
         )
     db.rollback()

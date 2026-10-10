@@ -61,3 +61,38 @@ Work the queue escalated-first. See the incident runbooks in this folder.
 - Saturated requests are answered 503 rather than queued (REL-02).
 - Check for slow queries and stuck workers before adding capacity.
 - Stay inside the connection budget (§5.8).
+
+## error-rate
+**Signal:** `http_server_error_ratio_5m`: share of this process's requests in the last five minutes answered 5xx (warn 1%, alert 5%).
+**Owner:** platform operator.
+
+- Find the failing route templates in the request logs (they carry the correlation ID; see P03.S4.T2).
+- A 503 from pool saturation counts here too: check `db_pool_in_use_ratio` first.
+- If one optional feature is failing, switch it off (Operations → feature switches) with a reason; active attempts and submissions are never behind a switch.
+
+## latency
+**Signal:** `http_latency_p95_ms_5m`: 95th-percentile request time for this process over five minutes (warn 800 ms, alert 2 s).
+**Owner:** platform operator.
+
+- Compare with `db_pool_in_use_ratio` and the queue-age signals; slow queries and stuck workers come before adding capacity.
+- The budgets are initial engineering defaults until load evidence exists (B03); don't treat them as validated SLOs.
+
+## submission-failures
+**Signal:** `submission_server_error_ratio_5m`: share of final submissions (MCQ submit, written seal) answered 5xx (warn 0.1%, alert 1%).
+**Owner:** platform operator.
+
+- Treat any alert as urgent: a learner's work may be at risk. Submissions are idempotent, so a learner can retry safely.
+- Check the attempt protocol logs by correlation ID, and follow `interrupted-mock.md` if a scheduled mock is running.
+- A 409 (late, already submitted, refused) is a decision, not a failure, and is not counted.
+
+## video-failures
+**Signal:** `video_playback_failure_ratio`: unavailable until a media provider and reviewed videos exist (B05).
+**Owner:** platform operator.
+
+No video is served yet. When B05 is resolved, measure playback start failures from the provider's analytics and the player's error events, and add thresholds here.
+
+## device-journey-budgets
+**Signal:** `device_journey_budget_breaches`: unavailable until named reference devices exist (B09; builds B07).
+**Owner:** platform operator.
+
+Expo web is not device evidence. When B09 is resolved, run the P02.S4.T1 journeys on the reference devices and report breaches here.

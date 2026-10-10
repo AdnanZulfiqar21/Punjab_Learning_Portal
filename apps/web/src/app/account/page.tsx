@@ -89,6 +89,11 @@ async function Account() {
               Business overview
             </Link>
           )}
+          {me.roles.includes("platform_operator") && (
+            <Link href="/admin/service" className="inline-block text-sm text-accent underline-offset-2 hover:underline">
+              Service overview
+            </Link>
+          )}
           {me.roles.some((r) => r === "owner_admin" || r === "academic_adjudicator") && (
             <Link href="/admin/exam-profiles" className="inline-block text-sm text-accent underline-offset-2 hover:underline">
               Exam profiles

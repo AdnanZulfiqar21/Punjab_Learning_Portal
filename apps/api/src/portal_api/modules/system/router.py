@@ -78,12 +78,14 @@ def _operator() -> object:
 
 class SignalOut(BaseModel):
     name: str
-    value: float
-    level: str
-    warn_at: float
-    alert_at: float
+    value: float | None = Field(description="Null when the signal can't be measured yet (see blocker)")
+    level: str = Field(description="ok, warn, alert, or unavailable")
+    warn_at: float | None
+    alert_at: float | None
     owner: str
     runbook: str
+    available: bool = True
+    blocker: str | None = None
 
 
 class FeatureOut(BaseModel):
