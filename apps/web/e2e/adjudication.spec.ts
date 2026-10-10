@@ -11,7 +11,7 @@ import { expect, test, type Browser, type Page } from "@playwright/test";
 // re-marks under the corrected rubric, and the learner sees the notice, the new marks and the history.
 const AUTH = { timeout: 20_000 };
 const JOB = { timeout: 60_000 };
-const PASSWORD = "studio-fixture-pass-1";
+const PASSWORD = "studio-fixture-pass-1"; // pragma: allowlist secret (dev-seed fixture, refused outside development/test)
 const API_DIR = path.resolve(__dirname, "..", "..", "api");
 
 test.describe.configure({ mode: "serial" });

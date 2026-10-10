@@ -40,6 +40,31 @@ jobs:
           echo "content=$(has '^(content/|education_knowledge/indexes/|\.github/)')" >> "$GITHUB_OUTPUT"
           echo "mobile=$(has '^(apps/mobile/|packages/contracts/|pnpm-lock\.yaml|\.github/)')" >> "$GITHUB_OUTPUT"
 
+  security:
+    # P18.S2.T3 (SUPPLY-CHAIN-01): known-vulnerable dependencies and committed secrets fail every change.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v10.2.0
+        with:
+          version: "0.12.23"
+      - name: Python dependency audit (runtime dependencies)
+        working-directory: apps/api
+        run: |
+          uv export --frozen --no-dev --no-hashes --no-emit-project -o /tmp/requirements.txt
+          uvx pip-audit==2.9.0 -r /tmp/requirements.txt --progress-spinner off
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+      - name: JavaScript dependency audit (production, high and above; reviewed exceptions in package.json)
+        run: pnpm audit --prod --audit-level=high
+      - name: Leaked-credential scan (findings beyond the reviewed baseline fail)
+        run: |
+          git ls-files -z \
+            | grep -zvE '(^|/)(migrations/versions/|pnpm-lock\.yaml$|uv\.lock$|packages/contracts/|content/catalogue/|content/source_registry\.json$|\.secrets\.baseline$)' \
+            | xargs -0 uvx --from detect-secrets==1.5.0 detect-secrets-hook --baseline .secrets.baseline
+
   content:
     needs: changes
     if: needs.changes.outputs.content == 'true'
