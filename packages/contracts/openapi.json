@@ -3153,6 +3153,106 @@
         "title": "FormOut",
         "type": "object"
       },
+      "FunnelCohort": {
+        "properties": {
+          "age_days": {
+            "title": "Age Days",
+            "type": "integer"
+          },
+          "first_completed_test": {
+            "title": "First Completed Test",
+            "type": "integer"
+          },
+          "first_lesson": {
+            "title": "First Lesson",
+            "type": "integer"
+          },
+          "paid_conversion": {
+            "$ref": "#/components/schemas/PaidConversion"
+          },
+          "repeat_study": {
+            "title": "Repeat Study",
+            "type": "integer"
+          },
+          "repeat_study_too_early": {
+            "title": "Repeat Study Too Early",
+            "type": "boolean"
+          },
+          "signed_up": {
+            "title": "Signed Up",
+            "type": "integer"
+          },
+          "week_start": {
+            "title": "Week Start",
+            "type": "string"
+          }
+        },
+        "required": [
+          "week_start",
+          "age_days",
+          "signed_up",
+          "first_lesson",
+          "first_completed_test",
+          "repeat_study",
+          "repeat_study_too_early",
+          "paid_conversion"
+        ],
+        "title": "FunnelCohort",
+        "type": "object"
+      },
+      "FunnelReport": {
+        "properties": {
+          "cohorts": {
+            "items": {
+              "$ref": "#/components/schemas/FunnelCohort"
+            },
+            "title": "Cohorts",
+            "type": "array"
+          },
+          "definitions": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "title": "Definitions",
+            "type": "object"
+          },
+          "events_since": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Events Since"
+          },
+          "generated_at": {
+            "format": "date-time",
+            "title": "Generated At",
+            "type": "string"
+          },
+          "repeat_days": {
+            "title": "Repeat Days",
+            "type": "integer"
+          },
+          "report_version": {
+            "title": "Report Version",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "report_version",
+          "generated_at",
+          "events_since",
+          "repeat_days",
+          "cohorts",
+          "definitions"
+        ],
+        "title": "FunnelReport",
+        "type": "object"
+      },
       "GradeCatalogue": {
         "properties": {
           "grade": {
@@ -5990,6 +6090,36 @@
           "uploaded_at"
         ],
         "title": "PageOut",
+        "type": "object"
+      },
+      "PaidConversion": {
+        "properties": {
+          "available": {
+            "title": "Available",
+            "type": "boolean"
+          },
+          "blocker": {
+            "title": "Blocker",
+            "type": "string"
+          },
+          "value": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Value"
+          }
+        },
+        "required": [
+          "value",
+          "available",
+          "blocker"
+        ],
+        "title": "PaidConversion",
         "type": "object"
       },
       "PreferencesIO": {
@@ -10966,6 +11096,27 @@
           }
         },
         "summary": "The analytics event dictionary (owner/admin, finance; MFA)",
+        "tags": [
+          "analytics"
+        ]
+      }
+    },
+    "/v1/admin/analytics/funnel": {
+      "get": {
+        "operationId": "funnel_v1_admin_analytics_funnel_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FunnelReport"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Learning funnel and repeat study by cohort (MFA)",
         "tags": [
           "analytics"
         ]
