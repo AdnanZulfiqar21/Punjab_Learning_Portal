@@ -138,8 +138,11 @@ export const api = {
   runtimeConfig: (signal?: AbortSignal) => getJSON<RuntimeConfig>("/v1/runtime-config", signal),
   /** Published, live lessons only (independently reviewed); drafts never reach the app. */
   // Premium bodies come back only with a session that has an active plan or trial (review R07).
-  lessons: (chapterId: string, token: string | null, signal?: AbortSignal) =>
-    request<Lesson[]>(`/v1/chapters/${encodeURIComponent(chapterId)}/lessons`, { token, signal }),
+  lessons: (chapterId: string, token: string | null, signal?: AbortSignal, language?: string) =>
+    request<Lesson[]>(
+      `/v1/chapters/${encodeURIComponent(chapterId)}/lessons${language && language !== "en" ? `?language=${encodeURIComponent(language)}` : ""}`,
+      { token, signal },
+    ),
 
   // Development identity adapter: the API exposes it only in development/test and keeps it out of the contract.
   devRegister: (email: string, password: string) =>
