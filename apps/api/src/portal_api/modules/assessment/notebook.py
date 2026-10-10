@@ -117,8 +117,10 @@ def reconcile(db: Session, user_id: uuid.UUID, family_ids: set[uuid.UUID]) -> No
         return
     db.execute(select(func.pg_advisory_xact_lock(func.hashtextextended(f"notebook:{user_id}", 0))))
     held = held_forms(db, user_id)
-    latest = (
+    latest = (  # only this learner's attempts: never an aggregate over every score in the database
         select(ScoreVersion.attempt_id, func.max(ScoreVersion.version).label("v"))
+        .join(Attempt, Attempt.id == ScoreVersion.attempt_id)
+        .where(Attempt.user_id == user_id)
         .group_by(ScoreVersion.attempt_id)
         .subquery()
     )

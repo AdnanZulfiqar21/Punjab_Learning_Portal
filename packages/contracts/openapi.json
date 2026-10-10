@@ -4341,6 +4341,14 @@
             "title": "Position",
             "type": "integer"
           },
+          "related_lessons": {
+            "description": "Published lessons for this question's topic (or its chapter): revise here",
+            "items": {
+              "$ref": "#/components/schemas/RelatedLesson"
+            },
+            "title": "Related Lessons",
+            "type": "array"
+          },
           "stem": {
             "items": {
               "additionalProperties": true,
@@ -7425,6 +7433,31 @@
           "finished_at"
         ],
         "title": "RegradeJobOut",
+        "type": "object"
+      },
+      "RelatedLesson": {
+        "properties": {
+          "chapter_id": {
+            "format": "uuid",
+            "title": "Chapter Id",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "chapter_id"
+        ],
+        "title": "RelatedLesson",
         "type": "object"
       },
       "RemedyIn": {

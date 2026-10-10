@@ -175,8 +175,10 @@ def learner_responses(db: Any, user_id: uuid.UUID, now: datetime) -> list[Respon
     from portal_api.modules.assessment.sessions import held_forms
 
     held = held_forms(db, user_id)  # OCT9-01: a held scheduled mock is not evidence until its results are released
-    latest = (
+    latest = (  # this learner's attempts only
         select(ScoreVersion.attempt_id, func.max(ScoreVersion.version).label("v"))
+        .join(Attempt, Attempt.id == ScoreVersion.attempt_id)
+        .where(Attempt.user_id == user_id)
         .group_by(ScoreVersion.attempt_id)
         .subquery()
     )

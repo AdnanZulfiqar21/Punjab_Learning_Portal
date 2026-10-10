@@ -38,8 +38,10 @@ def report(db: Session, user_id: uuid.UUID) -> dict[str, Any]:
     notebook.sync(db, user_id)
     held = held_forms(db, user_id)  # OCT9-01: a held scheduled mock adds nothing until its results are released
 
-    latest = (
+    latest = (  # this learner's attempts only
         select(ScoreVersion.attempt_id, func.max(ScoreVersion.version).label("v"))
+        .join(Attempt, Attempt.id == ScoreVersion.attempt_id)
+        .where(Attempt.user_id == user_id)
         .group_by(ScoreVersion.attempt_id)
         .subquery()
     )

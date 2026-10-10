@@ -137,6 +137,12 @@ class SubmitOut(BaseModel):
     reconciliation: list[OpResult] = Field(description="Operations presented after finalisation, with their outcome")
 
 
+class RelatedLesson(BaseModel):
+    id: uuid.UUID
+    title: str
+    chapter_id: uuid.UUID
+
+
 class ItemReview(BaseModel):
     position: int
     marks: int
@@ -148,6 +154,9 @@ class ItemReview(BaseModel):
     earned: int
     treatment: str
     explanation: dict[str, Any]
+    related_lessons: list[RelatedLesson] = Field(
+        default_factory=list, description="Published lessons for this question's topic (or its chapter): revise here"
+    )
 
 
 class ResultOut(BaseModel):

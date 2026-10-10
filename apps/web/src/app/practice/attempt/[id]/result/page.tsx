@@ -119,6 +119,19 @@ function ReviewItem({ item, attemptId }: { item: ItemReview; attemptId: string }
           {(explanation.worked_steps?.length ?? 0) > 0 && <LessonBlocks blocks={explanation.worked_steps ?? []} headingOffset={3} />}
         </div>
       )}
+      {(item.related_lessons ?? []).length > 0 && (
+        <p className="text-sm">
+          Revise:{" "}
+          {(item.related_lessons ?? []).map((l, i) => (
+            <span key={l.id}>
+              {i > 0 && " · "}
+              <Link href={`/learn/chapter/${l.chapter_id}#lesson-${l.id}`} className="text-accent underline underline-offset-2">
+                {l.title}
+              </Link>
+            </span>
+          ))}
+        </p>
+      )}
       <Link
         href={`/help/new?category=academic_report&kind=attempt&id=${attemptId}&position=${item.position}`}
         className="inline-block text-sm text-muted underline underline-offset-2 hover:text-foreground"
