@@ -1361,6 +1361,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/ops/integrations": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** External providers: mode, health, usage, budget */
+        get: operations["integrations_v1_ops_integrations_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/ops/notifications/dead-letters": {
         parameters: {
             query?: never;
@@ -4629,6 +4646,31 @@ export interface components {
             message: string;
             /** Status */
             status: string;
+        };
+        /** IntegrationOut */
+        IntegrationOut: {
+            /** Adapter */
+            adapter: string;
+            /** Blocker */
+            blocker: string | null;
+            /** Budget Daily */
+            budget_daily: number | null;
+            /** Budget Used Ratio */
+            budget_used_ratio: number | null;
+            /** Health */
+            health: string;
+            /** Key */
+            key: string;
+            /** Level */
+            level: string;
+            /** Mode */
+            mode: string;
+            /** Name */
+            name: string;
+            /** Usage 24H */
+            usage_24h: {
+                [key: string]: number;
+            };
         };
         /** ItemCreateIn */
         ItemCreateIn: {
@@ -10195,6 +10237,26 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    integrations_v1_ops_integrations_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["IntegrationOut"][];
                 };
             };
         };

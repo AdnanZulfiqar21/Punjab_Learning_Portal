@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
-import type { OpsSignal } from "@portal/contracts";
+import type { Integration, OpsSignal } from "@portal/contracts";
 import { Badge, Breadcrumbs, Notice, SkeletonLines } from "@/components/ui";
 import { api, currentUser } from "@/lib/session";
 
@@ -30,6 +30,9 @@ export default function ServicePage() {
       </div>
       <Suspense fallback={<SkeletonLines lines={8} label="Reading the signals" />}>
         <Signals />
+      </Suspense>
+      <Suspense fallback={<SkeletonLines lines={6} label="Checking integrations" />}>
+        <Integrations />
       </Suspense>
     </div>
   );
@@ -79,5 +82,60 @@ async function Signals() {
         </tbody>
       </table>
     </div>
+  );
+}
+
+const MODE: Record<string, { label: string; tone: "ok" | "warn" | "danger" | "info" }> = {
+  live: { label: "Live", tone: "ok" },
+  development: { label: "Development stand-in", tone: "info" },
+  unavailable: { label: "Not connected", tone: "warn" },
+};
+
+async function Integrations() {
+  const user = await currentUser();
+  if (!user) redirect("/signin?next=/admin/service");
+  const res = await api<Integration[]>("/v1/ops/integrations", { token: user.token });
+  if (!res.ok) return null; // the signals panel above already explains access problems
+  return (
+    <section aria-labelledby="integrations-h" className="space-y-2">
+      <h2 id="integrations-h" className="font-semibold">
+        Integrations
+      </h2>
+      <div className="overflow-x-auto rounded-xl border border-border bg-surface">
+        <table className="w-full text-sm">
+          <thead className="text-left text-muted">
+            <tr>
+              {["Provider", "Mode", "Adapter", "Health", "Last 24 hours", "Daily budget"].map((h) => (
+                <th key={h} scope="col" className="px-3 py-2 font-medium">
+                  {h}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-border">
+            {res.data.map((i) => (
+              <tr key={i.key}>
+                <th scope="row" className="px-3 py-2 text-left font-normal">
+                  {i.name}
+                </th>
+                <td className="px-3 py-2">
+                  <Badge tone={MODE[i.mode]?.tone ?? "info"}>{MODE[i.mode]?.label ?? i.mode}</Badge>
+                  {i.blocker && <span className="ml-2 text-xs text-muted">waits on {i.blocker}</span>}
+                </td>
+                <td className="px-3 py-2 font-mono text-xs">{i.adapter}</td>
+                <td className="px-3 py-2">{i.health === "not_checked" ? "—" : i.health}</td>
+                <td className="px-3 py-2">
+                  {Object.keys(i.usage_24h).length === 0 ? "—" : Object.entries(i.usage_24h).map(([k, v]) => `${k} ${v}`).join(", ")}
+                </td>
+                <td className="px-3 py-2">
+                  {i.budget_daily === null ? "not set" : `${i.budget_daily}${i.budget_used_ratio === null ? "" : ` (${Math.round(i.budget_used_ratio * 100)}% used)`}`}
+                  {i.level !== "ok" && <Badge tone={i.level === "alert" ? "danger" : "warn"}>{i.level}</Badge>}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
   );
 }

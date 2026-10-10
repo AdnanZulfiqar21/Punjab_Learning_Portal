@@ -60,6 +60,14 @@ class Settings(BaseSettings):
     # deployed roles need private object storage (S3 proposed, BLOCKERS B03), whose adapter lands with that account.
     evidence_store: Literal["local", "s3"] = "local"
     evidence_dir: str = "var/evidence"
+    # Upload scanning (P06.S4.T1). "clamd" scans every learner upload before storage; "none" is development/test only.
+    upload_scanner: Literal["none", "clamd"] = "none"
+    clamd_host: str = "127.0.0.1"
+    clamd_port: int = 3310
+    # Daily usage budgets for paid providers (P16.S3.T2): the operator view warns at 80% and alerts at 100%. Unset = no
+    # budget recorded yet (set them when the providers and prices are chosen: B04, B10).
+    email_daily_budget: int | None = None
+    assessor_daily_budget: int | None = None
 
     # Trial device evidence (roadmap §16, review R06). "required": unknown native evidence never completes a claim.
     # "fallback": while a device provider is unconfigured (B07/B08), native activation uses account history alone and
@@ -102,6 +110,8 @@ class Settings(BaseSettings):
                 problems.append("trial_device_evidence must be set explicitly (required or fallback; roadmap §16)")
             if self.notification_email_adapter == "dev_outbox":
                 problems.append("notification_email_adapter dev_outbox is development/test only")
+            if self.upload_scanner == "none":
+                problems.append("upload_scanner must scan uploads (clamd) in deployed roles")
             if self.written_assessor == "fixture":
                 problems.append("written_assessor fixture is development/test only")
             if self.trial_ref_pepper.startswith("dev-only"):

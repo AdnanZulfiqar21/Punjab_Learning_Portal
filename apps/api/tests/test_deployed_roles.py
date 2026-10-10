@@ -30,6 +30,7 @@ DEPLOYED_ENV = {
     "PORTAL_TRIAL_DEVICE_EVIDENCE": "fallback",
     "PORTAL_TRIAL_REF_PEPPER": "deployment-secret-fixture",
     "PORTAL_NOTIFICATION_EMAIL_ADAPTER": "none",  # P15.S1: the dev outbox is refused in deployed roles
+    "PORTAL_UPLOAD_SCANNER": "clamd",  # P06.S4.T1
 }
 
 

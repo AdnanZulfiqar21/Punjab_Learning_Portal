@@ -479,6 +479,9 @@ def upload_page(
     except evidence.Rejected as e:
         raise Unprocessable(e.reason, code_reason="UNSUPPORTED_FILE") from e
     _check_cap_values(caps, *usage, len(inspected.pages), len(data))  # early, honest refusal before storing anything
+    from portal_api.modules.system import scanning
+
+    scanning.require_clean(data)  # P06.S4.T1: scanned before anything is stored
 
     store = storage.get_store()
     file_id = uuid.uuid4()

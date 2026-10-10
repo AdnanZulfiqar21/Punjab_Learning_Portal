@@ -15,6 +15,7 @@ OIDC = {
     "trial_device_evidence": "fallback",
     "trial_ref_pepper": "deployment-secret-fixture",
     "notification_email_adapter": "none",  # P15.S1: the dev outbox is refused; "none" until a sender exists (B04)
+    "upload_scanner": "clamd",  # P06.S4.T1: deployed roles scan uploads
 }
 
 
