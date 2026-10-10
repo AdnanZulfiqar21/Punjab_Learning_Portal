@@ -159,3 +159,4 @@ Source plan: `Road Map/Punjab_Learning_Portal_Master_Roadmap_v2.2_Integrated_Wri
 | P06.S4.T1 Protect file intake | IMPLEMENTED (scanner adapter + fail-closed admission; daemon deployment waits on B03) | UPLOAD-SCAN-01. `tests/test_upload_scanning.py`. |
 | P16.S3.T2 Integrations and quotas | IMPLEMENTED (view, health, usage, budgets; providers wait on B03–B10) | INTEGRATIONS-01. `tests/test_integrations.py`. |
 | P12.S1.T3 Reports ↔ corrections | IMPLEMENTED (API + web, learner and staff) | REPORT-LINKS-01. |
+| P12.S3.T3 Mixed revision | IMPLEMENTED | MIXED-REVISION-01. `tests/test_mixed_revision.py`. |

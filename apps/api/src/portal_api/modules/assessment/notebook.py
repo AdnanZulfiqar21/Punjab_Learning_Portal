@@ -12,9 +12,10 @@ instead of disappearing.
 * At most `DAILY_CAP` entries are offered per review test. Missed days don't pile up: an overdue entry is simply due.
 
 **Reviewing:** a review test is a frozen practice form (`kind="review"`) built from due entries of one class and
-subject. It uses each family's current live *practice* question (never a mock-reserved one), preferring a variant
-other than the one originally missed, so the original attempt stays exactly as it was. Reusing a request key with a
-different class, subject or count is refused.
+subject, plus at most `MIXED_SHARE` of already-mastered questions for interleaved retrieval (P12.S3.T3). It uses each
+family's current live *practice* question (never a mock-reserved one), preferring a variant other than the one
+originally missed, so the original attempt stays exactly as it was. Reusing a request key with a different class,
+subject or count is refused.
 
 Learners can add a private note to any entry.
 
@@ -50,6 +51,7 @@ from portal_api.modules.content.models import Availability, ContentItem, Content
 
 INTERVALS = (1, 3, 7, 14)  # days
 DAILY_CAP = 20
+MIXED_SHARE = 0.2  # P12.S3.T3: at most this share of a review test is mastered material, interleaved for retrieval
 
 
 class MistakeEntry(Base):
@@ -302,6 +304,28 @@ def build_review(db: Session, who: Any, *, grade: int, subject: str, count: int,
             chosen.append((e, iv))
     if not chosen:
         raise Unprocessable("Nothing is due for review in this class and subject right now.", code_reason="NOTHING_DUE")
+    # P12.S3.T3 (MIXED-REVISION-01): interleave a bounded share of mastered questions, least recently seen first, only
+    # alongside due work. A wrong answer reopens the entry through the normal replay rules; a right one changes nothing.
+    mixed: list[tuple[MistakeEntry, tuple[ContentItem, ContentVersion]]] = []
+    budget = int(min(count, DAILY_CAP) * MIXED_SHARE)
+    if budget:
+        for e in db.scalars(
+            select(MistakeEntry)
+            .where(
+                MistakeEntry.user_id == who.user.id,
+                MistakeEntry.status == "mastered",
+                MistakeEntry.grade_number == grade,
+                MistakeEntry.subject_code == subject,
+            )
+            .order_by(MistakeEntry.last_event_at)
+            .limit(budget * 3)
+        ):
+            iv = _live_variant(db, e.family_id, e.version_id)
+            if iv is not None:
+                mixed.append((e, iv))
+            if len(mixed) == budget:
+                break
+    chosen += mixed
     seed = secrets.randbits(62)
     rng = random.Random(seed)  # noqa: S311 - reproducible option order from a stored seed, not a secret
     form = PracticeForm(
@@ -312,7 +336,7 @@ def build_review(db: Session, who: Any, *, grade: int, subject: str, count: int,
         kind="review",
         grade_number=grade,
         subject_code=subject,
-        scope={"mode": "review", "entries": [str(e.id) for e, _ in chosen]},
+        scope={"mode": "review", "entries": [str(e.id) for e, _ in chosen], "mixed": [str(e.id) for e, _ in mixed]},
         seed=seed,
         question_count=len(chosen),
         duration_s=None,
