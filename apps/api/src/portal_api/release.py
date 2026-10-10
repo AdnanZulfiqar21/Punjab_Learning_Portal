@@ -29,7 +29,8 @@ from typing import Any
 API_DIR = Path(__file__).resolve().parents[2]
 REPO = API_DIR.parents[1]
 MIGRATIONS = API_DIR / "migrations" / "versions"
-GRANDFATHERED_THROUGH = "e8b2d6f4a193"  # analytics_event (2026-10-10): the last migration before these rules
+# The last migration before these rules (analytics_event, 2026-10-10); an Alembic revision ID, not a credential.
+GRANDFATHERED_THROUGH = "e8b2d6f4a193"  # pragma: allowlist secret
 
 DESTRUCTIVE = re.compile(r"op\.(drop_table|drop_column|rename_table)\(|new_column_name\s*=")
 MARKER = re.compile(r"^#\s*contract-migration:\s*\S", re.M)
