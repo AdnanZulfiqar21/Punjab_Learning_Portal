@@ -118,14 +118,13 @@ def parse_rules(raw: object, active_subjects: set[str]) -> tuple[ProfileRules | 
     except ValidationError as e:
         return None, [f"{'.'.join(map(str, x['loc']))}: {x['msg']}" for x in e.errors()]
     errors = []
-    seen = set()
     for n, s in enumerate(rules.sections, start=1):
         if s.subject not in active_subjects:
             errors.append(f"Section {n}: {s.subject} isn't an active subject.")
-        key = (s.subject, tuple(sorted(s.grades)))
-        if key in seen:
-            errors.append(f"Section {n}: {s.subject} for these classes appears twice.")
-        seen.add(key)
+        for m, earlier in enumerate(rules.sections[: n - 1], start=1):
+            # Sections sharing a subject and a class would draw on the same questions (GENERATOR-PROPERTIES-01).
+            if earlier.subject == s.subject and set(earlier.grades) & set(s.grades):
+                errors.append(f"Section {n}: {s.subject} classes overlap section {m}; give each class to one section.")
     if rules.negative_marks > rules.marks_per_question:
         errors.append("Negative marking can't exceed the marks for a question.")
     return (rules if not errors else None), errors
