@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Pressable, ScrollView, View } from "react-native";
 import type { TopicNode } from "@portal/contracts";
 
+import { Choices } from "@/components/form";
 import { LessonBlocks } from "@/components/lesson-blocks";
 import { Badge, Card, ErrorState, Loading, Notice, T } from "@/components/ui";
 import { Space } from "@/constants/theme";
@@ -85,13 +86,24 @@ function Lessons({ chapterId }: { chapterId: string }) {
   return <LessonList chapterId={chapterId} token={auth.state.status === "signed_in" ? auth.state.token : null} />;
 }
 
+// P07.S1.T2: each lesson is shown in the chosen language when a reviewed version exists, otherwise in another with a note.
+const LANGUAGES = [
+  ["en", "English"],
+  ["ur", "اردو"],
+  ["roman_ur", "Roman Urdu"],
+] as const;
+type Language = (typeof LANGUAGES)[number][0];
+const LANGUAGE_NAME: Record<string, string> = { en: "English", ur: "Urdu", roman_ur: "Roman Urdu" };
+
 function LessonList({ chapterId, token }: { chapterId: string; token: string | null }) {
-  const { state, retry } = useRequest((signal) => api.lessons(chapterId, token, signal), [chapterId, token]);
+  const [language, setLanguage] = useState<Language>("en");
+  const { state, retry } = useRequest((signal) => api.lessons(chapterId, token, signal, language), [chapterId, token, language]);
   return (
     <View style={{ gap: Space.sm }}>
       <T variant="heading" accessibilityRole="header">
         Lessons
       </T>
+      <Choices label="Language" options={LANGUAGES} selected={[language]} onToggle={setLanguage} />
       {state.status === "loading" && <T variant="muted">Loading lessons…</T>}
       {state.status === "error" && (
         <Pressable accessibilityRole="button" onPress={retry}>
@@ -107,7 +119,10 @@ function LessonList({ chapterId, token }: { chapterId: string; token: string | n
       {state.status === "success" &&
         state.data.map((l) => (
           <Card key={l.id}>
-            <T variant="heading" accessibilityRole="header">
+            {l.requested_language_missing && (
+              <Notice title={`Not available in ${LANGUAGE_NAME[language]} yet`}>Shown in {LANGUAGE_NAME[l.language]}.</Notice>
+            )}
+            <T variant="heading" accessibilityRole="header" style={l.language === "ur" ? { writingDirection: "rtl", textAlign: "right" } : undefined}>
               {l.title}
             </T>
             <T variant="small">
@@ -119,7 +134,9 @@ function LessonList({ chapterId, token }: { chapterId: string; token: string | n
                   Start your free trial from the Account tab to read this lesson.
                 </Notice>
               ) : (
-                <LessonBlocks blocks={l.body.blocks as { type: string }[]} />
+                <View style={l.language === "ur" ? { direction: "rtl" } : undefined}>
+                  <LessonBlocks blocks={l.body.blocks as { type: string }[]} />
+                </View>
               )}
             </View>
             <T variant="small" style={{ marginTop: Space.sm }}>
