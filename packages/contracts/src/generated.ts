@@ -294,6 +294,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/admin/mock-sessions/{session_id}/postpone-results": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Move a session's result release later, never earlier (reason required; audited) */
+        post: operations["postpone_mock_results_v1_admin_mock_sessions__session_id__postpone_results_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/admin/role-grants/{grant_id}/revoke": {
         parameters: {
             query?: never;
@@ -305,6 +322,23 @@ export interface paths {
         put?: never;
         /** Revoke Role */
         post: operations["revoke_role_v1_admin_role_grants__grant_id__revoke_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/admin/users/{user_id}/reinstate": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Reinstate Account */
+        post: operations["reinstate_account_v1_admin_users__user_id__reinstate_post"];
         delete?: never;
         options?: never;
         head?: never;
@@ -323,6 +357,23 @@ export interface paths {
         put?: never;
         /** Grant Role */
         post: operations["grant_role_v1_admin_users__user_id__roles_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/admin/users/{user_id}/suspend": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Suspend an account now: every session revoked, its tokens refused; its data and others' work untouched */
+        post: operations["suspend_account_v1_admin_users__user_id__suspend_post"];
         delete?: never;
         options?: never;
         head?: never;
@@ -3040,6 +3091,21 @@ export interface components {
             /** Reason */
             reason: string;
         };
+        /** AccountStatusOut */
+        AccountStatusOut: {
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /**
+             * Sessions Revoked
+             * @default 0
+             */
+            sessions_revoked: number;
+            /** Status */
+            status: string;
+        };
         /**
          * Actions
          * @description What the caller may do now. Advisory for the UI; the server re-checks every action.
@@ -5585,6 +5651,29 @@ export interface components {
             /** Value */
             value: number | null;
         };
+        /** PostponeIn */
+        PostponeIn: {
+            /** Reason */
+            reason: string;
+            /**
+             * Results At
+             * Format: date-time
+             */
+            results_at: string;
+        };
+        /** PostponedOut */
+        PostponedOut: {
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /**
+             * Results At
+             * Format: date-time
+             */
+            results_at: string;
+        };
         /** PreferencesIO */
         PreferencesIO: {
             /**
@@ -8114,6 +8203,41 @@ export interface operations {
             };
         };
     };
+    postpone_mock_results_v1_admin_mock_sessions__session_id__postpone_results_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                session_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PostponeIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PostponedOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     revoke_role_v1_admin_role_grants__grant_id__revoke_post: {
         parameters: {
             query?: never;
@@ -8136,6 +8260,41 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["RoleGrantOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    reinstate_account_v1_admin_users__user_id__reinstate_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                user_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["portal_api__modules__identity__schemas__RevokeIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AccountStatusOut"];
                 };
             };
             /** @description Validation Error */
@@ -8202,6 +8361,41 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["RoleGrantOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    suspend_account_v1_admin_users__user_id__suspend_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                user_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["portal_api__modules__identity__schemas__RevokeIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AccountStatusOut"];
                 };
             };
             /** @description Validation Error */

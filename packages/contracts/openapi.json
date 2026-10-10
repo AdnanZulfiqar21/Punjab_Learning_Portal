@@ -162,6 +162,30 @@
         "title": "AccommodationIn",
         "type": "object"
       },
+      "AccountStatusOut": {
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "sessions_revoked": {
+            "default": 0,
+            "title": "Sessions Revoked",
+            "type": "integer"
+          },
+          "status": {
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "status"
+        ],
+        "title": "AccountStatusOut",
+        "type": "object"
+      },
       "Actions": {
         "description": "What the caller may do now. Advisory for the UI; the server re-checks every action.",
         "properties": {
@@ -6286,6 +6310,47 @@
         "title": "PaidConversion",
         "type": "object"
       },
+      "PostponeIn": {
+        "properties": {
+          "reason": {
+            "maxLength": 500,
+            "minLength": 10,
+            "title": "Reason",
+            "type": "string"
+          },
+          "results_at": {
+            "format": "date-time",
+            "title": "Results At",
+            "type": "string"
+          }
+        },
+        "required": [
+          "results_at",
+          "reason"
+        ],
+        "title": "PostponeIn",
+        "type": "object"
+      },
+      "PostponedOut": {
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "results_at": {
+            "format": "date-time",
+            "title": "Results At",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "results_at"
+        ],
+        "title": "PostponedOut",
+        "type": "object"
+      },
       "PreferencesIO": {
         "properties": {
           "email_enabled": {
@@ -12126,6 +12191,59 @@
         ]
       }
     },
+    "/v1/admin/mock-sessions/{session_id}/postpone-results": {
+      "post": {
+        "operationId": "postpone_mock_results_v1_admin_mock_sessions__session_id__postpone_results_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "session_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Session Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PostponeIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PostponedOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Move a session's result release later, never earlier (reason required; audited)",
+        "tags": [
+          "practice"
+        ]
+      }
+    },
     "/v1/admin/role-grants/{grant_id}/revoke": {
       "post": {
         "operationId": "revoke_role_v1_admin_role_grants__grant_id__revoke_post",
@@ -12174,6 +12292,60 @@
           }
         },
         "summary": "Revoke Role",
+        "tags": [
+          "identity",
+          "admin"
+        ]
+      }
+    },
+    "/v1/admin/users/{user_id}/reinstate": {
+      "post": {
+        "operationId": "reinstate_account_v1_admin_users__user_id__reinstate_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "user_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "User Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/portal_api__modules__identity__schemas__RevokeIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountStatusOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Reinstate Account",
         "tags": [
           "identity",
           "admin"
@@ -12274,6 +12446,60 @@
           }
         },
         "summary": "Grant Role",
+        "tags": [
+          "identity",
+          "admin"
+        ]
+      }
+    },
+    "/v1/admin/users/{user_id}/suspend": {
+      "post": {
+        "operationId": "suspend_account_v1_admin_users__user_id__suspend_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "user_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "User Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/portal_api__modules__identity__schemas__RevokeIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountStatusOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Suspend an account now: every session revoked, its tokens refused; its data and others' work untouched",
         "tags": [
           "identity",
           "admin"

@@ -3,9 +3,10 @@
 **Owner:** support (first line); academic operations for remedies.
 **Rehearsal:** `apps/api/tests/test_mocks.py::test_rehearsal_interrupted_mock`.
 
-**Scope today:** self-started timed mocks built from a published exam profile (MOCK-01). Scheduled mock windows,
-late entry and delayed solution release (P09.S2.T3) are not built yet. No official profile is published until two
-reviewers verify it (B02).
+**Scope today:** self-started timed mocks (MOCK-01) and scheduled windows with late entry, accommodations and delayed
+result release (SCHEDULE-01, OCT9-01/04). For a scheduled window hit by an outage, staff can move the session's
+`results_at` later (results stay hidden on every surface until then) and grant per-learner accommodations, which may
+not run past `results_at`. No official profile is published until two reviewers verify it (B02).
 
 ## What the system already guarantees (no staff action needed)
 
