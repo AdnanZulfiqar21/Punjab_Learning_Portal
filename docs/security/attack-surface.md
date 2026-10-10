@@ -45,7 +45,7 @@ deployment (none exists yet: B03). It is not an independent assessment; P18.S4.T
 | V9 Communications | Deployment | HSTS/TLS are the hosting edge's job | B03 |
 | V10 Malicious code | Yes | Dependency audits and credential scan in CI | SBOM and bundle/source-map checks (P18.S2.T3 remainder) |
 | V11 Business logic | Yes | Idempotency keys; attempt protocol ledger; bounded exports; allowance ledger | **No application rate limiting**: anti-automation for expensive endpoints (form builds, exports, uploads) relies on caps per user today; edge rate limiting is a deployment decision (B03) |
-| V12 Files and resources | Yes | Caps, decoders, re-encoding, isolated processing, private keys | Malware-scan step and quarantine-until-scanned state (P06.S4.T1, open) |
+| V12 Files and resources | Yes | Caps, decoders, re-encoding, isolated processing, private keys; ClamAV scan before storage, failing closed (UPLOAD-SCAN-01) | Running the scanner daemon (B03) |
 | V13 API | Yes | Pinned public allowlist; typed contracts with drift check; no GraphQL | — |
 | V14 Configuration | Yes | Startup validator refuses development settings in deployed roles; security headers; release manifest | CSP still allows inline scripts (Next.js without nonces); a nonce-based CSP needs dynamic rendering trade-offs evaluated before claiming strong script-injection protection |
 
@@ -53,7 +53,7 @@ deployment (none exists yet: B03). It is not an independent assessment; P18.S4.T
 
 1. Application rate limiting (V11): decide edge vs application limits with the hosting choice (B03).
 2. CSP `unsafe-inline` (V14): evaluate nonces with Cache Components before claiming strong XSS protection.
-3. Malware scanning for uploads (V12, P06.S4.T1).
+3. Running the upload scanner daemon in hosting (V12; the scan step itself exists, UPLOAD-SCAN-01).
 4. SBOM and bundle/source-map checks (V10, P18.S2.T3 remainder).
 5. Independent review of this map and a penetration test (P18.S4.T1): needs an external reviewer.
 6. Branch protection on `main` is not enforced (owner setting); merges follow a manual green-CI rule.

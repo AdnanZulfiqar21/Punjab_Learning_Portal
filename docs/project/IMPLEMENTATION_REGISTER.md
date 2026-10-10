@@ -156,3 +156,5 @@ Source plan: `Road Map/Punjab_Learning_Portal_Master_Roadmap_v2.2_Integrated_Wri
 | P18.S1.T3 Privileged workflows | IMPLEMENTED (tests) | PRIVILEGED-01. |
 | P18.S4.T2 Incident response | PARTIAL (account suspension rehearsed; secret rotation planned, waits on B03) | SUSPEND-01, RESULTS-POSTPONE-01. |
 | P17.S4.T3 Service runbooks | PARTIAL (compromised account/secret, scoring pending added; restore/provider/payment/attestation wait on B03–B08) | `docs/runbooks/`. |
+| P06.S4.T1 Protect file intake | IMPLEMENTED (scanner adapter + fail-closed admission; daemon deployment waits on B03) | UPLOAD-SCAN-01. `tests/test_upload_scanning.py`. |
+| P16.S3.T2 Integrations and quotas | IMPLEMENTED (view, health, usage, budgets; providers wait on B03–B10) | INTEGRATIONS-01. `tests/test_integrations.py`. |

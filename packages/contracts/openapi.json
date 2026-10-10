@@ -3829,6 +3829,88 @@
         "title": "IncidentUpdateOut",
         "type": "object"
       },
+      "IntegrationOut": {
+        "properties": {
+          "adapter": {
+            "title": "Adapter",
+            "type": "string"
+          },
+          "blocker": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Blocker"
+          },
+          "budget_daily": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Budget Daily"
+          },
+          "budget_used_ratio": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Budget Used Ratio"
+          },
+          "health": {
+            "title": "Health",
+            "type": "string"
+          },
+          "key": {
+            "title": "Key",
+            "type": "string"
+          },
+          "level": {
+            "title": "Level",
+            "type": "string"
+          },
+          "mode": {
+            "title": "Mode",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "usage_24h": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "title": "Usage 24H",
+            "type": "object"
+          }
+        },
+        "required": [
+          "key",
+          "name",
+          "adapter",
+          "mode",
+          "blocker",
+          "health",
+          "usage_24h",
+          "budget_daily",
+          "budget_used_ratio",
+          "level"
+        ],
+        "title": "IntegrationOut",
+        "type": "object"
+      },
       "ItemCreateIn": {
         "properties": {
           "chapter_id": {
@@ -15018,6 +15100,31 @@
         "summary": "Update Incident",
         "tags": [
           "help"
+        ]
+      }
+    },
+    "/v1/ops/integrations": {
+      "get": {
+        "operationId": "integrations_v1_ops_integrations_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/IntegrationOut"
+                  },
+                  "title": "Response Integrations V1 Ops Integrations Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "External providers: mode, health, usage, budget",
+        "tags": [
+          "operations"
         ]
       }
     },

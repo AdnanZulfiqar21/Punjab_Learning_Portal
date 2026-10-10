@@ -296,6 +296,9 @@ def submit_rescan(
         raise Unprocessable(e.reason, code_reason="UNSUPPORTED_FILE") from e
     if len(inspected.pages) > MAX_REVISION_PAGES:
         raise Unprocessable(f"A clearer copy can have at most {MAX_REVISION_PAGES} pages.", code_reason="PAGE_LIMIT")
+    from portal_api.modules.system import scanning
+
+    scanning.require_clean(data)  # P06.S4.T1: scanned before anything is stored
     store = storage.get_store()
     file_id = uuid.uuid4()
     keys: list[str] = []

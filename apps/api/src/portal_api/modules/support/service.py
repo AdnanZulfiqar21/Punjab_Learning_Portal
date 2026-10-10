@@ -382,6 +382,9 @@ def add_screenshot(db: Session, who: Principal, ticket_id: uuid.UUID, data: byte
         inspected = evidence.inspect(data)
     except evidence.Rejected as e:
         raise Unprocessable(e.reason, code_reason="SCREENSHOT_REJECTED") from None
+    from portal_api.modules.system import scanning
+
+    scanning.require_clean(data)  # P06.S4.T1: before anything is stored
     page = inspected.pages[0]
     attachment_id = uuid.uuid4()
     store = storage.get_store()

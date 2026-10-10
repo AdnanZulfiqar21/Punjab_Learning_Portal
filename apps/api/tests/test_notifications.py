@@ -274,6 +274,7 @@ def test_production_refuses_the_development_email_adapter() -> None:
         "trial_device_evidence": "required",
         "trial_ref_pepper": "secret",
         "cors_origins": ["https://app.example.invalid"],
+        "upload_scanner": "clamd",
     }
     with pytest.raises(ConfigurationError, match="notification_email_adapter"):
         Settings(**base)
