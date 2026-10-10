@@ -150,3 +150,4 @@ Source plan: `Road Map/Punjab_Learning_Portal_Master_Roadmap_v2.2_Integrated_Wri
 | P18.S2.T3 Supply chain and secrets | PARTIAL (dependency audits + leaked-credential scan in CI; SBOM and bundle checks open) | SUPPLY-CHAIN-01 with reviewed exceptions and baseline. |
 | P12.S1.T2 Question review → lesson | IMPLEMENTED (API + web) | REVIEW-LINKS-01. `tests/test_review_lesson_links.py`. |
 | P09.S4.T2 Generator property tests | PARTIAL (scoring properties done; form-generator properties open) | PROPERTY-01. `tests/test_scoring_properties.py`. |
+| P10.S3.T3 Recoverable result creation | IMPLEMENTED | RECOVERABLE-SCORING-01: durable finalisation, SCORING_PENDING, worker retry exactly once. `tests/test_scoring_recovery.py`. |
