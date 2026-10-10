@@ -1264,6 +1264,29 @@
         "title": "Breadcrumb",
         "type": "object"
       },
+      "Bucket": {
+        "properties": {
+          "from": {
+            "title": "From",
+            "type": "integer"
+          },
+          "learners": {
+            "title": "Learners",
+            "type": "integer"
+          },
+          "to": {
+            "title": "To",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "from",
+          "to",
+          "learners"
+        ],
+        "title": "Bucket",
+        "type": "object"
+      },
       "BusinessOverview": {
         "properties": {
           "active_30d": {
@@ -2558,6 +2581,41 @@
           "surface"
         ],
         "title": "DeviceIn",
+        "type": "object"
+      },
+      "Engagement": {
+        "properties": {
+          "learners_completing": {
+            "title": "Learners Completing",
+            "type": "integer"
+          },
+          "lesson_visit_days_30d": {
+            "title": "Lesson Visit Days 30D",
+            "type": "integer"
+          },
+          "live_lessons": {
+            "title": "Live Lessons",
+            "type": "integer"
+          },
+          "median_completed_pct": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Median Completed Pct"
+          }
+        },
+        "required": [
+          "live_lessons",
+          "learners_completing",
+          "median_completed_pct",
+          "lesson_visit_days_30d"
+        ],
+        "title": "Engagement",
         "type": "object"
       },
       "EntitlementOut": {
@@ -4726,6 +4784,56 @@
         "title": "LearnerRevision",
         "type": "object"
       },
+      "LearningReport": {
+        "properties": {
+          "engagement": {
+            "$ref": "#/components/schemas/Engagement"
+          },
+          "generated_at": {
+            "format": "date-time",
+            "title": "Generated At",
+            "type": "string"
+          },
+          "grade": {
+            "title": "Grade",
+            "type": "integer"
+          },
+          "note": {
+            "title": "Note",
+            "type": "string"
+          },
+          "outcomes": {
+            "$ref": "#/components/schemas/Outcomes"
+          },
+          "report_version": {
+            "title": "Report Version",
+            "type": "integer"
+          },
+          "subject": {
+            "title": "Subject",
+            "type": "string"
+          },
+          "unavailable": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "title": "Unavailable",
+            "type": "object"
+          }
+        },
+        "required": [
+          "report_version",
+          "generated_at",
+          "grade",
+          "subject",
+          "outcomes",
+          "engagement",
+          "unavailable",
+          "note"
+        ],
+        "title": "LearningReport",
+        "type": "object"
+      },
       "LessonOut": {
         "properties": {
           "access_tier": {
@@ -5938,6 +6046,54 @@
           "recent_independent_correct_families"
         ],
         "title": "OutcomeEvidence",
+        "type": "object"
+      },
+      "Outcomes": {
+        "properties": {
+          "distribution": {
+            "items": {
+              "$ref": "#/components/schemas/Bucket"
+            },
+            "title": "Distribution",
+            "type": "array"
+          },
+          "learners_assessed": {
+            "title": "Learners Assessed",
+            "type": "integer"
+          },
+          "median_demonstrated_pct": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Median Demonstrated Pct"
+          },
+          "rules_version": {
+            "title": "Rules Version",
+            "type": "string"
+          },
+          "sample_limit": {
+            "title": "Sample Limit",
+            "type": "integer"
+          },
+          "topics_in_book": {
+            "title": "Topics In Book",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "rules_version",
+          "learners_assessed",
+          "sample_limit",
+          "topics_in_book",
+          "median_demonstrated_pct",
+          "distribution"
+        ],
+        "title": "Outcomes",
         "type": "object"
       },
       "OverviewChapter": {
@@ -11117,6 +11273,61 @@
           }
         },
         "summary": "Learning funnel and repeat study by cohort (MFA)",
+        "tags": [
+          "analytics"
+        ]
+      }
+    },
+    "/v1/admin/analytics/learning": {
+      "get": {
+        "operationId": "learning_v1_admin_analytics_learning_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "grade",
+            "required": true,
+            "schema": {
+              "maximum": 12,
+              "minimum": 11,
+              "title": "Grade",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "subject",
+            "required": true,
+            "schema": {
+              "maxLength": 40,
+              "minLength": 2,
+              "title": "Subject",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LearningReport"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Learning outcomes beside engagement, one book (MFA)",
         "tags": [
           "analytics"
         ]
