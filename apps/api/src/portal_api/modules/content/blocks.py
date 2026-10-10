@@ -13,7 +13,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Annotated, Literal
 
-from pydantic import BaseModel, ConfigDict, Field, TypeAdapter, ValidationError
+from pydantic import BaseModel, ConfigDict, Field, TypeAdapter, ValidationError, model_validator
 
 CONTENT_SCHEMA_VERSION = 1
 PLATFORMS = ("web", "android", "ios")
@@ -43,6 +43,9 @@ REGISTRY: dict[str, BlockSpec] = {
         # Equations need a typeset renderer. No client ships one yet (P01.S4.T2 rendering spike), so every equation
         # needs a reviewed static rendering plus its text equivalent before it can be published.
         BlockSpec("equation", 1, {"web": 2, "android": 2, "ios": 2}, True, "LaTeX equation with text equivalent."),
+        # P07.S1.T3: formative only. Renderer v1 includes it on every platform because no native build had shipped when
+        # it was added (B07); after a store release, a new block type must raise the renderer version instead.
+        BlockSpec("checkpoint", 1, {"web": 1, "android": 1, "ios": 1}, True, "Formative question or self-check."),
     )
 }
 
@@ -105,7 +108,42 @@ class Equation(_Block):
     fallback: Fallback | None = None
 
 
-Block = Annotated[Heading | Paragraph | ListBlock | Callout | Table | Equation, Field(discriminator="type")]
+class CheckpointOption(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    id: Annotated[str, Field(pattern=r"^[a-z0-9]{1,8}$")]
+    text: Short
+
+
+class Checkpoint(_Block):
+    """A formative check at a lesson point (P07.S1.T3; CHECKPOINTS-01). `question`: 2 to 6 options, one key, and the
+    explanation shown after answering. `self_check`: a prompt and what a good answer contains; no key. The key travels
+    with the lesson: checkpoints are self-checks, never stored, scored or counted as learning evidence, and never reuse
+    bank questions (whose keys stay isolated)."""
+
+    type: Literal["checkpoint"]
+    mode: Literal["question", "self_check"] = "question"
+    prompt: Text
+    options: list[CheckpointOption] = Field(default_factory=list, max_length=6)
+    answer_id: str | None = None
+    explanation: Text
+
+    @model_validator(mode="after")
+    def _shape(self) -> Checkpoint:
+        ids = [o.id for o in self.options]
+        if self.mode == "question":
+            if len(ids) < 2:
+                raise ValueError("a question checkpoint needs at least two options")
+            if len(set(ids)) != len(ids):
+                raise ValueError("option ids must be unique")
+            if self.answer_id not in ids:
+                raise ValueError("answer_id must be one of the options")
+        elif ids or self.answer_id is not None:
+            raise ValueError("a self-check has no options or key")
+        return self
+
+
+AnyBlock = Heading | Paragraph | ListBlock | Callout | Table | Equation | Checkpoint
+Block = Annotated[AnyBlock, Field(discriminator="type")]
 
 
 class Body(BaseModel):
@@ -139,9 +177,7 @@ def _loc(loc: tuple[int | str, ...]) -> str:
     return "".join(f"[{p}]" if isinstance(p, int) else f".{p}" for p in parts)
 
 
-def check_renderers(
-    block_list: list[Heading | Paragraph | ListBlock | Callout | Table | Equation], *, for_publication: bool, where: str
-) -> tuple[list[str], list[str]]:
+def check_renderers(block_list: list[AnyBlock], *, for_publication: bool, where: str) -> tuple[list[str], list[str]]:
     """§5.4 rule 4 for any list of blocks (a lesson body, a question stem, an option…). Returns (errors, warnings)."""
     errors: list[str] = []
     warnings: list[str] = []
@@ -173,11 +209,11 @@ def validate_body(body: object, *, for_publication: bool) -> Validation:
     return Validation(errors + r_err, warnings, types)
 
 
-def text_of(block_list: list[Heading | Paragraph | ListBlock | Callout | Table | Equation]) -> str:
+def text_of(block_list: list[AnyBlock]) -> str:
     """Canonical plain text of blocks, for duplicate detection (never for display)."""
     parts: list[str] = []
     for b in block_list:
-        for attr in ("text", "title", "caption", "latex", "text_alt"):
+        for attr in ("text", "title", "caption", "latex", "text_alt", "prompt", "explanation"):
             v = getattr(b, attr, None)
             if isinstance(v, str):
                 parts.append(v)
@@ -185,6 +221,8 @@ def text_of(block_list: list[Heading | Paragraph | ListBlock | Callout | Table |
             v = getattr(b, attr, None)
             if isinstance(v, list):
                 parts.extend(str(x) for x in v)
+        if isinstance(b, Checkpoint):
+            parts.extend(o.text for o in b.options)
         rows = getattr(b, "rows", None)
         if isinstance(rows, list):
             parts.extend(str(c) for r in rows for c in r)

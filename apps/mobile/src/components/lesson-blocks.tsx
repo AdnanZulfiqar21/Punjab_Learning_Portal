@@ -2,6 +2,7 @@
 // natively; an unknown or unsupported block shows an explicit "update required" note instead of failing.
 import { ScrollView, View } from "react-native";
 
+import { Checkpoint } from "@/components/checkpoint";
 import { T } from "@/components/ui";
 import { Radius, Space } from "@/constants/theme";
 import { useTheme } from "@/hooks/use-theme";
@@ -88,6 +89,16 @@ function BlockView({ block: b }: { block: Block }) {
         </View>
       );
     }
+    case "checkpoint":
+      return (
+        <Checkpoint
+          mode={b.mode === "self_check" ? "self_check" : "question"}
+          prompt={str(b.prompt)}
+          options={Array.isArray(b.options) ? (b.options as { id: string; text: string }[]) : []}
+          answerId={typeof b.answer_id === "string" ? b.answer_id : null}
+          explanation={str(b.explanation)}
+        />
+      );
     case "equation":
       // Native renderer 1 has no typeset equations; published lessons carry a reviewed text equivalent (§5.4).
       return (
