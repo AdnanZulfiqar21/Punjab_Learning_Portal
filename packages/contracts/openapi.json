@@ -5509,6 +5509,11 @@
             "title": "Code",
             "type": "string"
           },
+          "entitled": {
+            "description": "Whether this learner can start a new test now (an active plan or trial)",
+            "title": "Entitled",
+            "type": "boolean"
+          },
           "ready": {
             "title": "Ready",
             "type": "boolean"
@@ -5535,7 +5540,8 @@
           "version",
           "sections",
           "ready",
-          "scheduled"
+          "scheduled",
+          "entitled"
         ],
         "title": "MockReadinessOut",
         "type": "object"
@@ -6894,6 +6900,14 @@
           "source_url": {
             "title": "Source Url",
             "type": "string"
+          },
+          "streams": {
+            "description": "Empty: every stream",
+            "items": {
+              "type": "string"
+            },
+            "title": "Streams",
+            "type": "array"
           },
           "total_questions": {
             "title": "Total Questions",

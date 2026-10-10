@@ -5299,6 +5299,11 @@ export interface components {
         MockReadinessOut: {
             /** Code */
             code: string;
+            /**
+             * Entitled
+             * @description Whether this learner can start a new test now (an active plan or trial)
+             */
+            entitled: boolean;
             /** Ready */
             ready: boolean;
             /** Scheduled */
@@ -5901,6 +5906,11 @@ export interface components {
             }[];
             /** Source Url */
             source_url: string;
+            /**
+             * Streams
+             * @description Empty: every stream
+             */
+            streams?: string[];
             /** Total Questions */
             total_questions: number;
             /** Version */

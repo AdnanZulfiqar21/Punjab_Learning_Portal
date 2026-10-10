@@ -76,12 +76,24 @@ def start(db: Session, who: Principal, form_id: uuid.UUID) -> Attempt:
     if existing is not None:
         return existing  # starting is idempotent: one attempt per personal practice form
     if forms.superseded_positions(db, form):
-        # §5.7 before start: a question was quarantined, corrected or replaced since this test was built. The shared
-        # original is never mutated; the learner builds a new test from the approved versions.
-        raise Conflict(
-            "A question in this test was corrected or is under review since it was built. Build a new test.",
-            code_reason="FORM_SUPERSEDED",
-        )
+        # §5.7 before start: a question was quarantined, corrected or replaced since this test was built. An unstarted
+        # personal form gets approved replacements from the same pool (FORM-REPLACE-01); a started one never changes.
+        db.refresh(form, with_for_update=True)
+        started = db.scalar(select(Attempt.id).where(Attempt.form_id == form.id))
+        if started is None and forms.replace_superseded(db, form):
+            db.commit()
+        elif started is None:
+            db.rollback()
+            raise Conflict(
+                "A question in this test was corrected or is under review since it was built, and no approved "
+                "replacement is available. Build a new test.",
+                code_reason="FORM_SUPERSEDED",
+            )
+        else:
+            db.rollback()
+            existing = db.scalar(select(Attempt).where(Attempt.form_id == form_id, Attempt.user_id == who.user.id))
+            if existing is not None:
+                return existing
     now = db_now(db)
     deadline = now + timedelta(seconds=form.duration_s) if form.duration_s else None
     if "session_id" in (form.scope or {}):  # OCT9-04: scheduled mocks are admitted against an absolute deadline

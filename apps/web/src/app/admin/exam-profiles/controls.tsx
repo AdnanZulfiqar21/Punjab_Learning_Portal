@@ -16,6 +16,7 @@ export const RULES_TEMPLATE = JSON.stringify(
     negative_marks: 0,
     invalid_item_treatment: "EXCLUDE",
     solution_release: "after_submission",
+    streams: [],
     sections: [{ subject: "biology", grades: [11, 12], questions: 0, label: "" }],
   },
   null,

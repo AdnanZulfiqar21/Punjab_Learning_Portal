@@ -78,7 +78,15 @@ async function Patterns() {
                 {r.scheduled && <li>This pattern uses a scheduled window, which isn&apos;t available yet.</li>}
               </ul>
             )}
-            {r?.ready && <StartMock code={p.code} />}
+            {r?.ready && r.entitled && <StartMock code={p.code} />}
+            {r?.ready && !r.entitled && (
+              <p className="text-sm">
+                Mock tests are included with a plan or the free 30-day trial.{" "}
+                <Link href="/account" className="text-accent underline underline-offset-2">
+                  Start your free trial or see your plan
+                </Link>
+              </p>
+            )}
           </li>
         );
       })}
