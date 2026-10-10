@@ -41,6 +41,7 @@ class Permission(StrEnum):
     look_up_learners = "look_up_learners"  # P15.S3.T3: learner lookup, redacted timeline, assisted access
     manage_exam_profiles = "manage_exam_profiles"  # P05.S3: draft, verify (two people) and publish exam profiles
     manage_catalogue = "manage_catalogue"  # P06.S1.T1: preview and apply catalogue changes (MFA)
+    view_business_overview = "view_business_overview"  # P16.S1.T1: aggregate business figures (MFA)
 
 
 ROLE_PERMISSIONS: dict[Role, frozenset[Permission]] = {
@@ -59,7 +60,9 @@ ROLE_PERMISSIONS: dict[Role, frozenset[Permission]] = {
             Permission.look_up_learners,
         }
     ),
-    Role.finance: frozenset({Permission.finance_operations, Permission.grant_entitlements}),
+    Role.finance: frozenset(
+        {Permission.finance_operations, Permission.grant_entitlements, Permission.view_business_overview}
+    ),
     Role.platform_operator: frozenset({Permission.operate_platform}),
     Role.owner_admin: frozenset(
         {
@@ -69,6 +72,7 @@ ROLE_PERMISSIONS: dict[Role, frozenset[Permission]] = {
             Permission.grant_entitlements,
             Permission.manage_exam_profiles,
             Permission.manage_catalogue,
+            Permission.view_business_overview,
         }
     ),
 }
@@ -89,6 +93,7 @@ MFA_REQUIRED: frozenset[Permission] = frozenset(
         Permission.look_up_learners,
         Permission.manage_exam_profiles,
         Permission.manage_catalogue,
+        Permission.view_business_overview,
     }
 )
 

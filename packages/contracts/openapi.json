@@ -1264,6 +1264,85 @@
         "title": "Breadcrumb",
         "type": "object"
       },
+      "BusinessOverview": {
+        "properties": {
+          "active_30d": {
+            "title": "Active 30D",
+            "type": "integer"
+          },
+          "active_7d": {
+            "title": "Active 7D",
+            "type": "integer"
+          },
+          "content_usage_30d": {
+            "$ref": "#/components/schemas/ContentUsage"
+          },
+          "definitions": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "title": "Definitions",
+            "type": "object"
+          },
+          "entitlements_active": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "title": "Entitlements Active",
+            "type": "object"
+          },
+          "generated_at": {
+            "format": "date-time",
+            "title": "Generated At",
+            "type": "string"
+          },
+          "learners": {
+            "title": "Learners",
+            "type": "integer"
+          },
+          "refunds": {
+            "$ref": "#/components/schemas/Unavailable"
+          },
+          "report_version": {
+            "title": "Report Version",
+            "type": "integer"
+          },
+          "revenue": {
+            "$ref": "#/components/schemas/Unavailable"
+          },
+          "test_accounts": {
+            "title": "Test Accounts",
+            "type": "integer"
+          },
+          "trial_cohorts": {
+            "items": {
+              "$ref": "#/components/schemas/TrialCohort"
+            },
+            "title": "Trial Cohorts",
+            "type": "array"
+          },
+          "verified_purchases": {
+            "$ref": "#/components/schemas/Unavailable"
+          }
+        },
+        "required": [
+          "report_version",
+          "generated_at",
+          "definitions",
+          "learners",
+          "active_7d",
+          "active_30d",
+          "test_accounts",
+          "entitlements_active",
+          "verified_purchases",
+          "refunds",
+          "revenue",
+          "trial_cohorts",
+          "content_usage_30d"
+        ],
+        "title": "BusinessOverview",
+        "type": "object"
+      },
       "CancelIn": {
         "properties": {
           "reason": {
@@ -2208,6 +2287,34 @@
           "withdrawn_at"
         ],
         "title": "ConsentOut",
+        "type": "object"
+      },
+      "ContentUsage": {
+        "properties": {
+          "engaged_learners": {
+            "title": "Engaged Learners",
+            "type": "integer"
+          },
+          "lessons_completed": {
+            "title": "Lessons Completed",
+            "type": "integer"
+          },
+          "tests_submitted": {
+            "title": "Tests Submitted",
+            "type": "integer"
+          },
+          "written_sealed": {
+            "title": "Written Sealed",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "lessons_completed",
+          "tests_submitted",
+          "written_sealed",
+          "engaged_learners"
+        ],
+        "title": "ContentUsage",
         "type": "object"
       },
       "CriterionResult": {
@@ -9273,6 +9380,44 @@
         "title": "TopicNode",
         "type": "object"
       },
+      "TrialCohort": {
+        "properties": {
+          "converted_to_paid": {
+            "title": "Converted To Paid",
+            "type": "integer"
+          },
+          "ended": {
+            "title": "Ended",
+            "type": "integer"
+          },
+          "open": {
+            "title": "Open",
+            "type": "boolean"
+          },
+          "running": {
+            "title": "Running",
+            "type": "integer"
+          },
+          "started": {
+            "title": "Started",
+            "type": "integer"
+          },
+          "week_start": {
+            "title": "Week Start",
+            "type": "string"
+          }
+        },
+        "required": [
+          "week_start",
+          "started",
+          "running",
+          "ended",
+          "converted_to_paid",
+          "open"
+        ],
+        "title": "TrialCohort",
+        "type": "object"
+      },
       "TrialDecisionOut": {
         "properties": {
           "claim_status": {
@@ -9471,6 +9616,36 @@
           "reason"
         ],
         "title": "TrialOut",
+        "type": "object"
+      },
+      "Unavailable": {
+        "properties": {
+          "available": {
+            "title": "Available",
+            "type": "boolean"
+          },
+          "blocker": {
+            "title": "Blocker",
+            "type": "string"
+          },
+          "value": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Value"
+          }
+        },
+        "required": [
+          "value",
+          "available",
+          "blocker"
+        ],
+        "title": "Unavailable",
         "type": "object"
       },
       "UploadOut": {
@@ -10870,6 +11045,27 @@
         "summary": "Search the audit trail (owner/admin, MFA; redacted)",
         "tags": [
           "audit"
+        ]
+      }
+    },
+    "/v1/admin/business-overview": {
+      "get": {
+        "operationId": "business_overview_v1_admin_business_overview_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BusinessOverview"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Business overview: aggregate figures with definitions (MFA)",
+        "tags": [
+          "business overview"
         ]
       }
     },
