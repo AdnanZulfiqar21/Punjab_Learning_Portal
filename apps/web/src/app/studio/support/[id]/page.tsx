@@ -82,6 +82,22 @@ async function Ticket({ id }: { id: string }) {
         {!ctx.learner && !ctx.question && <p className="text-muted">No extra context.</p>}
         {!ctx.learner && ctx.question && <p className="text-muted">The learner&apos;s identity is not shown to reviewers.</p>}
       </section>
+      {(t.corrections ?? []).length > 0 && (
+        <section aria-labelledby="corr-h" className="space-y-1 rounded-xl border border-border bg-surface p-4 text-sm">
+          <h2 id="corr-h" className="font-semibold">
+            Corrections of the reported question
+          </h2>
+          <ul className="space-y-1">
+            {(t.corrections ?? []).map((c) => (
+              <li key={c.id}>
+                <Badge tone={c.status === "effective" ? "ok" : "info"}>{c.defect}</Badge> {new Date(c.decided_at).toLocaleDateString("en-GB", { dateStyle: "medium" })} ·{" "}
+                {c.same_version ? "same version as reported" : "another version"} · {c.status}
+                <span className="block text-muted">{c.reason}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
       <ScreenshotList ticketId={t.id} shots={t.attachments ?? []} />
       <ol className="space-y-3" aria-label="Conversation">
         {t.messages.map((m, i) => (

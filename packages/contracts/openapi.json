@@ -2364,6 +2364,37 @@
         "title": "ContentUsage",
         "type": "object"
       },
+      "CorrectionLink": {
+        "description": "A reviewed correction of the reported question (P12.S1.T3, REPORT-LINKS-01).",
+        "properties": {
+          "decided_at": {
+            "format": "date-time",
+            "title": "Decided At",
+            "type": "string"
+          },
+          "defect": {
+            "title": "Defect",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "status": {
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "defect",
+          "status",
+          "decided_at"
+        ],
+        "title": "CorrectionLink",
+        "type": "object"
+      },
       "CriterionResult": {
         "properties": {
           "description": {
@@ -9036,6 +9067,47 @@
         "title": "StaffArticle",
         "type": "object"
       },
+      "StaffCorrectionLink": {
+        "properties": {
+          "decided_at": {
+            "format": "date-time",
+            "title": "Decided At",
+            "type": "string"
+          },
+          "defect": {
+            "title": "Defect",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "reason": {
+            "title": "Reason",
+            "type": "string"
+          },
+          "same_version": {
+            "description": "The correction is for the exact version the learner reported",
+            "title": "Same Version",
+            "type": "boolean"
+          },
+          "status": {
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "defect",
+          "status",
+          "decided_at",
+          "reason",
+          "same_version"
+        ],
+        "title": "StaffCorrectionLink",
+        "type": "object"
+      },
       "StaffDraft": {
         "description": "PR32-02: everything a saved, unreleased draft of this case intends, restored when the workspace reopens.",
         "properties": {
@@ -9222,6 +9294,13 @@
             "additionalProperties": true,
             "title": "Context",
             "type": "object"
+          },
+          "corrections": {
+            "items": {
+              "$ref": "#/components/schemas/StaffCorrectionLink"
+            },
+            "title": "Corrections",
+            "type": "array"
           },
           "created_at": {
             "format": "date-time",
@@ -9732,6 +9811,14 @@
             ],
             "title": "Category",
             "type": "string"
+          },
+          "corrections": {
+            "description": "Reviewed corrections of the question you reported",
+            "items": {
+              "$ref": "#/components/schemas/CorrectionLink"
+            },
+            "title": "Corrections",
+            "type": "array"
           },
           "created_at": {
             "format": "date-time",

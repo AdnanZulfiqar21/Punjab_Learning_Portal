@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
 import { Suspense } from "react";
 import type { SupportTicket } from "@portal/contracts";
-import { Badge, Breadcrumbs, SkeletonLines } from "@/components/ui";
+import { Badge, Breadcrumbs, Notice, SkeletonLines } from "@/components/ui";
 import { api, currentUser } from "@/lib/session";
 import { STATUS_LABEL, statusTone } from "../status";
 import { ReplyBox } from "./reply-box";
@@ -46,6 +46,12 @@ async function Ticket({ id }: { id: string }) {
           </li>
         ))}
       </ol>
+      {(t.corrections ?? []).map((c) => (
+        <Notice key={c.id} tone="info" title={c.defect === "VOID" ? "The question was withdrawn after review" : "The question's answer was corrected after review"}>
+          Recorded on {new Date(c.decided_at).toLocaleDateString("en-GB", { dateStyle: "medium" })}. Affected results were re-scored as a new score version.
+          {c.status === "superseded" && " A later decision replaced this one."}
+        </Notice>
+      ))}
       <ScreenshotList ticketId={t.id} shots={t.attachments ?? []} />
       {t.status !== "resolved" && <AddScreenshot ticketId={t.id} remaining={5 - (t.attachments?.length ?? 0)} />}
       <ReplyBox id={t.id} />
