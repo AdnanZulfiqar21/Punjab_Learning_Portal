@@ -8,6 +8,7 @@ from typing import Annotated, Any, Literal
 
 from fastapi import APIRouter, Depends, Query, Request, Response
 from pydantic import BaseModel, Field
+from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from portal_api.db import get_session
@@ -73,6 +74,34 @@ class AttachmentOut(BaseModel):
     created_at: datetime
 
 
+class CorrectionLink(BaseModel):
+    """A reviewed correction of the reported question (P12.S1.T3, REPORT-LINKS-01)."""
+
+    id: uuid.UUID
+    defect: str
+    status: str
+    decided_at: datetime
+
+
+class StaffCorrectionLink(CorrectionLink):
+    reason: str
+    same_version: bool = Field(description="The correction is for the exact version the learner reported")
+
+
+def _corrections(db: Session, t: SupportTicket) -> list[Any]:
+    from portal_api.modules.assessment.models import McqAdjudication
+
+    if t.content_item_id is None:
+        return []
+    return list(
+        db.scalars(
+            select(McqAdjudication)
+            .where(McqAdjudication.item_id == t.content_item_id)
+            .order_by(McqAdjudication.decided_at)
+        )
+    )
+
+
 class TicketOut(BaseModel):
     id: uuid.UUID
     category: Category
@@ -83,6 +112,9 @@ class TicketOut(BaseModel):
     updated_at: datetime
     messages: list[MessageOut]
     attachments: list[AttachmentOut] = Field(default_factory=list, description="Screenshots you added")
+    corrections: list[CorrectionLink] = Field(
+        default_factory=list, description="Reviewed corrections of the question you reported"
+    )
 
 
 class StaffTicketOut(BaseModel):
@@ -98,6 +130,7 @@ class StaffTicketOut(BaseModel):
     context: dict[str, Any]
     escalated_at: datetime | None = None
     escalation_reason: str | None = None
+    corrections: list[StaffCorrectionLink] = Field(default_factory=list)
 
 
 class EscalateIn(BaseModel):
@@ -116,6 +149,10 @@ def _learner_view(db: Session, t: SupportTicket) -> TicketOut:
         updated_at=t.updated_at,
         messages=[MessageOut(from_staff=m.from_staff, body=m.body, created_at=m.created_at) for m in msgs],
         attachments=_attachments(db, t),
+        corrections=[
+            CorrectionLink(id=a.id, defect=a.defect, status=a.status, decided_at=a.decided_at)
+            for a in _corrections(db, t)
+        ],
     )
 
 
@@ -144,6 +181,17 @@ def _staff_view(db: Session, who: Principal, t: SupportTicket, *, with_context: 
         context=service.context(db, who, t) if with_context else {},
         escalated_at=t.escalated_at,
         escalation_reason=t.escalation_reason,
+        corrections=[
+            StaffCorrectionLink(
+                id=a.id,
+                defect=a.defect,
+                status=a.status,
+                decided_at=a.decided_at,
+                reason=a.reason,
+                same_version=a.version_id == t.content_version_id,
+            )
+            for a in _corrections(db, t)
+        ],
     )
 
 

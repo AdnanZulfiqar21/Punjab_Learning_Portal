@@ -4040,6 +4040,26 @@ export interface components {
             /** Written Sealed */
             written_sealed: number;
         };
+        /**
+         * CorrectionLink
+         * @description A reviewed correction of the reported question (P12.S1.T3, REPORT-LINKS-01).
+         */
+        CorrectionLink: {
+            /**
+             * Decided At
+             * Format: date-time
+             */
+            decided_at: string;
+            /** Defect */
+            defect: string;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Status */
+            status: string;
+        };
         /** CriterionResult */
         CriterionResult: {
             /** Description */
@@ -6739,6 +6759,30 @@ export interface components {
             /** Working Version */
             working_version: number | null;
         };
+        /** StaffCorrectionLink */
+        StaffCorrectionLink: {
+            /**
+             * Decided At
+             * Format: date-time
+             */
+            decided_at: string;
+            /** Defect */
+            defect: string;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Reason */
+            reason: string;
+            /**
+             * Same Version
+             * @description The correction is for the exact version the learner reported
+             */
+            same_version: boolean;
+            /** Status */
+            status: string;
+        };
         /**
          * StaffDraft
          * @description PR32-02: everything a saved, unreleased draft of this case intends, restored when the workspace reopens.
@@ -6835,6 +6879,8 @@ export interface components {
             context: {
                 [key: string]: unknown;
             };
+            /** Corrections */
+            corrections?: components["schemas"]["StaffCorrectionLink"][];
             /**
              * Created At
              * Format: date-time
@@ -7035,6 +7081,11 @@ export interface components {
              * @enum {string}
              */
             category: "account" | "access" | "technical" | "academic_report" | "other";
+            /**
+             * Corrections
+             * @description Reviewed corrections of the question you reported
+             */
+            corrections?: components["schemas"]["CorrectionLink"][];
             /**
              * Created At
              * Format: date-time

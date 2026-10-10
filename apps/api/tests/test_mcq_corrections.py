@@ -115,6 +115,13 @@ def test_rehearsal_disputed_question_soft_then_void(client: TestClient, physics:
         assert after["revised_at"] is not None
         notes = [n["event"] for n in client.get("/v1/me/notifications", headers=learner.headers).json()["items"]]
         assert notes.count("score.revised") == 1
+        # P12.S1.T3 (REPORT-LINKS-01): the report shows the correction that resolved it, to the learner and to staff.
+        mine = client.get(f"/v1/support/tickets/{report.json()['id']}", headers=learner.headers).json()
+        assert [(c["id"], c["defect"]) for c in mine["corrections"]] == [(done.json()["id"], "VOID")]
+        assert "reason" not in mine["corrections"][0]  # the learner sees the outcome, not the academic notes
+        staff = client.get(f"/v1/staff/support/tickets/{report.json()['id']}", headers=adjudicator.headers).json()
+        assert staff["corrections"][0]["reason"] == "Fixture: confirmed no valid option"
+        assert staff["corrections"][0]["same_version"] is True
         # Rerunning propagation (the recovery CLI path) adds nothing.
         with get_sessionmaker()() as db:
             assert adjudications.propagate(db, uuid.UUID(done.json()["version_id"])) == 0
