@@ -151,3 +151,5 @@ Source plan: `Road Map/Punjab_Learning_Portal_Master_Roadmap_v2.2_Integrated_Wri
 | P12.S1.T2 Question review → lesson | IMPLEMENTED (API + web) | REVIEW-LINKS-01. `tests/test_review_lesson_links.py`. |
 | P09.S4.T2 Generator property tests | PARTIAL (scoring properties done; form-generator properties open) | PROPERTY-01. `tests/test_scoring_properties.py`. |
 | P10.S3.T3 Recoverable result creation | IMPLEMENTED | RECOVERABLE-SCORING-01: durable finalisation, SCORING_PENDING, worker retry exactly once. `tests/test_scoring_recovery.py`. |
+| P17.S3.T2 Safe releases | PARTIAL (manifest + migration rules in CI; staged deploy/rollback waits on B03) | RELEASE-01. `tests/test_release.py`. |
+| P18.S1.T1 Attack-surface map | IMPLEMENTED (engineering record; independent review open) | ATTACK-SURFACE-01, `docs/security/attack-surface.md`. |
