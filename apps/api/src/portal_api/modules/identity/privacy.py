@@ -35,8 +35,8 @@ _EXCLUDED = ("hash", "token", "secret", "installation_ref", "evidence", "pepper"
 # inventory; `tests/test_privacy.py` fails when a new per-person table is in neither list).
 EXPORTED_TABLES = frozenset(
     {
-        "allowance_event", "attempt", "consent_record", "entitlement", "export_job", "lesson_completion",
-        "mistake_entry",
+        "allowance_event", "analytics_event", "attempt", "consent_record", "entitlement", "export_job",
+        "lesson_completion", "mistake_entry",
         "mock_accommodation", "notification", "notification_preference", "practice_form", "student_profile",
         "support_assisted_access", "support_ticket", "trial_claim", "trial_device_use", "trial_exception",
         "trial_grant", "user_session", "written_attempt", "written_form", "written_notice", "written_recheck_request",
@@ -68,6 +68,7 @@ def _rows(db: Session, model: Any, *where: Any) -> list[dict[str, Any]]:
 def export(db: Session, user: AppUser) -> tuple[bytes, str]:
     from portal_api.modules.access.models import AllowanceEvent, Entitlement, TrialGrant
     from portal_api.modules.access.trial_devices import TrialClaim, TrialDeviceUse, TrialException
+    from portal_api.modules.analytics.events import AnalyticsEvent
     from portal_api.modules.assessment import notebook
     from portal_api.modules.assessment.models import Attempt, AttemptAnswer, PracticeForm, ScoreVersion
     from portal_api.modules.assessment.notebook import MistakeEntry
@@ -152,6 +153,7 @@ def export(db: Session, user: AppUser) -> tuple[bytes, str]:
             "assisted_access": _rows(db, SupportAssistedAccess, SupportAssistedAccess.user_id == uid),
         },
         "exports": _rows(db, ExportJob, ExportJob.owner_id == uid),
+        "analytics_events": _rows(db, AnalyticsEvent, AnalyticsEvent.user_id == uid),
         "notifications": _rows(db, Notification, Notification.user_id == uid),
         "notification_preferences": _rows(db, NotificationPreference, NotificationPreference.user_id == uid),
     }

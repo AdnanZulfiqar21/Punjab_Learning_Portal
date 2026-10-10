@@ -5,6 +5,7 @@ import { Suspense } from "react";
 import type { Lesson, TopicNode } from "@portal/contracts";
 import { setLessonCompleted } from "@/app/actions/lessons";
 import { LessonBlocks } from "@/components/lesson-blocks";
+import { LessonStartBeacon } from "@/components/lesson-start-beacon";
 import { getChapter, getLessons } from "@/lib/api";
 import { CONTENT_STATE_TEXT, GRADE_LABEL, assessmentSummary, pageRange } from "@/lib/format";
 import { Badge, Breadcrumbs, Notice, SkeletonLines } from "@/components/ui";
@@ -219,6 +220,7 @@ async function Lessons({ chapterId, topics, lang }: { chapterId: string; topics:
               </div>
             ) : (
               <div lang={l.language === "ur" ? "ur" : "en"} dir={l.language === "ur" ? "rtl" : undefined}>
+                {token && <LessonStartBeacon lessonId={l.id} language={l.language} />}
                 <LessonBlocks blocks={l.body.blocks as { type: string }[]} headingOffset={2} />
               </div>
             )}

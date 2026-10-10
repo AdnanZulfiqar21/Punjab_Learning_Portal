@@ -322,7 +322,41 @@ def claim(
     install_token: str | None,
     label: str = "",
 ) -> Decision:
-    """Start (or recover) the one trial for this account, following §16.2 in order."""
+    """Start (or recover) the one trial for this account, following §16.2 in order; the decision is an analytics
+    event (P16.S2.T1), recorded once per request key and outcome."""
+    from portal_api.modules.analytics.events import emit
+
+    decision = _claim(
+        db,
+        user_id,
+        surface=surface,
+        idempotency_key=idempotency_key,
+        proof=proof,
+        install_token=install_token,
+        label=label,
+    )
+    emit(
+        db,
+        "trial.decided",
+        key=f"{user_id}:{idempotency_key}:{decision.state}",
+        user_id=user_id,
+        state=decision.state,
+        surface=surface,
+    )
+    db.commit()
+    return decision
+
+
+def _claim(
+    db: Session,
+    user_id: uuid.UUID,
+    *,
+    surface: Surface,
+    idempotency_key: str,
+    proof: dict[str, Any],
+    install_token: str | None,
+    label: str = "",
+) -> Decision:
     from portal_api.modules.access import service as access
 
     if surface != "web" and not install_token:

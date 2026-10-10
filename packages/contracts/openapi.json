@@ -4767,6 +4767,30 @@
         "title": "LessonOut",
         "type": "object"
       },
+      "LessonStartedIn": {
+        "properties": {
+          "language": {
+            "default": "en",
+            "enum": [
+              "en",
+              "ur",
+              "roman_ur"
+            ],
+            "title": "Language",
+            "type": "string"
+          },
+          "lesson_id": {
+            "format": "uuid",
+            "title": "Lesson Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "lesson_id"
+        ],
+        "title": "LessonStartedIn",
+        "type": "object"
+      },
       "LinkedAttemptOut": {
         "properties": {
           "attempt_id": {
@@ -10921,6 +10945,32 @@
   },
   "openapi": "3.1.0",
   "paths": {
+    "/v1/admin/analytics/dictionary": {
+      "get": {
+        "operationId": "analytics_dictionary_v1_admin_analytics_dictionary_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "additionalProperties": true,
+                    "type": "object"
+                  },
+                  "title": "Response Analytics Dictionary V1 Admin Analytics Dictionary Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "The analytics event dictionary (owner/admin, finance; MFA)",
+        "tags": [
+          "analytics"
+        ]
+      }
+    },
     "/v1/admin/audit": {
       "get": {
         "operationId": "search_v1_admin_audit_get",
@@ -12987,6 +13037,40 @@
         "summary": "Ask for your account and data to be deleted (handled by support under the retention policy)",
         "tags": [
           "identity"
+        ]
+      }
+    },
+    "/v1/me/events/lesson-started": {
+      "post": {
+        "operationId": "lesson_started_v1_me_events_lesson_started_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LessonStartedIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Record that you opened a lesson (once a day)",
+        "tags": [
+          "analytics"
         ]
       }
     },

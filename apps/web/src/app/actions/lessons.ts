@@ -12,3 +12,10 @@ export async function setLessonCompleted(lessonId: string, chapterId: string, do
   await api<null>(`/v1/me/lessons/${encodeURIComponent(lessonId)}/complete`, { method: done ? "POST" : "DELETE", token: t });
   revalidatePath(path);
 }
+
+/** P16.S2.T1: the lesson.started analytics event (the API records it at most once per lesson per day). */
+export async function recordLessonStart(lessonId: string, language: string): Promise<void> {
+  const t = await sessionToken();
+  if (!t) return;
+  await api<null>("/v1/me/events/lesson-started", { method: "POST", token: t, body: JSON.stringify({ lesson_id: lessonId, language }) });
+}
