@@ -7,6 +7,7 @@ from sqlalchemy import create_engine, pool
 
 import portal_api.modules.access.models
 import portal_api.modules.access.trial_devices
+import portal_api.modules.analytics.events
 import portal_api.modules.assessment.models
 import portal_api.modules.assessment.notebook
 import portal_api.modules.assessment.profiles

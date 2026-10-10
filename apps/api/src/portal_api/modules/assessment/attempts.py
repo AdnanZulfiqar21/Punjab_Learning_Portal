@@ -86,7 +86,7 @@ def start(db: Session, who: Principal, form_id: uuid.UUID) -> Attempt:
 
         deadline = admit(db, form, who.user.id, now)
     cutoff = deadline + timedelta(milliseconds=form.late_write_tolerance_ms) if deadline else None
-    db.execute(
+    created = db.scalar(
         insert(Attempt)
         .values(
             id=uuid.uuid4(),
@@ -99,7 +99,22 @@ def start(db: Session, who: Principal, form_id: uuid.UUID) -> Attempt:
             cutoff_at=cutoff,
         )
         .on_conflict_do_nothing(constraint="uq_attempt_form_user")
+        .returning(Attempt.id)
     )
+    if created is not None:  # P16.S2.T1: only the request that really started it
+        from portal_api.modules.analytics.events import emit
+
+        emit(
+            db,
+            "attempt.started",
+            key=str(created),
+            user_id=who.user.id,
+            at=now,
+            attempt_id=str(created),
+            form_kind=form.kind,
+            question_count=form.question_count,
+            timed=deadline is not None,
+        )
     db.commit()
     attempt = db.scalar(select(Attempt).where(Attempt.form_id == form_id, Attempt.user_id == who.user.id))
     assert attempt is not None
@@ -189,6 +204,20 @@ def _apply(
     )
     db.add(row)
     db.flush()
+    from portal_api.modules.analytics.events import emit
+
+    emit(
+        db,
+        "answer.saved",
+        key=f"{attempt.id}:{op.op_id}",
+        user_id=attempt.user_id,
+        at=now,
+        attempt_id=str(attempt.id),
+        position=int(op.position),
+        state=disposition,
+        cleared=op.option_id is None,
+        via=via,
+    )
     return _receipt_of(row, replay=False)
 
 
@@ -225,6 +254,19 @@ def _finalise(
     )
     db.add(receipt)
     _score(db, attempt, form, answers, reason=f"finalised ({reason})")
+    from portal_api.modules.analytics.events import emit
+
+    emit(
+        db,
+        "attempt.submitted",
+        key=str(attempt.id),
+        user_id=attempt.user_id,
+        at=now,
+        attempt_id=str(attempt.id),
+        reason=reason,
+        answered=receipt.answered_count,
+        question_count=receipt.question_count,
+    )
     from portal_api.modules.assessment import notebook
 
     notebook.apply_attempt(db, attempt, now)  # P12.S3: wrong answers join the mistake notebook (unless held)
@@ -271,6 +313,18 @@ def _score(
         reason=reason,
     )
     db.add(sv)
+    from portal_api.modules.analytics.events import emit
+
+    emit(
+        db,
+        "score.version_created",
+        key=f"{attempt.id}:1",
+        user_id=attempt.user_id,
+        attempt_id=str(attempt.id),
+        version=1,
+        status=result.status,
+        correction=False,
+    )
     return sv
 
 

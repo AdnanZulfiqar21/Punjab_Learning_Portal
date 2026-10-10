@@ -4,6 +4,23 @@
  */
 
 export interface paths {
+    "/v1/admin/analytics/dictionary": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** The analytics event dictionary (owner/admin, finance; MFA) */
+        get: operations["analytics_dictionary_v1_admin_analytics_dictionary_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/admin/audit": {
         parameters: {
             query?: never;
@@ -739,6 +756,23 @@ export interface paths {
         put?: never;
         /** Ask for your account and data to be deleted (handled by support under the retention policy) */
         post: operations["deletion_request_v1_me_deletion_request_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/me/events/lesson-started": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Record that you opened a lesson (once a day) */
+        post: operations["lesson_started_v1_me_events_lesson_started_post"];
         delete?: never;
         options?: never;
         head?: never;
@@ -4847,6 +4881,20 @@ export interface components {
             /** Version */
             version: number;
         };
+        /** LessonStartedIn */
+        LessonStartedIn: {
+            /**
+             * Language
+             * @default en
+             * @enum {string}
+             */
+            language: "en" | "ur" | "roman_ur";
+            /**
+             * Lesson Id
+             * Format: uuid
+             */
+            lesson_id: string;
+        };
         /** LinkedAttemptOut */
         LinkedAttemptOut: {
             /** Attempt Id */
@@ -7365,6 +7413,28 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
+    analytics_dictionary_v1_admin_analytics_dictionary_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        [key: string]: unknown;
+                    }[];
+                };
+            };
+        };
+    };
     search_v1_admin_audit_get: {
         parameters: {
             query?: {
@@ -8734,6 +8804,37 @@ export interface operations {
                         [key: string]: string;
                     };
                 };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    lesson_started_v1_me_events_lesson_started_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["LessonStartedIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
             };
             /** @description Validation Error */
             422: {

@@ -49,6 +49,16 @@ def complete(db: Session, user_id: uuid.UUID, item_id: uuid.UUID) -> None:
     if existing is None:
         assert item.published_version_id is not None
         db.add(LessonCompletion(user_id=user_id, item_id=item.id, version_id=item.published_version_id))
+        from portal_api.modules.analytics.events import emit
+
+        emit(
+            db,
+            "lesson.completed",
+            key=f"{user_id}:{item.id}:{item.published_version_id}",
+            user_id=user_id,
+            lesson_id=str(item.id),
+            version_id=str(item.published_version_id),
+        )
         db.commit()
 
 

@@ -270,6 +270,18 @@ def rescore(db: Session, attempt_id: uuid.UUID) -> ScoreVersion | None:
     )
     db.add(sv)
     db.flush()
+    from portal_api.modules.analytics.events import emit
+
+    emit(
+        db,
+        "score.version_created",
+        key=f"{attempt.id}:{sv.version}",
+        user_id=attempt.user_id,
+        attempt_id=str(attempt.id),
+        version=sv.version,
+        status=sv.status,
+        correction=True,
+    )
     from portal_api.modules.assessment import notebook
 
     notebook.apply_attempt(db, attempt, _now(db))  # a correction re-derives, never counts as a new response

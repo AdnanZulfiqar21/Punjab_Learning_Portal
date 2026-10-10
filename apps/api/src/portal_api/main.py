@@ -12,6 +12,7 @@ from portal_api import errors, observability
 from portal_api.config import get_settings
 from portal_api.modules.access import trial_devices
 from portal_api.modules.access.router import router as access_router
+from portal_api.modules.analytics.events import router as analytics_router
 from portal_api.modules.assessment.router import router as assessment_router
 from portal_api.modules.audit.router import router as audit_router
 from portal_api.modules.content import router as content
@@ -95,6 +96,7 @@ def create_app() -> FastAPI:
     app.include_router(exports_router)
     app.include_router(catalogue_admin_router)
     app.include_router(business_router)
+    app.include_router(analytics_router)
     if settings.dev_auth_enabled:  # refused in staging/production by the startup validator
         app.include_router(dev_auth.router)
     return app
