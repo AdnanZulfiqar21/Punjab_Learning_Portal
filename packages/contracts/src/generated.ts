@@ -21,6 +21,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/admin/business-overview": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Business overview: aggregate figures with definitions (MFA) */
+        get: operations["business_overview_v1_admin_business_overview_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/admin/catalogue/apply": {
         parameters: {
             query?: never;
@@ -3443,6 +3460,38 @@ export interface components {
             source_id: string;
             subject: components["schemas"]["SubjectOut"];
         };
+        /** BusinessOverview */
+        BusinessOverview: {
+            /** Active 30D */
+            active_30d: number;
+            /** Active 7D */
+            active_7d: number;
+            content_usage_30d: components["schemas"]["ContentUsage"];
+            /** Definitions */
+            definitions: {
+                [key: string]: string;
+            };
+            /** Entitlements Active */
+            entitlements_active: {
+                [key: string]: number;
+            };
+            /**
+             * Generated At
+             * Format: date-time
+             */
+            generated_at: string;
+            /** Learners */
+            learners: number;
+            refunds: components["schemas"]["Unavailable"];
+            /** Report Version */
+            report_version: number;
+            revenue: components["schemas"]["Unavailable"];
+            /** Test Accounts */
+            test_accounts: number;
+            /** Trial Cohorts */
+            trial_cohorts: components["schemas"]["TrialCohort"][];
+            verified_purchases: components["schemas"]["Unavailable"];
+        };
         /** CancelIn */
         CancelIn: {
             /** Reason */
@@ -3819,6 +3868,17 @@ export interface components {
             version: string;
             /** Withdrawn At */
             withdrawn_at: string | null;
+        };
+        /** ContentUsage */
+        ContentUsage: {
+            /** Engaged Learners */
+            engaged_learners: number;
+            /** Lessons Completed */
+            lessons_completed: number;
+            /** Tests Submitted */
+            tests_submitted: number;
+            /** Written Sealed */
+            written_sealed: number;
         };
         /** CriterionResult */
         CriterionResult: {
@@ -6696,6 +6756,21 @@ export interface components {
             /** Title */
             title: string;
         };
+        /** TrialCohort */
+        TrialCohort: {
+            /** Converted To Paid */
+            converted_to_paid: number;
+            /** Ended */
+            ended: number;
+            /** Open */
+            open: boolean;
+            /** Running */
+            running: number;
+            /** Started */
+            started: number;
+            /** Week Start */
+            week_start: string;
+        };
         /** TrialDecisionOut */
         TrialDecisionOut: {
             /** Claim Status */
@@ -6764,6 +6839,15 @@ export interface components {
              * @enum {string}
              */
             status: "available" | "not_eligible" | "active" | "ended" | "converted" | "revoked";
+        };
+        /** Unavailable */
+        Unavailable: {
+            /** Available */
+            available: boolean;
+            /** Blocker */
+            blocker: string;
+            /** Value */
+            value: number | null;
         };
         /** UploadOut */
         UploadOut: {
@@ -7303,6 +7387,26 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    business_overview_v1_admin_business_overview_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BusinessOverview"];
                 };
             };
         };
