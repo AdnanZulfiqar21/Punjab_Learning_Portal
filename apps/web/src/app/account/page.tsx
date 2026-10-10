@@ -94,6 +94,11 @@ async function Account() {
               Learning funnel
             </Link>
           )}
+          {me.roles.some((r) => r === "owner_admin" || r === "finance") && (
+            <Link href="/admin/learning" className="inline-block text-sm text-accent underline-offset-2 hover:underline">
+              Learning and engagement
+            </Link>
+          )}
           {me.roles.includes("platform_operator") && (
             <Link href="/admin/service" className="inline-block text-sm text-accent underline-offset-2 hover:underline">
               Service overview

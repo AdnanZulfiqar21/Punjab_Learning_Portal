@@ -84,6 +84,7 @@ export type LessonVariant = S["VariantOut"];
 export type BusinessOverview = S["BusinessOverview"];
 export type OpsSignal = S["SignalOut"];
 export type FunnelReport = S["FunnelReport"];
+export type LearningReport = S["LearningReport"];
 export type RecheckState = S["RecheckOut"];
 export type LinkedForm = S["LinkedFormOut"];
 export type LinkedAttempt = S["LinkedAttemptOut"];

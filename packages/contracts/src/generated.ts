@@ -38,6 +38,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/admin/analytics/learning": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Learning outcomes beside engagement, one book (MFA) */
+        get: operations["learning_v1_admin_analytics_learning_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/admin/audit": {
         parameters: {
             query?: never;
@@ -3511,6 +3528,15 @@ export interface components {
             source_id: string;
             subject: components["schemas"]["SubjectOut"];
         };
+        /** Bucket */
+        Bucket: {
+            /** From */
+            from: number;
+            /** Learners */
+            learners: number;
+            /** To */
+            to: number;
+        };
         /** BusinessOverview */
         BusinessOverview: {
             /** Active 30D */
@@ -4056,6 +4082,17 @@ export interface components {
              * @enum {string}
              */
             surface: "web" | "ios" | "android";
+        };
+        /** Engagement */
+        Engagement: {
+            /** Learners Completing */
+            learners_completing: number;
+            /** Lesson Visit Days 30D */
+            lesson_visit_days_30d: number;
+            /** Live Lessons */
+            live_lessons: number;
+            /** Median Completed Pct */
+            median_completed_pct: number | null;
         };
         /** EntitlementOut */
         EntitlementOut: {
@@ -4867,6 +4904,28 @@ export interface components {
              */
             id: string;
         };
+        /** LearningReport */
+        LearningReport: {
+            engagement: components["schemas"]["Engagement"];
+            /**
+             * Generated At
+             * Format: date-time
+             */
+            generated_at: string;
+            /** Grade */
+            grade: number;
+            /** Note */
+            note: string;
+            outcomes: components["schemas"]["Outcomes"];
+            /** Report Version */
+            report_version: number;
+            /** Subject */
+            subject: string;
+            /** Unavailable */
+            unavailable: {
+                [key: string]: string;
+            };
+        };
         /** LessonOut */
         LessonOut: {
             /**
@@ -5412,6 +5471,21 @@ export interface components {
             total_weight: number;
             /** Weighted Accuracy */
             weighted_accuracy: number | null;
+        };
+        /** Outcomes */
+        Outcomes: {
+            /** Distribution */
+            distribution: components["schemas"]["Bucket"][];
+            /** Learners Assessed */
+            learners_assessed: number;
+            /** Median Demonstrated Pct */
+            median_demonstrated_pct: number | null;
+            /** Rules Version */
+            rules_version: string;
+            /** Sample Limit */
+            sample_limit: number;
+            /** Topics In Book */
+            topics_in_book: number;
         };
         /** OverviewChapter */
         OverviewChapter: {
@@ -7515,6 +7589,38 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["FunnelReport"];
+                };
+            };
+        };
+    };
+    learning_v1_admin_analytics_learning_get: {
+        parameters: {
+            query: {
+                grade: number;
+                subject: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["LearningReport"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
                 };
             };
         };
