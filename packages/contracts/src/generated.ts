@@ -6278,8 +6278,18 @@ export interface components {
         /** SignalOut */
         SignalOut: {
             /** Alert At */
-            alert_at: number;
-            /** Level */
+            alert_at: number | null;
+            /**
+             * Available
+             * @default true
+             */
+            available: boolean;
+            /** Blocker */
+            blocker?: string | null;
+            /**
+             * Level
+             * @description ok, warn, alert, or unavailable
+             */
             level: string;
             /** Name */
             name: string;
@@ -6287,10 +6297,13 @@ export interface components {
             owner: string;
             /** Runbook */
             runbook: string;
-            /** Value */
-            value: number;
+            /**
+             * Value
+             * @description Null when the signal can't be measured yet (see blocker)
+             */
+            value: number | null;
             /** Warn At */
-            warn_at: number;
+            warn_at: number | null;
         };
         /** SlotOut */
         SlotOut: {

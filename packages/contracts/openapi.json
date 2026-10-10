@@ -8173,10 +8173,34 @@
       "SignalOut": {
         "properties": {
           "alert_at": {
-            "title": "Alert At",
-            "type": "number"
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Alert At"
+          },
+          "available": {
+            "default": true,
+            "title": "Available",
+            "type": "boolean"
+          },
+          "blocker": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Blocker"
           },
           "level": {
+            "description": "ok, warn, alert, or unavailable",
             "title": "Level",
             "type": "string"
           },
@@ -8193,12 +8217,27 @@
             "type": "string"
           },
           "value": {
-            "title": "Value",
-            "type": "number"
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Null when the signal can't be measured yet (see blocker)",
+            "title": "Value"
           },
           "warn_at": {
-            "title": "Warn At",
-            "type": "number"
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Warn At"
           }
         },
         "required": [

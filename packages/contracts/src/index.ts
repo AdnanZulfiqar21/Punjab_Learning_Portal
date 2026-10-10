@@ -82,6 +82,7 @@ export type CataloguePreview = S["CataloguePreview"];
 export type CatalogueApplied = S["CatalogueApplied"];
 export type LessonVariant = S["VariantOut"];
 export type BusinessOverview = S["BusinessOverview"];
+export type OpsSignal = S["SignalOut"];
 export type RecheckState = S["RecheckOut"];
 export type LinkedForm = S["LinkedFormOut"];
 export type LinkedAttempt = S["LinkedAttemptOut"];

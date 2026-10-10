@@ -4,6 +4,7 @@ new optional work while active attempts carry on."""
 from __future__ import annotations
 
 import uuid
+from pathlib import Path
 from typing import Any
 
 from fastapi.testclient import TestClient
@@ -27,11 +28,12 @@ def test_signals_report_every_watched_value_with_thresholds(client: TestClient) 
     r = client.get("/v1/ops/signals", headers=op.headers)
     assert r.status_code == 200, r.text
     names = {s["name"] for s in r.json()}
-    assert names == set(operations.THRESHOLDS)
+    assert names == set(operations.THRESHOLDS) | set(operations.UNAVAILABLE)
+    runbook = (Path(__file__).resolve().parents[3] / "docs" / "runbooks" / "alerts.md").read_text(encoding="utf-8")
     for s in r.json():
-        assert (
-            s["level"] in ("ok", "warn", "alert") and s["owner"] and s["runbook"].startswith("docs/runbooks/alerts.md#")
-        )
+        expected = ("ok", "warn", "alert") if s["available"] else ("unavailable",)
+        assert s["level"] in expected and s["owner"] and s["runbook"].startswith("docs/runbooks/alerts.md#")
+        assert f"## {s['runbook'].split('#', 1)[1]}\n" in runbook  # every signal links to a real runbook section
 
 
 def test_switching_new_practice_tests_off_keeps_active_attempts_going(
