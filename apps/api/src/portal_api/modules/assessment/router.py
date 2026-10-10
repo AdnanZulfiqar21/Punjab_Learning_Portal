@@ -14,7 +14,7 @@ from sqlalchemy.orm import Session
 from portal_api.db import get_session
 from portal_api.errors import Conflict, NotFound, Unprocessable
 from portal_api.modules.assessment import attempts, forms
-from portal_api.modules.assessment.models import Attempt, PracticeForm, SubmissionReceipt
+from portal_api.modules.assessment.models import Attempt, FormItem, PracticeForm, SubmissionReceipt
 from portal_api.modules.assessment.schemas import (
     AnswerOut,
     AttemptOut,
@@ -28,6 +28,7 @@ from portal_api.modules.assessment.schemas import (
     OpResult,
     OpsIn,
     ReceiptOut,
+    RelatedLesson,
     ResultOut,
     RevealOut,
     SaveOut,
@@ -182,6 +183,50 @@ def reveal(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, position: int, 
     return RevealOut(**attempts.reveal(db, who, attempt_id, position))
 
 
+def _related_lessons(db: Session, form: PracticeForm, limit: int = 3) -> dict[int, list[RelatedLesson]]:
+    """P12.S1.T2 (REVIEW-LINKS-01): live lessons for each question's topic, else its chapter, in two queries."""
+    from portal_api.modules.content.models import Availability, ContentItem, ContentVersion
+
+    questions = {
+        fi.position: q
+        for fi, q in db.execute(
+            select(FormItem, ContentItem)
+            .join(ContentItem, ContentItem.id == FormItem.item_id)
+            .where(FormItem.form_id == form.id)
+        ).all()
+    }
+    chapters = {q.chapter_id for q in questions.values()}
+    if not chapters:
+        return {}
+    lessons = (
+        db.execute(
+            select(ContentItem)
+            .join(ContentVersion, ContentVersion.id == ContentItem.published_version_id)
+            .where(
+                ContentItem.kind == "lesson",
+                ContentItem.availability == Availability.live.value,
+                ContentItem.chapter_id.in_(chapters),
+                ContentItem.concept_id.is_(None),  # one link per lesson concept: the original, whatever its language
+            )
+            .order_by(ContentVersion.published_at, ContentItem.id)
+        )
+        .scalars()
+        .all()
+    )
+    by_topic: dict[uuid.UUID, list[RelatedLesson]] = {}
+    by_chapter: dict[uuid.UUID, list[RelatedLesson]] = {}
+    for lesson in lessons:
+        ref = RelatedLesson(id=lesson.id, title=lesson.title, chapter_id=lesson.chapter_id)
+        by_chapter.setdefault(lesson.chapter_id, []).append(ref)
+        if lesson.topic_id:
+            by_topic.setdefault(lesson.topic_id, []).append(ref)
+    out = {}
+    for position, q in questions.items():
+        picks = (by_topic.get(q.topic_id) if q.topic_id else None) or by_chapter.get(q.chapter_id, [])
+        out[position] = picks[:limit]
+    return out
+
+
 @router.get("/attempts/{attempt_id}/result", response_model=ResultOut, summary="Score and review after submission")
 def result(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, response: Response) -> ResultOut:
     _private(response)
@@ -199,6 +244,7 @@ def result(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, response: Respo
         raise NotFound("The result is not available yet.")
     keys = forms.item_keys(db, form)
     rows = {r["position"]: r for r in score.items}
+    related = _related_lessons(db, form)
     items = []
     for fi in form.items:
         k = keys[fi.position]
@@ -215,6 +261,7 @@ def result(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, response: Respo
                 earned=r["earned"],
                 treatment=r["treatment"],
                 explanation=k["explanation"],
+                related_lessons=related.get(fi.position, []),
             )
         )
     return ResultOut(

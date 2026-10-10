@@ -148,3 +148,5 @@ Source plan: `Road Map/Punjab_Learning_Portal_Master_Roadmap_v2.2_Integrated_Wri
 | P16.S2.T2 Funnel and retention | IMPLEMENTED (API + web `/admin/funnel`; paid conversion waits on B06) | FUNNEL-01: cohort age stated, too-early instead of drop-off, coverage stated. `tests/test_funnel_report.py`. |
 | P16.S2.T3 Learning vs engagement | IMPLEMENTED (API + web `/admin/learning`; coverage B02, watch time B05) | LEARNING-REPORT-01: outcome distribution from evidence rules beside engagement; causation framed as hypothesis. `tests/test_learning_report.py`. |
 | P18.S2.T3 Supply chain and secrets | PARTIAL (dependency audits + leaked-credential scan in CI; SBOM and bundle checks open) | SUPPLY-CHAIN-01 with reviewed exceptions and baseline. |
+| P12.S1.T2 Question review → lesson | IMPLEMENTED (API + web) | REVIEW-LINKS-01. `tests/test_review_lesson_links.py`. |
+| P09.S4.T2 Generator property tests | PARTIAL (scoring properties done; form-generator properties open) | PROPERTY-01. `tests/test_scoring_properties.py`. |

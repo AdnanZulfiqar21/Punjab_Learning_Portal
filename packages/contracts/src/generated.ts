@@ -4745,6 +4745,11 @@ export interface components {
             options: components["schemas"]["OptionSnapshot"][];
             /** Position */
             position: number;
+            /**
+             * Related Lessons
+             * @description Published lessons for this question's topic (or its chapter): revise here
+             */
+            related_lessons?: components["schemas"]["RelatedLesson"][];
             /** Stem */
             stem: {
                 [key: string]: unknown;
@@ -6033,6 +6038,21 @@ export interface components {
             status: "queued" | "running" | "succeeded" | "failed" | "superseded";
             /** Unaffected */
             unaffected: number;
+        };
+        /** RelatedLesson */
+        RelatedLesson: {
+            /**
+             * Chapter Id
+             * Format: uuid
+             */
+            chapter_id: string;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Title */
+            title: string;
         };
         /** RemedyIn */
         RemedyIn: {

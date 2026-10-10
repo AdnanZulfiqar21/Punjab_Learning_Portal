@@ -8,14 +8,24 @@ from __future__ import annotations
 import time
 from typing import Any
 
+import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import text
 
 from portal_api.db import Base, get_sessionmaker
-from tests.test_attempts import POOL, _form, _learner, _start
+from tests.test_attempts import POOL, _form, _learner, _start, publish_physics_pool
 from tests.test_mistake_notebook import _answer, _submit
 
 HISTORY = 1000
+
+
+@pytest.fixture(scope="module")
+def physics(client: TestClient) -> dict[str, Any]:
+    """Its own pool in another chapter: cloning 1,000 attempts onto the shared session fixture made every later
+    correction of those questions re-score them all (found when a full run slowed to a crawl)."""
+    return publish_physics_pool(client, 2)
+
+
 BUDGET_S = 3.0  # generous: catches accidental per-attempt queries or quadratic work, not a latency target
 
 
