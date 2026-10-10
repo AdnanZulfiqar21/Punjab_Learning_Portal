@@ -60,7 +60,7 @@ jobs:
       - name: JavaScript dependency audit (production, high and above; reviewed exceptions in package.json)
         run: pnpm audit --prod --audit-level=high
       - name: Leaked-credential scan (findings beyond the reviewed baseline fail)
-        run: |
+        run: |  # pragma: allowlist secret (the block names the scan baseline file, not a credential)
           # The hook also exits non-zero when it only refreshes line numbers of reviewed findings; fail on new ones.
           set +e
           out=$(git ls-files -z \
