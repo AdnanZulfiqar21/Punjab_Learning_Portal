@@ -110,6 +110,11 @@ class ProfileRules(BaseModel):
         default="mock", description="mock: protected mock-only questions (P08.S3.T3); any: practice questions too"
     )
     sections: list[Section] = Field(min_length=1, max_length=12)
+    streams: list[Literal["pre_medical", "pre_engineering", "ics"]] = Field(
+        default_factory=list,
+        description="Streams this pattern is for (P09.S4.T3); empty means every stream. Learners whose profile names "
+        "another stream don't see it; learners without a stream see every pattern.",
+    )
 
 
 def parse_rules(raw: object, active_subjects: set[str]) -> tuple[ProfileRules | None, list[str]]:

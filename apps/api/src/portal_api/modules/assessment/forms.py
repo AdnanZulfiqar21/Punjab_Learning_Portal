@@ -278,6 +278,69 @@ def superseded_positions(db: Session, form: PracticeForm) -> list[int]:
     return out
 
 
+def _position_pool(db: Session, form: PracticeForm, position: int) -> Mapping[uuid.UUID, Members]:
+    """The approved pool a position was drawn from: the form's chapters/topics, or its mock section."""
+    scope = form.scope or {}
+    if form.kind == "mock":
+        from portal_api.modules.assessment import mocks
+
+        section = next(s for s in scope["sections"] if int(s["from"]) <= position <= int(s["to"]))
+        return mocks._section_pool(db, section["subject"], section["grades"], scope.get("question_pool", "mock"))
+    chapters = [uuid.UUID(c) for c in scope.get("chapter_ids", [])]
+    topics = [uuid.UUID(t) for t in scope.get("topic_ids", [])]
+    pool: dict[uuid.UUID, list[tuple[ContentItem, ContentVersion]]] = {}
+    for g in scope.get("grades", [form.grade_number]):
+        pool.update(_pool(db, int(g), form.subject_code, chapters, topics))
+    return pool
+
+
+def replace_superseded(db: Session, form: PracticeForm) -> bool:
+    """§5.7 before start (FORM-REPLACE-01): swap each superseded question of an unstarted form for an approved one
+    from the same pool (a corrected version of the same question counts), keeping one question per family, the
+    section blueprint and the form's marks policy. Reproducible from the form seed and logged in `scope.replaced`.
+    All or nothing: returns False, changing nothing, when any position has no replacement. Callers hold the form
+    lock and have checked that no attempt exists."""
+    from portal_api.modules.assessment.mocks import _seen_families
+
+    positions = superseded_positions(db, form)
+    if not positions:
+        return True
+    by_position = {fi.position: fi for fi in form.items}
+    taken = {fi.family_id for fi in form.items if fi.position not in positions}
+    seen = _seen_families(db, form.owner_id) if form.kind == "mock" else set()
+    log = []
+    swaps = []
+    for position in sorted(positions):
+        fi = by_position[position]
+        pool = _position_pool(db, form, position)
+        free = sorted((f for f in pool if f not in taken), key=lambda f: (f != fi.family_id, f in seen, str(f)))
+        if not free:
+            return False
+        rng = random.Random(f"{form.seed}:replace:{position}:{fi.version_id}")  # noqa: S311 - reproducible, not secret
+        same = [f for f in free if f == fi.family_id]  # a corrected version of the same question comes first
+        unseen = [f for f in free if f not in seen]
+        family = same[0] if same else rng.choice(unseen or free)
+        item, version, option_ids = variant(rng, pool[family])
+        taken.add(family)
+        swaps.append((fi, family, item, version, option_ids))
+        log.append(
+            {
+                "position": position,
+                "from_version": str(fi.version_id),
+                "to_version": str(version.id),
+                "reason": "superseded",
+            }
+        )
+    for fi, family, item, version, option_ids in swaps:  # the families are distinct: no unique-constraint clash
+        fi.family_id, fi.item_id, fi.version_id, fi.option_order = family, item.id, version.id, option_ids
+        fi.grade_number, fi.subject_code = item.grade_number, item.subject_code
+        if form.kind != "mock":  # mocks keep the profile's marks per question
+            fi.marks = int(version.body.get("marks", 1))
+    form.scope = {**(form.scope or {}), "replaced": [*(form.scope or {}).get("replaced", []), *log]}
+    db.flush()
+    return True
+
+
 def item_keys(db: Session, form: PracticeForm) -> dict[int, dict[str, Any]]:
     """Frozen keys and explanations per position. Server-side only: scoring and post-release review."""
     out: dict[int, dict[str, Any]] = {}

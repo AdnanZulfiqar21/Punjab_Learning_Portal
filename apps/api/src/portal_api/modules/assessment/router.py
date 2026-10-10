@@ -401,6 +401,7 @@ class PublishedProfileOut(BaseModel):
     total_questions: int
     sections: list[dict[str, Any]]
     source_url: str
+    streams: list[str] = Field(default_factory=list, description="Empty: every stream")
 
 
 def _pv(v: Any) -> ProfileVersionOut:
@@ -497,7 +498,10 @@ def publish_profile_version(db: DB, who: ProfileManager, version_id: uuid.UUID) 
 @router.get("/exam-profiles", response_model=list[PublishedProfileOut], summary="Published official test patterns")
 def published_exam_profiles(db: DB, who: CurrentPrincipal) -> list[PublishedProfileOut]:
     from portal_api.modules.assessment import profiles
+    from portal_api.modules.identity.models import StudentProfile
 
+    me = db.get(StudentProfile, who.user.id)
+    stream = me.stream if me is not None else None
     return [
         PublishedProfileOut(
             code=p.code,
@@ -509,8 +513,11 @@ def published_exam_profiles(db: DB, who: CurrentPrincipal) -> list[PublishedProf
             total_questions=profiles.total_questions(v.rules),
             sections=v.rules["sections"],
             source_url=v.rules["source_url"],
+            streams=v.rules.get("streams", []),
         )
         for p, v in profiles.published(db)
+        # P09.S4.T3: only patterns for the learner's stream (an unknown stream hides nothing)
+        if stream is None or not v.rules.get("streams") or stream in v.rules["streams"]
     ]
 
 
@@ -525,6 +532,7 @@ class MockReadinessOut(BaseModel):
     sections: list[dict[str, Any]]
     ready: bool
     scheduled: bool
+    entitled: bool = Field(description="Whether this learner can start a new test now (an active plan or trial)")
 
 
 @router.get(
@@ -533,9 +541,15 @@ class MockReadinessOut(BaseModel):
     summary="Whether every section of a published test pattern has enough approved questions (counts only)",
 )
 def mock_readiness(db: DB, who: CurrentPrincipal, code: str) -> MockReadinessOut:
+    from portal_api.modules.access import service as access
     from portal_api.modules.assessment import mocks
 
-    return MockReadinessOut(**mocks.readiness(db, code))
+    try:
+        access.require_access(db, who.user.id, purpose="Mock tests")
+        entitled = True
+    except (access.AccessRequired, access.DeviceAuthorizationRequired):
+        entitled = False
+    return MockReadinessOut(**mocks.readiness(db, code), entitled=entitled)
 
 
 @router.post(
