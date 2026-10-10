@@ -594,6 +594,28 @@ def mock_accommodation(db: DB, who: ProfileManager, session_id: uuid.UUID, body:
     return Response(status_code=204)
 
 
+class PostponeIn(BaseModel):
+    results_at: datetime
+    reason: str = Field(min_length=10, max_length=500)
+
+
+class PostponedOut(BaseModel):
+    id: uuid.UUID
+    results_at: datetime
+
+
+@router.post(
+    "/admin/mock-sessions/{session_id}/postpone-results",
+    response_model=PostponedOut,
+    summary="Move a session's result release later, never earlier (reason required; audited)",
+)
+def postpone_mock_results(db: DB, who: ProfileManager, session_id: uuid.UUID, body: PostponeIn) -> PostponedOut:
+    from portal_api.modules.assessment import sessions
+
+    s = sessions.postpone_results(db, who, session_id, body.results_at, body.reason)
+    return PostponedOut(id=s.id, results_at=s.results_at)
+
+
 @router.post("/admin/mock-sessions/{session_id}/cancel", status_code=204, summary="Cancel a session before it starts")
 def cancel_mock_session(db: DB, who: ProfileManager, session_id: uuid.UUID, body: CancelIn) -> Response:
     from portal_api.modules.assessment import sessions

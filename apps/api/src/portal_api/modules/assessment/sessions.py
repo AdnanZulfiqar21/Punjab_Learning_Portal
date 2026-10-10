@@ -190,6 +190,31 @@ def accommodate(
     db.commit()
 
 
+def postpone_results(
+    db: Session, who: Principal, session_id: uuid.UUID, results_at: datetime, reason: str
+) -> MockSession:
+    """Move a session's result release later (incident response). Never earlier: bringing results forward could show
+    solutions while someone may still be writing. Held results follow the live time on every surface (OCT9-01)."""
+    s = db.scalar(select(MockSession).where(MockSession.id == session_id).with_for_update())
+    if s is None:
+        raise NotFound("Session not found.")
+    if results_at <= s.results_at:
+        raise Unprocessable("Results can only be postponed, not brought forward.", code_reason="NOT_LATER")
+    before = s.results_at
+    s.results_at = results_at
+    record(
+        db,
+        actor=who.user.id,
+        action="mock_session.results_postponed",
+        target_type="mock_session",
+        target_id=str(s.id),
+        details={"from": before.isoformat(), "to": results_at.isoformat(), "reason": reason.strip()},
+    )
+    db.commit()
+    db.refresh(s)
+    return s
+
+
 def cancel(db: Session, who: Principal, session_id: uuid.UUID, reason: str) -> MockSession:
     s = db.get(MockSession, session_id)
     if s is None:

@@ -154,3 +154,5 @@ Source plan: `Road Map/Punjab_Learning_Portal_Master_Roadmap_v2.2_Integrated_Wri
 | P17.S3.T2 Safe releases | PARTIAL (manifest + migration rules in CI; staged deploy/rollback waits on B03) | RELEASE-01. `tests/test_release.py`. |
 | P18.S1.T1 Attack-surface map | IMPLEMENTED (engineering record; independent review open) | ATTACK-SURFACE-01, `docs/security/attack-surface.md`. |
 | P18.S1.T3 Privileged workflows | IMPLEMENTED (tests) | PRIVILEGED-01. |
+| P18.S4.T2 Incident response | PARTIAL (account suspension rehearsed; secret rotation planned, waits on B03) | SUSPEND-01, RESULTS-POSTPONE-01. |
+| P17.S4.T3 Service runbooks | PARTIAL (compromised account/secret, scoring pending added; restore/provider/payment/attestation wait on B03–B08) | `docs/runbooks/`. |

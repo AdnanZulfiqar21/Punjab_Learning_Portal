@@ -194,6 +194,74 @@ def revoke_role(grant_id: uuid.UUID, body: RevokeIn, admin: ManageRoles, db: DB,
     return RoleGrantOut.model_validate(grant)
 
 
+# ------------------------------------------------------------------ incident response (P18.S4.T2, SUSPEND-01)
+class AccountStatusOut(BaseModel):
+    id: uuid.UUID
+    status: str
+    sessions_revoked: int = 0
+
+
+def _account_change(db: Session, admin: Principal, user_id: uuid.UUID) -> AppUser:
+    if user_id == admin.user.id:
+        raise Forbidden("You can't suspend or reinstate your own account; ask another administrator.")
+    target = db.scalar(select(AppUser).where(AppUser.id == user_id).with_for_update())
+    if target is None or target.status == "deleted":
+        raise NotFound("User not found.")
+    return target
+
+
+@router.post(
+    "/admin/users/{user_id}/suspend",
+    response_model=AccountStatusOut,
+    tags=["admin"],
+    summary="Suspend an account now: every session revoked, its tokens refused; its data and others' work untouched",
+)
+def suspend_account(
+    user_id: uuid.UUID, body: RevokeIn, admin: ManageRoles, db: DB, request: Request
+) -> AccountStatusOut:
+    from portal_api.modules.identity.sessions import UserSession
+
+    target = _account_change(db, admin, user_id)
+    open_sessions = list(
+        db.scalars(select(UserSession).where(UserSession.user_id == target.id, UserSession.revoked_at.is_(None)))
+    )
+    for row in open_sessions:
+        sessions.revoke(db, row, "account suspended")
+    target.status = "suspended"
+    record(
+        db,
+        actor=admin.user.id,
+        action="account.suspended",
+        target_type="app_user",
+        target_id=str(target.id),
+        details={"reason": body.reason, "sessions_revoked": len(open_sessions)},
+        correlation_id=getattr(request.state, "correlation_id", None),
+    )
+    db.commit()
+    return AccountStatusOut(id=target.id, status=target.status, sessions_revoked=len(open_sessions))
+
+
+@router.post("/admin/users/{user_id}/reinstate", response_model=AccountStatusOut, tags=["admin"])
+def reinstate_account(
+    user_id: uuid.UUID, body: RevokeIn, admin: ManageRoles, db: DB, request: Request
+) -> AccountStatusOut:
+    target = _account_change(db, admin, user_id)
+    if target.status != "suspended":
+        raise Conflict("Only a suspended account can be reinstated.")
+    target.status = "active"
+    record(
+        db,
+        actor=admin.user.id,
+        action="account.reinstated",
+        target_type="app_user",
+        target_id=str(target.id),
+        details={"reason": body.reason},
+        correlation_id=getattr(request.state, "correlation_id", None),
+    )
+    db.commit()
+    return AccountStatusOut(id=target.id, status=target.status)
+
+
 # ---------------------------------------------------------------- sessions (P04.S1.T2/T3)
 @router.post("/sessions", response_model=SessionCreatedOut, status_code=201, tags=["sessions"])
 def create_session(
