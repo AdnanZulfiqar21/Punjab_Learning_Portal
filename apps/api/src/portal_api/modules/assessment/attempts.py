@@ -19,6 +19,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import logging
 import uuid
 from dataclasses import dataclass
 from datetime import datetime, timedelta
@@ -42,6 +43,8 @@ from portal_api.modules.assessment.models import (
 )
 from portal_api.modules.audit.models import record
 from portal_api.modules.identity.deps import Principal
+
+log = logging.getLogger(__name__)
 
 MAX_OPS = 50
 
@@ -253,7 +256,11 @@ def _finalise(
         included_ops=[{"op_id": str(r["op_id"]), "disposition": r["disposition"]} for r in results],
     )
     db.add(receipt)
-    _score(db, attempt, form, answers, reason=f"finalised ({reason})")
+    db.flush()
+    # P10.S3.T3 (RECOVERABLE-SCORING-01): the submission is durable even if scoring fails. Scoring runs in a savepoint;
+    # on failure the attempt stays finalised with its receipt, the result reads "scoring pending", and `score_pending`
+    # (run by the attempt worker) scores it later, exactly once.
+    scored = _try_score(db, attempt, form, answers, reason=f"finalised ({reason})")
     from portal_api.modules.analytics.events import emit
 
     emit(
@@ -269,7 +276,8 @@ def _finalise(
     )
     from portal_api.modules.assessment import notebook
 
-    notebook.apply_attempt(db, attempt, now)  # P12.S3: wrong answers join the mistake notebook (unless held)
+    if scored:
+        notebook.apply_attempt(db, attempt, now)  # P12.S3: wrong answers join the mistake notebook (unless held)
     record(
         db,
         actor=actor,
@@ -280,6 +288,64 @@ def _finalise(
     )
     db.flush()
     return receipt
+
+
+def _try_score(
+    db: Session, attempt: Attempt, form: PracticeForm, answers: dict[int, str | None], *, reason: str
+) -> bool:
+    try:
+        with db.begin_nested():
+            _score(db, attempt, form, answers, reason=reason)
+        return True
+    except Exception as e:
+        log.exception("scoring failed for attempt %s; left pending", attempt.id)
+        record(
+            db,
+            actor=None,
+            action="attempt.scoring_pending",
+            target_type="attempt",
+            target_id=str(attempt.id),
+            details={"error": type(e).__name__},
+        )
+        return False
+
+
+def score_pending(db: Session, limit: int = 200) -> int:
+    """Score finalised attempts that have no score yet (a failed or interrupted scoring). Idempotent; commits each."""
+    from portal_api.modules.assessment import notebook
+
+    ids = list(
+        db.scalars(
+            select(Attempt.id)
+            .where(
+                Attempt.status == "finalised",
+                ~select(ScoreVersion.id).where(ScoreVersion.attempt_id == Attempt.id).exists(),
+            )
+            .order_by(Attempt.finalised_at)
+            .limit(limit)
+        )
+    )
+    db.rollback()
+    done = 0
+    for attempt_id in ids:
+        attempt = db.scalar(select(Attempt).where(Attempt.id == attempt_id).with_for_update())
+        if attempt is None or db.scalar(select(ScoreVersion.id).where(ScoreVersion.attempt_id == attempt.id).limit(1)):
+            db.rollback()  # scored meanwhile by another worker
+            continue
+        form = db.get(PracticeForm, attempt.form_id)
+        assert form is not None
+        receipt = receipt_for(db, attempt.id)
+        if _try_score(
+            db, attempt, form, _answers(db, attempt), reason=f"finalised ({attempt.finalise_reason}); scored late"
+        ):
+            notebook.apply_attempt(db, attempt, db_now(db))
+            record(db, actor=None, action="attempt.scored_late", target_type="attempt", target_id=str(attempt.id),
+                   details={"receipt": str(receipt.attempt_id) if receipt else None})  # fmt: skip
+            db.commit()
+            done += 1
+        else:
+            db.commit()  # keep the audit record of the failed try
+    return done
 
 
 def _score(

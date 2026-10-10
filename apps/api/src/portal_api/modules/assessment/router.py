@@ -240,6 +240,11 @@ def result(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, response: Respo
         from portal_api.modules.assessment.sessions import require_released
 
         require_released(db, form)
+    if receipt is not None and score is None:
+        raise Conflict(
+            "Your answers are submitted and saved. Your result is being prepared; check back shortly.",
+            code_reason="SCORING_PENDING",
+        )
     if score is None or receipt is None or form is None:
         raise NotFound("The result is not available yet.")
     keys = forms.item_keys(db, form)
