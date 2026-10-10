@@ -12,7 +12,24 @@ export const BLOCK_TYPES: { type: string; label: string; make: () => Block }[] =
   { type: "callout", label: "Callout", make: () => ({ type: "callout", tone: "definition", text: "" }) },
   { type: "table", label: "Table", make: () => ({ type: "table", caption: "", header: ["", ""], rows: [["", ""]] }) },
   { type: "equation", label: "Equation", make: () => ({ type: "equation", latex: "", text_alt: "", display: true }) },
+  {
+    type: "checkpoint",
+    label: "Checkpoint",
+    make: () => ({ type: "checkpoint", mode: "question", prompt: "", options: [{ id: "a", text: "" }, { id: "b", text: "" }], answer_id: "a", explanation: "" }),
+  },
 ];
+
+const OPTION_IDS = "abcdef";
+type CheckpointOption = { id: string; text: string };
+/** Options as lines; a leading "*" marks the correct one (P07.S1.T3). */
+const optionLines = (b: Block) =>
+  (Array.isArray(b.options) ? (b.options as CheckpointOption[]) : []).map((o) => `${o.id === b.answer_id ? "* " : ""}${o.text}`).join("\n");
+function parseOptions(text: string): { options: CheckpointOption[]; answer_id: string | undefined } {
+  const rows = text.split("\n").slice(0, 6);
+  const options = rows.map((line, i) => ({ id: OPTION_IDS[i], text: line.replace(/^\s*\*\s*/, "") }));
+  const marked = rows.findIndex((line) => /^\s*\*/.test(line));
+  return { options, answer_id: marked >= 0 ? OPTION_IDS[marked] : undefined };
+}
 
 const s = (v: unknown) => (typeof v === "string" ? v : "");
 const lines = (v: unknown) => (Array.isArray(v) ? v.map(s).join("\n") : "");
@@ -143,6 +160,47 @@ function Fields({ block: b, index, update }: { block: Block; index: number; upda
           <p className="text-xs text-muted">Publishing an equation needs a reviewed static rendering until the equation renderer ships.</p>
         </div>
       );
+    case "checkpoint": {
+      const question = b.mode !== "self_check";
+      return (
+        <div className="space-y-2">
+          <select
+            aria-label="Checkpoint type"
+            value={question ? "question" : "self_check"}
+            onChange={(e) =>
+              update(
+                e.target.value === "question"
+                  ? { mode: "question", options: [{ id: "a", text: "" }, { id: "b", text: "" }], answer_id: "a" }
+                  : { mode: "self_check", options: [], answer_id: undefined },
+              )
+            }
+            className="rounded-lg border border-border bg-surface px-2 py-1"
+          >
+            <option value="question">Question with a reason</option>
+            <option value="self_check">Self-check</option>
+          </select>
+          <textarea aria-label="Checkpoint prompt" placeholder="Prompt" value={s(b.prompt)} onChange={(e) => update({ prompt: e.target.value })} className={input} rows={2} maxLength={5000} />
+          {question && (
+            <>
+              <label htmlFor={id("options")} className="block text-sm text-muted">
+                Options, one per line (2 to 6); start the correct one with *
+              </label>
+              <textarea id={id("options")} value={optionLines(b)} onChange={(e) => update(parseOptions(e.target.value))} className={input} rows={4} />
+            </>
+          )}
+          <textarea
+            aria-label={question ? "Why the correct option is correct" : "What a good answer contains"}
+            placeholder={question ? "Why the correct option is correct (shown after answering)" : "What a good answer contains (shown when revealed)"}
+            value={s(b.explanation)}
+            onChange={(e) => update({ explanation: e.target.value })}
+            className={input}
+            rows={3}
+            maxLength={5000}
+          />
+          <p className="text-xs text-muted">Checkpoints are self-checks: answers aren&apos;t stored or scored. Don&apos;t reuse question-bank items here.</p>
+        </div>
+      );
+    }
     default:
       return <p className="text-sm text-muted">This block type can&apos;t be edited here.</p>;
   }
@@ -154,6 +212,11 @@ export function normaliseBlocks(blocks: Block[]): Block[] {
     if (b.type === "list") return { ...b, items: (b.items as string[]).map((x) => x.trim()).filter(Boolean) };
     if (b.type === "table") {
       return { ...b, rows: (b.rows as string[][]).filter((r) => r.some((c) => c.trim())) };
+    }
+    if (b.type === "checkpoint") {
+      if (b.mode === "self_check") return { type: "checkpoint", mode: "self_check", prompt: b.prompt, explanation: b.explanation };
+      const options = ((b.options as CheckpointOption[]) ?? []).filter((o) => o.text.trim());
+      return { ...b, options, answer_id: options.some((o) => o.id === b.answer_id) ? b.answer_id : undefined };
     }
     if (b.type === "callout" && !s(b.title).trim()) {
       const rest: Block = { ...b };
