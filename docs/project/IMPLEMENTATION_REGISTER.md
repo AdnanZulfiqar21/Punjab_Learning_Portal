@@ -149,7 +149,7 @@ Source plan: `Road Map/Punjab_Learning_Portal_Master_Roadmap_v2.2_Integrated_Wri
 | P16.S2.T3 Learning vs engagement | IMPLEMENTED (API + web `/admin/learning`; coverage B02, watch time B05) | LEARNING-REPORT-01: outcome distribution from evidence rules beside engagement; causation framed as hypothesis. `tests/test_learning_report.py`. |
 | P18.S2.T3 Supply chain and secrets | PARTIAL (dependency audits + leaked-credential scan in CI; SBOM and bundle checks open) | SUPPLY-CHAIN-01 with reviewed exceptions and baseline. |
 | P12.S1.T2 Question review → lesson | IMPLEMENTED (API + web) | REVIEW-LINKS-01. `tests/test_review_lesson_links.py`. |
-| P09.S4.T2 Generator property tests | PARTIAL (scoring properties done; form-generator properties open) | PROPERTY-01. `tests/test_scoring_properties.py`. |
+| P09.S4.T2 Generator property tests | IMPLEMENTED (scoring and form-generator properties) | PROPERTY-01, GENERATOR-PROPERTIES-01. `tests/test_scoring_properties.py`, `tests/test_generator_properties.py`. |
 | P10.S3.T3 Recoverable result creation | IMPLEMENTED | RECOVERABLE-SCORING-01: durable finalisation, SCORING_PENDING, worker retry exactly once. `tests/test_scoring_recovery.py`. |
 | P17.S3.T2 Safe releases | PARTIAL (manifest + migration rules in CI; staged deploy/rollback waits on B03) | RELEASE-01. `tests/test_release.py`. |
 | P18.S1.T1 Attack-surface map | IMPLEMENTED (engineering record; independent review open) | ATTACK-SURFACE-01, `docs/security/attack-surface.md`. |

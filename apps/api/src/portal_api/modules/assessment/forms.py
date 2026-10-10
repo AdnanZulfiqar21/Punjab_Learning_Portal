@@ -14,6 +14,7 @@ import random
 import secrets
 import uuid
 from collections import defaultdict
+from collections.abc import Mapping, Sequence
 from typing import Any
 
 from sqlalchemy import func, select
@@ -27,6 +28,27 @@ from portal_api.modules.curriculum.models import BookEdition, Chapter, Grade, Su
 from portal_api.modules.identity.deps import Principal
 
 SELF_PACED_TOLERANCE_MS = 3000  # §10.5 default for self-paced timed practice; ranked mocks pin 0
+
+Members = Sequence[tuple[Any, Any]]  # (item, published version) variants of one question family
+Pick = tuple[uuid.UUID, Any, Any, list[str]]  # family, item, version, option display order
+
+
+def variant(rng: random.Random, members: Members) -> tuple[Any, Any, list[str]]:
+    """One variant of a family and its option order. Option IDs never change; only their display order does."""
+    item, version = rng.choice(sorted(members, key=lambda iv: str(iv[0].id)))
+    option_ids = [o["id"] for o in version.body["options"]]
+    if version.body.get("shuffle_options", True):
+        rng.shuffle(option_ids)
+    return item, version, option_ids
+
+
+def select_practice(pool: Mapping[uuid.UUID, Members], count: int, seed: int) -> list[Pick]:
+    """The questions for a practice form: exactly `count` distinct families, reproducible from the stored seed and
+    independent of pool order (GENERATOR-PROPERTIES-01). A short pool raises; the test is never quietly smaller."""
+    if count > len(pool):
+        raise ValueError(f"{len(pool)} families available, {count} requested")
+    rng = random.Random(seed)  # noqa: S311 - reproducible sampling from a stored seed, not a secret
+    return [(f, *variant(rng, pool[f])) for f in rng.sample(sorted(pool, key=str), count)]
 
 
 def _pool(
@@ -172,8 +194,7 @@ def create_form(
         )
 
     seed = secrets.randbits(62)
-    rng = random.Random(seed)  # noqa: S311 - reproducible sampling from a stored seed, not a secret
-    chosen = rng.sample(sorted(pool, key=str), question_count)
+    chosen = select_practice(pool, question_count, seed)
     form = PracticeForm(
         id=uuid.uuid4(),
         owner_id=who.user.id,
@@ -198,11 +219,7 @@ def create_form(
         invalid_item_treatment="EXCLUDE",
     )
     db.add(form)
-    for position, family in enumerate(chosen, start=1):
-        item, version = rng.choice(sorted(pool[family], key=lambda iv: str(iv[0].id)))
-        option_ids = [o["id"] for o in version.body["options"]]
-        if version.body.get("shuffle_options", True):
-            rng.shuffle(option_ids)  # option IDs never change; only their display order does
+    for position, (family, item, version, option_ids) in enumerate(chosen, start=1):
         db.add(
             FormItem(
                 form_id=form.id,

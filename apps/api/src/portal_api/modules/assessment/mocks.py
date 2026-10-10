@@ -26,6 +26,7 @@ import json
 import random
 import secrets
 import uuid
+from collections.abc import Mapping, Sequence
 from typing import Any
 
 from sqlalchemy import select
@@ -40,6 +41,36 @@ from portal_api.modules.content.models import ContentItem, ContentVersion
 from portal_api.modules.identity.deps import Principal
 
 Pool = dict[uuid.UUID, list[tuple[ContentItem, ContentVersion]]]
+
+
+class SectionShortage(Exception):
+    def __init__(self, section: int) -> None:
+        super().__init__(f"section {section} ran out of distinct questions")
+        self.section = section
+
+
+def select_sections(
+    sections: Sequence[tuple[int, Mapping[uuid.UUID, forms.Members]]], seen: set[uuid.UUID], seed: int
+) -> list[tuple[list[forms.Pick], int]]:
+    """Each section's questions, in profile order, with how many were reused from earlier mocks.
+
+    Unseen families come first; a family is never used twice in one mock, even when two sections' pools share it
+    (GENERATOR-PROPERTIES-01). Reproducible from the stored seed, independent of pool order."""
+    rng = random.Random(seed)  # noqa: S311 - reproducible sampling from a stored seed, not a secret
+    taken: set[uuid.UUID] = set()
+    out = []
+    for number, (n, pool) in enumerate(sections, start=1):
+        free = [f for f in pool if f not in taken]
+        if len(free) < n:
+            raise SectionShortage(number)
+        unseen = sorted((f for f in free if f not in seen), key=str)
+        picked = rng.sample(unseen, min(n, len(unseen)))
+        reused = n - len(picked)
+        if reused:  # not enough new questions: reuse some already seen, and say so on the form
+            picked += rng.sample(sorted((f for f in free if f in seen), key=str), reused)
+        taken.update(picked)
+        out.append(([(f, *forms.variant(rng, pool[f])) for f in picked], reused))
+    return out
 
 
 def _section_pool(db: Session, subject: str, grades: list[int], question_pool: str) -> Pool:
@@ -138,7 +169,16 @@ def build_from(
             sections=short,
         )
     seed = secrets.randbits(62)
-    rng = random.Random(seed)  # noqa: S311 - reproducible sampling from a stored seed, not a secret
+    try:
+        chosen = select_sections([(int(s["questions"]), p) for s, p in pools], _seen_families(db, who.user.id), seed)
+    except SectionShortage as e:  # sections that share questions (profiles older than the overlap rule)
+        s = rules["sections"][e.section - 1]
+        raise Unprocessable(
+            "There aren't enough approved questions for this test pattern yet. A smaller practice test is available "
+            "instead; it won't be a full mock.",
+            code_reason="POOL_SHORTAGE",
+            sections=[{"subject": s["subject"], "grades": s["grades"], "required": int(s["questions"])}],
+        ) from None
     total = sum(int(s["questions"]) for s, _ in pools)
     first = rules["sections"][0]
     form = PracticeForm(
@@ -170,21 +210,10 @@ def build_from(
     db.add(form)
     position = 0
     sections = []
-    seen = _seen_families(db, who.user.id)
-    for s, pool in pools:
+    for (s, _), (picks, reused) in zip(pools, chosen, strict=True):
         start = position + 1
-        n = int(s["questions"])
-        unseen = sorted((f for f in pool if f not in seen), key=str)
-        picked = rng.sample(unseen, min(n, len(unseen)))
-        reused = n - len(picked)
-        if reused:  # not enough new questions: reuse some already seen, and say so on the form
-            picked += rng.sample(sorted((f for f in pool if f in seen), key=str), reused)
-        for family in picked:
+        for family, item, cv, option_ids in picks:
             position += 1
-            item, cv = rng.choice(sorted(pool[family], key=lambda iv: str(iv[0].id)))
-            option_ids = [o["id"] for o in cv.body["options"]]
-            if cv.body.get("shuffle_options", True):
-                rng.shuffle(option_ids)
             db.add(
                 FormItem(
                     form_id=form.id,
