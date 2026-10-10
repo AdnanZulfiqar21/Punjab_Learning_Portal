@@ -31,7 +31,16 @@ async function Result({ id }: { id: string }) {
   if (typeof result === "object" && "heldUntil" in result) {
     return (
       <Notice title="Your answers are saved">
-        Results for this scheduled mock are released on {new Date(result.heldUntil).toLocaleString("en-GB", { dateStyle: "full", timeStyle: "short" })}. Come back then.
+        {result.heldUntil
+          ? `Results for this scheduled mock are released on ${new Date(result.heldUntil).toLocaleString("en-GB", { dateStyle: "full", timeStyle: "short" })}. Come back then.`
+          : "Results for this scheduled mock aren't released yet. Come back later."}
+      </Notice>
+    );
+  }
+  if (result === "scoring") {
+    return (
+      <Notice title="Submitted: your result is being prepared">
+        Your answers are saved and your test is submitted. The result will appear here shortly; you don&apos;t need to do anything.
       </Notice>
     );
   }
@@ -66,7 +75,32 @@ async function Result({ id }: { id: string }) {
         )}
         <p className="text-sm text-muted">
           {result.answered} of {result.question_count} answered · {result.finalise_reason === "expiry" ? "submitted when time ran out" : "submitted by you"}
+          {result.timing?.seconds_used != null && ` · ${Math.max(1, Math.round(result.timing.seconds_used / 60))} min`}
+          {result.form?.profile && ` · pattern ${result.form.profile} v${result.form.profile_version}`}
+          {(result.counts?.excluded ?? 0) > 0 && ` · ${result.counts?.excluded} withdrawn after review`}
+          {(result.counts?.credited ?? 0) > 0 && ` · ${result.counts?.credited} credited to everyone`}
         </p>
+        {(result.sections ?? []).length > 1 && (
+          <ul className="flex flex-wrap gap-2 text-sm" aria-label="Sections">
+            {(result.sections ?? []).map((s) => (
+              <li key={s.from_position} className="rounded-lg border border-border bg-surface px-3 py-1">
+                {s.label}: {s.raw} / {s.maximum}
+              </li>
+            ))}
+          </ul>
+        )}
+        {(result.history ?? []).length > 1 && (
+          <details className="text-sm">
+            <summary className="cursor-pointer text-muted">Score history ({(result.history ?? []).length} versions)</summary>
+            <ol className="mt-1 space-y-1">
+              {(result.history ?? []).map((h) => (
+                <li key={h.version}>
+                  v{h.version}: {h.raw} / {h.maximum} · {new Date(h.created_at).toLocaleDateString("en-GB", { dateStyle: "medium" })} · {h.reason}
+                </li>
+              ))}
+            </ol>
+          </details>
+        )}
       </div>
       <ol className="space-y-4">
         {result.items.map((it) => (

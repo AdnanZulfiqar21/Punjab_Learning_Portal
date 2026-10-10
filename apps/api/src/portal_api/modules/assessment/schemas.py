@@ -159,6 +159,45 @@ class ItemReview(BaseModel):
     )
 
 
+class ResultTiming(BaseModel):
+    started_at: datetime
+    finalised_at: datetime | None
+    seconds_used: int | None
+    time_limit_s: int | None
+
+
+class ResultForm(BaseModel):
+    kind: str
+    mode: str
+    profile: str | None = Field(description="Exam pattern code, for mocks")
+    profile_version: int | None
+
+
+class ResultSection(BaseModel):
+    label: str
+    from_position: int
+    to_position: int
+    raw: int
+    maximum: int
+
+
+class ScoreHistoryEntry(BaseModel):
+    version: int
+    status: str
+    raw: int
+    maximum: int
+    percentage: Decimal | None
+    reason: str
+    created_at: datetime
+
+
+class ResultCounts(BaseModel):
+    excluded: int = Field(description="Questions withdrawn after review: not counted at all")
+    credited: int = Field(description="Questions credited to everyone after review")
+    unanswered: int
+    not_scorable: bool
+
+
 class ResultOut(BaseModel):
     attempt_id: uuid.UUID
     version: int
@@ -172,6 +211,11 @@ class ResultOut(BaseModel):
     items: list[ItemReview]
     revised_at: datetime | None = Field(default=None, description="When this score was revised after review (v2+)")
     revision_reason: str | None = None
+    timing: ResultTiming | None = None
+    form: ResultForm | None = None
+    sections: list[ResultSection] = Field(default_factory=list, description="Mocks: one row per pattern section")
+    history: list[ScoreHistoryEntry] = Field(default_factory=list, description="Every score version, oldest first")
+    counts: ResultCounts | None = None
 
 
 class RevealOut(BaseModel):

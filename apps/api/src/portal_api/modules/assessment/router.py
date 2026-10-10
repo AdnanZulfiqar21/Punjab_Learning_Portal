@@ -282,7 +282,78 @@ def result(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, response: Respo
         items=items,
         revised_at=score.created_at if score.version > 1 else None,
         revision_reason=score.reason if score.version > 1 else None,
+        **_summary(db, attempt, form, score),
     )
+
+
+def _summary(db: Session, attempt: Any, form: PracticeForm, score: Any) -> dict[str, Any]:
+    """P12.S1.T1 (RESULT-SUMMARY-01): timing, pattern and version, sections, score history and outcome counts."""
+    from portal_api.modules.assessment.models import ScoreVersion
+    from portal_api.modules.assessment.schemas import (
+        ResultCounts,
+        ResultForm,
+        ResultSection,
+        ResultTiming,
+        ScoreHistoryEntry,
+    )
+
+    scope = form.scope or {}
+    used = (
+        int((attempt.finalised_at - attempt.started_at).total_seconds())
+        if attempt.finalised_at and attempt.started_at
+        else None
+    )
+    rows = {int(r["position"]): r for r in score.items}
+    sections = []
+    for sec in scope.get("sections", []) if form.kind == "mock" else []:
+        part = [rows[p] for p in range(int(sec["from"]), int(sec["to"]) + 1) if p in rows]
+        grades = " + ".join({11: "Class XI", 12: "Class XII"}.get(int(g), str(g)) for g in sec["grades"])
+        sections.append(
+            ResultSection(
+                label=f"{str(sec['subject']).replace('_', ' ').title()} · {grades}",
+                from_position=int(sec["from"]),
+                to_position=int(sec["to"]),
+                raw=sum(int(r["earned"]) for r in part),
+                maximum=sum(int(r["max"]) for r in part),
+            )
+        )
+    history = [
+        ScoreHistoryEntry(
+            version=v.version,
+            status=v.status,
+            raw=v.raw,
+            maximum=v.maximum,
+            percentage=v.percentage,  # type: ignore[arg-type]
+            reason=v.reason,
+            created_at=v.created_at,
+        )
+        for v in db.scalars(
+            select(ScoreVersion).where(ScoreVersion.attempt_id == attempt.id).order_by(ScoreVersion.version)
+        )
+    ]
+    treatments = [r.get("treatment", "NONE") for r in score.items]
+    return {
+        "timing": ResultTiming(
+            started_at=attempt.started_at,
+            finalised_at=attempt.finalised_at,
+            seconds_used=used,
+            time_limit_s=form.duration_s,
+        ),
+        "form": ResultForm(
+            kind=form.kind,
+            mode=str(scope.get("mode", "chapters")),
+            profile=scope.get("profile"),
+            profile_version=scope.get("profile_version"),
+        ),
+        "sections": sections,
+        "history": history,
+        "counts": ResultCounts(
+            excluded=treatments.count("EXCLUDE"),
+            credited=treatments.count("CREDIT_ALL"),
+            unanswered=sum(1 for r in score.items if r.get("chosen") is None and r.get("treatment") != "EXCLUDE"),
+            not_scorable=score.status == "not_scorable",
+        ),
+    }
 
 
 # ------------------------------------------------------------------ exam profiles (P05.S3, EXAMPROFILE-01)

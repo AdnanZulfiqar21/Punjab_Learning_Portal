@@ -7738,6 +7738,79 @@
         "title": "RemedyOut",
         "type": "object"
       },
+      "ResultCounts": {
+        "properties": {
+          "credited": {
+            "description": "Questions credited to everyone after review",
+            "title": "Credited",
+            "type": "integer"
+          },
+          "excluded": {
+            "description": "Questions withdrawn after review: not counted at all",
+            "title": "Excluded",
+            "type": "integer"
+          },
+          "not_scorable": {
+            "title": "Not Scorable",
+            "type": "boolean"
+          },
+          "unanswered": {
+            "title": "Unanswered",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "excluded",
+          "credited",
+          "unanswered",
+          "not_scorable"
+        ],
+        "title": "ResultCounts",
+        "type": "object"
+      },
+      "ResultForm": {
+        "properties": {
+          "kind": {
+            "title": "Kind",
+            "type": "string"
+          },
+          "mode": {
+            "title": "Mode",
+            "type": "string"
+          },
+          "profile": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Exam pattern code, for mocks",
+            "title": "Profile"
+          },
+          "profile_version": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Profile Version"
+          }
+        },
+        "required": [
+          "kind",
+          "mode",
+          "profile",
+          "profile_version"
+        ],
+        "title": "ResultForm",
+        "type": "object"
+      },
       "ResultOut": {
         "properties": {
           "answered": {
@@ -7749,6 +7822,16 @@
             "title": "Attempt Id",
             "type": "string"
           },
+          "counts": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ResultCounts"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "finalise_reason": {
             "enum": [
               "manual",
@@ -7756,6 +7839,24 @@
             ],
             "title": "Finalise Reason",
             "type": "string"
+          },
+          "form": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ResultForm"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "history": {
+            "description": "Every score version, oldest first",
+            "items": {
+              "$ref": "#/components/schemas/ScoreHistoryEntry"
+            },
+            "title": "History",
+            "type": "array"
           },
           "items": {
             "items": {
@@ -7812,6 +7913,14 @@
             ],
             "title": "Revision Reason"
           },
+          "sections": {
+            "description": "Mocks: one row per pattern section",
+            "items": {
+              "$ref": "#/components/schemas/ResultSection"
+            },
+            "title": "Sections",
+            "type": "array"
+          },
           "status": {
             "enum": [
               "scored",
@@ -7819,6 +7928,16 @@
             ],
             "title": "Status",
             "type": "string"
+          },
+          "timing": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ResultTiming"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "version": {
             "title": "Version",
@@ -7856,6 +7975,90 @@
           "subject"
         ],
         "title": "ResultPart",
+        "type": "object"
+      },
+      "ResultSection": {
+        "properties": {
+          "from_position": {
+            "title": "From Position",
+            "type": "integer"
+          },
+          "label": {
+            "title": "Label",
+            "type": "string"
+          },
+          "maximum": {
+            "title": "Maximum",
+            "type": "integer"
+          },
+          "raw": {
+            "title": "Raw",
+            "type": "integer"
+          },
+          "to_position": {
+            "title": "To Position",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "label",
+          "from_position",
+          "to_position",
+          "raw",
+          "maximum"
+        ],
+        "title": "ResultSection",
+        "type": "object"
+      },
+      "ResultTiming": {
+        "properties": {
+          "finalised_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Finalised At"
+          },
+          "seconds_used": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Seconds Used"
+          },
+          "started_at": {
+            "format": "date-time",
+            "title": "Started At",
+            "type": "string"
+          },
+          "time_limit_s": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Time Limit S"
+          }
+        },
+        "required": [
+          "started_at",
+          "finalised_at",
+          "seconds_used",
+          "time_limit_s"
+        ],
+        "title": "ResultTiming",
         "type": "object"
       },
       "RevealOut": {
@@ -8409,6 +8612,58 @@
           "affected_attempts"
         ],
         "title": "ScoreCorrectionOut",
+        "type": "object"
+      },
+      "ScoreHistoryEntry": {
+        "properties": {
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "maximum": {
+            "title": "Maximum",
+            "type": "integer"
+          },
+          "percentage": {
+            "anyOf": [
+              {
+                "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Percentage"
+          },
+          "raw": {
+            "title": "Raw",
+            "type": "integer"
+          },
+          "reason": {
+            "title": "Reason",
+            "type": "string"
+          },
+          "status": {
+            "title": "Status",
+            "type": "string"
+          },
+          "version": {
+            "title": "Version",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "version",
+          "status",
+          "raw",
+          "maximum",
+          "percentage",
+          "reason",
+          "created_at"
+        ],
+        "title": "ScoreHistoryEntry",
         "type": "object"
       },
       "SealIn": {

@@ -25,7 +25,21 @@ function ResultView({ id, token }: { id: string; token: string }) {
   const c = useTheme();
   const req = useRequest((signal) => api.result(token, id, signal), [token, id]);
   if (req.state.status === "loading") return <Loading label="Loading your result" />;
-  if (req.state.status === "error") return <ErrorState error={req.state.error} onRetry={req.retry} />;
+  if (req.state.status === "error") {
+    const reason = (req.state.error.problem as { code_reason?: string } | null | undefined)?.code_reason;
+    if (reason === "RESULTS_PENDING" || reason === "SCORING_PENDING") {
+      // Submitted and saved: a held scheduled mock, or a result still being prepared (OCT9-01, P10.S3.T3).
+      return (
+        <ScrollView style={{ backgroundColor: c.background }} contentContainerStyle={{ padding: Space.lg }}>
+          <Stack.Screen options={{ title: "Your result" }} />
+          <Notice title={reason === "SCORING_PENDING" ? "Submitted: your result is being prepared" : "Your answers are saved"}>
+            {req.state.error.message}
+          </Notice>
+        </ScrollView>
+      );
+    }
+    return <ErrorState error={req.state.error} onRetry={req.retry} />;
+  }
   const r = req.state.data;
   return (
     <ScrollView style={{ backgroundColor: c.background }} contentContainerStyle={{ padding: Space.lg, gap: Space.lg }}>

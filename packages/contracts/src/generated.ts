@@ -6251,6 +6251,37 @@ export interface components {
             /** Units */
             units: number;
         };
+        /** ResultCounts */
+        ResultCounts: {
+            /**
+             * Credited
+             * @description Questions credited to everyone after review
+             */
+            credited: number;
+            /**
+             * Excluded
+             * @description Questions withdrawn after review: not counted at all
+             */
+            excluded: number;
+            /** Not Scorable */
+            not_scorable: boolean;
+            /** Unanswered */
+            unanswered: number;
+        };
+        /** ResultForm */
+        ResultForm: {
+            /** Kind */
+            kind: string;
+            /** Mode */
+            mode: string;
+            /**
+             * Profile
+             * @description Exam pattern code, for mocks
+             */
+            profile: string | null;
+            /** Profile Version */
+            profile_version: number | null;
+        };
         /** ResultOut */
         ResultOut: {
             /** Answered */
@@ -6260,11 +6291,18 @@ export interface components {
              * Format: uuid
              */
             attempt_id: string;
+            counts?: components["schemas"]["ResultCounts"] | null;
             /**
              * Finalise Reason
              * @enum {string}
              */
             finalise_reason: "manual" | "expiry";
+            form?: components["schemas"]["ResultForm"] | null;
+            /**
+             * History
+             * @description Every score version, oldest first
+             */
+            history?: components["schemas"]["ScoreHistoryEntry"][];
             /** Items */
             items: components["schemas"]["ItemReview"][];
             /** Maximum */
@@ -6283,10 +6321,16 @@ export interface components {
             /** Revision Reason */
             revision_reason?: string | null;
             /**
+             * Sections
+             * @description Mocks: one row per pattern section
+             */
+            sections?: components["schemas"]["ResultSection"][];
+            /**
              * Status
              * @enum {string}
              */
             status: "scored" | "not_scorable";
+            timing?: components["schemas"]["ResultTiming"] | null;
             /** Version */
             version: number;
         };
@@ -6296,6 +6340,33 @@ export interface components {
             grade: number;
             /** Subject */
             subject: string;
+        };
+        /** ResultSection */
+        ResultSection: {
+            /** From Position */
+            from_position: number;
+            /** Label */
+            label: string;
+            /** Maximum */
+            maximum: number;
+            /** Raw */
+            raw: number;
+            /** To Position */
+            to_position: number;
+        };
+        /** ResultTiming */
+        ResultTiming: {
+            /** Finalised At */
+            finalised_at: string | null;
+            /** Seconds Used */
+            seconds_used: number | null;
+            /**
+             * Started At
+             * Format: date-time
+             */
+            started_at: string;
+            /** Time Limit S */
+            time_limit_s: number | null;
         };
         /** RevealOut */
         RevealOut: {
@@ -6524,6 +6595,26 @@ export interface components {
              * Format: uuid
              */
             version_id: string;
+        };
+        /** ScoreHistoryEntry */
+        ScoreHistoryEntry: {
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /** Maximum */
+            maximum: number;
+            /** Percentage */
+            percentage: string | null;
+            /** Raw */
+            raw: number;
+            /** Reason */
+            reason: string;
+            /** Status */
+            status: string;
+            /** Version */
+            version: number;
         };
         /** SealIn */
         SealIn: {

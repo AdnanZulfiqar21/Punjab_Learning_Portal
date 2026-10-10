@@ -19,11 +19,16 @@ export async function getAttempt(token: string, id: string): Promise<PracticeAtt
   throw new Error(res.problem?.detail ?? `Could not load the test (${res.status}).`);
 }
 
-export async function getResult(token: string, id: string): Promise<AttemptResult | "pending" | { heldUntil: string } | null> {
+export async function getResult(
+  token: string,
+  id: string,
+): Promise<AttemptResult | "pending" | "scoring" | { heldUntil: string | null } | null> {
   const res = await api<AttemptResult>(`/v1/attempts/${encodeURIComponent(id)}/result`, { token });
   if (res.ok) return res.data;
-  const held = res.problem as (Problem & { code_reason?: string; available_at?: string }) | null;
-  if (res.status === 409 && held?.code_reason === "RESULTS_PENDING" && held.available_at) return { heldUntil: held.available_at };
+  const held = res.problem as (Problem & { code_reason?: string; available_at?: string | null }) | null;
+  // A held scheduled mock (a missing release time means the session couldn't be resolved: still held, OCT9-01).
+  if (res.status === 409 && held?.code_reason === "RESULTS_PENDING") return { heldUntil: held.available_at ?? null };
+  if (res.status === 409 && held?.code_reason === "SCORING_PENDING") return "scoring"; // submitted; result being prepared
   if (res.status === 409) return "pending";
   if (res.status === 404 || res.status === 422) return null;
   throw new Error(res.problem?.detail ?? `Could not load the result (${res.status}).`);
