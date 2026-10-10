@@ -21,6 +21,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/admin/analytics/funnel": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Learning funnel and repeat study by cohort (MFA) */
+        get: operations["funnel_v1_admin_analytics_funnel_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/admin/audit": {
         parameters: {
             query?: never;
@@ -4277,6 +4294,44 @@ export interface components {
             /** Subject */
             subject: string;
         };
+        /** FunnelCohort */
+        FunnelCohort: {
+            /** Age Days */
+            age_days: number;
+            /** First Completed Test */
+            first_completed_test: number;
+            /** First Lesson */
+            first_lesson: number;
+            paid_conversion: components["schemas"]["PaidConversion"];
+            /** Repeat Study */
+            repeat_study: number;
+            /** Repeat Study Too Early */
+            repeat_study_too_early: boolean;
+            /** Signed Up */
+            signed_up: number;
+            /** Week Start */
+            week_start: string;
+        };
+        /** FunnelReport */
+        FunnelReport: {
+            /** Cohorts */
+            cohorts: components["schemas"]["FunnelCohort"][];
+            /** Definitions */
+            definitions: {
+                [key: string]: string;
+            };
+            /** Events Since */
+            events_since: string | null;
+            /**
+             * Generated At
+             * Format: date-time
+             */
+            generated_at: string;
+            /** Repeat Days */
+            repeat_days: number;
+            /** Report Version */
+            report_version: number;
+        };
         /** GradeCatalogue */
         GradeCatalogue: {
             grade: components["schemas"]["GradeOut"];
@@ -5441,6 +5496,15 @@ export interface components {
              * @description Preview width in pixels
              */
             width: number | null;
+        };
+        /** PaidConversion */
+        PaidConversion: {
+            /** Available */
+            available: boolean;
+            /** Blocker */
+            blocker: string;
+            /** Value */
+            value: number | null;
         };
         /** PreferencesIO */
         PreferencesIO: {
@@ -7431,6 +7495,26 @@ export interface operations {
                     "application/json": {
                         [key: string]: unknown;
                     }[];
+                };
+            };
+        };
+    };
+    funnel_v1_admin_analytics_funnel_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["FunnelReport"];
                 };
             };
         };
