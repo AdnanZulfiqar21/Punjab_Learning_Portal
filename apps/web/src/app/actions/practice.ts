@@ -149,6 +149,25 @@ export async function continueHere(attemptId: string): Promise<{ ok: boolean; me
   return res.ok ? { ok: true } : { ok: false, message: res.problem?.detail ?? "Couldn't move the test to this device." };
 }
 
+/** P11.S3.T2 (FLAGS-01): replace this attempt's flags. Flags are a study aid only and never scored. */
+export async function setFlags(
+  attemptId: string,
+  positions: number[],
+): Promise<{ ok: true; flagged: number[] } | { ok: false; elsewhere: boolean; message: string }> {
+  const t = await token(`/practice/attempt/${attemptId}`);
+  const res = await api<{ flagged: number[] }>(`/v1/attempts/${encodeURIComponent(attemptId)}/flags`, {
+    method: "PUT",
+    token: t,
+    body: JSON.stringify({ positions }),
+  });
+  if (res.ok) return { ok: true, flagged: res.data.flagged };
+  return {
+    ok: false,
+    elsewhere: (res.problem as { code_reason?: string } | null)?.code_reason === "ATTEMPT_ELSEWHERE",
+    message: res.problem?.detail ?? "Couldn't change the flag.",
+  };
+}
+
 export async function revealItem(attemptId: string, position: number): Promise<{ ok: true; data: RevealResult } | { ok: false; message: string }> {
   const t = await token(`/practice/attempt/${attemptId}`);
   const res = await api<RevealResult>(`/v1/attempts/${encodeURIComponent(attemptId)}/items/${position}/reveal`, {

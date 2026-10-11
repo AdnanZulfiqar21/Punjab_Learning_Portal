@@ -6,7 +6,7 @@
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import type { AnswerOpResult, PracticeAttempt, RevealResult } from "@portal/contracts";
-import { continueHere, revealItem, saveAnswers, submitAttempt, type Op } from "@/app/actions/practice";
+import { continueHere, revealItem, saveAnswers, setFlags, submitAttempt, type Op } from "@/app/actions/practice";
 import { LessonBlocks } from "@/components/lesson-blocks";
 import { HelpLink } from "@/components/help-link";
 
@@ -65,6 +65,9 @@ export function AttemptRunner({ attempt }: { attempt: PracticeAttempt }) {
   });
   const [revealed, setRevealed] = useState<Record<number, RevealResult>>({});
   const [locked, setLocked] = useState<Set<number>>(() => new Set(attempt.answers.filter((a) => a.revealed).map((a) => a.position)));
+  // P11.S3.T2 (FLAGS-01): questions to come back to, kept with the attempt so a refresh or another device keeps them.
+  const [flagged, setFlagged] = useState<Set<number>>(() => new Set(attempt.flagged ?? []));
+  const [flagError, setFlagError] = useState<string | null>(null);
   const [connection, setConnection] = useState<"ok" | "retrying">("ok");
   // P10.S1.T3: another signed-in device holds this attempt; nothing is sent from here until the learner chooses.
   const [elsewhere, setElsewhere] = useState(attempt.held_elsewhere === true);
@@ -212,6 +215,24 @@ export function AttemptRunner({ attempt }: { attempt: PracticeAttempt }) {
     timer.current = setTimeout(() => void flush(), DEBOUNCE_MS);
   }
 
+  async function toggleFlag(position: number) {
+    if (closed || submitting) return;
+    const before = flagged;
+    const next = new Set(before);
+    if (next.has(position)) next.delete(position);
+    else next.add(position);
+    setFlagged(next); // shown at once; put back if the server refuses
+    setFlagError(null);
+    const out = await setFlags(attempt.id, [...next]);
+    if (out.ok) {
+      setFlagged(new Set(out.flagged));
+      return;
+    }
+    setFlagged(before);
+    if (out.elsewhere) setElsewhere(true);
+    else setFlagError(out.message);
+  }
+
   async function check(position: number) {
     await flush();
     const res = await revealItem(attempt.id, position);
@@ -314,10 +335,15 @@ export function AttemptRunner({ attempt }: { attempt: PracticeAttempt }) {
               type="button"
               onClick={() => setCurrent(it.position)}
               aria-current={it.position === current ? "step" : undefined}
-              aria-label={`Question ${it.position}: ${st.status === "empty" ? "not answered" : st.status}`}
-              className={`h-9 w-9 rounded-md border text-sm ${tone} ${it.position === current ? "ring-2 ring-accent" : ""}`}
+              aria-label={`Question ${it.position}: ${st.status === "empty" ? "not answered" : st.status}${flagged.has(it.position) ? ", flagged" : ""}`}
+              className={`relative h-9 w-9 rounded-md border text-sm ${tone} ${it.position === current ? "ring-2 ring-accent" : ""}`}
             >
               {it.position}
+              {flagged.has(it.position) && (
+                <span aria-hidden="true" className="absolute -top-1.5 -right-1.5 rounded-full bg-warn px-1 text-[10px] leading-4 text-white dark:text-background">
+                  ⚑
+                </span>
+              )}
             </button>
           );
         })}
@@ -355,6 +381,22 @@ export function AttemptRunner({ attempt }: { attempt: PracticeAttempt }) {
             <button type="button" onClick={() => choose(current, null)} className="text-accent underline-offset-2 hover:underline">
               Clear answer
             </button>
+          )}
+          {!closed && (
+            <button
+              type="button"
+              onClick={() => void toggleFlag(current)}
+              aria-pressed={flagged.has(current)}
+              disabled={submitting || elsewhere}
+              className={`rounded-lg border px-3 py-1.5 disabled:opacity-60 ${flagged.has(current) ? "border-warn bg-warn-soft" : "border-border hover:border-accent"}`}
+            >
+              {flagged.has(current) ? "⚑ Flagged for review" : "Flag for review"}
+            </button>
+          )}
+          {flagError && (
+            <span role="alert" className="text-danger">
+              {flagError}
+            </span>
           )}
           {attempt.feedback_mode === "immediate" && state.status === "saved" && state.option !== null && !revealed[current] && !locked.has(current) && (
             <button type="button" onClick={() => void check(current)} className="rounded-lg border border-border px-3 py-1.5 hover:border-accent">
@@ -398,7 +440,28 @@ export function AttemptRunner({ attempt }: { attempt: PracticeAttempt }) {
             <li>{answered} answered</li>
             <li>{total - answered} not answered</li>
             {pending > 0 && <li>{pending} still being saved; they will be sent with your submission</li>}
+            {flagged.size > 0 && <li>{flagged.size} flagged for review</li>}
           </ul>
+          {flagged.size > 0 && (
+            <div className="flex flex-wrap items-center gap-2 text-sm">
+              <span className="text-muted">Go back to a flagged question:</span>
+              {[...flagged]
+                .sort((x, y) => x - y)
+                .map((p) => (
+                  <button
+                    key={p}
+                    type="button"
+                    onClick={() => {
+                      setCurrent(p);
+                      setConfirming(false);
+                    }}
+                    className="rounded-md border border-warn bg-warn-soft px-2 py-1"
+                  >
+                    Question {p}
+                  </button>
+                ))}
+            </div>
+          )}
           <p className="text-sm text-muted">After you submit you can&apos;t change any answer.</p>
           {submitError && (
             <p role="alert" className="rounded-lg border border-danger/30 bg-danger-soft px-3 py-2 text-sm">

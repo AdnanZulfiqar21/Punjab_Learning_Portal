@@ -117,6 +117,26 @@ test("immediate feedback reveals one answer and locks it", async ({ page }) => {
   }
 });
 
+test("flags mark questions to come back to, survive a reload and are listed before submitting", async ({ page }) => {
+  // P11.S3.T2 (FLAGS-01)
+  await newLearner(page);
+  await startTest(page, 3);
+  const flag = page.getByRole("button", { name: "Flag for review" });
+  await flag.click();
+  await expect(page.getByRole("button", { name: "⚑ Flagged for review" })).toHaveAttribute("aria-pressed", "true", AUTH);
+  await expect(page.getByRole("navigation", { name: "Questions" }).getByRole("button", { name: "Question 1: not answered, flagged" })).toBeVisible();
+  await page.reload();
+  await expect(page.getByRole("button", { name: "Question 1: not answered, flagged" })).toBeVisible(AUTH);
+  await page.getByRole("button", { name: "Next →" }).click();
+  await page.getByRole("button", { name: "Finish test" }).click();
+  const dialog = page.getByRole("dialog", { name: "Submit your test?" });
+  await expect(dialog.getByText("1 flagged for review")).toBeVisible();
+  await dialog.getByRole("button", { name: "Question 1" }).click();
+  await expect(page.getByRole("heading", { name: "Question 1 of 3" })).toBeVisible();
+  await page.getByRole("button", { name: "⚑ Flagged for review" }).click();
+  await expect(page.getByRole("button", { name: "Flag for review" })).toHaveAttribute("aria-pressed", "false", AUTH);
+});
+
 test("timed practice shows the countdown and the tolerance rule", async ({ page }) => {
   await newLearner(page);
   await page.goto("/practice?grade=11&subject=biology");

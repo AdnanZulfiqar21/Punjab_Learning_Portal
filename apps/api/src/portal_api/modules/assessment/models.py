@@ -108,6 +108,8 @@ class Attempt(Base):
     cutoff_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     finalised_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     finalise_reason: Mapped[str | None] = mapped_column(String(10))
+    # P11.S3.T2 (FLAGS-01): positions the learner flagged to come back to. A study aid only; never scored.
+    flagged: Mapped[list[int]] = mapped_column(JSONB, default=list, server_default=text("'[]'::jsonb"))
     # P10.S1.T3 (HANDOFF-01): the signed-in device (application session) that may write to this active attempt.
     holder_session_id: Mapped[uuid.UUID | None] = mapped_column(
         ForeignKey("user_session.id", ondelete="SET NULL"), nullable=True

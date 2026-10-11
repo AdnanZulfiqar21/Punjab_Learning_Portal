@@ -20,6 +20,8 @@ from portal_api.modules.assessment.schemas import (
     AttemptOut,
     AvailabilityOut,
     ChapterAvailability,
+    FlagsIn,
+    FlagsOut,
     FormCreateIn,
     FormOut,
     ItemReview,
@@ -95,6 +97,7 @@ def _attempt_out(db: Session, a: Attempt, who: Principal | None = None) -> Attem
         answers=[AnswerOut(**x) for x in attempts.answers_view(db, a)],
         receipt=_receipt_out(receipt) if receipt else None,
         held_elsewhere=attempts.held_elsewhere(db, a, who) if who is not None else False,
+        flagged=list(a.flagged or []),
     )
 
 
@@ -166,6 +169,12 @@ def continue_attempt_here(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, 
     _private(response)
     attempts.continue_here(db, who, attempt_id)
     return _attempt_out(db, attempts.load(db, who, attempt_id), who)
+
+
+@router.put("/attempts/{attempt_id}/flags", response_model=FlagsOut, summary="Flag questions to come back to")
+def set_flags(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, body: FlagsIn, response: Response) -> FlagsOut:
+    _private(response)
+    return FlagsOut(flagged=attempts.set_flags(db, who, attempt_id, body.positions))
 
 
 @router.post("/attempts/{attempt_id}/answers", response_model=SaveOut, summary="Save answer operations (§10.5)")
