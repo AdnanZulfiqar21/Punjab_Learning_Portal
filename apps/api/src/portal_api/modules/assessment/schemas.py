@@ -92,6 +92,14 @@ class AnswerOut(BaseModel):
     revealed: bool
 
 
+class NotCountedOut(BaseModel):
+    """RECEIPT-01: a question whose latest change wasn't counted, and why."""
+
+    position: int
+    reason: Literal["late", "finalised", "invalid"]
+    admitted_at: datetime
+
+
 class ReceiptOut(BaseModel):
     id: uuid.UUID
     reason: Literal["manual", "expiry"]
@@ -116,6 +124,10 @@ class AttemptOut(BaseModel):
     receipt: ReceiptOut | None
     held_elsewhere: bool = Field(
         default=False, description="Open on another signed-in device; choose continue-here before answering here"
+    )
+    not_counted: list[NotCountedOut] = Field(
+        default_factory=list,
+        description="After submission: questions whose latest change wasn't counted (the receipt itself never changes)",
     )
     flagged: list[int] = Field(default_factory=list, description="Positions flagged to come back to (never scored)")
 
@@ -246,6 +258,7 @@ class ResultOut(BaseModel):
     sections: list[ResultSection] = Field(default_factory=list, description="Mocks: one row per pattern section")
     history: list[ScoreHistoryEntry] = Field(default_factory=list, description="Every score version, oldest first")
     counts: ResultCounts | None = None
+    not_counted: list[NotCountedOut] = Field(default_factory=list, description="Latest changes that weren't counted")
 
 
 class RevealOut(BaseModel):
