@@ -12250,6 +12250,125 @@
         ]
       }
     },
+    "/v1/admin/exam-profile-versions/{version_id}/preview": {
+      "get": {
+        "operationId": "preview_profile_version_v1_admin_exam_profile_versions__version_id__preview_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "version_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Version Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "seed",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "exclusiveMaximum": 4611686018427387904,
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Seed"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Preview Profile Version V1 Admin Exam Profile Versions  Version Id  Preview Get",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Preview a sample form for a profile version (learner and oldest-client views, hint checks; no answers)",
+        "tags": [
+          "practice"
+        ]
+      }
+    },
+    "/v1/admin/exam-profile-versions/{version_id}/preview/answers": {
+      "get": {
+        "operationId": "preview_profile_version_answers_v1_admin_exam_profile_versions__version_id__preview_answers_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "version_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Version Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "seed",
+            "required": true,
+            "schema": {
+              "exclusiveMaximum": 4611686018427387904,
+              "minimum": 0,
+              "title": "Seed",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Preview Profile Version Answers V1 Admin Exam Profile Versions  Version Id  Preview Answers Get",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "The protected answer report for a sample form (same seed as the preview)",
+        "tags": [
+          "practice"
+        ]
+      }
+    },
     "/v1/admin/exam-profile-versions/{version_id}/publish": {
       "post": {
         "operationId": "publish_profile_version_v1_admin_exam_profile_versions__version_id__publish_post",

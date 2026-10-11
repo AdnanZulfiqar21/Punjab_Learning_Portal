@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
 import type { ExamProfileAdmin, MockSession } from "@portal/contracts";
@@ -67,6 +68,9 @@ async function Profiles() {
                     </span>
                   </p>
                   <VerifyPublish versionId={v.id} status={v.status} />
+                  <Link href={`/admin/exam-profiles/preview/${v.id}`} className="text-accent underline underline-offset-2">
+                    Preview a sample form
+                  </Link>
                 </li>
               ))}
             </ul>

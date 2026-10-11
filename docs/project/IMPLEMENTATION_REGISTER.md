@@ -168,3 +168,4 @@ Source plan: `Road Map/Punjab_Learning_Portal_Master_Roadmap_v2.2_Integrated_Wri
 | P10.S1.T3 Simultaneous sessions | IMPLEMENTED (API + web + mobile code; mobile not device-verified) | HANDOFF-01. `tests/test_attempt_handoff.py`. |
 | P10.S4.T1 Persistence failure cases | IMPLEMENTED (seeded retries, reordering, tab collisions, lost acknowledgements, commit failover; independent ledger; scoring reconciled) | LEDGER-01. `tests/test_persistence_ledger.py`. |
 | P09.S1.T2 Book and combined scopes (mobile) | IMPLEMENTED (mobile code; not device-verified) | MOBILE-MIX-01. |
+| P09.S4.T1 Reviewer form preview | IMPLEMENTED (API + web) | FORM-PREVIEW-01. `tests/test_form_preview.py`. |
