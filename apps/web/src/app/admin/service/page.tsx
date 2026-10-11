@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
-import type { Integration, OpsSignal } from "@portal/contracts";
+import type { Integration, OpsSignal, RolloutSnapshot } from "@portal/contracts";
 import { Badge, Breadcrumbs, Notice, SkeletonLines } from "@/components/ui";
 import { api, currentUser } from "@/lib/session";
+import { RolloutForm } from "./rollout-form";
 
 export const metadata: Metadata = { title: "Service overview", robots: { index: false } };
 
@@ -33,6 +34,9 @@ export default function ServicePage() {
       </Suspense>
       <Suspense fallback={<SkeletonLines lines={6} label="Checking integrations" />}>
         <Integrations />
+      </Suspense>
+      <Suspense fallback={<SkeletonLines lines={4} label="Reading feature rollouts" />}>
+        <Rollouts />
       </Suspense>
     </div>
   );
@@ -136,6 +140,48 @@ async function Integrations() {
           </tbody>
         </table>
       </div>
+    </section>
+  );
+}
+
+// P16.S3.T1 (ROLLOUT-01): the share of learners who get each feature in this environment. A flag only ever hides a
+// feature; staff always see it so it can be checked first. Changes need a reason and are audited.
+async function Rollouts() {
+  const user = await currentUser();
+  if (!user) redirect("/signin?next=/admin/service");
+  const res = await api<RolloutSnapshot>("/v1/ops/rollouts", { token: user.token });
+  if (!res.ok) return null; // the signals panel above already explains access problems
+  return (
+    <section aria-labelledby="rollouts-h" className="space-y-2">
+      <h2 id="rollouts-h" className="font-semibold">
+        Feature rollouts <span className="font-normal text-muted">({res.data.environment})</span>
+      </h2>
+      <p className="text-sm text-muted">
+        Learners are placed in or out by a stable hash of the feature and their account, so their answer doesn&apos;t change between visits. Staff always see the feature.
+        Lowering a rollout hides the feature; it never deletes anything learners kept.
+      </p>
+      <ul className="space-y-3">
+        {res.data.rollouts.map((r) => (
+          <li key={r.key} className="space-y-3 rounded-xl border border-border bg-surface p-4">
+            <div className="flex flex-wrap items-baseline justify-between gap-2">
+              <div>
+                <p className="font-medium">{r.description}</p>
+                <p className="font-mono text-xs text-muted">{r.key}</p>
+              </div>
+              <p className="text-sm">
+                <Badge tone={r.percent === 100 ? "ok" : r.percent === 0 ? "warn" : "info"}>{r.percent}% of learners</Badge>
+                <span className="ml-2 text-muted">default {r.default_percent}%</span>
+              </p>
+            </div>
+            {r.reason && (
+              <p className="text-sm text-muted">
+                Last change{r.updated_at ? ` on ${new Date(r.updated_at).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" })}` : ""}: {r.reason}
+              </p>
+            )}
+            <RolloutForm rolloutKey={r.key} label={r.description} percent={r.percent} />
+          </li>
+        ))}
+      </ul>
     </section>
   );
 }

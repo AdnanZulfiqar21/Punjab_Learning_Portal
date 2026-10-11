@@ -1,7 +1,7 @@
 """feature_rollout: rollout percentage overrides per feature (P16.S3.T1, ROLLOUT-01)
 
 Revision ID: a1d7e4b9c602
-Revises: d7a2c5e9f318
+Revises: f5c2a8d4b937
 Create Date: 2026-10-11
 """
 
@@ -11,7 +11,7 @@ import sqlalchemy as sa
 from alembic import op
 
 revision = "a1d7e4b9c602"
-down_revision = "d7a2c5e9f318"
+down_revision = "f5c2a8d4b937"
 branch_labels = None
 depends_on = None
 
