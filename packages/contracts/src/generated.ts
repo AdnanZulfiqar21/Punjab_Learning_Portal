@@ -2190,6 +2190,110 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/studio/concepts": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Learning concepts in your subjects */
+        get: operations["list_concepts_v1_studio_concepts_get"];
+        put?: never;
+        /** Write a draft learning concept */
+        post: operations["create_concept_v1_studio_concepts_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/studio/concepts/{concept_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** One concept with its topics and prerequisites */
+        get: operations["get_concept_v1_studio_concepts__concept_id__get"];
+        /** Edit a draft concept */
+        put: operations["edit_concept_v1_studio_concepts__concept_id__put"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/studio/concepts/{concept_id}/prerequisites": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Add a prerequisite (no cycles) */
+        post: operations["add_prereq_v1_studio_concepts__concept_id__prerequisites_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/studio/concepts/{concept_id}/prerequisites/{requires_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        /** Remove a prerequisite */
+        delete: operations["remove_prereq_v1_studio_concepts__concept_id__prerequisites__requires_id__delete"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/studio/concepts/{concept_id}/publish": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Publish a concept (an independent subject reviewer) */
+        post: operations["publish_concept_v1_studio_concepts__concept_id__publish_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/studio/concepts/{concept_id}/topics": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** Map the topics that teach a concept */
+        put: operations["map_topics_v1_studio_concepts__concept_id__topics_put"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/studio/export": {
         parameters: {
             query?: never;
@@ -4740,6 +4844,82 @@ export interface components {
             /** Reason */
             reason: string;
         };
+        /** ConceptIn */
+        ConceptIn: {
+            /**
+             * Code
+             * @description Stable identifier, e.g. bio.cell.membrane-transport
+             */
+            code: string;
+            /**
+             * Statement
+             * @description The learning outcome
+             */
+            statement: string;
+            /**
+             * Subject
+             * @enum {string}
+             */
+            subject: "biology" | "chemistry" | "physics" | "computer_science" | "mathematics";
+            /** Title */
+            title: string;
+        };
+        /** ConceptOut */
+        ConceptOut: {
+            /** Code */
+            code: string;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Prerequisites */
+            prerequisites: components["schemas"]["PrerequisiteOut"][];
+            /** Published At */
+            published_at: string | null;
+            /** Source Refs */
+            source_refs: {
+                [key: string]: unknown;
+            }[];
+            /** Statement */
+            statement: string;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "draft" | "published" | "retired";
+            /** Subject */
+            subject: string;
+            /** Title */
+            title: string;
+            /** Topics */
+            topics: components["schemas"]["ConceptTopicOut"][];
+        };
+        /** ConceptPatch */
+        ConceptPatch: {
+            /** Source Refs */
+            source_refs?: components["schemas"]["SourceRefIn"][] | null;
+            /** Statement */
+            statement?: string | null;
+            /** Title */
+            title?: string | null;
+        };
+        /** ConceptTopicOut */
+        ConceptTopicOut: {
+            /** Chapter Number */
+            chapter_number: number;
+            /** Grade */
+            grade: number;
+            /** Number */
+            number: string | null;
+            /** Title */
+            title: string;
+            /**
+             * Topic Id
+             * Format: uuid
+             */
+            topic_id: string;
+        };
         /** ConsentIn */
         ConsentIn: {
             /**
@@ -6968,6 +7148,26 @@ export interface components {
              */
             timezone: string;
         };
+        /** PrerequisiteIn */
+        PrerequisiteIn: {
+            /** Bridging Lesson Id */
+            bridging_lesson_id?: string | null;
+            /**
+             * Requires Id
+             * Format: uuid
+             */
+            requires_id: string;
+        };
+        /** PrerequisiteOut */
+        PrerequisiteOut: {
+            /** Bridging Lesson Id */
+            bridging_lesson_id: string | null;
+            /**
+             * Requires Id
+             * Format: uuid
+             */
+            requires_id: string;
+        };
         /** PreviewLesson */
         PreviewLesson: {
             /**
@@ -8057,6 +8257,18 @@ export interface components {
             /** Source Id */
             source_id: string;
         };
+        /** SourceRefIn */
+        SourceRefIn: {
+            /** Pdf From */
+            pdf_from: number;
+            /** Pdf To */
+            pdf_to: number;
+            /**
+             * Source Document Id
+             * Format: uuid
+             */
+            source_document_id: string;
+        };
         /** SourceReviewIn */
         SourceReviewIn: {
             /** Note */
@@ -8491,6 +8703,11 @@ export interface components {
             points: string[];
             /** Title */
             title: string;
+        };
+        /** TopicsIn */
+        TopicsIn: {
+            /** Topic Ids */
+            topic_ids: string[];
         };
         /** TrackOut */
         TrackOut: {
@@ -13346,6 +13563,270 @@ export interface operations {
                     "application/json": {
                         [key: string]: unknown;
                     };
+                };
+            };
+        };
+    };
+    list_concepts_v1_studio_concepts_get: {
+        parameters: {
+            query?: {
+                subject?: string | null;
+                grade?: number | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ConceptOut"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    create_concept_v1_studio_concepts_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ConceptIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ConceptOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_concept_v1_studio_concepts__concept_id__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                concept_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ConceptOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    edit_concept_v1_studio_concepts__concept_id__put: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                concept_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ConceptPatch"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ConceptOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    add_prereq_v1_studio_concepts__concept_id__prerequisites_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                concept_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PrerequisiteIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ConceptOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    remove_prereq_v1_studio_concepts__concept_id__prerequisites__requires_id__delete: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                concept_id: string;
+                requires_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ConceptOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    publish_concept_v1_studio_concepts__concept_id__publish_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                concept_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ConceptOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    map_topics_v1_studio_concepts__concept_id__topics_put: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                concept_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["TopicsIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ConceptOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
                 };
             };
         };

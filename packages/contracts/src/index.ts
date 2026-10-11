@@ -120,3 +120,4 @@ export type StudyNote = S["NoteOut"];
 export type StudyNoteListed = S["NoteListed"];
 export type FavouriteTopic = S["FavouriteOut"];
 export type SavedFormula = S["FormulaOut"];
+export type Concept = S["ConceptOut"];

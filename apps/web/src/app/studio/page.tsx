@@ -49,6 +49,9 @@ export default function StudioPage({ searchParams }: PageProps<"/studio">) {
         <Link href="/studio/lectures" className="rounded-lg border border-border bg-surface px-4 py-2.5 font-medium hover:border-accent">
           Lectures
         </Link>
+        <Link href="/studio/concepts" className="rounded-lg border border-border bg-surface px-4 py-2.5 font-medium hover:border-accent">
+          Concepts
+        </Link>
         <form action="/studio/export" method="get" className="flex items-center gap-1" aria-label="Export content">
           <select name="grade" aria-label="Export class" className="rounded-lg border border-border bg-surface px-2 py-2.5">
             <option value="11">XI</option>

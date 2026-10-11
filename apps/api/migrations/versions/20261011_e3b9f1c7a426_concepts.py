@@ -1,7 +1,7 @@
 """concept, concept_topic, concept_prerequisite: learning concepts and prerequisites (P05.S1.T2, CONCEPTS-01)
 
 Revision ID: e3b9f1c7a426
-Revises: b6d1e4a8c205
+Revises: d7a2c5e9f318
 Create Date: 2026-10-11
 """
 
@@ -12,7 +12,7 @@ from alembic import op
 from sqlalchemy.dialects import postgresql
 
 revision = "e3b9f1c7a426"
-down_revision = "b6d1e4a8c205"
+down_revision = "d7a2c5e9f318"
 branch_labels = None
 depends_on = None
 
