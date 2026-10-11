@@ -77,7 +77,7 @@ def _receipt_out(r: SubmissionReceipt) -> ReceiptOut:
     )
 
 
-def _attempt_out(db: Session, a: Attempt) -> AttemptOut:
+def _attempt_out(db: Session, a: Attempt, who: Principal | None = None) -> AttemptOut:
     form = db.get(PracticeForm, a.form_id)
     assert form is not None
     receipt = attempts.receipt_for(db, a.id)
@@ -94,6 +94,7 @@ def _attempt_out(db: Session, a: Attempt) -> AttemptOut:
         items=[ItemSnapshot(**i) for i in forms.learner_items(db, form)],
         answers=[AnswerOut(**x) for x in attempts.answers_view(db, a)],
         receipt=_receipt_out(receipt) if receipt else None,
+        held_elsewhere=attempts.held_elsewhere(db, a, who) if who is not None else False,
     )
 
 
@@ -147,13 +148,24 @@ def create_form(
 def start_attempt(db: DB, who: CurrentPrincipal, form_id: uuid.UUID, response: Response) -> AttemptOut:
     _private(response)
     attempt = attempts.start(db, who, form_id)
-    return _attempt_out(db, attempts.load(db, who, attempt.id))
+    return _attempt_out(db, attempts.load(db, who, attempt.id), who)
 
 
 @router.get("/attempts/{attempt_id}", response_model=AttemptOut, summary="Resume: questions, saved answers, timing")
 def get_attempt(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, response: Response) -> AttemptOut:
     _private(response)
-    return _attempt_out(db, attempts.load(db, who, attempt_id))
+    return _attempt_out(db, attempts.load(db, who, attempt_id), who)
+
+
+@router.post(
+    "/attempts/{attempt_id}/continue-here",
+    response_model=AttemptOut,
+    summary="Move an active attempt to this signed-in device (the other device must continue here to write again)",
+)
+def continue_attempt_here(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, response: Response) -> AttemptOut:
+    _private(response)
+    attempts.continue_here(db, who, attempt_id)
+    return _attempt_out(db, attempts.load(db, who, attempt_id), who)
 
 
 @router.post("/attempts/{attempt_id}/answers", response_model=SaveOut, summary="Save answer operations (§10.5)")

@@ -99,7 +99,10 @@ export type Op = { op_id: string; position: number; revision: number; option_id:
 export type SaveOutcome =
   | { kind: "ok"; status: string; results: AnswerOpResult[] }
   | { kind: "finalised"; results: AnswerOpResult[] }
+  | { kind: "elsewhere"; message: string }
   | { kind: "error"; message: string };
+
+const isElsewhere = (p: Problem | null) => (p as (Problem & { code_reason?: string }) | null)?.code_reason === "ATTEMPT_ELSEWHERE";
 
 export async function saveAnswers(attemptId: string, ops: Op[]): Promise<SaveOutcome> {
   const t = await token(`/practice/attempt/${attemptId}`);
@@ -110,6 +113,7 @@ export async function saveAnswers(attemptId: string, ops: Op[]): Promise<SaveOut
       body: JSON.stringify({ ops }),
     });
     if (res.ok) return { kind: "ok", status: res.data.status, results: res.data.results };
+    if (res.status === 409 && isElsewhere(res.problem)) return { kind: "elsewhere", message: res.problem?.detail ?? "" };
     if (res.status === 409) {
       const p = res.problem as (Problem & { results?: AnswerOpResult[] }) | null;
       return { kind: "finalised", results: p?.results ?? [] };
@@ -120,7 +124,7 @@ export async function saveAnswers(attemptId: string, ops: Op[]): Promise<SaveOut
   }
 }
 
-export type SubmitOutcome = { kind: "ok"; result: SubmitResult } | { kind: "error"; message: string };
+export type SubmitOutcome = { kind: "ok"; result: SubmitResult } | { kind: "elsewhere" | "error"; message: string };
 
 export async function submitAttempt(attemptId: string, idempotencyKey: string, ops: Op[]): Promise<SubmitOutcome> {
   const t = await token(`/practice/attempt/${attemptId}`);
@@ -131,10 +135,18 @@ export async function submitAttempt(attemptId: string, idempotencyKey: string, o
       body: JSON.stringify({ idempotency_key: idempotencyKey, ops }),
     });
     if (res.ok) return { kind: "ok", result: res.data };
+    if (res.status === 409 && isElsewhere(res.problem)) return { kind: "elsewhere", message: res.problem?.detail ?? "" };
     return { kind: "error", message: res.problem?.detail ?? `Submission failed (${res.status}).` };
   } catch {
     return { kind: "error", message: "Can't reach the service. Nothing was lost; submit again when you're back online." };
   }
+}
+
+/** P10.S1.T3: move an active attempt to this device after it was opened on another one. */
+export async function continueHere(attemptId: string): Promise<{ ok: boolean; message?: string }> {
+  const t = await token(`/practice/attempt/${attemptId}`);
+  const res = await api<PracticeAttempt>(`/v1/attempts/${encodeURIComponent(attemptId)}/continue-here`, { method: "POST", token: t });
+  return res.ok ? { ok: true } : { ok: false, message: res.problem?.detail ?? "Couldn't move the test to this device." };
 }
 
 export async function revealItem(attemptId: string, position: number): Promise<{ ok: true; data: RevealResult } | { ok: false; message: string }> {

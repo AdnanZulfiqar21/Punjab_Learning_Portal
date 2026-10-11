@@ -6,7 +6,7 @@
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import type { AnswerOpResult, PracticeAttempt, RevealResult } from "@portal/contracts";
-import { revealItem, saveAnswers, submitAttempt, type Op } from "@/app/actions/practice";
+import { continueHere, revealItem, saveAnswers, submitAttempt, type Op } from "@/app/actions/practice";
 import { LessonBlocks } from "@/components/lesson-blocks";
 import { HelpLink } from "@/components/help-link";
 
@@ -65,6 +65,9 @@ export function AttemptRunner({ attempt }: { attempt: PracticeAttempt }) {
   const [revealed, setRevealed] = useState<Record<number, RevealResult>>({});
   const [locked, setLocked] = useState<Set<number>>(() => new Set(attempt.answers.filter((a) => a.revealed).map((a) => a.position)));
   const [connection, setConnection] = useState<"ok" | "retrying">("ok");
+  // P10.S1.T3: another signed-in device holds this attempt; nothing is sent from here until the learner chooses.
+  const [elsewhere, setElsewhere] = useState(attempt.held_elsewhere === true);
+  const [moving, setMoving] = useState(false);
   const [confirming, setConfirming] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
@@ -129,7 +132,9 @@ export function AttemptRunner({ attempt }: { attempt: PracticeAttempt }) {
     const batch = queue.current.slice(0, 50);
     inflight.current = (async () => {
       const out = await saveAnswers(attempt.id, batch);
-      if (out.kind === "error") {
+      if (out.kind === "elsewhere") {
+        setElsewhere(true); // keep the queue; no automatic retry tug-of-war between devices
+      } else if (out.kind === "error") {
         setConnection("retrying");
         const delay = retryDelay.current;
         retryDelay.current = Math.min(15_000, delay * 2);
@@ -140,7 +145,7 @@ export function AttemptRunner({ attempt }: { attempt: PracticeAttempt }) {
         setConnection("ok");
         apply(out.results);
         persist();
-        if (out.kind === "finalised" || out.status !== "active") router.refresh();
+        if (out.kind === "finalised" || (out.kind === "ok" && out.status !== "active")) router.refresh();
       }
     })();
     try {
@@ -224,7 +229,8 @@ export function AttemptRunner({ attempt }: { attempt: PracticeAttempt }) {
     const key = stored.submitKey ?? crypto.randomUUID().replaceAll("-", "");
     writeStored(attempt.id, { ops: queue.current, submitKey: key }); // retries reuse the same submission key
     const out = await submitAttempt(attempt.id, key, queue.current);
-    if (out.kind === "error") {
+    if (out.kind === "elsewhere") setElsewhere(true);
+    if (out.kind === "error" || out.kind === "elsewhere") {
       setSubmitting(false);
       setSubmitError(out.message);
       return;
@@ -239,8 +245,38 @@ export function AttemptRunner({ attempt }: { attempt: PracticeAttempt }) {
   const state = view[current];
   const remaining = deadline !== null && now !== null ? Math.max(0, deadline - now) : null;
 
+  async function moveHere() {
+    setMoving(true);
+    const out = await continueHere(attempt.id);
+    setMoving(false);
+    if (!out.ok) {
+      setSubmitError(out.message ?? null);
+      return;
+    }
+    setElsewhere(false);
+    router.refresh(); // answers saved on the other device appear; this device's unsent changes are sent next
+    void flushRef.current();
+  }
+
   return (
     <div className="space-y-6">
+      {elsewhere && (
+        <div role="alert" className="space-y-2 rounded-xl border border-warn/40 bg-warn-soft p-4 text-sm">
+          <p className="font-medium">This test is open on another device.</p>
+          <p>
+            Only one device can answer at a time. Anything you change here stays on this device and isn&apos;t sent until you
+            continue here. The other device will then have to do the same.
+          </p>
+          <button
+            type="button"
+            onClick={() => void moveHere()}
+            disabled={moving}
+            className="rounded-lg bg-accent px-4 py-2 font-medium text-white hover:bg-accent-strong disabled:opacity-60 dark:text-background"
+          >
+            {moving ? "Moving…" : "Continue here"}
+          </button>
+        </div>
+      )}
       <header className="flex flex-wrap items-center justify-between gap-3">
         <h1 className="text-xl font-semibold tracking-tight">
           Question {current} of {total}

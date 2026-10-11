@@ -112,6 +112,7 @@ def start(db: Session, who: Principal, form_id: uuid.UUID) -> Attempt:
             deadline_at=deadline,
             tolerance_ms=form.late_write_tolerance_ms,
             cutoff_at=cutoff,
+            holder_session_id=who.session.id if who.session is not None else None,
         )
         .on_conflict_do_nothing(constraint="uq_attempt_form_user")
         .returning(Attempt.id)
@@ -141,6 +142,42 @@ def _lock(db: Session, attempt_id: uuid.UUID, who: Principal) -> Attempt:
     attempt = db.scalar(select(Attempt).where(Attempt.id == attempt_id).with_for_update())
     if attempt is None or attempt.user_id != who.user.id:
         raise NotFound("Attempt not found.")
+    return attempt
+
+
+def _other_holder(db: Session, attempt: Attempt, who: Principal) -> bool:
+    """Whether another *live* signed-in device holds this active attempt (HANDOFF-01). Identity-provider tokens
+    without an application session aren't tied to a device, so they never hold or contest an attempt."""
+    if who.session is None or attempt.status != "active" or attempt.holder_session_id in (None, who.session.id):
+        return False
+    from portal_api.modules.identity.sessions import UserSession
+
+    other = db.get(UserSession, attempt.holder_session_id)
+    return other is not None and other.revoked_at is None and other.expires_at > db_now(db)
+
+
+def held_elsewhere(db: Session, attempt: Attempt, who: Principal) -> bool:
+    return _other_holder(db, attempt, who)
+
+
+def _hold(db: Session, attempt: Attempt, who: Principal) -> None:
+    """P10.S1.T3: only the holding device writes. A device whose holder signed out or expired takes over silently;
+    a live holder elsewhere means this device must choose to continue here first (no silent tug-of-war)."""
+    if _other_holder(db, attempt, who):
+        raise Conflict(
+            "This test is open on another device. Choose Continue here to move it to this device.",
+            code_reason="ATTEMPT_ELSEWHERE",
+        )
+    if who.session is not None and attempt.status == "active":
+        attempt.holder_session_id = who.session.id
+
+
+def continue_here(db: Session, who: Principal, attempt_id: uuid.UUID) -> Attempt:
+    """Explicit handoff: this device becomes the holder. The other device's next write is refused."""
+    attempt = _lock(db, attempt_id, who)
+    if who.session is not None and attempt.status == "active":
+        attempt.holder_session_id = who.session.id
+    db.commit()
     return attempt
 
 
@@ -449,6 +486,7 @@ def save(db: Session, who: Principal, attempt_id: uuid.UUID, ops: list[Op]) -> d
     if len(ops) > MAX_OPS:
         raise Unprocessable(f"Send at most {MAX_OPS} operations at a time.")
     attempt = _lock(db, attempt_id, who)
+    _hold(db, attempt, who)
     was_final = attempt.status != "active"
     now = db_now(db)
     items = _items(db, attempt)
@@ -470,6 +508,7 @@ def submit(db: Session, who: Principal, attempt_id: uuid.UUID, idempotency_key: 
     if len(ops) > MAX_OPS:
         raise Unprocessable(f"Send at most {MAX_OPS} operations at a time.")
     attempt = _lock(db, attempt_id, who)
+    _hold(db, attempt, who)
     now = db_now(db)
     items = _items(db, attempt)
     existing = receipt_for(db, attempt.id)
@@ -499,6 +538,7 @@ def submit(db: Session, who: Principal, attempt_id: uuid.UUID, idempotency_key: 
 def reveal(db: Session, who: Principal, attempt_id: uuid.UUID, position: int) -> dict[str, Any]:
     """Immediate-feedback practice: show one item's key and explanation; its answer is then locked."""
     attempt = _lock(db, attempt_id, who)
+    _hold(db, attempt, who)
     form = db.get(PracticeForm, attempt.form_id)
     assert form is not None
     if form.feedback_mode != "immediate" and attempt.status == "active":

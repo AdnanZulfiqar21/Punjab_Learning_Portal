@@ -15,6 +15,10 @@ import { api, ApiError } from "@/lib/api";
 import { useAuth } from "@/lib/auth";
 import { readQueue, writeQueue, type QueuedOp } from "@/lib/op-store";
 
+// P10.S1.T3: a 409 that means "open on another device" must never be read as "already submitted".
+const elsewhereError = (e: unknown) =>
+  e instanceof ApiError && (e.problem as { code_reason?: string } | null | undefined)?.code_reason === "ATTEMPT_ELSEWHERE";
+
 const DEBOUNCE_MS = 400;
 const PRE_FLUSH_MS = 5000;
 type ItemState = { option: string | null; status: "saved" | "pending" | "rejected" | "empty"; reason?: string; revision: number };
@@ -82,6 +86,8 @@ function Runner({ attempt, token, onFinalised }: { attempt: PracticeAttempt; tok
   const [locked, setLocked] = useState<Set<number>>(() => new Set(attempt.answers.filter((a) => a.revealed).map((a) => a.position)));
   const [revealed, setRevealed] = useState<Record<number, RevealResult>>({});
   const [connection, setConnection] = useState<"ok" | "retrying">("ok");
+  const [elsewhere, setElsewhere] = useState(attempt.held_elsewhere === true);
+  const [moving, setMoving] = useState(false);
   const [confirming, setConfirming] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
@@ -132,6 +138,10 @@ function Runner({ attempt, token, onFinalised }: { attempt: PracticeAttempt; tok
         await persist();
         if (out.status !== "active") onFinalised();
       } catch (e) {
+        if (elsewhereError(e)) {
+          setElsewhere(true); // keep the queue on this device; no automatic retry between devices
+          return;
+        }
         if (e instanceof ApiError && e.kind === "conflict") {
           const results = ((e.problem as { results?: AnswerOpResult[] } | null | undefined)?.results ?? []) as AnswerOpResult[];
           apply(results);
@@ -245,6 +255,7 @@ function Runner({ attempt, token, onFinalised }: { attempt: PracticeAttempt; tok
       router.replace({ pathname: "/result/[id]", params: { id: attempt.id } });
     } catch (e) {
       setSubmitting(false);
+      if (elsewhereError(e)) setElsewhere(true);
       setSubmitError(e instanceof ApiError ? e.message : "Couldn't submit. Nothing was lost; try again.");
     }
   }
@@ -256,9 +267,33 @@ function Runner({ attempt, token, onFinalised }: { attempt: PracticeAttempt; tok
   const remaining = deadline !== null && now !== null ? Math.max(0, deadline - now) : null;
   const disabled = closed || submitting || locked.has(current);
 
+  async function moveHere() {
+    setMoving(true);
+    try {
+      await api.continueHere(token, attempt.id);
+      setElsewhere(false);
+      void flushRef.current();
+    } catch (e) {
+      setSubmitError(e instanceof ApiError ? e.message : "Couldn't move the test to this device.");
+    } finally {
+      setMoving(false);
+    }
+  }
+
   return (
     <ScrollView style={{ backgroundColor: c.background }} contentContainerStyle={{ padding: Space.lg, gap: Space.lg }}>
       <Stack.Screen options={{ title: `Question ${current} of ${total}` }} />
+      {elsewhere && (
+        <Notice title="This test is open on another device">
+          Only one device can answer at a time. Changes here stay on this device until you continue here; the other device will then
+          have to do the same.
+        </Notice>
+      )}
+      {elsewhere && (
+        <View style={{ alignSelf: "flex-start" }}>
+          <Button label="Continue here" busy={moving} onPress={() => void moveHere()} />
+        </View>
+      )}
       <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
         <T variant="small" accessibilityLiveRegion="polite" style={{ color: connection === "retrying" ? c.warn : c.muted, flex: 1 }}>
           {connection === "retrying" ? "Offline: answers are kept on this device and will be sent again" : pending > 0 ? `Saving ${pending}…` : `${answered} answered · all saved`}

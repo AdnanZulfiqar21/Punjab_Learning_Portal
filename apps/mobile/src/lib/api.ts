@@ -220,6 +220,8 @@ export const api = {
     request<PracticeAttempt>(`/v1/practice/forms/${encodeURIComponent(formId)}/attempt`, { method: "POST", token }),
   attempt: (token: string, id: string, signal?: AbortSignal) =>
     request<PracticeAttempt>(`/v1/attempts/${encodeURIComponent(id)}`, { token, signal }),
+  continueHere: (token: string, id: string) =>
+    request<PracticeAttempt>(`/v1/attempts/${encodeURIComponent(id)}/continue-here`, { method: "POST", token }),
   saveAnswers: (token: string, id: string, ops: unknown[]) =>
     request<SaveResult>(`/v1/attempts/${encodeURIComponent(id)}/answers`, { method: "POST", token, body: { ops } }),
   submitAttempt: (token: string, id: string, idempotencyKey: string, ops: unknown[]) =>
