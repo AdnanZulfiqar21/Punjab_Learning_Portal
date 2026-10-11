@@ -7,6 +7,19 @@ const DEV_MARKERS = ["localhost", "127.0.0.1", "[::1]"];
 export interface WebRuntimeConfig {
   role: string;
   apiOrigin: string;
+  /** P11.S1.T1: the site's public origin (for the sitemap). Optional; without it no sitemap is advertised. */
+  publicOrigin?: string;
+}
+
+function publicOrigin(env: Record<string, string | undefined>): string | undefined {
+  const v = env.PORTAL_PUBLIC_ORIGIN;
+  if (!v) return undefined;
+  try {
+    const u = new URL(v);
+    return u.protocol === "https:" || u.protocol === "http:" ? u.origin : undefined;
+  } catch {
+    throw new WebConfigurationError(`PORTAL_PUBLIC_ORIGIN is not a valid URL: ${v}`);
+  }
 }
 
 export class WebConfigurationError extends Error {
@@ -30,7 +43,7 @@ export function readRuntimeConfig(env: Record<string, string | undefined> = proc
     if (role === "production" && DEV_MARKERS.some((m) => url.host.includes(m))) {
       throw new WebConfigurationError(`PORTAL_API_INTERNAL_ORIGIN points at a development host for role=production`);
     }
-    return { role, apiOrigin: origin.replace(/\/$/, "") };
+    return { role, apiOrigin: origin.replace(/\/$/, ""), publicOrigin: publicOrigin(env) };
   }
-  return { role, apiOrigin: (origin ?? "http://127.0.0.1:8100").replace(/\/$/, "") };
+  return { role, apiOrigin: (origin ?? "http://127.0.0.1:8100").replace(/\/$/, ""), publicOrigin: publicOrigin(env) };
 }
