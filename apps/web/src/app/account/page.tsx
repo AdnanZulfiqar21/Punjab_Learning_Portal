@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
-import { revokeOtherSessions, revokeSession, signOut } from "@/app/actions/auth";
+import { revokeOtherSessions, revokeSession } from "@/app/actions/auth";
+import { SignOutForm } from "@/components/sign-out-form";
 import { Badge, Breadcrumbs, Notice, SkeletonLines } from "@/components/ui";
 import { GRADE_LABEL } from "@/lib/format";
 import { currentUser, listSessions } from "@/lib/session";
@@ -200,11 +201,7 @@ async function Account() {
         </ul>
       </section>
 
-      <form action={signOut}>
-        <button type="submit" className="rounded-lg border border-border bg-surface px-4 py-2 font-medium hover:border-danger">
-          Sign out of this device
-        </button>
-      </form>
+      <SignOutForm />
     </div>
   );
 }

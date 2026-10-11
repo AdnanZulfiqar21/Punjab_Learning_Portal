@@ -2,7 +2,8 @@
 export type QueuedOp = { op_id: string; position: number; revision: number; option_id: string | null };
 export type StoredQueue = { ops: QueuedOp[]; submitKey?: string };
 
-const key = (attemptId: string) => `practice-queue:${attemptId}`;
+const PREFIX = "practice-queue:";
+const key = (attemptId: string) => `${PREFIX}${attemptId}`;
 
 export async function readQueue(attemptId: string): Promise<StoredQueue> {
   try {
@@ -17,6 +18,14 @@ export async function writeQueue(attemptId: string, value: StoredQueue): Promise
   try {
     if (value.ops.length === 0 && !value.submitKey) window.localStorage.removeItem(key(attemptId));
     else window.localStorage.setItem(key(attemptId), JSON.stringify(value));
+  } catch {
+    /* storage unavailable */
+  }
+}
+
+export async function clearQueues(): Promise<void> {
+  try {
+    for (const k of Object.keys(window.localStorage)) if (k.startsWith(PREFIX)) window.localStorage.removeItem(k);
   } catch {
     /* storage unavailable */
   }

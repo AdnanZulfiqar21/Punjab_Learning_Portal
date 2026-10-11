@@ -75,6 +75,9 @@ def create_app() -> FastAPI:
         response.headers.setdefault("X-Content-Type-Options", "nosniff")
         response.headers.setdefault("X-Frame-Options", "DENY")
         response.headers.setdefault("Referrer-Policy", "no-referrer")
+        # P19.S3.T3 (ISOLATION-01): nothing is stored by a shared cache unless its route says so. Public catalogue
+        # routes set their own `public, max-age`; every other response (personal, staff, errors) defaults to private.
+        response.headers.setdefault("Cache-Control", "private, no-store")
         if not request.url.path.startswith(("/docs", "/openapi.json")):
             response.headers.setdefault("Content-Security-Policy", "default-src 'none'; frame-ancestors 'none'")
         return response
