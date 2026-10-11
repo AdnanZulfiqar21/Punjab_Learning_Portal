@@ -8,6 +8,13 @@ import { Badge, Notice, SkeletonLines } from "@/components/ui";
 import { getResult } from "@/lib/practice";
 import { currentUser } from "@/lib/session";
 
+// P11.S3.T3 (RECEIPT-01): why a learner's latest change to a question wasn't counted.
+const NOT_COUNTED: Record<string, string> = {
+  late: "arrived after the time was up",
+  finalised: "arrived after the test was submitted",
+  invalid: "wasn't a valid option",
+};
+
 export const metadata: Metadata = { title: "Practice result", robots: { index: false } };
 
 type Blocks = { type: string }[];
@@ -80,6 +87,17 @@ async function Result({ id }: { id: string }) {
           {(result.counts?.excluded ?? 0) > 0 && ` · ${result.counts?.excluded} withdrawn after review`}
           {(result.counts?.credited ?? 0) > 0 && ` · ${result.counts?.credited} credited to everyone`}
         </p>
+        {(result.not_counted ?? []).length > 0 && (
+          <Notice tone="warn" title="Some last changes weren't counted">
+            <ul className="list-disc pl-5">
+              {(result.not_counted ?? []).map((n) => (
+                <li key={n.position}>
+                  Question {n.position}: your last change {NOT_COUNTED[n.reason]}. The answer you had saved before it, if any, was marked.
+                </li>
+              ))}
+            </ul>
+          </Notice>
+        )}
         {(result.sections ?? []).length > 1 && (
           <ul className="flex flex-wrap gap-2 text-sm" aria-label="Sections">
             {(result.sections ?? []).map((s) => (

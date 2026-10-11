@@ -454,6 +454,31 @@ def receipt_for(db: Session, attempt_id: uuid.UUID) -> SubmissionReceipt | None:
     return db.scalar(select(SubmissionReceipt).where(SubmissionReceipt.attempt_id == attempt_id))
 
 
+NOT_COUNTED = ("late", "finalised", "invalid")
+
+
+def not_counted(db: Session, attempt_id: uuid.UUID) -> list[dict[str, Any]]:
+    """P11.S3.T3 (RECEIPT-01): per question, the learner's latest change when it wasn't counted (after the time was
+    up, after submission, or not a valid option) and differs from the recorded answer. An older revision overtaken
+    by a newer saved one (`stale`) is not a loss and is not listed."""
+    attempt = db.get(Attempt, attempt_id)
+    if attempt is None:
+        return []
+    latest: dict[int, AnswerOp] = {}
+    for op in db.scalars(
+        select(AnswerOp)
+        .where(AnswerOp.attempt_id == attempt_id)
+        .order_by(AnswerOp.position, AnswerOp.revision, AnswerOp.admitted_at)
+    ):
+        latest[op.position] = op  # the highest revision, then the last admitted
+    recorded = _answers(db, attempt)
+    return [
+        {"position": p, "reason": op.disposition, "admitted_at": op.admitted_at}
+        for p, op in sorted(latest.items())
+        if op.disposition in NOT_COUNTED and op.option_id != recorded.get(p)
+    ]
+
+
 # ------------------------------------------------------------------ reads
 def load(db: Session, who: Principal, attempt_id: uuid.UUID) -> Attempt:
     """Resume an attempt. Expires it first (under the lock) if its cutoff has passed."""
