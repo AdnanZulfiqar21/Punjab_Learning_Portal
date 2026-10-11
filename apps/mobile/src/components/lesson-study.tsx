@@ -10,6 +10,7 @@ import { T } from "@/components/ui";
 import { Radius, Space } from "@/constants/theme";
 import { useTheme } from "@/hooks/use-theme";
 import { api, ApiError } from "@/lib/api";
+import { useAuth } from "@/lib/auth";
 import { readDraft, writeDraft } from "@/lib/note-drafts";
 
 type Conflict = { reason: "NOTE_CHANGED" | "NOTE_DELETED"; current: StudyNote };
@@ -23,6 +24,8 @@ function conflictOf(e: unknown): Conflict | null {
 
 export function LessonNote({ token, lessonId }: { token: string; lessonId: string }) {
   const c = useTheme();
+  const { state: auth } = useAuth();
+  const owner = auth.status === "signed_in" ? auth.me.id : ""; // ISOLATION-01: drafts are kept per account
   const [loaded, setLoaded] = useState(false);
   const [open, setOpen] = useState(false);
   const [text, setText] = useState("");
@@ -38,7 +41,7 @@ export function LessonNote({ token, lessonId }: { token: string; lessonId: strin
     (async () => {
       try {
         const n = await api.note(token, lessonId);
-        const draft = await readDraft(lessonId);
+        const draft = await readDraft(owner, lessonId);
         if (!live) return;
         const current = n.deleted ? "" : n.text;
         setSaved(current);
@@ -60,12 +63,12 @@ export function LessonNote({ token, lessonId }: { token: string; lessonId: strin
     return () => {
       live = false;
     };
-  }, [token, lessonId]);
+  }, [token, lessonId, owner]);
 
   async function save(value: string, from: number) {
     setBusy(true);
     setError(null);
-    await writeDraft(lessonId, { text: value, base: from });
+    await writeDraft(owner, lessonId, { text: value, base: from });
     try {
       const n = await api.saveNote(token, lessonId, value, from);
       setBase(n.revision);
@@ -73,7 +76,7 @@ export function LessonNote({ token, lessonId }: { token: string; lessonId: strin
       setText(n.text);
       setConflict(null);
       setStatus("Saved. Only you can see this note.");
-      await writeDraft(lessonId, null);
+      await writeDraft(owner, lessonId, null);
     } catch (e) {
       const k = conflictOf(e);
       if (k) setConflict(k);
@@ -113,7 +116,7 @@ export function LessonNote({ token, lessonId }: { token: string; lessonId: strin
         onChangeText={(v) => {
           setText(v);
           setStatus(null);
-          void writeDraft(lessonId, { text: v, base });
+          void writeDraft(owner, lessonId, { text: v, base });
         }}
       />
       <View style={{ flexDirection: "row", flexWrap: "wrap", gap: Space.sm, alignItems: "center" }}>
@@ -141,7 +144,7 @@ export function LessonNote({ token, lessonId }: { token: string; lessonId: strin
               setSaved(other);
               setBase(conflict.current.revision);
               setConflict(null);
-              void writeDraft(lessonId, null);
+              void writeDraft(owner, lessonId, null);
             }}
           />
         </View>
