@@ -1875,6 +1875,109 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/studio/asset-versions/{version_id}/file": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Download a version's delivery copy or archived master */
+        get: operations["asset_file_v1_studio_asset_versions__version_id__file_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/studio/asset-versions/{version_id}/rederive": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Re-derive the delivery copy from the archived master (publishers, MFA; audited) */
+        post: operations["rederive_asset_v1_studio_asset_versions__version_id__rederive_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/studio/assets": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Archived assets for a class and subject in your scope */
+        get: operations["list_assets_v1_studio_assets_get"];
+        put?: never;
+        /** Create an archived asset (no file yet) */
+        post: operations["create_asset_v1_studio_assets_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/studio/assets/retention": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Retention job: purge delivery copies of superseded, unreferenced versions (masters kept; audited) */
+        post: operations["asset_retention_v1_studio_assets_retention_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/studio/assets/{asset_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** An asset and every archived version */
+        get: operations["get_asset_v1_studio_assets__asset_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/studio/assets/{asset_id}/versions": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Upload a new immutable version (raw body): scanned, validated, master archived, delivery copy derived */
+        post: operations["upload_asset_version_v1_studio_assets__asset_id__versions_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/studio/block-registry": {
         parameters: {
             query?: never;
@@ -3444,6 +3547,89 @@ export interface components {
             title: string;
             /** Version */
             version: number;
+        };
+        /** AssetIn */
+        AssetIn: {
+            /**
+             * Grade
+             * @enum {integer}
+             */
+            grade: 11 | 12;
+            /**
+             * Kind
+             * @enum {string}
+             */
+            kind: "image" | "handout" | "caption" | "diagram_source";
+            /** Subject */
+            subject: string;
+            /** Title */
+            title: string;
+        };
+        /** AssetOut */
+        AssetOut: {
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /** Grade */
+            grade: number;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Kind */
+            kind: string;
+            /** Subject */
+            subject: string;
+            /** Title */
+            title: string;
+            /** Versions */
+            versions?: components["schemas"]["AssetVersionOut"][];
+        };
+        /** AssetVersionOut */
+        AssetVersionOut: {
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /** Delivery Media Type */
+            delivery_media_type: string | null;
+            /**
+             * Delivery State
+             * @enum {string}
+             */
+            delivery_state: "ready" | "none" | "purged";
+            /** Height */
+            height: number | null;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Master Bytes */
+            master_bytes: number;
+            /** Master Sha256 */
+            master_sha256: string;
+            /** Media Type */
+            media_type: string;
+            /** Number */
+            number: number;
+            /** Pages */
+            pages: number | null;
+            /** Provenance */
+            provenance: {
+                [key: string]: string;
+            };
+            /**
+             * Referenced
+             * @description Named by at least one content version (never purged)
+             */
+            referenced: boolean;
+            /** Width */
+            width: number | null;
         };
         /** AssignIn */
         AssignIn: {
@@ -6456,6 +6642,13 @@ export interface components {
             started_at: string;
             /** Time Limit S */
             time_limit_s: number | null;
+        };
+        /** RetentionOut */
+        RetentionOut: {
+            /** Applied */
+            applied: boolean;
+            /** Purged */
+            purged: string[];
         };
         /** RevealOut */
         RevealOut: {
@@ -11411,6 +11604,234 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["StatusOut"];
+                };
+            };
+        };
+    };
+    asset_file_v1_studio_asset_versions__version_id__file_get: {
+        parameters: {
+            query?: {
+                copy?: "delivery" | "master";
+            };
+            header?: never;
+            path: {
+                version_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": unknown;
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    rederive_asset_v1_studio_asset_versions__version_id__rederive_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                version_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AssetVersionOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_assets_v1_studio_assets_get: {
+        parameters: {
+            query: {
+                grade: number;
+                subject: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AssetOut"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    create_asset_v1_studio_assets_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["AssetIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AssetOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    asset_retention_v1_studio_assets_retention_post: {
+        parameters: {
+            query?: {
+                apply?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RetentionOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_asset_v1_studio_assets__asset_id__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                asset_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AssetOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    upload_asset_version_v1_studio_assets__asset_id__versions_post: {
+        parameters: {
+            query: {
+                /** @description Who made it, from what */
+                source: string;
+                author?: string;
+                licence?: string;
+                tool?: string;
+            };
+            header?: never;
+            path: {
+                asset_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AssetVersionOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
                 };
             };
         };

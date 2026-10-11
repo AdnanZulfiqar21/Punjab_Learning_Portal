@@ -1118,3 +1118,215 @@ def item_variants(db: DB, who: Member, item_id: uuid.UUID, response: Response) -
         )
         for r in rows
     ]
+
+
+# ------------------------------------------------------------------ asset archive (P07.S2.T4, ASSETS-01)
+class AssetIn(BaseModel):
+    kind: Literal["image", "handout", "caption", "diagram_source"]
+    title: str = Field(min_length=2, max_length=200)
+    grade: Literal[11, 12]
+    subject: str = Field(min_length=2, max_length=40)
+
+
+class AssetVersionOut(BaseModel):
+    id: uuid.UUID
+    number: int
+    media_type: str
+    master_sha256: str
+    master_bytes: int
+    delivery_state: Literal["ready", "none", "purged"]
+    delivery_media_type: str | None
+    width: int | None
+    height: int | None
+    pages: int | None
+    provenance: dict[str, str]
+    created_at: datetime
+    referenced: bool = Field(description="Named by at least one content version (never purged)")
+
+
+class AssetOut(BaseModel):
+    id: uuid.UUID
+    kind: str
+    title: str
+    grade: int
+    subject: str
+    created_at: datetime
+    versions: list[AssetVersionOut] = Field(default_factory=list)
+
+
+def _asset_out(db: Session, a: Any, with_versions: bool = True) -> AssetOut:
+    from portal_api.modules.content import assets
+
+    versions = (
+        list(
+            db.scalars(
+                select(assets.AssetVersion)
+                .where(assets.AssetVersion.asset_id == a.id)
+                .order_by(assets.AssetVersion.number)
+            )
+        )
+        if with_versions
+        else []
+    )
+    refs = assets.referenced(db, [v.id for v in versions])
+    return AssetOut(
+        id=a.id,
+        kind=a.kind,
+        title=a.title,
+        grade=a.grade_number,
+        subject=a.subject_code,
+        created_at=a.created_at,
+        versions=[
+            AssetVersionOut(
+                id=v.id,
+                number=v.number,
+                media_type=v.media_type,
+                master_sha256=v.master_sha256,
+                master_bytes=v.master_bytes,
+                delivery_state=v.delivery_state,  # type: ignore[arg-type]
+                delivery_media_type=v.delivery_media_type,
+                width=v.width,
+                height=v.height,
+                pages=v.pages,
+                provenance=v.provenance,
+                created_at=v.created_at,
+                referenced=v.id in refs,
+            )
+            for v in versions
+        ],
+    )
+
+
+@router.post("/assets", response_model=AssetOut, status_code=201, summary="Create an archived asset (no file yet)")
+def create_asset(db: DB, who: Author, body: AssetIn) -> AssetOut:
+    from portal_api.modules.content import assets
+
+    return _asset_out(
+        db, assets.create(db, who, kind=body.kind, title=body.title, grade=body.grade, subject=body.subject)
+    )
+
+
+@router.get("/assets", response_model=list[AssetOut], summary="Archived assets for a class and subject in your scope")
+def list_assets(
+    db: DB,
+    who: Member,
+    response: Response,
+    grade: Annotated[int, Query(ge=11, le=12)],
+    subject: Annotated[str, Query(min_length=2, max_length=40)],
+) -> list[AssetOut]:
+    from portal_api.modules.content import assets
+
+    _no_store(response)
+    if not workflow.roles_in_scope(db, who.user.id, grade, subject) & CONTENT_ROLES:
+        return []
+    rows = db.scalars(
+        select(assets.Asset)
+        .where(assets.Asset.grade_number == grade, assets.Asset.subject_code == subject)
+        .order_by(assets.Asset.created_at.desc())
+        .limit(200)
+    )
+    return [_asset_out(db, a) for a in rows]
+
+
+@router.get("/assets/{asset_id}", response_model=AssetOut, summary="An asset and every archived version")
+def get_asset(db: DB, who: Member, asset_id: uuid.UUID, response: Response) -> AssetOut:
+    from portal_api.modules.content import assets
+
+    _no_store(response)
+    return _asset_out(db, assets.get_asset(db, who, asset_id))
+
+
+@router.post(
+    "/assets/{asset_id}/versions",
+    response_model=AssetVersionOut,
+    status_code=201,
+    summary="Upload a new immutable version (raw body): scanned, validated, master archived, delivery copy derived",
+)
+async def upload_asset_version(
+    db: DB,
+    who: Author,
+    asset_id: uuid.UUID,
+    request: Request,
+    source: Annotated[str, Query(min_length=3, max_length=500, description="Who made it, from what")],
+    author: Annotated[str, Query(max_length=200)] = "",
+    licence: Annotated[str, Query(max_length=200)] = "",
+    tool: Annotated[str, Query(max_length=200)] = "",
+) -> AssetVersionOut:
+    from starlette.concurrency import run_in_threadpool
+
+    from portal_api.errors import TooLarge
+    from portal_api.modules.content import assets
+
+    limit = max(assets.MAX_BYTES.values())
+    buf = bytearray()
+    async for chunk in request.stream():
+        buf.extend(chunk)
+        if len(buf) > limit:
+            raise TooLarge("Asset files can be at most 20 MB.")
+    provenance = {"source": source, "author": author, "licence": licence, "tool": tool}
+    v = await run_in_threadpool(assets.upload, db, who, asset_id, bytes(buf), provenance)
+    return next(x for x in _asset_out(db, assets.get_asset(db, who, asset_id)).versions if x.id == v.id)
+
+
+@router.get("/asset-versions/{version_id}/file", summary="Download a version's delivery copy or archived master")
+def asset_file(
+    db: DB,
+    who: Member,
+    version_id: uuid.UUID,
+    copy: Annotated[Literal["delivery", "master"], Query()] = "delivery",
+) -> Response:
+    from portal_api.errors import NotFound
+    from portal_api.modules.content import assets
+
+    asset, v = assets.get_version(db, who, version_id)
+    if copy == "delivery":
+        if v.delivery_state != "ready" or not v.delivery_key or asset.kind not in assets.SERVED:
+            raise NotFound("No delivery copy for this version.")
+        data, media_type, disposition = (
+            assets.read(v.delivery_key),
+            v.delivery_media_type or "application/octet-stream",
+            "inline",
+        )
+    else:
+        data, media_type, disposition = assets.read(v.master_key), "application/octet-stream", "attachment"
+    return Response(
+        content=data,
+        media_type=media_type,
+        headers={
+            "Cache-Control": "private, no-store",
+            "X-Content-Type-Options": "nosniff",
+            "Content-Disposition": f'{disposition}; filename="asset-{v.id}-{copy}"',
+        },
+    )
+
+
+@router.post(
+    "/asset-versions/{version_id}/rederive",
+    response_model=AssetVersionOut,
+    summary="Re-derive the delivery copy from the archived master (publishers, MFA; audited)",
+)
+def rederive_asset(db: DB, who: Publisher, version_id: uuid.UUID) -> AssetVersionOut:
+    from portal_api.modules.content import assets
+
+    asset, v = assets.get_version(db, who, version_id)
+    assets.rederive(db, who, version_id)
+    return next(x for x in _asset_out(db, asset).versions if x.id == v.id)
+
+
+class RetentionOut(BaseModel):
+    applied: bool
+    purged: list[uuid.UUID]
+
+
+@router.post(
+    "/assets/retention",
+    response_model=RetentionOut,
+    summary="Retention job: purge delivery copies of superseded, unreferenced versions (masters kept; audited)",
+    dependencies=[Depends(require(Permission.operate_platform))],
+)
+def asset_retention(db: DB, who: CurrentPrincipal, apply: Annotated[bool, Query()] = False) -> RetentionOut:
+    from portal_api.modules.content import assets
+
+    return RetentionOut(
+        applied=apply, purged=[uuid.UUID(x) for x in assets.collect(db, apply=apply, actor=who.user.id)]
+    )

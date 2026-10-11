@@ -1,21 +1,22 @@
 """Studio surface report: how an item reaches each delivery surface before publication (roadmap P06.S3.T1;
 SURFACES-01).
 
-Learner web and the phone layout render the same blocks (the web preview shows both widths). This report adds what
-can't be seen by looking at one client: the oldest supported app's rendering (reviewed fallbacks in place of blocks
-it can't show), the item's language variants, its access tier, and everything still missing before learners can be
-given it: fallbacks, fallback review, image alt text, unverifiable diagram assets and source-page mapping. Tables
-always have captions and equations always have a text equivalent, because the block schema requires them.
-"""
+Learner web and the phone layout render the same blocks (the web preview shows both widths). This report adds what can't
+be seen by looking at one client: the oldest supported app's rendering (reviewed fallbacks in place of blocks it can't
+show), the item's language variants, its access tier, and everything still missing before learners can be given it:
+fallbacks, fallback review, image alt text, unverifiable diagram assets and source-page mapping; image fallbacks must
+name a ready image version in the asset archive (ASSETS-01). Tables always have captions and equations always have a
+text equivalent, because the block schema requires them."""
 
 from __future__ import annotations
 
+from collections.abc import Callable
 from typing import Any
 
 from sqlalchemy import or_, select
 from sqlalchemy.orm import Session
 
-from portal_api.modules.content import blocks
+from portal_api.modules.content import assets, blocks
 from portal_api.modules.content.models import ContentItem
 
 LANGUAGES = ("en", "ur", "roman_ur")
@@ -45,7 +46,7 @@ def _groups(kind: str, body: dict[str, Any]) -> list[tuple[str, list[dict[str, A
     return []
 
 
-def _issues(where: str, block: dict[str, Any]) -> list[str]:
+def _issues(where: str, block: dict[str, Any], image_ready: Callable[[str], bool]) -> list[str]:
     kind = str(block.get("type"))
     fb = block.get("fallback") if isinstance(block.get("fallback"), dict) else None
     out = []
@@ -57,9 +58,10 @@ def _issues(where: str, block: dict[str, Any]) -> list[str]:
     if fb and fb.get("image_asset_id"):
         if not fb.get("alt"):
             out.append(f"{where}: the fallback image has no alt text.")
-        out.append(
-            f"{where}: diagram asset {fb['image_asset_id']} can't be checked until the asset store exists (P07)."
-        )
+        if not image_ready(str(fb["image_asset_id"])):
+            out.append(
+                f"{where}: the fallback image {fb['image_asset_id']} isn't a ready image version in the asset archive."
+            )
     return out
 
 
@@ -73,7 +75,7 @@ def report(db: Session, item: ContentItem) -> dict[str, Any]:
         total += n
         views.append({"where": where, "blocks": shown})
         for b in group:
-            issues += _issues(where, b)
+            issues += _issues(where, b, lambda v: assets.image_ready(db, v))
     if version is not None and not version.source_refs:
         issues.append("No source pages are mapped; every published item cites its source pages.")
     languages: dict[str, Any] = {}

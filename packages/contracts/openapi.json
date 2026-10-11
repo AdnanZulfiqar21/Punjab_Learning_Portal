@@ -730,6 +730,207 @@
         "title": "ArticleSummary",
         "type": "object"
       },
+      "AssetIn": {
+        "properties": {
+          "grade": {
+            "enum": [
+              11,
+              12
+            ],
+            "title": "Grade",
+            "type": "integer"
+          },
+          "kind": {
+            "enum": [
+              "image",
+              "handout",
+              "caption",
+              "diagram_source"
+            ],
+            "title": "Kind",
+            "type": "string"
+          },
+          "subject": {
+            "maxLength": 40,
+            "minLength": 2,
+            "title": "Subject",
+            "type": "string"
+          },
+          "title": {
+            "maxLength": 200,
+            "minLength": 2,
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "kind",
+          "title",
+          "grade",
+          "subject"
+        ],
+        "title": "AssetIn",
+        "type": "object"
+      },
+      "AssetOut": {
+        "properties": {
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "grade": {
+            "title": "Grade",
+            "type": "integer"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "kind": {
+            "title": "Kind",
+            "type": "string"
+          },
+          "subject": {
+            "title": "Subject",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "versions": {
+            "items": {
+              "$ref": "#/components/schemas/AssetVersionOut"
+            },
+            "title": "Versions",
+            "type": "array"
+          }
+        },
+        "required": [
+          "id",
+          "kind",
+          "title",
+          "grade",
+          "subject",
+          "created_at"
+        ],
+        "title": "AssetOut",
+        "type": "object"
+      },
+      "AssetVersionOut": {
+        "properties": {
+          "created_at": {
+            "format": "date-time",
+            "title": "Created At",
+            "type": "string"
+          },
+          "delivery_media_type": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Delivery Media Type"
+          },
+          "delivery_state": {
+            "enum": [
+              "ready",
+              "none",
+              "purged"
+            ],
+            "title": "Delivery State",
+            "type": "string"
+          },
+          "height": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Height"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "master_bytes": {
+            "title": "Master Bytes",
+            "type": "integer"
+          },
+          "master_sha256": {
+            "title": "Master Sha256",
+            "type": "string"
+          },
+          "media_type": {
+            "title": "Media Type",
+            "type": "string"
+          },
+          "number": {
+            "title": "Number",
+            "type": "integer"
+          },
+          "pages": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pages"
+          },
+          "provenance": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "title": "Provenance",
+            "type": "object"
+          },
+          "referenced": {
+            "description": "Named by at least one content version (never purged)",
+            "title": "Referenced",
+            "type": "boolean"
+          },
+          "width": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Width"
+          }
+        },
+        "required": [
+          "id",
+          "number",
+          "media_type",
+          "master_sha256",
+          "master_bytes",
+          "delivery_state",
+          "delivery_media_type",
+          "width",
+          "height",
+          "pages",
+          "provenance",
+          "created_at",
+          "referenced"
+        ],
+        "title": "AssetVersionOut",
+        "type": "object"
+      },
       "AssignIn": {
         "properties": {
           "reviewer_id": {
@@ -8089,6 +8290,28 @@
           "time_limit_s"
         ],
         "title": "ResultTiming",
+        "type": "object"
+      },
+      "RetentionOut": {
+        "properties": {
+          "applied": {
+            "title": "Applied",
+            "type": "boolean"
+          },
+          "purged": {
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "title": "Purged",
+            "type": "array"
+          }
+        },
+        "required": [
+          "applied",
+          "purged"
+        ],
+        "title": "RetentionOut",
         "type": "object"
       },
       "RevealOut": {
@@ -16882,6 +17105,377 @@
         "summary": "Known incidents (public; no sign-in needed)",
         "tags": [
           "help"
+        ]
+      }
+    },
+    "/v1/studio/asset-versions/{version_id}/file": {
+      "get": {
+        "operationId": "asset_file_v1_studio_asset_versions__version_id__file_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "version_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Version Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "copy",
+            "required": false,
+            "schema": {
+              "default": "delivery",
+              "enum": [
+                "delivery",
+                "master"
+              ],
+              "title": "Copy",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Download a version's delivery copy or archived master",
+        "tags": [
+          "studio"
+        ]
+      }
+    },
+    "/v1/studio/asset-versions/{version_id}/rederive": {
+      "post": {
+        "operationId": "rederive_asset_v1_studio_asset_versions__version_id__rederive_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "version_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Version Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AssetVersionOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Re-derive the delivery copy from the archived master (publishers, MFA; audited)",
+        "tags": [
+          "studio"
+        ]
+      }
+    },
+    "/v1/studio/assets": {
+      "get": {
+        "operationId": "list_assets_v1_studio_assets_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "grade",
+            "required": true,
+            "schema": {
+              "maximum": 12,
+              "minimum": 11,
+              "title": "Grade",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "subject",
+            "required": true,
+            "schema": {
+              "maxLength": 40,
+              "minLength": 2,
+              "title": "Subject",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/AssetOut"
+                  },
+                  "title": "Response List Assets V1 Studio Assets Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Archived assets for a class and subject in your scope",
+        "tags": [
+          "studio"
+        ]
+      },
+      "post": {
+        "operationId": "create_asset_v1_studio_assets_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssetIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AssetOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Create an archived asset (no file yet)",
+        "tags": [
+          "studio"
+        ]
+      }
+    },
+    "/v1/studio/assets/retention": {
+      "post": {
+        "operationId": "asset_retention_v1_studio_assets_retention_post",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "apply",
+            "required": false,
+            "schema": {
+              "default": false,
+              "title": "Apply",
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RetentionOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Retention job: purge delivery copies of superseded, unreferenced versions (masters kept; audited)",
+        "tags": [
+          "studio"
+        ]
+      }
+    },
+    "/v1/studio/assets/{asset_id}": {
+      "get": {
+        "operationId": "get_asset_v1_studio_assets__asset_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "asset_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Asset Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AssetOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "An asset and every archived version",
+        "tags": [
+          "studio"
+        ]
+      }
+    },
+    "/v1/studio/assets/{asset_id}/versions": {
+      "post": {
+        "operationId": "upload_asset_version_v1_studio_assets__asset_id__versions_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "asset_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Asset Id",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Who made it, from what",
+            "in": "query",
+            "name": "source",
+            "required": true,
+            "schema": {
+              "description": "Who made it, from what",
+              "maxLength": 500,
+              "minLength": 3,
+              "title": "Source",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "author",
+            "required": false,
+            "schema": {
+              "default": "",
+              "maxLength": 200,
+              "title": "Author",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "licence",
+            "required": false,
+            "schema": {
+              "default": "",
+              "maxLength": 200,
+              "title": "Licence",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "tool",
+            "required": false,
+            "schema": {
+              "default": "",
+              "maxLength": 200,
+              "title": "Tool",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AssetVersionOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Upload a new immutable version (raw body): scanned, validated, master archived, delivery copy derived",
+        "tags": [
+          "studio"
         ]
       }
     },

@@ -171,3 +171,4 @@ Source plan: `Road Map/Punjab_Learning_Portal_Master_Roadmap_v2.2_Integrated_Wri
 | P09.S4.T1 Reviewer form preview | IMPLEMENTED (API + web) | FORM-PREVIEW-01. `tests/test_form_preview.py`. |
 | P06.S3.T1 Preview across delivery surfaces | IMPLEMENTED (API + web studio) | SURFACES-01. `tests/test_surface_preview.py`. |
 | P06.S4.T3 Staff workflow rehearsal | IMPLEMENTED with technical fixtures; real-material rehearsal BLOCKED (B01) | WORKFLOW-REHEARSAL-01. `tests/test_staff_workflow_rehearsal.py`. |
+| P07.S2.T4 Owned master archive and retention | IMPLEMENTED (local private storage; object storage B03, media provider B05) | ASSETS-01. `tests/test_assets.py`. |

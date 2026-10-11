@@ -50,6 +50,7 @@ def test_the_surface_report_shows_what_each_client_gets_and_what_is_missing(
     rep = client.get(url, headers=author.headers).json()
     assert not any("needs a reviewed fallback" in i or "source pages" in i for i in rep["issues"])
     assert any("no alt text" in i for i in rep["issues"])  # an image fallback must describe itself
+    assert any("asset archive" in i for i in rep["issues"])  # "fixture-asset" names no archived image (ASSETS-01)
     assert rep["oldest_client"][0]["blocks"][1]["text"] == "E = mc²"
 
     assert client.get(url, headers=team["student"].headers).status_code == 403
