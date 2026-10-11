@@ -51,7 +51,6 @@ class StudentProfile(Base):
     target_year: Mapped[int | None] = mapped_column(SmallInteger)
     explanation_language: Mapped[str] = mapped_column(String(12), default="en")
     daily_minutes: Mapped[int | None] = mapped_column(SmallInteger)
-    preferences: Mapped[dict[str, Any]] = mapped_column(JSONB, default=dict)
     updated_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now(), onupdate=func.now()
     )
