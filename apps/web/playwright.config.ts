@@ -20,5 +20,9 @@ export default defineConfig({
   projects: [
     { name: "desktop", use: { ...devices["Desktop Chrome"] } },
     { name: "phone", use: { ...devices["Pixel 7"] } },
+    // P19.S2.T1 (BROWSERS-01): the cross-browser journeys in the other supported engines.
+    { name: "firefox", testMatch: /browsers\.spec\.ts/, use: { ...devices["Desktop Firefox"] } },
+    { name: "webkit", testMatch: /browsers\.spec\.ts/, use: { ...devices["Desktop Safari"] } },
+    { name: "iphone", testMatch: /browsers\.spec\.ts/, use: { ...devices["iPhone 13"] } },
   ],
 });
