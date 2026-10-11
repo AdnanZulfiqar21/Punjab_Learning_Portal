@@ -115,3 +115,7 @@ export type ContentAsset = S["AssetOut"];
 export type Lecture = S["LectureOut"];
 export type NarrationVoice = S["VoiceOut"];
 export type Dashboard = S["Dashboard"];
+export type StudyNote = S["NoteOut"];
+export type StudyNoteListed = S["NoteListed"];
+export type FavouriteTopic = S["FavouriteOut"];
+export type SavedFormula = S["FormulaOut"];
