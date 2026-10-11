@@ -2354,6 +2354,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/studio/items/{item_id}/surfaces": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Oldest-app rendering, languages, access tier and what is still missing before publication */
+        get: operations["item_surfaces_v1_studio_items__item_id__surfaces_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/studio/items/{item_id}/variants": {
         parameters: {
             query?: never;
@@ -12371,6 +12388,39 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["ItemDetail"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    item_surfaces_v1_studio_items__item_id__surfaces_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                item_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        [key: string]: unknown;
+                    };
                 };
             };
             /** @description Validation Error */

@@ -11,7 +11,7 @@ material is referenced by page (`source_refs`), not copied (IMPL-01).
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Annotated, Literal
+from typing import Annotated, Any, Literal
 
 from pydantic import BaseModel, ConfigDict, Field, TypeAdapter, ValidationError, model_validator
 
@@ -244,3 +244,23 @@ def registry_document() -> dict[str, object]:
             for s in REGISTRY.values()
         ],
     }
+
+
+def needs_fallback(block_type: str) -> bool:
+    """Whether the oldest supported client on any platform can't render this block type natively."""
+    spec = REGISTRY.get(block_type)
+    return spec is not None and any(spec.min_renderer[p] > SUPPORTED_RENDERER[p] for p in PLATFORMS)
+
+
+def oldest_client(block_list: list[dict[str, Any]]) -> tuple[list[dict[str, Any]], int]:
+    """What the oldest supported client shows: blocks it can't render become their reviewed fallback (§5.4 rule 4).
+    Shared by the form preview (FORM-PREVIEW-01) and the studio surface report (SURFACES-01)."""
+    out, replaced = [], 0
+    for b in block_list:
+        if needs_fallback(str(b.get("type"))):
+            replaced += 1
+            fb = b.get("fallback") or {}
+            out.append({"type": "fallback", "text": fb.get("text", ""), "image_asset_id": fb.get("image_asset_id")})
+        else:
+            out.append(b)
+    return out, replaced

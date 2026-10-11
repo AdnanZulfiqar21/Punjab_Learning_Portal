@@ -1079,6 +1079,18 @@ def completed_lessons(db: DB, who: CurrentPrincipal, chapter_id: uuid.UUID, resp
     return sorted(completion.completed_in(db, who.user.id, [chapter_id]), key=str)
 
 
+# ------------------------------------------------------------------ surface report (P06.S3.T1, SURFACES-01)
+@router.get(
+    "/items/{item_id}/surfaces",
+    summary="Oldest-app rendering, languages, access tier and what is still missing before publication",
+)
+def item_surfaces(db: DB, who: Member, item_id: uuid.UUID, response: Response) -> dict[str, Any]:
+    from portal_api.modules.content import surfaces
+
+    _no_store(response)
+    return surfaces.report(db, _scoped_item(db, who, item_id))
+
+
 # ------------------------------------------------------------------ lesson language variants (P07.S1.T2)
 @router.get(
     "/items/{item_id}/variants",

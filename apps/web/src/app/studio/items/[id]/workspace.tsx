@@ -27,6 +27,7 @@ import { LessonBlocks } from "@/components/lesson-blocks";
 import { Badge, Notice } from "@/components/ui";
 import { GRADE_LABEL } from "@/lib/format";
 import { BlockEditor, normaliseBlocks, SourceRefsEditor } from "./block-editor";
+import { Surfaces } from "./surfaces";
 import { McqEditor, McqPreview, mcqSections, normaliseMcq } from "./mcq-editor";
 import { normaliseStoryboard, StoryboardEditor, StoryboardPreview } from "./storyboard-editor";
 import {
@@ -317,7 +318,9 @@ export function Workspace({
         ) : (
           <article className="space-y-4 rounded-xl border border-border bg-surface p-5">
             <h2 className="text-2xl font-semibold tracking-tight">{draft.title}</h2>
-            <Preview kind={item.kind} body={draft.body} />
+            <Surfaces itemId={item.id} revision={revision}>
+              <Preview kind={item.kind} body={draft.body} />
+            </Surfaces>
             <SourceList refs={draft.refs} label={item.source.source_id} />
           </article>
         )}
