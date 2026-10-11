@@ -1,6 +1,7 @@
 // Native renderer for content blocks (schema v1, roadmap §5.4). Renderer version 1 on Android/iOS: text blocks render
 // natively; an unknown or unsupported block shows an explicit "update required" note instead of failing.
 import { Image } from "expo-image";
+import { Fragment, type ReactNode } from "react";
 import { ScrollView, View } from "react-native";
 
 import { Checkpoint } from "@/components/checkpoint";
@@ -18,11 +19,23 @@ const strs = (v: unknown) => (Array.isArray(v) ? v.map(str) : []);
 export type AssetSource = (versionId: string) => { uri: string; headers?: Record<string, string> };
 type Fallback = { text?: unknown; image_asset_id?: unknown; alt?: unknown };
 
-export function LessonBlocks({ blocks, assetSource }: { blocks: Block[]; assetSource?: AssetSource }) {
+export function LessonBlocks({
+  blocks,
+  assetSource,
+  equationAction,
+}: {
+  blocks: Block[];
+  assetSource?: AssetSource;
+  /** STUDY-TOOLS-01: e.g. "Save formula" under each top-level equation (its index in the lesson body). */
+  equationAction?: (index: number) => ReactNode;
+}) {
   return (
     <View style={{ gap: Space.md }}>
       {blocks.map((b, i) => (
-        <BlockView key={i} block={b} assetSource={assetSource} />
+        <Fragment key={i}>
+          <BlockView block={b} assetSource={assetSource} />
+          {b.type === "equation" && equationAction?.(i)}
+        </Fragment>
       ))}
     </View>
   );
