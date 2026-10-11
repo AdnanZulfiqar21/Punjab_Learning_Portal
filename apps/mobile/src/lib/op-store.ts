@@ -1,11 +1,12 @@
 // Durable local queue for unacknowledged answer operations (P10.S2.T2). Stored as a small JSON file in the app's
 // private document directory (OS-sandboxed, survives app termination). Never shown to the learner as "saved".
-import { File, Paths } from "expo-file-system";
+import { Directory, File, Paths } from "expo-file-system";
 
 export type QueuedOp = { op_id: string; position: number; revision: number; option_id: string | null };
 export type StoredQueue = { ops: QueuedOp[]; submitKey?: string };
 
-const fileFor = (attemptId: string) => new File(Paths.document, `practice-queue-${attemptId}.json`);
+const PREFIX = "practice-queue-";
+const fileFor = (attemptId: string) => new File(Paths.document, `${PREFIX}${attemptId}.json`);
 
 export async function readQueue(attemptId: string): Promise<StoredQueue> {
   try {
@@ -29,5 +30,16 @@ export async function writeQueue(attemptId: string, value: StoredQueue): Promise
     f.write(JSON.stringify(value));
   } catch {
     /* storage failure: answers still go to the server immediately and are never shown as saved until acknowledged */
+  }
+}
+
+/** ISOLATION-01, signing out of this device: unacknowledged answers are removed with the session. */
+export async function clearQueues(): Promise<void> {
+  try {
+    for (const entry of new Directory(Paths.document).list()) {
+      if (entry instanceof File && entry.name.startsWith(PREFIX)) entry.delete();
+    }
+  } catch {
+    /* nothing readable to clear */
   }
 }

@@ -1,5 +1,6 @@
 // Server-only session helpers (P04.S1.T2). The application session token lives in an HTTP-only cookie; browser
 // JavaScript never sees it. The web server forwards it to the API as a bearer token, server to server.
+import { createHash } from "node:crypto";
 import { cookies } from "next/headers";
 import { connection } from "next/server";
 import type { AppSession, Me, Problem, RuntimeConfig } from "@portal/contracts";
@@ -44,6 +45,11 @@ export async function api<T>(path: string, init: RequestInit & { token?: string 
   if (res.status === 204) return { ok: true, data: undefined as T };
   const body = await res.json().catch(() => null);
   return res.ok ? { ok: true, data: body as T } : { ok: false, status: res.status, problem: body as Problem | null };
+}
+
+/** ISOLATION-01: a stable, one-way label for an account, used to keep what this browser stores apart per account. */
+export function deviceScope(userId: string): string {
+  return createHash("sha256").update(`portal-device-scope:${userId}`).digest("hex").slice(0, 16);
 }
 
 /** The signed-in learner, or null when there is no valid session (expired, revoked or absent). */

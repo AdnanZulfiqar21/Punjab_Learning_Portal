@@ -10,7 +10,7 @@ import { FavouriteButton, LessonNote, SaveFormulaButton } from "@/components/stu
 import { getChapter, getLessons } from "@/lib/api";
 import { CONTENT_STATE_TEXT, GRADE_LABEL, assessmentSummary, pageRange } from "@/lib/format";
 import { Badge, Breadcrumbs, Notice, SkeletonLines } from "@/components/ui";
-import { api, features, sessionToken } from "@/lib/session";
+import { api, currentUser, deviceScope, features, sessionToken } from "@/lib/session";
 
 export const metadata: Metadata = { title: "Chapter" };
 
@@ -166,6 +166,7 @@ async function Lessons({ chapterId, topics, lang }: { chapterId: string; topics:
   const readable = token && study ? lessons.filter((l) => !l.locked && l.body) : [];
   const noteRes = await Promise.all(readable.map((l) => api<StudyNote>(`/v1/me/lessons/${encodeURIComponent(l.id)}/note`, { token })));
   const notes = new Map(readable.flatMap((l, i) => (noteRes[i].ok ? [[l.id, noteRes[i].data] as const] : [])));
+  const user = notes.size > 0 ? await currentUser() : null; // ISOLATION-01: unsent drafts are kept per account
   const titles = topicTitles(topics);
   return (
     <section aria-labelledby="lessons-heading" className="space-y-4">
@@ -241,7 +242,7 @@ async function Lessons({ chapterId, topics, lang }: { chapterId: string; topics:
                 <span className="text-xs text-muted">Completion tracks your reading only. It isn&apos;t evidence of what you know.</span>
               </form>
             )}
-            {notes.has(l.id) && <LessonNote lessonId={l.id} initial={notes.get(l.id)!} />}
+            {notes.has(l.id) && user && <LessonNote lessonId={l.id} scope={deviceScope(user.me.id)} initial={notes.get(l.id)!} />}
             <p className="border-t border-border pt-3 text-sm text-muted">
               Textbook pages (PDF):{" "}
               {(l.source_refs as { pdf_from: number; pdf_to: number }[])

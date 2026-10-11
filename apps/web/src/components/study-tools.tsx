@@ -7,21 +7,23 @@ import type { StudyNote } from "@portal/contracts";
 import { deleteNote, saveFormula, saveNote, setFavourite, type NoteResult } from "@/app/actions/study";
 
 type Draft = { text: string; base: number };
-const draftKey = (lessonId: string) => `portal-note-draft:${lessonId}`;
+// ISOLATION-01: a draft belongs to one account (`scope` is a one-way hash of it), so whoever signs in next on a shared
+// browser never sees it; signing out clears this device's portal storage entirely (SignOutForm).
+const draftKey = (scope: string, lessonId: string) => `portal-note-draft:${scope}:${lessonId}`;
 
-function readDraft(lessonId: string): Draft | null {
+function readDraft(key: string): Draft | null {
   try {
-    const raw = window.localStorage.getItem(draftKey(lessonId));
+    const raw = window.localStorage.getItem(key);
     return raw ? (JSON.parse(raw) as Draft) : null;
   } catch {
     return null; // storage unavailable: the note still saves; it just isn't kept across a reload while offline
   }
 }
 
-function writeDraft(lessonId: string, d: Draft | null) {
+function writeDraft(key: string, d: Draft | null) {
   try {
-    if (d) window.localStorage.setItem(draftKey(lessonId), JSON.stringify(d));
-    else window.localStorage.removeItem(draftKey(lessonId));
+    if (d) window.localStorage.setItem(key, JSON.stringify(d));
+    else window.localStorage.removeItem(key);
   } catch {
     /* see readDraft */
   }
@@ -32,8 +34,9 @@ type Status =
   | { kind: "error"; message: string }
   | { kind: "conflict"; reason: "NOTE_CHANGED" | "NOTE_DELETED"; current: StudyNote };
 
-export function LessonNote({ lessonId, initial }: { lessonId: string; initial: StudyNote }) {
+export function LessonNote({ lessonId, scope, initial }: { lessonId: string; scope: string; initial: StudyNote }) {
   const id = useId();
+  const key = draftKey(scope, lessonId);
   const [text, setText] = useState(initial.deleted ? "" : initial.text);
   const [base, setBase] = useState(initial.revision);
   const [saved, setSaved] = useState(initial.deleted ? "" : initial.text);
@@ -42,20 +45,20 @@ export function LessonNote({ lessonId, initial }: { lessonId: string; initial: S
 
   // An unsent draft from an earlier visit on this device (e.g. written offline) is restored and marked unsaved.
   useEffect(() => {
-    const d = readDraft(lessonId);
+    const d = readDraft(key);
     if (d && d.text !== (initial.deleted ? "" : initial.text)) {
       setText(d.text); // eslint-disable-line react-hooks/set-state-in-effect -- restoring device storage after hydration
       setBase(d.base);
       setOpen(true);
     }
-  }, [lessonId, initial]);
+  }, [key, initial]);
 
   function apply(r: NoteResult, after: "saved" | "deleted") {
     if (r.ok) {
       setBase(r.note.revision);
       setSaved(r.note.text);
       setText(r.note.text);
-      writeDraft(lessonId, null);
+      writeDraft(key, null);
       setStatus({ kind: after });
     } else if (r.conflict) {
       setStatus({ kind: "conflict", reason: r.conflict, current: r.current });
@@ -66,7 +69,7 @@ export function LessonNote({ lessonId, initial }: { lessonId: string; initial: S
 
   async function save(value: string, from: number) {
     setStatus({ kind: "saving" });
-    writeDraft(lessonId, { text: value, base: from });
+    writeDraft(key, { text: value, base: from });
     try {
       apply(await saveNote(lessonId, value, from), "saved");
     } catch {
@@ -87,7 +90,7 @@ export function LessonNote({ lessonId, initial }: { lessonId: string; initial: S
     setText(current.deleted ? "" : current.text);
     setSaved(current.deleted ? "" : current.text);
     setBase(current.revision);
-    writeDraft(lessonId, null);
+    writeDraft(key, null);
     setStatus({ kind: "idle" });
   }
 
@@ -111,7 +114,7 @@ export function LessonNote({ lessonId, initial }: { lessonId: string; initial: S
         rows={3}
         onChange={(e) => {
           setText(e.target.value);
-          writeDraft(lessonId, { text: e.target.value, base });
+          writeDraft(key, { text: e.target.value, base });
           if (status.kind !== "conflict") setStatus({ kind: "idle" });
         }}
         className="w-full rounded-lg border border-border bg-surface px-3 py-2"

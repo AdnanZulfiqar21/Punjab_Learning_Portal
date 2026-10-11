@@ -55,13 +55,6 @@ export async function registerWithPassword(_prev: FormState, form: FormData): Pr
   return signInWithPassword(undefined, form);
 }
 
-export async function signOut(): Promise<void> {
-  const token = await sessionToken();
-  if (token) await api("/v1/me/session", { method: "DELETE", token }).catch(() => undefined);
-  (await cookies()).delete(SESSION_COOKIE);
-  redirect("/");
-}
-
 export async function revokeSession(form: FormData): Promise<void> {
   const token = await sessionToken();
   const id = String(form.get("session_id") ?? "");
