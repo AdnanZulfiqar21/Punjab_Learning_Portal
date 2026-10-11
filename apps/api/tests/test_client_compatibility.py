@@ -17,16 +17,16 @@ from tests.test_mcq_items import CHECKS, VALID, _new_mcq, _save
 
 def test_a_question_the_oldest_client_cannot_render_never_reaches_a_test(client: TestClient) -> None:
     with get_sessionmaker()() as db:
-        scope = {"grades": [11], "subjects": ["chemistry"]}
+        scope = {"grades": [11], "subjects": ["biology"]}
         author = Staff(client, db, ["content_author"], scope)
         reviewer = Staff(client, db, ["subject_reviewer"], scope)
         publisher = Staff(client, db, ["publisher"], scope, mfa=True)
-        chapter, doc = _chapter(db, 11, "chemistry", 6)
+        chapter, doc = _chapter(db, 11, "biology", 9)  # not Chemistry XI: its rights must stay unverified
         _confirm_rights(client, db, doc)
     learner = _learner(client)
 
     def available() -> int:
-        url = "/v1/practice/availability?grade=11&subject=chemistry"
+        url = "/v1/practice/availability?grade=11&subject=biology"
         chapters = client.get(url, headers=learner.headers).json()["chapters"]
         return next(c["questions"] for c in chapters if c["chapter_id"] == str(chapter.id))
 
