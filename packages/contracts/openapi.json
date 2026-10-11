@@ -7717,6 +7717,35 @@
         "title": "OptionSnapshot",
         "type": "object"
       },
+      "OriginalOut": {
+        "properties": {
+          "bytes": {
+            "title": "Bytes",
+            "type": "integer"
+          },
+          "sha256": {
+            "title": "Sha256",
+            "type": "string"
+          },
+          "source_id": {
+            "format": "uuid",
+            "title": "Source Id",
+            "type": "string"
+          },
+          "stored": {
+            "title": "Stored",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "source_id",
+          "sha256",
+          "bytes",
+          "stored"
+        ],
+        "title": "OriginalOut",
+        "type": "object"
+      },
       "OutcomeEvidence": {
         "properties": {
           "chapter_number": {
@@ -10871,6 +10900,11 @@
             "items": {},
             "title": "Missing Pages",
             "type": "array"
+          },
+          "original_stored": {
+            "default": false,
+            "title": "Original Stored",
+            "type": "boolean"
           },
           "pdf_pages": {
             "title": "Pdf Pages",
@@ -22653,6 +22687,101 @@
           }
         },
         "summary": "Source documents and their publication-rights state",
+        "tags": [
+          "studio"
+        ]
+      }
+    },
+    "/v1/studio/sources/{source_id}/original": {
+      "post": {
+        "operationId": "upload_original_v1_studio_sources__source_id__original_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "source_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Source Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OriginalOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Store the owner's original (raw PDF body); only the registered SHA-256 is accepted",
+        "tags": [
+          "studio"
+        ]
+      }
+    },
+    "/v1/studio/sources/{source_id}/pages/{page}": {
+      "get": {
+        "operationId": "source_page_v1_studio_sources__source_id__pages__page__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "source_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Source Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "page",
+            "required": true,
+            "schema": {
+              "maximum": 5000,
+              "minimum": 1,
+              "title": "Page",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "One PDF page of a stored original, as PNG (content staff)",
         "tags": [
           "studio"
         ]
