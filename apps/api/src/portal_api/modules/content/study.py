@@ -30,6 +30,7 @@ from portal_api.db import Base, get_session
 from portal_api.errors import Conflict, NotFound, TooMany, Unprocessable
 from portal_api.modules.content.models import ContentItem, ContentVersion
 from portal_api.modules.identity.deps import CurrentPrincipal
+from portal_api.modules.system.operations import requires_rollout
 
 NOTE_MAX = 5000
 FORMULAS_MAX = 500
@@ -278,7 +279,8 @@ def remove_formula(db: Session, user_id: uuid.UUID, formula_id: uuid.UUID) -> No
 
 
 # ------------------------------------------------------------------ routes
-router = APIRouter(prefix="/v1", tags=["study"])
+# ROLLOUT-01: the whole study-tools surface follows its rollout flag (it only ever restricts).
+router = APIRouter(prefix="/v1", tags=["study"], dependencies=[Depends(requires_rollout("study_tools"))])
 DB = Annotated[Session, Depends(get_session)]
 
 

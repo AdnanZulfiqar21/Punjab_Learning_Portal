@@ -6,7 +6,7 @@ import type { FavouriteTopic, SavedFormula, StudyNoteListed } from "@portal/cont
 import { removeFormula } from "@/app/actions/study";
 import { Breadcrumbs, Notice, SkeletonLines } from "@/components/ui";
 import { GRADE_LABEL } from "@/lib/format";
-import { api, currentUser } from "@/lib/session";
+import { api, currentUser, features } from "@/lib/session";
 
 export const metadata: Metadata = { title: "My study tools", robots: { index: false } };
 
@@ -30,6 +30,9 @@ export default function StudyPage() {
 async function Tools() {
   const user = await currentUser();
   if (!user) redirect("/signin?next=/study");
+  if ((await features(user.token)).study_tools !== true) {
+    return <Notice title="Not available on your account yet">Study tools are being introduced gradually. Please check again later.</Notice>;
+  }
   const [notes, favs, formulas] = await Promise.all([
     api<StudyNoteListed[]>("/v1/me/notes", { token: user.token }),
     api<FavouriteTopic[]>("/v1/me/favourites", { token: user.token }),

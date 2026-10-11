@@ -68,3 +68,10 @@ export async function signInMethods(): Promise<string[]> {
   const res = await api<RuntimeConfig>("/v1/runtime-config");
   return res.ok ? res.data.sign_in_methods : [];
 }
+
+/** ROLLOUT-01: which rolled-out features this account has. A flag only hides things; on any error, nothing is shown
+ * that depends on one (the API refuses those routes anyway). */
+export async function features(token: string): Promise<Record<string, boolean>> {
+  const res = await api<Record<string, boolean>>("/v1/me/features", { token });
+  return res.ok ? res.data : {};
+}

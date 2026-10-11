@@ -4,7 +4,7 @@ import type { Dashboard, Discovery } from "@portal/contracts";
 import { DashboardView } from "@/components/dashboard";
 import { Notice, SkeletonLines } from "@/components/ui";
 import { getDiscovery } from "@/lib/api";
-import { api, currentUser } from "@/lib/session";
+import { api, currentUser, features } from "@/lib/session";
 
 const SUBJECTS = ["Biology", "Chemistry", "Physics", "Computer Science", "Mathematics"];
 
@@ -24,7 +24,8 @@ async function HomeFor() {
   if (!res.ok) {
     return <Notice tone="warn" title="Couldn't load your dashboard">{res.problem?.detail ?? "Please try again."}</Notice>;
   }
-  return <DashboardView d={res.data} email={user.me.email ?? ""} />;
+  const flags = await features(user.token);
+  return <DashboardView d={res.data} email={user.me.email ?? ""} studyTools={flags.study_tools === true} />;
 }
 
 /** P11.S1.T1 (PUBLIC-SITE-01): courses, tracks and honest coverage from what is actually published (DISCOVERY-01). */

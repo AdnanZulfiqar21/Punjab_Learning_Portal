@@ -69,6 +69,12 @@ def runtime_config(settings: Annotated[Settings, Depends(get_settings)]) -> Runt
 
 
 # ------------------------------------------------------------------ operations (P17.S3.T1/T3, OPS-01)
+def _signed_in() -> object:
+    from portal_api.modules.identity.deps import current_principal
+
+    return current_principal
+
+
 def _operator() -> object:
     from portal_api.modules.identity.deps import require
     from portal_api.modules.identity.permissions import Permission
@@ -108,6 +114,67 @@ def ops_signals(
     from portal_api.modules.system import operations
 
     return [SignalOut(**s) for s in operations.signals(db)]
+
+
+class RolloutOut(BaseModel):
+    key: str
+    description: str
+    default_percent: int
+    percent: int
+    reason: str | None
+    updated_at: datetime | None
+
+
+class RolloutSnapshot(BaseModel):
+    environment: str
+    rollouts: list[RolloutOut]
+
+
+class RolloutIn(BaseModel):
+    percent: int = Field(ge=0, le=100)
+    reason: str = Field(min_length=10, max_length=1000)
+
+
+@router.get(
+    "/v1/ops/rollouts", response_model=RolloutSnapshot, summary="Rollout flags: the runtime snapshot (operators)"
+)
+def ops_rollouts(
+    db: Annotated[Session, Depends(get_session)], who: Annotated[Any, Depends(_operator())], response: Response
+) -> RolloutSnapshot:
+    from portal_api.modules.system import operations
+
+    response.headers["Cache-Control"] = "private, no-store"
+    return RolloutSnapshot(
+        environment=operations._environment(), rollouts=[RolloutOut(**r) for r in operations.rollouts(db)]
+    )
+
+
+@router.put(
+    "/v1/ops/rollouts/{key}",
+    response_model=RolloutSnapshot,
+    summary="Set a feature's rollout percentage (operators, MFA, reason; audited). Flags only restrict",
+)
+def ops_set_rollout(
+    key: str,
+    body: RolloutIn,
+    db: Annotated[Session, Depends(get_session)],
+    who: Annotated[Any, Depends(_operator())],
+    response: Response,
+) -> RolloutSnapshot:
+    from portal_api.modules.system import operations
+
+    operations.set_rollout(db, who.user.id, key, body.percent, body.reason)
+    return ops_rollouts(db, who, response)
+
+
+@router.get("/v1/me/features", summary="Which rolled-out features your account has")
+def my_features(
+    db: Annotated[Session, Depends(get_session)], who: Annotated[Any, Depends(_signed_in())], response: Response
+) -> dict[str, bool]:
+    from portal_api.modules.system import operations
+
+    response.headers["Cache-Control"] = "private, no-store"
+    return operations.features_for(db, who)
 
 
 @router.get("/v1/ops/features", response_model=list[FeatureOut], summary="Optional feature switches (operators)")

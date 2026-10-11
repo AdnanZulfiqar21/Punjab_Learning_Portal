@@ -10,7 +10,7 @@ import { FavouriteButton, LessonNote, SaveFormulaButton } from "@/components/stu
 import { getChapter, getLessons } from "@/lib/api";
 import { CONTENT_STATE_TEXT, GRADE_LABEL, assessmentSummary, pageRange } from "@/lib/format";
 import { Badge, Breadcrumbs, Notice, SkeletonLines } from "@/components/ui";
-import { api, sessionToken } from "@/lib/session";
+import { api, features, sessionToken } from "@/lib/session";
 
 export const metadata: Metadata = { title: "Chapter" };
 
@@ -162,7 +162,8 @@ async function Lessons({ chapterId, topics, lang }: { chapterId: string; topics:
   const doneRes = token && lessons.some((l) => !l.locked) ? await api<string[]>(`/v1/me/chapters/${encodeURIComponent(chapterId)}/completed-lessons`, { token }) : null;
   const done = new Set(doneRes?.ok ? doneRes.data : []);
   // STUDY-TOOLS-01: each readable lesson's private note (with its revision, so edits from stale copies are caught).
-  const readable = token ? lessons.filter((l) => !l.locked && l.body) : [];
+  const study = token ? (await features(token)).study_tools === true : false; // ROLLOUT-01
+  const readable = token && study ? lessons.filter((l) => !l.locked && l.body) : [];
   const noteRes = await Promise.all(readable.map((l) => api<StudyNote>(`/v1/me/lessons/${encodeURIComponent(l.id)}/note`, { token })));
   const notes = new Map(readable.flatMap((l, i) => (noteRes[i].ok ? [[l.id, noteRes[i].data] as const] : [])));
   const titles = topicTitles(topics);
@@ -228,7 +229,7 @@ async function Lessons({ chapterId, topics, lang }: { chapterId: string; topics:
                   blocks={l.body.blocks as { type: string }[]}
                   headingOffset={2}
                   assetUrl={(v) => `/learn/lessons/${l.id}/assets/${v}`}
-                  equationAction={token ? (i) => <SaveFormulaButton lessonId={l.id} index={i} /> : undefined}
+                  equationAction={token && study ? (i) => <SaveFormulaButton lessonId={l.id} index={i} /> : undefined}
                 />
               </div>
             )}
