@@ -27,6 +27,10 @@ export function DashboardSection({ token }: { token: string }) {
         Your dashboard
       </T>
       {!d.profile && <Notice title="Choose your class and subjects">Set up your profile in the Account tab to see your meters.</Notice>}
+      <Card label="My study tools: notes, favourite topics and saved formulas" onPress={() => router.push("/study")}>
+        <T style={{ fontWeight: "600" }}>My study tools</T>
+        <T variant="small">Notes, favourite topics and saved formulas</T>
+      </Card>
       {next ? (
         <Card label={`Continue learning: ${next.title}`} onPress={() => router.push({ pathname: "/chapter/[id]", params: { id: next.chapter_id } })}>
           <T variant="small">Continue learning</T>

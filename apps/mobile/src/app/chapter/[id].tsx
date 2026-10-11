@@ -5,6 +5,7 @@ import type { TopicNode } from "@portal/contracts";
 
 import { Choices } from "@/components/form";
 import { LessonBlocks } from "@/components/lesson-blocks";
+import { CompletionToggle, FavouriteStar, LessonNote, SaveFormula } from "@/components/lesson-study";
 import { Badge, Card, ErrorState, Loading, Notice, T } from "@/components/ui";
 import { Space } from "@/constants/theme";
 import { useRequest } from "@/hooks/use-request";
@@ -47,11 +48,7 @@ export default function ChapterScreen() {
           <T variant="heading" accessibilityRole="header">
             Topics
           </T>
-          {ch.topics.length === 0 ? (
-            <T variant="muted">No topics are recorded for this chapter.</T>
-          ) : (
-            ch.topics.map((t) => <TopicRow key={t.id} topic={t} />)
-          )}
+          {ch.topics.length === 0 ? <T variant="muted">No topics are recorded for this chapter.</T> : <Topics topics={ch.topics} />}
         </View>
         <Card>
           <T variant="heading">In your textbook</T>
@@ -98,6 +95,10 @@ const LANGUAGE_NAME: Record<string, string> = { en: "English", ur: "Urdu", roman
 function LessonList({ chapterId, token }: { chapterId: string; token: string | null }) {
   const [language, setLanguage] = useState<Language>("en");
   const { state, retry } = useRequest((signal) => api.lessons(chapterId, token, signal, language), [chapterId, token, language]);
+  // LESSON-DONE-01: which lessons this learner marked completed (signed in only).
+  const done = useRequest((signal) => (token ? api.completedLessons(token, chapterId, signal) : Promise.resolve([] as string[])), [chapterId, token]);
+  const [toggled, setToggled] = useState<Record<string, boolean>>({});
+  const isDone = (id: string) => toggled[id] ?? (done.state.status === "success" && done.state.data.includes(id));
   return (
     <View style={{ gap: Space.sm }}>
       <T variant="heading" accessibilityRole="header">
@@ -135,10 +136,20 @@ function LessonList({ chapterId, token }: { chapterId: string; token: string | n
                 </Notice>
               ) : (
                 <View style={l.language === "ur" ? { direction: "rtl" } : undefined}>
-                  <LessonBlocks blocks={l.body.blocks as { type: string }[]} assetSource={(v) => lessonAsset(l.id, v, token)} />
+                  <LessonBlocks
+                    blocks={l.body.blocks as { type: string }[]}
+                    assetSource={(v) => lessonAsset(l.id, v, token)}
+                    equationAction={token ? (i) => <SaveFormula token={token} lessonId={l.id} index={i} /> : undefined}
+                  />
                 </View>
               )}
             </View>
+            {token && !l.locked && l.body ? (
+              <View style={{ gap: Space.sm, marginTop: Space.sm }}>
+                <CompletionToggle token={token} lessonId={l.id} done={isDone(l.id)} onChange={(d) => setToggled((t) => ({ ...t, [l.id]: d }))} />
+                <LessonNote token={token} lessonId={l.id} />
+              </View>
+            ) : null}
             <T variant="small" style={{ marginTop: Space.sm }}>
               Textbook pages (PDF):{" "}
               {(l.source_refs as { pdf_from: number; pdf_to: number }[])
@@ -151,25 +162,45 @@ function LessonList({ chapterId, token }: { chapterId: string; token: string | n
   );
 }
 
-function TopicRow({ topic, depth = 0 }: { topic: TopicNode; depth?: number }) {
+/** Topic outline; signed-in learners can star topics (STUDY-TOOLS-01). */
+function Topics({ topics }: { topics: TopicNode[] }) {
+  const auth = useAuth();
+  const token = auth.state.status === "signed_in" ? auth.state.token : null;
+  const favs = useRequest((signal) => (token ? api.favourites(token, signal) : Promise.resolve([])), [token]);
+  const starred = favs.state.status === "success" ? new Set(favs.state.data.map((f) => f.topic_id)) : null;
+  return (
+    <>
+      {topics.map((t) => (
+        <TopicRow key={t.id} topic={t} token={token} starred={token ? starred : null} />
+      ))}
+    </>
+  );
+}
+
+function TopicRow({ topic, depth = 0, token, starred }: { topic: TopicNode; depth?: number; token: string | null; starred: Set<string> | null }) {
   const c = useTheme();
   const [open, setOpen] = useState(false);
   const expandable = topic.children.length > 0 || topic.points.length > 0;
   return (
     <View style={{ marginLeft: depth * Space.md }}>
-      <Pressable
-        accessibilityRole={expandable ? "button" : "text"}
-        aria-expanded={expandable ? open : undefined}
-        disabled={!expandable}
-        onPress={() => setOpen((o) => !o)}
-        style={{ flexDirection: "row", gap: Space.sm, paddingVertical: Space.sm, borderBottomWidth: 1, borderBottomColor: c.border }}>
-        <T variant="mono" style={{ width: 52, color: c.muted }}>
-          {topic.number ?? ""}
-        </T>
-        <T style={{ flex: 1 }}>{topic.title}</T>
-        {topic.pdf_page != null && <Badge>PDF p. {topic.pdf_page}</Badge>}
-        {expandable && <T variant="muted">{open ? "▾" : "▸"}</T>}
-      </Pressable>
+      <View style={{ flexDirection: "row", alignItems: "center", gap: Space.sm, borderBottomWidth: 1, borderBottomColor: c.border }}>
+        <Pressable
+          accessibilityRole={expandable ? "button" : "text"}
+          aria-expanded={expandable ? open : undefined}
+          disabled={!expandable}
+          onPress={() => setOpen((o) => !o)}
+          style={{ flex: 1, flexDirection: "row", gap: Space.sm, paddingVertical: Space.sm }}>
+          <T variant="mono" style={{ width: 52, color: c.muted }}>
+            {topic.number ?? ""}
+          </T>
+          <T style={{ flex: 1 }}>{topic.title}</T>
+          {topic.pdf_page != null && <Badge>PDF p. {topic.pdf_page}</Badge>}
+          {expandable && <T variant="muted">{open ? "▾" : "▸"}</T>}
+        </Pressable>
+        {token && starred && (
+          <FavouriteStar token={token} topicId={topic.id} label={topic.number ? `${topic.number} ${topic.title}` : topic.title} initial={starred.has(topic.id)} />
+        )}
+      </View>
       {open && (
         <View style={{ paddingLeft: 60, paddingVertical: Space.xs, gap: Space.xs }}>
           {topic.points.map((p) => (
@@ -178,7 +209,7 @@ function TopicRow({ topic, depth = 0 }: { topic: TopicNode; depth?: number }) {
             </T>
           ))}
           {topic.children.map((child) => (
-            <TopicRow key={child.id} topic={child} depth={1} />
+            <TopicRow key={child.id} topic={child} depth={1} token={token} starred={starred} />
           ))}
         </View>
       )}
