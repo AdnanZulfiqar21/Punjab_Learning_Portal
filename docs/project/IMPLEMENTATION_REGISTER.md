@@ -162,3 +162,4 @@ Source plan: `Road Map/Punjab_Learning_Portal_Master_Roadmap_v2.2_Integrated_Wri
 | P12.S3.T3 Mixed revision | IMPLEMENTED | MIXED-REVISION-01. `tests/test_mixed_revision.py`. |
 | P12.S1.T1 Versioned result summary | IMPLEMENTED (API + web; mobile pending-state wording) | RESULT-SUMMARY-01. `tests/test_result_summary.py`. |
 | P09.S4.T3 Publish test availability | PARTIAL (replacement before start, stream targeting, entitlement shown; client-compatibility filter open: no minimum-client contract) | FORM-REPLACE-01. `tests/test_form_replacement.py`. |
+| P18.S2.T2 File and job abuse tests | IMPLEMENTED (import parser exhaustion, NUL, nesting, row flood, preview rate limit; uploads scanned; exports bounded) | IMPORT-ABUSE-01. `tests/test_import_abuse.py`. |
