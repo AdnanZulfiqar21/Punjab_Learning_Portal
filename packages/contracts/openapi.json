@@ -1109,6 +1109,14 @@
             "title": "Feedback Mode",
             "type": "string"
           },
+          "flagged": {
+            "description": "Positions flagged to come back to (never scored)",
+            "items": {
+              "type": "integer"
+            },
+            "title": "Flagged",
+            "type": "array"
+          },
           "form_id": {
             "format": "uuid",
             "title": "Form Id",
@@ -3483,6 +3491,41 @@
           "updated_at"
         ],
         "title": "FeatureOut",
+        "type": "object"
+      },
+      "FlagsIn": {
+        "properties": {
+          "positions": {
+            "items": {
+              "maximum": 200.0,
+              "minimum": 1.0,
+              "type": "integer"
+            },
+            "maxItems": 200,
+            "title": "Positions",
+            "type": "array"
+          }
+        },
+        "required": [
+          "positions"
+        ],
+        "title": "FlagsIn",
+        "type": "object"
+      },
+      "FlagsOut": {
+        "properties": {
+          "flagged": {
+            "items": {
+              "type": "integer"
+            },
+            "title": "Flagged",
+            "type": "array"
+          }
+        },
+        "required": [
+          "flagged"
+        ],
+        "title": "FlagsOut",
         "type": "object"
       },
       "FormCreateIn": {
@@ -14248,6 +14291,59 @@
           }
         },
         "summary": "Move an active attempt to this signed-in device (the other device must continue here to write again)",
+        "tags": [
+          "practice"
+        ]
+      }
+    },
+    "/v1/attempts/{attempt_id}/flags": {
+      "put": {
+        "operationId": "set_flags_v1_attempts__attempt_id__flags_put",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "attempt_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Attempt Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FlagsIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FlagsOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Flag questions to come back to",
         "tags": [
           "practice"
         ]

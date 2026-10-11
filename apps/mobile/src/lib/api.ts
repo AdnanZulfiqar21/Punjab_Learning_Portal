@@ -238,6 +238,8 @@ export const api = {
     request<PracticeAttempt>(`/v1/attempts/${encodeURIComponent(id)}`, { token, signal }),
   continueHere: (token: string, id: string) =>
     request<PracticeAttempt>(`/v1/attempts/${encodeURIComponent(id)}/continue-here`, { method: "POST", token }),
+  setFlags: (token: string, id: string, positions: number[]) =>
+    request<{ flagged: number[] }>(`/v1/attempts/${encodeURIComponent(id)}/flags`, { method: "PUT", token, body: { positions } }),
   saveAnswers: (token: string, id: string, ops: unknown[]) =>
     request<SaveResult>(`/v1/attempts/${encodeURIComponent(id)}/answers`, { method: "POST", token, body: { ops } }),
   submitAttempt: (token: string, id: string, idempotencyKey: string, ops: unknown[]) =>

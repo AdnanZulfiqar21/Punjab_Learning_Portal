@@ -86,6 +86,9 @@ function Runner({ attempt, token, onFinalised }: { attempt: PracticeAttempt; tok
   });
   const [locked, setLocked] = useState<Set<number>>(() => new Set(attempt.answers.filter((a) => a.revealed).map((a) => a.position)));
   const [revealed, setRevealed] = useState<Record<number, RevealResult>>({});
+  // P11.S3.T2 (FLAGS-01): questions to come back to, kept with the attempt (same flags on web and other devices).
+  const [flagged, setFlagged] = useState<Set<number>>(() => new Set(attempt.flagged ?? []));
+  const [flagError, setFlagError] = useState<string | null>(null);
   const [connection, setConnection] = useState<"ok" | "retrying">("ok");
   const [elsewhere, setElsewhere] = useState(attempt.held_elsewhere === true);
   const [moving, setMoving] = useState(false);
@@ -268,6 +271,24 @@ function Runner({ attempt, token, onFinalised }: { attempt: PracticeAttempt; tok
   const remaining = deadline !== null && now !== null ? Math.max(0, deadline - now) : null;
   const disabled = closed || submitting || locked.has(current);
 
+  async function toggleFlag(position: number) {
+    if (closed || submitting) return;
+    const before = flagged;
+    const next = new Set(before);
+    if (next.has(position)) next.delete(position);
+    else next.add(position);
+    setFlagged(next);
+    setFlagError(null);
+    try {
+      setFlagged(new Set((await api.setFlags(token, attempt.id, [...next])).flagged));
+    } catch (e) {
+      setFlagged(before);
+      const reason = e instanceof ApiError ? (e.problem as { code_reason?: string } | null | undefined)?.code_reason : undefined;
+      if (reason === "ATTEMPT_ELSEWHERE") setElsewhere(true);
+      else setFlagError(e instanceof ApiError ? e.message : "Couldn't change the flag.");
+    }
+  }
+
   async function moveHere() {
     setMoving(true);
     try {
@@ -314,10 +335,13 @@ function Runner({ attempt, token, onFinalised }: { attempt: PracticeAttempt; tok
             <Pressable
               key={it.position}
               accessibilityRole="button"
-              accessibilityLabel={`Question ${it.position}: ${st.status === "empty" ? "not answered" : st.status}`}
+              accessibilityLabel={`Question ${it.position}: ${st.status === "empty" ? "not answered" : st.status}${flagged.has(it.position) ? ", flagged" : ""}`}
               onPress={() => setCurrent(it.position)}
               style={{ width: 40, height: 40, borderRadius: Radius.sm, borderWidth: it.position === current ? 2 : 1, borderColor: it.position === current ? c.accent : c.border, backgroundColor: bg, alignItems: "center", justifyContent: "center" }}>
-              <T variant="small">{it.position}</T>
+              <T variant="small">
+                {it.position}
+                {flagged.has(it.position) ? " ⚑" : ""}
+              </T>
             </Pressable>
           );
         })}
@@ -357,6 +381,15 @@ function Runner({ attempt, token, onFinalised }: { attempt: PracticeAttempt; tok
         </View>
         <View style={{ flexDirection: "row", flexWrap: "wrap", gap: Space.md, alignItems: "center" }}>
           {state.option !== null && !disabled && <Button variant="link" label="Clear answer" onPress={() => choose(current, null)} />}
+          {!closed && (
+            <Button
+              variant="secondary"
+              label={flagged.has(current) ? "⚑ Flagged for review" : "Flag for review"}
+              onPress={() => void toggleFlag(current)}
+              disabled={submitting || elsewhere}
+            />
+          )}
+          {flagError ? <T style={{ color: c.danger }}>{flagError}</T> : null}
           {attempt.feedback_mode === "immediate" && state.status === "saved" && state.option !== null && !revealed[current] && !locked.has(current) && (
             <Button variant="secondary" label="Check answer" onPress={() => void check(current)} />
           )}
@@ -387,7 +420,21 @@ function Runner({ attempt, token, onFinalised }: { attempt: PracticeAttempt; tok
           <T variant="heading">Submit your test?</T>
           <T>
             {answered} answered · {total - answered} not answered{pending > 0 ? ` · ${pending} still being saved (sent with your submission)` : ""}
+            {flagged.size > 0 ? ` · ${flagged.size} flagged for review` : ""}
           </T>
+          {[...flagged]
+            .sort((x, y) => x - y)
+            .map((p) => (
+              <Button
+                key={p}
+                variant="link"
+                label={`Go back to flagged question ${p}`}
+                onPress={() => {
+                  setCurrent(p);
+                  setConfirming(false);
+                }}
+              />
+            ))}
           <T variant="small">After you submit you can’t change any answer.</T>
           {submitError ? <T style={{ color: c.danger }}>{submitError}</T> : null}
           <Button label={submitError ? "Try again" : "Submit"} onPress={() => void submit()} busy={submitting} />

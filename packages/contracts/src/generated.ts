@@ -482,6 +482,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/attempts/{attempt_id}/flags": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** Flag questions to come back to */
+        put: operations["set_flags_v1_attempts__attempt_id__flags_put"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/attempts/{attempt_id}/items/{position}/reveal": {
         parameters: {
             query?: never;
@@ -3945,6 +3962,11 @@ export interface components {
              */
             feedback_mode: "deferred" | "immediate";
             /**
+             * Flagged
+             * @description Positions flagged to come back to (never scored)
+             */
+            flagged?: number[];
+            /**
              * Form Id
              * Format: uuid
              */
@@ -4921,6 +4943,16 @@ export interface components {
             reason: string | null;
             /** Updated At */
             updated_at: string | null;
+        };
+        /** FlagsIn */
+        FlagsIn: {
+            /** Positions */
+            positions: number[];
+        };
+        /** FlagsOut */
+        FlagsOut: {
+            /** Flagged */
+            flagged: number[];
         };
         /** FormCreateIn */
         FormCreateIn: {
@@ -9592,6 +9624,41 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["AttemptOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    set_flags_v1_attempts__attempt_id__flags_put: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                attempt_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["FlagsIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["FlagsOut"];
                 };
             };
             /** @description Validation Error */
