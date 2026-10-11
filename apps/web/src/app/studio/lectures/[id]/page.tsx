@@ -7,7 +7,7 @@ import { GRADE_LABEL } from "@/lib/format";
 import { SUBJECTS } from "@/lib/practice";
 import { api, currentUser } from "@/lib/session";
 import { CHECKS, LANGUAGE, STATUS } from "../labels";
-import { CaptionsForm, MasterForm, ReviewForm, SubmitLecture, TranscriptEditor } from "./detail-forms";
+import { CaptionsForm, MasterForm, MasterUpload, ReviewForm, SubmitLecture, TranscriptEditor } from "./detail-forms";
 
 export const metadata: Metadata = { title: "Lecture", robots: { index: false } };
 
@@ -66,7 +66,17 @@ async function Detail({ id }: { id: string }) {
         ) : (
           <p className="text-sm text-muted">Not registered yet.</p>
         )}
-        {editable && author && <MasterForm id={l.id} />}
+        {editable && author && (
+          <>
+            <MasterUpload id={l.id} />
+            <details className="text-sm">
+              <summary className="cursor-pointer text-accent">Or register a master kept elsewhere</summary>
+              <div className="mt-2">
+                <MasterForm id={l.id} />
+              </div>
+            </details>
+          </>
+        )}
       </section>
 
       <section aria-labelledby="captions-h" className="space-y-2">

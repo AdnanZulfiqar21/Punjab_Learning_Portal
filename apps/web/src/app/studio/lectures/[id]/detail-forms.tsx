@@ -55,6 +55,144 @@ export function MasterForm({ id }: { id: string }) {
   );
 }
 
+type Upload = { id: string; bytes: number; received: number; state: "uploading" | "processing" | "ready" | "failed"; failure: string | null; chunk_bytes: number };
+const TYPES = ["video/mp4", "video/webm", "video/quicktime"];
+const mb = (n: number) => `${(n / (1024 * 1024)).toFixed(1)} MB`;
+
+/** MEDIA-UPLOAD-01 (P07.S2.T1): resumable master upload. The server's received count is the resume point, so a dropped
+ * connection or a closed tab resumes where the server stopped, not where this device thinks it did. */
+export function MasterUpload({ id }: { id: string }) {
+  const router = useRouter();
+  const [file, setFile] = useState<File | null>(null);
+  const [progress, setProgress] = useState<{ received: number; bytes: number } | null>(null);
+  const [message, setMessage] = useState<{ tone: "ok" | "warn"; text: string } | null>(null);
+  const [busy, setBusy] = useState(false);
+
+  async function upload(form: FormData) {
+    const f = file;
+    if (!f) return;
+    if (!TYPES.includes(f.type)) {
+      setMessage({ tone: "warn", text: "Choose an MP4, WebM or QuickTime video." });
+      return;
+    }
+    setBusy(true);
+    setMessage(null);
+    const key = `master-upload:${id}:${f.name}:${f.size}:${f.lastModified}`;
+    let up: Upload | null = null;
+    try {
+      const stored = window.localStorage.getItem(key);
+      if (stored) {
+        const r = await fetch(`/studio/uploads/${stored}`, { cache: "no-store" });
+        const s = r.ok ? ((await r.json()) as Upload) : null;
+        if (s?.state === "uploading") up = s;
+      }
+    } catch {
+      /* no device storage: start a new upload */
+    }
+    if (!up) {
+      const sha = String(form.get("sha256") ?? "").trim().toLowerCase();
+      const r = await fetch(`/studio/lectures/${id}/master-upload`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ filename: f.name, bytes: f.size, content_type: f.type, duration_s: Number(form.get("duration_s") ?? 0), ...(sha ? { sha256: sha } : {}) }),
+      });
+      const body = await r.json().catch(() => null);
+      if (!r.ok) {
+        setBusy(false);
+        setMessage({ tone: "warn", text: body?.detail ?? "Couldn't start the upload." });
+        return;
+      }
+      up = body as Upload;
+      try {
+        window.localStorage.setItem(key, up.id);
+      } catch {
+        /* resume on this device won't be available */
+      }
+    }
+    let failures = 0;
+    while (up.state === "uploading") {
+      setProgress({ received: up.received, bytes: up.bytes });
+      const end = Math.min(up.received + up.chunk_bytes, f.size);
+      try {
+        const r: Response = await fetch(`/studio/uploads/${up.id}?offset=${up.received}`, { method: "PUT", body: f.slice(up.received, end) });
+        const body = (await r.json().catch(() => null)) as (Upload & { code_reason?: string; expected_offset?: number; detail?: string }) | null;
+        if (r.status === 409 && body?.code_reason === "UPLOAD_OFFSET") {
+          up = { ...up, received: Number(body.expected_offset) }; // the server's count wins
+          continue;
+        }
+        if (!r.ok) throw new Error(body?.detail ?? `HTTP ${r.status}`);
+        up = body as Upload;
+        failures = 0;
+      } catch (e) {
+        failures += 1;
+        if (failures > 4) {
+          setBusy(false);
+          setMessage({ tone: "warn", text: `The connection dropped (${String(e)}). Press Upload to resume from ${mb(up.received)}; if you reload this page, choose the same file first.` });
+          return;
+        }
+        await new Promise((res) => setTimeout(res, 1000 * 2 ** failures));
+      }
+    }
+    setProgress({ received: up.received, bytes: up.bytes });
+    try {
+      window.localStorage.removeItem(key);
+    } catch {
+      /* nothing stored */
+    }
+    setBusy(false);
+    if (up.state === "ready") {
+      setMessage({ tone: "ok", text: "Uploaded and checked. It is now this lecture's master; it still needs the independent review." });
+      router.refresh();
+    } else {
+      setMessage({ tone: "warn", text: up.failure ?? "The upload couldn't be used." });
+    }
+  }
+
+  return (
+    // A plain submit handler, not a form action: an action resets the form afterwards, which would clear the chosen
+    // file and make resuming after a dropped connection mean choosing it again.
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        void upload(new FormData(e.currentTarget));
+      }}
+      className="space-y-2 rounded-lg border border-border bg-surface p-3 text-sm"
+    >
+      <p className="font-medium">Upload the master video</p>
+      <div className="flex flex-wrap items-end gap-3">
+        <label className="space-y-1">
+          <span className="block">Video file (MP4, WebM or QuickTime)</span>
+          <input type="file" accept="video/mp4,video/webm,video/quicktime" required onChange={(e) => setFile(e.target.files?.[0] ?? null)} />
+        </label>
+        <label className="space-y-1">
+          <span className="block">Duration (s)</span>
+          <input name="duration_s" type="number" min={1} max={7200} required className={`${field} w-28`} />
+        </label>
+        <label className="space-y-1">
+          <span className="block">SHA-256 from the owner (optional)</span>
+          <input name="sha256" pattern="[0-9a-fA-F]{64}" className={`${field} w-96 font-mono text-xs`} />
+        </label>
+        <button type="submit" disabled={busy || !file} className={button}>
+          {busy ? "Uploading…" : "Upload"}
+        </button>
+      </div>
+      {progress && (
+        <div className="space-y-1">
+          <progress value={progress.received} max={progress.bytes} className="w-full" aria-label="Upload progress" />
+          <p className="text-muted">
+            {mb(progress.received)} of {mb(progress.bytes)}
+          </p>
+        </div>
+      )}
+      {message && (
+        <p role={message.tone === "warn" ? "alert" : "status"} className={message.tone === "warn" ? "text-danger" : ""}>
+          {message.text}
+        </p>
+      )}
+    </form>
+  );
+}
+
 export function CaptionsForm({ id, language }: { id: string; language: string }) {
   const { busy, result, run } = useRun();
   return (

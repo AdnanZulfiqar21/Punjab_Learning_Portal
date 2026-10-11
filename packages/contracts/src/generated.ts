@@ -2772,6 +2772,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/studio/lectures/{lecture_id}/master-upload": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Start a resumable upload of the lecture's master video */
+        post: operations["start_upload_v1_studio_lectures__lecture_id__master_upload_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/studio/lectures/{lecture_id}/review": {
         parameters: {
             query?: never;
@@ -2937,6 +2954,24 @@ export interface paths {
         put?: never;
         /** Accept (action needed) or dismiss a notice (subject reviewers in scope; audited) */
         post: operations["decide_notice_v1_studio_syllabus_notices__notice_id__decision_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/studio/uploads/{upload_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** An upload's state and resume offset */
+        get: operations["upload_state_v1_studio_uploads__upload_id__get"];
+        /** Send one chunk at the given offset (raw bytes) */
+        put: operations["upload_chunk_v1_studio_uploads__upload_id__put"];
+        post?: never;
         delete?: never;
         options?: never;
         head?: never;
@@ -6227,6 +6262,60 @@ export interface components {
             roles: components["schemas"]["Role"][];
             /** Status */
             status: string;
+        };
+        /** MediaUploadIn */
+        MediaUploadIn: {
+            /** Bytes */
+            bytes: number;
+            /**
+             * Content Type
+             * @enum {string}
+             */
+            content_type: "video/mp4" | "video/webm" | "video/quicktime";
+            /** Duration S */
+            duration_s: number;
+            /** Filename */
+            filename: string;
+            /**
+             * Sha256
+             * @description The owner's checksum, if known
+             */
+            sha256?: string | null;
+        };
+        /** MediaUploadOut */
+        MediaUploadOut: {
+            /** Bytes */
+            bytes: number;
+            /** Chunk Bytes */
+            chunk_bytes: number;
+            /**
+             * Expires At
+             * Format: date-time
+             */
+            expires_at: string;
+            /** Failure */
+            failure: string | null;
+            /** Filename */
+            filename: string;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /**
+             * Lecture Id
+             * Format: uuid
+             */
+            lecture_id: string;
+            /** Received */
+            received: number;
+            /** Sha256 */
+            sha256: string | null;
+            /**
+             * State
+             * @enum {string}
+             */
+            state: "uploading" | "processing" | "ready" | "failed";
         };
         /** MessageIn */
         MessageIn: {
@@ -14424,6 +14513,41 @@ export interface operations {
             };
         };
     };
+    start_upload_v1_studio_lectures__lecture_id__master_upload_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                lecture_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["MediaUploadIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MediaUploadOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     review_lecture_v1_studio_lectures__lecture_id__review_post: {
         parameters: {
             query?: never;
@@ -14757,6 +14881,70 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["SyllabusNoticeOut"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    upload_state_v1_studio_uploads__upload_id__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                upload_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MediaUploadOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    upload_chunk_v1_studio_uploads__upload_id__put: {
+        parameters: {
+            query: {
+                offset: number;
+            };
+            header?: never;
+            path: {
+                upload_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MediaUploadOut"];
                 };
             };
             /** @description Validation Error */
