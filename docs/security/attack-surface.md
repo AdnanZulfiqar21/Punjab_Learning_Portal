@@ -43,7 +43,7 @@ deployment (none exists yet: B03). It is not an independent assessment; P18.S4.T
 | V7 Errors and logging | Yes | Problem-details errors without stack traces; correlation IDs; audit trail | Central log retention and access (B03) |
 | V8 Data protection | Yes | `Cache-Control: private, no-store` on personal responses; result-release policy; export coverage | Retention schedule (B15) |
 | V9 Communications | Deployment | HSTS/TLS are the hosting edge's job | B03 |
-| V10 Malicious code | Yes | Dependency audits and credential scan in CI | SBOM and bundle/source-map checks (P18.S2.T3 remainder) |
+| V10 Malicious code | Yes | Dependency audits, credential scan, CycloneDX SBOM artifact and browser-bundle check in CI (EXPOSURE-01) | Container image scanning once deployment images exist (B03) |
 | V11 Business logic | Yes | Idempotency keys; attempt protocol ledger; bounded exports; allowance ledger | **No application rate limiting**: anti-automation for expensive endpoints (form builds, exports, uploads) relies on caps per user today; edge rate limiting is a deployment decision (B03) |
 | V12 Files and resources | Yes | Caps, decoders, re-encoding, isolated processing, private keys; ClamAV scan before storage, failing closed (UPLOAD-SCAN-01) | Running the scanner daemon (B03) |
 | V13 API | Yes | Pinned public allowlist; typed contracts with drift check; no GraphQL | — |
@@ -54,6 +54,6 @@ deployment (none exists yet: B03). It is not an independent assessment; P18.S4.T
 1. Application rate limiting (V11): decide edge vs application limits with the hosting choice (B03).
 2. CSP `unsafe-inline` (V14): evaluate nonces with Cache Components before claiming strong XSS protection.
 3. Running the upload scanner daemon in hosting (V12; the scan step itself exists, UPLOAD-SCAN-01).
-4. SBOM and bundle/source-map checks (V10, P18.S2.T3 remainder).
+4. Container image scanning (V10) once deployment images exist (B03). SBOM and bundle checks are done (EXPOSURE-01).
 5. Independent review of this map and a penetration test (P18.S4.T1): needs an external reviewer.
 6. Branch protection on `main` is not enforced (owner setting); merges follow a manual green-CI rule.
