@@ -414,6 +414,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/attempts/{attempt_id}/continue-here": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Move an active attempt to this signed-in device (the other device must continue here to write again) */
+        post: operations["continue_attempt_here_v1_attempts__attempt_id__continue_here_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/attempts/{attempt_id}/items/{position}/reveal": {
         parameters: {
             query?: never;
@@ -3468,6 +3485,12 @@ export interface components {
              * Format: uuid
              */
             form_id: string;
+            /**
+             * Held Elsewhere
+             * @description Open on another signed-in device; choose continue-here before answering here
+             * @default false
+             */
+            held_elsewhere: boolean;
             /**
              * Id
              * Format: uuid
@@ -8668,6 +8691,37 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["SaveOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    continue_attempt_here_v1_attempts__attempt_id__continue_here_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                attempt_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AttemptOut"];
                 };
             };
             /** @description Validation Error */

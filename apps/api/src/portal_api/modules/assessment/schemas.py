@@ -106,6 +106,9 @@ class AttemptOut(BaseModel):
     items: list[ItemSnapshot]
     answers: list[AnswerOut]
     receipt: ReceiptOut | None
+    held_elsewhere: bool = Field(
+        default=False, description="Open on another signed-in device; choose continue-here before answering here"
+    )
 
 
 class OpIn(BaseModel):

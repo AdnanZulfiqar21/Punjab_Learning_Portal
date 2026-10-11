@@ -913,6 +913,12 @@
             "title": "Form Id",
             "type": "string"
           },
+          "held_elsewhere": {
+            "default": false,
+            "description": "Open on another signed-in device; choose continue-here before answering here",
+            "title": "Held Elsewhere",
+            "type": "boolean"
+          },
           "id": {
             "format": "uuid",
             "title": "Id",
@@ -13067,6 +13073,49 @@
           }
         },
         "summary": "Save answer operations (\u00a710.5)",
+        "tags": [
+          "practice"
+        ]
+      }
+    },
+    "/v1/attempts/{attempt_id}/continue-here": {
+      "post": {
+        "operationId": "continue_attempt_here_v1_attempts__attempt_id__continue_here_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "attempt_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Attempt Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AttemptOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Move an active attempt to this signed-in device (the other device must continue here to write again)",
         "tags": [
           "practice"
         ]

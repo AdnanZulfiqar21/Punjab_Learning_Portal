@@ -104,6 +104,10 @@ class Attempt(Base):
     cutoff_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     finalised_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     finalise_reason: Mapped[str | None] = mapped_column(String(10))
+    # P10.S1.T3 (HANDOFF-01): the signed-in device (application session) that may write to this active attempt.
+    holder_session_id: Mapped[uuid.UUID | None] = mapped_column(
+        ForeignKey("user_session.id", ondelete="SET NULL"), nullable=True
+    )
     # OCT9-01/02: when the mistake notebook last reflected this attempt (None: not yet, e.g. results still held).
     notebook_applied_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
 

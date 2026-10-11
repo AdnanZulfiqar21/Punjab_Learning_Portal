@@ -330,7 +330,7 @@ def test_concurrent_save_and_submit_never_lose_an_acknowledged_answer(
     """Race a save against a submit many times. The row lock serialises them: an acknowledged (accepted) save is always
     in the receipt's ledger, and a save that lost the race is reported as finalised, never silently dropped."""
     learner = _learner(client)
-    who = SimpleNamespace(user=SimpleNamespace(id=learner.id))
+    who = SimpleNamespace(user=SimpleNamespace(id=learner.id), session=None)  # a token without an app session
     outcomes = set()
     for _ in range(8):
         a = _start(client, learner, _form(client, learner, physics["chapter"]).json()["id"])
