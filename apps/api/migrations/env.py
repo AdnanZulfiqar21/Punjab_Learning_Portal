@@ -15,6 +15,8 @@ import portal_api.modules.assessment.sessions
 import portal_api.modules.audit.models
 import portal_api.modules.content.assets
 import portal_api.modules.content.completion
+import portal_api.modules.content.concepts
+import portal_api.modules.content.inclusion
 import portal_api.modules.content.lectures
 import portal_api.modules.content.models
 import portal_api.modules.content.study

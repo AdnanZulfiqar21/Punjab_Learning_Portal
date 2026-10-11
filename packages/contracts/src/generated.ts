@@ -2190,6 +2190,110 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/studio/concepts": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Learning concepts in your subjects */
+        get: operations["list_concepts_v1_studio_concepts_get"];
+        put?: never;
+        /** Write a draft learning concept */
+        post: operations["create_concept_v1_studio_concepts_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/studio/concepts/{concept_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** One concept with its topics and prerequisites */
+        get: operations["get_concept_v1_studio_concepts__concept_id__get"];
+        /** Edit a draft concept */
+        put: operations["edit_concept_v1_studio_concepts__concept_id__put"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/studio/concepts/{concept_id}/prerequisites": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Add a prerequisite (no cycles) */
+        post: operations["add_prereq_v1_studio_concepts__concept_id__prerequisites_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/studio/concepts/{concept_id}/prerequisites/{requires_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        /** Remove a prerequisite */
+        delete: operations["remove_prereq_v1_studio_concepts__concept_id__prerequisites__requires_id__delete"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/studio/concepts/{concept_id}/publish": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Publish a concept (an independent subject reviewer) */
+        post: operations["publish_concept_v1_studio_concepts__concept_id__publish_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/studio/concepts/{concept_id}/topics": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** Map the topics that teach a concept */
+        put: operations["map_topics_v1_studio_concepts__concept_id__topics_put"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/studio/export": {
         parameters: {
             query?: never;
@@ -2339,6 +2443,92 @@ export interface paths {
         get: operations["import_report_v1_studio_imports__batch_id__report_csv_get"];
         put?: never;
         post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/studio/inclusion": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Inclusion records in your subjects */
+        get: operations["list_records_v1_studio_inclusion_get"];
+        put?: never;
+        /** Draft an inclusion record */
+        post: operations["create_record_v1_studio_inclusion_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/studio/inclusion/coverage": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Published content behind each mapped concept */
+        get: operations["inclusion_coverage_v1_studio_inclusion_coverage_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/studio/inclusion/report": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Unmapped concepts and contradictory mappings */
+        get: operations["inclusion_report_v1_studio_inclusion_report_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/studio/inclusion/{record_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** Edit a draft inclusion record */
+        put: operations["edit_record_v1_studio_inclusion__record_id__put"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/studio/inclusion/{record_id}/publish": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Publish (an independent subject reviewer) */
+        post: operations["publish_record_v1_studio_inclusion__record_id__publish_post"];
         delete?: never;
         options?: never;
         head?: never;
@@ -4774,6 +4964,82 @@ export interface components {
             /** Reason */
             reason: string;
         };
+        /** ConceptIn */
+        ConceptIn: {
+            /**
+             * Code
+             * @description Stable identifier, e.g. bio.cell.membrane-transport
+             */
+            code: string;
+            /**
+             * Statement
+             * @description The learning outcome
+             */
+            statement: string;
+            /**
+             * Subject
+             * @enum {string}
+             */
+            subject: "biology" | "chemistry" | "physics" | "computer_science" | "mathematics";
+            /** Title */
+            title: string;
+        };
+        /** ConceptOut */
+        ConceptOut: {
+            /** Code */
+            code: string;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Prerequisites */
+            prerequisites: components["schemas"]["PrerequisiteOut"][];
+            /** Published At */
+            published_at: string | null;
+            /** Source Refs */
+            source_refs: {
+                [key: string]: unknown;
+            }[];
+            /** Statement */
+            statement: string;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "draft" | "published" | "retired";
+            /** Subject */
+            subject: string;
+            /** Title */
+            title: string;
+            /** Topics */
+            topics: components["schemas"]["ConceptTopicOut"][];
+        };
+        /** ConceptPatch */
+        ConceptPatch: {
+            /** Source Refs */
+            source_refs?: components["schemas"]["SourceRefIn"][] | null;
+            /** Statement */
+            statement?: string | null;
+            /** Title */
+            title?: string | null;
+        };
+        /** ConceptTopicOut */
+        ConceptTopicOut: {
+            /** Chapter Number */
+            chapter_number: number;
+            /** Grade */
+            grade: number;
+            /** Number */
+            number: string | null;
+            /** Title */
+            title: string;
+            /**
+             * Topic Id
+             * Format: uuid
+             */
+            topic_id: string;
+        };
         /** ConsentIn */
         ConsentIn: {
             /**
@@ -4856,6 +5122,50 @@ export interface components {
             id: string;
             /** Status */
             status: string;
+        };
+        /** CoverageOut */
+        CoverageOut: {
+            /** Concepts */
+            concepts: components["schemas"]["CoverageRow"][];
+            /** Included */
+            included: number;
+            /**
+             * Scope
+             * @enum {string}
+             */
+            scope: "full_curriculum" | "board_syllabus" | "mdcat" | "ecat";
+            /** Subject */
+            subject: string;
+            /** With Lectures */
+            with_lectures: number;
+            /** With Lessons */
+            with_lessons: number;
+            /** With Questions */
+            with_questions: number;
+            /** Year */
+            year: number | null;
+        };
+        /** CoverageRow */
+        CoverageRow: {
+            /** Approved Lectures */
+            approved_lectures: number;
+            /** Code */
+            code: string;
+            /**
+             * Concept Id
+             * Format: uuid
+             */
+            concept_id: string;
+            /** Included */
+            included: boolean;
+            /** Live Lessons */
+            live_lessons: number;
+            /** Live Questions */
+            live_questions: number;
+            /** State */
+            state: ("included" | "excluded" | "not_applicable" | "unverified") | null;
+            /** Title */
+            title: string;
         };
         /** CriterionResult */
         CriterionResult: {
@@ -7016,6 +7326,26 @@ export interface components {
              */
             timezone: string;
         };
+        /** PrerequisiteIn */
+        PrerequisiteIn: {
+            /** Bridging Lesson Id */
+            bridging_lesson_id?: string | null;
+            /**
+             * Requires Id
+             * Format: uuid
+             */
+            requires_id: string;
+        };
+        /** PrerequisiteOut */
+        PrerequisiteOut: {
+            /** Bridging Lesson Id */
+            bridging_lesson_id: string | null;
+            /**
+             * Requires Id
+             * Format: uuid
+             */
+            requires_id: string;
+        };
         /** PreviewLesson */
         PreviewLesson: {
             /**
@@ -7391,6 +7721,91 @@ export interface components {
              */
             target_version: number;
         };
+        /** RecordIn */
+        RecordIn: {
+            /**
+             * Concept Id
+             * Format: uuid
+             */
+            concept_id: string;
+            /** Reason */
+            reason: string;
+            /**
+             * Scope
+             * @enum {string}
+             */
+            scope: "full_curriculum" | "board_syllabus" | "mdcat" | "ecat";
+            /**
+             * Source
+             * @description The syllabus or notice, with section or page
+             */
+            source: string;
+            /**
+             * Source Version
+             * @description e.g. the notice date or document version
+             */
+            source_version: string;
+            /**
+             * State
+             * @enum {string}
+             */
+            state: "included" | "excluded" | "not_applicable" | "unverified";
+            /** Year */
+            year?: number | null;
+        };
+        /** RecordOut */
+        RecordOut: {
+            /** Concept Code */
+            concept_code: string;
+            /**
+             * Concept Id
+             * Format: uuid
+             */
+            concept_id: string;
+            /** Concept Title */
+            concept_title: string;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Published At */
+            published_at: string | null;
+            /** Reason */
+            reason: string;
+            /**
+             * Scope
+             * @enum {string}
+             */
+            scope: "full_curriculum" | "board_syllabus" | "mdcat" | "ecat";
+            /** Source */
+            source: string;
+            /** Source Version */
+            source_version: string;
+            /**
+             * State
+             * @enum {string}
+             */
+            state: "included" | "excluded" | "not_applicable" | "unverified";
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "draft" | "published";
+            /** Year */
+            year: number | null;
+        };
+        /** RecordPatch */
+        RecordPatch: {
+            /** Reason */
+            reason?: string | null;
+            /** Source */
+            source?: string | null;
+            /** Source Version */
+            source_version?: string | null;
+            /** State */
+            state?: ("included" | "excluded" | "not_applicable" | "unverified") | null;
+        };
         /** ReferenceIn */
         ReferenceIn: {
             /**
@@ -7516,6 +7931,36 @@ export interface components {
             position: number | null;
             /** Units */
             units: number;
+        };
+        /** ReportOut */
+        ReportOut: {
+            /** Contradictions */
+            contradictions: components["schemas"]["ReportRow"][];
+            /**
+             * Scope
+             * @enum {string}
+             */
+            scope: "full_curriculum" | "board_syllabus" | "mdcat" | "ecat";
+            /** Subject */
+            subject: string;
+            /** Unmapped */
+            unmapped: components["schemas"]["ReportRow"][];
+            /** Year */
+            year: number | null;
+        };
+        /** ReportRow */
+        ReportRow: {
+            /** Code */
+            code: string;
+            /**
+             * Concept Id
+             * Format: uuid
+             */
+            concept_id: string;
+            /** Detail */
+            detail?: string | null;
+            /** Title */
+            title?: string | null;
         };
         /** ResultCounts */
         ResultCounts: {
@@ -8110,6 +8555,18 @@ export interface components {
             /** Source Id */
             source_id: string;
         };
+        /** SourceRefIn */
+        SourceRefIn: {
+            /** Pdf From */
+            pdf_from: number;
+            /** Pdf To */
+            pdf_to: number;
+            /**
+             * Source Document Id
+             * Format: uuid
+             */
+            source_document_id: string;
+        };
         /** SourceReviewIn */
         SourceReviewIn: {
             /** Note */
@@ -8544,6 +9001,11 @@ export interface components {
             points: string[];
             /** Title */
             title: string;
+        };
+        /** TopicsIn */
+        TopicsIn: {
+            /** Topic Ids */
+            topic_ids: string[];
         };
         /** TrackOut */
         TrackOut: {
@@ -13403,6 +13865,270 @@ export interface operations {
             };
         };
     };
+    list_concepts_v1_studio_concepts_get: {
+        parameters: {
+            query?: {
+                subject?: string | null;
+                grade?: number | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ConceptOut"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    create_concept_v1_studio_concepts_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ConceptIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ConceptOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_concept_v1_studio_concepts__concept_id__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                concept_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ConceptOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    edit_concept_v1_studio_concepts__concept_id__put: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                concept_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ConceptPatch"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ConceptOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    add_prereq_v1_studio_concepts__concept_id__prerequisites_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                concept_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PrerequisiteIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ConceptOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    remove_prereq_v1_studio_concepts__concept_id__prerequisites__requires_id__delete: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                concept_id: string;
+                requires_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ConceptOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    publish_concept_v1_studio_concepts__concept_id__publish_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                concept_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ConceptOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    map_topics_v1_studio_concepts__concept_id__topics_put: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                concept_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["TopicsIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ConceptOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     export_content_v1_studio_export_get: {
         parameters: {
             query: {
@@ -13713,6 +14439,204 @@ export interface operations {
                 };
                 content: {
                     "application/json": unknown;
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_records_v1_studio_inclusion_get: {
+        parameters: {
+            query?: {
+                scope?: ("full_curriculum" | "board_syllabus" | "mdcat" | "ecat") | null;
+                year?: number | null;
+                subject?: string | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RecordOut"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    create_record_v1_studio_inclusion_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["RecordIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RecordOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    inclusion_coverage_v1_studio_inclusion_coverage_get: {
+        parameters: {
+            query: {
+                subject: string;
+                scope: "full_curriculum" | "board_syllabus" | "mdcat" | "ecat";
+                year?: number | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CoverageOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    inclusion_report_v1_studio_inclusion_report_get: {
+        parameters: {
+            query: {
+                subject: string;
+                scope: "full_curriculum" | "board_syllabus" | "mdcat" | "ecat";
+                year?: number | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ReportOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    edit_record_v1_studio_inclusion__record_id__put: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                record_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["RecordPatch"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RecordOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    publish_record_v1_studio_inclusion__record_id__publish_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                record_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RecordOut"];
                 };
             };
             /** @description Validation Error */
