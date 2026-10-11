@@ -152,6 +152,13 @@ def test_a_lecture_is_approved_only_by_an_independent_review(client: TestClient,
         client.put(f"{url}/transcript", headers=team["author"].headers, json={"scenes": edited[:1]}).status_code == 422
     )
 
+    markers = [
+        {"scene_id": "s1", "start_s": 0, "label": "Fixture title"},
+        {"scene_id": "s2", "start_s": 20, "label": "Summary"},
+    ]
+    no_markers = client.post(f"{url}/submit", headers=team["author"].headers)
+    assert no_markers.status_code == 422  # chapter markers are part of a finished lecture (MARKERS-01)
+    assert client.put(f"{url}/markers", headers=team["author"].headers, json={"scenes": markers}).status_code == 200
     assert client.post(f"{url}/submit", headers=team["author"].headers).status_code == 200
     review = {"decision": "approve", "checklist": REVIEW, "notes": "Fixture: terms and pronunciation checked."}
     assert client.post(f"{url}/review", headers=team["author"].headers, json=review).status_code == 403  # producer

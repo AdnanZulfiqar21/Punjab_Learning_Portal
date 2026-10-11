@@ -2755,6 +2755,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/studio/lectures/{lecture_id}/markers": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** Set where each storyboard scene starts in the current master video (chapter markers) */
+        put: operations["set_markers_v1_studio_lectures__lecture_id__markers_put"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/studio/lectures/{lecture_id}/master": {
         parameters: {
             query?: never;
@@ -5991,6 +6008,22 @@ export interface components {
              * Format: uuid
              */
             id: string;
+            /**
+             * Marker Proposal
+             * @description Starting point: the storyboard's planned scene times
+             */
+            marker_proposal: {
+                [key: string]: unknown;
+            }[];
+            /** Markers */
+            markers: {
+                [key: string]: unknown;
+            } | null;
+            /**
+             * Markers Current
+             * @description Timed against the current master video
+             */
+            markers_current: boolean;
             /** Master */
             master: {
                 [key: string]: unknown;
@@ -6225,6 +6258,23 @@ export interface components {
                     [key: string]: unknown;
                 };
             };
+        };
+        /** MarkerIn */
+        MarkerIn: {
+            /**
+             * Label
+             * @description The concept section a learner sees in the chapter list
+             */
+            label: string;
+            /** Scene Id */
+            scene_id: string;
+            /** Start S */
+            start_s: number;
+        };
+        /** MarkersIn */
+        MarkersIn: {
+            /** Scenes */
+            scenes: components["schemas"]["MarkerIn"][];
         };
         /** MasterIn */
         MasterIn: {
@@ -14455,6 +14505,41 @@ export interface operations {
         requestBody: {
             content: {
                 "application/json": components["schemas"]["CaptionIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["LectureOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    set_markers_v1_studio_lectures__lecture_id__markers_put: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                lecture_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["MarkersIn"];
             };
         };
         responses: {

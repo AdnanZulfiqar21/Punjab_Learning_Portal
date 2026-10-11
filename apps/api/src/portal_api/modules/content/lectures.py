@@ -14,6 +14,10 @@ traceable record that makes one academically approvable, separate from platform 
   and serving video waits on object storage and the media provider (B03, B05);
 * an **editable transcript**, one entry per storyboard scene, starting from the storyboard's narration;
 * **captions** per language: reviewed WebVTT versions in the asset archive (ASSETS-01), same class and subject;
+* **chapter markers** (P07.S3.T2, MARKERS-01): where each storyboard scene starts in the master, keyed by the
+  storyboard's stable scene ids (so a learner's later bookmark can say "scene s3, 12 s in" and stay meaningful when the
+  video is replaced) and pinned to the master's SHA-256. A new master marks them for re-timing; submission needs
+  current markers;
 * an **independent review**: a subject reviewer in scope who didn't produce the lecture checks accuracy, voice/text
   alignment, pacing, spelling, diagrams, captions, rights and textbook-source verification, and notes scientific
   terms and pronunciation. Only an approving review with every check passed makes a lecture *academically
@@ -24,6 +28,7 @@ Nothing here is shown to learners yet: learner playback needs the media provider
 
 from __future__ import annotations
 
+import itertools
 import uuid
 from datetime import datetime
 from typing import Annotated, Any, Literal
@@ -100,6 +105,8 @@ class Lecture(Base):
     master: Mapped[dict[str, Any] | None] = mapped_column(JSONB)
     transcript: Mapped[list[dict[str, Any]]] = mapped_column(JSONB, default=list)
     captions: Mapped[dict[str, str]] = mapped_column(JSONB, default=dict)
+    # MARKERS-01: {"master_sha256": ..., "scenes": [{"scene_id", "start_s", "label"}]}, timed against that master.
+    markers: Mapped[dict[str, Any] | None] = mapped_column(JSONB)
     review: Mapped[dict[str, Any] | None] = mapped_column(JSONB)
     contributors: Mapped[list[str]] = mapped_column(JSONB, default=list)
     created_by: Mapped[uuid.UUID] = mapped_column(ForeignKey("app_user.id", ondelete="RESTRICT"))
@@ -159,6 +166,18 @@ class TranscriptIn(BaseModel):
     scenes: list[TranscriptScene] = Field(max_length=60)
 
 
+class MarkerIn(BaseModel):
+    scene_id: str = Field(min_length=1, max_length=20)
+    start_s: int = Field(ge=0, le=7200)
+    label: str = Field(
+        min_length=1, max_length=120, description="The concept section a learner sees in the chapter list"
+    )
+
+
+class MarkersIn(BaseModel):
+    scenes: list[MarkerIn] = Field(max_length=60)
+
+
 class CaptionIn(BaseModel):
     language: Literal["roman_ur", "ur", "en"]
     asset_version_id: uuid.UUID
@@ -185,6 +204,9 @@ class LectureOut(BaseModel):
     master: dict[str, Any] | None
     transcript: list[dict[str, Any]]
     captions: dict[str, str]
+    markers: dict[str, Any] | None
+    markers_current: bool = Field(description="Timed against the current master video")
+    marker_proposal: list[dict[str, Any]] = Field(description="Starting point: the storyboard's planned scene times")
     review: dict[str, Any] | None
     missing: list[str] = Field(description="What still blocks submission for review")
     approved_at: datetime | None
@@ -222,6 +244,10 @@ def _missing(db: Session, lec: Lecture) -> list[str]:
     scene_ids = [s.get("id") for s in (version.body or {}).get("scenes", [])] if version is not None else []
     if [t.get("scene_id") for t in lec.transcript] != scene_ids:
         out.append("The transcript needs one entry for every storyboard scene, in order.")
+    if lec.master is not None and lec.markers is None:
+        out.append("Mark where each scene starts in the master video (chapter markers).")
+    elif lec.master is not None and not _markers_current(lec):
+        out.append("The master video changed since the chapter markers were set; re-time them.")
     if lec.narration_language not in lec.captions:
         out.append(f"Attach reviewed {LANGUAGE_NAME[lec.narration_language]} captions from the asset archive.")
     for lang, vid in lec.captions.items():
@@ -230,6 +256,17 @@ def _missing(db: Session, lec: Lecture) -> list[str]:
     if voice is None or voice.status != "approved":
         out.append("The narration voice is no longer approved; choose an approved voice.")
     return out
+
+
+def _scenes(db: Session, lec: Lecture) -> list[dict[str, Any]]:
+    from portal_api.modules.content.models import ContentVersion
+
+    version = db.get(ContentVersion, lec.storyboard_version_id)
+    return list((version.body or {}).get("scenes", [])) if version is not None else []
+
+
+def _markers_current(lec: Lecture) -> bool:
+    return bool(lec.markers and lec.master and lec.markers.get("master_sha256") == lec.master.get("sha256"))
 
 
 def _caption_problems(db: Session, lec: Lecture, version_id: str) -> list[str]:
@@ -270,6 +307,16 @@ def _out(db: Session, lec: Lecture) -> LectureOut:
         master=lec.master,
         transcript=lec.transcript,
         captions=lec.captions,
+        markers=lec.markers,
+        markers_current=_markers_current(lec),
+        marker_proposal=[
+            {
+                "scene_id": s.get("id"),
+                "start_s": s.get("start_s", 0),
+                "label": str(s.get("on_screen_text") or s.get("id") or "")[:120],
+            }
+            for s in _scenes(db, lec)
+        ],
         review=lec.review,
         missing=_missing(db, lec) if lec.status in EDITABLE else [],
         approved_at=lec.approved_at,
@@ -446,6 +493,39 @@ def set_transcript(db: DB, who: Author, lecture_id: uuid.UUID, body: TranscriptI
     if [s.scene_id for s in body.scenes] != scene_ids:
         raise Unprocessable("Give one transcript entry for every storyboard scene, in order.", scenes=scene_ids)
     lec.transcript = [s.model_dump() for s in body.scenes]
+    db.commit()
+    db.refresh(lec)
+    return _out(db, lec)
+
+
+@router.put(
+    "/lectures/{lecture_id}/markers",
+    response_model=LectureOut,
+    summary="Set where each storyboard scene starts in the current master video (chapter markers)",
+)
+def set_markers(db: DB, who: Author, lecture_id: uuid.UUID, body: MarkersIn) -> LectureOut:
+    lec = _editable(db, who, lecture_id)
+    if lec.master is None:
+        raise Unprocessable("Register or upload the master video first; markers are timed against it.")
+    scene_ids = [s.get("id") for s in _scenes(db, lec)]
+    errors = []
+    if [m.scene_id for m in body.scenes] != scene_ids:
+        errors.append("Give one marker for every storyboard scene, in storyboard order.")
+    starts = [m.start_s for m in body.scenes]
+    if starts and starts[0] != 0:
+        errors.append("The first scene starts the video, at 0 s.")
+    if any(b <= a for a, b in itertools.pairwise(starts)):
+        errors.append("Each scene must start after the one before it.")
+    duration = int(lec.master.get("duration_s") or 0)
+    if starts and starts[-1] >= duration:
+        errors.append(f"Every scene must start before the end of the master video ({duration} s).")
+    if errors:
+        raise Unprocessable(
+            "These markers don't fit the storyboard and the master video.", errors=errors, scenes=scene_ids
+        )
+    lec.markers = {"master_sha256": lec.master.get("sha256"), "scenes": [m.model_dump() for m in body.scenes]}
+    record(db, actor=who.user.id, action="lecture.markers_set", target_type="lecture", target_id=str(lec.id),
+           details={"master_sha256": lec.master.get("sha256"), "scenes": len(body.scenes)})  # fmt: skip
     db.commit()
     db.refresh(lec)
     return _out(db, lec)
