@@ -2,10 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
-import type { Lesson, TopicNode } from "@portal/contracts";
+import type { FavouriteTopic, Lesson, StudyNote, TopicNode } from "@portal/contracts";
 import { setLessonCompleted } from "@/app/actions/lessons";
 import { LessonBlocks } from "@/components/lesson-blocks";
 import { LessonStartBeacon } from "@/components/lesson-start-beacon";
+import { FavouriteButton, LessonNote, SaveFormulaButton } from "@/components/study-tools";
 import { getChapter, getLessons } from "@/lib/api";
 import { CONTENT_STATE_TEXT, GRADE_LABEL, assessmentSummary, pageRange } from "@/lib/format";
 import { Badge, Breadcrumbs, Notice, SkeletonLines } from "@/components/ui";
@@ -77,11 +78,9 @@ async function ChapterView({ id, lang }: { id: string; lang: string }) {
         {ch.topics.length === 0 ? (
           <p className="text-muted">No topics are recorded for this chapter.</p>
         ) : (
-          <ol className="divide-y divide-border rounded-xl border border-border bg-surface">
-            {ch.topics.map((t) => (
-              <TopicItem key={t.id} topic={t} />
-            ))}
-          </ol>
+          <Suspense fallback={<TopicList topics={ch.topics} favourites={null} />}>
+            <Topics topics={ch.topics} />
+          </Suspense>
         )}
       </section>
 
@@ -162,6 +161,10 @@ async function Lessons({ chapterId, topics, lang }: { chapterId: string; topics:
   const token = await sessionToken();
   const doneRes = token && lessons.some((l) => !l.locked) ? await api<string[]>(`/v1/me/chapters/${encodeURIComponent(chapterId)}/completed-lessons`, { token }) : null;
   const done = new Set(doneRes?.ok ? doneRes.data : []);
+  // STUDY-TOOLS-01: each readable lesson's private note (with its revision, so edits from stale copies are caught).
+  const readable = token ? lessons.filter((l) => !l.locked && l.body) : [];
+  const noteRes = await Promise.all(readable.map((l) => api<StudyNote>(`/v1/me/lessons/${encodeURIComponent(l.id)}/note`, { token })));
+  const notes = new Map(readable.flatMap((l, i) => (noteRes[i].ok ? [[l.id, noteRes[i].data] as const] : [])));
   const titles = topicTitles(topics);
   return (
     <section aria-labelledby="lessons-heading" className="space-y-4">
@@ -221,7 +224,12 @@ async function Lessons({ chapterId, topics, lang }: { chapterId: string; topics:
             ) : (
               <div lang={l.language === "ur" ? "ur" : "en"} dir={l.language === "ur" ? "rtl" : undefined}>
                 {token && <LessonStartBeacon lessonId={l.id} language={l.language} />}
-                <LessonBlocks blocks={l.body.blocks as { type: string }[]} headingOffset={2} assetUrl={(v) => `/learn/lessons/${l.id}/assets/${v}`} />
+                <LessonBlocks
+                  blocks={l.body.blocks as { type: string }[]}
+                  headingOffset={2}
+                  assetUrl={(v) => `/learn/lessons/${l.id}/assets/${v}`}
+                  equationAction={token ? (i) => <SaveFormulaButton lessonId={l.id} index={i} /> : undefined}
+                />
               </div>
             )}
             {token && !l.locked && l.body && (
@@ -232,6 +240,7 @@ async function Lessons({ chapterId, topics, lang }: { chapterId: string; topics:
                 <span className="text-xs text-muted">Completion tracks your reading only. It isn&apos;t evidence of what you know.</span>
               </form>
             )}
+            {notes.has(l.id) && <LessonNote lessonId={l.id} initial={notes.get(l.id)!} />}
             <p className="border-t border-border pt-3 text-sm text-muted">
               Textbook pages (PDF):{" "}
               {(l.source_refs as { pdf_from: number; pdf_to: number }[])
@@ -245,7 +254,27 @@ async function Lessons({ chapterId, topics, lang }: { chapterId: string; topics:
   );
 }
 
-function TopicItem({ topic }: { topic: TopicNode }) {
+/** Topic outline with favourite stars for a signed-in learner (STUDY-TOOLS-01). The outline itself stays public. */
+async function Topics({ topics }: { topics: TopicNode[] }) {
+  const token = await sessionToken();
+  const res = token ? await api<FavouriteTopic[]>("/v1/me/favourites", { token }) : null;
+  return <TopicList topics={topics} favourites={res?.ok ? new Set(res.data.map((f) => f.topic_id)) : null} />;
+}
+
+function TopicList({ topics, favourites }: { topics: TopicNode[]; favourites: Set<string> | null }) {
+  return (
+    <ol className="divide-y divide-border rounded-xl border border-border bg-surface">
+      {topics.map((t) => (
+        <TopicItem key={t.id} topic={t} favourites={favourites} />
+      ))}
+    </ol>
+  );
+}
+
+function TopicItem({ topic, favourites }: { topic: TopicNode; favourites: Set<string> | null }) {
+  const star = favourites && (
+    <FavouriteButton topicId={topic.id} label={topic.number ? `${topic.number} ${topic.title}` : topic.title} initial={favourites.has(topic.id)} />
+  );
   const hasDetail = topic.children.length > 0 || topic.points.length > 0;
   const title = (
     <span className="flex flex-1 items-baseline gap-3">
@@ -262,10 +291,16 @@ function TopicItem({ topic }: { topic: TopicNode }) {
       )}
     </span>
   );
-  if (!hasDetail) return <li className="px-4 py-3">{title}</li>;
+  if (!hasDetail)
+    return (
+      <li className="flex items-start gap-2 px-4 py-3">
+        {title}
+        {star}
+      </li>
+    );
   return (
-    <li>
-      <details className="group px-4 py-3">
+    <li className="flex items-start gap-2 pr-4">
+      <details className="group flex-1 py-3 pl-4">
         <summary className="flex cursor-pointer list-none items-baseline gap-2">
           <span aria-hidden="true" className="text-muted transition-transform group-open:rotate-90">
             ›
@@ -283,12 +318,13 @@ function TopicItem({ topic }: { topic: TopicNode }) {
           {topic.children.length > 0 && (
             <ol className="divide-y divide-border rounded-lg border border-border">
               {topic.children.map((c) => (
-                <TopicItem key={c.id} topic={c} />
+                <TopicItem key={c.id} topic={c} favourites={favourites} />
               ))}
             </ol>
           )}
         </div>
       </details>
+      <span className="pt-2.5">{star}</span>
     </li>
   );
 }

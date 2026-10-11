@@ -17,7 +17,8 @@ export function DashboardView({ d, email }: { d: Dashboard; email: string }) {
   const card = "space-y-2 rounded-xl border border-border bg-surface p-4";
   return (
     <div className="space-y-8">
-      <div>
+      <div className="flex flex-wrap items-start justify-between gap-3">
+        <div>
         <h1 className="text-2xl font-semibold tracking-tight">Your dashboard</h1>
         <p className="text-sm text-muted">
           {email}
@@ -28,6 +29,10 @@ export function DashboardView({ d, email }: { d: Dashboard; email: string }) {
             </>
           )}
         </p>
+        </div>
+        <Link href="/study" className="rounded-lg border border-border bg-surface px-3 py-1.5 text-sm hover:border-accent">
+          My study tools
+        </Link>
       </div>
       {!d.profile && (
         <Notice title="Choose your class and subjects">

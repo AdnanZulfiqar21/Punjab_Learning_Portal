@@ -54,7 +54,7 @@ test("signed in: dashboard, practice, help and account have no serious accessibi
   await audit(page, "/");
   await expect(page.getByRole("heading", { level: 1, name: "Your dashboard" })).toBeVisible();
   await expect(page.getByRole("heading", { level: 3 })).toHaveText(["Syllabus coverage", "Content completed", "Demonstrated knowledge"]);
-  for (const path of ["/account", "/practice", "/help", "/help/new", "/notifications"]) {
+  for (const path of ["/account", "/practice", "/study", "/help", "/help/new", "/notifications"]) {
     await audit(page, path);
     expect(new URL(page.url()).pathname, `${path} should not redirect a signed-in learner`).toBe(path);
   }

@@ -3583,6 +3583,63 @@
         "title": "ExportOut",
         "type": "object"
       },
+      "FavouriteOut": {
+        "properties": {
+          "chapter_id": {
+            "format": "uuid",
+            "title": "Chapter Id",
+            "type": "string"
+          },
+          "chapter_number": {
+            "title": "Chapter Number",
+            "type": "integer"
+          },
+          "chapter_title": {
+            "title": "Chapter Title",
+            "type": "string"
+          },
+          "grade": {
+            "title": "Grade",
+            "type": "integer"
+          },
+          "number": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Number"
+          },
+          "subject": {
+            "title": "Subject",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "topic_id": {
+            "format": "uuid",
+            "title": "Topic Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "topic_id",
+          "number",
+          "title",
+          "grade",
+          "subject",
+          "chapter_id",
+          "chapter_number",
+          "chapter_title"
+        ],
+        "title": "FavouriteOut",
+        "type": "object"
+      },
       "FeatureIn": {
         "properties": {
           "enabled": {
@@ -3865,6 +3922,89 @@
           "created_at"
         ],
         "title": "FormOut",
+        "type": "object"
+      },
+      "FormulaIn": {
+        "properties": {
+          "block_index": {
+            "maximum": 500.0,
+            "minimum": 0.0,
+            "title": "Block Index",
+            "type": "integer"
+          },
+          "lesson_id": {
+            "format": "uuid",
+            "title": "Lesson Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "lesson_id",
+          "block_index"
+        ],
+        "title": "FormulaIn",
+        "type": "object"
+      },
+      "FormulaOut": {
+        "properties": {
+          "chapter_id": {
+            "format": "uuid",
+            "title": "Chapter Id",
+            "type": "string"
+          },
+          "grade": {
+            "title": "Grade",
+            "type": "integer"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "latex": {
+            "title": "Latex",
+            "type": "string"
+          },
+          "lesson_id": {
+            "format": "uuid",
+            "title": "Lesson Id",
+            "type": "string"
+          },
+          "lesson_title": {
+            "title": "Lesson Title",
+            "type": "string"
+          },
+          "saved_at": {
+            "format": "date-time",
+            "title": "Saved At",
+            "type": "string"
+          },
+          "subject": {
+            "title": "Subject",
+            "type": "string"
+          },
+          "text_alt": {
+            "title": "Text Alt",
+            "type": "string"
+          },
+          "updated_since": {
+            "title": "Updated Since",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "lesson_id",
+          "lesson_title",
+          "chapter_id",
+          "grade",
+          "subject",
+          "latex",
+          "text_alt",
+          "saved_at",
+          "updated_since"
+        ],
+        "title": "FormulaOut",
         "type": "object"
       },
       "FunnelCohort": {
@@ -6651,18 +6791,114 @@
         "title": "NotCountedOut",
         "type": "object"
       },
-      "NoteIn": {
+      "NoteListed": {
         "properties": {
-          "note": {
-            "maxLength": 2000,
-            "title": "Note",
+          "chapter_id": {
+            "format": "uuid",
+            "title": "Chapter Id",
             "type": "string"
+          },
+          "chapter_number": {
+            "title": "Chapter Number",
+            "type": "integer"
+          },
+          "deleted": {
+            "title": "Deleted",
+            "type": "boolean"
+          },
+          "grade": {
+            "title": "Grade",
+            "type": "integer"
+          },
+          "lesson_id": {
+            "format": "uuid",
+            "title": "Lesson Id",
+            "type": "string"
+          },
+          "lesson_title": {
+            "title": "Lesson Title",
+            "type": "string"
+          },
+          "revision": {
+            "title": "Revision",
+            "type": "integer"
+          },
+          "subject": {
+            "title": "Subject",
+            "type": "string"
+          },
+          "text": {
+            "title": "Text",
+            "type": "string"
+          },
+          "updated_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Updated At"
           }
         },
         "required": [
-          "note"
+          "lesson_id",
+          "text",
+          "revision",
+          "deleted",
+          "updated_at",
+          "lesson_title",
+          "grade",
+          "subject",
+          "chapter_id",
+          "chapter_number"
         ],
-        "title": "NoteIn",
+        "title": "NoteListed",
+        "type": "object"
+      },
+      "NoteOut": {
+        "properties": {
+          "deleted": {
+            "title": "Deleted",
+            "type": "boolean"
+          },
+          "lesson_id": {
+            "format": "uuid",
+            "title": "Lesson Id",
+            "type": "string"
+          },
+          "revision": {
+            "title": "Revision",
+            "type": "integer"
+          },
+          "text": {
+            "title": "Text",
+            "type": "string"
+          },
+          "updated_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Updated At"
+          }
+        },
+        "required": [
+          "lesson_id",
+          "text",
+          "revision",
+          "deleted",
+          "updated_at"
+        ],
+        "title": "NoteOut",
         "type": "object"
       },
       "NotebookEntryOut": {
@@ -12829,6 +13065,20 @@
         "title": "RevokeIn",
         "type": "object"
       },
+      "portal_api__modules__assessment__router__NoteIn": {
+        "properties": {
+          "note": {
+            "maxLength": 2000,
+            "title": "Note",
+            "type": "string"
+          }
+        },
+        "required": [
+          "note"
+        ],
+        "title": "NoteIn",
+        "type": "object"
+      },
       "portal_api__modules__assessment__router__ReviewIn": {
         "properties": {
           "count": {
@@ -13006,6 +13256,26 @@
           }
         },
         "title": "SubmitIn",
+        "type": "object"
+      },
+      "portal_api__modules__content__study__NoteIn": {
+        "properties": {
+          "base_revision": {
+            "minimum": 0.0,
+            "title": "Base Revision",
+            "type": "integer"
+          },
+          "text": {
+            "maxLength": 5000,
+            "title": "Text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "text",
+          "base_revision"
+        ],
+        "title": "NoteIn",
         "type": "object"
       },
       "portal_api__modules__help__router__DraftIn": {
@@ -15966,6 +16236,201 @@
         ]
       }
     },
+    "/v1/me/favourites": {
+      "get": {
+        "operationId": "list_favourites_v1_me_favourites_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/FavouriteOut"
+                  },
+                  "title": "Response List Favourites V1 Me Favourites Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Your favourite topics, in book order",
+        "tags": [
+          "study"
+        ]
+      }
+    },
+    "/v1/me/favourites/topics/{topic_id}": {
+      "delete": {
+        "operationId": "drop_favourite_v1_me_favourites_topics__topic_id__delete",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "topic_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Topic Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Remove a topic from your favourites",
+        "tags": [
+          "study"
+        ]
+      },
+      "put": {
+        "operationId": "add_favourite_v1_me_favourites_topics__topic_id__put",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "topic_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Topic Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Add a topic to your favourites",
+        "tags": [
+          "study"
+        ]
+      }
+    },
+    "/v1/me/formulas": {
+      "get": {
+        "operationId": "list_formulas_v1_me_formulas_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/FormulaOut"
+                  },
+                  "title": "Response List Formulas V1 Me Formulas Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Your saved formulas, newest first",
+        "tags": [
+          "study"
+        ]
+      },
+      "post": {
+        "operationId": "add_formula_v1_me_formulas_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FormulaIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FormulaOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Save a formula from a lesson",
+        "tags": [
+          "study"
+        ]
+      }
+    },
+    "/v1/me/formulas/{formula_id}": {
+      "delete": {
+        "operationId": "drop_formula_v1_me_formulas__formula_id__delete",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "formula_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Formula Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Remove a saved formula",
+        "tags": [
+          "study"
+        ]
+      }
+    },
     "/v1/me/lessons/{item_id}/complete": {
       "delete": {
         "operationId": "undo_lesson_v1_me_lessons__item_id__complete_delete",
@@ -16033,6 +16498,151 @@
         "summary": "Mark a lesson you can read as completed",
         "tags": [
           "lessons"
+        ]
+      }
+    },
+    "/v1/me/lessons/{item_id}/note": {
+      "delete": {
+        "operationId": "remove_note_v1_me_lessons__item_id__note_delete",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "item_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Item Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "base_revision",
+            "required": true,
+            "schema": {
+              "minimum": 0,
+              "title": "Base Revision",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NoteOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Delete your note on a lesson",
+        "tags": [
+          "study"
+        ]
+      },
+      "get": {
+        "operationId": "read_note_v1_me_lessons__item_id__note_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "item_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Item Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NoteOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Your private note on a lesson",
+        "tags": [
+          "study"
+        ]
+      },
+      "put": {
+        "operationId": "write_note_v1_me_lessons__item_id__note_put",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "item_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Item Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/portal_api__modules__content__study__NoteIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NoteOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Save your note (refused with the current note if it changed or was deleted elsewhere)",
+        "tags": [
+          "study"
         ]
       }
     },
@@ -16134,7 +16744,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NoteIn"
+                "$ref": "#/components/schemas/portal_api__modules__assessment__router__NoteIn"
               }
             }
           },
@@ -16165,6 +16775,31 @@
         "summary": "Add or change your private note",
         "tags": [
           "practice"
+        ]
+      }
+    },
+    "/v1/me/notes": {
+      "get": {
+        "operationId": "list_notes_v1_me_notes_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/NoteListed"
+                  },
+                  "title": "Response List Notes V1 Me Notes Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "All your lesson notes, newest first",
+        "tags": [
+          "study"
         ]
       }
     },

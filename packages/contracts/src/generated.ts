@@ -1021,6 +1021,76 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/me/favourites": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Your favourite topics, in book order */
+        get: operations["list_favourites_v1_me_favourites_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/me/favourites/topics/{topic_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** Add a topic to your favourites */
+        put: operations["add_favourite_v1_me_favourites_topics__topic_id__put"];
+        post?: never;
+        /** Remove a topic from your favourites */
+        delete: operations["drop_favourite_v1_me_favourites_topics__topic_id__delete"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/me/formulas": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Your saved formulas, newest first */
+        get: operations["list_formulas_v1_me_formulas_get"];
+        put?: never;
+        /** Save a formula from a lesson */
+        post: operations["add_formula_v1_me_formulas_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/me/formulas/{formula_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        /** Remove a saved formula */
+        delete: operations["drop_formula_v1_me_formulas__formula_id__delete"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/me/lessons/{item_id}/complete": {
         parameters: {
             query?: never;
@@ -1034,6 +1104,25 @@ export interface paths {
         post: operations["complete_lesson_v1_me_lessons__item_id__complete_post"];
         /** Undo a lesson completion */
         delete: operations["undo_lesson_v1_me_lessons__item_id__complete_delete"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/me/lessons/{item_id}/note": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Your private note on a lesson */
+        get: operations["read_note_v1_me_lessons__item_id__note_get"];
+        /** Save your note (refused with the current note if it changed or was deleted elsewhere) */
+        put: operations["write_note_v1_me_lessons__item_id__note_put"];
+        post?: never;
+        /** Delete your note on a lesson */
+        delete: operations["remove_note_v1_me_lessons__item_id__note_delete"];
         options?: never;
         head?: never;
         patch?: never;
@@ -1083,6 +1172,23 @@ export interface paths {
         get?: never;
         /** Add or change your private note */
         put: operations["note_entry_v1_me_notebook__entry_id__put"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/me/notes": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** All your lesson notes, newest first */
+        get: operations["list_notes_v1_me_notes_get"];
+        put?: never;
         post?: never;
         delete?: never;
         options?: never;
@@ -5003,6 +5109,31 @@ export interface components {
             /** Tries */
             tries: number;
         };
+        /** FavouriteOut */
+        FavouriteOut: {
+            /**
+             * Chapter Id
+             * Format: uuid
+             */
+            chapter_id: string;
+            /** Chapter Number */
+            chapter_number: number;
+            /** Chapter Title */
+            chapter_title: string;
+            /** Grade */
+            grade: number;
+            /** Number */
+            number: string | null;
+            /** Subject */
+            subject: string;
+            /** Title */
+            title: string;
+            /**
+             * Topic Id
+             * Format: uuid
+             */
+            topic_id: string;
+        };
         /** FeatureIn */
         FeatureIn: {
             /** Enabled */
@@ -5107,6 +5238,51 @@ export interface components {
             };
             /** Subject */
             subject: string;
+        };
+        /** FormulaIn */
+        FormulaIn: {
+            /** Block Index */
+            block_index: number;
+            /**
+             * Lesson Id
+             * Format: uuid
+             */
+            lesson_id: string;
+        };
+        /** FormulaOut */
+        FormulaOut: {
+            /**
+             * Chapter Id
+             * Format: uuid
+             */
+            chapter_id: string;
+            /** Grade */
+            grade: number;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Latex */
+            latex: string;
+            /**
+             * Lesson Id
+             * Format: uuid
+             */
+            lesson_id: string;
+            /** Lesson Title */
+            lesson_title: string;
+            /**
+             * Saved At
+             * Format: date-time
+             */
+            saved_at: string;
+            /** Subject */
+            subject: string;
+            /** Text Alt */
+            text_alt: string;
+            /** Updated Since */
+            updated_since: boolean;
         };
         /** FunnelCohort */
         FunnelCohort: {
@@ -6220,10 +6396,50 @@ export interface components {
              */
             reason: "late" | "finalised" | "invalid";
         };
-        /** NoteIn */
-        NoteIn: {
-            /** Note */
-            note: string;
+        /** NoteListed */
+        NoteListed: {
+            /**
+             * Chapter Id
+             * Format: uuid
+             */
+            chapter_id: string;
+            /** Chapter Number */
+            chapter_number: number;
+            /** Deleted */
+            deleted: boolean;
+            /** Grade */
+            grade: number;
+            /**
+             * Lesson Id
+             * Format: uuid
+             */
+            lesson_id: string;
+            /** Lesson Title */
+            lesson_title: string;
+            /** Revision */
+            revision: number;
+            /** Subject */
+            subject: string;
+            /** Text */
+            text: string;
+            /** Updated At */
+            updated_at: string | null;
+        };
+        /** NoteOut */
+        NoteOut: {
+            /** Deleted */
+            deleted: boolean;
+            /**
+             * Lesson Id
+             * Format: uuid
+             */
+            lesson_id: string;
+            /** Revision */
+            revision: number;
+            /** Text */
+            text: string;
+            /** Updated At */
+            updated_at: string | null;
         };
         /** NotebookEntryOut */
         NotebookEntryOut: {
@@ -8713,6 +8929,11 @@ export interface components {
             /** Reason */
             reason: string;
         };
+        /** NoteIn */
+        portal_api__modules__assessment__router__NoteIn: {
+            /** Note */
+            note: string;
+        };
         /** ReviewIn */
         portal_api__modules__assessment__router__ReviewIn: {
             /**
@@ -8791,6 +9012,13 @@ export interface components {
         portal_api__modules__content__schemas__SubmitIn: {
             /** Note */
             note?: string | null;
+        };
+        /** NoteIn */
+        portal_api__modules__content__study__NoteIn: {
+            /** Base Revision */
+            base_revision: number;
+            /** Text */
+            text: string;
         };
         /** DraftIn */
         portal_api__modules__help__router__DraftIn: {
@@ -10703,6 +10931,166 @@ export interface operations {
             };
         };
     };
+    list_favourites_v1_me_favourites_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["FavouriteOut"][];
+                };
+            };
+        };
+    };
+    add_favourite_v1_me_favourites_topics__topic_id__put: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                topic_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    drop_favourite_v1_me_favourites_topics__topic_id__delete: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                topic_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_formulas_v1_me_formulas_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["FormulaOut"][];
+                };
+            };
+        };
+    };
+    add_formula_v1_me_formulas_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["FormulaIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["FormulaOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    drop_formula_v1_me_formulas__formula_id__delete: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                formula_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     complete_lesson_v1_me_lessons__item_id__complete_post: {
         parameters: {
             query?: never;
@@ -10749,6 +11137,105 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    read_note_v1_me_lessons__item_id__note_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                item_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NoteOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    write_note_v1_me_lessons__item_id__note_put: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                item_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["portal_api__modules__content__study__NoteIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NoteOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    remove_note_v1_me_lessons__item_id__note_delete: {
+        parameters: {
+            query: {
+                base_revision: number;
+            };
+            header?: never;
+            path: {
+                item_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NoteOut"];
+                };
             };
             /** @description Validation Error */
             422: {
@@ -10827,7 +11314,7 @@ export interface operations {
         };
         requestBody: {
             content: {
-                "application/json": components["schemas"]["NoteIn"];
+                "application/json": components["schemas"]["portal_api__modules__assessment__router__NoteIn"];
             };
         };
         responses: {
@@ -10847,6 +11334,26 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_notes_v1_me_notes_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NoteListed"][];
                 };
             };
         };
