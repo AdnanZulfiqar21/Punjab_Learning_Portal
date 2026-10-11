@@ -137,8 +137,9 @@ def create_form(
     feedback_mode: str,
     scope_mode: str = "chapters",
     half: int | None = None,
+    mix: list[tuple[str, int]] | None = None,
 ) -> PracticeForm:
-    req = {
+    req: dict[str, Any] = {
         "grade": grade,
         "subject": subject,
         "scope": scope_mode,
@@ -149,6 +150,8 @@ def create_form(
         "timed_minutes": timed_minutes,
         "feedback_mode": feedback_mode,
     }
+    if scope_mode == "multi_subject":  # only then, so earlier request hashes stay valid for idempotent retries
+        req["mix"] = [list(m) for m in mix or []]
     rhash = _request_hash(req)
     existing = db.scalar(
         select(PracticeForm).where(
@@ -163,6 +166,90 @@ def create_form(
     from portal_api.modules.access import service as access
 
     access.require_access(db, who.user.id, purpose="Practice tests")
+    if scope_mode == "multi_subject":
+        seed, chosen, scope = _multi_subject(db, grade, mix or [], question_count, chapter_ids, topic_ids, half)
+        subject = mix[0][0] if mix else subject
+    else:
+        seed, chosen, scope = _single_subject(
+            db, grade, subject, scope_mode, half, chapter_ids, topic_ids, question_count
+        )
+    form = PracticeForm(
+        id=uuid.uuid4(),
+        owner_id=who.user.id,
+        idempotency_key=idempotency_key,
+        request_hash=rhash,
+        kind="practice",
+        grade_number=grade,
+        subject_code=subject,
+        scope=scope,
+        seed=seed,
+        question_count=question_count,
+        duration_s=timed_minutes * 60 if timed_minutes else None,
+        late_write_tolerance_ms=SELF_PACED_TOLERANCE_MS if timed_minutes else 0,
+        feedback_mode=feedback_mode,
+        negative_marks=0,
+        invalid_item_treatment="EXCLUDE",
+    )
+    return _freeze(db, who, form, chosen, idempotency_key, rhash)
+
+
+def _multi_subject(
+    db: Session,
+    grade: int,
+    mix: list[tuple[str, int]],
+    question_count: int,
+    chapter_ids: list[uuid.UUID],
+    topic_ids: list[uuid.UUID],
+    half: int | None,
+) -> tuple[int, list[Pick], dict[str, Any]]:
+    """P09.S1.T3 (MULTI-SUBJECT-01): custom practice from several subjects' whole books in one class (classes are
+    never mixed), per-subject counts in the learner's order. Labelled custom practice, never an official pattern."""
+    from portal_api.modules.assessment import mocks
+
+    if chapter_ids or topic_ids or half:
+        raise Unprocessable("A custom mix uses each subject's whole book; don't choose chapters or topics.")
+    subjects = [s for s, _ in mix]
+    if not 2 <= len(mix) <= 5 or len(set(subjects)) != len(subjects):
+        raise Unprocessable("Choose two to five different subjects for a custom mix.")
+    if sum(n for _, n in mix) != question_count:
+        raise Unprocessable("The subjects' question counts must add up to the test's question count.")
+    pools = []
+    for s, n in mix:
+        book = _book_chapters(db, grade, s)
+        if not book:
+            raise Unprocessable(f"{s} isn't a subject with a book in this class.")
+        pools.append((n, _pool(db, grade, s, [c.id for c in book], [])))
+    short = [
+        {"subject": s, "grades": [grade], "required": n, "available": len(p)}
+        for (s, n), (_, p) in zip(mix, pools, strict=True)
+        if len(p) < n
+    ]
+    if short:
+        raise Unprocessable(
+            "There aren't enough approved questions for this mix yet; lower the count for these subjects.",
+            code_reason="POOL_SHORTAGE",
+            sections=short,
+        )
+    seed = secrets.randbits(62)
+    picked = mocks.select_sections(pools, set(), seed)
+    sections, position = [], 0
+    for s, n in mix:
+        sections.append({"subject": s, "grades": [grade], "from": position + 1, "to": position + n})
+        position += n
+    scope = {"mode": "multi_subject", "grades": [grade], "question_pool": "practice", "sections": sections}
+    return seed, [p for picks, _ in picked for p in picks], scope
+
+
+def _single_subject(
+    db: Session,
+    grade: int,
+    subject: str,
+    scope_mode: str,
+    half: int | None,
+    chapter_ids: list[uuid.UUID],
+    topic_ids: list[uuid.UUID],
+    question_count: int,
+) -> tuple[int, list[Pick], dict[str, Any]]:
     grades = [11, 12] if scope_mode == "combined" else [grade]
     book = _book_chapters(db, grade, subject)
     if scope_mode != "chapters" and topic_ids:
@@ -194,30 +281,19 @@ def create_form(
         )
 
     seed = secrets.randbits(62)
-    chosen = select_practice(pool, question_count, seed)
-    form = PracticeForm(
-        id=uuid.uuid4(),
-        owner_id=who.user.id,
-        idempotency_key=idempotency_key,
-        request_hash=rhash,
-        kind="practice",
-        grade_number=grade,
-        subject_code=subject,
-        scope={
-            "mode": scope_mode,
-            "grades": grades,
-            "half": half,
-            "chapter_ids": sorted(map(str, chapter_ids)),
-            "topic_ids": req["topic_ids"],
-        },
-        seed=seed,
-        question_count=question_count,
-        duration_s=timed_minutes * 60 if timed_minutes else None,
-        late_write_tolerance_ms=SELF_PACED_TOLERANCE_MS if timed_minutes else 0,
-        feedback_mode=feedback_mode,
-        negative_marks=0,
-        invalid_item_treatment="EXCLUDE",
-    )
+    scope = {
+        "mode": scope_mode,
+        "grades": grades,
+        "half": half,
+        "chapter_ids": sorted(map(str, chapter_ids)),
+        "topic_ids": sorted(map(str, topic_ids)),
+    }
+    return seed, select_practice(pool, question_count, seed), scope
+
+
+def _freeze(
+    db: Session, who: Principal, form: PracticeForm, chosen: list[Pick], idempotency_key: str, rhash: str
+) -> PracticeForm:
     db.add(form)
     for position, (family, item, version, option_ids) in enumerate(chosen, start=1):
         db.add(
@@ -281,7 +357,7 @@ def superseded_positions(db: Session, form: PracticeForm) -> list[int]:
 def _position_pool(db: Session, form: PracticeForm, position: int) -> Mapping[uuid.UUID, Members]:
     """The approved pool a position was drawn from: the form's chapters/topics, or its mock section."""
     scope = form.scope or {}
-    if form.kind == "mock":
+    if scope.get("sections"):  # mocks and multi-subject custom practice draw per section
         from portal_api.modules.assessment import mocks
 
         section = next(s for s in scope["sections"] if int(s["from"]) <= position <= int(s["to"]))

@@ -164,3 +164,4 @@ Source plan: `Road Map/Punjab_Learning_Portal_Master_Roadmap_v2.2_Integrated_Wri
 | P09.S4.T3 Publish test availability | PARTIAL (replacement before start, stream targeting, entitlement shown; client-compatibility filter open: no minimum-client contract) | FORM-REPLACE-01. `tests/test_form_replacement.py`. |
 | P18.S2.T2 File and job abuse tests | IMPLEMENTED (import parser exhaustion, NUL, nesting, row flood, preview rate limit; uploads scanned; exports bounded) | IMPORT-ABUSE-01. `tests/test_import_abuse.py`. |
 | P18.S3.T1 Data minimisation | IMPLEMENTED for the code (review record, unused profile store retired, metadata stripping and field set pinned); deployment processors wait on B03-B06, retention on B15 | MINIMISATION-01. `docs/security/data-minimisation.md`, `tests/test_data_minimisation.py`. |
+| P09.S1.T3 Multi-subject custom practice | IMPLEMENTED (API + web; mobile builder parity open) | MULTI-SUBJECT-01. `tests/test_multi_subject_practice.py`. |

@@ -23,13 +23,22 @@ class AvailabilityOut(BaseModel):
     chapters: list[ChapterAvailability]
 
 
+class SubjectShare(BaseModel):
+    subject: str = Field(min_length=2, max_length=40)
+    questions: int = Field(ge=1, le=100)
+
+
 class FormCreateIn(BaseModel):
     grade: Literal[11, 12]
     subject: str = Field(min_length=2, max_length=40)
-    scope: Literal["chapters", "half_book", "full_book", "combined"] = Field(
+    scope: Literal["chapters", "half_book", "full_book", "combined", "multi_subject"] = Field(
         default="chapters",
         description="chapters: the chosen chapters; half_book: first or second half of the book by chapter order; "
-        "full_book: every chapter of this class's book; combined: the same subject's Class XI and XII books",
+        "full_book: every chapter of this class's book; combined: the same subject's Class XI and XII books; "
+        "multi_subject: custom practice from two to five subjects' whole books in this class, counts from `mix`",
+    )
+    mix: list[SubjectShare] = Field(
+        default_factory=list, max_length=5, description="multi_subject only: questions per subject, in test order"
     )
     half: Literal[1, 2] | None = Field(default=None, description="half_book only")
     chapter_ids: list[uuid.UUID] = Field(default_factory=list, max_length=40)
