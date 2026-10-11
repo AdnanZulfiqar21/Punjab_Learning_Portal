@@ -162,7 +162,7 @@ def _validate(db: Session, item: ContentItem, version: ContentVersion, *, for_pu
     used = {w for w, _, _ in assets.block_refs(version.body)}
     if "handout block" in used and item.kind != "lesson":
         errors.append("Handouts can be used in lessons only.")
-    if "diagram block" in used and item.kind not in ("lesson", "mcq"):
+    if "diagram block" in used and item.kind not in ("lesson", "mcq", "passage"):
         # Lessons serve their files through the lesson, MCQs through the learner's own attempt (QUESTION-DIAGRAMS-01).
         # Written questions need the same attempt-bound delivery first.
         errors.append("Diagrams can be used in lessons and multiple-choice questions for now.")

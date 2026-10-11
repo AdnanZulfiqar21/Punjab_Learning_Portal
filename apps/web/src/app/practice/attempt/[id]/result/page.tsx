@@ -131,6 +131,12 @@ function ReviewItem({ item, attemptId }: { item: ItemReview; attemptId: string }
           <Badge tone="danger">Incorrect</Badge>
         )}
       </div>
+      {item.passage && (
+        <section aria-label="Passage" className="rounded-lg border border-border bg-surface-muted px-4 py-3">
+          <p className="mb-2 text-xs font-semibold tracking-wide text-muted uppercase">Passage</p>
+          <LessonBlocks blocks={item.passage.blocks as Blocks} headingOffset={3} assetUrl={assetUrl} />
+        </section>
+      )}
       <LessonBlocks blocks={item.stem as Blocks} headingOffset={2} assetUrl={assetUrl} />
       <ul className="space-y-2">
         {item.options.map((o, i) => {

@@ -5202,7 +5202,7 @@ export interface components {
              * @default lesson
              * @enum {string}
              */
-            kind: "lesson" | "mcq" | "written" | "rubric" | "storyboard";
+            kind: "lesson" | "mcq" | "written" | "rubric" | "storyboard" | "passage";
             /**
              * Language
              * @default en
@@ -5285,7 +5285,7 @@ export interface components {
              * Kind
              * @enum {string}
              */
-            kind: "lesson" | "mcq" | "written" | "rubric" | "storyboard";
+            kind: "lesson" | "mcq" | "written" | "rubric" | "storyboard" | "passage";
             /**
              * Language
              * @default en
@@ -5364,6 +5364,7 @@ export interface components {
             marks: number;
             /** Options */
             options: components["schemas"]["OptionSnapshot"][];
+            passage?: components["schemas"]["PassageSnapshot"] | null;
             /** Position */
             position: number;
             /**
@@ -5387,6 +5388,7 @@ export interface components {
             marks: number;
             /** Options */
             options: components["schemas"]["OptionSnapshot"][];
+            passage?: components["schemas"]["PassageSnapshot"] | null;
             /** Position */
             position: number;
             /** Stem */
@@ -5438,7 +5440,7 @@ export interface components {
              * Kind
              * @enum {string}
              */
-            kind: "lesson" | "mcq" | "written" | "rubric" | "storyboard";
+            kind: "lesson" | "mcq" | "written" | "rubric" | "storyboard" | "passage";
             /**
              * Language
              * @default en
@@ -6313,6 +6315,21 @@ export interface components {
             blocker: string;
             /** Value */
             value: number | null;
+        };
+        /**
+         * PassageSnapshot
+         * @description A shared passage, pinned when the test was built (PASSAGES-01).
+         */
+        PassageSnapshot: {
+            /** Blocks */
+            blocks: {
+                [key: string]: unknown;
+            }[];
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
         };
         /** PostponeIn */
         PostponeIn: {
@@ -8009,7 +8026,7 @@ export interface components {
              * @default lesson
              * @enum {string}
              */
-            kind: "lesson" | "mcq" | "written" | "rubric" | "storyboard";
+            kind: "lesson" | "mcq" | "written" | "rubric" | "storyboard" | "passage";
             /** Source Refs */
             source_refs?: {
                 [key: string]: unknown;

@@ -4233,7 +4233,8 @@
               "mcq",
               "written",
               "rubric",
-              "storyboard"
+              "storyboard",
+              "passage"
             ],
             "title": "Kind",
             "type": "string"
@@ -4463,7 +4464,8 @@
               "mcq",
               "written",
               "rubric",
-              "storyboard"
+              "storyboard",
+              "passage"
             ],
             "title": "Kind",
             "type": "string"
@@ -4730,6 +4732,16 @@
             "title": "Options",
             "type": "array"
           },
+          "passage": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PassageSnapshot"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "position": {
             "title": "Position",
             "type": "integer"
@@ -4783,6 +4795,16 @@
             },
             "title": "Options",
             "type": "array"
+          },
+          "passage": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PassageSnapshot"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "position": {
             "title": "Position",
@@ -4910,7 +4932,8 @@
               "mcq",
               "written",
               "rubric",
-              "storyboard"
+              "storyboard",
+              "passage"
             ],
             "title": "Kind",
             "type": "string"
@@ -6910,6 +6933,30 @@
           "blocker"
         ],
         "title": "PaidConversion",
+        "type": "object"
+      },
+      "PassageSnapshot": {
+        "description": "A shared passage, pinned when the test was built (PASSAGES-01).",
+        "properties": {
+          "blocks": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Blocks",
+            "type": "array"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "blocks"
+        ],
+        "title": "PassageSnapshot",
         "type": "object"
       },
       "PostponeIn": {
@@ -11154,7 +11201,8 @@
               "mcq",
               "written",
               "rubric",
-              "storyboard"
+              "storyboard",
+              "passage"
             ],
             "title": "Kind",
             "type": "string"

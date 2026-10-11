@@ -451,6 +451,9 @@ def for_attempt(db: Session, user_id: uuid.UUID, attempt_id: uuid.UUID, version_
         cv = db.get(ContentVersion, fi.version_id)
         body = cv.body if cv is not None else {}
         now = {vid for _, vid, _ in block_refs([body.get("stem"), [o.get("blocks") for o in body.get("options", [])]])}
+        if fi.passage_version_id is not None:  # PASSAGES-01: the pinned passage's figures are part of the question
+            pv = db.get(ContentVersion, fi.passage_version_id)
+            now |= {vid for _, vid, _ in block_refs(pv.body if pv is not None else None)}
         after = {vid for _, vid, _ in block_refs(body.get("explanation"))}
         if fi.position in revealed:
             now |= after

@@ -76,8 +76,36 @@ def _pool(
         stmt = stmt.where(ContentItem.topic_id.in_(topic_ids))
     families: dict[uuid.UUID, list[tuple[ContentItem, ContentVersion]]] = defaultdict(list)
     for item, version in db.execute(stmt).all():
+        if not passage_usable(db, version):
+            continue  # its passage is no longer live (quarantined, retired): never shown without it
         families[item.family_id or item.id].append((item, version))
     return families
+
+
+def passage_version(db: Session, version: ContentVersion) -> uuid.UUID | None:
+    """PASSAGES-01: the live published version of the passage a question names (None without a live one)."""
+    pid = version.body.get("passage_id") if isinstance(version.body, dict) else None
+    if not pid:
+        return None
+    p = db.get(ContentItem, uuid.UUID(str(pid)))
+    if p is None or p.availability != Availability.live.value:
+        return None
+    return p.published_version_id
+
+
+def passage_usable(db: Session, version: ContentVersion) -> bool:
+    """A question without a passage, or whose passage is live. Never show a question without its passage."""
+    named = isinstance(version.body, dict) and bool(version.body.get("passage_id"))
+    return not named or passage_version(db, version) is not None
+
+
+def group_by_passage(picks: list[Pick]) -> list[Pick]:
+    """Keep questions that share a passage next to each other, in the order each group first appears."""
+    order: dict[object, int] = {}
+    for i, (_, _, version, _) in enumerate(picks):
+        key = version.body.get("passage_id") or f"solo-{i}"
+        order.setdefault(key, i)
+    return sorted(picks, key=lambda p: order[p[2].body.get("passage_id") or f"solo-{picks.index(p)}"])
 
 
 def _book_chapters(db: Session, grade: int, subject: str) -> list[Chapter]:
@@ -295,7 +323,8 @@ def _freeze(
     db: Session, who: Principal, form: PracticeForm, chosen: list[Pick], idempotency_key: str, rhash: str
 ) -> PracticeForm:
     db.add(form)
-    for position, (family, item, version, option_ids) in enumerate(chosen, start=1):
+    for position, (family, item, version, option_ids) in enumerate(group_by_passage(chosen), start=1):
+        pv = passage_version(db, version)
         db.add(
             FormItem(
                 form_id=form.id,
@@ -307,6 +336,7 @@ def _freeze(
                 option_order=option_ids,
                 grade_number=item.grade_number,
                 subject_code=item.subject_code,
+                passage_version_id=pv or None,
             )
         )
     try:
@@ -338,9 +368,18 @@ def learner_items(db: Session, form: PracticeForm) -> list[dict[str, Any]]:
                 "marks": fi.marks,
                 "stem": version.body["stem"],
                 "options": [{"id": oid, "blocks": options[oid]["blocks"]} for oid in fi.option_order],
+                "passage": passage_snapshot(db, fi),
             }
         )
     return out
+
+
+def passage_snapshot(db: Session, fi: FormItem) -> dict[str, Any] | None:
+    """The pinned passage shown with a question (PASSAGES-01); a later passage revision never changes a test."""
+    if fi.passage_version_id is None:
+        return None
+    pv = db.get(ContentVersion, fi.passage_version_id)
+    return {"id": str(pv.item_id), "blocks": pv.body.get("blocks", [])} if pv is not None else None
 
 
 def superseded_positions(db: Session, form: PracticeForm) -> list[int]:
@@ -410,6 +449,7 @@ def replace_superseded(db: Session, form: PracticeForm) -> bool:
     for fi, family, item, version, option_ids in swaps:  # the families are distinct: no unique-constraint clash
         fi.family_id, fi.item_id, fi.version_id, fi.option_order = family, item.id, version.id, option_ids
         fi.grade_number, fi.subject_code = item.grade_number, item.subject_code
+        fi.passage_version_id = passage_version(db, version)
         if form.kind != "mock":  # mocks keep the profile's marks per question
             fi.marks = int(version.body.get("marks", 1))
     form.scope = {**(form.scope or {}), "replaced": [*(form.scope or {}).get("replaced", []), *log]}

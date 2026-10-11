@@ -13,7 +13,7 @@ type Item = {
   position: number;
   section: string;
   item_id: string;
-  learner: { stem: Block[]; options: { id: string; blocks: Block[] }[] };
+  learner: { passage?: Block[] | null; stem: Block[]; options: { id: string; blocks: Block[] }[] };
   oldest_client: { stem: Block[]; options: { id: string; blocks: Block[] }[]; fallback_blocks: number };
   checks: string[];
 };
@@ -86,6 +86,11 @@ async function Sample({ versionId, seed, withAnswers }: { versionId: string; see
                 <span className="font-medium text-foreground">Question {it.position}</span> {it.section}
                 {it.oldest_client.fallback_blocks > 0 && <Badge tone="info">{it.oldest_client.fallback_blocks} fallback block(s) on the oldest client</Badge>}
               </p>
+              {it.learner.passage && (
+                <div className="rounded-lg border border-border bg-surface-muted px-3 py-2">
+                  <LessonBlocks blocks={it.learner.passage} headingOffset={2} />
+                </div>
+              )}
               <LessonBlocks blocks={it.learner.stem} headingOffset={1} />
               <ul className="space-y-2">
                 {it.learner.options.map((o) => (

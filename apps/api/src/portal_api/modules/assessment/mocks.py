@@ -212,7 +212,7 @@ def build_from(
     sections = []
     for (s, _), (picks, reused) in zip(pools, chosen, strict=True):
         start = position + 1
-        for family, item, cv, option_ids in picks:
+        for family, item, cv, option_ids in forms.group_by_passage(picks):  # within the section (PASSAGES-01)
             position += 1
             db.add(
                 FormItem(
@@ -225,6 +225,7 @@ def build_from(
                     option_order=option_ids,
                     grade_number=item.grade_number,
                     subject_code=item.subject_code,
+                    passage_version_id=forms.passage_version(db, cv),
                 )
             )
         sections.append(

@@ -30,6 +30,8 @@ export type McqBody = {
   origin: "original_practice" | "authorised_past_paper";
   past_paper: PastPaper | null;
   language: "en" | "ur";
+  /** PASSAGES-01: a reviewed passage of the same class and subject, shared by a group of questions. */
+  passage_id: string | null;
 };
 
 export function asMcq(body: Record<string, unknown>): McqBody {
@@ -45,6 +47,7 @@ export function asMcq(body: Record<string, unknown>): McqBody {
     origin: b.origin ?? "original_practice",
     past_paper: b.past_paper ?? null,
     language: b.language ?? "en",
+    passage_id: b.passage_id ?? null,
   };
 }
 
@@ -71,6 +74,7 @@ export function normaliseMcq(body: Record<string, unknown>): Record<string, unkn
     language: q.language,
   };
   if (q.origin === "authorised_past_paper" && q.past_paper) out.past_paper = q.past_paper;
+  if (q.passage_id && q.passage_id.trim()) out.passage_id = q.passage_id.trim();
   return out;
 }
 
@@ -103,6 +107,17 @@ export function McqEditor({ body, onChange }: { body: Record<string, unknown>; o
 
   return (
     <div className="space-y-6">
+      <label className="block space-y-1 text-sm">
+        <span className="block font-medium">Passage (optional)</span>
+        <input
+          value={q.passage_id ?? ""}
+          onChange={(e) => set({ passage_id: e.target.value || null })}
+          placeholder="Item ID of a published passage in this class and subject"
+          pattern="[0-9a-fA-F-]{36}"
+          className="w-full rounded-lg border border-border bg-surface px-3 py-2 font-mono text-xs"
+        />
+        <span className="block text-muted">Questions that share a passage are shown with it and kept together in a test.</span>
+      </label>
       <section className="space-y-2" aria-labelledby="stem-h">
         <h2 id="stem-h" className="font-medium">
           Question stem

@@ -299,6 +299,7 @@ def result(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, response: Respo
                 treatment=r["treatment"],
                 explanation=k["explanation"],
                 related_lessons=related.get(fi.position, []),
+                passage=forms.passage_snapshot(db, fi),  # type: ignore[arg-type]
             )
         )
     return ResultOut(

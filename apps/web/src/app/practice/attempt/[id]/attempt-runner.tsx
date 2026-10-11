@@ -327,6 +327,12 @@ export function AttemptRunner({ attempt }: { attempt: PracticeAttempt }) {
         <h2 id="q-heading" className="sr-only">
           Question {current}
         </h2>
+        {item.passage && (
+          <section aria-label="Passage" className="rounded-lg border border-border bg-surface-muted px-4 py-3">
+            <p className="mb-2 text-xs font-semibold tracking-wide text-muted uppercase">Read the passage</p>
+            <LessonBlocks blocks={item.passage.blocks as { type: string }[]} headingOffset={2} assetUrl={assetUrl} />
+          </section>
+        )}
         <LessonBlocks blocks={item.stem as { type: string }[]} headingOffset={1} assetUrl={assetUrl} />
         <fieldset disabled={closed || submitting || locked.has(current)} className="space-y-2">
           <legend className="sr-only">Options for question {current}</legend>
