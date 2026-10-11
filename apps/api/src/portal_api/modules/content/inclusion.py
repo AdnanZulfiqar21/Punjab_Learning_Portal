@@ -273,6 +273,46 @@ def coverage(db: Session, who: Principal, subject: str, scope: str, year: int | 
     }
 
 
+def syllabus_counts(db: Session, topic_ids: set[uuid.UUID], scope: str, year: int | None) -> tuple[int, int] | None:
+    """For the learner's syllabus-coverage meter (DASHBOARD-01): concepts that a published record includes in this
+    mapping and year and that are taught in the given topics, and how many of them have a live lesson there.
+    None when no such verified record exists: the meter then stays unavailable rather than inventing a syllabus."""
+    from portal_api.modules.content.models import Availability, ContentItem
+
+    if not topic_ids:
+        return None
+    included = list(
+        db.scalars(
+            select(InclusionRecord.concept_id).where(
+                InclusionRecord.scope == scope,
+                InclusionRecord.state == "included",
+                InclusionRecord.status == "published",
+                InclusionRecord.year == year if scope in YEARLY else InclusionRecord.year.is_(None),
+            )
+        )
+    )
+    taught: dict[uuid.UUID, set[uuid.UUID]] = {}
+    for cid, tid in db.execute(
+        select(ConceptTopic.concept_id, ConceptTopic.topic_id).where(
+            ConceptTopic.concept_id.in_(included), ConceptTopic.topic_id.in_(topic_ids)
+        )
+    ) if included else []:  # fmt: skip
+        taught.setdefault(cid, set()).add(tid)
+    if not taught:
+        return None
+    lesson_topics = set(
+        db.scalars(
+            select(ContentItem.topic_id).where(
+                ContentItem.kind == "lesson",
+                ContentItem.availability == Availability.live.value,
+                ContentItem.topic_id.in_({t for ts in taught.values() for t in ts}),
+            )
+        )
+    )
+    covered = sum(1 for ts in taught.values() if ts & lesson_topics)
+    return covered, len(taught)
+
+
 # ------------------------------------------------------------------ routes
 router = APIRouter(prefix="/v1/studio", tags=["studio"])
 DB = Annotated[Session, Depends(get_session)]

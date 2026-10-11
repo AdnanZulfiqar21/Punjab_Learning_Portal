@@ -112,3 +112,28 @@ def test_inclusion_scope_rules(client: TestClient, db: Session) -> None:
     ).status_code in (200, 422)
     unknown = client.post(f"{URL}/{uuid.uuid4()}/publish", headers=reviewer.headers)
     assert unknown.status_code == 404
+
+
+def test_the_learners_syllabus_meter_reads_verified_records(client: TestClient, db: Session) -> None:
+    from tests.test_attempts import _learner
+
+    author = Staff(client, db, ["content_author"], BIO_BOTH)
+    reviewer = Staff(client, db, ["subject_reviewer"], BIO_BOTH)
+    learner = _learner(client)
+    profile = {"grade": 11, "subjects": ["biology"], "target_exams": ["mdcat"], "target_year": 2031}
+
+    def meter() -> dict[str, Any]:
+        body = client.get("/v1/me/dashboard", headers=learner.headers).json()
+        return next(m for m in body["meters"] if m["key"] == "syllabus_coverage")
+
+    assert client.put("/v1/me/profile", headers=learner.headers, json=profile).status_code == 200
+    assert meter()["percent"] is None  # no verified MDCAT 2031 records yet: never a syllabus from book headings
+    c = _published_concept(client, db, author, reviewer)
+    rec = _record(client, author, c, scope="mdcat", year=2031, state="included").json()
+    assert meter()["percent"] is None  # a draft record is not verified
+    assert client.post(f"{URL}/{rec['id']}/publish", headers=reviewer.headers).status_code == 200
+    m = meter()
+    assert m["denominator"] >= 1 and m["numerator"] <= m["denominator"] and m["percent"] is not None
+    no_year = {**profile, "target_year": None}
+    assert client.put("/v1/me/profile", headers=learner.headers, json=no_year).status_code == 200
+    assert meter()["percent"] is None  # an exam mapping needs the learner's exam year

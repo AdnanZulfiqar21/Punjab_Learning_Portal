@@ -49,7 +49,9 @@ def _meter(key: str, num: int | None, den: int | None, unavailable: str | None) 
     }
 
 
-def _meters(db: Session, user_id: uuid.UUID, chapters: list[Any], now: datetime) -> list[dict[str, Any]]:
+def _meters(
+    db: Session, user_id: uuid.UUID, chapters: list[Any], now: datetime, exams: list[str], year: int | None
+) -> list[dict[str, Any]]:
     from portal_api.modules.assessment import evidence
     from portal_api.modules.content import completion
     from portal_api.modules.content.models import Availability, ContentItem
@@ -68,6 +70,8 @@ def _meters(db: Session, user_id: uuid.UUID, chapters: list[Any], now: datetime)
             _meter("demonstrated_knowledge", None, None, NO_PROFILE),
         ]
     ids = [c.id for c in chapters]
+    topics = set(db.scalars(select(Topic.id).where(Topic.chapter_id.in_(ids), Topic.retired_at.is_(None))))
+    coverage = _syllabus(db, topics, exams, year) or coverage
     live = set(
         db.scalars(
             select(ContentItem.id).where(
@@ -78,7 +82,6 @@ def _meters(db: Session, user_id: uuid.UUID, chapters: list[Any], now: datetime)
         )
     )
     done = completion.completed_in(db, user_id, ids) & live
-    topics = set(db.scalars(select(Topic.id).where(Topic.chapter_id.in_(ids), Topic.retired_at.is_(None))))
     results = evidence.classify(evidence.learner_responses(db, user_id, now), now)
     states = [r.state for t in topics if (r := results.get(t)) is not None]
     shown = states.count("demonstrated")
@@ -98,6 +101,17 @@ def _meters(db: Session, user_id: uuid.UUID, chapters: list[Any], now: datetime)
         ),
         _meter("demonstrated_knowledge", shown, len(topics), why),
     ]
+
+
+def _syllabus(db: Session, topics: set[uuid.UUID], exams: list[str], year: int | None) -> dict[str, Any] | None:
+    """INCLUSION-01: syllabus coverage from verified inclusion records for the learner's exam (else the board syllabus)
+    and year. None (the meter stays unavailable) until such records exist."""
+    from portal_api.modules.content import inclusion
+
+    if year is None:
+        return None
+    counts = inclusion.syllabus_counts(db, topics, exams[0] if exams else "board_syllabus", year)
+    return _meter("syllabus_coverage", counts[0], counts[1], None) if counts else None
 
 
 def _continue(db: Session, user_id: uuid.UUID, grade: int | None) -> dict[str, Any] | None:
@@ -168,7 +182,9 @@ def build(db: Session, user_id: uuid.UUID) -> dict[str, Any]:
     return {
         "generated_at": now,
         "profile": {"grade": grade, "subjects": subjects} if grade else None,
-        "meters": _meters(db, user_id, chapters, now),
+        "meters": _meters(
+            db, user_id, chapters, now, list(p.target_exams or []) if p else [], p.target_year if p else None
+        ),
         "continue_learning": _continue(db, user_id, grade),
         "revision": _revision(db, user_id, now),
         "recent": report["recent"][:3],
