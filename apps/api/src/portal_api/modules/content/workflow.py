@@ -155,6 +155,19 @@ def _validate(db: Session, item: ContentItem, version: ContentVersion, *, for_pu
     s_err, s_warn, _ = check_sources(db, chapter, version.source_refs)
     errors = result.errors + s_err + links.check(db, item, version, for_publication=for_publication)
     warnings = result.warnings + s_warn
+    # P07.S1.T1: diagrams, handouts and fallback images must name ready archived assets of this class and subject.
+    from portal_api.modules.content import assets
+
+    refs = assets.check_references(db, item.grade_number, item.subject_code, version.body)
+    if item.kind != "lesson" and any(
+        w in ("diagram block", "handout block") for w, _, _ in assets.block_refs(version.body)
+    ):
+        # Learners fetch lesson files through the lesson; questions need attempt-bound delivery first (P08).
+        errors.append("Diagrams and handouts can be used in lessons only for now.")
+    if for_publication:
+        errors += refs
+    else:
+        warnings += refs
     if not version.source_refs:
         errors.append("Add at least one source page reference.")
     if for_publication:

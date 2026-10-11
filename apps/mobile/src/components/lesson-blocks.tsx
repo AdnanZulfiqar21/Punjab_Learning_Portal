@@ -1,5 +1,6 @@
 // Native renderer for content blocks (schema v1, roadmap §5.4). Renderer version 1 on Android/iOS: text blocks render
 // natively; an unknown or unsupported block shows an explicit "update required" note instead of failing.
+import { Image } from "expo-image";
 import { ScrollView, View } from "react-native";
 
 import { Checkpoint } from "@/components/checkpoint";
@@ -13,17 +14,41 @@ type Block = { type: string; [key: string]: unknown };
 const str = (v: unknown) => (typeof v === "string" ? v : "");
 const strs = (v: unknown) => (Array.isArray(v) ? v.map(str) : []);
 
-export function LessonBlocks({ blocks }: { blocks: Block[] }) {
+/** Where an archived asset version can be loaded on this screen (P07.S1.T1): a lesson's own files, with the session. */
+export type AssetSource = (versionId: string) => { uri: string; headers?: Record<string, string> };
+type Fallback = { text?: unknown; image_asset_id?: unknown; alt?: unknown };
+
+export function LessonBlocks({ blocks, assetSource }: { blocks: Block[]; assetSource?: AssetSource }) {
   return (
     <View style={{ gap: Space.md }}>
       {blocks.map((b, i) => (
-        <BlockView key={i} block={b} />
+        <BlockView key={i} block={b} assetSource={assetSource} />
       ))}
     </View>
   );
 }
 
-function BlockView({ block: b }: { block: Block }) {
+function ArchivedImage({ id, alt, assetSource }: { id: string; alt: string; assetSource?: AssetSource }) {
+  const c = useTheme();
+  if (!assetSource || !id) {
+    return (
+      <View style={{ borderWidth: 1, borderStyle: "dashed", borderColor: c.border, borderRadius: Radius.sm, padding: Space.md }}>
+        <T variant="small">{alt}</T>
+      </View>
+    );
+  }
+  return (
+    <Image
+      source={assetSource(id)}
+      accessibilityLabel={alt}
+      accessible
+      contentFit="contain"
+      style={{ width: "100%", height: 240, borderRadius: Radius.sm, backgroundColor: "#ffffff" }}
+    />
+  );
+}
+
+function BlockView({ block: b, assetSource }: { block: Block; assetSource?: AssetSource }) {
   const c = useTheme();
   switch (b.type) {
     case "heading":
@@ -99,18 +124,67 @@ function BlockView({ block: b }: { block: Block }) {
           explanation={str(b.explanation)}
         />
       );
-    case "equation":
-      // Native renderer 1 has no typeset equations; published lessons carry a reviewed text equivalent (§5.4).
+    case "equation": {
+      // Native renderer 1 has no typeset equations: show the reviewed static rendering and the text equivalent (§5.4).
+      const fb = (b.fallback ?? {}) as Fallback;
       return (
-        <View style={{ borderWidth: 1, borderColor: c.border, borderRadius: Radius.sm, padding: Space.md }}>
+        <View style={{ borderWidth: 1, borderColor: c.border, borderRadius: Radius.sm, padding: Space.md, gap: Space.sm }}>
+          {str(fb.image_asset_id) ? <ArchivedImage id={str(fb.image_asset_id)} alt={str(fb.alt) || str(b.text_alt)} assetSource={assetSource} /> : null}
           <T>{str(b.text_alt)}</T>
         </View>
       );
-    default:
+    }
+    case "example":
+      return (
+        <View
+          accessibilityLabel={`Worked example: ${str(b.title)}`}
+          style={{ borderWidth: 1, borderColor: c.border, borderRadius: Radius.sm, padding: Space.md, gap: Space.xs }}>
+          <T variant="eyebrow" style={{ color: c.muted, textTransform: "uppercase" }}>
+            Worked example
+          </T>
+          <T style={{ fontWeight: "600" }}>{str(b.title)}</T>
+          <T>{str(b.problem)}</T>
+          {strs(b.steps).map((step, i) => (
+            <View key={i} style={{ flexDirection: "row", gap: Space.sm }}>
+              <T style={{ width: 22, textAlign: "right" }}>{`${i + 1}.`}</T>
+              <T style={{ flex: 1 }}>{step}</T>
+            </View>
+          ))}
+          {str(b.answer) ? <T style={{ fontWeight: "600" }}>{`Answer: ${str(b.answer)}`}</T> : null}
+        </View>
+      );
+    case "diagram":
+      return (
+        <View style={{ gap: Space.xs }}>
+          <ArchivedImage id={str(b.asset_version_id)} alt={str(b.alt)} assetSource={assetSource} />
+          <T variant="small">{str(b.caption)}</T>
+          {str(b.long_description) ? <T variant="small">{str(b.long_description)}</T> : null}
+        </View>
+      );
+    case "handout":
+      // Saving a PDF on the device needs a share sheet this app doesn't include yet; handouts download on the website.
+      return (
+        <View style={{ borderWidth: 1, borderColor: c.border, borderRadius: Radius.sm, padding: Space.md, gap: Space.xs }}>
+          <T style={{ fontWeight: "600" }}>{`Handout: ${str(b.title)}`}</T>
+          {str(b.description) ? <T variant="small">{str(b.description)}</T> : null}
+          <T variant="small">Download it from this lesson on the website.</T>
+        </View>
+      );
+    default: {
+      const fb = (b.fallback ?? null) as Fallback | null; // §5.4 rule 5: the reviewed fallback, when there is one
+      if (fb && (str(fb.text) || str(fb.image_asset_id))) {
+        return (
+          <View style={{ gap: Space.xs }}>
+            {str(fb.image_asset_id) ? <ArchivedImage id={str(fb.image_asset_id)} alt={str(fb.alt) || str(fb.text)} assetSource={assetSource} /> : null}
+            {str(fb.text) ? <T>{str(fb.text)}</T> : null}
+          </View>
+        );
+      }
       return (
         <View accessibilityRole="alert" style={{ backgroundColor: c.warnSoft, borderRadius: Radius.sm, padding: Space.md }}>
           <T variant="small">This part of the lesson needs a newer version of the app to display.</T>
         </View>
       );
+    }
   }
 }

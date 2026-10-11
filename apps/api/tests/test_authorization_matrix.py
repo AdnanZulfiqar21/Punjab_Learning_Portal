@@ -34,6 +34,7 @@ PUBLIC = {
     "GET /v1/chapters/{chapter_id}": "public catalogue structure",
     "GET /v1/search": "public catalogue search (published content only)",
     "GET /v1/chapters/{chapter_id}/lessons": "optional auth: previews public, premium bodies need access (R07)",
+    "GET /v1/lessons/{item_id}/assets/{version_id}": "optional auth: the lesson's own files, under its tier (P07.S1)",
     "GET /v1/help/articles": "published help articles",
     "GET /v1/help/articles/{slug}": "published help articles",
     "GET /v1/status": "public incident status",

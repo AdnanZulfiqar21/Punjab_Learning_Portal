@@ -48,12 +48,15 @@ export function Surfaces({ itemId, revision, children }: { itemId: string; revis
                 <h3 className="text-sm font-medium text-muted">{g.where}</h3>
                 {g.blocks.map((b, i) =>
                   b.type === "fallback" ? (
-                    <p key={i} className="rounded-lg border border-dashed border-border px-3 py-2">
-                      {String(b.text || "(no fallback yet)")}
-                      {b.image_asset_id ? <span className="block text-xs text-muted">Image: {String(b.image_asset_id)}</span> : null}
-                    </p>
+                    <div key={i} className="space-y-2 rounded-lg border border-dashed border-border px-3 py-2">
+                      {b.image_asset_id ? (
+                        // eslint-disable-next-line @next/next/no-img-element -- archived, scope-checked studio copy
+                        <img src={`/studio/assets/file/${String(b.image_asset_id)}?copy=delivery`} alt={String(b.text || "Fallback image")} className="max-w-full rounded" />
+                      ) : null}
+                      <p>{String(b.text || "(no fallback yet)")}</p>
+                    </div>
                   ) : (
-                    <LessonBlocks key={i} blocks={[b]} headingOffset={2} />
+                    <LessonBlocks key={i} blocks={[b]} headingOffset={2} assetUrl={(v) => `/studio/assets/file/${v}?copy=delivery`} />
                   ),
                 )}
               </section>

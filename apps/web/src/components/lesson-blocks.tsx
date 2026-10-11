@@ -14,18 +14,40 @@ const CALLOUT_STYLE: Record<string, string> = {
   warning: "border-warn bg-warn-soft",
 };
 
+/** Where an archived asset version's delivery copy can be fetched on this surface (P07.S1.T1): a learner lesson,
+ * or the studio. Without it, diagrams show their alt text and handouts say where to get them. */
+export type AssetUrl = (versionId: string) => string;
+type Fallback = { text?: unknown; image_asset_id?: unknown; alt?: unknown };
+
 /** `headingOffset` shifts block headings down so they nest under the page's own headings (level 2 → h{2+offset}). */
-export function LessonBlocks({ blocks, headingOffset = 0 }: { blocks: Block[]; headingOffset?: number }) {
+export function LessonBlocks({ blocks, headingOffset = 0, assetUrl }: { blocks: Block[]; headingOffset?: number; assetUrl?: AssetUrl }) {
   return (
     <div className="space-y-4 leading-relaxed">
       {blocks.map((b, i) => (
-        <BlockView key={i} block={b} headingOffset={headingOffset} />
+        <BlockView key={i} block={b} headingOffset={headingOffset} assetUrl={assetUrl} />
       ))}
     </div>
   );
 }
 
-function BlockView({ block: b, headingOffset }: { block: Block; headingOffset: number }) {
+/** An archived image. Plain <img>: the copy is a re-encoded PNG from our own origin, sized by the browser. */
+function ArchivedImage({ id, alt, assetUrl }: { id: string; alt: string; assetUrl?: AssetUrl }) {
+  if (!assetUrl || !id) return <p className="rounded-lg border border-dashed border-border px-3 py-6 text-center text-sm text-muted">{alt}</p>;
+  // eslint-disable-next-line @next/next/no-img-element -- an authenticated, immutable archive copy; no optimiser
+  return <img src={assetUrl(id)} alt={alt} loading="lazy" className="mx-auto h-auto max-w-full rounded-lg border border-border bg-white" />;
+}
+
+/** §5.4 rule 5: the reviewed fallback for a block this renderer can't show natively. */
+function FallbackView({ fb, assetUrl }: { fb: Fallback; assetUrl?: AssetUrl }) {
+  return (
+    <figure className="space-y-2 rounded-lg border border-border bg-surface px-4 py-3">
+      {str(fb.image_asset_id) && <ArchivedImage id={str(fb.image_asset_id)} alt={str(fb.alt) || str(fb.text)} assetUrl={assetUrl} />}
+      {str(fb.text) && <figcaption>{str(fb.text)}</figcaption>}
+    </figure>
+  );
+}
+
+function BlockView({ block: b, headingOffset, assetUrl }: { block: Block; headingOffset: number; assetUrl?: AssetUrl }) {
   switch (b.type) {
     case "heading": {
       const level = Math.min(6, (b.level === 3 ? 3 : 2) + headingOffset);
@@ -93,20 +115,73 @@ function BlockView({ block: b, headingOffset }: { block: Block; headingOffset: n
           explanation={str(b.explanation)}
         />
       );
-    case "equation":
-      // No typeset renderer ships yet (§5.4: equations need a reviewed fallback before publication). Show the text
-      // equivalent, with the source LaTeX for staff checking.
+    case "equation": {
+      // No typeset renderer ships yet (§5.4: equations need a reviewed fallback before publication). Show the reviewed
+      // static rendering when there is one, always with the text equivalent; the source LaTeX helps staff check.
+      const fb = (b.fallback ?? {}) as Fallback;
       return (
-        <figure className="rounded-lg border border-border bg-surface px-4 py-3">
+        <figure className="space-y-2 rounded-lg border border-border bg-surface px-4 py-3">
+          {str(fb.image_asset_id) && <ArchivedImage id={str(fb.image_asset_id)} alt={str(fb.alt) || str(b.text_alt)} assetUrl={assetUrl} />}
           <p>{str(b.text_alt)}</p>
-          <figcaption className="mt-1 font-mono text-xs text-muted">{str(b.latex)}</figcaption>
+          <figcaption className="font-mono text-xs text-muted">{str(b.latex)}</figcaption>
         </figure>
       );
-    default:
+    }
+    case "example":
+      return (
+        <section className="space-y-2 rounded-lg border border-border bg-surface px-4 py-3" aria-label={`Worked example: ${str(b.title)}`}>
+          <p className="text-xs font-semibold tracking-wide text-muted uppercase">Worked example</p>
+          <p className="font-semibold">{str(b.title)}</p>
+          <p className="whitespace-pre-line">{str(b.problem)}</p>
+          <ol className="list-decimal space-y-1 pl-6">
+            {strs(b.steps).map((step, i) => (
+              <li key={i} className="whitespace-pre-line">
+                {step}
+              </li>
+            ))}
+          </ol>
+          {str(b.answer) && (
+            <p className="whitespace-pre-line">
+              <span className="font-semibold">Answer: </span>
+              {str(b.answer)}
+            </p>
+          )}
+        </section>
+      );
+    case "diagram":
+      return (
+        <figure className="space-y-2">
+          <ArchivedImage id={str(b.asset_version_id)} alt={str(b.alt)} assetUrl={assetUrl} />
+          <figcaption className="text-sm text-muted">{str(b.caption)}</figcaption>
+          {str(b.long_description) && (
+            <details className="text-sm">
+              <summary className="cursor-pointer">Describe this diagram</summary>
+              <p className="mt-1 whitespace-pre-line">{str(b.long_description)}</p>
+            </details>
+          )}
+        </figure>
+      );
+    case "handout":
+      return (
+        <p className="rounded-lg border border-border bg-surface px-4 py-3">
+          {assetUrl ? (
+            <a href={assetUrl(str(b.asset_version_id))} download className="font-medium text-accent underline underline-offset-2">
+              Download: {str(b.title)} (PDF)
+            </a>
+          ) : (
+            <span className="font-medium">Handout: {str(b.title)}</span>
+          )}
+          {str(b.description) && <span className="block text-sm text-muted">{str(b.description)}</span>}
+        </p>
+      );
+    default: {
+      const fb = (b.fallback ?? null) as Fallback | null;
+      if (fb && (str(fb.text) || str(fb.image_asset_id))) return <FallbackView fb={fb} assetUrl={assetUrl} />;
       return (
         <p role="note" className="rounded-lg border border-warn bg-warn-soft px-4 py-3 text-sm">
           This part of the lesson needs a newer version of the app to display.
         </p>
       );
+    }
   }
 }

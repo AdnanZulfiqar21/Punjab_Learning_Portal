@@ -14231,6 +14231,58 @@
         ]
       }
     },
+    "/v1/lessons/{item_id}/assets/{version_id}": {
+      "get": {
+        "description": "P07.S1.T1 (LESSON-BLOCKS-01): learners only ever receive derived delivery copies named by the published lesson\nthey may read: free previews for everyone, premium lessons with an active plan or trial.",
+        "operationId": "lesson_asset_v1_lessons__item_id__assets__version_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "item_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Item Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "version_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Version Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "A diagram or handout named by a live lesson's published version (under the lesson's access tier)",
+        "tags": [
+          "lessons"
+        ]
+      }
+    },
     "/v1/me": {
       "get": {
         "operationId": "me_v1_me_get",

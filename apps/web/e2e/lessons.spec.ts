@@ -20,7 +20,7 @@ test.skip(({ isMobile }) => isMobile, "Lesson access journeys run on desktop");
 test("anyone reads a free preview; a premium lesson shows what it is but not its text", async ({ page }) => {
   const lessons = await openFirstBiologyChapter(page);
   await expect(lessons.getByText(PREVIEW)).toBeVisible();
-  await expect(lessons.getByText(/Free preview ·/)).toBeVisible();
+  await expect(lessons.getByText(/Free preview ·/).first()).toBeVisible(); // two fixture previews exist (P07.S1.T1)
   await expect(lessons.getByRole("heading", { name: "[FIXTURE] Premium lesson" })).toBeVisible();
   await expect(lessons.getByText("This lesson is included with a plan or the free 30-day trial.")).toBeVisible();
   await expect(lessons.getByText(PREMIUM)).toHaveCount(0);
@@ -40,4 +40,24 @@ test("a learner on the free trial reads premium lessons", async ({ page }) => {
   const lessons = await openFirstBiologyChapter(page);
   await expect(lessons.getByText(PREMIUM)).toBeVisible();
   await expect(lessons.getByText("This lesson is included with a plan")).toHaveCount(0);
+});
+
+// P07.S1.T1 (LESSON-BLOCKS-01): the labelled structured-blocks fixture lesson (free preview) from portal-dev-seed-practice.
+test("structured blocks reach learners: worked example, diagram, formula rendering and handout", async ({ page, request }) => {
+  const lessons = await openFirstBiologyChapter(page);
+  const example = lessons.getByRole("region", { name: "Worked example: Technical fixture worked example" });
+  await expect(example).toBeVisible();
+  await expect(example.getByRole("listitem")).toHaveCount(2);
+  for (const alt of ["A synthetic fixture image with a box and a label", "Fixture rendering of v equals u plus a t"]) {
+    const img = lessons.getByRole("img", { name: alt });
+    await img.scrollIntoViewIfNeeded();
+    await expect.poll(() => img.evaluate((el: HTMLImageElement) => el.complete && el.naturalWidth > 0), AUTH).toBe(true);
+  }
+  await lessons.getByText("Describe this diagram").click();
+  await expect(lessons.getByText("A grey box with the words 'Technical fixture diagram'.")).toBeVisible();
+  const handout = lessons.getByRole("link", { name: "Download: Technical fixture handout (PDF)" });
+  const res = await request.get((await handout.getAttribute("href"))!);
+  expect(res.status()).toBe(200);
+  expect(res.headers()["content-type"]).toBe("application/pdf");
+  expect(res.headers()["content-disposition"]).toContain("attachment");
 });

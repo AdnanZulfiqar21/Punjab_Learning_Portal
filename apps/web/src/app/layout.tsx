@@ -37,29 +37,29 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <header className="border-b border-border bg-surface">
           <nav
             aria-label="Main"
-            className="mx-auto flex w-full max-w-5xl items-center justify-between gap-4 px-4 py-3"
+            className="mx-auto flex w-full max-w-5xl flex-wrap items-center justify-between gap-x-4 gap-y-1 px-4 py-3"
           >
             <Link href="/" className="font-semibold tracking-tight text-foreground">
               Punjab Learning Portal
             </Link>
-            <ul className="flex items-center gap-1 text-sm">
+            <ul className="flex flex-wrap items-center gap-0.5 text-sm sm:gap-1">
               <li>
-                <Link href="/learn" className="rounded-md px-3 py-2 text-muted hover:bg-surface-muted hover:text-foreground">
+                <Link href="/learn" className="rounded-md px-2 py-2 text-muted hover:bg-surface-muted hover:text-foreground sm:px-3">
                   Learn
                 </Link>
               </li>
               <li>
-                <Link href="/practice" className="rounded-md px-3 py-2 text-muted hover:bg-surface-muted hover:text-foreground">
+                <Link href="/practice" className="rounded-md px-2 py-2 text-muted hover:bg-surface-muted hover:text-foreground sm:px-3">
                   Practice
                 </Link>
               </li>
               <li>
-                <Link href="/search" className="rounded-md px-3 py-2 text-muted hover:bg-surface-muted hover:text-foreground">
+                <Link href="/search" className="rounded-md px-2 py-2 text-muted hover:bg-surface-muted hover:text-foreground sm:px-3">
                   Search
                 </Link>
               </li>
               <li>
-                <Link href="/help" className="rounded-md px-3 py-2 text-muted hover:bg-surface-muted hover:text-foreground">
+                <Link href="/help" className="rounded-md px-2 py-2 text-muted hover:bg-surface-muted hover:text-foreground sm:px-3">
                   Help
                 </Link>
               </li>
