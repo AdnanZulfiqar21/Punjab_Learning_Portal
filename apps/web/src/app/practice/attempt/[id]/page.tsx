@@ -36,8 +36,9 @@ async function Attempt({ id }: { id: string }) {
         </Notice>
         {(attempt.not_counted ?? []).length > 0 && (
           <Notice tone="warn" title="Some last changes weren't counted">
-            Questions {(attempt.not_counted ?? []).map((n) => n.position).join(", ")}: your last change wasn&apos;t counted. The answer you had
-            saved before it, if any, was marked. Your result explains why.
+            {(attempt.not_counted ?? []).length === 1 ? "Question" : "Questions"} {(attempt.not_counted ?? []).map((n) => n.position).join(", ")}:
+            your last change {(attempt.not_counted ?? []).length === 1 ? "wasn't" : "to each wasn't"} counted. The answer you had saved
+            before it, if any, was marked. Your result explains why.
           </Notice>
         )}
         <Link href={`/practice/attempt/${id}/result`} className="inline-block rounded-lg bg-accent px-4 py-2.5 font-medium text-white dark:text-background">
