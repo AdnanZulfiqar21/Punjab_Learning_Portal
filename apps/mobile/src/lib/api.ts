@@ -66,6 +66,12 @@ function origin(): string {
   return value;
 }
 
+/** A lesson's diagram or handout (P07.S1.T1): only files named by its published version, under its access tier. */
+export function lessonAsset(lessonId: string, versionId: string, token: string | null): { uri: string; headers?: Record<string, string> } {
+  const uri = `${origin()}/v1/lessons/${encodeURIComponent(lessonId)}/assets/${encodeURIComponent(versionId)}`;
+  return token ? { uri, headers: { Authorization: `Bearer ${token}` } } : { uri };
+}
+
 function correlationId(): string {
   return Array.from({ length: 32 }, () => Math.floor(Math.random() * 16).toString(16)).join("");
 }

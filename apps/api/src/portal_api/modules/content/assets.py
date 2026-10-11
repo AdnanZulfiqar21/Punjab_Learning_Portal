@@ -356,3 +356,69 @@ def main() -> None:  # pragma: no cover - thin CLI wrapper
     with get_sessionmaker()() as db:
         purged = collect(db, apply="--apply" in sys.argv)
     print(("purged " if "--apply" in sys.argv else "would purge ") + f"{len(purged)} delivery copies")
+
+
+# ------------------------------------------------------------------ references from content (P07.S1.T1)
+REF_KIND = {"diagram": "image", "handout": "handout"}
+_KIND_NAME = {"image": "an image", "handout": "a PDF handout"}
+_CLASS = {11: "Class XI", 12: "Class XII"}
+
+
+def block_refs(body: object) -> list[tuple[str, str, str]]:
+    """(where, asset version ID, required kind) for every diagram, handout and fallback image in a body."""
+    out: list[tuple[str, str, str]] = []
+    stack: list[object] = [body]
+    while stack:  # iterative: bodies are shallow, but never trust their depth
+        node = stack.pop()
+        if isinstance(node, list):
+            stack.extend(node)
+        elif isinstance(node, dict):
+            kind = node.get("type")
+            if isinstance(kind, str) and kind in REF_KIND and isinstance(node.get("asset_version_id"), str):
+                out.append((f"{kind} block", node["asset_version_id"], REF_KIND[kind]))
+            fb = node.get("fallback")
+            if isinstance(fb, dict) and isinstance(fb.get("image_asset_id"), str):
+                out.append((f"{kind} fallback", fb["image_asset_id"], "image"))
+            stack.extend(v for k, v in node.items() if k != "fallback")
+    return out
+
+
+def check_references(db: Session, grade: int, subject: str, body: object) -> list[str]:
+    """Every archived asset a body names must exist, be the right kind, have a ready delivery copy and belong to the
+    same class and subject as the content: Class XI and XII material is never mixed."""
+    problems = []
+    for where, vid, kind in block_refs(body):
+        v = resolve(db, vid)
+        asset = db.get(Asset, v.asset_id) if v is not None else None
+        if v is None or asset is None:
+            problems.append(f"The {where} names asset version {vid}, which isn't in the asset archive.")
+            continue
+        if asset.kind != kind:
+            problems.append(f"The {where} names '{asset.title}', which isn't {_KIND_NAME[kind]} ({asset.kind}).")
+        if (asset.grade_number, asset.subject_code) != (grade, subject):
+            problems.append(
+                f"The {where} names '{asset.title}' from {_CLASS.get(asset.grade_number, asset.grade_number)} "
+                f"{asset.subject_code}; Class XI and XII (and different subjects) are never mixed."
+            )
+        if v.delivery_state != "ready":
+            problems.append(f"The {where} names '{asset.title}' version {v.number}, which has no delivery copy.")
+    return problems
+
+
+def for_lesson(db: Session, item: Any, version_id: uuid.UUID) -> tuple[AssetVersion, Asset]:
+    """The asset version a live lesson's *published* version names, or NotFound. Nothing else in the archive is ever
+    reachable by learners."""
+    published = item.published
+    named = {vid for _, vid, _ in block_refs(published.body)} if published is not None else set()
+    v = db.get(AssetVersion, version_id) if str(version_id) in named else None
+    asset = db.get(Asset, v.asset_id) if v is not None else None
+    if (
+        v is None
+        or asset is None
+        or asset.kind not in SERVED
+        or v.delivery_state != "ready"
+        or not v.delivery_key
+        or (asset.grade_number, asset.subject_code) != (item.grade_number, item.subject_code)
+    ):
+        raise NotFound("File not found.")
+    return v, asset

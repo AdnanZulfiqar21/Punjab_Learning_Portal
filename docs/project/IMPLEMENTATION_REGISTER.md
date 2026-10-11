@@ -4,6 +4,8 @@ Source plan: `Road Map/Punjab_Learning_Portal_Master_Roadmap_v2.2_Integrated_Wri
 
 ## Tasks touched
 
+**Completion states (2026-10-11, owner instruction).** Rows from LESSON-BLOCKS-01 onward state each of six separate states: **Code** implemented · **Tests** (automated tests passed: API, web, contract) · **Browser/device** verified (real browser journeys; Android/iOS devices separately; Expo web is never device evidence) · **Academic** approval (named reviewers, B01; fixtures never count) · **Deployment** verified (B03) · **Launch** ready. A state not shown as done is not done.
+
 **State vocabulary (R09, 2026-10-08).** `IMPLEMENTED` means code plus passing local tests for the stated slice. `PARTIAL` means a first slice exists with named acceptance gaps. Verification level is stated separately: locally verified, CI verified (merged with green required checks), externally blocked, or release qualified. **No task is release qualified yet**, and Platform Ready, Content Ready and Public Launch Ready are all unmet (RELEASE_CHECKLIST). Expo web checks are not native Android/iOS evidence.
 
 | Task | State | Evidence / code | Checks | Remaining |
@@ -172,3 +174,4 @@ Source plan: `Road Map/Punjab_Learning_Portal_Master_Roadmap_v2.2_Integrated_Wri
 | P06.S3.T1 Preview across delivery surfaces | IMPLEMENTED (API + web studio) | SURFACES-01. `tests/test_surface_preview.py`. |
 | P06.S4.T3 Staff workflow rehearsal | IMPLEMENTED with technical fixtures; real-material rehearsal BLOCKED (B01) | WORKFLOW-REHEARSAL-01. `tests/test_staff_workflow_rehearsal.py`. |
 | P07.S2.T4 Owned master archive and retention | IMPLEMENTED (local private storage; object storage B03, media provider B05) | ASSETS-01. `tests/test_assets.py`. |
+| P07.S1.T1 Structured content blocks | IMPLEMENTED. Code: done. Tests: API + Playwright passed locally. Browser: web desktop, 375 px and dark verified locally; studio verified; Android/iOS NOT device-verified. Academic: n/a (fixtures only). Deployment: no. Launch: no | LESSON-BLOCKS-01. `tests/test_lesson_blocks.py`, `e2e/lessons.spec.ts`, `e2e/accessibility.spec.ts`. | Question diagrams (attempt-bound delivery); mobile handout download; device verification (B07/B09/B13) |

@@ -70,12 +70,15 @@ function normaliseBody(kind: string, body: Body): Body {
   return { blocks: normaliseBlocks(blocksOf(body)) };
 }
 
+/** Staff see archived files through the studio route (scope-checked by the API). */
+export const studioAsset = (v: string) => `/studio/assets/file/${v}?copy=delivery`;
+
 function Preview({ kind, body }: { kind: string; body: Body }) {
   if (kind === "mcq") return <McqPreview body={body} />;
   if (kind === "written") return <WrittenPreview body={body} />;
   if (kind === "rubric") return <RubricPreview body={body} />;
   if (kind === "storyboard") return <StoryboardPreview body={body} />;
-  return <LessonBlocks blocks={blocksOf(body)} headingOffset={1} />;
+  return <LessonBlocks blocks={blocksOf(body)} headingOffset={1} assetUrl={studioAsset} />;
 }
 
 function sections(kind: string, body: Body): { label: string; text: string }[] {

@@ -4,6 +4,10 @@ Every content version stores `content_schema_version` and the block types it use
 renderer version per platform and whether a reviewed fallback is mandatory. Publication is rejected when a block needs
 a renderer newer than the oldest supported client and no reviewed fallback is attached (§5.4 rule 4).
 
+All text is plain text: nothing is interpreted as HTML or markup, and clients render it as text (P07.S1.T1).
+Scientific notation keeps an accessible equivalent: equations carry `text_alt`, diagrams `alt` (and an optional long
+description), tables a caption.
+
 Blocks hold the author's own explanatory text. They never embed textbook page images or long verbatim passages; source
 material is referenced by page (`source_refs`), not copied (IMPL-01).
 """
@@ -46,6 +50,11 @@ REGISTRY: dict[str, BlockSpec] = {
         # P07.S1.T3: formative only. Renderer v1 includes it on every platform because no native build had shipped when
         # it was added (B07); after a store release, a new block type must raise the renderer version instead.
         BlockSpec("checkpoint", 1, {"web": 1, "android": 1, "ios": 1}, True, "Formative question or self-check."),
+        # P07.S1.T1 (LESSON-BLOCKS-01): like checkpoints, these join renderer v1 because no native build has shipped
+        # (B07). After the first store release a new block type must raise the renderer version instead.
+        BlockSpec("example", 1, {"web": 1, "android": 1, "ios": 1}, True, "Worked example: problem, steps, answer."),
+        BlockSpec("diagram", 1, {"web": 1, "android": 1, "ios": 1}, True, "Archived image with alt text and caption."),
+        BlockSpec("handout", 1, {"web": 1, "android": 1, "ios": 1}, True, "Downloadable archived PDF handout."),
     )
 }
 
@@ -67,6 +76,8 @@ class Fallback(BaseModel):
 
 Text = Annotated[str, Field(min_length=1, max_length=5000)]
 Short = Annotated[str, Field(min_length=1, max_length=300)]
+# An archived asset version (ASSETS-01). Which kind, class and subject it must be is checked against the archive.
+AssetRef = Annotated[str, Field(pattern=r"^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")]
 
 
 class Heading(_Block):
@@ -142,7 +153,37 @@ class Checkpoint(_Block):
         return self
 
 
-AnyBlock = Heading | Paragraph | ListBlock | Callout | Table | Equation | Checkpoint
+class Example(_Block):
+    """A worked example (P07.S1.T1): the problem, numbered steps and the answer, all plain text."""
+
+    type: Literal["example"]
+    title: Short
+    problem: Text
+    steps: list[Annotated[str, Field(min_length=1, max_length=2000)]] = Field(min_length=1, max_length=20)
+    answer: Text | None = None
+
+
+class Diagram(_Block):
+    """An archived image (labelled diagram, graph, photo). Alt text and a caption are required; a long description
+    carries what a complex diagram shows for learners who can't see it."""
+
+    type: Literal["diagram"]
+    asset_version_id: AssetRef
+    alt: Annotated[str, Field(min_length=3, max_length=500)]
+    caption: Short
+    long_description: Text | None = None
+
+
+class Handout(_Block):
+    """A downloadable archived PDF (worksheet, summary sheet)."""
+
+    type: Literal["handout"]
+    asset_version_id: AssetRef
+    title: Short
+    description: Short | None = None
+
+
+AnyBlock = Heading | Paragraph | ListBlock | Callout | Table | Equation | Checkpoint | Example | Diagram | Handout
 Block = Annotated[AnyBlock, Field(discriminator="type")]
 
 
@@ -213,11 +254,22 @@ def text_of(block_list: list[AnyBlock]) -> str:
     """Canonical plain text of blocks, for duplicate detection (never for display)."""
     parts: list[str] = []
     for b in block_list:
-        for attr in ("text", "title", "caption", "latex", "text_alt", "prompt", "explanation"):
+        for attr in (
+            "text",
+            "title",
+            "caption",
+            "latex",
+            "text_alt",
+            "prompt",
+            "explanation",
+            "problem",
+            "answer",
+            "alt",
+        ):
             v = getattr(b, attr, None)
             if isinstance(v, str):
                 parts.append(v)
-        for attr in ("items", "header"):
+        for attr in ("items", "header", "steps"):
             v = getattr(b, attr, None)
             if isinstance(v, list):
                 parts.extend(str(x) for x in v)

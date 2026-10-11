@@ -15,6 +15,7 @@ import sys
 import uuid
 
 from sqlalchemy import select
+from sqlalchemy.orm import Session
 
 from portal_api.config import get_settings
 from portal_api.db import get_sessionmaker
@@ -32,6 +33,55 @@ NAMESPACE = uuid.UUID("6f0f3a52-7d0f-4a8b-9c1e-0c5b8a0d4e11")  # deterministic f
 
 def _p(text: str) -> list[dict[str, object]]:
     return [{"type": "paragraph", "text": text}]
+
+
+def _fixture_png(label: str) -> bytes:
+    import io
+
+    from PIL import Image, ImageDraw
+
+    im = Image.new("RGB", (640, 320), (240, 240, 240))
+    draw = ImageDraw.Draw(im)
+    draw.rectangle((40, 40, 600, 280), outline=(60, 60, 60), width=4)
+    draw.text((70, 150), label, fill=(20, 20, 20))
+    buf = io.BytesIO()
+    im.save(buf, format="PNG")
+    return buf.getvalue()
+
+
+def _fixture_pdf() -> bytes:
+    import io
+
+    from PIL import Image, ImageDraw
+
+    im = Image.new("RGB", (595, 842), (255, 255, 255))
+    ImageDraw.Draw(im).text((60, 60), "Technical fixture handout. Not academic content.", fill=(0, 0, 0))
+    buf = io.BytesIO()
+    im.save(buf, format="PDF")
+    return buf.getvalue()
+
+
+def _fixture_asset(db: Session, author_id: uuid.UUID, kind: str, title: str, data: bytes) -> str:
+    """Archive a synthetic fixture file as Class XI Biology (ASSETS-01) and return its version ID."""
+    from portal_api.modules.content import assets
+
+    asset = assets.Asset(kind=kind, title=f"{FIXTURE_PREFIX} {title}", grade_number=11, subject_code="biology",
+                         created_by=author_id)  # fmt: skip
+    db.add(asset)
+    db.flush()
+    derived = assets._derive(kind, data)
+    version = assets.AssetVersion(id=uuid.uuid4(), asset_id=asset.id, number=1, created_by=author_id)
+    version.master_key = f"{asset.id}/{version.id}/master"
+    version.master_sha256 = assets._sha(data)
+    version.master_bytes = len(data)
+    version.media_type = derived["media_type"]
+    version.width, version.height, version.pages = derived.get("width"), derived.get("height"), derived.get("pages")
+    version.provenance = {"source": "Synthetic technical fixture (portal-dev-seed-practice)"}
+    assets._write(version.master_key, data)
+    assets._set_delivery(version, derived["delivery"], derived["delivery_type"])
+    db.add(version)
+    db.flush()
+    return str(version.id)
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -104,7 +154,9 @@ def main(argv: list[str] | None = None) -> int:
                     revision=1,
                     content_schema_version=blocks.CONTENT_SCHEMA_VERSION,
                     body=body,
-                    block_types=["paragraph"] if kind != "rubric" else [],
+                    block_types=blocks.validate_body(body, for_publication=False).block_types
+                    if kind == "lesson"
+                    else (["paragraph"] if kind != "rubric" else []),
                     source_refs=refs,
                     change_reason=None,
                     created_by=author.id,
@@ -203,8 +255,65 @@ def main(argv: list[str] | None = None) -> int:
                 {"blocks": _p(f"Technical fixture {tier} lesson text. This is not academic content.")},
                 access_tier=tier,
             )
+        # P07.S1.T1: one free-preview lesson using every structured block, with synthetic archived assets, so the
+        # lesson viewer can be checked in a browser (web, phone width) and on devices.
+        if db.get(ContentItem, uuid.uuid5(NAMESPACE, "lesson-fixture-blocks")) is None:
+            image = _fixture_asset(db, author.id, "image", "Fixture diagram", _fixture_png("Technical fixture diagram"))
+            formula = _fixture_asset(db, author.id, "image", "Fixture formula rendering", _fixture_png("v = u + at"))
+            sheet = _fixture_asset(db, author.id, "handout", "Fixture handout", _fixture_pdf())
+            created += publish(
+                "lesson-fixture-blocks",
+                "lesson",
+                "Structured blocks lesson",
+                {
+                    "blocks": [
+                        {"type": "heading", "level": 2, "text": "Technical fixture: structured blocks"},
+                        *_p("Technical fixture explanation text. This is not academic content."),
+                        {
+                            "type": "example",
+                            "title": "Technical fixture worked example",
+                            "problem": "Fixture problem statement (not academic content).",
+                            "steps": ["Fixture step one.", "Fixture step two."],
+                            "answer": "Fixture answer.",
+                        },
+                        {
+                            "type": "equation",
+                            "latex": "v = u + at",
+                            "text_alt": "v equals u plus a t (fixture)",
+                            "fallback": {
+                                "text": "v = u + at",
+                                "image_asset_id": formula,
+                                "alt": "Fixture rendering of v equals u plus a t",
+                                "reviewed": True,
+                            },
+                        },
+                        {
+                            "type": "diagram",
+                            "asset_version_id": image,
+                            "alt": "A synthetic fixture image with a box and a label",
+                            "caption": "Technical fixture diagram",
+                            "long_description": "A grey box with the words 'Technical fixture diagram'.",
+                        },
+                        {
+                            "type": "table",
+                            "caption": "Technical fixture table",
+                            "header": ["Fixture column A", "Fixture column B"],
+                            "rows": [["1", "2"], ["3", "4"]],
+                        },
+                        {"type": "callout", "tone": "warning", "text": "Technical fixture warning."},
+                        {
+                            "type": "checkpoint",
+                            "mode": "self_check",
+                            "prompt": "Technical fixture self-check prompt.",
+                            "explanation": "Fixture explanation shown when revealed.",
+                        },
+                        {"type": "handout", "asset_version_id": sheet, "title": "Technical fixture handout"},
+                    ]
+                },
+                access_tier="preview",
+            )
         db.commit()
-    total = COUNT + 2 * WRITTEN_COUNT + 2
+    total = COUNT + 2 * WRITTEN_COUNT + 3
     print(f"practice fixtures: {created} created, {total - created} already present (Class XI Biology, first chapter)")
     return 0
 

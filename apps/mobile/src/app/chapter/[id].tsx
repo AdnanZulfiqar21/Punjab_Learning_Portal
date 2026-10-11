@@ -9,7 +9,7 @@ import { Badge, Card, ErrorState, Loading, Notice, T } from "@/components/ui";
 import { Space } from "@/constants/theme";
 import { useRequest } from "@/hooks/use-request";
 import { useTheme } from "@/hooks/use-theme";
-import { api, GRADE_LABEL, pageRange } from "@/lib/api";
+import { api, GRADE_LABEL, pageRange, lessonAsset } from "@/lib/api";
 import { useAuth } from "@/lib/auth";
 
 export default function ChapterScreen() {
@@ -135,7 +135,7 @@ function LessonList({ chapterId, token }: { chapterId: string; token: string | n
                 </Notice>
               ) : (
                 <View style={l.language === "ur" ? { direction: "rtl" } : undefined}>
-                  <LessonBlocks blocks={l.body.blocks as { type: string }[]} />
+                  <LessonBlocks blocks={l.body.blocks as { type: string }[]} assetSource={(v) => lessonAsset(l.id, v, token)} />
                 </View>
               )}
             </View>

@@ -745,6 +745,27 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/lessons/{item_id}/assets/{version_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * A diagram or handout named by a live lesson's published version (under the lesson's access tier)
+         * @description P07.S1.T1 (LESSON-BLOCKS-01): learners only ever receive derived delivery copies named by the published lesson
+         *     they may read: free previews for everyone, premium lessons with an active plan or trial.
+         */
+        get: operations["lesson_asset_v1_lessons__item_id__assets__version_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/me": {
         parameters: {
             query?: never;
@@ -9544,6 +9565,38 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["ArticleOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    lesson_asset_v1_lessons__item_id__assets__version_id__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                item_id: string;
+                version_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": unknown;
                 };
             };
             /** @description Validation Error */

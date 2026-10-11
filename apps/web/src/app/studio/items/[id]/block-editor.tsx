@@ -13,6 +13,13 @@ export const BLOCK_TYPES: { type: string; label: string; make: () => Block }[] =
   { type: "table", label: "Table", make: () => ({ type: "table", caption: "", header: ["", ""], rows: [["", ""]] }) },
   { type: "equation", label: "Equation", make: () => ({ type: "equation", latex: "", text_alt: "", display: true }) },
   {
+    type: "example",
+    label: "Worked example",
+    make: () => ({ type: "example", title: "", problem: "", steps: [""], answer: "" }),
+  },
+  { type: "diagram", label: "Diagram", make: () => ({ type: "diagram", asset_version_id: "", alt: "", caption: "" }) },
+  { type: "handout", label: "Handout", make: () => ({ type: "handout", asset_version_id: "", title: "" }) },
+  {
     type: "checkpoint",
     label: "Checkpoint",
     make: () => ({ type: "checkpoint", mode: "question", prompt: "", options: [{ id: "a", text: "" }, { id: "b", text: "" }], answer_id: "a", explanation: "" }),
@@ -152,12 +159,53 @@ function Fields({ block: b, index, update }: { block: Block; index: number; upda
           />
         </div>
       );
-    case "equation":
+    case "equation": {
+      const fb = (b.fallback ?? {}) as { text?: string; image_asset_id?: string; alt?: string; reviewed?: boolean };
+      const setFb = (p: Partial<typeof fb>) => update({ fallback: { ...fb, ...p } });
       return (
         <div className="space-y-2">
           <input aria-label="LaTeX" placeholder="LaTeX, e.g. v = u + at" value={s(b.latex)} onChange={(e) => update({ latex: e.target.value })} className={`${input} font-mono`} maxLength={2000} />
           <input aria-label="Text equivalent" placeholder="Text equivalent, e.g. v equals u plus a t" value={s(b.text_alt)} onChange={(e) => update({ text_alt: e.target.value })} className={input} maxLength={1000} />
-          <p className="text-xs text-muted">Publishing an equation needs a reviewed static rendering until the equation renderer ships.</p>
+          <fieldset className="space-y-2 rounded-lg border border-border p-3">
+            <legend className="px-1 text-sm font-medium">Static rendering for apps without an equation renderer</legend>
+            <input aria-label="Rendered image version ID" placeholder="Image version ID from Studio → Assets" value={s(fb.image_asset_id)} onChange={(e) => setFb({ image_asset_id: e.target.value.trim() })} className={`${input} font-mono text-sm`} maxLength={80} />
+            <input aria-label="Rendered image alt text" placeholder="Alt text for the image" value={s(fb.alt)} onChange={(e) => setFb({ alt: e.target.value })} className={input} maxLength={500} />
+            <input aria-label="Fallback text" placeholder="Fallback text (e.g. v = u + at)" value={s(fb.text)} onChange={(e) => setFb({ text: e.target.value })} className={input} maxLength={2000} />
+            <label className="flex items-center gap-2 text-sm">
+              <input type="checkbox" checked={!!fb.reviewed} onChange={(e) => setFb({ reviewed: e.target.checked })} />
+              The image matches the equation exactly (the reviewer checks this too)
+            </label>
+          </fieldset>
+        </div>
+      );
+    }
+    case "example":
+      return (
+        <div className="space-y-2">
+          <input aria-label="Example title" placeholder="Title" value={s(b.title)} onChange={(e) => update({ title: e.target.value })} className={input} maxLength={300} />
+          <textarea aria-label="Example problem" placeholder="The problem" value={s(b.problem)} onChange={(e) => update({ problem: e.target.value })} className={input} rows={3} maxLength={5000} />
+          <label htmlFor={id("steps")} className="block text-sm text-muted">
+            Steps, one per line
+          </label>
+          <textarea id={id("steps")} value={lines(b.steps)} onChange={(e) => update({ steps: e.target.value.split("\n") })} className={input} rows={4} />
+          <textarea aria-label="Example answer" placeholder="Answer (optional)" value={s(b.answer)} onChange={(e) => update({ answer: e.target.value })} className={input} rows={2} maxLength={5000} />
+        </div>
+      );
+    case "diagram":
+      return (
+        <div className="space-y-2">
+          <input aria-label="Diagram image version ID" placeholder="Image version ID from Studio → Assets (same class and subject)" value={s(b.asset_version_id)} onChange={(e) => update({ asset_version_id: e.target.value.trim() })} className={`${input} font-mono text-sm`} maxLength={80} />
+          <input aria-label="Diagram alt text" placeholder="Alt text: what the diagram shows" value={s(b.alt)} onChange={(e) => update({ alt: e.target.value })} className={input} maxLength={500} />
+          <input aria-label="Diagram caption" placeholder="Caption" value={s(b.caption)} onChange={(e) => update({ caption: e.target.value })} className={input} maxLength={300} />
+          <textarea aria-label="Diagram long description" placeholder="Long description for complex diagrams (optional)" value={s(b.long_description)} onChange={(e) => update({ long_description: e.target.value })} className={input} rows={3} maxLength={5000} />
+        </div>
+      );
+    case "handout":
+      return (
+        <div className="space-y-2">
+          <input aria-label="Handout PDF version ID" placeholder="Handout version ID from Studio → Assets (same class and subject)" value={s(b.asset_version_id)} onChange={(e) => update({ asset_version_id: e.target.value.trim() })} className={`${input} font-mono text-sm`} maxLength={80} />
+          <input aria-label="Handout title" placeholder="Title" value={s(b.title)} onChange={(e) => update({ title: e.target.value })} className={input} maxLength={300} />
+          <input aria-label="Handout description" placeholder="Description (optional)" value={s(b.description)} onChange={(e) => update({ description: e.target.value })} className={input} maxLength={300} />
         </div>
       );
     case "checkpoint": {
@@ -217,6 +265,29 @@ export function normaliseBlocks(blocks: Block[]): Block[] {
       if (b.mode === "self_check") return { type: "checkpoint", mode: "self_check", prompt: b.prompt, explanation: b.explanation };
       const options = ((b.options as CheckpointOption[]) ?? []).filter((o) => o.text.trim());
       return { ...b, options, answer_id: options.some((o) => o.id === b.answer_id) ? b.answer_id : undefined };
+    }
+    if (b.type === "example") {
+      const out: Block = { ...b, steps: ((b.steps as string[]) ?? []).map((x) => x.trim()).filter(Boolean) };
+      if (!s(b.answer).trim()) delete out.answer;
+      return out;
+    }
+    if (b.type === "diagram" && !s(b.long_description).trim()) {
+      const out: Block = { ...b };
+      delete out.long_description;
+      return out;
+    }
+    if (b.type === "handout" && !s(b.description).trim()) {
+      const out: Block = { ...b };
+      delete out.description;
+      return out;
+    }
+    if (b.type === "equation" && b.fallback) {
+      const fb = b.fallback as Record<string, unknown>;
+      const kept = Object.fromEntries(Object.entries(fb).filter(([, v]) => v !== "" && v !== undefined));
+      const out: Block = { ...b };
+      if (Object.keys(kept).length === 0 || !s(kept.text)) delete out.fallback;
+      else out.fallback = kept;
+      return out;
     }
     if (b.type === "callout" && !s(b.title).trim()) {
       const rest: Block = { ...b };

@@ -7,7 +7,7 @@ export async function AccountNav() {
   return (
     <Link
       href={signedIn ? "/account" : "/signin"}
-      className="rounded-md px-3 py-2 text-muted hover:bg-surface-muted hover:text-foreground"
+      className="rounded-md px-2 py-2 text-muted hover:bg-surface-muted hover:text-foreground sm:px-3"
     >
       {signedIn ? "Account" : "Sign in"}
     </Link>

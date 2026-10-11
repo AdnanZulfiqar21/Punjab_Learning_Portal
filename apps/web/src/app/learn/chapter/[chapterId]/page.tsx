@@ -221,7 +221,7 @@ async function Lessons({ chapterId, topics, lang }: { chapterId: string; topics:
             ) : (
               <div lang={l.language === "ur" ? "ur" : "en"} dir={l.language === "ur" ? "rtl" : undefined}>
                 {token && <LessonStartBeacon lessonId={l.id} language={l.language} />}
-                <LessonBlocks blocks={l.body.blocks as { type: string }[]} headingOffset={2} />
+                <LessonBlocks blocks={l.body.blocks as { type: string }[]} headingOffset={2} assetUrl={(v) => `/learn/lessons/${l.id}/assets/${v}`} />
               </div>
             )}
             {token && !l.locked && l.body && (

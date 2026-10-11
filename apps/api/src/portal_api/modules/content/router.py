@@ -573,6 +573,47 @@ def chapter_lessons(
     return out
 
 
+@public.get(
+    "/lessons/{item_id}/assets/{version_id}",
+    summary="A diagram or handout named by a live lesson's published version (under the lesson's access tier)",
+)
+def lesson_asset(db: DB, who: OptionalPrincipal, item_id: uuid.UUID, version_id: uuid.UUID) -> Response:
+    """P07.S1.T1 (LESSON-BLOCKS-01): learners only ever receive derived delivery copies named by the published lesson
+    they may read: free previews for everyone, premium lessons with an active plan or trial."""
+    from portal_api.errors import Forbidden, Unauthorized
+    from portal_api.modules.content import assets
+
+    item = db.get(ContentItem, item_id)
+    if (
+        item is None
+        or item.availability != Availability.live.value
+        or not kinds.get(item.kind).learner_readable
+        or item.published is None
+    ):
+        raise NotFound("File not found.")
+    if item.access_tier != "preview":
+        if who is None:
+            raise Unauthorized("Sign in to open this lesson's files.")
+        entitled = bool(access.active_entitlements(db, who.user.id, access.db_now(db)))
+        if not entitled or access.device_gate(db, who.user.id) is not None:
+            raise Forbidden("This lesson is included with a plan or the free trial.")
+    v, asset = assets.for_lesson(db, item, version_id)
+    filename = (
+        "handout.pdf" if asset.kind == "handout" else ("captions.vtt" if asset.kind == "caption" else "diagram.png")
+    )
+    return Response(
+        content=assets.read(v.delivery_key or ""),
+        media_type=v.delivery_media_type or "application/octet-stream",
+        headers={
+            # Versions are immutable, so a copy can be cached; premium copies only by the learner's own browser.
+            "Cache-Control": ("public" if item.access_tier == "preview" else "private") + ", max-age=3600",
+            "Vary": "Authorization",
+            "X-Content-Type-Options": "nosniff",
+            "Content-Disposition": f'{"attachment" if asset.kind == "handout" else "inline"}; filename="{filename}"',
+        },
+    )
+
+
 # ------------------------------------------------------------------ MCQ score corrections (§5.7, P10.S3.T4)
 class ScoreCorrectionIn(BaseModel):
     defect: Literal["VOID", "KEY_ERROR"]
