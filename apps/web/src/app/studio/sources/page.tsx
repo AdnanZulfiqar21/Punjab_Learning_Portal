@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import type { SourceInfo, SyllabusNotice } from "@portal/contracts";
 import { Badge, Breadcrumbs, Notice, SkeletonLines } from "@/components/ui";
-import { api } from "@/lib/session";
-import { requireStaff, StudioForbiddenError } from "@/lib/studio";
-import { DecideNotice, LogNoticeForm, ReviewSourceButton } from "./controls";
+import { redirect } from "next/navigation";
+import { api, currentUser } from "@/lib/session";
+import { STUDIO_ROLES } from "@/lib/studio";
+import { DecideNotice, LogNoticeForm, ReviewSourceButton, RightsForm, UploadOriginal, ViewSourcePage } from "./controls";
 
 export const metadata: Metadata = { title: "Sources and notices", robots: { index: false } };
 const date = (s: string) => new Date(s).toLocaleDateString("en-GB", { dateStyle: "medium" });
@@ -27,20 +28,21 @@ export default function SourcesPage() {
 }
 
 async function Body() {
-  let token = "";
-  let roles: string[] = [];
-  try {
-    const staff = await requireStaff("/studio/sources");
-    token = staff.token;
-    roles = staff.me.roles;
-  } catch (e) {
-    if (!(e instanceof StudioForbiddenError)) throw e;
-  }
-  if (!token) return <Notice tone="warn" title="Staff only">Only content staff can open the source registry.</Notice>;
-  const [sources, notices] = await Promise.all([api<SourceInfo[]>("/v1/studio/sources", { token }), api<SyllabusNotice[]>("/v1/studio/syllabus-notices", { token })]);
+  const user = await currentUser();
+  if (!user) redirect("/signin?next=/studio/sources");
+  const { token } = user;
+  const roles = user.me.roles;
+  const staff = roles.some((r) => STUDIO_ROLES.has(r));
+  const owner = roles.includes("owner_admin"); // SOURCE-INTAKE-01: the owner sets rights and stores originals
+  if (!staff && !owner) return <Notice tone="warn" title="Staff only">Only content staff and the owner can open the source registry.</Notice>;
+  const [sources, notices] = await Promise.all([
+    api<SourceInfo[]>("/v1/studio/sources", { token }),
+    staff ? api<SyllabusNotice[]>("/v1/studio/syllabus-notices", { token }) : Promise.resolve(null),
+  ]);
   const reviewer = roles.includes("subject_reviewer");
   return (
     <div className="space-y-8">
+      {staff && notices && (
       <section aria-labelledby="notices-h" className="space-y-3">
         <h2 id="notices-h" className="font-semibold">
           Syllabus notices
@@ -72,6 +74,7 @@ async function Body() {
           <p className="text-sm text-muted">No notices yet.</p>
         )}
       </section>
+      )}
       <section aria-labelledby="sources-h" className="space-y-3">
         <h2 id="sources-h" className="font-semibold">
           Source registry
@@ -88,12 +91,16 @@ async function Body() {
                   <span className="font-medium">{s.title ?? s.source_id}</span>
                   <Badge tone={s.publication_rights === "CONFIRMED" ? "ok" : s.publication_rights === "DENIED" ? "danger" : "warn"}>rights {s.publication_rights.toLowerCase()}</Badge>
                   {s.review_stale ? <Badge tone="warn">review due</Badge> : <Badge tone="ok">reviewed</Badge>}
+                  {s.original_stored ? <Badge tone="ok">original stored</Badge> : <Badge>original not stored</Badge>}
                 </p>
                 <p className="text-muted">
                   {s.source_id} · Class {s.grade_number === 11 ? "XI" : "XII"} {s.subject_code.replace("_", " ")} · {s.pdf_pages} pages ·{" "}
                   {s.last_reviewed_at ? `last reviewed ${date(s.last_reviewed_at)}` : "never reviewed"}
                 </p>
                 {reviewer && <ReviewSourceButton id={s.id} label={s.source_id} />}
+                {s.original_stored && staff && <ViewSourcePage id={s.id} pages={s.pdf_pages} label={s.source_id} />}
+                {owner && !s.original_stored && <UploadOriginal id={s.id} label={s.source_id} />}
+                {owner && <RightsForm id={s.id} label={s.source_id} />}
               </li>
             ))}
           </ul>

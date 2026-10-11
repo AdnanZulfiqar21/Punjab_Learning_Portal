@@ -5825,6 +5825,32 @@
             "title": "Id",
             "type": "string"
           },
+          "marker_proposal": {
+            "description": "Starting point: the storyboard's planned scene times",
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Marker Proposal",
+            "type": "array"
+          },
+          "markers": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Markers"
+          },
+          "markers_current": {
+            "description": "Timed against the current master video",
+            "title": "Markers Current",
+            "type": "boolean"
+          },
           "master": {
             "anyOf": [
               {
@@ -5920,6 +5946,9 @@
           "master",
           "transcript",
           "captions",
+          "markers",
+          "markers_current",
+          "marker_proposal",
           "review",
           "missing",
           "approved_at",
@@ -6321,6 +6350,53 @@
           "slots"
         ],
         "title": "ManifestIn",
+        "type": "object"
+      },
+      "MarkerIn": {
+        "properties": {
+          "label": {
+            "description": "The concept section a learner sees in the chapter list",
+            "maxLength": 120,
+            "minLength": 1,
+            "title": "Label",
+            "type": "string"
+          },
+          "scene_id": {
+            "maxLength": 20,
+            "minLength": 1,
+            "title": "Scene Id",
+            "type": "string"
+          },
+          "start_s": {
+            "maximum": 7200.0,
+            "minimum": 0.0,
+            "title": "Start S",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "scene_id",
+          "start_s",
+          "label"
+        ],
+        "title": "MarkerIn",
+        "type": "object"
+      },
+      "MarkersIn": {
+        "properties": {
+          "scenes": {
+            "items": {
+              "$ref": "#/components/schemas/MarkerIn"
+            },
+            "maxItems": 60,
+            "title": "Scenes",
+            "type": "array"
+          }
+        },
+        "required": [
+          "scenes"
+        ],
+        "title": "MarkersIn",
         "type": "object"
       },
       "MasterIn": {
@@ -7427,6 +7503,35 @@
           "blocks"
         ],
         "title": "OptionSnapshot",
+        "type": "object"
+      },
+      "OriginalOut": {
+        "properties": {
+          "bytes": {
+            "title": "Bytes",
+            "type": "integer"
+          },
+          "sha256": {
+            "title": "Sha256",
+            "type": "string"
+          },
+          "source_id": {
+            "format": "uuid",
+            "title": "Source Id",
+            "type": "string"
+          },
+          "stored": {
+            "title": "Stored",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "source_id",
+          "sha256",
+          "bytes",
+          "stored"
+        ],
+        "title": "OriginalOut",
         "type": "object"
       },
       "OutcomeEvidence": {
@@ -10530,6 +10635,11 @@
             "items": {},
             "title": "Missing Pages",
             "type": "array"
+          },
+          "original_stored": {
+            "default": false,
+            "title": "Original Stored",
+            "type": "boolean"
           },
           "pdf_pages": {
             "title": "Pdf Pages",
@@ -21331,6 +21441,59 @@
         ]
       }
     },
+    "/v1/studio/lectures/{lecture_id}/markers": {
+      "put": {
+        "operationId": "set_markers_v1_studio_lectures__lecture_id__markers_put",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "lecture_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Lecture Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MarkersIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LectureOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Set where each storyboard scene starts in the current master video (chapter markers)",
+        "tags": [
+          "lectures"
+        ]
+      }
+    },
     "/v1/studio/lectures/{lecture_id}/master": {
       "put": {
         "operationId": "set_master_v1_studio_lectures__lecture_id__master_put",
@@ -21806,6 +21969,101 @@
           }
         },
         "summary": "Source documents and their publication-rights state",
+        "tags": [
+          "studio"
+        ]
+      }
+    },
+    "/v1/studio/sources/{source_id}/original": {
+      "post": {
+        "operationId": "upload_original_v1_studio_sources__source_id__original_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "source_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Source Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OriginalOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Store the owner's original (raw PDF body); only the registered SHA-256 is accepted",
+        "tags": [
+          "studio"
+        ]
+      }
+    },
+    "/v1/studio/sources/{source_id}/pages/{page}": {
+      "get": {
+        "operationId": "source_page_v1_studio_sources__source_id__pages__page__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "source_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Source Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "page",
+            "required": true,
+            "schema": {
+              "maximum": 5000,
+              "minimum": 1,
+              "title": "Page",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "One PDF page of a stored original, as PNG (content staff)",
         "tags": [
           "studio"
         ]
