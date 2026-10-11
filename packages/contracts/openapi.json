@@ -1140,6 +1140,14 @@
             "title": "Items",
             "type": "array"
           },
+          "not_counted": {
+            "description": "After submission: questions whose latest change wasn't counted (the receipt itself never changes)",
+            "items": {
+              "$ref": "#/components/schemas/NotCountedOut"
+            },
+            "title": "Not Counted",
+            "type": "array"
+          },
           "receipt": {
             "anyOf": [
               {
@@ -6463,6 +6471,36 @@
         "title": "MockSessionOut",
         "type": "object"
       },
+      "NotCountedOut": {
+        "description": "RECEIPT-01: a question whose latest change wasn't counted, and why.",
+        "properties": {
+          "admitted_at": {
+            "format": "date-time",
+            "title": "Admitted At",
+            "type": "string"
+          },
+          "position": {
+            "title": "Position",
+            "type": "integer"
+          },
+          "reason": {
+            "enum": [
+              "late",
+              "finalised",
+              "invalid"
+            ],
+            "title": "Reason",
+            "type": "string"
+          }
+        },
+        "required": [
+          "position",
+          "reason",
+          "admitted_at"
+        ],
+        "title": "NotCountedOut",
+        "type": "object"
+      },
       "NoteIn": {
         "properties": {
           "note": {
@@ -8670,6 +8708,14 @@
           "maximum": {
             "title": "Maximum",
             "type": "integer"
+          },
+          "not_counted": {
+            "description": "Latest changes that weren't counted",
+            "items": {
+              "$ref": "#/components/schemas/NotCountedOut"
+            },
+            "title": "Not Counted",
+            "type": "array"
           },
           "percentage": {
             "anyOf": [

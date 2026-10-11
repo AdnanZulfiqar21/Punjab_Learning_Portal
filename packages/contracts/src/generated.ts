@@ -3984,6 +3984,11 @@ export interface components {
             id: string;
             /** Items */
             items: components["schemas"]["ItemSnapshot"][];
+            /**
+             * Not Counted
+             * @description After submission: questions whose latest change wasn't counted (the receipt itself never changes)
+             */
+            not_counted?: components["schemas"]["NotCountedOut"][];
             receipt: components["schemas"]["ReceiptOut"] | null;
             /**
              * Server Now
@@ -6123,6 +6128,24 @@ export interface components {
              */
             window_closes_at: string;
         };
+        /**
+         * NotCountedOut
+         * @description RECEIPT-01: a question whose latest change wasn't counted, and why.
+         */
+        NotCountedOut: {
+            /**
+             * Admitted At
+             * Format: date-time
+             */
+            admitted_at: string;
+            /** Position */
+            position: number;
+            /**
+             * Reason
+             * @enum {string}
+             */
+            reason: "late" | "finalised" | "invalid";
+        };
         /** NoteIn */
         NoteIn: {
             /** Note */
@@ -7050,6 +7073,11 @@ export interface components {
             items: components["schemas"]["ItemReview"][];
             /** Maximum */
             maximum: number;
+            /**
+             * Not Counted
+             * @description Latest changes that weren't counted
+             */
+            not_counted?: components["schemas"]["NotCountedOut"][];
             /** Percentage */
             percentage: string | null;
             /** Question Count */

@@ -26,6 +26,7 @@ from portal_api.modules.assessment.schemas import (
     FormOut,
     ItemReview,
     ItemSnapshot,
+    NotCountedOut,
     OpIn,
     OpResult,
     OpsIn,
@@ -97,6 +98,7 @@ def _attempt_out(db: Session, a: Attempt, who: Principal | None = None) -> Attem
         answers=[AnswerOut(**x) for x in attempts.answers_view(db, a)],
         receipt=_receipt_out(receipt) if receipt else None,
         held_elsewhere=attempts.held_elsewhere(db, a, who) if who is not None else False,
+        not_counted=[NotCountedOut(**n) for n in attempts.not_counted(db, a.id)] if a.status != "active" else [],
         flagged=list(a.flagged or []),
     )
 
@@ -321,6 +323,7 @@ def result(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, response: Respo
         answered=receipt.answered_count,
         question_count=receipt.question_count,
         finalise_reason=attempt.finalise_reason,  # type: ignore[arg-type]
+        not_counted=[NotCountedOut(**n) for n in attempts.not_counted(db, attempt.id)],
         items=items,
         revised_at=score.created_at if score.version > 1 else None,
         revision_reason=score.reason if score.version > 1 else None,

@@ -13,6 +13,13 @@ import { useAuth } from "@/lib/auth";
 
 type Blocks = { type: string }[];
 
+// P11.S3.T3 (RECEIPT-01): why a learner's latest change to a question wasn't counted.
+const WHY: Record<string, string> = {
+  late: "arrived after the time was up",
+  finalised: "arrived after the test was submitted",
+  invalid: "wasn't a valid option",
+};
+
 export default function ResultScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const { state } = useAuth();
@@ -64,6 +71,14 @@ function ResultView({ id, token }: { id: string; token: string }) {
       <T variant="small">
         {r.answered} of {r.question_count} answered · {r.finalise_reason === "expiry" ? "submitted when time ran out" : "submitted by you"}
       </T>
+      {(r.not_counted ?? []).length > 0 && (
+        <Notice title="Some last changes weren't counted" tone="warn">
+          {(r.not_counted ?? [])
+            .map((n) => `Question ${n.position}: your last change ${WHY[n.reason] ?? "wasn't counted"}.`)
+            .join(" ")}{" "}
+          The answer you had saved before it, if any, was marked.
+        </Notice>
+      )}
       {r.items.map((it) => (
         <Review key={it.position} item={it} assetSource={(v) => attemptAsset(id, v, token)} />
       ))}
