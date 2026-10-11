@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { attachCaptions, registerMaster, reviewLecture, saveTranscript, submitLecture, type LectureResult } from "@/app/actions/lectures";
+import { attachCaptions, registerMaster, reviewLecture, saveMarkers, saveTranscript, submitLecture, type LectureResult } from "@/app/actions/lectures";
 import { CHECKS, LANGUAGE } from "../labels";
 import { Problems } from "../lecture-forms";
 
@@ -241,6 +241,91 @@ export function TranscriptEditor({ id, scenes, editable }: { id: string; scenes:
         <button type="button" disabled={busy} onClick={() => run(() => saveTranscript(id, rows))} className={button}>
           {busy ? "Saving…" : "Save transcript"}
         </button>
+      )}
+      <Problems result={result} />
+    </div>
+  );
+}
+
+type Marker = { scene_id: string; start_s: number; label: string };
+const clock = (s: number) => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
+
+/** MARKERS-01 (P07.S3.T2): chapter markers, one per storyboard scene, timed against the current master video. */
+export function MarkersEditor({ id, initial, editable }: { id: string; initial: Marker[]; editable: boolean }) {
+  const { busy, result, run } = useRun();
+  const [rows, setRows] = useState(initial);
+  const [local, setLocal] = useState<string | null>(null);
+  return (
+    <div className="space-y-3 text-sm">
+      <table className="w-full text-left">
+        <thead className="text-muted">
+          <tr>
+            <th scope="col" className="py-1 pr-3 font-medium">
+              Scene
+            </th>
+            <th scope="col" className="py-1 pr-3 font-medium">
+              Starts at (s)
+            </th>
+            <th scope="col" className="py-1 font-medium">
+              Chapter title learners see
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((r, i) => (
+            <tr key={r.scene_id}>
+              <th scope="row" className="py-1 pr-3 font-mono font-normal">
+                {r.scene_id}
+              </th>
+              <td className="py-1 pr-3">
+                <input
+                  type="number"
+                  min={0}
+                  max={7200}
+                  value={r.start_s}
+                  readOnly={!editable || i === 0}
+                  aria-label={`Scene ${r.scene_id} start in seconds`}
+                  onChange={(e) => setRows(rows.map((x, j) => (j === i ? { ...x, start_s: Number(e.target.value) } : x)))}
+                  className={`${field} w-24`}
+                />{" "}
+                <span className="text-muted">{clock(r.start_s)}</span>
+              </td>
+              <td className="py-1">
+                <input
+                  value={r.label}
+                  maxLength={120}
+                  readOnly={!editable}
+                  aria-label={`Scene ${r.scene_id} chapter title`}
+                  onChange={(e) => setRows(rows.map((x, j) => (j === i ? { ...x, label: e.target.value } : x)))}
+                  className={`${field} w-full`}
+                />
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      {editable && (
+        <button
+          type="button"
+          disabled={busy}
+          onClick={() => {
+            const bad = rows.find((r) => !Number.isInteger(r.start_s) || r.start_s < 0 || r.start_s > 7200 || !r.label.trim());
+            if (bad) {
+              setLocal(`Scene ${bad.scene_id}: give a whole number of seconds between 0 and 7200, and a chapter title.`);
+              return;
+            }
+            setLocal(null);
+            void run(() => saveMarkers(id, rows));
+          }}
+          className={button}
+        >
+          {busy ? "Saving…" : "Save chapter markers"}
+        </button>
+      )}
+      {local && (
+        <p role="alert" className="text-danger">
+          {local}
+        </p>
       )}
       <Problems result={result} />
     </div>
