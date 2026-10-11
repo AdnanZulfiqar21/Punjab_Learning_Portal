@@ -3,7 +3,7 @@ from __future__ import annotations
 import uuid
 from datetime import datetime
 from decimal import Decimal
-from typing import Any, Literal
+from typing import Annotated, Any, Literal
 
 from pydantic import BaseModel, Field
 
@@ -129,6 +129,15 @@ class AttemptOut(BaseModel):
         default_factory=list,
         description="After submission: questions whose latest change wasn't counted (the receipt itself never changes)",
     )
+    flagged: list[int] = Field(default_factory=list, description="Positions flagged to come back to (never scored)")
+
+
+class FlagsIn(BaseModel):
+    positions: list[Annotated[int, Field(ge=1, le=200)]] = Field(max_length=200)
+
+
+class FlagsOut(BaseModel):
+    flagged: list[int]
 
 
 class OpIn(BaseModel):

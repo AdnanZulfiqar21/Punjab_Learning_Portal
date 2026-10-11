@@ -482,6 +482,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/attempts/{attempt_id}/flags": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** Flag questions to come back to */
+        put: operations["set_flags_v1_attempts__attempt_id__flags_put"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/attempts/{attempt_id}/items/{position}/reveal": {
         parameters: {
             query?: never;
@@ -897,6 +914,23 @@ export interface paths {
         post?: never;
         /** Withdraw an optional consent */
         delete: operations["withdraw_consent_v1_me_consents__document__delete"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/me/dashboard": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Your home dashboard, with the three progress meters */
+        get: operations["my_dashboard_v1_me_dashboard_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
         options?: never;
         head?: never;
         patch?: never;
@@ -3928,6 +3962,11 @@ export interface components {
              */
             feedback_mode: "deferred" | "immediate";
             /**
+             * Flagged
+             * @description Positions flagged to come back to (never scored)
+             */
+            flagged?: number[];
+            /**
              * Form Id
              * Format: uuid
              */
@@ -4528,6 +4567,34 @@ export interface components {
             /** Written Sealed */
             written_sealed: number;
         };
+        /** ContinueLesson */
+        ContinueLesson: {
+            /**
+             * Chapter Id
+             * Format: uuid
+             */
+            chapter_id: string;
+            /** Chapter Number */
+            chapter_number: number;
+            /** Chapter Title */
+            chapter_title: string;
+            /** Grade */
+            grade: number;
+            /**
+             * Lesson Id
+             * Format: uuid
+             */
+            lesson_id: string;
+            /**
+             * Opened At
+             * Format: date-time
+             */
+            opened_at: string;
+            /** Subject */
+            subject: string;
+            /** Title */
+            title: string;
+        };
         /**
          * CorrectionLink
          * @description A reviewed correction of the reported question (P12.S1.T3, REPORT-LINKS-01).
@@ -4562,6 +4629,31 @@ export interface components {
             reason: string;
             /** Subpart Id */
             subpart_id: string | null;
+        };
+        /** Dashboard */
+        Dashboard: {
+            continue_learning: components["schemas"]["ContinueLesson"] | null;
+            /**
+             * Generated At
+             * Format: date-time
+             */
+            generated_at: string;
+            /** Meters */
+            meters: components["schemas"]["Meter"][];
+            profile: components["schemas"]["DashboardProfile"] | null;
+            /** Recent */
+            recent: components["schemas"]["RecentResult"][];
+            /** Results Pending */
+            results_pending: number;
+            revision: components["schemas"]["Revision"];
+            upcoming_mock: components["schemas"]["MockSessionOut"] | null;
+        };
+        /** DashboardProfile */
+        DashboardProfile: {
+            /** Grade */
+            grade: number;
+            /** Subjects */
+            subjects: string[];
         };
         /** DeadLetterOut */
         DeadLetterOut: {
@@ -4856,6 +4948,16 @@ export interface components {
             reason: string | null;
             /** Updated At */
             updated_at: string | null;
+        };
+        /** FlagsIn */
+        FlagsIn: {
+            /** Positions */
+            positions: number[];
+        };
+        /** FlagsOut */
+        FlagsOut: {
+            /** Flagged */
+            flagged: number[];
         };
         /** FormCreateIn */
         FormCreateIn: {
@@ -5892,6 +5994,24 @@ export interface components {
             created_at: string;
             /** From Staff */
             from_staff: boolean;
+        };
+        /** Meter */
+        Meter: {
+            /** Definition */
+            definition: string;
+            /** Denominator */
+            denominator: number | null;
+            /**
+             * Key
+             * @enum {string}
+             */
+            key: "syllabus_coverage" | "content_completed" | "demonstrated_knowledge";
+            /** Numerator */
+            numerator: number | null;
+            /** Percent */
+            percent: number | null;
+            /** Unavailable */
+            unavailable: string | null;
         };
         /** MockIn */
         MockIn: {
@@ -7061,6 +7181,13 @@ export interface components {
             decision: "approve" | "request_changes";
             /** Reviewer */
             reviewer: string | null;
+        };
+        /** Revision */
+        Revision: {
+            /** Due */
+            due: number;
+            /** Open */
+            open: number;
         };
         /** RevisionOut */
         RevisionOut: {
@@ -9538,6 +9665,41 @@ export interface operations {
             };
         };
     };
+    set_flags_v1_attempts__attempt_id__flags_put: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                attempt_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["FlagsIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["FlagsOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     reveal_v1_attempts__attempt_id__items__position__reveal_post: {
         parameters: {
             query?: never;
@@ -10256,6 +10418,26 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    my_dashboard_v1_me_dashboard_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Dashboard"];
                 };
             };
         };

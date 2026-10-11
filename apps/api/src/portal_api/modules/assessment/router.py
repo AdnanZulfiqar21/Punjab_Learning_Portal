@@ -20,6 +20,8 @@ from portal_api.modules.assessment.schemas import (
     AttemptOut,
     AvailabilityOut,
     ChapterAvailability,
+    FlagsIn,
+    FlagsOut,
     FormCreateIn,
     FormOut,
     ItemReview,
@@ -97,6 +99,7 @@ def _attempt_out(db: Session, a: Attempt, who: Principal | None = None) -> Attem
         receipt=_receipt_out(receipt) if receipt else None,
         held_elsewhere=attempts.held_elsewhere(db, a, who) if who is not None else False,
         not_counted=[NotCountedOut(**n) for n in attempts.not_counted(db, a.id)] if a.status != "active" else [],
+        flagged=list(a.flagged or []),
     )
 
 
@@ -168,6 +171,12 @@ def continue_attempt_here(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, 
     _private(response)
     attempts.continue_here(db, who, attempt_id)
     return _attempt_out(db, attempts.load(db, who, attempt_id), who)
+
+
+@router.put("/attempts/{attempt_id}/flags", response_model=FlagsOut, summary="Flag questions to come back to")
+def set_flags(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, body: FlagsIn, response: Response) -> FlagsOut:
+    _private(response)
+    return FlagsOut(flagged=attempts.set_flags(db, who, attempt_id, body.positions))
 
 
 @router.post("/attempts/{attempt_id}/answers", response_model=SaveOut, summary="Save answer operations (§10.5)")
@@ -936,6 +945,57 @@ def my_progress(db: DB, who: CurrentPrincipal, response: Response) -> ProgressRe
 
     _private(response)
     return ProgressReport(**progress.report(db, who.user.id))
+
+
+# ------------------------------------------------------------------ dashboard (P11.S1.T2, DASHBOARD-01)
+class Meter(BaseModel):
+    key: Literal["syllabus_coverage", "content_completed", "demonstrated_knowledge"]
+    definition: str
+    numerator: int | None
+    denominator: int | None
+    percent: float | None
+    unavailable: str | None  # why there's no percentage (no profile, zero or unverified denominator)
+
+
+class DashboardProfile(BaseModel):
+    grade: int
+    subjects: list[str]
+
+
+class ContinueLesson(BaseModel):
+    lesson_id: uuid.UUID
+    title: str
+    grade: int
+    subject: str
+    chapter_id: uuid.UUID
+    chapter_number: int
+    chapter_title: str
+    opened_at: datetime
+
+
+class Revision(BaseModel):
+    due: int
+    open: int
+
+
+class Dashboard(BaseModel):
+    generated_at: datetime
+    profile: DashboardProfile | None
+    meters: list[Meter]
+    continue_learning: ContinueLesson | None
+    revision: Revision
+    upcoming_mock: MockSessionOut | None
+    recent: list[RecentResult]
+    results_pending: int
+
+
+@router.get("/me/dashboard", response_model=Dashboard, summary="Your home dashboard, with the three progress meters")
+def my_dashboard(db: DB, who: CurrentPrincipal, response: Response) -> Dashboard:
+    from portal_api.modules.assessment import dashboard
+
+    _private(response)
+    upcoming = _sessions_out(db)
+    return Dashboard(**dashboard.build(db, who.user.id), upcoming_mock=upcoming[0] if upcoming else None)
 
 
 # ------------------------------------------------------------------ learning evidence (P12.S2, EVIDENCE-RULES-01)

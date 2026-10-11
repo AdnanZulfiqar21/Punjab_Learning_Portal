@@ -9,6 +9,7 @@ import type {
   MockSession,
   NotebookEntry,
   ProgressReport,
+  Dashboard,
   EvidenceReport,
   StudyPlan,
   PublishedExamProfile,
@@ -223,6 +224,7 @@ export const api = {
       headers: { "Idempotency-Key": idempotencyKey },
     }),
   progress: (token: string, signal?: AbortSignal) => request<ProgressReport>("/v1/me/progress", { token, signal }),
+  dashboard: (token: string, signal?: AbortSignal) => request<Dashboard>("/v1/me/dashboard", { token, signal }),
   evidence: (token: string, grade: number, subject: string, signal?: AbortSignal) =>
     request<EvidenceReport>(`/v1/me/evidence?grade=${grade}&subject=${encodeURIComponent(subject)}`, { token, signal }),
   studyPlan: (token: string, q: { grade: number; subject: string; target_date: string; daily_minutes: number }, signal?: AbortSignal) =>
@@ -236,6 +238,8 @@ export const api = {
     request<PracticeAttempt>(`/v1/attempts/${encodeURIComponent(id)}`, { token, signal }),
   continueHere: (token: string, id: string) =>
     request<PracticeAttempt>(`/v1/attempts/${encodeURIComponent(id)}/continue-here`, { method: "POST", token }),
+  setFlags: (token: string, id: string, positions: number[]) =>
+    request<{ flagged: number[] }>(`/v1/attempts/${encodeURIComponent(id)}/flags`, { method: "PUT", token, body: { positions } }),
   saveAnswers: (token: string, id: string, ops: unknown[]) =>
     request<SaveResult>(`/v1/attempts/${encodeURIComponent(id)}/answers`, { method: "POST", token, body: { ops } }),
   submitAttempt: (token: string, id: string, idempotencyKey: string, ops: unknown[]) =>

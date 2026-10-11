@@ -172,6 +172,23 @@ def _hold(db: Session, attempt: Attempt, who: Principal) -> None:
         attempt.holder_session_id = who.session.id
 
 
+def set_flags(db: Session, who: Principal, attempt_id: uuid.UUID, positions: list[int]) -> list[int]:
+    """P11.S3.T2 (FLAGS-01): replace the learner's flags. Same one-device rule as answers; closed at the deadline."""
+    attempt = _lock(db, attempt_id, who)
+    if attempt.status != "active":
+        raise Conflict("This test has been submitted, so flags no longer change.", code_reason="ATTEMPT_CLOSED")
+    _hold(db, attempt, who)
+    now = db_now(db)
+    if attempt.deadline_at is not None and now >= attempt.deadline_at:
+        raise Conflict("Time is up, so flags no longer change.", code_reason="ATTEMPT_CLOSED")
+    wanted = sorted(set(positions))
+    if any(p not in _items(db, attempt) for p in wanted):
+        raise Unprocessable("Flag only questions in this test.")
+    attempt.flagged = wanted
+    db.commit()
+    return wanted
+
+
 def continue_here(db: Session, who: Principal, attempt_id: uuid.UUID) -> Attempt:
     """Explicit handoff: this device becomes the holder. The other device's next write is refused."""
     attempt = _lock(db, attempt_id, who)

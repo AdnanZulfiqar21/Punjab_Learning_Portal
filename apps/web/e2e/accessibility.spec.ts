@@ -41,7 +41,7 @@ for (const path of ["/", "/learn", "/learn/chapter/317f2726-31a1-55f5-bd13-a9551
   });
 }
 
-test("signed in: practice, help and account have no serious accessibility violations", async ({ page }) => {
+test("signed in: dashboard, practice, help and account have no serious accessibility violations", async ({ page }) => {
   test.setTimeout(120_000);
   const email = `e2e-a11y-${Date.now()}-${Math.random().toString(36).slice(2, 7)}@example.com`;
   await page.goto("/signin?next=/account");
@@ -50,6 +50,10 @@ test("signed in: practice, help and account have no serious accessibility violat
   await page.getByLabel("Password").fill("a11y-fixture-pass-1");
   await page.getByRole("button", { name: "Create account" }).click();
   await expect(page).toHaveURL(/:\d+\/account$/, AUTH);
+  // P11.S1.T2 (DASHBOARD-01): a signed-in learner's home is their dashboard, with the three meters kept separate.
+  await audit(page, "/");
+  await expect(page.getByRole("heading", { level: 1, name: "Your dashboard" })).toBeVisible();
+  await expect(page.getByRole("heading", { level: 3 })).toHaveText(["Syllabus coverage", "Content completed", "Demonstrated knowledge"]);
   for (const path of ["/account", "/practice", "/help", "/help/new", "/notifications"]) {
     await audit(page, path);
     expect(new URL(page.url()).pathname, `${path} should not redirect a signed-in learner`).toBe(path);
