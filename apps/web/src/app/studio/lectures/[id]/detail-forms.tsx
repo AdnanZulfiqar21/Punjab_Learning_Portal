@@ -254,6 +254,7 @@ const clock = (s: number) => `${Math.floor(s / 60)}:${String(s % 60).padStart(2,
 export function MarkersEditor({ id, initial, editable }: { id: string; initial: Marker[]; editable: boolean }) {
   const { busy, result, run } = useRun();
   const [rows, setRows] = useState(initial);
+  const [local, setLocal] = useState<string | null>(null);
   return (
     <div className="space-y-3 text-sm">
       <table className="w-full text-left">
@@ -304,9 +305,27 @@ export function MarkersEditor({ id, initial, editable }: { id: string; initial: 
         </tbody>
       </table>
       {editable && (
-        <button type="button" disabled={busy} onClick={() => run(() => saveMarkers(id, rows))} className={button}>
+        <button
+          type="button"
+          disabled={busy}
+          onClick={() => {
+            const bad = rows.find((r) => !Number.isInteger(r.start_s) || r.start_s < 0 || r.start_s > 7200 || !r.label.trim());
+            if (bad) {
+              setLocal(`Scene ${bad.scene_id}: give a whole number of seconds between 0 and 7200, and a chapter title.`);
+              return;
+            }
+            setLocal(null);
+            void run(() => saveMarkers(id, rows));
+          }}
+          className={button}
+        >
           {busy ? "Saving…" : "Save chapter markers"}
         </button>
+      )}
+      {local && (
+        <p role="alert" className="text-danger">
+          {local}
+        </p>
       )}
       <Problems result={result} />
     </div>
