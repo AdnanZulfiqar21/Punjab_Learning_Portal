@@ -170,3 +170,4 @@ Source plan: `Road Map/Punjab_Learning_Portal_Master_Roadmap_v2.2_Integrated_Wri
 | P09.S1.T2 Book and combined scopes (mobile) | IMPLEMENTED (mobile code; not device-verified) | MOBILE-MIX-01. |
 | P09.S4.T1 Reviewer form preview | IMPLEMENTED (API + web) | FORM-PREVIEW-01. `tests/test_form_preview.py`. |
 | P06.S3.T1 Preview across delivery surfaces | IMPLEMENTED (API + web studio) | SURFACES-01. `tests/test_surface_preview.py`. |
+| P06.S4.T3 Staff workflow rehearsal | IMPLEMENTED with technical fixtures; real-material rehearsal BLOCKED (B01) | WORKFLOW-REHEARSAL-01. `tests/test_staff_workflow_rehearsal.py`. |
