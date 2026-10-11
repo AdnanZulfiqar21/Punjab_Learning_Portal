@@ -66,6 +66,14 @@ function origin(): string {
   return value;
 }
 
+/** A diagram from a question in the learner's own attempt (QUESTION-DIAGRAMS-01). */
+export function attemptAsset(attemptId: string, versionId: string, token: string): { uri: string; headers: Record<string, string> } {
+  return {
+    uri: `${origin()}/v1/attempts/${encodeURIComponent(attemptId)}/assets/${encodeURIComponent(versionId)}`,
+    headers: { Authorization: `Bearer ${token}` },
+  };
+}
+
 /** A lesson's diagram or handout (P07.S1.T1): only files named by its published version, under its access tier. */
 export function lessonAsset(lessonId: string, versionId: string, token: string | null): { uri: string; headers?: Record<string, string> } {
   const uri = `${origin()}/v1/lessons/${encodeURIComponent(lessonId)}/assets/${encodeURIComponent(versionId)}`;

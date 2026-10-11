@@ -115,6 +115,7 @@ async function Result({ id }: { id: string }) {
 }
 
 function ReviewItem({ item, attemptId }: { item: ItemReview; attemptId: string }) {
+  const assetUrl = (v: string) => `/practice/attempt/${attemptId}/assets/${v}`; // QUESTION-DIAGRAMS-01
   const explanation = item.explanation as { correct?: Blocks; distractors?: Record<string, string>; worked_steps?: Blocks };
   return (
     <li className="space-y-3 rounded-xl border border-border bg-surface p-5">
@@ -130,7 +131,7 @@ function ReviewItem({ item, attemptId }: { item: ItemReview; attemptId: string }
           <Badge tone="danger">Incorrect</Badge>
         )}
       </div>
-      <LessonBlocks blocks={item.stem as Blocks} headingOffset={2} />
+      <LessonBlocks blocks={item.stem as Blocks} headingOffset={2} assetUrl={assetUrl} />
       <ul className="space-y-2">
         {item.options.map((o, i) => {
           const isKey = o.id === item.correct_option_id;
@@ -140,7 +141,7 @@ function ReviewItem({ item, attemptId }: { item: ItemReview; attemptId: string }
               <span className="mr-2 font-medium text-muted">{String.fromCharCode(65 + i)}</span>
               {isKey && <span className="mr-2 text-xs font-semibold text-ok">Correct answer</span>}
               {isChosen && !isKey && <span className="mr-2 text-xs font-semibold text-danger">Your answer</span>}
-              <LessonBlocks blocks={o.blocks as Blocks} headingOffset={3} />
+              <LessonBlocks blocks={o.blocks as Blocks} headingOffset={3} assetUrl={assetUrl} />
               {isChosen && !isKey && explanation.distractors?.[o.id] && <p className="mt-1 text-sm">{explanation.distractors[o.id]}</p>}
             </li>
           );
@@ -149,8 +150,8 @@ function ReviewItem({ item, attemptId }: { item: ItemReview; attemptId: string }
       {(explanation.correct?.length ?? 0) > 0 && (
         <div className="rounded-lg bg-surface-muted p-3 text-sm">
           <p className="font-semibold">Why</p>
-          <LessonBlocks blocks={explanation.correct ?? []} headingOffset={3} />
-          {(explanation.worked_steps?.length ?? 0) > 0 && <LessonBlocks blocks={explanation.worked_steps ?? []} headingOffset={3} />}
+          <LessonBlocks blocks={explanation.correct ?? []} headingOffset={3} assetUrl={assetUrl} />
+          {(explanation.worked_steps?.length ?? 0) > 0 && <LessonBlocks blocks={explanation.worked_steps ?? []} headingOffset={3} assetUrl={assetUrl} />}
         </div>
       )}
       {(item.related_lessons ?? []).length > 0 && (

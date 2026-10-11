@@ -202,7 +202,7 @@ function Builder({ token, initialGrade, initialSubject }: { token: string; initi
                   <T style={{ flex: 1 }}>
                     Chapter {ch.number}: {ch.title}
                   </T>
-                  <T variant="small">{disabled ? "none yet" : `${ch.questions} questions`}</T>
+                  <T variant="small">{disabled ? "none yet" : `${ch.questions} question${ch.questions === 1 ? "" : "s"}`}</T>
                 </Pressable>
               );
             })}

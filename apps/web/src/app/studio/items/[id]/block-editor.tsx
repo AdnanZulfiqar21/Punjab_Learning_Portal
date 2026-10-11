@@ -47,10 +47,13 @@ export function BlockEditor({
   blocks,
   onChange,
   disabled,
+  exclude = [],
 }: {
   blocks: Block[];
   onChange: (blocks: Block[]) => void;
   disabled?: boolean;
+  /** Block types this field can't hold (e.g. handouts in questions). */
+  exclude?: string[];
 }) {
   const update = (i: number, patch: Partial<Block>) => onChange(blocks.map((b, j) => (j === i ? { ...b, ...patch } : b)));
   const move = (i: number, d: -1 | 1) => {
@@ -85,7 +88,7 @@ export function BlockEditor({
       {!disabled && (
         <div className="flex flex-wrap items-center gap-2" role="group" aria-label="Add a block">
           <span className="text-sm text-muted">Add:</span>
-          {BLOCK_TYPES.map((t) => (
+          {BLOCK_TYPES.filter((t) => !exclude.includes(t.type)).map((t) => (
             <button key={t.type} type="button" className={small} onClick={() => onChange([...blocks, t.make()])}>
               + {t.label}
             </button>

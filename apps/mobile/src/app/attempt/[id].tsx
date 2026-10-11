@@ -11,7 +11,7 @@ import { ErrorState, Loading, Notice, T } from "@/components/ui";
 import { Radius, Space } from "@/constants/theme";
 import { useRequest } from "@/hooks/use-request";
 import { useTheme } from "@/hooks/use-theme";
-import { api, ApiError } from "@/lib/api";
+import { api, ApiError, attemptAsset } from "@/lib/api";
 import { useAuth } from "@/lib/auth";
 import { readQueue, writeQueue, type QueuedOp } from "@/lib/op-store";
 
@@ -74,6 +74,7 @@ function Submitted({ attempt }: { attempt: PracticeAttempt }) {
 }
 
 function Runner({ attempt, token, onFinalised }: { attempt: PracticeAttempt; token: string; onFinalised: () => void }) {
+  const assetSource = (v: string) => attemptAsset(attempt.id, v, token); // QUESTION-DIAGRAMS-01
   const c = useTheme();
   const total = attempt.items.length;
   const [current, setCurrent] = useState(1);
@@ -323,7 +324,7 @@ function Runner({ attempt, token, onFinalised }: { attempt: PracticeAttempt; tok
       </View>
 
       <View style={{ gap: Space.md, padding: Space.lg, borderRadius: Radius.md, borderWidth: 1, borderColor: c.border, backgroundColor: c.surface }}>
-        <LessonBlocks blocks={item.stem as { type: string }[]} />
+        <LessonBlocks blocks={item.stem as { type: string }[]} assetSource={assetSource} />
         <View accessibilityRole="radiogroup" style={{ gap: Space.sm }}>
           {item.options.map((o, idx) => {
             const reveal = revealed[current];
@@ -340,7 +341,7 @@ function Runner({ attempt, token, onFinalised }: { attempt: PracticeAttempt; tok
                 style={{ flexDirection: "row", gap: Space.sm, padding: Space.md, borderRadius: Radius.sm, borderWidth: selected ? 2 : 1, borderColor: border, backgroundColor: selected ? c.accentSoft : c.surface, opacity: disabled && !selected ? 0.7 : 1 }}>
                 <T style={{ fontWeight: "600", width: 20 }}>{String.fromCharCode(65 + idx)}</T>
                 <View style={{ flex: 1 }}>
-                  <LessonBlocks blocks={o.blocks as { type: string }[]} />
+                  <LessonBlocks blocks={o.blocks as { type: string }[]} assetSource={assetSource} />
                 </View>
               </Pressable>
             );
@@ -358,7 +359,7 @@ function Runner({ attempt, token, onFinalised }: { attempt: PracticeAttempt; tok
         {revealed[current] && (
           <View accessibilityLiveRegion="polite" style={{ gap: Space.xs, padding: Space.md, borderRadius: Radius.sm, backgroundColor: c.surfaceMuted }}>
             <T style={{ fontWeight: "600" }}>{revealed[current].correct ? "Correct" : "Not quite"}</T>
-            <LessonBlocks blocks={((revealed[current].explanation as { correct?: unknown[] }).correct ?? []) as { type: string }[]} />
+            <LessonBlocks blocks={((revealed[current].explanation as { correct?: unknown[] }).correct ?? []) as { type: string }[]} assetSource={assetSource} />
           </View>
         )}
       </View>

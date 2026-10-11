@@ -422,3 +422,59 @@ def for_lesson(db: Session, item: Any, version_id: uuid.UUID) -> tuple[AssetVers
     ):
         raise NotFound("File not found.")
     return v, asset
+
+
+def for_attempt(db: Session, user_id: uuid.UUID, attempt_id: uuid.UUID, version_id: uuid.UUID) -> AssetVersion:
+    """An archived file named by a question in the learner's *own* attempt (QUESTION-DIAGRAMS-01). Stem and option
+    files are available while answering. Explanation files only once the result is available (finalised and released)
+    or for an item already revealed under immediate feedback, so an explanation figure can't leak the key early."""
+    from portal_api.modules.assessment.models import Attempt, AttemptAnswer, PracticeForm
+    from portal_api.modules.assessment.sessions import require_released
+    from portal_api.modules.content.models import ContentVersion
+
+    attempt = db.get(Attempt, attempt_id)
+    if attempt is None or attempt.user_id != user_id:
+        raise NotFound("File not found.")
+    form = db.get(PracticeForm, attempt.form_id)
+    assert form is not None
+    revealed = set(
+        db.scalars(
+            select(AttemptAnswer.position).where(
+                AttemptAnswer.attempt_id == attempt.id, AttemptAnswer.revealed_at.is_not(None)
+            )
+        )
+    )
+    key = str(version_id)
+    later: set[str] = set()
+    owner = None
+    for fi in form.items:
+        cv = db.get(ContentVersion, fi.version_id)
+        body = cv.body if cv is not None else {}
+        now = {vid for _, vid, _ in block_refs([body.get("stem"), [o.get("blocks") for o in body.get("options", [])]])}
+        after = {vid for _, vid, _ in block_refs(body.get("explanation"))}
+        if fi.position in revealed:
+            now |= after
+        if key in now:
+            owner = fi
+            break
+        if key in after:
+            later.add(key)
+            owner = fi
+    if owner is None:
+        raise NotFound("File not found.")
+    if key in later:
+        if attempt.status == "active":
+            raise NotFound("File not found.")  # explanations come with the result
+        require_released(db, form)
+    v = db.get(AssetVersion, version_id)
+    asset = db.get(Asset, v.asset_id) if v is not None else None
+    if (
+        v is None
+        or asset is None
+        or asset.kind != "image"
+        or v.delivery_state != "ready"
+        or not v.delivery_key
+        or (asset.grade_number, asset.subject_code) != (owner.grade_number, owner.subject_code)
+    ):
+        raise NotFound("File not found.")
+    return v

@@ -7,6 +7,9 @@ import type { Block } from "@/app/actions/studio";
 import { LessonBlocks } from "@/components/lesson-blocks";
 import { BlockEditor, normaliseBlocks } from "./block-editor";
 
+/** Written questions hold neither handouts nor (until attempt-bound delivery covers them) diagrams. */
+const WRITTEN_EXCLUDE = ["handout", "diagram"];
+
 type Body = Record<string, unknown>;
 type Subpart = { id: string; label: string; blocks: Block[]; max_units: number };
 type Written = {
@@ -126,7 +129,7 @@ export function WrittenEditor({ body, onChange }: { body: Body; onChange: (b: Bo
         <h2 id="w-stem" className="font-medium">
           Question
         </h2>
-        <BlockEditor blocks={q.stem} onChange={(stem) => set({ stem })} />
+        <BlockEditor blocks={q.stem} onChange={(stem) => set({ stem })} exclude={WRITTEN_EXCLUDE} />
       </section>
       <section className="space-y-3" aria-labelledby="w-parts">
         <h2 id="w-parts" className="font-medium">
@@ -148,7 +151,7 @@ export function WrittenEditor({ body, onChange }: { body: Body; onChange: (b: Bo
                 Remove
               </button>
             </div>
-            <BlockEditor blocks={s.blocks} onChange={(blocks) => setPart(i, { blocks })} />
+            <BlockEditor blocks={s.blocks} onChange={(blocks) => setPart(i, { blocks })} exclude={WRITTEN_EXCLUDE} />
           </div>
         ))}
         <button type="button" className={small} onClick={() => { const id = nextId(); set({ subparts: [...q.subparts, { id, label: `(${id})`, blocks: [], max_units: 100 }] }); }}>

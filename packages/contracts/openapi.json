@@ -13878,6 +13878,57 @@
         ]
       }
     },
+    "/v1/attempts/{attempt_id}/assets/{version_id}": {
+      "get": {
+        "operationId": "attempt_asset_v1_attempts__attempt_id__assets__version_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "attempt_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Attempt Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "version_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Version Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "A diagram named by a question in your own attempt (explanation figures once the result is available)",
+        "tags": [
+          "practice"
+        ]
+      }
+    },
     "/v1/attempts/{attempt_id}/continue-here": {
       "post": {
         "operationId": "continue_attempt_here_v1_attempts__attempt_id__continue_here_post",
