@@ -625,6 +625,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/discovery": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** What is published per book, with filters (public) */
+        get: operations["discovery_v1_discovery_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/exam-profiles": {
         parameters: {
             query?: never;
@@ -4183,6 +4200,39 @@ export interface components {
             /** Subject */
             subject: string;
         };
+        /** BookAvailability */
+        BookAvailability: {
+            /**
+             * Book Id
+             * Format: uuid
+             */
+            book_id: string;
+            /** Chapter Count */
+            chapter_count: number;
+            /** Chapter Label */
+            chapter_label: string;
+            /** Chapters With Lessons */
+            chapters_with_lessons: number;
+            /** Completeness */
+            completeness: string;
+            /** Grade */
+            grade: number;
+            /** Live Lessons */
+            live_lessons: number;
+            /** Practice Questions */
+            practice_questions: number;
+            /** Preview Lessons */
+            preview_lessons: number;
+            /**
+             * State
+             * @enum {string}
+             */
+            state: "lessons" | "practice_only" | "not_yet_published";
+            /** Subject */
+            subject: string;
+            /** Subject Name */
+            subject_name: string;
+        };
         /** BookOut */
         BookOut: {
             /** Authority */
@@ -4872,6 +4922,19 @@ export interface components {
              */
             surface: "web" | "ios" | "android";
         };
+        /** DiscoveryOut */
+        DiscoveryOut: {
+            /** Books */
+            books: components["schemas"]["BookAvailability"][];
+            /** Exams */
+            exams: components["schemas"]["ExamOut"][];
+            /** Plans Note */
+            plans_note: string;
+            /** Previews */
+            previews: components["schemas"]["PreviewLesson"][];
+            /** Tracks */
+            tracks: components["schemas"]["TrackOut"][];
+        };
         /** Engagement */
         Engagement: {
             /** Learners Completing */
@@ -4942,6 +5005,17 @@ export interface components {
             rules_version: string;
             /** Subject */
             subject: string;
+        };
+        /** ExamOut */
+        ExamOut: {
+            /** Code */
+            code: string;
+            /** Name */
+            name: string;
+            /** Subjects */
+            subjects: string[];
+            /** Year */
+            year: number;
         };
         /** ExamProfileIn */
         ExamProfileIn: {
@@ -6755,6 +6829,29 @@ export interface components {
              */
             timezone: string;
         };
+        /** PreviewLesson */
+        PreviewLesson: {
+            /**
+             * Chapter Id
+             * Format: uuid
+             */
+            chapter_id: string;
+            /** Chapter Number */
+            chapter_number: number;
+            /** Grade */
+            grade: number;
+            /**
+             * Lesson Id
+             * Format: uuid
+             */
+            lesson_id: string;
+            /** Subject */
+            subject: string;
+            /** Subject Name */
+            subject_name: string;
+            /** Title */
+            title: string;
+        };
         /**
          * ProfileIn
          * @description Onboarding answers (P04.S3.T1). Everything can be corrected later; no identity documents are collected.
@@ -8255,6 +8352,17 @@ export interface components {
             points: string[];
             /** Title */
             title: string;
+        };
+        /** TrackOut */
+        TrackOut: {
+            /** Code */
+            code: string;
+            /** Name */
+            name: string;
+            /** Note */
+            note: string;
+            /** Subjects */
+            subjects: string[];
         };
         /** TranscriptIn */
         TranscriptIn: {
@@ -10128,6 +10236,41 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["LessonOut"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    discovery_v1_discovery_get: {
+        parameters: {
+            query?: {
+                grade?: number | null;
+                track?: ("pre_medical" | "pre_engineering" | "ics") | null;
+                subject?: string | null;
+                exam?: string | null;
+                availability?: "all" | "lessons" | "previews" | "practice";
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DiscoveryOut"];
                 };
             };
             /** @description Validation Error */

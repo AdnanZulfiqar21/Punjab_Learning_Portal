@@ -2,7 +2,7 @@
 // the build (roadmap §5.5: one immutable artifact promoted between environments).
 import { connection } from "next/server";
 import { cache } from "react";
-import type { Book, Catalogue, Chapter, Lesson, Problem, SearchResult } from "@portal/contracts";
+import type { Book, Catalogue, Chapter, Discovery, Lesson, Problem, SearchResult } from "@portal/contracts";
 import { readRuntimeConfig } from "@/lib/runtime-config";
 import { sessionToken } from "@/lib/session";
 
@@ -51,6 +51,11 @@ async function getJSON<T>(path: string, token?: string): Promise<Result<T>> {
 }
 
 export const getCatalogue = cache(() => getJSON<Catalogue>("/v1/catalogue"));
+/** P11.S1.T3 (DISCOVERY-01): what is published per book, filtered. Only known filter values are passed in. */
+export const getDiscovery = cache((f: { grade?: string; track?: string; subject?: string; exam?: string; availability?: string }) => {
+  const q = new URLSearchParams(Object.entries(f).filter((e): e is [string, string] => Boolean(e[1])));
+  return getJSON<Discovery>(`/v1/discovery${q.size ? `?${q}` : ""}`);
+});
 export const getBookFor = cache((grade: number, subject: string) =>
   getJSON<Book>(`/v1/grades/${grade}/subjects/${encodeURIComponent(subject)}/book`),
 );

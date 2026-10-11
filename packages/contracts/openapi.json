@@ -1364,6 +1364,80 @@
         "title": "BacklogRow",
         "type": "object"
       },
+      "BookAvailability": {
+        "properties": {
+          "book_id": {
+            "format": "uuid",
+            "title": "Book Id",
+            "type": "string"
+          },
+          "chapter_count": {
+            "title": "Chapter Count",
+            "type": "integer"
+          },
+          "chapter_label": {
+            "title": "Chapter Label",
+            "type": "string"
+          },
+          "chapters_with_lessons": {
+            "title": "Chapters With Lessons",
+            "type": "integer"
+          },
+          "completeness": {
+            "title": "Completeness",
+            "type": "string"
+          },
+          "grade": {
+            "title": "Grade",
+            "type": "integer"
+          },
+          "live_lessons": {
+            "title": "Live Lessons",
+            "type": "integer"
+          },
+          "practice_questions": {
+            "title": "Practice Questions",
+            "type": "integer"
+          },
+          "preview_lessons": {
+            "title": "Preview Lessons",
+            "type": "integer"
+          },
+          "state": {
+            "enum": [
+              "lessons",
+              "practice_only",
+              "not_yet_published"
+            ],
+            "title": "State",
+            "type": "string"
+          },
+          "subject": {
+            "title": "Subject",
+            "type": "string"
+          },
+          "subject_name": {
+            "title": "Subject Name",
+            "type": "string"
+          }
+        },
+        "required": [
+          "book_id",
+          "grade",
+          "subject",
+          "subject_name",
+          "chapter_label",
+          "chapter_count",
+          "completeness",
+          "chapters_with_lessons",
+          "live_lessons",
+          "preview_lessons",
+          "practice_questions",
+          "state"
+        ],
+        "title": "BookAvailability",
+        "type": "object"
+      },
       "BookOut": {
         "properties": {
           "authority": {
@@ -3029,6 +3103,51 @@
         "title": "DeviceIn",
         "type": "object"
       },
+      "DiscoveryOut": {
+        "properties": {
+          "books": {
+            "items": {
+              "$ref": "#/components/schemas/BookAvailability"
+            },
+            "title": "Books",
+            "type": "array"
+          },
+          "exams": {
+            "items": {
+              "$ref": "#/components/schemas/ExamOut"
+            },
+            "title": "Exams",
+            "type": "array"
+          },
+          "plans_note": {
+            "title": "Plans Note",
+            "type": "string"
+          },
+          "previews": {
+            "items": {
+              "$ref": "#/components/schemas/PreviewLesson"
+            },
+            "title": "Previews",
+            "type": "array"
+          },
+          "tracks": {
+            "items": {
+              "$ref": "#/components/schemas/TrackOut"
+            },
+            "title": "Tracks",
+            "type": "array"
+          }
+        },
+        "required": [
+          "tracks",
+          "exams",
+          "books",
+          "previews",
+          "plans_note"
+        ],
+        "title": "DiscoveryOut",
+        "type": "object"
+      },
       "Engagement": {
         "properties": {
           "learners_completing": {
@@ -3188,6 +3307,37 @@
           "outcomes"
         ],
         "title": "EvidenceReport",
+        "type": "object"
+      },
+      "ExamOut": {
+        "properties": {
+          "code": {
+            "title": "Code",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "subjects": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Subjects",
+            "type": "array"
+          },
+          "year": {
+            "title": "Year",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "code",
+          "name",
+          "year",
+          "subjects"
+        ],
+        "title": "ExamOut",
         "type": "object"
       },
       "ExamProfileIn": {
@@ -7578,6 +7728,51 @@
         "title": "PreferencesIO",
         "type": "object"
       },
+      "PreviewLesson": {
+        "properties": {
+          "chapter_id": {
+            "format": "uuid",
+            "title": "Chapter Id",
+            "type": "string"
+          },
+          "chapter_number": {
+            "title": "Chapter Number",
+            "type": "integer"
+          },
+          "grade": {
+            "title": "Grade",
+            "type": "integer"
+          },
+          "lesson_id": {
+            "format": "uuid",
+            "title": "Lesson Id",
+            "type": "string"
+          },
+          "subject": {
+            "title": "Subject",
+            "type": "string"
+          },
+          "subject_name": {
+            "title": "Subject Name",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "lesson_id",
+          "title",
+          "grade",
+          "subject",
+          "subject_name",
+          "chapter_id",
+          "chapter_number"
+        ],
+        "title": "PreviewLesson",
+        "type": "object"
+      },
       "ProfileIn": {
         "additionalProperties": false,
         "description": "Onboarding answers (P04.S3.T1). Everything can be corrected later; no identity documents are collected.",
@@ -11397,6 +11592,37 @@
         "title": "TopicNode",
         "type": "object"
       },
+      "TrackOut": {
+        "properties": {
+          "code": {
+            "title": "Code",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "note": {
+            "title": "Note",
+            "type": "string"
+          },
+          "subjects": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Subjects",
+            "type": "array"
+          }
+        },
+        "required": [
+          "code",
+          "name",
+          "subjects",
+          "note"
+        ],
+        "title": "TrackOut",
+        "type": "object"
+      },
       "TranscriptIn": {
         "properties": {
           "scenes": {
@@ -14986,6 +15212,130 @@
         "summary": "Published, live lessons for a chapter (academically approved; never drafts)",
         "tags": [
           "lessons"
+        ]
+      }
+    },
+    "/v1/discovery": {
+      "get": {
+        "operationId": "discovery_v1_discovery_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "grade",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "maximum": 12,
+                  "minimum": 11,
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Grade"
+            }
+          },
+          {
+            "in": "query",
+            "name": "track",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "pre_medical",
+                    "pre_engineering",
+                    "ics"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Track"
+            }
+          },
+          {
+            "in": "query",
+            "name": "subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "maxLength": 40,
+                  "minLength": 2,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Subject"
+            }
+          },
+          {
+            "in": "query",
+            "name": "exam",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "maxLength": 40,
+                  "minLength": 2,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Exam"
+            }
+          },
+          {
+            "in": "query",
+            "name": "availability",
+            "required": false,
+            "schema": {
+              "default": "all",
+              "enum": [
+                "all",
+                "lessons",
+                "previews",
+                "practice"
+              ],
+              "title": "Availability",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DiscoveryOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "What is published per book, with filters (public)",
+        "tags": [
+          "discovery"
         ]
       }
     },
