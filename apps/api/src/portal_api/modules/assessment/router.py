@@ -935,6 +935,57 @@ def my_progress(db: DB, who: CurrentPrincipal, response: Response) -> ProgressRe
     return ProgressReport(**progress.report(db, who.user.id))
 
 
+# ------------------------------------------------------------------ dashboard (P11.S1.T2, DASHBOARD-01)
+class Meter(BaseModel):
+    key: Literal["syllabus_coverage", "content_completed", "demonstrated_knowledge"]
+    definition: str
+    numerator: int | None
+    denominator: int | None
+    percent: float | None
+    unavailable: str | None  # why there's no percentage (no profile, zero or unverified denominator)
+
+
+class DashboardProfile(BaseModel):
+    grade: int
+    subjects: list[str]
+
+
+class ContinueLesson(BaseModel):
+    lesson_id: uuid.UUID
+    title: str
+    grade: int
+    subject: str
+    chapter_id: uuid.UUID
+    chapter_number: int
+    chapter_title: str
+    opened_at: datetime
+
+
+class Revision(BaseModel):
+    due: int
+    open: int
+
+
+class Dashboard(BaseModel):
+    generated_at: datetime
+    profile: DashboardProfile | None
+    meters: list[Meter]
+    continue_learning: ContinueLesson | None
+    revision: Revision
+    upcoming_mock: MockSessionOut | None
+    recent: list[RecentResult]
+    results_pending: int
+
+
+@router.get("/me/dashboard", response_model=Dashboard, summary="Your home dashboard, with the three progress meters")
+def my_dashboard(db: DB, who: CurrentPrincipal, response: Response) -> Dashboard:
+    from portal_api.modules.assessment import dashboard
+
+    _private(response)
+    upcoming = _sessions_out(db)
+    return Dashboard(**dashboard.build(db, who.user.id), upcoming_mock=upcoming[0] if upcoming else None)
+
+
 # ------------------------------------------------------------------ learning evidence (P12.S2, EVIDENCE-RULES-01)
 class OutcomeEvidence(BaseModel):
     outcome_id: uuid.UUID

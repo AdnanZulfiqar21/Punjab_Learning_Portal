@@ -114,3 +114,4 @@ export interface Problem {
 export type ContentAsset = S["AssetOut"];
 export type Lecture = S["LectureOut"];
 export type NarrationVoice = S["VoiceOut"];
+export type Dashboard = S["Dashboard"];

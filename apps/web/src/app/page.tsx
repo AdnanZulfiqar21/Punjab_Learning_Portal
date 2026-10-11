@@ -1,8 +1,32 @@
 import Link from "next/link";
+import { Suspense } from "react";
+import type { Dashboard } from "@portal/contracts";
+import { DashboardView } from "@/components/dashboard";
+import { Notice, SkeletonLines } from "@/components/ui";
+import { api, currentUser } from "@/lib/session";
 
 const SUBJECTS = ["Biology", "Chemistry", "Physics", "Computer Science", "Mathematics"];
 
 export default function Home() {
+  return (
+    <Suspense fallback={<SkeletonLines lines={6} label="Loading" />}>
+      <HomeFor />
+    </Suspense>
+  );
+}
+
+/** Signed-in learners get their dashboard (P11.S1.T2); everyone else sees the introduction. */
+async function HomeFor() {
+  const user = await currentUser();
+  if (!user) return <Welcome />;
+  const res = await api<Dashboard>("/v1/me/dashboard", { token: user.token });
+  if (!res.ok) {
+    return <Notice tone="warn" title="Couldn't load your dashboard">{res.problem?.detail ?? "Please try again."}</Notice>;
+  }
+  return <DashboardView d={res.data} email={user.me.email ?? ""} />;
+}
+
+function Welcome() {
   return (
     <div className="space-y-10">
       <section className="space-y-4">

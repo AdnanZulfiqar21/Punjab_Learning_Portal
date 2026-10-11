@@ -2,14 +2,17 @@ import { router } from "expo-router";
 import { ScrollView, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+import { DashboardSection } from "@/components/dashboard";
 import { Badge, Card, ErrorState, Loading, T } from "@/components/ui";
 import { Space, TAB_SCREEN_TOP } from "@/constants/theme";
 import { useRequest } from "@/hooks/use-request";
 import { useTheme } from "@/hooks/use-theme";
 import { api, GRADE_LABEL } from "@/lib/api";
+import { useAuth } from "@/lib/auth";
 
 export default function LearnScreen() {
   const c = useTheme();
+  const auth = useAuth();
   const { state, retry } = useRequest((signal) => api.catalogue(signal), []);
   return (
     <SafeAreaView edges={["top"]} style={{ flex: 1, backgroundColor: c.background }}>
@@ -21,6 +24,7 @@ export default function LearnScreen() {
             <T variant="title">Learn</T>
             <T variant="muted">Class XI and Class XII use different textbooks and are listed separately.</T>
           </View>
+          {auth.state.status === "signed_in" && <DashboardSection token={auth.state.token} />}
           {state.data.grades.map((g) => (
             <View key={g.grade.id} style={{ gap: Space.sm }} accessibilityRole="list">
               <T variant="heading" accessibilityRole="header">
