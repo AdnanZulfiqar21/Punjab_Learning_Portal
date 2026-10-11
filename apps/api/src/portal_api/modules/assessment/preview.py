@@ -6,7 +6,8 @@ rules as a real mock (`mocks.select_sections`), drawn reproducibly from a seed, 
 * the learner view (stem and options in the frozen display order, with no key or explanation);
 * the oldest supported client's view: every block that client can't render is replaced by its reviewed fallback
   (§5.4 rule 4; after publication there should be none to replace);
-* automatic checks for accidental answer hints and unverifiable diagram dependencies.
+* automatic checks for accidental answer hints and image fallbacks that don't name a ready image in the asset archive
+  (ASSETS-01).
 
 The answer report (keys and explanations) is a separate request, so the learner view can be shared or screenshotted
 without exposing answers. Passages don't exist as a block type yet, so there is nothing to check for them.
@@ -17,11 +18,13 @@ from __future__ import annotations
 import re
 import secrets
 import uuid
+from collections.abc import Callable
 from typing import Any
 
 from sqlalchemy.orm import Session
 
 from portal_api.errors import NotFound
+from portal_api.modules.content import assets
 from portal_api.modules.content import blocks as block_registry
 
 _TEXT_KEYS = ("text", "items", "rows", "caption", "text_alt", "prompt")
@@ -47,7 +50,7 @@ def _norm(s: str) -> str:
     return " ".join(re.findall(r"[a-z0-9]+", s.lower()))
 
 
-def checks(body: dict[str, Any]) -> list[str]:
+def checks(body: dict[str, Any], image_ready: Callable[[str], bool] | None = None) -> list[str]:
     """Accidental answer hints a reviewer should look at (warnings, not verdicts)."""
     out: list[str] = []
     options = {o["id"]: _norm(_text(o.get("blocks", []))) for o in body.get("options", [])}
@@ -68,10 +71,10 @@ def checks(body: dict[str, Any]) -> list[str]:
         out.append("Options are shuffled but one says 'all/none of the above', which depends on position.")
     for b in _blocks(body):
         fallback = b.get("fallback") or {}
-        if fallback.get("image_asset_id"):
+        if fallback.get("image_asset_id") and (image_ready is None or not image_ready(str(fallback["image_asset_id"]))):
             out.append(
-                f"A fallback uses diagram asset {fallback['image_asset_id']}, which can't be checked until the asset "
-                "store exists (P07)."
+                f"A fallback uses image {fallback['image_asset_id']}, which isn't a ready image version in the asset "
+                "archive."
             )
     return out
 
@@ -137,7 +140,7 @@ def form(db: Session, version_id: uuid.UUID, seed: int | None) -> dict[str, Any]
                     "options": [{"id": oid, "blocks": options[oid]["blocks"]} for oid in option_ids],
                 },
                 "oldest_client": {"stem": stem_old, "options": option_views, "fallback_blocks": n_stem + n_opt},
-                "checks": checks(body),
+                "checks": checks(body, lambda v: assets.image_ready(db, v)),
             }
         )
     return {

@@ -17,6 +17,7 @@ os.environ["PORTAL_DATABASE_URL"] = TEST_URL
 os.environ["PORTAL_ROLE"] = "test"
 # Uploaded evidence from tests goes to a throwaway directory, never the development store.
 os.environ.setdefault("PORTAL_EVIDENCE_DIR", tempfile.mkdtemp(prefix="portal-evidence-test-"))
+os.environ.setdefault("PORTAL_ASSET_DIR", tempfile.mkdtemp(prefix="portal-assets-test-"))  # ASSETS-01
 
 from collections.abc import Iterator  # noqa: E402
 from typing import Any  # noqa: E402

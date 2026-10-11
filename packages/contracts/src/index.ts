@@ -111,3 +111,4 @@ export interface Problem {
   correlation_id?: string | null;
   errors?: { loc: (string | number)[]; msg: string }[];
 }
+export type ContentAsset = S["AssetOut"];

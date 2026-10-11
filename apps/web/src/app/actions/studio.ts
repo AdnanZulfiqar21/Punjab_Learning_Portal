@@ -148,3 +148,20 @@ export async function createLanguageVariant(
   if (!res.ok) return { error: [res.error, ...(res.errors ?? [])].join(" ") };
   redirect(`/studio/items/${res.item.id}`);
 }
+
+/** P07.S2.T4: create an archived asset (its first version is uploaded separately). */
+export async function createAsset(_prev: unknown, form: FormData): Promise<{ error?: string } | undefined> {
+  const t = await token();
+  const res = await api<{ id: string }>("/v1/studio/assets", {
+    method: "POST",
+    token: t,
+    body: JSON.stringify({
+      kind: String(form.get("kind") ?? "image"),
+      title: String(form.get("title") ?? ""),
+      grade: Number(form.get("grade")),
+      subject: String(form.get("subject") ?? ""),
+    }),
+  });
+  if (!res.ok) return { error: res.problem?.detail ?? "Couldn't create the asset." };
+  return undefined;
+}
