@@ -83,23 +83,6 @@ def _blocks(body: dict[str, Any]) -> list[dict[str, Any]]:
     return out
 
 
-def _oldest(block_list: list[dict[str, Any]]) -> tuple[list[dict[str, Any]], int]:
-    """The oldest supported client's rendering: blocks it can't show natively become their reviewed fallback."""
-    out, replaced = [], 0
-    for b in block_list:
-        spec = block_registry.REGISTRY.get(str(b.get("type")))
-        needs = spec is not None and any(
-            spec.min_renderer[p] > block_registry.SUPPORTED_RENDERER[p] for p in block_registry.PLATFORMS
-        )
-        if needs:
-            replaced += 1
-            fb = b.get("fallback") or {}
-            out.append({"type": "fallback", "text": fb.get("text", ""), "image_asset_id": fb.get("image_asset_id")})
-        else:
-            out.append(b)
-    return out, replaced
-
-
 def _sample(db: Session, version_id: uuid.UUID, seed: int) -> tuple[Any, list[dict[str, Any]], list[Any]]:
     from portal_api.modules.assessment import mocks
     from portal_api.modules.assessment.profiles import ExamProfileVersion
@@ -136,10 +119,10 @@ def form(db: Session, version_id: uuid.UUID, seed: int | None) -> dict[str, Any]
     for position, (section, (family, item, cv, option_ids)) in enumerate(picks, start=1):
         body = cv.body
         options = {o["id"]: o for o in body["options"]}
-        stem_old, n_stem = _oldest(body["stem"])
+        stem_old, n_stem = block_registry.oldest_client(body["stem"])
         option_views, n_opt = [], 0
         for oid in option_ids:
-            blocks_old, n = _oldest(options[oid]["blocks"])
+            blocks_old, n = block_registry.oldest_client(options[oid]["blocks"])
             n_opt += n
             option_views.append({"id": oid, "blocks": blocks_old})
         items.append(
