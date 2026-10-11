@@ -22,11 +22,11 @@ import uuid
 from datetime import UTC, datetime, timedelta
 from typing import Any
 
-from sqlalchemy import select
+from sqlalchemy import func, select
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
-from portal_api.errors import Conflict, NotFound, TooLarge, Unprocessable
+from portal_api.errors import Conflict, NotFound, TooLarge, TooMany, Unprocessable
 from portal_api.modules.audit.models import record
 from portal_api.modules.content import blocks, kinds, workflow
 from portal_api.modules.content.models import (
@@ -46,6 +46,8 @@ SCHEMA_VERSION = 1
 IMPORT_KINDS = ("mcq", "lesson", "written", "storyboard")
 MAX_BYTES = 5 * 1024 * 1024
 MAX_ROWS = 2000
+MAX_DEPTH = 40  # rich blocks nest a few levels; anything deeper is hostile or broken (IMPORT-ABUSE-01)
+PREVIEWS_PER_HOUR = 30  # per author: each preview validates every row against the catalogue (provisional)
 PREVIEW_TTL = timedelta(hours=24)
 EXTERNAL_ID_MAX = 120
 CSV_COLUMNS = (
@@ -84,9 +86,30 @@ def _decode(data: bytes) -> str:
     if data.startswith(b"\xef\xbb\xbf"):
         data = data[3:]
     try:
-        return data.decode("utf-8")
+        text = data.decode("utf-8")
     except UnicodeDecodeError:
         raise Unprocessable("The file must be UTF-8 encoded.", code_reason="ENCODING") from None
+    if "\x00" in text:  # Postgres text can't hold NUL; reject it here, not as a server error on save
+        raise Unprocessable("The file contains a NUL character, which isn't allowed in text.", code_reason="ENCODING")
+    return text
+
+
+def _check_shape(doc: Any) -> None:
+    """Iteratively (no recursion) bound nesting depth and reject NUL characters decoded from JSON escapes."""
+    stack: list[tuple[Any, int]] = [(doc, 1)]
+    while stack:
+        node, depth = stack.pop()
+        if depth > MAX_DEPTH:
+            raise Unprocessable(f"The file nests deeper than {MAX_DEPTH} levels.", code_reason="JSON")
+        if isinstance(node, dict):
+            stack.extend((v, depth + 1) for v in node.values())
+            stack.extend((k, depth) for k in node)
+        elif isinstance(node, list):
+            stack.extend((v, depth + 1) for v in node)
+        elif isinstance(node, str) and "\x00" in node:
+            raise Unprocessable(
+                "The file contains a NUL character, which isn't allowed in text.", code_reason="ENCODING"
+            )
 
 
 def _para(text: str) -> list[dict[str, Any]]:
@@ -96,6 +119,13 @@ def _para(text: str) -> list[dict[str, Any]]:
 def _csv_rows(text: str) -> tuple[str, list[dict[str, Any]]]:
     """The MCQ CSV template (plain paragraphs). Rich blocks, formulas and images need the JSON format."""
     reader = csv.DictReader(io.StringIO(text))
+    try:
+        return _csv_read(reader)
+    except csv.Error as e:  # e.g. a field over the parser's size limit, or a broken quote
+        raise Unprocessable(f"The CSV file can't be read: {e}.", code_reason="CSV") from None
+
+
+def _csv_read(reader: csv.DictReader[str]) -> tuple[str, list[dict[str, Any]]]:
     header = [h.strip() for h in reader.fieldnames or []]
     missing = [
         c for c in ("external_id", "chapter", "title", "stem", "option_a", "option_b", "correct") if c not in header
@@ -107,6 +137,8 @@ def _csv_rows(text: str) -> tuple[str, list[dict[str, Any]]]:
         raise Unprocessable(f"Unknown CSV columns: {', '.join(unknown)}.", code_reason="CSV_HEADER")
     rows: list[dict[str, Any]] = []
     for raw in reader:
+        if len(rows) >= MAX_ROWS:  # stop reading at the limit instead of parsing a flood of rows
+            raise TooLarge(f"A batch can have at most {MAX_ROWS} rows; split the file.")
         r = {k.strip(): (v or "").strip() for k, v in raw.items() if k}
         options = [
             {"id": f"o{i + 1}", "blocks": _para(r.get(col, ""))}
@@ -156,6 +188,9 @@ def _json_rows(text: str) -> tuple[str, list[dict[str, Any]]]:
         doc = json.loads(text)
     except json.JSONDecodeError as e:
         raise Unprocessable(f"The file is not valid JSON (line {e.lineno}).", code_reason="JSON") from None
+    except RecursionError:
+        raise Unprocessable(f"The file nests deeper than {MAX_DEPTH} levels.", code_reason="JSON") from None
+    _check_shape(doc)
     if not isinstance(doc, dict):
         raise Unprocessable("The file must be a JSON object with schema_version, kind and items.", code_reason="JSON")
     if doc.get("schema_version") != SCHEMA_VERSION:
@@ -290,6 +325,16 @@ def preview(db: Session, who: Principal, data: bytes, *, fmt: str, filename: str
     if fmt not in ("json", "csv"):
         raise Unprocessable("Choose json or csv.")
     kind, raw_rows = parse_file(data, fmt)
+    recent = db.scalar(
+        select(func.count())
+        .select_from(ContentImportBatch)
+        .where(
+            ContentImportBatch.created_by == who.user.id,
+            ContentImportBatch.created_at > func.now() - timedelta(hours=1),
+        )
+    )
+    if (recent or 0) >= PREVIEWS_PER_HOUR:  # P18.S2.T2: validation is the expensive part of a preview
+        raise TooMany(f"You've previewed {PREVIEWS_PER_HOUR} imports in the last hour. Please wait before the next.")
     scope_cache: dict[Any, bool] = {}
     results = [_validate_row(db, who, kind, r, scope_cache) for r in raw_rows]
     seen: dict[str, int] = {}
