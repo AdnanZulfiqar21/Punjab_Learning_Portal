@@ -919,6 +919,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/me/dashboard": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Your home dashboard, with the three progress meters */
+        get: operations["my_dashboard_v1_me_dashboard_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/me/data-export": {
         parameters: {
             query?: never;
@@ -4545,6 +4562,34 @@ export interface components {
             /** Written Sealed */
             written_sealed: number;
         };
+        /** ContinueLesson */
+        ContinueLesson: {
+            /**
+             * Chapter Id
+             * Format: uuid
+             */
+            chapter_id: string;
+            /** Chapter Number */
+            chapter_number: number;
+            /** Chapter Title */
+            chapter_title: string;
+            /** Grade */
+            grade: number;
+            /**
+             * Lesson Id
+             * Format: uuid
+             */
+            lesson_id: string;
+            /**
+             * Opened At
+             * Format: date-time
+             */
+            opened_at: string;
+            /** Subject */
+            subject: string;
+            /** Title */
+            title: string;
+        };
         /**
          * CorrectionLink
          * @description A reviewed correction of the reported question (P12.S1.T3, REPORT-LINKS-01).
@@ -4579,6 +4624,31 @@ export interface components {
             reason: string;
             /** Subpart Id */
             subpart_id: string | null;
+        };
+        /** Dashboard */
+        Dashboard: {
+            continue_learning: components["schemas"]["ContinueLesson"] | null;
+            /**
+             * Generated At
+             * Format: date-time
+             */
+            generated_at: string;
+            /** Meters */
+            meters: components["schemas"]["Meter"][];
+            profile: components["schemas"]["DashboardProfile"] | null;
+            /** Recent */
+            recent: components["schemas"]["RecentResult"][];
+            /** Results Pending */
+            results_pending: number;
+            revision: components["schemas"]["Revision"];
+            upcoming_mock: components["schemas"]["MockSessionOut"] | null;
+        };
+        /** DashboardProfile */
+        DashboardProfile: {
+            /** Grade */
+            grade: number;
+            /** Subjects */
+            subjects: string[];
         };
         /** DeadLetterOut */
         DeadLetterOut: {
@@ -5920,6 +5990,24 @@ export interface components {
             /** From Staff */
             from_staff: boolean;
         };
+        /** Meter */
+        Meter: {
+            /** Definition */
+            definition: string;
+            /** Denominator */
+            denominator: number | null;
+            /**
+             * Key
+             * @enum {string}
+             */
+            key: "syllabus_coverage" | "content_completed" | "demonstrated_knowledge";
+            /** Numerator */
+            numerator: number | null;
+            /** Percent */
+            percent: number | null;
+            /** Unavailable */
+            unavailable: string | null;
+        };
         /** MockIn */
         MockIn: {
             /** Code */
@@ -7065,6 +7153,13 @@ export interface components {
             decision: "approve" | "request_changes";
             /** Reviewer */
             reviewer: string | null;
+        };
+        /** Revision */
+        Revision: {
+            /** Due */
+            due: number;
+            /** Open */
+            open: number;
         };
         /** RevisionOut */
         RevisionOut: {
@@ -10295,6 +10390,26 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    my_dashboard_v1_me_dashboard_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Dashboard"];
                 };
             };
         };

@@ -9,6 +9,7 @@ import type {
   MockSession,
   NotebookEntry,
   ProgressReport,
+  Dashboard,
   EvidenceReport,
   StudyPlan,
   PublishedExamProfile,
@@ -223,6 +224,7 @@ export const api = {
       headers: { "Idempotency-Key": idempotencyKey },
     }),
   progress: (token: string, signal?: AbortSignal) => request<ProgressReport>("/v1/me/progress", { token, signal }),
+  dashboard: (token: string, signal?: AbortSignal) => request<Dashboard>("/v1/me/dashboard", { token, signal }),
   evidence: (token: string, grade: number, subject: string, signal?: AbortSignal) =>
     request<EvidenceReport>(`/v1/me/evidence?grade=${grade}&subject=${encodeURIComponent(subject)}`, { token, signal }),
   studyPlan: (token: string, q: { grade: number; subject: string; target_date: string; daily_minutes: number }, signal?: AbortSignal) =>
