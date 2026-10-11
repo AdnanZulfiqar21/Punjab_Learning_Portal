@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import Link from "next/link";
 import { Suspense } from "react";
 import { AccountNav } from "@/components/account-nav";
+import { ConnectionStatus } from "@/components/connection-status";
 import { IncidentBanner } from "@/components/incident-banner";
 import "./globals.css";
 
@@ -34,6 +35,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         >
           Skip to content
         </a>
+        <ConnectionStatus />
         <header className="border-b border-border bg-surface">
           <nav
             aria-label="Main"
