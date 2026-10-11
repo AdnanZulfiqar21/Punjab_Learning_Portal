@@ -82,7 +82,7 @@ async function Entries() {
                 See the original question {e.position}
               </Link>
             </p>
-            <LessonBlocks blocks={e.stem as { type: string }[]} headingOffset={2} />
+            <LessonBlocks blocks={e.stem as { type: string }[]} headingOffset={2} assetUrl={(v) => `/practice/attempt/${e.source_attempt_id}/assets/${v}`} />
             <p className="text-muted">{e.why}</p>
             <NoteEditor id={e.id} initial={e.note} />
           </li>

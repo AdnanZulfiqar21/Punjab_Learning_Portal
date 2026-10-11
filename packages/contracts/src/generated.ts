@@ -448,6 +448,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/attempts/{attempt_id}/assets/{version_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** A diagram named by a question in your own attempt (explanation figures once the result is available) */
+        get: operations["attempt_asset_v1_attempts__attempt_id__assets__version_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/attempts/{attempt_id}/continue-here": {
         parameters: {
             query?: never;
@@ -9400,6 +9417,38 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["SaveOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    attempt_asset_v1_attempts__attempt_id__assets__version_id__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                attempt_id: string;
+                version_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": unknown;
                 };
             };
             /** @description Validation Error */

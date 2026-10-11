@@ -103,20 +103,20 @@ def test_diagrams_and_handouts_reach_learners_only_through_their_lesson(client: 
     assert free.status_code == 200 and free.headers["cache-control"].startswith("public")
 
 
-def test_questions_cannot_carry_diagrams_yet(client: TestClient, db: Session) -> None:
-    """Learners fetch lesson files through their lesson; a question diagram would need attempt-bound delivery."""
+def test_questions_cannot_carry_handouts(client: TestClient, db: Session) -> None:
+    """Handouts belong to lessons; MCQ diagrams are allowed and served through the attempt (QUESTION-DIAGRAMS-01)."""
     import copy
 
     from tests.test_mcq_items import VALID, _new_mcq
 
     author = Staff(client, db, ["content_author"], BIO11)
-    image = _upload(client, author, _asset(client, author, "image")["id"], _jpeg_with_gps()).json()
+    sheet = _upload(client, author, _asset(client, author, "handout")["id"], _pdf(1)).json()
     chapter, doc = _chapter(db, 11, "biology", 4)
     item = _new_mcq(client, author, str(chapter.id))
     body = copy.deepcopy(VALID)
     body["stem"] = [
         *body["stem"],
-        {"type": "diagram", "asset_version_id": image["id"], "alt": "Fixture", "caption": "F"},
+        {"type": "handout", "asset_version_id": sheet["id"], "title": "Fixture sheet"},
     ]
     saved = client.put(
         f"/v1/studio/items/{item['id']}/draft",

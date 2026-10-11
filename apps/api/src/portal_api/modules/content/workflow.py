@@ -159,11 +159,13 @@ def _validate(db: Session, item: ContentItem, version: ContentVersion, *, for_pu
     from portal_api.modules.content import assets
 
     refs = assets.check_references(db, item.grade_number, item.subject_code, version.body)
-    if item.kind != "lesson" and any(
-        w in ("diagram block", "handout block") for w, _, _ in assets.block_refs(version.body)
-    ):
-        # Learners fetch lesson files through the lesson; questions need attempt-bound delivery first (P08).
-        errors.append("Diagrams and handouts can be used in lessons only for now.")
+    used = {w for w, _, _ in assets.block_refs(version.body)}
+    if "handout block" in used and item.kind != "lesson":
+        errors.append("Handouts can be used in lessons only.")
+    if "diagram block" in used and item.kind not in ("lesson", "mcq"):
+        # Lessons serve their files through the lesson, MCQs through the learner's own attempt (QUESTION-DIAGRAMS-01).
+        # Written questions need the same attempt-bound delivery first.
+        errors.append("Diagrams can be used in lessons and multiple-choice questions for now.")
     if for_publication:
         errors += refs
     else:

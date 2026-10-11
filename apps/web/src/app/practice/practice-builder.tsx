@@ -85,7 +85,7 @@ export function PracticeBuilder({
                 <span className="flex-1">
                   Chapter {c.number}: {c.title}
                 </span>
-                <span className="text-sm text-muted">{c.questions === 0 ? "no questions yet" : `${c.questions} questions`}</span>
+                <span className="text-sm text-muted">{c.questions === 0 ? "no questions yet" : `${c.questions} question${c.questions === 1 ? "" : "s"}`}</span>
               </label>
             </li>
           ))}
@@ -147,7 +147,7 @@ export function PracticeBuilder({
           rejected, so keep your connection steady near the end.
         </p>
       )}
-      {selected.length > 0 && <p className="text-sm text-muted">{available} approved questions available in the chosen chapters.</p>}
+      {selected.length > 0 && <p className="text-sm text-muted">{available} approved question{available === 1 ? "" : "s"} available in the chosen chapters.</p>}
       {state?.error && (
         <p role="alert" className="rounded-lg border border-danger/30 bg-danger-soft px-3 py-2 text-sm">
           {state.error}

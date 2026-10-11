@@ -3,12 +3,12 @@ import { ScrollView, View } from "react-native";
 import type { ItemReview } from "@portal/contracts";
 
 import { Button } from "@/components/form";
-import { LessonBlocks } from "@/components/lesson-blocks";
+import { LessonBlocks, type AssetSource } from "@/components/lesson-blocks";
 import { Badge, Card, ErrorState, Loading, Notice, T } from "@/components/ui";
 import { Radius, Space } from "@/constants/theme";
 import { useRequest } from "@/hooks/use-request";
 import { useTheme } from "@/hooks/use-theme";
-import { api } from "@/lib/api";
+import { api, attemptAsset } from "@/lib/api";
 import { useAuth } from "@/lib/auth";
 
 type Blocks = { type: string }[];
@@ -65,14 +65,14 @@ function ResultView({ id, token }: { id: string; token: string }) {
         {r.answered} of {r.question_count} answered · {r.finalise_reason === "expiry" ? "submitted when time ran out" : "submitted by you"}
       </T>
       {r.items.map((it) => (
-        <Review key={it.position} item={it} />
+        <Review key={it.position} item={it} assetSource={(v) => attemptAsset(id, v, token)} />
       ))}
       <Button variant="secondary" label="Practise again" onPress={() => router.navigate("/practice")} />
     </ScrollView>
   );
 }
 
-function Review({ item }: { item: ItemReview }) {
+function Review({ item, assetSource }: { item: ItemReview; assetSource: AssetSource }) {
   const c = useTheme();
   const explanation = item.explanation as { correct?: Blocks; distractors?: Record<string, string> };
   return (
@@ -89,7 +89,7 @@ function Review({ item }: { item: ItemReview }) {
           <Badge tone="warn">Incorrect</Badge>
         )}
       </View>
-      <LessonBlocks blocks={item.stem as Blocks} />
+      <LessonBlocks blocks={item.stem as Blocks} assetSource={assetSource} />
       {item.options.map((o, i) => {
         const isKey = o.id === item.correct_option_id;
         const isChosen = o.id === item.chosen;
@@ -97,7 +97,7 @@ function Review({ item }: { item: ItemReview }) {
           <View key={o.id} style={{ flexDirection: "row", gap: Space.sm, padding: Space.sm, borderRadius: Radius.sm, borderWidth: 1, borderColor: isKey ? c.accent : isChosen ? c.danger : c.border, marginTop: Space.xs }}>
             <T style={{ fontWeight: "600", width: 20 }}>{String.fromCharCode(65 + i)}</T>
             <View style={{ flex: 1, gap: 2 }}>
-              <LessonBlocks blocks={o.blocks as Blocks} />
+              <LessonBlocks blocks={o.blocks as Blocks} assetSource={assetSource} />
               {isKey && <T variant="small" style={{ color: c.accent }}>Correct answer</T>}
               {isChosen && !isKey && <T variant="small" style={{ color: c.danger }}>Your answer{explanation.distractors?.[o.id] ? `: ${explanation.distractors[o.id]}` : ""}</T>}
             </View>
@@ -107,7 +107,7 @@ function Review({ item }: { item: ItemReview }) {
       {(explanation.correct?.length ?? 0) > 0 && (
         <View style={{ marginTop: Space.sm, padding: Space.sm, borderRadius: Radius.sm, backgroundColor: c.surfaceMuted }}>
           <T style={{ fontWeight: "600" }}>Why</T>
-          <LessonBlocks blocks={explanation.correct ?? []} />
+          <LessonBlocks blocks={explanation.correct ?? []} assetSource={assetSource} />
         </View>
       )}
     </Card>

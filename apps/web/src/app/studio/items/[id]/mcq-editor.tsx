@@ -6,6 +6,10 @@ import type { Block } from "@/app/actions/studio";
 import { LessonBlocks } from "@/components/lesson-blocks";
 import { BlockEditor, normaliseBlocks } from "./block-editor";
 
+/** Handouts belong to lessons; MCQs may hold diagrams (QUESTION-DIAGRAMS-01). */
+const QUESTION_EXCLUDE = ["handout"];
+const studioFile = (v: string) => `/studio/assets/file/${v}?copy=delivery`;
+
 type Option = { id: string; blocks: Block[] };
 type Explanation = { correct: Block[]; distractors: Record<string, string>; worked_steps: Block[] };
 type Metadata = {
@@ -103,7 +107,7 @@ export function McqEditor({ body, onChange }: { body: Record<string, unknown>; o
         <h2 id="stem-h" className="font-medium">
           Question stem
         </h2>
-        <BlockEditor blocks={q.stem} onChange={(stem) => set({ stem })} />
+        <BlockEditor blocks={q.stem} onChange={(stem) => set({ stem })} exclude={QUESTION_EXCLUDE} />
       </section>
 
       <section className="space-y-3" aria-labelledby="options-h">
@@ -137,7 +141,7 @@ export function McqEditor({ body, onChange }: { body: Record<string, unknown>; o
                   </button>
                 </div>
               </div>
-              <BlockEditor blocks={o.blocks} onChange={(blocks) => setOption(i, blocks)} />
+              <BlockEditor blocks={o.blocks} onChange={(blocks) => setOption(i, blocks)} exclude={QUESTION_EXCLUDE} />
               {q.correct_option_id !== o.id && (
                 <label className="block space-y-1 text-sm">
                   <span className="text-muted">Why a learner might choose {o.id}, and why it is wrong</span>
@@ -164,9 +168,9 @@ export function McqEditor({ body, onChange }: { body: Record<string, unknown>; o
         <h2 id="expl-h" className="font-medium">
           Why the correct answer is correct
         </h2>
-        <BlockEditor blocks={q.explanation.correct} onChange={(correct) => set({ explanation: { ...q.explanation, correct } })} />
+        <BlockEditor blocks={q.explanation.correct} onChange={(correct) => set({ explanation: { ...q.explanation, correct } })} exclude={QUESTION_EXCLUDE} />
         <h3 className="pt-2 text-sm font-medium">Worked steps (optional)</h3>
-        <BlockEditor blocks={q.explanation.worked_steps} onChange={(worked_steps) => set({ explanation: { ...q.explanation, worked_steps } })} />
+        <BlockEditor blocks={q.explanation.worked_steps} onChange={(worked_steps) => set({ explanation: { ...q.explanation, worked_steps } })} exclude={QUESTION_EXCLUDE} />
       </section>
 
       <section className="grid gap-4 sm:grid-cols-2" aria-label="Question details">
@@ -258,21 +262,21 @@ export function McqPreview({ body }: { body: Record<string, unknown> }) {
   const q = asMcq(body);
   return (
     <div className="space-y-4">
-      <LessonBlocks blocks={q.stem} headingOffset={1} />
+      <LessonBlocks blocks={q.stem} headingOffset={1} assetUrl={studioFile} />
       <ol className="space-y-2" aria-label="Options">
         {q.options.map((o) => (
           <li key={o.id} className={`rounded-lg border px-3 py-2 ${o.id === q.correct_option_id ? "border-ok bg-ok-soft" : "border-border"}`}>
             <span className="mr-2 font-mono text-xs text-muted">{o.id}</span>
             {o.id === q.correct_option_id && <span className="mr-2 text-xs font-semibold text-ok">KEY</span>}
-            <LessonBlocks blocks={o.blocks} headingOffset={2} />
+            <LessonBlocks blocks={o.blocks} headingOffset={2} assetUrl={studioFile} />
             {q.explanation.distractors[o.id] && <p className="mt-1 text-sm text-muted">{q.explanation.distractors[o.id]}</p>}
           </li>
         ))}
       </ol>
       <div className="rounded-lg border border-border p-3">
         <p className="text-sm font-semibold">Explanation</p>
-        <LessonBlocks blocks={q.explanation.correct} headingOffset={2} />
-        {q.explanation.worked_steps.length > 0 && <LessonBlocks blocks={q.explanation.worked_steps} headingOffset={2} />}
+        <LessonBlocks blocks={q.explanation.correct} headingOffset={2} assetUrl={studioFile} />
+        {q.explanation.worked_steps.length > 0 && <LessonBlocks blocks={q.explanation.worked_steps} headingOffset={2} assetUrl={studioFile} />}
       </div>
       <p className="text-xs text-muted">
         {q.marks} mark{q.marks === 1 ? "" : "s"} · {q.shuffle_options ? "options shuffled" : "fixed option order"} ·{" "}

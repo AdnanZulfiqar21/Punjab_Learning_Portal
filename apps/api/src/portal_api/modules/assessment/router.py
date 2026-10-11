@@ -240,6 +240,25 @@ def _related_lessons(db: Session, form: PracticeForm, limit: int = 3) -> dict[in
     return out
 
 
+@router.get(
+    "/attempts/{attempt_id}/assets/{version_id}",
+    summary="A diagram named by a question in your own attempt (explanation figures once the result is available)",
+)
+def attempt_asset(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, version_id: uuid.UUID) -> Response:
+    from portal_api.modules.content import assets
+
+    v = assets.for_attempt(db, who.user.id, attempt_id, version_id)
+    return Response(
+        content=assets.read(v.delivery_key or ""),
+        media_type=v.delivery_media_type or "image/png",
+        headers={
+            "Cache-Control": "private, max-age=3600",  # immutable version, but only for this learner's browser
+            "X-Content-Type-Options": "nosniff",
+            "Content-Disposition": 'inline; filename="diagram.png"',
+        },
+    )
+
+
 @router.get("/attempts/{attempt_id}/result", response_model=ResultOut, summary="Score and review after submission")
 def result(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, response: Response) -> ResultOut:
     _private(response)

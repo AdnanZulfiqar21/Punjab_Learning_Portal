@@ -55,6 +55,7 @@ const noopSubscribe = () => () => {};
 export function AttemptRunner({ attempt }: { attempt: PracticeAttempt }) {
   const router = useRouter();
   const total = attempt.items.length;
+  const assetUrl = (v: string) => `/practice/attempt/${attempt.id}/assets/${v}`; // QUESTION-DIAGRAMS-01
   const [current, setCurrent] = useState(1);
   const [items, setItems] = useState<Record<number, ItemState>>(() => {
     const out: Record<number, ItemState> = {};
@@ -326,7 +327,7 @@ export function AttemptRunner({ attempt }: { attempt: PracticeAttempt }) {
         <h2 id="q-heading" className="sr-only">
           Question {current}
         </h2>
-        <LessonBlocks blocks={item.stem as { type: string }[]} headingOffset={1} />
+        <LessonBlocks blocks={item.stem as { type: string }[]} headingOffset={1} assetUrl={assetUrl} />
         <fieldset disabled={closed || submitting || locked.has(current)} className="space-y-2">
           <legend className="sr-only">Options for question {current}</legend>
           {item.options.map((o, idx) => {
@@ -337,7 +338,7 @@ export function AttemptRunner({ attempt }: { attempt: PracticeAttempt }) {
                 <input type="radio" name={`q${current}`} value={o.id} checked={state.option === o.id} onChange={() => choose(current, o.id)} className="mt-1" />
                 <span className="w-5 font-medium text-muted">{String.fromCharCode(65 + idx)}</span>
                 <span className="flex-1">
-                  <LessonBlocks blocks={o.blocks as { type: string }[]} headingOffset={2} />
+                  <LessonBlocks blocks={o.blocks as { type: string }[]} headingOffset={2} assetUrl={assetUrl} />
                 </span>
               </label>
             );
@@ -363,7 +364,7 @@ export function AttemptRunner({ attempt }: { attempt: PracticeAttempt }) {
         {revealed[current] && (
           <div role="status" className="space-y-2 rounded-lg border border-border bg-surface-muted p-3 text-sm">
             <p className="font-semibold">{revealed[current].correct ? "Correct" : "Not quite"}</p>
-            <LessonBlocks blocks={((revealed[current].explanation as { correct?: unknown[] }).correct ?? []) as { type: string }[]} headingOffset={2} />
+            <LessonBlocks blocks={((revealed[current].explanation as { correct?: unknown[] }).correct ?? []) as { type: string }[]} headingOffset={2} assetUrl={assetUrl} />
           </div>
         )}
       </section>
