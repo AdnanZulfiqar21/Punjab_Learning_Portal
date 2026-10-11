@@ -2595,6 +2595,57 @@
         "title": "ContentUsage",
         "type": "object"
       },
+      "ContinueLesson": {
+        "properties": {
+          "chapter_id": {
+            "format": "uuid",
+            "title": "Chapter Id",
+            "type": "string"
+          },
+          "chapter_number": {
+            "title": "Chapter Number",
+            "type": "integer"
+          },
+          "chapter_title": {
+            "title": "Chapter Title",
+            "type": "string"
+          },
+          "grade": {
+            "title": "Grade",
+            "type": "integer"
+          },
+          "lesson_id": {
+            "format": "uuid",
+            "title": "Lesson Id",
+            "type": "string"
+          },
+          "opened_at": {
+            "format": "date-time",
+            "title": "Opened At",
+            "type": "string"
+          },
+          "subject": {
+            "title": "Subject",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "lesson_id",
+          "title",
+          "grade",
+          "subject",
+          "chapter_id",
+          "chapter_number",
+          "chapter_title",
+          "opened_at"
+        ],
+        "title": "ContinueLesson",
+        "type": "object"
+      },
       "CorrectionLink": {
         "description": "A reviewed correction of the reported question (P12.S1.T3, REPORT-LINKS-01).",
         "properties": {
@@ -2669,6 +2720,99 @@
           "reason"
         ],
         "title": "CriterionResult",
+        "type": "object"
+      },
+      "Dashboard": {
+        "properties": {
+          "continue_learning": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ContinueLesson"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "generated_at": {
+            "format": "date-time",
+            "title": "Generated At",
+            "type": "string"
+          },
+          "meters": {
+            "items": {
+              "$ref": "#/components/schemas/Meter"
+            },
+            "title": "Meters",
+            "type": "array"
+          },
+          "profile": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DashboardProfile"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "recent": {
+            "items": {
+              "$ref": "#/components/schemas/RecentResult"
+            },
+            "title": "Recent",
+            "type": "array"
+          },
+          "results_pending": {
+            "title": "Results Pending",
+            "type": "integer"
+          },
+          "revision": {
+            "$ref": "#/components/schemas/Revision"
+          },
+          "upcoming_mock": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/MockSessionOut"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "generated_at",
+          "profile",
+          "meters",
+          "continue_learning",
+          "revision",
+          "upcoming_mock",
+          "recent",
+          "results_pending"
+        ],
+        "title": "Dashboard",
+        "type": "object"
+      },
+      "DashboardProfile": {
+        "properties": {
+          "grade": {
+            "title": "Grade",
+            "type": "integer"
+          },
+          "subjects": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Subjects",
+            "type": "array"
+          }
+        },
+        "required": [
+          "grade",
+          "subjects"
+        ],
+        "title": "DashboardProfile",
         "type": "object"
       },
       "DeadLetterOut": {
@@ -5994,6 +6138,77 @@
         "title": "MessageOut",
         "type": "object"
       },
+      "Meter": {
+        "properties": {
+          "definition": {
+            "title": "Definition",
+            "type": "string"
+          },
+          "denominator": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Denominator"
+          },
+          "key": {
+            "enum": [
+              "syllabus_coverage",
+              "content_completed",
+              "demonstrated_knowledge"
+            ],
+            "title": "Key",
+            "type": "string"
+          },
+          "numerator": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Numerator"
+          },
+          "percent": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Percent"
+          },
+          "unavailable": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Unavailable"
+          }
+        },
+        "required": [
+          "key",
+          "definition",
+          "numerator",
+          "denominator",
+          "percent",
+          "unavailable"
+        ],
+        "title": "Meter",
+        "type": "object"
+      },
       "MockIn": {
         "properties": {
           "code": {
@@ -8714,6 +8929,24 @@
           "created_at"
         ],
         "title": "ReviewOut",
+        "type": "object"
+      },
+      "Revision": {
+        "properties": {
+          "due": {
+            "title": "Due",
+            "type": "integer"
+          },
+          "open": {
+            "title": "Open",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "due",
+          "open"
+        ],
+        "title": "Revision",
         "type": "object"
       },
       "RevisionOut": {
@@ -15064,6 +15297,27 @@
         "summary": "Withdraw an optional consent",
         "tags": [
           "identity"
+        ]
+      }
+    },
+    "/v1/me/dashboard": {
+      "get": {
+        "operationId": "my_dashboard_v1_me_dashboard_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Dashboard"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Your home dashboard, with the three progress meters",
+        "tags": [
+          "practice"
         ]
       }
     },
