@@ -61,6 +61,17 @@ def studio_member(principal: CurrentPrincipal) -> Principal:
 
 
 Member = Annotated[Principal, Depends(studio_member)]
+
+
+def registry_reader(principal: CurrentPrincipal) -> Principal:
+    """SOURCE-INTAKE-01: the source registry is read by content staff and by the owner, who sets publication rights
+    and stores originals but holds no content role."""
+    if not principal.permissions & (STUDIO_PERMISSIONS | {Permission.confirm_source_rights}):
+        raise Forbidden("The source registry is for content staff and the owner.")
+    return principal
+
+
+RegistryReader = Annotated[Principal, Depends(registry_reader)]
 Author = Annotated[Principal, Depends(require(Permission.draft_content))]
 Reviewer = Annotated[Principal, Depends(require(Permission.review_content))]
 Publisher = Annotated[Principal, Depends(require(Permission.publish_content))]
@@ -266,6 +277,8 @@ def _detail(db: Session, item: ContentItem, who: Principal) -> ItemDetail:
 
 
 def _source_out(doc: SourceDocument) -> SourceOut:
+    from portal_api.modules.content import sources  # lazy: sources uses this module's studio_member
+
     return SourceOut(
         id=doc.id,
         source_id=doc.source_id,
@@ -277,6 +290,7 @@ def _source_out(doc: SourceDocument) -> SourceOut:
         publication_rights=doc.publication_rights,  # type: ignore[arg-type]
         publication_rights_evidence=doc.publication_rights_evidence,
         publication_rights_set_at=doc.publication_rights_set_at,
+        original_stored=sources.has_original(doc),
     )
 
 
@@ -365,7 +379,7 @@ def item_history(db: DB, who: Member, item_id: uuid.UUID, response: Response) ->
 
 
 @router.get("/sources", response_model=list[SourceOut], summary="Source documents and their publication-rights state")
-def sources(db: DB, _: Member, response: Response) -> list[SourceOut]:
+def sources(db: DB, _: RegistryReader, response: Response) -> list[SourceOut]:
     from portal_api.modules.content import updates
 
     _no_store(response)

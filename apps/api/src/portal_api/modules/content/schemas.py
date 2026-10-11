@@ -108,6 +108,7 @@ class SourceOut(BaseModel):
     publication_rights_set_at: datetime | None
     last_reviewed_at: datetime | None = None  # P16.S3.T3: latest recorded source review
     review_stale: bool = False  # never reviewed, or not for a year
+    original_stored: bool = False  # SOURCE-INTAKE-01: the owner's exact original is in private storage
 
 
 class ReviewOut(BaseModel):
