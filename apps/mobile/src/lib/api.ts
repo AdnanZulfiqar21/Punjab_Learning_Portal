@@ -10,6 +10,10 @@ import type {
   NotebookEntry,
   ProgressReport,
   Dashboard,
+  StudyNote,
+  StudyNoteListed,
+  FavouriteTopic,
+  SavedFormula,
   EvidenceReport,
   StudyPlan,
   PublishedExamProfile,
@@ -225,6 +229,25 @@ export const api = {
     }),
   progress: (token: string, signal?: AbortSignal) => request<ProgressReport>("/v1/me/progress", { token, signal }),
   dashboard: (token: string, signal?: AbortSignal) => request<Dashboard>("/v1/me/dashboard", { token, signal }),
+  // LESSON-DONE-01 and STUDY-TOOLS-01: completion, private notes, favourite topics and saved formulas.
+  completedLessons: (token: string, chapterId: string, signal?: AbortSignal) =>
+    request<string[]>(`/v1/me/chapters/${encodeURIComponent(chapterId)}/completed-lessons`, { token, signal }),
+  setCompleted: (token: string, lessonId: string, done: boolean) =>
+    request<void>(`/v1/me/lessons/${encodeURIComponent(lessonId)}/complete`, { method: done ? "POST" : "DELETE", token }),
+  note: (token: string, lessonId: string, signal?: AbortSignal) =>
+    request<StudyNote>(`/v1/me/lessons/${encodeURIComponent(lessonId)}/note`, { token, signal }),
+  saveNote: (token: string, lessonId: string, text: string, baseRevision: number) =>
+    request<StudyNote>(`/v1/me/lessons/${encodeURIComponent(lessonId)}/note`, { method: "PUT", token, body: { text, base_revision: baseRevision } }),
+  deleteNote: (token: string, lessonId: string, baseRevision: number) =>
+    request<StudyNote>(`/v1/me/lessons/${encodeURIComponent(lessonId)}/note?base_revision=${baseRevision}`, { method: "DELETE", token }),
+  notes: (token: string, signal?: AbortSignal) => request<StudyNoteListed[]>("/v1/me/notes", { token, signal }),
+  favourites: (token: string, signal?: AbortSignal) => request<FavouriteTopic[]>("/v1/me/favourites", { token, signal }),
+  setFavourite: (token: string, topicId: string, on: boolean) =>
+    request<void>(`/v1/me/favourites/topics/${encodeURIComponent(topicId)}`, { method: on ? "PUT" : "DELETE", token }),
+  formulas: (token: string, signal?: AbortSignal) => request<SavedFormula[]>("/v1/me/formulas", { token, signal }),
+  saveFormula: (token: string, lessonId: string, blockIndex: number) =>
+    request<SavedFormula>("/v1/me/formulas", { method: "POST", token, body: { lesson_id: lessonId, block_index: blockIndex } }),
+  removeFormula: (token: string, id: string) => request<void>(`/v1/me/formulas/${encodeURIComponent(id)}`, { method: "DELETE", token }),
   evidence: (token: string, grade: number, subject: string, signal?: AbortSignal) =>
     request<EvidenceReport>(`/v1/me/evidence?grade=${grade}&subject=${encodeURIComponent(subject)}`, { token, signal }),
   studyPlan: (token: string, q: { grade: number; subject: string; target_date: string; daily_minutes: number }, signal?: AbortSignal) =>
