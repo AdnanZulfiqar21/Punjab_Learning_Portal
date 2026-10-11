@@ -121,3 +121,6 @@ export type StudyNoteListed = S["NoteListed"];
 export type FavouriteTopic = S["FavouriteOut"];
 export type SavedFormula = S["FormulaOut"];
 export type Concept = S["ConceptOut"];
+export type InclusionRecord = S["RecordOut"];
+export type InclusionReport = S["ReportOut"];
+export type InclusionCoverage = S["CoverageOut"];
