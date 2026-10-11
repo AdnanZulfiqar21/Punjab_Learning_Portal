@@ -81,17 +81,17 @@ async function Discover({ filters }: { filters: Filters }) {
   return (
     <div className="space-y-8">
       <form method="get" action="/learn" aria-label="Filter subjects" className="flex flex-wrap items-end gap-3 rounded-xl border border-border bg-surface p-4 text-sm">
-        <label className="flex flex-col gap-1">
-          Class
-          <select name="grade" defaultValue={filters.grade ?? ""} className={select}>
+        <div className="flex flex-col gap-1">
+          <label htmlFor="f-grade">Class</label>
+          <select id="f-grade" name="grade" defaultValue={filters.grade ?? ""} className={select}>
             <option value="">Both classes</option>
             <option value="11">Class XI</option>
             <option value="12">Class XII</option>
           </select>
-        </label>
-        <label className="flex flex-col gap-1">
-          Track
-          <select name="track" defaultValue={filters.track ?? ""} className={select}>
+        </div>
+        <div className="flex flex-col gap-1">
+          <label htmlFor="f-track">Track</label>
+          <select id="f-track" name="track" defaultValue={filters.track ?? ""} className={select}>
             <option value="">Any track</option>
             {d.tracks.map((t) => (
               <option key={t.code} value={t.code}>
@@ -99,10 +99,10 @@ async function Discover({ filters }: { filters: Filters }) {
               </option>
             ))}
           </select>
-        </label>
-        <label className="flex flex-col gap-1">
-          Subject
-          <select name="subject" defaultValue={filters.subject ?? ""} className={select}>
+        </div>
+        <div className="flex flex-col gap-1">
+          <label htmlFor="f-subject">Subject</label>
+          <select id="f-subject" name="subject" defaultValue={filters.subject ?? ""} className={select}>
             <option value="">Any subject</option>
             {SUBJECTS.map(([code, name]) => (
               <option key={code} value={code}>
@@ -110,11 +110,11 @@ async function Discover({ filters }: { filters: Filters }) {
               </option>
             ))}
           </select>
-        </label>
+        </div>
         {d.exams.length > 0 && (
-          <label className="flex flex-col gap-1">
-            Exam
-            <select name="exam" defaultValue={filters.exam ?? ""} className={select}>
+          <div className="flex flex-col gap-1">
+            <label htmlFor="f-exam">Exam</label>
+            <select id="f-exam" name="exam" defaultValue={filters.exam ?? ""} className={select}>
               <option value="">Any exam</option>
               {d.exams.map((e) => (
                 <option key={e.code} value={e.code}>
@@ -122,18 +122,18 @@ async function Discover({ filters }: { filters: Filters }) {
                 </option>
               ))}
             </select>
-          </label>
+          </div>
         )}
-        <label className="flex flex-col gap-1">
-          Show
-          <select name="availability" defaultValue={filters.availability ?? "all"} className={select}>
+        <div className="flex flex-col gap-1">
+          <label htmlFor="f-availability">Show</label>
+          <select id="f-availability" name="availability" defaultValue={filters.availability ?? "all"} className={select}>
             {AVAILABILITY.map(([v, l]) => (
               <option key={v} value={v}>
                 {l}
               </option>
             ))}
           </select>
-        </label>
+        </div>
         <button type="submit" className="rounded-lg bg-accent px-4 py-2 font-medium text-white hover:bg-accent-strong dark:text-background">
           Apply
         </button>
