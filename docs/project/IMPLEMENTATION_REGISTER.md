@@ -161,8 +161,9 @@ Source plan: `Road Map/Punjab_Learning_Portal_Master_Roadmap_v2.2_Integrated_Wri
 | P12.S1.T3 Reports ↔ corrections | IMPLEMENTED (API + web, learner and staff) | REPORT-LINKS-01. |
 | P12.S3.T3 Mixed revision | IMPLEMENTED | MIXED-REVISION-01. `tests/test_mixed_revision.py`. |
 | P12.S1.T1 Versioned result summary | IMPLEMENTED (API + web; mobile pending-state wording) | RESULT-SUMMARY-01. `tests/test_result_summary.py`. |
-| P09.S4.T3 Publish test availability | PARTIAL (replacement before start, stream targeting, entitlement shown; client-compatibility filter open: no minimum-client contract) | FORM-REPLACE-01. `tests/test_form_replacement.py`. |
+| P09.S4.T3 Publish test availability | IMPLEMENTED (replacement before start, stream targeting, entitlement shown; client compatibility by the publication renderer gate) | FORM-REPLACE-01, COMPAT-01. `tests/test_form_replacement.py`, `tests/test_client_compatibility.py`. |
 | P18.S2.T2 File and job abuse tests | IMPLEMENTED (import parser exhaustion, NUL, nesting, row flood, preview rate limit; uploads scanned; exports bounded) | IMPORT-ABUSE-01. `tests/test_import_abuse.py`. |
 | P18.S3.T1 Data minimisation | IMPLEMENTED for the code (review record, unused profile store retired, metadata stripping and field set pinned); deployment processors wait on B03-B06, retention on B15 | MINIMISATION-01. `docs/security/data-minimisation.md`, `tests/test_data_minimisation.py`. |
 | P09.S1.T3 Multi-subject custom practice | IMPLEMENTED (API + web; mobile builder parity open) | MULTI-SUBJECT-01. `tests/test_multi_subject_practice.py`. |
 | P10.S1.T3 Simultaneous sessions | IMPLEMENTED (API + web + mobile code; mobile not device-verified) | HANDOFF-01. `tests/test_attempt_handoff.py`. |
+| P10.S4.T1 Persistence failure cases | IMPLEMENTED (seeded retries, reordering, tab collisions, lost acknowledgements, commit failover; independent ledger; scoring reconciled) | LEDGER-01. `tests/test_persistence_ledger.py`. |
