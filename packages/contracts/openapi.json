@@ -5825,6 +5825,32 @@
             "title": "Id",
             "type": "string"
           },
+          "marker_proposal": {
+            "description": "Starting point: the storyboard's planned scene times",
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Marker Proposal",
+            "type": "array"
+          },
+          "markers": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Markers"
+          },
+          "markers_current": {
+            "description": "Timed against the current master video",
+            "title": "Markers Current",
+            "type": "boolean"
+          },
           "master": {
             "anyOf": [
               {
@@ -5920,6 +5946,9 @@
           "master",
           "transcript",
           "captions",
+          "markers",
+          "markers_current",
+          "marker_proposal",
           "review",
           "missing",
           "approved_at",
@@ -6321,6 +6350,53 @@
           "slots"
         ],
         "title": "ManifestIn",
+        "type": "object"
+      },
+      "MarkerIn": {
+        "properties": {
+          "label": {
+            "description": "The concept section a learner sees in the chapter list",
+            "maxLength": 120,
+            "minLength": 1,
+            "title": "Label",
+            "type": "string"
+          },
+          "scene_id": {
+            "maxLength": 20,
+            "minLength": 1,
+            "title": "Scene Id",
+            "type": "string"
+          },
+          "start_s": {
+            "maximum": 7200.0,
+            "minimum": 0.0,
+            "title": "Start S",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "scene_id",
+          "start_s",
+          "label"
+        ],
+        "title": "MarkerIn",
+        "type": "object"
+      },
+      "MarkersIn": {
+        "properties": {
+          "scenes": {
+            "items": {
+              "$ref": "#/components/schemas/MarkerIn"
+            },
+            "maxItems": 60,
+            "title": "Scenes",
+            "type": "array"
+          }
+        },
+        "required": [
+          "scenes"
+        ],
+        "title": "MarkersIn",
         "type": "object"
       },
       "MasterIn": {
@@ -21326,6 +21402,59 @@
           }
         },
         "summary": "Attach reviewed captions",
+        "tags": [
+          "lectures"
+        ]
+      }
+    },
+    "/v1/studio/lectures/{lecture_id}/markers": {
+      "put": {
+        "operationId": "set_markers_v1_studio_lectures__lecture_id__markers_put",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "lecture_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Lecture Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MarkersIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LectureOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Set where each storyboard scene starts in the current master video (chapter markers)",
         "tags": [
           "lectures"
         ]
