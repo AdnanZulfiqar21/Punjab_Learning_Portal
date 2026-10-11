@@ -29,6 +29,7 @@ PUBLIC = {
     "GET /readyz": "readiness probe",
     "GET /v1/runtime-config": "public client configuration (no secrets; tested in test_config)",
     "GET /v1/catalogue": "public catalogue structure",
+    "GET /v1/discovery": "public counts of published lessons, previews and practice per book (DISCOVERY-01)",
     "GET /v1/grades/{grade}/subjects/{subject}/book": "public catalogue structure",
     "GET /v1/books/{book_id}": "public catalogue structure",
     "GET /v1/chapters/{chapter_id}": "public catalogue structure",
