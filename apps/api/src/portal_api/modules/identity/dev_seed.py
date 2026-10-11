@@ -31,6 +31,7 @@ FIXTURES: list[tuple[str, list[str]]] = [
     ("studio-publisher@example.com", ["publisher"]),
     ("studio-support@example.com", ["support"]),
     ("studio-adjudicator@example.com", ["academic_adjudicator"]),  # applies rubric corrections (W06.S2.T3)
+    ("studio-owner@example.com", ["owner_admin"]),  # approves narration voices (LECTURE-01); development only
 ]
 
 

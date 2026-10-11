@@ -112,3 +112,5 @@ export interface Problem {
   errors?: { loc: (string | number)[]; msg: string }[];
 }
 export type ContentAsset = S["AssetOut"];
+export type Lecture = S["LectureOut"];
+export type NarrationVoice = S["VoiceOut"];

@@ -42,6 +42,7 @@ class Permission(StrEnum):
     manage_exam_profiles = "manage_exam_profiles"  # P05.S3: draft, verify (two people) and publish exam profiles
     manage_catalogue = "manage_catalogue"  # P06.S1.T1: preview and apply catalogue changes (MFA)
     view_business_overview = "view_business_overview"  # P16.S1.T1: aggregate business figures (MFA)
+    approve_voices = "approve_voices"  # P07.S4.T3 (LECTURE-01): the owner approves narration voices (MFA)
 
 
 ROLE_PERMISSIONS: dict[Role, frozenset[Permission]] = {
@@ -73,6 +74,7 @@ ROLE_PERMISSIONS: dict[Role, frozenset[Permission]] = {
             Permission.manage_exam_profiles,
             Permission.manage_catalogue,
             Permission.view_business_overview,
+            Permission.approve_voices,
         }
     ),
 }
@@ -92,6 +94,7 @@ MFA_REQUIRED: frozenset[Permission] = frozenset(
         Permission.review_trial_eligibility,
         Permission.look_up_learners,
         Permission.manage_exam_profiles,
+        Permission.approve_voices,
         Permission.manage_catalogue,
         Permission.view_business_overview,
     }

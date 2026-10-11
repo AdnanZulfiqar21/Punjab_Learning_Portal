@@ -1635,6 +1635,30 @@
         "title": "CapacityIn",
         "type": "object"
       },
+      "CaptionIn": {
+        "properties": {
+          "asset_version_id": {
+            "format": "uuid",
+            "title": "Asset Version Id",
+            "type": "string"
+          },
+          "language": {
+            "enum": [
+              "roman_ur",
+              "ur",
+              "en"
+            ],
+            "title": "Language",
+            "type": "string"
+          }
+        },
+        "required": [
+          "language",
+          "asset_version_id"
+        ],
+        "title": "CaptionIn",
+        "type": "object"
+      },
       "CaseDetail": {
         "properties": {
           "case_kind": {
@@ -2946,6 +2970,21 @@
           "reason"
         ],
         "title": "EscalateIn",
+        "type": "object"
+      },
+      "EvidenceIn": {
+        "properties": {
+          "evidence": {
+            "maxLength": 2000,
+            "minLength": 10,
+            "title": "Evidence",
+            "type": "string"
+          }
+        },
+        "required": [
+          "evidence"
+        ],
+        "title": "EvidenceIn",
         "type": "object"
       },
       "EvidenceReport": {
@@ -5196,6 +5235,191 @@
         "title": "LearningReport",
         "type": "object"
       },
+      "LectureIn": {
+        "properties": {
+          "narration_language": {
+            "enum": [
+              "roman_ur",
+              "ur",
+              "en"
+            ],
+            "title": "Narration Language",
+            "type": "string"
+          },
+          "storyboard_item_id": {
+            "format": "uuid",
+            "title": "Storyboard Item Id",
+            "type": "string"
+          },
+          "title": {
+            "anyOf": [
+              {
+                "maxLength": 200,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Title"
+          },
+          "voice_id": {
+            "format": "uuid",
+            "title": "Voice Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "storyboard_item_id",
+          "narration_language",
+          "voice_id"
+        ],
+        "title": "LectureIn",
+        "type": "object"
+      },
+      "LectureOut": {
+        "properties": {
+          "academically_approved": {
+            "description": "True only after an independent reviewer approved every check",
+            "title": "Academically Approved",
+            "type": "boolean"
+          },
+          "approved_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Approved At"
+          },
+          "captions": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "title": "Captions",
+            "type": "object"
+          },
+          "chapter_id": {
+            "format": "uuid",
+            "title": "Chapter Id",
+            "type": "string"
+          },
+          "grade": {
+            "title": "Grade",
+            "type": "integer"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "master": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Master"
+          },
+          "missing": {
+            "description": "What still blocks submission for review",
+            "items": {
+              "type": "string"
+            },
+            "title": "Missing",
+            "type": "array"
+          },
+          "narration_language": {
+            "title": "Narration Language",
+            "type": "string"
+          },
+          "review": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Review"
+          },
+          "status": {
+            "enum": [
+              "in_production",
+              "in_review",
+              "approved",
+              "changes_requested"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "storyboard_item_id": {
+            "format": "uuid",
+            "title": "Storyboard Item Id",
+            "type": "string"
+          },
+          "storyboard_version": {
+            "title": "Storyboard Version",
+            "type": "integer"
+          },
+          "subject": {
+            "title": "Subject",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "transcript": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Transcript",
+            "type": "array"
+          },
+          "updated_at": {
+            "format": "date-time",
+            "title": "Updated At",
+            "type": "string"
+          },
+          "voice": {
+            "$ref": "#/components/schemas/VoiceOut"
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "storyboard_item_id",
+          "storyboard_version",
+          "grade",
+          "subject",
+          "chapter_id",
+          "narration_language",
+          "voice",
+          "status",
+          "academically_approved",
+          "master",
+          "transcript",
+          "captions",
+          "review",
+          "missing",
+          "approved_at",
+          "updated_at"
+        ],
+        "title": "LectureOut",
+        "type": "object"
+      },
       "LessonOut": {
         "properties": {
           "access_tier": {
@@ -5589,6 +5813,48 @@
           "slots"
         ],
         "title": "ManifestIn",
+        "type": "object"
+      },
+      "MasterIn": {
+        "properties": {
+          "bytes": {
+            "minimum": 1.0,
+            "title": "Bytes",
+            "type": "integer"
+          },
+          "duration_s": {
+            "maximum": 7200.0,
+            "minimum": 1.0,
+            "title": "Duration S",
+            "type": "integer"
+          },
+          "filename": {
+            "maxLength": 255,
+            "minLength": 3,
+            "title": "Filename",
+            "type": "string"
+          },
+          "location": {
+            "description": "Where the owner keeps the master",
+            "maxLength": 500,
+            "minLength": 3,
+            "title": "Location",
+            "type": "string"
+          },
+          "sha256": {
+            "pattern": "^[0-9a-f]{64}$",
+            "title": "Sha256",
+            "type": "string"
+          }
+        },
+        "required": [
+          "filename",
+          "sha256",
+          "bytes",
+          "duration_s",
+          "location"
+        ],
+        "title": "MasterIn",
         "type": "object"
       },
       "MeOut": {
@@ -10526,6 +10792,45 @@
         "title": "TopicNode",
         "type": "object"
       },
+      "TranscriptIn": {
+        "properties": {
+          "scenes": {
+            "items": {
+              "$ref": "#/components/schemas/TranscriptScene"
+            },
+            "maxItems": 60,
+            "title": "Scenes",
+            "type": "array"
+          }
+        },
+        "required": [
+          "scenes"
+        ],
+        "title": "TranscriptIn",
+        "type": "object"
+      },
+      "TranscriptScene": {
+        "properties": {
+          "scene_id": {
+            "maxLength": 20,
+            "minLength": 1,
+            "title": "Scene Id",
+            "type": "string"
+          },
+          "text": {
+            "maxLength": 4000,
+            "minLength": 1,
+            "title": "Text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "scene_id",
+          "text"
+        ],
+        "title": "TranscriptScene",
+        "type": "object"
+      },
       "TrialCohort": {
         "properties": {
           "converted_to_paid": {
@@ -11223,6 +11528,127 @@
         "title": "VersionOut",
         "type": "object"
       },
+      "VoiceIn": {
+        "properties": {
+          "language": {
+            "enum": [
+              "roman_ur",
+              "ur",
+              "en"
+            ],
+            "title": "Language",
+            "type": "string"
+          },
+          "name": {
+            "maxLength": 120,
+            "minLength": 2,
+            "title": "Name",
+            "type": "string"
+          },
+          "notes": {
+            "default": "",
+            "maxLength": 2000,
+            "title": "Notes",
+            "type": "string"
+          },
+          "tool": {
+            "description": "The production tool or provider",
+            "maxLength": 120,
+            "minLength": 2,
+            "title": "Tool",
+            "type": "string"
+          },
+          "voice_ref": {
+            "description": "The tool's own voice identifier",
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Voice Ref",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "language",
+          "tool",
+          "voice_ref"
+        ],
+        "title": "VoiceIn",
+        "type": "object"
+      },
+      "VoiceOut": {
+        "properties": {
+          "approval_evidence": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Approval Evidence"
+          },
+          "approved_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Approved At"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "language": {
+            "title": "Language",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "notes": {
+            "title": "Notes",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "proposed",
+              "approved",
+              "retired"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "tool": {
+            "title": "Tool",
+            "type": "string"
+          },
+          "voice_ref": {
+            "title": "Voice Ref",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "language",
+          "tool",
+          "voice_ref",
+          "notes",
+          "status",
+          "approved_at",
+          "approval_evidence"
+        ],
+        "title": "VoiceOut",
+        "type": "object"
+      },
       "WrittenAttemptOut": {
         "properties": {
           "caps": {
@@ -11859,6 +12285,38 @@
           "idempotency_key"
         ],
         "title": "SubmitIn",
+        "type": "object"
+      },
+      "portal_api__modules__content__lectures__ReviewIn": {
+        "properties": {
+          "checklist": {
+            "additionalProperties": {
+              "type": "boolean"
+            },
+            "title": "Checklist",
+            "type": "object"
+          },
+          "decision": {
+            "enum": [
+              "approve",
+              "request_changes"
+            ],
+            "title": "Decision",
+            "type": "string"
+          },
+          "notes": {
+            "description": "Terms, pronunciation, equations, timing",
+            "maxLength": 4000,
+            "minLength": 10,
+            "title": "Notes",
+            "type": "string"
+          }
+        },
+        "required": [
+          "decision",
+          "notes"
+        ],
+        "title": "ReviewIn",
         "type": "object"
       },
       "portal_api__modules__content__schemas__DraftIn": {
@@ -19100,6 +19558,368 @@
         ]
       }
     },
+    "/v1/studio/lectures": {
+      "get": {
+        "operationId": "list_lectures_v1_studio_lectures_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/LectureOut"
+                  },
+                  "title": "Response List Lectures V1 Studio Lectures Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Lecture production records in your scope",
+        "tags": [
+          "lectures"
+        ]
+      },
+      "post": {
+        "operationId": "create_lecture_v1_studio_lectures_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LectureIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LectureOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Start a lecture from a storyboard",
+        "tags": [
+          "lectures"
+        ]
+      }
+    },
+    "/v1/studio/lectures/{lecture_id}": {
+      "get": {
+        "operationId": "get_lecture_v1_studio_lectures__lecture_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "lecture_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Lecture Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LectureOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "A lecture production record",
+        "tags": [
+          "lectures"
+        ]
+      }
+    },
+    "/v1/studio/lectures/{lecture_id}/captions": {
+      "put": {
+        "operationId": "set_captions_v1_studio_lectures__lecture_id__captions_put",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "lecture_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Lecture Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CaptionIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LectureOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Attach reviewed captions",
+        "tags": [
+          "lectures"
+        ]
+      }
+    },
+    "/v1/studio/lectures/{lecture_id}/master": {
+      "put": {
+        "operationId": "set_master_v1_studio_lectures__lecture_id__master_put",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "lecture_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Lecture Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MasterIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LectureOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Register the master video",
+        "tags": [
+          "lectures"
+        ]
+      }
+    },
+    "/v1/studio/lectures/{lecture_id}/review": {
+      "post": {
+        "operationId": "review_lecture_v1_studio_lectures__lecture_id__review_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "lecture_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Lecture Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/portal_api__modules__content__lectures__ReviewIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LectureOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Independent academic review: approve only with every check passed, or request changes",
+        "tags": [
+          "lectures"
+        ]
+      }
+    },
+    "/v1/studio/lectures/{lecture_id}/submit": {
+      "post": {
+        "operationId": "submit_lecture_v1_studio_lectures__lecture_id__submit_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "lecture_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Lecture Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LectureOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Submit for academic review",
+        "tags": [
+          "lectures"
+        ]
+      }
+    },
+    "/v1/studio/lectures/{lecture_id}/transcript": {
+      "put": {
+        "operationId": "set_transcript_v1_studio_lectures__lecture_id__transcript_put",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "lecture_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Lecture Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TranscriptIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LectureOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Edit the per-scene transcript",
+        "tags": [
+          "lectures"
+        ]
+      }
+    },
     "/v1/studio/overview": {
       "get": {
         "operationId": "academic_overview_v1_studio_overview_get",
@@ -19218,7 +20038,7 @@
             "schema": {
               "anyOf": [
                 {
-                  "pattern": "^(lesson|mcq|written|rubric)$",
+                  "pattern": "^(lesson|mcq|written|rubric|storyboard)$",
                   "type": "string"
                 },
                 {
@@ -19587,6 +20407,176 @@
         "summary": "Dry-run validation for the editor (writes nothing)",
         "tags": [
           "studio"
+        ]
+      }
+    },
+    "/v1/studio/voices": {
+      "get": {
+        "operationId": "list_voices_v1_studio_voices_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/VoiceOut"
+                  },
+                  "title": "Response List Voices V1 Studio Voices Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Narration voices (proposed, approved, retired)",
+        "tags": [
+          "lectures"
+        ]
+      },
+      "post": {
+        "operationId": "propose_voice_v1_studio_voices_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VoiceIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VoiceOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Propose a narration voice",
+        "tags": [
+          "lectures"
+        ]
+      }
+    },
+    "/v1/studio/voices/{voice_id}/approve": {
+      "post": {
+        "operationId": "approve_voice_v1_studio_voices__voice_id__approve_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "voice_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Voice Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EvidenceIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VoiceOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Owner approves a voice (MFA, evidence)",
+        "tags": [
+          "lectures"
+        ]
+      }
+    },
+    "/v1/studio/voices/{voice_id}/retire": {
+      "post": {
+        "operationId": "retire_voice_v1_studio_voices__voice_id__retire_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "voice_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Voice Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EvidenceIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VoiceOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Owner retires a voice (MFA, reason)",
+        "tags": [
+          "lectures"
         ]
       }
     },

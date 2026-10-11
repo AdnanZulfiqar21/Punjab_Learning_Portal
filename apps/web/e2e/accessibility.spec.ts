@@ -56,11 +56,11 @@ test("signed in: practice, help and account have no serious accessibility violat
   }
 });
 
-test("staff: studio, import, overview, sources and support have no serious accessibility violations", async ({ page, isMobile }) => {
+test("staff: studio, import, overview, sources, assets, lectures and support have no serious accessibility violations", async ({ page, isMobile }) => {
   test.skip(isMobile, "Staff studio runs on desktop");
   test.setTimeout(150_000);
   for (const [email, paths] of [
-    ["studio-author@example.com", ["/studio", "/studio/new", "/studio/imports", "/studio/overview", "/studio/sources"]],
+    ["studio-author@example.com", ["/studio", "/studio/new", "/studio/imports", "/studio/overview", "/studio/sources", "/studio/assets", "/studio/lectures"]],
     ["studio-support@example.com", ["/studio/support", "/studio/support/learners"]],
   ] as const) {
     await page.context().clearCookies();

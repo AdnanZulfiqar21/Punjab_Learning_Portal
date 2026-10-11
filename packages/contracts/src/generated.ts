@@ -2529,6 +2529,126 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/studio/lectures": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Lecture production records in your scope */
+        get: operations["list_lectures_v1_studio_lectures_get"];
+        put?: never;
+        /** Start a lecture from a storyboard */
+        post: operations["create_lecture_v1_studio_lectures_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/studio/lectures/{lecture_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** A lecture production record */
+        get: operations["get_lecture_v1_studio_lectures__lecture_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/studio/lectures/{lecture_id}/captions": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** Attach reviewed captions */
+        put: operations["set_captions_v1_studio_lectures__lecture_id__captions_put"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/studio/lectures/{lecture_id}/master": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** Register the master video */
+        put: operations["set_master_v1_studio_lectures__lecture_id__master_put"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/studio/lectures/{lecture_id}/review": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Independent academic review: approve only with every check passed, or request changes */
+        post: operations["review_lecture_v1_studio_lectures__lecture_id__review_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/studio/lectures/{lecture_id}/submit": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Submit for academic review */
+        post: operations["submit_lecture_v1_studio_lectures__lecture_id__submit_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/studio/lectures/{lecture_id}/transcript": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** Edit the per-scene transcript */
+        put: operations["set_transcript_v1_studio_lectures__lecture_id__transcript_put"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/studio/overview": {
         parameters: {
             query?: never;
@@ -2660,6 +2780,58 @@ export interface paths {
         put?: never;
         /** Dry-run validation for the editor (writes nothing) */
         post: operations["validate_v1_studio_validate_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/studio/voices": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Narration voices (proposed, approved, retired) */
+        get: operations["list_voices_v1_studio_voices_get"];
+        put?: never;
+        /** Propose a narration voice */
+        post: operations["propose_voice_v1_studio_voices_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/studio/voices/{voice_id}/approve": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Owner approves a voice (MFA, evidence) */
+        post: operations["approve_voice_v1_studio_voices__voice_id__approve_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/studio/voices/{voice_id}/retire": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Owner retires a voice (MFA, reason) */
+        post: operations["retire_voice_v1_studio_voices__voice_id__retire_post"];
         delete?: never;
         options?: never;
         head?: never;
@@ -3948,6 +4120,19 @@ export interface components {
             /** Reason */
             reason: string;
         };
+        /** CaptionIn */
+        CaptionIn: {
+            /**
+             * Asset Version Id
+             * Format: uuid
+             */
+            asset_version_id: string;
+            /**
+             * Language
+             * @enum {string}
+             */
+            language: "roman_ur" | "ur" | "en";
+        };
         /** CaseDetail */
         CaseDetail: {
             /**
@@ -4512,6 +4697,11 @@ export interface components {
         EscalateIn: {
             /** Reason */
             reason: string;
+        };
+        /** EvidenceIn */
+        EvidenceIn: {
+            /** Evidence */
+            evidence: string;
         };
         /** EvidenceReport */
         EvidenceReport: {
@@ -5345,6 +5535,93 @@ export interface components {
                 [key: string]: string;
             };
         };
+        /** LectureIn */
+        LectureIn: {
+            /**
+             * Narration Language
+             * @enum {string}
+             */
+            narration_language: "roman_ur" | "ur" | "en";
+            /**
+             * Storyboard Item Id
+             * Format: uuid
+             */
+            storyboard_item_id: string;
+            /** Title */
+            title?: string | null;
+            /**
+             * Voice Id
+             * Format: uuid
+             */
+            voice_id: string;
+        };
+        /** LectureOut */
+        LectureOut: {
+            /**
+             * Academically Approved
+             * @description True only after an independent reviewer approved every check
+             */
+            academically_approved: boolean;
+            /** Approved At */
+            approved_at: string | null;
+            /** Captions */
+            captions: {
+                [key: string]: string;
+            };
+            /**
+             * Chapter Id
+             * Format: uuid
+             */
+            chapter_id: string;
+            /** Grade */
+            grade: number;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Master */
+            master: {
+                [key: string]: unknown;
+            } | null;
+            /**
+             * Missing
+             * @description What still blocks submission for review
+             */
+            missing: string[];
+            /** Narration Language */
+            narration_language: string;
+            /** Review */
+            review: {
+                [key: string]: unknown;
+            } | null;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "in_production" | "in_review" | "approved" | "changes_requested";
+            /**
+             * Storyboard Item Id
+             * Format: uuid
+             */
+            storyboard_item_id: string;
+            /** Storyboard Version */
+            storyboard_version: number;
+            /** Subject */
+            subject: string;
+            /** Title */
+            title: string;
+            /** Transcript */
+            transcript: {
+                [key: string]: unknown;
+            }[];
+            /**
+             * Updated At
+             * Format: date-time
+             */
+            updated_at: string;
+            voice: components["schemas"]["VoiceOut"];
+        };
         /** LessonOut */
         LessonOut: {
             /**
@@ -5537,6 +5814,22 @@ export interface components {
                     [key: string]: unknown;
                 };
             };
+        };
+        /** MasterIn */
+        MasterIn: {
+            /** Bytes */
+            bytes: number;
+            /** Duration S */
+            duration_s: number;
+            /** Filename */
+            filename: string;
+            /**
+             * Location
+             * @description Where the owner keeps the master
+             */
+            location: string;
+            /** Sha256 */
+            sha256: string;
         };
         /** MeOut */
         MeOut: {
@@ -7558,6 +7851,18 @@ export interface components {
             /** Title */
             title: string;
         };
+        /** TranscriptIn */
+        TranscriptIn: {
+            /** Scenes */
+            scenes: components["schemas"]["TranscriptScene"][];
+        };
+        /** TranscriptScene */
+        TranscriptScene: {
+            /** Scene Id */
+            scene_id: string;
+            /** Text */
+            text: string;
+        };
         /** TrialCohort */
         TrialCohort: {
             /** Converted To Paid */
@@ -7807,6 +8112,58 @@ export interface components {
             updated_at: string;
             /** Updated By */
             updated_by: string | null;
+        };
+        /** VoiceIn */
+        VoiceIn: {
+            /**
+             * Language
+             * @enum {string}
+             */
+            language: "roman_ur" | "ur" | "en";
+            /** Name */
+            name: string;
+            /**
+             * Notes
+             * @default
+             */
+            notes: string;
+            /**
+             * Tool
+             * @description The production tool or provider
+             */
+            tool: string;
+            /**
+             * Voice Ref
+             * @description The tool's own voice identifier
+             */
+            voice_ref: string;
+        };
+        /** VoiceOut */
+        VoiceOut: {
+            /** Approval Evidence */
+            approval_evidence: string | null;
+            /** Approved At */
+            approved_at: string | null;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Language */
+            language: string;
+            /** Name */
+            name: string;
+            /** Notes */
+            notes: string;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "proposed" | "approved" | "retired";
+            /** Tool */
+            tool: string;
+            /** Voice Ref */
+            voice_ref: string;
         };
         /** WrittenAttemptOut */
         WrittenAttemptOut: {
@@ -8080,6 +8437,23 @@ export interface components {
             idempotency_key: string;
             /** Ops */
             ops?: components["schemas"]["OpIn"][];
+        };
+        /** ReviewIn */
+        portal_api__modules__content__lectures__ReviewIn: {
+            /** Checklist */
+            checklist?: {
+                [key: string]: boolean;
+            };
+            /**
+             * Decision
+             * @enum {string}
+             */
+            decision: "approve" | "request_changes";
+            /**
+             * Notes
+             * @description Terms, pronunciation, equations, timing
+             */
+            notes: string;
         };
         /** DraftIn */
         portal_api__modules__content__schemas__DraftIn: {
@@ -12970,6 +13344,261 @@ export interface operations {
             };
         };
     };
+    list_lectures_v1_studio_lectures_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["LectureOut"][];
+                };
+            };
+        };
+    };
+    create_lecture_v1_studio_lectures_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["LectureIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["LectureOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_lecture_v1_studio_lectures__lecture_id__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                lecture_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["LectureOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    set_captions_v1_studio_lectures__lecture_id__captions_put: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                lecture_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CaptionIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["LectureOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    set_master_v1_studio_lectures__lecture_id__master_put: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                lecture_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["MasterIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["LectureOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    review_lecture_v1_studio_lectures__lecture_id__review_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                lecture_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["portal_api__modules__content__lectures__ReviewIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["LectureOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    submit_lecture_v1_studio_lectures__lecture_id__submit_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                lecture_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["LectureOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    set_transcript_v1_studio_lectures__lecture_id__transcript_put: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                lecture_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["TranscriptIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["LectureOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     academic_overview_v1_studio_overview_get: {
         parameters: {
             query: {
@@ -13235,6 +13864,129 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["ValidationOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_voices_v1_studio_voices_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["VoiceOut"][];
+                };
+            };
+        };
+    };
+    propose_voice_v1_studio_voices_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["VoiceIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["VoiceOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    approve_voice_v1_studio_voices__voice_id__approve_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                voice_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["EvidenceIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["VoiceOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    retire_voice_v1_studio_voices__voice_id__retire_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                voice_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["EvidenceIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["VoiceOut"];
                 };
             };
             /** @description Validation Error */

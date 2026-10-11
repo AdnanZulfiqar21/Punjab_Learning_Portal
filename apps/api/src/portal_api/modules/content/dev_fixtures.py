@@ -156,7 +156,7 @@ def main(argv: list[str] | None = None) -> int:
                     body=body,
                     block_types=blocks.validate_body(body, for_publication=False).block_types
                     if kind == "lesson"
-                    else (["paragraph"] if kind != "rubric" else []),
+                    else (["paragraph"] if kind not in ("rubric", "storyboard") else []),
                     source_refs=refs,
                     change_reason=None,
                     created_by=author.id,
@@ -312,8 +312,40 @@ def main(argv: list[str] | None = None) -> int:
                 },
                 access_tier="preview",
             )
+        # LECTURE-01: one published storyboard, so the lecture production workflow can be exercised end to end.
+        created += publish(
+            "storyboard-fixture",
+            "storyboard",
+            "Lecture storyboard",
+            {
+                "objective": "Technical fixture objective (not academic content)",
+                "outcome": "Technical fixture outcome",
+                "prerequisites": [],
+                "duration_s": 40,
+                "creative_direction": "Technical fixture direction",
+                "scenes": [
+                    {
+                        "id": "s1",
+                        "start_s": 0,
+                        "end_s": 20,
+                        "visual": "Fixture visual",
+                        "narration": "Technical fixture narration one.",
+                        "accessibility": "Fixture description of the visual.",
+                        "claims": [{"text": "Fixture claim", "source_ref": 0}],
+                    },
+                    {
+                        "id": "s2",
+                        "start_s": 20,
+                        "end_s": 40,
+                        "visual": "Fixture summary",
+                        "narration": "Technical fixture narration two.",
+                        "accessibility": "Fixture description of the summary.",
+                    },
+                ],
+            },
+        )
         db.commit()
-    total = COUNT + 2 * WRITTEN_COUNT + 3
+    total = COUNT + 2 * WRITTEN_COUNT + 4
     print(f"practice fixtures: {created} created, {total - created} already present (Class XI Biology, first chapter)")
     return 0
 
