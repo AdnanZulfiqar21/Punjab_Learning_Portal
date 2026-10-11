@@ -486,6 +486,40 @@ def edit_profile_version(
     return _pv(profiles.save_draft(db, who, profile_id, body.year, body.rules, version_id))
 
 
+@router.get(
+    "/admin/exam-profile-versions/{version_id}/preview",
+    summary="Preview a sample form for a profile version (learner and oldest-client views, hint checks; no answers)",
+)
+def preview_profile_version(
+    db: DB,
+    who: ProfileManager,
+    version_id: uuid.UUID,
+    response: Response,
+    seed: Annotated[int | None, Query(ge=0, lt=2**62)] = None,
+) -> dict[str, Any]:
+    from portal_api.modules.assessment import preview
+
+    _private(response)
+    return preview.form(db, version_id, seed)
+
+
+@router.get(
+    "/admin/exam-profile-versions/{version_id}/preview/answers",
+    summary="The protected answer report for a sample form (same seed as the preview)",
+)
+def preview_profile_version_answers(
+    db: DB,
+    who: ProfileManager,
+    version_id: uuid.UUID,
+    response: Response,
+    seed: Annotated[int, Query(ge=0, lt=2**62)],
+) -> dict[str, Any]:
+    from portal_api.modules.assessment import preview
+
+    _private(response)
+    return preview.answers(db, version_id, seed)
+
+
 @router.post(
     "/admin/exam-profile-versions/{version_id}/verify",
     response_model=ProfileVersionOut,
