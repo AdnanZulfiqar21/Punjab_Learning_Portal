@@ -28,7 +28,7 @@ No academic content is published: B01 (reviewers) and rights confirmation block 
 ## Unblocked queue (triage of 10 Oct 2026, roadmap vs register/decisions/blockers)
 Buildable now without external inputs, in phase order (size S/M/L). Remove items as they merge.
 - **Security and release (S):** P18.S4.T2 secret-rotation rehearsal (waits on B03 secret store).
-- **Assessment (S/M):** P09.S4.T1 reviewer form preview; P09.S1.T3 mobile builder parity for custom mixes.
+- **Assessment (S/M):** P09.S4.T1 reviewer form preview.
 - **Content (S/M/L):** P06.S4.T3 staff workflow rehearsal; P07.S1.T1 example/diagram/handout blocks; P06.S3.T1 cross-surface preview; P06.S2.T3 source-document intake; P07.S2.T4 asset archive model (local storage; B05 for provider); P07.S2.T1 resumable uploads (local); P07.S3.T1/T2 captions and chapter-marker data models.
 - **Operations (M):** P16.S3.T1 cohort/environment flags; P17.S2.T2 worker priority classes; P16.S4.T3 owner-operations validation; P16.S2.T4 cohort economics calculator (inputs need B03/B05/B06 and owner review).
 
