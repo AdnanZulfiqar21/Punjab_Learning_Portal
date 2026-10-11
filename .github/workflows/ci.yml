@@ -248,7 +248,7 @@ jobs:
         run: |
           nohup pnpm start > /tmp/web.log 2>&1 &
           for i in $(seq 1 60); do curl -sf -o /dev/null http://localhost:3100/ && break; sleep 1; done
-      - run: pnpm --filter web exec playwright install --with-deps chromium
+      - run: pnpm --filter web exec playwright install --with-deps chromium firefox webkit  # P19.S2.T1 (BROWSERS-01)
       - name: End-to-end journeys
         run: pnpm --filter web exec playwright test
         env:
