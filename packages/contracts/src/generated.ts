@@ -2449,6 +2449,92 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/studio/inclusion": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Inclusion records in your subjects */
+        get: operations["list_records_v1_studio_inclusion_get"];
+        put?: never;
+        /** Draft an inclusion record */
+        post: operations["create_record_v1_studio_inclusion_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/studio/inclusion/coverage": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Published content behind each mapped concept */
+        get: operations["inclusion_coverage_v1_studio_inclusion_coverage_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/studio/inclusion/report": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Unmapped concepts and contradictory mappings */
+        get: operations["inclusion_report_v1_studio_inclusion_report_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/studio/inclusion/{record_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** Edit a draft inclusion record */
+        put: operations["edit_record_v1_studio_inclusion__record_id__put"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/studio/inclusion/{record_id}/publish": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Publish (an independent subject reviewer) */
+        post: operations["publish_record_v1_studio_inclusion__record_id__publish_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/studio/items": {
         parameters: {
             query?: never;
@@ -5003,6 +5089,50 @@ export interface components {
             /** Status */
             status: string;
         };
+        /** CoverageOut */
+        CoverageOut: {
+            /** Concepts */
+            concepts: components["schemas"]["CoverageRow"][];
+            /** Included */
+            included: number;
+            /**
+             * Scope
+             * @enum {string}
+             */
+            scope: "full_curriculum" | "board_syllabus" | "mdcat" | "ecat";
+            /** Subject */
+            subject: string;
+            /** With Lectures */
+            with_lectures: number;
+            /** With Lessons */
+            with_lessons: number;
+            /** With Questions */
+            with_questions: number;
+            /** Year */
+            year: number | null;
+        };
+        /** CoverageRow */
+        CoverageRow: {
+            /** Approved Lectures */
+            approved_lectures: number;
+            /** Code */
+            code: string;
+            /**
+             * Concept Id
+             * Format: uuid
+             */
+            concept_id: string;
+            /** Included */
+            included: boolean;
+            /** Live Lessons */
+            live_lessons: number;
+            /** Live Questions */
+            live_questions: number;
+            /** State */
+            state: ("included" | "excluded" | "not_applicable" | "unverified") | null;
+            /** Title */
+            title: string;
+        };
         /** CriterionResult */
         CriterionResult: {
             /** Description */
@@ -7543,6 +7673,91 @@ export interface components {
              */
             target_version: number;
         };
+        /** RecordIn */
+        RecordIn: {
+            /**
+             * Concept Id
+             * Format: uuid
+             */
+            concept_id: string;
+            /** Reason */
+            reason: string;
+            /**
+             * Scope
+             * @enum {string}
+             */
+            scope: "full_curriculum" | "board_syllabus" | "mdcat" | "ecat";
+            /**
+             * Source
+             * @description The syllabus or notice, with section or page
+             */
+            source: string;
+            /**
+             * Source Version
+             * @description e.g. the notice date or document version
+             */
+            source_version: string;
+            /**
+             * State
+             * @enum {string}
+             */
+            state: "included" | "excluded" | "not_applicable" | "unverified";
+            /** Year */
+            year?: number | null;
+        };
+        /** RecordOut */
+        RecordOut: {
+            /** Concept Code */
+            concept_code: string;
+            /**
+             * Concept Id
+             * Format: uuid
+             */
+            concept_id: string;
+            /** Concept Title */
+            concept_title: string;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Published At */
+            published_at: string | null;
+            /** Reason */
+            reason: string;
+            /**
+             * Scope
+             * @enum {string}
+             */
+            scope: "full_curriculum" | "board_syllabus" | "mdcat" | "ecat";
+            /** Source */
+            source: string;
+            /** Source Version */
+            source_version: string;
+            /**
+             * State
+             * @enum {string}
+             */
+            state: "included" | "excluded" | "not_applicable" | "unverified";
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "draft" | "published";
+            /** Year */
+            year: number | null;
+        };
+        /** RecordPatch */
+        RecordPatch: {
+            /** Reason */
+            reason?: string | null;
+            /** Source */
+            source?: string | null;
+            /** Source Version */
+            source_version?: string | null;
+            /** State */
+            state?: ("included" | "excluded" | "not_applicable" | "unverified") | null;
+        };
         /** ReferenceIn */
         ReferenceIn: {
             /**
@@ -7668,6 +7883,36 @@ export interface components {
             position: number | null;
             /** Units */
             units: number;
+        };
+        /** ReportOut */
+        ReportOut: {
+            /** Contradictions */
+            contradictions: components["schemas"]["ReportRow"][];
+            /**
+             * Scope
+             * @enum {string}
+             */
+            scope: "full_curriculum" | "board_syllabus" | "mdcat" | "ecat";
+            /** Subject */
+            subject: string;
+            /** Unmapped */
+            unmapped: components["schemas"]["ReportRow"][];
+            /** Year */
+            year: number | null;
+        };
+        /** ReportRow */
+        ReportRow: {
+            /** Code */
+            code: string;
+            /**
+             * Concept Id
+             * Format: uuid
+             */
+            concept_id: string;
+            /** Detail */
+            detail?: string | null;
+            /** Title */
+            title?: string | null;
         };
         /** ResultCounts */
         ResultCounts: {
@@ -14141,6 +14386,204 @@ export interface operations {
                 };
                 content: {
                     "application/json": unknown;
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_records_v1_studio_inclusion_get: {
+        parameters: {
+            query?: {
+                scope?: ("full_curriculum" | "board_syllabus" | "mdcat" | "ecat") | null;
+                year?: number | null;
+                subject?: string | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RecordOut"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    create_record_v1_studio_inclusion_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["RecordIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RecordOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    inclusion_coverage_v1_studio_inclusion_coverage_get: {
+        parameters: {
+            query: {
+                subject: string;
+                scope: "full_curriculum" | "board_syllabus" | "mdcat" | "ecat";
+                year?: number | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CoverageOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    inclusion_report_v1_studio_inclusion_report_get: {
+        parameters: {
+            query: {
+                subject: string;
+                scope: "full_curriculum" | "board_syllabus" | "mdcat" | "ecat";
+                year?: number | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ReportOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    edit_record_v1_studio_inclusion__record_id__put: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                record_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["RecordPatch"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RecordOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    publish_record_v1_studio_inclusion__record_id__publish_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                record_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RecordOut"];
                 };
             };
             /** @description Validation Error */
