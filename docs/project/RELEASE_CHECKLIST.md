@@ -16,6 +16,7 @@ Three separately evidenced states (roadmap §2.3). Nothing is ticked without cur
 ## Public Launch Ready: NOT_READY
 - [ ] Exact release manifest, live providers (identity, media, payments, stores), staffed support
 - [ ] Store decisions, P23/W11 staged live evidence, owner launch authorization
+- [ ] Production web sets `PORTAL_PUBLIC_ORIGIN`; `robots.txt` and `sitemap.xml` checked on the live host (PUBLIC-SITE-01)
 
 ## Release stop conditions (§13.1)
 Incorrect grading · lost acknowledged answers · submission-protocol violations · exposed keys/private data · unreliable payment access · failed recovery · open P0/P1 · unreviewed advertised content · manifest drift · unsupported capacity claims · (written) missing rubrics/permissions, unqualified automatic slices, overwritten human decisions, misleading pending totals, double-consumed allowances, unapproved processors.
