@@ -24,14 +24,14 @@ from tests.test_mcq_items import CHECKS, VALID, _new_mcq, _save
 POOL = 6
 
 
-def publish_physics_pool(client: TestClient, index: int = 0) -> dict[str, Any]:
-    """Publish POOL fixture questions in Class XI Physics chapter `index` (keys rotate o1..o4)."""
+def publish_physics_pool(client: TestClient, index: int = 0, subject: str = "physics") -> dict[str, Any]:
+    """Publish POOL fixture questions in Class XI `subject` (default Physics), chapter `index` (keys rotate o1..o4)."""
     with get_sessionmaker()() as db:
-        scope = {"grades": [11], "subjects": ["physics"]}
+        scope = {"grades": [11], "subjects": [subject]}
         author = Staff(client, db, ["content_author"], scope)
         reviewer = Staff(client, db, ["subject_reviewer"], scope)
         publisher = Staff(client, db, ["publisher"], scope, mfa=True)
-        chapter, doc = _chapter(db, 11, "physics", index)
+        chapter, doc = _chapter(db, 11, subject, index)
         _confirm_rights(client, db, doc)
         keys: dict[str, str] = {}
         ids = []

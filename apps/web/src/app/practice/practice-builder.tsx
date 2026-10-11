@@ -6,7 +6,17 @@ import { createPractice, type BuilderState } from "@/app/actions/practice";
 
 const newKey = () => crypto.randomUUID().replaceAll("-", "");
 
-export function PracticeBuilder({ grade, subject, chapters }: { grade: number; subject: string; chapters: PracticeAvailability["chapters"] }) {
+export function PracticeBuilder({
+  grade,
+  subject,
+  chapters,
+  subjects,
+}: {
+  grade: number;
+  subject: string;
+  chapters: PracticeAvailability["chapters"];
+  subjects: [string, string][];
+}) {
   // One idempotency key per test request: a double click or a retry returns the same test; a changed request gets a
   // fresh key after an error so it is never mistaken for the earlier one.
   const key = useRef<string | null>(null);
@@ -20,12 +30,17 @@ export function PracticeBuilder({ grade, subject, chapters }: { grade: number; s
   const [selected, setSelected] = useState<string[]>([]);
   const [timed, setTimed] = useState(false);
   // P09.S1.T2: halves follow the book's chapter order (first half = the first ceil(n/2) chapters).
-  const [scope, setScope] = useState<"chapters" | "half_1" | "half_2" | "full_book" | "combined">("chapters");
+  const [scope, setScope] = useState<"chapters" | "half_1" | "half_2" | "full_book" | "combined" | "multi_subject">("chapters");
+  // P09.S1.T3: a custom mix of this class's subjects, each with its own count (0 leaves a subject out).
+  const [mix, setMix] = useState<Record<string, number>>({ [subject]: 5 });
+  const mixTotal = Object.values(mix).reduce((n, v) => n + v, 0);
+  const mixSubjects = Object.values(mix).filter((v) => v > 0).length;
   const split = Math.ceil(chapters.length / 2);
   const inScope =
     scope === "chapters" ? chapters.filter((c) => selected.includes(c.chapter_id)) : scope === "half_1" ? chapters.slice(0, split) : scope === "half_2" ? chapters.slice(split) : chapters;
   // The other class's book isn't listed here, so a combined test can ask for more than this book alone holds.
-  const available = scope === "combined" ? 100 : inScope.reduce((n, c) => n + c.questions, 0);
+  const available = scope === "combined" || scope === "multi_subject" ? 100 : inScope.reduce((n, c) => n + c.questions, 0);
+  const ready = scope === "chapters" ? selected.length > 0 : scope === "multi_subject" ? mixSubjects >= 2 && mixTotal <= 100 : true;
   const field = "rounded-lg border border-border bg-surface px-3 py-2";
 
   return (
@@ -44,6 +59,7 @@ export function PracticeBuilder({ grade, subject, chapters }: { grade: number; s
               ["half_2", "Second half of the book"],
               ["full_book", "Whole book"],
               ["combined", "Class XI and XII together"],
+              ["multi_subject", "Several subjects (custom mix)"],
             ] as const
           ).map(([value, label]) => (
             <label key={value} className="flex items-center gap-2 rounded-lg border border-border bg-surface px-3 py-2">
@@ -75,8 +91,35 @@ export function PracticeBuilder({ grade, subject, chapters }: { grade: number; s
           ))}
         </ul>
       </fieldset>
+      <fieldset className="space-y-2" hidden={scope !== "multi_subject"}>
+        <legend className="font-medium">Questions per subject</legend>
+        <p className="text-sm text-muted">
+          Custom practice from each subject&apos;s whole book in this class. It isn&apos;t an official test pattern; for those, use
+          a mock test. Choose two to five subjects.
+        </p>
+        <div className="flex flex-wrap gap-3">
+          {subjects.map(([code, name]) => (
+            <label key={code} className="space-y-1">
+              <span className="block text-sm">{name}</span>
+              <input
+                type="number"
+                name={`mix_${code}`}
+                min={0}
+                max={100}
+                value={mix[code] ?? 0}
+                onChange={(e) => setMix({ ...mix, [code]: Math.max(0, Math.min(100, Number(e.target.value) || 0)) })}
+                className={`${field} w-24`}
+              />
+            </label>
+          ))}
+        </div>
+        <p className="text-sm text-muted" aria-live="polite">
+          {mixTotal} questions from {mixSubjects} subject{mixSubjects === 1 ? "" : "s"}
+          {mixTotal > 100 ? " (at most 100 in one test)" : ""}.
+        </p>
+      </fieldset>
       <div className="flex flex-wrap items-end gap-4">
-        <label className="space-y-1">
+        <label className="space-y-1" hidden={scope === "multi_subject"}>
           <span className="block font-medium">Questions</span>
           <input type="number" name="question_count" min={1} max={Math.max(1, Math.min(100, available))} defaultValue={Math.min(10, Math.max(1, available))} className={`${field} w-28`} />
         </label>
@@ -113,7 +156,7 @@ export function PracticeBuilder({ grade, subject, chapters }: { grade: number; s
       )}
       <button
         type="submit"
-        disabled={pending || selected.length === 0}
+        disabled={pending || !ready}
         className="rounded-lg bg-accent px-5 py-3 font-medium text-white hover:bg-accent-strong disabled:opacity-60 dark:text-background"
       >
         {pending ? "Preparing…" : "Start test"}

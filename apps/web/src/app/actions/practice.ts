@@ -20,13 +20,22 @@ export async function createPractice(_prev: BuilderState, form: FormData): Promi
   const chapterIds = scope === "chapters" ? form.getAll("chapter_ids").map(String) : [];
   if (scope === "chapters" && chapterIds.length === 0) return { error: "Choose at least one chapter." };
   const timed = form.get("timed") === "on";
+  // P09.S1.T3: a custom mix sends each chosen subject's count; the total is their sum.
+  const mix =
+    scope === "multi_subject"
+      ? [...form.entries()]
+          .filter(([k, v]) => k.startsWith("mix_") && Number(v) > 0)
+          .map(([k, v]) => ({ subject: k.slice(4), questions: Number(v) }))
+      : [];
+  if (scope === "multi_subject" && mix.length < 2) return { error: "Choose at least two subjects for a custom mix." };
   const body = {
     grade: Number(form.get("grade")),
-    subject: String(form.get("subject") ?? ""),
+    subject: mix[0]?.subject ?? String(form.get("subject") ?? ""),
     scope,
     half: form.get("half") ? Number(form.get("half")) : null,
     chapter_ids: chapterIds,
-    question_count: Number(form.get("question_count") ?? 10),
+    mix,
+    question_count: scope === "multi_subject" ? mix.reduce((n, m) => n + m.questions, 0) : Number(form.get("question_count") ?? 10),
     timed_minutes: timed ? Number(form.get("timed_minutes") ?? 10) : null,
     feedback_mode: form.get("feedback_mode") === "immediate" ? "immediate" : "deferred",
   };

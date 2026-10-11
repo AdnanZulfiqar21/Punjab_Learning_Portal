@@ -4384,15 +4384,20 @@ export interface components {
              * @description half_book only
              */
             half?: (1 | 2) | null;
+            /**
+             * Mix
+             * @description multi_subject only: questions per subject, in test order
+             */
+            mix?: components["schemas"]["SubjectShare"][];
             /** Question Count */
             question_count: number;
             /**
              * Scope
-             * @description chapters: the chosen chapters; half_book: first or second half of the book by chapter order; full_book: every chapter of this class's book; combined: the same subject's Class XI and XII books
+             * @description chapters: the chosen chapters; half_book: first or second half of the book by chapter order; full_book: every chapter of this class's book; combined: the same subject's Class XI and XII books; multi_subject: custom practice from two to five subjects' whole books in this class, counts from `mix`
              * @default chapters
              * @enum {string}
              */
-            scope: "chapters" | "half_book" | "full_book" | "combined";
+            scope: "chapters" | "half_book" | "full_book" | "combined" | "multi_subject";
             /** Subject */
             subject: string;
             /** Timed Minutes */
@@ -7094,6 +7099,13 @@ export interface components {
             subject: string;
             /** Tests */
             tests: number;
+        };
+        /** SubjectShare */
+        SubjectShare: {
+            /** Questions */
+            questions: number;
+            /** Subject */
+            subject: string;
         };
         /** SubmitOut */
         SubmitOut: {

@@ -138,6 +138,7 @@ def create_form(
         question_count=body.question_count,
         timed_minutes=body.timed_minutes,
         feedback_mode=body.feedback_mode,
+        mix=[(m.subject, m.questions) for m in body.mix],
     )
     return _form_out(form)
 
@@ -305,7 +306,7 @@ def _summary(db: Session, attempt: Any, form: PracticeForm, score: Any) -> dict[
     )
     rows = {int(r["position"]): r for r in score.items}
     sections = []
-    for sec in scope.get("sections", []) if form.kind == "mock" else []:
+    for sec in scope.get("sections", []):  # mocks and multi-subject custom practice
         part = [rows[p] for p in range(int(sec["from"]), int(sec["to"]) + 1) if p in rows]
         grades = " + ".join({11: "Class XI", 12: "Class XII"}.get(int(g), str(g)) for g in sec["grades"])
         sections.append(

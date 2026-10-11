@@ -3139,6 +3139,15 @@
             "description": "half_book only",
             "title": "Half"
           },
+          "mix": {
+            "description": "multi_subject only: questions per subject, in test order",
+            "items": {
+              "$ref": "#/components/schemas/SubjectShare"
+            },
+            "maxItems": 5,
+            "title": "Mix",
+            "type": "array"
+          },
           "question_count": {
             "maximum": 100.0,
             "minimum": 1.0,
@@ -3147,12 +3156,13 @@
           },
           "scope": {
             "default": "chapters",
-            "description": "chapters: the chosen chapters; half_book: first or second half of the book by chapter order; full_book: every chapter of this class's book; combined: the same subject's Class XI and XII books",
+            "description": "chapters: the chosen chapters; half_book: first or second half of the book by chapter order; full_book: every chapter of this class's book; combined: the same subject's Class XI and XII books; multi_subject: custom practice from two to five subjects' whole books in this class, counts from `mix`",
             "enum": [
               "chapters",
               "half_book",
               "full_book",
-              "combined"
+              "combined",
+              "multi_subject"
             ],
             "title": "Scope",
             "type": "string"
@@ -9858,6 +9868,28 @@
           "last_activity"
         ],
         "title": "SubjectProgress",
+        "type": "object"
+      },
+      "SubjectShare": {
+        "properties": {
+          "questions": {
+            "maximum": 100.0,
+            "minimum": 1.0,
+            "title": "Questions",
+            "type": "integer"
+          },
+          "subject": {
+            "maxLength": 40,
+            "minLength": 2,
+            "title": "Subject",
+            "type": "string"
+          }
+        },
+        "required": [
+          "subject",
+          "questions"
+        ],
+        "title": "SubjectShare",
         "type": "object"
       },
       "SubmitOut": {

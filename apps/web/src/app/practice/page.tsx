@@ -89,7 +89,7 @@ async function Builder({ grade: rawGrade, subject: rawSubject }: { grade?: strin
           them and they are published. Nothing unreviewed is ever used in a test.
         </Notice>
       ) : (
-        <PracticeBuilder grade={grade} subject={subject} chapters={availability.chapters} />
+        <PracticeBuilder grade={grade} subject={subject} chapters={availability.chapters} subjects={SUBJECTS} />
       )}
     </div>
   );
