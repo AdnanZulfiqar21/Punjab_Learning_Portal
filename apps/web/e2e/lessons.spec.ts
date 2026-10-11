@@ -61,3 +61,41 @@ test("structured blocks reach learners: worked example, diagram, formula renderi
   expect(res.headers()["content-type"]).toBe("application/pdf");
   expect(res.headers()["content-disposition"]).toContain("attachment");
 });
+
+// P11.S2.T2 (STUDY-TOOLS-01): a private note, a saved formula and a favourite topic, gathered on /study.
+test("a learner keeps a private note, a saved formula and a favourite topic", async ({ page }) => {
+  const email = `e2e-study-${Date.now()}-${Math.random().toString(36).slice(2, 7)}@example.com`;
+  await page.goto("/signin?next=/account");
+  await page.getByRole("button", { name: "New here? Create an account" }).click();
+  await page.getByLabel("Email").fill(email);
+  await page.getByLabel("Password").fill("study-fixture-pass-1");
+  await page.getByRole("button", { name: "Create account" }).click();
+  await expect(page).toHaveURL(/:\d+\/(account|onboarding)/, AUTH);
+  const lessons = await openFirstBiologyChapter(page);
+  const lesson = lessons.getByRole("article", { name: "[FIXTURE] Structured blocks lesson" });
+
+  await lesson.getByRole("button", { name: "Add a private note" }).click();
+  await lesson.getByLabel("My private note").fill("Fixture note: check the units.");
+  await lesson.getByRole("button", { name: "Save note" }).click();
+  await expect(lesson.getByText("Saved. Only you can see this note.")).toBeVisible(AUTH);
+
+  await lesson.getByRole("button", { name: "Save formula" }).first().click();
+  await expect(lesson.getByRole("button", { name: "Saved to your formulas" }).first()).toBeVisible(AUTH);
+
+  const star = page.getByRole("region", { name: "Topics" }).getByRole("button", { name: /^Add to favourites:/ }).first();
+  const topic = (await star.getAttribute("aria-label"))!.replace("Add to favourites: ", "");
+  await star.click();
+  await expect(page.getByRole("button", { name: `Remove from favourites: ${topic}` })).toHaveAttribute("aria-pressed", "true", AUTH);
+
+  await page.reload();
+  await expect(page.getByRole("article", { name: "[FIXTURE] Structured blocks lesson" }).getByLabel("My private note")).toHaveValue(
+    "Fixture note: check the units.",
+    AUTH,
+  );
+
+  await page.goto("/study");
+  await expect(page.getByRole("heading", { level: 1, name: "My study tools" })).toBeVisible(AUTH);
+  await expect(page.getByRole("region", { name: "Notes" }).getByText("Fixture note: check the units.")).toBeVisible();
+  await expect(page.getByRole("region", { name: "Saved formulas" }).getByText("v = u + at")).toBeVisible();
+  await expect(page.getByRole("region", { name: "Favourite topics" }).getByRole("link", { name: topic })).toBeVisible();
+});

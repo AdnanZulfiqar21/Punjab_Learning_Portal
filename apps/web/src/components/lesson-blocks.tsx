@@ -1,3 +1,4 @@
+import { Fragment, type ReactNode } from "react";
 import { Checkpoint } from "@/components/checkpoint";
 
 // Renders content blocks (schema v1, roadmap §5.4). Unknown block types never crash the page: they show an explicit
@@ -20,11 +21,25 @@ export type AssetUrl = (versionId: string) => string;
 type Fallback = { text?: unknown; image_asset_id?: unknown; alt?: unknown };
 
 /** `headingOffset` shifts block headings down so they nest under the page's own headings (level 2 → h{2+offset}). */
-export function LessonBlocks({ blocks, headingOffset = 0, assetUrl }: { blocks: Block[]; headingOffset?: number; assetUrl?: AssetUrl }) {
+export function LessonBlocks({
+  blocks,
+  headingOffset = 0,
+  assetUrl,
+  equationAction,
+}: {
+  blocks: Block[];
+  headingOffset?: number;
+  assetUrl?: AssetUrl;
+  /** STUDY-TOOLS-01: e.g. "Save formula" under each top-level equation (its index in the lesson body). */
+  equationAction?: (index: number) => ReactNode;
+}) {
   return (
     <div className="space-y-4 leading-relaxed">
       {blocks.map((b, i) => (
-        <BlockView key={i} block={b} headingOffset={headingOffset} assetUrl={assetUrl} />
+        <Fragment key={i}>
+          <BlockView block={b} headingOffset={headingOffset} assetUrl={assetUrl} />
+          {b.type === "equation" && equationAction?.(i)}
+        </Fragment>
       ))}
     </div>
   );
