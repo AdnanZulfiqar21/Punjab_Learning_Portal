@@ -2755,6 +2755,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/studio/lectures/{lecture_id}/markers": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** Set where each storyboard scene starts in the current master video (chapter markers) */
+        put: operations["set_markers_v1_studio_lectures__lecture_id__markers_put"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/studio/lectures/{lecture_id}/master": {
         parameters: {
             query?: never;
@@ -2766,6 +2783,23 @@ export interface paths {
         /** Register the master video */
         put: operations["set_master_v1_studio_lectures__lecture_id__master_put"];
         post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/studio/lectures/{lecture_id}/master-upload": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Start a resumable upload of the lecture's master video */
+        post: operations["start_upload_v1_studio_lectures__lecture_id__master_upload_post"];
         delete?: never;
         options?: never;
         head?: never;
@@ -2971,6 +3005,24 @@ export interface paths {
         put?: never;
         /** Accept (action needed) or dismiss a notice (subject reviewers in scope; audited) */
         post: operations["decide_notice_v1_studio_syllabus_notices__notice_id__decision_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/studio/uploads/{upload_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** An upload's state and resume offset */
+        get: operations["upload_state_v1_studio_uploads__upload_id__get"];
+        /** Send one chunk at the given offset (raw bytes) */
+        put: operations["upload_chunk_v1_studio_uploads__upload_id__put"];
+        post?: never;
         delete?: never;
         options?: never;
         head?: never;
@@ -5990,6 +6042,22 @@ export interface components {
              * Format: uuid
              */
             id: string;
+            /**
+             * Marker Proposal
+             * @description Starting point: the storyboard's planned scene times
+             */
+            marker_proposal: {
+                [key: string]: unknown;
+            }[];
+            /** Markers */
+            markers: {
+                [key: string]: unknown;
+            } | null;
+            /**
+             * Markers Current
+             * @description Timed against the current master video
+             */
+            markers_current: boolean;
             /** Master */
             master: {
                 [key: string]: unknown;
@@ -6225,6 +6293,23 @@ export interface components {
                 };
             };
         };
+        /** MarkerIn */
+        MarkerIn: {
+            /**
+             * Label
+             * @description The concept section a learner sees in the chapter list
+             */
+            label: string;
+            /** Scene Id */
+            scene_id: string;
+            /** Start S */
+            start_s: number;
+        };
+        /** MarkersIn */
+        MarkersIn: {
+            /** Scenes */
+            scenes: components["schemas"]["MarkerIn"][];
+        };
         /** MasterIn */
         MasterIn: {
             /** Bytes */
@@ -6261,6 +6346,60 @@ export interface components {
             roles: components["schemas"]["Role"][];
             /** Status */
             status: string;
+        };
+        /** MediaUploadIn */
+        MediaUploadIn: {
+            /** Bytes */
+            bytes: number;
+            /**
+             * Content Type
+             * @enum {string}
+             */
+            content_type: "video/mp4" | "video/webm" | "video/quicktime";
+            /** Duration S */
+            duration_s: number;
+            /** Filename */
+            filename: string;
+            /**
+             * Sha256
+             * @description The owner's checksum, if known
+             */
+            sha256?: string | null;
+        };
+        /** MediaUploadOut */
+        MediaUploadOut: {
+            /** Bytes */
+            bytes: number;
+            /** Chunk Bytes */
+            chunk_bytes: number;
+            /**
+             * Expires At
+             * Format: date-time
+             */
+            expires_at: string;
+            /** Failure */
+            failure: string | null;
+            /** Filename */
+            filename: string;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /**
+             * Lecture Id
+             * Format: uuid
+             */
+            lecture_id: string;
+            /** Received */
+            received: number;
+            /** Sha256 */
+            sha256: string | null;
+            /**
+             * State
+             * @enum {string}
+             */
+            state: "uploading" | "processing" | "ready" | "failed";
         };
         /** MessageIn */
         MessageIn: {
@@ -14442,6 +14581,41 @@ export interface operations {
             };
         };
     };
+    set_markers_v1_studio_lectures__lecture_id__markers_put: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                lecture_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["MarkersIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["LectureOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     set_master_v1_studio_lectures__lecture_id__master_put: {
         parameters: {
             query?: never;
@@ -14464,6 +14638,41 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["LectureOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    start_upload_v1_studio_lectures__lecture_id__master_upload_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                lecture_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["MediaUploadIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MediaUploadOut"];
                 };
             };
             /** @description Validation Error */
@@ -14873,6 +15082,70 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["SyllabusNoticeOut"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    upload_state_v1_studio_uploads__upload_id__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                upload_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MediaUploadOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    upload_chunk_v1_studio_uploads__upload_id__put: {
+        parameters: {
+            query: {
+                offset: number;
+            };
+            header?: never;
+            path: {
+                upload_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MediaUploadOut"];
                 };
             };
             /** @description Validation Error */

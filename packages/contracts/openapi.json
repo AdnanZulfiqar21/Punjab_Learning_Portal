@@ -5825,6 +5825,32 @@
             "title": "Id",
             "type": "string"
           },
+          "marker_proposal": {
+            "description": "Starting point: the storyboard's planned scene times",
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Marker Proposal",
+            "type": "array"
+          },
+          "markers": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Markers"
+          },
+          "markers_current": {
+            "description": "Timed against the current master video",
+            "title": "Markers Current",
+            "type": "boolean"
+          },
           "master": {
             "anyOf": [
               {
@@ -5920,6 +5946,9 @@
           "master",
           "transcript",
           "captions",
+          "markers",
+          "markers_current",
+          "marker_proposal",
           "review",
           "missing",
           "approved_at",
@@ -6323,6 +6352,53 @@
         "title": "ManifestIn",
         "type": "object"
       },
+      "MarkerIn": {
+        "properties": {
+          "label": {
+            "description": "The concept section a learner sees in the chapter list",
+            "maxLength": 120,
+            "minLength": 1,
+            "title": "Label",
+            "type": "string"
+          },
+          "scene_id": {
+            "maxLength": 20,
+            "minLength": 1,
+            "title": "Scene Id",
+            "type": "string"
+          },
+          "start_s": {
+            "maximum": 7200.0,
+            "minimum": 0.0,
+            "title": "Start S",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "scene_id",
+          "start_s",
+          "label"
+        ],
+        "title": "MarkerIn",
+        "type": "object"
+      },
+      "MarkersIn": {
+        "properties": {
+          "scenes": {
+            "items": {
+              "$ref": "#/components/schemas/MarkerIn"
+            },
+            "maxItems": 60,
+            "title": "Scenes",
+            "type": "array"
+          }
+        },
+        "required": [
+          "scenes"
+        ],
+        "title": "MarkersIn",
+        "type": "object"
+      },
       "MasterIn": {
         "properties": {
           "bytes": {
@@ -6438,6 +6514,139 @@
           "consents"
         ],
         "title": "MeOut",
+        "type": "object"
+      },
+      "MediaUploadIn": {
+        "properties": {
+          "bytes": {
+            "maximum": 8589934592.0,
+            "minimum": 1.0,
+            "title": "Bytes",
+            "type": "integer"
+          },
+          "content_type": {
+            "enum": [
+              "video/mp4",
+              "video/webm",
+              "video/quicktime"
+            ],
+            "title": "Content Type",
+            "type": "string"
+          },
+          "duration_s": {
+            "maximum": 7200.0,
+            "minimum": 1.0,
+            "title": "Duration S",
+            "type": "integer"
+          },
+          "filename": {
+            "maxLength": 255,
+            "minLength": 3,
+            "title": "Filename",
+            "type": "string"
+          },
+          "sha256": {
+            "anyOf": [
+              {
+                "pattern": "^[0-9a-f]{64}$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The owner's checksum, if known",
+            "title": "Sha256"
+          }
+        },
+        "required": [
+          "filename",
+          "bytes",
+          "content_type",
+          "duration_s"
+        ],
+        "title": "MediaUploadIn",
+        "type": "object"
+      },
+      "MediaUploadOut": {
+        "properties": {
+          "bytes": {
+            "title": "Bytes",
+            "type": "integer"
+          },
+          "chunk_bytes": {
+            "title": "Chunk Bytes",
+            "type": "integer"
+          },
+          "expires_at": {
+            "format": "date-time",
+            "title": "Expires At",
+            "type": "string"
+          },
+          "failure": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Failure"
+          },
+          "filename": {
+            "title": "Filename",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "lecture_id": {
+            "format": "uuid",
+            "title": "Lecture Id",
+            "type": "string"
+          },
+          "received": {
+            "title": "Received",
+            "type": "integer"
+          },
+          "sha256": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sha256"
+          },
+          "state": {
+            "enum": [
+              "uploading",
+              "processing",
+              "ready",
+              "failed"
+            ],
+            "title": "State",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "lecture_id",
+          "filename",
+          "bytes",
+          "received",
+          "state",
+          "failure",
+          "sha256",
+          "chunk_bytes",
+          "expires_at"
+        ],
+        "title": "MediaUploadOut",
         "type": "object"
       },
       "MessageIn": {
@@ -21232,6 +21441,59 @@
         ]
       }
     },
+    "/v1/studio/lectures/{lecture_id}/markers": {
+      "put": {
+        "operationId": "set_markers_v1_studio_lectures__lecture_id__markers_put",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "lecture_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Lecture Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MarkersIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LectureOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Set where each storyboard scene starts in the current master video (chapter markers)",
+        "tags": [
+          "lectures"
+        ]
+      }
+    },
     "/v1/studio/lectures/{lecture_id}/master": {
       "put": {
         "operationId": "set_master_v1_studio_lectures__lecture_id__master_put",
@@ -21282,6 +21544,59 @@
         "summary": "Register the master video",
         "tags": [
           "lectures"
+        ]
+      }
+    },
+    "/v1/studio/lectures/{lecture_id}/master-upload": {
+      "post": {
+        "operationId": "start_upload_v1_studio_lectures__lecture_id__master_upload_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "lecture_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Lecture Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MediaUploadIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MediaUploadOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Start a resumable upload of the lecture's master video",
+        "tags": [
+          "studio"
         ]
       }
     },
@@ -21973,6 +22288,100 @@
           }
         },
         "summary": "Accept (action needed) or dismiss a notice (subject reviewers in scope; audited)",
+        "tags": [
+          "studio"
+        ]
+      }
+    },
+    "/v1/studio/uploads/{upload_id}": {
+      "get": {
+        "operationId": "upload_state_v1_studio_uploads__upload_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "upload_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Upload Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MediaUploadOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "An upload's state and resume offset",
+        "tags": [
+          "studio"
+        ]
+      },
+      "put": {
+        "operationId": "upload_chunk_v1_studio_uploads__upload_id__put",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "upload_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Upload Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "required": true,
+            "schema": {
+              "minimum": 0,
+              "title": "Offset",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MediaUploadOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Send one chunk at the given offset (raw bytes)",
         "tags": [
           "studio"
         ]

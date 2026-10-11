@@ -7,7 +7,9 @@ import { GRADE_LABEL } from "@/lib/format";
 import { SUBJECTS } from "@/lib/practice";
 import { api, currentUser } from "@/lib/session";
 import { CHECKS, LANGUAGE, STATUS } from "../labels";
-import { CaptionsForm, MasterForm, ReviewForm, SubmitLecture, TranscriptEditor } from "./detail-forms";
+import { CaptionsForm, MarkersEditor, MasterForm, MasterUpload, ReviewForm, SubmitLecture, TranscriptEditor } from "./detail-forms";
+
+type Marker = { scene_id: string; start_s: number; label: string };
 
 export const metadata: Metadata = { title: "Lecture", robots: { index: false } };
 
@@ -66,8 +68,38 @@ async function Detail({ id }: { id: string }) {
         ) : (
           <p className="text-sm text-muted">Not registered yet.</p>
         )}
-        {editable && author && <MasterForm id={l.id} />}
+        {editable && author && (
+          <>
+            <MasterUpload id={l.id} />
+            <details className="text-sm">
+              <summary className="cursor-pointer text-accent">Or register a master kept elsewhere</summary>
+              <div className="mt-2">
+                <MasterForm id={l.id} />
+              </div>
+            </details>
+          </>
+        )}
       </section>
+
+      {l.master && (
+        <section aria-labelledby="markers-h" className="space-y-2">
+          <h2 id="markers-h" className="text-lg font-semibold">
+            Chapter markers
+          </h2>
+          <p className="text-sm text-muted">Where each storyboard scene starts in the master video. Learners use these to jump between concepts.</p>
+          {l.markers && !l.markers_current && (
+            <p role="alert" className="rounded-lg border border-warn bg-warn-soft px-3 py-2 text-sm">
+              The master video changed since these markers were set. Check each time against the new video and save again.
+            </p>
+          )}
+          <MarkersEditor
+            key={String(l.master.sha256)}
+            id={l.id}
+            initial={((l.markers?.scenes as Marker[] | undefined) ?? (l.marker_proposal as Marker[])).map((m) => ({ ...m }))}
+            editable={editable && author}
+          />
+        </section>
+      )}
 
       <section aria-labelledby="captions-h" className="space-y-2">
         <h2 id="captions-h" className="text-lg font-semibold">

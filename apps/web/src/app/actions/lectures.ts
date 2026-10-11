@@ -67,6 +67,11 @@ export async function saveTranscript(id: string, scenes: { scene_id: string; tex
   return call(lecture(id, "transcript"), "PUT", { scenes });
 }
 
+/** MARKERS-01: where each storyboard scene starts in the current master video. */
+export async function saveMarkers(id: string, scenes: { scene_id: string; start_s: number; label: string }[]): Promise<LectureResult> {
+  return call(lecture(id, "markers"), "PUT", { scenes });
+}
+
 export async function submitLecture(id: string): Promise<LectureResult> {
   return call(lecture(id, "submit"), "POST", {});
 }
