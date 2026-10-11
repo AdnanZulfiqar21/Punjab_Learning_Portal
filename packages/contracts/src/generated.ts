@@ -2874,6 +2874,40 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/studio/sources/{source_id}/original": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Store the owner's original (raw PDF body); only the registered SHA-256 is accepted */
+        post: operations["upload_original_v1_studio_sources__source_id__original_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/studio/sources/{source_id}/pages/{page}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** One PDF page of a stored original, as PNG (content staff) */
+        get: operations["source_page_v1_studio_sources__source_id__pages__page__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/studio/sources/{source_id}/publication-rights": {
         parameters: {
             query?: never;
@@ -6608,6 +6642,20 @@ export interface components {
             /** Id */
             id: string;
         };
+        /** OriginalOut */
+        OriginalOut: {
+            /** Bytes */
+            bytes: number;
+            /** Sha256 */
+            sha256: string;
+            /**
+             * Source Id
+             * Format: uuid
+             */
+            source_id: string;
+            /** Stored */
+            stored: boolean;
+        };
         /** OutcomeEvidence */
         OutcomeEvidence: {
             /** Chapter Number */
@@ -7873,6 +7921,11 @@ export interface components {
             last_reviewed_at?: string | null;
             /** Missing Pages */
             missing_pages: unknown[];
+            /**
+             * Original Stored
+             * @default false
+             */
+            original_stored: boolean;
             /** Pdf Pages */
             pdf_pages: number;
             /**
@@ -14610,6 +14663,69 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["SourceOut"][];
+                };
+            };
+        };
+    };
+    upload_original_v1_studio_sources__source_id__original_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                source_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["OriginalOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    source_page_v1_studio_sources__source_id__pages__page__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                source_id: string;
+                page: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": unknown;
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
                 };
             };
         };
