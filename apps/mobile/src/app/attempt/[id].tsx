@@ -324,6 +324,14 @@ function Runner({ attempt, token, onFinalised }: { attempt: PracticeAttempt; tok
       </View>
 
       <View style={{ gap: Space.md, padding: Space.lg, borderRadius: Radius.md, borderWidth: 1, borderColor: c.border, backgroundColor: c.surface }}>
+        {item.passage ? (
+          <View accessibilityLabel="Passage" style={{ backgroundColor: c.surfaceMuted, borderRadius: Radius.sm, padding: Space.md, gap: Space.xs }}>
+            <T variant="eyebrow" style={{ color: c.muted, textTransform: "uppercase" }}>
+              Read the passage
+            </T>
+            <LessonBlocks blocks={item.passage.blocks as { type: string }[]} assetSource={assetSource} />
+          </View>
+        ) : null}
         <LessonBlocks blocks={item.stem as { type: string }[]} assetSource={assetSource} />
         <View accessibilityRole="radiogroup" style={{ gap: Space.sm }}>
           {item.options.map((o, idx) => {

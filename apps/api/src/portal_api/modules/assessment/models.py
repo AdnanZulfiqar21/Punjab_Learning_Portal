@@ -78,6 +78,10 @@ class FormItem(Base):
     version_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("content_version.id", ondelete="RESTRICT"))
     marks: Mapped[int] = mapped_column(SmallInteger)
     option_order: Mapped[list[str]] = mapped_column(JSONB)  # frozen permutation of stable option IDs
+    # PASSAGES-01: the passage version this question was shown with, pinned when the test was built.
+    passage_version_id: Mapped[uuid.UUID | None] = mapped_column(
+        ForeignKey("content_version.id", ondelete="RESTRICT"), nullable=True
+    )
     # OCT9-03: the question's class and subject, frozen with the form, so reports never move between buckets later.
     grade_number: Mapped[int] = mapped_column(SmallInteger)
     subject_code: Mapped[str] = mapped_column(String(40))

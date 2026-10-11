@@ -68,6 +68,10 @@ class MCQBody(BaseModel):
     origin: Literal["original_practice", "authorised_past_paper"] = "original_practice"
     past_paper: PastPaper | None = None
     language: Literal["en", "ur"] = "en"
+    # P08.S1.T1 (PASSAGES-01): the passage this question belongs to (a `passage` item of the same class and subject).
+    passage_id: (
+        Annotated[str, Field(pattern=r"^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")] | None
+    ) = None
 
 
 _adapter = TypeAdapter(MCQBody)

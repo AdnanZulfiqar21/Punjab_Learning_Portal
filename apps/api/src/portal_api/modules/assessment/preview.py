@@ -115,6 +115,16 @@ def _sample(db: Session, version_id: uuid.UUID, seed: int) -> tuple[Any, list[di
     return version, [], picks
 
 
+def _passage_blocks(db: Session, cv: Any) -> list[dict[str, Any]] | None:
+    """The live passage a sampled question would be shown with (PASSAGES-01)."""
+    from portal_api.modules.assessment import forms
+    from portal_api.modules.content.models import ContentVersion
+
+    pv = forms.passage_version(db, cv)
+    version = db.get(ContentVersion, pv) if pv is not None else None
+    return version.body.get("blocks", []) if version is not None else None
+
+
 def form(db: Session, version_id: uuid.UUID, seed: int | None) -> dict[str, Any]:
     seed = seed if seed is not None else secrets.randbits(62)
     version, shortages, picks = _sample(db, version_id, seed)
@@ -136,6 +146,7 @@ def form(db: Session, version_id: uuid.UUID, seed: int | None) -> dict[str, Any]
                 "version_id": str(cv.id),
                 "family_id": str(family),
                 "learner": {
+                    "passage": _passage_blocks(db, cv),
                     "stem": body["stem"],
                     "options": [{"id": oid, "blocks": options[oid]["blocks"]} for oid in option_ids],
                 },

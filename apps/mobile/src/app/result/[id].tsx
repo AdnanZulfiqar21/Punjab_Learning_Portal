@@ -89,6 +89,11 @@ function Review({ item, assetSource }: { item: ItemReview; assetSource: AssetSou
           <Badge tone="warn">Incorrect</Badge>
         )}
       </View>
+      {item.passage ? (
+        <View accessibilityLabel="Passage" style={{ backgroundColor: c.surfaceMuted, borderRadius: Radius.sm, padding: Space.md }}>
+          <LessonBlocks blocks={item.passage.blocks as Blocks} assetSource={assetSource} />
+        </View>
+      ) : null}
       <LessonBlocks blocks={item.stem as Blocks} assetSource={assetSource} />
       {item.options.map((o, i) => {
         const isKey = o.id === item.correct_option_id;

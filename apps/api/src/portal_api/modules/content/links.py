@@ -21,7 +21,25 @@ def check(db: Session, item: ContentItem, version: ContentVersion, *, for_public
         from portal_api.modules.content import storyboard
 
         return storyboard.claim_errors(version.body, version.source_refs)
+    if item.kind == "mcq" and isinstance(version.body, dict) and version.body.get("passage_id"):
+        return _passage(db, item, str(version.body["passage_id"]), for_publication=for_publication)
     return []
+
+
+def _passage(db: Session, item: ContentItem, passage_id: str, *, for_publication: bool) -> list[str]:
+    """PASSAGES-01: a question's passage must be a passage of its own class and subject, and live to publish."""
+    try:
+        p = db.get(ContentItem, uuid.UUID(passage_id))
+    except ValueError:
+        p = None
+    if p is None or p.kind != "passage":
+        return ["The question names a passage that doesn't exist."]
+    errors = []
+    if (p.grade_number, p.subject_code) != (item.grade_number, item.subject_code):
+        errors.append("The passage belongs to another class or subject; Class XI and XII are never mixed.")
+    if for_publication and p.availability != Availability.live.value:
+        errors.append("Publish the passage first: a question can only use a reviewed, live passage.")
+    return errors
 
 
 def _rubric(db: Session, item: ContentItem, version: ContentVersion, *, for_publication: bool) -> list[str]:

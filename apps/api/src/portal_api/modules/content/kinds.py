@@ -104,6 +104,18 @@ KINDS: dict[str, KindSpec] = {
         quarantine_levels=(),
         learner_readable=False,  # a production record; learners see the reviewed video, never the storyboard
     ),
+    # P08.S1.T1 (PASSAGES-01): a stimulus (experiment, data, text, figure) shared by a group of questions. Reviewed
+    # and published like lessons, but learners only ever see it inside a test, pinned with its questions.
+    "passage": KindSpec(
+        name="passage",
+        label="Question passage",
+        empty_body=lambda: {"blocks": []},
+        parse_draft=_lesson_parse,
+        validate=lambda body, pub: blocks.validate_body(body, for_publication=pub),
+        review_checklist=("accuracy", "diagrams", "grammar", "mapping"),
+        quarantine_levels=(),
+        learner_readable=False,
+    ),
 }
 
 

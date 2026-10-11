@@ -66,6 +66,13 @@ class OptionSnapshot(BaseModel):
     blocks: list[dict[str, Any]]
 
 
+class PassageSnapshot(BaseModel):
+    """A shared passage, pinned when the test was built (PASSAGES-01)."""
+
+    id: uuid.UUID
+    blocks: list[dict[str, Any]]
+
+
 class ItemSnapshot(BaseModel):
     """What a learner sees during an attempt. Keys and explanations are never part of this payload."""
 
@@ -73,6 +80,7 @@ class ItemSnapshot(BaseModel):
     marks: int
     stem: list[dict[str, Any]]
     options: list[OptionSnapshot]
+    passage: PassageSnapshot | None = None
 
 
 class AnswerOut(BaseModel):
@@ -160,6 +168,7 @@ class ItemReview(BaseModel):
     marks: int
     stem: list[dict[str, Any]]
     options: list[OptionSnapshot]
+    passage: PassageSnapshot | None = None
     chosen: str | None
     correct_option_id: str
     correct: bool | None
