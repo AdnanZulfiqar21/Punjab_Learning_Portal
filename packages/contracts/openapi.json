@@ -2594,6 +2594,218 @@
         "title": "CompletionScope",
         "type": "object"
       },
+      "ConceptIn": {
+        "properties": {
+          "code": {
+            "description": "Stable identifier, e.g. bio.cell.membrane-transport",
+            "pattern": "^[a-z0-9][a-z0-9.\\-]{2,79}$",
+            "title": "Code",
+            "type": "string"
+          },
+          "statement": {
+            "description": "The learning outcome",
+            "maxLength": 2000,
+            "minLength": 1,
+            "title": "Statement",
+            "type": "string"
+          },
+          "subject": {
+            "enum": [
+              "biology",
+              "chemistry",
+              "physics",
+              "computer_science",
+              "mathematics"
+            ],
+            "title": "Subject",
+            "type": "string"
+          },
+          "title": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "code",
+          "title",
+          "statement",
+          "subject"
+        ],
+        "title": "ConceptIn",
+        "type": "object"
+      },
+      "ConceptOut": {
+        "properties": {
+          "code": {
+            "title": "Code",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "prerequisites": {
+            "items": {
+              "$ref": "#/components/schemas/PrerequisiteOut"
+            },
+            "title": "Prerequisites",
+            "type": "array"
+          },
+          "published_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Published At"
+          },
+          "source_refs": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Source Refs",
+            "type": "array"
+          },
+          "statement": {
+            "title": "Statement",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "draft",
+              "published",
+              "retired"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "subject": {
+            "title": "Subject",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "topics": {
+            "items": {
+              "$ref": "#/components/schemas/ConceptTopicOut"
+            },
+            "title": "Topics",
+            "type": "array"
+          }
+        },
+        "required": [
+          "id",
+          "code",
+          "subject",
+          "title",
+          "statement",
+          "source_refs",
+          "status",
+          "published_at",
+          "topics",
+          "prerequisites"
+        ],
+        "title": "ConceptOut",
+        "type": "object"
+      },
+      "ConceptPatch": {
+        "properties": {
+          "source_refs": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/SourceRefIn"
+                },
+                "maxItems": 20,
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Refs"
+          },
+          "statement": {
+            "anyOf": [
+              {
+                "maxLength": 2000,
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Statement"
+          },
+          "title": {
+            "anyOf": [
+              {
+                "maxLength": 200,
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Title"
+          }
+        },
+        "title": "ConceptPatch",
+        "type": "object"
+      },
+      "ConceptTopicOut": {
+        "properties": {
+          "chapter_number": {
+            "title": "Chapter Number",
+            "type": "integer"
+          },
+          "grade": {
+            "title": "Grade",
+            "type": "integer"
+          },
+          "number": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Number"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "topic_id": {
+            "format": "uuid",
+            "title": "Topic Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "topic_id",
+          "number",
+          "title",
+          "grade",
+          "chapter_number"
+        ],
+        "title": "ConceptTopicOut",
+        "type": "object"
+      },
       "ConsentIn": {
         "additionalProperties": false,
         "properties": {
@@ -7966,6 +8178,59 @@
         "title": "PreferencesIO",
         "type": "object"
       },
+      "PrerequisiteIn": {
+        "properties": {
+          "bridging_lesson_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Bridging Lesson Id"
+          },
+          "requires_id": {
+            "format": "uuid",
+            "title": "Requires Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "requires_id"
+        ],
+        "title": "PrerequisiteIn",
+        "type": "object"
+      },
+      "PrerequisiteOut": {
+        "properties": {
+          "bridging_lesson_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Bridging Lesson Id"
+          },
+          "requires_id": {
+            "format": "uuid",
+            "title": "Requires Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "requires_id",
+          "bridging_lesson_id"
+        ],
+        "title": "PrerequisiteOut",
+        "type": "object"
+      },
       "PreviewLesson": {
         "properties": {
           "chapter_id": {
@@ -10801,6 +11066,34 @@
         "title": "SourceRef",
         "type": "object"
       },
+      "SourceRefIn": {
+        "properties": {
+          "pdf_from": {
+            "maximum": 5000.0,
+            "minimum": 1.0,
+            "title": "Pdf From",
+            "type": "integer"
+          },
+          "pdf_to": {
+            "maximum": 5000.0,
+            "minimum": 1.0,
+            "title": "Pdf To",
+            "type": "integer"
+          },
+          "source_document_id": {
+            "format": "uuid",
+            "title": "Source Document Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "source_document_id",
+          "pdf_from",
+          "pdf_to"
+        ],
+        "title": "SourceRefIn",
+        "type": "object"
+      },
       "SourceReviewIn": {
         "properties": {
           "note": {
@@ -11833,6 +12126,24 @@
           "children"
         ],
         "title": "TopicNode",
+        "type": "object"
+      },
+      "TopicsIn": {
+        "properties": {
+          "topic_ids": {
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "maxItems": 200,
+            "title": "Topic Ids",
+            "type": "array"
+          }
+        },
+        "required": [
+          "topic_ids"
+        ],
+        "title": "TopicsIn",
         "type": "object"
       },
       "TrackOut": {
@@ -19730,6 +20041,413 @@
           }
         },
         "summary": "Block types, schema version and renderer requirements (\u00a75.4)",
+        "tags": [
+          "studio"
+        ]
+      }
+    },
+    "/v1/studio/concepts": {
+      "get": {
+        "operationId": "list_concepts_v1_studio_concepts_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "maxLength": 40,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Subject"
+            }
+          },
+          {
+            "in": "query",
+            "name": "grade",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "maximum": 12,
+                  "minimum": 11,
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Grade"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/ConceptOut"
+                  },
+                  "title": "Response List Concepts V1 Studio Concepts Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Learning concepts in your subjects",
+        "tags": [
+          "studio"
+        ]
+      },
+      "post": {
+        "operationId": "create_concept_v1_studio_concepts_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConceptIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConceptOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Write a draft learning concept",
+        "tags": [
+          "studio"
+        ]
+      }
+    },
+    "/v1/studio/concepts/{concept_id}": {
+      "get": {
+        "operationId": "get_concept_v1_studio_concepts__concept_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "concept_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Concept Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConceptOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "One concept with its topics and prerequisites",
+        "tags": [
+          "studio"
+        ]
+      },
+      "put": {
+        "operationId": "edit_concept_v1_studio_concepts__concept_id__put",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "concept_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Concept Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConceptPatch"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConceptOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Edit a draft concept",
+        "tags": [
+          "studio"
+        ]
+      }
+    },
+    "/v1/studio/concepts/{concept_id}/prerequisites": {
+      "post": {
+        "operationId": "add_prereq_v1_studio_concepts__concept_id__prerequisites_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "concept_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Concept Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PrerequisiteIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConceptOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Add a prerequisite (no cycles)",
+        "tags": [
+          "studio"
+        ]
+      }
+    },
+    "/v1/studio/concepts/{concept_id}/prerequisites/{requires_id}": {
+      "delete": {
+        "operationId": "remove_prereq_v1_studio_concepts__concept_id__prerequisites__requires_id__delete",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "concept_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Concept Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "requires_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Requires Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConceptOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Remove a prerequisite",
+        "tags": [
+          "studio"
+        ]
+      }
+    },
+    "/v1/studio/concepts/{concept_id}/publish": {
+      "post": {
+        "operationId": "publish_concept_v1_studio_concepts__concept_id__publish_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "concept_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Concept Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConceptOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Publish a concept (an independent subject reviewer)",
+        "tags": [
+          "studio"
+        ]
+      }
+    },
+    "/v1/studio/concepts/{concept_id}/topics": {
+      "put": {
+        "operationId": "map_topics_v1_studio_concepts__concept_id__topics_put",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "concept_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Concept Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TopicsIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConceptOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Map the topics that teach a concept",
         "tags": [
           "studio"
         ]

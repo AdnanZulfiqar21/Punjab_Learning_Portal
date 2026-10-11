@@ -18,6 +18,7 @@ from portal_api.modules.analytics.learning import router as learning_router
 from portal_api.modules.assessment.router import router as assessment_router
 from portal_api.modules.audit.router import router as audit_router
 from portal_api.modules.content import router as content
+from portal_api.modules.content.concepts import router as concepts_router
 from portal_api.modules.content.discovery import router as discovery_router
 from portal_api.modules.content.lectures import router as lectures_router
 from portal_api.modules.content.sources import router as sources_router
@@ -96,6 +97,7 @@ def create_app() -> FastAPI:
     app.include_router(lectures_router)
     app.include_router(discovery_router)
     app.include_router(study_router)
+    app.include_router(concepts_router)
     app.include_router(sources_router)
     app.include_router(uploads_router)
     app.include_router(access_router)
