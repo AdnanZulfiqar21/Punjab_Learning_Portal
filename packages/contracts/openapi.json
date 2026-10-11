@@ -6440,6 +6440,139 @@
         "title": "MeOut",
         "type": "object"
       },
+      "MediaUploadIn": {
+        "properties": {
+          "bytes": {
+            "maximum": 8589934592.0,
+            "minimum": 1.0,
+            "title": "Bytes",
+            "type": "integer"
+          },
+          "content_type": {
+            "enum": [
+              "video/mp4",
+              "video/webm",
+              "video/quicktime"
+            ],
+            "title": "Content Type",
+            "type": "string"
+          },
+          "duration_s": {
+            "maximum": 7200.0,
+            "minimum": 1.0,
+            "title": "Duration S",
+            "type": "integer"
+          },
+          "filename": {
+            "maxLength": 255,
+            "minLength": 3,
+            "title": "Filename",
+            "type": "string"
+          },
+          "sha256": {
+            "anyOf": [
+              {
+                "pattern": "^[0-9a-f]{64}$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The owner's checksum, if known",
+            "title": "Sha256"
+          }
+        },
+        "required": [
+          "filename",
+          "bytes",
+          "content_type",
+          "duration_s"
+        ],
+        "title": "MediaUploadIn",
+        "type": "object"
+      },
+      "MediaUploadOut": {
+        "properties": {
+          "bytes": {
+            "title": "Bytes",
+            "type": "integer"
+          },
+          "chunk_bytes": {
+            "title": "Chunk Bytes",
+            "type": "integer"
+          },
+          "expires_at": {
+            "format": "date-time",
+            "title": "Expires At",
+            "type": "string"
+          },
+          "failure": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Failure"
+          },
+          "filename": {
+            "title": "Filename",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "lecture_id": {
+            "format": "uuid",
+            "title": "Lecture Id",
+            "type": "string"
+          },
+          "received": {
+            "title": "Received",
+            "type": "integer"
+          },
+          "sha256": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sha256"
+          },
+          "state": {
+            "enum": [
+              "uploading",
+              "processing",
+              "ready",
+              "failed"
+            ],
+            "title": "State",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "lecture_id",
+          "filename",
+          "bytes",
+          "received",
+          "state",
+          "failure",
+          "sha256",
+          "chunk_bytes",
+          "expires_at"
+        ],
+        "title": "MediaUploadOut",
+        "type": "object"
+      },
       "MessageIn": {
         "properties": {
           "body": {
@@ -21251,6 +21384,59 @@
         ]
       }
     },
+    "/v1/studio/lectures/{lecture_id}/master-upload": {
+      "post": {
+        "operationId": "start_upload_v1_studio_lectures__lecture_id__master_upload_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "lecture_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Lecture Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MediaUploadIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MediaUploadOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Start a resumable upload of the lecture's master video",
+        "tags": [
+          "studio"
+        ]
+      }
+    },
     "/v1/studio/lectures/{lecture_id}/review": {
       "post": {
         "operationId": "review_lecture_v1_studio_lectures__lecture_id__review_post",
@@ -21844,6 +22030,100 @@
           }
         },
         "summary": "Accept (action needed) or dismiss a notice (subject reviewers in scope; audited)",
+        "tags": [
+          "studio"
+        ]
+      }
+    },
+    "/v1/studio/uploads/{upload_id}": {
+      "get": {
+        "operationId": "upload_state_v1_studio_uploads__upload_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "upload_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Upload Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MediaUploadOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "An upload's state and resume offset",
+        "tags": [
+          "studio"
+        ]
+      },
+      "put": {
+        "operationId": "upload_chunk_v1_studio_uploads__upload_id__put",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "upload_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Upload Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "required": true,
+            "schema": {
+              "minimum": 0,
+              "title": "Offset",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MediaUploadOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Send one chunk at the given offset (raw bytes)",
         "tags": [
           "studio"
         ]

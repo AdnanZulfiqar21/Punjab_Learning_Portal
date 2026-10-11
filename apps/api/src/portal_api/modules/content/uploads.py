@@ -83,7 +83,7 @@ def _now(db: Session) -> datetime:
     return db.execute(select(func.now())).scalar_one()
 
 
-def start(db: Session, who: Principal, lecture_id: uuid.UUID, body: StartIn) -> MediaUpload:
+def start(db: Session, who: Principal, lecture_id: uuid.UUID, body: MediaUploadIn) -> MediaUpload:
     from portal_api.modules.content.lectures import _editable
 
     lec = _editable(db, who, lecture_id)  # an author in scope, while the lecture is still being produced
@@ -247,7 +247,7 @@ DB = Annotated[Session, Depends(get_session)]
 Author = Annotated[Principal, Depends(require(Permission.draft_content))]
 
 
-class StartIn(BaseModel):
+class MediaUploadIn(BaseModel):
     filename: str = Field(min_length=3, max_length=255)
     bytes: int = Field(ge=1, le=MAX_BYTES)
     content_type: Literal["video/mp4", "video/webm", "video/quicktime"]
@@ -255,7 +255,7 @@ class StartIn(BaseModel):
     sha256: str | None = Field(default=None, pattern=r"^[0-9a-f]{64}$", description="The owner's checksum, if known")
 
 
-class UploadOut(BaseModel):
+class MediaUploadOut(BaseModel):
     id: uuid.UUID
     lecture_id: uuid.UUID
     filename: str
@@ -268,8 +268,8 @@ class UploadOut(BaseModel):
     expires_at: datetime
 
 
-def _out(up: MediaUpload) -> UploadOut:
-    return UploadOut(
+def _out(up: MediaUpload) -> MediaUploadOut:
+    return MediaUploadOut(
         id=up.id,
         lecture_id=up.lecture_id,
         filename=up.filename,
@@ -289,22 +289,24 @@ def _private(response: Response) -> None:
 
 @router.post(
     "/lectures/{lecture_id}/master-upload",
-    response_model=UploadOut,
+    response_model=MediaUploadOut,
     status_code=201,
     summary="Start a resumable upload of the lecture's master video",
 )
-def start_upload(db: DB, who: Author, lecture_id: uuid.UUID, body: StartIn, response: Response) -> UploadOut:
+def start_upload(db: DB, who: Author, lecture_id: uuid.UUID, body: MediaUploadIn, response: Response) -> MediaUploadOut:
     _private(response)
     return _out(start(db, who, lecture_id, body))
 
 
-@router.get("/uploads/{upload_id}", response_model=UploadOut, summary="An upload's state and resume offset")
-def upload_state(db: DB, who: Author, upload_id: uuid.UUID, response: Response) -> UploadOut:
+@router.get("/uploads/{upload_id}", response_model=MediaUploadOut, summary="An upload's state and resume offset")
+def upload_state(db: DB, who: Author, upload_id: uuid.UUID, response: Response) -> MediaUploadOut:
     _private(response)
     return _out(get(db, who, upload_id))
 
 
-@router.put("/uploads/{upload_id}", response_model=UploadOut, summary="Send one chunk at the given offset (raw bytes)")
+@router.put(
+    "/uploads/{upload_id}", response_model=MediaUploadOut, summary="Send one chunk at the given offset (raw bytes)"
+)
 async def upload_chunk(
     db: DB,
     who: Author,
@@ -312,7 +314,7 @@ async def upload_chunk(
     request: Request,
     response: Response,
     offset: Annotated[int, Query(ge=0)],
-) -> UploadOut:
+) -> MediaUploadOut:
     from fastapi.concurrency import run_in_threadpool
 
     _private(response)
