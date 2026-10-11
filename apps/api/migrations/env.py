@@ -47,10 +47,20 @@ def run_migrations_offline() -> None:
         context.run_migrations()
 
 
+def include_object(obj: object, name: str | None, type_: str, reflected: bool, compare_to: object) -> bool:
+    """Columns retired from the code but not yet dropped (expand/contract, RELEASE-01) aren't drift."""
+    from portal_api.release import RETIRING_COLUMNS
+
+    table = getattr(getattr(obj, "table", None), "name", None)
+    return not (type_ == "column" and reflected and (table, name) in RETIRING_COLUMNS)
+
+
 def run_migrations_online() -> None:
     engine = create_engine(get_settings().database_url, poolclass=pool.NullPool)
     with engine.connect() as connection:
-        context.configure(connection=connection, target_metadata=target_metadata, compare_type=True)
+        context.configure(
+            connection=connection, target_metadata=target_metadata, compare_type=True, include_object=include_object
+        )
         with context.begin_transaction():
             context.run_migrations()
 

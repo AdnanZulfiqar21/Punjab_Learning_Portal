@@ -32,6 +32,12 @@ MIGRATIONS = API_DIR / "migrations" / "versions"
 # The last migration before these rules (analytics_event, 2026-10-10); an Alembic revision ID, not a credential.
 GRANDFATHERED_THROUGH = "e8b2d6f4a193"  # pragma: allowlist secret
 
+# Expand/contract: columns the code no longer uses but the schema still holds until a later contract migration drops
+# them. `alembic check` ignores them meanwhile (migrations/env.py); each entry names why and when it goes.
+RETIRING_COLUMNS = {
+    ("student_profile", "preferences"): "MINIMISATION-01: a free-form store never written or read; drop next release",
+}
+
 DESTRUCTIVE = re.compile(r"op\.(drop_table|drop_column|rename_table)\(|new_column_name\s*=")
 MARKER = re.compile(r"^#\s*contract-migration:\s*\S", re.M)
 
