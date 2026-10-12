@@ -4,7 +4,6 @@ import { expect, test, type Browser, type Page } from "@playwright/test";
 // usual settings, they reach a new device at sign-in but never replace a device's own choice. Data saver holds lesson
 // diagrams until tapped (the labelled structured-blocks fixture lesson from `portal-dev-seed-practice`).
 const AUTH = { timeout: 20_000 };
-const PASSWORD = "settings-fixture-pass-1";
 
 test.skip(({ isMobile }) => isMobile, "Account journeys run on desktop");
 
@@ -12,7 +11,7 @@ async function signIn(page: Page, email: string, register = false) {
   await page.goto("/signin?next=/account");
   if (register) await page.getByRole("button", { name: "New here? Create an account" }).click();
   await page.getByLabel("Email").fill(email);
-  await page.getByLabel("Password").fill(PASSWORD);
+  await page.getByLabel("Password").fill("settings-fixture-pass-1");
   await page.getByRole("button", { name: register ? "Create account" : "Sign in", exact: true }).click();
   await expect(page).toHaveURL(/:\d+\/(account|onboarding)/, AUTH);
   await page.goto("/account");
