@@ -162,10 +162,12 @@ export const api = {
   bookFor: (grade: number, subject: string, signal?: AbortSignal) =>
     getJSON<Book>(`/v1/grades/${grade}/subjects/${encodeURIComponent(subject)}/book`, signal),
   chapter: (id: string, signal?: AbortSignal) => getJSON<Chapter>(`/v1/chapters/${encodeURIComponent(id)}`, signal),
-  search: (q: string, grade?: number, signal?: AbortSignal) => {
-    const params = new URLSearchParams({ q });
+  /** P11.S2.T3 (SEARCH-01): chapters, topics and published lessons. With a session, lesson text the learner's plan
+   * covers can match too; otherwise lessons match by title only and come back locked. */
+  search: (q: string, grade: number | undefined, token: string | null, signal?: AbortSignal) => {
+    const params = new URLSearchParams({ q, lessons: "true" });
     if (grade) params.set("grade", String(grade));
-    return getJSON<SearchResult>(`/v1/search?${params.toString()}`, signal);
+    return request<SearchResult>(`/v1/search?${params.toString()}`, { token, signal });
   },
   runtimeConfig: (signal?: AbortSignal) => getJSON<RuntimeConfig>("/v1/runtime-config", signal),
   /** Published, live lessons only (independently reviewed); drafts never reach the app. */

@@ -65,8 +65,11 @@ export const getChapter = cache((id: string) => getJSON<Chapter>(`/v1/chapters/$
 export const getLessons = cache(async (chapterId: string, language?: string) =>
   getJSON<Lesson[]>(`/v1/chapters/${encodeURIComponent(chapterId)}/lessons${language ? `?language=${encodeURIComponent(language)}` : ""}`, await sessionToken()),
 );
-export const searchCatalogue = cache((q: string, grade?: number) => {
-  const params = new URLSearchParams({ q });
+/** P11.S2.T3 (SEARCH-01): chapters, topics and published lessons. The learner's session is forwarded so lesson text
+ * their plan covers can match; everyone else matches lessons by title only. */
+export const searchContent = cache(async (q: string, grade?: number, subject?: string) => {
+  const params = new URLSearchParams({ q, lessons: "true" });
   if (grade) params.set("grade", String(grade));
-  return getJSON<SearchResult>(`/v1/search?${params.toString()}`);
+  if (subject) params.set("subject", subject);
+  return getJSON<SearchResult>(`/v1/search?${params.toString()}`, await sessionToken());
 });

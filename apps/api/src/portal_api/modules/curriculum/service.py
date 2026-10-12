@@ -5,7 +5,7 @@ from __future__ import annotations
 import uuid
 from collections import defaultdict
 
-from sqlalchemy import func, select, text
+from sqlalchemy import func, select
 from sqlalchemy.orm import Session
 
 from portal_api.errors import Gone, NotFound
@@ -19,8 +19,6 @@ from portal_api.modules.curriculum.schemas import (
     ChapterSummary,
     GradeCatalogue,
     GradeOut,
-    SearchHit,
-    SearchOut,
     SourceRef,
     SubjectInGrade,
     SubjectOut,
@@ -201,43 +199,4 @@ def get_chapter(session: Session, chapter_id: uuid.UUID) -> ChapterOut:
         topics=roots,
         previous_chapter_id=siblings[i - 1] if i > 0 else None,
         next_chapter_id=siblings[i + 1] if i + 1 < len(siblings) else None,
-    )
-
-
-# Typo tolerance without unrelated suffix matches (measured on real titles, e.g. "photosyntesis"→0.71,
-# "Synthesis of …"→0.47 for "photosynthesis"). The full relevance benchmark is P11 search work.
-FUZZY_THRESHOLD = 0.65
-
-SEARCH_SQL = text("""
-WITH q AS (SELECT CAST(:q AS text) AS q)
-SELECT kind, id, chapter_id, title, number, chapter_title, grade, subject_code, subject_name, pdf_page, score FROM (
-  SELECT 'topic' AS kind, t.id, c.id AS chapter_id, t.title, t.number, c.title AS chapter_title, g.number AS grade,
-         s.code AS subject_code, s.name AS subject_name, t.pdf_page,
-         CASE WHEN t.title ILIKE '%' || q.q || '%' THEN 1.0 ELSE strict_word_similarity(q.q, t.title) END AS score
-    FROM topic t JOIN chapter c ON c.id = t.chapter_id JOIN book_edition b ON b.id = c.book_id
-    JOIN grade g ON g.id = b.grade_id JOIN subject s ON s.id = b.subject_id, q
-   WHERE s.active AND t.retired_at IS NULL AND c.retired_at IS NULL
-         AND (t.title ILIKE '%' || q.q || '%' OR strict_word_similarity(q.q, t.title) >= :fuzzy)
-         AND (CAST(:grade AS int) IS NULL OR g.number = CAST(:grade AS int))
-         AND (CAST(:subject AS text) IS NULL OR s.code = CAST(:subject AS text))
-  UNION ALL
-  SELECT 'chapter', c.id, c.id, c.title, CAST(c.number AS text), c.title, g.number, s.code, s.name, c.pdf_start,
-         CASE WHEN c.title ILIKE '%' || q.q || '%' THEN 1.05 ELSE strict_word_similarity(q.q, c.title) + 0.05 END
-    FROM chapter c JOIN book_edition b ON b.id = c.book_id JOIN grade g ON g.id = b.grade_id
-    JOIN subject s ON s.id = b.subject_id, q
-   WHERE s.active AND c.retired_at IS NULL
-         AND (c.title ILIKE '%' || q.q || '%' OR strict_word_similarity(q.q, c.title) >= :fuzzy)
-         AND (CAST(:grade AS int) IS NULL OR g.number = CAST(:grade AS int))
-         AND (CAST(:subject AS text) IS NULL OR s.code = CAST(:subject AS text))
-) hits ORDER BY score DESC, grade, title LIMIT :limit
-""")
-
-
-def search(session: Session, q: str, grade: int | None, subject: str | None, limit: int = 20) -> SearchOut:
-    subj = normalise_subject(subject) if subject else None
-    rows = session.execute(
-        SEARCH_SQL, {"q": q.strip(), "grade": grade, "subject": subj, "limit": limit, "fuzzy": FUZZY_THRESHOLD}
-    ).mappings()
-    return SearchOut(
-        query=q, grade=grade, subject=subj, hits=[SearchHit(**{**r, "score": float(r["score"])}) for r in rows]
     )

@@ -24,6 +24,8 @@ from portal_api.modules.content.discovery import router as discovery_router
 from portal_api.modules.content.inclusion import router as inclusion_router
 from portal_api.modules.content.lectures import router as lectures_router
 from portal_api.modules.content.packs import router as packs_router
+from portal_api.modules.content.search import public as search_router
+from portal_api.modules.content.search import studio as search_terms_router
 from portal_api.modules.content.sources import router as sources_router
 from portal_api.modules.content.study import router as study_router
 from portal_api.modules.content.uploads import router as uploads_router
@@ -127,6 +129,8 @@ def create_app() -> FastAPI:
     app.include_router(system_router)
     app.include_router(clients_router)
     app.include_router(curriculum_router)
+    app.include_router(search_router)
+    app.include_router(search_terms_router)
     app.include_router(identity_router)
     app.include_router(content.router)
     app.include_router(content.public)

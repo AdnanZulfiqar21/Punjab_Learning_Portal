@@ -11880,6 +11880,17 @@
       },
       "SearchHit": {
         "properties": {
+          "access_tier": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Access Tier"
+          },
           "chapter_id": {
             "format": "uuid",
             "title": "Chapter Id",
@@ -11901,6 +11912,22 @@
           "kind": {
             "title": "Kind",
             "type": "string"
+          },
+          "language": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Language"
+          },
+          "locked": {
+            "default": false,
+            "title": "Locked",
+            "type": "boolean"
           },
           "number": {
             "anyOf": [
@@ -11927,6 +11954,14 @@
           "score": {
             "title": "Score",
             "type": "number"
+          },
+          "snippet": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/SnippetPart"
+            },
+            "title": "Snippet",
+            "type": "array"
           },
           "subject_code": {
             "title": "Subject Code",
@@ -11959,6 +11994,14 @@
       },
       "SearchOut": {
         "properties": {
+          "also_searched": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "title": "Also Searched",
+            "type": "array"
+          },
           "grade": {
             "anyOf": [
               {
@@ -11976,6 +12019,11 @@
             },
             "title": "Hits",
             "type": "array"
+          },
+          "lessons": {
+            "default": false,
+            "title": "Lessons",
+            "type": "boolean"
           },
           "query": {
             "title": "Query",
@@ -12000,6 +12048,179 @@
           "hits"
         ],
         "title": "SearchOut",
+        "type": "object"
+      },
+      "SearchTermForm": {
+        "properties": {
+          "language": {
+            "enum": [
+              "en",
+              "ur",
+              "roman_ur"
+            ],
+            "title": "Language",
+            "type": "string"
+          },
+          "text": {
+            "maxLength": 80,
+            "minLength": 1,
+            "title": "Text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "language",
+          "text"
+        ],
+        "title": "SearchTermForm",
+        "type": "object"
+      },
+      "SearchTermGroupIn": {
+        "properties": {
+          "forms": {
+            "items": {
+              "$ref": "#/components/schemas/SearchTermForm"
+            },
+            "maxItems": 12,
+            "minItems": 2,
+            "title": "Forms",
+            "type": "array"
+          },
+          "grade": {
+            "maximum": 12.0,
+            "minimum": 11.0,
+            "title": "Grade",
+            "type": "integer"
+          },
+          "source_ref": {
+            "description": "Where in the owner's material these come from",
+            "maxLength": 300,
+            "minLength": 3,
+            "title": "Source Ref",
+            "type": "string"
+          },
+          "subject": {
+            "maxLength": 40,
+            "minLength": 2,
+            "title": "Subject",
+            "type": "string"
+          }
+        },
+        "required": [
+          "grade",
+          "subject",
+          "forms",
+          "source_ref"
+        ],
+        "title": "SearchTermGroupIn",
+        "type": "object"
+      },
+      "SearchTermGroupOut": {
+        "properties": {
+          "approved_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Approved At"
+          },
+          "can_approve": {
+            "title": "Can Approve",
+            "type": "boolean"
+          },
+          "can_retire": {
+            "title": "Can Retire",
+            "type": "boolean"
+          },
+          "forms": {
+            "items": {
+              "$ref": "#/components/schemas/SearchTermForm"
+            },
+            "title": "Forms",
+            "type": "array"
+          },
+          "grade": {
+            "title": "Grade",
+            "type": "integer"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "mine": {
+            "title": "Mine",
+            "type": "boolean"
+          },
+          "proposed_at": {
+            "format": "date-time",
+            "title": "Proposed At",
+            "type": "string"
+          },
+          "retired_reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Retired Reason"
+          },
+          "source_ref": {
+            "title": "Source Ref",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "proposed",
+              "approved",
+              "retired"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "subject": {
+            "title": "Subject",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "grade",
+          "subject",
+          "status",
+          "forms",
+          "source_ref",
+          "proposed_at",
+          "approved_at",
+          "retired_reason",
+          "mine",
+          "can_approve",
+          "can_retire"
+        ],
+        "title": "SearchTermGroupOut",
+        "type": "object"
+      },
+      "SearchTermRetireIn": {
+        "properties": {
+          "reason": {
+            "maxLength": 300,
+            "minLength": 3,
+            "title": "Reason",
+            "type": "string"
+          }
+        },
+        "required": [
+          "reason"
+        ],
+        "title": "SearchTermRetireIn",
         "type": "object"
       },
       "SessionCreateIn": {
@@ -12223,6 +12444,25 @@
           "max_units"
         ],
         "title": "SlotOut",
+        "type": "object"
+      },
+      "SnippetPart": {
+        "description": "A run of snippet text; `match` marks the words that matched the search.",
+        "properties": {
+          "match": {
+            "title": "Match",
+            "type": "boolean"
+          },
+          "text": {
+            "title": "Text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "text",
+          "match"
+        ],
+        "title": "SnippetPart",
         "type": "object"
       },
       "SourceOut": {
@@ -21364,6 +21604,16 @@
               "title": "Limit",
               "type": "integer"
             }
+          },
+          {
+            "in": "query",
+            "name": "lessons",
+            "required": false,
+            "schema": {
+              "default": false,
+              "title": "Lessons",
+              "type": "boolean"
+            }
           }
         ],
         "responses": {
@@ -21388,9 +21638,9 @@
             "description": "Validation Error"
           }
         },
-        "summary": "Search chapters and topics; every hit is labelled with its grade",
+        "summary": "Search chapters and topics, and with lessons=true the published lessons the caller can see; every hit is labelled with its grade",
         "tags": [
-          "curriculum"
+          "search"
         ]
       }
     },
@@ -25405,6 +25655,200 @@
           }
         },
         "summary": "Editorial work queue (P06.S1.T2)",
+        "tags": [
+          "studio"
+        ]
+      }
+    },
+    "/v1/studio/search-terms": {
+      "get": {
+        "operationId": "list_terms_v1_studio_search_terms_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "grade",
+            "required": true,
+            "schema": {
+              "maximum": 12,
+              "minimum": 11,
+              "title": "Grade",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "subject",
+            "required": true,
+            "schema": {
+              "maxLength": 40,
+              "minLength": 2,
+              "title": "Subject",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/SearchTermGroupOut"
+                  },
+                  "title": "Response List Terms V1 Studio Search Terms Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Search term groups (English, Urdu, Roman Urdu) for one class and subject (content staff in scope)",
+        "tags": [
+          "studio"
+        ]
+      },
+      "post": {
+        "operationId": "propose_terms_v1_studio_search_terms_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchTermGroupIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchTermGroupOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Propose a group of equivalent search terms from the owner's material (authors in scope; audited)",
+        "tags": [
+          "studio"
+        ]
+      }
+    },
+    "/v1/studio/search-terms/{group_id}/approve": {
+      "post": {
+        "operationId": "approve_terms_v1_studio_search_terms__group_id__approve_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "group_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Group Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchTermGroupOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Approve a proposed group so search uses it (a subject reviewer in scope who didn't propose it; audited)",
+        "tags": [
+          "studio"
+        ]
+      }
+    },
+    "/v1/studio/search-terms/{group_id}/retire": {
+      "post": {
+        "operationId": "retire_terms_v1_studio_search_terms__group_id__retire_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "group_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Group Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchTermRetireIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchTermGroupOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Stop using a group in search, with a reason (subject reviewers in scope; audited; never deleted)",
         "tags": [
           "studio"
         ]

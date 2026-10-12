@@ -2177,7 +2177,7 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Search chapters and topics; every hit is labelled with its grade */
+        /** Search chapters and topics, and with lessons=true the published lessons the caller can see; every hit is labelled with its grade */
         get: operations["search_v1_search_get"];
         put?: never;
         post?: never;
@@ -3416,6 +3416,58 @@ export interface paths {
         get: operations["queue_v1_studio_queue_get"];
         put?: never;
         post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/studio/search-terms": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Search term groups (English, Urdu, Roman Urdu) for one class and subject (content staff in scope) */
+        get: operations["list_terms_v1_studio_search_terms_get"];
+        put?: never;
+        /** Propose a group of equivalent search terms from the owner's material (authors in scope; audited) */
+        post: operations["propose_terms_v1_studio_search_terms_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/studio/search-terms/{group_id}/approve": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Approve a proposed group so search uses it (a subject reviewer in scope who didn't propose it; audited) */
+        post: operations["approve_terms_v1_studio_search_terms__group_id__approve_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/studio/search-terms/{group_id}/retire": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Stop using a group in search, with a reason (subject reviewers in scope; audited; never deleted) */
+        post: operations["retire_terms_v1_studio_search_terms__group_id__retire_post"];
         delete?: never;
         options?: never;
         head?: never;
@@ -9067,6 +9119,8 @@ export interface components {
         };
         /** SearchHit */
         SearchHit: {
+            /** Access Tier */
+            access_tier?: string | null;
             /**
              * Chapter Id
              * Format: uuid
@@ -9083,12 +9137,24 @@ export interface components {
             id: string;
             /** Kind */
             kind: string;
+            /** Language */
+            language?: string | null;
+            /**
+             * Locked
+             * @default false
+             */
+            locked: boolean;
             /** Number */
             number: string | null;
             /** Pdf Page */
             pdf_page: number | null;
             /** Score */
             score: number;
+            /**
+             * Snippet
+             * @default []
+             */
+            snippet: components["schemas"]["SnippetPart"][];
             /** Subject Code */
             subject_code: string;
             /** Subject Name */
@@ -9098,14 +9164,89 @@ export interface components {
         };
         /** SearchOut */
         SearchOut: {
+            /**
+             * Also Searched
+             * @default []
+             */
+            also_searched: string[];
             /** Grade */
             grade: number | null;
             /** Hits */
             hits: components["schemas"]["SearchHit"][];
+            /**
+             * Lessons
+             * @default false
+             */
+            lessons: boolean;
             /** Query */
             query: string;
             /** Subject */
             subject: string | null;
+        };
+        /** SearchTermForm */
+        SearchTermForm: {
+            /**
+             * Language
+             * @enum {string}
+             */
+            language: "en" | "ur" | "roman_ur";
+            /** Text */
+            text: string;
+        };
+        /** SearchTermGroupIn */
+        SearchTermGroupIn: {
+            /** Forms */
+            forms: components["schemas"]["SearchTermForm"][];
+            /** Grade */
+            grade: number;
+            /**
+             * Source Ref
+             * @description Where in the owner's material these come from
+             */
+            source_ref: string;
+            /** Subject */
+            subject: string;
+        };
+        /** SearchTermGroupOut */
+        SearchTermGroupOut: {
+            /** Approved At */
+            approved_at: string | null;
+            /** Can Approve */
+            can_approve: boolean;
+            /** Can Retire */
+            can_retire: boolean;
+            /** Forms */
+            forms: components["schemas"]["SearchTermForm"][];
+            /** Grade */
+            grade: number;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Mine */
+            mine: boolean;
+            /**
+             * Proposed At
+             * Format: date-time
+             */
+            proposed_at: string;
+            /** Retired Reason */
+            retired_reason: string | null;
+            /** Source Ref */
+            source_ref: string;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "proposed" | "approved" | "retired";
+            /** Subject */
+            subject: string;
+        };
+        /** SearchTermRetireIn */
+        SearchTermRetireIn: {
+            /** Reason */
+            reason: string;
         };
         /** SessionCreateIn */
         SessionCreateIn: {
@@ -9197,6 +9338,16 @@ export interface components {
             label: string;
             /** Max Units */
             max_units: number;
+        };
+        /**
+         * SnippetPart
+         * @description A run of snippet text; `match` marks the words that matched the search.
+         */
+        SnippetPart: {
+            /** Match */
+            match: boolean;
+            /** Text */
+            text: string;
         };
         /** SourceOut */
         SourceOut: {
@@ -14548,6 +14699,7 @@ export interface operations {
                 grade?: number | null;
                 subject?: string | null;
                 limit?: number;
+                lessons?: boolean;
             };
             header?: never;
             path?: never;
@@ -17142,6 +17294,137 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["ItemSummary"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_terms_v1_studio_search_terms_get: {
+        parameters: {
+            query: {
+                grade: number;
+                subject: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SearchTermGroupOut"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    propose_terms_v1_studio_search_terms_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SearchTermGroupIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SearchTermGroupOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    approve_terms_v1_studio_search_terms__group_id__approve_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                group_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SearchTermGroupOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    retire_terms_v1_studio_search_terms__group_id__retire_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                group_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SearchTermRetireIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SearchTermGroupOut"];
                 };
             };
             /** @description Validation Error */
