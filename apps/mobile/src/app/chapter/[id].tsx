@@ -98,6 +98,8 @@ function LessonList({ chapterId, token }: { chapterId: string; token: string | n
   // LESSON-DONE-01: which lessons this learner marked completed (signed in only).
   const done = useRequest((signal) => (token ? api.completedLessons(token, chapterId, signal) : Promise.resolve([] as string[])), [chapterId, token]);
   const [toggled, setToggled] = useState<Record<string, boolean>>({});
+  const feats = useRequest((signal) => (token ? api.features(token, signal) : Promise.resolve({} as Record<string, boolean>)), [token]);
+  const study = feats.state.status === "success" && feats.state.data.study_tools === true; // ROLLOUT-01
   const isDone = (id: string) => toggled[id] ?? (done.state.status === "success" && done.state.data.includes(id));
   return (
     <View style={{ gap: Space.sm }}>
@@ -139,7 +141,7 @@ function LessonList({ chapterId, token }: { chapterId: string; token: string | n
                   <LessonBlocks
                     blocks={l.body.blocks as { type: string }[]}
                     assetSource={(v) => lessonAsset(l.id, v, token)}
-                    equationAction={token ? (i) => <SaveFormula token={token} lessonId={l.id} index={i} /> : undefined}
+                    equationAction={token && study ? (i) => <SaveFormula token={token} lessonId={l.id} index={i} /> : undefined}
                   />
                 </View>
               )}
@@ -147,7 +149,7 @@ function LessonList({ chapterId, token }: { chapterId: string; token: string | n
             {token && !l.locked && l.body ? (
               <View style={{ gap: Space.sm, marginTop: Space.sm }}>
                 <CompletionToggle token={token} lessonId={l.id} done={isDone(l.id)} onChange={(d) => setToggled((t) => ({ ...t, [l.id]: d }))} />
-                <LessonNote token={token} lessonId={l.id} />
+                {study && <LessonNote token={token} lessonId={l.id} />}
               </View>
             ) : null}
             <T variant="small" style={{ marginTop: Space.sm }}>

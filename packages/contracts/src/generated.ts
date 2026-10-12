@@ -1056,6 +1056,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/me/features": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Which rolled-out features your account has */
+        get: operations["my_features_v1_me_features_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/me/formulas": {
         parameters: {
             query?: never;
@@ -1688,6 +1705,40 @@ export interface paths {
         post: operations["add_suppression_v1_ops_notifications_suppressions_post"];
         /** Remove Suppression */
         delete: operations["remove_suppression_v1_ops_notifications_suppressions_delete"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/ops/rollouts": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Rollout flags: the runtime snapshot (operators) */
+        get: operations["ops_rollouts_v1_ops_rollouts_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/ops/rollouts/{key}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** Set a feature's rollout percentage (operators, MFA, reason; audited). Flags only restrict */
+        put: operations["ops_set_rollout_v1_ops_rollouts__key__put"];
+        post?: never;
+        delete?: never;
         options?: never;
         head?: never;
         patch?: never;
@@ -8236,6 +8287,35 @@ export interface components {
                 [key: string]: unknown;
             };
         };
+        /** RolloutIn */
+        RolloutIn: {
+            /** Percent */
+            percent: number;
+            /** Reason */
+            reason: string;
+        };
+        /** RolloutOut */
+        RolloutOut: {
+            /** Default Percent */
+            default_percent: number;
+            /** Description */
+            description: string;
+            /** Key */
+            key: string;
+            /** Percent */
+            percent: number;
+            /** Reason */
+            reason: string | null;
+            /** Updated At */
+            updated_at: string | null;
+        };
+        /** RolloutSnapshot */
+        RolloutSnapshot: {
+            /** Environment */
+            environment: string;
+            /** Rollouts */
+            rollouts: components["schemas"]["RolloutOut"][];
+        };
         /** RuntimeConfig */
         RuntimeConfig: {
             /** Active Grades */
@@ -11663,6 +11743,28 @@ export interface operations {
             };
         };
     };
+    my_features_v1_me_features_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        [key: string]: boolean;
+                    };
+                };
+            };
+        };
+    };
     list_formulas_v1_me_formulas_get: {
         parameters: {
             query?: never;
@@ -12942,6 +13044,61 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    ops_rollouts_v1_ops_rollouts_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RolloutSnapshot"];
+                };
+            };
+        };
+    };
+    ops_set_rollout_v1_ops_rollouts__key__put: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                key: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["RolloutIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RolloutSnapshot"];
+                };
             };
             /** @description Validation Error */
             422: {

@@ -10666,6 +10666,102 @@
         "title": "RoleGrantOut",
         "type": "object"
       },
+      "RolloutIn": {
+        "properties": {
+          "percent": {
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "title": "Percent",
+            "type": "integer"
+          },
+          "reason": {
+            "maxLength": 1000,
+            "minLength": 10,
+            "title": "Reason",
+            "type": "string"
+          }
+        },
+        "required": [
+          "percent",
+          "reason"
+        ],
+        "title": "RolloutIn",
+        "type": "object"
+      },
+      "RolloutOut": {
+        "properties": {
+          "default_percent": {
+            "title": "Default Percent",
+            "type": "integer"
+          },
+          "description": {
+            "title": "Description",
+            "type": "string"
+          },
+          "key": {
+            "title": "Key",
+            "type": "string"
+          },
+          "percent": {
+            "title": "Percent",
+            "type": "integer"
+          },
+          "reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reason"
+          },
+          "updated_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Updated At"
+          }
+        },
+        "required": [
+          "key",
+          "description",
+          "default_percent",
+          "percent",
+          "reason",
+          "updated_at"
+        ],
+        "title": "RolloutOut",
+        "type": "object"
+      },
+      "RolloutSnapshot": {
+        "properties": {
+          "environment": {
+            "title": "Environment",
+            "type": "string"
+          },
+          "rollouts": {
+            "items": {
+              "$ref": "#/components/schemas/RolloutOut"
+            },
+            "title": "Rollouts",
+            "type": "array"
+          }
+        },
+        "required": [
+          "environment",
+          "rollouts"
+        ],
+        "title": "RolloutSnapshot",
+        "type": "object"
+      },
       "RuntimeConfig": {
         "properties": {
           "active_grades": {
@@ -17338,6 +17434,31 @@
         ]
       }
     },
+    "/v1/me/features": {
+      "get": {
+        "operationId": "my_features_v1_me_features_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": {
+                    "type": "boolean"
+                  },
+                  "title": "Response My Features V1 Me Features Get",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Which rolled-out features your account has",
+        "tags": [
+          "system"
+        ]
+      }
+    },
     "/v1/me/formulas": {
       "get": {
         "operationId": "list_formulas_v1_me_formulas_get",
@@ -19116,6 +19237,79 @@
         "summary": "Stop sending to a destination (audited)",
         "tags": [
           "notifications"
+        ]
+      }
+    },
+    "/v1/ops/rollouts": {
+      "get": {
+        "operationId": "ops_rollouts_v1_ops_rollouts_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RolloutSnapshot"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Rollout flags: the runtime snapshot (operators)",
+        "tags": [
+          "system"
+        ]
+      }
+    },
+    "/v1/ops/rollouts/{key}": {
+      "put": {
+        "operationId": "ops_set_rollout_v1_ops_rollouts__key__put",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "key",
+            "required": true,
+            "schema": {
+              "title": "Key",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RolloutIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RolloutSnapshot"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Set a feature's rollout percentage (operators, MFA, reason; audited). Flags only restrict",
+        "tags": [
+          "system"
         ]
       }
     },

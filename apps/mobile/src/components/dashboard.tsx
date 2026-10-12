@@ -17,6 +17,8 @@ const METER_LABEL: Record<Dashboard["meters"][number]["key"], string> = {
 
 export function DashboardSection({ token }: { token: string }) {
   const req = useRequest((signal) => api.dashboard(token, signal), [token]);
+  const feats = useRequest((signal) => api.features(token, signal), [token]);
+  const studyTools = feats.state.status === "success" && feats.state.data.study_tools === true; // ROLLOUT-01
   if (req.state.status === "loading") return <Loading label="Loading your dashboard" />;
   if (req.state.status === "error") return <ErrorState error={req.state.error} onRetry={req.retry} />;
   const d = req.state.data;
@@ -27,10 +29,12 @@ export function DashboardSection({ token }: { token: string }) {
         Your dashboard
       </T>
       {!d.profile && <Notice title="Choose your class and subjects">Set up your profile in the Account tab to see your meters.</Notice>}
-      <Card label="My study tools: notes, favourite topics and saved formulas" onPress={() => router.push("/study")}>
-        <T style={{ fontWeight: "600" }}>My study tools</T>
-        <T variant="small">Notes, favourite topics and saved formulas</T>
-      </Card>
+      {studyTools && (
+        <Card label="My study tools: notes, favourite topics and saved formulas" onPress={() => router.push("/study")}>
+          <T style={{ fontWeight: "600" }}>My study tools</T>
+          <T variant="small">Notes, favourite topics and saved formulas</T>
+        </Card>
+      )}
       {next ? (
         <Card label={`Continue learning: ${next.title}`} onPress={() => router.push({ pathname: "/chapter/[id]", params: { id: next.chapter_id } })}>
           <T variant="small">Continue learning</T>

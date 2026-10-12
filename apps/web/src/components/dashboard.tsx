@@ -13,7 +13,7 @@ const when = (s: string) =>
   new Date(s).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short", timeZone: "Asia/Karachi" });
 
 /** P11.S1.T2 (DASHBOARD-01): the signed-in home. Every number comes from the API; the three meters stay separate. */
-export function DashboardView({ d, email }: { d: Dashboard; email: string }) {
+export function DashboardView({ d, email, studyTools = true }: { d: Dashboard; email: string; studyTools?: boolean }) {
   const card = "space-y-2 rounded-xl border border-border bg-surface p-4";
   return (
     <div className="space-y-8">
@@ -30,9 +30,11 @@ export function DashboardView({ d, email }: { d: Dashboard; email: string }) {
           )}
         </p>
         </div>
-        <Link href="/study" className="rounded-lg border border-border bg-surface px-3 py-1.5 text-sm hover:border-accent">
-          My study tools
-        </Link>
+        {studyTools && (
+          <Link href="/study" className="rounded-lg border border-border bg-surface px-3 py-1.5 text-sm hover:border-accent">
+            My study tools
+          </Link>
+        )}
       </div>
       {!d.profile && (
         <Notice title="Choose your class and subjects">

@@ -86,7 +86,7 @@ def manifest() -> dict[str, Any]:
     from portal_api.modules.analytics.events import DICTIONARY
     from portal_api.modules.content import blocks
     from portal_api.modules.curriculum.importer import DEFAULT_CATALOGUE
-    from portal_api.modules.system.operations import FEATURES
+    from portal_api.modules.system.operations import FEATURES, ROLLOUTS
 
     commit = os.environ.get("GITHUB_SHA")
     if not commit:
@@ -106,6 +106,8 @@ def manifest() -> dict[str, Any]:
         "supported_renderer": blocks.SUPPORTED_RENDERER,
         "analytics_events": {name: spec.version for name, spec in DICTIONARY.items()},
         "feature_switches": {key: "on (runtime-switchable)" for key in FEATURES},
+        # ROLLOUT-01: default percentages per environment; the runtime snapshot is GET /v1/ops/rollouts.
+        "feature_rollouts": {key: dict(defaults) for key, (_, defaults) in ROLLOUTS.items()},
         "lockfiles": {"uv.lock": _sha(API_DIR / "uv.lock"), "pnpm-lock.yaml": _sha(REPO / "pnpm-lock.yaml")},
     }
 

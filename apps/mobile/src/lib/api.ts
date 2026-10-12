@@ -229,6 +229,8 @@ export const api = {
     }),
   progress: (token: string, signal?: AbortSignal) => request<ProgressReport>("/v1/me/progress", { token, signal }),
   dashboard: (token: string, signal?: AbortSignal) => request<Dashboard>("/v1/me/dashboard", { token, signal }),
+  /** ROLLOUT-01: which rolled-out features this account has (a flag only ever hides things). */
+  features: (token: string, signal?: AbortSignal) => request<Record<string, boolean>>("/v1/me/features", { token, signal }),
   // LESSON-DONE-01 and STUDY-TOOLS-01: completion, private notes, favourite topics and saved formulas.
   completedLessons: (token: string, chapterId: string, signal?: AbortSignal) =>
     request<string[]>(`/v1/me/chapters/${encodeURIComponent(chapterId)}/completed-lessons`, { token, signal }),

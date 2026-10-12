@@ -14,6 +14,14 @@ A deployment's monitoring scrapes this endpoint (or the same queries). Real pagi
 broken. Switching a feature off refuses only *new* work with 503 `FEATURE_DISABLED`. Active attempts, submissions,
 marking, results and entitlements are never behind a switch, so turning a feature off never interrupts an exam or
 loses work.
+
+**Rollout flags** (P16.S3.T1, ROLLOUT-01): a feature can be released to a share of learners per environment. Each flag
+has a default percentage per environment (`ROLLOUTS`), which an operator can override with a reason (audited). A
+learner is in or out by a stable hash of the flag and their account, so the answer never flickers between visits;
+staff always see the feature, so it can be checked before learners get it. A flag only ever restricts: it hides a
+feature and refuses its entry routes (404 `FEATURE_NOT_AVAILABLE`); it never bypasses a permission, scoring or
+publication rule, and data kept behind a flag is untouched. `GET /v1/ops/rollouts` is the runtime snapshot recorded
+with a release; the release manifest carries the defaults.
 """
 
 from __future__ import annotations
@@ -24,7 +32,7 @@ from datetime import datetime
 from typing import Annotated, Any
 
 from fastapi import Depends
-from sqlalchemy import Boolean, DateTime, ForeignKey, String, Text, func, select
+from sqlalchemy import Boolean, DateTime, ForeignKey, SmallInteger, String, Text, func, select
 from sqlalchemy.orm import Mapped, Session, mapped_column
 
 from portal_api.db import Base, get_engine, get_session
@@ -40,6 +48,108 @@ FEATURES: dict[str, str] = {
     "new_practice_tests": "Building new practice tests (tests already started continue)",
     "new_written_tests": "Building new written tests (scripts already started or sealed continue)",
 }
+
+
+# key -> (what it controls, default percent of learners per environment role)
+ROLLOUTS: dict[str, tuple[str, dict[str, int]]] = {
+    "study_tools": (
+        "Private notes, topic favourites and saved formulas (STUDY-TOOLS-01)",
+        {"development": 100, "staging": 100, "production": 100},
+    ),
+}
+
+
+class FeatureRollout(Base):
+    __tablename__ = "feature_rollout"
+    key: Mapped[str] = mapped_column(String(40), primary_key=True)
+    percent: Mapped[int] = mapped_column(SmallInteger)
+    reason: Mapped[str] = mapped_column(Text)
+    updated_by: Mapped[uuid.UUID] = mapped_column(ForeignKey("app_user.id", ondelete="RESTRICT"))
+    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+
+
+def _environment() -> str:
+    from portal_api.config import get_settings
+
+    return str(get_settings().role.value)
+
+
+def _default(defaults: dict[str, int], env: str) -> int:
+    """Deployed roles use their own default (0 if none); local and test runs follow development."""
+    if env in defaults:
+        return defaults[env]
+    return 0 if env in ("staging", "production") else defaults.get("development", 0)
+
+
+def rollout_percent(db: Session, key: str) -> int:
+    row = db.get(FeatureRollout, key)
+    return row.percent if row is not None else _default(ROLLOUTS[key][1], _environment())
+
+
+def _bucket(key: str, user_id: uuid.UUID) -> int:
+    import hashlib
+
+    return int(hashlib.sha256(f"{key}:{user_id}".encode()).hexdigest()[:8], 16) % 100
+
+
+def rollout_on(db: Session, key: str, principal: Any) -> bool:
+    if principal.roles:  # staff check a feature before learners get it
+        return True
+    return _bucket(key, principal.user.id) < rollout_percent(db, key)
+
+
+def features_for(db: Session, principal: Any) -> dict[str, bool]:
+    return {key: rollout_on(db, key, principal) for key in ROLLOUTS}
+
+
+def requires_rollout(key: str) -> Callable[..., None]:
+    """Route dependency: the feature is not available to this learner yet (it never grants anything)."""
+    from portal_api.errors import NotFound as _NotFound
+    from portal_api.modules.identity.deps import current_principal
+
+    assert key in ROLLOUTS
+
+    def check(db: Session = Depends(get_session), principal: Any = Depends(current_principal)) -> None:  # noqa: B008
+        if not rollout_on(db, key, principal):
+            raise _NotFound("This feature isn't available on your account yet.", code_reason="FEATURE_NOT_AVAILABLE")
+
+    return check
+
+
+def rollouts(db: Session) -> list[dict[str, Any]]:
+    rows = {r.key: r for r in db.scalars(select(FeatureRollout))}
+    env = _environment()
+    return [
+        {
+            "key": k,
+            "description": d,
+            "default_percent": _default(defaults, env),
+            "percent": rows[k].percent if k in rows else _default(defaults, env),
+            "reason": rows[k].reason if k in rows else None,
+            "updated_at": rows[k].updated_at if k in rows else None,
+        }
+        for k, (d, defaults) in ROLLOUTS.items()
+    ]
+
+
+def set_rollout(db: Session, actor: uuid.UUID, key: str, percent: int, reason: str) -> None:
+    if key not in ROLLOUTS:
+        raise NotFound("Unknown feature.")
+    row = db.get(FeatureRollout, key, with_for_update=True)
+    previous = row.percent if row else rollout_percent(db, key)
+    if row is None:
+        db.add(FeatureRollout(key=key, percent=percent, reason=reason.strip(), updated_by=actor))
+    else:
+        row.percent, row.reason, row.updated_by, row.updated_at = percent, reason.strip(), actor, func.now()
+    record(
+        db,
+        actor=actor,
+        action="ops.rollout_changed",
+        target_type="feature_rollout",
+        target_id=key,
+        details={"percent": percent, "previous": previous, "reason": reason.strip(), "environment": _environment()},
+    )
+    db.commit()
 
 
 class FeatureDisabled(AppError):
