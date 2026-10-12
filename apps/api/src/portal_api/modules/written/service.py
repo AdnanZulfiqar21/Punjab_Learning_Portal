@@ -341,6 +341,16 @@ def start(db: Session, who: Principal, form_id: uuid.UUID) -> WrittenAttempt:
     if inserted is None:
         db.rollback()  # a concurrent start won: drop this reservation and return the existing attempt
     else:
+        from portal_api.modules.analytics.events import emit
+
+        emit(  # WRITTEN-SIGNALS-01
+            db,
+            "written.started",
+            key=str(inserted[0]),
+            user_id=who.user.id,
+            attempt_id=str(inserted[0]),
+            question_count=len(form.items),
+        )
         db.commit()
     attempt = db.scalar(
         select(WrittenAttempt).where(WrittenAttempt.form_id == form_id, WrittenAttempt.user_id == who.user.id)
@@ -817,6 +827,18 @@ def seal(
         target_type="written_attempt",
         target_id=str(attempt.id),
         details={"revision": attempt.manifest_revision, "pages": len(used), "admitted_at": now.isoformat()},
+    )
+    from portal_api.modules.analytics.events import emit
+
+    emit(  # WRITTEN-SIGNALS-01
+        db,
+        "written.submitted",
+        key=str(attempt.id),
+        user_id=who.user.id,
+        attempt_id=str(attempt.id),
+        pages=len(used),
+        answered_parts=int(receipt.answered_slots),
+        unanswered_parts=int(receipt.unanswered_slots),
     )
     db.commit()
     db.refresh(receipt)
