@@ -107,6 +107,21 @@ def _reconcile(attempt_id: str) -> dict[str, Any]:
         return {"raw": sv.raw, "maximum": sv.maximum, "version": sv.version, "items": sv.items}
 
 
+def _items(form_id: str) -> dict[int, str]:
+    with get_sessionmaker()() as db:
+        rows = db.execute(text("select position, item_id from form_item where form_id = :f"), {"f": form_id}).all()
+        return {int(p): str(i) for p, i in rows}
+
+
+def _disjoint(make: Any, taken: set[str]) -> dict[str, Any]:
+    """Draw a new test until none of its questions is already used by another check (random draws can repeat)."""
+    for _ in range(10):
+        form = make()
+        if not set(_items(form["id"]).values()) & taken:
+            return dict(form)
+    raise AssertionError("couldn't draw a test without the questions already in use")
+
+
 def _drawn(form_id: str) -> list[tuple[uuid.UUID | None, uuid.UUID | None, str, bool, int]]:
     """For each frozen question: chapter, topic, availability, whether it's the published version, grade."""
     with get_sessionmaker()() as db:
@@ -179,27 +194,20 @@ def test_the_three_correction_treatments_and_a_zero_denominator_reconcile(
 ) -> None:
     learner, adjudicator, pub = _learner(client), _adjudicator(client), pool["publisher"]
     chapter = pool["chapter"]
-    one = _finish(client, learner, _form(client, learner, chapter_ids=[chapter], question_count=1)["id"])
-    two_form = _form(client, learner, chapter_ids=[chapter], question_count=2)
-    two = _finish(client, learner, two_form["id"])
+    # Three tests whose questions don't overlap, so each correction lands on exactly one of them.
+    one_form = _form(client, learner, chapter_ids=[chapter], question_count=1)
+    single = _items(one_form["id"])[1]
+    two_form = _disjoint(lambda: _form(client, learner, chapter_ids=[chapter], question_count=2), {single})
+    key_position, rekeyed = 2, _items(two_form["id"])[2]
     code = _publish_profile(
         client, db, [{"subject": "physics", "grades": [11], "questions": 2}], invalid_item_treatment="CREDIT_ALL"
     )
-    mock = _mock(client, learner, code).json()
-    mocked = _finish(client, learner, mock["id"])
-    with get_sessionmaker()() as s:
-        item_of = {
-            (str(f), p): str(i) for f, p, i in s.execute(text("select form_id, position, item_id from form_item")).all()
-        }
-        one_form = str(s.get(Attempt, uuid.UUID(one)).form_id)  # type: ignore[union-attr]
-    # Three different questions: the single question, one of the two-question test's, and one of the mock's.
-    single = item_of[(one_form, 1)]
-    key_position = next(p for p in (1, 2) if item_of[(two_form["id"], p)] != single)
-    rekeyed = item_of[(two_form["id"], key_position)]
-    mock_position = next(p for p in (1, 2) if item_of[(mock["id"], p)] not in (single, rekeyed))
-    voided = {single, item_of[(mock["id"], mock_position)]}
+    taken = {single, *_items(two_form["id"]).values()}
+    mock = _disjoint(lambda: _mock(client, learner, code).json(), taken)
+    mock_position = 1
+    voided = {single, _items(mock["id"])[mock_position]}
     touched = voided | {rekeyed}
-    assert len(touched) == 3
+    one, two, mocked = (_finish(client, learner, f["id"]) for f in (one_form, two_form, mock))
     try:
         for item in voided:
             assert (
