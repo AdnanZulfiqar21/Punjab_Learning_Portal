@@ -6,6 +6,7 @@ import type { TopicNode } from "@portal/contracts";
 import { Choices } from "@/components/form";
 import { LessonBlocks } from "@/components/lesson-blocks";
 import { CompletionToggle, FavouriteStar, LessonNote, SaveFormula } from "@/components/lesson-study";
+import { OfflinePack } from "@/components/offline-pack";
 import { Badge, Card, ErrorState, Loading, Notice, T } from "@/components/ui";
 import { Space } from "@/constants/theme";
 import { useRequest } from "@/hooks/use-request";
@@ -18,7 +19,21 @@ export default function ChapterScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const { state, retry } = useRequest((signal) => api.chapter(id, signal), [id]);
   if (state.status === "loading") return <Loading label="Loading chapter" />;
-  if (state.status === "error") return <ErrorState error={state.error} onRetry={retry} />;
+  if (state.status === "error") {
+    // P13.S3: offline, a saved copy of this chapter can still be opened.
+    return (
+      <View style={{ flex: 1, backgroundColor: c.background }}>
+        <ErrorState error={state.error} onRetry={retry} />
+        {state.error.kind === "offline" && (
+          <View style={{ padding: Space.lg }}>
+            <Pressable accessibilityRole="button" onPress={() => router.push({ pathname: "/offline/[id]", params: { id } })}>
+              <T style={{ color: c.accent, fontWeight: "600", textAlign: "center" }}>Open the saved copy, if you saved one</T>
+            </Pressable>
+          </View>
+        )}
+      </View>
+    );
+  }
   const ch = state.data;
   const bc = ch.breadcrumb;
   return (
@@ -44,6 +59,7 @@ export default function ChapterScreen() {
           </Notice>
         )}
         <Lessons chapterId={ch.id} />
+        <Offline chapterId={ch.id} />
         <View style={{ gap: Space.sm }}>
           <T variant="heading" accessibilityRole="header">
             Topics
@@ -75,6 +91,12 @@ export default function ChapterScreen() {
       </ScrollView>
     </>
   );
+}
+
+function Offline({ chapterId }: { chapterId: string }) {
+  const auth = useAuth();
+  if (auth.state.status !== "signed_in") return null; // packs belong to an account
+  return <OfflinePack token={auth.state.token} owner={auth.state.me.id} chapterId={chapterId} />;
 }
 
 function Lessons({ chapterId }: { chapterId: string }) {
