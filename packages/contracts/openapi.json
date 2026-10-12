@@ -4280,6 +4280,38 @@
         "title": "FeatureOut",
         "type": "object"
       },
+      "FlaggedOut": {
+        "properties": {
+          "availability": {
+            "title": "Availability",
+            "type": "string"
+          },
+          "item_id": {
+            "format": "uuid",
+            "title": "Item Id",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "versions": {
+            "items": {
+              "$ref": "#/components/schemas/ItemStatsOut"
+            },
+            "title": "Versions",
+            "type": "array"
+          }
+        },
+        "required": [
+          "item_id",
+          "title",
+          "availability",
+          "versions"
+        ],
+        "title": "FlaggedOut",
+        "type": "object"
+      },
       "FlagsIn": {
         "properties": {
           "positions": {
@@ -5896,6 +5928,89 @@
           "options"
         ],
         "title": "ItemSnapshot",
+        "type": "object"
+      },
+      "ItemStatsOut": {
+        "properties": {
+          "answered": {
+            "title": "Answered",
+            "type": "integer"
+          },
+          "blank": {
+            "title": "Blank",
+            "type": "integer"
+          },
+          "difficulty": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Share of answered responses that were correct",
+            "title": "Difficulty"
+          },
+          "discrimination": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Point-biserial with the rest of the attempt; null if undefined",
+            "title": "Discrimination"
+          },
+          "discrimination_sample": {
+            "title": "Discrimination Sample",
+            "type": "integer"
+          },
+          "enough": {
+            "description": "At least 30 answered responses: below that nothing is judged",
+            "title": "Enough",
+            "type": "boolean"
+          },
+          "flags": {
+            "description": "Prompts for a reviewer's look, never a verdict",
+            "items": {
+              "type": "string"
+            },
+            "title": "Flags",
+            "type": "array"
+          },
+          "options": {
+            "items": {
+              "$ref": "#/components/schemas/OptionStat"
+            },
+            "title": "Options",
+            "type": "array"
+          },
+          "responses": {
+            "description": "Finalised attempts that included this version (excluding voided scoring)",
+            "title": "Responses",
+            "type": "integer"
+          },
+          "version": {
+            "title": "Version",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "version",
+          "responses",
+          "answered",
+          "blank",
+          "difficulty",
+          "options",
+          "discrimination",
+          "discrimination_sample",
+          "enough",
+          "flags"
+        ],
+        "title": "ItemStatsOut",
         "type": "object"
       },
       "ItemSummary": {
@@ -8088,6 +8203,41 @@
           "blocks"
         ],
         "title": "OptionSnapshot",
+        "type": "object"
+      },
+      "OptionStat": {
+        "properties": {
+          "chosen": {
+            "title": "Chosen",
+            "type": "integer"
+          },
+          "key": {
+            "title": "Key",
+            "type": "boolean"
+          },
+          "option_id": {
+            "title": "Option Id",
+            "type": "string"
+          },
+          "rate": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rate"
+          }
+        },
+        "required": [
+          "option_id",
+          "key",
+          "chosen",
+          "rate"
+        ],
+        "title": "OptionStat",
         "type": "object"
       },
       "OriginalOut": {
@@ -24338,6 +24488,53 @@
         ]
       }
     },
+    "/v1/studio/items/{item_id}/statistics": {
+      "get": {
+        "operationId": "item_statistics_v1_studio_items__item_id__statistics_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "item_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Item Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/ItemStatsOut"
+                  },
+                  "title": "Response Item Statistics V1 Studio Items  Item Id  Statistics Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Observed difficulty, option choice and discrimination per answered version (P08.S4.T3)",
+        "tags": [
+          "studio"
+        ]
+      }
+    },
     "/v1/studio/items/{item_id}/submit": {
       "post": {
         "operationId": "submit_v1_studio_items__item_id__submit_post",
@@ -25427,6 +25624,64 @@
           }
         },
         "summary": "Record that a source was checked (reviewers)",
+        "tags": [
+          "studio"
+        ]
+      }
+    },
+    "/v1/studio/statistics/flagged": {
+      "get": {
+        "operationId": "flagged_questions_v1_studio_statistics_flagged_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "grade",
+            "required": true,
+            "schema": {
+              "maximum": 12,
+              "minimum": 11,
+              "title": "Grade",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "subject",
+            "required": true,
+            "schema": {
+              "maxLength": 40,
+              "title": "Subject",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/FlaggedOut"
+                  },
+                  "title": "Response Flagged Questions V1 Studio Statistics Flagged Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Questions in a class and subject that statistics suggest a reviewer should look at",
         "tags": [
           "studio"
         ]
