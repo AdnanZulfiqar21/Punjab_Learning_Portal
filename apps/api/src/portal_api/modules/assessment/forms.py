@@ -193,7 +193,8 @@ def create_form(
 
     from portal_api.modules.access import service as access
 
-    access.require_access(db, who.user.id, purpose="Practice tests")
+    subjects = [s for s, _ in mix or []] if scope_mode == "multi_subject" and mix else [subject]
+    access.require_access(db, who.user.id, purpose="Practice tests", need=access.Need.subjects(grade, *subjects))
     if scope_mode == "multi_subject":
         seed, chosen, scope = _multi_subject(db, grade, mix or [], question_count, chapter_ids, topic_ids, half)
         subject = mix[0][0] if mix else subject

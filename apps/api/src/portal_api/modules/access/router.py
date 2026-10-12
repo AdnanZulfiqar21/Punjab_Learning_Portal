@@ -31,6 +31,8 @@ class EntitlementOut(BaseModel):
     ends_at: datetime
     status: Literal["active", "revoked", "refunded"]
     written_units: int
+    product_code: str = Field(description="The product granted ('platform' for whole-platform access)")
+    scope: dict[str, Any] = Field(description="What it covers, as granted: {} = everything; else grades/subjects/exams")
 
 
 class TrialOut(BaseModel):
@@ -68,6 +70,11 @@ class GrantIn(BaseModel):
     days: int = Field(ge=1, le=366)
     written_units: int = Field(ge=0, le=500)
     reason: str = Field(min_length=10, max_length=1000)
+    product_code: str | None = Field(
+        default=None,
+        max_length=40,
+        description="An active product to grant (its scope is copied); omit for the platform",
+    )
 
 
 class RevokeIn(BaseModel):
@@ -82,6 +89,8 @@ def _ent(e: Entitlement) -> EntitlementOut:
         ends_at=e.ends_at,
         status=e.status,  # type: ignore[arg-type]
         written_units=e.written_units,
+        product_code=e.product_code,
+        scope=e.scope or {},
     )
 
 
@@ -147,6 +156,7 @@ def grant(db: DB, who: Granter, body: GrantIn) -> EntitlementOut:
             days=body.days,
             written_units=body.written_units,
             reason=body.reason,
+            product_code=body.product_code,
         )
     )
 

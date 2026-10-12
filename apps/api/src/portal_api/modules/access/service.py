@@ -15,6 +15,7 @@ idempotent ledger event; nothing is rewritten.
 from __future__ import annotations
 
 import uuid
+from dataclasses import dataclass
 from datetime import datetime, timedelta
 from typing import Any
 
@@ -82,21 +83,68 @@ def device_gate(db: Session, user_id: uuid.UUID) -> str | None:
     return trial_devices.device_allows(db, user_id, client=client, install_token=install)
 
 
-def require_access(db: Session, user_id: uuid.UUID, *, purpose: str) -> None:
-    """New protected starts need a currently valid entitlement, and trial use on a native device needs that device's
-    authorization. Already-started attempts are never checked again."""
+@dataclass(frozen=True)
+class Need:
+    """What a start or a read needs (P14.S1.T2, ENTITLEMENT-SCOPE-01): class/subject pairs, or an exam pattern."""
+
+    pairs: frozenset[tuple[int, str]] = frozenset()
+    exam: str | None = None
+
+    @staticmethod
+    def subjects(grade: int, *subjects: str) -> Need:
+        return Need(pairs=frozenset((int(grade), s) for s in subjects))
+
+
+def covers(ent: Entitlement, need: Need | None) -> bool:
+    """An empty scope (the platform, the trial) covers everything. A package covers its class/subject pairs, and its
+    exam patterns for mocks; an exam pass is not a subject plan, and a subject plan is not an exam pass."""
+    scope = ent.scope or {}
+    if need is None or not scope:
+        return True
+    if need.exam is not None:
+        return need.exam in set(scope.get("exams") or []) and not need.pairs
+    grades, subjects = set(scope.get("grades") or []), set(scope.get("subjects") or [])
+    return bool(need.pairs) and all(g in grades and s in subjects for g, s in need.pairs)
+
+
+def _label(db: Session, need: Need) -> str:
+    if need.exam is not None:
+        return f"the {need.exam} exam pattern"
+    from portal_api.modules.curriculum.models import Subject
+
+    names = {s.code: s.name for s in db.scalars(select(Subject).where(Subject.code.in_({s for _, s in need.pairs})))}
+    return " and ".join(f"Class {'XI' if g == 11 else 'XII'} {names.get(s, s.title())}" for g, s in sorted(need.pairs))
+
+
+def entitled_for(db: Session, user_id: uuid.UUID, need: Need | None) -> bool:
+    """Reads (premium lessons, their files): a current entitlement covering `need`, and the trial device rule."""
+    ents = active_entitlements(db, user_id, db_now(db))
+    return any(covers(e, need) for e in ents) and device_gate(db, user_id) is None
+
+
+def require_access(db: Session, user_id: uuid.UUID, *, purpose: str, need: Need | None = None) -> None:
+    """New protected starts need a currently valid entitlement covering what the start needs, and trial use on a
+    native device needs that device's authorization. Already-started attempts are never checked again (an attempt
+    authorised before a plan ends runs to its own deadline)."""
     blocked = device_gate(db, user_id)
     if blocked is not None:
         raise DeviceAuthorizationRequired(
             "This device isn't set up for your free trial yet. Open the trial screen to add it, or contact support.",
             device_state=blocked,
         )
-    if not active_entitlements(db, user_id, db_now(db)):
+    ents = active_entitlements(db, user_id, db_now(db))
+    if not ents:
         trial = db.scalar(select(TrialGrant).where(TrialGrant.user_id == user_id, TrialGrant.program == TRIAL_PROGRAM))
         raise AccessRequired(
             f"{purpose} needs an active plan."
             + (" Your free trial has ended." if trial else " You can start your free 30-day trial."),
             trial_available=trial is None and not _has_paid_history(db, user_id),
+        )
+    if not any(covers(e, need) for e in ents):
+        raise AccessRequired(
+            f"Your plan doesn't include {_label(db, need) if need else 'this'}. {purpose} here need a plan that does.",
+            code_reason="NOT_IN_PLAN",
+            trial_available=False,
         )
 
 
@@ -199,12 +247,31 @@ def create_trial_grant(db: Session, user_id: uuid.UUID, *, client: str) -> Trial
 
 
 def grant_entitlement(
-    db: Session, actor: uuid.UUID, user_id: uuid.UUID, *, source: str, days: int, written_units: int, reason: str
+    db: Session,
+    actor: uuid.UUID,
+    user_id: uuid.UUID,
+    *,
+    source: str,
+    days: int,
+    written_units: int,
+    reason: str,
+    product_code: str | None = None,
 ) -> Entitlement:
     now = db_now(db)
+    scope: dict[str, Any] = {}
+    if product_code is not None:
+        # P14.S1.T2: a grant of a product snapshots the product's scope, so later product changes never alter it.
+        from portal_api.modules.access.products import Product
+
+        product = db.scalar(select(Product).where(Product.code == product_code))
+        if product is None or product.status != "active":
+            raise Unprocessable("Only a product that is on sale can be granted.", code_reason="PRODUCT_NOT_ON_SALE")
+        scope = dict(product.scope)
     ent = Entitlement(
         user_id=user_id,
         source=source,
+        product_code=product_code or "platform",
+        scope=scope,
         starts_at=now,
         ends_at=now + timedelta(days=days),
         written_units=written_units,
@@ -225,6 +292,8 @@ def grant_entitlement(
             "days": days,
             "written_units": written_units,
             "reason": reason.strip(),
+            "product": ent.product_code,
+            "scope": scope,
         },
     )
     db.commit()
@@ -346,14 +415,20 @@ def reserve(
     open_permits: int,
     now: datetime,
     funding: list[Entitlement],
+    need: Need | None = None,
 ) -> None:
-    """Inside the written start transaction, with every admission lock already held and `now` read after them."""
+    """Inside the written start transaction, with every admission lock already held and `now` read after them. Only
+    entitlements covering `need` fund the test: a package's marking units pay for that package's work only."""
     if open_permits >= MAX_OPEN_WRITTEN_PERMITS:
         raise AllowanceExhausted(
             f"Finish or submit your open written tests first (at most {MAX_OPEN_WRITTEN_PERMITS})."
         )
-    ents = sorted((e for e in funding if e.starts_at <= now < e.ends_at), key=lambda e: e.ends_at)
+    ents = sorted((e for e in funding if e.starts_at <= now < e.ends_at and covers(e, need)), key=lambda e: e.ends_at)
     if not ents:
+        if active_entitlements(db, user_id, now):  # a current plan, but no marking units that cover this work
+            raise AllowanceExhausted(
+                "Your plan has no written-marking units for this class and subject.", needed=units, available=0
+            )
         raise AccessRequired("Written practice needs an active plan. Your plan ended before this test could start.")
     for ent in ents:  # use the bucket that expires first
         reserved, accepted, consumed, remedy = _holds(_events(db, [ent.id]))

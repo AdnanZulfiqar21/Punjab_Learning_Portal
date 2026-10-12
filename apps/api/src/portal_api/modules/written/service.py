@@ -190,7 +190,7 @@ def create_form(
         if existing.request_hash != rhash:
             raise Conflict("This request key was already used for a different test.")
         return existing
-    access.require_access(db, who.user.id, purpose="Written practice")
+    access.require_access(db, who.user.id, purpose="Written practice", need=access.Need.subjects(grade, subject))
     valid = {c.id for c in _chapters(db, grade, subject)}
     if not chapter_ids or not set(chapter_ids) <= valid:
         raise Unprocessable("Choose chapters from this class and subject's book.")
@@ -307,7 +307,14 @@ def start(db: Session, who: Principal, form_id: uuid.UUID) -> WrittenAttempt:
     # §20.13.4: reserve the maximum weighted units for this form, atomically with the attempt.
     try:
         access.reserve(
-            db, who.user.id, attempt_id, _form_units(db, form), open_permits=open_permits, now=now, funding=funding
+            db,
+            who.user.id,
+            attempt_id,
+            _form_units(db, form),
+            open_permits=open_permits,
+            now=now,
+            funding=funding,
+            need=access.Need.subjects(form.grade_number, form.subject_code),  # a package's units fund its own work
         )
     except (access.AllowanceExhausted, access.AccessRequired):
         db.commit()  # keep any expiries made above; nothing was reserved

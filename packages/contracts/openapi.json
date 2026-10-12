@@ -3533,6 +3533,17 @@
             "title": "Id",
             "type": "string"
           },
+          "product_code": {
+            "description": "The product granted ('platform' for whole-platform access)",
+            "title": "Product Code",
+            "type": "string"
+          },
+          "scope": {
+            "additionalProperties": true,
+            "description": "What it covers, as granted: {} = everything; else grades/subjects/exams",
+            "title": "Scope",
+            "type": "object"
+          },
           "source": {
             "enum": [
               "trial",
@@ -3569,7 +3580,9 @@
           "starts_at",
           "ends_at",
           "status",
-          "written_units"
+          "written_units",
+          "product_code",
+          "scope"
         ],
         "title": "EntitlementOut",
         "type": "object"
@@ -4507,6 +4520,19 @@
             "minLength": 3,
             "title": "Email",
             "type": "string"
+          },
+          "product_code": {
+            "anyOf": [
+              {
+                "maxLength": 40,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "An active product to grant (its scope is copied); omit for the platform",
+            "title": "Product Code"
           },
           "reason": {
             "maxLength": 1000,

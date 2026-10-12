@@ -624,7 +624,7 @@ def mock_readiness(db: DB, who: CurrentPrincipal, code: str) -> MockReadinessOut
     from portal_api.modules.assessment import mocks
 
     try:
-        access.require_access(db, who.user.id, purpose="Mock tests")
+        access.require_access(db, who.user.id, purpose="Mock tests", need=access.Need(exam=code))
         entitled = True
     except (access.AccessRequired, access.DeviceAuthorizationRequired):
         entitled = False
