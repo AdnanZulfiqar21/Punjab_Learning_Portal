@@ -277,6 +277,15 @@ export function MarkingWorkspace({ initial }: { initial: MarkingCase }) {
                   <a href={`/studio/marking/${c.id}/pages/${p.id}/detail`} target="_blank" rel="noreferrer" className="text-accent underline">
                     Open in full detail
                   </a>
+                  {(p.transform?.rotate || p.transform?.crop || p.transform?.enhance) && (
+                    <>
+                      {" · "}
+                      {/* TRANSFORMS-01: the learner turned, trimmed or clarified this page; the original is always kept. */}
+                      <a href={`/studio/marking/${c.id}/pages/${p.id}/detail?original=1`} target="_blank" rel="noreferrer" className="text-accent underline">
+                        View the original photo
+                      </a>
+                    </>
+                  )}
                 </span>
                 {/* SCAN-QUALITY-01: what the learner was warned about; whether the page can be read is the reviewer's call. */}
                 {(p.quality ?? []).length > 0 && (

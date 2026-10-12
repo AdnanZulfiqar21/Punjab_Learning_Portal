@@ -4126,6 +4126,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/written-attempts/{attempt_id}/pages/{page_id}/transform": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** Turn, trim or clarify a page before submitting (the original is kept; W03.S1.T3) */
+        put: operations["transform_v1_written_attempts__attempt_id__pages__page_id__transform_put"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/written-attempts/{attempt_id}/questions/{position}/confirm-unanswered": {
         parameters: {
             query?: never;
@@ -7916,6 +7933,8 @@ export interface components {
              * @description Size of the uploaded file in bytes
              */
             size: number;
+            /** @description Turn, trim, readability */
+            transform?: components["schemas"]["PageTransform"];
             /**
              * Uploaded At
              * Format: date-time
@@ -7949,6 +7968,31 @@ export interface components {
              * @description For cut_off: top, bottom, left or right
              */
             sides?: string[];
+        };
+        /**
+         * PageTransform
+         * @description TRANSFORMS-01: how a page is shown, derived from its untouched original. Regions on the page (feedback places,
+         *     detail views) are fractions of the page as shown; the server maps them back to the original.
+         */
+        PageTransform: {
+            /**
+             * Crop
+             * @description x, y, w, h of the upright original kept (null: all)
+             */
+            crop?: number[] | null;
+            /**
+             * Enhance
+             * @description A higher-contrast preview that keeps faint marks
+             * @default false
+             */
+            enhance: boolean;
+            /**
+             * Rotate
+             * @description Clockwise quarter turns
+             * @default 0
+             * @enum {integer}
+             */
+            rotate: 0 | 90 | 180 | 270;
         };
         /** PaidConversion */
         PaidConversion: {
@@ -10161,6 +10205,36 @@ export interface components {
             scene_id: string;
             /** Text */
             text: string;
+        };
+        /**
+         * TransformIn
+         * @description A page's new transform. `trim`, when given, is the part of the page *as currently shown* to keep (x, y, w, h);
+         *     the server maps it onto the original and it replaces `crop`.
+         */
+        TransformIn: {
+            /**
+             * Crop
+             * @description x, y, w, h of the upright original kept (null: all)
+             */
+            crop?: number[] | null;
+            /**
+             * Enhance
+             * @description A higher-contrast preview that keeps faint marks
+             * @default false
+             */
+            enhance: boolean;
+            /**
+             * Rotate
+             * @description Clockwise quarter turns
+             * @default 0
+             * @enum {integer}
+             */
+            rotate: 0 | 90 | 180 | 270;
+            /**
+             * Trim
+             * @description Part of the page as shown to keep (x, y, w, h)
+             */
+            trim?: number[] | null;
         };
         /** TransitionIn */
         TransitionIn: {
@@ -18538,6 +18612,8 @@ export interface operations {
             query?: {
                 /** @description x,y,w,h as page fractions */
                 region?: string | null;
+                /** @description The untouched original, without the learner's turn or trim */
+                original?: boolean;
             };
             header?: never;
             path: {
@@ -19020,6 +19096,42 @@ export interface operations {
                 };
                 content: {
                     "application/json": unknown;
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    transform_v1_written_attempts__attempt_id__pages__page_id__transform_put: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                attempt_id: string;
+                page_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["TransformIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PageOut"];
                 };
             };
             /** @description Validation Error */

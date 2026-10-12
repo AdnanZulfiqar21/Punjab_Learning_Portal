@@ -5,7 +5,7 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import type { EvidenceLink, NextSteps as Steps, WrittenAttempt, WrittenPage, WrittenResult } from "@portal/contracts";
-import { saveMapping, sealScript } from "@/app/actions/written";
+import { saveMapping, sealScript, transformPage } from "@/app/actions/written";
 import { LessonBlocks } from "@/components/lesson-blocks";
 import { PendingAction } from "./pending-action";
 import { PractiseAgain } from "./practise-again";
@@ -327,7 +327,11 @@ export function WrittenRunner({ attempt, result = null }: { attempt: WrittenAtte
           {pages.map((p, i) => (
             <li key={p.id} className="space-y-1 rounded-lg border border-border bg-surface p-2 text-sm">
               {/* eslint-disable-next-line @next/next/no-img-element -- private, uncached preview served by our own route */}
-              <img src={`/practice/written/${attempt.id}/pages/${p.id}`} alt={`Page ${i + 1}`} className="h-40 w-full rounded object-contain" />
+              <img
+                src={`/practice/written/${attempt.id}/pages/${p.id}?v=${encodeURIComponent(JSON.stringify(p.transform ?? {}))}`}
+                alt={`Page ${i + 1}`}
+                className="h-40 w-full rounded object-contain"
+              />
               <p>
                 Page {i + 1} · {attempt.status === "sealed" ? "submitted" : "uploaded, not yet submitted"}
               </p>
@@ -336,6 +340,7 @@ export function WrittenRunner({ attempt, result = null }: { attempt: WrittenAtte
                   PDF page {p.page_index} of {p.file_pages}
                 </p>
               )}
+              {active && <PageAdjust attemptId={attempt.id} page={p} number={i + 1} onChange={(n) => setPages((all) => all.map((x) => (x.id === n.id ? n : x)))} />}
               {(p.quality ?? []).length > 0 && (
                 <ul className="space-y-1 text-warn" aria-label={`Photo checks for page ${i + 1}`}>
                   {(p.quality ?? []).map((q) => (
@@ -492,5 +497,86 @@ function NextSteps({ steps }: { steps: Steps }) {
         </p>
       )}
     </section>
+  );
+}
+
+// W03.S1.T3 (TRANSFORMS-01): turn a page, make its contrast clearer or trim its edges before submitting. Each is
+// applied to a fresh copy of the original, which is always kept; teachers can see the original too.
+function PageAdjust({ attemptId, page, number, onChange }: { attemptId: string; page: WrittenPage; number: number; onChange: (p: WrittenPage) => void }) {
+  const t = page.transform ?? { rotate: 0, crop: null, enhance: false };
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [trim, setTrim] = useState({ top: 0, bottom: 0, left: 0, right: 0 });
+  const apply = async (body: Parameters<typeof transformPage>[2]) => {
+    setBusy(true);
+    setError(null);
+    const r = await transformPage(attemptId, page.id, body);
+    setBusy(false);
+    if (r.ok) onChange(r.page);
+    else setError(r.error);
+  };
+  const keep = { rotate: t.rotate, crop: t.crop ?? null, enhance: t.enhance };
+  const small = "rounded border border-border bg-surface px-2 py-1 hover:border-accent disabled:opacity-60";
+  return (
+    <div role="group" aria-label={`Adjust page ${number}`} className="space-y-1">
+      <div className="flex flex-wrap items-center gap-1">
+        <button type="button" disabled={busy} className={small} onClick={() => apply({ ...keep, rotate: ((t.rotate + 270) % 360) as 0 | 90 | 180 | 270 })}>
+          Turn left
+        </button>
+        <button type="button" disabled={busy} className={small} onClick={() => apply({ ...keep, rotate: ((t.rotate + 90) % 360) as 0 | 90 | 180 | 270 })}>
+          Turn right
+        </button>
+        <label className="flex items-center gap-1">
+          <input type="checkbox" disabled={busy} checked={t.enhance} onChange={(e) => apply({ ...keep, enhance: e.target.checked })} />
+          Clearer contrast
+        </label>
+      </div>
+      <details>
+        <summary className="cursor-pointer">Trim edges</summary>
+        <div className="mt-1 grid grid-cols-2 gap-1">
+          {(["top", "bottom", "left", "right"] as const).map((side) => (
+            <label key={side} className="flex items-center gap-1">
+              <span className="w-14 capitalize">{side}</span>
+              <input
+                type="number"
+                min={0}
+                max={30}
+                step={1}
+                value={trim[side]}
+                onChange={(e) => setTrim((v) => ({ ...v, [side]: Math.max(0, Math.min(30, Number(e.target.value) || 0)) }))}
+                aria-label={`Trim from the ${side} (% of the page as shown)`}
+                className="w-16 rounded border border-border bg-surface px-1 py-0.5"
+              />
+              %
+            </label>
+          ))}
+        </div>
+        <div className="mt-1 flex flex-wrap gap-1">
+          <button
+            type="button"
+            disabled={busy || trim.top + trim.bottom + trim.left + trim.right === 0}
+            className={small}
+            onClick={() =>
+              apply({
+                ...keep,
+                trim: [trim.left / 100, trim.top / 100, 1 - (trim.left + trim.right) / 100, 1 - (trim.top + trim.bottom) / 100],
+              })
+            }
+          >
+            Trim
+          </button>
+          {t.crop && (
+            <button type="button" disabled={busy} className={small} onClick={() => apply({ ...keep, crop: null })}>
+              Undo trim
+            </button>
+          )}
+        </div>
+      </details>
+      {error && (
+        <p role="alert" className="text-danger">
+          {error}
+        </p>
+      )}
+    </div>
   );
 }

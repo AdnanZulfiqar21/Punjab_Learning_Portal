@@ -3,7 +3,7 @@
 // Written-practice mutations through the BFF. The API enforces timing (U), revision concurrency, completeness and
 // the one-receipt seal; these actions forward the learner's session and translate outcomes for the UI.
 import { redirect } from "next/navigation";
-import type { LinkedForm, Problem, WrittenAttempt, WrittenForm, WrittenSeal } from "@portal/contracts";
+import type { LinkedForm, Problem, TransformIn, WrittenAttempt, WrittenForm, WrittenPage, WrittenSeal } from "@portal/contracts";
 import { api, sessionToken } from "@/lib/session";
 
 async function token(next: string): Promise<string> {
@@ -120,4 +120,20 @@ export async function sealScript(attemptId: string, idempotencyKey: string, expe
   } catch {
     return { kind: "error", message: "Can't reach the service. Nothing was lost; submit again when you're back online." };
   }
+}
+
+/** W03.S1.T3 (TRANSFORMS-01): turn, trim or clarify a page before submitting. The original is always kept. */
+export async function transformPage(
+  attemptId: string,
+  pageId: string,
+  body: TransformIn,
+): Promise<{ ok: true; page: WrittenPage } | { ok: false; error: string }> {
+  const t = await token(`/practice/written/${attemptId}`);
+  const res = await api<WrittenPage>(`/v1/written-attempts/${encodeURIComponent(attemptId)}/pages/${encodeURIComponent(pageId)}/transform`, {
+    method: "PUT",
+    token: t,
+    body: JSON.stringify(body),
+  });
+  if (res.ok) return { ok: true, page: res.data };
+  return { ok: false, error: (res.problem as Problem | null)?.detail ?? `That change didn't work (${res.status}).` };
 }
