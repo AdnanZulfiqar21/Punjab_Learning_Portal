@@ -5668,6 +5668,8 @@ export interface components {
             description: string;
             /** Earned Units */
             earned_units: number;
+            /** Evidence */
+            evidence?: components["schemas"]["EvidenceLinkOut"][];
             /** Id */
             id: string;
             /** Max Units */
@@ -5727,7 +5729,7 @@ export interface components {
         DecisionIn: {
             /**
              * Awards
-             * @description {"1": {"a1": {"units": 100, "reason": "…"}}}
+             * @description {"1": {"a1": {"units": 100, "reason": "…", "evidence": [{"page_id": "…", "region": [x, y, w, h]}]}}}; evidence is optional: pages this question was mapped to, each with an optional region of its preview.
              */
             awards: {
                 [key: string]: {
@@ -5888,6 +5890,37 @@ export interface components {
         EvidenceIn: {
             /** Evidence */
             evidence: string;
+        };
+        /**
+         * EvidenceLinkOut
+         * @description W07.S1.T2 (FEEDBACK-EVIDENCE-01): where on your script a criterion's feedback points.
+         */
+        EvidenceLinkOut: {
+            /**
+             * Available
+             * @description False once the scan is no longer available: nothing is highlighted then
+             */
+            available: boolean;
+            /**
+             * Page Id
+             * Format: uuid
+             */
+            page_id: string;
+            /**
+             * Page Number
+             * @description The page's number as you uploaded it
+             */
+            page_number: number;
+            /**
+             * Region
+             * @description x, y, width, height as fractions of the upright page; null = whole
+             */
+            region: number[] | null;
+            /**
+             * Where
+             * @description Plain words for the place, e.g. "page 2, top left"
+             */
+            where: string;
         };
         /** EvidenceReport */
         EvidenceReport: {

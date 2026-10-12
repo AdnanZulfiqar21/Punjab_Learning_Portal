@@ -3336,6 +3336,13 @@
             "title": "Earned Units",
             "type": "integer"
           },
+          "evidence": {
+            "items": {
+              "$ref": "#/components/schemas/EvidenceLinkOut"
+            },
+            "title": "Evidence",
+            "type": "array"
+          },
           "id": {
             "title": "Id",
             "type": "string"
@@ -3521,7 +3528,7 @@
               },
               "type": "object"
             },
-            "description": "{\"1\": {\"a1\": {\"units\": 100, \"reason\": \"\u2026\"}}}",
+            "description": "{\"1\": {\"a1\": {\"units\": 100, \"reason\": \"\u2026\", \"evidence\": [{\"page_id\": \"\u2026\", \"region\": [x, y, w, h]}]}}}; evidence is optional: pages this question was mapped to, each with an optional region of its preview.",
             "title": "Awards",
             "type": "object"
           },
@@ -3836,6 +3843,55 @@
           "evidence"
         ],
         "title": "EvidenceIn",
+        "type": "object"
+      },
+      "EvidenceLinkOut": {
+        "description": "W07.S1.T2 (FEEDBACK-EVIDENCE-01): where on your script a criterion's feedback points.",
+        "properties": {
+          "available": {
+            "description": "False once the scan is no longer available: nothing is highlighted then",
+            "title": "Available",
+            "type": "boolean"
+          },
+          "page_id": {
+            "format": "uuid",
+            "title": "Page Id",
+            "type": "string"
+          },
+          "page_number": {
+            "description": "The page's number as you uploaded it",
+            "title": "Page Number",
+            "type": "integer"
+          },
+          "region": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "number"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "x, y, width, height as fractions of the upright page; null = whole",
+            "title": "Region"
+          },
+          "where": {
+            "description": "Plain words for the place, e.g. \"page 2, top left\"",
+            "title": "Where",
+            "type": "string"
+          }
+        },
+        "required": [
+          "page_id",
+          "page_number",
+          "region",
+          "where",
+          "available"
+        ],
+        "title": "EvidenceLinkOut",
         "type": "object"
       },
       "EvidenceReport": {
