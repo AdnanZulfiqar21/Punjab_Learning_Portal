@@ -64,6 +64,28 @@ class TooMany(AppError):
     code = "RATE_LIMITED"
 
 
+class Unavailable(AppError):
+    """A provider or store this request needs is down (P19.S3.T2, DEGRADATION-01). Nothing was recorded as done; the
+    response says when to retry (`Retry-After`). Never used to hide a refusal: a provider's "no" is not an outage."""
+
+    status = 503
+    code = "SERVICE_UNAVAILABLE"
+    retry_after = 30
+
+
+class StorageUnavailable(Unavailable):
+    """The private file store could not take or give back a file. Nothing half-written is kept."""
+
+    code = "STORAGE_UNAVAILABLE"
+
+    def __init__(
+        self,
+        detail: str = "We couldn't store this file right now. Nothing was saved; please try again shortly.",
+        **extra: object,
+    ) -> None:
+        super().__init__(detail, **{"code_reason": "STORAGE_UNAVAILABLE", **extra})
+
+
 class Unprocessable(AppError):
     """The request is well-formed but breaks a domain rule (e.g. content fails publication validation)."""
 
@@ -92,6 +114,8 @@ def install(app: FastAPI) -> None:
         response = _problem(request, exc.status, exc.code, exc.detail, exc.extra)
         if exc.status == 401:
             response.headers["WWW-Authenticate"] = 'Bearer realm="portal"'
+        if isinstance(exc, Unavailable):
+            response.headers["Retry-After"] = str(exc.retry_after)
         return response
 
     @app.exception_handler(RequestValidationError)

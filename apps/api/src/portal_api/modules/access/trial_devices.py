@@ -25,11 +25,12 @@ identifiers, do not survive reinstall, and are never treated as reinstall-proof 
 from __future__ import annotations
 
 import hashlib
+import logging
 import uuid
 from contextvars import ContextVar
 from dataclasses import dataclass
 from datetime import datetime, timedelta
-from typing import Any, Literal, Protocol
+from typing import Any, Literal, Protocol, cast
 
 from sqlalchemy import CheckConstraint, DateTime, ForeignKey, String, Text, UniqueConstraint, func, select
 from sqlalchemy.dialects.postgresql import JSONB, UUID
@@ -38,9 +39,11 @@ from sqlalchemy.orm import Mapped, Session, mapped_column
 from portal_api.config import Role as DeployRole
 from portal_api.config import get_settings
 from portal_api.db import Base
-from portal_api.errors import Conflict, NotFound, Unprocessable
+from portal_api.errors import AppError, Conflict, NotFound, Unprocessable
 from portal_api.modules.access.models import OFFER_TERMS_VERSION, TRIAL_PROGRAM, Entitlement, TrialGrant
 from portal_api.modules.audit.models import record
+
+log = logging.getLogger("portal_api.trial")
 
 # (X-Portal-Client, X-Portal-Install) of the current request, set by middleware; read by entitlement checks.
 CLIENT_CONTEXT: ContextVar[tuple[str | None, str | None]] = ContextVar("portal_client", default=(None, None))
@@ -201,6 +204,28 @@ def adapter_for(surface: str, proof: dict[str, Any]) -> EvidenceAdapter:
     if surface == "ios":
         return UnconfiguredProvider("apple-devicecheck", "B07")
     return UnconfiguredProvider("google-play-integrity-recall", "B07/B08")
+
+
+def _evaluate(adapter: EvidenceAdapter, proof: dict[str, Any]) -> Verdict:
+    """DEGRADATION-01: a provider that errors or times out gives `unknown` (an outage), never clean or consumed."""
+    try:
+        return adapter.evaluate(proof)
+    except AppError:
+        raise  # our own refusals (e.g. fixture evidence outside development) are not outages
+    except Exception as e:
+        log.warning("device evidence provider %s failed: %s", adapter.name, type(e).__name__)
+        return Verdict("unknown", f"provider_error ({type(e).__name__})")
+
+
+def _mark(adapter: EvidenceAdapter, proof: dict[str, Any]) -> Literal["confirmed", "unknown"]:
+    """A marker write whose outcome we can't confirm is `unknown`; the same claim recovers it later."""
+    try:
+        return adapter.mark_consumed(proof)
+    except AppError:
+        raise
+    except Exception as e:
+        log.warning("device marker write via %s failed: %s", adapter.name, type(e).__name__)
+        return "unknown"
 
 
 def evidence_mode() -> str:
@@ -368,7 +393,7 @@ def _claim(
         select(TrialClaim).where(TrialClaim.user_id == user_id, TrialClaim.idempotency_key == idempotency_key)
     )
     if existing is not None:
-        return _resume(db, existing, proof, label)
+        return _resume(db, existing, proof, label, install_token)
 
     # 1. Independent valid access is honored and never blocked by a trial decision.
     if _independent_access(db, user_id, now):
@@ -377,15 +402,7 @@ def _claim(
     grant = _grant(db, user_id)
     # 2. An existing grant: keep its dates; a new native device needs its own authorization (§16.4).
     if grant is not None:
-        if grant.status == "active" and grant.ends_at > now:
-            if surface == "web":
-                device = _record_web(db, grant, ref, label, now)
-                db.commit()
-                return _decision("active", grant=grant, device=device)
-            db.commit()
-            return authorize_device(db, user_id, surface=surface, proof=proof, install_token=install_token, label=label)
-        db.commit()
-        return _decision("account_trial_used", grant=grant)
+        return _existing_grant(db, grant, user_id, surface, ref, proof, install_token, label, now)
     # 3. Prior paid history (T8): no introductory trial.
     if _paid_history(db, user_id):
         db.commit()
@@ -405,7 +422,7 @@ def _claim(
     db.flush()
     db.add(TrialClaimEvent(claim_id=c.id, from_status=None, to_status=c.status, reason="claim created", at=now))
     adapter = adapter_for(surface, proof)
-    verdict = adapter.evaluate(proof)
+    verdict = _evaluate(adapter, proof)
     c.evidence = {"adapter": adapter.name, "verdict": verdict.status, "detail": verdict.detail, "mode": evidence_mode()}
     exception = _active_exception(db, user_id, surface, now) if verdict.status == "consumed" else None
     if exception is not None:
@@ -431,7 +448,31 @@ def _claim(
         _move(db, c, "PENDING_VERIFICATION", "evidence unknown; retry or review", "verification_pending")
         db.commit()
         return _decision("verification_pending", claim=c)
-    return _mark_and_grant(db, c, adapter, proof, label, access)
+    return _mark_and_grant(db, c, adapter, proof, label, access, install_token)
+
+
+def _existing_grant(
+    db: Session,
+    grant: TrialGrant,
+    user_id: uuid.UUID,
+    surface: Surface,
+    ref: str | None,
+    proof: dict[str, Any],
+    install_token: str | None,
+    label: str,
+    now: datetime,
+) -> Decision:
+    if grant.status == "active" and grant.ends_at > now:
+        if surface == "web":
+            device = _record_web(db, grant, ref, label, now)
+            db.commit()
+            return _decision("active", grant=grant, device=device)
+        db.commit()
+        if install_token is None:
+            return _decision("active", grant=grant)
+        return authorize_device(db, user_id, surface=surface, proof=proof, install_token=install_token, label=label)
+    db.commit()
+    return _decision("account_trial_used", grant=grant)
 
 
 def _fallback_allows(verdict: Verdict) -> bool:
@@ -439,12 +480,33 @@ def _fallback_allows(verdict: Verdict) -> bool:
 
 
 def _mark_and_grant(
-    db: Session, c: TrialClaim, adapter: EvidenceAdapter, proof: dict[str, Any], label: str, access: Any
+    db: Session,
+    c: TrialClaim,
+    adapter: EvidenceAdapter,
+    proof: dict[str, Any],
+    label: str,
+    access: Any,
+    install_token: str | None = None,
 ) -> Decision:
     if c.evidence.get("verdict") in ("clean",):
         _move(db, c, "MARK_PENDING", "writing the consumption marker")
-        db.flush()
-        result = adapter.mark_consumed(proof)
+        # DEGRADATION-01: the claim is saved before the remote write, so a crash or timeout during it can't lose the
+        # claim; a retry with the same key then recovers this claim instead of reading our own marker as reuse.
+        db.commit()
+        _lock_account(db, c.user_id)
+        db.refresh(c)
+        if c.status != "MARK_PENDING":  # another request with the same key moved it on meanwhile
+            return _resume(db, c, proof, label, install_token)
+        parallel = _grant(db, c.user_id)
+        if parallel is not None:
+            # A parallel claim for this account (another key) was granted while the lock was released: no second
+            # marker and no second grant; this request is handled as one for an account that already has the trial.
+            _move(db, c, "CLOSED_INELIGIBLE", "a parallel claim for this account was granted first", "active")
+            surface = cast("Surface", c.surface)
+            return _existing_grant(
+                db, parallel, c.user_id, surface, c.installation_ref, proof, install_token, label, _now(db)
+            )
+        result = _mark(adapter, proof)
         c.evidence = {**c.evidence, "mark": result}
         if result != "confirmed":
             _move(db, c, "MARK_UNKNOWN", "marker write outcome unknown; recover with the same claim", "mark_unknown")
@@ -489,7 +551,9 @@ def _mark_and_grant(
     return _decision("granted", claim=c, grant=grant, device=device)
 
 
-def _resume(db: Session, c: TrialClaim, proof: dict[str, Any], label: str) -> Decision:
+def _resume(
+    db: Session, c: TrialClaim, proof: dict[str, Any], label: str, install_token: str | None = None
+) -> Decision:
     """A retry of the same claim (§16.4.3/5/6): the original grant and dates, or recovery of an unresolved claim."""
     from portal_api.modules.access import service as access
 
@@ -510,18 +574,18 @@ def _resume(db: Session, c: TrialClaim, proof: dict[str, Any], label: str) -> De
         return _decision("review_required", claim=c)
     adapter = adapter_for(c.surface, proof)
     if c.status in ("MARK_UNKNOWN", "MARK_PENDING"):
-        result = adapter.mark_consumed(proof)  # re-attempt the original claim's marker; never a replacement claim
+        result = _mark(adapter, proof)  # re-attempt the original claim's marker; never a replacement claim
         c.evidence = {**c.evidence, "mark": result}
         if result != "confirmed":
             db.commit()
             return _decision("verification_pending", claim=c)
         _move(db, c, "MARK_CONFIRMED", "consumption marker confirmed on recovery")
         c.evidence = {**c.evidence, "verdict": "clean"}
-        return _mark_and_grant(db, c, _Confirmed(), proof, label, access)
+        return _mark_and_grant(db, c, _Confirmed(), proof, label, access, install_token)
     if c.status == "MARK_CONFIRMED":
-        return _mark_and_grant(db, c, _Confirmed(), proof, label, access)
+        return _mark_and_grant(db, c, _Confirmed(), proof, label, access, install_token)
     # PENDING_VERIFICATION: evaluate again with fresh proof.
-    verdict = adapter.evaluate(proof)
+    verdict = _evaluate(adapter, proof)
     c.evidence = {**c.evidence, "verdict": verdict.status, "detail": verdict.detail, "mode": evidence_mode()}
     if verdict.status == "consumed":
         _move(db, c, "CLOSED_INELIGIBLE", "prior promotional use recorded for this device", "device_used")
@@ -530,7 +594,7 @@ def _resume(db: Session, c: TrialClaim, proof: dict[str, Any], label: str) -> De
     if verdict.status == "unknown" and not _fallback_allows(verdict):
         db.commit()
         return _decision("verification_pending", claim=c)
-    return _mark_and_grant(db, c, adapter, proof, label, access)
+    return _mark_and_grant(db, c, adapter, proof, label, access, install_token)
 
 
 class _Confirmed:
@@ -609,7 +673,7 @@ def authorize_device(
 
     exception = _active_exception(db, user_id, surface, now)
     adapter = adapter_for(surface, proof)
-    verdict = adapter.evaluate(proof)
+    verdict = _evaluate(adapter, proof)
     evidence = {"adapter": adapter.name, "verdict": verdict.status, "detail": verdict.detail, "mode": evidence_mode()}
     method = "first_use"
     if exception is not None:
@@ -654,7 +718,7 @@ def authorize_device(
         db.commit()
         return _decision("device_limit", grant=grant)
     if method == "first_use":
-        mark = adapter.mark_consumed(proof)  # written on first trial use of this device only (T4)
+        mark = _mark(adapter, proof)  # written on first trial use of this device only (T4)
         evidence["mark"] = mark
         if mark != "confirmed":
             db.commit()
