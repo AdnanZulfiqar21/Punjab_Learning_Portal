@@ -541,6 +541,7 @@ def upload_page(
                 preview_key=pv.key,
                 preview_sha256=pv.sha256,
                 uploaded_at=now,
+                quality=lp.quality,
             )
             db.add(page)
             pages.append(page)

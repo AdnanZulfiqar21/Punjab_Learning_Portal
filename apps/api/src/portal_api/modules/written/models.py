@@ -23,6 +23,7 @@ from sqlalchemy import (
     Text,
     UniqueConstraint,
     func,
+    text,
 )
 from sqlalchemy.dialects.postgresql import JSONB, UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
@@ -150,6 +151,8 @@ class WrittenPage(Base):
     preview_sha256: Mapped[str | None] = mapped_column(String(64))
     uploaded_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
     status: Mapped[str] = mapped_column(String(10), default="uploaded")
+    # SCAN-QUALITY-01: the quality checks' flags for this page, shown to the learner and to reviewers.
+    quality: Mapped[list[dict[str, Any]]] = mapped_column(JSONB, default=list, server_default=text("'[]'::jsonb"))
 
 
 class WrittenReceipt(Base):
