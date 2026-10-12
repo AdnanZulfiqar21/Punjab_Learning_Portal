@@ -42,6 +42,7 @@ from portal_api.modules.system.business import router as business_router
 from portal_api.modules.system.clients import router as clients_router
 from portal_api.modules.system.integrations import router as integrations_router
 from portal_api.modules.system.router import router as system_router
+from portal_api.modules.written.calibration import router as calibration_router
 from portal_api.modules.written.review_router import router as written_review_router
 from portal_api.modules.written.router import router as written_router
 
@@ -149,6 +150,7 @@ def create_app() -> FastAPI:
     app.include_router(assessment_router)
     app.include_router(written_router)
     app.include_router(written_review_router)
+    app.include_router(calibration_router)
     app.include_router(support_router)
     app.include_router(notifications_router)
     app.include_router(help_router)
