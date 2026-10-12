@@ -202,6 +202,7 @@ SELECT * FROM (
      WHERE s.active AND t.retired_at IS NULL AND c.retired_at IS NULL
            AND (t.title ILIKE '%' || q.q || '%' OR strict_word_similarity(q.q, t.title) >= :fuzzy)
            AND (CAST(:grade AS int) IS NULL OR g.number = CAST(:grade AS int))
+           AND g.region_id = ANY(CAST(:regions AS uuid[]))
            AND (CAST(:subject AS text) IS NULL OR s.code = CAST(:subject AS text))
     UNION ALL
     SELECT 'chapter', c.id, c.id, c.title, CAST(c.number AS text), c.title, g.number, s.code, s.name, c.pdf_start,
@@ -211,6 +212,7 @@ SELECT * FROM (
      WHERE s.active AND c.retired_at IS NULL
            AND (c.title ILIKE '%' || q.q || '%' OR strict_word_similarity(q.q, c.title) >= :fuzzy)
            AND (CAST(:grade AS int) IS NULL OR g.number = CAST(:grade AS int))
+           AND g.region_id = ANY(CAST(:regions AS uuid[]))
            AND (CAST(:subject AS text) IS NULL OR s.code = CAST(:subject AS text))
   ) hits ORDER BY kind, id, score DESC
 ) best ORDER BY score DESC, grade, title LIMIT :limit
@@ -245,6 +247,7 @@ cand AS (
     LEFT JOIN text_hits h ON h.id = v.id
    WHERE i.availability = 'live' AND i.kind = ANY(CAST(:kinds AS text[])) AND s.active AND c.retired_at IS NULL
          AND (CAST(:grade AS int) IS NULL OR g.number = CAST(:grade AS int))
+         AND g.region_id = ANY(CAST(:regions AS uuid[]))
          AND (CAST(:subject AS text) IS NULL OR s.code = CAST(:subject AS text))
 ),
 scored AS (
@@ -304,7 +307,10 @@ def run_search(
     raw, folded = q.strip(), normalise(q)
     also = expand(db, folded, grade, subj) if folded else []
     terms = list(dict.fromkeys([raw, *([folded] if folded else []), *also]))
+    from portal_api.modules.curriculum.regions import released_region_ids
+
     params = {"terms": terms, "grade": grade, "subject": subj, "limit": limit, "fuzzy": FUZZY_THRESHOLD}
+    params["regions"] = released_region_ids(db)  # REGION-01: only released regions are searchable
     hits = [SearchHit(**{**r, "score": float(r["score"])}) for r in db.execute(STRUCTURE_SQL, params).mappings()]
     if lessons:
         rows = db.execute(

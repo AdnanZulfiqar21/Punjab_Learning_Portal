@@ -568,6 +568,10 @@ def chapter_lessons(
     if chapter is None or chapter.retired_at is not None:
         raise NotFound("Chapter not found.")
     book = db.get(BookEdition, chapter.book_id)
+    from portal_api.modules.curriculum.regions import book_is_released
+
+    if book is None or not book_is_released(db, book):  # REGION-01: unreleased regions aren't discoverable
+        raise NotFound("Chapter not found.")
     # P14.S1.T2: a plan covering this class and subject (a package covers only its own); trial devices need authorizing.
     entitled = (
         who is not None

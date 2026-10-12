@@ -10,6 +10,7 @@ from sqlalchemy.orm import Session
 
 from portal_api.errors import Gone, NotFound
 from portal_api.modules.curriculum.models import BookEdition, Chapter, Grade, Subject, Topic
+from portal_api.modules.curriculum.regions import book_is_released, released_grade
 from portal_api.modules.curriculum.schemas import (
     BookOut,
     BookSummary,
@@ -53,7 +54,7 @@ def _breadcrumb(book: BookEdition) -> Breadcrumb:
 
 
 def get_catalogue(session: Session) -> CatalogueOut:
-    grades = session.scalars(select(Grade).order_by(Grade.number)).all()
+    grades = session.scalars(select(Grade).where(released_grade()).order_by(Grade.number)).all()
     subjects = session.scalars(select(Subject).where(Subject.active).order_by(Subject.display_order)).all()
     counts: dict[uuid.UUID, int] = {
         bid: n
@@ -123,7 +124,7 @@ def get_book_for(session: Session, grade: int, subject: str) -> BookOut:
             select(BookEdition)
             .join(Grade, BookEdition.grade_id == Grade.id)
             .join(Subject, BookEdition.subject_id == Subject.id)
-            .where(Grade.number == grade, Subject.code == code, Subject.active)
+            .where(Grade.number == grade, Subject.code == code, Subject.active, released_grade())
         )
         .unique()
         .first()
@@ -135,7 +136,7 @@ def get_book_for(session: Session, grade: int, subject: str) -> BookOut:
 
 def get_book(session: Session, book_id: uuid.UUID) -> BookOut:
     book = session.get(BookEdition, book_id)
-    if book is None:
+    if book is None or not book_is_released(session, book):  # REGION-01: unreleased regions aren't discoverable
         raise NotFound("Book not found.")
     return _book_out(session, book)
 
@@ -153,7 +154,7 @@ def _book_out(session: Session, book: BookEdition) -> BookOut:
 
 def get_chapter(session: Session, chapter_id: uuid.UUID) -> ChapterOut:
     ch = session.get(Chapter, chapter_id)
-    if ch is None:
+    if ch is None or not book_is_released(session, ch.book):  # REGION-01
         raise NotFound("Chapter not found.")
     if ch.retired_at is not None:
         raise Gone("This chapter is no longer part of the current textbook catalogue.")

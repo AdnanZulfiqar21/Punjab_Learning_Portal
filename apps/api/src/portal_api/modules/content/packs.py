@@ -38,6 +38,7 @@ from portal_api.db import get_session
 from portal_api.errors import Conflict, NotFound
 from portal_api.modules.content import blocks, kinds
 from portal_api.modules.content.models import Availability, ContentItem, ContentVersion
+from portal_api.modules.curriculum.regions import book_is_released
 from portal_api.modules.identity.deps import CurrentPrincipal
 
 PACK_FORMAT_VERSION = 1
@@ -134,7 +135,7 @@ def build(db: Session, who: Any, chapter_id: uuid.UUID, client_format: int) -> d
         )
     chapter = db.get(Chapter, chapter_id)
     book = db.get(BookEdition, chapter.book_id) if chapter is not None else None
-    if chapter is None or book is None or chapter.retired_at is not None:
+    if chapter is None or book is None or chapter.retired_at is not None or not book_is_released(db, book):
         raise NotFound("Chapter not found.")
     grade, subject = book.grade.number, book.subject.code
     plan_end = _covering_end(db, who.user.id, grade, subject)
@@ -249,7 +250,7 @@ def study_pack_status(db: DB, who: CurrentPrincipal, chapter_id: uuid.UUID, resp
     response.headers["Cache-Control"] = "private, no-store"
     chapter = db.get(Chapter, chapter_id)
     book = db.get(BookEdition, chapter.book_id) if chapter is not None else None
-    if chapter is None or book is None or chapter.retired_at is not None:
+    if chapter is None or book is None or chapter.retired_at is not None or not book_is_released(db, book):
         return PackStatusOut(keep=False, includes_premium=False, expires_at=db_now(db), pack_format_version=1)
     plan_end = _covering_end(db, who.user.id, book.grade.number, book.subject.code)
     expires = plan_end if plan_end is not None else db_now(db) + timedelta(days=PREVIEW_PACK_DAYS)

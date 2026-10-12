@@ -25,6 +25,7 @@ from portal_api.errors import Conflict, NotFound, Unprocessable
 from portal_api.modules.assessment.models import FormItem, PracticeForm
 from portal_api.modules.content.models import Availability, ContentItem, ContentVersion
 from portal_api.modules.curriculum.models import BookEdition, Chapter, Grade, Subject, Topic
+from portal_api.modules.curriculum.regions import released_grade
 from portal_api.modules.identity.deps import Principal
 
 SELF_PACED_TOLERANCE_MS = 3000  # §10.5 default for self-paced timed practice; ranked mocks pin 0
@@ -115,7 +116,13 @@ def _book_chapters(db: Session, grade: int, subject: str) -> list[Chapter]:
             .join(BookEdition, BookEdition.id == Chapter.book_id)
             .join(Grade, Grade.id == BookEdition.grade_id)
             .join(Subject, Subject.id == BookEdition.subject_id)
-            .where(Grade.number == grade, Subject.code == subject, Subject.active, Chapter.retired_at.is_(None))
+            .where(
+                Grade.number == grade,
+                Subject.code == subject,
+                Subject.active,
+                Chapter.retired_at.is_(None),
+                released_grade(),  # REGION-01
+            )
             .order_by(Chapter.display_order)
         )
     )
