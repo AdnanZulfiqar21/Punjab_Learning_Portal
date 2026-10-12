@@ -7,6 +7,7 @@ import { LessonBlocks } from "@/components/lesson-blocks";
 import { Badge, Notice, SkeletonLines } from "@/components/ui";
 import { getResult } from "@/lib/practice";
 import { currentUser } from "@/lib/session";
+import { TIME_ZONE } from "@/lib/dates";
 
 // P11.S3.T3 (RECEIPT-01): why a learner's latest change to a question wasn't counted.
 const NOT_COUNTED: Record<string, string> = {
@@ -39,7 +40,7 @@ async function Result({ id }: { id: string }) {
     return (
       <Notice title="Your answers are saved">
         {result.heldUntil
-          ? `Results for this scheduled mock are released on ${new Date(result.heldUntil).toLocaleString("en-GB", { dateStyle: "full", timeStyle: "short" })}. Come back then.`
+          ? `Results for this scheduled mock are released on ${new Date(result.heldUntil).toLocaleString("en-GB", { dateStyle: "full", timeStyle: "short", timeZone: TIME_ZONE })}. Come back then.`
           : "Results for this scheduled mock aren't released yet. Come back later."}
       </Notice>
     );
@@ -76,7 +77,7 @@ async function Result({ id }: { id: string }) {
           </p>
         )}
         {result.revised_at && (
-          <Notice title={`Updated ${new Date(result.revised_at).toLocaleDateString("en-GB", { dateStyle: "medium" })}`}>
+          <Notice title={`Updated ${new Date(result.revised_at).toLocaleDateString("en-GB", { dateStyle: "medium", timeZone: TIME_ZONE })}`}>
             {result.revision_reason} Your earlier result stays in your history.
           </Notice>
         )}
@@ -113,7 +114,7 @@ async function Result({ id }: { id: string }) {
             <ol className="mt-1 space-y-1">
               {(result.history ?? []).map((h) => (
                 <li key={h.version}>
-                  v{h.version}: {h.raw} / {h.maximum} · {new Date(h.created_at).toLocaleDateString("en-GB", { dateStyle: "medium" })} · {h.reason}
+                  v{h.version}: {h.raw} / {h.maximum} · {new Date(h.created_at).toLocaleDateString("en-GB", { dateStyle: "medium", timeZone: TIME_ZONE })} · {h.reason}
                 </li>
               ))}
             </ol>

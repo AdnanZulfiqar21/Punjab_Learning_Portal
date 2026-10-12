@@ -13,6 +13,7 @@ import { useRequest } from "@/hooks/use-request";
 import { useTheme } from "@/hooks/use-theme";
 import { api, ApiError } from "@/lib/api";
 import { useAuth } from "@/lib/auth";
+import { TIME_ZONE } from "@/lib/dates";
 
 const CATEGORIES = [
   ["account", "Account"],
@@ -23,7 +24,7 @@ const CATEGORIES = [
 ] as const;
 type Category = (typeof CATEGORIES)[number][0];
 const STATUS: Record<string, string> = { open: "Open", in_progress: "In progress", waiting_learner: "Waiting for you", resolved: "Resolved" };
-const when = (iso: string) => new Date(iso).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" });
+const when = (iso: string) => new Date(iso).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short", timeZone: TIME_ZONE });
 
 export default function HelpScreen() {
   const { state } = useAuth();

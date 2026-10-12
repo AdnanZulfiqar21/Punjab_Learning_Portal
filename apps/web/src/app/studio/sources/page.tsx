@@ -6,9 +6,10 @@ import { redirect } from "next/navigation";
 import { api, currentUser } from "@/lib/session";
 import { STUDIO_ROLES } from "@/lib/studio";
 import { DecideNotice, LogNoticeForm, ReviewSourceButton, RightsForm, UploadOriginal, ViewSourcePage } from "./controls";
+import { TIME_ZONE } from "@/lib/dates";
 
 export const metadata: Metadata = { title: "Sources and notices", robots: { index: false } };
-const date = (s: string) => new Date(s).toLocaleDateString("en-GB", { dateStyle: "medium" });
+const date = (s: string) => new Date(s).toLocaleDateString("en-GB", { dateStyle: "medium", timeZone: TIME_ZONE });
 
 export default function SourcesPage() {
   return (

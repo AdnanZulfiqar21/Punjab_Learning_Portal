@@ -6,6 +6,7 @@ import { Badge, Notice, SkeletonLines } from "@/components/ui";
 import { GRADE_LABEL } from "@/lib/format";
 import { api } from "@/lib/session";
 import { requireStaff, StudioForbiddenError, SUBJECT_LABEL } from "@/lib/studio";
+import { TIME_ZONE } from "@/lib/dates";
 
 export const metadata: Metadata = { title: "Written marking", robots: { index: false } };
 
@@ -45,7 +46,7 @@ async function Queue() {
               Script {c.reference}
             </Link>
             <p className="text-sm text-muted">
-              {GRADE_LABEL[c.grade]} {SUBJECT_LABEL[c.subject] ?? c.subject} · submitted {new Date(c.opened_at).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" })}
+              {GRADE_LABEL[c.grade]} {SUBJECT_LABEL[c.subject] ?? c.subject} · submitted {new Date(c.opened_at).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short", timeZone: TIME_ZONE })}
             </p>
           </div>
           <div className="flex gap-2">

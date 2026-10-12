@@ -5,6 +5,7 @@ import type { CommerceTermsState, Product } from "@portal/contracts";
 import { Notice, SkeletonLines } from "@/components/ui";
 import { formatMinor } from "@/lib/money";
 import { api } from "@/lib/session";
+import { TIME_ZONE } from "@/lib/dates";
 
 // P14.S1.T3 (PRICING-01): what is on sale, at what full price, for how long and covering what, with the purchase terms
 // the owner published (tax, renewal, buying during the trial, refunds). Read from the API at request time. There is no
@@ -112,7 +113,7 @@ async function Plans() {
             </dl>
             <p className="text-xs text-muted">
               Version {published.version}
-              {published.published_at ? `, published ${new Date(published.published_at).toLocaleDateString("en-GB", { dateStyle: "long" })}` : ""}.
+              {published.published_at ? `, published ${new Date(published.published_at).toLocaleDateString("en-GB", { dateStyle: "long", timeZone: TIME_ZONE })}` : ""}.
             </p>
           </div>
         )}

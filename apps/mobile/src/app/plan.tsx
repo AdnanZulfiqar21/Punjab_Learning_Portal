@@ -10,13 +10,14 @@ import { useRequest } from "@/hooks/use-request";
 import { useTheme } from "@/hooks/use-theme";
 import { api, SUBJECTS, type SubjectCode } from "@/lib/api";
 import { useAuth } from "@/lib/auth";
+import { daysFromToday } from "@/lib/dates";
 
 const GRADES = [
   [11, "Class XI"],
   [12, "Class XII"],
 ] as const;
 const hours = (m: number) => (m >= 60 ? `${Math.floor(m / 60)} h ${m % 60} min` : `${m} min`);
-const inDays = (n: number) => new Date(Date.now() + n * 86_400_000).toISOString().slice(0, 10);
+const inDays = daysFromToday; // the Pakistan day, not the UTC day (P12.S4.T3)
 type Query = { grade: number; subject: string; target_date: string; daily_minutes: number };
 
 export default function PlanScreen() {
@@ -70,7 +71,7 @@ function Plan({ token, query }: { token: string; query: Query }) {
       {p.schedule.map((x, i) => (
         <Card key={i}>
           <T style={{ fontWeight: "600" }}>
-            {new Date(String(x.date)).toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "short" })} · Chapter {String(x.chapter_number)}
+            {new Date(String(x.date)).toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "short", timeZone: "UTC" })} · Chapter {String(x.chapter_number)}
           </T>
           <T>{String(x.label)}</T>
           <T variant="small">

@@ -7,11 +7,12 @@ import { removeFormula } from "@/app/actions/study";
 import { Breadcrumbs, Notice, SkeletonLines } from "@/components/ui";
 import { GRADE_LABEL } from "@/lib/format";
 import { api, currentUser, features } from "@/lib/session";
+import { TIME_ZONE } from "@/lib/dates";
 
 export const metadata: Metadata = { title: "My study tools", robots: { index: false } };
 
 const subject = (s: string) => s.replace("_", " ");
-const day = (iso: string | null | undefined) => (iso ? new Date(iso).toLocaleDateString("en-GB", { dateStyle: "medium" }) : "");
+const day = (iso: string | null | undefined) => (iso ? new Date(iso).toLocaleDateString("en-GB", { dateStyle: "medium", timeZone: TIME_ZONE }) : "");
 
 /** P11.S2.T2 (STUDY-TOOLS-01): everything a learner kept, in one private place. */
 export default function StudyPage() {

@@ -13,6 +13,7 @@ import { DISPLAY_COOKIE, parseDisplay } from "@/lib/display";
 import { CONTENT_STATE_TEXT, GRADE_LABEL, assessmentSummary, pageRange } from "@/lib/format";
 import { Badge, Breadcrumbs, Notice, SkeletonLines } from "@/components/ui";
 import { api, currentUser, deviceScope, features, sessionToken } from "@/lib/session";
+import { TIME_ZONE } from "@/lib/dates";
 
 export const metadata: Metadata = { title: "Chapter" };
 
@@ -155,7 +156,7 @@ function topicTitles(nodes: TopicNode[], out = new Map<string, string>()): Map<s
   return out;
 }
 
-const published = (iso: string) => new Date(iso).toLocaleDateString("en-GB", { dateStyle: "medium" });
+const published = (iso: string) => new Date(iso).toLocaleDateString("en-GB", { dateStyle: "medium", timeZone: TIME_ZONE });
 
 async function Lessons({ chapterId, topics, lang }: { chapterId: string; topics: TopicNode[]; lang: string }) {
   const res = await getLessons(chapterId, lang);

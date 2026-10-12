@@ -23,6 +23,7 @@ from pydantic import BaseModel
 from sqlalchemy import and_, distinct, exists, func, select
 from sqlalchemy.orm import Session
 
+from portal_api.days import day_of, wall_clock, week_of
 from portal_api.db import get_session
 from portal_api.modules.identity.deps import Principal, require
 from portal_api.modules.identity.permissions import Permission
@@ -41,7 +42,7 @@ def report(db: Session) -> dict[str, Any]:
     now: datetime = db.execute(select(func.now())).scalar_one()
     staff = exists().where(StaffRoleGrant.user_id == AppUser.id, StaffRoleGrant.revoked_at.is_(None))
     learner = and_(AppUser.status == "active", ~staff, AppUser.issuer != get_settings().dev_auth_issuer)
-    week = func.date_trunc("week", AppUser.created_at)
+    week = week_of(AppUser.created_at)  # Pakistan weeks and days (P12.S4.T3)
     since = now - timedelta(weeks=WEEKS)
 
     def first(name: str) -> Any:
@@ -54,7 +55,7 @@ def report(db: Session) -> dict[str, Any]:
 
     lesson, test = first("lesson.started"), first("attempt.submitted")
     activity = (
-        select(AnalyticsEvent.user_id, func.date_trunc("day", AnalyticsEvent.occurred_at).label("day"))
+        select(AnalyticsEvent.user_id, day_of(AnalyticsEvent.occurred_at).label("day"))
         .where(AnalyticsEvent.name.in_(LEARNING))
         .distinct()
         .subquery()
@@ -84,7 +85,7 @@ def report(db: Session) -> dict[str, Any]:
     ).all()
     cohorts = []
     for w, signed_up, lessons, tests, repeats in rows:
-        age_days = max(0, (now - w).days)
+        age_days = max(0, (wall_clock(now) - w).days)  # both Pakistan wall-clock times
         cohorts.append(
             {
                 "week_start": w.date().isoformat(),

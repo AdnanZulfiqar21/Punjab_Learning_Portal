@@ -6,6 +6,7 @@ import { cancelExport, retryExport } from "@/app/actions/exports";
 import { Badge, Breadcrumbs, Notice, SkeletonLines } from "@/components/ui";
 import { api, currentUser } from "@/lib/session";
 import { ExportRequestForm } from "./request-form";
+import { TIME_ZONE } from "@/lib/dates";
 
 export const metadata: Metadata = { title: "Exports", robots: { index: false } };
 
@@ -18,7 +19,7 @@ const STATUS: Record<string, { label: string; tone: "info" | "warn" | "ok" | "da
   cancelled: { label: "Cancelled", tone: "warn" },
   expired: { label: "Expired", tone: "warn" },
 };
-const when = (iso: string) => new Date(iso).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" });
+const when = (iso: string) => new Date(iso).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short", timeZone: TIME_ZONE });
 
 export default function ExportsPage() {
   return (

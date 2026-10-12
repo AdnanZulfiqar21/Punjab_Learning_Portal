@@ -6,6 +6,7 @@ import { Badge, Notice, SkeletonLines } from "@/components/ui";
 import { GRADE_LABEL } from "@/lib/format";
 import { api } from "@/lib/session";
 import { requireStaff, StudioForbiddenError, SUBJECT_LABEL } from "@/lib/studio";
+import { TIME_ZONE } from "@/lib/dates";
 
 export const metadata: Metadata = { title: "Rubric corrections", robots: { index: false } };
 
@@ -42,7 +43,7 @@ async function List() {
         <li key={a.id} className="flex flex-wrap items-center justify-between gap-3 px-4 py-3">
           <div>
             <Link href={`/studio/adjudications/${a.id}`} className="font-medium text-accent underline-offset-2 hover:underline">
-              {GRADE_LABEL[a.grade]} {SUBJECT_LABEL[a.subject] ?? a.subject} · {new Date(a.approved_at).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" })}
+              {GRADE_LABEL[a.grade]} {SUBJECT_LABEL[a.subject] ?? a.subject} · {new Date(a.approved_at).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short", timeZone: TIME_ZONE })}
             </Link>
             <p className="text-sm text-muted">{a.reason}</p>
           </div>

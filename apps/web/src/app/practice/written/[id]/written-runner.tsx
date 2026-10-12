@@ -12,11 +12,12 @@ import { PractiseAgain } from "./practise-again";
 import { RecheckPanel } from "./recheck-panel";
 import { Notice } from "@/components/ui";
 import { HelpLink } from "@/components/help-link";
+import { TIME_ZONE } from "@/lib/dates";
 
 type Slot = { pages: string[]; unanswered: boolean };
 type Upload = { id: string; name: string; progress: number; status: "uploading" | "failed"; error?: string };
 const marks = (u: number) => String(u / 100);
-const when = (iso: string) => new Date(iso).toLocaleString("en-GB", { timeStyle: "short", dateStyle: "medium" });
+const when = (iso: string) => new Date(iso).toLocaleString("en-GB", { timeStyle: "short", dateStyle: "medium", timeZone: TIME_ZONE });
 
 function uploadFile(attemptId: string, file: File, onProgress: (p: number) => void): Promise<{ status: number; body: unknown }> {
   return new Promise((resolve) => {

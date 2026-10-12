@@ -10,8 +10,9 @@ import { Card, Notice, T } from "@/components/ui";
 import { Space } from "@/constants/theme";
 import { ApiError } from "@/lib/api";
 import { downloadPack, PackError, readPack, refreshPack, removePack, type StoredPack } from "@/lib/study-packs";
+import { TIME_ZONE } from "@/lib/dates";
 
-const day = (iso: string) => new Date(iso).toLocaleDateString("en-GB", { dateStyle: "long" });
+const day = (iso: string) => new Date(iso).toLocaleDateString("en-GB", { dateStyle: "long", timeZone: TIME_ZONE });
 
 export function OfflinePack({ token, owner, chapterId }: { token: string; owner: string; chapterId: string }) {
   const [pack, setPack] = useState<StoredPack | null>(() => readPack(owner, chapterId));

@@ -3,9 +3,10 @@
 import { useActionState, useState } from "react";
 import type { AdjudicationSources } from "@portal/contracts";
 import { createAdjudication, type AdjudicationFormState } from "@/app/actions/adjudication";
+import { TIME_ZONE } from "@/lib/dates";
 
 type Active = { id: string; from_numbers: number[]; to_number: number | null; approved_at: string; reason: string };
-const when = (iso: string) => new Date(iso).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" });
+const when = (iso: string) => new Date(iso).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short", timeZone: TIME_ZONE });
 type Version = { id: string; number: number; denominator_compatible: boolean; compatibility: { carry_forward: boolean; criteria: Record<string, string> }; claimed_by: string[]; submitted_scripts: number };
 
 // W06-07: the adjudicator chooses exactly which earlier versions this correction covers and which active corrections

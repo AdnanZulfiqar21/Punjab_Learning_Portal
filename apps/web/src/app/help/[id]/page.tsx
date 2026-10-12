@@ -7,6 +7,7 @@ import { api, currentUser } from "@/lib/session";
 import { STATUS_LABEL, statusTone } from "../status";
 import { ReplyBox } from "./reply-box";
 import { AddScreenshot, ScreenshotList } from "./screenshots";
+import { TIME_ZONE } from "@/lib/dates";
 
 export const metadata: Metadata = { title: "Help request", robots: { index: false } };
 
@@ -40,7 +41,7 @@ async function Ticket({ id }: { id: string }) {
         {t.messages.map((m, i) => (
           <li key={i} className={`rounded-xl border p-3 ${m.from_staff ? "border-accent bg-accent-soft" : "border-border bg-surface"}`}>
             <p className="text-xs text-muted">
-              {m.from_staff ? "Support team" : "You"} · {new Date(m.created_at).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" })}
+              {m.from_staff ? "Support team" : "You"} · {new Date(m.created_at).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short", timeZone: TIME_ZONE })}
             </p>
             <p className="whitespace-pre-line">{m.body}</p>
           </li>
@@ -48,7 +49,7 @@ async function Ticket({ id }: { id: string }) {
       </ol>
       {(t.corrections ?? []).map((c) => (
         <Notice key={c.id} tone="info" title={c.defect === "VOID" ? "The question was withdrawn after review" : "The question's answer was corrected after review"}>
-          Recorded on {new Date(c.decided_at).toLocaleDateString("en-GB", { dateStyle: "medium" })}. Affected results were re-scored as a new score version.
+          Recorded on {new Date(c.decided_at).toLocaleDateString("en-GB", { dateStyle: "medium", timeZone: TIME_ZONE })}. Affected results were re-scored as a new score version.
           {c.status === "superseded" && " A later decision replaced this one."}
         </Notice>
       ))}

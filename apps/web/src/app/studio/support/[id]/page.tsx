@@ -9,6 +9,7 @@ import { api } from "@/lib/session";
 import { requireSupportStaff, StudioForbiddenError } from "@/lib/studio";
 import { ScreenshotList } from "@/app/help/[id]/screenshots";
 import { EscalateBox, StaffReplyBox } from "./staff-reply-box";
+import { TIME_ZONE } from "@/lib/dates";
 
 export const metadata: Metadata = { title: "Support request", robots: { index: false } };
 
@@ -31,7 +32,7 @@ type Context = {
   question: { item_id: string; title: string; kind: string; version: number; availability: string; quarantine_level: string | null } | null;
 };
 
-const date = (s: string) => new Date(s).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" });
+const date = (s: string) => new Date(s).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short", timeZone: TIME_ZONE });
 
 async function Ticket({ id }: { id: string }) {
   let token: string;
@@ -90,7 +91,7 @@ async function Ticket({ id }: { id: string }) {
           <ul className="space-y-1">
             {(t.corrections ?? []).map((c) => (
               <li key={c.id}>
-                <Badge tone={c.status === "effective" ? "ok" : "info"}>{c.defect}</Badge> {new Date(c.decided_at).toLocaleDateString("en-GB", { dateStyle: "medium" })} ·{" "}
+                <Badge tone={c.status === "effective" ? "ok" : "info"}>{c.defect}</Badge> {new Date(c.decided_at).toLocaleDateString("en-GB", { dateStyle: "medium", timeZone: TIME_ZONE })} ·{" "}
                 {c.same_version ? "same version as reported" : "another version"} · {c.status}
                 <span className="block text-muted">{c.reason}</span>
               </li>

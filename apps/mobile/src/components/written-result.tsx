@@ -12,10 +12,11 @@ import { Card, ErrorState, Loading, Notice, T } from "@/components/ui";
 import { Space } from "@/constants/theme";
 import { useRequest } from "@/hooks/use-request";
 import { api, ApiError } from "@/lib/api";
+import { TIME_ZONE } from "@/lib/dates";
 
 type Question = WrittenResult["questions"][number];
 const marks = (u: number) => String(u / 100);
-const when = (iso: string) => new Date(iso).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" });
+const when = (iso: string) => new Date(iso).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short", timeZone: TIME_ZONE });
 const newKey = () => `${Date.now().toString(36)}${Math.random().toString(36).slice(2, 12)}`;
 const CLASS_TEXT: Record<string, string> = {
   READABILITY: "A teacher used your clearer copy to mark this answer.",

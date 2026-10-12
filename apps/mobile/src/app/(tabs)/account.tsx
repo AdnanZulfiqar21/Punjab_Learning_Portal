@@ -12,6 +12,7 @@ import { useRequest } from "@/hooks/use-request";
 import { useTheme } from "@/hooks/use-theme";
 import { api, ApiError, GRADE_LABEL } from "@/lib/api";
 import { useAuth } from "@/lib/auth";
+import { TIME_ZONE } from "@/lib/dates";
 
 export default function AccountScreen() {
   const c = useTheme();
@@ -117,7 +118,7 @@ function DevPasswordForm() {
   );
 }
 
-const when = (iso: string) => new Date(iso).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" });
+const when = (iso: string) => new Date(iso).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short", timeZone: TIME_ZONE });
 
 function SignedIn({ token, me }: { token: string; me: Me }) {
   const c = useTheme();
