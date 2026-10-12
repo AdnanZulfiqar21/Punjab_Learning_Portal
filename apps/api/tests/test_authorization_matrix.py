@@ -38,6 +38,7 @@ PUBLIC = {
     "GET /v1/lessons/{item_id}/assets/{version_id}": "optional auth: the lesson's own files, under its tier (P07.S1)",
     "GET /v1/help/articles": "published help articles",
     "GET /v1/products": "products on sale and their current web price; no staff fields (PRODUCTS-01)",
+    "GET /v1/clients/policy": "whether an app version is supported; no personal data (CLIENTS-01)",
     "GET /v1/commerce-terms": "the published purchase terms, owner-reviewed text (PRICING-01)",
     "GET /v1/help/articles/{slug}": "published help articles",
     "GET /v1/status": "public incident status",

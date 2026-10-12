@@ -2563,6 +2563,227 @@
         "title": "ClaimIn",
         "type": "object"
       },
+      "ClientManifestIn": {
+        "properties": {
+          "app_version": {
+            "maxLength": 20,
+            "minLength": 5,
+            "title": "App Version",
+            "type": "string"
+          },
+          "block_types": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "description": "Supported block type -> highest version",
+            "title": "Block Types",
+            "type": "object"
+          },
+          "equation_renderer": {
+            "anyOf": [
+              {
+                "maxLength": 40,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Equation Renderer"
+          },
+          "font_set": {
+            "anyOf": [
+              {
+                "maxLength": 80,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Font Set"
+          },
+          "pack_format_version": {
+            "maximum": 100.0,
+            "minimum": 1.0,
+            "title": "Pack Format Version",
+            "type": "integer"
+          },
+          "platform": {
+            "enum": [
+              "android",
+              "ios"
+            ],
+            "title": "Platform",
+            "type": "string"
+          },
+          "renderer_version": {
+            "maximum": 100.0,
+            "minimum": 1.0,
+            "title": "Renderer Version",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "platform",
+          "app_version",
+          "renderer_version",
+          "pack_format_version",
+          "block_types"
+        ],
+        "title": "ClientManifestIn",
+        "type": "object"
+      },
+      "ClientMinimumIn": {
+        "properties": {
+          "enforce_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Defaults to 14 days from now when raising",
+            "title": "Enforce At"
+          },
+          "min_version": {
+            "maxLength": 20,
+            "minLength": 5,
+            "title": "Min Version",
+            "type": "string"
+          },
+          "reason": {
+            "maxLength": 1000,
+            "minLength": 10,
+            "title": "Reason",
+            "type": "string"
+          }
+        },
+        "required": [
+          "min_version",
+          "reason"
+        ],
+        "title": "ClientMinimumIn",
+        "type": "object"
+      },
+      "ClientPlatformState": {
+        "properties": {
+          "enforce_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Enforce At"
+          },
+          "manifests": {
+            "items": {
+              "$ref": "#/components/schemas/ClientManifestIn"
+            },
+            "title": "Manifests",
+            "type": "array"
+          },
+          "min_version": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Min Version"
+          },
+          "notice_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Notice At"
+          },
+          "platform": {
+            "title": "Platform",
+            "type": "string"
+          },
+          "reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reason"
+          }
+        },
+        "required": [
+          "platform",
+          "min_version",
+          "notice_at",
+          "enforce_at",
+          "reason",
+          "manifests"
+        ],
+        "title": "ClientPlatformState",
+        "type": "object"
+      },
+      "ClientPolicyOut": {
+        "properties": {
+          "enforce_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "When this app version stops working (for update_soon/required)",
+            "title": "Enforce At"
+          },
+          "min_version": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Min Version"
+          },
+          "status": {
+            "enum": [
+              "ok",
+              "update_soon",
+              "update_required"
+            ],
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "status",
+          "min_version",
+          "enforce_at"
+        ],
+        "title": "ClientPolicyOut",
+        "type": "object"
+      },
       "CompletionScope": {
         "properties": {
           "carried_forward": {
@@ -17269,6 +17490,63 @@
         ]
       }
     },
+    "/v1/clients/policy": {
+      "get": {
+        "operationId": "client_policy_v1_clients_policy_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "platform",
+            "required": true,
+            "schema": {
+              "enum": [
+                "android",
+                "ios"
+              ],
+              "title": "Platform",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "version",
+            "required": true,
+            "schema": {
+              "maxLength": 20,
+              "minLength": 5,
+              "title": "Version",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClientPolicyOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Whether this app version is supported (public)",
+        "tags": [
+          "clients"
+        ]
+      }
+    },
     "/v1/commerce-terms": {
       "get": {
         "operationId": "public_terms_v1_commerce_terms_get",
@@ -19894,6 +20172,128 @@
         "summary": "Whether every section of a published test pattern has enough approved questions (counts only)",
         "tags": [
           "practice"
+        ]
+      }
+    },
+    "/v1/ops/clients": {
+      "get": {
+        "operationId": "ops_clients_v1_ops_clients_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/ClientPlatformState"
+                  },
+                  "title": "Response Ops Clients V1 Ops Clients Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Supported versions and build manifests",
+        "tags": [
+          "clients"
+        ]
+      }
+    },
+    "/v1/ops/clients/manifests": {
+      "post": {
+        "operationId": "ops_register_manifest_v1_ops_clients_manifests_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClientManifestIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClientManifestIn"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Register a build's renderer capability manifest (operators; once per build)",
+        "tags": [
+          "clients"
+        ]
+      }
+    },
+    "/v1/ops/clients/{platform}/minimum": {
+      "put": {
+        "operationId": "ops_set_minimum_v1_ops_clients__platform__minimum_put",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "platform",
+            "required": true,
+            "schema": {
+              "title": "Platform",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClientMinimumIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/ClientPlatformState"
+                  },
+                  "title": "Response Ops Set Minimum V1 Ops Clients  Platform  Minimum Put",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Set the minimum supported app version (operators, MFA, audited; 14 days' notice when raising)",
+        "tags": [
+          "clients"
         ]
       }
     },
