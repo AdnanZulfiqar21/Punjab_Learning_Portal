@@ -70,7 +70,22 @@ async function Builder({ grade: rawGrade, subject: rawSubject }: { grade?: strin
           Written questions for {GRADE_LABEL[grade]} {name} appear here once their question and marking rubric are both approved.
         </Notice>
       ) : (
-        <WrittenBuilder grade={grade} subject={subject} chapters={av.chapters} uploadAllowanceS={av.upload_allowance_s} caps={av.caps} />
+        <>
+          {/* STAFFING-01: an honest wait, and a plain notice when marking is full (submitted work is still marked). */}
+          {!av.review_accepting ? (
+            <Notice tone="warn" title="Marking is full right now">
+              Teacher marking for {GRADE_LABEL[grade]} {name} is at capacity, so a new written test can&apos;t start now. Scripts already submitted are kept
+              and will be marked.
+            </Notice>
+          ) : (
+            av.turnaround_days != null && (
+              <p className="text-sm text-muted">
+                Teacher marking currently takes about {av.turnaround_days} day{av.turnaround_days === 1 ? "" : "s"} from when you submit.
+              </p>
+            )
+          )}
+          <WrittenBuilder grade={grade} subject={subject} chapters={av.chapters} uploadAllowanceS={av.upload_allowance_s} caps={av.caps} />
+        </>
       )}
     </div>
   );

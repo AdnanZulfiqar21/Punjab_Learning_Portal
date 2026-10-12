@@ -62,8 +62,13 @@ export function WrittenBuilder({ token, grade, subject }: { token: string; grade
     <View style={{ gap: Space.lg }}>
       {!a.review_accepting && (
         <Notice tone="warn" title="Marking is full right now">
-          Teacher marking for this subject is at capacity, so new written tests can&apos;t start. Try again later.
+          Teacher marking for this subject is at capacity, so new written tests can&apos;t start. Scripts already submitted are kept and will be marked.
         </Notice>
+      )}
+      {a.review_accepting && a.turnaround_days != null && (
+        <T variant="small">
+          Teacher marking currently takes about {a.turnaround_days} day{a.turnaround_days === 1 ? "" : "s"} from when you submit.
+        </T>
       )}
       <View style={{ gap: Space.xs }}>
         <T style={{ fontWeight: "600" }}>Chapters</T>
