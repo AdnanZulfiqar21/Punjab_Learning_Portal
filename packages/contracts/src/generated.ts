@@ -1556,6 +1556,40 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/me/study-packs/{chapter_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** An offline study pack for one chapter (lessons you may read; practice-pool questions with released keys) */
+        get: operations["study_pack_v1_me_study_packs__chapter_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/me/study-packs/{chapter_id}/status": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Whether a downloaded pack may be kept, and until when (check when online) */
+        get: operations["study_pack_status_v1_me_study_packs__chapter_id__status_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/me/study-plan": {
         parameters: {
             query?: never;
@@ -7424,6 +7458,38 @@ export interface components {
             /** Title */
             title: string;
         };
+        /** PackOut */
+        PackOut: {
+            /**
+             * Content
+             * @description Canonical JSON (lessons, questions, passages); its UTF-8 SHA-256 is in the manifest
+             */
+            content: string;
+            /**
+             * Manifest
+             * @description Format and schema versions, expiry, counts, files, SHA-256 and size
+             */
+            manifest: {
+                [key: string]: unknown;
+            };
+        };
+        /** PackStatusOut */
+        PackStatusOut: {
+            /**
+             * Expires At
+             * Format: date-time
+             */
+            expires_at: string;
+            /** Includes Premium */
+            includes_premium: boolean;
+            /**
+             * Keep
+             * @description False: delete the pack from the device (plan ended or no longer covers it)
+             */
+            keep: boolean;
+            /** Pack Format Version */
+            pack_format_version: number;
+        };
         /**
          * PageOut
          * @description One logical page: a photo, or one page of a PDF. Mapping and the page cap count these.
@@ -13114,6 +13180,71 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    study_pack_v1_me_study_packs__chapter_id__get: {
+        parameters: {
+            query?: {
+                /** @description The newest pack format this app reads */
+                format?: number;
+            };
+            header?: never;
+            path: {
+                chapter_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PackOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    study_pack_status_v1_me_study_packs__chapter_id__status_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                chapter_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PackStatusOut"];
+                };
             };
             /** @description Validation Error */
             422: {
