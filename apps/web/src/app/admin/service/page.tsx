@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
-import type { Integration, OpsSignal, RolloutSnapshot } from "@portal/contracts";
+import type { ClientPlatformState, Integration, OpsSignal, RolloutSnapshot } from "@portal/contracts";
 import { Badge, Breadcrumbs, Notice, SkeletonLines } from "@/components/ui";
 import { api, currentUser } from "@/lib/session";
+import { ClientMinimumForm } from "./client-minimum-form";
 import { RolloutForm } from "./rollout-form";
 
 export const metadata: Metadata = { title: "Service overview", robots: { index: false } };
@@ -37,6 +38,9 @@ export default function ServicePage() {
       </Suspense>
       <Suspense fallback={<SkeletonLines lines={4} label="Reading feature rollouts" />}>
         <Rollouts />
+      </Suspense>
+      <Suspense fallback={<SkeletonLines lines={4} label="Reading supported app versions" />}>
+        <ClientVersions />
       </Suspense>
     </div>
   );
@@ -181,6 +185,57 @@ async function Rollouts() {
             <RolloutForm rolloutKey={r.key} label={r.description} percent={r.percent} />
           </li>
         ))}
+      </ul>
+    </section>
+  );
+}
+
+const PLATFORM_NAME: Record<string, string> = { android: "Android", ios: "iPhone and iPad" };
+const at = (iso: string) => new Date(iso).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" });
+
+// P13.S1.T4 (CLIENTS-01): the oldest app version each platform still serves, and the builds' capability manifests.
+async function ClientVersions() {
+  const user = await currentUser();
+  if (!user) redirect("/signin?next=/admin/service");
+  const res = await api<ClientPlatformState[]>("/v1/ops/clients", { token: user.token });
+  if (!res.ok) return null; // the signals panel above already explains access problems
+  return (
+    <section aria-labelledby="clients-h" className="space-y-2">
+      <h2 id="clients-h" className="font-semibold">
+        Supported app versions
+      </h2>
+      <p className="text-sm text-muted">
+        Raising a minimum gives learners at least 14 days&apos; notice and never takes effect inside a scheduled mock window. After it, an older app is told to
+        update instead of working. Lowering it applies at once. The web app is always current.
+      </p>
+      <ul className="space-y-3">
+        {res.data.map((p) => {
+          const name = PLATFORM_NAME[p.platform] ?? p.platform;
+          return (
+            <li key={p.platform} className="space-y-3 rounded-xl border border-border bg-surface p-4 text-sm">
+              <div className="flex flex-wrap items-baseline justify-between gap-2">
+                <p className="font-medium">{name}</p>
+                <p>
+                  {p.min_version ? (
+                    <>
+                      Minimum <span className="font-mono">{p.min_version}</span>
+                      {p.enforce_at ? <span className="text-muted"> · in effect from {at(p.enforce_at)}</span> : null}
+                    </>
+                  ) : (
+                    <span className="text-muted">No minimum set: every version is served.</span>
+                  )}
+                </p>
+              </div>
+              {p.reason && <p className="text-muted">Reason: {p.reason}</p>}
+              <p className="text-muted">
+                {p.manifests.length === 0
+                  ? "No build has registered its capability manifest yet."
+                  : `Registered builds: ${p.manifests.map((m) => `${m.app_version} (renderer ${m.renderer_version}, packs v${m.pack_format_version})`).join(", ")}.`}
+              </p>
+              <ClientMinimumForm platform={p.platform} label={name} />
+            </li>
+          );
+        })}
       </ul>
     </section>
   );

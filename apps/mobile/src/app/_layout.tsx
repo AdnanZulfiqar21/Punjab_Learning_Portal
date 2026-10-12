@@ -4,6 +4,7 @@ import { useEffect } from "react";
 
 import { useColorScheme } from "@/hooks/use-color-scheme";
 import { useTheme } from "@/hooks/use-theme";
+import { VersionGate } from "@/components/version-gate";
 import { AuthProvider } from "@/lib/auth";
 
 SplashScreen.preventAutoHideAsync();
@@ -16,6 +17,7 @@ export default function RootLayout() {
   }, []);
   const base = scheme === "dark" ? DarkTheme : DefaultTheme;
   return (
+    <VersionGate>
     <AuthProvider>
     <ThemeProvider
       value={{ ...base, colors: { ...base.colors, background: c.background, card: c.surface, text: c.text, border: c.border, primary: c.accent } }}>
@@ -33,5 +35,6 @@ export default function RootLayout() {
       </Stack>
     </ThemeProvider>
     </AuthProvider>
+    </VersionGate>
   );
 }
