@@ -4403,6 +4403,34 @@
         "title": "FlagsOut",
         "type": "object"
       },
+      "FocusOut": {
+        "properties": {
+          "common_mistakes": {
+            "description": "The rubric's listed misconceptions for this criterion",
+            "items": {
+              "type": "string"
+            },
+            "title": "Common Mistakes",
+            "type": "array"
+          },
+          "criterion_id": {
+            "title": "Criterion Id",
+            "type": "string"
+          },
+          "description": {
+            "description": "What the rubric asks for, in its own approved words",
+            "title": "Description",
+            "type": "string"
+          }
+        },
+        "required": [
+          "criterion_id",
+          "description",
+          "common_mistakes"
+        ],
+        "title": "FocusOut",
+        "type": "object"
+      },
       "FormCreateIn": {
         "properties": {
           "chapter_ids": {
@@ -7726,6 +7754,51 @@
         "title": "MockSessionOut",
         "type": "object"
       },
+      "NextStepsOut": {
+        "description": "W07.S2.T1 (NEXT-STEPS-01): where to go next on a question that lost marks. Everything here is approved content:\nthe rubric's own wording for what was missed and live lessons for the question's topic. Nothing is generated.",
+        "properties": {
+          "chapter_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The question's chapter (its outline and textbook pages)",
+            "title": "Chapter Id"
+          },
+          "focus": {
+            "items": {
+              "$ref": "#/components/schemas/FocusOut"
+            },
+            "title": "Focus",
+            "type": "array"
+          },
+          "lessons": {
+            "items": {
+              "$ref": "#/components/schemas/RelatedLesson"
+            },
+            "title": "Lessons",
+            "type": "array"
+          },
+          "lessons_missing": {
+            "description": "True when no reviewed lesson is published for this topic or chapter",
+            "title": "Lessons Missing",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "focus",
+          "lessons",
+          "lessons_missing",
+          "chapter_id"
+        ],
+        "title": "NextStepsOut",
+        "type": "object"
+      },
       "NotCountedOut": {
         "description": "RECEIPT-01: a question whose latest change wasn't counted, and why.",
         "properties": {
@@ -9833,6 +9906,17 @@
           "max_units": {
             "title": "Max Units",
             "type": "integer"
+          },
+          "next_steps": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/NextStepsOut"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Only for a scored question that lost marks"
           },
           "position": {
             "title": "Position",

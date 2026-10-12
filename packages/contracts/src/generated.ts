@@ -6114,6 +6114,21 @@ export interface components {
             /** Flagged */
             flagged: number[];
         };
+        /** FocusOut */
+        FocusOut: {
+            /**
+             * Common Mistakes
+             * @description The rubric's listed misconceptions for this criterion
+             */
+            common_mistakes: string[];
+            /** Criterion Id */
+            criterion_id: string;
+            /**
+             * Description
+             * @description What the rubric asks for, in its own approved words
+             */
+            description: string;
+        };
         /** FormCreateIn */
         FormCreateIn: {
             /** Chapter Ids */
@@ -7459,6 +7474,27 @@ export interface components {
             window_closes_at: string;
         };
         /**
+         * NextStepsOut
+         * @description W07.S2.T1 (NEXT-STEPS-01): where to go next on a question that lost marks. Everything here is approved content:
+         *     the rubric's own wording for what was missed and live lessons for the question's topic. Nothing is generated.
+         */
+        NextStepsOut: {
+            /**
+             * Chapter Id
+             * @description The question's chapter (its outline and textbook pages)
+             */
+            chapter_id: string | null;
+            /** Focus */
+            focus: components["schemas"]["FocusOut"][];
+            /** Lessons */
+            lessons: components["schemas"]["RelatedLesson"][];
+            /**
+             * Lessons Missing
+             * @description True when no reviewed lesson is published for this topic or chapter
+             */
+            lessons_missing: boolean;
+        };
+        /**
          * NotCountedOut
          * @description RECEIPT-01: a question whose latest change wasn't counted, and why.
          */
@@ -8351,6 +8387,8 @@ export interface components {
             learner_action?: ("rescan" | "confirm_or_rescan") | null;
             /** Max Units */
             max_units: number;
+            /** @description Only for a scored question that lost marks */
+            next_steps?: components["schemas"]["NextStepsOut"] | null;
             /** Position */
             position: number;
             /**
