@@ -16370,6 +16370,8 @@ export interface operations {
                 kind?: string | null;
                 subject?: string | null;
                 mine?: boolean;
+                /** @description Only this question family's variants (P08.S3.T2) */
+                family?: string | null;
                 limit?: number;
             };
             header?: never;

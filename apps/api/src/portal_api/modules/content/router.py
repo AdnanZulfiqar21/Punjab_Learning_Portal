@@ -316,6 +316,7 @@ def queue(
     kind: Annotated[str | None, Query(pattern="^(lesson|mcq|written|rubric|storyboard)$")] = None,
     subject: Annotated[str | None, Query(max_length=40)] = None,
     mine: bool = False,
+    family: Annotated[uuid.UUID | None, Query(description="Only this question family's variants (P08.S3.T2)")] = None,
     limit: Annotated[int, Query(ge=1, le=200)] = 100,
 ) -> list[ItemSummary]:
     _no_store(response)
@@ -344,6 +345,8 @@ def queue(
         stmt = stmt.where(ContentItem.subject_code == subject)
     if mine:
         stmt = stmt.where((ContentItem.created_by == who.user.id) | (ContentItem.assigned_reviewer_id == who.user.id))
+    if family:
+        stmt = stmt.where(ContentItem.family_id == family)
     items = list(db.scalars(stmt))
     chapters = {c.id: c for c in db.scalars(select(Chapter).where(Chapter.id.in_({i.chapter_id for i in items})))}
     topic_ids = {i.topic_id for i in items if i.topic_id}

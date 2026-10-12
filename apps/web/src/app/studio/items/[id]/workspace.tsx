@@ -267,20 +267,23 @@ export function Workspace({
           </Notice>
         )}
         {conflict && <ConflictPanel kind={item.kind} conflict={conflict} mine={draft} onResolve={resolveConflict} />}
-        <div role="tablist" aria-label="View" className="flex gap-2">
-          {(["edit", "preview"] as const).map((t) => (
-            <button
-              key={t}
-              role="tab"
-              aria-selected={tab === t}
-              type="button"
-              onClick={() => setTab(t)}
-              disabled={t === "edit" && !editable}
-              className={`rounded-lg px-3 py-1.5 text-sm ${tab === t ? "bg-accent-soft font-medium text-accent" : "text-muted hover:text-foreground"} disabled:opacity-40`}
-            >
-              {t === "edit" ? "Edit" : "Preview"}
-            </button>
-          ))}
+        <div className="flex flex-wrap items-center gap-2">
+          {/* A tablist holds only its tabs; the save state sits beside it (axe aria-required-children). */}
+          <div role="tablist" aria-label="View" className="flex gap-2">
+            {(["edit", "preview"] as const).map((t) => (
+              <button
+                key={t}
+                role="tab"
+                aria-selected={tab === t}
+                type="button"
+                onClick={() => setTab(t)}
+                disabled={t === "edit" && !editable}
+                className={`rounded-lg px-3 py-1.5 text-sm ${tab === t ? "bg-accent-soft font-medium text-accent" : "text-muted hover:text-foreground"} disabled:opacity-40`}
+              >
+                {t === "edit" ? "Edit" : "Preview"}
+              </button>
+            ))}
+          </div>
           {editable && <SaveIndicator status={status} revision={revision} />}
         </div>
         {status.kind === "error" && status.errors && status.errors.length > 0 && (
