@@ -13,7 +13,26 @@ import { Badge, Notice } from "@/components/ui";
 type Criterion = { id: string; subpart_id: string | null; description: string; max_units: number; levels: number[]; alternative_group?: string | null };
 type Rubric = { criteria: Criterion[]; expected_concepts?: string[]; consequential_error_rule?: string; units_rule?: string; crossed_out_rule?: string };
 type Question = { stem: { type: string }[]; subparts: { id: string; label: string; blocks: { type: string }[]; max_units: number }[] };
-type Awards = Record<string, Record<string, { units: number; reason: string }>>;
+type Place = { page_id: string; region: number[] | null };
+type Awards = Record<string, Record<string, { units: number; reason: string; evidence?: Place[] }>>;
+// W07.S1.T2 (FEEDBACK-EVIDENCE-01): a criterion's feedback can point to a page, or a ninth of it.
+const AREAS: [string, string][] = [
+  ["0,0", "top left"], ["0,1", "top centre"], ["0,2", "top right"],
+  ["1,0", "middle left"], ["1,1", "centre"], ["1,2", "middle right"],
+  ["2,0", "bottom left"], ["2,1", "bottom centre"], ["2,2", "bottom right"],
+];
+const placeValue = (p?: Place) => {
+  if (!p) return "";
+  if (!p.region) return `${p.page_id}|page`;
+  return `${p.page_id}|${Math.round(p.region[1] * 3)},${Math.round(p.region[0] * 3)}`;
+};
+const placeOf = (v: string): Place[] => {
+  if (!v) return [];
+  const [page_id, area] = v.split("|");
+  if (area === "page") return [{ page_id, region: null }];
+  const [row, col] = area.split(",").map(Number);
+  return [{ page_id, region: [col / 3, row / 3, 1 / 3, 1 / 3].map((n) => Math.round(n * 10000) / 10000) }];
+};
 const marks = (u: number) => String(u / 100);
 
 // RS31-03 / PR32-04: the API's authoritative timing; sent after submission is not necessarily after the upload deadline.
@@ -42,7 +61,10 @@ export function MarkingWorkspace({ initial }: { initial: MarkingCase }) {
     for (const q of c.questions) {
       const r = q.rubric as unknown as Rubric;
       out[String(q.position)] = Object.fromEntries(
-        r.criteria.map((cr) => [cr.id, { units: prior[String(q.position)]?.[cr.id]?.units ?? 0, reason: prior[String(q.position)]?.[cr.id]?.reason ?? "" }]),
+        r.criteria.map((cr) => {
+          const was = prior[String(q.position)]?.[cr.id];
+          return [cr.id, { units: was?.units ?? 0, reason: was?.reason ?? "", evidence: was?.evidence ?? [] }];
+        }),
       );
     }
     return out;
@@ -93,7 +115,7 @@ export function MarkingWorkspace({ initial }: { initial: MarkingCase }) {
   const expansion = () => (added.length ? { positions: added, reason: expansionReason.trim() } : undefined);
   const canMark = c.leased_by_me && c.status === "queued";
 
-  function set(pos: string, id: string, patch: Partial<{ units: number; reason: string }>) {
+  function set(pos: string, id: string, patch: Partial<{ units: number; reason: string; evidence: Place[] }>) {
     setAwards((a) => ({ ...a, [pos]: { ...a[pos], [id]: { ...a[pos][id], ...patch } } }));
   }
 
@@ -393,6 +415,26 @@ export function MarkingWorkspace({ initial }: { initial: MarkingCase }) {
                             className="w-full rounded border border-border bg-surface px-2 py-1 text-sm"
                             maxLength={1000}
                           />
+                          {(slot.pages ?? []).length > 0 && (
+                            <select
+                              aria-label={`Where on the script ${cr.id} is about`}
+                              value={placeValue(awards[pos]?.[cr.id]?.evidence?.[0])}
+                              onChange={(e) => set(pos, cr.id, { evidence: placeOf(e.target.value) })}
+                              className="w-full rounded border border-border bg-surface px-2 py-1 text-sm"
+                            >
+                              <option value="">Not linked to a place on the script</option>
+                              {(slot.pages ?? []).map((pid) => (
+                                <optgroup key={pid} label={`Page ${pageNo(pid)}`}>
+                                  <option value={`${pid}|page`}>Page {pageNo(pid)}: whole page</option>
+                                  {AREAS.map(([a, label]) => (
+                                    <option key={a} value={`${pid}|${a}`}>
+                                      Page {pageNo(pid)}: {label}
+                                    </option>
+                                  ))}
+                                </optgroup>
+                              ))}
+                            </select>
+                          )}
                         </fieldset>
                       ))}
                     </div>

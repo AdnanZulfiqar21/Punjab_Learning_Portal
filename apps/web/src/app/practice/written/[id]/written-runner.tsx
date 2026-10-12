@@ -4,7 +4,7 @@
 // uploaded but NOT submitted, and submitted (sealed with a receipt). Nothing is marked until it is submitted.
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import type { WrittenAttempt, WrittenPage, WrittenResult } from "@portal/contracts";
+import type { EvidenceLink, WrittenAttempt, WrittenPage, WrittenResult } from "@portal/contracts";
 import { saveMapping, sealScript } from "@/app/actions/written";
 import { LessonBlocks } from "@/components/lesson-blocks";
 import { PendingAction } from "./pending-action";
@@ -263,6 +263,9 @@ export function WrittenRunner({ attempt, result = null }: { attempt: WrittenAtte
                         </span>{" "}
                         {c.description}
                         {c.reason && <span className="block text-muted">{c.reason}</span>}
+                        {(c.evidence ?? []).map((e, k) => (
+                          <EvidencePlace key={k} attemptId={attempt.id} place={e} />
+                        ))}
                       </li>
                     ))}
                   </ul>
@@ -418,5 +421,29 @@ export function WrittenRunner({ attempt, result = null }: { attempt: WrittenAtte
         </section>
       )}
     </div>
+  );
+}
+
+// W07.S1.T2 (FEEDBACK-EVIDENCE-01): the place on your page a comment is about. The region is a fraction of the upright
+// page preview, so it is drawn over the same image at any size. A scan that is no longer available is named, never
+// highlighted.
+function EvidencePlace({ attemptId, place }: { attemptId: string; place: EvidenceLink }) {
+  if (!place.available) return <span className="block text-sm text-muted">About {place.where}: that scan is no longer available.</span>;
+  const r = place.region;
+  return (
+    <details className="text-sm">
+      <summary className="cursor-pointer text-accent">Show where: {place.where}</summary>
+      <span className="relative mt-1 inline-block w-full max-w-sm">
+        {/* eslint-disable-next-line @next/next/no-img-element -- private, uncached preview served by our own route */}
+        <img src={`/practice/written/${attemptId}/pages/${place.page_id}`} alt={`Your page ${place.page_number}`} className="block w-full rounded border border-border" />
+        {r && (
+          <span
+            aria-hidden="true"
+            className="absolute rounded border-4 border-warn"
+            style={{ left: `${r[0] * 100}%`, top: `${r[1] * 100}%`, width: `${r[2] * 100}%`, height: `${r[3] * 100}%` }}
+          />
+        )}
+      </span>
+    </details>
   );
 }

@@ -84,6 +84,8 @@ export function WrittenResultView({ attemptId, token }: { attemptId: string; tok
               <T key={cr.id} variant="small">
                 {marks(cr.earned_units)} / {marks(cr.max_units)} · {cr.description}
                 {cr.reason ? ` — ${cr.reason}` : ""}
+                {/* FEEDBACK-EVIDENCE-01: the place on the script the comment is about, in words. */}
+                {(cr.evidence ?? []).map((e) => (e.available ? ` (see ${e.where})` : ` (about ${e.where}: that scan is no longer available)`)).join("")}
               </T>
             ))}
             <PendingAction attemptId={attemptId} token={token} q={q} onDone={req.retry} />
