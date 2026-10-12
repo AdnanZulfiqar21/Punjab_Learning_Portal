@@ -7503,6 +7503,11 @@ export interface components {
              * @description Whether this learner can start a new test now (an active plan or trial)
              */
             entitled: boolean;
+            /**
+             * Problems
+             * @description Why the pattern can't be used with the current books (P05.S4.T3)
+             */
+            problems: string[];
             /** Ready */
             ready: boolean;
             /** Scheduled */
