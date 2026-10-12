@@ -19,7 +19,7 @@ import uuid
 from datetime import datetime
 from typing import Any
 
-from sqlalchemy import String, cast, func, select
+from sqlalchemy import String, cast, func, or_, select
 from sqlalchemy.orm import Session
 
 from portal_api.modules.assessment import forms
@@ -169,6 +169,69 @@ def _revision(db: Session, user_id: uuid.UUID, now: datetime) -> dict[str, int]:
     }
 
 
+UNFINISHED_LIMIT = 5
+
+
+def _unfinished(db: Session, user_id: uuid.UUID, now: datetime) -> list[dict[str, Any]]:
+    """P19.S1.T1 (JOURNEYS-01): tests started and not yet submitted while there is still time, newest first, so one
+    started on another device can be picked up here (the attempt page then offers Continue here, HANDOFF-01)."""
+    from portal_api.modules.assessment.models import Attempt, AttemptAnswer, PracticeForm
+    from portal_api.modules.written.models import WrittenAttempt, WrittenForm
+
+    answered = (
+        select(func.count())
+        .where(AttemptAnswer.attempt_id == Attempt.id, AttemptAnswer.option_id.is_not(None))
+        .scalar_subquery()
+    )
+    out: list[dict[str, Any]] = [
+        {
+            "attempt_id": a.id,
+            "kind": f.kind,
+            "grade": f.grade_number,
+            "subject": f.subject_code,
+            "questions": f.question_count,
+            "answered": int(n),
+            "started_at": a.started_at,
+            "closes_at": a.deadline_at,
+        }
+        for a, f, n in db.execute(
+            select(Attempt, PracticeForm, answered)
+            .join(PracticeForm, PracticeForm.id == Attempt.form_id)
+            .where(
+                Attempt.user_id == user_id,
+                Attempt.status == "active",
+                or_(Attempt.deadline_at.is_(None), Attempt.deadline_at > now),
+            )
+            .order_by(Attempt.started_at.desc())
+            .limit(UNFINISHED_LIMIT)
+        ).all()
+    ]
+    out += [
+        {
+            "attempt_id": w.id,
+            "kind": "written",
+            "grade": f.grade_number,
+            "subject": f.subject_code,
+            "questions": None,
+            "answered": None,
+            "started_at": w.started_at,
+            "closes_at": w.upload_cutoff_at,
+        }
+        for w, f in db.execute(
+            select(WrittenAttempt, WrittenForm)
+            .join(WrittenForm, WrittenForm.id == WrittenAttempt.form_id)
+            .where(
+                WrittenAttempt.user_id == user_id,
+                WrittenAttempt.status == "active",
+                WrittenAttempt.upload_cutoff_at > now,
+            )
+            .order_by(WrittenAttempt.started_at.desc())
+            .limit(UNFINISHED_LIMIT)
+        ).all()
+    ]
+    return sorted(out, key=lambda u: u["started_at"], reverse=True)[:UNFINISHED_LIMIT]
+
+
 def build(db: Session, user_id: uuid.UUID) -> dict[str, Any]:
     from portal_api.modules.assessment import progress
     from portal_api.modules.identity.models import StudentProfile
@@ -186,6 +249,7 @@ def build(db: Session, user_id: uuid.UUID) -> dict[str, Any]:
             db, user_id, chapters, now, list(p.target_exams or []) if p else [], p.target_year if p else None
         ),
         "continue_learning": _continue(db, user_id, grade),
+        "unfinished": _unfinished(db, user_id, now),
         "revision": _revision(db, user_id, now),
         "recent": report["recent"][:3],
         "results_pending": report["results_pending"],

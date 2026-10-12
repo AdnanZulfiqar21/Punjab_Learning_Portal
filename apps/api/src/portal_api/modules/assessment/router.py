@@ -954,11 +954,25 @@ class Revision(BaseModel):
     open: int
 
 
+class UnfinishedTest(BaseModel):
+    """A test started and not yet submitted while there is still time (P19.S1.T1)."""
+
+    attempt_id: uuid.UUID
+    kind: Literal["practice", "mock", "review", "written"]
+    grade: int
+    subject: str
+    questions: int | None = Field(description="Questions in the test (not given for written tests)")
+    answered: int | None = Field(description="Questions answered so far (not given for written tests)")
+    started_at: datetime
+    closes_at: datetime | None = Field(description="When answering or uploading closes; null for untimed practice")
+
+
 class Dashboard(BaseModel):
     generated_at: datetime
     profile: DashboardProfile | None
     meters: list[Meter]
     continue_learning: ContinueLesson | None
+    unfinished: list[UnfinishedTest]
     revision: Revision
     upcoming_mock: MockSessionOut | None
     recent: list[RecentResult]
