@@ -208,3 +208,28 @@ Current product/engineering decisions. Section 17 (D01–D14) and 20.19 (WA-D01�
 
 ## Section 17 decisions (all at proposed default unless listed above)
 D02–D14 remain at the roadmap's proposed defaults. Nothing has been purchased, contracted or enrolled. See BLOCKERS.md for the external inputs each one waits on.
+
+
+## Written-assessment owner decisions WA-D01 to WA-D15 (W00.S3.T2; register written 2026-10-12)
+
+These are roadmap §20.19's decisions. **None has an owner or lead approval on record.** The "interim default" column
+is what the code does today, each provisional and reversible, so engineering could continue. An approval is recorded
+here with its date and approver. A blocker is never an approval.
+
+| ID | Decision | Roadmap recommendation (§20.19) | Interim default in the code | Approval | Needs |
+|---|---|---|---|---|---|
+| WA-D01 | First subject, grade, chapter and language | One well-supported Class XI conceptual short-answer slice from owner data | None chosen. Engineering uses technical fixture questions only. | Not recorded | B01 (owner material, reviewers) |
+| WA-D02 | Rubric authority and reviewer team | Official schemes where available, otherwise teacher-reviewed practice rubrics with independent approval | `official_scheme` needs a published reference, otherwise `practice_rubric`; independent review and publisher separation enforced (IMPL-19, RUBRIC-PATHS-01) | Not recorded | B01 (named reviewers) |
+| WA-D03 | Writing, upload and optional-answer policy | Separate D/G/U; proposed 10/20-minute allowances only after byte and uplink qualification | D, G and U are separate and pinned; G defaults to 10 minutes (IMPL-20); no optional-answer choices | Not recorded | Device qualification (B09, B14) |
+| WA-D04 | Input formats and page limits | Qualified JPEG/PNG/PDF and the §20.8 caps | JPEG, PNG and PDF with byte, pixel, side and page caps (EVIDENCE-01); HEIC converted to JPEG on the phone (NATIVE-W01) | Not recorded | Device qualification (B14) |
+| WA-D05 | Model/OCR route and terms | Benchmark permitted candidates on real scripts; pin versions or teacher review | No provider: the assessor is off by default and the fixture is refused in staging and production (AUTOASSESS-01); unexpected model versions are rejected (AUTO-PROVENANCE-01) | Not recorded | B10 |
+| WA-D06 | Statistical release policy | Freeze severe-error definitions and thresholds before the holdout | Not frozen. Only a fixed-share evaluation subset exists (CALIBRATION-01). | Not recorded | B10 (real data), evaluation lead |
+| WA-D07 | Trial and paid allowance and rates | Cost-backed weighted units, original bucket and period, remedies, no new trial | Weights short 1, long 2 units (IMPL-22), not cost-backed; the cohort economics report can price them once rates exist (ECONOMICS-01) | Not recorded | Owner, B06 |
+| WA-D08 | Review staffing and service | Fund real coverage; subtract fixed and backlog work before admission | Operator-entered staffing figures and admission limits (STAFFING-01, ALLOC-01, ADMIT-01) | Not recorded | Real staffing (B01) |
+| WA-D09 | Rescan, appeal and remedy windows | Proposed 14-day recheck, 7-day action and remedy, three-way rescan classification, mixed completeness | 14-day recheck (RECHECK-01); 7-day learner actions (RESCAN-01); three-way classification (RESCAN-02); completeness per §20.9.3 (COMPLETENESS-01) | Not recorded | Academic + product leads |
+| WA-D10 | Evidence and score retention and deletion | Proposed 90-day scans and readings, 12-month feedback, bounded appeal holds | Nothing is erased automatically; deletion requests are routed to support (PRIVACY-01) | Not recorded | B15 |
+| WA-D11 | Urdu, numericals and diagrams | Qualify each slice independently or keep it unavailable | Not offered: English text answers only | Not recorded | B01, B10 |
+| WA-D12 | Release scope and load promise | R2 chapter short and long scope for the default complete product | R2 is required for the complete-product claim (SCOPE-01, launch manifest); nothing beyond is claimed | Not recorded | Owner |
+| WA-D13 | Progressive upload and capture policy | Upload from the start; a measured 2,000-3,000-pixel preset with a higher-detail fallback | Uploads open from the start; the capture policy version is pinned per form; no measured preset | Not recorded | B09, B14 |
+| WA-D14 | Provider processing location and terms | Approve each candidate before any real-script call | None approved, so no real-script call is possible | Not recorded | B10 |
+| WA-D15 | Composite board-paper policy | Only source-verified parent/child timing, choices, maxima, corrections and release | Not built: chapter-only written practice, clearly labelled | Not recorded | B02, owner |
