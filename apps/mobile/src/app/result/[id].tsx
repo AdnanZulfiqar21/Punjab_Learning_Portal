@@ -130,6 +130,22 @@ function Review({ item, assetSource }: { item: ItemReview; assetSource: AssetSou
           <LessonBlocks blocks={explanation.correct ?? []} assetSource={assetSource} />
         </View>
       )}
+      {(item.related_lessons ?? []).length > 0 && (
+        // P13.S2.T3: the lessons that teach this question's topic (same as the web result), for revision.
+        <View style={{ marginTop: Space.sm, gap: Space.xs }}>
+          <T variant="small" style={{ fontWeight: "600" }}>
+            Revise
+          </T>
+          {(item.related_lessons ?? []).map((l) => (
+            <Button
+              key={l.id}
+              variant="link"
+              label={l.title}
+              onPress={() => router.push({ pathname: "/chapter/[id]", params: { id: l.chapter_id } })}
+            />
+          ))}
+        </View>
+      )}
     </Card>
   );
 }

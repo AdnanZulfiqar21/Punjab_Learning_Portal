@@ -10,8 +10,9 @@ import { currentUser, listSessions } from "@/lib/session";
 import { STUDIO_ROLES } from "@/lib/studio";
 import { getAccess } from "@/lib/access";
 import { PlanStatus } from "@/components/plan-status";
+import { RemoveTrialDevice } from "@/components/trial-devices";
 import { NotificationPreferences } from "@/components/notification-preferences";
-import type { AssistedAccess, NotificationPreferences as Prefs } from "@portal/contracts";
+import type { AssistedAccess, NotificationPreferences as Prefs, TrialDevice } from "@portal/contracts";
 import { AssistedAccessList } from "@/components/assisted-access";
 import { DeleteAccount } from "@/components/delete-account";
 import { api } from "@/lib/session";
@@ -31,16 +32,22 @@ export default function AccountPage() {
 }
 
 const fmt = (iso: string) => new Date(iso).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" });
+const SURFACE_NAME: Record<string, string> = { android: "Android app", ios: "iPhone or iPad app", web: "Web browser" };
+const METHOD_NOTE: Record<string, string> = {
+  exception: "allowed after a support review",
+  fallback: "added while device checks were unavailable",
+};
 
 async function Account() {
   const user = await currentUser();
   if (!user) redirect("/signin?next=/account");
   const { me, token } = user;
-  const [sessions, access, prefs, assists] = await Promise.all([
+  const [sessions, access, prefs, assists, trialDevices] = await Promise.all([
     listSessions(token),
     getAccess(token),
     api<Prefs>("/v1/me/notification-preferences", { token }),
     api<AssistedAccess[]>("/v1/me/assisted-access", { token }),
+    api<TrialDevice[]>("/v1/me/trial/devices", { token }),
   ]);
   const p = me.profile;
   return (
@@ -124,6 +131,35 @@ async function Account() {
             Your plan
           </h2>
           <PlanStatus access={access} />
+        </section>
+      )}
+
+      {trialDevices.ok && trialDevices.data.length > 0 && (
+        <section aria-labelledby="trial-devices-heading" className="space-y-3">
+          <h2 id="trial-devices-heading" className="font-semibold">
+            Devices on your free trial
+          </h2>
+          <p className="text-sm text-muted">
+            Up to 3 devices can use your free trial. Removing one frees a place for another. A removed phone or tablet can&apos;t rejoin the trial by itself; if
+            you removed one by mistake, ask for help.
+          </p>
+          <ul className="divide-y divide-border rounded-xl border border-border bg-surface">
+            {trialDevices.data.map((d) => {
+              const name = d.label || SURFACE_NAME[d.surface] || "Device";
+              return (
+                <li key={d.id} className="flex flex-wrap items-center justify-between gap-3 px-4 py-3 text-sm">
+                  <span>
+                    <span className="font-medium">{name}</span>
+                    <span className="block text-muted">
+                      {SURFACE_NAME[d.surface] ?? d.surface} · added {fmt(d.authorized_at)}
+                      {METHOD_NOTE[d.method] ? ` · ${METHOD_NOTE[d.method]}` : ""}
+                    </span>
+                  </span>
+                  <RemoveTrialDevice id={d.id} label={name} />
+                </li>
+              );
+            })}
+          </ul>
         </section>
       )}
 
