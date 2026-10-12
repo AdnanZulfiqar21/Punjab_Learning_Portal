@@ -120,6 +120,9 @@ class AssessorOutput(BaseModel):
     criteria: list[CriterionAward] = Field(max_length=60)
     alternatives_relied_on: list[str] = Field(default_factory=list, max_length=20)
     unresolved: list[UnresolvedFlag] = Field(default_factory=list, max_length=20)
+    # W05.S3.T2-T3 (AUTO-PROVENANCE-01): which model actually answered, and what the call used, when the provider says.
+    served_by: str | None = Field(default=None, max_length=100, description="The model version that answered")
+    usage: dict[str, int] | None = Field(default=None, description="Provider-reported usage, e.g. input/output units")
 
 
 class AssessorUnavailable(Exception):
@@ -390,6 +393,17 @@ def process(db: Session, row_id: uuid.UUID, assessor: Assessor) -> str:
     request = build_request(receipt, q)
     request_hash = hashlib.sha256(json.dumps(request, sort_keys=True, default=str).encode()).hexdigest()
     db.rollback()  # release the connection before calling the provider
+    config_hash = hashlib.sha256(
+        json.dumps(
+            {
+                "assessor": assessor.name,
+                "version": assessor.version,
+                "contract": CONTRACT_VERSION,
+                "instructions": request["instructions"],
+            },
+            sort_keys=True,
+        ).encode()
+    ).hexdigest()
     started = time.monotonic()
     try:
         raw = assessor.assess(request)
@@ -402,13 +416,26 @@ def process(db: Session, row_id: uuid.UUID, assessor: Assessor) -> str:
     assert receipt is not None
     status, proposal, flags, errors = validate_output(receipt, q, raw)
     output_hash = hashlib.sha256(json.dumps(raw, sort_keys=True, default=str).encode()).hexdigest()
+    served_by = raw.get("served_by") if isinstance(raw, dict) else None
+    usage = raw.get("usage") if isinstance(raw, dict) else None
+    if served_by is not None and str(served_by) != assessor.version:
+        # An unexpected model change: the qualified version didn't answer, so nothing it said can be proposed.
+        status, proposal, flags = "rejected", {}, []
+        errors = [
+            f"The provider answered with model {served_by}, not the qualified {assessor.version}; "
+            "reassess after requalification.",
+            *errors,
+        ]
     provenance = {
         "assessor": assessor.name,
         "assessor_version": assessor.version,
+        "served_by": served_by,  # None: the provider didn't say (a declared limitation)
         "contract_version": CONTRACT_VERSION,
+        "config_hash": config_hash,
         "request_hash": request_hash,
         "output_hash": output_hash,
         "latency_ms": latency_ms,
+        "usage": usage,  # priced later with the economics rates; None when the provider doesn't report it
     }
     return _finish(db, row_id, status, proposal=proposal, flags=flags, errors=errors, provenance=provenance)
 
