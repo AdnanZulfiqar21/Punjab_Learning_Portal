@@ -103,6 +103,11 @@ def save_note(db: Session, user_id: uuid.UUID, item_id: uuid.UUID, text: str, ba
     _readable(db, user_id, item_id)
     n = _locked_note(db, user_id, item_id)
     current = n.revision if n is not None else 0
+    if n is not None and n.deleted_at is None and n.text == text:
+        # P13.S3.T2 (OFFLINE-SYNC-01): the same words sent again (a replay whose first response was lost) are already
+        # saved; never a conflict with the learner's own note, and nothing is written twice.
+        db.rollback()
+        return _note_state(n, item_id)
     if base_revision != current:
         deleted = n is not None and n.deleted_at is not None
         raise Conflict(

@@ -2,11 +2,13 @@
 // validated against the API; a 401 anywhere means the session ended (expired, revoked elsewhere) and clears it.
 import * as Device from "expo-device";
 import { createContext, use, useCallback, useEffect, useMemo, useState, type ReactNode } from "react";
+import { AppState } from "react-native";
 import type { Me } from "@portal/contracts";
 
 import { api, ApiError } from "@/lib/api";
 import { clearDrafts } from "@/lib/note-drafts";
 import { clearQueues } from "@/lib/op-store";
+import { clearProgress, flush } from "@/lib/progress-queue";
 import { tokenStore } from "@/lib/token-store";
 
 export type AuthState =
@@ -79,11 +81,22 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const token = await tokenStore.get();
     if (token) await api.signOut(token).catch(() => undefined); // local sign-out must succeed even offline
     await tokenStore.clear();
-    await Promise.all([clearDrafts(), clearQueues()]); // ISOLATION-01: the next person on this device starts clean
+    await Promise.all([clearDrafts(), clearQueues(), clearProgress()]); // ISOLATION-01: a clean start for the next person
     setState({ status: "signed_out" });
   }, []);
 
   const refresh = useCallback(async () => load(await tokenStore.get()), [load]);
+
+  // P13.S3.T2: send progress queued offline when signed in and whenever the app comes back to the foreground.
+  const signedIn = state.status === "signed_in" ? state : null;
+  useEffect(() => {
+    if (!signedIn) return;
+    void flush(signedIn.token, signedIn.me.id).catch(() => undefined);
+    const sub = AppState.addEventListener("change", (s) => {
+      if (s === "active") void flush(signedIn.token, signedIn.me.id).catch(() => undefined);
+    });
+    return () => sub.remove();
+  }, [signedIn]);
 
   const handleError = useCallback((e: unknown) => {
     if (e instanceof ApiError && e.kind === "unauthorized") {
