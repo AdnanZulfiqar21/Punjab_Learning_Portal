@@ -12,7 +12,13 @@ export default function SignInPage({ searchParams }: PageProps<"/signin">) {
       <h1 className="text-2xl font-semibold tracking-tight">Sign in</h1>
       <Suspense fallback={<SkeletonLines lines={4} label="Loading sign-in options" />}>
         {searchParams.then((sp) => (
-          <Methods next={typeof sp.next === "string" ? sp.next : "/account"} />
+          <>
+            {sp.reason === "reauth" && (
+              // P04.S3.T3 (REAUTH-01): downloading your data or asking to delete your account needs a recent sign-in.
+              <Notice title="Sign in again to continue">For your safety, this needs a recent sign-in. You&apos;ll go straight back afterwards.</Notice>
+            )}
+            <Methods next={typeof sp.next === "string" ? sp.next : "/account"} />
+          </>
         ))}
       </Suspense>
     </div>

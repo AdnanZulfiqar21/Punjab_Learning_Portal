@@ -33,6 +33,12 @@ export function PlanStatus({ access, purpose }: { access: Access; purpose?: stri
           Your free 30-day trial covers practice tests, written practice and every subject in Class XI and XII. It starts when you press
           the button and ends exactly 30 days later. It doesn&apos;t ask for payment details.
         </span>
+        {/* P14.S8.T2 (TRIAL-CONTROLS-01): what the one-trial rule checks, said before anyone starts. */}
+        <span className="mt-2 block text-sm text-muted">
+          There is one free trial per person. Our apps may also check whether a phone has already had a free trial; for that we keep only a
+          random reference for the app on this phone, never the phone&apos;s identity. Shared or second-hand phone? Ask for help and a
+          person will review it.
+        </span>
         <span className="mt-2 block">
           <StartTrialButton />
         </span>

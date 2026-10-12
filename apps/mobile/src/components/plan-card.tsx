@@ -81,6 +81,12 @@ export function PlanCard({ access, token, onChange, purpose }: { access: Access;
           Your free 30-day trial covers practice tests, written practice and every subject in Class XI and XII. It starts now and ends
           exactly 30 days later. No payment details are needed.
         </Notice>
+        {/* P14.S8.T2 (TRIAL-CONTROLS-01): what the one-trial rule checks, said before anyone starts. */}
+        <T variant="small">
+          There is one free trial per person. This app may also check whether this phone has already had a free trial; for that we keep only
+          a random reference for the app on this phone, never the phone&apos;s identity. Shared or second-hand phone? Ask for help and a
+          person will review it.
+        </T>
         {notice ? <Notice tone="warn" title="Free trial">{notice}</Notice> : null}
         {error ? <T style={{ color: c.danger }}>{error}</T> : null}
         <Button

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import time
 import uuid
 from collections.abc import Callable
 from dataclasses import dataclass
@@ -14,7 +15,7 @@ from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.orm import Session
 
 from portal_api.db import get_session
-from portal_api.errors import Forbidden, Unauthorized, Unavailable
+from portal_api.errors import AppError, Forbidden, Unauthorized, Unavailable
 from portal_api.modules.identity import sessions, tokens
 from portal_api.modules.identity.models import AppUser, StaffRoleGrant
 from portal_api.modules.identity.permissions import MFA_REQUIRED, Permission, Role, permissions_for
@@ -54,6 +55,7 @@ def _from_session(db: Session, token: str) -> tuple[AppUser, tokens.Claims, sess
         token_id=str(row.id),
         expires_at=int(row.expires_at.timestamp()),
         mfa=row.mfa,
+        authenticated_at=int(row.created_at.timestamp()),
     )
     return user, claims, row
 
@@ -113,6 +115,23 @@ def _principal(
 
 
 CurrentPrincipal = Annotated[Principal, Depends(current_principal)]
+
+REAUTH_WINDOW_S = 15 * 60
+
+
+class ReauthRequired(AppError):
+    status = 403
+    code = "REAUTH_REQUIRED"
+
+
+def require_recent_sign_in(who: Principal) -> None:
+    """P04.S3.T3 (REAUTH-01): downloading everything about an account or asking to delete it needs a sign-in within
+    the last 15 minutes, so a device left signed in can't be used for either. Signing in again is enough."""
+    at = who.claims.authenticated_at
+    if at is None or time.time() - at > REAUTH_WINDOW_S:
+        raise ReauthRequired(
+            "For your safety, sign in again before you continue. It takes a moment and nothing is lost."
+        )
 
 
 def optional_principal(request: Request, db: Annotated[Session, Depends(get_session)]) -> Principal | None:

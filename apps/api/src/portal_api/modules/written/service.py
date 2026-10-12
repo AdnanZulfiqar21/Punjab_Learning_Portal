@@ -30,6 +30,7 @@ from portal_api.modules.content import written as wq
 from portal_api.modules.content.models import Availability, ContentItem, ContentVersion
 from portal_api.modules.content.workflow import roles_in_scope
 from portal_api.modules.curriculum.models import BookEdition, Chapter, Grade, Subject
+from portal_api.modules.curriculum.regions import released_grade
 from portal_api.modules.identity.deps import Principal
 from portal_api.modules.identity.models import StaffRoleGrant
 from portal_api.modules.identity.permissions import Permission, Role, permissions_for
@@ -134,7 +135,13 @@ def _chapters(db: Session, grade: int, subject: str) -> list[Chapter]:
             .join(BookEdition, BookEdition.id == Chapter.book_id)
             .join(Grade, Grade.id == BookEdition.grade_id)
             .join(Subject, Subject.id == BookEdition.subject_id)
-            .where(Grade.number == grade, Subject.code == subject, Subject.active, Chapter.retired_at.is_(None))
+            .where(
+                released_grade(),
+                Grade.number == grade,
+                Subject.code == subject,
+                Subject.active,
+                Chapter.retired_at.is_(None),
+            )
             .order_by(Chapter.display_order)
         )
     )

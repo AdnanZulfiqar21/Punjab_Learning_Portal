@@ -12,6 +12,8 @@ export async function requestDeletion(confirmEmail: string, reason: string): Pro
     token: t,
     body: JSON.stringify({ confirm_email: confirmEmail, reason: reason || null }),
   });
+  // P04.S3.T3 (REAUTH-01): asking to delete the account needs a recent sign-in; sign in again, then send it.
+  if (!res.ok && (res.problem as Problem | null)?.title === "REAUTH_REQUIRED") redirect("/signin?next=/account&reason=reauth");
   if (res.ok) return { ok: true, message: "We've received your request. Our support team will contact you through your help requests." };
   return { ok: false, message: (res.problem as Problem | null)?.detail ?? "We couldn't record your request." };
 }

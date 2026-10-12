@@ -13573,6 +13573,39 @@
         "title": "StaffArticle",
         "type": "object"
       },
+      "StaffByEmailIn": {
+        "additionalProperties": false,
+        "properties": {
+          "email": {
+            "description": "The exact email the person signed up with",
+            "maxLength": 320,
+            "minLength": 3,
+            "title": "Email",
+            "type": "string"
+          },
+          "reason": {
+            "maxLength": 500,
+            "minLength": 5,
+            "title": "Reason",
+            "type": "string"
+          },
+          "role": {
+            "$ref": "#/components/schemas/Role"
+          },
+          "scope": {
+            "additionalProperties": true,
+            "title": "Scope",
+            "type": "object"
+          }
+        },
+        "required": [
+          "role",
+          "reason",
+          "email"
+        ],
+        "title": "StaffByEmailIn",
+        "type": "object"
+      },
       "StaffCorrectionLink": {
         "properties": {
           "decided_at": {
@@ -13655,6 +13688,98 @@
           "evidence"
         ],
         "title": "StaffDraft",
+        "type": "object"
+      },
+      "StaffGrantOut": {
+        "properties": {
+          "email": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Email"
+          },
+          "granted_at": {
+            "format": "date-time",
+            "title": "Granted At",
+            "type": "string"
+          },
+          "granted_by": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Granted By"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "reason": {
+            "title": "Reason",
+            "type": "string"
+          },
+          "revoke_reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Revoke Reason"
+          },
+          "revoked_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Revoked At"
+          },
+          "role": {
+            "title": "Role",
+            "type": "string"
+          },
+          "scope": {
+            "additionalProperties": true,
+            "title": "Scope",
+            "type": "object"
+          },
+          "user_id": {
+            "format": "uuid",
+            "title": "User Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "role",
+          "scope",
+          "granted_by",
+          "granted_at",
+          "reason",
+          "revoked_at",
+          "revoke_reason",
+          "user_id",
+          "email"
+        ],
+        "title": "StaffGrantOut",
         "type": "object"
       },
       "StaffMessageIn": {
@@ -18622,6 +18747,72 @@
           }
         },
         "summary": "Revoke Role",
+        "tags": [
+          "identity",
+          "admin"
+        ]
+      }
+    },
+    "/v1/admin/staff": {
+      "get": {
+        "operationId": "list_staff_v1_admin_staff_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/StaffGrantOut"
+                  },
+                  "title": "Response List Staff V1 Admin Staff Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Current staff roles",
+        "tags": [
+          "identity",
+          "admin"
+        ]
+      },
+      "post": {
+        "operationId": "add_staff_v1_admin_staff_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StaffByEmailIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StaffGrantOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Give a staff role to the account with this exact email (owner/admin, MFA; audited)",
         "tags": [
           "identity",
           "admin"

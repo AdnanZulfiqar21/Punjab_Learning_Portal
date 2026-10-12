@@ -14,6 +14,8 @@ audited. Each runbook is rehearsed by an automated test that walks the same step
 | Rolling back a release | [release-rollback.md](release-rollback.md) | `apps/api/tests/test_upgrade_compatibility.py` | Strategy enforced by tests (MIGRATION-COMPAT-01); executing it waits on a deployment (B03). |
 | Operator alerts (queues, errors, latency, pool) | [alerts.md](alerts.md) | `test_operations.py`, `test_service_overview.py` | Signals and thresholds tested; paging waits on hosting (B03). |
 
+Everyday owner operations (adding staff, publishing, corrections, refunds, appeals, syllabus updates) and the work that still needs outside specialists: [owner-operations.md](owner-operations.md).
+
 Shared rules:
 
 - Sign in with multi-factor authentication. Lookups, timelines, exceptions, grants and quarantine all require it.

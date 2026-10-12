@@ -52,6 +52,7 @@ from sqlalchemy.orm import Mapped, Session, mapped_column
 from portal_api.db import Base
 from portal_api.errors import Conflict, Forbidden, NotFound, Unprocessable
 from portal_api.modules.audit.models import record
+from portal_api.modules.curriculum.regions import released_grade
 from portal_api.modules.identity.deps import Principal
 
 VERSION_STATUSES = ("draft", "verified", "published", "retired")
@@ -159,7 +160,7 @@ def catalogue_problems(db: Session, sections: list[dict[str, Any]]) -> list[str]
             books = db.execute(
                 select(BookEdition.natural_key, BookEdition.title)
                 .join(Grade, Grade.id == BookEdition.grade_id)
-                .where(BookEdition.subject_id == subject.id, Grade.number == int(g), live)
+                .where(BookEdition.subject_id == subject.id, Grade.number == int(g), live, released_grade())
                 .order_by(BookEdition.natural_key)
             ).all()
             book = f"Class {GRADE_NAMES.get(int(g), g)} {subject.name}"

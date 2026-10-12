@@ -42,6 +42,9 @@ class Settings(BaseSettings):
         # Development defaults: web app (3100) and the Expo web target (8190). Deployed roles must set their own.
         default_factory=lambda: ["http://localhost:3100", "http://127.0.0.1:3100", "http://localhost:8190"]
     )
+    # P05.S4.T2 (REGION-01): regions learners can discover. Another region's records stay hidden until the owner
+    # authorises its release by adding it here.
+    released_regions: list[str] = Field(default_factory=lambda: ["pk-punjab"])
     db_pool_size: int = 10  # per-process pool; multiplied by process count in the §5.8 budget
     db_max_overflow: int = 0
     db_statement_timeout_ms: int = 5000
