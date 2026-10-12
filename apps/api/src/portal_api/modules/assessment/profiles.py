@@ -17,6 +17,12 @@ Lifecycle: `draft` → (two verifications by two different people, neither the a
 version they pinned. Drafts can be edited; nothing else can. Only published versions are visible to learners. A
 profile carries an `eligibility_note` and a source link, and choosing a combination never claims admission
 eligibility.
+
+P05.S4.T3 (PROFILE-CHANGES-01): a pattern must resolve against the catalogue. Each section's class and subject needs
+exactly one live book edition: none leaves the section nothing to draw from, and two (an old and a revised book both
+live) would silently mix editions. This is checked when a draft is saved, again at publication and whenever a mock
+is built, because the catalogue can change in between. A version for an older exam year can't replace a newer
+published one.
 """
 
 from __future__ import annotations
@@ -135,6 +141,41 @@ def parse_rules(raw: object, active_subjects: set[str]) -> tuple[ProfileRules | 
     return (rules if not errors else None), errors
 
 
+GRADE_NAMES = {11: "XI", 12: "XII"}
+
+
+def catalogue_problems(db: Session, sections: list[dict[str, Any]]) -> list[str]:
+    """Why a pattern's sections can't be drawn from the catalogue as it is now (empty when they can)."""
+    from portal_api.modules.curriculum.models import BookEdition, Chapter, Grade, Subject
+
+    problems = []
+    for n, s in enumerate(sections, start=1):
+        subject = db.scalar(select(Subject).where(Subject.code == s["subject"]))
+        if subject is None or not subject.active:
+            problems.append(f"Section {n}: {s['subject']} isn't offered now.")
+            continue
+        for g in s["grades"]:
+            live = select(Chapter.id).where(Chapter.book_id == BookEdition.id, Chapter.retired_at.is_(None)).exists()
+            books = db.execute(
+                select(BookEdition.natural_key, BookEdition.title)
+                .join(Grade, Grade.id == BookEdition.grade_id)
+                .where(BookEdition.subject_id == subject.id, Grade.number == int(g), live)
+                .order_by(BookEdition.natural_key)
+            ).all()
+            book = f"Class {GRADE_NAMES.get(int(g), g)} {subject.name}"
+            if not books:
+                problems.append(
+                    f"Section {n}: the catalogue has no {book} book, so this section has nothing to draw from."
+                )
+            elif len(books) > 1:
+                names = "; ".join(b.title or b.natural_key for b in books)
+                problems.append(
+                    f"Section {n}: the catalogue has {len(books)} {book} book editions ({names}), so this pattern "
+                    "can't tell which one applies. Retire the edition that no longer applies first."
+                )
+    return problems
+
+
 def total_questions(rules: dict[str, Any]) -> int:
     return sum(int(s["questions"]) for s in rules.get("sections", []))
 
@@ -180,10 +221,12 @@ def save_draft(
 ) -> ExamProfileVersion:
     _profile(db, profile_id)
     parsed, errors = parse_rules(rules, _active_subjects(db))
-    if parsed is None:
-        raise Unprocessable("The profile rules aren't valid.", errors=errors)
     if not 2020 <= year <= 2100:
-        raise Unprocessable("Enter the exam year.")
+        errors = [f"year: {year} isn't a supported exam year; enter a year from 2020 to 2100.", *errors]
+    if parsed is not None:
+        errors += catalogue_problems(db, parsed.model_dump(mode="json")["sections"])
+    if errors or parsed is None:
+        raise Unprocessable("The profile rules aren't valid.", errors=errors)
     if version_id is not None:
         v = _version(db, version_id, for_update=True)
         if v.profile_id != profile_id:
@@ -256,6 +299,14 @@ def publish(db: Session, who: Principal, version_id: uuid.UUID) -> ExamProfileVe
         .where(ExamProfileVersion.profile_id == v.profile_id, ExamProfileVersion.status == "published")
         .with_for_update()
     )
+    if current is not None and current.year > v.year:
+        raise Conflict(
+            f"Version {v.version} is for {v.year}, older than the published version {current.version} for "
+            f"{current.year}. Publish a version for {current.year} or later instead."
+        )
+    problems = catalogue_problems(db, v.rules["sections"])  # the catalogue may have changed since the draft
+    if problems:
+        raise Conflict("This version doesn't match the catalogue as it is now.", errors=problems)
     now = db.execute(select(func.now())).scalar_one()
     if current is not None:
         current.status, current.retired_at = "retired", now

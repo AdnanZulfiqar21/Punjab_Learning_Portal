@@ -36,7 +36,7 @@ from sqlalchemy.orm import Session
 from portal_api.errors import Conflict, NotFound, Unprocessable
 from portal_api.modules.assessment import forms
 from portal_api.modules.assessment.models import FormItem, PracticeForm
-from portal_api.modules.assessment.profiles import ExamProfile, ExamProfileVersion
+from portal_api.modules.assessment.profiles import ExamProfile, ExamProfileVersion, catalogue_problems
 from portal_api.modules.content.models import ContentItem, ContentVersion
 from portal_api.modules.identity.deps import Principal
 
@@ -111,11 +111,15 @@ def readiness(db: Session, code: str) -> dict[str, Any]:
     for s in version.rules["sections"]:
         available = len(_section_pool(db, s["subject"], s["grades"], version.rules.get("question_pool", "mock")))
         sections.append({**s, "available": available, "enough": available >= int(s["questions"])})
+    problems = catalogue_problems(db, version.rules["sections"])
     return {
         "code": profile.code,
         "version": version.version,
         "sections": sections,
-        "ready": all(x["enough"] for x in sections) and version.rules.get("solution_release") == "after_submission",
+        "problems": problems,
+        "ready": all(x["enough"] for x in sections)
+        and not problems
+        and version.rules.get("solution_release") == "after_submission",
         "scheduled": version.rules.get("solution_release") != "after_submission",
     }
 
@@ -154,6 +158,13 @@ def build_from(
     rules = version.rules
     if rules.get("solution_release") != "after_submission" and not allow_scheduled:
         raise Conflict("Scheduled mocks with delayed solutions aren't available yet.", code_reason="MOCK_SCHEDULED")
+    problems = catalogue_problems(db, rules["sections"])  # P05.S4.T3: never mix book editions silently
+    if problems:
+        raise Conflict(
+            "This test pattern doesn't match the current books, so it can't be used until it is corrected.",
+            code_reason="PATTERN_UNSUPPORTED",
+            problems=problems,
+        )
     question_pool = rules.get("question_pool", "mock")
     pools = [(s, _section_pool(db, s["subject"], s["grades"], question_pool)) for s in rules["sections"]]
     short = [

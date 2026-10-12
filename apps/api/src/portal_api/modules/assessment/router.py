@@ -584,6 +584,7 @@ class MockReadinessOut(BaseModel):
     code: str
     version: int
     sections: list[dict[str, Any]]
+    problems: list[str] = Field(description="Why the pattern can't be used with the current books (P05.S4.T3)")
     ready: bool
     scheduled: bool
     entitled: bool = Field(description="Whether this learner can start a new test now (an active plan or trial)")

@@ -56,7 +56,11 @@ async function Patterns() {
             <div className="flex flex-wrap items-center gap-2">
               <h2 className="font-semibold">{p.name}</h2>
               <Badge>{p.year}</Badge>
-              {r?.ready ? <Badge tone="ok">Ready</Badge> : <Badge tone="warn">Not enough questions yet</Badge>}
+              {r?.ready ? (
+                <Badge tone="ok">Ready</Badge>
+              ) : (
+                <Badge tone="warn">{r && r.problems.length > 0 ? "Not available yet" : "Not enough questions yet"}</Badge>
+              )}
             </div>
             <p className="text-sm text-muted">
               {p.total_questions} questions · {p.duration_minutes} minutes ·{" "}
@@ -68,6 +72,10 @@ async function Patterns() {
             </a>
             {r && !r.ready && (
               <ul className="text-sm text-muted">
+                {/* P05.S4.T3: the pattern doesn't match the current books (for example two editions of one book). */}
+                {r.problems.map((problem) => (
+                  <li key={problem}>{problem}</li>
+                ))}
                 {r.sections
                   .filter((s) => !s.enough)
                   .map((s) => (
