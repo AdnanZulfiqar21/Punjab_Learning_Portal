@@ -23,3 +23,24 @@ export async function setRollout(key: string, form: FormData): Promise<RolloutRe
   const extra = Array.isArray(p?.errors) ? ` ${p.errors.map((e) => e.msg ?? "").join(" ")}` : "";
   return { ok: false, error: `${p?.detail ?? `The change failed (${res.status}).`}${extra}` };
 }
+
+/** P13.S1.T4 (CLIENTS-01): set a platform's minimum supported app version (14 days' notice when raising). */
+export async function setClientMinimum(platform: string, form: FormData): Promise<RolloutResult> {
+  const t = await sessionToken();
+  if (!t) redirect("/signin?next=/admin/service");
+  const when = String(form.get("enforce_at") ?? "");
+  const res = await api<unknown>(`/v1/ops/clients/${encodeURIComponent(platform)}/minimum`, {
+    method: "PUT",
+    token: t,
+    body: JSON.stringify({
+      min_version: String(form.get("min_version") ?? "").trim(),
+      reason: String(form.get("reason") ?? "").trim(),
+      enforce_at: when ? new Date(when).toISOString() : null,
+    }),
+  });
+  revalidatePath("/admin/service");
+  if (res.ok) return { ok: true };
+  const p = res.problem as (Problem & { errors?: { msg?: string }[] }) | null;
+  const extra = Array.isArray(p?.errors) ? ` ${p.errors.map((e) => e.msg ?? "").join(" ")}` : "";
+  return { ok: false, error: `${p?.detail ?? `The change failed (${res.status}).`}${extra}` };
+}

@@ -40,6 +40,7 @@ import type {
   Inbox,
   SupportTicket,
   TrialDecision,
+  ClientPolicy,
   StudyPack,
   StudyPackStatus,
   TrialDevice,
@@ -111,6 +112,7 @@ type RequestOptions = {
 // trial device rules (roadmap §16.4). Until request attestation exists (B07) these are asserted by the app.
 export const CLIENT = Platform.OS === "web" ? "web" : "native";
 export const SURFACE: "web" | "ios" | "android" = Platform.OS === "ios" ? "ios" : Platform.OS === "android" ? "android" : "web";
+export const APP_VERSION: string | null = Constants.expoConfig?.version ?? null;
 
 async function request<T>(path: string, opts: RequestOptions = {}): Promise<T> {
   const cid = correlationId();
@@ -123,6 +125,8 @@ async function request<T>(path: string, opts: RequestOptions = {}): Promise<T> {
         Accept: "application/json",
         "X-Correlation-ID": cid,
         "X-Portal-Client": CLIENT,
+        "X-Portal-Platform": SURFACE, // P13.S1.T4: which build is asking, so an unsupported one is told to update
+        ...(APP_VERSION ? { "X-Portal-App-Version": APP_VERSION } : {}),
         "X-Portal-Install": install,
         ...(opts.body !== undefined ? { "Content-Type": "application/json" } : {}),
         ...(opts.raw !== undefined ? { "Content-Type": "application/octet-stream" } : {}),
@@ -143,6 +147,7 @@ async function request<T>(path: string, opts: RequestOptions = {}): Promise<T> {
   const detail = problem?.detail;
   if (res.status === 404 || res.status === 410) throw new ApiError(detail ?? "Not found.", "not_found", ref, problem);
   if (res.status === 401) throw new ApiError(detail ?? "Please sign in again.", "unauthorized", ref, problem);
+  if (res.status === 426) throw new ApiError(detail ?? "Please update the app to continue.", "server", ref, problem);
   if (res.status === 422) throw new ApiError(detail ?? "Please check your entries.", "invalid", ref, problem);
   if (res.status === 409) throw new ApiError(detail ?? "This changed elsewhere.", "conflict", ref, problem);
   throw new ApiError(detail ?? `Service error (${res.status}).`, "server", ref, problem);
@@ -210,6 +215,8 @@ export const api = {
   authorizeDevice: (token: string) =>
     request<TrialDecision>("/v1/me/trial/devices", { method: "POST", token, body: { surface: SURFACE, proof: {}, label: deviceName() } }),
   trialDevices: (token: string, signal?: AbortSignal) => request<TrialDevice[]>("/v1/me/trial/devices", { token, signal }),
+  clientPolicy: (platform: string, version: string) =>
+    getJSON<ClientPolicy>(`/v1/clients/policy?platform=${encodeURIComponent(platform)}&version=${encodeURIComponent(version)}`),
   studyPack: (token: string, chapterId: string, format: number) =>
     request<StudyPack>(`/v1/me/study-packs/${encodeURIComponent(chapterId)}?format=${format}`, { token, signal: AbortSignal.timeout(60_000) }),
   studyPackStatus: (token: string, chapterId: string) =>
