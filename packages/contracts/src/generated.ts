@@ -550,6 +550,24 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/admin/staff": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Current staff roles */
+        get: operations["list_staff_v1_admin_staff_get"];
+        put?: never;
+        /** Give a staff role to the account with this exact email (owner/admin, MFA; audited) */
+        post: operations["add_staff_v1_admin_staff_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/admin/users/{user_id}/reinstate": {
         parameters: {
             query?: never;
@@ -9909,6 +9927,21 @@ export interface components {
             /** Working Version */
             working_version: number | null;
         };
+        /** StaffByEmailIn */
+        StaffByEmailIn: {
+            /**
+             * Email
+             * @description The exact email the person signed up with
+             */
+            email: string;
+            /** Reason */
+            reason: string;
+            role: components["schemas"]["Role"];
+            /** Scope */
+            scope?: {
+                [key: string]: unknown;
+            };
+        };
         /** StaffCorrectionLink */
         StaffCorrectionLink: {
             /**
@@ -9963,6 +9996,40 @@ export interface components {
                     [key: string]: unknown;
                 };
             };
+        };
+        /** StaffGrantOut */
+        StaffGrantOut: {
+            /** Email */
+            email: string | null;
+            /**
+             * Granted At
+             * Format: date-time
+             */
+            granted_at: string;
+            /** Granted By */
+            granted_by: string | null;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Reason */
+            reason: string;
+            /** Revoke Reason */
+            revoke_reason: string | null;
+            /** Revoked At */
+            revoked_at: string | null;
+            /** Role */
+            role: string;
+            /** Scope */
+            scope: {
+                [key: string]: unknown;
+            };
+            /**
+             * User Id
+             * Format: uuid
+             */
+            user_id: string;
         };
         /** StaffMessageIn */
         StaffMessageIn: {
@@ -12346,6 +12413,59 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["RoleGrantOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_staff_v1_admin_staff_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StaffGrantOut"][];
+                };
+            };
+        };
+    };
+    add_staff_v1_admin_staff_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["StaffByEmailIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StaffGrantOut"];
                 };
             };
             /** @description Validation Error */

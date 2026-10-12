@@ -128,6 +128,11 @@ async function Account() {
               Trial decisions
             </Link>
           )}
+          {me.roles.includes("owner_admin") && (
+            <Link href="/admin/staff" className="inline-block text-sm text-accent underline-offset-2 hover:underline">
+              Staff
+            </Link>
+          )}
           {me.roles.includes("platform_operator") && (
             <Link href="/admin/service" className="inline-block text-sm text-accent underline-offset-2 hover:underline">
               Service overview

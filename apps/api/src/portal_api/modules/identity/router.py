@@ -8,7 +8,7 @@ from typing import Annotated
 
 from fastapi import APIRouter, Depends, Request, Response
 from pydantic import BaseModel, Field
-from sqlalchemy import select
+from sqlalchemy import func, select
 from sqlalchemy.orm import Session
 
 from portal_api.db import get_session
@@ -132,6 +132,10 @@ def list_roles(user_id: uuid.UUID, _admin: ManageRoles, db: DB) -> list[RoleGran
 
 @router.post("/admin/users/{user_id}/roles", response_model=RoleGrantOut, status_code=201, tags=["admin"])
 def grant_role(user_id: uuid.UUID, body: RoleGrantIn, admin: ManageRoles, db: DB, request: Request) -> RoleGrantOut:
+    return _grant(db, admin, user_id, body, request)
+
+
+def _grant(db: Session, admin: Principal, user_id: uuid.UUID, body: RoleGrantIn, request: Request) -> RoleGrantOut:
     if body.role not in STAFF_ROLES:
         raise Conflict("Only staff roles can be granted.")
     if user_id == admin.user.id:
@@ -192,6 +196,47 @@ def revoke_role(grant_id: uuid.UUID, body: RevokeIn, admin: ManageRoles, db: DB,
         db.commit()
         db.refresh(grant)
     return RoleGrantOut.model_validate(grant)
+
+
+# P16.S4.T3 (OWNER-VALIDATION-01): the owner adds and reviews staff without technical help.
+class StaffGrantOut(RoleGrantOut):
+    user_id: uuid.UUID
+    email: str | None
+
+
+class StaffByEmailIn(RoleGrantIn):
+    email: str = Field(min_length=3, max_length=320, description="The exact email the person signed up with")
+
+
+@router.get("/admin/staff", response_model=list[StaffGrantOut], tags=["admin"], summary="Current staff roles")
+def list_staff(_admin: ManageRoles, db: DB, response: Response) -> list[StaffGrantOut]:
+    response.headers["Cache-Control"] = "private, no-store"
+    rows = db.execute(
+        select(StaffRoleGrant, AppUser.email)
+        .join(AppUser, AppUser.id == StaffRoleGrant.user_id)
+        .where(StaffRoleGrant.revoked_at.is_(None))
+        .order_by(AppUser.email, StaffRoleGrant.role)
+    ).all()
+    return [
+        StaffGrantOut(**RoleGrantOut.model_validate(g).model_dump(), user_id=g.user_id, email=email)
+        for g, email in rows
+    ]
+
+
+@router.post(
+    "/admin/staff",
+    response_model=StaffGrantOut,
+    status_code=201,
+    tags=["admin"],
+    summary="Give a staff role to the account with this exact email (owner/admin, MFA; audited)",
+)
+def add_staff(body: StaffByEmailIn, admin: ManageRoles, db: DB, request: Request) -> StaffGrantOut:
+    email = body.email.strip().lower()
+    target = db.scalar(select(AppUser).where(func.lower(AppUser.email) == email, AppUser.status != "deleted"))
+    if target is None:
+        raise NotFound("No account uses that email. Ask the person to create an account first, then try again.")
+    out = _grant(db, admin, target.id, RoleGrantIn(role=body.role, scope=body.scope, reason=body.reason), request)
+    return StaffGrantOut(**out.model_dump(), user_id=target.id, email=target.email)
 
 
 # ------------------------------------------------------------------ incident response (P18.S4.T2, SUSPEND-01)
