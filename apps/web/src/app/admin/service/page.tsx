@@ -289,7 +289,9 @@ async function ReviewStaffing() {
                 <p className="text-muted">
                   {s
                     ? `${s.available_minutes} minutes available within ${s.turnaround_days} days, ${s.due_minutes} already owed: room for ${s.admissible_scripts} more script${s.admissible_scripts === 1 ? "" : "s"}.` +
-                      (s.turnaround_estimate_days !== null ? ` A test started now would wait about ${s.turnaround_estimate_days} days.` : " Nobody is available to mark.")
+                      (s.turnaround_estimate_days !== null
+                        ? ` A test started now would wait about ${s.turnaround_estimate_days} day${s.turnaround_estimate_days === 1 ? "" : "s"}.`
+                        : " Nobody is available to mark.")
                     : "No staffing recorded: only the case limit applies."}
                 </p>
                 <StaffingForm row={r} label={label} />

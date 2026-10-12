@@ -1347,6 +1347,16 @@
             "title": "Overdue Cases",
             "type": "integer"
           },
+          "staffing": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/StaffingOut"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "subject": {
             "title": "Subject",
             "type": "string"
@@ -1704,6 +1714,12 @@
       },
       "CapacityIn": {
         "properties": {
+          "clear_staffing": {
+            "default": false,
+            "description": "Remove the staffing figures (the case limit alone applies)",
+            "title": "Clear Staffing",
+            "type": "boolean"
+          },
           "max_open_cases": {
             "description": "0 stops new written starts in this scope",
             "maximum": 100000.0,
@@ -1716,6 +1732,17 @@
             "minLength": 5,
             "title": "Reason",
             "type": "string"
+          },
+          "staffing": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/StaffingIn"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Leave out to keep the current staffing"
           }
         },
         "required": [
@@ -13273,6 +13300,106 @@
         "title": "StaffTicketOut",
         "type": "object"
       },
+      "StaffingIn": {
+        "description": "W06.S3.T2 (STAFFING-01): the staffing behind a scope's capacity.",
+        "properties": {
+          "fixed_hours_per_week": {
+            "description": "Calibration, adjudication, training and meetings",
+            "maximum": 10000.0,
+            "minimum": 0.0,
+            "title": "Fixed Hours Per Week",
+            "type": "integer"
+          },
+          "minutes_per_script": {
+            "description": "Teacher minutes to mark one script",
+            "maximum": 600.0,
+            "minimum": 1.0,
+            "title": "Minutes Per Script",
+            "type": "integer"
+          },
+          "reviewer_hours_per_week": {
+            "description": "Productive marking hours a week in this scope",
+            "maximum": 10000.0,
+            "minimum": 1.0,
+            "title": "Reviewer Hours Per Week",
+            "type": "integer"
+          },
+          "turnaround_days": {
+            "description": "The turnaround learners are promised",
+            "maximum": 60.0,
+            "minimum": 1.0,
+            "title": "Turnaround Days",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "reviewer_hours_per_week",
+          "fixed_hours_per_week",
+          "minutes_per_script",
+          "turnaround_days"
+        ],
+        "title": "StaffingIn",
+        "type": "object"
+      },
+      "StaffingOut": {
+        "properties": {
+          "admissible_scripts": {
+            "description": "New scripts that still fit within the turnaround",
+            "title": "Admissible Scripts",
+            "type": "integer"
+          },
+          "available_minutes": {
+            "description": "Productive minutes left after fixed obligations, over the turnaround",
+            "title": "Available Minutes",
+            "type": "integer"
+          },
+          "due_minutes": {
+            "description": "Minutes already owed to queued cases and started tests",
+            "title": "Due Minutes",
+            "type": "integer"
+          },
+          "fixed_hours_per_week": {
+            "title": "Fixed Hours Per Week",
+            "type": "integer"
+          },
+          "minutes_per_script": {
+            "title": "Minutes Per Script",
+            "type": "integer"
+          },
+          "reviewer_hours_per_week": {
+            "title": "Reviewer Hours Per Week",
+            "type": "integer"
+          },
+          "turnaround_days": {
+            "title": "Turnaround Days",
+            "type": "integer"
+          },
+          "turnaround_estimate_days": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "How long a script started now would wait",
+            "title": "Turnaround Estimate Days"
+          }
+        },
+        "required": [
+          "reviewer_hours_per_week",
+          "fixed_hours_per_week",
+          "minutes_per_script",
+          "turnaround_days",
+          "available_minutes",
+          "due_minutes",
+          "admissible_scripts",
+          "turnaround_estimate_days"
+        ],
+        "title": "StaffingOut",
+        "type": "object"
+      },
       "StatusOut": {
         "properties": {
           "incidents": {
@@ -15266,6 +15393,18 @@
           "subject": {
             "title": "Subject",
             "type": "string"
+          },
+          "turnaround_days": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "About how many days marking takes for a test started now (None: not estimated)",
+            "title": "Turnaround Days"
           },
           "upload_allowance_s": {
             "title": "Upload Allowance S",
