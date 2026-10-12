@@ -239,6 +239,12 @@ export function WrittenRunner({ attempt, result = null }: { attempt: WrittenAtte
                         : "marked by a teacher"}
                   </span>
                 </p>
+              ) : result.completeness === "unavailable" ? (
+                // COMPLETENESS-01 (§20.9.3): nothing could be assessed, so there is no mark at all, not a zero.
+                <Notice tone="warn" title="No mark for this test">
+                  None of the questions could be assessed, so this test has no mark. The allowance it used was returned; the reasons are shown with each
+                  question below.
+                </Notice>
               ) : (
                 <Notice tone="warn" title={result.completeness === "partial_pending" ? "Marking isn't finished yet" : "Some questions couldn't be assessed"}>
                   So far {marks(result.total_units ?? 0)} out of {marks(result.scored_max_units ?? 0)} on the questions a teacher marked. There is no final total until

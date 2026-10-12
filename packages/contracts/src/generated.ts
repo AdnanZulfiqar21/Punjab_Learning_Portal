@@ -6600,7 +6600,7 @@ export interface components {
              */
             released_at: string;
             /** Total Units */
-            total_units: number;
+            total_units: number | null;
             /** Version */
             version: number;
         };
@@ -11220,9 +11220,9 @@ export interface components {
             awaiting_regrade?: number[];
             /**
              * Completeness
-             * @description Not complete means no final total: some questions are pending or could not be assessed
+             * @description Not complete means no final total: some questions are pending or could not be assessed; unavailable means none could be assessed (no mark for this test)
              */
-            completeness: ("complete" | "partial_pending" | "partial_unavailable") | null;
+            completeness: ("complete" | "partial_pending" | "partial_unavailable" | "unavailable") | null;
             /** Decision Method */
             decision_method: string | null;
             /**

@@ -288,7 +288,7 @@ class RecheckOut(BaseModel):
 
 class HistoryEntry(BaseModel):
     version: int
-    total_units: int
+    total_units: int | None
     case_kind: str
     released_at: datetime
 
@@ -315,8 +315,9 @@ class WrittenResultOut(BaseModel):
     max_units: int
     released_at: datetime | None
     decision_method: str | None
-    completeness: Literal["complete", "partial_pending", "partial_unavailable"] | None = Field(
-        description="Not complete means no final total: some questions are pending or could not be assessed"
+    completeness: Literal["complete", "partial_pending", "partial_unavailable", "unavailable"] | None = Field(
+        description="Not complete means no final total: some questions are pending or could not be assessed; "
+        "unavailable means none could be assessed (no mark for this test)"
     )
     scored_max_units: int | None = Field(description="Maximum of the questions that were scored")
     questions: list[QuestionResult]
@@ -611,14 +612,19 @@ def my_result(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, response: Re
                 else None,
             )
         )
-    history = [
-        HistoryEntry(version=h.version, total_units=h.total_units, case_kind=h.case_kind, released_at=h.created_at)
+    history = [  # COMPLETENESS-01: a version where nothing could be assessed has no awarded total
+        HistoryEntry(
+            version=h.version,
+            total_units=None if h.completeness == "unavailable" else h.total_units,
+            case_kind=h.case_kind,
+            released_at=h.created_at,
+        )
         for h in review.released_history(db, attempt.id)
     ]
     return WrittenResultOut(
         status="released",
         version=sv.version,
-        total_units=sv.total_units,
+        total_units=None if sv.completeness == "unavailable" else sv.total_units,
         max_units=sv.max_units,
         released_at=sv.created_at,
         decision_method=sv.decision_method,

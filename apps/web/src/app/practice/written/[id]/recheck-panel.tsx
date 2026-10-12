@@ -33,7 +33,7 @@ export function RecheckPanel({ attemptId, result, marks }: { attemptId: string; 
           <ul>
             {result.history.map((h) => (
               <li key={h.version}>
-                Version {h.version}: {marks(h.total_units)} · {HISTORY_LABEL[h.case_kind] ?? h.case_kind} · released {date(h.released_at)}
+                Version {h.version}: {h.total_units === null ? "no mark" : marks(h.total_units)} · {HISTORY_LABEL[h.case_kind] ?? h.case_kind} · released {date(h.released_at)}
               </li>
             ))}
           </ul>

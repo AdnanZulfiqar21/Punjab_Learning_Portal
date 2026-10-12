@@ -5282,8 +5282,15 @@
             "type": "string"
           },
           "total_units": {
-            "title": "Total Units",
-            "type": "integer"
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Total Units"
           },
           "version": {
             "title": "Version",
@@ -16770,7 +16777,8 @@
                 "enum": [
                   "complete",
                   "partial_pending",
-                  "partial_unavailable"
+                  "partial_unavailable",
+                  "unavailable"
                 ],
                 "type": "string"
               },
@@ -16778,7 +16786,7 @@
                 "type": "null"
               }
             ],
-            "description": "Not complete means no final total: some questions are pending or could not be assessed",
+            "description": "Not complete means no final total: some questions are pending or could not be assessed; unavailable means none could be assessed (no mark for this test)",
             "title": "Completeness"
           },
           "decision_method": {

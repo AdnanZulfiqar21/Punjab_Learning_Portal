@@ -173,6 +173,31 @@ def test_unavailable_questions_return_their_allowance(client: TestClient, publis
     )
 
 
+def test_a_paper_with_nothing_assessable_is_unavailable_not_partial(
+    client: TestClient, published_written: dict[str, Any]
+) -> None:
+    """W02.S1.T3 (COMPLETENESS-01, §20.9.3): S = 0, P = 0 and U = M is UNAVAILABLE: no valid whole-paper
+    assessment, no awarded total, every unit returned, and the learner told why."""
+    learner, a = _sealed(client, published_written["chapter"], seed=507)
+    before = _allowance(client, learner)
+    reason = "Fixture: notation no available teacher can read"
+    statuses = {str(p): {"status": "unavailable", "reason": reason} for p in (1, 2)}
+    r = _decide(
+        client, _staff(client, ["subject_reviewer"]), a["id"], "initial", {"awards": {}, "question_status": statuses}
+    )
+    assert r.status_code == 200, r.text
+    result = client.get(f"/v1/written-attempts/{a['id']}/result", headers=learner.headers).json()
+    assert result["completeness"] == "unavailable"
+    assert result["total_units"] is None and all(q["earned_units"] is None for q in result["questions"])
+    assert _allowance(client, learner)["available"] == before["available"] + 2
+    with get_sessionmaker()() as db:
+        note = db.execute(
+            text("select body from notification where user_id = :u order by created_at desc limit 1"),
+            {"u": str(learner.id)},
+        ).scalar_one()
+    assert "None of the questions could be assessed" in note
+
+
 def test_rechecks_cannot_mark_questions_pending(client: TestClient, published_written: dict[str, Any]) -> None:
     learner, a = _sealed(client, published_written["chapter"], seed=504)
     assert (

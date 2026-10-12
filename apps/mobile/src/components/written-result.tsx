@@ -48,6 +48,12 @@ export function WrittenResultView({ attemptId, token }: { attemptId: string; tok
         <T variant="title">
           {marks(r.total_units ?? 0)} / {marks(r.max_units)}
         </T>
+      ) : r.completeness === "unavailable" ? (
+        // COMPLETENESS-01 (§20.9.3): nothing could be assessed, so there is no mark at all, not a zero.
+        <Notice tone="warn" title="No mark for this test">
+          None of the questions could be assessed, so this test has no mark. The allowance it used was returned; the reasons are shown with each
+          question below.
+        </Notice>
       ) : (
         <Notice tone="warn" title={r.completeness === "partial_pending" ? "Marking isn't finished yet" : "Some questions couldn't be assessed"}>
           So far {marks(r.total_units ?? 0)} out of {marks(r.scored_max_units ?? 0)} on the questions a teacher marked. There is no final total until
@@ -121,7 +127,7 @@ export function WrittenResultView({ attemptId, token }: { attemptId: string; tok
           <T style={{ fontWeight: "600" }}>Mark history</T>
           {r.history.map((h) => (
             <T key={h.version} variant="small">
-              Version {h.version}: {marks(h.total_units)} · {HISTORY[h.case_kind] ?? h.case_kind} · released {when(h.released_at)}
+              Version {h.version}: {h.total_units === null ? "no mark" : marks(h.total_units)} · {HISTORY[h.case_kind] ?? h.case_kind} · released {when(h.released_at)}
             </T>
           ))}
         </Card>

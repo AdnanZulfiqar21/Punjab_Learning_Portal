@@ -165,7 +165,10 @@ DICTIONARY: dict[str, EventSpec] = {
             "attempt_id": Prop(str, "The written attempt ID."),
             "version": Prop(int, "Score version number."),
             "case_kind": Prop(str, "Which review released it (e.g. initial, recheck, completion)."),
-            "completeness": Prop(str, "complete, or partial while questions are pending or unavailable."),
+            "completeness": Prop(
+                str,
+                "complete; partial while questions are pending or unavailable; unavailable if none could be assessed.",
+            ),
             "scored_questions": Prop(int, "Questions with a mark."),
             "pending_questions": Prop(int, "Questions still waiting for a teacher or the learner; no mark yet."),
             "unavailable_questions": Prop(int, "Questions that couldn't be marked; no mark, allowance returned."),
