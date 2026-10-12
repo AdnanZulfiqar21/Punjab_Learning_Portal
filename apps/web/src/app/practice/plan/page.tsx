@@ -5,12 +5,13 @@ import type { StudyPlan } from "@portal/contracts";
 import { Breadcrumbs, Notice, SkeletonLines } from "@/components/ui";
 import { SUBJECTS } from "@/lib/practice";
 import { api, currentUser } from "@/lib/session";
+import { daysFromToday } from "@/lib/dates";
 
 export const metadata: Metadata = { title: "Study plan", robots: { index: false } };
 
 const field = "rounded-lg border border-border bg-surface px-3 py-2";
 const hours = (m: number) => (m >= 60 ? `${Math.floor(m / 60)} h ${m % 60} min` : `${m} min`);
-const inDays = (n: number) => new Date(Date.now() + n * 86_400_000).toISOString().slice(0, 10);
+const inDays = daysFromToday; // the Pakistan day, not the UTC day (P12.S4.T3)
 
 export default function PlanPage({ searchParams }: PageProps<"/practice/plan">) {
   return (
@@ -94,7 +95,7 @@ async function Plan({ grade, subject, target, minutes }: { grade: string; subjec
         {p.schedule.map((x, i) => (
           <li key={i} className="flex flex-wrap items-center justify-between gap-2 px-3 py-2">
             <span>
-              {new Date(String(x.date)).toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "short" })} · Chapter {String(x.chapter_number)} · {String(x.label)}
+              {new Date(String(x.date)).toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "short", timeZone: "UTC" })} · Chapter {String(x.chapter_number)} · {String(x.label)}
             </span>
             <span className="text-muted">
               {String(x.minutes)} min · {String(x.why)}

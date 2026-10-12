@@ -7,10 +7,11 @@ import { Breadcrumbs, Notice, SkeletonLines } from "@/components/ui";
 import { GRADE_LABEL } from "@/lib/format";
 import { api, currentUser } from "@/lib/session";
 import { PrintButton } from "./print-button";
+import { TIME_ZONE } from "@/lib/dates";
 
 export const metadata: Metadata = { title: "Progress report", robots: { index: false } };
 
-const day = (s: string | null | undefined) => (s ? new Date(s).toLocaleDateString("en-GB", { dateStyle: "medium" }) : "—");
+const day = (s: string | null | undefined) => (s ? new Date(s).toLocaleDateString("en-GB", { dateStyle: "medium", timeZone: TIME_ZONE }) : "—");
 
 export default function ProgressPage() {
   return (

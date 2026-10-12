@@ -5,11 +5,12 @@ import { Suspense } from "react";
 import type { AuditPage } from "@portal/contracts";
 import { Breadcrumbs, Notice, SkeletonLines } from "@/components/ui";
 import { api, currentUser } from "@/lib/session";
+import { TIME_ZONE } from "@/lib/dates";
 
 export const metadata: Metadata = { title: "Audit trail", robots: { index: false } };
 
 const FILTERS = ["action", "actor_email", "target_type", "target_id", "before"] as const;
-const when = (s: string) => new Date(s).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "medium" });
+const when = (s: string) => new Date(s).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "medium", timeZone: TIME_ZONE });
 
 export default function AuditPageView({ searchParams }: PageProps<"/admin/audit">) {
   return (

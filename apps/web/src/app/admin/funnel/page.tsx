@@ -4,6 +4,7 @@ import { Suspense } from "react";
 import type { FunnelReport } from "@portal/contracts";
 import { Breadcrumbs, Notice, SkeletonLines } from "@/components/ui";
 import { api, currentUser } from "@/lib/session";
+import { TIME_ZONE } from "@/lib/dates";
 
 export const metadata: Metadata = { title: "Learning funnel", robots: { index: false } };
 
@@ -42,7 +43,7 @@ async function Funnel() {
     <div className="space-y-4">
       <Notice title="Data coverage">
         {r.events_since
-          ? `Events have been recorded since ${new Date(r.events_since).toLocaleDateString("en-GB", { dateStyle: "medium" })}; activity before that isn't counted.`
+          ? `Events have been recorded since ${new Date(r.events_since).toLocaleDateString("en-GB", { dateStyle: "medium", timeZone: TIME_ZONE })}; activity before that isn't counted.`
           : "No events have been recorded yet."}
       </Notice>
       {r.cohorts.length === 0 ? (

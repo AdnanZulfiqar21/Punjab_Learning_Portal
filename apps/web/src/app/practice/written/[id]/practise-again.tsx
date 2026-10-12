@@ -4,8 +4,9 @@ import Link from "next/link";
 import { useState, useTransition } from "react";
 import type { WrittenResult } from "@portal/contracts";
 import { prepareLinkedPractice } from "@/app/actions/written";
+import { TIME_ZONE } from "@/lib/dates";
 
-const date = (s: string) => new Date(s).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" });
+const date = (s: string) => new Date(s).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short", timeZone: TIME_ZONE });
 const REASON: Record<string, string> = {
   REWRITE: "rewrite after feedback",
   NEW_CONTENT: "new work from a clearer copy",

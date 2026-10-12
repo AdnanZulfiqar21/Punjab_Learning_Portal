@@ -7,6 +7,7 @@ import { api, currentUser } from "@/lib/session";
 import { ClientMinimumForm } from "./client-minimum-form";
 import { RolloutForm } from "./rollout-form";
 import { StaffingForm } from "./staffing-form";
+import { TIME_ZONE } from "@/lib/dates";
 
 export const metadata: Metadata = { title: "Service overview", robots: { index: false } };
 
@@ -183,7 +184,7 @@ async function Rollouts() {
             </div>
             {r.reason && (
               <p className="text-sm text-muted">
-                Last change{r.updated_at ? ` on ${new Date(r.updated_at).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" })}` : ""}: {r.reason}
+                Last change{r.updated_at ? ` on ${new Date(r.updated_at).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short", timeZone: TIME_ZONE })}` : ""}: {r.reason}
               </p>
             )}
             <RolloutForm rolloutKey={r.key} label={r.description} percent={r.percent} />
@@ -195,7 +196,7 @@ async function Rollouts() {
 }
 
 const PLATFORM_NAME: Record<string, string> = { android: "Android", ios: "iPhone and iPad" };
-const at = (iso: string) => new Date(iso).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" });
+const at = (iso: string) => new Date(iso).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short", timeZone: TIME_ZONE });
 
 // P13.S1.T4 (CLIENTS-01): the oldest app version each platform still serves, and the builds' capability manifests.
 async function ClientVersions() {

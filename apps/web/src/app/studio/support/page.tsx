@@ -6,6 +6,7 @@ import { Badge, Notice, SkeletonLines } from "@/components/ui";
 import { CATEGORY_LABEL, STATUS_LABEL, statusTone } from "@/app/help/status";
 import { api } from "@/lib/session";
 import { requireSupportStaff, StudioForbiddenError } from "@/lib/studio";
+import { TIME_ZONE } from "@/lib/dates";
 
 export const metadata: Metadata = { title: "Support queue", robots: { index: false } };
 
@@ -59,7 +60,7 @@ async function Queue({ status }: { status: string }) {
                   {t.subject}
                 </Link>
                 <p className="text-sm text-muted">
-                  {CATEGORY_LABEL[t.category]} · updated {new Date(t.updated_at).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" })}
+                  {CATEGORY_LABEL[t.category]} · updated {new Date(t.updated_at).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short", timeZone: TIME_ZONE })}
                 </p>
               </div>
               <Badge tone={statusTone(t.status)}>{STATUS_LABEL[t.status]}</Badge>

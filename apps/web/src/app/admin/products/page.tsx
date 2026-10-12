@@ -6,6 +6,7 @@ import { Badge, Breadcrumbs, Notice, SkeletonLines } from "@/components/ui";
 import { formatMinor } from "@/lib/money";
 import { api, currentUser } from "@/lib/session";
 import { AddPrice, MoveProduct, NewProduct, TermsEditor } from "./controls";
+import { TIME_ZONE } from "@/lib/dates";
 
 export const metadata: Metadata = { title: "Products and prices", robots: { index: false } };
 
@@ -22,7 +23,7 @@ const STATUS: Record<string, { label: string; tone: "ok" | "info" | "warn" }> = 
 };
 
 const money = (minor: number | null, currency: string) => (minor === null ? "not on sale" : formatMinor(minor, currency));
-const when = (iso: string) => new Date(iso).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" });
+const when = (iso: string) => new Date(iso).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short", timeZone: TIME_ZONE });
 
 export default function ProductsPage() {
   return (

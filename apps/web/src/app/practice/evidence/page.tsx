@@ -5,6 +5,7 @@ import type { EvidenceReport } from "@portal/contracts";
 import { Badge, Breadcrumbs, Notice, SkeletonLines } from "@/components/ui";
 import { SUBJECTS } from "@/lib/practice";
 import { api, currentUser } from "@/lib/session";
+import { TIME_ZONE } from "@/lib/dates";
 
 export const metadata: Metadata = { title: "What you've shown", robots: { index: false } };
 
@@ -94,7 +95,7 @@ async function Report({ grade, subject }: { grade: number; subject: string }) {
             ))}
           </ul>
           <p className="text-xs text-muted">
-            Rules: {res.data.rules_version}, evaluated {new Date(res.data.evaluated_at).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" })}.
+            Rules: {res.data.rules_version}, evaluated {new Date(res.data.evaluated_at).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short", timeZone: TIME_ZONE })}.
           </p>
         </>
       )}

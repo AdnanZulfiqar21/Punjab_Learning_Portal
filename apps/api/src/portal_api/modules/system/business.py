@@ -22,6 +22,7 @@ from pydantic import BaseModel
 from sqlalchemy import and_, distinct, exists, func, select, union
 from sqlalchemy.orm import Session
 
+from portal_api.days import week_of
 from portal_api.db import get_session
 from portal_api.modules.identity.deps import Principal, require
 from portal_api.modules.identity.permissions import Permission
@@ -87,7 +88,7 @@ def report(db: Session) -> dict[str, Any]:
         )
         or 0
     )
-    week = func.date_trunc("week", TrialGrant.granted_at)
+    week = week_of(TrialGrant.granted_at)  # Pakistan weeks (P12.S4.T3)
     converted = exists().where(
         Entitlement.user_id == TrialGrant.user_id,
         Entitlement.source == "paid",

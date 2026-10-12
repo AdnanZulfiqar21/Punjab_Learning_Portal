@@ -8,8 +8,9 @@ import { useRequest } from "@/hooks/use-request";
 import { useTheme } from "@/hooks/use-theme";
 import { api, GRADE_LABEL } from "@/lib/api";
 import { useAuth } from "@/lib/auth";
+import { TIME_ZONE } from "@/lib/dates";
 
-const when = (iso: string) => new Date(iso).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" });
+const when = (iso: string) => new Date(iso).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short", timeZone: TIME_ZONE });
 
 export default function ProgressScreen() {
   const { state } = useAuth();

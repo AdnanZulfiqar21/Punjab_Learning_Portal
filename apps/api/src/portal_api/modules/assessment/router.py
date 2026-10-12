@@ -1118,7 +1118,9 @@ def my_study_plan(
     minutes = daily_minutes or (profile.daily_minutes if profile and profile.daily_minutes else None)
     if not minutes:
         raise Unprocessable("Tell us how many minutes a day you can study.", code_reason="DAILY_MINUTES_NEEDED")
-    today = db.execute(select(func.current_date())).scalar_one()
+    from portal_api.days import learner_today
+
+    today = learner_today(db, who.user.id)  # P12.S4.T3: the learner's day, not the UTC database day
     if target_date <= today:
         raise Unprocessable("Choose a target date in the future.")
     report = my_evidence(db, who, response, grade, subject)

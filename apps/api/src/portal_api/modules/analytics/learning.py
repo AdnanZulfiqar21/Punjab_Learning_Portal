@@ -26,6 +26,7 @@ from pydantic import BaseModel, Field
 from sqlalchemy import and_, exists, func, select
 from sqlalchemy.orm import Session
 
+from portal_api.days import day_of
 from portal_api.db import get_session
 from portal_api.modules.identity.deps import Principal, require
 from portal_api.modules.identity.permissions import Permission
@@ -125,7 +126,7 @@ def report(db: Session, grade: int, subject: str) -> dict[str, Any]:
             select(ContentItem.id).where(ContentItem.kind == "lesson", ContentItem.chapter_id.in_(chapter_ids))
         )
     ]
-    day = func.date_trunc("day", AnalyticsEvent.occurred_at)
+    day = day_of(AnalyticsEvent.occurred_at)  # Pakistan days (P12.S4.T3)
     visits = (
         int(
             db.scalar(

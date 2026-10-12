@@ -19,6 +19,7 @@ import { DeleteAccount } from "@/components/delete-account";
 import { api } from "@/lib/session";
 import { DISPLAY_COOKIE, parseDisplay } from "@/lib/display";
 import { StudySettingsForm } from "@/components/study-settings";
+import { TIME_ZONE } from "@/lib/dates";
 
 export const metadata: Metadata = { title: "Your account", robots: { index: false } };
 
@@ -34,7 +35,7 @@ export default function AccountPage() {
   );
 }
 
-const fmt = (iso: string) => new Date(iso).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" });
+const fmt = (iso: string) => new Date(iso).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short", timeZone: TIME_ZONE });
 const SURFACE_NAME: Record<string, string> = { android: "Android app", ios: "iPhone or iPad app", web: "Web browser" };
 const METHOD_NOTE: Record<string, string> = {
   exception: "allowed after a support review",

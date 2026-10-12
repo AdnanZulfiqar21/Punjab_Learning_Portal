@@ -5,6 +5,7 @@ import { useState, useTransition } from "react";
 import type { WrittenResult } from "@portal/contracts";
 import { requestRecheck } from "@/app/actions/support";
 import { Notice } from "@/components/ui";
+import { TIME_ZONE } from "@/lib/dates";
 
 const HISTORY_LABEL: Record<string, string> = {
   initial: "first marking",
@@ -12,7 +13,7 @@ const HISTORY_LABEL: Record<string, string> = {
   completion: "after completing pending questions",
   regrade: "after a marking-guide correction",
 };
-const date = (s: string) => new Date(s).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" });
+const date = (s: string) => new Date(s).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short", timeZone: TIME_ZONE });
 
 // Learners may ask once, inside the window, for named questions to be marked again by a different teacher. A recheck
 // never consumes another written allowance, and every released version stays visible below.

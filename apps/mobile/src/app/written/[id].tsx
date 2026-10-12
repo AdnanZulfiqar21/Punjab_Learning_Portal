@@ -16,10 +16,11 @@ import { useRequest } from "@/hooks/use-request";
 import { useTheme } from "@/hooks/use-theme";
 import { api, ApiError } from "@/lib/api";
 import { useAuth } from "@/lib/auth";
+import { TIME_ZONE } from "@/lib/dates";
 
 type Slot = { pages: string[]; unanswered: boolean };
 type Upload = { key: string; name: string; status: "uploading" | "failed"; error?: string };
-const when = (iso: string) => new Date(iso).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" });
+const when = (iso: string) => new Date(iso).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short", timeZone: TIME_ZONE });
 const newKey = () => `${Date.now().toString(36)}${Math.random().toString(36).slice(2, 12)}`;
 const ACCEPTED = new Set(["image/jpeg", "image/png", "application/pdf"]);
 

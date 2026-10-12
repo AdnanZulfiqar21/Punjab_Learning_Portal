@@ -8,8 +8,9 @@ import { Notice, T } from "@/components/ui";
 import { Space } from "@/constants/theme";
 import { useTheme } from "@/hooks/use-theme";
 import { api, APP_VERSION, SURFACE } from "@/lib/api";
+import { TIME_ZONE } from "@/lib/dates";
 
-const day = (iso: string) => new Date(iso).toLocaleDateString("en-GB", { dateStyle: "long" });
+const day = (iso: string) => new Date(iso).toLocaleDateString("en-GB", { dateStyle: "long", timeZone: TIME_ZONE });
 const STORE = SURFACE === "ios" ? "the App Store" : "Google Play";
 
 export function VersionGate({ children }: { children: ReactNode }) {

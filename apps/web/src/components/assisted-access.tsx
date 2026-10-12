@@ -4,8 +4,9 @@ import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 import type { AssistedAccess } from "@portal/contracts";
 import { endAssistedAccess } from "@/app/actions/support-lookup";
+import { TIME_ZONE } from "@/lib/dates";
 
-const fmt = (iso: string) => new Date(iso).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" });
+const fmt = (iso: string) => new Date(iso).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short", timeZone: TIME_ZONE });
 
 /** P15.S3.T3: when support had (or has) temporary read-only access to a summary of the learner's activity. */
 export function AssistedAccessList({ items, now }: { items: AssistedAccess[]; now: string }) {

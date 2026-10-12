@@ -40,6 +40,7 @@ import {
   writtenSections,
   type QuestionVersionChoice,
 } from "./written-editor";
+import { TIME_ZONE } from "@/lib/dates";
 
 const STATE_LABEL: Record<string, string> = {
   draft: "Draft",
@@ -55,7 +56,7 @@ const AVAILABILITY_LABEL: Record<string, string> = {
   retired: "Retired",
 };
 const AUTOSAVE_MS = 1500;
-const when = (iso: string) => new Date(iso).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" });
+const when = (iso: string) => new Date(iso).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short", timeZone: TIME_ZONE });
 
 type Body = Record<string, unknown>;
 type Draft = { title: string; body: Body; refs: SourceRef[] };

@@ -10,6 +10,7 @@ import { useRequest } from "@/hooks/use-request";
 import { useTheme } from "@/hooks/use-theme";
 import { api, attemptAsset } from "@/lib/api";
 import { useAuth } from "@/lib/auth";
+import { TIME_ZONE } from "@/lib/dates";
 
 type Blocks = { type: string }[];
 
@@ -64,7 +65,7 @@ function ResultView({ id, token }: { id: string; token: string }) {
         </View>
       )}
       {r.revised_at && (
-        <Notice title={`Updated ${new Date(r.revised_at).toLocaleDateString("en-GB", { dateStyle: "medium" })}`}>
+        <Notice title={`Updated ${new Date(r.revised_at).toLocaleDateString("en-GB", { dateStyle: "medium", timeZone: TIME_ZONE })}`}>
           {`${r.revision_reason ?? ""} Your earlier result stays in your history.`}
         </Notice>
       )}

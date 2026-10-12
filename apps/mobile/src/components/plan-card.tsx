@@ -9,8 +9,9 @@ import { Notice, T } from "@/components/ui";
 import { Space } from "@/constants/theme";
 import { useTheme } from "@/hooks/use-theme";
 import { api, ApiError } from "@/lib/api";
+import { TIME_ZONE } from "@/lib/dates";
 
-const day = (iso: string) => new Date(iso).toLocaleDateString("en-GB", { dateStyle: "long" });
+const day = (iso: string) => new Date(iso).toLocaleDateString("en-GB", { dateStyle: "long", timeZone: TIME_ZONE });
 
 // P14.S1.T2: what the current plans cover; null when one covers everything (the platform or the free trial).
 function coverage(entitlements: Access["entitlements"]): string | null {

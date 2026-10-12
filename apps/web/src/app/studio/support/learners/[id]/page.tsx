@@ -7,6 +7,7 @@ import { Badge, Breadcrumbs, Notice, SkeletonLines } from "@/components/ui";
 import { api } from "@/lib/session";
 import { requireSupportStaff, StudioForbiddenError } from "@/lib/studio";
 import { AssistPanel } from "./assist-panel";
+import { TIME_ZONE } from "@/lib/dates";
 
 export const metadata: Metadata = { title: "Learner activity", robots: { index: false } };
 
@@ -29,7 +30,7 @@ export default function LearnerPage({ params }: PageProps<"/studio/support/learn
   );
 }
 
-const date = (s: string) => new Date(s).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" });
+const date = (s: string) => new Date(s).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short", timeZone: TIME_ZONE });
 
 const KIND_LABEL: Record<string, string> = {
   "account.created": "Account created",

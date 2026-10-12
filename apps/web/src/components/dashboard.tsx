@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Dashboard } from "@portal/contracts";
 import { Notice } from "@/components/ui";
 import { GRADE_LABEL } from "@/lib/format";
+import { TIME_ZONE } from "@/lib/dates";
 
 const METER_LABEL: Record<Dashboard["meters"][number]["key"], string> = {
   syllabus_coverage: "Syllabus coverage",
@@ -10,7 +11,7 @@ const METER_LABEL: Record<Dashboard["meters"][number]["key"], string> = {
 };
 const subject = (s: string) => s.replace("_", " ");
 const when = (s: string) =>
-  new Date(s).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short", timeZone: "Asia/Karachi" });
+  new Date(s).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short", timeZone: TIME_ZONE });
 
 /** P11.S1.T2 (DASHBOARD-01): the signed-in home. Every number comes from the API; the three meters stay separate. */
 export function DashboardView({ d, email, studyTools = true }: { d: Dashboard; email: string; studyTools?: boolean }) {

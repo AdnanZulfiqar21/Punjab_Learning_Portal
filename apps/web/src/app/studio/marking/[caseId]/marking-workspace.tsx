@@ -9,6 +9,7 @@ import type { MarkingCase } from "@portal/contracts";
 import { rebaseRecheck, saveMarks, takeLease } from "@/app/actions/marking";
 import { LessonBlocks } from "@/components/lesson-blocks";
 import { Badge, Notice } from "@/components/ui";
+import { TIME_ZONE } from "@/lib/dates";
 
 type Criterion = { id: string; subpart_id: string | null; description: string; max_units: number; levels: number[]; alternative_group?: string | null };
 type Rubric = { criteria: Criterion[]; expected_concepts?: string[]; consequential_error_rule?: string; units_rule?: string; crossed_out_rule?: string };
@@ -209,7 +210,7 @@ export function MarkingWorkspace({ initial }: { initial: MarkingCase }) {
           {c.revisions.map((r) => (
             <div key={r.id} className="space-y-2 border-t border-border pt-2">
               <p>
-                Question {r.position} · sent {new Date(r.created_at).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" })} · {TIMING[r.cutoff_timing]}
+                Question {r.position} · sent {new Date(r.created_at).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short", timeZone: TIME_ZONE })} · {TIMING[r.cutoff_timing]}
                 {r.note ? ` · “${r.note}”` : ""}
               </p>
               <div className="flex flex-wrap gap-2">

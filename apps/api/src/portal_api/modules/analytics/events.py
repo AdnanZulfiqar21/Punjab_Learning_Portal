@@ -24,7 +24,7 @@ from typing import Annotated, Any, Literal
 
 from fastapi import APIRouter, Depends, Response
 from pydantic import BaseModel
-from sqlalchemy import DateTime, ForeignKey, Index, SmallInteger, String, func, select
+from sqlalchemy import DateTime, ForeignKey, Index, SmallInteger, String, func
 from sqlalchemy.dialects.postgresql import JSONB, UUID, insert
 from sqlalchemy.orm import Mapped, Session, mapped_column
 
@@ -284,7 +284,9 @@ def lesson_started(db: DB, who: CurrentPrincipal, body: LessonStartedIn) -> Resp
     item = db.get(ContentItem, body.lesson_id)
     if item is None or item.kind != "lesson" or item.availability != Availability.live.value:
         raise NotFound("Lesson not found.")
-    day = db.execute(select(func.current_date())).scalar_one()
+    from portal_api.days import learner_today
+
+    day = learner_today(db, who.user.id)  # P12.S4.T3: once per day as the learner counts days, not per UTC day
     emit(
         db,
         "lesson.started",

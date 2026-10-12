@@ -7,9 +7,10 @@ import { useState, useTransition } from "react";
 import type { WrittenResult } from "@portal/contracts";
 import { confirmUnanswered, prepareLinkedPractice } from "@/app/actions/written";
 import { HelpLink } from "@/components/help-link";
+import { TIME_ZONE } from "@/lib/dates";
 
 type Question = WrittenResult["questions"][number];
-const when = (s: string) => new Date(s).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" });
+const when = (s: string) => new Date(s).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short", timeZone: TIME_ZONE });
 const CLASS_TEXT: Record<string, string> = {
   READABILITY: "A teacher used your clearer copy to mark this answer.",
   NEW_CONTENT: "Your copy showed new or changed work, so the original result stands. New work can be marked as a new practice test.",

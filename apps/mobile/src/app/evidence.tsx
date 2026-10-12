@@ -10,6 +10,7 @@ import { useRequest } from "@/hooks/use-request";
 import { useTheme } from "@/hooks/use-theme";
 import { api, SUBJECTS, type SubjectCode } from "@/lib/api";
 import { useAuth } from "@/lib/auth";
+import { TIME_ZONE } from "@/lib/dates";
 
 const STATE: Record<string, { label: string; tone: "info" | "warn" }> = {
   demonstrated: { label: "Demonstrated", tone: "info" },
@@ -82,7 +83,7 @@ function Report({ token, grade, subject }: { token: string; grade: number; subje
         </Card>
       ))}
       <T variant="small">
-        Rules: {r.rules_version}, evaluated {new Date(r.evaluated_at).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" })}.
+        Rules: {r.rules_version}, evaluated {new Date(r.evaluated_at).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short", timeZone: TIME_ZONE })}.
       </T>
     </View>
   );
