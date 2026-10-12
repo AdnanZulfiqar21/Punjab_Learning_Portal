@@ -123,6 +123,57 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/admin/commerce-terms": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Published and draft purchase terms (finance) */
+        get: operations["admin_terms_v1_admin_commerce_terms_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/admin/commerce-terms/draft": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** Write the draft purchase terms */
+        put: operations["admin_save_terms_v1_admin_commerce_terms_draft_put"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/admin/commerce-terms/publish": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Publish the draft terms (a different finance person; audited) */
+        post: operations["admin_publish_terms_v1_admin_commerce_terms_publish_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/admin/entitlements": {
         parameters: {
             query?: never;
@@ -703,6 +754,23 @@ export interface paths {
          *     (English first) is shown with `requested_language_missing`: a missing translation is explicit, never filled in.
          */
         get: operations["chapter_lessons_v1_chapters__chapter_id__lessons_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/commerce-terms": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** The published purchase terms (public) */
+        get: operations["public_terms_v1_commerce_terms_get"];
         put?: never;
         post?: never;
         delete?: never;
@@ -9307,6 +9375,56 @@ export interface components {
             /** Title */
             title: string;
         };
+        /** TermsIn */
+        TermsIn: {
+            /**
+             * Conversion Note
+             * @description Buying during the free trial (§16.9 T5)
+             */
+            conversion_note: string;
+            /**
+             * Refund Note
+             * @description Refunds and what they reverse
+             */
+            refund_note: string;
+            /**
+             * Renewal Note
+             * @description Whether and how a plan renews
+             */
+            renewal_note: string;
+            /**
+             * Tax Note
+             * @description How tax is treated in the prices shown
+             */
+            tax_note: string;
+        };
+        /** TermsOut */
+        TermsOut: {
+            /** Conversion Note */
+            conversion_note: string;
+            /** Published At */
+            published_at: string | null;
+            /** Refund Note */
+            refund_note: string;
+            /** Renewal Note */
+            renewal_note: string;
+            /** Status */
+            status: string;
+            /** Tax Note */
+            tax_note: string;
+            /** Version */
+            version: number;
+        };
+        /** TermsState */
+        TermsState: {
+            draft?: components["schemas"]["TermsOut"] | null;
+            /**
+             * Draft Is Mine
+             * @default false
+             */
+            draft_is_mine: boolean;
+            published: components["schemas"]["TermsOut"] | null;
+        };
         /** TicketIn */
         TicketIn: {
             /** Body */
@@ -10300,6 +10418,92 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["CataloguePreview"];
+                };
+            };
+        };
+    };
+    admin_terms_v1_admin_commerce_terms_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TermsState"];
+                };
+            };
+        };
+    };
+    admin_save_terms_v1_admin_commerce_terms_draft_put: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["TermsIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TermsState"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    admin_publish_terms_v1_admin_commerce_terms_publish_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["TransitionIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TermsState"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
                 };
             };
         };
@@ -11503,6 +11707,26 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    public_terms_v1_commerce_terms_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TermsState"];
                 };
             };
         };

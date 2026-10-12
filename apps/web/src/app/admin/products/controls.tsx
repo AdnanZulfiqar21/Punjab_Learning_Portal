@@ -1,7 +1,8 @@
 "use client";
 
 import { useId, useState, useTransition } from "react";
-import { addPrice, createProduct, moveProduct, type ProductResult } from "@/app/actions/products";
+import type { CommerceTermsState } from "@portal/contracts";
+import { addPrice, createProduct, moveProduct, publishTerms, saveTerms, type ProductResult } from "@/app/actions/products";
 import { formatMinor, toMinor } from "@/lib/money";
 
 const field = "w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm";
@@ -223,5 +224,93 @@ export function AddPrice({ id, name }: { id: string; name: string }) {
       {minor !== null && <p className="text-muted sm:col-span-4">Will be stored as {formatMinor(minor, v.currency)} ({minor} minor units).</p>}
       <div className="sm:col-span-4">{alert}</div>
     </form>
+  );
+}
+
+const TERM_FIELDS = [
+  ["tax_note", "Taxes: how tax is treated in the prices shown"],
+  ["renewal_note", "Renewal: whether and how a plan renews"],
+  ["conversion_note", "Buying during the free trial (early conversion)"],
+  ["refund_note", "Refunds: what a refund returns and reverses"],
+] as const;
+
+type TermKey = (typeof TERM_FIELDS)[number][0];
+
+/** P14.S1.T3 (PRICING-01): the purchase terms shown on /pricing, drafted by one finance person, published by another. */
+export function TermsEditor({ state }: { state: CommerceTermsState }) {
+  const base = state.draft ?? state.published;
+  const [v, setV] = useState<Record<TermKey, string>>({
+    tax_note: base?.tax_note ?? "",
+    renewal_note: base?.renewal_note ?? "",
+    conversion_note: base?.conversion_note ?? "",
+    refund_note: base?.refund_note ?? "",
+  });
+  const [reason, setReason] = useState("");
+  const save = useAction();
+  const publish = useAction();
+  const canEdit = !state.draft || state.draft_is_mine;
+  return (
+    <section aria-labelledby="terms-h" className="space-y-3 rounded-xl border border-border bg-surface p-4 text-sm">
+      <h2 id="terms-h" className="font-semibold">
+        Purchase terms
+      </h2>
+      <p className="text-muted">
+        {state.published ? `Version ${state.published.version} is on the pricing page.` : "No terms are published; the pricing page says so."}{" "}
+        {state.draft
+          ? state.draft_is_mine
+            ? `Your draft (version ${state.draft.version}) needs another finance person to publish it.`
+            : `A colleague's draft (version ${state.draft.version}) is waiting: read it below and publish it if it's right.`
+          : "Write a draft below; a different finance person publishes it."}
+      </p>
+      <form
+        aria-label="Draft purchase terms"
+        className="space-y-3"
+        onSubmit={(e) => {
+          e.preventDefault();
+          save.run(() => saveTerms(v));
+        }}
+      >
+        {TERM_FIELDS.map(([key, label]) => (
+          <label key={key} className="block space-y-1">
+            <span className="block font-medium">{label}</span>
+            <textarea
+              required
+              minLength={10}
+              maxLength={2000}
+              rows={3}
+              readOnly={!canEdit}
+              value={v[key]}
+              onChange={(e) => setV({ ...v, [key]: e.target.value })}
+              className={field}
+            />
+          </label>
+        ))}
+        {canEdit && (
+          <button type="submit" disabled={save.pending} className={btn}>
+            {save.pending ? "Saving…" : "Save draft terms"}
+          </button>
+        )}
+        {save.alert}
+      </form>
+      {state.draft && !state.draft_is_mine && (
+        <form
+          aria-label="Publish the draft terms"
+          className="flex flex-wrap items-end gap-2"
+          onSubmit={(e) => {
+            e.preventDefault();
+            publish.run(() => publishTerms(reason.trim()), () => setReason(""));
+          }}
+        >
+          <label className="min-w-56 flex-1 space-y-1">
+            <span className="block font-medium">Why publish it (recorded in the audit trail)</span>
+            <input required minLength={10} value={reason} onChange={(e) => setReason(e.target.value)} className={field} />
+          </label>
+          <button type="submit" disabled={publish.pending} className={btn}>
+            Publish terms
+          </button>
+          {publish.alert}
+        </form>
+      )}
+    </section>
   );
 }

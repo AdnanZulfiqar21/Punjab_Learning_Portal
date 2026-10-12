@@ -5,14 +5,14 @@ import { getBookFor, getCatalogue } from "@/lib/api";
 import { api } from "@/lib/session";
 import { readRuntimeConfig } from "@/lib/runtime-config";
 
-// P11.S1.T1 (PUBLIC-SITE-01): public pages only (home, learn, each book and chapter, help articles), built per request
+// P11.S1.T1 (PUBLIC-SITE-01): public pages only (home, learn, pricing, each book and chapter, help articles), built per request
 // from the live catalogue. Empty outside production or without PORTAL_PUBLIC_ORIGIN, so staging is never advertised.
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   await connection();
   const { role, publicOrigin } = readRuntimeConfig();
   if (role !== "production" || !publicOrigin) return [];
   const url = (path: string) => `${publicOrigin}${path}`;
-  const out: MetadataRoute.Sitemap = [{ url: url("/") }, { url: url("/learn") }, { url: url("/help") }];
+  const out: MetadataRoute.Sitemap = [{ url: url("/") }, { url: url("/learn") }, { url: url("/pricing") }, { url: url("/help") }];
   const catalogue = await getCatalogue();
   if (catalogue.ok) {
     for (const g of catalogue.data.grades) {

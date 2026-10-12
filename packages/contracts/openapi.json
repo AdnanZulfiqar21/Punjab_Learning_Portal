@@ -12860,6 +12860,131 @@
         "title": "SyllabusNoticeOut",
         "type": "object"
       },
+      "TermsIn": {
+        "properties": {
+          "conversion_note": {
+            "description": "Buying during the free trial (\u00a716.9 T5)",
+            "maxLength": 2000,
+            "minLength": 10,
+            "title": "Conversion Note",
+            "type": "string"
+          },
+          "refund_note": {
+            "description": "Refunds and what they reverse",
+            "maxLength": 2000,
+            "minLength": 10,
+            "title": "Refund Note",
+            "type": "string"
+          },
+          "renewal_note": {
+            "description": "Whether and how a plan renews",
+            "maxLength": 2000,
+            "minLength": 10,
+            "title": "Renewal Note",
+            "type": "string"
+          },
+          "tax_note": {
+            "description": "How tax is treated in the prices shown",
+            "maxLength": 2000,
+            "minLength": 10,
+            "title": "Tax Note",
+            "type": "string"
+          }
+        },
+        "required": [
+          "tax_note",
+          "renewal_note",
+          "conversion_note",
+          "refund_note"
+        ],
+        "title": "TermsIn",
+        "type": "object"
+      },
+      "TermsOut": {
+        "properties": {
+          "conversion_note": {
+            "title": "Conversion Note",
+            "type": "string"
+          },
+          "published_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Published At"
+          },
+          "refund_note": {
+            "title": "Refund Note",
+            "type": "string"
+          },
+          "renewal_note": {
+            "title": "Renewal Note",
+            "type": "string"
+          },
+          "status": {
+            "title": "Status",
+            "type": "string"
+          },
+          "tax_note": {
+            "title": "Tax Note",
+            "type": "string"
+          },
+          "version": {
+            "title": "Version",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "version",
+          "status",
+          "tax_note",
+          "renewal_note",
+          "conversion_note",
+          "refund_note",
+          "published_at"
+        ],
+        "title": "TermsOut",
+        "type": "object"
+      },
+      "TermsState": {
+        "properties": {
+          "draft": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TermsOut"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "draft_is_mine": {
+            "default": false,
+            "title": "Draft Is Mine",
+            "type": "boolean"
+          },
+          "published": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TermsOut"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "published"
+        ],
+        "title": "TermsState",
+        "type": "object"
+      },
       "TicketIn": {
         "properties": {
           "body": {
@@ -15253,6 +15378,109 @@
         ]
       }
     },
+    "/v1/admin/commerce-terms": {
+      "get": {
+        "operationId": "admin_terms_v1_admin_commerce_terms_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TermsState"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Published and draft purchase terms (finance)",
+        "tags": [
+          "products"
+        ]
+      }
+    },
+    "/v1/admin/commerce-terms/draft": {
+      "put": {
+        "operationId": "admin_save_terms_v1_admin_commerce_terms_draft_put",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TermsIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TermsState"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Write the draft purchase terms",
+        "tags": [
+          "products"
+        ]
+      }
+    },
+    "/v1/admin/commerce-terms/publish": {
+      "post": {
+        "operationId": "admin_publish_terms_v1_admin_commerce_terms_publish_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransitionIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TermsState"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Publish the draft terms (a different finance person; audited)",
+        "tags": [
+          "products"
+        ]
+      }
+    },
     "/v1/admin/entitlements": {
       "post": {
         "operationId": "grant_v1_admin_entitlements_post",
@@ -17038,6 +17266,27 @@
         "summary": "Published, live lessons for a chapter (academically approved; never drafts)",
         "tags": [
           "lessons"
+        ]
+      }
+    },
+    "/v1/commerce-terms": {
+      "get": {
+        "operationId": "public_terms_v1_commerce_terms_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TermsState"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "The published purchase terms (public)",
+        "tags": [
+          "products"
         ]
       }
     },

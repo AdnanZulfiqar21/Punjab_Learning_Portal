@@ -34,6 +34,7 @@ FIXTURES: list[tuple[str, list[str]]] = [
     ("studio-owner@example.com", ["owner_admin"]),  # approves narration voices (LECTURE-01); development only
     ("studio-operator@example.com", ["platform_operator"]),  # service overview and rollouts (ROLLOUT-01)
     ("studio-finance@example.com", ["finance"]),  # products and prices (PRODUCTS-01)
+    ("studio-finance2@example.com", ["finance"]),  # purchase terms need a second person to publish (PRICING-01)
 ]
 
 
