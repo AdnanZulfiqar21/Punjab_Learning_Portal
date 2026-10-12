@@ -36,7 +36,8 @@ def _readable_lesson(db: Session, user_id: uuid.UUID, item_id: uuid.UUID) -> Con
     item = db.get(ContentItem, item_id)
     if item is None or item.kind != "lesson" or item.availability != Availability.live.value:
         raise NotFound("Lesson not found.")
-    if item.access_tier != "preview" and not access.active_entitlements(db, user_id, access.db_now(db)):
+    need = access.Need.subjects(item.grade_number, item.subject_code)
+    if item.access_tier != "preview" and not access.entitled_for(db, user_id, need):
         raise Forbidden("This lesson is included with a plan or the free trial.")
     return item
 

@@ -150,7 +150,7 @@ def build_from(
         if existing.request_hash != rhash:
             raise Conflict("This request key was already used for a different test.")
         return existing
-    access.require_access(db, who.user.id, purpose="Mock tests")
+    access.require_access(db, who.user.id, purpose="Mock tests", need=access.Need(exam=profile.code))
     rules = version.rules
     if rules.get("solution_release") != "after_submission" and not allow_scheduled:
         raise Conflict("Scheduled mocks with delayed solutions aren't available yet.", code_reason="MOCK_SCHEDULED")

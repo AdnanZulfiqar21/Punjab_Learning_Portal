@@ -3,6 +3,7 @@
 import type { Access } from "@portal/contracts";
 import { Notice } from "@/components/ui";
 import { day } from "@/lib/access";
+import { coverage } from "@/lib/plan-coverage";
 import { StartTrialButton } from "./start-trial-button";
 
 const SOURCE: Record<string, string> = {
@@ -17,9 +18,10 @@ export function PlanStatus({ access, purpose }: { access: Access; purpose?: stri
   const active = access.entitlements.filter((e) => e.status === "active" && new Date(e.ends_at) > new Date());
   if (access.has_access && active.length > 0) {
     const current = active.reduce((a, b) => (new Date(a.ends_at) > new Date(b.ends_at) ? a : b));
+    const covers = coverage(active);
     return (
       <Notice tone="ok" title={`${SOURCE[current.source] ?? "Access"} until ${day(current.ends_at)}`}>
-        Practice tests and written practice are open. Written marking allowance: {access.written_allowance.available} of{" "}
+        {covers ? `Your plan covers ${covers}. ` : "Practice tests and written practice are open. "}Written marking allowance: {access.written_allowance.available} of{" "}
         {access.written_allowance.granted} units left (a short question uses {access.weights.short}, a long one {access.weights.long}).
       </Notice>
     );
