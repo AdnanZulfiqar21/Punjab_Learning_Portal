@@ -82,6 +82,13 @@ class PageTransform(BaseModel):
     enhance: bool = Field(default=False, description="A higher-contrast preview that keeps faint marks")
 
 
+class TransformIn(PageTransform):
+    """A page's new transform. `trim`, when given, is the part of the page *as currently shown* to keep (x, y, w, h);
+    the server maps it onto the original and it replaces `crop`."""
+
+    trim: list[float] | None = Field(default=None, description="Part of the page as shown to keep (x, y, w, h)")
+
+
 class PageOut(BaseModel):
     """One logical page: a photo, or one page of a PDF. Mapping and the page cap count these."""
 

@@ -30,6 +30,7 @@ from portal_api.modules.written.schemas import (
     SealIn,
     SealOut,
     SlotOut,
+    TransformIn,
     UploadOut,
     WrittenAttemptOut,
     WrittenAvailabilityOut,
@@ -315,7 +316,7 @@ def get_page(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, page_id: uuid
     summary="Turn, trim or clarify a page before submitting (the original is kept; W03.S1.T3)",
 )
 async def transform(
-    db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, page_id: uuid.UUID, body: PageTransform, response: Response
+    db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, page_id: uuid.UUID, body: TransformIn, response: Response
 ) -> PageOut:
     _private(response)
     page = await run_in_threadpool(service.transform_page, db, who, attempt_id, page_id, body.model_dump())

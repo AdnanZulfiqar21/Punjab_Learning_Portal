@@ -121,6 +121,16 @@ def test_a_learner_transforms_a_page_and_the_original_is_kept(
     shown = client.get(f"/v1/written-attempts/{attempt['id']}", headers=learner.headers).json()["pages"][0]
     assert shown["transform"]["rotate"] == 90
 
+    # A trim of the turned page as shown: its left half is the bottom half of the original photo.
+    half = {"rotate": 90, "enhance": True, "trim": [0, 0, 0.5, 1]}
+    trimmed = client.put(url, headers=learner.headers, json=half)
+    assert trimmed.status_code == 200, trimmed.text
+    assert trimmed.json()["transform"]["crop"] == [0.0, 0.5, 1.0, 0.5] and trimmed.json()["width"] < page["width"]
+    again = client.put(url, headers=learner.headers, json=half)  # a quarter of the original height is too little
+    assert again.status_code == 422 and again.json()["code_reason"] == "TRANSFORM_REFUSED"
+    untrimmed = client.put(url, headers=learner.headers, json={"rotate": 90, "enhance": True, "crop": None})
+    assert untrimmed.json()["transform"]["crop"] is None and untrimmed.json()["width"] == page["width"]
+
     # Submitted: the transform is fixed, and the marker can see the page as shown or the untouched original.
     m = _map(client, learner, attempt, {"1:a": {"pages": [up["id"]]}, "1:b": {"unanswered": True}}).json()
     assert _seal(client, learner, attempt["id"], m["manifest_revision"]).status_code == 200

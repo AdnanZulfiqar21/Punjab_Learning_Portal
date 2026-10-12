@@ -570,10 +570,6 @@ def transform_page(
     """TRANSFORMS-01: turn, trim or clarify one page before submitting. The original is never touched: a fresh preview
     is rendered from it with the transform and stored under a new key; the old preview is swept later as unreferenced.
     Only while the attempt is open; after sealing the page and its transform are fixed."""
-    try:
-        transform = evidence.check_transform(raw)
-    except evidence.Rejected as e:
-        raise Unprocessable(e.reason, code_reason="TRANSFORM_REFUSED") from e
     attempt = db.get(WrittenAttempt, attempt_id)
     if attempt is None or attempt.user_id != who.user.id:
         raise NotFound("Attempt not found.")
@@ -581,6 +577,16 @@ def transform_page(
     page = db.get(WrittenPage, page_id)
     if page is None or page.attempt_id != attempt.id or page.status != "uploaded":
         raise NotFound("Page not found.")
+    try:
+        if raw.get("trim") is not None:  # a trim of the page as shown, mapped onto the original
+            trim = [float(v) for v in raw["trim"]]
+            if len(trim) != 4 or min(trim) < 0 or trim[0] + trim[2] > 1.0001 or trim[1] + trim[3] > 1.0001:
+                raise evidence.Rejected("A trim must stay inside the page.")
+            raw = {**raw, "crop": evidence.to_source(trim, page.transform or None)}
+        transform = evidence.check_transform({k: raw.get(k) for k in ("rotate", "crop", "enhance")})
+    except (evidence.Rejected, TypeError, ValueError) as e:
+        reason = e.reason if isinstance(e, evidence.Rejected) else "A trim is four numbers: x, y, width and height."
+        raise Unprocessable(reason, code_reason="TRANSFORM_REFUSED") from e
     file = db.get(WrittenFile, page.file_id)
     assert file is not None
     key, kind, index, file_id = file.storage_key, file.content_type, page.page_index, file.id
