@@ -11,6 +11,7 @@ audited. Each runbook is rehearsed by an automated test that walks the same step
 | Interrupted mock exam | [interrupted-mock.md](interrupted-mock.md) | `apps/api/tests/test_mocks.py::test_rehearsal_interrupted_mock`; scheduled windows: `test_mock_deadlines.py` | Rehearsed for self-started mocks (MOCK-01). Scheduled windows exist (SCHEDULE-01, OCT9-04): staff can move `results_at` later and grant accommodations within it. |
 | Compromised account or leaked secret | [compromised-account-or-secret.md](compromised-account-or-secret.md) | `test_account_suspension.py::test_suspension_is_immediate_scoped_and_reversible` | Account suspension rehearsed; secret rotation waits on the hosting secret store (B03). |
 | Result shows "scoring pending" | [scoring-pending.md](scoring-pending.md) | `test_scoring_recovery.py` | Rehearsed (RECOVERABLE-SCORING-01). |
+| Rolling back a release | [release-rollback.md](release-rollback.md) | `apps/api/tests/test_upgrade_compatibility.py` | Strategy enforced by tests (MIGRATION-COMPAT-01); executing it waits on a deployment (B03). |
 | Operator alerts (queues, errors, latency, pool) | [alerts.md](alerts.md) | `test_operations.py`, `test_service_overview.py` | Signals and thresholds tested; paging waits on hosting (B03). |
 
 Shared rules:
