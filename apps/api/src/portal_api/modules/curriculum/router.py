@@ -3,12 +3,12 @@ from __future__ import annotations
 import uuid
 from typing import Annotated
 
-from fastapi import APIRouter, Depends, Path, Query, Response
+from fastapi import APIRouter, Depends, Path, Response
 from sqlalchemy.orm import Session
 
 from portal_api.db import get_session
 from portal_api.modules.curriculum import service
-from portal_api.modules.curriculum.schemas import BookOut, CatalogueOut, ChapterOut, SearchOut
+from portal_api.modules.curriculum.schemas import BookOut, CatalogueOut, ChapterOut
 
 router = APIRouter(prefix="/v1", tags=["curriculum"])
 DB = Annotated[Session, Depends(get_session)]
@@ -43,16 +43,3 @@ def book(db: DB, response: Response, book_id: uuid.UUID) -> BookOut:
 def chapter(db: DB, response: Response, chapter_id: uuid.UUID) -> ChapterOut:
     response.headers["Cache-Control"] = PUBLIC_CACHE
     return service.get_chapter(db, chapter_id)
-
-
-@router.get(
-    "/search", response_model=SearchOut, summary="Search chapters and topics; every hit is labelled with its grade"
-)
-def search(
-    db: DB,
-    q: Annotated[str, Query(min_length=2, max_length=100)],
-    grade: Annotated[int | None, Query(ge=11, le=12)] = None,
-    subject: Annotated[str | None, Query(max_length=40)] = None,
-    limit: Annotated[int, Query(ge=1, le=50)] = 20,
-) -> SearchOut:
-    return service.search(db, q, grade, subject, limit)

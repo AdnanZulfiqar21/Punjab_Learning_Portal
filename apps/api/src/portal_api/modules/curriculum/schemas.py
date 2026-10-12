@@ -125,8 +125,15 @@ class ChapterOut(BaseModel):
     next_chapter_id: uuid.UUID | None
 
 
+class SnippetPart(BaseModel):
+    """A run of snippet text; `match` marks the words that matched the search."""
+
+    text: str
+    match: bool
+
+
 class SearchHit(BaseModel):
-    kind: str  # "chapter" | "topic"
+    kind: str  # "chapter" | "topic" | "lesson" (lessons only when asked for)
     id: uuid.UUID
     chapter_id: uuid.UUID
     title: str
@@ -137,6 +144,12 @@ class SearchHit(BaseModel):
     subject_name: str
     pdf_page: int | None
     score: float
+    # Lessons (SEARCH-01): the lesson's language and tier; `locked` when the caller can't read it (title match only,
+    # no snippet); `snippet` quotes matching lesson text the caller may read, never a checkpoint or an answer.
+    language: str | None = None
+    access_tier: str | None = None
+    locked: bool = False
+    snippet: list[SnippetPart] = []
 
 
 class SearchOut(BaseModel):
@@ -144,3 +157,5 @@ class SearchOut(BaseModel):
     grade: int | None
     subject: str | None
     hits: list[SearchHit]
+    also_searched: list[str] = []  # equivalent terms from the reviewed alias table
+    lessons: bool = False  # whether lessons were searched

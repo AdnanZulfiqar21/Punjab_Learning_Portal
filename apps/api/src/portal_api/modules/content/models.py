@@ -158,6 +158,13 @@ class ContentVersion(Base):
             unique=True,
             postgresql_where=text("status = 'published'"),
         ),
+        # SEARCH-01: full-text index over the searchable lesson text; `lesson_search_text` is defined in migration
+        # f6a1c3e8b204 (see content.search).
+        Index(
+            "ix_content_version_search",
+            text("to_tsvector('english'::regconfig, lesson_search_text(body))"),
+            postgresql_using="gin",
+        ),
         CheckConstraint(
             f"status in ({', '.join(repr(s.value) for s in VersionStatus)})", name="content_version_status"
         ),
