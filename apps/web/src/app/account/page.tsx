@@ -118,6 +118,11 @@ async function Account() {
               Learning and engagement
             </Link>
           )}
+          {me.roles.some((r) => r === "owner_admin" || r === "finance") && (
+            <Link href="/admin/economics" className="inline-block text-sm text-accent underline-offset-2 hover:underline">
+              Cohort economics
+            </Link>
+          )}
           {me.roles.includes("platform_operator") && (
             <Link href="/admin/service" className="inline-block text-sm text-accent underline-offset-2 hover:underline">
               Service overview

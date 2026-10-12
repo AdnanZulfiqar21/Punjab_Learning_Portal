@@ -3390,6 +3390,86 @@
         "title": "CorrectionLink",
         "type": "object"
       },
+      "CostLine": {
+        "properties": {
+          "blocker": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Blocker"
+          },
+          "cost": {
+            "anyOf": [
+              {
+                "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Quantity times the current rate; null when either is missing",
+            "title": "Cost"
+          },
+          "currency": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Currency"
+          },
+          "key": {
+            "title": "Key",
+            "type": "string"
+          },
+          "label": {
+            "title": "Label",
+            "type": "string"
+          },
+          "quantity": {
+            "anyOf": [
+              {
+                "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Measured from our own records; null when it can't be measured yet",
+            "title": "Quantity"
+          },
+          "quantity_note": {
+            "title": "Quantity Note",
+            "type": "string"
+          },
+          "rate_set": {
+            "title": "Rate Set",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "key",
+          "label",
+          "quantity",
+          "quantity_note",
+          "blocker",
+          "rate_set",
+          "cost",
+          "currency"
+        ],
+        "title": "CostLine",
+        "type": "object"
+      },
       "CoverageOut": {
         "properties": {
           "concepts": {
@@ -3902,6 +3982,58 @@
           "plans_note"
         ],
         "title": "DiscoveryOut",
+        "type": "object"
+      },
+      "EconomicsReport": {
+        "properties": {
+          "contribution_per_paying_learner": {
+            "$ref": "#/components/schemas/UnavailableFigure"
+          },
+          "definitions": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "title": "Definitions",
+            "type": "object"
+          },
+          "generated_at": {
+            "format": "date-time",
+            "title": "Generated At",
+            "type": "string"
+          },
+          "populations": {
+            "items": {
+              "$ref": "#/components/schemas/Population"
+            },
+            "title": "Populations",
+            "type": "array"
+          },
+          "rates": {
+            "items": {
+              "$ref": "#/components/schemas/RateOut"
+            },
+            "title": "Rates",
+            "type": "array"
+          },
+          "report_version": {
+            "title": "Report Version",
+            "type": "integer"
+          },
+          "window_days": {
+            "title": "Window Days",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "report_version",
+          "generated_at",
+          "window_days",
+          "rates",
+          "populations",
+          "contribution_per_paying_learner",
+          "definitions"
+        ],
+        "title": "EconomicsReport",
         "type": "object"
       },
       "Engagement": {
@@ -7953,6 +8085,25 @@
         "title": "MockSessionOut",
         "type": "object"
       },
+      "Money": {
+        "properties": {
+          "amount": {
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Amount",
+            "type": "string"
+          },
+          "currency": {
+            "title": "Currency",
+            "type": "string"
+          }
+        },
+        "required": [
+          "currency",
+          "amount"
+        ],
+        "title": "Money",
+        "type": "object"
+      },
       "NextStepsOut": {
         "description": "W07.S2.T1 (NEXT-STEPS-01): where to go next on a question that lost marks. Everything here is approved content:\nthe rubric's own wording for what was missed and live lessons for the question's topic. Nothing is generated.",
         "properties": {
@@ -9087,6 +9238,67 @@
         "title": "PassageSnapshot",
         "type": "object"
       },
+      "Population": {
+        "properties": {
+          "complete": {
+            "title": "Complete",
+            "type": "boolean"
+          },
+          "key": {
+            "enum": [
+              "paying",
+              "trial",
+              "completed_trial"
+            ],
+            "title": "Key",
+            "type": "string"
+          },
+          "known_cost": {
+            "description": "The known part only, by currency",
+            "items": {
+              "$ref": "#/components/schemas/Money"
+            },
+            "title": "Known Cost",
+            "type": "array"
+          },
+          "known_cost_per_learner": {
+            "items": {
+              "$ref": "#/components/schemas/Money"
+            },
+            "title": "Known Cost Per Learner",
+            "type": "array"
+          },
+          "learners": {
+            "title": "Learners",
+            "type": "integer"
+          },
+          "lines": {
+            "items": {
+              "$ref": "#/components/schemas/CostLine"
+            },
+            "title": "Lines",
+            "type": "array"
+          },
+          "missing": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Missing",
+            "type": "array"
+          }
+        },
+        "required": [
+          "key",
+          "learners",
+          "lines",
+          "known_cost",
+          "known_cost_per_learner",
+          "complete",
+          "missing"
+        ],
+        "title": "Population",
+        "type": "object"
+      },
       "PostponeIn": {
         "properties": {
           "reason": {
@@ -10197,6 +10409,133 @@
           "criteria"
         ],
         "title": "QuestionResult",
+        "type": "object"
+      },
+      "RateIn": {
+        "properties": {
+          "amount": {
+            "anyOf": [
+              {
+                "minimum": 0.0,
+                "type": "number"
+              },
+              {
+                "pattern": "^(?!^[-+.]*$)[+-]?0*(?:\\d{0,10}|(?=[\\d.]{1,15}0*$)\\d{0,10}\\.\\d{0,4}0*$)",
+                "type": "string"
+              }
+            ],
+            "description": "Cost for the rate's quoted quantity",
+            "title": "Amount"
+          },
+          "currency": {
+            "pattern": "^[A-Za-z]{3}$",
+            "title": "Currency",
+            "type": "string"
+          },
+          "key": {
+            "enum": [
+              "hosting_per_learner_month",
+              "production_per_learner_month",
+              "video_delivery_per_1000_minutes",
+              "otp_per_1000",
+              "email_per_1000",
+              "attestation_per_1000",
+              "support_per_ticket",
+              "review_per_script",
+              "evidence_storage_per_gb_month",
+              "ocr_per_1000_pages"
+            ],
+            "title": "Key",
+            "type": "string"
+          },
+          "source_note": {
+            "description": "Where the figure comes from and when it was checked",
+            "maxLength": 2000,
+            "minLength": 10,
+            "title": "Source Note",
+            "type": "string"
+          }
+        },
+        "required": [
+          "key",
+          "amount",
+          "currency",
+          "source_note"
+        ],
+        "title": "RateIn",
+        "type": "object"
+      },
+      "RateOut": {
+        "properties": {
+          "amount": {
+            "anyOf": [
+              {
+                "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Amount"
+          },
+          "currency": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Currency"
+          },
+          "key": {
+            "title": "Key",
+            "type": "string"
+          },
+          "label": {
+            "title": "Label",
+            "type": "string"
+          },
+          "set_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Set At"
+          },
+          "source_note": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Note"
+          },
+          "unit": {
+            "title": "Unit",
+            "type": "string"
+          }
+        },
+        "required": [
+          "key",
+          "label",
+          "unit",
+          "amount",
+          "currency",
+          "source_note",
+          "set_at"
+        ],
+        "title": "RateOut",
         "type": "object"
       },
       "RebaseIn": {
@@ -14950,6 +15289,37 @@
         "title": "Unavailable",
         "type": "object"
       },
+      "UnavailableFigure": {
+        "properties": {
+          "available": {
+            "title": "Available",
+            "type": "boolean"
+          },
+          "blocker": {
+            "title": "Blocker",
+            "type": "string"
+          },
+          "value": {
+            "anyOf": [
+              {
+                "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Value"
+          }
+        },
+        "required": [
+          "value",
+          "available",
+          "blocker"
+        ],
+        "title": "UnavailableFigure",
+        "type": "object"
+      },
       "UploadOut": {
         "properties": {
           "duplicate": {
@@ -16418,6 +16788,68 @@
           }
         },
         "summary": "The analytics event dictionary (owner/admin, finance; MFA)",
+        "tags": [
+          "analytics"
+        ]
+      }
+    },
+    "/v1/admin/analytics/economics": {
+      "get": {
+        "operationId": "economics_report_v1_admin_analytics_economics_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EconomicsReport"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Trial and paid cohort economics (owner, finance; MFA)",
+        "tags": [
+          "analytics"
+        ]
+      }
+    },
+    "/v1/admin/analytics/economics/rates": {
+      "post": {
+        "operationId": "set_economics_rate_v1_admin_analytics_economics_rates_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RateIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RateOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Enter a unit rate with its source (finance; MFA). Earlier rates are kept",
         "tags": [
           "analytics"
         ]
