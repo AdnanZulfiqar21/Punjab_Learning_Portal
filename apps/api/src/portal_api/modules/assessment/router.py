@@ -208,8 +208,9 @@ def reveal(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, position: int, 
 
 
 def _related_lessons(db: Session, form: PracticeForm, limit: int = 3) -> dict[int, list[RelatedLesson]]:
-    """P12.S1.T2 (REVIEW-LINKS-01): live lessons for each question's topic, else its chapter, in two queries."""
-    from portal_api.modules.content.models import Availability, ContentItem, ContentVersion
+    """P12.S1.T2 (REVIEW-LINKS-01): live lessons for each question's topic, else its chapter (content.related)."""
+    from portal_api.modules.content.models import ContentItem
+    from portal_api.modules.content.related import live_lessons_for
 
     questions = {
         fi.position: q
@@ -219,36 +220,10 @@ def _related_lessons(db: Session, form: PracticeForm, limit: int = 3) -> dict[in
             .where(FormItem.form_id == form.id)
         ).all()
     }
-    chapters = {q.chapter_id for q in questions.values()}
-    if not chapters:
-        return {}
-    lessons = (
-        db.execute(
-            select(ContentItem)
-            .join(ContentVersion, ContentVersion.id == ContentItem.published_version_id)
-            .where(
-                ContentItem.kind == "lesson",
-                ContentItem.availability == Availability.live.value,
-                ContentItem.chapter_id.in_(chapters),
-                ContentItem.concept_id.is_(None),  # one link per lesson concept: the original, whatever its language
-            )
-            .order_by(ContentVersion.published_at, ContentItem.id)
-        )
-        .scalars()
-        .all()
-    )
-    by_topic: dict[uuid.UUID, list[RelatedLesson]] = {}
-    by_chapter: dict[uuid.UUID, list[RelatedLesson]] = {}
-    for lesson in lessons:
-        ref = RelatedLesson(id=lesson.id, title=lesson.title, chapter_id=lesson.chapter_id)
-        by_chapter.setdefault(lesson.chapter_id, []).append(ref)
-        if lesson.topic_id:
-            by_topic.setdefault(lesson.topic_id, []).append(ref)
-    out = {}
-    for position, q in questions.items():
-        picks = (by_topic.get(q.topic_id) if q.topic_id else None) or by_chapter.get(q.chapter_id, [])
-        out[position] = picks[:limit]
-    return out
+    return {
+        position: [RelatedLesson(id=lesson.id, title=lesson.title, chapter_id=lesson.chapter_id) for lesson in found]
+        for position, found in live_lessons_for(db, questions, limit).items()
+    }
 
 
 @router.get(
