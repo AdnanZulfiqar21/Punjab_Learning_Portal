@@ -21,6 +21,40 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/admin/analytics/economics": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Trial and paid cohort economics (owner, finance; MFA) */
+        get: operations["economics_report_v1_admin_analytics_economics_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/admin/analytics/economics/rates": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Enter a unit rate with its source (finance; MFA). Earlier rates are kept */
+        post: operations["set_economics_rate_v1_admin_analytics_economics_rates_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/admin/analytics/funnel": {
         parameters: {
             query?: never;
@@ -5749,6 +5783,31 @@ export interface components {
             /** Status */
             status: string;
         };
+        /** CostLine */
+        CostLine: {
+            /** Blocker */
+            blocker: string | null;
+            /**
+             * Cost
+             * @description Quantity times the current rate; null when either is missing
+             */
+            cost: string | null;
+            /** Currency */
+            currency: string | null;
+            /** Key */
+            key: string;
+            /** Label */
+            label: string;
+            /**
+             * Quantity
+             * @description Measured from our own records; null when it can't be measured yet
+             */
+            quantity: string | null;
+            /** Quantity Note */
+            quantity_note: string;
+            /** Rate Set */
+            rate_set: boolean;
+        };
         /** CoverageOut */
         CoverageOut: {
             /** Concepts */
@@ -5958,6 +6017,27 @@ export interface components {
             previews: components["schemas"]["PreviewLesson"][];
             /** Tracks */
             tracks: components["schemas"]["TrackOut"][];
+        };
+        /** EconomicsReport */
+        EconomicsReport: {
+            contribution_per_paying_learner: components["schemas"]["UnavailableFigure"];
+            /** Definitions */
+            definitions: {
+                [key: string]: string;
+            };
+            /**
+             * Generated At
+             * Format: date-time
+             */
+            generated_at: string;
+            /** Populations */
+            populations: components["schemas"]["Population"][];
+            /** Rates */
+            rates: components["schemas"]["RateOut"][];
+            /** Report Version */
+            report_version: number;
+            /** Window Days */
+            window_days: number;
         };
         /** Engagement */
         Engagement: {
@@ -7609,6 +7689,13 @@ export interface components {
              */
             window_closes_at: string;
         };
+        /** Money */
+        Money: {
+            /** Amount */
+            amount: string;
+            /** Currency */
+            currency: string;
+        };
         /**
          * NextStepsOut
          * @description W07.S2.T1 (NEXT-STEPS-01): where to go next on a question that lost marks. Everything here is approved content:
@@ -8128,6 +8215,29 @@ export interface components {
              */
             id: string;
         };
+        /** Population */
+        Population: {
+            /** Complete */
+            complete: boolean;
+            /**
+             * Key
+             * @enum {string}
+             */
+            key: "paying" | "trial" | "completed_trial";
+            /**
+             * Known Cost
+             * @description The known part only, by currency
+             */
+            known_cost: components["schemas"]["Money"][];
+            /** Known Cost Per Learner */
+            known_cost_per_learner: components["schemas"]["Money"][];
+            /** Learners */
+            learners: number;
+            /** Lines */
+            lines: components["schemas"]["CostLine"][];
+            /** Missing */
+            missing: string[];
+        };
         /** PostponeIn */
         PostponeIn: {
             /** Reason */
@@ -8569,6 +8679,43 @@ export interface components {
              * @description Why a question is pending or unavailable
              */
             status_reason: string;
+        };
+        /** RateIn */
+        RateIn: {
+            /**
+             * Amount
+             * @description Cost for the rate's quoted quantity
+             */
+            amount: number | string;
+            /** Currency */
+            currency: string;
+            /**
+             * Key
+             * @enum {string}
+             */
+            key: "hosting_per_learner_month" | "production_per_learner_month" | "video_delivery_per_1000_minutes" | "otp_per_1000" | "email_per_1000" | "attestation_per_1000" | "support_per_ticket" | "review_per_script" | "evidence_storage_per_gb_month" | "ocr_per_1000_pages";
+            /**
+             * Source Note
+             * @description Where the figure comes from and when it was checked
+             */
+            source_note: string;
+        };
+        /** RateOut */
+        RateOut: {
+            /** Amount */
+            amount: string | null;
+            /** Currency */
+            currency: string | null;
+            /** Key */
+            key: string;
+            /** Label */
+            label: string;
+            /** Set At */
+            set_at: string | null;
+            /** Source Note */
+            source_note: string | null;
+            /** Unit */
+            unit: string;
         };
         /** RebaseIn */
         RebaseIn: {
@@ -10444,6 +10591,15 @@ export interface components {
             /** Value */
             value: number | null;
         };
+        /** UnavailableFigure */
+        UnavailableFigure: {
+            /** Available */
+            available: boolean;
+            /** Blocker */
+            blocker: string;
+            /** Value */
+            value: string | null;
+        };
         /** UploadOut */
         UploadOut: {
             /**
@@ -11056,6 +11212,59 @@ export interface operations {
                     "application/json": {
                         [key: string]: unknown;
                     }[];
+                };
+            };
+        };
+    };
+    economics_report_v1_admin_analytics_economics_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EconomicsReport"];
+                };
+            };
+        };
+    };
+    set_economics_rate_v1_admin_analytics_economics_rates_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["RateIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RateOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
                 };
             };
         };

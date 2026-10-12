@@ -13,6 +13,7 @@ from portal_api.config import get_settings
 from portal_api.modules.access import trial_devices
 from portal_api.modules.access.products import router as products_router
 from portal_api.modules.access.router import router as access_router
+from portal_api.modules.analytics.economics import router as economics_router
 from portal_api.modules.analytics.events import router as analytics_router
 from portal_api.modules.analytics.funnels import router as funnel_router
 from portal_api.modules.analytics.learning import router as learning_router
@@ -161,6 +162,7 @@ def create_app() -> FastAPI:
     app.include_router(analytics_router)
     app.include_router(funnel_router)
     app.include_router(learning_router)
+    app.include_router(economics_router)
     app.include_router(integrations_router)
     if settings.dev_auth_enabled:  # refused in staging/production by the startup validator
         app.include_router(dev_auth.router)
