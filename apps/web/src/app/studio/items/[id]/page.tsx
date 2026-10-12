@@ -3,9 +3,10 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { Breadcrumbs, Notice, SkeletonLines } from "@/components/ui";
-import { getHistory, getItem, getVariants, requireStaff, StudioForbiddenError } from "@/lib/studio";
+import { getHistory, getItem, getQueue, getVariants, requireStaff, StudioForbiddenError } from "@/lib/studio";
 import { AddRubric } from "./add-rubric";
 import { LanguageVariants } from "./language-variants";
+import { QuestionVariants } from "./question-variants";
 import type { QuestionVersionChoice } from "./written-editor";
 import { Workspace } from "./workspace";
 
@@ -35,7 +36,12 @@ async function Item({ id }: { id: string }) {
   if (!/^[0-9a-f-]{36}$/i.test(id)) notFound();
   const item = await getItem(auth.token, id);
   if (!item) notFound();
-  const [history, variants] = await Promise.all([getHistory(auth.token, id), item.kind === "lesson" ? getVariants(auth.token, id) : Promise.resolve([])]);
+  const question = (item.kind === "mcq" || item.kind === "written") && item.family_id;
+  const [history, variants, family] = await Promise.all([
+    getHistory(auth.token, id),
+    item.kind === "lesson" ? getVariants(auth.token, id) : Promise.resolve([]),
+    question ? getQueue(auth.token, { family: item.family_id ?? undefined }) : Promise.resolve([]),
+  ]);
   // A rubric marks one version of its written question: offer that question's versions to choose from.
   let questionVersions: QuestionVersionChoice[] = [];
   if (item.kind === "rubric" && item.parent_item_id) {
@@ -49,6 +55,13 @@ async function Item({ id }: { id: string }) {
   return (
     <div className="space-y-4">
       {item.kind === "written" && auth.me.roles.includes("content_author") && <AddRubric questionId={item.id} title={item.title} />}
+      {question && (item.kind === "mcq" || item.kind === "written") && (
+        <QuestionVariants
+          item={{ id: item.id, kind: item.kind, chapterId: item.chapter_id, topicId: item.topic_id, title: item.title }}
+          family={family}
+          canAdd={auth.me.roles.includes("content_author")}
+        />
+      )}
       {item.kind === "lesson" && (
         <LanguageVariants itemId={item.id} title={item.title.replace(/ \((English|Urdu|Roman Urdu)\)$/, "")} variants={variants} canAdd={auth.me.roles.includes("content_author")} />
       )}
