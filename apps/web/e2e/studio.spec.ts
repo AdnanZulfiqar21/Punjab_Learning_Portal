@@ -144,7 +144,7 @@ test("a question needs every review check before it can be approved", async ({ b
   const reviewer = await signIn(browser, "studio-reviewer@example.com");
   await reviewer.getByRole("link", { name: qTitle }).click();
   await reviewer.getByRole("tab", { name: "Preview" }).click();
-  await expect(reviewer.getByText("KEY")).toBeVisible(); // staff preview shows the key; learners never receive it
+  await expect(reviewer.getByText("KEY", { exact: true })).toBeVisible(); // staff preview shows the key; learners never receive it
   await reviewer.getByLabel("Review comment").fill("Checked the fixture against the referenced pages.");
   const approve = reviewer.getByRole("button", { name: "Approve" });
   await expect(approve).toBeDisabled();
