@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
-import type { ClientPlatformState, Integration, OpsSignal, RolloutSnapshot } from "@portal/contracts";
+import type { BacklogRow, ClientPlatformState, Integration, OpsSignal, RolloutSnapshot } from "@portal/contracts";
 import { Badge, Breadcrumbs, Notice, SkeletonLines } from "@/components/ui";
 import { api, currentUser } from "@/lib/session";
 import { ClientMinimumForm } from "./client-minimum-form";
 import { RolloutForm } from "./rollout-form";
+import { StaffingForm } from "./staffing-form";
 
 export const metadata: Metadata = { title: "Service overview", robots: { index: false } };
 
@@ -41,6 +42,9 @@ export default function ServicePage() {
       </Suspense>
       <Suspense fallback={<SkeletonLines lines={4} label="Reading supported app versions" />}>
         <ClientVersions />
+      </Suspense>
+      <Suspense fallback={<SkeletonLines lines={4} label="Reading written-review staffing" />}>
+        <ReviewStaffing />
       </Suspense>
     </div>
   );
@@ -237,6 +241,65 @@ async function ClientVersions() {
           );
         })}
       </ul>
+    </section>
+  );
+}
+
+const SUBJECT_NAME: Record<string, string> = {
+  biology: "Biology",
+  chemistry: "Chemistry",
+  physics: "Physics",
+  computer_science: "Computer Science",
+  mathematics: "Mathematics",
+};
+
+// W06.S3.T2 (STAFFING-01): written-review capacity per class and subject, with the staffing behind it. New tests are
+// admitted only while the hours left after fixed obligations and owed work cover another script within the turnaround.
+async function ReviewStaffing() {
+  const user = await currentUser();
+  if (!user) redirect("/signin?next=/admin/service");
+  const res = await api<BacklogRow[]>("/v1/ops/written-backlog", { token: user.token });
+  if (!res.ok) return null; // the signals panel above already explains access problems
+  return (
+    <section aria-labelledby="staffing-h" className="space-y-2">
+      <h2 id="staffing-h" className="font-semibold">
+        Written-review staffing
+      </h2>
+      <p className="text-sm text-muted">
+        Fixed obligations come off the productive hours first, then the work already owed (queued scripts and started tests). New written tests start only
+        while what is left covers another script within the promised turnaround. Scripts already accepted are always marked, and no answer is ever approved
+        automatically to clear a backlog.
+      </p>
+      {res.data.length === 0 ? (
+        <p className="text-sm text-muted">No class and subject has review capacity yet.</p>
+      ) : (
+        <ul className="space-y-3">
+          {res.data.map((r) => {
+            const label = `Class ${r.grade === 11 ? "XI" : "XII"} ${SUBJECT_NAME[r.subject] ?? r.subject}`;
+            const s = r.staffing;
+            return (
+              <li key={`${r.grade}-${r.subject}`} className="space-y-3 rounded-xl border border-border bg-surface p-4 text-sm">
+                <div className="flex flex-wrap items-baseline justify-between gap-2">
+                  <p className="font-medium">{label}</p>
+                  <Badge tone={r.accepting ? "ok" : "warn"}>{r.accepting ? "Accepting new tests" : "Not accepting new tests"}</Badge>
+                </div>
+                <p className="text-muted">
+                  {r.open_cases} queued · {r.open_permits} started, not yet submitted · {r.overdue_cases} overdue · case limit {r.max_open_cases}
+                </p>
+                <p className="text-muted">
+                  {s
+                    ? `${s.available_minutes} minutes available within ${s.turnaround_days} days, ${s.due_minutes} already owed: room for ${s.admissible_scripts} more script${s.admissible_scripts === 1 ? "" : "s"}.` +
+                      (s.turnaround_estimate_days !== null
+                        ? ` A test started now would wait about ${s.turnaround_estimate_days} day${s.turnaround_estimate_days === 1 ? "" : "s"}.`
+                        : " Nobody is available to mark.")
+                    : "No staffing recorded: only the case limit applies."}
+                </p>
+                <StaffingForm row={r} label={label} />
+              </li>
+            );
+          })}
+        </ul>
+      )}
     </section>
   );
 }

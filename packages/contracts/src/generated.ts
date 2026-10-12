@@ -4901,6 +4901,7 @@ export interface components {
              * @description Queued cases past their due time (service obligation missed)
              */
             overdue_cases: number;
+            staffing?: components["schemas"]["StaffingOut"] | null;
             /** Subject */
             subject: string;
         };
@@ -5034,12 +5035,20 @@ export interface components {
         /** CapacityIn */
         CapacityIn: {
             /**
+             * Clear Staffing
+             * @description Remove the staffing figures (the case limit alone applies)
+             * @default false
+             */
+            clear_staffing: boolean;
+            /**
              * Max Open Cases
              * @description 0 stops new written starts in this scope
              */
             max_open_cases: number;
             /** Reason */
             reason: string;
+            /** @description Leave out to keep the current staffing */
+            staffing?: components["schemas"]["StaffingIn"] | null;
         };
         /** CaptionIn */
         CaptionIn: {
@@ -9726,6 +9735,63 @@ export interface components {
              */
             updated_at: string;
         };
+        /**
+         * StaffingIn
+         * @description W06.S3.T2 (STAFFING-01): the staffing behind a scope's capacity.
+         */
+        StaffingIn: {
+            /**
+             * Fixed Hours Per Week
+             * @description Calibration, adjudication, training and meetings
+             */
+            fixed_hours_per_week: number;
+            /**
+             * Minutes Per Script
+             * @description Teacher minutes to mark one script
+             */
+            minutes_per_script: number;
+            /**
+             * Reviewer Hours Per Week
+             * @description Productive marking hours a week in this scope
+             */
+            reviewer_hours_per_week: number;
+            /**
+             * Turnaround Days
+             * @description The turnaround learners are promised
+             */
+            turnaround_days: number;
+        };
+        /** StaffingOut */
+        StaffingOut: {
+            /**
+             * Admissible Scripts
+             * @description New scripts that still fit within the turnaround
+             */
+            admissible_scripts: number;
+            /**
+             * Available Minutes
+             * @description Productive minutes left after fixed obligations, over the turnaround
+             */
+            available_minutes: number;
+            /**
+             * Due Minutes
+             * @description Minutes already owed to queued cases and started tests
+             */
+            due_minutes: number;
+            /** Fixed Hours Per Week */
+            fixed_hours_per_week: number;
+            /** Minutes Per Script */
+            minutes_per_script: number;
+            /** Reviewer Hours Per Week */
+            reviewer_hours_per_week: number;
+            /** Turnaround Days */
+            turnaround_days: number;
+            /**
+             * Turnaround Estimate Days
+             * @description How long a script started now would wait
+             */
+            turnaround_estimate_days: number | null;
+        };
         /** StatusOut */
         StatusOut: {
             /** Incidents */
@@ -10485,6 +10551,11 @@ export interface components {
             review_staffed: boolean;
             /** Subject */
             subject: string;
+            /**
+             * Turnaround Days
+             * @description About how many days marking takes for a test started now (None: not estimated)
+             */
+            turnaround_days?: number | null;
             /** Upload Allowance S */
             upload_allowance_s: number;
         };

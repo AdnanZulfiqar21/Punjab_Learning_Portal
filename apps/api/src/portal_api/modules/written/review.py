@@ -150,6 +150,15 @@ class ReviewCapacity(Base):
     subject_code: Mapped[str] = mapped_column(String(40), primary_key=True)
     max_open_cases: Mapped[int] = mapped_column(Integer)
     reason: Mapped[str] = mapped_column(Text)
+    # W06.S3.T2 (STAFFING-01): the staffing behind the capacity, all four or none: productive reviewer hours a week in
+    # this scope; the fixed obligations taken out of them (calibration, adjudication, training); teacher minutes to mark
+    # one script (the automatic route is disabled, B10, so every script takes the full teacher time); and the turnaround
+    # learners are promised. The API sets and checks them together; there is no new check constraint, so the previous
+    # build's writes stay valid (MIGRATION-COMPAT-01).
+    reviewer_hours_per_week: Mapped[int | None] = mapped_column(Integer)
+    fixed_hours_per_week: Mapped[int | None] = mapped_column(Integer)
+    minutes_per_script: Mapped[int | None] = mapped_column(Integer)
+    turnaround_days: Mapped[int | None] = mapped_column(Integer)
     updated_by: Mapped[uuid.UUID | None] = mapped_column(ForeignKey("app_user.id", ondelete="RESTRICT"))
     updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
 
@@ -252,26 +261,64 @@ def capacity_lock_key(grade: int, subject: str) -> int:
     return int.from_bytes(digest[:8], "big", signed=True)
 
 
+def staffing_state(cap: ReviewCapacity | None, committed: int) -> dict[str, Any] | None:
+    """W06.S3.T2 (STAFFING-01): what the staffing can take within the promised turnaround. Fixed obligations come off
+    the productive hours first; work already committed (queued cases and started tests) comes off what is left; only
+    the remainder admits new scripts. Nothing is ever cleared by approving uncertain answers: there is no such path."""
+    if cap is None or cap.reviewer_hours_per_week is None:
+        return None
+    per_script = cap.minutes_per_script or 1
+    weekly = max(0, (cap.reviewer_hours_per_week - (cap.fixed_hours_per_week or 0)) * 60)
+    window = weekly * (cap.turnaround_days or 0) // 7
+    due = committed * per_script
+    return {
+        "reviewer_hours_per_week": cap.reviewer_hours_per_week,
+        "fixed_hours_per_week": cap.fixed_hours_per_week,
+        "minutes_per_script": per_script,
+        "turnaround_days": cap.turnaround_days,
+        "available_minutes": window,
+        "due_minutes": due,
+        "admissible_scripts": max(0, (window - due) // per_script),
+        # How long a script started now would wait, at today's productive minutes per day (None: nobody to mark).
+        "turnaround_estimate_days": -(-(due + per_script) * 7 // weekly) if weekly else None,
+    }
+
+
 def capacity_state(db: Session, grade: int, subject: str) -> dict[str, Any]:
     cap = db.get(ReviewCapacity, (grade, subject))
     n = open_cases(db, grade, subject)
     permits = open_permits(db, grade, subject)
+    staffing = staffing_state(cap, n + permits)
     return {
         "configured": cap is not None and cap.max_open_cases > 0,
         "max_open_cases": cap.max_open_cases if cap else 0,
         "open_cases": n,
         "open_permits": permits,
-        "accepting": cap is not None and n + permits < cap.max_open_cases,
+        "accepting": cap is not None
+        and n + permits < cap.max_open_cases
+        and (staffing is None or staffing["admissible_scripts"] > 0),
+        "staffing": staffing,
     }
 
 
-def set_capacity(db: Session, who: Principal, grade: int, subject: str, max_open_cases: int, reason: str) -> None:
+def set_capacity(
+    db: Session,
+    who: Principal,
+    grade: int,
+    subject: str,
+    max_open_cases: int,
+    reason: str,
+    staffing: dict[str, int] | None = None,
+) -> None:
     cap = db.get(ReviewCapacity, (grade, subject))
     if cap is None:
         cap = ReviewCapacity(grade_number=grade, subject_code=subject, max_open_cases=max_open_cases, reason=reason)
         db.add(cap)
     previous = cap.max_open_cases if cap.updated_at else None
     cap.max_open_cases = max_open_cases
+    if staffing is not None:  # STAFFING-01: all four together; an empty dict clears them
+        for key in ("reviewer_hours_per_week", "fixed_hours_per_week", "minutes_per_script", "turnaround_days"):
+            setattr(cap, key, staffing.get(key))
     cap.reason = reason.strip()
     cap.updated_by = who.user.id
     cap.updated_at = _now(db)
@@ -281,7 +328,12 @@ def set_capacity(db: Session, who: Principal, grade: int, subject: str, max_open
         action="written.capacity_set",
         target_type="review_capacity",
         target_id=f"{grade}:{subject}",
-        details={"max_open_cases": max_open_cases, "previous": previous, "reason": reason.strip()},
+        details={
+            "max_open_cases": max_open_cases,
+            "previous": previous,
+            "reason": reason.strip(),
+            "staffing": staffing,
+        },
     )
     db.commit()
 

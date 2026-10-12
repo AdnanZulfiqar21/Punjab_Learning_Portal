@@ -44,3 +44,29 @@ export async function setClientMinimum(platform: string, form: FormData): Promis
   const extra = Array.isArray(p?.errors) ? ` ${p.errors.map((e) => e.msg ?? "").join(" ")}` : "";
   return { ok: false, error: `${p?.detail ?? `The change failed (${res.status}).`}${extra}` };
 }
+
+/** W06.S3.T2 (STAFFING-01): a scope's review capacity and the staffing behind it. The API checks and audits it. */
+export async function setReviewStaffing(grade: number, subject: string, form: FormData): Promise<RolloutResult> {
+  const t = await sessionToken();
+  if (!t) redirect("/signin?next=/admin/service");
+  const n = (k: string) => Number(form.get(k));
+  const res = await api<unknown>(`/v1/ops/written-capacity/${grade}/${encodeURIComponent(subject)}`, {
+    method: "PUT",
+    token: t,
+    body: JSON.stringify({
+      max_open_cases: n("max_open_cases"),
+      reason: String(form.get("reason") ?? "").trim(),
+      staffing: {
+        reviewer_hours_per_week: n("reviewer_hours_per_week"),
+        fixed_hours_per_week: n("fixed_hours_per_week"),
+        minutes_per_script: n("minutes_per_script"),
+        turnaround_days: n("turnaround_days"),
+      },
+    }),
+  });
+  revalidatePath("/admin/service");
+  if (res.ok) return { ok: true };
+  const p = res.problem as (Problem & { errors?: { msg?: string }[] }) | null;
+  const extra = Array.isArray(p?.errors) ? ` ${p.errors.map((e) => e.msg ?? "").join(" ")}` : "";
+  return { ok: false, error: `${p?.detail ?? `The change failed (${res.status}).`}${extra}` };
+}

@@ -7,7 +7,7 @@ from datetime import datetime
 from typing import Annotated, Any, Literal
 
 from fastapi import APIRouter, Depends, Header, Query, Request, Response
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, model_validator
 from sqlalchemy.orm import Session
 
 from portal_api.db import get_session
@@ -669,9 +669,39 @@ def request_recheck(
 
 
 # ------------------------------------------------------------------ operations (R05: funded capacity, obligations)
+class StaffingIn(BaseModel):
+    """W06.S3.T2 (STAFFING-01): the staffing behind a scope's capacity."""
+
+    reviewer_hours_per_week: int = Field(ge=1, le=10_000, description="Productive marking hours a week in this scope")
+    fixed_hours_per_week: int = Field(ge=0, le=10_000, description="Calibration, adjudication, training and meetings")
+    minutes_per_script: int = Field(ge=1, le=600, description="Teacher minutes to mark one script")
+    turnaround_days: int = Field(ge=1, le=60, description="The turnaround learners are promised")
+
+    @model_validator(mode="after")
+    def _fits(self) -> StaffingIn:
+        if self.fixed_hours_per_week > self.reviewer_hours_per_week:
+            raise ValueError("fixed obligations can't exceed the productive hours")
+        return self
+
+
 class CapacityIn(BaseModel):
     max_open_cases: int = Field(ge=0, le=100_000, description="0 stops new written starts in this scope")
     reason: str = Field(min_length=5, max_length=1000)
+    staffing: StaffingIn | None = Field(default=None, description="Leave out to keep the current staffing")
+    clear_staffing: bool = Field(
+        default=False, description="Remove the staffing figures (the case limit alone applies)"
+    )
+
+
+class StaffingOut(BaseModel):
+    reviewer_hours_per_week: int
+    fixed_hours_per_week: int
+    minutes_per_script: int
+    turnaround_days: int
+    available_minutes: int = Field(description="Productive minutes left after fixed obligations, over the turnaround")
+    due_minutes: int = Field(description="Minutes already owed to queued cases and started tests")
+    admissible_scripts: int = Field(description="New scripts that still fit within the turnaround")
+    turnaround_estimate_days: int | None = Field(description="How long a script started now would wait")
 
 
 class BacklogRow(BaseModel):
@@ -682,6 +712,7 @@ class BacklogRow(BaseModel):
     open_permits: int = Field(description="Started, unsubmitted written tests that may still become cases")
     accepting: bool
     overdue_cases: int = Field(description="Queued cases past their due time (service obligation missed)")
+    staffing: StaffingOut | None = None
 
 
 @router.put(
@@ -693,7 +724,8 @@ def set_capacity(db: DB, who: Operator, grade: int, subject: str, body: Capacity
     _private(response)
     if grade not in (11, 12):
         raise NotFound("Unknown class.")
-    review.set_capacity(db, who, grade, subject, body.max_open_cases, body.reason)
+    staffing = {} if body.clear_staffing else body.staffing.model_dump() if body.staffing else None
+    review.set_capacity(db, who, grade, subject, body.max_open_cases, body.reason, staffing)
     return _backlog_row(db, grade, subject)
 
 
@@ -719,6 +751,7 @@ def _backlog_row(db: Session, grade: int, subject: str) -> BacklogRow:
         open_permits=cap["open_permits"],
         accepting=cap["accepting"],
         overdue_cases=int(overdue or 0),
+        staffing=StaffingOut(**cap["staffing"]) if cap["staffing"] else None,
     )
 
 
