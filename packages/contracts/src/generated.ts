@@ -345,6 +345,92 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/admin/products": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** All products, drafts included (finance) */
+        get: operations["admin_products_v1_admin_products_get"];
+        put?: never;
+        /** Define a draft product */
+        post: operations["admin_create_v1_admin_products_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/admin/products/{product_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** Change a draft product */
+        put: operations["admin_update_v1_admin_products__product_id__put"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/admin/products/{product_id}/activate": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Put a product on sale */
+        post: operations["admin_activate_v1_admin_products__product_id__activate_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/admin/products/{product_id}/prices": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Add a price version (append-only, integer minor units) */
+        post: operations["admin_price_v1_admin_products__product_id__prices_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/admin/products/{product_id}/retire": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Stop selling a product */
+        post: operations["admin_retire_v1_admin_products__product_id__retire_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/admin/role-grants/{grant_id}/revoke": {
         parameters: {
             query?: never;
@@ -1874,6 +1960,23 @@ export interface paths {
         put?: never;
         /** Start (or resume) the attempt */
         post: operations["start_attempt_v1_practice_forms__form_id__attempt_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/products": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Products on sale and their current web price */
+        get: operations["public_products_v1_products_get"];
+        put?: never;
+        post?: never;
         delete?: never;
         options?: never;
         head?: never;
@@ -7420,6 +7523,137 @@ export interface components {
             /** Title */
             title: string;
         };
+        /** PriceIn */
+        PriceIn: {
+            /**
+             * Amount Minor
+             * @description Integer minor units (paisa for PKR)
+             */
+            amount_minor?: number | null;
+            /**
+             * Channel
+             * @default web
+             * @constant
+             */
+            channel: "web";
+            /**
+             * Currency
+             * @description ISO 4217 code, e.g. PKR
+             */
+            currency: string;
+            /**
+             * On Sale
+             * @default true
+             */
+            on_sale: boolean;
+            /** Reason */
+            reason: string;
+            /**
+             * Starts At
+             * @description Defaults to now; never in the past
+             */
+            starts_at?: string | null;
+        };
+        /** PriceOut */
+        PriceOut: {
+            /** Amount Minor */
+            amount_minor: number | null;
+            /** Channel */
+            channel: string;
+            /** Currency */
+            currency: string;
+            /** On Sale */
+            on_sale: boolean;
+            /** Reason */
+            reason?: string | null;
+            /**
+             * Starts At
+             * Format: date-time
+             */
+            starts_at: string;
+        };
+        /** ProductAdminOut */
+        ProductAdminOut: {
+            /** Activated At */
+            activated_at: string | null;
+            /** Code */
+            code: string;
+            current_price: components["schemas"]["PriceOut"] | null;
+            /** Description */
+            description: string;
+            /** Duration Days */
+            duration_days: number;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Kind */
+            kind: string;
+            /** Name */
+            name: string;
+            /** Price History */
+            price_history: components["schemas"]["PriceOut"][];
+            /** Retired At */
+            retired_at: string | null;
+            /** Scope */
+            scope: {
+                [key: string]: unknown;
+            };
+            /** Status */
+            status: string;
+            /** Written Units */
+            written_units: number;
+        };
+        /** ProductIn */
+        ProductIn: {
+            /** Code */
+            code: string;
+            /**
+             * Description
+             * @default
+             */
+            description: string;
+            /** Duration Days */
+            duration_days: number;
+            /**
+             * Kind
+             * @enum {string}
+             */
+            kind: "platform" | "subject_package" | "exam_package" | "bundle";
+            /** Name */
+            name: string;
+            scope?: components["schemas"]["ScopeIn"];
+            /** Written Units */
+            written_units: number;
+        };
+        /**
+         * ProductOut
+         * @description What the public listing shows: the definition and the price on sale now (if any). No staff fields.
+         */
+        ProductOut: {
+            /** Code */
+            code: string;
+            /** Description */
+            description: string;
+            /** Duration Days */
+            duration_days: number;
+            /** Kind */
+            kind: string;
+            /** Name */
+            name: string;
+            /** @description The web price on sale now; null if not priced yet */
+            price: components["schemas"]["PriceOut"] | null;
+            /** Scope */
+            scope: {
+                [key: string]: unknown;
+            };
+            /**
+             * Written Units
+             * @description The disclosed, finite written allowance for the period
+             */
+            written_units: number;
+        };
         /**
          * ProfileIn
          * @description Onboarding answers (P04.S3.T1). Everything can be corrected later; no identity documents are collected.
@@ -8349,6 +8583,15 @@ export interface components {
              */
             status: "active" | "finalised" | "void";
         };
+        /** ScopeIn */
+        ScopeIn: {
+            /** Exams */
+            exams?: string[];
+            /** Grades */
+            grades?: number[];
+            /** Subjects */
+            subjects?: string[];
+        };
         /** ScoreCorrectionIn */
         ScoreCorrectionIn: {
             /**
@@ -9109,6 +9352,11 @@ export interface components {
             scene_id: string;
             /** Text */
             text: string;
+        };
+        /** TransitionIn */
+        TransitionIn: {
+            /** Reason */
+            reason: string;
         };
         /** TrialCohort */
         TrialCohort: {
@@ -10422,6 +10670,199 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["PostponedOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    admin_products_v1_admin_products_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProductAdminOut"][];
+                };
+            };
+        };
+    };
+    admin_create_v1_admin_products_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ProductIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProductAdminOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    admin_update_v1_admin_products__product_id__put: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                product_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ProductIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProductAdminOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    admin_activate_v1_admin_products__product_id__activate_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                product_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["TransitionIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProductAdminOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    admin_price_v1_admin_products__product_id__prices_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                product_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PriceIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProductAdminOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    admin_retire_v1_admin_products__product_id__retire_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                product_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["TransitionIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProductAdminOut"];
                 };
             };
             /** @description Validation Error */
@@ -13332,6 +13773,26 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    public_products_v1_products_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProductOut"][];
                 };
             };
         };

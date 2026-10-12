@@ -11,6 +11,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from portal_api import errors, observability
 from portal_api.config import get_settings
 from portal_api.modules.access import trial_devices
+from portal_api.modules.access.products import router as products_router
 from portal_api.modules.access.router import router as access_router
 from portal_api.modules.analytics.events import router as analytics_router
 from portal_api.modules.analytics.funnels import router as funnel_router
@@ -106,6 +107,7 @@ def create_app() -> FastAPI:
     app.include_router(sources_router)
     app.include_router(uploads_router)
     app.include_router(access_router)
+    app.include_router(products_router)
     app.include_router(assessment_router)
     app.include_router(written_router)
     app.include_router(written_review_router)
