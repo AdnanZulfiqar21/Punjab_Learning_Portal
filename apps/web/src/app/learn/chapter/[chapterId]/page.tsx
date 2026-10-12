@@ -196,7 +196,7 @@ async function Lessons({ chapterId, topics, lang }: { chapterId: string; topics:
           reviewer approves them. Until then, use the topic outline and your textbook pages below.
         </p>
       ) : (
-        lessons.map((l) => (
+        lessons.map((l, i) => (
           <article key={l.id} aria-labelledby={`lesson-${l.id}`} className="space-y-4 rounded-xl border border-border bg-surface p-5">
             {l.requested_language_missing && (
               <p className="rounded-lg bg-surface-muted px-3 py-2 text-sm">
@@ -249,6 +249,14 @@ async function Lessons({ chapterId, topics, lang }: { chapterId: string; topics:
                 .map((r) => (r.pdf_from === r.pdf_to ? `${r.pdf_from}` : `${r.pdf_from}–${r.pdf_to}`))
                 .join(", ")}
             </p>
+            {i + 1 < lessons.length && (
+              // P11.S2.T1: one lesson leads to the next, in the reviewed order of the chapter.
+              <p className="text-sm">
+                <a href={`#lesson-${lessons[i + 1].id}`} className="font-medium text-accent underline underline-offset-2">
+                  Next lesson: {lessons[i + 1].title}
+                </a>
+              </p>
+            )}
           </article>
         ))
       )}

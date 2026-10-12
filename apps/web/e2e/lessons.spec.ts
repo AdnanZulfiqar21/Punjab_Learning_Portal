@@ -55,6 +55,17 @@ test("structured blocks reach learners: worked example, diagram, formula renderi
   }
   await lessons.getByText("Describe this diagram").click();
   await expect(lessons.getByText("A grey box with the words 'Technical fixture diagram'.")).toBeVisible();
+  // P11.S2.T1: the lesson's checkpoint is a self-check: nothing is sent or scored, the explanation appears on request.
+  const checkpoint = lessons.getByRole("complementary", { name: "Check your understanding" });
+  await expect(checkpoint.getByText("Technical fixture self-check prompt.")).toBeVisible();
+  await checkpoint.getByRole("button", { name: "Show what a good answer contains" }).click();
+  await expect(checkpoint.getByRole("status")).toHaveText("Fixture explanation shown when revealed.");
+  // ...and each lesson but the last leads to the next one.
+  const next = lessons.getByRole("link", { name: /^Next lesson: / }).first();
+  const target = (await next.getAttribute("href"))!;
+  await next.click();
+  await expect(page).toHaveURL(new RegExp(`${target}$`));
+  await expect(page.locator(target)).toBeInViewport();
   const handout = lessons.getByRole("link", { name: "Download: Technical fixture handout (PDF)" });
   const res = await request.get((await handout.getAttribute("href"))!);
   expect(res.status()).toBe(200);
