@@ -342,7 +342,9 @@ class DeletionIn(BaseModel):
 @router.get("/me/data-export", summary="Download the personal data the portal holds about you (JSON; audited)")
 def data_export(db: Annotated[Session, Depends(get_session)], who: CurrentPrincipal) -> Response:
     from portal_api.modules.identity import privacy
+    from portal_api.modules.identity.deps import require_recent_sign_in
 
+    require_recent_sign_in(who)
     body, filename = privacy.export(db, who.user)
     return Response(
         content=body,
@@ -360,5 +362,7 @@ def deletion_request(
     body: DeletionIn, db: Annotated[Session, Depends(get_session)], who: CurrentPrincipal
 ) -> dict[str, str]:
     from portal_api.modules.identity import privacy
+    from portal_api.modules.identity.deps import require_recent_sign_in
 
+    require_recent_sign_in(who)
     return {"ticket_id": str(privacy.request_deletion(db, who.user, body.confirm_email, body.reason))}

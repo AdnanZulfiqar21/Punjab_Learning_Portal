@@ -37,6 +37,9 @@ class Claims:
     token_id: str | None
     expires_at: int
     mfa: bool
+    # P04.S3.T3: when the person last proved who they are (the provider's auth_time, else when the token was issued;
+    # for an app session, when the session was created at sign-in). None when unknown.
+    authenticated_at: int | None = None
 
 
 class DevIssuer:
@@ -147,4 +150,5 @@ def verify(token: str, settings: Settings | None = None) -> Claims:
         token_id=payload.get("jti"),
         expires_at=int(payload["exp"]),
         mfa=bool(amr & MFA_AMR),
+        authenticated_at=int(payload.get("auth_time") or payload["iat"]),
     )
