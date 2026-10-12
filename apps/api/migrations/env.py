@@ -36,6 +36,7 @@ import portal_api.modules.system.clients
 import portal_api.modules.system.operations
 import portal_api.modules.written.adjudication
 import portal_api.modules.written.automatic
+import portal_api.modules.written.calibration
 import portal_api.modules.written.models
 import portal_api.modules.written.regrade_jobs
 import portal_api.modules.written.rescans

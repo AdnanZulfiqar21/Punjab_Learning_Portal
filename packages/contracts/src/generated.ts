@@ -3802,6 +3802,43 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/studio/written/calibration": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Blinded teacher marking compared with automatic proposals on the evaluation subset (adjudicators, MFA) */
+        get: operations["calibration_v1_studio_written_calibration_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/studio/written/calibration/{comparison_id}/adjudicate": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Record who applied the rubric correctly in each disagreement (adjudicators, MFA; audited)
+         * @description Evidence for the reliability gate only: the teacher's score version and the learner's result stay as they are.
+         */
+        post: operations["adjudicate_v1_studio_written_calibration__comparison_id__adjudicate_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/studio/written/cases/{case_id}": {
         parameters: {
             query?: never;
@@ -4430,6 +4467,18 @@ export interface components {
             /** Withdraw */
             withdraw: boolean;
         };
+        /** AdjudicateIn */
+        AdjudicateIn: {
+            /** Reason */
+            reason: string;
+            /**
+             * Verdicts
+             * @description For each disputed criterion: who applied the rubric correctly
+             */
+            verdicts: {
+                [key: string]: "teacher" | "proposal" | "both" | "neither";
+            };
+        };
         /** AdjudicationIn */
         AdjudicationIn: {
             /**
@@ -5044,6 +5093,26 @@ export interface components {
             trial_cohorts: components["schemas"]["TrialCohort"][];
             verified_purchases: components["schemas"]["Unavailable"];
         };
+        /** CalibrationOut */
+        CalibrationOut: {
+            /** Adjudicated */
+            adjudicated: number;
+            /** Agreed */
+            agreed: number;
+            /**
+             * Agreement Rate
+             * @description Share of compared questions with identical awards
+             */
+            agreement_rate: number | null;
+            /** Compared */
+            compared: number;
+            /** Comparisons */
+            comparisons: components["schemas"]["ComparisonOut"][];
+            /** Disagreed */
+            disagreed: number;
+            /** Evaluation Percent */
+            evaluation_percent: number;
+        };
         /** CancelIn */
         CancelIn: {
             /** Reason */
@@ -5467,6 +5536,42 @@ export interface components {
              * @enum {string}
              */
             status: "ok" | "update_soon" | "update_required";
+        };
+        /** ComparisonOut */
+        ComparisonOut: {
+            /** Disagreements */
+            disagreements: string[];
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Position */
+            position: number;
+            /** Proposal Units */
+            proposal_units: {
+                [key: string]: number;
+            };
+            /** Reason */
+            reason: string | null;
+            /**
+             * Reference
+             * @description The script's short reference; no learner identity
+             */
+            reference: string;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "agreed" | "open" | "adjudicated";
+            /** Teacher Units */
+            teacher_units: {
+                [key: string]: number;
+            };
+            /** Verdicts */
+            verdicts: {
+                [key: string]: string;
+            };
         };
         /** CompletionScope */
         CompletionScope: {
@@ -18465,6 +18570,73 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["RegradeJobOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    calibration_v1_studio_written_calibration_get: {
+        parameters: {
+            query: {
+                grade: number;
+                subject: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CalibrationOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    adjudicate_v1_studio_written_calibration__comparison_id__adjudicate_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                comparison_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["AdjudicateIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ComparisonOut"];
                 };
             };
             /** @description Validation Error */

@@ -81,6 +81,9 @@ class Settings(BaseSettings):
     # Automatic written assessment (W05). "none" until a qualified provider is approved (BLOCKERS B10); "fixture" is a
     # deterministic technical fixture for development/test only.
     written_assessor: Literal["none", "fixture"] = "none"
+    # W06.S1.T3 (CALIBRATION-01): the share of sealed scripts in the evaluation subset whose blinded teacher marks are
+    # compared with automatic proposals (evidence for the WG10 gate; nothing is ever published from it).
+    written_evaluation_percent: int = Field(default=100, ge=0, le=100)
 
     @model_validator(mode="after")
     def _validate_role(self) -> Settings:

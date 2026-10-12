@@ -270,6 +270,36 @@
         "title": "Actions",
         "type": "object"
       },
+      "AdjudicateIn": {
+        "properties": {
+          "reason": {
+            "maxLength": 2000,
+            "minLength": 10,
+            "title": "Reason",
+            "type": "string"
+          },
+          "verdicts": {
+            "additionalProperties": {
+              "enum": [
+                "teacher",
+                "proposal",
+                "both",
+                "neither"
+              ],
+              "type": "string"
+            },
+            "description": "For each disputed criterion: who applied the rubric correctly",
+            "title": "Verdicts",
+            "type": "object"
+          }
+        },
+        "required": [
+          "verdicts",
+          "reason"
+        ],
+        "title": "AdjudicateIn",
+        "type": "object"
+      },
       "AdjudicationIn": {
         "properties": {
           "from_version_ids": {
@@ -1697,6 +1727,60 @@
         "title": "BusinessOverview",
         "type": "object"
       },
+      "CalibrationOut": {
+        "properties": {
+          "adjudicated": {
+            "title": "Adjudicated",
+            "type": "integer"
+          },
+          "agreed": {
+            "title": "Agreed",
+            "type": "integer"
+          },
+          "agreement_rate": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Share of compared questions with identical awards",
+            "title": "Agreement Rate"
+          },
+          "compared": {
+            "title": "Compared",
+            "type": "integer"
+          },
+          "comparisons": {
+            "items": {
+              "$ref": "#/components/schemas/ComparisonOut"
+            },
+            "title": "Comparisons",
+            "type": "array"
+          },
+          "disagreed": {
+            "title": "Disagreed",
+            "type": "integer"
+          },
+          "evaluation_percent": {
+            "title": "Evaluation Percent",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "evaluation_percent",
+          "compared",
+          "agreed",
+          "disagreed",
+          "adjudicated",
+          "agreement_rate",
+          "comparisons"
+        ],
+        "title": "CalibrationOut",
+        "type": "object"
+      },
       "CancelIn": {
         "properties": {
           "reason": {
@@ -2809,6 +2893,85 @@
           "enforce_at"
         ],
         "title": "ClientPolicyOut",
+        "type": "object"
+      },
+      "ComparisonOut": {
+        "properties": {
+          "disagreements": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Disagreements",
+            "type": "array"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "position": {
+            "title": "Position",
+            "type": "integer"
+          },
+          "proposal_units": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "title": "Proposal Units",
+            "type": "object"
+          },
+          "reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reason"
+          },
+          "reference": {
+            "description": "The script's short reference; no learner identity",
+            "title": "Reference",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "agreed",
+              "open",
+              "adjudicated"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "teacher_units": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "title": "Teacher Units",
+            "type": "object"
+          },
+          "verdicts": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "title": "Verdicts",
+            "type": "object"
+          }
+        },
+        "required": [
+          "id",
+          "reference",
+          "position",
+          "teacher_units",
+          "proposal_units",
+          "disagreements",
+          "status",
+          "verdicts",
+          "reason"
+        ],
+        "title": "ComparisonOut",
         "type": "object"
       },
       "CompletionScope": {
@@ -27486,6 +27649,115 @@
         "summary": "Queue the regrade for the worker (one open job per correction; repeating returns it)",
         "tags": [
           "written marking"
+        ]
+      }
+    },
+    "/v1/studio/written/calibration": {
+      "get": {
+        "operationId": "calibration_v1_studio_written_calibration_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "grade",
+            "required": true,
+            "schema": {
+              "maximum": 12,
+              "minimum": 11,
+              "title": "Grade",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "subject",
+            "required": true,
+            "schema": {
+              "maxLength": 40,
+              "minLength": 2,
+              "title": "Subject",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CalibrationOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Blinded teacher marking compared with automatic proposals on the evaluation subset (adjudicators, MFA)",
+        "tags": [
+          "written-calibration"
+        ]
+      }
+    },
+    "/v1/studio/written/calibration/{comparison_id}/adjudicate": {
+      "post": {
+        "description": "Evidence for the reliability gate only: the teacher's score version and the learner's result stay as they are.",
+        "operationId": "adjudicate_v1_studio_written_calibration__comparison_id__adjudicate_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "comparison_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Comparison Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdjudicateIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ComparisonOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Record who applied the rubric correctly in each disagreement (adjudicators, MFA; audited)",
+        "tags": [
+          "written-calibration"
         ]
       }
     },
