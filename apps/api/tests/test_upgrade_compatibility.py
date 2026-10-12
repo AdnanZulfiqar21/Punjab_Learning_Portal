@@ -47,7 +47,7 @@ from portal_api.main import app
 
 COMPAT = Path(__file__).parent / "compat"
 API_DIR = Path(__file__).resolve().parents[1]
-BASELINE_REVISION = "e8b2d6f4a193"  # the schema of build 362db5b (2026-10-10)
+BASELINE_REVISION = "e8b2d6f4a193"  # build 362db5b (2026-10-10); a revision id  # pragma: allowlist secret
 MOBILE = json.loads((COMPAT / "mobile_2026-10-10.json").read_text(encoding="utf8"))
 
 
