@@ -5885,6 +5885,8 @@ export interface components {
             /** Results Pending */
             results_pending: number;
             revision: components["schemas"]["Revision"];
+            /** Unfinished */
+            unfinished: components["schemas"]["UnfinishedTest"][];
             upcoming_mock: components["schemas"]["MockSessionOut"] | null;
         };
         /** DashboardProfile */
@@ -10599,6 +10601,46 @@ export interface components {
             blocker: string;
             /** Value */
             value: string | null;
+        };
+        /**
+         * UnfinishedTest
+         * @description A test started and not yet submitted while there is still time (P19.S1.T1).
+         */
+        UnfinishedTest: {
+            /**
+             * Answered
+             * @description Questions answered so far (not given for written tests)
+             */
+            answered: number | null;
+            /**
+             * Attempt Id
+             * Format: uuid
+             */
+            attempt_id: string;
+            /**
+             * Closes At
+             * @description When answering or uploading closes; null for untimed practice
+             */
+            closes_at: string | null;
+            /** Grade */
+            grade: number;
+            /**
+             * Kind
+             * @enum {string}
+             */
+            kind: "practice" | "mock" | "review" | "written";
+            /**
+             * Questions
+             * @description Questions in the test (not given for written tests)
+             */
+            questions: number | null;
+            /**
+             * Started At
+             * Format: date-time
+             */
+            started_at: string;
+            /** Subject */
+            subject: string;
         };
         /** UploadOut */
         UploadOut: {

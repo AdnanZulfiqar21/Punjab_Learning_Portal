@@ -8,12 +8,15 @@ import { Card, ErrorState, Loading, Notice, T } from "@/components/ui";
 import { Space } from "@/constants/theme";
 import { useRequest } from "@/hooks/use-request";
 import { api, GRADE_LABEL } from "@/lib/api";
+import { TIME_ZONE } from "@/lib/dates";
 
 const METER_LABEL: Record<Dashboard["meters"][number]["key"], string> = {
   syllabus_coverage: "Syllabus coverage",
   content_completed: "Content completed",
   demonstrated_knowledge: "Demonstrated knowledge",
 };
+
+const when = (iso: string) => new Date(iso).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short", timeZone: TIME_ZONE });
 
 export function DashboardSection({ token }: { token: string }) {
   const req = useRequest((signal) => api.dashboard(token, signal), [token]);
@@ -35,6 +38,27 @@ export function DashboardSection({ token }: { token: string }) {
           <T variant="small">Notes, favourite topics and saved formulas</T>
         </Card>
       )}
+      {d.unfinished.map((u) => (
+        // P19.S1.T1 (JOURNEYS-01): pick up a test started on any device; its screen offers "Continue here".
+        <Card
+          key={u.attempt_id}
+          label={`Unfinished ${u.kind} test, ${GRADE_LABEL[u.grade]} ${u.subject.replace("_", " ")}: continue`}
+          onPress={() =>
+            u.kind === "written"
+              ? router.push({ pathname: "/written/[id]", params: { id: u.attempt_id } })
+              : router.push({ pathname: "/attempt/[id]", params: { id: u.attempt_id } })
+          }
+        >
+          <T variant="small">Unfinished test</T>
+          <T style={{ fontWeight: "600" }}>
+            {u.kind.charAt(0).toUpperCase() + u.kind.slice(1)} · {GRADE_LABEL[u.grade]} {u.subject.replace("_", " ")}
+          </T>
+          <T variant="small">
+            {u.answered !== null && u.questions !== null ? `${u.answered} of ${u.questions} answered` : "Pages not submitted yet"}
+            {u.closes_at ? ` · closes ${when(u.closes_at)}` : ""}
+          </T>
+        </Card>
+      ))}
       {next ? (
         <Card label={`Continue learning: ${next.title}`} onPress={() => router.push({ pathname: "/chapter/[id]", params: { id: next.chapter_id } })}>
           <T variant="small">Continue learning</T>

@@ -46,6 +46,34 @@ export function DashboardView({ d, email, studyTools = true }: { d: Dashboard; e
           to see your meters and lessons.
         </Notice>
       )}
+      {d.unfinished.length > 0 && (
+        // P19.S1.T1 (JOURNEYS-01): pick up a test started on any device; its page offers "Continue here".
+        <section aria-labelledby="unfinished-h" className="space-y-2">
+          <h2 id="unfinished-h" className="text-lg font-semibold">
+            Unfinished tests
+          </h2>
+          <ul className="divide-y divide-border rounded-xl border border-border bg-surface text-sm">
+            {d.unfinished.map((u) => (
+              <li key={u.attempt_id} className="flex flex-wrap items-center justify-between gap-2 px-3 py-2">
+                <span>
+                  <span className="capitalize">{u.kind}</span> · {GRADE_LABEL[u.grade]} <span className="capitalize">{subject(u.subject)}</span>
+                  <span className="block text-xs text-muted">
+                    {u.answered !== null && u.questions !== null ? `${u.answered} of ${u.questions} answered` : "Pages not submitted yet"}
+                    {u.closes_at ? ` · closes ${when(u.closes_at)}` : ""}
+                  </span>
+                </span>
+                <Link
+                  href={u.kind === "written" ? `/practice/written/${u.attempt_id}` : `/practice/attempt/${u.attempt_id}`}
+                  className="font-medium text-accent underline underline-offset-2"
+                  aria-label={`Continue ${u.kind} test, ${GRADE_LABEL[u.grade]} ${subject(u.subject)}`}
+                >
+                  Continue
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
       <div className="grid gap-4 sm:grid-cols-3">
         <section aria-labelledby="continue-h" className={card}>
           <h2 id="continue-h" className="font-semibold">

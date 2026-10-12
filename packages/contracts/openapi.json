@@ -3696,6 +3696,13 @@
           "revision": {
             "$ref": "#/components/schemas/Revision"
           },
+          "unfinished": {
+            "items": {
+              "$ref": "#/components/schemas/UnfinishedTest"
+            },
+            "title": "Unfinished",
+            "type": "array"
+          },
           "upcoming_mock": {
             "anyOf": [
               {
@@ -3712,6 +3719,7 @@
           "profile",
           "meters",
           "continue_learning",
+          "unfinished",
           "revision",
           "upcoming_mock",
           "recent",
@@ -15318,6 +15326,88 @@
           "blocker"
         ],
         "title": "UnavailableFigure",
+        "type": "object"
+      },
+      "UnfinishedTest": {
+        "description": "A test started and not yet submitted while there is still time (P19.S1.T1).",
+        "properties": {
+          "answered": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Questions answered so far (not given for written tests)",
+            "title": "Answered"
+          },
+          "attempt_id": {
+            "format": "uuid",
+            "title": "Attempt Id",
+            "type": "string"
+          },
+          "closes_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "When answering or uploading closes; null for untimed practice",
+            "title": "Closes At"
+          },
+          "grade": {
+            "title": "Grade",
+            "type": "integer"
+          },
+          "kind": {
+            "enum": [
+              "practice",
+              "mock",
+              "review",
+              "written"
+            ],
+            "title": "Kind",
+            "type": "string"
+          },
+          "questions": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Questions in the test (not given for written tests)",
+            "title": "Questions"
+          },
+          "started_at": {
+            "format": "date-time",
+            "title": "Started At",
+            "type": "string"
+          },
+          "subject": {
+            "title": "Subject",
+            "type": "string"
+          }
+        },
+        "required": [
+          "attempt_id",
+          "kind",
+          "grade",
+          "subject",
+          "questions",
+          "answered",
+          "started_at",
+          "closes_at"
+        ],
+        "title": "UnfinishedTest",
         "type": "object"
       },
       "UploadOut": {
