@@ -512,9 +512,12 @@ def staff_page_detail(
     case_id: uuid.UUID,
     page_id: uuid.UUID,
     region: tuple[float, float, float, float] | None,
+    original: bool = False,
 ) -> tuple[bytes, dict[str, str]]:
     """OCT8-06: a higher-detail rendition of a submitted page for markers in scope, rendered from the immutable
-    original after an integrity check. Returns the PNG and provenance headers."""
+    original after an integrity check. Returns the PNG and provenance headers. TRANSFORMS-01: by default with the
+    learner's turn, trim and readability choices (regions are of the page as shown); `original` shows the untouched
+    original, so a marker can always check nothing was trimmed away."""
     from portal_api.modules.written import evidence
     from portal_api.modules.written.models import WrittenFile
 
@@ -526,6 +529,7 @@ def staff_page_detail(
     f = db.get(WrittenFile, page.file_id)
     assert f is not None
     key, sha, kind, index = f.storage_key, f.sha256, f.content_type, page.page_index
+    transform = None if original else (dict(page.transform) if page.transform else None)
     pinned = receipt.page_hashes.get(str(page_id), sha)  # revision pages are pinned by their own file hash
     db.rollback()  # no connection held while reading and rendering (OCT8-01)
     if sha != pinned:
@@ -536,14 +540,15 @@ def staff_page_detail(
     if hashlib.sha256(data).hexdigest() != sha:
         raise Conflict("This page's original failed its integrity check.", code_reason="EVIDENCE_MISMATCH")
     try:
-        d = evidence.render_detail(data, kind, index, region)
+        d = evidence.render_detail(data, kind, index, region, transform)
     except evidence.Rejected as e:
         raise Unprocessable(e.reason) from e
     provenance = {
         "X-Evidence-Sha256": sha,
         "X-Evidence-Page": str(index),
         "X-Derivative": f"detail; region={','.join(f'{v:.4f}' for v in region) if region else 'page'}; "
-        f"scale={d.scale:.4f}; size={d.width}x{d.height}",
+        f"scale={d.scale:.4f}; size={d.width}x{d.height}; "
+        f"view={'original' if original or not transform else 'as-shown'}",
     }
     return d.png, provenance
 

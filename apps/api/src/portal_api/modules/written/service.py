@@ -564,6 +564,54 @@ def upload_page(
     return file, pages, False, inspected.warnings
 
 
+def transform_page(
+    db: Session, who: Principal, attempt_id: uuid.UUID, page_id: uuid.UUID, raw: dict[str, Any]
+) -> WrittenPage:
+    """TRANSFORMS-01: turn, trim or clarify one page before submitting. The original is never touched: a fresh preview
+    is rendered from it with the transform and stored under a new key; the old preview is swept later as unreferenced.
+    Only while the attempt is open; after sealing the page and its transform are fixed."""
+    try:
+        transform = evidence.check_transform(raw)
+    except evidence.Rejected as e:
+        raise Unprocessable(e.reason, code_reason="TRANSFORM_REFUSED") from e
+    attempt = db.get(WrittenAttempt, attempt_id)
+    if attempt is None or attempt.user_id != who.user.id:
+        raise NotFound("Attempt not found.")
+    _require_open(attempt)
+    page = db.get(WrittenPage, page_id)
+    if page is None or page.attempt_id != attempt.id or page.status != "uploaded":
+        raise NotFound("Page not found.")
+    file = db.get(WrittenFile, page.file_id)
+    assert file is not None
+    key, kind, index, file_id = file.storage_key, file.content_type, page.page_index, file.id
+    db.rollback()  # OCT8-01: no connection held while reading and rendering
+    store = storage.get_store()
+    try:
+        rendered = evidence.render_page(store.get(key), kind, index, transform)
+    except evidence.Rejected as e:
+        raise Unprocessable(e.reason, code_reason="TRANSFORM_REFUSED") from e
+    pv = store.put(f"{attempt_id}/{file_id}/page-{index}-{uuid.uuid4().hex[:12]}.png", rendered.preview_png)
+    try:
+        attempt = _lock(db, attempt_id, who)
+        now = db_now(db)
+        if _expire_if_due(db, attempt, now):
+            db.commit()
+        _require_open(attempt)
+        page = db.get(WrittenPage, page_id, populate_existing=True)
+        if page is None or page.status != "uploaded":
+            raise NotFound("Page not found.")
+        page.preview_key, page.preview_sha256 = pv.key, pv.sha256
+        page.width, page.height = rendered.width, rendered.height
+        page.quality, page.transform = rendered.quality, transform
+        db.commit()
+    except BaseException:
+        db.rollback()
+        store.discard_uncommitted(pv.key)
+        raise
+    db.refresh(page)
+    return page
+
+
 def page_bytes(db: Session, who: Principal, attempt_id: uuid.UUID, page_id: uuid.UUID) -> tuple[bytes, str]:
     """The learner's own page, as its validated preview (originals are never served)."""
     attempt = db.get(WrittenAttempt, attempt_id)

@@ -153,6 +153,9 @@ class WrittenPage(Base):
     status: Mapped[str] = mapped_column(String(10), default="uploaded")
     # SCAN-QUALITY-01: the quality checks' flags for this page, shown to the learner and to reviewers.
     quality: Mapped[list[dict[str, Any]]] = mapped_column(JSONB, default=list, server_default=text("'[]'::jsonb"))
+    # TRANSFORMS-01: the learner's turn, trim and readability choices; the preview is rendered from the untouched
+    # original with them, and they are fixed once the script is submitted.
+    transform: Mapped[dict[str, Any]] = mapped_column(JSONB, default=dict, server_default=text("'{}'::jsonb"))
 
 
 class WrittenReceipt(Base):

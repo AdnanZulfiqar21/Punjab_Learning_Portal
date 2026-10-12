@@ -73,6 +73,15 @@ class PageQualityOut(BaseModel):
     message: str
 
 
+class PageTransform(BaseModel):
+    """TRANSFORMS-01: how a page is shown, derived from its untouched original. Regions on the page (feedback places,
+    detail views) are fractions of the page as shown; the server maps them back to the original."""
+
+    rotate: Literal[0, 90, 180, 270] = Field(default=0, description="Clockwise quarter turns")
+    crop: list[float] | None = Field(default=None, description="x, y, w, h of the upright original kept (null: all)")
+    enhance: bool = Field(default=False, description="A higher-contrast preview that keeps faint marks")
+
+
 class PageOut(BaseModel):
     """One logical page: a photo, or one page of a PDF. Mapping and the page cap count these."""
 
@@ -86,6 +95,7 @@ class PageOut(BaseModel):
     height: int | None = Field(description="Preview height in pixels")
     uploaded_at: datetime
     quality: list[PageQualityOut] = Field(default_factory=list, description="Quality warnings for this page")
+    transform: PageTransform = Field(default_factory=lambda: PageTransform(), description="Turn, trim, readability")
 
 
 class WrittenReceiptOut(BaseModel):
