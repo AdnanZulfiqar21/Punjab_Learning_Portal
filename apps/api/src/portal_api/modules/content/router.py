@@ -15,7 +15,7 @@ from portal_api.db import get_session
 from portal_api.errors import Forbidden, NotFound
 from portal_api.modules.access import service as access
 from portal_api.modules.audit.models import AuditEvent
-from portal_api.modules.content import blocks, kinds, workflow
+from portal_api.modules.content import blocks, item_stats, kinds, workflow
 from portal_api.modules.content.models import Availability, ContentItem, ContentVersion, ItemState
 from portal_api.modules.content.schemas import (
     AccessTierIn,
@@ -379,6 +379,37 @@ def item_history(db: DB, who: Member, item_id: uuid.UUID, response: Response) ->
         .order_by(AuditEvent.at, AuditEvent.id)
     )
     return [HistoryEvent(at=e.at, action=e.action, actor=email(e.actor_user_id), details=e.details) for e in events]
+
+
+@router.get(
+    "/items/{item_id}/statistics",
+    response_model=list[item_stats.ItemStatsOut],
+    summary="Observed difficulty, option choice and discrimination per answered version (P08.S4.T3)",
+)
+def item_statistics(db: DB, who: Member, item_id: uuid.UUID, response: Response) -> list[item_stats.ItemStatsOut]:
+    _no_store(response)
+    item = _scoped_item(db, who, item_id)
+    if item.kind != "mcq":
+        return []
+    return [item_stats.ItemStatsOut(**s) for s in item_stats.for_item(db, item.id)]
+
+
+@router.get(
+    "/statistics/flagged",
+    response_model=list[item_stats.FlaggedOut],
+    summary="Questions in a class and subject that statistics suggest a reviewer should look at",
+)
+def flagged_questions(
+    db: DB,
+    who: Member,
+    response: Response,
+    grade: Annotated[int, Query(ge=11, le=12)],
+    subject: Annotated[str, Query(max_length=40)],
+) -> list[item_stats.FlaggedOut]:
+    _no_store(response)
+    if not workflow.roles_in_scope(db, who.user.id, grade, subject) & CONTENT_ROLES:
+        raise NotFound("Nothing to show for this class and subject.")
+    return [item_stats.FlaggedOut(**f) for f in item_stats.flagged(db, grade, subject)]
 
 
 @router.get("/sources", response_model=list[SourceOut], summary="Source documents and their publication-rights state")

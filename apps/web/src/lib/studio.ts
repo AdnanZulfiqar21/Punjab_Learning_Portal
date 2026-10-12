@@ -1,7 +1,7 @@
 // Server-only helpers for the staff content studio (P06). Every request carries the signed-in person's session; the
 // API decides what they may see and do. Drafts are private staff data and are never cached.
 import { redirect } from "next/navigation";
-import type { LessonVariant, Me, StudioHistoryEvent, StudioItem, StudioItemSummary } from "@portal/contracts";
+import type { ItemStats, LessonVariant, Me, StudioHistoryEvent, StudioItem, StudioItemSummary } from "@portal/contracts";
 import { api, currentUser } from "@/lib/session";
 
 export const STUDIO_ROLES = new Set(["content_author", "subject_reviewer", "academic_adjudicator", "publisher"]);
@@ -80,3 +80,9 @@ export const SUBJECT_LABEL: Record<string, string> = {
   computer_science: "Computer Science",
   mathematics: "Mathematics",
 };
+
+/** P08.S4.T3 (ITEM-STATS-01): how learners answered each published version of a question. */
+export async function getItemStats(token: string, id: string): Promise<ItemStats[]> {
+  const res = await api<ItemStats[]>(`/v1/studio/items/${encodeURIComponent(id)}/statistics`, { token });
+  return res.ok ? res.data : [];
+}
