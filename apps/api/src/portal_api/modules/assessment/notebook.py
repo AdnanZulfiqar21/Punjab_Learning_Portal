@@ -282,7 +282,7 @@ def build_review(db: Session, who: Any, *, grade: int, subject: str, count: int,
         if existing.kind != "review" or existing.request_hash not in (request_hash, "review"):
             raise Conflict("This request key was already used for a different test.")
         return existing
-    access.require_access(db, who.user.id, purpose="Review tests")
+    access.require_access(db, who.user.id, purpose="Review tests", need=access.Need.subjects(grade, subject))
     sync(db, who.user.id)
     now = db.execute(select(func.now())).scalar_one()
     due = db.scalars(

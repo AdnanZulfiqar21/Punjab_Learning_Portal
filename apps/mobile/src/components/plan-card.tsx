@@ -11,6 +11,19 @@ import { useTheme } from "@/hooks/use-theme";
 import { api, ApiError } from "@/lib/api";
 
 const day = (iso: string) => new Date(iso).toLocaleDateString("en-GB", { dateStyle: "long" });
+
+// P14.S1.T2: what the current plans cover; null when one covers everything (the platform or the free trial).
+function coverage(entitlements: Access["entitlements"]): string | null {
+  const parts: string[] = [];
+  for (const e of entitlements) {
+    const s = (e.scope ?? {}) as { grades?: number[]; subjects?: string[]; exams?: string[] };
+    if (!s.grades?.length && !s.subjects?.length && !s.exams?.length) return null;
+    const name = (code: string) => code.charAt(0).toUpperCase() + code.slice(1).replaceAll("_", " ");
+    for (const g of s.grades ?? []) for (const sub of s.subjects ?? []) parts.push(`Class ${g === 11 ? "XI" : "XII"} ${name(sub)}`);
+    for (const x of s.exams ?? []) parts.push(`${x} mocks`);
+  }
+  return [...new Set(parts)].join(", ") || null;
+}
 const SOURCE: Record<string, string> = { trial: "Free trial", paid: "Paid plan", scholarship: "Scholarship access", promotional: "Promotional access", pilot: "Pilot access" };
 
 // Trial decisions the server can return (roadmap §16.5): only "granted"/"active"/"device_authorized" unlock trial use.
@@ -55,7 +68,8 @@ export function PlanCard({ access, token, onChange, purpose }: { access: Access;
     const current = active.reduce((a, b) => (new Date(a.ends_at) > new Date(b.ends_at) ? a : b));
     return (
       <Notice title={`${SOURCE[current.source] ?? "Access"} until ${day(current.ends_at)}`}>
-        Written marking allowance: {access.written_allowance.available} of {access.written_allowance.granted} units left.
+        {coverage(active) ? `Your plan covers ${coverage(active)}. ` : ""}Written marking allowance: {access.written_allowance.available} of{" "}
+        {access.written_allowance.granted} units left.
       </Notice>
     );
   }

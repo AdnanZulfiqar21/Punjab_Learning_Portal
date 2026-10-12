@@ -87,7 +87,12 @@ def create_linked_form(
                 "That copy wasn't classified as new or unclear work for these questions.",
                 code_reason="LINK_NOT_ELIGIBLE",
             )
-    access.require_access(db, who.user.id, purpose="Written practice")
+    access.require_access(
+        db,
+        who.user.id,
+        purpose="Written practice",
+        need=access.Need.subjects(origin_form.grade_number, origin_form.subject_code),
+    )
     if not service.review_staffed(db, origin_form.grade_number, origin_form.subject_code):
         raise Unprocessable(
             "Written practice for this subject isn't offered yet: no teacher reviewer is available to mark it."

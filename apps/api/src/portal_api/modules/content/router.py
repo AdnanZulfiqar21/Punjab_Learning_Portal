@@ -536,10 +536,12 @@ def chapter_lessons(
     chapter = db.get(Chapter, chapter_id)
     if chapter is None or chapter.retired_at is not None:
         raise NotFound("Chapter not found.")
+    book = db.get(BookEdition, chapter.book_id)
+    # P14.S1.T2: a plan covering this class and subject (a package covers only its own); trial devices need authorizing.
     entitled = (
         who is not None
-        and bool(access.active_entitlements(db, who.user.id, access.db_now(db)))
-        and access.device_gate(db, who.user.id) is None  # trial use on a native device needs its authorization
+        and book is not None
+        and access.entitled_for(db, who.user.id, access.Need.subjects(book.grade.number, book.subject.code))
     )
     if who is None:
         # The anonymous response holds preview bodies only, identical for every anonymous caller: safe to share.
@@ -611,8 +613,7 @@ def lesson_asset(db: DB, who: OptionalPrincipal, item_id: uuid.UUID, version_id:
     if item.access_tier != "preview":
         if who is None:
             raise Unauthorized("Sign in to open this lesson's files.")
-        entitled = bool(access.active_entitlements(db, who.user.id, access.db_now(db)))
-        if not entitled or access.device_gate(db, who.user.id) is not None:
+        if not access.entitled_for(db, who.user.id, access.Need.subjects(item.grade_number, item.subject_code)):
             raise Forbidden("This lesson is included with a plan or the free trial.")
     v, asset = assets.for_lesson(db, item, version_id)
     filename = (

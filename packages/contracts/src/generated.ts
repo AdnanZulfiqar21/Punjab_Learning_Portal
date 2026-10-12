@@ -5577,6 +5577,18 @@ export interface components {
              */
             id: string;
             /**
+             * Product Code
+             * @description The product granted ('platform' for whole-platform access)
+             */
+            product_code: string;
+            /**
+             * Scope
+             * @description What it covers, as granted: {} = everything; else grades/subjects/exams
+             */
+            scope: {
+                [key: string]: unknown;
+            };
+            /**
              * Source
              * @enum {string}
              */
@@ -5966,6 +5978,11 @@ export interface components {
             days: number;
             /** Email */
             email: string;
+            /**
+             * Product Code
+             * @description An active product to grant (its scope is copied); omit for the platform
+             */
+            product_code?: string | null;
             /** Reason */
             reason: string;
             /**
