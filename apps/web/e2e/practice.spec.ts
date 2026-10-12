@@ -252,6 +252,44 @@ test("a pending question shows no invented mark, and a completion case finishes 
   await expect(page.getByText("Question 1: 1 / 5")).toBeVisible();
 });
 
+// W07.S1.T2 (FEEDBACK-EVIDENCE-01): a teacher points a criterion's feedback at a place on the page; the learner sees it.
+test("feedback points to the place on the page it is about", async ({ page, browser }) => {
+  test.slow(); // a marking round in a second browser context
+  await newLearner(page);
+  await page.goto("/practice/written?grade=11&subject=biology");
+  await page.getByRole("group", { name: "Chapters" }).getByRole("checkbox").first().check();
+  await page.getByRole("button", { name: "Start written test" }).click();
+  await expect(page).toHaveURL(/:\d+\/practice\/written\/[0-9a-f-]{36}$/, AUTH);
+  const attemptId = page.url().split("/").pop()!;
+  await page.getByLabel("Add photos or a PDF").setInputFiles("e2e/fixtures/synthetic-page.png");
+  await expect(page.getByRole("list", { name: "Uploaded pages" }).getByText(/Page 1 ·/)).toBeVisible(AUTH);
+  await page.getByRole("group", { name: /Question 1 \(a\)/ }).getByLabel("Page 1").check();
+  await page.getByRole("group", { name: /Question 1 \(b\)/ }).getByLabel("I didn't answer this").check();
+  await expect(page.getByRole("status").filter({ hasText: /Saved · revision \d+/ })).toBeVisible(AUTH);
+  await page.getByRole("button", { name: "Submit for marking" }).click();
+  await expect(page.getByText("Waiting for a teacher")).toBeVisible(AUTH);
+
+  const teacher = await (await browser.newContext()).newPage();
+  await teacher.goto("/signin?next=/studio/marking");
+  await teacher.getByLabel("Email").fill("studio-reviewer@example.com");
+  await teacher.getByLabel("Password").fill("studio-fixture-pass-1");
+  await teacher.getByRole("button", { name: "Sign in", exact: true }).click();
+  await expect(teacher).toHaveURL(/:\d+\/studio\/marking$/, AUTH);
+  await teacher.getByRole("link", { name: `Script ${attemptId.slice(0, 8)}` }).click();
+  await teacher.getByRole("button", { name: "Start marking" }).click();
+  await teacher.getByRole("radiogroup", { name: "Award for a1" }).getByLabel("1", { exact: true }).check();
+  await teacher.getByLabel("Reason for a1").fill("Fixture: the first step is here.");
+  await teacher.getByLabel("Where on the script a1 is about").selectOption({ label: "Page 1: top left" });
+  await teacher.getByRole("button", { name: "Release result" }).click();
+  await expect(teacher.getByText("Result released")).toBeVisible(AUTH);
+
+  await page.reload();
+  const where = page.getByText("Show where: page 1, top left");
+  await expect(where).toBeVisible(AUTH);
+  await where.click();
+  await expect(page.getByRole("img", { name: "Your page 1" })).toBeVisible();
+});
+
 /** Save a marking draft, leave the case, and open it again (a real navigation, not client state). */
 async function saveAndReopen(teacher: Page) {
   const caseUrl = teacher.url();

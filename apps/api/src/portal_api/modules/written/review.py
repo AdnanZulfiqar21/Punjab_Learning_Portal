@@ -496,6 +496,43 @@ def staff_page_detail(
     return d.png, provenance
 
 
+MAX_ANCHORS = 6  # W07.S1.T2: places on the script a criterion's feedback points to
+
+
+def anchors(raw: object) -> list[dict[str, Any]]:
+    """W07.S1.T2 (FEEDBACK-EVIDENCE-01): a criterion's evidence anchors as stored: a sealed page, and optionally a
+    region of it as x, y, w, h fractions of the upright page preview (validated by `_anchor_errors` first)."""
+    out = []
+    for a in raw if isinstance(raw, list) else []:
+        region = a.get("region")
+        out.append({"page_id": str(a["page_id"]), "region": [round(float(v), 4) for v in region] if region else None})
+    return out
+
+
+def _anchor_errors(where: str, raw: object, allowed: set[str]) -> list[str]:
+    """Every anchor must be grounded: a page of this question's sealed answer, and a region inside it."""
+    if raw is None:
+        return []
+    if not isinstance(raw, list) or len(raw) > MAX_ANCHORS:
+        return [f"{where}: give at most {MAX_ANCHORS} evidence places as a list."]
+    errors = []
+    for a in raw:
+        if not isinstance(a, dict) or str(a.get("page_id")) not in allowed:
+            errors.append(f"{where}: evidence must point to a page this question's answer was mapped to.")
+            continue
+        region = a.get("region")
+        if region is None:
+            continue
+        try:
+            x, y, w, h = (float(v) for v in region)
+        except (TypeError, ValueError):
+            errors.append(f"{where}: an evidence region is four numbers: x, y, width, height.")
+            continue
+        if min(x, y) < 0 or w <= 0 or h <= 0 or x + w > 1.0001 or y + h > 1.0001:
+            errors.append(f"{where}: an evidence region must lie inside the page.")
+    return errors
+
+
 def _check_awards(
     ctx: dict[str, Any], awards: dict[str, dict[str, dict[str, Any]]], scope: set[str] | None = None
 ) -> tuple[dict[str, int], list[str]]:
@@ -513,11 +550,13 @@ def _check_awards(
         unknown = set(given) - {c.id for c in rubric.criteria}
         if unknown:
             errors.append(f"Question {pos}: unknown criteria {sorted(unknown)}.")
+        mapped = {str(p) for key, slot in slots.items() if key.split(":", 1)[0] == pos for p in slot.get("pages", [])}
         earned: dict[str, int] = {}
         for c in rubric.criteria:
             if c.id not in given:
                 errors.append(f"Question {pos}: give an award for criterion {c.id}.")
                 continue
+            errors += _anchor_errors(f"Question {pos} criterion {c.id}", given[c.id].get("evidence"), mapped)
             units = int(given[c.id].get("units", -1))
             if units not in c.levels:
                 errors.append(f"Question {pos} criterion {c.id}: {units} isn't a permitted award {c.levels}.")
@@ -760,7 +799,11 @@ def decide(
             **carried_awards,
             **{
                 p: {
-                    c: {"units": int(v.get("units", 0)), "reason": str(v.get("reason", ""))[:1000]}
+                    c: {
+                        "units": int(v.get("units", 0)),
+                        "reason": str(v.get("reason", ""))[:1000],
+                        "evidence": anchors(v.get("evidence")),
+                    }
                     for c, v in a.items()
                 }
                 for p, a in awards.items()
