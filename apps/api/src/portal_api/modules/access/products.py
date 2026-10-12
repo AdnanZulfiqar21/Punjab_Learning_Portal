@@ -16,6 +16,11 @@ channel**, so a price change never rewrites what was sold, and an entitlement ke
   per-module trial, and switching subjects never restarts trial eligibility (§16).
 * Nothing here invents a price or a product: the catalogue starts empty, and finance staff (MFA, audited) define it.
   Package-scoped access checks are P14.S1.T2; until then a package can be defined and priced but not granted.
+
+**Purchase terms** (P14.S1.T3, PRICING-01): what a buyer is told before paying (taxes, renewal, the early-conversion
+rule of §16.9 T5, refunds) is owner-reviewed text, never written by the code. Finance staff draft a version and a
+*different* finance person publishes it; publishing supersedes the previous version, and every version is kept. The
+public pricing page shows the published version, or says plainly that terms aren't published yet.
 """
 
 from __future__ import annotations
@@ -40,6 +45,7 @@ from sqlalchemy import (
     Text,
     func,
     select,
+    text,
 )
 from sqlalchemy.dialects.postgresql import JSONB, UUID
 from sqlalchemy.orm import Mapped, Session, mapped_column
@@ -101,6 +107,30 @@ class ProductPrice(Base):
     reason: Mapped[str] = mapped_column(Text)
     set_by: Mapped[uuid.UUID] = mapped_column(ForeignKey("app_user.id", ondelete="RESTRICT"))
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+
+
+TERMS_STATUSES = ("draft", "published", "superseded")
+
+
+class CommerceTerms(Base):
+    __tablename__ = "commerce_terms"
+    __table_args__ = (
+        CheckConstraint(f"status in ({', '.join(repr(t) for t in TERMS_STATUSES)})", name="commerce_terms_status"),
+        CheckConstraint("published_by is null or published_by <> drafted_by", name="commerce_terms_two_people"),
+        Index("uq_commerce_terms_published", "status", unique=True, postgresql_where=text("status = 'published'")),
+        Index("uq_commerce_terms_draft", "status", unique=True, postgresql_where=text("status = 'draft'")),
+    )
+    id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    version: Mapped[int] = mapped_column(Integer, unique=True)
+    tax_note: Mapped[str] = mapped_column(Text)
+    renewal_note: Mapped[str] = mapped_column(Text)
+    conversion_note: Mapped[str] = mapped_column(Text)
+    refund_note: Mapped[str] = mapped_column(Text)
+    status: Mapped[str] = mapped_column(String(10), default="draft")
+    drafted_by: Mapped[uuid.UUID] = mapped_column(ForeignKey("app_user.id", ondelete="RESTRICT"))
+    drafted_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+    published_by: Mapped[uuid.UUID | None] = mapped_column(ForeignKey("app_user.id", ondelete="RESTRICT"))
+    published_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
 
 
 # ------------------------------------------------------------------ rules
@@ -280,6 +310,53 @@ def current(history: list[ProductPrice], channel: str, now: datetime) -> Product
     return started[-1] if started else None
 
 
+def save_terms(db: Session, who: Principal, body: TermsIn) -> CommerceTerms:
+    """Create the one open draft, or change it (only its author can)."""
+    draft = db.scalar(select(CommerceTerms).where(CommerceTerms.status == "draft").with_for_update())
+    if draft is None:
+        number = (db.scalar(select(func.max(CommerceTerms.version))) or 0) + 1
+        draft = CommerceTerms(version=number, drafted_by=who.user.id)
+        db.add(draft)
+    elif draft.drafted_by != who.user.id:
+        raise Conflict("Another person's draft is open; they can change it, or someone else can publish it.")
+    draft.tax_note, draft.renewal_note = body.tax_note.strip(), body.renewal_note.strip()
+    draft.conversion_note, draft.refund_note = body.conversion_note.strip(), body.refund_note.strip()
+    db.flush()
+    record(
+        db,
+        actor=who.user.id,
+        action="commerce_terms.drafted",
+        target_type="commerce_terms",
+        target_id=str(draft.id),
+        details={"version": draft.version},
+    )
+    db.commit()
+    return draft
+
+
+def publish_terms(db: Session, who: Principal, reason: str) -> CommerceTerms:
+    draft = db.scalar(select(CommerceTerms).where(CommerceTerms.status == "draft").with_for_update())
+    if draft is None:
+        raise NotFound("There is no draft to publish.")
+    if draft.drafted_by == who.user.id:
+        raise Conflict("A different person must publish the terms you drafted.", code_reason="TWO_PEOPLE")
+    now = _now(db)
+    for old in db.scalars(select(CommerceTerms).where(CommerceTerms.status == "published").with_for_update()):
+        old.status = "superseded"
+    db.flush()
+    draft.status, draft.published_by, draft.published_at = "published", who.user.id, now
+    record(
+        db,
+        actor=who.user.id,
+        action="commerce_terms.published",
+        target_type="commerce_terms",
+        target_id=str(draft.id),
+        details={"version": draft.version, "reason": reason.strip()},
+    )
+    db.commit()
+    return draft
+
+
 # ------------------------------------------------------------------ schemas
 class ScopeIn(BaseModel):
     grades: list[int] = Field(default_factory=list, max_length=2)
@@ -317,6 +394,43 @@ class PriceOut(BaseModel):
     on_sale: bool
     starts_at: datetime
     reason: str | None = None
+
+
+class TermsIn(BaseModel):
+    tax_note: str = Field(min_length=10, max_length=2000, description="How tax is treated in the prices shown")
+    renewal_note: str = Field(min_length=10, max_length=2000, description="Whether and how a plan renews")
+    conversion_note: str = Field(min_length=10, max_length=2000, description="Buying during the free trial (§16.9 T5)")
+    refund_note: str = Field(min_length=10, max_length=2000, description="Refunds and what they reverse")
+
+
+class TermsOut(BaseModel):
+    version: int
+    status: str
+    tax_note: str
+    renewal_note: str
+    conversion_note: str
+    refund_note: str
+    published_at: datetime | None
+
+
+class TermsState(BaseModel):
+    published: TermsOut | None
+    draft: TermsOut | None = None
+    draft_is_mine: bool = False
+
+
+def _terms_out(t: CommerceTerms | None) -> TermsOut | None:
+    if t is None:
+        return None
+    return TermsOut(
+        version=t.version,
+        status=t.status,
+        tax_note=t.tax_note,
+        renewal_note=t.renewal_note,
+        conversion_note=t.conversion_note,
+        refund_note=t.refund_note,
+        published_at=t.published_at,
+    )
 
 
 class ProductAdminOut(BaseModel):
@@ -462,3 +576,38 @@ def admin_price(db: DB, who: Finance, product_id: uuid.UUID, body: PriceIn, resp
     _private(response)
     set_price(db, who, product_id, body)
     return _admin_out(db, [_get(db, product_id)])[0]
+
+
+@router.get("/commerce-terms", response_model=TermsState, summary="The published purchase terms (public)")
+def public_terms(db: DB, response: Response) -> TermsState:
+    response.headers["Cache-Control"] = "public, max-age=60"
+    published = db.scalar(select(CommerceTerms).where(CommerceTerms.status == "published"))
+    return TermsState(published=_terms_out(published))
+
+
+@router.get("/admin/commerce-terms", response_model=TermsState, summary="Published and draft purchase terms (finance)")
+def admin_terms(db: DB, who: Finance, response: Response) -> TermsState:
+    _private(response)
+    published = db.scalar(select(CommerceTerms).where(CommerceTerms.status == "published"))
+    draft = db.scalar(select(CommerceTerms).where(CommerceTerms.status == "draft"))
+    return TermsState(
+        published=_terms_out(published),
+        draft=_terms_out(draft),
+        draft_is_mine=draft is not None and draft.drafted_by == who.user.id,
+    )
+
+
+@router.put("/admin/commerce-terms/draft", response_model=TermsState, summary="Write the draft purchase terms")
+def admin_save_terms(db: DB, who: Finance, body: TermsIn, response: Response) -> TermsState:
+    save_terms(db, who, body)
+    return admin_terms(db, who, response)
+
+
+@router.post(
+    "/admin/commerce-terms/publish",
+    response_model=TermsState,
+    summary="Publish the draft terms (a different finance person; audited)",
+)
+def admin_publish_terms(db: DB, who: Finance, body: TransitionIn, response: Response) -> TermsState:
+    publish_terms(db, who, body.reason)
+    return admin_terms(db, who, response)

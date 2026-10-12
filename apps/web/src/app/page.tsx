@@ -122,6 +122,9 @@ async function Welcome() {
           <Link href="/signin" className="text-accent underline underline-offset-2">
             Create an account
           </Link>
+          <Link href="/pricing" className="text-accent underline underline-offset-2">
+            Plans and prices
+          </Link>
           <Link href="/help" className="text-accent underline underline-offset-2">
             Help and questions
           </Link>

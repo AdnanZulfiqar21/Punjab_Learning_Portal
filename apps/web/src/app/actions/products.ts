@@ -4,7 +4,7 @@
 // retire them; the API enforces the permission, MFA, scope rules, immutability and audit. These actions only forward.
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import type { Problem, ProductIn } from "@portal/contracts";
+import type { CommerceTermsIn, Problem, ProductIn } from "@portal/contracts";
 import { api, sessionToken } from "@/lib/session";
 
 export type ProductResult = { ok: boolean; error?: string };
@@ -33,4 +33,14 @@ export async function addPrice(
   price: { currency: string; amount_minor: number | null; on_sale: boolean; starts_at: string | null; reason: string },
 ): Promise<ProductResult> {
   return call(`/v1/admin/products/${encodeURIComponent(id)}/prices`, "POST", { channel: "web", ...price });
+}
+
+/** P14.S1.T3 (PRICING-01): write the draft purchase terms (one open draft; only its author changes it). */
+export async function saveTerms(terms: CommerceTermsIn): Promise<ProductResult> {
+  return call("/v1/admin/commerce-terms/draft", "PUT", terms);
+}
+
+/** Publish the draft terms; a different finance person than the drafter must do it (two people). */
+export async function publishTerms(reason: string): Promise<ProductResult> {
+  return call("/v1/admin/commerce-terms/publish", "POST", { reason });
 }
