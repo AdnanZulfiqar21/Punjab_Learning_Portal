@@ -3390,6 +3390,30 @@
         "title": "CorrectionLink",
         "type": "object"
       },
+      "CostAmount": {
+        "properties": {
+          "amount": {
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Amount",
+            "type": "string"
+          },
+          "currency": {
+            "title": "Currency",
+            "type": "string"
+          },
+          "line": {
+            "title": "Line",
+            "type": "string"
+          }
+        },
+        "required": [
+          "line",
+          "currency",
+          "amount"
+        ],
+        "title": "CostAmount",
+        "type": "object"
+      },
       "CostLine": {
         "properties": {
           "blocker": {
@@ -15067,6 +15091,127 @@
         "title": "TrialCohort",
         "type": "object"
       },
+      "TrialDecisionCohort": {
+        "properties": {
+          "app_claims": {
+            "title": "App Claims",
+            "type": "integer"
+          },
+          "appeal_rate": {
+            "anyOf": [
+              {
+                "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Appeal Rate"
+          },
+          "appeals": {
+            "title": "Appeals",
+            "type": "integer"
+          },
+          "claims": {
+            "title": "Claims",
+            "type": "integer"
+          },
+          "denial_rate": {
+            "anyOf": [
+              {
+                "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Denial Rate"
+          },
+          "denials": {
+            "title": "Denials",
+            "type": "integer"
+          },
+          "meets_target": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Meets Target"
+          },
+          "overturned_denials": {
+            "title": "Overturned Denials",
+            "type": "integer"
+          },
+          "overturned_rate": {
+            "anyOf": [
+              {
+                "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "False-block proxy; null when there were no denials",
+            "title": "Overturned Rate"
+          },
+          "review_required": {
+            "title": "Review Required",
+            "type": "integer"
+          },
+          "trial_cost": {
+            "items": {
+              "$ref": "#/components/schemas/CostAmount"
+            },
+            "title": "Trial Cost",
+            "type": "array"
+          },
+          "unknown_rate": {
+            "anyOf": [
+              {
+                "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Unknown Rate"
+          },
+          "unknown_verdicts": {
+            "title": "Unknown Verdicts",
+            "type": "integer"
+          },
+          "week_start": {
+            "title": "Week Start",
+            "type": "string"
+          }
+        },
+        "required": [
+          "week_start",
+          "claims",
+          "app_claims",
+          "unknown_verdicts",
+          "unknown_rate",
+          "denials",
+          "denial_rate",
+          "appeals",
+          "appeal_rate",
+          "overturned_denials",
+          "overturned_rate",
+          "meets_target",
+          "review_required",
+          "trial_cost"
+        ],
+        "title": "TrialDecisionCohort",
+        "type": "object"
+      },
       "TrialDecisionOut": {
         "properties": {
           "claim_status": {
@@ -15149,6 +15294,82 @@
           "evidence"
         ],
         "title": "TrialDecisionOut",
+        "type": "object"
+      },
+      "TrialDecisionReport": {
+        "properties": {
+          "appeals_owner": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Appeals Owner"
+          },
+          "appeals_owner_note": {
+            "title": "Appeals Owner Note",
+            "type": "string"
+          },
+          "cohorts": {
+            "items": {
+              "$ref": "#/components/schemas/TrialDecisionCohort"
+            },
+            "title": "Cohorts",
+            "type": "array"
+          },
+          "definitions": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "title": "Definitions",
+            "type": "object"
+          },
+          "evidence_note": {
+            "title": "Evidence Note",
+            "type": "string"
+          },
+          "generated_at": {
+            "format": "date-time",
+            "title": "Generated At",
+            "type": "string"
+          },
+          "report_version": {
+            "title": "Report Version",
+            "type": "integer"
+          },
+          "target_overturned_percent": {
+            "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+            "title": "Target Overturned Percent",
+            "type": "string"
+          },
+          "unmeasured_costs": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Unmeasured Costs",
+            "type": "array"
+          },
+          "weeks": {
+            "title": "Weeks",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "report_version",
+          "generated_at",
+          "weeks",
+          "target_overturned_percent",
+          "cohorts",
+          "unmeasured_costs",
+          "appeals_owner",
+          "appeals_owner_note",
+          "evidence_note",
+          "definitions"
+        ],
+        "title": "TrialDecisionReport",
         "type": "object"
       },
       "TrialDeviceOut": {
@@ -17016,6 +17237,27 @@
           }
         },
         "summary": "Learning outcomes beside engagement, one book (MFA)",
+        "tags": [
+          "analytics"
+        ]
+      }
+    },
+    "/v1/admin/analytics/trial-decisions": {
+      "get": {
+        "operationId": "trial_decision_report_v1_admin_analytics_trial_decisions_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TrialDecisionReport"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Trial decision quality and false blocks by cohort (owner, finance; MFA)",
         "tags": [
           "analytics"
         ]

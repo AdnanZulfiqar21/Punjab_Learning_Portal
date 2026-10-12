@@ -17,6 +17,7 @@ from portal_api.modules.analytics.economics import router as economics_router
 from portal_api.modules.analytics.events import router as analytics_router
 from portal_api.modules.analytics.funnels import router as funnel_router
 from portal_api.modules.analytics.learning import router as learning_router
+from portal_api.modules.analytics.trial_decisions import router as trial_decisions_router
 from portal_api.modules.assessment.router import router as assessment_router
 from portal_api.modules.audit.router import router as audit_router
 from portal_api.modules.content import router as content
@@ -163,6 +164,7 @@ def create_app() -> FastAPI:
     app.include_router(funnel_router)
     app.include_router(learning_router)
     app.include_router(economics_router)
+    app.include_router(trial_decisions_router)
     app.include_router(integrations_router)
     if settings.dev_auth_enabled:  # refused in staging/production by the startup validator
         app.include_router(dev_auth.router)

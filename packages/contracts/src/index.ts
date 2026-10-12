@@ -112,6 +112,7 @@ export type ClientPlatformState = S["ClientPlatformState"];
 export type FunnelReport = S["FunnelReport"];
 export type LearningReport = S["LearningReport"];
 export type EconomicsReport = S["EconomicsReport"];
+export type TrialDecisionReport = S["TrialDecisionReport"];
 export type RateIn = S["RateIn"];
 export type RecheckState = S["RecheckOut"];
 export type LinkedForm = S["LinkedFormOut"];

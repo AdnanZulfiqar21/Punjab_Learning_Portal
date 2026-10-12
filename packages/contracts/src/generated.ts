@@ -89,6 +89,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/admin/analytics/trial-decisions": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Trial decision quality and false blocks by cohort (owner, finance; MFA) */
+        get: operations["trial_decision_report_v1_admin_analytics_trial_decisions_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/admin/audit": {
         parameters: {
             query?: never;
@@ -5783,6 +5800,15 @@ export interface components {
             /** Status */
             status: string;
         };
+        /** CostAmount */
+        CostAmount: {
+            /** Amount */
+            amount: string;
+            /** Currency */
+            currency: string;
+            /** Line */
+            line: string;
+        };
         /** CostLine */
         CostLine: {
             /** Blocker */
@@ -10515,6 +10541,40 @@ export interface components {
             /** Week Start */
             week_start: string;
         };
+        /** TrialDecisionCohort */
+        TrialDecisionCohort: {
+            /** App Claims */
+            app_claims: number;
+            /** Appeal Rate */
+            appeal_rate: string | null;
+            /** Appeals */
+            appeals: number;
+            /** Claims */
+            claims: number;
+            /** Denial Rate */
+            denial_rate: string | null;
+            /** Denials */
+            denials: number;
+            /** Meets Target */
+            meets_target: boolean | null;
+            /** Overturned Denials */
+            overturned_denials: number;
+            /**
+             * Overturned Rate
+             * @description False-block proxy; null when there were no denials
+             */
+            overturned_rate: string | null;
+            /** Review Required */
+            review_required: number;
+            /** Trial Cost */
+            trial_cost: components["schemas"]["CostAmount"][];
+            /** Unknown Rate */
+            unknown_rate: string | null;
+            /** Unknown Verdicts */
+            unknown_verdicts: number;
+            /** Week Start */
+            week_start: string;
+        };
         /** TrialDecisionOut */
         TrialDecisionOut: {
             /** Claim Status */
@@ -10541,6 +10601,34 @@ export interface components {
              * @enum {string}
              */
             state: "eligible" | "granted" | "active" | "device_authorized" | "paid_active" | "account_trial_used" | "prior_paid" | "device_used" | "review_required" | "verification_pending" | "device_limit";
+        };
+        /** TrialDecisionReport */
+        TrialDecisionReport: {
+            /** Appeals Owner */
+            appeals_owner: string | null;
+            /** Appeals Owner Note */
+            appeals_owner_note: string;
+            /** Cohorts */
+            cohorts: components["schemas"]["TrialDecisionCohort"][];
+            /** Definitions */
+            definitions: {
+                [key: string]: string;
+            };
+            /** Evidence Note */
+            evidence_note: string;
+            /**
+             * Generated At
+             * Format: date-time
+             */
+            generated_at: string;
+            /** Report Version */
+            report_version: number;
+            /** Target Overturned Percent */
+            target_overturned_percent: string;
+            /** Unmeasured Costs */
+            unmeasured_costs: string[];
+            /** Weeks */
+            weeks: number;
         };
         /** TrialDeviceOut */
         TrialDeviceOut: {
@@ -11359,6 +11447,26 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    trial_decision_report_v1_admin_analytics_trial_decisions_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TrialDecisionReport"];
                 };
             };
         };
