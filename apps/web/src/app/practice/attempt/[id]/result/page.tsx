@@ -5,6 +5,7 @@ import { Suspense } from "react";
 import type { ItemReview } from "@portal/contracts";
 import { LessonBlocks } from "@/components/lesson-blocks";
 import { Badge, Notice, SkeletonLines } from "@/components/ui";
+import { MockRunningNotice } from "@/components/mock-running";
 import { getResult } from "@/lib/practice";
 import { currentUser } from "@/lib/session";
 import { TIME_ZONE } from "@/lib/dates";
@@ -36,6 +37,7 @@ async function Result({ id }: { id: string }) {
   if (!/^[0-9a-f-]{36}$/i.test(id)) notFound();
   const result = await getResult(user.token, id);
   if (result === null) notFound();
+  if (typeof result === "object" && "mockRunning" in result) return <MockRunningNotice attemptId={result.mockRunning} />;
   if (typeof result === "object" && "heldUntil" in result) {
     return (
       <Notice title="Your answers are saved">

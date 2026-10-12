@@ -107,7 +107,7 @@ def test_a_new_version_reaches_new_mocks_and_corrections_keep_each_pinned_policy
 ) -> None:
     # v1: 30 minutes, 2 marks a question, 1 off for a wrong answer, a void question is excluded.
     code = _publish_profile(client, db, PHYSICS_XI)
-    learner = _learner(client)
+    learner, other = _learner(client), _learner(client)
     first_form = _mock(client, learner, code).json()
     first = _start(client, learner, first_form["id"])
     first_frozen = _frozen(first_form["id"])
@@ -129,13 +129,13 @@ def test_a_new_version_reaches_new_mocks_and_corrections_keep_each_pinned_policy
     assert resumed["deadline_at"] == first["deadline_at"] and [i["marks"] for i in resumed["items"]] == [2, 2, 2]
     assert _frozen(first_form["id"]) == first_frozen
 
-    # A new mock follows v2.
-    second_form = _mock(client, learner, code).json()
+    # A new mock follows v2 (another learner's: a learner has one mock open at a time, EXAM-ROOM-01).
+    second_form = _mock(client, other, code).json()
     assert (first_form["scope"]["profile_version"], second_form["scope"]["profile_version"]) == (1, 2)
     assert (first_form["scope"]["year"], second_form["scope"]["year"]) == (2026, 2027)
     assert (first_form["duration_s"], second_form["duration_s"]) == (1800, 2700)
     assert (first_form["negative_marks"], second_form["negative_marks"]) == (1, 0)
-    second = _start(client, learner, second_form["id"])
+    second = _start(client, other, second_form["id"])
     assert [i["marks"] for i in second["items"]] == [3, 3, 3] and _frozen(second_form["id"])[0] == "CREDIT_ALL"
 
     # The first mock is submitted under v1: question 2 is wrong (-1), the others earn 2 each.
@@ -165,10 +165,10 @@ def test_a_new_version_reaches_new_mocks_and_corrections_keep_each_pinned_policy
         assert [tuple(h) for h in history] == [(1, 3, 6), (2, 1, 4)]
 
         # The open mock keeps its deadline and gets the correction at submission, with its own policy (CREDIT_ALL).
-        still = client.get(f"/v1/attempts/{second['id']}", headers=learner.headers).json()
+        still = client.get(f"/v1/attempts/{second['id']}", headers=other.headers).json()
         assert still["deadline_at"] == second["deadline_at"]
-        _answer_and_submit(client, learner, second["id"], second_form["id"], wrong=2)
-        credited = _result(client, learner, second["id"])
+        _answer_and_submit(client, other, second["id"], second_form["id"], wrong=2)
+        credited = _result(client, other, second["id"])
         assert (credited["raw"], credited["maximum"], credited["version"]) == (6, 9, 1)
         assert credited["items"][0]["treatment"] == "CREDIT_ALL"
 

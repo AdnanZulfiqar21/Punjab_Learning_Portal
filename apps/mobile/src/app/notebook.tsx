@@ -5,6 +5,7 @@ import { ScrollView, View } from "react-native";
 
 import { Button, FormError } from "@/components/form";
 import { Badge, Card, ErrorState, Loading, Notice, T } from "@/components/ui";
+import { MockRunningNotice, mockRunning } from "@/components/mock-running";
 import { Space } from "@/constants/theme";
 import { useRequest } from "@/hooks/use-request";
 import { useTheme } from "@/hooks/use-theme";
@@ -31,7 +32,11 @@ function Entries({ token }: { token: string }) {
   const [busy, setBusy] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   if (req.state.status === "loading") return <Loading label="Loading your notebook" />;
-  if (req.state.status === "error") return <ErrorState error={req.state.error} onRetry={req.retry} />;
+  if (req.state.status === "error") {
+    const running = mockRunning(req.state.error);
+    if (running) return <MockRunningNotice attemptId={running} />;
+    return <ErrorState error={req.state.error} onRetry={req.retry} />;
+  }
   const entries = req.state.data;
   if (entries.length === 0) return <Notice title="Nothing here yet">Questions you get wrong in a practice test appear here.</Notice>;
   const due = new Map<string, number>();

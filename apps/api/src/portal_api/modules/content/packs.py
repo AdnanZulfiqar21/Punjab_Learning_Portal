@@ -231,6 +231,9 @@ def study_pack(
     format: Annotated[int, Query(ge=1, le=100, description="The newest pack format this app reads")] = 1,
 ) -> PackOut:
     response.headers["Cache-Control"] = "private, no-store"
+    from portal_api.modules.assessment import exam_room
+
+    exam_room.guard(db, who.user.id)  # P10.S4.T3: packs carry released keys and explanations
     return PackOut(**build(db, who, chapter_id, format))
 
 
