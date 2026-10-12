@@ -82,6 +82,7 @@ def _sha(path: Path) -> str | None:
 
 
 def manifest() -> dict[str, Any]:
+    from portal_api import budget
     from portal_api.main import create_app
     from portal_api.modules.analytics.events import DICTIONARY
     from portal_api.modules.content import blocks
@@ -108,6 +109,8 @@ def manifest() -> dict[str, Any]:
         "feature_switches": {key: "on (runtime-switchable)" for key in FEATURES},
         # ROLLOUT-01: default percentages per environment; the runtime snapshot is GET /v1/ops/rollouts.
         "feature_rollouts": {key: dict(defaults) for key, (_, defaults) in ROLLOUTS.items()},
+        # BUDGET-01: the planned §5.8 connection budget this build was sized for (planning numbers, not measured).
+        "connection_budget": budget.totals(),
         "lockfiles": {"uv.lock": _sha(API_DIR / "uv.lock"), "pnpm-lock.yaml": _sha(REPO / "pnpm-lock.yaml")},
     }
 
