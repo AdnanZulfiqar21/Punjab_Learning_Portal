@@ -297,7 +297,12 @@ def rescore(db: Session, attempt_id: uuid.UUID) -> ScoreVersion | None:
 
     if attempt.form_id not in held_forms(db, attempt.user_id):  # OCT9-01: a held result is released, not "revised"
         notifications.notify(
-            db, attempt.user_id, "score.revised", {"reason": reason}, dedupe_key=f"mcq-score-{attempt.id}-{sv.version}"
+            db,
+            attempt.user_id,
+            "score.revised",
+            {"reason": reason},
+            dedupe_key=f"mcq-score-{attempt.id}-{sv.version}",
+            link=f"/practice/attempt/{attempt.id}/result",  # P13.S2.T3: the notice opens the revised result
         )
     db.commit()
     return sv

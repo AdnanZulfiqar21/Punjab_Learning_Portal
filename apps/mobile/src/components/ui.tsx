@@ -1,3 +1,4 @@
+import { router } from "expo-router";
 import type { ReactNode } from "react";
 import { ActivityIndicator, Pressable, StyleSheet, Text, View, type TextProps, type ViewStyle } from "react-native";
 
@@ -82,12 +83,20 @@ export function ErrorState({ error, onRetry }: { error: ApiError; onRetry: () =>
       <T variant="muted" style={{ textAlign: "center", marginTop: Space.sm }}>
         {error.message}
       </T>
-      {error.kind !== "not_found" && (
+      {error.kind !== "not_found" ? (
         <Pressable
           accessibilityRole="button"
           onPress={onRetry}
           style={({ pressed }) => [styles.button, { backgroundColor: c.accent, opacity: pressed ? 0.8 : 1 }]}>
           <Text style={{ color: c.onAccent, fontWeight: "600", fontSize: 16 }}>Try again</Text>
+        </Pressable>
+      ) : (
+        // P13.S2.T3: retired, locked or missing content (an old link, a notice) still leads somewhere useful.
+        <Pressable
+          accessibilityRole="button"
+          onPress={() => router.navigate("/")}
+          style={({ pressed }) => [styles.button, { backgroundColor: c.accent, opacity: pressed ? 0.8 : 1 }]}>
+          <Text style={{ color: c.onAccent, fontWeight: "600", fontSize: 16 }}>Go to Learn</Text>
         </Pressable>
       )}
       {error.correlationId ? (
