@@ -103,6 +103,9 @@ class WrittenAttempt(Base):
     upload_cutoff_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))  # U
     sealed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     expired_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    # W08.S1.T3 (PERMITS-01): why an expired attempt ended: its upload window closed (null) or the plan that funded
+    # it was withdrawn (refund or fraud revocation).
+    end_reason: Mapped[str | None] = mapped_column(String(20))
     # Mapping manifest: {"slots": {slot: {"pages": [page_id...], "unanswered": bool}}, "order": [page_id...]}
     manifest: Mapped[dict[str, Any]] = mapped_column(JSONB, default=dict)
     manifest_revision: Mapped[int] = mapped_column(Integer, default=0)

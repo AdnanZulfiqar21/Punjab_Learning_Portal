@@ -153,6 +153,9 @@ class WrittenAttemptOut(BaseModel):
         default=None, description="Set when this is a new practice attempt linked to an earlier test"
     )
     status: Literal["active", "sealed", "expired"]
+    end_reason: Literal["plan_withdrawn"] | None = Field(
+        default=None, description="Set when an expired test ended because its plan was withdrawn (refund or fraud)"
+    )
     started_at: datetime
     writing_deadline_at: datetime | None = Field(description="D: writing should stop (not enforceable at home)")
     upload_cutoff_at: datetime = Field(description="U = D + G: nothing is admitted after this")

@@ -186,7 +186,14 @@ export function WrittenRunner({ attempt, result = null }: { attempt: WrittenAtte
             received {when(attempt.receipt.admitted_at)}. A teacher will mark it against the approved rubric.
           </Notice>
         )}
-        {attempt.status === "expired" && (
+        {attempt.status === "expired" && attempt.end_reason === "plan_withdrawn" && (
+          // PERMITS-01: a refund or revocation ended this unsealed test; pages are kept, nothing was marked.
+          <Notice tone="warn" title="This test ended because your plan was withdrawn">
+            {pages.length} page(s) you uploaded are kept but weren&apos;t submitted, so they won&apos;t be marked. Tests you had already submitted are
+            still marked.
+          </Notice>
+        )}
+        {attempt.status === "expired" && attempt.end_reason !== "plan_withdrawn" && (
           <Notice tone="warn" title="The upload window closed before you submitted">
             {pages.length} page(s) reached the server but were not submitted, so they won&apos;t be marked. You can start a new practice test.{" "}
             <HelpLink slug="written-submission-receipt">How submitting and time limits work</HelpLink>

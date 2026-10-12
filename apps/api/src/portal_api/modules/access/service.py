@@ -312,6 +312,10 @@ def revoke_entitlement(db: Session, actor: uuid.UUID, entitlement_id: uuid.UUID,
     ent.status = "revoked"
     ent.revoked_at = db_now(db)
     ent.revoke_reason = reason.strip()
+    # W08.S1.T3 (PERMITS-01): unsealed written tests this plan funded end now; accepted work and its results stay.
+    from portal_api.modules.written.service import end_withdrawn_permits
+
+    end_withdrawn_permits(db, ent.id, reason.strip())
     record(
         db,
         actor=actor,

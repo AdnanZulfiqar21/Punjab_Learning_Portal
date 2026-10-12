@@ -123,6 +123,7 @@ def _attempt_out(db: Session, a: WrittenAttempt) -> WrittenAttemptOut:
         form_id=a.form_id,
         linked_from=_linked_from(form),
         status=a.status,  # type: ignore[arg-type]
+        end_reason=a.end_reason,  # type: ignore[arg-type]
         started_at=a.started_at,
         writing_deadline_at=a.writing_deadline_at,
         upload_cutoff_at=a.upload_cutoff_at,

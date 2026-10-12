@@ -140,7 +140,13 @@ function Runner({ initial, token, reload }: { initial: WrittenAttempt; token: st
           {when(a.receipt.admitted_at)}. A teacher will mark it against the approved rubric.
         </Notice>
       )}
-      {a.status === "expired" && (
+      {a.status === "expired" && a.end_reason === "plan_withdrawn" && (
+        <Notice tone="warn" title="Ended: plan withdrawn">
+          This test ended because your plan was withdrawn. Pages you uploaded are kept but weren&apos;t submitted. Tests you had
+          already submitted are still marked.
+        </Notice>
+      )}
+      {a.status === "expired" && a.end_reason !== "plan_withdrawn" && (
         <Notice tone="warn" title="Upload window closed">
           This test wasn&apos;t submitted before the upload deadline, so it won&apos;t be marked. Its allowance was returned.
         </Notice>

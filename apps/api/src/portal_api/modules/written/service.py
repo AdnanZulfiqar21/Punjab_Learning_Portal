@@ -445,6 +445,12 @@ def _check_cap_values(
 def _require_open(attempt: WrittenAttempt) -> None:
     if attempt.status == "sealed":
         raise Conflict("This answer script has been submitted and can't be changed.", attempt_status=attempt.status)
+    if attempt.status == "expired" and attempt.end_reason == PLAN_WITHDRAWN:
+        raise Conflict(
+            "This test ended because the plan it was started under was withdrawn. Pages you uploaded are kept.",
+            attempt_status=attempt.status,
+            code_reason="PERMIT_WITHDRAWN",
+        )
     if attempt.status == "expired":
         raise Conflict(
             "The upload window has closed. Pages you uploaded are kept but weren't submitted.",
@@ -843,6 +849,41 @@ def seal(
     db.commit()
     db.refresh(receipt)
     return receipt, False
+
+
+PLAN_WITHDRAWN = "plan_withdrawn"
+
+
+def end_withdrawn_permits(db: Session, entitlement_id: uuid.UUID, reason: str) -> int:
+    """W08.S1.T3 (PERMITS-01): a plan withdrawn for a refund or fraud ends the *unsealed* written tests it funded, in
+    the revoking transaction: their reservation returns to its bucket and uploaded pages are kept. Sealed (accepted)
+    work is not touched: its marking, results and recheck rights continue, and nothing retained is erased. Ordinary
+    expiry is different: a test started before the plan ended may still be finished (its permit is honoured)."""
+    from portal_api.modules.access.models import AllowanceEvent
+
+    attempts = db.scalars(
+        select(WrittenAttempt)
+        .join(AllowanceEvent, AllowanceEvent.attempt_id == WrittenAttempt.id)
+        .where(
+            AllowanceEvent.kind == "RESERVED",
+            AllowanceEvent.entitlement_id == entitlement_id,
+            WrittenAttempt.status == "active",
+        )
+        .with_for_update(of=WrittenAttempt)
+    ).all()
+    now = db_now(db)
+    for attempt in attempts:
+        attempt.status, attempt.expired_at, attempt.end_reason = "expired", now, PLAN_WITHDRAWN
+        access.release(db, attempt.id, f"plan withdrawn: {reason}"[:200])
+        record(
+            db,
+            actor=None,
+            action="written.permit_withdrawn",
+            target_type="written_attempt",
+            target_id=str(attempt.id),
+            details={"entitlement": str(entitlement_id), "pages": len(_pages(db, attempt.id))},
+        )
+    return len(attempts)
 
 
 def expire_due(db: Session, limit: int = 200) -> int:

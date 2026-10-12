@@ -10655,6 +10655,11 @@ export interface components {
                 [key: string]: number;
             };
             /**
+             * End Reason
+             * @description Set when an expired test ended because its plan was withdrawn (refund or fraud)
+             */
+            end_reason?: "plan_withdrawn" | null;
+            /**
              * Form Id
              * Format: uuid
              */
