@@ -44,6 +44,8 @@ def _send_email(db: Session, d: NotificationDelivery, n: Notification) -> Outcom
     adapter = get_settings().notification_email_adapter
     if adapter == "none":
         return Outcome("unavailable", error="no email sender is configured (BLOCKERS B04)")
+    if adapter != "dev_outbox":  # DEGRADATION-01: an adapter this code doesn't implement never counts as sent
+        return Outcome("unavailable", error=f"email adapter {adapter!r} is not implemented; nothing was sent")
     user = db.get(AppUser, d.user_id)
     if user is None or not user.email:
         return Outcome("skipped", error="no email address on the account")
