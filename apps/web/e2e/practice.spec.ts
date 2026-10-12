@@ -288,6 +288,10 @@ test("feedback points to the place on the page it is about", async ({ page, brow
   await expect(where).toBeVisible(AUTH);
   await where.click();
   await expect(page.getByRole("img", { name: "Your page 1" })).toBeVisible();
+  // W07.S2.T1 (NEXT-STEPS-01): marks were lost, so next steps quote the rubric and link the chapter's reviewed lessons.
+  const next = page.getByRole("region", { name: "Next steps" });
+  await expect(next.getByText(/^Work on: /).first()).toBeVisible();
+  await expect(next.getByRole("link").first()).toHaveAttribute("href", /\/learn\/chapter\/[0-9a-f-]{36}/);
 });
 
 /** Save a marking draft, leave the case, and open it again (a real navigation, not client state). */

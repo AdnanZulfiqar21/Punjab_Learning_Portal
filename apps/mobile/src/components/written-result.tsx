@@ -88,6 +88,24 @@ export function WrittenResultView({ attemptId, token }: { attemptId: string; tok
                 {(cr.evidence ?? []).map((e) => (e.available ? ` (see ${e.where})` : ` (about ${e.where}: that scan is no longer available)`)).join("")}
               </T>
             ))}
+            {q.next_steps && (
+              // NEXT-STEPS-01: the rubric's own words and reviewed lessons; nothing generated.
+              <View style={{ gap: 2 }} accessibilityLabel="Next steps">
+                <T variant="small" style={{ fontWeight: "600" }}>
+                  Next steps
+                </T>
+                {q.next_steps.focus.map((f) => (
+                  <T key={f.criterion_id} variant="small">
+                    Work on: {f.description}
+                    {f.common_mistakes.length ? ` (common mistakes: ${f.common_mistakes.join("; ")})` : ""}
+                  </T>
+                ))}
+                {q.next_steps.lessons.map((l) => (
+                  <Button key={l.id} variant="link" label={`Revise: ${l.title}`} onPress={() => router.push({ pathname: "/chapter/[id]", params: { id: l.chapter_id } })} />
+                ))}
+                {q.next_steps.lessons_missing && <T variant="small">No reviewed lesson is published for this topic yet.</T>}
+              </View>
+            )}
             <PendingAction attemptId={attemptId} token={token} q={q} onDone={req.retry} />
             <Button
               variant="secondary"

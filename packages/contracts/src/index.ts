@@ -54,6 +54,7 @@ export type WrittenItem = S["WrittenItemOut"];
 export type WrittenPage = S["PageOut"];
 export type PageQuality = S["PageQualityOut"];
 export type EvidenceLink = S["EvidenceLinkOut"];
+export type NextSteps = S["NextStepsOut"];
 export type WrittenUpload = S["UploadOut"];
 export type WrittenReceipt = S["WrittenReceiptOut"];
 export type WrittenSeal = S["SealOut"];
