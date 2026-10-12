@@ -36,6 +36,7 @@ from portal_api.modules.identity.router import router as identity_router
 from portal_api.modules.notifications.router import router as notifications_router
 from portal_api.modules.support.router import router as support_router
 from portal_api.modules.system.business import router as business_router
+from portal_api.modules.system.clients import router as clients_router
 from portal_api.modules.system.integrations import router as integrations_router
 from portal_api.modules.system.router import router as system_router
 from portal_api.modules.written.review_router import router as written_review_router
@@ -63,11 +64,39 @@ def create_app() -> FastAPI:
             "Idempotency-Key",
             "X-Portal-Client",
             "X-Portal-Install",
+            "X-Portal-Platform",
+            "X-Portal-App-Version",
             observability.HEADER,
         ],
         expose_headers=[observability.HEADER],
     )
     observability.install(app)
+
+    @app.middleware("http")
+    async def supported_client(request: Request, call_next: Callable[[Request], Awaitable[Response]]) -> Response:
+        # P13.S1.T4 (CLIENTS-01): a native app below the enforced minimum version is told to update (426). Registered
+        # before the security headers so the refusal carries them too.
+        platform, version = request.headers.get("x-portal-platform"), request.headers.get("x-portal-app-version")
+        if platform and version:
+            from starlette.concurrency import run_in_threadpool
+
+            from portal_api.db import get_sessionmaker
+            from portal_api.modules.system import clients
+
+            def check() -> dict[str, object] | None:
+                with get_sessionmaker()() as db:
+                    return clients.refuses(db, request.url.path, platform, version)
+
+            refused = await run_in_threadpool(check)
+            if refused is not None:
+                return errors._problem(
+                    request,
+                    426,
+                    "UPDATE_REQUIRED",
+                    "This version of the app is no longer supported. Update it from your app store to continue.",
+                    {**refused, "code_reason": "UPDATE_REQUIRED"},
+                )
+        return await call_next(request)
 
     @app.middleware("http")
     async def security_headers(request: Request, call_next: Callable[[Request], Awaitable[Response]]) -> Response:
@@ -96,6 +125,7 @@ def create_app() -> FastAPI:
 
     errors.install(app)
     app.include_router(system_router)
+    app.include_router(clients_router)
     app.include_router(curriculum_router)
     app.include_router(identity_router)
     app.include_router(content.router)

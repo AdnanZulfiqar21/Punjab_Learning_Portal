@@ -762,6 +762,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/clients/policy": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Whether this app version is supported (public) */
+        get: operations["client_policy_v1_clients_policy_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/commerce-terms": {
         parameters: {
             query?: never;
@@ -1737,6 +1754,57 @@ export interface paths {
         /** Whether every section of a published test pattern has enough approved questions (counts only) */
         get: operations["mock_readiness_v1_mocks__code__readiness_get"];
         put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/ops/clients": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Supported versions and build manifests */
+        get: operations["ops_clients_v1_ops_clients_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/ops/clients/manifests": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Register a build's renderer capability manifest (operators; once per build) */
+        post: operations["ops_register_manifest_v1_ops_clients_manifests_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/ops/clients/{platform}/minimum": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** Set the minimum supported app version (operators, MFA, audited; 14 days' notice when raising) */
+        put: operations["ops_set_minimum_v1_ops_clients__platform__minimum_put"];
         post?: never;
         delete?: never;
         options?: never;
@@ -5236,6 +5304,73 @@ export interface components {
              * @enum {string}
              */
             surface: "web" | "ios" | "android";
+        };
+        /** ClientManifestIn */
+        ClientManifestIn: {
+            /** App Version */
+            app_version: string;
+            /**
+             * Block Types
+             * @description Supported block type -> highest version
+             */
+            block_types: {
+                [key: string]: number;
+            };
+            /** Equation Renderer */
+            equation_renderer?: string | null;
+            /** Font Set */
+            font_set?: string | null;
+            /** Pack Format Version */
+            pack_format_version: number;
+            /**
+             * Platform
+             * @enum {string}
+             */
+            platform: "android" | "ios";
+            /** Renderer Version */
+            renderer_version: number;
+        };
+        /** ClientMinimumIn */
+        ClientMinimumIn: {
+            /**
+             * Enforce At
+             * @description Defaults to 14 days from now when raising
+             */
+            enforce_at?: string | null;
+            /** Min Version */
+            min_version: string;
+            /** Reason */
+            reason: string;
+        };
+        /** ClientPlatformState */
+        ClientPlatformState: {
+            /** Enforce At */
+            enforce_at: string | null;
+            /** Manifests */
+            manifests: components["schemas"]["ClientManifestIn"][];
+            /** Min Version */
+            min_version: string | null;
+            /** Notice At */
+            notice_at: string | null;
+            /** Platform */
+            platform: string;
+            /** Reason */
+            reason: string | null;
+        };
+        /** ClientPolicyOut */
+        ClientPolicyOut: {
+            /**
+             * Enforce At
+             * @description When this app version stops working (for update_soon/required)
+             */
+            enforce_at: string | null;
+            /** Min Version */
+            min_version: string | null;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "ok" | "update_soon" | "update_required";
         };
         /** CompletionScope */
         CompletionScope: {
@@ -11808,6 +11943,38 @@ export interface operations {
             };
         };
     };
+    client_policy_v1_clients_policy_get: {
+        parameters: {
+            query: {
+                platform: "android" | "ios";
+                version: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ClientPolicyOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     public_terms_v1_commerce_terms_get: {
         parameters: {
             query?: never;
@@ -13656,6 +13823,94 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["MockReadinessOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    ops_clients_v1_ops_clients_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ClientPlatformState"][];
+                };
+            };
+        };
+    };
+    ops_register_manifest_v1_ops_clients_manifests_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ClientManifestIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ClientManifestIn"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    ops_set_minimum_v1_ops_clients__platform__minimum_put: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                platform: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ClientMinimumIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ClientPlatformState"][];
                 };
             };
             /** @description Validation Error */
