@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
-import type { Catalogue, ProductAdmin } from "@portal/contracts";
+import type { Catalogue, CommerceTermsState, ProductAdmin } from "@portal/contracts";
 import { Badge, Breadcrumbs, Notice, SkeletonLines } from "@/components/ui";
 import { formatMinor } from "@/lib/money";
 import { api, currentUser } from "@/lib/session";
-import { AddPrice, MoveProduct, NewProduct } from "./controls";
+import { AddPrice, MoveProduct, NewProduct, TermsEditor } from "./controls";
 
 export const metadata: Metadata = { title: "Products and prices", robots: { index: false } };
 
@@ -45,9 +45,10 @@ export default function ProductsPage() {
 async function Products() {
   const user = await currentUser();
   if (!user) redirect("/signin?next=/admin/products");
-  const [res, catalogue] = await Promise.all([
+  const [res, catalogue, terms] = await Promise.all([
     api<ProductAdmin[]>("/v1/admin/products", { token: user.token }),
     api<Catalogue>("/v1/catalogue"),
+    api<CommerceTermsState>("/v1/admin/commerce-terms", { token: user.token }),
   ]);
   if (!res.ok) {
     return (
@@ -60,6 +61,7 @@ async function Products() {
   for (const g of catalogue.ok ? catalogue.data.grades : []) for (const s of g.subjects) subjects.set(s.subject.code, s.subject.name);
   return (
     <div className="space-y-6">
+      {terms.ok && <TermsEditor key={`${terms.data.published?.version}:${terms.data.draft?.version}`} state={terms.data} />}
       <NewProduct subjects={[...subjects].map(([code, name]) => ({ code, name }))} />
       {res.data.length === 0 ? (
         <p className="text-muted">No products are defined yet.</p>
