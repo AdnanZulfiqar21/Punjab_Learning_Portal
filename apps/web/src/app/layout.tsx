@@ -42,7 +42,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           Skip to content
         </a>
         <ConnectionStatus />
-        <DisplaySync />
+        <Suspense fallback={null}>
+          <DisplaySync />
+        </Suspense>
         <header className="border-b border-border bg-surface">
           <nav
             aria-label="Main"
