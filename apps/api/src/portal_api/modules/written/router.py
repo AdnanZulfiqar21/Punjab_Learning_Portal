@@ -26,9 +26,11 @@ from portal_api.modules.written.schemas import (
     ManifestIn,
     PageOut,
     PageQualityOut,
+    PageTransform,
     SealIn,
     SealOut,
     SlotOut,
+    TransformIn,
     UploadOut,
     WrittenAttemptOut,
     WrittenAvailabilityOut,
@@ -60,6 +62,7 @@ def page_out(p: WrittenPage, f: WrittenFile) -> PageOut:
         height=p.height,
         uploaded_at=p.uploaded_at,
         quality=[PageQualityOut(**f, message=evidence.quality_message(f)) for f in p.quality or []],
+        transform=PageTransform(**evidence.check_transform(p.transform)),
     )
 
 
@@ -305,6 +308,21 @@ def get_page(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, page_id: uuid
             "Content-Disposition": "inline",
         },
     )
+
+
+@router.put(
+    "/written-attempts/{attempt_id}/pages/{page_id}/transform",
+    response_model=PageOut,
+    summary="Turn, trim or clarify a page before submitting (the original is kept; W03.S1.T3)",
+)
+async def transform(
+    db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, page_id: uuid.UUID, body: TransformIn, response: Response
+) -> PageOut:
+    _private(response)
+    page = await run_in_threadpool(service.transform_page, db, who, attempt_id, page_id, body.model_dump())
+    file = db.get(WrittenFile, page.file_id)
+    assert file is not None
+    return page_out(page, file)
 
 
 @router.put("/written-attempts/{attempt_id}/manifest", response_model=WrittenAttemptOut)

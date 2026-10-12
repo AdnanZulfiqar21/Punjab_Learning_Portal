@@ -8743,6 +8743,10 @@
             "title": "Size",
             "type": "integer"
           },
+          "transform": {
+            "$ref": "#/components/schemas/PageTransform",
+            "description": "Turn, trim, readability"
+          },
           "uploaded_at": {
             "format": "date-time",
             "title": "Uploaded At",
@@ -8815,6 +8819,46 @@
           "message"
         ],
         "title": "PageQualityOut",
+        "type": "object"
+      },
+      "PageTransform": {
+        "description": "TRANSFORMS-01: how a page is shown, derived from its untouched original. Regions on the page (feedback places,\ndetail views) are fractions of the page as shown; the server maps them back to the original.",
+        "properties": {
+          "crop": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "number"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "x, y, w, h of the upright original kept (null: all)",
+            "title": "Crop"
+          },
+          "enhance": {
+            "default": false,
+            "description": "A higher-contrast preview that keeps faint marks",
+            "title": "Enhance",
+            "type": "boolean"
+          },
+          "rotate": {
+            "default": 0,
+            "description": "Clockwise quarter turns",
+            "enum": [
+              0,
+              90,
+              180,
+              270
+            ],
+            "title": "Rotate",
+            "type": "integer"
+          }
+        },
+        "title": "PageTransform",
         "type": "object"
       },
       "PaidConversion": {
@@ -14394,6 +14438,61 @@
           "text"
         ],
         "title": "TranscriptScene",
+        "type": "object"
+      },
+      "TransformIn": {
+        "description": "A page's new transform. `trim`, when given, is the part of the page *as currently shown* to keep (x, y, w, h);\nthe server maps it onto the original and it replaces `crop`.",
+        "properties": {
+          "crop": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "number"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "x, y, w, h of the upright original kept (null: all)",
+            "title": "Crop"
+          },
+          "enhance": {
+            "default": false,
+            "description": "A higher-contrast preview that keeps faint marks",
+            "title": "Enhance",
+            "type": "boolean"
+          },
+          "rotate": {
+            "default": 0,
+            "description": "Clockwise quarter turns",
+            "enum": [
+              0,
+              90,
+              180,
+              270
+            ],
+            "title": "Rotate",
+            "type": "integer"
+          },
+          "trim": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "number"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Part of the page as shown to keep (x, y, w, h)",
+            "title": "Trim"
+          }
+        },
+        "title": "TransformIn",
         "type": "object"
       },
       "TransitionIn": {
@@ -27622,6 +27721,18 @@
               "description": "x,y,w,h as page fractions",
               "title": "Region"
             }
+          },
+          {
+            "description": "The untouched original, without the learner's turn or trim",
+            "in": "query",
+            "name": "original",
+            "required": false,
+            "schema": {
+              "default": false,
+              "description": "The untouched original, without the learner's turn or trim",
+              "title": "Original",
+              "type": "boolean"
+            }
           }
         ],
         "responses": {
@@ -28317,6 +28428,69 @@
           }
         },
         "summary": "Your own page as its validated PNG preview (private; originals are never served)",
+        "tags": [
+          "written practice"
+        ]
+      }
+    },
+    "/v1/written-attempts/{attempt_id}/pages/{page_id}/transform": {
+      "put": {
+        "operationId": "transform_v1_written_attempts__attempt_id__pages__page_id__transform_put",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "attempt_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Attempt Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "page_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Page Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransformIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Turn, trim or clarify a page before submitting (the original is kept; W03.S1.T3)",
         "tags": [
           "written practice"
         ]

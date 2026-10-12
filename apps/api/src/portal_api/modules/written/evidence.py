@@ -9,6 +9,10 @@ previews; the original stays private and immutable.
 A file that can't be decoded, is encrypted, carries document JavaScript or attachments, or exceeds a limit is a
 recoverable processing rejection shown to the learner. It is never an academic mark.
 
+W03.S1.T3 (TRANSFORMS-01): a learner may turn a page, trim its edges or ask for a clearer-contrast preview before
+submitting. These are derived transforms recorded with the page and applied to a fresh render of the untouched
+original (`apply_transform`); regions on a transformed page map back to the original with `to_source`.
+
 W03.S2.T1 (SCAN-QUALITY-01): each logical page is also checked for blur, glare, writing cut off at an edge, and a
 page too small in the photo. A check is `likely` or `possible` and comes with a retake suggestion; it never
 rejects a page. Only a teacher decides a page is unreadable, and can ask for a clearer copy (W04.S3.T2).
@@ -109,6 +113,112 @@ def inspect(data: bytes) -> Inspected:
         _slots.release()
 
 
+ROTATIONS = (0, 90, 180, 270)  # clockwise degrees
+MIN_CROP = 0.3  # a trim keeps at least this share of each side, so a slip can't remove most of a page
+
+
+def check_transform(raw: dict[str, Any] | None) -> dict[str, Any]:
+    """TRANSFORMS-01: a page's transform as stored: rotation, an optional crop of the upright original (x, y, w, h
+    fractions) and an optional readability boost. Raises Rejected with a learner-facing reason."""
+    raw = raw or {}
+    rotate = int(raw.get("rotate", 0))
+    if rotate not in ROTATIONS:
+        raise Rejected("A page can only be turned in quarter turns.")
+    crop = raw.get("crop")
+    if crop is not None:
+        try:
+            x, y, w, h = (float(v) for v in crop)
+        except (TypeError, ValueError) as e:
+            raise Rejected("A trim is four numbers: x, y, width and height.") from e
+        if min(x, y) < 0 or x + w > 1.0001 or y + h > 1.0001:
+            raise Rejected("A trim must stay inside the page.")
+        if w < MIN_CROP or h < MIN_CROP:
+            raise Rejected("That trim would remove most of the page. Keep at least a third of each side.")
+        crop = [round(x, 4), round(y, 4), round(w, 4), round(h, 4)]
+        if crop == [0.0, 0.0, 1.0, 1.0]:
+            crop = None
+    return {"rotate": rotate, "crop": crop, "enhance": bool(raw.get("enhance", False))}
+
+
+def to_source(region: list[float] | tuple[float, ...], transform: dict[str, Any] | None) -> list[float]:
+    """Map a region of the transformed page (x, y, w, h fractions) to the same region of the upright original."""
+    x, y, w, h = (float(v) for v in region)
+    t = check_transform(transform)
+    rotate = t["rotate"]
+    if rotate == 90:  # undo a clockwise quarter turn
+        x, y, w, h = y, 1 - x - w, h, w
+    elif rotate == 180:
+        x, y = 1 - x - w, 1 - y - h
+    elif rotate == 270:
+        x, y, w, h = 1 - y - h, x, h, w
+    cx, cy, cw, ch = t["crop"] or (0.0, 0.0, 1.0, 1.0)
+    return [cx + x * cw, cy + y * ch, w * cw, h * ch]
+
+
+def apply_transform(image: Any, transform: dict[str, Any] | None, *, crop: bool = True) -> Any:
+    """Crop (in the upright original), turn without resampling, then, if asked, stretch the contrast. Every step is
+    lossless or monotonic: nothing that was darker than the paper becomes paper, so faint ink, pencil, small marks and
+    edges stay. `crop=False` when the region was already cut out of the original (detail renders)."""
+    from PIL import Image, ImageOps
+
+    t = check_transform(transform)
+    out = image
+    if crop and t["crop"]:
+        x, y, w, h = t["crop"]
+        out = out.crop(
+            (
+                int(x * out.width),
+                int(y * out.height),
+                max(int((x + w) * out.width), int(x * out.width) + 1),
+                max(int((y + h) * out.height), int(y * out.height) + 1),
+            )
+        )
+    turn = {90: Image.Transpose.ROTATE_270, 180: Image.Transpose.ROTATE_180, 270: Image.Transpose.ROTATE_90}
+    if t["rotate"]:
+        out = out.transpose(turn[t["rotate"]])
+    if t["enhance"]:
+        out = ImageOps.autocontrast(out.convert("L" if out.mode in ("1", "L", "LA", "I", "I;16") else "RGB"), cutoff=0)
+    return out
+
+
+def render_page(data: bytes, kind: str, page_index: int, transform: dict[str, Any] | None) -> LogicalPage:
+    """TRANSFORMS-01: a fresh preview (and quality checks) of one logical page with its transform, rendered from the
+    untouched original in the same isolated, bounded worker."""
+    spec = {"page_index": page_index, "transform": check_transform(transform)}
+    if not _slots.acquire(timeout=WORKER_QUEUE_WAIT_S):
+        raise WorkersBusy("evidence workers are busy")
+    try:
+        with tempfile.TemporaryDirectory(prefix="portal-page-") as tmp:
+            work = Path(tmp)
+            (work / "input").write_bytes(data)
+            (work / "page.json").write_text(json.dumps(spec), encoding="utf8")
+            env = {k: v for k, v in os.environ.items() if k in ("PATH", "SYSTEMROOT", "TEMP", "TMP")}
+            try:
+                proc = subprocess.run(  # noqa: S603 - fixed interpreter and module, no shell
+                    [sys.executable, "-I", "-m", "portal_api.modules.written.evidence", str(work), kind, "page"],
+                    capture_output=True,
+                    timeout=WORKER_TIMEOUT_S,
+                    env=env,
+                    check=False,
+                )
+            except subprocess.TimeoutExpired as e:
+                raise Rejected("This page took too long to render. Try again.") from e
+            out = work / "result.json"
+            if proc.returncode != 0 or not out.is_file():
+                raise Rejected("This page couldn't be rendered. Try again.")
+            result = json.loads(out.read_text(encoding="utf8"))
+            if "rejected" in result:
+                raise Rejected(str(result["rejected"]))
+            return LogicalPage(
+                width=int(result["width"]),
+                height=int(result["height"]),
+                preview_png=(work / "page.png").read_bytes(),
+                quality=[f for f in result.get("quality", []) if f.get("code") in QUALITY_TEXT],
+            )
+    finally:
+        _slots.release()
+
+
 @dataclass(frozen=True)
 class Detail:
     png: bytes
@@ -117,7 +227,13 @@ class Detail:
     scale: float  # output pixels per original pixel (images) or per PDF point (PDF)
 
 
-def render_detail(data: bytes, kind: str, page_index: int, region: tuple[float, float, float, float] | None) -> Detail:
+def render_detail(
+    data: bytes,
+    kind: str,
+    page_index: int,
+    region: tuple[float, float, float, float] | None,
+    transform: dict[str, Any] | None = None,
+) -> Detail:
     """A higher-detail PNG of one logical page (or a region of it, as fractions x, y, w, h of the upright page),
     rendered from the retained original in the same isolated, bounded worker. The original is never served."""
     if region is not None:
@@ -132,7 +248,11 @@ def render_detail(data: bytes, kind: str, page_index: int, region: tuple[float, 
         with tempfile.TemporaryDirectory(prefix="portal-detail-") as tmp:
             work = Path(tmp)
             (work / "input").write_bytes(data)
-            spec = {"page_index": page_index, "region": list(region) if region else None}
+            spec = {
+                "page_index": page_index,
+                "region": list(region) if region else None,
+                "transform": check_transform(transform) if transform else None,
+            }
             (work / "detail.json").write_text(json.dumps(spec), encoding="utf8")
             env = {k: v for k, v in os.environ.items() if k in ("PATH", "SYSTEMROOT", "TEMP", "TMP")}
             try:
@@ -414,8 +534,11 @@ def _detail_worker(work: Path, kind: str) -> None:
     from PIL import Image, ImageOps
 
     spec = json.loads((work / "detail.json").read_text(encoding="utf8"))
+    transform = spec.get("transform")
     region = spec["region"]
     limit = DETAIL_REGION_LONG_EDGE_PX if region else DETAIL_PAGE_LONG_EDGE_PX
+    if transform and (region or transform.get("crop")):  # TRANSFORMS-01: the same place on the untouched original
+        region = to_source(region or [0.0, 0.0, 1.0, 1.0], transform)
     data = (work / "input").read_bytes()
     if kind == "application/pdf":
         import pypdfium2 as pdfium
@@ -438,6 +561,8 @@ def _detail_worker(work: Path, kind: str) -> None:
                     image = page.render(scale=scale, crop=crop, may_draw_forms=False).to_pil()
                 finally:
                     page.close()
+                if transform:
+                    image = apply_transform(image, transform, crop=False)
                 image.convert("RGB").save(work / "detail.png", format="PNG")
                 result = {"width": image.width, "height": image.height, "scale": scale}
         finally:
@@ -462,10 +587,51 @@ def _detail_worker(work: Path, kind: str) -> None:
             upright = upright.resize(
                 (max(1, round(upright.width * scale)), max(1, round(upright.height * scale))), Image.Resampling.LANCZOS
             )
+        if transform:
+            upright = apply_transform(upright, transform, crop=False)
         out = upright.convert("L" if upright.mode in ("1", "L", "LA", "I", "I;16") else "RGB")
         out.save(work / "detail.png", format="PNG")
         result = {"width": out.width, "height": out.height, "scale": scale}
     (work / "result.json").write_text(json.dumps(result), encoding="utf8")
+
+
+def _page_worker(work: Path, kind: str) -> None:
+    """TRANSFORMS-01: re-render one logical page from the original with its transform: preview and quality checks."""
+    import warnings
+
+    from PIL import Image, ImageOps
+
+    spec = json.loads((work / "page.json").read_text(encoding="utf8"))
+    data = (work / "input").read_bytes()
+    if kind == "application/pdf":
+        import pypdfium2 as pdfium
+
+        doc = pdfium.PdfDocument(data)
+        try:
+            idx = int(spec["page_index"]) - 1
+            if not 0 <= idx < len(doc):
+                (work / "result.json").write_text(json.dumps({"rejected": "That page doesn't exist."}), encoding="utf8")
+                return
+            page = doc[idx]
+            try:
+                w_pt, h_pt = page.get_size()
+                image = page.render(scale=min(PREVIEW_LONG_EDGE_PX / max(w_pt, h_pt), 300 / 72), may_draw_forms=False)
+                upright = image.to_pil()
+            finally:
+                page.close()
+        finally:
+            doc.close()
+    else:
+        Image.MAX_IMAGE_PIXELS = MAX_IMAGE_PIXELS
+        warnings.simplefilter("error", Image.DecompressionBombWarning)
+        with Image.open(io.BytesIO(data), formats=["JPEG"] if kind == "image/jpeg" else ["PNG"]) as im:
+            im.load()
+            upright = ImageOps.exif_transpose(im)
+    shown = apply_transform(upright, spec["transform"])
+    png, w, h = _preview(shown)
+    (work / "page.png").write_bytes(png)
+    quality = _quality(shown, photo=kind != "application/pdf")
+    (work / "result.json").write_text(json.dumps({"width": w, "height": h, "quality": quality}), encoding="utf8")
 
 
 def _worker(work: Path, kind: str) -> None:
@@ -481,5 +647,8 @@ if __name__ == "__main__":
     if len(sys.argv) > 3 and sys.argv[3] == "detail":
         _limit_resources()
         _detail_worker(Path(sys.argv[1]), sys.argv[2])
+    elif len(sys.argv) > 3 and sys.argv[3] == "page":
+        _limit_resources()
+        _page_worker(Path(sys.argv[1]), sys.argv[2])
     else:
         _worker(Path(sys.argv[1]), sys.argv[2])

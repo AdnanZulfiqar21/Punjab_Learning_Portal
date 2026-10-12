@@ -187,6 +187,26 @@ test("a photo with glare is accepted with a retake suggestion", async ({ page })
   await expect(page.getByText("A page you don't choose for any answer isn't sent for marking.")).toBeVisible();
 });
 
+// W03.S1.T3 (TRANSFORMS-01): a learner turns a page and clarifies it before submitting; the original is kept.
+test("a page can be turned and clarified before submitting", async ({ page }) => {
+  await newLearner(page);
+  await page.goto("/practice/written?grade=11&subject=biology");
+  await page.getByRole("group", { name: "Chapters" }).getByRole("checkbox").first().check();
+  await page.getByRole("button", { name: "Start written test" }).click();
+  await expect(page).toHaveURL(/:\d+\/practice\/written\/[0-9a-f-]{36}$/, AUTH);
+  await page.getByLabel("Add photos or a PDF").setInputFiles("e2e/fixtures/synthetic-page.png");
+  const preview = page.getByRole("img", { name: "Page 1", exact: true });
+  await expect(preview).toBeVisible(AUTH);
+  const size = () => preview.evaluate((el: HTMLImageElement) => [el.naturalWidth, el.naturalHeight]);
+  await expect.poll(async () => (await size())[0]).toBeGreaterThan(0);
+  const [w, h] = await size();
+  const adjust = page.getByRole("group", { name: "Adjust page 1" });
+  await adjust.getByRole("button", { name: "Turn right" }).click();
+  await expect.poll(size, AUTH).toEqual([h, w]); // a fresh preview, turned
+  await adjust.getByLabel("Clearer contrast").click(); // shows the saved state once the fresh preview is ready
+  await expect(adjust.getByLabel("Clearer contrast")).toBeChecked(AUTH);
+});
+
 test("a PDF becomes one page per PDF page, and each page maps on its own", async ({ page }) => {
   await newLearner(page);
   await page.goto("/practice/written?grade=11&subject=biology");

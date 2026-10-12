@@ -799,9 +799,10 @@ def case_page_detail(
     region: Annotated[
         str | None, Query(pattern=r"^[0-9.]+,[0-9.]+,[0-9.]+,[0-9.]+$", description="x,y,w,h as page fractions")
     ] = None,
+    original: Annotated[bool, Query(description="The untouched original, without the learner's turn or trim")] = False,
 ) -> Response:
     box = tuple(float(v) for v in region.split(",")) if region else None
-    png, provenance = review.staff_page_detail(db, who, case_id, page_id, box)  # type: ignore[arg-type]
+    png, provenance = review.staff_page_detail(db, who, case_id, page_id, box, original)  # type: ignore[arg-type]
     return Response(
         content=png,
         media_type="image/png",
