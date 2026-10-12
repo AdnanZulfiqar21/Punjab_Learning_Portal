@@ -353,28 +353,28 @@ def search(
 
 
 # ------------------------------------------------------------------ studio: curating the alias table
-class AliasForm(BaseModel):
+class SearchTermForm(BaseModel):
     language: Literal["en", "ur", "roman_ur"]
     text: str = Field(min_length=1, max_length=80)
 
 
-class AliasGroupIn(BaseModel):
+class SearchTermGroupIn(BaseModel):
     grade: int = Field(ge=11, le=12)
     subject: str = Field(min_length=2, max_length=40)
-    forms: list[AliasForm] = Field(min_length=2, max_length=12)
+    forms: list[SearchTermForm] = Field(min_length=2, max_length=12)
     source_ref: str = Field(min_length=3, max_length=300, description="Where in the owner's material these come from")
 
 
-class AliasRetireIn(BaseModel):
+class SearchTermRetireIn(BaseModel):
     reason: str = Field(min_length=3, max_length=300)
 
 
-class AliasGroupOut(BaseModel):
+class SearchTermGroupOut(BaseModel):
     id: uuid.UUID
     grade: int
     subject: str
     status: Literal["proposed", "approved", "retired"]
-    forms: list[AliasForm]
+    forms: list[SearchTermForm]
     source_ref: str
     proposed_at: datetime
     approved_at: datetime | None
@@ -388,17 +388,17 @@ def _perms(db: Session, who: Principal, grade: int, subject: str) -> set[Permiss
     return set(permissions_for(workflow.roles_in_scope(db, who.user.id, grade, subject)))
 
 
-def _out(db: Session, who: Principal, g: SearchAliasGroup) -> AliasGroupOut:
+def _out(db: Session, who: Principal, g: SearchAliasGroup) -> SearchTermGroupOut:
     perms = _perms(db, who, g.grade_number, g.subject_code)
     forms = db.scalars(
         select(SearchAlias).where(SearchAlias.group_id == g.id).order_by(SearchAlias.language, SearchAlias.text)
     )
-    return AliasGroupOut(
+    return SearchTermGroupOut(
         id=g.id,
         grade=g.grade_number,
         subject=g.subject_code,
         status=g.status,  # type: ignore[arg-type]
-        forms=[AliasForm(language=f.language, text=f.text) for f in forms],  # type: ignore[arg-type]
+        forms=[SearchTermForm(language=f.language, text=f.text) for f in forms],  # type: ignore[arg-type]
         source_ref=g.source_ref,
         proposed_at=g.proposed_at,
         approved_at=g.approved_at,
@@ -443,7 +443,7 @@ def _scoped_group(db: Session, who: Principal, group_id: uuid.UUID, permission: 
 
 @studio.get(
     "/search-terms",
-    response_model=list[AliasGroupOut],
+    response_model=list[SearchTermGroupOut],
     summary="Search term groups (English, Urdu, Roman Urdu) for one class and subject (content staff in scope)",
 )
 def list_terms(
@@ -451,7 +451,7 @@ def list_terms(
     who: Member,
     grade: Annotated[int, Query(ge=11, le=12)],
     subject: Annotated[str, Query(min_length=2, max_length=40)],
-) -> list[AliasGroupOut]:
+) -> list[SearchTermGroupOut]:
     subj = normalise_subject(subject)
     if not _perms(db, who, grade, subj) & {
         Permission.draft_content,
@@ -469,11 +469,11 @@ def list_terms(
 
 @studio.post(
     "/search-terms",
-    response_model=AliasGroupOut,
+    response_model=SearchTermGroupOut,
     status_code=201,
     summary="Propose a group of equivalent search terms from the owner's material (authors in scope; audited)",
 )
-def propose_terms(db: DB, who: Member, body: AliasGroupIn) -> AliasGroupOut:
+def propose_terms(db: DB, who: Member, body: SearchTermGroupIn) -> SearchTermGroupOut:
     subj = normalise_subject(body.subject)
     if db.scalar(select(Subject.id).where(Subject.code == subj, Subject.active)) is None:
         raise NotFound("Subject not found.")
@@ -522,10 +522,10 @@ def propose_terms(db: DB, who: Member, body: AliasGroupIn) -> AliasGroupOut:
 
 @studio.post(
     "/search-terms/{group_id}/approve",
-    response_model=AliasGroupOut,
+    response_model=SearchTermGroupOut,
     summary="Approve a proposed group so search uses it (a subject reviewer in scope who didn't propose it; audited)",
 )
-def approve_terms(db: DB, who: Member, group_id: uuid.UUID) -> AliasGroupOut:
+def approve_terms(db: DB, who: Member, group_id: uuid.UUID) -> SearchTermGroupOut:
     g = _scoped_group(db, who, group_id, Permission.review_content)
     if g.status != "proposed":
         raise Conflict(f"This group is {g.status}; only a proposed group can be approved.")
@@ -545,10 +545,10 @@ def approve_terms(db: DB, who: Member, group_id: uuid.UUID) -> AliasGroupOut:
 
 @studio.post(
     "/search-terms/{group_id}/retire",
-    response_model=AliasGroupOut,
+    response_model=SearchTermGroupOut,
     summary="Stop using a group in search, with a reason (subject reviewers in scope; audited; never deleted)",
 )
-def retire_terms(db: DB, who: Member, group_id: uuid.UUID, body: AliasRetireIn) -> AliasGroupOut:
+def retire_terms(db: DB, who: Member, group_id: uuid.UUID, body: SearchTermRetireIn) -> SearchTermGroupOut:
     g = _scoped_group(db, who, group_id, Permission.review_content)
     if g.status == "retired":
         raise Conflict("This group is already retired.")

@@ -15,8 +15,10 @@ export function QuerySync({ formId }: { formId: string }) {
     if (!form) return;
     const q = form.elements.namedItem("q") as HTMLInputElement | null;
     const grade = form.elements.namedItem("grade") as HTMLSelectElement | null;
+    const subject = form.elements.namedItem("subject") as HTMLSelectElement | null;
     if (q && !q.value) q.value = params.get("q") ?? "";
     if (grade && !grade.value) grade.value = params.get("grade") ?? "";
+    if (subject && !subject.value) subject.value = params.get("subject") ?? "";
   }, [formId, params]);
   return null;
 }
