@@ -31,7 +31,7 @@ export async function requireSupportStaff(next: string): Promise<{ me: Me; token
   return { ...user, isSupport: user.me.roles.includes("support") };
 }
 
-export type QueueFilters = { state?: string; availability?: string; grade?: string; subject?: string; mine?: string };
+export type QueueFilters = { state?: string; availability?: string; grade?: string; subject?: string; mine?: string; family?: string };
 
 export async function getQueue(token: string, filters: QueueFilters): Promise<StudioItemSummary[]> {
   const params = new URLSearchParams();

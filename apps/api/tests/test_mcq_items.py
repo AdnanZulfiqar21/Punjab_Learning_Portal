@@ -176,6 +176,9 @@ def test_quarantine_levels_and_variant_families(client: TestClient, db: Session,
 
     variant = _new_mcq(client, bio["author"], str(chapter.id), family_of=item["id"])
     assert variant["family_id"] == item["family_id"] and variant["id"] != item["id"]
+    # P08.S3.T2: the studio lists a question's family, so authors and reviewers see every variant together.
+    family = client.get("/v1/studio/queue", params={"family": item["family_id"]}, headers=bio["author"].headers).json()
+    assert {f["id"] for f in family} == {item["id"], variant["id"]}
     other_chapter, _ = _chapter(db, 11, "chemistry")
     chem_author = Staff(client, db, ["content_author"], {"grades": [11], "subjects": ["chemistry"]})
     cross = client.post(

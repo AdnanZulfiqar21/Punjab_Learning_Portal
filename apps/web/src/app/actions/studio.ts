@@ -137,6 +137,25 @@ export async function createRubric(questionId: string, title: string): Promise<{
   redirect(`/studio/items/${res.item.id}`);
 }
 
+/** P08.S3.T2: start a variant of this question (same class, subject and topic; its own key, explanation and review). */
+export async function createQuestionVariant(
+  questionId: string,
+  kind: "mcq" | "written",
+  chapterId: string,
+  topicId: string | null,
+  title: string,
+): Promise<{ error?: string } | undefined> {
+  const res = await call("/v1/studio/items", "POST", {
+    kind,
+    chapter_id: chapterId,
+    ...(topicId ? { topic_id: topicId } : {}),
+    family_of: questionId,
+    title: `Variant: ${title}`.slice(0, 200),
+  });
+  if (!res.ok) return { error: [res.error, ...(res.errors ?? [])].join(" ") };
+  redirect(`/studio/items/${res.item.id}`);
+}
+
 /** P07.S1.T2: start a language variant of this lesson concept (its own draft, its own review). */
 export async function createLanguageVariant(
   lessonId: string,
