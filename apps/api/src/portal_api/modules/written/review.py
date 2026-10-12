@@ -901,6 +901,7 @@ def decide(
     if release:
         from portal_api.modules.access import service as access
 
+        emit_released(db, sv)  # WRITTEN-SIGNALS-01
         # Allowance (R05): scored questions consume their units once; unavailable ones return theirs; pending hold.
         access.consume(db, case.attempt_id, [int(p) for p in scored])
         access.release_questions(
@@ -1260,11 +1261,39 @@ def publish_resolution(
     )
     db.add(sv)
     db.flush()
+    emit_released(db, sv)  # WRITTEN-SIGNALS-01
     _sync_pending(db, None, set(pending), status, _now(db), attempt_id=attempt_id)
     if method == "SYSTEM":  # a deadline resolution the learner didn't make themselves
         db.flush()
         _notify_release(db, attempt_id, sv, sv.completeness, {})
     return sv
+
+
+def emit_released(db: Session, sv: WrittenScoreVersion) -> None:
+    """W07.S2.T3 (WRITTEN-SIGNALS-01): record a released written result as a typed event, in the releasing transaction.
+    Units stay units; pending and unavailable questions are counted, never scored as zero."""
+    from portal_api.modules.analytics.events import emit
+
+    attempt = db.get(WrittenAttempt, sv.attempt_id)
+    case = db.get(WrittenReviewCase, sv.case_id)
+    if attempt is None:
+        return
+    status = [s.get("status") for s in (sv.question_status or {}).values()]
+    emit(
+        db,
+        "written.result_released",
+        key=str(sv.id),
+        user_id=attempt.user_id,
+        attempt_id=str(sv.attempt_id),
+        version=int(sv.version),
+        case_kind=str(case.case_kind if case is not None else sv.case_kind),
+        completeness=str(sv.completeness or "complete"),
+        scored_questions=status.count("scored"),
+        pending_questions=status.count("pending"),
+        unavailable_questions=status.count("unavailable"),
+        earned_units=int(sv.total_units or 0),
+        scored_max_units=int(sv.scored_max_units or 0),
+    )
 
 
 def released_result(db: Session, attempt_id: uuid.UUID) -> WrittenScoreVersion | None:

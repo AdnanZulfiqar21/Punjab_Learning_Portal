@@ -131,6 +131,48 @@ DICTIONARY: dict[str, EventSpec] = {
             "correction": Prop(bool, "True when created by a reviewed correction."),
         },
     ),
+    # W07.S2.T3 (WRITTEN-SIGNALS-01): written practice has its own typed events. Marks stay as units out of a maximum
+    # (partial credit is never turned into right/wrong), pending and unavailable questions are counted apart and add
+    # no units, and none of this feeds `evidence_rules_v2`, which is defined over binary MCQ responses only.
+    "written.started": EventSpec(
+        1,
+        "A learner started a written practice test.",
+        "server",
+        True,
+        {
+            "attempt_id": Prop(str, "The written attempt ID."),
+            "question_count": Prop(int, "Questions in the test."),
+        },
+    ),
+    "written.submitted": EventSpec(
+        1,
+        "A learner submitted a written answer script (sealed once).",
+        "server",
+        True,
+        {
+            "attempt_id": Prop(str, "The written attempt ID."),
+            "pages": Prop(int, "Pages submitted for marking."),
+            "answered_parts": Prop(int, "Question parts mapped to at least one page."),
+            "unanswered_parts": Prop(int, "Question parts the learner declared unanswered."),
+        },
+    ),
+    "written.result_released": EventSpec(
+        1,
+        "A teacher-marked written result was released (first marking, recheck, completion or rubric correction).",
+        "server",
+        True,
+        {
+            "attempt_id": Prop(str, "The written attempt ID."),
+            "version": Prop(int, "Score version number."),
+            "case_kind": Prop(str, "Which review released it (e.g. initial, recheck, completion)."),
+            "completeness": Prop(str, "complete, or partial while questions are pending or unavailable."),
+            "scored_questions": Prop(int, "Questions with a mark."),
+            "pending_questions": Prop(int, "Questions still waiting for a teacher or the learner; no mark yet."),
+            "unavailable_questions": Prop(int, "Questions that couldn't be marked; no mark, allowance returned."),
+            "earned_units": Prop(int, "Units earned on scored questions (partial credit kept as units)."),
+            "scored_max_units": Prop(int, "Units available on scored questions."),
+        },
+    ),
     "trial.decided": EventSpec(
         1,
         "A free-trial request was decided.",

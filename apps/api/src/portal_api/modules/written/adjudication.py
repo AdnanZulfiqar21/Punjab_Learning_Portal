@@ -1014,6 +1014,7 @@ def _publish_carry_forward(
     )
     db.add(sv)
     db.flush()
+    review.emit_released(db, sv)  # WRITTEN-SIGNALS-01
     return sv
 
 
