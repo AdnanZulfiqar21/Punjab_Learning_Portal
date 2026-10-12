@@ -25,6 +25,10 @@ class InvalidToken(Exception):
     """The presented credential is missing, malformed, expired or from an untrusted issuer."""
 
 
+class ProviderUnreachable(Exception):
+    """The identity provider's signing keys could not be fetched (DEGRADATION-01). Says nothing about the token."""
+
+
 @dataclass(frozen=True)
 class Claims:
     issuer: str
@@ -109,6 +113,8 @@ def verify(token: str, settings: Settings | None = None) -> Claims:
     elif s.oidc_issuer and issuer == s.oidc_issuer and s.jwks_url:
         try:
             key = _jwks_client(s.jwks_url).get_signing_key_from_jwt(token).key
+        except jwt.PyJWKClientConnectionError as e:
+            raise ProviderUnreachable(str(e)) from e  # an outage, not a bad sign-in: retry, don't sign out
         except jwt.PyJWTError as e:
             raise InvalidToken("unknown signing key") from e
         audience = s.oidc_audience or ""

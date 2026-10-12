@@ -14,7 +14,7 @@ from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.orm import Session
 
 from portal_api.db import get_session
-from portal_api.errors import Forbidden, Unauthorized
+from portal_api.errors import Forbidden, Unauthorized, Unavailable
 from portal_api.modules.identity import sessions, tokens
 from portal_api.modules.identity.models import AppUser, StaffRoleGrant
 from portal_api.modules.identity.permissions import MFA_REQUIRED, Permission, Role, permissions_for
@@ -69,6 +69,10 @@ def current_principal(request: Request, db: Annotated[Session, Depends(get_sessi
         claims = tokens.verify(token)
     except tokens.InvalidToken as e:
         raise Unauthorized(EXPIRED) from e
+    except tokens.ProviderUnreachable as e:
+        raise Unavailable(
+            "We can't confirm your sign-in right now. Please try again in a moment.", code_reason="IDENTITY_UNAVAILABLE"
+        ) from e
     user = db.scalar(select(AppUser).where(AppUser.issuer == claims.issuer, AppUser.subject == claims.subject))
     if user is None:
         # First authenticated request from a verified identity creates the application account (no trial is granted

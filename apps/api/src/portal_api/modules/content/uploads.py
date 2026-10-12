@@ -34,7 +34,7 @@ from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped, Session, mapped_column
 
 from portal_api.db import Base, get_session
-from portal_api.errors import Conflict, NotFound, TooLarge, Unprocessable
+from portal_api.errors import Conflict, NotFound, StorageUnavailable, TooLarge, Unprocessable
 from portal_api.modules.audit.models import record
 from portal_api.modules.identity.deps import Principal, require
 from portal_api.modules.identity.permissions import Permission
@@ -142,10 +142,14 @@ def write_chunk(db: Session, who: Principal, upload_id: uuid.UUID, offset: int, 
         )
     if offset + len(data) > up.bytes:
         raise Unprocessable("This is more data than the file size given when the upload started.")
-    with _part(up.id).open("r+b") as f:
-        f.seek(offset)
-        f.write(data)
-        f.truncate()
+    try:
+        with _part(up.id).open("r+b") as f:
+            f.seek(offset)
+            f.write(data)
+            f.truncate()
+    except OSError as e:
+        db.rollback()  # DEGRADATION-01: the resume point stays where it was; send the same chunk again
+        raise StorageUnavailable("We couldn't store this part of the file. Send the same part again shortly.") from e
     up.received = offset + len(data)
     up.updated_at = func.now()
     if up.received < up.bytes:

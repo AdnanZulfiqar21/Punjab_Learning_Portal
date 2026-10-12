@@ -41,7 +41,7 @@ from sqlalchemy.dialects.postgresql import JSONB, UUID
 from sqlalchemy.orm import Mapped, Session, mapped_column
 
 from portal_api.db import Base
-from portal_api.errors import Forbidden, NotFound, TooLarge, Unprocessable
+from portal_api.errors import Forbidden, NotFound, StorageUnavailable, TooLarge, Unprocessable
 from portal_api.modules.audit.models import record
 from portal_api.modules.identity.deps import Principal
 
@@ -110,11 +110,23 @@ def _root() -> Path:
 
 
 def _write(key: str, data: bytes) -> None:
-    path = _root() / key
-    path.parent.mkdir(parents=True, exist_ok=True)
-    tmp = path.with_suffix(path.suffix + ".part")
-    tmp.write_bytes(data)
-    tmp.replace(path)  # atomic: a reader never sees half a file
+    try:
+        path = _root() / key
+        path.parent.mkdir(parents=True, exist_ok=True)
+        tmp = path.with_suffix(path.suffix + ".part")
+        tmp.write_bytes(data)
+        tmp.replace(path)  # atomic: a reader never sees half a file
+    except OSError as e:
+        raise StorageUnavailable() from e  # DEGRADATION-01: a retryable 503, nothing recorded
+
+
+def _remove(key: str) -> None:
+    """Take back a file whose version row was never committed (a failed upload)."""
+    try:
+        (_root() / key).unlink(missing_ok=True)
+        (_root() / key).with_suffix(".part").unlink(missing_ok=True)
+    except OSError:
+        pass  # the retention sweep only keeps files that a committed version references
 
 
 def read(key: str) -> bytes:
@@ -236,12 +248,19 @@ def upload(db: Session, who: Principal, asset_id: uuid.UUID, data: bytes, proven
         k: str(v)[:500] for k, v in provenance.items() if k in ("source", "author", "licence", "tool")
     }
     version.created_by = who.user.id
-    _write(version.master_key, data)
-    _set_delivery(version, derived["delivery"], derived["delivery_type"])
-    db.add(version)
-    record(db, actor=who.user.id, action="asset.version_uploaded", target_type="content_asset_version",
-           target_id=str(version.id), details={"number": number, "sha256": version.master_sha256})  # fmt: skip
-    db.commit()
+    try:
+        _write(version.master_key, data)
+        _set_delivery(version, derived["delivery"], derived["delivery_type"])
+        db.add(version)
+        record(db, actor=who.user.id, action="asset.version_uploaded", target_type="content_asset_version",
+               target_id=str(version.id), details={"number": number, "sha256": version.master_sha256})  # fmt: skip
+        db.commit()
+    except BaseException:
+        db.rollback()  # DEGRADATION-01: no version row, and no file left without one
+        for key in (version.master_key, version.delivery_key):
+            if key:
+                _remove(key)
+        raise
     return version
 
 

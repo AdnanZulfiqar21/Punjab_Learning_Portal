@@ -14,10 +14,11 @@ from functools import lru_cache
 from pathlib import Path
 
 from portal_api.config import get_settings
+from portal_api.errors import StorageUnavailable
 
 
-class EvidenceStoreUnavailable(RuntimeError):
-    pass
+class EvidenceStoreUnavailable(StorageUnavailable):
+    """The evidence store is not connected or can't take a write (DEGRADATION-01): a retryable 503, never a 500."""
 
 
 @dataclass(frozen=True)
@@ -40,11 +41,23 @@ class LocalEvidenceStore:
 
     def put(self, key: str, data: bytes) -> Stored:
         path = self._path(key)
-        path.parent.mkdir(parents=True, exist_ok=True)
-        # Exclusive create: an existing object is never replaced.
-        fd = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL | getattr(os, "O_BINARY", 0), 0o600)
-        with os.fdopen(fd, "wb") as f:
-            f.write(data)
+        try:
+            path.parent.mkdir(parents=True, exist_ok=True)
+        except OSError as e:
+            raise EvidenceStoreUnavailable() from e
+        try:
+            # Exclusive create: an existing object is never replaced.
+            fd = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL | getattr(os, "O_BINARY", 0), 0o600)
+        except FileExistsError:
+            raise  # a key collision is a bug, not an outage
+        except OSError as e:
+            raise EvidenceStoreUnavailable() from e
+        try:
+            with os.fdopen(fd, "wb") as f:
+                f.write(data)
+        except OSError as e:
+            path.unlink(missing_ok=True)  # never leave half an object behind
+            raise EvidenceStoreUnavailable() from e
         return Stored(key=key, sha256=hashlib.sha256(data).hexdigest(), size=len(data))
 
     def discard_uncommitted(self, key: str) -> None:
@@ -81,7 +94,7 @@ class LocalEvidenceStore:
 def get_store() -> LocalEvidenceStore:
     s = get_settings()
     if s.evidence_store != "local":
-        raise EvidenceStoreUnavailable("Private object storage isn't connected yet (BLOCKERS B03).")
+        raise EvidenceStoreUnavailable("Private file storage isn't connected yet. Please try again later.")
     root = Path(s.evidence_dir)
     if not root.is_absolute():
         root = Path(__file__).resolve().parents[4] / root  # apps/api/<evidence_dir>

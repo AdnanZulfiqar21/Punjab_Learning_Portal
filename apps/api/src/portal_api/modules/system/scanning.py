@@ -18,7 +18,7 @@ import struct
 from dataclasses import dataclass
 
 from portal_api.config import get_settings
-from portal_api.errors import AppError, Unprocessable
+from portal_api.errors import Unavailable, Unprocessable
 
 CHUNK = 64 * 1024
 
@@ -29,9 +29,9 @@ class Verdict:
     signature: str | None = None
 
 
-class ScannerUnavailable(AppError):
-    status = 503
+class ScannerUnavailable(Unavailable):
     code = "SCANNER_UNAVAILABLE"
+    retry_after = 60
 
 
 class ClamdScanner:
