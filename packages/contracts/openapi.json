@@ -8111,6 +8111,57 @@
         "title": "OverviewChapter",
         "type": "object"
       },
+      "PackOut": {
+        "properties": {
+          "content": {
+            "description": "Canonical JSON (lessons, questions, passages); its UTF-8 SHA-256 is in the manifest",
+            "title": "Content",
+            "type": "string"
+          },
+          "manifest": {
+            "additionalProperties": true,
+            "description": "Format and schema versions, expiry, counts, files, SHA-256 and size",
+            "title": "Manifest",
+            "type": "object"
+          }
+        },
+        "required": [
+          "manifest",
+          "content"
+        ],
+        "title": "PackOut",
+        "type": "object"
+      },
+      "PackStatusOut": {
+        "properties": {
+          "expires_at": {
+            "format": "date-time",
+            "title": "Expires At",
+            "type": "string"
+          },
+          "includes_premium": {
+            "title": "Includes Premium",
+            "type": "boolean"
+          },
+          "keep": {
+            "description": "False: delete the pack from the device (plan ended or no longer covers it)",
+            "title": "Keep",
+            "type": "boolean"
+          },
+          "pack_format_version": {
+            "title": "Pack Format Version",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "keep",
+          "includes_premium",
+          "expires_at",
+          "pack_format_version"
+        ],
+        "title": "PackStatusOut",
+        "type": "object"
+      },
       "PageOut": {
         "description": "One logical page: a photo, or one page of a PDF. Mapping and the page cap count these.",
         "properties": {
@@ -18989,6 +19040,106 @@
         "tags": [
           "identity",
           "sessions"
+        ]
+      }
+    },
+    "/v1/me/study-packs/{chapter_id}": {
+      "get": {
+        "operationId": "study_pack_v1_me_study_packs__chapter_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "chapter_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Chapter Id",
+              "type": "string"
+            }
+          },
+          {
+            "description": "The newest pack format this app reads",
+            "in": "query",
+            "name": "format",
+            "required": false,
+            "schema": {
+              "default": 1,
+              "description": "The newest pack format this app reads",
+              "maximum": 100,
+              "minimum": 1,
+              "title": "Format",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PackOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "An offline study pack for one chapter (lessons you may read; practice-pool questions with released keys)",
+        "tags": [
+          "study-packs"
+        ]
+      }
+    },
+    "/v1/me/study-packs/{chapter_id}/status": {
+      "get": {
+        "operationId": "study_pack_status_v1_me_study_packs__chapter_id__status_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "chapter_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Chapter Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PackStatusOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Whether a downloaded pack may be kept, and until when (check when online)",
+        "tags": [
+          "study-packs"
         ]
       }
     },

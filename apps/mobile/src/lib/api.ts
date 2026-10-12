@@ -40,6 +40,8 @@ import type {
   Inbox,
   SupportTicket,
   TrialDecision,
+  StudyPack,
+  StudyPackStatus,
   TrialDevice,
   WrittenAttempt,
   WrittenAvailability,
@@ -81,6 +83,11 @@ export function attemptAsset(attemptId: string, versionId: string, token: string
 }
 
 /** A lesson's diagram or handout (P07.S1.T1): only files named by its published version, under its access tier. */
+/** P13.S3.T1: an absolute API URL for a path the server returned (e.g. a study pack's file list). */
+export function apiUrl(path: string): string {
+  return `${origin()}${path}`;
+}
+
 export function lessonAsset(lessonId: string, versionId: string, token: string | null): { uri: string; headers?: Record<string, string> } {
   const uri = `${origin()}/v1/lessons/${encodeURIComponent(lessonId)}/assets/${encodeURIComponent(versionId)}`;
   return token ? { uri, headers: { Authorization: `Bearer ${token}` } } : { uri };
@@ -203,6 +210,10 @@ export const api = {
   authorizeDevice: (token: string) =>
     request<TrialDecision>("/v1/me/trial/devices", { method: "POST", token, body: { surface: SURFACE, proof: {}, label: deviceName() } }),
   trialDevices: (token: string, signal?: AbortSignal) => request<TrialDevice[]>("/v1/me/trial/devices", { token, signal }),
+  studyPack: (token: string, chapterId: string, format: number) =>
+    request<StudyPack>(`/v1/me/study-packs/${encodeURIComponent(chapterId)}?format=${format}`, { token, signal: AbortSignal.timeout(60_000) }),
+  studyPackStatus: (token: string, chapterId: string) =>
+    request<StudyPackStatus>(`/v1/me/study-packs/${encodeURIComponent(chapterId)}/status`, { token }),
   removeTrialDevice: (token: string, id: string) =>
     request<void>(`/v1/me/trial/devices/${encodeURIComponent(id)}`, { method: "DELETE", token }),
 
