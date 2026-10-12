@@ -81,6 +81,66 @@ def _sha(path: Path) -> str | None:
     return hashlib.sha256(path.read_bytes()).hexdigest() if path.exists() else None
 
 
+def _mobile_identity() -> dict[str, Any]:
+    """P19.S4.T3: the native app version and per-variant application IDs, read from the app's own configuration."""
+    config = REPO / "apps" / "mobile" / "app.config.ts"
+    if not config.exists():
+        return {"version": None, "ids": {}}
+    text_ = config.read_text(encoding="utf-8")
+    base = re.search(r'const BASE_ID = "([^"]+)"', text_)
+    version = re.search(r'\bversion: "([^"]+)"', text_)
+    ids: dict[str, str] = {}
+    if base:
+        for variant, suffix in re.findall(r"(development|preview|production): `\$\{BASE_ID\}([^`]*)`", text_):
+            ids[variant] = base.group(1) + suffix
+        if re.search(r"production: BASE_ID\b", text_):
+            ids["production"] = base.group(1)
+    return {"version": version.group(1) if version else None, "ids": ids}
+
+
+def _open_blockers() -> list[str]:
+    """P19.S4.T3: known limitations of this build: every open external blocker, by ID and first words."""
+    path = REPO / "docs" / "project" / "BLOCKERS.md"
+    if not path.exists():
+        return []
+    out = []
+    for line in path.read_text(encoding="utf-8").splitlines():
+        m = re.match(r"^\| (B\d{2}) \| (.+?) \| (.+?) \|", line)
+        if m and "RESOLVED" not in m.group(3).upper():
+            out.append(f"{m.group(1)}: {re.sub(r'[*`]', '', m.group(2))[:120]}")
+    return out
+
+
+def _live_state() -> dict[str, Any]:
+    """P19.S4.T3: what was live when the candidate was frozen, when a database is reachable: an ID for the published
+    content set (live items and their published versions; learners read content at request time) and the operators'
+    feature-switch and rollout overrides (anything absent follows `feature_switches` / `feature_rollouts`)."""
+    try:
+        from sqlalchemy import create_engine
+        from sqlalchemy import text as sql
+        from sqlalchemy.pool import NullPool
+
+        from portal_api.config import get_settings
+
+        engine = create_engine(get_settings().database_url, poolclass=NullPool, connect_args={"connect_timeout": 3})
+        with engine.connect() as conn:
+            rows = conn.execute(
+                sql(
+                    "select id::text, coalesce(published_version_id::text, '') from content_item "
+                    "where availability = 'live' order by id"
+                )
+            ).all()
+            switches: dict[str, bool] = {k: v for k, v in conn.execute(sql("select key, enabled from feature_switch"))}
+            rollouts: dict[str, int] = {k: v for k, v in conn.execute(sql("select key, percent from feature_rollout"))}
+        engine.dispose()
+    except Exception:  # no database here (e.g. a build step): recorded at deployment instead
+        return {"content_release_id": None, "runtime_overrides": None}
+    return {
+        "content_release_id": hashlib.sha256(json.dumps([list(r) for r in rows]).encode()).hexdigest(),
+        "runtime_overrides": {"switches": switches, "rollouts": rollouts},
+    }
+
+
 def manifest() -> dict[str, Any]:
     from portal_api import budget
     from portal_api.main import create_app
@@ -112,6 +172,12 @@ def manifest() -> dict[str, Any]:
         # BUDGET-01: the planned §5.8 connection budget this build was sized for (planning numbers, not measured).
         "connection_budget": budget.totals(),
         "lockfiles": {"uv.lock": _sha(API_DIR / "uv.lock"), "pnpm-lock.yaml": _sha(REPO / "pnpm-lock.yaml")},
+        # P19.S4.T3 (RELEASE-CANDIDATE-01)
+        "mobile_app": _mobile_identity(),
+        "ota_runtime_version": None,  # no over-the-air updates are configured; store builds wait on B07
+        "image_digests": None,  # container images are built and pushed with hosting (B03)
+        **_live_state(),
+        "known_limitations": _open_blockers(),
     }
 
 

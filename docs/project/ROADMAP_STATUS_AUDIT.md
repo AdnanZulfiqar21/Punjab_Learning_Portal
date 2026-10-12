@@ -51,7 +51,7 @@ For the tasks marked **Implemented**, the cited tests were confirmed to exist. T
 | P13.S4.T2 OTA update behaviour | CLIENTS-01 minimums and mock-window protection | `expo-updates` runtime-version pinning; store builds (B07) |
 | P19.S2.T3 Manual accessibility | Automated axe, text size, reduced motion, captions | A manual screen-reader and 200 % zoom review by a person |
 | P19.S3.T4 Content compatibility | Oldest-client and pack-format tests | One end-to-end AC47 scenario (new block type with an old client, an old pack and an active attempt) |
-| P19.S4.T3 Freeze release candidate | RELEASE-01 manifest | Content-release ID, rollout snapshot and known limitations (doable now); image digests (B03) and native builds (B07) |
+| P19.S4.T3 Freeze release candidate | RELEASE-01 manifest; app IDs, content-release ID, rollout snapshot and known limitations (RELEASE-CANDIDATE-01) | Image digests (B03) and native builds (B07) |
 
 ## Blocked on external inputs
 

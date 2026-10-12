@@ -15,6 +15,7 @@ Three separately evidenced states (roadmap §2.3). Nothing is ticked without cur
 
 ## Public Launch Ready: NOT_READY
 - [ ] Exact release manifest, live providers (identity, media, payments, stores), staffed support
+  - The manifest (`python -m portal_api.release manifest`, RELEASE-CANDIDATE-01) must be produced against the deployment database so `content_release_id` and `runtime_overrides` are not null, with image digests (B03) and the native build's OTA runtime (B07) filled in.
 - [ ] Store decisions, P23/W11 staged live evidence, owner launch authorization
 - [ ] Production web sets `PORTAL_PUBLIC_ORIGIN`; `robots.txt` and `sitemap.xml` checked on the live host (PUBLIC-SITE-01)
 
