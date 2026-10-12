@@ -12,6 +12,7 @@ import { useTheme } from "@/hooks/use-theme";
 import { api, ApiError } from "@/lib/api";
 import { useAuth } from "@/lib/auth";
 import { readDraft, writeDraft } from "@/lib/note-drafts";
+import { enqueue } from "@/lib/progress-queue";
 
 type Conflict = { reason: "NOTE_CHANGED" | "NOTE_DELETED"; current: StudyNote };
 
@@ -80,7 +81,11 @@ export function LessonNote({ token, lessonId }: { token: string; lessonId: strin
     } catch (e) {
       const k = conflictOf(e);
       if (k) setConflict(k);
-      else setError(e instanceof ApiError && e.kind === "offline" ? "You're offline. Your note is kept on this device; save again when you're back online." : e instanceof ApiError ? e.message : "Couldn't save your note.");
+      else if (e instanceof ApiError && e.kind === "offline") {
+        // P13.S3.T2: kept on this device and sent when the app is back online (the draft stays until then).
+        enqueue(owner, { kind: "note", lesson_id: lessonId, text: value, base: from });
+        setStatus("Saved on this device. It will be sent when you're back online.");
+      } else setError(e instanceof ApiError ? e.message : "Couldn't save your note.");
     } finally {
       setBusy(false);
     }
@@ -154,8 +159,10 @@ export function LessonNote({ token, lessonId }: { token: string; lessonId: strin
 }
 
 export function CompletionToggle({ token, lessonId, done, onChange }: { token: string; lessonId: string; done: boolean; onChange: (done: boolean) => void }) {
+  const { state: auth } = useAuth();
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [queued, setQueued] = useState(false);
   return (
     <View style={{ gap: Space.xs }}>
       <Button
@@ -165,17 +172,23 @@ export function CompletionToggle({ token, lessonId, done, onChange }: { token: s
         onPress={async () => {
           setBusy(true);
           setError(null);
+          setQueued(false);
           try {
             await api.setCompleted(token, lessonId, !done);
             onChange(!done);
           } catch (e) {
-            setError(e instanceof ApiError ? e.message : "Couldn't change this.");
+            if (e instanceof ApiError && e.kind === "offline" && auth.status === "signed_in") {
+              enqueue(auth.me.id, { kind: "completion", lesson_id: lessonId, done: !done }); // P13.S3.T2
+              onChange(!done);
+              setQueued(true);
+            } else setError(e instanceof ApiError ? e.message : "Couldn't change this.");
           } finally {
             setBusy(false);
           }
         }}
       />
       <T variant="small">Completion tracks your reading only. It isn&apos;t evidence of what you know.</T>
+      {queued ? <T variant="small">Saved on this device. It will be sent when you&apos;re back online.</T> : null}
       <FormError message={error} />
     </View>
   );

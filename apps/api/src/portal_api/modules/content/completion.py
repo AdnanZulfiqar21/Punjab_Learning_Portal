@@ -12,7 +12,7 @@ import uuid
 from datetime import datetime
 
 from sqlalchemy import DateTime, ForeignKey, UniqueConstraint, func, select
-from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy.dialects.postgresql import UUID, insert
 from sqlalchemy.orm import Mapped, Session, mapped_column
 
 from portal_api.db import Base
@@ -44,12 +44,15 @@ def _readable_lesson(db: Session, user_id: uuid.UUID, item_id: uuid.UUID) -> Con
 
 def complete(db: Session, user_id: uuid.UUID, item_id: uuid.UUID) -> None:
     item = _readable_lesson(db, user_id, item_id)
-    existing = db.scalar(
-        select(LessonCompletion).where(LessonCompletion.user_id == user_id, LessonCompletion.item_id == item.id)
+    assert item.published_version_id is not None
+    # P13.S3.T2 (OFFLINE-SYNC-01): a replayed completion racing another one inserts once and never fails.
+    inserted = db.scalar(
+        insert(LessonCompletion)
+        .values(id=uuid.uuid4(), user_id=user_id, item_id=item.id, version_id=item.published_version_id)
+        .on_conflict_do_nothing(constraint="uq_lesson_completion")
+        .returning(LessonCompletion.id)
     )
-    if existing is None:
-        assert item.published_version_id is not None
-        db.add(LessonCompletion(user_id=user_id, item_id=item.id, version_id=item.published_version_id))
+    if inserted is not None:
         from portal_api.modules.analytics.events import emit
 
         emit(
