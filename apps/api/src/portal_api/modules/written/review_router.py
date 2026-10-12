@@ -127,7 +127,11 @@ class CaseDetail(CaseSummary):
 
 class DecisionIn(BaseModel):
     expected_version: int = Field(ge=0)
-    awards: dict[str, dict[str, dict[str, Any]]] = Field(description='{"1": {"a1": {"units": 100, "reason": "…"}}}')
+    awards: dict[str, dict[str, dict[str, Any]]] = Field(
+        description='{"1": {"a1": {"units": 100, "reason": "…", '
+        '"evidence": [{"page_id": "…", "region": [x, y, w, h]}]}}}'
+        "; evidence is optional: pages this question was mapped to, each with an optional region of its preview."
+    )
     release: bool = False
     reason: str = Field(default="", max_length=1000)
     expand_positions: list[int] = Field(
@@ -152,6 +156,16 @@ class DecisionIn(BaseModel):
     )
 
 
+class EvidenceLinkOut(BaseModel):
+    """W07.S1.T2 (FEEDBACK-EVIDENCE-01): where on your script a criterion's feedback points."""
+
+    page_id: uuid.UUID
+    page_number: int = Field(description="The page's number as you uploaded it")
+    region: list[float] | None = Field(description="x, y, width, height as fractions of the upright page; null = whole")
+    where: str = Field(description='Plain words for the place, e.g. "page 2, top left"')
+    available: bool = Field(description="False once the scan is no longer available: nothing is highlighted then")
+
+
 class CriterionResult(BaseModel):
     id: str
     subpart_id: str | None
@@ -159,6 +173,43 @@ class CriterionResult(BaseModel):
     earned_units: int
     max_units: int
     reason: str
+    evidence: list[EvidenceLinkOut] = Field(default_factory=list)
+
+
+def _where(number: int, region: list[float] | None) -> str:
+    if not region:
+        return f"page {number}"
+    x, y, w, h = region
+    cx, cy = x + w / 2, y + h / 2
+    v = "top" if cy < 1 / 3 else "bottom" if cy > 2 / 3 else "middle"
+    hz = "left" if cx < 1 / 3 else "right" if cx > 2 / 3 else "centre"
+    return f"page {number}, " + ("centre" if (v, hz) == ("middle", "centre") else f"{v} {hz}")
+
+
+def _evidence_links(db: Session, attempt_id: uuid.UUID, raw: object) -> list[EvidenceLinkOut]:
+    """Only grounded places: a page of this attempt with its preview still stored. Anything else is shown as no
+    longer available, and never with an invented highlight."""
+    from portal_api.modules.written import service, storage
+
+    pages = {str(p.id): (n, p) for n, p in enumerate(service._pages(db, attempt_id), start=1)}
+    store = storage.get_store()
+    out = []
+    for a in review.anchors(raw):
+        n, page = pages.get(a["page_id"], (0, None))
+        if n == 0:
+            continue  # not a page of this attempt: never shown
+        live = page is not None and bool(page.preview_key) and store.exists(page.preview_key or "")
+        region = a["region"] if live else None
+        out.append(
+            EvidenceLinkOut(
+                page_id=uuid.UUID(a["page_id"]),
+                page_number=n,
+                region=region,
+                where=_where(n, a["region"]),
+                available=live,
+            )
+        )
+    return out
 
 
 class LearnerRevision(BaseModel):
@@ -498,6 +549,7 @@ def my_result(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, response: Re
                         earned_units=int(given.get(c.id, {}).get("units", 0)),
                         max_units=c.max_units,
                         reason=str(given.get(c.id, {}).get("reason", "")),
+                        evidence=_evidence_links(db, attempt.id, given.get(c.id, {}).get("evidence")),
                     )
                     for c in rubric.criteria
                 ],
