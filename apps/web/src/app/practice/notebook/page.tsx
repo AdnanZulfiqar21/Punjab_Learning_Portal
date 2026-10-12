@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { Suspense } from "react";
 import type { NotebookEntry } from "@portal/contracts";
 import { LessonBlocks } from "@/components/lesson-blocks";
+import { MockRunningNotice } from "@/components/mock-running";
 import { Badge, Breadcrumbs, Notice, SkeletonLines } from "@/components/ui";
 import { GRADE_LABEL } from "@/lib/format";
 import { api, currentUser } from "@/lib/session";
@@ -32,7 +33,11 @@ async function Entries() {
   const user = await currentUser();
   if (!user) redirect("/signin?next=/practice/notebook");
   const res = await api<NotebookEntry[]>("/v1/me/notebook", { token: user.token });
-  if (!res.ok) return <Notice tone="warn" title="Couldn't load your notebook">{res.problem?.detail ?? "Please try again."}</Notice>;
+  if (!res.ok) {
+    const p = res.problem as { code_reason?: string; attempt_id?: string } | null;
+    if (p?.code_reason === "MOCK_IN_PROGRESS" && p.attempt_id) return <MockRunningNotice attemptId={p.attempt_id} />;
+    return <Notice tone="warn" title="Couldn't load your notebook">{res.problem?.detail ?? "Please try again."}</Notice>;
+  }
   if (res.data.length === 0) {
     return (
       <Notice title="Nothing here yet">

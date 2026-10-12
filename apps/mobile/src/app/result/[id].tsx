@@ -5,6 +5,7 @@ import type { ItemReview } from "@portal/contracts";
 import { Button } from "@/components/form";
 import { LessonBlocks, type AssetSource } from "@/components/lesson-blocks";
 import { Badge, Card, ErrorState, Loading, Notice, T } from "@/components/ui";
+import { MockRunningNotice, mockRunning } from "@/components/mock-running";
 import { Radius, Space } from "@/constants/theme";
 import { useRequest } from "@/hooks/use-request";
 import { useTheme } from "@/hooks/use-theme";
@@ -46,6 +47,8 @@ function ResultView({ id, token }: { id: string; token: string }) {
         </ScrollView>
       );
     }
+    const running = mockRunning(req.state.error);
+    if (running) return <MockRunningNotice attemptId={running} />;
     return <ErrorState error={req.state.error} onRetry={req.retry} />;
   }
   const r = req.state.data;

@@ -13,7 +13,7 @@ from sqlalchemy.orm import Session
 
 from portal_api.db import get_session
 from portal_api.errors import Conflict, NotFound, Unprocessable
-from portal_api.modules.assessment import attempts, forms
+from portal_api.modules.assessment import attempts, exam_room, forms
 from portal_api.modules.assessment.models import Attempt, FormItem, PracticeForm, SubmissionReceipt
 from portal_api.modules.assessment.schemas import (
     AnswerOut,
@@ -131,6 +131,7 @@ def create_form(
     idempotency_key: Annotated[str, Header(alias="Idempotency-Key", min_length=8, max_length=80)],
 ) -> FormOut:
     _private(response)
+    exam_room.guard(db, who.user.id)  # P10.S4.T3: no other tests while a mock runs
     form = forms.create_form(
         db,
         who,
@@ -152,6 +153,7 @@ def create_form(
 @router.post("/practice/forms/{form_id}/attempt", response_model=AttemptOut, summary="Start (or resume) the attempt")
 def start_attempt(db: DB, who: CurrentPrincipal, form_id: uuid.UUID, response: Response) -> AttemptOut:
     _private(response)
+    exam_room.guard_form(db, who.user.id, form_id)
     attempt = attempts.start(db, who, form_id)
     return _attempt_out(db, attempts.load(db, who, attempt.id), who)
 
@@ -159,6 +161,7 @@ def start_attempt(db: DB, who: CurrentPrincipal, form_id: uuid.UUID, response: R
 @router.get("/attempts/{attempt_id}", response_model=AttemptOut, summary="Resume: questions, saved answers, timing")
 def get_attempt(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, response: Response) -> AttemptOut:
     _private(response)
+    exam_room.guard(db, who.user.id, attempt_id=attempt_id)
     return _attempt_out(db, attempts.load(db, who, attempt_id), who)
 
 
@@ -169,6 +172,7 @@ def get_attempt(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, response: 
 )
 def continue_attempt_here(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, response: Response) -> AttemptOut:
     _private(response)
+    exam_room.guard(db, who.user.id, attempt_id=attempt_id)
     attempts.continue_here(db, who, attempt_id)
     return _attempt_out(db, attempts.load(db, who, attempt_id), who)
 
@@ -176,12 +180,14 @@ def continue_attempt_here(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, 
 @router.put("/attempts/{attempt_id}/flags", response_model=FlagsOut, summary="Flag questions to come back to")
 def set_flags(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, body: FlagsIn, response: Response) -> FlagsOut:
     _private(response)
+    exam_room.guard(db, who.user.id, attempt_id=attempt_id)
     return FlagsOut(flagged=attempts.set_flags(db, who, attempt_id, body.positions))
 
 
 @router.post("/attempts/{attempt_id}/answers", response_model=SaveOut, summary="Save answer operations (§10.5)")
 def save_answers(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, body: OpsIn, response: Response) -> SaveOut:
     _private(response)
+    exam_room.guard(db, who.user.id, attempt_id=attempt_id)
     out = attempts.save(db, who, attempt_id, _ops(body.ops))
     return SaveOut(status=out["status"], results=[OpResult(**r) for r in out["results"]], receipt_id=out["receipt_id"])
 
@@ -189,6 +195,7 @@ def save_answers(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, body: Ops
 @router.post("/attempts/{attempt_id}/submit", response_model=SubmitOut, summary="Final submission (idempotent)")
 def submit(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, body: SubmitIn, response: Response) -> SubmitOut:
     _private(response)
+    exam_room.guard(db, who.user.id, attempt_id=attempt_id)
     out = attempts.submit(db, who, attempt_id, body.idempotency_key, _ops(body.ops))
     return SubmitOut(
         receipt=_receipt_out(out["receipt"]),
@@ -248,6 +255,7 @@ def attempt_asset(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, version_
 @router.get("/attempts/{attempt_id}/result", response_model=ResultOut, summary="Score and review after submission")
 def result(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, response: Response) -> ResultOut:
     _private(response)
+    exam_room.guard(db, who.user.id, attempt_id=attempt_id)
     attempt = attempts.load(db, who, attempt_id)
     if attempt.status != "finalised":
         raise Conflict("Results are available after you submit.")
@@ -624,6 +632,7 @@ def create_mock(
     from portal_api.modules.assessment import mocks
 
     _private(response)
+    exam_room.guard(db, who.user.id)
     return _form_out(mocks.build(db, who, body.code, idempotency_key))
 
 
@@ -783,6 +792,7 @@ def join_mock_session(db: DB, who: CurrentPrincipal, session_id: uuid.UUID, resp
     from portal_api.modules.assessment import sessions
 
     _private(response)
+    exam_room.guard_session(db, who.user.id, session_id)
     return JoinOut(attempt_id=sessions.join(db, who, session_id))
 
 
@@ -838,6 +848,7 @@ def my_notebook(db: DB, who: CurrentPrincipal, response: Response) -> list[Noteb
     from portal_api.modules.assessment import notebook
 
     _private(response)
+    exam_room.guard(db, who.user.id)  # entries carry keys and explanations
     now = db.execute(select(func.now())).scalar_one()
     return [_entry_out(db, e, now) for e in notebook.entries(db, who.user.id)]
 
@@ -846,6 +857,7 @@ def my_notebook(db: DB, who: CurrentPrincipal, response: Response) -> list[Noteb
 def note_entry(db: DB, who: CurrentPrincipal, entry_id: uuid.UUID, body: NoteIn) -> NotebookEntryOut:
     from portal_api.modules.assessment import notebook
 
+    exam_room.guard(db, who.user.id)
     e = notebook.set_note(db, who.user.id, entry_id, body.note)
     return _entry_out(db, e, db.execute(select(func.now())).scalar_one())
 
@@ -867,6 +879,7 @@ def review_test(
     from portal_api.modules.assessment import notebook
 
     _private(response)
+    exam_room.guard(db, who.user.id)
     return _form_out(
         notebook.build_review(
             db, who, grade=body.grade, subject=body.subject, count=body.count, idempotency_key=idempotency_key

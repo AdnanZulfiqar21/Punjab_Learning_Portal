@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { Suspense } from "react";
+import { MockRunningNotice } from "@/components/mock-running";
 import { Notice, SkeletonLines } from "@/components/ui";
 import { getAttempt } from "@/lib/practice";
 import { currentUser } from "@/lib/session";
@@ -25,6 +26,13 @@ async function Attempt({ id }: { id: string }) {
   if (!/^[0-9a-f-]{36}$/i.test(id)) notFound();
   const attempt = await getAttempt(user.token, id);
   if (!attempt) notFound();
+  if ("mockRunning" in attempt) {
+    return (
+      <div className="mx-auto max-w-2xl">
+        <MockRunningNotice attemptId={attempt.mockRunning} />
+      </div>
+    );
+  }
   if (attempt.status !== "active") {
     return (
       <div className="mx-auto max-w-2xl space-y-4">

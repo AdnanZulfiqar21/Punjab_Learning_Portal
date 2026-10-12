@@ -12,9 +12,19 @@ export async function getAvailability(token: string, grade: number, subject: str
   throw new Error(res.problem?.detail ?? `Could not load practice availability (${res.status}).`);
 }
 
-export async function getAttempt(token: string, id: string): Promise<PracticeAttempt | null> {
+/** P10.S4.T3 (EXAM-ROOM-01): while a mock runs, other tests and results are closed; this is the mock to go back to. */
+export type MockRunning = { mockRunning: string };
+
+function mockRunning(status: number, problem: unknown): MockRunning | null {
+  const p = problem as (Problem & { code_reason?: string; attempt_id?: string }) | null;
+  return status === 409 && p?.code_reason === "MOCK_IN_PROGRESS" && p.attempt_id ? { mockRunning: p.attempt_id } : null;
+}
+
+export async function getAttempt(token: string, id: string): Promise<PracticeAttempt | MockRunning | null> {
   const res = await api<PracticeAttempt>(`/v1/attempts/${encodeURIComponent(id)}`, { token });
   if (res.ok) return res.data;
+  const running = mockRunning(res.status, res.problem);
+  if (running) return running;
   if (res.status === 404 || res.status === 422) return null;
   throw new Error(res.problem?.detail ?? `Could not load the test (${res.status}).`);
 }
@@ -22,9 +32,11 @@ export async function getAttempt(token: string, id: string): Promise<PracticeAtt
 export async function getResult(
   token: string,
   id: string,
-): Promise<AttemptResult | "pending" | "scoring" | { heldUntil: string | null } | null> {
+): Promise<AttemptResult | "pending" | "scoring" | { heldUntil: string | null } | MockRunning | null> {
   const res = await api<AttemptResult>(`/v1/attempts/${encodeURIComponent(id)}/result`, { token });
   if (res.ok) return res.data;
+  const running = mockRunning(res.status, res.problem);
+  if (running) return running;
   const held = res.problem as (Problem & { code_reason?: string; available_at?: string | null }) | null;
   // A held scheduled mock (a missing release time means the session couldn't be resolved: still held, OCT9-01).
   if (res.status === 409 && held?.code_reason === "RESULTS_PENDING") return { heldUntil: held.available_at ?? null };
