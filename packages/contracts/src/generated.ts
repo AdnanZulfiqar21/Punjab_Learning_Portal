@@ -11082,6 +11082,16 @@ export interface components {
             /** Grade */
             grade: number;
             /**
+             * In Pilot
+             * @description True when this learner has an active pilot entitlement
+             */
+            in_pilot: boolean;
+            /**
+             * Pilot Only
+             * @description True during the R0 teacher-reviewed pilot: only invited pilot learners can start written tests
+             */
+            pilot_only: boolean;
+            /**
              * Review Accepting
              * @description False means teacher marking is at capacity; new tests can't start now
              */

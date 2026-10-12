@@ -45,7 +45,7 @@ For the tasks marked **Implemented**, the cited tests were confirmed to exist. T
 | W07.S1.T3 Answer-release policies | Rubrics never shown in attempts; MCQ release (OCT9-01) | A versioned written model-answer release |
 | W07.S2.T2 Score/attempt history | Released-version history, notices, linked attempts | Rubric/evidence versions, per-question change reasons and rescan/new-content/corrected labels in the history |
 | W07.S3.T2 Interrupted processing journeys | Unfinished tests across devices; idempotent notices | A logout/login and second-device receipt-restore test |
-| W08.S1.T1 Assessment plans | Weights, page caps, units shown before start, pilot entitlements | Cost-backed units (WA-D07); an R0 pilot switch |
+| W08.S1.T1 Assessment plans | Weights, page caps, units shown before start, pilot entitlements; the R0 pilot switch (PILOT-R0-01) | Cost-backed units (WA-D07) |
 | P07.S3.T3 Low-bandwidth alternatives | Data saver defers diagrams | Audio-only assets (B05); per-lesson download size |
 | P11.S3.T1 Practice configuration | Every scope, multi-subject, feedback modes, counts and shortage | Topic scope, an estimated time and a client-compatibility message in the web builder |
 | P13.S4.T2 OTA update behaviour | CLIENTS-01 minimums and mock-window protection | `expo-updates` runtime-version pinning; store builds (B07) |

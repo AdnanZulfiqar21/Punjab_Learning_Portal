@@ -23,7 +23,8 @@ from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
-from portal_api.errors import Conflict, NotFound, Unprocessable
+from portal_api.config import get_settings
+from portal_api.errors import AppError, Conflict, NotFound, Unprocessable
 from portal_api.modules.access import service as access
 from portal_api.modules.audit.models import record
 from portal_api.modules.content import written as wq
@@ -58,6 +59,31 @@ CAPS = {
 def db_now(db: Session) -> datetime:
     now: datetime = db.execute(select(func.clock_timestamp())).scalar_one()
     return now
+
+
+class PilotOnly(AppError):
+    status = 403
+    code = "WRITTEN_PILOT_ONLY"
+
+
+PILOT_MESSAGE = (
+    "Written practice is in a teacher-reviewed pilot, open only to invited pilot learners for now. Your plan's other "
+    "features are unaffected."
+)
+
+
+def pilot_only() -> bool:
+    """W08.S1.T1 (PILOT-R0-01): the R0 pilot. Only a pilot entitlement admits and funds written tests."""
+    return get_settings().written_pilot_only
+
+
+def in_pilot(db: Session, user_id: uuid.UUID, now: datetime | None = None) -> bool:
+    return any(e.source == "pilot" for e in access.active_entitlements(db, user_id, now or db_now(db)))
+
+
+def require_pilot(db: Session, user_id: uuid.UUID) -> None:
+    if pilot_only() and not in_pilot(db, user_id):
+        raise PilotOnly(PILOT_MESSAGE)
 
 
 def slot_key(position: int, subpart: str | None) -> str:
@@ -200,6 +226,7 @@ def create_form(
             raise Conflict("This request key was already used for a different test.")
         return existing
     access.require_access(db, who.user.id, purpose="Written practice", need=access.Need.subjects(grade, subject))
+    require_pilot(db, who.user.id)
     valid = {c.id for c in _chapters(db, grade, subject)}
     if not chapter_ids or not set(chapter_ids) <= valid:
         raise Unprocessable("Choose chapters from this class and subject's book.")
@@ -304,6 +331,11 @@ def start(db: Session, who: Principal, form_id: uuid.UUID) -> WrittenAttempt:
     for open_attempt in active:
         if not _expire_if_due(db, open_attempt, now):  # a closed upload window releases its permit by the same rules
             open_permits += 1
+    if pilot_only():  # PILOT-R0-01: during the R0 pilot only a pilot entitlement admits and funds a written test
+        if not in_pilot(db, who.user.id, now):
+            db.commit()  # keep any expiries made above
+            raise PilotOnly(PILOT_MESSAGE)
+        funding = [e for e in funding if e.source == "pilot"]
     if not review.capacity_state(db, form.grade_number, form.subject_code)["accepting"]:
         db.commit()  # keep any expiries made above
         raise Conflict(

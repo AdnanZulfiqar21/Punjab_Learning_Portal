@@ -203,7 +203,7 @@ def get_linked_form(db: DB, who: CurrentPrincipal, form_id: uuid.UUID, response:
 @router.get("/written/availability", response_model=WrittenAvailabilityOut)
 def availability(
     db: DB,
-    _: CurrentPrincipal,
+    who: CurrentPrincipal,
     response: Response,
     grade: Annotated[int, Query(ge=11, le=12)],
     subject: Annotated[str, Query(min_length=2, max_length=40)],
@@ -219,6 +219,8 @@ def availability(
         upload_allowance_s=out["upload_allowance_s"],
         caps=out["caps"],
         chapters=[WrittenChapter(**c) for c in out["chapters"]],
+        pilot_only=service.pilot_only(),
+        in_pilot=service.in_pilot(db, who.user.id),
     )
 
 

@@ -87,6 +87,11 @@ class Settings(BaseSettings):
     # W06.S1.T3 (CALIBRATION-01): the share of sealed scripts in the evaluation subset whose blinded teacher marks are
     # compared with automatic proposals (evidence for the WG10 gate; nothing is ever published from it).
     written_evaluation_percent: int = Field(default=100, ge=0, le=100)
+    # W08.S1.T1 (PILOT-R0-01): the written release level (roadmap §20.15). "r0_pilot" offers written practice only
+    # to learners with an active pilot entitlement, whose units fund it (tracked, non-billable; every mark is a
+    # teacher's). "open" lets any plan's marking units fund it. Unset means r0_pilot in deployed roles, because no
+    # later level is qualified yet (WA-D12, B10), and open in development and test.
+    written_release: Literal["r0_pilot", "open"] | None = None
 
     @model_validator(mode="after")
     def _validate_role(self) -> Settings:
@@ -127,6 +132,12 @@ class Settings(BaseSettings):
         if self.db_max_overflow != 0 and self.role is Role.production:
             raise ConfigurationError("db_max_overflow must be 0 in production (connection budget, roadmap §5.8)")
         return self
+
+    @property
+    def written_pilot_only(self) -> bool:
+        if self.written_release is not None:
+            return self.written_release == "r0_pilot"
+        return self.role in (Role.production, Role.staging)
 
     @property
     def jwks_url(self) -> str | None:
