@@ -1,5 +1,6 @@
 import { Fragment, type ReactNode } from "react";
 import { Checkpoint } from "@/components/checkpoint";
+import { SaverImage } from "@/components/saver-image";
 
 // Renders content blocks (schema v1, roadmap §5.4). Unknown block types never crash the page: they show an explicit
 // "update required" notice, as the renderer contract requires.
@@ -26,10 +27,13 @@ export function LessonBlocks({
   headingOffset = 0,
   assetUrl,
   equationAction,
+  dataSaver = false,
 }: {
   blocks: Block[];
   headingOffset?: number;
   assetUrl?: AssetUrl;
+  /** SETTINGS-01: lesson diagrams load only when tapped (never used for questions, where a diagram may be needed). */
+  dataSaver?: boolean;
   /** STUDY-TOOLS-01: e.g. "Save formula" under each top-level equation (its index in the lesson body). */
   equationAction?: (index: number) => ReactNode;
 }) {
@@ -37,7 +41,7 @@ export function LessonBlocks({
     <div className="space-y-4 leading-relaxed">
       {blocks.map((b, i) => (
         <Fragment key={i}>
-          <BlockView block={b} headingOffset={headingOffset} assetUrl={assetUrl} />
+          <BlockView block={b} headingOffset={headingOffset} assetUrl={assetUrl} dataSaver={dataSaver} />
           {b.type === "equation" && equationAction?.(i)}
         </Fragment>
       ))}
@@ -46,23 +50,24 @@ export function LessonBlocks({
 }
 
 /** An archived image. Plain <img>: the copy is a re-encoded PNG from our own origin, sized by the browser. */
-function ArchivedImage({ id, alt, assetUrl }: { id: string; alt: string; assetUrl?: AssetUrl }) {
+function ArchivedImage({ id, alt, assetUrl, dataSaver }: { id: string; alt: string; assetUrl?: AssetUrl; dataSaver?: boolean }) {
   if (!assetUrl || !id) return <p className="rounded-lg border border-dashed border-border px-3 py-6 text-center text-sm text-muted">{alt}</p>;
+  if (dataSaver) return <SaverImage src={assetUrl(id)} alt={alt} />;
   // eslint-disable-next-line @next/next/no-img-element -- an authenticated, immutable archive copy; no optimiser
   return <img src={assetUrl(id)} alt={alt} loading="lazy" className="mx-auto h-auto max-w-full rounded-lg border border-border bg-white" />;
 }
 
 /** §5.4 rule 5: the reviewed fallback for a block this renderer can't show natively. */
-function FallbackView({ fb, assetUrl }: { fb: Fallback; assetUrl?: AssetUrl }) {
+function FallbackView({ fb, assetUrl, dataSaver }: { fb: Fallback; assetUrl?: AssetUrl; dataSaver?: boolean }) {
   return (
     <figure className="space-y-2 rounded-lg border border-border bg-surface px-4 py-3">
-      {str(fb.image_asset_id) && <ArchivedImage id={str(fb.image_asset_id)} alt={str(fb.alt) || str(fb.text)} assetUrl={assetUrl} />}
+      {str(fb.image_asset_id) && <ArchivedImage id={str(fb.image_asset_id)} alt={str(fb.alt) || str(fb.text)} assetUrl={assetUrl} dataSaver={dataSaver} />}
       {str(fb.text) && <figcaption>{str(fb.text)}</figcaption>}
     </figure>
   );
 }
 
-function BlockView({ block: b, headingOffset, assetUrl }: { block: Block; headingOffset: number; assetUrl?: AssetUrl }) {
+function BlockView({ block: b, headingOffset, assetUrl, dataSaver }: { block: Block; headingOffset: number; assetUrl?: AssetUrl; dataSaver?: boolean }) {
   switch (b.type) {
     case "heading": {
       const level = Math.min(6, (b.level === 3 ? 3 : 2) + headingOffset);
@@ -136,7 +141,7 @@ function BlockView({ block: b, headingOffset, assetUrl }: { block: Block; headin
       const fb = (b.fallback ?? {}) as Fallback;
       return (
         <figure className="space-y-2 rounded-lg border border-border bg-surface px-4 py-3">
-          {str(fb.image_asset_id) && <ArchivedImage id={str(fb.image_asset_id)} alt={str(fb.alt) || str(b.text_alt)} assetUrl={assetUrl} />}
+          {str(fb.image_asset_id) && <ArchivedImage id={str(fb.image_asset_id)} alt={str(fb.alt) || str(b.text_alt)} assetUrl={assetUrl} dataSaver={dataSaver} />}
           <p>{str(b.text_alt)}</p>
           <figcaption className="font-mono text-xs text-muted">{str(b.latex)}</figcaption>
         </figure>
@@ -166,7 +171,7 @@ function BlockView({ block: b, headingOffset, assetUrl }: { block: Block; headin
     case "diagram":
       return (
         <figure className="space-y-2">
-          <ArchivedImage id={str(b.asset_version_id)} alt={str(b.alt)} assetUrl={assetUrl} />
+          <ArchivedImage id={str(b.asset_version_id)} alt={str(b.alt)} assetUrl={assetUrl} dataSaver={dataSaver} />
           <figcaption className="text-sm text-muted">{str(b.caption)}</figcaption>
           {str(b.long_description) && (
             <details className="text-sm">
@@ -191,7 +196,7 @@ function BlockView({ block: b, headingOffset, assetUrl }: { block: Block; headin
       );
     default: {
       const fb = (b.fallback ?? null) as Fallback | null;
-      if (fb && (str(fb.text) || str(fb.image_asset_id))) return <FallbackView fb={fb} assetUrl={assetUrl} />;
+      if (fb && (str(fb.text) || str(fb.image_asset_id))) return <FallbackView fb={fb} assetUrl={assetUrl} dataSaver={dataSaver} />;
       return (
         <p role="note" className="rounded-lg border border-warn bg-warn-soft px-4 py-3 text-sm">
           This part of the lesson needs a newer version of the app to display.

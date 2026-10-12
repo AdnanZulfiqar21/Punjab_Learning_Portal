@@ -20,8 +20,9 @@
   --ok-soft: #e7f5ec;
 }
 
+/* SETTINGS-01: the theme follows the system unless this device chose light or dark (lib/display.ts). */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --background: #0f1318;
     --surface: #161b22;
     --surface-muted: #1e252e;
@@ -37,6 +38,47 @@
     --danger-soft: #3d1717;
     --ok: #7fd3a0;
     --ok-soft: #13301f;
+  }
+}
+
+:root[data-theme="dark"] {
+  --background: #0f1318;
+  --surface: #161b22;
+  --surface-muted: #1e252e;
+  --foreground: #e8ecf1;
+  --muted: #a7b0bc;
+  --border: #2c3542;
+  --accent: #6cc4dc;
+  --accent-strong: #9ad8ea;
+  --accent-soft: #143440;
+  --warn: #f3b765;
+  --warn-soft: #3a2a12;
+  --danger: #f19a9a;
+  --danger-soft: #3d1717;
+  --ok: #7fd3a0;
+  --ok-soft: #13301f;
+}
+
+:root {
+  color-scheme: light dark;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+@custom-variant dark {
+  @media (prefers-color-scheme: dark) {
+    &:not(:where([data-theme="light"], [data-theme="light"] *)) {
+      @slot;
+    }
+  }
+  &:where([data-theme="dark"], [data-theme="dark"] *) {
+    @slot;
   }
 }
 
@@ -84,4 +126,22 @@ body {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/* SETTINGS-01: reduced motion chosen in the portal adds to the system setting; it never turns the system's off. */
+:root[data-reduce-motion] *,
+:root[data-reduce-motion] *::before,
+:root[data-reduce-motion] *::after {
+  animation-duration: 0.01ms !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+
+/* SETTINGS-01: larger text scales every rem-based size; browser zoom and system text size still apply on top. */
+:root[data-text-size="large"] {
+  font-size: 112.5%;
+}
+
+:root[data-text-size="larger"] {
+  font-size: 125%;
 }

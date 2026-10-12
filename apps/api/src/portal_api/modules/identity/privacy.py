@@ -38,8 +38,9 @@ EXPORTED_TABLES = frozenset(
         "allowance_event", "analytics_event", "attempt", "consent_record", "entitlement", "export_job",
         "lesson_completion", "mistake_entry", "saved_formula", "study_note", "topic_favourite",
         "mock_accommodation", "notification", "notification_preference", "practice_form", "student_profile",
-        "support_assisted_access", "support_ticket", "trial_claim", "trial_device_use", "trial_exception",
-        "trial_grant", "user_session", "written_attempt", "written_form", "written_notice", "written_recheck_request",
+        "study_settings", "support_assisted_access", "support_ticket", "trial_claim", "trial_device_use",
+        "trial_exception", "trial_grant", "user_session", "written_attempt", "written_form", "written_notice",
+        "written_recheck_request",
     }
 )  # fmt: skip
 NOT_EXPORTED = {
@@ -78,6 +79,7 @@ def export(db: Session, user: AppUser) -> tuple[bytes, str]:
     from portal_api.modules.exports.service import ExportJob
     from portal_api.modules.identity.models import ConsentRecord, StudentProfile
     from portal_api.modules.identity.sessions import UserSession
+    from portal_api.modules.identity.settings import StudySettings
     from portal_api.modules.notifications.models import Notification, NotificationPreference
     from portal_api.modules.support.models import (
         SupportAssistedAccess,
@@ -103,6 +105,7 @@ def export(db: Session, user: AppUser) -> tuple[bytes, str]:
         "exported_at": datetime.now(UTC).isoformat(),
         "account": _row(user),
         "profile": _rows(db, StudentProfile, StudentProfile.user_id == uid),
+        "settings": _rows(db, StudySettings, StudySettings.user_id == uid),
         "consents": _rows(db, ConsentRecord, ConsentRecord.user_id == uid),
         "sessions": _rows(db, UserSession, UserSession.user_id == uid),
         "trial": {

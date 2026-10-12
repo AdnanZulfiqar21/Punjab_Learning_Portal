@@ -1,8 +1,8 @@
 // Native renderer for content blocks (schema v1, roadmap §5.4). Renderer version 1 on Android/iOS: text blocks render
 // natively; an unknown or unsupported block shows an explicit "update required" note instead of failing.
 import { Image } from "expo-image";
-import { Fragment, type ReactNode } from "react";
-import { ScrollView, View } from "react-native";
+import { Fragment, useState, type ReactNode } from "react";
+import { Pressable, ScrollView, View } from "react-native";
 
 import { Checkpoint } from "@/components/checkpoint";
 import { T } from "@/components/ui";
@@ -23,9 +23,12 @@ export function LessonBlocks({
   blocks,
   assetSource,
   equationAction,
+  dataSaver = false,
 }: {
   blocks: Block[];
   assetSource?: AssetSource;
+  /** SETTINGS-01: lesson diagrams load only when tapped (never for questions, where a diagram may be needed). */
+  dataSaver?: boolean;
   /** STUDY-TOOLS-01: e.g. "Save formula" under each top-level equation (its index in the lesson body). */
   equationAction?: (index: number) => ReactNode;
 }) {
@@ -33,7 +36,7 @@ export function LessonBlocks({
     <View style={{ gap: Space.md }}>
       {blocks.map((b, i) => (
         <Fragment key={i}>
-          <BlockView block={b} assetSource={assetSource} />
+          <BlockView block={b} assetSource={assetSource} dataSaver={dataSaver} />
           {b.type === "equation" && equationAction?.(i)}
         </Fragment>
       ))}
@@ -41,8 +44,19 @@ export function LessonBlocks({
   );
 }
 
-function ArchivedImage({ id, alt, assetSource }: { id: string; alt: string; assetSource?: AssetSource }) {
+function ArchivedImage({ id, alt, assetSource, dataSaver }: { id: string; alt: string; assetSource?: AssetSource; dataSaver?: boolean }) {
   const c = useTheme();
+  const [shown, setShown] = useState(false);
+  if (assetSource && id && dataSaver && !shown) {
+    return (
+      <View style={{ borderWidth: 1, borderStyle: "dashed", borderColor: c.border, borderRadius: Radius.sm, padding: Space.md, gap: Space.sm }}>
+        <T variant="small">{alt}</T>
+        <Pressable accessibilityRole="button" onPress={() => setShown(true)} style={{ minHeight: 44, justifyContent: "center" }}>
+          <T style={{ color: c.accent, fontWeight: "600" }}>Show diagram (data saver is on)</T>
+        </Pressable>
+      </View>
+    );
+  }
   if (!assetSource || !id) {
     return (
       <View style={{ borderWidth: 1, borderStyle: "dashed", borderColor: c.border, borderRadius: Radius.sm, padding: Space.md }}>
@@ -61,7 +75,7 @@ function ArchivedImage({ id, alt, assetSource }: { id: string; alt: string; asse
   );
 }
 
-function BlockView({ block: b, assetSource }: { block: Block; assetSource?: AssetSource }) {
+function BlockView({ block: b, assetSource, dataSaver }: { block: Block; assetSource?: AssetSource; dataSaver?: boolean }) {
   const c = useTheme();
   switch (b.type) {
     case "heading":
@@ -142,7 +156,7 @@ function BlockView({ block: b, assetSource }: { block: Block; assetSource?: Asse
       const fb = (b.fallback ?? {}) as Fallback;
       return (
         <View style={{ borderWidth: 1, borderColor: c.border, borderRadius: Radius.sm, padding: Space.md, gap: Space.sm }}>
-          {str(fb.image_asset_id) ? <ArchivedImage id={str(fb.image_asset_id)} alt={str(fb.alt) || str(b.text_alt)} assetSource={assetSource} /> : null}
+          {str(fb.image_asset_id) ? <ArchivedImage id={str(fb.image_asset_id)} alt={str(fb.alt) || str(b.text_alt)} assetSource={assetSource} dataSaver={dataSaver} /> : null}
           <T>{str(b.text_alt)}</T>
         </View>
       );
@@ -169,7 +183,7 @@ function BlockView({ block: b, assetSource }: { block: Block; assetSource?: Asse
     case "diagram":
       return (
         <View style={{ gap: Space.xs }}>
-          <ArchivedImage id={str(b.asset_version_id)} alt={str(b.alt)} assetSource={assetSource} />
+          <ArchivedImage id={str(b.asset_version_id)} alt={str(b.alt)} assetSource={assetSource} dataSaver={dataSaver} />
           <T variant="small">{str(b.caption)}</T>
           {str(b.long_description) ? <T variant="small">{str(b.long_description)}</T> : null}
         </View>
@@ -188,7 +202,7 @@ function BlockView({ block: b, assetSource }: { block: Block; assetSource?: Asse
       if (fb && (str(fb.text) || str(fb.image_asset_id))) {
         return (
           <View style={{ gap: Space.xs }}>
-            {str(fb.image_asset_id) ? <ArchivedImage id={str(fb.image_asset_id)} alt={str(fb.alt) || str(fb.text)} assetSource={assetSource} /> : null}
+            {str(fb.image_asset_id) ? <ArchivedImage id={str(fb.image_asset_id)} alt={str(fb.alt) || str(fb.text)} assetSource={assetSource} dataSaver={dataSaver} /> : null}
             {str(fb.text) ? <T>{str(fb.text)}</T> : null}
           </View>
         );

@@ -1573,6 +1573,24 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/me/settings": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Your usual study settings (defaults if unsaved) */
+        get: operations["get_settings_v1_me_settings_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /** Change some of your usual study settings; the others are left as they are */
+        patch: operations["change_settings_v1_me_settings_patch"];
+        trace?: never;
+    };
     "/v1/me/study-packs/{chapter_id}": {
         parameters: {
             query?: never;
@@ -9652,6 +9670,48 @@ export interface components {
             /** Unscheduled Topics */
             unscheduled_topics: number;
         };
+        /** StudySettingsOut */
+        StudySettingsOut: {
+            /** Data Saver */
+            data_saver: boolean;
+            /** Reduce Motion */
+            reduce_motion: boolean;
+            /** Saved */
+            saved: boolean;
+            /**
+             * Text Size
+             * @enum {string}
+             */
+            text_size: "default" | "large" | "larger";
+            /**
+             * Theme
+             * @enum {string}
+             */
+            theme: "system" | "light" | "dark";
+            /** Updated At */
+            updated_at: string | null;
+            /**
+             * Video Quality
+             * @enum {string}
+             */
+            video_quality: "auto" | "data_saver" | "standard" | "high";
+        };
+        /**
+         * StudySettingsPatch
+         * @description Only the settings given are changed.
+         */
+        StudySettingsPatch: {
+            /** Data Saver */
+            data_saver?: boolean | null;
+            /** Reduce Motion */
+            reduce_motion?: boolean | null;
+            /** Text Size */
+            text_size?: ("default" | "large" | "larger") | null;
+            /** Theme */
+            theme?: ("system" | "light" | "dark") | null;
+            /** Video Quality */
+            video_quality?: ("auto" | "data_saver" | "standard" | "high") | null;
+        };
         /** SubjectInGrade */
         SubjectInGrade: {
             /** Books */
@@ -13595,6 +13655,59 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_settings_v1_me_settings_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StudySettingsOut"];
+                };
+            };
+        };
+    };
+    change_settings_v1_me_settings_patch: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["StudySettingsPatch"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StudySettingsOut"];
+                };
             };
             /** @description Validation Error */
             422: {

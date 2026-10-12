@@ -35,6 +35,7 @@ from portal_api.modules.exports.router import router as exports_router
 from portal_api.modules.help.router import router as help_router
 from portal_api.modules.identity import dev_auth
 from portal_api.modules.identity.router import router as identity_router
+from portal_api.modules.identity.settings import router as settings_router
 from portal_api.modules.notifications.router import router as notifications_router
 from portal_api.modules.support.router import router as support_router
 from portal_api.modules.system.business import router as business_router
@@ -132,6 +133,7 @@ def create_app() -> FastAPI:
     app.include_router(search_router)
     app.include_router(search_terms_router)
     app.include_router(identity_router)
+    app.include_router(settings_router)
     app.include_router(content.router)
     app.include_router(content.public)
     app.include_router(lectures_router)

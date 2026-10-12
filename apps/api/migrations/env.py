@@ -29,6 +29,7 @@ import portal_api.modules.exports.service
 import portal_api.modules.help.models
 import portal_api.modules.identity.models
 import portal_api.modules.identity.sessions
+import portal_api.modules.identity.settings
 import portal_api.modules.notifications.models
 import portal_api.modules.support.models
 import portal_api.modules.system.clients
