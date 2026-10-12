@@ -7829,6 +7829,11 @@ export interface components {
              */
             page_index: number;
             /**
+             * Quality
+             * @description Quality warnings for this page
+             */
+            quality?: components["schemas"]["PageQualityOut"][];
+            /**
              * Size
              * @description Size of the uploaded file in bytes
              */
@@ -7843,6 +7848,29 @@ export interface components {
              * @description Preview width in pixels
              */
             width: number | null;
+        };
+        /**
+         * PageQualityOut
+         * @description A quality check on a page (SCAN-QUALITY-01): a warning with a retake suggestion, never a verdict.
+         */
+        PageQualityOut: {
+            /**
+             * Code
+             * @enum {string}
+             */
+            code: "blur" | "glare" | "cut_off" | "small_text";
+            /**
+             * Level
+             * @enum {string}
+             */
+            level: "likely" | "possible";
+            /** Message */
+            message: string;
+            /**
+             * Sides
+             * @description For cut_off: top, bottom, left or right
+             */
+            sides?: string[];
         };
         /** PaidConversion */
         PaidConversion: {

@@ -8574,6 +8574,14 @@
             "title": "Page Index",
             "type": "integer"
           },
+          "quality": {
+            "description": "Quality warnings for this page",
+            "items": {
+              "$ref": "#/components/schemas/PageQualityOut"
+            },
+            "title": "Quality",
+            "type": "array"
+          },
           "size": {
             "description": "Size of the uploaded file in bytes",
             "title": "Size",
@@ -8609,6 +8617,48 @@
           "uploaded_at"
         ],
         "title": "PageOut",
+        "type": "object"
+      },
+      "PageQualityOut": {
+        "description": "A quality check on a page (SCAN-QUALITY-01): a warning with a retake suggestion, never a verdict.",
+        "properties": {
+          "code": {
+            "enum": [
+              "blur",
+              "glare",
+              "cut_off",
+              "small_text"
+            ],
+            "title": "Code",
+            "type": "string"
+          },
+          "level": {
+            "enum": [
+              "likely",
+              "possible"
+            ],
+            "title": "Level",
+            "type": "string"
+          },
+          "message": {
+            "title": "Message",
+            "type": "string"
+          },
+          "sides": {
+            "description": "For cut_off: top, bottom, left or right",
+            "items": {
+              "type": "string"
+            },
+            "title": "Sides",
+            "type": "array"
+          }
+        },
+        "required": [
+          "code",
+          "level",
+          "message"
+        ],
+        "title": "PageQualityOut",
         "type": "object"
       },
       "PaidConversion": {

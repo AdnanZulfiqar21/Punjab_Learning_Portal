@@ -85,7 +85,8 @@ export function WrittenRunner({ attempt, result = null }: { attempt: WrittenAtte
         const body = res.body as { pages: WrittenPage[]; duplicate: boolean; warnings: string[] };
         setUploads((u) => u.filter((x) => x.id !== tmp));
         setPages((p) => [...p, ...body.pages.filter((n) => !p.some((x) => x.id === n.id))]); // a PDF adds one page per PDF page
-        setNotes((n) => [...n, ...(body.duplicate ? [`${file.name} was already uploaded.`] : []), ...body.warnings.map((w) => `${file.name}: ${w}`)]);
+        // SCAN-QUALITY-01: quality warnings are shown with each page below; only duplicates need a note here.
+        if (body.duplicate) setNotes((n) => [...n, `${file.name} was already uploaded.`]);
       } else {
         const detail = (res.body as { detail?: string } | null)?.detail;
         setUploads((u) =>
@@ -331,6 +332,13 @@ export function WrittenRunner({ attempt, result = null }: { attempt: WrittenAtte
                   PDF page {p.page_index} of {p.file_pages}
                 </p>
               )}
+              {(p.quality ?? []).length > 0 && (
+                <ul className="space-y-1 text-warn" aria-label={`Photo checks for page ${i + 1}`}>
+                  {(p.quality ?? []).map((q) => (
+                    <li key={q.code}>{q.message}</li>
+                  ))}
+                </ul>
+              )}
             </li>
           ))}
           {uploads.map((u) => (
@@ -342,6 +350,12 @@ export function WrittenRunner({ attempt, result = null }: { attempt: WrittenAtte
             </li>
           ))}
         </ul>
+        {active && pages.some((p) => (p.quality ?? []).length > 0) && (
+          <p className="text-sm text-muted">
+            These are automatic checks, not a judgement: a teacher decides whether a page can be read. To use a clearer photo, add it and choose
+            it for that answer below. A page you don&apos;t choose for any answer isn&apos;t sent for marking.
+          </p>
+        )}
         {notes.length > 0 && (
           <ul className="space-y-1 text-sm text-warn">
             {notes.map((n, i) => (

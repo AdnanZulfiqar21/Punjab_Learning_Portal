@@ -256,6 +256,14 @@ export function MarkingWorkspace({ initial }: { initial: MarkingCase }) {
                     Open in full detail
                   </a>
                 </span>
+                {/* SCAN-QUALITY-01: what the learner was warned about; whether the page can be read is the reviewer's call. */}
+                {(p.quality ?? []).length > 0 && (
+                  <span className="block text-warn">
+                    Photo check{(p.quality ?? []).length > 1 ? "s" : ""} shown to the learner:{" "}
+                    {(p.quality ?? []).map((q) => `${q.code.replace("_", " ")} (${q.level})`).join(", ")}. If the page can&apos;t be read, ask
+                    for a clearer copy.
+                  </span>
+                )}
                 {/* Higher-detail regions rendered from the original: small symbols, subscripts and labels (OCT8-06). */}
                 <span className="grid w-28 grid-cols-3 gap-0.5" aria-label={`Zoom into part of page ${i + 1}`}>
                   {[0, 1, 2].flatMap((row) =>

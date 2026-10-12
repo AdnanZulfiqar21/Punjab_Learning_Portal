@@ -25,6 +25,7 @@ from portal_api.modules.written.schemas import (
     LinkedFromOut,
     ManifestIn,
     PageOut,
+    PageQualityOut,
     SealIn,
     SealOut,
     SlotOut,
@@ -58,6 +59,7 @@ def page_out(p: WrittenPage, f: WrittenFile) -> PageOut:
         width=p.width,
         height=p.height,
         uploaded_at=p.uploaded_at,
+        quality=[PageQualityOut(**f, message=evidence.quality_message(f)) for f in p.quality or []],
     )
 
 

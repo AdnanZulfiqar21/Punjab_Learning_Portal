@@ -44,7 +44,6 @@ function Runner({ initial, token, reload }: { initial: WrittenAttempt; token: st
   const [a, setA] = useState(initial);
   const [uploads, setUploads] = useState<Upload[]>([]);
   const [error, setError] = useState<string | null>(null);
-  const [warnings, setWarnings] = useState<string[]>([]);
   const [saving, setSaving] = useState(false);
   const [sealing, setSealing] = useState(false);
   const sealKey = useRef(newKey()); // one key for this submission; a retry returns the same receipt
@@ -83,8 +82,7 @@ function Runner({ initial, token, reload }: { initial: WrittenAttempt; token: st
     setUploads((u) => [...u, { key, name, status: "uploading" }]);
     try {
       const blob = await (await fetch(asset.uri)).blob();
-      const out = await api.uploadWritten(token, a.id, blob);
-      setWarnings(out.warnings);
+      await api.uploadWritten(token, a.id, blob); // SCAN-QUALITY-01: its warnings are shown with each page below
       setUploads((u) => u.filter((x) => x.key !== key));
       setA(await api.writtenAttempt(token, a.id));
     } catch (e) {
@@ -190,16 +188,22 @@ function Runner({ initial, token, reload }: { initial: WrittenAttempt; token: st
               {u.name}: {u.status === "uploading" ? "uploading…" : `not uploaded — ${u.error}`}
             </T>
           ))}
-          {warnings.map((w) => (
-            <T key={w} variant="small">
-              {w}
-            </T>
-          ))}
           {a.pages.length === 0 ? (
             <T variant="muted">No pages uploaded yet.</T>
           ) : (
             <T variant="small" accessibilityLabel="Uploaded pages">
               {a.pages.length} page(s) uploaded (not submitted): {a.pages.map((_, i) => `Page ${i + 1}`).join(", ")}
+            </T>
+          )}
+          {a.pages.flatMap((p, i) => (p.quality ?? []).map((q) => (
+            <T key={`${p.id}-${q.code}`} variant="small" style={{ color: c.warn }}>
+              Page {i + 1}: {q.message}
+            </T>
+          )))}
+          {a.pages.some((p) => (p.quality ?? []).length > 0) && (
+            <T variant="small">
+              These are automatic checks, not a judgement: a teacher decides whether a page can be read. To use a clearer photo, add it and choose it
+              for that answer below. A page you don&apos;t choose isn&apos;t sent for marking.
             </T>
           )}
 

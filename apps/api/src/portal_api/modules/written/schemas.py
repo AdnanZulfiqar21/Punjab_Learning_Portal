@@ -61,6 +61,15 @@ class WrittenItemOut(BaseModel):
     answer_language: str
 
 
+class PageQualityOut(BaseModel):
+    """A quality check on a page (SCAN-QUALITY-01): a warning with a retake suggestion, never a verdict."""
+
+    code: Literal["blur", "glare", "cut_off", "small_text"]
+    level: Literal["likely", "possible"]
+    sides: list[str] = Field(default_factory=list, description="For cut_off: top, bottom, left or right")
+    message: str
+
+
 class PageOut(BaseModel):
     """One logical page: a photo, or one page of a PDF. Mapping and the page cap count these."""
 
@@ -73,6 +82,7 @@ class PageOut(BaseModel):
     width: int | None = Field(description="Preview width in pixels")
     height: int | None = Field(description="Preview height in pixels")
     uploaded_at: datetime
+    quality: list[PageQualityOut] = Field(default_factory=list, description="Quality warnings for this page")
 
 
 class WrittenReceiptOut(BaseModel):

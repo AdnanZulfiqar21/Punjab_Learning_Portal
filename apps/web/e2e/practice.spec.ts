@@ -173,6 +173,20 @@ test("written practice: upload a page, map it, declare a part unanswered and sub
   await expect(page.getByLabel("Add photos or a PDF")).toHaveCount(0); // no edits after submission
 });
 
+// W03.S2.T1 (SCAN-QUALITY-01): a page with a quality problem is accepted with a retake suggestion, never rejected.
+test("a photo with glare is accepted with a retake suggestion", async ({ page }) => {
+  await newLearner(page);
+  await page.goto("/practice/written?grade=11&subject=biology");
+  await page.getByRole("group", { name: "Chapters" }).getByRole("checkbox").first().check();
+  await page.getByRole("button", { name: "Start written test" }).click();
+  await expect(page).toHaveURL(/:\d+\/practice\/written\/[0-9a-f-]{36}$/, AUTH);
+  await page.getByLabel("Add photos or a PDF").setInputFiles("e2e/fixtures/synthetic-page-glare.png");
+  const uploaded = page.getByRole("list", { name: "Uploaded pages" });
+  await expect(uploaded.getByText("Page 1 · uploaded, not yet submitted")).toBeVisible(AUTH);
+  await expect(uploaded.getByRole("list", { name: "Photo checks for page 1" })).toContainText("Light is reflecting off part of this page");
+  await expect(page.getByText("A page you don't choose for any answer isn't sent for marking.")).toBeVisible();
+});
+
 test("a PDF becomes one page per PDF page, and each page maps on its own", async ({ page }) => {
   await newLearner(page);
   await page.goto("/practice/written?grade=11&subject=biology");

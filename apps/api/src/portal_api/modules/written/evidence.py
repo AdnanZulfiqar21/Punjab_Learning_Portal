@@ -8,6 +8,10 @@ previews; the original stays private and immutable.
 
 A file that can't be decoded, is encrypted, carries document JavaScript or attachments, or exceeds a limit is a
 recoverable processing rejection shown to the learner. It is never an academic mark.
+
+W03.S2.T1 (SCAN-QUALITY-01): each logical page is also checked for blur, glare, writing cut off at an edge, and a
+page too small in the photo. A check is `likely` or `possible` and comes with a retake suggestion; it never
+rejects a page. Only a teacher decides a page is unreadable, and can ask for a clearer copy (W04.S3.T2).
 """
 
 from __future__ import annotations
@@ -52,6 +56,7 @@ class LogicalPage:
     width: int
     height: int
     preview_png: bytes
+    quality: list[dict[str, Any]] = field(default_factory=list)  # SCAN-QUALITY-01 flags (see `quality_message`)
 
 
 @dataclass(frozen=True)
@@ -178,10 +183,21 @@ def _run_worker(data: bytes, kind: str) -> Inspected:
         if "rejected" in result:
             raise Rejected(str(result["rejected"]))
         pages = [
-            LogicalPage(width=int(p["width"]), height=int(p["height"]), preview_png=(work / p["preview"]).read_bytes())
+            LogicalPage(
+                width=int(p["width"]),
+                height=int(p["height"]),
+                preview_png=(work / p["preview"]).read_bytes(),
+                quality=[f for f in p.get("quality", []) if f.get("code") in QUALITY_TEXT],
+            )
             for p in result["pages"]
         ]
-        return Inspected(content_type=kind, pages=pages, warnings=list(result.get("warnings", [])))
+        many = len(pages) > 1
+        warnings = [
+            f"Page {i}: {quality_message(f)}" if many else quality_message(f)
+            for i, lp in enumerate(pages, start=1)
+            for f in lp.quality
+        ]
+        return Inspected(content_type=kind, pages=pages, warnings=warnings)
 
 
 # ---------------------------------------------------------------- worker side (runs in the child process only)
@@ -227,15 +243,8 @@ def _inspect_image(data: bytes, kind: str) -> dict[str, Any]:
     except (OSError, SyntaxError, ValueError):
         return {"rejected": "This image is damaged or incomplete. Take or export the photo again."}
     png, pw, ph = _preview(upright)
-    warnings_out = []
-    if max(upright.size) < MIN_LONG_EDGE_PX:
-        warnings_out.append(
-            "This photo is small; faint or small writing may be hard to read. Consider a clearer photo."
-        )
-    return {
-        "pages": [{"width": pw, "height": ph, "preview": "page-1.png", "_png": png}],
-        "warnings": warnings_out,
-    }
+    quality = _quality(upright, photo=True)
+    return {"pages": [{"width": pw, "height": ph, "preview": "page-1.png", "_png": png, "quality": quality}]}
 
 
 def _inspect_pdf(data: bytes) -> dict[str, Any]:
@@ -265,13 +274,138 @@ def _inspect_pdf(data: bytes) -> dict[str, Any]:
                     return {"rejected": f"Page {i + 1} of this PDF has an unusable size."}
                 scale = min(PREVIEW_LONG_EDGE_PX / max(w_pt, h_pt), 300 / 72)
                 bitmap = page.render(scale=scale, may_draw_forms=False)
-                png, w, h = _preview(bitmap.to_pil())
+                rendered = bitmap.to_pil()
+                png, w, h = _preview(rendered)
+                quality = _quality(rendered, photo=False)  # a PDF page's size is ours to choose: no small-page check
             finally:
                 page.close()
-            pages.append({"width": w, "height": h, "preview": f"page-{i + 1}.png", "_png": png})
-        return {"pages": pages, "warnings": []}
+            pages.append({"width": w, "height": h, "preview": f"page-{i + 1}.png", "_png": png, "quality": quality})
+        return {"pages": pages}
     finally:
         doc.close()
+
+
+# ------------------------------------------------------------------ quality checks (W03.S2.T1, SCAN-QUALITY-01)
+# Measured on a grey working copy (long edge QUALITY_WORK_PX). These are provisional engineering thresholds set on
+# labelled synthetic pages; they need calibrating on real learner scans. A check only ever *warns*: whether a page
+# is unreadable is decided by a teacher, who can ask for a rescan (W04.S3.T2).
+QUALITY_WORK_PX = 1000
+CONTENT_MIN_STDDEV = 6.0  # a near-blank page has no edges to judge sharpness by
+BLUR_LIKELY, BLUR_POSSIBLE = 60, 100  # strongest-edge response (99.5th percentile of |Laplacian|, denoised)
+GLARE_LIKELY, GLARE_POSSIBLE = 0.03, 0.01  # share of the page blown out to near-white
+GLARE_SKIP_MEDIAN = 240  # a scan whose paper is already pure white has no glare to find
+EDGE_BAND = 0.03  # each border band is 3 % of the side
+EDGE_PAPER_SHARE = 0.6  # the paper reaches the edge (not a background around the page)
+CUT_LIKELY, CUT_POSSIBLE = 0.01, 0.003  # share of ink pixels in a band where the paper reaches the edge
+SMALL_LIKELY_PX, SMALL_POSSIBLE_PX = MIN_LONG_EDGE_PX, 1_100  # the page's own long edge in the photo
+
+
+def _percentile(hist: list[int], share: float) -> int:
+    total, acc = sum(hist), 0
+    for value, n in enumerate(hist):
+        acc += n
+        if acc >= total * share:
+            return value
+    return len(hist) - 1
+
+
+def _quality(image: Any, *, photo: bool) -> list[dict[str, Any]]:
+    """Blur, glare, cut-off edges and a page too small in the photo, each `likely` or `possible`."""
+    from PIL import Image, ImageChops, ImageFilter, ImageStat
+
+    def shrink(im: Any) -> tuple[Any, float]:
+        scale = min(1.0, QUALITY_WORK_PX / max(im.size))
+        size = (max(1, round(im.width * scale)), max(1, round(im.height * scale)))
+        return im.resize(size, Image.Resampling.BOX), scale
+
+    grey = image.convert("L")
+    work, scale = shrink(grey)  # the whole frame, for the page's extent and its edges
+    hist = work.histogram()
+    median = _percentile(hist, 0.5)
+    flags: list[dict[str, Any]] = []
+
+    def level(value: float, likely: float, possible: float, *, below: bool) -> str | None:
+        if below:
+            return "likely" if value < likely else "possible" if value < possible else None
+        return "likely" if value >= likely else "possible" if value >= possible else None
+
+    # The page itself: the bright paper region (a dark table around it is not part of it).
+    paper = max(90, int(median * 0.75))
+    box = work.point(lambda v: 255 if v >= paper else 0).getbbox()
+    if photo:  # with no bright paper found, the whole photo is judged
+        page_px = (max(box[2] - box[0], box[3] - box[1]) if box else max(work.size)) / scale
+        if lv := level(page_px, SMALL_LIKELY_PX, SMALL_POSSIBLE_PX, below=True):
+            flags.append({"code": "small_text", "level": lv})
+    # Sharpness and glare are judged on the page alone, at its own working size.
+    region = grey.crop(tuple(round(v / scale) for v in box)) if box else grey
+    page_work, _ = shrink(region)
+    page_hist = page_work.histogram()
+    page_median = _percentile(page_hist, 0.5)
+
+    if ImageStat.Stat(page_work).stddev[0] >= CONTENT_MIN_STDDEV:
+        quiet = page_work.filter(ImageFilter.MedianFilter(3))
+        lap = (0, 1, 0, 1, -4, 1, 0, 1, 0)
+        edges = ImageChops.lighter(
+            quiet.filter(ImageFilter.Kernel((3, 3), lap, scale=1, offset=0)),
+            quiet.filter(ImageFilter.Kernel((3, 3), tuple(-v for v in lap), scale=1, offset=0)),
+        )
+        if lv := level(_percentile(edges.histogram(), 0.995), BLUR_LIKELY, BLUR_POSSIBLE, below=True):
+            flags.append({"code": "blur", "level": lv})
+
+    glare = sum(page_hist[250:]) / sum(page_hist)
+    if page_median < GLARE_SKIP_MEDIAN and (lv := level(glare, GLARE_LIKELY, GLARE_POSSIBLE, below=False)):
+        flags.append({"code": "glare", "level": lv})
+
+    ink = min(100, median // 2)
+    w, h = work.size
+    bw, bh = max(2, round(w * EDGE_BAND)), max(2, round(h * EDGE_BAND))
+    sides: dict[str, str] = {}
+    for side, crop in {
+        "top": (0, 0, w, bh),
+        "bottom": (0, h - bh, w, h),
+        "left": (0, 0, bw, h),
+        "right": (w - bw, 0, w, h),
+    }.items():
+        band = work.crop(crop).histogram()
+        n = sum(band)
+        reaches_edge = sum(band[paper:]) / n >= EDGE_PAPER_SHARE
+        if reaches_edge and (lv := level(sum(band[:ink]) / n, CUT_LIKELY, CUT_POSSIBLE, below=False)):
+            sides[side] = lv
+    if sides:
+        flags.append(
+            {"code": "cut_off", "level": "likely" if "likely" in sides.values() else "possible", "sides": list(sides)}
+        )
+    return flags
+
+
+# What the learner is told: each flag says what may be wrong and how to retake the page. `possible` is worded as a
+# prompt to check the preview, never as a verdict.
+QUALITY_TEXT: dict[str, dict[str, str]] = {
+    "blur": {
+        "likely": "This page looks blurry. Retake the photo holding the phone steady, with the page in focus.",
+        "possible": "This page may be slightly blurry. If the writing isn't sharp in the preview, retake it.",
+    },
+    "glare": {
+        "likely": "Light is reflecting off part of this page and may hide writing. Retake it away from bright light.",
+        "possible": "There may be a bright reflection on this page. Check the preview; retake it if writing is hidden.",
+    },
+    "cut_off": {
+        "likely": "Writing seems to run off the {sides} edge. Retake it with the whole page and some margin in view.",
+        "possible": "Writing may run off the {sides} edge. Check the preview and retake it if anything is missing.",
+    },
+    "small_text": {
+        "likely": "The page is small in this photo, so the writing may be too small to read. Move closer, retake it.",
+        "possible": "The page is fairly small in this photo. Check the writing is readable in the preview.",
+    },
+}
+
+
+def quality_message(flag: dict[str, Any]) -> str:
+    text = QUALITY_TEXT[flag["code"]][flag["level"]]
+    sides = list(flag.get("sides", []))
+    if len(sides) > 1:
+        return text.replace("{sides} edge", f"{', '.join(sides[:-1])} and {sides[-1]} edges")
+    return text.replace("{sides}", sides[0] if sides else "page")
 
 
 def _detail_worker(work: Path, kind: str) -> None:
