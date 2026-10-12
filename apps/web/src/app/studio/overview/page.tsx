@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Suspense } from "react";
-import type { AcademicOverview } from "@portal/contracts";
+import type { AcademicOverview, FlaggedQuestion } from "@portal/contracts";
 import { Badge, Breadcrumbs, Notice, SkeletonLines } from "@/components/ui";
 import { api } from "@/lib/session";
 import { requireStaff, StudioForbiddenError } from "@/lib/studio";
+import { FLAG_TEXT } from "../items/[id]/question-statistics";
 
 export const metadata: Metadata = { title: "Academic overview", robots: { index: false } };
 
@@ -40,7 +42,10 @@ async function Overview({ grade, subject }: { grade: string; subject: string }) 
     if (!(e instanceof StudioForbiddenError)) throw e;
   }
   if (!token) return <Notice tone="warn" title="Staff only">Only content staff can open the academic overview.</Notice>;
-  const res = await api<AcademicOverview>(`/v1/studio/overview?grade=${grade}&subject=${subject}`, { token });
+  const [res, flagged] = await Promise.all([
+    api<AcademicOverview>(`/v1/studio/overview?grade=${grade}&subject=${subject}`, { token }),
+    api<FlaggedQuestion[]>(`/v1/studio/statistics/flagged?grade=${grade}&subject=${subject}`, { token }),
+  ]);
   return (
     <div className="space-y-4">
       <form method="get" className="flex flex-wrap items-end gap-2" aria-label="Choose class and subject">
@@ -101,6 +106,27 @@ async function Overview({ grade, subject }: { grade: string; subject: string }) 
               </tbody>
             </table>
           </div>
+          {flagged.ok && (
+            <section aria-labelledby="flagged-h" className="space-y-2">
+              <h2 id="flagged-h" className="font-semibold">
+                Questions worth a review (from learners&apos; answers)
+              </h2>
+              {flagged.data.length === 0 ? (
+                <p className="text-sm text-muted">None yet. A question is only flagged once at least 30 learners have answered a version of it.</p>
+              ) : (
+                <ul className="space-y-1 text-sm">
+                  {flagged.data.map((f) => (
+                    <li key={f.item_id}>
+                      <Link href={`/studio/items/${f.item_id}`} className="text-accent underline-offset-2 hover:underline">
+                        {f.title}
+                      </Link>{" "}
+                      <span className="text-muted">· {f.versions.flatMap((v) => v.flags.map((x) => FLAG_TEXT[x] ?? x)).join(" ")}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </section>
+          )}
         </>
       )}
     </div>

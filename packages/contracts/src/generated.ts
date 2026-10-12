@@ -3081,6 +3081,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/studio/items/{item_id}/statistics": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Observed difficulty, option choice and discrimination per answered version (P08.S4.T3) */
+        get: operations["item_statistics_v1_studio_items__item_id__statistics_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/studio/items/{item_id}/submit": {
         parameters: {
             query?: never;
@@ -3416,6 +3433,23 @@ export interface paths {
         put?: never;
         /** Record that a source was checked (reviewers) */
         post: operations["review_source_v1_studio_sources__source_id__review_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/studio/statistics/flagged": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Questions in a class and subject that statistics suggest a reviewer should look at */
+        get: operations["flagged_questions_v1_studio_statistics_flagged_get"];
+        put?: never;
+        post?: never;
         delete?: never;
         options?: never;
         head?: never;
@@ -5818,6 +5852,20 @@ export interface components {
             /** Updated At */
             updated_at: string | null;
         };
+        /** FlaggedOut */
+        FlaggedOut: {
+            /** Availability */
+            availability: string;
+            /**
+             * Item Id
+             * Format: uuid
+             */
+            item_id: string;
+            /** Title */
+            title: string;
+            /** Versions */
+            versions: components["schemas"]["ItemStatsOut"][];
+        };
         /** FlagsIn */
         FlagsIn: {
             /** Positions */
@@ -6421,6 +6469,44 @@ export interface components {
             stem: {
                 [key: string]: unknown;
             }[];
+        };
+        /** ItemStatsOut */
+        ItemStatsOut: {
+            /** Answered */
+            answered: number;
+            /** Blank */
+            blank: number;
+            /**
+             * Difficulty
+             * @description Share of answered responses that were correct
+             */
+            difficulty: number | null;
+            /**
+             * Discrimination
+             * @description Point-biserial with the rest of the attempt; null if undefined
+             */
+            discrimination: number | null;
+            /** Discrimination Sample */
+            discrimination_sample: number;
+            /**
+             * Enough
+             * @description At least 30 answered responses: below that nothing is judged
+             */
+            enough: boolean;
+            /**
+             * Flags
+             * @description Prompts for a reviewer's look, never a verdict
+             */
+            flags: string[];
+            /** Options */
+            options: components["schemas"]["OptionStat"][];
+            /**
+             * Responses
+             * @description Finalised attempts that included this version (excluding voided scoring)
+             */
+            responses: number;
+            /** Version */
+            version: number;
         };
         /** ItemSummary */
         ItemSummary: {
@@ -7363,6 +7449,17 @@ export interface components {
             }[];
             /** Id */
             id: string;
+        };
+        /** OptionStat */
+        OptionStat: {
+            /** Chosen */
+            chosen: number;
+            /** Key */
+            key: boolean;
+            /** Option Id */
+            option_id: string;
+            /** Rate */
+            rate: number | null;
         };
         /** OriginalOut */
         OriginalOut: {
@@ -16246,6 +16343,37 @@ export interface operations {
             };
         };
     };
+    item_statistics_v1_studio_items__item_id__statistics_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                item_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ItemStatsOut"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     submit_v1_studio_items__item_id__submit_post: {
         parameters: {
             query?: never;
@@ -16911,6 +17039,38 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    flagged_questions_v1_studio_statistics_flagged_get: {
+        parameters: {
+            query: {
+                grade: number;
+                subject: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["FlaggedOut"][];
+                };
             };
             /** @description Validation Error */
             422: {
