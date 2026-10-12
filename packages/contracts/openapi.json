@@ -8402,6 +8402,331 @@
         "title": "PreviewLesson",
         "type": "object"
       },
+      "PriceIn": {
+        "properties": {
+          "amount_minor": {
+            "anyOf": [
+              {
+                "minimum": 0.0,
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Integer minor units (paisa for PKR)",
+            "title": "Amount Minor"
+          },
+          "channel": {
+            "const": "web",
+            "default": "web",
+            "title": "Channel",
+            "type": "string"
+          },
+          "currency": {
+            "description": "ISO 4217 code, e.g. PKR",
+            "pattern": "^[A-Z]{3}$",
+            "title": "Currency",
+            "type": "string"
+          },
+          "on_sale": {
+            "default": true,
+            "title": "On Sale",
+            "type": "boolean"
+          },
+          "reason": {
+            "maxLength": 1000,
+            "minLength": 10,
+            "title": "Reason",
+            "type": "string"
+          },
+          "starts_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Defaults to now; never in the past",
+            "title": "Starts At"
+          }
+        },
+        "required": [
+          "currency",
+          "reason"
+        ],
+        "title": "PriceIn",
+        "type": "object"
+      },
+      "PriceOut": {
+        "properties": {
+          "amount_minor": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Amount Minor"
+          },
+          "channel": {
+            "title": "Channel",
+            "type": "string"
+          },
+          "currency": {
+            "title": "Currency",
+            "type": "string"
+          },
+          "on_sale": {
+            "title": "On Sale",
+            "type": "boolean"
+          },
+          "reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reason"
+          },
+          "starts_at": {
+            "format": "date-time",
+            "title": "Starts At",
+            "type": "string"
+          }
+        },
+        "required": [
+          "channel",
+          "currency",
+          "amount_minor",
+          "on_sale",
+          "starts_at"
+        ],
+        "title": "PriceOut",
+        "type": "object"
+      },
+      "ProductAdminOut": {
+        "properties": {
+          "activated_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Activated At"
+          },
+          "code": {
+            "title": "Code",
+            "type": "string"
+          },
+          "current_price": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PriceOut"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "description": {
+            "title": "Description",
+            "type": "string"
+          },
+          "duration_days": {
+            "title": "Duration Days",
+            "type": "integer"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "kind": {
+            "title": "Kind",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "price_history": {
+            "items": {
+              "$ref": "#/components/schemas/PriceOut"
+            },
+            "title": "Price History",
+            "type": "array"
+          },
+          "retired_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Retired At"
+          },
+          "scope": {
+            "additionalProperties": true,
+            "title": "Scope",
+            "type": "object"
+          },
+          "status": {
+            "title": "Status",
+            "type": "string"
+          },
+          "written_units": {
+            "title": "Written Units",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id",
+          "code",
+          "name",
+          "kind",
+          "scope",
+          "duration_days",
+          "written_units",
+          "description",
+          "status",
+          "activated_at",
+          "retired_at",
+          "current_price",
+          "price_history"
+        ],
+        "title": "ProductAdminOut",
+        "type": "object"
+      },
+      "ProductIn": {
+        "properties": {
+          "code": {
+            "maxLength": 40,
+            "minLength": 3,
+            "title": "Code",
+            "type": "string"
+          },
+          "description": {
+            "default": "",
+            "maxLength": 2000,
+            "title": "Description",
+            "type": "string"
+          },
+          "duration_days": {
+            "maximum": 366.0,
+            "minimum": 1.0,
+            "title": "Duration Days",
+            "type": "integer"
+          },
+          "kind": {
+            "enum": [
+              "platform",
+              "subject_package",
+              "exam_package",
+              "bundle"
+            ],
+            "title": "Kind",
+            "type": "string"
+          },
+          "name": {
+            "maxLength": 120,
+            "minLength": 3,
+            "title": "Name",
+            "type": "string"
+          },
+          "scope": {
+            "$ref": "#/components/schemas/ScopeIn"
+          },
+          "written_units": {
+            "maximum": 500.0,
+            "minimum": 0.0,
+            "title": "Written Units",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "code",
+          "name",
+          "kind",
+          "duration_days",
+          "written_units"
+        ],
+        "title": "ProductIn",
+        "type": "object"
+      },
+      "ProductOut": {
+        "description": "What the public listing shows: the definition and the price on sale now (if any). No staff fields.",
+        "properties": {
+          "code": {
+            "title": "Code",
+            "type": "string"
+          },
+          "description": {
+            "title": "Description",
+            "type": "string"
+          },
+          "duration_days": {
+            "title": "Duration Days",
+            "type": "integer"
+          },
+          "kind": {
+            "title": "Kind",
+            "type": "string"
+          },
+          "name": {
+            "title": "Name",
+            "type": "string"
+          },
+          "price": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/PriceOut"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The web price on sale now; null if not priced yet"
+          },
+          "scope": {
+            "additionalProperties": true,
+            "title": "Scope",
+            "type": "object"
+          },
+          "written_units": {
+            "description": "The disclosed, finite written allowance for the period",
+            "title": "Written Units",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "code",
+          "name",
+          "kind",
+          "scope",
+          "duration_days",
+          "written_units",
+          "description",
+          "price"
+        ],
+        "title": "ProductOut",
+        "type": "object"
+      },
       "ProfileIn": {
         "additionalProperties": false,
         "description": "Onboarding answers (P04.S3.T1). Everything can be corrected later; no identity documents are collected.",
@@ -10863,6 +11188,36 @@
         "title": "SaveOut",
         "type": "object"
       },
+      "ScopeIn": {
+        "properties": {
+          "exams": {
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 10,
+            "title": "Exams",
+            "type": "array"
+          },
+          "grades": {
+            "items": {
+              "type": "integer"
+            },
+            "maxItems": 2,
+            "title": "Grades",
+            "type": "array"
+          },
+          "subjects": {
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 10,
+            "title": "Subjects",
+            "type": "array"
+          }
+        },
+        "title": "ScopeIn",
+        "type": "object"
+      },
       "ScoreCorrectionIn": {
         "properties": {
           "corrected_option_id": {
@@ -12763,6 +13118,21 @@
           "text"
         ],
         "title": "TranscriptScene",
+        "type": "object"
+      },
+      "TransitionIn": {
+        "properties": {
+          "reason": {
+            "maxLength": 1000,
+            "minLength": 10,
+            "title": "Reason",
+            "type": "string"
+          }
+        },
+        "required": [
+          "reason"
+        ],
+        "title": "TransitionIn",
         "type": "object"
       },
       "TrialCohort": {
@@ -15486,6 +15856,282 @@
         "summary": "Move a session's result release later, never earlier (reason required; audited)",
         "tags": [
           "practice"
+        ]
+      }
+    },
+    "/v1/admin/products": {
+      "get": {
+        "operationId": "admin_products_v1_admin_products_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/ProductAdminOut"
+                  },
+                  "title": "Response Admin Products V1 Admin Products Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "All products, drafts included (finance)",
+        "tags": [
+          "products"
+        ]
+      },
+      "post": {
+        "operationId": "admin_create_v1_admin_products_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductAdminOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Define a draft product",
+        "tags": [
+          "products"
+        ]
+      }
+    },
+    "/v1/admin/products/{product_id}": {
+      "put": {
+        "operationId": "admin_update_v1_admin_products__product_id__put",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "product_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Product Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductAdminOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Change a draft product",
+        "tags": [
+          "products"
+        ]
+      }
+    },
+    "/v1/admin/products/{product_id}/activate": {
+      "post": {
+        "operationId": "admin_activate_v1_admin_products__product_id__activate_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "product_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Product Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransitionIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductAdminOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Put a product on sale",
+        "tags": [
+          "products"
+        ]
+      }
+    },
+    "/v1/admin/products/{product_id}/prices": {
+      "post": {
+        "operationId": "admin_price_v1_admin_products__product_id__prices_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "product_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Product Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PriceIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductAdminOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Add a price version (append-only, integer minor units)",
+        "tags": [
+          "products"
+        ]
+      }
+    },
+    "/v1/admin/products/{product_id}/retire": {
+      "post": {
+        "operationId": "admin_retire_v1_admin_products__product_id__retire_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "product_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Product Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransitionIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductAdminOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Stop selling a product",
+        "tags": [
+          "products"
         ]
       }
     },
@@ -19632,6 +20278,31 @@
         "summary": "Start (or resume) the attempt",
         "tags": [
           "practice"
+        ]
+      }
+    },
+    "/v1/products": {
+      "get": {
+        "operationId": "public_products_v1_products_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/ProductOut"
+                  },
+                  "title": "Response Public Products V1 Products Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Products on sale and their current web price",
+        "tags": [
+          "products"
         ]
       }
     },
