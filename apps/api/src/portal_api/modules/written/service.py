@@ -152,6 +152,8 @@ def availability(db: Session, grade: int, subject: str) -> dict[str, Any]:
     return {
         "review_staffed": review_staffed(db, grade, subject),
         "review_accepting": cap["accepting"],
+        # STAFFING-01: the honest wait for a script started now (None until the staffing is recorded).
+        "turnaround_days": cap["staffing"]["turnaround_estimate_days"] if cap["staffing"] else None,
         "upload_allowance_s": UPLOAD_ALLOWANCE_S,
         "caps": CAPS,
         "chapters": [

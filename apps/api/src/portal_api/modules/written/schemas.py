@@ -19,6 +19,9 @@ class WrittenAvailabilityOut(BaseModel):
     subject: str
     review_staffed: bool = Field(description="False means no funded teacher review exists, so nothing is offered")
     review_accepting: bool = Field(description="False means teacher marking is at capacity; new tests can't start now")
+    turnaround_days: int | None = Field(
+        default=None, description="About how many days marking takes for a test started now (None: not estimated)"
+    )
     upload_allowance_s: int
     caps: dict[str, int]
     chapters: list[WrittenChapter]
