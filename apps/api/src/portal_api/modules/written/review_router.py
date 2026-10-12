@@ -12,6 +12,7 @@ from sqlalchemy.orm import Session
 
 from portal_api.db import get_session
 from portal_api.errors import NotFound
+from portal_api.modules.assessment.schemas import RelatedLesson
 from portal_api.modules.content import written as wq
 from portal_api.modules.content.models import ContentVersion
 from portal_api.modules.identity.deps import CurrentPrincipal, Principal, require
@@ -176,6 +177,29 @@ class CriterionResult(BaseModel):
     evidence: list[EvidenceLinkOut] = Field(default_factory=list)
 
 
+MAX_FOCUS = 5
+
+
+def _next_steps(rubric: Any, given: dict[str, Any], lessons: list[Any], chapter_id: uuid.UUID | None) -> NextStepsOut:
+    """Criteria that didn't earn full credit, with the rubric's own words, and the topic's live lessons. An
+    alternative route the learner didn't take is left out once another route in its group earned credit."""
+    earned = {c.id: int(given.get(c.id, {}).get("units", 0)) for c in rubric.criteria}
+    credited = {(c.subpart_id, c.alternative_group) for c in rubric.criteria if c.alternative_group and earned[c.id]}
+    focus = [
+        FocusOut(criterion_id=c.id, description=c.description, common_mistakes=list(c.misconceptions))
+        for c in rubric.criteria
+        if c.description
+        and earned[c.id] < c.max_units
+        and not (c.alternative_group and not earned[c.id] and (c.subpart_id, c.alternative_group) in credited)
+    ][:MAX_FOCUS]
+    return NextStepsOut(
+        focus=focus,
+        lessons=[RelatedLesson(id=lesson.id, title=lesson.title, chapter_id=lesson.chapter_id) for lesson in lessons],
+        lessons_missing=not lessons,
+        chapter_id=chapter_id,
+    )
+
+
 def _where(number: int, region: list[float] | None) -> str:
     if not region:
         return f"page {number}"
@@ -230,6 +254,23 @@ class QuestionResult(BaseModel):
     revisions: list[LearnerRevision] = Field(default_factory=list, description="Clearer copies you sent")
     earned_units: int | None = Field(description="Null unless scored; no mark is invented for unassessed work")
     criteria: list[CriterionResult]
+    next_steps: NextStepsOut | None = Field(default=None, description="Only for a scored question that lost marks")
+
+
+class FocusOut(BaseModel):
+    criterion_id: str
+    description: str = Field(description="What the rubric asks for, in its own approved words")
+    common_mistakes: list[str] = Field(description="The rubric's listed misconceptions for this criterion")
+
+
+class NextStepsOut(BaseModel):
+    """W07.S2.T1 (NEXT-STEPS-01): where to go next on a question that lost marks. Everything here is approved content:
+    the rubric's own wording for what was missed and live lessons for the question's topic. Nothing is generated."""
+
+    focus: list[FocusOut]
+    lessons: list[RelatedLesson]
+    lessons_missing: bool = Field(description="True when no reviewed lesson is published for this topic or chapter")
+    chapter_id: uuid.UUID | None = Field(description="The question's chapter (its outline and textbook pages)")
 
 
 class RecheckOut(BaseModel):
@@ -511,7 +552,17 @@ def my_result(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, response: Re
             linked_attempts=[LinkedAttemptOut(**x) for x in linked.linked_attempts(db, attempt.id)],
         )
     ctx_questions = {str(fi.position): fi for fi in form.items}
+    from portal_api.modules.content.models import ContentItem
+    from portal_api.modules.content.related import live_lessons_for
     from portal_api.modules.written import rescans
+
+    question_items = {}
+    for pos, fi in ctx_questions.items():
+        qv = db.get(ContentVersion, fi.question_version_id)
+        item = db.get(ContentItem, qv.item_id) if qv is not None else None
+        if item is not None:
+            question_items[pos] = item
+    lessons = live_lessons_for(db, question_items)
 
     revisions_by_pos: dict[int, list[Any]] = {}
     for r in rescans.revisions_for(db, attempt.id):
@@ -553,6 +604,11 @@ def my_result(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, response: Re
                     )
                     for c in rubric.criteria
                 ],
+                next_steps=_next_steps(
+                    rubric, given, lessons.get(pos, []), q.chapter_id if (q := question_items.get(pos)) else None
+                )
+                if scored and sv.question_units.get(pos, 0) < fi.max_units
+                else None,
             )
         )
     history = [

@@ -4,7 +4,7 @@
 // uploaded but NOT submitted, and submitted (sealed with a receipt). Nothing is marked until it is submitted.
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import type { EvidenceLink, WrittenAttempt, WrittenPage, WrittenResult } from "@portal/contracts";
+import type { EvidenceLink, NextSteps as Steps, WrittenAttempt, WrittenPage, WrittenResult } from "@portal/contracts";
 import { saveMapping, sealScript } from "@/app/actions/written";
 import { LessonBlocks } from "@/components/lesson-blocks";
 import { PendingAction } from "./pending-action";
@@ -269,6 +269,7 @@ export function WrittenRunner({ attempt, result = null }: { attempt: WrittenAtte
                       </li>
                     ))}
                   </ul>
+                  {q.next_steps && <NextSteps steps={q.next_steps} />}
                 </div>
               ))}
               <RecheckPanel attemptId={attempt.id} result={result} marks={marks} />
@@ -445,5 +446,51 @@ function EvidencePlace({ attemptId, place }: { attemptId: string; place: Evidenc
         )}
       </span>
     </details>
+  );
+}
+
+// W07.S2.T1 (NEXT-STEPS-01): what to work on next, in the rubric's own approved words, and the reviewed lessons for
+// this question's topic. When none is published yet it says so and points to the chapter page; nothing is generated.
+function NextSteps({ steps }: { steps: Steps }) {
+  return (
+    <section aria-label="Next steps" className="space-y-2 rounded-lg border border-border bg-surface-muted p-3 text-sm">
+      <p className="font-medium">Next steps</p>
+      {steps.focus.length > 0 && (
+        <ul className="list-disc space-y-1 pl-5">
+          {steps.focus.map((f) => (
+            <li key={f.criterion_id}>
+              Work on: {f.description}
+              {f.common_mistakes.length > 0 && <span className="block text-muted">Common mistakes: {f.common_mistakes.join("; ")}</span>}
+            </li>
+          ))}
+        </ul>
+      )}
+      {steps.lessons.length > 0 ? (
+        <p>
+          Revise:{" "}
+          {steps.lessons.map((l, i) => (
+            <span key={l.id}>
+              {i > 0 && ", "}
+              <a href={`/learn/chapter/${l.chapter_id}#lesson-${l.id}`} className="text-accent underline underline-offset-2">
+                {l.title}
+              </a>
+            </span>
+          ))}
+        </p>
+      ) : (
+        <p className="text-muted">
+          No reviewed lesson is published for this topic yet.
+          {steps.chapter_id && (
+            <>
+              {" "}
+              <a href={`/learn/chapter/${steps.chapter_id}`} className="text-accent underline underline-offset-2">
+                Open the chapter
+              </a>{" "}
+              for its outline and textbook pages.
+            </>
+          )}
+        </p>
+      )}
+    </section>
   );
 }
