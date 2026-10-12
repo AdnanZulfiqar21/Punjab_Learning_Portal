@@ -13,6 +13,7 @@ import { useRequest } from "@/hooks/use-request";
 import { useTheme } from "@/hooks/use-theme";
 import { api, GRADE_LABEL, pageRange, lessonAsset } from "@/lib/api";
 import { useAuth } from "@/lib/auth";
+import { useDisplay } from "@/lib/display";
 
 export default function ChapterScreen() {
   const c = useTheme();
@@ -115,6 +116,7 @@ type Language = (typeof LANGUAGES)[number][0];
 const LANGUAGE_NAME: Record<string, string> = { en: "English", ur: "Urdu", roman_ur: "Roman Urdu" };
 
 function LessonList({ chapterId, token }: { chapterId: string; token: string | null }) {
+  const { dataSaver } = useDisplay().display; // SETTINGS-01
   const [language, setLanguage] = useState<Language>("en");
   const { state, retry } = useRequest((signal) => api.lessons(chapterId, token, signal, language), [chapterId, token, language]);
   // LESSON-DONE-01: which lessons this learner marked completed (signed in only).
@@ -163,6 +165,7 @@ function LessonList({ chapterId, token }: { chapterId: string; token: string | n
                   <LessonBlocks
                     blocks={l.body.blocks as { type: string }[]}
                     assetSource={(v) => lessonAsset(l.id, v, token)}
+                    dataSaver={dataSaver}
                     equationAction={token && study ? (i) => <SaveFormula token={token} lessonId={l.id} index={i} /> : undefined}
                   />
                 </View>

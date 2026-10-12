@@ -13183,6 +13183,152 @@
         "title": "StudyPlanOut",
         "type": "object"
       },
+      "StudySettingsOut": {
+        "properties": {
+          "data_saver": {
+            "title": "Data Saver",
+            "type": "boolean"
+          },
+          "reduce_motion": {
+            "title": "Reduce Motion",
+            "type": "boolean"
+          },
+          "saved": {
+            "title": "Saved",
+            "type": "boolean"
+          },
+          "text_size": {
+            "enum": [
+              "default",
+              "large",
+              "larger"
+            ],
+            "title": "Text Size",
+            "type": "string"
+          },
+          "theme": {
+            "enum": [
+              "system",
+              "light",
+              "dark"
+            ],
+            "title": "Theme",
+            "type": "string"
+          },
+          "updated_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Updated At"
+          },
+          "video_quality": {
+            "enum": [
+              "auto",
+              "data_saver",
+              "standard",
+              "high"
+            ],
+            "title": "Video Quality",
+            "type": "string"
+          }
+        },
+        "required": [
+          "theme",
+          "text_size",
+          "reduce_motion",
+          "data_saver",
+          "video_quality",
+          "saved",
+          "updated_at"
+        ],
+        "title": "StudySettingsOut",
+        "type": "object"
+      },
+      "StudySettingsPatch": {
+        "additionalProperties": false,
+        "description": "Only the settings given are changed.",
+        "properties": {
+          "data_saver": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Data Saver"
+          },
+          "reduce_motion": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reduce Motion"
+          },
+          "text_size": {
+            "anyOf": [
+              {
+                "enum": [
+                  "default",
+                  "large",
+                  "larger"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Text Size"
+          },
+          "theme": {
+            "anyOf": [
+              {
+                "enum": [
+                  "system",
+                  "light",
+                  "dark"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Theme"
+          },
+          "video_quality": {
+            "anyOf": [
+              {
+                "enum": [
+                  "auto",
+                  "data_saver",
+                  "standard",
+                  "high"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Video Quality"
+          }
+        },
+        "title": "StudySettingsPatch",
+        "type": "object"
+      },
       "SubjectInGrade": {
         "properties": {
           "books": {
@@ -19957,6 +20103,66 @@
         "tags": [
           "identity",
           "sessions"
+        ]
+      }
+    },
+    "/v1/me/settings": {
+      "get": {
+        "operationId": "get_settings_v1_me_settings_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StudySettingsOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Your usual study settings (defaults if unsaved)",
+        "tags": [
+          "settings"
+        ]
+      },
+      "patch": {
+        "operationId": "change_settings_v1_me_settings_patch",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StudySettingsPatch"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StudySettingsOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Change some of your usual study settings; the others are left as they are",
+        "tags": [
+          "settings"
         ]
       }
     },

@@ -5,13 +5,17 @@ import { ActivityIndicator, Pressable, StyleSheet, Text, View, type TextProps, t
 import { Radius, Space } from "@/constants/theme";
 import { useTheme } from "@/hooks/use-theme";
 import type { ApiError } from "@/lib/api";
+import { useDisplay } from "@/lib/display-context";
 
 type Variant = "title" | "heading" | "body" | "muted" | "small" | "eyebrow" | "mono";
 
 export function T({ variant = "body", style, ...rest }: TextProps & { variant?: Variant }) {
   const c = useTheme();
+  const { scale } = useDisplay(); // SETTINGS-01: larger text on this device; the system text size still applies on top
   const color = variant === "muted" || variant === "small" ? c.muted : variant === "eyebrow" ? c.accent : c.text;
-  return <Text style={[{ color }, text[variant], style]} {...rest} />;
+  const v = text[variant];
+  const sized = scale === 1 ? v : { ...v, fontSize: v.fontSize * scale, lineHeight: v.lineHeight * scale };
+  return <Text style={[{ color }, sized, style]} {...rest} />;
 }
 
 const text = StyleSheet.create({

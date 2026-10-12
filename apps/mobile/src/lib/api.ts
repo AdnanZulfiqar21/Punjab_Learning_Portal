@@ -24,6 +24,8 @@ import type {
   Chapter,
   Lesson,
   Me,
+  StudySettings,
+  StudySettingsPatch,
   PracticeAttempt,
   PracticeAvailability,
   PracticeForm,
@@ -192,6 +194,10 @@ export const api = {
       body: { kind: "native", device_label: deviceLabel },
     }),
   me: (token: string, signal?: AbortSignal) => request<Me>("/v1/me", { token, signal }),
+  // P04.S3.T2 (SETTINGS-01): the account's usual study settings; only the settings given change.
+  settings: (token: string, signal?: AbortSignal) => request<StudySettings>("/v1/me/settings", { token, signal }),
+  saveSettings: (token: string, patch: StudySettingsPatch) =>
+    request<StudySettings>("/v1/me/settings", { method: "PATCH", token, body: patch }),
   sessions: (token: string, signal?: AbortSignal) => request<AppSession[]>("/v1/me/sessions", { token, signal }),
   revokeSession: (token: string, id: string) =>
     request<void>(`/v1/me/sessions/${encodeURIComponent(id)}`, { method: "DELETE", token }),

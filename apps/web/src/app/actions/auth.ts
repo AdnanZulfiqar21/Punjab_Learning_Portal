@@ -4,7 +4,8 @@
 // see node_modules/next/dist/docs/01-app/02-guides/data-security.md); the session cookie is also SameSite=Lax.
 import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
-import type { ProfileInput, SessionCreated } from "@portal/contracts";
+import type { ProfileInput, SessionCreated, StudySettings } from "@portal/contracts";
+import { DISPLAY_COOKIE, DISPLAY_MAX_AGE_S, fromAccount, parseDisplay, serializeDisplay } from "@/lib/display";
 import { api, cookieOptions, SESSION_COOKIE, sessionToken } from "@/lib/session";
 
 export type FormState = { error?: string; fieldErrors?: Record<string, string> } | undefined;
@@ -39,7 +40,15 @@ export async function signInWithPassword(_prev: FormState, form: FormData): Prom
     headers: { "User-Agent": h.get("user-agent") ?? "web" },
   });
   if (!created.ok) return { error: "Could not start a session. Please try again." };
-  (await cookies()).set(SESSION_COOKIE, created.data.session_token, cookieOptions());
+  const jar = await cookies();
+  jar.set(SESSION_COOKIE, created.data.session_token, cookieOptions());
+  // SETTINGS-01: a device without its own display choice takes the account's usual settings; its own is never replaced.
+  if (!parseDisplay(jar.get(DISPLAY_COOKIE)?.value)?.own) {
+    const usual = await api<StudySettings>("/v1/me/settings", { token: created.data.session_token });
+    if (usual.ok && usual.data.saved) {
+      jar.set(DISPLAY_COOKIE, serializeDisplay(fromAccount(usual.data)), { ...cookieOptions(), httpOnly: false, maxAge: DISPLAY_MAX_AGE_S });
+    }
+  }
   redirect(safeNext(form.get("next")));
 }
 

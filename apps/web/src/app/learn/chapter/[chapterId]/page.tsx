@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { cookies, headers } from "next/headers";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import type { FavouriteTopic, Lesson, StudyNote, TopicNode } from "@portal/contracts";
@@ -8,6 +9,7 @@ import { LessonBlocks } from "@/components/lesson-blocks";
 import { LessonStartBeacon } from "@/components/lesson-start-beacon";
 import { FavouriteButton, LessonNote, SaveFormulaButton } from "@/components/study-tools";
 import { getChapter, getLessons } from "@/lib/api";
+import { DISPLAY_COOKIE, parseDisplay } from "@/lib/display";
 import { CONTENT_STATE_TEXT, GRADE_LABEL, assessmentSummary, pageRange } from "@/lib/format";
 import { Badge, Breadcrumbs, Notice, SkeletonLines } from "@/components/ui";
 import { api, currentUser, deviceScope, features, sessionToken } from "@/lib/session";
@@ -168,6 +170,9 @@ async function Lessons({ chapterId, topics, lang }: { chapterId: string; topics:
   const notes = new Map(readable.flatMap((l, i) => (noteRes[i].ok ? [[l.id, noteRes[i].data] as const] : [])));
   const user = notes.size > 0 ? await currentUser() : null; // ISOLATION-01: unsent drafts are kept per account
   const titles = topicTitles(topics);
+  // SETTINGS-01: this device's data saver, or the browser's Save-Data hint when the device hasn't chosen.
+  const display = parseDisplay((await cookies()).get(DISPLAY_COOKIE)?.value);
+  const dataSaver = display ? display.dataSaver : (await headers()).get("save-data") === "on";
   return (
     <section aria-labelledby="lessons-heading" className="space-y-4">
       <div className="flex flex-wrap items-center justify-between gap-2">
@@ -230,6 +235,7 @@ async function Lessons({ chapterId, topics, lang }: { chapterId: string; topics:
                   blocks={l.body.blocks as { type: string }[]}
                   headingOffset={2}
                   assetUrl={(v) => `/learn/lessons/${l.id}/assets/${v}`}
+                  dataSaver={dataSaver}
                   equationAction={token && study ? (i) => <SaveFormulaButton lessonId={l.id} index={i} /> : undefined}
                 />
               </div>

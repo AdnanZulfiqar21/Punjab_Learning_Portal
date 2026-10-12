@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { cookies } from "next/headers";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
@@ -12,10 +13,12 @@ import { getAccess } from "@/lib/access";
 import { PlanStatus } from "@/components/plan-status";
 import { RemoveTrialDevice } from "@/components/trial-devices";
 import { NotificationPreferences } from "@/components/notification-preferences";
-import type { AssistedAccess, NotificationPreferences as Prefs, TrialDevice } from "@portal/contracts";
+import type { AssistedAccess, NotificationPreferences as Prefs, StudySettings, TrialDevice } from "@portal/contracts";
 import { AssistedAccessList } from "@/components/assisted-access";
 import { DeleteAccount } from "@/components/delete-account";
 import { api } from "@/lib/session";
+import { DISPLAY_COOKIE, parseDisplay } from "@/lib/display";
+import { StudySettingsForm } from "@/components/study-settings";
 
 export const metadata: Metadata = { title: "Your account", robots: { index: false } };
 
@@ -42,12 +45,14 @@ async function Account() {
   const user = await currentUser();
   if (!user) redirect("/signin?next=/account");
   const { me, token } = user;
-  const [sessions, access, prefs, assists, trialDevices] = await Promise.all([
+  const [sessions, access, prefs, assists, trialDevices, settings, jar] = await Promise.all([
     listSessions(token),
     getAccess(token),
     api<Prefs>("/v1/me/notification-preferences", { token }),
     api<AssistedAccess[]>("/v1/me/assisted-access", { token }),
     api<TrialDevice[]>("/v1/me/trial/devices", { token }),
+    api<StudySettings>("/v1/me/settings", { token }),
+    cookies(),
   ]);
   const p = me.profile;
   return (
@@ -179,6 +184,15 @@ async function Account() {
             </Link>
           </div>
           <NotificationPreferences initial={prefs.data} />
+        </section>
+      )}
+
+      {settings.ok && (
+        <section aria-labelledby="settings-heading" className="space-y-3">
+          <h2 id="settings-heading" className="font-semibold">
+            Display and data
+          </h2>
+          <StudySettingsForm initial={settings.data} current={parseDisplay(jar.get(DISPLAY_COOKIE)?.value)} />
         </section>
       )}
 

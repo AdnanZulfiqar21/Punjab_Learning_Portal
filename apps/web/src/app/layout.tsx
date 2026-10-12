@@ -4,7 +4,9 @@ import Link from "next/link";
 import { Suspense } from "react";
 import { AccountNav } from "@/components/account-nav";
 import { ConnectionStatus } from "@/components/connection-status";
+import { DisplaySync } from "@/components/display-sync";
 import { IncidentBanner } from "@/components/incident-banner";
+import { DISPLAY_SCRIPT } from "@/lib/display";
 import "./globals.css";
 
 const sans = Geist({ variable: "--font-sans-ui", subsets: ["latin"] });
@@ -27,7 +29,11 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${sans.variable} ${mono.variable} h-full antialiased`}>
+    // The display script sets this device's theme, text size and motion on <html> before the first paint (SETTINGS-01).
+    <html lang="en" className={`${sans.variable} ${mono.variable} h-full antialiased`} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: DISPLAY_SCRIPT }} />
+      </head>
       <body className="flex min-h-full flex-col">
         <a
           href="#main"
@@ -36,6 +42,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           Skip to content
         </a>
         <ConnectionStatus />
+        <Suspense fallback={null}>
+          <DisplaySync />
+        </Suspense>
         <header className="border-b border-border bg-surface">
           <nav
             aria-label="Main"
