@@ -40,6 +40,7 @@ import type {
   Inbox,
   SupportTicket,
   TrialDecision,
+  TrialDevice,
   WrittenAttempt,
   WrittenAvailability,
   WrittenForm,
@@ -201,6 +202,9 @@ export const api = {
     }),
   authorizeDevice: (token: string) =>
     request<TrialDecision>("/v1/me/trial/devices", { method: "POST", token, body: { surface: SURFACE, proof: {}, label: deviceName() } }),
+  trialDevices: (token: string, signal?: AbortSignal) => request<TrialDevice[]>("/v1/me/trial/devices", { token, signal }),
+  removeTrialDevice: (token: string, id: string) =>
+    request<void>(`/v1/me/trial/devices/${encodeURIComponent(id)}`, { method: "DELETE", token }),
 
   // Practice (P09/P10). Attempt payloads never contain keys; results release them after submission.
   practiceAvailability: (token: string, grade: number, subject: string, signal?: AbortSignal) =>

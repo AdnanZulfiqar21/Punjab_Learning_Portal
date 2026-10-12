@@ -19,6 +19,8 @@ const when = (iso: string) => new Date(iso).toLocaleString("en-GB", { dateStyle:
 function route(link: string | null): void {
   const written = link?.match(/^\/practice\/written\/([0-9a-f-]{36})$/i);
   if (written) return void router.push({ pathname: "/written/[id]", params: { id: written[1] } });
+  const result = link?.match(/^\/practice\/attempt\/([0-9a-f-]{36})\/result$/i); // P13.S2.T3: a revised score
+  if (result) return void router.push({ pathname: "/result/[id]", params: { id: result[1] } });
   if (link?.startsWith("/help")) return void router.push("/help");
   if (link === "/account") return void router.navigate("/account");
 }

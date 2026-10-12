@@ -230,6 +230,8 @@ function SignedIn({ token, me }: { token: string; me: Me }) {
         )}
       </View>
 
+      <TrialDevices token={token} />
+
       <YourData token={token} email={me.email ?? ""} />
 
       <View style={{ borderTopWidth: 1, borderColor: c.border, paddingTop: Space.lg }}>
@@ -241,6 +243,69 @@ function SignedIn({ token, me }: { token: string; me: Me }) {
 
 
 /** P15.S3.T3 / P18.S3.T2: support's assisted access to my activity, and asking for the account to be deleted. */
+const SURFACE_NAME: Record<string, string> = { android: "Android app", ios: "iPhone or iPad app", web: "Web browser" };
+
+// P04.S1.T3: the devices using this account's free trial. Removing one frees a place; it can't rejoin by itself.
+function TrialDevices({ token }: { token: string }) {
+  const { handleError } = useAuth();
+  const devices = useRequest((signal) => api.trialDevices(token, signal), [token]);
+  const [asking, setAsking] = useState<string | null>(null);
+  const [busy, setBusy] = useState(false);
+  if (devices.state.status !== "success" || devices.state.data.length === 0) return null;
+
+  async function remove(id: string) {
+    setBusy(true);
+    try {
+      await api.removeTrialDevice(token, id);
+      setAsking(null);
+      devices.retry();
+    } catch (e) {
+      handleError(e);
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  return (
+    <View style={{ gap: Space.sm }}>
+      <T variant="heading" accessibilityRole="header">
+        Devices on your free trial
+      </T>
+      <T variant="small">
+        Up to 3 devices can use your free trial. Removing one frees a place for another. A removed phone or tablet can&apos;t rejoin the trial by itself; if you
+        removed one by mistake, ask for help.
+      </T>
+      {devices.state.data.map((d) => {
+        const name = d.label || SURFACE_NAME[d.surface] || "Device";
+        return (
+          <Card key={d.id}>
+            <View style={{ flexDirection: "row", alignItems: "center", gap: Space.sm, flexWrap: "wrap" }}>
+              <T style={{ fontWeight: "600" }}>{name}</T>
+              {d.this_device && <Badge>This device</Badge>}
+            </View>
+            <T variant="small">
+              {SURFACE_NAME[d.surface] ?? d.surface} · added {when(d.authorized_at)}
+            </T>
+            <View style={{ marginTop: Space.sm, flexDirection: "row", gap: Space.sm, flexWrap: "wrap", alignItems: "center" }}>
+              {asking === d.id ? (
+                <>
+                  <T variant="small" accessibilityLiveRegion="polite">
+                    It can&apos;t rejoin the trial by itself.
+                  </T>
+                  <Button label="Yes, remove" busy={busy} onPress={() => remove(d.id)} />
+                  <Button variant="secondary" label="Cancel" onPress={() => setAsking(null)} />
+                </>
+              ) : (
+                <Button variant="secondary" label={`Remove ${name}`} onPress={() => setAsking(d.id)} />
+              )}
+            </View>
+          </Card>
+        );
+      })}
+    </View>
+  );
+}
+
 function YourData({ token, email }: { token: string; email: string }) {
   const { handleError } = useAuth();
   const assists = useRequest((signal) => api.assistedAccess(token, signal), [token]);

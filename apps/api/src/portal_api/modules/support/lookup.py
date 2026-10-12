@@ -219,6 +219,7 @@ def grant_assist(
         "support.assisted_access",
         {"subject": t.subject, "minutes": str(minutes)},
         dedupe_key=f"assist-{row.id}",
+        link="/account",  # where the learner sees and can end the access
     )
     db.commit()
     db.refresh(row)

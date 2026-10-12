@@ -113,8 +113,11 @@ def test_rehearsal_disputed_question_soft_then_void(client: TestClient, physics:
         assert (after["raw"], after["maximum"], after["version"]) == (POOL - 1, POOL - 1, 2)  # EXCLUDE for practice
         assert after["items"][0]["treatment"] == "EXCLUDE" and after["revision_reason"]
         assert after["revised_at"] is not None
-        notes = [n["event"] for n in client.get("/v1/me/notifications", headers=learner.headers).json()["items"]]
+        inbox = client.get("/v1/me/notifications", headers=learner.headers).json()["items"]
+        notes = [n["event"] for n in inbox]
         assert notes.count("score.revised") == 1
+        revised = next(n for n in inbox if n["event"] == "score.revised")
+        assert revised["link"] == f"/practice/attempt/{a['id']}/result"  # P13.S2.T3: the notice opens the result
         # P12.S1.T3 (REPORT-LINKS-01): the report shows the correction that resolved it, to the learner and to staff.
         mine = client.get(f"/v1/support/tickets/{report.json()['id']}", headers=learner.headers).json()
         assert [(c["id"], c["defect"]) for c in mine["corrections"]] == [(done.json()["id"], "VOID")]
