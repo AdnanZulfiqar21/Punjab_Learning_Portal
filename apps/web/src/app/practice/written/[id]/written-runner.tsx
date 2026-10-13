@@ -234,12 +234,12 @@ export function WrittenRunner({ attempt, result = null }: { attempt: WrittenAtte
                   <span className="ml-2 text-sm text-muted">
                     {(result.awaiting_regrade ?? []).length > 0
                       ? `marked by a teacher; question ${(result.awaiting_regrade ?? []).join(", ")} is waiting to be re-marked under a corrected marking guide`
-                      : result.decision_method === "SYSTEM" && result.history.at(-1)?.case_kind === "regrade"
+                      : result.decision_method === "SYSTEM" && result.versions.at(-1)?.case_kind === "regrade"
                         ? "marked by a teacher; carried forward unchanged after a marking-guide correction"
                         : "marked by a teacher"}
                   </span>
                 </p>
-              ) : result.completeness === "unavailable" ? (
+              ) : result.assessment_state === "unavailable" ? (
                 // COMPLETENESS-01 (§20.9.3): nothing could be assessed, so there is no mark at all, not a zero.
                 <Notice tone="warn" title="No mark for this test">
                   None of the questions could be assessed, so this test has no mark. The allowance it used was returned; the reasons are shown with each
