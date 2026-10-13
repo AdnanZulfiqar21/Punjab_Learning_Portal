@@ -10,17 +10,33 @@ from pydantic import BaseModel, Field
 Disposition = Literal["accepted", "stale", "invalid", "late", "finalised", "locked", "conflict"]
 
 
+class TopicAvailability(BaseModel):
+    topic_id: uuid.UUID
+    number: str | None = Field(description="The printed heading number, e.g. 13.1.2")
+    title: str
+    questions: int = Field(description="Approved, published question families for this topic")
+
+
 class ChapterAvailability(BaseModel):
     chapter_id: uuid.UUID
     number: int
     title: str
     questions: int = Field(description="Approved, published question families available for practice")
+    topics: list[TopicAvailability] = Field(
+        default_factory=list, description="Topics with questions, to narrow a chapter test (P11.S3.T1)"
+    )
 
 
 class AvailabilityOut(BaseModel):
     grade: int
     subject: str
     chapters: list[ChapterAvailability]
+    seconds_per_question: int | None = Field(
+        default=None,
+        description="Measured median time per question on submitted untimed practice in this class and subject; "
+        "null until enough tests exist (never a guess)",
+    )
+    estimate_based_on: int = Field(default=0, description="How many submitted tests the estimate was measured from")
 
 
 class SubjectShare(BaseModel):

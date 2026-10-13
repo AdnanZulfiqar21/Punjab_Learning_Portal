@@ -133,25 +133,82 @@ def availability(db: Session, grade: int, subject: str) -> list[dict[str, Any]]:
     chapters = _book_chapters(db, grade, subject)
     if not chapters:
         raise NotFound("No book is available for this class and subject.")
-    counts = dict(
-        db.execute(
-            select(
-                ContentItem.chapter_id, func.count(func.distinct(func.coalesce(ContentItem.family_id, ContentItem.id)))
-            )
-            .where(
-                ContentItem.kind == "mcq",
-                ContentItem.availability == Availability.live.value,
-                ContentItem.question_pool == "practice",
-                ContentItem.grade_number == grade,
-                ContentItem.subject_code == subject,
-            )
-            .group_by(ContentItem.chapter_id)
-        ).all()
+    live = (
+        ContentItem.kind == "mcq",
+        ContentItem.availability == Availability.live.value,
+        ContentItem.question_pool == "practice",
+        ContentItem.grade_number == grade,
+        ContentItem.subject_code == subject,
     )
+    families = func.count(func.distinct(func.coalesce(ContentItem.family_id, ContentItem.id)))
+    counts = {
+        cid: int(n)
+        for cid, n in db.execute(select(ContentItem.chapter_id, families).where(*live).group_by(ContentItem.chapter_id))
+    }
+    # P11.S3.T1 (PRACTICE-CONFIG-01): the topics a learner can narrow a chapter to, with their own counts. Only topics
+    # with questions are listed; a test scoped to topics draws from exactly these (forms._pool).
+    by_topic: dict[uuid.UUID, list[dict[str, Any]]] = defaultdict(list)
+    rows = db.execute(
+        select(Topic, families)
+        .join(ContentItem, ContentItem.topic_id == Topic.id)
+        .where(*live, Topic.retired_at.is_(None), Topic.chapter_id.in_([c.id for c in chapters]))
+        .group_by(Topic.id)
+        .order_by(Topic.display_order)
+    ).all()
+    for topic, n in rows:
+        by_topic[topic.chapter_id].append(
+            {"topic_id": topic.id, "number": topic.number, "title": topic.title, "questions": int(n)}
+        )
     return [
-        {"chapter_id": c.id, "number": c.number, "title": c.title, "questions": int(counts.get(c.id, 0))}
+        {
+            "chapter_id": c.id,
+            "number": c.number,
+            "title": c.title,
+            "questions": int(counts.get(c.id, 0)),
+            "topics": by_topic.get(c.id, []),
+        }
         for c in chapters
     ]
+
+
+ESTIMATE_MIN_TESTS = 20  # fewer finished tests than this and no estimate is shown
+ESTIMATE_WINDOW_DAYS = 180
+
+
+def time_estimate(db: Session, grade: int, subject: str) -> tuple[int | None, int]:
+    """P11.S3.T1 (PRACTICE-CONFIG-01): a measured time per question, never a guess. The median of how long learners
+    actually took per question on untimed practice tests they submitted in this class and subject over the last 180
+    days (ignoring per-question times under 5 seconds or over 30 minutes, which are not answering). Returns (seconds per
+    question or None, tests measured); None until at least ESTIMATE_MIN_TESTS tests exist."""
+    from datetime import timedelta
+
+    from sqlalchemy import Float, cast, literal
+
+    from portal_api.modules.assessment.models import Attempt
+
+    per_question = (
+        cast(func.extract("epoch", Attempt.finalised_at - Attempt.started_at), Float) / PracticeForm.question_count
+    )
+    stmt = (
+        select(func.percentile_cont(literal(0.5)).within_group(per_question), func.count())
+        .select_from(Attempt)
+        .join(PracticeForm, PracticeForm.id == Attempt.form_id)
+        .where(
+            PracticeForm.kind == "practice",
+            PracticeForm.duration_s.is_(None),
+            PracticeForm.grade_number == grade,
+            PracticeForm.subject_code == subject,
+            Attempt.finalise_reason == "manual",
+            Attempt.finalised_at.is_not(None),
+            Attempt.finalised_at > func.now() - timedelta(days=ESTIMATE_WINDOW_DAYS),
+            per_question.between(5, 1800),
+        )
+    )
+    median, tests = db.execute(stmt).one()
+    tests = int(tests or 0)
+    if tests < ESTIMATE_MIN_TESTS or median is None:
+        return None, tests
+    return max(5, round(float(median))), tests
 
 
 def _request_hash(req: dict[str, Any]) -> str:

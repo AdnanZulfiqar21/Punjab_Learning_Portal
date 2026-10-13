@@ -1339,9 +1339,27 @@
             "title": "Chapters",
             "type": "array"
           },
+          "estimate_based_on": {
+            "default": 0,
+            "description": "How many submitted tests the estimate was measured from",
+            "title": "Estimate Based On",
+            "type": "integer"
+          },
           "grade": {
             "title": "Grade",
             "type": "integer"
+          },
+          "seconds_per_question": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Measured median time per question on submitted untimed practice in this class and subject; null until enough tests exist (never a guess)",
+            "title": "Seconds Per Question"
           },
           "subject": {
             "title": "Subject",
@@ -2382,6 +2400,14 @@
           "title": {
             "title": "Title",
             "type": "string"
+          },
+          "topics": {
+            "description": "Topics with questions, to narrow a chapter test (P11.S3.T1)",
+            "items": {
+              "$ref": "#/components/schemas/TopicAvailability"
+            },
+            "title": "Topics",
+            "type": "array"
           }
         },
         "required": [
@@ -15050,6 +15076,44 @@
           "events"
         ],
         "title": "TimelineOut",
+        "type": "object"
+      },
+      "TopicAvailability": {
+        "properties": {
+          "number": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The printed heading number, e.g. 13.1.2",
+            "title": "Number"
+          },
+          "questions": {
+            "description": "Approved, published question families for this topic",
+            "title": "Questions",
+            "type": "integer"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "topic_id": {
+            "format": "uuid",
+            "title": "Topic Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "topic_id",
+          "number",
+          "title",
+          "questions"
+        ],
+        "title": "TopicAvailability",
         "type": "object"
       },
       "TopicNode": {

@@ -5017,8 +5017,19 @@ export interface components {
         AvailabilityOut: {
             /** Chapters */
             chapters: components["schemas"]["ChapterAvailability"][];
+            /**
+             * Estimate Based On
+             * @description How many submitted tests the estimate was measured from
+             * @default 0
+             */
+            estimate_based_on: number;
             /** Grade */
             grade: number;
+            /**
+             * Seconds Per Question
+             * @description Measured median time per question on submitted untimed practice in this class and subject; null until enough tests exist (never a guess)
+             */
+            seconds_per_question?: number | null;
             /** Subject */
             subject: string;
         };
@@ -5447,6 +5458,11 @@ export interface components {
             questions: number;
             /** Title */
             title: string;
+            /**
+             * Topics
+             * @description Topics with questions, to narrow a chapter test (P11.S3.T1)
+             */
+            topics?: components["schemas"]["TopicAvailability"][];
         };
         /** ChapterOut */
         ChapterOut: {
@@ -10555,6 +10571,26 @@ export interface components {
             /** Events */
             events: components["schemas"]["TimelineEventOut"][];
             learner: components["schemas"]["LearnerOut"];
+        };
+        /** TopicAvailability */
+        TopicAvailability: {
+            /**
+             * Number
+             * @description The printed heading number, e.g. 13.1.2
+             */
+            number: string | null;
+            /**
+             * Questions
+             * @description Approved, published question families for this topic
+             */
+            questions: number;
+            /** Title */
+            title: string;
+            /**
+             * Topic Id
+             * Format: uuid
+             */
+            topic_id: string;
         };
         /** TopicNode */
         TopicNode: {

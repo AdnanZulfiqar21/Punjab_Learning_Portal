@@ -399,6 +399,7 @@ test("uploads are refused from other sites", async ({ page }) => {
 });
 
 test("a teacher marks a submitted script and the learner sees the released marks", async ({ page, browser }) => {
+  test.slow(); // a learner, a teacher, a recheck and a linked test: about 50 s on a development server
   await newLearner(page);
   await page.goto("/practice/written?grade=11&subject=biology");
   await page.getByRole("group", { name: "Chapters" }).getByRole("checkbox").first().check();
