@@ -73,6 +73,8 @@ function Builder({ token, initialGrade, initialSubject }: { token: string; initi
   const [mix, setMix] = useState<Partial<Record<SubjectCode, string>>>({});
   const availability = useRequest((signal) => api.practiceAvailability(token, grade, subject, signal), [token, grade, subject]);
   const [chapters, setChapters] = useState<string[]>([]);
+  // P11.S3.T1 (PRACTICE-CONFIG-01): optional topics inside the chosen chapters; any chosen limits the test to them.
+  const [topics, setTopics] = useState<string[]>([]);
   // P09.S1.T2 (SCOPES-01): halves follow the book's chapter order; "combined" is this subject's XI and XII books.
   const [cover, setCover] = useState<"chapters" | "half_1" | "half_2" | "full_book" | "combined">("chapters");
   const [count, setCount] = useState("10");
@@ -113,6 +115,7 @@ function Builder({ token, initialGrade, initialSubject }: { token: string; initi
               scope: cover.startsWith("half") ? "half_book" : cover,
               half: cover === "half_1" ? 1 : cover === "half_2" ? 2 : null,
               chapter_ids: cover === "chapters" ? chapters : [],
+              topic_ids: cover === "chapters" ? topics : [],
               question_count: Number(count) || 1,
               ...timing,
             },
@@ -135,8 +138,8 @@ function Builder({ token, initialGrade, initialSubject }: { token: string; initi
 
   return (
     <View style={{ gap: Space.lg }}>
-      <Choices label="Class" options={[[11, GRADE_LABEL[11]], [12, GRADE_LABEL[12]]] as const} selected={[grade]} onToggle={(g) => { setGrade(g); setChapters([]); }} />
-      <Choices label="Subject" options={SUBJECTS} selected={[subject]} onToggle={(s) => { setSubject(s); setChapters([]); }} />
+      <Choices label="Class" options={[[11, GRADE_LABEL[11]], [12, GRADE_LABEL[12]]] as const} selected={[grade]} onToggle={(g) => { setGrade(g); setChapters([]); setTopics([]); }} />
+      <Choices label="Subject" options={SUBJECTS} selected={[subject]} onToggle={(s) => { setSubject(s); setChapters([]); setTopics([]); }} />
       <Choices
         label="Kind of test"
         options={[["mcq", "Multiple choice"], ["mix", "Several subjects"], ["written", "Written answers"]] as const}
@@ -187,7 +190,10 @@ function Builder({ token, initialGrade, initialSubject }: { token: string; initi
                   aria-checked={on}
                   aria-disabled={disabled}
                   disabled={disabled}
-                  onPress={() => setChapters(on ? chapters.filter((x) => x !== ch.chapter_id) : [...chapters, ch.chapter_id])}
+                  onPress={() => {
+                    setChapters(on ? chapters.filter((x) => x !== ch.chapter_id) : [...chapters, ch.chapter_id]);
+                    if (on) setTopics((ts) => ts.filter((t) => !(ch.topics ?? []).some((x) => x.topic_id === t)));
+                  }}
                   style={{
                     flexDirection: "row",
                     gap: Space.sm,
@@ -206,9 +212,49 @@ function Builder({ token, initialGrade, initialSubject }: { token: string; initi
                 </Pressable>
               );
             })}
+            {availability.state.data.chapters
+              .filter((ch) => chapters.includes(ch.chapter_id) && (ch.topics ?? []).length > 0)
+              .map((ch) => (
+                <View key={`topics-${ch.chapter_id}`} style={{ gap: Space.xs, paddingLeft: Space.lg }}>
+                  <T variant="small">Chapter {ch.number}: only some topics? (optional; choosing any limits the whole test to them)</T>
+                  {(ch.topics ?? []).map((t) => {
+                    const picked = topics.includes(t.topic_id);
+                    return (
+                      <Pressable
+                        key={t.topic_id}
+                        accessibilityRole="checkbox"
+                        aria-checked={picked}
+                        onPress={() => setTopics(picked ? topics.filter((x) => x !== t.topic_id) : [...topics, t.topic_id])}
+                        style={{
+                          flexDirection: "row",
+                          gap: Space.sm,
+                          padding: Space.sm,
+                          borderWidth: 1,
+                          borderRadius: Radius.sm,
+                          borderColor: picked ? c.accent : c.border,
+                          backgroundColor: picked ? c.accentSoft : c.surface,
+                        }}>
+                        <T style={{ flex: 1 }}>
+                          {t.number ? `${t.number} ` : ""}
+                          {t.title}
+                        </T>
+                        <T variant="small">
+                          {t.questions} question{t.questions === 1 ? "" : "s"}
+                        </T>
+                      </Pressable>
+                    );
+                  })}
+                </View>
+              ))}
           </View>
           )}
           <Field label="Questions" value={count} onChangeText={setCount} keyboardType="number-pad" maxLength={3} />
+          {/* PRACTICE-CONFIG-01: a measured median, never a guess. */}
+          <T variant="small">
+            {availability.state.data.seconds_per_question
+              ? `About ${Math.max(1, Math.ceil(((Number(count) || 1) * availability.state.data.seconds_per_question) / 60))} minutes for ${Number(count) || 1} questions, measured from ${availability.state.data.estimate_based_on} submitted tests here.`
+              : "No time estimate yet: not enough submitted tests in this subject to measure one."}
+          </T>
           {settings()}
           <FormError message={error} />
           <Button label="Start test" onPress={start} busy={busy} disabled={cover === "chapters" && chapters.length === 0} />

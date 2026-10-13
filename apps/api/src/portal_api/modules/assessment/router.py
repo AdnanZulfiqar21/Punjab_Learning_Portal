@@ -113,7 +113,14 @@ def availability(
 ) -> AvailabilityOut:
     _private(response)
     rows = forms.availability(db, grade, subject)
-    return AvailabilityOut(grade=grade, subject=subject, chapters=[ChapterAvailability(**r) for r in rows])
+    per_question, measured = forms.time_estimate(db, grade, subject)
+    return AvailabilityOut(
+        grade=grade,
+        subject=subject,
+        chapters=[ChapterAvailability(**r) for r in rows],
+        seconds_per_question=per_question,
+        estimate_based_on=measured,
+    )
 
 
 @router.post(

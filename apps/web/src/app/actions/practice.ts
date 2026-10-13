@@ -34,6 +34,8 @@ export async function createPractice(_prev: BuilderState, form: FormData): Promi
     scope,
     half: form.get("half") ? Number(form.get("half")) : null,
     chapter_ids: chapterIds,
+    // P11.S3.T1: optional topics inside the chosen chapters; any chosen topic limits the whole test to the chosen topics.
+    topic_ids: scope === "chapters" ? form.getAll("topic_ids").map(String) : [],
     mix,
     question_count: scope === "multi_subject" ? mix.reduce((n, m) => n + m.questions, 0) : Number(form.get("question_count") ?? 10),
     timed_minutes: timed ? Number(form.get("timed_minutes") ?? 10) : null,

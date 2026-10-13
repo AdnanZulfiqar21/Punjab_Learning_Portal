@@ -11,11 +11,15 @@ export function PracticeBuilder({
   subject,
   chapters,
   subjects,
+  secondsPerQuestion = null,
+  estimateBasedOn = 0,
 }: {
   grade: number;
   subject: string;
   chapters: PracticeAvailability["chapters"];
   subjects: [string, string][];
+  secondsPerQuestion?: number | null;
+  estimateBasedOn?: number;
 }) {
   // One idempotency key per test request: a double click or a retry returns the same test; a changed request gets a
   // fresh key after an error so it is never mistaken for the earlier one.
@@ -28,6 +32,9 @@ export function PracticeBuilder({
     return out;
   }, undefined);
   const [selected, setSelected] = useState<string[]>([]);
+  // P11.S3.T1 (PRACTICE-CONFIG-01): optional topics inside the chosen chapters. Choosing any limits the whole test to
+  // the chosen topics, as the API does.
+  const [topics, setTopics] = useState<string[]>([]);
   const [timed, setTimed] = useState(false);
   // P09.S1.T2: halves follow the book's chapter order (first half = the first ceil(n/2) chapters).
   const [scope, setScope] = useState<"chapters" | "half_1" | "half_2" | "full_book" | "combined" | "multi_subject">("chapters");
@@ -39,7 +46,17 @@ export function PracticeBuilder({
   const inScope =
     scope === "chapters" ? chapters.filter((c) => selected.includes(c.chapter_id)) : scope === "half_1" ? chapters.slice(0, split) : scope === "half_2" ? chapters.slice(split) : chapters;
   // The other class's book isn't listed here, so a combined test can ask for more than this book alone holds.
-  const available = scope === "combined" || scope === "multi_subject" ? 100 : inScope.reduce((n, c) => n + c.questions, 0);
+  const chosenTopics = scope === "chapters" ? inScope.flatMap((c) => (c.topics ?? []).filter((t) => topics.includes(t.topic_id))) : [];
+  const available =
+    scope === "combined" || scope === "multi_subject"
+      ? 100
+      : chosenTopics.length
+        ? chosenTopics.reduce((n, t) => n + t.questions, 0)
+        : inScope.reduce((n, c) => n + c.questions, 0);
+  const [countText, setCountText] = useState("10");
+  const asked = scope === "multi_subject" ? mixTotal : Math.max(1, Math.min(Number(countText) || 1, Math.max(1, available)));
+  // A measured median, never a guess (PRACTICE-CONFIG-01); rounded up to whole minutes.
+  const estimate = secondsPerQuestion ? Math.max(1, Math.ceil((asked * secondsPerQuestion) / 60)) : null;
   const ready = scope === "chapters" ? selected.length > 0 : scope === "multi_subject" ? mixSubjects >= 2 && mixTotal <= 100 : true;
   const field = "rounded-lg border border-border bg-surface px-3 py-2";
 
@@ -80,13 +97,40 @@ export function PracticeBuilder({
                   value={c.chapter_id}
                   disabled={c.questions === 0}
                   checked={selected.includes(c.chapter_id)}
-                  onChange={(e) => setSelected(e.target.checked ? [...selected, c.chapter_id] : selected.filter((x) => x !== c.chapter_id))}
+                  onChange={(e) => {
+                    setSelected(e.target.checked ? [...selected, c.chapter_id] : selected.filter((x) => x !== c.chapter_id));
+                    if (!e.target.checked) setTopics((ts) => ts.filter((t) => !(c.topics ?? []).some((x) => x.topic_id === t)));
+                  }}
                 />
                 <span className="flex-1">
                   Chapter {c.number}: {c.title}
                 </span>
                 <span className="text-sm text-muted">{c.questions === 0 ? "no questions yet" : `${c.questions} question${c.questions === 1 ? "" : "s"}`}</span>
               </label>
+              {selected.includes(c.chapter_id) && (c.topics ?? []).length > 0 && (
+                <fieldset className="space-y-1 px-4 pb-3 pl-11 text-sm">
+                  <legend className="sr-only">Topics in chapter {c.number}</legend>
+                  <p className="text-muted">Only some topics? (optional; choosing any limits the whole test to the topics you choose)</p>
+                  {(c.topics ?? []).map((t) => (
+                    <label key={t.topic_id} className="flex items-center gap-2">
+                      <input
+                        type="checkbox"
+                        name="topic_ids"
+                        value={t.topic_id}
+                        checked={topics.includes(t.topic_id)}
+                        onChange={(e) => setTopics(e.target.checked ? [...topics, t.topic_id] : topics.filter((x) => x !== t.topic_id))}
+                      />
+                      <span className="flex-1">
+                        {t.number ? `${t.number} ` : ""}
+                        {t.title}
+                      </span>
+                      <span className="text-muted">
+                        {t.questions} question{t.questions === 1 ? "" : "s"}
+                      </span>
+                    </label>
+                  ))}
+                </fieldset>
+              )}
             </li>
           ))}
         </ul>
@@ -121,7 +165,15 @@ export function PracticeBuilder({
       <div className="flex flex-wrap items-end gap-4">
         <label className="space-y-1" hidden={scope === "multi_subject"}>
           <span className="block font-medium">Questions</span>
-          <input type="number" name="question_count" min={1} max={Math.max(1, Math.min(100, available))} defaultValue={Math.min(10, Math.max(1, available))} className={`${field} w-28`} />
+          <input
+            type="number"
+            name="question_count"
+            min={1}
+            max={Math.max(1, Math.min(100, available))}
+            value={countText}
+            onChange={(e) => setCountText(e.target.value)}
+            className={`${field} w-28`}
+          />
         </label>
         <label className="space-y-1">
           <span className="block font-medium">Feedback</span>
@@ -147,7 +199,16 @@ export function PracticeBuilder({
           rejected, so keep your connection steady near the end.
         </p>
       )}
-      {selected.length > 0 && <p className="text-sm text-muted">{available} approved question{available === 1 ? "" : "s"} available in the chosen chapters.</p>}
+      {selected.length > 0 && (
+        <p className="text-sm text-muted">
+          {available} approved question{available === 1 ? "" : "s"} available in the chosen {chosenTopics.length ? "topics" : "chapters"}.
+        </p>
+      )}
+      <p className="text-sm text-muted" aria-live="polite">
+        {estimate !== null
+          ? `About ${estimate} minute${estimate === 1 ? "" : "s"} for ${asked} question${asked === 1 ? "" : "s"}, measured from how long learners took in ${estimateBasedOn} submitted tests here.`
+          : "No time estimate yet: not enough submitted tests in this subject to measure one."}
+      </p>
       {state?.error && (
         <p role="alert" className="rounded-lg border border-danger/30 bg-danger-soft px-3 py-2 text-sm">
           {state.error}
