@@ -7331,6 +7331,11 @@ export interface components {
             /** Content Schema Version */
             content_schema_version: number;
             /**
+             * Download Bytes
+             * @description Total size of this lesson's images and handouts (0: none); null when locked or unknown
+             */
+            download_bytes?: number | null;
+            /**
              * Id
              * Format: uuid
              */

@@ -156,6 +156,7 @@ function topicTitles(nodes: TopicNode[], out = new Map<string, string>()): Map<s
   return out;
 }
 
+const megabytes = (n: number) => (n < 100_000 ? `${Math.max(1, Math.round(n / 1000))} KB` : `${(n / 1_000_000).toFixed(1)} MB`);
 const published = (iso: string) => new Date(iso).toLocaleDateString("en-GB", { dateStyle: "medium", timeZone: TIME_ZONE });
 
 async function Lessons({ chapterId, topics, lang }: { chapterId: string; topics: TopicNode[]; lang: string }) {
@@ -218,6 +219,13 @@ async function Lessons({ chapterId, topics, lang }: { chapterId: string; topics:
                 {l.access_tier === "preview" ? "Free preview · " : ""}Reviewed lesson · version {l.version} ·
                 published {published(l.published_at)}
               </p>
+              {/* P07.S3.T3 (LESSON-SIZE-01): what the lesson's images and handouts cost to download, before they load. */}
+              {!l.locked && (l.download_bytes ?? 0) > 0 && (
+                <p className="text-sm text-muted">
+                  Images and handouts: {megabytes(l.download_bytes!)}
+                  {dataSaver ? " · data saver is on, so each loads only when you tap it" : ""}
+                </p>
+              )}
             </header>
             {l.locked || !l.body ? (
               <div className="rounded-lg bg-surface-muted p-4 text-sm">

@@ -117,6 +117,8 @@ const LANGUAGE_NAME: Record<string, string> = { en: "English", ur: "Urdu", roman
 
 function LessonList({ chapterId, token }: { chapterId: string; token: string | null }) {
   const { dataSaver } = useDisplay().display; // SETTINGS-01
+  // P07.S3.T3 (LESSON-SIZE-01): what a lesson's images and handouts cost to download, before they load.
+  const megabytes = (n: number) => (n < 100_000 ? `${Math.max(1, Math.round(n / 1000))} KB` : `${(n / 1_000_000).toFixed(1)} MB`);
   const [language, setLanguage] = useState<Language>("en");
   const { state, retry } = useRequest((signal) => api.lessons(chapterId, token, signal, language), [chapterId, token, language]);
   // LESSON-DONE-01: which lessons this learner marked completed (signed in only).
@@ -155,6 +157,12 @@ function LessonList({ chapterId, token }: { chapterId: string; token: string | n
             <T variant="small">
               {l.access_tier === "preview" ? "Free preview · " : ""}Reviewed lesson · version {l.version}
             </T>
+            {!l.locked && (l.download_bytes ?? 0) > 0 ? (
+              <T variant="small">
+                Images and handouts: {megabytes(l.download_bytes!)}
+                {dataSaver ? " · data saver is on, so each loads only when you tap it" : ""}
+              </T>
+            ) : null}
             <View style={{ marginTop: Space.sm }}>
               {l.locked || !l.body ? (
                 <Notice title="Included with a plan or the free 30-day trial">

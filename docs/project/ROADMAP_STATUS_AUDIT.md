@@ -46,7 +46,7 @@ For the tasks marked **Implemented**, the cited tests were confirmed to exist. T
 | W07.S2.T2 Score/attempt history | Released-version history, notices, linked attempts; marking-guide and evidence versions, per-question reasons and labels (HISTORY-01) | Device check only |
 | W07.S3.T2 Interrupted processing journeys | Unfinished tests across devices; idempotent notices; receipt restore after logout and on a second device (INTERRUPTIONS-01) | A native restart on a device (B09, B14) |
 | W08.S1.T1 Assessment plans | Weights, page caps, units shown before start, pilot entitlements; the R0 pilot switch (PILOT-R0-01) | Cost-backed units (WA-D07) |
-| P07.S3.T3 Low-bandwidth alternatives | Data saver defers diagrams | Audio-only assets (B05); per-lesson download size |
+| P07.S3.T3 Low-bandwidth alternatives | Data saver defers diagrams; per-lesson download size (LESSON-SIZE-01) | Audio-only assets (B05) |
 | P11.S3.T1 Practice configuration | Every scope, multi-subject, feedback modes, counts and shortage; topics and a measured time estimate on web and mobile (PRACTICE-CONFIG-01) | Device check only |
 | P13.S4.T2 OTA update behaviour | CLIENTS-01 minimums and mock-window protection | `expo-updates` runtime-version pinning; store builds (B07) |
 | P19.S2.T3 Manual accessibility | Automated axe, text size, reduced motion, captions | A manual screen-reader and 200 % zoom review by a person |
