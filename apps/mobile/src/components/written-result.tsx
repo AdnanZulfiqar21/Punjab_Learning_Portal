@@ -125,11 +125,34 @@ export function WrittenResultView({ attemptId, token }: { attemptId: string; tok
       {r.versions.length > 1 && (
         <Card>
           <T style={{ fontWeight: "600" }}>Mark history</T>
-          {r.versions.map((h) => (
-            <T key={h.version} variant="small">
-              Version {h.version}: {h.total_units === null ? "no mark" : marks(h.total_units)} · {HISTORY[h.case_kind] ?? h.case_kind} · released {when(h.released_at)}
-            </T>
-          ))}
+          {r.versions.map((h, i) => {
+            // HISTORY-01 (W07.S2.T2): what each version used and why a question changed.
+            const before = i > 0 ? r.versions[i - 1] : null;
+            const mark = (q: (typeof h.questions)[number] | undefined) =>
+              !q || q.status === "pending" ? "pending" : q.status === "unavailable" ? "couldn't be assessed" : marks(q.earned_units ?? 0);
+            const guides = [...new Set(h.questions.map((q) => q.rubric_version).filter((x): x is number => x !== null))].sort((a, b) => a - b);
+            const extra = [h.labels.includes("clearer_copy") ? "marked from a clearer copy you sent" : null, h.labels.includes("deadline_passed") ? "a deadline passed" : null]
+              .filter(Boolean)
+              .map((l) => ` · ${l}`)
+              .join("");
+            return (
+              <View key={h.version} style={{ gap: Space.xs }}>
+                <T variant="small">
+                  Version {h.version}: {h.total_units === null ? "no mark" : marks(h.total_units)} · {HISTORY[h.case_kind] ?? h.case_kind}
+                  {extra}
+                  {guides.length ? ` · marking guide v${guides.join(", v")}` : ""} · released {when(h.released_at)}
+                </T>
+                {h.questions
+                  .filter((q) => q.reason)
+                  .map((q) => (
+                    <T key={q.position} variant="small">
+                      {"  "}Question {q.position}
+                      {q.changed ? `: ${mark(before?.questions.find((p) => p.position === q.position))} → ${mark(q)}` : ""} — {q.reason}
+                    </T>
+                  ))}
+              </View>
+            );
+          })}
         </Card>
       )}
       <Recheck attemptId={attemptId} token={token} r={r} onDone={req.retry} />

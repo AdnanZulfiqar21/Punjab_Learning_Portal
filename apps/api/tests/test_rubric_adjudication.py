@@ -207,6 +207,9 @@ def test_an_identical_scoring_basis_carries_human_marks_forward_once(
     assert (after["total_units"], after["questions"]) == (before["total_units"], before["questions"])
     assert [h["case_kind"] for h in after["history"]] == ["initial", "regrade"]
     assert len(after["notices"]) == 1 and "unchanged" in after["notices"][0]["message"]
+    carried = after["versions"][-1]  # HISTORY-01: labelled, and nothing presented as a change
+    assert carried["labels"] == ["marking_guide_corrected"] and carried["decision_method"] == "SYSTEM"
+    assert not any(q["changed"] for q in carried["questions"])
     with get_sessionmaker()() as db:
         sv = db.execute(
             text(
@@ -258,6 +261,14 @@ def test_a_changed_scoring_basis_goes_to_a_teacher_never_a_machine_overwrite(
     assert done.status_code == 200, done.text
     final = _result(client, learner, a["id"])
     assert final["decision_method"] == "TEACHER" and final["history"][-1]["case_kind"] == "regrade"
+    remarked = final["versions"][-1]  # HISTORY-01: the corrected guide's version and the reason are shown
+    assert remarked["labels"] == ["marking_guide_corrected"]
+    q1 = next(q for q in remarked["questions"] if q["position"] == 1)
+    assert q1["reason"] == "Marked again under the corrected marking guide."
+    assert (
+        q1["rubric_version"]
+        > next(q for q in final["versions"][0]["questions"] if q["position"] == 1)["rubric_version"]
+    )
     assert _count("select count(*) from allowance_event where attempt_id = :a and kind = 'CONSUMED'", a=a["id"]) == 1
 
 

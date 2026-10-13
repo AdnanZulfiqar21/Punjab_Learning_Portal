@@ -43,7 +43,7 @@ For the tasks marked **Implemented**, the cited tests were confirmed to exist. T
 | W05.S3.T3 Controlled failure | Malformed, duplicate, timeout and unavailable injected | An unexpected model-version change; proof that MCQ work is unaffected |
 | W06.S3.T3 Train/qualify reviewers | CALIBRATION-01 | Discussion threads, periodic rounds, override and upheld-appeal audit; approved examples (B01) |
 | W07.S1.T3 Answer-release policies | Rubrics never shown in attempts; MCQ release (OCT9-01) | A versioned written model-answer release |
-| W07.S2.T2 Score/attempt history | Released-version history, notices, linked attempts | Rubric/evidence versions, per-question change reasons and rescan/new-content/corrected labels in the history |
+| W07.S2.T2 Score/attempt history | Released-version history, notices, linked attempts; marking-guide and evidence versions, per-question reasons and labels (HISTORY-01) | Device check only |
 | W07.S3.T2 Interrupted processing journeys | Unfinished tests across devices; idempotent notices; receipt restore after logout and on a second device (INTERRUPTIONS-01) | A native restart on a device (B09, B14) |
 | W08.S1.T1 Assessment plans | Weights, page caps, units shown before start, pilot entitlements; the R0 pilot switch (PILOT-R0-01) | Cost-backed units (WA-D07) |
 | P07.S3.T3 Low-bandwidth alternatives | Data saver defers diagrams | Audio-only assets (B05); per-lesson download size |
