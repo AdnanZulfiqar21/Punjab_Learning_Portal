@@ -4452,7 +4452,13 @@ export interface components {
             weights: {
                 [key: string]: number;
             };
+            /** @description Units that can fund written tests now (during the R0 pilot, pilot access only) */
             written_allowance: components["schemas"]["AllowanceOut"];
+            /**
+             * Written Pilot Only
+             * @description True during the R0 teacher-reviewed pilot: written practice is for learners with pilot access
+             */
+            written_pilot_only: boolean;
         };
         /** AccessTierIn */
         AccessTierIn: {
@@ -8517,6 +8523,11 @@ export interface components {
             scope: {
                 [key: string]: unknown;
             };
+            /**
+             * Written Pilot Only
+             * @description True while written practice is in the R0 teacher-reviewed pilot: these units can't be used yet
+             */
+            written_pilot_only: boolean;
             /**
              * Written Units
              * @description The disclosed, finite written allowance for the period

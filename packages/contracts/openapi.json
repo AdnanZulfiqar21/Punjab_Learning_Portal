@@ -94,7 +94,13 @@
             "type": "object"
           },
           "written_allowance": {
-            "$ref": "#/components/schemas/AllowanceOut"
+            "$ref": "#/components/schemas/AllowanceOut",
+            "description": "Units that can fund written tests now (during the R0 pilot, pilot access only)"
+          },
+          "written_pilot_only": {
+            "description": "True during the R0 teacher-reviewed pilot: written practice is for learners with pilot access",
+            "title": "Written Pilot Only",
+            "type": "boolean"
           }
         },
         "required": [
@@ -102,6 +108,7 @@
           "entitlements",
           "trial",
           "written_allowance",
+          "written_pilot_only",
           "weights",
           "device_check",
           "device_state"
@@ -9829,6 +9836,11 @@
             "title": "Scope",
             "type": "object"
           },
+          "written_pilot_only": {
+            "description": "True while written practice is in the R0 teacher-reviewed pilot: these units can't be used yet",
+            "title": "Written Pilot Only",
+            "type": "boolean"
+          },
           "written_units": {
             "description": "The disclosed, finite written allowance for the period",
             "title": "Written Units",
@@ -9842,6 +9854,7 @@
           "scope",
           "duration_days",
           "written_units",
+          "written_pilot_only",
           "description",
           "price"
         ],

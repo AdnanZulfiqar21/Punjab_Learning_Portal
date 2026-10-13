@@ -62,6 +62,12 @@ def _reservations(learner: Staff) -> list[AllowanceEvent]:
         )
 
 
+def _access(client: TestClient, who: Staff) -> dict[str, Any]:
+    r = client.get("/v1/me/access", headers=who.headers)
+    assert r.status_code == 200, r.text
+    return dict(r.json())
+
+
 def _availability(client: TestClient, who: Staff) -> dict[str, Any]:
     r = client.get("/v1/written/availability?grade=12&subject=chemistry", headers=who.headers)
     assert r.status_code == 200, r.text
@@ -81,10 +87,19 @@ def test_the_r0_pilot_admits_and_funds_only_pilot_learners(
     sealed_by, sealed = _sealed_script(client, chapter)
     before = len(_reservations(learner))
     assert _availability(client, learner)["pilot_only"] is False
+    assert (
+        _access(client, learner)["written_pilot_only"] is False
+        and _access(client, learner)["written_allowance"]["granted"] > 0
+    )
 
     monkeypatch.setattr(get_settings(), "written_release", "r0_pilot")
     av = _availability(client, learner)
     assert (av["pilot_only"], av["in_pilot"]) == (True, False)
+    # The plan and the price list say so too: no usable written units outside the pilot.
+    plan = _access(client, learner)
+    assert plan["written_pilot_only"] is True and plan["written_allowance"]["granted"] == 0
+    assert plan["written_allowance"]["available"] == 0 and plan["has_access"] is True  # practice tests still open
+    assert all(p["written_pilot_only"] for p in client.get("/v1/products").json())
     refused = [
         _form(client, learner, chapter),
         client.post(f"/v1/written/forms/{form.json()['id']}/attempt", headers=learner.headers),
@@ -106,6 +121,7 @@ def test_the_r0_pilot_admits_and_funds_only_pilot_learners(
     assert len(_reservations(learner)) == before
 
     funded_by = _grant(client, learner, 6)
+    assert _access(client, learner)["written_allowance"]["granted"] == 6  # only the pilot's units
     attempt = client.post(f"/v1/written/forms/{form.json()['id']}/attempt", headers=learner.headers)
     assert attempt.status_code == 200, attempt.text
     new = [e for e in _reservations(learner) if str(e.attempt_id) == attempt.json()["id"]]

@@ -23,6 +23,7 @@ from sqlalchemy import func, select
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
+from portal_api.config import get_settings
 from portal_api.errors import AppError, Conflict, NotFound, Unprocessable
 from portal_api.modules.access.models import (
     OFFER_TERMS_VERSION,
@@ -373,6 +374,8 @@ def _available(db: Session, ents: list[Entitlement]) -> int:
 
 def allowance(db: Session, user_id: uuid.UUID) -> dict[str, int]:
     ents = [e for e in active_entitlements(db, user_id, db_now(db)) if e.written_units > 0]
+    if get_settings().written_pilot_only:  # PILOT-R0-01: during the R0 pilot only pilot units can be used
+        ents = [e for e in ents if e.source == "pilot"]
     granted = sum(e.written_units for e in ents)
     reserved, accepted, consumed, remedy = _holds(_events(db, [e.id for e in ents]))
     return {

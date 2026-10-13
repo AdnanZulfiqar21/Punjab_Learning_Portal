@@ -11,6 +11,7 @@ from pydantic import BaseModel, Field
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
+from portal_api.config import get_settings
 from portal_api.db import get_session
 from portal_api.errors import Conflict, NotFound, Unprocessable
 from portal_api.modules.access import service, trial_devices
@@ -56,7 +57,12 @@ class AccessOut(BaseModel):
     has_access: bool = Field(description="True when a current entitlement allows new practice and written tests")
     entitlements: list[EntitlementOut]
     trial: TrialOut
-    written_allowance: AllowanceOut
+    written_allowance: AllowanceOut = Field(
+        description="Units that can fund written tests now (during the R0 pilot, pilot access only)"
+    )
+    written_pilot_only: bool = Field(
+        description="True during the R0 teacher-reviewed pilot: written practice is for learners with pilot access"
+    )
     weights: dict[str, int] = Field(description="Written allowance units per question type")
     device_check: str = Field(description="How the trial decision was made on this platform")
     device_state: Literal["device_authorization_required"] | None = Field(
@@ -102,6 +108,7 @@ def _access(db: Session, user_id: uuid.UUID) -> AccessOut:
         entitlements=[_ent(e) for e in ents],
         trial=TrialOut(**service.trial_status(db, user_id)),
         written_allowance=AllowanceOut(**service.allowance(db, user_id)),
+        written_pilot_only=get_settings().written_pilot_only,
         weights=service.QUESTION_WEIGHTS,
         device_check=(
             "Web uses account history. Apps record device evidence; Apple and Google device checks aren't connected "
