@@ -83,7 +83,7 @@ def _lessons(db: Session, chapter_id: uuid.UUID, premium: bool) -> list[tuple[Co
     return out
 
 
-def _questions(db: Session, chapter_id: uuid.UUID) -> tuple[list[dict[str, Any]], dict[str, dict[str, Any]]]:
+def _questions(db: Session, chapter_id: uuid.UUID) -> tuple[list[dict[str, Any]], dict[str, dict[str, Any]], int]:
     from portal_api.modules.assessment.forms import passage_version
 
     rows = db.execute(
@@ -99,11 +99,14 @@ def _questions(db: Session, chapter_id: uuid.UUID) -> tuple[list[dict[str, Any]]
     ).all()
     from portal_api.modules.content import assets
 
-    questions, passages = [], {}
+    questions, passages, online_only = [], {}, 0
     for item, version in rows:
         body = version.body if isinstance(version.body, dict) else {}
         if assets.block_refs(body):
-            continue  # its diagrams are served only inside an attempt today: left out, never shown without them
+            # Its images (diagrams, or the reviewed fallback a new block type needs) are served only inside an attempt
+            # today: left out, never shown without them, and counted so the app can say so (CONTENT-COMPAT-01).
+            online_only += 1
+            continue
         if body.get("passage_id"):
             pvid = passage_version(db, version)
             if pvid is None:
@@ -120,7 +123,7 @@ def _questions(db: Session, chapter_id: uuid.UUID) -> tuple[list[dict[str, Any]]
                 "body": {k: body[k] for k in QUESTION_FIELDS if k in body},
             }
         )
-    return questions, passages
+    return questions, passages, online_only
 
 
 def build(db: Session, who: Any, chapter_id: uuid.UUID, client_format: int) -> dict[str, Any]:
@@ -143,7 +146,7 @@ def build(db: Session, who: Any, chapter_id: uuid.UUID, client_format: int) -> d
 
     now = db_now(db)
     lessons = _lessons(db, chapter_id, premium=plan_end is not None)
-    questions, passages = _questions(db, chapter_id) if plan_end is not None else ([], {})
+    questions, passages, online_only = _questions(db, chapter_id) if plan_end is not None else ([], {}, 0)
     files: list[dict[str, Any]] = []
     for item, version in lessons:
         for _, vid, _ in assets.block_refs(version.body):
@@ -193,6 +196,7 @@ def build(db: Session, who: Any, chapter_id: uuid.UUID, client_format: int) -> d
         "includes_premium": plan_end is not None,
         "lessons": len(content["lessons"]),
         "questions": len(questions),
+        "questions_online_only": online_only,  # practice questions with images: online in this format
         "files": files,
         "sha256": hashlib.sha256(data).hexdigest(),
         "bytes": len(data),
