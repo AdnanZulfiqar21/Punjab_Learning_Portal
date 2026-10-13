@@ -187,8 +187,15 @@ def test_a_paper_with_nothing_assessable_is_unavailable_not_partial(
     )
     assert r.status_code == 200, r.text
     result = client.get(f"/v1/written-attempts/{a['id']}/result", headers=learner.headers).json()
-    assert result["completeness"] == "unavailable"
+    assert result["assessment_state"] == "unavailable"
     assert result["total_units"] is None and all(q["earned_units"] is None for q in result["questions"])
+    assert all(q["status"] == "unavailable" and reason in q["status_reason"] for q in result["questions"])
+    # Older apps (MIGRATION-COMPAT-01) get only values they know and never a number for a version with no mark: they
+    # show "Some questions couldn't be assessed" with no total, and the version is left out of their history list.
+    assert result["completeness"] == "partial_unavailable" and result["scored_max_units"] == 0
+    assert result["history"] == []
+    [v] = result["versions"]
+    assert (v["version"], v["total_units"], v["assessment_state"]) == (1, None, "unavailable")
     assert _allowance(client, learner)["available"] == before["available"] + 2
     with get_sessionmaker()() as db:
         note = db.execute(
@@ -196,6 +203,61 @@ def test_a_paper_with_nothing_assessable_is_unavailable_not_partial(
             {"u": str(learner.id)},
         ).scalar_one()
     assert "None of the questions could be assessed" in note
+
+
+def test_pending_and_unavailable_together_are_pending_then_partial(
+    client: TestClient, published_written: dict[str, Any]
+) -> None:
+    """§20.9.3: pending wins while any question waits (PARTIAL_PENDING); once it is marked, the paper is
+    PARTIAL_UNAVAILABLE with a total over the scored questions only. Each version stays readable in both histories."""
+    learner, a = _sealed(client, published_written["chapter"], seed=508)
+    before = _allowance(client, learner)
+    teacher = _staff(client, ["subject_reviewer"])
+    r = _decide(
+        client,
+        teacher,
+        a["id"],
+        "initial",
+        {
+            "awards": {},
+            "question_status": {
+                "1": {"status": "pending", "reason": "Fixture: page too blurred to read"},
+                "2": {"status": "unavailable", "reason": "Fixture: no teacher for this notation"},
+            },
+        },
+    )
+    assert r.status_code == 200, r.text
+    first = client.get(f"/v1/written-attempts/{a['id']}/result", headers=learner.headers).json()
+    assert (first["completeness"], first["assessment_state"]) == ("partial_pending", "partial_pending")
+    assert [q["status"] for q in first["questions"]] == ["pending", "unavailable"]
+    assert "blurred" in first["questions"][0]["status_reason"] and "notation" in first["questions"][1]["status_reason"]
+    assert all(q["earned_units"] is None for q in first["questions"])  # nothing invented for either
+    assert ("RELEASED", 2, 1) in _ledger(a["id"]) and not any(k == "CONSUMED" for k, _, _ in _ledger(a["id"]))
+    assert _allowance(client, learner)["available"] == before["available"] + 1
+
+    case = next(
+        c
+        for c in client.get("/v1/studio/written/queue", headers=teacher.headers).json()
+        if c["reference"] == a["id"][:8] and c["case_kind"] == "completion"
+    )
+    assert case["id"]
+    done = _decide(client, teacher, a["id"], "completion", {"awards": _awards(q1=200)})
+    assert done.status_code == 200, done.text
+    final = client.get(f"/v1/written-attempts/{a['id']}/result", headers=learner.headers).json()
+    assert (final["completeness"], final["assessment_state"]) == ("partial_unavailable", "partial_unavailable")
+    assert final["total_units"] == 200 and final["scored_max_units"] == final["questions"][0]["max_units"]
+    states = [(v["version"], v["assessment_state"], v["total_units"]) for v in final["versions"]]
+    assert states == [(1, "partial_pending", 0), (2, "partial_unavailable", 200)]
+    assert [(h["version"], h["total_units"]) for h in final["history"]] == [(1, 0), (2, 200)]
+
+
+def test_older_apps_only_get_completeness_values_they_know() -> None:
+    from portal_api.modules.written.review_router import legacy_completeness
+
+    known = {"complete", "partial_pending", "partial_unavailable"}
+    for state in ("complete", "partial_pending", "partial_unavailable", "unavailable"):
+        assert legacy_completeness(state) in known
+    assert legacy_completeness("unavailable") == "partial_unavailable" and legacy_completeness(None) is None
 
 
 def test_rechecks_cannot_mark_questions_pending(client: TestClient, published_written: dict[str, Any]) -> None:

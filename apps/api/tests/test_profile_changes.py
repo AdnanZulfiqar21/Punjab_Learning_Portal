@@ -102,6 +102,19 @@ def _frozen(form_id: str) -> tuple[str, list[tuple[int, str, int]]]:
         return str(policy), [(int(p), str(v), int(m)) for p, v, m in rows]
 
 
+def _without_clash(make: Any, first_form_id: str) -> dict[str, Any]:
+    """Both mocks draw at random from one pool, so a question can appear in both. Redraw the second until the
+    questions each check relies on are distinct: question 1 of each mock is voided below, and question 2 of each is
+    answered wrong (a voided question elsewhere in the other mock would change its expected marks)."""
+    first = _form_item_ids(first_form_id)
+    for _ in range(10):
+        form = make()
+        second = _form_item_ids(form["id"])
+        if second[1] not in (first[2], first[3]) and first[1] != second[2]:
+            return dict(form)
+    raise AssertionError("couldn't draw a second mock without a clashing question")
+
+
 def test_a_new_version_reaches_new_mocks_and_corrections_keep_each_pinned_policy(
     client: TestClient, db: Session, physics: dict[str, Any]
 ) -> None:
@@ -130,7 +143,7 @@ def test_a_new_version_reaches_new_mocks_and_corrections_keep_each_pinned_policy
     assert _frozen(first_form["id"]) == first_frozen
 
     # A new mock follows v2 (another learner's: a learner has one mock open at a time, EXAM-ROOM-01).
-    second_form = _mock(client, other, code).json()
+    second_form = _without_clash(lambda: _mock(client, other, code).json(), first_form["id"])
     assert (first_form["scope"]["profile_version"], second_form["scope"]["profile_version"]) == (1, 2)
     assert (first_form["scope"]["year"], second_form["scope"]["year"]) == (2026, 2027)
     assert (first_form["duration_s"], second_form["duration_s"]) == (1800, 2700)

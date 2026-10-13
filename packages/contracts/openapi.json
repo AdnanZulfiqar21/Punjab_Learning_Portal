@@ -5282,15 +5282,8 @@
             "type": "string"
           },
           "total_units": {
-            "anyOf": [
-              {
-                "type": "integer"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Total Units"
+            "title": "Total Units",
+            "type": "integer"
           },
           "version": {
             "title": "Version",
@@ -12651,6 +12644,54 @@
         "title": "ScoreHistoryEntry",
         "type": "object"
       },
+      "ScoreVersionOut": {
+        "properties": {
+          "assessment_state": {
+            "enum": [
+              "complete",
+              "partial_pending",
+              "partial_unavailable",
+              "unavailable"
+            ],
+            "title": "Assessment State",
+            "type": "string"
+          },
+          "case_kind": {
+            "title": "Case Kind",
+            "type": "string"
+          },
+          "released_at": {
+            "format": "date-time",
+            "title": "Released At",
+            "type": "string"
+          },
+          "total_units": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "None when nothing could be assessed: that version has no mark",
+            "title": "Total Units"
+          },
+          "version": {
+            "title": "Version",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "version",
+          "total_units",
+          "assessment_state",
+          "case_kind",
+          "released_at"
+        ],
+        "title": "ScoreVersionOut",
+        "type": "object"
+      },
       "SealIn": {
         "properties": {
           "expected_revision": {
@@ -16763,15 +16804,7 @@
       },
       "WrittenResultOut": {
         "properties": {
-          "awaiting_regrade": {
-            "description": "Questions a teacher will re-mark under a corrected marking guide (current marks stand until then)",
-            "items": {
-              "type": "integer"
-            },
-            "title": "Awaiting Regrade",
-            "type": "array"
-          },
-          "completeness": {
+          "assessment_state": {
             "anyOf": [
               {
                 "enum": [
@@ -16786,7 +16819,32 @@
                 "type": "null"
               }
             ],
-            "description": "Not complete means no final total: some questions are pending or could not be assessed; unavailable means none could be assessed (no mark for this test)",
+            "description": "complete; partial_pending (some questions are still being marked); partial_unavailable (some could not be assessed); unavailable (none could be assessed, so this test has no mark). None until released",
+            "title": "Assessment State"
+          },
+          "awaiting_regrade": {
+            "description": "Questions a teacher will re-mark under a corrected marking guide (current marks stand until then)",
+            "items": {
+              "type": "integer"
+            },
+            "title": "Awaiting Regrade",
+            "type": "array"
+          },
+          "completeness": {
+            "anyOf": [
+              {
+                "enum": [
+                  "complete",
+                  "partial_pending",
+                  "partial_unavailable"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Not complete means no final total: some questions are pending or could not be assessed. Kept for older apps: a paper where nothing could be assessed is partial_unavailable here; read assessment_state",
             "title": "Completeness"
           },
           "decision_method": {
@@ -16801,7 +16859,7 @@
             "title": "Decision Method"
           },
           "history": {
-            "description": "Every released version, oldest first; corrections never erase history",
+            "description": "Released versions that have a mark, oldest first (kept for older apps; a version where nothing could be assessed is listed only in versions)",
             "items": {
               "$ref": "#/components/schemas/HistoryEntry"
             },
@@ -16891,6 +16949,14 @@
               }
             ],
             "title": "Version"
+          },
+          "versions": {
+            "description": "Every released version, oldest first, including any with no mark; corrections never erase history",
+            "items": {
+              "$ref": "#/components/schemas/ScoreVersionOut"
+            },
+            "title": "Versions",
+            "type": "array"
           }
         },
         "required": [
@@ -16901,10 +16967,12 @@
           "released_at",
           "decision_method",
           "completeness",
+          "assessment_state",
           "scored_max_units",
           "questions",
           "recheck",
-          "history"
+          "history",
+          "versions"
         ],
         "title": "WrittenResultOut",
         "type": "object"

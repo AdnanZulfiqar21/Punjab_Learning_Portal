@@ -148,11 +148,12 @@ Buildable now without external inputs, in phase order (size S/M/L). Remove items
 | same | `PORTAL_BENCH=120 uv run pytest -s tests/test_bench_regrade.py` | 120 scripts: preview p50 65 ms / max 75 ms, 10 SQL; worker 6.1 scripts/s (dev laptop only) |
 | PR #25 body (159) vs final report (172) | 159 was on `fix/pool-saturation` alone; 172 after merging #24 into it | Both correct for their commit |
 
-## Intermittent test failures (bounded record; not fixed)
+## Intermittent test failures (bounded record; each row says whether it was fixed)
 | Seen | Tests | Observation | Status |
 |---|---|---|---|
 | 2026-10-08, full E2E on `feat/written-rescans` @ `27e9f84` (3 workers) | `studio.spec.ts:88` concurrent edits; `support.spec.ts:66` question report | Failed in the full run, passed when rerun alone and in the next two full runs | **Root cause unknown.** Later green runs are not a fix. Re-examine if either fails again (capture the trace; suspect shared fixture accounts under parallel workers). |
 | 2026-10-12, CI on `main` @ `0e6d13c` (run 38302659926, post-merge of #166) | `support.spec.ts:33` learner and staff help request | Line 63: after staff sent a reply (staff saw it in the thread), the learner's reloaded page didn't show it within 20 s; passed on retry, and `failOnFlakyTests` made the run red. The PR's own run on the same code was green. Static review found no cause: the learner page fetches with `no-store`, there is no per-account session cap, and the staff reply box resets its state correctly. | **Root cause unknown.** The trace is in that run's `playwright-report` artifact. Re-examine if it recurs; a second support-spec flake (with `support.spec.ts:66` on 2026-10-08) suggests something in this file under parallel workers. |
+| 2026-10-12, CI on PR #174 @ `2ba82f7` (run 38309725305) | `tests/test_profile_changes.py::test_a_new_version_reaches_new_mocks_and_corrections_keep_each_pinned_policy` | `(9, 9, 1) == (6, 9, 1)`: both mocks draw at random from one Physics XI pool, so the question voided as question 1 of the first mock can be question 2 (answered wrong) of the second, where CREDIT_ALL credits it. | **Fixed (root cause):** the second mock is redrawn until the voided and wrong-answer positions don't share a question (`_without_clash`), as SCOPES-01 did for its draws. |
 | 2026-10-08, full E2E on `feat/rubric-adjudication` while a second pytest run was loading the machine | `catalogue.spec.ts:3` Class XII region not visible; `lessons.spec.ts:20` timeout | Did not recur in the next full run made alone (47 passed) | **Not proven** to be load-related; re-examine if seen without concurrent load. |
 
 ## Next actions

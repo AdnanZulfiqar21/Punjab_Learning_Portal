@@ -6600,7 +6600,7 @@ export interface components {
              */
             released_at: string;
             /** Total Units */
-            total_units: number | null;
+            total_units: number;
             /** Version */
             version: number;
         };
@@ -9577,6 +9577,28 @@ export interface components {
             /** Version */
             version: number;
         };
+        /** ScoreVersionOut */
+        ScoreVersionOut: {
+            /**
+             * Assessment State
+             * @enum {string}
+             */
+            assessment_state: "complete" | "partial_pending" | "partial_unavailable" | "unavailable";
+            /** Case Kind */
+            case_kind: string;
+            /**
+             * Released At
+             * Format: date-time
+             */
+            released_at: string;
+            /**
+             * Total Units
+             * @description None when nothing could be assessed: that version has no mark
+             */
+            total_units: number | null;
+            /** Version */
+            version: number;
+        };
         /** SealIn */
         SealIn: {
             /** Expected Revision */
@@ -11214,20 +11236,25 @@ export interface components {
         /** WrittenResultOut */
         WrittenResultOut: {
             /**
+             * Assessment State
+             * @description complete; partial_pending (some questions are still being marked); partial_unavailable (some could not be assessed); unavailable (none could be assessed, so this test has no mark). None until released
+             */
+            assessment_state: ("complete" | "partial_pending" | "partial_unavailable" | "unavailable") | null;
+            /**
              * Awaiting Regrade
              * @description Questions a teacher will re-mark under a corrected marking guide (current marks stand until then)
              */
             awaiting_regrade?: number[];
             /**
              * Completeness
-             * @description Not complete means no final total: some questions are pending or could not be assessed; unavailable means none could be assessed (no mark for this test)
+             * @description Not complete means no final total: some questions are pending or could not be assessed. Kept for older apps: a paper where nothing could be assessed is partial_unavailable here; read assessment_state
              */
-            completeness: ("complete" | "partial_pending" | "partial_unavailable" | "unavailable") | null;
+            completeness: ("complete" | "partial_pending" | "partial_unavailable") | null;
             /** Decision Method */
             decision_method: string | null;
             /**
              * History
-             * @description Every released version, oldest first; corrections never erase history
+             * @description Released versions that have a mark, oldest first (kept for older apps; a version where nothing could be assessed is listed only in versions)
              */
             history: components["schemas"]["HistoryEntry"][];
             /**
@@ -11261,6 +11288,11 @@ export interface components {
             total_units: number | null;
             /** Version */
             version: number | null;
+            /**
+             * Versions
+             * @description Every released version, oldest first, including any with no mark; corrections never erase history
+             */
+            versions: components["schemas"]["ScoreVersionOut"][];
         };
         /** RevokeIn */
         portal_api__modules__access__router__RevokeIn: {

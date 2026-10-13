@@ -27,11 +27,11 @@ export function RecheckPanel({ attemptId, result, marks }: { attemptId: string; 
   const rc = result.recheck;
   return (
     <div className="space-y-3">
-      {result.history.length > 1 && (
+      {result.versions.length > 1 && (
         <div className="rounded-lg bg-surface-muted p-3 text-sm">
           <p className="font-semibold">Mark history</p>
           <ul>
-            {result.history.map((h) => (
+            {result.versions.map((h) => (
               <li key={h.version}>
                 Version {h.version}: {h.total_units === null ? "no mark" : marks(h.total_units)} · {HISTORY_LABEL[h.case_kind] ?? h.case_kind} · released {date(h.released_at)}
               </li>
@@ -59,7 +59,7 @@ export function RecheckPanel({ attemptId, result, marks }: { attemptId: string; 
             <p className="text-sm text-muted">
               A different teacher will mark the questions you choose again. Marks can go up or down, and your other questions keep
               their marks.{" "}
-              {rc.target_version !== null && result.history.length > 1 && <>This appeal is about the corrected marks (version {rc.target_version}). </>}
+              {rc.target_version !== null && result.versions.length > 1 && <>This appeal is about the corrected marks (version {rc.target_version}). </>}
               {rc.window_ends_at && <>You can ask until {date(rc.window_ends_at)}.</>}
             </p>
             <fieldset className="space-y-1">
