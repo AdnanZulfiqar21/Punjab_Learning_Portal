@@ -52,6 +52,15 @@ export function WrittenBuilder({ token, grade, subject }: { token: string; grade
   if (availability.state.status === "loading") return <Loading label="Loading chapters" />;
   if (availability.state.status === "error") return <ErrorState error={availability.state.error} onRetry={availability.retry} />;
   const a = availability.state.data;
+  if (a.pilot_only && !a.in_pilot) {
+    // PILOT-R0-01: during the R0 pilot only invited pilot learners can start written tests.
+    return (
+      <Notice title="Written practice is in a teacher-reviewed pilot">
+        For now, written practice is open only to learners invited to the pilot, and a teacher checks every mark. Your plan&apos;s other features are
+        unaffected.
+      </Notice>
+    );
+  }
   if (!a.review_staffed) {
     return <Notice title="Not offered yet">No teacher reviewer is available to mark written answers in this subject yet.</Notice>;
   }
@@ -60,6 +69,9 @@ export function WrittenBuilder({ token, grade, subject }: { token: string; grade
   }
   return (
     <View style={{ gap: Space.lg }}>
+      {a.pilot_only && (
+        <T variant="small">You&apos;re in the written-practice pilot: a teacher checks every mark, and pilot tests use only your pilot marking units.</T>
+      )}
       {!a.review_accepting && (
         <Notice tone="warn" title="Marking is full right now">
           Teacher marking for this subject is at capacity, so new written tests can&apos;t start. Scripts already submitted are kept and will be marked.

@@ -41,3 +41,13 @@ def test_the_manifest_describes_the_build() -> None:
         assert key in m, key
     assert len(m["openapi_sha256"]) == 64 and m["migration_head"]
     assert m["analytics_events"]["attempt.submitted"] == 1
+    # P19.S4.T3 (RELEASE-CANDIDATE-01): app identities, the published content set, and known limitations.
+    app = m["mobile_app"]
+    assert app["version"] and set(app["ids"]) == {"development", "preview", "production"}
+    assert len(set(app["ids"].values())) == 3  # a development or preview build is never mistaken for production
+    assert m["ota_runtime_version"] is None and m["image_digests"] is None  # recorded honestly until B07/B03
+    if m["content_release_id"] is not None:  # a database was reachable: the live state is pinned too
+        assert len(m["content_release_id"]) == 64
+        assert set(m["runtime_overrides"]) == {"switches", "rollouts"}
+        assert set(m["runtime_overrides"]["rollouts"]) <= set(m["feature_rollouts"])
+    assert any(x.startswith("B03:") for x in m["known_limitations"])

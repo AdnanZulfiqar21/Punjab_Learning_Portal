@@ -80,7 +80,11 @@ async function Plans() {
                 </div>
                 <div>
                   <dt className="inline font-medium">Written answers marked by teachers: </dt>
-                  <dd className="inline">{p.written_units} units included</dd>
+                  <dd className="inline">
+                    {p.written_units} units included
+                    {/* PILOT-R0-01: said before anything is bought, never after */}
+                    {p.written_pilot_only && " (usable once written practice opens beyond the current teacher-reviewed pilot)"}
+                  </dd>
                 </div>
               </dl>
               {p.description && <p className="text-sm text-muted">{p.description}</p>}

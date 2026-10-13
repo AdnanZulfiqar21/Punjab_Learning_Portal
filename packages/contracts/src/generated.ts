@@ -4452,7 +4452,13 @@ export interface components {
             weights: {
                 [key: string]: number;
             };
+            /** @description Units that can fund written tests now (during the R0 pilot, pilot access only) */
             written_allowance: components["schemas"]["AllowanceOut"];
+            /**
+             * Written Pilot Only
+             * @description True during the R0 teacher-reviewed pilot: written practice is for learners with pilot access
+             */
+            written_pilot_only: boolean;
         };
         /** AccessTierIn */
         AccessTierIn: {
@@ -8518,6 +8524,11 @@ export interface components {
                 [key: string]: unknown;
             };
             /**
+             * Written Pilot Only
+             * @description True while written practice is in the R0 teacher-reviewed pilot: these units can't be used yet
+             */
+            written_pilot_only: boolean;
+            /**
              * Written Units
              * @description The disclosed, finite written allowance for the period
              */
@@ -11103,6 +11114,16 @@ export interface components {
             chapters: components["schemas"]["WrittenChapter"][];
             /** Grade */
             grade: number;
+            /**
+             * In Pilot
+             * @description True when this learner has an active pilot entitlement
+             */
+            in_pilot: boolean;
+            /**
+             * Pilot Only
+             * @description True during the R0 teacher-reviewed pilot: only invited pilot learners can start written tests
+             */
+            pilot_only: boolean;
             /**
              * Review Accepting
              * @description False means teacher marking is at capacity; new tests can't start now

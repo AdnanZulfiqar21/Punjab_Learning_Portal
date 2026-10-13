@@ -67,10 +67,14 @@ export function PlanCard({ access, token, onChange, purpose }: { access: Access;
   }
   if (access.has_access && active.length > 0) {
     const current = active.reduce((a, b) => (new Date(a.ends_at) > new Date(b.ends_at) ? a : b));
+    // PILOT-R0-01: during the R0 pilot only pilot access opens written practice, and only its units count.
+    const outsidePilot = access.written_pilot_only && !active.some((e) => e.source === "pilot");
     return (
       <Notice title={`${SOURCE[current.source] ?? "Access"} until ${day(current.ends_at)}`}>
-        {coverage(active) ? `Your plan covers ${coverage(active)}. ` : ""}Written marking allowance: {access.written_allowance.available} of{" "}
-        {access.written_allowance.granted} units left.
+        {coverage(active) ? `Your plan covers ${coverage(active)}. ` : ""}
+        {outsidePilot
+          ? "Written practice is in a teacher-reviewed pilot for invited learners for now."
+          : `Written marking allowance${access.written_pilot_only ? " (pilot)" : ""}: ${access.written_allowance.available} of ${access.written_allowance.granted} units left.`}
       </Notice>
     );
   }
@@ -78,8 +82,9 @@ export function PlanCard({ access, token, onChange, purpose }: { access: Access;
     return (
       <View style={{ gap: Space.sm }}>
         <Notice title={purpose ? `${purpose} needs a plan` : "Start your free trial"}>
-          Your free 30-day trial covers practice tests, written practice and every subject in Class XI and XII. It starts now and ends
-          exactly 30 days later. No payment details are needed.
+          Your free 30-day trial covers practice tests{access.written_pilot_only ? "" : ", written practice"} and every subject in Class XI and
+          XII. It starts now and ends exactly 30 days later. No payment details are needed.
+          {access.written_pilot_only ? " Written practice is in a teacher-reviewed pilot for invited learners for now." : ""}
         </Notice>
         {/* P14.S8.T2 (TRIAL-CONTROLS-01): what the one-trial rule checks, said before anyone starts. */}
         <T variant="small">

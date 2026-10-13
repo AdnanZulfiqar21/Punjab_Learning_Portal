@@ -50,6 +50,7 @@ from sqlalchemy import (
 from sqlalchemy.dialects.postgresql import JSONB, UUID
 from sqlalchemy.orm import Mapped, Session, mapped_column
 
+from portal_api.config import get_settings
 from portal_api.db import Base, get_session
 from portal_api.errors import Conflict, NotFound, Unprocessable
 from portal_api.modules.audit.models import record
@@ -458,6 +459,9 @@ class ProductOut(BaseModel):
     scope: dict[str, Any]
     duration_days: int
     written_units: int = Field(description="The disclosed, finite written allowance for the period")
+    written_pilot_only: bool = Field(
+        description="True while written practice is in the R0 teacher-reviewed pilot: these units can't be used yet"
+    )
     description: str
     price: PriceOut | None = Field(description="The web price on sale now; null if not priced yet")
 
@@ -525,6 +529,7 @@ def public_products(db: DB, response: Response) -> list[ProductOut]:
                 scope=p.scope,
                 duration_days=p.duration_days,
                 written_units=p.written_units,
+                written_pilot_only=get_settings().written_pilot_only,
                 description=p.description,
                 price=_price_out(price, False) if price is not None and price.on_sale else None,
             )

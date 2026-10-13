@@ -16,13 +16,24 @@ const SOURCE: Record<string, string> = {
 
 export function PlanStatus({ access, purpose }: { access: Access; purpose?: string }) {
   const active = access.entitlements.filter((e) => e.status === "active" && new Date(e.ends_at) > new Date());
+  // PILOT-R0-01: during the R0 pilot only pilot access opens written practice, and only its units count.
+  const pilotOnly = access.written_pilot_only;
+  const inPilot = active.some((e) => e.source === "pilot");
   if (access.has_access && active.length > 0) {
     const current = active.reduce((a, b) => (new Date(a.ends_at) > new Date(b.ends_at) ? a : b));
     const covers = coverage(active);
+    const opening = covers ? `Your plan covers ${covers}. ` : pilotOnly && !inPilot ? "Practice tests are open. " : "Practice tests and written practice are open. ";
     return (
       <Notice tone="ok" title={`${SOURCE[current.source] ?? "Access"} until ${day(current.ends_at)}`}>
-        {covers ? `Your plan covers ${covers}. ` : "Practice tests and written practice are open. "}Written marking allowance: {access.written_allowance.available} of{" "}
-        {access.written_allowance.granted} units left (a short question uses {access.weights.short}, a long one {access.weights.long}).
+        {opening}
+        {pilotOnly && !inPilot ? (
+          "Written practice is in a teacher-reviewed pilot for invited learners for now."
+        ) : (
+          <>
+            Written marking allowance{pilotOnly ? " (pilot)" : ""}: {access.written_allowance.available} of {access.written_allowance.granted} units left (a
+            short question uses {access.weights.short}, a long one {access.weights.long}).
+          </>
+        )}
       </Notice>
     );
   }
@@ -30,8 +41,9 @@ export function PlanStatus({ access, purpose }: { access: Access; purpose?: stri
     return (
       <Notice title={purpose ? `${purpose} needs a plan` : "Start your free trial"}>
         <span className="block">
-          Your free 30-day trial covers practice tests, written practice and every subject in Class XI and XII. It starts when you press
-          the button and ends exactly 30 days later. It doesn&apos;t ask for payment details.
+          Your free 30-day trial covers practice tests{pilotOnly ? "" : ", written practice"} and every subject in Class XI and XII. It starts
+          when you press the button and ends exactly 30 days later. It doesn&apos;t ask for payment details.
+          {pilotOnly && ` Written practice is in a teacher-reviewed pilot for invited learners for now.`}
         </span>
         {/* P14.S8.T2 (TRIAL-CONTROLS-01): what the one-trial rule checks, said before anyone starts. */}
         <span className="mt-2 block text-sm text-muted">

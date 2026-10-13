@@ -45,13 +45,13 @@ For the tasks marked **Implemented**, the cited tests were confirmed to exist. T
 | W07.S1.T3 Answer-release policies | Rubrics never shown in attempts; MCQ release (OCT9-01) | A versioned written model-answer release |
 | W07.S2.T2 Score/attempt history | Released-version history, notices, linked attempts | Rubric/evidence versions, per-question change reasons and rescan/new-content/corrected labels in the history |
 | W07.S3.T2 Interrupted processing journeys | Unfinished tests across devices; idempotent notices | A logout/login and second-device receipt-restore test |
-| W08.S1.T1 Assessment plans | Weights, page caps, units shown before start, pilot entitlements | Cost-backed units (WA-D07); an R0 pilot switch |
+| W08.S1.T1 Assessment plans | Weights, page caps, units shown before start, pilot entitlements; the R0 pilot switch (PILOT-R0-01) | Cost-backed units (WA-D07) |
 | P07.S3.T3 Low-bandwidth alternatives | Data saver defers diagrams | Audio-only assets (B05); per-lesson download size |
 | P11.S3.T1 Practice configuration | Every scope, multi-subject, feedback modes, counts and shortage | Topic scope, an estimated time and a client-compatibility message in the web builder |
 | P13.S4.T2 OTA update behaviour | CLIENTS-01 minimums and mock-window protection | `expo-updates` runtime-version pinning; store builds (B07) |
 | P19.S2.T3 Manual accessibility | Automated axe, text size, reduced motion, captions | A manual screen-reader and 200 % zoom review by a person |
 | P19.S3.T4 Content compatibility | Oldest-client and pack-format tests | One end-to-end AC47 scenario (new block type with an old client, an old pack and an active attempt) |
-| P19.S4.T3 Freeze release candidate | RELEASE-01 manifest | Content-release ID, rollout snapshot and known limitations (doable now); image digests (B03) and native builds (B07) |
+| P19.S4.T3 Freeze release candidate | RELEASE-01 manifest; app IDs, content-release ID, rollout snapshot and known limitations (RELEASE-CANDIDATE-01) | Image digests (B03) and native builds (B07) |
 
 ## Blocked on external inputs
 

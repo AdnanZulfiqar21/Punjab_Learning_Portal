@@ -25,6 +25,10 @@ class WrittenAvailabilityOut(BaseModel):
     upload_allowance_s: int
     caps: dict[str, int]
     chapters: list[WrittenChapter]
+    pilot_only: bool = Field(
+        description="True during the R0 teacher-reviewed pilot: only invited pilot learners can start written tests"
+    )
+    in_pilot: bool = Field(description="True when this learner has an active pilot entitlement")
 
 
 class WrittenFormIn(BaseModel):

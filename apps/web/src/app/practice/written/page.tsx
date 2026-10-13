@@ -61,7 +61,13 @@ async function Builder({ grade: rawGrade, subject: rawSubject }: { grade?: strin
         )}
       </nav>
       {access && <PlanStatus access={access} purpose="Written practice" />}
-      {access && !access.has_access ? null : !av || !av.review_staffed ? (
+      {access && !access.has_access ? null : av?.pilot_only && !av.in_pilot ? (
+        // PILOT-R0-01: during the R0 pilot only invited pilot learners can start written tests.
+        <Notice title="Written practice is in a teacher-reviewed pilot">
+          For now, written practice is open only to learners invited to the pilot, and a teacher checks every mark. Your plan&apos;s
+          other features are unaffected.
+        </Notice>
+      ) : !av || !av.review_staffed ? (
         <Notice title="Written practice isn't offered for this subject yet">
           Written answers are marked by teachers, and no teacher reviewer is available for {GRADE_LABEL[grade]} {name} yet.
         </Notice>
@@ -71,6 +77,11 @@ async function Builder({ grade: rawGrade, subject: rawSubject }: { grade?: strin
         </Notice>
       ) : (
         <>
+          {av.pilot_only && (
+            <p className="text-sm text-muted">
+              You&apos;re in the written-practice pilot: a teacher checks every mark, and pilot tests use only your pilot marking units.
+            </p>
+          )}
           {/* STAFFING-01: an honest wait, and a plain notice when marking is full (submitted work is still marked). */}
           {!av.review_accepting ? (
             <Notice tone="warn" title="Marking is full right now">

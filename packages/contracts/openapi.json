@@ -94,7 +94,13 @@
             "type": "object"
           },
           "written_allowance": {
-            "$ref": "#/components/schemas/AllowanceOut"
+            "$ref": "#/components/schemas/AllowanceOut",
+            "description": "Units that can fund written tests now (during the R0 pilot, pilot access only)"
+          },
+          "written_pilot_only": {
+            "description": "True during the R0 teacher-reviewed pilot: written practice is for learners with pilot access",
+            "title": "Written Pilot Only",
+            "type": "boolean"
           }
         },
         "required": [
@@ -102,6 +108,7 @@
           "entitlements",
           "trial",
           "written_allowance",
+          "written_pilot_only",
           "weights",
           "device_check",
           "device_state"
@@ -9822,6 +9829,11 @@
             "title": "Scope",
             "type": "object"
           },
+          "written_pilot_only": {
+            "description": "True while written practice is in the R0 teacher-reviewed pilot: these units can't be used yet",
+            "title": "Written Pilot Only",
+            "type": "boolean"
+          },
           "written_units": {
             "description": "The disclosed, finite written allowance for the period",
             "title": "Written Units",
@@ -9835,6 +9847,7 @@
           "scope",
           "duration_days",
           "written_units",
+          "written_pilot_only",
           "description",
           "price"
         ],
@@ -16518,6 +16531,16 @@
             "title": "Grade",
             "type": "integer"
           },
+          "in_pilot": {
+            "description": "True when this learner has an active pilot entitlement",
+            "title": "In Pilot",
+            "type": "boolean"
+          },
+          "pilot_only": {
+            "description": "True during the R0 teacher-reviewed pilot: only invited pilot learners can start written tests",
+            "title": "Pilot Only",
+            "type": "boolean"
+          },
           "review_accepting": {
             "description": "False means teacher marking is at capacity; new tests can't start now",
             "title": "Review Accepting",
@@ -16556,7 +16579,9 @@
           "review_accepting",
           "upload_allowance_s",
           "caps",
-          "chapters"
+          "chapters",
+          "pilot_only",
+          "in_pilot"
         ],
         "title": "WrittenAvailabilityOut",
         "type": "object"

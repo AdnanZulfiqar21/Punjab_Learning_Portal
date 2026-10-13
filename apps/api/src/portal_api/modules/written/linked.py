@@ -62,6 +62,7 @@ def create_linked_form(
     origin = db.get(WrittenAttempt, origin_attempt_id)
     if origin is None or origin.user_id != who.user.id:
         raise NotFound("Attempt not found.")
+    service.require_pilot(db, who.user.id)  # PILOT-R0-01: a linked test is a new written test
     if origin.status != "sealed":
         raise Unprocessable("Only a submitted test can be practised again.", code_reason="NOT_SEALED")
     origin_form = db.get(WrittenForm, origin.form_id)

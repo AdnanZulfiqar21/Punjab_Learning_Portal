@@ -23,6 +23,7 @@ from sqlalchemy import func, select
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
+from portal_api.config import get_settings
 from portal_api.errors import AppError, Conflict, NotFound, Unprocessable
 from portal_api.modules.access.models import (
     OFFER_TERMS_VERSION,
@@ -366,8 +367,15 @@ def _holds(events: list[AllowanceEvent]) -> tuple[int, int, int, int]:
     return reserved, accepted, consumed, remedy
 
 
+def _available(db: Session, ents: list[Entitlement]) -> int:
+    reserved, accepted, consumed, remedy = _holds(_events(db, [e.id for e in ents]))
+    return max(0, sum(e.written_units for e in ents) + remedy - reserved - accepted - consumed)
+
+
 def allowance(db: Session, user_id: uuid.UUID) -> dict[str, int]:
     ents = [e for e in active_entitlements(db, user_id, db_now(db)) if e.written_units > 0]
+    if get_settings().written_pilot_only:  # PILOT-R0-01: during the R0 pilot only pilot units can be used
+        ents = [e for e in ents if e.source == "pilot"]
     granted = sum(e.written_units for e in ents)
     reserved, accepted, consumed, remedy = _holds(_events(db, [e.id for e in ents]))
     return {
@@ -447,7 +455,8 @@ def reserve(
     raise AllowanceExhausted(
         "Your plan's written-marking allowance can't cover this test.",
         needed=units,
-        available=allowance(db, user_id)["available"],
+        # only what could have funded it (PILOT-R0-01: during the R0 pilot, a paid plan's units are not counted)
+        available=_available(db, [e for e in funding if e.starts_at <= now < e.ends_at]),
     )
 
 
