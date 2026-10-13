@@ -12673,6 +12673,38 @@
             "title": "Case Kind",
             "type": "string"
           },
+          "decision_method": {
+            "description": "TEACHER: a teacher decided; SYSTEM: a deadline or an unchanged carry-forward; LEARNER: confirmed",
+            "enum": [
+              "TEACHER",
+              "SYSTEM",
+              "LEARNER"
+            ],
+            "title": "Decision Method",
+            "type": "string"
+          },
+          "labels": {
+            "description": "What kind of change this version is: a recheck, marking from a clearer copy, a marking-guide correction, pending questions completed, or a deadline that passed",
+            "items": {
+              "enum": [
+                "recheck",
+                "clearer_copy",
+                "marking_guide_corrected",
+                "pending_completed",
+                "deadline_passed"
+              ],
+              "type": "string"
+            },
+            "title": "Labels",
+            "type": "array"
+          },
+          "questions": {
+            "items": {
+              "$ref": "#/components/schemas/VersionQuestionOut"
+            },
+            "title": "Questions",
+            "type": "array"
+          },
           "released_at": {
             "format": "date-time",
             "title": "Released At",
@@ -12700,6 +12732,9 @@
           "total_units",
           "assessment_state",
           "case_kind",
+          "decision_method",
+          "labels",
+          "questions",
           "released_at"
         ],
         "title": "ScoreVersionOut",
@@ -16245,6 +16280,85 @@
           "reviews"
         ],
         "title": "VersionOut",
+        "type": "object"
+      },
+      "VersionQuestionOut": {
+        "description": "W07.S2.T2 (HISTORY-01): one question as a released version recorded it.",
+        "properties": {
+          "changed": {
+            "description": "True when its status or mark differs from the previous version",
+            "title": "Changed",
+            "type": "boolean"
+          },
+          "earned_units": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Null unless scored",
+            "title": "Earned Units"
+          },
+          "evidence": {
+            "description": "Marked from the submitted original, or from a clearer copy the learner sent",
+            "enum": [
+              "original",
+              "clearer_copy"
+            ],
+            "title": "Evidence",
+            "type": "string"
+          },
+          "position": {
+            "title": "Position",
+            "type": "integer"
+          },
+          "reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Why this version touched it, in plain words; null when it was simply carried forward",
+            "title": "Reason"
+          },
+          "rubric_version": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The marking-guide version it was marked under (null if unmarked)",
+            "title": "Rubric Version"
+          },
+          "status": {
+            "enum": [
+              "scored",
+              "pending",
+              "unavailable"
+            ],
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "position",
+          "status",
+          "earned_units",
+          "rubric_version",
+          "evidence",
+          "changed",
+          "reason"
+        ],
+        "title": "VersionQuestionOut",
         "type": "object"
       },
       "VoiceIn": {

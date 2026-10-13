@@ -307,11 +307,38 @@ def legacy_completeness(state: str | None) -> LegacyCompleteness | None:
     return "partial_unavailable" if state == "unavailable" else state  # type: ignore[return-value]
 
 
+VersionLabel = Literal["recheck", "clearer_copy", "marking_guide_corrected", "pending_completed", "deadline_passed"]
+
+
+class VersionQuestionOut(BaseModel):
+    """W07.S2.T2 (HISTORY-01): one question as a released version recorded it."""
+
+    position: int
+    status: Literal["scored", "pending", "unavailable"]
+    earned_units: int | None = Field(description="Null unless scored")
+    rubric_version: int | None = Field(description="The marking-guide version it was marked under (null if unmarked)")
+    evidence: Literal["original", "clearer_copy"] = Field(
+        description="Marked from the submitted original, or from a clearer copy the learner sent"
+    )
+    changed: bool = Field(description="True when its status or mark differs from the previous version")
+    reason: str | None = Field(
+        description="Why this version touched it, in plain words; null when it was simply carried forward"
+    )
+
+
 class ScoreVersionOut(BaseModel):
     version: int
     total_units: int | None = Field(description="None when nothing could be assessed: that version has no mark")
     assessment_state: AssessmentState
     case_kind: str
+    decision_method: Literal["TEACHER", "SYSTEM", "LEARNER"] = Field(
+        description="TEACHER: a teacher decided; SYSTEM: a deadline or an unchanged carry-forward; LEARNER: confirmed"
+    )
+    labels: list[VersionLabel] = Field(
+        description="What kind of change this version is: a recheck, marking from a clearer copy, a marking-guide "
+        "correction, pending questions completed, or a deadline that passed"
+    )
+    questions: list[VersionQuestionOut]
     released_at: datetime
 
 
@@ -644,16 +671,7 @@ def my_result(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, response: Re
                 else None,
             )
         )
-    versions = [  # COMPLETENESS-01: a version where nothing could be assessed has no awarded total
-        ScoreVersionOut(
-            version=h.version,
-            total_units=None if h.completeness == "unavailable" else h.total_units,
-            assessment_state=h.completeness or "complete",  # type: ignore[arg-type]
-            case_kind=h.case_kind,
-            released_at=h.created_at,
-        )
-        for h in review.released_history(db, attempt.id)
-    ]
+    versions = _version_history(db, review.released_history(db, attempt.id))
     history = [  # older apps always print a number, so a version with no mark is left out rather than shown as 0
         HistoryEntry(version=v.version, total_units=v.total_units, case_kind=v.case_kind, released_at=v.released_at)
         for v in versions
@@ -677,6 +695,127 @@ def my_result(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, response: Re
         awaiting_regrade=_awaiting_regrade(db, attempt.id),
         linked_attempts=[LinkedAttemptOut(**x) for x in linked.linked_attempts(db, attempt.id)],
     )
+
+
+def _q_status(sv: review.WrittenScoreVersion, pos: str) -> str:
+    return str((sv.question_status or {}).get(pos, {}).get("status", "scored"))
+
+
+def _scope(db: Session, case: review.WrittenReviewCase | None) -> set[int] | None:
+    """The questions a case decided (None: all of them). A recheck covers the learner's questions plus any an
+    adjudicator added; a completion or regrade case names its own."""
+    if case is None or case.case_kind == "initial":
+        return None
+    request = review.recheck_request(db, case)
+    if request is not None:
+        return {*request.positions, *(request.expanded_positions or [])}
+    return set(case.positions) if case.positions else None
+
+
+def _q_reason(
+    sv: review.WrittenScoreVersion, scope: set[int] | None, before: tuple[str, int | None], now: VersionQuestionOut
+) -> str | None:
+    """HISTORY-01: a plain explanation for a question this version decided (None when it was only carried forward)."""
+    in_scope = scope is None or now.position in scope
+    if not now.changed and not in_scope:
+        return None
+    if sv.version == 1:
+        return None  # the first marking needs no explanation
+    if now.status == "unavailable" and before[0] == "pending" and sv.decision_method == "SYSTEM":
+        return (
+            "No clearer copy arrived by the deadline, so this question couldn't be assessed; "
+            "its allowance was returned."
+        )
+    if now.status == "unavailable":
+        return "A teacher found that this question couldn't be assessed; its allowance was returned."
+    copy = " from the clearer copy you sent" if now.evidence == "clearer_copy" else ""
+    if before[0] == "pending" and now.status == "scored":
+        return f"Marked{copy} after it was pending."
+    if sv.case_kind == "recheck":
+        if now.changed:
+            return f"Marked again{copy} by a different teacher after your recheck request."
+        return "Checked again by a different teacher after your recheck request; the mark stands."
+    if sv.case_kind == "regrade":
+        if sv.decision_method == "SYSTEM":
+            return "Unchanged after a marking-guide correction." if not now.changed else None
+        return f"Marked again{copy} under the corrected marking guide."
+    if now.changed:
+        return f"Changed by a teacher{copy}."
+    return None
+
+
+def _version_history(db: Session, rows: list[review.WrittenScoreVersion]) -> list[ScoreVersionOut]:
+    """W07.S2.T2 (HISTORY-01): every released version with, per question, its mark, the marking-guide version and
+    evidence it used, and why it changed. Corrections never erase a version (COMPLETENESS-01: no-mark versions have
+    a null total)."""
+    from sqlalchemy import select as sa_select
+
+    rubric_ids = {uuid.UUID(v) for sv in rows for v in (sv.rubric_version_ids or {}).values() if v}
+    numbers: dict[uuid.UUID, int] = {}
+    if rubric_ids:
+        query = sa_select(ContentVersion.id, ContentVersion.number).where(ContentVersion.id.in_(rubric_ids))
+        numbers = {vid: int(n) for vid, n in db.execute(query)}
+    out: list[ScoreVersionOut] = []
+    previous: review.WrittenScoreVersion | None = None
+    for sv in rows:
+        scope = _scope(db, db.get(review.WrittenReviewCase, sv.case_id))
+        positions = sorted(
+            {*map(str, (sv.rubric_version_ids or {})), *(sv.question_status or {}), *(sv.question_units or {})}, key=int
+        )
+        questions: list[VersionQuestionOut] = []
+        for pos in positions:
+            status = _q_status(sv, pos)
+            earned = int(sv.question_units[pos]) if status == "scored" and pos in (sv.question_units or {}) else None
+            before = (
+                (
+                    _q_status(previous, pos),
+                    (previous.question_units or {}).get(pos) if _q_status(previous, pos) == "scored" else None,
+                )
+                if previous is not None
+                else ("", None)
+            )
+            rid = (sv.rubric_version_ids or {}).get(pos)
+            q = VersionQuestionOut(
+                position=int(pos),
+                status=status,  # type: ignore[arg-type]
+                earned_units=earned,
+                rubric_version=numbers.get(uuid.UUID(rid)) if rid and status == "scored" else None,
+                evidence="clearer_copy" if (sv.evidence_revisions or {}).get(pos) else "original",
+                changed=previous is not None and (before[0], before[1]) != (status, earned),
+                reason=None,
+            )
+            q.reason = _q_reason(sv, scope, before, q)
+            questions.append(q)
+        labels: list[VersionLabel] = []
+        if sv.case_kind == "recheck":
+            labels.append("recheck")
+        if sv.case_kind == "regrade":
+            labels.append("marking_guide_corrected")
+        if sv.case_kind == "completion" and any(q.reason and "after it was pending" in q.reason for q in questions):
+            labels.append("pending_completed")
+        if sv.decision_method == "SYSTEM" and any(q.reason and "deadline" in q.reason for q in questions):
+            labels.append("deadline_passed")
+        newly_copied = {
+            p
+            for p, e in (sv.evidence_revisions or {}).items()
+            if e and (previous is None or (previous.evidence_revisions or {}).get(p) != e)
+        }
+        if newly_copied:
+            labels.append("clearer_copy")
+        out.append(
+            ScoreVersionOut(
+                version=sv.version,
+                total_units=None if sv.completeness == "unavailable" else sv.total_units,
+                assessment_state=sv.completeness or "complete",  # type: ignore[arg-type]
+                case_kind=sv.case_kind,
+                decision_method=sv.decision_method,  # type: ignore[arg-type]
+                labels=labels,
+                questions=questions,
+                released_at=sv.created_at,
+            )
+        )
+        previous = sv
+    return out
 
 
 def _awaiting_regrade(db: Session, attempt_id: uuid.UUID) -> list[int]:

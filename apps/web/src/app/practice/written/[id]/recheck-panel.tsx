@@ -14,6 +14,13 @@ const HISTORY_LABEL: Record<string, string> = {
   regrade: "after a marking-guide correction",
 };
 const date = (s: string) => new Date(s).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short", timeZone: TIME_ZONE });
+// HISTORY-01 (W07.S2.T2): what else a version did, beyond its kind of review.
+const EXTRA_LABEL: Record<string, string> = { clearer_copy: "marked from a clearer copy you sent", deadline_passed: "a deadline passed" };
+type Version = WrittenResult["versions"][number];
+const guides = (v: Version) => {
+  const n = [...new Set(v.questions.map((q) => q.rubric_version).filter((x): x is number => x !== null))].sort((a, b) => a - b);
+  return n.length ? ` · marking guide v${n.join(", v")}` : "";
+};
 
 // Learners may ask once, inside the window, for named questions to be marked again by a different teacher. A recheck
 // never consumes another written allowance, and every released version stays visible below.
@@ -30,13 +37,31 @@ export function RecheckPanel({ attemptId, result, marks }: { attemptId: string; 
       {result.versions.length > 1 && (
         <div className="rounded-lg bg-surface-muted p-3 text-sm">
           <p className="font-semibold">Mark history</p>
-          <ul>
-            {result.versions.map((h) => (
-              <li key={h.version}>
-                Version {h.version}: {h.total_units === null ? "no mark" : marks(h.total_units)} · {HISTORY_LABEL[h.case_kind] ?? h.case_kind} · released {date(h.released_at)}
-              </li>
-            ))}
-          </ul>
+          <ol className="space-y-1">
+            {result.versions.map((h, i) => {
+              const before = i > 0 ? result.versions[i - 1] : null;
+              const mark = (q: Version["questions"][number] | undefined) =>
+                !q || q.status === "pending" ? "pending" : q.status === "unavailable" ? "couldn't be assessed" : marks(q.earned_units ?? 0);
+              const explained = h.questions.filter((q) => q.reason);
+              return (
+                <li key={h.version}>
+                  Version {h.version}: {h.total_units === null ? "no mark" : marks(h.total_units)} · {HISTORY_LABEL[h.case_kind] ?? h.case_kind}
+                  {h.labels.filter((l) => EXTRA_LABEL[l]).map((l) => ` · ${EXTRA_LABEL[l]}`)}
+                  {guides(h)} · released {date(h.released_at)}
+                  {explained.length > 0 && (
+                    <ul className="ml-4 list-disc text-muted">
+                      {explained.map((q) => (
+                        <li key={q.position}>
+                          Question {q.position}
+                          {q.changed ? `: ${mark(before?.questions.find((p) => p.position === q.position))} → ${mark(q)}` : ""} — {q.reason}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </li>
+              );
+            })}
+          </ol>
         </div>
       )}
       {rc.status === "requested" && (

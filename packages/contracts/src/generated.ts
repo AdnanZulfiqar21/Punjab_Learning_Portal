@@ -9598,6 +9598,19 @@ export interface components {
             /** Case Kind */
             case_kind: string;
             /**
+             * Decision Method
+             * @description TEACHER: a teacher decided; SYSTEM: a deadline or an unchanged carry-forward; LEARNER: confirmed
+             * @enum {string}
+             */
+            decision_method: "TEACHER" | "SYSTEM" | "LEARNER";
+            /**
+             * Labels
+             * @description What kind of change this version is: a recheck, marking from a clearer copy, a marking-guide correction, pending questions completed, or a deadline that passed
+             */
+            labels: ("recheck" | "clearer_copy" | "marking_guide_corrected" | "pending_completed" | "deadline_passed")[];
+            /** Questions */
+            questions: components["schemas"]["VersionQuestionOut"][];
+            /**
              * Released At
              * Format: date-time
              */
@@ -10986,6 +10999,45 @@ export interface components {
             updated_at: string;
             /** Updated By */
             updated_by: string | null;
+        };
+        /**
+         * VersionQuestionOut
+         * @description W07.S2.T2 (HISTORY-01): one question as a released version recorded it.
+         */
+        VersionQuestionOut: {
+            /**
+             * Changed
+             * @description True when its status or mark differs from the previous version
+             */
+            changed: boolean;
+            /**
+             * Earned Units
+             * @description Null unless scored
+             */
+            earned_units: number | null;
+            /**
+             * Evidence
+             * @description Marked from the submitted original, or from a clearer copy the learner sent
+             * @enum {string}
+             */
+            evidence: "original" | "clearer_copy";
+            /** Position */
+            position: number;
+            /**
+             * Reason
+             * @description Why this version touched it, in plain words; null when it was simply carried forward
+             */
+            reason: string | null;
+            /**
+             * Rubric Version
+             * @description The marking-guide version it was marked under (null if unmarked)
+             */
+            rubric_version: number | null;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "scored" | "pending" | "unavailable";
         };
         /** VoiceIn */
         VoiceIn: {
