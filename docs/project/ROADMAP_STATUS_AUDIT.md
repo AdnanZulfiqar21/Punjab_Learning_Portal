@@ -68,4 +68,4 @@ For the tasks marked **Implemented**, the cited tests were confirmed to exist. T
 ## Not started
 
 - **W04.S1.T4, W07.S1.T4** (composite board results, R3): large; need WA-D15 and verified board patterns (B02).
-- **W07.S3.T1** (written reading and navigation tests): no written accessibility, RTL, zoom or lazy-load tests yet. Feasible now.
+- **W07.S3.T1** (written reading and navigation tests): done (WRITTEN-A11Y-01); equations and a manual screen-reader review remain.

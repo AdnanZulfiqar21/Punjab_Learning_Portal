@@ -263,7 +263,7 @@ export function WrittenRunner({ attempt, result = null }: { attempt: WrittenAtte
                     {q.status === "scored" ? `${marks(q.earned_units ?? 0)} / ${marks(q.max_units)}` : q.status === "pending" ? "pending" : "couldn't be assessed"}
                   </p>
                   {q.status !== "scored" && (
-                    <p className="text-sm text-muted">
+                    <p className="text-sm text-muted" dir="auto">
                       {q.status_reason}
                       {q.status === "unavailable" && " The allowance for this question was returned to your plan."}
                     </p>
@@ -276,7 +276,12 @@ export function WrittenRunner({ attempt, result = null }: { attempt: WrittenAtte
                           {marks(c.earned_units)} / {marks(c.max_units)}
                         </span>{" "}
                         {c.description}
-                        {c.reason && <span className="block text-muted">{c.reason}</span>}
+                        {/* W07.S3.T1: a teacher may write in Urdu; the browser sets each comment's direction from its text. */}
+                        {c.reason && (
+                          <span className="block text-muted" dir="auto">
+                            {c.reason}
+                          </span>
+                        )}
                         {(c.evidence ?? []).map((e, k) => (
                           <EvidencePlace key={k} attemptId={attempt.id} place={e} />
                         ))}
@@ -344,6 +349,8 @@ export function WrittenRunner({ attempt, result = null }: { attempt: WrittenAtte
               <img
                 src={`/practice/written/${attempt.id}/pages/${p.id}?v=${encodeURIComponent(JSON.stringify(p.transform ?? {}))}`}
                 alt={`Page ${i + 1}`}
+                loading="lazy" // W07.S3.T1: large scans load as they scroll into view; the fixed height keeps the layout still
+                decoding="async"
                 className="h-40 w-full rounded object-contain"
               />
               <p>
@@ -455,7 +462,13 @@ function EvidencePlace({ attemptId, place }: { attemptId: string; place: Evidenc
       <summary className="cursor-pointer text-accent">Show where: {place.where}</summary>
       <span className="relative mt-1 inline-block w-full max-w-sm">
         {/* eslint-disable-next-line @next/next/no-img-element -- private, uncached preview served by our own route */}
-        <img src={`/practice/written/${attemptId}/pages/${place.page_id}`} alt={`Your page ${place.page_number}`} className="block w-full rounded border border-border" />
+        <img
+          src={`/practice/written/${attemptId}/pages/${place.page_id}`}
+          alt={`Your page ${place.page_number}`}
+          loading="lazy"
+          decoding="async"
+          className="block w-full rounded border border-border"
+        />
         {r && (
           <span
             aria-hidden="true"

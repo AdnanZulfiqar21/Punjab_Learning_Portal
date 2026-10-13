@@ -1,31 +1,10 @@
-import AxeBuilder from "@axe-core/playwright";
-import { expect, test, type Page } from "@playwright/test";
+import { expect, test } from "@playwright/test";
+import { audit } from "./helpers/a11y";
 
 // P19 accessibility (A11Y-01): automated WCAG 2 A/AA checks with axe on the main learner pages, signed out and in.
 // Serious and critical violations fail the build. Automated rules cover only part of WCAG; manual screen-reader and
 // keyboard reviews are still required before release.
 const AUTH = { timeout: 20_000 };
-
-async function audit(page: Page, path: string) {
-  await page.goto(path);
-  await expect(page.locator("main")).toBeVisible();
-  // Let streamed sections settle, without depending on the network ever going fully idle.
-  await page.waitForLoadState("networkidle", { timeout: 5_000 }).catch(() => undefined);
-  let results: Awaited<ReturnType<AxeBuilder["analyze"]>> | null = null;
-  for (let tries = 0; tries < 3 && !results; tries++) {
-    try {
-      results = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"]).analyze();
-    } catch (e) {
-      if (!String(e).includes("Execution context was destroyed")) throw e;
-      await page.waitForLoadState("load"); // the page navigated on its own (e.g. a client redirect): scan where it landed
-    }
-  }
-  if (!results) throw new Error(`${path}: the page kept navigating (now at ${page.url()})`);
-  const blocking = results.violations
-    .filter((v) => v.impact === "serious" || v.impact === "critical")
-    .map((v) => `${v.id} (${v.impact}): ${v.help} — ${v.nodes.map((n) => n.target.join(" ")).slice(0, 3).join(" | ")}`);
-  expect(blocking, `${path} (landed on ${page.url()}) accessibility violations`).toEqual([]);
-}
 
 test.describe.configure({ mode: "serial" });
 
