@@ -141,6 +141,12 @@ def test_rubrics_attach_to_written_questions_only(client: TestClient, db: Sessio
         (lambda r: r["criteria"][0].update(subpart_id="z"), "doesn't have as a slot"),
         (lambda r: r.update(authority="official_scheme"), "official marking scheme needs a reference"),
         (lambda r: r["criteria"][0].update(depends_on=["nope"]), "depends on unknown"),
+        # W01.S2.T1 (RUBRIC-PATHS-01): unreachable credit paths.
+        (
+            lambda r: (r["criteria"][0].update(depends_on=["b1"]), r["criteria"][1].update(depends_on=["a1"])),
+            "depend on each other in a circle",
+        ),
+        (lambda r: r["criteria"][2].update(depends_on=["b1"]), "can never earn credit"),
     ],
 )
 def test_rubric_rules_and_reconciliation(

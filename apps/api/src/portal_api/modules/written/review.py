@@ -636,6 +636,17 @@ def _check_awards(
     return totals, errors
 
 
+def completeness_of(pending: list[int], unavailable: list[int], questions: int) -> str:
+    """§20.9.3 (W02.S1.T3, COMPLETENESS-01): pending wins whether or not some are unavailable (PARTIAL_PENDING); a
+    paper where nothing could be assessed is UNAVAILABLE (no valid whole-paper assessment, no awarded total), not a
+    partial result. A written paper always has a positive maximum, so NOT_SCORABLE (M = 0) can't arise here."""
+    if pending:
+        return "partial_pending"
+    if unavailable and len(unavailable) >= questions:
+        return "unavailable"
+    return "partial_unavailable" if unavailable else "complete"
+
+
 def decide(
     db: Session,
     who: Principal,
@@ -822,7 +833,7 @@ def decide(
     maxima = {str(q["position"]): int(q["max_units"]) for q in ctx["questions"]}
     pending = sorted(int(p) for p, st in all_status.items() if st["status"] == "pending")
     unavailable = sorted(int(p) for p, st in all_status.items() if st["status"] == "unavailable")
-    completeness = "partial_pending" if pending else "partial_unavailable" if unavailable else "complete"
+    completeness = completeness_of(pending, unavailable, len(all_status))
     from portal_api.modules.written import adjudication
 
     # W06-03: the rubric each marked question uses must be its current effective basis, and the authorised
@@ -956,6 +967,8 @@ def _notify_release(
         "complete": "Your result is complete.",
         "partial_pending": "Some questions are still being marked.",
         "partial_unavailable": "Some questions couldn't be assessed; their allowance was returned.",
+        "unavailable": "None of the questions could be assessed, so there is no mark for this test. "
+        "The allowance it used was returned.",
     }.get(completeness, "")
     link = f"/practice/written/{attempt_id}"
     notifications.notify(
@@ -1252,7 +1265,7 @@ def publish_resolution(
         question_units={p: u for p, u in units.items() if status.get(p, {}).get("status") == "scored"},
         question_status=status,
         evidence_revisions={p: e for p, e in (current.evidence_revisions or {}).items() if p not in updates},
-        completeness="partial_pending" if pending else "partial_unavailable" if unavailable else "complete",
+        completeness=completeness_of(pending, unavailable, len(status)),
         scored_max_units=sum(m for p, m in maxima.items() if status[p]["status"] == "scored"),
         total_units=sum(u for p, u in units.items() if status.get(p, {}).get("status") == "scored"),
         max_units=current.max_units,

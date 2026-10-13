@@ -293,6 +293,28 @@ class HistoryEntry(BaseModel):
     released_at: datetime
 
 
+# COMPLETENESS-01 (§20.9.3). Apps released before it know only the first three values (MIGRATION-COMPAT-01), so the
+# legacy `completeness` field keeps them and the full state is a separate field.
+AssessmentState = Literal["complete", "partial_pending", "partial_unavailable", "unavailable"]
+LegacyCompleteness = Literal["complete", "partial_pending", "partial_unavailable"]
+
+
+def legacy_completeness(state: str | None) -> LegacyCompleteness | None:
+    """What an older app is told: a paper where nothing could be assessed is a partial result with no marked
+    questions there, which it already shows as "Some questions couldn't be assessed", with no total."""
+    if state is None:
+        return None
+    return "partial_unavailable" if state == "unavailable" else state  # type: ignore[return-value]
+
+
+class ScoreVersionOut(BaseModel):
+    version: int
+    total_units: int | None = Field(description="None when nothing could be assessed: that version has no mark")
+    assessment_state: AssessmentState
+    case_kind: str
+    released_at: datetime
+
+
 class RecheckIn(BaseModel):
     reason: str = Field(min_length=10, max_length=2000)
     positions: list[int] = Field(min_length=1, max_length=20)
@@ -315,14 +337,23 @@ class WrittenResultOut(BaseModel):
     max_units: int
     released_at: datetime | None
     decision_method: str | None
-    completeness: Literal["complete", "partial_pending", "partial_unavailable"] | None = Field(
-        description="Not complete means no final total: some questions are pending or could not be assessed"
+    completeness: LegacyCompleteness | None = Field(
+        description="Not complete means no final total: some questions are pending or could not be assessed. Kept "
+        "for older apps: a paper where nothing could be assessed is partial_unavailable here; read assessment_state"
+    )
+    assessment_state: AssessmentState | None = Field(
+        description="complete; partial_pending (some questions are still being marked); partial_unavailable (some "
+        "could not be assessed); unavailable (none could be assessed, so this test has no mark). None until released"
     )
     scored_max_units: int | None = Field(description="Maximum of the questions that were scored")
     questions: list[QuestionResult]
     recheck: RecheckOut
     history: list[HistoryEntry] = Field(
-        description="Every released version, oldest first; corrections never erase history"
+        description="Released versions that have a mark, oldest first (kept for older apps; a version where nothing "
+        "could be assessed is listed only in versions)"
+    )
+    versions: list[ScoreVersionOut] = Field(
+        description="Every released version, oldest first, including any with no mark; corrections never erase history"
     )
     notices: list[NoticeOut] = Field(
         default_factory=list, description="Changes to this result's basis, such as a marking-guide correction"
@@ -543,10 +574,12 @@ def my_result(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, response: Re
             released_at=None,
             decision_method=None,
             completeness=None,
+            assessment_state=None,
             scored_max_units=None,
             questions=[],
             recheck=RecheckOut(**review.recheck_state(db, attempt.id)),
             history=[],
+            versions=[],
             notices=_notices(db, attempt.id),
             awaiting_regrade=_awaiting_regrade(db, attempt.id),
             linked_attempts=[LinkedAttemptOut(**x) for x in linked.linked_attempts(db, attempt.id)],
@@ -611,22 +644,35 @@ def my_result(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, response: Re
                 else None,
             )
         )
-    history = [
-        HistoryEntry(version=h.version, total_units=h.total_units, case_kind=h.case_kind, released_at=h.created_at)
+    versions = [  # COMPLETENESS-01: a version where nothing could be assessed has no awarded total
+        ScoreVersionOut(
+            version=h.version,
+            total_units=None if h.completeness == "unavailable" else h.total_units,
+            assessment_state=h.completeness or "complete",  # type: ignore[arg-type]
+            case_kind=h.case_kind,
+            released_at=h.created_at,
+        )
         for h in review.released_history(db, attempt.id)
+    ]
+    history = [  # older apps always print a number, so a version with no mark is left out rather than shown as 0
+        HistoryEntry(version=v.version, total_units=v.total_units, case_kind=v.case_kind, released_at=v.released_at)
+        for v in versions
+        if v.total_units is not None
     ]
     return WrittenResultOut(
         status="released",
         version=sv.version,
-        total_units=sv.total_units,
+        total_units=None if sv.completeness == "unavailable" else sv.total_units,
         max_units=sv.max_units,
         released_at=sv.created_at,
         decision_method=sv.decision_method,
-        completeness=sv.completeness,  # type: ignore[arg-type]
+        completeness=legacy_completeness(sv.completeness),
+        assessment_state=sv.completeness,  # type: ignore[arg-type]
         scored_max_units=sv.scored_max_units if sv.scored_max_units is not None else sv.max_units,
         questions=questions,
         recheck=RecheckOut(**review.recheck_state(db, attempt.id)),
         history=history,
+        versions=versions,
         notices=_notices(db, attempt.id),
         awaiting_regrade=_awaiting_regrade(db, attempt.id),
         linked_attempts=[LinkedAttemptOut(**x) for x in linked.linked_attempts(db, attempt.id)],

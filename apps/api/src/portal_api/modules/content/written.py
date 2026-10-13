@@ -166,9 +166,52 @@ def validate_rubric(body: object, *, for_publication: bool) -> blocks.Validation
         missing = set(c.depends_on) - known
         if missing or c.id in c.depends_on:
             errors.append(f"Criterion {c.id}: depends on unknown criteria {sorted(missing) or [c.id]}.")
+    errors += _unreachable(r)
     if not r.expected_concepts:
         warnings.append("List the expected concepts so reviewers can check equivalent wording consistently.")
     return blocks.Validation(errors, warnings, [])
+
+
+def _unreachable(r: RubricBody) -> list[str]:
+    """W01.S2.T1 (RUBRIC-PATHS-01): credit that no award can reach. A dependency cycle has no order in which its
+    criteria can be credited; a criterion that depends on another route of its own alternative group can never earn
+    credit, because only one route of a group is credited."""
+    by_id = {c.id: c for c in r.criteria}
+    errors: list[str] = []
+    graph = {c.id: [d for d in c.depends_on if d in by_id and d != c.id] for c in r.criteria}
+    state: dict[str, int] = {}  # 1 visiting, 2 done
+    reported: set[frozenset[str]] = set()
+
+    def visit(node: str, path: list[str]) -> None:
+        state[node] = 1
+        for nxt in graph[node]:
+            if state.get(nxt) == 1:
+                cycle = frozenset(path[path.index(nxt) :])
+                if cycle not in reported:
+                    reported.add(cycle)
+                    errors.append(
+                        f"Criteria {sorted(cycle)} depend on each other in a circle; no award can satisfy them."
+                    )
+            elif state.get(nxt) is None:
+                visit(nxt, [*path, nxt])
+        state[node] = 2
+
+    for cid in by_id:
+        if cid not in state:
+            visit(cid, [cid])
+    for c in r.criteria:
+        for d in c.depends_on:
+            other = by_id.get(d)
+            if (
+                other is not None
+                and c.alternative_group
+                and (other.subpart_id, other.alternative_group) == (c.subpart_id, c.alternative_group)
+            ):
+                errors.append(
+                    f"Criterion {c.id} depends on {d}, another route of alternative group {c.alternative_group}, "
+                    "so it can never earn credit."
+                )
+    return errors
 
 
 def slot_totals(r: RubricBody) -> dict[str | None, int]:
