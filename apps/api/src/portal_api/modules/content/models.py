@@ -219,7 +219,10 @@ class ContentImportBatch(Base):
 
     __tablename__ = "content_import_batch"
     __table_args__ = (
-        CheckConstraint("status in ('previewed','committed','discarded')", name="content_import_batch_status"),
+        CheckConstraint(
+            "status in ('queued','validating','previewed','committing','committed','discarded','failed')",
+            name="content_import_batch_status",
+        ),
         CheckConstraint("format in ('json','csv','xlsx')", name="content_import_batch_format"),
     )
     id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
@@ -234,6 +237,13 @@ class ContentImportBatch(Base):
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
     expires_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
     committed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    # IMPORT-BULK-01: large files are checked and committed by the import worker.
+    rows_total: Mapped[int | None] = mapped_column(Integer)
+    rows_checked: Mapped[int | None] = mapped_column(Integer)
+    file_key: Mapped[str | None] = mapped_column(Text)  # the private upload, deleted once its rows are stored
+    failure: Mapped[str | None] = mapped_column(Text)
+    lease_owner: Mapped[str | None] = mapped_column(String(120))
+    lease_expires_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
 
 
 class ContentImportRow(Base):

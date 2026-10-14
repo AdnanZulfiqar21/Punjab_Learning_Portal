@@ -53,6 +53,7 @@ ENTRY_POINTS: dict[str, str] = {
     "portal-asset-retention": "bulk",
     "portal-upload-reconcile": "bulk",
     "portal-help-import": "bulk",
+    "portal-import-worker": "bulk",  # IMPORT-BULK-01
     "portal-import-catalogue": "reserve",
     "portal-grant-role": "reserve",
     "portal-written-previews": "written.ingestion",

@@ -33,6 +33,17 @@ marking, results and entitlements are never behind a switch. The keys are:
 2. A failed job lists its failed scripts. Fix the cause, then an adjudicator uses **Retry** (MFA).
 3. Released results stay as they are until the regrade succeeds.
 
+## import-backlog
+**Signal:** `content_import_queue_age_s` (warn 15 min, alert 1 h): the oldest bulk import still queued, being checked
+or being committed (IMPORT-BULK-01).
+**Owner:** platform operator.
+
+1. Check that `portal-import-worker` is running.
+2. A crashed worker's batch is picked up again once its two-minute lease runs out, and resumes after its last
+   stored rows. Nothing needs to be reset by hand.
+3. An author can cancel a queued batch from the import page. A batch that fails says why, and nothing from it is
+   imported.
+
 ## auto-assessment
 **Signal:** `auto_assessment_dead_letters`.
 **Owner:** platform operator.

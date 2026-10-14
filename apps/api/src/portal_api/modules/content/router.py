@@ -757,12 +757,15 @@ class ImportBatchOut(BaseModel):
     format: Literal["json", "csv", "xlsx"]
     filename: str
     sha256: str
-    status: Literal["previewed", "committed", "discarded"]
+    status: Literal["queued", "validating", "previewed", "committing", "committed", "discarded", "failed"]
     counts: dict[str, int]
     created_at: datetime
     expires_at: datetime
     committed_at: datetime | None
     rows: list[ImportRowOut] = Field(default_factory=list)
+    rows_total: int | None = Field(default=None, description="Rows in the file, once read (IMPORT-BULK-01)")
+    rows_checked: int | None = Field(default=None, description="Rows checked so far by the import worker")
+    failure: str | None = Field(default=None, description="Why a bulk import failed; nothing was imported")
 
 
 def _batch_out(db: Session, b: Any, with_rows: bool = True) -> ImportBatchOut:
@@ -779,6 +782,9 @@ def _batch_out(db: Session, b: Any, with_rows: bool = True) -> ImportBatchOut:
         created_at=b.created_at,
         expires_at=b.expires_at,
         committed_at=b.committed_at,
+        rows_total=b.rows_total,
+        rows_checked=b.rows_checked,
+        failure=b.failure,
         rows=[
             ImportRowOut(
                 row=r.row_number,
@@ -824,6 +830,49 @@ async def preview_import(
     return _batch_out(db, batch)
 
 
+@router.post(
+    "/imports/bulk",
+    response_model=ImportBatchOut,
+    status_code=202,
+    dependencies=[Depends(operations.requires("content_imports"))],
+    summary="Queue a large import (raw JSON, CSV or XLSX body, at most 50 MB and 20,000 rows) for the import worker, "
+    "which checks it like a preview; poll the batch for progress",
+)
+async def queue_bulk_import(
+    db: DB,
+    who: Author,
+    request: Request,
+    format: Annotated[Literal["json", "csv", "xlsx"], Query()] = "json",
+    filename: Annotated[str, Query(max_length=200)] = "import",
+) -> ImportBatchOut:
+    import hashlib
+
+    from starlette.concurrency import run_in_threadpool
+
+    from portal_api.errors import TooLarge, Unprocessable
+    from portal_api.modules.content import bulk_imports
+
+    key, path = bulk_imports.new_upload_path()
+    digest, size = hashlib.sha256(), 0
+    try:
+        with path.open("wb") as f:  # streamed to private storage, never held whole in memory here
+            async for chunk in request.stream():
+                size += len(chunk)
+                if size > bulk_imports.BULK.max_bytes:
+                    raise TooLarge("Bulk import files can be at most 50 MB; split the file.")
+                digest.update(chunk)
+                f.write(chunk)
+        if size == 0:
+            raise Unprocessable("The file is empty.")
+    except BaseException:
+        path.unlink(missing_ok=True)
+        raise
+    batch = await run_in_threadpool(
+        bulk_imports.enqueue, db, who, fmt=format, filename=filename, key=key, sha256=digest.hexdigest()
+    )
+    return _batch_out(db, batch, with_rows=False)
+
+
 @router.get(
     "/imports/templates/{name}",
     summary="The multiple-choice import template, headings only (mcq.xlsx with text-formatted columns, or mcq.csv)",
@@ -860,7 +909,9 @@ def list_imports(db: DB, who: Author) -> list[ImportBatchOut]:
 def get_import(db: DB, who: Author, batch_id: uuid.UUID) -> ImportBatchOut:
     from portal_api.modules.content import imports
 
-    return _batch_out(db, imports.get_batch(db, who, batch_id))
+    batch = imports.get_batch(db, who, batch_id)
+    # IMPORT-BULK-01: while the worker has the batch, a poll gets its progress, not every row stored so far.
+    return _batch_out(db, batch, with_rows=batch.status not in ("queued", "validating", "committing"))
 
 
 @router.get("/imports/{batch_id}/report.csv", summary="Downloadable correction report (one line per row)")

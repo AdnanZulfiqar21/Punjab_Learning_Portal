@@ -22,6 +22,7 @@ import re
 import uuid
 import zipfile
 from collections.abc import Iterable, Iterator
+from dataclasses import dataclass
 from datetime import UTC, datetime, timedelta
 from typing import Any
 from xml.etree import ElementTree as ET
@@ -80,14 +81,31 @@ def _now() -> datetime:
     return datetime.now(UTC)
 
 
+@dataclass(frozen=True)
+class Limits:
+    """How much one file may hold. Previews in a request use the defaults; the bulk worker (IMPORT-BULK-01) more."""
+
+    max_bytes: int
+    max_rows: int
+    max_part: int  # one unpacked part of a workbook
+
+    @staticmethod
+    def request() -> Limits:  # read at call time, so the module constants stay the single source
+        return Limits(MAX_BYTES, MAX_ROWS, XLSX_MAX_PART)
+
+
+def _too_many(limits: Limits) -> TooLarge:
+    return TooLarge(f"A batch can have at most {limits.max_rows:,} rows; split the file.")
+
+
 def _hash(payload: dict[str, Any]) -> str:
     return hashlib.sha256(json.dumps(payload, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
 
 
 # ------------------------------------------------------------------ decoding
-def _decode(data: bytes) -> str:
-    if len(data) > MAX_BYTES:
-        raise TooLarge(f"Import files can be at most {MAX_BYTES // (1024 * 1024)} MB.")
+def _decode(data: bytes, limits: Limits) -> str:
+    if len(data) > limits.max_bytes:
+        raise TooLarge(f"Import files can be at most {limits.max_bytes // (1024 * 1024)} MB.")
     if data.startswith(b"\xef\xbb\xbf"):
         data = data[3:]
     try:
@@ -121,16 +139,18 @@ def _para(text: str) -> list[dict[str, Any]]:
     return [{"type": "paragraph", "text": text.strip()}] if text.strip() else []
 
 
-def _csv_rows(text: str) -> tuple[str, list[dict[str, Any]]]:
+def _csv_rows(text: str, limits: Limits) -> tuple[str, list[dict[str, Any]]]:
     """The MCQ CSV template (plain paragraphs). Rich blocks, formulas and images need the JSON format."""
     reader = csv.DictReader(io.StringIO(text))
     try:
-        return _template_rows(reader.fieldnames or [], reader)
+        return _template_rows(reader.fieldnames or [], reader, limits)
     except csv.Error as e:  # e.g. a field over the parser's size limit, or a broken quote
         raise Unprocessable(f"The CSV file can't be read: {e}.", code_reason="CSV") from None
 
 
-def _template_rows(fieldnames: Iterable[str], records: Iterable[dict[str, Any]]) -> tuple[str, list[dict[str, Any]]]:
+def _template_rows(
+    fieldnames: Iterable[str], records: Iterable[dict[str, Any]], limits: Limits
+) -> tuple[str, list[dict[str, Any]]]:
     """The multiple-choice template's columns (CSV_COLUMNS), from a CSV file or the first sheet of a workbook."""
     header = [h.strip() for h in fieldnames]
     missing = [
@@ -146,8 +166,8 @@ def _template_rows(fieldnames: Iterable[str], records: Iterable[dict[str, Any]])
         raise Unprocessable(f"Repeated columns: {', '.join(repeated)}.", code_reason="CSV_HEADER")
     rows: list[dict[str, Any]] = []
     for raw in records:
-        if len(rows) >= MAX_ROWS:  # stop reading at the limit instead of parsing a flood of rows
-            raise TooLarge(f"A batch can have at most {MAX_ROWS} rows; split the file.")
+        if len(rows) >= limits.max_rows:  # stop reading at the limit instead of parsing a flood of rows
+            raise _too_many(limits)
         r = {k.strip(): (v or "").strip() for k, v in raw.items() if k}
         options = [
             {"id": f"o{i + 1}", "blocks": _para(r.get(col, ""))}
@@ -241,14 +261,14 @@ def _local(tag: str) -> str:
     return tag.rsplit("}", 1)[-1]  # transitional and strict workbooks use different namespaces; names are the same
 
 
-def _optional(z: zipfile.ZipFile, name: str) -> ET.Element | None:
+def _optional(z: zipfile.ZipFile, name: str, cap: int) -> ET.Element | None:
     try:
         with z.open(name) as f:
-            data = f.read(XLSX_MAX_PART + 1)
+            data = f.read(cap + 1)
     except KeyError:
         return None
-    if len(data) > XLSX_MAX_PART:
-        raise TooLarge(f"A part of the workbook ({name}) is larger than {XLSX_MAX_PART // (1024 * 1024)} MB unpacked.")
+    if len(data) > cap:
+        raise TooLarge(f"A part of the workbook ({name}) is larger than {cap // (1024 * 1024)} MB unpacked.")
     if _DECLARATION.search(data):  # anywhere: a comment may come first. Real cell text escapes "<" as "&lt;".
         raise _unreadable("it declares a DOCTYPE or entities, which workbooks never need")
     try:
@@ -257,8 +277,8 @@ def _optional(z: zipfile.ZipFile, name: str) -> ET.Element | None:
         raise _unreadable(f"{name} is not valid XML") from None
 
 
-def _required(z: zipfile.ZipFile, name: str) -> ET.Element:
-    el = _optional(z, name)
+def _required(z: zipfile.ZipFile, name: str, cap: int) -> ET.Element:
+    el = _optional(z, name, cap)
     if el is None:
         raise _unreadable(f"{name} is missing")
     return el
@@ -266,7 +286,7 @@ def _required(z: zipfile.ZipFile, name: str) -> ET.Element:
 
 def _targets(z: zipfile.ZipFile, rels: str, base: str, *, kind: str | None = None) -> dict[str, str]:
     """Relationship ID -> part path (internal targets only; `kind` keeps only that relationship type)."""
-    root = _optional(z, rels)
+    root = _optional(z, rels, XLSX_MAX_PART)  # relationship parts are tiny
     out: dict[str, str] = {}
     for r in [] if root is None else list(root):
         target = r.get("Target") or ""
@@ -298,10 +318,11 @@ def _column(ref: str | None, fallback: int) -> int:
     return n - 1
 
 
-def xlsx_table(data: bytes) -> tuple[list[str], list[dict[str, str]]]:
+def xlsx_table(data: bytes, limits: Limits | None = None) -> tuple[list[str], list[dict[str, str]]]:
     """The first worksheet as headings and rows (each row a dict by heading). Blank rows are skipped."""
-    if len(data) > MAX_BYTES:
-        raise TooLarge(f"Import files can be at most {MAX_BYTES // (1024 * 1024)} MB.")
+    limits = limits or Limits.request()
+    if len(data) > limits.max_bytes:
+        raise TooLarge(f"Import files can be at most {limits.max_bytes // (1024 * 1024)} MB.")
     try:
         z = zipfile.ZipFile(io.BytesIO(data))
     except zipfile.BadZipFile:
@@ -311,7 +332,7 @@ def xlsx_table(data: bytes) -> tuple[list[str], list[dict[str, str]]]:
             raise _unreadable("it has too many parts")
         book_path = next(iter(_targets(z, "_rels/.rels", "", kind="officeDocument").values()), "xl/workbook.xml")
         base = book_path.rsplit("/", 1)[0] + "/" if "/" in book_path else ""
-        book = _required(z, book_path)
+        book = _required(z, book_path, XLSX_MAX_PART)
         sheets = [el for el in book.iter() if _local(el.tag) == "sheet"]
         if not sheets:
             raise _unreadable("it has no worksheet")
@@ -319,12 +340,12 @@ def xlsx_table(data: bytes) -> tuple[list[str], list[dict[str, str]]]:
         sheet_path = _targets(z, f"{base}_rels/{book_path.rsplit('/', 1)[-1]}.rels", base).get(rid)
         if not sheet_path:
             raise _unreadable("its first worksheet can't be found")
-        sst = _optional(z, f"{base}sharedStrings.xml")
+        sst = _optional(z, f"{base}sharedStrings.xml", limits.max_part)
         shared = [] if sst is None else [_text(si) for si in sst if _local(si.tag) == "si"]
-        return _sheet_rows(_required(z, sheet_path), shared)
+        return _sheet_rows(_required(z, sheet_path, limits.max_part), shared, limits)
 
 
-def _sheet_rows(sheet: ET.Element, shared: list[str]) -> tuple[list[str], list[dict[str, str]]]:
+def _sheet_rows(sheet: ET.Element, shared: list[str], limits: Limits) -> tuple[list[str], list[dict[str, str]]]:
     def cells(row: ET.Element) -> list[str]:
         values: dict[int, str] = {}
         for i, c in enumerate(el for el in row if _local(el.tag) == "c"):
@@ -351,8 +372,8 @@ def _sheet_rows(sheet: ET.Element, shared: list[str]) -> tuple[list[str], list[d
     header = next(nonblank, [])
     records: list[dict[str, str]] = []
     for r in nonblank:
-        if len(records) >= MAX_ROWS:  # stop at the limit instead of building a flood of rows
-            raise TooLarge(f"A batch can have at most {MAX_ROWS} rows; split the file.")
+        if len(records) >= limits.max_rows:  # stop at the limit instead of building a flood of rows
+            raise _too_many(limits)
         for i, v in enumerate(r):
             if v and (i >= len(header) or not header[i]):
                 raise Unprocessable(
@@ -431,22 +452,23 @@ def xlsx_template(headings: Iterable[str]) -> bytes:
     return buf.getvalue()
 
 
-def parse_file(data: bytes, fmt: str) -> tuple[str, list[dict[str, Any]]]:
+def parse_file(data: bytes, fmt: str, limits: Limits | None = None) -> tuple[str, list[dict[str, Any]]]:
+    limits = limits or Limits.request()
     if fmt == "xlsx":
-        header, records = xlsx_table(data)
+        header, records = xlsx_table(data, limits)
         for record in records:
             if any("\x00" in v for v in record.values()):
                 raise Unprocessable(
                     "The file contains a NUL character, which isn't allowed in text.", code_reason="ENCODING"
                 )
-        kind, rows = _template_rows(header, records)
+        kind, rows = _template_rows(header, records, limits)
     else:
-        text = _decode(data)
-        kind, rows = _csv_rows(text) if fmt == "csv" else _json_rows(text)
+        text = _decode(data, limits)
+        kind, rows = _csv_rows(text, limits) if fmt == "csv" else _json_rows(text)
     if not rows:
         raise Unprocessable("The file has no rows.", code_reason="EMPTY")
-    if len(rows) > MAX_ROWS:
-        raise TooLarge(f"A batch can have at most {MAX_ROWS} rows; split the file.")
+    if len(rows) > limits.max_rows:
+        raise _too_many(limits)
     return kind, rows
 
 
@@ -635,25 +657,8 @@ def preview(db: Session, who: Principal, data: bytes, *, fmt: str, filename: str
         raise TooMany(f"You've previewed {PREVIEWS_PER_HOUR} imports in the last hour. Please wait before the next.")
     scope_cache: dict[Any, bool] = {}
     results = [_validate_row(db, who, kind, r, scope_cache) for r in raw_rows]
-    seen: dict[str, int] = {}
-    stems: dict[str, int] = {}
-    for n, r in enumerate(results, start=1):
-        ext = r.get("external_id")
-        if ext and ext in seen:
-            r["action"] = "error"
-            r["errors"] = [*r["errors"], f"Duplicate external_id; first used on row {seen[ext]}."]
-        elif ext:
-            seen[ext] = n
-        body = (r.get("payload") or {}).get("body") or {}
-        stem = json.dumps(body.get("stem") or body.get("blocks") or [], sort_keys=True).lower()
-        if stem not in ("[]", "") and r["action"] != "error":
-            if stem in stems:
-                r["warnings"] = [*r["warnings"], f"Same text as row {stems[stem]}; check this isn't a duplicate."]
-            else:
-                stems[stem] = n
-    counts: dict[str, int] = {}
-    for r in results:
-        counts[r["action"]] = counts.get(r["action"], 0) + 1
+    mark_duplicates(results)
+    counts = count_actions(results)
     batch = ContentImportBatch(
         id=uuid.uuid4(),
         kind=kind,
@@ -665,6 +670,8 @@ def preview(db: Session, who: Principal, data: bytes, *, fmt: str, filename: str
         counts=counts,
         created_by=who.user.id,
         expires_at=_now() + PREVIEW_TTL,
+        rows_total=len(results),
+        rows_checked=len(results),
     )
     db.add(batch)
     db.flush()
@@ -693,6 +700,33 @@ def preview(db: Session, who: Principal, data: bytes, *, fmt: str, filename: str
     db.commit()
     db.refresh(batch)
     return batch
+
+
+def mark_duplicates(results: list[dict[str, Any]]) -> None:
+    """Across the whole file: a repeated external_id is an error; the same question text twice is a warning."""
+    seen: dict[str, int] = {}
+    stems: dict[str, int] = {}
+    for n, r in enumerate(results, start=1):
+        ext = r.get("external_id")
+        if ext and ext in seen:
+            r["action"] = "error"
+            r["errors"] = [*r["errors"], f"Duplicate external_id; first used on row {seen[ext]}."]
+        elif ext:
+            seen[ext] = n
+        body = (r.get("payload") or {}).get("body") or {}
+        stem = json.dumps(body.get("stem") or body.get("blocks") or [], sort_keys=True).lower()
+        if stem not in ("[]", "") and r["action"] != "error":
+            if stem in stems:
+                r["warnings"] = [*r["warnings"], f"Same text as row {stems[stem]}; check this isn't a duplicate."]
+            else:
+                stems[stem] = n
+
+
+def count_actions(results: Iterable[dict[str, Any]]) -> dict[str, int]:
+    counts: dict[str, int] = {}
+    for r in results:
+        counts[r["action"]] = counts.get(r["action"], 0) + 1
+    return counts
 
 
 # ------------------------------------------------------------------ commit
@@ -730,16 +764,21 @@ def list_batches(db: Session, who: Principal) -> list[ContentImportBatch]:
 
 
 def discard(db: Session, who: Principal, batch_id: uuid.UUID) -> ContentImportBatch:
+    from portal_api.modules.content import bulk_imports
+
     batch = _own_batch(db, who, batch_id, for_update=True)
-    if batch.status != "previewed":
+    if batch.status in ("validating", "committing"):
+        raise Conflict("This import is being processed. Wait for it to finish, then discard it.")
+    if batch.status not in ("previewed", "queued"):
         raise Conflict(f"This import is already {batch.status}.")
+    if batch.status == "queued":  # IMPORT-BULK-01: the worker hasn't started; its upload goes now
+        bulk_imports.discard_queued(batch)
     batch.status = "discarded"
     db.commit()
     return batch
 
 
-def commit(db: Session, who: Principal, batch_id: uuid.UUID) -> ContentImportBatch:
-    batch = _own_batch(db, who, batch_id, for_update=True)
+def check_committable(db: Session, batch: ContentImportBatch) -> list[ContentImportRow]:
     if batch.status != "previewed":
         raise Conflict(f"This import is already {batch.status}.")
     if batch.expires_at <= _now():
@@ -747,6 +786,28 @@ def commit(db: Session, who: Principal, batch_id: uuid.UUID) -> ContentImportBat
     stored = rows(db, batch.id)
     if any(r.action == "error" for r in stored):
         raise Conflict("Fix the rows with errors and preview the file again; nothing was imported.")
+    return stored
+
+
+def commit(db: Session, who: Principal, batch_id: uuid.UUID) -> ContentImportBatch:
+    from portal_api.modules.content import bulk_imports
+
+    batch = _own_batch(db, who, batch_id, for_update=True)
+    stored = check_committable(db, batch)
+    if len(stored) > bulk_imports.SYNC_COMMIT_ROWS:  # IMPORT-BULK-01: a very large batch commits in the worker
+        return bulk_imports.queue_commit(db, who, batch)
+    apply_commit(db, who, batch, stored)
+    try:
+        db.commit()
+    except IntegrityError:
+        db.rollback()
+        raise Conflict("Another import created some of these items at the same time; preview the file again.") from None
+    db.refresh(batch)
+    return batch
+
+
+def apply_commit(db: Session, who: Principal, batch: ContentImportBatch, stored: list[ContentImportRow]) -> None:
+    """Write every create/update row of a checked batch, without committing (the caller owns the transaction)."""
     scope_cache: dict[Any, bool] = {}
     written = {"created": 0, "updated": 0}
     for r in stored:
@@ -778,13 +839,6 @@ def commit(db: Session, who: Principal, batch_id: uuid.UUID) -> ContentImportBat
         target_id=str(batch.id),
         details={"kind": batch.kind, "sha256": batch.sha256, **written},
     )
-    try:
-        db.commit()
-    except IntegrityError:
-        db.rollback()
-        raise Conflict("Another import created some of these items at the same time; preview the file again.") from None
-    db.refresh(batch)
-    return batch
 
 
 def _row_input(r: ContentImportRow) -> dict[str, Any]:

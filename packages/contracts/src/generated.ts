@@ -2844,6 +2844,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/studio/imports/bulk": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Queue a large import (raw JSON, CSV or XLSX body, at most 50 MB and 20,000 rows) for the import worker, which checks it like a preview; poll the batch for progress */
+        post: operations["queue_bulk_import_v1_studio_imports_bulk_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/studio/imports/templates/{name}": {
         parameters: {
             query?: never;
@@ -6925,6 +6942,11 @@ export interface components {
              * Format: date-time
              */
             expires_at: string;
+            /**
+             * Failure
+             * @description Why a bulk import failed; nothing was imported
+             */
+            failure?: string | null;
             /** Filename */
             filename: string;
             /**
@@ -6941,13 +6963,23 @@ export interface components {
             kind: string;
             /** Rows */
             rows?: components["schemas"]["ImportRowOut"][];
+            /**
+             * Rows Checked
+             * @description Rows checked so far by the import worker
+             */
+            rows_checked?: number | null;
+            /**
+             * Rows Total
+             * @description Rows in the file, once read (IMPORT-BULK-01)
+             */
+            rows_total?: number | null;
             /** Sha256 */
             sha256: string;
             /**
              * Status
              * @enum {string}
              */
-            status: "previewed" | "committed" | "discarded";
+            status: "queued" | "validating" | "previewed" | "committing" | "committed" | "discarded" | "failed";
         };
         /** ImportRowOut */
         ImportRowOut: {
@@ -17452,6 +17484,38 @@ export interface operations {
         responses: {
             /** @description Successful Response */
             201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ImportBatchOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    queue_bulk_import_v1_studio_imports_bulk_post: {
+        parameters: {
+            query?: {
+                format?: "json" | "csv" | "xlsx";
+                filename?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            202: {
                 headers: {
                     [name: string]: unknown;
                 };
