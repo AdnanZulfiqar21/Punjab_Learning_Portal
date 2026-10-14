@@ -8,6 +8,7 @@ Three separately evidenced states (roadmap §2.3). Nothing is ticked without cur
 - [ ] Written R2: approved short+long questions/rubrics, teacher route qualified/funded per advertised chapter scope; WG11[PRELAUNCH, RCS]
 - [ ] Web, Android, iOS (installable production variants) and admin operate on the RCS
 - [ ] Zero unresolved P0/P1 defects
+- [ ] Advisory review (`docs/security/advisory-review.md`) re-run on the release candidate's lockfiles within 7 days of release; every open finding has an owner, reason and target date (ADVISORY-REVIEW-01)
 
 ## Content Ready: NOT_READY
 - [ ] Full launch manifest reviewed, licensed (rights confirmed), mapped and published (G22)
