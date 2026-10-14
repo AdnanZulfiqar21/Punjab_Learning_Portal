@@ -23,7 +23,7 @@ For the tasks marked **Implemented**, the cited tests were confirmed to exist. T
 
 | Task | Found | Missing |
 | --- | --- | --- |
-| W00.S1.T1 Freeze outcomes/exclusions | SCOPE-01, D01, launch manifest | R1/R2 distinction and the tutoring, proctoring and entrance-test exclusions; owner freeze (WA-D12) |
+| W00.S1.T1 Freeze outcomes/exclusions | SCOPE-01, D01, launch manifest; written outcomes, R1/R2 and proposed exclusions (WRITTEN-SCOPE-01) | Owner freeze (WA-D12) |
 | W00.S3.T1 Release evidence R0–R3 | Release checklist (R2 line), READINESS-01 | An R0–R3 capability and gate map |
 | W00.S3.T2 Policy defaults with owners | Defaults spread across IMPL-20, RECHECK-01, RESCAN-01, ALLOC-01, ACCESS-01 | A WA-D01–D15 register with approval state; capture (WA-D13), retention (WA-D10/B15) and severe-error (WA-D06) defaults |
 | W00.S3.T3 Dependency-based estimate | `DEPENDENCIES.md` waves | Estimates; the final one needs spikes (B10) |
