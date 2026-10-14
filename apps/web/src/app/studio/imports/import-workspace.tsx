@@ -30,7 +30,7 @@ const ACTION_LABEL: Record<string, string> = {
 /** Upload → preview (dry run) → commit. Shows every row's action, errors and warnings. */
 const subscribe = () => () => {};
 
-export function ImportWorkspace() {
+export function ImportWorkspace({ initialBatchId }: { initialBatchId?: string } = {}) {
   // The picker appears only once the page is interactive, so a file chosen early is never silently ignored.
   const hydrated = useSyncExternalStore(subscribe, () => true, () => false);
   const input = useRef<HTMLInputElement>(null);
@@ -38,6 +38,12 @@ export function ImportWorkspace() {
   const [error, setError] = useState<string | null>(null);
   const [uploading, setUploading] = useState(false);
   const [pending, start] = useTransition();
+
+  // Reopened from the recent imports list (IMPORT-BULK-01): load that batch once.
+  useEffect(() => {
+    if (!initialBatchId) return;
+    void getImport(initialBatchId).then((out) => (out.ok ? setBatch(out.batch) : setError(out.error)));
+  }, [initialBatchId]);
 
   // While the import worker has the batch, show its progress (every 2 seconds) until it is ready, imported or failed.
   const working = batch !== null && WORKING.has(batch.status);

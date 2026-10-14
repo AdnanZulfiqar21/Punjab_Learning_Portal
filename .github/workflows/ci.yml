@@ -168,8 +168,14 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm typecheck
       - run: pnpm lint
-      - name: Expo dependency/config checks
-        run: pnpm doctor
+      # EXPO-CHECK-01: `pnpm doctor` ran pnpm's own built-in command, not expo-doctor, so this step checked nothing.
+      # The version check compares with Expo's newest patch releases online, so it reports drift without failing the
+      # build; updating the app's packages is done with a device build (B09, B14). The config checks below block.
+      - name: Expo SDK version drift (online report, does not fail the build)
+        continue-on-error: true
+        run: npx expo install --check
+      - name: Expo app config resolves
+        run: npx expo config --type public > /dev/null
       - name: Production variant refuses to build without an explicit API origin
         run: |
           if APP_VARIANT=production npx expo config --type public > /dev/null 2>&1; then

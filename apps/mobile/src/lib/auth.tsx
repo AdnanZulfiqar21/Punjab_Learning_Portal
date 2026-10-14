@@ -7,6 +7,7 @@ import type { Me } from "@portal/contracts";
 
 import { api, ApiError } from "@/lib/api";
 import { clearDrafts } from "@/lib/note-drafts";
+import { clearPageDrafts } from "@/lib/page-drafts";
 import { clearPacks } from "@/lib/study-packs";
 import { clearQueues } from "@/lib/op-store";
 import { clearProgress, flush } from "@/lib/progress-queue";
@@ -82,7 +83,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const token = await tokenStore.get();
     if (token) await api.signOut(token).catch(() => undefined); // local sign-out must succeed even offline
     await tokenStore.clear();
-    await Promise.all([clearDrafts(), clearQueues(), clearPacks(), clearProgress()]); // ISOLATION-01: a clean start
+    await Promise.all([clearDrafts(), clearQueues(), clearPacks(), clearProgress(), clearPageDrafts()]); // ISOLATION-01: a clean start
     setState({ status: "signed_out" });
   }, []);
 
