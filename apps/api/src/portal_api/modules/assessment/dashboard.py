@@ -144,6 +144,27 @@ def _continue(db: Session, user_id: uuid.UUID, grade: int | None) -> dict[str, A
     if grade is not None:
         stmt = stmt.where(ContentItem.grade_number == grade)
     row = db.execute(stmt).first()
+    # LESSON-PROGRESS-01: a saved reading position is finer than the once-a-day "opened" event; the newer one wins.
+    from portal_api.modules.content.progress import ReadingPosition
+
+    placed = (
+        select(ContentItem, Chapter, ReadingPosition.client_at)
+        .join(ReadingPosition, ReadingPosition.lesson_id == ContentItem.id)
+        .join(Chapter, Chapter.id == ContentItem.chapter_id)
+        .where(
+            ReadingPosition.user_id == user_id,
+            ContentItem.kind == "lesson",
+            ContentItem.availability == Availability.live.value,
+            ContentItem.id.not_in(done),
+        )
+        .order_by(ReadingPosition.client_at.desc())
+        .limit(1)
+    )
+    if grade is not None:
+        placed = placed.where(ContentItem.grade_number == grade)
+    place = db.execute(placed).first()
+    if place is not None and (row is None or place[2] > row[2]):
+        row = place
     if row is None:
         return None
     item, chapter, at = row
