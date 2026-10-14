@@ -66,6 +66,7 @@ async function answer(page: Page, correct: boolean) {
 }
 
 test("a new learner starts on one device and carries on as a returning learner on another", async ({ browser }) => {
+  test.slow(); // two devices, onboarding, a test and a result: over 30 s on a development server
   const email = newEmail("journey");
   // New: register, choose a class and subject, start the free trial.
   const first = await register(browser, email);
