@@ -24,9 +24,10 @@ test("a chapter offers to continue at the lesson the learner reached", async ({ 
   test.skip(count < 2, "The local fixture chapter needs at least two readable lessons");
   const target = lessons.nth(count - 1);
   const title = (await target.textContent())!.trim();
-  await target.scrollIntoViewIfNeeded();
-  await page.evaluate(() => window.scrollBy(0, -50));
-  await page.waitForTimeout(3500); // the page saves a place after the heading has been in view for a moment
+  // The place counts once the heading has sat in the upper half of the screen for a moment, as when reading it.
+  await target.evaluate((h) => h.scrollIntoView({ block: "start" }));
+  await expect.poll(() => target.evaluate((h) => h.getBoundingClientRect().top < window.innerHeight / 2)).toBe(true);
+  await page.waitForTimeout(3500);
 
   // Another device (a fresh browser context) signed in as the same learner sees where to continue.
   const other = await (await browser.newContext()).newPage();
