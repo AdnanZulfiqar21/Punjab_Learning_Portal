@@ -8,6 +8,7 @@ import { GRADE_LABEL } from "@/lib/format";
 import { SUBJECTS } from "@/lib/practice";
 import { api, currentUser } from "@/lib/session";
 import { NewAsset, UploadVersion } from "./asset-forms";
+import { MediaPackForm } from "./media-pack";
 
 export const metadata: Metadata = { title: "Assets", robots: { index: false } };
 
@@ -57,6 +58,7 @@ async function Archive({ grade, subject }: { grade: number; subject: string }) {
         )}
       </nav>
       <NewAsset grade={grade} subject={subject} />
+      <MediaPackForm />
       {res.data.length === 0 && <Notice title="No assets here yet">Create one above, then upload its first version.</Notice>}
       <ul className="space-y-4">
         {res.data.map((a) => (
@@ -64,6 +66,7 @@ async function Archive({ grade, subject }: { grade: number; subject: string }) {
             <p className="flex flex-wrap items-center gap-2">
               <span className="font-medium">{a.title}</span>
               <Badge>{a.kind.replace("_", " ")}</Badge>
+              {a.external_id && <span className="font-mono text-xs text-muted">pack key {a.external_id}</span>}
             </p>
             {(a.versions ?? []).length > 0 && (
               <table className="w-full text-sm">

@@ -29,6 +29,7 @@ from sqlalchemy import (
     CheckConstraint,
     DateTime,
     ForeignKey,
+    Index,
     Integer,
     SmallInteger,
     String,
@@ -36,6 +37,7 @@ from sqlalchemy import (
     UniqueConstraint,
     func,
     select,
+    text,
 )
 from sqlalchemy.dialects.postgresql import JSONB, UUID
 from sqlalchemy.orm import Mapped, Session, mapped_column
@@ -60,6 +62,15 @@ class Asset(Base):
     __tablename__ = "content_asset"
     __table_args__ = (
         CheckConstraint("kind in ('image','handout','caption','diagram_source')", name="content_asset_kind"),
+        # MEDIA-MANIFEST-01: a media pack's stable key, unique within a class and subject.
+        Index(
+            "uq_content_asset_external_ref",
+            "grade_number",
+            "subject_code",
+            "external_ref",
+            unique=True,
+            postgresql_where=text("external_ref is not null"),
+        ),
     )
 
     id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
@@ -67,6 +78,7 @@ class Asset(Base):
     title: Mapped[str] = mapped_column(Text)
     grade_number: Mapped[int] = mapped_column(SmallInteger)
     subject_code: Mapped[str] = mapped_column(String(40))
+    external_ref: Mapped[str | None] = mapped_column(String(120))
     created_by: Mapped[uuid.UUID] = mapped_column(ForeignKey("app_user.id", ondelete="RESTRICT"))
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
 
@@ -237,6 +249,28 @@ def upload(db: Session, who: Principal, asset_id: uuid.UUID, data: bytes, proven
     db.commit()  # nothing slow happens under a lock: derive first, then number the version
     asset = db.scalar(select(Asset).where(Asset.id == asset_id).with_for_update())
     assert asset is not None
+    written: list[str] = []
+    try:
+        version = new_version(db, who, asset, data, derived, provenance, written)
+        db.commit()
+    except BaseException:
+        db.rollback()  # DEGRADATION-01: no version row, and no file left without one
+        remove_files(written)
+        raise
+    return version
+
+
+def new_version(
+    db: Session,
+    who: Principal,
+    asset: Asset,
+    data: bytes,
+    derived: dict[str, Any],
+    provenance: dict[str, Any],
+    written: list[str],
+) -> AssetVersion:
+    """Number and archive a version of a locked asset (master, then delivery copy) without committing. Every file
+    key is appended to `written` before it is written, so a caller that rolls back can take all of them back."""
     number = (db.scalar(select(func.max(AssetVersion.number)).where(AssetVersion.asset_id == asset.id)) or 0) + 1
     version = AssetVersion(id=uuid.uuid4(), asset_id=asset.id, number=number)
     version.master_key = f"{asset.id}/{version.id}/master"
@@ -248,20 +282,19 @@ def upload(db: Session, who: Principal, asset_id: uuid.UUID, data: bytes, proven
         k: str(v)[:500] for k, v in provenance.items() if k in ("source", "author", "licence", "tool")
     }
     version.created_by = who.user.id
-    try:
-        _write(version.master_key, data)
-        _set_delivery(version, derived["delivery"], derived["delivery_type"])
-        db.add(version)
-        record(db, actor=who.user.id, action="asset.version_uploaded", target_type="content_asset_version",
-               target_id=str(version.id), details={"number": number, "sha256": version.master_sha256})  # fmt: skip
-        db.commit()
-    except BaseException:
-        db.rollback()  # DEGRADATION-01: no version row, and no file left without one
-        for key in (version.master_key, version.delivery_key):
-            if key:
-                _remove(key)
-        raise
+    written.extend([version.master_key, f"{asset.id}/{version.id}/delivery"])
+    _write(version.master_key, data)
+    _set_delivery(version, derived["delivery"], derived["delivery_type"])
+    db.add(version)
+    record(db, actor=who.user.id, action="asset.version_uploaded", target_type="content_asset_version",
+           target_id=str(version.id), details={"number": number, "sha256": version.master_sha256})  # fmt: skip
+    db.flush()
     return version
+
+
+def remove_files(keys: list[str]) -> None:
+    for key in keys:
+        _remove(key)
 
 
 def _set_delivery(version: AssetVersion, data: bytes | None, media_type: str | None) -> None:

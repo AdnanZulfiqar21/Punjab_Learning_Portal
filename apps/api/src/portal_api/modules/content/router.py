@@ -1337,6 +1337,29 @@ class AssetOut(BaseModel):
     subject: str
     created_at: datetime
     versions: list[AssetVersionOut] = Field(default_factory=list)
+    external_id: str | None = None  # MEDIA-MANIFEST-01: the media pack key, when it came from one
+
+
+class MediaEntryOut(BaseModel):
+    external_id: str
+    kind: str
+    file: str
+    title: str
+    action: Literal["create", "version", "unchanged", "error"]
+    errors: list[str]
+    sha256: str | None
+    bytes: int | None
+    asset_id: uuid.UUID | None
+    version_id: uuid.UUID | None = Field(description="The asset version to cite in content blocks (after a commit)")
+    number: int | None
+
+
+class MediaPackOut(BaseModel):
+    grade: int
+    subject: str
+    committed: bool
+    counts: dict[str, int]
+    entries: list[MediaEntryOut]
 
 
 def _asset_out(db: Session, a: Any, with_versions: bool = True) -> AssetOut:
@@ -1361,6 +1384,7 @@ def _asset_out(db: Session, a: Any, with_versions: bool = True) -> AssetOut:
         grade=a.grade_number,
         subject=a.subject_code,
         created_at=a.created_at,
+        external_id=a.external_ref,
         versions=[
             AssetVersionOut(
                 id=v.id,
@@ -1388,6 +1412,53 @@ def create_asset(db: DB, who: Author, body: AssetIn) -> AssetOut:
 
     return _asset_out(
         db, assets.create(db, who, kind=body.kind, title=body.title, grade=body.grade, subject=body.subject)
+    )
+
+
+@router.post(
+    "/assets/manifest",
+    response_model=MediaPackOut,
+    summary="Preview or commit a media pack (raw .zip body with manifest.json, at most 60 MB): every file is scanned "
+    "and validated; a commit archives all of them or none",
+)
+async def import_media_pack(
+    db: DB,
+    who: Author,
+    request: Request,
+    commit: Annotated[bool, Query()] = False,
+) -> MediaPackOut:
+    from starlette.concurrency import run_in_threadpool
+
+    from portal_api.errors import TooLarge
+    from portal_api.modules.content import media_manifest
+
+    buf = bytearray()
+    async for chunk in request.stream():
+        buf.extend(chunk)
+        if len(buf) > media_manifest.MAX_PACK_BYTES:
+            raise TooLarge("A media pack can be at most 60 MB; split it.")
+    pack = await run_in_threadpool(media_manifest.run, db, who, bytes(buf), commit=commit)
+    return MediaPackOut(
+        grade=pack.grade,
+        subject=pack.subject,
+        committed=pack.committed,
+        counts=pack.counts,
+        entries=[
+            MediaEntryOut(
+                external_id=e.external_id,
+                kind=e.kind,
+                file=e.file,
+                title=e.title,
+                action=e.action,  # type: ignore[arg-type]
+                errors=e.errors,
+                sha256=e.sha256,
+                bytes=e.size,
+                asset_id=e.asset_id,
+                version_id=e.version_id,
+                number=e.number,
+            )
+            for e in pack.entries
+        ],
     )
 
 
