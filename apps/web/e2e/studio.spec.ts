@@ -320,4 +320,9 @@ test("a file too big for a quick preview is checked by the import worker, with p
   await expect(author.getByRole("button", { name: /Import \d+ rows? as drafts/ })).toBeDisabled();
   await author.getByRole("button", { name: "Discard" }).click();
   await expect(author.getByRole("heading", { name: `Discarded: fixture-bulk-${run}.csv` })).toBeVisible(AUTH);
+  // Leaving and coming back: the recent imports list reopens the batch.
+  await author.goto("/studio/imports");
+  const recent = author.getByRole("region", { name: "Your recent imports" });
+  await recent.getByRole("link", { name: `fixture-bulk-${run}.csv` }).click();
+  await expect(author.getByRole("heading", { name: `Discarded: fixture-bulk-${run}.csv` })).toBeVisible(AUTH);
 });
