@@ -105,7 +105,9 @@ def test_new_blocks_reach_old_clients_as_fallbacks_and_leave_active_work_alone(c
     assert old_pack.json()["manifest"]["questions_online_only"] == 0  # nothing was left out before
 
     # A new test built for the oldest app delivers the block with the same fallback for its renderer to show.
-    oldest = {"X-Portal-Platform": "android", "X-Portal-App-Version": "0.1.0"}
+    # The oldest app still supported is the current enforced minimum (other modules raise it), or any app if none.
+    policy = client.get("/v1/clients/policy", params={"platform": "android", "version": "0.0.1"}).json()
+    oldest = {"X-Portal-Platform": "android", "X-Portal-App-Version": policy["min_version"] or "0.0.1"}
     who = _learner(client)
     made = _form(client, who, chapter, 2, oldest)
     assert made.status_code == 201, made.text
