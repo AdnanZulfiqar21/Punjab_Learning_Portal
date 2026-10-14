@@ -8,6 +8,7 @@ import { View } from "react-native";
 import type { WrittenResult } from "@portal/contracts";
 
 import { Button, Choices, Field, FormError } from "@/components/form";
+import { LessonBlocks } from "@/components/lesson-blocks";
 import { Card, ErrorState, Loading, Notice, T } from "@/components/ui";
 import { Space } from "@/constants/theme";
 import { useRequest } from "@/hooks/use-request";
@@ -87,6 +88,13 @@ export function WrittenResultView({ attemptId, token }: { attemptId: string; tok
                 {q.status === "unavailable" ? " The allowance for this question was returned to your plan." : ""}
               </T>
             )}
+            {q.academic_review === "open" && (
+              // ACADEMIC-REVIEW-01: the guide doesn't cover the method yet; no score is forced meanwhile.
+              <T variant="small">
+                A senior subject reviewer is checking how the marking guide applies to your answer. This question has no mark until then, and nothing is
+                counted as zero.
+              </T>
+            )}
             {q.criteria.map((cr) => (
               <T key={cr.id} variant="small">
                 {marks(cr.earned_units)} / {marks(cr.max_units)} · {cr.description}
@@ -113,6 +121,14 @@ export function WrittenResultView({ attemptId, token }: { attemptId: string; tok
                 {q.next_steps.lessons_missing && <T variant="small">No reviewed lesson is published for this topic yet.</T>}
               </View>
             )}
+            {/* MODEL-ANSWER-01 (W07.S1.T3): released with the mark, from the marking guide that marked it. */}
+            {q.model_answer && q.model_answer.length > 0 ? (
+              <View style={{ gap: Space.xs }}>
+                <T style={{ fontWeight: "600" }}>Worked answer</T>
+                {q.model_answer_note ? <T variant="small">{q.model_answer_note}</T> : null}
+                <LessonBlocks blocks={q.model_answer as { type: string }[]} />
+              </View>
+            ) : null}
             <PendingAction attemptId={attemptId} token={token} q={q} onDone={req.retry} />
             <Button
               variant="secondary"

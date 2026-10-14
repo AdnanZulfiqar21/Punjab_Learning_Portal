@@ -43,7 +43,7 @@ def _passage(db: Session, item: ContentItem, passage_id: str, *, for_publication
 
 
 def _rubric(db: Session, item: ContentItem, version: ContentVersion, *, for_publication: bool) -> list[str]:
-    r, errs = written.parse_rubric(version.body)
+    r, errs = written.parse_rubric(version.body, stored=True)
     if r is None or r.question_version_id is None:
         return errs
     parent = db.get(ContentItem, item.parent_item_id) if item.parent_item_id else None

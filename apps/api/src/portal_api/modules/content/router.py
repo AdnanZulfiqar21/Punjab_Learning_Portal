@@ -622,9 +622,16 @@ def chapter_lessons(
                 block_types=[] if locked else v.block_types,
                 body=None if locked else v.body,
                 source_refs=v.source_refs,  # textbook page references are not premium content
+                download_bytes=None if locked else _lesson_bytes(db, i),  # LESSON-SIZE-01
             )
         )
     return out
+
+
+def _lesson_bytes(db: Session, item: ContentItem) -> int | None:
+    from portal_api.modules.content import assets
+
+    return assets.lesson_download_bytes(db, item)
 
 
 @public.get(

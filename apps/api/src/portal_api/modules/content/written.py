@@ -72,6 +72,9 @@ class RubricBody(BaseModel):
     consequential_error_rule: Annotated[str, Field(max_length=1000)] | None = None
     units_rule: Annotated[str, Field(max_length=1000)] | None = None
     crossed_out_rule: Annotated[str, Field(max_length=1000)] | None = None
+    # W07.S1.T3 (MODEL-ANSWER-01): a reviewed worked answer, released to a learner only with their released mark for
+    # that question, from the marking-guide version that marked it. Never part of an attempt.
+    model_answer: list[ContentBlock] = Field(default_factory=list, max_length=40)
 
 
 _written = TypeAdapter(WrittenBody)
@@ -92,7 +95,18 @@ def parse_written(body: object) -> tuple[WrittenBody | None, list[str]]:
         return None, _errors(e)
 
 
-def parse_rubric(body: object) -> tuple[RubricBody | None, list[str]]:
+def parse_rubric(body: object, *, stored: bool = False) -> tuple[RubricBody | None, list[str]]:
+    """Authoring validation is strict (unknown fields are errors). `stored=True` reads a body already saved and keeps
+    only the fields this build knows (MODEL-ANSWER-01), so a body written by a newer build stays readable after a
+    rollback: new rubric fields are additive, and an older build marks with the fields it understands."""
+    if stored and isinstance(body, dict):
+        known = set(RubricBody.model_fields)
+        criterion = set(Criterion.model_fields)
+        body = {k: v for k, v in body.items() if k in known}
+        if isinstance(body.get("criteria"), list):
+            body["criteria"] = [
+                {k: v for k, v in c.items() if k in criterion} if isinstance(c, dict) else c for c in body["criteria"]
+            ]
     try:
         return _rubric.validate_python(body), []
     except ValidationError as e:
@@ -167,6 +181,9 @@ def validate_rubric(body: object, *, for_publication: bool) -> blocks.Validation
         if missing or c.id in c.depends_on:
             errors.append(f"Criterion {c.id}: depends on unknown criteria {sorted(missing) or [c.id]}.")
     errors += _unreachable(r)
+    r_err, r_warn = blocks.check_renderers(r.model_answer, for_publication=for_publication, where="model_answer")
+    errors += r_err
+    warnings += r_warn
     if not r.expected_concepts:
         warnings.append("List the expected concepts so reviewers can check equivalent wording consistently.")
     return blocks.Validation(errors, warnings, [])

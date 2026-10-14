@@ -10,13 +10,14 @@ const PASSWORD = "studio-fixture-pass-1"; // pragma: allowlist secret (dev-seed 
 
 test.skip(({ isMobile }) => isMobile, "Staff journeys run on desktop");
 
-async function teacher(browser: Browser, email = "studio-reviewer@example.com"): Promise<Page> {
+async function teacher(browser: Browser, email = "studio-reviewer@example.com", next = "/studio/marking", mfa = false): Promise<Page> {
   const page = await (await browser.newContext()).newPage();
-  await page.goto(`/signin?next=${encodeURIComponent("/studio/marking")}`);
+  await page.goto(`/signin?next=${encodeURIComponent(next)}`);
   await page.getByLabel("Email").fill(email);
   await page.getByLabel("Password").fill(PASSWORD);
+  if (mfa) await page.getByLabel(/Simulate a multi-factor sign-in/).check();
   await page.getByRole("button", { name: "Sign in", exact: true }).click();
-  await expect(page).toHaveURL(/:\d+\/studio\/marking$/, AUTH);
+  await expect(page).toHaveURL(new RegExp(`:\\d+${next}$`), AUTH);
   return page;
 }
 
@@ -107,4 +108,37 @@ test("a recheck appears in the mark history with its reason", async ({ page, bro
   await expect(page.getByText(/^Version 1: 1 · first marking · marking guide v\d+ · released/)).toBeVisible();
   await expect(page.getByText(/^Version 2: 2 · after recheck · marking guide v\d+ · released/)).toBeVisible();
   await expect(page.getByText("Question 1: 1 → 2 — Marked again by a different teacher after your recheck request.")).toBeVisible();
+});
+
+// W01.S2.T2 / W05.S2.T3 (ACADEMIC-REVIEW-01): a method the marking guide doesn't cover waits for an academic decision.
+test("a method the guide doesn't list waits for academic review, then is marked", async ({ page, browser }) => {
+  test.slow();
+  const attemptId = await submitScript(page, "academic");
+
+  const marker = await teacher(browser);
+  await openScript(marker, attemptId);
+  await marker.getByLabel("Outcome for question 1").selectOption("pending");
+  await marker.getByLabel("Academic review for question 1").selectOption("unlisted_method");
+  await marker.getByLabel("Reason for question 1").fill("Fixture: a valid method the marking guide doesn't list.");
+  await marker.getByRole("button", { name: "Release result" }).click();
+  await expect(marker.getByText("Result released")).toBeVisible(AUTH);
+
+  await page.reload();
+  await expect(page.getByText(/A senior subject reviewer is checking how the marking guide applies to your answer/)).toBeVisible(AUTH);
+
+  const adjudicator = await teacher(browser, "studio-adjudicator@example.com", "/studio/academic-reviews", true);
+  const item = adjudicator.getByRole("list", { name: "Open academic reviews" }).getByRole("listitem").filter({ hasText: `Script ${attemptId.slice(0, 8)}` });
+  await expect(item).toContainText("Valid method the guide doesn't list");
+  await item.getByLabel("Why (kept on the record and shown to the marker)").fill("Fixture: the guide stands for this method.");
+  await item.getByRole("button", { name: "Record the decision" }).click();
+  const decided = adjudicator.getByRole("list", { name: "Decided academic reviews" });
+  await expect(decided.getByText(`Script ${attemptId.slice(0, 8)} · question 1 · Guide stands`)).toBeVisible(AUTH);
+
+  await openScript(marker, attemptId); // the completion case for the pending question
+  await marker.getByRole("radiogroup", { name: "Award for a1" }).getByLabel("1", { exact: true }).check();
+  await marker.getByLabel("Reason for a1").fill("Fixture: marked under the guide.");
+  await marker.getByRole("button", { name: "Release result" }).click();
+  await expect(marker.getByText("Result released")).toBeVisible(AUTH);
+  await page.reload();
+  await expect(page.getByText(/^Question 1: 1 \/ \d+$/)).toBeVisible(AUTH);
 });

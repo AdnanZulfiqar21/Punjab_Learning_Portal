@@ -601,7 +601,7 @@ def _check_awards(
         pos = str(q["position"])
         if scope is not None and pos not in scope:
             continue
-        rubric, _ = wq.parse_rubric(q["rubric"])
+        rubric, _ = wq.parse_rubric(q["rubric"], stored=True)
         assert rubric is not None
         given = awards.get(pos, {})
         unknown = set(given) - {c.id for c in rubric.criteria}
@@ -783,6 +783,8 @@ def decide(
 
     # R05: each question in scope is scored, pending (e.g. unreadable, awaiting the learner) or unavailable (the
     # service can't assess it). Pending and unavailable questions get no awards and no invented zero.
+    from portal_api.modules.written import academic
+
     in_scope = [str(q["position"]) for q in ctx["questions"] if scope is None or str(q["position"]) in scope]
     statuses: dict[str, dict[str, Any]] = {}
     for pos in in_scope:
@@ -801,9 +803,13 @@ def decide(
             if kind != "pending" or action not in LEARNER_ACTIONS:
                 raise Unprocessable(f"Question {pos}: a learner action can only be asked for a pending question.")
             statuses[pos]["learner_action"] = action  # its deadline comes from the durable obligation below
+        escalation = academic.check_status(pos, st, kind)  # ACADEMIC-REVIEW-01: a method the guide doesn't cover
+        if escalation is not None:
+            statuses[pos]["escalation"] = escalation
     unknown = sorted(set(question_status or {}) - set(in_scope), key=int)
     if unknown:
         raise Unprocessable("Statuses were given for questions outside this case.", errors=unknown)
+    academic.guard_marking(db, case.attempt_id, statuses)  # never marked while its academic review is open
     scored = {p for p, st in statuses.items() if st["status"] == "scored"}
     not_scored_awarded = sorted(set(awards) - scored, key=int)
     if not_scored_awarded:
@@ -922,6 +928,7 @@ def decide(
             "question unavailable: could not be assessed",
         )
     if release:
+        academic.raise_for(db, who, case, statuses, rubric_ids)  # ACADEMIC-REVIEW-01
         case.status = "released"
         case.released_at = now
         _sync_pending(db, case, set(pending), all_status, now)
@@ -1461,7 +1468,7 @@ def request_recheck(
             raise Unprocessable(f"Criteria were given for question {pos}, which isn't part of this recheck.")
         rv = db.get(ContentVersion, fi.rubric_version_id)
         assert rv is not None
-        rubric, _ = wq.parse_rubric(rv.body)
+        rubric, _ = wq.parse_rubric(rv.body, stored=True)
         assert rubric is not None
         known = {c.id for c in rubric.criteria}
         if set(ids) - known:

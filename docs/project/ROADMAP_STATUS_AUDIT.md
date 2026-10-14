@@ -30,23 +30,23 @@ For the tasks marked **Implemented**, the cited tests were confirmed to exist. T
 | W01.S1.T1 Question taxonomy | IMPL-19 short/long, subparts, maxima, languages, structures | Numerical/derivation types; written passages and diagrams |
 | W01.S1.T3 Publish only reviewed | IMPL-14/19 publication gate | Outcome mapping required for written items; academic approval (B01) |
 | W01.S2.T1 Bounded criteria | `validate_rubric`, `reconcile` | A dependency-cycle and unreachable-credit check (only self-dependency is caught) |
-| W01.S2.T2 Alternative/consequential marking | Alternative groups, dependencies, rubric checklist | Significant-figure, multiple-final-answer and contradiction rules; teacher escalation for a valid method missing from the rubric |
+| W01.S2.T2 Alternative/consequential marking | Alternative groups, dependencies, rubric checklist; teacher escalation to academic review (ACADEMIC-REVIEW-01) | Significant-figure, multiple-final-answer and contradiction rules per approved rubric (academic input, B01) |
 | W02.S1.T1 Evidence/attempt model | Hashes, logical pages, frozen forms, receipts, rescans | Retention/deletion references (B15) |
 | W02.S1.T2 Assessment/review provenance | Score versions, effective adjudication sets, separate assessor proposals | Reading alternatives (B10); an explicit human-protection marker |
 | W02.S1.T3 Allowance/operational state | ALLOC-01, ADMIT-01, IMPL-22 | A mixed pending-and-unavailable completeness state and a zero denominator (pending currently wins) |
 | W03.S1.T2 Native capture/import | NATIVE-W01 | Offline draft queue, native PDF picker, low-storage state; device proof (B14) |
 | W03.S1.T4 Progressive upload, capture policy | Uploads open until U with per-file states; capture policy pinned per form | A resolution preset with a higher-detail fallback; phone qualification (B09/B14) |
-| W03.S3.T3 Interruption/concurrency | Revision concurrency, deduplication, idempotent seal and rescans | Weak-network, restart and second-device tests; native (B14) |
-| W05.S2.T3 Route unsupported reasoning | Unlisted-method and diagram flags go to review, never a mark | An academic review case created from a flag; detection needs a provider (B10) |
+| W03.S3.T3 Interruption/concurrency | Revision concurrency, deduplication, idempotent seal and rescans; weak-network retry, restart and two-tab tests (UPLOAD-RETRY-01, INTERRUPTIONS-01) | Native on a device (B14) |
+| W05.S2.T3 Route unsupported reasoning | Unlisted-method and diagram flags go to review, never a mark; academic review cases (ACADEMIC-REVIEW-01) | Automatic detection needs a provider (B10) |
 | W05.S3.T1 Retries/reconciliation | Stage records, backoff, dead letter and requeue | Tests for `reconcile()` and stale-lease reclaim |
 | W05.S3.T2 Publication fence/provenance | No AI publication path; assessor, version, contract, hashes and latency recorded | Cost and configuration hash; the fenced writer waits on WG10/B10 |
 | W05.S3.T3 Controlled failure | Malformed, duplicate, timeout and unavailable injected | An unexpected model-version change; proof that MCQ work is unaffected |
 | W06.S3.T3 Train/qualify reviewers | CALIBRATION-01 | Discussion threads, periodic rounds, override and upheld-appeal audit; approved examples (B01) |
-| W07.S1.T3 Answer-release policies | Rubrics never shown in attempts; MCQ release (OCT9-01) | A versioned written model-answer release |
+| W07.S1.T3 Answer-release policies | Rubrics never shown in attempts; MCQ release (OCT9-01); versioned worked-answer release (MODEL-ANSWER-01) | Worked answers themselves (B01) |
 | W07.S2.T2 Score/attempt history | Released-version history, notices, linked attempts; marking-guide and evidence versions, per-question reasons and labels (HISTORY-01) | Device check only |
 | W07.S3.T2 Interrupted processing journeys | Unfinished tests across devices; idempotent notices; receipt restore after logout and on a second device (INTERRUPTIONS-01) | A native restart on a device (B09, B14) |
 | W08.S1.T1 Assessment plans | Weights, page caps, units shown before start, pilot entitlements; the R0 pilot switch (PILOT-R0-01) | Cost-backed units (WA-D07) |
-| P07.S3.T3 Low-bandwidth alternatives | Data saver defers diagrams | Audio-only assets (B05); per-lesson download size |
+| P07.S3.T3 Low-bandwidth alternatives | Data saver defers diagrams; per-lesson download size (LESSON-SIZE-01) | Audio-only assets (B05) |
 | P11.S3.T1 Practice configuration | Every scope, multi-subject, feedback modes, counts and shortage; topics and a measured time estimate on web and mobile (PRACTICE-CONFIG-01) | Device check only |
 | P13.S4.T2 OTA update behaviour | CLIENTS-01 minimums and mock-window protection | `expo-updates` runtime-version pinning; store builds (B07) |
 | P19.S2.T3 Manual accessibility | Automated axe, text size, reduced motion, captions | A manual screen-reader and 200 % zoom review by a person |

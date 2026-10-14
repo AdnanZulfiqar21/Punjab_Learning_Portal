@@ -96,6 +96,12 @@ def test_diagrams_and_handouts_reach_learners_only_through_their_lesson(client: 
     pdf = client.get(f"{url}/{handout['id']}", headers=learner.headers)
     assert pdf.status_code == 200 and pdf.headers["content-disposition"].startswith("attachment")
     assert client.get(f"{url}/{unrelated['id']}", headers=learner.headers).status_code == 404  # not in this lesson
+    # P07.S3.T3 (LESSON-SIZE-01): the lesson says what its images and handouts cost to download, before they load.
+    listed = client.get(f"/v1/chapters/{chapter.id}/lessons", headers=learner.headers).json()
+    mine = next(x for x in listed if x["id"] == lesson["id"])
+    assert mine["download_bytes"] == len(img.content) + len(pdf.content)
+    anonymous = next(x for x in client.get(f"/v1/chapters/{chapter.id}/lessons").json() if x["id"] == lesson["id"])
+    assert anonymous["locked"] is True and anonymous["download_bytes"] is None  # nothing to download while locked
 
     tier = {"tier": "preview", "reason": "Fixture: free sample lesson"}
     assert _post(client, team["publisher"], lesson["id"], "access-tier", tier).status_code == 200

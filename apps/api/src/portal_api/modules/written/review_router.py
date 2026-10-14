@@ -251,6 +251,17 @@ class QuestionResult(BaseModel):
         default=None, description="What the teacher asked you to do for this pending question"
     )
     action_deadline: datetime | None = None
+    model_answer: list[dict[str, Any]] | None = Field(
+        default=None,
+        description="The reviewed worked answer from the marking guide that marked this question; only once scored",
+    )
+    model_answer_note: str | None = Field(
+        default=None, description="Set when a correction to the marking guide affects the worked answer"
+    )
+    academic_review: Literal["open", "resolved"] | None = Field(
+        default=None,
+        description="open: a senior subject reviewer is deciding how the marking guide applies (no mark until then)",
+    )
     revisions: list[LearnerRevision] = Field(default_factory=list, description="Clearer copies you sent")
     earned_units: int | None = Field(description="Null unless scored; no mark is invented for unassessed work")
     criteria: list[CriterionResult]
@@ -627,11 +638,13 @@ def my_result(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, response: Re
     revisions_by_pos: dict[int, list[Any]] = {}
     for r in rescans.revisions_for(db, attempt.id):
         revisions_by_pos.setdefault(r.position, []).append(r)
+    reviews = _academic_states(db, attempt.id)  # ACADEMIC-REVIEW-01
+    awaiting = set(_awaiting_regrade(db, attempt.id))
     questions = []
     for pos, fi in sorted(ctx_questions.items(), key=lambda kv: int(kv[0])):
         rv = db.get(ContentVersion, uuid.UUID(str(sv.rubric_version_ids.get(pos, fi.rubric_version_id))))
         assert rv is not None
-        rubric, _ = wq.parse_rubric(rv.body)
+        rubric, _ = wq.parse_rubric(rv.body, stored=True)
         assert rubric is not None
         given = sv.awards.get(pos, {})
         st = (sv.question_status or {}).get(pos, {"status": "scored", "reason": ""})
@@ -645,6 +658,12 @@ def my_result(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, response: Re
                 status_reason=st.get("reason", ""),
                 learner_action=req[0] if req else None,  # type: ignore[arg-type]
                 action_deadline=req[1] if req else None,
+                academic_review=reviews.get(fi.position),  # type: ignore[arg-type]
+                # MODEL-ANSWER-01: released with the mark, from the guide version that marked it; never before.
+                model_answer=list(rv.body.get("model_answer") or []) or None if scored else None,
+                model_answer_note=_model_answer_note(sv, pos, fi.position in awaiting)
+                if scored and rubric.model_answer
+                else None,
                 revisions=[
                     LearnerRevision(id=r.id, created_at=r.created_at, classification=r.classification)
                     for r in revisions_by_pos.get(fi.position, [])
@@ -815,6 +834,31 @@ def _version_history(db: Session, rows: list[review.WrittenScoreVersion]) -> lis
             )
         )
         previous = sv
+    return out
+
+
+def _model_answer_note(sv: Any, pos: str, regrade_pending: bool) -> str | None:
+    """MODEL-ANSWER-01: say when an academic correction affects the worked answer shown."""
+    if regrade_pending:
+        return (
+            "A correction to the marking guide is waiting to be applied to your answer; this worked answer may change."
+        )
+    if (sv.effective_adjudication or {}).get(pos):
+        return "This worked answer is from the corrected marking guide your answer was marked under."
+    return None
+
+
+def _academic_states(db: Session, attempt_id: uuid.UUID) -> dict[int, str]:
+    """Per question, the latest academic review's status (open wins over earlier resolved ones)."""
+    from sqlalchemy import select as sa_select
+
+    from portal_api.modules.written.academic import AcademicReview
+
+    out: dict[int, str] = {}
+    for r in db.scalars(
+        sa_select(AcademicReview).where(AcademicReview.attempt_id == attempt_id).order_by(AcademicReview.raised_at)
+    ):
+        out[r.position] = "open" if r.status == "open" or out.get(r.position) == "open" else r.status
     return out
 
 
@@ -1282,3 +1326,83 @@ def retry_regrade_job(db: DB, who: Adjudicator, job_id: uuid.UUID, response: Res
 
     _private(response)
     return _job_out(regrade_jobs.retry(db, who, job_id))
+
+
+# ------------------------------------------------------------------ ACADEMIC-REVIEW-01 (W01.S2.T2, W05.S2.T3)
+class AcademicReviewOut(BaseModel):
+    id: uuid.UUID
+    reference: str = Field(description="The script reference markers see (the learner is never named)")
+    position: int
+    grade: int
+    subject: str
+    kind: Literal["unlisted_method", "rubric_defect"]
+    reason: str = Field(description="What the teacher wrote")
+    rubric_item_id: uuid.UUID | None
+    rubric_version: int | None
+    raised_at: datetime
+    status: Literal["open", "resolved"]
+    resolution: Literal["guide_corrected", "not_covered"] | None
+    resolution_note: str | None
+    adjudication_id: uuid.UUID | None
+    resolved_at: datetime | None
+
+
+class AcademicResolveIn(BaseModel):
+    resolution: Literal["guide_corrected", "not_covered"]
+    note: str = Field(min_length=10, max_length=2000, description="Why, for the marker and the record")
+    adjudication_id: uuid.UUID | None = Field(
+        default=None, description="For guide_corrected: the approved correction of this question's marking guide"
+    )
+
+
+def _academic_out(db: Session, r: Any) -> AcademicReviewOut:
+    rv = db.get(ContentVersion, r.rubric_version_id) if r.rubric_version_id else None
+    return AcademicReviewOut(
+        id=r.id,
+        reference=str(r.attempt_id)[:8],
+        position=r.position,
+        grade=r.grade_number,
+        subject=r.subject_code,
+        kind=r.kind,
+        reason=r.reason,
+        rubric_item_id=rv.item_id if rv is not None else None,
+        rubric_version=rv.number if rv is not None else None,
+        raised_at=r.raised_at,
+        status=r.status,
+        resolution=r.resolution,
+        resolution_note=r.resolution_note,
+        adjudication_id=r.adjudication_id,
+        resolved_at=r.resolved_at,
+    )
+
+
+@router.get(
+    "/studio/written/academic-reviews",
+    response_model=list[AcademicReviewOut],
+    summary="Questions a teacher sent to academic review, in your academic scope (oldest first)",
+)
+def list_academic_reviews(
+    db: DB,
+    who: Reviewer,
+    response: Response,
+    status: Annotated[Literal["open", "resolved"], Query()] = "open",
+) -> list[AcademicReviewOut]:
+    from portal_api.modules.written import academic
+
+    _private(response)
+    return [_academic_out(db, r) for r in academic.visible(db, who, status)]
+
+
+@router.post(
+    "/studio/written/academic-reviews/{review_id}/resolve",
+    response_model=AcademicReviewOut,
+    summary="Decide how the marking guide applies (academic adjudicator with MFA); never sets a mark",
+)
+def resolve_academic_review(
+    db: DB, who: Adjudicator, review_id: uuid.UUID, body: AcademicResolveIn, response: Response
+) -> AcademicReviewOut:
+    from portal_api.modules.written import academic
+
+    _private(response)
+    r = academic.resolve(db, who, review_id, body.resolution, body.note, body.adjudication_id)
+    return _academic_out(db, r)

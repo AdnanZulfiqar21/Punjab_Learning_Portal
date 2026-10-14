@@ -443,6 +443,34 @@ def for_lesson(db: Session, item: Any, version_id: uuid.UUID) -> tuple[AssetVers
     return v, asset
 
 
+def delivery_bytes(v: AssetVersion) -> int | None:
+    """P07.S3.T3 (LESSON-SIZE-01): the size of the copy a learner downloads, or None when unknown. Read from the local
+    store; an object-store adapter (B03) reports the object's size the same way."""
+    if v.delivery_state != "ready" or not v.delivery_key:
+        return None
+    try:
+        return (_root() / v.delivery_key).stat().st_size
+    except OSError:
+        return None
+
+
+def lesson_download_bytes(db: Session, item: Any) -> int | None:
+    """The total size of the images and handouts a live lesson's published version shows (0 when it has none; None
+    when any size is unknown, so a partial figure is never shown as the whole)."""
+    published = item.published
+    total = 0
+    for vid in dict.fromkeys(vid for _, vid, _ in block_refs(published.body if published is not None else None)):
+        try:
+            v, _asset = for_lesson(db, item, uuid.UUID(vid))
+        except (NotFound, ValueError):
+            continue  # not servable to learners, so never downloaded
+        size = delivery_bytes(v)
+        if size is None:
+            return None
+        total += size
+    return total
+
+
 def for_attempt(db: Session, user_id: uuid.UUID, attempt_id: uuid.UUID, version_id: uuid.UUID) -> AssetVersion:
     """An archived file named by a question in the learner's *own* attempt (QUESTION-DIAGRAMS-01). Stem and option
     files are available while answering. Explanation files only once the result is available (finalised and released)

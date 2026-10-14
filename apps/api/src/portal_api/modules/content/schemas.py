@@ -231,6 +231,10 @@ class LessonOut(BaseModel):
     block_types: list[str]
     body: dict[str, Any] | None = Field(description="Null when locked")
     source_refs: list[dict[str, Any]]
+    download_bytes: int | None = Field(
+        default=None,
+        description="Total size of this lesson's images and handouts (0: none); null when locked or unknown",
+    )
 
 
 class VariantOut(BaseModel):
