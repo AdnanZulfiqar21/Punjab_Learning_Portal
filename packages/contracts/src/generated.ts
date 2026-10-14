@@ -8846,6 +8846,18 @@ export interface components {
             learner_action?: ("rescan" | "confirm_or_rescan") | null;
             /** Max Units */
             max_units: number;
+            /**
+             * Model Answer
+             * @description The reviewed worked answer from the marking guide that marked this question; only once scored
+             */
+            model_answer?: {
+                [key: string]: unknown;
+            }[] | null;
+            /**
+             * Model Answer Note
+             * @description Set when a correction to the marking guide affects the worked answer
+             */
+            model_answer_note?: string | null;
             /** @description Only for a scored question that lost marks */
             next_steps?: components["schemas"]["NextStepsOut"] | null;
             /** Position */

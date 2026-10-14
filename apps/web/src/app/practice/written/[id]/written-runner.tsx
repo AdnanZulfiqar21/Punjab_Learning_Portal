@@ -318,6 +318,16 @@ export function WrittenRunner({ attempt, result = null }: { attempt: WrittenAtte
                     ))}
                   </ul>
                   {q.next_steps && <NextSteps steps={q.next_steps} />}
+                  {/* MODEL-ANSWER-01 (W07.S1.T3): released with the mark, from the marking guide that marked it. */}
+                  {q.model_answer && q.model_answer.length > 0 && (
+                    <details className="rounded-lg border border-border p-3 text-sm">
+                      <summary className="cursor-pointer font-medium text-accent">Worked answer for question {q.position}</summary>
+                      <div className="mt-2 space-y-2">
+                        {q.model_answer_note && <p className="text-muted">{q.model_answer_note}</p>}
+                        <LessonBlocks blocks={q.model_answer as { type: string }[]} headingOffset={4} />
+                      </div>
+                    </details>
+                  )}
                 </div>
               ))}
               <RecheckPanel attemptId={attempt.id} result={result} marks={marks} />

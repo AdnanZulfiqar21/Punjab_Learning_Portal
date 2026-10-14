@@ -441,7 +441,7 @@ def confirm_unanswered(db: Session, who: Principal, attempt_id: uuid.UUID, posit
     fi = next(f for f in form.items if f.position == position)
     rv = db.get(ContentVersion, fi.rubric_version_id)
     assert rv is not None
-    rubric, _ = wq.parse_rubric(rv.body)
+    rubric, _ = wq.parse_rubric(rv.body, stored=True)
     assert rubric is not None
     case = _completion_case_for(db, attempt_id, position)
     review.publish_resolution(

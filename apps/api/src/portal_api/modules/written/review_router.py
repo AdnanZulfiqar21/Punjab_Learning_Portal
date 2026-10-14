@@ -251,6 +251,13 @@ class QuestionResult(BaseModel):
         default=None, description="What the teacher asked you to do for this pending question"
     )
     action_deadline: datetime | None = None
+    model_answer: list[dict[str, Any]] | None = Field(
+        default=None,
+        description="The reviewed worked answer from the marking guide that marked this question; only once scored",
+    )
+    model_answer_note: str | None = Field(
+        default=None, description="Set when a correction to the marking guide affects the worked answer"
+    )
     academic_review: Literal["open", "resolved"] | None = Field(
         default=None,
         description="open: a senior subject reviewer is deciding how the marking guide applies (no mark until then)",
@@ -632,11 +639,12 @@ def my_result(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, response: Re
     for r in rescans.revisions_for(db, attempt.id):
         revisions_by_pos.setdefault(r.position, []).append(r)
     reviews = _academic_states(db, attempt.id)  # ACADEMIC-REVIEW-01
+    awaiting = set(_awaiting_regrade(db, attempt.id))
     questions = []
     for pos, fi in sorted(ctx_questions.items(), key=lambda kv: int(kv[0])):
         rv = db.get(ContentVersion, uuid.UUID(str(sv.rubric_version_ids.get(pos, fi.rubric_version_id))))
         assert rv is not None
-        rubric, _ = wq.parse_rubric(rv.body)
+        rubric, _ = wq.parse_rubric(rv.body, stored=True)
         assert rubric is not None
         given = sv.awards.get(pos, {})
         st = (sv.question_status or {}).get(pos, {"status": "scored", "reason": ""})
@@ -651,6 +659,11 @@ def my_result(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, response: Re
                 learner_action=req[0] if req else None,  # type: ignore[arg-type]
                 action_deadline=req[1] if req else None,
                 academic_review=reviews.get(fi.position),  # type: ignore[arg-type]
+                # MODEL-ANSWER-01: released with the mark, from the guide version that marked it; never before.
+                model_answer=list(rv.body.get("model_answer") or []) or None if scored else None,
+                model_answer_note=_model_answer_note(sv, pos, fi.position in awaiting)
+                if scored and rubric.model_answer
+                else None,
                 revisions=[
                     LearnerRevision(id=r.id, created_at=r.created_at, classification=r.classification)
                     for r in revisions_by_pos.get(fi.position, [])
@@ -822,6 +835,17 @@ def _version_history(db: Session, rows: list[review.WrittenScoreVersion]) -> lis
         )
         previous = sv
     return out
+
+
+def _model_answer_note(sv: Any, pos: str, regrade_pending: bool) -> str | None:
+    """MODEL-ANSWER-01: say when an academic correction affects the worked answer shown."""
+    if regrade_pending:
+        return (
+            "A correction to the marking guide is waiting to be applied to your answer; this worked answer may change."
+        )
+    if (sv.effective_adjudication or {}).get(pos):
+        return "This worked answer is from the corrected marking guide your answer was marked under."
+    return None
 
 
 def _academic_states(db: Session, attempt_id: uuid.UUID) -> dict[int, str]:

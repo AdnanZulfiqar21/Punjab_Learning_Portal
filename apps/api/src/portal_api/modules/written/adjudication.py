@@ -167,7 +167,7 @@ class WrittenNotice(Base):
 
 # ------------------------------------------------------------------ compatibility
 def _criteria(body: dict[str, Any]) -> dict[str, dict[str, Any]]:
-    r, _ = wq.parse_rubric(body)
+    r, _ = wq.parse_rubric(body, stored=True)
     assert r is not None
     return {c.id: {f: getattr(c, f) for f in SCORING_FIELDS} for c in r.criteria}
 
@@ -192,7 +192,7 @@ def compatibility(old: dict[str, Any], new: dict[str, Any]) -> dict[str, Any]:
 
 
 def _slot_totals(body: dict[str, Any]) -> dict[str, int]:
-    r, _ = wq.parse_rubric(body)
+    r, _ = wq.parse_rubric(body, stored=True)
     assert r is not None
     return {str(k): v for k, v in wq.slot_totals(r).items()}
 

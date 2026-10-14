@@ -8,6 +8,7 @@ import { View } from "react-native";
 import type { WrittenResult } from "@portal/contracts";
 
 import { Button, Choices, Field, FormError } from "@/components/form";
+import { LessonBlocks } from "@/components/lesson-blocks";
 import { Card, ErrorState, Loading, Notice, T } from "@/components/ui";
 import { Space } from "@/constants/theme";
 import { useRequest } from "@/hooks/use-request";
@@ -120,6 +121,14 @@ export function WrittenResultView({ attemptId, token }: { attemptId: string; tok
                 {q.next_steps.lessons_missing && <T variant="small">No reviewed lesson is published for this topic yet.</T>}
               </View>
             )}
+            {/* MODEL-ANSWER-01 (W07.S1.T3): released with the mark, from the marking guide that marked it. */}
+            {q.model_answer && q.model_answer.length > 0 ? (
+              <View style={{ gap: Space.xs }}>
+                <T style={{ fontWeight: "600" }}>Worked answer</T>
+                {q.model_answer_note ? <T variant="small">{q.model_answer_note}</T> : null}
+                <LessonBlocks blocks={q.model_answer as { type: string }[]} />
+              </View>
+            ) : null}
             <PendingAction attemptId={attemptId} token={token} q={q} onDone={req.retry} />
             <Button
               variant="secondary"

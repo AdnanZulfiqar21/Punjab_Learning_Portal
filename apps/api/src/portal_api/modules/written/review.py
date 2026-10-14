@@ -601,7 +601,7 @@ def _check_awards(
         pos = str(q["position"])
         if scope is not None and pos not in scope:
             continue
-        rubric, _ = wq.parse_rubric(q["rubric"])
+        rubric, _ = wq.parse_rubric(q["rubric"], stored=True)
         assert rubric is not None
         given = awards.get(pos, {})
         unknown = set(given) - {c.id for c in rubric.criteria}
@@ -1468,7 +1468,7 @@ def request_recheck(
             raise Unprocessable(f"Criteria were given for question {pos}, which isn't part of this recheck.")
         rv = db.get(ContentVersion, fi.rubric_version_id)
         assert rv is not None
-        rubric, _ = wq.parse_rubric(rv.body)
+        rubric, _ = wq.parse_rubric(rv.body, stored=True)
         assert rubric is not None
         known = {c.id for c in rubric.criteria}
         if set(ids) - known:

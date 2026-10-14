@@ -257,7 +257,7 @@ def validate_output(
         return "rejected", {}, [], [f"{'.'.join(map(str, x['loc']))}: {x['msg']}" for x in e.errors()][:20]
     flags = [f.model_dump() for f in out.unresolved]
     errors: list[str] = []
-    rubric, _ = wq.parse_rubric(q["rubric"])
+    rubric, _ = wq.parse_rubric(q["rubric"], stored=True)
     assert rubric is not None
     known = {c.id: c for c in rubric.criteria}
     seen: set[str] = set()

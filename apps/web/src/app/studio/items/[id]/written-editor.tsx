@@ -43,6 +43,7 @@ type Rubric = {
   consequential_error_rule?: string | null;
   units_rule?: string | null;
   crossed_out_rule?: string | null;
+  model_answer: { type: string; text?: string }[];
 };
 export type QuestionVersionChoice = { id: string; number: number; status: string; body: Body };
 
@@ -228,6 +229,7 @@ export function asRubric(body: Body): Rubric {
     consequential_error_rule: b.consequential_error_rule ?? null,
     units_rule: b.units_rule ?? null,
     crossed_out_rule: b.crossed_out_rule ?? null,
+    model_answer: b.model_answer ?? [],
   };
 }
 
@@ -254,6 +256,8 @@ export function normaliseRubric(body: Body): Body {
     consequential_error_rule: clean(r.consequential_error_rule),
     units_rule: clean(r.units_rule),
     crossed_out_rule: clean(r.crossed_out_rule),
+    // MODEL-ANSWER-01: empty paragraphs are dropped; other block types (e.g. from an import) are kept as they are.
+    model_answer: r.model_answer.filter((b) => b.type !== "paragraph" || (b.text ?? "").trim()),
   };
 }
 
@@ -421,6 +425,19 @@ export function RubricEditor({
         <label className="space-y-1 text-sm sm:col-span-2">
           <span className="block font-medium">Expected concepts (one per line)</span>
           <textarea value={r.expected_concepts.join("\n")} onChange={(e) => set({ expected_concepts: e.target.value.split("\n") })} rows={3} className={input} />
+        </label>
+        <label className="space-y-1 text-sm sm:col-span-2">
+          <span className="block font-medium">Worked answer (shown to a learner only with their released mark; blank line between paragraphs)</span>
+          {r.model_answer.some((b) => b.type !== "paragraph") ? (
+            <span className="block text-muted">This worked answer has {r.model_answer.length} blocks, including more than text. Edit it through an import.</span>
+          ) : (
+            <textarea
+              value={r.model_answer.map((b) => b.text ?? "").join("\n\n")}
+              onChange={(e) => set({ model_answer: e.target.value.split(/\n\s*\n/).map((text) => ({ type: "paragraph", text })) })}
+              rows={4}
+              className={input}
+            />
+          )}
         </label>
         <label className="space-y-1 text-sm sm:col-span-2">
           <span className="block font-medium">Valid alternative routes (one per line)</span>
