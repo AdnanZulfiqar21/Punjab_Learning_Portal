@@ -372,8 +372,16 @@ function Runner({ initial, token, owner, reload }: { initial: WrittenAttempt; to
   );
 }
 
-// W03.S1.T3 (MOBILE-TRANSFORMS-01): turn a page or make it clearer before submitting. The server re-renders from the
-// untouched original every time, so nothing is lost and a teacher can always see the original.
+// W03.S1.T3 (MOBILE-TRANSFORMS-01): turn a page, make it clearer or trim its edges before submitting, as on the web.
+// The server re-renders from the untouched original every time, so nothing is lost and a teacher can always see the
+// original. A trim is a share of the page as shown (at most 30% from any side), mapped onto the original by the server.
+const SIDES = [
+  ["top", "Top"],
+  ["bottom", "Bottom"],
+  ["left", "Left"],
+  ["right", "Right"],
+] as const;
+type Trim = Record<(typeof SIDES)[number][0], number>;
 function PageCard({
   attemptId,
   page,
@@ -394,13 +402,17 @@ function PageCard({
   const c = useTheme();
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [trimming, setTrimming] = useState(false);
+  const [trim, setTrim] = useState<Trim>({ top: 0, bottom: 0, left: 0, right: 0 });
   const t = (page.transform ?? { rotate: 0, crop: null, enhance: false }) as { rotate: number; crop: number[] | null; enhance: boolean };
-  async function apply(next: { rotate: number; enhance: boolean }) {
+  async function apply(next: { rotate: number; enhance: boolean; crop?: number[] | null; trim?: number[] }) {
     setBusy(true);
     setError(null);
     await track(async () => {
       try {
-        onChange(await api.transformPage(token, attemptId, page.id, { rotate: next.rotate, crop: t.crop ?? null, enhance: next.enhance }));
+        const body = { rotate: next.rotate, crop: next.crop === undefined ? (t.crop ?? null) : next.crop, enhance: next.enhance };
+        onChange(await api.transformPage(token, attemptId, page.id, next.trim ? { ...body, trim: next.trim } : body));
+        if (next.trim) setTrim({ top: 0, bottom: 0, left: 0, right: 0 });
       } catch (e) {
         setError(e instanceof ApiError ? e.message : "Couldn't change this page.");
       } finally {
@@ -421,6 +433,7 @@ function PageCard({
         Page {number} · {editable ? "uploaded, not yet submitted" : "submitted"}
         {t.rotate ? ` · turned ${t.rotate}°` : ""}
         {t.enhance ? " · clearer contrast" : ""}
+        {t.crop ? " · trimmed" : ""}
       </T>
       {editable ? (
         <View style={{ flexDirection: "row", flexWrap: "wrap", gap: Space.xs }}>
@@ -431,6 +444,51 @@ function PageCard({
             label={t.enhance ? "Original contrast" : "Clearer contrast"}
             busy={busy}
             onPress={() => void apply({ rotate: t.rotate, enhance: !t.enhance })}
+          />
+          <Button variant="secondary" label={trimming ? "Close trim" : "Trim edges"} onPress={() => setTrimming((v) => !v)} />
+          {t.crop ? (
+            <Button variant="secondary" label="Undo trim" busy={busy} onPress={() => void apply({ rotate: t.rotate, enhance: t.enhance, crop: null })} />
+          ) : null}
+        </View>
+      ) : null}
+      {editable && trimming ? (
+        <View accessibilityLabel={`Trim page ${number}`} style={{ gap: Space.xs }}>
+          {SIDES.map(([side, label]) => (
+            <View key={side} style={{ flexDirection: "row", alignItems: "center", gap: Space.xs }}>
+              <T variant="small" style={{ width: 64 }}>
+                {label}
+              </T>
+              <Button
+                variant="secondary"
+                label="−"
+                accessibilityLabel={`Trim less from the ${side}`}
+                disabled={trim[side] === 0}
+                onPress={() => setTrim((v) => ({ ...v, [side]: Math.max(0, v[side] - 5) }))}
+              />
+              <T variant="small" accessibilityLabel={`${trim[side]} percent from the ${side}`}>
+                {trim[side]}%
+              </T>
+              <Button
+                variant="secondary"
+                label="+"
+                accessibilityLabel={`Trim more from the ${side}`}
+                disabled={trim[side] === 30}
+                onPress={() => setTrim((v) => ({ ...v, [side]: Math.min(30, v[side] + 5) }))}
+              />
+            </View>
+          ))}
+          <Button
+            variant="secondary"
+            label="Trim"
+            busy={busy}
+            disabled={trim.top + trim.bottom + trim.left + trim.right === 0}
+            onPress={() =>
+              void apply({
+                rotate: t.rotate,
+                enhance: t.enhance,
+                trim: [trim.left / 100, trim.top / 100, 1 - (trim.left + trim.right) / 100, 1 - (trim.top + trim.bottom) / 100],
+              })
+            }
           />
         </View>
       ) : null}

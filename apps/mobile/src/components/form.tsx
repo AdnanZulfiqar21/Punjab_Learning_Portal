@@ -40,18 +40,25 @@ export function Button({
   busy,
   variant = "primary",
   disabled,
+  accessibilityLabel,
 }: {
   label: string;
   onPress: () => void;
   busy?: boolean;
   variant?: "primary" | "secondary" | "link";
   disabled?: boolean;
+  accessibilityLabel?: string; // when the visible label alone (e.g. "+") doesn't say what it does
 }) {
   const c = useTheme();
   const inactive = busy || disabled;
   if (variant === "link") {
     return (
-      <Pressable accessibilityRole="button" onPress={onPress} disabled={inactive} style={{ minHeight: 44, justifyContent: "center" }}>
+      <Pressable
+        accessibilityRole="button"
+        accessibilityLabel={accessibilityLabel ?? label}
+        onPress={onPress}
+        disabled={inactive}
+        style={{ minHeight: 44, justifyContent: "center" }}>
         <Text style={{ color: c.accent, fontSize: 15, fontWeight: "600", textAlign: "center" }}>{label}</Text>
       </Pressable>
     );
@@ -60,7 +67,7 @@ export function Button({
   return (
     <Pressable
       accessibilityRole="button"
-      accessibilityLabel={label}
+      accessibilityLabel={accessibilityLabel ?? label}
       aria-busy={!!busy}
       aria-disabled={!!inactive}
       onPress={onPress}

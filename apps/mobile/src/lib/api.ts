@@ -339,9 +339,15 @@ export const api = {
     request<WrittenForm>("/v1/written/forms", { method: "POST", token, body, headers: { "Idempotency-Key": idempotencyKey } }),
   startWritten: (token: string, formId: string) =>
     request<WrittenAttempt>(`/v1/written/forms/${encodeURIComponent(formId)}/attempt`, { method: "POST", token }),
-  transformPage: (token: string, attemptId: string, pageId: string, body: { rotate: number; crop: number[] | null; enhance: boolean }) =>
+  /** W03.S1.T3: turn, trim or clarify a page. `trim` (x, y, w, h of the page as shown) replaces `crop` when given. */
+  transformPage: (
+    token: string,
+    attemptId: string,
+    pageId: string,
+    body: { rotate: number; crop: number[] | null; enhance: boolean; trim?: number[] },
+  ) =>
     request<WrittenPage>(`/v1/written-attempts/${encodeURIComponent(attemptId)}/pages/${encodeURIComponent(pageId)}/transform`, {
-      method: "POST",
+      method: "PUT",
       token,
       body,
     }),
