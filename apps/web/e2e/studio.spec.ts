@@ -1,3 +1,4 @@
+import { readFile } from "node:fs/promises";
 import { expect, test, type Browser, type Page } from "@playwright/test";
 
 // Staff studio journeys (P06) using the development fixtures from `portal-dev-seed-staff` (Class XI Biology scope).
@@ -245,4 +246,20 @@ test("an author previews an import, sees row errors, and commits valid rows as d
   await expect(author.getByRole("heading", { name: /^Imported:/ })).toBeVisible(AUTH);
   await rows.getByRole("link", { name: "Open" }).click();
   await expect(author.getByText(/^Draft · version 1/)).toBeVisible(AUTH);
+});
+
+test("an author downloads the Excel template, and a workbook goes through the same checks", async ({ browser }) => {
+  // P06.S2.T1 (IMPORT-XLSX-01): headings-only templates; an .xlsx upload is read by the same validation as CSV.
+  const author = await signIn(browser, "studio-author@example.com");
+  await author.goto("/studio/imports");
+  const [download] = await Promise.all([author.waitForEvent("download"), author.getByRole("link", { name: "Excel (.xlsx)" }).click()]);
+  expect(download.suggestedFilename()).toBe("mcq-template.xlsx");
+  const buffer = await readFile((await download.path())!);
+  expect(buffer.subarray(0, 2).toString()).toBe("PK"); // a zip package, as every .xlsx is
+  const csv = await author.request.get("/studio/imports/templates/mcq.csv");
+  expect(csv.status()).toBe(200);
+  expect((await csv.text()).replace(/^﻿/, "").startsWith("external_id,chapter,topic,title,stem")).toBe(true);
+  // The template has headings and no rows, so the preview says exactly that.
+  await author.getByLabel(/File to preview/).setInputFiles({ name: "mcq-template.xlsx", mimeType: "application/octet-stream", buffer });
+  await expect(author.getByText("The file has no rows.")).toBeVisible(AUTH);
 });

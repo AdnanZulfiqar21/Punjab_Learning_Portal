@@ -6,7 +6,7 @@ import uuid
 from datetime import datetime
 from typing import Annotated, Any, Literal
 
-from fastapi import APIRouter, Depends, Query, Request, Response
+from fastapi import APIRouter, Depends, Path, Query, Request, Response
 from pydantic import BaseModel, Field
 from sqlalchemy import or_, select
 from sqlalchemy.orm import Session, selectinload
@@ -754,7 +754,7 @@ class ImportRowOut(BaseModel):
 class ImportBatchOut(BaseModel):
     id: uuid.UUID
     kind: str
-    format: Literal["json", "csv"]
+    format: Literal["json", "csv", "xlsx"]
     filename: str
     sha256: str
     status: Literal["previewed", "committed", "discarded"]
@@ -800,13 +800,14 @@ def _batch_out(db: Session, b: Any, with_rows: bool = True) -> ImportBatchOut:
     response_model=ImportBatchOut,
     status_code=201,
     dependencies=[Depends(operations.requires("content_imports"))],
-    summary="Preview an import (raw JSON or CSV body, at most 5 MB): validates every row, writes nothing to content",
+    summary="Preview an import (raw JSON, CSV or XLSX body, at most 5 MB): validates every row, writes nothing to "
+    "content",
 )
 async def preview_import(
     db: DB,
     who: Author,
     request: Request,
-    format: Annotated[Literal["json", "csv"], Query()] = "json",
+    format: Annotated[Literal["json", "csv", "xlsx"], Query()] = "json",
     filename: Annotated[str, Query(max_length=200)] = "import",
 ) -> ImportBatchOut:
     from starlette.concurrency import run_in_threadpool
@@ -821,6 +822,31 @@ async def preview_import(
             raise TooLarge("Import files can be at most 5 MB.")
     batch = await run_in_threadpool(imports.preview, db, who, bytes(buf), fmt=format, filename=filename)
     return _batch_out(db, batch)
+
+
+@router.get(
+    "/imports/templates/{name}",
+    summary="The multiple-choice import template, headings only (mcq.xlsx with text-formatted columns, or mcq.csv)",
+    responses={200: {"content": {"text/csv": {}, "application/octet-stream": {}}}},
+)
+def import_template(who: Author, name: Annotated[str, Path(max_length=20)]) -> Response:
+    from portal_api.modules.content import imports
+
+    del who  # staff who can draft content only; the template holds no data
+    if name not in ("mcq.xlsx", "mcq.csv"):
+        raise NotFound("No such template.")
+    if name == "mcq.xlsx":
+        content, media = imports.xlsx_template(imports.CSV_COLUMNS), imports.XLSX_TYPE
+    else:
+        content, media = ("\ufeff" + ",".join(imports.CSV_COLUMNS) + "\r\n").encode(), "text/csv; charset=utf-8"
+    return Response(
+        content=content,
+        media_type=media,
+        headers={
+            "Content-Disposition": f'attachment; filename="{name.replace(".", "-template.")}"',
+            "Cache-Control": "private, max-age=3600",
+        },
+    )
 
 
 @router.get("/imports", response_model=list[ImportBatchOut], summary="Your recent imports")

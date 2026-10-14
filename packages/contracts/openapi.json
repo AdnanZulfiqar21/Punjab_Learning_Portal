@@ -5709,7 +5709,8 @@
           "format": {
             "enum": [
               "json",
-              "csv"
+              "csv",
+              "xlsx"
             ],
             "title": "Format",
             "type": "string"
@@ -25991,7 +25992,8 @@
               "default": "json",
               "enum": [
                 "json",
-                "csv"
+                "csv",
+                "xlsx"
               ],
               "title": "Format",
               "type": "string"
@@ -26031,7 +26033,50 @@
             "description": "Validation Error"
           }
         },
-        "summary": "Preview an import (raw JSON or CSV body, at most 5 MB): validates every row, writes nothing to content",
+        "summary": "Preview an import (raw JSON, CSV or XLSX body, at most 5 MB): validates every row, writes nothing to content",
+        "tags": [
+          "studio"
+        ]
+      }
+    },
+    "/v1/studio/imports/templates/{name}": {
+      "get": {
+        "operationId": "import_template_v1_studio_imports_templates__name__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "schema": {
+              "maxLength": 20,
+              "title": "Name",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              },
+              "application/octet-stream": {},
+              "text/csv": {}
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "The multiple-choice import template, headings only (mcq.xlsx with text-formatted columns, or mcq.csv)",
         "tags": [
           "studio"
         ]
