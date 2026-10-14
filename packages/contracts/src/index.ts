@@ -121,6 +121,7 @@ export type LinkedForm = S["LinkedFormOut"];
 export type LinkedAttempt = S["LinkedAttemptOut"];
 export type Adjudication = S["AdjudicationOut"];
 export type RegradeJob = S["RegradeJobOut"];
+export type AcademicReview = S["AcademicReviewOut"];
 export type AdjudicationSources = S["AdjudicationSourcesOut"];
 export type RegradeAttempts = S["RegradeAttemptsOut"];
 export type WrittenNotice = S["NoticeOut"];

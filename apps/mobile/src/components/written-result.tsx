@@ -87,6 +87,13 @@ export function WrittenResultView({ attemptId, token }: { attemptId: string; tok
                 {q.status === "unavailable" ? " The allowance for this question was returned to your plan." : ""}
               </T>
             )}
+            {q.academic_review === "open" && (
+              // ACADEMIC-REVIEW-01: the guide doesn't cover the method yet; no score is forced meanwhile.
+              <T variant="small">
+                A senior subject reviewer is checking how the marking guide applies to your answer. This question has no mark until then, and nothing is
+                counted as zero.
+              </T>
+            )}
             {q.criteria.map((cr) => (
               <T key={cr.id} variant="small">
                 {marks(cr.earned_units)} / {marks(cr.max_units)} · {cr.description}

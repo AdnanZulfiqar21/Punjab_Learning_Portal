@@ -78,8 +78,8 @@ export function MarkingWorkspace({ initial }: { initial: MarkingCase }) {
   const [expansionReason, setExpansionReason] = useState("");
   // R05: each question in scope is scored, pending (e.g. unreadable) or unavailable (can't be assessed).
   // PR32-02: a saved draft reopens with everything it intended, not just its awards.
-  const [status, setStatus] = useState<Record<string, { status: "scored" | "pending" | "unavailable"; reason: string; learner_action?: string }>>(
-    () => (initial.draft?.question_status ?? {}) as Record<string, { status: "scored" | "pending" | "unavailable"; reason: string; learner_action?: string }>,
+  const [status, setStatus] = useState<Record<string, { status: "scored" | "pending" | "unavailable"; reason: string; learner_action?: string; escalation?: string }>>(
+    () => (initial.draft?.question_status ?? {}) as Record<string, { status: "scored" | "pending" | "unavailable"; reason: string; learner_action?: string; escalation?: string }>,
   );
   const [classes, setClasses] = useState<Record<string, { class: string; reason: string }>>(
     () => (initial.draft?.classifications ?? {}) as Record<string, { class: string; reason: string }>,
@@ -369,13 +369,29 @@ export function MarkingWorkspace({ initial }: { initial: MarkingCase }) {
                       <select
                         aria-label={`Ask the learner about question ${pos}`}
                         value={status[pos]?.learner_action ?? ""}
-                        disabled={!canMark}
+                        disabled={!canMark || !!status[pos]?.escalation}
                         onChange={(e) => setStatus((s) => ({ ...s, [pos]: { ...s[pos], status: "pending", reason: s[pos]?.reason ?? "", learner_action: e.target.value || undefined } }))}
                         className="rounded border border-border bg-surface px-2 py-1"
                       >
                         <option value="">Don&apos;t ask the learner</option>
                         <option value="rescan">Ask for a clearer copy (7 days)</option>
                         <option value="confirm_or_rescan">Looks blank: confirm or clearer copy (7 days)</option>
+                      </select>
+                    )}
+                    {/* ACADEMIC-REVIEW-01: a method the marking guide doesn't cover is never forced into a score. */}
+                    {statusOf(pos) === "pending" && (
+                      <select
+                        aria-label={`Academic review for question ${pos}`}
+                        value={status[pos]?.escalation ?? ""}
+                        disabled={!canMark || !!status[pos]?.learner_action}
+                        onChange={(e) =>
+                          setStatus((s) => ({ ...s, [pos]: { ...s[pos], status: "pending", reason: s[pos]?.reason ?? "", escalation: e.target.value || undefined } }))
+                        }
+                        className="rounded border border-border bg-surface px-2 py-1"
+                      >
+                        <option value="">No academic review</option>
+                        <option value="unlisted_method">Valid method the guide doesn&apos;t list</option>
+                        <option value="rubric_defect">Problem with the marking guide</option>
                       </select>
                     )}
                     {statusOf(pos) !== "scored" && (

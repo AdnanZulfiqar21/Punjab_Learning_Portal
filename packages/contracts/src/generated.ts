@@ -3785,6 +3785,40 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/studio/written/academic-reviews": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Questions a teacher sent to academic review, in your academic scope (oldest first) */
+        get: operations["list_academic_reviews_v1_studio_written_academic_reviews_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/studio/written/academic-reviews/{review_id}/resolve": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Decide how the marking guide applies (academic adjudicator with MFA); never sets a mark */
+        post: operations["resolve_academic_review_v1_studio_written_academic_reviews__review_id__resolve_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/studio/written/adjudication-sources": {
         parameters: {
             query?: never;
@@ -4424,6 +4458,75 @@ export interface components {
             totals: {
                 [key: string]: number;
             };
+        };
+        /** AcademicResolveIn */
+        AcademicResolveIn: {
+            /**
+             * Adjudication Id
+             * @description For guide_corrected: the approved correction of this question's marking guide
+             */
+            adjudication_id?: string | null;
+            /**
+             * Note
+             * @description Why, for the marker and the record
+             */
+            note: string;
+            /**
+             * Resolution
+             * @enum {string}
+             */
+            resolution: "guide_corrected" | "not_covered";
+        };
+        /** AcademicReviewOut */
+        AcademicReviewOut: {
+            /** Adjudication Id */
+            adjudication_id: string | null;
+            /** Grade */
+            grade: number;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /**
+             * Kind
+             * @enum {string}
+             */
+            kind: "unlisted_method" | "rubric_defect";
+            /** Position */
+            position: number;
+            /**
+             * Raised At
+             * Format: date-time
+             */
+            raised_at: string;
+            /**
+             * Reason
+             * @description What the teacher wrote
+             */
+            reason: string;
+            /**
+             * Reference
+             * @description The script reference markers see (the learner is never named)
+             */
+            reference: string;
+            /** Resolution */
+            resolution: ("guide_corrected" | "not_covered") | null;
+            /** Resolution Note */
+            resolution_note: string | null;
+            /** Resolved At */
+            resolved_at: string | null;
+            /** Rubric Item Id */
+            rubric_item_id: string | null;
+            /** Rubric Version */
+            rubric_version: number | null;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "open" | "resolved";
+            /** Subject */
+            subject: string;
         };
         /** AccessOut */
         AccessOut: {
@@ -8722,6 +8825,11 @@ export interface components {
         };
         /** QuestionResult */
         QuestionResult: {
+            /**
+             * Academic Review
+             * @description open: a senior subject reviewer is deciding how the marking guide applies (no mark until then)
+             */
+            academic_review?: ("open" | "resolved") | null;
             /** Action Deadline */
             action_deadline?: string | null;
             /** Criteria */
@@ -19013,6 +19121,72 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["VoiceOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_academic_reviews_v1_studio_written_academic_reviews_get: {
+        parameters: {
+            query?: {
+                status?: "open" | "resolved";
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AcademicReviewOut"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    resolve_academic_review_v1_studio_written_academic_reviews__review_id__resolve_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                review_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["AcademicResolveIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AcademicReviewOut"];
                 };
             };
             /** @description Validation Error */

@@ -572,6 +572,12 @@ def visible(db: Session, who: Principal, offset: int = 0, limit: int = 50) -> li
 
 
 def _scope_clause(db: Session, who: Principal) -> Any:
+    return scope_clause(db, who, RubricAdjudication.grade_number, RubricAdjudication.subject_code)
+
+
+def scope_clause(db: Session, who: Principal, grade_col: Any, subject_col: Any) -> Any:
+    """SQL filter for rows in the caller's academic scope (adjudicators and subject reviewers), given a table's class
+    and subject columns. Shared with academic reviews (ACADEMIC-REVIEW-01)."""
     from sqlalchemy import and_, false, or_, true
 
     from portal_api.modules.identity.models import StaffRoleGrant
@@ -594,9 +600,9 @@ def _scope_clause(db: Session, who: Principal) -> Any:
             return true()
         parts = []
         if grades is not None:
-            parts.append(RubricAdjudication.grade_number.in_(grades))
+            parts.append(grade_col.in_(grades))
         if subjects is not None:
-            parts.append(RubricAdjudication.subject_code.in_(subjects))
+            parts.append(subject_col.in_(subjects))
         clauses.append(and_(*parts))
     return or_(*clauses) if clauses else false()
 

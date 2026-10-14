@@ -50,6 +50,188 @@
         "title": "AcademicOverview",
         "type": "object"
       },
+      "AcademicResolveIn": {
+        "properties": {
+          "adjudication_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "For guide_corrected: the approved correction of this question's marking guide",
+            "title": "Adjudication Id"
+          },
+          "note": {
+            "description": "Why, for the marker and the record",
+            "maxLength": 2000,
+            "minLength": 10,
+            "title": "Note",
+            "type": "string"
+          },
+          "resolution": {
+            "enum": [
+              "guide_corrected",
+              "not_covered"
+            ],
+            "title": "Resolution",
+            "type": "string"
+          }
+        },
+        "required": [
+          "resolution",
+          "note"
+        ],
+        "title": "AcademicResolveIn",
+        "type": "object"
+      },
+      "AcademicReviewOut": {
+        "properties": {
+          "adjudication_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Adjudication Id"
+          },
+          "grade": {
+            "title": "Grade",
+            "type": "integer"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "kind": {
+            "enum": [
+              "unlisted_method",
+              "rubric_defect"
+            ],
+            "title": "Kind",
+            "type": "string"
+          },
+          "position": {
+            "title": "Position",
+            "type": "integer"
+          },
+          "raised_at": {
+            "format": "date-time",
+            "title": "Raised At",
+            "type": "string"
+          },
+          "reason": {
+            "description": "What the teacher wrote",
+            "title": "Reason",
+            "type": "string"
+          },
+          "reference": {
+            "description": "The script reference markers see (the learner is never named)",
+            "title": "Reference",
+            "type": "string"
+          },
+          "resolution": {
+            "anyOf": [
+              {
+                "enum": [
+                  "guide_corrected",
+                  "not_covered"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Resolution"
+          },
+          "resolution_note": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Resolution Note"
+          },
+          "resolved_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Resolved At"
+          },
+          "rubric_item_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rubric Item Id"
+          },
+          "rubric_version": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rubric Version"
+          },
+          "status": {
+            "enum": [
+              "open",
+              "resolved"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "subject": {
+            "title": "Subject",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "reference",
+          "position",
+          "grade",
+          "subject",
+          "kind",
+          "reason",
+          "rubric_item_id",
+          "rubric_version",
+          "raised_at",
+          "status",
+          "resolution",
+          "resolution_note",
+          "adjudication_id",
+          "resolved_at"
+        ],
+        "title": "AcademicReviewOut",
+        "type": "object"
+      },
       "AccessOut": {
         "properties": {
           "device_check": {
@@ -10394,6 +10576,22 @@
       },
       "QuestionResult": {
         "properties": {
+          "academic_review": {
+            "anyOf": [
+              {
+                "enum": [
+                  "open",
+                  "resolved"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "open: a senior subject reviewer is deciding how the marking guide applies (no mark until then)",
+            "title": "Academic Review"
+          },
           "action_deadline": {
             "anyOf": [
               {
@@ -28623,6 +28821,110 @@
         "summary": "Owner retires a voice (MFA, reason)",
         "tags": [
           "lectures"
+        ]
+      }
+    },
+    "/v1/studio/written/academic-reviews": {
+      "get": {
+        "operationId": "list_academic_reviews_v1_studio_written_academic_reviews_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "status",
+            "required": false,
+            "schema": {
+              "default": "open",
+              "enum": [
+                "open",
+                "resolved"
+              ],
+              "title": "Status",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/AcademicReviewOut"
+                  },
+                  "title": "Response List Academic Reviews V1 Studio Written Academic Reviews Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Questions a teacher sent to academic review, in your academic scope (oldest first)",
+        "tags": [
+          "written marking"
+        ]
+      }
+    },
+    "/v1/studio/written/academic-reviews/{review_id}/resolve": {
+      "post": {
+        "operationId": "resolve_academic_review_v1_studio_written_academic_reviews__review_id__resolve_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "review_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Review Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AcademicResolveIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AcademicReviewOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Decide how the marking guide applies (academic adjudicator with MFA); never sets a mark",
+        "tags": [
+          "written marking"
         ]
       }
     },

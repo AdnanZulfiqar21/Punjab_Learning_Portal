@@ -35,6 +35,7 @@ import portal_api.modules.notifications.models
 import portal_api.modules.support.models
 import portal_api.modules.system.clients
 import portal_api.modules.system.operations
+import portal_api.modules.written.academic
 import portal_api.modules.written.adjudication
 import portal_api.modules.written.automatic
 import portal_api.modules.written.calibration

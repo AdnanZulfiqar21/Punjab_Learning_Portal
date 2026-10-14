@@ -268,6 +268,13 @@ export function WrittenRunner({ attempt, result = null }: { attempt: WrittenAtte
                       {q.status === "unavailable" && " The allowance for this question was returned to your plan."}
                     </p>
                   )}
+                  {q.academic_review === "open" && (
+                    // ACADEMIC-REVIEW-01: the guide doesn't cover the method yet; no score is forced meanwhile.
+                    <p className="text-sm text-muted">
+                      A senior subject reviewer is checking how the marking guide applies to your answer. This question has no mark until then, and
+                      nothing is counted as zero.
+                    </p>
+                  )}
                   <PendingAction attemptId={attempt.id} q={q} />
                   <ul className="space-y-1 text-sm">
                     {q.criteria.map((c) => (

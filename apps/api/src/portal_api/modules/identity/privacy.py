@@ -40,7 +40,7 @@ EXPORTED_TABLES = frozenset(
         "mock_accommodation", "notification", "notification_preference", "practice_form", "student_profile",
         "study_settings", "support_assisted_access", "support_ticket", "trial_claim", "trial_device_use",
         "trial_exception", "trial_grant", "user_session", "written_attempt", "written_form", "written_notice",
-        "written_recheck_request",
+        "written_recheck_request", "written_academic_review",
     }
 )  # fmt: skip
 NOT_EXPORTED = {
@@ -87,6 +87,7 @@ def export(db: Session, user: AppUser) -> tuple[bytes, str]:
         SupportMessage,
         SupportTicket,
     )
+    from portal_api.modules.written.academic import AcademicReview
     from portal_api.modules.written.adjudication import WrittenNotice
     from portal_api.modules.written.models import WrittenAttempt, WrittenForm
     from portal_api.modules.written.review import WrittenRecheckRequest, WrittenScoreVersion
@@ -140,6 +141,8 @@ def export(db: Session, user: AppUser) -> tuple[bytes, str]:
             "attempts": _rows(db, WrittenAttempt, WrittenAttempt.user_id == uid),
             "notices": _rows(db, WrittenNotice, WrittenNotice.user_id == uid),
             "recheck_requests": _rows(db, WrittenRecheckRequest, WrittenRecheckRequest.requested_by == uid),
+            # ACADEMIC-REVIEW-01: reviews of the learner's own answers (staff who raised or resolved them are omitted)
+            "academic_reviews": _rows(db, AcademicReview, AcademicReview.attempt_id.in_(written)) if written else [],
             "released_results": _rows(
                 db,
                 WrittenScoreVersion,
