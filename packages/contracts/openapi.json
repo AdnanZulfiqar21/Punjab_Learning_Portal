@@ -5713,6 +5713,18 @@
             "title": "Expires At",
             "type": "string"
           },
+          "failure": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Why a bulk import failed; nothing was imported",
+            "title": "Failure"
+          },
           "filename": {
             "title": "Filename",
             "type": "string"
@@ -5742,15 +5754,43 @@
             "title": "Rows",
             "type": "array"
           },
+          "rows_checked": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Rows checked so far by the import worker",
+            "title": "Rows Checked"
+          },
+          "rows_total": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Rows in the file, once read (IMPORT-BULK-01)",
+            "title": "Rows Total"
+          },
           "sha256": {
             "title": "Sha256",
             "type": "string"
           },
           "status": {
             "enum": [
+              "queued",
+              "validating",
               "previewed",
+              "committing",
               "committed",
-              "discarded"
+              "discarded",
+              "failed"
             ],
             "title": "Status",
             "type": "string"
@@ -26237,6 +26277,65 @@
           }
         },
         "summary": "Preview an import (raw JSON, CSV or XLSX body, at most 5 MB): validates every row, writes nothing to content",
+        "tags": [
+          "studio"
+        ]
+      }
+    },
+    "/v1/studio/imports/bulk": {
+      "post": {
+        "operationId": "queue_bulk_import_v1_studio_imports_bulk_post",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "format",
+            "required": false,
+            "schema": {
+              "default": "json",
+              "enum": [
+                "json",
+                "csv",
+                "xlsx"
+              ],
+              "title": "Format",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "filename",
+            "required": false,
+            "schema": {
+              "default": "import",
+              "maxLength": 200,
+              "title": "Filename",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportBatchOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Queue a large import (raw JSON, CSV or XLSX body, at most 50 MB and 20,000 rows) for the import worker, which checks it like a preview; poll the batch for progress",
         "tags": [
           "studio"
         ]

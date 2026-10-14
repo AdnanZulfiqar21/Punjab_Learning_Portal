@@ -18,7 +18,9 @@ export async function POST(request: NextRequest) {
   const filename = (request.nextUrl.searchParams.get("filename") ?? "import").slice(0, 200);
   if (!request.body) return Response.json({ detail: "Choose a file." }, { status: 422 });
   const qs = new URLSearchParams({ format, filename });
-  const upstream = await fetch(`${readRuntimeConfig().apiOrigin}/v1/studio/imports?${qs.toString()}`, {
+  // IMPORT-BULK-01: a large file goes to the import worker's queue instead of a preview in this request.
+  const path = request.nextUrl.searchParams.get("bulk") === "1" ? "/v1/studio/imports/bulk" : "/v1/studio/imports";
+  const upstream = await fetch(`${readRuntimeConfig().apiOrigin}${path}?${qs.toString()}`, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${token}`,

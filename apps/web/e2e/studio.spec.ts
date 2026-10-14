@@ -299,3 +299,25 @@ test("an author checks a media pack, archives it, and the same pack again change
   await expect(files.getByText("Unchanged")).toBeVisible(AUTH);
   await expect(section.getByRole("button", { name: /Archive/ })).toBeDisabled();
 });
+
+test("a file too big for a quick preview is checked by the import worker, with progress", async ({ browser }) => {
+  // IMPORT-BULK-01: more rows than a request preview takes, so the page hands the file to the worker and follows it.
+  // Every row names a chapter that doesn't exist, so the check is real but nothing is ever written.
+  test.slow();
+  const author = await signIn(browser, "studio-author@example.com");
+  const run = Date.now();
+  const header = "external_id,chapter,title,stem,option_a,option_b,correct";
+  const lines = Array.from({ length: 2001 }, (_, i) => `E2E-BULK-${run}-${i},no-such-chapter-${run},Fixture,Fixture stem ${i},A,B,A`);
+  await author.goto("/studio/imports");
+  await author.getByLabel(/File to preview/).setInputFiles({
+    name: `fixture-bulk-${run}.csv`,
+    mimeType: "text/csv",
+    buffer: Buffer.from([header, ...lines].join("\n") + "\n"),
+  });
+  await expect(author.getByRole("heading", { name: /^(Queued|Checking|Preview): fixture-bulk-/ })).toBeVisible({ timeout: 20_000 });
+  await expect(author.getByRole("heading", { name: `Preview: fixture-bulk-${run}.csv` })).toBeVisible({ timeout: 90_000 });
+  await expect(author.getByText("Showing the 500 rows with errors or warnings out of 2001.")).toBeVisible();
+  await expect(author.getByRole("button", { name: /Import \d+ rows? as drafts/ })).toBeDisabled();
+  await author.getByRole("button", { name: "Discard" }).click();
+  await expect(author.getByRole("heading", { name: `Discarded: fixture-bulk-${run}.csv` })).toBeVisible(AUTH);
+});

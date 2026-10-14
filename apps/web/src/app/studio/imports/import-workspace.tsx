@@ -1,12 +1,24 @@
 "use client";
 
 import Link from "next/link";
-import { useRef, useState, useSyncExternalStore, useTransition } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore, useTransition } from "react";
 import type { ImportBatch } from "@portal/contracts";
-import { commitImport, discardImport } from "@/app/actions/imports";
+import { commitImport, discardImport, getImport } from "@/app/actions/imports";
 import { Badge } from "@/components/ui";
 
 const MAX_BYTES = 5 * 1024 * 1024;
+const BULK_MAX_BYTES = 50 * 1024 * 1024; // IMPORT-BULK-01: larger files are checked by the import worker
+const WORKING = new Set(["queued", "validating", "committing"]);
+const SHOWN_ROWS = 500;
+const STATUS_TITLE: Record<string, string> = {
+  queued: "Queued",
+  validating: "Checking",
+  previewed: "Preview",
+  committing: "Importing",
+  committed: "Imported",
+  discarded: "Discarded",
+  failed: "Failed",
+};
 const ACTION_LABEL: Record<string, string> = {
   create: "New draft",
   update: "Update draft",
@@ -27,16 +39,34 @@ export function ImportWorkspace() {
   const [uploading, setUploading] = useState(false);
   const [pending, start] = useTransition();
 
+  // While the import worker has the batch, show its progress (every 2 seconds) until it is ready, imported or failed.
+  const working = batch !== null && WORKING.has(batch.status);
+  const batchId = batch?.id;
+  useEffect(() => {
+    if (!working || !batchId) return;
+    const timer = setInterval(async () => {
+      const out = await getImport(batchId);
+      if (out.ok) setBatch(out.batch);
+    }, 2000);
+    return () => clearInterval(timer);
+  }, [working, batchId]);
+
   async function preview(file: File) {
     setError(null);
     setBatch(null);
-    if (file.size > MAX_BYTES) return setError("Import files can be at most 5 MB. Split the file.");
+    if (file.size > BULK_MAX_BYTES) return setError("Import files can be at most 50 MB. Split the file.");
     const name = file.name.toLowerCase();
     const format = name.endsWith(".csv") ? "csv" : name.endsWith(".xlsx") ? "xlsx" : "json";
     setUploading(true);
     try {
-      const qs = new URLSearchParams({ format, filename: file.name });
-      const res = await fetch(`/studio/imports/upload?${qs.toString()}`, { method: "POST", headers: { "Content-Type": "application/octet-stream" }, body: file });
+      const send = (bulk: boolean) =>
+        fetch(`/studio/imports/upload?${new URLSearchParams({ format, filename: file.name, ...(bulk ? { bulk: "1" } : {}) }).toString()}`, {
+          method: "POST",
+          headers: { "Content-Type": "application/octet-stream" },
+          body: file,
+        });
+      let res = await send(file.size > MAX_BYTES);
+      if (res.status === 413 && file.size <= MAX_BYTES) res = await send(true); // more rows than a quick preview takes
       const body = (await res.json().catch(() => null)) as (ImportBatch & { detail?: string }) | null;
       if (res.ok && body) setBatch(body);
       else setError(body?.detail ?? "That file couldn't be previewed.");
@@ -49,6 +79,9 @@ export function ImportWorkspace() {
   }
 
   const errors = (batch?.rows ?? []).filter((r) => r.action === "error").length ?? 0;
+  // A bulk preview can hold thousands of rows: past 500, list the rows that need attention; the report has them all.
+  const allRows = batch?.rows ?? [];
+  const listed = allRows.length > SHOWN_ROWS ? allRows.filter((r) => r.errors.length > 0 || r.warnings.length > 0).slice(0, SHOWN_ROWS) : allRows;
   const writes = (batch?.rows ?? []).filter((r) => r.action === "create" || r.action === "update").length ?? 0;
   return (
     <div className="space-y-5">
@@ -83,7 +116,7 @@ export function ImportWorkspace() {
           </a>
           . The formats are described in the content import guide (docs/content-import.md).
         </p>
-        {uploading && <p className="text-sm text-muted">Checking every row…</p>}
+        {uploading && <p className="text-sm text-muted">Uploading and checking…</p>}
       </div>
       {error && (
         <p role="alert" className="text-sm text-danger">
@@ -94,7 +127,7 @@ export function ImportWorkspace() {
         <section aria-labelledby="preview-h" className="space-y-3">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <h2 id="preview-h" className="font-semibold">
-              {batch.status === "committed" ? "Imported" : batch.status === "discarded" ? "Discarded" : "Preview"}: {batch.filename}
+              {STATUS_TITLE[batch.status] ?? "Preview"}: {batch.filename}
             </h2>
             <p className="text-sm text-muted">
               {Object.entries(batch.counts)
@@ -103,10 +136,42 @@ export function ImportWorkspace() {
                 .join(" · ")}
             </p>
           </div>
+          {WORKING.has(batch.status) && (
+            <p role="status" className="text-sm">
+              {batch.status === "queued"
+                ? "Waiting for the import worker. Large files are checked in the background; you can leave this page and come back."
+                : batch.status === "validating"
+                  ? `Checking rows: ${batch.rows_checked ?? 0} of ${batch.rows_total ?? "?"}.`
+                  : `Importing ${batch.rows_total ?? ""} rows as drafts. Every row is written, or none.`}
+            </p>
+          )}
+          {batch.status === "failed" && (
+            <p role="alert" className="text-sm text-danger">
+              {batch.failure ?? "This import failed."}
+            </p>
+          )}
           <div className="flex flex-wrap gap-2">
+            {batch.status === "queued" && (
+              <button
+                type="button"
+                disabled={pending}
+                onClick={() =>
+                  start(async () => {
+                    const out = await discardImport(batch.id);
+                    if (out.ok) setBatch({ ...batch, status: "discarded" });
+                    else setError(out.error ?? null);
+                  })
+                }
+                className="rounded-lg border border-border bg-surface px-3 py-1.5 text-sm font-medium hover:border-accent"
+              >
+                Cancel
+              </button>
+            )}
+            {!WORKING.has(batch.status) && batch.status !== "failed" && (
             <a href={`/studio/imports/${batch.id}/report`} className="rounded-lg border border-border bg-surface px-3 py-1.5 text-sm font-medium hover:border-accent">
               Download correction report
             </a>
+            )}
             {batch.status === "previewed" && (
               <>
                 <button
@@ -146,8 +211,13 @@ export function ImportWorkspace() {
               {errors} row{errors === 1 ? " has" : "s have"} errors. Fix the file and preview it again; nothing is imported until every row is valid.
             </p>
           )}
+          {listed.length < allRows.length && (
+            <p className="text-sm text-muted">
+              Showing the {listed.length} row{listed.length === 1 ? "" : "s"} with errors or warnings out of {allRows.length}. The correction report lists every row.
+            </p>
+          )}
           <ol className="divide-y divide-border rounded-xl border border-border bg-surface" aria-label="Import rows">
-            {(batch.rows ?? []).map((r) => (
+            {listed.map((r) => (
               <li key={r.row} className="space-y-1 p-3 text-sm">
                 <div className="flex flex-wrap items-center gap-2">
                   <span className="text-muted">Row {r.row}</span>

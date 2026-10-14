@@ -15,7 +15,7 @@ totals match §5.8, and every installed database command belongs to a class.
 | api | 20 | 10 | 200 | API replicas; request work in a bounded threadpool |
 | critical | 4 | 5 | 20 | `portal-expire-attempts`, `portal-mcq-regrade`, `portal-notification-worker` |
 | standard | 4 | 3 | 12 | `portal-notification-trial-reminders` |
-| bulk | 2 | 3 | 6 | `portal-export-worker`, `portal-asset-retention`, `portal-upload-reconcile`, `portal-help-import` |
+| bulk | 2 | 3 | 6 | `portal-export-worker`, `portal-import-worker`, `portal-asset-retention`, `portal-upload-reconcile`, `portal-help-import` |
 | reserve | 1 | 7 | 7 | migrations, `portal-import-catalogue`, `portal-grant-role`, monitoring |
 | written.ingestion | 2 | 3 | 6 | `portal-written-previews`, `portal-written-sweep-orphans` |
 | written.reading | 4 | 2 | 8 | `portal-written-learner-deadlines`, `portal-written-repair` |

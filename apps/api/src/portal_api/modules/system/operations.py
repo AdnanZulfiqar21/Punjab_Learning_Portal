@@ -230,6 +230,7 @@ THRESHOLDS: dict[str, tuple[float, float, str, str]] = {
     "notification_dead_letters": (1, 25, "platform operator", "notification-backlog"),
     "written_regrade_queue_age_s": (1800, 7200, "platform operator", "regrade-backlog"),
     "written_regrade_failed_jobs": (1, 1, "academic operations", "regrade-backlog"),
+    "content_import_queue_age_s": (900, 3600, "platform operator", "import-backlog"),  # IMPORT-BULK-01
     "auto_assessment_dead_letters": (1, 10, "platform operator", "auto-assessment"),
     "marking_overdue_cases": (1, 10, "academic operations", "marking-backlog"),
     "marking_oldest_queued_age_s": (2 * 86400, 5 * 86400, "academic operations", "marking-backlog"),
@@ -257,6 +258,7 @@ def _age(db: Session, column: Any, *where: Any) -> float:
 
 
 def signals(db: Session) -> list[dict[str, Any]]:
+    from portal_api.modules.content.models import ContentImportBatch
     from portal_api.modules.notifications.models import NotificationDelivery
     from portal_api.modules.support.models import SupportTicket
     from portal_api.modules.written.automatic import AutoAssessment
@@ -276,6 +278,9 @@ def signals(db: Session) -> list[dict[str, Any]]:
         "notification_dead_letters": count(NotificationDelivery, NotificationDelivery.status == "failed"),
         "written_regrade_queue_age_s": _age(db, RegradeJob.created_at, RegradeJob.status.in_(("queued", "running"))),
         "written_regrade_failed_jobs": count(RegradeJob, RegradeJob.status == "failed"),
+        "content_import_queue_age_s": _age(
+            db, ContentImportBatch.created_at, ContentImportBatch.status.in_(("queued", "validating", "committing"))
+        ),
         "auto_assessment_dead_letters": count(AutoAssessment, AutoAssessment.status == "failed"),
         "marking_overdue_cases": count(
             WrittenReviewCase, WrittenReviewCase.status == "queued", WrittenReviewCase.due_at < func.now()

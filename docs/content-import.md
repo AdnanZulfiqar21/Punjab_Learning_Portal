@@ -98,6 +98,23 @@ as the CSV file.
   A part that unpacks past 25 MB, more than 64 columns, or more than 2,000 rows is also refused.
 - If a workbook won't read, save it as **CSV UTF-8** instead.
 
+## Large files (IMPORT-BULK-01)
+
+A preview in the page takes at most 5 MB and 2,000 rows. A larger file, up to **50 MB and 20,000 rows**, is checked by
+the import worker instead. The import page does this by itself: it shows the batch as **Queued**, then **Checking
+rows: N of M**, then the ordinary preview. You can leave the page and come back. A queued file can be cancelled.
+
+- The rows are checked with exactly the same rules as a preview. The batch then expires like any other preview, a
+  day after it is ready.
+- Past 500 rows, the page lists only the rows with errors or warnings. The correction report lists every row.
+- Importing more than 2,000 rows is also done by the worker. It writes every row in one transaction, or none. If a
+  row changed after the preview (for example, it was imported separately), the batch **fails** with the reason, and
+  nothing from it is imported. Upload the file again to get a fresh preview.
+- The uploaded file is kept privately only until its rows are checked, and deleted then (or when the batch fails or
+  is cancelled).
+- API: `POST /v1/studio/imports/bulk?format=…&filename=…` (raw body) answers `202` with the queued batch. Poll
+  `GET /v1/studio/imports/{id}`: it carries `rows_checked`, `rows_total` and, for a failed batch, `failure`.
+
 ## Media packs (MEDIA-MANIFEST-01)
 
 Diagrams, handouts, captions and diagram sources can be added to the asset archive in bulk, from **Studio → Assets →
