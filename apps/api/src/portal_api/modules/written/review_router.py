@@ -933,6 +933,23 @@ class StaffingOut(BaseModel):
     turnaround_estimate_days: int | None = Field(description="How long a script started now would wait")
 
 
+class DemandOut(BaseModel):
+    """W06.S3.T1 (DEMAND-01): measured review demand (roadmap §20.13.3). A forecast only: admission is unchanged."""
+
+    released_scripts: int = Field(description="First markings released in the last 90 days")
+    rechecks: int = Field(description="Recheck cases opened in the last 90 days")
+    recheck_rate: float | None = Field(description="Rechecks per released script; null until 20 were released")
+    recheck_window_releases: int = Field(
+        description="First markings released in the last 14 days (still open to a recheck)"
+    )
+    expected_rechecks: int = Field(description="Rechecks still expected from those (rate x releases, rounded up)")
+    queued_by_kind: dict[str, int] = Field(description="Queued cases by kind: initial, recheck, completion, regrade")
+    expected_recheck_minutes: int | None = Field(description="Minutes those rechecks would take (staffing recorded)")
+    admissible_if_rechecks_counted: int | None = Field(
+        description="New scripts that would fit if expected rechecks were also subtracted (a WA-D08 choice)"
+    )
+
+
 class BacklogRow(BaseModel):
     grade: int
     subject: str
@@ -947,6 +964,7 @@ class BacklogRow(BaseModel):
     queued_over_48h: int = 0
     oldest_queued_at: datetime | None = Field(default=None, description="When the longest-waiting queued case opened")
     staffing: StaffingOut | None = None
+    demand: DemandOut | None = None
 
 
 @router.put(
@@ -1003,6 +1021,7 @@ def _backlog_row(db: Session, grade: int, subject: str) -> BacklogRow:
         queued_over_48h=int(old or 0),
         oldest_queued_at=oldest,
         staffing=StaffingOut(**cap["staffing"]) if cap["staffing"] else None,
+        demand=DemandOut(**review.review_demand(db, grade, subject, db.get(review.ReviewCapacity, (grade, subject)))),
     )
 
 

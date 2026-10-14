@@ -9,6 +9,7 @@ prior version). Learners see a result only once a teacher releases it. No automa
 
 from __future__ import annotations
 
+import math
 import uuid
 from datetime import datetime, timedelta
 from typing import Any
@@ -282,6 +283,68 @@ def staffing_state(cap: ReviewCapacity | None, committed: int) -> dict[str, Any]
         # How long a script started now would wait, at today's productive minutes per day (None: nobody to mark).
         "turnaround_estimate_days": -(-(due + per_script) * 7 // weekly) if weekly else None,
     }
+
+
+DEMAND_HISTORY_DAYS = 90
+MIN_RECHECK_SAMPLE = 20  # first markings released before a measured recheck rate is shown
+
+
+def review_demand(db: Session, grade: int, subject: str, cap: ReviewCapacity | None) -> dict[str, Any]:
+    """W06.S3.T1 (DEMAND-01): measured review demand for a class and subject, per roadmap §20.13.3. The recheck rate q
+    is rechecks opened over first markings released in the last 90 days, shown only once at least MIN_RECHECK_SAMPLE
+    were released (a thin sample isn't a rate). Rechecks still expected (R) are q times the first markings released
+    within the 14-day recheck window. With the automatic route off (B10) every script is fully teacher-reviewed, so
+    there is no escalation or random-audit term yet. This forecasts; it never changes admission: subtracting R before
+    admitting new scripts is part of WA-D08 (owner), so `admissible_if_rechecks_counted` shows what that would mean."""
+    now: datetime = db.execute(select(func.clock_timestamp())).scalar_one()
+    case = WrittenReviewCase
+    scope = (case.grade_number == grade, case.subject_code == subject)
+    history = now - timedelta(days=DEMAND_HISTORY_DAYS)
+    released = int(
+        db.scalar(
+            select(func.count()).where(
+                *scope, case.case_kind == "initial", case.status == "released", case.released_at >= history
+            )
+        )
+        or 0
+    )
+    rechecks = int(
+        db.scalar(select(func.count()).where(*scope, case.case_kind == "recheck", case.opened_at >= history)) or 0
+    )
+    in_window = int(
+        db.scalar(
+            select(func.count()).where(
+                *scope, case.case_kind == "initial", case.status == "released", case.released_at >= now - RECHECK_WINDOW
+            )
+        )
+        or 0
+    )
+    queued = {
+        kind: int(n)
+        for kind, n in db.execute(
+            select(case.case_kind, func.count()).where(*scope, case.status == "queued").group_by(case.case_kind)
+        )
+    }
+    rate = rechecks / released if released >= MIN_RECHECK_SAMPLE else None
+    expected = math.ceil(rate * in_window) if rate else 0
+    out: dict[str, Any] = {
+        "released_scripts": released,
+        "rechecks": rechecks,
+        "recheck_rate": round(rate, 4) if rate is not None else None,
+        "recheck_window_releases": in_window,
+        "expected_rechecks": expected,
+        "queued_by_kind": {k: int(queued.get(k, 0)) for k in ("initial", "recheck", "completion", "regrade")},
+        "expected_recheck_minutes": None,
+        "admissible_if_rechecks_counted": None,
+    }
+    staffing = staffing_state(cap, open_cases(db, grade, subject) + open_permits(db, grade, subject))
+    if staffing is not None:
+        per_script = staffing["minutes_per_script"]
+        out["expected_recheck_minutes"] = expected * per_script  # a recheck costed as a full script: conservative
+        per_new = per_script * (1 + (rate or 0))  # m_new: marking it, plus its expected recheck
+        spare = staffing["available_minutes"] - staffing["due_minutes"] - out["expected_recheck_minutes"]
+        out["admissible_if_rechecks_counted"] = max(0, math.floor(spare / per_new))
+    return out
 
 
 def capacity_state(db: Session, grade: int, subject: str) -> dict[str, Any]:

@@ -303,6 +303,17 @@ async function ReviewStaffing() {
                         : " Nobody is available to mark.")
                     : "No staffing recorded: only the case limit applies."}
                 </p>
+                {/* DEMAND-01 (W06.S3.T1): measured recheck demand; a forecast, admission is unchanged */}
+                {r.demand && (
+                  <p className="text-muted">
+                    {r.demand.recheck_rate !== null
+                      ? `Rechecks: ${Math.round(r.demand.recheck_rate * 1000) / 10}% of ${r.demand.released_scripts} first markings in 90 days; about ${r.demand.expected_rechecks} more expected from the last 14 days.`
+                      : `Recheck rate: not enough history yet (${r.demand.released_scripts} first markings released in 90 days; 20 needed).`}
+                    {r.demand.admissible_if_rechecks_counted !== null && r.demand.admissible_if_rechecks_counted !== undefined
+                      ? ` If expected rechecks were counted before admitting new tests, there would be room for ${r.demand.admissible_if_rechecks_counted} (an owner decision, WA-D08).`
+                      : ""}
+                  </p>
+                )}
                 <StaffingForm row={r} label={label} />
               </li>
             );
