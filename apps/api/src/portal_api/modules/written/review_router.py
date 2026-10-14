@@ -941,6 +941,11 @@ class BacklogRow(BaseModel):
     open_permits: int = Field(description="Started, unsubmitted written tests that may still become cases")
     accepting: bool
     overdue_cases: int = Field(description="Queued cases past their due time (service obligation missed)")
+    # W06.S3.T1 (QUEUE-AGEING-01): how long queued cases have waited, against the proposed 24 h / 48 h targets (§20.10).
+    queued_under_24h: int = 0
+    queued_24_to_48h: int = 0
+    queued_over_48h: int = 0
+    oldest_queued_at: datetime | None = Field(default=None, description="When the longest-waiting queued case opened")
     staffing: StaffingOut | None = None
 
 
@@ -959,9 +964,22 @@ def set_capacity(db: DB, who: Operator, grade: int, subject: str, body: Capacity
 
 
 def _backlog_row(db: Session, grade: int, subject: str) -> BacklogRow:
-    from sqlalchemy import func, select
+    from datetime import timedelta
+
+    from sqlalchemy import and_, func, select
 
     cap = review.capacity_state(db, grade, subject)
+    case = review.WrittenReviewCase
+    waited = func.now() - case.opened_at
+    day, two = timedelta(hours=24), timedelta(hours=48)
+    young, middle, old, oldest = db.execute(
+        select(
+            func.count().filter(waited < day),
+            func.count().filter(and_(waited >= day, waited < two)),
+            func.count().filter(waited >= two),
+            func.min(case.opened_at),
+        ).where(case.status == "queued", case.grade_number == grade, case.subject_code == subject)
+    ).one()
     overdue = db.scalar(
         select(func.count())
         .select_from(review.WrittenReviewCase)
@@ -980,6 +998,10 @@ def _backlog_row(db: Session, grade: int, subject: str) -> BacklogRow:
         open_permits=cap["open_permits"],
         accepting=cap["accepting"],
         overdue_cases=int(overdue or 0),
+        queued_under_24h=int(young or 0),
+        queued_24_to_48h=int(middle or 0),
+        queued_over_48h=int(old or 0),
+        oldest_queued_at=oldest,
         staffing=StaffingOut(**cap["staffing"]) if cap["staffing"] else None,
     )
 

@@ -5162,6 +5162,11 @@ export interface components {
             grade: number;
             /** Max Open Cases */
             max_open_cases: number;
+            /**
+             * Oldest Queued At
+             * @description When the longest-waiting queued case opened
+             */
+            oldest_queued_at?: string | null;
             /** Open Cases */
             open_cases: number;
             /**
@@ -5174,6 +5179,21 @@ export interface components {
              * @description Queued cases past their due time (service obligation missed)
              */
             overdue_cases: number;
+            /**
+             * Queued 24 To 48H
+             * @default 0
+             */
+            queued_24_to_48h: number;
+            /**
+             * Queued Over 48H
+             * @default 0
+             */
+            queued_over_48h: number;
+            /**
+             * Queued Under 24H
+             * @default 0
+             */
+            queued_under_24h: number;
             staffing?: components["schemas"]["StaffingOut"] | null;
             /** Subject */
             subject: string;

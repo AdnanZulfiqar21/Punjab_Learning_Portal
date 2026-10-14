@@ -1570,6 +1570,19 @@
             "title": "Max Open Cases",
             "type": "integer"
           },
+          "oldest_queued_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "When the longest-waiting queued case opened",
+            "title": "Oldest Queued At"
+          },
           "open_cases": {
             "title": "Open Cases",
             "type": "integer"
@@ -1582,6 +1595,21 @@
           "overdue_cases": {
             "description": "Queued cases past their due time (service obligation missed)",
             "title": "Overdue Cases",
+            "type": "integer"
+          },
+          "queued_24_to_48h": {
+            "default": 0,
+            "title": "Queued 24 To 48H",
+            "type": "integer"
+          },
+          "queued_over_48h": {
+            "default": 0,
+            "title": "Queued Over 48H",
+            "type": "integer"
+          },
+          "queued_under_24h": {
+            "default": 0,
+            "title": "Queued Under 24H",
             "type": "integer"
           },
           "staffing": {
