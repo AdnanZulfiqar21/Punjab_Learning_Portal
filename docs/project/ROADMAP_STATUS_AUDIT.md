@@ -8,6 +8,19 @@ For the tasks marked **Implemented**, the cited tests were confirmed to exist. T
 
 **Totals:** 6 implemented · 30 partial · 26 blocked on external inputs · 3 not started. Since this audit, W08.S2.T2 and P05.S4.T2 have been done (WRITTEN-INJECTION-01, REGION-01).
 
+**Checked again 2026-10-15** (for the PR #188 review). Since this audit, these partial items have been completed:
+- W01.S2.T1: cycles and unreachable credit (RUBRIC-PATHS-01).
+- W02.S1.T3: mixed completeness (COMPLETENESS-01).
+- W03.S1.T2: in code, with host-side tests (CAPTURE-01, OCT14-01, OCT14-04); a device still needed.
+- W05.S3.T1: reconcile and stale-lease reclaim tests (AUTO-RECOVERY-01).
+- W05.S3.T3: model-version change and MCQ unaffected (AUTO-PROVENANCE-01).
+- W06.S3.T1: measured demand and marking time (DEMAND-01, MARKING-TIME-01).
+- W03.S1.T3: deskew, behind a rollout until qualified (STRAIGHTEN-01).
+
+The table rows below keep their original findings for the record. What remains needs owner, academic, device or
+provider input, except W06.S3.T3's discussion threads and periodic calibration rounds. Those need a product rule
+for how often reviewers must recalibrate (WA-D08 staffing; B01 approved examples).
+
 ## Implemented (now registered)
 
 | Task | Evidence |
