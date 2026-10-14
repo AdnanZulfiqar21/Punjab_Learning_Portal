@@ -98,9 +98,47 @@ as the CSV file.
   A part that unpacks past 25 MB, more than 64 columns, or more than 2,000 rows is also refused.
 - If a workbook won't read, save it as **CSV UTF-8** instead.
 
+## Media packs (MEDIA-MANIFEST-01)
+
+Diagrams, handouts, captions and diagram sources can be added to the asset archive in bulk, from **Studio → Assets →
+Media pack**. A pack is a `.zip` file, at most 60 MB, holding `manifest.json` at its top level and the files it lists:
+
+```json
+{
+  "schema_version": 1,
+  "kind": "media",
+  "grade": 11,
+  "subject": "biology",
+  "items": [
+    {
+      "external_id": "bio11-ch1-fig-2",
+      "kind": "image",
+      "title": "Cell diagram, figure 2",
+      "file": "figures/fig-2.png",
+      "sha256": "optional: the file's SHA-256, checked when given",
+      "provenance": { "source": "Who made it, from what", "author": "", "licence": "", "tool": "" }
+    }
+  ]
+}
+```
+
+- `kind` is `image` (PNG or JPEG), `handout` (PDF), `caption` (WebVTT) or `diagram_source` (archived, never served).
+  Each kind keeps its usual size limit, and every file is scanned and validated exactly like a single upload.
+- `external_id` is the file's stable key within the class and subject. Importing the same pack again changes
+  nothing. A changed file becomes that asset's next version; earlier versions are never overwritten. An existing key
+  can't change its kind.
+- `provenance.source` is required for every file. File names are exact paths inside the pack.
+- A pack lists at most 200 files.
+- **Check** previews every file and writes nothing. **Archive** checks everything again, then archives all the files
+  or none. It only runs when the preview has no errors. If storage fails part-way, nothing is kept.
+- After archiving, each file shows its version ID. Content cites that ID, for example an image's `asset_version_id`
+  or a fallback's `image_asset_id`.
+- Only content authors for the pack's class and subject can import it.
+
 ## Not imported here
 
-- Media files (diagrams and handouts are uploaded to the asset archive, and blocks name them).
+- Media files inside a structured import (add them with a media pack or a single upload first, then cite their
+  version IDs).
 - Teacher labels, held-out evaluation evidence and student scripts. These stay private and separate (W01).
 
 ## Export (P06.S4.T2, EXPORT-01)

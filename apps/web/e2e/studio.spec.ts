@@ -1,5 +1,6 @@
 import { readFile } from "node:fs/promises";
 import { expect, test, type Browser, type Page } from "@playwright/test";
+import { png, zip } from "./helpers/zip";
 
 // Staff studio journeys (P06) using the development fixtures from `portal-dev-seed-staff` (Class XI Biology scope).
 // Lesson text here is a technical fixture. Publication rights stay UNVERIFIED in development, so nothing published
@@ -262,4 +263,39 @@ test("an author downloads the Excel template, and a workbook goes through the sa
   // The template has headings and no rows, so the preview says exactly that.
   await author.getByLabel(/File to preview/).setInputFiles({ name: "mcq-template.xlsx", mimeType: "application/octet-stream", buffer });
   await expect(author.getByText("The file has no rows.")).toBeVisible(AUTH);
+});
+
+test("an author checks a media pack, archives it, and the same pack again changes nothing", async ({ browser }) => {
+  // MEDIA-MANIFEST-01: preview scans and checks every file and writes nothing; the commit archives all or none.
+  const author = await signIn(browser, "studio-author@example.com");
+  const run = Date.now();
+  const manifest = {
+    schema_version: 1,
+    kind: "media",
+    grade: 11,
+    subject: "biology",
+    items: [
+      {
+        external_id: `e2e-fig-${run}`,
+        kind: "image",
+        title: `Fixture pack image ${run}`,
+        file: "figures/fixture.png",
+        provenance: { source: "Fixture: drawn by the browser test", licence: "Owner's own work" },
+      },
+    ],
+  };
+  const pack = zip({ "manifest.json": Buffer.from(JSON.stringify(manifest)), "figures/fixture.png": png(8, 6, [20, 90, 160]) });
+  const file = { name: `fixture-pack-${run}.zip`, mimeType: "application/zip", buffer: pack };
+  await author.goto("/studio/assets?grade=11&subject=biology");
+  const section = author.getByRole("region", { name: "Media pack" });
+  await section.getByLabel("Pack to check").setInputFiles(file);
+  const files = section.getByRole("list", { name: "Pack files" });
+  await expect(files.getByText("New asset")).toBeVisible(AUTH);
+  await section.getByRole("button", { name: "Archive 1 file" }).click();
+  await expect(section.getByText(/^Archived/)).toBeVisible(AUTH);
+  await expect(files.getByText(/^Version 1: [0-9a-f-]{36}$/)).toBeVisible();
+  await expect(author.getByText(`pack key e2e-fig-${run}`)).toBeVisible(AUTH); // the archive list shows it
+  await section.getByLabel("Pack to check").setInputFiles(file);
+  await expect(files.getByText("Unchanged")).toBeVisible(AUTH);
+  await expect(section.getByRole("button", { name: /Archive/ })).toBeDisabled();
 });

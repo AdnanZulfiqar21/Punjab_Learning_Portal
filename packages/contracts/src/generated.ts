@@ -2568,6 +2568,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/studio/assets/manifest": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Preview or commit a media pack (raw .zip body with manifest.json, at most 60 MB): every file is scanned and validated; a commit archives all of them or none */
+        post: operations["import_media_pack_v1_studio_assets_manifest_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/studio/assets/retention": {
         parameters: {
             query?: never;
@@ -4956,6 +4973,8 @@ export interface components {
              * Format: date-time
              */
             created_at: string;
+            /** External Id */
+            external_id?: string | null;
             /** Grade */
             grade: number;
             /**
@@ -7798,6 +7817,52 @@ export interface components {
             roles: components["schemas"]["Role"][];
             /** Status */
             status: string;
+        };
+        /** MediaEntryOut */
+        MediaEntryOut: {
+            /**
+             * Action
+             * @enum {string}
+             */
+            action: "create" | "version" | "unchanged" | "error";
+            /** Asset Id */
+            asset_id: string | null;
+            /** Bytes */
+            bytes: number | null;
+            /** Errors */
+            errors: string[];
+            /** External Id */
+            external_id: string;
+            /** File */
+            file: string;
+            /** Kind */
+            kind: string;
+            /** Number */
+            number: number | null;
+            /** Sha256 */
+            sha256: string | null;
+            /** Title */
+            title: string;
+            /**
+             * Version Id
+             * @description The asset version to cite in content blocks (after a commit)
+             */
+            version_id: string | null;
+        };
+        /** MediaPackOut */
+        MediaPackOut: {
+            /** Committed */
+            committed: boolean;
+            /** Counts */
+            counts: {
+                [key: string]: number;
+            };
+            /** Entries */
+            entries: components["schemas"]["MediaEntryOut"][];
+            /** Grade */
+            grade: number;
+            /** Subject */
+            subject: string;
         };
         /** MediaUploadIn */
         MediaUploadIn: {
@@ -16777,6 +16842,37 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["AssetOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    import_media_pack_v1_studio_assets_manifest_post: {
+        parameters: {
+            query?: {
+                commit?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MediaPackOut"];
                 };
             };
             /** @description Validation Error */

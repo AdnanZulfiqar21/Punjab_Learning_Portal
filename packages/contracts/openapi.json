@@ -998,6 +998,17 @@
             "title": "Created At",
             "type": "string"
           },
+          "external_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "External Id"
+          },
           "grade": {
             "title": "Grade",
             "type": "integer"
@@ -8000,6 +8011,155 @@
           "consents"
         ],
         "title": "MeOut",
+        "type": "object"
+      },
+      "MediaEntryOut": {
+        "properties": {
+          "action": {
+            "enum": [
+              "create",
+              "version",
+              "unchanged",
+              "error"
+            ],
+            "title": "Action",
+            "type": "string"
+          },
+          "asset_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Asset Id"
+          },
+          "bytes": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Bytes"
+          },
+          "errors": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Errors",
+            "type": "array"
+          },
+          "external_id": {
+            "title": "External Id",
+            "type": "string"
+          },
+          "file": {
+            "title": "File",
+            "type": "string"
+          },
+          "kind": {
+            "title": "Kind",
+            "type": "string"
+          },
+          "number": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Number"
+          },
+          "sha256": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sha256"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "version_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The asset version to cite in content blocks (after a commit)",
+            "title": "Version Id"
+          }
+        },
+        "required": [
+          "external_id",
+          "kind",
+          "file",
+          "title",
+          "action",
+          "errors",
+          "sha256",
+          "bytes",
+          "asset_id",
+          "version_id",
+          "number"
+        ],
+        "title": "MediaEntryOut",
+        "type": "object"
+      },
+      "MediaPackOut": {
+        "properties": {
+          "committed": {
+            "title": "Committed",
+            "type": "boolean"
+          },
+          "counts": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "title": "Counts",
+            "type": "object"
+          },
+          "entries": {
+            "items": {
+              "$ref": "#/components/schemas/MediaEntryOut"
+            },
+            "title": "Entries",
+            "type": "array"
+          },
+          "grade": {
+            "title": "Grade",
+            "type": "integer"
+          },
+          "subject": {
+            "title": "Subject",
+            "type": "string"
+          }
+        },
+        "required": [
+          "grade",
+          "subject",
+          "committed",
+          "counts",
+          "entries"
+        ],
+        "title": "MediaPackOut",
         "type": "object"
       },
       "MediaUploadIn": {
@@ -25144,6 +25304,49 @@
           }
         },
         "summary": "Create an archived asset (no file yet)",
+        "tags": [
+          "studio"
+        ]
+      }
+    },
+    "/v1/studio/assets/manifest": {
+      "post": {
+        "operationId": "import_media_pack_v1_studio_assets_manifest_post",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "commit",
+            "required": false,
+            "schema": {
+              "default": false,
+              "title": "Commit",
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MediaPackOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Preview or commit a media pack (raw .zip body with manifest.json, at most 60 MB): every file is scanned and validated; a commit archives all of them or none",
         "tags": [
           "studio"
         ]

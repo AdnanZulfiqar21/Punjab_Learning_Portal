@@ -15,6 +15,7 @@ const MUTATING: [string, string][] = [
   ["POST", `/practice/written/${ID}/questions/1/rescan`],
   ["POST", `/practice/written/${ID}/upload`],
   ["POST", `/studio/assets/${ID}/upload`],
+  ["POST", "/studio/assets/manifest"],
   ["POST", "/studio/imports/upload"],
   ["POST", `/studio/lectures/${ID}/master-upload`],
   ["POST", `/studio/sources/${ID}/original`],
