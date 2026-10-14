@@ -168,6 +168,8 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm typecheck
       - run: pnpm lint
+      - name: Host-side tests of the native logic (page drafts, submit gate; not device evidence)
+        run: pnpm test
       # EXPO-CHECK-01: `pnpm doctor` ran pnpm's own built-in command, not expo-doctor, so this step checked nothing.
       # The version check compares with Expo's newest patch releases online, so it reports drift without failing the
       # build; updating the app's packages is done with a device build (B09, B14). The config checks below block.

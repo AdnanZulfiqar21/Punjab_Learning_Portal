@@ -17,6 +17,7 @@ import zipfile
 from typing import Any
 from xml.sax.saxutils import escape
 
+import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import select
 
@@ -203,3 +204,44 @@ def test_unsafe_or_broken_workbooks_are_refused(client: TestClient) -> None:
     assert reason(_excel_style(headless)) == (422, "CSV_HEADER")
     assert reason(_excel_style([HEADER[:2], [f"FX-{run}", chapter]])) == (422, "CSV_HEADER")  # columns missing
     assert reason(_excel_style([HEADER])) == (422, "EMPTY")
+
+
+def _with_part(name: str, data: bytes) -> bytes:
+    """The real template with one part replaced (OCT14-06)."""
+    src = zipfile.ZipFile(io.BytesIO(imports.xlsx_template(imports.CSV_COLUMNS)))
+    buf = io.BytesIO()
+    with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as out:
+        for info in src.infolist():
+            out.writestr(info.filename, data if info.filename == name else src.read(info.filename))
+    return buf.getvalue()
+
+
+BOMS = {"utf-8": b"", "utf-16-le": b"\xff\xfe", "utf-16-be": b"\xfe\xff"}
+
+
+@pytest.mark.parametrize("encoding", sorted(BOMS))
+@pytest.mark.parametrize(
+    "declaration",
+    [
+        '<!DOCTYPE w [<!ENTITY e "fixture-expanded">]>',  # an internal entity
+        '<!DOCTYPE w SYSTEM "http://example.invalid/fixture.dtd">',  # an external DTD (never fetched)
+        "<!DOCTYPE w>",  # any DOCTYPE at all
+    ],
+)
+def test_declarations_are_refused_in_every_encoding(encoding: str, declaration: str) -> None:
+    # OCT14-06: the refusal happens in the parser after decoding, not in a byte pattern that UTF-16 slips past.
+    label = "UTF-8" if encoding == "utf-8" else "UTF-16"
+    xml = (
+        f'<?xml version="1.0" encoding="{label}"?>{declaration}'
+        f'<workbook xmlns="{NS}" xmlns:r="{REL}"><sheets><sheet name="Q" sheetId="1" r:id="rId1"/></sheets></workbook>'
+    )
+    with pytest.raises(imports.Unprocessable) as refused:
+        imports.xlsx_table(_with_part("xl/workbook.xml", BOMS[encoding] + xml.encode(encoding)))
+    assert refused.value.extra["code_reason"] == "XLSX" and "DOCTYPE or entities" in refused.value.detail
+
+
+def test_a_workbook_saved_as_utf16_still_reads() -> None:
+    src = zipfile.ZipFile(io.BytesIO(imports.xlsx_template(imports.CSV_COLUMNS)))
+    sheet = src.read("xl/worksheets/sheet1.xml").decode("utf-8").replace('encoding="UTF-8"', 'encoding="UTF-16"')
+    header, records = imports.xlsx_table(_with_part("xl/worksheets/sheet1.xml", sheet.encode("utf-16")))
+    assert header == list(imports.CSV_COLUMNS) and records == []

@@ -41,7 +41,7 @@ async function answer(page: Page, correct: boolean) {
 }
 
 test.describe.configure({ mode: "serial" });
-test.skip(({ isMobile }) => isMobile, "Practice journeys run on desktop");
+test.skip(({ isMobile }) => isMobile && !process.env.E2E_FULL_MATRIX, "Practice journeys run on desktop");
 
 test("practice needs a plan, and the free trial is offered once", async ({ page }) => {
   const email = `e2e-trial-${Date.now()}@example.com`;
@@ -400,6 +400,7 @@ test("uploads are refused from other sites", async ({ page }) => {
 
 test("a teacher marks a submitted script and the learner sees the released marks", async ({ page, browser }) => {
   test.slow(); // a learner, a teacher, a recheck and a linked test: about 50 s on a development server
+  if (test.info().project.name === "phone") test.setTimeout(180_000); // E2E_FULL_MATRIX: ~95 s at phone width (2026-10-14)
   await newLearner(page);
   await page.goto("/practice/written?grade=11&subject=biology");
   await page.getByRole("group", { name: "Chapters" }).getByRole("checkbox").first().check();

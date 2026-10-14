@@ -242,8 +242,10 @@ class ContentImportBatch(Base):
     rows_checked: Mapped[int | None] = mapped_column(Integer)
     file_key: Mapped[str | None] = mapped_column(Text)  # the private upload, deleted once its rows are stored
     failure: Mapped[str | None] = mapped_column(Text)
-    lease_owner: Mapped[str | None] = mapped_column(String(120))
+    lease_owner: Mapped[str | None] = mapped_column(String(120))  # the current claim's token (OCT14-02)
     lease_expires_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    attempts: Mapped[int] = mapped_column(Integer, default=0, server_default="0")  # claims in this phase (OCT14-03)
+    last_error: Mapped[str | None] = mapped_column(Text)  # the last unexpected error, for operators only
 
 
 class ContentImportRow(Base):

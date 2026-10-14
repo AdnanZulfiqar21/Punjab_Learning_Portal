@@ -40,7 +40,7 @@ async function writeUnsentDraft(page: Page) {
 
 const textareas = (page: Page) => page.evaluate(() => [...document.querySelectorAll("textarea")].map((t) => t.value));
 
-test.skip(({ isMobile }) => isMobile, "Shared-device journeys run on desktop");
+test.skip(({ isMobile }) => isMobile && !process.env.E2E_FULL_MATRIX, "Shared-device journeys run on desktop");
 
 test("signing out leaves nothing of the last person in the tab, its history or the browser's storage", async ({ page }) => {
   const first = await register(page, "shared-first");

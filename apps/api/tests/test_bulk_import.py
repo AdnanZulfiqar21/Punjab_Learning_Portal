@@ -124,14 +124,17 @@ def test_a_worker_that_dies_part_way_is_resumed_without_repeating_rows(
 
     real, calls = imports._validate_row, []
 
+    class WorkerDied(BaseException):  # the process is killed: nothing in the worker can catch or record it
+        pass
+
     def dies_on_row_five(*args: Any, **kwargs: Any) -> dict[str, Any]:
         calls.append(1)
         if len(calls) == 5:  # the first chunk (rows 1-3) is stored; the worker dies inside the second
-            raise RuntimeError("fixture: the worker process died")
+            raise WorkerDied
         return real(*args, **kwargs)
 
     monkeypatch.setattr(imports, "_validate_row", dies_on_row_five)
-    with pytest.raises(RuntimeError), get_sessionmaker()() as db:
+    with pytest.raises(WorkerDied), get_sessionmaker()() as db:
         bulk_imports.work(db, "worker-that-dies")
     monkeypatch.setattr(imports, "_validate_row", real)
     stuck = _batch(client, author, b["id"])

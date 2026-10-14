@@ -9,7 +9,7 @@ const AUTH = { timeout: 20_000 };
 const newEmail = (tag: string) => `e2e-${tag}-${Date.now()}-${Math.random().toString(36).slice(2, 7)}@example.com`;
 
 test.describe.configure({ mode: "serial" });
-test.skip(({ isMobile }) => isMobile, "Two-device journeys run on desktop");
+test.skip(({ isMobile }) => isMobile && !process.env.E2E_FULL_MATRIX, "Two-device journeys run on desktop");
 
 async function register(browser: Browser, email: string): Promise<Page> {
   const page = await (await browser.newContext()).newPage();
