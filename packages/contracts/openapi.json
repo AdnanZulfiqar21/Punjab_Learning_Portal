@@ -10967,6 +10967,76 @@
         "title": "RateOut",
         "type": "object"
       },
+      "ReadingPositionIn": {
+        "properties": {
+          "block_index": {
+            "default": 0,
+            "maximum": 500.0,
+            "minimum": 0.0,
+            "title": "Block Index",
+            "type": "integer"
+          },
+          "client_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "When the learner was there (an older event is ignored)",
+            "title": "Client At"
+          },
+          "lesson_id": {
+            "format": "uuid",
+            "title": "Lesson Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "lesson_id"
+        ],
+        "title": "ReadingPositionIn",
+        "type": "object"
+      },
+      "ReadingPositionOut": {
+        "properties": {
+          "block_index": {
+            "title": "Block Index",
+            "type": "integer"
+          },
+          "chapter_id": {
+            "format": "uuid",
+            "title": "Chapter Id",
+            "type": "string"
+          },
+          "client_at": {
+            "format": "date-time",
+            "title": "Client At",
+            "type": "string"
+          },
+          "lesson_id": {
+            "format": "uuid",
+            "title": "Lesson Id",
+            "type": "string"
+          },
+          "lesson_title": {
+            "title": "Lesson Title",
+            "type": "string"
+          }
+        },
+        "required": [
+          "chapter_id",
+          "lesson_id",
+          "lesson_title",
+          "block_index",
+          "client_at"
+        ],
+        "title": "ReadingPositionOut",
+        "type": "object"
+      },
       "RebaseIn": {
         "properties": {
           "reason": {
@@ -21225,6 +21295,57 @@
         ]
       }
     },
+    "/v1/me/chapters/{chapter_id}/reading-position": {
+      "get": {
+        "operationId": "reading_position_v1_me_chapters__chapter_id__reading_position_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "chapter_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Chapter Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/ReadingPositionOut"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "title": "Response Reading Position V1 Me Chapters  Chapter Id  Reading Position Get"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Where you last were in this chapter, if its lesson is still published",
+        "tags": [
+          "lessons"
+        ]
+      }
+    },
     "/v1/me/consents": {
       "post": {
         "operationId": "accept_consent_v1_me_consents_post",
@@ -21708,6 +21829,25 @@
               "title": "Item Id",
               "type": "string"
             }
+          },
+          {
+            "description": "When the learner acted (a queued offline event); an older event than the last one is ignored",
+            "in": "query",
+            "name": "client_at",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "format": "date-time",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "When the learner acted (a queued offline event); an older event than the last one is ignored",
+              "title": "Client At"
+            }
           }
         ],
         "responses": {
@@ -21741,6 +21881,25 @@
               "format": "uuid",
               "title": "Item Id",
               "type": "string"
+            }
+          },
+          {
+            "description": "When the learner acted (a queued offline event); an older event than the last one is ignored",
+            "in": "query",
+            "name": "client_at",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "format": "date-time",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "When the learner acted (a queued offline event); an older event than the last one is ignored",
+              "title": "Client At"
             }
           }
         ],
@@ -22360,6 +22519,47 @@
         "summary": "Register this device for push notifications",
         "tags": [
           "notifications"
+        ]
+      }
+    },
+    "/v1/me/reading-position": {
+      "put": {
+        "operationId": "save_reading_position_v1_me_reading_position_put",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReadingPositionIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReadingPositionOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Save where you are in a chapter (P11.S2.T1); an older event never moves it back",
+        "tags": [
+          "lessons"
         ]
       }
     },

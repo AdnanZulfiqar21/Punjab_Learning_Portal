@@ -3,10 +3,11 @@ import Link from "next/link";
 import { cookies, headers } from "next/headers";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
-import type { FavouriteTopic, Lesson, StudyNote, TopicNode } from "@portal/contracts";
+import type { FavouriteTopic, Lesson, ReadingPosition, StudyNote, TopicNode } from "@portal/contracts";
 import { setLessonCompleted } from "@/app/actions/lessons";
 import { LessonBlocks } from "@/components/lesson-blocks";
 import { LessonStartBeacon } from "@/components/lesson-start-beacon";
+import { ReadingTracker } from "@/components/reading-tracker";
 import { FavouriteButton, LessonNote, SaveFormulaButton } from "@/components/study-tools";
 import { getChapter, getLessons } from "@/lib/api";
 import { DISPLAY_COOKIE, parseDisplay } from "@/lib/display";
@@ -165,6 +166,11 @@ async function Lessons({ chapterId, topics, lang }: { chapterId: string; topics:
   const token = await sessionToken();
   const doneRes = token && lessons.some((l) => !l.locked) ? await api<string[]>(`/v1/me/chapters/${encodeURIComponent(chapterId)}/completed-lessons`, { token }) : null;
   const done = new Set(doneRes?.ok ? doneRes.data : []);
+  // LESSON-PROGRESS-01: the newest place this learner reached in the chapter, from any device.
+  const placeRes = token && lessons.some((l) => !l.locked)
+    ? await api<ReadingPosition | null>(`/v1/me/chapters/${encodeURIComponent(chapterId)}/reading-position`, { token })
+    : null;
+  const place = placeRes?.ok && placeRes.data && lessons.some((l) => l.id === placeRes.data!.lesson_id) ? placeRes.data : null;
   // STUDY-TOOLS-01: each readable lesson's private note (with its revision, so edits from stale copies are caught).
   const study = token ? (await features(token)).study_tools === true : false; // ROLLOUT-01
   const readable = token && study ? lessons.filter((l) => !l.locked && l.body) : [];
@@ -197,6 +203,14 @@ async function Lessons({ chapterId, topics, lang }: { chapterId: string; topics:
           </nav>
         )}
       </div>
+      {place && place.lesson_id !== lessons[0]?.id && (
+        <p className="rounded-lg bg-surface-muted px-3 py-2 text-sm">
+          <a href={`#lesson-${place.lesson_id}`} className="font-medium text-accent underline underline-offset-2">
+            Continue where you left off: {place.lesson_title}
+          </a>
+        </p>
+      )}
+      {token && <ReadingTracker lessonIds={lessons.filter((l) => !l.locked && l.body).map((l) => l.id)} />}
       {lessons.length === 0 ? (
         <p className="text-muted">
           No reviewed lessons are published for this chapter yet. Lessons appear here only after an independent subject

@@ -36,7 +36,8 @@ _EXCLUDED = ("hash", "token", "secret", "installation_ref", "evidence", "pepper"
 EXPORTED_TABLES = frozenset(
     {
         "allowance_event", "analytics_event", "attempt", "consent_record", "entitlement", "export_job",
-        "lesson_completion", "mistake_entry", "saved_formula", "study_note", "topic_favourite",
+        "lesson_completion", "lesson_event_clock", "mistake_entry", "reading_position", "saved_formula", "study_note",
+        "topic_favourite",
         "mock_accommodation", "notification", "notification_preference", "practice_form", "student_profile",
         "study_settings", "support_assisted_access", "support_ticket", "trial_claim", "trial_device_use",
         "trial_exception", "trial_grant", "user_session", "written_attempt", "written_form", "written_notice",
@@ -75,6 +76,7 @@ def export(db: Session, user: AppUser) -> tuple[bytes, str]:
     from portal_api.modules.assessment.notebook import MistakeEntry
     from portal_api.modules.assessment.sessions import MockAccommodation, held_forms
     from portal_api.modules.content.completion import LessonCompletion
+    from portal_api.modules.content.progress import LessonEventClock, ReadingPosition
     from portal_api.modules.content.study import SavedFormula, StudyNote, TopicFavourite
     from portal_api.modules.exports.service import ExportJob
     from portal_api.modules.identity.models import ConsentRecord, StudentProfile
@@ -133,6 +135,9 @@ def export(db: Session, user: AppUser) -> tuple[bytes, str]:
             "mock_accommodations": _rows(db, MockAccommodation, MockAccommodation.user_id == uid),
         },
         "lesson_completions": _rows(db, LessonCompletion, LessonCompletion.user_id == uid),
+        # LESSON-PROGRESS-01: where the learner last was in each chapter, and when each lesson's progress last changed
+        "reading_positions": _rows(db, ReadingPosition, ReadingPosition.user_id == uid),
+        "lesson_progress_times": _rows(db, LessonEventClock, LessonEventClock.user_id == uid),
         "study_notes": _rows(db, StudyNote, StudyNote.user_id == uid),  # STUDY-TOOLS-01
         "topic_favourites": _rows(db, TopicFavourite, TopicFavourite.user_id == uid),
         "saved_formulas": _rows(db, SavedFormula, SavedFormula.user_id == uid),

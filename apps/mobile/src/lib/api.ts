@@ -10,6 +10,7 @@ import type {
   NotebookEntry,
   ProgressReport,
   Dashboard,
+  ReadingPosition,
   StudyNote,
   StudyNoteListed,
   FavouriteTopic,
@@ -264,8 +265,16 @@ export const api = {
   // LESSON-DONE-01 and STUDY-TOOLS-01: completion, private notes, favourite topics and saved formulas.
   completedLessons: (token: string, chapterId: string, signal?: AbortSignal) =>
     request<string[]>(`/v1/me/chapters/${encodeURIComponent(chapterId)}/completed-lessons`, { token, signal }),
-  setCompleted: (token: string, lessonId: string, done: boolean) =>
-    request<void>(`/v1/me/lessons/${encodeURIComponent(lessonId)}/complete`, { method: done ? "POST" : "DELETE", token }),
+  // LESSON-PROGRESS-01: a queued (offline) change carries when the learner acted, so a late one never reverses a newer one.
+  setCompleted: (token: string, lessonId: string, done: boolean, clientAt?: string) =>
+    request<void>(
+      `/v1/me/lessons/${encodeURIComponent(lessonId)}/complete${clientAt ? `?client_at=${encodeURIComponent(clientAt)}` : ""}`,
+      { method: done ? "POST" : "DELETE", token },
+    ),
+  readingPosition: (token: string, chapterId: string, signal?: AbortSignal) =>
+    request<ReadingPosition | null>(`/v1/me/chapters/${encodeURIComponent(chapterId)}/reading-position`, { token, signal }),
+  saveReadingPosition: (token: string, lessonId: string) =>
+    request<ReadingPosition>("/v1/me/reading-position", { method: "PUT", token, body: { lesson_id: lessonId, block_index: 0 } }),
   note: (token: string, lessonId: string, signal?: AbortSignal) =>
     request<StudyNote>(`/v1/me/lessons/${encodeURIComponent(lessonId)}/note`, { token, signal }),
   saveNote: (token: string, lessonId: string, text: string, baseRevision: number) =>

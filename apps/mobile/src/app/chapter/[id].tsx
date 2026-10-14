@@ -127,12 +127,17 @@ function LessonList({ chapterId, token }: { chapterId: string; token: string | n
   const feats = useRequest((signal) => (token ? api.features(token, signal) : Promise.resolve({} as Record<string, boolean>)), [token]);
   const study = feats.state.status === "success" && feats.state.data.study_tools === true; // ROLLOUT-01
   const isDone = (id: string) => toggled[id] ?? (done.state.status === "success" && done.state.data.includes(id));
+  // LESSON-PROGRESS-01: where this learner last was in the chapter, from any device (the newest place wins).
+  const lastPlace = useRequest((signal) => (token ? api.readingPosition(token, chapterId, signal) : Promise.resolve(null)), [chapterId, token]);
   return (
     <View style={{ gap: Space.sm }}>
       <T variant="heading" accessibilityRole="header">
         Lessons
       </T>
       <Choices label="Language" options={LANGUAGES} selected={[language]} onToggle={setLanguage} />
+      {lastPlace.state.status === "success" && lastPlace.state.data ? (
+        <T variant="small">You were last reading: {lastPlace.state.data.lesson_title}</T>
+      ) : null}
       {state.status === "loading" && <T variant="muted">Loading lessons…</T>}
       {state.status === "error" && (
         <Pressable accessibilityRole="button" onPress={retry}>
