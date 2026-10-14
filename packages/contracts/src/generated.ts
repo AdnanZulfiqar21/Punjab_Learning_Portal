@@ -232,7 +232,8 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        get?: never;
+        /** Staff grants (scholarship, promotional, pilot), newest first, with written units used (MFA) */
+        get: operations["list_grants_v1_admin_entitlements_get"];
         put?: never;
         /** Grant scholarship, promotional or pilot access (audited, MFA) */
         post: operations["grant_v1_admin_entitlements_post"];
@@ -6727,6 +6728,60 @@ export interface components {
             /** Written Units */
             written_units: number;
         };
+        /**
+         * GrantOut
+         * @description P04.S2.T3 (ACCESS-GRANTS-01): a staff grant as the granter manages it.
+         */
+        GrantOut: {
+            /**
+             * Email
+             * @description The learner's account email
+             */
+            email: string;
+            /**
+             * Ends At
+             * Format: date-time
+             */
+            ends_at: string;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Product Code */
+            product_code: string;
+            /** Reason */
+            reason: string;
+            /** Revoke Reason */
+            revoke_reason: string | null;
+            /**
+             * Source
+             * @enum {string}
+             */
+            source: "scholarship" | "promotional" | "pilot";
+            /**
+             * Starts At
+             * Format: date-time
+             */
+            starts_at: string;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "active" | "revoked" | "refunded";
+            /**
+             * Units Consumed
+             * @description Written units used by marked questions
+             */
+            units_consumed: number;
+            /**
+             * Units Held
+             * @description Written units reserved or accepted for tests not yet marked
+             */
+            units_held: number;
+            /** Written Units */
+            written_units: number;
+        };
         /** HTTPValidationError */
         HTTPValidationError: {
             /** Detail */
@@ -12054,6 +12109,40 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["TermsState"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_grants_v1_admin_entitlements_get: {
+        parameters: {
+            query?: {
+                /** @description Only grants active now */
+                current?: boolean;
+                source?: ("scholarship" | "promotional" | "pilot") | null;
+                limit?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GrantOut"][];
                 };
             };
             /** @description Validation Error */

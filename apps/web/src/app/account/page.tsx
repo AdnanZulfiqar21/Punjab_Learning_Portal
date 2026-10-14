@@ -128,6 +128,11 @@ async function Account() {
               Trial decisions
             </Link>
           )}
+          {me.roles.some((r) => r === "owner_admin" || r === "finance") && (
+            <Link href="/admin/access" className="inline-block text-sm text-accent underline-offset-2 hover:underline">
+              Access grants
+            </Link>
+          )}
           {me.roles.includes("owner_admin") && (
             <Link href="/admin/staff" className="inline-block text-sm text-accent underline-offset-2 hover:underline">
               Staff
