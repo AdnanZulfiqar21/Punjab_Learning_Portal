@@ -1,19 +1,8 @@
 // Expo web target (development preview only): pages are sent straight from the chosen file and never kept in the
 // browser. The installed app keeps them in its private storage until they upload (CAPTURE-01).
-import type { PageDraft, PageSource } from "./page-drafts";
+import type { PageDraft, PageSource } from "@/lib/page-drafts-core";
 
-export type { PageDraft, PageSource };
-export const LOW_STORAGE_BYTES = 50 * 1024 * 1024;
-
-export class StorageLow extends Error {
-  constructor(readonly freeBytes: number | null) {
-    super("Your phone is nearly full.");
-  }
-}
-
-export function freeSpace(): number | null {
-  return null;
-}
+export { LOW_STORAGE_BYTES, StorageLow, type PageDraft, type PageSource } from "@/lib/page-drafts-core";
 
 export async function keepPage(_owner: string, _attemptId: string, source: PageSource): Promise<PageDraft> {
   return {
@@ -34,9 +23,7 @@ export function notePageError(): void {}
 
 export function removePage(): void {}
 
-export function clearAttempt(): number {
-  return 0;
-}
+export function clearAttempt(): void {}
 
 export async function clearPageDrafts(): Promise<void> {}
 

@@ -1,10 +1,11 @@
 // Native written-script runner (W03/W04): write on paper, photograph each page, map pages to answer slots, submit once
 // for a receipt. States stay honest: on this phone but not sent yet (kept safely until it uploads; CAPTURE-01),
 // uploaded but NOT submitted, and submitted (sealed with a receipt). Nothing is marked until it is submitted; marks
-// come from teachers.
+// come from teachers. Submitting is refused while a page is unsent or anything is still moving (OCT14-01); the rules
+// are in lib/written-pages.ts and tested on the host.
 import * as ImagePicker from "expo-image-picker";
 import { Stack, useLocalSearchParams } from "expo-router";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState, useSyncExternalStore } from "react";
 import { Image } from "expo-image";
 import { Linking, Pressable, ScrollView, View } from "react-native";
 import type { WrittenAttempt, WrittenPage } from "@portal/contracts";
@@ -19,25 +20,12 @@ import { useTheme } from "@/hooks/use-theme";
 import { api, ApiError, writtenPageImage } from "@/lib/api";
 import { useAuth } from "@/lib/auth";
 import { TIME_ZONE } from "@/lib/dates";
-import {
-  clearAttempt,
-  keepPage,
-  listPages,
-  notePageError,
-  pickPdf,
-  removePage,
-  StorageLow,
-  type PageDraft,
-  type PageSource,
-} from "@/lib/page-drafts";
+import { clearAttempt, keepPage, listPages, notePageError, pickPdf, removePage } from "@/lib/page-drafts";
+import { WrittenPages } from "@/lib/written-pages";
 
 type Slot = { pages: string[]; unanswered: boolean };
-// A page on its way: kept on the phone (or, when the phone is full, sent straight from where it was chosen).
-type Pending = PageDraft & { status: "sending" | "failed"; kept: boolean };
 const when = (iso: string) => new Date(iso).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short", timeZone: TIME_ZONE });
 const newKey = () => `${Date.now().toString(36)}${Math.random().toString(36).slice(2, 12)}`;
-const ACCEPTED = new Set(["image/jpeg", "image/png", "application/pdf"]);
-const MAX_BYTES: Record<string, number> = { "application/pdf": 40 * 1024 * 1024, "image/jpeg": 15 * 1024 * 1024, "image/png": 15 * 1024 * 1024 };
 const mb = (n: number) => `${Math.max(1, Math.round(n / (1024 * 1024)))} MB`;
 
 export default function WrittenScreen() {
@@ -60,131 +48,107 @@ function Runner({ initial, token, owner, reload }: { initial: WrittenAttempt; to
   const c = useTheme();
   const [a, setA] = useState(initial);
   const open = a.status === "active";
-  // CAPTURE-01: pages still on this phone from earlier (the app was closed, or there was no signal).
-  const [pending, setPending] = useState<Pending[]>(() =>
-    open ? listPages(owner, initial.id).map((d) => ({ ...d, status: "failed" as const, kept: true, error: d.error ?? "Not sent yet." })) : [],
+  const [pages] = useState(
+    () =>
+      new WrittenPages(
+        {
+          keepPage: (source) => keepPage(owner, initial.id, source),
+          removePage: (pageId) => removePage(owner, initial.id, pageId),
+          notePageError: (draft, msg) => notePageError(owner, initial.id, draft, msg),
+          upload: async (draft) => {
+            const blob = await (await fetch(draft.uri)).blob();
+            await api.uploadWritten(token, initial.id, blob); // SCAN-QUALITY-01: its warnings are shown with each page
+            try {
+              setA(await api.writtenAttempt(token, initial.id));
+            } catch {
+              /* the page is uploaded; the list catches up on the next change */
+            }
+          },
+          seal: (key, revision) => api.sealWritten(token, initial.id, key, revision),
+          message: (e, fallback) => (e instanceof ApiError ? e.message : fallback),
+          newKey,
+        },
+        initial.status === "active" ? listPages(owner, initial.id) : [],
+      ),
   );
-  const [storage, setStorage] = useState<number | null | undefined>(undefined); // free bytes when the phone was too full
+  useSyncExternalStore(
+    useCallback((listener) => pages.subscribe(listener), [pages]),
+    () => pages.version,
+  );
+  // CAPTURE-01, OCT14-01: pages left on this phone for a test that has closed can't be submitted any more. They are
+  // kept until the learner removes them (or signs out), never deleted behind their back.
+  const [leftover, setLeftover] = useState(() => (initial.status === "active" ? [] : listPages(owner, initial.id)));
   const [cameraDenied, setCameraDenied] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
-  const [sealing, setSealing] = useState(false);
-  const sealKey = useRef(newKey()); // one key for this submission; a retry returns the same receipt
   const slots = (a.manifest as { slots?: Record<string, Slot> }).slots ?? {};
 
-  // Send what is still on the phone as soon as the test is open again; once it isn't, those pages can't be used.
-  const resent = useRef(false);
+  // Send what is still on the phone as soon as the test is open again.
   useEffect(() => {
-    if (!open) {
-      clearAttempt(owner, a.id);
-      return;
-    }
-    if (resent.current) return;
-    resent.current = true;
+    if (!open) return;
     void (async () => {
-      for (const d of listPages(owner, a.id)) await send(d, true);
+      for (const d of [...pages.pending]) await pages.resend(d.id);
     })();
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- once per opened test
-  }, [open]);
+  }, [open, pages]);
 
   async function pick(source: "camera" | "library" | "pdf") {
+    if (!pages.canCapture()) return;
     setError(null);
     setCameraDenied(false);
-    if (source === "pdf") {
-      try {
-        const doc = await pickPdf();
-        if (doc) await capture(doc);
-      } catch (e) {
-        setError(e instanceof Error ? e.message : "Couldn't open your files.");
-      }
-      return;
-    }
-    const options: ImagePicker.ImagePickerOptions = {
-      mediaTypes: ["images"],
-      quality: 0.9,
-      preferredAssetRepresentationMode: ImagePicker.UIImagePickerPreferredAssetRepresentationMode.Compatible,
-    };
-    if (source === "camera") {
-      const perm = await ImagePicker.requestCameraPermissionsAsync();
-      if (!perm.granted) {
-        setCameraDenied(true); // shown with a way to the settings, and the other ways to add pages
+    await pages.track(async () => {
+      if (source === "pdf") {
+        try {
+          const doc = await pickPdf();
+          if (doc) await pages.capture(doc);
+        } catch (e) {
+          setError(e instanceof Error ? e.message : "Couldn't open your files.");
+        }
         return;
       }
-    }
-    const res =
-      source === "camera"
-        ? await ImagePicker.launchCameraAsync(options)
-        : await ImagePicker.launchImageLibraryAsync({ ...options, allowsMultipleSelection: true, selectionLimit: 10 });
-    if (res.canceled) return;
-    for (const asset of res.assets) {
-      await capture({ uri: asset.uri, name: asset.fileName ?? "photo", mimeType: asset.mimeType ?? "image/jpeg", size: asset.fileSize });
-    }
-  }
-
-  /** Keep the page on the phone first, then send it. A page that can't be kept is still sent, with a warning. */
-  async function capture(source: PageSource) {
-    if (!ACCEPTED.has(source.mimeType)) {
-      setError(`${source.name}: only JPEG, PNG or PDF files are accepted.`);
-      return;
-    }
-    const limit = MAX_BYTES[source.mimeType];
-    if (source.size && source.size > limit) {
-      setError(`${source.name} is ${mb(source.size)}; the limit is ${mb(limit)}. Take a smaller photo or split the PDF.`);
-      return;
-    }
-    let draft: PageDraft;
-    let kept = true;
-    try {
-      draft = await keepPage(owner, a.id, source);
-      setStorage(undefined);
-    } catch (e) {
-      if (!(e instanceof StorageLow)) setError("This page couldn't be kept on your phone, so it is being sent straight away.");
-      else setStorage(e.freeBytes);
-      kept = false;
-      draft = { id: newKey(), name: source.name, mimeType: source.mimeType, bytes: source.size ?? 0, savedAt: new Date().toISOString(), uri: source.uri };
-    }
-    await send(draft, kept);
-  }
-
-  async function send(draft: PageDraft, kept: boolean) {
-    setPending((list) => [...list.filter((x) => x.id !== draft.id), { ...draft, status: "sending", kept, error: undefined }]);
-    try {
-      const blob = await (await fetch(draft.uri)).blob();
-      await api.uploadWritten(token, a.id, blob); // SCAN-QUALITY-01: its warnings are shown with each page below
-      if (kept) removePage(owner, a.id, draft.id); // the server has it now
-      setPending((list) => list.filter((x) => x.id !== draft.id));
-      setA(await api.writtenAttempt(token, a.id));
-    } catch (e) {
-      const msg = e instanceof ApiError ? e.message : "That didn't upload. Check your connection.";
-      if (kept) notePageError(owner, a.id, draft, msg);
-      setPending((list) => list.map((x) => (x.id === draft.id ? { ...x, status: "failed", error: msg } : x)));
-    }
-  }
-
-  function discard(d: Pending) {
-    if (d.kept) removePage(owner, a.id, d.id);
-    setPending((list) => list.filter((x) => x.id !== d.id));
+      const options: ImagePicker.ImagePickerOptions = {
+        mediaTypes: ["images"],
+        quality: 0.9,
+        preferredAssetRepresentationMode: ImagePicker.UIImagePickerPreferredAssetRepresentationMode.Compatible,
+      };
+      if (source === "camera") {
+        const perm = await ImagePicker.requestCameraPermissionsAsync();
+        if (!perm.granted) {
+          setCameraDenied(true); // shown with a way to the settings, and the other ways to add pages
+          return;
+        }
+      }
+      const res =
+        source === "camera"
+          ? await ImagePicker.launchCameraAsync(options)
+          : await ImagePicker.launchImageLibraryAsync({ ...options, allowsMultipleSelection: true, selectionLimit: 10 });
+      if (res.canceled) return;
+      for (const asset of res.assets) {
+        await pages.capture({ uri: asset.uri, name: asset.fileName ?? "photo", mimeType: asset.mimeType ?? "image/jpeg", size: asset.fileSize });
+      }
+    });
   }
 
   async function save(next: Record<string, Slot>) {
     setSaving(true);
     setError(null);
-    try {
-      setA(await api.saveMapping(token, a.id, a.manifest_revision, next));
-    } catch (e) {
-      if (e instanceof ApiError && e.kind === "conflict") {
-        setError("Your mapping changed on another device. The latest version has been loaded.");
-        setA(await api.writtenAttempt(token, a.id));
-      } else setError(e instanceof ApiError ? e.message : "Couldn't save the mapping.");
-    } finally {
-      setSaving(false);
-    }
+    await pages.track(async () => {
+      try {
+        setA(await api.saveMapping(token, a.id, a.manifest_revision, next));
+      } catch (e) {
+        if (e instanceof ApiError && e.kind === "conflict") {
+          setError("Your mapping changed on another device. The latest version has been loaded.");
+          setA(await api.writtenAttempt(token, a.id));
+        } else setError(e instanceof ApiError ? e.message : "Couldn't save the mapping.");
+      } finally {
+        setSaving(false);
+      }
+    });
   }
 
   function toggle(slot: string, page: string) {
     const cur = slots[slot] ?? { pages: [], unanswered: false };
-    const pages = cur.pages.includes(page) ? cur.pages.filter((p) => p !== page) : [...cur.pages, page];
-    void save({ ...slots, [slot]: { pages, unanswered: pages.length ? false : cur.unanswered } });
+    const next = cur.pages.includes(page) ? cur.pages.filter((p) => p !== page) : [...cur.pages, page];
+    void save({ ...slots, [slot]: { pages: next, unanswered: next.length ? false : cur.unanswered } });
   }
 
   function unanswered(slot: string) {
@@ -193,19 +157,16 @@ function Runner({ initial, token, owner, reload }: { initial: WrittenAttempt; to
   }
 
   async function seal() {
-    setSealing(true);
     setError(null);
-    try {
-      await api.sealWritten(token, a.id, sealKey.current, a.manifest_revision);
-      reload();
-    } catch (e) {
-      setError(e instanceof ApiError ? e.message : "Couldn't submit. Your pages are still uploaded; try again.");
-      setSealing(false);
-    }
+    const out = await pages.seal(mapped, allSlots.length, a.manifest_revision); // checks the gate again, now
+    if (out.ok) reload();
+    else setError(out.reason);
   }
 
   const allSlots = a.items.flatMap((it) => it.slots);
   const mapped = allSlots.filter((s) => (slots[s.key]?.pages.length ?? 0) > 0 || slots[s.key]?.unanswered).length;
+  const blocked = pages.blocker(mapped, allSlots.length);
+  const pending = pages.pending;
   return (
     <ScrollView style={{ backgroundColor: c.background }} contentContainerStyle={{ padding: Space.lg, gap: Space.lg }}>
       <Stack.Screen options={{ title: a.linked_from ? "New practice test" : "Written test" }} />
@@ -233,6 +194,23 @@ function Runner({ initial, token, owner, reload }: { initial: WrittenAttempt; to
         </Notice>
       )}
       {a.status === "sealed" && <WrittenResultView attemptId={a.id} token={token} />}
+      {!open && leftover.length > 0 && (
+        <View style={{ gap: Space.sm }}>
+          <Notice tone="warn" title="Pages on this phone that were never sent">
+            {leftover.length} page{leftover.length === 1 ? "" : "s"} you added to this test stayed on this phone and never reached us, so
+            {leftover.length === 1 ? " it isn't" : " they aren't"} part of what was received. This test is closed, so they can&apos;t be added
+            now. They stay on this phone until you remove them or sign out.
+          </Notice>
+          <Button
+            variant="secondary"
+            label="Remove them from this phone"
+            onPress={() => {
+              clearAttempt(owner, a.id);
+              setLeftover([]);
+            }}
+          />
+        </View>
+      )}
 
       <T variant="heading" accessibilityRole="header">
         Questions
@@ -261,10 +239,15 @@ function Runner({ initial, token, owner, reload }: { initial: WrittenAttempt; to
             Your pages
           </T>
           <View style={{ flexDirection: "row", gap: Space.sm, flexWrap: "wrap" }}>
-            <Button label="Take a photo" onPress={() => void pick("camera")} />
-            <Button variant="secondary" label="Choose photos" onPress={() => void pick("library")} />
-            <Button variant="secondary" label="Choose a PDF" onPress={() => void pick("pdf")} />
+            <Button label="Take a photo" disabled={pages.sealing} onPress={() => void pick("camera")} />
+            <Button variant="secondary" label="Choose photos" disabled={pages.sealing} onPress={() => void pick("library")} />
+            <Button variant="secondary" label="Choose a PDF" disabled={pages.sealing} onPress={() => void pick("pdf")} />
           </View>
+          {pages.notice && (
+            <T variant="small" accessibilityRole="alert" style={{ color: c.danger }}>
+              {pages.notice}
+            </T>
+          )}
           {cameraDenied && (
             <View style={{ gap: Space.sm }}>
               <Notice tone="warn" title="Camera access is off">
@@ -273,9 +256,9 @@ function Runner({ initial, token, owner, reload }: { initial: WrittenAttempt; to
               <Button variant="secondary" label="Open settings" onPress={() => void Linking.openSettings()} />
             </View>
           )}
-          {storage !== undefined && (
+          {pages.lowStorage !== undefined && (
             <Notice tone="warn" title="Your phone is nearly full">
-              {storage !== null ? `About ${mb(storage)} is free. ` : ""}New pages are being sent straight away but can&apos;t be kept on your
+              {pages.lowStorage !== null ? `About ${mb(pages.lowStorage)} is free. ` : ""}New pages are being sent straight away but can&apos;t be kept on your
               phone, so if one doesn&apos;t upload you&apos;ll need to add it again. Free up some space to keep pages safely until they upload.
             </Notice>
           )}
@@ -290,8 +273,8 @@ function Runner({ initial, token, owner, reload }: { initial: WrittenAttempt; to
                   </T>
                   {d.status === "failed" && (
                     <View style={{ flexDirection: "row", flexWrap: "wrap", gap: Space.xs }}>
-                      <Button variant="secondary" label="Send again" onPress={() => void send(d, d.kept)} />
-                      <Button variant="secondary" label="Remove" onPress={() => discard(d)} />
+                      <Button variant="secondary" label="Send again" onPress={() => void pages.resend(d.id)} />
+                      <Button variant="secondary" label="Remove" onPress={() => pages.discard(d.id)} />
                     </View>
                   )}
                 </View>
@@ -309,7 +292,8 @@ function Runner({ initial, token, owner, reload }: { initial: WrittenAttempt; to
                   page={p}
                   number={i + 1}
                   token={token}
-                  editable={a.status === "active"}
+                  editable={a.status === "active" && !pages.sealing}
+                  track={(work) => pages.track(work)}
                   onChange={(n) => setA((cur) => ({ ...cur, pages: cur.pages.map((x) => (x.id === n.id ? n : x)) }))}
                 />
               ))}
@@ -376,13 +360,11 @@ function Runner({ initial, token, owner, reload }: { initial: WrittenAttempt; to
             {saving ? "Saving…" : `Saved · revision ${a.manifest_revision}`} · {mapped} of {allSlots.length} parts mapped
           </T>
           <FormError message={error} />
-          <Button
-            label="Submit for marking"
-            onPress={() => void seal()}
-            busy={sealing}
-            disabled={saving || mapped < allSlots.length}
-          />
-          <T variant="small">Every part needs a page or &quot;I didn&apos;t answer this&quot;. You can submit once; after that nothing changes.</T>
+          <Button label="Submit for marking" onPress={() => void seal()} busy={pages.sealing} disabled={blocked !== null} />
+          <T variant="small">
+            {blocked && !pages.sealing ? `${blocked} ` : ""}Every part needs a page or &quot;I didn&apos;t answer this&quot;, and every page on
+            this phone must be sent or removed. You can submit once; after that nothing changes.
+          </T>
         </>
       )}
       {!open && <FormError message={error} />}
@@ -398,6 +380,7 @@ function PageCard({
   number,
   token,
   editable,
+  track,
   onChange,
 }: {
   attemptId: string;
@@ -405,6 +388,7 @@ function PageCard({
   number: number;
   token: string;
   editable: boolean;
+  track: <R>(work: () => Promise<R>) => Promise<R>; // counted as work in flight, so submitting waits for it
   onChange: (p: WrittenPage) => void;
 }) {
   const c = useTheme();
@@ -414,13 +398,15 @@ function PageCard({
   async function apply(next: { rotate: number; enhance: boolean }) {
     setBusy(true);
     setError(null);
-    try {
-      onChange(await api.transformPage(token, attemptId, page.id, { rotate: next.rotate, crop: t.crop ?? null, enhance: next.enhance }));
-    } catch (e) {
-      setError(e instanceof ApiError ? e.message : "Couldn't change this page.");
-    } finally {
-      setBusy(false);
-    }
+    await track(async () => {
+      try {
+        onChange(await api.transformPage(token, attemptId, page.id, { rotate: next.rotate, crop: t.crop ?? null, enhance: next.enhance }));
+      } catch (e) {
+        setError(e instanceof ApiError ? e.message : "Couldn't change this page.");
+      } finally {
+        setBusy(false);
+      }
+    });
   }
   return (
     <View style={{ gap: Space.xs, borderWidth: 1, borderColor: c.border, borderRadius: Radius.sm, padding: Space.sm }}>
