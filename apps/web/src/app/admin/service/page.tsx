@@ -312,6 +312,9 @@ async function ReviewStaffing() {
                     {r.demand.admissible_if_rechecks_counted !== null && r.demand.admissible_if_rechecks_counted !== undefined
                       ? ` If expected rechecks were counted before admitting new tests, there would be room for ${r.demand.admissible_if_rechecks_counted} (an owner decision, WA-D08).`
                       : ""}
+                    {r.demand.measured_minutes_per_script !== null && r.demand.measured_minutes_per_script !== undefined
+                      ? ` Marking takes a median of ${r.demand.measured_minutes_per_script} minutes per script from taking it to releasing it (${r.demand.timed_scripts} timed, breaks included)${s ? `; ${s.minutes_per_script} are entered for planning` : ""}.`
+                      : ""}
                   </p>
                 )}
                 <StaffingForm row={r} label={label} />

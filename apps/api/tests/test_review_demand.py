@@ -98,3 +98,65 @@ def test_operators_see_demand_with_the_backlog(client: TestClient) -> None:
     operator = _staff(client, ["platform_operator"], mfa=True)
     rows = client.get("/v1/ops/written-backlog", headers=operator.headers).json()
     assert rows and all("demand" in r and "recheck_rate" in r["demand"] for r in rows)
+
+
+def test_marking_time_is_measured_from_taking_a_script_to_releasing_it(
+    client: TestClient, published_written: dict[str, Any]
+) -> None:
+    # MARKING-TIME-01: the median over first markings with a recorded start, once ten were timed.
+    attempt = uuid.UUID(_start(client, _learner(client), published_written["chapter"])["id"])
+    subject = f"fixture-timing-{uuid.uuid4().hex[:8]}"
+    try:
+        with get_sessionmaker()() as db:
+            now = db.scalar(select(func.now()))
+            assert now is not None
+            seq = db.scalar(select(func.coalesce(func.max(review.WrittenReviewCase.opened_seq), 0))) or 0
+            for i, minutes in enumerate(range(10, 20)):  # 10..19 minutes: the median is 14.5
+                released = now - timedelta(days=2, hours=i)
+                db.add(
+                    review.WrittenReviewCase(
+                        attempt_id=attempt,
+                        case_kind="initial",
+                        opened_seq=seq + i + 1,
+                        grade_number=11,
+                        subject_code=subject,
+                        status="released",
+                        opened_at=released - timedelta(hours=5),
+                        marking_started_at=released - timedelta(minutes=minutes),
+                        released_at=released,
+                    )
+                )
+                if i == 8:
+                    db.commit()
+                    nine = review.review_demand(db, 11, subject, None)
+                    assert nine["timed_scripts"] == 9 and nine["measured_minutes_per_script"] is None
+            db.commit()
+            ten = review.review_demand(db, 11, subject, None)
+        assert ten["timed_scripts"] == 10 and ten["measured_minutes_per_script"] == 14.5
+    finally:
+        with get_sessionmaker()() as db:
+            db.execute(delete(review.WrittenReviewCase).where(review.WrittenReviewCase.subject_code == subject))
+            db.commit()
+
+
+def test_taking_a_case_records_when_marking_started_and_a_renewal_keeps_it(
+    client: TestClient, published_written: dict[str, Any]
+) -> None:
+    from tests.test_written_marking import _case_for, _reviewer, _sealed_script
+
+    _, a = _sealed_script(client, published_written["chapter"])
+    reviewer = _reviewer(client)
+    case = _case_for(client, reviewer, a["id"])
+    url = f"/v1/studio/written/cases/{case['id']}/lease"
+    assert client.post(url, headers=reviewer.headers).status_code == 200
+
+    def started() -> Any:
+        with get_sessionmaker()() as db:
+            c = db.get(review.WrittenReviewCase, uuid.UUID(case["id"]))
+            assert c is not None
+            return c.marking_started_at
+
+    first = started()
+    assert first is not None
+    assert client.post(url, headers=reviewer.headers).status_code == 200  # renewing keeps the start
+    assert started() == first

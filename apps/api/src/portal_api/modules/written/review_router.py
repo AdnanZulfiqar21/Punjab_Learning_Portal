@@ -948,6 +948,12 @@ class DemandOut(BaseModel):
     admissible_if_rechecks_counted: int | None = Field(
         description="New scripts that would fit if expected rechecks were also subtracted (a WA-D08 choice)"
     )
+    timed_scripts: int = Field(
+        default=0, description="First markings in 90 days with a recorded start (MARKING-TIME-01)"
+    )
+    measured_minutes_per_script: float | None = Field(
+        default=None, description="Median minutes from taking a first marking to releasing it (breaks included)"
+    )
 
 
 class BacklogRow(BaseModel):

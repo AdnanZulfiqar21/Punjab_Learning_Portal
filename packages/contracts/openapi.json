@@ -4225,6 +4225,18 @@
             "title": "Expected Rechecks",
             "type": "integer"
           },
+          "measured_minutes_per_script": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Median minutes from taking a first marking to releasing it (breaks included)",
+            "title": "Measured Minutes Per Script"
+          },
           "queued_by_kind": {
             "additionalProperties": {
               "type": "integer"
@@ -4258,6 +4270,12 @@
           "released_scripts": {
             "description": "First markings released in the last 90 days",
             "title": "Released Scripts",
+            "type": "integer"
+          },
+          "timed_scripts": {
+            "default": 0,
+            "description": "First markings in 90 days with a recorded start (MARKING-TIME-01)",
+            "title": "Timed Scripts",
             "type": "integer"
           }
         },

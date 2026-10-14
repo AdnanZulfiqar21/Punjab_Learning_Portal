@@ -70,6 +70,9 @@ class WrittenReviewCase(Base):
     version: Mapped[int] = mapped_column(Integer, default=0)  # expected-version CAS for decisions
     lease_holder: Mapped[uuid.UUID | None] = mapped_column(ForeignKey("app_user.id", ondelete="RESTRICT"))
     lease_expires_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    # MARKING-TIME-01: when the current teacher took the case (kept while they renew; reset when someone else takes
+    # it). With released_at it gives the time from taking a script to releasing it, breaks included: an upper bound.
+    marking_started_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     opened_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
     released_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     reason: Mapped[str | None] = mapped_column(Text)  # learner's recheck reason (recheck cases)
@@ -287,6 +290,7 @@ def staffing_state(cap: ReviewCapacity | None, committed: int) -> dict[str, Any]
 
 DEMAND_HISTORY_DAYS = 90
 MIN_RECHECK_SAMPLE = 20  # first markings released before a measured recheck rate is shown
+MIN_TIMING_SAMPLE = 10  # timed first markings before a measured marking time is shown
 
 
 def review_demand(db: Session, grade: int, subject: str, cap: ReviewCapacity | None) -> dict[str, Any]:
@@ -325,6 +329,33 @@ def review_demand(db: Session, grade: int, subject: str, cap: ReviewCapacity | N
             select(case.case_kind, func.count()).where(*scope, case.status == "queued").group_by(case.case_kind)
         )
     }
+    timed = db.scalar(
+        select(
+            func.percentile_cont(0.5).within_group(
+                func.extract("epoch", case.released_at - case.marking_started_at) / 60
+            )
+        ).where(
+            *scope,
+            case.case_kind == "initial",
+            case.status == "released",
+            case.released_at >= history,
+            case.marking_started_at.is_not(None),
+            case.released_at > case.marking_started_at,
+        )
+    )
+    timed_n = int(
+        db.scalar(
+            select(func.count()).where(
+                *scope,
+                case.case_kind == "initial",
+                case.status == "released",
+                case.released_at >= history,
+                case.marking_started_at.is_not(None),
+                case.released_at > case.marking_started_at,
+            )
+        )
+        or 0
+    )
     rate = rechecks / released if released >= MIN_RECHECK_SAMPLE else None
     expected = math.ceil(rate * in_window) if rate else 0
     out: dict[str, Any] = {
@@ -336,6 +367,12 @@ def review_demand(db: Session, grade: int, subject: str, cap: ReviewCapacity | N
         "queued_by_kind": {k: int(queued.get(k, 0)) for k in ("initial", "recheck", "completion", "regrade")},
         "expected_recheck_minutes": None,
         "admissible_if_rechecks_counted": None,
+        # MARKING-TIME-01: median minutes from taking a first marking to releasing it (breaks included: an upper
+        # bound), shown once MIN_TIMING_SAMPLE were timed; beside the operator-entered minutes per script.
+        "timed_scripts": timed_n,
+        "measured_minutes_per_script": round(float(timed), 1)
+        if timed is not None and timed_n >= MIN_TIMING_SAMPLE
+        else None,
     }
     staffing = staffing_state(cap, open_cases(db, grade, subject) + open_permits(db, grade, subject))
     if staffing is not None:
@@ -497,6 +534,8 @@ def lease(db: Session, who: Principal, case_id: uuid.UUID) -> WrittenReviewCase:
     now = _now(db)
     if case.lease_holder not in (None, who.user.id) and case.lease_expires_at and case.lease_expires_at > now:
         raise Conflict("Another teacher is marking this script.", lease_expires_at=case.lease_expires_at.isoformat())
+    if case.lease_holder != who.user.id or case.marking_started_at is None:
+        case.marking_started_at = now  # a new teacher starts; a renewal keeps the start
     case.lease_holder = who.user.id
     case.lease_expires_at = now + LEASE
     current = released_result(db, case.attempt_id)
