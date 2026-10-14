@@ -1406,3 +1406,30 @@ def resolve_academic_review(
     _private(response)
     r = academic.resolve(db, who, review_id, body.resolution, body.note, body.adjudication_id)
     return _academic_out(db, r)
+
+
+# ------------------------------------------------------------------ REVIEWER-QUALITY-01 (W06.S3.T3, part)
+class ReviewerQualityOut(BaseModel):
+    reviewer_id: uuid.UUID
+    reviewer: str = Field(description="The marker's sign-in email (staff accountability; never a learner)")
+    scopes: list[str] = Field(description="grade:subject pairs the marker decided in, within your scope")
+    decisions: int = Field(description="Released teacher decisions in the window")
+    rechecked: int = Field(description="Of the marker's decisions, how many a learner asked to recheck")
+    changed_on_recheck: int = Field(description="Rechecks where another teacher changed the marks")
+    upheld_on_recheck: int = Field(description="Rechecks where the marks stood")
+    teacher_regrades: int = Field(description="Times an approved guide correction sent the marker's work to a teacher")
+    academic_reviews_raised: int = Field(description="Methods the marker sent to academic review")
+
+
+@router.get(
+    "/studio/written/reviewer-quality",
+    response_model=list[ReviewerQualityOut],
+    summary="Per-marker overrides, upheld rechecks and conflicts in your academic scope (adjudicators)",
+)
+def reviewer_quality(
+    db: DB, who: Adjudicator, response: Response, days: Annotated[int, Query(ge=7, le=365)] = 90
+) -> list[ReviewerQualityOut]:
+    from portal_api.modules.written import quality
+
+    _private(response)
+    return [ReviewerQualityOut(**r) for r in quality.report(db, who, days)]

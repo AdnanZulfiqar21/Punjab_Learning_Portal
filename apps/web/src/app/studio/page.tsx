@@ -37,6 +37,9 @@ export default function StudioPage({ searchParams }: PageProps<"/studio">) {
         <Link href="/studio/academic-reviews" className="rounded-lg border border-border bg-surface px-4 py-2.5 font-medium hover:border-accent">
           Academic reviews
         </Link>
+        <Link href="/studio/reviewer-quality" className="rounded-lg border border-border bg-surface px-4 py-2.5 font-medium hover:border-accent">
+          Reviewer quality
+        </Link>
         <Link href="/studio/overview" className="rounded-lg border border-border bg-surface px-4 py-2.5 font-medium hover:border-accent">
           Overview
         </Link>

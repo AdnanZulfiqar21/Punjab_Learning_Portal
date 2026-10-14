@@ -4095,6 +4095,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/studio/written/reviewer-quality": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Per-marker overrides, upheld rechecks and conflicts in your academic scope (adjudicators) */
+        get: operations["reviewer_quality_v1_studio_written_reviewer_quality_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/support/tickets": {
         parameters: {
             query?: never;
@@ -9471,6 +9488,54 @@ export interface components {
             decision: "approve" | "request_changes";
             /** Reviewer */
             reviewer: string | null;
+        };
+        /** ReviewerQualityOut */
+        ReviewerQualityOut: {
+            /**
+             * Academic Reviews Raised
+             * @description Methods the marker sent to academic review
+             */
+            academic_reviews_raised: number;
+            /**
+             * Changed On Recheck
+             * @description Rechecks where another teacher changed the marks
+             */
+            changed_on_recheck: number;
+            /**
+             * Decisions
+             * @description Released teacher decisions in the window
+             */
+            decisions: number;
+            /**
+             * Rechecked
+             * @description Of the marker's decisions, how many a learner asked to recheck
+             */
+            rechecked: number;
+            /**
+             * Reviewer
+             * @description The marker's sign-in email (staff accountability; never a learner)
+             */
+            reviewer: string;
+            /**
+             * Reviewer Id
+             * Format: uuid
+             */
+            reviewer_id: string;
+            /**
+             * Scopes
+             * @description grade:subject pairs the marker decided in, within your scope
+             */
+            scopes: string[];
+            /**
+             * Teacher Regrades
+             * @description Times an approved guide correction sent the marker's work to a teacher
+             */
+            teacher_regrades: number;
+            /**
+             * Upheld On Recheck
+             * @description Rechecks where the marks stood
+             */
+            upheld_on_recheck: number;
         };
         /** Revision */
         Revision: {
@@ -19741,6 +19806,37 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["RegradeJobOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    reviewer_quality_v1_studio_written_reviewer_quality_get: {
+        parameters: {
+            query?: {
+                days?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ReviewerQualityOut"][];
                 };
             };
             /** @description Validation Error */
