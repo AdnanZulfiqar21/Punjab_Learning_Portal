@@ -53,7 +53,7 @@ export function flush(token: string, owner: string): Promise<number> {
     try {
       for (const op of pending(owner)) {
         try {
-          if (op.kind === "completion") await api.setCompleted(token, op.lesson_id, op.done);
+          if (op.kind === "completion") await api.setCompleted(token, op.lesson_id, op.done, op.queued_at);
           else await api.saveNote(token, op.lesson_id, op.text, op.base);
           sent += 1;
         } catch (e) {

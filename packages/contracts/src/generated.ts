@@ -1143,6 +1143,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/me/chapters/{chapter_id}/reading-position": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Where you last were in this chapter, if its lesson is still published */
+        get: operations["reading_position_v1_me_chapters__chapter_id__reading_position_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/me/consents": {
         parameters: {
             query?: never;
@@ -1570,6 +1587,23 @@ export interface paths {
         post: operations["add_push_token_v1_me_push_tokens_post"];
         /** Delete Push Token */
         delete: operations["delete_push_token_v1_me_push_tokens_delete"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/me/reading-position": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** Save where you are in a chapter (P11.S2.T1); an older event never moves it back */
+        put: operations["save_reading_position_v1_me_reading_position_put"];
+        post?: never;
+        delete?: never;
         options?: never;
         head?: never;
         patch?: never;
@@ -9007,6 +9041,46 @@ export interface components {
             /** Unit */
             unit: string;
         };
+        /** ReadingPositionIn */
+        ReadingPositionIn: {
+            /**
+             * Block Index
+             * @default 0
+             */
+            block_index: number;
+            /**
+             * Client At
+             * @description When the learner was there (an older event is ignored)
+             */
+            client_at?: string | null;
+            /**
+             * Lesson Id
+             * Format: uuid
+             */
+            lesson_id: string;
+        };
+        /** ReadingPositionOut */
+        ReadingPositionOut: {
+            /** Block Index */
+            block_index: number;
+            /**
+             * Chapter Id
+             * Format: uuid
+             */
+            chapter_id: string;
+            /**
+             * Client At
+             * Format: date-time
+             */
+            client_at: string;
+            /**
+             * Lesson Id
+             * Format: uuid
+             */
+            lesson_id: string;
+            /** Lesson Title */
+            lesson_title: string;
+        };
         /** RebaseIn */
         RebaseIn: {
             /** Reason */
@@ -13966,6 +14040,37 @@ export interface operations {
             };
         };
     };
+    reading_position_v1_me_chapters__chapter_id__reading_position_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                chapter_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ReadingPositionOut"] | null;
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     accept_consent_v1_me_consents_post: {
         parameters: {
             query?: never;
@@ -14350,7 +14455,10 @@ export interface operations {
     };
     complete_lesson_v1_me_lessons__item_id__complete_post: {
         parameters: {
-            query?: never;
+            query?: {
+                /** @description When the learner acted (a queued offline event); an older event than the last one is ignored */
+                client_at?: string | null;
+            };
             header?: never;
             path: {
                 item_id: string;
@@ -14379,7 +14487,10 @@ export interface operations {
     };
     undo_lesson_v1_me_lessons__item_id__complete_delete: {
         parameters: {
-            query?: never;
+            query?: {
+                /** @description When the learner acted (a queued offline event); an older event than the last one is ignored */
+                client_at?: string | null;
+            };
             header?: never;
             path: {
                 item_id: string;
@@ -14848,6 +14959,39 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content?: never;
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    save_reading_position_v1_me_reading_position_put: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ReadingPositionIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ReadingPositionOut"];
+                };
             };
             /** @description Validation Error */
             422: {

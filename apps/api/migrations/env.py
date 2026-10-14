@@ -21,6 +21,7 @@ import portal_api.modules.content.concepts
 import portal_api.modules.content.inclusion
 import portal_api.modules.content.lectures
 import portal_api.modules.content.models
+import portal_api.modules.content.progress
 import portal_api.modules.content.search
 import portal_api.modules.content.study
 import portal_api.modules.content.updates

@@ -1152,20 +1152,78 @@ def decide_notice(db: DB, who: Member, notice_id: uuid.UUID, body: NoticeDecisio
 
 
 # ------------------------------------------------------------------ lesson completion (P07.S1.T3, LESSON-DONE-01)
-@public.post("/me/lessons/{item_id}/complete", status_code=204, summary="Mark a lesson you can read as completed")
-def complete_lesson(db: DB, who: CurrentPrincipal, item_id: uuid.UUID) -> Response:
-    from portal_api.modules.content import completion
+ClientAt = Annotated[
+    datetime | None,
+    Query(description="When the learner acted (a queued offline event); an older event than the last one is ignored"),
+]
 
-    completion.complete(db, who.user.id, item_id)
+
+@public.post("/me/lessons/{item_id}/complete", status_code=204, summary="Mark a lesson you can read as completed")
+def complete_lesson(db: DB, who: CurrentPrincipal, item_id: uuid.UUID, client_at: ClientAt = None) -> Response:
+    from portal_api.modules.content import completion, progress
+
+    # LESSON-PROGRESS-01: a late, older event (e.g. queued offline) never reverses a newer one from another device.
+    if progress.accept_event(db, who.user.id, item_id, client_at):
+        completion.complete(db, who.user.id, item_id)
+    db.commit()
     return Response(status_code=204)
 
 
 @public.delete("/me/lessons/{item_id}/complete", status_code=204, summary="Undo a lesson completion")
-def undo_lesson(db: DB, who: CurrentPrincipal, item_id: uuid.UUID) -> Response:
-    from portal_api.modules.content import completion
+def undo_lesson(db: DB, who: CurrentPrincipal, item_id: uuid.UUID, client_at: ClientAt = None) -> Response:
+    from portal_api.modules.content import completion, progress
 
-    completion.undo(db, who.user.id, item_id)
+    if progress.accept_event(db, who.user.id, item_id, client_at):
+        completion.undo(db, who.user.id, item_id)
+    db.commit()
     return Response(status_code=204)
+
+
+class ReadingPositionIn(BaseModel):
+    lesson_id: uuid.UUID
+    block_index: int = Field(default=0, ge=0, le=500)
+    client_at: datetime | None = Field(
+        default=None, description="When the learner was there (an older event is ignored)"
+    )
+
+
+class ReadingPositionOut(BaseModel):
+    chapter_id: uuid.UUID
+    lesson_id: uuid.UUID
+    lesson_title: str
+    block_index: int
+    client_at: datetime
+
+
+@public.put(
+    "/me/reading-position",
+    response_model=ReadingPositionOut,
+    summary="Save where you are in a chapter (P11.S2.T1); an older event never moves it back",
+)
+def save_reading_position(
+    db: DB, who: CurrentPrincipal, body: ReadingPositionIn, response: Response
+) -> ReadingPositionOut:
+    from portal_api.modules.content import progress
+
+    _no_store(response)
+    return ReadingPositionOut(
+        **progress.record_position(db, who.user.id, body.lesson_id, body.block_index, body.client_at)
+    )
+
+
+@public.get(
+    "/me/chapters/{chapter_id}/reading-position",
+    response_model=ReadingPositionOut | None,
+    summary="Where you last were in this chapter, if its lesson is still published",
+)
+def reading_position(
+    db: DB, who: CurrentPrincipal, chapter_id: uuid.UUID, response: Response
+) -> ReadingPositionOut | None:
+    from portal_api.modules.content import progress
+
+    _no_store(response)
+    found = progress.position(db, who.user.id, chapter_id)
+    return ReadingPositionOut(**found) if found else None
 
 
 @public.get(

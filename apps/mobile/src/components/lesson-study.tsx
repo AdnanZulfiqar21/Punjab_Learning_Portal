@@ -176,6 +176,7 @@ export function CompletionToggle({ token, lessonId, done, onChange }: { token: s
           try {
             await api.setCompleted(token, lessonId, !done);
             onChange(!done);
+            void api.saveReadingPosition(token, lessonId).catch(() => undefined); // LESSON-PROGRESS-01: "you were last reading"
           } catch (e) {
             if (e instanceof ApiError && e.kind === "offline" && auth.status === "signed_in") {
               enqueue(auth.me.id, { kind: "completion", lesson_id: lessonId, done: !done }); // P13.S3.T2
