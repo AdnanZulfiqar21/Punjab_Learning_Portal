@@ -4,8 +4,9 @@
 import * as ImagePicker from "expo-image-picker";
 import { Stack, useLocalSearchParams } from "expo-router";
 import { useRef, useState } from "react";
+import { Image } from "expo-image";
 import { Pressable, ScrollView, View } from "react-native";
-import type { WrittenAttempt } from "@portal/contracts";
+import type { WrittenAttempt, WrittenPage } from "@portal/contracts";
 
 import { Button, FormError } from "@/components/form";
 import { LessonBlocks } from "@/components/lesson-blocks";
@@ -14,7 +15,7 @@ import { WrittenResultView } from "@/components/written-result";
 import { Radius, Space } from "@/constants/theme";
 import { useRequest } from "@/hooks/use-request";
 import { useTheme } from "@/hooks/use-theme";
-import { api, ApiError } from "@/lib/api";
+import { api, ApiError, writtenPageImage } from "@/lib/api";
 import { useAuth } from "@/lib/auth";
 import { TIME_ZONE } from "@/lib/dates";
 
@@ -198,9 +199,19 @@ function Runner({ initial, token, reload }: { initial: WrittenAttempt; token: st
           {a.pages.length === 0 ? (
             <T variant="muted">No pages uploaded yet.</T>
           ) : (
-            <T variant="small" accessibilityLabel="Uploaded pages">
-              {a.pages.length} page(s) uploaded (not submitted): {a.pages.map((_, i) => `Page ${i + 1}`).join(", ")}
-            </T>
+            <View accessibilityLabel="Uploaded pages" style={{ gap: Space.sm }}>
+              {a.pages.map((p, i) => (
+                <PageCard
+                  key={p.id}
+                  attemptId={a.id}
+                  page={p}
+                  number={i + 1}
+                  token={token}
+                  editable={a.status === "active"}
+                  onChange={(n) => setA((cur) => ({ ...cur, pages: cur.pages.map((x) => (x.id === n.id ? n : x)) }))}
+                />
+              ))}
+            </View>
           )}
           {a.pages.flatMap((p, i) => (p.quality ?? []).map((q) => (
             <T key={`${p.id}-${q.code}`} variant="small" style={{ color: c.warn }}>
@@ -274,5 +285,68 @@ function Runner({ initial, token, reload }: { initial: WrittenAttempt; token: st
       )}
       {!open && <FormError message={error} />}
     </ScrollView>
+  );
+}
+
+// W03.S1.T3 (MOBILE-TRANSFORMS-01): turn a page or make it clearer before submitting. The server re-renders from the
+// untouched original every time, so nothing is lost and a teacher can always see the original.
+function PageCard({
+  attemptId,
+  page,
+  number,
+  token,
+  editable,
+  onChange,
+}: {
+  attemptId: string;
+  page: WrittenPage;
+  number: number;
+  token: string;
+  editable: boolean;
+  onChange: (p: WrittenPage) => void;
+}) {
+  const c = useTheme();
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const t = (page.transform ?? { rotate: 0, crop: null, enhance: false }) as { rotate: number; crop: number[] | null; enhance: boolean };
+  async function apply(next: { rotate: number; enhance: boolean }) {
+    setBusy(true);
+    setError(null);
+    try {
+      onChange(await api.transformPage(token, attemptId, page.id, { rotate: next.rotate, crop: t.crop ?? null, enhance: next.enhance }));
+    } catch (e) {
+      setError(e instanceof ApiError ? e.message : "Couldn't change this page.");
+    } finally {
+      setBusy(false);
+    }
+  }
+  return (
+    <View style={{ gap: Space.xs, borderWidth: 1, borderColor: c.border, borderRadius: Radius.sm, padding: Space.sm }}>
+      <Image
+        source={writtenPageImage(attemptId, page, token)}
+        accessibilityLabel={`Page ${number}`}
+        accessible
+        contentFit="contain"
+        style={{ width: "100%", height: 200 }}
+      />
+      <T variant="small">
+        Page {number} · {editable ? "uploaded, not yet submitted" : "submitted"}
+        {t.rotate ? ` · turned ${t.rotate}°` : ""}
+        {t.enhance ? " · clearer contrast" : ""}
+      </T>
+      {editable ? (
+        <View style={{ flexDirection: "row", flexWrap: "wrap", gap: Space.xs }}>
+          <Button variant="secondary" label="Turn left" busy={busy} onPress={() => void apply({ rotate: (t.rotate + 270) % 360, enhance: t.enhance })} />
+          <Button variant="secondary" label="Turn right" busy={busy} onPress={() => void apply({ rotate: (t.rotate + 90) % 360, enhance: t.enhance })} />
+          <Button
+            variant="secondary"
+            label={t.enhance ? "Original contrast" : "Clearer contrast"}
+            busy={busy}
+            onPress={() => void apply({ rotate: t.rotate, enhance: !t.enhance })}
+          />
+        </View>
+      ) : null}
+      <FormError message={error} />
+    </View>
   );
 }
