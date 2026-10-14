@@ -2819,8 +2819,25 @@ export interface paths {
         /** Your recent imports */
         get: operations["list_imports_v1_studio_imports_get"];
         put?: never;
-        /** Preview an import (raw JSON or CSV body, at most 5 MB): validates every row, writes nothing to content */
+        /** Preview an import (raw JSON, CSV or XLSX body, at most 5 MB): validates every row, writes nothing to content */
         post: operations["preview_import_v1_studio_imports_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/studio/imports/templates/{name}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** The multiple-choice import template, headings only (mcq.xlsx with text-formatted columns, or mcq.csv) */
+        get: operations["import_template_v1_studio_imports_templates__name__get"];
+        put?: never;
+        post?: never;
         delete?: never;
         options?: never;
         head?: never;
@@ -6895,7 +6912,7 @@ export interface components {
              * Format
              * @enum {string}
              */
-            format: "json" | "csv";
+            format: "json" | "csv" | "xlsx";
             /**
              * Id
              * Format: uuid
@@ -17328,7 +17345,7 @@ export interface operations {
     preview_import_v1_studio_imports_post: {
         parameters: {
             query?: {
-                format?: "json" | "csv";
+                format?: "json" | "csv" | "xlsx";
                 filename?: string;
             };
             header?: never;
@@ -17344,6 +17361,39 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["ImportBatchOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    import_template_v1_studio_imports_templates__name__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                name: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": unknown;
+                    "application/octet-stream": unknown;
+                    "text/csv": unknown;
                 };
             };
             /** @description Validation Error */

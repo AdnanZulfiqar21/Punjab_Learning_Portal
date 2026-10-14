@@ -18,9 +18,13 @@ import csv
 import hashlib
 import io
 import json
+import re
 import uuid
+import zipfile
+from collections.abc import Iterable, Iterator
 from datetime import UTC, datetime, timedelta
 from typing import Any
+from xml.etree import ElementTree as ET
 
 from sqlalchemy import func, select
 from sqlalchemy.exc import IntegrityError
@@ -43,7 +47,7 @@ from portal_api.modules.identity.deps import Principal
 from portal_api.modules.identity.permissions import Permission, permissions_for
 
 SCHEMA_VERSION = 1
-IMPORT_KINDS = ("mcq", "lesson", "written", "storyboard")
+IMPORT_KINDS = ("mcq", "lesson", "written", "storyboard", "rubric", "passage")
 MAX_BYTES = 5 * 1024 * 1024
 MAX_ROWS = 2000
 MAX_DEPTH = 40  # rich blocks nest a few levels; anything deeper is hostile or broken (IMPORT-ABUSE-01)
@@ -68,6 +72,7 @@ CSV_COLUMNS = (
     "source_document_id",
     "pdf_from",
     "pdf_to",
+    "family",  # IMPORT-REFS-01: an existing question (external_id or ID) this one is a variant of
 )
 
 
@@ -120,23 +125,27 @@ def _csv_rows(text: str) -> tuple[str, list[dict[str, Any]]]:
     """The MCQ CSV template (plain paragraphs). Rich blocks, formulas and images need the JSON format."""
     reader = csv.DictReader(io.StringIO(text))
     try:
-        return _csv_read(reader)
+        return _template_rows(reader.fieldnames or [], reader)
     except csv.Error as e:  # e.g. a field over the parser's size limit, or a broken quote
         raise Unprocessable(f"The CSV file can't be read: {e}.", code_reason="CSV") from None
 
 
-def _csv_read(reader: csv.DictReader[str]) -> tuple[str, list[dict[str, Any]]]:
-    header = [h.strip() for h in reader.fieldnames or []]
+def _template_rows(fieldnames: Iterable[str], records: Iterable[dict[str, Any]]) -> tuple[str, list[dict[str, Any]]]:
+    """The multiple-choice template's columns (CSV_COLUMNS), from a CSV file or the first sheet of a workbook."""
+    header = [h.strip() for h in fieldnames]
     missing = [
         c for c in ("external_id", "chapter", "title", "stem", "option_a", "option_b", "correct") if c not in header
     ]
     if missing:
-        raise Unprocessable(f"Missing CSV columns: {', '.join(missing)}.", code_reason="CSV_HEADER")
+        raise Unprocessable(f"Missing columns: {', '.join(missing)}.", code_reason="CSV_HEADER")
     unknown = [h for h in header if h not in CSV_COLUMNS]
     if unknown:
-        raise Unprocessable(f"Unknown CSV columns: {', '.join(unknown)}.", code_reason="CSV_HEADER")
+        raise Unprocessable(f"Unknown columns: {', '.join(unknown)}.", code_reason="CSV_HEADER")
+    repeated = sorted({h for h in header if header.count(h) > 1})
+    if repeated:  # one value would silently replace the other
+        raise Unprocessable(f"Repeated columns: {', '.join(repeated)}.", code_reason="CSV_HEADER")
     rows: list[dict[str, Any]] = []
-    for raw in reader:
+    for raw in records:
         if len(rows) >= MAX_ROWS:  # stop reading at the limit instead of parsing a flood of rows
             raise TooLarge(f"A batch can have at most {MAX_ROWS} rows; split the file.")
         r = {k.strip(): (v or "").strip() for k, v in raw.items() if k}
@@ -178,6 +187,7 @@ def _csv_read(reader: csv.DictReader[str]) -> tuple[str, list[dict[str, Any]]]:
                     "metadata": metadata,
                 },
                 "source_refs": refs,
+                **({"family": r["family"]} if r.get("family") else {}),
             }
         )
     return "mcq", rows
@@ -206,9 +216,233 @@ def _json_rows(text: str) -> tuple[str, list[dict[str, Any]]]:
     return str(kind), [i if isinstance(i, dict) else {"_invalid": True} for i in items]
 
 
+# ------------------------------------------------------------------ Excel workbooks (IMPORT-XLSX-01)
+# Read with the standard library, never evaluated: the first worksheet's cached cell values only. Every part is read
+# with a hard size cap (a small zip can inflate enormously) and any DOCTYPE is refused, so entity expansion and
+# external entities never reach the XML parser.
+XLSX_MAX_PART = 25 * 1024 * 1024
+XLSX_MAX_PARTS = 500
+XLSX_MAX_COLUMNS = 64
+XLSX_TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+_MAIN = "http://schemas.openxmlformats.org/spreadsheetml/2006/main"
+_DOC_REL = "http://schemas.openxmlformats.org/officeDocument/2006/relationships"
+_PKG_REL = "http://schemas.openxmlformats.org/package/2006/relationships"
+_CELL_REF = re.compile(r"^([A-Z]{1,3})\d+$")
+_DECLARATION = re.compile(rb"<!(?i:doctype|entity)")
+
+
+def _unreadable(why: str) -> Unprocessable:
+    return Unprocessable(
+        f"The workbook can't be read: {why}. Save it as .xlsx (Excel Workbook), or as CSV UTF-8.", code_reason="XLSX"
+    )
+
+
+def _local(tag: str) -> str:
+    return tag.rsplit("}", 1)[-1]  # transitional and strict workbooks use different namespaces; names are the same
+
+
+def _optional(z: zipfile.ZipFile, name: str) -> ET.Element | None:
+    try:
+        with z.open(name) as f:
+            data = f.read(XLSX_MAX_PART + 1)
+    except KeyError:
+        return None
+    if len(data) > XLSX_MAX_PART:
+        raise TooLarge(f"A part of the workbook ({name}) is larger than {XLSX_MAX_PART // (1024 * 1024)} MB unpacked.")
+    if _DECLARATION.search(data):  # anywhere: a comment may come first. Real cell text escapes "<" as "&lt;".
+        raise _unreadable("it declares a DOCTYPE or entities, which workbooks never need")
+    try:
+        return ET.fromstring(data)  # noqa: S314 - DOCTYPE/ENTITY refused above; no external entities are fetched
+    except ET.ParseError:
+        raise _unreadable(f"{name} is not valid XML") from None
+
+
+def _required(z: zipfile.ZipFile, name: str) -> ET.Element:
+    el = _optional(z, name)
+    if el is None:
+        raise _unreadable(f"{name} is missing")
+    return el
+
+
+def _targets(z: zipfile.ZipFile, rels: str, base: str, *, kind: str | None = None) -> dict[str, str]:
+    """Relationship ID -> part path (internal targets only; `kind` keeps only that relationship type)."""
+    root = _optional(z, rels)
+    out: dict[str, str] = {}
+    for r in [] if root is None else list(root):
+        target = r.get("Target") or ""
+        if r.get("TargetMode") == "External" or (kind and not (r.get("Type") or "").endswith("/" + kind)):
+            continue
+        out[r.get("Id") or ""] = target.lstrip("/") if target.startswith("/") else base + target
+    return out
+
+
+def _text(el: ET.Element) -> str:
+    """A string item's text: plain `t`, or the `t` of each rich-text run; phonetic guides (`rPh`) are not text."""
+    parts: list[str] = []
+    for child in el:
+        name = _local(child.tag)
+        if name == "t":
+            parts.append(child.text or "")
+        elif name == "r":
+            parts.extend(t.text or "" for t in child if _local(t.tag) == "t")
+    return "".join(parts)
+
+
+def _column(ref: str | None, fallback: int) -> int:
+    m = _CELL_REF.match(ref or "")
+    if not m:
+        return fallback
+    n = 0
+    for ch in m.group(1):
+        n = n * 26 + ord(ch) - 64
+    return n - 1
+
+
+def xlsx_table(data: bytes) -> tuple[list[str], list[dict[str, str]]]:
+    """The first worksheet as headings and rows (each row a dict by heading). Blank rows are skipped."""
+    if len(data) > MAX_BYTES:
+        raise TooLarge(f"Import files can be at most {MAX_BYTES // (1024 * 1024)} MB.")
+    try:
+        z = zipfile.ZipFile(io.BytesIO(data))
+    except zipfile.BadZipFile:
+        raise _unreadable("it isn't an .xlsx file (an old .xls or a password-protected file can't be read)") from None
+    with z:
+        if len(z.infolist()) > XLSX_MAX_PARTS:
+            raise _unreadable("it has too many parts")
+        book_path = next(iter(_targets(z, "_rels/.rels", "", kind="officeDocument").values()), "xl/workbook.xml")
+        base = book_path.rsplit("/", 1)[0] + "/" if "/" in book_path else ""
+        book = _required(z, book_path)
+        sheets = [el for el in book.iter() if _local(el.tag) == "sheet"]
+        if not sheets:
+            raise _unreadable("it has no worksheet")
+        rid = next((v for k, v in sheets[0].attrib.items() if _local(k) == "id"), "")
+        sheet_path = _targets(z, f"{base}_rels/{book_path.rsplit('/', 1)[-1]}.rels", base).get(rid)
+        if not sheet_path:
+            raise _unreadable("its first worksheet can't be found")
+        sst = _optional(z, f"{base}sharedStrings.xml")
+        shared = [] if sst is None else [_text(si) for si in sst if _local(si.tag) == "si"]
+        return _sheet_rows(_required(z, sheet_path), shared)
+
+
+def _sheet_rows(sheet: ET.Element, shared: list[str]) -> tuple[list[str], list[dict[str, str]]]:
+    def cells(row: ET.Element) -> list[str]:
+        values: dict[int, str] = {}
+        for i, c in enumerate(el for el in row if _local(el.tag) == "c"):
+            col = _column(c.get("r"), i)
+            if col >= XLSX_MAX_COLUMNS:
+                raise _unreadable(f"it uses more than {XLSX_MAX_COLUMNS} columns")
+            kind = c.get("t")
+            v = next((el.text or "" for el in c if _local(el.tag) == "v"), "")
+            if kind == "s":
+                try:
+                    v = shared[int(v)]
+                except (ValueError, IndexError):
+                    raise _unreadable("a cell points at a missing shared string") from None
+            elif kind == "inlineStr":
+                v = next((_text(el) for el in c if _local(el.tag) == "is"), "")
+            values[col] = v.strip()
+        width = max(values, default=-1) + 1
+        return [values.get(i, "") for i in range(width)]
+
+    rows: Iterator[list[str]] = (
+        cells(r) for data in sheet if _local(data.tag) == "sheetData" for r in data if _local(r.tag) == "row"
+    )
+    nonblank = (r for r in rows if any(r))
+    header = next(nonblank, [])
+    records: list[dict[str, str]] = []
+    for r in nonblank:
+        if len(records) >= MAX_ROWS:  # stop at the limit instead of building a flood of rows
+            raise TooLarge(f"A batch can have at most {MAX_ROWS} rows; split the file.")
+        for i, v in enumerate(r):
+            if v and (i >= len(header) or not header[i]):
+                raise Unprocessable(
+                    f"Column {i + 1} has values but no heading; add its heading or delete the column.",
+                    code_reason="CSV_HEADER",
+                )
+        records.append({h: (r[i] if i < len(r) else "") for i, h in enumerate(header) if h})
+    return [h for h in header if h], records
+
+
+def xlsx_template(headings: Iterable[str]) -> bytes:
+    """A headings-only workbook: every column formatted as text (so IDs keep leading zeros), the heading row frozen."""
+    names = list(headings)
+
+    def col(i: int) -> str:
+        s, i = "", i + 1
+        while i:
+            i, r = divmod(i - 1, 26)
+            s = chr(65 + r) + s
+        return s
+
+    cells = "".join(f'<c r="{col(i)}1" s="2" t="inlineStr"><is><t>{h}</t></is></c>' for i, h in enumerate(names))
+    parts = {
+        "[Content_Types].xml": (
+            '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>'
+            '<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">'
+            '<Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>'
+            '<Default Extension="xml" ContentType="application/xml"/>'
+            '<Override PartName="/xl/workbook.xml" '
+            'ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/>'
+            '<Override PartName="/xl/worksheets/sheet1.xml" '
+            'ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>'
+            '<Override PartName="/xl/styles.xml" '
+            'ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/>'
+            "</Types>"
+        ),
+        "_rels/.rels": (
+            f'<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="{_PKG_REL}">'
+            f'<Relationship Id="rId1" Type="{_DOC_REL}/officeDocument" Target="xl/workbook.xml"/></Relationships>'
+        ),
+        "xl/workbook.xml": (
+            f'<?xml version="1.0" encoding="UTF-8" standalone="yes"?><workbook xmlns="{_MAIN}" xmlns:r="{_DOC_REL}">'
+            '<sheets><sheet name="Questions" sheetId="1" r:id="rId1"/></sheets></workbook>'
+        ),
+        "xl/_rels/workbook.xml.rels": (
+            f'<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="{_PKG_REL}">'
+            f'<Relationship Id="rId1" Type="{_DOC_REL}/worksheet" Target="worksheets/sheet1.xml"/>'
+            f'<Relationship Id="rId2" Type="{_DOC_REL}/styles" Target="styles.xml"/></Relationships>'
+        ),
+        "xl/styles.xml": (
+            f'<?xml version="1.0" encoding="UTF-8" standalone="yes"?><styleSheet xmlns="{_MAIN}">'
+            '<fonts count="2"><font><sz val="11"/><name val="Calibri"/></font>'
+            '<font><b/><sz val="11"/><name val="Calibri"/></font></fonts>'
+            '<fills count="2"><fill><patternFill patternType="none"/></fill>'
+            '<fill><patternFill patternType="gray125"/></fill></fills>'
+            '<borders count="1"><border><left/><right/><top/><bottom/><diagonal/></border></borders>'
+            '<cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs>'
+            '<cellXfs count="3"><xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/>'
+            '<xf numFmtId="49" fontId="0" fillId="0" borderId="0" xfId="0" applyNumberFormat="1"/>'
+            '<xf numFmtId="49" fontId="1" fillId="0" borderId="0" xfId="0" applyNumberFormat="1" applyFont="1"/>'
+            "</cellXfs>"
+            '<cellStyles count="1"><cellStyle name="Normal" xfId="0" builtinId="0"/></cellStyles></styleSheet>'
+        ),
+        "xl/worksheets/sheet1.xml": (
+            f'<?xml version="1.0" encoding="UTF-8" standalone="yes"?><worksheet xmlns="{_MAIN}">'
+            '<sheetViews><sheetView workbookViewId="0">'
+            '<pane ySplit="1" topLeftCell="A2" activePane="bottomLeft" state="frozen"/></sheetView></sheetViews>'
+            f'<cols><col min="1" max="{len(names)}" width="22" style="1" customWidth="1"/></cols>'
+            f'<sheetData><row r="1">{cells}</row></sheetData></worksheet>'
+        ),
+    }
+    buf = io.BytesIO()
+    with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as z:
+        for name, xml in parts.items():
+            z.writestr(name, xml)
+    return buf.getvalue()
+
+
 def parse_file(data: bytes, fmt: str) -> tuple[str, list[dict[str, Any]]]:
-    text = _decode(data)
-    kind, rows = _csv_rows(text) if fmt == "csv" else _json_rows(text)
+    if fmt == "xlsx":
+        header, records = xlsx_table(data)
+        for record in records:
+            if any("\x00" in v for v in record.values()):
+                raise Unprocessable(
+                    "The file contains a NUL character, which isn't allowed in text.", code_reason="ENCODING"
+                )
+        kind, rows = _template_rows(header, records)
+    else:
+        text = _decode(data)
+        kind, rows = _csv_rows(text) if fmt == "csv" else _json_rows(text)
     if not rows:
         raise Unprocessable("The file has no rows.", code_reason="EMPTY")
     if len(rows) > MAX_ROWS:
@@ -230,6 +464,67 @@ def _topic(db: Session, ref: str, chapter: Chapter) -> Topic | None:
     except ValueError:
         t = db.scalar(select(Topic).where(Topic.natural_key == ref))
     return t if t is not None and t.chapter_id == chapter.id and t.retired_at is None else None
+
+
+def _ref(db: Session, kind: str, ref: object) -> ContentItem | None:
+    """IMPORT-REFS-01: an existing item of this kind by its import external_id or its ID."""
+    if not isinstance(ref, str) or not ref.strip():
+        return None
+    ref = ref.strip()
+    try:
+        item = db.get(ContentItem, uuid.UUID(ref))
+    except ValueError:
+        item = db.scalar(select(ContentItem).where(ContentItem.kind == kind, ContentItem.external_ref == ref))
+    return item if item is not None and item.kind == kind else None
+
+
+def _links(
+    db: Session, kind: str, raw: dict[str, Any], chapter: Chapter, body: Any, ext: str | None
+) -> tuple[dict[str, Any], Any, list[str]]:
+    """IMPORT-REFS-01: references to other items. A rubric names its written question (and marks its current version);
+    a question may name a variant family and a passage. Returns (payload additions, body, errors)."""
+    extra: dict[str, Any] = {}
+    errors: list[str] = []
+    if kind == "rubric":
+        q = _ref(db, "written", raw.get("question"))
+        if q is None:
+            errors.append("question: name an existing written question (its external_id or ID).")
+        elif q.chapter_id != chapter.id:
+            errors.append("question: the written question is in another chapter; a rubric lives with its question.")
+        else:
+            version = q.working_version_id or q.published_version_id
+            if version is None:
+                errors.append("question: the written question has no version to mark yet.")
+            else:
+                other = db.scalar(
+                    select(ContentItem).where(
+                        ContentItem.kind == "rubric",
+                        ContentItem.parent_item_id == q.id,
+                        ContentItem.external_ref.is_distinct_from(ext),
+                    )
+                )
+                if other is not None:
+                    errors.append("question: it already has a rubric; change that one in the studio.")
+                extra = {"parent_item_id": str(q.id), "question_ref": str(raw.get("question")).strip()}
+                if isinstance(body, dict):
+                    body = {**body, "question_version_id": str(version)}
+    if kind == "mcq":
+        if raw.get("family"):
+            base = _ref(db, "mcq", raw.get("family"))
+            if base is None or base.chapter_id != chapter.id:
+                errors.append("family: name an existing question in the same chapter (its external_id or ID).")
+            else:
+                extra["family_id"] = str(base.family_id or base.id)
+                extra["family_ref"] = str(raw["family"]).strip()
+        if raw.get("passage"):
+            passage = _ref(db, "passage", raw.get("passage"))
+            if passage is None or passage.chapter_id is None:
+                errors.append("passage: name an existing passage (its external_id or ID).")
+            else:
+                extra["passage_ref"] = str(raw["passage"]).strip()
+                if isinstance(body, dict):
+                    body = {**body, "passage_id": str(passage.id)}
+    return extra, body, errors
 
 
 def _validate_row(
@@ -272,7 +567,9 @@ def _validate_row(
                     errors.append("topic: not a current topic of this chapter.")
                 else:
                     topic_id = str(topic.id)
-            body, body_errors, types = kinds.get(kind).parse_draft(raw.get("body"))
+            links, linked_body, link_errors = _links(db, kind, raw, chapter, raw.get("body"), ext)
+            errors += link_errors
+            body, body_errors, types = kinds.get(kind).parse_draft(linked_body)
             errors += [f"body: {e}" for e in body_errors]
             s_err, s_warn, refs = workflow.check_sources(db, chapter, raw.get("source_refs", []))
             errors += s_err
@@ -289,6 +586,7 @@ def _validate_row(
                     "body": body,
                     "block_types": types,
                     "source_refs": refs,
+                    **links,
                 }
     if errors:
         return {"external_id": ext, "action": "error", "errors": errors, "warnings": warnings}
@@ -322,8 +620,8 @@ def _validate_row(
 
 
 def preview(db: Session, who: Principal, data: bytes, *, fmt: str, filename: str) -> ContentImportBatch:
-    if fmt not in ("json", "csv"):
-        raise Unprocessable("Choose json or csv.")
+    if fmt not in ("json", "csv", "xlsx"):
+        raise Unprocessable("Choose json, csv or xlsx.")
     kind, raw_rows = parse_file(data, fmt)
     recent = db.scalar(
         select(func.count())
@@ -498,6 +796,9 @@ def _row_input(r: ContentImportRow) -> dict[str, Any]:
         "title": p["title"],
         "body": p["body"],
         "source_refs": p["source_refs"],
+        **({"question": p["question_ref"]} if p.get("question_ref") else {}),
+        **({"family": p["family_ref"]} if p.get("family_ref") else {}),
+        **({"passage": p["passage_ref"]} if p.get("passage_ref") else {}),
     }
 
 
@@ -524,7 +825,9 @@ def _create(db: Session, who: Principal, batch: ContentImportBatch, r: ContentIm
         import_hash=r.payload_hash,
     )
     if batch.kind in ("mcq", "written"):
-        item.family_id = item.id
+        item.family_id = uuid.UUID(p["family_id"]) if p.get("family_id") else item.id  # IMPORT-REFS-01: a variant
+    if batch.kind == "rubric":
+        item.parent_item_id = uuid.UUID(p["parent_item_id"])  # a rubric lives with its written question
     version = ContentVersion(
         id=uuid.uuid4(),
         item_id=item.id,

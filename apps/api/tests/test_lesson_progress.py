@@ -90,3 +90,17 @@ def test_continue_reading_keeps_the_newest_place(client: TestClient, db: Session
     retired = _post(client, team["publisher"], second, "retire", {"reason": "Fixture: withdrawn lesson"})
     assert retired.status_code == 200, retired.text
     assert client.get(where, headers=learner.headers).json() is None  # never offer a withdrawn lesson
+
+
+def test_the_dashboard_continues_at_the_newest_place(client: TestClient, db: Session, team: dict[str, Staff]) -> None:
+    first, _ = _published(client, db, team)
+    second, _ = _published(client, db, team)
+    learner = _learner(client)
+    client.put("/v1/me/profile", headers=learner.headers, json={"grade": 11, "subjects": ["biology"]})
+    opened = client.post("/v1/me/events/lesson-started", headers=learner.headers, json={"lesson_id": first})
+    assert opened.status_code == 204, opened.text
+    dashboard = "/v1/me/dashboard"
+    assert client.get(dashboard, headers=learner.headers).json()["continue_learning"]["lesson_id"] == first
+    saved = client.put("/v1/me/reading-position", headers=learner.headers, json={"lesson_id": second})
+    assert saved.status_code == 200
+    assert client.get(dashboard, headers=learner.headers).json()["continue_learning"]["lesson_id"] == second

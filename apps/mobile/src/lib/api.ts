@@ -48,6 +48,7 @@ import type {
   StudyPackStatus,
   TrialDevice,
   WrittenAttempt,
+  WrittenPage,
   WrittenAvailability,
   WrittenForm,
   WrittenResult,
@@ -90,6 +91,19 @@ export function attemptAsset(attemptId: string, versionId: string, token: string
 /** P13.S3.T1: an absolute API URL for a path the server returned (e.g. a study pack's file list). */
 export function apiUrl(path: string): string {
   return `${origin()}${path}`;
+}
+
+/** W03.S1.T3 (MOBILE-TRANSFORMS-01): your own page's preview, as currently turned and enhanced (never the original). */
+export function writtenPageImage(
+  attemptId: string,
+  page: { id: string; transform?: unknown },
+  token: string,
+): { uri: string; headers: Record<string, string> } {
+  const v = encodeURIComponent(JSON.stringify(page.transform ?? {})); // a new transform is a new image, never a stale cache
+  return {
+    uri: `${origin()}/v1/written-attempts/${encodeURIComponent(attemptId)}/pages/${encodeURIComponent(page.id)}?v=${v}`,
+    headers: { Authorization: `Bearer ${token}` },
+  };
 }
 
 export function lessonAsset(lessonId: string, versionId: string, token: string | null): { uri: string; headers?: Record<string, string> } {
@@ -325,6 +339,12 @@ export const api = {
     request<WrittenForm>("/v1/written/forms", { method: "POST", token, body, headers: { "Idempotency-Key": idempotencyKey } }),
   startWritten: (token: string, formId: string) =>
     request<WrittenAttempt>(`/v1/written/forms/${encodeURIComponent(formId)}/attempt`, { method: "POST", token }),
+  transformPage: (token: string, attemptId: string, pageId: string, body: { rotate: number; crop: number[] | null; enhance: boolean }) =>
+    request<WrittenPage>(`/v1/written-attempts/${encodeURIComponent(attemptId)}/pages/${encodeURIComponent(pageId)}/transform`, {
+      method: "POST",
+      token,
+      body,
+    }),
   writtenAttempt: (token: string, id: string, signal?: AbortSignal) =>
     request<WrittenAttempt>(`/v1/written-attempts/${encodeURIComponent(id)}`, { token, signal }),
   uploadWritten: (token: string, id: string, file: Blob) =>

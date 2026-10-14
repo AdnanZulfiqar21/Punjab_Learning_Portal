@@ -220,7 +220,7 @@ class ContentImportBatch(Base):
     __tablename__ = "content_import_batch"
     __table_args__ = (
         CheckConstraint("status in ('previewed','committed','discarded')", name="content_import_batch_status"),
-        CheckConstraint("format in ('json','csv')", name="content_import_batch_format"),
+        CheckConstraint("format in ('json','csv','xlsx')", name="content_import_batch_format"),
     )
     id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     kind: Mapped[str] = mapped_column(String(20))

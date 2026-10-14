@@ -13,7 +13,8 @@ export async function POST(request: NextRequest) {
   }
   const token = (await cookies()).get(SESSION_COOKIE)?.value;
   if (!token) return Response.json({ detail: "Sign in to continue." }, { status: 401 });
-  const format = request.nextUrl.searchParams.get("format") === "csv" ? "csv" : "json";
+  const asked = request.nextUrl.searchParams.get("format");
+  const format = asked === "csv" || asked === "xlsx" ? asked : "json";
   const filename = (request.nextUrl.searchParams.get("filename") ?? "import").slice(0, 200);
   if (!request.body) return Response.json({ detail: "Choose a file." }, { status: 422 });
   const qs = new URLSearchParams({ format, filename });

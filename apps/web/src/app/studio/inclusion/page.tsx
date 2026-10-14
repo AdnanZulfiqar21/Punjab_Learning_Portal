@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { connection } from "next/server";
 import { Suspense } from "react";
 import type { Concept, InclusionCoverage, InclusionRecord, InclusionReport } from "@portal/contracts";
 import { Badge, Breadcrumbs, Notice, SkeletonLines } from "@/components/ui";
@@ -36,17 +37,20 @@ export default function InclusionPage({ searchParams }: PageProps<"/studio/inclu
         {searchParams.then((sp) => {
           const subject = typeof sp.subject === "string" && SUBJECTS.some(([c]) => c === sp.subject) ? sp.subject : "biology";
           const scope = typeof sp.scope === "string" && SCOPES.some(([c]) => c === sp.scope) ? sp.scope : "mdcat";
-          const year = typeof sp.year === "string" && /^20\d\d$/.test(sp.year) ? sp.year : String(new Date().getFullYear());
-          return <Board subject={subject} scope={scope} year={year} />;
+          const year = typeof sp.year === "string" && /^20\d\d$/.test(sp.year) ? sp.year : null;
+          return <Board subject={subject} scope={scope} chosenYear={year} />;
         })}
       </Suspense>
     </div>
   );
 }
 
-async function Board({ subject, scope, year }: { subject: string; scope: string; year: string }) {
+async function Board({ subject, scope, chosenYear }: { subject: string; scope: string; chosenYear: string | null }) {
   const user = await currentUser();
   if (!user) redirect("/signin?next=/studio/inclusion");
+  // The current year is a request-time value, never read while the page is prerendered or prefetched.
+  await connection();
+  const year = chosenYear ?? String(new Date().getFullYear());
   if (!user.me.roles.some((r) => STUDIO_ROLES.has(r))) return <Notice tone="warn" title="Staff only">Syllabus mapping is for content staff.</Notice>;
   const yearly = scope !== "full_curriculum";
   const qs = new URLSearchParams({ subject, scope, ...(yearly ? { year } : {}) });

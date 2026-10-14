@@ -31,7 +31,8 @@ export function ImportWorkspace() {
     setError(null);
     setBatch(null);
     if (file.size > MAX_BYTES) return setError("Import files can be at most 5 MB. Split the file.");
-    const format = file.name.toLowerCase().endsWith(".csv") ? "csv" : "json";
+    const name = file.name.toLowerCase();
+    const format = name.endsWith(".csv") ? "csv" : name.endsWith(".xlsx") ? "xlsx" : "json";
     setUploading(true);
     try {
       const qs = new URLSearchParams({ format, filename: file.name });
@@ -53,7 +54,7 @@ export function ImportWorkspace() {
     <div className="space-y-5">
       <div className="space-y-1">
         <label htmlFor="import-file" className="font-medium">
-          File to preview <span className="text-sm font-normal text-muted">(JSON or CSV, up to 5 MB)</span>
+          File to preview <span className="text-sm font-normal text-muted">(JSON, CSV or Excel .xlsx, up to 5 MB)</span>
         </label>
         {!hydrated ? (
           <p className="text-sm text-muted">Loading…</p>
@@ -62,7 +63,7 @@ export function ImportWorkspace() {
           ref={input}
           id="import-file"
           type="file"
-          accept=".json,.csv,application/json,text/csv"
+          accept=".json,.csv,.xlsx,application/json,text/csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
           disabled={uploading}
           onChange={(e) => {
             const f = e.target.files?.[0];
@@ -71,7 +72,17 @@ export function ImportWorkspace() {
           className="block text-sm"
         />
         )}
-        <p className="text-sm text-muted">The formats are described in the content import guide (docs/content-import.md).</p>
+        <p className="text-sm text-muted">
+          Multiple-choice template, headings only:{" "}
+          <a href="/studio/imports/templates/mcq.xlsx" download className="text-accent underline underline-offset-2">
+            Excel (.xlsx)
+          </a>{" "}
+          ·{" "}
+          <a href="/studio/imports/templates/mcq.csv" download className="text-accent underline underline-offset-2">
+            CSV
+          </a>
+          . The formats are described in the content import guide (docs/content-import.md).
+        </p>
         {uploading && <p className="text-sm text-muted">Checking every row…</p>}
       </div>
       {error && (
