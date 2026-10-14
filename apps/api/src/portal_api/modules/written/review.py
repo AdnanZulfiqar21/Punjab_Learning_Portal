@@ -12,7 +12,7 @@ from __future__ import annotations
 import math
 import uuid
 from datetime import datetime, timedelta
-from typing import Any
+from typing import Any, Literal
 
 from sqlalchemy import (
     CheckConstraint,
@@ -751,7 +751,10 @@ def completeness_of(pending: list[int], unavailable: list[int], questions: int) 
     return "partial_unavailable" if unavailable else "complete"
 
 
-def work_status(db: Session, attempt_id: uuid.UUID, *, pending: bool, action_required: bool) -> str:
+WorkStatus = Literal["in_review", "action_required", "delayed", "finished"]
+
+
+def work_status(db: Session, attempt_id: uuid.UUID, *, pending: bool, action_required: bool) -> WorkStatus:
     """§20.9.3 (W07.S1.T1, RESULT-ARITHMETIC-01): what is happening to a sealed script now, kept apart from its marks
     and its completeness. The learner's own step comes first; then an open case past its due time (the service
     obligation was missed); then any open case or pending question; otherwise nothing more is happening."""

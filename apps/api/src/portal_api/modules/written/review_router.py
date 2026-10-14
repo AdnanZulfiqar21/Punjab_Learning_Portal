@@ -310,7 +310,7 @@ class HistoryEntry(BaseModel):
 # legacy `completeness` field keeps them and the full state is a separate field.
 AssessmentState = Literal["complete", "partial_pending", "partial_unavailable", "unavailable"]
 LegacyCompleteness = Literal["complete", "partial_pending", "partial_unavailable"]
-WorkStatus = Literal["in_review", "action_required", "delayed", "finished"]
+WorkStatus = review.WorkStatus
 
 
 def legacy_completeness(state: str | None) -> LegacyCompleteness | None:
@@ -389,8 +389,8 @@ class WrittenResultOut(BaseModel):
     scored_max_units: int | None = Field(description="Maximum of the questions that were scored")
     pending_max_units: int | None = Field(
         default=None,
-        description="Maximum of the questions still being marked (P). Scored (S), pending (P) and could-not-be-assessed "
-        "(U) maxima always add up to max_units (M), §20.9.3. None until released",
+        description="Maximum of the questions still being marked (P). Scored (S), pending (P) and "
+        "could-not-be-assessed (U) maxima always add up to max_units (M), §20.9.3. None until released",
     )
     unavailable_max_units: int | None = Field(
         default=None, description="Maximum of the questions that could not be assessed (U). None until released"
