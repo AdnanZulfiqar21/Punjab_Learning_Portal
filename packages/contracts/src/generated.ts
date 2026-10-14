@@ -8589,6 +8589,11 @@ export interface components {
          */
         PageTransform: {
             /**
+             * Aspect
+             * @description The page's width/height just before straightening
+             */
+            aspect?: number | null;
+            /**
              * Crop
              * @description x, y, w, h of the upright original kept (null: all)
              */
@@ -8606,6 +8611,17 @@ export interface components {
              * @enum {integer}
              */
             rotate: 0 | 90 | 180 | 270;
+            /**
+             * Shown Crop
+             * @description STRAIGHTEN-01: x, y, w, h of the straightened page kept (a trim made after it)
+             */
+            shown_crop?: number[] | null;
+            /**
+             * Straighten
+             * @description STRAIGHTEN-01: a small turn, degrees counter-clockwise as shown
+             * @default 0
+             */
+            straighten: number;
         };
         /** PaidConversion */
         PaidConversion: {
@@ -11100,6 +11116,11 @@ export interface components {
          */
         TransformIn: {
             /**
+             * Aspect
+             * @description The page's width/height just before straightening
+             */
+            aspect?: number | null;
+            /**
              * Crop
              * @description x, y, w, h of the upright original kept (null: all)
              */
@@ -11117,6 +11138,17 @@ export interface components {
              * @enum {integer}
              */
             rotate: 0 | 90 | 180 | 270;
+            /**
+             * Shown Crop
+             * @description STRAIGHTEN-01: x, y, w, h of the straightened page kept (a trim made after it)
+             */
+            shown_crop?: number[] | null;
+            /**
+             * Straighten
+             * @description STRAIGHTEN-01: degrees, or "auto" to find the angle that levels the writing (where available)
+             * @default 0
+             */
+            straighten: number | "auto";
             /**
              * Trim
              * @description Part of the page as shown to keep (x, y, w, h)

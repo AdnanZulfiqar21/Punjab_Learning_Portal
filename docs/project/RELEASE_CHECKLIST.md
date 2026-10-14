@@ -9,6 +9,7 @@ Three separately evidenced states (roadmap §2.3). Nothing is ticked without cur
 - [ ] Web, Android, iOS (installable production variants) and admin operate on the RCS
 - [ ] Zero unresolved P0/P1 defects
 - [ ] Browser suite run with `E2E_FULL_MATRIX=1` (learner journeys at phone width) on the release candidate's production build; skips reviewed against `docs/project/E2E_SKIPS.md` (SKIPS-01)
+- [ ] `page_straighten` rollout stays at 0% for learners until straightening is qualified on real faint-ink and pencil scripts (W03.S1.T3, STRAIGHTEN-01, B10)
 - [ ] Import workers deployed per `docs/production/import-worker.md`: one shared private `PORTAL_IMPORT_DIR`, supervised workers, `portal-import-reconcile` hourly, queue-age alert wired (IMPORT-DEPLOY-01)
 - [ ] Advisory review (`docs/security/advisory-review.md`) re-run on the release candidate's lockfiles within 7 days of release; every open finding has an owner, reason and target date (ADVISORY-REVIEW-01)
 

@@ -21,7 +21,9 @@ rejects a page. Only a teacher decides a page is unreadable, and can ask for a c
 from __future__ import annotations
 
 import io
+import itertools
 import json
+import math
 import os
 import subprocess
 import sys
@@ -29,7 +31,7 @@ import tempfile
 import threading
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any
+from typing import Any, cast
 
 IMAGE_MAX_BYTES = 15 * 1024 * 1024
 PDF_MAX_BYTES = 40 * 1024 * 1024
@@ -61,6 +63,7 @@ class LogicalPage:
     height: int
     preview_png: bytes
     quality: list[dict[str, Any]] = field(default_factory=list)  # SCAN-QUALITY-01 flags (see `quality_message`)
+    transform: dict[str, Any] | None = None  # STRAIGHTEN-01: as applied (the angle found, the page's shape before it)
 
 
 @dataclass(frozen=True)
@@ -115,35 +118,138 @@ def inspect(data: bytes) -> Inspected:
 
 ROTATIONS = (0, 90, 180, 270)  # clockwise degrees
 MIN_CROP = 0.3  # a trim keeps at least this share of each side, so a slip can't remove most of a page
+STRAIGHTEN_MAX = 10.0  # degrees either way; a page more crooked than this is turned or photographed again
 
 
-def check_transform(raw: dict[str, Any] | None) -> dict[str, Any]:
+def _check_crop(raw: Any) -> list[float] | None:
+    if raw is None:
+        return None
+    try:
+        x, y, w, h = (float(v) for v in raw)
+    except (TypeError, ValueError) as e:
+        raise Rejected("A trim is four numbers: x, y, width and height.") from e
+    if min(x, y) < 0 or x + w > 1.0001 or y + h > 1.0001:
+        raise Rejected("A trim must stay inside the page.")
+    if w < MIN_CROP or h < MIN_CROP:
+        raise Rejected("That trim would remove most of the page. Keep at least a third of each side.")
+    crop = [round(x, 4), round(y, 4), round(w, 4), round(h, 4)]
+    return None if crop == [0.0, 0.0, 1.0, 1.0] else crop
+
+
+def check_transform(raw: dict[str, Any] | None, *, allow_auto: bool = False) -> dict[str, Any]:
     """TRANSFORMS-01: a page's transform as stored: rotation, an optional crop of the upright original (x, y, w, h
-    fractions) and an optional readability boost. Raises Rejected with a learner-facing reason."""
+    fractions) and an optional readability boost. STRAIGHTEN-01 adds an optional small rotation (`straighten`, degrees
+    counter-clockwise as shown) with `aspect`, the width/height of the page just before it, which region mapping
+    needs. `straighten: "auto"` (with `allow_auto`) asks the page worker to find the angle. Raises Rejected with a
+    learner-facing reason."""
     raw = raw or {}
     rotate = int(raw.get("rotate", 0))
     if rotate not in ROTATIONS:
         raise Rejected("A page can only be turned in quarter turns.")
-    crop = raw.get("crop")
-    if crop is not None:
-        try:
-            x, y, w, h = (float(v) for v in crop)
-        except (TypeError, ValueError) as e:
-            raise Rejected("A trim is four numbers: x, y, width and height.") from e
-        if min(x, y) < 0 or x + w > 1.0001 or y + h > 1.0001:
-            raise Rejected("A trim must stay inside the page.")
-        if w < MIN_CROP or h < MIN_CROP:
-            raise Rejected("That trim would remove most of the page. Keep at least a third of each side.")
-        crop = [round(x, 4), round(y, 4), round(w, 4), round(h, 4)]
-        if crop == [0.0, 0.0, 1.0, 1.0]:
-            crop = None
-    return {"rotate": rotate, "crop": crop, "enhance": bool(raw.get("enhance", False))}
+    crop = _check_crop(raw.get("crop"))
+    out: dict[str, Any] = {"rotate": rotate, "crop": crop, "enhance": bool(raw.get("enhance", False))}
+    straighten = raw.get("straighten") or 0
+    if straighten == "auto":
+        if not allow_auto:
+            raise Rejected("Straightening is an angle in degrees.")
+        out["straighten"] = "auto"
+        return out
+    try:
+        angle = round(float(straighten), 1)
+    except (TypeError, ValueError) as e:
+        raise Rejected("Straightening is an angle in degrees.") from e
+    if not math.isfinite(angle) or abs(angle) > STRAIGHTEN_MAX:
+        raise Rejected(f"A page can be straightened by at most {STRAIGHTEN_MAX:g} degrees either way.")
+    if angle:
+        aspect = raw.get("aspect")
+        if aspect is not None:
+            try:
+                aspect = float(aspect)
+            except (TypeError, ValueError):
+                aspect = None
+        if aspect is not None and (not math.isfinite(aspect) or not 0.05 <= aspect <= 20):
+            aspect = None
+        out["straighten"] = angle
+        if aspect is not None:
+            out["aspect"] = round(aspect, 6)
+        shown_crop = _check_crop(raw.get("shown_crop"))  # a trim of the straightened page, in its own coordinates
+        if shown_crop is not None:
+            out["shown_crop"] = shown_crop
+    return out
+
+
+def _unstraighten(region: tuple[float, float, float, float], angle: float, aspect: float) -> list[float]:
+    """STRAIGHTEN-01: a region of the straightened page (fractions) as the smallest region of the page before
+    straightening that contains it. PIL's rotate(angle) turns counter-clockwise about the centre and, with expand,
+    grows the canvas to (w|cos| + h|sin|, w|sin| + h|cos|); this is its inverse, in units where that page is
+    aspect x 1."""
+    theta = math.radians(angle)
+    c, s_ = math.cos(theta), math.sin(theta)
+    w0, h0 = aspect, 1.0
+    shown_w, shown_h = w0 * abs(c) + h0 * abs(s_), w0 * abs(s_) + h0 * abs(c)
+    x, y, w, h = region
+    xs, ys = [], []
+    for u, v in ((x, y), (x + w, y), (x, y + h), (x + w, y + h)):
+        px, py = u * shown_w - shown_w / 2, v * shown_h - shown_h / 2
+        ox, oy = c * px - s_ * py, s_ * px + c * py  # undo the turn
+        xs.append((ox + w0 / 2) / w0)
+        ys.append((oy + h0 / 2) / h0)
+    left, top = max(0.0, min(xs)), max(0.0, min(ys))
+    right, bottom = min(1.0, max(xs)), min(1.0, max(ys))
+    return [left, top, max(0.0, right - left), max(0.0, bottom - top)]
+
+
+def estimate_skew(image: Any) -> float:
+    """STRAIGHTEN-01: the small turn (degrees, counter-clockwise as PIL's rotate takes it) that makes written lines
+    level: the angle whose row profile of ink is sharpest (the projection-profile method), tried every half degree
+    within STRAIGHTEN_MAX and then refined to a tenth. 0.0 when there is too little ink to tell or the page is level."""
+    from PIL import Image, ImageOps
+
+    grey = ImageOps.grayscale(image)
+    scale = min(1.0, 700 / max(grey.size))
+    if scale < 1.0:
+        size = (max(1, round(grey.width * scale)), max(1, round(grey.height * scale)))
+        grey = grey.resize(size, Image.Resampling.BOX)
+    grey = ImageOps.autocontrast(grey, cutoff=1)
+    ink = grey.point(lambda v: 255 if v < 128 else 0)
+    if sum(ink.histogram()[255:]) < 0.002 * ink.width * ink.height:
+        return 0.0
+
+    def sharpness(angle: float) -> float:
+        turned = ink.rotate(angle, resample=Image.Resampling.NEAREST, expand=True, fillcolor=0)
+        column = turned.resize((1, turned.height), Image.Resampling.BOX)
+        rows = [float(cast(float, v)) for v in column.get_flattened_data()]  # one band: a number per row
+        return float(sum((b - a) ** 2 for a, b in itertools.pairwise(rows)))
+
+    limit = int(STRAIGHTEN_MAX * 2)
+    coarse = max((sharpness(a / 2), a / 2) for a in range(-limit, limit + 1))[1]
+    fine = max((sharpness(coarse + d / 10), coarse + d / 10) for d in range(-5, 6))[1]
+    angle = round(max(-STRAIGHTEN_MAX, min(STRAIGHTEN_MAX, fine)), 1)
+    return angle if abs(angle) >= 0.3 else 0.0
+
+
+def _straighten(image: Any, angle: float) -> Any:
+    """Turn by a small angle with nearest-neighbour sampling, so every pixel shown is a pixel of the original (nothing
+    is blended lighter); the corners revealed are paper white, and nothing is cut off (expand)."""
+    from PIL import Image
+
+    if image.mode not in ("L", "RGB"):
+        image = image.convert("L" if image.mode in ("1", "LA", "I", "I;16") else "RGB")
+    white: Any = 255 if image.mode == "L" else (255, 255, 255)
+    return image.rotate(angle, resample=Image.Resampling.NEAREST, expand=True, fillcolor=white)
 
 
 def to_source(region: list[float] | tuple[float, ...], transform: dict[str, Any] | None) -> list[float]:
     """Map a region of the transformed page (x, y, w, h fractions) to the same region of the upright original."""
     x, y, w, h = (float(v) for v in region)
     t = check_transform(transform)
+    if t.get("straighten"):
+        if "aspect" not in t:
+            raise Rejected("This page's straightening can't be mapped; straighten it again.")
+        if t.get("shown_crop"):  # the trim made on the straightened page
+            sx, sy, sw, sh = t["shown_crop"]
+            x, y, w, h = sx + x * sw, sy + y * sh, w * sw, h * sh
+        x, y, w, h = _unstraighten((x, y, w, h), float(t["straighten"]), float(t["aspect"]))
     rotate = t["rotate"]
     if rotate == 90:  # undo a clockwise quarter turn
         x, y, w, h = y, 1 - x - w, h, w
@@ -155,6 +261,18 @@ def to_source(region: list[float] | tuple[float, ...], transform: dict[str, Any]
     return [cx + x * cw, cy + y * ch, w * cw, h * ch]
 
 
+def _cut(image: Any, region: list[float]) -> Any:
+    x, y, w, h = region
+    return image.crop(
+        (
+            int(x * image.width),
+            int(y * image.height),
+            max(int((x + w) * image.width), int(x * image.width) + 1),
+            max(int((y + h) * image.height), int(y * image.height) + 1),
+        )
+    )
+
+
 def apply_transform(image: Any, transform: dict[str, Any] | None, *, crop: bool = True) -> Any:
     """Crop (in the upright original), turn without resampling, then, if asked, stretch the contrast. Every step is
     lossless or monotonic: nothing that was darker than the paper becomes paper, so faint ink, pencil, small marks and
@@ -164,18 +282,14 @@ def apply_transform(image: Any, transform: dict[str, Any] | None, *, crop: bool 
     t = check_transform(transform)
     out = image
     if crop and t["crop"]:
-        x, y, w, h = t["crop"]
-        out = out.crop(
-            (
-                int(x * out.width),
-                int(y * out.height),
-                max(int((x + w) * out.width), int(x * out.width) + 1),
-                max(int((y + h) * out.height), int(y * out.height) + 1),
-            )
-        )
+        out = _cut(out, t["crop"])
     turn = {90: Image.Transpose.ROTATE_270, 180: Image.Transpose.ROTATE_180, 270: Image.Transpose.ROTATE_90}
     if t["rotate"]:
         out = out.transpose(turn[t["rotate"]])
+    if t.get("straighten"):
+        out = _straighten(out, float(t["straighten"]))
+        if crop and t.get("shown_crop"):
+            out = _cut(out, t["shown_crop"])
     if t["enhance"]:
         out = ImageOps.autocontrast(out.convert("L" if out.mode in ("1", "L", "LA", "I", "I;16") else "RGB"), cutoff=0)
     return out
@@ -183,8 +297,9 @@ def apply_transform(image: Any, transform: dict[str, Any] | None, *, crop: bool 
 
 def render_page(data: bytes, kind: str, page_index: int, transform: dict[str, Any] | None) -> LogicalPage:
     """TRANSFORMS-01: a fresh preview (and quality checks) of one logical page with its transform, rendered from the
-    untouched original in the same isolated, bounded worker."""
-    spec = {"page_index": page_index, "transform": check_transform(transform)}
+    untouched original in the same isolated, bounded worker. STRAIGHTEN-01: the worker finds the angle for
+    `straighten: "auto"`; the page's `transform` reports what was applied."""
+    spec = {"page_index": page_index, "transform": check_transform(transform, allow_auto=True)}
     if not _slots.acquire(timeout=WORKER_QUEUE_WAIT_S):
         raise WorkersBusy("evidence workers are busy")
     try:
@@ -214,6 +329,7 @@ def render_page(data: bytes, kind: str, page_index: int, transform: dict[str, An
                 height=int(result["height"]),
                 preview_png=(work / "page.png").read_bytes(),
                 quality=[f for f in result.get("quality", []) if f.get("code") in QUALITY_TEXT],
+                transform=check_transform(result["transform"]) if "transform" in result else None,
             )
     finally:
         _slots.release()
@@ -627,11 +743,20 @@ def _page_worker(work: Path, kind: str) -> None:
         with Image.open(io.BytesIO(data), formats=["JPEG"] if kind == "image/jpeg" else ["PNG"]) as im:
             im.load()
             upright = ImageOps.exif_transpose(im)
-    shown = apply_transform(upright, spec["transform"])
+    asked = spec["transform"]
+    level = apply_transform(upright, {**asked, "straighten": 0, "enhance": False})  # cropped and turned
+    angle = estimate_skew(level) if asked.get("straighten") == "auto" else float(asked.get("straighten") or 0)
+    applied = {k: v for k, v in asked.items() if k not in ("straighten", "aspect", "shown_crop")}
+    if angle:
+        applied.update(straighten=angle, aspect=level.width / level.height)
+        if asked.get("straighten") != "auto" and asked.get("shown_crop"):
+            applied["shown_crop"] = asked["shown_crop"]
+    shown = apply_transform(upright, applied)
     png, w, h = _preview(shown)
     (work / "page.png").write_bytes(png)
     quality = _quality(shown, photo=kind != "application/pdf")
-    (work / "result.json").write_text(json.dumps({"width": w, "height": h, "quality": quality}), encoding="utf8")
+    result = {"width": w, "height": h, "quality": quality, "transform": applied}
+    (work / "result.json").write_text(json.dumps(result), encoding="utf8")
 
 
 def _worker(work: Path, kind: str) -> None:

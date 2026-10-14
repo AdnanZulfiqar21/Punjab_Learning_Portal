@@ -344,7 +344,14 @@ export const api = {
     token: string,
     attemptId: string,
     pageId: string,
-    body: { rotate: number; crop: number[] | null; enhance: boolean; trim?: number[] },
+    body: {
+      rotate: number;
+      crop: number[] | null;
+      enhance: boolean;
+      trim?: number[];
+      straighten?: number | "auto"; // STRAIGHTEN-01, where rolled out
+      shown_crop?: number[] | null;
+    },
   ) =>
     request<WrittenPage>(`/v1/written-attempts/${encodeURIComponent(attemptId)}/pages/${encodeURIComponent(pageId)}/transform`, {
       method: "PUT",

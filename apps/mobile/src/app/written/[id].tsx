@@ -79,6 +79,9 @@ function Runner({ initial, token, owner, reload }: { initial: WrittenAttempt; to
   // kept until the learner removes them (or signs out), never deleted behind their back.
   const [leftover, setLeftover] = useState(() => (initial.status === "active" ? [] : listPages(owner, initial.id)));
   const [cameraDenied, setCameraDenied] = useState(false);
+  // STRAIGHTEN-01: offered only where rolled out (deployed roles start at 0% until it is qualified on real scripts).
+  const feats = useRequest((signal) => api.features(token, signal), [token]);
+  const canStraighten = feats.state.status === "success" && feats.state.data.page_straighten === true;
   const [error, setError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
   const slots = (a.manifest as { slots?: Record<string, Slot> }).slots ?? {};
@@ -293,6 +296,7 @@ function Runner({ initial, token, owner, reload }: { initial: WrittenAttempt; to
                   number={i + 1}
                   token={token}
                   editable={a.status === "active" && !pages.sealing}
+                  canStraighten={canStraighten}
                   track={(work) => pages.track(work)}
                   onChange={(n) => setA((cur) => ({ ...cur, pages: cur.pages.map((x) => (x.id === n.id ? n : x)) }))}
                 />
@@ -388,6 +392,7 @@ function PageCard({
   number,
   token,
   editable,
+  canStraighten,
   track,
   onChange,
 }: {
@@ -396,6 +401,7 @@ function PageCard({
   number: number;
   token: string;
   editable: boolean;
+  canStraighten: boolean;
   track: <R>(work: () => Promise<R>) => Promise<R>; // counted as work in flight, so submitting waits for it
   onChange: (p: WrittenPage) => void;
 }) {
@@ -404,13 +410,33 @@ function PageCard({
   const [error, setError] = useState<string | null>(null);
   const [trimming, setTrimming] = useState(false);
   const [trim, setTrim] = useState<Trim>({ top: 0, bottom: 0, left: 0, right: 0 });
-  const t = (page.transform ?? { rotate: 0, crop: null, enhance: false }) as { rotate: number; crop: number[] | null; enhance: boolean };
-  async function apply(next: { rotate: number; enhance: boolean; crop?: number[] | null; trim?: number[] }) {
+  const t = (page.transform ?? { rotate: 0, crop: null, enhance: false }) as {
+    rotate: number;
+    crop: number[] | null;
+    enhance: boolean;
+    straighten?: number;
+    shown_crop?: number[] | null;
+  };
+  const angle = t.straighten ?? 0;
+  async function apply(next: {
+    rotate: number;
+    enhance: boolean;
+    crop?: number[] | null;
+    trim?: number[];
+    straighten?: number | "auto";
+    shown_crop?: number[] | null;
+  }) {
     setBusy(true);
     setError(null);
     await track(async () => {
       try {
-        const body = { rotate: next.rotate, crop: next.crop === undefined ? (t.crop ?? null) : next.crop, enhance: next.enhance };
+        const body = {
+          rotate: next.rotate,
+          crop: next.crop === undefined ? (t.crop ?? null) : next.crop,
+          enhance: next.enhance,
+          straighten: next.straighten === undefined ? angle : next.straighten, // kept unless changed
+          shown_crop: next.shown_crop === undefined ? (t.shown_crop ?? null) : next.shown_crop,
+        };
         onChange(await api.transformPage(token, attemptId, page.id, next.trim ? { ...body, trim: next.trim } : body));
         if (next.trim) setTrim({ top: 0, bottom: 0, left: 0, right: 0 });
       } catch (e) {
@@ -433,7 +459,8 @@ function PageCard({
         Page {number} · {editable ? "uploaded, not yet submitted" : "submitted"}
         {t.rotate ? ` · turned ${t.rotate}°` : ""}
         {t.enhance ? " · clearer contrast" : ""}
-        {t.crop ? " · trimmed" : ""}
+        {t.crop || t.shown_crop ? " · trimmed" : ""}
+        {angle ? ` · straightened by ${Math.abs(angle).toFixed(1)}°` : ""}
       </T>
       {editable ? (
         <View style={{ flexDirection: "row", flexWrap: "wrap", gap: Space.xs }}>
@@ -446,8 +473,29 @@ function PageCard({
             onPress={() => void apply({ rotate: t.rotate, enhance: !t.enhance })}
           />
           <Button variant="secondary" label={trimming ? "Close trim" : "Trim edges"} onPress={() => setTrimming((v) => !v)} />
-          {t.crop ? (
-            <Button variant="secondary" label="Undo trim" busy={busy} onPress={() => void apply({ rotate: t.rotate, enhance: t.enhance, crop: null })} />
+          {t.crop || t.shown_crop ? (
+            <Button
+              variant="secondary"
+              label="Undo trim"
+              busy={busy}
+              onPress={() => void apply({ rotate: t.rotate, enhance: t.enhance, crop: null, shown_crop: null })}
+            />
+          ) : null}
+          {canStraighten && !angle ? (
+            <Button
+              variant="secondary"
+              label="Straighten"
+              busy={busy}
+              onPress={() => void apply({ rotate: t.rotate, enhance: t.enhance, straighten: "auto", shown_crop: null })}
+            />
+          ) : null}
+          {angle ? (
+            <Button
+              variant="secondary"
+              label="Undo straighten"
+              busy={busy}
+              onPress={() => void apply({ rotate: t.rotate, enhance: t.enhance, straighten: 0, shown_crop: null })}
+            />
           ) : null}
         </View>
       ) : null}

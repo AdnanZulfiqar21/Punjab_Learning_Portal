@@ -84,6 +84,13 @@ class PageTransform(BaseModel):
     rotate: Literal[0, 90, 180, 270] = Field(default=0, description="Clockwise quarter turns")
     crop: list[float] | None = Field(default=None, description="x, y, w, h of the upright original kept (null: all)")
     enhance: bool = Field(default=False, description="A higher-contrast preview that keeps faint marks")
+    straighten: float = Field(
+        default=0.0, ge=-10, le=10, description="STRAIGHTEN-01: a small turn, degrees counter-clockwise as shown"
+    )
+    aspect: float | None = Field(default=None, description="The page's width/height just before straightening")
+    shown_crop: list[float] | None = Field(
+        default=None, description="STRAIGHTEN-01: x, y, w, h of the straightened page kept (a trim made after it)"
+    )
 
 
 class TransformIn(PageTransform):
@@ -91,6 +98,10 @@ class TransformIn(PageTransform):
     the server maps it onto the original and it replaces `crop`."""
 
     trim: list[float] | None = Field(default=None, description="Part of the page as shown to keep (x, y, w, h)")
+    straighten: float | Literal["auto"] = Field(  # type: ignore[assignment]
+        default=0.0,
+        description='STRAIGHTEN-01: degrees, or "auto" to find the angle that levels the writing (where available)',
+    )
 
 
 class PageOut(BaseModel):
