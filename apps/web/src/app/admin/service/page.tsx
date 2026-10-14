@@ -287,6 +287,14 @@ async function ReviewStaffing() {
                 <p className="text-muted">
                   {r.open_cases} queued · {r.open_permits} started, not yet submitted · {r.overdue_cases} overdue · case limit {r.max_open_cases}
                 </p>
+                {/* QUEUE-AGEING-01: waiting time against the proposed 24 h / 48 h targets */}
+                {r.open_cases > 0 && (
+                  <p className={(r.queued_over_48h ?? 0) > 0 ? "text-danger" : "text-muted"}>
+                    Waiting: {r.queued_under_24h ?? 0} under 24 hours · {r.queued_24_to_48h ?? 0} for 24 to 48 hours · {r.queued_over_48h ?? 0} for more than 48
+                    hours
+                    {r.oldest_queued_at ? ` · the longest since ${new Date(r.oldest_queued_at).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short", timeZone: TIME_ZONE })}` : ""}
+                  </p>
+                )}
                 <p className="text-muted">
                   {s
                     ? `${s.available_minutes} minutes available within ${s.turnaround_days} days, ${s.due_minutes} already owed: room for ${s.admissible_scripts} more script${s.admissible_scripts === 1 ? "" : "s"}.` +

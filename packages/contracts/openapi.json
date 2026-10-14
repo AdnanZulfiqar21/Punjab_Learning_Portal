@@ -1570,6 +1570,19 @@
             "title": "Max Open Cases",
             "type": "integer"
           },
+          "oldest_queued_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "When the longest-waiting queued case opened",
+            "title": "Oldest Queued At"
+          },
           "open_cases": {
             "title": "Open Cases",
             "type": "integer"
@@ -1582,6 +1595,21 @@
           "overdue_cases": {
             "description": "Queued cases past their due time (service obligation missed)",
             "title": "Overdue Cases",
+            "type": "integer"
+          },
+          "queued_24_to_48h": {
+            "default": 0,
+            "title": "Queued 24 To 48H",
+            "type": "integer"
+          },
+          "queued_over_48h": {
+            "default": 0,
+            "title": "Queued Over 48H",
+            "type": "integer"
+          },
+          "queued_under_24h": {
+            "default": 0,
+            "title": "Queued Under 24H",
             "type": "integer"
           },
           "staffing": {
@@ -5470,6 +5498,98 @@
           "reason"
         ],
         "title": "GrantIn",
+        "type": "object"
+      },
+      "GrantOut": {
+        "description": "P04.S2.T3 (ACCESS-GRANTS-01): a staff grant as the granter manages it.",
+        "properties": {
+          "email": {
+            "description": "The learner's account email",
+            "title": "Email",
+            "type": "string"
+          },
+          "ends_at": {
+            "format": "date-time",
+            "title": "Ends At",
+            "type": "string"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "product_code": {
+            "title": "Product Code",
+            "type": "string"
+          },
+          "reason": {
+            "title": "Reason",
+            "type": "string"
+          },
+          "revoke_reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Revoke Reason"
+          },
+          "source": {
+            "enum": [
+              "scholarship",
+              "promotional",
+              "pilot"
+            ],
+            "title": "Source",
+            "type": "string"
+          },
+          "starts_at": {
+            "format": "date-time",
+            "title": "Starts At",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "active",
+              "revoked",
+              "refunded"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "units_consumed": {
+            "description": "Written units used by marked questions",
+            "title": "Units Consumed",
+            "type": "integer"
+          },
+          "units_held": {
+            "description": "Written units reserved or accepted for tests not yet marked",
+            "title": "Units Held",
+            "type": "integer"
+          },
+          "written_units": {
+            "title": "Written Units",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id",
+          "email",
+          "source",
+          "product_code",
+          "written_units",
+          "units_consumed",
+          "units_held",
+          "reason",
+          "starts_at",
+          "ends_at",
+          "status",
+          "revoke_reason"
+        ],
+        "title": "GrantOut",
         "type": "object"
       },
       "HTTPValidationError": {
@@ -18323,6 +18443,86 @@
       }
     },
     "/v1/admin/entitlements": {
+      "get": {
+        "operationId": "list_grants_v1_admin_entitlements_get",
+        "parameters": [
+          {
+            "description": "Only grants active now",
+            "in": "query",
+            "name": "current",
+            "required": false,
+            "schema": {
+              "default": true,
+              "description": "Only grants active now",
+              "title": "Current",
+              "type": "boolean"
+            }
+          },
+          {
+            "in": "query",
+            "name": "source",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "scholarship",
+                    "promotional",
+                    "pilot"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Source"
+            }
+          },
+          {
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "schema": {
+              "default": 200,
+              "maximum": 500,
+              "minimum": 1,
+              "title": "Limit",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/GrantOut"
+                  },
+                  "title": "Response List Grants V1 Admin Entitlements Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Staff grants (scholarship, promotional, pilot), newest first, with written units used (MFA)",
+        "tags": [
+          "access"
+        ]
+      },
       "post": {
         "operationId": "grant_v1_admin_entitlements_post",
         "requestBody": {

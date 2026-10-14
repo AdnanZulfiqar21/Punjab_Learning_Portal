@@ -13,6 +13,30 @@ Single list connecting advertised scope to content obligations (roadmap §10.4).
 | Explanation languages | English (book language). Urdu/Roman Urdu explanation variants: **UNDECIDED**, owner input when lesson production starts |
 | Exam profiles | MDCAT and ECAT: profile engine + five-subject section practice. **Full official-pattern mock: UNAVAILABLE** where the verified profile requires sections outside SCOPE-01 (MDCAT: English, Logical Reasoning; ECAT: English; ECAT combinations with Statistics). No partial paper may be labelled a full official mock. Profile publication also waits on B02 |
 
+## Written assessment: required outcomes and exclusions (W00.S1.T1; PROPOSED, owner freeze pending WA-D12)
+Recorded so scope does not grow during review. Nothing here is frozen until the owner approves WA-D12; the code already
+behaves this way.
+
+| Required learner outcome (R2, the complete written module) | Where it is built |
+|---|---|
+| Chapter practice with short and long written questions, per class and subject | W04 (forms, IMPL-19, SCOPE-01 for questions) |
+| Answer on paper, photograph or scan, map pages, submit once and get a receipt | W03 (IMPL-20, EVIDENCE-01, INTERRUPTIONS-01, UPLOAD-RETRY-01) |
+| Teacher-released marks per question and criterion, never an invented zero | W06 (R05, COMPLETENESS-01) |
+| Feedback on the answer: criterion reasons, evidence places, next steps, worked answer when reviewed | W07 (FEEDBACK-EVIDENCE-01, MODEL-ANSWER-01) |
+| A recheck by a different teacher, with history that explains each version | W06/W07 (RECHECK-01, HISTORY-01) |
+
+**R1 is not the complete module:** R1 is a qualified automatic short-answer slice (WA-D06, B10). It may be offered only as
+that slice and never described as complete written practice; the complete-product claim needs R2 (SCOPE-01, release
+map in `RELEASE_CHECKLIST.md`).
+
+| Excluded (proposed) | Why |
+|---|---|
+| General tutoring or open chat about any topic | Not a portal outcome; written feedback is tied to an approved rubric |
+| Proctoring or surveillance of written practice (camera, screen or location monitoring) | Practice is self-directed; integrity rests on receipts, timing and teacher review, not monitoring |
+| Other provinces and boards | Outside SCOPE-01 |
+| Redesigning entrance tests (MDCAT, ECAT) | Only verified official patterns are used (exam profiles); the portal never invents a pattern |
+| Automatic marks released without qualification | WA-D05/WA-D06, B10; teachers release every mark today (PILOT-R0-01) |
+
 ## Sources (accepted for intake 2026-10-06; checksums in `content/source_registry.json`)
 | Source ID | Grade | Subject | File | Status |
 |---|---|---|---|---|

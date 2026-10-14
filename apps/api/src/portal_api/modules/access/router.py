@@ -6,7 +6,7 @@ import uuid
 from datetime import datetime
 from typing import Annotated, Any, Literal
 
-from fastapi import APIRouter, Depends, Header, Response
+from fastapi import APIRouter, Depends, Header, Query, Response
 from pydantic import BaseModel, Field
 from sqlalchemy import select
 from sqlalchemy.orm import Session
@@ -166,6 +166,69 @@ def grant(db: DB, who: Granter, body: GrantIn) -> EntitlementOut:
             product_code=body.product_code,
         )
     )
+
+
+class GrantOut(BaseModel):
+    """P04.S2.T3 (ACCESS-GRANTS-01): a staff grant as the granter manages it."""
+
+    id: uuid.UUID
+    email: str = Field(description="The learner's account email")
+    source: Literal["scholarship", "promotional", "pilot"]
+    product_code: str
+    written_units: int
+    units_consumed: int = Field(description="Written units used by marked questions")
+    units_held: int = Field(description="Written units reserved or accepted for tests not yet marked")
+    reason: str
+    starts_at: datetime
+    ends_at: datetime
+    status: Literal["active", "revoked", "refunded"]
+    revoke_reason: str | None
+
+
+@router.get(
+    "/admin/entitlements",
+    response_model=list[GrantOut],
+    summary="Staff grants (scholarship, promotional, pilot), newest first, with written units used (MFA)",
+)
+def list_grants(
+    db: DB,
+    who: Granter,
+    response: Response,
+    current: Annotated[bool, Query(description="Only grants active now")] = True,
+    source: Annotated[Literal["scholarship", "promotional", "pilot"] | None, Query()] = None,
+    limit: Annotated[int, Query(ge=1, le=500)] = 200,
+) -> list[GrantOut]:
+    response.headers["Cache-Control"] = "private, no-store"
+    stmt = (
+        select(Entitlement, AppUser.email)
+        .join(AppUser, AppUser.id == Entitlement.user_id)
+        .where(Entitlement.source.in_([source] if source else ["scholarship", "promotional", "pilot"]))
+        .order_by(Entitlement.created_at.desc(), Entitlement.id)
+        .limit(limit)
+    )
+    if current:
+        now = service.db_now(db)
+        stmt = stmt.where(Entitlement.status == "active", Entitlement.starts_at <= now, Entitlement.ends_at > now)
+    out = []
+    for e, email in db.execute(stmt).all():
+        reserved, accepted, consumed, _remedy = service._holds(service._events(db, [e.id]))
+        out.append(
+            GrantOut(
+                id=e.id,
+                email=email or "(no email)",
+                source=e.source,  # type: ignore[arg-type]
+                product_code=e.product_code,
+                written_units=e.written_units,
+                units_consumed=consumed,
+                units_held=reserved + accepted,
+                reason=e.reason,
+                starts_at=e.starts_at,
+                ends_at=e.ends_at,
+                status=e.status,  # type: ignore[arg-type]
+                revoke_reason=e.revoke_reason,
+            )
+        )
+    return out
 
 
 @router.post(
