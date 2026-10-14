@@ -6301,6 +6301,11 @@ export interface components {
              */
             expected_rechecks: number;
             /**
+             * Measured Minutes Per Script
+             * @description Median minutes from taking a first marking to releasing it (breaks included)
+             */
+            measured_minutes_per_script?: number | null;
+            /**
              * Queued By Kind
              * @description Queued cases by kind: initial, recheck, completion, regrade
              */
@@ -6327,6 +6332,12 @@ export interface components {
              * @description First markings released in the last 90 days
              */
             released_scripts: number;
+            /**
+             * Timed Scripts
+             * @description First markings in 90 days with a recorded start (MARKING-TIME-01)
+             * @default 0
+             */
+            timed_scripts: number;
         };
         /** DeviceIn */
         DeviceIn: {
