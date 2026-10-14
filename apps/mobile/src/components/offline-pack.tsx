@@ -56,6 +56,13 @@ export function OfflinePack({ token, owner, chapterId }: { token: string; owner:
               Saved on this device: {pack.manifest.lessons as number} lessons and {pack.manifest.questions as number} practice questions. Kept until{" "}
               {day(pack.manifest.expires_at)}.
             </T>
+            {/* CONTENT-COMPAT-01: questions with images aren't packed yet; say so rather than leave them silently out. */}
+            {Number(pack.manifest.questions_online_only ?? 0) > 0 ? (
+              <T variant="small">
+                {Number(pack.manifest.questions_online_only)} more practice question{Number(pack.manifest.questions_online_only) === 1 ? "" : "s"} with
+                images or diagrams can be practised online only.
+              </T>
+            ) : null}
             <View style={{ flexDirection: "row", gap: Space.sm, flexWrap: "wrap" }}>
               <Button label="Open saved copy" onPress={() => router.push({ pathname: "/offline/[id]", params: { id: chapterId } })} />
               <Button variant="secondary" label="Update" busy={busy} onPress={save} />
