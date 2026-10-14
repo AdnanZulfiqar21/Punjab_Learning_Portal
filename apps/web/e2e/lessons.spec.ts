@@ -15,7 +15,7 @@ async function openFirstBiologyChapter(page: Page) {
   return page.getByRole("region", { name: "Lessons" });
 }
 
-test.skip(({ isMobile }) => isMobile, "Lesson access journeys run on desktop");
+test.skip(({ isMobile }) => isMobile && !process.env.E2E_FULL_MATRIX, "Lesson access journeys run on desktop");
 
 test("anyone reads a free preview; a premium lesson shows what it is but not its text", async ({ page }) => {
   const lessons = await openFirstBiologyChapter(page);

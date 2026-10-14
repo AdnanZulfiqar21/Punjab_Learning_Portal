@@ -352,3 +352,29 @@ def test_a_revoked_role_stops_a_queued_commit(client: TestClient) -> None:
     assert _items(f"BULK-{run}-") == 0
     with get_sessionmaker()() as db:
         assert db.scalar(select(func.count(ContentItem.id)).where(ContentItem.created_by == author.id)) == 0
+
+
+# ------------------------------------------------------------------ deployment: orphaned uploads
+def test_reconcile_removes_only_old_uploads_that_no_batch_names(client: TestClient) -> None:
+    import os
+    import time
+
+    author = _author(client)
+    chapter, refs = _setup()
+    named = _bulk(client, author, _csv(uuid.uuid4().hex[:8], chapter, refs, 6)).json()["id"]
+    named_key = _row(named).file_key
+    assert named_key
+    root = bulk_imports._root()
+    old_orphan, fresh_orphan = root / f"{uuid.uuid4()}.upload", root / f"{uuid.uuid4()}.upload"
+    old_orphan.write_bytes(b"orphan")
+    fresh_orphan.write_bytes(b"still streaming")
+    two_hours_ago = time.time() - 7200
+    for path in (old_orphan, root / named_key):
+        os.utime(path, (two_hours_ago, two_hours_ago))
+    with get_sessionmaker()() as db:
+        listed = bulk_imports.reconcile(db, apply=False)
+        assert old_orphan.name in listed and fresh_orphan.name not in listed and named_key not in listed
+        assert old_orphan.exists()  # listing deletes nothing
+        bulk_imports.reconcile(db, apply=True)
+    assert not old_orphan.exists() and fresh_orphan.exists() and (root / named_key).exists()
+    fresh_orphan.unlink()

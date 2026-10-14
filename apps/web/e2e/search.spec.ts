@@ -25,7 +25,7 @@ test("a guest finds a free preview by its text, and a premium lesson only by its
 });
 
 test("a learner on the free trial finds premium lesson text", async ({ page, isMobile }) => {
-  test.skip(isMobile, "The account journey runs on desktop");
+  test.skip(isMobile && !process.env.E2E_FULL_MATRIX, "The account journey runs on desktop");
   const email = `e2e-search-${Date.now()}-${Math.random().toString(36).slice(2, 7)}@example.com`;
   await page.goto("/signin?next=/account");
   await page.getByRole("button", { name: "New here? Create an account" }).click();

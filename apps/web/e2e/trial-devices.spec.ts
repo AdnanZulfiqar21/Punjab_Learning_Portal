@@ -8,7 +8,7 @@ const API = process.env.PORTAL_API_INTERNAL_ORIGIN ?? "http://127.0.0.1:8100";
 const AUTH = { timeout: 20_000 };
 const hex = () => crypto.randomUUID().replaceAll("-", "");
 
-test.skip(({ isMobile }) => isMobile, "Account journeys run on desktop");
+test.skip(({ isMobile }) => isMobile && !process.env.E2E_FULL_MATRIX, "Account journeys run on desktop");
 
 test("a learner sees the devices on their free trial and removes one", async ({ page, request, context }) => {
   await page.goto("/signin?next=/account");

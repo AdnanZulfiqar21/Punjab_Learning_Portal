@@ -41,7 +41,7 @@ import sys
 import time
 import uuid
 from dataclasses import dataclass
-from datetime import datetime, timedelta
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
 from typing import Any, cast
 
@@ -398,6 +398,44 @@ def work(db: Session, owner: str | None = None, max_jobs: int | None = None) -> 
             break
         n += 1
     return n
+
+
+ORPHAN_AGE = timedelta(hours=1)
+
+
+def reconcile(db: Session, *, apply: bool, now: datetime | None = None) -> list[str]:
+    """Uploads that no batch names (the API stopped between writing the file and recording its batch), untouched for
+    ORPHAN_AGE. A file being streamed is written to continuously, so its modification time keeps it safe. Returns the
+    names; deletes them only with `apply`."""
+    named = set(db.scalars(select(ContentImportBatch.file_key).where(ContentImportBatch.file_key.is_not(None))))
+    db.rollback()
+    cutoff = (now or datetime.now(UTC)).timestamp() - ORPHAN_AGE.total_seconds()
+    orphans: list[str] = []
+    for path in sorted(_root().iterdir()):
+        if not path.is_file() or not path.name.endswith(".upload") or path.name in named:
+            continue
+        try:
+            if path.stat().st_mtime > cutoff:
+                continue
+        except OSError:
+            continue
+        orphans.append(path.name)
+        if apply:
+            _remove(path.name)
+    return orphans
+
+
+def reconcile_main(argv: list[str] | None = None) -> int:
+    """portal-import-reconcile [--apply]: list (or delete) import uploads that no batch names. Run hourly."""
+    import argparse
+
+    p = argparse.ArgumentParser(prog="portal-import-reconcile")
+    p.add_argument("--apply", action="store_true", help="delete them (default: only list them)")
+    args = p.parse_args(argv)
+    with get_sessionmaker()() as db:
+        orphans = reconcile(db, apply=args.apply)
+    print(f"{len(orphans)} orphaned import upload(s){' deleted' if args.apply else ''}: {', '.join(orphans) or '-'}")
+    return 0
 
 
 def worker_main(argv: list[str] | None = None) -> int:

@@ -5,7 +5,7 @@ import { expect, test, type Browser, type Page } from "@playwright/test";
 // diagrams until tapped (the labelled structured-blocks fixture lesson from `portal-dev-seed-practice`).
 const AUTH = { timeout: 20_000 };
 
-test.skip(({ isMobile }) => isMobile, "Account journeys run on desktop");
+test.skip(({ isMobile }) => isMobile && !process.env.E2E_FULL_MATRIX, "Account journeys run on desktop");
 
 async function signIn(page: Page, email: string, register = false) {
   await page.goto("/signin?next=/account");
