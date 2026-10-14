@@ -9727,6 +9727,18 @@
       "PageTransform": {
         "description": "TRANSFORMS-01: how a page is shown, derived from its untouched original. Regions on the page (feedback places,\ndetail views) are fractions of the page as shown; the server maps them back to the original.",
         "properties": {
+          "aspect": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The page's width/height just before straightening",
+            "title": "Aspect"
+          },
           "crop": {
             "anyOf": [
               {
@@ -9759,6 +9771,29 @@
             ],
             "title": "Rotate",
             "type": "integer"
+          },
+          "shown_crop": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "number"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "STRAIGHTEN-01: x, y, w, h of the straightened page kept (a trim made after it)",
+            "title": "Shown Crop"
+          },
+          "straighten": {
+            "default": 0.0,
+            "description": "STRAIGHTEN-01: a small turn, degrees counter-clockwise as shown",
+            "maximum": 10.0,
+            "minimum": -10.0,
+            "title": "Straighten",
+            "type": "number"
           }
         },
         "title": "PageTransform",
@@ -15965,6 +16000,18 @@
       "TransformIn": {
         "description": "A page's new transform. `trim`, when given, is the part of the page *as currently shown* to keep (x, y, w, h);\nthe server maps it onto the original and it replaces `crop`.",
         "properties": {
+          "aspect": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The page's width/height just before straightening",
+            "title": "Aspect"
+          },
           "crop": {
             "anyOf": [
               {
@@ -15997,6 +16044,35 @@
             ],
             "title": "Rotate",
             "type": "integer"
+          },
+          "shown_crop": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "number"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "STRAIGHTEN-01: x, y, w, h of the straightened page kept (a trim made after it)",
+            "title": "Shown Crop"
+          },
+          "straighten": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "const": "auto",
+                "type": "string"
+              }
+            ],
+            "default": 0.0,
+            "description": "STRAIGHTEN-01: degrees, or \"auto\" to find the angle that levels the writing (where available)",
+            "title": "Straighten"
           },
           "trim": {
             "anyOf": [

@@ -56,6 +56,12 @@ ROLLOUTS: dict[str, tuple[str, dict[str, int]]] = {
         "Private notes, topic favourites and saved formulas (STUDY-TOOLS-01)",
         {"development": 100, "staging": 100, "production": 100},
     ),
+    # STRAIGHTEN-01: straightening resamples the photo (nearest-neighbour, so no pixel is blended lighter), but it is
+    # not yet qualified on real faint-ink and pencil scripts (W03.S1.T3; B10), so deployed roles start at 0%.
+    "page_straighten": (
+        "Straighten a written page's photo before submitting (STRAIGHTEN-01; not yet qualified on real scripts)",
+        {"development": 100, "staging": 0, "production": 0},
+    ),
 }
 
 

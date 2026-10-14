@@ -3,7 +3,7 @@ import { notFound, redirect } from "next/navigation";
 import { Suspense } from "react";
 import { SkeletonLines } from "@/components/ui";
 import type { WrittenResult } from "@portal/contracts";
-import { api, currentUser } from "@/lib/session";
+import { api, currentUser, features } from "@/lib/session";
 import { getWrittenAttempt } from "@/lib/written";
 import { WrittenRunner } from "./written-runner";
 
@@ -30,5 +30,14 @@ async function Attempt({ id }: { id: string }) {
     const res = await api<WrittenResult>(`/v1/written-attempts/${id}/result`, { token: user.token });
     result = res.ok ? res.data : null;
   }
-  return <WrittenRunner key={`${attempt.id}:${attempt.status}:${attempt.manifest_revision}`} attempt={attempt} result={result} />;
+  // STRAIGHTEN-01: offered only where rolled out (deployed roles start at 0% until it is qualified on real scripts).
+  const canStraighten = attempt.status === "active" && (await features(user.token)).page_straighten === true;
+  return (
+    <WrittenRunner
+      key={`${attempt.id}:${attempt.status}:${attempt.manifest_revision}`}
+      attempt={attempt}
+      result={result}
+      canStraighten={canStraighten}
+    />
+  );
 }

@@ -632,13 +632,28 @@ def transform_page(
     page = db.get(WrittenPage, page_id)
     if page is None or page.attempt_id != attempt.id or page.status != "uploaded":
         raise NotFound("Page not found.")
+    current = page.transform or {}
+    asked = raw.get("straighten") or 0
+    if asked != current.get("straighten", 0) or not asked:  # STRAIGHTEN-01: a trim of the old angle doesn't carry over
+        raw = {**raw, "shown_crop": None}
+    if asked and asked != current.get("straighten"):  # STRAIGHTEN-01: offered only where rolled out
+        from portal_api.modules.system import operations
+
+        if not operations.rollout_on(db, "page_straighten", who):
+            raise NotFound("Straightening isn't available on your account yet.", code_reason="FEATURE_NOT_AVAILABLE")
     try:
-        if raw.get("trim") is not None:  # a trim of the page as shown, mapped onto the original
+        if raw.get("trim") is not None:  # a trim of the page as shown
             trim = [float(v) for v in raw["trim"]]
             if len(trim) != 4 or min(trim) < 0 or trim[0] + trim[2] > 1.0001 or trim[1] + trim[3] > 1.0001:
                 raise evidence.Rejected("A trim must stay inside the page.")
-            raw = {**raw, "crop": evidence.to_source(trim, page.transform or None)}
-        transform = evidence.check_transform({k: raw.get(k) for k in ("rotate", "crop", "enhance")})
+            if asked and asked == current.get("straighten"):  # straightened: kept in the straightened page's terms
+                sx, sy, sw, sh = current.get("shown_crop") or [0.0, 0.0, 1.0, 1.0]
+                raw = {**raw, "shown_crop": [sx + trim[0] * sw, sy + trim[1] * sh, trim[2] * sw, trim[3] * sh]}
+            else:  # mapped onto the original
+                raw = {**raw, "crop": evidence.to_source(trim, current or None)}
+        transform = evidence.check_transform(
+            {k: raw.get(k) for k in ("rotate", "crop", "enhance", "straighten", "shown_crop")}, allow_auto=True
+        )
     except (evidence.Rejected, TypeError, ValueError) as e:
         reason = e.reason if isinstance(e, evidence.Rejected) else "A trim is four numbers: x, y, width and height."
         raise Unprocessable(reason, code_reason="TRANSFORM_REFUSED") from e
@@ -663,7 +678,7 @@ def transform_page(
             raise NotFound("Page not found.")
         page.preview_key, page.preview_sha256 = pv.key, pv.sha256
         page.width, page.height = rendered.width, rendered.height
-        page.quality, page.transform = rendered.quality, transform
+        page.quality, page.transform = rendered.quality, rendered.transform or transform  # as applied
         db.commit()
     except BaseException:
         db.rollback()

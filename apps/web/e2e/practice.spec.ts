@@ -207,6 +207,23 @@ test("a page can be turned and clarified before submitting", async ({ page }) =>
   await expect(adjust.getByLabel("Clearer contrast")).toBeChecked(AUTH);
 });
 
+// W03.S1.T3 (STRAIGHTEN-01): a crooked photo is straightened from its writing, and undone; development has it rolled out.
+test("a crooked page can be straightened and the straightening undone", async ({ page }) => {
+  await newLearner(page);
+  await page.goto("/practice/written?grade=11&subject=biology");
+  await page.getByRole("group", { name: "Chapters" }).getByRole("checkbox").first().check();
+  await page.getByRole("button", { name: "Start written test" }).click();
+  await expect(page).toHaveURL(/:\d+\/practice\/written\/[0-9a-f-]{36}$/, AUTH);
+  await page.getByLabel("Add photos or a PDF").setInputFiles("e2e/fixtures/synthetic-tilted-page.png"); // tilted 5°
+  const adjust = page.getByRole("group", { name: "Adjust page 1" });
+  await adjust.getByRole("button", { name: "Straighten" }).click();
+  await expect(adjust.getByText(/^Straightened by [4-6]\.\d°$/)).toBeVisible(AUTH);
+  await adjust.getByRole("button", { name: "Turn right" }).click(); // the straightening is kept through other changes
+  await expect(adjust.getByText(/^Straightened by [4-6]\.\d°$/)).toBeVisible(AUTH);
+  await adjust.getByRole("button", { name: "Undo straighten" }).click();
+  await expect(adjust.getByRole("button", { name: "Straighten" })).toBeVisible(AUTH);
+});
+
 test("a PDF becomes one page per PDF page, and each page maps on its own", async ({ page }) => {
   await newLearner(page);
   await page.goto("/practice/written?grade=11&subject=biology");

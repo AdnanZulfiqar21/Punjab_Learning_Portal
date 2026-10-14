@@ -117,7 +117,14 @@ def test_a_learner_transforms_a_page_and_the_original_is_kept(
     assert turned.status_code == 200, turned.text
     page = turned.json()
     assert (page["width"], page["height"]) == (up["height"], up["width"])
-    assert page["transform"] == {"rotate": 90, "crop": None, "enhance": True}
+    assert page["transform"] == {
+        "rotate": 90,
+        "crop": None,
+        "enhance": True,
+        "straighten": 0.0,  # STRAIGHTEN-01: not straightened
+        "aspect": None,
+        "shown_crop": None,
+    }
     shown = client.get(f"/v1/written-attempts/{attempt['id']}", headers=learner.headers).json()["pages"][0]
     assert shown["transform"]["rotate"] == 90
 

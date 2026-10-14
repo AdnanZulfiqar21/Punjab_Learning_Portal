@@ -38,7 +38,15 @@ function uploadFile(attemptId: string, file: File, onProgress: (p: number) => vo
   });
 }
 
-export function WrittenRunner({ attempt, result = null }: { attempt: WrittenAttempt; result?: WrittenResult | null }) {
+export function WrittenRunner({
+  attempt,
+  result = null,
+  canStraighten = false,
+}: {
+  attempt: WrittenAttempt;
+  result?: WrittenResult | null;
+  canStraighten?: boolean;
+}) {
   const router = useRouter();
   const [pages, setPages] = useState<WrittenPage[]>(attempt.pages);
   const [uploads, setUploads] = useState<Upload[]>([]);
@@ -400,7 +408,15 @@ export function WrittenRunner({ attempt, result = null }: { attempt: WrittenAtte
                   PDF page {p.page_index} of {p.file_pages}
                 </p>
               )}
-              {active && <PageAdjust attemptId={attempt.id} page={p} number={i + 1} onChange={(n) => setPages((all) => all.map((x) => (x.id === n.id ? n : x)))} />}
+              {active && (
+                <PageAdjust
+                  attemptId={attempt.id}
+                  page={p}
+                  number={i + 1}
+                  canStraighten={canStraighten}
+                  onChange={(n) => setPages((all) => all.map((x) => (x.id === n.id ? n : x)))}
+                />
+              )}
               {(p.quality ?? []).length > 0 && (
                 <ul className="space-y-1 text-warn" aria-label={`Photo checks for page ${i + 1}`}>
                   {(p.quality ?? []).map((q) => (
@@ -583,9 +599,23 @@ function NextSteps({ steps }: { steps: Steps }) {
 }
 
 // W03.S1.T3 (TRANSFORMS-01): turn a page, make its contrast clearer or trim its edges before submitting. Each is
-// applied to a fresh copy of the original, which is always kept; teachers can see the original too.
-function PageAdjust({ attemptId, page, number, onChange }: { attemptId: string; page: WrittenPage; number: number; onChange: (p: WrittenPage) => void }) {
-  const t = page.transform ?? { rotate: 0, crop: null, enhance: false };
+// applied to a fresh copy of the original, which is always kept; teachers can see the original too. STRAIGHTEN-01: where
+// rolled out, a crooked photo can be straightened (the angle is found from the writing); undo is always offered.
+function PageAdjust({
+  attemptId,
+  page,
+  number,
+  canStraighten,
+  onChange,
+}: {
+  attemptId: string;
+  page: WrittenPage;
+  number: number;
+  canStraighten: boolean;
+  onChange: (p: WrittenPage) => void;
+}) {
+  const t = page.transform ?? { rotate: 0, crop: null, enhance: false, straighten: 0, aspect: null, shown_crop: null };
+  const angle = t.straighten ?? 0;
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [trim, setTrim] = useState({ top: 0, bottom: 0, left: 0, right: 0 });
@@ -597,7 +627,7 @@ function PageAdjust({ attemptId, page, number, onChange }: { attemptId: string; 
     if (r.ok) onChange(r.page);
     else setError(r.error);
   };
-  const keep = { rotate: t.rotate, crop: t.crop ?? null, enhance: t.enhance };
+  const keep = { rotate: t.rotate, crop: t.crop ?? null, enhance: t.enhance, straighten: angle, shown_crop: t.shown_crop ?? null };
   const small = "rounded border border-border bg-surface px-2 py-1 hover:border-accent disabled:opacity-60";
   return (
     <div role="group" aria-label={`Adjust page ${number}`} className="space-y-1">
@@ -612,6 +642,19 @@ function PageAdjust({ attemptId, page, number, onChange }: { attemptId: string; 
           <input type="checkbox" disabled={busy} checked={t.enhance} onChange={(e) => apply({ ...keep, enhance: e.target.checked })} />
           Clearer contrast
         </label>
+        {canStraighten && !angle && (
+          <button type="button" disabled={busy} className={small} onClick={() => apply({ ...keep, straighten: "auto", shown_crop: null })}>
+            Straighten
+          </button>
+        )}
+        {angle !== 0 && (
+          <>
+            <span className="text-muted">Straightened by {Math.abs(angle).toFixed(1)}°</span>
+            <button type="button" disabled={busy} className={small} onClick={() => apply({ ...keep, straighten: 0, shown_crop: null })}>
+              Undo straighten
+            </button>
+          </>
+        )}
       </div>
       <details>
         <summary className="cursor-pointer">Trim edges</summary>
@@ -647,8 +690,8 @@ function PageAdjust({ attemptId, page, number, onChange }: { attemptId: string; 
           >
             Trim
           </button>
-          {t.crop && (
-            <button type="button" disabled={busy} className={small} onClick={() => apply({ ...keep, crop: null })}>
+          {(t.crop || t.shown_crop) && (
+            <button type="button" disabled={busy} className={small} onClick={() => apply({ ...keep, crop: null, shown_crop: null })}>
               Undo trim
             </button>
           )}
