@@ -12261,6 +12261,71 @@
         "title": "ReviewOut",
         "type": "object"
       },
+      "ReviewerQualityOut": {
+        "properties": {
+          "academic_reviews_raised": {
+            "description": "Methods the marker sent to academic review",
+            "title": "Academic Reviews Raised",
+            "type": "integer"
+          },
+          "changed_on_recheck": {
+            "description": "Rechecks where another teacher changed the marks",
+            "title": "Changed On Recheck",
+            "type": "integer"
+          },
+          "decisions": {
+            "description": "Released teacher decisions in the window",
+            "title": "Decisions",
+            "type": "integer"
+          },
+          "rechecked": {
+            "description": "Of the marker's decisions, how many a learner asked to recheck",
+            "title": "Rechecked",
+            "type": "integer"
+          },
+          "reviewer": {
+            "description": "The marker's sign-in email (staff accountability; never a learner)",
+            "title": "Reviewer",
+            "type": "string"
+          },
+          "reviewer_id": {
+            "format": "uuid",
+            "title": "Reviewer Id",
+            "type": "string"
+          },
+          "scopes": {
+            "description": "grade:subject pairs the marker decided in, within your scope",
+            "items": {
+              "type": "string"
+            },
+            "title": "Scopes",
+            "type": "array"
+          },
+          "teacher_regrades": {
+            "description": "Times an approved guide correction sent the marker's work to a teacher",
+            "title": "Teacher Regrades",
+            "type": "integer"
+          },
+          "upheld_on_recheck": {
+            "description": "Rechecks where the marks stood",
+            "title": "Upheld On Recheck",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "reviewer_id",
+          "reviewer",
+          "scopes",
+          "decisions",
+          "rechecked",
+          "changed_on_recheck",
+          "upheld_on_recheck",
+          "teacher_regrades",
+          "academic_reviews_raised"
+        ],
+        "title": "ReviewerQualityOut",
+        "type": "object"
+      },
       "Revision": {
         "properties": {
           "due": {
@@ -29790,6 +29855,55 @@
           }
         },
         "summary": "Retry Regrade Job",
+        "tags": [
+          "written marking"
+        ]
+      }
+    },
+    "/v1/studio/written/reviewer-quality": {
+      "get": {
+        "operationId": "reviewer_quality_v1_studio_written_reviewer_quality_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "days",
+            "required": false,
+            "schema": {
+              "default": 90,
+              "maximum": 365,
+              "minimum": 7,
+              "title": "Days",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/ReviewerQualityOut"
+                  },
+                  "title": "Response Reviewer Quality V1 Studio Written Reviewer Quality Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Per-marker overrides, upheld rechecks and conflicts in your academic scope (adjudicators)",
         "tags": [
           "written marking"
         ]
