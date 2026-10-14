@@ -43,7 +43,7 @@ from portal_api.modules.identity.deps import Principal
 from portal_api.modules.identity.permissions import Permission, permissions_for
 
 SCHEMA_VERSION = 1
-IMPORT_KINDS = ("mcq", "lesson", "written", "storyboard")
+IMPORT_KINDS = ("mcq", "lesson", "written", "storyboard", "rubric", "passage")
 MAX_BYTES = 5 * 1024 * 1024
 MAX_ROWS = 2000
 MAX_DEPTH = 40  # rich blocks nest a few levels; anything deeper is hostile or broken (IMPORT-ABUSE-01)
@@ -68,6 +68,7 @@ CSV_COLUMNS = (
     "source_document_id",
     "pdf_from",
     "pdf_to",
+    "family",  # IMPORT-REFS-01: an existing question (external_id or ID) this one is a variant of
 )
 
 
@@ -178,6 +179,7 @@ def _csv_read(reader: csv.DictReader[str]) -> tuple[str, list[dict[str, Any]]]:
                     "metadata": metadata,
                 },
                 "source_refs": refs,
+                **({"family": r["family"]} if r.get("family") else {}),
             }
         )
     return "mcq", rows
@@ -232,6 +234,67 @@ def _topic(db: Session, ref: str, chapter: Chapter) -> Topic | None:
     return t if t is not None and t.chapter_id == chapter.id and t.retired_at is None else None
 
 
+def _ref(db: Session, kind: str, ref: object) -> ContentItem | None:
+    """IMPORT-REFS-01: an existing item of this kind by its import external_id or its ID."""
+    if not isinstance(ref, str) or not ref.strip():
+        return None
+    ref = ref.strip()
+    try:
+        item = db.get(ContentItem, uuid.UUID(ref))
+    except ValueError:
+        item = db.scalar(select(ContentItem).where(ContentItem.kind == kind, ContentItem.external_ref == ref))
+    return item if item is not None and item.kind == kind else None
+
+
+def _links(
+    db: Session, kind: str, raw: dict[str, Any], chapter: Chapter, body: Any, ext: str | None
+) -> tuple[dict[str, Any], Any, list[str]]:
+    """IMPORT-REFS-01: references to other items. A rubric names its written question (and marks its current version);
+    a question may name a variant family and a passage. Returns (payload additions, body, errors)."""
+    extra: dict[str, Any] = {}
+    errors: list[str] = []
+    if kind == "rubric":
+        q = _ref(db, "written", raw.get("question"))
+        if q is None:
+            errors.append("question: name an existing written question (its external_id or ID).")
+        elif q.chapter_id != chapter.id:
+            errors.append("question: the written question is in another chapter; a rubric lives with its question.")
+        else:
+            version = q.working_version_id or q.published_version_id
+            if version is None:
+                errors.append("question: the written question has no version to mark yet.")
+            else:
+                other = db.scalar(
+                    select(ContentItem).where(
+                        ContentItem.kind == "rubric",
+                        ContentItem.parent_item_id == q.id,
+                        ContentItem.external_ref.is_distinct_from(ext),
+                    )
+                )
+                if other is not None:
+                    errors.append("question: it already has a rubric; change that one in the studio.")
+                extra = {"parent_item_id": str(q.id), "question_ref": str(raw.get("question")).strip()}
+                if isinstance(body, dict):
+                    body = {**body, "question_version_id": str(version)}
+    if kind == "mcq":
+        if raw.get("family"):
+            base = _ref(db, "mcq", raw.get("family"))
+            if base is None or base.chapter_id != chapter.id:
+                errors.append("family: name an existing question in the same chapter (its external_id or ID).")
+            else:
+                extra["family_id"] = str(base.family_id or base.id)
+                extra["family_ref"] = str(raw["family"]).strip()
+        if raw.get("passage"):
+            passage = _ref(db, "passage", raw.get("passage"))
+            if passage is None or passage.chapter_id is None:
+                errors.append("passage: name an existing passage (its external_id or ID).")
+            else:
+                extra["passage_ref"] = str(raw["passage"]).strip()
+                if isinstance(body, dict):
+                    body = {**body, "passage_id": str(passage.id)}
+    return extra, body, errors
+
+
 def _validate_row(
     db: Session, who: Principal, kind: str, raw: dict[str, Any], scope_cache: dict[Any, bool]
 ) -> dict[str, Any]:
@@ -272,7 +335,9 @@ def _validate_row(
                     errors.append("topic: not a current topic of this chapter.")
                 else:
                     topic_id = str(topic.id)
-            body, body_errors, types = kinds.get(kind).parse_draft(raw.get("body"))
+            links, linked_body, link_errors = _links(db, kind, raw, chapter, raw.get("body"), ext)
+            errors += link_errors
+            body, body_errors, types = kinds.get(kind).parse_draft(linked_body)
             errors += [f"body: {e}" for e in body_errors]
             s_err, s_warn, refs = workflow.check_sources(db, chapter, raw.get("source_refs", []))
             errors += s_err
@@ -289,6 +354,7 @@ def _validate_row(
                     "body": body,
                     "block_types": types,
                     "source_refs": refs,
+                    **links,
                 }
     if errors:
         return {"external_id": ext, "action": "error", "errors": errors, "warnings": warnings}
@@ -498,6 +564,9 @@ def _row_input(r: ContentImportRow) -> dict[str, Any]:
         "title": p["title"],
         "body": p["body"],
         "source_refs": p["source_refs"],
+        **({"question": p["question_ref"]} if p.get("question_ref") else {}),
+        **({"family": p["family_ref"]} if p.get("family_ref") else {}),
+        **({"passage": p["passage_ref"]} if p.get("passage_ref") else {}),
     }
 
 
@@ -524,7 +593,9 @@ def _create(db: Session, who: Principal, batch: ContentImportBatch, r: ContentIm
         import_hash=r.payload_hash,
     )
     if batch.kind in ("mcq", "written"):
-        item.family_id = item.id
+        item.family_id = uuid.UUID(p["family_id"]) if p.get("family_id") else item.id  # IMPORT-REFS-01: a variant
+    if batch.kind == "rubric":
+        item.parent_item_id = uuid.UUID(p["parent_item_id"])  # a rubric lives with its written question
     version = ContentVersion(
         id=uuid.uuid4(),
         item_id=item.id,

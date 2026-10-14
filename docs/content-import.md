@@ -36,7 +36,7 @@ through an import.
 - UTF-8 only. A byte-order mark is accepted.
 - Previews expire after 24 hours.
 
-## JSON (all kinds: `mcq`, `lesson`, `written`)
+## JSON (all kinds: `mcq`, `lesson`, `written`, `storyboard`, `rubric`, `passage`)
 
 ```json
 {
@@ -59,6 +59,18 @@ The `body` follows each kind's content schema (§10.2, §10.7): blocks, formulas
 Source references must point to the chapter's own textbook, inside the PDF page range. Rows without references can be
 imported but cannot be published until references are added.
 
+### References to other items (IMPORT-REFS-01)
+
+Each reference is an existing item's `external_id` (from an earlier import) or its ID. Import the referenced items first.
+
+- **Rubrics** (`kind: "rubric"`) need `"question"`: the written question they mark, in the same chapter. The rubric is
+  attached to that question and marks its current version, whatever `question_version_id` the body names. A question
+  that already has another rubric is an error: change that rubric in the studio.
+- **Variants** (`kind: "mcq"`) may give `"family"`: an existing question in the same chapter. The new question joins
+  that question's family (P08.S3.T2).
+- **Passages** (`kind: "passage"`) import like lessons (their `body` holds `blocks`). A question may then give
+  `"passage"`: the passage it uses, which becomes its `passage_id`.
+
 ## CSV (multiple-choice questions only)
 
 These are plain paragraphs. Use JSON for formulas, images or rich formatting.
@@ -66,7 +78,8 @@ These are plain paragraphs. Use JSON for formulas, images or rich formatting.
 Required columns: `external_id`, `chapter`, `title`, `stem`, `option_a`, `option_b`, `correct`.
 
 Optional columns: `topic`, `option_c`, `option_d`, `explanation`, `difficulty`, `estimated_seconds`,
-`cognitive_demand`, `source_document_id`, `pdf_from`, `pdf_to`.
+`cognitive_demand`, `source_document_id`, `pdf_from`, `pdf_to`, `family` (an existing question this one is a variant
+of).
 
 - `correct` is the letter of the right option (`A` to `D`). Options get the stable IDs `o1` to `o4`.
 - Unknown columns are rejected, so a misspelt header can't silently drop data.
@@ -75,8 +88,7 @@ Excel users: save as **CSV UTF-8**.
 
 ## Not imported here
 
-- Marking rubrics. Attach them to a written question in the studio.
-- Media files.
+- Media files (diagrams and handouts are uploaded to the asset archive, and blocks name them).
 - Teacher labels, held-out evaluation evidence and student scripts. These stay private and separate (W01).
 
 ## Export (P06.S4.T2, EXPORT-01)
