@@ -129,10 +129,10 @@ def test_marking_time_is_measured_from_taking_a_script_to_releasing_it(
                 if i == 8:
                     db.commit()
                     nine = review.review_demand(db, 11, subject, None)
-                    assert nine["timed_scripts"] == 9 and nine["measured_minutes_per_script"] is None
+                    assert nine["timed_scripts"] == 9 and nine["median_take_to_release_minutes"] is None
             db.commit()
             ten = review.review_demand(db, 11, subject, None)
-        assert ten["timed_scripts"] == 10 and ten["measured_minutes_per_script"] == 14.5
+        assert ten["timed_scripts"] == 10 and ten["median_take_to_release_minutes"] == 14.5
     finally:
         with get_sessionmaker()() as db:
             db.execute(delete(review.WrittenReviewCase).where(review.WrittenReviewCase.subject_code == subject))

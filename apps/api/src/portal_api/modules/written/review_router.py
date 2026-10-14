@@ -951,8 +951,10 @@ class DemandOut(BaseModel):
     timed_scripts: int = Field(
         default=0, description="First markings in 90 days with a recorded start (MARKING-TIME-01)"
     )
-    measured_minutes_per_script: float | None = Field(
-        default=None, description="Median minutes from taking a first marking to releasing it (breaks included)"
+    median_take_to_release_minutes: float | None = Field(
+        default=None,
+        description="Median elapsed minutes from taking a first marking to releasing it. Elapsed time with breaks "
+        "included, not measured working time",
     )
 
 

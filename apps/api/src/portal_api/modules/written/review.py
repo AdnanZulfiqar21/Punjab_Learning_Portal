@@ -367,10 +367,12 @@ def review_demand(db: Session, grade: int, subject: str, cap: ReviewCapacity | N
         "queued_by_kind": {k: int(queued.get(k, 0)) for k in ("initial", "recheck", "completion", "regrade")},
         "expected_recheck_minutes": None,
         "admissible_if_rechecks_counted": None,
-        # MARKING-TIME-01: median minutes from taking a first marking to releasing it (breaks included: an upper
-        # bound), shown once MIN_TIMING_SAMPLE were timed; beside the operator-entered minutes per script.
+        # MARKING-TIME-01: median elapsed minutes from taking a first marking to releasing it, shown once
+        # MIN_TIMING_SAMPLE were timed. Elapsed time, not working time: breaks and interruptions while the case is held
+        # are included, so it is an upper bound on a teacher's effort and never replaces the minutes entered for
+        # planning.
         "timed_scripts": timed_n,
-        "measured_minutes_per_script": round(float(timed), 1)
+        "median_take_to_release_minutes": round(float(timed), 1)
         if timed is not None and timed_n >= MIN_TIMING_SAMPLE
         else None,
     }

@@ -6301,10 +6301,10 @@ export interface components {
              */
             expected_rechecks: number;
             /**
-             * Measured Minutes Per Script
-             * @description Median minutes from taking a first marking to releasing it (breaks included)
+             * Median Take To Release Minutes
+             * @description Median elapsed minutes from taking a first marking to releasing it. Elapsed time with breaks included, not measured working time
              */
-            measured_minutes_per_script?: number | null;
+            median_take_to_release_minutes?: number | null;
             /**
              * Queued By Kind
              * @description Queued cases by kind: initial, recheck, completion, regrade
