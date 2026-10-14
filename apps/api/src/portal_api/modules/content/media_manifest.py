@@ -30,6 +30,7 @@ from sqlalchemy.orm import Session
 from portal_api.errors import Conflict, Forbidden, TooLarge, Unprocessable
 from portal_api.modules.audit.models import record
 from portal_api.modules.content import assets
+from portal_api.modules.content.imports import ZIP_MEMBER_ERRORS
 from portal_api.modules.identity.deps import Principal
 
 SCHEMA_VERSION = 1
@@ -85,6 +86,10 @@ def _manifest(z: zipfile.ZipFile) -> dict[str, Any]:
             raw = f.read(MAX_MANIFEST_BYTES + 1)
     except KeyError:
         raise _bad("The pack has no manifest.json at its top level.") from None
+    except ZIP_MEMBER_ERRORS:  # OCT14-03: a damaged, encrypted or oddly compressed manifest is unreadable, not a crash
+        raise _bad(
+            "manifest.json in the pack is damaged, encrypted or compressed in a way that can't be read."
+        ) from None
     if len(raw) > MAX_MANIFEST_BYTES:
         raise TooLarge("manifest.json can be at most 1 MB.")
     try:
@@ -115,8 +120,8 @@ def _read_member(z: zipfile.ZipFile, name: str, limit: int) -> bytes | str:
             data = f.read(limit + 1)
     except KeyError:
         return f"{name} is not in the pack."
-    except (zipfile.BadZipFile, NotImplementedError, RuntimeError):
-        return f"{name} can't be unpacked (encrypted or an unsupported compression)."
+    except ZIP_MEMBER_ERRORS:
+        return f"{name} can't be unpacked (damaged, encrypted or an unsupported compression)."
     if len(data) > limit:
         return f"{name} is larger than {limit // (1024 * 1024)} MB."
     if not data:
@@ -209,7 +214,7 @@ def run(db: Session, who: Principal, data: bytes, *, commit: bool) -> Pack:
         raise TooLarge(f"A media pack can be at most {MAX_PACK_BYTES // (1024 * 1024)} MB; split it.")
     try:
         z = zipfile.ZipFile(io.BytesIO(data))
-    except zipfile.BadZipFile:
+    except (zipfile.BadZipFile, EOFError, ValueError, NotImplementedError):
         raise _bad("A media pack must be a .zip file holding manifest.json and the files it lists.") from None
     with z:
         if len(z.infolist()) > MAX_ITEMS + 50:

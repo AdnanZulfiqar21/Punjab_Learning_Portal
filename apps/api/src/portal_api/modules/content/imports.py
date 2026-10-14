@@ -21,11 +21,13 @@ import json
 import re
 import uuid
 import zipfile
+import zlib
 from collections.abc import Iterable, Iterator
 from dataclasses import dataclass
 from datetime import UTC, datetime, timedelta
 from typing import Any
 from xml.etree import ElementTree as ET
+from xml.parsers import expat
 
 from sqlalchemy import func, select
 from sqlalchemy.exc import IntegrityError
@@ -238,8 +240,9 @@ def _json_rows(text: str) -> tuple[str, list[dict[str, Any]]]:
 
 # ------------------------------------------------------------------ Excel workbooks (IMPORT-XLSX-01)
 # Read with the standard library, never evaluated: the first worksheet's cached cell values only. Every part is read
-# with a hard size cap (a small zip can inflate enormously) and any DOCTYPE is refused, so entity expansion and
-# external entities never reach the XML parser.
+# with a hard size cap (a small zip can inflate enormously). The XML parser itself refuses any DOCTYPE or entity
+# declaration, after decoding, so the rule holds in every encoding (OCT14-06); nothing is ever expanded or fetched.
+# A damaged, encrypted or unsupported member is a validation error like any other unreadable file (OCT14-03).
 XLSX_MAX_PART = 25 * 1024 * 1024
 XLSX_MAX_PARTS = 500
 XLSX_MAX_COLUMNS = 64
@@ -248,7 +251,49 @@ _MAIN = "http://schemas.openxmlformats.org/spreadsheetml/2006/main"
 _DOC_REL = "http://schemas.openxmlformats.org/officeDocument/2006/relationships"
 _PKG_REL = "http://schemas.openxmlformats.org/package/2006/relationships"
 _CELL_REF = re.compile(r"^([A-Z]{1,3})\d+$")
-_DECLARATION = re.compile(rb"<!(?i:doctype|entity)")
+# What reading one member of a zip can raise besides a missing name: a CRC mismatch or damaged directory
+# (BadZipFile), a damaged deflate stream (zlib.error), a truncated member (EOFError), an unsupported compression
+# method (NotImplementedError) or an encrypted member (RuntimeError, "password required").
+ZIP_MEMBER_ERRORS: tuple[type[BaseException], ...] = (
+    zipfile.BadZipFile,
+    zlib.error,
+    EOFError,
+    NotImplementedError,
+    RuntimeError,
+)
+
+
+class _Declaration(Exception):
+    pass
+
+
+def _qname(name: str) -> str:
+    return "{" + name if "}" in name else name  # expat gives "uri}local"; ElementTree uses "{uri}local"
+
+
+def parse_xml(data: bytes) -> ET.Element:
+    """Parse one workbook part, refusing any DOCTYPE or entity declaration. expat reports a declaration after it has
+    decoded the document, so the refusal doesn't depend on UTF-8, UTF-16 or any other encoding."""
+
+    def refuse(*_: object) -> None:
+        raise _Declaration
+
+    def refuse_external(*_: object) -> int:
+        raise _Declaration
+
+    builder = ET.TreeBuilder()
+    parser = expat.ParserCreate(namespace_separator="}")
+    parser.StartDoctypeDeclHandler = refuse
+    parser.EntityDeclHandler = refuse
+    parser.UnparsedEntityDeclHandler = refuse
+    parser.NotationDeclHandler = refuse
+    parser.ExternalEntityRefHandler = refuse_external
+    parser.buffer_text = True
+    parser.StartElementHandler = lambda tag, attrs: builder.start(_qname(tag), {_qname(k): v for k, v in attrs.items()})
+    parser.EndElementHandler = lambda tag: builder.end(_qname(tag))
+    parser.CharacterDataHandler = builder.data
+    parser.Parse(data, True)
+    return builder.close()
 
 
 def _unreadable(why: str) -> Unprocessable:
@@ -267,13 +312,15 @@ def _optional(z: zipfile.ZipFile, name: str, cap: int) -> ET.Element | None:
             data = f.read(cap + 1)
     except KeyError:
         return None
+    except ZIP_MEMBER_ERRORS:
+        raise _unreadable(f"{name} is damaged, encrypted or compressed in a way that can't be read") from None
     if len(data) > cap:
         raise TooLarge(f"A part of the workbook ({name}) is larger than {cap // (1024 * 1024)} MB unpacked.")
-    if _DECLARATION.search(data):  # anywhere: a comment may come first. Real cell text escapes "<" as "&lt;".
-        raise _unreadable("it declares a DOCTYPE or entities, which workbooks never need")
     try:
-        return ET.fromstring(data)  # noqa: S314 - DOCTYPE/ENTITY refused above; no external entities are fetched
-    except ET.ParseError:
+        return parse_xml(data)
+    except _Declaration:
+        raise _unreadable("it declares a DOCTYPE or entities, which workbooks never need") from None
+    except expat.ExpatError:
         raise _unreadable(f"{name} is not valid XML") from None
 
 
@@ -325,7 +372,7 @@ def xlsx_table(data: bytes, limits: Limits | None = None) -> tuple[list[str], li
         raise TooLarge(f"Import files can be at most {limits.max_bytes // (1024 * 1024)} MB.")
     try:
         z = zipfile.ZipFile(io.BytesIO(data))
-    except zipfile.BadZipFile:
+    except (zipfile.BadZipFile, EOFError, ValueError, NotImplementedError):
         raise _unreadable("it isn't an .xlsx file (an old .xls or a password-protected file can't be read)") from None
     with z:
         if len(z.infolist()) > XLSX_MAX_PARTS:
@@ -771,10 +818,10 @@ def discard(db: Session, who: Principal, batch_id: uuid.UUID) -> ContentImportBa
         raise Conflict("This import is being processed. Wait for it to finish, then discard it.")
     if batch.status not in ("previewed", "queued"):
         raise Conflict(f"This import is already {batch.status}.")
-    if batch.status == "queued":  # IMPORT-BULK-01: the worker hasn't started; its upload goes now
-        bulk_imports.discard_queued(batch)
+    key, batch.file_key = batch.file_key, None  # IMPORT-BULK-01: a queued upload goes once this has committed
     batch.status = "discarded"
     db.commit()
+    bulk_imports.remove_upload(key)
     return batch
 
 
@@ -815,6 +862,10 @@ def apply_commit(db: Session, who: Principal, batch: ContentImportBatch, stored:
             continue
         # Re-check against the current database: another batch or editor may have changed things since the preview.
         fresh = _validate_row(db, who, batch.kind, _row_input(r), scope_cache)
+        if fresh["action"] == "error":  # e.g. the author no longer holds a role for that class and subject
+            db.rollback()
+            why = (fresh["errors"] or ["it no longer passes the checks"])[0]
+            raise Conflict(f"Row {r.row_number} ({r.external_id}) can no longer be imported: {why}", row=r.row_number)
         if fresh["action"] != r.action or fresh.get("payload_hash") != r.payload_hash:
             db.rollback()
             raise Conflict(

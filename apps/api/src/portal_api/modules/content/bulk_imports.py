@@ -14,6 +14,22 @@ an item another import created meanwhile, fails the batch with the reason and wr
 
 The uploaded file is deleted as soon as its rows are stored, or when the batch fails or is discarded. A queued batch
 whose file is never processed keeps it until it is discarded.
+
+**Claims (OCT14-02).** Every claim carries a fresh token in ``lease_owner``. Every write a worker makes (progress,
+the finished preview, the commit, a failure, file cleanup and its audit entry) first re-reads the batch under a row
+lock, straight from the database (``populate_existing``: sessions keep objects across commits), and goes ahead only
+if the batch still has that worker's token and the expected status. A worker whose lease ran out and was taken over
+stops without touching the batch, its file or the audit trail. A file is deleted only after the state change that
+releases it has committed.
+
+**Failures (OCT14-03).** Bad input (an unreadable or invalid file, an author no longer allowed to import, a preview
+out of date) fails the batch once, with the reason. Anything else (the database, storage, a bug) is not the author's
+fault: the batch is released for another try after a growing pause, and fails with a clear reason only after
+``MAX_ATTEMPTS`` claims, so a poison job can't loop forever or stop the rest of the queue.
+
+**Authority (OCT14-05).** Work runs on the author's behalf only while their account is active and, row by row, while
+they still hold a content role for the class and subject (re-read for every chunk and again at commit). A suspended,
+deleted or de-scoped author's queued work fails with the reason; nothing new is written.
 """
 
 from __future__ import annotations
@@ -21,8 +37,10 @@ from __future__ import annotations
 import contextlib
 import os
 import socket
+import sys
 import time
 import uuid
+from dataclasses import dataclass
 from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Any, cast
@@ -44,6 +62,21 @@ SYNC_COMMIT_ROWS = 2000  # larger previews commit in the worker, never inside a 
 CHUNK = 250
 LEASE = timedelta(minutes=2)
 ACTIVE = ("queued", "validating", "committing")
+MAX_ATTEMPTS = 5  # claims per phase before a batch that keeps failing for unexpected reasons is failed
+RETRY_PAUSE = timedelta(seconds=30)  # doubled per attempt, at most RETRY_PAUSE_MAX
+RETRY_PAUSE_MAX = timedelta(minutes=15)
+
+
+class Stop(Exception):
+    """This worker no longer holds the batch (taken over after its lease ran out, or discarded): touch nothing."""
+
+
+class Refused(Exception):
+    """A permanent reason this batch can't go on; the author is told why and nothing new is written."""
+
+    def __init__(self, reason: str) -> None:
+        super().__init__(reason)
+        self.reason = reason
 
 
 # ------------------------------------------------------------------ storage (private, never served)
@@ -119,6 +152,7 @@ def queue_commit(db: Session, who: Principal, batch: ContentImportBatch) -> Cont
     """Hand a checked, error-free preview of many rows to the worker (called with the batch locked)."""
     batch.status = "committing"
     batch.lease_owner = batch.lease_expires_at = None
+    batch.attempts, batch.last_error = 0, None  # a new phase gets its own attempts
     record(db, actor=who.user.id, action="content.import_commit_queued", target_type="content_import_batch",
            target_id=str(batch.id), details={"rows": batch.rows_total})  # fmt: skip
     db.commit()
@@ -126,13 +160,21 @@ def queue_commit(db: Session, who: Principal, batch: ContentImportBatch) -> Cont
     return batch
 
 
-def discard_queued(batch: ContentImportBatch) -> None:
-    _remove(batch.file_key)
-    batch.file_key = None
+def remove_upload(key: str | None) -> None:
+    """Delete an upload once the state change that released it has committed."""
+    _remove(key)
 
 
 # ------------------------------------------------------------------ worker
-def _claim(db: Session, owner: str) -> tuple[uuid.UUID, str] | None:
+@dataclass(frozen=True)
+class Claim:
+    batch_id: uuid.UUID
+    status: str  # "validating" or "committing"
+    token: str  # this claim's lease_owner; every write checks it
+    attempts: int
+
+
+def _claim(db: Session, owner: str) -> Claim | None:
     now = _now(db)
     batch = db.scalar(
         select(ContentImportBatch)
@@ -143,80 +185,116 @@ def _claim(db: Session, owner: str) -> tuple[uuid.UUID, str] | None:
         .order_by(ContentImportBatch.created_at)
         .with_for_update(skip_locked=True)
         .limit(1)
+        .execution_options(populate_existing=True)
     )
     if batch is None:
         db.rollback()
         return None
     if batch.status == "queued":
         batch.status = "validating"
-    batch.lease_owner, batch.lease_expires_at = owner, now + LEASE
-    claimed = (batch.id, batch.status)
+    token = f"{owner[:80]}#{uuid.uuid4().hex[:16]}"
+    batch.lease_owner, batch.lease_expires_at = token, now + LEASE
+    batch.attempts = (batch.attempts or 0) + 1
+    claim = Claim(batch.id, batch.status, token, batch.attempts)
     db.commit()
-    return claimed
+    return claim
+
+
+def _locked(db: Session, claim: Claim) -> ContentImportBatch:
+    """The batch, locked and re-read from the database, if this claim still holds it; otherwise Stop."""
+    batch = db.scalar(
+        select(ContentImportBatch)
+        .where(ContentImportBatch.id == claim.batch_id)
+        .with_for_update()
+        .execution_options(populate_existing=True)
+    )
+    if batch is None or batch.status != claim.status or batch.lease_owner != claim.token:
+        db.rollback()
+        raise Stop
+    return batch
 
 
 def _actor(db: Session, user_id: uuid.UUID) -> Principal:
-    """The import's author, for the scope checks and audit entries made on their behalf. Roles are read from the
-    database on every check, so an author whose role was revoked meanwhile gets scope errors, not a write."""
+    """The import's author, for the scope checks and audit entries made on their behalf, only while their account is
+    active (a suspended or deleted account can't sign in, so its queued work can't write either). Scoped roles are
+    read from the database on every check."""
 
     class _Author:
         def __init__(self, user: AppUser) -> None:
             self.user = user
 
-    user = db.get(AppUser, user_id)
-    assert user is not None
+    user = db.scalar(select(AppUser).where(AppUser.id == user_id).execution_options(populate_existing=True))
+    if user is None or user.status != "active":
+        raise Refused("The account that uploaded this import is no longer active, so nothing was imported.")
     return cast(Principal, _Author(user))
 
 
-def _locked(db: Session, batch_id: uuid.UUID, owner: str, status: str) -> ContentImportBatch | None:
-    batch = db.scalar(select(ContentImportBatch).where(ContentImportBatch.id == batch_id).with_for_update())
-    if batch is None or batch.status != status or batch.lease_owner != owner:
-        db.rollback()  # discarded, or another worker took over after our lease ran out
-        return None
-    return batch
-
-
-def _fail(db: Session, batch_id: uuid.UUID, reason: str) -> None:
-    batch = db.scalar(select(ContentImportBatch).where(ContentImportBatch.id == batch_id).with_for_update())
-    assert batch is not None
-    _remove(batch.file_key)
+def _fail(db: Session, claim: Claim, reason: str) -> str:
+    """End the batch as failed, with the reason, if this claim still holds it. Returns the outcome."""
+    try:
+        batch = _locked(db, claim)
+    except Stop:
+        return "stopped"
+    key = batch.file_key
     batch.status, batch.failure, batch.file_key = "failed", reason[:1000], None
     batch.lease_owner = batch.lease_expires_at = None
     record(db, actor=batch.created_by, action="content.import_failed", target_type="content_import_batch",
-           target_id=str(batch.id), details={"reason": reason[:300]})  # fmt: skip
+           target_id=str(batch.id), details={"reason": reason[:300], "attempts": claim.attempts})  # fmt: skip
     db.commit()
+    _remove(key)  # only now: the batch no longer names the file
+    return "failed"
 
 
-def _check_rows(db: Session, batch_id: uuid.UUID, owner: str) -> str:
-    batch = db.get(ContentImportBatch, batch_id)
-    assert batch is not None
+def _retry_later(db: Session, claim: Claim, error: BaseException) -> str:
+    """Something unexpected (the database, storage, a bug): release the batch for another try after a pause, or fail
+    it once it has had MAX_ATTEMPTS claims. Never reported to the author as a problem with their file."""
+    detail = f"{type(error).__name__}: {error}"[:1000]
+    if claim.attempts >= MAX_ATTEMPTS:
+        return _fail(
+            db,
+            claim,
+            f"This import couldn't be processed after {claim.attempts} tries because of a problem on our side, so "
+            "nothing was imported. Please upload it again later; if it keeps happening, contact support.",
+        )
     try:
-        data = (_root() / (batch.file_key or "missing")).read_bytes()
-    except OSError:
-        _fail(db, batch_id, "The uploaded file is missing. Upload it again.")
-        return "failed"
+        batch = _locked(db, claim)
+    except Stop:
+        return "stopped"
+    pause = min(RETRY_PAUSE * (2 ** (claim.attempts - 1)), RETRY_PAUSE_MAX)
+    batch.lease_owner, batch.lease_expires_at = None, _now(db) + pause
+    batch.last_error = detail
+    db.commit()
+    return "retry"
+
+
+def _check_rows(db: Session, claim: Claim) -> str:
+    batch = _locked(db, claim)
+    key, fmt, author = batch.file_key, batch.format, batch.created_by
+    db.commit()  # nothing slow happens under a lock
     try:
-        kind, raw_rows = imports.parse_file(data, batch.format, BULK)
+        data = (_root() / (key or "missing")).read_bytes()
+    except FileNotFoundError:
+        raise Refused("The uploaded file is missing. Upload it again.") from None
+    try:
+        kind, raw_rows = imports.parse_file(data, fmt, BULK)
     except AppError as e:
-        db.rollback()
-        _fail(db, batch_id, e.detail)
-        return "failed"
+        raise Refused(e.detail) from None
     del data
-    who = _actor(db, batch.created_by)
-    done = db.scalar(select(func.count()).select_from(ContentImportRow).where(ContentImportRow.batch_id == batch_id))
+    done = db.scalar(
+        select(func.count()).select_from(ContentImportRow).where(ContentImportRow.batch_id == claim.batch_id)
+    )
     db.commit()
-    scope_cache: dict[Any, bool] = {}
     for start in range(done or 0, len(raw_rows), CHUNK):
-        locked = _locked(db, batch_id, owner, "validating")
-        if locked is None:
-            return "stopped"
+        who = _actor(db, author)  # re-read for every chunk: a suspension takes effect at the next chunk
+        locked = _locked(db, claim)
         locked.kind, locked.rows_total = kind, len(raw_rows)
+        scope_cache: dict[Any, bool] = {}  # per chunk, so a revoked role is seen at the next chunk
         chunk = raw_rows[start : start + CHUNK]
         for n, raw in enumerate(chunk, start=start + 1):
             r = imports._validate_row(db, who, kind, raw, scope_cache)
             db.add(
                 ContentImportRow(
-                    batch_id=batch_id,
+                    batch_id=claim.batch_id,
                     row_number=n,
                     external_id=r.get("external_id"),
                     action=r["action"],
@@ -231,10 +309,9 @@ def _check_rows(db: Session, batch_id: uuid.UUID, owner: str) -> str:
         locked.lease_expires_at = _now(db) + LEASE
         db.commit()  # this chunk is durable: a worker that dies now resumes after it
 
-    locked = _locked(db, batch_id, owner, "validating")
-    if locked is None:
-        return "stopped"
-    stored = imports.rows(db, batch_id)
+    _actor(db, author)
+    locked = _locked(db, claim)
+    stored = imports.rows(db, claim.batch_id)
     results: list[dict[str, Any]] = [
         {
             "external_id": row.external_id,
@@ -254,48 +331,62 @@ def _check_rows(db: Session, batch_id: uuid.UUID, owner: str) -> str:
     locked.status, locked.counts = "previewed", imports.count_actions(results)
     locked.expires_at = now + imports.PREVIEW_TTL  # a day to review it, from when it is ready
     locked.lease_owner = locked.lease_expires_at = None
+    locked.attempts, locked.last_error = 0, None
     key, locked.file_key = locked.file_key, None
     record(db, actor=locked.created_by, action="content.import_previewed", target_type="content_import_batch",
-           target_id=str(batch_id), details={"kind": kind, "format": locked.format, "sha256": locked.sha256,
-                                               "counts": locked.counts, "bulk": True})  # fmt: skip
+           target_id=str(claim.batch_id), details={"kind": kind, "format": locked.format, "sha256": locked.sha256,
+                                                     "counts": locked.counts, "bulk": True})  # fmt: skip
     db.commit()
     _remove(key)
     return "previewed"
 
 
-def _commit_rows(db: Session, batch_id: uuid.UUID, owner: str) -> str:
-    locked = _locked(db, batch_id, owner, "committing")
-    if locked is None:
-        return "stopped"
+def _commit_rows(db: Session, claim: Claim) -> str:
+    locked = _locked(db, claim)
     who = _actor(db, locked.created_by)
-    stored = imports.rows(db, batch_id)
+    stored = imports.rows(db, claim.batch_id)
     if any(r.action == "error" for r in stored):
-        db.rollback()
-        _fail(db, batch_id, "The preview has rows with errors; nothing was imported.")
-        return "failed"
+        raise Refused("The preview has rows with errors; nothing was imported.")
     try:
         imports.apply_commit(db, who, locked, stored)  # one transaction: every row, or none
         locked.lease_owner = locked.lease_expires_at = None
+        locked.last_error = None
         db.commit()
     except Conflict as e:
         db.rollback()
-        _fail(db, batch_id, f"{e.detail} Nothing was imported.")
-        return "failed"
+        raise Refused(f"{e.detail} Nothing was imported.") from None
     except IntegrityError:
         db.rollback()
-        _fail(db, batch_id, "Another import created some of these items at the same time; nothing was imported.")
-        return "failed"
+        raise Refused("Another import created some of these items at the same time; nothing was imported.") from None
     return "committed"
 
 
 def run_one(db: Session, owner: str) -> dict[str, Any] | None:
     """Claim one batch and take it as far as it goes. Returns what happened, or None when nothing is waiting."""
-    claimed = _claim(db, owner)
-    if claimed is None:
+    claim = _claim(db, owner)
+    if claim is None:
         return None
-    batch_id, status = claimed
-    outcome = _check_rows(db, batch_id, owner) if status == "validating" else _commit_rows(db, batch_id, owner)
-    return {"batch": str(batch_id), "outcome": outcome}
+    try:
+        if claim.attempts > MAX_ATTEMPTS:  # it kept failing, or kept killing its worker, before finishing
+            outcome = _retry_later(db, claim, RuntimeError("no attempts left"))
+        elif claim.status == "validating":
+            outcome = _check_rows(db, claim)
+        else:
+            outcome = _commit_rows(db, claim)
+    except Stop:
+        outcome = "stopped"
+    except Refused as r:
+        db.rollback()
+        outcome = _fail(db, claim, r.reason)
+    except Exception as e:  # one batch's trouble must not stop the queue: it is retried, then failed
+        db.rollback()
+        print(f"import batch {claim.batch_id}: {type(e).__name__}: {e}", file=sys.stderr, flush=True)
+        try:
+            outcome = _retry_later(db, claim, e)
+        except Exception:  # the database itself is down: the lease runs out and the batch is claimed again
+            db.rollback()
+            outcome = "retry"
+    return {"batch": str(claim.batch_id), "outcome": outcome}
 
 
 def work(db: Session, owner: str | None = None, max_jobs: int | None = None) -> int:
