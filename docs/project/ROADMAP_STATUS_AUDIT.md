@@ -28,11 +28,11 @@ For the tasks marked **Implemented**, the cited tests were confirmed to exist. T
 | W00.S3.T2 Policy defaults with owners | Defaults spread across IMPL-20, RECHECK-01, RESCAN-01, ALLOC-01, ACCESS-01 | A WA-D01–D15 register with approval state; capture (WA-D13), retention (WA-D10/B15) and severe-error (WA-D06) defaults |
 | W00.S3.T3 Dependency-based estimate | `DEPENDENCIES.md` waves | Estimates; the final one needs spikes (B10) |
 | W01.S1.T1 Question taxonomy | IMPL-19 short/long, subparts, maxima, languages, structures | Numerical/derivation types; written passages and diagrams |
-| W01.S1.T3 Publish only reviewed | IMPL-14/19 publication gate | Outcome mapping required for written items; academic approval (B01) |
+| W01.S1.T3 Publish only reviewed | IMPL-14/19 publication gate | Outcome mapping: blocked, because all 122 chapters record "No SLO codes printed" with unnumbered outcome bullets, so codified outcomes must come from the academic team first (B01); academic approval (B01) |
 | W01.S2.T1 Bounded criteria | `validate_rubric`, `reconcile` | A dependency-cycle and unreachable-credit check (only self-dependency is caught) |
 | W01.S2.T2 Alternative/consequential marking | Alternative groups, dependencies, rubric checklist; teacher escalation to academic review (ACADEMIC-REVIEW-01) | Significant-figure, multiple-final-answer and contradiction rules per approved rubric (academic input, B01) |
 | W02.S1.T1 Evidence/attempt model | Hashes, logical pages, frozen forms, receipts, rescans | Retention/deletion references (B15) |
-| W02.S1.T2 Assessment/review provenance | Score versions, effective adjudication sets, separate assessor proposals | Reading alternatives (B10); an explicit human-protection marker |
+| W02.S1.T2 Assessment/review provenance | Score versions, effective adjudication sets, separate assessor proposals; no automatic publication path exists, so every released mark is a person's (AUTOASSESS-01, PILOT-R0-01) | Reading alternatives and an explicit protection marker for automatic publication, which only exists with a qualified provider (B10, WG10) |
 | W02.S1.T3 Allowance/operational state | ALLOC-01, ADMIT-01, IMPL-22 | A mixed pending-and-unavailable completeness state and a zero denominator (pending currently wins) |
 | W03.S1.T2 Native capture/import | NATIVE-W01 | Offline draft queue, native PDF picker, low-storage state; device proof (B14) |
 | W03.S1.T4 Progressive upload, capture policy | Uploads open until U with per-file states; capture policy pinned per form | A resolution preset with a higher-detail fallback; phone qualification (B09/B14) |
