@@ -14,7 +14,7 @@ For the tasks marked **Implemented**, the cited tests were confirmed to exist. T
 - W03.S1.T2: in code, with host-side tests (CAPTURE-01, OCT14-01, OCT14-04); a device still needed.
 - W05.S3.T1: reconcile and stale-lease reclaim tests (AUTO-RECOVERY-01).
 - W05.S3.T3: model-version change and MCQ unaffected (AUTO-PROVENANCE-01).
-- W06.S3.T1: measured demand and marking time (DEMAND-01, MARKING-TIME-01).
+- W06.S3.T1: measured recheck demand and elapsed take-to-release time, which is not working time (DEMAND-01, MARKING-TIME-01).
 - W03.S1.T3: deskew, behind a rollout until qualified (STRAIGHTEN-01).
 
 The table rows below keep their original findings for the record. What remains needs owner, academic, device or
