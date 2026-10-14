@@ -15,7 +15,7 @@ import { HelpLink } from "@/components/help-link";
 import { TIME_ZONE } from "@/lib/dates";
 
 type Slot = { pages: string[]; unanswered: boolean };
-type Upload = { id: string; name: string; progress: number; status: "uploading" | "failed"; error?: string };
+type Upload = { id: string; name: string; progress: number; status: "uploading" | "failed"; error?: string; retryable?: boolean };
 const marks = (u: number) => String(u / 100);
 const when = (iso: string) => new Date(iso).toLocaleString("en-GB", { timeStyle: "short", dateStyle: "medium", timeZone: TIME_ZONE });
 
@@ -58,6 +58,9 @@ export function WrittenRunner({ attempt, result = null }: { attempt: WrittenAtte
   const offset = useRef<number | null>(null);
   const saveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const savingPromise = useRef<Promise<boolean> | null>(null);
+  // W03.S3.T3 (UPLOAD-RETRY-01): a failed upload keeps its file on this device so it can be sent again. The server
+  // recognises the same file, so a retry after a lost acknowledgement never adds a second page.
+  const pendingFiles = useRef(new Map<string, File>());
   const revisionRef = useRef(attempt.manifest_revision);
   const active = attempt.status === "active";
   const cutoff = new Date(attempt.upload_cutoff_at).getTime();
@@ -76,25 +79,44 @@ export function WrittenRunner({ attempt, result = null }: { attempt: WrittenAtte
     if (closed) router.refresh(); // the server expires the attempt after U; show its honest state
   }, [closed, router]);
 
+  async function sendFile(file: File, tmp: string, retry: boolean) {
+    pendingFiles.current.set(tmp, file);
+    setUploads((u) => (retry ? u.map((x) => (x.id === tmp ? { ...x, progress: 0, status: "uploading", error: undefined } : x)) : [...u, { id: tmp, name: file.name, progress: 0, status: "uploading" }]));
+    const res = await uploadFile(attempt.id, file, (p) => setUploads((u) => u.map((x) => (x.id === tmp ? { ...x, progress: p } : x))));
+    if (res.status === 201) {
+      const body = res.body as { pages: WrittenPage[]; duplicate: boolean; warnings: string[] };
+      pendingFiles.current.delete(tmp);
+      setUploads((u) => u.filter((x) => x.id !== tmp));
+      setPages((p) => [...p, ...body.pages.filter((n) => !p.some((x) => x.id === n.id))]); // a PDF adds one page per PDF page
+      // SCAN-QUALITY-01: quality warnings are shown with each page below. A retry that reached the server the first
+      // time returns the same pages; only a deliberate second copy needs a note here.
+      if (body.duplicate && !retry) setNotes((n) => [...n, `${file.name} was already uploaded.`]);
+    } else {
+      const detail = (res.body as { detail?: string } | null)?.detail;
+      const lost = res.status === 0;
+      setUploads((u) =>
+        u.map((x) =>
+          x.id === tmp
+            ? { ...x, status: "failed", retryable: lost || res.status >= 500, error: detail ?? (lost ? "Connection lost. Your file is kept on this device: try again." : `Upload failed (${res.status}).`) }
+            : x,
+        ),
+      );
+    }
+  }
+
   async function addFiles(files: FileList | null) {
     if (!files) return;
-    for (const file of Array.from(files)) {
-      const tmp = crypto.randomUUID();
-      setUploads((u) => [...u, { id: tmp, name: file.name, progress: 0, status: "uploading" }]);
-      const res = await uploadFile(attempt.id, file, (p) => setUploads((u) => u.map((x) => (x.id === tmp ? { ...x, progress: p } : x))));
-      if (res.status === 201) {
-        const body = res.body as { pages: WrittenPage[]; duplicate: boolean; warnings: string[] };
-        setUploads((u) => u.filter((x) => x.id !== tmp));
-        setPages((p) => [...p, ...body.pages.filter((n) => !p.some((x) => x.id === n.id))]); // a PDF adds one page per PDF page
-        // SCAN-QUALITY-01: quality warnings are shown with each page below; only duplicates need a note here.
-        if (body.duplicate) setNotes((n) => [...n, `${file.name} was already uploaded.`]);
-      } else {
-        const detail = (res.body as { detail?: string } | null)?.detail;
-        setUploads((u) =>
-          u.map((x) => (x.id === tmp ? { ...x, status: "failed", error: detail ?? (res.status === 0 ? "Connection lost. Try again." : `Upload failed (${res.status}).`) } : x)),
-        );
-      }
-    }
+    for (const file of Array.from(files)) await sendFile(file, crypto.randomUUID(), false);
+  }
+
+  function retryUpload(tmp: string) {
+    const file = pendingFiles.current.get(tmp);
+    if (file) void sendFile(file, tmp, true);
+  }
+
+  function dismissUpload(tmp: string) {
+    pendingFiles.current.delete(tmp);
+    setUploads((u) => u.filter((x) => x.id !== tmp));
   }
 
   function persistMapping(next: Record<string, Slot>) {
@@ -381,9 +403,25 @@ export function WrittenRunner({ attempt, result = null }: { attempt: WrittenAtte
           {uploads.map((u) => (
             <li key={u.id} className="rounded-lg border border-dashed border-border p-2 text-sm" role="status">
               <p className="truncate">{u.name}</p>
-              {u.status === "uploading" ? <progress max={100} value={u.progress} className="w-full" aria-label={`Uploading ${u.name}`} /> : <p className="text-danger">
-                  {u.error} <HelpLink slug="written-upload-limits">What can I upload?</HelpLink>
-                </p>}
+              {u.status === "uploading" ? (
+                <progress max={100} value={u.progress} className="w-full" aria-label={`Uploading ${u.name}`} />
+              ) : (
+                <>
+                  <p className="text-danger">
+                    {u.error} <HelpLink slug="written-upload-limits">What can I upload?</HelpLink>
+                  </p>
+                  <p className="mt-1 flex gap-3">
+                    {u.retryable && active && (
+                      <button type="button" onClick={() => retryUpload(u.id)} className="text-accent underline underline-offset-2">
+                        Try {u.name} again
+                      </button>
+                    )}
+                    <button type="button" onClick={() => dismissUpload(u.id)} className="text-muted underline underline-offset-2">
+                      Remove from this list
+                    </button>
+                  </p>
+                </>
+              )}
             </li>
           ))}
         </ul>

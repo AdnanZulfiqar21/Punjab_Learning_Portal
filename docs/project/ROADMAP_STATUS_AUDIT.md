@@ -36,7 +36,7 @@ For the tasks marked **Implemented**, the cited tests were confirmed to exist. T
 | W02.S1.T3 Allowance/operational state | ALLOC-01, ADMIT-01, IMPL-22 | A mixed pending-and-unavailable completeness state and a zero denominator (pending currently wins) |
 | W03.S1.T2 Native capture/import | NATIVE-W01 | Offline draft queue, native PDF picker, low-storage state; device proof (B14) |
 | W03.S1.T4 Progressive upload, capture policy | Uploads open until U with per-file states; capture policy pinned per form | A resolution preset with a higher-detail fallback; phone qualification (B09/B14) |
-| W03.S3.T3 Interruption/concurrency | Revision concurrency, deduplication, idempotent seal and rescans | Weak-network, restart and second-device tests; native (B14) |
+| W03.S3.T3 Interruption/concurrency | Revision concurrency, deduplication, idempotent seal and rescans; weak-network retry, restart and two-tab tests (UPLOAD-RETRY-01, INTERRUPTIONS-01) | Native on a device (B14) |
 | W05.S2.T3 Route unsupported reasoning | Unlisted-method and diagram flags go to review, never a mark; academic review cases (ACADEMIC-REVIEW-01) | Automatic detection needs a provider (B10) |
 | W05.S3.T1 Retries/reconciliation | Stage records, backoff, dead letter and requeue | Tests for `reconcile()` and stale-lease reclaim |
 | W05.S3.T2 Publication fence/provenance | No AI publication path; assessor, version, contract, hashes and latency recorded | Cost and configuration hash; the fenced writer waits on WG10/B10 |
