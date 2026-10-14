@@ -1573,6 +1573,16 @@
             "title": "Accepting",
             "type": "boolean"
           },
+          "demand": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DemandOut"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "grade": {
             "title": "Grade",
             "type": "integer"
@@ -4181,6 +4191,87 @@
           "confirm_email"
         ],
         "title": "DeletionIn",
+        "type": "object"
+      },
+      "DemandOut": {
+        "description": "W06.S3.T1 (DEMAND-01): measured review demand (roadmap \u00a720.13.3). A forecast only: admission is unchanged.",
+        "properties": {
+          "admissible_if_rechecks_counted": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "New scripts that would fit if expected rechecks were also subtracted (a WA-D08 choice)",
+            "title": "Admissible If Rechecks Counted"
+          },
+          "expected_recheck_minutes": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Minutes those rechecks would take (staffing recorded)",
+            "title": "Expected Recheck Minutes"
+          },
+          "expected_rechecks": {
+            "description": "Rechecks still expected from those (rate x releases, rounded up)",
+            "title": "Expected Rechecks",
+            "type": "integer"
+          },
+          "queued_by_kind": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "description": "Queued cases by kind: initial, recheck, completion, regrade",
+            "title": "Queued By Kind",
+            "type": "object"
+          },
+          "recheck_rate": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Rechecks per released script; null until 20 were released",
+            "title": "Recheck Rate"
+          },
+          "recheck_window_releases": {
+            "description": "First markings released in the last 14 days (still open to a recheck)",
+            "title": "Recheck Window Releases",
+            "type": "integer"
+          },
+          "rechecks": {
+            "description": "Recheck cases opened in the last 90 days",
+            "title": "Rechecks",
+            "type": "integer"
+          },
+          "released_scripts": {
+            "description": "First markings released in the last 90 days",
+            "title": "Released Scripts",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "released_scripts",
+          "rechecks",
+          "recheck_rate",
+          "recheck_window_releases",
+          "expected_rechecks",
+          "queued_by_kind",
+          "expected_recheck_minutes",
+          "admissible_if_rechecks_counted"
+        ],
+        "title": "DemandOut",
         "type": "object"
       },
       "DeviceIn": {

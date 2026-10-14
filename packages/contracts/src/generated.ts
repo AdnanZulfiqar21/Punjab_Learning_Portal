@@ -5245,6 +5245,7 @@ export interface components {
         BacklogRow: {
             /** Accepting */
             accepting: boolean;
+            demand?: components["schemas"]["DemandOut"] | null;
             /** Grade */
             grade: number;
             /** Max Open Cases */
@@ -6278,6 +6279,54 @@ export interface components {
             confirm_email: string;
             /** Reason */
             reason?: string | null;
+        };
+        /**
+         * DemandOut
+         * @description W06.S3.T1 (DEMAND-01): measured review demand (roadmap §20.13.3). A forecast only: admission is unchanged.
+         */
+        DemandOut: {
+            /**
+             * Admissible If Rechecks Counted
+             * @description New scripts that would fit if expected rechecks were also subtracted (a WA-D08 choice)
+             */
+            admissible_if_rechecks_counted: number | null;
+            /**
+             * Expected Recheck Minutes
+             * @description Minutes those rechecks would take (staffing recorded)
+             */
+            expected_recheck_minutes: number | null;
+            /**
+             * Expected Rechecks
+             * @description Rechecks still expected from those (rate x releases, rounded up)
+             */
+            expected_rechecks: number;
+            /**
+             * Queued By Kind
+             * @description Queued cases by kind: initial, recheck, completion, regrade
+             */
+            queued_by_kind: {
+                [key: string]: number;
+            };
+            /**
+             * Recheck Rate
+             * @description Rechecks per released script; null until 20 were released
+             */
+            recheck_rate: number | null;
+            /**
+             * Recheck Window Releases
+             * @description First markings released in the last 14 days (still open to a recheck)
+             */
+            recheck_window_releases: number;
+            /**
+             * Rechecks
+             * @description Recheck cases opened in the last 90 days
+             */
+            rechecks: number;
+            /**
+             * Released Scripts
+             * @description First markings released in the last 90 days
+             */
+            released_scripts: number;
         };
         /** DeviceIn */
         DeviceIn: {
