@@ -751,6 +751,23 @@ def completeness_of(pending: list[int], unavailable: list[int], questions: int) 
     return "partial_unavailable" if unavailable else "complete"
 
 
+def work_status(db: Session, attempt_id: uuid.UUID, *, pending: bool, action_required: bool) -> str:
+    """§20.9.3 (W07.S1.T1, RESULT-ARITHMETIC-01): what is happening to a sealed script now, kept apart from its marks
+    and its completeness. The learner's own step comes first; then an open case past its due time (the service
+    obligation was missed); then any open case or pending question; otherwise nothing more is happening."""
+    if action_required:
+        return "action_required"
+    due = db.scalars(
+        select(WrittenReviewCase.due_at).where(
+            WrittenReviewCase.attempt_id == attempt_id, WrittenReviewCase.status == "queued"
+        )
+    ).all()
+    now = _now(db)
+    if any(d is not None and d < now for d in due):
+        return "delayed"
+    return "in_review" if due or pending else "finished"
+
+
 def decide(
     db: Session,
     who: Principal,
