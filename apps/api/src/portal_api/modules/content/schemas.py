@@ -50,6 +50,13 @@ class AssignIn(BaseModel):
     reviewer_id: uuid.UUID | None
 
 
+class ReviewerOption(BaseModel):
+    """ASSIGN-REVIEWER-01: someone a publisher may assign to review an item."""
+
+    id: uuid.UUID
+    email: str
+
+
 class ReviewIn(BaseModel):
     decision: Literal["approve", "request_changes"]
     comment: str = Field(min_length=3, max_length=4000)
@@ -190,6 +197,7 @@ class Actions(BaseModel):
     correct_score: bool = False  # record a VOID/KEY_ERROR score correction (adjudicators, MFA)
     rollback: bool = False  # put the previously published version back (publishers, MFA)
     set_question_pool: bool = False  # reserve a question for mocks or return it to practice (publishers, MFA)
+    assign: bool = False  # ASSIGN-REVIEWER-01: assign or clear the reviewer (publishers in scope, before approval)
 
 
 class ItemDetail(ItemSummary):

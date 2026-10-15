@@ -3270,6 +3270,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/studio/items/{item_id}/reviewers": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Who a publisher may assign to review this item (active reviewers in scope who didn't edit it) */
+        get: operations["eligible_reviewers_v1_studio_items__item_id__reviewers_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/studio/items/{item_id}/revise": {
         parameters: {
             query?: never;
@@ -4739,6 +4756,11 @@ export interface components {
          * @description What the caller may do now. Advisory for the UI; the server re-checks every action.
          */
         Actions: {
+            /**
+             * Assign
+             * @default false
+             */
+            assign: boolean;
             /**
              * Change Quarantine Level
              * @default false
@@ -9875,6 +9897,19 @@ export interface components {
             decision: "approve" | "request_changes";
             /** Reviewer */
             reviewer: string | null;
+        };
+        /**
+         * ReviewerOption
+         * @description ASSIGN-REVIEWER-01: someone a publisher may assign to review an item.
+         */
+        ReviewerOption: {
+            /** Email */
+            email: string;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
         };
         /** ReviewerQualityOut */
         ReviewerQualityOut: {
@@ -18506,6 +18541,37 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["ItemDetail"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    eligible_reviewers_v1_studio_items__item_id__reviewers_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                item_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ReviewerOption"][];
                 };
             };
             /** @description Validation Error */

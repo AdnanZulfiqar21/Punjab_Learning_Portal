@@ -468,18 +468,55 @@ def withdraw(db: Session, who: Principal, item_id: uuid.UUID) -> ContentItem:
     return item
 
 
+def eligible_reviewers(db: Session, who: Principal, item_id: uuid.UUID) -> list[tuple[uuid.UUID, str]]:
+    """P06.S1.T2 (ASSIGN-REVIEWER-01): who a publisher may assign to review this item: active staff holding the review
+    permission for its class and subject who didn't edit the version under review (the same rules `assign_reviewer`
+    applies). Only a publisher in scope may list them."""
+    from portal_api.modules.identity.permissions import ROLE_PERMISSIONS
+
+    item = get_item(db, item_id)
+    if Permission.publish_content not in permissions_for(
+        roles_in_scope(db, who.user.id, item.grade_number, item.subject_code)
+    ):
+        raise Forbidden("Only a publisher can assign someone else.")
+    reviewing = [r.value for r, perms in ROLE_PERMISSIONS.items() if Permission.review_content in perms]
+    candidates = set(
+        db.scalars(
+            select(StaffRoleGrant.user_id).where(
+                StaffRoleGrant.revoked_at.is_(None), StaffRoleGrant.role.in_(reviewing)
+            )
+        )
+    )
+    contributors = set(item.working.contributors) if item.working is not None else set()
+    out = []
+    for user in db.scalars(select(AppUser).where(AppUser.id.in_(candidates), AppUser.status == "active")):
+        if str(user.id) in contributors:
+            continue
+        if Permission.review_content in permissions_for(
+            roles_in_scope(db, user.id, item.grade_number, item.subject_code)
+        ):
+            out.append((user.id, user.email or str(user.id)))
+    return sorted(out, key=lambda r: r[1])
+
+
 def assign_reviewer(db: Session, who: Principal, item_id: uuid.UUID, reviewer_id: uuid.UUID | None) -> ContentItem:
-    """Reviewers may claim (assign themselves); publishers may assign anyone eligible or clear the assignment."""
+    """Reviewers may claim (assign themselves); publishers may assign anyone eligible or clear the assignment, with an
+    MFA session like every publisher action (ASSIGN-REVIEWER-01)."""
     item = get_item(db, item_id, for_update=True)
     scoped = permissions_for(roles_in_scope(db, who.user.id, item.grade_number, item.subject_code))
     is_publisher = Permission.publish_content in scoped
     if reviewer_id != who.user.id and not is_publisher:
         raise Forbidden("Only a publisher can assign someone else.")
+    if reviewer_id != who.user.id and not who.claims.mfa:
+        raise Forbidden("Assigning a reviewer needs a multi-factor authenticated session. Sign in again with MFA.")
     if reviewer_id is not None:
         if Permission.review_content not in permissions_for(
             roles_in_scope(db, reviewer_id, item.grade_number, item.subject_code)
         ):
             raise Unprocessable("That person isn't a reviewer for this subject and class.")
+        assignee = db.get(AppUser, reviewer_id)
+        if assignee is None or assignee.status != "active":  # ASSIGN-REVIEWER-01: a suspended account can't review
+            raise Unprocessable("That person's account isn't active.")
         if item.working is not None and str(reviewer_id) in item.working.contributors:
             raise Unprocessable("That person edited this version and can't review it.")
     item.assigned_reviewer_id = reviewer_id

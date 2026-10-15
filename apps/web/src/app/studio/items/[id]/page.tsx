@@ -3,7 +3,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { Breadcrumbs, Notice, SkeletonLines } from "@/components/ui";
-import { getHistory, getItem, getItemStats, getQueue, getVariants, requireStaff, StudioForbiddenError } from "@/lib/studio";
+import { getHistory, getItem, getItemStats, getQueue, getReviewerOptions, getVariants, requireStaff, StudioForbiddenError } from "@/lib/studio";
+import { AssignReviewer } from "./assign-reviewer";
 import { AddRubric } from "./add-rubric";
 import { LanguageVariants } from "./language-variants";
 import { QuestionStatistics } from "./question-statistics";
@@ -38,11 +39,12 @@ async function Item({ id }: { id: string }) {
   const item = await getItem(auth.token, id);
   if (!item) notFound();
   const question = (item.kind === "mcq" || item.kind === "written") && item.family_id;
-  const [history, variants, family, stats] = await Promise.all([
+  const [history, variants, family, stats, reviewers] = await Promise.all([
     getHistory(auth.token, id),
     item.kind === "lesson" ? getVariants(auth.token, id) : Promise.resolve([]),
     question ? getQueue(auth.token, { family: item.family_id ?? undefined }) : Promise.resolve([]),
     item.kind === "mcq" && item.published_version !== null ? getItemStats(auth.token, id) : Promise.resolve(null),
+    item.actions.assign ? getReviewerOptions(auth.token, id) : Promise.resolve([]),
   ]);
   // A rubric marks one version of its written question: offer that question's versions to choose from.
   let questionVersions: QuestionVersionChoice[] = [];
@@ -65,6 +67,7 @@ async function Item({ id }: { id: string }) {
         />
       )}
       {stats && <QuestionStatistics stats={stats} />}
+      {item.actions.assign && <AssignReviewer key={item.assigned_reviewer ?? "none"} itemId={item.id} assigned={item.assigned_reviewer ?? null} options={reviewers} />}
       {item.kind === "lesson" && (
         <LanguageVariants itemId={item.id} title={item.title.replace(/ \((English|Urdu|Roman Urdu)\)$/, "")} variants={variants} canAdd={auth.me.roles.includes("content_author")} />
       )}
