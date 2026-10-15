@@ -7790,6 +7790,185 @@
         "title": "LessonStartedIn",
         "type": "object"
       },
+      "LifecycleOut": {
+        "properties": {
+          "days": {
+            "title": "Days",
+            "type": "integer"
+          },
+          "grade": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Grade"
+          },
+          "not_running": {
+            "description": "Stages with nothing to measure yet, and why",
+            "items": {
+              "type": "string"
+            },
+            "title": "Not Running",
+            "type": "array"
+          },
+          "outcomes": {
+            "$ref": "#/components/schemas/LifecycleOutcomes"
+          },
+          "since": {
+            "format": "date-time",
+            "title": "Since",
+            "type": "string"
+          },
+          "stages": {
+            "items": {
+              "$ref": "#/components/schemas/LifecycleStage"
+            },
+            "title": "Stages",
+            "type": "array"
+          },
+          "subject": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Subject"
+          }
+        },
+        "required": [
+          "since",
+          "days",
+          "grade",
+          "subject",
+          "outcomes",
+          "stages",
+          "not_running"
+        ],
+        "title": "LifecycleOut",
+        "type": "object"
+      },
+      "LifecycleOutcomes": {
+        "properties": {
+          "accepted": {
+            "description": "Submitted: a receipt was issued",
+            "title": "Accepted",
+            "type": "integer"
+          },
+          "delayed": {
+            "description": "Submitted, with an open marking case past its due time",
+            "title": "Delayed",
+            "type": "integer"
+          },
+          "not_submitted": {
+            "description": "Ended without a submission (the upload time ran out, or the plan ended)",
+            "title": "Not Submitted",
+            "type": "integer"
+          },
+          "not_submitted_plan_withdrawn": {
+            "title": "Not Submitted Plan Withdrawn",
+            "type": "integer"
+          },
+          "pending": {
+            "description": "Submitted, with no released result yet",
+            "title": "Pending",
+            "type": "integer"
+          },
+          "released_automatically": {
+            "description": "Always 0 in R0: automatic assessment publishes nothing (B10)",
+            "title": "Released Automatically",
+            "type": "integer"
+          },
+          "released_by_teacher": {
+            "title": "Released By Teacher",
+            "type": "integer"
+          },
+          "started": {
+            "description": "Written tests started in the window",
+            "title": "Started",
+            "type": "integer"
+          },
+          "still_writing": {
+            "title": "Still Writing",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "started",
+          "accepted",
+          "not_submitted",
+          "not_submitted_plan_withdrawn",
+          "still_writing",
+          "pending",
+          "delayed",
+          "released_by_teacher",
+          "released_automatically"
+        ],
+        "title": "LifecycleOutcomes",
+        "type": "object"
+      },
+      "LifecycleStage": {
+        "properties": {
+          "count": {
+            "description": "How many pages (upload stages) or scripts the times are measured over",
+            "title": "Count",
+            "type": "integer"
+          },
+          "description": {
+            "title": "Description",
+            "type": "string"
+          },
+          "median_minutes": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Median Minutes"
+          },
+          "p90_minutes": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "P90 Minutes"
+          },
+          "stage": {
+            "enum": [
+              "upload_while_writing",
+              "upload_after_writing",
+              "seal",
+              "queue",
+              "review",
+              "publication"
+            ],
+            "title": "Stage",
+            "type": "string"
+          }
+        },
+        "required": [
+          "stage",
+          "description",
+          "count",
+          "median_minutes",
+          "p90_minutes"
+        ],
+        "title": "LifecycleStage",
+        "type": "object"
+      },
       "LinkedAttemptOut": {
         "properties": {
           "attempt_id": {
@@ -24517,6 +24696,87 @@
           }
         },
         "summary": "Set funded teacher-review capacity for a class and subject (operators, MFA, audited)",
+        "tags": [
+          "written marking"
+        ]
+      }
+    },
+    "/v1/ops/written-lifecycle": {
+      "get": {
+        "operationId": "written_lifecycle_v1_ops_written_lifecycle_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "days",
+            "required": false,
+            "schema": {
+              "default": 30,
+              "maximum": 365,
+              "minimum": 1,
+              "title": "Days",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "query",
+            "name": "grade",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "maximum": 12,
+                  "minimum": 11,
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Grade"
+            }
+          },
+          {
+            "in": "query",
+            "name": "subject",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "maxLength": 40,
+                  "minLength": 2,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Subject"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LifecycleOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Written script lifecycle timings with their counts (W09.S1.T1; operators)",
         "tags": [
           "written marking"
         ]
