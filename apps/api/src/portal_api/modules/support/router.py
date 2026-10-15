@@ -137,8 +137,22 @@ class EscalateIn(BaseModel):
     reason: str = Field(min_length=10, max_length=1000)
 
 
+def _aligned_messages(db: Session, t: SupportTicket, *, include_internal: bool) -> list[SupportMessage]:
+    """Status and messages are separate statements. Under READ COMMITTED a reply can commit between them, and the
+    page would show the new message beside the status from before it. A reply updates the ticket in that same
+    commit, so when the ticket changed during the message read, read both again."""
+    msgs = service.messages(db, t, include_internal=include_internal)
+    for _ in range(4):
+        stamp = (t.status, t.updated_at)
+        db.refresh(t)
+        if (t.status, t.updated_at) == stamp:
+            return msgs
+        msgs = service.messages(db, t, include_internal=include_internal)
+    return msgs
+
+
 def _learner_view(db: Session, t: SupportTicket) -> TicketOut:
-    msgs = service.messages(db, t, include_internal=False)
+    msgs = _aligned_messages(db, t, include_internal=False)
     return TicketOut(
         id=t.id,
         category=t.category,  # type: ignore[arg-type]
@@ -164,7 +178,7 @@ def _attachments(db: Session, t: SupportTicket) -> list[AttachmentOut]:
 
 
 def _staff_view(db: Session, who: Principal, t: SupportTicket, *, with_context: bool = True) -> StaffTicketOut:
-    msgs: list[SupportMessage] = service.messages(db, t, include_internal=True)
+    msgs = _aligned_messages(db, t, include_internal=True)
     return StaffTicketOut(
         id=t.id,
         category=t.category,  # type: ignore[arg-type]
