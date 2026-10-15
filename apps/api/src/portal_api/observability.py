@@ -56,6 +56,12 @@ def record_request(route: str, status: int, ms: float) -> None:
         _events.append((time.monotonic(), route, status, ms))
 
 
+def events_since(start: float) -> list[tuple[float, str, int, float]]:
+    """This process's requests recorded after `start` (a `time.monotonic()` value): (time, route, status, ms)."""
+    with _lock:
+        return [e for e in _events if e[0] > start]
+
+
 def reset_window() -> None:
     with _lock:
         _events.clear()

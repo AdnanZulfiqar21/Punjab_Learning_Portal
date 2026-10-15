@@ -96,6 +96,15 @@ Work the queue escalated-first. See the incident runbooks in this folder.
 - Check the attempt protocol logs by correlation ID, and follow `interrupted-mock.md` if a scheduled mock is running.
 - A 409 (late, already submitted, refused) is a decision, not a failure, and is not counted.
 
+## workload-guard
+**Signal:** `written_guard_state`: the written workload guard (WORKLOAD-GUARD-01): 0 healthy, 0.5 recovering (warn), 1 paused (alert).
+**Owner:** platform operator.
+
+- The guard pauses itself when MCQ saves are slow or failing, MCQ submissions wait for a score, or the database is near its connection limit; the reasons are in the audit log (`workload_guard.paused`) and the `workload_guard` row.
+- While paused, new written tests wait (503 `WRITTEN_PAUSED`), the written regrade and automatic-assessment workers take no new work, and bulk imports, exports and rebuilds wait. Uploads, sealing and receipts of tests already started continue.
+- It resumes by itself: three healthy checks and five minutes after the last fault, then a quarter, half, then all of the usual written work. Don't force it; fix the cause (slow queries, stuck workers, pool saturation) first.
+- The thresholds are proposed operating controls, not measured ones (§20.11.1); pin measured values in the deployment policy after load tests (W09.S2, B03).
+
 ## video-failures
 **Signal:** `video_playback_failure_ratio`: unavailable until a media provider and reviewed videos exist (B05).
 **Owner:** platform operator.

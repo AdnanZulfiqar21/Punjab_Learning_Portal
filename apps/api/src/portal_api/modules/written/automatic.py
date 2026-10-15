@@ -503,6 +503,17 @@ def run_once(db: Session, assessor: Assessor | None = None, limit: int = 20) -> 
     return counts
 
 
+def run_guarded(db: Session, assessor: Assessor, limit: int = 20) -> dict[str, int]:
+    """One worker pass under the workload guard (W09.S1.T3): nothing new while it is paused; its ramp share of the
+    usual batch while it recovers."""
+    from portal_api.modules.system import guard
+
+    share = guard.allowance(db)
+    if share <= 0:
+        return {}
+    return run_once(db, assessor, limit=max(1, int(limit * share)))
+
+
 def requeue(db: Session, row_id: uuid.UUID) -> AutoAssessment:
     from portal_api.errors import Conflict, NotFound
 
@@ -534,6 +545,6 @@ def worker_main() -> None:
         return
     while True:
         with get_sessionmaker()() as db:
-            counts = run_once(db, assessor)
+            counts = run_guarded(db, assessor)
         if not counts:
             time.sleep(5)

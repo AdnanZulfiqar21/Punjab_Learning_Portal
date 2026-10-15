@@ -36,6 +36,7 @@ import portal_api.modules.identity.settings
 import portal_api.modules.notifications.models
 import portal_api.modules.support.models
 import portal_api.modules.system.clients
+import portal_api.modules.system.guard
 import portal_api.modules.system.operations
 import portal_api.modules.written.academic
 import portal_api.modules.written.adjudication

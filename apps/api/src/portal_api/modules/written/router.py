@@ -16,7 +16,7 @@ from portal_api.modules.access import service as access
 from portal_api.modules.content import written as wq
 from portal_api.modules.content.models import ContentVersion
 from portal_api.modules.identity.deps import CurrentPrincipal
-from portal_api.modules.system import operations
+from portal_api.modules.system import guard, operations
 from portal_api.modules.written import evidence, linked, service
 from portal_api.modules.written.models import WrittenAttempt, WrittenFile, WrittenForm, WrittenPage, WrittenReceipt
 from portal_api.modules.written.schemas import (
@@ -221,6 +221,8 @@ def availability(
         chapters=[WrittenChapter(**c) for c in out["chapters"]],
         pilot_only=service.pilot_only(),
         in_pilot=service.in_pilot(db, who.user.id),
+        paused=(g := guard.current(db)) is not None and g.state == "paused",
+        guard_notice=guard.learner_notice(db),
     )
 
 
@@ -228,7 +230,7 @@ def availability(
     "/written/forms",
     response_model=WrittenFormOut,
     status_code=201,
-    dependencies=[Depends(operations.requires("new_written_tests"))],
+    dependencies=[Depends(operations.requires("new_written_tests")), Depends(guard.open_for_new_tests)],
 )
 def create_form(
     db: DB,
