@@ -1,4 +1,5 @@
 import { expect, test, type Browser, type Page } from "@playwright/test";
+import { audit } from "./helpers/a11y";
 
 // Written results as the learner sees them. Technical fixture question and labelled dev-seed staff only.
 // * W02.S1.T3 (COMPLETENESS-01, §20.9.3): when a teacher finds that none of a script's questions can be assessed, the
@@ -141,4 +142,33 @@ test("a method the guide doesn't list waits for academic review, then is marked"
   await expect(marker.getByText("Result released")).toBeVisible(AUTH);
   await page.reload();
   await expect(page.getByText(/^Question 1: 1 \/ \d+$/)).toBeVisible(AUTH);
+});
+
+// W06.S1.T2 (CASE-HANDBACK-01): a teacher gives a script back so another can take it at once; an academic adjudicator
+// (MFA) frees a script a teacher left, with a reason, and that teacher's next action is refused.
+test("a teacher gives a script back, and an adjudicator frees one a teacher left", async ({ page, browser }) => {
+  test.slow();
+  const attemptId = await submitScript(page, "handback");
+
+  const first = await teacher(browser);
+  await openScript(first, attemptId);
+  await first.getByRole("button", { name: "Give back to the queue" }).click();
+  await expect(first.getByRole("button", { name: "Start marking" })).toBeEnabled(AUTH);
+
+  const second = await teacher(browser, "studio-reviewer2@example.com");
+  await openScript(second, attemptId);
+  await expect(second.getByRole("button", { name: "Give back to the queue" })).toBeVisible(AUTH);
+
+  const lead = await teacher(browser, "studio-adjudicator@example.com", "/studio/marking", true);
+  await lead.getByRole("link", { name: `Script ${attemptId.slice(0, 8)}` }).click();
+  await expect(lead.getByText("Another teacher is marking")).toBeVisible(AUTH);
+  const free = lead.getByRole("form", { name: "Free this script" });
+  await free.getByLabel(/Why free this script/).fill("Fixture: the marker was called away");
+  await audit(lead, null);
+  await free.getByRole("button", { name: "Free this script" }).click();
+  await expect(lead.getByRole("button", { name: "Start marking" })).toBeEnabled(AUTH);
+  await expect(lead.getByRole("form", { name: "Free this script" })).toHaveCount(0);
+
+  await second.getByRole("button", { name: "Give back to the queue" }).click(); // its screen is out of date
+  await expect(second.getByRole("alert").filter({ hasText: "You aren't marking this script" })).toBeVisible(AUTH);
 });

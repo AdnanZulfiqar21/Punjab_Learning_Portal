@@ -24,6 +24,16 @@ export async function rebaseRecheck(caseId: string, reason: string): Promise<Mar
   return call(`/v1/studio/written/cases/${encodeURIComponent(caseId)}/rebase`, { reason });
 }
 
+// CASE-HANDBACK-01 (W06.S1.T2): the teacher marking a script gives it back to the queue now.
+export async function handBack(caseId: string): Promise<MarkingOutcome> {
+  return call(`/v1/studio/written/cases/${encodeURIComponent(caseId)}/lease/release`);
+}
+
+// CASE-HANDBACK-01: an academic adjudicator (MFA) frees a script another teacher holds, with a reason for the audit trail.
+export async function freeCase(caseId: string, reason: string): Promise<MarkingOutcome> {
+  return call(`/v1/studio/written/cases/${encodeURIComponent(caseId)}/free`, { reason });
+}
+
 export async function takeLease(caseId: string): Promise<MarkingOutcome> {
   return call(`/v1/studio/written/cases/${encodeURIComponent(caseId)}/lease`);
 }

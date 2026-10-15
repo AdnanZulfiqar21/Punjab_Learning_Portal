@@ -4062,6 +4062,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/studio/written/cases/{case_id}/free": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Free a script another teacher is marking (academic adjudicator in scope, MFA; audited with the reason) */
+        post: operations["free_case_v1_studio_written_cases__case_id__free_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/studio/written/cases/{case_id}/lease": {
         parameters: {
             query?: never;
@@ -4073,6 +4090,23 @@ export interface paths {
         put?: never;
         /** Take or renew the marking lease */
         post: operations["take_lease_v1_studio_written_cases__case_id__lease_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/studio/written/cases/{case_id}/lease/release": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Give the script back to the queue now (the teacher marking it) */
+        post: operations["hand_back_v1_studio_written_cases__case_id__lease_release_post"];
         delete?: never;
         options?: never;
         head?: never;
@@ -5467,6 +5501,12 @@ export interface components {
         /** CaseDetail */
         CaseDetail: {
             /**
+             * Can Free
+             * @description You may free this script from another teacher's lease (academic adjudicator in scope; needs MFA)
+             * @default false
+             */
+            can_free: boolean;
+            /**
              * Case Kind
              * @enum {string}
              */
@@ -6815,6 +6855,14 @@ export interface components {
             text_alt: string;
             /** Updated Since */
             updated_since: boolean;
+        };
+        /** FreeCaseIn */
+        FreeCaseIn: {
+            /**
+             * Reason
+             * @description Why the script is being freed, for the audit trail
+             */
+            reason: string;
         };
         /** FunnelCohort */
         FunnelCohort: {
@@ -20177,7 +20225,73 @@ export interface operations {
             };
         };
     };
+    free_case_v1_studio_written_cases__case_id__free_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                case_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["FreeCaseIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CaseDetail"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     take_lease_v1_studio_written_cases__case_id__lease_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                case_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CaseDetail"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    hand_back_v1_studio_written_cases__case_id__lease_release_post: {
         parameters: {
             query?: never;
             header?: never;
