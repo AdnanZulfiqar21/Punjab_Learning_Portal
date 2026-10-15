@@ -15,6 +15,7 @@ TEST_URL = os.environ.get(
 assert TEST_URL.rsplit("/", 1)[-1].endswith("_test"), "refusing to run tests against a non-test database"
 os.environ["PORTAL_DATABASE_URL"] = TEST_URL
 os.environ["PORTAL_ROLE"] = "test"
+os.environ.setdefault("PORTAL_HEALTH_SAMPLE_S", "0")  # WORKLOAD-GUARD-01: tests publish samples themselves
 # Uploaded evidence from tests goes to a throwaway directory, never the development store.
 os.environ.setdefault("PORTAL_EVIDENCE_DIR", tempfile.mkdtemp(prefix="portal-evidence-test-"))
 os.environ.setdefault("PORTAL_ASSET_DIR", tempfile.mkdtemp(prefix="portal-assets-test-"))  # ASSETS-01

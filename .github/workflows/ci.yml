@@ -213,6 +213,9 @@ jobs:
       NEXT_TELEMETRY_DISABLED: "1"
       PORTAL_DATABASE_URL: postgresql+psycopg://portal:portal-ci-only@127.0.0.1:5432/portal
       PORTAL_API_INTERNAL_ORIGIN: http://127.0.0.1:8100
+      # WORKLOAD-GUARD-01: the guard's MCQ save-latency and error rules are for real traffic; on a shared runner they
+      # would pause written tests at random. The API tests cover them; the database and scoring rules stay on here.
+      PORTAL_HEALTH_SAMPLE_S: "0"
     steps:
       - uses: actions/checkout@v7
       - uses: pnpm/action-setup@v6

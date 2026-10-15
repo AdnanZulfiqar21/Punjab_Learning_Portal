@@ -247,6 +247,8 @@ THRESHOLDS: dict[str, tuple[float, float, str, str]] = {
     "http_server_error_ratio_5m": (0.01, 0.05, "platform operator", "error-rate"),
     "http_latency_p95_ms_5m": (800, 2000, "platform operator", "latency"),
     "submission_server_error_ratio_5m": (0.001, 0.01, "platform operator", "submission-failures"),
+    # W09.S1.T3 (WORKLOAD-GUARD-01): 0 healthy, 0.5 recovering, 1 paused.
+    "written_guard_state": (0.5, 1, "platform operator", "workload-guard"),
 }
 # Signals the service overview needs but nothing can measure yet: shown as unavailable with their blocker.
 UNAVAILABLE: dict[str, tuple[str, str, str]] = {
@@ -298,6 +300,9 @@ def signals(db: Session) -> list[dict[str, Any]]:
         ),
         "db_pool_in_use_ratio": round(in_use / size, 3) if size else 0.0,
     }
+    from portal_api.modules.system import guard
+
+    values["written_guard_state"] = {"healthy": 0.0, "recovering": 0.5, "paused": 1.0}[guard.snapshot(db)["state"]]
     from portal_api import observability
 
     w = observability.window_summary()
