@@ -57,11 +57,15 @@ test("a learner asks for help, staff reply, and internal notes stay internal", a
   await agent.getByLabel("Message to the learner or note").fill("Fixture reply: please sign out and back in.");
   await agent.getByLabel("Set status").selectOption("waiting_learner");
   await agent.getByRole("button", { name: "Send reply" }).click();
-  await expect(agent.getByText("Fixture reply: please sign out and back in.")).toBeVisible(AUTH);
+  // The text box still holds the reply until the save finishes, so only the conversation list counts as saved.
+  const staffThread = agent.getByRole("list", { name: "Conversation" });
+  await expect(staffThread.getByText("Fixture reply: please sign out and back in.")).toBeVisible(AUTH);
+  await expect(agent.locator("h1").locator("..").getByText("Waiting for your reply", { exact: true })).toBeVisible(AUTH);
 
   await page.reload();
-  await expect(page.getByText("Fixture reply: please sign out and back in.")).toBeVisible(AUTH);
-  await expect(page.getByText("Waiting for your reply")).toBeVisible();
+  const learnerThread = page.getByRole("list", { name: "Conversation" });
+  await expect(learnerThread.getByText("Fixture reply: please sign out and back in.")).toBeVisible(AUTH);
+  await expect(page.locator("h1").locator("..").getByText("Waiting for your reply", { exact: true })).toBeVisible();
   await expect(page.getByText(/Fixture internal note/)).toHaveCount(0);
   await page.getByLabel("Add a reply").fill("Fixture: that worked, thanks.");
   await page.getByRole("button", { name: "Send reply" }).click();
