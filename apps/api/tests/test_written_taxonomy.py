@@ -59,7 +59,9 @@ def test_a_published_numerical_question_is_not_offered_to_learners(client: TestC
         author = Staff(client, db, ["content_author"], scope)
         reviewer = Staff(client, db, ["subject_reviewer"], scope)
         publisher = Staff(client, db, ["publisher"], scope, mfa=True)
-        chapter, doc = _chapter(db, 12, "chemistry", 5)
+        # Index 5 is Hydroxy Compounds, where test_w06_review.py publishes a short fixture. Index 7
+        # (Organic Nitrogen) is the Class XII Chemistry chapter no other written fixture uses.
+        chapter, doc = _chapter(db, 12, "chemistry", 7)
         _confirm_rights(client, db, doc)
     q = client.post(
         "/v1/studio/items",
@@ -103,6 +105,17 @@ def test_a_published_numerical_question_is_not_offered_to_learners(client: TestC
         "/v1/written/availability", headers=learner.headers, params={"grade": 12, "subject": "chemistry"}
     ).json()
     [row] = [c for c in shown["chapters"] if c["chapter_id"] == str(chapter.id)]
+    from sqlalchemy import select
+
+    from portal_api.modules.content.models import ContentItem, ContentVersion
+
+    with get_sessionmaker()() as db:
+        stored = db.execute(
+            select(ContentVersion.body)
+            .join(ContentItem, ContentItem.published_version_id == ContentVersion.id)
+            .where(ContentItem.id == uuid.UUID(q["id"]))
+        ).scalar_one()
+    assert stored["question_type"] == "numerical"  # published as a numerical question, not rewritten to short
     assert row["questions"] == 0  # not offered: the numerical slice isn't qualified (WA-D11)
     built = _form(client, learner, str(chapter.id))
     assert built.status_code == 422, built.text
