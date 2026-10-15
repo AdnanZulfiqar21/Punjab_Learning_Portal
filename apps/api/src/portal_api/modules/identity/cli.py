@@ -15,12 +15,14 @@ import sys
 
 from sqlalchemy import select
 
+from portal_api.budget import process_class
 from portal_api.db import get_sessionmaker
 from portal_api.modules.audit.models import record
 from portal_api.modules.identity.models import AppUser, StaffRoleGrant
 from portal_api.modules.identity.permissions import STAFF_ROLES, Role
 
 
+@process_class("reserve")
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--email", required=True)

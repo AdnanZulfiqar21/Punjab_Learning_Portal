@@ -24,6 +24,7 @@ from sqlalchemy import CheckConstraint, DateTime, ForeignKey, Index, Integer, St
 from sqlalchemy.dialects.postgresql import UUID, insert
 from sqlalchemy.orm import Mapped, Session, mapped_column
 
+from portal_api.budget import process_class
 from portal_api.db import Base, get_sessionmaker
 from portal_api.errors import Conflict, NotFound
 from portal_api.modules.audit.models import record
@@ -239,6 +240,7 @@ def work(db: Session, batch: int = 50, max_batches: int | None = None, owner: st
     return done
 
 
+@process_class("written.regrade")
 def worker_main(argv: list[str] | None = None) -> int:
     """portal-written-worker [--once] [--batch N] [--interval S]: the written regrade worker process."""
     import argparse

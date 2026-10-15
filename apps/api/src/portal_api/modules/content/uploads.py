@@ -33,6 +33,7 @@ from sqlalchemy import BigInteger, CheckConstraint, DateTime, ForeignKey, Intege
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped, Session, mapped_column
 
+from portal_api.budget import process_class
 from portal_api.db import Base, get_session
 from portal_api.errors import Conflict, NotFound, StorageUnavailable, TooLarge, Unprocessable
 from portal_api.modules.audit.models import record
@@ -237,9 +238,15 @@ def reconcile(db: Session) -> dict[str, int]:
     return {"expired": len(expired), "rechecked": len(stuck)}
 
 
+@process_class("bulk")
 def main() -> None:  # pragma: no cover - thin CLI wrapper
     """portal-upload-reconcile: the scheduled reconciliation of master-video uploads."""
+    from portal_api.budget import bulk_paused_now
     from portal_api.db import get_sessionmaker
+
+    if why := bulk_paused_now():  # POOL-CAPS-01: the next scheduled run does it
+        print(f"skipped: {why}", flush=True)
+        return
 
     with get_sessionmaker()() as db:
         print(reconcile(db))

@@ -47,6 +47,8 @@ class Settings(BaseSettings):
     released_regions: list[str] = Field(default_factory=lambda: ["pk-punjab"])
     db_pool_size: int = 10  # per-process pool; multiplied by process count in the §5.8 budget
     db_max_overflow: int = 0
+    # P17.S2.T2 (POOL-CAPS-01): bulk-class commands claim no new work around scheduled mock windows.
+    bulk_pause_in_mock_windows: bool = True
     db_statement_timeout_ms: int = 5000
 
     # Identity (P04). Production trusts exactly one managed OIDC issuer (Cognito proposed; BLOCKERS B04).

@@ -49,6 +49,7 @@ from sqlalchemy import func, select
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
+from portal_api.budget import bulk_pause_reason, bulk_paused_now, process_class
 from portal_api.db import get_sessionmaker
 from portal_api.errors import AppError, Conflict, TooMany, Unprocessable
 from portal_api.modules.audit.models import record
@@ -425,6 +426,7 @@ def reconcile(db: Session, *, apply: bool, now: datetime | None = None) -> list[
     return orphans
 
 
+@process_class("bulk")
 def reconcile_main(argv: list[str] | None = None) -> int:
     """portal-import-reconcile [--apply]: list (or delete) import uploads that no batch names. Run hourly."""
     import argparse
@@ -432,12 +434,16 @@ def reconcile_main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(prog="portal-import-reconcile")
     p.add_argument("--apply", action="store_true", help="delete them (default: only list them)")
     args = p.parse_args(argv)
+    if args.apply and (why := bulk_paused_now()):  # POOL-CAPS-01: the next hourly run does it
+        print(f"skipped: {why}", flush=True)
+        return 0
     with get_sessionmaker()() as db:
         orphans = reconcile(db, apply=args.apply)
     print(f"{len(orphans)} orphaned import upload(s){' deleted' if args.apply else ''}: {', '.join(orphans) or '-'}")
     return 0
 
 
+@process_class("bulk")
 def worker_main(argv: list[str] | None = None) -> int:
     """portal-import-worker [--once] [--interval S]: checks and commits bulk content imports."""
     import argparse
@@ -450,7 +456,10 @@ def worker_main(argv: list[str] | None = None) -> int:
     print(f"import worker {owner} started", flush=True)
     while True:
         with get_sessionmaker()() as db:  # a fresh session per drain: no connection kept across idle waits
-            n = work(db, owner)
+            paused = bulk_pause_reason(db)  # POOL-CAPS-01: queued batches wait out a mock window
+            n = 0 if paused else work(db, owner)
+        if paused:
+            print(f"paused: {paused}", flush=True)
         if n:
             print(f"handled {n} import batch(es)", flush=True)
         if args.once:

@@ -40,6 +40,7 @@ from sqlalchemy import CheckConstraint, DateTime, ForeignKey, Index, Integer, St
 from sqlalchemy.dialects.postgresql import JSONB, UUID
 from sqlalchemy.orm import Mapped, Session, mapped_column
 
+from portal_api.budget import bulk_pause_reason, process_class
 from portal_api.db import Base, get_sessionmaker
 from portal_api.errors import Conflict, Forbidden, NotFound, Unprocessable
 from portal_api.modules.audit.models import record
@@ -436,11 +437,13 @@ def sweep(db: Session, now: datetime) -> int:
     return len(jobs)
 
 
+@process_class("bulk")
 def worker_main() -> None:  # pragma: no cover - long-running process
     idle = float(os.environ.get("PORTAL_EXPORT_IDLE_SECONDS", "5"))
     factory = get_sessionmaker()
     while True:
         with factory() as db:
-            handled = run_once(db)
+            paused = bulk_pause_reason(db)  # POOL-CAPS-01: queued exports wait out a mock window
+            handled = None if paused else run_once(db)
         if handled is None:
             time.sleep(idle)
