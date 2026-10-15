@@ -791,6 +791,39 @@
         "title": "AllowanceOut",
         "type": "object"
       },
+      "AmbiguousEdition": {
+        "description": "More than one edition of this class and subject is effective today, so none is offered as current.",
+        "properties": {
+          "book_ids": {
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "title": "Book Ids",
+            "type": "array"
+          },
+          "grade": {
+            "title": "Grade",
+            "type": "integer"
+          },
+          "subject": {
+            "title": "Subject",
+            "type": "string"
+          },
+          "subject_name": {
+            "title": "Subject Name",
+            "type": "string"
+          }
+        },
+        "required": [
+          "grade",
+          "subject",
+          "subject_name",
+          "book_ids"
+        ],
+        "title": "AmbiguousEdition",
+        "type": "object"
+      },
       "AnswerOut": {
         "properties": {
           "op_id": {
@@ -4275,6 +4308,14 @@
       },
       "DiscoveryOut": {
         "properties": {
+          "ambiguous_editions": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/AmbiguousEdition"
+            },
+            "title": "Ambiguous Editions",
+            "type": "array"
+          },
           "books": {
             "items": {
               "$ref": "#/components/schemas/BookAvailability"
@@ -15554,6 +15595,11 @@
             },
             "title": "Books",
             "type": "array"
+          },
+          "edition_conflict": {
+            "default": false,
+            "title": "Edition Conflict",
+            "type": "boolean"
           },
           "subject": {
             "$ref": "#/components/schemas/SubjectOut"

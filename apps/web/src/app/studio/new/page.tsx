@@ -34,8 +34,12 @@ async function Form() {
   const catalogue = await getCatalogue();
   if (!catalogue.ok) throw new Error("The catalogue is unavailable.");
   const books: BookChoice[] = [];
+  const conflicts: string[] = [];
   for (const g of catalogue.data.grades) {
-    for (const { subject, books: bs } of g.subjects) {
+    for (const { subject, books: bs, edition_conflict } of g.subjects) {
+      if (edition_conflict) {
+        conflicts.push(`${GRADE_LABEL[g.grade.number]} ${SUBJECT_LABEL[subject.code] ?? subject.name}`);
+      }
       if (bs.length === 0) continue;
       const res = await getBookFor(g.grade.number, subject.code);
       if (!res.ok) continue;
@@ -46,5 +50,15 @@ async function Form() {
       });
     }
   }
-  return <NewLessonForm books={books} />;
+  return (
+    <>
+      {conflicts.length > 0 && (
+        <Notice tone="warn" title="More than one edition is effective today">
+          {conflicts.join("; ")}. None of those books is offered for a new draft, because the portal does not choose an
+          edition. A known edition can still be opened by its link.
+        </Notice>
+      )}
+      <NewLessonForm books={books} />
+    </>
+  );
 }

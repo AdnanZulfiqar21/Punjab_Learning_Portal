@@ -147,12 +147,21 @@ async function Discover({ filters }: { filters: Filters }) {
         <p className="text-sm text-muted">MDCAT and ECAT exam filters appear once their official patterns have been verified.</p>
       )}
       {filters.track && <p className="text-sm text-muted">{d.tracks.find((t) => t.code === filters.track)?.note}</p>}
+      {d.ambiguous_editions.length > 0 && (
+        <Notice tone="warn" title="More than one edition is effective today">
+          {d.ambiguous_editions
+            .map((a) => `${GRADE_LABEL[a.grade] ?? `Class ${a.grade}`} ${a.subject_name}`)
+            .join("; ")}
+          . None of those books is shown, because the portal does not choose an edition for you. An edition you already
+          have a link for can still be opened.
+        </Notice>
+      )}
 
-      {d.books.length === 0 ? (
+      {d.books.length === 0 && d.ambiguous_editions.length === 0 ? (
         <Notice title="Nothing matches these filters yet">
           Try another class or subject, or <Link href="/learn" className="underline">show everything</Link>.
         </Notice>
-      ) : (
+      ) : d.books.length > 0 ? (
         <div className="grid gap-8 md:grid-cols-2">
           {grades.map((g) => (
             <section key={g} aria-labelledby={`grade-${g}`}>
@@ -186,7 +195,7 @@ async function Discover({ filters }: { filters: Filters }) {
             </section>
           ))}
         </div>
-      )}
+      ) : null}
 
       {d.previews.length > 0 && (
         <section aria-labelledby="previews-h" className="space-y-2">

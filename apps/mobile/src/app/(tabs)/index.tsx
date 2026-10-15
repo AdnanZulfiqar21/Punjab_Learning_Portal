@@ -103,9 +103,17 @@ function Books({ data, filters }: { data: Discovery; filters: DiscoveryFilters }
         <T variant="muted">MDCAT and ECAT exam filters appear once their official patterns have been verified.</T>
       )}
       {trackNote ? <T variant="muted">{trackNote}</T> : null}
-      {data.books.length === 0 ? (
+      {data.ambiguous_editions.length > 0 && (
+        <Notice tone="warn" title="More than one edition is effective today">
+          {data.ambiguous_editions
+            .map((item) => `${GRADE_LABEL[item.grade] ?? `Class ${item.grade}`} ${item.subject_name}`)
+            .join("; ")}
+          . None of those books is shown, because the app does not choose an edition for you.
+        </Notice>
+      )}
+      {data.books.length === 0 && data.ambiguous_editions.length === 0 ? (
         <Notice title="Nothing matches these filters yet">Try another class or subject, or clear the filters.</Notice>
-      ) : (
+      ) : data.books.length > 0 ? (
         grades.map((grade) => (
           <View key={grade} style={{ gap: Space.sm }} accessibilityRole="list">
             <T variant="heading" accessibilityRole="header">
@@ -138,7 +146,7 @@ function Books({ data, filters }: { data: Discovery; filters: DiscoveryFilters }
               ))}
           </View>
         ))
-      )}
+      ) : null}
       {data.previews.length > 0 && (
         <View style={{ gap: Space.sm }}>
           <T variant="heading" accessibilityRole="header">

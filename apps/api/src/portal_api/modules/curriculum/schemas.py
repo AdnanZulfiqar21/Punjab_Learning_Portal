@@ -35,6 +35,8 @@ class BookSummary(_Out):
 class SubjectInGrade(BaseModel):
     subject: SubjectOut
     books: list[BookSummary]
+    # More than one edition is effective today, so none is listed. A known edition stays at /v1/books/{id}.
+    edition_conflict: bool = False
 
 
 class GradeCatalogue(BaseModel):

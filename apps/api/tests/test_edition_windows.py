@@ -68,6 +68,19 @@ def test_an_old_edition_stays_addressable_and_two_current_editions_are_not_chose
             overlap = client.get("/v1/grades/11/subjects/biology/book")
             assert overlap.status_code == 409
             assert "none is chosen" in overlap.json()["detail"]
+            catalogue = client.get("/v1/catalogue").json()
+            biology = _subject(catalogue, 11, "biology")
+            chemistry = _subject(catalogue, 11, "chemistry")
+            assert biology["books"] == [] and biology["edition_conflict"] is True
+            assert chemistry["edition_conflict"] is False and chemistry["books"]
+            listed = client.get("/v1/discovery").json()
+            shown = {b["book_id"] for b in listed["books"]}
+            assert original not in shown and str(edition.id) not in shown
+            clash = [a for a in listed["ambiguous_editions"] if a["grade"] == 11 and a["subject"] == "biology"]
+            assert len(clash) == 1 and set(clash[0]["book_ids"]) == {original, str(edition.id)}
+            assert not any(p["grade"] == 11 and p["subject"] == "biology" for p in listed["previews"])
+            assert client.get(f"/v1/books/{original}").status_code == 200
+            assert client.get(f"/v1/books/{edition.id}").status_code == 200
         finally:
             db.rollback()
             book = db.get(BookEdition, uuid.UUID(original))
@@ -79,6 +92,16 @@ def test_an_old_edition_stays_addressable_and_two_current_editions_are_not_chose
             if source_id is not None:
                 db.execute(delete(SourceDocument).where(SourceDocument.id == source_id))
             db.commit()
+
+
+def _subject(catalogue: dict, grade: int, code: str) -> dict:
+    return next(
+        s
+        for g in catalogue["grades"]
+        if g["grade"]["number"] == grade
+        for s in g["subjects"]
+        if s["subject"]["code"] == code
+    )
 
 
 def _today(db: Session) -> date:
