@@ -30,6 +30,7 @@ from sqlalchemy.dialects.postgresql import JSONB, UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from portal_api.db import Base
+from portal_api.observability import current_correlation
 
 
 class ItemState(StrEnum):
@@ -246,6 +247,8 @@ class ContentImportBatch(Base):
     lease_expires_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     attempts: Mapped[int] = mapped_column(Integer, default=0, server_default="0")  # claims in this phase (OCT14-03)
     last_error: Mapped[str | None] = mapped_column(Text)  # the last unexpected error, for operators only
+    # CORRELATION-01: the correlation ID of the request that created this row (None: created outside a request).
+    correlation_id: Mapped[str | None] = mapped_column(String(64), default=current_correlation)
 
 
 class ContentImportRow(Base):

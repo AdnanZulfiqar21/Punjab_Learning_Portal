@@ -14,7 +14,9 @@ import threading
 import time
 import uuid
 from collections import deque
-from collections.abc import Awaitable, Callable
+from collections.abc import Awaitable, Callable, Iterator
+from contextlib import contextmanager
+from contextvars import ContextVar
 from typing import Any
 
 from fastapi import FastAPI, Request, Response
@@ -22,6 +24,25 @@ from fastapi import FastAPI, Request, Response
 HEADER = "X-Correlation-ID"
 _VALID = re.compile(r"^[A-Za-z0-9._-]{8,64}$")
 log = logging.getLogger("portal_api.request")
+# P03.S4.T2 (CORRELATION-01): the correlation ID of the request (or of the job a worker is running) in hand. Audit
+# entries and job rows created meanwhile carry it, so one ID traces a request through the API, the database records
+# it changed and the background work it started.
+_CID: ContextVar[str | None] = ContextVar("correlation_id", default=None)
+
+
+def current_correlation() -> str | None:
+    return _CID.get()
+
+
+@contextmanager
+def bind_correlation(cid: str | None) -> Iterator[None]:
+    """Run a job under the correlation ID of the request that queued it."""
+    token = _CID.set(cid)
+    try:
+        yield
+    finally:
+        _CID.reset(token)
+
 
 WINDOW_S = 300
 # Final submissions: a server error here can lose a learner's work, so it has its own signal.
@@ -71,16 +92,19 @@ def install(app: FastAPI) -> None:
         incoming = request.headers.get(HEADER, "")
         cid = incoming if _VALID.match(incoming) else uuid.uuid4().hex  # never trust arbitrary header content
         request.state.correlation_id = cid
+        bound = _CID.set(cid)
         started = time.perf_counter()
         try:
             response = await call_next(request)
         except Exception:
+            _CID.reset(bound)
             route = getattr(request.scope.get("route"), "path", "unmatched")
             record_request(route, 500, (time.perf_counter() - started) * 1000)
             raise
         route = getattr(request.scope.get("route"), "path", "unmatched")
         record_request(route, response.status_code, (time.perf_counter() - started) * 1000)
         response.headers[HEADER] = cid
+        _CID.reset(bound)
         log.info(
             "request",
             extra={
