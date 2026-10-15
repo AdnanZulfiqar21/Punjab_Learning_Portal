@@ -4968,6 +4968,20 @@ export interface components {
             /** Reserved */
             reserved: number;
         };
+        /**
+         * AmbiguousEdition
+         * @description More than one edition of this class and subject is effective today, so none is offered as current.
+         */
+        AmbiguousEdition: {
+            /** Book Ids */
+            book_ids: string[];
+            /** Grade */
+            grade: number;
+            /** Subject */
+            subject: string;
+            /** Subject Name */
+            subject_name: string;
+        };
         /** AnswerOut */
         AnswerOut: {
             /**
@@ -6408,6 +6422,11 @@ export interface components {
         };
         /** DiscoveryOut */
         DiscoveryOut: {
+            /**
+             * Ambiguous Editions
+             * @default []
+             */
+            ambiguous_editions: components["schemas"]["AmbiguousEdition"][];
             /** Books */
             books: components["schemas"]["BookAvailability"][];
             /** Exams */
@@ -11052,6 +11071,11 @@ export interface components {
         SubjectInGrade: {
             /** Books */
             books: components["schemas"]["BookSummary"][];
+            /**
+             * Edition Conflict
+             * @default false
+             */
+            edition_conflict: boolean;
             subject: components["schemas"]["SubjectOut"];
         };
         /** SubjectOut */
