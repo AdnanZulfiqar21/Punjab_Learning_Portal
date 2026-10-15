@@ -68,6 +68,7 @@ test("a learner sees only reviewed-question availability and builds a test", asy
 });
 
 test("answers save durably, survive a reload and an outage, and score after submission", async ({ page, context }) => {
+  test.slow(); // an outage, a refused offline submission and a recovery
   await newLearner(page);
   await startTest(page, 4);
   await answer(page, true);
@@ -81,11 +82,20 @@ test("answers save durably, survive a reload and an outage, and score after subm
   await expect(page.getByRole("button", { name: /Question 1: saved/ })).toBeVisible(AUTH);
   await expect(page.getByRole("button", { name: /Question 2: saved/ })).toBeVisible();
 
-  // Offline: the selection stays pending on this device and is sent when the connection returns.
+  // Offline: the selection stays on this device as pending and is sent when the connection returns.
   await page.getByRole("button", { name: /Question 3:/ }).click();
   await context.setOffline(true);
   await answer(page, true);
-  await expect(page.getByRole("button", { name: /Question 3: pending/ })).toBeVisible(AUTH);
+  // ANSWER-STATES-01: once the send fails it is "pending" (kept on this device), never "saving" or "saved".
+  await expect(page.getByRole("button", { name: /Question 3: not saved yet, kept on this device/ })).toBeVisible(AUTH);
+  await expect(page.getByText("Not saved yet: kept on this device and sent again when the connection is back")).toBeVisible();
+  // Submitting while offline says so and can be tried again; it never hangs on "Submitting…".
+  await page.getByRole("button", { name: "Finish test" }).click();
+  const offlineDialog = page.getByRole("dialog", { name: "Submit your test?" });
+  await offlineDialog.getByRole("button", { name: "Submit" }).click();
+  await expect(offlineDialog.getByRole("alert")).toContainText("Can't reach the service", AUTH);
+  await expect(offlineDialog.getByRole("button", { name: "Try again" })).toBeEnabled();
+  await offlineDialog.getByRole("button", { name: "Keep working" }).click();
   await context.setOffline(false);
   await expect(page.getByRole("button", { name: /Question 3: saved/ })).toBeVisible(AUTH);
 

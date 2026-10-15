@@ -1,6 +1,7 @@
 "use client";
 
-// Attempt runner (P10.S2): selected → pending → saved only after the server's commit receipt (§10.5).
+// Attempt runner (P10.S2): selected → saving → saved only after the server's commit receipt (§10.5), or pending when
+// a send failed or the change came from an earlier session; the five states are in lib/answer-state (ANSWER-STATES-01).
 // Pending operations are kept in browser storage, so a refresh, a closed tab or a dropped connection never loses a
 // selection that wasn't acknowledged; on return they are re-sent (exact replays get their original receipts).
 import { useRouter } from "next/navigation";
@@ -9,11 +10,31 @@ import type { AnswerOpResult, PracticeAttempt, RevealResult } from "@portal/cont
 import { continueHere, revealItem, saveAnswers, setFlags, submitAttempt, type Op } from "@/app/actions/practice";
 import { LessonBlocks } from "@/components/lesson-blocks";
 import { HelpLink } from "@/components/help-link";
+import { answerState, PALETTE_LABEL, stateLine, type AnswerState, type ItemStatus } from "@/lib/answer-state";
 
 const DEBOUNCE_MS = 400; // ≤ 500 ms (P10.S2.T1)
 const PRE_FLUSH_MS = 5000; // best-effort flush at D − 5 s
 type Stored = { ops: Op[]; submitKey?: string };
-type ItemState = { option: string | null; status: "saved" | "pending" | "rejected" | "empty"; reason?: string; revision: number };
+type ItemState = { option: string | null; status: ItemStatus; reason?: string; revision: number; restored?: boolean };
+const TONE: Record<AnswerState, string> = {
+  empty: "border-border bg-surface",
+  selected: "border-accent bg-accent-soft",
+  saving: "border-warn bg-warn-soft",
+  pending: "border-dashed border-warn bg-warn-soft",
+  saved: "border-ok bg-ok-soft",
+  rejected: "border-danger bg-danger-soft",
+};
+
+const OFFLINE = "Can't reach the service. Your answers are kept on this device and will be sent again.";
+/** A server action whose request never reached the server (offline, dropped) rejects instead of returning; treat that
+ *  like any other failure so the runner retries, and nothing waits on a promise that already failed (ANSWER-STATES-01). */
+async function reach<T>(call: () => Promise<T>, failed: T): Promise<T> {
+  try {
+    return await call();
+  } catch {
+    return failed;
+  }
+}
 
 const storageKey = (id: string) => `practice-queue:${id}`;
 function readRaw(id: string): string | null {
@@ -69,6 +90,9 @@ export function AttemptRunner({ attempt }: { attempt: PracticeAttempt }) {
   const [flagged, setFlagged] = useState<Set<number>>(() => new Set(attempt.flagged ?? []));
   const [flagError, setFlagError] = useState<string | null>(null);
   const [connection, setConnection] = useState<"ok" | "retrying">("ok");
+  // ANSWER-STATES-01: questions whose change a request is carrying now, and those whose last send failed.
+  const [sending, setSending] = useState<ReadonlySet<number>>(() => new Set());
+  const [failed, setFailed] = useState<ReadonlySet<number>>(() => new Set());
   // P10.S1.T3: another signed-in device holds this attempt; nothing is sent from here until the learner chooses.
   const [elsewhere, setElsewhere] = useState(attempt.held_elsewhere === true);
   const [moving, setMoving] = useState(false);
@@ -96,7 +120,8 @@ export function AttemptRunner({ attempt }: { attempt: PracticeAttempt }) {
     const v = { ...items };
     for (const o of parseStored(storedRaw).ops) {
       const cur = v[o.position];
-      if (!cur || o.revision >= cur.revision) v[o.position] = { option: o.option_id, status: "pending", revision: o.revision };
+      // A stored change this page didn't make itself came from an earlier session: unacknowledged, so "pending".
+      if (!cur || o.revision >= cur.revision) v[o.position] = { option: o.option_id, status: "pending", revision: o.revision, restored: cur?.status !== "pending" };
     }
     return v;
   }, [items, storedRaw]);
@@ -134,11 +159,15 @@ export function AttemptRunner({ attempt }: { attempt: PracticeAttempt }) {
     if (inflight.current) return inflight.current;
     if (queue.current.length === 0) return;
     const batch = queue.current.slice(0, 50);
+    const positions = new Set(batch.map((o) => o.position));
+    setSending(positions);
     inflight.current = (async () => {
-      const out = await saveAnswers(attempt.id, batch);
+      const out = await reach(() => saveAnswers(attempt.id, batch), { kind: "error", message: OFFLINE } as const);
       if (out.kind === "elsewhere") {
         setElsewhere(true); // keep the queue; no automatic retry tug-of-war between devices
+        setFailed((f) => new Set([...f, ...positions]));
       } else if (out.kind === "error") {
+        setFailed((f) => new Set([...f, ...positions]));
         setConnection("retrying");
         const delay = retryDelay.current;
         retryDelay.current = Math.min(15_000, delay * 2);
@@ -147,6 +176,7 @@ export function AttemptRunner({ attempt }: { attempt: PracticeAttempt }) {
       } else {
         retryDelay.current = 2000;
         setConnection("ok");
+        setFailed((f) => new Set([...f].filter((p) => !positions.has(p))));
         apply(out.results);
         persist();
         if (out.kind === "finalised" || (out.kind === "ok" && out.status !== "active")) router.refresh();
@@ -156,6 +186,7 @@ export function AttemptRunner({ attempt }: { attempt: PracticeAttempt }) {
       await inflight.current;
     } finally {
       inflight.current = null;
+      setSending(new Set());
     }
     if (queue.current.length > 0 && retryDelay.current === 2000) void flushRef.current();
   }, [apply, attempt.id, persist, router]);
@@ -173,10 +204,15 @@ export function AttemptRunner({ attempt }: { attempt: PracticeAttempt }) {
       queue.current = stored.ops;
       void flush();
     }
+  }, [attempt.id, flush]);
+
+  // Send again as soon as the browser is back online. A separate effect, so it is always registered (the restore
+  // above runs once even when React runs effects twice in development).
+  useEffect(() => {
     const online = () => void flushRef.current();
     window.addEventListener("online", online);
     return () => window.removeEventListener("online", online);
-  }, [attempt.id, flush]);
+  }, []);
 
   // Ticking clock, pre-flush at D − 5 s, flush at D, and pick up the server's expiry after C.
   const preFlushed = useRef(false);
@@ -223,7 +259,7 @@ export function AttemptRunner({ attempt }: { attempt: PracticeAttempt }) {
     else next.add(position);
     setFlagged(next); // shown at once; put back if the server refuses
     setFlagError(null);
-    const out = await setFlags(attempt.id, [...next]);
+    const out = await reach(() => setFlags(attempt.id, [...next]), { ok: false, elsewhere: false, message: OFFLINE } as const);
     if (out.ok) {
       setFlagged(new Set(out.flagged));
       return;
@@ -235,7 +271,7 @@ export function AttemptRunner({ attempt }: { attempt: PracticeAttempt }) {
 
   async function check(position: number) {
     await flush();
-    const res = await revealItem(attempt.id, position);
+    const res = await reach(() => revealItem(attempt.id, position), { ok: false, message: OFFLINE } as const);
     if (res.ok) {
       setRevealed((r) => ({ ...r, [position]: res.data }));
       setLocked((l) => new Set(l).add(position));
@@ -250,17 +286,23 @@ export function AttemptRunner({ attempt }: { attempt: PracticeAttempt }) {
     const stored = readStored(attempt.id);
     const key = stored.submitKey ?? crypto.randomUUID().replaceAll("-", "");
     writeStored(attempt.id, { ops: queue.current, submitKey: key }); // retries reuse the same submission key
-    const out = await submitAttempt(attempt.id, key, queue.current);
+    const out = await reach(() => submitAttempt(attempt.id, key, queue.current), { kind: "error", message: OFFLINE } as const);
     if (out.kind === "elsewhere") setElsewhere(true);
     if (out.kind === "error" || out.kind === "elsewhere") {
       setSubmitting(false);
       setSubmitError(out.message);
+      // Submitting stopped the retry timer: start it again, so unsent answers keep going out while the learner waits.
+      if (out.kind === "error" && queue.current.length > 0) timer.current = setTimeout(() => void flushRef.current(), retryDelay.current);
       return;
     }
     writeStored(attempt.id, { ops: [] });
     router.replace(`/practice/attempt/${attempt.id}/result`); // Back never returns into a submitted test
   }
 
+  const shown = (position: number): AnswerState => {
+    const st = view[position];
+    return answerState(st.status, { sending: sending.has(position), held: !!st.restored || failed.has(position) || connection === "retrying" || elsewhere });
+  };
   const answered = Object.values(view).filter((i) => i.option !== null).length;
   const pending = Object.values(view).filter((i) => i.status === "pending").length;
   const item = attempt.items.find((i) => i.position === current)!;
@@ -269,7 +311,7 @@ export function AttemptRunner({ attempt }: { attempt: PracticeAttempt }) {
 
   async function moveHere() {
     setMoving(true);
-    const out = await continueHere(attempt.id);
+    const out = await reach(() => continueHere(attempt.id), { ok: false, message: OFFLINE });
     setMoving(false);
     if (!out.ok) {
       setSubmitError(out.message ?? null);
@@ -326,17 +368,15 @@ export function AttemptRunner({ attempt }: { attempt: PracticeAttempt }) {
 
       <nav aria-label="Questions" className="flex flex-wrap gap-1.5">
         {attempt.items.map((it) => {
-          const st = view[it.position];
-          const tone =
-            st.status === "saved" ? "border-ok bg-ok-soft" : st.status === "pending" ? "border-warn bg-warn-soft" : st.status === "rejected" ? "border-danger bg-danger-soft" : "border-border bg-surface";
+          const s = shown(it.position);
           return (
             <button
               key={it.position}
               type="button"
               onClick={() => setCurrent(it.position)}
               aria-current={it.position === current ? "step" : undefined}
-              aria-label={`Question ${it.position}: ${st.status === "empty" ? "not answered" : st.status}${flagged.has(it.position) ? ", flagged" : ""}`}
-              className={`relative h-9 w-9 rounded-md border text-sm ${tone} ${it.position === current ? "ring-2 ring-accent" : ""}`}
+              aria-label={`Question ${it.position}: ${PALETTE_LABEL[s]}${flagged.has(it.position) ? ", flagged" : ""}`}
+              className={`relative h-9 w-9 rounded-md border text-sm ${TONE[s]} ${it.position === current ? "ring-2 ring-accent" : ""}`}
             >
               {it.position}
               {flagged.has(it.position) && (
@@ -403,10 +443,8 @@ export function AttemptRunner({ attempt }: { attempt: PracticeAttempt }) {
               Check answer
             </button>
           )}
-          <span className="text-muted">
-            {state.status === "saved" && "Saved"}
-            {state.status === "pending" && "Saving…"}
-            {state.status === "rejected" && <span className="text-danger">Not saved: {state.reason}</span>}
+          <span className={shown(current) === "rejected" ? "text-danger" : shown(current) === "pending" ? "text-warn" : "text-muted"}>
+            {stateLine(shown(current), { elsewhere, reason: state.reason })}
           </span>
         </div>
         {revealed[current] && (
@@ -472,7 +510,15 @@ export function AttemptRunner({ attempt }: { attempt: PracticeAttempt }) {
             <button type="button" onClick={() => void submit()} disabled={submitting} className="rounded-lg bg-accent px-4 py-2 font-medium text-white disabled:opacity-60 dark:text-background">
               {submitting ? "Submitting…" : submitError ? "Try again" : "Submit"}
             </button>
-            <button type="button" onClick={() => setConfirming(false)} disabled={submitting} className="rounded-lg border border-border px-4 py-2">
+            <button
+              type="button"
+              onClick={() => {
+                setConfirming(false);
+                setSubmitError(null); // an old failure isn't shown again when the dialog reopens
+              }}
+              disabled={submitting}
+              className="rounded-lg border border-border px-4 py-2"
+            >
               Keep working
             </button>
           </div>
