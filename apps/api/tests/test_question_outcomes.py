@@ -251,6 +251,76 @@ def test_pending_and_unavailable_together_are_pending_then_partial(
     assert [(h["version"], h["total_units"]) for h in final["history"]] == [(1, 0), (2, 200)]
 
 
+def test_the_result_adds_up_and_says_separately_what_is_happening(
+    client: TestClient, published_written: dict[str, Any]
+) -> None:
+    """RESULT-ARITHMETIC-01 (§20.9.3, W07.S1.T1): scored, pending and could-not-be-assessed maxima are reported
+    together and add up to the paper's maximum; the assessor covers only the scored questions; work status is a
+    separate dimension (in review, the learner's step, delayed, finished)."""
+    learner, a = _sealed(client, published_written["chapter"], seed=509)
+    url = f"/v1/written-attempts/{a['id']}/result"
+    waiting = client.get(url, headers=learner.headers).json()
+    assert (waiting["status"], waiting["work_status"], waiting["pending_max_units"]) == ("pending", "in_review", None)
+
+    teacher = _staff(client, ["subject_reviewer"])
+    both = {
+        "1": {"status": "pending", "reason": "Fixture: page too blurred to read"},
+        "2": {"status": "unavailable", "reason": "Fixture: no teacher for this notation"},
+    }
+    assert _decide(client, teacher, a["id"], "initial", {"awards": {}, "question_status": both}).status_code == 200
+    r = client.get(url, headers=learner.headers).json()
+    q1, q2 = (q["max_units"] for q in r["questions"])
+    assert (r["scored_max_units"], r["pending_max_units"], r["unavailable_max_units"]) == (0, q1, q2)
+    assert r["scored_max_units"] + r["pending_max_units"] + r["unavailable_max_units"] == r["max_units"]
+    assert r["assessment_method"] == "none"  # nothing was scored, so nobody assessed the paper
+    assert r["work_status"] == "in_review"  # the completion case is open and not yet due
+
+    with get_sessionmaker()() as db:  # the service obligation passes with the case still open
+        db.execute(
+            text("update written_review_case set due_at = now() - interval '1 hour' where attempt_id = :a"),
+            {"a": a["id"]},
+        )
+        db.commit()
+    assert client.get(url, headers=learner.headers).json()["work_status"] == "delayed"
+
+    done = _decide(client, teacher, a["id"], "completion", {"awards": _awards(q1=200)})
+    assert done.status_code == 200, done.text
+    r = client.get(url, headers=learner.headers).json()
+    assert (r["scored_max_units"], r["pending_max_units"], r["unavailable_max_units"]) == (q1, 0, q2)
+    assert (r["assessment_method"], r["work_status"], r["total_units"]) == ("teacher", "finished", 200)
+
+
+def test_a_request_to_the_learner_is_their_step_in_the_work_status(
+    client: TestClient, published_written: dict[str, Any]
+) -> None:
+    """RESULT-ARITHMETIC-01: a teacher's request for a clearer copy makes the work status the learner's step, even
+    while the case is overdue; the marks stay as they are."""
+    learner, a = _sealed(client, published_written["chapter"], seed=510)
+    pending = {"2": {"status": "pending", "reason": "Fixture: can't read it", "learner_action": "rescan"}}
+    r = _decide(
+        client,
+        _staff(client, ["subject_reviewer"]),
+        a["id"],
+        "initial",
+        {"awards": _awards(q1=100), "question_status": pending},
+    )
+    assert r.status_code == 200, r.text
+    with get_sessionmaker()() as db:
+        db.execute(
+            text("update written_review_case set due_at = now() - interval '1 hour' where attempt_id = :a"),
+            {"a": a["id"]},
+        )
+        db.commit()
+    result = client.get(f"/v1/written-attempts/{a['id']}/result", headers=learner.headers).json()
+    assert result["work_status"] == "action_required"
+    assert result["questions"][1]["learner_action"] == "rescan"
+    assert (result["assessment_method"], result["pending_max_units"], result["unavailable_max_units"]) == (
+        "teacher",
+        result["questions"][1]["max_units"],
+        0,
+    )
+
+
 def test_older_apps_only_get_completeness_values_they_know() -> None:
     from portal_api.modules.written.review_router import legacy_completeness
 
