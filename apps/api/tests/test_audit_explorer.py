@@ -9,7 +9,7 @@ from sqlalchemy.exc import DBAPIError
 
 from portal_api.db import get_sessionmaker
 from portal_api.modules.audit.models import record
-from portal_api.modules.audit.router import redact
+from portal_api.modules.audit.redaction import redact
 from tests.test_content_workflow import Staff
 
 
