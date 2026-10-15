@@ -8,68 +8,57 @@ import { Directory, File, Paths } from "expo-file-system";
 
 import { accountScope } from "@/lib/account-scope";
 import { api, ApiError } from "@/lib/api";
+import { createFlusher, withOp, type NewProgressOp, type ProgressOp, type QueueStore } from "@/lib/progress-queue-core";
 
-export type ProgressOp =
-  | { op_id: string; kind: "completion"; lesson_id: string; done: boolean; queued_at: string }
-  | { op_id: string; kind: "note"; lesson_id: string; text: string; base: number; queued_at: string };
-export type NewProgressOp =
-  | { kind: "completion"; lesson_id: string; done: boolean }
-  | { kind: "note"; lesson_id: string; text: string; base: number };
+export type { NewProgressOp, ProgressOp };
 
 const fileFor = (owner: string) => new File(Paths.document, `progress-queue-${accountScope(owner)}.json`);
 const opId = () => Array.from({ length: 32 }, () => Math.floor(Math.random() * 16).toString(16)).join("");
 
-export function pending(owner: string): ProgressOp[] {
-  try {
-    const f = fileFor(owner);
-    return f.exists ? (JSON.parse(f.textSync()) as ProgressOp[]) : [];
-  } catch {
-    return [];
-  }
+function storeFor(owner: string): QueueStore {
+  return {
+    read: () => {
+      try {
+        const f = fileFor(owner);
+        return f.exists ? (JSON.parse(f.textSync()) as ProgressOp[]) : [];
+      } catch {
+        return [];
+      }
+    },
+    write: (ops) => {
+      const f = fileFor(owner);
+      if (ops.length === 0) {
+        if (f.exists) f.delete();
+        return;
+      }
+      if (!f.exists) f.create();
+      f.write(JSON.stringify(ops));
+    },
+  };
 }
 
-function store(owner: string, ops: ProgressOp[]): void {
-  const f = fileFor(owner);
-  if (ops.length === 0) {
-    if (f.exists) f.delete();
-    return;
-  }
-  if (!f.exists) f.create();
-  f.write(JSON.stringify(ops));
+export function pending(owner: string): ProgressOp[] {
+  return storeFor(owner).read();
 }
 
 /** Queue a change; a newer change to the same lesson's completion or note replaces the older one. */
 export function enqueue(owner: string, op: NewProgressOp): void {
-  const ops = pending(owner).filter((o) => !(o.lesson_id === op.lesson_id && o.kind === op.kind));
-  store(owner, [...ops, { ...op, op_id: opId(), queued_at: new Date().toISOString() } as ProgressOp]);
+  const store = storeFor(owner);
+  store.write(withOp(store.read(), op, opId(), new Date()));
 }
 
-let running: Promise<number> | null = null;
+const temporary = (e: unknown) => e instanceof ApiError && ["offline", "server", "unauthorized"].includes(e.kind);
+const flights = new Map<string, Promise<number>>();
 
-/** Send what is queued, in order. Stops at the first offline failure; returns how many were sent. */
+/** Send what is queued, in order. Stops at the first temporary failure; returns how many were sent. */
 export function flush(token: string, owner: string): Promise<number> {
-  running ??= (async () => {
-    let sent = 0;
-    try {
-      for (const op of pending(owner)) {
-        try {
-          if (op.kind === "completion") await api.setCompleted(token, op.lesson_id, op.done, op.queued_at);
-          else await api.saveNote(token, op.lesson_id, op.text, op.base);
-          sent += 1;
-        } catch (e) {
-          // Offline, a server problem or an ended session: stop and keep everything for later (the queue is this
-          // account's). A conflict (the note changed elsewhere) or a lesson no longer readable: this operation can't
-          // apply as it was, so it is dropped; the note's text stays in its draft for the learner to decide.
-          if (e instanceof ApiError && ["offline", "server", "unauthorized"].includes(e.kind)) break;
-        }
-        store(owner, pending(owner).filter((o) => o.op_id !== op.op_id));
-      }
-    } finally {
-      running = null;
-    }
-    return sent;
-  })();
-  return running;
+  const running = flights.get(owner);
+  if (running) return running;
+  const send = (op: ProgressOp) =>
+    op.kind === "completion" ? api.setCompleted(token, op.lesson_id, op.done, op.queued_at).then(() => undefined) : api.saveNote(token, op.lesson_id, op.text, op.base).then(() => undefined);
+  const flight = createFlusher(storeFor(owner), send, temporary)().finally(() => flights.delete(owner));
+  flights.set(owner, flight);
+  return flight;
 }
 
 /** Signing out of this device: every account's queue goes with the session (ISOLATION-01). */

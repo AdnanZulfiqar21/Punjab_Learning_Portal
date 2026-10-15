@@ -1,48 +1,53 @@
 // Expo web target (development preview only): the queue lives in localStorage for this browser profile.
 import { accountScope } from "@/lib/account-scope";
 import { api, ApiError } from "@/lib/api";
-import type { NewProgressOp, ProgressOp } from "./progress-queue";
+import { createFlusher, withOp, type NewProgressOp, type ProgressOp, type QueueStore } from "@/lib/progress-queue-core";
 
 export type { NewProgressOp, ProgressOp };
 const PREFIX = "progress-queue:";
 const key = (owner: string) => `${PREFIX}${accountScope(owner)}`;
 const opId = () => Array.from({ length: 32 }, () => Math.floor(Math.random() * 16).toString(16)).join("");
 
-export function pending(owner: string): ProgressOp[] {
-  try {
-    return JSON.parse(window.localStorage.getItem(key(owner)) ?? "[]") as ProgressOp[];
-  } catch {
-    return [];
-  }
+function storeFor(owner: string): QueueStore {
+  return {
+    read: () => {
+      try {
+        return JSON.parse(window.localStorage.getItem(key(owner)) ?? "[]") as ProgressOp[];
+      } catch {
+        return [];
+      }
+    },
+    write: (ops) => {
+      try {
+        if (ops.length === 0) window.localStorage.removeItem(key(owner));
+        else window.localStorage.setItem(key(owner), JSON.stringify(ops));
+      } catch {
+        /* storage unavailable */
+      }
+    },
+  };
 }
 
-function store(owner: string, ops: ProgressOp[]): void {
-  try {
-    if (ops.length === 0) window.localStorage.removeItem(key(owner));
-    else window.localStorage.setItem(key(owner), JSON.stringify(ops));
-  } catch {
-    /* storage unavailable */
-  }
+export function pending(owner: string): ProgressOp[] {
+  return storeFor(owner).read();
 }
 
 export function enqueue(owner: string, op: NewProgressOp): void {
-  const ops = pending(owner).filter((o) => !(o.lesson_id === op.lesson_id && o.kind === op.kind));
-  store(owner, [...ops, { ...op, op_id: opId(), queued_at: new Date().toISOString() } as ProgressOp]);
+  const store = storeFor(owner);
+  store.write(withOp(store.read(), op, opId(), new Date()));
 }
 
-export async function flush(token: string, owner: string): Promise<number> {
-  let sent = 0;
-  for (const op of pending(owner)) {
-    try {
-      if (op.kind === "completion") await api.setCompleted(token, op.lesson_id, op.done, op.queued_at);
-      else await api.saveNote(token, op.lesson_id, op.text, op.base);
-      sent += 1;
-    } catch (e) {
-      if (e instanceof ApiError && ["offline", "server", "unauthorized"].includes(e.kind)) break;
-    }
-    store(owner, pending(owner).filter((o) => o.op_id !== op.op_id));
-  }
-  return sent;
+const temporary = (e: unknown) => e instanceof ApiError && ["offline", "server", "unauthorized"].includes(e.kind);
+const flights = new Map<string, Promise<number>>();
+
+export function flush(token: string, owner: string): Promise<number> {
+  const running = flights.get(owner);
+  if (running) return running;
+  const send = (op: ProgressOp) =>
+    op.kind === "completion" ? api.setCompleted(token, op.lesson_id, op.done, op.queued_at).then(() => undefined) : api.saveNote(token, op.lesson_id, op.text, op.base).then(() => undefined);
+  const flight = createFlusher(storeFor(owner), send, temporary)().finally(() => flights.delete(owner));
+  flights.set(owner, flight);
+  return flight;
 }
 
 export async function clearProgress(): Promise<void> {
