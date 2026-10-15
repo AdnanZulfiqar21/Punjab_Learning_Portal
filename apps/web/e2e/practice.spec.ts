@@ -499,12 +499,17 @@ test("a teacher asks for a clearer copy, the learner sends one, and it is classi
   await expect(teacher.getByLabel("Reason for the classification of question 1")).toHaveValue("Fixture: same working, brighter photo.");
   await expect(teacher.getByLabel("Used the clearer copy for question 1 (recorded with the mark)")).toBeChecked();
   await expect(teacher.getByRole("radiogroup", { name: "Award for a1" }).getByLabel("1", { exact: true })).toBeChecked();
+  // W07.S1.T2 (FEEDBACK-COPIES-01): the feedback can point at a place on the clearer copy the answer is marked from.
+  await teacher.getByLabel("Reason for a1").fill("Fixture: the working is shown here.");
+  await teacher.getByLabel("Where on the script a1 is about").selectOption({ label: "Clearer copy, page 1: bottom left" });
   await teacher.getByRole("button", { name: "Release result" }).click();
   await expect(teacher.getByText("Result released")).toBeVisible(AUTH);
 
   await page.reload();
   await expect(page.getByText("A teacher used your clearer copy to mark this answer.")).toBeVisible(AUTH);
   await expect(page.getByText("Question 1: 1 / 5")).toBeVisible();
+  await page.getByText("Show where: your clearer copy for question 1, page 1, bottom left").click();
+  await expect(page.getByAltText("Your clearer copy, page 1")).toBeVisible(AUTH);
 });
 
 test("uploads are refused from other sites", async ({ page }) => {
