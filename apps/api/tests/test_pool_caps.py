@@ -20,7 +20,8 @@ from tests.test_content_workflow import Staff
 from tests.test_mock_sessions import _schedule, _shift
 from tests.test_mocks import _publish_profile
 
-SCRIPTS = tomllib.loads((Path(__file__).parents[1] / "pyproject.toml").read_text(encoding="utf-8"))["project"]["scripts"]
+PYPROJECT = (Path(__file__).parents[1] / "pyproject.toml").read_text(encoding="utf-8")
+SCRIPTS = tomllib.loads(PYPROJECT)["project"]["scripts"]
 
 
 @pytest.mark.parametrize("command", sorted(budget.ENTRY_POINTS))
