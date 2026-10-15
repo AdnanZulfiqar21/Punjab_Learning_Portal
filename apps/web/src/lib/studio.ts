@@ -41,6 +41,12 @@ export async function getQueue(token: string, filters: QueueFilters): Promise<St
   return res.data;
 }
 
+// ASSIGN-REVIEWER-01 (P06.S1.T2): who a publisher may assign (active reviewers in scope who didn't edit the item).
+export async function getReviewerOptions(token: string, id: string): Promise<{ id: string; email: string }[]> {
+  const res = await api<{ id: string; email: string }[]>(`/v1/studio/items/${encodeURIComponent(id)}/reviewers`, { token });
+  return res.ok ? res.data : [];
+}
+
 export async function getItem(token: string, id: string): Promise<StudioItem | null> {
   const res = await api<StudioItem>(`/v1/studio/items/${encodeURIComponent(id)}`, { token });
   if (res.ok) return res.data;

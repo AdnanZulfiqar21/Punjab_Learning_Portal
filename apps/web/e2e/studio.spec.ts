@@ -65,6 +65,14 @@ test("an author drafts with autosave and submits for review", async ({ browser }
 });
 
 test("an independent reviewer approves; the rights gate blocks publication", async ({ browser }) => {
+  // P06.S1.T2 (ASSIGN-REVIEWER-01): a publisher (MFA) assigns the review to an eligible reviewer first.
+  const assigner = await signIn(browser, "studio-publisher@example.com", true);
+  await assigner.goto(itemUrl);
+  const assign = assigner.getByRole("region", { name: "Reviewer" });
+  await assign.getByLabel("Assign to").selectOption({ label: "studio-reviewer@example.com" });
+  await assign.getByRole("button", { name: "Assign" }).click();
+  await expect(assign.getByText("Assigned to studio-reviewer@example.com.")).toBeVisible(AUTH);
+
   const reviewer = await signIn(browser, "studio-reviewer@example.com");
   await reviewer.getByRole("link", { name: title }).click();
   await expect(reviewer.getByText("In review · version 1")).toBeVisible();
