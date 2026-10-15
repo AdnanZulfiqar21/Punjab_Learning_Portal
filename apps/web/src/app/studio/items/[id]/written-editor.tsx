@@ -31,6 +31,7 @@ type Criterion = {
   depends_on: string[];
   alternative_group?: string | null;
   evidence?: string | null;
+  misconceptions?: string[];
 };
 type Rubric = {
   question_version_id: string | null;
@@ -42,6 +43,8 @@ type Rubric = {
   alternative_routes: string[];
   consequential_error_rule?: string | null;
   units_rule?: string | null;
+  significant_figures_rule?: string | null;
+  final_answers_rule?: string | null;
   crossed_out_rule?: string | null;
   model_answer: { type: string; text?: string }[];
 };
@@ -228,6 +231,8 @@ export function asRubric(body: Body): Rubric {
     alternative_routes: b.alternative_routes ?? [],
     consequential_error_rule: b.consequential_error_rule ?? null,
     units_rule: b.units_rule ?? null,
+    significant_figures_rule: b.significant_figures_rule ?? null,
+    final_answers_rule: b.final_answers_rule ?? null,
     crossed_out_rule: b.crossed_out_rule ?? null,
     model_answer: b.model_answer ?? [],
   };
@@ -250,11 +255,15 @@ export function normaliseRubric(body: Body): Body {
       depends_on: c.depends_on.filter(Boolean),
       alternative_group: clean(c.alternative_group),
       evidence: clean(c.evidence),
+      // Not edited here, but kept: saving must never drop a criterion's listed misconceptions.
+      ...(c.misconceptions?.length ? { misconceptions: c.misconceptions } : {}),
     })),
     expected_concepts: r.expected_concepts.map((x) => x.trim()).filter(Boolean),
     alternative_routes: r.alternative_routes.map((x) => x.trim()).filter(Boolean),
     consequential_error_rule: clean(r.consequential_error_rule),
     units_rule: clean(r.units_rule),
+    significant_figures_rule: clean(r.significant_figures_rule),
+    final_answers_rule: clean(r.final_answers_rule),
     crossed_out_rule: clean(r.crossed_out_rule),
     // MODEL-ANSWER-01: empty paragraphs are dropped; other block types (e.g. from an import) are kept as they are.
     model_answer: r.model_answer.filter((b) => b.type !== "paragraph" || (b.text ?? "").trim()),
@@ -446,8 +455,10 @@ export function RubricEditor({
         {(
           [
             ["consequential_error_rule", "Consequential (carried-forward) errors"],
-            ["units_rule", "Units and significant figures"],
-            ["crossed_out_rule", "Crossed-out work"],
+            ["units_rule", "Units"],
+            ["significant_figures_rule", "Significant figures"],
+            ["final_answers_rule", "Several or contradictory final answers (blank: markers escalate them)"],
+            ["crossed_out_rule", "Crossed-out work (blank: the proposed default applies)"],
           ] as const
         ).map(([k, label]) => (
           <label key={k} className="space-y-1 text-sm">
