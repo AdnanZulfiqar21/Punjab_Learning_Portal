@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { Suspense } from "react";
-import type { ItemReview } from "@portal/contracts";
+import type { AttemptResult, ItemReview } from "@portal/contracts";
 import { LessonBlocks } from "@/components/lesson-blocks";
 import { Badge, Notice, SkeletonLines } from "@/components/ui";
 import { MockRunningNotice } from "@/components/mock-running";
@@ -110,6 +110,7 @@ async function Result({ id }: { id: string }) {
             ))}
           </ul>
         )}
+        {result.comparison && <Comparison c={result.comparison} />}
         {(result.history ?? []).length > 1 && (
           <details className="text-sm">
             <summary className="cursor-pointer text-muted">Score history ({(result.history ?? []).length} versions)</summary>
@@ -132,6 +133,36 @@ async function Result({ id }: { id: string }) {
         Practise again
       </Link>
     </div>
+  );
+}
+
+// P12.S2.T3 (COMPARISON-01): scheduled sessions' fixed forms only; the API decides whether a percentile may be shown.
+function Comparison({ c }: { c: NonNullable<AttemptResult["comparison"]> }) {
+  const day = (iso: string) => new Date(iso).toLocaleDateString("en-GB", { dateStyle: "medium", timeZone: TIME_ZONE });
+  return (
+    <section aria-labelledby="compare" className="space-y-1 rounded-lg border border-border bg-surface p-4 text-sm">
+      <h2 id="compare" className="font-semibold">
+        How you compare
+      </h2>
+      {c.state === "published" && c.percentile != null ? (
+        <>
+          <p>
+            <span className="text-2xl font-semibold tabular-nums">{String(c.percentile)}</span> percentile
+          </p>
+          <p>{c.message}</p>
+          {c.window_start && c.window_end && (
+            <p className="text-muted">
+              Results finalised {day(c.window_start)} to {day(c.window_end)} · comparison v{c.version}
+            </p>
+          )}
+          <p className="text-muted">{c.tie_rule}</p>
+        </>
+      ) : (
+        <p>{c.message}</p>
+      )}
+      {c.state !== "not_included" && <p className="text-muted">{c.group}</p>}
+      <p className="text-muted">{c.limits}</p>
+    </section>
   );
 }
 

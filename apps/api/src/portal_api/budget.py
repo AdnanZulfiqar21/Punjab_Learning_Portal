@@ -66,6 +66,7 @@ ENTRY_POINTS: dict[str, str] = {
     "portal-notification-worker": "critical",
     "portal-notification-trial-reminders": "standard",
     "portal-export-worker": "bulk",
+    "portal-comparison-snapshots": "bulk",  # COMPARISON-01
     "portal-asset-retention": "bulk",
     "portal-upload-reconcile": "bulk",
     "portal-help-import": "bulk",

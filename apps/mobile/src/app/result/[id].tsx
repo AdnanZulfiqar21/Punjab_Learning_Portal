@@ -1,6 +1,6 @@
 import { router, Stack, useLocalSearchParams } from "expo-router";
 import { ScrollView, View } from "react-native";
-import type { ItemReview } from "@portal/contracts";
+import type { AttemptResult, ItemReview } from "@portal/contracts";
 
 import { Button } from "@/components/form";
 import { LessonBlocks, type AssetSource } from "@/components/lesson-blocks";
@@ -83,11 +83,38 @@ function ResultView({ id, token }: { id: string; token: string }) {
           The answer you had saved before it, if any, was marked.
         </Notice>
       )}
+      {r.comparison && <Comparison c={r.comparison} />}
       {r.items.map((it) => (
         <Review key={it.position} item={it} assetSource={(v) => attemptAsset(id, v, token)} />
       ))}
       <Button variant="secondary" label="Practise again" onPress={() => router.navigate("/practice")} />
     </ScrollView>
+  );
+}
+
+// P12.S2.T3 (COMPARISON-01): scheduled sessions' fixed forms only; the API decides whether a percentile may be shown.
+function Comparison({ c }: { c: NonNullable<AttemptResult["comparison"]> }) {
+  const day = (iso: string) => new Date(iso).toLocaleDateString("en-GB", { dateStyle: "medium", timeZone: TIME_ZONE });
+  return (
+    <Card style={{ gap: Space.sm }}>
+      <T variant="heading" accessibilityRole="header">
+        How you compare
+      </T>
+      {c.state === "published" && c.percentile != null ? (
+        <>
+          <T variant="title">{`${String(c.percentile)} percentile`}</T>
+          <T>{c.message}</T>
+          {c.window_start && c.window_end && (
+            <T variant="small">{`Results finalised ${day(c.window_start)} to ${day(c.window_end)} · comparison v${c.version}`}</T>
+          )}
+          <T variant="small">{c.tie_rule}</T>
+        </>
+      ) : (
+        <T>{c.message}</T>
+      )}
+      {c.state !== "not_included" && <T variant="small">{c.group}</T>}
+      <T variant="small">{c.limits}</T>
+    </Card>
   );
 }
 
