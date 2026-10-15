@@ -647,7 +647,7 @@ function EvidencePlace({ attemptId, place }: { attemptId: string; place: Evidenc
         {/* eslint-disable-next-line @next/next/no-img-element -- private, uncached preview served by our own route */}
         <img
           src={`/practice/written/${attemptId}/pages/${place.page_id}`}
-          alt={`Your page ${place.page_number}`}
+          alt={place.clearer_copy ? `Your clearer copy, page ${place.page_number}` : `Your page ${place.page_number}`}
           loading="lazy"
           decoding="async"
           className="block w-full rounded border border-border"
