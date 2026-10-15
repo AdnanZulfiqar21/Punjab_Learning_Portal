@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Noto_Nastaliq_Urdu } from "next/font/google";
 import Link from "next/link";
 import { Suspense } from "react";
 import { AccountNav } from "@/components/account-nav";
@@ -11,6 +11,9 @@ import "./globals.css";
 
 const sans = Geist({ variable: "--font-sans-ui", subsets: ["latin"] });
 const mono = Geist_Mono({ variable: "--font-mono-ui", subsets: ["latin"] });
+// P02.S2.T1 (TOKENS-01): Urdu is set in Nastaliq, the style Punjab's Urdu textbooks use (Noto Nastaliq Urdu, SIL Open
+// Font Licence). Not preloaded: only pages that show Urdu text fetch it, so English pages carry no extra weight.
+const urdu = Noto_Nastaliq_Urdu({ variable: "--font-urdu", subsets: ["arabic"], weight: "variable", preload: false });
 
 export const metadata: Metadata = {
   title: { default: "Punjab Learning Portal", template: "%s · Punjab Learning Portal" },
@@ -30,7 +33,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     // The display script sets this device's theme, text size and motion on <html> before the first paint (SETTINGS-01).
-    <html lang="en" className={`${sans.variable} ${mono.variable} h-full antialiased`} suppressHydrationWarning>
+    <html lang="en" className={`${sans.variable} ${mono.variable} ${urdu.variable} h-full antialiased`} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: DISPLAY_SCRIPT }} />
       </head>
