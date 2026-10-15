@@ -1,4 +1,5 @@
 import { expect, test, type Page } from "@playwright/test";
+import { audit } from "./helpers/a11y";
 
 // Learner practice journeys (P09/P10) against the development fixtures from `portal-dev-seed-practice`: technical
 // fixture questions in Class XI Biology, chapter 1, whose stems say which option is the key. Not academic content.
@@ -297,6 +298,56 @@ test("a pending question shows no invented mark, and a completion case finishes 
   await page.reload();
   await expect(page.getByText(/marked by a teacher/)).toBeVisible(AUTH);
   await expect(page.getByText("Question 1: 1 / 5")).toBeVisible();
+});
+
+// W07.S1.T1 (RESULT-ARITHMETIC-01, §20.9.3): one question pending and one that couldn't be assessed, shown together;
+// the parts add up to the whole test and there is no total, zero or teacher label for the paper.
+test("a partly pending, partly unassessable paper shows how its marks add up", async ({ page, browser }) => {
+  test.slow(); // a marking round in a second browser context
+  await newLearner(page);
+  await page.goto("/practice/written?grade=11&subject=biology");
+  await page.getByRole("group", { name: "Chapters" }).getByRole("checkbox").first().check();
+  await page.getByRole("spinbutton", { name: "Questions" }).fill("2");
+  await page.getByRole("button", { name: "Start written test" }).click();
+  await expect(page).toHaveURL(/:\d+\/practice\/written\/[0-9a-f-]{36}$/, AUTH);
+  const attemptId = page.url().split("/").pop()!;
+  await page.getByLabel("Add photos or a PDF").setInputFiles("e2e/fixtures/synthetic-page.png");
+  await expect(page.getByRole("list", { name: "Uploaded pages" }).getByText(/Page 1 ·/)).toBeVisible(AUTH);
+  for (const part of [/Question 1 \(a\)/, /Question 1 \(b\)/, /Question 2 \(a\)/, /Question 2 \(b\)/]) {
+    await page.getByRole("group", { name: part }).getByLabel("Page 1").check();
+  }
+  await expect(page.getByRole("status").filter({ hasText: /Saved · revision \d+/ })).toBeVisible(AUTH);
+  await page.getByRole("button", { name: "Submit for marking" }).click();
+  await expect(page.getByText("Waiting for a teacher")).toBeVisible(AUTH);
+
+  const teacher = await (await browser.newContext()).newPage();
+  await teacher.goto("/signin?next=/studio/marking");
+  await teacher.getByLabel("Email").fill("studio-reviewer@example.com");
+  await teacher.getByLabel("Password").fill("studio-fixture-pass-1");
+  await teacher.getByRole("button", { name: "Sign in", exact: true }).click();
+  await expect(teacher).toHaveURL(/:\d+\/studio\/marking$/, AUTH);
+  await teacher.getByRole("link", { name: `Script ${attemptId.slice(0, 8)}` }).click();
+  await teacher.getByRole("button", { name: "Start marking" }).click();
+  await teacher.getByLabel("Outcome for question 1").selectOption("pending");
+  await teacher.getByLabel("Reason for question 1").fill("Fixture: part (b) is too faint to read.");
+  await teacher.getByLabel("Outcome for question 2").selectOption("unavailable");
+  await teacher.getByLabel("Reason for question 2").fill("Fixture: no teacher can read this notation.");
+  await teacher.getByRole("button", { name: "Release result" }).click();
+  await expect(teacher.getByText("Result released")).toBeVisible(AUTH);
+
+  await page.reload();
+  await expect(page.getByText("Marking isn't finished yet")).toBeVisible(AUTH);
+  await expect(page.getByText("No question has been marked yet.")).toBeVisible();
+  const breakdown = page.getByLabel("How the marks add up");
+  await expect(breakdown).toContainText("Marked0 marks");
+  await expect(breakdown).toContainText("Still being marked5 marks");
+  await expect(breakdown).toContainText("Couldn't be assessed5 marks");
+  await expect(breakdown).toContainText("Whole test10 marks");
+  await expect(page.getByText("A teacher is still working on this script.")).toBeVisible();
+  await expect(page.getByText(/Question 1: pending/)).toBeVisible();
+  await expect(page.getByText(/Question 2: couldn't be assessed/)).toBeVisible();
+  await expect(page.getByText(/marked by a teacher$|%/)).toHaveCount(0); // no paper-level teacher label or percentage
+  await audit(page, null);
 });
 
 // W07.S1.T2 (FEEDBACK-EVIDENCE-01): a teacher points a criterion's feedback at a place on the page; the learner sees it.

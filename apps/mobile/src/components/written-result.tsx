@@ -31,13 +31,47 @@ const HISTORY: Record<string, string> = {
   regrade: "after a marking-guide correction",
 };
 
+// RESULT-ARITHMETIC-01 (§20.9.3, W07.S1.T1): marks on the scored questions, marks still being marked and marks that
+// couldn't be assessed, side by side; they add up to the whole test. No total or percentage for an incomplete paper.
+function PartialMarks({ r }: { r: WrittenResult }) {
+  const scored = r.scored_max_units ?? 0;
+  const pending = r.pending_max_units ?? 0;
+  const unavailable = r.unavailable_max_units ?? 0;
+  const stillMarking = r.completeness === "partial_pending";
+  return (
+    <Notice tone="warn" title={stillMarking ? "Marking isn't finished yet" : "Some questions couldn't be assessed"}>
+      {scored > 0 ? `${marks(r.total_units ?? 0)} out of ${marks(scored)} on the questions a teacher marked.` : "No question has been marked yet."}
+      {`\nMarked: ${marks(scored)} marks`}
+      {pending > 0 ? `\nStill being marked: ${marks(pending)} marks` : ""}
+      {unavailable > 0 ? `\nCouldn't be assessed: ${marks(unavailable)} marks` : ""}
+      {`\nWhole test: ${marks(r.max_units)} marks\n`}
+      {stillMarking
+        ? "There is no final total until every question is resolved, and nothing is counted as zero just because it wasn't assessed."
+        : "This test has no final total or percentage, because some questions couldn't be assessed. They aren't counted as zero."}
+    </Notice>
+  );
+}
+
+// §20.9.3: what is happening to the script now, kept apart from the marks.
+function WorkStatus({ status }: { status: WrittenResult["work_status"] }) {
+  if (status === "action_required") return <T variant="small">Your step: a teacher asked you for something on a question below.</T>;
+  if (status === "delayed") return <T variant="small">Marking is taking longer than planned. Your script is still in the queue, and nothing has been lost.</T>;
+  if (status === "in_review") return <T variant="small">A teacher is still working on this script.</T>;
+  return null;
+}
+
 export function WrittenResultView({ attemptId, token }: { attemptId: string; token: string }) {
   const req = useRequest((signal) => api.writtenResult(token, attemptId, signal), [token, attemptId]);
   if (req.state.status === "loading") return <Loading label="Loading your marks" />;
   if (req.state.status === "error") return <ErrorState error={req.state.error} onRetry={req.retry} />;
   const r = req.state.data;
   if (r.status === "pending") {
-    return <Notice title="Waiting for a teacher">Your script is in the marking queue. Marks appear here once a teacher releases them.</Notice>;
+    return (
+      <Notice title="Waiting for a teacher">
+        Your script is in the marking queue. Marks appear here once a teacher releases them.
+        {r.work_status === "delayed" ? " Marking is taking longer than planned; nothing has been lost." : ""}
+      </Notice>
+    );
   }
   const awaiting = r.awaiting_regrade ?? [];
   return (
@@ -56,11 +90,9 @@ export function WrittenResultView({ attemptId, token }: { attemptId: string; tok
           question below.
         </Notice>
       ) : (
-        <Notice tone="warn" title={r.completeness === "partial_pending" ? "Marking isn't finished yet" : "Some questions couldn't be assessed"}>
-          So far {marks(r.total_units ?? 0)} out of {marks(r.scored_max_units ?? 0)} on the questions a teacher marked. There is no final total until
-          every question is resolved, and nothing is counted as zero just because it wasn&apos;t assessed.
-        </Notice>
+        <PartialMarks r={r} />
       )}
+      <WorkStatus status={r.work_status} />
       <T variant="small">
         {awaiting.length
           ? `Marked by a teacher; question ${awaiting.join(", ")} is waiting to be re-marked under a corrected marking guide.`
@@ -68,7 +100,9 @@ export function WrittenResultView({ attemptId, token }: { attemptId: string; tok
             ? "Marked by a teacher; carried forward unchanged after a marking-guide correction."
             : r.completeness === "complete"
               ? "Marked by a teacher."
-              : "Reviewed by a teacher so far."}
+              : r.assessment_method === "none"
+                ? "No question has been marked yet."
+                : "Marked by a teacher: only the questions that have a mark."}
       </T>
       {(r.notices ?? []).map((n) => (
         <Notice key={`${n.kind}:${n.created_at}`} title="Marking guide corrected">
