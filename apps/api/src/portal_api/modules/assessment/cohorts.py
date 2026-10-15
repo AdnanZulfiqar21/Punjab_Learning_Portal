@@ -56,6 +56,7 @@ from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Mapped, Session, mapped_column
 
+from portal_api.budget import process_class
 from portal_api.db import Base
 from portal_api.modules.assessment import scoring
 from portal_api.modules.assessment.models import SCORING_POLICY_VERSION, Attempt, PracticeForm, ScoreVersion
@@ -353,10 +354,15 @@ def for_attempt(db: Session, attempt: Attempt, form: PracticeForm, score: ScoreV
     }
 
 
+@process_class("bulk")
 def main(argv: list[str] | None = None) -> int:
     """`portal-comparison-snapshots`: one pass; schedule it every few minutes."""
+    from portal_api.budget import bulk_paused_now
     from portal_api.db import get_sessionmaker
 
+    if why := bulk_paused_now():  # POOL-CAPS-01: the next scheduled run does it
+        print(f"skipped: {why}", flush=True)
+        return 0
     with get_sessionmaker()() as db:
         made = refresh(db)
     print(f"built {made} comparison snapshot(s)")
