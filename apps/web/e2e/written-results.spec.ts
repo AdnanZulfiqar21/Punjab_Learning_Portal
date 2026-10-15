@@ -118,6 +118,11 @@ test("a method the guide doesn't list waits for academic review, then is marked"
 
   const marker = await teacher(browser);
   await openScript(marker, attemptId);
+  // MARKING-RULES-01: the fixture guide states no rule for several final answers, so the proposed default shows, labelled.
+  await marker.locator("summary", { hasText: "Marking rules" }).filter({ visible: true }).first().click();
+  await expect(
+    marker.getByText(/Several or contradictory final answers: This guide gives no rule .*\(proposed default: this guide states no rule\)/).filter({ visible: true }).first(),
+  ).toBeVisible();
   await marker.getByLabel("Outcome for question 1").selectOption("pending");
   await marker.getByLabel("Academic review for question 1").selectOption("unlisted_method");
   await marker.getByLabel("Reason for question 1").fill("Fixture: a valid method the marking guide doesn't list.");

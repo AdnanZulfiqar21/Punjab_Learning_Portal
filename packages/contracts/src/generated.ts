@@ -5612,6 +5612,8 @@ export interface components {
         };
         /** CaseQuestion */
         CaseQuestion: {
+            /** Marking Rules */
+            marking_rules?: components["schemas"]["MarkingRuleOut"][];
             /** Max Units */
             max_units: number;
             /** Position */
@@ -8050,6 +8052,20 @@ export interface components {
         MarkersIn: {
             /** Scenes */
             scenes: components["schemas"]["MarkerIn"][];
+        };
+        /** MarkingRuleOut */
+        MarkingRuleOut: {
+            /** Key */
+            key: string;
+            /** Label */
+            label: string;
+            /**
+             * Proposed Default
+             * @description True: the guide states no such rule, and this is the §20.6.3 proposed default (W01.S2.T2)
+             */
+            proposed_default: boolean;
+            /** Text */
+            text: string;
         };
         /** MasterIn */
         MasterIn: {

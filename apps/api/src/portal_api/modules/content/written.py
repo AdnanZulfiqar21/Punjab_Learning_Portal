@@ -71,10 +71,47 @@ class RubricBody(BaseModel):
     alternative_routes: list[Annotated[str, Field(max_length=1000)]] = Field(default_factory=list, max_length=20)
     consequential_error_rule: Annotated[str, Field(max_length=1000)] | None = None
     units_rule: Annotated[str, Field(max_length=1000)] | None = None
+    # W01.S2.T2 (MARKING-RULES-01): significant figures, and several or contradictory final answers, each stated apart.
+    significant_figures_rule: Annotated[str, Field(max_length=1000)] | None = None
+    final_answers_rule: Annotated[str, Field(max_length=1000)] | None = None
     crossed_out_rule: Annotated[str, Field(max_length=1000)] | None = None
     # W07.S1.T3 (MODEL-ANSWER-01): a reviewed worked answer, released to a learner only with their released mark for
     # that question, from the marking-guide version that marked it. Never part of an attempt.
     model_answer: list[ContentBlock] = Field(default_factory=list, max_length=40)
+
+
+# W01.S2.T2 (MARKING-RULES-01): the marking rules a guide can state, in the order markers read them, and the §20.6.3
+# proposed defaults shown when a guide states none. They are proposals for this product's practice marking, not a
+# universal Punjab marking rule; where the default says to escalate, the question stays pending (ACADEMIC-REVIEW-01).
+RULE_LABELS: tuple[tuple[str, str], ...] = (
+    ("consequential_error_rule", "Carried-forward errors"),
+    ("units_rule", "Units"),
+    ("significant_figures_rule", "Significant figures"),
+    ("final_answers_rule", "Several or contradictory final answers"),
+    ("crossed_out_rule", "Crossed-out work"),
+)
+DEFAULT_RULES: dict[str, str] = {
+    "final_answers_rule": (
+        "This guide gives no rule for several or contradictory final answers. Don't choose one: mark the question "
+        "pending and escalate it to the guide's reviewers."
+    ),
+    "crossed_out_rule": (
+        "Disregard clearly cancelled work where an uncancelled answer exists. If it isn't clear what was cancelled, "
+        "mark the question pending and escalate it."
+    ),
+}
+
+
+def marking_rules(r: RubricBody) -> list[dict[str, object]]:
+    """The guide's own marking rules, and the proposed default for a rule it leaves unstated."""
+    out: list[dict[str, object]] = []
+    for key, label in RULE_LABELS:
+        text = (getattr(r, key) or "").strip()
+        if text:
+            out.append({"key": key, "label": label, "text": text, "proposed_default": False})
+        elif key in DEFAULT_RULES:
+            out.append({"key": key, "label": label, "text": DEFAULT_RULES[key], "proposed_default": True})
+    return out
 
 
 _written = TypeAdapter(WrittenBody)
