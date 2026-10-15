@@ -7,11 +7,12 @@ alone is never an identifier. Every chapter/topic keeps its source reference (PD
 from __future__ import annotations
 
 import uuid
-from datetime import datetime
+from datetime import date, datetime
 from typing import Any
 
 from sqlalchemy import (
     CheckConstraint,
+    Date,
     DateTime,
     ForeignKey,
     Index,
@@ -96,7 +97,13 @@ class SourceDocument(Base):
 
 class BookEdition(Base):
     __tablename__ = "book_edition"
-    __table_args__ = (UniqueConstraint("grade_id", "subject_id", "source_document_id"),)
+    __table_args__ = (
+        UniqueConstraint("grade_id", "subject_id", "source_document_id"),
+        CheckConstraint(
+            "effective_until is null or effective_from is null or effective_until > effective_from",
+            name="book_edition_window",
+        ),
+    )
     id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True)
     natural_key: Mapped[str] = mapped_column(Text, unique=True)
     grade_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("grade.id", ondelete="RESTRICT"))
@@ -104,6 +111,10 @@ class BookEdition(Base):
     source_document_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("source_document.id", ondelete="RESTRICT"))
     title: Mapped[str | None] = mapped_column(Text)
     chapter_label: Mapped[str] = mapped_column(String(20))
+    # P05.S1.T3: inclusive start, exclusive end. Both empty means every day, which is every imported book until a
+    # boundary is recorded. The years themselves are not chosen here.
+    effective_from: Mapped[date | None] = mapped_column(Date)
+    effective_until: Mapped[date | None] = mapped_column(Date)
 
     grade: Mapped[Grade] = relationship(lazy="joined")
     subject: Mapped[Subject] = relationship(lazy="joined")

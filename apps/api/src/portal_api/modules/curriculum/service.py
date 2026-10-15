@@ -4,11 +4,14 @@ from __future__ import annotations
 
 import uuid
 from collections import defaultdict
+from datetime import date, datetime
 
 from sqlalchemy import func, select
 from sqlalchemy.orm import Session
 
-from portal_api.errors import Gone, NotFound
+from portal_api.days import local_date
+from portal_api.errors import Conflict, Gone, NotFound
+from portal_api.modules.curriculum.editions import covers
 from portal_api.modules.curriculum.models import BookEdition, Chapter, Grade, Subject, Topic
 from portal_api.modules.curriculum.regions import book_is_released, released_grade
 from portal_api.modules.curriculum.schemas import (
@@ -53,6 +56,15 @@ def _breadcrumb(book: BookEdition) -> Breadcrumb:
     )
 
 
+def _today(session: Session) -> date:
+    now: datetime = session.execute(select(func.now())).scalar_one()
+    return local_date(now)
+
+
+def _current(books: list[BookEdition], day: date) -> list[BookEdition]:
+    return [book for book in books if covers(book.effective_from, book.effective_until, day)]
+
+
 def get_catalogue(session: Session) -> CatalogueOut:
     grades = session.scalars(select(Grade).where(released_grade()).order_by(Grade.number)).all()
     subjects = session.scalars(select(Subject).where(Subject.active).order_by(Subject.display_order)).all()
@@ -63,8 +75,10 @@ def get_catalogue(session: Session) -> CatalogueOut:
         )
     }
     by_key: dict[tuple[uuid.UUID, uuid.UUID], list[BookEdition]] = defaultdict(list)
+    today = _today(session)
     for b in session.scalars(select(BookEdition)).unique().all():
-        by_key[(b.grade_id, b.subject_id)].append(b)
+        if covers(b.effective_from, b.effective_until, today):
+            by_key[(b.grade_id, b.subject_id)].append(b)
     out = []
     for g in grades:
         items = []
@@ -119,7 +133,7 @@ def _chapter_summaries(session: Session, book: BookEdition) -> list[ChapterSumma
 
 def get_book_for(session: Session, grade: int, subject: str) -> BookOut:
     code = normalise_subject(subject)
-    book = (
+    books = (
         session.scalars(
             select(BookEdition)
             .join(Grade, BookEdition.grade_id == Grade.id)
@@ -127,8 +141,12 @@ def get_book_for(session: Session, grade: int, subject: str) -> BookOut:
             .where(Grade.number == grade, Subject.code == code, Subject.active, released_grade())
         )
         .unique()
-        .first()
+        .all()
     )
+    current = _current(list(books), _today(session))
+    if len(current) > 1:
+        raise Conflict("More than one edition of this book is effective today, so none is chosen.")
+    book = current[0] if current else None
     if book is None:
         raise NotFound(f"No Class {grade} book is available for subject '{subject}'.")
     return _book_out(session, book)
