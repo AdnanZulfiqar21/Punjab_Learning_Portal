@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
-import type { BacklogRow, ClientPlatformState, Integration, OpsSignal, RolloutSnapshot } from "@portal/contracts";
+import type { BacklogRow, ClientPlatformState, Integration, OpsSignal, RolloutSnapshot, WrittenLifecycle } from "@portal/contracts";
 import { Badge, Breadcrumbs, Notice, SkeletonLines } from "@/components/ui";
 import { api, currentUser } from "@/lib/session";
 import { ClientMinimumForm } from "./client-minimum-form";
@@ -46,6 +46,9 @@ export default function ServicePage() {
       </Suspense>
       <Suspense fallback={<SkeletonLines lines={4} label="Reading written-review staffing" />}>
         <ReviewStaffing />
+      </Suspense>
+      <Suspense fallback={<SkeletonLines lines={6} label="Reading the written script lifecycle" />}>
+        <WrittenScriptLifecycle />
       </Suspense>
     </div>
   );
@@ -199,6 +202,73 @@ const PLATFORM_NAME: Record<string, string> = { android: "Android", ios: "iPhone
 const at = (iso: string) => new Date(iso).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short", timeZone: TIME_ZONE });
 
 // P13.S1.T4 (CLIENTS-01): the oldest app version each platform still serves, and the builds' capability manifests.
+const STAGE_LABEL: Record<string, string> = {
+  upload_while_writing: "Upload while writing (per page)",
+  upload_after_writing: "Upload after writing (per page)",
+  seal: "Start to submission",
+  queue: "Waiting for a teacher",
+  review: "Teacher marking (elapsed)",
+  publication: "Submission to result",
+};
+const OUTCOME_LABEL: [keyof WrittenLifecycle["outcomes"], string][] = [
+  ["started", "Started"],
+  ["accepted", "Submitted"],
+  ["not_submitted", "Not submitted"],
+  ["still_writing", "Still writing"],
+  ["pending", "Waiting for a result"],
+  ["delayed", "Past the promised time"],
+  ["released_by_teacher", "Released by a teacher"],
+  ["released_automatically", "Released automatically"],
+];
+
+// W09.S1.T1 (LIFECYCLE-01): every time with the number of pages or scripts behind it; outcomes counted apart.
+async function WrittenScriptLifecycle() {
+  const user = await currentUser();
+  if (!user) redirect("/signin?next=/admin/service");
+  const res = await api<WrittenLifecycle>("/v1/ops/written-lifecycle", { token: user.token });
+  if (!res.ok) return null; // the signals panel above already explains access problems
+  const r = res.data;
+  return (
+    <section aria-labelledby="lifecycle-h" className="space-y-2">
+      <h2 id="lifecycle-h" className="font-semibold">
+        Written scripts, last {r.days} days
+      </h2>
+      <p className="text-sm text-muted">Times are medians and 90th percentiles in minutes; each is shown with how many pages or scripts it covers.</p>
+      <ul aria-label="Script outcomes" className="flex flex-wrap gap-x-4 gap-y-1 text-sm">
+        {OUTCOME_LABEL.map(([k, label]) => (
+          <li key={k}>
+            {label}: <span className="font-medium tabular-nums">{r.outcomes[k]}</span>
+          </li>
+        ))}
+      </ul>
+      <div className="overflow-x-auto">
+        <table className="w-full text-left text-sm">
+          <caption className="sr-only">Lifecycle stage times</caption>
+          <thead className="text-muted">
+            <tr>
+              <th scope="col" className="py-1 pr-4 font-medium">Stage</th>
+              <th scope="col" className="py-1 pr-4 font-medium">Count</th>
+              <th scope="col" className="py-1 pr-4 font-medium">Median</th>
+              <th scope="col" className="py-1 font-medium">90th percentile</th>
+            </tr>
+          </thead>
+          <tbody>
+            {r.stages.map((s) => (
+              <tr key={s.stage} className="border-t border-border" title={s.description}>
+                <th scope="row" className="py-1 pr-4 font-normal">{STAGE_LABEL[s.stage] ?? s.stage}</th>
+                <td className="py-1 pr-4 tabular-nums">{s.count}</td>
+                <td className="py-1 pr-4 tabular-nums">{s.median_minutes ?? "—"}</td>
+                <td className="py-1 tabular-nums">{s.p90_minutes ?? "—"}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      {r.not_running.length > 0 && <p className="text-sm text-muted">Not measured yet: {r.not_running.join("; ")}.</p>}
+    </section>
+  );
+}
+
 async function ClientVersions() {
   const user = await currentUser();
   if (!user) redirect("/signin?next=/admin/service");
