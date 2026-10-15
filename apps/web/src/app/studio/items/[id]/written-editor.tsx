@@ -13,7 +13,7 @@ const WRITTEN_EXCLUDE = ["handout", "diagram"];
 type Body = Record<string, unknown>;
 type Subpart = { id: string; label: string; blocks: Block[]; max_units: number };
 type Written = {
-  question_type: "short" | "long";
+  question_type: "short" | "long" | "numerical" | "derivation";
   stem: Block[];
   subparts: Subpart[];
   max_units: number;
@@ -21,6 +21,14 @@ type Written = {
   expected_structures: string[];
   origin: "original_practice" | "authorised_past_paper";
   past_paper_ref?: string | null;
+  answer_unit?: string | null;
+};
+// TAXONOMY-01: authored and reviewed now; offered to learners only once each slice is qualified (WA-D11).
+const TYPE_LABEL: Record<Written["question_type"], string> = {
+  short: "Short answer",
+  long: "Long answer",
+  numerical: "Numerical",
+  derivation: "Derivation",
 };
 type Criterion = {
   id: string;
@@ -67,6 +75,7 @@ export function asWritten(body: Body): Written {
     expected_structures: b.expected_structures ?? [],
     origin: b.origin ?? "original_practice",
     past_paper_ref: b.past_paper_ref ?? null,
+    answer_unit: b.answer_unit ?? null,
   };
 }
 
@@ -83,6 +92,7 @@ export function normaliseWritten(body: Body): Body {
     origin: q.origin,
   };
   if (q.origin === "authorised_past_paper" && q.past_paper_ref) out.past_paper_ref = q.past_paper_ref;
+  if (q.question_type === "numerical" && q.answer_unit?.trim()) out.answer_unit = q.answer_unit.trim();
   return out;
 }
 
@@ -101,10 +111,24 @@ export function WrittenEditor({ body, onChange }: { body: Body; onChange: (b: Bo
         <label className="space-y-1 text-sm">
           <span className="block font-medium">Type</span>
           <select value={q.question_type} onChange={(e) => set({ question_type: e.target.value as Written["question_type"] })} className={input}>
-            <option value="short">Short answer</option>
-            <option value="long">Long answer</option>
+            {(Object.keys(TYPE_LABEL) as Written["question_type"][]).map((t) => (
+              <option key={t} value={t}>
+                {TYPE_LABEL[t]}
+              </option>
+            ))}
           </select>
+          {(q.question_type === "numerical" || q.question_type === "derivation") && (
+            <span className="block text-xs text-muted">
+              Can be reviewed and published with its marking guide, but isn&apos;t offered to learners until this kind of question is qualified.
+            </span>
+          )}
         </label>
+        {q.question_type === "numerical" && (
+          <label className="space-y-1 text-sm">
+            <span className="block font-medium">Unit of the final answer</span>
+            <input value={q.answer_unit ?? ""} onChange={(e) => set({ answer_unit: e.target.value })} className={input} maxLength={40} placeholder='e.g. m/s, or "none"' />
+          </label>
+        )}
         <label className="space-y-1 text-sm">
           <span className="block font-medium">Answer language</span>
           <select value={q.answer_language} onChange={(e) => set({ answer_language: e.target.value as Written["answer_language"] })} className={input}>
@@ -212,7 +236,7 @@ export function WrittenPreview({ body }: { body: Body }) {
         </div>
       ))}
       <p className="text-sm text-muted">
-        {q.question_type === "long" ? "Long" : "Short"} answer · {toMarks(total)} marks · answer in {q.answer_language === "ur" ? "Urdu" : "English"}
+        {TYPE_LABEL[q.question_type]} · {toMarks(total)} marks · answer in {q.answer_language === "ur" ? "Urdu" : "English"}
       </p>
     </div>
   );
