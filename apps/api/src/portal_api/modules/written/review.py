@@ -547,6 +547,72 @@ def lease(db: Session, who: Principal, case_id: uuid.UUID) -> WrittenReviewCase:
     return case
 
 
+def _held_by(case: WrittenReviewCase, now: datetime) -> uuid.UUID | None:
+    """Who is marking the case now: a lease that has run out holds nothing."""
+    if case.lease_holder is None or case.lease_expires_at is None or case.lease_expires_at <= now:
+        return None
+    return case.lease_holder
+
+
+def _free(case: WrittenReviewCase) -> None:
+    case.lease_holder = None
+    case.lease_expires_at = None
+    case.marking_started_at = None  # MARKING-TIME-01: the next teacher's time starts when they take it
+
+
+def hand_back(db: Session, who: Principal, case_id: uuid.UUID) -> WrittenReviewCase:
+    """W06.S1.T2 (CASE-HANDBACK-01): the teacher marking a script gives it back to the queue now, instead of other
+    teachers waiting for the 20-minute lease to run out. Nothing saved changes: a released result stays as it is and a
+    saved draft stays a draft, exactly as when a lease runs out."""
+    case = _case(db, who, case_id, lock=True)
+    if case.status != "queued":
+        raise Conflict("This case has already been released.")
+    if _held_by(case, _now(db)) != who.user.id:
+        raise Conflict("You aren't marking this script, so there is nothing to give back.")
+    _free(case)
+    record(
+        db,
+        actor=who.user.id,
+        action="written.case_handed_back",
+        target_type="written_review_case",
+        target_id=str(case.id),
+    )
+    db.commit()
+    db.refresh(case)
+    return case
+
+
+def free_case(db: Session, who: Principal, case_id: uuid.UUID, *, reason: str) -> WrittenReviewCase:
+    """W06.S1.T2 (CASE-HANDBACK-01, §20.10 reassignment): an academic adjudicator in scope, signed in with MFA, frees a
+    script another teacher holds (someone called away mid-script), so the next eligible teacher can take it. The
+    previous holder's next save is refused because it needs the lease, so nothing is silently overwritten; the
+    eligibility rules for whoever takes it next (recheck independence, regrade approvers) still apply in `lease`."""
+    case = _case(db, who, case_id, lock=True)
+    require_adjudication(db, who, case, "free a script another teacher is marking")
+    reason = reason.strip()
+    if not reason:
+        raise Unprocessable("Say why this script is being freed.")
+    if case.status != "queued":
+        raise Conflict("This case has already been released.")
+    holder = _held_by(case, _now(db))
+    if holder is None:
+        raise Conflict("Nobody is marking this script: any teacher in scope can take it now.")
+    if holder == who.user.id:
+        raise Conflict("You are marking this script yourself: give it back from the marking screen.")
+    _free(case)
+    record(
+        db,
+        actor=who.user.id,
+        action="written.case_freed",
+        target_type="written_review_case",
+        target_id=str(case.id),
+        details={"previous_holder": str(holder), "reason": reason},
+    )
+    db.commit()
+    db.refresh(case)
+    return case
+
+
 def case_context(db: Session, case: WrittenReviewCase) -> dict[str, Any]:
     """Everything a teacher needs: evidence, mapping and the pinned questions and rubrics. No learner identity."""
     attempt = db.get(WrittenAttempt, case.attempt_id)

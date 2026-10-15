@@ -2118,6 +2118,12 @@
       },
       "CaseDetail": {
         "properties": {
+          "can_free": {
+            "default": false,
+            "description": "You may free this script from another teacher's lease (academic adjudicator in scope; needs MFA)",
+            "title": "Can Free",
+            "type": "boolean"
+          },
           "case_kind": {
             "enum": [
               "initial",
@@ -5410,6 +5416,22 @@
           "updated_since"
         ],
         "title": "FormulaOut",
+        "type": "object"
+      },
+      "FreeCaseIn": {
+        "properties": {
+          "reason": {
+            "description": "Why the script is being freed, for the audit trail",
+            "maxLength": 500,
+            "minLength": 1,
+            "title": "Reason",
+            "type": "string"
+          }
+        },
+        "required": [
+          "reason"
+        ],
+        "title": "FreeCaseIn",
         "type": "object"
       },
       "FunnelCohort": {
@@ -30452,6 +30474,59 @@
         ]
       }
     },
+    "/v1/studio/written/cases/{case_id}/free": {
+      "post": {
+        "operationId": "free_case_v1_studio_written_cases__case_id__free_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "case_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Case Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FreeCaseIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CaseDetail"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Free a script another teacher is marking (academic adjudicator in scope, MFA; audited with the reason)",
+        "tags": [
+          "written marking"
+        ]
+      }
+    },
     "/v1/studio/written/cases/{case_id}/lease": {
       "post": {
         "operationId": "take_lease_v1_studio_written_cases__case_id__lease_post",
@@ -30490,6 +30565,49 @@
           }
         },
         "summary": "Take or renew the marking lease",
+        "tags": [
+          "written marking"
+        ]
+      }
+    },
+    "/v1/studio/written/cases/{case_id}/lease/release": {
+      "post": {
+        "operationId": "hand_back_v1_studio_written_cases__case_id__lease_release_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "case_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Case Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CaseDetail"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Give the script back to the queue now (the teacher marking it)",
         "tags": [
           "written marking"
         ]
