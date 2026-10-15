@@ -21,6 +21,7 @@ from sqlalchemy.orm import Session
 from portal_api.db import get_session
 from portal_api.errors import Unprocessable
 from portal_api.modules.audit.models import AuditEvent, record
+from portal_api.modules.audit.redaction import redact
 from portal_api.modules.identity.deps import Principal, require
 from portal_api.modules.identity.models import AppUser
 from portal_api.modules.identity.permissions import Permission
@@ -28,15 +29,6 @@ from portal_api.modules.identity.permissions import Permission
 router = APIRouter(prefix="/v1/admin", tags=["audit"])
 DB = Annotated[Session, Depends(get_session)]
 Auditor = Annotated[Principal, Depends(require(Permission.view_audit))]
-_SENSITIVE = ("email", "token", "hash", "password", "secret", "destination", "ip", "phone")
-
-
-def redact(value: Any) -> Any:
-    if isinstance(value, dict):
-        return {k: "[redacted]" if any(s in k.lower() for s in _SENSITIVE) else redact(v) for k, v in value.items()}
-    if isinstance(value, list):
-        return [redact(v) for v in value]
-    return value
 
 
 class AuditRow(BaseModel):

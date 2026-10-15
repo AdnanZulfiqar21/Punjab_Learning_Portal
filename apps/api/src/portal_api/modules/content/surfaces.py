@@ -66,6 +66,13 @@ def _issues(where: str, block: dict[str, Any], image_ready: Callable[[str], bool
 
 
 def report(db: Session, item: ContentItem) -> dict[str, Any]:
+    from portal_api.modules.system import clients
+
+    with blocks.client_floor(clients.renderer_floor(db)):  # CLIENT-FLOOR-01: the oldest supported build
+        return _report(db, item)
+
+
+def _report(db: Session, item: ContentItem) -> dict[str, Any]:
     version = item.working or item.published
     body = version.body if version is not None and isinstance(version.body, dict) else {}
     issues: list[str] = []

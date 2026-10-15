@@ -46,6 +46,7 @@ from portal_api.errors import Conflict, Forbidden, NotFound, Unprocessable
 from portal_api.modules.audit.models import record
 from portal_api.modules.identity.deps import Principal
 from portal_api.modules.identity.permissions import Permission
+from portal_api.observability import bind_correlation, current_correlation
 
 LEASE = timedelta(minutes=5)
 TTL = timedelta(hours=24)
@@ -82,6 +83,8 @@ class ExportJob(Base):
     started_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     finished_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     expires_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    # CORRELATION-01: the correlation ID of the request that created this row (None: created outside a request).
+    correlation_id: Mapped[str | None] = mapped_column(String(64), default=current_correlation)
 
 
 # ------------------------------------------------------------------ kinds
@@ -129,7 +132,7 @@ def _audit_params(p: dict[str, Any]) -> dict[str, Any]:
 
 def _audit_events(db: Session, who: Principal, p: dict[str, Any]) -> tuple[bytes, int | None, dict[str, Any]]:
     from portal_api.modules.audit.models import AuditEvent
-    from portal_api.modules.audit.router import redact
+    from portal_api.modules.audit.redaction import redact
     from portal_api.modules.identity.models import AppUser
 
     q = select(AuditEvent, AppUser.email).outerjoin(AppUser, AppUser.id == AuditEvent.actor_user_id)
@@ -379,45 +382,47 @@ def run_once(db: Session, worker: str | None = None) -> ExportJob | None:
     job.started_at, job.tries = now, job.tries + 1
     db.commit()
     job_id, owner, kind_name, params = job.id, job.owner_id, job.kind, dict(job.params)
+    cid = job.correlation_id
 
-    error: str | None = None
-    try:
-        who = _principal(db, owner)
-        kind = _kind(kind_name)
-        if who is None:
-            raise Forbidden("The account that requested this export is no longer active.")
-        _authorise(who, kind, interactive=False)  # the role is rechecked by the worker
-        body, rows, content = kind.generate(db, who, params)
-        db.rollback()  # the generator only read
-    except TooLarge:
-        error = f"More than {MAX_ROWS:,} rows. Narrow the filter and request again."
-    except (Forbidden, Unprocessable) as e:
-        error = e.detail
-    except Exception as e:
-        error = f"Export failed: {type(e).__name__}."
-    job = db.scalar(select(ExportJob).where(ExportJob.id == job_id).with_for_update())
-    assert job is not None
-    if job.status != "running" or job.lease_owner != worker:
-        db.rollback()  # cancelled, or another worker took over after our lease ran out: discard
+    with bind_correlation(cid):  # CORRELATION-01: the export's audit entries trace to the request
+        error: str | None = None
+        try:
+            who = _principal(db, owner)
+            kind = _kind(kind_name)
+            if who is None:
+                raise Forbidden("The account that requested this export is no longer active.")
+            _authorise(who, kind, interactive=False)  # the role is rechecked by the worker
+            body, rows, content = kind.generate(db, who, params)
+            db.rollback()  # the generator only read
+        except TooLarge:
+            error = f"More than {MAX_ROWS:,} rows. Narrow the filter and request again."
+        except (Forbidden, Unprocessable) as e:
+            error = e.detail
+        except Exception as e:
+            error = f"Export failed: {type(e).__name__}."
+        job = db.scalar(select(ExportJob).where(ExportJob.id == job_id).with_for_update())
+        assert job is not None
+        if job.status != "running" or job.lease_owner != worker:
+            db.rollback()  # cancelled, or another worker took over after our lease ran out: discard
+            return job
+        done = _now(db)
+        job.lease_owner, job.lease_expires_at, job.finished_at = None, None, done
+        if error is not None:
+            job.status, job.error = "failed", error
+            record(db, actor=None, action="export.failed", target_type="export_job", target_id=str(job.id),
+                   details={"kind": job.kind, "error": error, "try": job.tries})  # fmt: skip
+        else:
+            key = f"{job.id}.{_kind(job.kind).extension}"
+            tmp = _path(key + ".part")
+            tmp.write_bytes(body)
+            tmp.replace(_path(key))
+            job.status, job.file_key, job.row_count = "ready", key, rows
+            job.byte_size, job.sha256, job.content = len(body), hashlib.sha256(body).hexdigest(), content
+            job.expires_at = done + TTL
+            record(db, actor=None, action="export.ready", target_type="export_job", target_id=str(job.id),
+                   details={"kind": job.kind, "rows": rows, "bytes": len(body)})  # fmt: skip
+        db.commit()
         return job
-    done = _now(db)
-    job.lease_owner, job.lease_expires_at, job.finished_at = None, None, done
-    if error is not None:
-        job.status, job.error = "failed", error
-        record(db, actor=None, action="export.failed", target_type="export_job", target_id=str(job.id),
-               details={"kind": job.kind, "error": error, "try": job.tries})  # fmt: skip
-    else:
-        key = f"{job.id}.{_kind(job.kind).extension}"
-        tmp = _path(key + ".part")
-        tmp.write_bytes(body)
-        tmp.replace(_path(key))
-        job.status, job.file_key, job.row_count = "ready", key, rows
-        job.byte_size, job.sha256, job.content = len(body), hashlib.sha256(body).hexdigest(), content
-        job.expires_at = done + TTL
-        record(db, actor=None, action="export.ready", target_type="export_job", target_id=str(job.id),
-               details={"kind": job.kind, "rows": rows, "bytes": len(body)})  # fmt: skip
-    db.commit()
-    return job
 
 
 def sweep(db: Session, now: datetime) -> int:

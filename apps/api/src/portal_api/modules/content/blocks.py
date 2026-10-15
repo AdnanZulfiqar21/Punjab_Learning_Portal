@@ -14,6 +14,9 @@ material is referenced by page (`source_refs`), not copied (IMPL-01).
 
 from __future__ import annotations
 
+from collections.abc import Iterator
+from contextlib import contextmanager
+from contextvars import ContextVar
 from dataclasses import dataclass
 from typing import Annotated, Any, Literal
 
@@ -22,9 +25,26 @@ from pydantic import BaseModel, ConfigDict, Field, TypeAdapter, ValidationError,
 CONTENT_SCHEMA_VERSION = 1
 PLATFORMS = ("web", "android", "ios")
 
-# Oldest renderer version each platform's supported clients understand. Raised only through the client update policy
-# (P13.S1.T4); a full supported-client registry with per-build manifests arrives with P13.
+# Oldest renderer version each platform's supported clients understand, as the code knows it: the lower bound used for
+# any supported build that has no registered capability manifest. With manifests registered, publication and previews
+# use the oldest supported build's own manifest instead (`clients.renderer_floor`, CLIENT-FLOOR-01).
 SUPPORTED_RENDERER: dict[str, int] = {"web": 1, "android": 1, "ios": 1}
+_FLOOR: ContextVar[dict[str, int] | None] = ContextVar("renderer_floor", default=None)
+
+
+def supported_renderer() -> dict[str, int]:
+    """The renderer versions the oldest supported clients understand, for the current check."""
+    return _FLOOR.get() or SUPPORTED_RENDERER
+
+
+@contextmanager
+def client_floor(values: dict[str, int]) -> Iterator[None]:
+    """Check blocks against these renderer versions (from the registered build manifests) within this block."""
+    token = _FLOOR.set(values)
+    try:
+        yield
+    finally:
+        _FLOOR.reset(token)
 
 
 @dataclass(frozen=True)
@@ -224,7 +244,8 @@ def check_renderers(block_list: list[AnyBlock], *, for_publication: bool, where:
     warnings: list[str] = []
     for i, block in enumerate(block_list):
         spec = REGISTRY[block.type]
-        needs = [p for p in PLATFORMS if spec.min_renderer[p] > SUPPORTED_RENDERER[p]]
+        floor = supported_renderer()
+        needs = [p for p in PLATFORMS if spec.min_renderer[p] > floor[p]]
         if not needs:
             continue
         fb = getattr(block, "fallback", None)
@@ -284,7 +305,7 @@ def text_of(block_list: list[AnyBlock]) -> str:
 def registry_document() -> dict[str, object]:
     return {
         "content_schema_version": CONTENT_SCHEMA_VERSION,
-        "supported_renderer": SUPPORTED_RENDERER,
+        "supported_renderer": supported_renderer(),
         "blocks": [
             {
                 "type": s.type,
@@ -301,7 +322,8 @@ def registry_document() -> dict[str, object]:
 def needs_fallback(block_type: str) -> bool:
     """Whether the oldest supported client on any platform can't render this block type natively."""
     spec = REGISTRY.get(block_type)
-    return spec is not None and any(spec.min_renderer[p] > SUPPORTED_RENDERER[p] for p in PLATFORMS)
+    floor = supported_renderer()
+    return spec is not None and any(spec.min_renderer[p] > floor[p] for p in PLATFORMS)
 
 
 def oldest_client(block_list: list[dict[str, Any]]) -> tuple[list[dict[str, Any]], int]:

@@ -8,9 +8,9 @@ import type { StudyPack } from "@portal/contracts";
 
 import { accountScope } from "@/lib/account-scope";
 import { api, apiUrl } from "@/lib/api";
+import { afterStatus, downloadProblem, fileProblem, PACK_FORMAT, usable } from "@/lib/study-packs-core";
 
-/** The newest pack format this build reads (§5.4 rule 6). Raise it only with code that reads the new format. */
-export const PACK_FORMAT = 1;
+export { PACK_FORMAT };
 
 export type PackLesson = {
   id: string;
@@ -58,9 +58,9 @@ export class PackError extends Error {}
 export async function downloadPack(token: string, owner: string, chapterId: string): Promise<StoredPack> {
   const pack = await api.studyPack(token, chapterId, PACK_FORMAT);
   const manifest = pack.manifest as Manifest;
-  if (manifest.pack_format_version > PACK_FORMAT) throw new PackError("This pack needs a newer version of the app.");
   const digest = await Crypto.digestStringAsync(Crypto.CryptoDigestAlgorithm.SHA256, pack.content);
-  if (digest !== manifest.sha256) throw new PackError("The download was damaged. Please try again.");
+  const problem = downloadProblem(manifest, digest);
+  if (problem) throw new PackError(problem);
   const staging = new Directory(dirFor(owner), `${chapterId}.partial`);
   if (staging.exists) staging.delete();
   staging.create({ intermediates: true });
@@ -71,7 +71,8 @@ export async function downloadPack(token: string, owner: string, chapterId: stri
       const target = new File(files, f.asset_version_id);
       await File.downloadFileAsync(apiUrl(f.url), target, { headers: { Authorization: `Bearer ${token}` }, idempotent: true });
       const sum = hex(await Crypto.digest(Crypto.CryptoDigestAlgorithm.SHA256, new Uint8Array(await target.arrayBuffer())));
-      if (f.sha256 && sum !== f.sha256) throw new PackError("A lesson file was damaged in the download. Please try again.");
+      const bad = fileProblem(f.sha256, sum);
+      if (bad) throw new PackError(bad);
     }
     const stored: StoredPack = { manifest, content: JSON.parse(pack.content) as PackContent, savedAt: new Date().toISOString() };
     new File(staging, "pack.json").write(JSON.stringify(stored));
@@ -91,12 +92,9 @@ export function readPack(owner: string, chapterId: string): StoredPack | null {
     const f = new File(packDir(owner, chapterId), "pack.json");
     if (!f.exists) return null;
     const stored = JSON.parse(f.textSync()) as StoredPack;
-    if (stored.manifest.pack_format_version > PACK_FORMAT) return null;
-    if (new Date(stored.manifest.expires_at) <= new Date()) {
-      removePack(owner, chapterId);
-      return null;
-    }
-    return stored;
+    const state = usable(stored.manifest, new Date());
+    if (state === "expired") removePack(owner, chapterId);
+    return state === "ok" ? stored : null;
   } catch {
     return null;
   }
@@ -125,7 +123,7 @@ export async function refreshPack(token: string, owner: string, chapterId: strin
   const stored = readPack(owner, chapterId);
   if (!stored) return "none";
   const status = await api.studyPackStatus(token, chapterId);
-  if (!status.keep || (stored.manifest.includes_premium && !status.includes_premium)) {
+  if (afterStatus(stored.manifest, status) === "removed") {
     removePack(owner, chapterId);
     return "removed";
   }

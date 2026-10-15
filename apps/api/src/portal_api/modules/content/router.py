@@ -15,7 +15,7 @@ from portal_api.db import get_session
 from portal_api.errors import Forbidden, NotFound
 from portal_api.modules.access import service as access
 from portal_api.modules.audit.models import AuditEvent
-from portal_api.modules.content import blocks, item_stats, kinds, workflow
+from portal_api.modules.content import blocks, duplicates, item_stats, kinds, workflow
 from portal_api.modules.content.models import Availability, ContentItem, ContentVersion, ItemState
 from portal_api.modules.content.schemas import (
     AccessTierIn,
@@ -276,6 +276,12 @@ def _detail(db: Session, item: ContentItem, who: Principal) -> ItemDetail:
         chapter_pdf_end=chapter.pdf_end,
         actions=actions,
         blockers=blockers,
+        # P08.S3.T1 (DUP-STEMS-01): shown while a question is being reviewed or awaits publication.
+        duplicate_warnings=duplicates.find(db, item, item.working)
+        if item.working is not None
+        and not retired
+        and item.state in (ItemState.submitted.value, ItemState.approved.value)
+        else [],
         review_checklist=list(kinds.get(item.kind).review_checklist),
         quarantine_levels=list(kinds.get(item.kind).quarantine_levels),
     )
@@ -306,8 +312,11 @@ def _no_store(response: Response) -> None:
 
 # ------------------------------------------------------------------ studio: reading
 @router.get("/block-registry", summary="Block types, schema version and renderer requirements (§5.4)")
-def block_registry(_: Member) -> dict[str, object]:
-    return blocks.registry_document()
+def block_registry(db: DB, _: Member) -> dict[str, object]:
+    from portal_api.modules.system import clients
+
+    with blocks.client_floor(clients.renderer_floor(db)):  # CLIENT-FLOOR-01: what the oldest supported builds render
+        return blocks.registry_document()
 
 
 @router.get("/queue", response_model=list[ItemSummary], summary="Editorial work queue (P06.S1.T2)")

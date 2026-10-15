@@ -30,6 +30,7 @@ from portal_api.errors import Conflict, NotFound
 from portal_api.modules.audit.models import record
 from portal_api.modules.identity.deps import Principal
 from portal_api.modules.written import adjudication
+from portal_api.observability import bind_correlation, current_correlation
 
 LEASE = timedelta(minutes=2)
 STATUSES = ("queued", "running", "succeeded", "failed", "superseded")
@@ -68,6 +69,8 @@ class RegradeJob(Base):
     started_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     finished_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+    # CORRELATION-01: the correlation ID of the request that created this row (None: created outside a request).
+    correlation_id: Mapped[str | None] = mapped_column(String(64), default=current_correlation)
 
 
 def _now(db: Session) -> datetime:
@@ -188,27 +191,28 @@ def run_one_batch(db: Session, owner: str, batch: int = 50) -> dict[str, Any] | 
     job = _claim(db, owner)
     if job is None:
         return None
-    job_id, adj_id = job.id, job.adjudication_id
-    out = adjudication.process_batch(db, adj_id, batch, job_id)
-    job = db.scalar(select(RegradeJob).where(RegradeJob.id == job_id).with_for_update())
-    assert job is not None
-    now = _now(db)
-    # NEW-12: progress is read back from the durable per-script rows this job wrote, never accumulated in memory,
-    # so a worker that died after committing scripts but before this update can't leave false counts or success.
-    _reconcile(db, job)
-    job.remaining = out["remaining"]
-    job.batches += 1
-    job.updated_at = now
-    job.lease_owner, job.lease_expires_at = None, None
-    if out["superseded"]:
-        job.status, job.finished_at = "superseded", now
-    elif out["remaining"] == 0:
-        job.status = "failed" if job.failed else "succeeded"
-        job.finished_at = now
-    else:
-        job.status = "queued"  # more to do: back in the queue for the next claim (any worker)
-    db.commit()
-    return {"job": str(job_id), "status": job.status, **out}
+    job_id, adj_id, cid = job.id, job.adjudication_id, job.correlation_id
+    with bind_correlation(cid):  # CORRELATION-01: regrade audit entries trace to the approving request
+        out = adjudication.process_batch(db, adj_id, batch, job_id)
+        job = db.scalar(select(RegradeJob).where(RegradeJob.id == job_id).with_for_update())
+        assert job is not None
+        now = _now(db)
+        # NEW-12: progress is read back from the durable per-script rows this job wrote, never accumulated in memory,
+        # so a worker that died after committing scripts but before this update can't leave false counts or success.
+        _reconcile(db, job)
+        job.remaining = out["remaining"]
+        job.batches += 1
+        job.updated_at = now
+        job.lease_owner, job.lease_expires_at = None, None
+        if out["superseded"]:
+            job.status, job.finished_at = "superseded", now
+        elif out["remaining"] == 0:
+            job.status = "failed" if job.failed else "succeeded"
+            job.finished_at = now
+        else:
+            job.status = "queued"  # more to do: back in the queue for the next claim (any worker)
+        db.commit()
+        return {"job": str(job_id), "status": job.status, **out}
 
 
 def _reconcile(db: Session, job: RegradeJob) -> None:

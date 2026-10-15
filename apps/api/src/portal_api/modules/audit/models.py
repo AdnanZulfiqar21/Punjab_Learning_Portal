@@ -11,6 +11,7 @@ from sqlalchemy.dialects.postgresql import JSONB, UUID
 from sqlalchemy.orm import Mapped, Session, mapped_column
 
 from portal_api.db import Base
+from portal_api.observability import current_correlation
 
 
 class AuditEvent(Base):
@@ -44,7 +45,7 @@ def record(
         target_type=target_type,
         target_id=target_id,
         details=details or {},
-        correlation_id=correlation_id,
+        correlation_id=correlation_id or current_correlation(),  # CORRELATION-01: the request or job in hand
     )
     session.add(event)
     return event

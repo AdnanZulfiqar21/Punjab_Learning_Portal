@@ -22,6 +22,7 @@ from sqlalchemy.dialects.postgresql import JSONB, UUID
 from sqlalchemy.orm import Mapped, mapped_column
 
 from portal_api.db import Base
+from portal_api.observability import current_correlation
 
 
 class Notification(Base):
@@ -73,6 +74,8 @@ class NotificationDelivery(Base):
     provider_ref: Mapped[str | None] = mapped_column(String(200))
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
     sent_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    # CORRELATION-01: the correlation ID of the request that created this row (None: created outside a request).
+    correlation_id: Mapped[str | None] = mapped_column(String(64), default=current_correlation)
 
 
 class NotificationPreference(Base):
