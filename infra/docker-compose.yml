@@ -32,5 +32,22 @@ services:
     ports:
       - "127.0.0.1:59324:9324"
 
+  object-store:
+    # S3-compatible development emulator (P03.S1.T2). Not a production bucket and not a region choice (B03, D14).
+    # The API talks to it path-style. These values are obvious; staging and production refuse them.
+    #   PORTAL_EVIDENCE_STORE=s3
+    #   PORTAL_EVIDENCE_S3_ENDPOINT=http://127.0.0.1:59000
+    #   PORTAL_EVIDENCE_S3_BUCKET=portal-evidence-dev
+    #   PORTAL_EVIDENCE_S3_ACCESS_KEY=portal-dev-only
+    #   PORTAL_EVIDENCE_S3_SECRET_KEY=portal-dev-only
+    #   PORTAL_EVIDENCE_S3_REGION=us-east-1
+    # The bucket is created on the first write. 59000 is outside the Windows reserved ranges checked on 2026-10-15.
+    image: localstack/localstack:4.7.0
+    environment:
+      SERVICES: s3
+      AWS_DEFAULT_REGION: us-east-1
+    ports:
+      - "127.0.0.1:59000:4566"
+
 volumes:
   pgdata:

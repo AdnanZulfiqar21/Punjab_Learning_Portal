@@ -12,7 +12,8 @@ showing exactly what was reviewed. **Retention:** masters are never deleted. The
 the delivery copy of a superseded version that no content version refers to and that is older than the retention
 period; an admin can re-derive it from the master at any time. Both are audited.
 
-Storage is a private local directory (`PORTAL_ASSET_DIR`) until the media provider and object storage exist (B03, B05).
+Storage is the private asset directory (`PORTAL_ASSET_DIR`) when evidence storage is local, and the same S3-compatible
+bucket under `assets/` when `PORTAL_EVIDENCE_STORE=s3`. The production bucket is still unchosen (B03).
 """
 
 from __future__ import annotations
@@ -47,6 +48,7 @@ from portal_api.db import Base
 from portal_api.errors import Forbidden, NotFound, StorageUnavailable, TooLarge, Unprocessable
 from portal_api.modules.audit.models import record
 from portal_api.modules.identity.deps import Principal
+from portal_api.object_store import Prefixed
 
 KINDS = ("image", "handout", "caption", "diagram_source")
 SERVED = {"image", "handout", "caption"}  # diagram sources are archived, never served
@@ -122,7 +124,32 @@ def _root() -> Path:
     return base
 
 
+def _s3() -> Prefixed | None:
+    from portal_api.config import get_settings
+    from portal_api.object_store import Client
+
+    s = get_settings()
+    if s.evidence_store != "s3":
+        return None
+    return Client(
+        s.evidence_s3_endpoint,
+        s.evidence_s3_bucket,
+        s.evidence_s3_access_key,
+        s.evidence_s3_secret_key,
+        s.evidence_s3_region,
+    ).prefixed("assets/")
+
+
 def _write(key: str, data: bytes) -> None:
+    store = _s3()
+    if store is not None:
+        from portal_api.object_store import ObjectStoreError
+
+        try:
+            store.put(key, data, exclusive=False)
+        except ObjectStoreError as e:
+            raise StorageUnavailable() from e
+        return
     try:
         path = _root() / key
         path.parent.mkdir(parents=True, exist_ok=True)
@@ -135,6 +162,13 @@ def _write(key: str, data: bytes) -> None:
 
 def _remove(key: str) -> None:
     """Take back a file whose version row was never committed (a failed upload)."""
+    store = _s3()
+    if store is not None:
+        from portal_api.object_store import ObjectStoreError
+
+        with contextlib.suppress(ObjectStoreError):
+            store.delete(key)
+        return
     try:
         (_root() / key).unlink(missing_ok=True)
         (_root() / key).with_suffix(".part").unlink(missing_ok=True)
@@ -143,6 +177,14 @@ def _remove(key: str) -> None:
 
 
 def read(key: str) -> bytes:
+    store = _s3()
+    if store is not None:
+        from portal_api.object_store import ObjectStoreError
+
+        try:
+            return store.get(key)
+        except ObjectStoreError as e:
+            raise StorageUnavailable() from e
     return (_root() / key).read_bytes()
 
 
@@ -372,8 +414,7 @@ def collect(db: Session, *, apply: bool, actor: uuid.UUID | None = None, now: da
         purged.append(str(v.id))
         if apply:
             if v.delivery_key:
-                with contextlib.suppress(OSError):
-                    (_root() / v.delivery_key).unlink(missing_ok=True)
+                _remove(v.delivery_key)
             v.delivery_key = v.delivery_sha256 = None
             v.delivery_state = "purged"
             v.purged_at = now
@@ -484,10 +525,17 @@ def for_lesson(db: Session, item: Any, version_id: uuid.UUID) -> tuple[AssetVers
 
 
 def delivery_bytes(v: AssetVersion) -> int | None:
-    """P07.S3.T3 (LESSON-SIZE-01): the size of the copy a learner downloads, or None when unknown. Read from the local
-    store; an object-store adapter (B03) reports the object's size the same way."""
+    """P07.S3.T3 (LESSON-SIZE-01): the size of the copy a learner downloads, or None when unknown."""
     if v.delivery_state != "ready" or not v.delivery_key:
         return None
+    store = _s3()
+    if store is not None:
+        from portal_api.object_store import ObjectStoreError
+
+        try:
+            return store.size(v.delivery_key)
+        except (ObjectStoreError, FileNotFoundError):
+            return None
     try:
         return (_root() / v.delivery_key).stat().st_size
     except OSError:

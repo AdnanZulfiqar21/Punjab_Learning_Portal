@@ -12,7 +12,7 @@ Checked **2026-10-06/07** against the official registries (npm, PyPI, Docker Hub
 | API | Uvicorn | 0.54.0 (standard) | |
 | API dev | pytest / httpx2 / ruff / mypy | 9.1.1 / 2.13.1 / 0.16.10 / 2.4.0 | Starlette's test client now uses httpx2 |
 | Database | PostgreSQL | 17 (local `postgres:17-alpine`, 17.11) | 18 is available. 17 was chosen for broad managed-service support; final D14 at P17. Extension: `pg_trgm` |
-| Cache / queue (local) | Valkey 8 / ElasticMQ (SQS-compatible) | images `valkey/valkey:8-alpine`, `softwaremill/elasticmq-native` | Development emulation only |
+| Cache / queue / object storage (local) | Valkey 8 / ElasticMQ (SQS-compatible) / LocalStack S3 | images `valkey/valkey:8-alpine`, `softwaremill/elasticmq-native`, `localstack/localstack:4.7.0` | Development emulation only. LocalStack stands in for a private bucket; the production account is B03 |
 | Web | Next.js / React | 16.4.0 / 19.3.0 | App Router with **Cache Components and Partial Prefetching on**. Read `node_modules/next/dist/docs` before changing patterns (`apps/web/AGENTS.md`) |
 | Web | TypeScript | 5.9.3 | TS 7.0.2 (native compiler) deferred until Next/ESLint compatibility is verified |
 | Web | Tailwind CSS / @tailwindcss/turbopack | 4.3.3 / 4.3.3 | |
@@ -23,4 +23,4 @@ Checked **2026-10-06/07** against the official registries (npm, PyPI, Docker Hub
 | CI | actions/checkout v7, setup-node v7, setup-python v7, pnpm/action-setup v6, astral-sh/setup-uv v10.2.0 (no floating major tag), upload-artifact v7 | | |
 
 ## Local ports
-API `127.0.0.1:8100`, web `localhost:3100`, Expo web target `localhost:8190`, PostgreSQL `127.0.0.1:55432`, Valkey `56379`, queue `59324`. Ports 8000 and 3000 are used by another project on this machine.
+API `127.0.0.1:8100`, web `localhost:3100`, Expo web target `localhost:8190`, PostgreSQL `127.0.0.1:55432`, Valkey `56379`, queue `59324`, object storage `127.0.0.1:59000`. Ports 8000 and 3000 are used by another project on this machine.

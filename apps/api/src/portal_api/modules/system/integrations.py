@@ -21,10 +21,11 @@ from pydantic import BaseModel
 from sqlalchemy import func, select
 from sqlalchemy.orm import Session
 
-from portal_api.config import get_settings
+from portal_api.config import DEV_MARKERS, Settings, get_settings
 from portal_api.db import get_session
 from portal_api.modules.identity.deps import Principal, require
 from portal_api.modules.identity.permissions import Permission
+from portal_api.object_store import health as object_health
 
 WARN_AT, ALERT_AT = 0.8, 1.0
 
@@ -44,6 +45,13 @@ def _writable(path: Path) -> str:
         return "ok" if os.access(path, os.W_OK) else "failing"
     except OSError:
         return "failing"
+
+
+def _emulator(s: Settings) -> bool:
+    blob = " ".join(
+        (s.evidence_s3_endpoint, s.evidence_s3_bucket, s.evidence_s3_access_key, s.evidence_s3_secret_key)
+    ).lower()
+    return any(m in blob for m in DEV_MARKERS) or "minioadmin" in blob
 
 
 def _level(used: int, budget: int | None) -> tuple[float | None, str]:
@@ -113,9 +121,11 @@ def overview(db: Session) -> list[dict[str, Any]]:
             "key": "object_storage",
             "name": "Private file storage",
             "adapter": s.evidence_store,
-            "mode": "development" if s.evidence_store == "local" else "unavailable",  # the S3 adapter lands with B03
-            "blocker": None if s.evidence_store == "local" else "B03",
-            "health": _writable(evidence_root) if s.evidence_store == "local" else "not_checked",
+            # The directory and the emulator are development stand-ins. A non-emulator endpoint is configured, and
+            # the production account is still unchosen (B03).
+            "mode": "development" if s.evidence_store == "local" or _emulator(s) else "configured",
+            "blocker": None if s.evidence_store == "local" or _emulator(s) else "B03",
+            "health": _writable(evidence_root) if s.evidence_store == "local" else object_health(s),
             "usage_24h": {},
             "budget_daily": None,
         },

@@ -1,8 +1,9 @@
 """Private evidence storage (W03.S3.T1). Objects are immutable: a key is written once and never overwritten, so sealed
 evidence can't be substituted. The server computes the checksum itself; a client-supplied hash is never trusted.
 
-The local backend is a private directory for development/test. Deployed roles must use private object storage (S3
-proposed, BLOCKERS B03); the configuration validator refuses to start them with the local backend.
+The local backend is a private directory for development/test. ``s3`` uses the path-style client in
+``portal_api.object_store`` (a development emulator, or a private bucket once one is chosen — B03). The configuration
+validator refuses to start a deployed role with the local directory or with the emulator's credentials.
 """
 
 from __future__ import annotations
@@ -15,6 +16,7 @@ from pathlib import Path
 
 from portal_api.config import get_settings
 from portal_api.errors import StorageUnavailable
+from portal_api.object_store import Client, ObjectStoreError, Prefixed
 
 
 class EvidenceStoreUnavailable(StorageUnavailable):
@@ -90,11 +92,67 @@ class LocalEvidenceStore:
         return h.hexdigest()
 
 
+class S3EvidenceStore:
+    """Immutable evidence in the shared bucket, under ``evidence/``. A key is written once."""
+
+    def __init__(self, bucket: Prefixed) -> None:
+        self.bucket = bucket
+
+    def put(self, key: str, data: bytes) -> Stored:
+        try:
+            self.bucket.put(key, data, exclusive=True)
+        except ObjectStoreError as e:
+            raise EvidenceStoreUnavailable("Private file storage isn't connected yet. Please try again later.") from e
+        return Stored(key=key, sha256=hashlib.sha256(data).hexdigest(), size=len(data))
+
+    def discard_uncommitted(self, key: str) -> None:
+        try:
+            self.bucket.delete(key)
+        except ObjectStoreError as e:
+            raise EvidenceStoreUnavailable("Private file storage isn't connected yet. Please try again later.") from e
+
+    def list_objects(self) -> list[tuple[str, float]]:
+        try:
+            return self.bucket.list()
+        except ObjectStoreError as e:
+            raise EvidenceStoreUnavailable("Private file storage isn't connected yet. Please try again later.") from e
+
+    def get(self, key: str) -> bytes:
+        try:
+            return self.bucket.get(key)
+        except ObjectStoreError as e:
+            raise EvidenceStoreUnavailable("Private file storage isn't connected yet. Please try again later.") from e
+
+    def exists(self, key: str) -> bool:
+        try:
+            return self.bucket.exists(key)
+        except ObjectStoreError as e:
+            raise EvidenceStoreUnavailable("Private file storage isn't connected yet. Please try again later.") from e
+
+    def sha256(self, key: str) -> str | None:
+        try:
+            return hashlib.sha256(self.bucket.get(key)).hexdigest()
+        except FileNotFoundError:
+            return None
+        except ObjectStoreError as e:
+            raise EvidenceStoreUnavailable("Private file storage isn't connected yet. Please try again later.") from e
+
+
 @lru_cache
-def get_store() -> LocalEvidenceStore:
+def get_store() -> LocalEvidenceStore | S3EvidenceStore:
     s = get_settings()
-    if s.evidence_store != "local":
-        raise EvidenceStoreUnavailable("Private file storage isn't connected yet. Please try again later.")
+    if s.evidence_store == "s3":
+        try:
+            client = Client(
+                s.evidence_s3_endpoint,
+                s.evidence_s3_bucket,
+                s.evidence_s3_access_key,
+                s.evidence_s3_secret_key,
+                s.evidence_s3_region,
+            )
+        except ObjectStoreError as e:
+            raise EvidenceStoreUnavailable("Private file storage isn't connected yet. Please try again later.") from e
+        return S3EvidenceStore(client.prefixed("evidence/"))
     root = Path(s.evidence_dir)
     if not root.is_absolute():
         root = Path(__file__).resolve().parents[4] / root  # apps/api/<evidence_dir>
