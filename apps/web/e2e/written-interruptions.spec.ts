@@ -60,3 +60,55 @@ test("a lost upload is retried without duplicates, and two tabs never overwrite 
   await expect(groups(page).nth(1).getByLabel("I didn't answer this")).toBeChecked();
   await expect(pagesList.getByText(/^Page \d+ ·/)).toHaveCount(1);
 });
+
+// W04.S2.T1 (WRITTEN-CONNECTION-01): an outage during a written test is explained, a page choice made offline is sent
+// when the connection is back, submitting never hangs, and a changed device clock is corrected from the server's time.
+test("offline, the written test says what it means, then saves the page map and corrects its clock", async ({ page, context }) => {
+  test.slow();
+  await page.clock.install(); // the device clock, which the learner (or a sleeping laptop) can change
+  await page.goto("/signin?next=/practice?grade=11%26subject=biology");
+  await page.getByRole("button", { name: "New here? Create an account" }).click();
+  await page.getByLabel("Email").fill(`e2e-offline-written-${Date.now()}-${Math.random().toString(36).slice(2, 7)}@example.com`);
+  await page.getByLabel("Password").fill("practice-fixture-pass-1");
+  await page.getByRole("button", { name: "Create account" }).click();
+  await expect(page).toHaveURL(/:\d+\/practice\?/, AUTH);
+  await page.getByRole("button", { name: "Start my free 30-day trial" }).click();
+  await expect(page.getByText(/Free trial until/)).toBeVisible(AUTH);
+  await page.goto("/practice/written?grade=11&subject=biology");
+  await page.getByRole("group", { name: "Chapters" }).getByRole("checkbox").first().check();
+  await page.getByRole("button", { name: "Start written test" }).click();
+  await expect(page).toHaveURL(/:\d+\/practice\/written\/[0-9a-f-]{36}$/, AUTH);
+  await page.getByLabel("Add photos or a PDF").setInputFiles("e2e/fixtures/synthetic-page.png");
+  await expect(page.getByRole("list", { name: "Uploaded pages" }).getByText("Page 1 · uploaded, not yet submitted")).toBeVisible(AUTH);
+
+  // The clock: the device's time jumps 20 minutes ahead with no real time passing; a fresh server time corrects it.
+  const left = async () => {
+    const text = await page.getByText(/\(\d+:\d{2} left\)/).innerText();
+    const [, m, s] = /\((\d+):(\d{2}) left\)/.exec(text)!;
+    return Number(m) * 60 + Number(s);
+  };
+  await expect(page.getByText(/\(\d+:\d{2} left\)/)).toBeVisible(AUTH);
+  const before = await left();
+  await page.clock.setSystemTime(Date.now() + 20 * 60_000);
+  await expect.poll(left, AUTH).toBeLessThan(before - 15 * 60);
+  await page.evaluate(() => document.dispatchEvent(new Event("visibilitychange"))); // back on this tab
+  await expect.poll(left, AUTH).toBeGreaterThan(before - 5 * 60);
+
+  // Offline: the notice says what an outage means; a page choice made now fails, and is sent once the connection is back.
+  await context.setOffline(true);
+  await expect(page.getByText("You're offline", { exact: true })).toBeVisible(AUTH);
+  await expect(page.getByText(/Time keeps running: upload and submit by/)).toBeVisible();
+  const parts = page.getByRole("group", { name: /^Question \d/ });
+  await parts.nth(0).getByLabel("Page 1").check();
+  await expect(page.getByRole("status").filter({ hasText: "Can't reach the service" })).toBeVisible(AUTH);
+  for (let i = 1; i < (await parts.count()); i++) await parts.nth(i).getByLabel("Page 1").check();
+  await page.getByRole("button", { name: "Submit for marking" }).click();
+  await expect(page.getByRole("alert").filter({ hasText: "Can't reach the service" })).toBeVisible(AUTH); // refused, not hung
+  await expect(page.getByRole("button", { name: "Submit for marking" })).toBeEnabled();
+
+  await context.setOffline(false);
+  await expect(page.getByRole("status").filter({ hasText: /Saved · revision \d+/ })).toBeVisible(AUTH);
+  await expect(page.getByText("You're offline", { exact: true })).toHaveCount(0);
+  await page.getByRole("button", { name: "Submit for marking" }).click();
+  await expect(page.getByText("Submitted for marking")).toBeVisible(AUTH);
+});
