@@ -2173,6 +2173,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/ops/written-lifecycle": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Written script lifecycle timings with their counts (W09.S1.T1; operators) */
+        get: operations["written_lifecycle_v1_ops_written_lifecycle_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/ops/written/auto-assessments": {
         parameters: {
             query?: never;
@@ -3264,6 +3281,23 @@ export interface paths {
         put?: never;
         /** Review */
         post: operations["review_v1_studio_items__item_id__review_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/studio/items/{item_id}/reviewers": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Who a publisher may assign to review this item (active reviewers in scope who didn't edit it) */
+        get: operations["eligible_reviewers_v1_studio_items__item_id__reviewers_get"];
+        put?: never;
+        post?: never;
         delete?: never;
         options?: never;
         head?: never;
@@ -4739,6 +4773,11 @@ export interface components {
          * @description What the caller may do now. Advisory for the UI; the server re-checks every action.
          */
         Actions: {
+            /**
+             * Assign
+             * @default false
+             */
+            assign: boolean;
             /**
              * Change Quarantine Level
              * @default false
@@ -7794,6 +7833,86 @@ export interface components {
              */
             lesson_id: string;
         };
+        /** LifecycleOut */
+        LifecycleOut: {
+            /** Days */
+            days: number;
+            /** Grade */
+            grade: number | null;
+            /**
+             * Not Running
+             * @description Stages with nothing to measure yet, and why
+             */
+            not_running: string[];
+            outcomes: components["schemas"]["LifecycleOutcomes"];
+            /**
+             * Since
+             * Format: date-time
+             */
+            since: string;
+            /** Stages */
+            stages: components["schemas"]["LifecycleStage"][];
+            /** Subject */
+            subject: string | null;
+        };
+        /** LifecycleOutcomes */
+        LifecycleOutcomes: {
+            /**
+             * Accepted
+             * @description Submitted: a receipt was issued
+             */
+            accepted: number;
+            /**
+             * Delayed
+             * @description Submitted, with an open marking case past its due time
+             */
+            delayed: number;
+            /**
+             * Not Submitted
+             * @description Ended without a submission (the upload time ran out, or the plan ended)
+             */
+            not_submitted: number;
+            /** Not Submitted Plan Withdrawn */
+            not_submitted_plan_withdrawn: number;
+            /**
+             * Pending
+             * @description Submitted, with no released result yet
+             */
+            pending: number;
+            /**
+             * Released Automatically
+             * @description Always 0 in R0: automatic assessment publishes nothing (B10)
+             */
+            released_automatically: number;
+            /** Released By Teacher */
+            released_by_teacher: number;
+            /**
+             * Started
+             * @description Written tests started in the window
+             */
+            started: number;
+            /** Still Writing */
+            still_writing: number;
+        };
+        /** LifecycleStage */
+        LifecycleStage: {
+            /**
+             * Count
+             * @description How many pages (upload stages) or scripts the times are measured over
+             */
+            count: number;
+            /** Description */
+            description: string;
+            /** Median Minutes */
+            median_minutes: number | null;
+            /** P90 Minutes */
+            p90_minutes: number | null;
+            /**
+             * Stage
+             * @enum {string}
+             */
+            stage: "upload_while_writing" | "upload_after_writing" | "seal" | "queue" | "review" | "publication";
+        };
         /** LinkedAttemptOut */
         LinkedAttemptOut: {
             /** Attempt Id */
@@ -9886,6 +10005,19 @@ export interface components {
             decision: "approve" | "request_changes";
             /** Reviewer */
             reviewer: string | null;
+        };
+        /**
+         * ReviewerOption
+         * @description ASSIGN-REVIEWER-01: someone a publisher may assign to review an item.
+         */
+        ReviewerOption: {
+            /** Email */
+            email: string;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
         };
         /** ReviewerQualityOut */
         ReviewerQualityOut: {
@@ -16323,6 +16455,39 @@ export interface operations {
             };
         };
     };
+    written_lifecycle_v1_ops_written_lifecycle_get: {
+        parameters: {
+            query?: {
+                days?: number;
+                grade?: number | null;
+                subject?: string | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["LifecycleOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     auto_assessments_v1_ops_written_auto_assessments_get: {
         parameters: {
             query?: never;
@@ -18517,6 +18682,37 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["ItemDetail"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    eligible_reviewers_v1_studio_items__item_id__reviewers_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                item_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ReviewerOption"][];
                 };
             };
             /** @description Validation Error */
