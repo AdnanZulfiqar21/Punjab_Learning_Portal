@@ -64,6 +64,7 @@ class LogicalPage:
     preview_png: bytes
     quality: list[dict[str, Any]] = field(default_factory=list)  # SCAN-QUALITY-01 flags (see `quality_message`)
     transform: dict[str, Any] | None = None  # STRAIGHTEN-01: as applied (the angle found, the page's shape before it)
+    fingerprint: str | None = None  # NEAR-DUP-01: a coarse thumbnail for spotting the same page twice (None: blank)
 
 
 @dataclass(frozen=True)
@@ -424,6 +425,7 @@ def _run_worker(data: bytes, kind: str) -> Inspected:
                 height=int(p["height"]),
                 preview_png=(work / p["preview"]).read_bytes(),
                 quality=[f for f in p.get("quality", []) if f.get("code") in QUALITY_TEXT],
+                fingerprint=_valid_fingerprint(p.get("fingerprint")),
             )
             for p in result["pages"]
         ]
@@ -480,7 +482,8 @@ def _inspect_image(data: bytes, kind: str) -> dict[str, Any]:
         return {"rejected": "This image is damaged or incomplete. Take or export the photo again."}
     png, pw, ph = _preview(upright)
     quality = _quality(upright, photo=True)
-    return {"pages": [{"width": pw, "height": ph, "preview": "page-1.png", "_png": png, "quality": quality}]}
+    page = {"width": pw, "height": ph, "preview": "page-1.png", "_png": png, "quality": quality}
+    return {"pages": [{**page, "fingerprint": _fingerprint(upright)}]}
 
 
 def _inspect_pdf(data: bytes) -> dict[str, Any]:
@@ -513,9 +516,19 @@ def _inspect_pdf(data: bytes) -> dict[str, Any]:
                 rendered = bitmap.to_pil()
                 png, w, h = _preview(rendered)
                 quality = _quality(rendered, photo=False)  # a PDF page's size is ours to choose: no small-page check
+                fingerprint = _fingerprint(rendered)
             finally:
                 page.close()
-            pages.append({"width": w, "height": h, "preview": f"page-{i + 1}.png", "_png": png, "quality": quality})
+            pages.append(
+                {
+                    "width": w,
+                    "height": h,
+                    "preview": f"page-{i + 1}.png",
+                    "_png": png,
+                    "quality": quality,
+                    "fingerprint": fingerprint,
+                }
+            )
         return {"pages": pages}
     finally:
         doc.close()
@@ -629,11 +642,63 @@ QUALITY_TEXT: dict[str, dict[str, str]] = {
         "likely": "Writing seems to run off the {sides} edge. Retake it with the whole page and some margin in view.",
         "possible": "Writing may run off the {sides} edge. Check the preview and retake it if anything is missing.",
     },
+    "near_duplicate": {
+        "possible": "This page looks almost the same as another page you uploaded. If it's the same page twice, "
+        "choose just one of them for your answers; if they're different pages, ignore this.",
+    },
     "small_text": {
         "likely": "The page is small in this photo, so the writing may be too small to read. Move closer, retake it.",
         "possible": "The page is fairly small in this photo. Check the writing is readable in the preview.",
     },
 }
+
+
+# ------------------------------------------------------- the same page twice (W03.S2.T3, NEAR-DUP-01)
+# An exact copy of a file is already recognised by its hash. A page photographed or exported twice (re-compressed,
+# resized, lighter or darker) has different bytes, so each page also gets a coarse fingerprint: its 32 x 32 grey
+# thumbnail. Two fingerprints are compared after normalising brightness and contrast (each scaled to mean 0, spread 1);
+# a mean difference of at most NEAR_DUP_MAX_DIFF flags the pages as possibly the same page. Only flagged, never
+# removed: the learner decides. Blank pages get no fingerprint (several blank sheets are normal). Measured on synthetic
+# pages only (the same page re-encoded, resized, lightened, darkened or with more contrast: at most 0.26; different
+# pages: at least 0.74), so the threshold is provisional, like the others here, until real scans (B10).
+FINGERPRINT_SIDE = 32
+NEAR_DUP_MAX_DIFF = 0.45  # mean absolute difference of the normalised thumbnails
+
+
+def _fingerprint(image: Any) -> str | None:
+    from PIL import Image, ImageStat
+
+    work = image.convert("L")
+    work.thumbnail((QUALITY_WORK_PX, QUALITY_WORK_PX), Image.Resampling.BOX)
+    if ImageStat.Stat(work).stddev[0] < CONTENT_MIN_STDDEV:
+        return None  # a near-blank page: nothing to tell it apart by
+    thumb: bytes = work.resize((FINGERPRINT_SIDE, FINGERPRINT_SIDE), Image.Resampling.BOX).tobytes()
+    return thumb.hex()
+
+
+def _valid_fingerprint(raw: object) -> str | None:
+    if not isinstance(raw, str) or len(raw) != FINGERPRINT_SIDE * FINGERPRINT_SIDE * 2:
+        return None
+    try:
+        bytes.fromhex(raw)
+    except ValueError:
+        return None
+    return raw
+
+
+def _normalised(fingerprint: str) -> list[float]:
+    values = list(bytes.fromhex(fingerprint))
+    mean = sum(values) / len(values)
+    spread = (sum((v - mean) ** 2 for v in values) / len(values)) ** 0.5 or 1.0
+    return [(v - mean) / spread for v in values]
+
+
+def near_duplicate(a: str | None, b: str | None) -> bool:
+    """NEAR-DUP-01: the two pages are probably the same page (both must have content)."""
+    if a is None or b is None or len(a) != len(b):
+        return False
+    x, y = _normalised(a), _normalised(b)
+    return sum(abs(i - j) for i, j in zip(x, y, strict=True)) / len(x) <= NEAR_DUP_MAX_DIFF
 
 
 def quality_message(flag: dict[str, Any]) -> str:

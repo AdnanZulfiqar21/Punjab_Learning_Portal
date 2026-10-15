@@ -318,7 +318,13 @@ export function MarkingWorkspace({ initial }: { initial: MarkingCase }) {
                 {(p.quality ?? []).length > 0 && (
                   <span className="block text-warn">
                     Photo check{(p.quality ?? []).length > 1 ? "s" : ""} shown to the learner:{" "}
-                    {(p.quality ?? []).map((q) => `${q.code.replace("_", " ")} (${q.level})`).join(", ")}. If the page can&apos;t be read, ask
+                    {(p.quality ?? [])
+                      .map((q) => {
+                        const like = q.like_page_id ? c.pages.findIndex((x) => x.id === q.like_page_id) : -1;
+                        return `${q.code.replace("_", " ")} (${q.level})${like >= 0 ? ` of page ${like + 1}` : ""}`;
+                      })
+                      .join(", ")}
+                    . If the page can&apos;t be read, ask
                     for a clearer copy.
                   </span>
                 )}

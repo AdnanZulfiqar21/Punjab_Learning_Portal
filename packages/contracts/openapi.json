@@ -9016,6 +9016,12 @@
             "title": "Due At",
             "type": "string"
           },
+          "flagged": {
+            "default": false,
+            "description": "You flagged this question as unsure in a submitted test (NOTEBOOK-FLAGS-01)",
+            "title": "Flagged",
+            "type": "boolean"
+          },
           "grade": {
             "title": "Grade",
             "type": "integer"
@@ -9826,7 +9832,8 @@
               "blur",
               "glare",
               "cut_off",
-              "small_text"
+              "small_text",
+              "near_duplicate"
             ],
             "title": "Code",
             "type": "string"
@@ -9838,6 +9845,19 @@
             ],
             "title": "Level",
             "type": "string"
+          },
+          "like_page_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "For near_duplicate (NEAR-DUP-01): the earlier page this one looks almost the same as",
+            "title": "Like Page Id"
           },
           "message": {
             "title": "Message",

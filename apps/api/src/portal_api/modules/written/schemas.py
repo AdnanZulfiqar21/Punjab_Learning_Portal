@@ -71,9 +71,12 @@ class WrittenItemOut(BaseModel):
 class PageQualityOut(BaseModel):
     """A quality check on a page (SCAN-QUALITY-01): a warning with a retake suggestion, never a verdict."""
 
-    code: Literal["blur", "glare", "cut_off", "small_text"]
+    code: Literal["blur", "glare", "cut_off", "small_text", "near_duplicate"]
     level: Literal["likely", "possible"]
     sides: list[str] = Field(default_factory=list, description="For cut_off: top, bottom, left or right")
+    like_page_id: uuid.UUID | None = Field(
+        default=None, description="For near_duplicate (NEAR-DUP-01): the earlier page this one looks almost the same as"
+    )
     message: str
 
 

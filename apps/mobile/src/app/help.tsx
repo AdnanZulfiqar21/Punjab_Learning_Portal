@@ -1,6 +1,7 @@
 // Help on native (P15.S3): open a request, read replies and answer them. A question report opened from a written
 // result carries its reference; the server resolves it to the exact question version and keeps your identity from
 // the subject reviewer who handles it.
+import * as ImagePicker from "expo-image-picker";
 import { router, Stack, useLocalSearchParams } from "expo-router";
 import { useState } from "react";
 import { ScrollView, View } from "react-native";
@@ -14,6 +15,7 @@ import { useTheme } from "@/hooks/use-theme";
 import { api, ApiError } from "@/lib/api";
 import { useAuth } from "@/lib/auth";
 import { TIME_ZONE } from "@/lib/dates";
+import { screenshotProblem } from "@/lib/screenshots";
 
 const CATEGORIES = [
   ["account", "Account"],
@@ -100,6 +102,33 @@ function Ticket({ token, ticket, onChange }: { token: string; ticket: SupportTic
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  // P15.S3.T1 (MOBILE-SCREENSHOTS-01): a picture of what went wrong, from the photo library.
+  async function addScreenshot() {
+    setError(null);
+    const res = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ["images"],
+      quality: 0.9,
+      preferredAssetRepresentationMode: ImagePicker.UIImagePickerPreferredAssetRepresentationMode.Compatible,
+    });
+    const asset = res.canceled ? null : res.assets[0];
+    if (!asset) return;
+    const problem = screenshotProblem(asset);
+    if (problem) {
+      setError(problem);
+      return;
+    }
+    setBusy(true);
+    try {
+      const blob = await (await fetch(asset.uri)).blob();
+      await api.addScreenshot(token, ticket.id, blob);
+      onChange();
+    } catch (e) {
+      setError(e instanceof ApiError ? e.message : "Couldn't add the screenshot. Nothing was sent; try again.");
+    } finally {
+      setBusy(false);
+    }
+  }
+
   async function send() {
     setBusy(true);
     setError(null);
@@ -126,11 +155,17 @@ function Ticket({ token, ticket, onChange }: { token: string; ticket: SupportTic
             {m.from_staff ? "Support" : "You"} · {when(m.created_at)}: {m.body}
           </T>
         ))}
+        {(ticket.attachments ?? []).length > 0 && (
+          <T variant="small">
+            Screenshots: {(ticket.attachments ?? []).map((a, i) => `${i + 1} (${a.width} × ${a.height})`).join(", ")}
+          </T>
+        )}
         {ticket.status !== "resolved" && (
           <>
             <Field label={`Reply to "${ticket.subject}"`} value={reply} onChangeText={setReply} multiline maxLength={4000} />
             <FormError message={error} />
             <Button variant="secondary" label="Send reply" onPress={() => void send()} busy={busy} disabled={!reply.trim()} />
+            <Button variant="secondary" label="Add a screenshot" onPress={() => void addScreenshot()} busy={busy} />
           </>
         )}
       </View>
