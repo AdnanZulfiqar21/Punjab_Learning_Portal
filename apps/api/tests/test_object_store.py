@@ -27,8 +27,8 @@ def test_the_signature_matches_the_published_aws_example() -> None:
         path="/test.txt",
         query={},
         body=b"",
-        access_key="AKIAIOSFODNN7EXAMPLE",
-        secret_key="wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+        access_key="AKIAIOSFODNN7EXAMPLE",  # pragma: allowlist secret
+        secret_key="wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",  # pragma: allowlist secret
         region="us-east-1",
         now=datetime(2013, 5, 24, tzinfo=UTC),
         extra={"range": "bytes=0-9"},

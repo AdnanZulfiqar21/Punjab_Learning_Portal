@@ -15,7 +15,7 @@ OIDC = {
     "evidence_s3_endpoint": "https://s3.internal.example",
     "evidence_s3_bucket": "portal-evidence",
     "evidence_s3_access_key": "deployed-access",
-    "evidence_s3_secret_key": "deployed-secret-value",
+    "evidence_s3_secret_key": "deployed-secret-value",  # pragma: allowlist secret
     "trial_device_evidence": "fallback",
     "trial_ref_pepper": "deployment-secret-fixture",
     "notification_email_adapter": "none",  # P15.S1: the dev outbox is refused; "none" until a sender exists (B04)
@@ -142,7 +142,7 @@ def test_the_emulator_is_accepted_in_development_and_refused_when_deployed() -> 
         "evidence_s3_endpoint": "http://127.0.0.1:59000",
         "evidence_s3_bucket": "portal-evidence-dev",
         "evidence_s3_access_key": "portal-dev-only",
-        "evidence_s3_secret_key": "portal-dev-only",
+        "evidence_s3_secret_key": "portal-dev-only",  # pragma: allowlist secret
     }
     assert Settings(role=Role.development, **emulator).evidence_s3_endpoint.endswith(":59000")
     base = {

@@ -274,7 +274,7 @@ def test_production_refuses_the_development_email_adapter() -> None:
         "evidence_s3_endpoint": "https://s3.internal.example",
         "evidence_s3_bucket": "portal-evidence",
         "evidence_s3_access_key": "deployed-access",
-        "evidence_s3_secret_key": "deployed-secret-value",
+        "evidence_s3_secret_key": "deployed-secret-value",  # pragma: allowlist secret
         "trial_device_evidence": "required",
         "trial_ref_pepper": "secret",
         "cors_origins": ["https://app.example.invalid"],
