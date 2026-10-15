@@ -16,13 +16,24 @@ class Base(DeclarativeBase):
 _engine: Engine | None = None
 _maker: sessionmaker[Session] | None = None
 _lock = threading.Lock()
+_pool_cap: int | None = None  # POOL-CAPS-01: the per-process connections of this process's budget class
+
+
+def cap_pool(size: int) -> None:
+    """Cap this process's pool at its budget class's size (`budget.process_class`). Only a pool not yet built is
+    capped; an existing one is left alone (a test or tool already holding connections): a deployed command starts
+    fresh."""
+    global _pool_cap
+    with _lock:
+        if _engine is None:
+            _pool_cap = size
 
 
 def _build_engine() -> Engine:
     s = get_settings()
     engine = create_engine(
         s.database_url,
-        pool_size=s.db_pool_size,
+        pool_size=min(s.db_pool_size, _pool_cap) if _pool_cap is not None else s.db_pool_size,
         max_overflow=s.db_max_overflow,
         pool_pre_ping=True,
         pool_timeout=5,

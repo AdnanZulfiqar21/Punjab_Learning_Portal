@@ -10,12 +10,14 @@ import sys
 
 from sqlalchemy import select
 
+from portal_api.budget import process_class
 from portal_api.db import get_sessionmaker
 from portal_api.modules.audit.models import record
 from portal_api.modules.written import evidence, service, storage
 from portal_api.modules.written.models import WrittenFile, WrittenPage
 
 
+@process_class("written.ingestion")
 def previews(argv: list[str] | None = None) -> int:
     store = storage.get_store()
     done = failed = 0
@@ -52,6 +54,7 @@ def previews(argv: list[str] | None = None) -> int:
     return 1 if failed else 0
 
 
+@process_class("written.ingestion")
 def sweep(argv: list[str] | None = None) -> int:
     with get_sessionmaker()() as db:
         removed = service.sweep_orphans(db)
@@ -59,6 +62,7 @@ def sweep(argv: list[str] | None = None) -> int:
     return 0
 
 
+@process_class("written.reading")
 def repair(argv: list[str] | None = None) -> int:
     """portal-written-repair: idempotent, audited repairs for review findings (OCT8-02 pending obligations)."""
     from portal_api.modules.written import review
@@ -75,6 +79,7 @@ def repair(argv: list[str] | None = None) -> int:
     return 0
 
 
+@process_class("written.reading")
 def learner_deadlines(argv: list[str] | None = None) -> int:
     """portal-written-learner-deadlines: resolve questions whose 7-day learner action passed (schedule hourly)."""
     from portal_api.modules.written import rescans

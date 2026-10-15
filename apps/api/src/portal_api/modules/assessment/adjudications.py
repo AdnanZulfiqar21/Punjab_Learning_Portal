@@ -25,6 +25,7 @@ from typing import Any
 from sqlalchemy import func, select
 from sqlalchemy.orm import Session
 
+from portal_api.budget import process_class
 from portal_api.errors import Conflict, Unprocessable
 from portal_api.modules.assessment import forms, scoring
 from portal_api.modules.assessment.models import (
@@ -319,6 +320,7 @@ def summary(db: Session, adjudication: McqAdjudication) -> dict[str, Any]:
     return {"affected_attempts": len(affected_attempts(db, adjudication.version_id))}
 
 
+@process_class("critical")
 def main() -> None:
     """`portal-mcq-regrade`: re-run propagation for every effective correction (recovery after an interruption)."""
     from portal_api.db import get_sessionmaker

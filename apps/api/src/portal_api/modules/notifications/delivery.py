@@ -22,6 +22,7 @@ from datetime import datetime, timedelta
 from sqlalchemy import func, select
 from sqlalchemy.orm import Session
 
+from portal_api.budget import process_class
 from portal_api.config import get_settings
 from portal_api.db import get_sessionmaker
 from portal_api.modules.identity.models import AppUser
@@ -134,6 +135,7 @@ def deliver_due(db: Session, limit: int = 100) -> int:
     return done
 
 
+@process_class("critical")
 def worker_main(argv: list[str] | None = None) -> int:
     """portal-notification-worker [--once] [--interval S]: deliver queued email/push notifications."""
     import argparse
@@ -152,6 +154,7 @@ def worker_main(argv: list[str] | None = None) -> int:
         time.sleep(args.interval)
 
 
+@process_class("standard")
 def trial_reminders(argv: list[str] | None = None) -> int:
     """portal-notification-trial-reminders: tell learners 3 days before a free trial ends (schedule daily).
     Idempotent per trial entitlement."""

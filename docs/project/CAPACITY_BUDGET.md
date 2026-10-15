@@ -15,7 +15,7 @@ totals match §5.8, and every installed database command belongs to a class.
 | api | 20 | 10 | 200 | API replicas; request work in a bounded threadpool |
 | critical | 4 | 5 | 20 | `portal-expire-attempts`, `portal-mcq-regrade`, `portal-notification-worker` |
 | standard | 4 | 3 | 12 | `portal-notification-trial-reminders` |
-| bulk | 2 | 3 | 6 | `portal-export-worker`, `portal-import-worker`, `portal-asset-retention`, `portal-upload-reconcile`, `portal-help-import` |
+| bulk | 2 | 3 | 6 | `portal-export-worker`, `portal-import-worker`, `portal-import-reconcile`, `portal-asset-retention`, `portal-upload-reconcile`, `portal-help-import` |
 | reserve | 1 | 7 | 7 | migrations, `portal-import-catalogue`, `portal-grant-role`, monitoring |
 | written.ingestion | 2 | 3 | 6 | `portal-written-previews`, `portal-written-sweep-orphans` |
 | written.reading | 4 | 2 | 8 | `portal-written-learner-deadlines`, `portal-written-repair` |
@@ -24,7 +24,8 @@ totals match §5.8, and every installed database command belongs to a class.
 
 - **Totals:** core 245, plus written 24, gives 269 planned connections.
 - **Rolling-deploy overlap:** 2 extra API replicas, budgeted explicitly (+20), for a **peak of 289**.
-- **Per-process pools:** every process sets its own pool with `PORTAL_DB_POOL_SIZE`. The default of 10 is right for the API only, so each worker class sets its row's value.
+- **Per-process pools (enforced since POOL-CAPS-01, P17.S2.T2):** every installed command is declared with `budget.process_class(...)`, which caps its process's pool at its row's "Pool each" before the first connection opens. `PORTAL_DB_POOL_SIZE` can only lower it (the API keeps the default of 10). `tests/test_pool_caps.py` fails if a command in `ENTRY_POINTS` lacks the declaration or names another class.
+- **Bulk work pauses in mock windows:** the import and export workers claim no new work from 15 minutes before a scheduled mock window opens until 15 minutes after it closes, and the scheduled bulk jobs (`portal-asset-retention`, `portal-upload-reconcile`, `portal-import-reconcile --apply`) skip that run. Operator-run commands (`portal-help-import`) are not paused. `PORTAL_BULK_PAUSE_IN_MOCK_WINDOWS=false` turns the pause off. CPU and memory caps per class belong to the deployment (B03).
 - **No overflow in production:** production refuses `db_max_overflow > 0` (config validator), so a pool size is a hard ceiling.
 - **Pool saturation:** a request that can't get a connection within 5 s is answered `503 SERVICE_BUSY` with `Retry-After: 5`, never a hang (REL-02).
 - **Written ingestion:** inside API requests it parses files in an isolated worker pool that holds no database connection (DBHOLD-01). The `written.ingestion` class covers the scheduled ingestion commands.

@@ -18,6 +18,7 @@ from __future__ import annotations
 import sys
 from pathlib import Path
 
+from portal_api.budget import process_class
 from portal_api.db import get_sessionmaker
 from portal_api.modules.help import service
 
@@ -41,6 +42,7 @@ def parse(path: Path) -> dict[str, object]:
     }
 
 
+@process_class("bulk")
 def main(argv: list[str] | None = None) -> int:
     args = argv if argv is not None else sys.argv[1:]
     root = Path(args[0]) if args else DEFAULT_DIR

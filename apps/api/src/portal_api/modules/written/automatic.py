@@ -47,6 +47,7 @@ from sqlalchemy import DateTime, ForeignKey, Integer, SmallInteger, String, Text
 from sqlalchemy.dialects.postgresql import JSONB, UUID, insert
 from sqlalchemy.orm import Mapped, Session, mapped_column
 
+from portal_api.budget import process_class
 from portal_api.config import get_settings
 from portal_api.db import Base
 from portal_api.modules.content import written as wq
@@ -522,6 +523,7 @@ def summary(db: Session) -> dict[str, Any]:
     return {"assessor": adapter_for().name, "counts": {s: int(counts.get(s, 0)) for s in STATUSES}}
 
 
+@process_class("written.assessment")
 def worker_main() -> None:
     """`portal-written-auto-worker`: reconcile and assess. With the `none` adapter it does nothing (B10)."""
     from portal_api.db import get_sessionmaker
