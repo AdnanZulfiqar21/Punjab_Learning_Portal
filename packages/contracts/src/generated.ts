@@ -7322,6 +7322,11 @@ export interface components {
             concept_id?: string | null;
             /** Created By */
             created_by: string | null;
+            /**
+             * Duplicate Warnings
+             * @description DUP-STEMS-01: other questions this one duplicates or nearly duplicates (in review or approved); for the academic reviewer to decide, never applied automatically
+             */
+            duplicate_warnings?: string[];
             /** Family Id */
             family_id: string | null;
             /** Grade Number */

@@ -161,7 +161,9 @@ test("a teacher gives a script back, and an adjudicator frees one a teacher left
 
   const lead = await teacher(browser, "studio-adjudicator@example.com", "/studio/marking", true);
   await lead.getByRole("link", { name: `Script ${attemptId.slice(0, 8)}` }).click();
-  await expect(lead.getByText("Another teacher is marking")).toBeVisible(AUTH);
+  await expect(lead.getByRole("heading", { level: 1, name: `Script ${attemptId.slice(0, 8)}` })).toBeVisible(AUTH);
+  // Next keeps the previous page (the queue, with the same badge) in the DOM, hidden: look only at what is shown.
+  await expect(lead.getByText("Another teacher is marking").filter({ visible: true })).toBeVisible(AUTH);
   const free = lead.getByRole("form", { name: "Free this script" });
   await free.getByLabel(/Why free this script/).fill("Fixture: the marker was called away");
   await audit(lead, null);
