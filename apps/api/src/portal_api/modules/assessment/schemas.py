@@ -256,6 +256,26 @@ class ResultCounts(BaseModel):
     not_scorable: bool
 
 
+class ComparisonOut(BaseModel):
+    """P12.S2.T3 (COMPARISON-01): how a scheduled session's fixed-form result compares with other learners'."""
+
+    state: Literal["published", "too_few", "pending", "not_included"] = Field(
+        description="published: a percentile is shown; otherwise `message` says why not"
+    )
+    message: str
+    percentile: Decimal | None = Field(
+        default=None, description="100 * (lower + 0.5 * equal) / N, the learner included; one decimal"
+    )
+    learners: int | None = Field(default=None, description="N: distinct learner accounts compared")
+    timing_group: Literal["standard", "accommodated"]
+    group: str = Field(description="Who this learner is compared with")
+    window_start: datetime | None = None
+    window_end: datetime | None = None
+    version: int | None = Field(default=None, description="Comparison snapshot version")
+    tie_rule: str
+    limits: str = Field(description="What the comparison does not show")
+
+
 class ResultOut(BaseModel):
     attempt_id: uuid.UUID
     version: int
@@ -275,6 +295,7 @@ class ResultOut(BaseModel):
     history: list[ScoreHistoryEntry] = Field(default_factory=list, description="Every score version, oldest first")
     counts: ResultCounts | None = None
     not_counted: list[NotCountedOut] = Field(default_factory=list, description="Latest changes that weren't counted")
+    comparison: ComparisonOut | None = Field(default=None, description="Scheduled sessions' fixed forms only")
 
 
 class RevealOut(BaseModel):

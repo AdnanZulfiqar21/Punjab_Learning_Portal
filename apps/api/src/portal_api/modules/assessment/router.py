@@ -13,13 +13,14 @@ from sqlalchemy.orm import Session
 
 from portal_api.db import get_session
 from portal_api.errors import Conflict, NotFound, Unprocessable
-from portal_api.modules.assessment import attempts, exam_room, forms
+from portal_api.modules.assessment import attempts, cohorts, exam_room, forms
 from portal_api.modules.assessment.models import Attempt, FormItem, PracticeForm, SubmissionReceipt
 from portal_api.modules.assessment.schemas import (
     AnswerOut,
     AttemptOut,
     AvailabilityOut,
     ChapterAvailability,
+    ComparisonOut,
     FlagsIn,
     FlagsOut,
     FormCreateIn,
@@ -303,6 +304,7 @@ def result(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, response: Respo
                 passage=forms.passage_snapshot(db, fi),  # type: ignore[arg-type]
             )
         )
+    compared = cohorts.for_attempt(db, attempt, form, score)  # P12.S2.T3: fixed session forms only
     return ResultOut(
         attempt_id=attempt.id,
         version=score.version,
@@ -317,6 +319,7 @@ def result(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, response: Respo
         items=items,
         revised_at=score.created_at if score.version > 1 else None,
         revision_reason=score.reason if score.version > 1 else None,
+        comparison=ComparisonOut(**compared) if compared else None,
         **_summary(db, attempt, form, score),
     )
 

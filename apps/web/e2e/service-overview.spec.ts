@@ -70,6 +70,13 @@ test("staffing decides whether written tests start, and learners are told", asyn
     await form.getByLabel(/^Reason/).fill(reason);
     await form.getByRole("button", { name: "Save staffing" }).click();
     await expect(form.getByRole("status")).toContainText("Saved.", AUTH);
+    // The status still says "Saved." from the previous save, so wait until the API holds these figures.
+    await expect
+      .poll(async () => {
+        const now = (await (await request.get(`${API}/v1/ops/written-backlog`, { headers: auth })).json()) as typeof rows;
+        return now.find((r) => r.grade === 11 && r.subject === "biology")?.staffing?.reviewer_hours_per_week;
+      }, AUTH)
+      .toBe(Number(hours));
   }
   try {
     await save("1", "1", "600", "Fixture: no marking time left");
