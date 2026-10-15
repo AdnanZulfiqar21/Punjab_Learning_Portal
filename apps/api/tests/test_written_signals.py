@@ -2,8 +2,9 @@
 
 Written practice records its own typed events: started, submitted and each released result. A result keeps marks as
 units out of a maximum (partial credit is never turned into right or wrong) and counts pending and unavailable
-questions apart, adding no units for them. None of it feeds `evidence_rules_v2` or the MCQ progress figures, and
-there is no public percentile, rank or leaderboard anywhere. Scripts and marks are technical fixtures.
+questions apart, adding no units for them. None of it feeds `evidence_rules_v2` or the MCQ progress figures. There
+is no percentile for written work and no rank or leaderboard anywhere (the MCQ fixed-session comparison of
+COMPARISON-01 is the one percentile, private to each learner). Scripts and marks are technical fixtures.
 """
 
 from __future__ import annotations
@@ -82,12 +83,16 @@ def test_a_pending_question_adds_no_units(client: TestClient, published_written:
 
 
 def test_no_percentile_rank_or_leaderboard_is_offered() -> None:
+    """No rank or leaderboard anywhere, and no percentile for written work. The one percentile is the MCQ
+    fixed-session comparison (P12.S2.T3, COMPARISON-01): private to the learner and under the §6.6 rules."""
     spec = create_app().openapi()
     words = re.compile(r"percentile|leaderboard|ranking|\brank\b", re.I)
+    ranks = re.compile(r"leaderboard|ranking|\brank\b", re.I)
     assert not [p for p in spec["paths"] if words.search(p)]
     for name, schema in spec["components"]["schemas"].items():
         assert not words.search(name), name
-        assert not [f for f in schema.get("properties", {}) if words.search(f)], name
+        rule = ranks if name.rsplit("__", 1)[-1] == "ComparisonOut" else words
+        assert not [f for f in schema.get("properties", {}) if rule.search(f)], name
     for name in ("written.started", "written.submitted", "written.result_released"):
         assert events.DICTIONARY[name].emitted
         assert not set(events.DICTIONARY[name].props) & {"correct", "accuracy"}
