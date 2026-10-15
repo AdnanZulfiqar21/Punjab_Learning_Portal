@@ -33,6 +33,10 @@ function apiOrigin(): string {
   return "http://127.0.0.1:8100";
 }
 
+// Created by `eas init` as @desirly/punjab-learning-portal. Dynamic config cannot be edited by that command, so the id
+// is set here and any id already present on extra.eas is kept.
+const EAS_PROJECT_ID = "0e89f0cd-7ca1-429a-8265-1a29a2dc999a";
+
 export default ({ config }: ConfigContext): ExpoConfig => ({
   ...config,
   name: NAMES[variant],
@@ -85,10 +89,9 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     ],
   ],
   experiments: { typedRoutes: true, reactCompiler: true },
-  // eas init stores the project id under extra.eas. Keep that object; this config also adds the variant and origin.
   extra: {
     ...config.extra,
-    eas: config.extra?.eas,
+    eas: { ...config.extra?.eas, projectId: config.extra?.eas?.projectId ?? EAS_PROJECT_ID },
     variant,
     apiOrigin: apiOrigin(),
   },

@@ -14,7 +14,7 @@ npx eas-cli@latest init
 npx eas-cli@latest device:create
 ```
 
-`eas init` writes the Expo project id into `extra.eas`. `app.config.ts` keeps that object and adds `variant` and `apiOrigin`. Reuse the existing project if `init` finds one. Register this iPhone with `device:create` before the build so the provisioning profile includes it.
+The linked Expo project is `@desirly/punjab-learning-portal` (`0e89f0cd-7ca1-429a-8265-1a29a2dc999a`). `app.config.ts` keeps `extra.eas.projectId` and adds `variant` and `apiOrigin`. Do not create a second project. Register this iPhone with `device:create` before the build so the provisioning profile includes it. No Apple team is linked to the Expo account yet, so this command is what starts that link.
 
 The preview profile sets `"environment": "preview"` and keeps `APP_VARIANT=preview`. A PowerShell variable is not sent to the cloud builder. Store the origin in the preview EAS environment after login:
 
