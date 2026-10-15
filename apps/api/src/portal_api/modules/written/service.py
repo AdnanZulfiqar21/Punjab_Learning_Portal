@@ -586,10 +586,27 @@ def upload_page(
             )
         )
         db.flush()
+        # NEAR-DUP-01 (W03.S2.T3): pages already in this script that have content, to flag the same page uploaded twice.
+        seen: list[tuple[uuid.UUID, str]] = [
+            (pid, fp)
+            for pid, fp in db.execute(
+                select(WrittenPage.id, WrittenPage.fingerprint).where(
+                    WrittenPage.attempt_id == attempt.id,
+                    WrittenPage.status == "uploaded",
+                    WrittenPage.fingerprint.is_not(None),
+                )
+            )
+            if fp is not None
+        ]
         pages = []
         for i, (lp, pv) in enumerate(previews, start=1):
+            page_id = file_id if i == 1 else uuid.uuid4()
+            like = next((pid for pid, fp in seen if evidence.near_duplicate(lp.fingerprint, fp)), None)
+            near = [{"code": "near_duplicate", "level": "possible", "like_page_id": str(like)}] if like else []
+            if lp.fingerprint is not None:
+                seen.append((page_id, lp.fingerprint))
             page = WrittenPage(
-                id=file_id if i == 1 else uuid.uuid4(),
+                id=page_id,
                 attempt_id=attempt.id,
                 file_id=file_id,
                 page_index=i,
@@ -598,7 +615,8 @@ def upload_page(
                 preview_key=pv.key,
                 preview_sha256=pv.sha256,
                 uploaded_at=now,
-                quality=lp.quality,
+                quality=[*lp.quality, *near],
+                fingerprint=lp.fingerprint,
             )
             db.add(page)
             pages.append(page)
@@ -678,7 +696,9 @@ def transform_page(
             raise NotFound("Page not found.")
         page.preview_key, page.preview_sha256 = pv.key, pv.sha256
         page.width, page.height = rendered.width, rendered.height
-        page.quality, page.transform = rendered.quality, rendered.transform or transform  # as applied
+        # The checks run again on the new view; a near-duplicate flag is about the upload itself, so it stays.
+        kept = [f for f in page.quality or [] if f.get("code") == "near_duplicate"]
+        page.quality, page.transform = [*rendered.quality, *kept], rendered.transform or transform  # as applied
         db.commit()
     except BaseException:
         db.rollback()

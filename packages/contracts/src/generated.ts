@@ -8676,12 +8676,17 @@ export interface components {
              * Code
              * @enum {string}
              */
-            code: "blur" | "glare" | "cut_off" | "small_text";
+            code: "blur" | "glare" | "cut_off" | "small_text" | "near_duplicate";
             /**
              * Level
              * @enum {string}
              */
             level: "likely" | "possible";
+            /**
+             * Like Page Id
+             * @description For near_duplicate (NEAR-DUP-01): the earlier page this one looks almost the same as
+             */
+            like_page_id?: string | null;
             /** Message */
             message: string;
             /**

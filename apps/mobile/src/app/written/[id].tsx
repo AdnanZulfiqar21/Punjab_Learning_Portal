@@ -306,6 +306,7 @@ function Runner({ initial, token, owner, reload }: { initial: WrittenAttempt; to
           {a.pages.flatMap((p, i) => (p.quality ?? []).map((q) => (
             <T key={`${p.id}-${q.code}`} variant="small" style={{ color: c.warn }}>
               Page {i + 1}: {q.message}
+              {q.like_page_id && a.pages.some((x) => x.id === q.like_page_id) ? ` (It looks like page ${a.pages.findIndex((x) => x.id === q.like_page_id) + 1}.)` : ""}
             </T>
           )))}
           {a.pages.some((p) => (p.quality ?? []).length > 0) && (

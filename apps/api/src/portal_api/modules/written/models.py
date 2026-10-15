@@ -159,6 +159,9 @@ class WrittenPage(Base):
     # TRANSFORMS-01: the learner's turn, trim and readability choices; the preview is rendered from the untouched
     # original with them, and they are fixed once the script is submitted.
     transform: Mapped[dict[str, Any]] = mapped_column(JSONB, default=dict, server_default=text("'{}'::jsonb"))
+    # NEAR-DUP-01: a coarse thumbnail of the uploaded page (hex), for flagging the same page uploaded twice; null for a
+    # blank page or one uploaded before fingerprints existed.
+    fingerprint: Mapped[str | None] = mapped_column(Text)
 
 
 class WrittenReceipt(Base):

@@ -475,7 +475,11 @@ export function WrittenRunner({
               {(p.quality ?? []).length > 0 && (
                 <ul className="space-y-1 text-warn" aria-label={`Photo checks for page ${i + 1}`}>
                   {(p.quality ?? []).map((q) => (
-                    <li key={q.code}>{q.message}</li>
+                    <li key={q.code}>
+                      {q.message}
+                      {/* NEAR-DUP-01: which page it looks like, by its number in this list. */}
+                      {q.like_page_id && pages.some((x) => x.id === q.like_page_id) && ` (It looks like page ${pages.findIndex((x) => x.id === q.like_page_id) + 1}.)`}
+                    </li>
                   ))}
                 </ul>
               )}
