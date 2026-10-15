@@ -8410,6 +8410,12 @@ export interface components {
              * Format: date-time
              */
             due_at: string;
+            /**
+             * Flagged
+             * @description You flagged this question as unsure in a submitted test (NOTEBOOK-FLAGS-01)
+             * @default false
+             */
+            flagged: boolean;
             /** Grade */
             grade: number;
             /**
