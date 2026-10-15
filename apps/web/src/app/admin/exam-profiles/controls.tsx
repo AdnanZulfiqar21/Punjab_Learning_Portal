@@ -69,7 +69,7 @@ export function DraftEditor({ profileId, versionId, initialYear, initialRules }:
         <input type="number" min={2020} max={2100} value={year} onChange={(e) => setYear(Number(e.target.value))} className={`${field} w-32`} />
       </label>
       <label className="block text-sm">
-        <span className="font-medium">Rules (JSON: source, duration, marking, correction policy, sections)</span>
+        <span className="font-medium">Rules (JSON: source, duration, marking, correction policy, sections; a section may add difficulty_mix, e.g. {"{"}&quot;easy&quot;: 30, &quot;medium&quot;: 50, &quot;hard&quot;: 20{"}"}, adding up to 100)</span>
         <textarea value={rules} onChange={(e) => setRules(e.target.value)} rows={14} spellCheck={false} className={`${field} font-mono`} />
       </label>
       <button type="button" className={btn} disabled={pending} onClick={() => run(() => saveDraft(profileId, versionId, year, rules))}>

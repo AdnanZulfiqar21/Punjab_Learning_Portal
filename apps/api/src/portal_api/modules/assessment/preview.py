@@ -105,10 +105,13 @@ def _sample(db: Session, version_id: uuid.UUID, seed: int) -> tuple[Any, list[di
     if shortages:
         return version, shortages, []
     try:
-        chosen = mocks.select_sections(pools, set(), seed)
+        chosen = mocks.select_sections(pools, set(), seed, [s.get("difficulty_mix") for s in sections])
     except mocks.SectionShortage as e:
         s = sections[e.section - 1]
-        return version, [{"subject": s["subject"], "grades": s["grades"], "required": int(s["questions"])}], []
+        row: dict[str, Any] = {"subject": s["subject"], "grades": s["grades"], "required": int(s["questions"])}
+        if e.band:
+            row |= {"difficulty": e.band, "required": e.needed, "available": e.available}
+        return version, [row], []
     picks = []
     for s, (section_picks, _) in zip(sections, chosen, strict=True):
         picks += [(s, p) for p in section_picks]
