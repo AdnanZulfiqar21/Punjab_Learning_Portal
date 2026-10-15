@@ -23,6 +23,7 @@ import type {
   Book,
   Catalogue,
   Chapter,
+  Discovery,
   Lesson,
   Me,
   StudySettings,
@@ -56,6 +57,7 @@ import type {
   WrittenSeal,
 } from "@portal/contracts";
 
+import { discoveryPath, type DiscoveryFilters } from "@/lib/discovery";
 import { installToken } from "@/lib/install-token";
 
 function deviceName(): string {
@@ -177,6 +179,8 @@ function getJSON<T>(path: string, signal?: AbortSignal): Promise<T> {
 
 export const api = {
   catalogue: (signal?: AbortSignal) => getJSON<Catalogue>("/v1/catalogue", signal),
+  /** P13.S2.T1: published lessons, previews and practice per book. Class XI and XII stay separate. */
+  discovery: (filters: DiscoveryFilters, signal?: AbortSignal) => getJSON<Discovery>(discoveryPath(filters), signal),
   bookFor: (grade: number, subject: string, signal?: AbortSignal) =>
     getJSON<Book>(`/v1/grades/${grade}/subjects/${encodeURIComponent(subject)}/book`, signal),
   chapter: (id: string, signal?: AbortSignal) => getJSON<Chapter>(`/v1/chapters/${encodeURIComponent(id)}`, signal),
