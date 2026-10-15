@@ -151,9 +151,14 @@ def check_sources(db: Session, chapter: Chapter, refs: object) -> tuple[list[str
 def _validate(db: Session, item: ContentItem, version: ContentVersion, *, for_publication: bool) -> dict[str, Any]:
     chapter = db.get(Chapter, item.chapter_id)
     assert chapter is not None
-    result = kinds.get(item.kind).validate(version.body, for_publication)
+    from portal_api.modules.system import clients
+
+    # CLIENT-FLOOR-01: blocks are checked against the oldest supported build's registered manifest.
+    with blocks.client_floor(clients.renderer_floor(db)):
+        result = kinds.get(item.kind).validate(version.body, for_publication)
+        link_errors = links.check(db, item, version, for_publication=for_publication)
     s_err, s_warn, _ = check_sources(db, chapter, version.source_refs)
-    errors = result.errors + s_err + links.check(db, item, version, for_publication=for_publication)
+    errors = result.errors + s_err + link_errors
     warnings = result.warnings + s_warn
     # P07.S1.T1: diagrams, handouts and fallback images must name ready archived assets of this class and subject.
     from portal_api.modules.content import assets

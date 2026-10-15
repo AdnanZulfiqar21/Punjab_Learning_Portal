@@ -110,6 +110,42 @@ def effective_at(db: Session, p: ClientVersionPolicy) -> datetime:
     return window[1] if window else p.enforce_at
 
 
+def floor_version(db: Session, platform: str) -> str | None:
+    """The minimum version in effect now (None: every version is supported). A raised minimum still in its notice
+    period isn't in effect yet, so the older builds it will drop are still supported."""
+    now = _now(db)
+    rows = db.scalars(
+        select(ClientVersionPolicy)
+        .where(ClientVersionPolicy.platform == platform)
+        .order_by(ClientVersionPolicy.created_at.desc(), ClientVersionPolicy.id.desc())
+    )
+    for p in rows:
+        if effective_at(db, p) <= now:
+            return p.min_version
+    return None
+
+
+def renderer_floor(db: Session) -> dict[str, int]:
+    """CLIENT-FLOOR-01 (P13.S1.T4, §5.4 rule 4): per platform, the renderer version of the oldest build still supported,
+    read from the registered build manifests. A supported build without a manifest is assumed to have the code's
+    lower bound (`SUPPORTED_RENDERER`), so this is never less careful than before: unless the minimum version itself
+    has a manifest, the lower bound stays in. Builds are assumed to raise the renderer version, never lower it, so the
+    oldest registered supported build decides. The web app is always current."""
+    from portal_api.modules.content.blocks import SUPPORTED_RENDERER
+
+    out = dict(SUPPORTED_RENDERER)
+    for platform in PLATFORMS:
+        floor = floor_version(db, platform)
+        manifests = list(db.scalars(select(ClientManifest).where(ClientManifest.platform == platform)))
+        supported = [m for m in manifests if floor is None or parse(m.app_version) >= parse(floor)]
+        covered = floor is not None and any(parse(m.app_version) == parse(floor) for m in manifests)
+        values = [m.renderer_version for m in supported]
+        if not covered:
+            values.append(SUPPORTED_RENDERER[platform])
+        out[platform] = min(values)
+    return out
+
+
 def status_for(db: Session, platform: str, version: str) -> dict[str, Any]:
     p = policy(db, platform)
     if p is None or parse(version) >= parse(p.min_version):
