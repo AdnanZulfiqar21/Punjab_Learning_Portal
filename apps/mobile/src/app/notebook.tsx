@@ -20,7 +20,7 @@ export default function NotebookScreen() {
   return (
     <ScrollView style={{ backgroundColor: c.background }} contentContainerStyle={{ padding: Space.lg, gap: Space.md }}>
       <Stack.Screen options={{ title: "Mistake notebook" }} />
-      <T variant="muted">Questions you answered wrongly come back after 1, 3, 7 and 14 days. Miss one again and it starts over.</T>
+      <T variant="muted">Questions you answered wrongly or flagged as unsure come back after 1, 3, 7 and 14 days. Miss one again and it starts over.</T>
       {state.status === "signed_in" ? <Entries token={state.token} /> : <Notice title="Sign in to see your notebook">Open the Account tab to sign in.</Notice>}
     </ScrollView>
   );
@@ -38,7 +38,7 @@ function Entries({ token }: { token: string }) {
     return <ErrorState error={req.state.error} onRetry={req.retry} />;
   }
   const entries = req.state.data;
-  if (entries.length === 0) return <Notice title="Nothing here yet">Questions you get wrong in a practice test appear here.</Notice>;
+  if (entries.length === 0) return <Notice title="Nothing here yet">Questions you get wrong or flag as unsure in a practice test appear here.</Notice>;
   const due = new Map<string, number>();
   for (const e of entries) if (e.due) due.set(`${e.grade}:${e.subject}`, (due.get(`${e.grade}:${e.subject}`) ?? 0) + 1);
 
@@ -79,7 +79,9 @@ function Entries({ token }: { token: string }) {
           <View style={{ flexDirection: "row", gap: Space.sm, flexWrap: "wrap" }}>
             <Badge tone={e.due ? "warn" : "info"}>{e.status === "open" ? (e.due ? "Due now" : "Waiting") : e.status}</Badge>
             <T variant="small">
-              {GRADE_LABEL[e.grade]} {e.subject.replace("_", " ")} · missed {e.misses}
+              {GRADE_LABEL[e.grade]} {e.subject.replace("_", " ")}
+              {e.misses > 0 ? ` · missed ${e.misses}` : ""}
+              {e.flagged ? " · you flagged it as unsure" : ""}
             </T>
           </View>
           <T variant="small">{e.why}</T>

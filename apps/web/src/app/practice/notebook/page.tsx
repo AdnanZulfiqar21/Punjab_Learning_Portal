@@ -19,7 +19,7 @@ export default function NotebookPage() {
       <div>
         <h1 className="text-2xl font-semibold tracking-tight">Mistake notebook</h1>
         <p className="text-muted">
-          Questions you answered wrongly come back for review after 1, 3, 7 and 14 days. Get one right at every step and it&apos;s marked as mastered; miss it again and it starts over.
+          Questions you answered wrongly, and questions you flagged as unsure, come back for review after 1, 3, 7 and 14 days. Get one right at every step without flagging it and it&apos;s marked as mastered; miss it again and it starts over.
         </p>
       </div>
       <Suspense fallback={<SkeletonLines lines={6} label="Loading your notebook" />}>
@@ -41,7 +41,7 @@ async function Entries() {
   if (res.data.length === 0) {
     return (
       <Notice title="Nothing here yet">
-        Questions you get wrong in a practice test appear here.{" "}
+        Questions you get wrong or flag as unsure in a practice test appear here.{" "}
         <Link href="/practice" className="underline">
           Build a practice test
         </Link>
@@ -81,7 +81,10 @@ async function Entries() {
                 {e.status === "open" ? (e.due ? "Due now" : "Waiting") : e.status}
               </Badge>
               <span className="text-muted">
-                {GRADE_LABEL[e.grade]} {e.subject.replace("_", " ")} · missed {e.misses} time{e.misses === 1 ? "" : "s"}
+                {GRADE_LABEL[e.grade]} {e.subject.replace("_", " ")}
+                {e.misses > 0 ? ` · missed ${e.misses} time${e.misses === 1 ? "" : "s"}` : ""}
+                {/* NOTEBOOK-FLAGS-01: collected because the learner flagged it as unsure, even if the answer was right. */}
+                {e.flagged ? " · you flagged it as unsure" : ""}
               </span>
               <Link href={`/practice/attempt/${e.source_attempt_id}/result`} className="text-accent underline underline-offset-2">
                 See the original question {e.position}
