@@ -14,6 +14,7 @@ import { useRequest } from "@/hooks/use-request";
 import { useTheme } from "@/hooks/use-theme";
 import { api, ApiError, attemptAsset } from "@/lib/api";
 import { useAuth } from "@/lib/auth";
+import { answerState, PALETTE_LABEL, stateLine, type AnswerState, type ItemStatus } from "@/lib/answer-state";
 import { readQueue, writeQueue, type QueuedOp } from "@/lib/op-store";
 
 // P10.S1.T3: a 409 that means "open on another device" must never be read as "already submitted".
@@ -22,7 +23,7 @@ const elsewhereError = (e: unknown) =>
 
 const DEBOUNCE_MS = 400;
 const PRE_FLUSH_MS = 5000;
-type ItemState = { option: string | null; status: "saved" | "pending" | "rejected" | "empty"; reason?: string; revision: number };
+type ItemState = { option: string | null; status: ItemStatus; reason?: string; revision: number; restored?: boolean };
 const REASON: Record<string, string> = {
   stale: "A newer answer from another device is already saved.",
   invalid: "This answer couldn't be accepted.",
@@ -95,6 +96,9 @@ function Runner({ attempt, token, onFinalised }: { attempt: PracticeAttempt; tok
   const [flagged, setFlagged] = useState<Set<number>>(() => new Set(attempt.flagged ?? []));
   const [flagError, setFlagError] = useState<string | null>(null);
   const [connection, setConnection] = useState<"ok" | "retrying">("ok");
+  // ANSWER-STATES-01: questions whose change a request is carrying now, and those whose last send failed.
+  const [sending, setSending] = useState<ReadonlySet<number>>(() => new Set());
+  const [failed, setFailed] = useState<ReadonlySet<number>>(() => new Set());
   const [elsewhere, setElsewhere] = useState(attempt.held_elsewhere === true);
   const [moving, setMoving] = useState(false);
   const [confirming, setConfirming] = useState(false);
@@ -138,17 +142,21 @@ function Runner({ attempt, token, onFinalised }: { attempt: PracticeAttempt; tok
     if (inflight.current) return inflight.current;
     if (queue.current.length === 0) return;
     const batch = queue.current.slice(0, 50);
+    const positions = new Set(batch.map((o) => o.position));
+    setSending(positions);
     inflight.current = (async () => {
       try {
         const out = await api.saveAnswers(token, attempt.id, batch);
         retryDelay.current = 2000;
         setConnection("ok");
+        setFailed((f) => new Set([...f].filter((p) => !positions.has(p))));
         apply(out.results);
         await persist();
         if (out.status !== "active") onFinalised();
       } catch (e) {
         if (elsewhereError(e)) {
           setElsewhere(true); // keep the queue on this device; no automatic retry between devices
+          setFailed((f) => new Set([...f, ...positions]));
           return;
         }
         if (e instanceof ApiError && e.kind === "conflict") {
@@ -158,6 +166,7 @@ function Runner({ attempt, token, onFinalised }: { attempt: PracticeAttempt; tok
           onFinalised();
           return;
         }
+        setFailed((f) => new Set([...f, ...positions]));
         setConnection("retrying");
         const delay = retryDelay.current;
         retryDelay.current = Math.min(15_000, delay * 2);
@@ -169,6 +178,7 @@ function Runner({ attempt, token, onFinalised }: { attempt: PracticeAttempt; tok
       await inflight.current;
     } finally {
       inflight.current = null;
+      setSending(new Set());
     }
     if (queue.current.length > 0 && retryDelay.current === 2000) void flushRef.current();
   }, [apply, attempt.id, onFinalised, persist, token]);
@@ -189,7 +199,8 @@ function Runner({ attempt, token, onFinalised }: { attempt: PracticeAttempt; tok
         const next = { ...prev };
         for (const o of stored.ops) {
           const cur = next[o.position];
-          if (!cur || o.revision >= cur.revision) next[o.position] = { option: o.option_id, status: "pending", revision: o.revision };
+          // From an earlier session and never acknowledged: "pending" until the server's receipt (ANSWER-STATES-01).
+          if (!cur || o.revision >= cur.revision) next[o.position] = { option: o.option_id, status: "pending", revision: o.revision, restored: true };
         }
         return next;
       });
@@ -266,9 +277,15 @@ function Runner({ attempt, token, onFinalised }: { attempt: PracticeAttempt; tok
       setSubmitting(false);
       if (elsewhereError(e)) setElsewhere(true);
       setSubmitError(e instanceof ApiError ? e.message : "Couldn't submit. Nothing was lost; try again.");
+      // Submitting stopped the retry timer: start it again, so unsent answers keep going out (ANSWER-STATES-01).
+      if (!elsewhereError(e) && queue.current.length > 0) timer.current = setTimeout(() => void flushRef.current(), retryDelay.current);
     }
   }
 
+  const shown = (position: number): AnswerState => {
+    const st = items[position];
+    return answerState(st.status, { sending: sending.has(position), held: !!st.restored || failed.has(position) || connection === "retrying" || elsewhere });
+  };
   const answered = Object.values(items).filter((i) => i.option !== null).length;
   const pending = Object.values(items).filter((i) => i.status === "pending").length;
   const item = attempt.items.find((i) => i.position === current)!;
@@ -334,13 +351,13 @@ function Runner({ attempt, token, onFinalised }: { attempt: PracticeAttempt; tok
 
       <View style={{ flexDirection: "row", flexWrap: "wrap", gap: Space.xs }} accessibilityLabel="Questions">
         {attempt.items.map((it) => {
-          const st = items[it.position];
-          const bg = st.status === "saved" ? c.accentSoft : st.status === "pending" ? c.warnSoft : st.status === "rejected" ? c.dangerSoft : c.surface;
+          const s = shown(it.position);
+          const bg = s === "saved" || s === "selected" ? c.accentSoft : s === "saving" || s === "pending" ? c.warnSoft : s === "rejected" ? c.dangerSoft : c.surface;
           return (
             <Pressable
               key={it.position}
               accessibilityRole="button"
-              accessibilityLabel={`Question ${it.position}: ${st.status === "empty" ? "not answered" : st.status}${flagged.has(it.position) ? ", flagged" : ""}`}
+              accessibilityLabel={`Question ${it.position}: ${PALETTE_LABEL[s]}${flagged.has(it.position) ? ", flagged" : ""}`}
               onPress={() => setCurrent(it.position)}
               style={{ width: 40, height: 40, borderRadius: Radius.sm, borderWidth: it.position === current ? 2 : 1, borderColor: it.position === current ? c.accent : c.border, backgroundColor: bg, alignItems: "center", justifyContent: "center" }}>
               <T variant="small">
@@ -398,8 +415,8 @@ function Runner({ attempt, token, onFinalised }: { attempt: PracticeAttempt; tok
           {attempt.feedback_mode === "immediate" && state.status === "saved" && state.option !== null && !revealed[current] && !locked.has(current) && (
             <Button variant="secondary" label="Check answer" onPress={() => void check(current)} />
           )}
-          <T variant="small" style={{ color: state.status === "rejected" ? c.danger : c.muted }}>
-            {state.status === "saved" ? "Saved" : state.status === "pending" ? "Saving…" : state.status === "rejected" ? `Not saved: ${state.reason}` : ""}
+          <T variant="small" style={{ color: shown(current) === "rejected" ? c.danger : shown(current) === "pending" ? c.warn : c.muted }}>
+            {stateLine(shown(current), { elsewhere, reason: state.reason })}
           </T>
         </View>
         {revealed[current] && (
