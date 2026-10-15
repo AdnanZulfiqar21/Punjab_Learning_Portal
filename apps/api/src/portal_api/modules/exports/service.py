@@ -128,7 +128,7 @@ def _audit_params(p: dict[str, Any]) -> dict[str, Any]:
 
 def _audit_events(db: Session, who: Principal, p: dict[str, Any]) -> tuple[bytes, int | None, dict[str, Any]]:
     from portal_api.modules.audit.models import AuditEvent
-    from portal_api.modules.audit.router import redact
+    from portal_api.modules.audit.redaction import redact
     from portal_api.modules.identity.models import AppUser
 
     q = select(AuditEvent, AppUser.email).outerjoin(AppUser, AppUser.id == AuditEvent.actor_user_id)
