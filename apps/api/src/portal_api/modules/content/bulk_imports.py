@@ -56,6 +56,7 @@ from portal_api.modules.content import imports
 from portal_api.modules.content.models import ContentImportBatch, ContentImportRow
 from portal_api.modules.identity.deps import Principal
 from portal_api.modules.identity.models import AppUser
+from portal_api.observability import bind_correlation
 
 BULK = imports.Limits(max_bytes=50 * 1024 * 1024, max_rows=20_000, max_part=100 * 1024 * 1024)
 SYNC_COMMIT_ROWS = 2000  # larger previews commit in the worker, never inside a request
@@ -172,6 +173,7 @@ class Claim:
     status: str  # "validating" or "committing"
     token: str  # this claim's lease_owner; every write checks it
     attempts: int
+    correlation_id: str | None = None  # CORRELATION-01: the upload request's
 
 
 def _claim(db: Session, owner: str) -> Claim | None:
@@ -195,7 +197,7 @@ def _claim(db: Session, owner: str) -> Claim | None:
     token = f"{owner[:80]}#{uuid.uuid4().hex[:16]}"
     batch.lease_owner, batch.lease_expires_at = token, now + LEASE
     batch.attempts = (batch.attempts or 0) + 1
-    claim = Claim(batch.id, batch.status, token, batch.attempts)
+    claim = Claim(batch.id, batch.status, token, batch.attempts, batch.correlation_id)
     db.commit()
     return claim
 
@@ -366,27 +368,32 @@ def run_one(db: Session, owner: str) -> dict[str, Any] | None:
     claim = _claim(db, owner)
     if claim is None:
         return None
-    try:
-        if claim.attempts > MAX_ATTEMPTS:  # it kept failing, or kept killing its worker, before finishing
-            outcome = _retry_later(db, claim, RuntimeError("no attempts left"))
-        elif claim.status == "validating":
-            outcome = _check_rows(db, claim)
-        else:
-            outcome = _commit_rows(db, claim)
-    except Stop:
-        outcome = "stopped"
-    except Refused as r:
-        db.rollback()
-        outcome = _fail(db, claim, r.reason)
-    except Exception as e:  # one batch's trouble must not stop the queue: it is retried, then failed
-        db.rollback()
-        print(f"import batch {claim.batch_id}: {type(e).__name__}: {e}", file=sys.stderr, flush=True)
+    with bind_correlation(claim.correlation_id):  # CORRELATION-01: audit entries and logs trace to the upload
         try:
-            outcome = _retry_later(db, claim, e)
-        except Exception:  # the database itself is down: the lease runs out and the batch is claimed again
+            if claim.attempts > MAX_ATTEMPTS:  # it kept failing, or kept killing its worker, before finishing
+                outcome = _retry_later(db, claim, RuntimeError("no attempts left"))
+            elif claim.status == "validating":
+                outcome = _check_rows(db, claim)
+            else:
+                outcome = _commit_rows(db, claim)
+        except Stop:
+            outcome = "stopped"
+        except Refused as r:
             db.rollback()
-            outcome = "retry"
-    return {"batch": str(claim.batch_id), "outcome": outcome}
+            outcome = _fail(db, claim, r.reason)
+        except Exception as e:  # one batch's trouble must not stop the queue: it is retried, then failed
+            db.rollback()
+            print(
+                f"import batch {claim.batch_id} (correlation {claim.correlation_id}): {type(e).__name__}: {e}",
+                file=sys.stderr,
+                flush=True,
+            )
+            try:
+                outcome = _retry_later(db, claim, e)
+            except Exception:  # the database itself is down: the lease runs out and the batch is claimed again
+                db.rollback()
+                outcome = "retry"
+        return {"batch": str(claim.batch_id), "outcome": outcome}
 
 
 def work(db: Session, owner: str | None = None, max_jobs: int | None = None) -> int:
