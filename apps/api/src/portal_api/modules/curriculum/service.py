@@ -83,18 +83,24 @@ def get_catalogue(session: Session) -> CatalogueOut:
     for g in grades:
         items = []
         for s in subjects:
-            books = [
-                BookSummary(
-                    id=b.id,
-                    title=b.title,
-                    source_id=b.source.source_id,
-                    chapter_label=b.chapter_label,
-                    chapter_count=counts.get(b.id, 0),
-                    completeness=b.source.completeness,
-                )
-                for b in by_key.get((g.id, s.id), [])
-            ]
-            items.append(SubjectInGrade(subject=SubjectOut.model_validate(s), books=books))
+            matching = by_key.get((g.id, s.id), [])
+            conflict = len(matching) > 1
+            books = (
+                []
+                if conflict
+                else [
+                    BookSummary(
+                        id=b.id,
+                        title=b.title,
+                        source_id=b.source.source_id,
+                        chapter_label=b.chapter_label,
+                        chapter_count=counts.get(b.id, 0),
+                        completeness=b.source.completeness,
+                    )
+                    for b in matching
+                ]
+            )
+            items.append(SubjectInGrade(subject=SubjectOut.model_validate(s), books=books, edition_conflict=conflict))
         out.append(GradeCatalogue(grade=GradeOut.model_validate(g), subjects=items))
     return CatalogueOut(region="pk-punjab", scope_decision="SCOPE-01", grades=out)
 

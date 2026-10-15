@@ -60,6 +60,14 @@ async function Welcome() {
           </Link>
         </div>
       </section>
+      {(d?.ambiguous_editions.length ?? 0) > 0 && (
+        <Notice tone="warn" title="More than one edition is effective today">
+          {d?.ambiguous_editions
+            .map((a) => `${a.grade === 11 ? "Class XI" : a.grade === 12 ? "Class XII" : `Class ${a.grade}`} ${a.subject_name}`)
+            .join("; ")}
+          . None of those books is shown, because the portal does not choose an edition for you.
+        </Notice>
+      )}
 
       <section aria-labelledby="tracks-heading" className="space-y-3">
         <h2 id="tracks-heading" className="text-lg font-semibold">
