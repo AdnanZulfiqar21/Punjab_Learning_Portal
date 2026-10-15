@@ -45,7 +45,9 @@ test("staff: studio, import, overview, sources, assets, lectures and support hav
   for (const [email, paths] of [
     ["studio-author@example.com", ["/studio", "/studio/new", "/studio/imports", "/studio/overview", "/studio/sources", "/studio/assets", "/studio/lectures"]],
     ["studio-support@example.com", ["/studio/support", "/studio/support/learners"]],
-    ["studio-adjudicator@example.com", ["/studio/academic-reviews", "/studio/adjudications", "/studio/reviewer-quality"]], // ACADEMIC-REVIEW-01, REVIEWER-QUALITY-01
+    // ACADEMIC-REVIEW-01, REVIEWER-QUALITY-01, and W06.S1.T3 (CALIBRATION-01): the calibration screen as adjudicators see it.
+    ["studio-adjudicator@example.com", ["/studio/academic-reviews", "/studio/adjudications", "/studio/reviewer-quality", "/studio/calibration"]],
+    ["studio-reviewer@example.com", ["/studio/marking"]], // the teacher's marking queue
   ] as const) {
     await page.context().clearCookies();
     await page.goto("/signin?next=/account");

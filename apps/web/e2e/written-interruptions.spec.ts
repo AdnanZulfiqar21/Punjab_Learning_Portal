@@ -112,3 +112,48 @@ test("offline, the written test says what it means, then saves the page map and 
   await page.getByRole("button", { name: "Submit for marking" }).click();
   await expect(page.getByText("Submitted for marking")).toBeVisible(AUTH);
 });
+
+// W08.S1.T3 (PERMITS-01): when finance withdraws the plan a written test was started under, the open test ends and the
+// learner is told why; pages they uploaded are kept but not marked.
+test("a withdrawn plan ends the open written test, and the learner is told why", async ({ page, browser, request }) => {
+  test.slow();
+  const API = process.env.PORTAL_API_INTERNAL_ORIGIN ?? "http://127.0.0.1:8100";
+  const email = `e2e-withdrawn-${Date.now()}-${Math.random().toString(36).slice(2, 7)}@example.com`;
+  await page.goto("/signin?next=/practice?grade=11%26subject=biology");
+  await page.getByRole("button", { name: "New here? Create an account" }).click();
+  await page.getByLabel("Email").fill(email);
+  await page.getByLabel("Password").fill("practice-fixture-pass-1");
+  await page.getByRole("button", { name: "Create account" }).click();
+  await expect(page).toHaveURL(/:\d+\/practice\?/, AUTH);
+
+  const finance = await (await browser.newContext()).newPage();
+  await finance.goto("/signin?next=/account");
+  await finance.getByLabel("Email").fill("studio-finance@example.com");
+  await finance.getByLabel("Password").fill("studio-fixture-pass-1");
+  await finance.getByLabel(/multi-factor/i).check();
+  await finance.getByRole("button", { name: "Sign in", exact: true }).click();
+  await expect(finance).toHaveURL(/:\d+\/account/, AUTH);
+  const auth = { Authorization: `Bearer ${(await finance.context().cookies()).find((c) => c.name === "portal_session")!.value}` };
+  const grant = await request.post(`${API}/v1/admin/entitlements`, {
+    headers: auth,
+    data: { email, source: "pilot", days: 7, written_units: 2, reason: "Fixture: e2e plan withdrawal" },
+  });
+  expect(grant.status()).toBe(201);
+
+  await page.goto("/practice/written?grade=11&subject=biology");
+  await page.getByRole("group", { name: "Chapters" }).getByRole("checkbox").first().check();
+  await page.getByRole("button", { name: "Start written test" }).click();
+  await expect(page).toHaveURL(/:\d+\/practice\/written\/[0-9a-f-]{36}$/, AUTH);
+  await page.getByLabel("Add photos or a PDF").setInputFiles("e2e/fixtures/synthetic-page.png");
+  await expect(page.getByRole("list", { name: "Uploaded pages" }).getByText(/Page 1 ·/)).toBeVisible(AUTH);
+
+  const revoked = await request.post(`${API}/v1/admin/entitlements/${(await grant.json()).id}/revoke`, {
+    headers: auth,
+    data: { reason: "Fixture: e2e plan withdrawn (refund)" },
+  });
+  expect(revoked.status()).toBe(200);
+  await page.reload();
+  await expect(page.getByText("This test ended because your plan was withdrawn")).toBeVisible(AUTH);
+  await expect(page.getByText(/1 page\(s\) you uploaded are kept but weren't submitted/)).toBeVisible();
+  await expect(page.getByRole("button", { name: "Submit for marking" })).toHaveCount(0);
+});
