@@ -1109,6 +1109,55 @@ def _backlog_row(db: Session, grade: int, subject: str) -> BacklogRow:
     )
 
 
+class LifecycleOutcomes(BaseModel):
+    started: int = Field(description="Written tests started in the window")
+    accepted: int = Field(description="Submitted: a receipt was issued")
+    not_submitted: int = Field(description="Ended without a submission (the upload time ran out, or the plan ended)")
+    not_submitted_plan_withdrawn: int
+    still_writing: int
+    pending: int = Field(description="Submitted, with no released result yet")
+    delayed: int = Field(description="Submitted, with an open marking case past its due time")
+    released_by_teacher: int
+    released_automatically: int = Field(description="Always 0 in R0: automatic assessment publishes nothing (B10)")
+
+
+class LifecycleStage(BaseModel):
+    stage: Literal["upload_while_writing", "upload_after_writing", "seal", "queue", "review", "publication"]
+    description: str
+    count: int = Field(description="How many pages (upload stages) or scripts the times are measured over")
+    median_minutes: float | None
+    p90_minutes: float | None
+
+
+class LifecycleOut(BaseModel):
+    since: datetime
+    days: int
+    grade: int | None
+    subject: str | None
+    outcomes: LifecycleOutcomes
+    stages: list[LifecycleStage]
+    not_running: list[str] = Field(description="Stages with nothing to measure yet, and why")
+
+
+@router.get(
+    "/ops/written-lifecycle",
+    response_model=LifecycleOut,
+    summary="Written script lifecycle timings with their counts (W09.S1.T1; operators)",
+)
+def written_lifecycle(
+    db: DB,
+    who: Operator,
+    response: Response,
+    days: int = Query(default=30, ge=1, le=365),
+    grade: int | None = Query(default=None, ge=11, le=12),
+    subject: str | None = Query(default=None, min_length=2, max_length=40),
+) -> LifecycleOut:
+    _private(response)
+    from portal_api.modules.written import lifecycle
+
+    return LifecycleOut(**lifecycle.report(db, days=days, grade=grade, subject=subject))
+
+
 @router.get(
     "/ops/written-backlog", response_model=list[BacklogRow], summary="Review capacity, backlog and overdue work"
 )

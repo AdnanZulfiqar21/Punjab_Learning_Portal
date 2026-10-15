@@ -30,6 +30,7 @@ from portal_api.modules.content.schemas import (
     LessonOut,
     QuarantineIn,
     QuestionPoolIn,
+    ReviewerOption,
     ReviewIn,
     ReviewOut,
     RightsIn,
@@ -219,6 +220,10 @@ def _detail(db: Session, item: ContentItem, who: Principal) -> ItemDetail:
         submit=can_draft and editable,
         withdraw=can_draft and item.state == ItemState.submitted.value,
         review=can_review and item.assigned_reviewer_id in (None, who.user.id),
+        assign=Permission.publish_content in perms
+        and mfa
+        and not retired
+        and item.state in (ItemState.draft.value, ItemState.submitted.value, ItemState.changes_requested.value),
         claim=can_review and item.assigned_reviewer_id != who.user.id,
         publish=Permission.publish_content in perms
         and mfa
@@ -475,6 +480,15 @@ def submit(db: DB, who: Author, item_id: uuid.UUID, body: SubmitIn) -> ItemDetai
 @router.post("/items/{item_id}/withdraw", response_model=ItemDetail)
 def withdraw(db: DB, who: Author, item_id: uuid.UUID) -> ItemDetail:
     return _detail(db, workflow.withdraw(db, who, item_id), who)
+
+
+@router.get(
+    "/items/{item_id}/reviewers",
+    response_model=list[ReviewerOption],
+    summary="Who a publisher may assign to review this item (active reviewers in scope who didn't edit it)",
+)
+def eligible_reviewers(db: DB, who: Publisher, item_id: uuid.UUID) -> list[ReviewerOption]:
+    return [ReviewerOption(id=i, email=e) for i, e in workflow.eligible_reviewers(db, who, item_id)]
 
 
 @router.post("/items/{item_id}/assign", response_model=ItemDetail)

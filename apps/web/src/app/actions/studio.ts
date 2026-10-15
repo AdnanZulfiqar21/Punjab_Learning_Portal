@@ -85,6 +85,10 @@ export async function submitItem(id: string, note: string): Promise<ActionResult
 export async function withdrawItem(id: string): Promise<ActionResult> {
   return call(item(id, "withdraw"), "POST");
 }
+// ASSIGN-REVIEWER-01: a publisher assigns a reviewer, or clears the assignment (null).
+export async function assignReviewer(id: string, reviewerId: string | null): Promise<ActionResult> {
+  return call(item(id, "assign"), "POST", { reviewer_id: reviewerId });
+}
 export async function claimItem(id: string, myId: string): Promise<ActionResult> {
   return call(item(id, "assign"), "POST", { reviewer_id: myId });
 }
