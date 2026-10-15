@@ -233,3 +233,20 @@ def test_admins_cannot_change_their_own_roles_or_grant_student(client: TestClien
         headers=_auth(owner_mfa),
     )
     assert missing.status_code == 404
+
+
+def test_the_bootstrap_command_is_audited_with_no_actor(client: TestClient, db: Session) -> None:
+    """P04.S2.T2: portal-grant-role is the break-glass path. It records who was granted what, with no actor,
+    because nobody holds manage_roles yet. Later grants go through the MFA admin API."""
+    email = _email()
+    _login(client, email)
+    reason = "break-glass: the only administrator is locked out"
+    assert cli.main(["--email", email, "--role", "owner_admin", "--reason", reason]) == 0
+    user = db.scalars(select(AppUser).where(AppUser.email == email)).one()
+    event = db.scalars(
+        select(AuditEvent).where(AuditEvent.action == "role.grant", AuditEvent.target_id == str(user.id))
+    ).one()
+    assert event.actor_user_id is None
+    assert event.details["via"] == "cli"
+    assert event.details["role"] == "owner_admin"
+    assert event.details["reason"] == reason
