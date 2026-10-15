@@ -1,5 +1,7 @@
 # Work queue (every roadmap task)
 
+**Evening of 2026-10-15:** the counts and the C list below were written before #219–#225 merged. Those pulls are on `main` (`8949b49`). Treat these as already implemented, and do not rebuild them: P12.S2.T3 comparisons, W09.S1.T3 workload guard, P06.S4.T2 export schema 2, P09.S3.T1 difficulty allocation, W01.S1.T1 numerical/derivation authoring (not offered to learners), P02.S2.T1 Urdu Nastaliq and the shared colour check, plus the support read and the staffing-journey order. The class counts are not a current census.
+
 Built 2026-10-15 from the roadmap's 423 task IDs (306 core `P..`, 117 written `W..`), the register, BLOCKERS, DECISIONS and
 the status audit, with the cited code and test files checked to exist. Classes:
 
