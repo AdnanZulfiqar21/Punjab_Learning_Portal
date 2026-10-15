@@ -278,3 +278,27 @@ jobs:
           name: playwright-report
           path: apps/web/playwright-report
           retention-days: 7
+
+  images:
+    # P03.S3.T2: build the API and web images and keep their digests. Nothing is pushed to a registry (B03).
+    needs: changes
+    if: needs.changes.outputs.api == 'true' || needs.changes.outputs.web == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Build the API image and check it answers without migrating
+        if: needs.changes.outputs.api == 'true'
+        run: |
+          docker buildx build -f apps/api/Dockerfile -t portal-api:ci --load --metadata-file /tmp/api-image.json .
+          docker run -d --name portal-api -p 8100:8100 -e PORTAL_ROLE=development -e PORTAL_HEALTH_SAMPLE_S=0 portal-api:ci
+          for i in $(seq 1 30); do curl -sf http://127.0.0.1:8100/healthz && break; sleep 1; done
+          curl -sf http://127.0.0.1:8100/healthz
+      - name: Build the web image
+        if: needs.changes.outputs.web == 'true'
+        run: docker buildx build -f apps/web/Dockerfile -t portal-web:ci --load --metadata-file /tmp/web-image.json .
+      - uses: actions/upload-artifact@v7
+        with:
+          name: image-digests
+          path: /tmp/*-image.json
+          retention-days: 14
+          if-no-files-found: error
