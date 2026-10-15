@@ -817,6 +817,9 @@ class NotebookEntryOut(BaseModel):
     source_attempt_id: uuid.UUID
     position: int
     stem: list[dict[str, Any]]
+    flagged: bool = Field(
+        default=False, description="You flagged this question as unsure in a submitted test (NOTEBOOK-FLAGS-01)"
+    )
 
 
 class NoteIn(BaseModel):
@@ -847,6 +850,7 @@ def _entry_out(db: Session, e: Any, now: datetime) -> NotebookEntryOut:
         source_attempt_id=e.source_attempt_id,
         position=e.position,
         stem=(v.body.get("stem") or []) if v else [],
+        flagged=bool(e.flagged),
     )
 
 
