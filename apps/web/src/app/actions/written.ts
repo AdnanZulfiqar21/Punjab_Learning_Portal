@@ -78,7 +78,10 @@ export async function createWrittenPractice(_prev: WrittenBuilderState, form: Fo
     return { error: `${p?.detail ?? "Could not create the test."}${p?.available !== undefined ? ` You can ask for up to ${p.available}.` : ""}` };
   }
   const attempt = await api<WrittenAttempt>(`/v1/written/forms/${created.data.id}/attempt`, { method: "POST", token: t });
-  if (!attempt.ok) return { error: "The test was created but could not be started. Try again." };
+  if (!attempt.ok) {
+    const p = attempt.problem as Problem | null;
+    return { error: p?.detail ?? "The test was created but could not be started. Try again." };
+  }
   redirect(`/practice/written/${attempt.data.id}`);
 }
 
