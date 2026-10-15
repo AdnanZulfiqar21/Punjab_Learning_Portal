@@ -163,13 +163,26 @@ Media pack**. A pack is a `.zip` file, at most 60 MB, holding `manifest.json` at
 Publishers (with MFA) can download one class and subject at a time from **Studio → Export**
 (`GET /v1/studio/export?grade=11&subject=chemistry`). The download is a JSON document with:
 
-- `format: "portal-content-export"` and `schema_version: 1`;
+- `format: "portal-content-export"` and `schema_version: 2` (version 1 had no `concepts` or `assets`);
 - the book: title, source ID and publication-rights status;
 - every chapter and topic, with its stable key, number and title, and whether it is retired;
 - every item in that scope, with:
   - its `external_id` (if imported), kind, chapter and topic keys, state, availability, quarantine level and reading tier;
   - **all versions**: number, status, content schema version, body, source references and publication time;
-  - any MCQ score corrections.
+  - any MCQ score corrections;
+- `concepts` (EXPORT-02): every concept of the subject that is mapped to a topic of this book, with its code, title,
+  statement, status, publication time and source references, and:
+  - `topics`: its topic keys **in this book only** (a concept also taught in the other class's book is mapped there too,
+    but Class XI and XII are never mixed in one file);
+  - `requires`: its prerequisites by concept code, with the bridging lesson's item ID if one is named;
+  - `inclusion`: its syllabus inclusion records (scope, year, state, reason, source and source version, status,
+    publication time);
+- `assets` (EXPORT-02): one reference for every archived asset version that any exported version's body names
+  (diagrams, handouts and fallback images): asset and version IDs, the asset's `external_id`, kind and title, the
+  version number, media type, SHA-256 and size of the master, its dimensions or page count, delivery state and
+  provenance (source, author, licence, tool). A reference to a version that no longer exists is listed with
+  `missing: true`. The files themselves are not in the document; fetch them from the studio, and check them against
+  the SHA-256.
 
 Exports never include learner data, attempts, staff identities or internal notes. Each export is audited with its
 item count and size.

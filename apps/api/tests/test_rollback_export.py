@@ -70,7 +70,7 @@ def test_export_is_scoped_audited_and_portable(client: TestClient, db: Session, 
     assert r.status_code == 200 and r.headers["content-disposition"].startswith("attachment;")
     assert r.headers["cache-control"] == "private, no-store"
     doc = json.loads(r.content)
-    assert doc["format"] == "portal-content-export" and doc["schema_version"] == 1
+    assert doc["format"] == "portal-content-export" and doc["schema_version"] == 2
     assert doc["grade"] == 11 and doc["subject"] == "biology"
     assert any(c["key"] == chapter.natural_key for c in doc["chapters"])
     mine = next(i for i in doc["items"] if i["id"] == item["id"])
