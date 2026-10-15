@@ -4,6 +4,13 @@ One class and subject per file: the book and its chapter/topic structure (stable
 its state, availability and all versions (body, source references, status, publication time), and any MCQ score
 corrections. Publishers in scope with MFA only; every export is audited with its size. Learner data, attempts and
 staff notes are never included.
+
+Schema version 2 (P06.S4.T2, EXPORT-02) adds the mappings and media references:
+
+* `concepts`: the subject's concepts mapped to this book's topics, each with its topic keys in this book only (Class XI
+  and XII are never mixed), its prerequisites by concept code (and bridging lesson) and its syllabus inclusion records;
+* `assets`: every archived asset version an exported version's body names (diagrams, handouts, fallback images), with
+  its kind, checksum, size, media type, delivery state and provenance. Files themselves are not in the document.
 """
 
 from __future__ import annotations
@@ -24,7 +31,7 @@ from portal_api.modules.identity.deps import Principal
 from portal_api.modules.identity.permissions import Permission, permissions_for
 
 FORMAT = "portal-content-export"
-SCHEMA_VERSION = 1
+SCHEMA_VERSION = 2
 
 
 def export(db: Session, who: Principal, grade: int, subject_code: str) -> tuple[bytes, str]:
@@ -113,6 +120,8 @@ def export(db: Session, who: Principal, grade: int, subject_code: str) -> tuple[
                 ],
             }
         )
+    concepts = _concepts(db, subject_code, topics)
+    assets = _assets(db, [v["body"] for it in out_items for v in it["versions"]])
     doc_out = {
         "format": FORMAT,
         "schema_version": SCHEMA_VERSION,
@@ -141,6 +150,8 @@ def export(db: Session, who: Principal, grade: int, subject_code: str) -> tuple[
             for c in chapters
         ],
         "items": out_items,
+        "concepts": concepts,
+        "assets": assets,
     }
     body = json.dumps(doc_out, ensure_ascii=False, indent=1).encode("utf-8")
     record(
@@ -149,7 +160,119 @@ def export(db: Session, who: Principal, grade: int, subject_code: str) -> tuple[
         action="content.exported",
         target_type="book_edition",
         target_id=str(book.id),
-        details={"grade": grade, "subject": subject_code, "items": len(out_items), "bytes": len(body)},
+        details={
+            "grade": grade,
+            "subject": subject_code,
+            "items": len(out_items),
+            "concepts": len(concepts),
+            "assets": len(assets),
+            "bytes": len(body),
+        },
     )
     db.commit()
     return body, f"content-{grade}-{subject_code}-{datetime.now(UTC):%Y%m%d}.json"
+
+
+def _concepts(db: Session, subject_code: str, topics: list[Topic]) -> list[dict[str, Any]]:
+    """EXPORT-02: the subject's concepts mapped to this book's topics, with prerequisites and inclusion records."""
+    from portal_api.modules.content.concepts import Concept, ConceptPrerequisite, ConceptTopic
+    from portal_api.modules.content.inclusion import InclusionRecord
+
+    keys = {t.id: t.natural_key for t in topics}
+    if not keys:
+        return []
+    links = db.execute(
+        select(ConceptTopic.concept_id, ConceptTopic.topic_id).where(ConceptTopic.topic_id.in_(list(keys)))
+    ).all()
+    mapped: dict[Any, list[str]] = {}
+    for concept_id, topic_id in links:
+        mapped.setdefault(concept_id, []).append(keys[topic_id])
+    concepts = list(
+        db.scalars(
+            select(Concept)
+            .where(Concept.id.in_(list(mapped)), Concept.subject_code == subject_code)
+            .order_by(Concept.code)
+        )
+    )
+    codes = dict(db.execute(select(Concept.id, Concept.code).where(Concept.subject_code == subject_code)).all())
+    out = []
+    for c in concepts:
+        requires = db.execute(
+            select(ConceptPrerequisite.requires_id, ConceptPrerequisite.bridging_lesson_id).where(
+                ConceptPrerequisite.concept_id == c.id
+            )
+        ).all()
+        records = db.scalars(
+            select(InclusionRecord)
+            .where(InclusionRecord.concept_id == c.id)
+            .order_by(InclusionRecord.scope, InclusionRecord.year)
+        )
+        out.append(
+            {
+                "code": c.code,
+                "title": c.title,
+                "statement": c.statement,
+                "status": c.status,
+                "published_at": c.published_at.isoformat() if c.published_at else None,
+                "source_refs": c.source_refs,
+                "topics": sorted(mapped[c.id]),
+                "requires": sorted(
+                    (
+                        {"code": codes.get(r), "bridging_lesson_id": str(b) if b else None}
+                        for r, b in requires
+                        if codes.get(r)
+                    ),
+                    key=lambda x: str(x["code"]),
+                ),
+                "inclusion": [
+                    {
+                        "scope": r.scope,
+                        "year": r.year,
+                        "state": r.state,
+                        "reason": r.reason,
+                        "source": r.source,
+                        "source_version": r.source_version,
+                        "status": r.status,
+                        "published_at": r.published_at.isoformat() if r.published_at else None,
+                    }
+                    for r in records
+                ],
+            }
+        )
+    return out
+
+
+def _assets(db: Session, bodies: list[Any]) -> list[dict[str, Any]]:
+    """EXPORT-02: every archived asset version the exported bodies name, as a reference (never the file)."""
+    from portal_api.modules.content.assets import Asset, block_refs, resolve
+
+    ids = sorted({vid for body in bodies for _, vid, _ in block_refs(body)})
+    out = []
+    for vid in ids:
+        v = resolve(db, vid)
+        a = db.get(Asset, v.asset_id) if v is not None else None
+        if v is None or a is None:
+            out.append({"asset_version_id": vid, "missing": True})
+            continue
+        out.append(
+            {
+                "asset_version_id": vid,
+                "asset_id": str(a.id),
+                "external_id": a.external_ref,
+                "kind": a.kind,
+                "title": a.title,
+                "version": v.number,
+                "media_type": v.media_type,
+                "sha256": v.master_sha256,
+                "bytes": v.master_bytes,
+                "width": v.width,
+                "height": v.height,
+                "pages": v.pages,
+                "delivery_state": v.delivery_state,
+                "provenance": {
+                    k: v.provenance[k] for k in ("source", "author", "licence", "tool") if k in v.provenance
+                },
+                "missing": False,
+            }
+        )
+    return out
