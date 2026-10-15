@@ -50,6 +50,14 @@ def test_a_fresh_process_gets_its_class_pool_and_a_running_one_keeps_its_own() -
 def test_bulk_work_waits_out_a_scheduled_mock_window(
     client: TestClient, db: Session, physics: dict[str, Any], monkeypatch: pytest.MonkeyPatch
 ) -> None:
+    with get_sessionmaker()() as s:  # earlier tests in the shared database leave fixture windows open: close them
+        s.execute(
+            text(
+                "update mock_session set status = 'cancelled' where status = 'scheduled' "
+                "and starts_at - interval '15 minutes' <= now() and window_closes_at + interval '15 minutes' >= now()"
+            )
+        )
+        s.commit()
     code = _publish_profile(client, db, [{"subject": "physics", "grades": [11], "questions": 1}])
     admin = Staff(client, db, ["academic_adjudicator"], mfa=True)
     session = _schedule(client, admin, code)  # starts in an hour
