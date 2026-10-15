@@ -18,11 +18,19 @@ export default defineConfig({
     screenshot: "only-on-failure",
   },
   projects: [
-    { name: "desktop", use: { ...devices["Desktop Chrome"] } },
-    { name: "phone", use: { ...devices["Pixel 7"] } },
+    { name: "desktop", testIgnore: /service-overview\.spec\.ts/, use: { ...devices["Desktop Chrome"] } },
+    { name: "phone", testIgnore: /service-overview\.spec\.ts/, use: { ...devices["Pixel 7"] } },
     // P19.S2.T1 (BROWSERS-01): the cross-browser journeys in the other supported engines.
     { name: "firefox", testMatch: /browsers\.spec\.ts/, use: { ...devices["Desktop Firefox"] } },
     { name: "webkit", testMatch: /browsers\.spec\.ts/, use: { ...devices["Desktop Safari"] } },
     { name: "iphone", testMatch: /browsers\.spec\.ts/, use: { ...devices["iPhone 13"] } },
+    // STAFFING-01 closes Class XI Biology marking while it checks the learner notice. Written starts in the other
+    // projects read that same capacity, so this file runs only after they have finished.
+    {
+      name: "staffing",
+      testMatch: /service-overview\.spec\.ts/,
+      dependencies: ["desktop", "phone", "firefox", "webkit", "iphone"],
+      use: { ...devices["Desktop Chrome"] },
+    },
   ],
 });
