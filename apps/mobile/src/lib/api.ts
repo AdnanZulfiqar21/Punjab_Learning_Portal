@@ -47,6 +47,7 @@ import type {
   StudyPack,
   StudyPackStatus,
   TrialDevice,
+  LinkedForm,
   WrittenAttempt,
   WrittenPage,
   WrittenAvailability,
@@ -339,6 +340,22 @@ export const api = {
     request<WrittenForm>("/v1/written/forms", { method: "POST", token, body, headers: { "Idempotency-Key": idempotencyKey } }),
   startWritten: (token: string, formId: string) =>
     request<WrittenAttempt>(`/v1/written/forms/${encodeURIComponent(formId)}/attempt`, { method: "POST", token }),
+  // W04.S3.T3 (MOBILE-LINKED-01): prepare a linked new practice test (nothing reserved yet); the key makes a retry
+  // return the same prepared test.
+  prepareLinkedPractice: (
+    token: string,
+    attemptId: string,
+    idempotencyKey: string,
+    body: { reason: "REWRITE" | "NEW_CONTENT" | "INDETERMINATE"; positions: number[]; revision_id: string | null },
+  ) =>
+    request<LinkedForm>(`/v1/written-attempts/${encodeURIComponent(attemptId)}/linked-forms`, {
+      method: "POST",
+      token,
+      body,
+      headers: { "Idempotency-Key": idempotencyKey },
+    }),
+  linkedForm: (token: string, formId: string, signal?: AbortSignal) =>
+    request<LinkedForm>(`/v1/written/linked-forms/${encodeURIComponent(formId)}`, { token, signal }),
   /** W03.S1.T3: turn, trim or clarify a page. `trim` (x, y, w, h of the page as shown) replaces `crop` when given. */
   transformPage: (
     token: string,
