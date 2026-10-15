@@ -139,8 +139,14 @@ def build_from(
     duration_s: int | None = None,
     extra_scope: dict[str, Any] | None = None,
     allow_scheduled: bool = False,
+    copy_from: PracticeForm | None = None,
 ) -> PracticeForm:
-    """Build the frozen mock form. Scheduled sessions (SCHEDULE-01) pass their own time limit and window details."""
+    """Build the frozen mock form. Scheduled sessions (SCHEDULE-01) pass their own time limit and window details.
+
+    P09.S3.T3 (FIXED-FORMS-01): a practice mock is a *varied* form, sampled for this learner (unseen questions
+    first). A scheduled session is a *fixed comparable* form: its first form is sampled without regard to anyone's
+    history, and `copy_from` gives every later participant exactly that form (question versions, order, option
+    permutations, passages, marks). Equivalence beyond "the same questions" is not claimed."""
     from portal_api.modules.access import service as access
 
     req = {"mock": profile.code, "version_id": str(version.id), "scope": extra_scope or {}}
@@ -155,6 +161,8 @@ def build_from(
             raise Conflict("This request key was already used for a different test.")
         return existing
     access.require_access(db, who.user.id, purpose="Mock tests", need=access.Need(exam=profile.code))
+    if copy_from is not None:  # the session's fixed form, as frozen: today's pool doesn't change it
+        return _copy(db, who, copy_from, idempotency_key=idempotency_key, request_hash=rhash)
     rules = version.rules
     if rules.get("solution_release") != "after_submission" and not allow_scheduled:
         raise Conflict("Scheduled mocks with delayed solutions aren't available yet.", code_reason="MOCK_SCHEDULED")
@@ -179,9 +187,11 @@ def build_from(
             code_reason="POOL_SHORTAGE",
             sections=short,
         )
+    comparable = allow_scheduled  # session forms are fixed and shared; practice mocks are varied per learner
     seed = secrets.randbits(62)
+    seen = set() if comparable else _seen_families(db, who.user.id)
     try:
-        chosen = select_sections([(int(s["questions"]), p) for s, p in pools], _seen_families(db, who.user.id), seed)
+        chosen = select_sections([(int(s["questions"]), p) for s, p in pools], seen, seed)
     except SectionShortage as e:  # sections that share questions (profiles older than the overlap rule)
         s = rules["sections"][e.section - 1]
         raise Unprocessable(
@@ -208,6 +218,7 @@ def build_from(
             "year": version.year,
             "question_pool": question_pool,
             "sections": [],
+            "form_type": "fixed" if comparable else "varied",
             **(extra_scope or {}),
         },
         seed=seed,
@@ -243,6 +254,59 @@ def build_from(
             {"subject": s["subject"], "grades": s["grades"], "from": start, "to": position, "reused": reused}
         )
     form.scope = {**form.scope, "sections": sections}
+    try:
+        db.commit()
+    except IntegrityError:
+        db.rollback()
+        existing = db.scalar(
+            select(PracticeForm).where(
+                PracticeForm.owner_id == who.user.id, PracticeForm.idempotency_key == idempotency_key
+            )
+        )
+        if existing is None:
+            raise
+        return existing
+    db.refresh(form)
+    return form
+
+
+def _copy(
+    db: Session, who: Principal, master: PracticeForm, *, idempotency_key: str, request_hash: str
+) -> PracticeForm:
+    """FIXED-FORMS-01: this learner's copy of a session's fixed form (the master's items, exactly)."""
+    form = PracticeForm(
+        id=uuid.uuid4(),
+        owner_id=who.user.id,
+        idempotency_key=idempotency_key,
+        request_hash=request_hash,
+        kind=master.kind,
+        grade_number=master.grade_number,
+        subject_code=master.subject_code,
+        scope={**master.scope, "fixed_from": str(master.id)},
+        seed=master.seed,
+        question_count=master.question_count,
+        duration_s=master.duration_s,
+        late_write_tolerance_ms=master.late_write_tolerance_ms,
+        feedback_mode=master.feedback_mode,
+        negative_marks=master.negative_marks,
+        invalid_item_treatment=master.invalid_item_treatment,
+    )
+    db.add(form)
+    for fi in sorted(master.items, key=lambda i: i.position):
+        db.add(
+            FormItem(
+                form_id=form.id,
+                position=fi.position,
+                item_id=fi.item_id,
+                family_id=fi.family_id,
+                version_id=fi.version_id,
+                marks=fi.marks,
+                option_order=list(fi.option_order),
+                grade_number=fi.grade_number,
+                subject_code=fi.subject_code,
+                passage_version_id=fi.passage_version_id,
+            )
+        )
     try:
         db.commit()
     except IntegrityError:

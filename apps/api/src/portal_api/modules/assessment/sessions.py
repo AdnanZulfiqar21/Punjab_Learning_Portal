@@ -63,6 +63,8 @@ class MockSession(Base):
     results_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
     late_entry: Mapped[str] = mapped_column(String(14), default="fixed_end")
     status: Mapped[str] = mapped_column(String(10), default="scheduled")
+    # P09.S3.T3 (FIXED-FORMS-01): the first participant's form; every later participant gets an exact copy of it.
+    master_form_id: Mapped[uuid.UUID | None] = mapped_column(ForeignKey("practice_form.id", ondelete="RESTRICT"))
     created_by: Mapped[uuid.UUID] = mapped_column(ForeignKey("app_user.id", ondelete="RESTRICT"))
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
 
@@ -271,24 +273,62 @@ def join(db: Session, who: Principal, session_id: uuid.UUID) -> uuid.UUID:
         assert version is not None
         profile = db.get(ExamProfile, version.profile_id)
         assert profile is not None
-        form = mocks.build_from(
-            db,
-            who,
-            profile,
-            version,
-            idempotency_key=key,
-            duration_s=int(version.rules["duration_minutes"]) * 60,  # nominal; the real deadline is set by `admit`
-            extra_scope={
-                "session_id": str(s.id),
-                "results_at": s.results_at.isoformat(),
-                "late_entry": s.late_entry,
-            },
-            allow_scheduled=True,
-        )
+
+        def build(master: PracticeForm | None) -> PracticeForm:
+            return mocks.build_from(
+                db,
+                who,
+                profile,
+                version,
+                idempotency_key=key,
+                duration_s=int(version.rules["duration_minutes"]) * 60,  # nominal; `admit` sets the real deadline
+                extra_scope={
+                    "session_id": str(s.id),
+                    "results_at": s.results_at.isoformat(),
+                    "late_entry": s.late_entry,
+                },
+                allow_scheduled=True,
+                copy_from=master,
+            )
+
+        # FIXED-FORMS-01: one fixed form per session. The first participant's form becomes the master; everyone after
+        # gets a copy. Two first joins at once: only one claim succeeds, and the other learner's form is replaced by a
+        # copy of the winner's before any attempt exists on it.
+        master = db.get(PracticeForm, s.master_form_id) if s.master_form_id else None
+        form = build(master)
+        if master is None and not claim_master(db, s.id, form.id):
+            winner = db.scalar(select(MockSession.master_form_id).where(MockSession.id == s.id))
+            _discard_form(db, form.id)
+            form = build(db.get(PracticeForm, winner))
     else:
         form = existing
     attempt = attempts.start(db, who, form.id)
     return attempt.id
+
+
+def claim_master(db: Session, session_id: uuid.UUID, form_id: uuid.UUID) -> bool:
+    """Make this form the session's fixed form, unless another already is (one conditional update; commits)."""
+    from sqlalchemy import update
+
+    claimed = db.scalar(
+        update(MockSession)
+        .where(MockSession.id == session_id, MockSession.master_form_id.is_(None))
+        .values(master_form_id=form_id)
+        .returning(MockSession.id)
+    )
+    db.commit()
+    return claimed is not None
+
+
+def _discard_form(db: Session, form_id: uuid.UUID) -> None:
+    """Remove a form that lost the race to be a session's master; it has no attempt yet."""
+    from sqlalchemy import delete
+
+    from portal_api.modules.assessment.models import FormItem, PracticeForm
+
+    db.execute(delete(FormItem).where(FormItem.form_id == form_id))
+    db.execute(delete(PracticeForm).where(PracticeForm.id == form_id))
+    db.commit()
 
 
 def _check_entry(s: MockSession, now: datetime) -> None:
