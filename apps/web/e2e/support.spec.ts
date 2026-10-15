@@ -19,6 +19,14 @@ async function newLearner(page: Page, next: string): Promise<string> {
   return email;
 }
 
+/** The status sits beside the heading, not inside it. The reply box also lists that label as an option. */
+function statusBadge(page: Page, label: string) {
+  return page
+    .locator("h1")
+    .locator("xpath=ancestor::div[contains(@class,'justify-between')]")
+    .getByText(label, { exact: true });
+}
+
 async function staff(browser: Browser, email: string, path: string, mfa = false): Promise<Page> {
   const page = await (await browser.newContext()).newPage();
   await page.goto(`/signin?next=${encodeURIComponent(path)}`);
@@ -60,12 +68,12 @@ test("a learner asks for help, staff reply, and internal notes stay internal", a
   // The text box still holds the reply until the save finishes, so only the conversation list counts as saved.
   const staffThread = agent.getByRole("list", { name: "Conversation" });
   await expect(staffThread.getByText("Fixture reply: please sign out and back in.")).toBeVisible(AUTH);
-  await expect(agent.locator("h1").locator("..").getByText("Waiting for your reply", { exact: true })).toBeVisible(AUTH);
+  await expect(statusBadge(agent, "Waiting for your reply")).toBeVisible(AUTH);
 
   await page.reload();
   const learnerThread = page.getByRole("list", { name: "Conversation" });
   await expect(learnerThread.getByText("Fixture reply: please sign out and back in.")).toBeVisible(AUTH);
-  await expect(page.locator("h1").locator("..").getByText("Waiting for your reply", { exact: true })).toBeVisible();
+  await expect(statusBadge(page, "Waiting for your reply")).toBeVisible();
   await expect(page.getByText(/Fixture internal note/)).toHaveCount(0);
   await page.getByLabel("Add a reply").fill("Fixture: that worked, thanks.");
   await page.getByRole("button", { name: "Send reply" }).click();
