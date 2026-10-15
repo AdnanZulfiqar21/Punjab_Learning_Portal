@@ -133,6 +133,8 @@ def _pool(
     for item, qv in rows:
         if item.id not in rubrics:
             continue  # never offer a question without a published rubric for its exact version
+        if qv.body.get("question_type", "short") not in wq.OFFERED_TYPES:
+            continue  # TAXONOMY-01: numerical and derivation slices wait for qualification (WA-D11)
         if question_type != "mixed" and qv.body.get("question_type") != question_type:
             continue
         families[item.family_id or item.id].append((item, qv, rubrics[item.id]))
