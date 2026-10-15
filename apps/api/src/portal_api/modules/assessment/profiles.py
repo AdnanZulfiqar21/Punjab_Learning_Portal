@@ -101,6 +101,9 @@ class Section(BaseModel):
     grades: list[Literal[11, 12]] = Field(min_length=1, max_length=2)
     questions: int = Field(ge=1, le=400)
     label: str = Field(default="", max_length=120)
+    # P09.S3.T1 (ALLOCATION-01): optional percentages by editorial difficulty, adding up to 100. Counts are allocated by
+    # largest-remainder rounding; each band draws only questions reviewed at that difficulty.
+    difficulty_mix: dict[Literal["easy", "medium", "hard"], int] | None = None
 
 
 class ProfileRules(BaseModel):
@@ -137,6 +140,10 @@ def parse_rules(raw: object, active_subjects: set[str]) -> tuple[ProfileRules | 
             # Sections sharing a subject and a class would draw on the same questions (GENERATOR-PROPERTIES-01).
             if earlier.subject == s.subject and set(earlier.grades) & set(s.grades):
                 errors.append(f"Section {n}: {s.subject} classes overlap section {m}; give each class to one section.")
+    for n, s in enumerate(rules.sections, start=1):
+        mix = s.difficulty_mix
+        if mix is not None and (any(v < 0 or v > 100 for v in mix.values()) or sum(mix.values()) != 100):
+            errors.append(f"Section {n}: the difficulty mix must be percentages that add up to 100.")
     if rules.negative_marks > rules.marks_per_question:
         errors.append("Negative marking can't exceed the marks for a question.")
     return (rules if not errors else None), errors

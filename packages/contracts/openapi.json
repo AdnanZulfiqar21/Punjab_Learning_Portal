@@ -2016,7 +2016,7 @@
           },
           "comparisons": {
             "items": {
-              "$ref": "#/components/schemas/ComparisonOut"
+              "$ref": "#/components/schemas/portal_api__modules__written__calibration__ComparisonOut"
             },
             "title": "Comparisons",
             "type": "array"
@@ -3175,85 +3175,6 @@
           "enforce_at"
         ],
         "title": "ClientPolicyOut",
-        "type": "object"
-      },
-      "ComparisonOut": {
-        "properties": {
-          "disagreements": {
-            "items": {
-              "type": "string"
-            },
-            "title": "Disagreements",
-            "type": "array"
-          },
-          "id": {
-            "format": "uuid",
-            "title": "Id",
-            "type": "string"
-          },
-          "position": {
-            "title": "Position",
-            "type": "integer"
-          },
-          "proposal_units": {
-            "additionalProperties": {
-              "type": "integer"
-            },
-            "title": "Proposal Units",
-            "type": "object"
-          },
-          "reason": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Reason"
-          },
-          "reference": {
-            "description": "The script's short reference; no learner identity",
-            "title": "Reference",
-            "type": "string"
-          },
-          "status": {
-            "enum": [
-              "agreed",
-              "open",
-              "adjudicated"
-            ],
-            "title": "Status",
-            "type": "string"
-          },
-          "teacher_units": {
-            "additionalProperties": {
-              "type": "integer"
-            },
-            "title": "Teacher Units",
-            "type": "object"
-          },
-          "verdicts": {
-            "additionalProperties": {
-              "type": "string"
-            },
-            "title": "Verdicts",
-            "type": "object"
-          }
-        },
-        "required": [
-          "id",
-          "reference",
-          "position",
-          "teacher_units",
-          "proposal_units",
-          "disagreements",
-          "status",
-          "verdicts",
-          "reason"
-        ],
-        "title": "ComparisonOut",
         "type": "object"
       },
       "CompletionScope": {
@@ -12714,6 +12635,17 @@
             "title": "Attempt Id",
             "type": "string"
           },
+          "comparison": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/portal_api__modules__assessment__schemas__ComparisonOut"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Scheduled sessions' fixed forms only"
+          },
           "counts": {
             "anyOf": [
               {
@@ -18473,6 +18405,119 @@
         "title": "ReviewIn",
         "type": "object"
       },
+      "portal_api__modules__assessment__schemas__ComparisonOut": {
+        "description": "P12.S2.T3 (COMPARISON-01): how a scheduled session's fixed-form result compares with other learners'.",
+        "properties": {
+          "group": {
+            "description": "Who this learner is compared with",
+            "title": "Group",
+            "type": "string"
+          },
+          "learners": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "N: distinct learner accounts compared",
+            "title": "Learners"
+          },
+          "limits": {
+            "description": "What the comparison does not show",
+            "title": "Limits",
+            "type": "string"
+          },
+          "message": {
+            "title": "Message",
+            "type": "string"
+          },
+          "percentile": {
+            "anyOf": [
+              {
+                "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "100 * (lower + 0.5 * equal) / N, the learner included; one decimal",
+            "title": "Percentile"
+          },
+          "state": {
+            "description": "published: a percentile is shown; otherwise `message` says why not",
+            "enum": [
+              "published",
+              "too_few",
+              "pending",
+              "not_included"
+            ],
+            "title": "State",
+            "type": "string"
+          },
+          "tie_rule": {
+            "title": "Tie Rule",
+            "type": "string"
+          },
+          "timing_group": {
+            "enum": [
+              "standard",
+              "accommodated"
+            ],
+            "title": "Timing Group",
+            "type": "string"
+          },
+          "version": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Comparison snapshot version",
+            "title": "Version"
+          },
+          "window_end": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Window End"
+          },
+          "window_start": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Window Start"
+          }
+        },
+        "required": [
+          "state",
+          "message",
+          "timing_group",
+          "group",
+          "tie_rule",
+          "limits"
+        ],
+        "title": "ComparisonOut",
+        "type": "object"
+      },
       "portal_api__modules__assessment__schemas__SubmitIn": {
         "properties": {
           "idempotency_key": {
@@ -18704,6 +18749,85 @@
           "reason"
         ],
         "title": "RevokeIn",
+        "type": "object"
+      },
+      "portal_api__modules__written__calibration__ComparisonOut": {
+        "properties": {
+          "disagreements": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Disagreements",
+            "type": "array"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "position": {
+            "title": "Position",
+            "type": "integer"
+          },
+          "proposal_units": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "title": "Proposal Units",
+            "type": "object"
+          },
+          "reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reason"
+          },
+          "reference": {
+            "description": "The script's short reference; no learner identity",
+            "title": "Reference",
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "agreed",
+              "open",
+              "adjudicated"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "teacher_units": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "title": "Teacher Units",
+            "type": "object"
+          },
+          "verdicts": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "title": "Verdicts",
+            "type": "object"
+          }
+        },
+        "required": [
+          "id",
+          "reference",
+          "position",
+          "teacher_units",
+          "proposal_units",
+          "disagreements",
+          "status",
+          "verdicts",
+          "reason"
+        ],
+        "title": "ComparisonOut",
         "type": "object"
       }
     }
@@ -30815,7 +30939,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ComparisonOut"
+                  "$ref": "#/components/schemas/portal_api__modules__written__calibration__ComparisonOut"
                 }
               }
             },

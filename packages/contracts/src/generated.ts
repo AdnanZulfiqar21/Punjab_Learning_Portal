@@ -5495,7 +5495,7 @@ export interface components {
             /** Compared */
             compared: number;
             /** Comparisons */
-            comparisons: components["schemas"]["ComparisonOut"][];
+            comparisons: components["schemas"]["portal_api__modules__written__calibration__ComparisonOut"][];
             /** Disagreed */
             disagreed: number;
             /** Evaluation Percent */
@@ -5937,42 +5937,6 @@ export interface components {
              * @enum {string}
              */
             status: "ok" | "update_soon" | "update_required";
-        };
-        /** ComparisonOut */
-        ComparisonOut: {
-            /** Disagreements */
-            disagreements: string[];
-            /**
-             * Id
-             * Format: uuid
-             */
-            id: string;
-            /** Position */
-            position: number;
-            /** Proposal Units */
-            proposal_units: {
-                [key: string]: number;
-            };
-            /** Reason */
-            reason: string | null;
-            /**
-             * Reference
-             * @description The script's short reference; no learner identity
-             */
-            reference: string;
-            /**
-             * Status
-             * @enum {string}
-             */
-            status: "agreed" | "open" | "adjudicated";
-            /** Teacher Units */
-            teacher_units: {
-                [key: string]: number;
-            };
-            /** Verdicts */
-            verdicts: {
-                [key: string]: string;
-            };
         };
         /** CompletionScope */
         CompletionScope: {
@@ -9908,6 +9872,8 @@ export interface components {
              * Format: uuid
              */
             attempt_id: string;
+            /** @description Scheduled sessions' fixed forms only */
+            comparison?: components["schemas"]["portal_api__modules__assessment__schemas__ComparisonOut"] | null;
             counts?: components["schemas"]["ResultCounts"] | null;
             /**
              * Finalise Reason
@@ -12211,6 +12177,56 @@ export interface components {
             /** Subject */
             subject: string;
         };
+        /**
+         * ComparisonOut
+         * @description P12.S2.T3 (COMPARISON-01): how a scheduled session's fixed-form result compares with other learners'.
+         */
+        portal_api__modules__assessment__schemas__ComparisonOut: {
+            /**
+             * Group
+             * @description Who this learner is compared with
+             */
+            group: string;
+            /**
+             * Learners
+             * @description N: distinct learner accounts compared
+             */
+            learners?: number | null;
+            /**
+             * Limits
+             * @description What the comparison does not show
+             */
+            limits: string;
+            /** Message */
+            message: string;
+            /**
+             * Percentile
+             * @description 100 * (lower + 0.5 * equal) / N, the learner included; one decimal
+             */
+            percentile?: string | null;
+            /**
+             * State
+             * @description published: a percentile is shown; otherwise `message` says why not
+             * @enum {string}
+             */
+            state: "published" | "too_few" | "pending" | "not_included";
+            /** Tie Rule */
+            tie_rule: string;
+            /**
+             * Timing Group
+             * @enum {string}
+             */
+            timing_group: "standard" | "accommodated";
+            /**
+             * Version
+             * @description Comparison snapshot version
+             */
+            version?: number | null;
+            /** Window End */
+            window_end?: string | null;
+            /** Window Start */
+            window_start?: string | null;
+        };
         /** SubmitIn */
         portal_api__modules__assessment__schemas__SubmitIn: {
             /** Idempotency Key */
@@ -12305,6 +12321,42 @@ export interface components {
         portal_api__modules__identity__schemas__RevokeIn: {
             /** Reason */
             reason: string;
+        };
+        /** ComparisonOut */
+        portal_api__modules__written__calibration__ComparisonOut: {
+            /** Disagreements */
+            disagreements: string[];
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Position */
+            position: number;
+            /** Proposal Units */
+            proposal_units: {
+                [key: string]: number;
+            };
+            /** Reason */
+            reason: string | null;
+            /**
+             * Reference
+             * @description The script's short reference; no learner identity
+             */
+            reference: string;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "agreed" | "open" | "adjudicated";
+            /** Teacher Units */
+            teacher_units: {
+                [key: string]: number;
+            };
+            /** Verdicts */
+            verdicts: {
+                [key: string]: string;
+            };
         };
     };
     responses: never;
@@ -20379,7 +20431,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["ComparisonOut"];
+                    "application/json": components["schemas"]["portal_api__modules__written__calibration__ComparisonOut"];
                 };
             };
             /** @description Validation Error */

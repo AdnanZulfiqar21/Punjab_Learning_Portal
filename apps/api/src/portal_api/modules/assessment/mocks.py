@@ -44,32 +44,84 @@ Pool = dict[uuid.UUID, list[tuple[ContentItem, ContentVersion]]]
 
 
 class SectionShortage(Exception):
-    def __init__(self, section: int) -> None:
-        super().__init__(f"section {section} ran out of distinct questions")
-        self.section = section
+    def __init__(self, section: int, band: str | None = None, needed: int = 0, available: int = 0) -> None:
+        super().__init__(f"section {section} ran out of distinct questions" + (f" at {band}" if band else ""))
+        self.section, self.band, self.needed, self.available = section, band, needed, available
+
+
+BANDS = ("easy", "medium", "hard")
+
+
+def allocate(n: int, mix: Mapping[str, int]) -> dict[str, int]:
+    """P09.S3.T1 (ALLOCATION-01): `n` questions over a difficulty mix in percent, by largest-remainder rounding. Each
+    band gets its whole share; the questions left go to the largest remainders, ties to the earlier band (easy,
+    medium, hard). Always adds up to `n`, and the same inputs always give the same counts."""
+    shares = {b: n * int(mix.get(b, 0)) for b in BANDS}  # hundredths of a question
+    counts = {b: shares[b] // 100 for b in BANDS}
+    left = n - sum(counts.values())
+    for b in sorted(BANDS, key=lambda b: (-(shares[b] % 100), BANDS.index(b)))[:left]:
+        counts[b] += 1
+    return counts
+
+
+def difficulty(version: Any) -> str | None:
+    """The editorial difficulty a reviewed version carries (MCQ metadata), if any."""
+    value = ((version.body or {}).get("metadata") or {}).get("difficulty")
+    return value if value in BANDS else None
+
+
+def _draw(
+    rng: random.Random, pool: Mapping[uuid.UUID, forms.Members], n: int, seen: set[uuid.UUID]
+) -> tuple[list[uuid.UUID], int]:
+    unseen = sorted((f for f in pool if f not in seen), key=str)
+    picked = rng.sample(unseen, min(n, len(unseen)))
+    reused = n - len(picked)
+    if reused:  # not enough new questions: reuse some already seen, and say so on the form
+        picked += rng.sample(sorted((f for f in pool if f in seen), key=str), reused)
+    return picked, reused
 
 
 def select_sections(
-    sections: Sequence[tuple[int, Mapping[uuid.UUID, forms.Members]]], seen: set[uuid.UUID], seed: int
+    sections: Sequence[tuple[int, Mapping[uuid.UUID, forms.Members]]],
+    seen: set[uuid.UUID],
+    seed: int,
+    mixes: Sequence[Mapping[str, int] | None] | None = None,
 ) -> list[tuple[list[forms.Pick], int]]:
     """Each section's questions, in profile order, with how many were reused from earlier mocks.
 
     Unseen families come first; a family is never used twice in one mock, even when two sections' pools share it
-    (GENERATOR-PROPERTIES-01). Reproducible from the stored seed, independent of pool order."""
+    (GENERATOR-PROPERTIES-01). Reproducible from the stored seed, independent of pool order. A section with a
+    difficulty mix (ALLOCATION-01) draws each band's allocated count from families with a variant reviewed at that
+    difficulty, takes that variant, and is shuffled so the order doesn't give the difficulty away; a band that runs
+    short refuses the whole test rather than borrowing from another band."""
     rng = random.Random(seed)  # noqa: S311 - reproducible sampling from a stored seed, not a secret
     taken: set[uuid.UUID] = set()
     out = []
     for number, (n, pool) in enumerate(sections, start=1):
-        free = [f for f in pool if f not in taken]
-        if len(free) < n:
-            raise SectionShortage(number)
-        unseen = sorted((f for f in free if f not in seen), key=str)
-        picked = rng.sample(unseen, min(n, len(unseen)))
-        reused = n - len(picked)
-        if reused:  # not enough new questions: reuse some already seen, and say so on the form
-            picked += rng.sample(sorted((f for f in free if f in seen), key=str), reused)
-        taken.update(picked)
-        out.append(([(f, *forms.variant(rng, pool[f])) for f in picked], reused))
+        free = {f: pool[f] for f in pool if f not in taken}
+        mix = mixes[number - 1] if mixes else None
+        if not mix:
+            if len(free) < n:
+                raise SectionShortage(number)
+            picked, reused = _draw(rng, free, n, seen)
+            taken.update(picked)
+            out.append(([(f, *forms.variant(rng, free[f])) for f in picked], reused))
+            continue
+        picks: list[forms.Pick] = []
+        reused_all = 0
+        for band, k in allocate(n, mix).items():
+            if k == 0:
+                continue
+            banded = {f: [m for m in ms if difficulty(m[1]) == band] for f, ms in free.items() if f not in taken}
+            banded = {f: ms for f, ms in banded.items() if ms}
+            if len(banded) < k:
+                raise SectionShortage(number, band, k, len(banded))
+            picked, reused = _draw(rng, banded, k, seen)
+            taken.update(picked)
+            reused_all += reused
+            picks += [(f, *forms.variant(rng, banded[f])) for f in picked]
+        rng.shuffle(picks)
+        out.append((picks, reused_all))
     return out
 
 
@@ -109,8 +161,18 @@ def readiness(db: Session, code: str) -> dict[str, Any]:
     profile, version = _published(db, code)
     sections = []
     for s in version.rules["sections"]:
-        available = len(_section_pool(db, s["subject"], s["grades"], version.rules.get("question_pool", "mock")))
-        sections.append({**s, "available": available, "enough": available >= int(s["questions"])})
+        pool = _section_pool(db, s["subject"], s["grades"], version.rules.get("question_pool", "mock"))
+        available = len(pool)
+        enough = available >= int(s["questions"])
+        bands: list[dict[str, Any]] | None = None
+        if s.get("difficulty_mix"):  # ALLOCATION-01: each band needs its own count
+            bands = []
+            for b, k in allocate(int(s["questions"]), s["difficulty_mix"]).items():
+                if k:
+                    have = sum(1 for ms in pool.values() if any(difficulty(v) == b for _, v in ms))
+                    bands.append({"difficulty": b, "required": k, "available": have})
+                    enough = enough and have >= k
+        sections.append({**s, "available": available, "enough": enough, "bands": bands})
     problems = catalogue_problems(db, version.rules["sections"])
     return {
         "code": profile.code,
@@ -191,14 +253,19 @@ def build_from(
     seed = secrets.randbits(62)
     seen = set() if comparable else _seen_families(db, who.user.id)
     try:
-        chosen = select_sections([(int(s["questions"]), p) for s, p in pools], seen, seed)
-    except SectionShortage as e:  # sections that share questions (profiles older than the overlap rule)
+        chosen = select_sections(
+            [(int(s["questions"]), p) for s, p in pools], seen, seed, [s.get("difficulty_mix") for s, _ in pools]
+        )
+    except SectionShortage as e:  # sections that share questions, or a difficulty band that runs short
         s = rules["sections"][e.section - 1]
+        short_row: dict[str, Any] = {"subject": s["subject"], "grades": s["grades"], "required": int(s["questions"])}
+        if e.band:
+            short_row |= {"difficulty": e.band, "required": e.needed, "available": e.available}
         raise Unprocessable(
             "There aren't enough approved questions for this test pattern yet. A smaller practice test is available "
             "instead; it won't be a full mock.",
             code_reason="POOL_SHORTAGE",
-            sections=[{"subject": s["subject"], "grades": s["grades"], "required": int(s["questions"])}],
+            sections=[short_row],
         ) from None
     total = sum(int(s["questions"]) for s, _ in pools)
     first = rules["sections"][0]
@@ -250,9 +317,10 @@ def build_from(
                     passage_version_id=forms.passage_version(db, cv),
                 )
             )
-        sections.append(
-            {"subject": s["subject"], "grades": s["grades"], "from": start, "to": position, "reused": reused}
-        )
+        row = {"subject": s["subject"], "grades": s["grades"], "from": start, "to": position, "reused": reused}
+        if s.get("difficulty_mix"):  # ALLOCATION-01: the counts this form was built with, for the audit trail
+            row["difficulty"] = allocate(int(s["questions"]), s["difficulty_mix"])
+        sections.append(row)
     form.scope = {**form.scope, "sections": sections}
     try:
         db.commit()
