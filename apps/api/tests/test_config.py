@@ -12,6 +12,10 @@ OIDC = {
     "oidc_issuer": "https://idp.example.org/pool",
     "oidc_audience": "client-1",
     "evidence_store": "s3",
+    "evidence_s3_endpoint": "https://s3.internal.example",
+    "evidence_s3_bucket": "portal-evidence",
+    "evidence_s3_access_key": "deployed-access",
+    "evidence_s3_secret_key": "deployed-secret-value",
     "trial_device_evidence": "fallback",
     "trial_ref_pepper": "deployment-secret-fixture",
     "notification_email_adapter": "none",  # P15.S1: the dev outbox is refused; "none" until a sender exists (B04)
@@ -130,3 +134,25 @@ def test_deployed_roles_must_choose_trial_evidence_and_a_pepper() -> None:
     with pytest.raises(ConfigurationError, match="trial_ref_pepper"):
         Settings(**{**OIDC, "trial_ref_pepper": "dev-only-trial-pepper"}, **base)
     assert Settings(**OIDC, **base).trial_device_evidence == "fallback"  # an explicit, recorded choice is accepted
+
+
+def test_the_emulator_is_accepted_in_development_and_refused_when_deployed() -> None:
+    emulator = {
+        "evidence_store": "s3",
+        "evidence_s3_endpoint": "http://127.0.0.1:59000",
+        "evidence_s3_bucket": "portal-evidence-dev",
+        "evidence_s3_access_key": "portal-dev-only",
+        "evidence_s3_secret_key": "portal-dev-only",
+    }
+    assert Settings(role=Role.development, **emulator).evidence_s3_endpoint.endswith(":59000")
+    base = {
+        "role": Role.production,
+        "database_url": PROD_DB,
+        "public_api_origin": "https://api.example.org",
+        "build_id": "sha-abc",
+        "cors_origins": ["https://example.org"],
+    }
+    with pytest.raises(ConfigurationError, match="development endpoint or credential"):
+        Settings(**{**OIDC, **emulator}, **base)
+    with pytest.raises(ConfigurationError, match="endpoint, bucket"):
+        Settings(**{**OIDC, "evidence_s3_endpoint": "", "evidence_s3_bucket": ""}, **base)

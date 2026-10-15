@@ -104,6 +104,7 @@ async function Signals() {
 const MODE: Record<string, { label: string; tone: "ok" | "warn" | "danger" | "info" }> = {
   live: { label: "Live", tone: "ok" },
   development: { label: "Development stand-in", tone: "info" },
+  configured: { label: "Configured, production account not chosen", tone: "warn" },
   unavailable: { label: "Not connected", tone: "warn" },
 };
 

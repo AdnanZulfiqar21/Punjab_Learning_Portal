@@ -63,10 +63,16 @@ class Settings(BaseSettings):
     dev_auth_audience: str = "portal-api"
     dev_auth_token_ttl_s: int = 900
 
-    # Handwritten-answer evidence (W03). "local" is a private directory for development/test only (never web-served);
-    # deployed roles need private object storage (S3 proposed, BLOCKERS B03), whose adapter lands with that account.
+    # Handwritten-answer evidence and lesson assets (W03, P03.S1.T2). "local" is a private directory for
+    # development/test only. "s3" is the path-style client: the compose emulator in development, or a private bucket
+    # once the owner chooses an account and region (B03, D14). The region string is only for request signing.
     evidence_store: Literal["local", "s3"] = "local"
     evidence_dir: str = "var/evidence"
+    evidence_s3_endpoint: str = ""
+    evidence_s3_bucket: str = ""
+    evidence_s3_access_key: str = ""
+    evidence_s3_secret_key: str = ""
+    evidence_s3_region: str = "us-east-1"
     # Upload scanning (P06.S4.T1). "clamd" scans every learner upload before storage; "none" is development/test only.
     upload_scanner: Literal["none", "clamd"] = "none"
     clamd_host: str = "127.0.0.1"
@@ -121,6 +127,30 @@ class Settings(BaseSettings):
                 problems.append("oidc_issuer points at a development issuer")
             if self.evidence_store == "local":
                 problems.append("evidence_store must be private object storage, not the local development directory")
+            elif not all(
+                (
+                    self.evidence_s3_endpoint,
+                    self.evidence_s3_bucket,
+                    self.evidence_s3_access_key,
+                    self.evidence_s3_secret_key,
+                )
+            ):
+                problems.append("evidence_store=s3 needs an endpoint, bucket, access key and secret key")
+            else:
+                blob = " ".join(
+                    (
+                        self.evidence_s3_endpoint,
+                        self.evidence_s3_bucket,
+                        self.evidence_s3_access_key,
+                        self.evidence_s3_secret_key,
+                    )
+                ).lower()
+                markers = [m for m in DEV_MARKERS if m in blob and not (self.role is Role.staging and m == "staging")]
+                if markers or "minioadmin" in blob:
+                    problems.append(
+                        "evidence object storage uses a development endpoint or credential "
+                        + str(markers or ["minioadmin"])
+                    )
             if self.trial_device_evidence is None:
                 problems.append("trial_device_evidence must be set explicitly (required or fallback; roadmap §16)")
             if self.notification_email_adapter == "dev_outbox":
@@ -133,6 +163,15 @@ class Settings(BaseSettings):
                 problems.append("trial_ref_pepper must be a deployment secret")
             if problems:
                 raise ConfigurationError(f"refusing to start role={self.role.value}: " + "; ".join(problems))
+        elif self.evidence_store == "s3" and not all(
+            (
+                self.evidence_s3_endpoint,
+                self.evidence_s3_bucket,
+                self.evidence_s3_access_key,
+                self.evidence_s3_secret_key,
+            )
+        ):
+            raise ConfigurationError("evidence_store=s3 needs an endpoint, bucket, access key and secret key")
         if self.db_max_overflow != 0 and self.role is Role.production:
             raise ConfigurationError("db_max_overflow must be 0 in production (connection budget, roadmap §5.8)")
         return self

@@ -27,6 +27,10 @@ DEPLOYED_ENV = {
     "PORTAL_OIDC_ISSUER": "https://idp.example.org/pool",
     "PORTAL_OIDC_AUDIENCE": "client-1",
     "PORTAL_EVIDENCE_STORE": "s3",
+    "PORTAL_EVIDENCE_S3_ENDPOINT": "https://s3.internal.example",
+    "PORTAL_EVIDENCE_S3_BUCKET": "portal-evidence",
+    "PORTAL_EVIDENCE_S3_ACCESS_KEY": "deployed-access",
+    "PORTAL_EVIDENCE_S3_SECRET_KEY": "deployed-secret-value",
     "PORTAL_TRIAL_DEVICE_EVIDENCE": "fallback",
     "PORTAL_TRIAL_REF_PEPPER": "deployment-secret-fixture",
     "PORTAL_NOTIFICATION_EMAIL_ADAPTER": "none",  # P15.S1: the dev outbox is refused in deployed roles
