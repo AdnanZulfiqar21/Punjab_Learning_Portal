@@ -11938,6 +11938,11 @@ export interface components {
         /** WrittenResultOut */
         WrittenResultOut: {
             /**
+             * Assessment Method
+             * @description Who assessed the scored questions only (S): teacher, or none when nothing was scored. It never describes the whole paper while questions are pending or could not be assessed. None until released
+             */
+            assessment_method?: ("teacher" | "none") | null;
+            /**
              * Assessment State
              * @description complete; partial_pending (some questions are still being marked); partial_unavailable (some could not be assessed); unavailable (none could be assessed, so this test has no mark). None until released
              */
@@ -11971,6 +11976,11 @@ export interface components {
              * @description Changes to this result's basis, such as a marking-guide correction
              */
             notices?: components["schemas"]["NoticeOut"][];
+            /**
+             * Pending Max Units
+             * @description Maximum of the questions still being marked (P). Scored (S), pending (P) and could-not-be-assessed (U) maxima always add up to max_units (M), §20.9.3. None until released
+             */
+            pending_max_units?: number | null;
             /** Questions */
             questions: components["schemas"]["QuestionResult"][];
             recheck: components["schemas"]["RecheckOut"];
@@ -11988,6 +11998,11 @@ export interface components {
             status: "pending" | "released";
             /** Total Units */
             total_units: number | null;
+            /**
+             * Unavailable Max Units
+             * @description Maximum of the questions that could not be assessed (U). None until released
+             */
+            unavailable_max_units?: number | null;
             /** Version */
             version: number | null;
             /**
@@ -11995,6 +12010,11 @@ export interface components {
              * @description Every released version, oldest first, including any with no mark; corrections never erase history
              */
             versions: components["schemas"]["ScoreVersionOut"][];
+            /**
+             * Work Status
+             * @description What is happening to the script now, apart from its marks: in_review (a teacher has it or will), action_required (you were asked for a clearer copy or a confirmation), delayed (marking is past the time promised), finished. None before the script is submitted
+             */
+            work_status?: ("in_review" | "action_required" | "delayed" | "finished") | null;
         };
         /** RevokeIn */
         portal_api__modules__access__router__RevokeIn: {

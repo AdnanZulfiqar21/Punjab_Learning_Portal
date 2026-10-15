@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import logging
 import uuid
 from datetime import datetime
 from typing import Annotated, Any, Literal
@@ -22,6 +23,7 @@ from portal_api.modules.written.models import WrittenAttempt, WrittenForm
 from portal_api.modules.written.router import pages_out
 from portal_api.modules.written.schemas import LinkedAttemptOut, PageOut
 
+log = logging.getLogger("portal_api.written")
 router = APIRouter(prefix="/v1", tags=["written marking"])
 DB = Annotated[Session, Depends(get_session)]
 Reviewer = Annotated[Principal, Depends(require(Permission.review_content))]
@@ -316,6 +318,7 @@ class HistoryEntry(BaseModel):
 # legacy `completeness` field keeps them and the full state is a separate field.
 AssessmentState = Literal["complete", "partial_pending", "partial_unavailable", "unavailable"]
 LegacyCompleteness = Literal["complete", "partial_pending", "partial_unavailable"]
+WorkStatus = review.WorkStatus
 
 
 def legacy_completeness(state: str | None) -> LegacyCompleteness | None:
@@ -392,6 +395,25 @@ class WrittenResultOut(BaseModel):
         "could not be assessed); unavailable (none could be assessed, so this test has no mark). None until released"
     )
     scored_max_units: int | None = Field(description="Maximum of the questions that were scored")
+    pending_max_units: int | None = Field(
+        default=None,
+        description="Maximum of the questions still being marked (P). Scored (S), pending (P) and "
+        "could-not-be-assessed (U) maxima always add up to max_units (M), §20.9.3. None until released",
+    )
+    unavailable_max_units: int | None = Field(
+        default=None, description="Maximum of the questions that could not be assessed (U). None until released"
+    )
+    assessment_method: Literal["teacher", "none"] | None = Field(
+        default=None,
+        description="Who assessed the scored questions only (S): teacher, or none when nothing was scored. It never "
+        "describes the whole paper while questions are pending or could not be assessed. None until released",
+    )
+    work_status: WorkStatus | None = Field(
+        default=None,
+        description="What is happening to the script now, apart from its marks: in_review (a teacher has it or will), "
+        "action_required (you were asked for a clearer copy or a confirmation), delayed (marking is past the time "
+        "promised), finished. None before the script is submitted",
+    )
     questions: list[QuestionResult]
     recheck: RecheckOut
     history: list[HistoryEntry] = Field(
@@ -643,6 +665,9 @@ def my_result(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, response: Re
             completeness=None,
             assessment_state=None,
             scored_max_units=None,
+            work_status=review.work_status(db, attempt.id, pending=True, action_required=False)
+            if attempt.status == "sealed"
+            else None,
             questions=[],
             recheck=RecheckOut(**review.recheck_state(db, attempt.id)),
             history=[],
@@ -725,6 +750,18 @@ def my_result(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, response: Re
         for v in versions
         if v.total_units is not None
     ]
+    # RESULT-ARITHMETIC-01 (§20.9.3, W07.S1.T1): S + P + U = M, from the same per-question states the learner sees.
+    by_status = {s: sum(q.max_units for q in questions if q.status == s) for s in ("scored", "pending", "unavailable")}
+    if sum(by_status.values()) != sv.max_units:
+        log.error(
+            "written result %s v%s: scored %s + pending %s + unavailable %s != maximum %s",
+            attempt.id,
+            sv.version,
+            by_status["scored"],
+            by_status["pending"],
+            by_status["unavailable"],
+            sv.max_units,
+        )
     return WrittenResultOut(
         status="released",
         version=sv.version,
@@ -735,6 +772,16 @@ def my_result(db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, response: Re
         completeness=legacy_completeness(sv.completeness),
         assessment_state=sv.completeness,  # type: ignore[arg-type]
         scored_max_units=sv.scored_max_units if sv.scored_max_units is not None else sv.max_units,
+        pending_max_units=by_status["pending"],
+        unavailable_max_units=by_status["unavailable"],
+        # R0: every scored question was marked by a teacher (a carried-forward regrade keeps the teacher's marks).
+        assessment_method="teacher" if any(q.status == "scored" for q in questions) else "none",
+        work_status=review.work_status(
+            db,
+            attempt.id,
+            pending=any(q.status == "pending" for q in questions),
+            action_required=any(q.learner_action for q in questions),
+        ),
         questions=questions,
         recheck=RecheckOut(**review.recheck_state(db, attempt.id)),
         history=history,

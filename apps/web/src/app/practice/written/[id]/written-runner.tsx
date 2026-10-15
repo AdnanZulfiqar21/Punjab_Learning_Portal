@@ -254,6 +254,7 @@ export function WrittenRunner({
           <h2 id="result-h" className="text-lg font-semibold">
             Your marks
           </h2>
+          {result && (result.status === "released" || result.work_status === "delayed") && <WorkStatus status={result.work_status} />}
           {!result || result.status === "pending" ? (
             <Notice title="Waiting for a teacher">Your script is in the marking queue. Marks appear here once a teacher releases them.</Notice>
           ) : (
@@ -276,10 +277,7 @@ export function WrittenRunner({
                   question below.
                 </Notice>
               ) : (
-                <Notice tone="warn" title={result.completeness === "partial_pending" ? "Marking isn't finished yet" : "Some questions couldn't be assessed"}>
-                  So far {marks(result.total_units ?? 0)} out of {marks(result.scored_max_units ?? 0)} on the questions a teacher marked. There is no final total until
-                  every question is resolved, and nothing is counted as zero just because it wasn&apos;t assessed.
-                </Notice>
+                <PartialMarks result={result} />
               )}
               {(result.notices ?? []).map((n) => (
                 <Notice key={`${n.kind}:${n.created_at}`} title="Marking guide corrected">
@@ -525,6 +523,59 @@ export function WrittenRunner({
 // W07.S1.T2 (FEEDBACK-EVIDENCE-01): the place on your page a comment is about. The region is a fraction of the upright
 // page preview, so it is drawn over the same image at any size. A scan that is no longer available is named, never
 // highlighted.
+// RESULT-ARITHMETIC-01 (§20.9.3, W07.S1.T1): an incomplete paper shows the marks awarded on the scored questions, the
+// marks still being marked and the marks that couldn't be assessed side by side, which add up to the whole test. There
+// is no total or percentage for the paper, and the teacher label covers only the scored questions.
+function PartialMarks({ result }: { result: WrittenResult }) {
+  const scored = result.scored_max_units ?? 0;
+  const pending = result.pending_max_units ?? 0;
+  const unavailable = result.unavailable_max_units ?? 0;
+  const stillMarking = result.completeness === "partial_pending";
+  return (
+    <Notice tone="warn" title={stillMarking ? "Marking isn't finished yet" : "Some questions couldn't be assessed"}>
+      <p>
+        {scored > 0
+          ? `${marks(result.total_units ?? 0)} out of ${marks(scored)} on the questions a teacher marked.`
+          : "No question has been marked yet."}
+      </p>
+      <dl aria-label="How the marks add up" className="mt-2 grid grid-cols-[auto_1fr] gap-x-4 gap-y-1 tabular-nums">
+        <dt>Marked</dt>
+        <dd>{marks(scored)} marks</dd>
+        {pending > 0 && (
+          <>
+            <dt>Still being marked</dt>
+            <dd>{marks(pending)} marks</dd>
+          </>
+        )}
+        {unavailable > 0 && (
+          <>
+            <dt>Couldn&apos;t be assessed</dt>
+            <dd>{marks(unavailable)} marks</dd>
+          </>
+        )}
+        <dt className="font-medium">Whole test</dt>
+        <dd className="font-medium">{marks(result.max_units)} marks</dd>
+      </dl>
+      <p className="mt-2">
+        {stillMarking
+          ? "There is no final total until every question is resolved, and nothing is counted as zero just because it wasn't assessed."
+          : "This test has no final total or percentage, because some questions couldn't be assessed. They aren't counted as zero."}
+      </p>
+    </Notice>
+  );
+}
+
+// §20.9.3: what is happening to the script now, kept apart from the marks.
+function WorkStatus({ status }: { status: WrittenResult["work_status"] }) {
+  if (status === "action_required") return <p className="text-sm font-medium">Your step: a teacher asked you for something on a question below.</p>;
+  if (status === "delayed")
+    return (
+      <p className="text-sm font-medium">Marking is taking longer than planned. Your script is still in the queue, and nothing has been lost.</p>
+    );
+  if (status === "in_review") return <p className="text-sm text-muted">A teacher is still working on this script.</p>;
+  return null;
+}
+
 function EvidencePlace({ attemptId, place }: { attemptId: string; place: EvidenceLink }) {
   if (!place.available) return <span className="block text-sm text-muted">About {place.where}: that scan is no longer available.</span>;
   const r = place.region;

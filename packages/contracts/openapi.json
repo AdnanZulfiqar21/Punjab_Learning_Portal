@@ -17908,6 +17908,22 @@
       },
       "WrittenResultOut": {
         "properties": {
+          "assessment_method": {
+            "anyOf": [
+              {
+                "enum": [
+                  "teacher",
+                  "none"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Who assessed the scored questions only (S): teacher, or none when nothing was scored. It never describes the whole paper while questions are pending or could not be assessed. None until released",
+            "title": "Assessment Method"
+          },
           "assessment_state": {
             "anyOf": [
               {
@@ -17990,6 +18006,18 @@
             "title": "Notices",
             "type": "array"
           },
+          "pending_max_units": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Maximum of the questions still being marked (P). Scored (S), pending (P) and could-not-be-assessed (U) maxima always add up to max_units (M), \u00a720.9.3. None until released",
+            "title": "Pending Max Units"
+          },
           "questions": {
             "items": {
               "$ref": "#/components/schemas/QuestionResult"
@@ -18043,6 +18071,18 @@
             ],
             "title": "Total Units"
           },
+          "unavailable_max_units": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Maximum of the questions that could not be assessed (U). None until released",
+            "title": "Unavailable Max Units"
+          },
           "version": {
             "anyOf": [
               {
@@ -18061,6 +18101,24 @@
             },
             "title": "Versions",
             "type": "array"
+          },
+          "work_status": {
+            "anyOf": [
+              {
+                "enum": [
+                  "in_review",
+                  "action_required",
+                  "delayed",
+                  "finished"
+                ],
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "What is happening to the script now, apart from its marks: in_review (a teacher has it or will), action_required (you were asked for a clearer copy or a confirmation), delayed (marking is past the time promised), finished. None before the script is submitted",
+            "title": "Work Status"
           }
         },
         "required": [
