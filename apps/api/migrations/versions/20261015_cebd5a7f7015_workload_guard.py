@@ -4,7 +4,7 @@ Two new tables. API processes write samples and any process may write the guard 
 nor writes them, so it keeps running written work unguarded during a rolling deployment.
 
 Revision ID: cebd5a7f7015
-Revises: a7e159815370
+Revises: b780d235c059
 Create Date: 2026-10-15
 """
 
@@ -15,7 +15,7 @@ from alembic import op
 from sqlalchemy.dialects import postgresql
 
 revision = "cebd5a7f7015"
-down_revision = "a7e159815370"
+down_revision = "b780d235c059"
 branch_labels = None
 depends_on = None
 
