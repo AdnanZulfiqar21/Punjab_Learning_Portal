@@ -42,6 +42,7 @@ from sqlalchemy import (
 from sqlalchemy.dialects.postgresql import JSONB, UUID
 from sqlalchemy.orm import Mapped, Session, mapped_column
 
+from portal_api.budget import process_class
 from portal_api.db import Base
 from portal_api.errors import Forbidden, NotFound, StorageUnavailable, TooLarge, Unprocessable
 from portal_api.modules.audit.models import record
@@ -399,11 +400,17 @@ def image_ready(db: Session, version_id: str) -> bool:
     return asset is not None and asset.kind == "image"
 
 
+@process_class("bulk")
 def main() -> None:  # pragma: no cover - thin CLI wrapper
     """portal-asset-retention [--apply]: the scheduled retention job (dry run by default)."""
     import sys
 
+    from portal_api.budget import bulk_paused_now
     from portal_api.db import get_sessionmaker
+
+    if why := bulk_paused_now():  # POOL-CAPS-01: the next scheduled run does it
+        print(f"skipped: {why}", flush=True)
+        return
 
     with get_sessionmaker()() as db:
         purged = collect(db, apply="--apply" in sys.argv)

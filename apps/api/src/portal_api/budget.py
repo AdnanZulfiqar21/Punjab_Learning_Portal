@@ -5,6 +5,13 @@ pool; the total is what the database (or its pooler) must actually admit at peak
 reserves. A per-process pool is multiplied by its process count, never mislabelled as per replica. Production refuses
 pool overflow (config validator), so a pool size is a hard ceiling.
 
+**Enforced per process (P17.S2.T2, POOL-CAPS-01):** every installed command declares its class with `process_class`,
+which caps that process's database pool at the class's per-process connections before the first connection is
+opened, and a test checks that every command in `ENTRY_POINTS` does. **Bulk work pauses in mock windows:** bulk-class
+commands claim no new work from `BULK_PAUSE_MARGIN` before a scheduled mock window opens until the same margin after
+it closes (`bulk_pause_reason`), unless `PORTAL_BULK_PAUSE_IN_MOCK_WINDOWS=false`. CPU and memory caps belong to the
+deployment (B03).
+
 These are **planning numbers** from the roadmap, not measurements: the funded server/pooler limit, autoscaling maxima
 and the measured envelopes come with hosting (B03) and the load qualification (P20, AC50/AC63). `portal-budget`
 prints the sheet and, given the funded capacity (`PORTAL_DB_SERVER_CONNECTIONS`), says whether the plan fits.
@@ -12,9 +19,18 @@ prints the sheet and, given the funded capacity (`PORTAL_DB_SERVER_CONNECTIONS`)
 
 from __future__ import annotations
 
+import functools
 import os
 import sys
+from collections.abc import Callable
 from dataclasses import dataclass
+from datetime import timedelta
+from typing import TYPE_CHECKING, Any, TypeVar
+
+if TYPE_CHECKING:
+    from sqlalchemy.orm import Session
+
+F = TypeVar("F", bound=Callable[..., Any])
 
 
 @dataclass(frozen=True)
@@ -67,6 +83,66 @@ ENTRY_POINTS: dict[str, str] = {
 }
 DEVELOPMENT_ONLY = ("portal-dev-seed-staff", "portal-dev-seed-practice", "portal-dev-fixture-rubric-correction")
 NO_DATABASE = ("portal-budget",)
+
+BULK_PAUSE_MARGIN = timedelta(minutes=15)
+
+
+def process_class(name: str) -> Callable[[F], F]:
+    """Declare the budget class of an installed command (POOL-CAPS-01). Before the command runs, its process's database
+    pool is capped at the class's per-process connections. A process that already has its pool (a test calling the
+    function directly) keeps it: the cap is for the deployed process, which starts fresh."""
+    pool = next((p for p in PLAN if p.name == name), None)
+    if pool is None:
+        raise ValueError(f"{name} is not a budgeted class")
+
+    def wrap(fn: F) -> F:
+        @functools.wraps(fn)
+        def run(*args: Any, **kwargs: Any) -> Any:
+            from portal_api import db
+
+            db.cap_pool(pool.connections_each)
+            return fn(*args, **kwargs)
+
+        run.budget_class = name  # type: ignore[attr-defined]
+        return run  # type: ignore[return-value]
+
+    return wrap
+
+
+def bulk_pause_reason(db: Session) -> str | None:
+    """Why bulk work must wait now (P17.S2.T2), or None: a scheduled mock window is open or about to open."""
+    from sqlalchemy import func, select
+
+    from portal_api.config import get_settings
+    from portal_api.modules.assessment.sessions import MockSession
+
+    if not get_settings().bulk_pause_in_mock_windows:
+        return None
+    now = db.execute(select(func.now())).scalar_one()
+    session = db.scalar(
+        select(MockSession)
+        .where(
+            MockSession.status == "scheduled",
+            MockSession.starts_at - BULK_PAUSE_MARGIN <= now,
+            MockSession.window_closes_at + BULK_PAUSE_MARGIN >= now,
+        )
+        .order_by(MockSession.starts_at)
+        .limit(1)
+    )
+    if session is None:
+        return None
+    margin = int(BULK_PAUSE_MARGIN.total_seconds() // 60)
+    until = f"{session.window_closes_at:%Y-%m-%d %H:%M} UTC + {margin} min"
+    return f"bulk work is paused for the scheduled mock window '{session.title}' (until {until})"
+
+
+def bulk_paused_now() -> str | None:
+    """`bulk_pause_reason` in a short session of its own, for commands that run once."""
+    from portal_api.db import get_sessionmaker
+
+    with get_sessionmaker()() as db:
+        return bulk_pause_reason(db)
+
 
 # A rolling deployment briefly runs old and new API replicas side by side; budget that overlap explicitly.
 DEPLOY_OVERLAP_API_REPLICAS = 2

@@ -23,6 +23,7 @@ from sqlalchemy import select, update
 from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.orm import Session
 
+from portal_api.budget import process_class
 from portal_api.db import get_sessionmaker
 from portal_api.modules.curriculum.models import (
     BookEdition,
@@ -391,6 +392,7 @@ def describe(session: Session, chapters: list[dict[str, Any]], topics: list[dict
     return out
 
 
+@process_class("reserve")
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--catalogue", type=Path, default=DEFAULT_CATALOGUE)

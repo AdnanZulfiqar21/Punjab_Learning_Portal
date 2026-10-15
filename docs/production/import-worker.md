@@ -13,7 +13,8 @@ deployment must provide, and what was rehearsed locally.
 | `portal-import-reconcile --apply` | hourly, scheduled | Deletes uploads that no batch names and that are over an hour old: the API stopped between writing a file and recording its batch. Without `--apply` it only lists them. |
 
 All three belong to the **bulk** capacity class (`budget.py`, `docs/project/CAPACITY_BUDGET.md`): a database pool of
-3 per process.
+3 per process, enforced when the command starts (POOL-CAPS-01). Around a scheduled mock window (15 minutes either
+side) the worker claims nothing new and `--apply` reconciliation skips its run; queued batches simply wait.
 
 ## Shared private storage: required
 

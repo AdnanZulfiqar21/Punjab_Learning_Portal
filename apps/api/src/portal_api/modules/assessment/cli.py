@@ -11,11 +11,13 @@ from __future__ import annotations
 
 import sys
 
+from portal_api.budget import process_class
 from portal_api.db import get_sessionmaker
 from portal_api.modules.assessment.attempts import expire_due, score_pending
 from portal_api.modules.written.service import expire_due as expire_written
 
 
+@process_class("critical")
 def main(argv: list[str] | None = None) -> int:
     with get_sessionmaker()() as db:
         done = expire_due(db)
