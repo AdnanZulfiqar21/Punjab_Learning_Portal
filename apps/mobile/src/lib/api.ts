@@ -410,6 +410,13 @@ export const api = {
     request<SupportTicket>("/v1/support/tickets", { method: "POST", token, body }),
   replyTicket: (token: string, id: string, body: string) =>
     request<SupportTicket>(`/v1/support/tickets/${encodeURIComponent(id)}/messages`, { method: "POST", token, body: { body } }),
+  // P15.S3.T1 (MOBILE-SCREENSHOTS-01): a JPEG or PNG, sent as is; the server validates and re-encodes it.
+  addScreenshot: (token: string, id: string, file: Blob) =>
+    request<NonNullable<SupportTicket["attachments"]>[number]>(`/v1/support/tickets/${encodeURIComponent(id)}/attachments`, {
+      method: "POST",
+      token,
+      raw: file,
+    }),
 };
 
 export const GRADE_LABEL: Record<number, string> = { 11: "Class XI", 12: "Class XII" };
