@@ -82,6 +82,14 @@ async function Builder({ grade: rawGrade, subject: rawSubject }: { grade?: strin
               You&apos;re in the written-practice pilot: a teacher checks every mark, and pilot tests use only your pilot marking units.
             </p>
           )}
+          {/* WORKLOAD-GUARD-01: new written tests wait out a short pause that protects exams in progress. */}
+          {av.paused ? (
+            <Notice tone="warn" title="Written tests are paused for a few minutes">
+              {av.guard_notice}
+            </Notice>
+          ) : (
+            av.guard_notice && <p className="text-sm text-muted">{av.guard_notice}</p>
+          )}
           {/* STAFFING-01: an honest wait, and a plain notice when marking is full (submitted work is still marked). */}
           {!av.review_accepting ? (
             <Notice tone="warn" title="Marking is full right now">

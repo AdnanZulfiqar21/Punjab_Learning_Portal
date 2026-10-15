@@ -72,6 +72,14 @@ export function WrittenBuilder({ token, grade, subject }: { token: string; grade
       {a.pilot_only && (
         <T variant="small">You&apos;re in the written-practice pilot: a teacher checks every mark, and pilot tests use only your pilot marking units.</T>
       )}
+      {/* WORKLOAD-GUARD-01: new written tests wait out a short pause that protects exams in progress. */}
+      {a.paused ? (
+        <Notice tone="warn" title="Written tests are paused for a few minutes">
+          {a.guard_notice ?? ""}
+        </Notice>
+      ) : (
+        a.guard_notice && <T variant="small">{a.guard_notice}</T>
+      )}
       {!a.review_accepting && (
         <Notice tone="warn" title="Marking is full right now">
           Teacher marking for this subject is at capacity, so new written tests can&apos;t start. Scripts already submitted are kept and will be marked.

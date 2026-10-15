@@ -3,7 +3,8 @@
 from __future__ import annotations
 
 import logging
-from collections.abc import Awaitable, Callable
+from collections.abc import AsyncIterator, Awaitable, Callable
+from contextlib import asynccontextmanager
 
 from fastapi import FastAPI, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
@@ -40,6 +41,7 @@ from portal_api.modules.identity.router import router as identity_router
 from portal_api.modules.identity.settings import router as settings_router
 from portal_api.modules.notifications.router import router as notifications_router
 from portal_api.modules.support.router import router as support_router
+from portal_api.modules.system import guard
 from portal_api.modules.system.business import router as business_router
 from portal_api.modules.system.clients import router as clients_router
 from portal_api.modules.system.integrations import router as integrations_router
@@ -49,10 +51,18 @@ from portal_api.modules.written.review_router import router as written_review_ro
 from portal_api.modules.written.router import router as written_router
 
 
+@asynccontextmanager
+async def _lifespan(app: FastAPI) -> AsyncIterator[None]:
+    # W09.S1.T3 (WORKLOAD-GUARD-01): a served process publishes its MCQ save health for the written workload guard.
+    guard.start_sampler(get_settings().health_sample_s)
+    yield
+
+
 def create_app() -> FastAPI:
     settings = get_settings()  # validates configuration; refuses unsafe production roles at startup
     logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s %(message)s")
     app = FastAPI(
+        lifespan=_lifespan,
         title="Punjab Learning Portal API",
         version="0.1.0",
         summary="Authoritative backend for student web, Android, iOS and staff admin.",

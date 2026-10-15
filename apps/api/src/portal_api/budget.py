@@ -109,12 +109,16 @@ def process_class(name: str) -> Callable[[F], F]:
 
 
 def bulk_pause_reason(db: Session) -> str | None:
-    """Why bulk work must wait now (P17.S2.T2), or None: a scheduled mock window is open or about to open."""
+    """Why bulk work must wait now (P17.S2.T2), or None: a scheduled mock window is open or about to open, or the
+    workload guard is protecting exams (W09.S1.T3)."""
     from sqlalchemy import func, select
 
     from portal_api.config import get_settings
     from portal_api.modules.assessment.sessions import MockSession
+    from portal_api.modules.system import guard
 
+    if why := guard.paused_reason(db):
+        return f"bulk work is paused: {why}"
     if not get_settings().bulk_pause_in_mock_windows:
         return None
     now = db.execute(select(func.now())).scalar_one()

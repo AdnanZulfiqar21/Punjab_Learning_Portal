@@ -29,6 +29,11 @@ class WrittenAvailabilityOut(BaseModel):
         description="True during the R0 teacher-reviewed pilot: only invited pilot learners can start written tests"
     )
     in_pilot: bool = Field(description="True when this learner has an active pilot entitlement")
+    paused: bool = Field(
+        default=False,
+        description="WORKLOAD-GUARD-01: new written tests wait a few minutes to protect exams in progress",
+    )
+    guard_notice: str | None = Field(default=None, description="Why marking may take longer now, in plain words")
 
 
 class WrittenFormIn(BaseModel):

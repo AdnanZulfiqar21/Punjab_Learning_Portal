@@ -49,6 +49,8 @@ class Settings(BaseSettings):
     db_max_overflow: int = 0
     # P17.S2.T2 (POOL-CAPS-01): bulk-class commands claim no new work around scheduled mock windows.
     bulk_pause_in_mock_windows: bool = True
+    # W09.S1.T3 (WORKLOAD-GUARD-01): each API process publishes its MCQ save health this often (seconds); 0 = off.
+    health_sample_s: float = 20.0
     db_statement_timeout_ms: int = 5000
 
     # Identity (P04). Production trusts exactly one managed OIDC issuer (Cognito proposed; BLOCKERS B04).

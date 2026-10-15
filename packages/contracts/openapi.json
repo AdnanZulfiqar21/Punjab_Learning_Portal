@@ -17848,9 +17848,27 @@
             "title": "Grade",
             "type": "integer"
           },
+          "guard_notice": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Why marking may take longer now, in plain words",
+            "title": "Guard Notice"
+          },
           "in_pilot": {
             "description": "True when this learner has an active pilot entitlement",
             "title": "In Pilot",
+            "type": "boolean"
+          },
+          "paused": {
+            "default": false,
+            "description": "WORKLOAD-GUARD-01: new written tests wait a few minutes to protect exams in progress",
+            "title": "Paused",
             "type": "boolean"
           },
           "pilot_only": {

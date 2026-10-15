@@ -35,6 +35,7 @@ from portal_api.modules.curriculum.regions import released_grade
 from portal_api.modules.identity.deps import Principal
 from portal_api.modules.identity.models import StaffRoleGrant
 from portal_api.modules.identity.permissions import Permission, Role, permissions_for
+from portal_api.modules.system import guard
 from portal_api.modules.written import evidence, review, storage
 from portal_api.modules.written.models import (
     WrittenAttempt,
@@ -304,7 +305,8 @@ def start(db: Session, who: Principal, form_id: uuid.UUID) -> WrittenAttempt:
         select(WrittenAttempt).where(WrittenAttempt.form_id == form_id, WrittenAttempt.user_id == who.user.id)
     )
     if existing is not None:
-        return existing
+        return existing  # resuming an admitted test is never paused
+    guard.require_open(db)  # W09.S1.T3 (WORKLOAD-GUARD-01): a new start waits out a guard pause
     # Review R03: admission is serialized per account, and everything that decides it is read after the lock.
     access.lock_permit_admission(db, who.user.id)
     existing = db.scalar(

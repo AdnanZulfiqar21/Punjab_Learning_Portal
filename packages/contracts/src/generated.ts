@@ -11950,10 +11950,21 @@ export interface components {
             /** Grade */
             grade: number;
             /**
+             * Guard Notice
+             * @description Why marking may take longer now, in plain words
+             */
+            guard_notice?: string | null;
+            /**
              * In Pilot
              * @description True when this learner has an active pilot entitlement
              */
             in_pilot: boolean;
+            /**
+             * Paused
+             * @description WORKLOAD-GUARD-01: new written tests wait a few minutes to protect exams in progress
+             * @default false
+             */
+            paused: boolean;
             /**
              * Pilot Only
              * @description True during the R0 teacher-reviewed pilot: only invited pilot learners can start written tests

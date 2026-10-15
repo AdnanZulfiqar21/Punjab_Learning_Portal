@@ -244,6 +244,19 @@ def work(db: Session, batch: int = 50, max_batches: int | None = None, owner: st
     return done
 
 
+def drain(db: Session, batch: int, owner: str) -> int:
+    """One worker pass under the workload guard (W09.S1.T3): nothing new while it is paused; while it recovers, one
+    batch of its ramp share; otherwise the whole queue."""
+    from portal_api.modules.system import guard
+
+    share = guard.allowance(db)
+    if share <= 0:
+        return 0
+    if share < 1:
+        return work(db, max(1, int(batch * share)), max_batches=1, owner=owner)
+    return work(db, batch, owner=owner)
+
+
 @process_class("written.regrade")
 def worker_main(argv: list[str] | None = None) -> int:
     """portal-written-worker [--once] [--batch N] [--interval S]: the written regrade worker process."""
@@ -258,7 +271,7 @@ def worker_main(argv: list[str] | None = None) -> int:
     print(f"written worker {owner} started", flush=True)
     while True:
         with get_sessionmaker()() as db:  # a fresh session per drain: no connection kept across idle waits
-            n = work(db, args.batch, owner=owner)
+            n = drain(db, args.batch, owner=owner)
         if n:
             print(f"processed {n} script(s)", flush=True)
         if args.once:
