@@ -14,6 +14,7 @@ import { Space } from "@/constants/theme";
 import { useRequest } from "@/hooks/use-request";
 import { api, ApiError } from "@/lib/api";
 import { TIME_ZONE } from "@/lib/dates";
+import { LINKED_STATUS, linkedRoute, togglePosition } from "@/lib/linked-practice";
 
 type Question = WrittenResult["questions"][number];
 const marks = (u: number) => String(u / 100);
@@ -206,6 +207,7 @@ export function WrittenResultView({ attemptId, token }: { attemptId: string; tok
         </Card>
       )}
       <Recheck attemptId={attemptId} token={token} r={r} onDone={req.retry} />
+      <PractiseAgain attemptId={attemptId} token={token} r={r} />
     </View>
   );
 }
@@ -280,6 +282,65 @@ function PendingAction({ attemptId, token, q, onDone }: { attemptId: string; tok
       {note && <T variant="small">{note}</T>}
       <FormError message={error} />
     </View>
+  );
+}
+
+// W04.S3.T3 (MOBILE-LINKED-01): answering again is a separate, linked practice test with its own allowance use. It
+// never changes the result above; to have the same answer looked at again, the learner asks for a recheck instead.
+function PractiseAgain({ attemptId, token, r }: { attemptId: string; token: string; r: WrittenResult }) {
+  const [picked, setPicked] = useState<number[]>(() => r.questions.map((q) => q.position));
+  const [key] = useState(newKey); // one per screen: a double tap or a retry returns the same prepared test
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const linked = r.linked_attempts ?? [];
+
+  async function prepare() {
+    setBusy(true);
+    setError(null);
+    try {
+      const f = await api.prepareLinkedPractice(token, attemptId, key, { reason: "REWRITE", positions: picked, revision_id: null });
+      router.push({ pathname: "/written/linked/[formId]", params: { formId: f.form_id } });
+    } catch (e) {
+      setError(e instanceof ApiError ? e.message : "Couldn't prepare the new practice test.");
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  return (
+    <Card label="Practise these questions again">
+      <View style={{ gap: Space.sm }}>
+        <T style={{ fontWeight: "600" }}>Practise these questions again</T>
+        <T variant="small">
+          Write fresh answers as a new practice test. It is marked on its own and uses your written allowance like any test (you&apos;ll see how much before
+          it starts). The marks above stay as they are; if you think a teacher misread this script, a recheck is the right route.
+        </T>
+        <Choices
+          label="Questions to practise again"
+          multiple
+          options={r.questions.map((q) => [q.position, `Question ${q.position}`] as const)}
+          selected={picked}
+          onToggle={(p) => setPicked((cur) => togglePosition(cur, p))}
+        />
+        <FormError message={error} />
+        <Button label="Prepare a new practice test" onPress={() => void prepare()} busy={busy} disabled={picked.length === 0} />
+        {linked.length > 0 && (
+          <View style={{ gap: Space.xs }} accessibilityLabel="Linked practice tests">
+            <T variant="small" style={{ fontWeight: "600" }}>
+              Linked practice tests
+            </T>
+            {linked.map((l) => (
+              <Button
+                key={l.form_id}
+                variant="link"
+                label={`Questions ${l.positions.join(", ")} · ${LINKED_STATUS[l.status] ?? l.status} · ${when(l.created_at)}`}
+                onPress={() => router.push(linkedRoute(l))}
+              />
+            ))}
+          </View>
+        )}
+      </View>
+    </Card>
   );
 }
 
