@@ -1,6 +1,6 @@
 # Work queue (every roadmap task)
 
-**Evening of 2026-10-15:** the counts and the C list below were written before #219–#225 merged. Those pulls are on `main` (`8949b49`). Treat these as already implemented, and do not rebuild them: P12.S2.T3 comparisons, W09.S1.T3 workload guard, P06.S4.T2 export schema 2, P09.S3.T1 difficulty allocation, W01.S1.T1 numerical/derivation authoring (not offered to learners), P02.S2.T1 Urdu Nastaliq and the shared colour check, plus the support read and the staffing-journey order. The class counts are not a current census.
+**Night of 2026-10-15:** `main` is `f3d2a83`. Alembic head is `f8a21c6d4e90`. The counts and the C list below are not a current census. Do not rebuild work that is already on main: the evening items (P12.S2.T3, W09.S1.T3, P06.S4.T2, P09.S3.T1, W01.S1.T1, P02.S2.T1, the support read and the staffing-journey order; then at `8949b49`) and, since then, P13.S2.T1 mobile discovery (#227), P05.S1.T3 edition windows (#228), P03.S1.T2 the development object-store adapter (#229) and P04.S2.T2 the emergency-access audit (#230). #231 (do not choose among overlapping current editions) was open when this note was written and is not evidence until it merges. The sentence “nothing buildable remains” in RESUME_STATE is a 12 October historical note.
 
 Built 2026-10-15 from the roadmap's 423 task IDs (306 core `P..`, 117 written `W..`), the register, BLOCKERS, DECISIONS and
 the status audit, with the cited code and test files checked to exist. Classes:
@@ -58,13 +58,13 @@ Smallest learner- or safety-relevant items first; each one lands as its own PR, 
 | 11 | P06.S4.T2 | S/M | export schema v2 |
 | 12 | P09.S3.T3 | M | fixed form per scheduled session |
 | 13 | P09.S3.T1 | M | difficulty/outcome allocation |
-| 14 | P13.S2.T1 | M | mobile discovery |
+| 14 | P13.S2.T1 | M | mobile discovery — on main (#227); do not rebuild |
 | 15 | W01.S2.T2 | S | rubric sig-fig and contradiction fields |
 | 16 | W03.S2.T2 | L | region mapping and mapping history |
-| 17 | P05.S1.T3 | M | edition effective dates |
+| 17 | P05.S1.T3 | M | edition effective dates — on main (#228); do not rebuild |
 | 18 | P06.S3.T2 | L | atomic multi-item release |
 | 19 | P12.S2.T3 | L | cohort comparisons (after P09.S3.T3) |
-| 20 | P03.S1.T2 | M | S3-compatible emulator + adapter |
+| 20 | P03.S1.T2 | M | S3-compatible emulator + adapter — on main (#229); do not rebuild |
 | 21 | P03.S3.T2 | M/L | Dockerfiles + CI image digests |
 | 22 | P01.S4.T2 | M/L | web equation/notation renderer spike |
 | 23 | P02.S2.T1 | S | Urdu font + shared tokens |
@@ -72,7 +72,7 @@ Smallest learner- or safety-relevant items first; each one lands as its own PR, 
 | 25 | P11.S2.T1 | M | focused lesson page (confirm intent first) |
 
 Records-only C items (size S, after the code items, in one records PR): P00.S1.T1, P00.S1.T3, P00.S1.T4, P00.S2.T3,
-P00.S3.T2, P01.S2.T2, P01.S3.T1, P02.S1.T3, P02.S2.T2, P03.S1.T3, P04.S2.T2, W11.S3.T3.
+P00.S3.T2, P01.S2.T2, P01.S3.T1, P02.S1.T3, P02.S2.T2, P03.S1.T3, W11.S3.T3. P04.S2.T2 landed in #230 and is not still a records-only item.
 
 ## C: incomplete and executable now (39)
 
@@ -90,12 +90,12 @@ P00.S3.T2, P01.S2.T2, P01.S3.T1, P02.S1.T3, P02.S2.T2, P03.S1.T3, P04.S2.T2, W11
 | P02.S1.T3 | Map every screen state | not registered (TODO by rule) | State map per route (loading, empty, expired, offline, conflict, update-required, score revised, 5 answer states) and gap list | none |
 | P02.S2.T1 | Define tokens and typography | not registered (TODO by rule) | Choose/record Urdu font and a token table used by web and mobile | phone readability check B09; brand B11 not blocking |
 | P02.S2.T2 | Build component specifications | not registered (TODO by rule) | Component specs: forms, tables, meters, answer-state options, keyboard and disabled states | none |
-| P03.S1.T2 | Create reproducible local services | IMPLEMENTED | Add S3-compatible emulator + adapter behind written/storage.py and asset store | none (prod bucket B03) |
+| P03.S1.T2 | Create reproducible local services | IMPLEMENTED on main (#229); emulator exercised 2026-10-15 | LocalStack 4.7.0. CI used an in-process stand-in. A later local run covered put, get, list, delete, exclusive evidence and prefix isolation, and the admin label was "Development stand-in". | Production bucket and region (B03). Not production qualification. |
 | P03.S1.T3 | Establish coding and review conventions | IN_PROGRESS | CONTRIBUTING: startup, seed/reset, debugging, migration naming, commit style; refresh README | none |
 | P03.S3.T2 | Build immutable artifacts and variant builds | not registered (TODO by rule) | Dockerfiles (API/workers, web); CI build per commit recording digest in release manifest | registry promotion B03; native variants B07/B13 |
 | P03.S4.T2 | Add baseline observability | IMPLEMENTED (API + web) | Carry correlation ID into import/export/notification/regrade/auto-assess job rows and worker logs | none |
-| P04.S2.T2 | Protect staff accounts | IMPLEMENTED (API) | Emergency-access runbook + test that portal-grant-role use is audited | none |
-| P05.S1.T3 | Add edition and year boundaries | P05.S1 stage row only | Edition/cohort effective dates so old and new cohorts coexist; tests with technical fixture editions | none (real dates owner later) |
+| P04.S2.T2 | Protect staff accounts | IMPLEMENTED on main (#230) | `docs/runbooks/emergency-access.md`; `portal-grant-role` writes an audit row with no actor | Not a current C item |
+| P05.S1.T3 | Add edition and year boundaries | IMPLEMENTED on main (#228), migration `f8a21c6d4e90` | The grade/subject book endpoint returns 409 when two editions are effective today and does not choose one. A book id still loads. | Real edition dates are an owner decision. Catalogue and discovery still listed both editions until #231. |
 | P06.S1.T2 | Build the editorial work queue | IMPLEMENTED | In PR #202 ASSIGN-REVIEWER-01 (publisher assigns from eligible reviewers) | none |
 | P06.S3.T2 | Publish versioned content releases | IN_PROGRESS | Atomic multi-item catalogue release with release-level rollback; CDN invalidation later | none (CDN B03) |
 | P06.S4.T2 | Provide portable content export | IMPLEMENTED | Add concept/inclusion mappings and asset-version references (schema v2); update docs/content-import.md | none |
@@ -106,7 +106,7 @@ P00.S3.T2, P01.S2.T2, P01.S3.T1, P02.S1.T3, P02.S2.T2, P03.S1.T3, P04.S2.T2, W11
 | P12.S2.T3 | Make learner comparisons honest | not registered (TODO by rule) | Cohort snapshot: >=200 distinct learners, earliest attempt, 90 days, midrank ties, hidden below threshold; tests with technical accounts | none (display needs real learners) |
 | P12.S3.T1 | Build the mistake notebook | IMPLEMENTED | In PR #203 NOTEBOOK-FLAGS-01 (flagged answers collected and reviewed) | none |
 | P13.S1.T4 | Implement client capability and supported-version policy | IMPLEMENTED (server)/code only | Validate publication against the oldest supported build registered manifest (CLIENTS-01 Not done) | pipeline registration B03; D08 B09 |
-| P13.S2.T1 | Implement learning screens | PARTIAL | Mobile discovery screen; keep state across rotation/background | player/transcript B05; devices B13 |
+| P13.S2.T1 | Implement learning screens | PARTIAL; discovery on main (#227) | The Learn tab reads `/v1/discovery`. Host tests are not device evidence. | Rotation and background; lecture player and transcripts (B05); devices (B09, B13) |
 | P17.S2.T2 | Separate worker priorities | not registered (TODO by rule) | Per-class pool caps at worker start, job duration caps, bulk workers pause in published mock windows | separate deployments/CPU/memory B03 |
 | P20.S4.T4 | Bind qualification evidence to the release manifest | not registered (TODO by rule) | QualificationRecord schema, §6.4 trigger table as release-checklist tool, AC51 demo (payload vs caption change) | none (real records need P20 runs) |
 | W01.S1.T1 | Extend the question taxonomy | TODO (W01 stage row IMPLEMENTED; audit: partial) | Add numerical and derivation types with required fields; shared passages/assets for written items; tests | None to build; offering them to learners needs WA-D11 |
