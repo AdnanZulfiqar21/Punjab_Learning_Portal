@@ -75,7 +75,10 @@ def test_a_publisher_assigns_an_eligible_reviewer_and_can_clear_it(
     assert cleared.status_code == 200 and cleared.json()["assigned_reviewer"] is None
     events = (
         db.execute(
-            text("select details from audit_event where target_id = :i and action = 'content.reviewer_assigned'"),
+            text(
+                "select details from audit_event where target_id = :i and action = 'content.reviewer_assigned' "
+                "order by at"  # each assignment is its own request, so its own time; without an order rows come any way
+            ),
             {"i": item["id"]},
         )
         .scalars()
