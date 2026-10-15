@@ -235,6 +235,25 @@ test("a crooked page can be straightened and the straightening undone", async ({
   await expect(adjust.getByRole("button", { name: "Straighten" })).toBeVisible(AUTH);
 });
 
+// W03.S2.T3 (NEAR-DUP-01): the same page uploaded again (re-saved smaller, as a JPEG) is flagged, named and kept.
+test("the same page uploaded twice is pointed out, and both pages are kept", async ({ page }) => {
+  await newLearner(page);
+  await page.goto("/practice/written?grade=11&subject=biology");
+  await page.getByRole("group", { name: "Chapters" }).getByRole("checkbox").first().check();
+  await page.getByRole("button", { name: "Start written test" }).click();
+  await expect(page).toHaveURL(/:\d+\/practice\/written\/[0-9a-f-]{36}$/, AUTH);
+  const uploaded = page.getByRole("list", { name: "Uploaded pages" });
+  await page.getByLabel("Add photos or a PDF").setInputFiles("e2e/fixtures/synthetic-page.png");
+  await expect(uploaded.getByText(/^Page 1 ·/)).toBeVisible(AUTH);
+  await page.getByLabel("Add photos or a PDF").setInputFiles("e2e/fixtures/synthetic-page-again.jpg"); // re-saved, smaller
+  await expect(uploaded.getByText(/^Page 2 ·/)).toBeVisible(AUTH);
+  const checks = page.getByRole("list", { name: "Photo checks for page 2" });
+  await expect(checks).toContainText("looks almost the same as another page you uploaded", AUTH);
+  await expect(checks).toContainText("(It looks like page 1.)");
+  await expect(page.getByRole("list", { name: "Photo checks for page 1" }).filter({ hasText: "almost the same" })).toHaveCount(0);
+  await audit(page, null);
+});
+
 test("a PDF becomes one page per PDF page, and each page maps on its own", async ({ page }) => {
   await newLearner(page);
   await page.goto("/practice/written?grade=11&subject=biology");
