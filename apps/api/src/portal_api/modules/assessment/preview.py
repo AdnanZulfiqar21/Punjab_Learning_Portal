@@ -126,6 +126,13 @@ def _passage_blocks(db: Session, cv: Any) -> list[dict[str, Any]] | None:
 
 
 def form(db: Session, version_id: uuid.UUID, seed: int | None) -> dict[str, Any]:
+    from portal_api.modules.system import clients
+
+    with block_registry.client_floor(clients.renderer_floor(db)):  # CLIENT-FLOOR-01: the oldest supported build
+        return _form(db, version_id, seed)
+
+
+def _form(db: Session, version_id: uuid.UUID, seed: int | None) -> dict[str, Any]:
     seed = seed if seed is not None else secrets.randbits(62)
     version, shortages, picks = _sample(db, version_id, seed)
     items = []
