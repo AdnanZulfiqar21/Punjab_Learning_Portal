@@ -23,9 +23,11 @@ from pydantic import BaseModel
 from sqlalchemy import func, select
 from sqlalchemy.orm import Session
 
+from portal_api.days import local_date
 from portal_api.db import get_session
 from portal_api.errors import NotFound
 from portal_api.modules.content.models import Availability, ContentItem
+from portal_api.modules.curriculum.editions import covers
 
 TRACKS: dict[str, tuple[str, tuple[str, ...], str]] = {
     "pre_medical": ("Pre-Medical", ("biology", "chemistry", "physics"), ""),
@@ -58,6 +60,7 @@ def discover(
     from portal_api.modules.curriculum.models import BookEdition, Chapter, Grade, Subject
 
     published = profiles.published(db)
+    today = local_date(db.execute(select(func.now())).scalar_one())
     exam_scope: set[tuple[int, str]] | None = None
     if exam is not None:
         match = next(((p, v) for p, v in published if p.code == exam), None)
@@ -120,6 +123,8 @@ def discover(
     wanted_subjects = set(TRACKS[track][1]) if track else None
     out_books, kept = [], set()
     for b, g, s in books:
+        if not covers(b.effective_from, b.effective_until, today):
+            continue
         if grade is not None and g.number != grade:
             continue
         if subject is not None and s.code != subject:

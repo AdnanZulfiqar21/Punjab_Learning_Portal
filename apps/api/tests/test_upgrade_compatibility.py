@@ -39,6 +39,7 @@ from typing import Any
 
 from sqlalchemy import create_engine, inspect, select, text
 from sqlalchemy.engine import Engine
+from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import Session
 from sqlalchemy.pool import NullPool
 
@@ -269,39 +270,64 @@ def _allowed(check: str) -> set[str]:
     return values if "ANY (ARRAY[" in check else {check}
 
 
+def _nulls_satisfy(engine: Engine, check: str, old_columns: dict[str, Any], new_columns: dict[str, Any]) -> bool:
+    """A new check is safe for the previous build when it names only new nullable columns and a row that leaves
+    them unset still passes. The previous build cannot write columns it does not know."""
+    identifiers = set(re.findall(r"\b([a-z_][a-z0-9_]*)\b", check.lower()))
+    old_names = {name.lower() for name in old_columns}
+    new_by_lower = {name.lower(): info for name, info in new_columns.items()}
+    referenced = identifiers & set(new_by_lower)
+    if not referenced or referenced & old_names:
+        return False
+    for name in referenced:
+        info = new_by_lower[name]
+        if not info["nullable"] or info["default"]:
+            return False
+    if re.fullmatch(r"[A-Za-z0-9_ \n\t()<>=.,:'-]+", check) is None:
+        return False
+    expr = check
+    for name in sorted(referenced, key=len, reverse=True):
+        expr = re.sub(rf"\b{re.escape(name)}\b", "NULL", expr, flags=re.IGNORECASE)
+    try:
+        with engine.connect() as conn:
+            return conn.execute(text(f"SELECT ({expr})")).scalar() is True
+    except SQLAlchemyError:
+        return False
+
+
 def test_the_previous_build_runs_on_the_current_schema() -> None:
     with _scratch("previous") as previous_url, _scratch("head") as head_url:
         _alembic(previous_url, "upgrade", BASELINE_REVISION)
         _alembic(head_url, "upgrade", "head")
         previous_engine, head_engine = create_engine(previous_url), create_engine(head_url)
         previous, head = _schema(previous_engine), _schema(head_engine)
+        problems = []
+        for table, old in previous.items():
+            new = head.get(table)
+            if new is None:
+                problems.append(f"{table}: dropped")
+                continue
+            for column, info in old["columns"].items():
+                now = new["columns"].get(column)
+                if now is None:
+                    problems.append(f"{table}.{column}: dropped")
+                elif now["type"] != info["type"]:
+                    problems.append(f"{table}.{column}: type {info['type']} became {now['type']}")
+                elif info["nullable"] and not now["nullable"] and not now["default"]:
+                    problems.append(f"{table}.{column}: now NOT NULL without a default")
+            for column, now in new["columns"].items():
+                if column not in old["columns"] and not now["nullable"] and not now["default"]:
+                    problems.append(f"{table}.{column}: added NOT NULL without a default, so earlier inserts fail")
+            for unique in new["unique"] - old["unique"]:
+                problems.append(f"{table}: new unique rule on {unique}, which earlier writes may break")
+            for name, check in new["checks"].items():
+                before = old["checks"].get(name)
+                if before is None and not _nulls_satisfy(head_engine, check, old["columns"], new["columns"]):
+                    problems.append(f"{table}: new check {check}")
+                elif before is not None and before != check and not _allowed(before) <= _allowed(check):
+                    problems.append(f"{table}: check {name} narrowed to {check}")
         previous_engine.dispose()
         head_engine.dispose()
-    problems = []
-    for table, old in previous.items():
-        new = head.get(table)
-        if new is None:
-            problems.append(f"{table}: dropped")
-            continue
-        for column, info in old["columns"].items():
-            now = new["columns"].get(column)
-            if now is None:
-                problems.append(f"{table}.{column}: dropped")
-            elif now["type"] != info["type"]:
-                problems.append(f"{table}.{column}: type {info['type']} became {now['type']}")
-            elif info["nullable"] and not now["nullable"] and not now["default"]:
-                problems.append(f"{table}.{column}: now NOT NULL without a default")
-        for column, now in new["columns"].items():
-            if column not in old["columns"] and not now["nullable"] and not now["default"]:
-                problems.append(f"{table}.{column}: added NOT NULL without a default, so earlier inserts fail")
-        for unique in new["unique"] - old["unique"]:
-            problems.append(f"{table}: new unique rule on {unique}, which earlier writes may break")
-        for name, check in new["checks"].items():
-            before = old["checks"].get(name)
-            if before is None:
-                problems.append(f"{table}: new check {check}")
-            elif before != check and not _allowed(before) <= _allowed(check):
-                problems.append(f"{table}: check {name} narrowed to {check}")
     assert len(previous) > 50  # the comparison really covers the earlier schema
     assert problems == [], "\n".join(problems)
 
