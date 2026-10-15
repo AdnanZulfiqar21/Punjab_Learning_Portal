@@ -56,7 +56,6 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   android: {
     ...config.android,
     package: IDS[variant].replaceAll("-", "_"),
-    usesCleartextTraffic: variant !== "production",
     adaptiveIcon: {
       backgroundColor: "#E3F1F5",
       foregroundImage: "./assets/images/android-icon-foreground.png",
