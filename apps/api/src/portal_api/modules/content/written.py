@@ -33,9 +33,15 @@ class Subpart(BaseModel):
     max_units: Units = 0
 
 
+# W01.S1.T1 (TAXONOMY-01): numerical and derivation questions can be authored, reviewed and published with their
+# guides, but learners are offered only these types until each new slice is qualified and staffed (WA-D11).
+OFFERED_TYPES = ("short", "long")
+NEEDS_EQUATION = ("numerical", "derivation")
+
+
 class WrittenBody(BaseModel):
     model_config = ConfigDict(extra="forbid")
-    question_type: Literal["short", "long"] = "short"
+    question_type: Literal["short", "long", "numerical", "derivation"] = "short"
     stem: list[ContentBlock] = Field(default_factory=list, max_length=40)
     subparts: list[Subpart] = Field(default_factory=list, max_length=12)
     max_units: Units = 0
@@ -45,6 +51,8 @@ class WrittenBody(BaseModel):
     )
     origin: Literal["original_practice", "authorised_past_paper"] = "original_practice"
     past_paper_ref: Annotated[str, Field(max_length=300)] | None = None
+    # Numerical questions: the unit the final answer is given in ("none" for a pure number).
+    answer_unit: Annotated[str, Field(min_length=1, max_length=40)] | None = None
 
 
 class Criterion(BaseModel):
@@ -178,6 +186,12 @@ def validate_written(body: object, *, for_publication: bool) -> blocks.Validatio
             errors.append("Subpart maxima must add up to the question maximum.")
     if q.origin == "authorised_past_paper" and not q.past_paper_ref:
         errors.append("Past-paper questions need a reference to where reuse is authorised.")
+    if q.question_type in NEEDS_EQUATION and "equation" not in q.expected_structures:
+        errors.append(f"A {q.question_type} question expects equations in the answer: tick Equation under structures.")
+    if q.question_type == "numerical" and not q.answer_unit:
+        errors.append('Give the unit of the final answer ("none" for a pure number).')
+    if q.answer_unit and q.question_type != "numerical":
+        errors.append("Only a numerical question has an answer unit.")
     where_blocks = [("stem", q.stem)] + [(f"subparts[{s.id}]", s.blocks) for s in q.subparts]
     for where, bl in where_blocks:
         r_err, r_warn = blocks.check_renderers(bl, for_publication=for_publication, where=where)
@@ -297,6 +311,13 @@ def reconcile(r: RubricBody, q: WrittenBody) -> list[str]:
         if got != maximum:
             label = "the question" if slot is None else f"subpart {slot}"
             errors.append(f"Criteria for {label} add up to {got} units but its maximum is {maximum}.")
+    # TAXONOMY-01: what each type's guide must state (§20.6.3: units, significant figures, carried-forward errors).
+    if q.question_type == "numerical":
+        for key, label in (("units_rule", "units"), ("significant_figures_rule", "significant-figures")):
+            if not (getattr(r, key) or "").strip():
+                errors.append(f"A numerical question's marking guide must state its {label} rule.")
+    if q.question_type == "derivation" and not (r.consequential_error_rule or "").strip():
+        errors.append("A derivation's marking guide must state how a carried-forward error is marked.")
     return errors
 
 
