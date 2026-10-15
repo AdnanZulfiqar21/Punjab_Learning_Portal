@@ -12,7 +12,7 @@ import { Badge, Notice } from "@/components/ui";
 import { TIME_ZONE } from "@/lib/dates";
 
 type Criterion = { id: string; subpart_id: string | null; description: string; max_units: number; levels: number[]; alternative_group?: string | null };
-type Rubric = { criteria: Criterion[]; expected_concepts?: string[]; consequential_error_rule?: string; units_rule?: string; crossed_out_rule?: string };
+type Rubric = { criteria: Criterion[]; expected_concepts?: string[] };
 type Question = { stem: { type: string }[]; subparts: { id: string; label: string; blocks: { type: string }[]; max_units: number }[] };
 type Place = { page_id: string; region: number[] | null };
 type Awards = Record<string, Record<string, { units: number; reason: string; evidence?: Place[] }>>;
@@ -512,12 +512,16 @@ export function MarkingWorkspace({ initial }: { initial: MarkingCase }) {
                     </div>
                   );
                 })}
-                {(r.consequential_error_rule || r.units_rule || r.crossed_out_rule) && (
+                {/* MARKING-RULES-01: the guide's own rules, and the §20.6.3 proposed default where it states none. */}
+                {(q.marking_rules ?? []).length > 0 && (
                   <details className="text-sm text-muted">
                     <summary>Marking rules</summary>
-                    {r.consequential_error_rule && <p>Carried-forward errors: {r.consequential_error_rule}</p>}
-                    {r.units_rule && <p>Units: {r.units_rule}</p>}
-                    {r.crossed_out_rule && <p>Crossed-out work: {r.crossed_out_rule}</p>}
+                    {(q.marking_rules ?? []).map((m) => (
+                      <p key={m.key}>
+                        {m.label}: {m.text}
+                        {m.proposed_default && <span className="ml-1 italic">(proposed default: this guide states no rule)</span>}
+                      </p>
+                    ))}
                   </details>
                 )}
               </article>
