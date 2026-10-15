@@ -11,16 +11,28 @@ Run these in `apps/mobile`. Enter the Apple and Expo passwords and the 2FA codes
 ```bash
 npx eas-cli@latest login
 npx eas-cli@latest init
+npx eas-cli@latest device:create
 ```
 
-`eas init` writes the Expo project id into the app config. That association is not done until this command succeeds.
+`eas init` writes the Expo project id into `extra.eas`. `app.config.ts` keeps that object and adds `variant` and `apiOrigin`. Reuse the existing project if `init` finds one. Register this iPhone with `device:create` before the build so the provisioning profile includes it.
 
-A preview build refuses to start unless `PORTAL_API_ORIGIN` is set. Use the computer's address on the same Wi-Fi as the phone, not `127.0.0.1` (that address is the phone itself). On 15 October 2026 the computer's Wi-Fi address was `172.20.10.2`, and `http://172.20.10.2:8100/healthz` answered from that computer. Recheck the address before a build. The API must listen on `0.0.0.0:8100`. If the phone's browser cannot open `/healthz`, allow inbound TCP 8100 in Windows Firewall for the private network.
+The preview profile sets `"environment": "preview"` and keeps `APP_VARIANT=preview`. A PowerShell variable is not sent to the cloud builder. Store the origin in the preview EAS environment after login:
 
-PowerShell:
+```bash
+npx eas-cli@latest env:set --name PORTAL_API_ORIGIN --value http://172.20.10.2:8100 --environment preview --visibility plaintext
+```
+
+Use the computer's address on the same Wi-Fi as the phone, not `127.0.0.1` (that address is the phone itself). On 15 October 2026 the Wi-Fi address was `172.20.10.2`. The API listened on `0.0.0.0:8100`, and both `http://172.20.10.2:8100/healthz` and `http://172.20.10.2:8100/readyz` answered from that computer. Recheck the address before `env:set`. Readiness on that date reported migration `f8a21c6d4e90` against the disposable database `portal_integrations_view_test`. Do not migrate the `portal` database for this preview.
+
+Open this URL in Safari on the phone: `http://172.20.10.2:8100/readyz`. If it does not load, allow inbound TCP 8100 on the private profile only:
 
 ```powershell
-$env:PORTAL_API_ORIGIN = "http://172.20.10.2:8100"
+New-NetFirewallRule -DisplayName "Punjab Portal API TCP 8100" -Direction Inbound -Action Allow -Protocol TCP -LocalPort 8100 -Profile Private -RemoteAddress LocalSubnet
+```
+
+Then start the build. Choose the active Apple Developer team when EAS asks.
+
+```bash
 npx eas-cli@latest build --platform ios --profile preview
 ```
 

@@ -191,8 +191,13 @@ jobs:
           node -e '
             const p = require("/tmp/prod.json"), v = require("/tmp/preview.json");
             if (p.ios.bundleIdentifier !== "pk.punjablearningportal.student") throw new Error("production id");
-            if (v.ios.bundleIdentifier === p.ios.bundleIdentifier) throw new Error("preview must not share the production identity");
+            if (v.ios.bundleIdentifier !== "pk.punjablearningportal.student.preview") throw new Error("preview id");
             if (p.extra.apiOrigin !== "https://api.example.invalid") throw new Error("api origin");
+            if (v.extra.apiOrigin !== "https://api.example.invalid") throw new Error("preview origin");
+            if (v.extra.variant !== "preview") throw new Error("preview variant");
+            if (!v.ios.infoPlist.NSLocalNetworkUsageDescription) throw new Error("local network description");
+            if (v.ios.infoPlist.NSAppTransportSecurity?.NSAllowsLocalNetworking !== true) throw new Error("preview transport");
+            if (p.ios.infoPlist?.NSAppTransportSecurity?.NSAllowsLocalNetworking) throw new Error("production transport");
           '
 
   web:

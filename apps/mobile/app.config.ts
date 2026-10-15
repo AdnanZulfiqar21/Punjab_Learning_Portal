@@ -51,7 +51,12 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     infoPlist:
       variant === "production"
         ? config.ios?.infoPlist
-        : { ...config.ios?.infoPlist, NSAppTransportSecurity: { NSAllowsLocalNetworking: true } },
+        : {
+            ...config.ios?.infoPlist,
+            NSLocalNetworkUsageDescription:
+              "Punjab Portal (Preview) connects to the learning service on this Wi-Fi.",
+            NSAppTransportSecurity: { NSAllowsLocalNetworking: true },
+          },
   },
   android: {
     ...config.android,
@@ -80,5 +85,11 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     ],
   ],
   experiments: { typedRoutes: true, reactCompiler: true },
-  extra: { variant, apiOrigin: apiOrigin() },
+  // eas init stores the project id under extra.eas. Keep that object; this config also adds the variant and origin.
+  extra: {
+    ...config.extra,
+    eas: config.extra?.eas,
+    variant,
+    apiOrigin: apiOrigin(),
+  },
 });
