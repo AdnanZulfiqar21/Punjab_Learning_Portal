@@ -1,9 +1,12 @@
 """Mistake notebook and spaced review (roadmap P12.S3.T1-T3; NOTEBOOK-01).
 
 **Collecting:** every question a learner answers wrongly in a submitted practice test, mock or review test becomes
-(or refreshes) one notebook entry per question family. Unanswered questions are not mistakes. When a reviewed
-correction voids a question (EXCLUDE or CREDIT_ALL), its entry stays in the notebook as `voided`, with the reason,
-instead of disappearing.
+(or refreshes) one notebook entry per question family. Unanswered questions are not mistakes. A question the learner
+*flagged* in a submitted test is collected too, answered or not, right or wrong (NOTEBOOK-FLAGS-01): the flag says they
+weren't sure, so it is due for review after 1 day with no miss counted. In a review test, a flagged correct answer
+doesn't move the entry on (it wasn't a confident recall), and flagging a mastered question opens it again. When a
+reviewed correction voids a question (EXCLUDE or CREDIT_ALL), its entry stays in the notebook as `voided`, with the
+reason, instead of disappearing.
 
 **Spacing:** deterministic intervals of 1, 3, 7 and 14 days (`INTERVALS`).
 * A wrong answer, first time or in review, resets the entry: due again after 1 day.
@@ -39,7 +42,19 @@ import uuid
 from datetime import datetime, timedelta
 from typing import Any
 
-from sqlalchemy import CheckConstraint, DateTime, ForeignKey, SmallInteger, String, Text, UniqueConstraint, func, select
+from sqlalchemy import (
+    Boolean,
+    CheckConstraint,
+    DateTime,
+    ForeignKey,
+    SmallInteger,
+    String,
+    Text,
+    UniqueConstraint,
+    false,
+    func,
+    select,
+)
 from sqlalchemy import true as sa_true
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped, Session, mapped_column
@@ -75,7 +90,9 @@ class MistakeEntry(Base):
     interval_index: Mapped[int] = mapped_column(SmallInteger, default=0)
     misses: Mapped[int] = mapped_column(SmallInteger, default=1)
     due_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
-    last_event: Mapped[str] = mapped_column(String(10), default="missed")  # missed | reviewed
+    last_event: Mapped[str] = mapped_column(String(10), default="missed")  # missed | reviewed | flagged
+    # NOTEBOOK-FLAGS-01: the learner flagged this question as unsure in at least one submitted test.
+    flagged: Mapped[bool] = mapped_column(Boolean, default=False, server_default=false())
     last_event_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
 
@@ -84,22 +101,43 @@ NO_LONGER_A_MISTAKE = "Your answer was re-marked as correct after review, so thi
 WITHDRAWN = "This question was withdrawn after academic review."
 
 
-def _replay(events: list[tuple[datetime, str, dict[str, Any], FormItem, uuid.UUID]]) -> dict[str, Any] | None:
-    """One family's derived state from its responses in submission order (None: never a counted mistake)."""
+Event = tuple[datetime, str, dict[str, Any], FormItem, uuid.UUID, bool]  # ..., attempt id, flagged by the learner
+
+
+def _replay(events: list[Event]) -> dict[str, Any] | None:
+    """One family's derived state from its responses in submission order (None: never a counted mistake or flag)."""
     st: dict[str, Any] | None = None
-    for at, kind, row, fi, attempt_id in events:
+
+    def due_again(at: datetime, event: str) -> None:
+        assert st is not None
+        st.update(status="open", interval_index=0, last_event=event, last_event_at=at)
+        st["due_at"] = at + timedelta(days=INTERVALS[0])
+
+    for at, kind, row, fi, attempt_id, flagged in events:
         if row.get("treatment") in ("EXCLUDE", "CREDIT_ALL"):
             if st is not None and st["status"] != "voided":
                 st["status"], st["void_reason"] = "voided", WITHDRAWN
             continue
         if row.get("correct") is False and row.get("chosen") is not None:
             if st is None:
-                st = {"first": (attempt_id, fi), "misses": 0, "void_reason": None}
+                st = {"first": (attempt_id, fi), "misses": 0, "void_reason": None, "flagged": False}
             elif st["status"] == "voided":
                 continue
-            st.update(status="open", interval_index=0, last_event="missed", last_event_at=at)
+            due_again(at, "missed")
             st["misses"] += 1
-            st["due_at"] = at + timedelta(days=INTERVALS[0])
+            st["flagged"] = st["flagged"] or flagged
+        elif flagged:  # NOTEBOOK-FLAGS-01: unsure (right, or not answered): reviewed soon, never counted as a miss
+            if st is None:
+                st = {"first": (attempt_id, fi), "misses": 0, "void_reason": None, "flagged": True}
+                due_again(at, "flagged")
+            elif st["status"] == "voided":
+                continue
+            else:
+                st["flagged"] = True
+                if st["status"] == "mastered":
+                    due_again(at, "flagged")  # unsure again about a mastered question: back into review
+                elif kind == "review":
+                    st["last_event"], st["last_event_at"] = "flagged", at  # not a confident recall: no step forward
         elif row.get("correct") is True and kind == "review" and st is not None and st["status"] == "open":
             nxt = st["interval_index"] + 1
             st["last_event"], st["last_event_at"] = "reviewed", at
@@ -140,11 +178,12 @@ def reconcile(db: Session, user_id: uuid.UUID, family_ids: set[uuid.UUID]) -> No
         )
         .order_by(Attempt.finalised_at, Attempt.id, FormItem.position)
     ).all()
-    events: dict[uuid.UUID, list[tuple[datetime, str, dict[str, Any], FormItem, uuid.UUID]]] = {}
+    events: dict[uuid.UUID, list[Event]] = {}
     for attempt, kind, items, fi in rows:
         row = next((r for r in items if int(r["position"]) == fi.position), None)
         if row is not None and attempt.finalised_at is not None:
-            events.setdefault(fi.family_id, []).append((attempt.finalised_at, kind, row, fi, attempt.id))
+            flagged = fi.position in (attempt.flagged or [])
+            events.setdefault(fi.family_id, []).append((attempt.finalised_at, kind, row, fi, attempt.id, flagged))
     existing = {
         e.family_id: e
         for e in db.scalars(
@@ -177,6 +216,7 @@ def reconcile(db: Session, user_id: uuid.UUID, family_ids: set[uuid.UUID]) -> No
         entry.status, entry.void_reason = st["status"], st["void_reason"]
         entry.interval_index, entry.misses, entry.due_at = st["interval_index"], st["misses"], st["due_at"]
         entry.last_event, entry.last_event_at = st["last_event"], st["last_event_at"]
+        entry.flagged = st["flagged"]
     db.flush()
 
 
@@ -221,7 +261,7 @@ def why(entry: MistakeEntry, now: datetime) -> str:
     if entry.status == "mastered":
         return "Answered correctly at every review interval."
     days = INTERVALS[entry.interval_index]
-    verb = "missed" if entry.last_event == "missed" else "answered correctly in review"
+    verb = {"missed": "missed", "flagged": "flagged as unsure"}.get(entry.last_event, "answered correctly in review")
     state = "due now" if entry.due_at <= now else f"due on {entry.due_at:%d %b %Y}"
     return f"{verb.capitalize()} on {entry.last_event_at:%d %b %Y}; reviewed again after {days} day(s) ({state})."
 

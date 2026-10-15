@@ -59,6 +59,27 @@ test("practice needs a plan, and the free trial is offered once", async ({ page 
   await expect(page.getByRole("region", { name: "Your plan" })).toContainText(/Free trial until .* Written marking allowance: 10 of 10 units left/);
 });
 
+// P12.S3.T1 (NOTEBOOK-FLAGS-01): a question flagged as unsure comes back for review even when it was answered right.
+test("a question flagged as unsure comes back in the notebook, with no miss counted", async ({ page }) => {
+  await newLearner(page);
+  await startTest(page, 2);
+  await answer(page, true);
+  await page.getByRole("button", { name: "Flag for review" }).click();
+  await expect(page.getByRole("button", { name: "⚑ Flagged for review" })).toBeVisible(AUTH);
+  await page.getByRole("button", { name: "Next →" }).click();
+  await answer(page, true);
+  await expect(page.getByRole("status").first()).toHaveText(/2 answered · all saved/, AUTH);
+  await page.getByRole("button", { name: "Finish test" }).click();
+  await page.getByRole("dialog", { name: "Submit your test?" }).getByRole("button", { name: "Submit" }).click();
+  await expect(page).toHaveURL(/\/result$/, AUTH);
+  await page.goto("/practice/notebook");
+  const entries = page.getByRole("list", { name: "Notebook entries" }).getByRole("listitem");
+  await expect(entries).toHaveCount(1, AUTH); // the confident right answer isn't collected
+  await expect(entries.first()).toContainText("you flagged it as unsure");
+  await expect(entries.first()).not.toContainText("missed");
+  await audit(page, null);
+});
+
 test("a learner sees only reviewed-question availability and builds a test", async ({ page }) => {
   await newLearner(page);
   await page.goto("/practice?grade=11&subject=chemistry");
