@@ -46,10 +46,17 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     ...config.ios,
     bundleIdentifier: IDS[variant],
     icon: "./assets/expo.icon",
+    // A preview or development build may call an http API on the same Wi-Fi. Production stays on the default
+    // App Transport Security rules, so it does not accept cleartext.
+    infoPlist:
+      variant === "production"
+        ? config.ios?.infoPlist
+        : { ...config.ios?.infoPlist, NSAppTransportSecurity: { NSAllowsLocalNetworking: true } },
   },
   android: {
     ...config.android,
     package: IDS[variant].replaceAll("-", "_"),
+    usesCleartextTraffic: variant !== "production",
     adaptiveIcon: {
       backgroundColor: "#E3F1F5",
       foregroundImage: "./assets/images/android-icon-foreground.png",
