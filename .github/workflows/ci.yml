@@ -170,6 +170,9 @@ jobs:
       - run: pnpm lint
       - name: Host-side tests of the native logic (page drafts, submit gate; not device evidence)
         run: pnpm test
+      - name: App and web colour tokens match (P02.S2.T1, TOKENS-01)
+        working-directory: .
+        run: node apps/web/scripts/check-tokens.mjs
       # EXPO-CHECK-01: `pnpm doctor` ran pnpm's own built-in command, not expo-doctor, so this step checked nothing.
       # The version check compares with Expo's newest patch releases online, so it reports drift without failing the
       # build; updating the app's packages is done with a device build (B09, B14). The config checks below block.
@@ -231,6 +234,8 @@ jobs:
         run: pnpm --filter web build
       - name: Browser bundle ships no source maps, credentials or server configuration names (P18.S2.T3)
         run: node apps/web/scripts/check-bundle.mjs
+      - name: Web and app colour tokens match (P02.S2.T1, TOKENS-01)
+        run: node apps/web/scripts/check-tokens.mjs
       - name: The same build refuses missing or development configuration for production (exit 78)
         working-directory: apps/web
         run: |
