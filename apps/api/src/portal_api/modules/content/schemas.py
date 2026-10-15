@@ -209,6 +209,11 @@ class ItemDetail(ItemSummary):
     chapter_pdf_end: int | None
     actions: Actions
     blockers: list[str] = Field(description="Why the next step can't happen yet (e.g. rights unverified).")
+    duplicate_warnings: list[str] = Field(
+        default_factory=list,
+        description="DUP-STEMS-01: other questions this one duplicates or nearly duplicates (in review or approved); "
+        "for the academic reviewer to decide, never applied automatically",
+    )
     review_checklist: list[str] = Field(description="Checks a reviewer must confirm to approve this kind")
     quarantine_levels: list[str] = Field(description="Levels a publisher chooses from when quarantining this kind")
 

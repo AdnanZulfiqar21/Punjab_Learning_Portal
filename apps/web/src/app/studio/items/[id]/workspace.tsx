@@ -501,6 +501,16 @@ function ActionsPanel({ item, myId, flush }: { item: StudioItem; myId: string; f
           ))}
         </ul>
       )}
+      {/* P08.S3.T1 (DUP-STEMS-01): possible duplicates, for the reviewer to judge; nothing is merged automatically. */}
+      {(item.duplicate_warnings ?? []).length > 0 && (
+        <ul aria-label="Possible duplicates" className="space-y-1 text-sm">
+          {(item.duplicate_warnings ?? []).map((w, i) => (
+            <li key={i} className="rounded-md bg-warn-soft px-2 py-1">
+              {w}
+            </li>
+          ))}
+        </ul>
+      )}
       {a.review && item.review_checklist.length > 0 && (
         <fieldset className="space-y-1 rounded-lg border border-border p-2 text-sm">
           <legend className="px-1 font-medium">Checks before approving</legend>
