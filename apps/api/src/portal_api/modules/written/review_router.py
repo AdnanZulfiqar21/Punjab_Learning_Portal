@@ -175,6 +175,10 @@ class EvidenceLinkOut(BaseModel):
     region: list[float] | None = Field(description="x, y, width, height as fractions of the upright page; null = whole")
     where: str = Field(description='Plain words for the place, e.g. "page 2, top left"')
     available: bool = Field(description="False once the scan is no longer available: nothing is highlighted then")
+    clearer_copy: bool = Field(
+        default=False,
+        description="The place is on a clearer copy you sent (page_number is within that copy), not on your script",
+    )
 
 
 class CriterionResult(BaseModel):
@@ -223,24 +227,37 @@ def _where(number: int, region: list[float] | None) -> str:
 def _evidence_links(db: Session, attempt_id: uuid.UUID, raw: object) -> list[EvidenceLinkOut]:
     """Only grounded places: a page of this attempt with its preview still stored. Anything else is shown as no
     longer available, and never with an invented highlight."""
-    from portal_api.modules.written import service, storage
+    from sqlalchemy import select as sa_select
+
+    from portal_api.modules.written import rescans, service, storage
+    from portal_api.modules.written.models import WrittenPage
 
     pages = {str(p.id): (n, p) for n, p in enumerate(service._pages(db, attempt_id), start=1)}
+    copies: dict[str, tuple[int, int, WrittenPage]] = {}  # FEEDBACK-COPIES-01: page -> (question, page in copy, page)
+    for r in rescans.revisions_for(db, attempt_id):
+        in_copy = sa_select(WrittenPage).where(WrittenPage.file_id == r.file_id).order_by(WrittenPage.page_index)
+        for i, p in enumerate(db.scalars(in_copy), start=1):
+            copies[str(p.id)] = (r.position, i, p)
     store = storage.get_store()
     out = []
     for a in review.anchors(raw):
         n, page = pages.get(a["page_id"], (0, None))
+        position = None
+        if n == 0 and a["page_id"] in copies:
+            position, n, page = copies[a["page_id"]]
         if n == 0:
             continue  # not a page of this attempt: never shown
         live = page is not None and bool(page.preview_key) and store.exists(page.preview_key or "")
         region = a["region"] if live else None
+        where = _where(n, a["region"])
         out.append(
             EvidenceLinkOut(
                 page_id=uuid.UUID(a["page_id"]),
                 page_number=n,
                 region=region,
-                where=_where(n, a["region"]),
+                where=where if position is None else f"your clearer copy for question {position}, {where}",
                 available=live,
+                clearer_copy=position is not None,
             )
         )
     return out

@@ -761,9 +761,14 @@ def _anchor_errors(where: str, raw: object, allowed: set[str]) -> list[str]:
 
 
 def _check_awards(
-    ctx: dict[str, Any], awards: dict[str, dict[str, dict[str, Any]]], scope: set[str] | None = None
+    ctx: dict[str, Any],
+    awards: dict[str, dict[str, dict[str, Any]]],
+    scope: set[str] | None = None,
+    copy_pages: dict[str, set[str]] | None = None,
 ) -> tuple[dict[str, int], list[str]]:
-    """Validate awards for every question, or only for `scope` (a recheck re-marks just the questions in scope)."""
+    """Validate awards for every question, or only for `scope` (a recheck re-marks just the questions in scope).
+    `copy_pages`: per question, the pages of the clearer copies this decision marks it from (FEEDBACK-COPIES-01);
+    feedback may point at them as well as at the sealed pages."""
     errors: list[str] = []
     totals: dict[str, int] = {}
     slots = ctx["manifest"].get("slots", {})
@@ -778,6 +783,7 @@ def _check_awards(
         if unknown:
             errors.append(f"Question {pos}: unknown criteria {sorted(unknown)}.")
         mapped = {str(p) for key, slot in slots.items() if key.split(":", 1)[0] == pos for p in slot.get("pages", [])}
+        mapped |= (copy_pages or {}).get(pos, set())
         earned: dict[str, int] = {}
         for c in rubric.criteria:
             if c.id not in given:
@@ -1006,10 +1012,13 @@ def decide(
         raise Unprocessable(
             "Pending or unavailable questions can't have awards.", errors=[f"Question {p}" for p in not_scored_awarded]
         )
-    totals, errors = _check_awards(ctx, awards, scored)
+    from portal_api.modules.written import rescans
+
+    # W07.S1.T2 (FEEDBACK-COPIES-01): feedback may point at the clearer copies this decision marks from; whether each
+    # copy may be used at all (READABILITY, this question) is checked by `evidence_for_decision` below.
+    totals, errors = _check_awards(ctx, awards, scored, rescans.copy_pages(db, case.attempt_id, evidence or {}))
     if errors:
         raise Unprocessable("Some awards don't follow the rubric.", errors=errors)
-    from portal_api.modules.written import rescans
 
     # RS31-02: a requested action's deadline is set once, on first release, and never moved by later saves.
     rescans.request_actions(db, case.attempt_id, statuses, now, persist=release)

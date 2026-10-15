@@ -6512,6 +6512,12 @@ export interface components {
              */
             available: boolean;
             /**
+             * Clearer Copy
+             * @description The place is on a clearer copy you sent (page_number is within that copy), not on your script
+             * @default false
+             */
+            clearer_copy: boolean;
+            /**
              * Page Id
              * Format: uuid
              */

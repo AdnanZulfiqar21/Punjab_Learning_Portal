@@ -228,6 +228,23 @@ def _requested_action(db: Session, attempt_id: uuid.UUID, position: int, now: da
     return {**st, "learner_action": action, "action_deadline": deadline.isoformat()}
 
 
+def copy_pages(db: Session, attempt_id: uuid.UUID, evidence: dict[str, list[str]]) -> dict[str, set[str]]:
+    """FEEDBACK-COPIES-01: per question, the page IDs of the clearer copies named for it (this attempt's, that
+    question's; anything else is left out here and refused by `evidence_for_decision`)."""
+    out: dict[str, set[str]] = {}
+    for pos, ids in evidence.items():
+        for rid in ids:
+            try:
+                rev = db.get(EvidenceRevision, uuid.UUID(str(rid)))
+            except ValueError:
+                continue
+            if rev is None or rev.attempt_id != attempt_id or str(rev.position) != str(pos):
+                continue
+            pages = db.scalars(select(WrittenPage.id).where(WrittenPage.file_id == rev.file_id))
+            out.setdefault(str(pos), set()).update(str(p) for p in pages)
+    return out
+
+
 def revisions_for(db: Session, attempt_id: uuid.UUID, positions: set[int] | None = None) -> list[EvidenceRevision]:
     stmt = select(EvidenceRevision).where(EvidenceRevision.attempt_id == attempt_id)
     if positions is not None:

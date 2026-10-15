@@ -94,6 +94,9 @@ export function MarkingWorkspace({ initial }: { initial: MarkingCase }) {
     for (const r of c.revisions) if (used[r.id] && readable(r)) (out[String(r.position)] ??= []).push(r.id);
     return out;
   };
+  // FEEDBACK-COPIES-01: pages of the clearer copies this question is marked from (READABILITY and ticked as used).
+  const copyPages = (pos: string): [string, number][] =>
+    c.revisions.filter((r) => String(r.position) === pos && used[r.id] && readable(r)).flatMap((r) => r.pages.map((p, i) => [p.id, i + 1] as [string, number]));
   const statusOf = (pos: string) => status[pos]?.status ?? "scored";
   const carried = rc?.carried_forward ?? cp?.carried_forward ?? rg?.carried_forward ?? {};
   const scope = rc
@@ -473,7 +476,7 @@ export function MarkingWorkspace({ initial }: { initial: MarkingCase }) {
                             className="w-full rounded border border-border bg-surface px-2 py-1 text-sm"
                             maxLength={1000}
                           />
-                          {(slot.pages ?? []).length > 0 && (
+                          {((slot.pages ?? []).length > 0 || copyPages(pos).length > 0) && (
                             <select
                               aria-label={`Where on the script ${cr.id} is about`}
                               value={placeValue(awards[pos]?.[cr.id]?.evidence?.[0])}
@@ -487,6 +490,17 @@ export function MarkingWorkspace({ initial }: { initial: MarkingCase }) {
                                   {AREAS.map(([a, label]) => (
                                     <option key={a} value={`${pid}|${a}`}>
                                       Page {pageNo(pid)}: {label}
+                                    </option>
+                                  ))}
+                                </optgroup>
+                              ))}
+                              {/* FEEDBACK-COPIES-01: a clearer copy this answer is marked from can be pointed at too. */}
+                              {copyPages(pos).map(([pid, n]) => (
+                                <optgroup key={pid} label={`Clearer copy, page ${n}`}>
+                                  <option value={`${pid}|page`}>Clearer copy, page {n}: whole page</option>
+                                  {AREAS.map(([a, label]) => (
+                                    <option key={a} value={`${pid}|${a}`}>
+                                      Clearer copy, page {n}: {label}
                                     </option>
                                   ))}
                                 </optgroup>
