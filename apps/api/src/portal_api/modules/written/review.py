@@ -628,6 +628,7 @@ def case_context(db: Session, case: WrittenReviewCase) -> dict[str, Any]:
         qv = db.get(ContentVersion, fi.question_version_id)
         rv = db.get(ContentVersion, over.get(fi.position, fi.rubric_version_id))
         assert qv is not None and rv is not None
+        parsed, _ = wq.parse_rubric(rv.body, stored=True)
         questions.append(
             {
                 "position": fi.position,
@@ -636,6 +637,7 @@ def case_context(db: Session, case: WrittenReviewCase) -> dict[str, Any]:
                 "question": qv.body,
                 "rubric": rv.body,
                 "rubric_version_id": str(rv.id),
+                "marking_rules": wq.marking_rules(parsed) if parsed else [],  # W01.S2.T2
             }
         )
     pages = db.scalars(select(WrittenPage).where(WrittenPage.id.in_([uuid.UUID(p) for p in receipt.page_hashes]))).all()

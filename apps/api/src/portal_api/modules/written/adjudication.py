@@ -74,6 +74,8 @@ RUBRIC_SCORING_FIELDS = (
     "alternative_routes",
     "consequential_error_rule",
     "units_rule",
+    "significant_figures_rule",  # MARKING-RULES-01
+    "final_answers_rule",
     "crossed_out_rule",
 )
 # Integrity conflicts that mean "another run already did this attempt" (W06-04); anything else is a real failure.

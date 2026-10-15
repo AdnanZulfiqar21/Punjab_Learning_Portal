@@ -50,6 +50,15 @@ class CaseSummary(BaseModel):
     leased_by_other: bool
 
 
+class MarkingRuleOut(BaseModel):
+    key: str
+    label: str
+    text: str
+    proposed_default: bool = Field(
+        description="True: the guide states no such rule, and this is the §20.6.3 proposed default (W01.S2.T2)"
+    )
+
+
 class CaseQuestion(BaseModel):
     position: int
     max_units: int
@@ -57,6 +66,7 @@ class CaseQuestion(BaseModel):
     question: dict[str, Any]
     rubric: dict[str, Any]
     rubric_version_id: uuid.UUID
+    marking_rules: list[MarkingRuleOut] = Field(default_factory=list)
 
 
 class StaffScore(BaseModel):
