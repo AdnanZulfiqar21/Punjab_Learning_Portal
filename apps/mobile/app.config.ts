@@ -54,9 +54,10 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     // App Transport Security rules, so it does not accept cleartext.
     infoPlist:
       variant === "production"
-        ? config.ios?.infoPlist
+        ? { ...config.ios?.infoPlist, ITSAppUsesNonExemptEncryption: false }
         : {
             ...config.ios?.infoPlist,
+            ITSAppUsesNonExemptEncryption: false,
             NSLocalNetworkUsageDescription:
               "Punjab Portal (Preview) connects to the learning service on this Wi-Fi.",
             NSAppTransportSecurity: { NSAllowsLocalNetworking: true },

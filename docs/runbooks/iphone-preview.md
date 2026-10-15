@@ -30,9 +30,10 @@ Open this URL in Safari on the phone: `http://172.20.10.2:8100/readyz`. If it do
 New-NetFirewallRule -DisplayName "Punjab Portal API TCP 8100" -Direction Inbound -Action Allow -Protocol TCP -LocalPort 8100 -Profile Private -RemoteAddress LocalSubnet
 ```
 
-Then start the build. Choose the active Apple Developer team when EAS asks.
+`eas build` reads the app config once with only `APP_VARIANT` before it can download the EAS variable. Set the same origin in that terminal as well, then start the build. Choose Desirly Limited (`6FV87T5UMF`) and include the registered iPhone.
 
-```bash
+```powershell
+$env:PORTAL_API_ORIGIN = "http://172.20.10.2:8100"
 npx eas-cli@latest build --platform ios --profile preview
 ```
 
