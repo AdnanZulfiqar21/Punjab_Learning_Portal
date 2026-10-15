@@ -11,6 +11,7 @@ import { continueHere, revealItem, saveAnswers, setFlags, submitAttempt, type Op
 import { LessonBlocks } from "@/components/lesson-blocks";
 import { HelpLink } from "@/components/help-link";
 import { answerState, PALETTE_LABEL, stateLine, type AnswerState, type ItemStatus } from "@/lib/answer-state";
+import { reach } from "@/lib/reach";
 
 const DEBOUNCE_MS = 400; // ≤ 500 ms (P10.S2.T1)
 const PRE_FLUSH_MS = 5000; // best-effort flush at D − 5 s
@@ -26,15 +27,6 @@ const TONE: Record<AnswerState, string> = {
 };
 
 const OFFLINE = "Can't reach the service. Your answers are kept on this device and will be sent again.";
-/** A server action whose request never reached the server (offline, dropped) rejects instead of returning; treat that
- *  like any other failure so the runner retries, and nothing waits on a promise that already failed (ANSWER-STATES-01). */
-async function reach<T>(call: () => Promise<T>, failed: T): Promise<T> {
-  try {
-    return await call();
-  } catch {
-    return failed;
-  }
-}
 
 const storageKey = (id: string) => `practice-queue:${id}`;
 function readRaw(id: string): string | null {

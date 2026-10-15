@@ -6,7 +6,7 @@
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 import type { MarkingCase } from "@portal/contracts";
-import { rebaseRecheck, saveMarks, takeLease } from "@/app/actions/marking";
+import { freeCase, handBack, rebaseRecheck, saveMarks, takeLease } from "@/app/actions/marking";
 import { LessonBlocks } from "@/components/lesson-blocks";
 import { Badge, Notice } from "@/components/ui";
 import { TIME_ZONE } from "@/lib/dates";
@@ -148,8 +148,34 @@ export function MarkingWorkspace({ initial }: { initial: MarkingCase }) {
               Start marking
             </button>
           )}
+          {canMark && (
+            // CASE-HANDBACK-01: another teacher can take it straight away; a saved draft stays a draft.
+            <button type="button" disabled={pending} onClick={() => run(() => handBack(c.id))} className="rounded-lg border border-border px-4 py-2 font-medium disabled:opacity-60">
+              Give back to the queue
+            </button>
+          )}
         </div>
       </header>
+      {c.status === "queued" && c.leased_by_other && c.can_free && (
+        <form
+          aria-label="Free this script"
+          className="flex flex-wrap items-end gap-2 rounded-lg border border-border p-3 text-sm"
+          onSubmit={(e) => {
+            e.preventDefault();
+            const reason = String(new FormData(e.currentTarget).get("reason") ?? "");
+            run(() => freeCase(c.id, reason));
+          }}
+        >
+          <label className="flex-1 space-y-1">
+            <span className="block font-medium">Why free this script from the teacher marking it?</span>
+            <input name="reason" required maxLength={500} className="w-full rounded-lg border border-border bg-surface px-3 py-2" />
+          </label>
+          <button type="submit" disabled={pending} className="rounded-lg border border-border px-4 py-2 font-medium disabled:opacity-60">
+            Free this script
+          </button>
+          <p className="w-full text-muted">Their next save will be refused, so nothing they marked is overwritten. Recorded in the audit trail.</p>
+        </form>
+      )}
       {error && (
         <div role="alert" className="space-y-1 rounded-lg border border-danger/30 bg-danger-soft px-3 py-2 text-sm">
           <p>{error.text}</p>

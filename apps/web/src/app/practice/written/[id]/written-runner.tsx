@@ -3,7 +3,7 @@
 // Written-script runner (W03/W04). States are kept distinct and honest: a file chosen on this device, uploading,
 // uploaded but NOT submitted, and submitted (sealed with a receipt). Nothing is marked until it is submitted.
 import { useRouter } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import type { EvidenceLink, NextSteps as Steps, WrittenAttempt, WrittenPage, WrittenResult } from "@portal/contracts";
 import { saveMapping, sealScript, transformPage } from "@/app/actions/written";
 import { LessonBlocks } from "@/components/lesson-blocks";
@@ -13,10 +13,21 @@ import { RecheckPanel } from "./recheck-panel";
 import { Notice } from "@/components/ui";
 import { HelpLink } from "@/components/help-link";
 import { TIME_ZONE } from "@/lib/dates";
+import { reach } from "@/lib/reach";
 
 type Slot = { pages: string[]; unanswered: boolean };
 type Upload = { id: string; name: string; progress: number; status: "uploading" | "failed"; error?: string; retryable?: boolean };
 const marks = (u: number) => String(u / 100);
+// WRITTEN-CONNECTION-01 (W04.S2.T1): a request that never reached the server is a failure like any other.
+const UNREACHABLE = "Can't reach the service. Check your connection; nothing on this page is lost.";
+function onConnectionChange(notify: () => void) {
+  window.addEventListener("online", notify);
+  window.addEventListener("offline", notify);
+  return () => {
+    window.removeEventListener("online", notify);
+    window.removeEventListener("offline", notify);
+  };
+}
 const when = (iso: string) => new Date(iso).toLocaleString("en-GB", { timeStyle: "short", dateStyle: "medium", timeZone: TIME_ZONE });
 
 function uploadFile(attemptId: string, file: File, onProgress: (p: number) => void): Promise<{ status: number; body: unknown }> {
@@ -64,6 +75,9 @@ export function WrittenRunner({
   const [sealError, setSealError] = useState<string | null>(null);
   const [now, setNow] = useState<number | null>(null);
   const offset = useRef<number | null>(null);
+  const syncedWith = useRef<string | null>(null); // the server time the offset was last measured against
+  const reconnect = useRef<() => void>(() => undefined);
+  const online = useSyncExternalStore(onConnectionChange, () => navigator.onLine, () => true);
   const saveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const savingPromise = useRef<Promise<boolean> | null>(null);
   // W03.S3.T3 (UPLOAD-RETRY-01): a failed upload keeps its file on this device so it can be sent again. The server
@@ -77,11 +91,38 @@ export function WrittenRunner({
   useEffect(() => {
     if (!active) return;
     const t = setInterval(() => {
-      offset.current ??= new Date(attempt.server_now).getTime() - Date.now();
+      // W04.S2.T1: measured again whenever a fresh server time arrives (after a reconnect or a return to this tab), so
+      // a device clock that was changed or drifted while asleep doesn't misstate the time left.
+      if (offset.current === null || syncedWith.current !== attempt.server_now) {
+        offset.current = new Date(attempt.server_now).getTime() - Date.now();
+        syncedWith.current = attempt.server_now;
+      }
       setNow(Date.now() + offset.current);
     }, 1000);
     return () => clearInterval(t);
   }, [active, attempt.server_now]);
+
+  // Back online, or back on this tab: fetch the attempt again (a fresh server time, and its real status) and send a page
+  // map that couldn't be saved. The handler is refreshed every render so it sees the current map.
+  useEffect(() => {
+    reconnect.current = () => {
+      if (mapState === "error") persistMapping(slots);
+      router.refresh();
+    };
+  });
+  useEffect(() => {
+    if (!active) return;
+    const back = () => reconnect.current();
+    const visible = () => {
+      if (document.visibilityState === "visible") reconnect.current();
+    };
+    window.addEventListener("online", back);
+    document.addEventListener("visibilitychange", visible);
+    return () => {
+      window.removeEventListener("online", back);
+      document.removeEventListener("visibilitychange", visible);
+    };
+  }, [active]);
 
   useEffect(() => {
     if (closed) router.refresh(); // the server expires the attempt after U; show its honest state
@@ -134,7 +175,7 @@ export function WrittenRunner({
     saveTimer.current = setTimeout(() => {
       saveTimer.current = null;
       savingPromise.current = (async () => {
-        const out = await saveMapping(attempt.id, revisionRef.current, next);
+        const out = await reach(() => saveMapping(attempt.id, revisionRef.current, next), { kind: "error", message: UNREACHABLE } as const);
         if (out.kind === "ok") {
           revisionRef.current = out.attempt.manifest_revision;
           setRevision(out.attempt.manifest_revision);
@@ -162,20 +203,29 @@ export function WrittenRunner({
   async function submit() {
     setSealing(true);
     setSealError(null);
+    // The map must be saved before sealing: send it now if a save is waiting, or if the last one failed (for example
+    // while offline); never refuse just because an earlier attempt to save it failed.
+    let saved = mapState === "saved";
     if (saveTimer.current) {
       clearTimeout(saveTimer.current);
       saveTimer.current = null;
-      const out = await saveMapping(attempt.id, revisionRef.current, slots);
+      saved = false;
+    } else if (savingPromise.current) {
+      saved = await savingPromise.current;
+    }
+    if (!saved) {
+      const out = await reach(() => saveMapping(attempt.id, revisionRef.current, slots), { kind: "error", message: UNREACHABLE } as const);
       if (out.kind !== "ok") {
+        setMapState(out.kind === "conflict" ? "conflict" : "error"); // shown truthfully, and sent again on reconnect
+        setMapError(out.message);
         setSealing(false);
         setSealError(out.message);
         return;
       }
       revisionRef.current = out.attempt.manifest_revision;
-    } else if (savingPromise.current && !(await savingPromise.current)) {
-      setSealing(false);
-      setSealError("Your answer mapping couldn't be saved. Fix it and try again.");
-      return;
+      setRevision(out.attempt.manifest_revision);
+      setMapState("saved");
+      setMapError(null);
     }
     const storageKey = `written-seal:${attempt.id}`;
     let key: string;
@@ -185,7 +235,7 @@ export function WrittenRunner({
     } catch {
       key = crypto.randomUUID().replaceAll("-", "");
     }
-    const out = await sealScript(attempt.id, key, revisionRef.current);
+    const out = await reach(() => sealScript(attempt.id, key, revisionRef.current), { kind: "error", message: UNREACHABLE } as const);
     setSealing(false);
     if (out.kind === "error") {
       setSealError(out.missing?.length ? `${out.message} Missing: ${out.missing.join(", ")}.` : out.message);
@@ -246,6 +296,13 @@ export function WrittenRunner({
             <dt className="text-muted">Total</dt>
             <dd>{marks(attempt.max_units)} marks</dd>
           </dl>
+        )}
+        {active && !online && (
+          // W04.S2.T1 (WRITTEN-CONNECTION-01): what an outage means for a written test, which keeps no pages offline.
+          <Notice tone="warn" title="You're offline">
+            Time keeps running: upload and submit by {when(attempt.upload_cutoff_at)}. Pages can&apos;t upload until you&apos;re back online; a page that
+            fails stays in this tab so you can send it again. Your page choices are sent as soon as you&apos;re back.
+          </Notice>
         )}
       </header>
 
@@ -677,7 +734,7 @@ function PageAdjust({
   const apply = async (body: Parameters<typeof transformPage>[2]) => {
     setBusy(true);
     setError(null);
-    const r = await transformPage(attemptId, page.id, body);
+    const r = await reach(() => transformPage(attemptId, page.id, body), { ok: false, error: UNREACHABLE } as const);
     setBusy(false);
     if (r.ok) onChange(r.page);
     else setError(r.error);

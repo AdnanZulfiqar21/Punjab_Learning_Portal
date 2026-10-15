@@ -126,6 +126,14 @@ class CaseDetail(CaseSummary):
         default=None, description="Regrade cases: the questions a rubric correction changed, and why (W06.S2.T3)"
     )
     revisions: list[RevisionOut] = Field(description="Learner rescans for questions in this case (W06.S2.T4)")
+    can_free: bool = Field(
+        default=False,
+        description="You may free this script from another teacher's lease (academic adjudicator in scope; needs MFA)",
+    )
+
+
+class FreeCaseIn(BaseModel):
+    reason: str = Field(min_length=1, max_length=500, description="Why the script is being freed, for the audit trail")
 
 
 class DecisionIn(BaseModel):
@@ -492,6 +500,7 @@ def _detail(db: Session, case: review.WrittenReviewCase, who: Principal) -> Case
         completion=_completion_scope(db, case),
         regrade=_completion_scope(db, case, kind="regrade"),
         revisions=_revisions(db, case.attempt_id, {int(p) for p in (case.positions or [])} if case.positions else None),
+        can_free=review.can_adjudicate(db, who, case),
     )
 
 
@@ -576,6 +585,26 @@ def case_detail(db: DB, who: Reviewer, case_id: uuid.UUID, response: Response) -
 def take_lease(db: DB, who: Reviewer, case_id: uuid.UUID, response: Response) -> CaseDetail:
     _private(response)
     return _detail(db, review.lease(db, who, case_id), who)
+
+
+@router.post(
+    "/studio/written/cases/{case_id}/lease/release",
+    response_model=CaseDetail,
+    summary="Give the script back to the queue now (the teacher marking it)",
+)
+def hand_back(db: DB, who: Reviewer, case_id: uuid.UUID, response: Response) -> CaseDetail:
+    _private(response)
+    return _detail(db, review.hand_back(db, who, case_id), who)
+
+
+@router.post(
+    "/studio/written/cases/{case_id}/free",
+    response_model=CaseDetail,
+    summary="Free a script another teacher is marking (academic adjudicator in scope, MFA; audited with the reason)",
+)
+def free_case(db: DB, who: Reviewer, case_id: uuid.UUID, body: FreeCaseIn, response: Response) -> CaseDetail:
+    _private(response)
+    return _detail(db, review.free_case(db, who, case_id, reason=body.reason), who)
 
 
 @router.get("/studio/written/cases/{case_id}/pages/{page_id}", summary="Submitted evidence page (markers in scope)")
