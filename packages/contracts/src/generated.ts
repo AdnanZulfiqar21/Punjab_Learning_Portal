@@ -2173,6 +2173,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/ops/written-lifecycle": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Written script lifecycle timings with their counts (W09.S1.T1; operators) */
+        get: operations["written_lifecycle_v1_ops_written_lifecycle_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/ops/written/auto-assessments": {
         parameters: {
             query?: never;
@@ -7815,6 +7832,86 @@ export interface components {
              * Format: uuid
              */
             lesson_id: string;
+        };
+        /** LifecycleOut */
+        LifecycleOut: {
+            /** Days */
+            days: number;
+            /** Grade */
+            grade: number | null;
+            /**
+             * Not Running
+             * @description Stages with nothing to measure yet, and why
+             */
+            not_running: string[];
+            outcomes: components["schemas"]["LifecycleOutcomes"];
+            /**
+             * Since
+             * Format: date-time
+             */
+            since: string;
+            /** Stages */
+            stages: components["schemas"]["LifecycleStage"][];
+            /** Subject */
+            subject: string | null;
+        };
+        /** LifecycleOutcomes */
+        LifecycleOutcomes: {
+            /**
+             * Accepted
+             * @description Submitted: a receipt was issued
+             */
+            accepted: number;
+            /**
+             * Delayed
+             * @description Submitted, with an open marking case past its due time
+             */
+            delayed: number;
+            /**
+             * Not Submitted
+             * @description Ended without a submission (the upload time ran out, or the plan ended)
+             */
+            not_submitted: number;
+            /** Not Submitted Plan Withdrawn */
+            not_submitted_plan_withdrawn: number;
+            /**
+             * Pending
+             * @description Submitted, with no released result yet
+             */
+            pending: number;
+            /**
+             * Released Automatically
+             * @description Always 0 in R0: automatic assessment publishes nothing (B10)
+             */
+            released_automatically: number;
+            /** Released By Teacher */
+            released_by_teacher: number;
+            /**
+             * Started
+             * @description Written tests started in the window
+             */
+            started: number;
+            /** Still Writing */
+            still_writing: number;
+        };
+        /** LifecycleStage */
+        LifecycleStage: {
+            /**
+             * Count
+             * @description How many pages (upload stages) or scripts the times are measured over
+             */
+            count: number;
+            /** Description */
+            description: string;
+            /** Median Minutes */
+            median_minutes: number | null;
+            /** P90 Minutes */
+            p90_minutes: number | null;
+            /**
+             * Stage
+             * @enum {string}
+             */
+            stage: "upload_while_writing" | "upload_after_writing" | "seal" | "queue" | "review" | "publication";
         };
         /** LinkedAttemptOut */
         LinkedAttemptOut: {
@@ -16345,6 +16442,39 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["BacklogRow"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    written_lifecycle_v1_ops_written_lifecycle_get: {
+        parameters: {
+            query?: {
+                days?: number;
+                grade?: number | null;
+                subject?: string | null;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["LifecycleOut"];
                 };
             };
             /** @description Validation Error */
