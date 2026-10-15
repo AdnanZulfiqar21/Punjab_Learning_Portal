@@ -2318,6 +2318,13 @@
       },
       "CaseQuestion": {
         "properties": {
+          "marking_rules": {
+            "items": {
+              "$ref": "#/components/schemas/MarkingRuleOut"
+            },
+            "title": "Marking Rules",
+            "type": "array"
+          },
           "max_units": {
             "title": "Max Units",
             "type": "integer"
@@ -8184,6 +8191,35 @@
           "scenes"
         ],
         "title": "MarkersIn",
+        "type": "object"
+      },
+      "MarkingRuleOut": {
+        "properties": {
+          "key": {
+            "title": "Key",
+            "type": "string"
+          },
+          "label": {
+            "title": "Label",
+            "type": "string"
+          },
+          "proposed_default": {
+            "description": "True: the guide states no such rule, and this is the \u00a720.6.3 proposed default (W01.S2.T2)",
+            "title": "Proposed Default",
+            "type": "boolean"
+          },
+          "text": {
+            "title": "Text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "key",
+          "label",
+          "text",
+          "proposed_default"
+        ],
+        "title": "MarkingRuleOut",
         "type": "object"
       },
       "MasterIn": {
