@@ -10,6 +10,7 @@ Source plan: `Road Map/Punjab_Learning_Portal_Master_Roadmap_v2.2_Integrated_Wri
 
 | Task | State | Evidence / code | Checks | Remaining |
 |---|---|---|---|---|
+| P11.S2.T1 / P13.S2.T1 / P07.S1.T1 topic reader (TOPIC-READER-01) | IN_PROGRESS | Topic lesson route; chapter screens open the reader; `scene` block `bacterial_shapes`; Biology XI 1.1 draft `C11-BIO-CH1-1.1` | Code: written, uncommitted. Tests: `test_topic_reading.py` passed locally. Browser: not checked. Device: not checked. Academic: draft, not reviewed. Deployment: local API only. Launch: no | New iOS preview build; stills for Fig 1.1–1.3; OpenAPI export; academic review before publication |
 | P00.S1.T1 Owner requirements | IN_PROGRESS | DECISIONS SCOPE-01/AUTH-01, LAUNCH_MANIFEST | — | Requirement→phase/AC trace table |
 | P00.S1.T2 Release boundaries | IMPLEMENTED | RELEASE_CHECKLIST (3 readiness states) | — | Owner acceptance |
 | P00.S2.T1 External dependency register | IMPLEMENTED | BLOCKERS B01–B15 (corrected 2026-10-12) | — | Owner/lead times |

@@ -1,4 +1,5 @@
 // P04.S3.T2 (SETTINGS-01): display settings for this device, the account's usual settings, and video quality.
+import Constants from "expo-constants";
 import { useState } from "react";
 import { ScrollView, Switch, View } from "react-native";
 import type { StudySettings } from "@portal/contracts";
@@ -35,6 +36,7 @@ export default function SettingsScreen() {
   return (
     <ScrollView contentContainerStyle={{ padding: Space.lg, gap: Space.lg }}>
       <DeviceSettings />
+      <PreviewIdentity />
       {token && <UsualSettings token={token} />}
     </ScrollView>
   );
@@ -50,6 +52,34 @@ function Toggle({ label, hint, value, onChange }: { label: string; hint: string;
       </View>
       <Switch accessibilityLabel={label} value={value} onValueChange={onChange} trackColor={{ true: c.accent, false: c.border }} />
     </View>
+  );
+}
+
+function textExtra(key: string): string | null {
+  const value = Constants.expoConfig?.extra?.[key];
+  return typeof value === "string" && value ? value : null;
+}
+
+/** Preview builds only. Shows which binary this is and which API it calls. No tokens or passwords. */
+function PreviewIdentity() {
+  const variant = textExtra("variant");
+  if (variant === "production") return null;
+  const revision = textExtra("sourceRevision");
+  return (
+    <Card>
+      <View style={{ gap: Space.xs }}>
+        <T variant="heading" accessibilityRole="header">
+          This installation
+        </T>
+        <T variant="small">Standalone preview. This app does not download a newer version by itself.</T>
+        <T variant="small">{`Variant ${variant ?? "unknown"}`}</T>
+        <T variant="small">
+          {`Version ${Constants.expoConfig?.version ?? "unknown"} (${Constants.nativeBuildVersion ?? Constants.expoConfig?.ios?.buildNumber ?? "unknown"})`}
+        </T>
+        <T variant="small">{`Source ${revision ? revision.slice(0, 12) : "unknown"}`}</T>
+        <T variant="small">{`API ${textExtra("apiOrigin") ?? "not set"}`}</T>
+      </View>
+    </Card>
   );
 }
 
