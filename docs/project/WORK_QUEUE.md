@@ -1,6 +1,6 @@
 # Work queue (every roadmap task)
 
-**16 October 2026 — topic reader (current priority).** Uncommitted on `feat/topic-reader` (base `7d1be98`). Linked tasks: P11.S2.T1, P13.S2.T1, P07.S1.T1, P01.S4.T2, P22. Decision TOPIC-READER-01.
+**17 October 2026 — the phone is on build 2 and the lesson is withheld.** `feat/topic-reader` `c9028c7`. The installed app calls the topic route. A signed-out or ordinary learner gets `unavailable`, which the screen states as “This lesson is not ready yet.” The Biology XI 1.1 draft is still private. Staff preview works for `studio-author@example.com`. Topics 1.2–1.8 have no lesson. #233 and #234 are green on their heads and both touch `.github/workflows/ci.yml`, so only one can merge before the other is retested. Linked tasks: P11.S2.T1, P13.S2.T1, P07.S1.T1, P01.S4.T2, P22. Decision TOPIC-READER-01. Claude visual work is recorded in `docs/project/CLAUDE_UI_HANDOVER.md`.
 
 | Slice | Code | Tested | Device |
 |---|---|---|---|
