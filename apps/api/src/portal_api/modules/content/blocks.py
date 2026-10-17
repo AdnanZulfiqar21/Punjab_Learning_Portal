@@ -75,6 +75,11 @@ REGISTRY: dict[str, BlockSpec] = {
         BlockSpec("example", 1, {"web": 1, "android": 1, "ios": 1}, True, "Worked example: problem, steps, answer."),
         BlockSpec("diagram", 1, {"web": 1, "android": 1, "ios": 1}, True, "Archived image with alt text and caption."),
         BlockSpec("handout", 1, {"web": 1, "android": 1, "ios": 1}, True, "Downloadable archived PDF handout."),
+        # Constrained original scenes (TOPIC-READER-01). Geometry lives in the app, not in a downloaded script.
+        # A still diagram in the same lesson is the readable fallback if the scene cannot start.
+        BlockSpec(
+            "scene", 1, {"web": 1, "android": 1, "ios": 1}, True, "Named original scene with a text alternative."
+        ),
     )
 }
 
@@ -203,7 +208,19 @@ class Handout(_Block):
     description: Short | None = None
 
 
-AnyBlock = Heading | Paragraph | ListBlock | Callout | Table | Equation | Checkpoint | Example | Diagram | Handout
+class Scene(_Block):
+    """A named original scene the app knows how to draw. Unknown names stay readable through alt text."""
+
+    type: Literal["scene"]
+    scene: Literal["bacterial_shapes"]
+    alt: Annotated[str, Field(min_length=3, max_length=500)]
+    caption: Short
+    long_description: Text | None = None
+
+
+AnyBlock = (
+    Heading | Paragraph | ListBlock | Callout | Table | Equation | Checkpoint | Example | Diagram | Handout | Scene
+)
 Block = Annotated[AnyBlock, Field(discriminator="type")]
 
 

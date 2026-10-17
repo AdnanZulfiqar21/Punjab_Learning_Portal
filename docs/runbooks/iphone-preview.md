@@ -39,4 +39,6 @@ npx eas-cli@latest build --platform ios --profile preview
 
 EAS will ask for the Apple Developer account during credential setup. Accepting that prompt is what creates the signing certificate and the provisioning profile. Until a build page shows a finished iOS artifact, signing and on-device testing are not done (B07, B09).
 
+There is no `expo-updates` dependency, update channel, or development client. Restarting the API or Metro does not change the installed app. The finished preview installed on 15 October 2026 is build `1` of version `0.1.0`, bundle `pk.punjablearningportal.student.preview`, internal distribution, git `7d1be98`, build id `0be43c26-284c-4aa5-b083-9595b27babce`. iOS build `2` finished on 17 October 2026: id `1bcfc70b-9b5c-4410-b5b8-604ba23a6602`, git `c9028c7e128653062b36cd75775e90a660be5927`, same bundle and team, same registered iPhone. Install page: https://expo.dev/accounts/desirly/projects/punjab-learning-portal/builds/1bcfc70b-9b5c-4410-b5b8-604ba23a6602. The phone has not been checked after that install. Settings shows the variant, build number, source revision and API origin. It does not show a token.
+
 A production build must get an `https` origin. The preview exception for local networking is not on the production variant.

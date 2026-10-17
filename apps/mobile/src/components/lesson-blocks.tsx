@@ -188,6 +188,15 @@ function BlockView({ block: b, assetSource, dataSaver }: { block: Block; assetSo
           {str(b.long_description) ? <T variant="small">{str(b.long_description)}</T> : null}
         </View>
       );
+    case "scene":
+      return (
+        <View style={{ gap: Space.xs }}>
+          <BacterialShapes />
+          <T variant="small">{str(b.caption)}</T>
+          <T>{str(b.alt)}</T>
+          {str(b.long_description) ? <T variant="small">{str(b.long_description)}</T> : null}
+        </View>
+      );
     case "handout":
       // Saving a PDF on the device needs a share sheet this app doesn't include yet; handouts download on the website.
       return (
@@ -214,4 +223,27 @@ function BlockView({ block: b, assetSource, dataSaver }: { block: Block; assetSo
       );
     }
   }
+}
+
+function BacterialShapes() {
+  const c = useTheme();
+  const shapes = [
+    { name: "Coccus", detail: "spherical", style: { width: 36, height: 36, borderRadius: 18 } },
+    { name: "Bacillus", detail: "rod-shaped", style: { width: 56, height: 22, borderRadius: 11 } },
+    { name: "Vibrio", detail: "comma-shaped", style: { width: 28, height: 36, borderRadius: 14, borderBottomRightRadius: 4 } },
+    { name: "Spirillum", detail: "spiral-shaped", style: { width: 18, height: 40, borderRadius: 9 } },
+  ];
+  return (
+    <View accessibilityLabel="Four bacterial forms" style={{ flexDirection: "row", flexWrap: "wrap", gap: Space.md }}>
+      {shapes.map((shape) => (
+        <View key={shape.name} style={{ width: 88, alignItems: "center", gap: Space.xs }}>
+          <View style={{ height: 48, justifyContent: "center" }}>
+            <View style={{ borderWidth: 2, borderColor: c.accent, ...shape.style }} />
+          </View>
+          <T style={{ fontWeight: "600", textAlign: "center" }}>{shape.name}</T>
+          <T variant="small" style={{ textAlign: "center" }}>{shape.detail}</T>
+        </View>
+      ))}
+    </View>
+  );
 }

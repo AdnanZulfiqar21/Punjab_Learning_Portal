@@ -250,6 +250,43 @@ class LessonOut(BaseModel):
     )
 
 
+class TopicLessonOut(BaseModel):
+    """One lesson for one topic. A private preview is a draft, never a published lesson."""
+
+    id: uuid.UUID
+    title: str
+    language: Literal["en", "ur", "roman_ur"]
+    available_languages: list[str]
+    requested_language_missing: bool = False
+    topic_id: uuid.UUID
+    version: int
+    status: ItemStateName
+    private_preview: bool
+    access_tier: Literal["preview", "premium"]
+    locked: bool
+    content_schema_version: int
+    block_types: list[str]
+    body: dict[str, Any] | None
+    source_refs: list[dict[str, Any]] = Field(
+        default_factory=list, description="Present for staff preview only. Learners do not receive page numbers here."
+    )
+
+
+class TopicReadingOut(BaseModel):
+    topic_id: uuid.UUID
+    number: str | None
+    title: str
+    chapter_id: uuid.UUID
+    chapter_number: int
+    chapter_title: str
+    grade_number: int
+    subject_name: str
+    availability: Literal["published", "private_preview", "unavailable"]
+    lesson: TopicLessonOut | None
+    previous_topic_id: uuid.UUID | None
+    next_topic_id: uuid.UUID | None
+
+
 class VariantOut(BaseModel):
     item_id: uuid.UUID
     language: Literal["en", "ur", "roman_ur"]

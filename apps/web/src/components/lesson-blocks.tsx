@@ -181,6 +181,15 @@ function BlockView({ block: b, headingOffset, assetUrl, dataSaver }: { block: Bl
           )}
         </figure>
       );
+    case "scene":
+      return (
+        <figure className="space-y-2">
+          <BacterialShapes />
+          <figcaption className="text-sm text-muted">{str(b.caption)}</figcaption>
+          <p className="text-sm">{str(b.alt)}</p>
+          {str(b.long_description) && <p className="text-sm whitespace-pre-line text-muted">{str(b.long_description)}</p>}
+        </figure>
+      );
     case "handout":
       return (
         <p className="rounded-lg border border-border bg-surface px-4 py-3">
@@ -204,4 +213,27 @@ function BlockView({ block: b, headingOffset, assetUrl, dataSaver }: { block: Bl
       );
     }
   }
+}
+
+/** Original shapes for topic 1.1. A still diagram in the lesson remains readable if this view is unused. */
+function BacterialShapes() {
+  const shapes = [
+    { name: "Coccus", detail: "spherical", path: "M36 8a16 16 0 1 0 0.1 0z" },
+    { name: "Bacillus", detail: "rod-shaped", path: "M8 20h40a12 12 0 0 1 0 24H8a12 12 0 0 1 0-24z" },
+    { name: "Vibrio", detail: "comma-shaped", path: "M48 16c-20 0-28 10-28 24 0 8 6 14 16 14" },
+    { name: "Spirillum", detail: "spiral-shaped", path: "M8 40c8-16 16-16 24 0s16 16 24 0" },
+  ];
+  return (
+    <div className="grid grid-cols-2 gap-3 rounded-xl border border-border bg-surface p-4 sm:grid-cols-4" aria-label="Four bacterial forms">
+      {shapes.map((shape) => (
+        <div key={shape.name} className="flex flex-col items-center gap-1 text-center">
+          <svg viewBox="0 0 64 64" className="h-16 w-16 text-accent" role="img" aria-label={`${shape.name}, ${shape.detail}`}>
+            <path d={shape.path} fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
+          </svg>
+          <p className="text-sm font-medium">{shape.name}</p>
+          <p className="text-xs text-muted">{shape.detail}</p>
+        </div>
+      ))}
+    </div>
+  );
 }
