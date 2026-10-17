@@ -33,6 +33,10 @@ function apiOrigin(): string {
   return "http://127.0.0.1:8100";
 }
 
+// Created by `eas init` as @desirly/punjab-learning-portal. Dynamic config cannot be edited by that command, so the id
+// is set here and any id already present on extra.eas is kept.
+const EAS_PROJECT_ID = "0e89f0cd-7ca1-429a-8265-1a29a2dc999a";
+
 export default ({ config }: ConfigContext): ExpoConfig => ({
   ...config,
   name: NAMES[variant],
@@ -46,6 +50,18 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     ...config.ios,
     bundleIdentifier: IDS[variant],
     icon: "./assets/expo.icon",
+    // A preview or development build may call an http API on the same Wi-Fi. Production stays on the default
+    // App Transport Security rules, so it does not accept cleartext.
+    infoPlist:
+      variant === "production"
+        ? { ...config.ios?.infoPlist, ITSAppUsesNonExemptEncryption: false }
+        : {
+            ...config.ios?.infoPlist,
+            ITSAppUsesNonExemptEncryption: false,
+            NSLocalNetworkUsageDescription:
+              "Punjab Portal (Preview) connects to the learning service on this Wi-Fi.",
+            NSAppTransportSecurity: { NSAllowsLocalNetworking: true },
+          },
   },
   android: {
     ...config.android,
@@ -74,5 +90,10 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     ],
   ],
   experiments: { typedRoutes: true, reactCompiler: true },
-  extra: { variant, apiOrigin: apiOrigin() },
+  extra: {
+    ...config.extra,
+    eas: { ...config.extra?.eas, projectId: config.extra?.eas?.projectId ?? EAS_PROJECT_ID },
+    variant,
+    apiOrigin: apiOrigin(),
+  },
 });
