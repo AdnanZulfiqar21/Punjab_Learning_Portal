@@ -30,7 +30,7 @@ export default function BookScreen() {
         ListHeaderComponent={
           <View style={{ gap: Space.md, marginBottom: Space.sm }}>
             <T variant="muted">
-              {book.chapters.length} {bc.chapter_label.toLowerCase()}s · textbook source {bc.source_id}
+              {book.chapters.length} {bc.chapter_label.toLowerCase()}s
             </T>
             {book.missing_pages.length > 0 && (
               <Notice tone="warn" title="Part of the supplied textbook file is missing">

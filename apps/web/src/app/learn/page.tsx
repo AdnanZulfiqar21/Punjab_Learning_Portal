@@ -1,58 +1,140 @@
 import type { Metadata } from "next";
+import { cookies } from "next/headers";
 import Link from "next/link";
 import { Suspense } from "react";
-import type { Discovery } from "@portal/contracts";
+import type { Dashboard, Discovery } from "@portal/contracts";
+import { chooseLearnContext } from "@/app/actions/learn";
 import { getDiscovery } from "@/lib/api";
 import { GRADE_LABEL } from "@/lib/format";
+import {
+  GRADES,
+  LEARN_COOKIE,
+  parseLearnCookie,
+  resolveContext,
+  STREAM_LABEL,
+  STREAMS,
+  subjectKey,
+  type LearnContext,
+} from "@/lib/learn-context";
+import { api, currentUser } from "@/lib/session";
 import { Badge, Breadcrumbs, Notice, SkeletonCards } from "@/components/ui";
 
 export const metadata: Metadata = { title: "Learn" };
 
-const SUBJECTS: [string, string][] = [
-  ["biology", "Biology"],
-  ["chemistry", "Chemistry"],
-  ["physics", "Physics"],
-  ["computer_science", "Computer Science"],
-  ["mathematics", "Mathematics"],
-];
-const AVAILABILITY: [string, string][] = [
-  ["all", "Everything"],
-  ["lessons", "Has reviewed lessons"],
-  ["previews", "Has free previews"],
-  ["practice", "Has practice questions"],
-];
-type Filters = { grade?: string; track?: string; subject?: string; exam?: string; availability?: string };
 const TRACK_CODES = ["pre_medical", "pre_engineering", "ics"];
-/** Only known values reach the API; anything hand-edited into the URL is ignored rather than shown as an error. */
-const pick = (v: string | string[] | undefined, allowed?: string[]) =>
-  typeof v === "string" && v && (!allowed || allowed.includes(v)) ? v : undefined;
+const pick = (v: string | string[] | undefined, allowed: string[]) => (typeof v === "string" && allowed.includes(v) ? v : undefined);
 
-/** P11.S1.T3 (DISCOVERY-01): what is actually published per book, with filters. Class XI and XII stay separate. */
+/**
+ * Learn (pilot): choose your class, then your study group, and see that class's books for that group. A signed-in
+ * learner's profile sets both; a guest's choice stays in a cookie on this device. Every book can still be browsed.
+ */
 export default function LearnPage({ searchParams }: PageProps<"/learn">) {
   return (
     <div className="space-y-6">
       <div>
         <Breadcrumbs items={[{ href: "/", label: "Home" }, { label: "Learn" }]} />
-        <h1 className="mb-2 text-2xl font-semibold tracking-tight">Choose your class and subject</h1>
-        <p className="text-muted">
-          Class XI and Class XII use different textbooks and are listed separately. Each book shows what has been
-          reviewed and published so far.
-        </p>
+        <h1 className="mb-2 text-2xl font-semibold tracking-tight">Learn</h1>
       </div>
-      <Suspense fallback={<SkeletonCards count={10} label="Loading subjects" />}>
+      <Suspense fallback={<SkeletonCards count={6} label="Loading subjects" />}>
         {searchParams.then((sp) => (
-          <Discover
-            filters={{
-              grade: pick(sp.grade, ["11", "12"]),
-              track: pick(sp.track, TRACK_CODES),
-              subject: pick(sp.subject, SUBJECTS.map(([c]) => c)),
-              exam: typeof sp.exam === "string" && /^[A-Za-z0-9_-]{2,40}$/.test(sp.exam) ? sp.exam : undefined,
-              availability: pick(sp.availability, AVAILABILITY.map(([v]) => v)),
-            }}
-          />
+          <LearnFor grade={pick(sp.grade, ["11", "12"])} track={pick(sp.track, TRACK_CODES)} change={sp.change === "1"} />
         ))}
       </Suspense>
     </div>
+  );
+}
+
+async function LearnFor({ grade, track, change }: { grade?: string; track?: string; change: boolean }) {
+  const user = await currentUser();
+  const device = parseLearnCookie((await cookies()).get(LEARN_COOKIE)?.value);
+  const fromUrl: Partial<LearnContext> = {};
+  if (grade) fromUrl.grade = Number(grade) as LearnContext["grade"];
+  if (track) fromUrl.stream = track as LearnContext["stream"];
+  const resolved = resolveContext(user?.me.profile, { ...device, ...fromUrl });
+  const partial = { ...resolved.partial, ...fromUrl };
+  const context = change ? null : resolved.context;
+  return (
+    <div className="space-y-8">
+      {context ? (
+        <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-border bg-surface px-4 py-3">
+          <div>
+            <p className="font-semibold">
+              {GRADE_LABEL[context.grade]} · {STREAM_LABEL[context.stream]}
+            </p>
+            <p className="text-sm text-muted">{resolved.source === "profile" ? "From your profile" : user ? "Chosen on this device" : "Chosen on this device · sign in to keep it"}</p>
+          </div>
+          <Link href="/learn?change=1" className="text-sm font-medium text-accent underline underline-offset-2" aria-label="Change class or study group">
+            Change
+          </Link>
+        </div>
+      ) : (
+        <Chooser partial={partial} tracks={null} />
+      )}
+      {user && <ContinueReading token={user.token} />}
+      <Suspense fallback={<SkeletonCards count={3} label="Loading subjects" />}>
+        {context ? <Subjects context={context} /> : <AllBooks partial={partial} />}
+      </Suspense>
+    </div>
+  );
+}
+
+function Chooser({ partial, tracks }: { partial: Partial<LearnContext>; tracks: Discovery["tracks"] | null }) {
+  const chip = "flex cursor-pointer items-center gap-2 rounded-full border border-border bg-surface px-4 py-2 has-[:checked]:border-accent has-[:checked]:bg-accent-soft";
+  return (
+    <form action={chooseLearnContext} className="space-y-5 rounded-xl border border-border bg-surface p-5" aria-labelledby="choose-heading">
+      <div>
+        <h2 id="choose-heading" className="text-lg font-semibold">
+          What are you studying?
+        </h2>
+        <p className="text-sm text-muted">Class XI and Class XII use different textbooks, so choose both.</p>
+      </div>
+      <fieldset className="space-y-2">
+        <legend className="font-medium">1. Your class</legend>
+        <div className="flex flex-wrap gap-2">
+          {GRADES.map(([g, label]) => (
+            <label key={g} className={chip}>
+              <input type="radio" name="grade" value={g} defaultChecked={partial.grade === g} required />
+              {label}
+            </label>
+          ))}
+        </div>
+      </fieldset>
+      <fieldset className="space-y-2">
+        <legend className="font-medium">2. Your study group</legend>
+        <div className="flex flex-wrap gap-2">
+          {STREAMS.map(([code, label, subjects]) => (
+            <label key={code} className={chip} title={subjects}>
+              <input type="radio" name="stream" value={code} defaultChecked={partial.stream === code} required />
+              {label}
+            </label>
+          ))}
+        </div>
+        <p className="text-sm text-muted">
+          {partial.stream ? STREAMS.find(([code]) => code === partial.stream)?.[2] : "Pre-Medical, Pre-Engineering or ICS."}
+          {tracks?.find((t) => t.code === partial.stream)?.note ? ` ${tracks.find((t) => t.code === partial.stream)?.note}` : ""}
+        </p>
+      </fieldset>
+      <button type="submit" className="rounded-lg bg-accent px-5 py-2.5 font-medium text-white hover:bg-accent-strong dark:text-background">
+        Show my subjects
+      </button>
+    </form>
+  );
+}
+
+/** Only a real reading position (a published lesson this learner opened) becomes "Continue reading". */
+async function ContinueReading({ token }: { token: string }) {
+  const res = await api<Dashboard>("/v1/me/dashboard", { token });
+  if (!res.ok) return null;
+  const next = res.data.continue_learning;
+  if (!next) return null;
+  return (
+    <Link href={`/learn/chapter/${next.chapter_id}#lesson-${next.lesson_id}`} className="block rounded-xl border border-border bg-surface px-4 py-3 hover:border-accent">
+      <span className="block text-sm font-medium text-accent">Continue reading</span>
+      <span className="block font-semibold">{next.title}</span>
+      <span className="block text-sm text-muted">
+        {GRADE_LABEL[next.grade]} · Chapter {next.chapter_number}: {next.chapter_title}
+      </span>
+    </Link>
   );
 }
 
@@ -66,137 +148,146 @@ function summary(b: Discovery["books"][number]): string {
   return parts.join(" · ");
 }
 
-async function Discover({ filters }: { filters: Filters }) {
-  const res = await getDiscovery(filters);
+function BookCard({ b }: { b: Discovery["books"][number] }) {
+  return (
+    <li>
+      <Link
+        href={`/learn/${b.grade}/${b.subject}`}
+        data-subject={subjectKey(b.subject)}
+        className="flex items-start justify-between gap-3 rounded-xl border border-border border-l-4 border-l-accent bg-surface px-4 py-3 hover:border-accent"
+      >
+        <span>
+          <span className="block font-semibold">{b.subject_name}</span>
+          <span className="block text-sm text-muted">
+            {b.chapter_count} {b.chapter_label.toLowerCase()}s · {summary(b)}
+          </span>
+        </span>
+        <span className="flex shrink-0 flex-col items-end gap-1">
+          {b.preview_lessons > 0 && <Badge tone="ok">Free previews</Badge>}
+          {b.completeness !== "complete" && <Badge tone="warn">Source has gaps</Badge>}
+        </span>
+      </Link>
+    </li>
+  );
+}
+
+/** The chosen class's books for the chosen group (the API's track filter decides which books those are). */
+async function Subjects({ context }: { context: LearnContext }) {
+  const res = await getDiscovery({ grade: String(context.grade), track: context.stream });
   if (!res.ok) {
     return (
-      <Notice tone="warn" title="Nothing matches that filter">
-        {res.problem.detail} <Link href="/learn" className="underline">Show everything</Link>
+      <Notice tone="warn" title="Couldn't load these subjects">
+        {res.problem.detail} <Link href="/learn?change=1" className="underline">Choose again</Link>
       </Notice>
     );
   }
   const d = res.data;
-  const select = "rounded-lg border border-border bg-surface px-3 py-2";
-  const grades = [11, 12].filter((g) => d.books.some((b) => b.grade === g));
+  const books = d.books.filter((b) => b.grade === context.grade);
+  const previews = d.previews.filter((p) => p.grade === context.grade);
+  const note = d.tracks.find((t) => t.code === context.stream)?.note;
   return (
     <div className="space-y-8">
-      <form method="get" action="/learn" aria-label="Filter subjects" className="flex flex-wrap items-end gap-3 rounded-xl border border-border bg-surface p-4 text-sm">
-        <div className="flex flex-col gap-1">
-          <label htmlFor="f-grade">Class</label>
-          <select id="f-grade" name="grade" defaultValue={filters.grade ?? ""} className={select}>
-            <option value="">Both classes</option>
-            <option value="11">Class XI</option>
-            <option value="12">Class XII</option>
-          </select>
-        </div>
-        <div className="flex flex-col gap-1">
-          <label htmlFor="f-track">Track</label>
-          <select id="f-track" name="track" defaultValue={filters.track ?? ""} className={select}>
-            <option value="">Any track</option>
-            {d.tracks.map((t) => (
-              <option key={t.code} value={t.code}>
-                {t.name}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="flex flex-col gap-1">
-          <label htmlFor="f-subject">Subject</label>
-          <select id="f-subject" name="subject" defaultValue={filters.subject ?? ""} className={select}>
-            <option value="">Any subject</option>
-            {SUBJECTS.map(([code, name]) => (
-              <option key={code} value={code}>
-                {name}
-              </option>
-            ))}
-          </select>
-        </div>
-        {d.exams.length > 0 && (
-          <div className="flex flex-col gap-1">
-            <label htmlFor="f-exam">Exam</label>
-            <select id="f-exam" name="exam" defaultValue={filters.exam ?? ""} className={select}>
-              <option value="">Any exam</option>
-              {d.exams.map((e) => (
-                <option key={e.code} value={e.code}>
-                  {e.name} {e.year}
-                </option>
-              ))}
-            </select>
-          </div>
+      <section aria-labelledby="subjects-h" className="space-y-3">
+        <h2 id="subjects-h" className="text-lg font-semibold">
+          Your subjects
+        </h2>
+        {note && <p className="text-sm text-muted">{note}</p>}
+        {d.ambiguous_editions.length > 0 && (
+          <Notice tone="warn" title="More than one edition is effective today">
+            {d.ambiguous_editions.map((a) => `${GRADE_LABEL[a.grade] ?? `Class ${a.grade}`} ${a.subject_name}`).join("; ")}. Those books are not shown,
+            because the portal does not choose an edition for you.
+          </Notice>
         )}
-        <div className="flex flex-col gap-1">
-          <label htmlFor="f-availability">Show</label>
-          <select id="f-availability" name="availability" defaultValue={filters.availability ?? "all"} className={select}>
-            {AVAILABILITY.map(([v, l]) => (
-              <option key={v} value={v}>
-                {l}
-              </option>
+        {books.length === 0 && d.ambiguous_editions.length === 0 ? (
+          <Notice title={`No ${GRADE_LABEL[context.grade]} ${STREAM_LABEL[context.stream]} books yet`}>
+            <Link href="/learn?change=1" className="underline">Choose another class or group</Link>, or browse every book below.
+          </Notice>
+        ) : (
+          <ul className="grid gap-3 md:grid-cols-3">
+            {books.map((b) => (
+              <BookCard key={b.book_id} b={b} />
             ))}
-          </select>
-        </div>
-        <button type="submit" className="rounded-lg bg-accent px-4 py-2 font-medium text-white hover:bg-accent-strong dark:text-background">
-          Apply
-        </button>
-        {Object.values(filters).some(Boolean) && (
-          <Link href="/learn" className="py-2 text-accent underline underline-offset-2">
-            Clear filters
-          </Link>
+          </ul>
         )}
-      </form>
-      {d.exams.length === 0 && (
-        <p className="text-sm text-muted">MDCAT and ECAT exam filters appear once their official patterns have been verified.</p>
+      </section>
+      {previews.length > 0 && (
+        <section aria-labelledby="previews-h" className="space-y-2">
+          <h2 id="previews-h" className="text-lg font-semibold">
+            Free preview lessons
+          </h2>
+          <ul className="divide-y divide-border rounded-xl border border-border bg-surface text-sm">
+            {previews.map((p) => (
+              <li key={p.lesson_id} className="px-4 py-3">
+                <Link href={`/learn/chapter/${p.chapter_id}#lesson-${p.lesson_id}`} className="font-medium text-accent underline underline-offset-2">
+                  {p.title}
+                </Link>
+                <span className="text-muted">
+                  {" "}
+                  · {GRADE_LABEL[p.grade]} {p.subject_name} · Chapter {p.chapter_number}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </section>
       )}
-      {filters.track && <p className="text-sm text-muted">{d.tracks.find((t) => t.code === filters.track)?.note}</p>}
+      <p className="text-sm text-muted">
+        {d.plans_note}{" "}
+        <Link href="/learn?change=1" className="underline underline-offset-2">
+          Browse every book
+        </Link>
+      </p>
+    </div>
+  );
+}
+
+/**
+ * Every published book, Class XI and Class XII kept separate (DISCOVERY-01), while no class and group are chosen.
+ * A group or class already named (a track link from the home page, a half-made choice) narrows the list.
+ */
+async function AllBooks({ partial }: { partial: Partial<LearnContext> }) {
+  const res = await getDiscovery({ grade: partial.grade ? String(partial.grade) : undefined, track: partial.stream });
+  if (!res.ok) return <Notice tone="warn" title="Couldn't load the books">{res.problem.detail}</Notice>;
+  const d = res.data;
+  const grades = [11, 12].filter((g) => d.books.some((b) => b.grade === g));
+  const title = partial.stream ? `${STREAM_LABEL[partial.stream]} books` : "Browse every book";
+  return (
+    <div className="space-y-8">
+      <div>
+        <h2 className="text-lg font-semibold">{title}</h2>
+        <p className="text-sm text-muted">
+          Each book shows what has been reviewed and published so far.
+          {partial.stream ? (
+            <>
+              {" "}
+              <Link href="/learn?change=1" className="underline underline-offset-2">
+                Show every book
+              </Link>
+            </>
+          ) : null}
+        </p>
+      </div>
       {d.ambiguous_editions.length > 0 && (
         <Notice tone="warn" title="More than one edition is effective today">
-          {d.ambiguous_editions
-            .map((a) => `${GRADE_LABEL[a.grade] ?? `Class ${a.grade}`} ${a.subject_name}`)
-            .join("; ")}
-          . None of those books is shown, because the portal does not choose an edition for you. An edition you already
-          have a link for can still be opened.
+          {d.ambiguous_editions.map((a) => `${GRADE_LABEL[a.grade] ?? `Class ${a.grade}`} ${a.subject_name}`).join("; ")}. None of those books is shown,
+          because the portal does not choose an edition for you. An edition you already have a link for can still be opened.
         </Notice>
       )}
-
-      {d.books.length === 0 && d.ambiguous_editions.length === 0 ? (
-        <Notice title="Nothing matches these filters yet">
-          Try another class or subject, or <Link href="/learn" className="underline">show everything</Link>.
-        </Notice>
-      ) : d.books.length > 0 ? (
-        <div className="grid gap-8 md:grid-cols-2">
-          {grades.map((g) => (
-            <section key={g} aria-labelledby={`grade-${g}`}>
-              <h2 id={`grade-${g}`} className="mb-3 text-lg font-semibold">
-                {GRADE_LABEL[g]}
-              </h2>
-              <ul className="space-y-2">
-                {d.books
-                  .filter((b) => b.grade === g)
-                  .map((b) => (
-                    <li key={b.book_id}>
-                      <Link
-                        href={`/learn/${b.grade}/${b.subject}`}
-                        className="flex items-start justify-between gap-3 rounded-xl border border-border bg-surface px-4 py-3 hover:border-accent"
-                      >
-                        <span>
-                          <span className="block font-medium">{b.subject_name}</span>
-                          <span className="block text-sm text-muted">
-                            {b.chapter_count} {b.chapter_label.toLowerCase()}s · {summary(b)}
-                          </span>
-                        </span>
-                        <span className="flex shrink-0 flex-col items-end gap-1">
-                          {b.state === "not_yet_published" && <Badge>Outline only</Badge>}
-                          {b.preview_lessons > 0 && <Badge tone="ok">Free previews</Badge>}
-                          {b.completeness !== "complete" && <Badge tone="warn">Source has gaps</Badge>}
-                        </span>
-                      </Link>
-                    </li>
-                  ))}
-              </ul>
-            </section>
-          ))}
-        </div>
-      ) : null}
-
+      <div className="grid gap-8 md:grid-cols-2">
+        {grades.map((g) => (
+          <section key={g} aria-labelledby={`grade-${g}`}>
+            <h3 id={`grade-${g}`} className="mb-3 text-lg font-semibold">
+              {GRADE_LABEL[g]}
+            </h3>
+            <ul className="space-y-2">
+              {d.books
+                .filter((b) => b.grade === g)
+                .map((b) => (
+                  <BookCard key={b.book_id} b={b} />
+                ))}
+            </ul>
+          </section>
+        ))}
+      </div>
       {d.previews.length > 0 && (
         <section aria-labelledby="previews-h" className="space-y-2">
           <h2 id="previews-h" className="text-lg font-semibold">

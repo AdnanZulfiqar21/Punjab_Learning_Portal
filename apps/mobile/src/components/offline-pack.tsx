@@ -1,13 +1,14 @@
 // P13.S3 (OFFLINE-PACKS-01): save a chapter for offline reading and self-check practice. What is saved is exactly what
 // this account may read online now; it is checked byte for byte, kept per account, refreshed when online, and removed
 // on sign-out. Background downloads depend on the phone's operating system, so saving happens while this screen is open.
+// Shown as one quiet row under the chapter's topics: a secondary action, not a panel.
 import { router } from "expo-router";
 import { useEffect, useState } from "react";
 import { View } from "react-native";
 
-import { Button } from "@/components/form";
-import { Card, Notice, T } from "@/components/ui";
+import { LinkButton, Notice, T } from "@/components/ui";
 import { Space } from "@/constants/theme";
+import { useTheme } from "@/hooks/use-theme";
 import { ApiError } from "@/lib/api";
 import { downloadPack, PackError, readPack, refreshPack, removePack, type StoredPack } from "@/lib/study-packs";
 import { TIME_ZONE } from "@/lib/dates";
@@ -15,6 +16,7 @@ import { TIME_ZONE } from "@/lib/dates";
 const day = (iso: string) => new Date(iso).toLocaleDateString("en-GB", { dateStyle: "long", timeZone: TIME_ZONE });
 
 export function OfflinePack({ token, owner, chapterId }: { token: string; owner: string; chapterId: string }) {
+  const c = useTheme();
   const [pack, setPack] = useState<StoredPack | null>(() => readPack(owner, chapterId));
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
@@ -47,43 +49,38 @@ export function OfflinePack({ token, owner, chapterId }: { token: string; owner:
   }
 
   return (
-    <Card>
-      <View style={{ gap: Space.sm }}>
-        <T variant="heading">Use offline</T>
-        {pack ? (
-          <>
-            <T variant="small">
-              Saved on this device: {pack.manifest.lessons as number} lessons and {pack.manifest.questions as number} practice questions. Kept until{" "}
-              {day(pack.manifest.expires_at)}.
-            </T>
+    <View style={{ gap: Space.xs, borderTopWidth: 1, borderTopColor: c.border, paddingTop: Space.sm }}>
+      {pack ? (
+        <>
+          <T variant="small">
+            Saved on this device: {pack.manifest.lessons as number} lessons, {pack.manifest.questions as number} practice questions · kept until{" "}
+            {day(pack.manifest.expires_at)}.
             {/* CONTENT-COMPAT-01: questions with images aren't packed yet; say so rather than leave them silently out. */}
-            {Number(pack.manifest.questions_online_only ?? 0) > 0 ? (
-              <T variant="small">
-                {Number(pack.manifest.questions_online_only)} more practice question{Number(pack.manifest.questions_online_only) === 1 ? "" : "s"} with
-                images or diagrams can be practised online only.
-              </T>
-            ) : null}
-            <View style={{ flexDirection: "row", gap: Space.sm, flexWrap: "wrap" }}>
-              <Button label="Open saved copy" onPress={() => router.push({ pathname: "/offline/[id]", params: { id: chapterId } })} />
-              <Button variant="secondary" label="Update" busy={busy} onPress={save} />
-              <Button
-                variant="secondary"
-                label="Remove"
-                onPress={() => {
-                  removePack(owner, chapterId);
-                  setPack(null);
-                }}
-              />
-            </View>
-          </>
-        ) : (
-          <>
-            <T variant="small">Save this chapter&apos;s lessons you can read now, and its practice questions, to study without a connection.</T>
-            <Button variant="secondary" label="Save for offline" busy={busy} onPress={save} />
-          </>
-        )}
-        {message ? <Notice tone="warn" title="Offline copy">{message}</Notice> : null}
-      </View>
-    </Card>
+            {Number(pack.manifest.questions_online_only ?? 0) > 0
+              ? ` ${Number(pack.manifest.questions_online_only)} more with diagrams can be practised online only.`
+              : ""}
+          </T>
+          <View style={{ flexDirection: "row", gap: Space.md, flexWrap: "wrap" }}>
+            <LinkButton label="Open saved copy" onPress={() => router.push({ pathname: "/offline/[id]", params: { id: chapterId } })} />
+            <LinkButton label="Update" busy={busy} onPress={save} />
+            <LinkButton
+              label="Remove"
+              onPress={() => {
+                removePack(owner, chapterId);
+                setPack(null);
+              }}
+            />
+          </View>
+        </>
+      ) : (
+        <View style={{ flexDirection: "row", alignItems: "center", gap: Space.sm, flexWrap: "wrap" }}>
+          <T variant="small" style={{ flex: 1, minWidth: 160 }}>
+            Read this chapter without a connection.
+          </T>
+          <LinkButton label="Save for offline" busy={busy} onPress={save} />
+        </View>
+      )}
+      {message ? <Notice tone="warn" title="Offline copy">{message}</Notice> : null}
+    </View>
   );
 }

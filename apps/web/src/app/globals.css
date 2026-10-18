@@ -3,12 +3,12 @@
 /* Design tokens (P02.S2.T1). Neutral palette until the owner settles brand (BLOCKERS B11).
    Contrast pairs are chosen for ≥4.5:1 body text in both themes. */
 :root {
-  --background: #f7f8fa;
+  --background: #f8f6f2;
   --surface: #ffffff;
-  --surface-muted: #eef1f5;
-  --foreground: #14181f;
-  --muted: #4b5563;
-  --border: #d9dee6;
+  --surface-muted: #f1ede6;
+  --foreground: #1c1a17;
+  --muted: #5b5750;
+  --border: #e2ddd4;
   --accent: #0b5d73;
   --accent-strong: #08485a;
   --accent-soft: #e3f1f5;
@@ -23,12 +23,12 @@
 /* SETTINGS-01: the theme follows the system unless this device chose light or dark (lib/display.ts). */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --background: #0f1318;
-    --surface: #161b22;
-    --surface-muted: #1e252e;
-    --foreground: #e8ecf1;
-    --muted: #a7b0bc;
-    --border: #2c3542;
+    --background: #121412;
+    --surface: #1b1e1b;
+    --surface-muted: #242824;
+    --foreground: #ece9e3;
+    --muted: #aaa69e;
+    --border: #333832;
     --accent: #6cc4dc;
     --accent-strong: #9ad8ea;
     --accent-soft: #143440;
@@ -42,12 +42,12 @@
 }
 
 :root[data-theme="dark"] {
-  --background: #0f1318;
-  --surface: #161b22;
-  --surface-muted: #1e252e;
-  --foreground: #e8ecf1;
-  --muted: #a7b0bc;
-  --border: #2c3542;
+  --background: #121412;
+  --surface: #1b1e1b;
+  --surface-muted: #242824;
+  --foreground: #ece9e3;
+  --muted: #aaa69e;
+  --border: #333832;
   --accent: #6cc4dc;
   --accent-strong: #9ad8ea;
   --accent-soft: #143440;
@@ -104,6 +104,113 @@
 
 html {
   -webkit-text-size-adjust: 100%;
+}
+
+/* Subject accents (pilot): inside a subject's book, chapter and lessons the accent is that subject's; Biology is
+   emerald. The app keeps the same values (apps/mobile/src/constants/theme.ts SubjectAccents). */
+[data-subject="biology"] {
+  --accent: #0f7a62;
+  --accent-strong: #0b5f4c;
+  --accent-soft: #e1f3ec;
+}
+[data-subject="chemistry"] {
+  --accent: #9a4b00;
+  --accent-strong: #7a3b00;
+  --accent-soft: #fdeee0;
+}
+[data-subject="physics"] {
+  --accent: #3f46b5;
+  --accent-strong: #323893;
+  --accent-soft: #e8e9fb;
+}
+[data-subject="mathematics"] {
+  --accent: #8a2a6a;
+  --accent-strong: #6e2154;
+  --accent-soft: #f9e6f3;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) [data-subject="biology"] {
+    --accent: #5fcfae;
+    --accent-strong: #8ee0c6;
+    --accent-soft: #123a30;
+  }
+  :root:not([data-theme="light"]) [data-subject="chemistry"] {
+    --accent: #f3b06a;
+    --accent-strong: #f7c892;
+    --accent-soft: #3c2410;
+  }
+  :root:not([data-theme="light"]) [data-subject="physics"] {
+    --accent: #a4a9f5;
+    --accent-strong: #c0c3f8;
+    --accent-soft: #1f2250;
+  }
+  :root:not([data-theme="light"]) [data-subject="mathematics"] {
+    --accent: #e9a1d3;
+    --accent-strong: #f0bde0;
+    --accent-soft: #3c1532;
+  }
+}
+:root[data-theme="dark"] [data-subject="biology"] {
+  --accent: #5fcfae;
+  --accent-strong: #8ee0c6;
+  --accent-soft: #123a30;
+}
+:root[data-theme="dark"] [data-subject="chemistry"] {
+  --accent: #f3b06a;
+  --accent-strong: #f7c892;
+  --accent-soft: #3c2410;
+}
+:root[data-theme="dark"] [data-subject="physics"] {
+  --accent: #a4a9f5;
+  --accent-strong: #c0c3f8;
+  --accent-soft: #1f2250;
+}
+:root[data-theme="dark"] [data-subject="mathematics"] {
+  --accent: #e9a1d3;
+  --accent-strong: #f0bde0;
+  --accent-soft: #3c1532;
+}
+
+/* Lesson tables (renderer 2): below 40rem each row becomes a card. The first cell names the card; every other cell is
+   labelled by its column header, so a five-column comparison reads top to bottom instead of scrolling sideways. */
+@media (max-width: 40rem) {
+  .lesson-table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+  .lesson-table tr {
+    display: block;
+    margin-bottom: 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    background: var(--surface);
+    padding: 0.5rem 0.75rem;
+  }
+  .lesson-table td {
+    display: grid;
+    grid-template-columns: 7rem 1fr;
+    gap: 0.5rem;
+    border: 0;
+    padding: 0.25rem 0;
+  }
+  .lesson-table td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: var(--muted);
+  }
+  .lesson-table td:first-child {
+    display: block;
+    padding-bottom: 0.35rem;
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .lesson-table td:first-child::before {
+    content: none;
+  }
 }
 
 body {

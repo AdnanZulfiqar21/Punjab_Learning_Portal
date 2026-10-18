@@ -476,6 +476,12 @@ def block_refs(body: object) -> list[tuple[str, str, str]]:
             kind = node.get("type")
             if isinstance(kind, str) and kind in REF_KIND and isinstance(node.get("asset_version_id"), str):
                 out.append((f"{kind} block", node["asset_version_id"], REF_KIND[kind]))
+            if kind == "model3d":  # MODEL3D-01: the poster and every turntable still are archived images
+                if isinstance(node.get("poster_asset_version_id"), str):
+                    out.append(("model3d poster", node["poster_asset_version_id"], "image"))
+                for n, frame in enumerate(node.get("frames") or []):
+                    if isinstance(frame, str):
+                        out.append((f"model3d frame {n + 1}", frame, "image"))
             fb = node.get("fallback")
             if isinstance(fb, dict) and isinstance(fb.get("image_asset_id"), str):
                 out.append((f"{kind} fallback", fb["image_asset_id"], "image"))

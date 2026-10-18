@@ -49,6 +49,8 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   ios: {
     ...config.ios,
     bundleIdentifier: IDS[variant],
+    // Local source of truth (eas.json appVersionSource). Build 1 is the installed preview of 7d1be98.
+    buildNumber: "3",
     icon: "./assets/expo.icon",
     // A preview or development build may call an http API on the same Wi-Fi. Production stays on the default
     // App Transport Security rules, so it does not accept cleartext.
@@ -95,5 +97,8 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     eas: { ...config.extra?.eas, projectId: config.extra?.eas?.projectId ?? EAS_PROJECT_ID },
     variant,
     apiOrigin: apiOrigin(),
+    // Baked at build time. There is no expo-updates channel, so this identity is the installed binary.
+    sourceRevision: process.env.EAS_BUILD_GIT_COMMIT_HASH ?? "local",
+    delivery: "standalone",
   },
 });

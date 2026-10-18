@@ -1,5 +1,14 @@
 # Work queue (every roadmap task)
 
+**17 October 2026 — the phone is on build 2 and the lesson is withheld.** `feat/topic-reader` `c9028c7`. The installed app calls the topic route. A signed-out or ordinary learner gets `unavailable`, which the screen states as “This lesson is not ready yet.” The Biology XI 1.1 draft is still private. Staff preview works for `studio-author@example.com`. Topics 1.2–1.8 have no lesson. #233 and #234 are green on their heads and both touch `.github/workflows/ci.yml`, so only one can merge before the other is retested. Linked tasks: P11.S2.T1, P13.S2.T1, P07.S1.T1, P01.S4.T2, P22. Decision TOPIC-READER-01. Claude visual work is recorded in `docs/project/CLAUDE_UI_HANDOVER.md`.
+
+| Slice | Code | Tested | Device |
+|---|---|---|---|
+| Topic route, private draft preview, chapter list without PDF badges | Written on native and web | API `test_topic_reading.py` passed locally. OpenAPI not regenerated. | Not device-verified. The installed preview binary has no `/topic/[id]` route. |
+| Biology XI 1.1 draft | Imported once into `portal_integrations_view_test` as `C11-BIO-CH1-1.1` | Live check: anonymous unavailable; scoped author sees 29 blocks | Not on the phone |
+
+Mapped: Biology XI chapter 1 topic 1.1, PDF 4–8. Drafted: that topic only. Reviewed: none. Published: none. Figures expected: Fig 1.1–1.4. Created: the bacterial-shapes scene only. Still diagrams of the tree, membranes and archaea groups are not archived. The build the owner should install does not exist yet. External wait: an interactive iOS preview build (Apple team `6FV87T5UMF`, registered iPhone `00008130-000169AE2130001C`) and a second-person academic review before publication.
+
 **Night of 2026-10-15:** `main` is `f3d2a83`. Alembic head is `f8a21c6d4e90`. The counts and the C list below are not a current census. Do not rebuild work that is already on main: the evening items (P12.S2.T3, W09.S1.T3, P06.S4.T2, P09.S3.T1, W01.S1.T1, P02.S2.T1, the support read and the staffing-journey order; then at `8949b49`) and, since then, P13.S2.T1 mobile discovery (#227), P05.S1.T3 edition windows (#228), P03.S1.T2 the development object-store adapter (#229) and P04.S2.T2 the emergency-access audit (#230). #231 (do not choose among overlapping current editions) was open when this note was written and is not evidence until it merges. The sentence “nothing buildable remains” in RESUME_STATE is a 12 October historical note.
 
 Built 2026-10-15 from the roadmap's 423 task IDs (306 core `P..`, 117 written `W..`), the register, BLOCKERS, DECISIONS and

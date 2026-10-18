@@ -6,6 +6,7 @@ import { useScheme, useTheme } from "@/hooks/use-theme";
 import { VersionGate } from "@/components/version-gate";
 import { AuthProvider } from "@/lib/auth";
 import { DisplayProvider, useReducedMotion } from "@/lib/display";
+import { PrefsProvider } from "@/lib/prefs";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -17,7 +18,9 @@ export default function RootLayout() {
     <VersionGate>
     <AuthProvider>
     <DisplayProvider>
+    <PrefsProvider>
       <Shell />
+    </PrefsProvider>
     </DisplayProvider>
     </AuthProvider>
     </VersionGate>
@@ -37,6 +40,8 @@ function Shell() {
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="book/[grade]/[subject]" options={{ title: "Chapters" }} />
         <Stack.Screen name="chapter/[id]" options={{ title: "Chapter" }} />
+        <Stack.Screen name="topic/[id]" options={{ title: "Lesson" }} />
+        <Stack.Screen name="dashboard" options={{ title: "Dashboard" }} />
         <Stack.Screen name="onboarding" options={{ title: "Learning preferences" }} />
         <Stack.Screen name="attempt/[id]" options={{ title: "Practice test", gestureEnabled: false }} />
         <Stack.Screen name="result/[id]" options={{ title: "Your result" }} />

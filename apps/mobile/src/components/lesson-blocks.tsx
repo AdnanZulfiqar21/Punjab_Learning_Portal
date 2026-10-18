@@ -1,15 +1,18 @@
-// Native renderer for content blocks (schema v1, roadmap §5.4). Renderer version 1 on Android/iOS: text blocks render
-// natively; an unknown or unsupported block shows an explicit "update required" note instead of failing.
+// Native renderer for content blocks (schema v1, roadmap §5.4). Renderer version 2 on Android/iOS: text blocks render
+// natively, comparison tables become cards, and `model3d` blocks show a poster render with a drag-to-rotate turntable.
+// An unknown or unsupported block shows its reviewed fallback, or an explicit "update required" note instead of failing.
 import { Image } from "expo-image";
 import { Fragment, useState, type ReactNode } from "react";
-import { Pressable, ScrollView, View } from "react-native";
+import { View } from "react-native";
 
 import { Checkpoint } from "@/components/checkpoint";
-import { T } from "@/components/ui";
+import { Model3D } from "@/components/model3d";
+import { LinkButton, T } from "@/components/ui";
 import { Radius, Space } from "@/constants/theme";
 import { useTheme } from "@/hooks/use-theme";
+import { comparisonCards } from "@/lib/lesson-tables";
 
-export const NATIVE_RENDERER_VERSION = 1;
+export const NATIVE_RENDERER_VERSION = 2;
 
 type Block = { type: string; [key: string]: unknown };
 const str = (v: unknown) => (typeof v === "string" ? v : "");
@@ -19,11 +22,14 @@ const strs = (v: unknown) => (Array.isArray(v) ? v.map(str) : []);
 export type AssetSource = (versionId: string) => { uri: string; headers?: Record<string, string> };
 type Fallback = { text?: unknown; image_asset_id?: unknown; alt?: unknown };
 
+const CALLOUT_LABEL: Record<string, string> = { definition: "Definition", note: "Note", tip: "Tip", warning: "Take care" };
+
 export function LessonBlocks({
   blocks,
   assetSource,
   equationAction,
   dataSaver = false,
+  onBlockLayout,
 }: {
   blocks: Block[];
   assetSource?: AssetSource;
@@ -31,12 +37,16 @@ export function LessonBlocks({
   dataSaver?: boolean;
   /** STUDY-TOOLS-01: e.g. "Save formula" under each top-level equation (its index in the lesson body). */
   equationAction?: (index: number) => ReactNode;
+  /** Where each block sits (y within this list), so a language switch can return to the same place. */
+  onBlockLayout?: (index: number, y: number) => void;
 }) {
   return (
-    <View style={{ gap: Space.md }}>
+    <View style={{ gap: Space.lg }}>
       {blocks.map((b, i) => (
         <Fragment key={i}>
-          <BlockView block={b} assetSource={assetSource} dataSaver={dataSaver} />
+          <View onLayout={onBlockLayout ? (e) => onBlockLayout(i, e.nativeEvent.layout.y) : undefined}>
+            <BlockView block={b} assetSource={assetSource} dataSaver={dataSaver} />
+          </View>
           {b.type === "equation" && equationAction?.(i)}
         </Fragment>
       ))}
@@ -44,6 +54,7 @@ export function LessonBlocks({
   );
 }
 
+/** A figure plate: archived PNGs have white backgrounds, so the plate stays white in both themes. */
 function ArchivedImage({ id, alt, assetSource, dataSaver }: { id: string; alt: string; assetSource?: AssetSource; dataSaver?: boolean }) {
   const c = useTheme();
   const [shown, setShown] = useState(false);
@@ -51,9 +62,7 @@ function ArchivedImage({ id, alt, assetSource, dataSaver }: { id: string; alt: s
     return (
       <View style={{ borderWidth: 1, borderStyle: "dashed", borderColor: c.border, borderRadius: Radius.sm, padding: Space.md, gap: Space.sm }}>
         <T variant="small">{alt}</T>
-        <Pressable accessibilityRole="button" onPress={() => setShown(true)} style={{ minHeight: 44, justifyContent: "center" }}>
-          <T style={{ color: c.accent, fontWeight: "600" }}>Show diagram (data saver is on)</T>
-        </Pressable>
+        <LinkButton label="Show diagram (data saver is on)" onPress={() => setShown(true)} />
       </View>
     );
   }
@@ -65,13 +74,22 @@ function ArchivedImage({ id, alt, assetSource, dataSaver }: { id: string; alt: s
     );
   }
   return (
-    <Image
-      source={assetSource(id)}
-      accessibilityLabel={alt}
-      accessible
-      contentFit="contain"
-      style={{ width: "100%", height: 240, borderRadius: Radius.sm, backgroundColor: "#ffffff" }}
-    />
+    <View style={{ backgroundColor: "#ffffff", borderWidth: 1, borderColor: c.border, borderRadius: Radius.md, overflow: "hidden" }}>
+      <Image source={assetSource(id)} accessibilityLabel={alt} accessible contentFit="contain" style={{ width: "100%", aspectRatio: 4 / 3 }} />
+    </View>
+  );
+}
+
+function Lines({ items, ordered }: { items: string[]; ordered: boolean }) {
+  return (
+    <View style={{ gap: Space.xs }} accessibilityRole="list">
+      {items.map((item, i) => (
+        <View key={i} style={{ flexDirection: "row", gap: Space.sm }}>
+          <T style={{ width: 22, textAlign: "right" }}>{ordered ? `${i + 1}.` : "•"}</T>
+          <T style={{ flex: 1 }}>{item}</T>
+        </View>
+      ))}
+    </View>
   );
 }
 
@@ -80,31 +98,22 @@ function BlockView({ block: b, assetSource, dataSaver }: { block: Block; assetSo
   switch (b.type) {
     case "heading":
       return (
-        <T variant="heading" accessibilityRole="header" style={b.level === 3 ? { fontSize: 16 } : undefined}>
+        <T variant={b.level === 3 ? "subheading" : "heading"} accessibilityRole="header" style={{ marginTop: b.level === 3 ? 0 : Space.sm }}>
           {str(b.text)}
         </T>
       );
     case "paragraph":
       return <T>{str(b.text)}</T>;
     case "list":
-      return (
-        <View style={{ gap: Space.xs }} accessibilityRole="list">
-          {strs(b.items).map((item, i) => (
-            <View key={i} style={{ flexDirection: "row", gap: Space.sm }}>
-              <T style={{ width: 22, textAlign: "right" }}>{b.ordered ? `${i + 1}.` : "•"}</T>
-              <T style={{ flex: 1 }}>{item}</T>
-            </View>
-          ))}
-        </View>
-      );
+      return <Lines items={strs(b.items)} ordered={b.ordered === true} />;
     case "callout": {
       const tone = str(b.tone) || "note";
       const border = tone === "warning" ? c.warn : tone === "definition" ? c.accent : c.border;
       const bg = tone === "warning" ? c.warnSoft : tone === "definition" ? c.accentSoft : c.surfaceMuted;
       return (
         <View style={{ borderLeftWidth: 4, borderLeftColor: border, backgroundColor: bg, borderRadius: Radius.sm, padding: Space.md, gap: Space.xs }}>
-          <T variant="eyebrow" style={{ color: c.muted, textTransform: "uppercase" }}>
-            {tone}
+          <T variant="eyebrow" style={{ color: tone === "warning" ? c.warn : tone === "definition" ? c.accent : c.muted }}>
+            {CALLOUT_LABEL[tone] ?? "Note"}
           </T>
           {str(b.title) ? <T style={{ fontWeight: "600" }}>{str(b.title)}</T> : null}
           <T>{str(b.text)}</T>
@@ -114,30 +123,27 @@ function BlockView({ block: b, assetSource, dataSaver }: { block: Block; assetSo
     case "table": {
       const header = strs(b.header);
       const rows = Array.isArray(b.rows) ? (b.rows as unknown[]).map(strs) : [];
-      const cell = { borderWidth: 1, borderColor: c.border, padding: Space.sm, minWidth: 110 } as const;
+      const cards = comparisonCards(header, rows);
       return (
-        <View style={{ gap: Space.xs }}>
+        <View style={{ gap: Space.sm }} accessibilityLabel={`Table: ${str(b.caption)}`}>
           <T style={{ fontWeight: "600" }}>{str(b.caption)}</T>
-          <ScrollView horizontal accessibilityLabel={`Table: ${str(b.caption)}`}>
-            <View>
-              <View style={{ flexDirection: "row", backgroundColor: c.surfaceMuted }}>
-                {header.map((h, i) => (
-                  <T key={i} style={[cell, { fontWeight: "600" }]}>
-                    {h}
-                  </T>
+          {cards ? (
+            cards.map((card, i) => (
+              <View key={i} style={{ borderWidth: 1, borderColor: c.border, backgroundColor: c.surface, borderRadius: Radius.md, padding: Space.md, gap: Space.xs }}>
+                <T style={{ fontWeight: "700", color: c.accent }}>{card.title}</T>
+                {card.fields.map((f) => (
+                  <View key={f.label} style={{ flexDirection: "row", gap: Space.sm }}>
+                    <T variant="small" style={{ width: 104, fontWeight: "600" }}>
+                      {f.label}
+                    </T>
+                    <T style={{ flex: 1 }}>{f.value}</T>
+                  </View>
                 ))}
               </View>
-              {rows.map((r, i) => (
-                <View key={i} style={{ flexDirection: "row" }}>
-                  {r.map((v, j) => (
-                    <T key={j} style={cell}>
-                      {v}
-                    </T>
-                  ))}
-                </View>
-              ))}
-            </View>
-          </ScrollView>
+            ))
+          ) : (
+            <Lines items={rows.flat()} ordered={false} />
+          )}
         </View>
       );
     }
@@ -152,7 +158,7 @@ function BlockView({ block: b, assetSource, dataSaver }: { block: Block; assetSo
         />
       );
     case "equation": {
-      // Native renderer 1 has no typeset equations: show the reviewed static rendering and the text equivalent (§5.4).
+      // Native renderer 2 has no typeset equations: show the reviewed static rendering and the text equivalent (§5.4).
       const fb = (b.fallback ?? {}) as Fallback;
       return (
         <View style={{ borderWidth: 1, borderColor: c.border, borderRadius: Radius.sm, padding: Space.md, gap: Space.sm }}>
@@ -166,17 +172,12 @@ function BlockView({ block: b, assetSource, dataSaver }: { block: Block; assetSo
         <View
           accessibilityLabel={`Worked example: ${str(b.title)}`}
           style={{ borderWidth: 1, borderColor: c.border, borderRadius: Radius.sm, padding: Space.md, gap: Space.xs }}>
-          <T variant="eyebrow" style={{ color: c.muted, textTransform: "uppercase" }}>
+          <T variant="eyebrow" style={{ color: c.muted }}>
             Worked example
           </T>
           <T style={{ fontWeight: "600" }}>{str(b.title)}</T>
           <T>{str(b.problem)}</T>
-          {strs(b.steps).map((step, i) => (
-            <View key={i} style={{ flexDirection: "row", gap: Space.sm }}>
-              <T style={{ width: 22, textAlign: "right" }}>{`${i + 1}.`}</T>
-              <T style={{ flex: 1 }}>{step}</T>
-            </View>
-          ))}
+          <Lines items={strs(b.steps)} ordered />
           {str(b.answer) ? <T style={{ fontWeight: "600" }}>{`Answer: ${str(b.answer)}`}</T> : null}
         </View>
       );
@@ -185,7 +186,29 @@ function BlockView({ block: b, assetSource, dataSaver }: { block: Block; assetSo
         <View style={{ gap: Space.xs }}>
           <ArchivedImage id={str(b.asset_version_id)} alt={str(b.alt)} assetSource={assetSource} dataSaver={dataSaver} />
           <T variant="small">{str(b.caption)}</T>
-          {str(b.long_description) ? <T variant="small">{str(b.long_description)}</T> : null}
+          {str(b.long_description) ? <Description text={str(b.long_description)} /> : null}
+        </View>
+      );
+    case "model3d":
+      return (
+        <Model3D
+          poster={str(b.poster_asset_version_id)}
+          frames={strs(b.frames).filter(Boolean)}
+          alt={str(b.alt)}
+          caption={str(b.caption)}
+          labels={strs(b.labels).filter(Boolean)}
+          longDescription={str(b.long_description)}
+          assetSource={assetSource}
+          dataSaver={dataSaver}
+        />
+      );
+    case "scene":
+      return (
+        <View style={{ gap: Space.xs }}>
+          <BacterialShapes />
+          <T variant="small">{str(b.caption)}</T>
+          <T>{str(b.alt)}</T>
+          {str(b.long_description) ? <Description text={str(b.long_description)} /> : null}
         </View>
       );
     case "handout":
@@ -214,4 +237,38 @@ function BlockView({ block: b, assetSource, dataSaver }: { block: Block; assetSo
       );
     }
   }
+}
+
+/** A figure's long description, folded by default so the lesson stays readable; screen readers get the alt text anyway. */
+function Description({ text }: { text: string }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <View style={{ gap: Space.xs }}>
+      <LinkButton label={open ? "Hide the description" : "Describe this figure"} onPress={() => setOpen((o) => !o)} />
+      {open ? <T variant="muted">{text}</T> : null}
+    </View>
+  );
+}
+
+function BacterialShapes() {
+  const c = useTheme();
+  const shapes = [
+    { name: "Coccus", detail: "spherical", style: { width: 36, height: 36, borderRadius: 18 } },
+    { name: "Bacillus", detail: "rod-shaped", style: { width: 56, height: 22, borderRadius: 11 } },
+    { name: "Vibrio", detail: "comma-shaped", style: { width: 28, height: 36, borderRadius: 14, borderBottomRightRadius: 4 } },
+    { name: "Spirillum", detail: "spiral-shaped", style: { width: 18, height: 40, borderRadius: 9 } },
+  ];
+  return (
+    <View accessibilityLabel="Four bacterial forms" style={{ flexDirection: "row", flexWrap: "wrap", gap: Space.md }}>
+      {shapes.map((shape) => (
+        <View key={shape.name} accessible accessibilityLabel={`${shape.name}, ${shape.detail}`} style={{ width: 88, alignItems: "center", gap: Space.xs }}>
+          <View style={{ height: 48, justifyContent: "center" }}>
+            <View style={{ borderWidth: 2, borderColor: c.accent, ...shape.style }} />
+          </View>
+          <T style={{ fontWeight: "600", textAlign: "center" }}>{shape.name}</T>
+          <T variant="small" style={{ textAlign: "center" }}>{shape.detail}</T>
+        </View>
+      ))}
+    </View>
+  );
 }

@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { getBookFor } from "@/lib/api";
 import { GRADE_LABEL, assessmentSummary, chapterHeading, pageRange, parseGrade } from "@/lib/format";
+import { subjectKey } from "@/lib/learn-context";
 import { Badge, Breadcrumbs, Notice, SkeletonCards } from "@/components/ui";
 
 export const metadata: Metadata = { title: "Chapters" };
@@ -27,13 +28,13 @@ async function BookView({ grade: rawGrade, subject }: { grade: string; subject: 
   const { breadcrumb: bc } = book;
   const gradeLabel = GRADE_LABEL[bc.grade.number];
   return (
-    <div>
+    <div data-subject={subjectKey(bc.subject.code)}>
       <Breadcrumbs items={[{ href: "/learn", label: "Learn" }, { label: `${gradeLabel} ${bc.subject.name}` }]} />
       <header className="mb-6 space-y-2">
         <p className="text-sm font-medium text-accent">{gradeLabel}</p>
         <h1 className="text-2xl font-semibold tracking-tight">{bc.subject.name}</h1>
         <p className="text-muted">
-          {book.chapters.length} {bc.chapter_label.toLowerCase()}s · textbook source {bc.source_id}
+          {book.chapters.length} {bc.chapter_label.toLowerCase()}s
         </p>
       </header>
       {book.missing_pages.length > 0 && (

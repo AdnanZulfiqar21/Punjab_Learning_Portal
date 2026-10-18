@@ -1,9 +1,13 @@
 import { Fragment, type ReactNode } from "react";
 import { Checkpoint } from "@/components/checkpoint";
+import { Model3DFigure } from "@/components/model3d-figure";
 import { SaverImage } from "@/components/saver-image";
 
-// Renders content blocks (schema v1, roadmap §5.4). Unknown block types never crash the page: they show an explicit
-// "update required" notice, as the renderer contract requires.
+// Renders content blocks (schema v1, roadmap §5.4). Web renderer version 2: comparison tables fold into cards on narrow
+// screens and `model3d` blocks show a poster render with a turntable. Unknown block types never crash the page: they
+// show their reviewed fallback, or an explicit "update required" notice, as the renderer contract requires.
+export const WEB_RENDERER_VERSION = 2;
+
 type Block = { type: string; [key: string]: unknown };
 
 const str = (v: unknown) => (typeof v === "string" ? v : "");
@@ -15,6 +19,7 @@ const CALLOUT_STYLE: Record<string, string> = {
   tip: "border-ok bg-ok-soft",
   warning: "border-warn bg-warn-soft",
 };
+const CALLOUT_LABEL: Record<string, string> = { definition: "Definition", note: "Note", tip: "Tip", warning: "Take care" };
 
 /** Where an archived asset version's delivery copy can be fetched on this surface (P07.S1.T1): a learner lesson,
  * or the studio. Without it, diagrams show their alt text and handouts say where to get them. */
@@ -28,6 +33,7 @@ export function LessonBlocks({
   assetUrl,
   equationAction,
   dataSaver = false,
+  blockIds = false,
 }: {
   blocks: Block[];
   headingOffset?: number;
@@ -36,12 +42,20 @@ export function LessonBlocks({
   dataSaver?: boolean;
   /** STUDY-TOOLS-01: e.g. "Save formula" under each top-level equation (its index in the lesson body). */
   equationAction?: (index: number) => ReactNode;
+  /** Give each block an id (b0, b1, …) so language variants with one structure can return to the same place. */
+  blockIds?: boolean;
 }) {
   return (
-    <div className="space-y-4 leading-relaxed">
+    <div className="space-y-5 leading-relaxed">
       {blocks.map((b, i) => (
         <Fragment key={i}>
-          <BlockView block={b} headingOffset={headingOffset} assetUrl={assetUrl} dataSaver={dataSaver} />
+          {blockIds ? (
+            <div id={`b${i}`} data-block="" className="scroll-mt-20">
+              <BlockView block={b} headingOffset={headingOffset} assetUrl={assetUrl} dataSaver={dataSaver} />
+            </div>
+          ) : (
+            <BlockView block={b} headingOffset={headingOffset} assetUrl={assetUrl} dataSaver={dataSaver} />
+          )}
           {b.type === "equation" && equationAction?.(i)}
         </Fragment>
       ))}
@@ -88,41 +102,41 @@ function BlockView({ block: b, headingOffset, assetUrl, dataSaver }: { block: Bl
       const tone = str(b.tone) || "note";
       return (
         <aside className={`rounded-lg border-l-4 px-4 py-3 ${CALLOUT_STYLE[tone] ?? CALLOUT_STYLE.note}`}>
-          <p className="text-xs font-semibold tracking-wide text-muted uppercase">{tone}</p>
+          <p className="text-xs font-semibold tracking-wide text-muted uppercase">{CALLOUT_LABEL[tone] ?? "Note"}</p>
           {str(b.title) && <p className="font-semibold">{str(b.title)}</p>}
           <p className="whitespace-pre-line">{str(b.text)}</p>
         </aside>
       );
     }
     case "table": {
+      // A comparison table: a real table on wide screens; below 40rem each row folds into a card (globals.css
+      // `.lesson-table`), with the first column naming the card and every other cell labelled by its column.
       const header = strs(b.header);
       const rows = Array.isArray(b.rows) ? (b.rows as unknown[]).map(strs) : [];
       return (
-        <div className="overflow-x-auto">
-          <table className="w-full border-collapse text-sm">
-            <caption className="mb-2 text-left font-medium">{str(b.caption)}</caption>
-            <thead>
-              <tr>
-                {header.map((h, i) => (
-                  <th key={i} scope="col" className="border border-border bg-surface-muted px-3 py-2 text-left">
-                    {h}
-                  </th>
+        <table className="lesson-table w-full border-collapse text-sm">
+          <caption className="mb-2 text-left font-medium">{str(b.caption)}</caption>
+          <thead>
+            <tr>
+              {header.map((h, i) => (
+                <th key={i} scope="col" className="border border-border bg-surface-muted px-3 py-2 text-left">
+                  {h}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((r, i) => (
+              <tr key={i}>
+                {r.map((c, j) => (
+                  <td key={j} data-label={header[j] ?? ""} className="border border-border px-3 py-2 align-top">
+                    {c}
+                  </td>
                 ))}
               </tr>
-            </thead>
-            <tbody>
-              {rows.map((r, i) => (
-                <tr key={i}>
-                  {r.map((c, j) => (
-                    <td key={j} className="border border-border px-3 py-2">
-                      {c}
-                    </td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+            ))}
+          </tbody>
+        </table>
       );
     }
     case "checkpoint":
@@ -181,6 +195,33 @@ function BlockView({ block: b, headingOffset, assetUrl, dataSaver }: { block: Bl
           )}
         </figure>
       );
+    case "model3d": {
+      const poster = str(b.poster_asset_version_id);
+      const frames = strs(b.frames).filter(Boolean);
+      if (!assetUrl || !poster) {
+        return <p className="rounded-lg border border-dashed border-border px-3 py-6 text-center text-sm text-muted">{str(b.alt)}</p>;
+      }
+      return (
+        <Model3DFigure
+          poster={assetUrl(poster)}
+          frames={frames.map(assetUrl)}
+          alt={str(b.alt)}
+          caption={str(b.caption)}
+          labels={strs(b.labels).filter(Boolean)}
+          longDescription={str(b.long_description)}
+          dataSaver={!!dataSaver}
+        />
+      );
+    }
+    case "scene":
+      return (
+        <figure className="space-y-2">
+          <BacterialShapes />
+          <figcaption className="text-sm text-muted">{str(b.caption)}</figcaption>
+          <p className="text-sm">{str(b.alt)}</p>
+          {str(b.long_description) && <p className="text-sm whitespace-pre-line text-muted">{str(b.long_description)}</p>}
+        </figure>
+      );
     case "handout":
       return (
         <p className="rounded-lg border border-border bg-surface px-4 py-3">
@@ -204,4 +245,27 @@ function BlockView({ block: b, headingOffset, assetUrl, dataSaver }: { block: Bl
       );
     }
   }
+}
+
+/** Original shapes for topic 1.1. A still diagram in the lesson remains readable if this view is unused. */
+function BacterialShapes() {
+  const shapes = [
+    { name: "Coccus", detail: "spherical", path: "M36 8a16 16 0 1 0 0.1 0z" },
+    { name: "Bacillus", detail: "rod-shaped", path: "M8 20h40a12 12 0 0 1 0 24H8a12 12 0 0 1 0-24z" },
+    { name: "Vibrio", detail: "comma-shaped", path: "M48 16c-20 0-28 10-28 24 0 8 6 14 16 14" },
+    { name: "Spirillum", detail: "spiral-shaped", path: "M8 40c8-16 16-16 24 0s16 16 24 0" },
+  ];
+  return (
+    <div className="grid grid-cols-2 gap-3 rounded-xl border border-border bg-surface p-4 sm:grid-cols-4" aria-label="Four bacterial forms">
+      {shapes.map((shape) => (
+        <div key={shape.name} className="flex flex-col items-center gap-1 text-center">
+          <svg viewBox="0 0 64 64" className="h-16 w-16 text-accent" role="img" aria-label={`${shape.name}, ${shape.detail}`}>
+            <path d={shape.path} fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
+          </svg>
+          <p className="text-sm font-medium">{shape.name}</p>
+          <p className="text-xs text-muted">{shape.detail}</p>
+        </div>
+      ))}
+    </div>
+  );
 }

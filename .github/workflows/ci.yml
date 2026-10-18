@@ -75,7 +75,7 @@ jobs:
           # The hook also exits non-zero when it only refreshes line numbers of reviewed findings; fail on new ones.
           set +e
           out=$(git ls-files -z \
-            | grep -zvE '(^|/)(migrations/versions/|pnpm-lock\.yaml$|uv\.lock$|packages/contracts/|content/catalogue/|content/source_registry\.json$|\.secrets\.baseline$)' \
+            | grep -zvE '(^|/)(migrations/versions/|pnpm-lock\.yaml$|uv\.lock$|packages/contracts/|content/catalogue/|content/lessons/|content/source_registry\.json$|\.secrets\.baseline$)' \
             | xargs -0 uvx --from detect-secrets==1.5.0 detect-secrets-hook --baseline .secrets.baseline 2>&1)
           echo "$out"
           if echo "$out" | grep -q "Potential secrets about to be committed"; then exit 1; fi
@@ -265,6 +265,8 @@ jobs:
           nohup uv run portal-written-worker --interval 1 > /tmp/worker.log 2>&1 &   # written regrade jobs (W06-06)
           nohup uv run portal-import-worker --interval 1 > /tmp/import-worker.log 2>&1 &   # bulk imports (IMPORT-BULK-01)
           for i in $(seq 1 60); do curl -sf http://127.0.0.1:8100/readyz && break; sleep 1; done
+          # Class XI Biology Chapter 1 pilot drafts (private; never published here) for the staff preview journeys.
+          python3 ../../content/tools/import_lessons.py --api http://127.0.0.1:8100
       - name: Start web
         working-directory: apps/web
         run: |
