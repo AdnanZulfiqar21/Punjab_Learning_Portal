@@ -1,9 +1,10 @@
 import { DarkTheme, DefaultTheme, Stack, ThemeProvider } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import { useScheme, useTheme } from "@/hooks/use-theme";
 import { VersionGate } from "@/components/version-gate";
+import { loadApiOriginOverride } from "@/lib/api-origin";
 import { AuthProvider } from "@/lib/auth";
 import { DisplayProvider, useReducedMotion } from "@/lib/display";
 import { PrefsProvider } from "@/lib/prefs";
@@ -11,9 +12,14 @@ import { PrefsProvider } from "@/lib/prefs";
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
+  const [ready, setReady] = useState(false);
   useEffect(() => {
-    SplashScreen.hideAsync();
+    loadApiOriginOverride().finally(() => {
+      setReady(true);
+      SplashScreen.hideAsync();
+    });
   }, []);
+  if (!ready) return null; // the splash screen stays until the API address is known
   return (
     <VersionGate>
     <AuthProvider>

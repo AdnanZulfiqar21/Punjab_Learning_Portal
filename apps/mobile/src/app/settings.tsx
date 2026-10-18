@@ -4,12 +4,13 @@ import { useState } from "react";
 import { ScrollView, Switch, View } from "react-native";
 import type { StudySettings } from "@portal/contracts";
 
-import { Button, Choices, FormError } from "@/components/form";
+import { Button, Choices, Field, FormError } from "@/components/form";
 import { Card, ErrorState, Loading, T } from "@/components/ui";
 import { Space } from "@/constants/theme";
 import { useRequest } from "@/hooks/use-request";
 import { useTheme } from "@/hooks/use-theme";
-import { api } from "@/lib/api";
+import { api, currentApiOrigin } from "@/lib/api";
+import { apiOriginOverride, canOverrideApiOrigin, normaliseOrigin, setApiOriginOverride } from "@/lib/api-origin";
 import { useAuth } from "@/lib/auth";
 import { useDisplay, type TextSize, type Theme } from "@/lib/display";
 
@@ -78,8 +79,31 @@ function PreviewIdentity() {
         </T>
         <T variant="small">{`Source ${revision ? revision.slice(0, 12) : "unknown"}`}</T>
         <T variant="small">{`API ${textExtra("apiOrigin") ?? "not set"}`}</T>
+        <ApiAddress />
       </View>
     </Card>
+  );
+}
+
+/** Preview and development builds: point this device at the laptop's current address without a new build. */
+function ApiAddress() {
+  const [value, setValue] = useState(apiOriginOverride() ?? "");
+  const [saved, setSaved] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  if (!canOverrideApiOrigin()) return null;
+  async function save() {
+    setError(null);
+    if (value.trim() && !normaliseOrigin(value)) return setError("Use the form http://192.168.1.10:8100 (no path).");
+    await setApiOriginOverride(value.trim() || null);
+    setSaved(value.trim() ? `Using ${normaliseOrigin(value)} on this device. Restart the app if a screen is still loading.` : "Using the built-in address again.");
+  }
+  return (
+    <View style={{ gap: Space.sm, marginTop: Space.sm }}>
+      <Field label="API address on this device" value={value} onChangeText={setValue} autoCapitalize="none" autoCorrect={false} keyboardType="url" placeholder="http://192.168.1.10:8100" error={error ?? undefined} />
+      <T variant="small">{`In use now: ${currentApiOrigin()}. Leave empty to use the built-in address.`}</T>
+      <Button variant="secondary" label="Save API address" onPress={() => void save()} />
+      {saved ? <T variant="small" accessibilityLiveRegion="polite">{saved}</T> : null}
+    </View>
   );
 }
 
