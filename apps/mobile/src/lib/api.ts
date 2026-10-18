@@ -39,6 +39,7 @@ import type {
   SearchResult,
   SessionCreated,
   SubmitResult,
+  TopicLecture,
   HelpArticle,
   HelpArticleSummary,
   Inbox,
@@ -75,6 +76,8 @@ export class ApiError extends Error {
     this.name = "ApiError";
   }
 }
+
+export type { TopicLecture };
 
 export type TopicReading = {
   topic_id: string;
@@ -223,6 +226,9 @@ export const api = {
       `/v1/topics/${encodeURIComponent(topicId)}/lesson${language && language !== "en" ? `?language=${encodeURIComponent(language)}` : ""}`,
       { token, signal, cache: "no-store", headers: { "Cache-Control": "no-cache" } },
     ),
+  /** LECTURE-READ-01: the topic's approved lecture (locked without a plan or trial), or that it is coming. */
+  topicLecture: (topicId: string, token: string | null, signal?: AbortSignal) =>
+    request<TopicLecture>(`/v1/topics/${encodeURIComponent(topicId)}/lecture`, { token, signal, cache: "no-store" }),
   lessons: (chapterId: string, token: string | null, signal?: AbortSignal, language?: string) =>
     request<Lesson[]>(
       `/v1/chapters/${encodeURIComponent(chapterId)}/lessons${language && language !== "en" ? `?language=${encodeURIComponent(language)}` : ""}`,

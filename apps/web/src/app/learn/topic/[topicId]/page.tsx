@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { chooseReadingLanguage } from "@/app/actions/learn";
 import { KeepPlace } from "@/components/keep-place";
+import { LectureView } from "@/components/lecture-view";
 import { LessonBlocks } from "@/components/lesson-blocks";
 import { Notice, SkeletonLines } from "@/components/ui";
 import { DISPLAY_COOKIE, parseDisplay } from "@/lib/display";
@@ -48,15 +49,29 @@ type TopicReading = {
  * is kept on this device and in a signed-in learner's profile. Both variants share one block structure (ids b0, b1,
  * …), so switching returns to the same place.
  */
-export default function TopicPage({ params }: PageProps<"/learn/topic/[topicId]">) {
+type TopicLecture = {
+  availability: "available" | "coming";
+  lecture: {
+    id: string;
+    title: string;
+    language: string;
+    duration_s: number;
+    locked: boolean;
+    stream_path: string | null;
+    markers: { scene_id: string; label: string; start_s: number }[];
+    transcript: { scene_id: string; text: string }[];
+  } | null;
+};
+
+export default function TopicPage({ params, searchParams }: PageProps<"/learn/topic/[topicId]">) {
   return (
     <Suspense fallback={<SkeletonLines lines={8} label="Loading lesson" />}>
-      {params.then(({ topicId }) => <TopicView id={topicId} />)}
+      {Promise.all([params, searchParams]).then(([{ topicId }, sp]) => <TopicView id={topicId} view={sp.view === "lecture" ? "lecture" : "read"} />)}
     </Suspense>
   );
 }
 
-async function TopicView({ id }: { id: string }) {
+async function TopicView({ id, view }: { id: string; view: "read" | "lecture" }) {
   if (!UUID.test(id)) notFound();
   const user = await currentUser();
   const token = user?.token;
@@ -71,27 +86,34 @@ async function TopicView({ id }: { id: string }) {
   const note = lesson && readable ? missingLanguageNote(language, lesson.language) : null;
   const display = parseDisplay(jar.get(DISPLAY_COOKIE)?.value);
   const dataSaver = display ? display.dataSaver : (await headers()).get("save-data") === "on";
+  const lectureRes = readable ? await api<TopicLecture>(`/v1/topics/${id}/lecture`, token ? { token } : {}) : null;
+  const lecture = lectureRes?.ok ? lectureRes.data : null;
+  const segment = "rounded-md px-4 py-1.5 text-sm";
+  const on = `${segment} bg-surface font-semibold shadow-sm`;
+  const off = `${segment} text-muted hover:text-foreground`;
   return (
     <article className="mx-auto max-w-3xl space-y-6" data-subject={subjectKey(reading.subject_name)}>
       {readable && (
         <form action={chooseReadingLanguage} className="sticky top-0 z-10 -mx-4 space-y-2 bg-background/95 px-4 py-2 backdrop-blur" aria-label="Explanation language">
           <input type="hidden" name="topic" value={reading.topic_id} />
           <KeepPlace lessonId={lesson?.id ?? ""} />
-          <div role="group" aria-label="Explanation language" className="inline-flex rounded-lg border border-border bg-surface-muted p-0.5">
-            {READING_LANGUAGES.map(([code, label]) => (
-              <button
-                key={code}
-                type="submit"
-                name="language"
-                value={code}
-                aria-pressed={code === language}
-                className={`rounded-md px-4 py-1.5 text-sm ${code === language ? "bg-surface font-semibold shadow-sm" : "text-muted hover:text-foreground"}`}
-              >
-                {label}
-              </button>
-            ))}
+          <div role="group" aria-label="Read or watch" className="inline-flex rounded-lg border border-border bg-surface-muted p-0.5">
+            {READING_LANGUAGES.map(([code, label]) =>
+              view === "lecture" ? (
+                <Link key={code} href={`/learn/topic/${reading.topic_id}`} aria-current={undefined} className={off}>
+                  {label}
+                </Link>
+              ) : (
+                <button key={code} type="submit" name="language" value={code} aria-pressed={code === language} className={code === language ? on : off}>
+                  {label}
+                </button>
+              ),
+            )}
+            <Link href={`/learn/topic/${reading.topic_id}?view=lecture`} aria-current={view === "lecture" ? "page" : undefined} className={view === "lecture" ? on : off}>
+              Lecture
+            </Link>
           </div>
-          {note && (
+          {note && view !== "lecture" && (
             <p className="text-sm text-muted" role="status">
               {note}
             </p>
@@ -112,6 +134,31 @@ async function TopicView({ id }: { id: string }) {
         <h1 className="text-3xl font-semibold tracking-tight">{reading.number ? `${reading.number} ${reading.title}` : reading.title}</h1>
         <p className="text-sm text-muted">{reading.chapter_title}</p>
       </header>
+      {view === "lecture" && readable && (
+        <section aria-label="Lecture" className="space-y-3">
+          {lecture?.availability === "available" && lecture.lecture ? (
+            lecture.lecture.locked || !lecture.lecture.stream_path ? (
+              <Notice title="Included with a plan or the free 30-day trial">
+                <Link href="/account" className="underline underline-offset-2">
+                  Start your free trial or sign in
+                </Link>{" "}
+                to watch this lecture.
+              </Notice>
+            ) : (
+              <LectureView
+                src={`/learn/lectures/${lecture.lecture.id}/stream`}
+                title={lecture.lecture.title}
+                markers={lecture.lecture.markers}
+                transcript={lecture.lecture.transcript}
+              />
+            )
+          ) : (
+            <Notice title="The lecture for this topic is coming">
+              Lectures are added topic by topic after an independent academic review. The lesson text below is complete.
+            </Notice>
+          )}
+        </section>
+      )}
       {reading.availability === "unavailable" || !lesson?.body ? (
         <Notice title="This topic’s lesson isn’t ready yet">The chapter outline lists the topic, but its lesson has not been published.</Notice>
       ) : lesson.locked ? (

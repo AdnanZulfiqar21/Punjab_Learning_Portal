@@ -61,7 +61,7 @@ test("a topic without a published lesson says so and offers no language choice",
   await page.goto(TOPIC_1_1);
   await expect(page.getByRole("heading", { level: 1, name: /^1\.1 / })).toBeVisible();
   await expect(page.getByText("This topic’s lesson isn’t ready yet")).toBeVisible();
-  await expect(page.getByRole("group", { name: "Explanation language" })).toHaveCount(0);
+  await expect(page.getByRole("group", { name: "Read or watch" })).toHaveCount(0);
   await expect(page.getByText("Draft preview")).toHaveCount(0);
   await audit(page, null);
 });
@@ -72,8 +72,10 @@ test("staff who cover the subject read the draft in English, then in Roman Urdu 
   await page.goto(TOPIC_1_4);
   await expect(page.getByRole("heading", { level: 1, name: /^1\.4 / })).toBeVisible();
   await expect(page.getByText("Draft preview", { exact: true })).toBeVisible();
-  const languages = page.getByRole("group", { name: "Explanation language" });
-  await expect(languages.getByRole("button", { name: "English" })).toHaveAttribute("aria-pressed", "true");
+  const languages = page.getByRole("group", { name: "Read or watch" });
+  // The staff fixture account may have saved Roman Urdu on an earlier run; start from English explicitly.
+  await languages.getByRole("button", { name: "English" }).click();
+  await expect(languages.getByRole("button", { name: "English" })).toHaveAttribute("aria-pressed", "true", AUTH);
   // Renderer 2: a comparison table folds into cards on narrow screens; a model shows its poster, then a turntable.
   const model = page.locator("figure").filter({ hasText: "3D model" }).first();
   await model.scrollIntoViewIfNeeded();
@@ -96,6 +98,14 @@ test("staff who cover the subject read the draft in English, then in Roman Urdu 
   await expect(page.locator("[data-block]").nth(0)).not.toBeInViewport();
   // The preference is kept: another topic opens in Roman Urdu too.
   await page.goto(TOPIC_1_1);
-  await expect(page.getByRole("group", { name: "Explanation language" }).getByRole("button", { name: "Roman Urdu" })).toHaveAttribute("aria-pressed", "true");
+  await expect(page.getByRole("group", { name: "Read or watch" }).getByRole("button", { name: "Roman Urdu" })).toHaveAttribute("aria-pressed", "true");
+  // Lecture: the third choice. No approved lecture is registered for this topic, so it says so and keeps the text.
+  await page.getByRole("group", { name: "Read or watch" }).getByRole("link", { name: "Lecture" }).click();
+  await expect(page).toHaveURL(/\?view=lecture$/);
+  const lecture = page.getByRole("region", { name: "Lecture" });
+  await expect(lecture.getByText("The lecture for this topic is coming")).toBeVisible(AUTH);
+  await expect(page.locator("[data-block]").first()).toBeVisible();
+  await page.getByRole("group", { name: "Read or watch" }).getByRole("link", { name: "Roman Urdu" }).click();
+  await expect(page).not.toHaveURL(/view=lecture/);
   await audit(page, null);
 });

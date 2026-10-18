@@ -7,9 +7,10 @@ import { parseStored, type LearnContext } from "@/lib/learn-context-core";
 import { readPrefsRaw, writePrefsRaw } from "@/lib/prefs-store";
 import { isReadingLanguage, type ReadingLanguage } from "@/lib/reading-language-core";
 
-export type Prefs = { context: Partial<LearnContext> | null; language: ReadingLanguage | null };
+export type ReaderView = "read" | "lecture";
+export type Prefs = { context: Partial<LearnContext> | null; language: ReadingLanguage | null; view: ReaderView | null };
 
-const EMPTY: Prefs = { context: null, language: null };
+const EMPTY: Prefs = { context: null, language: null, view: null };
 
 type Ctx = { prefs: Prefs; loaded: boolean; update: (patch: Partial<Prefs>) => void };
 const PrefsContext = createContext<Ctx>({ prefs: EMPTY, loaded: false, update: () => {} });
@@ -17,7 +18,11 @@ const PrefsContext = createContext<Ctx>({ prefs: EMPTY, loaded: false, update: (
 function parse(raw: unknown): Prefs {
   if (!raw || typeof raw !== "object") return EMPTY;
   const r = raw as Record<string, unknown>;
-  return { context: parseStored(r.context), language: isReadingLanguage(r.language) ? r.language : null };
+  return {
+    context: parseStored(r.context),
+    language: isReadingLanguage(r.language) ? r.language : null,
+    view: r.view === "lecture" ? "lecture" : r.view === "read" ? "read" : null,
+  };
 }
 
 export function PrefsProvider({ children }: { children: ReactNode }) {

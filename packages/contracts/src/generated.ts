@@ -1037,6 +1037,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/lectures/{lecture_id}/stream": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Stream an approved lecture's master video (development media directory only; range requests honoured) */
+        get: operations["stream_lecture_v1_lectures__lecture_id__stream_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/lessons/{item_id}/assets/{version_id}": {
         parameters: {
             query?: never;
@@ -4352,6 +4369,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/topics/{topic_id}/lecture": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** The topic's approved lecture, or that it is coming */
+        get: operations["read_topic_lecture_v1_topics__topic_id__lecture_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/topics/{topic_id}/lesson": {
         parameters: {
             query?: never;
@@ -7617,6 +7651,37 @@ export interface components {
              */
             attempt_id: string;
         };
+        /** LearnerLectureOut */
+        LearnerLectureOut: {
+            /** Duration S */
+            duration_s: number;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /**
+             * Language
+             * @enum {string}
+             */
+            language: "en" | "ur" | "roman_ur";
+            /**
+             * Locked
+             * @description True when this learner may not watch yet (plan or trial needed)
+             */
+            locked: boolean;
+            /** Markers */
+            markers: components["schemas"]["LectureMarkerOut"][];
+            /**
+             * Stream Path
+             * @description Where to stream the video; null while locked
+             */
+            stream_path: string | null;
+            /** Title */
+            title: string;
+            /** Transcript */
+            transcript: components["schemas"]["LectureSceneOut"][];
+        };
         /** LearnerOut */
         LearnerOut: {
             /**
@@ -7694,6 +7759,15 @@ export interface components {
              * Format: uuid
              */
             voice_id: string;
+        };
+        /** LectureMarkerOut */
+        LectureMarkerOut: {
+            /** Label */
+            label: string;
+            /** Scene Id */
+            scene_id: string;
+            /** Start S */
+            start_s: number;
         };
         /** LectureOut */
         LectureOut: {
@@ -7777,6 +7851,13 @@ export interface components {
              */
             updated_at: string;
             voice: components["schemas"]["VoiceOut"];
+        };
+        /** LectureSceneOut */
+        LectureSceneOut: {
+            /** Scene Id */
+            scene_id: string;
+            /** Text */
+            text: string;
         };
         /** LessonOut */
         LessonOut: {
@@ -11366,6 +11447,20 @@ export interface components {
              */
             topic_id: string;
         };
+        /** TopicLectureOut */
+        TopicLectureOut: {
+            /**
+             * Availability
+             * @enum {string}
+             */
+            availability: "available" | "coming";
+            lecture: components["schemas"]["LearnerLectureOut"] | null;
+            /**
+             * Topic Id
+             * Format: uuid
+             */
+            topic_id: string;
+        };
         /**
          * TopicLessonOut
          * @description One lesson for one topic. A private preview is a draft, never a published lesson.
@@ -14539,6 +14634,46 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["ArticleOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    stream_lecture_v1_lectures__lecture_id__stream_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                lecture_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "video/mp4": unknown;
+                };
+            };
+            /** @description Partial Content */
+            206: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "video/mp4": unknown;
                 };
             };
             /** @description Validation Error */
@@ -21162,6 +21297,37 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["TicketOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    read_topic_lecture_v1_topics__topic_id__lecture_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                topic_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TopicLectureOut"];
                 };
             };
             /** @description Validation Error */

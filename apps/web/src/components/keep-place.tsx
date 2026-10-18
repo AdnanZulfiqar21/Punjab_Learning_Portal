@@ -30,10 +30,10 @@ export function KeepPlace({ lessonId }: { lessonId: string }) {
     };
   }, [lessonId]);
 
+  // Listen on the document: the form's DOM node is replaced after each switch, while this component is kept.
   useEffect(() => {
-    const form = marker.current?.closest("form");
-    if (!form) return;
-    const onSubmit = () => {
+    const onSubmit = (e: Event) => {
+      if (e.target !== marker.current?.closest("form")) return;
       const blocks = Array.from(document.querySelectorAll<HTMLElement>("[data-block]"));
       const top = blocks.filter((b) => b.getBoundingClientRect().top <= 80).at(-1);
       try {
@@ -42,8 +42,8 @@ export function KeepPlace({ lessonId }: { lessonId: string }) {
         // see above
       }
     };
-    form.addEventListener("submit", onSubmit);
-    return () => form.removeEventListener("submit", onSubmit);
+    document.addEventListener("submit", onSubmit, true);
+    return () => document.removeEventListener("submit", onSubmit, true);
   }, []);
 
   return <span ref={marker} hidden />;

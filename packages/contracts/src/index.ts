@@ -161,3 +161,4 @@ export type Concept = S["ConceptOut"];
 export type InclusionRecord = S["RecordOut"];
 export type InclusionReport = S["ReportOut"];
 export type InclusionCoverage = S["CoverageOut"];
+export type TopicLecture = S["TopicLectureOut"];
