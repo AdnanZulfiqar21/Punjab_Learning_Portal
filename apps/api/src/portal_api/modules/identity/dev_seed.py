@@ -22,7 +22,9 @@ from portal_api.modules.identity.models import AppUser, DevCredential, StaffRole
 
 # Development-only fixture password for the local identity adapter. Never valid anywhere else.
 FIXTURE_PASSWORD = "studio-fixture-pass-1"  # noqa: S105 - dev-adapter fixture, refused outside development/test
-SCOPE = {"grades": [11], "subjects": ["biology"]}
+# Every Class XI subject in the catalogue, so the fixtures can author and review any of the five books.
+SCOPE = {"grades": [11], "subjects": ["biology", "chemistry", "physics", "computer_science", "mathematics"]}
+DEV_REASON = "development fixture (portal-dev-seed-staff)"
 FIXTURES: list[tuple[str, list[str]]] = [
     ("studio-author@example.com", ["content_author"]),
     ("studio-author2@example.com", ["content_author"]),
@@ -65,13 +67,31 @@ def main(argv: list[str] | None = None) -> int:
                         StaffRoleGrant.revoked_at.is_(None),
                     )
                 )
+                if held is not None and held.reason == DEV_REASON and held.scope != SCOPE:
+                    # An older fixture grant (Biology only): widen it to the current fixture scope.
+                    held.scope = SCOPE
+                    db.flush()
+                    record(
+                        db,
+                        actor=None,
+                        action="role.grant",
+                        target_type="app_user",
+                        target_id=str(user.id),
+                        details={
+                            "grant_id": str(held.id),
+                            "role": role,
+                            "scope": SCOPE,
+                            "via": "dev-seed",
+                            "widened": True,
+                        },
+                    )
                 if held is None:
                     grant = StaffRoleGrant(
                         user_id=user.id,
                         role=role,
                         scope=SCOPE,
                         granted_by=None,
-                        reason="development fixture (portal-dev-seed-staff)",
+                        reason=DEV_REASON,
                     )
                     db.add(grant)
                     db.flush()
@@ -83,7 +103,7 @@ def main(argv: list[str] | None = None) -> int:
                         target_id=str(user.id),
                         details={"grant_id": str(grant.id), "role": role, "scope": SCOPE, "via": "dev-seed"},
                     )
-            print(f"{email}: {', '.join(roles)} (Class XI Biology)")
+            print(f"{email}: {', '.join(roles)} (Class XI, all subjects)")
         # Development-only funded review capacity for the fixture scope (R05). Real capacity is an operator decision.
         from portal_api.modules.written.review import ReviewCapacity
 
@@ -93,7 +113,7 @@ def main(argv: list[str] | None = None) -> int:
                     grade_number=11,
                     subject_code="biology",
                     max_open_cases=500,
-                    reason="development fixture (portal-dev-seed-staff)",
+                    reason=DEV_REASON,
                 )
             )
             print("review capacity: Class XI Biology, 500 open cases (development fixture)")
