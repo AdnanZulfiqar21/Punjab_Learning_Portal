@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <rect width="1200" height="800" fill="#ffffff"/>
+  <!-- Original diagram after Figure 5.9: non-cyclic photophosphorylation drawn as the Z-scheme. -->
+  <defs>
+    <style>
+      .h{font-size:27px;font-weight:700;fill:#14181f;text-anchor:middle}
+      .s{font-size:18px;fill:#4b5563;text-anchor:middle}
+      .b{font-size:18px;font-weight:700;fill:#ffffff;text-anchor:middle}
+      .n{font-size:18px;fill:#14181f;text-anchor:middle;font-weight:700}
+    </style>
+    <marker id="ar" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#4b5563"/></marker>
+    <marker id="ary" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#d98b2b"/></marker>
+  </defs>
+  <text class="h" x="600" y="40">Non-cyclic photophosphorylation: the Z-scheme</text>
+  <!-- energy axis -->
+  <path d="M80 680 V90" stroke="#14181f" stroke-width="3" marker-end="url(#ar)"/>
+  <text class="s" x="40" y="400" transform="rotate(-90 40 400)">energy level of electrons</text>
+  <!-- PS-II -->
+  <rect x="150" y="560" width="130" height="70" rx="12" fill="#0f7a62"/><text class="b" x="215" y="590">PS-II</text><text class="b" x="215" y="614">P680</text>
+  <!-- primary acceptor II -->
+  <rect x="300" y="250" width="130" height="50" rx="10" fill="#d98b2b"/><text class="b" x="365" y="282">acceptor</text>
+  <!-- ETC 1 -->
+  <g fill="#9ca3af"><circle cx="470" cy="330" r="20"/><circle cx="530" cy="400" r="20"/><circle cx="590" cy="470" r="20"/></g>
+  <text class="s" x="470" y="300">PQ</text><text class="s" x="440" y="430">cytochrome</text><text class="s" x="440" y="454">complex</text><text class="s" x="590" y="510">PC</text>
+  <!-- PS-I -->
+  <rect x="640" y="500" width="130" height="70" rx="12" fill="#5b3fb5"/><text class="b" x="705" y="530">PS-I</text><text class="b" x="705" y="554">P700</text>
+  <!-- primary acceptor I -->
+  <rect x="800" y="140" width="130" height="50" rx="10" fill="#d98b2b"/><text class="b" x="865" y="172">acceptor</text>
+  <!-- FD and NADP -->
+  <circle cx="990" cy="210" r="20" fill="#9ca3af"/><text class="s" x="990" y="255">FD</text>
+  <rect x="1040" y="250" width="140" height="56" rx="10" fill="#1f6fb5"/><text class="b" x="1110" y="285">NADPH</text>
+  <!-- electron path -->
+  <g stroke="#4b5563" stroke-width="4" fill="none" marker-end="url(#ar)">
+    <path d="M215 555 L340 300"/>
+    <path d="M430 285 L460 318"/><path d="M485 345 L520 385"/><path d="M545 415 L580 455"/><path d="M605 480 L660 500"/>
+    <path d="M705 495 L840 190"/>
+    <path d="M930 170 L975 200"/><path d="M1008 222 L1045 250"/>
+  </g>
+  <!-- light -->
+  <g stroke="#f2b134" stroke-width="5" fill="none" marker-end="url(#ary)"><path d="M150 450 L200 560"/><path d="M640 400 L690 500"/></g>
+  <text class="n" x="120" y="440">light</text><text class="n" x="600" y="380">light</text>
+  <!-- photolysis -->
+  <rect x="120" y="660" width="220" height="60" rx="10" fill="#dbe9f5" stroke="#1f6fb5" stroke-width="3"/>
+  <text class="n" x="230" y="685">2H2O</text><text class="s" x="230" y="708">photolysis: 4H+ + O2 + 4e-</text>
+  <path d="M230 655 L220 635" stroke="#4b5563" stroke-width="4" marker-end="url(#ar)"/>
+  <!-- ATP by chemiosmosis -->
+  <rect x="560" y="560" width="60" height="30" rx="8" fill="#0f7a62"/><text class="b" x="590" y="582" style="font-size:16px">ATP</text>
+  <text class="s" x="470" y="600">chemiosmosis</text>
+  <path d="M560 440 L575 555" stroke="#4b5563" stroke-width="2" stroke-dasharray="5 4"/>
+  <!-- step numbers -->
+  <g class="n"><text x="270" y="420">1</text><text x="130" y="650">2</text><text x="520" y="330">3</text><text x="770" y="330">4</text><text x="990" y="150">5</text></g>
+  <text class="s" x="600" y="762">1 PS-II absorbs light; 2 photolysis of water fills the hole in P680; 3 electrons flow down the chain to PS-I, making ATP;</text><text class="s" x="600" y="788">4 PS-I absorbs light; 5 ferredoxin and NADP reductase make NADPH.</text>
+</svg>
