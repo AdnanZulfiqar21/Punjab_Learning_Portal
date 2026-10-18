@@ -166,8 +166,7 @@ function Reader({
       </View>
       {view === "lecture" && lesson?.body && !lesson.locked ? (
         lecture ? <LectureView data={lecture} token={token} /> : <Loading label="Checking for a lecture" />
-      ) : null}
-      {reading.availability === "unavailable" || !lesson?.body ? (
+      ) : reading.availability === "unavailable" || !lesson?.body ? (
         <Notice title="This topic’s lesson isn’t ready yet">The chapter outline lists the topic, but its lesson has not been published.</Notice>
       ) : lesson.locked ? (
         <Notice title="Included with a plan or the free 30-day trial">Start your free trial from the Account tab to read this lesson.</Notice>

@@ -163,7 +163,7 @@ async function TopicView({ id, view }: { id: string; view: "read" | "lecture" })
           )}
         </section>
       )}
-      {reading.availability === "unavailable" || !lesson?.body ? (
+      {view === "lecture" && readable ? null : reading.availability === "unavailable" || !lesson?.body ? (
         <Notice title="This topic’s lesson isn’t ready yet">The chapter outline lists the topic, but its lesson has not been published.</Notice>
       ) : lesson.locked ? (
         <Notice title="Included with a plan or the free 30-day trial">

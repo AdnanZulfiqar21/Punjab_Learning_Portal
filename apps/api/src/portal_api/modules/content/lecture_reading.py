@@ -18,14 +18,14 @@ import uuid
 from pathlib import Path
 from typing import Annotated, Literal
 
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Request
 from fastapi.responses import FileResponse
 from pydantic import BaseModel, Field
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from portal_api.config import get_settings
-from portal_api.db import get_session
+from portal_api.db import get_session, get_sessionmaker
 from portal_api.errors import NotFound
 from portal_api.modules.access import service as access
 from portal_api.modules.content.lectures import Lecture
@@ -159,11 +159,15 @@ def read_topic_lecture(db: DB, who: Who, topic_id: uuid.UUID) -> TopicLectureOut
     response_class=FileResponse,
     responses={200: {"content": {"video/mp4": {}}}, 206: {"content": {"video/mp4": {}}}},
 )
-def stream_lecture(db: DB, who: Who, lecture_id: uuid.UUID) -> FileResponse:
-    lec = db.get(Lecture, lecture_id)
-    path = master_file(lec) if lec is not None and lec.status == "approved" else None
-    if lec is None or path is None or not _may_watch(db, who, lec):
-        raise NotFound("This lecture isn't available.")
+def stream_lecture(request: Request, lecture_id: uuid.UUID) -> FileResponse:
+    # A stream lasts minutes: the caller, the lecture and the entitlement are resolved in a short session of its own
+    # (no request-scoped dependency), released before the file is sent, so open players can't exhaust the pool.
+    with get_sessionmaker()() as db:
+        who = optional_principal(request, db)
+        lec = db.get(Lecture, lecture_id)
+        path = master_file(lec) if lec is not None and lec.status == "approved" else None
+        if lec is None or path is None or not _may_watch(db, who, lec):
+            raise NotFound("This lecture isn't available.")
     return FileResponse(
         path,
         media_type="video/mp4",
