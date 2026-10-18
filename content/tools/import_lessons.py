@@ -60,33 +60,41 @@ def sign_in(api: str, email: str, password: str) -> str:
     return str(out["access_token"])
 
 
+PACK_LIMIT = 200  # the API accepts at most 200 files per media pack
+
+
 def media_pack(api: str, token: str, dry_run: bool) -> dict[str, str]:
-    figures = json.loads((FIGURES / "figures.json").read_text(encoding="utf-8"))
-    manifest = {
-        "schema_version": 1,
-        "kind": "media",
-        "grade": 11,
-        "subject": "biology",
-        "items": [
-            {"external_id": f["external_id"], "kind": f["kind"], "title": f["title"][:200], "file": f["file"], "provenance": f["provenance"]}
-            for f in figures["items"]
-        ],
-    }
-    buf = io.BytesIO()
-    with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as z:
-        z.writestr("manifest.json", json.dumps(manifest))
-        for f in figures["items"]:
-            z.write(LESSONS / f["file"], f["file"])
-    data = buf.getvalue()
-    print(f"media pack: {len(manifest['items'])} files, {len(data) / 1e6:.1f} MB")
-    out = call(api, "POST", f"/v1/studio/assets/manifest?commit={'false' if dry_run else 'true'}", token, data, "application/zip")
-    bad = [e for e in out["entries"] if e["errors"]]
-    for e in bad:
-        print("  error", e["external_id"], e["errors"])
-    if bad:
-        raise SystemExit("media pack has errors; nothing imported")
-    print("  ", out["counts"])
-    return {e["external_id"]: e["version_id"] for e in out["entries"] if e.get("version_id")}
+    """Commit every figure in figures.json, in packs of at most PACK_LIMIT files; returns external_id -> version_id."""
+    figures = json.loads((FIGURES / "figures.json").read_text(encoding="utf-8"))["items"]
+    versions: dict[str, str] = {}
+    for start in range(0, len(figures), PACK_LIMIT):
+        chunk = figures[start : start + PACK_LIMIT]
+        manifest = {
+            "schema_version": 1,
+            "kind": "media",
+            "grade": 11,
+            "subject": "biology",
+            "items": [
+                {"external_id": f["external_id"], "kind": f["kind"], "title": f["title"][:200], "file": f["file"], "provenance": f["provenance"]}
+                for f in chunk
+            ],
+        }
+        buf = io.BytesIO()
+        with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as z:
+            z.writestr("manifest.json", json.dumps(manifest))
+            for f in chunk:
+                z.write(LESSONS / f["file"], f["file"])
+        data = buf.getvalue()
+        print(f"media pack {start // PACK_LIMIT + 1}: {len(chunk)} files, {len(data) / 1e6:.1f} MB")
+        out = call(api, "POST", f"/v1/studio/assets/manifest?commit={'false' if dry_run else 'true'}", token, data, "application/zip")
+        bad = [e for e in out["entries"] if e["errors"]]
+        for e in bad:
+            print("  error", e["external_id"], e["errors"])
+        if bad:
+            raise SystemExit("media pack has errors; nothing imported")
+        print("  ", out["counts"])
+        versions.update({e["external_id"]: e["version_id"] for e in out["entries"] if e.get("version_id")})
+    return versions
 
 
 def resolve(block: dict[str, Any], versions: dict[str, str], frames_per_turn: int) -> dict[str, Any]:
