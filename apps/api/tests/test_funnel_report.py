@@ -11,6 +11,7 @@ from typing import Any
 from fastapi.testclient import TestClient
 from sqlalchemy.orm import Session
 
+from portal_api.days import wall_clock
 from portal_api.db import get_sessionmaker
 from portal_api.modules.analytics.events import emit
 from portal_api.modules.identity.models import AppUser
@@ -36,7 +37,9 @@ def _learner_with(created: datetime, activity: list[tuple[str, int]]) -> None:
 
 
 def _cohort(report: dict[str, Any], start: datetime) -> dict[str, Any]:
-    monday = (start - timedelta(days=start.weekday())).date().isoformat()
+    """The cohort whose Pakistan week holds `start` (the report keys weeks by Pakistan wall-clock, not UTC)."""
+    local = wall_clock(start)
+    monday = (local - timedelta(days=local.weekday())).date().isoformat()
     return next((c for c in report["cohorts"] if c["week_start"] == monday), {"signed_up": 0})
 
 
