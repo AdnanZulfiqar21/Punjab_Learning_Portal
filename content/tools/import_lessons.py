@@ -1,4 +1,4 @@
-"""Import the Biology XI Chapter 1 pilot figures and lessons into a running API as a content author (development only).
+"""Import the Biology XI figures and lessons (every chapter authored so far) into a running API as a content author (development only).
 
     python content/tools/import_lessons.py --api http://127.0.0.1:8100 [--email studio-author@example.com] [--dry-run]
 
@@ -132,6 +132,7 @@ def main() -> int:
     ap.add_argument("--api", default="http://127.0.0.1:8100")
     ap.add_argument("--email", default="studio-author@example.com")
     ap.add_argument("--dry-run", action="store_true", help="preview everything; commit nothing")
+    ap.add_argument("--chapter", type=int, help="import only this chapter's lessons (the API allows 30 previews an hour)")
     args = ap.parse_args()
     token = sign_in(args.api, args.email, os.environ.get("PORTAL_IMPORT_PASSWORD", DEV_PASSWORD))
     versions = media_pack(args.api, token, args.dry_run)
@@ -139,8 +140,11 @@ def main() -> int:
         print("dry run: lesson placeholders can't be resolved without archived versions; stopping after the pack preview")
         return 0
     frames = int(json.loads((FIGURES / "figures.json").read_text(encoding="utf-8"))["frames_per_turn"])
-    english = sorted(p for p in LESSONS.glob("c11-bio-ch1-1.*.json") if not p.name.endswith("-ru.json") and not p.name.endswith("coverage.json"))
-    roman = sorted(LESSONS.glob("c11-bio-ch1-1.*-ru.json"))
+    stem = f"c11-bio-ch{args.chapter}" if args.chapter else "c11-bio-ch*"
+    english = sorted(
+        p for p in LESSONS.glob(f"{stem}-*.json") if not p.name.endswith("-ru.json") and not p.name.endswith("coverage.json")
+    )
+    roman = sorted(LESSONS.glob(f"{stem}-*-ru.json"))
     print(f"lessons: {len(english)} English, {len(roman)} Roman Urdu")
     for p in [*english, *roman]:
         import_lesson(args.api, token, p, versions, frames, args.dry_run)
