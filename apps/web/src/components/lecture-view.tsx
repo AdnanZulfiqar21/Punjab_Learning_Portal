@@ -50,7 +50,7 @@ function Player({ src, title, markers, transcript }: { src: string; title: strin
   };
   return (
     <div className="space-y-3">
-      <video ref={video} controls preload="metadata" playsInline aria-label={title} className="aspect-video w-full rounded-xl bg-black">
+      <video ref={video} controls preload="metadata" playsInline aria-label={title} className="mx-auto max-h-[72vh] w-full rounded-xl bg-black">
         <source src={src} type="video/mp4" />
       </video>
       {markers.length > 0 && (

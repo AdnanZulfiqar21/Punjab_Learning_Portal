@@ -3,7 +3,7 @@
 // media directory until the media provider, B05), sent with the session so premium rules hold.
 import { useVideoPlayer, VideoView } from "expo-video";
 import { useState } from "react";
-import { Pressable, View } from "react-native";
+import { Pressable, useWindowDimensions, View } from "react-native";
 
 import { Chip, LinkButton, Notice, Segmented, T } from "@/components/ui";
 import { Radius, Space } from "@/constants/theme";
@@ -47,6 +47,10 @@ export function LectureView({ data, token }: { data: TopicLecture; token: string
 
 function Player({ uri, token, lecture }: { uri: string; token: string | null; lecture: TopicLecture["lectures"][number] }) {
   const c = useTheme();
+  const { width } = useWindowDimensions();
+  // The pilot's lectures are portrait (9:16): give the player the height a portrait video needs, capped so the
+  // markers stay in reach; a landscape video simply letterboxes inside it.
+  const height = Math.min(Math.round(((width - 2 * Space.lg) * 16) / 9), 600);
   const [showTranscript, setShowTranscript] = useState(false);
   const player = useVideoPlayer({ uri, headers: token ? { Authorization: `Bearer ${token}` } : undefined }, (p) => {
     p.timeUpdateEventInterval = 1;
@@ -60,7 +64,7 @@ function Player({ uri, token, lecture }: { uri: string; token: string | null; le
         </T>
       </View>
       <View style={{ borderRadius: Radius.md, overflow: "hidden", backgroundColor: "#000000" }}>
-        <VideoView player={player} style={{ width: "100%", aspectRatio: 16 / 9 }} nativeControls fullscreenOptions={{ enable: true }} accessibilityLabel={lecture.title} />
+        <VideoView player={player} style={{ width: "100%", height }} contentFit="contain" nativeControls fullscreenOptions={{ enable: true }} accessibilityLabel={lecture.title} />
       </View>
       {lecture.markers.length > 0 && (
         <View style={{ gap: Space.xs }}>
