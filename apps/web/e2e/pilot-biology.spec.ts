@@ -102,8 +102,9 @@ test("staff who cover the subject read the draft in English, then in Roman Urdu 
   // Lecture: the third choice. No approved lecture is registered for this topic, so it says so and keeps the text.
   await page.getByRole("group", { name: "Read or watch" }).getByRole("link", { name: "Lecture" }).click();
   await expect(page).toHaveURL(/\?view=lecture$/);
+  // CI has no lecture registered (coming); a development database with registered masters shows the player instead.
   const lecture = page.getByRole("region", { name: "Lecture" });
-  await expect(lecture.getByText("The lecture for this topic is coming")).toBeVisible(AUTH);
+  await expect(lecture.getByText("The lecture for this topic is coming").or(lecture.locator("video"))).toBeVisible(AUTH);
   await expect(page.locator("[data-block]").first()).toBeVisible();
   await page.getByRole("group", { name: "Read or watch" }).getByRole("link", { name: "Roman Urdu" }).click();
   await expect(page).not.toHaveURL(/view=lecture/);

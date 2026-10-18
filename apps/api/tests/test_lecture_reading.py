@@ -112,7 +112,7 @@ def test_a_topic_offers_only_an_approved_servable_lecture(client: TestClient, db
     assert guest.status_code == 200 and guest.json() == {
         "topic_id": str(topic.id),
         "availability": "coming",
-        "lecture": None,
+        "lectures": [],
     }
 
     lecture = _approved_lecture(client, db, team, str(topic.id))
@@ -128,16 +128,16 @@ def test_a_topic_offers_only_an_approved_servable_lecture(client: TestClient, db
     # Now it is offered. A guest sees it exists but can't watch; staff in scope and entitled learners get a stream.
     shown = client.get(path).json()
     assert shown["availability"] == "available"
-    assert shown["lecture"]["locked"] is True and shown["lecture"]["stream_path"] is None
-    assert shown["lecture"]["duration_s"] == 40 and shown["lecture"]["language"] == "roman_ur"
-    assert [m["label"] for m in shown["lecture"]["markers"]] == ["Fixture title", "Summary"]
-    assert [t["scene_id"] for t in shown["lecture"]["transcript"]] == ["s1", "s2"]
+    assert shown["lectures"][0]["locked"] is True and shown["lectures"][0]["stream_path"] is None
+    assert shown["lectures"][0]["duration_s"] == 40 and shown["lectures"][0]["language"] == "roman_ur"
+    assert [m["label"] for m in shown["lectures"][0]["markers"]] == ["Fixture title", "Summary"]
+    assert [t["scene_id"] for t in shown["lectures"][0]["transcript"]] == ["s1", "s2"]
     learner = Staff(client, db, [])
-    assert client.get(path, headers=learner.headers).json()["lecture"]["locked"] is True  # no plan or trial
-    staff = client.get(path, headers=team["author"].headers).json()["lecture"]
+    assert client.get(path, headers=learner.headers).json()["lectures"][0]["locked"] is True  # no plan or trial
+    staff = client.get(path, headers=team["author"].headers).json()["lectures"][0]
     assert staff["locked"] is False and staff["stream_path"] == f"/v1/lectures/{lecture['id']}/stream"
     outsider = Staff(client, db, ["content_author"], {"grades": [12], "subjects": ["biology"]})
-    assert client.get(path, headers=outsider.headers).json()["lecture"]["locked"] is True
+    assert client.get(path, headers=outsider.headers).json()["lectures"][0]["locked"] is True
 
     stream = client.get(staff["stream_path"], headers=team["author"].headers)
     assert stream.status_code == 200 and stream.content == MASTER

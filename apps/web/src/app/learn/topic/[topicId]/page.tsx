@@ -51,7 +51,7 @@ type TopicReading = {
  */
 type TopicLecture = {
   availability: "available" | "coming";
-  lecture: {
+  lectures: {
     id: string;
     title: string;
     language: string;
@@ -60,7 +60,7 @@ type TopicLecture = {
     stream_path: string | null;
     markers: { scene_id: string; label: string; start_s: number }[];
     transcript: { scene_id: string; text: string }[];
-  } | null;
+  }[];
 };
 
 export default function TopicPage({ params, searchParams }: PageProps<"/learn/topic/[topicId]">) {
@@ -136,8 +136,8 @@ async function TopicView({ id, view }: { id: string; view: "read" | "lecture" })
       </header>
       {view === "lecture" && readable && (
         <section aria-label="Lecture" className="space-y-3">
-          {lecture?.availability === "available" && lecture.lecture ? (
-            lecture.lecture.locked || !lecture.lecture.stream_path ? (
+          {lecture?.availability === "available" && lecture.lectures.length > 0 ? (
+            lecture.lectures.some((l) => l.locked || !l.stream_path) ? (
               <Notice title="Included with a plan or the free 30-day trial">
                 <Link href="/account" className="underline underline-offset-2">
                   Start your free trial or sign in
@@ -146,10 +146,14 @@ async function TopicView({ id, view }: { id: string; view: "read" | "lecture" })
               </Notice>
             ) : (
               <LectureView
-                src={`/learn/lectures/${lecture.lecture.id}/stream`}
-                title={lecture.lecture.title}
-                markers={lecture.lecture.markers}
-                transcript={lecture.lecture.transcript}
+                parts={lecture.lectures.map((l) => ({
+                  id: l.id,
+                  title: l.title,
+                  duration_s: l.duration_s,
+                  src: `/learn/lectures/${l.id}/stream`,
+                  markers: l.markers,
+                  transcript: l.transcript,
+                }))}
               />
             )
           ) : (

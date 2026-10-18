@@ -11454,7 +11454,11 @@ export interface components {
              * @enum {string}
              */
             availability: "available" | "coming";
-            lecture: components["schemas"]["LearnerLectureOut"] | null;
+            /**
+             * Lectures
+             * @description The topic's approved parts, in order; empty while coming
+             */
+            lectures: components["schemas"]["LearnerLectureOut"][];
             /**
              * Topic Id
              * Format: uuid

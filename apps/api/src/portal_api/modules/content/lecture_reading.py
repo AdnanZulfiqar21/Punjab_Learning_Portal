@@ -13,6 +13,7 @@ entitlement as a premium lesson of that class and subject; staff who can preview
 
 from __future__ import annotations
 
+import re
 import uuid
 from pathlib import Path
 from typing import Annotated, Literal
@@ -60,18 +61,27 @@ class LearnerLectureOut(BaseModel):
 class TopicLectureOut(BaseModel):
     topic_id: uuid.UUID
     availability: Availability
-    lecture: LearnerLectureOut | None
+    lectures: list[LearnerLectureOut] = Field(description="The topic's approved parts, in order; empty while coming")
 
 
-def _approved_for_topic(db: Session, topic_id: uuid.UUID) -> Lecture | None:
-    """The newest approved lecture whose storyboard belongs to this topic, if any."""
+def _part_key(title: str) -> tuple[int, str]:
+    """Parts sort by their number ("Part 2" before "Part 10"); a single lecture has no part."""
+    m = re.search(r"\bpart\s+(\d+)", title, re.I)
+    return (int(m.group(1)) if m else 0, title.lower())
+
+
+def _approved_for_topic(db: Session, topic_id: uuid.UUID) -> list[Lecture]:
+    """The approved lectures whose storyboards belong to this topic, one per part, in part order."""
     rows = db.scalars(
         select(Lecture)
         .join(ContentItem, ContentItem.id == Lecture.storyboard_item_id)
         .where(ContentItem.topic_id == topic_id, Lecture.status == "approved")
         .order_by(Lecture.approved_at.desc())
     ).all()
-    return rows[0] if rows else None
+    newest: dict[tuple[int, str], Lecture] = {}
+    for lec in rows:  # the newest approval wins for the same part title
+        newest.setdefault(_part_key(lec.title), lec)
+    return [newest[k] for k in sorted(newest)]
 
 
 def master_file(lec: Lecture) -> Path | None:
@@ -97,11 +107,7 @@ def _may_watch(db: Session, who: Principal | None, lec: Lecture) -> bool:
     return access.entitled_for(db, who.user.id, access.Need.subjects(lec.grade_number, lec.subject_code))
 
 
-def topic_lecture(db: Session, who: Principal | None, topic_id: uuid.UUID) -> TopicLectureOut:
-    topic, _chapter, _book = _place(db, topic_id)
-    lec = _approved_for_topic(db, topic.id)
-    if lec is None or master_file(lec) is None:
-        return TopicLectureOut(topic_id=topic.id, availability="coming", lecture=None)
+def _learner_out(db: Session, who: Principal | None, lec: Lecture) -> LearnerLectureOut:
     markers = [
         LectureMarkerOut(scene_id=str(m["scene_id"]), label=str(m.get("label") or ""), start_s=int(m["start_s"]))
         for m in (lec.markers or {}).get("scenes", [])
@@ -111,19 +117,25 @@ def topic_lecture(db: Session, who: Principal | None, topic_id: uuid.UUID) -> To
         LectureSceneOut(scene_id=str(t.get("scene_id")), text=str(t.get("text") or "")) for t in lec.transcript
     ]
     locked = not _may_watch(db, who, lec)
+    return LearnerLectureOut(
+        id=lec.id,
+        title=lec.title,
+        language=lec.narration_language,  # type: ignore[arg-type]
+        duration_s=int((lec.master or {}).get("duration_s") or 0),
+        locked=locked,
+        stream_path=None if locked else f"/v1/lectures/{lec.id}/stream",
+        markers=markers,
+        transcript=transcript,
+    )
+
+
+def topic_lecture(db: Session, who: Principal | None, topic_id: uuid.UUID) -> TopicLectureOut:
+    topic, _chapter, _book = _place(db, topic_id)
+    servable = [lec for lec in _approved_for_topic(db, topic.id) if master_file(lec) is not None]
+    if not servable:
+        return TopicLectureOut(topic_id=topic.id, availability="coming", lectures=[])
     return TopicLectureOut(
-        topic_id=topic.id,
-        availability="available",
-        lecture=LearnerLectureOut(
-            id=lec.id,
-            title=lec.title,
-            language=lec.narration_language,  # type: ignore[arg-type]
-            duration_s=int((lec.master or {}).get("duration_s") or 0),
-            locked=locked,
-            stream_path=None if locked else f"/v1/lectures/{lec.id}/stream",
-            markers=markers,
-            transcript=transcript,
-        ),
+        topic_id=topic.id, availability="available", lectures=[_learner_out(db, who, lec) for lec in servable]
     )
 
 

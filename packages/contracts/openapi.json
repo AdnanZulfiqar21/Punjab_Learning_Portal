@@ -16348,15 +16348,13 @@
             "title": "Availability",
             "type": "string"
           },
-          "lecture": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/LearnerLectureOut"
-              },
-              {
-                "type": "null"
-              }
-            ]
+          "lectures": {
+            "description": "The topic's approved parts, in order; empty while coming",
+            "items": {
+              "$ref": "#/components/schemas/LearnerLectureOut"
+            },
+            "title": "Lectures",
+            "type": "array"
           },
           "topic_id": {
             "format": "uuid",
@@ -16367,7 +16365,7 @@
         "required": [
           "topic_id",
           "availability",
-          "lecture"
+          "lectures"
         ],
         "title": "TopicLectureOut",
         "type": "object"

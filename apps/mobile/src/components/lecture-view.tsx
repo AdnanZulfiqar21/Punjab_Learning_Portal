@@ -5,7 +5,7 @@ import { useVideoPlayer, VideoView } from "expo-video";
 import { useState } from "react";
 import { Pressable, View } from "react-native";
 
-import { Chip, LinkButton, Notice, T } from "@/components/ui";
+import { Chip, LinkButton, Notice, Segmented, T } from "@/components/ui";
 import { Radius, Space } from "@/constants/theme";
 import { useTheme } from "@/hooks/use-theme";
 import { apiUrl, type TopicLecture } from "@/lib/api";
@@ -14,7 +14,8 @@ const LANGUAGE: Record<string, string> = { en: "English", ur: "Urdu", roman_ur: 
 const mmss = (s: number) => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
 
 export function LectureView({ data, token }: { data: TopicLecture; token: string | null }) {
-  const lecture = data.lecture;
+  const [part, setPart] = useState(0);
+  const lecture = data.lectures[part] ?? data.lectures[0];
   if (data.availability !== "available" || !lecture) {
     return (
       <Notice title="The lecture for this topic is coming">
@@ -29,10 +30,22 @@ export function LectureView({ data, token }: { data: TopicLecture; token: string
       </Notice>
     );
   }
-  return <Player uri={apiUrl(lecture.stream_path)} token={token} lecture={lecture} />;
+  return (
+    <View style={{ gap: Space.sm }}>
+      {data.lectures.length > 1 && (
+        <Segmented
+          label="Lecture part"
+          options={data.lectures.map((l, i) => [String(i), `Part ${i + 1}`] as const)}
+          value={String(data.lectures.indexOf(lecture))}
+          onChange={(v) => setPart(Number(v))}
+        />
+      )}
+      <Player key={lecture.id} uri={apiUrl(lecture.stream_path)} token={token} lecture={lecture} />
+    </View>
+  );
 }
 
-function Player({ uri, token, lecture }: { uri: string; token: string | null; lecture: NonNullable<TopicLecture["lecture"]> }) {
+function Player({ uri, token, lecture }: { uri: string; token: string | null; lecture: TopicLecture["lectures"][number] }) {
   const c = useTheme();
   const [showTranscript, setShowTranscript] = useState(false);
   const player = useVideoPlayer({ uri, headers: token ? { Authorization: `Bearer ${token}` } : undefined }, (p) => {
@@ -42,7 +55,9 @@ function Player({ uri, token, lecture }: { uri: string; token: string | null; le
     <View style={{ gap: Space.sm }}>
       <View style={{ flexDirection: "row", alignItems: "center", gap: Space.sm, flexWrap: "wrap" }}>
         <Chip label={`Lecture in ${LANGUAGE[lecture.language] ?? lecture.language}`}>{LANGUAGE[lecture.language] ?? lecture.language}</Chip>
-        <T variant="small">{mmss(lecture.duration_s)} · reviewed lecture</T>
+        <T variant="small" style={{ flex: 1 }}>
+          {lecture.title} · {mmss(lecture.duration_s)}
+        </T>
       </View>
       <View style={{ borderRadius: Radius.md, overflow: "hidden", backgroundColor: "#000000" }}>
         <VideoView player={player} style={{ width: "100%", aspectRatio: 16 / 9 }} nativeControls fullscreenOptions={{ enable: true }} accessibilityLabel={lecture.title} />
