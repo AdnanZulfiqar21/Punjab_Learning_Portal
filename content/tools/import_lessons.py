@@ -13,8 +13,9 @@ What it does, in order:
        "$poster": "<external_id>"       -> "poster_asset_version_id": "<version id>"
        "$frames": "<external_id prefix>" -> "frames": [<version ids of prefix-01 .. prefix-NN, in order>]
        "$image": "<external_id>"        -> "image_asset_id": "<version id>"   (inside a fallback)
-   and imports the English lessons first, then the Roman Urdu variants (which name their English base). Every import
-   is a preview followed by a commit, so a file with an error imports nothing.
+   and imports every English lesson as one batch, then every Roman Urdu variant (which names its English base) as a
+   second batch. Each batch is a preview followed by a commit, so a lesson with an error stops its whole batch and
+   nothing is committed. Two previews per run keep a whole book inside the API's preview rate limit.
 
 Nothing here publishes anything. Publication still needs independent academic review (W01.S1.T3).
 """
@@ -106,25 +107,33 @@ def resolve(block: dict[str, Any], versions: dict[str, str], frames_per_turn: in
     return out
 
 
-def import_lesson(api: str, token: str, path: Path, versions: dict[str, str], frames_per_turn: int, dry_run: bool) -> None:
-    doc = copy.deepcopy(json.loads(path.read_text(encoding="utf-8")))
-    for item in doc["items"]:
-        item["body"]["blocks"] = [resolve(b, versions, frames_per_turn) for b in item["body"]["blocks"]]
-    body = json.dumps(doc).encode()
-    batch = call(api, "POST", f"/v1/studio/imports?format=json&filename={path.name}", token, body, "application/json")
+def import_batch(api: str, token: str, paths: list[Path], name: str, versions: dict[str, str], frames_per_turn: int, dry_run: bool) -> None:
+    """Import several lesson files as one batch (one preview), so a whole book stays inside the preview rate limit."""
+    if not paths:
+        return
+    items: list[dict[str, Any]] = []
+    for path in paths:
+        doc = copy.deepcopy(json.loads(path.read_text(encoding="utf-8")))
+        for item in doc["items"]:
+            item["body"]["blocks"] = [resolve(b, versions, frames_per_turn) for b in item["body"]["blocks"]]
+            items.append(item)
+    body = json.dumps({"schema_version": 1, "kind": "lesson", "items": items}).encode()
+    batch = call(api, "POST", f"/v1/studio/imports?format=json&filename={name}", token, body, "application/json")
     rows = batch["rows"]
     for r in rows:
         if r["errors"]:
-            print("  error", path.name, r["external_id"], r["errors"])
+            print("  error", name, r["external_id"], r["errors"])
     if any(r["errors"] for r in rows):
-        raise SystemExit(f"{path.name}: errors; nothing committed")
-    actions = {r["external_id"]: r["action"] for r in rows}
+        raise SystemExit(f"{name}: errors; nothing committed")
+    actions: dict[str, int] = {}
+    for r in rows:
+        actions[r["action"]] = actions.get(r["action"], 0) + 1
     if dry_run:
-        print(f"  {path.name}: preview ok {actions} (dry run, discarded)")
+        print(f"  {name}: preview ok {actions} (dry run, discarded)")
         call(api, "POST", f"/v1/studio/imports/{batch['id']}/discard", token)
         return
     done = call(api, "POST", f"/v1/studio/imports/{batch['id']}/commit", token)
-    print(f"  {path.name}: {done['status']} {actions}")
+    print(f"  {name}: {done['status']} {actions} ({len(rows)} lessons)")
 
 
 def main() -> int:
@@ -133,6 +142,7 @@ def main() -> int:
     ap.add_argument("--email", default="studio-author@example.com")
     ap.add_argument("--dry-run", action="store_true", help="preview everything; commit nothing")
     ap.add_argument("--chapter", type=int, help="import only this chapter's lessons (the API allows 30 previews an hour)")
+    ap.add_argument("--only", help="comma-separated topic numbers to import, e.g. 2.8,2.9 (both languages)")
     args = ap.parse_args()
     token = sign_in(args.api, args.email, os.environ.get("PORTAL_IMPORT_PASSWORD", DEV_PASSWORD))
     versions = media_pack(args.api, token, args.dry_run)
@@ -145,9 +155,14 @@ def main() -> int:
         p for p in LESSONS.glob(f"{stem}-*.json") if not p.name.endswith("-ru.json") and not p.name.endswith("coverage.json")
     )
     roman = sorted(LESSONS.glob(f"{stem}-*-ru.json"))
+    if args.only:
+        wanted = {t.strip() for t in args.only.split(",")}
+        english = [p for p in english if p.stem.rsplit("-", 1)[-1] in wanted]
+        roman = [p for p in roman if p.stem[: -len("-ru")].rsplit("-", 1)[-1] in wanted]
     print(f"lessons: {len(english)} English, {len(roman)} Roman Urdu")
-    for p in [*english, *roman]:
-        import_lesson(args.api, token, p, versions, frames, args.dry_run)
+    tag = f"ch{args.chapter}" if args.chapter else "all"
+    import_batch(args.api, token, english, f"c11-bio-{tag}-en.json", versions, frames, args.dry_run)
+    import_batch(args.api, token, roman, f"c11-bio-{tag}-ru.json", versions, frames, args.dry_run)
     return 0
 
 
