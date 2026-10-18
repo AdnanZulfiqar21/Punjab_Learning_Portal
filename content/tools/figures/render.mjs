@@ -2,6 +2,7 @@
 //
 //   node content/tools/figures/render.mjs            # everything
 //   node content/tools/figures/render.mjs svg         # the vector diagrams only
+//   node content/tools/figures/render.mjs svg chemistry   # another subject (default biology)
 //   node content/tools/figures/render.mjs scenes      # the 3D models only (poster + turntable stills)
 //
 // Vector diagrams (svg/*.svg) become PNGs at 2x. Each three.js scene (scenes/*.js) becomes a labelled poster and
@@ -18,7 +19,13 @@ const root = resolve(here, "..", "..", "..");
 const require = createRequire(join(root, "apps", "web", "package.json"));
 const { chromium } = require("@playwright/test");
 const THREE_PATH = join(root, "apps", "web", "node_modules", "three", "build", "three.module.js");
-const OUT = join(root, "content", "lessons", "xi", "biology", "figures");
+// Subject (argv[3], default biology): figures live under content/lessons/xi/<subject>/figures and only the svg/
+// files whose id starts with the subject's prefix (c11-bio-, c11-chem-, ...) are rendered.
+const SUBJECTS = { biology: { prefix: "c11-bio-", book: "Class XI Biology" }, chemistry: { prefix: "c11-chem-", book: "Class XI Chemistry" } };
+const subject = process.argv[3] ?? "biology";
+if (!SUBJECTS[subject]) throw new Error(`unknown subject ${subject}; one of ${Object.keys(SUBJECTS).join(", ")}`);
+const { prefix: PREFIX, book: BOOK } = SUBJECTS[subject];
+const OUT = join(root, "content", "lessons", "xi", subject, "figures");
 const FRAMES = 16;
 const POSTER = { w: 1200, h: 900 };
 const FRAME = { w: 640, h: 480 };
@@ -103,7 +110,7 @@ const browser = await chromium.launch({
 
 if (what === "all" || what === "svg") {
   const page = await browser.newPage({ viewport: { width: 1000, height: 1000 }, deviceScaleFactor: 2 });
-  for (const file of readdirSync(join(here, "svg")).filter((f) => f.endsWith(".svg")).sort()) {
+  for (const file of readdirSync(join(here, "svg")).filter((f) => f.endsWith(".svg") && f.startsWith(PREFIX)).sort()) {
     const id = file.replace(/\.svg$/, "");
     const svg = readFileSync(join(here, "svg", file), "utf8");
     const m = svg.match(/viewBox="0 0 (\d+) (\d+)"/);
@@ -116,9 +123,9 @@ if (what === "all" || what === "svg") {
     manifest.push({
       external_id: id,
       kind: "image",
-      title: id.replace(/^c11-bio-ch\d+-fig-/, "Figure: ").replace(/-/g, " "),
+      title: id.replace(new RegExp(`^${PREFIX}ch\\d+-fig-`), "Figure: ").replace(/-/g, " "),
       file: `figures/${id}.png`,
-      provenance: { ...PROVENANCE, source: `Original vector diagram drawn from the Class XI Biology text, chapter ${(id.match(/^c11-bio-ch(\d+)-/) ?? [])[1] ?? "?"} (svg/${file})`, tool: "SVG rendered by headless Chromium" },
+      provenance: { ...PROVENANCE, source: `Original vector diagram drawn from the ${BOOK} text, chapter ${(id.match(new RegExp(`^${PREFIX}ch(\\d+)-`)) ?? [])[1] ?? "?"} (svg/${file})`, tool: "SVG rendered by headless Chromium" },
       bytes: statSync(out).size,
     });
     console.log("svg", id, statSync(out).size, "bytes");

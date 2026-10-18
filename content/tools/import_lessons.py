@@ -34,8 +34,10 @@ from typing import Any
 from urllib import error, request
 
 ROOT = Path(__file__).resolve().parents[2]
-LESSONS = ROOT / "content" / "lessons" / "xi" / "biology"
+SUBJECTS = {"biology": "c11-bio", "chemistry": "c11-chem"}  # subject -> external-id prefix of its lessons and figures
+LESSONS = ROOT / "content" / "lessons" / "xi" / "biology"  # overridden by --subject in main()
 FIGURES = LESSONS / "figures"
+SUBJECT = "biology"
 DEV_PASSWORD = "studio-fixture-pass-1"  # pragma: allowlist secret (dev-seed fixture, refused outside development/test)
 
 
@@ -73,7 +75,7 @@ def media_pack(api: str, token: str, dry_run: bool) -> dict[str, str]:
             "schema_version": 1,
             "kind": "media",
             "grade": 11,
-            "subject": "biology",
+            "subject": SUBJECT,
             "items": [
                 {"external_id": f["external_id"], "kind": f["kind"], "title": f["title"][:200], "file": f["file"], "provenance": f["provenance"]}
                 for f in chunk
@@ -151,14 +153,20 @@ def main() -> int:
     ap.add_argument("--dry-run", action="store_true", help="preview everything; commit nothing")
     ap.add_argument("--chapter", type=int, help="import only this chapter's lessons (the API allows 30 previews an hour)")
     ap.add_argument("--only", help="comma-separated topic numbers to import, e.g. 2.8,2.9 (both languages)")
+    ap.add_argument("--subject", choices=sorted(SUBJECTS), default="biology", help="which Class XI book (default biology)")
     args = ap.parse_args()
+    global LESSONS, FIGURES, SUBJECT
+    SUBJECT = args.subject
+    LESSONS = ROOT / "content" / "lessons" / "xi" / SUBJECT
+    FIGURES = LESSONS / "figures"
+    prefix = SUBJECTS[SUBJECT]
     token = sign_in(args.api, args.email, os.environ.get("PORTAL_IMPORT_PASSWORD", DEV_PASSWORD))
     versions = media_pack(args.api, token, args.dry_run)
     if args.dry_run:
         print("dry run: lesson placeholders can't be resolved without archived versions; stopping after the pack preview")
         return 0
     frames = int(json.loads((FIGURES / "figures.json").read_text(encoding="utf-8"))["frames_per_turn"])
-    stem = f"c11-bio-ch{args.chapter}" if args.chapter else "c11-bio-ch*"
+    stem = f"{prefix}-ch{args.chapter}" if args.chapter else f"{prefix}-ch*"
     english = sorted(
         p for p in LESSONS.glob(f"{stem}-*.json") if not p.name.endswith("-ru.json") and not p.name.endswith("coverage.json")
     )
@@ -169,8 +177,8 @@ def main() -> int:
         roman = [p for p in roman if p.stem[: -len("-ru")].rsplit("-", 1)[-1] in wanted]
     print(f"lessons: {len(english)} English, {len(roman)} Roman Urdu")
     tag = f"ch{args.chapter}" if args.chapter else "all"
-    import_batch(args.api, token, english, f"c11-bio-{tag}-en.json", versions, frames, args.dry_run)
-    import_batch(args.api, token, roman, f"c11-bio-{tag}-ru.json", versions, frames, args.dry_run)
+    import_batch(args.api, token, english, f"{prefix}-{tag}-en.json", versions, frames, args.dry_run)
+    import_batch(args.api, token, roman, f"{prefix}-{tag}-ru.json", versions, frames, args.dry_run)
     return 0
 
 
