@@ -72,7 +72,7 @@ async function LearnFor({ grade, track, change }: { grade?: string; track?: stri
       )}
       {user && <ContinueReading token={user.token} />}
       <Suspense fallback={<SkeletonCards count={3} label="Loading subjects" />}>
-        {context ? <Subjects context={context} /> : <AllBooks />}
+        {context ? <Subjects context={context} /> : <AllBooks partial={partial} />}
       </Suspense>
     </div>
   );
@@ -240,17 +240,31 @@ async function Subjects({ context }: { context: LearnContext }) {
   );
 }
 
-/** Every published book, Class XI and Class XII kept separate (DISCOVERY-01), while no class and group are chosen. */
-async function AllBooks() {
-  const res = await getDiscovery({});
+/**
+ * Every published book, Class XI and Class XII kept separate (DISCOVERY-01), while no class and group are chosen.
+ * A group or class already named (a track link from the home page, a half-made choice) narrows the list.
+ */
+async function AllBooks({ partial }: { partial: Partial<LearnContext> }) {
+  const res = await getDiscovery({ grade: partial.grade ? String(partial.grade) : undefined, track: partial.stream });
   if (!res.ok) return <Notice tone="warn" title="Couldn't load the books">{res.problem.detail}</Notice>;
   const d = res.data;
   const grades = [11, 12].filter((g) => d.books.some((b) => b.grade === g));
+  const title = partial.stream ? `${STREAM_LABEL[partial.stream]} books` : "Browse every book";
   return (
     <div className="space-y-8">
       <div>
-        <h2 className="text-lg font-semibold">Browse every book</h2>
-        <p className="text-sm text-muted">Each book shows what has been reviewed and published so far.</p>
+        <h2 className="text-lg font-semibold">{title}</h2>
+        <p className="text-sm text-muted">
+          Each book shows what has been reviewed and published so far.
+          {partial.stream ? (
+            <>
+              {" "}
+              <Link href="/learn?change=1" className="underline underline-offset-2">
+                Show every book
+              </Link>
+            </>
+          ) : null}
+        </p>
       </div>
       {d.ambiguous_editions.length > 0 && (
         <Notice tone="warn" title="More than one edition is effective today">
