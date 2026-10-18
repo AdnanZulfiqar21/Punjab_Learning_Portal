@@ -9,7 +9,7 @@
 // three.js from apps/web. Output: content/lessons/xi/biology/figures/, plus figures.json, which the import tool turns
 // into a media-pack manifest. Nothing here touches the textbook's own images.
 import { createRequire } from "node:module";
-import { mkdirSync, readdirSync, readFileSync, writeFileSync, statSync } from "node:fs";
+import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync, statSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -116,9 +116,9 @@ if (what === "all" || what === "svg") {
     manifest.push({
       external_id: id,
       kind: "image",
-      title: id.replace("c11-bio-ch1-fig-", "Figure: ").replace(/-/g, " "),
+      title: id.replace(/^c11-bio-ch\d+-fig-/, "Figure: ").replace(/-/g, " "),
       file: `figures/${id}.png`,
-      provenance: { ...PROVENANCE, source: `Original vector diagram drawn from the Class XI Biology Chapter 1 text (svg/${file})`, tool: "SVG rendered by headless Chromium" },
+      provenance: { ...PROVENANCE, source: `Original vector diagram drawn from the Class XI Biology text, chapter ${(id.match(/^c11-bio-ch(\d+)-/) ?? [])[1] ?? "?"} (svg/${file})`, tool: "SVG rendered by headless Chromium" },
       bytes: statSync(out).size,
     });
     console.log("svg", id, statSync(out).size, "bytes");
@@ -130,7 +130,10 @@ if (what === "all" || what === "scenes") {
   const threeSource = readFileSync(THREE_PATH, "utf8");
   for (const file of readdirSync(join(here, "scenes")).filter((f) => f.endsWith(".js")).sort()) {
     const name = file.replace(/\.js$/, "");
-    const id = `c11-bio-ch1-m3d-${name.replace(/_/g, "-")}`;
+    // Scenes for later chapters are named `ch<N>_<model>.js`; the Chapter 1 scenes keep their bare names.
+    const m = name.match(/^ch(\d+)_(.+)$/);
+    const chapter = m ? m[1] : "1";
+    const id = `c11-bio-ch${chapter}-m3d-${(m ? m[2] : name).replace(/_/g, "-")}`;
     const sceneSource = readFileSync(join(here, "scenes", file), "utf8");
     const page = await browser.newPage({ viewport: { width: POSTER.w, height: POSTER.h }, deviceScaleFactor: 1 });
     await page.route("https://figures.local/**", (route) => {
@@ -178,8 +181,14 @@ if (what === "all" || what === "scenes") {
 }
 
 await browser.close();
-if (what === "all") {
-  writeFileSync(join(OUT, "figures.json"), JSON.stringify({ generated_by: "content/tools/figures/render.mjs", frames_per_turn: FRAMES, items: manifest }, null, 2) + "\n");
-  console.log("wrote figures.json with", manifest.length, "entries");
+// A full run rewrites figures.json. A partial run (svg | scenes) merges: entries it regenerated replace their
+// previous versions, everything else is kept, so the Chapter 1 turntables do not have to be re-rendered for a new SVG.
+const manifestPath = join(OUT, "figures.json");
+let items = manifest;
+if (what !== "all" && existsSync(manifestPath)) {
+  const fresh = new Set(manifest.map((m) => m.external_id));
+  const kept = JSON.parse(readFileSync(manifestPath, "utf8")).items.filter((m) => !fresh.has(m.external_id));
+  items = [...kept, ...manifest].sort((a, b) => a.external_id.localeCompare(b.external_id));
 }
-
+writeFileSync(manifestPath, JSON.stringify({ generated_by: "content/tools/figures/render.mjs", frames_per_turn: FRAMES, items }, null, 2) + "\n");
+console.log("wrote figures.json with", items.length, "entries");
