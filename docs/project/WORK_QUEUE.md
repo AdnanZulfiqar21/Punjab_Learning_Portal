@@ -1,5 +1,14 @@
 # Work queue (every roadmap task)
 
+**18 October 2026 (evening) — the whole Class XI Biology book drafted.** Chapters 2 to 12 authored like Chapter 1 (BIO-XI-BOOK-01): PRs #242 to #250 merged on green CI; #251 and #252 open.
+
+| Slice | Code | Tested | Device |
+|---|---|---|---|
+| Biology XI chapters 2 to 12: 64 topics as English and Roman Urdu (glossed) drafts, coverage registers, 109 original 2D figures | Imported into `portal` (dev) chapter by chapter | CI content, api and web jobs green on each chapter PR | Not walked on the phone |
+| `import_lessons.py`: `--chapter`, `--only`, per-language batches, 200-file media packs | On main (#250) | Used for every chapter import | n/a |
+
+Open: academic review of all 12 chapters; owner's lecture videos and registration for chapters 2 to 12; owner reads a later chapter on build 6.
+
 **18 October 2026 — Chapter 1 pilot on the phone.** #236 and #237 merged (`486b62b`). Build 3 confirmed on the iPhone by the owner; build 4 (video player) started from `67a673d`.
 
 | Slice | Code | Tested | Device |
