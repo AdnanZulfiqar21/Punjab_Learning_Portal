@@ -16,7 +16,8 @@ from sqlalchemy.orm import Session
 from portal_api.errors import Conflict, NotFound
 from portal_api.modules.access import service as access
 from portal_api.modules.content import assets, kinds
-from portal_api.modules.content.models import Availability, ContentItem, ContentVersion
+from portal_api.modules.content.models import Availability as ItemAvailability
+from portal_api.modules.content.models import ContentItem, ContentVersion
 from portal_api.modules.content.schemas import TopicLessonOut, TopicReadingOut
 from portal_api.modules.content.workflow import roles_in_scope
 from portal_api.modules.curriculum.models import BookEdition, Chapter, Topic
@@ -25,6 +26,7 @@ from portal_api.modules.identity.deps import Principal
 from portal_api.modules.identity.permissions import Permission, Role, permissions_for
 
 Language = Literal["en", "ur", "roman_ur"]
+Availability = Literal["published", "private_preview", "unavailable"]
 _PREVIEW_ROLES = {Role.content_author, Role.subject_reviewer, Role.publisher, Role.owner_admin}
 _PREVIEW_PERMS = {Permission.draft_content, Permission.review_content, Permission.publish_content}
 
@@ -37,33 +39,37 @@ def reading(
 ) -> TopicReadingOut:
     topic, chapter, book = _place(db, topic_id)
     previous_id, next_id = _neighbours(db, topic)
-    shell = dict(
-        topic_id=topic.id,
-        number=topic.number,
-        title=topic.title,
-        chapter_id=chapter.id,
-        chapter_number=chapter.number,
-        chapter_title=chapter.title,
-        grade_number=book.grade.number,
-        subject_name=book.subject.name,
-        previous_topic_id=previous_id,
-        next_topic_id=next_id,
-    )
+
+    def out(availability: Availability, lesson: TopicLessonOut | None) -> TopicReadingOut:
+        return TopicReadingOut(
+            topic_id=topic.id,
+            number=topic.number,
+            title=topic.title,
+            chapter_id=chapter.id,
+            chapter_number=chapter.number,
+            chapter_title=chapter.title,
+            grade_number=book.grade.number,
+            subject_name=book.subject.name,
+            previous_topic_id=previous_id,
+            next_topic_id=next_id,
+            availability=availability,
+            lesson=lesson,
+        )
+
     published = _concepts(db, topic.id, published_only=True)
     if len(published) > 1:
         raise Conflict("This topic has more than one published lesson. None is chosen automatically.")
     if published:
-        lesson = _published_lesson(db, who, book, published[0], language)
-        return TopicReadingOut(availability="published", lesson=lesson, **shell)
+        return out("published", _published_lesson(db, who, book, published[0], language))
     if _can_preview(db, who, book.grade.number, book.subject.code):
         drafts = _concepts(db, topic.id, published_only=False)
         if len(drafts) > 1:
             raise Conflict("This topic has more than one draft lesson. None is chosen automatically.")
         if drafts:
-            lesson = _draft_lesson(drafts[0], language)
-            if lesson is not None:
-                return TopicReadingOut(availability="private_preview", lesson=lesson, **shell)
-    return TopicReadingOut(availability="unavailable", lesson=None, **shell)
+            draft = _draft_lesson(drafts[0], language)
+            if draft is not None:
+                return out("private_preview", draft)
+    return out("unavailable", None)
 
 
 def preview_asset(db: Session, who: Principal, topic_id: uuid.UUID, version_id: uuid.UUID) -> tuple[bytes, str]:
@@ -74,7 +80,7 @@ def preview_asset(db: Session, who: Principal, topic_id: uuid.UUID, version_id: 
     drafts = _concepts(db, topic.id, published_only=False)
     if len(drafts) != 1:
         raise NotFound("File not found.")
-    named = {vid for _where, vid, _kind in assets.block_refs(_working(drafts[0]).body)}
+    named = {vid for item in drafts[0] for _where, vid, _kind in assets.block_refs(_working(item).body)}
     if str(version_id) not in named:
         raise NotFound("File not found.")
     version = db.get(assets.AssetVersion, version_id)
@@ -139,9 +145,9 @@ def _concepts(db: Session, topic_id: uuid.UUID, *, published_only: bool) -> list
         ContentItem.kind.in_([k.name for k in kinds.KINDS.values() if k.learner_readable]),
     )
     if published_only:
-        statement = statement.where(ContentItem.availability == Availability.live.value)
+        statement = statement.where(ContentItem.availability == ItemAvailability.live.value)
     else:
-        statement = statement.where(ContentItem.availability != Availability.live.value)
+        statement = statement.where(ContentItem.availability != ItemAvailability.live.value)
     grouped: dict[uuid.UUID, list[ContentItem]] = {}
     for item in db.scalars(statement.order_by(ContentItem.created_at, ContentItem.id)):
         grouped.setdefault(item.concept_id or item.id, []).append(item)

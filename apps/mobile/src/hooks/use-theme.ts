@@ -1,4 +1,6 @@
-import { Colors, type Palette } from "@/constants/theme";
+import { createContext, createElement, useContext, useMemo, type ReactNode } from "react";
+
+import { Colors, SubjectAccents, subjectKey, type Palette } from "@/constants/theme";
 import { useColorScheme } from "@/hooks/use-color-scheme";
 import { useDisplay } from "@/lib/display-context";
 
@@ -9,6 +11,19 @@ export function useScheme(): "light" | "dark" {
   return theme === "system" ? (system === "dark" ? "dark" : "light") : theme;
 }
 
+const SubjectContext = createContext<string | null>(null);
+
+/** Inside a subject's screens (a book, chapter or lesson) the accent is that subject's; elsewhere the portal's teal. */
+export function SubjectAccent({ subject, children }: { subject: string | null | undefined; children: ReactNode }) {
+  return createElement(SubjectContext.Provider, { value: subjectKey(subject) }, children);
+}
+
 export function useTheme(): Palette {
-  return Colors[useScheme()];
+  const scheme = useScheme();
+  const subject = useContext(SubjectContext);
+  return useMemo(() => {
+    const base = Colors[scheme];
+    const accent = subject ? SubjectAccents[subject]?.[scheme] : null;
+    return accent ? { ...base, ...accent } : base;
+  }, [scheme, subject]);
 }

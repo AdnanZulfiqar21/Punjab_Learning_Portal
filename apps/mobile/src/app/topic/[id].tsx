@@ -1,75 +1,165 @@
+// A topic's lesson (pilot): "English | Roman Urdu" at the top, a compact header, the lesson, then previous/next.
+// The language choice is kept on this device and, for a signed-in learner, in the profile's explanation language.
+// Both variants share one block structure, so switching languages returns to the same place in the lesson.
 import { router, Stack, useLocalSearchParams } from "expo-router";
-import { useEffect } from "react";
-import { Pressable, ScrollView, View } from "react-native";
+import { useEffect, useRef } from "react";
+import { Pressable, ScrollView, View, type NativeScrollEvent, type NativeSyntheticEvent } from "react-native";
 
 import { LessonBlocks } from "@/components/lesson-blocks";
 import { CompletionToggle, LessonNote, SaveFormula } from "@/components/lesson-study";
-import { ErrorState, Loading, Notice, T } from "@/components/ui";
+import { Chip, ErrorState, LinkButton, Loading, Notice, Segmented, T } from "@/components/ui";
 import { Space } from "@/constants/theme";
 import { useRequest } from "@/hooks/use-request";
-import { useTheme } from "@/hooks/use-theme";
-import { api, GRADE_LABEL, lessonAsset, previewAsset } from "@/lib/api";
+import { SubjectAccent, useTheme } from "@/hooks/use-theme";
+import { api, GRADE_LABEL, lessonAsset, previewAsset, type TopicReading } from "@/lib/api";
 import { useAuth } from "@/lib/auth";
 import { useDisplay } from "@/lib/display";
+import { usePrefs } from "@/lib/prefs";
+import { missingLanguageNote, preferredLanguage, READING_LANGUAGES, type ReadingLanguage } from "@/lib/reading-language-core";
 
 export default function TopicScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const auth = useAuth();
+  const { prefs, update } = usePrefs();
   const token = auth.state.status === "signed_in" ? auth.state.token : null;
-  const { state, retry } = useRequest((signal) => api.topicLesson(id, token, signal), [id, token]);
+  const me = auth.state.status === "signed_in" ? auth.state.me : null;
+  const language = preferredLanguage(prefs.language, me?.profile?.explanation_language);
+  const { state, retry } = useRequest((signal) => api.topicLesson(id, token, signal, language), [id, token, language]);
   const c = useTheme();
+
+  function choose(next: ReadingLanguage) {
+    update({ language: next });
+    const p = me?.profile;
+    if (token && p?.grade) {
+      // Keep the choice with the account too (existing profile service); the device copy already applies.
+      void api
+        .saveProfile(token, {
+          grade: p.grade,
+          stream: p.stream ?? null,
+          subjects: p.subjects ?? [],
+          target_exams: p.target_exams ?? [],
+          target_year: p.target_year ?? null,
+          explanation_language: next,
+          daily_minutes: p.daily_minutes ?? null,
+        })
+        .then(() => auth.refresh())
+        .catch(auth.handleError);
+    }
+  }
+
   if (auth.state.status === "loading" || state.status === "loading") return <Loading label="Loading lesson" />;
   if (state.status === "error") return <ErrorState error={state.error} onRetry={retry} />;
-  const reading = state.data;
-  const lesson = reading.lesson;
   return (
-    <>
-      <Stack.Screen options={{ title: reading.number ?? "Lesson", headerBackTitle: "Chapter" }} />
-      <ScrollView style={{ flex: 1, backgroundColor: c.background }} contentContainerStyle={{ padding: Space.lg, gap: Space.lg }}>
-        <Pressable accessibilityRole="button" onPress={() => router.push({ pathname: "/chapter/[id]", params: { id: reading.chapter_id } })}>
-          <T variant="eyebrow" style={{ color: c.accent }}>
-            {GRADE_LABEL[reading.grade_number] ?? `Class ${reading.grade_number}`} · {reading.subject_name} · Chapter {reading.chapter_number}
-          </T>
-        </Pressable>
+    <SubjectAccent subject={state.data.subject_name}>
+      <Stack.Screen options={{ title: state.data.number ?? "Lesson", headerBackTitle: "Chapter" }} />
+      <Reader reading={state.data} token={token} language={language} onLanguage={choose} background={c.background} />
+    </SubjectAccent>
+  );
+}
+
+function Reader({
+  reading,
+  token,
+  language,
+  onLanguage,
+  background,
+}: {
+  reading: TopicReading;
+  token: string | null;
+  language: ReadingLanguage;
+  onLanguage: (next: ReadingLanguage) => void;
+  background: string;
+}) {
+  const c = useTheme();
+  const lesson = reading.lesson;
+  const scroll = useRef<ScrollView>(null);
+  const offset = useRef(0);
+  const bodyTop = useRef(0);
+  const blockYs = useRef<number[]>([]);
+  const pending = useRef<number | null>(null);
+
+  // Which block the reader is on, for the language switch (the nearest block that starts above the top of the screen).
+  function anchorIndex(): number {
+    const y = offset.current - bodyTop.current;
+    let index = 0;
+    blockYs.current.forEach((blockY, i) => {
+      if (blockY <= y + 8) index = i;
+    });
+    return index;
+  }
+  function switchLanguage(next: ReadingLanguage) {
+    if (next === language) return;
+    pending.current = anchorIndex();
+    blockYs.current = [];
+    onLanguage(next);
+  }
+  function onBlockLayout(index: number, y: number) {
+    blockYs.current[index] = y;
+    if (pending.current === index) {
+      pending.current = null;
+      scroll.current?.scrollTo({ y: bodyTop.current + y, animated: false });
+    }
+  }
+  const onScroll = (e: NativeSyntheticEvent<NativeScrollEvent>) => {
+    offset.current = e.nativeEvent.contentOffset.y;
+  };
+
+  const note = lesson ? missingLanguageNote(language, lesson.language, lesson.available_languages) : null;
+  return (
+    <ScrollView
+      ref={scroll}
+      onScroll={onScroll}
+      scrollEventThrottle={100}
+      stickyHeaderIndices={lesson?.body && !lesson.locked ? [0] : undefined}
+      style={{ flex: 1, backgroundColor: background }}
+      contentContainerStyle={{ padding: Space.lg, gap: Space.md }}>
+      {lesson?.body && !lesson.locked ? (
+        <View style={{ backgroundColor: background, paddingBottom: Space.xs }}>
+          <Segmented label="Explanation language" options={READING_LANGUAGES} value={language} onChange={switchLanguage} />
+        </View>
+      ) : null}
+      {note ? <T variant="small" accessibilityLiveRegion="polite">{note}</T> : null}
+      <View style={{ gap: Space.xs }}>
+        <View style={{ flexDirection: "row", alignItems: "center", gap: Space.sm, flexWrap: "wrap" }}>
+          <Pressable accessibilityRole="button" accessibilityLabel={`Back to chapter ${reading.chapter_number}: ${reading.chapter_title}`} onPress={() => router.push({ pathname: "/chapter/[id]", params: { id: reading.chapter_id } })}>
+            <T variant="eyebrow">
+              {GRADE_LABEL[reading.grade_number] ?? `Class ${reading.grade_number}`} · {reading.subject_name} · Chapter {reading.chapter_number}
+            </T>
+          </Pressable>
+          {reading.availability === "private_preview" ? <Chip label="Draft preview: not yet reviewed or published">Draft preview</Chip> : null}
+        </View>
         <T variant="title" accessibilityRole="header">
           {reading.number ? `${reading.number} ${reading.title}` : reading.title}
         </T>
-        <T variant="muted">{reading.chapter_title}</T>
-        {reading.availability === "private_preview" && (
-          <Notice title="Private draft">
-            This lesson is not published. Only staff who cover this subject can read it. Your place in the chapter is saved after publication.
-          </Notice>
-        )}
-        {reading.availability === "unavailable" || !lesson?.body ? (
-          <T>This lesson is not ready yet. An outline is not the lesson.</T>
-        ) : lesson.locked ? (
-          <Notice title="Included with a plan or the free 30-day trial">Start your free trial from the Account tab to read this lesson.</Notice>
-        ) : (
+        <T variant="small">{reading.chapter_title}</T>
+      </View>
+      {reading.availability === "unavailable" || !lesson?.body ? (
+        <Notice title="This topic’s lesson isn’t ready yet">The chapter outline lists the topic, but its lesson has not been published.</Notice>
+      ) : lesson.locked ? (
+        <Notice title="Included with a plan or the free 30-day trial">Start your free trial from the Account tab to read this lesson.</Notice>
+      ) : (
+        <View onLayout={(e) => (bodyTop.current = e.nativeEvent.layout.y)}>
           <LessonBody
+            key={lesson.id}
             chapterId={reading.chapter_id}
             topicId={reading.topic_id}
             lessonId={lesson.id}
             token={token}
             privatePreview={lesson.private_preview}
             blocks={lesson.body.blocks as { type: string }[]}
+            onBlockLayout={onBlockLayout}
           />
-        )}
-        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-          {reading.previous_topic_id ? (
-            <Pressable accessibilityRole="button" onPress={() => router.replace({ pathname: "/topic/[id]", params: { id: reading.previous_topic_id! } })}>
-              <T style={{ color: c.accent, fontWeight: "600" }}>Previous topic</T>
-            </Pressable>
-          ) : (
-            <View />
-          )}
-          {reading.next_topic_id ? (
-            <Pressable accessibilityRole="button" onPress={() => router.replace({ pathname: "/topic/[id]", params: { id: reading.next_topic_id! } })}>
-              <T style={{ color: c.accent, fontWeight: "600" }}>Next topic</T>
-            </Pressable>
-          ) : null}
         </View>
-      </ScrollView>
-    </>
+      )}
+      <View style={{ flexDirection: "row", justifyContent: "space-between", borderTopWidth: 1, borderTopColor: c.border, paddingTop: Space.sm }}>
+        {reading.previous_topic_id ? (
+          <LinkButton label="← Previous topic" onPress={() => router.replace({ pathname: "/topic/[id]", params: { id: reading.previous_topic_id! } })} />
+        ) : (
+          <View />
+        )}
+        {reading.next_topic_id ? <LinkButton label="Next topic →" onPress={() => router.replace({ pathname: "/topic/[id]", params: { id: reading.next_topic_id! } })} /> : null}
+      </View>
+    </ScrollView>
   );
 }
 
@@ -80,6 +170,7 @@ function LessonBody({
   token,
   privatePreview,
   blocks,
+  onBlockLayout,
 }: {
   chapterId: string;
   topicId: string;
@@ -87,6 +178,7 @@ function LessonBody({
   token: string | null;
   privatePreview: boolean;
   blocks: { type: string }[];
+  onBlockLayout: (index: number, y: number) => void;
 }) {
   const { dataSaver } = useDisplay().display;
   useEffect(() => {
@@ -100,23 +192,17 @@ function LessonBody({
     [token, privatePreview, chapterId],
   );
   return (
-    <View style={{ gap: Space.md }}>
+    <View style={{ gap: Space.lg }}>
       <LessonBlocks
         blocks={blocks}
-        assetSource={(versionId) =>
-          privatePreview && token ? previewAsset(topicId, versionId, token) : lessonAsset(lessonId, versionId, token)
-        }
+        assetSource={(versionId) => (privatePreview && token ? previewAsset(topicId, versionId, token) : lessonAsset(lessonId, versionId, token))}
         dataSaver={dataSaver}
         equationAction={token && study && !privatePreview ? (index) => <SaveFormula token={token} lessonId={lessonId} index={index} /> : undefined}
+        onBlockLayout={onBlockLayout}
       />
       {token && !privatePreview ? (
         <View style={{ gap: Space.sm }}>
-          <CompletionToggle
-            token={token}
-            lessonId={lessonId}
-            done={done.state.status === "success" && done.state.data.includes(lessonId)}
-            onChange={() => undefined}
-          />
+          <CompletionToggle token={token} lessonId={lessonId} done={done.state.status === "success" && done.state.data.includes(lessonId)} onChange={() => undefined} />
           {study ? <LessonNote token={token} lessonId={lessonId} /> : null}
         </View>
       ) : null}

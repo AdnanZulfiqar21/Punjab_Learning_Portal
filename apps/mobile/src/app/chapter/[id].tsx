@@ -1,3 +1,4 @@
+// A chapter (pilot): a compact header, the topics right under it, and offline saving as one quiet row at the end.
 import { router, Stack, useLocalSearchParams } from "expo-router";
 import { useState } from "react";
 import { Pressable, ScrollView, View } from "react-native";
@@ -5,17 +6,17 @@ import type { TopicNode } from "@portal/contracts";
 
 import { FavouriteStar } from "@/components/lesson-study";
 import { OfflinePack } from "@/components/offline-pack";
-import { ErrorState, Loading, Notice, T } from "@/components/ui";
+import { ErrorState, LinkButton, Loading, Notice, T } from "@/components/ui";
 import { Space } from "@/constants/theme";
 import { useRequest } from "@/hooks/use-request";
-import { useTheme } from "@/hooks/use-theme";
+import { SubjectAccent, useTheme } from "@/hooks/use-theme";
 import { api, GRADE_LABEL } from "@/lib/api";
 import { useAuth } from "@/lib/auth";
 
 export default function ChapterScreen() {
-  const c = useTheme();
   const { id } = useLocalSearchParams<{ id: string }>();
   const { state, retry } = useRequest((signal) => api.chapter(id, signal), [id]);
+  const c = useTheme();
   if (state.status === "loading") return <Loading label="Loading chapter" />;
   if (state.status === "error") {
     // P13.S3: offline, a saved copy of this chapter can still be opened.
@@ -23,58 +24,64 @@ export default function ChapterScreen() {
       <View style={{ flex: 1, backgroundColor: c.background }}>
         <ErrorState error={state.error} onRetry={retry} />
         {state.error.kind === "offline" && (
-          <View style={{ padding: Space.lg }}>
-            <Pressable accessibilityRole="button" onPress={() => router.push({ pathname: "/offline/[id]", params: { id } })}>
-              <T style={{ color: c.accent, fontWeight: "600", textAlign: "center" }}>Open the saved copy, if you saved one</T>
-            </Pressable>
+          <View style={{ padding: Space.lg, alignItems: "center" }}>
+            <LinkButton label="Open the saved copy, if you saved one" onPress={() => router.push({ pathname: "/offline/[id]", params: { id } })} />
           </View>
         )}
       </View>
     );
   }
   const ch = state.data;
-  const bc = ch.breadcrumb;
   return (
-    <>
-      <Stack.Screen options={{ title: `${bc.chapter_label} ${ch.number}` }} />
-      <ScrollView style={{ backgroundColor: c.background }} contentContainerStyle={{ padding: Space.lg, gap: Space.lg }}>
-        <View style={{ gap: Space.xs }}>
-          <T variant="eyebrow">
-            {GRADE_LABEL[bc.grade.number]} · {bc.subject.name} · {bc.chapter_label} {ch.number}
-          </T>
-          <T variant="title" accessibilityRole="header">
-            {ch.title}
-          </T>
-          {ch.main_concept ? <T variant="muted">{ch.main_concept}</T> : null}
-        </View>
-        {ch.status !== "complete" && (
-          <Notice tone="warn" title={`This chapter is ${ch.status} in the supplied textbook file`}>
-            Topics from missing pages are not listed.
-          </Notice>
+    <SubjectAccent subject={ch.breadcrumb.subject.code}>
+      <Stack.Screen options={{ title: `${ch.breadcrumb.chapter_label} ${ch.number}` }} />
+      <Chapter ch={ch} />
+    </SubjectAccent>
+  );
+}
+
+function Chapter({ ch }: { ch: Awaited<ReturnType<typeof api.chapter>> }) {
+  const c = useTheme();
+  const bc = ch.breadcrumb;
+  const [intro, setIntro] = useState(false);
+  const long = (ch.main_concept ?? "").length > 180;
+  return (
+    <ScrollView style={{ backgroundColor: c.background }} contentContainerStyle={{ padding: Space.lg, gap: Space.lg }}>
+      <View style={{ gap: Space.xs }}>
+        <T variant="eyebrow">
+          {GRADE_LABEL[bc.grade.number]} · {bc.subject.name} · {bc.chapter_label} {ch.number}
+        </T>
+        <T variant="title" accessibilityRole="header">
+          {ch.title}
+        </T>
+        {ch.main_concept ? (
+          <View>
+            <T variant="muted" numberOfLines={intro || !long ? undefined : 3}>
+              {ch.main_concept}
+            </T>
+            {long ? <LinkButton label={intro ? "Less" : "More"} accessibilityLabel={intro ? "Show less of the introduction" : "Show the whole introduction"} onPress={() => setIntro((o) => !o)} /> : null}
+          </View>
+        ) : null}
+      </View>
+      {ch.status !== "complete" && (
+        <Notice tone="warn" title={`This chapter is ${ch.status} in the supplied textbook file`}>Topics from missing pages are not listed.</Notice>
+      )}
+      <View style={{ gap: Space.sm }}>
+        <T variant="heading" accessibilityRole="header">
+          Topics
+        </T>
+        {ch.topics.length === 0 ? <T variant="muted">No topics are recorded for this chapter.</T> : <Topics topics={ch.topics} />}
+      </View>
+      <Offline chapterId={ch.id} />
+      <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+        {ch.previous_chapter_id ? (
+          <LinkButton label="← Previous chapter" onPress={() => router.replace({ pathname: "/chapter/[id]", params: { id: ch.previous_chapter_id! } })} />
+        ) : (
+          <View />
         )}
-        <Offline chapterId={ch.id} />
-        <View style={{ gap: Space.sm }}>
-          <T variant="heading" accessibilityRole="header">
-            Topics
-          </T>
-          {ch.topics.length === 0 ? <T variant="muted">No topics are recorded for this chapter.</T> : <Topics topics={ch.topics} />}
-        </View>
-        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-          {ch.previous_chapter_id ? (
-            <Pressable accessibilityRole="button" onPress={() => router.replace({ pathname: "/chapter/[id]", params: { id: ch.previous_chapter_id! } })}>
-              <T style={{ color: c.accent, fontWeight: "600" }}>← Previous</T>
-            </Pressable>
-          ) : (
-            <View />
-          )}
-          {ch.next_chapter_id ? (
-            <Pressable accessibilityRole="button" onPress={() => router.replace({ pathname: "/chapter/[id]", params: { id: ch.next_chapter_id! } })}>
-              <T style={{ color: c.accent, fontWeight: "600" }}>Next →</T>
-            </Pressable>
-          ) : null}
-        </View>
-      </ScrollView>
-    </>
+        {ch.next_chapter_id ? <LinkButton label="Next chapter →" onPress={() => router.replace({ pathname: "/chapter/[id]", params: { id: ch.next_chapter_id! } })} /> : null}
+      </View>
+    </ScrollView>
   );
 }
 
@@ -104,20 +111,23 @@ function TopicRow({ topic, depth = 0, token, starred }: { topic: TopicNode; dept
   const expandable = topic.children.length > 0 || topic.points.length > 0;
   return (
     <View style={{ marginLeft: depth * Space.md }}>
-      <View style={{ flexDirection: "row", alignItems: "center", gap: Space.sm, borderBottomWidth: 1, borderBottomColor: c.border }}>
+      <View style={{ flexDirection: "row", alignItems: "center", gap: Space.xs, borderBottomWidth: 1, borderBottomColor: c.border }}>
         <Pressable
           accessibilityRole="button"
           accessibilityLabel={topic.number ? `${topic.number} ${topic.title}` : topic.title}
           onPress={() => router.push({ pathname: "/topic/[id]", params: { id: topic.id } })}
-          style={{ flex: 1, flexDirection: "row", gap: Space.sm, paddingVertical: Space.sm }}>
-          <T variant="mono" style={{ width: 52, color: c.muted }}>
+          style={({ pressed }) => ({ flex: 1, flexDirection: "row", alignItems: "center", gap: Space.sm, paddingVertical: Space.md, minHeight: 52, opacity: pressed ? 0.7 : 1 })}>
+          <T variant="eyebrow" style={{ width: 40 }}>
             {topic.number ?? ""}
           </T>
-          <T style={{ flex: 1 }}>{topic.title}</T>
+          <T style={{ flex: 1, fontWeight: "500" }}>{topic.title}</T>
+          <T variant="muted" accessibilityElementsHidden>
+            ›
+          </T>
         </Pressable>
         {expandable && (
-          <Pressable accessibilityRole="button" accessibilityLabel={`Outline of ${topic.title}`} onPress={() => setOpen((o) => !o)}>
-            <T variant="muted">{open ? "Hide outline" : "Outline"}</T>
+          <Pressable accessibilityRole="button" accessibilityLabel={`Outline of ${topic.title}`} onPress={() => setOpen((o) => !o)} style={{ minHeight: 44, justifyContent: "center", paddingHorizontal: Space.xs }}>
+            <T variant="small">{open ? "Hide" : "Outline"}</T>
           </Pressable>
         )}
         {token && starred && (
@@ -125,7 +135,7 @@ function TopicRow({ topic, depth = 0, token, starred }: { topic: TopicNode; dept
         )}
       </View>
       {open && (
-        <View style={{ paddingLeft: 60, paddingVertical: Space.xs, gap: Space.xs }}>
+        <View style={{ paddingLeft: 48, paddingVertical: Space.xs, gap: Space.xs }}>
           {topic.points.map((p) => (
             <T key={p} variant="small">
               • {p}

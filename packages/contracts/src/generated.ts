@@ -4352,6 +4352,43 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/topics/{topic_id}/lesson": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * The lesson for one topic (published, or a private staff preview of a draft)
+         * @description Draft text is never included for a learner. The response is personal, so it is not stored in a shared cache.
+         */
+        get: operations["topic_lesson_v1_topics__topic_id__lesson_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/topics/{topic_id}/preview-assets/{version_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** A diagram named by this topic's private-preview draft (staff in scope only) */
+        get: operations["topic_preview_asset_v1_topics__topic_id__preview_assets__version_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/written-attempts/{attempt_id}": {
         parameters: {
             query?: never;
@@ -11329,6 +11366,67 @@ export interface components {
              */
             topic_id: string;
         };
+        /**
+         * TopicLessonOut
+         * @description One lesson for one topic. A private preview is a draft, never a published lesson.
+         */
+        TopicLessonOut: {
+            /**
+             * Access Tier
+             * @enum {string}
+             */
+            access_tier: "preview" | "premium";
+            /** Available Languages */
+            available_languages: string[];
+            /** Block Types */
+            block_types: string[];
+            /** Body */
+            body: {
+                [key: string]: unknown;
+            } | null;
+            /** Content Schema Version */
+            content_schema_version: number;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /**
+             * Language
+             * @enum {string}
+             */
+            language: "en" | "ur" | "roman_ur";
+            /** Locked */
+            locked: boolean;
+            /** Private Preview */
+            private_preview: boolean;
+            /**
+             * Requested Language Missing
+             * @default false
+             */
+            requested_language_missing: boolean;
+            /**
+             * Source Refs
+             * @description Present for staff preview only. Learners do not receive page numbers here.
+             */
+            source_refs?: {
+                [key: string]: unknown;
+            }[];
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "draft" | "submitted" | "changes_requested" | "approved" | "published";
+            /** Title */
+            title: string;
+            /**
+             * Topic Id
+             * Format: uuid
+             */
+            topic_id: string;
+            /** Version */
+            version: number;
+        };
         /** TopicNode */
         TopicNode: {
             /** Children */
@@ -11348,6 +11446,41 @@ export interface components {
             points: string[];
             /** Title */
             title: string;
+        };
+        /** TopicReadingOut */
+        TopicReadingOut: {
+            /**
+             * Availability
+             * @enum {string}
+             */
+            availability: "published" | "private_preview" | "unavailable";
+            /**
+             * Chapter Id
+             * Format: uuid
+             */
+            chapter_id: string;
+            /** Chapter Number */
+            chapter_number: number;
+            /** Chapter Title */
+            chapter_title: string;
+            /** Grade Number */
+            grade_number: number;
+            lesson: components["schemas"]["TopicLessonOut"] | null;
+            /** Next Topic Id */
+            next_topic_id: string | null;
+            /** Number */
+            number: string | null;
+            /** Previous Topic Id */
+            previous_topic_id: string | null;
+            /** Subject Name */
+            subject_name: string;
+            /** Title */
+            title: string;
+            /**
+             * Topic Id
+             * Format: uuid
+             */
+            topic_id: string;
         };
         /** TopicsIn */
         TopicsIn: {
@@ -21029,6 +21162,71 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["TicketOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    topic_lesson_v1_topics__topic_id__lesson_get: {
+        parameters: {
+            query?: {
+                language?: ("en" | "ur" | "roman_ur") | null;
+            };
+            header?: never;
+            path: {
+                topic_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TopicReadingOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    topic_preview_asset_v1_topics__topic_id__preview_assets__version_id__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                topic_id: string;
+                version_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": unknown;
                 };
             };
             /** @description Validation Error */
