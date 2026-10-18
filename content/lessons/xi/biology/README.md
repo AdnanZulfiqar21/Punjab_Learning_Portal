@@ -46,5 +46,7 @@ Needs `apps/web` installed (three.js and Playwright's Chromium come from there).
 
 - **Quick recap after the full explanation**, never instead of it. Distinctions the textbook draws (ester vs ether lipids, acoelomate vs pseudocoelomate vs coelomate, polyp vs medusa, Pisces vs Tetrapoda) stay distinct.
 - **Provenance and corrections** live in the coverage register, not in the lesson text. A printed error is kept as a finding; the lesson uses the correct form and says so.
+- **2D first.** Every figure starts as a 2D drawing. A 3D model is made only where a 2D drawing cannot convey the structure (the amniotic egg's layers, polyp against medusa, a sponge's interior, virus shapes, the lipid bilayer), never for charts, hierarchies or tables; speed comes first.
+- **Roman Urdu glossing.** The first time a hard Urdu word appears in a topic it is followed by the English word in brackets ("darjon (levels) ka ek nizam (system)"); scientific terms stay in English.
 - **Originals only.** Figures are drawn or modelled for the lesson, labelled, captioned in both languages, and never traced from the textbook's pictures or photographs. Photographic figures in the book are covered in the text and marked so in the register.
 - **No invented content.** Every paragraph traces to the page span in `source_refs`; the register lists what each figure in that span became.

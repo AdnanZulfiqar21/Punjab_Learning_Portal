@@ -10,41 +10,64 @@ const KEY = "portal-keep-place";
 
 export function KeepPlace({ lessonId }: { lessonId: string }) {
   const marker = useRef<HTMLSpanElement>(null);
+  const input = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
+    // The note is "b6|<time>": it is cleared once the block has been reached (not on read, so a development
+    // double-invoked effect can't lose it), and ignored when older than a moment.
     let wanted: string | null = null;
     try {
-      wanted = window.sessionStorage.getItem(KEY);
-      if (wanted) window.sessionStorage.removeItem(KEY);
+      const raw = window.sessionStorage.getItem(KEY) ?? "";
+      const [id, at] = raw.split("|");
+      if (/^b\d{1,3}$/.test(id) && Date.now() - Number(at) < 15_000) wanted = id;
+      else if (raw) window.sessionStorage.removeItem(KEY);
     } catch {
       // Private browsing or blocked storage: the lesson simply opens at the top.
     }
-    if (!wanted || !/^b\d{1,3}$/.test(wanted)) return;
+    if (!wanted) return;
     const id = wanted;
-    const go = () => document.getElementById(id)?.scrollIntoView({ block: "start" });
-    const frame = requestAnimationFrame(go);
-    const later = setTimeout(go, 350); // after any scroll the router itself does on arrival
-    return () => {
-      cancelAnimationFrame(frame);
-      clearTimeout(later);
-    };
-  }, [lessonId]);
-
-  useEffect(() => {
-    const form = marker.current?.closest("form");
-    if (!form) return;
-    const onSubmit = () => {
-      const blocks = Array.from(document.querySelectorAll<HTMLElement>("[data-block]"));
-      const top = blocks.filter((b) => b.getBoundingClientRect().top <= 80).at(-1);
+    // The router may scroll on arrival after this effect, and the lesson may still be streaming in: keep returning
+    // to the block for a moment, and stop as soon as it sits at the top.
+    const timers: ReturnType<typeof setTimeout>[] = [];
+    const go = () => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      if (Math.abs(el.getBoundingClientRect().top - 80) > 4) el.scrollIntoView({ block: "start" });
       try {
-        if (top) window.sessionStorage.setItem(KEY, top.id);
+        window.sessionStorage.removeItem(KEY);
       } catch {
         // see above
       }
     };
-    form.addEventListener("submit", onSubmit);
-    return () => form.removeEventListener("submit", onSubmit);
+    const frame = requestAnimationFrame(go);
+    for (const ms of [150, 350, 700, 1200, 2000]) timers.push(setTimeout(go, ms));
+    return () => {
+      cancelAnimationFrame(frame);
+      timers.forEach(clearTimeout);
+    };
+  }, [lessonId]);
+
+  // Listen on the document: the form's DOM node is replaced after each switch, while this component is kept.
+  useEffect(() => {
+    const onSubmit = (e: Event) => {
+      if (e.target !== marker.current?.closest("form")) return;
+      const blocks = Array.from(document.querySelectorAll<HTMLElement>("[data-block]"));
+      const top = blocks.filter((b) => b.getBoundingClientRect().top <= 80).at(-1);
+      if (input.current) input.current.value = top?.id ?? "";
+      try {
+        if (top) window.sessionStorage.setItem(KEY, `${top.id}|${Date.now()}`);
+      } catch {
+        // see above
+      }
+    };
+    document.addEventListener("submit", onSubmit, true);
+    return () => document.removeEventListener("submit", onSubmit, true);
   }, []);
 
-  return <span ref={marker} hidden />;
+  return (
+    <>
+      <span ref={marker} hidden />
+      <input ref={input} type="hidden" name="block" defaultValue="" />
+    </>
+  );
 }

@@ -42,6 +42,9 @@ class Settings(BaseSettings):
         # Development defaults: web app (3100) and the Expo web target (8190). Deployed roles must set their own.
         default_factory=lambda: ["http://localhost:3100", "http://127.0.0.1:3100", "http://localhost:8190"]
     )
+    # LECTURE-READ-01: development/test only. A directory holding registered master videos so the pilot can stream a
+    # lecture on the local network. Deployed roles must use the media provider (B05) and refuse this setting.
+    lecture_media_dir: str = ""
     # P05.S4.T2 (REGION-01): regions learners can discover. Another region's records stay hidden until the owner
     # authorises its release by adding it here.
     released_regions: list[str] = Field(default_factory=lambda: ["pk-punjab"])
@@ -116,6 +119,10 @@ class Settings(BaseSettings):
                 problems.append("cors_origins contains development/staging origins")
             if self.build_id == "local":
                 problems.append("build_id must identify the immutable artifact")
+            if self.lecture_media_dir:
+                problems.append(
+                    "lecture_media_dir is a development streaming path; deployed roles use the media provider"
+                )
             if self.dev_auth_enabled:
                 problems.append("dev_auth_enabled must be false (development identity adapter)")
             if not (self.oidc_issuer and self.oidc_audience):

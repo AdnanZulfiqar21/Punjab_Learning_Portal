@@ -36,6 +36,12 @@ Web (`apps/web/src`):
 - `components/lesson-blocks.tsx` renderer 2; `components/model3d-figure.tsx` (turntable with pointer drag and arrow keys; `role=slider`). Tables are real tables above 40rem and cards below (`globals.css .lesson-table`). Subject accents via `[data-subject]`.
 - No live three.js in learner pages (JavaScript budget, PERF-01); `three` is a devDependency used only by `content/tools/figures/render.mjs`.
 
+## Lecture view (LECTURE-READ-01, 18 October, second PR)
+
+The reader control is **English | Roman Urdu | Lecture**. `GET /v1/topics/{id}/lecture` answers `coming` (no approved lecture for the topic, or its master isn't servable) or `available` with `locked` (plan or trial needed, or staff in scope), `stream_path`, `markers` (scene labels with start times) and `transcript`. The stream is `GET /v1/lectures/{id}/stream`, served from `PORTAL_LECTURE_MEDIA_DIR` in development and test only (deployed roles refuse the setting; the media provider, B05, is the production path); range requests work, so iOS and `<video>` can seek. The web proxies it at `/learn/lectures/{id}/stream` with the session cookie. Mobile plays it with `expo-video` (a native module: build 4 is needed; build 3 has no video player). To light a topic up: register and approve the lecture in the studio with its storyboard pinned to that topic (`topic_id` on the storyboard item), put the master file under its registered file name and byte size in the media directory, and start the API with `PORTAL_LECTURE_MEDIA_DIR` set. Until then every topic says the lecture is coming and keeps the lesson text.
+
+Roman Urdu glossing rule (owner, 18 October): hard Urdu words carry the English word in brackets on first use per topic; applied to all eight RU drafts and re-imported.
+
 ## Content
 
 `content/lessons/xi/biology/README.md` describes the files, placeholders, import and rendering. Eight English lessons, eight Roman Urdu variants, eight coverage registers, ten original diagrams and six original 3D models (poster + 16 stills each). Draft stage only.

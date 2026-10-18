@@ -7246,6 +7246,75 @@
         "title": "JoinOut",
         "type": "object"
       },
+      "LearnerLectureOut": {
+        "properties": {
+          "duration_s": {
+            "title": "Duration S",
+            "type": "integer"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "language": {
+            "enum": [
+              "en",
+              "ur",
+              "roman_ur"
+            ],
+            "title": "Language",
+            "type": "string"
+          },
+          "locked": {
+            "description": "True when this learner may not watch yet (plan or trial needed)",
+            "title": "Locked",
+            "type": "boolean"
+          },
+          "markers": {
+            "items": {
+              "$ref": "#/components/schemas/LectureMarkerOut"
+            },
+            "title": "Markers",
+            "type": "array"
+          },
+          "stream_path": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Where to stream the video; null while locked",
+            "title": "Stream Path"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "transcript": {
+            "items": {
+              "$ref": "#/components/schemas/LectureSceneOut"
+            },
+            "title": "Transcript",
+            "type": "array"
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "language",
+          "duration_s",
+          "locked",
+          "stream_path",
+          "markers",
+          "transcript"
+        ],
+        "title": "LearnerLectureOut",
+        "type": "object"
+      },
       "LearnerOut": {
         "properties": {
           "created_at": {
@@ -7429,6 +7498,29 @@
         "title": "LectureIn",
         "type": "object"
       },
+      "LectureMarkerOut": {
+        "properties": {
+          "label": {
+            "title": "Label",
+            "type": "string"
+          },
+          "scene_id": {
+            "title": "Scene Id",
+            "type": "string"
+          },
+          "start_s": {
+            "title": "Start S",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "scene_id",
+          "label",
+          "start_s"
+        ],
+        "title": "LectureMarkerOut",
+        "type": "object"
+      },
       "LectureOut": {
         "properties": {
           "academically_approved": {
@@ -7599,6 +7691,24 @@
           "updated_at"
         ],
         "title": "LectureOut",
+        "type": "object"
+      },
+      "LectureSceneOut": {
+        "properties": {
+          "scene_id": {
+            "title": "Scene Id",
+            "type": "string"
+          },
+          "text": {
+            "title": "Text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "scene_id",
+          "text"
+        ],
+        "title": "LectureSceneOut",
         "type": "object"
       },
       "LessonOut": {
@@ -16228,6 +16338,38 @@
         "title": "TopicAvailability",
         "type": "object"
       },
+      "TopicLectureOut": {
+        "properties": {
+          "availability": {
+            "enum": [
+              "available",
+              "coming"
+            ],
+            "title": "Availability",
+            "type": "string"
+          },
+          "lectures": {
+            "description": "The topic's approved parts, in order; empty while coming",
+            "items": {
+              "$ref": "#/components/schemas/LearnerLectureOut"
+            },
+            "title": "Lectures",
+            "type": "array"
+          },
+          "topic_id": {
+            "format": "uuid",
+            "title": "Topic Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "topic_id",
+          "availability",
+          "lectures"
+        ],
+        "title": "TopicLectureOut",
+        "type": "object"
+      },
       "TopicLessonOut": {
         "description": "One lesson for one topic. A private preview is a draft, never a published lesson.",
         "properties": {
@@ -22241,6 +22383,51 @@
         "summary": "Get Article",
         "tags": [
           "help"
+        ]
+      }
+    },
+    "/v1/lectures/{lecture_id}/stream": {
+      "get": {
+        "operationId": "stream_lecture_v1_lectures__lecture_id__stream_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "lecture_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Lecture Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "video/mp4": {}
+            },
+            "description": "Successful Response"
+          },
+          "206": {
+            "content": {
+              "video/mp4": {}
+            },
+            "description": "Partial Content"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Stream an approved lecture's master video (development media directory only; range requests honoured)",
+        "tags": [
+          "lectures"
         ]
       }
     },
@@ -32082,6 +32269,49 @@
         "summary": "Reply",
         "tags": [
           "support"
+        ]
+      }
+    },
+    "/v1/topics/{topic_id}/lecture": {
+      "get": {
+        "operationId": "read_topic_lecture_v1_topics__topic_id__lecture_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "topic_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Topic Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TopicLectureOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "The topic's approved lecture, or that it is coming",
+        "tags": [
+          "lectures"
         ]
       }
     },

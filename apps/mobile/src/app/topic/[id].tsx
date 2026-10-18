@@ -5,17 +5,21 @@ import { router, Stack, useLocalSearchParams } from "expo-router";
 import { useEffect, useRef } from "react";
 import { Pressable, ScrollView, View, type NativeScrollEvent, type NativeSyntheticEvent } from "react-native";
 
+import { LectureView } from "@/components/lecture-view";
 import { LessonBlocks } from "@/components/lesson-blocks";
 import { CompletionToggle, LessonNote, SaveFormula } from "@/components/lesson-study";
 import { Chip, ErrorState, LinkButton, Loading, Notice, Segmented, T } from "@/components/ui";
 import { Space } from "@/constants/theme";
 import { useRequest } from "@/hooks/use-request";
 import { SubjectAccent, useTheme } from "@/hooks/use-theme";
-import { api, GRADE_LABEL, lessonAsset, previewAsset, type TopicReading } from "@/lib/api";
+import { api, GRADE_LABEL, lessonAsset, previewAsset, type TopicLecture, type TopicReading } from "@/lib/api";
 import { useAuth } from "@/lib/auth";
 import { useDisplay } from "@/lib/display";
 import { usePrefs } from "@/lib/prefs";
 import { missingLanguageNote, preferredLanguage, READING_LANGUAGES, type ReadingLanguage } from "@/lib/reading-language-core";
+
+type Segment = ReadingLanguage | "lecture";
+const SEGMENTS: readonly (readonly [Segment, string])[] = [...READING_LANGUAGES, ["lecture", "Lecture"]];
 
 export default function TopicScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -24,7 +28,9 @@ export default function TopicScreen() {
   const token = auth.state.status === "signed_in" ? auth.state.token : null;
   const me = auth.state.status === "signed_in" ? auth.state.me : null;
   const language = preferredLanguage(prefs.language, me?.profile?.explanation_language);
+  const view = prefs.view === "lecture" ? "lecture" : "read";
   const { state, retry } = useRequest((signal) => api.topicLesson(id, token, signal, language), [id, token, language]);
+  const lecture = useRequest((signal) => api.topicLecture(id, token, signal), [id, token]);
   const c = useTheme();
 
   function choose(next: ReadingLanguage) {
@@ -52,7 +58,16 @@ export default function TopicScreen() {
   return (
     <SubjectAccent subject={state.data.subject_name}>
       <Stack.Screen options={{ title: state.data.number ?? "Lesson", headerBackTitle: "Chapter" }} />
-      <Reader reading={state.data} token={token} language={language} onLanguage={choose} background={c.background} />
+      <Reader
+        reading={state.data}
+        token={token}
+        language={language}
+        view={view}
+        lecture={lecture.state.status === "success" ? lecture.state.data : null}
+        onLanguage={choose}
+        onView={(next) => update({ view: next })}
+        background={c.background}
+      />
     </SubjectAccent>
   );
 }
@@ -61,13 +76,19 @@ function Reader({
   reading,
   token,
   language,
+  view,
+  lecture,
   onLanguage,
+  onView,
   background,
 }: {
   reading: TopicReading;
   token: string | null;
   language: ReadingLanguage;
+  view: "read" | "lecture";
+  lecture: TopicLecture | null;
   onLanguage: (next: ReadingLanguage) => void;
+  onView: (next: "read" | "lecture") => void;
   background: string;
 }) {
   const c = useTheme();
@@ -93,6 +114,15 @@ function Reader({
     blockYs.current = [];
     onLanguage(next);
   }
+  function choose(next: Segment) {
+    if (next === "lecture") {
+      onView("lecture");
+      scroll.current?.scrollTo({ y: 0, animated: false });
+      return;
+    }
+    if (view === "lecture") onView("read");
+    switchLanguage(next);
+  }
   function onBlockLayout(index: number, y: number) {
     blockYs.current[index] = y;
     if (pending.current === index) {
@@ -111,14 +141,15 @@ function Reader({
       onScroll={onScroll}
       scrollEventThrottle={100}
       stickyHeaderIndices={lesson?.body && !lesson.locked ? [0] : undefined}
+      stickyHeaderHiddenOnScroll={false}
       style={{ flex: 1, backgroundColor: background }}
       contentContainerStyle={{ padding: Space.lg, gap: Space.md }}>
       {lesson?.body && !lesson.locked ? (
         <View style={{ backgroundColor: background, paddingBottom: Space.xs }}>
-          <Segmented label="Explanation language" options={READING_LANGUAGES} value={language} onChange={switchLanguage} />
+          <Segmented label="Read or watch" options={SEGMENTS} value={view === "lecture" ? "lecture" : language} onChange={choose} />
         </View>
       ) : null}
-      {note ? <T variant="small" accessibilityLiveRegion="polite">{note}</T> : null}
+      {note && view !== "lecture" ? <T variant="small" accessibilityLiveRegion="polite">{note}</T> : null}
       <View style={{ gap: Space.xs }}>
         <View style={{ flexDirection: "row", alignItems: "center", gap: Space.sm, flexWrap: "wrap" }}>
           <Pressable accessibilityRole="button" accessibilityLabel={`Back to chapter ${reading.chapter_number}: ${reading.chapter_title}`} onPress={() => router.push({ pathname: "/chapter/[id]", params: { id: reading.chapter_id } })}>
@@ -133,6 +164,9 @@ function Reader({
         </T>
         <T variant="small">{reading.chapter_title}</T>
       </View>
+      {view === "lecture" && lesson?.body && !lesson.locked ? (
+        lecture ? <LectureView data={lecture} token={token} /> : <Loading label="Checking for a lecture" />
+      ) : null}
       {reading.availability === "unavailable" || !lesson?.body ? (
         <Notice title="This topic’s lesson isn’t ready yet">The chapter outline lists the topic, but its lesson has not been published.</Notice>
       ) : lesson.locked ? (
