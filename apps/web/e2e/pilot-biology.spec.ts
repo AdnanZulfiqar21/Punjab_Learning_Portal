@@ -73,9 +73,15 @@ test("staff who cover the subject read the draft in English, then in Roman Urdu 
   await expect(page.getByRole("heading", { level: 1, name: /^1\.4 / })).toBeVisible();
   await expect(page.getByText("Draft preview", { exact: true })).toBeVisible();
   const languages = page.getByRole("group", { name: "Read or watch" });
-  // The staff fixture account may have saved Roman Urdu on an earlier run; start from English explicitly.
-  await languages.getByRole("button", { name: "English" }).click();
-  await expect(languages.getByRole("button", { name: "English" })).toHaveAttribute("aria-pressed", "true", AUTH);
+  // The staff fixture account may have saved Roman Urdu on an earlier run; start from English, and let the page
+  // settle after the switch (the action re-renders the lesson, which would reset the turntable below).
+  const english = languages.getByRole("button", { name: "English" });
+  await page.waitForLoadState("networkidle");
+  if ((await english.getAttribute("aria-pressed")) !== "true") {
+    await english.click();
+    await expect(english).toHaveAttribute("aria-pressed", "true", AUTH);
+    await page.waitForLoadState("networkidle");
+  }
   // Renderer 2: a comparison table folds into cards on narrow screens; a model shows its poster, then a turntable.
   const model = page.locator("figure").filter({ hasText: "3D model" }).first();
   await model.scrollIntoViewIfNeeded();
@@ -94,7 +100,7 @@ test("staff who cover the subject read the draft in English, then in Roman Urdu 
   await languages.getByRole("button", { name: "Roman Urdu" }).click();
   await expect(languages.getByRole("button", { name: "Roman Urdu" })).toHaveAttribute("aria-pressed", "true", AUTH);
   await expect(page.getByText(/Roman Urdu isn’t available/)).toHaveCount(0);
-  await expect(page.locator("[data-block]").nth(6)).toBeInViewport();
+  await expect(page.locator("[data-block]").nth(6)).toBeInViewport(AUTH);
   await expect(page.locator("[data-block]").nth(0)).not.toBeInViewport();
   // The preference is kept: another topic opens in Roman Urdu too.
   await page.goto(TOPIC_1_1);
