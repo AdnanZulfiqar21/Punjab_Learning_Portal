@@ -58,6 +58,7 @@ import type {
   WrittenSeal,
 } from "@portal/contracts";
 
+import { apiOriginOverride } from "@/lib/api-origin";
 import { discoveryPath, type DiscoveryFilters } from "@/lib/discovery";
 import { installToken } from "@/lib/install-token";
 
@@ -95,9 +96,18 @@ export type TopicReading = {
 };
 
 function origin(): string {
-  const value = Constants.expoConfig?.extra?.apiOrigin;
+  const value = apiOriginOverride() ?? Constants.expoConfig?.extra?.apiOrigin; // the device's own address in preview builds
   if (typeof value !== "string" || !value) throw new ApiError("App configuration is missing the API address.", "server");
   return value;
+}
+
+/** The API address in use (for the Settings screen). */
+export function currentApiOrigin(): string {
+  try {
+    return origin();
+  } catch {
+    return "not set";
+  }
 }
 
 /** A diagram from a question in the learner's own attempt (QUESTION-DIAGRAMS-01). */
