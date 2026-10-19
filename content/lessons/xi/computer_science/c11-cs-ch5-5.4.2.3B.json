@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-CS-CH5-5.4.2.3B",
+      "chapter": "pk-punjab/xi/computer_science/c11-cs/ch5",
+      "topic": "pk-punjab/xi/computer_science/c11-cs/ch5/5.4.2.3~2",
+      "title": "5.4.2.3 Ethical Considerations",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
+          "pdf_from": 143,
+          "pdf_to": 146,
+          "note": "Topic printed 5.4.2.3 Ethical Considerations with the three class activities (PDF 143-146, printed 140-143); the number 5.4.2.3 is repeated. The worked answers are calculated here, not given in the book; flagged. Long question 6 is answered."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Fairness and bias: a model should not unfairly favour one group, for example when deciding who gets a loan.",
+              "Data privacy: personal data used to build models must be kept secure and not shared without permission."
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Always visualize data before building models, and test results on new data for better accuracy (Tip)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Class activity (linear regression): hours 1 to 6 gave marks 20, 25, 35, 40, 45, 50. Find the best-fit line, predict marks for 7 hours and judge the fit.",
+            "explanation": "Least squares gives slope 107.5 / 17.5 = 6.14 and intercept 35.83 - 6.14 x 3.5 = 14.33, so marks = 14.33 + 6.14 x hours, and 7 hours predicts about 57.3 marks. The errors at hours 1 to 6 are -0.5, -1.6, 2.2, 1.1, -0.1 and -1.2, all within about 2 marks, so the line fits well."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Class activity (logistic regression): midterm marks 30, 40, 50 failed and 60, 70, 80, 90 passed. What is the probability of passing with 55?",
+            "explanation": "The two groups separate exactly between 50 and 60, so a fitted logistic curve puts its 50% point near 55, giving a probability of about 0.5. With so few points and a perfect split the estimate is very uncertain; more data near 50 to 60 would make it reliable."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Class activity (K-means): customers' grocery and clothing spending in dollars are (150, 100), (200, 150), (100, 50), (80, 20), (160, 90) and (40, 10). Group them into two clusters (long question 6 asks for such a scenario).",
+            "explanation": "Start with customers 2 and 6 as centres. Customers 1, 2 and 5 join the first; 3, 4 and 6 join the second. The new centres are (170, 113.3) and (73.3, 26.7), and no one moves, so the clusters are stable: high spenders (1, 2, 5) and low spenders (3, 4, 6). For a real scenario such as a shop's customers, clean the data and put spending on the same scale, choose K from business needs or by trying several values, run K-means, and describe each cluster to target offers."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Quick recap"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Ethics: fairness and privacy. Practice: marks = 14.33 + 6.14 x hours; midterm 55 gives about 0.5; spenders split into high and low."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

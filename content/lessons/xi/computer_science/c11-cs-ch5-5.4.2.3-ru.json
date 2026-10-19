@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-CS-CH5-5.4.2.3-RU",
+      "chapter": "pk-punjab/xi/computer_science/c11-cs/ch5",
+      "topic": "pk-punjab/xi/computer_science/c11-cs/ch5/5.4.2.3",
+      "title": "5.4.2.3 Introduction To Clustering Techniques (K-means) (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C11-CS-CH5-5.4.2.3",
+      "source_refs": [
+        {
+          "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
+          "pdf_from": 140,
+          "pdf_to": 143,
+          "note": "Roman Urdu explanation of K-means clustering (PDF 140-143)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "callout",
+            "tone": "definition",
+            "title": "Clustering",
+            "text": "Clustering milti julti cheezon ko un ki khasusiyat se group karta hai. K-means sab se saade aur mashhoor tareeqon mein se hai: hum groups ki tadaad, K, chunte hain aur algorithm nuqton ko cluster ke markazon se faasle ki bunyad par group karta hai."
+          },
+          {
+            "type": "table",
+            "caption": "Math aur English scores",
+            "header": [
+              "Student",
+              "Math",
+              "English"
+            ],
+            "rows": [
+              [
+                "Basim",
+                "85",
+                "70"
+              ],
+              [
+                "Umer",
+                "90",
+                "65"
+              ],
+              [
+                "Anie",
+                "50",
+                "80"
+              ],
+              [
+                "Tallat",
+                "40",
+                "85"
+              ],
+              [
+                "Maliha",
+                "60",
+                "60"
+              ]
+            ]
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "K = 2 chunein: ek cluster Math mein mazboot students ke liye, ek English mein mazboot ke liye.",
+              "Shuru ke markaz rakhein: Basim (85, 70) aur Tallat (40, 85).",
+              "Euclidean faasle se har student ko qareeb tareen markaz se jorein. Umer Basim se 7.1; Anie Tallat se 11.2; Maliha Basim se 26.9 aur Tallat se 32.0, to woh Basim ke saath. Cluster 1: Basim, Umer, Maliha; cluster 2: Anie, Tallat.",
+              "Har markaz ko us ke arkaan ke ausat se dobara nikalein: cluster 1 (78.3, 65), cluster 2 (45, 82.5).",
+              "Markaz ruk jane tak jorna aur dobara nikalna dohrayein. Yahan koi cluster nahi badalta, to nateeja mustahkam hai."
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "(x1, y1) aur (x2, y2) ka Euclidean faasla (x1 - x2)^2 + (y1 - y2)^2 ka square root hai; Maliha aur Basim ke liye 25^2 + 10^2 = 725 ka square root, taqreeban 26.9."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-cs-ch5-fig-models",
+            "alt": "Oopar baen: customers banam earnings ke paanch nuqte line earnings = 100 + 40 x customers par, 22 customers par Rs 980 ki prediction aur chhatay din ka asal nuqta 1,250. Oopar daen: 1 se 6 ghante parhai ke pass/fail nuqton par S-shakal imkan ka curve. Neeche baen: paanch students ke Math aur English scores do K-means clusters mein, markaz x se. Neeche daen: model banane ke paanch qadam.",
+            "caption": "Linear regression, logistic regression aur K-means (topic 5.4 ke mutabiq asal khaaka).",
+            "long_description": "Phal ke stall ka data bilkul line earnings = 100 + 40 x customers par hai, to 22 customers par 980 rupay ki prediction, aur chhatay din model ne 28 customers ke liye 1,220 kaha jabke asal 1,250 the. Logistic model parhai ke ghanton ko pass hone ke imkan mein badalta hai jo 0 ke qareeb se 1 ke qareeb tak S-shakal mein barhta aur fail aur pass students ke darmiyan 0.5 paar karta hai; banaya gaya curve wazahati hai. K = 2 ke saath K-means Basim, Umer aur Maliha ko Math 78.3, English 65 ke markaz par, aur Anie aur Tallat ko Math 45, English 82.5 par jama karta hai. Model masla tay karne, data jama karne, algorithm chunne, train karne aur naye data par jaanchne se banta hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "K-means ka bunyadi maqsad kya hai (MCQ 8)? K kya dikhata hai (MCQ 9)? Algorithm qadam ba qadam samjhaiye (long question 5).",
+            "explanation": "(b) data ko milte julte pan se clusters mein group karna; (b) clusters ki tadaad. Qadam: K chunein; K shuru ke centroids, aksar tasadufi chune K data points (yahan Basim aur Tallat); har nuqte ko Euclidean faasle se qareeb tareen centroid se jorein; har centroid ko us ke nuqton ke ausat par le jayein; centroids na badalne tak jorna aur update dohrayein. Aakhri clusters milte julte nuqton ke groups hain."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Fauri khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "K-means (K = 2): Basim, Umer, Maliha (78.3, 65) ke gird; Anie, Tallat (45, 82.5) ke gird."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

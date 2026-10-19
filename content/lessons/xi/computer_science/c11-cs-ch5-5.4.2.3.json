@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-CS-CH5-5.4.2.3",
+      "chapter": "pk-punjab/xi/computer_science/c11-cs/ch5",
+      "topic": "pk-punjab/xi/computer_science/c11-cs/ch5/5.4.2.3",
+      "title": "5.4.2.3 Introduction To Clustering Techniques (K-means)",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
+          "pdf_from": 140,
+          "pdf_to": 143,
+          "note": "Topic printed 5.4.2.3 Clustering (K-means) (PDF 140-143, printed 137-140). The book's step 3 puts Maliha with Tallat, but she is nearer Basim (26.9 vs 32.0); its final result agrees with this. Recalculated. MCQs 8, 9 (key a, c) and long question 5 answered."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "callout",
+            "tone": "definition",
+            "title": "Clustering",
+            "text": "Clustering groups similar things together by their characteristics. K-means is one of the simplest and most popular methods: we choose the number of groups, K, and the algorithm groups points by their distance from cluster centres."
+          },
+          {
+            "type": "table",
+            "caption": "Math and English scores",
+            "header": [
+              "Student",
+              "Math",
+              "English"
+            ],
+            "rows": [
+              [
+                "Basim",
+                "85",
+                "70"
+              ],
+              [
+                "Umer",
+                "90",
+                "65"
+              ],
+              [
+                "Anie",
+                "50",
+                "80"
+              ],
+              [
+                "Tallat",
+                "40",
+                "85"
+              ],
+              [
+                "Maliha",
+                "60",
+                "60"
+              ]
+            ]
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "Choose K = 2: one cluster for students stronger in Math, one for students stronger in English.",
+              "Place initial centres: Basim (85, 70) and Tallat (40, 85).",
+              "Assign each student to the nearest centre using Euclidean distance. Umer is 7.1 from Basim; Anie is 11.2 from Tallat; Maliha is 26.9 from Basim and 32.0 from Tallat, so she joins Basim. Cluster 1 is Basim, Umer, Maliha; cluster 2 is Anie, Tallat.",
+              "Recalculate each centre as the average of its members: cluster 1 (78.3, 65), cluster 2 (45, 82.5).",
+              "Repeat assigning and recalculating until the centres stop moving. Here nobody changes cluster, so the result is stable."
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Euclidean distance between (x1, y1) and (x2, y2) is the square root of (x1 - x2)^2 + (y1 - y2)^2; for Maliha and Basim it is the square root of 25^2 + 10^2 = 725, about 26.9."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-cs-ch5-fig-models",
+            "alt": "Top left: five points of customers against earnings on the line earnings = 100 + 40 x customers, with a prediction of Rs 980 for 22 customers and an actual day-6 point of 1,250. Top right: an S-shaped probability curve over pass/fail points for 1 to 6 hours of study. Bottom left: Math and English scores of five students in two K-means clusters with centres marked x. Bottom right: five model-building steps.",
+            "caption": "Linear regression, logistic regression and K-means (original diagram after topic 5.4).",
+            "long_description": "The fruit-stall data lie exactly on the line earnings = 100 + 40 x customers, so 22 customers predict 980 rupees, and on day 6 the model predicted 1,220 for 28 customers against an actual 1,250. A logistic model turns study hours into a probability of passing that rises in an S-shape from near 0 to near 1, crossing 0.5 between the failing and passing students; the curve drawn is illustrative. K-means with K = 2 groups Basim, Umer and Maliha around a centre at Math 78.3, English 65, and Anie and Tallat around Math 45, English 82.5. A model is built by defining the problem, collecting data, choosing an algorithm, training and evaluating on new data."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "What is the primary goal of K-means (MCQ 8)? What does K represent (MCQ 9)? Explain the algorithm step by step (long question 5).",
+            "explanation": "(b) to group data into clusters by similarity; (b) the number of clusters. Steps: choose K; pick K initial centroids, often K data points chosen at random (here Basim and Tallat); assign every point to its nearest centroid by Euclidean distance; move each centroid to the mean of its assigned points; repeat assignment and update until the centroids stop changing. The final clusters are the groups of similar points."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Quick recap"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "K-means (K = 2): Basim, Umer, Maliha around (78.3, 65); Anie, Tallat around (45, 82.5)."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
