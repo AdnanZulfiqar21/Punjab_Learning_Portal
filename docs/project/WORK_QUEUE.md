@@ -1,5 +1,13 @@
 # Work queue (every roadmap task)
 
+**19 October 2026 (night) — the whole Class XI Computer Science book drafted.** Chapters 1 to 9 authored like the Physics book (CS-XI-BOOK-01): PRs #285 to #293 merged on green CI.
+
+| Slice | Code | Tested | Device |
+|---|---|---|---|
+| Computer Science XI chapters 1 to 9: 435 topics as English and Roman Urdu (glossed) drafts, coverage registers, 25 original 2D figures | Imported into `portal` (dev) chapter by chapter (`--subject computer_science`) | CI content, api and web jobs green on each chapter PR; printed calculations and listings re-run | Not walked on the phone |
+
+Open: academic review of all 9 chapters (start with the flagged findings, including every unit's answer-key mismatches); a `code` lesson block for listings; owner's CS lecture videos; next book Mathematics by the same pipeline.
+
 **19 October 2026 (evening) — the whole Class XI Physics book drafted.** Chapters 1 to 12 authored like the Chemistry book (PHY-XI-BOOK-01): PRs #272 to #283 merged on green CI.
 
 | Slice | Code | Tested | Device |
