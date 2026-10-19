@@ -1,5 +1,13 @@
 # Work queue (every roadmap task)
 
+**19 October 2026 — the whole Class XI Chemistry book drafted.** Chapters 1 to 16 authored like the Biology book (CHEM-XI-BOOK-01): PRs #255 to #270 merged on green CI.
+
+| Slice | Code | Tested | Device |
+|---|---|---|---|
+| Chemistry XI chapters 1 to 16: 371 topics as English and Roman Urdu (glossed) drafts, coverage registers, 73 original 2D figures | Imported into `portal` (dev) chapter by chapter (`--subject chemistry`) | CI content, api and web jobs green on each chapter PR | Not walked on the phone |
+
+Open: academic review of all 16 chapters; owner's chemistry lecture videos and registration; next books (Physics, Computer Science, Mathematics) by the same pipeline.
+
 **18 October 2026 (evening) — the whole Class XI Biology book drafted.** Chapters 2 to 12 authored like Chapter 1 (BIO-XI-BOOK-01): PRs #242 to #250 merged on green CI; #251 and #252 open.
 
 | Slice | Code | Tested | Device |
