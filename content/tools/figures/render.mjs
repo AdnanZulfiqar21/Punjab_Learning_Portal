@@ -19,13 +19,18 @@ const root = resolve(here, "..", "..", "..");
 const require = createRequire(join(root, "apps", "web", "package.json"));
 const { chromium } = require("@playwright/test");
 const THREE_PATH = join(root, "apps", "web", "node_modules", "three", "build", "three.module.js");
-// Subject (argv[3], default biology): figures live under content/lessons/xi/<subject>/figures and only the svg/
-// files whose id starts with the subject's prefix (c11-bio-, c11-chem-, ...) are rendered.
-const SUBJECTS = { biology: { prefix: "c11-bio-", book: "Class XI Biology" }, chemistry: { prefix: "c11-chem-", book: "Class XI Chemistry" }, physics: { prefix: "c11-phy-", book: "Class XI Physics" }, computer_science: { prefix: "c11-cs-", book: "Class XI Computer Science" } };
+// Subject (argv[3], default biology) and grade (argv[4], 11 or 12, default 11): figures live under
+// content/lessons/<xi|xii>/<subject>/figures and only the svg/ files whose id starts with the book's prefix
+// (c11-bio-, c12-chem-, ...) are rendered. Class XI and XII books never share a folder or prefix.
+const SUBJECTS = { biology: { code: "bio", name: "Biology" }, chemistry: { code: "chem", name: "Chemistry" }, physics: { code: "phy", name: "Physics" }, computer_science: { code: "cs", name: "Computer Science" } };
+const GRADES = { 11: { dir: "xi", label: "XI" }, 12: { dir: "xii", label: "XII" } };
 const subject = process.argv[3] ?? "biology";
+const grade = process.argv[4] ?? "11";
 if (!SUBJECTS[subject]) throw new Error(`unknown subject ${subject}; one of ${Object.keys(SUBJECTS).join(", ")}`);
-const { prefix: PREFIX, book: BOOK } = SUBJECTS[subject];
-const OUT = join(root, "content", "lessons", "xi", subject, "figures");
+if (!GRADES[grade]) throw new Error(`unknown grade ${grade}; one of ${Object.keys(GRADES).join(", ")}`);
+const PREFIX = `c${grade}-${SUBJECTS[subject].code}-`;
+const BOOK = `Class ${GRADES[grade].label} ${SUBJECTS[subject].name}`;
+const OUT = join(root, "content", "lessons", GRADES[grade].dir, subject, "figures");
 const FRAMES = 16;
 const POSTER = { w: 1200, h: 900 };
 const FRAME = { w: 640, h: 480 };
