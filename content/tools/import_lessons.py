@@ -1,12 +1,12 @@
-"""Import the Biology XI figures and lessons (every chapter authored so far) into a running API as a content author (development only).
+"""Import a book's figures and lessons (every chapter authored so far) into a running API as a content author (development only).
 
-    python content/tools/import_lessons.py --api http://127.0.0.1:8100 [--email studio-author@example.com] [--dry-run]
+    python content/tools/import_lessons.py --api http://127.0.0.1:8100 [--subject biology] [--grade 11] [--chapter N] [--dry-run]
 
 What it does, in order:
 
 1. Signs in through the development issuer (refused outside development/test roles). The password comes from
    PORTAL_IMPORT_PASSWORD or the dev-seed fixture password.
-2. Zips content/lessons/xi/biology/figures/*.png with the manifest built from figures.json and commits it as a media pack
+2. Zips content/lessons/<xi|xii>/<subject>/figures/*.png with the manifest built from figures.json and commits it as a media pack
    (idempotent: an unchanged file is reported "unchanged", a changed file becomes the asset's next version).
 3. Rewrites each lesson file's figure placeholders with the archived versions' IDs:
        "$asset": "<external_id>"        -> "asset_version_id": "<version id>"
@@ -34,10 +34,12 @@ from typing import Any
 from urllib import error, request
 
 ROOT = Path(__file__).resolve().parents[2]
-SUBJECTS = {"biology": "c11-bio", "chemistry": "c11-chem", "physics": "c11-phy", "computer_science": "c11-cs"}  # subject -> external-id prefix of its lessons and figures
+SUBJECTS = {"biology": "bio", "chemistry": "chem", "physics": "phy", "computer_science": "cs"}  # subject -> code in the external-id prefix c<grade>-<code>
+GRADES = {11: "xi", 12: "xii"}  # grade -> lesson folder; Class XI and XII books never share a folder or prefix
 LESSONS = ROOT / "content" / "lessons" / "xi" / "biology"  # overridden by --subject in main()
 FIGURES = LESSONS / "figures"
 SUBJECT = "biology"
+GRADE = 11
 DEV_PASSWORD = "studio-fixture-pass-1"  # pragma: allowlist secret (dev-seed fixture, refused outside development/test)
 
 
@@ -74,7 +76,7 @@ def media_pack(api: str, token: str, dry_run: bool) -> dict[str, str]:
         manifest = {
             "schema_version": 1,
             "kind": "media",
-            "grade": 11,
+            "grade": GRADE,
             "subject": SUBJECT,
             "items": [
                 {"external_id": f["external_id"], "kind": f["kind"], "title": f["title"][:200], "file": f["file"], "provenance": f["provenance"]}
@@ -153,13 +155,15 @@ def main() -> int:
     ap.add_argument("--dry-run", action="store_true", help="preview everything; commit nothing")
     ap.add_argument("--chapter", type=int, help="import only this chapter's lessons (the API allows 30 previews an hour)")
     ap.add_argument("--only", help="comma-separated topic numbers to import, e.g. 2.8,2.9 (both languages)")
-    ap.add_argument("--subject", choices=sorted(SUBJECTS), default="biology", help="which Class XI book (default biology)")
+    ap.add_argument("--subject", choices=sorted(SUBJECTS), default="biology", help="which book (default biology)")
+    ap.add_argument("--grade", type=int, choices=sorted(GRADES), default=11, help="Class XI (11, default) or XII (12)")
     args = ap.parse_args()
-    global LESSONS, FIGURES, SUBJECT
+    global LESSONS, FIGURES, SUBJECT, GRADE
     SUBJECT = args.subject
-    LESSONS = ROOT / "content" / "lessons" / "xi" / SUBJECT
+    GRADE = args.grade
+    LESSONS = ROOT / "content" / "lessons" / GRADES[GRADE] / SUBJECT
     FIGURES = LESSONS / "figures"
-    prefix = SUBJECTS[SUBJECT]
+    prefix = f"c{GRADE}-{SUBJECTS[SUBJECT]}"
     token = sign_in(args.api, args.email, os.environ.get("PORTAL_IMPORT_PASSWORD", DEV_PASSWORD))
     versions = media_pack(args.api, token, args.dry_run)
     if args.dry_run:
