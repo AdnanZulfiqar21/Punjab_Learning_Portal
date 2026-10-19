@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-CS-CH2-2.8.1.1",
+      "chapter": "pk-punjab/xi/computer_science/c11-cs/ch2",
+      "topic": "pk-punjab/xi/computer_science/c11-cs/ch2/2.8.1.1",
+      "title": "2.8.1.1 Defining Classes and Creating Objects",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
+          "pdf_from": 57,
+          "pdf_to": 58,
+          "note": "Topic 2.8.1.1 Defining Classes and Creating Objects (PDF 57-58, printed 54-55). The printed __init__ line is garbled and describe() returns a tuple; the lesson uses a working f-string version. Recorded."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Python code (each .... is one 4-space indent)",
+            "text": "class ToyCar:\n....def __init__(self, color, size, wheels):\n........self.color = color\n........self.size = size\n........self.wheels = wheels\n\n....def describe(self):\n........return f\"This toy car is {self.color}, {self.size} and has {self.wheels} wheels.\"\n\ncar1 = ToyCar(\"red\", \"small\", 4)\ncar2 = ToyCar(\"blue\", \"large\", 6)\nprint(car1.describe())\nprint(car2.describe())"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Class definition: ToyCar is the template, describing the attributes color, size and wheels.",
+              "Creating objects: car1 and car2 are particular toy cars made from the template, each with its own attributes.",
+              "Using methods: describe() returns a description of the car.",
+              "self: refers to the particular object inside its methods."
+            ]
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "What does car2.describe() return?",
+            "explanation": "\"This toy car is blue, large and has 6 wheels.\""
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Quick recap"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "class ToyCar with __init__(self, ...) sets attributes; objects ToyCar(...); methods use self."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

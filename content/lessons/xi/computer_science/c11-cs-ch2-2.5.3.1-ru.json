@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-CS-CH2-2.5.3.1-RU",
+      "chapter": "pk-punjab/xi/computer_science/c11-cs/ch2",
+      "topic": "pk-punjab/xi/computer_science/c11-cs/ch2/2.5.3.1",
+      "title": "2.5.3.1 Module Search Path and Package Structure (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C11-CS-CH2-2.5.3.1",
+      "source_refs": [
+        {
+          "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
+          "pdf_from": 49,
+          "pdf_to": 50,
+          "note": "Roman Urdu explanation of the module search path and packages (PDF 49-50)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Jab module import hota hai to Python use tarteeb se dhoondti hai: pehle us folder mein jahan script hai, phir built-in modules ki standard library mein."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Python code (har .... ek 4-space indent hai)",
+            "text": "# helper.py\ndef greet():\n....return \"As-Salaam-Alaikum from helper.py!\"\n\n# main.py (same folder)\nimport helper\nprint(helper.greet())"
+          },
+          {
+            "type": "paragraph",
+            "text": "Agar module maujooda folder mein na ho to Python standard library mein dhoondti hai. random standard library ka hissa hai, is liye baghair kisi masle ke mil jata hai. String se pehle f variable ki qeemat string ke andar rakhta hai."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Python code (har .... ek 4-space indent hai)",
+            "text": "# main.py\nimport random\nnumber = random.randint(1, 10)\nprint(f\"Random number: {number}\")    # any number from 1 to 10"
+          },
+          {
+            "type": "callout",
+            "tone": "definition",
+            "title": "Package",
+            "text": "Package mutalliqa modules ka folder hai. E-commerce platform ke liye aap ecommerce package bana sakte hain jis mein products.py, customers.py aur orders.py modules hon, aur import: from ecommerce import products."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Python code (har .... ek 4-space indent hai)",
+            "text": "# ecommerce/products.py\ndef list_products():\n....return [\"Laptop\", \"Mobile\", \"Tablet\"]\n\n# main script\nfrom ecommerce import products\navailable_products = products.list_products()\nprint(available_products)    # ['Laptop', 'Mobile', 'Tablet']"
+          },
+          {
+            "type": "paragraph",
+            "text": "Modules ko packages mein munazzam karna kitabon ko library ke hisson mein lagane jaisa hai: is se code dhoondna aur sambhalna aasan hota hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "import helper likhne par Python sab se pehle kahan dhoondti hai?",
+            "explanation": "Chalte script ke maujooda folder mein; wahan na mile to standard library mein."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Fauri khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Module ki talash: maujooda folder, phir standard library. Package: mutalliqa modules ka folder (ecommerce/products.py)."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

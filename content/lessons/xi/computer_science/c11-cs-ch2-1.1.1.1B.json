@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-CS-CH2-1.1.1.1B",
+      "chapter": "pk-punjab/xi/computer_science/c11-cs/ch2",
+      "topic": "pk-punjab/xi/computer_science/c11-cs/ch2/1.1.1.1~2",
+      "title": "1.1.1.1 Access Modifiers",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
+          "pdf_from": 58,
+          "pdf_to": 58,
+          "note": "Topic printed 1.1.1.1 Access Modifiers (PDF 58, printed 55); print slip for 2.8.1.2. Python's 'protected' is a naming convention, not enforced; flagged."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "callout",
+            "tone": "definition",
+            "title": "Access modifiers",
+            "text": "Access modifiers set who can reach a class's attributes and methods. Python marks them by naming: public (no underscore), protected (one underscore) and private (two underscores)."
+          },
+          {
+            "type": "table",
+            "caption": "Access modifiers in Python",
+            "header": [
+              "Kind",
+              "Written as",
+              "Reachable from"
+            ],
+            "rows": [
+              [
+                "Public",
+                "self.color",
+                "anywhere, including outside the class"
+              ],
+              [
+                "Protected",
+                "self._protected_var",
+                "the class and its subclasses (by convention)"
+              ],
+              [
+                "Private",
+                "self.__color",
+                "only inside the class; use a method such as get_color()"
+              ]
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Python code (each .... is one 4-space indent)",
+            "text": "class Car:\n....def __init__(self, color):\n........self.__color = color    # private\n\n....def get_color(self):\n........return self.__color"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "How can code outside the class read a private attribute?",
+            "explanation": "Through a public method of the class, such as get_color(), not directly."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Quick recap"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Public: name; protected: _name; private: __name (reach through a getter)."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

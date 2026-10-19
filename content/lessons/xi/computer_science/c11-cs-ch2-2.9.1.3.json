@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-CS-CH2-2.9.1.3",
+      "chapter": "pk-punjab/xi/computer_science/c11-cs/ch2",
+      "topic": "pk-punjab/xi/computer_science/c11-cs/ch2/2.9.1.3",
+      "title": "2.9.1.3 Custom Exceptions",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
+          "pdf_from": 61,
+          "pdf_to": 62,
+          "note": "Topic 2.9.1.3 Custom Exceptions (PDF 61-62, printed 58-59)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "callout",
+            "tone": "definition",
+            "title": "Custom exception",
+            "text": "A custom exception is an error type you define yourself, so it can be raised and handled specifically."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Python code (each .... is one 4-space indent)",
+            "text": "class CustomError(Exception):\n....pass    # pass does nothing\n\ndef check_value(value):\n....if value < 0:\n........raise CustomError(\"Value must be non-negative!\")\n\ntry:\n....check_value(-1)\nexcept CustomError as e:\n....print(\"Error:\", e)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "What does the program print?",
+            "explanation": "Error: Value must be non-negative!"
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Quick recap"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "class MyError(Exception): pass; raise MyError(\"message\"); catch with except MyError as e."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

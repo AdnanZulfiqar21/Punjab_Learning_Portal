@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-CS-CH2-2.7.1",
+      "chapter": "pk-punjab/xi/computer_science/c11-cs/ch2",
+      "topic": "pk-punjab/xi/computer_science/c11-cs/ch2/2.7.1",
+      "title": "2.7.1 Working with Modules in Python",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
+          "pdf_from": 55,
+          "pdf_to": 56,
+          "note": "Topic 2.7.1 Working with Modules (PDF 55-56, printed 52-53). The book's function name say_As-Salaam-Alaikum is invalid Python; the conversion fractions print as '|'. Long question 7 is answered. Recorded."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "A module is a file of Python code, such as functions, variables and classes, that can be reused in other parts of a program. To create one, write the code in a file and save it with the .py extension."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Python code (each .... is one 4-space indent)",
+            "text": "# greetings.py\ndef say_salaam():\n....return \"As-Salaam-Alaikum, everyone!\"\n\n# main.py\nimport greetings\n\ndef main():\n....print(greetings.say_salaam())\n\nif __name__ == \"__main__\":\n....main()"
+          },
+          {
+            "type": "paragraph",
+            "text": "Running main.py imports greetings, calls its function and prints 'As-Salaam-Alaikum, everyone!'. The book names the function say_As-Salaam-Alaikum, which is not a valid Python name because names cannot contain hyphens; the lesson uses say_salaam."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Create a module temperature_converter.py with celsius_to_fahrenheit(c) and fahrenheit_to_celsius(f), and use it from main.py to convert 25 C and 77 F (long question 7).",
+            "explanation": "In temperature_converter.py: def celsius_to_fahrenheit(c): return 9 / 5 * c + 32 and def fahrenheit_to_celsius(f): return 5 / 9 * (f - 32). In main.py: import temperature_converter as tc; print(tc.celsius_to_fahrenheit(25)) gives 77.0 and print(tc.fahrenheit_to_celsius(77)) gives 25.0. (The book prints the fractions 9/5 and 5/9 as '|'.)"
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Quick recap"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "A module is a .py file; import it and call its functions; keep main() as the starting point."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
