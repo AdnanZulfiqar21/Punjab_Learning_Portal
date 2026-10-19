@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-CS-CH3-3.3.3.4",
+      "chapter": "pk-punjab/xi/computer_science/c11-cs/ch3",
+      "topic": "pk-punjab/xi/computer_science/c11-cs/ch3/3.3.3.4",
+      "title": "3.3.3.4 NP-Complete",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
+          "pdf_from": 77,
+          "pdf_to": 78,
+          "note": "Topic printed 3.3.3.4 NP-Complete (PDF 77-78, printed 74-75); Figure 3.4 (Venn diagram) is replaced by the original diagram. Long question 1 is answered; the statement that NP-hard problems need not be in NP is general knowledge, flagged."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "callout",
+            "tone": "definition",
+            "title": "NP-complete",
+            "text": "NP-complete problems are both in NP and as hard as the hardest problems in NP. If any NP-complete problem could be solved efficiently, every NP problem could be."
+          },
+          {
+            "type": "paragraph",
+            "text": "Example: the knapsack problem. A knapsack has a maximum weight capacity and each item has a weight and a value; the goal is the most valuable combination that does not exceed the capacity. Verifying a proposed set is easy (add the weights and values), but finding the best combination is hard because the number of combinations grows exponentially with the number of items, so brute force soon becomes impractical."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-cs-ch3-fig-complexity",
+            "alt": "Left: a Venn diagram with a P circle inside a larger NP oval, an NP-hard oval overlapping NP on the right, and the overlap labelled NP-complete, with examples sorting, Sudoku, knapsack and TSP and notes on solvable and tractable problems. Right: sketched curves of time against input size for O(1) flat, O(log n) rising slowly, O(n) straight and O(n^2) curving up steeply, with examples.",
+            "caption": "Complexity classes and Big O growth (original diagram after topics 3.3 and 3.4).",
+            "long_description": "P, the problems solved quickly such as sorting, lies inside NP, the problems whose given solutions can be checked quickly such as Sudoku. NP-hard problems such as the Travelling Salesman Problem are at least as hard as the hardest NP problems, and the overlap of NP and NP-hard is NP-complete, for example the knapsack problem; the picture assumes P is not equal to NP, which is unproved. On the graph, the O(1) line stays flat, O(log n) rises slowly, O(n) rises in a straight line and O(n^2) bends sharply upward, so for large inputs the quadratic algorithm becomes far slower than the others."
+          },
+          {
+            "type": "paragraph",
+            "text": "Whether P equals NP is one of the most important unsolved problems in computer science, with major implications for cryptography, algorithm design and computational complexity (Did You Know)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Discuss the complexity classes P, NP, NP-hard and NP-complete and their importance (long question 1).",
+            "explanation": "P: solvable in polynomial time (sorting). NP: a proposed solution can be verified in polynomial time (Sudoku); P is inside NP. NP-hard: at least as hard as every NP problem, and not necessarily in NP (TSP). NP-complete: problems in NP that are also NP-hard (knapsack). The classes tell us whether to expect an efficient exact algorithm: for P problems we use exact algorithms, while for NP-hard and NP-complete ones we accept approximations, heuristics or small inputs. If P = NP were proved, all NP problems would become efficiently solvable, which would affect cryptography."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Quick recap"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "NP-complete: in NP and NP-hard (knapsack); solving one efficiently would solve all NP problems.",
+              "P inside NP; NP-complete is where NP and NP-hard meet; P versus NP is unsolved."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

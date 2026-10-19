@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-CS-CH3-3.4.1B",
+      "chapter": "pk-punjab/xi/computer_science/c11-cs/ch3",
+      "topic": "pk-punjab/xi/computer_science/c11-cs/ch3/3.4.1~2",
+      "title": "3.4.1 Space Complexity",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
+          "pdf_from": 80,
+          "pdf_to": 81,
+          "note": "Topic printed 3.4.1 Space Complexity (PDF 80-81, printed 77-78); the number 3.4.1 is repeated. Long question 7 is answered; the merge sort memory note is general knowledge, flagged."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "callout",
+            "tone": "definition",
+            "title": "Space complexity",
+            "text": "Space complexity measures how the memory an algorithm uses changes as the size of the input grows. It is also written in Big O notation as an upper limit."
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "O(1) constant space: a fixed amount, such as a few variables for intermediate values.",
+              "O(n) linear space: memory grows with the input, such as storing a list of items.",
+              "O(n^2) quadratic space: storing an n x n matrix.",
+              "O(log n) logarithmic space: some divide-and-conquer algorithms keep only a small part of the data at each step."
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Efficient use of memory matters most in large-scale applications and systems with limited memory. Big O describes the worst case, predicting how an algorithm performs as the input grows (Did You Know)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Discuss the differences between time and space complexity and how they affect the choice of algorithm (long question 7).",
+            "explanation": "Time complexity measures how running time grows with input size; space complexity measures how memory use grows. An algorithm can be fast but memory-hungry, or frugal but slow, so the choice depends on the limits: for very large data on a fast server time matters most, while on a device with little memory an O(1)-space algorithm may be preferred even if it is slower. For example, merge sort runs in O(n log n) time but needs extra memory for merging, while bubble sort needs only O(1) extra space but takes O(n^2) time."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Quick recap"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Space complexity: memory growth (O(1) few variables, O(n) list, O(n^2) matrix, O(log n)).",
+              "Choose an algorithm by balancing time and memory limits."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
