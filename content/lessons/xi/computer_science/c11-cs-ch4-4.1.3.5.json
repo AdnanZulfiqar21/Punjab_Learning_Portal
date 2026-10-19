@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-CS-CH4-4.1.3.5",
+      "chapter": "pk-punjab/xi/computer_science/c11-cs/ch4",
+      "topic": "pk-punjab/xi/computer_science/c11-cs/ch4/4.1.3.5",
+      "title": "4.1.3.5 Undo Mechanism",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
+          "pdf_from": 99,
+          "pdf_to": 100,
+          "note": "Topic 4.1.3.5 Undo Mechanism with the class activity (PDF 99-100, printed 96-97). 'Notepad' prints as 'Not Pad'. The Stack class and the browser example are not from the book; flagged. Long question 3 is answered."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Applications such as Notepad and Microsoft Word use a stack for undo. Each action, such as typing or deleting text, is pushed onto a stack. Pressing undo pops the most recent action and reverses it; pressing again reverses the one before. If you typed 'Hello' and then 'World', undo removes 'World' first and then 'Hello'."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Python code (each .... is one 4-space indent)",
+            "text": "class Stack:\n....def __init__(self):\n........self.items = []\n....def push(self, item):\n........self.items.append(item)\n....def pop(self):\n........return self.items.pop()\n....def peek(self):\n........return self.items[-1]\n\nplates = Stack()\nfor plate in [\"Plate 1\", \"Plate 2\", \"Plate 3\"]:\n....plates.push(plate)\n....print(plates.items)\nprint(\"Removed:\", plates.pop(), \"Stack:\", plates.items)\nprint(\"Top plate:\", plates.peek())    # Plate 2"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Class activity: write a Stack class for plates in a restaurant kitchen with push, pop and peek; push Plate 1, 2, 3, pop one, then peek. What is printed at the end?",
+            "explanation": "The code above (not from the book) shows the stack growing to Plate 1, Plate 2, Plate 3; pop removes Plate 3, leaving Plate 1, Plate 2; peek shows Plate 2."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Discuss two real-world uses of stacks and how the operations work in them (long question 3).",
+            "explanation": "Undo in a text editor: each edit is pushed; undo pops the latest edit and reverses it, so edits are undone newest first. Browser back button: each visited page is pushed; Back pops the current page and shows the one below it. A pile of plates works the same way: new plates go on top and the top plate is taken first."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Quick recap"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Undo: actions pushed, undo pops the latest; a Stack class needs push, pop and peek."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

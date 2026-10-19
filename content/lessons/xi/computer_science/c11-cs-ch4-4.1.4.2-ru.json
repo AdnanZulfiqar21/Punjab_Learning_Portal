@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-CS-CH4-4.1.4.2-RU",
+      "chapter": "pk-punjab/xi/computer_science/c11-cs/ch4",
+      "topic": "pk-punjab/xi/computer_science/c11-cs/ch4/4.1.4.2",
+      "title": "4.1.4.2 Queue Operations (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C11-CS-CH4-4.1.4.2",
+      "source_refs": [
+        {
+          "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
+          "pdf_from": 101,
+          "pdf_to": 102,
+          "note": "Roman Urdu explanation of queue operations (PDF 101-102)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Enqueue: peeche cheez jorna, jaise koi qataar ke aakhir mein lage.",
+              "Dequeue: aage wali cheez nikalna, jaise pehle shakhs ki khidmat.",
+              "Doosre amal: queue khali hai ya nahi, aage wali cheez nikale baghair dekhna (peek), aur size maloom karna."
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Python code (har .... ek 4-space indent hai)",
+            "text": "from queue import Queue    # built-in module\nq = Queue()\nq.put(\"Ahmed\")    # enqueue\nq.put(\"Fatima\")\nq.put(\"Ali\")\nprint(q.queue[0])    # peek: Ahmed\nprint(q.get())       # dequeue: Ahmed\nq.put(\"Sara\")\nprint(list(q.queue)) # ['Fatima', 'Ali', 'Sara']"
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-cs-ch4-fig-lists-stacks-queues",
+            "alt": "Oopar baen: list ki paanch cheezein Decorations, Snacks, Cold drinks, Plates, Balloons index 0 se 4 ke saath aur list ke amal ke notes. Oopar daen: Book A, Book B aur Book C ka stack, push oopar jorta aur pop Book C hatata hai. Neeche baen: queue Ahmed, Fatima, Ali, Sara, aage se dequeue aur peeche enqueue. Neeche daen: 3 4 5 * + nikalte waqt stack ki halatein [3], [3, 4], [3, 4, 5], [3, 20], [23].",
+            "caption": "Lists, stacks, queues aur postfix evaluation (topics 4.1.1 se 4.1.5 ke mutabiq asal khaaka).",
+            "long_description": "List cheezon ko 0 se shuru hone wale index ke saath tarteeb mein rakhti hai, to Plates index 3 par hai, aur cheezein dakhil, aakhir mein jori, hatayi ya dhoondi ja sakti hain. Kitabon ka stack sirf oopar se istemal hota hai: push Book B aur Book A ke oopar Book C rakhta, aur pop pehle Book C hatata hai, jo aakhir mein aayi thi. Queue aage se khidmat karti aur peeche jorti hai: Ahmed, jo pehle aaya, pehle farigh hota hai, aur Sara Ali ke peeche lagti hai. 3 4 5 * + nikalne ke liye adad baari baari push hote hain; * 5 aur 4 nikal kar 20 push karta, phir + 20 aur 3 nikal kar jawab 23 push karta hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Queue mein cheez kaunsa amal jorta hai (MCQ 5)? Enqueue aur dequeue mein farq bataiye (short question 5).",
+            "explanation": "(c) Enqueue. Enqueue queue ke peeche cheez jorta hai; dequeue aage wali cheez nikal kar lautata hai. Dono mil kar first-in, first-out tarteeb qaim rakhte hain."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Long question 5: print jobs ki queue ka Python code likhein: banayein, teen jobs jorein, aage wali dikhayein, nikalein, ek aur jorein aur queue dikhayein.",
+            "explanation": "from queue import Queue; jobs = Queue(); jobs.put(\"Report.pdf\"); jobs.put(\"Notes.docx\"); jobs.put(\"Photo.png\"); print(\"Front:\", jobs.queue[0]); print(\"Printed:\", jobs.get()); jobs.put(\"Slides.pptx\"); print(list(jobs.queue)) Notes.docx, Photo.png, Slides.pptx dikhata hai. Files ke naam misal hain."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Fauri khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Python mein queue: Queue(); put() enqueue, get() dequeue, q.queue[0] peek."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

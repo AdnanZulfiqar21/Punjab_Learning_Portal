@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-CS-CH4-4.1.8.4",
+      "chapter": "pk-punjab/xi/computer_science/c11-cs/ch4",
+      "topic": "pk-punjab/xi/computer_science/c11-cs/ch4/4.1.8.4",
+      "title": "4.1.8.4 Types of Graphs; Graph Implementation Using Python",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
+          "pdf_from": 114,
+          "pdf_to": 116,
+          "note": "Topic 4.1.8.4 Types of Graphs with 'Graph Implementation Using Python' (PDF 114-116, printed 111-113). Figures 4.11 and 4.12 are replaced by the original diagram with the same edges and weights. The printed code imports matplotlib as 'pit'; corrected to plt."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Directed graph: edges have a direction; you can travel from city A to city B only if an edge points that way (Figure 4.11).",
+              "Undirected graph: edges work both ways; if A is friends with B, B is friends with A (Figure 4.12).",
+              "Weighted graph: each edge has a weight such as distance, time or cost, which helps find the shortest or quickest route (Figure 4.11)."
+            ]
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-cs-ch4-fig-graphs",
+            "alt": "Top left: a directed weighted graph on A to E with arrows B to A 10, A to C 12, C to B 20, A to D 60, C to D 32 and E to A 7. Top right: an undirected graph with edges A-B, A-E, B-E, B-D, B-C, C-D and E-D. Bottom left: a tree with root 1, children 2, 3, 4, then 5 and 6 under 2, 7 under 3, 8 and 9 under 4, with DFS and BFS orders. Bottom right: when to use a stack, queue, list, tree or graph.",
+            "caption": "Graphs, DFS and BFS, and choosing a structure (original diagram after topics 4.1.8 to 4.3).",
+            "long_description": "In the directed weighted graph each edge points one way and carries a cost, for example A to D costs 60 while A to C to D costs 12 + 32 = 44. In the undirected graph every edge works both ways; B touches A, C, D and E, so its degree is 4. On the nine-node tree, DFS with a stack goes deep first: 1, 2, 5, 6, 3, 7, 4, 8, 9, while BFS with a queue goes level by level: 1 to 9 in order. Choose a stack for last-in-first-out work, a queue for first-in-first-out, a list for ordered collections, a tree for hierarchies and a graph for networks."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Graph implementation using Python"
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Python code (each .... is one 4-space indent)",
+            "text": "import networkx as nx\nimport matplotlib.pyplot as plt\nG = nx.Graph()          # create a graph\nG.add_node(\"A\")\nG.add_node(\"B\")\nG.add_node(\"C\")\nG.add_edge(\"A\", \"B\")     # add edges\nG.add_edge(\"B\", \"C\")\nnx.draw(G, with_labels=True)\nplt.show()"
+          },
+          {
+            "type": "paragraph",
+            "text": "The code creates a graph with three nodes and two edges using the NetworkX library and draws it with Matplotlib (both must be installed)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "In the directed weighted graph (B to A 10, A to C 12, C to B 20, A to D 60, C to D 32, E to A 7), what is the cheapest way from E to D?",
+            "explanation": "E to A to C to D costs 7 + 12 + 32 = 51, cheaper than E to A to D, 7 + 60 = 67."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Quick recap"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Graph types: directed (one-way), undirected (two-way), weighted (costs); NetworkX builds and draws graphs."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

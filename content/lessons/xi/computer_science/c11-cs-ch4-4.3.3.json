@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-CS-CH4-4.3.3",
+      "chapter": "pk-punjab/xi/computer_science/c11-cs/ch4",
+      "topic": "pk-punjab/xi/computer_science/c11-cs/ch4/4.3.3",
+      "title": "4.3.3 Combining Queue and Graph to Perform BFS",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
+          "pdf_from": 120,
+          "pdf_to": 121,
+          "note": "Topic 4.3.3 (PDF 120-121, printed 117-118). Short question 8 and long question 7(b) are answered. Recorded."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "BFS uses a queue to explore all nodes at the present depth before the next level, which makes it ideal for finding shortest paths in unweighted graphs or exploring connections level by level. On the same tree (Figure 4.13):"
+          },
+          {
+            "type": "table",
+            "caption": "BFS queue trace",
+            "header": [
+              "Step",
+              "Dequeue and visit",
+              "Queue after (front on the left)"
+            ],
+            "rows": [
+              [
+                "1",
+                "1, enqueue 2, 3, 4",
+                "[2, 3, 4]"
+              ],
+              [
+                "2",
+                "2, enqueue 5, 6",
+                "[3, 4, 5, 6]"
+              ],
+              [
+                "3",
+                "3, enqueue 7",
+                "[4, 5, 6, 7]"
+              ],
+              [
+                "4",
+                "4, enqueue 8, 9",
+                "[5, 6, 7, 8, 9]"
+              ],
+              [
+                "5",
+                "5",
+                "[6, 7, 8, 9]"
+              ],
+              [
+                "6",
+                "6",
+                "[7, 8, 9]"
+              ],
+              [
+                "7",
+                "7",
+                "[8, 9]"
+              ],
+              [
+                "8",
+                "8",
+                "[9]"
+              ],
+              [
+                "9",
+                "9",
+                "[] (done)"
+              ]
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "The BFS order is 1, 2, 3, 4, 5, 6, 7, 8, 9."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Differentiate between DFS and BFS (short question 8). Long question 7(b): give the BFS order from A for the exercise graph.",
+            "explanation": "DFS uses a stack (or recursion) and goes deep along one branch before backtracking; BFS uses a queue and visits all nodes at one level before the next, finding shortest paths in unweighted graphs. Both take O(V + E) time. For the exercise graph BFS from A gives A, B, C, D, E, F, G, H, I."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Quick recap"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "BFS with a queue on the 9-node tree: 1 to 9 in order; DFS goes deep, BFS goes wide."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-CS-CH4-4.1.8.4-RU",
+      "chapter": "pk-punjab/xi/computer_science/c11-cs/ch4",
+      "topic": "pk-punjab/xi/computer_science/c11-cs/ch4/4.1.8.4",
+      "title": "4.1.8.4 Types of Graphs; Graph Implementation Using Python (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C11-CS-CH4-4.1.8.4",
+      "source_refs": [
+        {
+          "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
+          "pdf_from": 114,
+          "pdf_to": 116,
+          "note": "Roman Urdu explanation of types of graphs (PDF 114-116)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Directed graph: edges ki simt hoti hai; shehar A se B tabhi ja sakte hain jab edge usi taraf ho (Figure 4.11).",
+              "Undirected graph: edges dono taraf; A B ka dost hai to B A ka dost hai (Figure 4.12).",
+              "Weighted graph: har edge ka weight jaise faasla, waqt ya laagat, jo sab se chhota ya tez raasta dhoondne mein madad deta hai (Figure 4.11)."
+            ]
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-cs-ch4-fig-graphs",
+            "alt": "Oopar baen: A se E par directed weighted graph, teer B se A 10, A se C 12, C se B 20, A se D 60, C se D 32 aur E se A 7. Oopar daen: undirected graph jis ke edges A-B, A-E, B-E, B-D, B-C, C-D aur E-D. Neeche baen: tree jis ki jarr 1, bachche 2, 3, 4, phir 2 ke neeche 5 aur 6, 3 ke neeche 7, 4 ke neeche 8 aur 9, DFS aur BFS tarteebon ke saath. Neeche daen: stack, queue, list, tree ya graph kab istemal karein.",
+            "caption": "Graphs, DFS aur BFS, aur structure ka intikhab (topics 4.1.8 se 4.3 ke mutabiq asal khaaka).",
+            "long_description": "Directed weighted graph mein har edge ek taraf jata aur laagat rakhta hai, maslan A se D 60, jabke A se C se D 12 + 32 = 44. Undirected graph mein har edge dono taraf chalta hai; B A, C, D aur E se jura hai, to us ki degree 4 hai. Nau nodes wale tree par stack wala DFS pehle gehrai mein jata hai: 1, 2, 5, 6, 3, 7, 4, 8, 9, jabke queue wala BFS level ba level: 1 se 9 tarteeb se. Aakhir mein aa kar pehle jane wale kaam ke liye stack, pehle aa kar pehle jane wale ke liye queue, tarteeb wale majmooe ke liye list, darja-bandi ke liye tree aur networks ke liye graph chunein."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Python mein graph banana"
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Python code (har .... ek 4-space indent hai)",
+            "text": "import networkx as nx\nimport matplotlib.pyplot as plt\nG = nx.Graph()          # create a graph\nG.add_node(\"A\")\nG.add_node(\"B\")\nG.add_node(\"C\")\nG.add_edge(\"A\", \"B\")     # add edges\nG.add_edge(\"B\", \"C\")\nnx.draw(G, with_labels=True)\nplt.show()"
+          },
+          {
+            "type": "paragraph",
+            "text": "Code NetworkX library se teen nodes aur do edges wala graph banata aur Matplotlib se banata hai (dono install hone chahiyein)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Directed weighted graph (B se A 10, A se C 12, C se B 20, A se D 60, C se D 32, E se A 7) mein E se D tak sab se sasta raasta kya hai?",
+            "explanation": "E se A se C se D: 7 + 12 + 32 = 51, jo E se A se D, 7 + 60 = 67, se sasta hai."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Fauri khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Graph ki qismein: directed (ek taraf), undirected (dono taraf), weighted (laagat); NetworkX graphs banata aur khenchta hai."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

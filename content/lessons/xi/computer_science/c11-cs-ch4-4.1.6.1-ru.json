@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-CS-CH4-4.1.6.1-RU",
+      "chapter": "pk-punjab/xi/computer_science/c11-cs/ch4",
+      "topic": "pk-punjab/xi/computer_science/c11-cs/ch4/4.1.6.1",
+      "title": "4.1.6.1 Properties of Trees (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C11-CS-CH4-4.1.6.1",
+      "source_refs": [
+        {
+          "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
+          "pdf_from": 106,
+          "pdf_to": 108,
+          "note": "Roman Urdu explanation of tree properties (PDF 106-108)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "Root node: pehla ya sab se oopar wala node, jaise woh markazi folder jis mein baqi tamam folders aur files hon.",
+              "Edges aur nodes: nodes elements hain aur edges unhein jorne wali lines; jis node ke bachche na hon woh leaf hai, jaise folder mein file.",
+              "Height: root se sab se door leaf tak sab se lamba raasta, jo batata hai ke tree kitna uncha hai.",
+              "Mutawazin trees: baen aur daen shaakhein taqreeban barabar unchi (topic 4.1.7)."
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Python code (har .... ek 4-space indent hai)",
+            "text": "class FamilyMember:\n....def __init__(self, name):\n........self.name = name\n........self.children = []\n\nclass FamilyTree:\n....def __init__(self, ancestor_name):\n........self.root = FamilyMember(ancestor_name)\n\n....def add_child(self, parent_name, child_name):\n........parent = self._find_member(self.root, parent_name)\n........if parent:\n............parent.children.append(FamilyMember(child_name))\n\n....def _find_member(self, current, name):\n........if current.name == name:\n............return current\n........for child in current.children:\n............result = self._find_member(child, name)\n............if result:\n................return result\n........return None\n\nfamily = FamilyTree(\"Grandparent\")\nfamily.add_child(\"Grandparent\", \"Parent1\")\nfamily.add_child(\"Grandparent\", \"Parent2\")\nfamily.add_child(\"Parent1\", \"Child1\")\nfamily.add_child(\"Parent1\", \"Child2\")"
+          },
+          {
+            "type": "paragraph",
+            "text": "FamilyMember ek shakhs hai jis ka naam aur bachchon ki list hai; FamilyTree root wale buzurg se poora tree sambhalta, bachche jorta aur tree mein recursive talash se afraad dhoondta hai. Nateeja: Grandparent ke Parent1 aur Parent2, aur Parent1 ke Child1 aur Child2 (Figure 4.6)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Tree ki height ke baare mein kya sach hai (MCQ 8)?",
+            "explanation": "(a) root se sab se gehre node tak edges ki tadaad, jo 'root se sab se door leaf tak sab se lamba raasta' se mel khata hai."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Fauri khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Tree ki istilahat: root, nodes, edges, leaf, height; FamilyTree class bachchon ko lists mein rakhti hai."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

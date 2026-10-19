@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-CS-CH4-4.3.4",
+      "chapter": "pk-punjab/xi/computer_science/c11-cs/ch4",
+      "topic": "pk-punjab/xi/computer_science/c11-cs/ch4/4.3.4",
+      "title": "4.3.4 Combining List and Stack to Perform Sequential Operations",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
+          "pdf_from": 121,
+          "pdf_to": 122,
+          "note": "Topic 4.3.4 (PDF 121-122, printed 118-119). The reversal code is not from the book; flagged."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "A list stores data flexibly and a stack imposes Last-In, First-Out order, so together they handle tasks where the most recent element must be processed first. To reverse [10, 20, 30, 40, 50]: push each element onto an empty stack, then pop them one by one back into the list. Because the stack is LIFO, the list becomes [50, 40, 30, 20, 10]."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Python code (each .... is one 4-space indent)",
+            "text": "numbers = [10, 20, 30, 40, 50]\nstack = []\nfor n in numbers:\n....stack.append(n)          # push\nnumbers = []\nwhile stack:\n....numbers.append(stack.pop())    # pop back into the list\nprint(numbers)    # [50, 40, 30, 20, 10]"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Name two other tasks where a list and a stack work together.",
+            "explanation": "Undo (a list of document states with a stack of recent actions) and backtracking (a list of choices with a stack of the path tried so far)."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Quick recap"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "List plus stack: push all, pop all, and the order is reversed: [50, 40, 30, 20, 10]."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-CS-CH4-4.3.2-RU",
+      "chapter": "pk-punjab/xi/computer_science/c11-cs/ch4",
+      "topic": "pk-punjab/xi/computer_science/c11-cs/ch4/4.3.2",
+      "title": "4.3.2 Combining Stack and Graph to perform DFS (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C11-CS-CH4-4.3.2",
+      "source_refs": [
+        {
+          "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
+          "pdf_from": 118,
+          "pdf_to": 120,
+          "note": "Roman Urdu explanation of DFS with a stack (PDF 118-120)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "DFS graph ya tree ko shaakh mein jitna aage ja sake khangalta phir wapas aata hai, aur baqi nodes rakhne ke liye stack istemal karta hai. Misal: tree jis ki jarr 1; bachche 2, 3 aur 4; 2 ke neeche 5 aur 6; 3 ke neeche 7; 4 ke neeche 8 aur 9 (Figure 4.13)."
+          },
+          {
+            "type": "table",
+            "caption": "DFS stack ka safar",
+            "header": [
+              "Qadam",
+              "Pop aur visit",
+              "Baad mein stack (top daen)"
+            ],
+            "rows": [
+              [
+                "1",
+                "1, 4, 3, 2 push",
+                "[4, 3, 2]"
+              ],
+              [
+                "2",
+                "2, 6, 5 push",
+                "[4, 3, 6, 5]"
+              ],
+              [
+                "3",
+                "5",
+                "[4, 3, 6]"
+              ],
+              [
+                "4",
+                "6",
+                "[4, 3]"
+              ],
+              [
+                "5",
+                "3, 7 push",
+                "[4, 7]"
+              ],
+              [
+                "6",
+                "7",
+                "[4]"
+              ],
+              [
+                "7",
+                "4, 9, 8 push",
+                "[9, 8]"
+              ],
+              [
+                "8",
+                "8",
+                "[9]"
+              ],
+              [
+                "9",
+                "9",
+                "[] (mukammal)"
+              ]
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "DFS tarteeb 1, 2, 5, 6, 3, 7, 4, 8, 9 hai. Bachche ulti tarteeb mein push hote hain ta ke sab se baen bachcha top par ho aur pehle dekha jaye."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-cs-ch4-fig-graphs",
+            "alt": "Oopar baen: A se E par directed weighted graph, teer B se A 10, A se C 12, C se B 20, A se D 60, C se D 32 aur E se A 7. Oopar daen: undirected graph jis ke edges A-B, A-E, B-E, B-D, B-C, C-D aur E-D. Neeche baen: tree jis ki jarr 1, bachche 2, 3, 4, phir 2 ke neeche 5 aur 6, 3 ke neeche 7, 4 ke neeche 8 aur 9, DFS aur BFS tarteebon ke saath. Neeche daen: stack, queue, list, tree ya graph kab istemal karein.",
+            "caption": "Graphs, DFS aur BFS, aur structure ka intikhab (topics 4.1.8 se 4.3 ke mutabiq asal khaaka).",
+            "long_description": "Directed weighted graph mein har edge ek taraf jata aur laagat rakhta hai, maslan A se D 60, jabke A se C se D 12 + 32 = 44. Undirected graph mein har edge dono taraf chalta hai; B A, C, D aur E se jura hai, to us ki degree 4 hai. Nau nodes wale tree par stack wala DFS pehle gehrai mein jata hai: 1, 2, 5, 6, 3, 7, 4, 8, 9, jabke queue wala BFS level ba level: 1 se 9 tarteeb se. Aakhir mein aa kar pehle jane wale kaam ke liye stack, pehle aa kar pehle jane wale ke liye queue, tarteeb wale majmooe ke liye list, darja-bandi ke liye tree aur networks ke liye graph chunein."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Long question 7(a): jis graph mein A se B, C aur D, B se E aur F, C se G, aur D se H aur I ki taraf teer hain, A se DFS tarteeb dijiye.",
+            "explanation": "Parosiyon ko haroof-e-tahaji ki tarteeb mein le kar: A, B, E, F, C, G, D, H, I."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Fauri khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "9 nodes wale tree par stack wala DFS: 1, 2, 5, 6, 3, 7, 4, 8, 9."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
