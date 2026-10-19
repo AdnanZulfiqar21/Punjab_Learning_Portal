@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-CS-CH6-6.4.1.2",
+      "chapter": "pk-punjab/xi/computer_science/c11-cs/ch6",
+      "topic": "pk-punjab/xi/computer_science/c11-cs/ch6/6.4.1.2",
+      "title": "6.4.1.2 Blockchain Components",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
+          "pdf_from": 163,
+          "pdf_to": 163,
+          "note": "Topic 6.4.1.2 (PDF 163, printed 160). Long question 1 is answered."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "table",
+            "caption": "Blockchain components",
+            "header": [
+              "Component",
+              "Meaning"
+            ],
+            "rows": [
+              [
+                "Node",
+                "a computer in the network that keeps a copy of the blockchain and helps validate transactions and blocks"
+              ],
+              [
+                "Ledger",
+                "the digital record of all transactions, distributed across all nodes"
+              ],
+              [
+                "Block",
+                "a bundle of transactions with its own hash and the previous block's hash"
+              ],
+              [
+                "Transaction",
+                "one entry: a transfer of assets or information between participants"
+              ],
+              [
+                "Protocol",
+                "the rules for validating transactions, adding blocks and reaching consensus"
+              ]
+            ]
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-cs-ch6-fig-blockchain",
+            "alt": "Top: three blocks in a row, each listing the previous block's hash, a timestamp, transactions and its own hash, joined by arrows. Bottom left: six nodes N1 to N6 all connected to one another in a peer-to-peer network. Bottom right: notes on decentralization, immutability, consensus, transparency, security and the components node, ledger, block, transaction and protocol.",
+            "caption": "Linked blocks, a peer-to-peer network and blockchain principles (original diagram after topic 6.4).",
+            "long_description": "Each block stores the hash of the block before it, a timestamp and its transactions, and has its own hash. If someone altered an old block, its hash would change and no longer match the copy stored in the next block, so the tampering would show. Every node in the peer-to-peer network keeps a full copy of the ledger and talks directly to the others, with no central server. The network relies on decentralization, immutability, consensus rules such as Proof of Work or Proof of Stake, transparency and cryptographic security."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Explain the structure of a distributed ledger and the reason for its decentralization (long question 1).",
+            "explanation": "The ledger is a chain of blocks; each block bundles transactions with a timestamp, its own hash and the previous block's hash, so the blocks are linked in order. Every node in the peer-to-peer network stores a full copy and checks new blocks under the protocol's consensus rules. Decentralization removes the need to trust one central authority, avoids a single point of failure, makes tampering obvious because other copies disagree, and lets all participants verify the same transparent record."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Quick recap"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Components: node, ledger, block, transaction, protocol; blocks link by hashes."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
