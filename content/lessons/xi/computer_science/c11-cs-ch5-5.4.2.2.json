@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-CS-CH5-5.4.2.2",
+      "chapter": "pk-punjab/xi/computer_science/c11-cs/ch5",
+      "topic": "pk-punjab/xi/computer_science/c11-cs/ch5/5.4.2.2",
+      "title": "5.4.2.2 Logistic Regression",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
+          "pdf_from": 139,
+          "pdf_to": 140,
+          "note": "Topic printed 5.4.2.2 Logistic Regression (PDF 139-140, printed 136-137); Table 5.1 is carried. With b0 = 1 and b1 = 0.6 the book's 0.83 (5 h) and 0.73 (4 h) are wrong (0.98 and 0.97). Recalculated and recorded."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "callout",
+            "tone": "definition",
+            "title": "Logistic regression",
+            "text": "Logistic regression predicts an outcome that is yes or no. Instead of an exact number, it gives a probability between 0 and 1: P = 1 / (1 + e^-(b0 + b1 x)), where e is the base of natural logarithms, b0 the intercept (log-odds when x = 0) and b1 how much the log-odds change per unit of x."
+          },
+          {
+            "type": "table",
+            "caption": "Study hours and exam results",
+            "header": [
+              "Hours studied",
+              "Passed (1) or failed (0)"
+            ],
+            "rows": [
+              [
+                "1",
+                "0"
+              ],
+              [
+                "2",
+                "0"
+              ],
+              [
+                "3",
+                "0"
+              ],
+              [
+                "4",
+                "1"
+              ],
+              [
+                "5",
+                "1"
+              ],
+              [
+                "6",
+                "1"
+              ]
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "A predicted probability of 0.85 means an 85% chance of passing. The book supposes b0 = 1 and b1 = 0.6. With these values, 5 hours gives P = 1 / (1 + e^-4), about 0.98, and 4 hours gives 1 / (1 + e^-3.4), about 0.97. The book prints 0.83 and 0.73, which are the values for 1 hour and 0 hours. These assumed coefficients also do not fit the data, since they predict passing even for students who studied 1 hour and failed. A model fitted to this data would have a negative intercept, so its probability crosses 0.5 between 3 and 4 hours."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-cs-ch5-fig-models",
+            "alt": "Top left: five points of customers against earnings on the line earnings = 100 + 40 x customers, with a prediction of Rs 980 for 22 customers and an actual day-6 point of 1,250. Top right: an S-shaped probability curve over pass/fail points for 1 to 6 hours of study. Bottom left: Math and English scores of five students in two K-means clusters with centres marked x. Bottom right: five model-building steps.",
+            "caption": "Linear regression, logistic regression and K-means (original diagram after topic 5.4).",
+            "long_description": "The fruit-stall data lie exactly on the line earnings = 100 + 40 x customers, so 22 customers predict 980 rupees, and on day 6 the model predicted 1,220 for 28 customers against an actual 1,250. A logistic model turns study hours into a probability of passing that rises in an S-shape from near 0 to near 1, crossing 0.5 between the failing and passing students; the curve drawn is illustrative. K-means with K = 2 groups Basim, Umer and Maliha around a centre at Math 78.3, English 65, and Anie and Tallat around Math 45, English 82.5. A model is built by defining the problem, collecting data, choosing an algorithm, training and evaluating on new data."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "How does logistic regression differ from linear regression?",
+            "explanation": "Linear regression predicts a number on a straight line; logistic regression predicts the probability (0 to 1) of a yes-or-no outcome along an S-shaped curve."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Quick recap"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Logistic regression: P = 1 / (1 + e^-(b0 + b1 x)) gives a pass probability between 0 and 1."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
