@@ -1,5 +1,13 @@
 # Work queue (every roadmap task)
 
+**19 October 2026 (evening) — the whole Class XI Physics book drafted.** Chapters 1 to 12 authored like the Chemistry book (PHY-XI-BOOK-01): PRs #272 to #283 merged on green CI.
+
+| Slice | Code | Tested | Device |
+|---|---|---|---|
+| Physics XI chapters 1 to 12: 129 topics as English and Roman Urdu (glossed) drafts, coverage registers, 39 original 2D figures | Imported into `portal` (dev) chapter by chapter (`--subject physics`) | CI content, api and web jobs green on each chapter PR | Not walked on the phone |
+
+Open: academic review of all 12 chapters (start with the flagged findings); owner's physics lecture videos and registration; next book Computer Science, then Mathematics, by the same pipeline.
+
 **19 October 2026 — the whole Class XI Chemistry book drafted.** Chapters 1 to 16 authored like the Biology book (CHEM-XI-BOOK-01): PRs #255 to #270 merged on green CI.
 
 | Slice | Code | Tested | Device |
