@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-CS-CH3-3.7.3.2-RU",
+      "chapter": "pk-punjab/xi/computer_science/c11-cs/ch3",
+      "topic": "pk-punjab/xi/computer_science/c11-cs/ch3/3.7.3.2",
+      "title": "3.7.3.2 Depth-First Search (DFS) (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C11-CS-CH3-3.7.3.2",
+      "source_refs": [
+        {
+          "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
+          "pdf_from": 86,
+          "pdf_to": 87,
+          "note": "Roman Urdu explanation of DFS (PDF 86-87)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "callout",
+            "tone": "definition",
+            "title": "Depth-First Search (DFS)",
+            "text": "DFS kisi shaakh mein jitna neeche ja sake jata hai, phir wapas mur kar doosri shaakhein dekhta hai, aur nodes sambhalne ke liye stack istemal karta hai."
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "Root node se shuru kar ke use stack par rakhein.",
+              "Stack se node utha kar process karein aur us ke tamam na dekhe gaye parosi stack par rakhein.",
+              "Stack khali hone tak dohrayein."
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "DFS mazes jaise puzzles ke liye munasib hai: yeh ek raasta aakhir tak chalta aur band gali par wapas murta hai. Is ka waqt BFS ki tarah O(V + E) hai. Kitab kehti hai ke DFS gehre graphs ke liye memory mein kifayati aur BFS uthle graphs ke liye munasib hai; zyada durust yeh ke DFS sirf maujooda raasta rakhta hai, to is ki memory gehrai ke saath barhti hai, jabke BFS poora level rakhta hai, to us ki memory chaurai ke saath barhti hai."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-cs-ch3-fig-design-algorithms",
+            "alt": "Oopar baen: merge sort [14, 7, 3, 12] ko aadhon aur akeli qeematon mein baant kar [7, 14], [3, 12] aur [3, 7, 12, 14] mein jorta hua. Oopar daen: tarteeb wali list 21 34 43 57 66 78 ki teen qataarein jo 78 ki binary search darmiyani qeematon 43, 66 aur 78 ke saath dikhati hain. Neeche baen: jarr 0, bachche 1, 2, 3 aur pote 4, 5, 6, 7 wala darakht BFS aur DFS tarteeb ke saath. Neeche daen: greedy, dynamic programming, backtracking, sorting aur searching ke notes.",
+            "caption": "Merge sort, binary search, BFS aur DFS (topics 3.5 se 3.7 ke mutabiq asal khaaka).",
+            "long_description": "Merge sort [14, 7, 3, 12] ko [14, 7] aur [3, 12] mein, phir akele adad mein baantta, aur wapas [7, 14] aur [3, 12] aur aakhir mein [3, 7, 12, 14] jorta hai. 21, 34, 43, 57, 66, 78 mein 78 ki binary search darmiyani qeemat 43 dekhti hai jo chhoti hai, to daen aadha rakhti hai; agli darmiyani qeemat 66 bhi chhoti hai, to phir daen aadha rakh kar teen qadmon mein index 5 par 78 pa leti hai. Jis darakht ki jarr 0, bachche 1, 2 aur 3, aur pote 1 ke neeche 4 aur 5, 2 ke neeche 6 aur 3 ke neeche 7 hon, us par BFS level ba level 0 se 7 tak tarteeb se jata, jabke DFS pehle gehrai mein jata hai: 0, 1, 4, 5, 2, 6, 3, 7."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Python code (har .... ek 4-space indent hai)",
+            "text": "tree = {0: [1, 2, 3], 1: [4, 5], 2: [6], 3: [7], 4: [], 5: [], 6: [], 7: []}\n\ndef bfs(start):\n....order, queue = [], [start]\n....while queue:\n........node = queue.pop(0)          # take from the front\n........order.append(node)\n........queue.extend(tree[node])\n....return order\n\ndef dfs(node, order=None):\n....order = [] if order is None else order\n....order.append(node)\n....for child in tree[node]:\n........dfs(child, order)            # go deep first\n....return order\n\nprint(bfs(0))    # [0, 1, 2, 3, 4, 5, 6, 7]\nprint(dfs(0))    # [0, 1, 4, 5, 2, 6, 3, 7]"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Class activity: BFS aur DFS bana kar muwazna karein. DFS ki time complexity kya hai (MCQ 8)? Un ke faidon ka muwazna kijiye (short question 6).",
+            "explanation": "MCQ 8: (c) O(V + E). Oopar ka code (kitab se nahi) dono tarteebein deta hai. BFS be-wazan graph mein sab se chhota raasta dhoondta aur shuru ke qareeb matlooba ya uthle graphs ke liye munasib hai; DFS sirf maujooda raste ke liye memory leta, gehre matlooba tak jaldi pohanchta aur mazes, puzzles aur har raasta khangalne ke liye munasib hai. Dono har node aur edge ek baar dekhte hain."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Fauri khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "DFS: stack, pehle gehrai phir wapsi; tarteeb 0, 1, 4, 5, 2, 6, 3, 7; O(V + E).",
+              "Chhote raaston aur qareebi matlooba ke liye BFS; mazes aur gehri talash ke liye DFS."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
