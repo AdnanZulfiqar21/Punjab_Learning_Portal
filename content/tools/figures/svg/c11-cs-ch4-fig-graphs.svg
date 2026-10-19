@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 715" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <rect width="1200" height="715" fill="#ffffff"/>
+  <!-- Original diagram after topics 4.1.8 to 4.3: a directed weighted graph and an undirected graph on vertices A to E, a nine-node tree with DFS and BFS orders, and a guide to choosing stacks, queues, lists, trees and graphs. -->
+  <defs>
+    <style>
+      .h{font-size:22px;font-weight:700;fill:#14181f;text-anchor:middle}
+      .k{font-size:16px;font-weight:700;fill:#14181f;text-anchor:middle}
+      .s{font-size:13px;fill:#4b5563;text-anchor:middle}
+      .t{font-size:12px;fill:#4b5563}
+      .b{font-weight:700;fill:#14181f}
+      .f{font-family:Consolas, Courier New, monospace;font-size:12px;fill:#14181f}
+      .r{font-size:11px;fill:#4b5563}
+      .l{font-size:12px;font-weight:700;fill:#14181f}
+    </style>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#4b5563"/></marker>
+    <marker id="p" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#d7322f"/></marker>
+    <marker id="bl" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#1f6fb5"/></marker>
+    <marker id="g" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#0f7a62"/></marker>
+  </defs>
+  <text class="h" x="600" y="32">Graphs, DFS and BFS, and choosing a data structure</text>
+  <rect x="50" y="55" width="540" height="300" rx="12" fill="#dbe9f5" stroke="#1f6fb5" stroke-width="2"/>
+  <text class="k" x="320" y="83">Directed weighted graph (4.1.8)</text>
+  <path d="M404 122 L269 166" stroke="#4b5563" stroke-width="1.8" marker-end="url(#a)"/>
+  <text class="l" x="335" y="132" style="fill:#d7322f;text-anchor:middle">10</text>
+  <path d="M266 178 L431 240" stroke="#4b5563" stroke-width="1.8" marker-end="url(#a)"/>
+  <text class="l" x="350" y="200" style="fill:#d7322f;text-anchor:middle">12</text>
+  <path d="M446 230 L424 136" stroke="#4b5563" stroke-width="1.8" marker-end="url(#a)"/>
+  <text class="l" x="451" y="182" style="fill:#d7322f;text-anchor:middle">20</text>
+  <path d="M255 188 L285 293" stroke="#4b5563" stroke-width="1.8" marker-end="url(#a)"/>
+  <text class="l" x="254" y="242" style="fill:#d7322f;text-anchor:middle">60</text>
+  <path d="M434 253 L309 304" stroke="#4b5563" stroke-width="1.8" marker-end="url(#a)"/>
+  <text class="l" x="370" y="270" style="fill:#d7322f;text-anchor:middle">32</text>
+  <path d="M124 262 L234 184" stroke="#4b5563" stroke-width="1.8" marker-end="url(#a)"/>
+  <text class="l" x="168" y="216" style="fill:#d7322f;text-anchor:middle">7</text>
+  <circle cx="250" cy="172" r="17" fill="#e8f1fb" stroke="#1f6fb5" stroke-width="1.6"/>
+  <text class="l" x="250" y="177" style="text-anchor:middle">A</text>
+  <circle cx="420" cy="117" r="17" fill="#e8f1fb" stroke="#1f6fb5" stroke-width="1.6"/>
+  <text class="l" x="420" y="122" style="text-anchor:middle">B</text>
+  <circle cx="450" cy="247" r="17" fill="#e8f1fb" stroke="#1f6fb5" stroke-width="1.6"/>
+  <text class="l" x="450" y="252" style="text-anchor:middle">C</text>
+  <circle cx="290" cy="312" r="17" fill="#e8f1fb" stroke="#1f6fb5" stroke-width="1.6"/>
+  <text class="l" x="290" y="317" style="text-anchor:middle">D</text>
+  <circle cx="110" cy="272" r="17" fill="#e8f1fb" stroke="#1f6fb5" stroke-width="1.6"/>
+  <text class="l" x="110" y="277" style="text-anchor:middle">E</text>
+  <g class="r">
+    <text x="70" y="346">one-way edges with weights (distance, time or cost)</text>
+  </g>
+  <rect x="610" y="55" width="540" height="300" rx="12" fill="#e6f4ef" stroke="#0f7a62" stroke-width="2"/>
+  <text class="k" x="880" y="83">Undirected graph (4.1.8.4)</text>
+  <path d="M717 120 L883 120" stroke="#4b5563" stroke-width="1.8"/>
+  <path d="M700 137 L700 263" stroke="#4b5563" stroke-width="1.8"/>
+  <path d="M887 131 L713 269" stroke="#4b5563" stroke-width="1.8"/>
+  <path d="M900 137 L900 263" stroke="#4b5563" stroke-width="1.8"/>
+  <path d="M915 128 L1045 192" stroke="#4b5563" stroke-width="1.8"/>
+  <path d="M1045 208 L915 272" stroke="#4b5563" stroke-width="1.8"/>
+  <path d="M717 280 L883 280" stroke="#4b5563" stroke-width="1.8"/>
+  <circle cx="700" cy="120" r="17" fill="#e6f4ef" stroke="#0f7a62" stroke-width="1.6"/>
+  <text class="l" x="700" y="125" style="text-anchor:middle">A</text>
+  <circle cx="900" cy="120" r="17" fill="#e6f4ef" stroke="#0f7a62" stroke-width="1.6"/>
+  <text class="l" x="900" y="125" style="text-anchor:middle">B</text>
+  <circle cx="1060" cy="200" r="17" fill="#e6f4ef" stroke="#0f7a62" stroke-width="1.6"/>
+  <text class="l" x="1060" y="205" style="text-anchor:middle">C</text>
+  <circle cx="900" cy="280" r="17" fill="#e6f4ef" stroke="#0f7a62" stroke-width="1.6"/>
+  <text class="l" x="900" y="285" style="text-anchor:middle">D</text>
+  <circle cx="700" cy="280" r="17" fill="#e6f4ef" stroke="#0f7a62" stroke-width="1.6"/>
+  <text class="l" x="700" y="285" style="text-anchor:middle">E</text>
+  <g class="r">
+    <text x="630" y="330">two-way edges, like friendships; degree of B = 4</text>
+  </g>
+  <rect x="50" y="375" width="540" height="320" rx="12" fill="#fff4e2" stroke="#d98b2b" stroke-width="2"/>
+  <text class="k" x="320" y="403">DFS with a stack, BFS with a queue (4.3)</text>
+  <path d="M305 448 L185 507" stroke="#4b5563" stroke-width="1.8"/>
+  <path d="M320 457 L320 498" stroke="#4b5563" stroke-width="1.8"/>
+  <path d="M335 448 L455 507" stroke="#4b5563" stroke-width="1.8"/>
+  <path d="M161 529 L129 576" stroke="#4b5563" stroke-width="1.8"/>
+  <path d="M179 529 L211 576" stroke="#4b5563" stroke-width="1.8"/>
+  <path d="M320 532 L320 573" stroke="#4b5563" stroke-width="1.8"/>
+  <path d="M461 529 L429 576" stroke="#4b5563" stroke-width="1.8"/>
+  <path d="M479 529 L511 576" stroke="#4b5563" stroke-width="1.8"/>
+  <circle cx="320" cy="440" r="17" fill="#fff4e2" stroke="#d98b2b" stroke-width="1.6"/>
+  <text class="l" x="320" y="445" style="text-anchor:middle">1</text>
+  <circle cx="170" cy="515" r="17" fill="#fff4e2" stroke="#d98b2b" stroke-width="1.6"/>
+  <text class="l" x="170" y="520" style="text-anchor:middle">2</text>
+  <circle cx="320" cy="515" r="17" fill="#fff4e2" stroke="#d98b2b" stroke-width="1.6"/>
+  <text class="l" x="320" y="520" style="text-anchor:middle">3</text>
+  <circle cx="470" cy="515" r="17" fill="#fff4e2" stroke="#d98b2b" stroke-width="1.6"/>
+  <text class="l" x="470" y="520" style="text-anchor:middle">4</text>
+  <circle cx="120" cy="590" r="17" fill="#fff4e2" stroke="#d98b2b" stroke-width="1.6"/>
+  <text class="l" x="120" y="595" style="text-anchor:middle">5</text>
+  <circle cx="220" cy="590" r="17" fill="#fff4e2" stroke="#d98b2b" stroke-width="1.6"/>
+  <text class="l" x="220" y="595" style="text-anchor:middle">6</text>
+  <circle cx="320" cy="590" r="17" fill="#fff4e2" stroke="#d98b2b" stroke-width="1.6"/>
+  <text class="l" x="320" y="595" style="text-anchor:middle">7</text>
+  <circle cx="420" cy="590" r="17" fill="#fff4e2" stroke="#d98b2b" stroke-width="1.6"/>
+  <text class="l" x="420" y="595" style="text-anchor:middle">8</text>
+  <circle cx="520" cy="590" r="17" fill="#fff4e2" stroke="#d98b2b" stroke-width="1.6"/>
+  <text class="l" x="520" y="595" style="text-anchor:middle">9</text>
+  <g class="r">
+    <text x="70" y="640">DFS (stack): 1, 2, 5, 6, 3, 7, 4, 8, 9</text>
+    <text x="70" y="658">BFS (queue): 1, 2, 3, 4, 5, 6, 7, 8, 9</text>
+  </g>
+  <rect x="610" y="375" width="540" height="320" rx="12" fill="#fde8e7" stroke="#d7322f" stroke-width="2"/>
+  <text class="k" x="880" y="403">Choosing the right structure (4.2)</text>
+  <g class="r">
+    <text x="630" y="434">stack (LIFO): undo, backtracking, DFS, expressions</text>
+    <text x="630" y="450">queue (FIFO): BFS, task scheduling, customer lines</text>
+    <text x="630" y="466">list (ordered): to-do lists, playlists, building block</text>
+    <text x="630" y="482">tree (hierarchy): file systems, search trees, compilers</text>
+    <text x="630" y="498">graph (network): social networks, shortest paths,</text>
+    <text x="630" y="514">dependency order</text>
+    <text x="630" y="546">combining: a list and a stack reverse a list:</text>
+    <text x="630" y="562">push 10, 20, 30, 40, 50, then pop: 50, 40, 30, 20, 10</text>
+  </g>
+  <text class="s" x="600" y="707" style="font-size:11px">Original diagram for this lesson; the textbook's pictures are not reproduced.</text>
+</svg>

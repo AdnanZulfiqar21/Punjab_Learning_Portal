@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-CS-CH4-4.1.3.1-RU",
+      "chapter": "pk-punjab/xi/computer_science/c11-cs/ch4",
+      "topic": "pk-punjab/xi/computer_science/c11-cs/ch4/4.1.3.1",
+      "title": "4.1.3.1 Infix, Postfix, and Prefix Notations; Converting an Infix Expression to Postfix (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C11-CS-CH4-4.1.3.1",
+      "source_refs": [
+        {
+          "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
+          "pdf_from": 97,
+          "pdf_to": 98,
+          "note": "Roman Urdu explanation of notations and conversion (PDF 97-98)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "table",
+            "caption": "Teen notations",
+            "header": [
+              "Notation",
+              "Operator ki jagah",
+              "A + B",
+              "(A + B) x C"
+            ],
+            "rows": [
+              [
+                "Infix",
+                "operands ke darmiyan",
+                "A + B",
+                "(A + B) x C"
+              ],
+              [
+                "Postfix (Reverse Polish)",
+                "operands ke baad",
+                "A B +",
+                "A B + C x"
+              ],
+              [
+                "Prefix (Polish)",
+                "operands se pehle",
+                "+ A B",
+                "x + A B C"
+              ]
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Postfix aur prefix ko amal ki tarteeb dikhane ke liye qausain nahi chahiyein; + A x B C mein pehle B aur C ki zarb hoti phir A jorta hai."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Stack se infix ko postfix banana"
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "Khali stack aur khali output list se shuru karein, aur expression baen se daen parhein.",
+              "Operand: output mein jorein.",
+              "Operator: pehle stack par barabar ya zyada tarjeeh wale operators output mein pop karein, phir naya operator push karein.",
+              "Baen qaus: push karein.",
+              "Daen qaus: baen qaus tak operators output mein pop karein, phir qaus chhor dein.",
+              "Aakhir mein baqi tamam operators output mein pop karein."
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Misal: 3 + 4 * 2. 3 parha: output [3]. + parha: stack [+]. 4 parha: output [3, 4]. * parha: + se zyada tarjeeh, to push: stack [+, *]. 2 parha: output [3, 4, 2]. Aakhir: sab pop: 3 4 2 * +."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Infix se postfix banate waqt stack kis cheez ko sambhalta hai (MCQ 4)?",
+            "explanation": "(d) operators ki tarjeeh aur qausain dono."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Long question 4: (5 + 2) * (3 - 1) ko stack se postfix banayein, har token ke baad stack aur output dikhate hue.",
+            "explanation": "( stack [(], output []; 5 output [5]; + stack [(, +]; 2 output [5, 2]; ) + pop: stack [], output [5, 2, +]; * stack [*]; ( stack [*, (]; 3 output [5, 2, +, 3]; - stack [*, (, -]; 1 output [5, 2, +, 3, 1]; ) - pop: stack [*], output [5, 2, +, 3, 1, -]; aakhir: * pop: postfix 5 2 + 3 1 - *, jis ka jawab 7 x 2 = 14."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Fauri khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Infix A + B, postfix A B +, prefix + A B; badalte waqt stack operators aur qausain rakhta hai: 3 + 4 * 2 se 3 4 2 * +."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

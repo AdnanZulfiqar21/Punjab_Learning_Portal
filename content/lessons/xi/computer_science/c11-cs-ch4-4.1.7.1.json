@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-CS-CH4-4.1.7.1",
+      "chapter": "pk-punjab/xi/computer_science/c11-cs/ch4",
+      "topic": "pk-punjab/xi/computer_science/c11-cs/ch4/4.1.7.1",
+      "title": "4.1.7.1 Operations on Tree (Insertion, Deletion, Traversal: In-order, Pre-order, Post-order; Searching)",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
+          "pdf_from": 109,
+          "pdf_to": 111,
+          "note": "Topic 4.1.7.1 Operations on Tree (PDF 109-111, printed 106-108). The promised insertion code is missing. Figure 4.8 mirrors 2 and 3 relative to the traversals; the original diagram follows the text. MCQ 7 is answered (b); the key gives (d). Long question 6 is answered. Recorded."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Insertion: find the right place and connect the new node to its parent, like adding a family member.",
+              "Deletion: remove a node carefully so the rest of the tree stays connected.",
+              "Traversal: visit every node in a set order: in-order, pre-order or post-order.",
+              "Searching: go through the tree checking nodes until the one wanted is found."
+            ]
+          },
+          {
+            "type": "table",
+            "caption": "Traversals of the tree with root 1, children 2 and 3, and leaves 4, 5, 6, 7",
+            "header": [
+              "Traversal",
+              "Rule",
+              "Output"
+            ],
+            "rows": [
+              [
+                "In-order",
+                "left subtree, root, right subtree",
+                "4, 2, 5, 1, 6, 3, 7"
+              ],
+              [
+                "Pre-order",
+                "root, left subtree, right subtree",
+                "1, 2, 4, 5, 3, 6, 7"
+              ],
+              [
+                "Post-order",
+                "left subtree, right subtree, root",
+                "4, 5, 2, 6, 7, 3, 1"
+              ]
+            ]
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-cs-ch4-fig-trees",
+            "alt": "Left: a binary tree with root 1, children 2 and 3, and leaves 4, 5, 6, 7, labelled root, edge, leaves and height 2, with BFS, in-order, pre-order and post-order sequences. Top right: a family tree with Grandparent, Parent1, Parent2 and Child1, Child2 under Parent1. Bottom right: an AVL tree with root 20, left child 15 having children 10 and 18, and right child 30.",
+            "caption": "Tree terms, traversals, a family tree and an AVL tree (original diagram after topics 4.1.5 to 4.1.7).",
+            "long_description": "In the binary tree, 1 is the root, 4 to 7 are leaves, and the height is 2 edges. Breadth-first order is 1 to 7 level by level; in-order visits left subtree, root, right subtree: 4, 2, 5, 1, 6, 3, 7; pre-order visits the root first: 1, 2, 4, 5, 3, 6, 7; post-order visits the root last: 4, 5, 2, 6, 7, 3, 1. The family tree has Grandparent at the root with two parents, and Parent1 has two children. In the AVL tree the left subtree under 15 has height 1 and the right subtree 30 has height 0, so they differ by only 1 and the tree is balanced."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Which traversal visits the root before its children (MCQ 7)?",
+            "explanation": "(b) Pre-order."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Explain in-order, pre-order and post-order traversal with an example (long question 6).",
+            "explanation": "Each is defined recursively for every subtree. In-order visits the left subtree, then the node, then the right subtree: on the tree above, 4, 2, 5, 1, 6, 3, 7. Pre-order visits the node before its subtrees: 1, 2, 4, 5, 3, 6, 7, useful for copying or backing up a structure top-down. Post-order visits the node after its subtrees: 4, 5, 2, 6, 7, 3, 1, useful for deleting a folder's contents before the folder."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Quick recap"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Tree operations: insert, delete, traverse, search; in-order 4,2,5,1,6,3,7; pre-order 1,2,4,5,3,6,7; post-order 4,5,2,6,7,3,1."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

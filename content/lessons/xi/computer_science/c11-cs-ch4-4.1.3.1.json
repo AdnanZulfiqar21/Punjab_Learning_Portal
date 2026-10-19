@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-CS-CH4-4.1.3.1",
+      "chapter": "pk-punjab/xi/computer_science/c11-cs/ch4",
+      "topic": "pk-punjab/xi/computer_science/c11-cs/ch4/4.1.3.1",
+      "title": "4.1.3.1 Infix, Postfix, and Prefix Notations; Converting an Infix Expression to Postfix",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
+          "pdf_from": 97,
+          "pdf_to": 98,
+          "note": "Topic 4.1.3.1 with 'Converting an Infix Expression to Postfix' (PDF 97-98, printed 94-95). The prefix example prints as '-\\-AB' and 'x' is used for multiplication; the prefix form of (A + B) x C is worked here (general knowledge, flagged). MCQ 4 and long question 4 are answered."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "table",
+            "caption": "Three notations",
+            "header": [
+              "Notation",
+              "Operator position",
+              "A + B",
+              "(A + B) x C"
+            ],
+            "rows": [
+              [
+                "Infix",
+                "between the operands",
+                "A + B",
+                "(A + B) x C"
+              ],
+              [
+                "Postfix (Reverse Polish)",
+                "after the operands",
+                "A B +",
+                "A B + C x"
+              ],
+              [
+                "Prefix (Polish)",
+                "before the operands",
+                "+ A B",
+                "x + A B C"
+              ]
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Postfix and prefix need no parentheses to show the order of operations; in + A x B C, B and C are multiplied first and then A is added."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Converting infix to postfix with a stack"
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "Start with an empty stack and an empty output list, and read the expression from left to right.",
+              "Operand: add it to the output.",
+              "Operator: first pop to the output any operator on the stack with higher or equal priority, then push the new operator.",
+              "Left parenthesis: push it.",
+              "Right parenthesis: pop operators to the output until the left parenthesis, then discard the parenthesis.",
+              "At the end, pop all remaining operators to the output."
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Example: 3 + 4 * 2. Read 3: output [3]. Read +: stack [+]. Read 4: output [3, 4]. Read *: higher priority than +, so push: stack [+, *]. Read 2: output [3, 4, 2]. End: pop all: 3 4 2 * +."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "When converting infix to postfix, what does the stack help to manage (MCQ 4)?",
+            "explanation": "(d) both the priority of operators and parentheses."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Long question 4: convert (5 + 2) * (3 - 1) to postfix with a stack, showing the stack and output after each token.",
+            "explanation": "( stack [(], output []; 5 output [5]; + stack [(, +]; 2 output [5, 2]; ) pop + : stack [], output [5, 2, +]; * stack [*]; ( stack [*, (]; 3 output [5, 2, +, 3]; - stack [*, (, -]; 1 output [5, 2, +, 3, 1]; ) pop - : stack [*], output [5, 2, +, 3, 1, -]; end: pop *: postfix 5 2 + 3 1 - *, which evaluates to 7 x 2 = 14."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Quick recap"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Infix A + B, postfix A B +, prefix + A B; a stack holds operators and parentheses during conversion: 3 + 4 * 2 becomes 3 4 2 * +."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

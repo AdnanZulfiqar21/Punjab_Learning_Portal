@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-CS-CH4-4.1.2.1B",
+      "chapter": "pk-punjab/xi/computer_science/c11-cs/ch4",
+      "topic": "pk-punjab/xi/computer_science/c11-cs/ch4/4.1.2.1~2",
+      "title": "4.1.2.1 Stack Operations",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
+          "pdf_from": 96,
+          "pdf_to": 97,
+          "note": "Topic printed 4.1.2.1 Stack Operations (PDF 96-97, printed 93-94); the number 4.1.2.1 is repeated. Figure 4.2 (stack of books photo) is replaced by the original diagram. MCQ 3 is answered."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Push: add an item to the top. In Python a list is used as the stack and append() pushes.",
+              "Pop: remove the item from the top with the list's pop()."
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Python code (each .... is one 4-space indent)",
+            "text": "stack_of_books = []\nstack_of_books.append(\"Book A\")\nstack_of_books.append(\"Book B\")\nstack_of_books.append(\"Book C\")\nprint(\"Stack:\", stack_of_books)        # Book A, Book B, Book C\ntop_book = stack_of_books.pop()\nprint(\"Removed book:\", top_book)       # Book C\nprint(\"Stack now:\", stack_of_books)    # Book A, Book B"
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-cs-ch4-fig-lists-stacks-queues",
+            "alt": "Top left: five list items Decorations, Snacks, Cold drinks, Plates, Balloons with indexes 0 to 4 and notes on list operations. Top right: a stack of Book A, Book B and Book C with push adding at the top and pop removing Book C. Bottom left: a queue Ahmed, Fatima, Ali, Sara with dequeue at the front and enqueue at the back. Bottom right: stack states [3], [3, 4], [3, 4, 5], [3, 20], [23] while evaluating 3 4 5 * +.",
+            "caption": "Lists, stacks, queues and postfix evaluation (original diagram after topics 4.1.1 to 4.1.5).",
+            "long_description": "A list keeps items in order with indexes from 0, so Plates is at index 3, and items can be inserted, appended, removed or found. A stack of books is used only from the top: pushing adds Book C on top of Book B and Book A, and popping removes Book C first, the last one added. A queue serves from the front and adds at the back: Ahmed, who came first, is served first, and Sara joins behind Ali. To evaluate 3 4 5 * +, the numbers are pushed one by one; the * pops 5 and 4 and pushes 20, then + pops 20 and 3 and pushes the answer 23."
+          },
+          {
+            "type": "paragraph",
+            "text": "Like a stack of books on a desk, you can only add a book on top or take the top book off. Stacks are also used in depth-first search (DFS) to manage the nodes to explore in LIFO order (Did You Know)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Which operation removes an item from the top of a stack (MCQ 3)?",
+            "explanation": "(b) Pop."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Quick recap"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "push = append(), pop = pop(); pushing A, B, C then popping returns C."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

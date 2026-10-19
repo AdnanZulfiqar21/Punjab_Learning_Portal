@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-CS-CH4-4.3.3-RU",
+      "chapter": "pk-punjab/xi/computer_science/c11-cs/ch4",
+      "topic": "pk-punjab/xi/computer_science/c11-cs/ch4/4.3.3",
+      "title": "4.3.3 Combining Queue and Graph to Perform BFS (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C11-CS-CH4-4.3.3",
+      "source_refs": [
+        {
+          "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
+          "pdf_from": 120,
+          "pdf_to": 121,
+          "note": "Roman Urdu explanation of BFS with a queue (PDF 120-121)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "BFS queue istemal kar ke agle level se pehle maujooda gehrai ke tamam nodes dekhta hai, jo be-wazan graphs mein sab se chhote raaste dhoondne ya level ba level rabte dekhne ke liye behtareen hai. Usi tree par (Figure 4.13):"
+          },
+          {
+            "type": "table",
+            "caption": "BFS queue ka safar",
+            "header": [
+              "Qadam",
+              "Dequeue aur visit",
+              "Baad mein queue (aage baen)"
+            ],
+            "rows": [
+              [
+                "1",
+                "1, 2, 3, 4 enqueue",
+                "[2, 3, 4]"
+              ],
+              [
+                "2",
+                "2, 5, 6 enqueue",
+                "[3, 4, 5, 6]"
+              ],
+              [
+                "3",
+                "3, 7 enqueue",
+                "[4, 5, 6, 7]"
+              ],
+              [
+                "4",
+                "4, 8, 9 enqueue",
+                "[5, 6, 7, 8, 9]"
+              ],
+              [
+                "5",
+                "5",
+                "[6, 7, 8, 9]"
+              ],
+              [
+                "6",
+                "6",
+                "[7, 8, 9]"
+              ],
+              [
+                "7",
+                "7",
+                "[8, 9]"
+              ],
+              [
+                "8",
+                "8",
+                "[9]"
+              ],
+              [
+                "9",
+                "9",
+                "[] (mukammal)"
+              ]
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "BFS tarteeb 1, 2, 3, 4, 5, 6, 7, 8, 9 hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "DFS aur BFS mein farq bataiye (short question 8). Long question 7(b): exercise graph ke liye A se BFS tarteeb dijiye.",
+            "explanation": "DFS stack (ya recursion) istemal karta aur wapas aane se pehle ek shaakh mein gehrai tak jata hai; BFS queue istemal karta aur agle level se pehle ek level ke tamam nodes dekhta hai, be-wazan graphs mein sab se chhote raaste dhoondta hai. Dono O(V + E) waqt lete hain. Exercise graph ke liye A se BFS: A, B, C, D, E, F, G, H, I."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Fauri khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "9 nodes wale tree par queue wala BFS: 1 se 9 tarteeb se; DFS gehra jata, BFS chaura."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

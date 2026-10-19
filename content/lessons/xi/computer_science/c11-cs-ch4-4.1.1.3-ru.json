@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-CS-CH4-4.1.1.3-RU",
+      "chapter": "pk-punjab/xi/computer_science/c11-cs/ch4",
+      "topic": "pk-punjab/xi/computer_science/c11-cs/ch4/4.1.1.3",
+      "title": "4.1.1.3 List Operations (Insertion, Deletion, Searching) (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C11-CS-CH4-4.1.1.3",
+      "source_refs": [
+        {
+          "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
+          "pdf_from": 93,
+          "pdf_to": 95,
+          "note": "Roman Urdu explanation of list operations (PDF 93-95)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Insertion (dakhil karna)"
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Python code (har .... ek 4-space indent hai)",
+            "text": "party_list = [\"Buy drinks\", \"Buy decorations\", \"Buy snacks\", \"Buy cold drinks\"]\nparty_list.insert(0, \"Invite friends\")      # add at the start\nparty_list.append(\"Order cake\")            # add at the end\nparty_list.extend([\"Party hats\", \"Streamers\"])    # add several at once\nprint(party_list)"
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Deletion (hatana)"
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Python code (har .... ek 4-space indent hai)",
+            "text": "party_list = [\"Invite friends\", \"Buy decorations\", \"Buy snacks\", \"Buy cold drinks\"]\nparty_list.remove(\"Buy snacks\")    # removes the first match\nparty_list.pop(0)                  # removes the item at index 0\nprint(party_list)                  # ['Buy decorations', 'Buy cold drinks']\nparty_list.clear()                 # removes all items\nprint(party_list)                  # []"
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Searching (talash)"
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Python code (har .... ek 4-space indent hai)",
+            "text": "party_list = [\"Invite friends\", \"Buy decorations\", \"Buy cold drinks\"]\nif \"Buy cold drinks\" in party_list:\n....print(\"Buy cold drinks is on the list.\")\nindex = party_list.index(\"Buy decorations\")\nprint(\"Index of Buy decorations:\", index)    # 1"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Kaunsa function list ke aakhir mein cheez jorta hai (MCQ 1)? List ke saath 'in' kya karta hai (MCQ 2)?",
+            "explanation": "(b) append(); (c) yeh jaanchta hai ke cheez list mein maujood hai ya nahi."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "extend() kaise kaam karta hai, misal ke saath bataiye (short question 1).",
+            "explanation": "extend() doosri list (ya sequence) ki har cheez list ke aakhir mein ek ek kar ke jorta hai: a = [1, 2]; a.extend([3, 4]) se a = [1, 2, 3, 4]. Is ke bar-aks append([3, 4]) poori list ko ek cheez bana kar jorta: [1, 2, [3, 4]]."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Jab do variables ek hi list ki taraf ishara karein to kya masail ho sakte hain, misal ke saath (short question 2)?",
+            "explanation": "b = a list ki copy nahi banata; dono naam ek hi list ki taraf ishara karte hain, to ek naam se tabdeeli doosre se bhi nazar aati hai: a = [1, 2]; b = a; b.append(3) se a bhi [1, 2, 3] ho jata hai, jo ghair mutawaqqo bugs paida kar sakta hai. Alag copy ke liye b = a.copy() ya b = list(a) istemal karein. Yeh aam Python ilm hai; chapter mein nahi."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Long question 2: tasks = [design, development, testing, deployment] se shuru karein; aakhir mein 'review' jorein, teesri jagah 'planning' dakhil karein, 'testing' ko 'quality assurance' badlein, 'development' hatayein, index 1 wala kaam hatayein, 'deployment' ka index dhoondein, aur aakhri list aur us ki lambai print karein.",
+            "explanation": "tasks.append(\"review\"); tasks.insert(2, \"planning\"); tasks[tasks.index(\"testing\")] = \"quality assurance\"; tasks.remove(\"development\"); tasks.pop(1) 'planning' hatata hai; tasks.index(\"deployment\") 2 hai; aakhri list design, quality assurance, deployment, review, aur len(tasks) 4."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Fauri khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Dakhil: insert(), append(), extend(); hatana: remove(), pop(), clear(); talash: in, index()."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

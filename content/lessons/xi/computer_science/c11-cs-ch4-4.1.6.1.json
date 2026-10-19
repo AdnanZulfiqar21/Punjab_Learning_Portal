@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-CS-CH4-4.1.6.1",
+      "chapter": "pk-punjab/xi/computer_science/c11-cs/ch4",
+      "topic": "pk-punjab/xi/computer_science/c11-cs/ch4/4.1.6.1",
+      "title": "4.1.6.1 Properties of Trees",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
+          "pdf_from": 106,
+          "pdf_to": 108,
+          "note": "Topic 4.1.6.1 Properties of Trees (PDF 106-108, printed 103-105). The printed class code is garbled ('Fami1yMember', 'ctii 1 d_name', 'Parenti', 'Childl', a missing bracket); a working version is carried. MCQ 8 is answered (a); the answer key gives (c). Recorded."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "Root node: the first or top node, like the main folder that contains all other folders and files.",
+              "Edges and nodes: nodes are the elements and edges are the lines joining them; a node with no children is a leaf, like a file in a folder.",
+              "Height: the longest path from the root down to the farthest leaf, showing how tall the tree is.",
+              "Balanced trees: the left and right branches are nearly the same height (topic 4.1.7)."
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Python code (each .... is one 4-space indent)",
+            "text": "class FamilyMember:\n....def __init__(self, name):\n........self.name = name\n........self.children = []\n\nclass FamilyTree:\n....def __init__(self, ancestor_name):\n........self.root = FamilyMember(ancestor_name)\n\n....def add_child(self, parent_name, child_name):\n........parent = self._find_member(self.root, parent_name)\n........if parent:\n............parent.children.append(FamilyMember(child_name))\n\n....def _find_member(self, current, name):\n........if current.name == name:\n............return current\n........for child in current.children:\n............result = self._find_member(child, name)\n............if result:\n................return result\n........return None\n\nfamily = FamilyTree(\"Grandparent\")\nfamily.add_child(\"Grandparent\", \"Parent1\")\nfamily.add_child(\"Grandparent\", \"Parent2\")\nfamily.add_child(\"Parent1\", \"Child1\")\nfamily.add_child(\"Parent1\", \"Child2\")"
+          },
+          {
+            "type": "paragraph",
+            "text": "FamilyMember represents one person with a name and a list of children; FamilyTree manages the whole tree from the ancestor at the root, adding children and finding members by searching the tree recursively. The result is Grandparent with Parent1 and Parent2, and Parent1 with Child1 and Child2 (Figure 4.6)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Which is true about the height of a tree (MCQ 8)?",
+            "explanation": "(a) the number of edges from the root to the deepest node, matching 'the longest path from the root to the farthest leaf'."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Quick recap"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Tree terms: root, nodes, edges, leaf, height; a FamilyTree class stores children in lists."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

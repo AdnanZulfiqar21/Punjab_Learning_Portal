@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-CS-CH4-4.3.2",
+      "chapter": "pk-punjab/xi/computer_science/c11-cs/ch4",
+      "topic": "pk-punjab/xi/computer_science/c11-cs/ch4/4.3.2",
+      "title": "4.3.2 Combining Stack and Graph to perform DFS",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
+          "pdf_from": 118,
+          "pdf_to": 120,
+          "note": "Topic 4.3.2 (PDF 118-120, printed 115-117); Figure 4.13 is replaced by the original diagram with the same tree. Long question 7 (its number is not printed) uses the exercise graph on PDF 125, read from the page image; part (a) is answered here, taking neighbours alphabetically. Recorded."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "DFS explores a graph or tree as far as possible along a branch before backtracking, using a stack to keep the nodes still to visit. Example: a tree with root 1; children 2, 3 and 4; 5 and 6 under 2; 7 under 3; 8 and 9 under 4 (Figure 4.13)."
+          },
+          {
+            "type": "table",
+            "caption": "DFS stack trace",
+            "header": [
+              "Step",
+              "Pop and visit",
+              "Stack after (top on the right)"
+            ],
+            "rows": [
+              [
+                "1",
+                "1, push 4, 3, 2",
+                "[4, 3, 2]"
+              ],
+              [
+                "2",
+                "2, push 6, 5",
+                "[4, 3, 6, 5]"
+              ],
+              [
+                "3",
+                "5",
+                "[4, 3, 6]"
+              ],
+              [
+                "4",
+                "6",
+                "[4, 3]"
+              ],
+              [
+                "5",
+                "3, push 7",
+                "[4, 7]"
+              ],
+              [
+                "6",
+                "7",
+                "[4]"
+              ],
+              [
+                "7",
+                "4, push 9, 8",
+                "[9, 8]"
+              ],
+              [
+                "8",
+                "8",
+                "[9]"
+              ],
+              [
+                "9",
+                "9",
+                "[] (done)"
+              ]
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "The DFS order is 1, 2, 5, 6, 3, 7, 4, 8, 9. Children are pushed in reverse so the leftmost child is on top and is visited first."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-cs-ch4-fig-graphs",
+            "alt": "Top left: a directed weighted graph on A to E with arrows B to A 10, A to C 12, C to B 20, A to D 60, C to D 32 and E to A 7. Top right: an undirected graph with edges A-B, A-E, B-E, B-D, B-C, C-D and E-D. Bottom left: a tree with root 1, children 2, 3, 4, then 5 and 6 under 2, 7 under 3, 8 and 9 under 4, with DFS and BFS orders. Bottom right: when to use a stack, queue, list, tree or graph.",
+            "caption": "Graphs, DFS and BFS, and choosing a structure (original diagram after topics 4.1.8 to 4.3).",
+            "long_description": "In the directed weighted graph each edge points one way and carries a cost, for example A to D costs 60 while A to C to D costs 12 + 32 = 44. In the undirected graph every edge works both ways; B touches A, C, D and E, so its degree is 4. On the nine-node tree, DFS with a stack goes deep first: 1, 2, 5, 6, 3, 7, 4, 8, 9, while BFS with a queue goes level by level: 1 to 9 in order. Choose a stack for last-in-first-out work, a queue for first-in-first-out, a list for ordered collections, a tree for hierarchies and a graph for networks."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Long question 7(a): for the graph where A points to B, C and D, B to E and F, C to G, and D to H and I, give the DFS order from A.",
+            "explanation": "Taking neighbours in alphabetical order: A, B, E, F, C, G, D, H, I."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Quick recap"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "DFS with a stack on the 9-node tree: 1, 2, 5, 6, 3, 7, 4, 8, 9."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

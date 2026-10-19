@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 715" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <rect width="1200" height="715" fill="#ffffff"/>
+  <!-- Original diagram after topics 4.1.5 to 4.1.7: a seven-node binary tree with root, leaves, edges, height and its BFS, in-order, pre-order and post-order sequences, a family tree from the FamilyTree class, and an AVL tree rooted at 20. -->
+  <defs>
+    <style>
+      .h{font-size:22px;font-weight:700;fill:#14181f;text-anchor:middle}
+      .k{font-size:16px;font-weight:700;fill:#14181f;text-anchor:middle}
+      .s{font-size:13px;fill:#4b5563;text-anchor:middle}
+      .t{font-size:12px;fill:#4b5563}
+      .b{font-weight:700;fill:#14181f}
+      .f{font-family:Consolas, Courier New, monospace;font-size:12px;fill:#14181f}
+      .r{font-size:11px;fill:#4b5563}
+      .l{font-size:12px;font-weight:700;fill:#14181f}
+    </style>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#4b5563"/></marker>
+    <marker id="p" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#d7322f"/></marker>
+    <marker id="bl" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#1f6fb5"/></marker>
+    <marker id="g" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#0f7a62"/></marker>
+  </defs>
+  <text class="h" x="600" y="32">Trees: terms, traversals, family tree and AVL tree</text>
+  <rect x="50" y="55" width="540" height="640" rx="12" fill="#dbe9f5" stroke="#1f6fb5" stroke-width="2"/>
+  <text class="k" x="320" y="83">A binary tree and its traversals (4.1.5 to 4.1.7)</text>
+  <path d="M306 135 L214 200" stroke="#4b5563" stroke-width="1.8"/>
+  <path d="M334 135 L426 200" stroke="#4b5563" stroke-width="1.8"/>
+  <path d="M190 224 L150 281" stroke="#4b5563" stroke-width="1.8"/>
+  <path d="M210 224 L250 281" stroke="#4b5563" stroke-width="1.8"/>
+  <path d="M430 224 L390 281" stroke="#4b5563" stroke-width="1.8"/>
+  <path d="M450 224 L490 281" stroke="#4b5563" stroke-width="1.8"/>
+  <circle cx="320" cy="125" r="17" fill="#e6f4ef" stroke="#0f7a62" stroke-width="1.6"/>
+  <text class="l" x="320" y="130" style="text-anchor:middle">1</text>
+  <circle cx="200" cy="210" r="17" fill="#e6f4ef" stroke="#0f7a62" stroke-width="1.6"/>
+  <text class="l" x="200" y="215" style="text-anchor:middle">2</text>
+  <circle cx="440" cy="210" r="17" fill="#e6f4ef" stroke="#0f7a62" stroke-width="1.6"/>
+  <text class="l" x="440" y="215" style="text-anchor:middle">3</text>
+  <circle cx="140" cy="295" r="17" fill="#e6f4ef" stroke="#0f7a62" stroke-width="1.6"/>
+  <text class="l" x="140" y="300" style="text-anchor:middle">4</text>
+  <circle cx="260" cy="295" r="17" fill="#e6f4ef" stroke="#0f7a62" stroke-width="1.6"/>
+  <text class="l" x="260" y="300" style="text-anchor:middle">5</text>
+  <circle cx="380" cy="295" r="17" fill="#e6f4ef" stroke="#0f7a62" stroke-width="1.6"/>
+  <text class="l" x="380" y="300" style="text-anchor:middle">6</text>
+  <circle cx="500" cy="295" r="17" fill="#e6f4ef" stroke="#0f7a62" stroke-width="1.6"/>
+  <text class="l" x="500" y="300" style="text-anchor:middle">7</text>
+  <text class="r" x="350" y="112" style="fill:#1f6fb5">root</text>
+  <text class="r" x="70" y="300" style="fill:#1f6fb5">leaves</text>
+  <text class="r" x="238" y="160" style="fill:#1f6fb5;text-anchor:end">edge</text>
+  <path d="M560 125 V295" stroke="#d98b2b" stroke-width="1.6" stroke-dasharray="4 3"/>
+  <text class="r" x="548" y="214" style="fill:#d98b2b;text-anchor:end">height 2</text>
+  <g class="r">
+    <text x="70" y="360">breadth-first (queue): 1, 2, 3, 4, 5, 6, 7</text>
+    <text x="70" y="378">in-order (left, root, right): 4, 2, 5, 1, 6, 3, 7</text>
+    <text x="70" y="396">pre-order (root, left, right): 1, 2, 4, 5, 3, 6, 7</text>
+    <text x="70" y="414">post-order (left, right, root): 4, 5, 2, 6, 7, 3, 1</text>
+  </g>
+  <g class="r">
+    <text x="70" y="450">root: the top node; leaf: a node with no children;</text>
+    <text x="70" y="466">edges join nodes; height: the longest path from the root</text>
+    <text x="70" y="482">down to a leaf (here 2 edges)</text>
+    <text x="70" y="514">BFS queue: [1], [2, 3], [3, 4, 5], [4, 5, 6, 7], [5, 6, 7], ...</text>
+    <text x="70" y="546">uses: pre-order backs up folders before their contents;</text>
+    <text x="70" y="562">post-order deletes contents before their folder;</text>
+    <text x="70" y="578">also org charts, decision trees and syntax parsing</text>
+  </g>
+  <rect x="610" y="55" width="540" height="300" rx="12" fill="#e6f4ef" stroke="#0f7a62" stroke-width="2"/>
+  <text class="k" x="880" y="83">Family tree built with classes (4.1.6)</text>
+  <path d="M880 136 L760 182" stroke="#0f7a62" stroke-width="1.6" marker-end="url(#g)"/>
+  <path d="M880 136 L1000 182" stroke="#0f7a62" stroke-width="1.6" marker-end="url(#g)"/>
+  <path d="M760 216 L700 262" stroke="#0f7a62" stroke-width="1.6" marker-end="url(#g)"/>
+  <path d="M760 216 L820 262" stroke="#0f7a62" stroke-width="1.6" marker-end="url(#g)"/>
+  <rect x="820.0" y="104" width="120" height="32" rx="6" fill="#ffffff" stroke="#0f7a62" stroke-width="1.5"/>
+  <text class="l" x="842" y="124">Grandparent</text>
+  <rect x="715.0" y="184" width="90" height="32" rx="6" fill="#ffffff" stroke="#0f7a62" stroke-width="1.5"/>
+  <text class="r" x="740" y="204">Parent1</text>
+  <rect x="955.0" y="184" width="90" height="32" rx="6" fill="#ffffff" stroke="#0f7a62" stroke-width="1.5"/>
+  <text class="r" x="980" y="204">Parent2</text>
+  <rect x="655.0" y="264" width="90" height="32" rx="6" fill="#ffffff" stroke="#0f7a62" stroke-width="1.5"/>
+  <text class="r" x="683" y="284">Child1</text>
+  <rect x="775.0" y="264" width="90" height="32" rx="6" fill="#ffffff" stroke="#0f7a62" stroke-width="1.5"/>
+  <text class="r" x="803" y="284">Child2</text>
+  <g class="r">
+    <text x="900" y="262">FamilyMember: name and</text>
+    <text x="900" y="278">a list of children</text>
+    <text x="900" y="294">add_child(parent, child)</text>
+  </g>
+  <rect x="610" y="375" width="540" height="320" rx="12" fill="#fff4e2" stroke="#d98b2b" stroke-width="2"/>
+  <text class="k" x="880" y="403">Balanced tree: an AVL tree (4.1.7)</text>
+  <path d="M866 450 L794 505" stroke="#4b5563" stroke-width="1.8"/>
+  <path d="M894 450 L966 505" stroke="#4b5563" stroke-width="1.8"/>
+  <path d="M769 528 L731 577" stroke="#4b5563" stroke-width="1.8"/>
+  <path d="M791 528 L829 577" stroke="#4b5563" stroke-width="1.8"/>
+  <circle cx="880" cy="440" r="17" fill="#fff4e2" stroke="#d98b2b" stroke-width="1.6"/>
+  <text class="l" x="880" y="445" style="text-anchor:middle">20</text>
+  <circle cx="780" cy="515" r="17" fill="#fff4e2" stroke="#d98b2b" stroke-width="1.6"/>
+  <text class="l" x="780" y="520" style="text-anchor:middle">15</text>
+  <circle cx="980" cy="515" r="17" fill="#fff4e2" stroke="#d98b2b" stroke-width="1.6"/>
+  <text class="l" x="980" y="520" style="text-anchor:middle">30</text>
+  <circle cx="720" cy="590" r="17" fill="#fff4e2" stroke="#d98b2b" stroke-width="1.6"/>
+  <text class="l" x="720" y="595" style="text-anchor:middle">10</text>
+  <circle cx="840" cy="590" r="17" fill="#fff4e2" stroke="#d98b2b" stroke-width="1.6"/>
+  <text class="l" x="840" y="595" style="text-anchor:middle">18</text>
+  <text class="r" x="700" y="470" style="fill:#d98b2b">left height 1</text>
+  <text class="r" x="1010" y="470" style="fill:#d98b2b">right height 0</text>
+  <g class="r">
+    <text x="630" y="636">heights of left and right subtrees differ by at most 1;</text>
+    <text x="630" y="652">an AVL tree rebalances itself, keeping search, insertion</text>
+    <text x="630" y="668">and deletion close to O(log n)</text>
+  </g>
+  <text class="s" x="600" y="707" style="font-size:11px">Original diagram for this lesson; the textbook's pictures are not reproduced.</text>
+</svg>
