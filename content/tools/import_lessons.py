@@ -34,7 +34,7 @@ from typing import Any
 from urllib import error, request
 
 ROOT = Path(__file__).resolve().parents[2]
-SUBJECTS = {"biology": "c11-bio", "chemistry": "c11-chem"}  # subject -> external-id prefix of its lessons and figures
+SUBJECTS = {"biology": "c11-bio", "chemistry": "c11-chem", "physics": "c11-phy"}  # subject -> external-id prefix of its lessons and figures
 LESSONS = ROOT / "content" / "lessons" / "xi" / "biology"  # overridden by --subject in main()
 FIGURES = LESSONS / "figures"
 SUBJECT = "biology"

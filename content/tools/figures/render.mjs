@@ -21,7 +21,7 @@ const { chromium } = require("@playwright/test");
 const THREE_PATH = join(root, "apps", "web", "node_modules", "three", "build", "three.module.js");
 // Subject (argv[3], default biology): figures live under content/lessons/xi/<subject>/figures and only the svg/
 // files whose id starts with the subject's prefix (c11-bio-, c11-chem-, ...) are rendered.
-const SUBJECTS = { biology: { prefix: "c11-bio-", book: "Class XI Biology" }, chemistry: { prefix: "c11-chem-", book: "Class XI Chemistry" } };
+const SUBJECTS = { biology: { prefix: "c11-bio-", book: "Class XI Biology" }, chemistry: { prefix: "c11-chem-", book: "Class XI Chemistry" }, physics: { prefix: "c11-phy-", book: "Class XI Physics" } };
 const subject = process.argv[3] ?? "biology";
 if (!SUBJECTS[subject]) throw new Error(`unknown subject ${subject}; one of ${Object.keys(SUBJECTS).join(", ")}`);
 const { prefix: PREFIX, book: BOOK } = SUBJECTS[subject];
