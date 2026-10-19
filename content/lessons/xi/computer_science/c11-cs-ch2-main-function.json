@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-CS-CH2-MAIN-FUNCTION",
+      "chapter": "pk-punjab/xi/computer_science/c11-cs/ch2",
+      "topic": "pk-punjab/xi/computer_science/c11-cs/ch2/u-identifying-code-duplication-the-main-function",
+      "title": "Identifying Code Duplication and the main Function",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
+          "pdf_from": 54,
+          "pdf_to": 55,
+          "note": "Unnumbered topic Identifying Code Duplication; The main Function (PDF 54-55, printed 51-52)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "callout",
+            "tone": "definition",
+            "title": "Code duplication",
+            "text": "Code duplication means the same code is repeated in several places; it makes maintenance harder and causes bugs, so finding and removing it is an important part of modular programming."
+          },
+          {
+            "type": "callout",
+            "tone": "definition",
+            "title": "The main function",
+            "text": "The main function marks where a program starts. It is usually called inside a block that checks whether the file is being run directly or imported as a module."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Python code (each .... is one 4-space indent)",
+            "text": "def main():\n....print(\"This is the main function.\")\n\nif __name__ == \"__main__\":\n....main()"
+          },
+          {
+            "type": "paragraph",
+            "text": "main() runs only when the file is executed directly, not when it is imported elsewhere; this setup is useful in large projects with many modules."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "What is the value of __name__ when a file is run directly?",
+            "explanation": "\"__main__\"; when the file is imported, __name__ is the module's own name instead."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Quick recap"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Avoid duplicated code; if __name__ == \"__main__\": main() starts the program only when the file is run directly."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

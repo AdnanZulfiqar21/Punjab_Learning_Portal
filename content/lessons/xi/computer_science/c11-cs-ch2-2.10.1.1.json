@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-CS-CH2-2.10.1.1",
+      "chapter": "pk-punjab/xi/computer_science/c11-cs/ch2",
+      "topic": "pk-punjab/xi/computer_science/c11-cs/ch2/2.10.1.1",
+      "title": "2.10.1.1 Types of Testing",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
+          "pdf_from": 63,
+          "pdf_to": 63,
+          "note": "Topic 2.10.1.1 Types of Testing (PDF 63, printed 60)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Unit testing: tests individual parts such as functions or classes in isolation; Python's unittest module is often used.",
+              "Integration testing: checks how parts of the code work together.",
+              "Functional testing: checks that the software behaves as expected from the user's point of view.",
+              "Regression testing: makes sure new changes do not break existing features."
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Python code (each .... is one 4-space indent)",
+            "text": "import unittest\n\ndef add(a, b):\n....return a + b\n\nclass TestMathOperations(unittest.TestCase):\n....def test_add(self):\n........self.assertEqual(add(2, 3), 5)\n........self.assertEqual(add(-1, 1), 0)\n\nif __name__ == \"__main__\":\n....unittest.main()"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "What does assertEqual(add(2, 3), 5) check?",
+            "explanation": "That add(2, 3) returns exactly 5; if not, the test fails and reports the difference."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Quick recap"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Types: unit, integration, functional, regression; unittest.TestCase with assertEqual tests functions."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

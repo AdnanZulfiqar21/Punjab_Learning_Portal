@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-CS-CH2-2.9.1.2",
+      "chapter": "pk-punjab/xi/computer_science/c11-cs/ch2",
+      "topic": "pk-punjab/xi/computer_science/c11-cs/ch2/2.9.1.2",
+      "title": "2.9.1.2 Finally and Else",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
+          "pdf_from": 61,
+          "pdf_to": 61,
+          "note": "Topic 2.9.1.2 Finally and Else (PDF 61, printed 58). The printed code is scrambled across columns; the lesson reconstructs it from the explanation. Flagged."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "The finally block always runs, whether or not an exception was raised. The else block runs only if no exception was raised in the try block."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Python code (each .... is one 4-space indent)",
+            "text": "try:\n....number = int(input(\"Enter a number: \"))\n....result = 10 / number\nexcept ZeroDivisionError:\n....print(\"You can't divide by zero!\")\nexcept ValueError:\n....print(\"Invalid input! Please enter a valid number.\")\nelse:\n....print(\"The result is\", result)\nfinally:\n....print(\"Execution completed.\")"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "What is printed if the user types abc?",
+            "explanation": "\"Invalid input! Please enter a valid number.\" and then \"Execution completed.\""
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Quick recap"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "else: runs when there is no error; finally: always runs (clean-up, completion message)."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

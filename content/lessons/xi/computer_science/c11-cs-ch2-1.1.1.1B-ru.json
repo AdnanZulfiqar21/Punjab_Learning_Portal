@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-CS-CH2-1.1.1.1B-RU",
+      "chapter": "pk-punjab/xi/computer_science/c11-cs/ch2",
+      "topic": "pk-punjab/xi/computer_science/c11-cs/ch2/1.1.1.1~2",
+      "title": "1.1.1.1 Access Modifiers (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C11-CS-CH2-1.1.1.1B",
+      "source_refs": [
+        {
+          "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
+          "pdf_from": 58,
+          "pdf_to": 58,
+          "note": "Roman Urdu explanation of access modifiers (PDF 58)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "callout",
+            "tone": "definition",
+            "title": "Access modifiers",
+            "text": "Access modifiers tay karte hain ke class ke attributes aur methods tak kaun pohanch sakta hai. Python inhein naam se zahir karti hai: public (koi underscore nahi), protected (ek underscore) aur private (do underscores)."
+          },
+          {
+            "type": "table",
+            "caption": "Python mein access modifiers",
+            "header": [
+              "Qism",
+              "Likhne ka andaaz",
+              "Kahan se pohanch"
+            ],
+            "rows": [
+              [
+                "Public",
+                "self.color",
+                "har jagah, class ke bahar bhi"
+              ],
+              [
+                "Protected",
+                "self._protected_var",
+                "class aur us ki subclasses (riwayat ke taur par)"
+              ],
+              [
+                "Private",
+                "self.__color",
+                "sirf class ke andar; get_color() jaisa method istemal karein"
+              ]
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Python code (har .... ek 4-space indent hai)",
+            "text": "class Car:\n....def __init__(self, color):\n........self.__color = color    # private\n\n....def get_color(self):\n........return self.__color"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Class ke bahar ka code private attribute kaise parh sakta hai?",
+            "explanation": "Class ke public method, jaise get_color(), ke zariye, seedhe nahi."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Fauri khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Public: name; protected: _name; private: __name (getter se pohanch)."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

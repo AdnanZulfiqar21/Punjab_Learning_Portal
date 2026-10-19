@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-CS-CH2-2.5.3",
+      "chapter": "pk-punjab/xi/computer_science/c11-cs/ch2",
+      "topic": "pk-punjab/xi/computer_science/c11-cs/ch2/2.5.3",
+      "title": "2.5.3 Importing and Using Libraries",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
+          "pdf_from": 48,
+          "pdf_to": 49,
+          "note": "Topic 2.5.3 Importing and Using Libraries (PDF 48-49, printed 45-46). 'Import datetime' is printed with a capital I. The list-comprehension answer is general Python; flagged."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Libraries are pre-built toolkits used through import. Three standard libraries are shown: random for random numbers, datetime for dates and times, and statistics for calculations such as the mean."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Python code (each .... is one 4-space indent)",
+            "text": "import random\nnumber = random.randint(1, 10)\nprint(\"The random number is:\", number)\n\nimport datetime\nprint(\"Current date and time:\", datetime.datetime.now())\n\nimport statistics\ndata = [23, 45, 67, 89, 12, 44, 56]\nprint(\"The mean value is:\", statistics.mean(data))"
+          },
+          {
+            "type": "paragraph",
+            "text": "random helps in games, simulations or picking a lucky-draw winner; datetime helps with logging events and reminders; statistics finds the mean, median and mode. Import only what you need; more libraries are listed at https://docs.python.org/3/ (Did You Know)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "What is the mean of the data list in the example?",
+            "explanation": "(23 + 45 + 67 + 89 + 12 + 44 + 56) / 7 = 336 / 7 = 48."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Class activity: use random to make a list of 10 numbers from 1 to 50 and statistics to print their mean.",
+            "explanation": "import random, statistics; nums = [random.randint(1, 50) for _ in range(10)]; print(statistics.mean(nums)). The mean changes on every run because the numbers are random."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Quick recap"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "import a library to use it: random.randint, datetime.datetime.now, statistics.mean (data mean 48)."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
