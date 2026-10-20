@@ -1,5 +1,13 @@
 # Work queue (every roadmap task)
 
+**20 October 2026 — the whole Class XII Computer Science book drafted; all requested books are drafted.** Chapters 1 to 9 authored like the Physics XII book (CS-XII-BOOK-01): PRs #343 to #351 merged on green CI.
+
+| Slice | Code | Tested | Device |
+|---|---|---|---|
+| Computer Science XII chapters 1 to 9: 84 topics (with summaries and exercises) as English and Roman Urdu (glossed) drafts, coverage registers, 72 original 2D figures | Imported into `portal` (dev) chapter by chapter (`--subject computer_science --grade 12`) | CI content, api and web jobs green on each chapter PR; contact sheets checked for every figure; worked numbers recomputed | Not walked on the phone |
+
+Open: academic review of all nine chapters, starting with the flagged findings (the Chapter 9 key error, added notes on PECA 2025 and the national AI policy) and the derived answers; the owner's copy of printed page 21 for section 2.2 (B17); owner's Class XII lecture videos.
+
 **20 October 2026 — the whole Class XII Physics book drafted.** Chapters 13 to 21 authored like the Chemistry XII book (PHY-XII-BOOK-01): PRs #332, #333 and #335 to #341 merged on green CI.
 
 | Slice | Code | Tested | Device |
