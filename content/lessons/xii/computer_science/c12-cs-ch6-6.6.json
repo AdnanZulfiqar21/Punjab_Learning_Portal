@@ -1,0 +1,135 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH6-6.6",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch6",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch6/6.6",
+      "title": "6.6 Building a Machine Learning Model",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 81,
+          "pdf_to": 85,
+          "note": "Topic 6.6 with the Tidbit (PDF 81-85); Figs 6.6 and 6.7 redrawn and a data-split figure added. The listing and its printed output were checked by recomputing the split and fit; one print line is added. Short Q7, Long Q5 and MCQs 7 and 9 are answered here."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Building a machine learning model follows clear steps (Fig 6.6). Take predicting students' grades. First, data about students is collected, such as attendance, quiz marks, assignment scores, study hours and previous exam results. The data is cleaned and prepared. Input values, called features, are chosen because they help the model understand what affects performance. The model is then trained on the prepared data; once trained, it can predict a student's likely grade from new data, which helps teachers find students who need extra support before the examination."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Tidbit",
+            "text": "Building a model means choosing data and features carefully: training data teaches the model patterns, testing data checks its performance, and good feature selection improves results, so a well-built model gives reliable predictions."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch6-fig-model-steps",
+            "alt": "Seven boxes joined by arrows: collect data, clean and prepare, select features, split train/test, train model, test model and predict. A dashed arrow loops from test model back to select features: not good enough? improve features or data and retrain. A note gives the grade-prediction example: attendance, quiz marks, assignment scores and study hours are features used to predict the grade (the target).",
+            "caption": "The steps of building a machine learning model (original diagram after Fig 6.6).",
+            "long_description": "Building a model is rarely done in one pass: the test result usually sends the builder back to improve the data or the features."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Example: linear regression in Python"
+          },
+          {
+            "type": "paragraph",
+            "text": "Exam scores are often affected by the number of hours studied. The program below builds a simple linear regression model that predicts exam scores from study hours. The data is split into training and testing sets, the model is trained on the training data, and its performance is measured with the mean squared error (MSE). Finally the data points and the fitted line are plotted (Fig 6.7)."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Example: predicting exam scores from study hours (Python code; each .... is one 4-space indent)",
+            "text": "import numpy as np\nimport matplotlib.pyplot as plt\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LinearRegression\nfrom sklearn.metrics import mean_squared_error\n\n# Hours studied (X) and exam scores (y)\nX = np.array([[1], [2], [3], [4], [5], [6], [7], [8], [9], [10]])\ny = np.array([1, 2, 2, 3, 3, 4, 5, 5, 6, 7])\n\n# Step 1: split into training and testing sets\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)\n\n# Step 2: create and train the model\nmodel = LinearRegression()\nmodel.fit(X_train, y_train)\n\n# Step 3: make predictions; Step 4: evaluate\ny_pred = model.predict(X_test)\nmse = mean_squared_error(y_test, y_pred)\nprint(f\"Mean Squared Error: {mse:.4f}\")\nprint(f\"Exam Score = {model.coef_[0]:.4f} x Hours + {model.intercept_:.4f}\")   # added line\n\n# Step 5: plot the data and the fitted line\nplt.scatter(X, y, color='blue')\nplt.plot(X, model.predict(X), color='red')\nplt.xlabel('Hours Studied')\nplt.ylabel('Exam Scores')\nplt.title('Linear Regression: Hours vs. Scores')\nplt.show()"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Data preparation: X holds the hours studied and y the matching exam scores.",
+              "Model training: a linear regression model is trained on X_train and y_train (8 of the 10 points).",
+              "Testing: the model predicts the 2 test points, and the MSE (the average of the squared differences between predicted and actual scores) measures the error; a lower MSE is better.",
+              "Output: Mean Squared Error: 0.1484, and the fitted line Exam Score = 0.6552 x Hours + 0.1466.",
+              "Improvement: gathering more data, or better data, usually makes the model more accurate."
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Checking the printed output",
+            "text": "With random_state=42 the test points are 9 hours (score 6) and 2 hours (score 2). Fitting the other eight points gives slope 0.6552 and intercept 0.1466, and the test MSE is 0.1484, as printed. The book's listing has no line that prints the equation, so one is added above."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch6-fig-regression",
+            "alt": "A scatter graph of exam score (0 to 7) against hours studied (0 to 10) with ten points: (1,1), (2,2), (3,2), (4,3), (5,3), (6,4), (7,5), (8,5), (9,6), (10,7). The points at 2 and 9 hours are marked as test points. A red fitted line rises across the graph; the key gives score = 0.6552 x hours + 0.1466 and test MSE = 0.1484.",
+            "caption": "Linear regression of exam scores on study hours (original graph after Fig 6.7).",
+            "long_description": "The line is the model: for 5 hours it predicts 0.6552 x 5 + 0.1466, about 3.4 marks."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Features and target values"
+          },
+          {
+            "type": "paragraph",
+            "text": "Features are the input values a model uses; target values are the outputs it must predict. Choosing the right features improves learning, while unnecessary features can reduce accuracy, so features must be relevant and the target clearly defined. When predicting marks, study hours is a feature and the marks are the target."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Feature engineering basics"
+          },
+          {
+            "type": "paragraph",
+            "text": "Feature engineering improves data for better learning by selecting, changing and creating features. Raw data is often not ready: it may need cleaning and scaling. Good features highlight the important information and give better predictions, and the step needs a good understanding of the data. For example, when predicting marks, study-hour records can be cleaned and scaled, and a new feature such as 'study hours per day' can be created."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Train-test split and a simple predictive model"
+          },
+          {
+            "type": "paragraph",
+            "text": "The data is divided into a training set, which teaches the model, and a testing set of unseen data, which checks its real performance. Testing on unseen data reveals overfitting, where a model memorises its training data but does poorly on new data. A common split is 80 percent training and 20 percent testing. A simple predictive model uses a basic algorithm to learn from the training data and predict new cases; such models are easy to understand, and their test results guide improvements."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch6-fig-data-split",
+            "alt": "Two bars. The train-test split bar is 80 percent training (the model learns patterns) and 20 percent test. The second bar, with validation, is 70 percent training, 15 percent validation and 15 percent test. A note says validation data tunes settings and shows overfitting, while test data stays unseen until the end; 70/15/15 is one common choice.",
+            "caption": "Dividing data into training, validation and test sets (original diagram after 6.6 and 6.8).",
+            "long_description": "The regression example uses an 80/20 split of 10 points: 8 for training and 2 for testing."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "A model scores 99% on its training data but only 60% on the test data. What is the problem, and name one way to reduce it.",
+            "explanation": "Overfitting: the model has memorised the training data instead of learning general patterns. Ways to reduce it include using more training data, removing unnecessary features, choosing a simpler model, or tuning it with validation data."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Quick recap"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Steps: collect, clean, choose features, split, train, test, predict.",
+              "Features are inputs, the target is the output; feature engineering cleans, scales and creates features.",
+              "Train-test split (often 80/20) shows real performance and overfitting; regression example: MSE 0.1484."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

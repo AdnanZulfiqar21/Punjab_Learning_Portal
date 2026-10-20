@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH6-6.4",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch6",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch6/6.4",
+      "title": "6.4 Machine Learning Mechanisms",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 79,
+          "pdf_to": 80,
+          "note": "Topic 6.4 (PDF 79-80); Fig 6.4 redrawn with all three mechanisms, which are also carried as a table. The rule-based note (asked in Long Q3 but not taught) and the check question are added. Short Q6, Long Q3 and MCQs 5-6 are answered here."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Machine learning mechanisms describe how systems learn from data. Different mechanisms suit different problems: some use labelled data, some do not, and some learn through feedback and experience (Fig 6.4). Choosing the right mechanism matters, because the quality of learning depends on it."
+          },
+          {
+            "type": "callout",
+            "tone": "definition",
+            "title": "Labelled and unlabelled data",
+            "text": "Labelled data comes with the correct output for each item (a picture marked 'apple'); unlabelled data has no such answers."
+          },
+          {
+            "type": "table",
+            "caption": "Machine learning mechanisms",
+            "header": [
+              "Mechanism",
+              "How it learns",
+              "Examples"
+            ],
+            "rows": [
+              [
+                "Supervised",
+                "From labelled data: each input has a correct output, and the model compares its answer with it. It needs large, good-quality labelled datasets and is used for prediction (classification and regression).",
+                "Spam or not spam; cat or dog; normal or abnormal scans; face and speech recognition; fraud detection; exam result prediction"
+              ],
+              [
+                "Unsupervised",
+                "From unlabelled data: no correct output is given; it finds hidden structure by grouping similar items into clusters.",
+                "Customer grouping; data clustering; exploring data"
+              ],
+              [
+                "Reinforcement",
+                "By trial and error, like a person: an agent acts in an environment and receives rewards or penalties, aiming to maximise the reward.",
+                "A robot learning a maze; AlphaGo improving at Go; a self-driving car's decisions; recommendations adjusted by feedback"
+              ]
+            ]
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch6-fig-ml-types",
+            "alt": "Three panels. Supervised (labelled): three fruit outlines each joined to a label, apple, banana and grapes; each example has the right answer. Unsupervised (unlabelled): dots that form three coloured clusters; no answers are given and the system finds groups. Reinforcement: an agent box sends an action to an environment box, which returns a reward or penalty; it learns by trial and error.",
+            "caption": "Supervised, unsupervised and reinforcement learning (original diagram after Fig 6.4).",
+            "long_description": "Supervised learning needs a teacher's answers, unsupervised learning finds its own groups, and reinforcement learning learns from the consequences of its own actions."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Rule-based systems",
+            "text": "The exercise also mentions rule-based learning, which the chapter does not describe. Rule-based systems follow if-then rules written by people, like the traditional programming in 6.3, so they do not learn patterns from data by themselves."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Which mechanism fits each task? (a) Grouping shoppers by buying habits with no categories given. (b) Predicting house prices from past sales. (c) Teaching a game-playing program by rewarding wins.",
+            "explanation": "(a) Unsupervised (clustering). (b) Supervised (the past prices are labels; this is regression). (c) Reinforcement (rewards and penalties)."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Quick recap"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Supervised: labelled data, for prediction.",
+              "Unsupervised: unlabelled data, finds clusters.",
+              "Reinforcement: rewards and penalties, trial and error."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
