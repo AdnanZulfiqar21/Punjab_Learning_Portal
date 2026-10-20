@@ -4,6 +4,7 @@
 //   node content/tools/figures/render.mjs svg         # the vector diagrams only
 //   node content/tools/figures/render.mjs svg chemistry   # another subject (default biology)
 //   node content/tools/figures/render.mjs scenes      # the 3D models only (poster + turntable stills)
+//   node content/tools/figures/render.mjs scenes physics 11   # one book's 3D models (scenes/c11-phy-ch<N>_<model>.js)
 //
 // Vector diagrams (svg/*.svg) become PNGs at 2x. Each three.js scene (scenes/*.js) becomes a labelled poster and
 // FRAMES evenly spaced stills of one full turn about its axis, drawn by headless Chromium (SwiftShader WebGL) with
@@ -140,12 +141,15 @@ if (what === "all" || what === "svg") {
 
 if (what === "all" || what === "scenes") {
   const threeSource = readFileSync(THREE_PATH, "utf8");
-  for (const file of readdirSync(join(here, "scenes")).filter((f) => f.endsWith(".js")).sort()) {
-    const name = file.replace(/\.js$/, "");
-    // Scenes for later chapters are named `ch<N>_<model>.js`; the Chapter 1 scenes keep their bare names.
+  // Biology XI scenes keep their original names (`<model>.js` for Chapter 1, `ch<N>_<model>.js` later); every other
+  // book names its scenes with the book prefix, `c11-phy-ch<N>_<model>.js`, so one book never renders another's.
+  const legacy = subject === "biology" && grade === "11";
+  const sceneFiles = readdirSync(join(here, "scenes")).filter((f) => f.endsWith(".js") && (legacy ? !/^c\d+-/.test(f) : f.startsWith(PREFIX))).sort();
+  for (const file of sceneFiles) {
+    const name = file.replace(/\.js$/, "").replace(PREFIX, "");
     const m = name.match(/^ch(\d+)_(.+)$/);
     const chapter = m ? m[1] : "1";
-    const id = `c11-bio-ch${chapter}-m3d-${(m ? m[2] : name).replace(/_/g, "-")}`;
+    const id = `${PREFIX}ch${chapter}-m3d-${(m ? m[2] : name).replace(/_/g, "-")}`;
     const sceneSource = readFileSync(join(here, "scenes", file), "utf8");
     const page = await browser.newPage({ viewport: { width: POSTER.w, height: POSTER.h }, deviceScaleFactor: 1 });
     await page.route("https://figures.local/**", (route) => {
