@@ -1,0 +1,286 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH3-3.2-RU",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch3",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch3/3.2",
+      "title": "3.2 OOP ke bunyadi tasawwurat (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-CS-CH3-3.2",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 37,
+          "pdf_to": 46,
+          "note": "Roman Urdu explanation of the core concepts of OOP (PDF 37-45)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "OOP ke bunyadi tasawwurat programs ko munazzam, dobara qabil-e-istemal aur sambhalne mein asan banate hain: classes aur objects, encapsulation, inheritance aur polymorphism."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Classes aur objects: haqeeqi cheezon ki numaindagi"
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Kya aap jante hain?",
+            "text": "Class naqshe (blueprint) ki tarah hai, jab ke object us naqshe se bani asal cheez hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Class aik naqsha ya saancha hai jo kisi cheez ki sifaat (attributes) aur kaam (methods) tay karta hai. Object class ka instance hai jis ke attributes ki asal qeematein hoti hain (Fig 3.1). Classes aur objects programmers ko haqeeqi cheezon ka model banane aur data aur us se mutalliq functions ko ikattha rakhne dete hain, jis se programs zyada munazzam hote hain."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch3-fig-class-object",
+            "alt": "Baen class ka dabba, class Person, attributes name, age aur gender aur methods eat(), sleep() aur work(). p1 = Person(...) aur p2 = Person(...) wale teer do object dabbon tak: object p1 name Bob, age 34, gender Male, aur object p2 name Jenny, age 27, gender Female; dono mein wahi teen methods. Note: aik class, bohat se objects, har aik ki apni qeematein.",
+            "caption": "Aik class aur us ke do objects (Fig 3.1 ke mutabiq asal khaaka).",
+            "long_description": "Class batati hai ke har Person ke paas kya hai aur woh kya kar sakta hai; har object apni qeematein bharta hai. Class se object banana instantiation kehlata hai."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Misal: Student class (Python code; har .... ek 4-space indent hai)",
+            "text": "class Student:\n....def __init__(self, name):\n........self.name = name\n\n....def display(self):\n........print(\"Student Name:\", self.name)\n\n# Creating objects\nobject1 = Student(\"Ali\")\nobject2 = Student(\"Ahmed\")\n\n# Using objects\nobject1.display()\nobject2.display()"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "class Student talaba ka naqsha tay karti hai.",
+              "__init__ constructor hai: object bante hi khud chalta aur naam set karta hai.",
+              "self.name har talib-e-ilm ka naam rakhta hai; self khud object ki taraf ishara hai.",
+              "display() talib-e-ilm ka naam print karta hai.",
+              "object1 aur object2 do alag Student objects hain, har aik ka apna data (Ali, Ahmed); output pehle 'Student Name: Ali' phir 'Student Name: Ahmed' hai."
+            ]
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Encapsulation"
+          },
+          {
+            "type": "callout",
+            "tone": "definition",
+            "title": "Encapsulation",
+            "text": "Encapsulation ka matlab data (variables) aur methods (functions) ko aik ikai, yani class, mein band karna aur data tak seedhi rasai mehdood karna hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Java ya C++ ke baraks Python mein 'private' ya 'protected' ke sakht keywords nahi; yeh naam rakhne ke riwaj (conventions) se batata hai ke data tak kaise pohanchna chahiye. Encapsulation data ko na-pasandeeda rasai se bachati, security behtar karti, code sambhalna asan banati aur sirf qaboo shuda tabdeeli ki ijazat deti hai. Bank account ka socheein: aap ka balance chhupa hai, aap us tak sirf deposit() aur withdraw() se pohanch sakte hain, aur use seedha nahi badal sakte."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Dilchasp baat",
+            "text": "Data chhupayein aur methods se rasai control karein."
+          },
+          {
+            "type": "table",
+            "caption": "Python mein rasai ke darje",
+            "header": [
+              "Darja",
+              "Syntax",
+              "Matlab"
+            ],
+            "rows": [
+              [
+                "Public",
+                "self.attribute_name",
+                "Har jagah se, class ke andar ya bahar, qabil-e-rasai; default mein sab members public"
+              ],
+              [
+                "Protected",
+                "self._attribute_name (aik underscore)",
+                "Class aur us ki subclasses ke andar istemal ke liye; riwaj hai, pabandi nahi"
+              ],
+              [
+                "Private",
+                "self.__attribute_name (do underscores)",
+                "Bahar se pohanchna mushkil: Python ki name mangling andar ka naam badal kar ittifaqi rasai rokti"
+              ]
+            ]
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch3-fig-encapsulation",
+            "alt": "Bahar ka code (user) class BankAccount tak sirf public methods deposit(), withdraw() aur get_balance() se pohanchta, sabz teer 'allowed'. Andar private data self.__balance (do underscores) tak sirf methods se rasai. User se seedha data tak surkh dashed teer cross par khatam, 'direct access blocked'. Neeche: public: name (har jagah), protected: _name (riwaj: class aur subclasses) aur private: __name (name mangling chhupati).",
+            "caption": "Bank account class mein encapsulation (Fig 3.2 ke mutabiq asal khaaka).",
+            "long_description": "Methods data tak wahid darwaza hain, is liye har tabdeeli jaanchi ja sakti hai; maslan withdraw() balance se zyada nikalne se inkar karta hai."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Misal: BankAccount mein encapsulation (Python code; har .... ek 4-space indent hai)",
+            "text": "class BankAccount:\n....def __init__(self, balance):\n........self.__balance = balance      # private variable\n\n....def deposit(self, amount):\n........self.__balance += amount\n\n....def withdraw(self, amount):\n........if amount <= self.__balance:\n............self.__balance -= amount\n........else:\n............print(\"Insufficient balance\")\n\n....def get_balance(self):\n........return self.__balance\n\n# Usage\naccount = BankAccount(1000)\naccount.deposit(500)\naccount.withdraw(300)\nprint(account.get_balance())      # Output: 1200\n\n# Direct access will fail\n# print(account.__balance)        # Error"
+          },
+          {
+            "type": "paragraph",
+            "text": "Balance 1000 se shuru hota hai; 500 jama karne se 1500, aur 300 nikalne se 1200 rehta hai. Bahar se account.__balance parhne ki koshish AttributeError deti hai, kyunke name mangling ne class ke andar variable ka naam badal diya hai."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Inheritance: functionality ka dobara istemal aur wusat"
+          },
+          {
+            "type": "paragraph",
+            "text": "Inheritance aik class ko doosri class ki sifaat aur methods lene deti hai. Nayi class, jise subclass ya child class kehte hain, parent class (superclass) ki khusoosiyat mein izafa ya tabdeeli kar sakti hai. Inheritance code ke dobara istemal ko barhati, takrar kam karti aur maujooda code dobara likhe baghair program ko wasee karna asan banati hai. Child class parent ka naam qausain mein likh kar banti hai: class Child(Parent):."
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Single inheritance: child class bilkul aik parent class se inherit karti hai (Fig 3.3). Yeh sab se bunyadi shakal hai.",
+              "Multiple inheritance: child class aik se zyada parent classes se inherit kar ke un ka rawaiya milati hai, maslan Smartphone class jo Camera aur Computer dono se inherit kare (Fig 3.4).",
+              "Multilevel inheritance: class aisi class se inherit karti hai jo khud derived hai, khandani shajre ki tarah zanjeer (dada, walid, beta); 'pota' class apne parent aur grandparent dono ke methods aur attributes leti hai (Fig 3.5)."
+            ]
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch3-fig-inheritance",
+            "alt": "UML tarz ke class dabbon ke teen panels, har child parent se aisi line se jura jo parent par khokhle teer ke sire par khatam. Single: Dog (child) Animal (parent) se; class Dog(Animal). Multiple: Child Father (parent 1) aur Mother (parent 2) se; class Child(Father, Mother). Multilevel: ElectricCar (child) Car (parent) se, jo Vehicle (grandparent) se inherit karti.",
+            "caption": "Single, multiple aur multilevel inheritance (Figs 3.3 se 3.5 ke mutabiq asal khaaka).",
+            "long_description": "Har soorat mein teer inherit karne wali class se us class ki taraf hai jis se woh inherit karti, aur child apne oopar ki har cheez use kar sakti hai."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Misal: single inheritance (Python code; har .... ek 4-space indent hai)",
+            "text": "# Parent class (superclass)\nclass Animal:\n....def __init__(self, name):\n........self.name = name\n\n....def eat(self):\n........print(f\"{self.name} is eating.\")\n\n# Child class (subclass) inheriting from Animal\nclass Dog(Animal):\n....def bark(self):\n........print(f\"{self.name} says Woof!\")\n\nmy_dog = Dog(\"Buddy\")\nmy_dog.eat()     # Output: Buddy is eating.\nmy_dog.bark()    # Output: Buddy says Woof!"
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Dilchasp baat",
+            "text": "self maujooda object ka hawala hai; Python ise instance methods ko khud bhejta hai."
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Parent class (base class): woh class jis ki sifaat inherit hoti hain; oopar Animal.",
+              "Child class (derived class): inherit karne wali class; oopar Dog.",
+              "Method overriding: child class parent ke maujooda method ka apna version de sakti hai. Us ke andar super() parent ka version call karta hai."
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Izafi misal: super() ke saath overriding (Python code; har .... ek 4-space indent hai)",
+            "text": "class Puppy(Dog):\n....def eat(self):\n........super().eat()                     # parent's version first\n........print(f\"{self.name} wants more milk.\")\n\nPuppy(\"Moti\").eat()\n# Output: Moti is eating.\n#         Moti wants more milk."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Misal: multiple inheritance (Python code; har .... ek 4-space indent hai)",
+            "text": "class Father:\n....def skill1(self):\n........print(\"Father's skill: Gardening\")\n\nclass Mother:\n....def skill2(self):\n........print(\"Mother's skill: Cooking\")\n\n# Derived class inheriting from two base classes\nclass Child(Father, Mother):\n....def own_skill(self):\n........print(\"Child's skill: Coding\")\n\nc = Child()\nc.skill1()      # Father's method\nc.skill2()      # Mother's method\nc.own_skill()   # its own method"
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Misal: multilevel inheritance (Python code; har .... ek 4-space indent hai)",
+            "text": "# Base class (grandparent)\nclass Vehicle:\n....def start_engine(self):\n........print(\"Engine started.\")\n\n# Intermediate class (parent)\nclass Car(Vehicle):\n....def drive(self):\n........print(\"Car is driving.\")\n\n# Derived class (child)\nclass ElectricCar(Car):\n....def charge(self):\n........print(\"Battery is charging.\")\n\nmy_tesla = ElectricCar()\nmy_tesla.start_engine()   # inherited from Vehicle\nmy_tesla.drive()          # inherited from Car\nmy_tesla.charge()         # defined in ElectricCar"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Class activity",
+            "text": "Vehicle class banayein aur use Car aur Bike subclasses se wasee karein. Har subclass mein munfarid method dalein aur inheritance dikhayein."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Polymorphism"
+          },
+          {
+            "type": "paragraph",
+            "text": "Polymorphism ka matlab 'kai shaklein' hai. Aik hi method, function ya operator us object ke mutabiq mukhtalif bartao kar sakta hai jis par woh kaam kare, jis se code zyada lachakdar aur dobara qabil-e-istemal hota hai. Maslan payment system credit card, UPI (fauri bank transfer service; Pakistan mein is jaisi Raast hai), net banking aur wallet payments de sakta hai. Sab aik mushtarka method processPayment() use karte hain, lekin har aik ka apna amal hai; maslan net banking user ko bank ke login page par le jati hai. Method ka naam wahi rehta hai jab ke amal payment ki qism ke saath badalta hai."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Izafi misal: aik method ka naam, mukhtalif payment amal (Python code; har .... ek 4-space indent hai)",
+            "text": "class Payment:\n....def process_payment(self, amount):\n........print(\"Processing\", amount)\n\nclass CreditCard(Payment):\n....def process_payment(self, amount):\n........print(\"Charging card:\", amount)\n\nclass NetBanking(Payment):\n....def process_payment(self, amount):\n........print(\"Redirecting to bank login for\", amount)\n\nfor method in [CreditCard(), NetBanking()]:\n....method.process_payment(500)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Polymorphism ki do bari qismein hain, compile-time aur runtime (Fig 3.6)."
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "Compile-time polymorphism: chalne wala method compilation ke dauran chuna jata hai, aam taur par method ya operator overloading se, jaise Java ya C++ mein. Python function signature ke lihaz se asal overloading nahi deta: dynamically typed hone ki wajah se aik function mukhtalif qism ke arguments le sakta hai. Milta julta bartao default arguments, variable-length arguments (*args, **kwargs) ya function ke andar shartein laga kar hasil hota hai.",
+              "Runtime polymorphism (overriding): bartao program chalte waqt method call karne wale object ke mutabiq tay hota hai. Yeh method overriding se hota hai, jab child class parent mein pehle se maujood method ka apna version deti hai."
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Misal: default aur variable-length arguments se overloading ki naqal (Python code; har .... ek 4-space indent hai)",
+            "text": "class Calculator:\n....def multiply(self, a=1, b=1, *args):\n........result = a * b\n........for num in args:\n............result *= num\n........return result\n\ncalc = Calculator()\nprint(calc.multiply())          # 1   (default arguments)\nprint(calc.multiply(4))         # 4\nprint(calc.multiply(2, 3))      # 6   (more arguments)\nprint(calc.multiply(2, 3, 4))   # 24"
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Misal: overriding se runtime polymorphism (Python code; har .... ek 4-space indent hai)",
+            "text": "class Animal:\n....def sound(self):\n........return \"Some generic sound\"\n\nclass Dog(Animal):\n....def sound(self):\n........return \"Bark\"\n\nclass Cat(Animal):\n....def sound(self):\n........return \"Meow\"\n\nanimals = [Dog(), Cat(), Animal()]\nfor animal in animals:\n....print(animal.sound())\n# Output: Bark, Meow, Some generic sound (one per line)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Aik hi call, animal.sound(), Dog, Cat ya saade Animal ke liye mukhtalif nateeja deti hai, aur yeh intikhab runtime par hota hai. Yeh dynamic bartao Python ko runtime polymorphism ke liye bohat munasib banata hai."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch3-fig-polymorphism",
+            "alt": "Darakht: polymorphism compile-time (method overloading) aur runtime (method overriding) mein bat'ti. Compile-time ke neeche: Python mein asal overloading nahi, aik method mukhtalif inputs leta: multiply() 1, multiply(4) 4, multiply(2, 3) 6 aur multiply(2, 3, 4) 24. Runtime ke neeche: wahi call animal.sound() Dog ke liye Bark, Cat ke liye Meow aur Animal ke liye Some generic sound.",
+            "caption": "Compile-time aur runtime polymorphism (Fig 3.6 ke mutabiq asal khaaka).",
+            "long_description": "Overloading diye gaye arguments se bartao badalta hai; overriding object ki qism se. Dono mein call karne wala code aik naam use karta hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Python class mein __init__ ka maqsad kya hai?",
+            "explanation": "__init__ constructor hai. Yeh object bante hi khud chalta aur object ke ibtidai attributes, jaise self.name = name, set karta hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "BankAccount class mein agar balance 1200 ho aur program account.withdraw(2000) call kare to kya hoga? Yeh encapsulation ki misal kyun hai?",
+            "explanation": "Yeh 'Insufficient balance' print karega aur balance 1200 rahega. Private balance sirf un methods se badalta hai jo request jaanchte hain, is liye ghalat tabdeeli ruk jati hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Inheritance, encapsulation aur polymorphism mil kar behtar software design kaise dete hain?",
+            "explanation": "Encapsulation har class ka data mehfooz aur interface wazeh rakhti hai; inheritance code copy karne ke bajaye jaanchi parkhi classes dobara use aur wasee karti hai; polymorphism aik code ko bohat si mutalliq classes ke saath chalne deti hai. Nateeja modular code hai jise barhana, test karna aur sambhalna asan hai."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Fauri khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Class: naqsha (attributes aur methods); object: apni qeematon wala instance; __init__ unhein set karta.",
+              "Encapsulation: data aur methods aik class mein; public name, protected _name, private __name.",
+              "Inheritance: single, multiple, multilevel; overriding aur super().",
+              "Polymorphism: compile-time (overloading, Python mein naqal) aur runtime (overriding)."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
