@@ -1,0 +1,264 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH4-4.2-RU",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch4",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch4/4.2",
+      "title": "4.2 Python mein databases ke saath kaam (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-CS-CH4-4.2",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 56,
+          "pdf_to": 61,
+          "note": "Roman Urdu explanation of working with databases in Python (PDF 56-61)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Python mein databases ke saath kaam ka matlab database system mein data rakhna aur sambhalna hai. Python programs databases se jur kar data dal, nikal, badal aur mita sakte hain. Databases applications ko bari miqdar ki maloomat kaamyabi se sambhalne aur data durust aur yaksan rakhne dete hain. Python built-in aur bahar ki libraries se database ka kaam karta hai."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Kya aap jante hain?",
+            "text": "Databases programs ko bari miqdar ki maloomat mehfooz rakhne aur zaroorat par jaldi nikalne dete hain."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Databases ka ta'aruf"
+          },
+          {
+            "type": "callout",
+            "tone": "definition",
+            "title": "Database",
+            "text": "Database data ka munazzam majmua hai jo munazzam shakal mein rakha jata hai, taake data tak asani se pohancha aur use sambhala ja sake."
+          },
+          {
+            "type": "paragraph",
+            "text": "Databases data ki takrar kam karte, aitbaar barhate aur mehfooz storage dete hain, aur bohat si qism ke software mein use hote hain."
+          },
+          {
+            "type": "table",
+            "caption": "Database ke bunyadi khayalat",
+            "header": [
+              "Khayal",
+              "Matlab",
+              "Misal"
+            ],
+            "rows": [
+              [
+                "Entity",
+                "Haqeeqi cheez, shakhs, jagah, waqia ya tasawwur jis ka data rakha jaye",
+                "Student, Teacher, Course, Book, Employee"
+              ],
+              [
+                "Attribute",
+                "Entity ki sifat ya khusoosiyat",
+                "Student ke liye: naam, roll number, class, umar"
+              ],
+              [
+                "Relationship",
+                "Do ya zyada entities kaise jure hain",
+                "Student Course mein dakhla leta hai"
+              ],
+              [
+                "Identifier",
+                "Woh attribute jo entity ke har record ki munfarid pehchan kare",
+                "Roll number, kyunke har talib-e-ilm ka alag hai"
+              ]
+            ]
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch4-fig-er-concepts",
+            "alt": "Student entity ka dabba 'enrols in' relationship ke heere (diamond) se Course entity ke dabbe se jura. Student se chaar attribute ovals: Roll Number (underline, identifier, munfarid), Name, Class aur Age. Key entity, attribute, relationship aur identifier samjhati.",
+            "caption": "Entity, attribute, relationship aur identifier (4.2 ke mutabiq asal khaaka).",
+            "long_description": "Is tarah ka khaaka, entities ke liye dabbe, attributes ke liye ovals aur relationships ke liye heere, entity-relationship (ER) diagram kehlata hai."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Relational databases samajhna"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Relational database: data rows aur columns wale tables mein rakhta aur tables ko rishton se jorta hai.",
+              "Table: rows (records) aur columns (fields) mein munazzam mutalliq data ka majmua.",
+              "Column: entity ki sifat, jaise naam ya umar.",
+              "Primary key: table ke har record ki munfarid pehchan.",
+              "Foreign key: woh field jo doosre table ki primary key ka hawala de kar tables ko jore."
+            ]
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch4-fig-tables-keys",
+            "alt": "Student table ke columns RollNo (primary key), Name, Age aur DeptID (foreign key), rows 101 Ibrahim 20 1, 102 Kamal 21 2, 103 Zainab 20 1 aur 104 Ayesha 22 3. Row 102 record ke taur par aur Name column (attribute) ke taur par ghera hua. 'DeptID refers to Department.DeptID' wala teer Department table tak, jis ki primary key DeptID, rows 1 Computer Science, 2 Electronics aur 3 Mechanical.",
+            "caption": "Tables, records, fields, primary aur foreign keys (Fig 4.3 ke mutabiq asal khaaka).",
+            "long_description": "Kamal ka DeptID 2 hai, aur Department mein 2 dekhne se Electronics milta hai: foreign key har student row mein department ka naam dohraye baghair dono tables jorne deti hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "SQL (Structured Query Language) relational databases ke saath kaam ki zaban hai; is ki commands data banati, parhti, badalti aur mitati hain."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Python ko database se jorna"
+          },
+          {
+            "type": "paragraph",
+            "text": "Kisi bhi data amal se pehle database se connection zaroori hai. sqlite3 library Python mein built-in hai aur chhote databases ke liye munasib hai: yeh poora database aik file mein rakhti hai. MySQL bare, pecheeda systems ke liye use hota hai; us ke connection ko database ka naam aur credentials jaisi tafseelat chahiye. Jurne ke baad Python data dal, nikal aur badal sakta hai, aur baad mein connection theek tarah band karna chahiye."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Misal: sqlite3 se table banana, data dalna aur parhna (Python code; har .... ek 4-space indent hai)",
+            "text": "import sqlite3\n\n# Connect to school.db (created automatically if missing)\nconnection = sqlite3.connect(\"school.db\")\ncursor = connection.cursor()     # runs SQL queries\n\ncursor.execute(\"\"\"CREATE TABLE IF NOT EXISTS students\n....(id INTEGER PRIMARY KEY, name TEXT, age INTEGER, grade TEXT)\"\"\")\n\n# (Optional) insert sample data\ncursor.execute(\"INSERT INTO students (name, age, grade) VALUES ('Ali', 14, '8th')\")\ncursor.execute(\"INSERT INTO students (name, age, grade) VALUES ('Sara', 15, '9th')\")\nconnection.commit()               # save changes\n\ncursor.execute(\"SELECT * FROM students\")\nrecords = cursor.fetchall()       # list of rows\nfor row in records:\n....print(row)\n\nconnection.close()"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Database se jurein: sqlite3.connect() school.db kholta hai.",
+              "Cursor banayein: cursor object SQL commands chalata hai.",
+              "Queries chalayein: CREATE TABLE, INSERT aur SELECT cursor.execute() se bheje jate hain.",
+              "Mehfooz karein: connection.commit() inserts ko pakka karta hai.",
+              "Nikal kar dikhayein: fetchall() tamam rows deta hai jo aik aik print hoti hain, maslan (1, 'Ali', 14, '8th').",
+              "Kaam ke baad connection band karein."
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Misal do dafa chalana",
+            "text": "INSERT lines har dafa program chalne par chalti hain, is liye doosri dafa chalane par Ali aur Sara naye ids ke saath dobara shamil ho jate hain. Asli programs dalne se pehle jaanchte hain, ya sirf user ke kehne par dalte hain."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "CRUD operations"
+          },
+          {
+            "type": "paragraph",
+            "text": "CRUD ka matlab Create, Read, Update aur Delete hai, jo mehfooz data par bunyadi amal hain (Fig 4.4 aur Table 4.1). Har database application maloomat durust aur taaza rakhne ke liye in par munhasir hai, aur Python cursor ke zariye SQL commands bhej kar yeh karta hai."
+          },
+          {
+            "type": "table",
+            "caption": "Table 4.1 CRUD operations",
+            "header": [
+              "Amal",
+              "SQL misal",
+              "Kya karta hai"
+            ],
+            "rows": [
+              [
+                "Create",
+                "INSERT INTO students (ID, Name, Age) VALUES (1, 'John', 20);",
+                "Table mein naya record dalta hai"
+              ],
+              [
+                "Read",
+                "SELECT * FROM students;",
+                "Table se data nikalta hai; data nahi badalta"
+              ],
+              [
+                "Update",
+                "UPDATE students SET Age = 21 WHERE ID = 1;",
+                "Maujooda record badalta hai; sirf shart se milti rows badalti hain"
+              ],
+              [
+                "Delete",
+                "DELETE FROM students WHERE ID = 1;",
+                "Record mitata hai; shart tay karti hai kaun si rows mitein"
+              ]
+            ]
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch4-fig-crud",
+            "alt": "Darmiyan chhota students table (ID, Name, Age: 1 Ibrahim 25, 2 Zainab 30, 3 Kiran 28) jis ki taraf chaar teer: oopar Create (INSERT ...) aur Read (SELECT ...), neeche Update (UPDATE ...) aur Delete (DELETE ...). Note: Read data nahi badalta, jab ke Create, Update aur Delete badalte aur commit() chahte hain.",
+            "caption": "Table par chaar CRUD operations (Fig 4.4 ke mutabiq asal khaaka).",
+            "long_description": "Chaar mein se teen amal table badalte hain; isi liye Python ko un ke baad commit() call karna parta hai."
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "Create (naye records): SQL INSERT commands naya data rakhti hain jo chalne ke baad table ka hissa ban jata hai.",
+              "Read (data nikalna aur dikhana): SQL SELECT commands mehfooz records nikalti hain; Python nataij process karta hai.",
+              "Update (maujooda records badalna): mehfooz maloomat durust karni ho to SQL UPDATE commands chune hue records badalti hain; sirf muqarrara data badalta hai.",
+              "Delete (mehfooz tareeqe se mitana): shart wali SQL DELETE commands sirf chune hue records mitati hain; ehtiyat se istemal ahem data zaya hone se bachata hai."
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Class activity",
+            "text": "Kisi talib-e-ilm ke number update karein aur naya data dikhayein."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Misal: record mitana (Python code; har .... ek 4-space indent hai)",
+            "text": "import sqlite3\n\nconnection = sqlite3.connect(\"school.db\")\ncursor = connection.cursor()\n\n# Delete the student with ID = 1\ncursor.execute(\"DELETE FROM students WHERE ID = 1\")\nconnection.commit()               # without commit() the delete is not permanent\nprint(\"Record deleted successfully\")\n\nconnection.close()"
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "UPDATE aur DELETE ke saath hamesha WHERE shart",
+            "text": "WHERE ke baghair DELETE FROM students; har row mita deta hai, aur WHERE ke baghair UPDATE har row badal deta hai. Command chalane se pehle shart jaanch lein."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Users ki qeematein: placeholders use karein",
+            "text": "Jab qeematein user se aayein to unhein SQL text mein jorne ke bajaye alag bhejein, maslan cursor.execute(\"SELECT * FROM students WHERE name = ?\", (name,)). ? placeholder likhe gaye text ko command badalne (SQL injection) se rokta hai."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch4-fig-db-steps",
+            "alt": "Teeron se jure chhe dabbe: 1 connect (sqlite3.connect('school.db')), 2 cursor (connection.cursor()), 3 execute (cursor.execute(sql)), 4 commit (connection.commit()), 5 fetch (cursor.fetchall()), 6 close (connection.close()). Note: commit() INSERT, UPDATE aur DELETE jaisi tabdeeliyan mehfooz karta, aur fetchall() SELECT ki rows list ki shakal mein deta.",
+            "caption": "Python se database use karne ke qadam (connection misal ke mutabiq asal khaaka).",
+            "long_description": "Is chapter ki har sqlite3 misal mein yahi chhe qadam hain; sirf qadam 3 ka SQL badalta hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "students table mein Sara ka grade '10th' karne ka SQL likhein, aur batayein ke baad mein Python ko kya call karna hoga.",
+            "explanation": "UPDATE students SET grade = '10th' WHERE name = 'Sara'; phir connection.commit() taake tabdeeli mehfooz ho."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Primary key aur foreign key mein kya farq hai?",
+            "explanation": "Primary key apne table ke har record ki munfarid pehchan hai (jaise RollNo); foreign key aik table ki field hai jo tables jorne ke liye doosre table ki primary key rakhti hai (jaise Student mein DeptID)."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Fauri khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Database: munazzam data; entity, attribute, relationship, identifier.",
+              "Relational tables: rows (records), columns (fields), primary aur foreign keys; SQL in se kaam karti.",
+              "sqlite3: connect, cursor, execute, commit, fetch, close.",
+              "CRUD: INSERT, SELECT, UPDATE, DELETE (WHERE use karein)."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
