@@ -1,0 +1,183 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH7-7.3",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch7",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch7/7.3",
+      "title": "7.3 Concepts in Hypothesis Testing",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 95,
+          "pdf_to": 97,
+          "note": "Topic 7.3 (PDF 95-97) with the t-test and chi-square examples checked against the page images; no book figure. The decisions for both examples (critical values 2.06 and 11.07) are added, with original figures for the critical region and the die. Short Q4-6, Long Q3 and MCQs 4-7 are answered here."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Hypothesis testing uses a few key concepts together to reach correct decisions: test statistics, the critical region, the significance level and the p-value."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Test statistics"
+          },
+          {
+            "type": "paragraph",
+            "text": "A test statistic is a number calculated from sample data that summarises how far the results are from what H0 expects. Different tests use different statistics, for example the t-value, the chi-square value and the F-value."
+          },
+          {
+            "type": "table",
+            "caption": "Two test statistics",
+            "header": [
+              "Test",
+              "Formula",
+              "Symbols"
+            ],
+            "rows": [
+              [
+                "t-test",
+                "t = (x_bar - mu_0) / (s / sqrt(n))",
+                "x_bar: sample mean; mu_0: population mean under H0; s: sample standard deviation; n: sample size"
+              ],
+              [
+                "Chi-square test",
+                "chi^2 = sum of (O_i - E_i)^2 / E_i",
+                "O_i: observed frequency in each category; E_i: expected frequency in each category"
+              ]
+            ]
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Worked example: t-test"
+          },
+          {
+            "type": "paragraph",
+            "text": "A sample of 25 students has a mean score of 80. Is this significantly different from the population mean of 75, if the sample standard deviation is 10? t = (80 - 75) / (10 / sqrt(25)) = 5 / (10 / 5) = 5 / 2 = 2.5. With 24 degrees of freedom the two-tailed critical value at alpha = 0.05 is about 2.06, so t = 2.5 lies in the critical region and H0 is rejected: the mean does differ from 75."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Worked example: chi-square test"
+          },
+          {
+            "type": "table",
+            "caption": "A die rolled 60 times",
+            "header": [
+              "Face",
+              "Observed O",
+              "Expected E",
+              "(O - E)^2 / E"
+            ],
+            "rows": [
+              [
+                "1",
+                "10",
+                "10",
+                "0"
+              ],
+              [
+                "2",
+                "12",
+                "10",
+                "0.4"
+              ],
+              [
+                "3",
+                "8",
+                "10",
+                "0.4"
+              ],
+              [
+                "4",
+                "14",
+                "10",
+                "1.6"
+              ],
+              [
+                "5",
+                "9",
+                "10",
+                "0.1"
+              ],
+              [
+                "6",
+                "7",
+                "10",
+                "0.9"
+              ],
+              [
+                "Total",
+                "60",
+                "60",
+                "3.4"
+              ]
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "So chi^2 = 3.4. It is compared with the critical value from the chi-square table for the chosen significance level (alpha = 0.05) and the degrees of freedom (6 faces - 1 = 5). That critical value is 11.07; since 3.4 < 11.07, H0 (the die is fair) is not rejected."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch7-fig-chi-square",
+            "alt": "A bar chart of the observed frequencies of the six faces in 60 rolls (10, 12, 8, 14, 9 and 7) with a dashed line at the expected 10. A box shows the working: 0 + 0.4 + 0.4 + 1.6 + 0.1 + 0.9 = 3.4; df = 5; critical value at alpha 0.05 = 11.07. A note says 3.4 < 11.07, so H0 (the die is fair) is not rejected.",
+            "caption": "A chi-square test of a die (original diagram after the die example).",
+            "long_description": "Even a fair die never gives exactly 10 of each face in 60 rolls; the test asks whether the differences are bigger than chance would usually produce."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Critical region, significance level and p-value"
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "Critical region: the range of extreme values of the test statistic for which H0 is rejected. It is fixed before testing and depends on the significance level; graphs often show it.",
+              "Significance level (alpha): the largest risk we accept of rejecting H0 when it is actually true; a common value is 0.05. A lower alpha means a stricter test. It is chosen before the analysis.",
+              "p-value: the probability of getting the observed result, or a more extreme one, if H0 is true. A small p-value is strong evidence against H0, because such a result would rarely happen by chance. If the p-value is less than alpha, H0 is rejected."
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "For example, a teacher tests whether a new teaching method improves marks; H0 says it has no effect. If the analysis gives p = 0.03, then since 0.03 < 0.05, H0 is rejected: there is statistical evidence that the method improved performance. In medicine, a p-value of 0.01 when comparing a new drug with an old one gives strong evidence that the improvement is not due to chance alone. Understanding p-values helps avoid rejecting or accepting a hypothesis without proper evidence."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch7-fig-critical-region",
+            "alt": "A bell-shaped curve shows the values of the test statistic expected if H0 is true. Beyond a dashed line marked critical value, the right tail is shaded red as the critical region with area alpha = 0.05. A purple line marks the test statistic inside the critical region, and the small purple area beyond it is the p-value. A note: test statistic in the critical region (p-value < alpha) means reject H0; otherwise do not reject H0.",
+            "caption": "The critical region and the p-value (original diagram after 7.3).",
+            "long_description": "The two rules are the same decision: a test statistic beyond the critical value always has a p-value smaller than alpha."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "A test gives p = 0.08 with alpha = 0.05. What is the decision, and does it prove H0 is true?",
+            "explanation": "Since 0.08 is greater than 0.05, H0 is not rejected. This does not prove H0 is true; it only means the data did not give strong enough evidence against it."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Quick recap"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Test statistic: a number from the sample, e.g. t = (x_bar - mu_0) / (s / sqrt(n)), chi^2 = sum (O - E)^2 / E.",
+              "Critical region: values that lead to rejecting H0; alpha (often 0.05) sets its size.",
+              "p-value < alpha: reject H0."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
