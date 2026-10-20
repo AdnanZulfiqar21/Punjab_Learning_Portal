@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH5-BREAKPOINTS-AND-WATCHES-RU",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch5",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch5/u-using-breakpoints-and-watches",
+      "title": "Breakpoints aur watches ka istemal (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-CS-CH5-BREAKPOINTS-AND-WATCHES",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 66,
+          "pdf_to": 68,
+          "note": "Roman Urdu explanation of breakpoints, watches and step-by-step debugging (PDF 66-68)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Breakpoints aur watches debugging ke tools hain jo program rok kar chuni hui jagahon par us ka data dekhne dete hain. Yeh ghaltiyan dhoondne aur code ka bahao dikhane mein madad dete aur debugging ko tez aur durust banate hain."
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Breakpoint: nishan jo chuni hui line par program rok deta hai. PyCharm ya VS Code jaise IDEs mein line number ke saath haashiye mein click kar ke lagta hai. Program wahan pohanch kar ruk jata hai aur maujooda halat (variables ki qeematein) dekhi ja sakti hai, is liye code ke aik hisse par tawajjuh di ja sakti hai.",
+              "Watch expression: program chalte waqt variable ya expression ki qeemat par nazar rakhta aur qeemat badalne par khud update hota hai, is liye ghair-mutawaqqa qeematein qadam ba qadam pakri ja sakti hain.",
+              "Qadam ba qadam debugging: code aik line ya function aik waqt mein chalata hai taake program ki mantiq follow ho aur theek pata chale ke ghalti kahan hai."
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Misal: debug karne ke liye program (Python code; har .... ek 4-space indent hai)",
+            "text": "def calculate_area(radius):\n....# Set a breakpoint here to check the value of radius\n....area = 3.14 * radius ** 2\n....return area\n\ndef main():\n....# Step-by-step debugging starts here\n....radius = 5\n....print(\"Area of circle:\", calculate_area(radius))   # 78.5\n....radius = 10\n....print(\"Area of circle:\", calculate_area(radius))   # 314.0\n\nif __name__ == \"__main__\":\n....main()"
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "calculate_area(radius) 3.14 * radius ** 2 nikal kar wapas deta hai; main() ise pehle radius 5 aur phir 10 se test karta hai.",
+              "radius = 5 aur radius = 10 wali lines ke saath click kar ke breakpoints lagayein; program wahan rukta aur variables dekhe ja sakte hain.",
+              "radius (aur area) ki watch lagayein taake program chalte hue radius 5 se 10 hota dikhe.",
+              "Step Into function, jaise calculate_area(), ke andar jata hai; Step Over maujooda line chala kar functions ke andar gaye baghair agli line par jata hai; Continue agle breakpoint tak chalata hai."
+            ]
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch5-fig-debugging",
+            "alt": "Code panel mein calculate_area aur main, area = 3.14 * radius ** 2, radius = 5 aur radius = 10 ke saath surkh breakpoint nuqte; area wali line numayan, jahan program ruka hai. Watches panel: radius = 5 aur area = 78.5, agli dafa radius = 10, area = 314.0. Buttons Step Into (calculate_area() ke andar), Step Over (yeh line chala kar agli) aur Continue (agle breakpoint tak) samjhaye gaye.",
+            "caption": "IDE mein breakpoints, watches aur stepping (Fig 5.2 ke mutabiq asal khaaka).",
+            "long_description": "Area wali line par ruk kar radius dekhne se foran pata chalta hai ke function ko mutawaqqa qeemat mili ya nahi; agar nahi, to bug call karne wale mein hai, formula mein nahi."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Debugging ke dauran watch calculate_area() ke andar radius = 0 dikhati hai halanke main() ne radius = 5 rakha tha. Ab Step Into use karein ya Step Over, aur bug ghaliban kahan hai?",
+            "explanation": "Ghalat qeemat function tak pohanchti hai, is liye bug call mein ya radius ko pehle badalne wale code mein hai; dobara chalayein, main() mein rokein aur radius dekhte hue line ba line Step Over karein jab tak woh 5 se 0 na ho."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Fauri khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Breakpoint: line par program rokta (IDE ke haashiye mein click).",
+              "Watch: variable ki badalti qeemat dikhati.",
+              "Step Into, Step Over, Continue qadam ba qadam debugging chalate."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

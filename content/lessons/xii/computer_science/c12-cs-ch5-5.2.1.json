@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH5-5.2.1",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch5",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch5/5.2.1",
+      "title": "5.2.1 Importance of Testing and Debugging",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 64,
+          "pdf_to": 65,
+          "note": "Topic 5.2.1 with the Class Activity (PDF 64-65); Fig 5.1 redrawn and also carried as a table. Short Q1-2 and Long Q1-2 are answered here. The resource-leak example and check question are added."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Testing and debugging are essential to make sure an application works correctly in all conditions. They find and remove errors before the software is released; regular testing prevents unexpected failures during use, and debugging locates the cause of an error and fixes it. Together they increase reliability and user confidence."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Class activity",
+            "text": "Discuss situations where errors cause failures, and explain why testing is important."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Why testing is essential"
+          },
+          {
+            "type": "paragraph",
+            "text": "Testing checks whether an application meets its requirements and that every function gives correct results. It reduces the risk of crashes or wrong output, and it confirms that changes have not broken features that already worked. Thoroughly tested applications are more trustworthy and stable."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Common programming errors and bugs"
+          },
+          {
+            "type": "table",
+            "caption": "Types of program error",
+            "header": [
+              "Error",
+              "What happens",
+              "Example"
+            ],
+            "rows": [
+              [
+                "Syntax error",
+                "The code breaks the language's rules, so the program does not run at all",
+                "if x > 5 without the colon: SyntaxError"
+              ],
+              [
+                "Runtime error",
+                "An invalid operation happens while the program runs, and it stops",
+                "a = 10; b = 0; result = a / b gives ZeroDivisionError"
+              ],
+              [
+                "Logic error",
+                "The program runs but gives the wrong result",
+                "area = length + width instead of length * width"
+              ],
+              [
+                "Other bugs",
+                "Data errors (wrong or badly formatted data) and resource leaks (files or connections never closed)",
+                "A file left open uses memory until the program ends"
+              ]
+            ]
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch5-fig-error-types",
+            "alt": "Three panels with short code. Logic error: length = 5, width = 3, area = length + width (highlighted), print(area) gives 8; it runs but the answer is wrong; fix area = length * width (15). Runtime error: a = 10, b = 0, result = a / b (highlighted); it stops while running with ZeroDivisionError. Syntax error: x = 7, if x > 5 (highlighted, missing colon), print; it will not run at all: SyntaxError.",
+            "caption": "Logic, runtime and syntax errors (original diagram after Fig 5.1).",
+            "long_description": "Python reports syntax and runtime errors itself, but it cannot know that a formula is wrong; only testing the results catches logic errors."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "A program to average two marks prints 140 for marks 60 and 80. Which kind of error is this, and what is the likely fix?",
+            "explanation": "A logic error: the program runs but the result is wrong. It probably computes the sum and does not divide by 2; the fix is average = (a + b) / 2, which gives 70."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Quick recap"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Testing finds errors before release and checks that changes break nothing.",
+              "Syntax errors stop the program running; runtime errors stop it mid-way; logic errors give wrong results.",
+              "Other bugs: data errors, resource leaks."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

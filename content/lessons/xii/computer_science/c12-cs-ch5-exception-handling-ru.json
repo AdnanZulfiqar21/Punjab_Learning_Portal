@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH5-EXCEPTION-HANDLING-RU",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch5",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch5/u-exception-handling",
+      "title": "Exception handling (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-CS-CH5-EXCEPTION-HANDLING",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 68,
+          "pdf_to": 69,
+          "note": "Roman Urdu explanation of exception handling (PDF 68-69)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Exception handling program chalte waqt hone wali ghaltiyon ko sambhalti hai. Yeh program ko crash hone se rokti aur ghair-mutawaqqa suraton mein saleeqe se jawab dene deti hai, jis se aitbaar aur user ka tajurba behtar hota hai. Python exceptions pakarne aur sambhalne ke built-in tools deta hai."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Dilchasp baat",
+            "text": "Exception handling programs ko achanak ruke baghair ghair-mutawaqqa masail sambhalne deti hai."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Misal: try, except aur finally se mehfooz database insert (Python code; har .... ek 4-space indent hai)",
+            "text": "import sqlite3\n\ntry:\n....connection = sqlite3.connect(\"school.db\")\n....cursor = connection.cursor()\n....cursor.execute(\"INSERT INTO students (ID, Name, Age) VALUES (?, ?, ?)\", (1, \"Ali\", 20))\n....connection.commit()             # save changes (keeps data correct)\n....print(\"Data inserted successfully\")\nexcept sqlite3.Error as e:\n....print(\"Error occurred:\", e)\n....connection.rollback()           # undo changes if an error occurs\nfinally:\n....if connection:\n........connection.close()\n........print(\"Connection closed\")"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "try-except ghaltiyan sambhalta aur crash rokta hai.",
+              "commit() durust data mehfooz kar ke database yaksan rakhta hai.",
+              "rollback() ghalti hone par tabdeeliyan mansookh karta hai.",
+              "finally hamesha chalta hai, is liye database mehfooz tareeqe se band hota hai."
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Agar connection hi nakam ho",
+            "text": "Agar sqlite3.connect() khud nakam ho to connection ka naam banta hi nahi, is liye finally mein 'if connection:' NameError deta hai, aur except wala rollback bhi isi tarah nakam hota hai. try se pehle connection = None likhna, aur rollback se pehle bhi 'if connection:', ise theek karta hai."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch5-fig-exceptions",
+            "alt": "Flow chart. try: connect, insert, commit. Ghalti na ho to teer commit() data mehfooz karta ('Data inserted successfully') tak. sqlite3.Error aaye to teer except: ghalti dikhao, rollback() tabdeeliyan wapas tak. Dono raste finally: connection band karo tak, jo ghalti ho ya na ho chalta hai. Note: program crash nahi hota kyunke har rasta finally par khatam hota hai.",
+            "caption": "try, except aur finally ke raste (exception misal ke mutabiq asal khaaka).",
+            "long_description": "Pehle se maujood ID wala record dalne par sqlite3.IntegrityError aata hai jo sqlite3.Error ki aik qism hai, is liye yeh program use batata, rollback karta aur phir bhi database band karta hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Class activity",
+            "text": "Aisa Python program likhein jo user se do numbers le aur exception handling se ghalat input ya zero se taqseem ki koshish par ghalti ka paigham dikhaye."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Kai qism ke exceptions sambhalna"
+          },
+          {
+            "type": "paragraph",
+            "text": "Program ko mukhtalif qism ke exceptions pesh aa sakte hain. Python aik try block ke saath kai except blocks rakhne deta hai, har aik aik qism ke exception ka munasib jawab deta hai. Yeh achanak crash rokta, theek bahali mumkin banata aur ghaltiyon par behtar control deta hai."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Izafi misal: class activity, do qism ke exceptions ke saath (Python code; har .... ek 4-space indent hai)",
+            "text": "try:\n....a = int(input(\"First number: \"))\n....b = int(input(\"Second number: \"))\n....print(\"Result:\", a / b)\nexcept ValueError:\n....print(\"Please enter whole numbers only.\")\nexcept ZeroDivisionError:\n....print(\"You cannot divide by zero.\")"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Izafi misal mein agar user pehle number ke liye 'ten' likhe to kya print hoga, aur agar 8 aur 0 likhe to?",
+            "explanation": "'ten' int() se badla nahi ja sakta, is liye ValueError pakra jata aur 'Please enter whole numbers only.' print hota hai. 8 aur 0 par a / b ZeroDivisionError deta hai, is liye 'You cannot divide by zero.' print hota hai. Dono suraton mein program crash ke bajaye theek khatam hota hai."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Fauri khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "try mein woh code jo nakam ho sakta; except naam wali ghalti sambhalta; finally hamesha chalta.",
+              "commit() achhi tabdeeliyan mehfooz; rollback() ghalti ke baad wapas.",
+              "Kai except blocks kai qism ke exceptions sambhalte."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

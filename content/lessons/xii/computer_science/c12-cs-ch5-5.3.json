@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH5-5.3",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch5",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch5/5.3",
+      "title": "5.3 Profiling and Optimization",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 69,
+          "pdf_to": 73,
+          "note": "Topic 5.3 with the Do You Know (PDF 69-72); Figs 5.3 and 5.4 redrawn, with the profiling listing checked against the page images and the book's sample output used in Fig 5.3. Short Q10 is answered here. The tottime note and check question are added."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Profiling and optimisation improve a program's speed and efficiency. Profiling measures how much time and how many resources each part of the code uses; optimisation makes the slow or resource-heavy parts faster. Regular profiling keeps code efficient as it grows."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Do you know?",
+            "text": "Profiling helps find the slow parts of a program so that they can be improved for better performance."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Example: a nested loop (Python code; each .... is one 4-space indent)",
+            "text": "for i in range(10000):\n....for j in range(10000):\n........pass    # some repeated task"
+          },
+          {
+            "type": "paragraph",
+            "text": "The outer loop runs 10,000 times, and for every one of those the inner loop runs 10,000 times, so the inner statement runs 10,000 x 10,000 = 100,000,000 (one hundred million) times. Such a slow part of the code is called a performance bottleneck; profiling tools help programmers find bottlenecks so that the code can be optimised."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Measuring performance with profiling tools"
+          },
+          {
+            "type": "paragraph",
+            "text": "Profiling tools record the execution time (and sometimes memory use) of each function. Python provides cProfile, which reports how long every function takes, and timeit, which times a small piece of code over many runs. Their reports show which parts are slow (Fig 5.3), so optimisation effort goes where it matters most."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Finding and fixing bottlenecks"
+          },
+          {
+            "type": "paragraph",
+            "text": "Bottlenecks are the sections that slow the whole program; profiling reports locate them. They are fixed by improving the algorithm, removing unnecessary operations or using more efficient data structures, which speeds up the whole program. Testing performance is a cycle: run a benchmark, profile, find the bottleneck, fix it, tune, and verify the results (Fig 5.4)."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Example: profiling a slow and a fast sum (Python code; each .... is one 4-space indent)",
+            "text": "import cProfile\nimport timeit\n\ndef slow_sum(numbers):\n....total = 0\n....for num in numbers:          # adds one by one in a loop\n........total = total + num\n....return total\n\ndef fast_sum(numbers):\n....return sum(numbers)          # built-in, already optimised\n\ndef main():\n....numbers = list(range(1, 1000000))\n....print(\"Slow code result:\", slow_sum(numbers))\n....print(\"Fast code result:\", fast_sum(numbers))\n\nprint(\"Profiling Report:\")\ncProfile.run(\"main()\")\n\nnumbers = list(range(1, 1000000))\nslow_time = timeit.timeit(lambda: slow_sum(numbers), number=10)\nfast_time = timeit.timeit(lambda: fast_sum(numbers), number=10)\nprint(\"Slow code time:\", slow_time)\nprint(\"Fast code time:\", fast_time)"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Both functions give the same result, 499999500000 (the sum of 1 to 999,999).",
+              "cProfile's report shows how much time each function took; slow_sum() takes the most, so it is the bottleneck.",
+              "timeit runs each function 10 times; in the book's sample run the loop took about 0.42 s and sum() about 0.09 s. Exact times differ on every computer.",
+              "fast_sum() is faster because Python's built-in sum() is already optimised."
+            ]
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch5-fig-profiling",
+            "alt": "Left: a sample cProfile report table with columns function, calls, tottime and cumtime: main 1, 0.000, 0.080; slow_sum 1, 0.050, 0.050 (highlighted as the bottleneck); fast_sum 1, 0.010, 0.010; built-in sum 1, 0.010, 0.010. Right: a timeit bar chart for 10 runs each, slow_sum (loop) 0.42 s and fast_sum (sum()) 0.09 s. A note says both give 499999500000 and times differ on every computer.",
+            "caption": "Profiling finds the bottleneck (original diagram after Fig 5.3 and the profiling example).",
+            "long_description": "tottime is the time spent inside a function itself; cumtime also includes the functions it calls, which is why main has a tiny tottime but the largest cumtime."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch5-fig-perf-cycle",
+            "alt": "Six boxes around a circle with arrows going clockwise: benchmark run, profile the program, find the bottleneck, fix it, tune and refine, verify the results, and back to benchmark run. The centre reads measure, fix, measure again.",
+            "caption": "The performance test cycle (original diagram after Fig 5.4).",
+            "long_description": "Every fix must be measured again: a change that seems faster can sometimes be slower, or can break the program's results."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "A program checks every pair of 5,000 students with two nested loops. How many comparisons is that, and why might it be a bottleneck?",
+            "explanation": "5,000 x 5,000 = 25,000,000 comparisons (about half that if each pair is checked once). The work grows with the square of the number of students, so doubling the class makes it four times slower; profiling would show this loop taking most of the time."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Quick recap"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Profiling measures time and resources per function (cProfile, timeit).",
+              "A bottleneck is the slowest part; nested loops are common culprits.",
+              "Fix bottlenecks with better algorithms or built-ins, then measure again."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
