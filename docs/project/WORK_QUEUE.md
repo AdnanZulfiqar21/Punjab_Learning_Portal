@@ -1,5 +1,13 @@
 # Work queue (every roadmap task)
 
+**20 October 2026 — the whole Class XII Chemistry book drafted.** Chapters 17 to 33 authored like the Biology XII book (CHEM-XII-BOOK-01): PRs #314 and #316 to #331 merged on green CI.
+
+| Slice | Code | Tested | Device |
+|---|---|---|---|
+| Chemistry XII chapters 17 to 33: 232 topics as English and Roman Urdu (glossed) drafts, coverage registers, 166 original 2D figures | Imported into `portal` (dev) chapter by chapter (`--subject chemistry --grade 12`) | CI content, api and web jobs green on each chapter PR; contact sheets checked for every figure | Not walked on the phone |
+
+Open: academic review of all 17 chapters, starting with the flagged findings and the derived answers; owner's Class XII lecture videos; Physics XII is next, with Chapter 13 in PR #332 and Chapter 14 in PR #333.
+
 **20 October 2026 — the whole Class XII Biology book drafted.** Chapters 13 to 25 authored like the Class XI books (BIO-XII-BOOK-01): PRs #295, #301 and #303 to #313 merged on green CI.
 
 | Slice | Code | Tested | Device |
