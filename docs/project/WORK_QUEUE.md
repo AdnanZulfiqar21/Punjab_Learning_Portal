@@ -6,7 +6,7 @@
 |---|---|---|---|
 | Physics XI (108 diagrams, 2 models), Chemistry XI (84 diagrams, 3 models), Biology XI (18 diagrams, 1 reused) in English and Roman Urdu with coverage updates | Imported into `portal` (dev) as whole-book batches | CI content, api and web jobs green on each PR; contact sheets checked against the lesson text | Not walked on the phone |
 
-Open: academic review of the figures with their lessons; photographs (11 Physics, 2 Chemistry, 27 Biology) stay development-only book references; Class XII resumes at Biology Chapter 14.
+Open: academic review of the figures with their lessons; photographs (11 Physics, 2 Chemistry, 27 Biology) stay development-only book references; Class XII resumed: Biology Chapter 14 is PR #301.
 
 **19 October 2026 (night) — the whole Class XI Computer Science book drafted.** Chapters 1 to 9 authored like the Physics book (CS-XI-BOOK-01): PRs #285 to #293 merged on green CI.
 
