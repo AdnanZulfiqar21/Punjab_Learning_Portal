@@ -1,5 +1,13 @@
 # Work queue (every roadmap task)
 
+**20 October 2026 — the whole Class XII Physics book drafted.** Chapters 13 to 21 authored like the Chemistry XII book (PHY-XII-BOOK-01): PRs #332, #333 and #335 to #341 merged on green CI.
+
+| Slice | Code | Tested | Device |
+|---|---|---|---|
+| Physics XII chapters 13 to 21: 94 topics as English and Roman Urdu (glossed) drafts, coverage registers, 86 original 2D figures | Imported into `portal` (dev) chapter by chapter (`--subject physics --grade 12`) | CI content, api and web jobs green on each chapter PR; contact sheets checked for every figure | Not walked on the phone |
+
+Open: academic review of all 9 chapters, starting with the flagged findings, the added worked examples and the derived answers; owner's Class XII lecture videos; Computer Science XII is next and last.
+
 **20 October 2026 — the whole Class XII Chemistry book drafted.** Chapters 17 to 33 authored like the Biology XII book (CHEM-XII-BOOK-01): PRs #314 and #316 to #331 merged on green CI.
 
 | Slice | Code | Tested | Device |
