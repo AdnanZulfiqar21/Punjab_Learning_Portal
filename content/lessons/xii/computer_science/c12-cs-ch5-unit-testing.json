@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH5-UNIT-TESTING",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch5",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch5/u-unit-testing",
+      "title": "Unit Testing",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 65,
+          "pdf_to": 66,
+          "note": "Unnumbered heading 'Unit Testing' (PDF 65-66) with the pytest listing checked against the page image. The unittest example, install note and check question are added. Short Q3-5 and Long Q3-4 are answered here."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "callout",
+            "tone": "definition",
+            "title": "Unit testing",
+            "text": "Unit testing is testing the individual parts (units) of a program, such as single functions, separately to check that each works correctly."
+          },
+          {
+            "type": "paragraph",
+            "text": "Unit testing catches errors early and makes debugging easier. Python's modules automate testing of functions and methods, checking whether each component produces the expected output; clear, simple test cases improve reliability."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Python's unittest and pytest"
+          },
+          {
+            "type": "paragraph",
+            "text": "unittest is built into Python and provides a framework of test-case classes. pytest is an external module (installed with pip install pytest) that makes tests simpler to write and run. Both verify that code behaves as expected, for single functions, classes or whole modules, and they improve stability in larger applications."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Writing and running test cases"
+          },
+          {
+            "type": "paragraph",
+            "text": "A test case gives a function specific inputs and states the expected output; for example, a calculator can be tested on addition and subtraction. Python runs the tests and reports any failures or errors. Running the tests again after every change shows that existing features still work, and automated running saves time."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Example: functions and their pytest tests (Python code; each .... is one 4-space indent)",
+            "text": "# Functions to test\ndef add(a, b):\n....return a + b\n\ndef multiply(a, b):\n....return a * b\n\n# pytest finds and runs functions whose names start with test\ndef test_add():\n....assert add(2, 3) == 5          # passes: 2 + 3 = 5\n\ndef test_multiply():\n....assert multiply(2, 3) == 6     # passes: 2 * 3 = 6"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "pytest needs no test-case classes or extra boilerplate, unlike unittest: tests are plain functions.",
+              "assert checks whether the output is correct; if the condition is false, the test fails.",
+              "To run the tests, type pytest in the command line in the folder that holds the test file."
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Added example: the same test with unittest (Python code; each .... is one 4-space indent)",
+            "text": "import unittest\n\nclass TestCalc(unittest.TestCase):\n....def test_add(self):\n........self.assertEqual(add(2, 3), 5)\n\nif __name__ == \"__main__\":\n....unittest.main()"
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch5-fig-unit-test",
+            "alt": "Top left, the code under test (calc.py): add returns a + b and multiply returns a * b. Below, the tests (test_calc.py): test_add asserts add(2, 3) == 5 and test_multiply asserts multiply(2, 3) == 6. An arrow labelled finds test_ functions leads to > pytest in the terminal, which reports test_add PASS, test_multiply PASS, 2 passed. A note: assert checks one expected result; if add() returned a - b, test_add would fail and show both values.",
+            "caption": "Unit testing with pytest (original diagram after the testing example).",
+            "long_description": "Keeping tests in their own file means they can be run after every change in a second; any test that fails points straight to the function that broke."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Write a pytest test that checks a function square(n) returns 49 for 7. What happens if square is written as n * 2?",
+            "explanation": "def test_square(): assert square(7) == 49. With n * 2 the function returns 14, so the assert is false and pytest reports the test as failed, showing 14 != 49."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Quick recap"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Unit test: check one function or method at a time.",
+              "unittest: built in, class-based; pytest: external, plain functions with assert.",
+              "Run tests after every change; pytest finds functions named test_..."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

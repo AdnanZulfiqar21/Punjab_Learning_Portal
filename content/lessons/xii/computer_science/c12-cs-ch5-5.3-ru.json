@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH5-5.3-RU",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch5",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch5/5.3",
+      "title": "5.3 Profiling aur optimisation (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-CS-CH5-5.3",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 69,
+          "pdf_to": 73,
+          "note": "Roman Urdu explanation of profiling and optimisation (PDF 69-72)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Profiling aur optimisation program ki raftar aur kaar-amadi behtar karti hain. Profiling napti hai ke code ka har hissa kitna waqt aur kitne wasail leta hai; optimisation sust ya wasail-khor hisson ko tez banati hai. Baqaida profiling code barhne ke saath use kaar-amad rakhti hai."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Kya aap jante hain?",
+            "text": "Profiling program ke sust hisse dhoondne mein madad deti hai taake behtar karkardagi ke liye unhein behtar kiya ja sake."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Misal: nested loop (Python code; har .... ek 4-space indent hai)",
+            "text": "for i in range(10000):\n....for j in range(10000):\n........pass    # some repeated task"
+          },
+          {
+            "type": "paragraph",
+            "text": "Bahar wala loop 10,000 dafa chalta hai, aur har dafa andar wala loop 10,000 dafa chalta hai, is liye andar ka statement 10,000 x 10,000 = 100,000,000 (das karor) dafa chalta hai. Code ka aisa sust hissa performance bottleneck kehlata hai; profiling tools programmers ko bottlenecks dhoondne mein madad dete hain taake code optimise ho sake."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Profiling tools se karkardagi napna"
+          },
+          {
+            "type": "paragraph",
+            "text": "Profiling tools har function ke chalne ka waqt (aur kabhi memory ka istemal) record karte hain. Python cProfile deta hai jo har function ka waqt batata hai, aur timeit jo code ke chhote hisse ka waqt bohat si dafa chala kar napta hai. In ki reports dikhati hain ke kaun se hisse sust hain (Fig 5.3), taake optimisation ki mehnat wahan ho jahan sab se zyada zaroori hai."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Bottlenecks dhoondna aur theek karna"
+          },
+          {
+            "type": "paragraph",
+            "text": "Bottlenecks woh hisse hain jo poore program ko sust karte hain; profiling reports unhein dhoondti hain. Inhein algorithm behtar kar ke, ghair zaroori amal hata kar ya zyada kaar-amad data structures use kar ke theek kiya jata hai, jis se poora program tez hota hai. Karkardagi ki testing aik chakkar hai: benchmark chalayein, profile karein, bottleneck dhoondein, theek karein, tune karein, aur nataij ki tasdeeq karein (Fig 5.4)."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Misal: sust aur tez sum ki profiling (Python code; har .... ek 4-space indent hai)",
+            "text": "import cProfile\nimport timeit\n\ndef slow_sum(numbers):\n....total = 0\n....for num in numbers:          # adds one by one in a loop\n........total = total + num\n....return total\n\ndef fast_sum(numbers):\n....return sum(numbers)          # built-in, already optimised\n\ndef main():\n....numbers = list(range(1, 1000000))\n....print(\"Slow code result:\", slow_sum(numbers))\n....print(\"Fast code result:\", fast_sum(numbers))\n\nprint(\"Profiling Report:\")\ncProfile.run(\"main()\")\n\nnumbers = list(range(1, 1000000))\nslow_time = timeit.timeit(lambda: slow_sum(numbers), number=10)\nfast_time = timeit.timeit(lambda: fast_sum(numbers), number=10)\nprint(\"Slow code time:\", slow_time)\nprint(\"Fast code time:\", fast_time)"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Dono functions aik hi nateeja dete hain, 499999500000 (1 se 999,999 tak ka jama).",
+              "cProfile ki report batati hai ke har function ne kitna waqt liya; slow_sum() sab se zyada leta hai, is liye yeh bottleneck hai.",
+              "timeit har function 10 dafa chalata hai; kitab ki namoona run mein loop ne taqreeban 0.42 s aur sum() ne taqreeban 0.09 s liye. Asal waqt har computer par mukhtalif hota hai.",
+              "fast_sum() tez hai kyunke Python ka built-in sum() pehle se optimise hai."
+            ]
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch5-fig-profiling",
+            "alt": "Baen: namoona cProfile report table, columns function, calls, tottime aur cumtime: main 1, 0.000, 0.080; slow_sum 1, 0.050, 0.050 (bottleneck ke taur par numayan); fast_sum 1, 0.010, 0.010; built-in sum 1, 0.010, 0.010. Daen: har aik ke 10 runs ka timeit bar chart, slow_sum (loop) 0.42 s aur fast_sum (sum()) 0.09 s. Note: dono 499999500000 dete aur waqt har computer par mukhtalif.",
+            "caption": "Profiling bottleneck dhoondti hai (Fig 5.3 aur profiling misal ke mutabiq asal khaaka).",
+            "long_description": "tottime function ke andar khud guzra waqt hai; cumtime mein woh functions bhi shamil hain jinhein yeh call karta hai, isi liye main ka tottime bohat kam magar cumtime sab se zyada hai."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch5-fig-perf-cycle",
+            "alt": "Daire ke gird chhe dabbe, teer ghari ki simt mein: benchmark run, program profile karein, bottleneck dhoondein, theek karein, tune aur behtar karein, nataij ki tasdeeq, phir wapas benchmark run. Darmiyan: napo, theek karo, dobara napo.",
+            "caption": "Karkardagi testing ka chakkar (Fig 5.4 ke mutabiq asal khaaka).",
+            "long_description": "Har durusti ko dobara napna zaroori hai: jo tabdeeli tez lagti hai woh kabhi sust bhi ho sakti hai, ya program ke nataij tor sakti hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Aik program 5,000 talaba ke har jore ko do nested loops se jaanchta hai. Yeh kitne muwazne hain, aur yeh bottleneck kyun ho sakta hai?",
+            "explanation": "5,000 x 5,000 = 25,000,000 muwazne (har jora aik dafa jaanchein to taqreeban aadhe). Kaam talaba ki tadaad ke murabba ke saath barhta hai, is liye class dugni karne se yeh chaar guna sust hota hai; profiling dikhayegi ke zyada tar waqt yahi loop leta hai."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Fauri khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Profiling har function ka waqt aur wasail napti (cProfile, timeit).",
+              "Bottleneck sab se sust hissa; nested loops aam wajah.",
+              "Behtar algorithms ya built-ins se bottlenecks theek karein, phir dobara napein."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
