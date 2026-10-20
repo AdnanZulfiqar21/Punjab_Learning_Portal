@@ -1,0 +1,263 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH4-4.2",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch4",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch4/4.2",
+      "title": "4.2 Working with Databases in Python",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 56,
+          "pdf_to": 61,
+          "note": "Topic 4.2 (PDF 56-61) with the Do You Know, Class Activity, Table 4.1 and code listings checked against the page images; Figs 4.3 and 4.4 redrawn, plus ER and database-steps figures. Warnings, a tip and check questions are added. Short Q9-10 and Long Q8 are answered here."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Working with databases in Python means storing and managing data in a database system. Python programs can connect to databases to insert, retrieve, update and delete data. Databases let applications handle large amounts of information efficiently and keep data accurate and consistent. Python supports database work through built-in and external libraries."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Do you know?",
+            "text": "Databases let programs store large amounts of information safely and retrieve it quickly when needed."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Introduction to databases"
+          },
+          {
+            "type": "callout",
+            "tone": "definition",
+            "title": "Database",
+            "text": "A database is an organised collection of data stored in a structured format, so that the data can be accessed and managed easily."
+          },
+          {
+            "type": "paragraph",
+            "text": "Databases reduce duplicated data, improve reliability and support secure storage, and they are used in many kinds of software."
+          },
+          {
+            "type": "table",
+            "caption": "Basic database ideas",
+            "header": [
+              "Idea",
+              "Meaning",
+              "Example"
+            ],
+            "rows": [
+              [
+                "Entity",
+                "A real-world object, person, place, event or concept about which data is stored",
+                "Student, Teacher, Course, Book, Employee"
+              ],
+              [
+                "Attribute",
+                "A property or characteristic of an entity",
+                "For Student: name, roll number, class, age"
+              ],
+              [
+                "Relationship",
+                "How two or more entities are connected",
+                "A Student enrols in a Course"
+              ],
+              [
+                "Identifier",
+                "An attribute that uniquely identifies each record of an entity",
+                "Roll number, because each student's is unique"
+              ]
+            ]
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch4-fig-er-concepts",
+            "alt": "A Student entity box is linked by an 'enrols in' relationship diamond to a Course entity box. Four attribute ovals hang from Student: Roll Number (underlined and labelled identifier, unique), Name, Class and Age. A key explains entity, attribute, relationship and identifier.",
+            "caption": "Entity, attribute, relationship and identifier (original diagram after 4.2).",
+            "long_description": "This style of drawing, with boxes for entities, ovals for attributes and diamonds for relationships, is called an entity-relationship (ER) diagram."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Understanding relational databases"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Relational database: stores data in tables of rows and columns and links the tables through relationships.",
+              "Table: a collection of related data organised in rows (records) and columns (fields).",
+              "Column: a property of an entity, such as name or age.",
+              "Primary key: a unique identifier for each record in a table.",
+              "Foreign key: a field that links one table to another by referring to the other table's primary key."
+            ]
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch4-fig-tables-keys",
+            "alt": "Table Student has columns RollNo (primary key), Name, Age and DeptID (foreign key) with rows 101 Ibrahim 20 1, 102 Kamal 21 2, 103 Zainab 20 1 and 104 Ayesha 22 3. Row 102 is outlined as a record and the Name column as a column (attribute). An arrow labelled DeptID refers to Department.DeptID runs to table Department, whose primary key DeptID has rows 1 Computer Science, 2 Electronics and 3 Mechanical.",
+            "caption": "Tables, records, fields, primary and foreign keys (original diagram after Fig 4.3).",
+            "long_description": "Kamal's DeptID is 2, and looking up 2 in Department gives Electronics: the foreign key lets the two tables be joined without repeating department names in every student row."
+          },
+          {
+            "type": "paragraph",
+            "text": "SQL (Structured Query Language) is the language used to work with relational databases; its commands create, read, update and delete data."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Connecting Python to a database"
+          },
+          {
+            "type": "paragraph",
+            "text": "A connection to the database is needed before any data operation. The sqlite3 library is built into Python and suits small databases: it keeps the whole database in a single file. MySQL is used for larger, more complex systems; its connection needs details such as the database name and credentials. Once connected, Python can add, retrieve and modify data, and the connection should be closed properly afterwards."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Example: create a table, insert and read with sqlite3 (Python code; each .... is one 4-space indent)",
+            "text": "import sqlite3\n\n# Connect to school.db (created automatically if missing)\nconnection = sqlite3.connect(\"school.db\")\ncursor = connection.cursor()     # runs SQL queries\n\ncursor.execute(\"\"\"CREATE TABLE IF NOT EXISTS students\n....(id INTEGER PRIMARY KEY, name TEXT, age INTEGER, grade TEXT)\"\"\")\n\n# (Optional) insert sample data\ncursor.execute(\"INSERT INTO students (name, age, grade) VALUES ('Ali', 14, '8th')\")\ncursor.execute(\"INSERT INTO students (name, age, grade) VALUES ('Sara', 15, '9th')\")\nconnection.commit()               # save changes\n\ncursor.execute(\"SELECT * FROM students\")\nrecords = cursor.fetchall()       # list of rows\nfor row in records:\n....print(row)\n\nconnection.close()"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Connect to the database: sqlite3.connect() opens school.db.",
+              "Create a cursor: the cursor object runs SQL commands.",
+              "Execute queries: CREATE TABLE, INSERT and SELECT are sent with cursor.execute().",
+              "Save: connection.commit() makes the inserts permanent.",
+              "Fetch and display: fetchall() returns all rows, printed one by one, for example (1, 'Ali', 14, '8th').",
+              "Close the connection when finished."
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Running the example twice",
+            "text": "The INSERT lines run every time the program runs, so a second run adds Ali and Sara again with new ids. Real programs check before inserting, or insert only when the user asks."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "CRUD operations"
+          },
+          {
+            "type": "paragraph",
+            "text": "CRUD stands for Create, Read, Update and Delete, the basic actions on stored data (Fig 4.4 and Table 4.1). Every database application depends on them to keep information accurate and up to date, and Python performs them by sending SQL commands through a cursor."
+          },
+          {
+            "type": "table",
+            "caption": "Table 4.1 CRUD operations",
+            "header": [
+              "Operation",
+              "SQL example",
+              "What it does"
+            ],
+            "rows": [
+              [
+                "Create",
+                "INSERT INTO students (ID, Name, Age) VALUES (1, 'John', 20);",
+                "Adds a new record to a table"
+              ],
+              [
+                "Read",
+                "SELECT * FROM students;",
+                "Retrieves data from a table; the data is not changed"
+              ],
+              [
+                "Update",
+                "UPDATE students SET Age = 21 WHERE ID = 1;",
+                "Modifies an existing record; only the rows matching the condition change"
+              ],
+              [
+                "Delete",
+                "DELETE FROM students WHERE ID = 1;",
+                "Removes a record; the condition limits which rows are removed"
+              ]
+            ]
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch4-fig-crud",
+            "alt": "A small students table (ID, Name, Age: 1 Ibrahim 25, 2 Zainab 30, 3 Kiran 28) in the middle with four arrows pointing to it: Create (INSERT ...) and Read (SELECT ...) at the top, Update (UPDATE ...) and Delete (DELETE ...) at the bottom. A note says Read does not change the data, while Create, Update and Delete do and need commit().",
+            "caption": "The four CRUD operations on a table (original diagram after Fig 4.4).",
+            "long_description": "Three of the four operations change the table; that is why Python must call commit() after them."
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "Create (adding new records): SQL INSERT commands store new data, which becomes part of the table once executed.",
+              "Read (retrieving and displaying data): SQL SELECT commands fetch stored records; Python processes the results.",
+              "Update (modifying existing records): SQL UPDATE commands change selected records when stored information needs correction; only the specified data changes.",
+              "Delete (removing data safely): SQL DELETE commands with conditions remove only the selected records; careful use prevents losing important data."
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Class activity",
+            "text": "Update a student's marks and display the updated data."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Example: deleting a record (Python code; each .... is one 4-space indent)",
+            "text": "import sqlite3\n\nconnection = sqlite3.connect(\"school.db\")\ncursor = connection.cursor()\n\n# Delete the student with ID = 1\ncursor.execute(\"DELETE FROM students WHERE ID = 1\")\nconnection.commit()               # without commit() the delete is not permanent\nprint(\"Record deleted successfully\")\n\nconnection.close()"
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Always use a WHERE condition with UPDATE and DELETE",
+            "text": "DELETE FROM students; with no WHERE removes every row, and UPDATE without WHERE changes every row. Check the condition before running the command."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Values from users: use placeholders",
+            "text": "When values come from a user, pass them separately instead of joining them into the SQL text, for example cursor.execute(\"SELECT * FROM students WHERE name = ?\", (name,)). The ? placeholder stops typed text from changing the command (SQL injection)."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch4-fig-db-steps",
+            "alt": "Six boxes in a row joined by arrows: 1 connect (sqlite3.connect('school.db')), 2 cursor (connection.cursor()), 3 execute (cursor.execute(sql)), 4 commit (connection.commit()), 5 fetch (cursor.fetchall()), 6 close (connection.close()). A note says commit() saves changes such as INSERT, UPDATE and DELETE, and fetchall() returns the rows of a SELECT as a list.",
+            "caption": "The steps of using a database from Python (original diagram after the connection example).",
+            "long_description": "The same six steps appear in every sqlite3 example in this chapter; only the SQL in step 3 changes."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Write the SQL to change Sara's grade to '10th' in the students table, and say what Python must call afterwards.",
+            "explanation": "UPDATE students SET grade = '10th' WHERE name = 'Sara'; then connection.commit() so the change is saved."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "What is the difference between a primary key and a foreign key?",
+            "explanation": "A primary key uniquely identifies each record in its own table (such as RollNo); a foreign key is a field in one table that holds another table's primary key (such as DeptID in Student) to link the tables."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Quick recap"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Database: organised data; entity, attribute, relationship, identifier.",
+              "Relational tables: rows (records), columns (fields), primary and foreign keys; SQL works with them.",
+              "sqlite3: connect, cursor, execute, commit, fetch, close.",
+              "CRUD: INSERT, SELECT, UPDATE, DELETE (use WHERE)."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
