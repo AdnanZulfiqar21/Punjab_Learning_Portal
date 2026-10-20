@@ -1,5 +1,13 @@
 # Work queue (every roadmap task)
 
+**20 October 2026 — the whole Class XII Biology book drafted.** Chapters 13 to 25 authored like the Class XI books (BIO-XII-BOOK-01): PRs #295, #301 and #303 to #313 merged on green CI.
+
+| Slice | Code | Tested | Device |
+|---|---|---|---|
+| Biology XII chapters 13 to 25: 216 topics as English and Roman Urdu (glossed) drafts, coverage registers, 125 original 2D figures | Imported into `portal` (dev) chapter by chapter (`--grade 12`) | CI content, api and web jobs green on each chapter PR; contact sheets checked for every figure | Not walked on the phone |
+
+Open: academic review of all 13 chapters, starting with the flagged findings and the derived answers; owner's Class XII lecture videos; Chemistry XII is next, with Chapter 17 in PR #314.
+
 **20 October 2026 — original figures for the Class XI books.** Printed figures the lessons only described are now original 2D diagrams, with 3D models where the structure needs them (XI-FIGURES-01): PRs #296 to #300 merged on green CI.
 
 | Slice | Code | Tested | Device |
