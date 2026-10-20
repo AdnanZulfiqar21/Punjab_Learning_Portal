@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-PHY-CH17-17.14",
+      "chapter": "pk-punjab/xii/physics/c12-phy/ch17",
+      "topic": "pk-punjab/xii/physics/c12-phy/ch17/17.14",
+      "title": "17.14 Rectification",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "bfc68b7f-dac5-5e57-a286-814710fe09bc",
+          "pdf_from": 106,
+          "pdf_to": 110,
+          "note": "Topic 17.14 with boxes (PDF 106-110); Figs 17.13, 17.15 and 17.17 redrawn, the UPS diagram and photographs described. The ripple statement and the heart Brain Teaser are clarified. The ripple example is added; answers need review."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "callout",
+            "tone": "definition",
+            "title": "Rectification",
+            "text": "Rectification is the process of converting alternating current into direct current."
+          },
+          {
+            "type": "paragraph",
+            "text": "Diodes allow current to flow in one direction (forward bias) but block it in the opposite direction (reverse bias). Rectification is of two types, half-wave and full-wave. It is used in electronic devices that need a steady DC supply, such as computers and smartphones, since most household and commercial power is AC. A diode passes a large current when forward biased, while the current through a reverse-biased diode is practically zero; this property lets a diode turn alternating current into unidirectional (direct) current."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Half-wave rectifier"
+          },
+          {
+            "type": "paragraph",
+            "text": "In half-wave rectification, an AC signal is turned into pulsating DC by passing one half-cycle and blocking the other. An alternating voltage of period T is applied (through a transformer) to a diode D in series with a load resistance RL (Fig 17.13). During the positive half-cycle (0 to T/2) the diode is forward biased, offers very low resistance, and current flows through RL, producing a voltage across it that follows the input. During the negative half-cycle (T/2 to T) the diode is reverse biased, offers very high resistance, and practically no current flows, so the voltage across RL is almost zero. The same events repeat each cycle. The current through RL flows in only one direction, so it is direct current, but it flows in pulses. A UPS used at home for backup power contains a rectifier and battery charger feeding a battery, and an inverter that turns the battery's DC back into AC (Fig 17.13 a, a block diagram in the book)."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-phy-ch17-fig-half-wave",
+            "alt": "Three panels. Input: a sine wave of voltage. Circuit: a transformer secondary connected through a single diode D to a load resistor RL. Output: only the positive half-cycles appear, separated by flat gaps where the diode blocks, giving pulsating DC.",
+            "caption": "A half-wave rectifier (original diagram after Fig 17.13).",
+            "long_description": "The diode acts as a one-way valve: it lets the positive half-cycles through and blocks the negative ones, so half of each cycle is wasted."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Full-wave rectification"
+          },
+          {
+            "type": "paragraph",
+            "text": "In full-wave rectification both halves of the alternating input are turned into unidirectional current through the load. It is achieved with a bridge rectifier, in which four diodes D1 to D4 are connected in a closed loop or 'bridge' (Fig 17.15 a). The AC supply is connected to one pair of opposite corners (A and B) and the load to the other pair; the diodes work in series pairs, with only two conducting in each half-cycle."
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Positive half-cycle (0 to T/2): terminal A is positive with respect to B. Diodes D1 and D2 are forward biased and conduct in series, while D3 and D4 are reverse biased; the current flows through the load (Fig 17.15 b).",
+              "Negative half-cycle (T/2 to T): terminal A is negative and B positive. Now D3 and D4 conduct in series while D1 and D2 are switched off. The current through the load flows in the same direction as before (Fig 17.15 c)."
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "So both halves of the input send a unidirectional current through the load. The output is not smooth but pulsating; it can be smoothed with a filter circuit containing capacitors. Mobile phone chargers typically use a full-wave bridge rectifier to turn the AC from the wall socket into the DC needed to charge the battery (Fig 17.16; compact bridge rectifiers come as single packages with two AC and two DC terminals)."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-phy-ch17-fig-bridge",
+            "alt": "Top: two copies of a bridge of four diodes arranged in a diamond, with the AC source across corners A and B and a load across the other two corners. In the positive half-cycle D1 and D2 are drawn in red (conducting); in the negative half-cycle D3 and D4 are red. In both, an arrow shows the current flowing down through the load. Bottom: the output, a row of positive humps, one for every half-cycle, compared with the half-wave output.",
+            "caption": "The full-wave bridge rectifier (original diagram after Figs 17.15 and 17.16).",
+            "long_description": "Whichever end of the supply is positive, two diodes steer the current so that it always enters the load from the same side; no half-cycle is wasted."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Full-wave bridge rectifier with a smoothing capacitor"
+          },
+          {
+            "type": "paragraph",
+            "text": "Rectified output is pulsating DC, which is not suitable for most electronic devices. Smoothing filters reduce the AC components (ripple). In a capacitor filter, a capacitor is connected in parallel with the load: it charges when the rectified voltage rises and discharges into the load when the voltage falls, smoothing the output (Fig 17.17). This smoothing (reservoir) capacitor also raises the average DC output level, acting as a storage device."
+          },
+          {
+            "type": "paragraph",
+            "text": "The ripple voltage of a full-wave bridge rectifier with a smoothing capacitor is Vripple = IDC / (f_ripple C) = IDC / (2fC), where IDC is the load current in amperes, f the input frequency and C the capacitance in farads. The ripple frequency is twice the input frequency: f_ripple = 2f. So a larger capacitance or a smaller load current gives a smaller ripple."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Ripple does depend on C",
+            "text": "The book states that the maximum ripple voltage 'is not determined by the value of the smoothing capacitor but by the frequency and load current', and then gives Vripple = IDC/(2fC), which contains C. The formula is right: the ripple depends on the capacitance as well as on the frequency and the load current."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-phy-ch17-fig-smoothing",
+            "alt": "A graph of voltage against time. Dashed blue humps show the full-wave rectified pulses. A red line follows each hump up to its peak (the capacitor charges) and then slopes gently down (the capacitor discharges into the load) until the next hump catches it, leaving a small ripple marked at the right. Below: Vripple = IDC/(fripple C) = IDC/(2fC); a larger capacitor or a smaller load current gives less ripple.",
+            "caption": "Smoothing with a capacitor (original graph after Fig 17.17).",
+            "long_description": "Between peaks the capacitor supplies the load, so the voltage only sags a little instead of falling to zero. A bigger capacitor sags less."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Worked example (added)"
+          },
+          {
+            "type": "paragraph",
+            "text": "A full-wave bridge rectifier on a 50 Hz supply feeds a load current of 0.5 A through a 2000 uF smoothing capacitor. Find the ripple voltage. Solution: Vripple = IDC/(2fC) = 0.5 A / (2 x 50 Hz x 2000 x 10^-6 F) = 0.5/0.2 = 2.5 V."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Brain teasers",
+            "text": "Do cell phones store AC or DC? Their batteries store DC, which is easier to store than AC; the grid supplies AC, so it is converted to DC by a rectifier before charging phones, laptops and flashlights. The book also notes that AC passing through the body can upset the heart's rhythm and cause cardiac arrest; currents at mains frequency are especially dangerous."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Do you know?",
+            "text": "The PN-junction diode is used for rectification, signal clipping, regulation, clamping voltages, signal detection, photovoltaic cells and light emission (LEDs)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Why is a full-wave rectifier easier to smooth than a half-wave rectifier?",
+            "explanation": "Its pulses come twice as often (ripple frequency 2f), so the capacitor has only half as long to discharge between pulses and the ripple is about half as large for the same capacitor."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Quick recap"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Rectification: AC to DC using diodes (forward bias conducts).",
+              "Half-wave: one diode, one half-cycle used; full-wave bridge: four diodes, both halves used.",
+              "Smoothing capacitor in parallel with the load; Vripple = IDC/(2fC)."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

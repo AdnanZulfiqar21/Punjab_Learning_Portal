@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-PHY-CH17-17.12",
+      "chapter": "pk-punjab/xii/physics/c12-phy/ch17",
+      "topic": "pk-punjab/xii/physics/c12-phy/ch17/17.12",
+      "title": "17.12 Navigating AC Through RLC-Series Circuit",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "bfc68b7f-dac5-5e57-a286-814710fe09bc",
+          "pdf_from": 102,
+          "pdf_to": 105,
+          "note": "Topic 17.12 with Example 17.7 and the ceiling-fan Brain Teaser, answered (PDF 102-105); Fig 17.11 redrawn; the car photograph is described. The apparent-power statement is corrected in a warning. The resonance example is added; answers need review."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Consider an RLC series circuit connected to an AC source of variable frequency (Fig 17.11 a). In its impedance diagram (Fig 17.11 b), the inductive reactance XL = wL and the capacitive reactance XC = 1/(wC) point in opposite directions. So the impedance is Z = square root of (R^2 + (XL - XC)^2) (17.24) = square root of (R^2 + (wL - 1/(wC))^2) (17.25)."
+          },
+          {
+            "type": "paragraph",
+            "text": "At high frequency XL = wL is much greater than XC = 1/(wC), so the inductance dominates and the circuit behaves like an RL series circuit. At low frequency XC dominates and it behaves like an RC series circuit. In between there is a frequency wr at which XL = XC: the reactances, equal and opposite, cancel, and the circuit behaves as a purely resistive circuit (Fig 17.11 c). This condition is called resonance. From wr L = 1/(wr C): wr^2 = 1/(LC), wr = 1/square root of (LC), and since wr = 2 pi fr, the resonant frequency is fr = 1/(2 pi square root of (LC)) (17.26)."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Key properties of an RLC series circuit"
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "Impedance and resonance: at resonance the impedance is a minimum, Z = R, and fr = 1/(2 pi square root of (LC)).",
+              "Current: at resonance the current is at its maximum because the impedance is a minimum (Fig 17.11 d).",
+              "Phase angle: at resonance it is zero; voltage and current are in phase and the power factor is 1.",
+              "Damping: the resistor damps the oscillations of the current; higher resistance gives more damping. A car's suspension is a mechanical analogue: the shock absorber dissipates energy like the resistance, and the mass and spring set the resonant frequency (Fig 17.11 e, a photograph).",
+              "Tuning and filtering: RLC series circuits at resonance are used to tune radio receivers and in other communication devices, and as band-pass filters that let a chosen range of frequencies through while weakening others.",
+              "Voltage amplification: at resonance the voltages across the inductor and the capacitor can each be much larger than the applied voltage.",
+              "Power: the true power is P = VI cos(theta) (17.27), greatest when theta = 0, that is, at resonance or for a pure resistance."
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Apparent power",
+            "text": "The book says the apparent power 'is equal to VI cos(theta)'. The apparent power is the product VI (in volt-amperes); the true (real) power is VI cos(theta), and the power factor cos(theta) is their ratio."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-phy-ch17-fig-rlc-series",
+            "alt": "Left: R, L and C in series with an AC source, and the impedance triangle with R horizontal, XL - XC vertical and Z as the hypotenuse; Z = sqrt(R^2 + (XL - XC)^2), tan(theta) = (XL - XC)/R. Right: a graph of current against frequency rising to a sharp peak at the resonant frequency fr = 1/(2 pi sqrt(LC)) and falling again; at low frequency the circuit acts like RC, at high frequency like RL.",
+            "caption": "RLC series circuit and resonance (original diagram after Fig 17.11).",
+            "long_description": "As the frequency rises XL grows and XC shrinks. Where they are equal they cancel, the impedance falls to R and the current peaks: this is resonance."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Example 17.7"
+          },
+          {
+            "type": "paragraph",
+            "text": "In an LCR circuit the voltages across the inductor, capacitor and resistor are VL = 20 V, VC = 11 V and VR = 12 V. Find the phase difference between the resultant voltage and the current, and the rms voltage of the source. Solution: tan(theta) = (VL - VC)/VR = (20 V - 11 V)/12 V = 0.75, so theta = tan^-1(0.75) = 36.9 degrees. Vrms = square root of [VR^2 + (VL - VC)^2] = square root of [(12 V)^2 + (9 V)^2] = square root of 225 V^2 = 15 V."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Worked example (added)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Find the resonant frequency of a series circuit with L = 10 mH and C = 1.0 uF. Solution: fr = 1/(2 pi square root of (LC)) = 1/(2 x 3.14 x square root of (10 x 10^-3 x 1.0 x 10^-6)) = 1/(2 x 3.14 x 1.0 x 10^-4) = 1.59 x 10^3 Hz, about 1.6 kHz."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Brain teaser"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "The book shows the wiring of a ceiling fan: a switch, a running winding, a starting winding in series with a capacitor, and a rotor. What kind of AC circuit is this?",
+            "explanation": "A capacitor-start (split-phase) motor circuit: the starting winding with its series capacitor forms an RLC-type branch whose current is shifted in phase from the running winding's, so the two windings together make a rotating magnetic field."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Quick recap"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "RLC series: Z = sqrt(R^2 + (XL - XC)^2).",
+              "Resonance when XL = XC: fr = 1/(2 pi sqrt(LC)); Z = R, current maximum, power factor 1.",
+              "Uses: tuning radios, band-pass filters."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
