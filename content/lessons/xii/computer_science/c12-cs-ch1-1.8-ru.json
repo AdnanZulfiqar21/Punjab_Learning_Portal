@@ -1,0 +1,153 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH1-1.8-RU",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch1",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch1/1.8",
+      "title": "1.8 IP addressing aur subnetting (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-CS-CH1-1.8",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 15,
+          "pdf_to": 16,
+          "note": "Roman Urdu explanation of IP addressing, subnetting and NAT (PDF 15-16)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "IP (Internet Protocol) address device ko diya gaya munfarid number hai. Yeh network par device ki pehchan karata hai, aur data apni manzil dhoondne ke liye IP addresses use karta hai. Har network device ka IP address hona zaroori hai; is ke baghair baat-cheet mumkin nahi."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "IPv4 aur IPv6"
+          },
+          {
+            "type": "paragraph",
+            "text": "IPv4 purana version hai aur 32-bit addresses use karta hai, is liye is ke addresses mehdood hain. IPv6 naya version hai jis ke addresses 128-bit hain; yeh kaheen zyada addresses deta aur aaj ke Internet ki zarooratein poori karta hai."
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "IPv4 misal: 192.168.1.10. Is mein 4 numbers hain, har aik 0 se 255 tak, nuqton se alag; har number 1 byte (8 bits) hai, is liye kul 32 bits.",
+              "IPv6 misal: 2001:0db8:85a3:0000:0000:8a2e:0370:7334. Is mein 4 hexadecimal digits ke 8 groups hain, colons se alag; har group 16 bits hai, is liye kul 128 bits."
+            ]
+          },
+          {
+            "type": "table",
+            "caption": "IPv4 aur IPv6 addresses ki taqseem",
+            "header": [
+              "Address",
+              "Hissa",
+              "Qeemat",
+              "Matlab"
+            ],
+            "rows": [
+              [
+                "IPv4",
+                "Network hissa",
+                "192.168.1",
+                "Aap ka local network, gali ke pate ki tarah"
+              ],
+              [
+                "IPv4",
+                "Host hissa",
+                "10",
+                "Us network par aap ka device, ghar ke number ki tarah"
+              ],
+              [
+                "IPv6",
+                "Global routing prefix",
+                "2001:0db8:85a3",
+                "ISP ya ilaqa, jaise 'Pakistan, Sindh, Karachi'"
+              ],
+              [
+                "IPv6",
+                "Subnet ID",
+                "0000",
+                "ISP ke andar aap ka local network, shehar ke aik ilaqe ki tarah"
+              ],
+              [
+                "IPv6",
+                "Interface ID",
+                "0000:8a2e:0370:7334",
+                "Aap ka khaas device, jaise aap ka laptop"
+              ]
+            ]
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch1-fig-ip-addresses",
+            "alt": "Oopar: IPv4 192.168.1.10 chaar dabbon 192, 168, 1 aur 10 ki shakal mein, har aik par 8 bits; pehle teen neele (network hissa, gali ki tarah) aur aakhri narangi (host hissa, ghar ki tarah). Neeche: IPv6 aath dabbe 2001, 0db8, 85a3, 0000, 0000, 8a2e, 0370, 7334; pehle teen purple (global routing prefix, 48 bits, ISP ya ilaqa), chautha sabz (subnet ID, 16 bits) aur aakhri chaar narangi (interface ID, 64 bits, device). Note: taqreeban 4.29 arab IPv4 aur 3.4 x 10^38 IPv6 addresses.",
+            "caption": "IPv4 aur IPv6 address ke hisse (kitab ki taqseem tables ke mutabiq asal khaaka).",
+            "long_description": "Dono versions address ko aik network dhoondne wale aur aik device dhoondne wale hisse mein baant'te hain, jaise dak ke pate mein gali aur ghar ka number hota hai."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Kya aap jante hain?",
+            "text": "Taqreeban 4.29 arab IPv4 addresses mumkin hain (2^32). IPv6 2^128, yani taqreeban 3.4 x 10^38 addresses deta hai, itna bara number ke amalan khatam nahi hoga."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Subnetting"
+          },
+          {
+            "type": "paragraph",
+            "text": "Subnetting network ko chhote hisson mein baant'ti hai, har hissa subnet kehlata hai (Fig 1.15). Yeh network traffic kam, karkardagi behtar aur security zyada karti hai, is liye bare networks intizam ke liye ise use karte hain. Maslan network 192.168.1.0/24 (addresses .0 se .255) ko 192.168.1.0/25 (.0 se .127) aur 192.168.1.128/25 (.128 se .255) mein baanta ja sakta hai. Slash ke baad wala number batata hai ke kitne bits network hisse ke hain."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Network Address Translation (NAT)"
+          },
+          {
+            "type": "paragraph",
+            "text": "NAT bohat se devices ko aik public IP address share karne deta hai. Yeh router karta hai aur andar ke devices ke private IP addresses chhupata hai, jis se security behtar hoti hai. NAT networks mein, ghar ke networks samet, aam use hota hai."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch1-fig-subnet-nat",
+            "alt": "Baen panel, subnetting: dabba 192.168.1.0/24 (256 addresses, .0 se .255) dashed lines se subnet 1, 192.168.1.0/25 (.0 se .127), aur subnet 2, 192.168.1.128/25 (.128 se .255), mein bat'ta, har aik mein computer aur laptop. Daen panel, NAT: private addresses 192.168.1.10, .11 aur .12 wale teen computers NAT wale router se jure jo Internet se jurta; note: bohat se private addresses aik public address share karte (misal 203.0.113.5), aur private addresses chhupe rehte.",
+            "caption": "Subnetting aur NAT (Fig 1.15 ke mutabiq asal khaaka).",
+            "long_description": "/25 subnet /24 se aik bit zyada network ke liye rakhta hai, is liye har subnet mein aadhe addresses hote hain. NAT ke saath bahar ki duniya sirf router ka public address dekhti hai. Dikhaya gaya public address sirf documentation ki misal hai, asli nahi."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "IPv4 aur IPv6 address mein kitne bits hote hain, aur yeh kaise likhe jate hain?",
+            "explanation": "IPv4: 32 bits, nuqton se alag 0 se 255 tak ke chaar numbers (192.168.1.10). IPv6: 128 bits, colons se alag chaar hexadecimal digits ke aath groups."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "NAT kya karta hai?",
+            "explanation": "Yeh private IP addresses wale bohat se devices ko aik public IP address share karne deta hai; router in ke darmiyan tarjuma karta aur private addresses chhupaye rakhta hai."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Fauri khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "IP address: device ki pehchan ka munfarid number.",
+              "IPv4: 32 bits, taqreeban 4.29 arab; IPv6: 128 bits, taqreeban 3.4 x 10^38.",
+              "Subnetting network baant'ti (/24 se do /25); NAT aik public address share karata."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

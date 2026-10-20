@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH1-1.8",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch1",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch1/1.8",
+      "title": "1.8 IP Addressing and Subnetting",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 15,
+          "pdf_to": 16,
+          "note": "Topic 1.8 with the IPv4 and IPv6 breakdown tables and three Do You Know boxes (PDF 15-16); Fig 1.15 redrawn with NAT. Long Q8 (with 1.10) is answered here. The /24 and /25 address ranges and the example public address are added."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "An IP (Internet Protocol) address is a unique number assigned to a device. It identifies the device on a network, and data uses IP addresses to find its destination. Every network device must have an IP address; without one, communication is not possible."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "IPv4 and IPv6"
+          },
+          {
+            "type": "paragraph",
+            "text": "IPv4 is the older version and uses 32-bit numeric addresses, so it has a limited number of addresses. IPv6 is the newer version with 128-bit addresses; it provides far more address space and supports modern Internet needs."
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "IPv4 example: 192.168.1.10. It has 4 numbers, each from 0 to 255, separated by dots; each number is 1 byte (8 bits), so the total is 32 bits.",
+              "IPv6 example: 2001:0db8:85a3:0000:0000:8a2e:0370:7334. It has 8 groups of 4 hexadecimal digits separated by colons; each group is 16 bits, so the total is 128 bits."
+            ]
+          },
+          {
+            "type": "table",
+            "caption": "Breakdown of IPv4 and IPv6 addresses",
+            "header": [
+              "Address",
+              "Part",
+              "Value",
+              "What it means"
+            ],
+            "rows": [
+              [
+                "IPv4",
+                "Network part",
+                "192.168.1",
+                "Identifies your local network, like a street address"
+              ],
+              [
+                "IPv4",
+                "Host part",
+                "10",
+                "Identifies your device on that network, like a house number"
+              ],
+              [
+                "IPv6",
+                "Global routing prefix",
+                "2001:0db8:85a3",
+                "The ISP or region, like 'Pakistan, Sindh, Karachi'"
+              ],
+              [
+                "IPv6",
+                "Subnet ID",
+                "0000",
+                "Your local network inside the ISP, like an area of the city"
+              ],
+              [
+                "IPv6",
+                "Interface ID",
+                "0000:8a2e:0370:7334",
+                "Your specific device, like your laptop"
+              ]
+            ]
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch1-fig-ip-addresses",
+            "alt": "Top: IPv4 192.168.1.10 drawn as four boxes 192, 168, 1 and 10, each marked 8 bits; the first three are blue (network part, like the street) and the last orange (host part, like the house). Bottom: IPv6 drawn as eight boxes 2001, 0db8, 85a3, 0000, 0000, 8a2e, 0370, 7334; the first three are purple (global routing prefix, 48 bits, ISP or region), the fourth green (subnet ID, 16 bits) and the last four orange (interface ID, 64 bits, the device). A note gives the address counts.",
+            "caption": "The parts of an IPv4 and an IPv6 address (original diagram after the book's breakdown tables).",
+            "long_description": "Both versions split an address into a part that finds the network and a part that finds the device, just as a postal address has a street and a house number."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Do you know?",
+            "text": "About 4.29 billion IPv4 addresses are possible (2^32). IPv6 gives 2^128, about 3.4 x 10^38 addresses, an astronomically large number that will not run out in practice."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Subnetting"
+          },
+          {
+            "type": "paragraph",
+            "text": "Subnetting divides a network into smaller parts, each called a subnet (Fig 1.15). It reduces network traffic, improves performance and increases security, so large networks use it for management. For example, the network 192.168.1.0/24 (addresses .0 to .255) can be split into 192.168.1.0/25 (.0 to .127) and 192.168.1.128/25 (.128 to .255). The number after the slash tells how many bits belong to the network part."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Network Address Translation (NAT)"
+          },
+          {
+            "type": "paragraph",
+            "text": "NAT lets many devices share one public IP address. It is performed by routers and hides the private IP addresses of the devices inside, which improves security. NAT is commonly used in networks, including home networks."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch1-fig-subnet-nat",
+            "alt": "Left panel, subnetting: a box 192.168.1.0/24 (256 addresses, .0 to .255) splits by dashed lines into subnet 1, 192.168.1.0/25 (.0 to .127), and subnet 2, 192.168.1.128/25 (.128 to .255), each with a computer and a laptop. Right panel, NAT: three computers with private addresses 192.168.1.10, .11 and .12 joined to a router marked NAT, which connects to the Internet; note: many private addresses share one public address (example 203.0.113.5), and private addresses stay hidden.",
+            "caption": "Subnetting and NAT (original diagram after Fig 1.15).",
+            "long_description": "A /25 subnet keeps one more bit for the network than a /24, so each subnet has half the addresses. With NAT the outside world sees only the router's public address. The public address shown is a documentation example, not a real one."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "How many bits are in an IPv4 address and in an IPv6 address, and how are they written?",
+            "explanation": "IPv4: 32 bits, written as four numbers 0 to 255 separated by dots (192.168.1.10). IPv6: 128 bits, written as eight groups of four hexadecimal digits separated by colons."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "What does NAT do?",
+            "explanation": "It lets many devices with private IP addresses share one public IP address; the router translates between them and keeps the private addresses hidden."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Quick recap"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "IP address: unique number that identifies a device.",
+              "IPv4: 32 bits, about 4.29 billion; IPv6: 128 bits, about 3.4 x 10^38.",
+              "Subnetting splits a network (/24 into two /25); NAT shares one public address."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

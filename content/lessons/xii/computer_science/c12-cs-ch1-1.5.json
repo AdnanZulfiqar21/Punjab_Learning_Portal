@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH1-1.5",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch1",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch1/1.5",
+      "title": "1.5 Network Topologies",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 10,
+          "pdf_to": 12,
+          "note": "Topic 1.5 with the Class Activity, Table 1.1 and the Tidbit (PDF 10-12); Figs 1.8 to 1.12 redrawn as two figures. Short Q6, Long Q4 and MCQs 4 and 10 are answered here. The n(n-1)/2 link count is added."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "callout",
+            "tone": "definition",
+            "title": "Network topology",
+            "text": "Network topology is the layout of a computer network: how the devices and cables are arranged. Physical topology shows the actual connections; logical topology shows how data flows in the network."
+          },
+          {
+            "type": "paragraph",
+            "text": "The topology affects the network's performance and maintenance. Five common topologies are bus, star, ring, mesh and tree (Figs 1.8 to 1.12)."
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Bus: all devices are connected to a single main cable, with a terminator at each end; data travels along the cable to every device. It is simple and cheap and suits small networks, but a fault in the main cable stops the entire network, so it is not good for large networks.",
+              "Star: all devices connect to a central hub or switch, and data passes through the central device. It is easy to manage and expand, and the failure of one device does not affect the others, but the failure of the central device stops the network. It is widely used in modern networks.",
+              "Ring: devices are connected in a circular path and data moves in one direction around the ring, each device receiving the data and passing it along. The failure of one device can affect the whole network; it is more complex than a bus and rarely used today.",
+              "Mesh: each device is connected to many other devices, so there are multiple paths for data. If one link fails, data uses another path, which makes the network reliable and fault-tolerant, but it is expensive and complex. It is used in large and critical networks.",
+              "Tree: devices are arranged in a hierarchy like a tree. It combines bus and star: several star networks are connected to a central backbone, and data flows from the root (main node) to the branches and sub-branches. It is easy to expand and manage for large networks, but a backbone failure can affect the entire network. It is common in large organisations."
+            ]
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch1-fig-topologies-a",
+            "alt": "Three panels. Bus: four computers on short drop lines from one long main cable with an orange terminator at each end; note: cheap, simple, cable fault stops all. Star: five computers each joined by its own line to a central hub or switch; note: easy to manage, one device fails alone, hub fails all. Ring: five computers on a circle with a red arrow showing one direction; note: each device passes data on, one failure breaks the ring.",
+            "caption": "Bus, star and ring topologies (original diagram after Figs 1.8 to 1.10).",
+            "long_description": "In a bus every device shares one cable; in a star every device has its own link to the centre; in a ring each device passes data to the next."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch1-fig-topologies-b",
+            "alt": "Two panels. Mesh: five computers on a pentagon, every computer joined to every other by a line; note: many paths, if one link fails data takes another, reliable but costly and complex. Tree: a server at the top of a vertical backbone cable; two switches branch off the backbone, each with three computers below it; note: star networks joined to one backbone, easy to expand, backbone fault affects all.",
+            "caption": "Mesh and tree topologies (original diagram after Figs 1.11 and 1.12).",
+            "long_description": "A full mesh with n devices needs n(n-1)/2 links (10 for five devices), which is why it is reliable but costly. A tree grows by adding star networks to the backbone."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Class activity",
+            "text": "Students stand in a circle and pass a message along; discuss what happens if one student stops."
+          },
+          {
+            "type": "table",
+            "caption": "Table 1.1 Advantages and disadvantages of network topologies",
+            "header": [
+              "Topology",
+              "Advantages",
+              "Disadvantages"
+            ],
+            "rows": [
+              [
+                "Bus",
+                "Simple and easy to install; needs less cable; cost-effective",
+                "Main-cable failure affects the whole network; difficult to troubleshoot; performance falls as devices are added"
+              ],
+              [
+                "Star",
+                "Easy to install and manage; one device failing does not affect others; easy to detect faults",
+                "Central-device failure stops the entire network; needs more cable; higher cost"
+              ],
+              [
+                "Ring",
+                "Data flows in an organised way; no data collisions; equal access for all devices",
+                "One device failing affects the whole network; difficult to add or remove devices; rarely used today"
+              ],
+              [
+                "Mesh",
+                "Highly reliable and fault-tolerant; multiple paths for data; high security",
+                "Very expensive; complex installation; needs a large number of cables"
+              ],
+              [
+                "Tree",
+                "Easy to expand; suitable for large networks; hierarchical management",
+                "Backbone failure affects the whole network; complex setup; more cabling needed"
+              ]
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Tidbit",
+            "text": "Some topologies are simple and cheap; others are reliable but costly. Some are easy to expand and others are difficult to manage. The choice depends on the network's needs."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Which topology uses a central hub or switch, and which gives the highest reliability? Why?",
+            "explanation": "Star uses a central hub or switch. Mesh is the most reliable, because every device has several paths, so data can go round a failed link."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Quick recap"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Topology: layout of devices and cables; physical or logical.",
+              "Bus (one cable), star (central switch), ring (circle), mesh (many paths), tree (stars on a backbone).",
+              "Choice depends on cost, reliability, ease of expansion and management."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

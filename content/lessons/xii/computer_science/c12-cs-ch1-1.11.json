@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH1-1.11",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch1",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch1/1.11",
+      "title": "1.11 Network Diagnostic Tools and Commands",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 17,
+          "pdf_to": 19,
+          "note": "Topic 1.11 with the ping listing and the Class Activity (PDF 17-19); Fig 1.16 redrawn. The reading of the output lines and the DNS question are added; the sample output's '=' signs are restored from the page image."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Network diagnostic tools are used to find network problems. They check Internet and network connections and show whether devices can communicate properly. The commands are typed at the command prompt or terminal, and they help identify slow or broken connections."
+          },
+          {
+            "type": "paragraph",
+            "text": "Network troubleshooting is the process of finding and fixing network issues such as connection and speed problems. It checks cables, devices and settings, reduces downtime and errors, and keeps communication smooth."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "The ping command"
+          },
+          {
+            "type": "paragraph",
+            "text": "The ping command tests network connectivity: it checks whether a device is reachable. Ping sends small data packets (ICMP echo requests) to another device and measures how long the replies take, so it helps detect delays. It is commonly used to check an Internet connection."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Command and sample output (from the book)",
+            "text": "ping google.com\n\nPinging google.com [142.250.190.14] with 32 bytes of data:\nReply from 142.250.190.14: bytes=32 time=25ms TTL=118\nReply from 142.250.190.14: bytes=32 time=24ms TTL=118\nReply from 142.250.190.14: bytes=32 time=26ms TTL=118\nReply from 142.250.190.14: bytes=32 time=25ms TTL=118"
+          },
+          {
+            "type": "paragraph",
+            "text": "Each reply line shows the destination's IP address, the packet size (32 bytes), the round-trip time in milliseconds and the TTL (time to live, a hop limit). Steady times of about 25 ms mean a healthy connection; 'Request timed out' means no reply came back."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch1-fig-ping",
+            "alt": "Host A on the left and host B (192.168.0.1) on the right. A blue arrow from A to B is labelled ICMP echo request: 'are you there?'; a green arrow from B back to A is labelled ICMP echo reply: 'yes'. Below, a dark terminal box shows: > ping 192.168.0.1, then Reply from 192.168.0.1: bytes=32 time=25ms TTL=118, then the note: time = round trip in milliseconds; no reply = not reachable.",
+            "caption": "How ping works (original diagram after Fig 1.16).",
+            "long_description": "Ping is the simplest test of whether two hosts can reach each other and how long a message takes to go and come back."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Class activity",
+            "text": "Map the path packets take between two locations."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Ipconfig and ifconfig"
+          },
+          {
+            "type": "paragraph",
+            "text": "Ipconfig is used in Windows; ifconfig is used in Linux and macOS. These commands display the network settings: the IP address, subnet mask, default gateway and network status, which helps in troubleshooting."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Telnet, PuTTY and Secure Shell (SSH)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Telnet is used for remote access to a device but sends data without encryption. PuTTY is a popular program for remote login. SSH is a secure method of remote access that encrypts the data. These tools help manage network devices from another computer."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "A student can open websites by IP address but not by name. Which service is probably failing, and which command would show the computer's IP settings on Windows?",
+            "explanation": "DNS (name resolution) is probably failing, since the connection itself works. On Windows, ipconfig shows the IP address, subnet mask and default gateway."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Quick recap"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Diagnostic tools find network problems; commands run at the command prompt or terminal.",
+              "ping: reachability and round-trip time (ICMP echo).",
+              "ipconfig (Windows) / ifconfig (Linux, macOS): IP settings; SSH: encrypted remote access (Telnet is not)."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH1-1.11-RU",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch1",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch1/1.11",
+      "title": "1.11 Network diagnostic tools aur commands (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-CS-CH1-1.11",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 17,
+          "pdf_to": 19,
+          "note": "Roman Urdu explanation of network diagnostic tools and commands (PDF 17-19)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Network diagnostic tools network ke masail dhoondne ke liye use hote hain. Yeh Internet aur network connections check karte aur dikhate hain ke devices theek tarah baat kar sakte hain ya nahi. Commands command prompt ya terminal par likhi jati hain, aur sust ya toote connections pehchanne mein madad deti hain."
+          },
+          {
+            "type": "paragraph",
+            "text": "Network troubleshooting network ke masail, jaise connection aur raftar ke masle, dhoondne aur theek karne ka amal hai. Is mein cables, devices aur settings check hoti hain, rukawat ka waqt (downtime) aur ghaltiyan kam hoti hain, aur baat-cheet hamwaar rehti hai."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Ping command"
+          },
+          {
+            "type": "paragraph",
+            "text": "Ping command network ka rabta test karti hai: yeh check karti hai ke device tak pohancha ja sakta hai ya nahi. Ping doosre device ko chhote data packets (ICMP echo requests) bhejti aur napti hai ke jawab mein kitna waqt laga, is liye deri pakarne mein madad deti hai. Yeh Internet connection check karne ke liye aam use hoti hai."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Command aur namoona output (kitab se)",
+            "text": "ping google.com\n\nPinging google.com [142.250.190.14] with 32 bytes of data:\nReply from 142.250.190.14: bytes=32 time=25ms TTL=118\nReply from 142.250.190.14: bytes=32 time=24ms TTL=118\nReply from 142.250.190.14: bytes=32 time=26ms TTL=118\nReply from 142.250.190.14: bytes=32 time=25ms TTL=118"
+          },
+          {
+            "type": "paragraph",
+            "text": "Har reply line manzil ka IP address, packet ka size (32 bytes), milliseconds mein aane jane ka waqt aur TTL (time to live, hops ki had) dikhati hai. Taqreeban 25 ms ke mustaqil waqt sehatmand connection batate hain; 'Request timed out' ka matlab hai ke jawab wapas nahi aaya."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch1-fig-ping",
+            "alt": "Baen host A aur daen host B (192.168.0.1). A se B tak neela teer: ICMP echo request: 'kya aap hain?'; B se wapas A tak sabz teer: ICMP echo reply: 'haan'. Neeche gehra terminal dabba: > ping 192.168.0.1, phir Reply from 192.168.0.1: bytes=32 time=25ms TTL=118, phir note: time = aane jane ka waqt milliseconds mein; jawab nahi = pohanch nahi.",
+            "caption": "Ping kaise kaam karti hai (Fig 1.16 ke mutabiq asal khaaka).",
+            "long_description": "Ping sab se saada test hai ke do hosts aik doosre tak pohanch sakte hain ya nahi aur paigham ke jane aur wapas aane mein kitna waqt lagta hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Class activity",
+            "text": "Do muqamat ke darmiyan packets ke raste ka naqsha banayein."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Ipconfig aur ifconfig"
+          },
+          {
+            "type": "paragraph",
+            "text": "Ipconfig Windows mein use hoti hai; ifconfig Linux aur macOS mein. Yeh commands network settings dikhati hain: IP address, subnet mask, default gateway aur network ki halat, jo troubleshooting mein madad deti hai."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Telnet, PuTTY aur Secure Shell (SSH)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Telnet kisi device tak door se rasai ke liye use hota hai lekin data be-encryption bhejta hai. PuTTY door se login ka mashhoor program hai. SSH door se rasai ka mehfooz tareeqa hai jo data encrypt karta hai. Yeh tools doosre computer se network devices sambhalne mein madad dete hain."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Aik talib-e-ilm IP address se websites khol sakta hai lekin naam se nahi. Ghaliban kaun si service kharab hai, aur Windows par kaun si command computer ki IP settings dikhayegi?",
+            "explanation": "Ghaliban DNS (naam ka tarjuma) kharab hai, kyunke connection khud kaam kar raha hai. Windows par ipconfig IP address, subnet mask aur default gateway dikhati hai."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Fauri khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Diagnostic tools network ke masail dhoondte; commands command prompt ya terminal par.",
+              "ping: pohanch aur aane jane ka waqt (ICMP echo).",
+              "ipconfig (Windows) / ifconfig (Linux, macOS): IP settings; SSH: encrypted door ki rasai (Telnet nahi)."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
