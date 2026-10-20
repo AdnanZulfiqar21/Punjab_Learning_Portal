@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-PHY-CH16-16.9",
+      "chapter": "pk-punjab/xii/physics/c12-phy/ch16",
+      "topic": "pk-punjab/xii/physics/c12-phy/ch16/16.9",
+      "title": "16.9 Exponential Decay of Discharging Capacitor Through Resistor",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "bfc68b7f-dac5-5e57-a286-814710fe09bc",
+          "pdf_from": 78,
+          "pdf_to": 80,
+          "note": "Topic 16.9 (printed 14.9) with Example 16.10 and the box (PDF 78-80); Figs 16.14-16.16 are redrawn. The ln 2 value and the misprinted references are noted. The check question is added; answer needs review."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "When a capacitor discharges through a resistor (Fig 16.13 a), its charge decreases exponentially with time (Fig 16.14). An exponential function has the form f(x) = a^x, where the variable appears as an exponent. The general decay formula for a discharging capacitor in an RC circuit is x = xo exp(-t/RC), or x = xo e^(-t/RC) (16.43), where x is the quantity (charge, voltage or current) at time t, xo its initial value at t = 0, R the resistance in ohms, C the capacitance in farads, t the time in seconds and RC the time constant tau. The number e, about 2.718, is the base of natural logarithms (Euler's number). The negative exponent shows that the quantity decreases with time."
+          },
+          {
+            "type": "paragraph",
+            "text": "So the charge, voltage and current all fall in the same way: Q = Qo e^(-t/RC), V = Vo e^(-t/RC) and I = Io e^(-t/RC). The graphs start steeply (fast discharge) and gradually flatten out. In equal intervals of time the charge falls by the same fraction, so the amount lost in each interval gets smaller as the charge gets smaller (Fig 16.15). This is like water flowing out of a tank through a narrow pipe: when the tank is full the pressure is high and the water flows fast; as the level falls, the flow slows down."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "For your information",
+            "text": "Exponential functions describe many processes in physics, such as radioactive decay, in which the rate of change of a quantity depends directly on its current value."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Role of the time constant"
+          },
+          {
+            "type": "paragraph",
+            "text": "Putting t = RC in Q = Qo e^(-t/RC) gives Q = Qo e^-1 = Qo / 2.718 = 0.37 Qo. So the time constant is the time in which the initial charge Qo drops to about 0.37 Qo: after one time constant the charge (and likewise the voltage and current) has fallen to 37 per cent of its initial value. A smaller time constant means the circuit responds faster (Fig 16.16)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Half-life: the time t1/2 for the charge to fall to half its initial value. Putting Q = Qo/2: 1/2 = e^(-t1/2 / RC), so ln(1/2) = -t1/2 / RC and t1/2 = -RC ln(1/2) = RC ln 2 (16.44). Since ln 2 = 0.693, t1/2 = 0.69 RC (16.45)."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "ln 2 and the printed references",
+            "text": "The book says 'from calculator, -ln(2) = -0.6' and then uses 0.69; ln 2 = 0.693. It also refers to 'Eq. 4.45' and 'Fig. 4.17', meaning equation 16.45 and Fig 16.16, and this section is printed as 14.9."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-phy-ch16-fig-decay",
+            "alt": "A graph of charge against time falling from Qo along a red exponential curve that is steep at first and then flattens. Dashed lines mark 0.5 Qo at time 0.69 RC and 0.37 Qo at time RC. Equations: x = xo e^(-t/RC) for Q, V or I; after t = RC, Q = Qo/e = 0.37 Qo; half-life t1/2 = RC ln 2 = 0.69 RC.",
+            "caption": "Exponential decay of a discharging capacitor (original graph after Figs 16.14 to 16.16).",
+            "long_description": "The curve never quite reaches zero. Each half-life halves whatever charge is left, and each time constant leaves 37 per cent of it."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Example 16.10"
+          },
+          {
+            "type": "paragraph",
+            "text": "In an RC circuit R = 1 kilo-ohm, C = 100 uF and Vo = 10 V. Find the voltage across the capacitor after 0.2 s. Solution: tau = RC = (1000 ohm)(100 x 10^-6 F) = 0.1 s. V = Vo e^(-t/RC) = 10 e^(-0.2/0.1) = 10 e^-2 = 10 / (2.718)^2 = 1.35 V."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "For the circuit of Example 16.10, how long does the voltage take to fall to 5 V?",
+            "explanation": "5 V is half of 10 V, so t = t1/2 = 0.69 RC = 0.69 x 0.1 s = 0.069 s."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Quick recap"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "x = xo e^(-t/RC) for charge, voltage and current.",
+              "After RC: 0.37 of the start; half-life t1/2 = 0.69 RC.",
+              "Smaller RC: faster decay."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
