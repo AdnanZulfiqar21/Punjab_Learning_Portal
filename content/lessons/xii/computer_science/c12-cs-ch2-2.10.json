@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH2-2.10",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch2",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch2/2.10",
+      "title": "2.10 Applying Predicate Logic to Real-World Problems",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 32,
+          "pdf_to": 33,
+          "note": "Topic 2.10 with the Do You Know and Class Activity (PDF 32-33). The note on the precise form of 'every student borrows a book' is added, and the deduction figure is placed in 2.11. Long Q8 (with 2.8-2.9) is answered here."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Predicate logic can solve real-world problems by representing knowledge clearly and systematically. It models situations made of objects, their properties and their relationships, so that we can analyse problems, make decisions and find solutions logically."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Do you know?",
+            "text": "Predicate logic can model family trees, social networks and even computer programs."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Representing relationships: a library system"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Borrows(x, y): student x borrows book y.",
+              "Teaches(t, s): teacher t teaches student s.",
+              "Student(x), Book(y), Available(y), HasLibraryCard(x): properties of objects."
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Such predicates describe clearly how students, books and teachers are connected, so the working of the library can be modelled and the interactions between its parts organised and understood."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Writing rules with quantifiers"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "For all x, Student(x) -> Borrows(x, Book): every student borrows a book.",
+              "There exists y such that Book(y) AND Available(y): at least one book is available."
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Reading the first rule precisely",
+            "text": "In the first rule, 'Book' stands for 'some book'. Written fully, 'every student borrows a book' is: for all x, Student(x) -> (there exists y such that Book(y) AND Borrows(x, y)). The arrow -> is read 'if ... then'."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Class activity",
+            "text": "Write rules such as 'All students must attend class' using the universal quantifier."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Reasoning and drawing conclusions"
+          },
+          {
+            "type": "paragraph",
+            "text": "Predicate logic lets us draw conclusions from facts. If 'for all x, Student(x) -> HasLibraryCard(x)' and 'Ali is a student' are both given, we conclude 'Ali has a library card'. This kind of reasoning supports decisions, such as checking whether a student can borrow a book, and keeps conclusions correct and consistent so that the system is reliable and easy to manage."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Write the rule 'Every available book can be borrowed' with a quantifier, and use it to decide about a book B7 that is available.",
+            "explanation": "For all y, (Book(y) AND Available(y)) -> CanBorrow(y). Since Book(B7) and Available(B7) are true, CanBorrow(B7) follows: B7 can be borrowed."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Quick recap"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Predicates model real objects and relationships, such as Borrows(x, y).",
+              "Quantified rules state general conditions; facts plus rules give conclusions.",
+              "Example: every student has a card, Ali is a student, so Ali has a card."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
