@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH2-2.7",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch2",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch2/2.7",
+      "title": "2.7 Propositional Satisfiability",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 30,
+          "pdf_to": 31,
+          "note": "Topic 2.7 with the Do You Know and Class Activity (PDF 30); no figure. The pizza examples are tidied from the page image. Short Q9, Long Q7 and MCQ 8 are answered here. The check question is added."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Propositional satisfiability checks whether a logical expression can be true: whether there is at least one situation in which it is true. It is widely used in computer science, especially in problem solving and programming, for testing logical statements, making decisions, designing algorithms and verifying programs."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Do you know?",
+            "text": "A logical expression is satisfiable if there is at least one way to make it true."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Conditions for satisfiability"
+          },
+          {
+            "type": "paragraph",
+            "text": "A proposition is satisfiable if at least one combination of truth values makes it true. If every possible combination makes it false, it is unsatisfiable. Satisfiability depends on the structure of the expression and on the connectives (AND, OR, NOT) it uses. One way to test it is to check every case in a truth table: if any row is true, the proposition is satisfiable."
+          },
+          {
+            "type": "table",
+            "caption": "Satisfiable and unsatisfiable expressions",
+            "header": [
+              "Expression",
+              "Result",
+              "Why"
+            ],
+            "rows": [
+              [
+                "P OR Q",
+                "Satisfiable",
+                "True whenever P or Q is true"
+              ],
+              [
+                "P AND Q",
+                "Satisfiable",
+                "True when both P and Q are true"
+              ],
+              [
+                "P AND NOT P",
+                "Unsatisfiable",
+                "P cannot be both true and false, so no row is true"
+              ],
+              [
+                "'Bring pizza OR (bring a burger AND do NOT bring soda)'",
+                "Satisfiable",
+                "Bringing pizza and no soda makes it true: a solution exists"
+              ],
+              [
+                "'You must bring pizza AND you must NOT bring pizza'",
+                "Unsatisfiable",
+                "No choice makes both parts true: no solution exists"
+              ]
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Class activity",
+            "text": "The teacher gives several expressions and students classify each as satisfiable or unsatisfiable."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Is (P OR Q) AND (NOT P) AND (NOT Q) satisfiable? Explain.",
+            "explanation": "No. NOT P and NOT Q need both P and Q to be false, but then P OR Q is false, so every row is false and the expression is unsatisfiable."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Quick recap"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Satisfiable: true for at least one combination of values.",
+              "Unsatisfiable: false for every combination, such as P AND NOT P.",
+              "Test by checking the rows of a truth table."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH2-2.6",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch2",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch2/2.6",
+      "title": "2.6 Propositional Equivalence",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 29,
+          "pdf_to": 30,
+          "note": "Topic 2.6 with Fig 2.6 and the Tidbit (PDF 29-30); Fig 2.6 redrawn and its truth table carried. De Morgan's laws are added as the example of 'logical laws'. Long Q6 is answered here."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Propositional equivalence explains when two logical expressions have the same meaning. Expressions that look different may give the same result. Equivalence is checked with truth tables: if two expressions have the same truth value in every case, they are equivalent. The book writes equivalence with a triple-bar symbol (three horizontal lines), read 'is equivalent to'."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Example: exclusive OR written two ways"
+          },
+          {
+            "type": "paragraph",
+            "text": "Expression 1, (A AND NOT B) OR (B AND NOT A), is equivalent to Expression 2, (A OR B) AND (NOT A OR NOT B). Both are true exactly when one of A and B is true but not both, which is called exclusive OR (XOR) (Fig 2.6)."
+          },
+          {
+            "type": "table",
+            "caption": "Truth table for the two expressions",
+            "header": [
+              "A",
+              "B",
+              "Expression 1",
+              "Expression 2"
+            ],
+            "rows": [
+              [
+                "F",
+                "F",
+                "F",
+                "F"
+              ],
+              [
+                "F",
+                "T",
+                "T",
+                "T"
+              ],
+              [
+                "T",
+                "F",
+                "T",
+                "T"
+              ],
+              [
+                "T",
+                "T",
+                "F",
+                "F"
+              ]
+            ]
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch2-fig-xor-equivalence",
+            "alt": "At the top, (A AND NOT B) OR (B AND NOT A) is shown equivalent to (A OR B) AND (NOT A OR NOT B). Below left, a Venn diagram of A and B with both circles shaded except their overlap, labelled A or B, but not both. Below right, a truth table with columns A, B, first and second: F F F F; F T T T; T F T T; T T F F, noting that the last two columns agree in every row.",
+            "caption": "Two equivalent expressions for exclusive OR (original diagram after Fig 2.6).",
+            "long_description": "Equal columns in every row are the proof of equivalence; the Venn diagram shows the same region in picture form."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Tidbit",
+            "text": "Equivalent expressions may look different but always give the same result; they help simplify complex logic."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Identifying equivalent expressions"
+          },
+          {
+            "type": "paragraph",
+            "text": "Equivalent expressions are identified with truth tables: each expression is tested for all possible truth values, and if the results match in every case they are equivalent. Logical laws also help identify equivalence and simplify expressions. For example, one of De Morgan's laws says that NOT (A AND B) is equivalent to (NOT A) OR (NOT B)."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Importance of equivalence"
+          },
+          {
+            "type": "paragraph",
+            "text": "Equivalence lets us replace a complex expression with a simpler one, saving time and effort. In programming, simpler equivalent conditions make code more efficient and help avoid logical errors, and they keep reasoning and decisions correct."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Use a truth table to check whether NOT (A OR B) is equivalent to (NOT A) AND (NOT B).",
+            "explanation": "Rows (A, B): F F gives T and T; F T gives F and F; T F gives F and F; T T gives F and F. The columns agree in every row, so the expressions are equivalent (this is De Morgan's other law)."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Quick recap"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Equivalent: same truth value in every case, checked with a truth table.",
+              "XOR: (A AND NOT B) OR (B AND NOT A) is equivalent to (A OR B) AND (NOT A OR NOT B).",
+              "Equivalence simplifies logic and code (for example De Morgan's laws)."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
