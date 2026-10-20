@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-PHY-CH17-17.10",
+      "chapter": "pk-punjab/xii/physics/c12-phy/ch17",
+      "topic": "pk-punjab/xii/physics/c12-phy/ch17/17.10",
+      "title": "17.10 AC Through RC-Series Circuit",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "bfc68b7f-dac5-5e57-a286-814710fe09bc",
+          "pdf_from": 99,
+          "pdf_to": 100,
+          "note": "Topic 17.10 with Example 17.6 (PDF 99-100); Fig 17.9 (a)-(d) redrawn in the rc-rl figure. The example's capacitance printed '5 F' is read as 5 uF. The check question is added."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "A resistance R and a capacitor C are connected in series to an AC source V (Fig 17.9 a). The same current flows through both. The voltage across R is VR = Irms R, in phase with the current; the voltage across C is VC = Irms XC = Irms / (wC), lagging the current by 90 degrees. Taking the current as the reference, VR is drawn along the current line and VC at right angles to it (Fig 17.9 b). The applied voltage is the vector sum: Vrms = square root of (VR^2 + VC^2) = Irms square root of (R^2 + (1/wC)^2). So the impedance is Z = Vrms / Irms = square root of (R^2 + (1/wC)^2) (17.21)."
+          },
+          {
+            "type": "paragraph",
+            "text": "This impedance diagram (Fig 17.9 c) shows R along the reference direction and XC at right angles; Z is their vector sum. The angle theta between Z and R is the phase difference between the voltage and the current: here the current leads the voltage by theta (Fig 17.9 d), where theta = tan^-1(XC/R) = tan^-1(1/(wCR)) = tan^-1(1/(2 pi f C R))."
+          },
+          {
+            "type": "paragraph",
+            "text": "The power consumed in an RC series circuit is due to the resistor, because the capacitor only stores energy and does not dissipate it: P = I^2 R, or P = VI cos(theta) (17.22), where theta is the phase angle between voltage and current."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-phy-ch17-fig-rc-rl",
+            "alt": "Left: an RC series circuit (R and C in series with an AC source) and its voltage triangle: VR = IR along the current, VC = IXC pointing at right angles below it, and the resultant V = IZ; Z = sqrt(R^2 + (1/wC)^2), tan(theta) = XC/R. Right: an RL series circuit and its triangle with VL = IXL pointing at right angles above VR; Z = sqrt(R^2 + (wL)^2), tan(theta) = wL/R.",
+            "caption": "RC and RL series circuits and their voltage triangles (original diagram after Figs 17.9 and 17.10).",
+            "long_description": "The resistor's voltage is in step with the current; the capacitor's voltage is a quarter cycle behind and the inductor's a quarter cycle ahead. Pythagoras gives the total voltage, and the angle gives the phase difference."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Example 17.6"
+          },
+          {
+            "type": "paragraph",
+            "text": "A 5 kilo-ohm resistor is connected in series with a 5 uF capacitor across a 220 V, 50 Hz AC source. Find the phase angle. Solution: theta = tan^-1(1/(2 pi f C R)) = tan^-1[1/(2 x 3.14 x 50 Hz x 5 x 10^-6 F x 5000 ohm)] = tan^-1(0.1273) = 7.25 degrees."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "In Example 17.6, find the impedance and the rms current.",
+            "explanation": "XC = 1/(2 x 3.14 x 50 x 5 x 10^-6) = 637 ohm; Z = square root of (5000^2 + 637^2) = 5040 ohm; Irms = 220 V / 5040 ohm = 0.044 A (44 mA)."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Quick recap"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "RC series: Z = sqrt(R^2 + (1/wC)^2).",
+              "Current leads voltage by theta = tan^-1(1/(wCR)).",
+              "Power only in R: P = I^2 R = VI cos(theta)."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
