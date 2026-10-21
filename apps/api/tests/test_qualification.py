@@ -23,7 +23,7 @@ from tests.test_content_workflow import FIXTURE_BODY, Staff, _confirm_rights, _p
 team = test_content_workflow.team  # the Class XI Biology staff fixture
 
 APPROVE = {"decision": "approve", "comment": "Checked against source pages"}
-COMMIT = "0123456789abcdef0123456789abcdef01234567"  # a fixture commit, not a real measured build
+COMMIT = "a" * 40  # a fixture commit, not a real measured build
 MANIFEST: dict[str, Any] = {
     "git_commit": COMMIT,
     "migration_head": "fixturehead01",
