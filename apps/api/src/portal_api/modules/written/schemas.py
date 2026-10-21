@@ -201,7 +201,28 @@ class UploadOut(BaseModel):
 
 class ManifestIn(BaseModel):
     expected_revision: int = Field(ge=0)
-    slots: dict[str, dict[str, Any]] = Field(description='{"1:a": {"pages": [page_id], "unanswered": false}}')
+    slots: dict[str, dict[str, Any]] = Field(
+        description='{"1:a": {"pages": [page_id], "unanswered": false, "regions": [{"page": page_id, "box": [x, y, w, '
+        "h]}]}}. A region is an area of the page as shown (fractions); send `source` instead of `box` to keep a "
+        "returned region unchanged. A slot without `regions` keeps its areas."
+    )
+    order: list[uuid.UUID] | None = Field(
+        default=None, max_length=100, description="Every uploaded page once, in the order to show them; omit to keep"
+    )
+    confirmed: list[uuid.UUID] | None = Field(
+        default=None,
+        max_length=100,
+        description="Pages shared by several answers whose question numbering is confirmed; omit to keep",
+    )
+
+
+class ManifestRevisionOut(BaseModel):
+    revision: int
+    saved_at: datetime
+    answered: int = Field(description="Answer parts with pages in this revision")
+    unanswered: int = Field(description="Answer parts declared not answered")
+    areas: int = Field(description="Marked areas in this revision")
+    manifest: dict[str, Any] = Field(description="The mapping as saved (areas in canonical page coordinates)")
 
 
 class SealIn(BaseModel):

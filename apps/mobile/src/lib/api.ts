@@ -431,11 +431,19 @@ export const api = {
       `/v1/written-attempts/${encodeURIComponent(id)}/pages`,
       { method: "POST", token, raw: file },
     ),
-  saveMapping: (token: string, id: string, expectedRevision: number, slots: Record<string, { pages: string[]; unanswered: boolean }>) =>
+  // REGION-MAP-01: `confirmed` (shared pages whose numbering the learner confirmed) is sent only when it changes; left
+  // out, the server keeps the current confirmations, the page order and any areas.
+  saveMapping: (
+    token: string,
+    id: string,
+    expectedRevision: number,
+    slots: Record<string, { pages: string[]; unanswered: boolean }>,
+    confirmed?: string[],
+  ) =>
     request<WrittenAttempt>(`/v1/written-attempts/${encodeURIComponent(id)}/manifest`, {
       method: "PUT",
       token,
-      body: { expected_revision: expectedRevision, slots },
+      body: confirmed === undefined ? { expected_revision: expectedRevision, slots } : { expected_revision: expectedRevision, slots, confirmed },
     }),
   sealWritten: (token: string, id: string, idempotencyKey: string, expectedRevision: number) =>
     request<WrittenSeal>(`/v1/written-attempts/${encodeURIComponent(id)}/seal`, {

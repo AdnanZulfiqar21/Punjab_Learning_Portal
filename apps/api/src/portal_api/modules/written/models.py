@@ -106,7 +106,10 @@ class WrittenAttempt(Base):
     # W08.S1.T3 (PERMITS-01): why an expired attempt ended: its upload window closed (null) or the plan that funded
     # it was withdrawn (refund or fraud revocation).
     end_reason: Mapped[str | None] = mapped_column(String(20))
-    # Mapping manifest: {"slots": {slot: {"pages": [page_id...], "unanswered": bool}}, "order": [page_id...]}
+    # Mapping manifest: {"slots": {slot: {"pages": [page_id...], "unanswered": bool, "regions": [{"page": page_id,
+    # "source": [x, y, w, h]}]}}, "order": [page_id...], "confirmed": [page_id...]}. REGION-MAP-01: regions are
+    # fractions of the upright original (canonical), so turning or trimming a page doesn't move them; "confirmed" lists
+    # the pages shared by several answers whose question numbering the learner has confirmed.
     manifest: Mapped[dict[str, Any]] = mapped_column(JSONB, default=dict)
     manifest_revision: Mapped[int] = mapped_column(Integer, default=0)
 
@@ -162,6 +165,20 @@ class WrittenPage(Base):
     # NEAR-DUP-01: a coarse thumbnail of the uploaded page (hex), for flagging the same page uploaded twice; null for a
     # blank page or one uploaded before fingerprints existed.
     fingerprint: Mapped[str | None] = mapped_column(Text)
+
+
+class WrittenManifestRevision(Base):
+    """REGION-MAP-01 (W03.S2.T2): every saved answer mapping, kept so the learner and reviewers can see how it changed.
+
+    Rows are only added: revision n is the mapping as it stood after the n-th save."""
+
+    __tablename__ = "written_manifest_revision"
+    __table_args__ = (UniqueConstraint("attempt_id", "revision", name="uq_written_manifest_revision"),)
+    id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    attempt_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("written_attempt.id", ondelete="RESTRICT"), index=True)
+    revision: Mapped[int] = mapped_column(Integer)
+    manifest: Mapped[dict[str, Any]] = mapped_column(JSONB)
+    saved_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
 
 
 class WrittenReceipt(Base):

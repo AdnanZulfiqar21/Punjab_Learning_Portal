@@ -72,10 +72,20 @@ def _upload(client: TestClient, who: Staff, attempt_id: str, data: bytes) -> Any
 def _map(
     client: TestClient, who: Staff, attempt: dict[str, Any], slots: dict[str, Any], revision: int | None = None
 ) -> Any:
+    """Save a mapping. A page given to several answers is sent as confirmed (REGION-MAP-01 asks the learner to confirm
+    its numbering); tests of that rule send their own mappings."""
+    used: dict[str, int] = {}
+    for slot in slots.values():
+        for page in slot.get("pages", []) if isinstance(slot, dict) else []:
+            used[page] = used.get(page, 0) + 1
     return client.put(
         f"/v1/written-attempts/{attempt['id']}/manifest",
         headers=who.headers,
-        json={"expected_revision": attempt["manifest_revision"] if revision is None else revision, "slots": slots},
+        json={
+            "expected_revision": attempt["manifest_revision"] if revision is None else revision,
+            "slots": slots,
+            "confirmed": sorted(p for p, n in used.items() if n > 1),
+        },
     )
 
 

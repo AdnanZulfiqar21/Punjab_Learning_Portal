@@ -305,6 +305,7 @@ test("a pending question shows no invented mark, and a completion case finishes 
   await expect(page.getByRole("list", { name: "Uploaded pages" }).getByText(/Page 1 ·/)).toBeVisible(AUTH);
   await page.getByRole("group", { name: /Question 1 \(a\)/ }).getByLabel("Page 1").check();
   await page.getByRole("group", { name: /Question 1 \(b\)/ }).getByLabel("Page 1").check();
+  await page.getByLabel("I wrote the question numbers clearly on page 1").check(); // REGION-MAP-01: page 1 is shared
   await expect(page.getByRole("status").filter({ hasText: /Saved · revision \d+/ })).toBeVisible(AUTH);
   await page.getByRole("button", { name: "Submit for marking" }).click();
   await expect(page.getByText("Waiting for a teacher")).toBeVisible(AUTH);
@@ -356,6 +357,7 @@ test("a partly pending, partly unassessable paper shows how its marks add up", a
   for (const part of [/Question 1 \(a\)/, /Question 1 \(b\)/, /Question 2 \(a\)/, /Question 2 \(b\)/]) {
     await page.getByRole("group", { name: part }).getByLabel("Page 1").check();
   }
+  await page.getByLabel("I wrote the question numbers clearly on page 1").check(); // REGION-MAP-01: page 1 is shared
   await expect(page.getByRole("status").filter({ hasText: /Saved · revision \d+/ })).toBeVisible(AUTH);
   await page.getByRole("button", { name: "Submit for marking" }).click();
   await expect(page.getByText("Waiting for a teacher")).toBeVisible(AUTH);
@@ -455,6 +457,7 @@ test("a teacher asks for a clearer copy, the learner sends one, and it is classi
   await expect(page.getByRole("list", { name: "Uploaded pages" }).getByText(/Page 1 ·/)).toBeVisible(AUTH);
   await page.getByRole("group", { name: /Question 1 \(a\)/ }).getByLabel("Page 1").check();
   await page.getByRole("group", { name: /Question 1 \(b\)/ }).getByLabel("Page 1").check();
+  await page.getByLabel("I wrote the question numbers clearly on page 1").check(); // REGION-MAP-01: page 1 is shared
   await expect(page.getByRole("status").filter({ hasText: /Saved · revision \d+/ })).toBeVisible(AUTH);
   await page.getByRole("button", { name: "Submit for marking" }).click();
   await expect(page.getByText("Waiting for a teacher")).toBeVisible(AUTH);

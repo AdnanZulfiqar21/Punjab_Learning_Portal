@@ -8275,17 +8275,51 @@
       },
       "ManifestIn": {
         "properties": {
+          "confirmed": {
+            "anyOf": [
+              {
+                "items": {
+                  "format": "uuid",
+                  "type": "string"
+                },
+                "maxItems": 100,
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Pages shared by several answers whose question numbering is confirmed; omit to keep",
+            "title": "Confirmed"
+          },
           "expected_revision": {
             "minimum": 0.0,
             "title": "Expected Revision",
             "type": "integer"
+          },
+          "order": {
+            "anyOf": [
+              {
+                "items": {
+                  "format": "uuid",
+                  "type": "string"
+                },
+                "maxItems": 100,
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Every uploaded page once, in the order to show them; omit to keep",
+            "title": "Order"
           },
           "slots": {
             "additionalProperties": {
               "additionalProperties": true,
               "type": "object"
             },
-            "description": "{\"1:a\": {\"pages\": [page_id], \"unanswered\": false}}",
+            "description": "{\"1:a\": {\"pages\": [page_id], \"unanswered\": false, \"regions\": [{\"page\": page_id, \"box\": [x, y, w, h]}]}}. A region is an area of the page as shown (fractions); send `source` instead of `box` to keep a returned region unchanged. A slot without `regions` keeps its areas.",
             "title": "Slots",
             "type": "object"
           }
@@ -8295,6 +8329,50 @@
           "slots"
         ],
         "title": "ManifestIn",
+        "type": "object"
+      },
+      "ManifestRevisionOut": {
+        "properties": {
+          "answered": {
+            "description": "Answer parts with pages in this revision",
+            "title": "Answered",
+            "type": "integer"
+          },
+          "areas": {
+            "description": "Marked areas in this revision",
+            "title": "Areas",
+            "type": "integer"
+          },
+          "manifest": {
+            "additionalProperties": true,
+            "description": "The mapping as saved (areas in canonical page coordinates)",
+            "title": "Manifest",
+            "type": "object"
+          },
+          "revision": {
+            "title": "Revision",
+            "type": "integer"
+          },
+          "saved_at": {
+            "format": "date-time",
+            "title": "Saved At",
+            "type": "string"
+          },
+          "unanswered": {
+            "description": "Answer parts declared not answered",
+            "title": "Unanswered",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "revision",
+          "saved_at",
+          "answered",
+          "unanswered",
+          "areas",
+          "manifest"
+        ],
+        "title": "ManifestRevisionOut",
         "type": "object"
       },
       "MarkerIn": {
@@ -32929,6 +33007,53 @@
           }
         },
         "summary": "Put Manifest",
+        "tags": [
+          "written practice"
+        ]
+      }
+    },
+    "/v1/written-attempts/{attempt_id}/manifest/revisions": {
+      "get": {
+        "operationId": "manifest_revisions_v1_written_attempts__attempt_id__manifest_revisions_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "attempt_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Attempt Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/ManifestRevisionOut"
+                  },
+                  "title": "Response Manifest Revisions V1 Written Attempts  Attempt Id  Manifest Revisions Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Every saved answer mapping of an attempt, oldest first (W03.S2.T2)",
         "tags": [
           "written practice"
         ]

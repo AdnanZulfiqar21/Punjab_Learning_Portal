@@ -4526,6 +4526,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/written-attempts/{attempt_id}/manifest/revisions": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Every saved answer mapping of an attempt, oldest first (W03.S2.T2) */
+        get: operations["manifest_revisions_v1_written_attempts__attempt_id__manifest_revisions_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/written-attempts/{attempt_id}/pages": {
         parameters: {
             query?: never;
@@ -8177,17 +8194,59 @@ export interface components {
         };
         /** ManifestIn */
         ManifestIn: {
+            /**
+             * Confirmed
+             * @description Pages shared by several answers whose question numbering is confirmed; omit to keep
+             */
+            confirmed?: string[] | null;
             /** Expected Revision */
             expected_revision: number;
             /**
+             * Order
+             * @description Every uploaded page once, in the order to show them; omit to keep
+             */
+            order?: string[] | null;
+            /**
              * Slots
-             * @description {"1:a": {"pages": [page_id], "unanswered": false}}
+             * @description {"1:a": {"pages": [page_id], "unanswered": false, "regions": [{"page": page_id, "box": [x, y, w, h]}]}}. A region is an area of the page as shown (fractions); send `source` instead of `box` to keep a returned region unchanged. A slot without `regions` keeps its areas.
              */
             slots: {
                 [key: string]: {
                     [key: string]: unknown;
                 };
             };
+        };
+        /** ManifestRevisionOut */
+        ManifestRevisionOut: {
+            /**
+             * Answered
+             * @description Answer parts with pages in this revision
+             */
+            answered: number;
+            /**
+             * Areas
+             * @description Marked areas in this revision
+             */
+            areas: number;
+            /**
+             * Manifest
+             * @description The mapping as saved (areas in canonical page coordinates)
+             */
+            manifest: {
+                [key: string]: unknown;
+            };
+            /** Revision */
+            revision: number;
+            /**
+             * Saved At
+             * Format: date-time
+             */
+            saved_at: string;
+            /**
+             * Unanswered
+             * @description Answer parts declared not answered
+             */
+            unanswered: number;
         };
         /** MarkerIn */
         MarkerIn: {
@@ -21748,6 +21807,37 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["WrittenAttemptOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    manifest_revisions_v1_written_attempts__attempt_id__manifest_revisions_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                attempt_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ManifestRevisionOut"][];
                 };
             };
             /** @description Validation Error */

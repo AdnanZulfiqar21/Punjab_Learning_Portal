@@ -141,6 +141,24 @@ def _live_state() -> dict[str, Any]:
     }
 
 
+def _qualification() -> list[dict[str, Any]]:
+    """P20.S4.T4 (QUALIFICATION-01): the qualification records this build's capacity, security and device claims may
+    rest on. `python -m portal_api.qualification impact` lists which of them a change since their measured build
+    invalidates; an invalid record file is reported by `qualification check` and left out here."""
+    from portal_api.qualification import load_records
+
+    records, _ = load_records()
+    return [
+        {
+            "id": r.id,
+            "scenario": r.scenario,
+            "measured_commit": r.manifest["git_commit"],
+            "measured_at": str(r.measured_at),
+        }
+        for r in records
+    ]
+
+
 def manifest() -> dict[str, Any]:
     from portal_api import budget
     from portal_api.main import create_app
@@ -178,6 +196,7 @@ def manifest() -> dict[str, Any]:
         "image_digests": None,  # container images are built and pushed with hosting (B03)
         **_live_state(),
         "known_limitations": _open_blockers(),
+        "qualification_records": _qualification(),
     }
 
 

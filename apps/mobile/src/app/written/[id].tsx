@@ -23,7 +23,9 @@ import { TIME_ZONE } from "@/lib/dates";
 import { clearAttempt, keepPage, listPages, notePageError, pickPdf, removePage } from "@/lib/page-drafts";
 import { WrittenPages } from "@/lib/written-pages";
 
-type Slot = { pages: string[]; unanswered: boolean };
+// REGION-MAP-01: areas marked on the website come back with the slot and are sent back unchanged (the server keeps
+// their saved place), so saving here never moves or drops them.
+type Slot = { pages: string[]; unanswered: boolean; regions?: { page: string }[] };
 const when = (iso: string) => new Date(iso).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short", timeZone: TIME_ZONE });
 const newKey = () => `${Date.now().toString(36)}${Math.random().toString(36).slice(2, 12)}`;
 const mb = (n: number) => `${Math.max(1, Math.round(n / (1024 * 1024)))} MB`;
@@ -85,6 +87,9 @@ function Runner({ initial, token, owner, reload }: { initial: WrittenAttempt; to
   const [error, setError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
   const slots = (a.manifest as { slots?: Record<string, Slot> }).slots ?? {};
+  // REGION-MAP-01: pages used by several answers without marked areas; the learner confirms their numbering.
+  const unconfirmed = (a.manifest as { ambiguous?: string[] }).ambiguous ?? [];
+  const confirmed = (a.manifest as { confirmed?: string[] }).confirmed ?? [];
 
   // Send what is still on the phone as soon as the test is open again.
   useEffect(() => {
@@ -131,12 +136,12 @@ function Runner({ initial, token, owner, reload }: { initial: WrittenAttempt; to
     });
   }
 
-  async function save(next: Record<string, Slot>) {
+  async function save(next: Record<string, Slot>, nextConfirmed?: string[]) {
     setSaving(true);
     setError(null);
     await pages.track(async () => {
       try {
-        setA(await api.saveMapping(token, a.id, a.manifest_revision, next));
+        setA(await api.saveMapping(token, a.id, a.manifest_revision, next, nextConfirmed));
       } catch (e) {
         if (e instanceof ApiError && e.kind === "conflict") {
           setError("Your mapping changed on another device. The latest version has been loaded.");
@@ -159,8 +164,17 @@ function Runner({ initial, token, owner, reload }: { initial: WrittenAttempt; to
     void save({ ...slots, [slot]: { pages: cur.unanswered ? cur.pages : [], unanswered: !cur.unanswered } });
   }
 
+  function confirmNumbering(page: string) {
+    const on = confirmed.includes(page);
+    void save(slots, on ? confirmed.filter((p) => p !== page) : [...confirmed, page]);
+  }
+
   async function seal() {
     setError(null);
+    if (unconfirmed.length > 0) {
+      setError("Confirm the question numbers on the pages with more than one answer.");
+      return;
+    }
     const out = await pages.seal(mapped, allSlots.length, a.manifest_revision); // checks the gate again, now
     if (out.ok) reload();
     else setError(out.reason);
@@ -168,7 +182,9 @@ function Runner({ initial, token, owner, reload }: { initial: WrittenAttempt; to
 
   const allSlots = a.items.flatMap((it) => it.slots);
   const mapped = allSlots.filter((s) => (slots[s.key]?.pages.length ?? 0) > 0 || slots[s.key]?.unanswered).length;
-  const blocked = pages.blocker(mapped, allSlots.length);
+  const blocked =
+    pages.blocker(mapped, allSlots.length) ?? (unconfirmed.length > 0 ? "Confirm the question numbers on the pages with more than one answer." : null);
+  const pageNo = (id: string) => a.pages.findIndex((p) => p.id === id) + 1;
   const pending = pages.pending;
   return (
     <ScrollView style={{ backgroundColor: c.background }} contentContainerStyle={{ padding: Space.lg, gap: Space.lg }}>
@@ -344,7 +360,10 @@ function Runner({ initial, token, owner, reload }: { initial: WrittenAttempt; to
                             borderColor: on ? c.accent : c.border,
                             backgroundColor: on ? c.accentSoft : c.surface,
                           }}>
-                          <T variant="small">Page {i + 1}</T>
+                          <T variant="small">
+                            Page {i + 1}
+                            {on && (cur.regions ?? []).some((r) => r.page === p.id) ? " · area marked" : ""}
+                          </T>
                         </Pressable>
                       );
                     })}
@@ -361,6 +380,29 @@ function Runner({ initial, token, owner, reload }: { initial: WrittenAttempt; to
               </Card>
             );
           })}
+          {[...unconfirmed, ...confirmed].length > 0 && (
+            <Card label="Pages with more than one answer">
+              <View style={{ gap: Space.xs }}>
+                <T variant="small">
+                  A teacher needs to know which part of these pages answers which question. Confirm that you wrote the question number beside each
+                  answer (or mark each answer&apos;s area on the website).
+                </T>
+                {[...unconfirmed, ...confirmed].sort((x, y) => pageNo(x) - pageNo(y)).map((pid) => (
+                  <Pressable
+                    key={pid}
+                    accessibilityRole="checkbox"
+                    accessibilityLabel={`I wrote the question numbers clearly on page ${pageNo(pid)}`}
+                    aria-checked={confirmed.includes(pid)}
+                    disabled={saving}
+                    onPress={() => confirmNumbering(pid)}>
+                    <T variant="small">
+                      {confirmed.includes(pid) ? "☑" : "☐"} I wrote the question numbers clearly on page {pageNo(pid)}
+                    </T>
+                  </Pressable>
+                ))}
+              </View>
+            </Card>
+          )}
           <T variant="small" accessibilityRole="text">
             {saving ? "Saving…" : `Saved · revision ${a.manifest_revision}`} · {mapped} of {allSlots.length} parts mapped
           </T>
