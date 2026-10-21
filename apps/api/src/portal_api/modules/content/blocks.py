@@ -64,8 +64,8 @@ REGISTRY: dict[str, BlockSpec] = {
         BlockSpec("list", 1, {"web": 1, "android": 1, "ios": 1}, True, "Ordered or unordered list."),
         BlockSpec("callout", 1, {"web": 1, "android": 1, "ios": 1}, True, "Definition, tip, note or warning box."),
         BlockSpec("table", 1, {"web": 1, "android": 1, "ios": 1}, True, "Small data table with a caption."),
-        # Equations need a typeset renderer. No client ships one yet (P01.S4.T2 rendering spike), so every equation
-        # needs a reviewed static rendering plus its text equivalent before it can be published.
+        # Equations need a typeset renderer. The web typesets them (P01.S4.T2, RENDERER-SPIKE-01); the apps don't yet,
+        # so every equation still needs a reviewed static rendering plus its text equivalent before it can be published.
         BlockSpec("equation", 1, {"web": 2, "android": 2, "ios": 2}, True, "LaTeX equation with text equivalent."),
         # P07.S1.T3: formative only. Renderer v1 includes it on every platform because no native build had shipped when
         # it was added (B07); after a store release, a new block type must raise the renderer version instead.

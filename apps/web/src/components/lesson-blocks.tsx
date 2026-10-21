@@ -1,11 +1,14 @@
 import { Fragment, type ReactNode } from "react";
 import { Checkpoint } from "@/components/checkpoint";
+import { Equation } from "@/components/equation";
 import { Model3DFigure } from "@/components/model3d-figure";
 import { SaverImage } from "@/components/saver-image";
 
 // Renders content blocks (schema v1, roadmap §5.4). Web renderer version 2: comparison tables fold into cards on narrow
 // screens and `model3d` blocks show a poster render with a turntable. Unknown block types never crash the page: they
 // show their reviewed fallback, or an explicit "update required" notice, as the renderer contract requires.
+// P01.S4.T2: equations are typeset (components/equation.tsx), and text blocks take their direction from their own text
+// (`dir="auto"`), so an Urdu paragraph reads right to left while English and Roman Urdu stay left to right.
 export const WEB_RENDERER_VERSION = 2;
 
 type Block = { type: string; [key: string]: unknown };
@@ -34,6 +37,7 @@ export function LessonBlocks({
   equationAction,
   dataSaver = false,
   blockIds = false,
+  typeset,
 }: {
   blocks: Block[];
   headingOffset?: number;
@@ -44,6 +48,8 @@ export function LessonBlocks({
   equationAction?: (index: number) => ReactNode;
   /** Give each block an id (b0, b1, …) so language variants with one structure can return to the same place. */
   blockIds?: boolean;
+  /** P01.S4.T2: equations already typeset on the server (`lib/typeset.ts`), by block index. */
+  typeset?: Record<number, string | null>;
 }) {
   return (
     <div className="space-y-5 leading-relaxed">
@@ -51,10 +57,10 @@ export function LessonBlocks({
         <Fragment key={i}>
           {blockIds ? (
             <div id={`b${i}`} data-block="" className="scroll-mt-20">
-              <BlockView block={b} headingOffset={headingOffset} assetUrl={assetUrl} dataSaver={dataSaver} />
+              <BlockView block={b} headingOffset={headingOffset} assetUrl={assetUrl} dataSaver={dataSaver} typeset={typeset?.[i]} />
             </div>
           ) : (
-            <BlockView block={b} headingOffset={headingOffset} assetUrl={assetUrl} dataSaver={dataSaver} />
+            <BlockView block={b} headingOffset={headingOffset} assetUrl={assetUrl} dataSaver={dataSaver} typeset={typeset?.[i]} />
           )}
           {b.type === "equation" && equationAction?.(i)}
         </Fragment>
@@ -81,17 +87,41 @@ function FallbackView({ fb, assetUrl, dataSaver }: { fb: Fallback; assetUrl?: As
   );
 }
 
-function BlockView({ block: b, headingOffset, assetUrl, dataSaver }: { block: Block; headingOffset: number; assetUrl?: AssetUrl; dataSaver?: boolean }) {
+function BlockView({
+  block: b,
+  headingOffset,
+  assetUrl,
+  dataSaver,
+  typeset,
+}: {
+  block: Block;
+  headingOffset: number;
+  assetUrl?: AssetUrl;
+  dataSaver?: boolean;
+  typeset?: string | null;
+}) {
   switch (b.type) {
     case "heading": {
       const level = Math.min(6, (b.level === 3 ? 3 : 2) + headingOffset);
       const Tag = `h${level}` as "h2" | "h3" | "h4" | "h5" | "h6";
-      return <Tag className={b.level === 3 ? "text-lg font-semibold" : "text-xl font-semibold tracking-tight"}>{str(b.text)}</Tag>;
+      return (
+        <Tag dir="auto" className={b.level === 3 ? "text-lg font-semibold" : "text-xl font-semibold tracking-tight"}>
+          {str(b.text)}
+        </Tag>
+      );
     }
     case "paragraph":
-      return <p className="whitespace-pre-line">{str(b.text)}</p>;
+      return (
+        <p dir="auto" className="whitespace-pre-line">
+          {str(b.text)}
+        </p>
+      );
     case "list": {
-      const items = strs(b.items).map((t, i) => <li key={i}>{t}</li>);
+      const items = strs(b.items).map((t, i) => (
+        <li key={i} dir="auto">
+          {t}
+        </li>
+      ));
       return b.ordered ? (
         <ol className="list-decimal space-y-1 pl-6">{items}</ol>
       ) : (
@@ -103,8 +133,14 @@ function BlockView({ block: b, headingOffset, assetUrl, dataSaver }: { block: Bl
       return (
         <aside className={`rounded-lg border-l-4 px-4 py-3 ${CALLOUT_STYLE[tone] ?? CALLOUT_STYLE.note}`}>
           <p className="text-xs font-semibold tracking-wide text-muted uppercase">{CALLOUT_LABEL[tone] ?? "Note"}</p>
-          {str(b.title) && <p className="font-semibold">{str(b.title)}</p>}
-          <p className="whitespace-pre-line">{str(b.text)}</p>
+          {str(b.title) && (
+            <p dir="auto" className="font-semibold">
+              {str(b.title)}
+            </p>
+          )}
+          <p dir="auto" className="whitespace-pre-line">
+            {str(b.text)}
+          </p>
         </aside>
       );
     }
@@ -150,15 +186,22 @@ function BlockView({ block: b, headingOffset, assetUrl, dataSaver }: { block: Bl
         />
       );
     case "equation": {
-      // No typeset renderer ships yet (§5.4: equations need a reviewed fallback before publication). Show the reviewed
-      // static rendering when there is one, always with the text equivalent; the source LaTeX helps staff check.
+      // Typeset on the web (P01.S4.T2), always with the text equivalent. The reviewed static rendering (§5.4: required
+      // before publication while the apps have no equation renderer) shows when typesetting is off or fails.
       const fb = (b.fallback ?? {}) as Fallback;
       return (
-        <figure className="space-y-2 rounded-lg border border-border bg-surface px-4 py-3">
-          {str(fb.image_asset_id) && <ArchivedImage id={str(fb.image_asset_id)} alt={str(fb.alt) || str(b.text_alt)} assetUrl={assetUrl} dataSaver={dataSaver} />}
-          <p>{str(b.text_alt)}</p>
-          <figcaption className="font-mono text-xs text-muted">{str(b.latex)}</figcaption>
-        </figure>
+        <Equation
+          latex={str(b.latex)}
+          display={b.display !== false}
+          textAlt={str(b.text_alt)}
+          dataSaver={dataSaver}
+          typeset={typeset}
+          fallback={
+            str(fb.image_asset_id) ? (
+              <ArchivedImage id={str(fb.image_asset_id)} alt={str(fb.alt) || str(b.text_alt)} assetUrl={assetUrl} dataSaver={dataSaver} />
+            ) : null
+          }
+        />
       );
     }
     case "example":
