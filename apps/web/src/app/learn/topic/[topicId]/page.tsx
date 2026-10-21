@@ -8,6 +8,7 @@ import { KeepPlace } from "@/components/keep-place";
 import { LectureView } from "@/components/lecture-view";
 import { LessonBlocks } from "@/components/lesson-blocks";
 import { typesetEquations } from "@/lib/typeset";
+import { placeSignature, type PlaceBlock } from "@/lib/variant-place";
 import { Notice, SkeletonLines } from "@/components/ui";
 import { DISPLAY_COOKIE, parseDisplay } from "@/lib/display";
 import { GRADE_LABEL } from "@/lib/format";
@@ -97,7 +98,7 @@ async function TopicView({ id, view }: { id: string; view: "read" | "lecture" })
       {readable && (
         <form action={chooseReadingLanguage} className="sticky top-0 z-10 -mx-4 space-y-2 bg-background/95 px-4 py-2 backdrop-blur" aria-label="Explanation language">
           <input type="hidden" name="topic" value={reading.topic_id} />
-          <KeepPlace lessonId={lesson?.id ?? ""} />
+          <KeepPlace lessonId={lesson?.id ?? ""} signatures={(lesson?.body?.blocks ?? []).map((b) => placeSignature(b as PlaceBlock))} />
           <div role="group" aria-label="Read or watch" className="inline-flex rounded-lg border border-border bg-surface-muted p-0.5">
             {READING_LANGUAGES.map(([code, label]) =>
               view === "lecture" ? (

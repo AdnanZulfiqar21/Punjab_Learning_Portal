@@ -1,8 +1,9 @@
 // A topic's lesson (pilot): "English | Roman Urdu" at the top, a compact header, the lesson, then previous/next.
 // The language choice is kept on this device and, for a signed-in learner, in the profile's explanation language.
-// Both variants share one block structure, so switching languages returns to the same place in the lesson.
+// The variants differ in structure (the English lesson carries only the book; Roman Urdu adds our explanations), so a
+// language switch returns to the matching block of the other variant (READER-PLACE-01, lib/variant-place.ts).
 import { router, Stack, useLocalSearchParams } from "expo-router";
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef, type RefObject } from "react";
 import { Pressable, ScrollView, View, type NativeScrollEvent, type NativeSyntheticEvent } from "react-native";
 
 import { LectureView } from "@/components/lecture-view";
@@ -17,8 +18,11 @@ import { useAuth } from "@/lib/auth";
 import { useDisplay } from "@/lib/display";
 import { usePrefs } from "@/lib/prefs";
 import { missingLanguageNote, preferredLanguage, READING_LANGUAGES, type ReadingLanguage } from "@/lib/reading-language-core";
+import { mapPlace, placeSignature, type PlaceBlock } from "@/lib/variant-place";
 
 type Segment = ReadingLanguage | "lecture";
+/** The block the reader was on when switching language, kept by the screen while the other variant loads. */
+type Place = { lessonId: string; index: number; signatures: string[]; target?: number };
 const SEGMENTS: readonly (readonly [Segment, string])[] = [...READING_LANGUAGES, ["lecture", "Lecture"]];
 
 export default function TopicScreen() {
@@ -32,6 +36,7 @@ export default function TopicScreen() {
   const { state, retry } = useRequest((signal) => api.topicLesson(id, token, signal, language), [id, token, language]);
   const lecture = useRequest((signal) => api.topicLecture(id, token, signal), [id, token]);
   const c = useTheme();
+  const placeRef = useRef<Place | null>(null);
 
   function choose(next: ReadingLanguage) {
     update({ language: next });
@@ -67,6 +72,7 @@ export default function TopicScreen() {
         onLanguage={choose}
         onView={(next) => update({ view: next })}
         background={c.background}
+        placeRef={placeRef}
       />
     </SubjectAccent>
   );
@@ -81,6 +87,7 @@ function Reader({
   onLanguage,
   onView,
   background,
+  placeRef,
 }: {
   reading: TopicReading;
   token: string | null;
@@ -90,6 +97,7 @@ function Reader({
   onLanguage: (next: ReadingLanguage) => void;
   onView: (next: "read" | "lecture") => void;
   background: string;
+  placeRef: RefObject<Place | null>;
 }) {
   const c = useTheme();
   const lesson = reading.lesson;
@@ -97,7 +105,8 @@ function Reader({
   const offset = useRef(0);
   const bodyTop = useRef(0);
   const blockYs = useRef<number[]>([]);
-  const pending = useRef<number | null>(null);
+  const blocks = useMemo(() => (lesson?.body?.blocks ?? []) as PlaceBlock[], [lesson?.body?.blocks]);
+  const signatures = useMemo(() => blocks.map(placeSignature), [blocks]);
 
   // Which block the reader is on, for the language switch (the nearest block that starts above the top of the screen).
   function anchorIndex(): number {
@@ -110,7 +119,7 @@ function Reader({
   }
   function switchLanguage(next: ReadingLanguage) {
     if (next === language) return;
-    pending.current = anchorIndex();
+    placeRef.current = lesson ? { lessonId: lesson.id, index: anchorIndex(), signatures } : null;
     blockYs.current = [];
     onLanguage(next);
   }
@@ -125,9 +134,13 @@ function Reader({
   }
   function onBlockLayout(index: number, y: number) {
     blockYs.current[index] = y;
-    if (pending.current === index) {
-      pending.current = null;
-      scroll.current?.scrollTo({ y: bodyTop.current + y, animated: false });
+    const p = placeRef.current;
+    if (!p || !lesson || p.lessonId === lesson.id) return;
+    p.target ??= mapPlace(p.signatures, signatures, p.index);
+    const targetY = blockYs.current[p.target];
+    if (targetY !== undefined) {
+      placeRef.current = null;
+      scroll.current?.scrollTo({ y: bodyTop.current + targetY, animated: false });
     }
   }
   const onScroll = (e: NativeSyntheticEvent<NativeScrollEvent>) => {

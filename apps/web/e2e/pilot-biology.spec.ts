@@ -82,7 +82,19 @@ test("staff who cover the subject read the draft in English, then in Roman Urdu 
     await expect(english).toHaveAttribute("aria-pressed", "true", AUTH);
     await page.waitForLoadState("networkidle");
   }
-  // Renderer 2: a comparison table folds into cards on narrow screens; a model shows its poster, then a turntable.
+  // Switch to Roman Urdu from a figure further down. The variants differ in structure (EN-BOOK-ONLY-01: the English
+  // lesson carries only the book), so the page returns to the matching block, the same figure (READER-PLACE-01).
+  const figures = page.locator("[data-block] figure").filter({ hasNotText: "3D model" });
+  const figure = figures.nth(Math.floor((await figures.count()) / 2)); // one the page can scroll to the top
+  const src = await figure.getByRole("img").first().getAttribute("src");
+  expect(src).toBeTruthy();
+  await figure.evaluate((el) => el.closest("[data-block]")?.scrollIntoView({ block: "start" }));
+  await languages.getByRole("button", { name: "Roman Urdu" }).click();
+  await expect(languages.getByRole("button", { name: "Roman Urdu" })).toHaveAttribute("aria-pressed", "true", AUTH);
+  await expect(page.getByText(/Roman Urdu isn’t available/)).toHaveCount(0);
+  await expect(page.locator(`[data-block] img[src="${src}"]`).first()).toBeInViewport(AUTH);
+  await expect(page.locator("[data-block]").nth(0)).not.toBeInViewport();
+  // Renderer 2: a model shows its poster, then a turntable (3D models are ours, so they are in the Roman Urdu lesson).
   const model = page.locator("figure").filter({ hasText: "3D model" }).first();
   await model.scrollIntoViewIfNeeded();
   const poster = model.getByRole("img").first();
@@ -93,15 +105,6 @@ test("staff who cover the subject read the draft in English, then in Roman Urdu 
   await turntable.focus();
   await page.keyboard.press("ArrowRight");
   await expect(turntable).toHaveAttribute("aria-valuenow", "2");
-
-  // Switch to Roman Urdu from a block further down: the page returns to that block in the other variant.
-  const anchor = page.locator("[data-block]").nth(6);
-  await anchor.evaluate((el) => el.scrollIntoView({ block: "start" }));
-  await languages.getByRole("button", { name: "Roman Urdu" }).click();
-  await expect(languages.getByRole("button", { name: "Roman Urdu" })).toHaveAttribute("aria-pressed", "true", AUTH);
-  await expect(page.getByText(/Roman Urdu isn’t available/)).toHaveCount(0);
-  await expect(page.locator("[data-block]").nth(6)).toBeInViewport(AUTH);
-  await expect(page.locator("[data-block]").nth(0)).not.toBeInViewport();
   // The preference is kept: another topic opens in Roman Urdu too.
   await page.goto(TOPIC_1_1);
   await expect(page.getByRole("group", { name: "Read or watch" }).getByRole("button", { name: "Roman Urdu" })).toHaveAttribute("aria-pressed", "true");
