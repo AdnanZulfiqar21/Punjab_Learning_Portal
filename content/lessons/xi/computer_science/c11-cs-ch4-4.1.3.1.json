@@ -44,7 +44,7 @@
                 "Prefix (Polish)",
                 "before the operands",
                 "+ A B",
-                "x + A B C"
+                ""
               ]
             ]
           },
@@ -72,30 +72,6 @@
           {
             "type": "paragraph",
             "text": "Example: 3 + 4 * 2. Read 3: output [3]. Read +: stack [+]. Read 4: output [3, 4]. Read *: higher priority than +, so push: stack [+, *]. Read 2: output [3, 4, 2]. End: pop all: 3 4 2 * +."
-          },
-          {
-            "type": "checkpoint",
-            "mode": "self_check",
-            "prompt": "When converting infix to postfix, what does the stack help to manage (MCQ 4)?",
-            "explanation": "(d) both the priority of operators and parentheses."
-          },
-          {
-            "type": "checkpoint",
-            "mode": "self_check",
-            "prompt": "Long question 4: convert (5 + 2) * (3 - 1) to postfix with a stack, showing the stack and output after each token.",
-            "explanation": "( stack [(], output []; 5 output [5]; + stack [(, +]; 2 output [5, 2]; ) pop + : stack [], output [5, 2, +]; * stack [*]; ( stack [*, (]; 3 output [5, 2, +, 3]; - stack [*, (, -]; 1 output [5, 2, +, 3, 1]; ) pop - : stack [*], output [5, 2, +, 3, 1, -]; end: pop *: postfix 5 2 + 3 1 - *, which evaluates to 7 x 2 = 14."
-          },
-          {
-            "type": "heading",
-            "level": 2,
-            "text": "Quick recap"
-          },
-          {
-            "type": "list",
-            "ordered": false,
-            "items": [
-              "Infix A + B, postfix A B +, prefix + A B; a stack holds operators and parentheses during conversion: 3 + 4 * 2 becomes 3 4 2 * +."
-            ]
           }
         ]
       }

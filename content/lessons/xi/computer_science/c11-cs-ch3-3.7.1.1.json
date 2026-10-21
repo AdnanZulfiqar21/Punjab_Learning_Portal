@@ -26,61 +26,25 @@
           },
           {
             "type": "table",
-            "caption": "Bubble sort passes on [5, 3, 8, 4, 2]",
+            "caption": "Bubble sort on [5, 3, 8, 4, 2]",
             "header": [
-              "Pass",
-              "List after the pass"
+              "Stage",
+              "List"
             ],
             "rows": [
               [
-                "1",
-                "[3, 5, 4, 2, 8]"
+                "Start",
+                "[5, 3, 8, 4, 2]"
               ],
               [
-                "2",
-                "[3, 4, 2, 5, 8]"
-              ],
-              [
-                "3",
-                "[3, 2, 4, 5, 8]"
-              ],
-              [
-                "4",
+                "Sorted after several passes",
                 "[2, 3, 4, 5, 8]"
-              ],
-              [
-                "5",
-                "no swaps: sorted"
               ]
             ]
           },
           {
             "type": "paragraph",
             "text": "Bubble Sort is O(n^2), so it is inefficient for large datasets, but it is easy to understand and useful for teaching and small datasets. For larger datasets use more efficient algorithms like Quick Sort or Merge Sort (Tip)."
-          },
-          {
-            "type": "checkpoint",
-            "mode": "self_check",
-            "prompt": "Which algorithm sorts by repeatedly stepping through the list and swapping adjacent elements in the wrong order (MCQ 7)?",
-            "explanation": "(c) Bubble Sort."
-          },
-          {
-            "type": "checkpoint",
-            "mode": "self_check",
-            "prompt": "Explain the process and time complexity of Bubble Sort and compare it with another sorting algorithm (long question 6).",
-            "explanation": "Each pass compares every adjacent pair and swaps those out of order, so the largest remaining value moves to the end; up to n - 1 passes of up to n - 1 comparisons give O(n^2) time. Merge Sort instead splits the list in halves, sorts them and merges them, taking O(n log n). For 1,000 items bubble sort needs about 500,000 comparisons, merge sort only about 10,000, so merge sort is far better for large lists; bubble sort is simpler and needs no extra memory."
-          },
-          {
-            "type": "heading",
-            "level": 2,
-            "text": "Quick recap"
-          },
-          {
-            "type": "list",
-            "ordered": false,
-            "items": [
-              "Bubble sort: swap adjacent pairs pass by pass; [5, 3, 8, 4, 2] to [2, 3, 4, 5, 8]; O(n^2)."
-            ]
           }
         ]
       }

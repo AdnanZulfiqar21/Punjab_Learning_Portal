@@ -27,36 +27,6 @@
           {
             "type": "paragraph",
             "text": "The Fibonacci sequence starts with 0 and 1, and each later number is the sum of the two before it: 0 + 1 = 1, 1 + 1 = 2, 1 + 2 = 3, giving 0, 1, 1, 2, 3, 5, 8, 13, 21, 34 and so on. It is named after Leonardo of Pisa (Fibonacci) and appears in nature, in leaf patterns, tree branching and pine-cone scales. DP stores each Fibonacci number once it is computed instead of recalculating it."
-          },
-          {
-            "type": "callout",
-            "tone": "note",
-            "title": "Python code (each .... is one 4-space indent)",
-            "text": "fib = [0, 1]\nfor i in range(2, 20):\n....fib.append(fib[i - 1] + fib[i - 2])    # use stored values\nprint(fib)       # 20 terms\nprint(fib[19])   # 4181, the 20th term"
-          },
-          {
-            "type": "checkpoint",
-            "mode": "self_check",
-            "prompt": "Class activity: use DP to produce the Fibonacci sequence up to the 20th term. What is the 20th term?",
-            "explanation": "The code above stores each term in a list and computes the next from the last two, 18 additions in all; counting 0 as the first term, the 20th term is 4181. The code is not from the book."
-          },
-          {
-            "type": "checkpoint",
-            "mode": "self_check",
-            "prompt": "In which scenario is DP particularly useful (MCQ 6)? Discuss the advantages of DP (short question 5).",
-            "explanation": "(c) when problems have overlapping subproblems and optimal substructure. Advantages: each subproblem is solved once, so far fewer calculations (Fibonacci in linear time instead of an exponential number of repeated calls); it gives exact optimal answers; and stored results can be reused."
-          },
-          {
-            "type": "heading",
-            "level": 2,
-            "text": "Quick recap"
-          },
-          {
-            "type": "list",
-            "ordered": false,
-            "items": [
-              "DP: solve subproblems once and store them; Fibonacci 0, 1, 1, 2, 3, 5, 8, ...; 20th term 4181."
-            ]
           }
         ]
       }
