@@ -3,9 +3,10 @@
 // An unknown or unsupported block shows its reviewed fallback, or an explicit "update required" note instead of failing.
 import { Image } from "expo-image";
 import { Fragment, useState, type ReactNode } from "react";
-import { View } from "react-native";
+import { Pressable, View } from "react-native";
 
 import { Checkpoint } from "@/components/checkpoint";
+import { FigureViewer } from "@/components/figure-viewer";
 import { Model3D } from "@/components/model3d";
 import { LinkButton, T } from "@/components/ui";
 import { Radius, Space } from "@/constants/theme";
@@ -54,10 +55,24 @@ export function LessonBlocks({
   );
 }
 
-/** A figure plate: archived PNGs have white backgrounds, so the plate stays white in both themes. */
-function ArchivedImage({ id, alt, assetSource, dataSaver }: { id: string; alt: string; assetSource?: AssetSource; dataSaver?: boolean }) {
+/** A figure plate: archived PNGs have white backgrounds, so the plate stays white in both themes. Tapping it opens the
+ * figure full screen to pinch-zoom its labels (DIAGRAM-ZOOM-01). */
+function ArchivedImage({
+  id,
+  alt,
+  caption,
+  assetSource,
+  dataSaver,
+}: {
+  id: string;
+  alt: string;
+  caption?: string;
+  assetSource?: AssetSource;
+  dataSaver?: boolean;
+}) {
   const c = useTheme();
   const [shown, setShown] = useState(false);
+  const [open, setOpen] = useState(false);
   if (assetSource && id && dataSaver && !shown) {
     return (
       <View style={{ borderWidth: 1, borderStyle: "dashed", borderColor: c.border, borderRadius: Radius.sm, padding: Space.md, gap: Space.sm }}>
@@ -74,9 +89,24 @@ function ArchivedImage({ id, alt, assetSource, dataSaver }: { id: string; alt: s
     );
   }
   return (
-    <View style={{ backgroundColor: "#ffffff", borderWidth: 1, borderColor: c.border, borderRadius: Radius.md, overflow: "hidden" }}>
-      <Image source={assetSource(id)} accessibilityLabel={alt} accessible contentFit="contain" style={{ width: "100%", aspectRatio: 4 / 3 }} />
-    </View>
+    <>
+      <Pressable
+        onPress={() => setOpen(true)}
+        accessibilityRole="imagebutton"
+        accessibilityLabel={alt}
+        accessibilityHint="Opens the diagram full screen so you can zoom in"
+        style={{ backgroundColor: "#ffffff", borderWidth: 1, borderColor: c.border, borderRadius: Radius.md, overflow: "hidden" }}>
+        <Image source={assetSource(id)} contentFit="contain" style={{ width: "100%", aspectRatio: 4 / 3 }} />
+        <View
+          pointerEvents="none"
+          style={{ position: "absolute", right: Space.sm, bottom: Space.sm, backgroundColor: "rgba(17,19,23,0.72)", borderRadius: Radius.pill, paddingHorizontal: Space.sm, paddingVertical: 3 }}>
+          <T variant="small" style={{ color: "#ffffff", fontWeight: "600" }}>
+            Tap to zoom
+          </T>
+        </View>
+      </Pressable>
+      {open ? <FigureViewer source={assetSource(id)} alt={alt} caption={caption} onClose={() => setOpen(false)} /> : null}
+    </>
   );
 }
 
@@ -184,7 +214,7 @@ function BlockView({ block: b, assetSource, dataSaver }: { block: Block; assetSo
     case "diagram":
       return (
         <View style={{ gap: Space.xs }}>
-          <ArchivedImage id={str(b.asset_version_id)} alt={str(b.alt)} assetSource={assetSource} dataSaver={dataSaver} />
+          <ArchivedImage id={str(b.asset_version_id)} alt={str(b.alt)} caption={str(b.caption)} assetSource={assetSource} dataSaver={dataSaver} />
           <T variant="small">{str(b.caption)}</T>
           {str(b.long_description) ? <Description text={str(b.long_description)} /> : null}
         </View>
