@@ -1,4 +1,4 @@
-"""P06.S3.T2 (RELEASE-01): several approved items published together, or none of them, and rolled back together.
+"""P06.S3.T2 (CONTENT-RELEASE-01): several approved items published together, or none of them, and rolled back together.
 
 Lesson text is a technical fixture used only to exercise the workflow."""
 

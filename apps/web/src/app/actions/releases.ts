@@ -1,6 +1,6 @@
 "use server";
 
-// P06.S3.T2 (RELEASE-01): publish several approved items together, or none of them, and roll a release back as a
+// P06.S3.T2 (CONTENT-RELEASE-01): publish several approved items together, or none of them, and roll a release back as a
 // whole. The API checks the publisher's scope, MFA and independence and today's publication gate for every item.
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";

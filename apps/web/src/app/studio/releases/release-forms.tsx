@@ -24,7 +24,7 @@ function Problems({ result }: { result: ReleaseResult | null }) {
   );
 }
 
-// RELEASE-01: choose approved items and publish them in one step. If any item fails a check, nothing is published.
+// CONTENT-RELEASE-01: choose approved items and publish them in one step. If any item fails a check, nothing is published.
 export function PublishTogether({ items }: { items: ApprovedItem[] }) {
   const router = useRouter();
   const uid = useId();
@@ -85,7 +85,7 @@ export function PublishTogether({ items }: { items: ApprovedItem[] }) {
   );
 }
 
-// RELEASE-01: every item goes back to the version learners saw before, or off their screens if the release first
+// CONTENT-RELEASE-01: every item goes back to the version learners saw before, or off their screens if the release first
 // published it. If any item can't go back (a newer version is live, or the earlier one fails today's checks), nothing
 // changes.
 export function RollBack({ id, label }: { id: string; label: string }) {

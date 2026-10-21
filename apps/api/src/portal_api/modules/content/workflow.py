@@ -597,8 +597,8 @@ def put_live(
     db: Session, who: Principal, item: ContentItem, version: ContentVersion, **details: Any
 ) -> ContentVersion | None:
     """Make an approved working version the one learners see (no checks, no commit; the caller validated it). The
-    version it supersedes is kept as history. Returns that earlier published version, if any. RELEASE-01 publishes
-    several items this way in one transaction."""
+    version it supersedes is kept as history. Returns that earlier published version, if any. CONTENT-RELEASE-01
+    publishes several items this way in one transaction."""
     previous = item.published
     if previous is not None and previous.id != version.id:
         previous.status = VersionStatus.superseded.value

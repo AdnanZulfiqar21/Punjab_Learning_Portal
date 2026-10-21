@@ -1,4 +1,4 @@
-"""Content releases: several items published together, rolled back together (P06.S3.T2, RELEASE-01).
+"""Content releases: several items published together, rolled back together (P06.S3.T2, CONTENT-RELEASE-01).
 
 New tables only; the previous build doesn't read them, and single-item publishing is unchanged.
 

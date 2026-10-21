@@ -12,7 +12,7 @@ export const metadata: Metadata = { title: "Releases", robots: { index: false } 
 
 const WHEN = new Intl.DateTimeFormat("en-GB", { dateStyle: "medium", timeStyle: "short", timeZone: "Asia/Karachi" });
 
-// P06.S3.T2 (RELEASE-01): a publisher puts several approved items live in one step (a rubric with its written question,
+// P06.S3.T2 (CONTENT-RELEASE-01): a publisher puts several approved items live in one step (a rubric with its written question,
 // a passage with its questions, a chapter's lessons). Every item passes today's publication checks in the state the
 // release leaves behind, or nothing is published. A release is rolled back as a whole.
 export default function ReleasesPage() {

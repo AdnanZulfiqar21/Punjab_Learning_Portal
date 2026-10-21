@@ -1,4 +1,4 @@
-"""Content releases (P06.S3.T2, RELEASE-01): publish several approved items together, or none of them.
+"""Content releases (P06.S3.T2, CONTENT-RELEASE-01): publish several approved items together, or none of them.
 
 Every item must be approved, in the publisher's scope and not edited by the publisher. The items are put live in one
 transaction and then each is checked against today's publication gate (renderer floor, rights, links) in the state the

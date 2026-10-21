@@ -270,7 +270,7 @@ class ContentImportRow(Base):
 
 
 class ContentRelease(Base):
-    """RELEASE-01 (P06.S3.T2): several approved items published together in one transaction, or none of them.
+    """CONTENT-RELEASE-01 (P06.S3.T2): several approved items published together in one transaction, or none of them.
 
     A release can be rolled back as a whole: each item goes back to the version it had before (or off learners'
     screens if the release first published it). Nothing is deleted; the entries say what changed."""

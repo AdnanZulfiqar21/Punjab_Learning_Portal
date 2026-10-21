@@ -298,7 +298,7 @@ class VariantOut(BaseModel):
 
 
 class ReleaseIn(BaseModel):
-    """RELEASE-01: approved items to publish together, or none of them."""
+    """CONTENT-RELEASE-01: approved items to publish together, or none of them."""
 
     item_ids: list[uuid.UUID] = Field(min_length=1, max_length=100)
     label: str = Field(min_length=3, max_length=120, description="A short name, e.g. 'Chapter 4 lessons'")

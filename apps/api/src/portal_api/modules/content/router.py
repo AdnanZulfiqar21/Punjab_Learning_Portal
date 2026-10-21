@@ -1703,7 +1703,7 @@ def asset_retention(db: DB, who: CurrentPrincipal, apply: Annotated[bool, Query(
     )
 
 
-# ------------------------------------------------------------------ releases (P06.S3.T2, RELEASE-01)
+# ------------------------------------------------------------------ releases (P06.S3.T2, CONTENT-RELEASE-01)
 def _release_out(db: Session, r: Any) -> ReleaseOut:
     from portal_api.modules.content import releases
 
