@@ -3,7 +3,7 @@
 New tables only; the previous build doesn't read them, and single-item publishing is unchanged.
 
 Revision ID: 8d2f6b1e7a30
-Revises: f8a21c6d4e90
+Revises: 3b7e2a9c4d51
 Create Date: 2026-10-21
 """
 
@@ -14,7 +14,7 @@ from alembic import op
 from sqlalchemy.dialects import postgresql
 
 revision = "8d2f6b1e7a30"
-down_revision = "f8a21c6d4e90"
+down_revision = "3b7e2a9c4d51"
 branch_labels = None
 depends_on = None
 
