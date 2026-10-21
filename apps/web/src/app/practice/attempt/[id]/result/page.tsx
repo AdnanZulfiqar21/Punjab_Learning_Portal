@@ -4,6 +4,7 @@ import { notFound, redirect } from "next/navigation";
 import { Suspense } from "react";
 import type { AttemptResult, ItemReview } from "@portal/contracts";
 import { LessonBlocks } from "@/components/lesson-blocks";
+import { typesetEquations } from "@/lib/typeset";
 import { Badge, Notice, SkeletonLines } from "@/components/ui";
 import { MockRunningNotice } from "@/components/mock-running";
 import { getResult } from "@/lib/practice";
@@ -186,20 +187,20 @@ function ReviewItem({ item, attemptId }: { item: ItemReview; attemptId: string }
       {item.passage && (
         <section aria-label="Passage" className="rounded-lg border border-border bg-surface-muted px-4 py-3">
           <p className="mb-2 text-xs font-semibold tracking-wide text-muted uppercase">Passage</p>
-          <LessonBlocks blocks={item.passage.blocks as Blocks} headingOffset={3} assetUrl={assetUrl} />
+          <LessonBlocks blocks={item.passage.blocks as Blocks} typeset={typesetEquations(item.passage.blocks as Blocks)} headingOffset={3} assetUrl={assetUrl} />
         </section>
       )}
-      <LessonBlocks blocks={item.stem as Blocks} headingOffset={2} assetUrl={assetUrl} />
+      <LessonBlocks blocks={item.stem as Blocks} typeset={typesetEquations(item.stem as Blocks)} headingOffset={2} assetUrl={assetUrl} />
       <ul className="space-y-2">
         {item.options.map((o, i) => {
           const isKey = o.id === item.correct_option_id;
           const isChosen = o.id === item.chosen;
           return (
-            <li key={o.id} className={`rounded-lg border px-3 py-2 ${isKey ? "border-ok bg-ok-soft" : isChosen ? "border-danger bg-danger-soft" : "border-border"}`}>
+            <li key={o.id} className={`rounded-lg border px-3 py-2 break-words ${isKey ? "border-ok bg-ok-soft" : isChosen ? "border-danger bg-danger-soft" : "border-border"}`}>
               <span className="mr-2 font-medium text-muted">{String.fromCharCode(65 + i)}</span>
               {isKey && <span className="mr-2 text-xs font-semibold text-ok">Correct answer</span>}
               {isChosen && !isKey && <span className="mr-2 text-xs font-semibold text-danger">Your answer</span>}
-              <LessonBlocks blocks={o.blocks as Blocks} headingOffset={3} assetUrl={assetUrl} />
+              <LessonBlocks blocks={o.blocks as Blocks} typeset={typesetEquations(o.blocks as Blocks)} headingOffset={3} assetUrl={assetUrl} />
               {isChosen && !isKey && explanation.distractors?.[o.id] && <p className="mt-1 text-sm">{explanation.distractors[o.id]}</p>}
             </li>
           );
@@ -208,7 +209,7 @@ function ReviewItem({ item, attemptId }: { item: ItemReview; attemptId: string }
       {(explanation.correct?.length ?? 0) > 0 && (
         <div className="rounded-lg bg-surface-muted p-3 text-sm">
           <p className="font-semibold">Why</p>
-          <LessonBlocks blocks={explanation.correct ?? []} headingOffset={3} assetUrl={assetUrl} />
+          <LessonBlocks blocks={explanation.correct ?? []} typeset={typesetEquations(explanation.correct)} headingOffset={3} assetUrl={assetUrl} />
           {(explanation.worked_steps?.length ?? 0) > 0 && <LessonBlocks blocks={explanation.worked_steps ?? []} headingOffset={3} assetUrl={assetUrl} />}
         </div>
       )}

@@ -48,11 +48,13 @@ test("structured blocks reach learners: worked example, diagram, formula renderi
   const example = lessons.getByRole("region", { name: "Worked example: Technical fixture worked example" });
   await expect(example).toBeVisible();
   await expect(example.getByRole("listitem")).toHaveCount(2);
-  for (const alt of ["A synthetic fixture image with a box and a label", "Fixture rendering of v equals u plus a t"]) {
-    const img = lessons.getByRole("img", { name: alt });
-    await img.scrollIntoViewIfNeeded();
-    await expect.poll(() => img.evaluate((el: HTMLImageElement) => el.complete && el.naturalWidth > 0), AUTH).toBe(true);
-  }
+  const img = lessons.getByRole("img", { name: "A synthetic fixture image with a box and a label" });
+  await img.scrollIntoViewIfNeeded();
+  await expect.poll(() => img.evaluate((el: HTMLImageElement) => el.complete && el.naturalWidth > 0), AUTH).toBe(true);
+  // P01.S4.T2: the formula is typeset on the web, with its text equivalent; its reviewed static rendering isn't needed.
+  const formula = lessons.getByRole("article", { name: "[FIXTURE] Structured blocks lesson" }).locator('figure[data-typeset="ok"]');
+  await expect(formula.locator(".katex")).toBeVisible(AUTH);
+  await expect(formula.getByText("v equals u plus a t (fixture)")).toBeVisible();
   await lessons.getByText("Describe this diagram").click();
   await expect(lessons.getByText("A grey box with the words 'Technical fixture diagram'.")).toBeVisible();
   // P11.S2.T1: the lesson's checkpoint is a self-check: nothing is sent or scored, the explanation appears on request.
@@ -71,6 +73,30 @@ test("structured blocks reach learners: worked example, diagram, formula renderi
   expect(res.status()).toBe(200);
   expect(res.headers()["content-type"]).toBe("application/pdf");
   expect(res.headers()["content-disposition"]).toContain("attachment");
+});
+
+// P01.S4.T2 (RENDERER-SPIKE-01): formulas and chemistry are typeset, a formula can't add a link or a class, one that can't
+// be typeset shows its reviewed rendering, and an Urdu paragraph with English words reads right to left. Fixtures only.
+test("notation: formulas and chemistry are typeset safely, and Urdu reads right to left", async ({ page }) => {
+  const lessons = await openFirstBiologyChapter(page);
+  const lesson = lessons.getByRole("article", { name: "[FIXTURE] Notation lesson" });
+  await lesson.scrollIntoViewIfNeeded();
+  const typeset = lesson.locator('figure[data-typeset="ok"]');
+  await expect(typeset).toHaveCount(3, AUTH);
+  const chemistry = typeset.filter({ hasText: "Fixture chemistry" });
+  await expect(chemistry.locator(".katex-html")).toBeVisible();
+  expect(await chemistry.locator("math msub").count()).toBeGreaterThan(0); // H₂, O₂ as real subscripts
+  await expect(lesson.locator('a[href^="javascript:"], .fixture-injected')).toHaveCount(0);
+  await expect(typeset.filter({ hasText: "must refuse" }).locator(".katex-html")).toContainText("\\href");
+
+  const broken = lesson.locator('figure[data-typeset="failed"]');
+  await expect(broken.getByRole("img", { name: "Fixture rendering: Fixture: a formula that cannot be typeset" })).toBeVisible();
+  await expect(broken.getByText("couldn't be typeset here")).toBeVisible();
+
+  const urdu = lesson.getByText(/^تکنیکی نمونہ/);
+  await expect(urdu).toHaveAttribute("dir", "auto");
+  expect(await urdu.evaluate((el) => getComputedStyle(el).direction)).toBe("rtl");
+  expect(await lesson.getByText("Fixture formula: x equals a fraction").evaluate((el) => getComputedStyle(el).direction)).toBe("ltr");
 });
 
 // P11.S2.T2 (STUDY-TOOLS-01): a private note, a saved formula and a favourite topic, gathered on /study.

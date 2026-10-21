@@ -401,7 +401,7 @@ export function AttemptRunner({ attempt }: { attempt: PracticeAttempt }) {
               <label key={o.id} className={`flex cursor-pointer items-start gap-3 rounded-lg border px-3 py-2.5 ${mark || (state.option === o.id ? "border-accent bg-accent-soft" : "border-border")}`}>
                 <input type="radio" name={`q${current}`} value={o.id} checked={state.option === o.id} onChange={() => choose(current, o.id)} className="mt-1" />
                 <span className="w-5 font-medium text-muted">{String.fromCharCode(65 + idx)}</span>
-                <span className="flex-1">
+                <span className="min-w-0 flex-1 break-words">
                   <LessonBlocks blocks={o.blocks as { type: string }[]} headingOffset={2} assetUrl={assetUrl} />
                 </span>
               </label>
