@@ -17,13 +17,14 @@ from portal_api.modules.content import written as wq
 from portal_api.modules.content.models import ContentVersion
 from portal_api.modules.identity.deps import CurrentPrincipal
 from portal_api.modules.system import guard, operations
-from portal_api.modules.written import evidence, linked, service
+from portal_api.modules.written import evidence, linked, mapping, service
 from portal_api.modules.written.models import WrittenAttempt, WrittenFile, WrittenForm, WrittenPage, WrittenReceipt
 from portal_api.modules.written.schemas import (
     LinkedFormIn,
     LinkedFormOut,
     LinkedFromOut,
     ManifestIn,
+    ManifestRevisionOut,
     PageOut,
     PageQualityOut,
     PageTransform,
@@ -118,6 +119,7 @@ def _attempt_out(db: Session, a: WrittenAttempt) -> WrittenAttemptOut:
             )
         )
     receipt = service.receipt_for(db, a.id)
+    live = mapping.ordered_pages(service.pages_of(db, a.id), a.manifest)
     return WrittenAttemptOut(
         id=a.id,
         form_id=a.form_id,
@@ -132,8 +134,8 @@ def _attempt_out(db: Session, a: WrittenAttempt) -> WrittenAttemptOut:
         max_units=form.max_units,
         caps=form.caps,
         items=items,
-        pages=pages_out(db, service.pages_of(db, a.id)),
-        manifest=a.manifest,
+        pages=pages_out(db, live),
+        manifest=mapping.manifest_view(a.manifest, live),
         manifest_revision=a.manifest_revision,
         receipt=_receipt_out(receipt) if receipt else None,
     )
@@ -335,8 +337,41 @@ def put_manifest(
     db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, body: ManifestIn, response: Response
 ) -> WrittenAttemptOut:
     _private(response)
-    attempt = service.update_manifest(db, who, attempt_id, expected_revision=body.expected_revision, slots=body.slots)
+    attempt = service.update_manifest(
+        db,
+        who,
+        attempt_id,
+        expected_revision=body.expected_revision,
+        slots=body.slots,
+        order=[str(p) for p in body.order] if body.order is not None else None,
+        confirmed=[str(p) for p in body.confirmed] if body.confirmed is not None else None,
+    )
     return _attempt_out(db, attempt)
+
+
+@router.get(
+    "/written-attempts/{attempt_id}/manifest/revisions",
+    response_model=list[ManifestRevisionOut],
+    summary="Every saved answer mapping of an attempt, oldest first (W03.S2.T2)",
+)
+def manifest_revisions(
+    db: DB, who: CurrentPrincipal, attempt_id: uuid.UUID, response: Response
+) -> list[ManifestRevisionOut]:
+    _private(response)
+    out = []
+    for r in service.manifest_revisions(db, who, attempt_id):
+        slots = r.manifest.get("slots", {})
+        out.append(
+            ManifestRevisionOut(
+                revision=r.revision,
+                saved_at=r.saved_at,
+                answered=sum(1 for s in slots.values() if s.get("pages")),
+                unanswered=sum(1 for s in slots.values() if s.get("unanswered")),
+                areas=sum(len(s.get("regions", [])) for s in slots.values()),
+                manifest=r.manifest,
+            )
+        )
+    return out
 
 
 @router.post(

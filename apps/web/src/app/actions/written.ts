@@ -90,16 +90,19 @@ export type ManifestOutcome =
   | { kind: "conflict"; message: string }
   | { kind: "error"; message: string; errors?: string[] };
 
-export async function saveMapping(
-  attemptId: string,
-  expectedRevision: number,
-  slots: Record<string, { pages: string[]; unanswered: boolean }>,
-): Promise<ManifestOutcome> {
+// REGION-MAP-01: slots with their marked areas, the page order, and confirmed shared pages.
+export type MappingIn = {
+  slots: Record<string, { pages: string[]; unanswered: boolean; regions: { page: string; source?: number[]; box?: number[] }[] }>;
+  order: string[];
+  confirmed: string[];
+};
+
+export async function saveMapping(attemptId: string, expectedRevision: number, mapping: MappingIn): Promise<ManifestOutcome> {
   const t = await token(`/practice/written/${attemptId}`);
   const res = await api<WrittenAttempt>(`/v1/written-attempts/${encodeURIComponent(attemptId)}/manifest`, {
     method: "PUT",
     token: t,
-    body: JSON.stringify({ expected_revision: expectedRevision, slots }),
+    body: JSON.stringify({ expected_revision: expectedRevision, ...mapping }),
   });
   if (res.ok) return { kind: "ok", attempt: res.data };
   const p = res.problem as (Problem & { errors?: string[] }) | null;

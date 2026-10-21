@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 import type { MarkingCase } from "@portal/contracts";
 import { freeCase, handBack, rebaseRecheck, saveMarks, takeLease } from "@/app/actions/marking";
+import { AreaOverlay } from "@/components/area-overlay";
 import { LessonBlocks } from "@/components/lesson-blocks";
 import { Badge, Notice } from "@/components/ui";
 import { TIME_ZONE } from "@/lib/dates";
@@ -107,7 +108,16 @@ export function MarkingWorkspace({ initial }: { initial: MarkingCase }) {
         ? new Set(rg.positions.map(String))
       : null;
   const inScope = (pos: string) => !scope || scope.has(pos);
-  const slots = (c.manifest as { slots?: Record<string, { pages?: string[]; unanswered?: boolean }> }).slots ?? {};
+  const slots =
+    (c.manifest as { slots?: Record<string, { pages?: string[]; unanswered?: boolean; regions?: { page: string; box?: number[] | null }[] }> }).slots ?? {};
+  // REGION-MAP-01: the areas the learner marked, by page, labelled with their answer ("Q1 a"); boxes are on the page as
+  // submitted.
+  const areasOn = (pageId: string) =>
+    Object.entries(slots).flatMap(([key, slot]) =>
+      (slot.regions ?? [])
+        .filter((r) => r.page === pageId && r.box && r.box.length === 4)
+        .map((r) => ({ label: `Q${key.replace(":", " ").replace(" *", "")}`, box: r.box as [number, number, number, number] })),
+    );
   const pageNo = (id: string) => c.pages.findIndex((p) => p.id === id) + 1;
   const total = Object.entries(awards).reduce(
     (n, [pos, q]) =>
@@ -298,8 +308,13 @@ export function MarkingWorkspace({ initial }: { initial: MarkingCase }) {
         <section aria-label="Submitted pages" className="space-y-3">
           {c.pages.map((p, i) => (
             <figure key={p.id} className="rounded-lg border border-border bg-surface p-2">
-              {/* eslint-disable-next-line @next/next/no-img-element -- validated private preview served by our own route */}
-              <img src={`/studio/marking/${c.id}/pages/${p.id}`} alt={`Submitted page ${i + 1}`} className="w-full rounded" />
+              <span className="relative block">
+                {/* eslint-disable-next-line @next/next/no-img-element -- validated private preview served by our own route */}
+                <img src={`/studio/marking/${c.id}/pages/${p.id}`} alt={`Submitted page ${i + 1}`} className="w-full rounded" />
+                {areasOn(p.id).map((a, k) => (
+                  <AreaOverlay key={k} boxes={[a.box]} label={a.label} />
+                ))}
+              </span>
               <figcaption className="mt-1 space-y-1 text-sm text-muted">
                 <span>
                   Page {i + 1}
@@ -451,6 +466,7 @@ export function MarkingWorkspace({ initial }: { initial: MarkingCase }) {
                         <span className="font-medium">{sp.label}</span>{" "}
                         <span className="text-muted">
                           {slot.unanswered ? "· learner declared this part unanswered" : slot.pages?.length ? `· on page ${slot.pages.map(pageNo).join(", ")}` : "· no page mapped"}
+                          {(slot.regions ?? []).length > 0 && " · the learner marked where it is (outlined on the page)"}
                         </span>
                       </p>
                       {crit.map((cr) => (

@@ -102,6 +102,8 @@ test("offline, the written test says what it means, then saves the page map and 
   await parts.nth(0).getByLabel("Page 1").check();
   await expect(page.getByRole("status").filter({ hasText: "Can't reach the service" })).toBeVisible(AUTH);
   for (let i = 1; i < (await parts.count()); i++) await parts.nth(i).getByLabel("Page 1").check();
+  // REGION-MAP-01: page 1 answers every part, so its question numbering is confirmed before submitting.
+  await page.getByLabel("I wrote the question numbers clearly on page 1").check();
   await page.getByRole("button", { name: "Submit for marking" }).click();
   await expect(page.getByRole("alert").filter({ hasText: "Can't reach the service" })).toBeVisible(AUTH); // refused, not hung
   await expect(page.getByRole("button", { name: "Submit for marking" })).toBeEnabled();

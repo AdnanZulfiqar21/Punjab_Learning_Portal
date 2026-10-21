@@ -18,7 +18,7 @@ from portal_api.modules.content import written as wq
 from portal_api.modules.content.models import ContentVersion
 from portal_api.modules.identity.deps import CurrentPrincipal, Principal, require
 from portal_api.modules.identity.permissions import Permission
-from portal_api.modules.written import linked, review
+from portal_api.modules.written import linked, mapping, review
 from portal_api.modules.written.models import WrittenAttempt, WrittenForm
 from portal_api.modules.written.router import pages_out
 from portal_api.modules.written.schemas import LinkedAttemptOut, PageOut
@@ -517,7 +517,7 @@ def _detail(db: Session, case: review.WrittenReviewCase, who: Principal) -> Case
     return CaseDetail(
         **_summary(case, who),
         max_units=ctx["max_units"],
-        manifest=ctx["manifest"],
+        manifest=mapping.manifest_view(ctx["manifest"], ctx["pages"]),
         questions=[CaseQuestion(**q) for q in ctx["questions"]],
         pages=pages_out(db, ctx["pages"]),
         lease_expires_at=case.lease_expires_at,
