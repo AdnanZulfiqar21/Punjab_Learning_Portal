@@ -35,7 +35,7 @@
           },
           {
             "type": "paragraph",
-            "text": "DFS suits puzzles such as mazes: it follows one path to the end and backtracks at a dead end. Its time is O(V + E), like BFS. The book says DFS is more memory-efficient for deep graphs and BFS suits shallow graphs; more precisely, DFS stores only the current path, so its memory grows with depth, while BFS stores a whole level, so its memory grows with width."
+            "text": "DFS suits puzzles such as mazes: it follows one path to the end and backtracks at a dead end. Its time is O(V + E), like BFS. DFS is more memory-efficient for deep graphs, while BFS is more suited to shallow graphs."
           },
           {
             "type": "diagram",
@@ -43,31 +43,6 @@
             "alt": "Top left: merge sort splitting [14, 7, 3, 12] into halves and single items and merging them into [7, 14], [3, 12] and [3, 7, 12, 14]. Top right: three rows of the sorted list 21 34 43 57 66 78 showing a binary search for 78 with middle values 43, 66 and 78. Bottom left: a tree with root 0, children 1, 2, 3 and grandchildren 4, 5, 6, 7 with BFS and DFS orders. Bottom right: notes on greedy, dynamic programming, backtracking, sorting and searching.",
             "caption": "Merge sort, binary search, BFS and DFS (original diagram after topics 3.5 to 3.7).",
             "long_description": "Merge sort divides [14, 7, 3, 12] into [14, 7] and [3, 12], then into single numbers, and merges them back as [7, 14] and [3, 12] and finally [3, 7, 12, 14]. Binary search for 78 in 21, 34, 43, 57, 66, 78 checks the middle value 43, which is smaller, so it keeps the right half; the next middle value 66 is also smaller, so it keeps the right half again and finds 78 at index 5 in three steps. On a tree with root 0, children 1, 2 and 3, and grandchildren 4 and 5 under 1, 6 under 2 and 7 under 3, BFS visits level by level, 0 to 7 in order, while DFS goes deep first: 0, 1, 4, 5, 2, 6, 3, 7."
-          },
-          {
-            "type": "callout",
-            "tone": "note",
-            "title": "Python code (each .... is one 4-space indent)",
-            "text": "tree = {0: [1, 2, 3], 1: [4, 5], 2: [6], 3: [7], 4: [], 5: [], 6: [], 7: []}\n\ndef bfs(start):\n....order, queue = [], [start]\n....while queue:\n........node = queue.pop(0)          # take from the front\n........order.append(node)\n........queue.extend(tree[node])\n....return order\n\ndef dfs(node, order=None):\n....order = [] if order is None else order\n....order.append(node)\n....for child in tree[node]:\n........dfs(child, order)            # go deep first\n....return order\n\nprint(bfs(0))    # [0, 1, 2, 3, 4, 5, 6, 7]\nprint(dfs(0))    # [0, 1, 4, 5, 2, 6, 3, 7]"
-          },
-          {
-            "type": "checkpoint",
-            "mode": "self_check",
-            "prompt": "Class activity: implement BFS and DFS and compare them. What is the time complexity of DFS (MCQ 8)? Compare their advantages (short question 6).",
-            "explanation": "MCQ 8: (c) O(V + E). The code above (not from the book) gives the two orders. BFS finds the shortest path in an unweighted graph and suits targets near the start or shallow graphs; DFS uses memory only for the current path, reaches deep targets quickly and suits mazes, puzzles and exploring every path. Both visit each node and edge once."
-          },
-          {
-            "type": "heading",
-            "level": 2,
-            "text": "Quick recap"
-          },
-          {
-            "type": "list",
-            "ordered": false,
-            "items": [
-              "DFS: stack, deep first then backtrack; order 0, 1, 4, 5, 2, 6, 3, 7; O(V + E).",
-              "BFS for shortest paths and shallow targets; DFS for mazes and deep searches."
-            ]
           }
         ]
       }

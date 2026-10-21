@@ -68,6 +68,5 @@ export async function chooseReadingLanguage(form: FormData): Promise<void> {
   (await cookies()).set(LANGUAGE_COOKIE, lang, cookieOptions());
   await profilePatch({ explanation_language: lang });
   revalidatePath(back); // the reader re-renders in the chosen language rather than from the router's copy
-  const block = String(form.get("block") ?? "");
-  redirect(/^b\d{1,3}$/.test(block) ? `${back}#${block}` : back); // back to the same block in the other variant
+  redirect(back); // KeepPlace returns the reader to the matching block of the other variant (READER-PLACE-01)
 }

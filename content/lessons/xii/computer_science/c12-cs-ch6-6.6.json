@@ -48,24 +48,18 @@
             "type": "callout",
             "tone": "note",
             "title": "Example: predicting exam scores from study hours (Python code; each .... is one 4-space indent)",
-            "text": "import numpy as np\nimport matplotlib.pyplot as plt\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LinearRegression\nfrom sklearn.metrics import mean_squared_error\n\n# Hours studied (X) and exam scores (y)\nX = np.array([[1], [2], [3], [4], [5], [6], [7], [8], [9], [10]])\ny = np.array([1, 2, 2, 3, 3, 4, 5, 5, 6, 7])\n\n# Step 1: split into training and testing sets\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)\n\n# Step 2: create and train the model\nmodel = LinearRegression()\nmodel.fit(X_train, y_train)\n\n# Step 3: make predictions; Step 4: evaluate\ny_pred = model.predict(X_test)\nmse = mean_squared_error(y_test, y_pred)\nprint(f\"Mean Squared Error: {mse:.4f}\")\nprint(f\"Exam Score = {model.coef_[0]:.4f} x Hours + {model.intercept_:.4f}\")   # added line\n\n# Step 5: plot the data and the fitted line\nplt.scatter(X, y, color='blue')\nplt.plot(X, model.predict(X), color='red')\nplt.xlabel('Hours Studied')\nplt.ylabel('Exam Scores')\nplt.title('Linear Regression: Hours vs. Scores')\nplt.show()"
+            "text": "import numpy as np\nimport matplotlib.pyplot as plt\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LinearRegression\nfrom sklearn.metrics import mean_squared_error\n\n# Hours studied (X) and exam scores (y)\nX = np.array([[1], [2], [3], [4], [5], [6], [7], [8], [9], [10]])\ny = np.array([1, 2, 2, 3, 3, 4, 5, 5, 6, 7])\n\n# Step 1: split into training and testing sets\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)\n\n# Step 2: create and train the model\nmodel = LinearRegression()\nmodel.fit(X_train, y_train)\n\n# Step 3: make predictions; Step 4: evaluate\ny_pred = model.predict(X_test)\nmse = mean_squared_error(y_test, y_pred)\nprint(f\"Mean Squared Error: {mse:.4f}\")\n\n# Step 5: plot the data and the fitted line\nplt.scatter(X, y, color='blue')\nplt.plot(X, model.predict(X), color='red')\nplt.xlabel('Hours Studied')\nplt.ylabel('Exam Scores')\nplt.title('Linear Regression: Hours vs. Scores')\nplt.show()"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
               "Data preparation: X holds the hours studied and y the matching exam scores.",
-              "Model training: a linear regression model is trained on X_train and y_train (8 of the 10 points).",
-              "Testing: the model predicts the 2 test points, and the MSE (the average of the squared differences between predicted and actual scores) measures the error; a lower MSE is better.",
+              "Model training: a linear regression model is created and trained on the training data (X_train, y_train).",
+              "Testing: the model is tested on the test data (X_test) and the MSE is calculated to measure its performance; a lower MSE is better, because the predictions are closer to the actual values.",
               "Output: Mean Squared Error: 0.1484, and the fitted line Exam Score = 0.6552 x Hours + 0.1466.",
-              "Improvement: gathering more data, or better data, usually makes the model more accurate."
+              "Improvement: as more data is gathered or adjusted, the model becomes more accurate."
             ]
-          },
-          {
-            "type": "callout",
-            "tone": "note",
-            "title": "Checking the printed output",
-            "text": "With random_state=42 the test points are 9 hours (score 6) and 2 hours (score 2). Fitting the other eight points gives slope 0.6552 and intercept 0.1466, and the test MSE is 0.1484, as printed. The book's listing has no line that prints the equation, so one is added above."
           },
           {
             "type": "diagram",
@@ -99,34 +93,7 @@
           },
           {
             "type": "paragraph",
-            "text": "The data is divided into a training set, which teaches the model, and a testing set of unseen data, which checks its real performance. Testing on unseen data reveals overfitting, where a model memorises its training data but does poorly on new data. A common split is 80 percent training and 20 percent testing. A simple predictive model uses a basic algorithm to learn from the training data and predict new cases; such models are easy to understand, and their test results guide improvements."
-          },
-          {
-            "type": "diagram",
-            "$asset": "c12-cs-ch6-fig-data-split",
-            "alt": "Two bars. The train-test split bar is 80 percent training (the model learns patterns) and 20 percent test. The second bar, with validation, is 70 percent training, 15 percent validation and 15 percent test. A note says validation data tunes settings and shows overfitting, while test data stays unseen until the end; 70/15/15 is one common choice.",
-            "caption": "Dividing data into training, validation and test sets (original diagram after 6.6 and 6.8).",
-            "long_description": "The regression example uses an 80/20 split of 10 points: 8 for training and 2 for testing."
-          },
-          {
-            "type": "checkpoint",
-            "mode": "self_check",
-            "prompt": "A model scores 99% on its training data but only 60% on the test data. What is the problem, and name one way to reduce it.",
-            "explanation": "Overfitting: the model has memorised the training data instead of learning general patterns. Ways to reduce it include using more training data, removing unnecessary features, choosing a simpler model, or tuning it with validation data."
-          },
-          {
-            "type": "heading",
-            "level": 2,
-            "text": "Quick recap"
-          },
-          {
-            "type": "list",
-            "ordered": false,
-            "items": [
-              "Steps: collect, clean, choose features, split, train, test, predict.",
-              "Features are inputs, the target is the output; feature engineering cleans, scales and creates features.",
-              "Train-test split (often 80/20) shows real performance and overfitting; regression example: MSE 0.1484."
-            ]
+            "text": "The data is divided into a training set, which teaches the model, and a testing set of unseen data, which checks its real performance. The split prevents overfitting. A common split is 80 percent training and 20 percent testing. A simple predictive model uses a basic algorithm to learn from the training data and predict new cases; such models are easy to understand, and their test results guide improvements."
           }
         ]
       }

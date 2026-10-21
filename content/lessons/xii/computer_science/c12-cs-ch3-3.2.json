@@ -55,10 +55,10 @@
             "ordered": false,
             "items": [
               "class Student defines a blueprint for students.",
-              "__init__ is the constructor: it runs automatically when an object is created and sets the name.",
-              "self.name stores each student's name; self refers to the object itself.",
+              "__init__ sets the name when an object is created.",
+              "self.name stores the student's name.",
               "display() prints the student's name.",
-              "object1 and object2 are two different Student objects, each with its own data (Ali, Ahmed); the output is 'Student Name: Ali' then 'Student Name: Ahmed'."
+              "object1 and object2 are two different Student objects, each with its own data (Ali, Ahmed)."
             ]
           },
           {
@@ -122,10 +122,6 @@
             "text": "class BankAccount:\n....def __init__(self, balance):\n........self.__balance = balance      # private variable\n\n....def deposit(self, amount):\n........self.__balance += amount\n\n....def withdraw(self, amount):\n........if amount <= self.__balance:\n............self.__balance -= amount\n........else:\n............print(\"Insufficient balance\")\n\n....def get_balance(self):\n........return self.__balance\n\n# Usage\naccount = BankAccount(1000)\naccount.deposit(500)\naccount.withdraw(300)\nprint(account.get_balance())      # Output: 1200\n\n# Direct access will fail\n# print(account.__balance)        # Error"
           },
           {
-            "type": "paragraph",
-            "text": "The balance starts at 1000; depositing 500 gives 1500, and withdrawing 300 leaves 1200. Trying to read account.__balance from outside raises an AttributeError, because name mangling has renamed the variable inside the class."
-          },
-          {
             "type": "heading",
             "level": 2,
             "text": "Inheritance: reusing and extending functionality"
@@ -174,12 +170,6 @@
           {
             "type": "callout",
             "tone": "note",
-            "title": "Added example: overriding with super() (Python code; each .... is one 4-space indent)",
-            "text": "class Puppy(Dog):\n....def eat(self):\n........super().eat()                     # parent's version first\n........print(f\"{self.name} wants more milk.\")\n\nPuppy(\"Moti\").eat()\n# Output: Moti is eating.\n#         Moti wants more milk."
-          },
-          {
-            "type": "callout",
-            "tone": "note",
             "title": "Example: multiple inheritance (Python code; each .... is one 4-space indent)",
             "text": "class Father:\n....def skill1(self):\n........print(\"Father's skill: Gardening\")\n\nclass Mother:\n....def skill2(self):\n........print(\"Mother's skill: Cooking\")\n\n# Derived class inheriting from two base classes\nclass Child(Father, Mother):\n....def own_skill(self):\n........print(\"Child's skill: Coding\")\n\nc = Child()\nc.skill1()      # Father's method\nc.skill2()      # Mother's method\nc.own_skill()   # its own method"
           },
@@ -202,13 +192,7 @@
           },
           {
             "type": "paragraph",
-            "text": "Polymorphism means 'many forms'. The same method, function or operator can behave differently depending on the object it works with, which makes code more flexible and reusable. For example, a payment system may offer credit card, UPI (an instant bank-transfer service; Pakistan's equivalent is Raast), net banking and wallet payments. All of them use a common method, processPayment(), but each has its own implementation; net banking, for instance, redirects the user to the bank's login page. The method name stays the same while the action changes with the payment type."
-          },
-          {
-            "type": "callout",
-            "tone": "note",
-            "title": "Added example: one method name, different payment actions (Python code; each .... is one 4-space indent)",
-            "text": "class Payment:\n....def process_payment(self, amount):\n........print(\"Processing\", amount)\n\nclass CreditCard(Payment):\n....def process_payment(self, amount):\n........print(\"Charging card:\", amount)\n\nclass NetBanking(Payment):\n....def process_payment(self, amount):\n........print(\"Redirecting to bank login for\", amount)\n\nfor method in [CreditCard(), NetBanking()]:\n....method.process_payment(500)"
+            "text": "Polymorphism means 'many forms'. The same method, function or operator can behave differently depending on the object it works with, which makes code more flexible and reusable. For example, a payment system may offer credit card, UPI, net banking and wallet payments. All of them use a common method, processPayment(), but each has its own implementation; net banking, for instance, redirects the user to the bank's login page. The method name stays the same while the action changes with the payment type."
           },
           {
             "type": "paragraph",
@@ -244,39 +228,6 @@
             "alt": "A tree: polymorphism splits into compile-time (method overloading) and runtime (method overriding). Under compile-time, a box notes that Python has no true overloading and one method takes different inputs: multiply() gives 1, multiply(4) gives 4, multiply(2, 3) gives 6 and multiply(2, 3, 4) gives 24. Under runtime, the same call animal.sound() gives Bark for Dog, Meow for Cat and Some generic sound for Animal.",
             "caption": "Compile-time and runtime polymorphism (original diagram after Fig 3.6).",
             "long_description": "Overloading changes behaviour by the arguments given; overriding changes it by the kind of object. In both, the calling code uses one name."
-          },
-          {
-            "type": "checkpoint",
-            "mode": "self_check",
-            "prompt": "What is the purpose of __init__ in a Python class?",
-            "explanation": "__init__ is the constructor. It runs automatically when an object is created and sets the object's starting attribute values, such as self.name = name."
-          },
-          {
-            "type": "checkpoint",
-            "mode": "self_check",
-            "prompt": "In the BankAccount class, what would happen if a program called account.withdraw(2000) when the balance is 1200? Why is this an example of encapsulation?",
-            "explanation": "It prints 'Insufficient balance' and the balance stays 1200. The private balance can change only through methods that check the request, so invalid changes are blocked."
-          },
-          {
-            "type": "checkpoint",
-            "mode": "self_check",
-            "prompt": "How do inheritance, encapsulation and polymorphism together lead to better software design?",
-            "explanation": "Encapsulation keeps each class's data safe and its interface clear; inheritance reuses and extends tested classes instead of copying code; polymorphism lets one piece of code work with many related classes. The result is modular code that is easier to extend, test and maintain."
-          },
-          {
-            "type": "heading",
-            "level": 2,
-            "text": "Quick recap"
-          },
-          {
-            "type": "list",
-            "ordered": false,
-            "items": [
-              "Class: blueprint (attributes and methods); object: instance with its own values; __init__ sets them.",
-              "Encapsulation: data and methods in one class; public name, protected _name, private __name.",
-              "Inheritance: single, multiple, multilevel; overriding and super().",
-              "Polymorphism: compile-time (overloading, imitated in Python) and runtime (overriding)."
-            ]
           }
         ]
       }
