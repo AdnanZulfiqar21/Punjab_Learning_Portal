@@ -35,7 +35,7 @@
           },
           {
             "type": "paragraph",
-            "text": "In half-wave rectification, an AC signal is turned into pulsating DC by passing one half-cycle and blocking the other. An alternating voltage of period T is applied (through a transformer) to a diode D in series with a load resistance RL (Fig 17.13). During the positive half-cycle (0 to T/2) the diode is forward biased, offers very low resistance, and current flows through RL, producing a voltage across it that follows the input. During the negative half-cycle (T/2 to T) the diode is reverse biased, offers very high resistance, and practically no current flows, so the voltage across RL is almost zero. The same events repeat each cycle. The current through RL flows in only one direction, so it is direct current, but it flows in pulses. A UPS used at home for backup power contains a rectifier and battery charger feeding a battery, and an inverter that turns the battery's DC back into AC (Fig 17.13 a, a block diagram in the book)."
+            "text": "In half-wave rectification, an AC signal is turned into pulsating DC by passing one half-cycle and blocking the other. An alternating voltage of period T is applied (through a transformer) to a diode D in series with a load resistance RL (Fig 17.13). During the positive half-cycle (0 to T/2) the diode is forward biased, offers very low resistance, and current flows through RL, producing a voltage across it that follows the input. During the negative half-cycle (T/2 to T) the diode is reverse biased, offers very high resistance, and practically no current flows, so the voltage across RL is almost zero. The same events repeat each cycle. The current through RL flows in only one direction, so it is direct current, but it flows in pulses. A UPS used at home for backup power contains a rectifier and battery charger feeding a battery, and an inverter that turns the battery's DC back into AC (Fig 17.13 a)."
           },
           {
             "type": "diagram",
@@ -93,58 +93,11 @@
             "text": "The ripple voltage of a full-wave bridge rectifier with a smoothing capacitor is Vripple = IDC / (f_ripple C) = IDC / (2fC), where IDC is the load current in amperes, f the input frequency and C the capacitance in farads. The ripple frequency is twice the input frequency: f_ripple = 2f. So a larger capacitance or a smaller load current gives a smaller ripple."
           },
           {
-            "type": "callout",
-            "tone": "warning",
-            "title": "Ripple does depend on C",
-            "text": "The book states that the maximum ripple voltage 'is not determined by the value of the smoothing capacitor but by the frequency and load current', and then gives Vripple = IDC/(2fC), which contains C. The formula is right: the ripple depends on the capacitance as well as on the frequency and the load current."
-          },
-          {
             "type": "diagram",
             "$asset": "c12-phy-ch17-fig-smoothing",
             "alt": "A graph of voltage against time. Dashed blue humps show the full-wave rectified pulses. A red line follows each hump up to its peak (the capacitor charges) and then slopes gently down (the capacitor discharges into the load) until the next hump catches it, leaving a small ripple marked at the right. Below: Vripple = IDC/(fripple C) = IDC/(2fC); a larger capacitor or a smaller load current gives less ripple.",
             "caption": "Smoothing with a capacitor (original graph after Fig 17.17).",
             "long_description": "Between peaks the capacitor supplies the load, so the voltage only sags a little instead of falling to zero. A bigger capacitor sags less."
-          },
-          {
-            "type": "heading",
-            "level": 2,
-            "text": "Worked example (added)"
-          },
-          {
-            "type": "paragraph",
-            "text": "A full-wave bridge rectifier on a 50 Hz supply feeds a load current of 0.5 A through a 2000 uF smoothing capacitor. Find the ripple voltage. Solution: Vripple = IDC/(2fC) = 0.5 A / (2 x 50 Hz x 2000 x 10^-6 F) = 0.5/0.2 = 2.5 V."
-          },
-          {
-            "type": "callout",
-            "tone": "note",
-            "title": "Brain teasers",
-            "text": "Do cell phones store AC or DC? Their batteries store DC, which is easier to store than AC; the grid supplies AC, so it is converted to DC by a rectifier before charging phones, laptops and flashlights. The book also notes that AC passing through the body can upset the heart's rhythm and cause cardiac arrest; currents at mains frequency are especially dangerous."
-          },
-          {
-            "type": "callout",
-            "tone": "note",
-            "title": "Do you know?",
-            "text": "The PN-junction diode is used for rectification, signal clipping, regulation, clamping voltages, signal detection, photovoltaic cells and light emission (LEDs)."
-          },
-          {
-            "type": "checkpoint",
-            "mode": "self_check",
-            "prompt": "Why is a full-wave rectifier easier to smooth than a half-wave rectifier?",
-            "explanation": "Its pulses come twice as often (ripple frequency 2f), so the capacitor has only half as long to discharge between pulses and the ripple is about half as large for the same capacitor."
-          },
-          {
-            "type": "heading",
-            "level": 2,
-            "text": "Quick recap"
-          },
-          {
-            "type": "list",
-            "ordered": false,
-            "items": [
-              "Rectification: AC to DC using diodes (forward bias conducts).",
-              "Half-wave: one diode, one half-cycle used; full-wave bridge: four diodes, both halves used.",
-              "Smoothing capacitor in parallel with the load; Vripple = IDC/(2fC)."
-            ]
           }
         ]
       }
