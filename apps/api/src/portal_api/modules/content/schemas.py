@@ -295,3 +295,36 @@ class VariantOut(BaseModel):
     availability: AvailabilityName
     translation_origin: Literal["human", "machine_draft"] | None
     original: bool
+
+
+class ReleaseIn(BaseModel):
+    """RELEASE-01: approved items to publish together, or none of them."""
+
+    item_ids: list[uuid.UUID] = Field(min_length=1, max_length=100)
+    label: str = Field(min_length=3, max_length=120, description="A short name, e.g. 'Chapter 4 lessons'")
+    reason: str = Field(min_length=5, max_length=1000)
+
+
+class ReleaseRollbackIn(BaseModel):
+    reason: str = Field(min_length=5, max_length=1000)
+
+
+class ReleaseEntryOut(BaseModel):
+    item_id: uuid.UUID
+    title: str
+    kind: str
+    version: int = Field(description="The version this release published")
+    previous_version: int | None = Field(description="The version learners saw before; none if first published here")
+    current_version: int | None = Field(description="The version learners see now")
+    availability: str
+
+
+class ReleaseOut(BaseModel):
+    id: uuid.UUID
+    label: str
+    reason: str
+    status: Literal["published", "rolled_back"]
+    published_at: datetime
+    rolled_back_at: datetime | None
+    rollback_reason: str | None
+    entries: list[ReleaseEntryOut]

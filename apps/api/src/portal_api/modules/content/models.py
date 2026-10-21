@@ -267,3 +267,38 @@ class ContentImportRow(Base):
     payload: Mapped[dict[str, Any]] = mapped_column(JSONB, default=dict)
     payload_hash: Mapped[str | None] = mapped_column(String(64))
     item_id: Mapped[uuid.UUID | None] = mapped_column(ForeignKey("content_item.id", ondelete="RESTRICT"))
+
+
+class ContentRelease(Base):
+    """RELEASE-01 (P06.S3.T2): several approved items published together in one transaction, or none of them.
+
+    A release can be rolled back as a whole: each item goes back to the version it had before (or off learners'
+    screens if the release first published it). Nothing is deleted; the entries say what changed."""
+
+    __tablename__ = "content_release"
+    __table_args__ = (CheckConstraint("status in ('published','rolled_back')", name="content_release_status"),)
+    id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    label: Mapped[str] = mapped_column(String(120))
+    reason: Mapped[str] = mapped_column(Text)
+    status: Mapped[str] = mapped_column(String(12), default="published")
+    published_by: Mapped[uuid.UUID] = mapped_column(ForeignKey("app_user.id", ondelete="RESTRICT"))
+    published_at: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+    rolled_back_by: Mapped[uuid.UUID | None] = mapped_column(ForeignKey("app_user.id", ondelete="RESTRICT"))
+    rolled_back_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    rollback_reason: Mapped[str | None] = mapped_column(Text)
+
+    entries: Mapped[list[ContentReleaseEntry]] = relationship(order_by="ContentReleaseEntry.position")
+
+
+class ContentReleaseEntry(Base):
+    """One item of a release: the version it published and the version learners saw before (none if the release first
+    published the item)."""
+
+    __tablename__ = "content_release_entry"
+    __table_args__ = (UniqueConstraint("release_id", "item_id", name="uq_content_release_entry_item"),)
+    id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    release_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("content_release.id", ondelete="RESTRICT"), index=True)
+    item_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("content_item.id", ondelete="RESTRICT"), index=True)
+    version_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("content_version.id", ondelete="RESTRICT"))
+    previous_version_id: Mapped[uuid.UUID | None] = mapped_column(ForeignKey("content_version.id", ondelete="RESTRICT"))
+    position: Mapped[int] = mapped_column(SmallInteger)

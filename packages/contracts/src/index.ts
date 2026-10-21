@@ -60,6 +60,7 @@ export type NextSteps = S["NextStepsOut"];
 export type BacklogRow = S["BacklogRow"];
 export type WrittenLifecycle = S["LifecycleOut"];
 export type Calibration = S["CalibrationOut"];
+export type ContentRelease = S["ReleaseOut"];
 export type WrittenUpload = S["UploadOut"];
 export type WrittenReceipt = S["WrittenReceiptOut"];
 export type WrittenSeal = S["SealOut"];

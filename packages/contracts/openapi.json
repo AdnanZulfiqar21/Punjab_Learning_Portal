@@ -12509,6 +12509,189 @@
         "title": "RelatedLesson",
         "type": "object"
       },
+      "ReleaseEntryOut": {
+        "properties": {
+          "availability": {
+            "title": "Availability",
+            "type": "string"
+          },
+          "current_version": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The version learners see now",
+            "title": "Current Version"
+          },
+          "item_id": {
+            "format": "uuid",
+            "title": "Item Id",
+            "type": "string"
+          },
+          "kind": {
+            "title": "Kind",
+            "type": "string"
+          },
+          "previous_version": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The version learners saw before; none if first published here",
+            "title": "Previous Version"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "version": {
+            "description": "The version this release published",
+            "title": "Version",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "item_id",
+          "title",
+          "kind",
+          "version",
+          "previous_version",
+          "current_version",
+          "availability"
+        ],
+        "title": "ReleaseEntryOut",
+        "type": "object"
+      },
+      "ReleaseIn": {
+        "description": "RELEASE-01: approved items to publish together, or none of them.",
+        "properties": {
+          "item_ids": {
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "maxItems": 100,
+            "minItems": 1,
+            "title": "Item Ids",
+            "type": "array"
+          },
+          "label": {
+            "description": "A short name, e.g. 'Chapter 4 lessons'",
+            "maxLength": 120,
+            "minLength": 3,
+            "title": "Label",
+            "type": "string"
+          },
+          "reason": {
+            "maxLength": 1000,
+            "minLength": 5,
+            "title": "Reason",
+            "type": "string"
+          }
+        },
+        "required": [
+          "item_ids",
+          "label",
+          "reason"
+        ],
+        "title": "ReleaseIn",
+        "type": "object"
+      },
+      "ReleaseOut": {
+        "properties": {
+          "entries": {
+            "items": {
+              "$ref": "#/components/schemas/ReleaseEntryOut"
+            },
+            "title": "Entries",
+            "type": "array"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "label": {
+            "title": "Label",
+            "type": "string"
+          },
+          "published_at": {
+            "format": "date-time",
+            "title": "Published At",
+            "type": "string"
+          },
+          "reason": {
+            "title": "Reason",
+            "type": "string"
+          },
+          "rollback_reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rollback Reason"
+          },
+          "rolled_back_at": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rolled Back At"
+          },
+          "status": {
+            "enum": [
+              "published",
+              "rolled_back"
+            ],
+            "title": "Status",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "label",
+          "reason",
+          "status",
+          "published_at",
+          "rolled_back_at",
+          "rollback_reason",
+          "entries"
+        ],
+        "title": "ReleaseOut",
+        "type": "object"
+      },
+      "ReleaseRollbackIn": {
+        "properties": {
+          "reason": {
+            "maxLength": 1000,
+            "minLength": 5,
+            "title": "Reason",
+            "type": "string"
+          }
+        },
+        "required": [
+          "reason"
+        ],
+        "title": "ReleaseRollbackIn",
+        "type": "object"
+      },
       "RemedyIn": {
         "properties": {
           "attempt_id": {
@@ -30024,6 +30207,166 @@
           }
         },
         "summary": "Editorial work queue (P06.S1.T2)",
+        "tags": [
+          "studio"
+        ]
+      }
+    },
+    "/v1/studio/releases": {
+      "get": {
+        "operationId": "list_releases_v1_studio_releases_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/ReleaseOut"
+                  },
+                  "title": "Response List Releases V1 Studio Releases Get",
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Recent releases within your publishing scope",
+        "tags": [
+          "studio"
+        ]
+      },
+      "post": {
+        "operationId": "publish_release_v1_studio_releases_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReleaseIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReleaseOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Publish several approved items together, or none of them (publishers, MFA)",
+        "tags": [
+          "studio"
+        ]
+      }
+    },
+    "/v1/studio/releases/{release_id}": {
+      "get": {
+        "operationId": "get_release_v1_studio_releases__release_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "release_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Release Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReleaseOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Get Release",
+        "tags": [
+          "studio"
+        ]
+      }
+    },
+    "/v1/studio/releases/{release_id}/rollback": {
+      "post": {
+        "operationId": "rollback_release_v1_studio_releases__release_id__rollback_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "release_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Release Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReleaseRollbackIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReleaseOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Put every item of a release back as it was before, or none of them",
         "tags": [
           "studio"
         ]

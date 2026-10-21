@@ -30,6 +30,10 @@ from portal_api.modules.content.schemas import (
     LessonOut,
     QuarantineIn,
     QuestionPoolIn,
+    ReleaseEntryOut,
+    ReleaseIn,
+    ReleaseOut,
+    ReleaseRollbackIn,
     ReviewerOption,
     ReviewIn,
     ReviewOut,
@@ -1697,3 +1701,60 @@ def asset_retention(db: DB, who: CurrentPrincipal, apply: Annotated[bool, Query(
     return RetentionOut(
         applied=apply, purged=[uuid.UUID(x) for x in assets.collect(db, apply=apply, actor=who.user.id)]
     )
+
+
+# ------------------------------------------------------------------ releases (P06.S3.T2, RELEASE-01)
+def _release_out(db: Session, r: Any) -> ReleaseOut:
+    from portal_api.modules.content import releases
+
+    return ReleaseOut(
+        id=r.id,
+        label=r.label,
+        reason=r.reason,
+        status=r.status,
+        published_at=r.published_at,
+        rolled_back_at=r.rolled_back_at,
+        rollback_reason=r.rollback_reason,
+        entries=[ReleaseEntryOut(**e) for e in releases.entry_rows(db, r)],
+    )
+
+
+@router.post(
+    "/releases",
+    response_model=ReleaseOut,
+    status_code=201,
+    summary="Publish several approved items together, or none of them (publishers, MFA)",
+)
+def publish_release(db: DB, who: Publisher, body: ReleaseIn) -> ReleaseOut:
+    from portal_api.modules.content import releases
+
+    return _release_out(db, releases.publish(db, who, body.item_ids, body.label, body.reason))
+
+
+@router.get("/releases", response_model=list[ReleaseOut], summary="Recent releases within your publishing scope")
+def list_releases(db: DB, who: Publisher) -> list[ReleaseOut]:
+    from portal_api.modules.content import releases
+
+    return [_release_out(db, r) for r in releases.listing(db, who)]
+
+
+@router.get("/releases/{release_id}", response_model=ReleaseOut)
+def get_release(db: DB, who: Publisher, release_id: uuid.UUID) -> ReleaseOut:
+    from portal_api.modules.content import releases
+    from portal_api.modules.content.models import ContentRelease
+
+    r = db.get(ContentRelease, release_id)
+    if r is None or not releases.visible(db, who, r):
+        raise NotFound("Release not found.")
+    return _release_out(db, r)
+
+
+@router.post(
+    "/releases/{release_id}/rollback",
+    response_model=ReleaseOut,
+    summary="Put every item of a release back as it was before, or none of them",
+)
+def rollback_release(db: DB, who: Publisher, release_id: uuid.UUID, body: ReleaseRollbackIn) -> ReleaseOut:
+    from portal_api.modules.content import releases
+
+    return _release_out(db, releases.rollback(db, who, release_id, body.reason))
