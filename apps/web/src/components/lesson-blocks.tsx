@@ -37,6 +37,7 @@ export function LessonBlocks({
   equationAction,
   dataSaver = false,
   blockIds = false,
+  typeset,
 }: {
   blocks: Block[];
   headingOffset?: number;
@@ -47,6 +48,8 @@ export function LessonBlocks({
   equationAction?: (index: number) => ReactNode;
   /** Give each block an id (b0, b1, …) so language variants with one structure can return to the same place. */
   blockIds?: boolean;
+  /** P01.S4.T2: equations already typeset on the server (`lib/typeset.ts`), by block index. */
+  typeset?: Record<number, string | null>;
 }) {
   return (
     <div className="space-y-5 leading-relaxed">
@@ -54,10 +57,10 @@ export function LessonBlocks({
         <Fragment key={i}>
           {blockIds ? (
             <div id={`b${i}`} data-block="" className="scroll-mt-20">
-              <BlockView block={b} headingOffset={headingOffset} assetUrl={assetUrl} dataSaver={dataSaver} />
+              <BlockView block={b} headingOffset={headingOffset} assetUrl={assetUrl} dataSaver={dataSaver} typeset={typeset?.[i]} />
             </div>
           ) : (
-            <BlockView block={b} headingOffset={headingOffset} assetUrl={assetUrl} dataSaver={dataSaver} />
+            <BlockView block={b} headingOffset={headingOffset} assetUrl={assetUrl} dataSaver={dataSaver} typeset={typeset?.[i]} />
           )}
           {b.type === "equation" && equationAction?.(i)}
         </Fragment>
@@ -84,7 +87,19 @@ function FallbackView({ fb, assetUrl, dataSaver }: { fb: Fallback; assetUrl?: As
   );
 }
 
-function BlockView({ block: b, headingOffset, assetUrl, dataSaver }: { block: Block; headingOffset: number; assetUrl?: AssetUrl; dataSaver?: boolean }) {
+function BlockView({
+  block: b,
+  headingOffset,
+  assetUrl,
+  dataSaver,
+  typeset,
+}: {
+  block: Block;
+  headingOffset: number;
+  assetUrl?: AssetUrl;
+  dataSaver?: boolean;
+  typeset?: string | null;
+}) {
   switch (b.type) {
     case "heading": {
       const level = Math.min(6, (b.level === 3 ? 3 : 2) + headingOffset);
@@ -180,6 +195,7 @@ function BlockView({ block: b, headingOffset, assetUrl, dataSaver }: { block: Bl
           display={b.display !== false}
           textAlt={str(b.text_alt)}
           dataSaver={dataSaver}
+          typeset={typeset}
           fallback={
             str(fb.image_asset_id) ? (
               <ArchivedImage id={str(fb.image_asset_id)} alt={str(fb.alt) || str(b.text_alt)} assetUrl={assetUrl} dataSaver={dataSaver} />

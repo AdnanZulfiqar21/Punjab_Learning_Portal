@@ -1,16 +1,17 @@
 "use client";
 
 import { type ReactNode, useEffect, useState } from "react";
+import { KATEX_OPTIONS } from "@/lib/katex-options";
 
 // P01.S4.T2 (RENDERER-SPIKE-01): typeset equations and chemistry notation (mhchem `\ce{…}`) on the web.
 //
-// KaTeX loads only on a page that has an equation, after the page is shown: about 76 KB gzipped, 8 KB more for
-// chemistry, 3.5 KB of CSS and only the fonts the formula uses. Until it has loaded the text equivalent and the source
-// show. The reviewed static rendering stays in four cases: without JavaScript, with data saver on (until asked), when the
-// formula can't be typeset, and in the apps, which have no equation renderer yet.
+// Server-rendered pages (lessons, topics, results, the notebook) typeset on the server (`lib/typeset.ts`), so they ship
+// only KaTeX's CSS and the fonts a formula uses. Client-rendered surfaces (the exam runner, the studio) load KaTeX here
+// when a formula needs it, after the page is shown: about 76 KB gzipped, plus 8 KB for chemistry.
 //
-// KaTeX runs with `trust: false`, so a formula can't add links, HTML, classes, styles or includes. It emits only its own
-// markup. The typeset copy is hidden from screen readers, which read the reviewed text equivalent instead.
+// The reviewed static rendering stays in four cases: without JavaScript on those client surfaces, with data saver on
+// (until asked), when a formula can't be typeset, and in the apps, which have no equation renderer yet. The typeset copy
+// is hidden from screen readers, which read the reviewed text equivalent instead.
 
 type Typeset = (latex: string, display: boolean) => string;
 let loading: Promise<Typeset> | null = null;
@@ -19,15 +20,7 @@ function typesetter(): Promise<Typeset> {
   loading ??= Promise.all([import("katex"), import("katex/contrib/mhchem"), import("katex/dist/katex-swap.min.css")]).then(
     ([{ default: katex }]): Typeset =>
       (latex, display) =>
-        katex.renderToString(latex, {
-          displayMode: display,
-          output: "htmlAndMathml",
-          throwOnError: true,
-          trust: false,
-          strict: "ignore",
-          maxSize: 10,
-          maxExpand: 100,
-        }),
+        katex.renderToString(latex, { ...KATEX_OPTIONS, displayMode: display }),
     (e: unknown) => {
       loading = null; // a failed download is retried by the next formula; a formula that fails to parse is not
       throw e;
@@ -41,6 +34,7 @@ export function Equation({
   display,
   textAlt,
   fallback,
+  typeset,
   dataSaver = false,
 }: {
   latex: string;
@@ -48,15 +42,18 @@ export function Equation({
   textAlt: string;
   /** The reviewed static rendering, if the block has one. */
   fallback: ReactNode;
+  /** Typeset on the server: the markup, or null when it couldn't be typeset. Undefined: typeset here if needed. */
+  typeset?: string | null;
   dataSaver?: boolean;
 }) {
-  const [asked, setAsked] = useState(!dataSaver);
+  const fromServer = typeset !== undefined;
+  const [asked, setAsked] = useState(fromServer || !dataSaver);
   const [result, setResult] = useState<{ latex: string; html: string | null } | null>(null);
   useEffect(() => {
-    if (!asked) return;
+    if (fromServer || !asked) return;
     let live = true;
     typesetter()
-      .then((typeset) => typeset(latex, display))
+      .then((t) => t(latex, display))
       .then(
         (html) => live && setResult({ latex, html }),
         () => live && setResult({ latex, html: null }),
@@ -64,9 +61,9 @@ export function Equation({
     return () => {
       live = false;
     };
-  }, [asked, latex, display]);
+  }, [fromServer, asked, latex, display]);
 
-  const current = result?.latex === latex ? result : null;
+  const current = fromServer ? { latex, html: typeset } : result?.latex === latex ? result : null;
   if (current?.html) {
     return (
       <figure className="space-y-2 rounded-lg border border-border bg-surface px-4 py-3" data-typeset="ok">

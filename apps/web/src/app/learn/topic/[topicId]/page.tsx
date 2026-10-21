@@ -7,6 +7,7 @@ import { chooseReadingLanguage } from "@/app/actions/learn";
 import { KeepPlace } from "@/components/keep-place";
 import { LectureView } from "@/components/lecture-view";
 import { LessonBlocks } from "@/components/lesson-blocks";
+import { typesetEquations } from "@/lib/typeset";
 import { Notice, SkeletonLines } from "@/components/ui";
 import { DISPLAY_COOKIE, parseDisplay } from "@/lib/display";
 import { GRADE_LABEL } from "@/lib/format";
@@ -176,6 +177,7 @@ async function TopicView({ id, view }: { id: string; view: "read" | "lecture" })
         <div className="space-y-4 text-[1.0625rem] leading-7 sm:text-[1.125rem] sm:leading-8" lang={lesson.language === "ur" ? "ur" : "en"} dir={lesson.language === "ur" ? "rtl" : undefined}>
           <LessonBlocks
             blocks={lesson.body.blocks}
+            typeset={typesetEquations(lesson.body.blocks)}
             blockIds
             dataSaver={dataSaver}
             assetUrl={(versionId) =>

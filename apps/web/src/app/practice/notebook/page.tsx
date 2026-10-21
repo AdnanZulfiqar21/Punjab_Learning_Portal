@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { Suspense } from "react";
 import type { NotebookEntry } from "@portal/contracts";
 import { LessonBlocks } from "@/components/lesson-blocks";
+import { typesetEquations } from "@/lib/typeset";
 import { MockRunningNotice } from "@/components/mock-running";
 import { Badge, Breadcrumbs, Notice, SkeletonLines } from "@/components/ui";
 import { GRADE_LABEL } from "@/lib/format";
@@ -90,7 +91,7 @@ async function Entries() {
                 See the original question {e.position}
               </Link>
             </p>
-            <LessonBlocks blocks={e.stem as { type: string }[]} headingOffset={2} assetUrl={(v) => `/practice/attempt/${e.source_attempt_id}/assets/${v}`} />
+            <LessonBlocks blocks={e.stem as { type: string }[]} typeset={typesetEquations(e.stem as { type: string }[])} headingOffset={2} assetUrl={(v) => `/practice/attempt/${e.source_attempt_id}/assets/${v}`} />
             <p className="text-muted">{e.why}</p>
             <NoteEditor id={e.id} initial={e.note} />
           </li>

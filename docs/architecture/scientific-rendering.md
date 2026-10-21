@@ -8,7 +8,10 @@ This page records what the 2026-10-21 rendering spike proved on the web, what it
   - The API stores no markup.
   - Text takes its direction from its own content (`dir="auto"`): an Urdu paragraph reads right to left, while English and Roman Urdu stay left to right.
 - **Equations are LaTeX plus a reviewed text equivalent** (`text_alt`), with a reviewed static rendering as the fallback.
-  - The web typesets them with KaTeX 0.19.0 (`apps/web/src/components/equation.tsx`), with the mhchem extension for chemistry (`\ce{2H2 + O2 -> 2H2O}`).
+  - The web typesets them with KaTeX 0.19.0 and the mhchem extension for chemistry (`\ce{2H2 + O2 -> 2H2O}`).
+  - Server-rendered pages (lessons, topics, results, the notebook) typeset on the server (`apps/web/src/lib/typeset.ts`) and ship no KaTeX JavaScript.
+  - Client-rendered surfaces (the exam runner, the studio) load KaTeX in the browser when a formula needs it (`apps/web/src/components/equation.tsx`).
+  - Both use the options in `apps/web/src/lib/katex-options.ts`.
   - KaTeX runs with `trust: false`. `\href`, `\url`, `\includegraphics`, `\htmlClass`, `\htmlId`, `\htmlStyle` and `\htmlData` are shown as plain red command names, so a formula can't add a link, an element class, a style or an include.
   - It also runs with `maxSize: 10` and `maxExpand: 100`, which bounds what one formula can make the page do.
   - KaTeX emits only its own markup. The typeset copy is hidden from screen readers, which read the reviewed text equivalent instead.
@@ -29,12 +32,12 @@ A formula that fails to parse shows its reviewed image and a short note. The reg
 
 | Part | Bytes | Gzipped | When it loads |
 | --- | --- | --- | --- |
-| `katex.min.js` | 272,868 | 75,906 | Only on a page with an equation, after the page is shown |
+| `katex.min.js` | 272,868 | 75,906 | Never on server-rendered pages. On client-rendered surfaces, only when a formula needs it, after the page is shown |
 | `contrib/mhchem.min.js` | 33,706 | 8,392 | With KaTeX |
 | `katex-swap.min.css` | 24,793 | 3,512 | With KaTeX (fonts use `font-display: swap`) |
 | Fonts (20 woff2, all) | 259,792 | n/a (woff2) | Only the faces a formula uses; the fixture lesson used Main-Regular (26,272) and Math-Italic (16,440) |
 
-Pages without equations load none of this. These figures come from the package's minified files. The development server's unminified chunks (about 330 KB) are not representative.
+Pages without equations load none of this. The server-rendered chapter page with the fixture formulas loads the CSS, two fonts and a 410-byte loader stub (development server); its JavaScript stays inside the 180 KB budget (`e2e/payload-budget.spec.ts`), which the first version of this change exceeded (229 KB) by loading KaTeX in the browser. These figures come from the package's minified files. The development server's unminified chunks (about 330 KB) are not representative.
 
 ## Evidence
 

@@ -6,6 +6,7 @@ import { Suspense } from "react";
 import type { FavouriteTopic, Lesson, ReadingPosition, StudyNote, TopicNode } from "@portal/contracts";
 import { setLessonCompleted } from "@/app/actions/lessons";
 import { LessonBlocks } from "@/components/lesson-blocks";
+import { typesetEquations } from "@/lib/typeset";
 import { LessonStartBeacon } from "@/components/lesson-start-beacon";
 import { ReadingTracker } from "@/components/reading-tracker";
 import { FavouriteButton, LessonNote, SaveFormulaButton } from "@/components/study-tools";
@@ -234,6 +235,7 @@ async function Lessons({ chapterId, topics, lang }: { chapterId: string; topics:
                 {token && <LessonStartBeacon lessonId={l.id} language={l.language} />}
                 <LessonBlocks
                   blocks={l.body.blocks as { type: string }[]}
+                  typeset={typesetEquations(l.body.blocks as { type: string }[])}
                   headingOffset={2}
                   assetUrl={(v) => `/learn/lessons/${l.id}/assets/${v}`}
                   dataSaver={dataSaver}
