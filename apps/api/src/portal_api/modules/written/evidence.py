@@ -262,6 +262,54 @@ def to_source(region: list[float] | tuple[float, ...], transform: dict[str, Any]
     return [cx + x * cw, cy + y * ch, w * cw, h * ch]
 
 
+def _straighten_region(region: tuple[float, float, float, float], angle: float, aspect: float) -> list[float]:
+    """STRAIGHTEN-01, the other way: a region of the page before straightening (fractions) as the smallest region of
+    the straightened page that contains it."""
+    theta = math.radians(angle)
+    c, s_ = math.cos(theta), math.sin(theta)
+    w0, h0 = aspect, 1.0
+    shown_w, shown_h = w0 * abs(c) + h0 * abs(s_), w0 * abs(s_) + h0 * abs(c)
+    x, y, w, h = region
+    xs, ys = [], []
+    for u, v in ((x, y), (x + w, y), (x, y + h), (x + w, y + h)):
+        ox, oy = u * w0 - w0 / 2, v * h0 - h0 / 2
+        px, py = c * ox + s_ * oy, -s_ * ox + c * oy  # the turn _unstraighten undoes
+        xs.append((px + shown_w / 2) / shown_w)
+        ys.append((py + shown_h / 2) / shown_h)
+    left, top = max(0.0, min(xs)), max(0.0, min(ys))
+    right, bottom = min(1.0, max(xs)), min(1.0, max(ys))
+    return [left, top, max(0.0, right - left), max(0.0, bottom - top)]
+
+
+def from_source(region: list[float] | tuple[float, ...], transform: dict[str, Any] | None) -> list[float]:
+    """REGION-MAP-01: the inverse of `to_source`. A region of the upright original (x, y, w, h fractions) as the same
+    region of the page as currently shown with its transform, clipped to it; (0, 0, 0, 0) when it is trimmed away.
+    Exact for turns and trims; with straightening it is the smallest upright box containing the region."""
+    x, y, w, h = (float(v) for v in region)
+    t = check_transform(transform)
+    cx, cy, cw, ch = t["crop"] or (0.0, 0.0, 1.0, 1.0)
+    x, y, w, h = (x - cx) / cw, (y - cy) / ch, w / cw, h / ch
+    rotate = t["rotate"]
+    if rotate == 90:  # a clockwise quarter turn
+        x, y, w, h = 1 - y - h, x, h, w
+    elif rotate == 180:
+        x, y = 1 - x - w, 1 - y - h
+    elif rotate == 270:
+        x, y, w, h = y, 1 - x - w, h, w
+    if t.get("straighten"):
+        if "aspect" not in t:
+            raise Rejected("This page's straightening can't be mapped; straighten it again.")
+        x, y, w, h = _straighten_region((x, y, w, h), float(t["straighten"]), float(t["aspect"]))
+        if t.get("shown_crop"):
+            sx, sy, sw, sh = t["shown_crop"]
+            x, y, w, h = (x - sx) / sw, (y - sy) / sh, w / sw, h / sh
+    left, top = max(0.0, x), max(0.0, y)
+    right, bottom = min(1.0, x + w), min(1.0, y + h)
+    if right <= left or bottom <= top:
+        return [0.0, 0.0, 0.0, 0.0]
+    return [left, top, right - left, bottom - top]
+
+
 def _cut(image: Any, region: list[float]) -> Any:
     x, y, w, h = region
     return image.crop(

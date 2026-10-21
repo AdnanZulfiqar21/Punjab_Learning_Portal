@@ -62,6 +62,11 @@ test("written practice reads, navigates and reflows accessibly", async ({ page, 
     await page.keyboard.press("Space");
     await expect(boxes.nth(i)).toBeChecked();
   }
+  // REGION-MAP-01: page 1 answers every part; confirm its question numbering, by keyboard too.
+  const numbering = page.getByLabel("I wrote the question numbers clearly on page 1");
+  await numbering.focus();
+  await page.keyboard.press("Space");
+  await expect(numbering).toBeChecked();
   await expect(page.getByRole("status").filter({ hasText: /Saved · revision \d+/ })).toBeVisible(AUTH);
   const submit = page.getByRole("button", { name: "Submit for marking" });
   await submit.focus();

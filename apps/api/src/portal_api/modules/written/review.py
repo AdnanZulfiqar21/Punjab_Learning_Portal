@@ -40,7 +40,7 @@ from portal_api.modules.content.models import ContentVersion
 from portal_api.modules.content.workflow import roles_in_scope
 from portal_api.modules.identity.deps import Principal
 from portal_api.modules.identity.permissions import Permission, permissions_for
-from portal_api.modules.written import storage
+from portal_api.modules.written import mapping, storage
 from portal_api.modules.written.models import WrittenAttempt, WrittenForm, WrittenPage, WrittenReceipt
 
 LEASE = timedelta(minutes=20)
@@ -646,7 +646,10 @@ def case_context(db: Session, case: WrittenReviewCase) -> dict[str, Any]:
         "recheck": recheck_request(db, case),
         "manifest": receipt.manifest,
         "questions": questions,
-        "pages": sorted(pages, key=lambda p: (p.uploaded_at, str(p.file_id), p.page_index)),
+        # REGION-MAP-01: in the learner's order as submitted, then upload order
+        "pages": mapping.ordered_pages(
+            sorted(pages, key=lambda p: (p.uploaded_at, str(p.file_id), p.page_index)), receipt.manifest
+        ),
         "max_units": form.max_units,
     }
 

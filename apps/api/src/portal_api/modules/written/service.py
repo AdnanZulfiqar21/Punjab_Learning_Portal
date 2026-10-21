@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import math
 import random
 import secrets
 import uuid
@@ -37,11 +38,13 @@ from portal_api.modules.identity.models import StaffRoleGrant
 from portal_api.modules.identity.permissions import Permission, Role, permissions_for
 from portal_api.modules.system import guard
 from portal_api.modules.written import evidence, review, storage
+from portal_api.modules.written.mapping import ambiguous_pages
 from portal_api.modules.written.models import (
     WrittenAttempt,
     WrittenFile,
     WrittenForm,
     WrittenFormItem,
+    WrittenManifestRevision,
     WrittenPage,
     WrittenReceipt,
 )
@@ -753,9 +756,39 @@ def sweep_orphans(db: Session, older_than_s: int = 3600) -> list[str]:
     return removed
 
 
+MAX_REGIONS_PER_SLOT = 10
+MIN_REGION = 0.02  # a marked area is at least this share of each side of the page, so a stray tap isn't an area
+
+
+def _check_box(raw: Any) -> list[float]:
+    """REGION-MAP-01: an area of a page as x, y, width and height fractions, inside the page and not a sliver."""
+    try:
+        x, y, w, h = (float(v) for v in raw)
+    except (TypeError, ValueError) as e:
+        raise evidence.Rejected("An area is four numbers: x, y, width and height.") from e
+    if not all(map(math.isfinite, (x, y, w, h))) or min(x, y) < 0 or x + w > 1.0001 or y + h > 1.0001:
+        raise evidence.Rejected("An area must stay inside the page.")
+    if w < MIN_REGION or h < MIN_REGION:
+        raise evidence.Rejected("That area is too small to show an answer.")
+    return [round(x, 4), round(y, 4), round(min(w, 1 - x), 4), round(min(h, 1 - y), 4)]
+
+
 def update_manifest(
-    db: Session, who: Principal, attempt_id: uuid.UUID, *, expected_revision: int, slots: dict[str, dict[str, Any]]
+    db: Session,
+    who: Principal,
+    attempt_id: uuid.UUID,
+    *,
+    expected_revision: int,
+    slots: dict[str, dict[str, Any]],
+    order: list[str] | None = None,
+    confirmed: list[str] | None = None,
 ) -> WrittenAttempt:
+    """Save the answer mapping as a new revision. REGION-MAP-01: a slot may mark areas of its pages (`regions`, each
+    `{"page", "box"}` on the page as shown, or `{"page", "source"}` as returned, which wins when both are sent);
+    `order` reorders the pages;
+    `confirmed` lists shared pages whose question numbering the learner has confirmed. A slot without a `regions` key
+    keeps the areas it had on pages it still uses, and an absent `order` or `confirmed` keeps the current one, so a
+    client that doesn't know about them never erases them."""
     attempt = _lock(db, attempt_id, who)
     now = db_now(db)
     if _expire_if_due(db, attempt, now):
@@ -767,7 +800,10 @@ def update_manifest(
             current={"revision": attempt.manifest_revision, "manifest": attempt.manifest},
         )
     allowed = {s for fi in attempt.form.items for s in fi.slots}
-    pages = {str(p.id) for p in _pages(db, attempt.id)}
+    live = _pages(db, attempt.id)
+    pages = {str(p.id) for p in live}
+    transforms = {str(p.id): p.transform or {} for p in live}
+    previous = attempt.manifest.get("slots", {})
     errors = []
     clean: dict[str, dict[str, Any]] = {}
     for key, value in slots.items():
@@ -780,14 +816,67 @@ def update_manifest(
             errors.append(f"Slot {key} can't be both answered and declared unanswered.")
         if set(ids) - pages:
             errors.append(f"Slot {key} refers to pages that aren't part of this script.")
-        clean[key] = {"pages": list(dict.fromkeys(ids)), "unanswered": unanswered}
+        ids = list(dict.fromkeys(ids))
+        if "regions" in value:
+            regions = []
+            for raw in value.get("regions") or []:
+                pid = str(raw.get("page")) if isinstance(raw, dict) else ""
+                if pid not in ids:
+                    errors.append(f"Slot {key} marks an area on a page it doesn't use.")
+                    continue
+                try:  # a returned area keeps its saved place; only a new one is mapped from the page as shown
+                    if raw.get("source") is not None:
+                        source = _check_box(raw["source"])
+                    else:
+                        source = _check_box(evidence.to_source(_check_box(raw.get("box")), transforms.get(pid) or None))
+                except evidence.Rejected as e:
+                    errors.append(f"Slot {key}: {e.reason}")
+                    continue
+                regions.append({"page": pid, "source": source})
+        else:
+            regions = [r for r in previous.get(key, {}).get("regions", []) if r.get("page") in ids]
+        if len(regions) > MAX_REGIONS_PER_SLOT:
+            errors.append(f"Slot {key} can mark at most {MAX_REGIONS_PER_SLOT} areas.")
+        clean[key] = {"pages": ids, "unanswered": unanswered}
+        if regions:
+            clean[key]["regions"] = regions
+    current_order = [p for p in attempt.manifest.get("order", []) if p in pages]
+    if order is not None:
+        asked = [str(p) for p in order]
+        if len(asked) != len(set(asked)) or set(asked) != pages:
+            errors.append("The page order must list every uploaded page once.")
+        else:
+            current_order = asked
     if errors:
         raise Unprocessable("The mapping isn't valid.", errors=errors)
-    attempt.manifest = {**attempt.manifest, "slots": clean}
+    ambiguous = set(ambiguous_pages(clean))
+    kept = attempt.manifest.get("confirmed", []) if confirmed is None else [str(p) for p in confirmed]
+    manifest: dict[str, Any] = {**attempt.manifest, "slots": clean, "order": current_order}
+    manifest["confirmed"] = sorted(p for p in set(kept) if p in ambiguous)
+    attempt.manifest = manifest
     attempt.manifest_revision += 1
+    db.add(
+        WrittenManifestRevision(
+            attempt_id=attempt.id, revision=attempt.manifest_revision, manifest=manifest, saved_at=now
+        )
+    )
     db.commit()
     db.refresh(attempt)
     return attempt
+
+
+def manifest_revisions(db: Session, who: Principal, attempt_id: uuid.UUID) -> list[WrittenManifestRevision]:
+    """REGION-MAP-01: the learner's saved mappings for an attempt, oldest first."""
+    attempt = db.get(WrittenAttempt, attempt_id)
+    if attempt is None or attempt.user_id != who.user.id:
+        raise NotFound("Attempt not found.")
+    return list(
+        db.scalars(
+            select(WrittenManifestRevision)
+            .where(WrittenManifestRevision.attempt_id == attempt.id)
+            .order_by(WrittenManifestRevision.revision)
+        )
+    )
 
 
 # ------------------------------------------------------------------ seal
@@ -867,6 +956,14 @@ def seal(
     ]
     if missing:
         raise Unprocessable("Give every answer at least one page, or mark it as not answered.", missing=missing)
+    unconfirmed = sorted(set(ambiguous_pages(slots)) - set(attempt.manifest.get("confirmed", [])))
+    if unconfirmed:  # REGION-MAP-01: a page shared by answers needs its question numbering confirmed
+        raise Unprocessable(
+            "Some pages answer more than one question. Mark each answer's area, or confirm that the question numbers "
+            "are written on those pages.",
+            pages=unconfirmed,
+            code_reason="NUMBERING_UNCONFIRMED",
+        )
     live_ids = {str(p.id) for p in _pages(db, attempt.id)}
     used = {p for s in slots.values() for p in s.get("pages", [])}
     if used - live_ids or used - set(verified):

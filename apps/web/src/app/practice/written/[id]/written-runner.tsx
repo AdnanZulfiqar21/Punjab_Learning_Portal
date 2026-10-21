@@ -5,7 +5,7 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import type { EvidenceLink, NextSteps as Steps, WrittenAttempt, WrittenPage, WrittenResult } from "@portal/contracts";
-import { saveMapping, sealScript, transformPage } from "@/app/actions/written";
+import { saveMapping, sealScript, transformPage, type MappingIn } from "@/app/actions/written";
 import { LessonBlocks } from "@/components/lesson-blocks";
 import { PendingAction } from "./pending-action";
 import { PractiseAgain } from "./practise-again";
@@ -14,8 +14,13 @@ import { Notice } from "@/components/ui";
 import { HelpLink } from "@/components/help-link";
 import { TIME_ZONE } from "@/lib/dates";
 import { reach } from "@/lib/reach";
+import { ambiguousPages, fromSource, type Box } from "@/lib/page-areas";
+import { AreaOverlay, AreaPicker } from "./area-picker";
 
-type Slot = { pages: string[]; unanswered: boolean };
+// REGION-MAP-01: an area is kept as `source` (the original page's coordinates) once saved; one drawn on this device
+// and not yet saved has only `box`, on the page as shown.
+type Region = { page: string; source?: number[]; box?: number[] | null };
+type Slot = { pages: string[]; unanswered: boolean; regions?: Region[] };
 type Upload = { id: string; name: string; progress: number; status: "uploading" | "failed"; error?: string; retryable?: boolean };
 const marks = (u: number) => String(u / 100);
 // WRITTEN-CONNECTION-01 (W04.S2.T1): a request that never reached the server is a failure like any other.
@@ -68,6 +73,8 @@ export function WrittenRunner({
     for (const it of attempt.items) for (const s of it.slots) out[s.key] = m[s.key] ?? { pages: [], unanswered: false };
     return out;
   });
+  const [confirmed, setConfirmed] = useState<string[]>(() => (attempt.manifest as { confirmed?: string[] }).confirmed ?? []);
+  const [picking, setPicking] = useState<{ slot: string; page: string } | null>(null);
   const [revision, setRevision] = useState(attempt.manifest_revision);
   const [mapState, setMapState] = useState<"saved" | "saving" | "error" | "conflict">("saved");
   const [mapError, setMapError] = useState<string | null>(null);
@@ -168,15 +175,46 @@ export function WrittenRunner({
     setUploads((u) => u.filter((x) => x.id !== tmp));
   }
 
-  function persistMapping(next: Record<string, Slot>) {
+  // REGION-MAP-01: what is sent: every slot with its areas (saved ones by `source`, new ones by `box`), the page order
+  // as listed, and the shared pages whose numbering is confirmed.
+  function mappingOf(next: Record<string, Slot>, order: string[], conf: string[]): MappingIn {
+    const out: MappingIn["slots"] = {};
+    for (const [k, v] of Object.entries(next)) {
+      out[k] = {
+        pages: v.pages,
+        unanswered: v.unanswered,
+        regions: (v.regions ?? [])
+          .filter((r) => v.pages.includes(r.page))
+          .map((r) => (r.source ? { page: r.page, source: r.source } : { page: r.page, box: r.box ?? undefined })),
+      };
+    }
+    return { slots: out, order, confirmed: conf };
+  }
+
+  function persistMapping(next: Record<string, Slot>, nextConfirmed: string[] = confirmed, nextPages: WrittenPage[] = pages) {
     setSlots(next);
+    setConfirmed(nextConfirmed);
     setMapState("saving");
     if (saveTimer.current) clearTimeout(saveTimer.current);
+    const mapping = mappingOf(next, nextPages.map((p) => p.id), nextConfirmed);
     saveTimer.current = setTimeout(() => {
       saveTimer.current = null;
       savingPromise.current = (async () => {
-        const out = await reach(() => saveMapping(attempt.id, revisionRef.current, next), { kind: "error", message: UNREACHABLE } as const);
+        const out = await reach(() => saveMapping(attempt.id, revisionRef.current, mapping), { kind: "error", message: UNREACHABLE } as const);
         if (out.kind === "ok") {
+          // New areas get their saved place (`source`), so a later turn of the page doesn't move them.
+          const saved = (out.attempt.manifest as { slots?: Record<string, Slot> }).slots ?? {};
+          setSlots((cur) => {
+            const merged = { ...cur };
+            for (const [k, v] of Object.entries(cur)) {
+              const theirs = saved[k]?.regions ?? [];
+              const mine = v.regions ?? [];
+              if (mine.some((r) => !r.source) && theirs.length === mine.length && mine.every((r, i) => r.page === theirs[i].page)) {
+                merged[k] = { ...v, regions: mine.map((r, i) => ({ ...r, source: theirs[i].source })) };
+              }
+            }
+            return merged;
+          });
           revisionRef.current = out.attempt.manifest_revision;
           setRevision(out.attempt.manifest_revision);
           setMapState("saved");
@@ -193,11 +231,44 @@ export function WrittenRunner({
   function togglePage(key: string, pageId: string, on: boolean) {
     const cur = slots[key];
     const pagesFor = on ? [...cur.pages, pageId] : cur.pages.filter((p) => p !== pageId);
-    persistMapping({ ...slots, [key]: { pages: pagesFor, unanswered: on ? false : cur.unanswered } });
+    const regions = (cur.regions ?? []).filter((r) => pagesFor.includes(r.page));
+    persistMapping({ ...slots, [key]: { pages: pagesFor, unanswered: on ? false : cur.unanswered, regions } });
   }
 
   function toggleUnanswered(key: string, on: boolean) {
-    persistMapping({ ...slots, [key]: { pages: on ? [] : slots[key].pages, unanswered: on } });
+    persistMapping({ ...slots, [key]: { pages: on ? [] : slots[key].pages, unanswered: on, regions: on ? [] : slots[key].regions } });
+  }
+
+  function addArea(key: string, pageId: string, box: Box) {
+    const cur = slots[key];
+    persistMapping({ ...slots, [key]: { ...cur, regions: [...(cur.regions ?? []), { page: pageId, box }] } });
+    setPicking(null);
+  }
+
+  function clearAreas(key: string, pageId: string) {
+    const cur = slots[key];
+    persistMapping({ ...slots, [key]: { ...cur, regions: (cur.regions ?? []).filter((r) => r.page !== pageId) } });
+  }
+
+  function confirmNumbering(pageId: string, on: boolean) {
+    persistMapping(slots, on ? [...confirmed.filter((p) => p !== pageId), pageId] : confirmed.filter((p) => p !== pageId));
+  }
+
+  function movePage(index: number, by: -1 | 1) {
+    const next = [...pages];
+    const [moved] = next.splice(index, 1);
+    next.splice(index + by, 0, moved);
+    setPages(next);
+    persistMapping(slots, confirmed, next);
+  }
+
+  // Where an area shows on its page now: from its saved place and the page's current turn and trim, or as drawn.
+  function shownBoxes(slot: Slot, pageId: string): Box[] {
+    const page = pages.find((p) => p.id === pageId);
+    return (slot.regions ?? [])
+      .filter((r) => r.page === pageId)
+      .map((r) => (r.source ? fromSource(r.source, page?.transform) : r.box ? (r.box as Box) : null))
+      .filter((b): b is Box => b !== null);
   }
 
   async function submit() {
@@ -214,7 +285,8 @@ export function WrittenRunner({
       saved = await savingPromise.current;
     }
     if (!saved) {
-      const out = await reach(() => saveMapping(attempt.id, revisionRef.current, slots), { kind: "error", message: UNREACHABLE } as const);
+      const mapping = mappingOf(slots, pages.map((p) => p.id), confirmed);
+      const out = await reach(() => saveMapping(attempt.id, revisionRef.current, mapping), { kind: "error", message: UNREACHABLE } as const);
       if (out.kind !== "ok") {
         setMapState(out.kind === "conflict" ? "conflict" : "error"); // shown truthfully, and sent again on reconnect
         setMapError(out.message);
@@ -246,6 +318,9 @@ export function WrittenRunner({
 
   const pageLabel = (id: string) => `Page ${pages.findIndex((p) => p.id === id) + 1}`;
   const complete = Object.values(slots).every((s) => s.pages.length > 0 || s.unanswered);
+  const shared = ambiguousPages(slots);
+  const unconfirmed = shared.filter((p) => !confirmed.includes(p));
+  const previewOf = (p: WrittenPage) => `/practice/written/${attempt.id}/pages/${p.id}?v=${encodeURIComponent(JSON.stringify(p.transform ?? {}))}`;
   const remaining = now === null ? null : Math.max(0, cutoff - now);
 
   return (
@@ -449,7 +524,7 @@ export function WrittenRunner({
             <li key={p.id} className="space-y-1 rounded-lg border border-border bg-surface p-2 text-sm">
               {/* eslint-disable-next-line @next/next/no-img-element -- private, uncached preview served by our own route */}
               <img
-                src={`/practice/written/${attempt.id}/pages/${p.id}?v=${encodeURIComponent(JSON.stringify(p.transform ?? {}))}`}
+                src={previewOf(p)}
                 alt={`Page ${i + 1}`}
                 loading="lazy" // W07.S3.T1: large scans load as they scroll into view; the fixed height keeps the layout still
                 decoding="async"
@@ -461,6 +536,22 @@ export function WrittenRunner({
               {p.file_pages > 1 && (
                 <p className="text-muted">
                   PDF page {p.page_index} of {p.file_pages}
+                </p>
+              )}
+              {active && pages.length > 1 && (
+                <p className="flex gap-3">
+                  {/* REGION-MAP-01: put the pages in the order a teacher should read them. */}
+                  <button type="button" disabled={i === 0} onClick={() => movePage(i, -1)} className="text-accent underline underline-offset-2 disabled:text-muted disabled:no-underline">
+                    Move page {i + 1} earlier
+                  </button>
+                  <button
+                    type="button"
+                    disabled={i === pages.length - 1}
+                    onClick={() => movePage(i, 1)}
+                    className="text-accent underline underline-offset-2 disabled:text-muted disabled:no-underline"
+                  >
+                    Move page {i + 1} later
+                  </button>
                 </p>
               )}
               {active && (
@@ -558,8 +649,49 @@ export function WrittenRunner({
                     <input type="checkbox" checked={slots[s.key]?.unanswered ?? false} onChange={(e) => toggleUnanswered(s.key, e.target.checked)} />I didn&apos;t answer this
                   </label>
                 </div>
+                {(slots[s.key]?.pages ?? []).map((pid) => {
+                  const page = pages.find((p) => p.id === pid);
+                  if (!page) return null;
+                  const boxes = shownBoxes(slots[s.key], pid);
+                  const label = pageLabel(pid);
+                  return picking?.slot === s.key && picking.page === pid ? (
+                    <AreaPicker key={pid} src={previewOf(page)} pageLabel={label} answerLabel={s.label} onSave={(b) => addArea(s.key, pid, b)} onCancel={() => setPicking(null)} />
+                  ) : (
+                    <div key={pid} className="flex items-center gap-3 text-sm">
+                      <span className="relative inline-block w-16 shrink-0">
+                        {/* eslint-disable-next-line @next/next/no-img-element -- private, uncached preview served by our own route */}
+                        <img src={previewOf(page)} alt="" className="w-16 rounded" loading="lazy" />
+                        <AreaOverlay boxes={boxes} />
+                      </span>
+                      <span className="text-muted">{boxes.length ? `${label}: ${boxes.length === 1 ? "an area is" : `${boxes.length} areas are`} marked` : `${label}: the whole page`}</span>
+                      <button type="button" onClick={() => setPicking({ slot: s.key, page: pid })} className="text-accent underline underline-offset-2">
+                        Mark where it is on {label.toLowerCase()}
+                      </button>
+                      {boxes.length > 0 && (
+                        <button type="button" onClick={() => clearAreas(s.key, pid)} className="text-muted underline underline-offset-2">
+                          Use the whole page
+                        </button>
+                      )}
+                    </div>
+                  );
+                })}
               </fieldset>
             )),
+          )}
+          {shared.length > 0 && (
+            <fieldset className="space-y-2 rounded-xl border border-warn/40 bg-surface p-3 text-sm">
+              <legend className="px-1 font-medium">Pages with more than one answer</legend>
+              <p className="text-muted">
+                A teacher needs to know which part of these pages answers which question. Mark each answer&apos;s area above, or confirm that you wrote the
+                question number beside each answer.
+              </p>
+              {shared.map((pid) => (
+                <label key={pid} className="flex items-center gap-2">
+                  <input type="checkbox" checked={confirmed.includes(pid)} onChange={(e) => confirmNumbering(pid, e.target.checked)} />
+                  I wrote the question numbers clearly on {pageLabel(pid).toLowerCase()}
+                </label>
+              ))}
+            </fieldset>
           )}
           {sealError && (
             <p role="alert" className="rounded-lg border border-danger/30 bg-danger-soft px-3 py-2 text-sm">
@@ -569,12 +701,15 @@ export function WrittenRunner({
           <button
             type="button"
             onClick={() => void submit()}
-            disabled={sealing || !complete || uploads.some((u) => u.status === "uploading")}
+            disabled={sealing || !complete || unconfirmed.length > 0 || uploads.some((u) => u.status === "uploading")}
             className="rounded-lg bg-accent px-5 py-3 font-medium text-white hover:bg-accent-strong disabled:opacity-60 dark:text-background"
           >
             {sealing ? "Submitting…" : "Submit for marking"}
           </button>
           {!complete && <p className="text-sm text-muted">Give every part at least one page, or tick “I didn&apos;t answer this”.</p>}
+          {complete && unconfirmed.length > 0 && (
+            <p className="text-sm text-muted">Mark the answers&apos; areas or confirm the question numbers on the pages with more than one answer.</p>
+          )}
         </section>
       )}
     </div>

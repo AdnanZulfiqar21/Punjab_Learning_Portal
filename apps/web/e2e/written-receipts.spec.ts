@@ -37,6 +37,8 @@ test("the same receipt after signing out and in again on another device", async 
   await expect(page.getByRole("list", { name: "Uploaded pages" }).getByText(/Page 1 ·/)).toBeVisible(AUTH);
   const parts = page.getByRole("group", { name: /^Question \d/ });
   for (let i = 0; i < (await parts.count()); i++) await parts.nth(i).getByLabel("Page 1").check();
+  // REGION-MAP-01: page 1 answers every part, so its question numbering is confirmed before submitting.
+  await page.getByLabel("I wrote the question numbers clearly on page 1").check();
   await expect(page.getByRole("status").filter({ hasText: /Saved · revision \d+/ })).toBeVisible(AUTH);
   await page.getByRole("button", { name: "Submit for marking" }).click();
   const receipt = page.getByText(/^Receipt [0-9a-f]{8} ·/);
