@@ -9976,7 +9976,7 @@ export interface components {
         };
         /**
          * ReleaseIn
-         * @description RELEASE-01: approved items to publish together, or none of them.
+         * @description CONTENT-RELEASE-01: approved items to publish together, or none of them.
          */
         ReleaseIn: {
             /** Item Ids */
