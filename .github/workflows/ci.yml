@@ -34,7 +34,9 @@ jobs:
           else
             changed="$(git diff --name-only "$base" HEAD)"
           fi
-          has() { echo "$changed" | grep -qE "$1" && echo true || echo false; }
+          # A here-string, not `echo | grep -q`: under bash's pipefail, grep -q exits at the first match and a long file list
+          # (hundreds of lessons) then fails the echo with SIGPIPE, which read as "nothing changed" and skipped jobs.
+          has() { grep -qE "$1" <<< "$changed" && echo true || echo false; }
           echo "api=$(has '^(apps/api/|content/|packages/contracts/|\.github/)')" >> "$GITHUB_OUTPUT"
           echo "web=$(has '^(apps/web/|packages/contracts/|apps/api/|content/|pnpm-lock\.yaml|package\.json|\.github/)')" >> "$GITHUB_OUTPUT"
           echo "content=$(has '^(content/|education_knowledge/indexes/|\.github/)')" >> "$GITHUB_OUTPUT"
