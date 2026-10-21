@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH1-1.6",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch1",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch1/1.6",
+      "title": "1.6 Network Models and Layers",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 12,
+          "pdf_to": 14,
+          "note": "Topic 1.6 with the Do You Know and Tidbit (PDF 12-14); Fig 1.13 redrawn with the receiver stack added. Short Q5, Long Q3 and MCQ 5 are answered here."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Network models explain how data moves from one device to another in an organised way. They divide communication into layers, and each layer performs a specific task in data transmission (Fig 1.13). Layered models make networks easier to understand and manage, help in troubleshooting, and are used as standards in networking."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Do you know?",
+            "text": "Network models are used to understand complex network communication in simple steps."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Network layers"
+          },
+          {
+            "type": "paragraph",
+            "text": "Network layers divide the communication process into smaller parts, each with a specific responsibility. Data passes through the layers step by step. This makes network design simple and organised: a change in one layer does not affect the other layers, and layered communication improves reliability and control."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "The OSI model (Open Systems Interconnection)"
+          },
+          {
+            "type": "paragraph",
+            "text": "The OSI model is a standard seven-layer model used to understand network communication. Each layer performs a different function. It is used for learning and designing networks, and it helps different systems communicate properly. On the sender, data passes down from the application layer to the physical layer; on the receiver it passes back up."
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "Physical layer: sends raw data as electrical, optical or radio signals over the medium; defines hardware aspects such as cables, connectors, voltage levels and data rates.",
+              "Data link layer: ensures error-free transfer between directly connected nodes; handles framing, error detection and correction, and access to the shared medium.",
+              "Network layer: routes data from source to destination across different networks; manages logical addressing (IP addresses) and chooses the best path.",
+              "Transport layer: provides reliable, ordered delivery between devices; performs error recovery, flow control and segmentation of data into smaller units.",
+              "Session layer: establishes, maintains and terminates communication sessions between applications; manages checkpoints and recovery after interruptions.",
+              "Presentation layer: translates data into a format the application layer understands; handles encryption, compression and format conversion.",
+              "Application layer: provides services directly to users and applications; supports protocols such as HTTP, FTP and email."
+            ]
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch1-fig-osi",
+            "alt": "Two stacks of seven coloured boxes, sender on the left and receiver on the right, numbered from 7 Application at the top through 6 Presentation, 5 Session, 4 Transport, 3 Network and 2 Data link to 1 Physical at the bottom. Between the stacks each layer's job is written. A red arrow beside the sender points down (data goes down) and a blue arrow beside the receiver points up (data goes up). The two Physical boxes are joined by a line labelled physical medium: cable, fibre or radio.",
+            "caption": "The seven layers of the OSI model on the sender and the receiver (original diagram after Fig 1.13).",
+            "long_description": "Each layer on the sender adds what its partner layer on the receiver needs. Lower layers move the data; upper layers serve the user's application."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Tidbit",
+            "text": "Lower layers handle the physical transfer of data, middle layers manage routing and delivery, and upper layers support user applications. Each layer works independently, and together they ensure proper communication."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Name the seven OSI layers from top to bottom, and state which layer handles IP addresses and routing.",
+            "explanation": "Application, presentation, session, transport, network, data link, physical. The network layer handles IP addresses and routing."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Quick recap"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Layered models split communication into layers with separate jobs.",
+              "OSI: 7 layers; data goes down on the sender and up on the receiver.",
+              "Physical: signals; data link: frames; network: IP and routing; transport: reliable delivery; session; presentation: format and encryption; application: user services."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

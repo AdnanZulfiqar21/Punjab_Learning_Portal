@@ -39,6 +39,7 @@ import type {
   SearchResult,
   SessionCreated,
   SubmitResult,
+  TopicLecture,
   HelpArticle,
   HelpArticleSummary,
   Inbox,
@@ -57,6 +58,7 @@ import type {
   WrittenSeal,
 } from "@portal/contracts";
 
+import { apiOriginOverride } from "@/lib/api-origin";
 import { discoveryPath, type DiscoveryFilters } from "@/lib/discovery";
 import { installToken } from "@/lib/install-token";
 
@@ -76,10 +78,36 @@ export class ApiError extends Error {
   }
 }
 
+export type { TopicLecture };
+
+export type TopicReading = {
+  topic_id: string;
+  number: string | null;
+  title: string;
+  chapter_id: string;
+  chapter_number: number;
+  chapter_title: string;
+  grade_number: number;
+  subject_name: string;
+  availability: "published" | "private_preview" | "unavailable";
+  lesson: (Lesson & { status: string; private_preview: boolean }) | null;
+  previous_topic_id: string | null;
+  next_topic_id: string | null;
+};
+
 function origin(): string {
-  const value = Constants.expoConfig?.extra?.apiOrigin;
+  const value = apiOriginOverride() ?? Constants.expoConfig?.extra?.apiOrigin; // the device's own address in preview builds
   if (typeof value !== "string" || !value) throw new ApiError("App configuration is missing the API address.", "server");
   return value;
+}
+
+/** The API address in use (for the Settings screen). */
+export function currentApiOrigin(): string {
+  try {
+    return origin();
+  } catch {
+    return "not set";
+  }
 }
 
 /** A diagram from a question in the learner's own attempt (QUESTION-DIAGRAMS-01). */
@@ -109,6 +137,13 @@ export function writtenPageImage(
   };
 }
 
+export function previewAsset(topicId: string, versionId: string, token: string): { uri: string; headers: Record<string, string> } {
+  return {
+    uri: `${origin()}/v1/topics/${encodeURIComponent(topicId)}/preview-assets/${encodeURIComponent(versionId)}`,
+    headers: { Authorization: `Bearer ${token}` },
+  };
+}
+
 export function lessonAsset(lessonId: string, versionId: string, token: string | null): { uri: string; headers?: Record<string, string> } {
   const uri = `${origin()}/v1/lessons/${encodeURIComponent(lessonId)}/assets/${encodeURIComponent(versionId)}`;
   return token ? { uri, headers: { Authorization: `Bearer ${token}` } } : { uri };
@@ -126,6 +161,7 @@ type RequestOptions = {
   headers?: Record<string, string>;
   /** A raw upload body (a photo or PDF); sent as application/octet-stream. */
   raw?: Blob;
+  cache?: "no-store";
 };
 
 // Every request says which client it is and carries this installation's opaque token, so the server can apply the
@@ -154,6 +190,7 @@ async function request<T>(path: string, opts: RequestOptions = {}): Promise<T> {
         ...opts.headers,
       },
       body: opts.raw ?? (opts.body !== undefined ? JSON.stringify(opts.body) : undefined),
+      cache: opts.cache,
       signal: opts.signal ?? AbortSignal.timeout(opts.raw !== undefined ? 120_000 : 15_000),
     });
   } catch (e) {
@@ -194,6 +231,14 @@ export const api = {
   runtimeConfig: (signal?: AbortSignal) => getJSON<RuntimeConfig>("/v1/runtime-config", signal),
   /** Published, live lessons only (independently reviewed); drafts never reach the app. */
   // Premium bodies come back only with a session that has an active plan or trial (review R07).
+  topicLesson: (topicId: string, token: string | null, signal?: AbortSignal, language?: string) =>
+    request<TopicReading>(
+      `/v1/topics/${encodeURIComponent(topicId)}/lesson${language && language !== "en" ? `?language=${encodeURIComponent(language)}` : ""}`,
+      { token, signal, cache: "no-store", headers: { "Cache-Control": "no-cache" } },
+    ),
+  /** LECTURE-READ-01: the topic's approved lecture (locked without a plan or trial), or that it is coming. */
+  topicLecture: (topicId: string, token: string | null, signal?: AbortSignal) =>
+    request<TopicLecture>(`/v1/topics/${encodeURIComponent(topicId)}/lecture`, { token, signal, cache: "no-store" }),
   lessons: (chapterId: string, token: string | null, signal?: AbortSignal, language?: string) =>
     request<Lesson[]>(
       `/v1/chapters/${encodeURIComponent(chapterId)}/lessons${language && language !== "en" ? `?language=${encodeURIComponent(language)}` : ""}`,

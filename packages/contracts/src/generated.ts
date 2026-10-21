@@ -1037,6 +1037,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/lectures/{lecture_id}/stream": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Stream an approved lecture's master video (development media directory only; range requests honoured) */
+        get: operations["stream_lecture_v1_lectures__lecture_id__stream_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/lessons/{item_id}/assets/{version_id}": {
         parameters: {
             query?: never;
@@ -4352,6 +4369,60 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/topics/{topic_id}/lecture": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** The topic's approved lecture, or that it is coming */
+        get: operations["read_topic_lecture_v1_topics__topic_id__lecture_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/topics/{topic_id}/lesson": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * The lesson for one topic (published, or a private staff preview of a draft)
+         * @description Draft text is never included for a learner. The response is personal, so it is not stored in a shared cache.
+         */
+        get: operations["topic_lesson_v1_topics__topic_id__lesson_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/topics/{topic_id}/preview-assets/{version_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** A diagram named by this topic's private-preview draft (staff in scope only) */
+        get: operations["topic_preview_asset_v1_topics__topic_id__preview_assets__version_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/written-attempts/{attempt_id}": {
         parameters: {
             query?: never;
@@ -4967,6 +5038,20 @@ export interface components {
             granted: number;
             /** Reserved */
             reserved: number;
+        };
+        /**
+         * AmbiguousEdition
+         * @description More than one edition of this class and subject is effective today, so none is offered as current.
+         */
+        AmbiguousEdition: {
+            /** Book Ids */
+            book_ids: string[];
+            /** Grade */
+            grade: number;
+            /** Subject */
+            subject: string;
+            /** Subject Name */
+            subject_name: string;
         };
         /** AnswerOut */
         AnswerOut: {
@@ -6408,6 +6493,11 @@ export interface components {
         };
         /** DiscoveryOut */
         DiscoveryOut: {
+            /**
+             * Ambiguous Editions
+             * @default []
+             */
+            ambiguous_editions: components["schemas"]["AmbiguousEdition"][];
             /** Books */
             books: components["schemas"]["BookAvailability"][];
             /** Exams */
@@ -7561,6 +7651,37 @@ export interface components {
              */
             attempt_id: string;
         };
+        /** LearnerLectureOut */
+        LearnerLectureOut: {
+            /** Duration S */
+            duration_s: number;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /**
+             * Language
+             * @enum {string}
+             */
+            language: "en" | "ur" | "roman_ur";
+            /**
+             * Locked
+             * @description True when this learner may not watch yet (plan or trial needed)
+             */
+            locked: boolean;
+            /** Markers */
+            markers: components["schemas"]["LectureMarkerOut"][];
+            /**
+             * Stream Path
+             * @description Where to stream the video; null while locked
+             */
+            stream_path: string | null;
+            /** Title */
+            title: string;
+            /** Transcript */
+            transcript: components["schemas"]["LectureSceneOut"][];
+        };
         /** LearnerOut */
         LearnerOut: {
             /**
@@ -7638,6 +7759,15 @@ export interface components {
              * Format: uuid
              */
             voice_id: string;
+        };
+        /** LectureMarkerOut */
+        LectureMarkerOut: {
+            /** Label */
+            label: string;
+            /** Scene Id */
+            scene_id: string;
+            /** Start S */
+            start_s: number;
         };
         /** LectureOut */
         LectureOut: {
@@ -7721,6 +7851,13 @@ export interface components {
              */
             updated_at: string;
             voice: components["schemas"]["VoiceOut"];
+        };
+        /** LectureSceneOut */
+        LectureSceneOut: {
+            /** Scene Id */
+            scene_id: string;
+            /** Text */
+            text: string;
         };
         /** LessonOut */
         LessonOut: {
@@ -11052,6 +11189,11 @@ export interface components {
         SubjectInGrade: {
             /** Books */
             books: components["schemas"]["BookSummary"][];
+            /**
+             * Edition Conflict
+             * @default false
+             */
+            edition_conflict: boolean;
             subject: components["schemas"]["SubjectOut"];
         };
         /** SubjectOut */
@@ -11305,6 +11447,85 @@ export interface components {
              */
             topic_id: string;
         };
+        /** TopicLectureOut */
+        TopicLectureOut: {
+            /**
+             * Availability
+             * @enum {string}
+             */
+            availability: "available" | "coming";
+            /**
+             * Lectures
+             * @description The topic's approved parts, in order; empty while coming
+             */
+            lectures: components["schemas"]["LearnerLectureOut"][];
+            /**
+             * Topic Id
+             * Format: uuid
+             */
+            topic_id: string;
+        };
+        /**
+         * TopicLessonOut
+         * @description One lesson for one topic. A private preview is a draft, never a published lesson.
+         */
+        TopicLessonOut: {
+            /**
+             * Access Tier
+             * @enum {string}
+             */
+            access_tier: "preview" | "premium";
+            /** Available Languages */
+            available_languages: string[];
+            /** Block Types */
+            block_types: string[];
+            /** Body */
+            body: {
+                [key: string]: unknown;
+            } | null;
+            /** Content Schema Version */
+            content_schema_version: number;
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /**
+             * Language
+             * @enum {string}
+             */
+            language: "en" | "ur" | "roman_ur";
+            /** Locked */
+            locked: boolean;
+            /** Private Preview */
+            private_preview: boolean;
+            /**
+             * Requested Language Missing
+             * @default false
+             */
+            requested_language_missing: boolean;
+            /**
+             * Source Refs
+             * @description Present for staff preview only. Learners do not receive page numbers here.
+             */
+            source_refs?: {
+                [key: string]: unknown;
+            }[];
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "draft" | "submitted" | "changes_requested" | "approved" | "published";
+            /** Title */
+            title: string;
+            /**
+             * Topic Id
+             * Format: uuid
+             */
+            topic_id: string;
+            /** Version */
+            version: number;
+        };
         /** TopicNode */
         TopicNode: {
             /** Children */
@@ -11324,6 +11545,41 @@ export interface components {
             points: string[];
             /** Title */
             title: string;
+        };
+        /** TopicReadingOut */
+        TopicReadingOut: {
+            /**
+             * Availability
+             * @enum {string}
+             */
+            availability: "published" | "private_preview" | "unavailable";
+            /**
+             * Chapter Id
+             * Format: uuid
+             */
+            chapter_id: string;
+            /** Chapter Number */
+            chapter_number: number;
+            /** Chapter Title */
+            chapter_title: string;
+            /** Grade Number */
+            grade_number: number;
+            lesson: components["schemas"]["TopicLessonOut"] | null;
+            /** Next Topic Id */
+            next_topic_id: string | null;
+            /** Number */
+            number: string | null;
+            /** Previous Topic Id */
+            previous_topic_id: string | null;
+            /** Subject Name */
+            subject_name: string;
+            /** Title */
+            title: string;
+            /**
+             * Topic Id
+             * Format: uuid
+             */
+            topic_id: string;
         };
         /** TopicsIn */
         TopicsIn: {
@@ -14382,6 +14638,46 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["ArticleOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    stream_lecture_v1_lectures__lecture_id__stream_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                lecture_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "video/mp4": unknown;
+                };
+            };
+            /** @description Partial Content */
+            206: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "video/mp4": unknown;
                 };
             };
             /** @description Validation Error */
@@ -21005,6 +21301,102 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["TicketOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    read_topic_lecture_v1_topics__topic_id__lecture_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                topic_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TopicLectureOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    topic_lesson_v1_topics__topic_id__lesson_get: {
+        parameters: {
+            query?: {
+                language?: ("en" | "ur" | "roman_ur") | null;
+            };
+            header?: never;
+            path: {
+                topic_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TopicReadingOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    topic_preview_asset_v1_topics__topic_id__preview_assets__version_id__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                topic_id: string;
+                version_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": unknown;
                 };
             };
             /** @description Validation Error */

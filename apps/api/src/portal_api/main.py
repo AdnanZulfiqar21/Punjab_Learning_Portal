@@ -25,6 +25,7 @@ from portal_api.modules.content import router as content
 from portal_api.modules.content.concepts import router as concepts_router
 from portal_api.modules.content.discovery import router as discovery_router
 from portal_api.modules.content.inclusion import router as inclusion_router
+from portal_api.modules.content.lecture_reading import router as lecture_reading_router
 from portal_api.modules.content.lectures import router as lectures_router
 from portal_api.modules.content.packs import router as packs_router
 from portal_api.modules.content.search import public as search_router
@@ -150,6 +151,7 @@ def create_app() -> FastAPI:
     app.include_router(content.router)
     app.include_router(content.public)
     app.include_router(lectures_router)
+    app.include_router(lecture_reading_router)
     app.include_router(discovery_router)
     app.include_router(study_router)
     app.include_router(concepts_router)

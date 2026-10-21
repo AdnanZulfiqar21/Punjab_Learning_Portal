@@ -15,7 +15,7 @@ from portal_api.db import get_session
 from portal_api.errors import Forbidden, NotFound
 from portal_api.modules.access import service as access
 from portal_api.modules.audit.models import AuditEvent
-from portal_api.modules.content import blocks, duplicates, item_stats, kinds, workflow
+from portal_api.modules.content import blocks, duplicates, item_stats, kinds, reading, workflow
 from portal_api.modules.content.models import Availability, ContentItem, ContentVersion, ItemState
 from portal_api.modules.content.schemas import (
     AccessTierIn,
@@ -36,6 +36,7 @@ from portal_api.modules.content.schemas import (
     RightsIn,
     SourceOut,
     SubmitIn,
+    TopicReadingOut,
     ValidateIn,
     ValidationOut,
     VariantOut,
@@ -649,6 +650,42 @@ def chapter_lessons(
             )
         )
     return out
+
+
+@public.get(
+    "/topics/{topic_id}/lesson",
+    response_model=TopicReadingOut,
+    summary="The lesson for one topic (published, or a private staff preview of a draft)",
+)
+def topic_lesson(
+    db: DB,
+    who: OptionalPrincipal,
+    topic_id: uuid.UUID,
+    response: Response,
+    language: Literal["en", "ur", "roman_ur"] | None = None,
+) -> TopicReadingOut:
+    """Draft text is never included for a learner. The response is personal, so it is not stored in a shared cache."""
+    response.headers["Cache-Control"] = "private, no-store"
+    response.headers["Vary"] = "Authorization"
+    return reading.reading(db, who, topic_id, language)
+
+
+@public.get(
+    "/topics/{topic_id}/preview-assets/{version_id}",
+    summary="A diagram named by this topic's private-preview draft (staff in scope only)",
+)
+def topic_preview_asset(db: DB, who: CurrentPrincipal, topic_id: uuid.UUID, version_id: uuid.UUID) -> Response:
+    content, media = reading.preview_asset(db, who, topic_id, version_id)
+    return Response(
+        content=content,
+        media_type=media,
+        headers={
+            "Cache-Control": "private, no-store",
+            "Vary": "Authorization",
+            "X-Content-Type-Options": "nosniff",
+            "Content-Disposition": 'inline; filename="diagram.png"',
+        },
+    )
 
 
 def _lesson_bytes(db: Session, item: ContentItem) -> int | None:

@@ -1,14 +1,16 @@
-// Design tokens shared in value with apps/web/src/app/globals.css (P02.S2.T1). Neutral palette until brand (B11).
+// Design tokens shared in value with apps/web/src/app/globals.css (P02.S2.T1). Warm neutrals with a teal accent; each
+// subject has its own accent (Biology is emerald) used on the subject's cards and inside its lessons. Brand is still
+// provisional (B11).
 import { Platform } from "react-native";
 
 export const Colors = {
   light: {
-    background: "#f7f8fa",
+    background: "#f8f6f2",
     surface: "#ffffff",
-    surfaceMuted: "#eef1f5",
-    text: "#14181f",
-    muted: "#4b5563",
-    border: "#d9dee6",
+    surfaceMuted: "#f1ede6",
+    text: "#1c1a17",
+    muted: "#5b5750",
+    border: "#e2ddd4",
     accent: "#0b5d73",
     accentSoft: "#e3f1f5",
     onAccent: "#ffffff",
@@ -18,15 +20,15 @@ export const Colors = {
     dangerSoft: "#fdecec",
   },
   dark: {
-    background: "#0f1318",
-    surface: "#161b22",
-    surfaceMuted: "#1e252e",
-    text: "#e8ecf1",
-    muted: "#a7b0bc",
-    border: "#2c3542",
+    background: "#121412",
+    surface: "#1b1e1b",
+    surfaceMuted: "#242824",
+    text: "#ece9e3",
+    muted: "#aaa69e",
+    border: "#333832",
     accent: "#6cc4dc",
     accentSoft: "#143440",
-    onAccent: "#0f1318",
+    onAccent: "#121412",
     warn: "#f3b765",
     warnSoft: "#3a2a12",
     danger: "#f19a9a",
@@ -34,7 +36,22 @@ export const Colors = {
   },
 } as const;
 
-export type Palette = (typeof Colors)["light"] | (typeof Colors)["dark"];
+export type Palette = { [K in keyof (typeof Colors)["light"]]: string };
+
+/** Per-subject accents (text contrast ≥ 4.5:1 on the matching surface). Keys are the API's subject codes. */
+export const SubjectAccents: Record<string, { light: { accent: string; accentSoft: string }; dark: { accent: string; accentSoft: string } }> = {
+  biology: { light: { accent: "#0f7a62", accentSoft: "#e1f3ec" }, dark: { accent: "#5fcfae", accentSoft: "#123a30" } },
+  chemistry: { light: { accent: "#9a4b00", accentSoft: "#fdeee0" }, dark: { accent: "#f3b06a", accentSoft: "#3c2410" } },
+  physics: { light: { accent: "#3f46b5", accentSoft: "#e8e9fb" }, dark: { accent: "#a4a9f5", accentSoft: "#1f2250" } },
+  mathematics: { light: { accent: "#8a2a6a", accentSoft: "#f9e6f3" }, dark: { accent: "#e9a1d3", accentSoft: "#3c1532" } },
+  computer_science: { light: { accent: "#0b5d73", accentSoft: "#e3f1f5" }, dark: { accent: "#6cc4dc", accentSoft: "#143440" } },
+};
+
+/** The subject code for an API subject name or code ("Biology" → "biology"); unknown subjects keep the default accent. */
+export function subjectKey(nameOrCode: string | null | undefined): string | null {
+  const key = (nameOrCode ?? "").trim().toLowerCase().replace(/\s+/g, "_");
+  return key in SubjectAccents ? key : null;
+}
 
 export const Space = { xs: 4, sm: 8, md: 12, lg: 16, xl: 24, xxl: 32 } as const;
 export const Radius = { sm: 8, md: 12, lg: 16, pill: 999 } as const;

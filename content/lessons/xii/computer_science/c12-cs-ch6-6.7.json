@@ -1,0 +1,136 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH6-6.7",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch6",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch6/6.7",
+      "title": "6.7 Model Evaluation and Performance Metrics",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 85,
+          "pdf_to": 86,
+          "note": "Topic 6.7 with the Do You Know and worked example (PDF 85-86); no book figure. The metrics figure is original; the example's results were checked and its accuracy (0.857) is added. Short Q8, Long Q6 and MCQ 8 are answered here."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Model evaluation checks how well a machine learning model performs. It measures the quality of the model's predictions on test data that was not used in training, which shows the model's strengths and weaknesses. Performance metrics are the measures used, and different metrics suit different problems."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Do you know?",
+            "text": "A model with high accuracy can still give wrong results in some cases; that is why measures such as precision and recall are also used."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "The four outcomes"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "TP (true positives): positive cases correctly predicted as positive.",
+              "TN (true negatives): negative cases correctly predicted as negative.",
+              "FP (false positives): negative cases wrongly predicted as positive (false alarms).",
+              "FN (false negatives): positive cases wrongly predicted as negative (missed cases)."
+            ]
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Accuracy and error"
+          },
+          {
+            "type": "paragraph",
+            "text": "Accuracy is the share of all predictions that are correct, often given as a percentage: accuracy = (TP + TN) / (TP + TN + FP + FN). The error rate is the share that is wrong, so error rate = 1 - accuracy. Accuracy alone can mislead, especially when one class is much more common than the other, so error analysis and other measures are also used."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Precision, recall and F1-score"
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "Precision = TP / (TP + FP): of the cases predicted positive, how many really are positive. It measures correctness; high precision means few false alarms.",
+              "Recall = TP / (TP + FN): of the actual positive cases, how many were found. It measures completeness; high recall means few missed cases.",
+              "F1-score = 2 x (precision x recall) / (precision + recall): one score that balances precision and recall. It is especially useful when the data is unbalanced, and a higher F1-score means better performance."
+            ]
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Worked example"
+          },
+          {
+            "type": "table",
+            "caption": "Example: TP = 40, TN = 50, FP = 10, FN = 5",
+            "header": [
+              "Metric",
+              "Working",
+              "Result"
+            ],
+            "rows": [
+              [
+                "Precision",
+                "40 / (40 + 10) = 40 / 50",
+                "0.8"
+              ],
+              [
+                "Recall",
+                "40 / (40 + 5) = 40 / 45",
+                "0.8889"
+              ],
+              [
+                "F1-score",
+                "2 x (0.8 x 0.8889) / (0.8 + 0.8889) = 1.4222 / 1.6889",
+                "0.8421"
+              ],
+              [
+                "Accuracy (added)",
+                "(40 + 50) / (40 + 50 + 10 + 5) = 90 / 105",
+                "0.857"
+              ]
+            ]
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch6-fig-metrics",
+            "alt": "A two-by-two confusion matrix with predicted positive and negative across the top and actual positive and negative down the side: TP = 40 (correct positive), FN = 5 (missed positive), FP = 10 (false alarm) and TN = 50 (correct negative). Beside it: accuracy = (TP + TN) / all = 90 / 105 = 0.857; precision = TP / (TP + FP) = 40 / 50 = 0.8; recall = TP / (TP + FN) = 40 / 45 = 0.8889; F1 = 0.8421.",
+            "caption": "Confusion matrix and evaluation metrics for the book's example (original diagram after 6.7).",
+            "long_description": "Precision uses the 'predicted positive' column (TP and FP); recall uses the 'actual positive' row (TP and FN)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "A disease test finds 18 of 20 sick people and wrongly flags 30 of 980 healthy people. Work out its recall and precision. Why is accuracy alone misleading here?",
+            "explanation": "TP = 18, FN = 2, FP = 30, TN = 950. Recall = 18/20 = 0.9; precision = 18/48 = 0.375. Accuracy = 968/1000 = 0.968 looks excellent only because most people are healthy, yet most positive results are false alarms."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Quick recap"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Evaluate on unseen test data.",
+              "Accuracy = (TP + TN) / all; error rate = 1 - accuracy.",
+              "Precision = TP / (TP + FP); recall = TP / (TP + FN); F1 balances them (book example 0.8, 0.8889, 0.8421)."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

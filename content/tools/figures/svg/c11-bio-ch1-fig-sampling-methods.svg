@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1100" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <rect width="1000" height="1100" fill="#ffffff"/>
+  <!-- Original diagram after Figure 1.31: quadrat sampling, transect sampling and aerial surveys. -->
+  <defs>
+    <style>
+      .t{font-size:34px;font-weight:700;fill:#14181f}
+      .s{font-size:26px;fill:#4b5563}
+      .grid{stroke:#9aa5b1;stroke-width:3;fill:none}
+      .plant{fill:#0f7a62}
+    </style>
+  </defs>
+  <!-- Panel 1: quadrats -->
+  <text class="t" x="40" y="60">1. Quadrat sampling</text>
+  <text class="s" x="40" y="96">a grid; count inside randomly chosen squares</text>
+  <g transform="translate(40 120)">
+    <rect width="920" height="220" fill="#f1f7e8"/>
+    <g class="grid">
+      <path d="M0 0 H920 M0 73 H920 M0 147 H920 M0 220 H920 M0 0 V220 M115 0 V220 M230 0 V220 M345 0 V220 M460 0 V220 M575 0 V220 M690 0 V220 M805 0 V220 M920 0 V220"/>
+    </g>
+    <!-- chosen quadrats -->
+    <rect x="115" y="0" width="115" height="73" fill="#f3c98b" opacity="0.7"/>
+    <rect x="575" y="73" width="115" height="74" fill="#f3c98b" opacity="0.7"/>
+    <rect x="345" y="147" width="115" height="73" fill="#f3c98b" opacity="0.7"/>
+    <!-- plants scattered -->
+    <g class="plant">
+      <circle cx="40" cy="40" r="9"/><circle cx="150" cy="30" r="9"/><circle cx="200" cy="55" r="9"/><circle cx="300" cy="120" r="9"/>
+      <circle cx="420" cy="180" r="9"/><circle cx="380" cy="200" r="9"/><circle cx="610" cy="100" r="9"/><circle cx="660" cy="130" r="9"/>
+      <circle cx="750" cy="40" r="9"/><circle cx="860" cy="190" r="9"/><circle cx="520" cy="60" r="9"/><circle cx="130" cy="190" r="9"/>
+    </g>
+  </g>
+  <!-- Panel 2: transect -->
+  <text class="t" x="40" y="420">2. Transect sampling</text>
+  <text class="s" x="40" y="456">a line across a gradient; record at regular intervals</text>
+  <g transform="translate(40 480)">
+    <!-- shore: sea on the right, land on the left -->
+    <path d="M0 0 H920 V220 H0 Z" fill="#f6ead8"/>
+    <path d="M520 0 C600 60 620 160 700 220 H920 V0 Z" fill="#cfe6f6"/>
+    <path d="M0 110 H920" stroke="#b26a00" stroke-width="8"/>
+    <g fill="#b26a00">
+      <circle cx="60" cy="110" r="12"/><circle cx="200" cy="110" r="12"/><circle cx="340" cy="110" r="12"/><circle cx="480" cy="110" r="12"/><circle cx="620" cy="110" r="12"/><circle cx="760" cy="110" r="12"/><circle cx="900" cy="110" r="12"/>
+    </g>
+    <text class="s" x="20" y="40">high-tide line</text>
+    <text class="s" x="700" y="200">low-tide line</text>
+  </g>
+  <!-- Panel 3: aerial survey -->
+  <text class="t" x="40" y="780">3. Aerial survey</text>
+  <text class="s" x="40" y="816">aircraft or drones record large areas from above</text>
+  <g transform="translate(40 840)">
+    <rect width="920" height="220" fill="#e4efe9"/>
+    <path d="M100 160 C250 60 400 180 560 90 C680 30 780 150 880 70" stroke="#4b5563" stroke-width="4" fill="none" stroke-dasharray="14 10"/>
+    <!-- wetland patches -->
+    <ellipse cx="260" cy="150" rx="110" ry="40" fill="#cfe6f6"/>
+    <ellipse cx="640" cy="170" rx="140" ry="36" fill="#cfe6f6"/>
+    <!-- drone -->
+    <g transform="translate(470 50)">
+      <rect x="-22" y="-10" width="44" height="20" rx="6" fill="#14181f"/>
+      <path d="M-40 -18 h22 M18 -18 h22 M-40 18 h22 M18 18 h22" stroke="#14181f" stroke-width="6"/>
+      <circle cx="-40" cy="-18" r="12" fill="none" stroke="#4b5563" stroke-width="4"/><circle cx="40" cy="-18" r="12" fill="none" stroke="#4b5563" stroke-width="4"/>
+      <circle cx="-40" cy="18" r="12" fill="none" stroke="#4b5563" stroke-width="4"/><circle cx="40" cy="18" r="12" fill="none" stroke="#4b5563" stroke-width="4"/>
+    </g>
+    <!-- birds as small marks -->
+    <g stroke="#14181f" stroke-width="3" fill="none">
+      <path d="M220 140 q8 -8 16 0 q8 -8 16 0"/><path d="M300 165 q8 -8 16 0 q8 -8 16 0"/><path d="M620 160 q8 -8 16 0 q8 -8 16 0"/><path d="M700 185 q8 -8 16 0 q8 -8 16 0"/>
+    </g>
+  </g>
+</svg>

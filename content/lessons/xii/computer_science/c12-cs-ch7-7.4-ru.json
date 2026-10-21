@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH7-7.4-RU",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch7",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch7/7.4",
+      "title": "7.4 Hypothesis tests karna (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-CS-CH7-7.4",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 97,
+          "pdf_to": 100,
+          "note": "Roman Urdu explanation of performing hypothesis tests (PDF 97-100)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Hypothesis test karna wazeh amal par chalta hai (Fig 7.1): hypotheses tay karein, data ehtiyat se jama karein, test statistic nikalein, nateeje ko muqarrar miyar se milayein aur faisla karein. Qadmon par chalna ghaltiyan kam aur test munsifana rakhta hai."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Dilchasp baat",
+            "text": "Testing wazeh qadmon par chalti hai: data jama aur tajzia hota, nataij muqarrar miyar se milaye jate, aur nataij ehtiyat se nikale jate hain."
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "Null aur alternative hypotheses bayan karein.",
+              "Significance level alpha chunein.",
+              "Namoone ka data jama karein.",
+              "Test statistic nikal kar p-value maloom karein.",
+              "p-value ko alpha se milayein.",
+              "Faisla: agar p < alpha to H0 radd; warna H0 radd nahi."
+            ]
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch7-fig-process",
+            "alt": "Teeron se jure chaar tah-ba-tah dabbe: 1 H0 aur H1 bayan, 2 significance level alpha set, 3 namoone ka data jama, 4 test statistic aur p-value. Do teer faislon tak: p-value < alpha, H0 radd (H1 ka saboot); aur p-value >= alpha, H0 radd nahi. Note: 'accept' ke bajaye 'radd nahi' zyada mehfooz alfaz hain.",
+            "caption": "Hypothesis testing ke qadam (Fig 7.1 ke mutabiq asal khaaka).",
+            "long_description": "Kitab ka figure p > alpha par 'accept' kehta hai; maahireen-e-shumariyat 'H0 radd nahi' pasand karte hain, kyunke test sirf yeh dikha sakta hai ke saboot kafi mazboot nahi tha."
+          },
+          {
+            "type": "paragraph",
+            "text": "Saadi misalein, jaise imtihani nataij ya average qad ki jaanch, samajh banane mein madad deti hain: namoonon se data jama, bunyadi tests se tajzia aur nataij wazeh nikale jate hain."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Advanced tests: F-test aur chi-square test"
+          },
+          {
+            "type": "paragraph",
+            "text": "Advanced tests zyada pecheeda data sambhalte hain. F-test do groups ke variances ka muwazna karta aur analysis of variance (ANOVA) mein use hota hai: F = s1^2 / s2^2, jahan s1^2 aur s2^2 do namoonon ke variances hain. Talaba ke do groups jin ke variances 16 aur 9 hon, F = 16 / 9 = 1.78, jise F-table ki critical value se mila kar tay kiya jata hai ke variances numayan mukhtalif hain ya nahi. Chi-square test (7.3) categorical data mein rishte jaanchta hai."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Hisabi misal: kya naye tareeqe ne number behtar kiye?"
+          },
+          {
+            "type": "paragraph",
+            "text": "Pichhla average 70 tha. Naye tareeqe se parhe 10 talaba ke namoone ne 72, 75, 78, 74, 77, 80, 76, 79, 81 aur 78 number liye."
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "Hypotheses: H0: mu = 70 (koi behtari nahi); H1: mu > 70 (behtari).",
+              "Significance level: alpha = 0.05.",
+              "Namoone ka mean: 770 / 10 = 77.",
+              "Standard deviation: 77 se farq ke murabbon ka jama 70 hai, is liye s = sqrt(70 / 9) = 2.79.",
+              "t-value: t = (77 - 70) / (2.79 / sqrt(10)) = 7 / 0.88 = 7.93, df = 9 ke saath.",
+              "Faisla: 9 degrees of freedom par t = 7.93 ki p-value 0.05 se bohat kam hai, is liye H0 radd hota hai.",
+              "Nateeja: naye tareeqa-e-tadrees ne talaba ke number numayan behtar kiye."
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Chhapi hui p-value ke baare mein",
+            "text": "Kitab p = 0.00002 deti hai. Kyunke H1 kehta hai mu > 70, yeh one-tailed test hai aur is ki p-value taqreeban 0.00001 hai; 0.00002 two-tailed qeemat hai. Dono suraton mein p 0.05 se bohat kam hai, is liye faisla nahi badalta."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch7-fig-marks-test",
+            "alt": "Das number 68 se 82 tak ki number line ke oopar nuqton ki shakal mein, 78 par do nuqte. Dashed surkh line purana mean 70 (H0) aur sabz line namoone ka mean 77. Dabba hal: n = 10, jama 770, mean 77, s = sqrt(70 / 9) = 2.79; t = 7 / 0.88 = 7.93, df = 9; p < 0.05, is liye H0 radd aur naye tareeqe ne number barhaye.",
+            "caption": "Tadrees ke tareeqe ki misal (hisabi misal ke mutabiq asal khaaka).",
+            "long_description": "Dason number 70 se oopar aur aik doosre ke qareeb hain, isi liye t itna bara hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Agar misal mein namoone ka mean wahi standard deviation ke saath 71 hota to t kya hota, aur kya H0 phir bhi radd hota (df = 9 par alpha = 0.05 ki one-tailed critical value 1.83 hai)?",
+            "explanation": "t = (71 - 70) / 0.88 = 1.13. Kyunke 1.13 < 1.83, t critical region mein nahi aur H0 radd nahi hota: aik number ka izafa ittifaq ho sakta hai."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Fauri khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Qadam: hypotheses, alpha, data, test statistic aur p-value, faisla.",
+              "F = s1^2 / s2^2 variances milata (16 / 9 = 1.78); chi-square categories jaanchta.",
+              "Tadrees misal: mean 77, s 2.79, t 7.93, H0 radd."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -791,6 +791,39 @@
         "title": "AllowanceOut",
         "type": "object"
       },
+      "AmbiguousEdition": {
+        "description": "More than one edition of this class and subject is effective today, so none is offered as current.",
+        "properties": {
+          "book_ids": {
+            "items": {
+              "format": "uuid",
+              "type": "string"
+            },
+            "title": "Book Ids",
+            "type": "array"
+          },
+          "grade": {
+            "title": "Grade",
+            "type": "integer"
+          },
+          "subject": {
+            "title": "Subject",
+            "type": "string"
+          },
+          "subject_name": {
+            "title": "Subject Name",
+            "type": "string"
+          }
+        },
+        "required": [
+          "grade",
+          "subject",
+          "subject_name",
+          "book_ids"
+        ],
+        "title": "AmbiguousEdition",
+        "type": "object"
+      },
       "AnswerOut": {
         "properties": {
           "op_id": {
@@ -4275,6 +4308,14 @@
       },
       "DiscoveryOut": {
         "properties": {
+          "ambiguous_editions": {
+            "default": [],
+            "items": {
+              "$ref": "#/components/schemas/AmbiguousEdition"
+            },
+            "title": "Ambiguous Editions",
+            "type": "array"
+          },
           "books": {
             "items": {
               "$ref": "#/components/schemas/BookAvailability"
@@ -7205,6 +7246,75 @@
         "title": "JoinOut",
         "type": "object"
       },
+      "LearnerLectureOut": {
+        "properties": {
+          "duration_s": {
+            "title": "Duration S",
+            "type": "integer"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "language": {
+            "enum": [
+              "en",
+              "ur",
+              "roman_ur"
+            ],
+            "title": "Language",
+            "type": "string"
+          },
+          "locked": {
+            "description": "True when this learner may not watch yet (plan or trial needed)",
+            "title": "Locked",
+            "type": "boolean"
+          },
+          "markers": {
+            "items": {
+              "$ref": "#/components/schemas/LectureMarkerOut"
+            },
+            "title": "Markers",
+            "type": "array"
+          },
+          "stream_path": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Where to stream the video; null while locked",
+            "title": "Stream Path"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "transcript": {
+            "items": {
+              "$ref": "#/components/schemas/LectureSceneOut"
+            },
+            "title": "Transcript",
+            "type": "array"
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "language",
+          "duration_s",
+          "locked",
+          "stream_path",
+          "markers",
+          "transcript"
+        ],
+        "title": "LearnerLectureOut",
+        "type": "object"
+      },
       "LearnerOut": {
         "properties": {
           "created_at": {
@@ -7388,6 +7498,29 @@
         "title": "LectureIn",
         "type": "object"
       },
+      "LectureMarkerOut": {
+        "properties": {
+          "label": {
+            "title": "Label",
+            "type": "string"
+          },
+          "scene_id": {
+            "title": "Scene Id",
+            "type": "string"
+          },
+          "start_s": {
+            "title": "Start S",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "scene_id",
+          "label",
+          "start_s"
+        ],
+        "title": "LectureMarkerOut",
+        "type": "object"
+      },
       "LectureOut": {
         "properties": {
           "academically_approved": {
@@ -7558,6 +7691,24 @@
           "updated_at"
         ],
         "title": "LectureOut",
+        "type": "object"
+      },
+      "LectureSceneOut": {
+        "properties": {
+          "scene_id": {
+            "title": "Scene Id",
+            "type": "string"
+          },
+          "text": {
+            "title": "Text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "scene_id",
+          "text"
+        ],
+        "title": "LectureSceneOut",
         "type": "object"
       },
       "LessonOut": {
@@ -15555,6 +15706,11 @@
             "title": "Books",
             "type": "array"
           },
+          "edition_conflict": {
+            "default": false,
+            "title": "Edition Conflict",
+            "type": "boolean"
+          },
           "subject": {
             "$ref": "#/components/schemas/SubjectOut"
           }
@@ -16182,6 +16338,158 @@
         "title": "TopicAvailability",
         "type": "object"
       },
+      "TopicLectureOut": {
+        "properties": {
+          "availability": {
+            "enum": [
+              "available",
+              "coming"
+            ],
+            "title": "Availability",
+            "type": "string"
+          },
+          "lectures": {
+            "description": "The topic's approved parts, in order; empty while coming",
+            "items": {
+              "$ref": "#/components/schemas/LearnerLectureOut"
+            },
+            "title": "Lectures",
+            "type": "array"
+          },
+          "topic_id": {
+            "format": "uuid",
+            "title": "Topic Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "topic_id",
+          "availability",
+          "lectures"
+        ],
+        "title": "TopicLectureOut",
+        "type": "object"
+      },
+      "TopicLessonOut": {
+        "description": "One lesson for one topic. A private preview is a draft, never a published lesson.",
+        "properties": {
+          "access_tier": {
+            "enum": [
+              "preview",
+              "premium"
+            ],
+            "title": "Access Tier",
+            "type": "string"
+          },
+          "available_languages": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Available Languages",
+            "type": "array"
+          },
+          "block_types": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Block Types",
+            "type": "array"
+          },
+          "body": {
+            "anyOf": [
+              {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Body"
+          },
+          "content_schema_version": {
+            "title": "Content Schema Version",
+            "type": "integer"
+          },
+          "id": {
+            "format": "uuid",
+            "title": "Id",
+            "type": "string"
+          },
+          "language": {
+            "enum": [
+              "en",
+              "ur",
+              "roman_ur"
+            ],
+            "title": "Language",
+            "type": "string"
+          },
+          "locked": {
+            "title": "Locked",
+            "type": "boolean"
+          },
+          "private_preview": {
+            "title": "Private Preview",
+            "type": "boolean"
+          },
+          "requested_language_missing": {
+            "default": false,
+            "title": "Requested Language Missing",
+            "type": "boolean"
+          },
+          "source_refs": {
+            "description": "Present for staff preview only. Learners do not receive page numbers here.",
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Source Refs",
+            "type": "array"
+          },
+          "status": {
+            "enum": [
+              "draft",
+              "submitted",
+              "changes_requested",
+              "approved",
+              "published"
+            ],
+            "title": "Status",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "topic_id": {
+            "format": "uuid",
+            "title": "Topic Id",
+            "type": "string"
+          },
+          "version": {
+            "title": "Version",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "language",
+          "available_languages",
+          "topic_id",
+          "version",
+          "status",
+          "private_preview",
+          "access_tier",
+          "locked",
+          "content_schema_version",
+          "block_types",
+          "body"
+        ],
+        "title": "TopicLessonOut",
+        "type": "object"
+      },
       "TopicNode": {
         "properties": {
           "children": {
@@ -16244,6 +16552,110 @@
           "children"
         ],
         "title": "TopicNode",
+        "type": "object"
+      },
+      "TopicReadingOut": {
+        "properties": {
+          "availability": {
+            "enum": [
+              "published",
+              "private_preview",
+              "unavailable"
+            ],
+            "title": "Availability",
+            "type": "string"
+          },
+          "chapter_id": {
+            "format": "uuid",
+            "title": "Chapter Id",
+            "type": "string"
+          },
+          "chapter_number": {
+            "title": "Chapter Number",
+            "type": "integer"
+          },
+          "chapter_title": {
+            "title": "Chapter Title",
+            "type": "string"
+          },
+          "grade_number": {
+            "title": "Grade Number",
+            "type": "integer"
+          },
+          "lesson": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TopicLessonOut"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "next_topic_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Next Topic Id"
+          },
+          "number": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Number"
+          },
+          "previous_topic_id": {
+            "anyOf": [
+              {
+                "format": "uuid",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Previous Topic Id"
+          },
+          "subject_name": {
+            "title": "Subject Name",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "topic_id": {
+            "format": "uuid",
+            "title": "Topic Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "topic_id",
+          "number",
+          "title",
+          "chapter_id",
+          "chapter_number",
+          "chapter_title",
+          "grade_number",
+          "subject_name",
+          "availability",
+          "lesson",
+          "previous_topic_id",
+          "next_topic_id"
+        ],
+        "title": "TopicReadingOut",
         "type": "object"
       },
       "TopicsIn": {
@@ -21971,6 +22383,51 @@
         "summary": "Get Article",
         "tags": [
           "help"
+        ]
+      }
+    },
+    "/v1/lectures/{lecture_id}/stream": {
+      "get": {
+        "operationId": "stream_lecture_v1_lectures__lecture_id__stream_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "lecture_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Lecture Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "video/mp4": {}
+            },
+            "description": "Successful Response"
+          },
+          "206": {
+            "content": {
+              "video/mp4": {}
+            },
+            "description": "Partial Content"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Stream an approved lecture's master video (development media directory only; range requests honoured)",
+        "tags": [
+          "lectures"
         ]
       }
     },
@@ -31812,6 +32269,165 @@
         "summary": "Reply",
         "tags": [
           "support"
+        ]
+      }
+    },
+    "/v1/topics/{topic_id}/lecture": {
+      "get": {
+        "operationId": "read_topic_lecture_v1_topics__topic_id__lecture_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "topic_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Topic Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TopicLectureOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "The topic's approved lecture, or that it is coming",
+        "tags": [
+          "lectures"
+        ]
+      }
+    },
+    "/v1/topics/{topic_id}/lesson": {
+      "get": {
+        "description": "Draft text is never included for a learner. The response is personal, so it is not stored in a shared cache.",
+        "operationId": "topic_lesson_v1_topics__topic_id__lesson_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "topic_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Topic Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "language",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "en",
+                    "ur",
+                    "roman_ur"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Language"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TopicReadingOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "The lesson for one topic (published, or a private staff preview of a draft)",
+        "tags": [
+          "lessons"
+        ]
+      }
+    },
+    "/v1/topics/{topic_id}/preview-assets/{version_id}": {
+      "get": {
+        "operationId": "topic_preview_asset_v1_topics__topic_id__preview_assets__version_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "topic_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Topic Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "version_id",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "title": "Version Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "A diagram named by this topic's private-preview draft (staff in scope only)",
+        "tags": [
+          "lessons"
         ]
       }
     },

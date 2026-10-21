@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-CS-CH4-4.1.5.2-RU",
+      "chapter": "pk-punjab/xi/computer_science/c11-cs/ch4",
+      "topic": "pk-punjab/xi/computer_science/c11-cs/ch4/4.1.5.2",
+      "title": "4.1.5.2 How We Traverse a Tree Using BFS? (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C11-CS-CH4-4.1.5.2",
+      "source_refs": [
+        {
+          "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
+          "pdf_from": 103,
+          "pdf_to": 104,
+          "note": "Roman Urdu explanation of BFS on a tree (PDF 103-104)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Mutawazin binary tree par BFS jis ki jarr 1, bachche 2 aur 3, aur 2 ke neeche patte 4, 5 aur 3 ke neeche 6, 7 (Figure 4.4)."
+          },
+          {
+            "type": "table",
+            "caption": "Har visit ke baad queue",
+            "header": [
+              "Visit",
+              "Jore gaye",
+              "Queue"
+            ],
+            "rows": [
+              [
+                "shuru",
+                "1",
+                "[1]"
+              ],
+              [
+                "1",
+                "2, 3",
+                "[2, 3]"
+              ],
+              [
+                "2",
+                "4, 5",
+                "[3, 4, 5]"
+              ],
+              [
+                "3",
+                "6, 7",
+                "[4, 5, 6, 7]"
+              ],
+              [
+                "4",
+                "koi nahi",
+                "[5, 6, 7]"
+              ],
+              [
+                "5",
+                "koi nahi",
+                "[6, 7]"
+              ],
+              [
+                "6",
+                "koi nahi",
+                "[7]"
+              ],
+              [
+                "7",
+                "koi nahi",
+                "[] (mukammal)"
+              ]
+            ]
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-cs-ch4-fig-trees",
+            "alt": "Baen: binary tree jis ki jarr 1, bachche 2 aur 3, aur patte 4, 5, 6, 7 hain, root, edge, leaves aur height 2 ke labels aur BFS, in-order, pre-order aur post-order tarteebon ke saath. Oopar daen: family tree jis mein Grandparent, Parent1, Parent2 aur Parent1 ke neeche Child1, Child2. Neeche daen: AVL tree jis ki jarr 20, baen bachcha 15 jis ke bachche 10 aur 18, aur daen bachcha 30.",
+            "caption": "Tree ki istilahat, traversals, family tree aur AVL tree (topics 4.1.5 se 4.1.7 ke mutabiq asal khaaka).",
+            "long_description": "Binary tree mein 1 jarr hai, 4 se 7 patte hain, aur height 2 edges hai. Breadth-first tarteeb level ba level 1 se 7; in-order baen shaakh, jarr, daen shaakh: 4, 2, 5, 1, 6, 3, 7; pre-order pehle jarr: 1, 2, 4, 5, 3, 6, 7; post-order aakhir mein jarr: 4, 5, 2, 6, 7, 3, 1. Family tree ki jarr Grandparent hai jis ke do parents hain, aur Parent1 ke do bachche hain. AVL tree mein 15 ke neeche baen shaakh ki height 1 aur daen shaakh 30 ki height 0 hai, to farq sirf 1 hai aur tree mutawazin hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Tree par BFS mein level ba level nodes dekhne ke liye queue ka kaunsa amal istemal hota hai (MCQ 6)?",
+            "explanation": "(c) nodes ko queue mein enqueue karna (aur usi tarteeb se aage se dequeue karna)."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Fauri khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "7 nodes wale tree par BFS 1, 2, 3, 4, 5, 6, 7 dekhta hai; sab dekhe jane par queue khali."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

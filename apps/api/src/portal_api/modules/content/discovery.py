@@ -16,6 +16,7 @@ bundle contents are shown.
 from __future__ import annotations
 
 import uuid
+from collections import defaultdict
 from typing import Annotated, Any, Literal
 
 from fastapi import APIRouter, Depends, Query, Response
@@ -121,7 +122,7 @@ def discover(
             per_book[owner]["practice"] += int(n)
 
     wanted_subjects = set(TRACKS[track][1]) if track else None
-    out_books, kept = [], set()
+    current: dict[tuple[int, str], list[tuple[Any, Any, Any]]] = defaultdict(list)
     for b, g, s in books:
         if not covers(b.effective_from, b.effective_until, today):
             continue
@@ -133,6 +134,23 @@ def discover(
             continue
         if exam_scope is not None and (g.number, s.code) not in exam_scope:
             continue
+        current[(g.number, s.code)].append((b, g, s))
+
+    out_books, kept = [], set()
+    ambiguous = []
+    for group in current.values():
+        if len(group) > 1:
+            _, grade_row, subject_row = group[0]
+            ambiguous.append(
+                {
+                    "grade": grade_row.number,
+                    "subject": subject_row.code,
+                    "subject_name": subject_row.name,
+                    "book_ids": [book.id for book, _, _ in group],
+                }
+            )
+            continue
+        b, g, s = group[0]
         counts = per_book[b.id]
         row = {
             "book_id": b.id,
@@ -190,6 +208,7 @@ def discover(
             for p, v in published
         ],
         "books": out_books,
+        "ambiguous_editions": ambiguous,
         "previews": previews[:PREVIEWS_SHOWN],
         "plans_note": "Plans and bundles aren't on sale yet. Free previews are open to everyone, and the free trial "
         "opens the rest of what is published.",
@@ -240,10 +259,20 @@ class PreviewLesson(BaseModel):
     chapter_number: int
 
 
+class AmbiguousEdition(BaseModel):
+    """More than one edition of this class and subject is effective today, so none is offered as current."""
+
+    grade: int
+    subject: str
+    subject_name: str
+    book_ids: list[uuid.UUID]
+
+
 class DiscoveryOut(BaseModel):
     tracks: list[TrackOut]
     exams: list[ExamOut]
     books: list[BookAvailability]
+    ambiguous_editions: list[AmbiguousEdition] = []
     previews: list[PreviewLesson]
     plans_note: str
 

@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 715" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <rect width="1200" height="715" fill="#ffffff"/>
+  <!-- Original diagram after topics 3.1 and 3.2: the even-number flowchart as a well-defined problem, problem types, and the generate and test loop with its pros and cons. -->
+  <defs>
+    <style>
+      .h{font-size:22px;font-weight:700;fill:#14181f;text-anchor:middle}
+      .k{font-size:16px;font-weight:700;fill:#14181f;text-anchor:middle}
+      .s{font-size:13px;fill:#4b5563;text-anchor:middle}
+      .t{font-size:12px;fill:#4b5563}
+      .b{font-weight:700;fill:#14181f}
+      .f{font-family:Consolas, Courier New, monospace;font-size:12px;fill:#14181f}
+      .r{font-size:11px;fill:#4b5563}
+      .l{font-size:12px;font-weight:700;fill:#14181f}
+    </style>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#4b5563"/></marker>
+    <marker id="p" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#d7322f"/></marker>
+    <marker id="bl" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#1f6fb5"/></marker>
+    <marker id="g" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#0f7a62"/></marker>
+  </defs>
+  <text class="h" x="600" y="32">Computational problems and the generate and test method</text>
+  <rect x="50" y="55" width="540" height="640" rx="12" fill="#dbe9f5" stroke="#1f6fb5" stroke-width="2"/>
+  <text class="k" x="320" y="83">A well-defined problem: is x even? (3.1)</text>
+  <rect x="145.0" y="89" width="110" height="32" rx="16" fill="#e6f4ef" stroke="#0f7a62" stroke-width="1.5"/>
+  <text class="l" x="200" y="109" style="text-anchor:middle">Start</text>
+  <path d="M200 121 L200 140" stroke="#4b5563" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M107.0 142 H305.0 L293.0 174 H95.0 Z" fill="#ffffff" stroke="#1f6fb5" stroke-width="1.5"/>
+  <text class="r" x="200" y="162" style="text-anchor:middle">Write "Enter an integer"</text>
+  <path d="M200 174 L200 192" stroke="#4b5563" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M127.0 194 H285.0 L273.0 226 H115.0 Z" fill="#ffffff" stroke="#1f6fb5" stroke-width="1.5"/>
+  <text class="r" x="200" y="214" style="text-anchor:middle">Read x</text>
+  <path d="M200 226 L200 244" stroke="#4b5563" stroke-width="2" marker-end="url(#a)"/>
+  <path d="M200 244 L300 276 L200 308 L100 276 Z" fill="#fff4e2" stroke="#d98b2b" stroke-width="1.5"/>
+  <text class="r" x="200" y="280" style="text-anchor:middle">x % 2 == 0 ?</text>
+  <path d="M300 276 L380 276" stroke="#0f7a62" stroke-width="2" marker-end="url(#g)"/>
+  <text class="r" x="318" y="268">true</text>
+  <path d="M392.0 260 H520.0 L508.0 292 H380.0 Z" fill="#ffffff" stroke="#1f6fb5" stroke-width="1.5"/>
+  <text class="r" x="450" y="280" style="text-anchor:middle">Write "Even"</text>
+  <path d="M200 308 L200 340" stroke="#4b5563" stroke-width="2" marker-end="url(#a)"/>
+  <text class="r" x="216" y="330">false</text>
+  <path d="M142.0 342 H270.0 L258.0 374 H130.0 Z" fill="#ffffff" stroke="#1f6fb5" stroke-width="1.5"/>
+  <text class="r" x="200" y="362" style="text-anchor:middle">Write "Odd"</text>
+  <path d="M450 292 V420 H262" stroke="#4b5563" stroke-width="1.5" fill="none" marker-end="url(#a)"/>
+  <path d="M200 374 L200 404" stroke="#4b5563" stroke-width="2" marker-end="url(#a)"/>
+  <rect x="145.0" y="404" width="110" height="32" rx="16" fill="#e6f4ef" stroke="#0f7a62" stroke-width="1.5"/>
+  <text class="l" x="200" y="424" style="text-anchor:middle">End</text>
+  <g class="r">
+    <text x="70" y="470">input: a single integer x;  process: check divisibility by 2;</text>
+    <text x="70" y="486">output: Even or Odd. Clear goal, input, process and output</text>
+    <text x="70" y="502">make the problem well defined.</text>
+    <text x="70" y="534">ill-defined: 'improve education in Pakistan' has no clear</text>
+    <text x="70" y="550">measures for funding, teachers or materials.</text>
+    <text x="70" y="582">problem types: decision (yes or no), search (find an item),</text>
+    <text x="70" y="598">optimization (find the best), counting (how many ways)</text>
+  </g>
+  <rect x="610" y="55" width="540" height="640" rx="12" fill="#e6f4ef" stroke="#0f7a62" stroke-width="2"/>
+  <text class="k" x="880" y="83">Generate and test (3.2.1)</text>
+  <rect x="800" y="105" width="160" height="40" rx="6" fill="#ffffff" stroke="#1f6fb5" stroke-width="1.5"/>
+  <text class="l" x="849" y="129">GENERATOR</text>
+  <path d="M880 145 L880 196" stroke="#4b5563" stroke-width="2" marker-end="url(#a)"/>
+  <text class="r" x="890" y="176">possible solution</text>
+  <rect x="800" y="200" width="160" height="40" rx="6" fill="#ffffff" stroke="#d98b2b" stroke-width="1.5"/>
+  <text class="l" x="859" y="224">TESTER</text>
+  <path d="M880 240 L880 291" stroke="#0f7a62" stroke-width="2" marker-end="url(#g)"/>
+  <text class="r" x="890" y="271">correct solution</text>
+  <rect x="820.0" y="296" width="120" height="32" rx="16" fill="#e6f4ef" stroke="#0f7a62" stroke-width="1.5"/>
+  <text class="l" x="880" y="316" style="text-anchor:middle">STOP</text>
+  <path d="M800 220 H690 V125 H796" stroke="#d7322f" stroke-width="1.8" fill="none" marker-end="url(#p)"/>
+  <text class="r" x="640" y="180" style="fill:#d7322f">incorrect:</text>
+  <text class="r" x="640" y="196" style="fill:#d7322f">try again</text>
+  <g class="r">
+    <text x="630" y="370">1 generate: produce a possible solution randomly,</text>
+    <text x="630" y="386">systematically or with a heuristic</text>
+    <text x="630" y="402">2 test: check it against the requirements; if it fails,</text>
+    <text x="630" y="418">generate a new one and repeat</text>
+    <text x="630" y="450">useful when the problem space is small or there is</text>
+    <text x="630" y="466">no clear strategy; heuristics cut down the candidates</text>
+    <text x="630" y="498">pros: simple, versatile, exhaustive (nothing overlooked)</text>
+    <text x="630" y="514">cons: inefficient for large spaces, finds a valid answer</text>
+    <text x="630" y="530">but not always the best one, computationally expensive</text>
+  </g>
+  <text class="s" x="600" y="707" style="font-size:11px">Original diagram for this lesson; the textbook's pictures are not reproduced.</text>
+</svg>

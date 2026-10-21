@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-CS-CH3-3.2.1.1",
+      "chapter": "pk-punjab/xi/computer_science/c11-cs/ch3",
+      "topic": "pk-punjab/xi/computer_science/c11-cs/ch3/3.2.1.1",
+      "title": "3.2.1.1 Definition and Process",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
+          "pdf_from": 71,
+          "pdf_to": 71,
+          "note": "Topic 3.2.1.1 (PDF 71, printed 68); Figure 3.2 (PDF 72) is replaced by the original diagram. Short question 2 is answered."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "Generate: produce a possible solution, randomly, systematically or using a heuristic (a rule of thumb).",
+              "Test: check the solution against the problem's requirements or constraints. If it satisfies all of them it is valid; if not, generate a new solution and repeat."
+            ]
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-cs-ch3-fig-problems-generate-test",
+            "alt": "Left: a flowchart that starts, asks for an integer, reads x, tests whether x % 2 == 0 and writes Even or Odd before ending, with notes on input, process, output, an ill-defined problem and four problem types. Right: a generator box passes a possible solution to a tester box; a correct solution leads to stop and an incorrect one loops back to the generator, with notes on the steps, pros and cons.",
+            "caption": "A well-defined problem and the generate and test loop (original diagram after topics 3.1 and 3.2).",
+            "long_description": "Checking whether a number is even is well defined: the input is one integer, the process divides it by 2 and looks at the remainder, and the output is Even or Odd. The flowchart starts, writes a prompt, reads x, takes the true branch to write Even when the remainder is 0 and the false branch to write Odd otherwise, and then ends. In generate and test, a generator proposes a possible solution and a tester checks it against the requirements; an incorrect solution sends the process back to generate another, and a correct one stops it."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Outline the main steps of the Generate and Test algorithm (short question 2).",
+            "explanation": "1 generate a candidate solution; 2 test it against all the conditions; 3 if it passes, stop with that solution; 4 otherwise generate the next candidate and test again, until a solution is found or no candidates remain."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Quick recap"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Two steps: generate (random, systematic or heuristic) and test (against all constraints), looping until valid."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,184 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH7-7.3-RU",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch7",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch7/7.3",
+      "title": "7.3 Hypothesis testing ke tasawwurat (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-CS-CH7-7.3",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 95,
+          "pdf_to": 97,
+          "note": "Roman Urdu explanation of the concepts in hypothesis testing (PDF 95-97)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Hypothesis testing durust faislon tak pohanchne ke liye chand kaleedi tasawwurat saath use karti hai: test statistics, critical region, significance level aur p-value."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Test statistics"
+          },
+          {
+            "type": "paragraph",
+            "text": "Test statistic namoone ke data se nikla number hai jo batata hai ke nataij H0 ki tawaqqo se kitne door hain. Mukhtalif tests mukhtalif statistics use karte hain, maslan t-value, chi-square value aur F-value."
+          },
+          {
+            "type": "table",
+            "caption": "Do test statistics",
+            "header": [
+              "Test",
+              "Formula",
+              "Alamat"
+            ],
+            "rows": [
+              [
+                "t-test",
+                "t = (x_bar - mu_0) / (s / sqrt(n))",
+                "x_bar: namoone ka mean; mu_0: H0 ke tehat population mean; s: namoone ka standard deviation; n: namoone ka size"
+              ],
+              [
+                "Chi-square test",
+                "chi^2 = (O_i - E_i)^2 / E_i ka jama",
+                "O_i: har category ki mushahida frequency; E_i: har category ki mutawaqqa frequency"
+              ]
+            ]
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Hal shuda misal: t-test"
+          },
+          {
+            "type": "paragraph",
+            "text": "25 talaba ke namoone ka mean score 80 hai. Agar namoone ka standard deviation 10 ho to kya yeh population mean 75 se numayan mukhtalif hai? t = (80 - 75) / (10 / sqrt(25)) = 5 / (10 / 5) = 5 / 2 = 2.5. 24 degrees of freedom par alpha = 0.05 ki two-tailed critical value taqreeban 2.06 hai, is liye t = 2.5 critical region mein hai aur H0 radd hota hai: mean 75 se waqai mukhtalif hai."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Hal shuda misal: chi-square test"
+          },
+          {
+            "type": "table",
+            "caption": "Pansa 60 dafa phenka gaya",
+            "header": [
+              "Rukh",
+              "Mushahida O",
+              "Mutawaqqa E",
+              "(O - E)^2 / E"
+            ],
+            "rows": [
+              [
+                "1",
+                "10",
+                "10",
+                "0"
+              ],
+              [
+                "2",
+                "12",
+                "10",
+                "0.4"
+              ],
+              [
+                "3",
+                "8",
+                "10",
+                "0.4"
+              ],
+              [
+                "4",
+                "14",
+                "10",
+                "1.6"
+              ],
+              [
+                "5",
+                "9",
+                "10",
+                "0.1"
+              ],
+              [
+                "6",
+                "7",
+                "10",
+                "0.9"
+              ],
+              [
+                "Kul",
+                "60",
+                "60",
+                "3.4"
+              ]
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Yun chi^2 = 3.4 hai. Ise chuni hui significance level (alpha = 0.05) aur degrees of freedom (6 rukh - 1 = 5) ke liye chi-square table ki critical value se milaya jata hai. Woh critical value 11.07 hai; kyunke 3.4 < 11.07, H0 (pansa munsif hai) radd nahi hota."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch7-fig-chi-square",
+            "alt": "60 phenkon mein chhe rukhon ki mushahida frequencies (10, 12, 8, 14, 9 aur 7) ka bar chart, mutawaqqa 10 par dashed line. Dabba hal dikhata: 0 + 0.4 + 0.4 + 1.6 + 0.1 + 0.9 = 3.4; df = 5; alpha 0.05 par critical value = 11.07. Note: 3.4 < 11.07, is liye H0 (pansa munsif) radd nahi hota.",
+            "caption": "Pansay ka chi-square test (pansay ki misal ke mutabiq asal khaaka).",
+            "long_description": "Munsif pansa bhi 60 phenkon mein har rukh bilkul 10 dafa nahi deta; test poochta hai ke kya farq us se bare hain jo ittifaq aam taur par paida karta hai."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Critical region, significance level aur p-value"
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "Critical region: test statistic ki intehai qeematon ki had jin par H0 radd hota hai. Yeh testing se pehle tay hoti aur significance level par munhasir hai; graphs aksar ise dikhate hain.",
+              "Significance level (alpha): H0 ke sach hote hue use radd karne ka zyada se zyada khatra jo hum qabool karte hain; aam qeemat 0.05. Kam alpha ka matlab sakht test. Ise tajzie se pehle chuna jata hai.",
+              "p-value: H0 sach hone ki soorat mein mushahida nateeja, ya us se intehai nateeja, milne ka imkaan. Chhoti p-value H0 ke khilaf mazboot saboot hai, kyunke aisa nateeja ittifaqan kam hi hota. Agar p-value alpha se kam ho to H0 radd hota hai."
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Maslan ustad jaanchta hai ke kya naya tareeqa-e-tadrees number behtar karta hai; H0 kehta hai koi asar nahi. Agar tajzie se p = 0.03 aaye to kyunke 0.03 < 0.05, H0 radd hota hai: shumariyati saboot hai ke tareeqe ne karkardagi behtar ki. Tib mein nayi dawa ka purani se muwazna karte hue 0.01 ki p-value mazboot saboot deti hai ke behtari sirf ittifaq nahi. p-values samajhna baghair munasib saboot ke hypothesis radd ya qabool karne se bachata hai."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch7-fig-critical-region",
+            "alt": "Ghante jaisi curve H0 sach hone par test statistic ki mutawaqqa qeematein dikhati. Dashed 'critical value' line se aage daen dum surkh: critical region, raqba alpha = 0.05. Purple line critical region ke andar test statistic, aur us se aage chhota purple raqba p-value hai. Note: test statistic critical region mein (p-value < alpha) to H0 radd; warna H0 radd nahi.",
+            "caption": "Critical region aur p-value (7.3 ke mutabiq asal khaaka).",
+            "long_description": "Dono qawaid aik hi faisla hain: critical value se aage ke test statistic ki p-value hamesha alpha se kam hoti hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Test alpha = 0.05 ke saath p = 0.08 deta hai. Faisla kya hai, aur kya yeh H0 ko sach sabit karta hai?",
+            "explanation": "Kyunke 0.08, 0.05 se zyada hai, H0 radd nahi hota. Yeh H0 ko sach sabit nahi karta; sirf yeh ke data ne us ke khilaf kafi mazboot saboot nahi diya."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Fauri khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Test statistic: namoone se number, maslan t = (x_bar - mu_0) / (s / sqrt(n)), chi^2 = (O - E)^2 / E ka jama.",
+              "Critical region: qeematein jo H0 radd karwati hain; alpha (aksar 0.05) is ka size tay karta.",
+              "p-value < alpha: H0 radd."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

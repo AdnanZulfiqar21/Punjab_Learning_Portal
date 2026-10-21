@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-CS-CH6-6.4.1",
+      "chapter": "pk-punjab/xi/computer_science/c11-cs/ch6",
+      "topic": "pk-punjab/xi/computer_science/c11-cs/ch6/6.4.1",
+      "title": "6.4.1 Fundamentals of Blockchain",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
+          "pdf_from": 161,
+          "pdf_to": 162,
+          "note": "Topic 6.4.1 (PDF 161-162, printed 158-159); Figure 6.2 is replaced by the original diagram."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Blockchain is like a digital notebook shared by a group of friends who track who owes whom money. Instead of one person keeping the record, everyone has a copy, and every change, such as paying back money, is written in all the notebooks at once."
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Transparency: everyone can see the notebook, so cheating or secret changes are noticed.",
+              "Security: once written, entries are almost impossible to erase, because cryptography locks them in place.",
+              "Decentralization: no single person or computer is in charge; everyone holds an equal copy, and changes need the agreement of the majority."
+            ]
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-cs-ch6-fig-blockchain",
+            "alt": "Top: three blocks in a row, each listing the previous block's hash, a timestamp, transactions and its own hash, joined by arrows. Bottom left: six nodes N1 to N6 all connected to one another in a peer-to-peer network. Bottom right: notes on decentralization, immutability, consensus, transparency, security and the components node, ledger, block, transaction and protocol.",
+            "caption": "Linked blocks, a peer-to-peer network and blockchain principles (original diagram after topic 6.4).",
+            "long_description": "Each block stores the hash of the block before it, a timestamp and its transactions, and has its own hash. If someone altered an old block, its hash would change and no longer match the copy stored in the next block, so the tampering would show. Every node in the peer-to-peer network keeps a full copy of the ledger and talks directly to the others, with no central server. The network relies on decentralization, immutability, consensus rules such as Proof of Work or Proof of Stake, transparency and cryptographic security."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Why is it hard for one friend to cheat in the shared notebook?",
+            "explanation": "Everyone else holds the same record and would see the difference, and changes need the majority to agree."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Quick recap"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Blockchain as a shared notebook: transparent, secure, decentralized."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

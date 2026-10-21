@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 640" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <rect width="1200" height="640" fill="#ffffff"/>
+  <!-- Original diagram after Figure 6.10 (diffusion and number of arrangements), the printed entropy comparisons, and the free energy relation. -->
+  <defs>
+    <style>
+      .h{font-size:22px;font-weight:700;fill:#14181f;text-anchor:middle}
+      .k{font-size:16px;font-weight:700;fill:#14181f;text-anchor:middle}
+      .s{font-size:13px;fill:#4b5563;text-anchor:middle}
+      .t{font-size:13px;fill:#4b5563}
+      .f{font-family:Consolas, Courier New, monospace;font-size:15px;fill:#14181f;text-anchor:middle}
+    </style>
+  </defs>
+  <text class="h" x="600" y="32">Entropy: the number of ways, and free energy: the test of spontaneity</text>
+  <!-- jars -->
+  <text class="k" x="250" y="72">Diffusion: three molecules, two jars (Figure 6.10)</text>
+  <rect x="100" y="90" width="130" height="110" fill="#f9fafb" stroke="#4b5563" stroke-width="2"/><rect x="236" y="90" width="130" height="110" fill="#f9fafb" stroke="#4b5563" stroke-width="2"/>
+  <rect x="229" y="90" width="8" height="110" fill="#d7322f"/><text class="s" x="233" y="215" style="fill:#d7322f">partition</text>
+  <g fill="#1f6fb5"><circle cx="130" cy="120" r="7"/><circle cx="170" cy="160" r="7"/><circle cx="200" cy="115" r="7"/></g>
+  <g class="s" style="font-size:12px"><text x="140" y="123">1</text><text x="180" y="163">2</text><text x="210" y="118">3</text></g>
+  <text class="s" x="165" y="215">jar A</text><text class="s" x="301" y="215">jar B (empty)</text>
+  <g class="t">
+    <text x="60" y="250">open the partition: each molecule can be in A or B,</text>
+    <text x="60" y="268">so 2 x 2 x 2 = 2^3 = 8 arrangements; 5 molecules 2^5 = 32;</text>
+    <text x="60" y="286">100 molecules 2^100; in general x^y for y particles in x places</text>
+    <text x="60" y="312">diffusion happens because there are so many more ways of</text>
+    <text x="60" y="330">spreading out than of staying together; entropy S measures</text>
+    <text x="60" y="348">the number of ways of arranging particles and their energy</text>
+  </g>
+  <!-- entropy comparisons -->
+  <text class="k" x="250" y="390">Comparing standard entropies (J per K per mol)</text>
+  <g class="t">
+    <text x="60" y="418">state: ice 48.0 &lt; water 69.9 &lt; vapour 188.7</text>
+    <text x="60" y="438">particles: CaO 39.7 &lt; CaCO3 92.9 (more particles, more ways)</text>
+    <text x="60" y="458">hardness: diamond &lt; graphite (stronger forces limit vibration)</text>
+    <text x="60" y="486">reactions: solid to gas, or more moles of gas, means delta S positive</text>
+    <text x="60" y="504">CaCO3(s) to CaO(s) + CO2(g); 2 N2O5(g) to 4 NO2(g) + O2(g): 2 to 5 moles</text>
+    <text x="60" y="532">delta S system = sum S products - sum S reactants</text>
+    <text x="60" y="550">2 Ca + O2 to 2 CaO: 2 x 39.7 - (2 x 41.4 + 205.0) = -208.4 J per K per mol</text>
+    <text x="60" y="568">negative, yet calcium burns: the surroundings' entropy must be counted too</text>
+  </g>
+  <!-- free energy -->
+  <rect x="640" y="90" width="500" height="200" rx="12" fill="#fff4e2" stroke="#d98b2b" stroke-width="2"/>
+  <text class="k" x="890" y="118">Gibbs free energy</text>
+  <text class="f" x="740" y="150">H = G + TS</text><text class="f" x="990" y="150">delta G = delta H - T delta S</text>
+  <g class="t">
+    <text x="660" y="180">G is the part of the enthalpy free to do work; TS is the part</text>
+    <text x="660" y="198">tied up in keeping the system at temperature T</text>
+    <text x="660" y="226">delta G negative: spontaneous as written</text>
+    <text x="660" y="244">delta G positive: not spontaneous; the reverse may occur</text>
+    <text x="660" y="262">delta G zero: equilibrium, neither direction spontaneous</text>
+  </g>
+  <rect x="640" y="310" width="500" height="150" rx="12" fill="#dbe9f5" stroke="#1f6fb5" stroke-width="2"/>
+  <text class="k" x="890" y="338">Sample 6.13: the Haber process at 25 degrees C</text>
+  <g class="t">
+    <text x="660" y="366">delta H = 2 x (-45.9) = -91.8 kJ</text>
+    <text x="660" y="386">delta S = 2 x 193 - (191.5 + 3 x 130.6) = -197 J per K = -0.197 kJ per K</text>
+    <text x="660" y="406">delta G = -91.8 - 298 x (-0.197) = -33.1 kJ: spontaneous</text>
+    <text x="660" y="436">Sample 6.12, CaSO4 dissolving: delta H -17.8 kJ, delta S -0.1447 kJ per K,</text>
+    <text x="660" y="454">delta G = -17.8 + 43.1 = +25.3 kJ: not spontaneous at 25 degrees C</text>
+  </g>
+  <rect x="640" y="480" width="500" height="120" rx="12" fill="#f9fafb" stroke="#9ca3af" stroke-width="2"/>
+  <text class="k" x="890" y="508">Sign of delta G from delta H and delta S</text>
+  <g class="t">
+    <text x="660" y="536">delta H -, delta S +: always spontaneous</text>
+    <text x="660" y="554">delta H +, delta S -: never spontaneous</text>
+    <text x="660" y="572">delta H -, delta S -: spontaneous at low T (Haber, CaO formation)</text>
+    <text x="660" y="590">delta H +, delta S +: spontaneous at high T (CaCO3 decomposing)</text>
+  </g>
+  <text class="s" x="600" y="625">Values as printed in topics 6.11 and 6.12. A positive total entropy change (system plus surroundings) is the full test; delta G packages it at constant T and P.</text>
+</svg>

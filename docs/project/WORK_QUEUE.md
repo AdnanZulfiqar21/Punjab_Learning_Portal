@@ -1,6 +1,89 @@
 # Work queue (every roadmap task)
 
-**Evening of 2026-10-15:** the counts and the C list below were written before #219–#225 merged. Those pulls are on `main` (`8949b49`). Treat these as already implemented, and do not rebuild them: P12.S2.T3 comparisons, W09.S1.T3 workload guard, P06.S4.T2 export schema 2, P09.S3.T1 difficulty allocation, W01.S1.T1 numerical/derivation authoring (not offered to learners), P02.S2.T1 Urdu Nastaliq and the shared colour check, plus the support read and the staffing-journey order. The class counts are not a current census.
+**20 October 2026 — the whole Class XII Computer Science book drafted; all requested books are drafted.** Chapters 1 to 9 authored like the Physics XII book (CS-XII-BOOK-01): PRs #343 to #351 merged on green CI.
+
+| Slice | Code | Tested | Device |
+|---|---|---|---|
+| Computer Science XII chapters 1 to 9: 84 topics (with summaries and exercises) as English and Roman Urdu (glossed) drafts, coverage registers, 72 original 2D figures | Imported into `portal` (dev) chapter by chapter (`--subject computer_science --grade 12`) | CI content, api and web jobs green on each chapter PR; contact sheets checked for every figure; worked numbers recomputed | Not walked on the phone |
+
+Open: academic review of all nine chapters, starting with the flagged findings (the Chapter 9 key error, added notes on PECA 2025 and the national AI policy) and the derived answers; the owner's copy of printed page 21 for section 2.2 (B17); owner's Class XII lecture videos.
+
+**20 October 2026 — the whole Class XII Physics book drafted.** Chapters 13 to 21 authored like the Chemistry XII book (PHY-XII-BOOK-01): PRs #332, #333 and #335 to #341 merged on green CI.
+
+| Slice | Code | Tested | Device |
+|---|---|---|---|
+| Physics XII chapters 13 to 21: 94 topics as English and Roman Urdu (glossed) drafts, coverage registers, 86 original 2D figures | Imported into `portal` (dev) chapter by chapter (`--subject physics --grade 12`) | CI content, api and web jobs green on each chapter PR; contact sheets checked for every figure | Not walked on the phone |
+
+Open: academic review of all 9 chapters, starting with the flagged findings, the added worked examples and the derived answers; owner's Class XII lecture videos; Computer Science XII is next and last.
+
+**20 October 2026 — the whole Class XII Chemistry book drafted.** Chapters 17 to 33 authored like the Biology XII book (CHEM-XII-BOOK-01): PRs #314 and #316 to #331 merged on green CI.
+
+| Slice | Code | Tested | Device |
+|---|---|---|---|
+| Chemistry XII chapters 17 to 33: 232 topics as English and Roman Urdu (glossed) drafts, coverage registers, 166 original 2D figures | Imported into `portal` (dev) chapter by chapter (`--subject chemistry --grade 12`) | CI content, api and web jobs green on each chapter PR; contact sheets checked for every figure | Not walked on the phone |
+
+Open: academic review of all 17 chapters, starting with the flagged findings and the derived answers; owner's Class XII lecture videos; Physics XII is next, with Chapter 13 in PR #332 and Chapter 14 in PR #333.
+
+**20 October 2026 — the whole Class XII Biology book drafted.** Chapters 13 to 25 authored like the Class XI books (BIO-XII-BOOK-01): PRs #295, #301 and #303 to #313 merged on green CI.
+
+| Slice | Code | Tested | Device |
+|---|---|---|---|
+| Biology XII chapters 13 to 25: 216 topics as English and Roman Urdu (glossed) drafts, coverage registers, 125 original 2D figures | Imported into `portal` (dev) chapter by chapter (`--grade 12`) | CI content, api and web jobs green on each chapter PR; contact sheets checked for every figure | Not walked on the phone |
+
+Open: academic review of all 13 chapters, starting with the flagged findings and the derived answers; owner's Class XII lecture videos; Chemistry XII is next, with Chapter 17 in PR #314.
+
+**20 October 2026 — original figures for the Class XI books.** Printed figures the lessons only described are now original 2D diagrams, with 3D models where the structure needs them (XI-FIGURES-01): PRs #296 to #300 merged on green CI.
+
+| Slice | Code | Tested | Device |
+|---|---|---|---|
+| Physics XI (108 diagrams, 2 models), Chemistry XI (84 diagrams, 3 models), Biology XI (18 diagrams, 1 reused) in English and Roman Urdu with coverage updates | Imported into `portal` (dev) as whole-book batches | CI content, api and web jobs green on each PR; contact sheets checked against the lesson text | Not walked on the phone |
+
+Open: academic review of the figures with their lessons; photographs (11 Physics, 2 Chemistry, 27 Biology) stay development-only book references; Class XII resumed: Biology Chapter 14 is PR #301.
+
+**19 October 2026 (night) — the whole Class XI Computer Science book drafted.** Chapters 1 to 9 authored like the Physics book (CS-XI-BOOK-01): PRs #285 to #293 merged on green CI.
+
+| Slice | Code | Tested | Device |
+|---|---|---|---|
+| Computer Science XI chapters 1 to 9: 435 topics as English and Roman Urdu (glossed) drafts, coverage registers, 25 original 2D figures | Imported into `portal` (dev) chapter by chapter (`--subject computer_science`) | CI content, api and web jobs green on each chapter PR; printed calculations and listings re-run | Not walked on the phone |
+
+Open: academic review of all 9 chapters (start with the flagged findings, including every unit's answer-key mismatches); a `code` lesson block for listings; owner's CS lecture videos; next book Mathematics by the same pipeline.
+
+**19 October 2026 (evening) — the whole Class XI Physics book drafted.** Chapters 1 to 12 authored like the Chemistry book (PHY-XI-BOOK-01): PRs #272 to #283 merged on green CI.
+
+| Slice | Code | Tested | Device |
+|---|---|---|---|
+| Physics XI chapters 1 to 12: 129 topics as English and Roman Urdu (glossed) drafts, coverage registers, 39 original 2D figures | Imported into `portal` (dev) chapter by chapter (`--subject physics`) | CI content, api and web jobs green on each chapter PR | Not walked on the phone |
+
+Open: academic review of all 12 chapters (start with the flagged findings); owner's physics lecture videos and registration; next book Computer Science, then Mathematics, by the same pipeline.
+
+**19 October 2026 — the whole Class XI Chemistry book drafted.** Chapters 1 to 16 authored like the Biology book (CHEM-XI-BOOK-01): PRs #255 to #270 merged on green CI.
+
+| Slice | Code | Tested | Device |
+|---|---|---|---|
+| Chemistry XI chapters 1 to 16: 371 topics as English and Roman Urdu (glossed) drafts, coverage registers, 73 original 2D figures | Imported into `portal` (dev) chapter by chapter (`--subject chemistry`) | CI content, api and web jobs green on each chapter PR | Not walked on the phone |
+
+Open: academic review of all 16 chapters; owner's chemistry lecture videos and registration; next books (Physics, Computer Science, Mathematics) by the same pipeline.
+
+**18 October 2026 (evening) — the whole Class XI Biology book drafted.** Chapters 2 to 12 authored like Chapter 1 (BIO-XI-BOOK-01): PRs #242 to #250 merged on green CI; #251 and #252 open.
+
+| Slice | Code | Tested | Device |
+|---|---|---|---|
+| Biology XI chapters 2 to 12: 64 topics as English and Roman Urdu (glossed) drafts, coverage registers, 109 original 2D figures | Imported into `portal` (dev) chapter by chapter | CI content, api and web jobs green on each chapter PR | Not walked on the phone |
+| `import_lessons.py`: `--chapter`, `--only`, per-language batches, 200-file media packs | On main (#250) | Used for every chapter import | n/a |
+
+Open: academic review of all 12 chapters; owner's lecture videos and registration for chapters 2 to 12; owner reads a later chapter on build 6.
+
+**18 October 2026 — Chapter 1 pilot on the phone.** #236 and #237 merged (`486b62b`). Build 3 confirmed on the iPhone by the owner; build 4 (video player) started from `67a673d`.
+
+| Slice | Code | Tested | Device |
+|---|---|---|---|
+| Learn class→group path, chapter screen, topic reader (English | Roman Urdu | Lecture) | On main, native and web | API, web e2e and mobile host tests green in CI | Reader: build 3 confirmed by the owner. Lecture: build 4 pending |
+| Biology XI 1.1–1.8 drafts, English and Roman Urdu (glossed), coverage registers, 16 original figures | Imported into `portal` (dev) | Import tool re-runnable; `test_bio_pilot.py` | Read on build 3 (owner) |
+| 17 lecture parts registered from the owner's production folder | `register_lectures.py` (dev-only test registration) | `test_lecture_reading.py`; web player plays part 3 of 1.4 in Chromium | Not yet on the phone (build 4) |
+
+Open: owner walkthrough of build 4 (every topic, both languages, Lecture parts); academic review of lessons and lectures; media provider (B05); renderer-2 client manifest for builds 3 and 4 (CLIENT-FLOOR-01); Windows firewall rule for TCP 8100 (owner).
+
+**Night of 2026-10-15:** `main` is `f3d2a83`. Alembic head is `f8a21c6d4e90`. The counts and the C list below are not a current census. Do not rebuild work that is already on main: the evening items (P12.S2.T3, W09.S1.T3, P06.S4.T2, P09.S3.T1, W01.S1.T1, P02.S2.T1, the support read and the staffing-journey order; then at `8949b49`) and, since then, P13.S2.T1 mobile discovery (#227), P05.S1.T3 edition windows (#228), P03.S1.T2 the development object-store adapter (#229) and P04.S2.T2 the emergency-access audit (#230). #231 (do not choose among overlapping current editions) was open when this note was written and is not evidence until it merges. The sentence “nothing buildable remains” in RESUME_STATE is a 12 October historical note.
 
 Built 2026-10-15 from the roadmap's 423 task IDs (306 core `P..`, 117 written `W..`), the register, BLOCKERS, DECISIONS and
 the status audit, with the cited code and test files checked to exist. Classes:
@@ -58,13 +141,13 @@ Smallest learner- or safety-relevant items first; each one lands as its own PR, 
 | 11 | P06.S4.T2 | S/M | export schema v2 |
 | 12 | P09.S3.T3 | M | fixed form per scheduled session |
 | 13 | P09.S3.T1 | M | difficulty/outcome allocation |
-| 14 | P13.S2.T1 | M | mobile discovery |
+| 14 | P13.S2.T1 | M | mobile discovery — on main (#227); do not rebuild |
 | 15 | W01.S2.T2 | S | rubric sig-fig and contradiction fields |
 | 16 | W03.S2.T2 | L | region mapping and mapping history |
-| 17 | P05.S1.T3 | M | edition effective dates |
+| 17 | P05.S1.T3 | M | edition effective dates — on main (#228); do not rebuild |
 | 18 | P06.S3.T2 | L | atomic multi-item release |
 | 19 | P12.S2.T3 | L | cohort comparisons (after P09.S3.T3) |
-| 20 | P03.S1.T2 | M | S3-compatible emulator + adapter |
+| 20 | P03.S1.T2 | M | S3-compatible emulator + adapter — on main (#229); do not rebuild |
 | 21 | P03.S3.T2 | M/L | Dockerfiles + CI image digests |
 | 22 | P01.S4.T2 | M/L | web equation/notation renderer spike |
 | 23 | P02.S2.T1 | S | Urdu font + shared tokens |
@@ -72,7 +155,7 @@ Smallest learner- or safety-relevant items first; each one lands as its own PR, 
 | 25 | P11.S2.T1 | M | focused lesson page (confirm intent first) |
 
 Records-only C items (size S, after the code items, in one records PR): P00.S1.T1, P00.S1.T3, P00.S1.T4, P00.S2.T3,
-P00.S3.T2, P01.S2.T2, P01.S3.T1, P02.S1.T3, P02.S2.T2, P03.S1.T3, P04.S2.T2, W11.S3.T3.
+P00.S3.T2, P01.S2.T2, P01.S3.T1, P02.S1.T3, P02.S2.T2, P03.S1.T3, W11.S3.T3. P04.S2.T2 landed in #230 and is not still a records-only item.
 
 ## C: incomplete and executable now (39)
 
@@ -90,12 +173,12 @@ P00.S3.T2, P01.S2.T2, P01.S3.T1, P02.S1.T3, P02.S2.T2, P03.S1.T3, P04.S2.T2, W11
 | P02.S1.T3 | Map every screen state | not registered (TODO by rule) | State map per route (loading, empty, expired, offline, conflict, update-required, score revised, 5 answer states) and gap list | none |
 | P02.S2.T1 | Define tokens and typography | not registered (TODO by rule) | Choose/record Urdu font and a token table used by web and mobile | phone readability check B09; brand B11 not blocking |
 | P02.S2.T2 | Build component specifications | not registered (TODO by rule) | Component specs: forms, tables, meters, answer-state options, keyboard and disabled states | none |
-| P03.S1.T2 | Create reproducible local services | IMPLEMENTED | Add S3-compatible emulator + adapter behind written/storage.py and asset store | none (prod bucket B03) |
+| P03.S1.T2 | Create reproducible local services | IMPLEMENTED on main (#229); emulator exercised 2026-10-15 | LocalStack 4.7.0. CI used an in-process stand-in. A later local run covered put, get, list, delete, exclusive evidence and prefix isolation, and the admin label was "Development stand-in". | Production bucket and region (B03). Not production qualification. |
 | P03.S1.T3 | Establish coding and review conventions | IN_PROGRESS | CONTRIBUTING: startup, seed/reset, debugging, migration naming, commit style; refresh README | none |
 | P03.S3.T2 | Build immutable artifacts and variant builds | not registered (TODO by rule) | Dockerfiles (API/workers, web); CI build per commit recording digest in release manifest | registry promotion B03; native variants B07/B13 |
 | P03.S4.T2 | Add baseline observability | IMPLEMENTED (API + web) | Carry correlation ID into import/export/notification/regrade/auto-assess job rows and worker logs | none |
-| P04.S2.T2 | Protect staff accounts | IMPLEMENTED (API) | Emergency-access runbook + test that portal-grant-role use is audited | none |
-| P05.S1.T3 | Add edition and year boundaries | P05.S1 stage row only | Edition/cohort effective dates so old and new cohorts coexist; tests with technical fixture editions | none (real dates owner later) |
+| P04.S2.T2 | Protect staff accounts | IMPLEMENTED on main (#230) | `docs/runbooks/emergency-access.md`; `portal-grant-role` writes an audit row with no actor | Not a current C item |
+| P05.S1.T3 | Add edition and year boundaries | IMPLEMENTED on main (#228), migration `f8a21c6d4e90` | The grade/subject book endpoint returns 409 when two editions are effective today and does not choose one. A book id still loads. | Real edition dates are an owner decision. Catalogue and discovery still listed both editions until #231. |
 | P06.S1.T2 | Build the editorial work queue | IMPLEMENTED | In PR #202 ASSIGN-REVIEWER-01 (publisher assigns from eligible reviewers) | none |
 | P06.S3.T2 | Publish versioned content releases | IN_PROGRESS | Atomic multi-item catalogue release with release-level rollback; CDN invalidation later | none (CDN B03) |
 | P06.S4.T2 | Provide portable content export | IMPLEMENTED | Add concept/inclusion mappings and asset-version references (schema v2); update docs/content-import.md | none |
@@ -106,7 +189,7 @@ P00.S3.T2, P01.S2.T2, P01.S3.T1, P02.S1.T3, P02.S2.T2, P03.S1.T3, P04.S2.T2, W11
 | P12.S2.T3 | Make learner comparisons honest | not registered (TODO by rule) | Cohort snapshot: >=200 distinct learners, earliest attempt, 90 days, midrank ties, hidden below threshold; tests with technical accounts | none (display needs real learners) |
 | P12.S3.T1 | Build the mistake notebook | IMPLEMENTED | In PR #203 NOTEBOOK-FLAGS-01 (flagged answers collected and reviewed) | none |
 | P13.S1.T4 | Implement client capability and supported-version policy | IMPLEMENTED (server)/code only | Validate publication against the oldest supported build registered manifest (CLIENTS-01 Not done) | pipeline registration B03; D08 B09 |
-| P13.S2.T1 | Implement learning screens | PARTIAL | Mobile discovery screen; keep state across rotation/background | player/transcript B05; devices B13 |
+| P13.S2.T1 | Implement learning screens | PARTIAL; discovery on main (#227) | The Learn tab reads `/v1/discovery`. Host tests are not device evidence. | Rotation and background; lecture player and transcripts (B05); devices (B09, B13) |
 | P17.S2.T2 | Separate worker priorities | not registered (TODO by rule) | Per-class pool caps at worker start, job duration caps, bulk workers pause in published mock windows | separate deployments/CPU/memory B03 |
 | P20.S4.T4 | Bind qualification evidence to the release manifest | not registered (TODO by rule) | QualificationRecord schema, §6.4 trigger table as release-checklist tool, AC51 demo (payload vs caption change) | none (real records need P20 runs) |
 | W01.S1.T1 | Extend the question taxonomy | TODO (W01 stage row IMPLEMENTED; audit: partial) | Add numerical and derivation types with required fields; shared passages/assets for written items; tests | None to build; offering them to learners needs WA-D11 |

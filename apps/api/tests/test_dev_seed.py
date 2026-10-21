@@ -46,3 +46,22 @@ def test_seed_refuses_without_the_dev_adapter(monkeypatch: pytest.MonkeyPatch) -
     finally:
         monkeypatch.undo()
         _clear()
+
+
+def test_seed_widens_an_older_fixture_grant(client: TestClient, db: Session) -> None:
+    """A grant left by an earlier seed (Biology only) is widened to the current fixture scope, not duplicated."""
+    assert dev_seed.main([]) == 0
+    user = db.scalar(select(AppUser).where(AppUser.email == "studio-author@example.com"))
+    assert user is not None
+    grant = db.scalar(
+        select(StaffRoleGrant).where(StaffRoleGrant.user_id == user.id, StaffRoleGrant.revoked_at.is_(None))
+    )
+    assert grant is not None
+    grant.scope = {"grades": [11], "subjects": ["biology"]}
+    db.commit()
+    assert dev_seed.main([]) == 0
+    db.expire_all()
+    grants = db.scalars(
+        select(StaffRoleGrant).where(StaffRoleGrant.user_id == user.id, StaffRoleGrant.revoked_at.is_(None))
+    ).all()
+    assert len(grants) == 1 and grants[0].scope == dev_seed.SCOPE

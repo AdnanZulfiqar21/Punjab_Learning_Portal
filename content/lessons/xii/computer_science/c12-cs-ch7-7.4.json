@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH7-7.4",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch7",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch7/7.4",
+      "title": "7.4 Performing Hypothesis Tests",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 97,
+          "pdf_to": 100,
+          "note": "Topic 7.4 with the Tidbit, Fig 7.1, the F-test and the numerical example (PDF 97-100), all checked against the page images and recomputed. The one-tailed p-value note, the marks figure and the check question are added. Short Q7, Long Q4 and MCQ 5 are answered here."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Performing a hypothesis test follows a clear process (Fig 7.1): define the hypotheses, collect data carefully, calculate the test statistic, compare the result with the criterion and make a decision. Following the steps reduces errors and keeps the test fair."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Tidbit",
+            "text": "Testing follows clear steps: data is collected and analysed, results are compared with criteria, and conclusions are drawn carefully."
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "State the null and alternative hypotheses.",
+              "Choose the significance level alpha.",
+              "Collect sample data.",
+              "Calculate the test statistic and find the p-value.",
+              "Compare the p-value with alpha.",
+              "Decide: if p < alpha, reject H0; otherwise do not reject H0."
+            ]
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch7-fig-process",
+            "alt": "Four stacked boxes joined by arrows: 1 state H0 and H1, 2 set significance level alpha, 3 collect sample data, 4 compute test statistic and p-value. Two arrows lead to the decisions: p-value < alpha, reject H0 (evidence for H1); and p-value >= alpha, fail to reject H0. A note says 'fail to reject' is safer wording than 'accept'.",
+            "caption": "The steps of hypothesis testing (original diagram after Fig 7.1).",
+            "long_description": "The book's figure says 'accept' when p > alpha; statisticians prefer 'fail to reject H0', because a test can only show that the evidence was not strong enough."
+          },
+          {
+            "type": "paragraph",
+            "text": "Simple examples, such as testing exam results or checking an average height, help build understanding: data is collected from samples, analysed with basic tests and conclusions are drawn clearly."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Advanced tests: F-test and chi-square test"
+          },
+          {
+            "type": "paragraph",
+            "text": "Advanced tests handle more complex data. The F-test compares the variances of two groups and is used in analysis of variance (ANOVA): F = s1^2 / s2^2, where s1^2 and s2^2 are the two sample variances. For two groups of students with variances 16 and 9, F = 16 / 9 = 1.78, which is compared with a critical value from the F-table to decide whether the variances differ significantly. The chi-square test (7.3) checks relationships in categorical data."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Numerical example: has a new teaching method improved marks?"
+          },
+          {
+            "type": "paragraph",
+            "text": "The previous average was 70. A sample of 10 students taught with the new method scored 72, 75, 78, 74, 77, 80, 76, 79, 81 and 78."
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "Hypotheses: H0: mu = 70 (no improvement); H1: mu > 70 (improvement).",
+              "Significance level: alpha = 0.05.",
+              "Sample mean: 770 / 10 = 77.",
+              "Standard deviation: the squared deviations from 77 add up to 70, so s = sqrt(70 / 9) = 2.79.",
+              "t-value: t = (77 - 70) / (2.79 / sqrt(10)) = 7 / 0.88 = 7.93, with df = 9.",
+              "Decision: the p-value for t = 7.93 with 9 degrees of freedom is far below 0.05, so H0 is rejected.",
+              "Conclusion: the new teaching method significantly improved students' marks."
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "About the printed p-value",
+            "text": "The book gives p = 0.00002. Because H1 says mu > 70, this is a one-tailed test, and its p-value is about 0.00001; 0.00002 is the two-tailed value. Either way p is far below 0.05, so the decision does not change."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch7-fig-marks-test",
+            "alt": "The ten marks are drawn as dots above a number line from 68 to 82, with two dots stacked at 78. A dashed red line marks the old mean 70 (H0) and a green line the sample mean 77. A box shows the working: n = 10, sum 770, mean 77, s = sqrt(70 / 9) = 2.79; t = 7 / 0.88 = 7.93 with df = 9; p < 0.05, so H0 is rejected and the new method raised marks.",
+            "caption": "The teaching-method example (original diagram after the numerical example).",
+            "long_description": "Every one of the ten marks is above 70, and they are close together, which is why t is so large."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "If the sample mean in the example had been 71 with the same standard deviation, what would t be, and would H0 still be rejected (the one-tailed critical value for df = 9 at alpha = 0.05 is 1.83)?",
+            "explanation": "t = (71 - 70) / 0.88 = 1.13. Since 1.13 < 1.83, t is not in the critical region and H0 would not be rejected: a one-mark rise could be chance."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Quick recap"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Steps: hypotheses, alpha, data, test statistic and p-value, decision.",
+              "F = s1^2 / s2^2 compares variances (16 / 9 = 1.78); chi-square tests categories.",
+              "Teaching example: mean 77, s 2.79, t 7.93, reject H0."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

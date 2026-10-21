@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <rect width="1200" height="600" fill="#ffffff"/>
+  <!-- Original diagram after topic 7.6: elementary steps, molecularity, intermediates and the rate-determining step, with the half-life decay curve of topic 7.5.2. -->
+  <defs>
+    <style>
+      .h{font-size:22px;font-weight:700;fill:#14181f;text-anchor:middle}
+      .k{font-size:16px;font-weight:700;fill:#14181f;text-anchor:middle}
+      .s{font-size:13px;fill:#4b5563;text-anchor:middle}
+      .t{font-size:13px;fill:#4b5563}
+      .b{font-size:14px;font-weight:700;fill:#14181f;text-anchor:middle}
+    </style>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#4b5563"/></marker>
+  </defs>
+  <text class="h" x="600" y="32">Reaction mechanism: the slow step sets the rate; half-life of a first-order reaction</text>
+  <!-- mechanism as a pipeline -->
+  <text class="k" x="330" y="70">2NO + 2H2 gives N2 + 2H2O in two steps</text>
+  <rect x="60" y="95" width="200" height="50" rx="10" fill="#dbe9f5" stroke="#1f6fb5" stroke-width="2"/><text class="b" x="160" y="125">2NO + H2</text>
+  <rect x="360" y="95" width="200" height="50" rx="10" fill="#fff4e2" stroke="#d98b2b" stroke-width="2"/><text class="b" x="460" y="125">N2 + H2O2</text>
+  <path d="M260 120 H352" stroke="#d7322f" stroke-width="3" marker-end="url(#a)"/><text class="s" x="306" y="108" style="fill:#d7322f;font-weight:700">step 1: SLOW</text>
+  <text class="s" x="306" y="162" style="fill:#d7322f">rate-determining</text>
+  <rect x="60" y="200" width="200" height="50" rx="10" fill="#fff4e2" stroke="#d98b2b" stroke-width="2"/><text class="b" x="160" y="230">H2O2 + H2</text>
+  <rect x="360" y="200" width="200" height="50" rx="10" fill="#b2dbcc" stroke="#0f7a62" stroke-width="2"/><text class="b" x="460" y="230">2H2O</text>
+  <path d="M260 225 H352" stroke="#0f7a62" stroke-width="2" marker-end="url(#a)"/><text class="s" x="306" y="213" style="fill:#0f7a62;font-weight:700">step 2: fast</text>
+  <text class="s" x="306" y="268" style="fill:#0f7a62">does not affect the rate</text>
+  <g class="t">
+    <text x="60" y="300">H2O2 is an intermediate: made in step 1, used in step 2, absent from the overall equation</text>
+    <text x="60" y="322">rate = k [NO]^2 [H2]: exactly the species of the slow step, third order (Table 7.3 agrees)</text>
+    <text x="60" y="350" style="font-weight:700;fill:#14181f">2NO2 + F2 gives 2NO2F</text>
+    <text x="60" y="372">step 1 (slow): NO2 + F2 gives NO2F + F; step 2 (fast): NO2 + F gives NO2F</text>
+    <text x="60" y="394">observed rate = k [NO2] [F2]: first order in each, second overall; fluorine atoms react as soon as made</text>
+    <text x="60" y="422" style="font-weight:700;fill:#14181f">Molecularity of an elementary step</text>
+    <text x="60" y="444">unimolecular: N2O5 gives NO2 + NO3; bimolecular: CO + NO3, NO + O3; termolecular (rare): 2O2 + O gives O3 + O2</text>
+    <text x="60" y="472">order is measured for the overall reaction; molecularity counts the molecules in one elementary step</text>
+  </g>
+  <!-- half-life curve -->
+  <text class="k" x="900" y="70">First-order decay and half-life</text>
+  <path d="M700 420 V90 M700 420 H1140" stroke="#4b5563" stroke-width="2" marker-end="url(#a)"/>
+  <text class="t" x="660" y="255" transform="rotate(-90 660 255)" text-anchor="middle">concentration</text>
+  <text class="s" x="1130" y="452">time</text>
+  <path d="M700 110 C 740 180, 780 240, 820 265 C 860 300, 900 330, 940 342 C 980 360, 1020 375, 1060 381 L1120 395" fill="none" stroke="#5b3fb5" stroke-width="3"/>
+  <g fill="none" stroke="#9ca3af" stroke-width="1.5" stroke-dasharray="4 3"><path d="M700 265 H820 V420"/><path d="M700 342 H940 V420"/><path d="M700 381 H1060 V420"/></g>
+  <g class="t" style="font-size:11px"><text x="706" y="106">c0</text><text x="706" y="261">c0/2</text><text x="706" y="338">c0/4</text><text x="706" y="377">c0/8</text><text x="812" y="438">t1/2</text><text x="928" y="438">2 t1/2</text><text x="1048" y="438">3 t1/2</text></g>
+  <g class="t">
+    <text x="680" y="480">the concentration halves in every half-life, whatever the starting value</text>
+    <text x="680" y="500">k = 0.693 / t1/2 (first order; units s-1)</text>
+    <text x="680" y="520">cyclopropane to propene, t1/2 = 17.0 min = 1020 s: k = 0.693 / 1020 = 6.8 x 10^-4 s-1</text>
+    <text x="680" y="540">(the print's units dm3 mol-1 s-1 are a slip; a first-order k is in s-1)</text>
+    <text x="680" y="568">radioactive decay is a first-order process: fixed half-life</text>
+  </g>
+</svg>

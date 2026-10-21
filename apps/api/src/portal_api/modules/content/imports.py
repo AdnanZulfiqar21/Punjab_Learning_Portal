@@ -35,7 +35,7 @@ from sqlalchemy.orm import Session
 
 from portal_api.errors import Conflict, NotFound, TooLarge, TooMany, Unprocessable
 from portal_api.modules.audit.models import record
-from portal_api.modules.content import blocks, kinds, workflow
+from portal_api.modules.content import assets, blocks, kinds, workflow
 from portal_api.modules.content.models import (
     Availability,
     ContentImportBatch,
@@ -577,6 +577,23 @@ def _links(
                 extra = {"parent_item_id": str(q.id), "question_ref": str(raw.get("question")).strip()}
                 if isinstance(body, dict):
                     body = {**body, "question_version_id": str(version)}
+    if kind == "lesson":  # LESSON-VARIANTS-01 by import: a language variant of an existing lesson concept
+        language = raw.get("language", "en")
+        if language not in ("en", "ur", "roman_ur"):
+            errors.append("language: use en, ur or roman_ur.")
+        else:
+            extra["language"] = language
+        if raw.get("variant_of"):
+            base = _ref(db, "lesson", raw.get("variant_of"))
+            if base is None or base.chapter_id != chapter.id:
+                errors.append("variant_of: name an existing lesson in the same chapter (its external_id or ID).")
+            elif base.external_ref == ext:
+                errors.append("variant_of: a lesson can't be a variant of itself.")
+            else:
+                extra["concept_id"] = str(base.concept_id or base.id)
+                extra["variant_of_ref"] = str(raw["variant_of"]).strip()
+                if base.topic_id is not None and raw.get("topic") is None:
+                    extra["topic_id_from_base"] = str(base.topic_id)
     if kind == "mcq":
         if raw.get("family"):
             base = _ref(db, "mcq", raw.get("family"))
@@ -640,6 +657,8 @@ def _validate_row(
             errors += link_errors
             body, body_errors, types = kinds.get(kind).parse_draft(linked_body)
             errors += [f"body: {e}" for e in body_errors]
+            if body is not None:  # every diagram, model poster, frame or fallback must already be in the archive
+                errors += [f"body: {e}" for e in assets.check_references(db, key[0], key[1], body)]
             s_err, s_warn, refs = workflow.check_sources(db, chapter, raw.get("source_refs", []))
             errors += s_err
             warnings += s_warn
@@ -904,7 +923,19 @@ def _row_input(r: ContentImportRow) -> dict[str, Any]:
         **({"question": p["question_ref"]} if p.get("question_ref") else {}),
         **({"family": p["family_ref"]} if p.get("family_ref") else {}),
         **({"passage": p["passage_ref"]} if p.get("passage_ref") else {}),
+        **({"language": p["language"]} if p.get("language") else {}),
+        **({"variant_of": p["variant_of_ref"]} if p.get("variant_of_ref") else {}),
     }
+
+
+def _apply_variant(item: ContentItem, p: dict[str, Any]) -> None:
+    """LESSON-VARIANTS-01: an imported variant joins its base lesson's concept and topic; a human-authored one."""
+    item.language = p.get("language") or "en"
+    if p.get("concept_id"):
+        item.concept_id = uuid.UUID(p["concept_id"])
+        item.translation_origin = "human"
+        if item.topic_id is None and p.get("topic_id_from_base"):
+            item.topic_id = uuid.UUID(p["topic_id_from_base"])
 
 
 def _create(db: Session, who: Principal, batch: ContentImportBatch, r: ContentImportRow) -> uuid.UUID:
@@ -933,6 +964,8 @@ def _create(db: Session, who: Principal, batch: ContentImportBatch, r: ContentIm
         item.family_id = uuid.UUID(p["family_id"]) if p.get("family_id") else item.id  # IMPORT-REFS-01: a variant
     if batch.kind == "rubric":
         item.parent_item_id = uuid.UUID(p["parent_item_id"])  # a rubric lives with its written question
+    if batch.kind == "lesson":
+        _apply_variant(item, p)
     version = ContentVersion(
         id=uuid.uuid4(),
         item_id=item.id,
@@ -980,6 +1013,8 @@ def _update(db: Session, who: Principal, batch: ContentImportBatch, r: ContentIm
         version.contributors = [*version.contributors, str(who.user.id)]
     item.title = p["title"]
     item.topic_id = uuid.UUID(p["topic_id"]) if p.get("topic_id") else None
+    if item.kind == "lesson":
+        _apply_variant(item, p)
     item.import_hash = r.payload_hash
     item.updated_at = _now()
     if item.state == ItemState.changes_requested.value:

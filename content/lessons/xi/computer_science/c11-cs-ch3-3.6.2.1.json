@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-CS-CH3-3.6.2.1",
+      "chapter": "pk-punjab/xi/computer_science/c11-cs/ch3",
+      "topic": "pk-punjab/xi/computer_science/c11-cs/ch3/3.6.2.1",
+      "title": "3.6.2.1 Linear Search",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
+          "pdf_from": 84,
+          "pdf_to": 85,
+          "note": "Topic printed 3.6.2.1 Linear Search (PDF 84-85, printed 81-82). The Python function is not from the book; flagged."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "callout",
+            "tone": "definition",
+            "title": "Linear search",
+            "text": "Linear search checks each item of a list one by one, from the start, until it finds the target or reaches the end."
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "Start at the beginning: look at the first item.",
+              "Check each item: compare it with the item you want.",
+              "Move to the next if they do not match.",
+              "Repeat until you find the item or reach the end."
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Searching [Karachi, Lahore, Islamabad, Faisalabad] for Islamabad: Karachi is not it, Lahore is not it, Islamabad is found at the third check. If Islamabad were not in the list, all the cities would be checked before concluding it is absent. Linear search is O(n)."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Python code (each .... is one 4-space indent)",
+            "text": "def linear_search(items, target):\n....for i in range(len(items)):\n........if items[i] == target:\n............return i    # position found\n....return -1           # not in the list\n\nprint(linear_search([\"Karachi\", \"Lahore\", \"Islamabad\", \"Faisalabad\"], \"Islamabad\"))    # 2"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "How many comparisons does linear search make to find Faisalabad, and to decide that Quetta is absent?",
+            "explanation": "Four for Faisalabad (the last item) and four for Quetta (every item checked)."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Quick recap"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Linear search: check items in order; works on unsorted lists; O(n)."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

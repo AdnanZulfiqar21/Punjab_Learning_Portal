@@ -1,0 +1,291 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH4-4.1-RU",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch4",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch4/4.1",
+      "title": "4.1 Tkinter se Graphical User Interface (GUI) banana (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-CS-CH4-4.1",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 49,
+          "pdf_to": 56,
+          "note": "Roman Urdu explanation of GUI development with Tkinter (PDF 49-56)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Yeh chapter sikhata hai ke Python ke built-in GUI toolkit Tkinter se user-friendly Graphical User Interfaces (GUIs) kaise banayein: windows, frames, labels, buttons aur entry fields, pack(), grid() aur place() se layouts, aur event handling jo user ke amal ko functions se jorti hai, aakhir mein aik saada login form. Phir yeh databases, SQL, Python ko database se jorna, aur SQLite ya MySQL ke saath bunyadi CRUD operations se ta'aruf karata hai."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "GUI kya hai, aur kyun ahem hai?"
+          },
+          {
+            "type": "callout",
+            "tone": "definition",
+            "title": "Graphical User Interface (GUI)",
+            "text": "GUI aik basari (visual) interface hai jo users ko windows, buttons, labels, menus, text boxes aur forms jaise ajza se software ke saath kaam karne deta hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "GUIs programs ko command-line interfaces se zyada samajhne aur use karne mein asan banate hain, khaas taur par ghair-takneeki users ke liye. Yeh basari jawab de kar aur pecheeda commands yaad rakhne ki zaroorat khatam kar ke istemal asan banate hain. GUI applications desktop software, web applications aur mobile apps mein use hoti hain (Fig 4.1)."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Tkinter: Python ka built-in GUI toolkit"
+          },
+          {
+            "type": "paragraph",
+            "text": "Tkinter Python ka standard GUI toolkit hai aur zaban ke saath pehle se install hota hai. Yeh windows, buttons, labels, entry fields aur doosre widgets ke liye classes aur functions deta hai. Yeh seekhne mein asan aur halka hai, event-driven programming (user ke events se amal shuru hote hain) ko sahara deta hai, aur chhoti se darmiyani GUI applications ke liye munasib hai."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Misal: saada GUI (Python code; har .... ek 4-space indent hai)",
+            "text": "import tkinter as tk\n\n# Create main window\nwindow = tk.Tk()\nwindow.title(\"Simple GUI Example\")\nwindow.geometry(\"300x200\")\n\n# Function to handle the button click (event)\ndef on_click():\n....print(\"Button Clicked!\")\n\nlabel = tk.Label(window, text=\"Welcome to Tkinter\")\nlabel.pack(pady=10)\n\nentry = tk.Entry(window)\nentry.pack(pady=10)\n\nbutton = tk.Button(window, text=\"Click Me\", command=on_click)\nbutton.pack(pady=10)\n\n# Run the application\nwindow.mainloop()"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "tk.Tk() main window banata hai; title() aur geometry() us ka unwan aur size (300 x 200 pixels) set karte hain.",
+              "Label text dikhata hai; Entry user ka input leta hai; Button amal karta hai.",
+              "command=on_click event handling hai: button dabane par on_click() chalta hai jo 'Button Clicked!' print karta hai.",
+              "mainloop() GUI chalata aur window khuli rakh kar events ka intezar karta hai."
+            ]
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch4-fig-gui-window",
+            "alt": "'Simple GUI Example' window mein 'Welcome to Tkinter' text, khaali entry box aur 'Click Me' button. Teer inhein Label (text dikhata), Entry (likha input leta) aur Button (dabane par function chalata) batate; window = tk.Tk() main window. Button se dashed teer note tak: command=on_click, click par on_click() chal kar 'Button Clicked!' print. Neeche: window.mainloop() window khuli aur events ke intezar mein rakhta.",
+            "caption": "Saada Tkinter window aur us ke widgets (Fig 4.1 ke mutabiq asal khaaka).",
+            "long_description": "Har Tkinter program ka dhaancha aik sa hai: window banayein, us mein widgets banayein, layout method se rakhein, events ko functions se jorein, phir mainloop() call karein."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Tkinter ke ajza aur widgets"
+          },
+          {
+            "type": "paragraph",
+            "text": "Tkinter ke ajza, jinhein widgets kehte hain, application ke basari hisse hain: windows, frames, buttons, text fields waghaira. Widgets users ko data likhne, intikhab karne ya amal karne dete hain; har aik ka apna maqsad hai, aur inhein mila kar poora interface banta hai. Tkinter layout bhi sambhalta hai taake widgets saleeqe se rakhe ja sakein."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Class activity",
+            "text": "Main window banayein aur use do frames mein baantein. Layout munazzam karne ke liye har frame mein mukhtalif widgets dalein."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Windows banana aur frames shamil karna"
+          },
+          {
+            "type": "paragraph",
+            "text": "Tkinter program main window se shuru hota hai jo har doosre hisse ki bunyad hai; is ka size badla, unwan diya aur widgets se bhara ja sakta hai. Frames window ke andar hisse hain jo mutalliq widgets ko ikattha karte hain, jis se interface wazeh aur saleeqe se rehta hai."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Misal: do frames (Python code; har .... ek 4-space indent hai)",
+            "text": "import tkinter as tk\n\nwindow = tk.Tk()\nwindow.title(\"Tkinter Frames Example\")\nwindow.geometry(\"400x300\")\n\ntop_frame = tk.Frame(window, bg=\"lightblue\", height=100)\ntop_frame.pack(fill=\"x\")\n\nbottom_frame = tk.Frame(window, bg=\"lightgreen\", height=200)\nbottom_frame.pack(fill=\"both\", expand=True)\n\ntk.Label(top_frame, text=\"Top Frame\", bg=\"lightblue\").pack(pady=20)\ntk.Label(bottom_frame, text=\"Bottom Frame\", bg=\"lightgreen\").pack(pady=20)\n\nwindow.mainloop()"
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch4-fig-frames",
+            "alt": "'Tkinter Frames Example' window halke neele oopri frame (Top Frame) aur bare halke sabz neechle frame (Bottom Frame) mein bati. Notes: top_frame halka neela, height 100; bottom_frame halka sabz, fill both aur expand True; har frame apne widgets rakhta.",
+            "caption": "Window ko hisson mein baant'te frames (frames wali misal ke mutabiq asal khaaka).",
+            "long_description": "fill='both' aur expand=True neechle frame ko window ka size badalne par bachi jagah bharne deta hai."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Aam widgets"
+          },
+          {
+            "type": "table",
+            "caption": "Aam Tkinter widgets",
+            "header": [
+              "Widget",
+              "Istemal"
+            ],
+            "rows": [
+              [
+                "Label",
+                "Text ya paigham dikhata hai"
+              ],
+              [
+                "Button",
+                "Dabane par amal karta hai"
+              ],
+              [
+                "Entry",
+                "Naam ya password jaisa text likhne ki aik line ki field"
+              ],
+              [
+                "Menu",
+                "Window ke oopar options ki fehrist"
+              ],
+              [
+                "Listbox",
+                "Cheezon ki fehrist dikhata aur intikhab karne deta hai"
+              ]
+            ]
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Layout management"
+          },
+          {
+            "type": "paragraph",
+            "text": "Layout management window ke andar widgets tarteeb deti aur har aik ki jagah aur size tay karti hai. Achha layout interface ko wazeh, asan aur munazzam banata hai. Tkinter ke teen layout methods hain, har aik widgets ko apne tareeqe se rakhta hai (Fig 4.2)."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Dilchasp baat",
+            "text": "Theek layout management applications ko saleeqe wala aur mukhtalif screen sizes par theek chalne wala banati hai."
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "pack(): widgets aik ke baad aik, amudi ya ufuqi rakhta hai. Saada aur chhoti applications ke liye achha.",
+              "grid(): widgets ko table ki tarah rows aur columns mein rakhta hai. Forms aur munazzam layouts ke liye munasib; columnspan aik widget ko kai columns par phailata hai.",
+              "place(): widgets ko bilkul x aur y coordinates par rakhta hai. Sab se zyada control deta hai magar ehtiyat se adjust karna parta hai."
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Misal: pack() (Python code; har .... ek 4-space indent hai)",
+            "text": "button1 = tk.Button(window, text=\"Button 1\", width=12)\nbutton2 = tk.Button(window, text=\"Button 2\", width=12)\nbutton3 = tk.Button(window, text=\"Button 3\", width=12)\nbutton1.pack(pady=10)\nbutton2.pack(pady=10)\nbutton3.pack(pady=10)"
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Misal: grid() (Python code; har .... ek 4-space indent hai)",
+            "text": "button1.grid(row=0, column=0, padx=10, pady=20)\nbutton2.grid(row=0, column=1, padx=10, pady=20)\n# Button 3 spans two columns\nbutton3.grid(row=1, column=0, columnspan=2, padx=10, pady=10)\n# Keep content centred\nwindow.grid_columnconfigure(0, weight=1)\nwindow.grid_columnconfigure(1, weight=1)"
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Misal: place() (Python code; har .... ek 4-space indent hai)",
+            "text": "button1.place(x=30, y=40)\nbutton2.place(x=170, y=85)\nbutton3.place(x=30, y=140)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Har misal frames wali misal ki tarah shuru hoti hai (tkinter import, unwan wali 300 x 220 window, teen buttons) aur window.mainloop() par khatam hoti hai. Aik hi container ke widgets ke liye pack() aur grid() na milayein: Tkinter dono poore nahi kar sakta aur program ruk sakta hai."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch4-fig-layouts",
+            "alt": "Teen chhoti windows. pack(): Button 1, 2 aur 3 oopar se neeche. grid(): row 0 mein Button 1 aur 2 saath saath, row 1 mein dono columns par phaila chaura Button 3, dashed grid lines. place(): Button 1 x=30, y=40 par, Button 2 x=170, y=85 par aur Button 3 x=30, y=140 par. Notes: pack tarteeb se; grid rows, columns aur columnspan; place bilkul jagah.",
+            "caption": "Teen layout managers (Fig 4.2 ke mutabiq asal khaaka).",
+            "long_description": "pack aur grid jagahein khud adjust karte hain; place nahi karta, is liye window ya font ka size badalne par place wali windows ghalat lag sakti hain."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Saaf aur responsive interfaces"
+          },
+          {
+            "type": "paragraph",
+            "text": "Saaf interface mein widgets saleeqe se aur darmiyan kafi jagah ke saath hote hain, aur text aur buttons wazeh aur parhne ke qabil hote hain. Responsive interface window ka size badalne par apna layout dhal leta hai, taake program mukhtalif screens par chale. Theek alignment aur saada design interface ko user-friendly banate hain."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Event handling aur interactivity"
+          },
+          {
+            "type": "paragraph",
+            "text": "Event handling program ko user ke amal ka jawab dene deti hai. Event aisa amal hai jaise button dabana ya text likhna. Program har waqt chalne ke bajaye events ka intezar karta hai; event hone par khaas kaam anjam deta hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Event-driven programming mein program event, jaise button click ya key press, hone tak khamosh rehta hai. Har event aik function se jura hota hai jo sirf event hone par chalta hai, jis se system ke wasail bachte hain; GUIs mein yeh tareeqa aam hai. User ka input entry fields aur buttons jaise widgets se aata hai; widgets functions se jure hote hain, aur widget use hone par us ka function chal kar input process karta hai."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Misal: saada login form"
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Misal: login form (Python code; har .... ek 4-space indent hai)",
+            "text": "import tkinter as tk\nfrom tkinter import messagebox\n\nwindow = tk.Tk()\nwindow.title(\"Login Form\")\nwindow.geometry(\"300x200\")\n\ndef check_login():\n....username = entry_user.get()\n....password = entry_pass.get()\n....if username == \"admin\" and password == \"1234\":\n........messagebox.showinfo(\"Success\", \"Login Successful!\")\n....else:\n........messagebox.showerror(\"Error\", \"Invalid Username or Password\")\n\ntk.Label(window, text=\"Username\").pack()\nentry_user = tk.Entry(window)\nentry_user.pack()\n\ntk.Label(window, text=\"Password\").pack()\nentry_pass = tk.Entry(window, show=\"*\")\nentry_pass.pack()\n\ntk.Button(window, text=\"Login\", command=check_login).pack(pady=10)\n\nwindow.mainloop()"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Entry widgets username aur password lete hain; show='*' likhte waqt password chhupata hai.",
+              "Login button data bhejta hai: command=check_login click par jaanch chalata hai.",
+              "check_login() get() se input parhta aur messagebox kamyabi ya ghalti dikhata hai.",
+              "Poora program event-driven programming par chalta hai."
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Asli passwords kabhi code mein na rakhein",
+            "text": "Seekhne ke liye program mein 'admin' aur '1234' likhna theek hai, lekin asli applications ko passwords kabhi code mein nahi rakhne chahiye. Woh har password ka mehfooz hash, aam taur par database mein, rakhti aur hashes ka muwazna karti hain."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch4-fig-login-events",
+            "alt": "Baen: chaar dabbon ka event loop kham-dar teeron se jura: mainloop() intezar, event: Login click, check_login() chalta, paigham dikhta, phir intezar. Daen: Login Form window, Username entry mein admin, Password entry mein chaar sitare, Login button aur sabz dabba 'Login Successful!'. Note: entry.get() likha hua parhta, show='*' password chhupata, aur button ka command= click ko check_login() se jorta.",
+            "caption": "Event loop aur login form (login misal ke mutabiq asal khaaka).",
+            "long_description": "User ke Login dabane tak program kuch nahi karta; phir jura function aik dafa chalta aur loop wapas intezar mein chala jata hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Class activity",
+            "text": "Event-driven khayalat samjhayein, phir aisa button banayein jo click par label ka text badal de."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Button command=greet ke bajaye command=greet() se banaya gaya. Kya ghalat hota hai?",
+            "explanation": "Qausain ke saath greet() button bante waqt aik dafa chal jata hai aur us ki wapas aane wali qeemat (aam taur par None) command ban jati hai, is liye click par kuch nahi hota. command= ko function khud, qausain ke baghair, dena chahiye."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Aise form ke liye kaun sa layout method use karenge jis mein labels aik column aur entry fields agle column mein hon? Kyun?",
+            "explanation": "grid(), kyunke yeh widgets rows aur columns mein rakhta hai, is liye har label aur us ki entry aik hi row mein seedh mein aate hain."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Fauri khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "GUI: basari interface; Tkinter: Python ka built-in toolkit (Tk(), widgets, mainloop()).",
+              "Widgets: Label, Button, Entry, Menu, Listbox; frames widgets ikatthe karte.",
+              "Layouts: pack (tarteeb), grid (rows aur columns), place (bilkul x, y).",
+              "Event-driven: command= widget ko function se jorta jo event par chalta."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

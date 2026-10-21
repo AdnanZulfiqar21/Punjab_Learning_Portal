@@ -75,6 +75,17 @@ REGISTRY: dict[str, BlockSpec] = {
         BlockSpec("example", 1, {"web": 1, "android": 1, "ios": 1}, True, "Worked example: problem, steps, answer."),
         BlockSpec("diagram", 1, {"web": 1, "android": 1, "ios": 1}, True, "Archived image with alt text and caption."),
         BlockSpec("handout", 1, {"web": 1, "android": 1, "ios": 1}, True, "Downloadable archived PDF handout."),
+        # Constrained original scenes (TOPIC-READER-01). Geometry lives in the app, not in a downloaded script.
+        # A still diagram in the same lesson is the readable fallback if the scene cannot start.
+        BlockSpec(
+            "scene", 1, {"web": 1, "android": 1, "ios": 1}, True, "Named original scene with a text alternative."
+        ),
+        # Biology XI pilot (MODEL3D-01): an original 3D model rendered to archived stills. Renderer 2 shows the poster
+        # and a drag-to-turn sequence of stills (native) or the live scene (web). Older clients show the reviewed
+        # fallback image, which every model3d block must carry.
+        BlockSpec(
+            "model3d", 1, {"web": 2, "android": 2, "ios": 2}, True, "Original 3D model: poster, turntable stills."
+        ),
     )
 }
 
@@ -203,7 +214,46 @@ class Handout(_Block):
     description: Short | None = None
 
 
-AnyBlock = Heading | Paragraph | ListBlock | Callout | Table | Equation | Checkpoint | Example | Diagram | Handout
+class Scene(_Block):
+    """A named original scene the app knows how to draw. Unknown names stay readable through alt text."""
+
+    type: Literal["scene"]
+    scene: Literal["bacterial_shapes"]
+    alt: Annotated[str, Field(min_length=3, max_length=500)]
+    caption: Short
+    long_description: Text | None = None
+
+
+class Model3D(_Block):
+    """An original three-dimensional model of a structure in the lesson (MODEL3D-01). `poster` is a rendered still;
+    `frames` are evenly spaced stills of one full turn, so a phone can be dragged round the model without a 3D engine;
+    `model` names the scene the web viewer can draw live. The text alternative carries the teaching."""
+
+    type: Literal["model3d"]
+    model: Annotated[str, Field(pattern=r"^[a-z0-9_]{2,40}$")]
+    poster_asset_version_id: AssetRef
+    frames: list[AssetRef] = Field(default_factory=list, max_length=48)
+    alt: Annotated[str, Field(min_length=3, max_length=500)]
+    caption: Short
+    long_description: Text | None = None
+    labels: list[Short] = Field(default_factory=list, max_length=20)  # the parts named on the render, in order
+    fallback: Fallback | None = None  # the poster as a still, for renderer 1 clients (§5.4 rule 4)
+
+
+AnyBlock = (
+    Heading
+    | Paragraph
+    | ListBlock
+    | Callout
+    | Table
+    | Equation
+    | Checkpoint
+    | Example
+    | Diagram
+    | Handout
+    | Scene
+    | Model3D
+)
 Block = Annotated[AnyBlock, Field(discriminator="type")]
 
 

@@ -1,0 +1,148 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 715" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <rect width="1200" height="715" fill="#ffffff"/>
+  <!-- Original diagram after topics 3.5 to 3.7: merge sort dividing and merging [14, 7, 3, 12], a binary search for 78, BFS and DFS orders on one tree, and notes on greedy, dynamic programming, backtracking, sorting and searching. -->
+  <defs>
+    <style>
+      .h{font-size:22px;font-weight:700;fill:#14181f;text-anchor:middle}
+      .k{font-size:16px;font-weight:700;fill:#14181f;text-anchor:middle}
+      .s{font-size:13px;fill:#4b5563;text-anchor:middle}
+      .t{font-size:12px;fill:#4b5563}
+      .b{font-weight:700;fill:#14181f}
+      .f{font-family:Consolas, Courier New, monospace;font-size:12px;fill:#14181f}
+      .r{font-size:11px;fill:#4b5563}
+      .l{font-size:12px;font-weight:700;fill:#14181f}
+    </style>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#4b5563"/></marker>
+    <marker id="p" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#d7322f"/></marker>
+    <marker id="bl" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#1f6fb5"/></marker>
+    <marker id="g" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#0f7a62"/></marker>
+  </defs>
+  <text class="h" x="600" y="32">Algorithm design techniques, sorting, searching and graph traversal</text>
+  <rect x="50" y="55" width="540" height="330" rx="12" fill="#fff4e2" stroke="#d98b2b" stroke-width="2"/>
+  <text class="k" x="320" y="83">Divide and conquer: merge sort (3.6.1)</text>
+  <rect x="265.0" y="100" width="110" height="32" rx="6" fill="#ffffff" stroke="#d98b2b" stroke-width="1.5"/>
+  <text class="r" x="281" y="120">[14, 7, 3, 12]</text>
+  <rect x="145.0" y="155" width="110" height="32" rx="6" fill="#ffffff" stroke="#d98b2b" stroke-width="1.5"/>
+  <text class="r" x="180" y="175">[14, 7]</text>
+  <rect x="385.0" y="155" width="110" height="32" rx="6" fill="#ffffff" stroke="#d98b2b" stroke-width="1.5"/>
+  <text class="r" x="420" y="175">[3, 12]</text>
+  <rect x="110.0" y="210" width="60" height="32" rx="6" fill="#ffffff" stroke="#d98b2b" stroke-width="1.5"/>
+  <text class="r" x="134" y="230">14</text>
+  <rect x="230.0" y="210" width="60" height="32" rx="6" fill="#ffffff" stroke="#d98b2b" stroke-width="1.5"/>
+  <text class="r" x="257" y="230">7</text>
+  <rect x="350.0" y="210" width="60" height="32" rx="6" fill="#ffffff" stroke="#d98b2b" stroke-width="1.5"/>
+  <text class="r" x="377" y="230">3</text>
+  <rect x="470.0" y="210" width="60" height="32" rx="6" fill="#ffffff" stroke="#d98b2b" stroke-width="1.5"/>
+  <text class="r" x="494" y="230">12</text>
+  <rect x="145.0" y="265" width="110" height="32" rx="6" fill="#e6f4ef" stroke="#0f7a62" stroke-width="1.5"/>
+  <text class="r" x="180" y="285">[7, 14]</text>
+  <rect x="385.0" y="265" width="110" height="32" rx="6" fill="#e6f4ef" stroke="#0f7a62" stroke-width="1.5"/>
+  <text class="r" x="420" y="285">[3, 12]</text>
+  <rect x="265.0" y="320" width="110" height="32" rx="6" fill="#e6f4ef" stroke="#0f7a62" stroke-width="1.5"/>
+  <text class="r" x="281" y="340">[3, 7, 12, 14]</text>
+  <path d="M320 132 L200 153" stroke="#4b5563" stroke-width="1.4" marker-end="url(#a)"/>
+  <path d="M320 132 L440 153" stroke="#4b5563" stroke-width="1.4" marker-end="url(#a)"/>
+  <path d="M200 187 L140 208" stroke="#4b5563" stroke-width="1.4" marker-end="url(#a)"/>
+  <path d="M200 187 L260 208" stroke="#4b5563" stroke-width="1.4" marker-end="url(#a)"/>
+  <path d="M440 187 L380 208" stroke="#4b5563" stroke-width="1.4" marker-end="url(#a)"/>
+  <path d="M440 187 L500 208" stroke="#4b5563" stroke-width="1.4" marker-end="url(#a)"/>
+  <path d="M140 242 L200 263" stroke="#0f7a62" stroke-width="1.4" marker-end="url(#g)"/>
+  <path d="M260 242 L200 263" stroke="#0f7a62" stroke-width="1.4" marker-end="url(#g)"/>
+  <path d="M380 242 L440 263" stroke="#0f7a62" stroke-width="1.4" marker-end="url(#g)"/>
+  <path d="M500 242 L440 263" stroke="#0f7a62" stroke-width="1.4" marker-end="url(#g)"/>
+  <path d="M200 297 L320 318" stroke="#0f7a62" stroke-width="1.4" marker-end="url(#g)"/>
+  <path d="M440 297 L320 318" stroke="#0f7a62" stroke-width="1.4" marker-end="url(#g)"/>
+  <text class="r" x="70" y="145" style="fill:#d98b2b">divide</text>
+  <text class="r" x="70" y="255" style="fill:#0f7a62">merge</text>
+  <rect x="610" y="55" width="540" height="330" rx="12" fill="#dbe9f5" stroke="#1f6fb5" stroke-width="2"/>
+  <text class="k" x="880" y="83">Binary search for 78 in a sorted list (3.7.2)</text>
+  <rect x="640" y="110" width="54" height="32" rx="6" fill="#ffffff" stroke="#1f6fb5" stroke-width="1.5"/>
+  <text class="r" x="661" y="130">21</text>
+  <rect x="702" y="110" width="54" height="32" rx="6" fill="#ffffff" stroke="#1f6fb5" stroke-width="1.5"/>
+  <text class="r" x="723" y="130">34</text>
+  <rect x="764" y="110" width="54" height="32" rx="6" fill="#fff4e2" stroke="#d98b2b" stroke-width="1.5"/>
+  <text class="l" x="784" y="130">43</text>
+  <rect x="826" y="110" width="54" height="32" rx="6" fill="#ffffff" stroke="#1f6fb5" stroke-width="1.5"/>
+  <text class="r" x="847" y="130">57</text>
+  <rect x="888" y="110" width="54" height="32" rx="6" fill="#ffffff" stroke="#1f6fb5" stroke-width="1.5"/>
+  <text class="r" x="909" y="130">66</text>
+  <rect x="950" y="110" width="54" height="32" rx="6" fill="#ffffff" stroke="#1f6fb5" stroke-width="1.5"/>
+  <text class="r" x="971" y="130">78</text>
+  <text class="l" x="1022" y="131" style="fill:#d98b2b">mid = 43</text>
+  <text class="r" x="640" y="162">step 1: 43 &lt; 78: search the right half</text>
+  <rect x="640" y="190" width="54" height="32" rx="6" fill="#eef0f3" stroke="#c4c9d0" stroke-width="1.5"/>
+  <text class="r" x="661" y="210">21</text>
+  <rect x="702" y="190" width="54" height="32" rx="6" fill="#eef0f3" stroke="#c4c9d0" stroke-width="1.5"/>
+  <text class="r" x="723" y="210">34</text>
+  <rect x="764" y="190" width="54" height="32" rx="6" fill="#eef0f3" stroke="#c4c9d0" stroke-width="1.5"/>
+  <text class="r" x="785" y="210">43</text>
+  <rect x="826" y="190" width="54" height="32" rx="6" fill="#ffffff" stroke="#1f6fb5" stroke-width="1.5"/>
+  <text class="r" x="847" y="210">57</text>
+  <rect x="888" y="190" width="54" height="32" rx="6" fill="#fff4e2" stroke="#d98b2b" stroke-width="1.5"/>
+  <text class="l" x="908" y="210">66</text>
+  <rect x="950" y="190" width="54" height="32" rx="6" fill="#ffffff" stroke="#1f6fb5" stroke-width="1.5"/>
+  <text class="r" x="971" y="210">78</text>
+  <text class="l" x="1022" y="211" style="fill:#d98b2b">mid = 66</text>
+  <text class="r" x="640" y="242">step 2: 66 &lt; 78: search the right half</text>
+  <rect x="640" y="270" width="54" height="32" rx="6" fill="#eef0f3" stroke="#c4c9d0" stroke-width="1.5"/>
+  <text class="r" x="661" y="290">21</text>
+  <rect x="702" y="270" width="54" height="32" rx="6" fill="#eef0f3" stroke="#c4c9d0" stroke-width="1.5"/>
+  <text class="r" x="723" y="290">34</text>
+  <rect x="764" y="270" width="54" height="32" rx="6" fill="#eef0f3" stroke="#c4c9d0" stroke-width="1.5"/>
+  <text class="r" x="785" y="290">43</text>
+  <rect x="826" y="270" width="54" height="32" rx="6" fill="#eef0f3" stroke="#c4c9d0" stroke-width="1.5"/>
+  <text class="r" x="847" y="290">57</text>
+  <rect x="888" y="270" width="54" height="32" rx="6" fill="#eef0f3" stroke="#c4c9d0" stroke-width="1.5"/>
+  <text class="r" x="909" y="290">66</text>
+  <rect x="950" y="270" width="54" height="32" rx="6" fill="#fff4e2" stroke="#d98b2b" stroke-width="1.5"/>
+  <text class="l" x="970" y="290">78</text>
+  <text class="l" x="1022" y="291" style="fill:#d98b2b">mid = 78</text>
+  <text class="r" x="640" y="322">step 3: 78 found at index 5</text>
+  <rect x="50" y="405" width="540" height="290" rx="12" fill="#e6f4ef" stroke="#0f7a62" stroke-width="2"/>
+  <text class="k" x="320" y="433">BFS and DFS on the same tree (3.7.3)</text>
+  <path d="M320 483 L200 520" stroke="#4b5563" stroke-width="1.6"/>
+  <path d="M320 483 L320 520" stroke="#4b5563" stroke-width="1.6"/>
+  <path d="M320 483 L440 520" stroke="#4b5563" stroke-width="1.6"/>
+  <path d="M200 550 L150 587" stroke="#4b5563" stroke-width="1.6"/>
+  <path d="M200 550 L250 587" stroke="#4b5563" stroke-width="1.6"/>
+  <path d="M320 550 L320 587" stroke="#4b5563" stroke-width="1.6"/>
+  <path d="M440 550 L440 587" stroke="#4b5563" stroke-width="1.6"/>
+  <circle cx="320" cy="468" r="15" fill="#e6f4ef" stroke="#0f7a62" stroke-width="1.6"/>
+  <text class="l" x="320" y="473" style="text-anchor:middle">0</text>
+  <circle cx="200" cy="535" r="15" fill="#e6f4ef" stroke="#0f7a62" stroke-width="1.6"/>
+  <text class="l" x="200" y="540" style="text-anchor:middle">1</text>
+  <circle cx="320" cy="535" r="15" fill="#e6f4ef" stroke="#0f7a62" stroke-width="1.6"/>
+  <text class="l" x="320" y="540" style="text-anchor:middle">2</text>
+  <circle cx="440" cy="535" r="15" fill="#e6f4ef" stroke="#0f7a62" stroke-width="1.6"/>
+  <text class="l" x="440" y="540" style="text-anchor:middle">3</text>
+  <circle cx="150" cy="602" r="15" fill="#e6f4ef" stroke="#0f7a62" stroke-width="1.6"/>
+  <text class="l" x="150" y="607" style="text-anchor:middle">4</text>
+  <circle cx="250" cy="602" r="15" fill="#e6f4ef" stroke="#0f7a62" stroke-width="1.6"/>
+  <text class="l" x="250" y="607" style="text-anchor:middle">5</text>
+  <circle cx="320" cy="602" r="15" fill="#e6f4ef" stroke="#0f7a62" stroke-width="1.6"/>
+  <text class="l" x="320" y="607" style="text-anchor:middle">6</text>
+  <circle cx="440" cy="602" r="15" fill="#e6f4ef" stroke="#0f7a62" stroke-width="1.6"/>
+  <text class="l" x="440" y="607" style="text-anchor:middle">7</text>
+  <text class="r" x="80" y="473">level 0</text>
+  <text class="r" x="80" y="540">level 1</text>
+  <text class="r" x="80" y="607">level 2</text>
+  <g class="r">
+    <text x="70" y="650">BFS (queue, level by level): 0, 1, 2, 3, 4, 5, 6, 7</text>
+    <text x="70" y="668">DFS (stack, deep first then back): 0, 1, 4, 5, 2, 6, 3, 7</text>
+  </g>
+  <rect x="610" y="405" width="540" height="290" rx="12" fill="#fde8e7" stroke="#d7322f" stroke-width="2"/>
+  <text class="k" x="880" y="433">More techniques and algorithms</text>
+  <g class="r">
+    <text x="630" y="462">greedy: take the best choice now (largest coin that fits);</text>
+    <text x="630" y="478">fast, but not always optimal</text>
+    <text x="630" y="494">dynamic programming: store answers to subproblems;</text>
+    <text x="630" y="510">Fibonacci 0, 1, 1, 2, 3, 5, 8, 13, 21, 34</text>
+    <text x="630" y="526">backtracking: build step by step, go back at a dead end</text>
+    <text x="630" y="558">bubble sort: swap adjacent pairs; [5, 3, 8, 4, 2] to [2, 3, 4, 5, 8]</text>
+    <text x="630" y="574">selection sort: swap the minimum to the front; O(n^2)</text>
+    <text x="630" y="590">linear search O(n): Karachi, Lahore, Islamabad (found)</text>
+    <text x="630" y="606">binary search O(log n): sorted lists only</text>
+    <text x="630" y="622">BFS and DFS: O(V + E)</text>
+  </g>
+  <text class="s" x="600" y="707" style="font-size:11px">Original diagram for this lesson; the textbook's pictures are not reproduced.</text>
+</svg>

@@ -12,7 +12,8 @@ import { FavouriteButton, LessonNote, SaveFormulaButton } from "@/components/stu
 import { getChapter, getLessons } from "@/lib/api";
 import { DISPLAY_COOKIE, parseDisplay } from "@/lib/display";
 import { CONTENT_STATE_TEXT, GRADE_LABEL, assessmentSummary, pageRange } from "@/lib/format";
-import { Badge, Breadcrumbs, Notice, SkeletonLines } from "@/components/ui";
+import { LANGUAGE_NAME, subjectKey } from "@/lib/learn-context";
+import { Breadcrumbs, Notice, SkeletonLines } from "@/components/ui";
 import { api, currentUser, deviceScope, features, sessionToken } from "@/lib/session";
 import { TIME_ZONE } from "@/lib/dates";
 
@@ -25,8 +26,8 @@ const LANGUAGES: [string, string][] = [
   ["ur", "اردو"],
   ["roman_ur", "Roman Urdu"],
 ];
-const LANGUAGE_NAME: Record<string, string> = { en: "English", ur: "Urdu", roman_ur: "Roman Urdu" };
 
+/** A chapter (pilot): a compact header, the topics first, then the chapter's published lessons and textbook details. */
 export default function ChapterPage({ params, searchParams }: PageProps<"/learn/chapter/[chapterId]">) {
   return (
     <Suspense fallback={<SkeletonLines lines={8} label="Loading chapter" />}>
@@ -47,7 +48,7 @@ async function ChapterView({ id, lang }: { id: string; lang: string }) {
   const state = CONTENT_STATE_TEXT[ch.content_state] ?? { label: ch.content_state, detail: "" };
   const exercises = assessmentSummary(ch.assessment_counts);
   return (
-    <article className="space-y-8">
+    <article className="space-y-8" data-subject={subjectKey(bc.subject.code)}>
       <div>
         <Breadcrumbs
           items={[
@@ -64,16 +65,11 @@ async function ChapterView({ id, lang }: { id: string; lang: string }) {
         {ch.main_concept && <p className="mt-3 max-w-3xl text-muted">{ch.main_concept}</p>}
       </div>
 
-      <Notice title={state.label}>{state.detail}</Notice>
       {ch.status !== "complete" && (
         <Notice tone="warn" title={`This chapter is ${ch.status} in the supplied textbook file`}>
           Some pages are missing from the source. Topics from missing pages are not listed.
         </Notice>
       )}
-
-      <Suspense fallback={<SkeletonLines lines={3} label="Loading lessons" />}>
-        <Lessons chapterId={ch.id} topics={ch.topics} lang={lang} />
-      </Suspense>
 
       <section aria-labelledby="topics-heading" className="space-y-3">
         <h2 id="topics-heading" className="text-lg font-semibold">
@@ -88,20 +84,11 @@ async function ChapterView({ id, lang }: { id: string; lang: string }) {
         )}
       </section>
 
-      {ch.key_terms.length > 0 && (
-        <section aria-labelledby="terms-heading" className="space-y-3">
-          <h2 id="terms-heading" className="text-lg font-semibold">
-            Key terms
-          </h2>
-          <ul className="flex flex-wrap gap-2">
-            {ch.key_terms.slice(0, 40).map((term) => (
-              <li key={term} className="rounded-full border border-border bg-surface px-3 py-1 text-sm">
-                {term}
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
+      <Notice title={state.label}>{state.detail}</Notice>
+
+      <Suspense fallback={<SkeletonLines lines={3} label="Loading lessons" />}>
+        <Lessons chapterId={ch.id} topics={ch.topics} lang={lang} />
+      </Suspense>
 
       <section aria-labelledby="source-heading" className="space-y-2 rounded-xl border border-border bg-surface p-4 text-sm">
         <h2 id="source-heading" className="font-semibold">
@@ -118,16 +105,6 @@ async function ChapterView({ id, lang }: { id: string; lang: string }) {
               <dd>{exercises.join(" · ")}</dd>
             </>
           )}
-          {ch.slo_codes && !/not printed|unverified/i.test(ch.slo_codes) && (
-            <>
-              <dt className="text-muted">Learning outcome codes</dt>
-              <dd>{ch.slo_codes}</dd>
-            </>
-          )}
-          <dt className="text-muted">Source reference</dt>
-          <dd className="font-mono text-xs">
-            {ch.source.source_id} · PDF pages {pageRange(ch.source.pdf_start, ch.source.pdf_end)}
-          </dd>
         </dl>
       </section>
 
@@ -160,6 +137,7 @@ function topicTitles(nodes: TopicNode[], out = new Map<string, string>()): Map<s
 const megabytes = (n: number) => (n < 100_000 ? `${Math.max(1, Math.round(n / 1000))} KB` : `${(n / 1_000_000).toFixed(1)} MB`);
 const published = (iso: string) => new Date(iso).toLocaleDateString("en-GB", { dateStyle: "medium", timeZone: TIME_ZONE });
 
+/** The chapter's published, independently reviewed lessons (P07), read in place; drafts never appear here. */
 async function Lessons({ chapterId, topics, lang }: { chapterId: string; topics: TopicNode[]; lang: string }) {
   const res = await getLessons(chapterId, lang);
   const lessons: Lesson[] = res.ok ? res.data : [];
@@ -214,7 +192,7 @@ async function Lessons({ chapterId, topics, lang }: { chapterId: string; topics:
       {lessons.length === 0 ? (
         <p className="text-muted">
           No reviewed lessons are published for this chapter yet. Lessons appear here only after an independent subject
-          reviewer approves them. Until then, use the topic outline and your textbook pages below.
+          reviewer approves them. Until then, use the topic outline and your textbook pages.
         </p>
       ) : (
         lessons.map((l, i) => (
@@ -272,15 +250,9 @@ async function Lessons({ chapterId, topics, lang }: { chapterId: string; topics:
               </form>
             )}
             {notes.has(l.id) && user && <LessonNote lessonId={l.id} scope={deviceScope(user.me.id)} initial={notes.get(l.id)!} />}
-            <p className="border-t border-border pt-3 text-sm text-muted">
-              Textbook pages (PDF):{" "}
-              {(l.source_refs as { pdf_from: number; pdf_to: number }[])
-                .map((r) => (r.pdf_from === r.pdf_to ? `${r.pdf_from}` : `${r.pdf_from}–${r.pdf_to}`))
-                .join(", ")}
-            </p>
             {i + 1 < lessons.length && (
               // P11.S2.T1: one lesson leads to the next, in the reviewed order of the chapter.
-              <p className="text-sm">
+              <p className="border-t border-border pt-3 text-sm">
                 <a href={`#lesson-${lessons[i + 1].id}`} className="font-medium text-accent underline underline-offset-2">
                   Next lesson: {lessons[i + 1].title}
                 </a>
@@ -302,7 +274,7 @@ async function Topics({ topics }: { topics: TopicNode[] }) {
 
 function TopicList({ topics, favourites }: { topics: TopicNode[]; favourites: Set<string> | null }) {
   return (
-    <ol className="divide-y divide-border rounded-xl border border-border bg-surface">
+    <ol className="divide-y divide-border overflow-hidden rounded-xl border border-border bg-surface">
       {topics.map((t) => (
         <TopicItem key={t.id} topic={t} favourites={favourites} />
       ))}
@@ -310,60 +282,42 @@ function TopicList({ topics, favourites }: { topics: TopicNode[]; favourites: Se
   );
 }
 
+/** Each topic opens its own lesson page. The outline (if any) folds under it; the link never sits inside the toggle. */
 function TopicItem({ topic, favourites }: { topic: TopicNode; favourites: Set<string> | null }) {
   const star = favourites && (
     <FavouriteButton topicId={topic.id} label={topic.number ? `${topic.number} ${topic.title}` : topic.title} initial={favourites.has(topic.id)} />
   );
-  const hasDetail = topic.children.length > 0 || topic.points.length > 0;
-  const title = (
-    <span className="flex flex-1 items-baseline gap-3">
-      {topic.number ? (
-        <span className="w-14 shrink-0 font-mono text-sm text-muted">{topic.number}</span>
-      ) : (
-        <span className="w-14 shrink-0" aria-hidden="true" />
-      )}
-      <span className="flex-1">{topic.title}</span>
-      {topic.pdf_page != null && (
-        <span title="Page index in the textbook PDF (may differ from the printed page number)">
-          <Badge>PDF p. {topic.pdf_page}</Badge>
-        </span>
-      )}
-    </span>
-  );
-  if (!hasDetail)
-    return (
-      <li className="flex items-start gap-2 px-4 py-3">
-        {title}
-        {star}
-      </li>
-    );
+  const hasDetail = topic.points.length > 0 || topic.children.length > 0;
   return (
-    <li className="flex items-start gap-2 pr-4">
-      <details className="group flex-1 py-3 pl-4">
-        <summary className="flex cursor-pointer list-none items-baseline gap-2">
-          <span aria-hidden="true" className="text-muted transition-transform group-open:rotate-90">
-            ›
-          </span>
-          {title}
-        </summary>
-        <div className="mt-2 ml-6 space-y-2">
-          {topic.points.length > 0 && (
-            <ul className="list-disc space-y-1 pl-5 text-sm text-muted">
-              {topic.points.map((p) => (
-                <li key={p}>{p}</li>
-              ))}
-            </ul>
-          )}
-          {topic.children.length > 0 && (
-            <ol className="divide-y divide-border rounded-lg border border-border">
-              {topic.children.map((c) => (
-                <TopicItem key={c.id} topic={c} favourites={favourites} />
-              ))}
-            </ol>
-          )}
-        </div>
-      </details>
-      <span className="pt-2.5">{star}</span>
+    <li className="px-4 py-2">
+      <div className="flex items-center gap-2">
+        <Link href={`/learn/topic/${topic.id}`} className="flex min-w-0 flex-1 items-baseline gap-3 py-1.5 hover:text-accent">
+          {topic.number && <span className="w-12 shrink-0 text-sm font-semibold text-accent">{topic.number}</span>}
+          <span className="font-medium">{topic.title}</span>
+        </Link>
+        {star}
+      </div>
+      {hasDetail && (
+        <details className="text-sm">
+          <summary className="cursor-pointer list-none py-1 pl-15 text-muted hover:text-foreground">Outline</summary>
+          <div className="mt-1 ml-15 space-y-2">
+            {topic.points.length > 0 && (
+              <ul className="list-disc space-y-1 pl-5 text-muted">
+                {topic.points.map((p) => (
+                  <li key={p}>{p}</li>
+                ))}
+              </ul>
+            )}
+            {topic.children.length > 0 && (
+              <ol className="divide-y divide-border rounded-lg border border-border">
+                {topic.children.map((c) => (
+                  <TopicItem key={c.id} topic={c} favourites={favourites} />
+                ))}
+              </ol>
+            )}
+          </div>
+        </details>
+      )}
     </li>
   );
 }

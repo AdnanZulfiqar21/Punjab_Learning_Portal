@@ -1,0 +1,285 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH3-3.2",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch3",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch3/3.2",
+      "title": "3.2 Core Concepts of OOP",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 37,
+          "pdf_to": 46,
+          "note": "Topic 3.2 (PDF 37-45), with its Do You Know, Tidbits, Class Activity and code listings checked against the page images; Figs 3.1 to 3.6 redrawn as four figures. The super() and payment code examples are added. Short Q2-10 and Long Q1-8 are answered here."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "OOP has core concepts that make programs organised, reusable and easier to manage: classes and objects, encapsulation, inheritance and polymorphism."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Classes and objects: representing real-world entities"
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Do you know?",
+            "text": "A class is like a blueprint, while an object is the real thing created from that blueprint."
+          },
+          {
+            "type": "paragraph",
+            "text": "A class is a blueprint or template that defines the properties (attributes) and actions (methods) of an entity. An object is an instance of a class that holds actual values for its attributes (Fig 3.1). Classes and objects let programmers model real-world entities and keep data and its related functions together, which makes programs more structured."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch3-fig-class-object",
+            "alt": "On the left a class box, class Person, lists attributes name, age and gender and methods eat(), sleep() and work(). Arrows labelled p1 = Person(...) and p2 = Person(...) lead to two object boxes: object p1 with name Bob, age 34, gender Male, and object p2 with name Jenny, age 27, gender Female; each has the same three methods. A note says one class, many objects, each with its own values.",
+            "caption": "A class and two of its objects (original diagram after Fig 3.1).",
+            "long_description": "The class says what every Person has and can do; each object fills in its own values. Creating an object from a class is called instantiation."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Example: a Student class (Python code; each .... is one 4-space indent)",
+            "text": "class Student:\n....def __init__(self, name):\n........self.name = name\n\n....def display(self):\n........print(\"Student Name:\", self.name)\n\n# Creating objects\nobject1 = Student(\"Ali\")\nobject2 = Student(\"Ahmed\")\n\n# Using objects\nobject1.display()\nobject2.display()"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "class Student defines a blueprint for students.",
+              "__init__ is the constructor: it runs automatically when an object is created and sets the name.",
+              "self.name stores each student's name; self refers to the object itself.",
+              "display() prints the student's name.",
+              "object1 and object2 are two different Student objects, each with its own data (Ali, Ahmed); the output is 'Student Name: Ali' then 'Student Name: Ahmed'."
+            ]
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Encapsulation"
+          },
+          {
+            "type": "callout",
+            "tone": "definition",
+            "title": "Encapsulation",
+            "text": "Encapsulation means bundling data (variables) and methods (functions) into a single unit, the class, and restricting direct access to the data."
+          },
+          {
+            "type": "paragraph",
+            "text": "Unlike Java or C++, Python has no strict 'private' or 'protected' keywords; it uses naming conventions to signal how data should be accessed. Encapsulation protects data from unwanted access, improves security, makes code easier to manage and allows only controlled changes. Think of a bank account: your balance is hidden, you can reach it only through deposit() and withdraw(), and you cannot change it directly."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Tidbit",
+            "text": "Hide the data and control access using methods."
+          },
+          {
+            "type": "table",
+            "caption": "Levels of access control in Python",
+            "header": [
+              "Level",
+              "Syntax",
+              "Meaning"
+            ],
+            "rows": [
+              [
+                "Public",
+                "self.attribute_name",
+                "Accessible from anywhere, inside or outside the class; all members are public by default"
+              ],
+              [
+                "Protected",
+                "self._attribute_name (one underscore)",
+                "Meant for use inside the class and its subclasses; a convention, not enforced"
+              ],
+              [
+                "Private",
+                "self.__attribute_name (two underscores)",
+                "Hard to reach from outside: Python's name mangling changes the internal name to prevent accidental access"
+              ]
+            ]
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch3-fig-encapsulation",
+            "alt": "Outside code (a user) reaches the class BankAccount only through its public methods deposit(), withdraw() and get_balance(), shown by a green arrow labelled allowed. Inside, the private data self.__balance (two underscores) is reached only from the methods. A red dashed arrow from the user straight to the data ends in a cross, labelled direct access blocked. A strip below lists public name, protected _name and private __name.",
+            "caption": "Encapsulation in a bank account class (original diagram after Fig 3.2).",
+            "long_description": "The methods are the only door to the data, so every change can be checked; for example, withdraw() refuses to take out more than the balance."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Example: encapsulation in a BankAccount (Python code; each .... is one 4-space indent)",
+            "text": "class BankAccount:\n....def __init__(self, balance):\n........self.__balance = balance      # private variable\n\n....def deposit(self, amount):\n........self.__balance += amount\n\n....def withdraw(self, amount):\n........if amount <= self.__balance:\n............self.__balance -= amount\n........else:\n............print(\"Insufficient balance\")\n\n....def get_balance(self):\n........return self.__balance\n\n# Usage\naccount = BankAccount(1000)\naccount.deposit(500)\naccount.withdraw(300)\nprint(account.get_balance())      # Output: 1200\n\n# Direct access will fail\n# print(account.__balance)        # Error"
+          },
+          {
+            "type": "paragraph",
+            "text": "The balance starts at 1000; depositing 500 gives 1500, and withdrawing 300 leaves 1200. Trying to read account.__balance from outside raises an AttributeError, because name mangling has renamed the variable inside the class."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Inheritance: reusing and extending functionality"
+          },
+          {
+            "type": "paragraph",
+            "text": "Inheritance lets a class take the properties and methods of another class. The new class, called a subclass or child class, can add to or modify the features of the parent class (superclass). Inheritance promotes code reuse, reduces redundancy and makes it easier to extend a program without rewriting existing code. A child class is defined by writing the parent's name in brackets: class Child(Parent):."
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Single inheritance: a child class inherits from exactly one parent class (Fig 3.3). It is the most basic form.",
+              "Multiple inheritance: a child class inherits from more than one parent class and combines their behaviour, for example a Smartphone class inheriting from both Camera and Computer (Fig 3.4).",
+              "Multilevel inheritance: a class inherits from a class that is itself derived, forming a chain like a family tree (grandparent, parent, child); the 'grandchild' gets the methods and attributes of both its parent and its grandparent (Fig 3.5)."
+            ]
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch3-fig-inheritance",
+            "alt": "Three panels of UML-style class boxes, each child joined to its parent by a line ending in a hollow arrowhead at the parent. Single: Dog (child) inherits from Animal (parent); class Dog(Animal). Multiple: Child inherits from Father (parent 1) and Mother (parent 2); class Child(Father, Mother). Multilevel: ElectricCar (child) inherits from Car (parent), which inherits from Vehicle (grandparent).",
+            "caption": "Single, multiple and multilevel inheritance (original diagram after Figs 3.3 to 3.5).",
+            "long_description": "In every case the arrow points from the class that inherits to the class it inherits from, and the child can use everything above it."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Example: single inheritance (Python code; each .... is one 4-space indent)",
+            "text": "# Parent class (superclass)\nclass Animal:\n....def __init__(self, name):\n........self.name = name\n\n....def eat(self):\n........print(f\"{self.name} is eating.\")\n\n# Child class (subclass) inheriting from Animal\nclass Dog(Animal):\n....def bark(self):\n........print(f\"{self.name} says Woof!\")\n\nmy_dog = Dog(\"Buddy\")\nmy_dog.eat()     # Output: Buddy is eating.\nmy_dog.bark()    # Output: Buddy says Woof!"
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Tidbit",
+            "text": "self is the reference to the current object; Python passes it automatically to instance methods."
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Parent class (base class): the class whose properties are inherited; Animal above.",
+              "Child class (derived class): the class that inherits; Dog above.",
+              "Method overriding: a child class can give its own version of a method its parent already has. Inside it, super() calls the parent's version."
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Added example: overriding with super() (Python code; each .... is one 4-space indent)",
+            "text": "class Puppy(Dog):\n....def eat(self):\n........super().eat()                     # parent's version first\n........print(f\"{self.name} wants more milk.\")\n\nPuppy(\"Moti\").eat()\n# Output: Moti is eating.\n#         Moti wants more milk."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Example: multiple inheritance (Python code; each .... is one 4-space indent)",
+            "text": "class Father:\n....def skill1(self):\n........print(\"Father's skill: Gardening\")\n\nclass Mother:\n....def skill2(self):\n........print(\"Mother's skill: Cooking\")\n\n# Derived class inheriting from two base classes\nclass Child(Father, Mother):\n....def own_skill(self):\n........print(\"Child's skill: Coding\")\n\nc = Child()\nc.skill1()      # Father's method\nc.skill2()      # Mother's method\nc.own_skill()   # its own method"
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Example: multilevel inheritance (Python code; each .... is one 4-space indent)",
+            "text": "# Base class (grandparent)\nclass Vehicle:\n....def start_engine(self):\n........print(\"Engine started.\")\n\n# Intermediate class (parent)\nclass Car(Vehicle):\n....def drive(self):\n........print(\"Car is driving.\")\n\n# Derived class (child)\nclass ElectricCar(Car):\n....def charge(self):\n........print(\"Battery is charging.\")\n\nmy_tesla = ElectricCar()\nmy_tesla.start_engine()   # inherited from Vehicle\nmy_tesla.drive()          # inherited from Car\nmy_tesla.charge()         # defined in ElectricCar"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Class activity",
+            "text": "Create a Vehicle class and extend it with Car and Bike subclasses. Add a unique method to each subclass and demonstrate inheritance."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Polymorphism"
+          },
+          {
+            "type": "paragraph",
+            "text": "Polymorphism means 'many forms'. The same method, function or operator can behave differently depending on the object it works with, which makes code more flexible and reusable. For example, a payment system may offer credit card, UPI (an instant bank-transfer service; Pakistan's equivalent is Raast), net banking and wallet payments. All of them use a common method, processPayment(), but each has its own implementation; net banking, for instance, redirects the user to the bank's login page. The method name stays the same while the action changes with the payment type."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Added example: one method name, different payment actions (Python code; each .... is one 4-space indent)",
+            "text": "class Payment:\n....def process_payment(self, amount):\n........print(\"Processing\", amount)\n\nclass CreditCard(Payment):\n....def process_payment(self, amount):\n........print(\"Charging card:\", amount)\n\nclass NetBanking(Payment):\n....def process_payment(self, amount):\n........print(\"Redirecting to bank login for\", amount)\n\nfor method in [CreditCard(), NetBanking()]:\n....method.process_payment(500)"
+          },
+          {
+            "type": "paragraph",
+            "text": "There are two main types of polymorphism, compile-time and runtime (Fig 3.6)."
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "Compile-time polymorphism: the method to run is chosen during compilation, usually through method or operator overloading, as in Java or C++. Python does not support true overloading by function signature: because it is dynamically typed, one function can accept arguments of different types. Similar behaviour is achieved with default arguments, variable-length arguments (*args, **kwargs) or conditions inside the function.",
+              "Runtime polymorphism (overriding): the behaviour is decided while the program runs, according to the object calling the method. It happens through method overriding, when a child class provides its own version of a method already defined in the parent."
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Example: overloading imitated with default and variable-length arguments (Python code; each .... is one 4-space indent)",
+            "text": "class Calculator:\n....def multiply(self, a=1, b=1, *args):\n........result = a * b\n........for num in args:\n............result *= num\n........return result\n\ncalc = Calculator()\nprint(calc.multiply())          # 1   (default arguments)\nprint(calc.multiply(4))         # 4\nprint(calc.multiply(2, 3))      # 6   (more arguments)\nprint(calc.multiply(2, 3, 4))   # 24"
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Example: runtime polymorphism by overriding (Python code; each .... is one 4-space indent)",
+            "text": "class Animal:\n....def sound(self):\n........return \"Some generic sound\"\n\nclass Dog(Animal):\n....def sound(self):\n........return \"Bark\"\n\nclass Cat(Animal):\n....def sound(self):\n........return \"Meow\"\n\nanimals = [Dog(), Cat(), Animal()]\nfor animal in animals:\n....print(animal.sound())\n# Output: Bark, Meow, Some generic sound (one per line)"
+          },
+          {
+            "type": "paragraph",
+            "text": "The same call, animal.sound(), gives a different result for a Dog, a Cat or a plain Animal, and the choice is made at runtime. This dynamic behaviour makes Python well suited to runtime polymorphism."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch3-fig-polymorphism",
+            "alt": "A tree: polymorphism splits into compile-time (method overloading) and runtime (method overriding). Under compile-time, a box notes that Python has no true overloading and one method takes different inputs: multiply() gives 1, multiply(4) gives 4, multiply(2, 3) gives 6 and multiply(2, 3, 4) gives 24. Under runtime, the same call animal.sound() gives Bark for Dog, Meow for Cat and Some generic sound for Animal.",
+            "caption": "Compile-time and runtime polymorphism (original diagram after Fig 3.6).",
+            "long_description": "Overloading changes behaviour by the arguments given; overriding changes it by the kind of object. In both, the calling code uses one name."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "What is the purpose of __init__ in a Python class?",
+            "explanation": "__init__ is the constructor. It runs automatically when an object is created and sets the object's starting attribute values, such as self.name = name."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "In the BankAccount class, what would happen if a program called account.withdraw(2000) when the balance is 1200? Why is this an example of encapsulation?",
+            "explanation": "It prints 'Insufficient balance' and the balance stays 1200. The private balance can change only through methods that check the request, so invalid changes are blocked."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "How do inheritance, encapsulation and polymorphism together lead to better software design?",
+            "explanation": "Encapsulation keeps each class's data safe and its interface clear; inheritance reuses and extends tested classes instead of copying code; polymorphism lets one piece of code work with many related classes. The result is modular code that is easier to extend, test and maintain."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Quick recap"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Class: blueprint (attributes and methods); object: instance with its own values; __init__ sets them.",
+              "Encapsulation: data and methods in one class; public name, protected _name, private __name.",
+              "Inheritance: single, multiple, multilevel; overriding and super().",
+              "Polymorphism: compile-time (overloading, imitated in Python) and runtime (overriding)."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

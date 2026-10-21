@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH1-1.13-RU",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch1",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch1/1.13",
+      "title": "1.13 Network load balancing (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-CS-CH1-1.13",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 19,
+          "pdf_to": 19,
+          "note": "Roman Urdu explanation of network load balancing (PDF 19)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Network load balancing traffic ko kai servers ya links mein baant kar sambhalti hai, taake koi aik device had se zyada bojh tale na aaye. Yeh raftar aur aitbaar behtar karti, network ko zyada users sambhalne deti, aur bare networks aur data centres mein use hoti hai."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Load balancing ke fawaid"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Network ki tez raftar aur jawab ka waqt.",
+              "Server fail hone ka kam khatra: aik server fail ho to baqi kaam karte rehte hain.",
+              "User ka behtar tajurba.",
+              "Zyada traffic asani se sambhalti hai.",
+              "Zyada aitbaar aur dastiyabi (availability)."
+            ]
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Load balancing ke bunyadi tareeqe"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Round Robin: requests bari bari servers ko bhejta hai (1, 2, 3, 1, 2, 3, ...).",
+              "Least Connection: naya traffic sab se kam masroof server ko bhejta hai.",
+              "IP Hash: user ke IP address se tay karta hai ke kaun sa server traffic sambhale, is liye wahi user aam taur par wahi server tak pohanchta hai."
+            ]
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch1-fig-load-balancing",
+            "alt": "Baen chaar user computers sab sabz 'load balancer' dabbe se jure, jo server 1, server 2 aur server 3 ko sabz teer bhejta. Saath ke dabbe mein tareeqe: Round Robin (1, 2, 3, 1, 2, 3 ...), Least Connection (sab se kam masroof server ko) aur IP Hash (user ka IP address server chunta). Note: aik server fail ho to baqi kaam karte rehte.",
+            "caption": "Teen servers mein load balancing (1.13 ke mutabiq asal khaaka).",
+            "long_description": "Balancer users aur servers ke darmiyan khara hota aur har request par tay karta hai ke kaun sa server jawab de."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Kaun sa load balancing tareeqa un servers ke liye munasib hoga jo aksar bohat mukhtalif muddat ke liye masroof rehte hain, aur kyun?",
+            "explanation": "Least Connection, kyunke yeh sirf bari bari dene ke bajaye dekhta hai ke har server is waqt kitna masroof hai, is liye lambe kaamon mein phansa server mazeed kaam nahi pata."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Fauri khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Load balancing traffic kai servers ya links par phailati.",
+              "Fawaid: raftar, kam failures, zyada users, aitbaar.",
+              "Tareeqe: Round Robin, Least Connection, IP Hash."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
