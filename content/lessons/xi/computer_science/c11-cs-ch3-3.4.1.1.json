@@ -57,7 +57,7 @@
           },
           {
             "type": "paragraph",
-            "text": "In the worst case for O(n), the student we want is the very last on the list, so all n must be checked. In the guessing game, each answer 'higher' or 'lower' halves the range, so the number of guesses is the number of halvings, about log2 n. Constant time O(1) appears as a flat line on a graph of time against input size."
+            "text": "In the worst case for O(n), the student we want is the very last on the list, so all n must be checked. In the guessing game, each answer 'higher' or 'lower' narrows the range, and the number of guesses is proportional to the number of times the range can be halved, which is logarithmic. Constant time O(1) appears as a flat line on a graph of time against input size."
           },
           {
             "type": "diagram",
@@ -65,24 +65,6 @@
             "alt": "Left: a Venn diagram with a P circle inside a larger NP oval, an NP-hard oval overlapping NP on the right, and the overlap labelled NP-complete, with examples sorting, Sudoku, knapsack and TSP and notes on solvable and tractable problems. Right: sketched curves of time against input size for O(1) flat, O(log n) rising slowly, O(n) straight and O(n^2) curving up steeply, with examples.",
             "caption": "Complexity classes and Big O growth (original diagram after topics 3.3 and 3.4).",
             "long_description": "P, the problems solved quickly such as sorting, lies inside NP, the problems whose given solutions can be checked quickly such as Sudoku. NP-hard problems such as the Travelling Salesman Problem are at least as hard as the hardest NP problems, and the overlap of NP and NP-hard is NP-complete, for example the knapsack problem; the picture assumes P is not equal to NP, which is unproved. On the graph, the O(1) line stays flat, O(log n) rises slowly, O(n) rises in a straight line and O(n^2) bends sharply upward, so for large inputs the quadratic algorithm becomes far slower than the others."
-          },
-          {
-            "type": "checkpoint",
-            "mode": "self_check",
-            "prompt": "For 1,000 students, about how many guesses does the halving game need, and how many pair comparisons does the O(n^2) task need?",
-            "explanation": "About 10 guesses, since 2^10 = 1024; and 1000 x 999 / 2 = 499,500 comparisons."
-          },
-          {
-            "type": "heading",
-            "level": 2,
-            "text": "Quick recap"
-          },
-          {
-            "type": "list",
-            "ordered": false,
-            "items": [
-              "Big O: an upper bound on growth; O(1) < O(log n) < O(n) < O(n^2) for large n."
-            ]
           }
         ]
       }

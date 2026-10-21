@@ -50,42 +50,6 @@
             "tone": "note",
             "title": "Python code (each .... is one 4-space indent)",
             "text": "party_list = [\"Invite friends\", \"Buy decorations\", \"Buy cold drinks\"]\nif \"Buy cold drinks\" in party_list:\n....print(\"Buy cold drinks is on the list.\")\nindex = party_list.index(\"Buy decorations\")\nprint(\"Index of Buy decorations:\", index)    # 1"
-          },
-          {
-            "type": "checkpoint",
-            "mode": "self_check",
-            "prompt": "Which function adds an item at the end of a list (MCQ 1)? What does 'in' do with a list (MCQ 2)?",
-            "explanation": "(b) append(); (c) it checks whether an item exists in the list."
-          },
-          {
-            "type": "checkpoint",
-            "mode": "self_check",
-            "prompt": "Explain how extend() works, with an example (short question 1).",
-            "explanation": "extend() adds every item of another list (or sequence) to the end of the list, one by one: a = [1, 2]; a.extend([3, 4]) makes a = [1, 2, 3, 4]. By contrast append([3, 4]) would add the whole list as one item: [1, 2, [3, 4]]."
-          },
-          {
-            "type": "checkpoint",
-            "mode": "self_check",
-            "prompt": "Explain the issues that can arise when two variables reference the same list, with an example (short question 2).",
-            "explanation": "b = a does not copy a list; both names refer to the same list, so a change through one name appears through the other: a = [1, 2]; b = a; b.append(3) makes a = [1, 2, 3] too, which can cause unexpected bugs. To get an independent copy use b = a.copy() or b = list(a). This is general Python knowledge; the chapter does not cover it."
-          },
-          {
-            "type": "checkpoint",
-            "mode": "self_check",
-            "prompt": "Long question 2: start with tasks = [design, development, testing, deployment]; add 'review' at the end, insert 'planning' at the third position, change 'testing' to 'quality assurance', remove 'development', remove the task at index 1, find the index of 'deployment', and print the final list and its length.",
-            "explanation": "tasks.append(\"review\"); tasks.insert(2, \"planning\"); tasks[tasks.index(\"testing\")] = \"quality assurance\"; tasks.remove(\"development\"); tasks.pop(1) removes 'planning'; tasks.index(\"deployment\") is 2; the final list is design, quality assurance, deployment, review, and len(tasks) is 4."
-          },
-          {
-            "type": "heading",
-            "level": 2,
-            "text": "Quick recap"
-          },
-          {
-            "type": "list",
-            "ordered": false,
-            "items": [
-              "Insert: insert(), append(), extend(); delete: remove(), pop(), clear(); search: in, index()."
-            ]
           }
         ]
       }
