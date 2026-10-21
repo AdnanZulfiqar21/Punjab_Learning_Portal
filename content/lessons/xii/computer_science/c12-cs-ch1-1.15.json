@@ -36,7 +36,7 @@
               ],
               [
                 "Incremental backup",
-                "Only the data changed since the last backup of any kind"
+                "Only the changed data"
               ],
               [
                 "Differential backup",
@@ -47,13 +47,6 @@
           {
             "type": "paragraph",
             "text": "Backups can be stored on hard drives or in cloud storage."
-          },
-          {
-            "type": "diagram",
-            "$asset": "c12-cs-ch1-fig-backup-types",
-            "alt": "A grid with days Sunday to Wednesday across the top. Row full every day: an 'all data' box each day. Row incremental: 'all data' on Sunday, then small equal boxes 'Mon only', 'Tue only', 'Wed only'. Row differential: 'all data' on Sunday, then 'since Sun' boxes that grow wider each day. A note: incremental is smallest and fastest but restoring needs the full backup and every later piece; differential grows each day but restoring needs only the full backup and the latest differential.",
-            "caption": "Full, incremental and differential backups over four days (original diagram).",
-            "long_description": "The choice is a trade-off between the time and space each backup takes and how many pieces are needed to restore the data."
           },
           {
             "type": "heading",
@@ -68,26 +61,6 @@
               "Recovery software helps get deleted files back.",
               "System restore can recover system data.",
               "Professionals can recover data from damaged devices."
-            ]
-          },
-          {
-            "type": "checkpoint",
-            "mode": "self_check",
-            "prompt": "A full backup is taken on Sunday and incremental backups on Monday, Tuesday and Wednesday. The disk fails on Thursday. Which backups are needed to restore the data?",
-            "explanation": "Sunday's full backup and all three incremental backups (Monday, Tuesday and Wednesday), applied in order. With differential backups, only Sunday's full backup and Wednesday's differential would be needed."
-          },
-          {
-            "type": "heading",
-            "level": 2,
-            "text": "Quick recap"
-          },
-          {
-            "type": "list",
-            "ordered": false,
-            "items": [
-              "Backup: a copy of important data; recovery: getting it back.",
-              "Full: everything; incremental: changes since the last backup; differential: changes since the last full backup.",
-              "Recovery: backup files, recovery software, system restore, professionals."
             ]
           }
         ]

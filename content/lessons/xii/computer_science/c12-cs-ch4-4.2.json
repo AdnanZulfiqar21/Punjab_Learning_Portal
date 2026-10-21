@@ -75,13 +75,6 @@
             ]
           },
           {
-            "type": "diagram",
-            "$asset": "c12-cs-ch4-fig-er-concepts",
-            "alt": "A Student entity box is linked by an 'enrols in' relationship diamond to a Course entity box. Four attribute ovals hang from Student: Roll Number (underlined and labelled identifier, unique), Name, Class and Age. A key explains entity, attribute, relationship and identifier.",
-            "caption": "Entity, attribute, relationship and identifier (original diagram after 4.2).",
-            "long_description": "This style of drawing, with boxes for entities, ovals for attributes and diamonds for relationships, is called an entity-relationship (ER) diagram."
-          },
-          {
             "type": "heading",
             "level": 2,
             "text": "Understanding relational databases"
@@ -127,19 +120,13 @@
             "type": "list",
             "ordered": false,
             "items": [
-              "Connect to the database: sqlite3.connect() opens school.db.",
+              "Connect to the database: sqlite3.connect() opens the school.db SQLite database.",
               "Create a cursor: the cursor object runs SQL commands.",
-              "Execute queries: CREATE TABLE, INSERT and SELECT are sent with cursor.execute().",
-              "Save: connection.commit() makes the inserts permanent.",
-              "Fetch and display: fetchall() returns all rows, printed one by one, for example (1, 'Ali', 14, '8th').",
+              "Execute a query: cursor.execute() runs the SQL query that fetches all records from the students table.",
+              "Save: connection.commit() saves the changes.",
+              "Fetch and display: fetchall() returns all the rows, which are printed one by one.",
               "Close the connection when finished."
             ]
-          },
-          {
-            "type": "callout",
-            "tone": "tip",
-            "title": "Running the example twice",
-            "text": "The INSERT lines run every time the program runs, so a second run adds Ali and Sara again with new ids. Real programs check before inserting, or insert only when the user asks."
           },
           {
             "type": "heading",
@@ -209,52 +196,6 @@
             "tone": "note",
             "title": "Example: deleting a record (Python code; each .... is one 4-space indent)",
             "text": "import sqlite3\n\nconnection = sqlite3.connect(\"school.db\")\ncursor = connection.cursor()\n\n# Delete the student with ID = 1\ncursor.execute(\"DELETE FROM students WHERE ID = 1\")\nconnection.commit()               # without commit() the delete is not permanent\nprint(\"Record deleted successfully\")\n\nconnection.close()"
-          },
-          {
-            "type": "callout",
-            "tone": "warning",
-            "title": "Always use a WHERE condition with UPDATE and DELETE",
-            "text": "DELETE FROM students; with no WHERE removes every row, and UPDATE without WHERE changes every row. Check the condition before running the command."
-          },
-          {
-            "type": "callout",
-            "tone": "tip",
-            "title": "Values from users: use placeholders",
-            "text": "When values come from a user, pass them separately instead of joining them into the SQL text, for example cursor.execute(\"SELECT * FROM students WHERE name = ?\", (name,)). The ? placeholder stops typed text from changing the command (SQL injection)."
-          },
-          {
-            "type": "diagram",
-            "$asset": "c12-cs-ch4-fig-db-steps",
-            "alt": "Six boxes in a row joined by arrows: 1 connect (sqlite3.connect('school.db')), 2 cursor (connection.cursor()), 3 execute (cursor.execute(sql)), 4 commit (connection.commit()), 5 fetch (cursor.fetchall()), 6 close (connection.close()). A note says commit() saves changes such as INSERT, UPDATE and DELETE, and fetchall() returns the rows of a SELECT as a list.",
-            "caption": "The steps of using a database from Python (original diagram after the connection example).",
-            "long_description": "The same six steps appear in every sqlite3 example in this chapter; only the SQL in step 3 changes."
-          },
-          {
-            "type": "checkpoint",
-            "mode": "self_check",
-            "prompt": "Write the SQL to change Sara's grade to '10th' in the students table, and say what Python must call afterwards.",
-            "explanation": "UPDATE students SET grade = '10th' WHERE name = 'Sara'; then connection.commit() so the change is saved."
-          },
-          {
-            "type": "checkpoint",
-            "mode": "self_check",
-            "prompt": "What is the difference between a primary key and a foreign key?",
-            "explanation": "A primary key uniquely identifies each record in its own table (such as RollNo); a foreign key is a field in one table that holds another table's primary key (such as DeptID in Student) to link the tables."
-          },
-          {
-            "type": "heading",
-            "level": 2,
-            "text": "Quick recap"
-          },
-          {
-            "type": "list",
-            "ordered": false,
-            "items": [
-              "Database: organised data; entity, attribute, relationship, identifier.",
-              "Relational tables: rows (records), columns (fields), primary and foreign keys; SQL works with them.",
-              "sqlite3: connect, cursor, execute, commit, fetch, close.",
-              "CRUD: INSERT, SELECT, UPDATE, DELETE (use WHERE)."
-            ]
           }
         ]
       }

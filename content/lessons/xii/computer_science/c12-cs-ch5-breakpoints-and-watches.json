@@ -35,7 +35,7 @@
             "type": "callout",
             "tone": "note",
             "title": "Example: a program to debug (Python code; each .... is one 4-space indent)",
-            "text": "def calculate_area(radius):\n....# Set a breakpoint here to check the value of radius\n....area = 3.14 * radius ** 2\n....return area\n\ndef main():\n....# Step-by-step debugging starts here\n....radius = 5\n....print(\"Area of circle:\", calculate_area(radius))   # 78.5\n....radius = 10\n....print(\"Area of circle:\", calculate_area(radius))   # 314.0\n\nif __name__ == \"__main__\":\n....main()"
+            "text": "def calculate_area(radius):\n....# Set a breakpoint here to check the value of radius\n....area = 3.14 * radius ** 2\n....return area\n\ndef main():\n....# Step-by-step debugging starts here\n....radius = 5\n....print(\"Area of circle:\", calculate_area(radius))\n....radius = 10\n....print(\"Area of circle:\", calculate_area(radius))\n\nif __name__ == \"__main__\":\n....main()"
           },
           {
             "type": "list",
@@ -43,7 +43,7 @@
             "items": [
               "calculate_area(radius) works out 3.14 * radius ** 2 and returns it; main() tests it with radius 5 and then 10.",
               "Set breakpoints by clicking next to the lines radius = 5 and radius = 10; the program pauses there and the variables can be inspected.",
-              "Add a watch for radius (and area) to see radius change from 5 to 10 as the program runs.",
+              "Add a watch for radius to see it change from 5 to 10 as the program runs.",
               "Step Into goes inside a function such as calculate_area(); Step Over runs the current line and moves to the next without going inside functions; Continue runs on to the next breakpoint."
             ]
           },
@@ -53,26 +53,6 @@
             "alt": "A code panel shows calculate_area and main with red breakpoint dots beside area = 3.14 * radius ** 2, radius = 5 and radius = 10; the area line is highlighted as the line where execution is paused. A watches panel shows radius = 5 and area = 78.5, and next run radius = 10, area = 314.0. Buttons Step Into (go inside calculate_area()), Step Over (run this line, go to next) and Continue (run to the next breakpoint) are explained.",
             "caption": "Breakpoints, watches and stepping in an IDE (original diagram after Fig 5.2).",
             "long_description": "Pausing at the area line and watching radius shows at once whether the function received the value expected; if not, the bug is in the caller, not in the formula."
-          },
-          {
-            "type": "checkpoint",
-            "mode": "self_check",
-            "prompt": "While debugging, a watch shows radius = 0 inside calculate_area() although main() set radius = 5. Should you use Step Into or Step Over next, and where is the bug likely to be?",
-            "explanation": "The wrong value arrives at the function, so the bug is in the call or in code that changes radius before it; restart, pause in main() and use Step Over line by line, watching radius, until it changes from 5 to 0."
-          },
-          {
-            "type": "heading",
-            "level": 2,
-            "text": "Quick recap"
-          },
-          {
-            "type": "list",
-            "ordered": false,
-            "items": [
-              "Breakpoint: pauses the program at a line (click in the IDE margin).",
-              "Watch: shows a variable's value as it changes.",
-              "Step Into, Step Over, Continue control step-by-step debugging."
-            ]
           }
         ]
       }

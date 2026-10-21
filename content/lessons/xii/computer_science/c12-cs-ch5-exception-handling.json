@@ -41,21 +41,8 @@
               "try-except handles errors and prevents crashes.",
               "commit() saves the correct data, keeping the database consistent.",
               "rollback() cancels the changes if an error occurs.",
-              "finally always runs, so the database is closed safely."
+              "finally safely closes the database."
             ]
-          },
-          {
-            "type": "callout",
-            "tone": "warning",
-            "title": "If the connection itself fails",
-            "text": "If sqlite3.connect() itself fails, the name connection is never created, so 'if connection:' in finally raises a NameError, and the rollback in except fails the same way. Writing connection = None before try fixes this, with 'if connection:' before the rollback too."
-          },
-          {
-            "type": "diagram",
-            "$asset": "c12-cs-ch5-fig-exceptions",
-            "alt": "A flow chart. try: connect, insert, commit. If there is no error, an arrow leads to commit() saves the data ('Data inserted successfully'). If sqlite3.Error is raised, an arrow leads to except: show the error, rollback() undoes the changes. Both paths lead to finally: close the connection, which runs whether or not an error happened. A note says the program does not crash because every path ends in finally.",
-            "caption": "The paths through try, except and finally (original diagram after the exception example).",
-            "long_description": "Inserting a record whose ID already exists raises sqlite3.IntegrityError, a kind of sqlite3.Error, so this program reports it, rolls back and still closes the database."
           },
           {
             "type": "callout",
@@ -71,32 +58,6 @@
           {
             "type": "paragraph",
             "text": "A program may meet different kinds of exception. Python lets one try block have several except blocks, each giving the right response to one exception type. This prevents unexpected crashes, allows proper recovery and gives better control over errors."
-          },
-          {
-            "type": "callout",
-            "tone": "note",
-            "title": "Added example: the class activity, with two exception types (Python code; each .... is one 4-space indent)",
-            "text": "try:\n....a = int(input(\"First number: \"))\n....b = int(input(\"Second number: \"))\n....print(\"Result:\", a / b)\nexcept ValueError:\n....print(\"Please enter whole numbers only.\")\nexcept ZeroDivisionError:\n....print(\"You cannot divide by zero.\")"
-          },
-          {
-            "type": "checkpoint",
-            "mode": "self_check",
-            "prompt": "In the added example, what is printed if the user types 'ten' for the first number, and what if they type 8 and 0?",
-            "explanation": "'ten' cannot be converted by int(), so ValueError is caught and 'Please enter whole numbers only.' is printed. For 8 and 0, a / b raises ZeroDivisionError, so 'You cannot divide by zero.' is printed. In both cases the program ends normally instead of crashing."
-          },
-          {
-            "type": "heading",
-            "level": 2,
-            "text": "Quick recap"
-          },
-          {
-            "type": "list",
-            "ordered": false,
-            "items": [
-              "try holds code that may fail; except handles a named error; finally always runs.",
-              "commit() saves good changes; rollback() undoes them after an error.",
-              "Several except blocks handle several exception types."
-            ]
           }
         ]
       }
