@@ -100,6 +100,12 @@ evidence.
 
 **Counts:** A 197 · B 26 · C 39 · D 161 now (at classification: core A 159, B 18, C 33, D 96; written A 34, B 6, C 12, D 65).
 
+## Done in this pass (2026-10-21)
+
+- W03.S2.T2 region mapping (#355, REGION-MAP-01); P06.S3.T2 multi-item releases and release rollback (#357, CONTENT-RELEASE-01); P20.S4.T4 qualification records and the §6.4 retest tool (#358, QUALIFICATION-01); P03.S3.T2 container images (#234, IMAGES-01); P01.S4.T2 web half (#359, RENDERER-SPIKE-01; native half waits on B13/B07).
+- Records-only C items: P00.S1.T1, P00.S1.T3, P00.S1.T4, P00.S2.T3, P00.S3.T2 (SEVERITY-01, readiness guard extended), P01.S2.T2, P01.S3.T1, P02.S1.T3, P03.S1.T3 and W11.S3.T3 (RECORDS-C-01). P02.S2.T2 (component specifications) remains.
+- Owner instruction: no MCQs until the owner says to start.
+
 ## Done in this pass (2026-10-15)
 
 | Task | PR | Record |
@@ -143,15 +149,15 @@ Smallest learner- or safety-relevant items first; each one lands as its own PR, 
 | 13 | P09.S3.T1 | M | difficulty/outcome allocation |
 | 14 | P13.S2.T1 | M | mobile discovery — on main (#227); do not rebuild |
 | 15 | W01.S2.T2 | S | rubric sig-fig and contradiction fields |
-| 16 | W03.S2.T2 | L | region mapping and mapping history |
+| 16 | W03.S2.T2 | L | region mapping and mapping history — on main (#355); do not rebuild |
 | 17 | P05.S1.T3 | M | edition effective dates — on main (#228); do not rebuild |
-| 18 | P06.S3.T2 | L | atomic multi-item release |
+| 18 | P06.S3.T2 | L | atomic multi-item release — on main (#357); do not rebuild |
 | 19 | P12.S2.T3 | L | cohort comparisons (after P09.S3.T3) |
 | 20 | P03.S1.T2 | M | S3-compatible emulator + adapter — on main (#229); do not rebuild |
-| 21 | P03.S3.T2 | M/L | Dockerfiles + CI image digests |
-| 22 | P01.S4.T2 | M/L | web equation/notation renderer spike |
+| 21 | P03.S3.T2 | M/L | Dockerfiles + CI image digests — on main (#234); registry waits on B03 |
+| 22 | P01.S4.T2 | M/L | web equation/notation renderer spike — #359 (web half); native half B13/B07 |
 | 23 | P02.S2.T1 | S | Urdu font + shared tokens |
-| 24 | P20.S4.T4 | M | qualification records + retest trigger tool |
+| 24 | P20.S4.T4 | M | qualification records + retest trigger tool — on main (#358); real records need P20 runs |
 | 25 | P11.S2.T1 | M | focused lesson page (confirm intent first) |
 
 Records-only C items (size S, after the code items, in one records PR): P00.S1.T1, P00.S1.T3, P00.S1.T4, P00.S2.T3,
