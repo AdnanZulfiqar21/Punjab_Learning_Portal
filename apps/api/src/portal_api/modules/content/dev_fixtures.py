@@ -312,6 +312,42 @@ def main(argv: list[str] | None = None) -> int:
                 },
                 access_tier="preview",
             )
+        # P01.S4.T2 (RENDERER-SPIKE-01): notation the web typesets: a formula, chemistry, a formula whose link and class
+        # the renderer must refuse, one that can't be typeset (its reviewed rendering shows), and an Urdu paragraph with
+        # English words that must read right to left. Technical fixtures, not academic content.
+        if db.get(ContentItem, uuid.uuid5(NAMESPACE, "lesson-fixture-notation")) is None:
+            unparsable = _fixture_asset(
+                db, author.id, "image", "Fixture rendering of a broken formula", _fixture_png("Fixture: broken formula")
+            )
+
+            def equation(latex: str, text_alt: str, image: str | None = None) -> dict[str, object]:
+                fallback: dict[str, object] = {"text": text_alt, "reviewed": True}
+                if image:
+                    fallback |= {"image_asset_id": image, "alt": f"Fixture rendering: {text_alt}"}
+                return {"type": "equation", "latex": latex, "text_alt": text_alt, "fallback": fallback}
+
+            created += publish(
+                "lesson-fixture-notation",
+                "lesson",
+                "Notation lesson",
+                {
+                    "blocks": [
+                        {"type": "heading", "level": 2, "text": "Technical fixture: notation"},
+                        equation(r"x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}", "Fixture formula: x equals a fraction"),
+                        equation(r"\ce{2H2 + O2 -> 2H2O}", "Fixture chemistry: two H2 plus O2 gives two H2O"),
+                        equation(
+                            r"\href{javascript:alert(1)}{x} + \htmlClass{fixture-injected}{y}",
+                            "Fixture: a formula whose link and class the renderer must refuse",
+                        ),
+                        equation(r"\frac{1}{", "Fixture: a formula that cannot be typeset", unparsable),
+                        *_p(
+                            "تکنیکی نمونہ: یہ پیراگراف اردو میں ہے، with English words in between. "
+                            "Not academic content."
+                        ),
+                    ]
+                },
+                access_tier="preview",
+            )
         # LECTURE-01: one published storyboard, so the lecture production workflow can be exercised end to end.
         created += publish(
             "storyboard-fixture",
@@ -345,7 +381,7 @@ def main(argv: list[str] | None = None) -> int:
             },
         )
         db.commit()
-    total = COUNT + 2 * WRITTEN_COUNT + 4
+    total = COUNT + 2 * WRITTEN_COUNT + 5
     print(f"practice fixtures: {created} created, {total - created} already present (Class XI Biology, first chapter)")
     return 0
 

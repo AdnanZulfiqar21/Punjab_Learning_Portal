@@ -195,7 +195,7 @@ function ReviewItem({ item, attemptId }: { item: ItemReview; attemptId: string }
           const isKey = o.id === item.correct_option_id;
           const isChosen = o.id === item.chosen;
           return (
-            <li key={o.id} className={`rounded-lg border px-3 py-2 ${isKey ? "border-ok bg-ok-soft" : isChosen ? "border-danger bg-danger-soft" : "border-border"}`}>
+            <li key={o.id} className={`rounded-lg border px-3 py-2 break-words ${isKey ? "border-ok bg-ok-soft" : isChosen ? "border-danger bg-danger-soft" : "border-border"}`}>
               <span className="mr-2 font-medium text-muted">{String.fromCharCode(65 + i)}</span>
               {isKey && <span className="mr-2 text-xs font-semibold text-ok">Correct answer</span>}
               {isChosen && !isKey && <span className="mr-2 text-xs font-semibold text-danger">Your answer</span>}
