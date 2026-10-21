@@ -138,11 +138,12 @@ function BlockView({ block: b, assetSource, dataSaver }: { block: Block; assetSo
       return <Lines items={strs(b.items)} ordered={b.ordered === true} />;
     case "callout": {
       const tone = str(b.tone) || "note";
-      const border = tone === "warning" ? c.warn : tone === "definition" ? c.accent : c.border;
-      const bg = tone === "warning" ? c.warnSoft : tone === "definition" ? c.accentSoft : c.surfaceMuted;
+      // A tip is green, as on the web: the diagram explanations ("Understanding the diagram") use it.
+      const border = tone === "warning" ? c.warn : tone === "definition" ? c.accent : tone === "tip" ? c.ok : c.border;
+      const bg = tone === "warning" ? c.warnSoft : tone === "definition" ? c.accentSoft : tone === "tip" ? c.okSoft : c.surfaceMuted;
       return (
         <View style={{ borderLeftWidth: 4, borderLeftColor: border, backgroundColor: bg, borderRadius: Radius.sm, padding: Space.md, gap: Space.xs }}>
-          <T variant="eyebrow" style={{ color: tone === "warning" ? c.warn : tone === "definition" ? c.accent : c.muted }}>
+          <T variant="eyebrow" style={{ color: tone === "warning" ? c.warn : tone === "definition" ? c.accent : tone === "tip" ? c.ok : c.muted }}>
             {CALLOUT_LABEL[tone] ?? "Note"}
           </T>
           {str(b.title) ? <T style={{ fontWeight: "600" }}>{str(b.title)}</T> : null}

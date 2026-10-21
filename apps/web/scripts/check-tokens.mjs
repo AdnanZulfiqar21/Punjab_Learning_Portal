@@ -18,6 +18,8 @@ const PAIRS = {
   "accent-soft": "accentSoft",
   warn: "warn",
   "warn-soft": "warnSoft",
+  ok: "ok",
+  "ok-soft": "okSoft",
   danger: "danger",
   "danger-soft": "dangerSoft",
 };
