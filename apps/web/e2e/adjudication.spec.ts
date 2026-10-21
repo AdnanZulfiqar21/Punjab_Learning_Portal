@@ -56,6 +56,7 @@ test("an adjudicator applies a rubric correction; a teacher re-marks; the learne
   await expect(page.getByRole("list", { name: "Uploaded pages" }).getByText(/Page 1 ·/)).toBeVisible(AUTH);
   await page.getByRole("group", { name: /Question 1 \(a\)/ }).getByLabel("Page 1").check();
   await page.getByRole("group", { name: /Question 1 \(b\)/ }).getByLabel("Page 1").check();
+  await page.getByLabel("I wrote the question numbers clearly on page 1").check(); // REGION-MAP-01: page 1 is shared
   await expect(page.getByRole("status").filter({ hasText: /Saved · revision \d+/ })).toBeVisible(AUTH);
   await page.getByRole("button", { name: "Submit for marking" }).click();
   await expect(page.getByText("Waiting for a teacher")).toBeVisible(AUTH);
