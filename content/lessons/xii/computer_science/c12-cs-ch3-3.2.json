@@ -122,10 +122,6 @@
             "text": "class BankAccount:\n....def __init__(self, balance):\n........self.__balance = balance      # private variable\n\n....def deposit(self, amount):\n........self.__balance += amount\n\n....def withdraw(self, amount):\n........if amount <= self.__balance:\n............self.__balance -= amount\n........else:\n............print(\"Insufficient balance\")\n\n....def get_balance(self):\n........return self.__balance\n\n# Usage\naccount = BankAccount(1000)\naccount.deposit(500)\naccount.withdraw(300)\nprint(account.get_balance())      # Output: 1200\n\n# Direct access will fail\n# print(account.__balance)        # Error"
           },
           {
-            "type": "paragraph",
-            "text": "The balance starts at 1000; depositing 500 gives 1500, and withdrawing 300 leaves 1200. Trying to read account.__balance from outside raises an AttributeError, because name mangling has renamed the variable inside the class."
-          },
-          {
             "type": "heading",
             "level": 2,
             "text": "Inheritance: reusing and extending functionality"
@@ -196,7 +192,7 @@
           },
           {
             "type": "paragraph",
-            "text": "Polymorphism means 'many forms'. The same method, function or operator can behave differently depending on the object it works with, which makes code more flexible and reusable. For example, a payment system may offer credit card, UPI (an instant bank-transfer service; Pakistan's equivalent is Raast), net banking and wallet payments. All of them use a common method, processPayment(), but each has its own implementation; net banking, for instance, redirects the user to the bank's login page. The method name stays the same while the action changes with the payment type."
+            "text": "Polymorphism means 'many forms'. The same method, function or operator can behave differently depending on the object it works with, which makes code more flexible and reusable. For example, a payment system may offer credit card, UPI, net banking and wallet payments. All of them use a common method, processPayment(), but each has its own implementation; net banking, for instance, redirects the user to the bank's login page. The method name stays the same while the action changes with the payment type."
           },
           {
             "type": "paragraph",
