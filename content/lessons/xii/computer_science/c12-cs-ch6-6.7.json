@@ -94,39 +94,7 @@
                 "F1-score",
                 "2 x (0.8 x 0.8889) / (0.8 + 0.8889) = 1.4222 / 1.6889",
                 "0.8421"
-              ],
-              [
-                "Accuracy (added)",
-                "(40 + 50) / (40 + 50 + 10 + 5) = 90 / 105",
-                "0.857"
               ]
-            ]
-          },
-          {
-            "type": "diagram",
-            "$asset": "c12-cs-ch6-fig-metrics",
-            "alt": "A two-by-two confusion matrix with predicted positive and negative across the top and actual positive and negative down the side: TP = 40 (correct positive), FN = 5 (missed positive), FP = 10 (false alarm) and TN = 50 (correct negative). Beside it: accuracy = (TP + TN) / all = 90 / 105 = 0.857; precision = TP / (TP + FP) = 40 / 50 = 0.8; recall = TP / (TP + FN) = 40 / 45 = 0.8889; F1 = 0.8421.",
-            "caption": "Confusion matrix and evaluation metrics for the book's example (original diagram after 6.7).",
-            "long_description": "Precision uses the 'predicted positive' column (TP and FP); recall uses the 'actual positive' row (TP and FN)."
-          },
-          {
-            "type": "checkpoint",
-            "mode": "self_check",
-            "prompt": "A disease test finds 18 of 20 sick people and wrongly flags 30 of 980 healthy people. Work out its recall and precision. Why is accuracy alone misleading here?",
-            "explanation": "TP = 18, FN = 2, FP = 30, TN = 950. Recall = 18/20 = 0.9; precision = 18/48 = 0.375. Accuracy = 968/1000 = 0.968 looks excellent only because most people are healthy, yet most positive results are false alarms."
-          },
-          {
-            "type": "heading",
-            "level": 2,
-            "text": "Quick recap"
-          },
-          {
-            "type": "list",
-            "ordered": false,
-            "items": [
-              "Evaluate on unseen test data.",
-              "Accuracy = (TP + TN) / all; error rate = 1 - accuracy.",
-              "Precision = TP / (TP + FP); recall = TP / (TP + FN); F1 balances them (book example 0.8, 0.8889, 0.8421)."
             ]
           }
         ]

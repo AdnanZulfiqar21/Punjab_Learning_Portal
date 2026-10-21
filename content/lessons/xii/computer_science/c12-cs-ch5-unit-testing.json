@@ -60,39 +60,6 @@
               "assert checks whether the output is correct; if the condition is false, the test fails.",
               "To run the tests, type pytest in the command line in the folder that holds the test file."
             ]
-          },
-          {
-            "type": "callout",
-            "tone": "note",
-            "title": "Added example: the same test with unittest (Python code; each .... is one 4-space indent)",
-            "text": "import unittest\n\nclass TestCalc(unittest.TestCase):\n....def test_add(self):\n........self.assertEqual(add(2, 3), 5)\n\nif __name__ == \"__main__\":\n....unittest.main()"
-          },
-          {
-            "type": "diagram",
-            "$asset": "c12-cs-ch5-fig-unit-test",
-            "alt": "Top left, the code under test (calc.py): add returns a + b and multiply returns a * b. Below, the tests (test_calc.py): test_add asserts add(2, 3) == 5 and test_multiply asserts multiply(2, 3) == 6. An arrow labelled finds test_ functions leads to > pytest in the terminal, which reports test_add PASS, test_multiply PASS, 2 passed. A note: assert checks one expected result; if add() returned a - b, test_add would fail and show both values.",
-            "caption": "Unit testing with pytest (original diagram after the testing example).",
-            "long_description": "Keeping tests in their own file means they can be run after every change in a second; any test that fails points straight to the function that broke."
-          },
-          {
-            "type": "checkpoint",
-            "mode": "self_check",
-            "prompt": "Write a pytest test that checks a function square(n) returns 49 for 7. What happens if square is written as n * 2?",
-            "explanation": "def test_square(): assert square(7) == 49. With n * 2 the function returns 14, so the assert is false and pytest reports the test as failed, showing 14 != 49."
-          },
-          {
-            "type": "heading",
-            "level": 2,
-            "text": "Quick recap"
-          },
-          {
-            "type": "list",
-            "ordered": false,
-            "items": [
-              "Unit test: check one function or method at a time.",
-              "unittest: built in, class-based; pytest: external, plain functions with assert.",
-              "Run tests after every change; pytest finds functions named test_..."
-            ]
           }
         ]
       }

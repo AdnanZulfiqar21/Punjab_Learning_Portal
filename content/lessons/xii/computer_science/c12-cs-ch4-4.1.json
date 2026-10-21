@@ -56,10 +56,10 @@
             "type": "list",
             "ordered": false,
             "items": [
-              "tk.Tk() creates the main window; title() and geometry() set its title and size (300 by 200 pixels).",
+              "tk.Tk() creates the main window.",
               "Label displays text; Entry takes user input; Button performs an action.",
-              "command=on_click is event handling: clicking the button calls on_click(), which prints 'Button Clicked!'.",
-              "mainloop() runs the GUI and keeps the window open, waiting for events."
+              "command=on_click is event handling (a button click).",
+              "mainloop() runs the GUI."
             ]
           },
           {
@@ -98,13 +98,6 @@
             "tone": "note",
             "title": "Example: two frames (Python code; each .... is one 4-space indent)",
             "text": "import tkinter as tk\n\nwindow = tk.Tk()\nwindow.title(\"Tkinter Frames Example\")\nwindow.geometry(\"400x300\")\n\ntop_frame = tk.Frame(window, bg=\"lightblue\", height=100)\ntop_frame.pack(fill=\"x\")\n\nbottom_frame = tk.Frame(window, bg=\"lightgreen\", height=200)\nbottom_frame.pack(fill=\"both\", expand=True)\n\ntk.Label(top_frame, text=\"Top Frame\", bg=\"lightblue\").pack(pady=20)\ntk.Label(bottom_frame, text=\"Bottom Frame\", bg=\"lightgreen\").pack(pady=20)\n\nwindow.mainloop()"
-          },
-          {
-            "type": "diagram",
-            "$asset": "c12-cs-ch4-fig-frames",
-            "alt": "A window titled Tkinter Frames Example is split into a light-blue top frame holding the text Top Frame and a larger light-green bottom frame holding the text Bottom Frame. Side notes: top_frame is light blue with height 100; bottom_frame is light green with fill both and expand True; each frame holds its own widgets.",
-            "caption": "Frames dividing a window into sections (original diagram after the frames example).",
-            "long_description": "fill='both' with expand=True lets the bottom frame grow to fill the space left when the window is resized."
           },
           {
             "type": "heading",
@@ -239,49 +232,9 @@
           },
           {
             "type": "callout",
-            "tone": "warning",
-            "title": "Never keep real passwords in code",
-            "text": "Writing 'admin' and '1234' in the program is fine for learning, but real applications must never store passwords in the code. They keep a secure hash of each password, usually in a database, and compare hashes."
-          },
-          {
-            "type": "diagram",
-            "$asset": "c12-cs-ch4-fig-login-events",
-            "alt": "Left: an event loop of four boxes joined by curved arrows: mainloop() waits, event: Login clicked, check_login() runs, message shown, and back to waiting. Right: a Login Form window with a Username entry containing admin, a Password entry showing four stars, a Login button and a green box saying Login Successful!. A note: entry.get() reads what was typed, show='*' hides the password, and the button's command= links the click to check_login().",
-            "caption": "The event loop and a login form (original diagram after the login example).",
-            "long_description": "The program does nothing until the user clicks Login; then the linked function runs once and the loop goes back to waiting."
-          },
-          {
-            "type": "callout",
             "tone": "tip",
             "title": "Class activity",
             "text": "Explain event-driven ideas, then add a button that updates a label's text when it is clicked."
-          },
-          {
-            "type": "checkpoint",
-            "mode": "self_check",
-            "prompt": "A button is created with command=greet() instead of command=greet. What goes wrong?",
-            "explanation": "With brackets, greet() is called once while the button is being created, and its return value (usually None) is stored as the command, so clicking does nothing. command= must be given the function itself, without brackets."
-          },
-          {
-            "type": "checkpoint",
-            "mode": "self_check",
-            "prompt": "Which layout method would you use for a form with labels in one column and entry fields in the next? Why?",
-            "explanation": "grid(), because it places widgets in rows and columns, so each label and its entry line up in the same row."
-          },
-          {
-            "type": "heading",
-            "level": 2,
-            "text": "Quick recap"
-          },
-          {
-            "type": "list",
-            "ordered": false,
-            "items": [
-              "GUI: visual interface; Tkinter: Python's built-in toolkit (Tk(), widgets, mainloop()).",
-              "Widgets: Label, Button, Entry, Menu, Listbox; frames group widgets.",
-              "Layouts: pack (in order), grid (rows and columns), place (exact x, y).",
-              "Event-driven: command= links a widget to a function that runs on the event."
-            ]
           }
         ]
       }

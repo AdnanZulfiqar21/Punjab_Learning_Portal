@@ -66,9 +66,9 @@
             "type": "list",
             "ordered": false,
             "items": [
-              "Both functions give the same result, 499999500000 (the sum of 1 to 999,999).",
+              "Both functions give the same result, 499999500000.",
               "cProfile's report shows how much time each function took; slow_sum() takes the most, so it is the bottleneck.",
-              "timeit runs each function 10 times; in the book's sample run the loop took about 0.42 s and sum() about 0.09 s. Exact times differ on every computer.",
+              "timeit compares the execution times; in the sample output the loop took about 0.42 s and sum() about 0.09 s. The exact times may differ on each computer.",
               "fast_sum() is faster because Python's built-in sum() is already optimised."
             ]
           },
@@ -85,26 +85,6 @@
             "alt": "Six boxes around a circle with arrows going clockwise: benchmark run, profile the program, find the bottleneck, fix it, tune and refine, verify the results, and back to benchmark run. The centre reads measure, fix, measure again.",
             "caption": "The performance test cycle (original diagram after Fig 5.4).",
             "long_description": "Every fix must be measured again: a change that seems faster can sometimes be slower, or can break the program's results."
-          },
-          {
-            "type": "checkpoint",
-            "mode": "self_check",
-            "prompt": "A program checks every pair of 5,000 students with two nested loops. How many comparisons is that, and why might it be a bottleneck?",
-            "explanation": "5,000 x 5,000 = 25,000,000 comparisons (about half that if each pair is checked once). The work grows with the square of the number of students, so doubling the class makes it four times slower; profiling would show this loop taking most of the time."
-          },
-          {
-            "type": "heading",
-            "level": 2,
-            "text": "Quick recap"
-          },
-          {
-            "type": "list",
-            "ordered": false,
-            "items": [
-              "Profiling measures time and resources per function (cProfile, timeit).",
-              "A bottleneck is the slowest part; nested loops are common culprits.",
-              "Fix bottlenecks with better algorithms or built-ins, then measure again."
-            ]
           }
         ]
       }

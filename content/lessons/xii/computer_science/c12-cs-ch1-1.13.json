@@ -51,33 +51,6 @@
               "Least Connection: sends new traffic to the least busy server.",
               "IP Hash: uses the user's IP address to decide which server handles the traffic, so the same user usually reaches the same server."
             ]
-          },
-          {
-            "type": "diagram",
-            "$asset": "c12-cs-ch1-fig-load-balancing",
-            "alt": "Four user computers on the left all connect to a green box labelled load balancer, which sends green arrows to server 1, server 2 and server 3. A side box lists the methods: Round Robin (1, 2, 3, 1, 2, 3 ...), Least Connection (to the least busy server) and IP Hash (the user's IP address picks the server). A note says: if one server fails, the others keep working.",
-            "caption": "Load balancing across three servers (original diagram after 1.13).",
-            "long_description": "The balancer stands between the users and the servers and decides, request by request, which server should answer."
-          },
-          {
-            "type": "checkpoint",
-            "mode": "self_check",
-            "prompt": "Which load-balancing method would suit servers that are often busy for very different lengths of time, and why?",
-            "explanation": "Least Connection, because it looks at how busy each server is now instead of simply taking turns, so a server stuck with long jobs is not given more."
-          },
-          {
-            "type": "heading",
-            "level": 2,
-            "text": "Quick recap"
-          },
-          {
-            "type": "list",
-            "ordered": false,
-            "items": [
-              "Load balancing spreads traffic over several servers or links.",
-              "Benefits: speed, fewer failures, more users, reliability.",
-              "Methods: Round Robin, Least Connection, IP Hash."
-            ]
           }
         ]
       }
