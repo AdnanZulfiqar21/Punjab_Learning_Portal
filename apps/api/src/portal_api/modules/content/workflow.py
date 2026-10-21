@@ -587,6 +587,18 @@ def publish(db: Session, who: Principal, item_id: uuid.UUID) -> ContentItem:
     v = _validate(db, item, version, for_publication=True)
     if not v["ok"]:
         raise Unprocessable("This version can't be published yet.", errors=v["errors"], warnings=v["warnings"])
+    put_live(db, who, item, version)
+    db.commit()
+    db.refresh(item)
+    return item
+
+
+def put_live(
+    db: Session, who: Principal, item: ContentItem, version: ContentVersion, **details: Any
+) -> ContentVersion | None:
+    """Make an approved working version the one learners see (no checks, no commit; the caller validated it). The
+    version it supersedes is kept as history. Returns that earlier published version, if any. CONTENT-RELEASE-01
+    publishes several items this way in one transaction."""
     previous = item.published
     if previous is not None and previous.id != version.id:
         previous.status = VersionStatus.superseded.value
@@ -609,10 +621,9 @@ def publish(db: Session, who: Principal, item_id: uuid.UUID) -> ContentItem:
         version=version.number,
         resolved_quarantine=resolved,
         superseded=previous.number if previous is not None and previous.id != version.id else None,
+        **details,
     )
-    db.commit()
-    db.refresh(item)
-    return item
+    return previous if previous is not None and previous.id != version.id else None
 
 
 def previous_published(db: Session, item: ContentItem) -> ContentVersion | None:

@@ -3646,6 +3646,58 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/studio/releases": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Recent releases within your publishing scope */
+        get: operations["list_releases_v1_studio_releases_get"];
+        put?: never;
+        /** Publish several approved items together, or none of them (publishers, MFA) */
+        post: operations["publish_release_v1_studio_releases_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/studio/releases/{release_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Release */
+        get: operations["get_release_v1_studio_releases__release_id__get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/studio/releases/{release_id}/rollback": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Put every item of a release back as it was before, or none of them */
+        post: operations["rollback_release_v1_studio_releases__release_id__rollback_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/studio/search-terms": {
         parameters: {
             query?: never;
@@ -9951,6 +10003,83 @@ export interface components {
             id: string;
             /** Title */
             title: string;
+        };
+        /** ReleaseEntryOut */
+        ReleaseEntryOut: {
+            /** Availability */
+            availability: string;
+            /**
+             * Current Version
+             * @description The version learners see now
+             */
+            current_version: number | null;
+            /**
+             * Item Id
+             * Format: uuid
+             */
+            item_id: string;
+            /** Kind */
+            kind: string;
+            /**
+             * Previous Version
+             * @description The version learners saw before; none if first published here
+             */
+            previous_version: number | null;
+            /** Title */
+            title: string;
+            /**
+             * Version
+             * @description The version this release published
+             */
+            version: number;
+        };
+        /**
+         * ReleaseIn
+         * @description CONTENT-RELEASE-01: approved items to publish together, or none of them.
+         */
+        ReleaseIn: {
+            /** Item Ids */
+            item_ids: string[];
+            /**
+             * Label
+             * @description A short name, e.g. 'Chapter 4 lessons'
+             */
+            label: string;
+            /** Reason */
+            reason: string;
+        };
+        /** ReleaseOut */
+        ReleaseOut: {
+            /** Entries */
+            entries: components["schemas"]["ReleaseEntryOut"][];
+            /**
+             * Id
+             * Format: uuid
+             */
+            id: string;
+            /** Label */
+            label: string;
+            /**
+             * Published At
+             * Format: date-time
+             */
+            published_at: string;
+            /** Reason */
+            reason: string;
+            /** Rollback Reason */
+            rollback_reason: string | null;
+            /** Rolled Back At */
+            rolled_back_at: string | null;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "published" | "rolled_back";
+        };
+        /** ReleaseRollbackIn */
+        ReleaseRollbackIn: {
+            /** Reason */
+            reason: string;
         };
         /** RemedyIn */
         RemedyIn: {
@@ -19851,6 +19980,125 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["ItemSummary"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    list_releases_v1_studio_releases_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ReleaseOut"][];
+                };
+            };
+        };
+    };
+    publish_release_v1_studio_releases_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ReleaseIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ReleaseOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    get_release_v1_studio_releases__release_id__get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                release_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ReleaseOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    rollback_release_v1_studio_releases__release_id__rollback_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                release_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ReleaseRollbackIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ReleaseOut"];
                 };
             };
             /** @description Validation Error */

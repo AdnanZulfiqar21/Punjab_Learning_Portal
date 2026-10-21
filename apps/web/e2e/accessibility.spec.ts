@@ -48,6 +48,7 @@ test("staff: studio, import, overview, sources, assets, lectures and support hav
     // ACADEMIC-REVIEW-01, REVIEWER-QUALITY-01, and W06.S1.T3 (CALIBRATION-01): the calibration screen as adjudicators see it.
     ["studio-adjudicator@example.com", ["/studio/academic-reviews", "/studio/adjudications", "/studio/reviewer-quality", "/studio/calibration"]],
     ["studio-reviewer@example.com", ["/studio/marking"]], // the teacher's marking queue
+    ["studio-publisher@example.com", ["/studio/releases"]], // P06.S3.T2 (CONTENT-RELEASE-01): publish together and roll back
   ] as const) {
     await page.context().clearCookies();
     await page.goto("/signin?next=/account");
