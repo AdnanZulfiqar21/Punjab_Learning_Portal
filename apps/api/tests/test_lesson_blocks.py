@@ -53,7 +53,8 @@ def test_book_errors_mark_printed_passages_and_a_correction_follows() -> None:
     eq = {"type": "equation", "latex": "x", "text_alt": "Fixture Kp = Kn N", "book_errors": ["Kn N"]}
     assert blocks.validate_body({"blocks": [table, example, eq]}, for_publication=False).errors == []
     # A printed box (Do You Know) may carry marks; a mark must be text the block shows; a correction box carries none.
-    box = {"type": "callout", "tone": "note", "title": "Do You Know?", "text": "Fixture 7.6 on reactor scale.", "book_errors": ["reactor scale"]}
+    box = {"type": "callout", "tone": "note", "title": "Do You Know?", "text": "Fixture 7.6 on reactor scale."}
+    box["book_errors"] = ["reactor scale"]
     assert blocks.validate_body({"blocks": [box]}, for_publication=False).errors == []
     stray = {**para, "book_errors": ["79.53 m"]}
     assert blocks.validate_body({"blocks": [stray]}, for_publication=False).errors
