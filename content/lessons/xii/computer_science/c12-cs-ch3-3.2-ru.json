@@ -41,9 +41,8 @@
           {
             "type": "diagram",
             "$asset": "c12-cs-ch3-fig-class-object",
-            "alt": "Baen class ka dabba, class Person, attributes name, age aur gender aur methods eat(), sleep() aur work(). p1 = Person(...) aur p2 = Person(...) wale teer do object dabbon tak: object p1 name Bob, age 34, gender Male, aur object p2 name Jenny, age 27, gender Female; dono mein wahi teen methods. Note: aik class, bohat se objects, har aik ki apni qeematein.",
-            "caption": "Aik class aur us ke do objects (Fig 3.1 ke mutabiq asal khaaka).",
-            "long_description": "Class batati hai ke har Person ke paas kya hai aur woh kya kar sakta hai; har object apni qeematein bharta hai. Class se object banana instantiation kehlata hai."
+            "alt": "Class aur object ka khaaka: Class: Person ke dabbe mein Attributes (name, age, gender) aur Methods (eat(), sleep(), work()) likhe hain, saath insaan ka saaya. Teer Object P1 (name = Bob, age = 34, gender = Male) aur Object P2 (name = Jenny, age = 27, gender = Female) tak jate hain; dono mein wohi teen methods hain.",
+            "caption": "Figure 3.1: Class aur Object ka rishta (kitab ki Figure 3.1 ke mutabiq asal khaaka)."
           },
           {
             "type": "callout",
@@ -112,9 +111,14 @@
           {
             "type": "diagram",
             "$asset": "c12-cs-ch3-fig-encapsulation",
-            "alt": "Bahar ka code (user) class BankAccount tak sirf public methods deposit(), withdraw() aur get_balance() se pohanchta, sabz teer 'allowed'. Andar private data self.__balance (do underscores) tak sirf methods se rasai. User se seedha data tak surkh dashed teer cross par khatam, 'direct access blocked'. Neeche: public: name (har jagah), protected: _name (riwaj: class aur subclasses) aur private: __name (name mangling chhupati).",
-            "caption": "Bank account class mein encapsulation (Fig 3.2 ke mutabiq asal khaaka).",
-            "long_description": "Methods data tak wahid darwaza hain, is liye har tabdeeli jaanchi ja sakti hai; maslan withdraw() balance se zyada nikalne se inkar karta hai."
+            "alt": "Encapsulation ka khaaka: User / Outside Class se sabz teer (tick, Access allowed) Class Object ke andar Public Methods / Interface (getValue(), setValue()) tak jata hai; methods se nuqta-daar teer Private Data (__private_variable) tak. User se private data tak laal tooti lakeer par cross aur Direct access restricted likha hai.",
+            "caption": "Figure 3.2: Private aur public variables dikhane wala encapsulation khaaka (kitab ki Figure 3.2 ke mutabiq asal khaaka)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Diagram ko samjhein",
+            "text": "Kitab ki Figure 3.2 mein Private Data ke andar '_private_variable' aik underscore ke saath chhapa hai. Python mein aik underscore (_name) protected ka riwaj hai; private member do underscores (__name) se banta hai, jaise kitab ki table bhi batati hai. Is liye yahan '__private_variable' likha gaya hai. Bahar wala code sirf public methods (getValue(), setValue()) se data tak pohanchta hai; seedhi rasai (direct access) band hai."
           },
           {
             "type": "callout",
@@ -139,17 +143,20 @@
             "type": "list",
             "ordered": false,
             "items": [
-              "Single inheritance: child class bilkul aik parent class se inherit karti hai (Fig 3.3). Yeh sab se bunyadi shakal hai.",
-              "Multiple inheritance: child class aik se zyada parent classes se inherit kar ke un ka rawaiya milati hai, maslan Smartphone class jo Camera aur Computer dono se inherit kare (Fig 3.4).",
-              "Multilevel inheritance: class aisi class se inherit karti hai jo khud derived hai, khandani shajre ki tarah zanjeer (dada, walid, beta); 'pota' class apne parent aur grandparent dono ke methods aur attributes leti hai (Fig 3.5)."
+              "Single inheritance: child class bilkul aik parent class se inherit karti hai (Fig 3.3). Yeh sab se bunyadi shakal hai."
             ]
           },
           {
             "type": "diagram",
-            "$asset": "c12-cs-ch3-fig-inheritance",
-            "alt": "UML tarz ke class dabbon ke teen panels, har child parent se aisi line se jura jo parent par khokhle teer ke sire par khatam. Single: Dog (child) Animal (parent) se; class Dog(Animal). Multiple: Child Father (parent 1) aur Mother (parent 2) se; class Child(Father, Mother). Multilevel: ElectricCar (child) Car (parent) se, jo Vehicle (grandparent) se inherit karti.",
-            "caption": "Single, multiple aur multilevel inheritance (Figs 3.3 se 3.5 ke mutabiq asal khaaka).",
-            "long_description": "Har soorat mein teer inherit karne wali class se us class ki taraf hai jis se woh inherit karti, aur child apne oopar ki har cheez use kar sakti hai."
+            "$asset": "c12-cs-ch3-fig-3-3-single-inheritance",
+            "alt": "Single inheritance: Child Class ka dabba Parent Class ke neeche hai; dono aik lakeer se jure hain jis ka khokhla (hollow) teer ka sira Parent Class par hai.",
+            "caption": "Figure 3.3: Single Inheritance (kitab ki Figure 3.3 ke mutabiq asal khaaka)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Diagram ko samjhein",
+            "text": "Teer child class se parent class ki taraf jata hai aur us ka khokhla (hollow) sira parent par hai. Matlab: child parent se inherit karti hai, yani parent ke attributes aur methods le leti hai. Neeche wali misal mein Animal parent hai aur Dog child."
           },
           {
             "type": "callout",
@@ -179,10 +186,36 @@
             "text": "class Puppy(Dog):\n....def eat(self):\n........super().eat()                     # parent's version first\n........print(f\"{self.name} wants more milk.\")\n\nPuppy(\"Moti\").eat()\n# Output: Moti is eating.\n#         Moti wants more milk."
           },
           {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Multiple inheritance: child class aik se zyada parent classes se inherit kar ke un ka rawaiya milati hai, maslan Smartphone class jo Camera aur Computer dono se inherit kare (Fig 3.4)."
+            ]
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch3-fig-3-4-multiple-inheritance",
+            "alt": "Multiple inheritance: Child Class ke oopar do dabbe, Parent Class 1 aur Parent Class 2; child se dono parents tak lakeerein, har aik ke sire par parent ki taraf khokhla teer.",
+            "caption": "Figure 3.4: Multiple Inheritance (kitab ki Figure 3.4 ke mutabiq asal khaaka)."
+          },
+          {
             "type": "callout",
             "tone": "note",
             "title": "Misal: multiple inheritance (Python code; har .... ek 4-space indent hai)",
             "text": "class Father:\n....def skill1(self):\n........print(\"Father's skill: Gardening\")\n\nclass Mother:\n....def skill2(self):\n........print(\"Mother's skill: Cooking\")\n\n# Derived class inheriting from two base classes\nclass Child(Father, Mother):\n....def own_skill(self):\n........print(\"Child's skill: Coding\")\n\nc = Child()\nc.skill1()      # Father's method\nc.skill2()      # Mother's method\nc.own_skill()   # its own method"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Multilevel inheritance: class aisi class se inherit karti hai jo khud derived hai, khandani shajre ki tarah zanjeer (dada, walid, beta); 'pota' class apne parent aur grandparent dono ke methods aur attributes leti hai (Fig 3.5)."
+            ]
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch3-fig-3-5-multilevel-inheritance",
+            "alt": "Multilevel inheritance: teen dabbe aik column mein: oopar Grand Parent Class, beech mein Parent Class, neeche Child Class; har neeche wali class oopar wali se khokhle teer wali lakeer se juri hai.",
+            "caption": "Figure 3.5: Multilevel Inheritance (kitab ki Figure 3.5 ke mutabiq asal khaaka)."
           },
           {
             "type": "callout",
@@ -216,6 +249,12 @@
             "text": "Polymorphism ki do bari qismein hain, compile-time aur runtime (Fig 3.6)."
           },
           {
+            "type": "diagram",
+            "$asset": "c12-cs-ch3-fig-polymorphism",
+            "alt": "Polymorphism ka shajra: Polymorphism se do shakhein: Compile-time Polymorphism jo Method Overloading tak jati hai, aur Runtime Polymorphism jo Method Overriding tak jati hai.",
+            "caption": "Figure 3.6: Aik hi function ka mukhtalif bartao, polymorphism ki misal (kitab ki Figure 3.6 ke mutabiq asal khaaka)."
+          },
+          {
             "type": "list",
             "ordered": true,
             "items": [
@@ -238,13 +277,6 @@
           {
             "type": "paragraph",
             "text": "Aik hi call, animal.sound(), Dog, Cat ya saade Animal ke liye mukhtalif nateeja deti hai, aur yeh intikhab runtime par hota hai. Yeh dynamic bartao Python ko runtime polymorphism ke liye bohat munasib banata hai."
-          },
-          {
-            "type": "diagram",
-            "$asset": "c12-cs-ch3-fig-polymorphism",
-            "alt": "Darakht: polymorphism compile-time (method overloading) aur runtime (method overriding) mein bat'ti. Compile-time ke neeche: Python mein asal overloading nahi, aik method mukhtalif inputs leta: multiply() 1, multiply(4) 4, multiply(2, 3) 6 aur multiply(2, 3, 4) 24. Runtime ke neeche: wahi call animal.sound() Dog ke liye Bark, Cat ke liye Meow aur Animal ke liye Some generic sound.",
-            "caption": "Compile-time aur runtime polymorphism (Fig 3.6 ke mutabiq asal khaaka).",
-            "long_description": "Overloading diye gaye arguments se bartao badalta hai; overriding object ki qism se. Dono mein call karne wala code aik naam use karta hai."
           },
           {
             "type": "checkpoint",
