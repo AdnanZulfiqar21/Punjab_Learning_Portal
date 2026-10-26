@@ -13,7 +13,7 @@
           "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
           "pdf_from": 35,
           "pdf_to": 36,
-          "note": "Topic 2.2.1.1 Variable with Python comments (PDF 35-36, printed 32-33). The print uses commas so numbers print without str(); the printed code layout is garbled in the PDF text. Short question 1 and long question 4 are answered."
+          "note": "Topic 2.2.1.1 Variable with Python comments (PDF 35-36, printed 32-33). The printed first line print(age=...) is invalid: shown as printed, marked, with a Book correction box. Short question 1 and long question 4 are answered."
         }
       ],
       "body": {
@@ -28,7 +28,16 @@
             "type": "callout",
             "tone": "note",
             "title": "Python code (each .... is one 4-space indent)",
-            "text": "age = 71\nprint(\"Quaid-i-Azam lived for\", age, \"years\")\nage = 60\nprint(\"Allama Iqbal lived for\", age, \"years\")"
+            "text": "print(age=\"As-Salaam-Alaikum, dear students!\")\nage = 71\nprint(\"Quaid-i-Azam lived for\", age, \"years\")\nage = 60\nprint(\"Allama Iqbal lived for\", age, \"years\")",
+            "book_errors": [
+              "age="
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book's first line, print(age=\"As-Salaam-Alaikum, dear students!\"), is not valid: print() has no argument named age, so Python stops with a TypeError. The working line is print(\"As-Salaam-Alaikum, dear students!\"); the rest of the code runs as printed."
           },
           {
             "type": "paragraph",
