@@ -1,42 +1,79 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 660" font-family="Segoe UI, Helvetica, Arial, sans-serif">
-  <rect width="1200" height="660" fill="#ffffff"/>
-  <!-- Original diagram after Figure 5.20: the ATP yield from the aerobic oxidation of one glucose. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 900" font-family="Segoe UI, Helvetica, Arial, sans-serif">
   <defs>
-    <style>
-      .h{font-size:26px;font-weight:700;fill:#14181f;text-anchor:middle}
-      .s{font-size:18px;fill:#4b5563;text-anchor:middle}
-      .b{font-size:18px;font-weight:700;fill:#ffffff;text-anchor:middle}
-      .k{font-size:20px;font-weight:700;fill:#14181f;text-anchor:middle}
-    </style>
-    <marker id="ar" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#4b5563"/></marker>
+    <linearGradient id="pbox" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#f3eaf3"/><stop offset="100%" stop-color="#a66a9f"/></linearGradient>
+    <linearGradient id="harr" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#ffffff"/><stop offset="100%" stop-color="#9a5e96"/></linearGradient>
+    <linearGradient id="varr" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ffffff"/><stop offset="100%" stop-color="#ee3b2b"/></linearGradient>
   </defs>
-  <text class="h" x="600" y="40">Energy extracted from one glucose in aerobic respiration</text>
-  <!-- stages -->
-  <rect x="60" y="120" width="220" height="80" rx="14" fill="#1f6fb5"/><text class="b" x="170" y="155">Glycolysis</text><text class="b" x="170" y="180" style="font-size:15px">cytosol</text>
-  <path d="M285 160 H340" stroke="#4b5563" stroke-width="4" marker-end="url(#ar)"/>
-  <rect x="345" y="120" width="220" height="80" rx="14" fill="#0f7a62"/><text class="b" x="455" y="155">Pyruvic acid oxidation</text><text class="b" x="455" y="180" style="font-size:15px">2 pyruvic acids</text>
-  <path d="M570 160 H625" stroke="#4b5563" stroke-width="4" marker-end="url(#ar)"/>
-  <rect x="630" y="120" width="220" height="80" rx="14" fill="#5b3fb5"/><text class="b" x="740" y="155">Krebs cycle</text><text class="b" x="740" y="180" style="font-size:15px">2 turns</text>
-  <path d="M855 160 H910" stroke="#4b5563" stroke-width="4" marker-end="url(#ar)"/>
-  <rect x="915" y="120" width="220" height="80" rx="14" fill="#d98b2b"/><text class="b" x="1025" y="155">Electron transport</text><text class="b" x="1025" y="180" style="font-size:15px">chemiosmosis</text>
-  <!-- yields -->
-  <g class="s">
-    <text x="170" y="250">2 ATP (substrate-level)</text><text x="170" y="276">2 NADH</text>
-    <text x="455" y="250">2 NADH</text>
-    <text x="740" y="250">2 ATP (substrate-level)</text><text x="740" y="276">6 NADH, 2 FADH2</text>
-    <text x="1025" y="250">10 NADH and 2 FADH2</text><text x="1025" y="276">pass electrons to the chain</text>
-  </g>
-  <!-- table -->
-  <g font-size="18" fill="#14181f">
-    <rect x="150" y="330" width="900" height="44" fill="#f3f4f6"/>
-    <text x="170" y="358" font-weight="700">Source</text><text x="600" y="358" font-weight="700">ATP</text><text x="760" y="358" font-weight="700">Note</text>
-    <text x="170" y="402">Glycolysis, substrate-level</text><text x="600" y="402">2</text>
-    <text x="170" y="440">2 NADH from glycolysis</text><text x="600" y="440">4</text><text x="760" y="440">2 each: 1 ATP spent moving each one in</text>
-    <text x="170" y="478">2 NADH from pyruvic acid oxidation</text><text x="600" y="478">6</text><text x="760" y="478">3 each</text>
-    <text x="170" y="516">Krebs cycle, substrate-level</text><text x="600" y="516">2</text>
-    <text x="170" y="554">6 NADH from the Krebs cycle</text><text x="600" y="554">18</text><text x="760" y="554">3 each</text>
-    <text x="170" y="592">2 FADH2 from the Krebs cycle</text><text x="600" y="592">4</text><text x="760" y="592">2 each</text>
-    <path d="M150 606 H1050" stroke="#14181f" stroke-width="2"/>
-    <text x="170" y="636" font-weight="700">Net total</text><text x="600" y="636" font-weight="700">36 ATP</text><text x="760" y="636">against 2 ATP in anaerobic respiration: 18 times more</text>
-  </g>
+  <rect width="1000" height="900" fill="#ffffff"/>
+  <!-- Figure 5.20 An overview of the energy extracted from the aerobic oxidation of glucose (C11-BIO PDF p163); original drawing -->
+  <rect x="10.0" y="10.0" width="980.0" height="880.0" rx="0" stroke="#14181f" stroke-width="2.5" fill="none"/>
+  <line x1="10.0" y1="800.0" x2="990.0" y2="800.0" stroke="#14181f" stroke-width="2.5" stroke-linecap="round"/>
+  <rect x="30.0" y="30.0" width="310.0" height="260.0" rx="0" stroke="#14181f" stroke-width="2.5" fill="url(#pbox)"/>
+  <rect x="30.0" y="500.0" width="310.0" height="285.0" rx="0" stroke="#14181f" stroke-width="2.5" fill="url(#pbox)"/>
+  <rect x="95.0" y="48.0" width="130.0" height="44.0" rx="0" stroke="#14181f" stroke-width="2" fill="#cfe39a"/>
+  <text x="160.0" y="79.0" font-size="26" fill="#14181f" text-anchor="middle" font-weight="400"><tspan dy="0.0">Glucose</tspan></text>
+  <path d="M143.0 92.0 L177.0 92.0 L177.0 195.0 L194.0 195.0 L160.0 225.0 L126.0 195.0 L143.0 195.0 Z" stroke="#14181f" stroke-width="1.5" fill="url(#varr)" stroke-linejoin="round" stroke-linecap="round"/>
+  <text x="200.0" y="170.0" font-size="24" fill="#c2185b" text-anchor="start" font-weight="700"><tspan dy="0.0">Glycolysis</tspan></text>
+  <rect x="70.0" y="228.0" width="180.0" height="44.0" rx="0" stroke="#14181f" stroke-width="2" fill="#cfe39a"/>
+  <text x="160.0" y="259.0" font-size="26" fill="#14181f" text-anchor="middle" font-weight="400"><tspan dy="0.0">Pyruvic acid</tspan></text>
+  <path d="M140 120 Q90 110 95 160" stroke="#14181f" stroke-width="5" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="M97.0 172.0 L90.7 157.3 L105.7 158.6 Z" fill="#14181f"/>
+  <path d="M95 190 Q100 235 140 225" stroke="#14181f" stroke-width="5" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="M128.0 178.0 L116.4 182.8 L122.9 191.0 L109.3 191.2 L109.0 200.5 L97.1 196.1 L90.0 204.0 L82.9 196.1 L71.0 200.5 L70.7 191.2 L57.1 191.0 L63.6 182.8 L52.0 178.0 L63.6 173.2 L57.1 165.0 L70.7 164.8 L71.0 155.5 L82.9 159.9 L90.0 152.0 L97.1 159.9 L109.0 155.5 L109.3 164.8 L122.9 165.0 L116.4 173.2 Z" stroke="#a08400" stroke-width="1.5" fill="#ffe94d" stroke-linejoin="round" stroke-linecap="round"/>
+  <text x="90.0" y="185.9" font-size="22" fill="#14181f" text-anchor="middle" font-weight="700"><tspan dy="0.0">ATP</tspan></text>
+  <text x="36.0" y="186.0" font-size="24" fill="#14181f" text-anchor="start" font-weight="400"><tspan dy="0.0">2</tspan></text>
+  <path d="M145.0 272.0 L175.0 272.0 L175.0 365.0 L190.0 365.0 L160.0 395.0 L130.0 365.0 L145.0 365.0 Z" stroke="#14181f" stroke-width="1.5" fill="url(#varr)" stroke-linejoin="round" stroke-linecap="round"/>
+  <rect x="80.0" y="398.0" width="160.0" height="44.0" rx="0" stroke="#14181f" stroke-width="2" fill="#cfe39a"/>
+  <text x="160.0" y="429.0" font-size="26" fill="#14181f" text-anchor="middle" font-weight="400"><tspan dy="0.0">Acetyl CoA</tspan></text>
+  <path d="M145.0 442.0 L175.0 442.0 L175.0 515.0 L190.0 515.0 L160.0 545.0 L130.0 515.0 L145.0 515.0 Z" stroke="#14181f" stroke-width="1.5" fill="url(#varr)" stroke-linejoin="round" stroke-linecap="round"/>
+  <circle cx="160.0" cy="660.0" r="80.0" stroke="#e53935" stroke-width="24" fill="none"/>
+  <path d="M229.3 700.0 L222.7 662.6 L265.0 687.0 Z" fill="#e53935"/>
+  <path d="M90.7 700.0 L126.4 713.0 L84.1 737.4 Z" fill="#e53935"/>
+  <path d="M160.0 580.0 L130.9 604.4 L130.9 555.6 Z" fill="#e53935"/>
+  <text x="160.0" y="652.0" font-size="25" fill="#e5294f" text-anchor="middle" font-weight="400"><tspan dy="0.0">Krebs</tspan></text>
+  <text x="160.0" y="680.0" font-size="25" fill="#e5294f" text-anchor="middle" font-weight="400"><tspan dy="0.0">cycle</tspan></text>
+  <path d="M340.0 65.0 L804.0 65.0 L804.0 55.0 L840.0 80.0 L804.0 105.0 L804.0 95.0 L340.0 95.0 Z" stroke="#14181f" stroke-width="1.5" fill="url(#harr)" stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="M974.0 80.0 L960.9 84.8 L969.6 93.0 L954.8 93.5 L957.4 103.5 L943.7 99.5 L939.8 109.2 L930.0 101.6 L920.2 109.2 L916.3 99.5 L902.6 103.5 L905.2 93.5 L890.4 93.0 L899.1 84.8 L886.0 80.0 L899.1 75.2 L890.4 67.0 L905.2 66.5 L902.6 56.5 L916.3 60.5 L920.2 50.8 L930.0 58.4 L939.8 50.8 L943.7 60.5 L957.4 56.5 L954.8 66.5 L969.6 67.0 L960.9 75.2 Z" stroke="#a08400" stroke-width="1.5" fill="#ffe94d" stroke-linejoin="round" stroke-linecap="round"/>
+  <text x="930.0" y="88.6" font-size="24" fill="#14181f" text-anchor="middle" font-weight="700"><tspan dy="0.0">ATP</tspan></text>
+  <text x="878.0" y="88.6" font-size="26" fill="#14181f" text-anchor="end" font-weight="600"><tspan dy="0.0">2</tspan></text>
+  <path d="M340.0 175.0 L524.0 175.0 L524.0 165.0 L560.0 190.0 L524.0 215.0 L524.0 205.0 L340.0 205.0 Z" stroke="#14181f" stroke-width="1.5" fill="url(#harr)" stroke-linejoin="round" stroke-linecap="round"/>
+  <text x="578.0" y="199.0" font-size="26" fill="#14181f" text-anchor="start" font-weight="400"><tspan dy="0.0">2</tspan></text>
+  <rect x="612.0" y="168.0" width="100.0" height="44.0" rx="0" stroke="#14181f" stroke-width="1.5" fill="#ffe94d"/>
+  <text x="662.0" y="199.0" font-size="26" fill="#14181f" text-anchor="middle" font-weight="400"><tspan dy="0.0">NADH</tspan></text>
+  <path d="M745.0 175.0 L804.0 175.0 L804.0 165.0 L840.0 190.0 L804.0 215.0 L804.0 205.0 L745.0 205.0 Z" stroke="#14181f" stroke-width="1.5" fill="url(#harr)" stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="M974.0 190.0 L960.9 194.8 L969.6 203.0 L954.8 203.5 L957.4 213.5 L943.7 209.5 L939.8 219.2 L930.0 211.6 L920.2 219.2 L916.3 209.5 L902.6 213.5 L905.2 203.5 L890.4 203.0 L899.1 194.8 L886.0 190.0 L899.1 185.2 L890.4 177.0 L905.2 176.5 L902.6 166.5 L916.3 170.5 L920.2 160.8 L930.0 168.4 L939.8 160.8 L943.7 170.5 L957.4 166.5 L954.8 176.5 L969.6 177.0 L960.9 185.2 Z" stroke="#a08400" stroke-width="1.5" fill="#ffe94d" stroke-linejoin="round" stroke-linecap="round"/>
+  <text x="930.0" y="198.6" font-size="24" fill="#14181f" text-anchor="middle" font-weight="700"><tspan dy="0.0">ATP</tspan></text>
+  <text x="878.0" y="198.6" font-size="26" fill="#14181f" text-anchor="end" font-weight="600"><tspan dy="0.0">4</tspan></text>
+  <path d="M340.0 325.0 L524.0 325.0 L524.0 315.0 L560.0 340.0 L524.0 365.0 L524.0 355.0 L340.0 355.0 Z" stroke="#14181f" stroke-width="1.5" fill="url(#harr)" stroke-linejoin="round" stroke-linecap="round"/>
+  <text x="578.0" y="349.0" font-size="26" fill="#14181f" text-anchor="start" font-weight="400"><tspan dy="0.0">2</tspan></text>
+  <rect x="612.0" y="318.0" width="100.0" height="44.0" rx="0" stroke="#14181f" stroke-width="1.5" fill="#ffe94d"/>
+  <text x="662.0" y="349.0" font-size="26" fill="#14181f" text-anchor="middle" font-weight="400"><tspan dy="0.0">NADH</tspan></text>
+  <path d="M745.0 325.0 L804.0 325.0 L804.0 315.0 L840.0 340.0 L804.0 365.0 L804.0 355.0 L745.0 355.0 Z" stroke="#14181f" stroke-width="1.5" fill="url(#harr)" stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="M974.0 340.0 L960.9 344.8 L969.6 353.0 L954.8 353.5 L957.4 363.5 L943.7 359.5 L939.8 369.2 L930.0 361.6 L920.2 369.2 L916.3 359.5 L902.6 363.5 L905.2 353.5 L890.4 353.0 L899.1 344.8 L886.0 340.0 L899.1 335.2 L890.4 327.0 L905.2 326.5 L902.6 316.5 L916.3 320.5 L920.2 310.8 L930.0 318.4 L939.8 310.8 L943.7 320.5 L957.4 316.5 L954.8 326.5 L969.6 327.0 L960.9 335.2 Z" stroke="#a08400" stroke-width="1.5" fill="#ffe94d" stroke-linejoin="round" stroke-linecap="round"/>
+  <text x="930.0" y="348.6" font-size="24" fill="#14181f" text-anchor="middle" font-weight="700"><tspan dy="0.0">ATP</tspan></text>
+  <text x="878.0" y="348.6" font-size="26" fill="#14181f" text-anchor="end" font-weight="600"><tspan dy="0.0">6</tspan></text>
+  <path d="M340.0 545.0 L804.0 545.0 L804.0 535.0 L840.0 560.0 L804.0 585.0 L804.0 575.0 L340.0 575.0 Z" stroke="#14181f" stroke-width="1.5" fill="url(#harr)" stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="M974.0 560.0 L960.9 564.8 L969.6 573.0 L954.8 573.5 L957.4 583.5 L943.7 579.5 L939.8 589.2 L930.0 581.6 L920.2 589.2 L916.3 579.5 L902.6 583.5 L905.2 573.5 L890.4 573.0 L899.1 564.8 L886.0 560.0 L899.1 555.2 L890.4 547.0 L905.2 546.5 L902.6 536.5 L916.3 540.5 L920.2 530.8 L930.0 538.4 L939.8 530.8 L943.7 540.5 L957.4 536.5 L954.8 546.5 L969.6 547.0 L960.9 555.2 Z" stroke="#a08400" stroke-width="1.5" fill="#ffe94d" stroke-linejoin="round" stroke-linecap="round"/>
+  <text x="930.0" y="568.6" font-size="24" fill="#14181f" text-anchor="middle" font-weight="700"><tspan dy="0.0">ATP</tspan></text>
+  <text x="878.0" y="568.6" font-size="26" fill="#14181f" text-anchor="end" font-weight="600"><tspan dy="0.0">2</tspan></text>
+  <path d="M340.0 655.0 L524.0 655.0 L524.0 645.0 L560.0 670.0 L524.0 695.0 L524.0 685.0 L340.0 685.0 Z" stroke="#14181f" stroke-width="1.5" fill="url(#harr)" stroke-linejoin="round" stroke-linecap="round"/>
+  <text x="578.0" y="679.0" font-size="26" fill="#14181f" text-anchor="start" font-weight="400"><tspan dy="0.0">6</tspan></text>
+  <rect x="612.0" y="648.0" width="100.0" height="44.0" rx="0" stroke="#14181f" stroke-width="1.5" fill="#ffe94d"/>
+  <text x="662.0" y="679.0" font-size="26" fill="#14181f" text-anchor="middle" font-weight="400"><tspan dy="0.0">NADH</tspan></text>
+  <path d="M745.0 655.0 L804.0 655.0 L804.0 645.0 L840.0 670.0 L804.0 695.0 L804.0 685.0 L745.0 685.0 Z" stroke="#14181f" stroke-width="1.5" fill="url(#harr)" stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="M974.0 670.0 L960.9 674.8 L969.6 683.0 L954.8 683.5 L957.4 693.5 L943.7 689.5 L939.8 699.2 L930.0 691.6 L920.2 699.2 L916.3 689.5 L902.6 693.5 L905.2 683.5 L890.4 683.0 L899.1 674.8 L886.0 670.0 L899.1 665.2 L890.4 657.0 L905.2 656.5 L902.6 646.5 L916.3 650.5 L920.2 640.8 L930.0 648.4 L939.8 640.8 L943.7 650.5 L957.4 646.5 L954.8 656.5 L969.6 657.0 L960.9 665.2 Z" stroke="#a08400" stroke-width="1.5" fill="#ffe94d" stroke-linejoin="round" stroke-linecap="round"/>
+  <text x="930.0" y="678.6" font-size="24" fill="#14181f" text-anchor="middle" font-weight="700"><tspan dy="0.0">ATP</tspan></text>
+  <text x="878.0" y="678.6" font-size="26" fill="#14181f" text-anchor="end" font-weight="600"><tspan dy="0.0">18</tspan></text>
+  <path d="M340.0 745.0 L524.0 745.0 L524.0 735.0 L560.0 760.0 L524.0 785.0 L524.0 775.0 L340.0 775.0 Z" stroke="#14181f" stroke-width="1.5" fill="url(#harr)" stroke-linejoin="round" stroke-linecap="round"/>
+  <text x="578.0" y="769.0" font-size="26" fill="#14181f" text-anchor="start" font-weight="400"><tspan dy="0.0">2</tspan></text>
+  <rect x="612.0" y="738.0" width="120.0" height="44.0" rx="0" stroke="#14181f" stroke-width="1.5" fill="#ffe94d"/>
+  <text x="672.0" y="769.0" font-size="26" fill="#14181f" text-anchor="middle" font-weight="400"><tspan dy="0.0">FADH</tspan><tspan dy="7.8" font-size="17.7">2</tspan></text>
+  <path d="M745.0 745.0 L804.0 745.0 L804.0 735.0 L840.0 760.0 L804.0 785.0 L804.0 775.0 L745.0 775.0 Z" stroke="#14181f" stroke-width="1.5" fill="url(#harr)" stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="M974.0 760.0 L960.9 764.8 L969.6 773.0 L954.8 773.5 L957.4 783.5 L943.7 779.5 L939.8 789.2 L930.0 781.6 L920.2 789.2 L916.3 779.5 L902.6 783.5 L905.2 773.5 L890.4 773.0 L899.1 764.8 L886.0 760.0 L899.1 755.2 L890.4 747.0 L905.2 746.5 L902.6 736.5 L916.3 740.5 L920.2 730.8 L930.0 738.4 L939.8 730.8 L943.7 740.5 L957.4 736.5 L954.8 746.5 L969.6 747.0 L960.9 755.2 Z" stroke="#a08400" stroke-width="1.5" fill="#ffe94d" stroke-linejoin="round" stroke-linecap="round"/>
+  <text x="930.0" y="768.6" font-size="24" fill="#14181f" text-anchor="middle" font-weight="700"><tspan dy="0.0">ATP</tspan></text>
+  <text x="878.0" y="768.6" font-size="26" fill="#14181f" text-anchor="end" font-weight="600"><tspan dy="0.0">4</tspan></text>
+  <text x="800.0" y="855.0" font-size="26" fill="#14181f" text-anchor="end" font-weight="400"><tspan dy="0.0">Total net yield =</tspan></text>
+  <path d="M974.0 845.0 L960.9 849.8 L969.6 858.0 L954.8 858.5 L957.4 868.5 L943.7 864.5 L939.8 874.2 L930.0 866.6 L920.2 874.2 L916.3 864.5 L902.6 868.5 L905.2 858.5 L890.4 858.0 L899.1 849.8 L886.0 845.0 L899.1 840.2 L890.4 832.0 L905.2 831.5 L902.6 821.5 L916.3 825.5 L920.2 815.8 L930.0 823.4 L939.8 815.8 L943.7 825.5 L957.4 821.5 L954.8 831.5 L969.6 832.0 L960.9 840.2 Z" stroke="#a08400" stroke-width="1.5" fill="#ffe94d" stroke-linejoin="round" stroke-linecap="round"/>
+  <text x="930.0" y="853.6" font-size="24" fill="#14181f" text-anchor="middle" font-weight="700"><tspan dy="0.0">ATP</tspan></text>
+  <text x="878.0" y="853.6" font-size="26" fill="#14181f" text-anchor="end" font-weight="600"><tspan dy="0.0">36</tspan></text>
 </svg>
