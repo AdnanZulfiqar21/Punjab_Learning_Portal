@@ -1,53 +1,121 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" font-family="Segoe UI, Helvetica, Arial, sans-serif">
-  <rect width="1200" height="800" fill="#ffffff"/>
-  <!-- Original diagram after Figure 5.9: non-cyclic photophosphorylation drawn as the Z-scheme. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 820" font-family="Segoe UI, Helvetica, Arial, sans-serif">
   <defs>
-    <style>
-      .h{font-size:27px;font-weight:700;fill:#14181f;text-anchor:middle}
-      .s{font-size:18px;fill:#4b5563;text-anchor:middle}
-      .b{font-size:18px;font-weight:700;fill:#ffffff;text-anchor:middle}
-      .n{font-size:18px;fill:#14181f;text-anchor:middle;font-weight:700}
-    </style>
-    <marker id="ar" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#4b5563"/></marker>
-    <marker id="ary" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#d98b2b"/></marker>
+    <radialGradient id="pig" cx="50%" cy="45%" r="60%"><stop offset="0%" stop-color="#ffffff"/><stop offset="100%" stop-color="#14a050"/></radialGradient>
+    <linearGradient id="up" x1="0" y1="1" x2="0" y2="0"><stop offset="0%" stop-color="#ffffff"/><stop offset="100%" stop-color="#e3262b"/></linearGradient>
+    <linearGradient id="step" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#ffffff"/><stop offset="100%" stop-color="#e3262b"/></linearGradient>
   </defs>
-  <text class="h" x="600" y="40">Non-cyclic photophosphorylation: the Z-scheme</text>
-  <!-- energy axis -->
-  <path d="M80 680 V90" stroke="#14181f" stroke-width="3" marker-end="url(#ar)"/>
-  <text class="s" x="40" y="400" transform="rotate(-90 40 400)">energy level of electrons</text>
-  <!-- PS-II -->
-  <rect x="150" y="560" width="130" height="70" rx="12" fill="#0f7a62"/><text class="b" x="215" y="590">PS-II</text><text class="b" x="215" y="614">P680</text>
-  <!-- primary acceptor II -->
-  <rect x="300" y="250" width="130" height="50" rx="10" fill="#d98b2b"/><text class="b" x="365" y="282">acceptor</text>
-  <!-- ETC 1 -->
-  <g fill="#9ca3af"><circle cx="470" cy="330" r="20"/><circle cx="530" cy="400" r="20"/><circle cx="590" cy="470" r="20"/></g>
-  <text class="s" x="470" y="300">PQ</text><text class="s" x="440" y="430">cytochrome</text><text class="s" x="440" y="454">complex</text><text class="s" x="590" y="510">PC</text>
-  <!-- PS-I -->
-  <rect x="640" y="500" width="130" height="70" rx="12" fill="#5b3fb5"/><text class="b" x="705" y="530">PS-I</text><text class="b" x="705" y="554">P700</text>
-  <!-- primary acceptor I -->
-  <rect x="800" y="140" width="130" height="50" rx="10" fill="#d98b2b"/><text class="b" x="865" y="172">acceptor</text>
-  <!-- FD and NADP -->
-  <circle cx="990" cy="210" r="20" fill="#9ca3af"/><text class="s" x="990" y="255">FD</text>
-  <rect x="1040" y="250" width="140" height="56" rx="10" fill="#1f6fb5"/><text class="b" x="1110" y="285">NADPH</text>
-  <!-- electron path -->
-  <g stroke="#4b5563" stroke-width="4" fill="none" marker-end="url(#ar)">
-    <path d="M215 555 L340 300"/>
-    <path d="M430 285 L460 318"/><path d="M485 345 L520 385"/><path d="M545 415 L580 455"/><path d="M605 480 L660 500"/>
-    <path d="M705 495 L840 190"/>
-    <path d="M930 170 L975 200"/><path d="M1008 222 L1045 250"/>
-  </g>
-  <!-- light -->
-  <g stroke="#f2b134" stroke-width="5" fill="none" marker-end="url(#ary)"><path d="M150 450 L200 560"/><path d="M640 400 L690 500"/></g>
-  <text class="n" x="120" y="440">light</text><text class="n" x="600" y="380">light</text>
-  <!-- photolysis -->
-  <rect x="120" y="660" width="220" height="60" rx="10" fill="#dbe9f5" stroke="#1f6fb5" stroke-width="3"/>
-  <text class="n" x="230" y="685">2H2O</text><text class="s" x="230" y="708">photolysis: 4H+ + O2 + 4e-</text>
-  <path d="M230 655 L220 635" stroke="#4b5563" stroke-width="4" marker-end="url(#ar)"/>
-  <!-- ATP by chemiosmosis -->
-  <rect x="560" y="560" width="60" height="30" rx="8" fill="#0f7a62"/><text class="b" x="590" y="582" style="font-size:16px">ATP</text>
-  <text class="s" x="470" y="600">chemiosmosis</text>
-  <path d="M560 440 L575 555" stroke="#4b5563" stroke-width="2" stroke-dasharray="5 4"/>
-  <!-- step numbers -->
-  <g class="n"><text x="270" y="420">1</text><text x="130" y="650">2</text><text x="520" y="330">3</text><text x="770" y="330">4</text><text x="990" y="150">5</text></g>
-  <text class="s" x="600" y="762">1 PS-II absorbs light; 2 photolysis of water fills the hole in P680; 3 electrons flow down the chain to PS-I, making ATP;</text><text class="s" x="600" y="788">4 PS-I absorbs light; 5 ferredoxin and NADP reductase make NADPH.</text>
+  <rect width="1200" height="820" fill="#ffffff"/>
+  <!-- Figure 5.9 Light-dependent reactions (noncyclic photophosphorylation) (C11-BIO PDF p152); original drawing -->
+  <ellipse cx="250.0" cy="540.0" rx="46.0" ry="23.0" stroke="#0b6b34" stroke-width="1.5" fill="url(#pig)"/>
+  <ellipse cx="350.0" cy="540.0" rx="46.0" ry="23.0" stroke="#0b6b34" stroke-width="1.5" fill="url(#pig)"/>
+  <ellipse cx="200.0" cy="592.0" rx="46.0" ry="23.0" stroke="#0b6b34" stroke-width="1.5" fill="url(#pig)"/>
+  <ellipse cx="300.0" cy="592.0" rx="50.0" ry="25.0" stroke="#05502a" stroke-width="2" fill="#169a4f"/>
+  <text x="300.0" y="602.0" font-size="27" fill="#14181f" text-anchor="middle" font-weight="600"><tspan dy="0.0">P680</tspan></text>
+  <ellipse cx="400.0" cy="592.0" rx="46.0" ry="23.0" stroke="#0b6b34" stroke-width="1.5" fill="url(#pig)"/>
+  <ellipse cx="150.0" cy="644.0" rx="46.0" ry="23.0" stroke="#0b6b34" stroke-width="1.5" fill="url(#pig)"/>
+  <ellipse cx="250.0" cy="644.0" rx="46.0" ry="23.0" stroke="#0b6b34" stroke-width="1.5" fill="url(#pig)"/>
+  <ellipse cx="350.0" cy="644.0" rx="46.0" ry="23.0" stroke="#0b6b34" stroke-width="1.5" fill="url(#pig)"/>
+  <ellipse cx="450.0" cy="644.0" rx="46.0" ry="23.0" stroke="#0b6b34" stroke-width="1.5" fill="url(#pig)"/>
+  <ellipse cx="200.0" cy="696.0" rx="46.0" ry="23.0" stroke="#0b6b34" stroke-width="1.5" fill="url(#pig)"/>
+  <ellipse cx="300.0" cy="696.0" rx="46.0" ry="23.0" stroke="#0b6b34" stroke-width="1.5" fill="url(#pig)"/>
+  <ellipse cx="400.0" cy="696.0" rx="46.0" ry="23.0" stroke="#0b6b34" stroke-width="1.5" fill="url(#pig)"/>
+  <ellipse cx="250.0" cy="748.0" rx="46.0" ry="23.0" stroke="#0b6b34" stroke-width="1.5" fill="url(#pig)"/>
+  <ellipse cx="350.0" cy="748.0" rx="46.0" ry="23.0" stroke="#0b6b34" stroke-width="1.5" fill="url(#pig)"/>
+  <ellipse cx="870.0" cy="480.0" rx="46.0" ry="23.0" stroke="#0b6b34" stroke-width="1.5" fill="url(#pig)"/>
+  <ellipse cx="970.0" cy="480.0" rx="46.0" ry="23.0" stroke="#0b6b34" stroke-width="1.5" fill="url(#pig)"/>
+  <ellipse cx="820.0" cy="532.0" rx="46.0" ry="23.0" stroke="#0b6b34" stroke-width="1.5" fill="url(#pig)"/>
+  <ellipse cx="920.0" cy="532.0" rx="50.0" ry="25.0" stroke="#05502a" stroke-width="2" fill="#169a4f"/>
+  <text x="920.0" y="542.0" font-size="27" fill="#14181f" text-anchor="middle" font-weight="600"><tspan dy="0.0">P700</tspan></text>
+  <ellipse cx="1020.0" cy="532.0" rx="46.0" ry="23.0" stroke="#0b6b34" stroke-width="1.5" fill="url(#pig)"/>
+  <ellipse cx="770.0" cy="584.0" rx="46.0" ry="23.0" stroke="#0b6b34" stroke-width="1.5" fill="url(#pig)"/>
+  <ellipse cx="870.0" cy="584.0" rx="46.0" ry="23.0" stroke="#0b6b34" stroke-width="1.5" fill="url(#pig)"/>
+  <ellipse cx="970.0" cy="584.0" rx="46.0" ry="23.0" stroke="#0b6b34" stroke-width="1.5" fill="url(#pig)"/>
+  <ellipse cx="1070.0" cy="584.0" rx="46.0" ry="23.0" stroke="#0b6b34" stroke-width="1.5" fill="url(#pig)"/>
+  <ellipse cx="820.0" cy="636.0" rx="46.0" ry="23.0" stroke="#0b6b34" stroke-width="1.5" fill="url(#pig)"/>
+  <ellipse cx="920.0" cy="636.0" rx="46.0" ry="23.0" stroke="#0b6b34" stroke-width="1.5" fill="url(#pig)"/>
+  <ellipse cx="1020.0" cy="636.0" rx="46.0" ry="23.0" stroke="#0b6b34" stroke-width="1.5" fill="url(#pig)"/>
+  <ellipse cx="870.0" cy="688.0" rx="46.0" ry="23.0" stroke="#0b6b34" stroke-width="1.5" fill="url(#pig)"/>
+  <ellipse cx="970.0" cy="688.0" rx="46.0" ry="23.0" stroke="#0b6b34" stroke-width="1.5" fill="url(#pig)"/>
+  <text x="300.0" y="808.0" font-size="28" fill="#14181f" text-anchor="middle" font-weight="600"><tspan dy="0.0">PHOTOSYSTEM II</tspan></text>
+  <text x="920.0" y="750.0" font-size="28" fill="#14181f" text-anchor="middle" font-weight="600"><tspan dy="0.0">PHOTOSYSTEM I</tspan></text>
+  <path d="M180.0 732.0 Q210.0 622.0 252.0 616.4" stroke="#f08a24" stroke-width="9" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="M270.0 614.0 L248.9 629.1 L245.6 604.9 Z" fill="#f08a24"/>
+  <path d="M1040.0 672.0 Q1010.0 562.0 968.0 556.4" stroke="#f08a24" stroke-width="9" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="M950.0 554.0 L974.4 544.9 L971.1 569.1 Z" fill="#f08a24"/>
+  <rect x="30.0" y="455.0" width="28.0" height="28.0" rx="3" stroke="#3b3b8f" stroke-width="2" fill="#f5d000"/>
+  <rect x="68.0" y="455.0" width="28.0" height="28.0" rx="3" stroke="#3b3b8f" stroke-width="2" fill="#f5d000"/>
+  <rect x="54.0" y="489.0" width="28.0" height="28.0" rx="3" stroke="#3b3b8f" stroke-width="2" fill="#f5d000"/>
+  <rect x="92.0" y="489.0" width="28.0" height="28.0" rx="3" stroke="#3b3b8f" stroke-width="2" fill="#f5d000"/>
+  <rect x="78.0" y="523.0" width="28.0" height="28.0" rx="3" stroke="#3b3b8f" stroke-width="2" fill="#f5d000"/>
+  <rect x="116.0" y="523.0" width="28.0" height="28.0" rx="3" stroke="#3b3b8f" stroke-width="2" fill="#f5d000"/>
+  <rect x="102.0" y="557.0" width="28.0" height="28.0" rx="3" stroke="#3b3b8f" stroke-width="2" fill="#f5d000"/>
+  <rect x="140.0" y="557.0" width="28.0" height="28.0" rx="3" stroke="#3b3b8f" stroke-width="2" fill="#f5d000"/>
+  <text x="12.0" y="440.0" font-size="26" fill="#14181f" text-anchor="start" font-weight="400"><tspan dy="0.0">Photons</tspan></text>
+  <rect x="1110.0" y="430.0" width="28.0" height="28.0" rx="3" stroke="#3b3b8f" stroke-width="2" fill="#f5d000"/>
+  <rect x="1148.0" y="430.0" width="28.0" height="28.0" rx="3" stroke="#3b3b8f" stroke-width="2" fill="#f5d000"/>
+  <rect x="1088.0" y="464.0" width="28.0" height="28.0" rx="3" stroke="#3b3b8f" stroke-width="2" fill="#f5d000"/>
+  <rect x="1126.0" y="464.0" width="28.0" height="28.0" rx="3" stroke="#3b3b8f" stroke-width="2" fill="#f5d000"/>
+  <rect x="1066.0" y="498.0" width="28.0" height="28.0" rx="3" stroke="#3b3b8f" stroke-width="2" fill="#f5d000"/>
+  <rect x="1104.0" y="498.0" width="28.0" height="28.0" rx="3" stroke="#3b3b8f" stroke-width="2" fill="#f5d000"/>
+  <text x="1100.0" y="418.0" font-size="28" fill="#14181f" text-anchor="middle" font-weight="400"><tspan dy="0.0">Photons</tspan></text>
+  <path d="M296.0 566.0 L304.0 566.0 L322.0 294.0 L342.0 294.0 L300.0 250.0 L258.0 294.0 L278.0 294.0 Z" stroke="#b71c1c" stroke-width="1.5" fill="url(#up)" stroke-linejoin="round" stroke-linecap="round"/>
+  <text x="300.0" y="288.0" font-size="22" fill="#5a0b0b" text-anchor="middle" font-weight="700"><tspan dy="0.0">2e</tspan><tspan dy="-9.2" font-size="15.0">&#8722;</tspan></text>
+  <rect x="175.0" y="175.0" width="250.0" height="70.0" rx="3" stroke="#9b1414" stroke-width="1.5" fill="#e53935"/>
+  <text x="300.0" y="204.0" font-size="24" fill="#ffffff" text-anchor="middle" font-weight="600"><tspan dy="0.0">Primary</tspan></text>
+  <text x="300.0" y="231.0" font-size="24" fill="#ffffff" text-anchor="middle" font-weight="600"><tspan dy="0.0">electron acceptor</tspan></text>
+  <ellipse cx="185.0" cy="405.0" rx="46.0" ry="28.0" stroke="#1b7fb0" stroke-width="2" fill="#7fd0f5"/>
+  <text x="185.0" y="414.7" font-size="27" fill="#14181f" text-anchor="middle" font-weight="600"><tspan dy="0.0">H</tspan><tspan dy="8.1" font-size="18.4">2</tspan><tspan dy="-8.1">O</tspan></text>
+  <ellipse cx="185.0" cy="300.0" rx="40.0" ry="27.0" stroke="#1b7fb0" stroke-width="2" fill="#7fd0f5"/>
+  <text x="185.0" y="309.7" font-size="27" fill="#14181f" text-anchor="middle" font-weight="600"><tspan dy="0.0">2H</tspan><tspan dy="-11.3" font-size="18.4">+</tspan></text>
+  <ellipse cx="70.0" cy="345.0" rx="44.0" ry="27.0" stroke="#1b7fb0" stroke-width="2" fill="#7fd0f5"/>
+  <text x="70.0" y="354.0" font-size="25" fill="#14181f" text-anchor="middle" font-weight="600"><tspan dy="0.0">&#189;O</tspan><tspan dy="7.5" font-size="17.0">2</tspan></text>
+  <ellipse cx="205.0" cy="500.0" rx="38.0" ry="25.0" stroke="#1b7fb0" stroke-width="2" fill="#7fd0f5"/>
+  <text x="205.0" y="509.7" font-size="27" fill="#14181f" text-anchor="middle" font-weight="600"><tspan dy="0.0">2e</tspan><tspan dy="-11.3" font-size="18.4">&#8722;</tspan></text>
+  <line x1="145.0" y1="390.0" x2="123.8" y2="373.9" stroke="#14181f" stroke-width="3" stroke-linecap="round"/>
+  <path d="M116.0 368.0 L129.8 370.2 L121.9 380.7 Z" fill="#14181f"/>
+  <path d="M188.0 377.0 Q190.0 350.0 187.9 339.6" stroke="#14181f" stroke-width="3" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="M186.0 330.0 L194.9 340.8 L182.0 343.4 Z" fill="#14181f"/>
+  <path d="M220.0 428.0 Q238.0 450.0 225.9 466.2" stroke="#14181f" stroke-width="3" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="M220.0 474.0 L222.2 460.2 L232.7 468.1 Z" fill="#14181f"/>
+  <path d="M219.7 525.9 L242.5 560.4 L236.4 565.5 L268.0 578.0 L260.7 544.8 L254.6 550.0 L224.3 522.1 Z" fill="url(#step)" stroke="#b71c1c" stroke-width="1.2" transform="rotate(0)"/>
+  <ellipse cx="500.0" cy="250.0" rx="40.0" ry="27.0" stroke="#1b7fb0" stroke-width="2" fill="#7fd0f5"/>
+  <text x="500.0" y="259.7" font-size="27" fill="#14181f" text-anchor="middle" font-weight="600"><tspan dy="0.0">PQ</tspan></text>
+  <path d="M425.6 196.8 L437.5 220.9 L431.1 225.7 L462.0 240.0 L456.7 206.4 L450.3 211.2 L430.4 193.2 Z" fill="url(#step)" stroke="#b71c1c" stroke-width="1.2" transform="rotate(0)"/>
+  <text x="457.0" y="183.5" font-size="27" fill="#14181f" text-anchor="middle" font-weight="600"><tspan dy="0.0">2e</tspan><tspan dy="-11.3" font-size="18.4">&#8722;</tspan></text>
+  <path d="M505.0 300.0 L742.0 410.0 L575.0 520.0 Z" stroke="#c2610c" stroke-width="1.5" fill="#f28c28" stroke-linejoin="round" stroke-linecap="round"/>
+  <ellipse cx="650.0" cy="335.0" rx="88.0" ry="40.0" stroke="#1b7fb0" stroke-width="2" fill="#7fd0f5"/>
+  <text x="650.0" y="344.7" font-size="27" fill="#14181f" text-anchor="middle" font-weight="600"></text>
+  <text x="650.0" y="327.0" font-size="24" fill="#14181f" text-anchor="middle" font-weight="600"><tspan dy="0.0">Cytochrome</tspan></text>
+  <text x="650.0" y="353.0" font-size="24" fill="#14181f" text-anchor="middle" font-weight="600"><tspan dy="0.0">complex</tspan></text>
+  <path d="M533.0 266.2 L552.6 291.4 L547.2 297.2 L580.0 306.0 L569.0 273.8 L563.5 279.7 L537.0 261.8 Z" fill="url(#step)" stroke="#b71c1c" stroke-width="1.2" transform="rotate(0)"/>
+  <text x="589.5" y="271.0" font-size="27" fill="#14181f" text-anchor="middle" font-weight="600"><tspan dy="0.0">2e</tspan><tspan dy="-11.3" font-size="18.4">&#8722;</tspan></text>
+  <ellipse cx="790.0" cy="420.0" rx="40.0" ry="27.0" stroke="#1b7fb0" stroke-width="2" fill="#7fd0f5"/>
+  <text x="790.0" y="429.7" font-size="27" fill="#14181f" text-anchor="middle" font-weight="600"><tspan dy="0.0">PC</tspan></text>
+  <path d="M710.0 368.2 L724.3 387.9 L719.0 393.8 L752.0 402.0 L740.4 370.0 L735.1 376.0 L714.0 363.8 Z" fill="url(#step)" stroke="#b71c1c" stroke-width="1.2" transform="rotate(0)"/>
+  <text x="766.0" y="370.0" font-size="27" fill="#14181f" text-anchor="middle" font-weight="600"><tspan dy="0.0">2e</tspan><tspan dy="-11.3" font-size="18.4">&#8722;</tspan></text>
+  <path d="M819.5 441.7 L850.7 497.5 L844.0 501.9 L874.0 518.0 L870.7 484.2 L864.0 488.6 L824.5 438.3 Z" fill="url(#step)" stroke="#b71c1c" stroke-width="1.2" transform="rotate(0)"/>
+  <text x="868.0" y="453.0" font-size="27" fill="#14181f" text-anchor="middle" font-weight="600"><tspan dy="0.0">2e</tspan><tspan dy="-11.3" font-size="18.4">&#8722;</tspan></text>
+  <text x="600.0" y="590.0" font-size="27" fill="#14181f" text-anchor="middle" font-weight="400"><tspan dy="0.0">Energy for</tspan></text>
+  <text x="600.0" y="621.0" font-size="27" fill="#14181f" text-anchor="middle" font-weight="400"><tspan dy="0.0">synthesis of ATP</tspan></text>
+  <text x="600.0" y="652.0" font-size="27" fill="#14181f" text-anchor="middle" font-weight="400"><tspan dy="0.0">by chemiosmosis</tspan></text>
+  <path d="M916.0 506.0 L924.0 506.0 L942.0 184.0 L962.0 184.0 L920.0 140.0 L878.0 184.0 L898.0 184.0 Z" stroke="#b71c1c" stroke-width="1.5" fill="url(#up)" stroke-linejoin="round" stroke-linecap="round"/>
+  <text x="920.0" y="178.0" font-size="22" fill="#5a0b0b" text-anchor="middle" font-weight="700"><tspan dy="0.0">2e</tspan><tspan dy="-9.2" font-size="15.0">&#8722;</tspan></text>
+  <rect x="795.0" y="65.0" width="250.0" height="70.0" rx="3" stroke="#9b1414" stroke-width="1.5" fill="#e53935"/>
+  <text x="920.0" y="94.0" font-size="24" fill="#ffffff" text-anchor="middle" font-weight="600"><tspan dy="0.0">Primary</tspan></text>
+  <text x="920.0" y="121.0" font-size="24" fill="#ffffff" text-anchor="middle" font-weight="600"><tspan dy="0.0">electron acceptor</tspan></text>
+  <ellipse cx="1130.0" cy="175.0" rx="38.0" ry="26.0" stroke="#1b7fb0" stroke-width="2" fill="#7fd0f5"/>
+  <text x="1130.0" y="184.7" font-size="27" fill="#14181f" text-anchor="middle" font-weight="600"><tspan dy="0.0">FD</tspan></text>
+  <path d="M1043.8 102.0 L1073.7 141.5 L1067.8 146.9 L1100.0 158.0 L1091.3 125.1 L1085.4 130.6 L1048.2 98.0 Z" fill="url(#step)" stroke="#b71c1c" stroke-width="1.2" transform="rotate(0)"/>
+  <ellipse cx="1140.0" cy="262.0" rx="38.0" ry="25.0" stroke="#1b7fb0" stroke-width="2" fill="#7fd0f5"/>
+  <text x="1140.0" y="271.7" font-size="27" fill="#14181f" text-anchor="middle" font-weight="600"><tspan dy="0.0">2e</tspan><tspan dy="-11.3" font-size="18.4">&#8722;</tspan></text>
+  <path d="M1132.0 202.4 L1127.5 207.1 L1119.6 208.1 L1139.0 236.0 L1151.4 204.3 L1143.4 205.3 L1138.0 201.6 Z" fill="url(#step)" stroke="#b71c1c" stroke-width="1.2" transform="rotate(0)"/>
+  <ellipse cx="1015.0" cy="262.0" rx="34.0" ry="26.0" stroke="#1b7fb0" stroke-width="2" fill="#7fd0f5"/>
+  <text x="1015.0" y="271.7" font-size="27" fill="#14181f" text-anchor="middle" font-weight="600"><tspan dy="0.0">H</tspan><tspan dy="-11.3" font-size="18.4">+</tspan></text>
+  <path d="M1040.0 280.0 Q1070.0 296.0 1078.0 318.0" stroke="#14181f" stroke-width="3" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="M1115.0 284.0 Q1086.0 296.0 1078.0 318.0" stroke="#14181f" stroke-width="3" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="M1140 350 Q1080 300 1030 352" stroke="#14181f" stroke-width="3.5" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="M1026.0 358.0 L1027.9 342.1 L1040.3 350.7 Z" fill="#14181f"/>
+  <rect x="957.5" y="362.1" width="95.0" height="31.0" rx="4" stroke="none" stroke-width="0" fill="#ffe94d"/>
+  <text x="1005.0" y="385.0" font-size="27" fill="#14181f" text-anchor="middle" font-weight="600"><tspan dy="0.0">NADPH</tspan></text>
+  <text x="1140.0" y="382.0" font-size="27" fill="#14181f" text-anchor="middle" font-weight="600"><tspan dy="0.0">NADP</tspan><tspan dy="-11.3" font-size="18.4">+</tspan></text>
 </svg>
