@@ -3,7 +3,7 @@
 // An unknown or unsupported block shows its reviewed fallback, or an explicit "update required" note instead of failing.
 import { Image } from "expo-image";
 import { Fragment, useState, type ReactNode } from "react";
-import { Pressable, View } from "react-native";
+import { Pressable, Text, View } from "react-native";
 
 import { Checkpoint } from "@/components/checkpoint";
 import { FigureViewer } from "@/components/figure-viewer";
@@ -11,6 +11,7 @@ import { Model3D } from "@/components/model3d";
 import { LinkButton, T } from "@/components/ui";
 import { Radius, Space } from "@/constants/theme";
 import { useTheme } from "@/hooks/use-theme";
+import { bookErrors, markPieces } from "@/lib/book-errors";
 import { comparisonCards } from "@/lib/lesson-tables";
 
 export const NATIVE_RENDERER_VERSION = 2;
@@ -23,7 +24,32 @@ const strs = (v: unknown) => (Array.isArray(v) ? v.map(str) : []);
 export type AssetSource = (versionId: string) => { uri: string; headers?: Record<string, string> };
 type Fallback = { text?: unknown; image_asset_id?: unknown; alt?: unknown };
 
-const CALLOUT_LABEL: Record<string, string> = { definition: "Definition", note: "Note", tip: "Tip", warning: "Take care" };
+const CALLOUT_LABEL: Record<string, string> = {
+  definition: "Definition",
+  note: "Note",
+  tip: "Tip",
+  warning: "Take care",
+  correction: "Book correction",
+};
+
+/** Text with the textbook's wrong passages marked in red (BOOK-CORRECTION-01). Nested Text keeps it one paragraph. */
+function Marked({ text, marks }: { text: string; marks: string[] }) {
+  const c = useTheme();
+  if (!marks.length) return <>{text}</>;
+  return (
+    <>
+      {markPieces(text, marks).map((p, i) =>
+        p.error ? (
+          <Text key={i} style={{ color: c.danger, backgroundColor: c.dangerSoft, fontWeight: "600" }}>
+            {p.text}
+          </Text>
+        ) : (
+          <Fragment key={i}>{p.text}</Fragment>
+        ),
+      )}
+    </>
+  );
+}
 
 export function LessonBlocks({
   blocks,
@@ -110,13 +136,15 @@ function ArchivedImage({
   );
 }
 
-function Lines({ items, ordered }: { items: string[]; ordered: boolean }) {
+function Lines({ items, ordered, marks = [] }: { items: string[]; ordered: boolean; marks?: string[] }) {
   return (
     <View style={{ gap: Space.xs }} accessibilityRole="list">
       {items.map((item, i) => (
         <View key={i} style={{ flexDirection: "row", gap: Space.sm }}>
           <T style={{ width: 22, textAlign: "right" }}>{ordered ? `${i + 1}.` : "•"}</T>
-          <T style={{ flex: 1 }}>{item}</T>
+          <T style={{ flex: 1 }}>
+            <Marked text={item} marks={marks} />
+          </T>
         </View>
       ))}
     </View>
@@ -125,29 +153,45 @@ function Lines({ items, ordered }: { items: string[]; ordered: boolean }) {
 
 function BlockView({ block: b, assetSource, dataSaver }: { block: Block; assetSource?: AssetSource; dataSaver?: boolean }) {
   const c = useTheme();
+  const marks = bookErrors(b.book_errors);
   switch (b.type) {
     case "heading":
       return (
         <T variant={b.level === 3 ? "subheading" : "heading"} accessibilityRole="header" style={{ marginTop: b.level === 3 ? 0 : Space.sm }}>
-          {str(b.text)}
+          <Marked text={str(b.text)} marks={marks} />
         </T>
       );
     case "paragraph":
-      return <T>{str(b.text)}</T>;
+      return (
+        <T>
+          <Marked text={str(b.text)} marks={marks} />
+        </T>
+      );
     case "list":
-      return <Lines items={strs(b.items)} ordered={b.ordered === true} />;
+      return <Lines items={strs(b.items)} ordered={b.ordered === true} marks={marks} />;
     case "callout": {
       const tone = str(b.tone) || "note";
-      // A tip is green, as on the web: the diagram explanations ("Understanding the diagram") use it.
-      const border = tone === "warning" ? c.warn : tone === "definition" ? c.accent : tone === "tip" ? c.ok : c.border;
-      const bg = tone === "warning" ? c.warnSoft : tone === "definition" ? c.accentSoft : tone === "tip" ? c.okSoft : c.surfaceMuted;
+      // A tip is green, as on the web: the diagram explanations ("Understanding the diagram") use it. So is a book
+      // correction (BOOK-CORRECTION-01).
+      const green = tone === "tip" || tone === "correction";
+      const border = tone === "warning" ? c.warn : tone === "definition" ? c.accent : green ? c.ok : c.border;
+      const bg = tone === "warning" ? c.warnSoft : tone === "definition" ? c.accentSoft : green ? c.okSoft : c.surfaceMuted;
+      const label = CALLOUT_LABEL[tone] ?? "Note";
+      // A title that only repeats the label ("Book correction") is shown once.
+      const title = str(b.title).trim().toLowerCase() === label.toLowerCase() ? "" : str(b.title);
       return (
         <View style={{ borderLeftWidth: 4, borderLeftColor: border, backgroundColor: bg, borderRadius: Radius.sm, padding: Space.md, gap: Space.xs }}>
-          <T variant="eyebrow" style={{ color: tone === "warning" ? c.warn : tone === "definition" ? c.accent : tone === "tip" ? c.ok : c.muted }}>
-            {CALLOUT_LABEL[tone] ?? "Note"}
+          <T variant="eyebrow" style={{ color: tone === "warning" ? c.warn : tone === "definition" ? c.accent : green ? c.ok : c.muted }}>
+            {label}
           </T>
-          {str(b.title) ? <T style={{ fontWeight: "600" }}>{str(b.title)}</T> : null}
-          <T>{str(b.text)}</T>
+          {title ? (
+            <T style={{ fontWeight: "600" }}>
+              <Marked text={title} marks={marks} />
+            </T>
+          ) : null}
+          <T>
+            <Marked text={str(b.text)} marks={marks} />
+          </T>
         </View>
       );
     }
@@ -157,23 +201,29 @@ function BlockView({ block: b, assetSource, dataSaver }: { block: Block; assetSo
       const cards = comparisonCards(header, rows);
       return (
         <View style={{ gap: Space.sm }} accessibilityLabel={`Table: ${str(b.caption)}`}>
-          <T style={{ fontWeight: "600" }}>{str(b.caption)}</T>
+          <T style={{ fontWeight: "600" }}>
+            <Marked text={str(b.caption)} marks={marks} />
+          </T>
           {cards ? (
             cards.map((card, i) => (
               <View key={i} style={{ borderWidth: 1, borderColor: c.border, backgroundColor: c.surface, borderRadius: Radius.md, padding: Space.md, gap: Space.xs }}>
-                <T style={{ fontWeight: "700", color: c.accent }}>{card.title}</T>
+                <T style={{ fontWeight: "700", color: c.accent }}>
+                  <Marked text={card.title} marks={marks} />
+                </T>
                 {card.fields.map((f) => (
                   <View key={f.label} style={{ flexDirection: "row", gap: Space.sm }}>
                     <T variant="small" style={{ width: 104, fontWeight: "600" }}>
                       {f.label}
                     </T>
-                    <T style={{ flex: 1 }}>{f.value}</T>
+                    <T style={{ flex: 1 }}>
+                      <Marked text={f.value} marks={marks} />
+                    </T>
                   </View>
                 ))}
               </View>
             ))
           ) : (
-            <Lines items={rows.flat()} ordered={false} />
+            <Lines items={rows.flat()} ordered={false} marks={marks} />
           )}
         </View>
       );
@@ -192,9 +242,12 @@ function BlockView({ block: b, assetSource, dataSaver }: { block: Block; assetSo
       // Native renderer 2 has no typeset equations: show the reviewed static rendering and the text equivalent (§5.4).
       const fb = (b.fallback ?? {}) as Fallback;
       return (
-        <View style={{ borderWidth: 1, borderColor: c.border, borderRadius: Radius.sm, padding: Space.md, gap: Space.sm }}>
+        // A printed equation with an error is outlined in red, its wrong part marked (BOOK-CORRECTION-01).
+        <View style={{ borderWidth: marks.length ? 2 : 1, borderColor: marks.length ? c.danger : c.border, borderRadius: Radius.sm, padding: Space.md, gap: Space.sm }}>
           {str(fb.image_asset_id) ? <ArchivedImage id={str(fb.image_asset_id)} alt={str(fb.alt) || str(b.text_alt)} assetSource={assetSource} dataSaver={dataSaver} /> : null}
-          <T>{str(b.text_alt)}</T>
+          <T>
+            <Marked text={str(b.text_alt)} marks={marks} />
+          </T>
         </View>
       );
     }
@@ -206,10 +259,19 @@ function BlockView({ block: b, assetSource, dataSaver }: { block: Block; assetSo
           <T variant="eyebrow" style={{ color: c.muted }}>
             Worked example
           </T>
-          <T style={{ fontWeight: "600" }}>{str(b.title)}</T>
-          <T>{str(b.problem)}</T>
-          <Lines items={strs(b.steps)} ordered />
-          {str(b.answer) ? <T style={{ fontWeight: "600" }}>{`Answer: ${str(b.answer)}`}</T> : null}
+          <T style={{ fontWeight: "600" }}>
+            <Marked text={str(b.title)} marks={marks} />
+          </T>
+          <T>
+            <Marked text={str(b.problem)} marks={marks} />
+          </T>
+          <Lines items={strs(b.steps)} ordered marks={marks} />
+          {str(b.answer) ? (
+            <T style={{ fontWeight: "600" }}>
+              {"Answer: "}
+              <Marked text={str(b.answer)} marks={marks} />
+            </T>
+          ) : null}
         </View>
       );
     case "diagram":

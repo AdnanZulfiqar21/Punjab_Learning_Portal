@@ -42,6 +42,26 @@ def test_the_new_block_types_are_registered_for_the_oldest_clients() -> None:
     assert blocks.validate_body({"blocks": [html]}, for_publication=False).errors == []  # stored as plain text
 
 
+def test_book_errors_mark_printed_passages_and_a_correction_follows() -> None:
+    # BOOK-CORRECTION-01: the printed wording stays, its wrong passage is marked, and a correction callout follows.
+    para = {"type": "paragraph", "text": "Fixture value printed as 89.53 m.", "book_errors": ["89.53 m"]}
+    fix = {"type": "callout", "tone": "correction", "text": "Fixture value is 79.53 m."}
+    ok = blocks.validate_body({"blocks": [para, fix]}, for_publication=True)
+    assert ok.errors == []
+    table = {"type": "table", "caption": "Fixture", "header": ["A"], "rows": [["C10H14"]], "book_errors": ["C10H14"]}
+    example = {**EXAMPLE, "steps": ["Fixture step 41 N."], "book_errors": ["41 N"]}
+    eq = {"type": "equation", "latex": "x", "text_alt": "Fixture Kp = Kn N", "book_errors": ["Kn N"]}
+    assert blocks.validate_body({"blocks": [table, example, eq]}, for_publication=False).errors == []
+    # A printed box (Do You Know) may carry marks; a mark must be text the block shows; a correction box carries none.
+    box = {"type": "callout", "tone": "note", "title": "Do You Know?", "text": "Fixture 7.6 on reactor scale."}
+    box["book_errors"] = ["reactor scale"]
+    assert blocks.validate_body({"blocks": [box]}, for_publication=False).errors == []
+    stray = {**para, "book_errors": ["79.53 m"]}
+    assert blocks.validate_body({"blocks": [stray]}, for_publication=False).errors
+    marked_correction = {**fix, "book_errors": ["79.53 m"]}
+    assert blocks.validate_body({"blocks": [marked_correction]}, for_publication=False).errors
+
+
 def _staff(client: TestClient, db: Session) -> dict[str, Staff]:
     return {
         "author": Staff(client, db, ["content_author"], BIO11),

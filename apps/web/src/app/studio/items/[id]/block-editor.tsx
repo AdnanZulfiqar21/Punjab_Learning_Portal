@@ -136,6 +136,7 @@ function Fields({ block: b, index, update }: { block: Block; index: number; upda
               <option value="note">Note</option>
               <option value="tip">Tip</option>
               <option value="warning">Warning</option>
+              <option value="correction">Book correction</option>
             </select>
             <input aria-label="Callout title (optional)" placeholder="Title (optional)" value={s(b.title)} onChange={(e) => update({ title: e.target.value || undefined })} className={input} maxLength={300} />
           </div>

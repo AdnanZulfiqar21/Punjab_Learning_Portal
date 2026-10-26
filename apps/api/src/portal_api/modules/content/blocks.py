@@ -107,47 +107,90 @@ class Fallback(BaseModel):
 
 Text = Annotated[str, Field(min_length=1, max_length=5000)]
 Short = Annotated[str, Field(min_length=1, max_length=300)]
+# BOOK-CORRECTION-01: the English lesson keeps the textbook's printed wording, errors included. `book_errors` names the
+# exact printed passages that are wrong; clients mark them in red, and a `correction` callout after the block gives the
+# right version. Each passage must occur in the block's own text.
+BookErrors = Annotated[list[Short] | None, Field(max_length=10)]
 # An archived asset version (ASSETS-01). Which kind, class and subject it must be is checked against the archive.
 AssetRef = Annotated[str, Field(pattern=r"^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")]
 
 
-class Heading(_Block):
+class _Marked(_Block):
+    """A block whose text can carry book-error marks (BOOK-CORRECTION-01)."""
+
+    book_errors: BookErrors = None  # absent, not empty, so stored bodies stay as authored (dumps drop None)
+
+    def _texts(self) -> list[str]:
+        raise NotImplementedError
+
+    @model_validator(mode="after")
+    def _marks_in_text(self) -> _Marked:
+        texts = self._texts()
+        for mark in self.book_errors or []:
+            if not any(mark in t for t in texts):
+                raise ValueError(f"book error {mark!r} does not occur in the block's text")
+        return self
+
+
+class Heading(_Marked):
     type: Literal["heading"]
     level: Literal[2, 3] = 2
     text: Short
 
+    def _texts(self) -> list[str]:
+        return [self.text]
 
-class Paragraph(_Block):
+
+class Paragraph(_Marked):
     type: Literal["paragraph"]
     text: Text
 
+    def _texts(self) -> list[str]:
+        return [self.text]
 
-class ListBlock(_Block):
+
+class ListBlock(_Marked):
     type: Literal["list"]
     ordered: bool = False
     items: list[Annotated[str, Field(min_length=1, max_length=1000)]] = Field(min_length=1, max_length=50)
 
+    def _texts(self) -> list[str]:
+        return list(self.items)
 
-class Callout(_Block):
+
+class Callout(_Marked):
     type: Literal["callout"]
-    tone: Literal["definition", "note", "tip", "warning"] = "note"
+    # `correction`: the right version of a book error marked in the block before it (BOOK-CORRECTION-01). A printed
+    # box (Do You Know, For Your Information) may itself carry marks; a correction box never does.
+    tone: Literal["definition", "note", "tip", "warning", "correction"] = "note"
     title: Short | None = None
     text: Text
 
+    def _texts(self) -> list[str]:
+        if self.tone == "correction" and self.book_errors:
+            raise ValueError("a book correction box carries no book-error marks")
+        return [*([self.title] if self.title else []), self.text]
 
-class Table(_Block):
+
+class Table(_Marked):
     type: Literal["table"]
     caption: Short
     header: list[Annotated[str, Field(max_length=200)]] = Field(min_length=1, max_length=12)
     rows: list[list[Annotated[str, Field(max_length=500)]]] = Field(min_length=1, max_length=60)
 
+    def _texts(self) -> list[str]:
+        return [self.caption, *self.header, *(c for r in self.rows for c in r)]
 
-class Equation(_Block):
+
+class Equation(_Marked):
     type: Literal["equation"]
     latex: Annotated[str, Field(min_length=1, max_length=2000)]
     display: bool = True
     text_alt: Annotated[str, Field(min_length=1, max_length=1000)]  # spoken/plain equivalent, always required
     fallback: Fallback | None = None
+
+    def _texts(self) -> list[str]:
+        return [self.text_alt]
 
 
 class CheckpointOption(BaseModel):
@@ -184,7 +227,7 @@ class Checkpoint(_Block):
         return self
 
 
-class Example(_Block):
+class Example(_Marked):
     """A worked example (P07.S1.T1): the problem, numbered steps and the answer, all plain text."""
 
     type: Literal["example"]
@@ -192,6 +235,9 @@ class Example(_Block):
     problem: Text
     steps: list[Annotated[str, Field(min_length=1, max_length=2000)]] = Field(min_length=1, max_length=20)
     answer: Text | None = None
+
+    def _texts(self) -> list[str]:
+        return [self.title, self.problem, *self.steps, *([self.answer] if self.answer else [])]
 
 
 class Diagram(_Block):
