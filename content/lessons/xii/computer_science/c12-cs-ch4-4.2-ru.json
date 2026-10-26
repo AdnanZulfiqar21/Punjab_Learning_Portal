@@ -78,9 +78,8 @@
           {
             "type": "diagram",
             "$asset": "c12-cs-ch4-fig-er-concepts",
-            "alt": "Student entity ka dabba 'enrols in' relationship ke heere (diamond) se Course entity ke dabbe se jura. Student se chaar attribute ovals: Roll Number (underline, identifier, munfarid), Name, Class aur Age. Key entity, attribute, relationship aur identifier samjhati.",
-            "caption": "Entity, attribute, relationship aur identifier (4.2 ke mutabiq asal khaaka).",
-            "long_description": "Is tarah ka khaaka, entities ke liye dabbe, attributes ke liye ovals aur relationships ke liye heere, entity-relationship (ER) diagram kehlata hai."
+            "alt": "Student entity ka dabba; baayein taraf us ke attributes ke ovals: Roll Number (neeche lakeer, identifier), Name, Class, Age. Student se 'enrols in' relationship ka diamond Course entity tak jata hai.",
+            "caption": "Entity, attribute, relationship aur identifier (hamara apna khaaka; kitab mein yeh figure nahi)."
           },
           {
             "type": "heading",
@@ -101,9 +100,8 @@
           {
             "type": "diagram",
             "$asset": "c12-cs-ch4-fig-tables-keys",
-            "alt": "Student table ke columns RollNo (primary key), Name, Age aur DeptID (foreign key), rows 101 Ibrahim 20 1, 102 Kamal 21 2, 103 Zainab 20 1 aur 104 Ayesha 22 3. Row 102 record ke taur par aur Name column (attribute) ke taur par ghera hua. 'DeptID refers to Department.DeptID' wala teer Department table tak, jis ki primary key DeptID, rows 1 Computer Science, 2 Electronics aur 3 Mechanical.",
-            "caption": "Tables, records, fields, primary aur foreign keys (Fig 4.3 ke mutabiq asal khaaka).",
-            "long_description": "Kamal ka DeptID 2 hai, aur Department mein 2 dekhne se Electronics milta hai: foreign key har student row mein department ka naam dohraye baghair dono tables jorne deti hai."
+            "alt": "Do tables. Table: Student ke columns RollNo, Name, Age, DeptID; rows 101 Kiran 20 1; 102 Ibrahim 21 2; 103 M Kamal 20 1; 104 Zainab 22 3. Table: Department ke columns DeptID, DeptName; rows 1 Computer Science; 2 Electronics; 3 Mechanical. Nishanat: Column (Attribute), Field (Attribute Value), Record (Tuple), RollNo aur Department DeptID ke neeche Primary Key, aur Student DeptID se Department ki primary key tak lakeer par Foreign Key.",
+            "caption": "Figure 4.3: Tables, columns, records, fields, primary key aur foreign key ka rishta (kitab ki Figure 4.3 ke mutabiq asal khaaka)."
           },
           {
             "type": "paragraph",
@@ -137,6 +135,12 @@
             ]
           },
           {
+            "type": "diagram",
+            "$asset": "c12-cs-ch4-fig-db-steps",
+            "alt": "sqlite3 misal ke chhe qadam do rows mein: 1 connect (sqlite3.connect('school.db')), 2 cursor (connection.cursor()), 3 execute (cursor.execute(sql)), 4 commit (connection.commit()), 5 fetch (cursor.fetchall()), 6 close (connection.close()).",
+            "caption": "Python se database use karne ke qadam (hamara apna khaaka; kitab mein yeh figure nahi)."
+          },
+          {
             "type": "callout",
             "tone": "tip",
             "title": "Misal do dafa chalana",
@@ -150,6 +154,12 @@
           {
             "type": "paragraph",
             "text": "CRUD ka matlab Create, Read, Update aur Delete hai, jo mehfooz data par bunyadi amal hain (Fig 4.4 aur Table 4.1). Har database application maloomat durust aur taaza rakhne ke liye in par munhasir hai, aur Python cursor ke zariye SQL commands bhej kar yeh karta hai."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch4-fig-crud",
+            "alt": "students naam ka table, columns ID, Name, Age; rows 1 Ibrahim 25; 2 Zainab 30; 3 Kiran 28. Chaar buttons us ki taraf ishara karte hain: Create (INSERT...), Read (SELECT...), Update (UPDATE...) aur Delete (DELETE...).",
+            "caption": "Figure 4.4: Table par Create, Read, Update aur Delete operations (kitab ki Figure 4.4 ke mutabiq asal khaaka)."
           },
           {
             "type": "table",
@@ -181,13 +191,6 @@
                 "Record mitata hai; shart tay karti hai kaun si rows mitein"
               ]
             ]
-          },
-          {
-            "type": "diagram",
-            "$asset": "c12-cs-ch4-fig-crud",
-            "alt": "Darmiyan chhota students table (ID, Name, Age: 1 Ibrahim 25, 2 Zainab 30, 3 Kiran 28) jis ki taraf chaar teer: oopar Create (INSERT ...) aur Read (SELECT ...), neeche Update (UPDATE ...) aur Delete (DELETE ...). Note: Read data nahi badalta, jab ke Create, Update aur Delete badalte aur commit() chahte hain.",
-            "caption": "Table par chaar CRUD operations (Fig 4.4 ke mutabiq asal khaaka).",
-            "long_description": "Chaar mein se teen amal table badalte hain; isi liye Python ko un ke baad commit() call karna parta hai."
           },
           {
             "type": "list",
@@ -222,13 +225,6 @@
             "tone": "tip",
             "title": "Users ki qeematein: placeholders use karein",
             "text": "Jab qeematein user se aayein to unhein SQL text mein jorne ke bajaye alag bhejein, maslan cursor.execute(\"SELECT * FROM students WHERE name = ?\", (name,)). ? placeholder likhe gaye text ko command badalne (SQL injection) se rokta hai."
-          },
-          {
-            "type": "diagram",
-            "$asset": "c12-cs-ch4-fig-db-steps",
-            "alt": "Teeron se jure chhe dabbe: 1 connect (sqlite3.connect('school.db')), 2 cursor (connection.cursor()), 3 execute (cursor.execute(sql)), 4 commit (connection.commit()), 5 fetch (cursor.fetchall()), 6 close (connection.close()). Note: commit() INSERT, UPDATE aur DELETE jaisi tabdeeliyan mehfooz karta, aur fetchall() SELECT ki rows list ki shakal mein deta.",
-            "caption": "Python se database use karne ke qadam (connection misal ke mutabiq asal khaaka).",
-            "long_description": "Is chapter ki har sqlite3 misal mein yahi chhe qadam hain; sirf qadam 3 ka SQL badalta hai."
           },
           {
             "type": "checkpoint",

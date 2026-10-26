@@ -46,17 +46,16 @@
             ]
           },
           {
+            "type": "diagram",
+            "$asset": "c12-cs-ch5-fig-exceptions",
+            "alt": "try mein connection aur data insert. Koi error na ho to commit() data save karta hai aur 'Data inserted successfully' chhapta hai; sqlite3.Error aaye to except error dikhata hai aur rollback() tabdeeli wapas leta hai. Dono raste finally tak jate hain jo connection band kar ke 'Connection closed' chhapta hai.",
+            "caption": "try, except aur finally ke raste (hamara apna khaaka; kitab mein yeh figure nahi)."
+          },
+          {
             "type": "callout",
             "tone": "warning",
             "title": "Agar connection hi nakam ho",
             "text": "Agar sqlite3.connect() khud nakam ho to connection ka naam banta hi nahi, is liye finally mein 'if connection:' NameError deta hai, aur except wala rollback bhi isi tarah nakam hota hai. try se pehle connection = None likhna, aur rollback se pehle bhi 'if connection:', ise theek karta hai."
-          },
-          {
-            "type": "diagram",
-            "$asset": "c12-cs-ch5-fig-exceptions",
-            "alt": "Flow chart. try: connect, insert, commit. Ghalti na ho to teer commit() data mehfooz karta ('Data inserted successfully') tak. sqlite3.Error aaye to teer except: ghalti dikhao, rollback() tabdeeliyan wapas tak. Dono raste finally: connection band karo tak, jo ghalti ho ya na ho chalta hai. Note: program crash nahi hota kyunke har rasta finally par khatam hota hai.",
-            "caption": "try, except aur finally ke raste (exception misal ke mutabiq asal khaaka).",
-            "long_description": "Pehle se maujood ID wala record dalne par sqlite3.IntegrityError aata hai jo sqlite3.Error ki aik qism hai, is liye yeh program use batata, rollback karta aur phir bhi database band karta hai."
           },
           {
             "type": "callout",

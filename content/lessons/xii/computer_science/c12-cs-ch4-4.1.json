@@ -23,6 +23,12 @@
             "text": "This chapter teaches how to build user-friendly Graphical User Interfaces (GUIs) with Tkinter, Python's built-in GUI toolkit: windows, frames, labels, buttons and entry fields, layouts with pack(), grid() and place(), and event handling that links user actions to functions, ending with a simple login form. It then introduces databases, SQL, connecting Python to a database, and the basic CRUD operations with SQLite or MySQL."
           },
           {
+            "type": "diagram",
+            "$asset": "c12-cs-ch4-fig-4-1-gui",
+            "alt": "A window titled Simple GUI Example with minimise, maximise and close buttons. Inside it are an empty text field at the top, a Button, the word Label, and a large multi-line text box.",
+            "caption": "Figure 4.1: Graphical User Interface (GUI) (original drawing after the textbook's Figure 4.1)."
+          },
+          {
             "type": "heading",
             "level": 2,
             "text": "What is a GUI, and why is it important?"
@@ -53,6 +59,12 @@
             "text": "import tkinter as tk\n\n# Create main window\nwindow = tk.Tk()\nwindow.title(\"Simple GUI Example\")\nwindow.geometry(\"300x200\")\n\n# Function to handle the button click (event)\ndef on_click():\n....print(\"Button Clicked!\")\n\nlabel = tk.Label(window, text=\"Welcome to Tkinter\")\nlabel.pack(pady=10)\n\nentry = tk.Entry(window)\nentry.pack(pady=10)\n\nbutton = tk.Button(window, text=\"Click Me\", command=on_click)\nbutton.pack(pady=10)\n\n# Run the application\nwindow.mainloop()"
           },
           {
+            "type": "diagram",
+            "$asset": "c12-cs-ch4-fig-gui-window",
+            "alt": "Output window titled Simple GUI Example: the label Welcome to Tkinter, an empty entry field below it, and a Click Me button.",
+            "caption": "Output of the simple GUI example (original drawing after the output window printed beside the textbook's code)."
+          },
+          {
             "type": "list",
             "ordered": false,
             "items": [
@@ -61,13 +73,6 @@
               "command=on_click is event handling (a button click).",
               "mainloop() runs the GUI."
             ]
-          },
-          {
-            "type": "diagram",
-            "$asset": "c12-cs-ch4-fig-gui-window",
-            "alt": "A window titled Simple GUI Example contains the text Welcome to Tkinter, an empty entry box and a Click Me button. Arrows label them Label (shows text), Entry (takes typed input) and Button (runs a function when clicked); window = tk.Tk() marks the main window. A dashed arrow from the button leads to a note: command=on_click, a click runs on_click() and prints Button Clicked!. A footer says window.mainloop() keeps the window open and waiting for events.",
-            "caption": "A simple Tkinter window and its widgets (original diagram after Fig 4.1).",
-            "long_description": "Every Tkinter program has the same skeleton: create the window, create widgets inside it, place them with a layout method, link events to functions, then call mainloop()."
           },
           {
             "type": "heading",
@@ -98,6 +103,12 @@
             "tone": "note",
             "title": "Example: two frames (Python code; each .... is one 4-space indent)",
             "text": "import tkinter as tk\n\nwindow = tk.Tk()\nwindow.title(\"Tkinter Frames Example\")\nwindow.geometry(\"400x300\")\n\ntop_frame = tk.Frame(window, bg=\"lightblue\", height=100)\ntop_frame.pack(fill=\"x\")\n\nbottom_frame = tk.Frame(window, bg=\"lightgreen\", height=200)\nbottom_frame.pack(fill=\"both\", expand=True)\n\ntk.Label(top_frame, text=\"Top Frame\", bg=\"lightblue\").pack(pady=20)\ntk.Label(bottom_frame, text=\"Bottom Frame\", bg=\"lightgreen\").pack(pady=20)\n\nwindow.mainloop()"
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch4-fig-frames",
+            "alt": "Output window titled Tkinter Frames Example: the upper part is a light-blue frame with the text Top Frame, and the larger lower part is a light-green frame with the text Bottom Frame.",
+            "caption": "Output of the frames example (original drawing after the output window printed beside the textbook's code)."
           },
           {
             "type": "heading",
@@ -159,6 +170,12 @@
             ]
           },
           {
+            "type": "diagram",
+            "$asset": "c12-cs-ch4-fig-layouts",
+            "alt": "Three windows side by side. Pack(): Button 1, Button 2 and Button 3 stacked one below another in the centre. Grid(): Button 1 and Button 2 side by side in a row, with a wide Button 3 spanning both columns below. Place(): Button 1 at the top left, Button 2 lower down on the right, and Button 3 at the bottom left.",
+            "caption": "Figure 4.2: Diagram showing Tkinter Layout Managers: pack(), grid(), place() (original drawing after the textbook's Figure 4.2)."
+          },
+          {
             "type": "callout",
             "tone": "note",
             "title": "Example: pack() (Python code; each .... is one 4-space indent)",
@@ -179,13 +196,6 @@
           {
             "type": "paragraph",
             "text": "Each example starts like the frames example (import tkinter, create a 300 by 220 window with a title, create three buttons) and ends with window.mainloop()."
-          },
-          {
-            "type": "diagram",
-            "$asset": "c12-cs-ch4-fig-layouts",
-            "alt": "Three small windows. pack(): Button 1, 2 and 3 stacked top to bottom. grid(): Button 1 and Button 2 side by side in row 0, and a wide Button 3 spanning both columns in row 1, with dashed grid lines. place(): Button 1 at x=30, y=40, Button 2 at x=170, y=85 and Button 3 at x=30, y=140. Notes: pack stacks in order; grid uses rows and columns and columnspan; place uses exact positions.",
-            "caption": "The three layout managers (original diagram after Fig 4.2).",
-            "long_description": "pack and grid adjust positions for you; place does not, so place-based windows may look wrong if the window or font size changes."
           },
           {
             "type": "heading",
@@ -219,6 +229,12 @@
             "tone": "note",
             "title": "Example: login form (Python code; each .... is one 4-space indent)",
             "text": "import tkinter as tk\nfrom tkinter import messagebox\n\nwindow = tk.Tk()\nwindow.title(\"Login Form\")\nwindow.geometry(\"300x200\")\n\ndef check_login():\n....username = entry_user.get()\n....password = entry_pass.get()\n....if username == \"admin\" and password == \"1234\":\n........messagebox.showinfo(\"Success\", \"Login Successful!\")\n....else:\n........messagebox.showerror(\"Error\", \"Invalid Username or Password\")\n\ntk.Label(window, text=\"Username\").pack()\nentry_user = tk.Entry(window)\nentry_user.pack()\n\ntk.Label(window, text=\"Password\").pack()\nentry_pass = tk.Entry(window, show=\"*\")\nentry_pass.pack()\n\ntk.Button(window, text=\"Login\", command=check_login).pack(pady=10)\n\nwindow.mainloop()"
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch4-fig-login-form",
+            "alt": "Output of the login program: a window titled Login Form with a Username label and entry field, a Password label and entry field, and a Login button. Overlapping it is a separate message box titled Success with an information icon, the text Login Successful! and an ok button.",
+            "caption": "Output of the login form example: the Login Form window and the Success message box (original drawing after the windows printed beside the textbook's code)."
           },
           {
             "type": "list",

@@ -24,6 +24,12 @@
             "text": "Yeh chapter sikhata hai ke Python ke built-in GUI toolkit Tkinter se user-friendly Graphical User Interfaces (GUIs) kaise banayein: windows, frames, labels, buttons aur entry fields, pack(), grid() aur place() se layouts, aur event handling jo user ke amal ko functions se jorti hai, aakhir mein aik saada login form. Phir yeh databases, SQL, Python ko database se jorna, aur SQLite ya MySQL ke saath bunyadi CRUD operations se ta'aruf karata hai."
           },
           {
+            "type": "diagram",
+            "$asset": "c12-cs-ch4-fig-4-1-gui",
+            "alt": "Simple GUI Example naam ki window, minimise, maximise aur close buttons ke saath. Andar oopar khaali text field, aik Button, lafz Label, aur kai lines wala bara text box hai.",
+            "caption": "Figure 4.1: Graphical User Interface (GUI) (kitab ki Figure 4.1 ke mutabiq asal khaaka)."
+          },
+          {
             "type": "heading",
             "level": 2,
             "text": "GUI kya hai, aur kyun ahem hai?"
@@ -54,6 +60,12 @@
             "text": "import tkinter as tk\n\n# Create main window\nwindow = tk.Tk()\nwindow.title(\"Simple GUI Example\")\nwindow.geometry(\"300x200\")\n\n# Function to handle the button click (event)\ndef on_click():\n....print(\"Button Clicked!\")\n\nlabel = tk.Label(window, text=\"Welcome to Tkinter\")\nlabel.pack(pady=10)\n\nentry = tk.Entry(window)\nentry.pack(pady=10)\n\nbutton = tk.Button(window, text=\"Click Me\", command=on_click)\nbutton.pack(pady=10)\n\n# Run the application\nwindow.mainloop()"
           },
           {
+            "type": "diagram",
+            "$asset": "c12-cs-ch4-fig-gui-window",
+            "alt": "Simple GUI Example window ka output: Welcome to Tkinter label, us ke neeche khaali entry field, aur Click Me button.",
+            "caption": "Saada GUI misal ka output (kitab mein code ke saath chhapi window ke mutabiq asal khaaka)."
+          },
+          {
             "type": "list",
             "ordered": false,
             "items": [
@@ -62,13 +74,6 @@
               "command=on_click event handling hai: button dabane par on_click() chalta hai jo 'Button Clicked!' print karta hai.",
               "mainloop() GUI chalata aur window khuli rakh kar events ka intezar karta hai."
             ]
-          },
-          {
-            "type": "diagram",
-            "$asset": "c12-cs-ch4-fig-gui-window",
-            "alt": "'Simple GUI Example' window mein 'Welcome to Tkinter' text, khaali entry box aur 'Click Me' button. Teer inhein Label (text dikhata), Entry (likha input leta) aur Button (dabane par function chalata) batate; window = tk.Tk() main window. Button se dashed teer note tak: command=on_click, click par on_click() chal kar 'Button Clicked!' print. Neeche: window.mainloop() window khuli aur events ke intezar mein rakhta.",
-            "caption": "Saada Tkinter window aur us ke widgets (Fig 4.1 ke mutabiq asal khaaka).",
-            "long_description": "Har Tkinter program ka dhaancha aik sa hai: window banayein, us mein widgets banayein, layout method se rakhein, events ko functions se jorein, phir mainloop() call karein."
           },
           {
             "type": "heading",
@@ -103,9 +108,8 @@
           {
             "type": "diagram",
             "$asset": "c12-cs-ch4-fig-frames",
-            "alt": "'Tkinter Frames Example' window halke neele oopri frame (Top Frame) aur bare halke sabz neechle frame (Bottom Frame) mein bati. Notes: top_frame halka neela, height 100; bottom_frame halka sabz, fill both aur expand True; har frame apne widgets rakhta.",
-            "caption": "Window ko hisson mein baant'te frames (frames wali misal ke mutabiq asal khaaka).",
-            "long_description": "fill='both' aur expand=True neechle frame ko window ka size badalne par bachi jagah bharne deta hai."
+            "alt": "Tkinter Frames Example window ka output: oopar halke neele rang ka frame jis mein Top Frame likha hai, neeche bara halka sabz frame jis mein Bottom Frame likha hai.",
+            "caption": "Frames wali misal ka output (kitab mein code ke saath chhapi window ke mutabiq asal khaaka)."
           },
           {
             "type": "heading",
@@ -167,6 +171,12 @@
             ]
           },
           {
+            "type": "diagram",
+            "$asset": "c12-cs-ch4-fig-layouts",
+            "alt": "Teen windows saath saath. Pack(): Button 1, 2 aur 3 beech mein aik ke neeche aik. Grid(): Button 1 aur Button 2 aik row mein, neeche chaura Button 3 dono columns par phaila hua. Place(): Button 1 oopar baayein, Button 2 neeche daayein, Button 3 neeche baayein.",
+            "caption": "Figure 4.2: Tkinter ke layout managers: pack(), grid(), place() (kitab ki Figure 4.2 ke mutabiq asal khaaka)."
+          },
+          {
             "type": "callout",
             "tone": "note",
             "title": "Misal: pack() (Python code; har .... ek 4-space indent hai)",
@@ -187,13 +197,6 @@
           {
             "type": "paragraph",
             "text": "Har misal frames wali misal ki tarah shuru hoti hai (tkinter import, unwan wali 300 x 220 window, teen buttons) aur window.mainloop() par khatam hoti hai. Aik hi container ke widgets ke liye pack() aur grid() na milayein: Tkinter dono poore nahi kar sakta aur program ruk sakta hai."
-          },
-          {
-            "type": "diagram",
-            "$asset": "c12-cs-ch4-fig-layouts",
-            "alt": "Teen chhoti windows. pack(): Button 1, 2 aur 3 oopar se neeche. grid(): row 0 mein Button 1 aur 2 saath saath, row 1 mein dono columns par phaila chaura Button 3, dashed grid lines. place(): Button 1 x=30, y=40 par, Button 2 x=170, y=85 par aur Button 3 x=30, y=140 par. Notes: pack tarteeb se; grid rows, columns aur columnspan; place bilkul jagah.",
-            "caption": "Teen layout managers (Fig 4.2 ke mutabiq asal khaaka).",
-            "long_description": "pack aur grid jagahein khud adjust karte hain; place nahi karta, is liye window ya font ka size badalne par place wali windows ghalat lag sakti hain."
           },
           {
             "type": "heading",
@@ -218,6 +221,12 @@
             "text": "Event-driven programming mein program event, jaise button click ya key press, hone tak khamosh rehta hai. Har event aik function se jura hota hai jo sirf event hone par chalta hai, jis se system ke wasail bachte hain; GUIs mein yeh tareeqa aam hai. User ka input entry fields aur buttons jaise widgets se aata hai; widgets functions se jure hote hain, aur widget use hone par us ka function chal kar input process karta hai."
           },
           {
+            "type": "diagram",
+            "$asset": "c12-cs-ch4-fig-event-loop",
+            "alt": "Event loop ka chakkar: mainloop() event ka intezar karta hai; Login dabana event hai; is se check_login() chalta hai; messagebox paigham dikhata hai; phir mainloop() dobara intezar karta hai.",
+            "caption": "Login misal mein event loop (hamara apna khaaka; kitab mein yeh figure nahi)."
+          },
+          {
             "type": "heading",
             "level": 2,
             "text": "Misal: saada login form"
@@ -227,6 +236,18 @@
             "tone": "note",
             "title": "Misal: login form (Python code; har .... ek 4-space indent hai)",
             "text": "import tkinter as tk\nfrom tkinter import messagebox\n\nwindow = tk.Tk()\nwindow.title(\"Login Form\")\nwindow.geometry(\"300x200\")\n\ndef check_login():\n....username = entry_user.get()\n....password = entry_pass.get()\n....if username == \"admin\" and password == \"1234\":\n........messagebox.showinfo(\"Success\", \"Login Successful!\")\n....else:\n........messagebox.showerror(\"Error\", \"Invalid Username or Password\")\n\ntk.Label(window, text=\"Username\").pack()\nentry_user = tk.Entry(window)\nentry_user.pack()\n\ntk.Label(window, text=\"Password\").pack()\nentry_pass = tk.Entry(window, show=\"*\")\nentry_pass.pack()\n\ntk.Button(window, text=\"Login\", command=check_login).pack(pady=10)\n\nwindow.mainloop()"
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch4-fig-login-form",
+            "alt": "Login program ka output: Login Form window jis mein Username aur Password ke labels aur entry fields aur Login button hain. Us ke oopar alag Success message box hai: maloomat (information) ka nishan, Login Successful! aur ok button.",
+            "caption": "Login form misal ka output: Login Form window aur Success message box (kitab mein code ke saath chhapi windows ke mutabiq asal khaaka)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Diagram ko samjhein",
+            "text": "Login button dabane par check_login() chalta hai. Username 'admin' aur password '1234' hon to messagebox.showinfo() aik alag chhoti window (pop-up) kholta hai jis ka unwan Success hai aur jis mein Login Successful! likha hota hai; ok dabane par yeh band ho jati hai. Ghalat ho to showerror() Error wali window dikhata hai. Paigham form ke andar nahi, alag window mein aata hai."
           },
           {
             "type": "list",
@@ -243,13 +264,6 @@
             "tone": "warning",
             "title": "Asli passwords kabhi code mein na rakhein",
             "text": "Seekhne ke liye program mein 'admin' aur '1234' likhna theek hai, lekin asli applications ko passwords kabhi code mein nahi rakhne chahiye. Woh har password ka mehfooz hash, aam taur par database mein, rakhti aur hashes ka muwazna karti hain."
-          },
-          {
-            "type": "diagram",
-            "$asset": "c12-cs-ch4-fig-login-events",
-            "alt": "Baen: chaar dabbon ka event loop kham-dar teeron se jura: mainloop() intezar, event: Login click, check_login() chalta, paigham dikhta, phir intezar. Daen: Login Form window, Username entry mein admin, Password entry mein chaar sitare, Login button aur sabz dabba 'Login Successful!'. Note: entry.get() likha hua parhta, show='*' password chhupata, aur button ka command= click ko check_login() se jorta.",
-            "caption": "Event loop aur login form (login misal ke mutabiq asal khaaka).",
-            "long_description": "User ke Login dabane tak program kuch nahi karta; phir jura function aik dafa chalta aur loop wapas intezar mein chala jata hai."
           },
           {
             "type": "callout",
