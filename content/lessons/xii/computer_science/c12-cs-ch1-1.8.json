@@ -82,13 +82,6 @@
             ]
           },
           {
-            "type": "diagram",
-            "$asset": "c12-cs-ch1-fig-ip-addresses",
-            "alt": "Top: IPv4 192.168.1.10 drawn as four boxes 192, 168, 1 and 10, each marked 8 bits; the first three are blue (network part, like the street) and the last orange (host part, like the house). Bottom: IPv6 drawn as eight boxes 2001, 0db8, 85a3, 0000, 0000, 8a2e, 0370, 7334; the first three are purple (global routing prefix, 48 bits, ISP or region), the fourth green (subnet ID, 16 bits) and the last four orange (interface ID, 64 bits, the device). A note gives the address counts.",
-            "caption": "The parts of an IPv4 and an IPv6 address (original diagram after the book's breakdown tables).",
-            "long_description": "Both versions split an address into a part that finds the network and a part that finds the device, just as a postal address has a street and a house number."
-          },
-          {
             "type": "callout",
             "tone": "note",
             "title": "Do you know?",
@@ -104,6 +97,12 @@
             "text": "Subnetting divides a network into smaller parts, each called a subnet (Fig 1.15). It reduces network traffic, improves performance and increases security, so large networks use it for management. For example, the network 192.168.1.0/24 can be split into the subnets 192.168.1.0/25 and 192.168.1.128/25."
           },
           {
+            "type": "diagram",
+            "$asset": "c12-cs-ch1-fig-1-15-subnetting",
+            "alt": "The network 192.168.1.0/24 at the top splits by dashed lines into Subnet 1 (192.168.1.0/25), holding a desktop computer, a network device and a laptop, and Subnet 2 (192.168.1.128/25), holding a mobile phone and a printer.",
+            "caption": "Figure 1.15: Subnetting Example (original drawing after the textbook's Figure 1.15)."
+          },
+          {
             "type": "heading",
             "level": 2,
             "text": "Network Address Translation (NAT)"
@@ -111,13 +110,6 @@
           {
             "type": "paragraph",
             "text": "NAT lets many devices share one public IP address. It is performed by routers and hides the private IP addresses of the devices inside, which improves security. NAT is commonly used in networks."
-          },
-          {
-            "type": "diagram",
-            "$asset": "c12-cs-ch1-fig-subnet-nat",
-            "alt": "Left panel, subnetting: a box 192.168.1.0/24 (256 addresses, .0 to .255) splits by dashed lines into subnet 1, 192.168.1.0/25 (.0 to .127), and subnet 2, 192.168.1.128/25 (.128 to .255), each with a computer and a laptop. Right panel, NAT: three computers with private addresses 192.168.1.10, .11 and .12 joined to a router marked NAT, which connects to the Internet; note: many private addresses share one public address (example 203.0.113.5), and private addresses stay hidden.",
-            "caption": "Subnetting and NAT (original diagram after Fig 1.15).",
-            "long_description": "A /25 subnet keeps one more bit for the network than a /24, so each subnet has half the addresses. With NAT the outside world sees only the router's public address. The public address shown is a documentation example, not a real one."
           }
         ]
       }
