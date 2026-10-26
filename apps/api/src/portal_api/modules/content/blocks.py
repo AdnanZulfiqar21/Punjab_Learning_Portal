@@ -158,12 +158,18 @@ class ListBlock(_Marked):
         return list(self.items)
 
 
-class Callout(_Block):
+class Callout(_Marked):
     type: Literal["callout"]
-    # `correction`: the right version of a book error marked in the block before it (BOOK-CORRECTION-01).
+    # `correction`: the right version of a book error marked in the block before it (BOOK-CORRECTION-01). A printed
+    # box (Do You Know, For Your Information) may itself carry marks; a correction box never does.
     tone: Literal["definition", "note", "tip", "warning", "correction"] = "note"
     title: Short | None = None
     text: Text
+
+    def _texts(self) -> list[str]:
+        if self.tone == "correction" and self.book_errors:
+            raise ValueError("a book correction box carries no book-error marks")
+        return [*([self.title] if self.title else []), self.text]
 
 
 class Table(_Marked):

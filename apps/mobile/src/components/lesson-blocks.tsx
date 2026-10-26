@@ -184,8 +184,14 @@ function BlockView({ block: b, assetSource, dataSaver }: { block: Block; assetSo
           <T variant="eyebrow" style={{ color: tone === "warning" ? c.warn : tone === "definition" ? c.accent : green ? c.ok : c.muted }}>
             {label}
           </T>
-          {title ? <T style={{ fontWeight: "600" }}>{title}</T> : null}
-          <T>{str(b.text)}</T>
+          {title ? (
+            <T style={{ fontWeight: "600" }}>
+              <Marked text={title} marks={marks} />
+            </T>
+          ) : null}
+          <T>
+            <Marked text={str(b.text)} marks={marks} />
+          </T>
         </View>
       );
     }

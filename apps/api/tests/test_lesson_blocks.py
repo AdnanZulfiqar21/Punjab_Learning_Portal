@@ -52,11 +52,13 @@ def test_book_errors_mark_printed_passages_and_a_correction_follows() -> None:
     example = {**EXAMPLE, "steps": ["Fixture step 41 N."], "book_errors": ["41 N"]}
     eq = {"type": "equation", "latex": "x", "text_alt": "Fixture Kp = Kn N", "book_errors": ["Kn N"]}
     assert blocks.validate_body({"blocks": [table, example, eq]}, for_publication=False).errors == []
-    # A mark must be text the block actually shows, and callouts carry none.
+    # A printed box (Do You Know) may carry marks; a mark must be text the block shows; a correction box carries none.
+    box = {"type": "callout", "tone": "note", "title": "Do You Know?", "text": "Fixture 7.6 on reactor scale.", "book_errors": ["reactor scale"]}
+    assert blocks.validate_body({"blocks": [box]}, for_publication=False).errors == []
     stray = {**para, "book_errors": ["79.53 m"]}
     assert blocks.validate_body({"blocks": [stray]}, for_publication=False).errors
-    marked_callout = {**fix, "book_errors": ["79.53 m"]}
-    assert blocks.validate_body({"blocks": [marked_callout]}, for_publication=False).errors
+    marked_correction = {**fix, "book_errors": ["79.53 m"]}
+    assert blocks.validate_body({"blocks": [marked_correction]}, for_publication=False).errors
 
 
 def _staff(client: TestClient, db: Session) -> dict[str, Staff]:

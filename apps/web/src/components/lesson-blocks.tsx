@@ -164,11 +164,11 @@ function BlockView({
           <p className="text-xs font-semibold tracking-wide text-muted uppercase">{label}</p>
           {title && (
             <p dir="auto" className="font-semibold">
-              {title}
+              <Marked text={title} marks={marks} />
             </p>
           )}
           <p dir="auto" className="whitespace-pre-line">
-            {str(b.text)}
+            <Marked text={str(b.text)} marks={marks} />
           </p>
         </aside>
       );
