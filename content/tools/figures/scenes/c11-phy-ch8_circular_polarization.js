@@ -1,5 +1,6 @@
 // Original 3D model after Figure 8.4(b): circularly polarized light. The electric field vector keeps the same size
 // and turns steadily as the wave moves, so its tip traces a helix around the direction of travel. Schematic.
+// The camera looks along the axis at about 37 degrees so the turning of E is visible, with red circles of constant radius.
 export const title = "Circular polarization";
 
 export function build(THREE) {
@@ -43,17 +44,24 @@ export function build(THREE) {
     head.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), dir);
     group.add(head);
   }
-  // A faint end ring showing the circle the tip follows.
-  const ring = new THREE.Mesh(
-    new THREE.TorusGeometry(R, 0.015, 8, 64),
-    new THREE.MeshStandardMaterial({ color: 0x94a3b8, transparent: true, opacity: 0.6 }),
+  // Red circles of the same radius, one per turn, as in the printed figure: the tip of E stays on them.
+  const redRing = new THREE.MeshStandardMaterial({ color: 0xd7322f, roughness: 0.45 });
+  for (let k = 0; k <= turns; k++) {
+    const ring = new THREE.Mesh(new THREE.TorusGeometry(R, 0.025, 8, 64), redRing);
+    ring.rotation.y = Math.PI / 2;
+    ring.position.x = -L / 2 + (k * L) / turns;
+    group.add(ring);
+  }
+  // A transparent cylinder round the helix, as printed.
+  const tube = new THREE.Mesh(
+    new THREE.CylinderGeometry(R, R, L, 48, 1, true),
+    new THREE.MeshStandardMaterial({ color: 0xcbd5e1, transparent: true, opacity: 0.18, side: THREE.DoubleSide, depthWrite: false }),
   );
-  ring.rotation.y = Math.PI / 2;
-  ring.position.x = L / 2;
-  group.add(ring);
+  tube.rotation.z = Math.PI / 2;
+  group.add(tube);
   return {
     group,
-    camera: { position: [0.6, 2.2, 8.0], lookAt: [0.3, 0.35, 0], fov: 40 },
+    camera: { position: [-6.2, 2.6, 4.6], lookAt: [0.4, 0, 0], fov: 42 },
     turntableAxis: "x",
     labels: [
       { text: "Direction of travel", at: [L / 2 + 0.5, 0, 0], anchor: "below" },
