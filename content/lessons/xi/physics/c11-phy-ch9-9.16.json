@@ -38,6 +38,12 @@
             "text": "Consider four wires meeting at a point A (Fig. 9.27). The currents flowing into A are I1 and I2, and the currents flowing away are I3 and I4. By the convention, I1 + I2 + (-I3) + (-I4) = 0, or I1 + I2 = I3 + I4 ... (9.44). Kirchhoff's first rule, also known as the point rule, is a manifestation of the law of conservation of charge: if there is no sink or source of charge at a point, the total charge flowing towards the point must equal the total charge flowing away from it. A node is a point in an electric circuit which joins two or more branches (For Your Information); the node whose potential is taken as zero is called the datum node (Do You Know)."
           },
           {
+            "type": "diagram",
+            "$asset": "c11-phy-ch9-fig-9-27-junction",
+            "alt": "Four wires, each containing a resistor, meet at a point A. Arrows show currents I1 (from the left) and I2 (from the lower left) flowing towards A, and currents I3 (to the lower right) and I4 (to the upper right) flowing away from A.",
+            "caption": "Figure 9.27: According to Kirchhoff's 1st rule I1 + I2 = I3 + I4 (original drawing after the textbook's Figure 9.27)."
+          },
+          {
             "type": "heading",
             "level": 2,
             "text": "Kirchhoff's second rule"
@@ -45,6 +51,12 @@
           {
             "type": "paragraph",
             "text": "It states that the algebraic sum of voltage changes in a closed circuit or loop must be zero. Consider the closed circuit of Fig. 9.28. The direction of the current I depends on the cell with the greater emf; suppose E1 is greater than E2, so the current flows anticlockwise. A steady current is equivalent to a continuous flow of positive charges, and a voltage change is the work done on, or energy gained or lost by, a unit positive charge in moving from one point to another. When a positive charge Q passes through cell E1 from low (-) to high (+) potential, it gains energy E1 Q. Passing through cell E2 from high to low potential, it loses energy E2 Q. In going through resistor R1 it loses energy I R1 Q, and through R2 it loses I R2 Q. Finally the charge reaches the negative terminal of E1, from where it started. By the law of conservation of energy the total change in energy is zero: E1 Q - I R1 Q - E2 Q - I R2 Q = 0, or E1 - I R1 - E2 - I R2 = 0 ... (9.45)."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c11-phy-ch9-fig-9-28-loop",
+            "alt": "A rectangular loop: resistance R1 and cell E1 in the top wire, cell E2 in the left side, resistance R2 in the bottom wire. A curved arrow I in the middle shows the current flowing anticlockwise.",
+            "caption": "Figure 9.28: According to Kirchhoff's 2nd rule E1 - IR1 - E2 - IR2 = 0 (original drawing after the textbook's Figure 9.28)."
           },
           {
             "type": "callout",
@@ -85,6 +97,12 @@
             "text": "Calculate the currents in the three resistances of the circuit of Fig. 9.29: R1 = 10 ohm, R2 = 30 ohm, R3 = 15 ohm; E1 = 40 V, E2 = 60 V, E3 = 50 V. Solution: take loops abcda and ebcfe, with loop currents I1 and I2 both clockwise. Loop abcda: -E1 - I1 R1 - (I1 - I2) R2 + E2 = 0, so -40 - 10 I1 - 30 (I1 - I2) + 60 = 0, or 4 I1 - 3 I2 = 2 A ... (i). Loop ebcfe: -E2 - (I2 - I1) R2 - I2 R3 + E3 = 0, so -60 - 30 (I2 - I1) - 15 I2 + 50 = 0, or 6 I1 - 9 I2 = 2 A ... (ii). Solving, I1 = 2/3 A = 0.66 A and I2 = 2/9 A = 0.22 A."
           },
           {
+            "type": "diagram",
+            "$asset": "c11-phy-ch9-fig-9-29-two-loops",
+            "alt": "A two-loop circuit with points e, b, a along the top and f, c, d along the bottom. Each of the three vertical branches has a cell above a resistor: E3 and R3 on the left, E2 and R2 in the middle, E1 and R1 on the right. Clockwise arrows show loop currents I2 (left loop) and I1 (right loop). Values: R1 = 10 ohm, R2 = 30 ohm, R3 = 15 ohm; E1 = 40 V, E2 = 60 V, E3 = 50 V.",
+            "caption": "Figure 9.29 (original drawing after the textbook's Figure 9.29)."
+          },
+          {
             "type": "paragraph",
             "text": "The actual currents follow from the loop currents. The current through R1 is I1 = 2/3 A = 0.66 A, from a to d. The current through R2 is I1 - I2 = 2/3 A - 2/9 A = 0.44 A, in the direction of I1, from c to b. The current through R3 is I2 = 2/9 A = 0.22 A, from f to e. In loop abcda the loop's own current I1 is given a positive sign and the opposite current I2 a negative sign; in loop ebcfe the reverse."
           },
@@ -103,13 +121,6 @@
               "Write the loop equations for all the selected loops; the voltage change across any component is positive if traversed from low to high potential and negative if traversed from high to low potential.",
               "Solve these equations for the unknown quantities."
             ]
-          },
-          {
-            "type": "diagram",
-            "$asset": "c11-phy-ch9-fig-kirchhoff-bridges-sensors",
-            "alt": "Top left: four currents meeting at a junction A, and a loop with two cells and two resistors. Top right: the two-loop circuit of Example 9.10. Bottom left: a Wheatstone bridge with a galvanometer between B and D, and a potentiometer wire with a sliding contact balancing an unknown emf. Bottom right: a fixed resistor in series with a thermistor or LDR, a voltmeter across the sensor, and notes on galvanometers, thermistors and LDRs.",
-            "caption": "Kirchhoff's rules, the Wheatstone bridge, the potentiometer and sensors (original diagram after Figures 9.27 to 9.36 and topics 9.16 to 9.21).",
-            "long_description": "At any junction the currents flowing in add up to the currents flowing out, because charge is conserved, and round any closed loop the rises in potential across cells equal the drops across resistors, because energy is conserved; with loop currents these rules give enough equations to find every current. A Wheatstone bridge is balanced, with no current in its galvanometer, when the ratio of the first pair of resistors equals the ratio of the second pair, so an unknown resistor can be found. A potentiometer balances an unknown emf against a fraction of a uniform wire, drawing no current from it at balance. A thermistor or LDR in series with a fixed resistor forms a potential divider whose middle voltage changes with temperature or light."
           }
         ]
       }
