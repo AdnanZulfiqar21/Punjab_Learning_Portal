@@ -3,6 +3,7 @@ import { Checkpoint } from "@/components/checkpoint";
 import { Equation } from "@/components/equation";
 import { Model3DFigure } from "@/components/model3d-figure";
 import { SaverImage } from "@/components/saver-image";
+import { bookErrors, markPieces } from "@/lib/book-errors";
 
 // Renders content blocks (schema v1, roadmap §5.4). Web renderer version 2: comparison tables fold into cards on narrow
 // screens and `model3d` blocks show a poster render with a turntable. Unknown block types never crash the page: they
@@ -21,8 +22,32 @@ const CALLOUT_STYLE: Record<string, string> = {
   note: "border-border bg-surface-muted",
   tip: "border-ok bg-ok-soft",
   warning: "border-warn bg-warn-soft",
+  correction: "border-ok bg-ok-soft",
 };
-const CALLOUT_LABEL: Record<string, string> = { definition: "Definition", note: "Note", tip: "Tip", warning: "Take care" };
+const CALLOUT_LABEL: Record<string, string> = {
+  definition: "Definition",
+  note: "Note",
+  tip: "Tip",
+  warning: "Take care",
+  correction: "Book correction",
+};
+
+/** Text with the textbook's wrong passages marked in red (BOOK-CORRECTION-01). */
+function Marked({ text, marks }: { text: string; marks: string[] }) {
+  return (
+    <>
+      {markPieces(text, marks).map((p, i) =>
+        p.error ? (
+          <mark key={i} title="Printed in the book; see the book correction" className="rounded-sm bg-danger-soft px-0.5 text-danger">
+            {p.text}
+          </mark>
+        ) : (
+          <Fragment key={i}>{p.text}</Fragment>
+        ),
+      )}
+    </>
+  );
+}
 
 /** Where an archived asset version's delivery copy can be fetched on this surface (P07.S1.T1): a learner lesson,
  * or the studio. Without it, diagrams show their alt text and handouts say where to get them. */
@@ -100,26 +125,27 @@ function BlockView({
   dataSaver?: boolean;
   typeset?: string | null;
 }) {
+  const marks = bookErrors(b.book_errors);
   switch (b.type) {
     case "heading": {
       const level = Math.min(6, (b.level === 3 ? 3 : 2) + headingOffset);
       const Tag = `h${level}` as "h2" | "h3" | "h4" | "h5" | "h6";
       return (
         <Tag dir="auto" className={b.level === 3 ? "text-lg font-semibold" : "text-xl font-semibold tracking-tight"}>
-          {str(b.text)}
+          <Marked text={str(b.text)} marks={marks} />
         </Tag>
       );
     }
     case "paragraph":
       return (
         <p dir="auto" className="whitespace-pre-line">
-          {str(b.text)}
+          <Marked text={str(b.text)} marks={marks} />
         </p>
       );
     case "list": {
       const items = strs(b.items).map((t, i) => (
         <li key={i} dir="auto">
-          {t}
+          <Marked text={t} marks={marks} />
         </li>
       ));
       return b.ordered ? (
@@ -151,12 +177,14 @@ function BlockView({
       const rows = Array.isArray(b.rows) ? (b.rows as unknown[]).map(strs) : [];
       return (
         <table className="lesson-table w-full border-collapse text-sm">
-          <caption className="mb-2 text-left font-medium">{str(b.caption)}</caption>
+          <caption className="mb-2 text-left font-medium">
+            <Marked text={str(b.caption)} marks={marks} />
+          </caption>
           <thead>
             <tr>
               {header.map((h, i) => (
                 <th key={i} scope="col" className="border border-border bg-surface-muted px-3 py-2 text-left">
-                  {h}
+                  <Marked text={h} marks={marks} />
                 </th>
               ))}
             </tr>
@@ -166,7 +194,7 @@ function BlockView({
               <tr key={i}>
                 {r.map((c, j) => (
                   <td key={j} data-label={header[j] ?? ""} className="border border-border px-3 py-2 align-top">
-                    {c}
+                    <Marked text={c} marks={marks} />
                   </td>
                 ))}
               </tr>
@@ -189,7 +217,7 @@ function BlockView({
       // Typeset on the web (P01.S4.T2), always with the text equivalent. The reviewed static rendering (§5.4: required
       // before publication while the apps have no equation renderer) shows when typesetting is off or fails.
       const fb = (b.fallback ?? {}) as Fallback;
-      return (
+      const equation = (
         <Equation
           latex={str(b.latex)}
           display={b.display !== false}
@@ -203,24 +231,38 @@ function BlockView({
           }
         />
       );
+      // A printed equation with an error: outlined in red, its wrong part marked in the text equivalent.
+      if (!marks.length) return equation;
+      return (
+        <div className="space-y-1 rounded-lg border-2 border-danger px-3 py-2">
+          {equation}
+          <p dir="auto" className="text-sm">
+            <Marked text={str(b.text_alt)} marks={marks} />
+          </p>
+        </div>
+      );
     }
     case "example":
       return (
         <section className="space-y-2 rounded-lg border border-border bg-surface px-4 py-3" aria-label={`Worked example: ${str(b.title)}`}>
           <p className="text-xs font-semibold tracking-wide text-muted uppercase">Worked example</p>
-          <p className="font-semibold">{str(b.title)}</p>
-          <p className="whitespace-pre-line">{str(b.problem)}</p>
+          <p className="font-semibold">
+            <Marked text={str(b.title)} marks={marks} />
+          </p>
+          <p className="whitespace-pre-line">
+            <Marked text={str(b.problem)} marks={marks} />
+          </p>
           <ol className="list-decimal space-y-1 pl-6">
             {strs(b.steps).map((step, i) => (
               <li key={i} className="whitespace-pre-line">
-                {step}
+                <Marked text={step} marks={marks} />
               </li>
             ))}
           </ol>
           {str(b.answer) && (
             <p className="whitespace-pre-line">
               <span className="font-semibold">Answer: </span>
-              {str(b.answer)}
+              <Marked text={str(b.answer)} marks={marks} />
             </p>
           )}
         </section>
