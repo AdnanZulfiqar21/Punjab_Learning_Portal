@@ -176,12 +176,15 @@ function BlockView({ block: b, assetSource, dataSaver }: { block: Block; assetSo
       const green = tone === "tip" || tone === "correction";
       const border = tone === "warning" ? c.warn : tone === "definition" ? c.accent : green ? c.ok : c.border;
       const bg = tone === "warning" ? c.warnSoft : tone === "definition" ? c.accentSoft : green ? c.okSoft : c.surfaceMuted;
+      const label = CALLOUT_LABEL[tone] ?? "Note";
+      // A title that only repeats the label ("Book correction") is shown once.
+      const title = str(b.title).trim().toLowerCase() === label.toLowerCase() ? "" : str(b.title);
       return (
         <View style={{ borderLeftWidth: 4, borderLeftColor: border, backgroundColor: bg, borderRadius: Radius.sm, padding: Space.md, gap: Space.xs }}>
           <T variant="eyebrow" style={{ color: tone === "warning" ? c.warn : tone === "definition" ? c.accent : green ? c.ok : c.muted }}>
-            {CALLOUT_LABEL[tone] ?? "Note"}
+            {label}
           </T>
-          {str(b.title) ? <T style={{ fontWeight: "600" }}>{str(b.title)}</T> : null}
+          {title ? <T style={{ fontWeight: "600" }}>{title}</T> : null}
           <T>{str(b.text)}</T>
         </View>
       );

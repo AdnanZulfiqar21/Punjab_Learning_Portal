@@ -156,12 +156,15 @@ function BlockView({
     }
     case "callout": {
       const tone = str(b.tone) || "note";
+      const label = CALLOUT_LABEL[tone] ?? "Note";
+      // A title that only repeats the label ("Book correction") is shown once.
+      const title = str(b.title).trim().toLowerCase() === label.toLowerCase() ? "" : str(b.title);
       return (
         <aside className={`rounded-lg border-l-4 px-4 py-3 ${CALLOUT_STYLE[tone] ?? CALLOUT_STYLE.note}`}>
-          <p className="text-xs font-semibold tracking-wide text-muted uppercase">{CALLOUT_LABEL[tone] ?? "Note"}</p>
-          {str(b.title) && (
+          <p className="text-xs font-semibold tracking-wide text-muted uppercase">{label}</p>
+          {title && (
             <p dir="auto" className="font-semibold">
-              {str(b.title)}
+              {title}
             </p>
           )}
           <p dir="auto" className="whitespace-pre-line">
