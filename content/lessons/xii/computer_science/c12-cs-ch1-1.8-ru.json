@@ -85,9 +85,8 @@
           {
             "type": "diagram",
             "$asset": "c12-cs-ch1-fig-ip-addresses",
-            "alt": "Oopar: IPv4 192.168.1.10 chaar dabbon 192, 168, 1 aur 10 ki shakal mein, har aik par 8 bits; pehle teen neele (network hissa, gali ki tarah) aur aakhri narangi (host hissa, ghar ki tarah). Neeche: IPv6 aath dabbe 2001, 0db8, 85a3, 0000, 0000, 8a2e, 0370, 7334; pehle teen purple (global routing prefix, 48 bits, ISP ya ilaqa), chautha sabz (subnet ID, 16 bits) aur aakhri chaar narangi (interface ID, 64 bits, device). Note: taqreeban 4.29 arab IPv4 aur 3.4 x 10^38 IPv6 addresses.",
-            "caption": "IPv4 aur IPv6 address ke hisse (kitab ki taqseem tables ke mutabiq asal khaaka).",
-            "long_description": "Dono versions address ko aik network dhoondne wale aur aik device dhoondne wale hisse mein baant'te hain, jaise dak ke pate mein gali aur ghar ka number hota hai."
+            "alt": "IPv4 192.168.1.10 ke chaar hisse: 192, 168 aur 1 network part, 10 host part (32 bits). IPv6 ke aath groups: 2001 0db8 85a3 global routing prefix (ISP ya ilaqa), 0000 subnet ID (local network), 0000 8a2e 0370 7334 interface ID (aap ka device) (128 bits).",
+            "caption": "IPv4 aur IPv6 address ke hisse (kitab ki breakdown tables ke mutabiq asal khaaka)."
           },
           {
             "type": "callout",
@@ -105,6 +104,12 @@
             "text": "Subnetting network ko chhote hisson mein baant'ti hai, har hissa subnet kehlata hai (Fig 1.15). Yeh network traffic kam, karkardagi behtar aur security zyada karti hai, is liye bare networks intizam ke liye ise use karte hain. Maslan network 192.168.1.0/24 (addresses .0 se .255) ko 192.168.1.0/25 (.0 se .127) aur 192.168.1.128/25 (.128 se .255) mein baanta ja sakta hai. Slash ke baad wala number batata hai ke kitne bits network hisse ke hain."
           },
           {
+            "type": "diagram",
+            "$asset": "c12-cs-ch1-fig-1-15-subnetting",
+            "alt": "Oopar network 192.168.1.0/24 tooti lakeeron se do hisson mein bantta hai: Subnet 1 (192.168.1.0/25) jis mein desktop computer, network device aur laptop hain, aur Subnet 2 (192.168.1.128/25) jis mein mobile phone aur printer hain.",
+            "caption": "Figure 1.15: Subnetting ki misal (kitab ki Figure 1.15 ke mutabiq asal khaaka)."
+          },
+          {
             "type": "heading",
             "level": 2,
             "text": "Network Address Translation (NAT)"
@@ -115,10 +120,9 @@
           },
           {
             "type": "diagram",
-            "$asset": "c12-cs-ch1-fig-subnet-nat",
-            "alt": "Baen panel, subnetting: dabba 192.168.1.0/24 (256 addresses, .0 se .255) dashed lines se subnet 1, 192.168.1.0/25 (.0 se .127), aur subnet 2, 192.168.1.128/25 (.128 se .255), mein bat'ta, har aik mein computer aur laptop. Daen panel, NAT: private addresses 192.168.1.10, .11 aur .12 wale teen computers NAT wale router se jure jo Internet se jurta; note: bohat se private addresses aik public address share karte (misal 203.0.113.5), aur private addresses chhupe rehte.",
-            "caption": "Subnetting aur NAT (Fig 1.15 ke mutabiq asal khaaka).",
-            "long_description": "/25 subnet /24 se aik bit zyada network ke liye rakhta hai, is liye har subnet mein aadhe addresses hote hain. NAT ke saath bahar ki duniya sirf router ka public address dekhti hai. Dikhaya gaya public address sirf documentation ki misal hai, asli nahi."
+            "$asset": "c12-cs-ch1-fig-nat",
+            "alt": "Teen computers jin ke private IP addresses 192.168.1.10, 192.168.1.11 aur 192.168.1.12 hain, aik router (NAT) se jure hain; router Internet se aik public IP 203.0.113.5 ke zariye jura hai.",
+            "caption": "NAT: kai private addresses aik public IP address share karte hain (asal khaaka, kitab ki figure nahi)."
           },
           {
             "type": "checkpoint",
