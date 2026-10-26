@@ -13,7 +13,7 @@
           "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
           "pdf_from": 139,
           "pdf_to": 140,
-          "note": "Topic printed 5.4.2.2 Logistic Regression (PDF 139-140, printed 136-137); Table 5.1 is carried. With b0 = 1 and b1 = 0.6 the book's 0.83 (5 h) and 0.73 (4 h) are wrong (0.98 and 0.97). Recalculated and recorded."
+          "note": "Topic printed 5.4.2.2 Logistic Regression (PDF 139-140, printed 136-137); Table 5.1 is carried. With b0 = 1 and b1 = 0.6 the book's 0.83 (5 h) and 0.73 (4 h) are wrong (0.98 and 0.97): shown as printed, marked, with a Book correction box. Recorded."
         }
       ],
       "body": {
@@ -60,7 +60,19 @@
           },
           {
             "type": "paragraph",
-            "text": "A predicted probability of 0.85 means an 85% chance of passing. Suppose b0 = 1 and b1 = 0.6. With these values, 5 hours gives P = 1 / (1 + e^-4), about 0.98, and 4 hours gives 1 / (1 + e^-3.4), about 0.97."
+            "text": "A predicted probability of 0.85 means an 85% chance of passing. Suppose b0 = 1 and b1 = 0.6: for each hour studied the likelihood of passing increases. A student who studies for 5 hours has P(Pass) = 1 / (1 + e^-(1 + 0.6 x 5)), about 0.83, an 83% chance of passing. For a new student who studies for 4 hours, P(Pass) = 1 / (1 + e^-(1 + 0.6 x 4)), about 0.73, a 73% chance of passing.",
+            "book_errors": [
+              "0.83",
+              "83%",
+              "0.73",
+              "73%"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "With b0 = 1 and b1 = 0.6 the book's values are wrong. For 5 hours, 1 + 0.6 x 5 = 4 and P = 1 / (1 + e^-4), about 0.98 (a 98% chance); for 4 hours, 1 + 0.6 x 4 = 3.4 and P is about 0.97 (97%). The book's 0.83 and 0.73 are the values for 1 hour and 0 hours."
           }
         ]
       }
