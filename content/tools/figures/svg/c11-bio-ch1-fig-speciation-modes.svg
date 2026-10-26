@@ -1,59 +1,76 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1100" font-family="Segoe UI, Helvetica, Arial, sans-serif">
-  <rect width="1000" height="1100" fill="#ffffff"/>
-  <!-- Original diagram after Figure 1.32: four modes of speciation read downward through the same four stages. -->
-  <defs>
-    <style>
-      .h{font-size:30px;font-weight:700;fill:#14181f;text-anchor:middle}
-      .r{font-size:24px;font-weight:700;fill:#4b5563}
-      .s{font-size:19px;fill:#4b5563;text-anchor:middle}
-      .pop{fill:#b2dbcc;stroke:#0f7a62;stroke-width:4}
-      .new{fill:#f3c98b;stroke:#b26a00;stroke-width:4}
-      .bar{stroke:#14181f;stroke-width:8}
-    </style>
-  </defs>
-  <!-- row labels -->
-  <text class="r" x="20" y="200">Original</text><text class="r" x="20" y="228">population</text>
-  <text class="r" x="20" y="450">Initial</text><text class="r" x="20" y="478">step</text>
-  <text class="r" x="20" y="700">Reproductive</text><text class="r" x="20" y="728">isolation</text>
-  <text class="r" x="20" y="950">Speciation</text>
-  <g stroke="#e3e8ee" stroke-width="3"><path d="M190 120 H990 M190 370 H990 M190 620 H990 M190 870 H990"/></g>
-  <!-- column headers -->
-  <text class="h" x="300" y="80">Allopatric</text>
-  <text class="h" x="500" y="80">Peripatric</text>
-  <text class="h" x="700" y="80">Parapatric</text>
-  <text class="h" x="900" y="80">Sympatric</text>
-  <!-- Row 1: original population (same in every column) -->
-  <g><ellipse class="pop" cx="300" cy="215" rx="70" ry="45"/><ellipse class="pop" cx="500" cy="215" rx="70" ry="45"/><ellipse class="pop" cx="700" cy="215" rx="70" ry="45"/><ellipse class="pop" cx="900" cy="215" rx="70" ry="45"/></g>
-  <!-- Row 2: initial step -->
-  <!-- allopatric: a barrier splits the population -->
-  <ellipse class="pop" cx="262" cy="465" rx="40" ry="45"/><ellipse class="pop" cx="338" cy="465" rx="40" ry="45"/>
-  <path class="bar" d="M300 410 V520"/>
-  <text class="s" x="300" y="555">geographical</text><text class="s" x="300" y="580">barrier</text>
-  <!-- peripatric: a small group at the edge becomes isolated -->
-  <ellipse class="pop" cx="490" cy="465" rx="62" ry="45"/><circle class="new" cx="575" cy="440" r="16"/>
-  <text class="s" x="500" y="555">small edge group</text><text class="s" x="500" y="580">isolated</text>
-  <!-- parapatric: adjacent niche along a gradient, limited gene flow -->
-  <ellipse class="pop" cx="670" cy="465" rx="55" ry="45"/><ellipse class="new" cx="745" cy="465" rx="40" ry="38"/>
-  <path d="M700 420 V510" stroke="#14181f" stroke-width="4" stroke-dasharray="10 8"/>
-  <text class="s" x="700" y="555">adjacent niche;</text><text class="s" x="700" y="580">little gene flow</text>
-  <!-- sympatric: a new niche inside the same area -->
-  <ellipse class="pop" cx="900" cy="465" rx="70" ry="45"/><circle class="new" cx="920" cy="470" r="18"/>
-  <text class="s" x="900" y="555">new niche in</text><text class="s" x="900" y="580">the same area</text>
-  <!-- Row 3: reproductive isolation -->
-  <ellipse class="pop" cx="255" cy="715" rx="40" ry="42"/><ellipse class="new" cx="345" cy="715" rx="40" ry="42"/><path class="bar" d="M300 660 V770"/>
-  <text class="s" x="300" y="805">evolve apart</text><text class="s" x="300" y="830">in isolation</text>
-  <ellipse class="pop" cx="480" cy="715" rx="55" ry="42"/><circle class="new" cx="585" cy="700" r="28"/>
-  <text class="s" x="500" y="805">rapid change</text><text class="s" x="500" y="830">in isolation</text>
-  <ellipse class="pop" cx="665" cy="715" rx="50" ry="42"/><ellipse class="new" cx="750" cy="715" rx="42" ry="42"/>
-  <text class="s" x="700" y="805">adapted to each</text><text class="s" x="700" y="830">environment</text>
-  <ellipse class="pop" cx="885" cy="715" rx="60" ry="42"/><circle class="new" cx="935" cy="715" r="30"/>
-  <text class="s" x="900" y="805">polyploidy or</text><text class="s" x="900" y="830">niche differentiation</text>
-  <!-- Row 4: two species -->
-  <g>
-    <ellipse class="pop" cx="255" cy="960" rx="40" ry="40"/><ellipse class="new" cx="345" cy="960" rx="40" ry="40"/>
-    <ellipse class="pop" cx="455" cy="960" rx="40" ry="40"/><ellipse class="new" cx="545" cy="960" rx="40" ry="40"/>
-    <ellipse class="pop" cx="655" cy="960" rx="40" ry="40"/><ellipse class="new" cx="745" cy="960" rx="40" ry="40"/>
-    <ellipse class="pop" cx="855" cy="960" rx="40" ry="40"/><ellipse class="new" cx="945" cy="960" rx="40" ry="40"/>
-  </g>
-  <text class="s" x="600" y="1050">green: the original species · amber: the new species</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 960" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <rect width="1100" height="960" fill="#ffffff"/>
+  <!-- Original drawing after Figure 1.32 of the Class XI Biology textbook (modes of speciation). -->
+  <defs><clipPath id="b0"><circle cx="368" cy="870" r="62"/></clipPath><clipPath id="b1"><circle cx="548" cy="870" r="62"/></clipPath><clipPath id="b2"><circle cx="728" cy="870" r="62"/></clipPath><clipPath id="b3"><circle cx="908" cy="870" r="62"/></clipPath></defs>
+  <text x="390" y="50" font-size="32" fill="#111111" text-anchor="middle" font-weight="700">Allopatric</text>
+  <text x="570" y="50" font-size="32" fill="#111111" text-anchor="middle" font-weight="700">Peripatric</text>
+  <text x="750" y="50" font-size="32" fill="#111111" text-anchor="middle" font-weight="700">Parapatric</text>
+  <text x="930" y="50" font-size="32" fill="#111111" text-anchor="middle" font-weight="700">Sympatric</text>
+  <text x="30" y="153" font-size="30" fill="#1f8fc8" text-anchor="start" font-weight="700">Original</text>
+  <text x="30" y="187" font-size="30" fill="#1f8fc8" text-anchor="start" font-weight="700">Population</text>
+  <text x="30" y="353" font-size="30" fill="#1f8fc8" text-anchor="start" font-weight="700">Initial</text>
+  <text x="30" y="387" font-size="30" fill="#1f8fc8" text-anchor="start" font-weight="700">Step</text>
+  <text x="30" y="593" font-size="30" fill="#1f8fc8" text-anchor="start" font-weight="700">Reproductive</text>
+  <text x="30" y="627" font-size="30" fill="#1f8fc8" text-anchor="start" font-weight="700">Isolation</text>
+  <text x="30" y="828" font-size="30" fill="#1f8fc8" text-anchor="start" font-weight="700">Speciation</text>
+  <text x="30" y="862" font-size="30" fill="#1f8fc8" text-anchor="start" font-weight="700">(Evolution of</text>
+  <text x="30" y="896" font-size="30" fill="#1f8fc8" text-anchor="start" font-weight="700">new Species)</text>
+  <circle cx="390" cy="160" r="62" stroke="#111111" stroke-width="2.5" fill="#2aaae2"/>
+  <circle cx="570" cy="160" r="62" stroke="#111111" stroke-width="2.5" fill="#2aaae2"/>
+  <circle cx="750" cy="160" r="62" stroke="#111111" stroke-width="2.5" fill="#2aaae2"/>
+  <circle cx="930" cy="160" r="62" stroke="#111111" stroke-width="2.5" fill="#2aaae2"/>
+  <path d="M383 298 A62 62 0 0 0 383 422 Z" stroke="#111111" stroke-width="2.5" fill="#2aaae2" stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="M397 298 A62 62 0 0 1 397 422 Z" stroke="#111111" stroke-width="2.5" fill="#2aaae2" stroke-linejoin="round" stroke-linecap="round"/>
+  <text x="390" y="458" font-size="28" fill="#333333" text-anchor="middle" font-weight="400">Geographical</text>
+  <text x="390" y="490" font-size="28" fill="#333333" text-anchor="middle" font-weight="400">separation</text>
+  <circle cx="570" cy="360" r="62" stroke="#111111" stroke-width="2.5" fill="#2aaae2"/>
+  <circle cx="634.9" cy="295.1" r="22" stroke="#111111" stroke-width="2.5" fill="#2aaae2"/>
+  <path d="M576 366 L622.9 319.1 L614.9 311.1 L632.9 297.1 L626.9 325.1 L618.9 315.1 L582 372 Z" stroke="#1a5a8a" stroke-width="1.5" fill="#4ab8e8" stroke-linejoin="round" stroke-linecap="round"/>
+  <text x="570" y="458" font-size="28" fill="#333333" text-anchor="middle" font-weight="400">New</text>
+  <text x="570" y="490" font-size="28" fill="#333333" text-anchor="middle" font-weight="400">Niche</text>
+  <circle cx="798.4" cy="311.6" r="28" stroke="#111111" stroke-width="2.5" fill="#2aaae2"/>
+  <circle cx="750" cy="360" r="62" stroke="#111111" stroke-width="2.5" fill="#2aaae2"/>
+  <circle cx="798.4" cy="311.6" r="25.5" stroke="none" stroke-width="0" fill="#2aaae2"/>
+  <text x="750" y="458" font-size="28" fill="#333333" text-anchor="middle" font-weight="400">New</text>
+  <text x="750" y="490" font-size="28" fill="#333333" text-anchor="middle" font-weight="400">Niche</text>
+  <circle cx="930" cy="360" r="62" stroke="#111111" stroke-width="2.5" fill="#2aaae2"/>
+  <circle cx="930" cy="348" r="24" stroke="none" stroke-width="0" fill="#d4e38a"/>
+  <text x="930" y="458" font-size="28" fill="#333333" text-anchor="middle" font-weight="400">Niche</text>
+  <text x="930" y="490" font-size="28" fill="#333333" text-anchor="middle" font-weight="400">differentiation</text>
+  <path d="M383 538 A62 62 0 0 0 383 662 Z" stroke="#111111" stroke-width="2.5" fill="#2aaae2" stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="M397 538 A62 62 0 0 1 397 662 Z" stroke="#111111" stroke-width="2.5" fill="#d4e38a" stroke-linejoin="round" stroke-linecap="round"/>
+  <text x="390" y="698" font-size="28" fill="#333333" text-anchor="middle" font-weight="400">In</text>
+  <text x="390" y="730" font-size="28" fill="#333333" text-anchor="middle" font-weight="400">isolation</text>
+  <circle cx="570" cy="600" r="62" stroke="#111111" stroke-width="2.5" fill="#2aaae2"/>
+  <circle cx="640" cy="528" r="22" stroke="#111111" stroke-width="2.5" fill="#d4e38a"/>
+  <text x="570" y="698" font-size="28" fill="#333333" text-anchor="middle" font-weight="400">In isolated</text>
+  <text x="570" y="730" font-size="28" fill="#333333" text-anchor="middle" font-weight="400">niche</text>
+  <circle cx="750" cy="600" r="62" stroke="#111111" stroke-width="2.5" fill="#2aaae2"/>
+  <circle cx="800" cy="550" r="28" stroke="#111111" stroke-width="2.5" fill="#d4e38a"/>
+  <text x="750" y="698" font-size="28" fill="#333333" text-anchor="middle" font-weight="400">In adjacent</text>
+  <text x="750" y="730" font-size="28" fill="#333333" text-anchor="middle" font-weight="400">niche</text>
+  <circle cx="930" cy="600" r="62" stroke="#111111" stroke-width="2.5" fill="#2aaae2"/>
+  <circle cx="930" cy="592" r="24" stroke="#111111" stroke-width="2.5" fill="#d4e38a" stroke-dasharray="7 5"/>
+  <text x="930" y="698" font-size="28" fill="#333333" text-anchor="middle" font-weight="400">Within</text>
+  <text x="930" y="730" font-size="28" fill="#333333" text-anchor="middle" font-weight="400">population</text>
+  <circle cx="368" cy="870" r="62" stroke="none" stroke-width="0" fill="#2aaae2"/>
+  <circle cx="420" cy="830" r="62" stroke="none" stroke-width="0" fill="#d4e38a"/>
+  <circle cx="420" cy="830" r="62" fill="#cde8dc" clip-path="url(#b0)"/>
+  <circle cx="368" cy="870" r="62" stroke="#111111" stroke-width="2.5" fill="none"/>
+  <circle cx="420" cy="830" r="62" stroke="#111111" stroke-width="2.5" fill="none"/>
+  <circle cx="548" cy="870" r="62" stroke="none" stroke-width="0" fill="#2aaae2"/>
+  <circle cx="600" cy="830" r="62" stroke="none" stroke-width="0" fill="#d4e38a"/>
+  <circle cx="600" cy="830" r="62" fill="#cde8dc" clip-path="url(#b1)"/>
+  <circle cx="548" cy="870" r="62" stroke="#111111" stroke-width="2.5" fill="none"/>
+  <circle cx="600" cy="830" r="62" stroke="#111111" stroke-width="2.5" fill="none"/>
+  <circle cx="728" cy="870" r="62" stroke="none" stroke-width="0" fill="#2aaae2"/>
+  <circle cx="780" cy="830" r="62" stroke="none" stroke-width="0" fill="#d4e38a"/>
+  <circle cx="780" cy="830" r="62" fill="#cde8dc" clip-path="url(#b2)"/>
+  <circle cx="728" cy="870" r="62" stroke="#111111" stroke-width="2.5" fill="none"/>
+  <circle cx="780" cy="830" r="62" stroke="#111111" stroke-width="2.5" fill="none"/>
+  <circle cx="908" cy="870" r="62" stroke="none" stroke-width="0" fill="#2aaae2"/>
+  <circle cx="960" cy="830" r="62" stroke="none" stroke-width="0" fill="#d4e38a"/>
+  <circle cx="960" cy="830" r="62" fill="#cde8dc" clip-path="url(#b3)"/>
+  <circle cx="908" cy="870" r="62" stroke="#111111" stroke-width="2.5" fill="none"/>
+  <circle cx="960" cy="830" r="62" stroke="#111111" stroke-width="2.5" fill="none"/>
 </svg>
