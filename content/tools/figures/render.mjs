@@ -5,13 +5,17 @@
 //   node content/tools/figures/render.mjs svg chemistry   # another subject (default biology)
 //   node content/tools/figures/render.mjs scenes      # the 3D models only (poster + turntable stills)
 //   node content/tools/figures/render.mjs scenes physics 11   # one book's 3D models (scenes/c11-phy-ch<N>_<model>.js)
+//   FIGURES_ONLY=c11-chem-ch1-fig-a,c11-chem-ch1-fig-b node content/tools/figures/render.mjs svg chemistry 11
+//                                                      # only these diagrams (no re-encoding of the others' PNGs)
+//   FIGURES_PRUNE=1 node content/tools/figures/render.mjs svg chemistry 11
+//                                                      # also drop retired diagrams: manifest entries and PNGs whose svg/ file is gone
 //
 // Vector diagrams (svg/*.svg) become PNGs at 2x. Each three.js scene (scenes/*.js) becomes a labelled poster and
 // FRAMES evenly spaced stills of one full turn about its axis, drawn by headless Chromium (SwiftShader WebGL) with
 // three.js from apps/web. Output: content/lessons/xi/biology/figures/, plus figures.json, which the import tool turns
 // into a media-pack manifest. Nothing here touches the textbook's own images.
 import { createRequire } from "node:module";
-import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync, statSync } from "node:fs";
+import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync, statSync, unlinkSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -114,9 +118,12 @@ const browser = await chromium.launch({
   args: ["--use-angle=swiftshader", "--enable-unsafe-swiftshader", "--ignore-gpu-blocklist", "--enable-webgl"],
 });
 
+const ONLY = new Set((process.env.FIGURES_ONLY ?? "").split(",").map((s) => s.trim()).filter(Boolean));
 if (what === "all" || what === "svg") {
   const page = await browser.newPage({ viewport: { width: 1000, height: 1000 }, deviceScaleFactor: 2 });
-  for (const file of readdirSync(join(here, "svg")).filter((f) => f.endsWith(".svg") && f.startsWith(PREFIX)).sort()) {
+  const files = readdirSync(join(here, "svg")).filter((f) => f.endsWith(".svg") && f.startsWith(PREFIX) && (!ONLY.size || ONLY.has(f.replace(/\.svg$/, ""))));
+  if (ONLY.size && files.length !== ONLY.size) throw new Error(`FIGURES_ONLY names ${ONLY.size} diagrams but ${files.length} svg/ files match`);
+  for (const file of files.sort()) {
     const id = file.replace(/\.svg$/, "");
     const svg = readFileSync(join(here, "svg", file), "utf8");
     const m = svg.match(/viewBox="0 0 (\d+) (\d+)"/);
@@ -203,7 +210,18 @@ const manifestPath = join(OUT, "figures.json");
 let items = manifest;
 if (what !== "all" && existsSync(manifestPath)) {
   const fresh = new Set(manifest.map((m) => m.external_id));
-  const kept = JSON.parse(readFileSync(manifestPath, "utf8")).items.filter((m) => !fresh.has(m.external_id));
+  let kept = JSON.parse(readFileSync(manifestPath, "utf8")).items.filter((m) => !fresh.has(m.external_id));
+  if (process.env.FIGURES_PRUNE) {
+    // A vector diagram whose svg/ source was retired leaves the manifest and the figures folder.
+    const retired = kept.filter((m) => /\(svg\/[^)]+\.svg\)$/.test(m.provenance?.source ?? "") && !existsSync(join(here, "svg", m.external_id + ".svg")));
+    for (const m of retired) {
+      const png = join(OUT, m.file.replace(/^figures\//, ""));
+      if (existsSync(png)) unlinkSync(png);
+      console.log("pruned", m.external_id);
+    }
+    const gone = new Set(retired.map((m) => m.external_id));
+    kept = kept.filter((m) => !gone.has(m.external_id));
+  }
   items = [...kept, ...manifest].sort((a, b) => a.external_id.localeCompare(b.external_id));
 }
 writeFileSync(manifestPath, JSON.stringify({ generated_by: "content/tools/figures/render.mjs", frames_per_turn: FRAMES, items }, null, 2) + "\n");
