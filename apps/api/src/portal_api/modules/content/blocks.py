@@ -110,7 +110,7 @@ Short = Annotated[str, Field(min_length=1, max_length=300)]
 # BOOK-CORRECTION-01: the English lesson keeps the textbook's printed wording, errors included. `book_errors` names the
 # exact printed passages that are wrong; clients mark them in red, and a `correction` callout after the block gives the
 # right version. Each passage must occur in the block's own text.
-BookErrors = Annotated[list[Short], Field(default_factory=list, max_length=10)]
+BookErrors = Annotated[list[Short] | None, Field(max_length=10)]
 # An archived asset version (ASSETS-01). Which kind, class and subject it must be is checked against the archive.
 AssetRef = Annotated[str, Field(pattern=r"^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")]
 
@@ -118,7 +118,7 @@ AssetRef = Annotated[str, Field(pattern=r"^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[
 class _Marked(_Block):
     """A block whose text can carry book-error marks (BOOK-CORRECTION-01)."""
 
-    book_errors: BookErrors
+    book_errors: BookErrors = None  # absent, not empty, so stored bodies stay as authored (dumps drop None)
 
     def _texts(self) -> list[str]:
         raise NotImplementedError
@@ -126,7 +126,7 @@ class _Marked(_Block):
     @model_validator(mode="after")
     def _marks_in_text(self) -> _Marked:
         texts = self._texts()
-        for mark in self.book_errors:
+        for mark in self.book_errors or []:
             if not any(mark in t for t in texts):
                 raise ValueError(f"book error {mark!r} does not occur in the block's text")
         return self
