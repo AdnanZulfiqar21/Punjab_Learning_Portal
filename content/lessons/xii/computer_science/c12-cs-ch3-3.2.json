@@ -115,6 +115,12 @@
           },
           {
             "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The printed Figure 3.2 labels the private data _private_variable with one underscore, which in Python marks a protected member; a private member has two underscores, __private_variable, as drawn above."
+          },
+          {
+            "type": "callout",
             "tone": "note",
             "title": "Example: encapsulation in a BankAccount (Python code; each .... is one 4-space indent)",
             "text": "class BankAccount:\n....def __init__(self, balance):\n........self.__balance = balance      # private variable\n\n....def deposit(self, amount):\n........self.__balance += amount\n\n....def withdraw(self, amount):\n........if amount <= self.__balance:\n............self.__balance -= amount\n........else:\n............print(\"Insufficient balance\")\n\n....def get_balance(self):\n........return self.__balance\n\n# Usage\naccount = BankAccount(1000)\naccount.deposit(500)\naccount.withdraw(300)\nprint(account.get_balance())      # Output: 1200\n\n# Direct access will fail\n# print(account.__balance)        # Error"
