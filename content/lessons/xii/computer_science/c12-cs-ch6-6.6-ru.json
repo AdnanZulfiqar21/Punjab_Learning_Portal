@@ -49,7 +49,13 @@
             "type": "callout",
             "tone": "note",
             "title": "Misal: parhai ke ghanton se imtihani score ka andaza (Python code; har .... ek 4-space indent hai)",
-            "text": "import numpy as np\nimport matplotlib.pyplot as plt\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LinearRegression\nfrom sklearn.metrics import mean_squared_error\n\n# Hours studied (X) and exam scores (y)\nX = np.array([[1], [2], [3], [4], [5], [6], [7], [8], [9], [10]])\ny = np.array([1, 2, 2, 3, 3, 4, 5, 5, 6, 7])\n\n# Step 1: split into training and testing sets\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)\n\n# Step 2: create and train the model\nmodel = LinearRegression()\nmodel.fit(X_train, y_train)\n\n# Step 3: make predictions; Step 4: evaluate\ny_pred = model.predict(X_test)\nmse = mean_squared_error(y_test, y_pred)\nprint(f\"Mean Squared Error: {mse:.4f}\")\nprint(f\"Exam Score = {model.coef_[0]:.4f} x Hours + {model.intercept_:.4f}\")   # added line\n\n# Step 5: plot the data and the fitted line\nplt.scatter(X, y, color='blue')\nplt.plot(X, model.predict(X), color='red')\nplt.xlabel('Hours Studied')\nplt.ylabel('Exam Scores')\nplt.title('Linear Regression: Hours vs. Scores')\nplt.show()"
+            "text": "import numpy as np\nimport matplotlib.pyplot as plt\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LinearRegression\nfrom sklearn.metrics import mean_squared_error\n\n# Hours studied (X) and exam scores (y)\nX = np.array([[1], [2], [3], [4], [5], [6], [7], [8], [9], [10]])\ny = np.array([1, 2, 2, 3, 3, 4, 5, 5, 6, 7])\n\n# Step 1: split into training and testing sets\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)\n\n# Step 2: create and train the model\nmodel = LinearRegression()\nmodel.fit(X_train, y_train)\n\n# Step 3: make predictions; Step 4: evaluate\ny_pred = model.predict(X_test)\nmse = mean_squared_error(y_test, y_pred)\nprint(f\"Mean Squared Error: {mse:.4f}\")\nprint(f\"Model equation: Exam Score = {model.coef_[0]:.4f} x Hours Studied + {model.intercept_:.4f}\")   # kitab mein yeh line nahi\n\n# Step 5: plot the data and the fitted line\nplt.scatter(X, y, color='blue')\nplt.plot(X, model.predict(X), color='red')\nplt.xlabel('Hours Studied')\nplt.ylabel('Exam Scores')\nplt.title('Linear Regression: Hours vs. Scores')\nplt.show()"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab ke output mein do lines hain: \"Mean Squared Error: 0.1484\" aur \"Model equation: Exam Score = 0.6552 x Hours Studied + 0.1466\". Lekin kitab ke code mein sirf MSE print karne wali line hai; equation print karne wali line ghayab hai, is liye woh code doosri line kabhi nahi dikhata. Sahi code mein upar wali print line honi chahiye (model.coef_ dhalaan (slope) aur model.intercept_ intercept deta hai). Isi tarah {mse} poora lamba number chhapta hai, is liye 0.1484 dikhane ke liye {mse:.4f} likha gaya hai. Jaanch: random_state=42 ke saath test nuqte 9 ghante (score 6) aur 2 ghante (score 2) hain; baqi aath nuqton se slope 0.6552, intercept 0.1466 aur test MSE 0.1484 aate hain, yani kitab ke number durust hain."
           },
           {
             "type": "list",
@@ -61,12 +67,6 @@
               "Output: Mean Squared Error: 0.1484, aur fit ki hui line Exam Score = 0.6552 x Hours + 0.1466.",
               "Behtari: zyada ya behtar data aam taur par model ko zyada durust banata hai."
             ]
-          },
-          {
-            "type": "callout",
-            "tone": "note",
-            "title": "Chhape hue output ki jaanch",
-            "text": "random_state=42 ke saath test nuqte 9 ghante (score 6) aur 2 ghante (score 2) hain. Baqi aath nuqton ko fit karne se slope 0.6552 aur intercept 0.1466 aata hai, aur test MSE 0.1484 hai, jaisa chhapa hai. Kitab ki listing mein equation print karne wali line nahi, is liye oopar aik line shamil ki gayi hai."
           },
           {
             "type": "diagram",
