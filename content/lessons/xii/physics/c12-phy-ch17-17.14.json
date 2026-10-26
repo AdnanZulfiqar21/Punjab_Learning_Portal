@@ -40,16 +40,14 @@
           {
             "type": "diagram",
             "$asset": "c12-phy-ch17-fig-half-wave",
-            "alt": "Three panels. Input: a sine wave of voltage. Circuit: a transformer secondary connected through a single diode D to a load resistor RL. Output: only the positive half-cycles appear, separated by flat gaps where the diode blocks, giving pulsating DC.",
-            "caption": "A half-wave rectifier (original diagram after Fig 17.13).",
-            "long_description": "The diode acts as a one-way valve: it lets the positive half-cycles through and blocks the negative ones, so half of each cycle is wasted."
+            "alt": "Top: a transformer feeds a diode D (forward resistance rf) in series with a load resistor RL; current I, the load current Idc and the output voltage Vdc are marked. Bottom left: the AC voltage input signal against time, 0, 90 and 180 degrees marked. Bottom right: the DC voltage output signal; the positive half-cycles are passed (conducting) and the output is zero during the negative half-cycles (cut off).",
+            "caption": "Figure 17.13: Working of a half-wave rectifier, showing graphically its input and output wave forms (original drawing after the textbook's Figure 17.13)."
           },
           {
             "type": "diagram",
             "$asset": "c12-phy-ch17-fig-ups",
-            "alt": "A block diagram of a UPS: 220 V AC mains goes to a rectifier (AC to DC), then a battery that stores DC, then an inverter (DC to AC), then the AC appliance. Below the rectifier, a battery charger feeds the battery. A note says that while the mains is on the rectifier charges the battery, and when it fails the inverter runs the appliance from the battery.",
-            "caption": "A UPS at home: rectifier, battery, inverter and appliance (original block diagram after Fig 17.13a).",
-            "long_description": "The rectifier is where this topic is used at home: it turns the mains AC into DC to charge the battery. The inverter does the reverse, so the appliance keeps receiving AC during a power cut."
+            "alt": "Block diagram: 220 V AC goes to a rectifier, then to a battery, then to an inverter and on to the AC appliance. Below the rectifier a battery charger takes its output and feeds the battery. A note reads: rectifiers are used in UPS at homes for backup power.",
+            "caption": "Figure 17.13 (a): A circuit view of a UPS system used in our homes (original drawing after the textbook's Figure 17.13 (a))."
           },
           {
             "type": "heading",
@@ -61,6 +59,12 @@
             "text": "In full-wave rectification both halves of the alternating input are turned into unidirectional current through the load. It is achieved with a bridge rectifier, in which four diodes D1 to D4 are connected in a closed loop or 'bridge' (Fig 17.15 a). The AC supply is connected to one pair of opposite corners (A and B) and the load to the other pair; the diodes work in series pairs, with only two conducting in each half-cycle."
           },
           {
+            "type": "diagram",
+            "$asset": "c12-phy-ch17-fig-17-15a-bridge",
+            "alt": "A four-diode bridge D1 to D4 with corners A (top) and B (bottom) joined to an AC source V; the other two corners give +V and 0V across a load R, with the DC output marked between them. Current I flows from the source to A and back from B, and along the +V line to the load.",
+            "caption": "Figure 17.15 (a): Full-wave bridge rectifier circuit showing 4 diode network with load resistance (original drawing after the textbook's Figure 17.15 (a))."
+          },
+          {
             "type": "list",
             "ordered": false,
             "items": [
@@ -69,15 +73,20 @@
             ]
           },
           {
+            "type": "diagram",
+            "$asset": "c12-phy-ch17-fig-bridge",
+            "alt": "Top left: the input waveform against time over 0 to 4 pi. Top right: three output strips: conducting D1 and D2 (pulses in the first and third half-cycles), conducting D3 and D4 (pulses in the second and fourth), and the final output with a pulse in every half-cycle. Bottom: the bridge in the positive half-cycle (0 to T/2, D1 and D2 conduct, green current arrows) and the negative half-cycle (T/2 to T, D3 and D4 conduct, pink arrows); the current through the load R is downwards both times.",
+            "caption": "Figure 17.15 (b), (c): Full-wave bridge rectifier circuit showing its working during its positive and negative half cycles and also representing graphically its input and output waveforms (original drawing after the textbook's Figure 17.15 (b), (c))."
+          },
+          {
             "type": "paragraph",
             "text": "So both halves of the input send a unidirectional current through the load. The output is not smooth but pulsating; it can be smoothed with a filter circuit containing capacitors. Mobile phone chargers typically use a full-wave bridge rectifier to turn the AC from the wall socket into the DC needed to charge the battery (Fig 17.16; compact bridge rectifiers come as single packages with two AC and two DC terminals)."
           },
           {
             "type": "diagram",
-            "$asset": "c12-phy-ch17-fig-bridge",
-            "alt": "Top: two copies of a bridge of four diodes arranged in a diamond, with the AC source across corners A and B and a load across the other two corners. In the positive half-cycle D1 and D2 are drawn in red (conducting); in the negative half-cycle D3 and D4 are red. In both, an arrow shows the current flowing down through the load. Bottom: the output, a row of positive humps, one for every half-cycle, compared with the half-wave output.",
-            "caption": "The full-wave bridge rectifier (original diagram after Figs 17.15 and 17.16).",
-            "long_description": "Whichever end of the supply is positive, two diodes steer the current so that it always enters the load from the same side; no half-cycle is wasted."
+            "$asset": "c12-phy-ch17-fig-17-16a-mobile-charger",
+            "alt": "The mains input passes through a step-down transformer whose secondary (+ at the top, - at the bottom) feeds a four-diode bridge. The two conducting diodes are coloured pink and a pink line traces the current I through them and down through the load to earth. Small sketches show the AC input with one half-cycle shaded red and the full-wave output with its first pulse shaded red, above 0 V.",
+            "caption": "Figure 17.16 (a): Circuit diagram showing the use of Full wave Bridge Rectifier in mobile charger circuit (original drawing after the textbook's Figure 17.16 (a))."
           },
           {
             "type": "heading",
@@ -89,15 +98,14 @@
             "text": "Rectified output is pulsating DC, which is not suitable for most electronic devices. Smoothing filters reduce the AC components (ripple). In a capacitor filter, a capacitor is connected in parallel with the load: it charges when the rectified voltage rises and discharges into the load when the voltage falls, smoothing the output (Fig 17.17). This smoothing (reservoir) capacitor also raises the average DC output level, acting as a storage device."
           },
           {
-            "type": "paragraph",
-            "text": "The ripple voltage of a full-wave bridge rectifier with a smoothing capacitor is Vripple = IDC / (f_ripple C) = IDC / (2fC), where IDC is the load current in amperes, f the input frequency and C the capacitance in farads. The ripple frequency is twice the input frequency: f_ripple = 2f."
-          },
-          {
             "type": "diagram",
             "$asset": "c12-phy-ch17-fig-smoothing",
-            "alt": "A graph of voltage against time. Dashed blue humps show the full-wave rectified pulses. A red line follows each hump up to its peak (the capacitor charges) and then slopes gently down (the capacitor discharges into the load) until the next hump catches it, leaving a small ripple marked at the right. Below: Vripple = IDC/(fripple C) = IDC/(2fC); a larger capacitor or a smaller load current gives less ripple.",
-            "caption": "Smoothing with a capacitor (original graph after Fig 17.17).",
-            "long_description": "Between peaks the capacitor supplies the load, so the voltage only sags a little instead of falling to zero. A bigger capacitor sags less."
+            "alt": "Top: a full-wave bridge rectifier (D1 to D4, AC source at A and B) with a smoothing capacitor C across the load R between +V and 0 V; green arrows show the current in one half-cycle and red arrows in the other. Bottom: the resultant waveform; dashed full-wave pulses without the capacitor and, with the capacitor, a nearly steady line just above Vdc that rises as C charges and falls slowly as C discharges, leaving a small ripple.",
+            "caption": "Figure 17.17: The smoothing capacitor converts the full-wave rippled output of the rectifier into a more smooth DC output voltage (original drawing after the textbook's Figure 17.17)."
+          },
+          {
+            "type": "paragraph",
+            "text": "The ripple voltage of a full-wave bridge rectifier with a smoothing capacitor is Vripple = IDC / (f_ripple C) = IDC / (2fC), where IDC is the load current in amperes, f the input frequency and C the capacitance in farads. The ripple frequency is twice the input frequency: f_ripple = 2f."
           }
         ]
       }

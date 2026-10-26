@@ -41,16 +41,26 @@
           {
             "type": "diagram",
             "$asset": "c12-phy-ch17-fig-half-wave",
-            "alt": "Teen panels. Input: voltage ki sine wave. Circuit: transformer ka secondary aik diode D ke zariye load resistor RL se jura. Output: sirf musbat aadhe chakkar nazar aate, darmiyan seedhe khala jahan diode rokta, yani pulsating DC.",
-            "caption": "Half-wave rectifier (Fig 17.13 ke mutabiq asal khaaka).",
-            "long_description": "Diode aik-rukhi valve ki tarah kaam karta hai: musbat aadhe chakkar guzarta aur manfi rokta hai, is liye har chakkar ka aadha zaya hota hai."
+            "alt": "Oopar: transformer diode D (forward resistance rf) aur load resistor RL ko series mein deta hai; current I, load current Idc aur output voltage Vdc nishan zada. Neeche baen: AC voltage input signal, 0, 90 aur 180 darje. Neeche daen: DC voltage output signal; musbat aadhe chakkar guzarte (conducting) aur manfi aadhe chakkaron mein output sifar (cut off).",
+            "caption": "Figure 17.13: Half-wave rectifier ka kaam, input aur output waves graph par (kitab ki Figure 17.13 ke mutabiq asal khaaka)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Diagram ko samjhein",
+            "text": "Kitab ke output graph mein manfi aadhe chakkar bhi bane hain, halanke diode unhein rok deta hai. Durust output un hisson mein sifar hai; khaake mein yeh hisse sirf halki dashed lakeer se dikhaye gaye hain ke input kya tha. Load mein current sirf aik simt mein, jhatkon (pulses) mein, behta hai."
           },
           {
             "type": "diagram",
             "$asset": "c12-phy-ch17-fig-ups",
-            "alt": "UPS ka block diagram: 220 V AC mains rectifier (AC se DC) mein, phir DC jama karne wali battery, phir inverter (DC se AC), phir AC appliance. Rectifier ke neeche battery charger battery ko bijli deta hai. Note kehta hai ke mains chalu ho to rectifier battery charge karta hai, aur band ho jaye to inverter battery se appliance chalata hai.",
-            "caption": "Ghar ka UPS: rectifier, battery, inverter aur appliance (Fig 17.13a ke mutabiq asal block diagram).",
-            "long_description": "Ghar mein yeh topic rectifier mein istemal hota hai: woh mains ka AC battery charge karne ke liye DC mein badalta hai. Inverter is ka ulta karta hai, is liye bijli jaane par bhi appliance ko AC milta rehta hai."
+            "alt": "Block diagram: 220 V AC rectifier mein, phir battery, phir inverter aur aakhir mein AC appliance. Rectifier ke neeche battery charger us ka output le kar battery ko deta hai. Note: rectifiers are used in UPS at homes for backup power.",
+            "caption": "Figure 17.13 (a): Hamare gharon mein use hone wale UPS ka circuit view (kitab ki Figure 17.13 (a) ke mutabiq asal khaaka)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Diagram ko samjhein",
+            "text": "Bijli aane par rectifier AC ko DC banata hai aur charger battery bharta hai. Bijli jane par battery ki DC inverter mein ja kar dobara AC ban jati hai aur appliance chalta rehta hai."
           },
           {
             "type": "heading",
@@ -62,6 +72,12 @@
             "text": "Full-wave rectification mein alternating input ke dono aadhe chakkar load se aik-rukhi current ban jate hain. Yeh bridge rectifier se hota hai, jis mein chaar diodes D1 se D4 band chakkar ya 'pul' (bridge) ki shakal mein jure hote hain (Fig 17.15 a). AC supply mukhalif konon ke aik jore (A aur B) se aur load doosre jore se jura hota hai; diodes series jore mein kaam karte hain, har aadhe chakkar mein sirf do current guzarte hain."
           },
           {
+            "type": "diagram",
+            "$asset": "c12-phy-ch17-fig-17-15a-bridge",
+            "alt": "Chaar diodes D1 se D4 ka bridge; konay A (oopar) aur B (neeche) AC source V se jure; baqi do konay load R par +V aur 0V dete, darmiyan DC output. Current I source se A ki taraf aur B se wapas, aur +V lakeer par load ki taraf.",
+            "caption": "Figure 17.15 (a): Chaar diodes aur load resistance wala full-wave bridge rectifier circuit (kitab ki Figure 17.15 (a) ke mutabiq asal khaaka)."
+          },
+          {
             "type": "list",
             "ordered": false,
             "items": [
@@ -70,15 +86,26 @@
             ]
           },
           {
+            "type": "diagram",
+            "$asset": "c12-phy-ch17-fig-bridge",
+            "alt": "Oopar baen: input wave, 0 se 4 pi. Oopar daen: teen output pattiyan: D1 aur D2 conducting (pehle aur teesre aadhe chakkar mein pulse), D3 aur D4 conducting (doosre aur chauthe mein), aur final output jis mein har aadhe chakkar mein pulse. Neeche: musbat aadhe chakkar (0 se T/2, D1 aur D2, sabz teer) aur manfi aadhe chakkar (T/2 se T, D3 aur D4, gulabi teer) mein bridge; dono dafa load R mein current neeche ki taraf.",
+            "caption": "Figure 17.15 (b), (c): Full-wave bridge rectifier musbat aur manfi aadhe chakkaron mein, input aur output waves ke saath (kitab ki Figure 17.15 (b), (c) ke mutabiq asal khaaka)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Diagram ko samjhein",
+            "text": "Kitab ke graphs par 'Half wave Bridge rectifier' likha hai aur mehwar par pi, 2 pi barabar faasle par nahi. Yeh full-wave bridge rectifier hai: har aadhe chakkar mein do diodes chalte hain aur load mein current hamesha aik hi simt mein jata hai, is liye final output mein har aadhe chakkar ka pulse hai."
+          },
+          {
             "type": "paragraph",
             "text": "Yun input ke dono aadhe chakkar load se aik-rukhi current bhejte hain. Output hamwar nahi balke pulsating hai; ise capacitors wale filter circuit se hamwar kiya ja sakta hai. Mobile phone chargers aam taur par deewar ke socket ke AC ko battery charge karne ke liye darkaar DC mein badalne ke liye full-wave bridge rectifier use karte hain (Fig 17.16; chhote bridge rectifiers do AC aur do DC siron wale aik package mein aate hain)."
           },
           {
             "type": "diagram",
-            "$asset": "c12-phy-ch17-fig-bridge",
-            "alt": "Oopar: diamond ki shakal mein chaar diodes ke bridge ki do naqlein, konon A aur B ke aar-paar AC source aur baqi do konon ke aar-paar load. Musbat aadhe chakkar mein D1 aur D2 surkh (current guzarte); manfi mein D3 aur D4 surkh. Dono mein teer load se neeche current dikhata. Neeche: output, har aadhe chakkar ke liye aik musbat ubhar, half-wave output se muqable mein.",
-            "caption": "Full-wave bridge rectifier (Figs 17.15 aur 17.16 ke mutabiq asal khaaka).",
-            "long_description": "Supply ka jo sira bhi musbat ho, do diodes current ko aise mor dete hain ke woh hamesha load mein aik hi taraf se dakhil ho; koi aadha chakkar zaya nahi hota."
+            "$asset": "c12-phy-ch17-fig-17-16a-mobile-charger",
+            "alt": "Mains input step-down transformer se guzarta hai jis ki secondary (oopar +, neeche -) chaar diodes ke bridge ko deti hai. Chalne wale do diodes gulabi hain aur gulabi lakeer current I ko un se aur load se neeche earth tak dikhati hai. Chhote khaake AC input (aik aadha chakkar surkh) aur 0 V ke oopar full-wave output (pehla pulse surkh) dikhate hain.",
+            "caption": "Figure 17.16 (a): Mobile charger mein full-wave bridge rectifier ka circuit (kitab ki Figure 17.16 (a) ke mutabiq asal khaaka)."
           },
           {
             "type": "heading",
@@ -90,6 +117,18 @@
             "text": "Rectified output pulsating DC hai, jo zyada tar electronic aalaat ke liye munasib nahi. Smoothing filters AC hisse (ripple) kam karte hain. Capacitor filter mein capacitor load ke parallel jura hota hai: rectified voltage barhne par yeh charge hota aur voltage girne par load mein discharge ho kar output hamwar karta hai (Fig 17.17). Yeh smoothing (reservoir) capacitor zakhire ki tarah kaam kar ke aust DC output bhi barhata hai."
           },
           {
+            "type": "diagram",
+            "$asset": "c12-phy-ch17-fig-smoothing",
+            "alt": "Oopar: full-wave bridge rectifier (D1 se D4, A aur B par AC source) aur +V aur 0 V ke darmiyan load R ke aar-paar smoothing capacitor C; sabz teer aik aadhe chakkar aur surkh teer doosre mein current dikhate. Neeche: nateeja wave; capacitor ke baghair dashed pulses, aur capacitor ke saath Vdc ke qareeb taqreeban seedhi lakeer jo C charge hone par uthti aur discharge hone par aahista girti hai, chhota ripple chhorti.",
+            "caption": "Figure 17.17: Smoothing capacitor rectifier ke full-wave ripple wale output ko hamwar DC voltage mein badalta hai (kitab ki Figure 17.17 ke mutabiq asal khaaka)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Diagram ko samjhein",
+            "text": "Kitab ki figure par 'Soothing capacitor' aur 'Wafeform' chhapa hai, aur dono teeron par 'with capacitor' likha hai. Durust: smoothing capacitor; oopar wali mazboot lakeer capacitor ke saath ki wave hai aur dashed pulses capacitor ke baghair ki. Pulse ke dauran C charge hota hai, pulses ke darmiyan load ko current de kar aahista discharge hota hai."
+          },
+          {
             "type": "paragraph",
             "text": "Smoothing capacitor wale full-wave bridge rectifier ka ripple voltage Vripple = IDC / (f_ripple C) = IDC / (2fC) hai, jahan IDC amperes mein load current, f input frequency aur C farads mein capacitance hai. Ripple frequency input frequency ki dugni hai: f_ripple = 2f. Yun zyada capacitance ya kam load current kam ripple deta hai."
           },
@@ -98,13 +137,6 @@
             "tone": "warning",
             "title": "Ripple C par munhasir hai",
             "text": "Kitab kehti hai ke zyada se zyada ripple voltage 'smoothing capacitor ki qeemat se nahi balke frequency aur load current se tay hota hai', aur phir Vripple = IDC/(2fC) deti hai jis mein C hai. Formula durust hai: ripple capacitance par bhi aur frequency aur load current par bhi munhasir hai."
-          },
-          {
-            "type": "diagram",
-            "$asset": "c12-phy-ch17-fig-smoothing",
-            "alt": "Waqt ke muqable voltage ka graph. Dashed neele ubhar full-wave rectified pulses dikhate. Surkh lakeer har ubhar ke saath chotti tak uthti (capacitor charge) aur phir halki dhalwan se girti (capacitor load mein discharge) yahan tak ke agla ubhar use pakar le, daen taraf chhota ripple nishan zada. Neeche: Vripple = IDC/(fripple C) = IDC/(2fC); bara capacitor ya kam load current kam ripple.",
-            "caption": "Capacitor se smoothing (Fig 17.17 ke mutabiq asal graph).",
-            "long_description": "Chotiyon ke darmiyan capacitor load ko tawanai deta hai, is liye voltage sifar tak girne ke bajaye thora sa jhukta hai. Bara capacitor kam jhukta hai."
           },
           {
             "type": "heading",
