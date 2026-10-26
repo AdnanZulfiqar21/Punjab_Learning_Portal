@@ -93,9 +93,8 @@
           {
             "type": "diagram",
             "$asset": "c12-cs-ch4-fig-tables-keys",
-            "alt": "Table Student has columns RollNo (primary key), Name, Age and DeptID (foreign key) with rows 101 Ibrahim 20 1, 102 Kamal 21 2, 103 Zainab 20 1 and 104 Ayesha 22 3. Row 102 is outlined as a record and the Name column as a column (attribute). An arrow labelled DeptID refers to Department.DeptID runs to table Department, whose primary key DeptID has rows 1 Computer Science, 2 Electronics and 3 Mechanical.",
-            "caption": "Tables, records, fields, primary and foreign keys (original diagram after Fig 4.3).",
-            "long_description": "Kamal's DeptID is 2, and looking up 2 in Department gives Electronics: the foreign key lets the two tables be joined without repeating department names in every student row."
+            "alt": "Two tables. Table: Student has columns RollNo, Name, Age and DeptID with rows 101 Kiran 20 1; 102 Ibrahim 21 2; 103 M Kamal 20 1; 104 Zainab 22 3. Table: Department has DeptID and DeptName with rows 1 Computer Science; 2 Electronics; 3 Mechanical. Labels: Column (Attribute), Field (Attribute Value), Record (Tuple), Primary Key under RollNo and under Department DeptID, and Foreign Key on the line from Student DeptID to the Department primary key.",
+            "caption": "Figure 4.3: Tables, Columns, Records, Fields, Primary Key, and Foreign Key Relationship (original drawing after the textbook's Figure 4.3)."
           },
           {
             "type": "paragraph",
@@ -138,6 +137,12 @@
             "text": "CRUD stands for Create, Read, Update and Delete, the basic actions on stored data (Fig 4.4 and Table 4.1). Every database application depends on them to keep information accurate and up to date, and Python performs them by sending SQL commands through a cursor."
           },
           {
+            "type": "diagram",
+            "$asset": "c12-cs-ch4-fig-crud",
+            "alt": "A table named students with columns ID, Name and Age and rows 1 Ibrahim 25; 2 Zainab 30; 3 Kiran 28. Four labelled buttons point at it: Create (INSERT...), Read (SELECT...), Update (UPDATE...) and Delete (DELETE...).",
+            "caption": "Figure 4.4: Diagram showing Create, Read, Update, and Delete operations on a table (original drawing after the textbook's Figure 4.4)."
+          },
+          {
             "type": "table",
             "caption": "Table 4.1 CRUD operations",
             "header": [
@@ -167,13 +172,6 @@
                 "Removes a record; the condition limits which rows are removed"
               ]
             ]
-          },
-          {
-            "type": "diagram",
-            "$asset": "c12-cs-ch4-fig-crud",
-            "alt": "A small students table (ID, Name, Age: 1 Ibrahim 25, 2 Zainab 30, 3 Kiran 28) in the middle with four arrows pointing to it: Create (INSERT ...) and Read (SELECT ...) at the top, Update (UPDATE ...) and Delete (DELETE ...) at the bottom. A note says Read does not change the data, while Create, Update and Delete do and need commit().",
-            "caption": "The four CRUD operations on a table (original diagram after Fig 4.4).",
-            "long_description": "Three of the four operations change the table; that is why Python must call commit() after them."
           },
           {
             "type": "list",

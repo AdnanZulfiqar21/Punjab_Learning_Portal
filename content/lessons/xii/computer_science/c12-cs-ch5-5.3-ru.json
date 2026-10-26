@@ -49,6 +49,18 @@
             "text": "Profiling tools har function ke chalne ka waqt (aur kabhi memory ka istemal) record karte hain. Python cProfile deta hai jo har function ka waqt batata hai, aur timeit jo code ke chhote hisse ka waqt bohat si dafa chala kar napta hai. In ki reports dikhati hain ke kaun se hisse sust hain (Fig 5.3), taake optimisation ki mehnat wahan ho jahan sab se zyada zaroori hai."
           },
           {
+            "type": "diagram",
+            "$asset": "c12-cs-ch5-fig-5-3-profiler-table",
+            "alt": "Profiler report ka table: columns Function, Call Count, Time, Cumulative Time, Description. Rows: process_data 10, 2.500, 2.500, Bottleneck; read_file 1, 2.400, 2.400, Bottleneck (laal row, khatre ka nishan); analyze_results 10, 0.100, 0.100. Nuqta-daar teer aag par rakhe magnifying glass tak jata hai.",
+            "caption": "Figure 5.3: Bottlenecks ko numayan karta profiling output (kitab ki Figure 5.3 ke mutabiq asal khaaka)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Diagram ko samjhein",
+            "text": "Kitab ki Figure 5.3 mein table ke unwan apne columns se khiske hue hain: pehle column mein functions ke naam hain magar oopar 'Call Count' likha hai, aur 'Time' ke neeche calls ki ginti hai. Yahan har column ko us ka durust unwan diya gaya hai: Function, Call Count, Time, Cumulative Time, Description. Sab se zyada waqt lene wale functions bottleneck hain; laal row read_file khaas taur par numayan hai."
+          },
+          {
             "type": "heading",
             "level": 2,
             "text": "Bottlenecks dhoondna aur theek karna"
@@ -58,10 +70,22 @@
             "text": "Bottlenecks woh hisse hain jo poore program ko sust karte hain; profiling reports unhein dhoondti hain. Inhein algorithm behtar kar ke, ghair zaroori amal hata kar ya zyada kaar-amad data structures use kar ke theek kiya jata hai, jis se poora program tez hota hai. Karkardagi ki testing aik chakkar hai: benchmark chalayein, profile karein, bottleneck dhoondein, theek karein, tune karein, aur nataij ki tasdeeq karein (Fig 5.4)."
           },
           {
+            "type": "diagram",
+            "$asset": "c12-cs-ch5-fig-perf-cycle",
+            "alt": "Performance Test Cycle: chakkar Benchmark Run (oopar) se Bottleneck (daayein), Profile (neeche), Tuning (baayein) aur wapas. Lakeeron par: Verifying results, Fixing bottleneck, Collecting component characteristics, Collecting configuration. Andar aane wale teer: Refining tunings, Infrastructure, Profiling the application. Frame par Documentation components; Configuration - Network, CPU, Disks; Monitoring and profiling tool.",
+            "caption": "Figure 5.4: Performance test ka chakkar (kitab ki Figure 5.4 ke mutabiq asal khaaka)."
+          },
+          {
             "type": "callout",
             "tone": "note",
             "title": "Misal: sust aur tez sum ki profiling (Python code; har .... ek 4-space indent hai)",
             "text": "import cProfile\nimport timeit\n\ndef slow_sum(numbers):\n....total = 0\n....for num in numbers:          # adds one by one in a loop\n........total = total + num\n....return total\n\ndef fast_sum(numbers):\n....return sum(numbers)          # built-in, already optimised\n\ndef main():\n....numbers = list(range(1, 1000000))\n....print(\"Slow code result:\", slow_sum(numbers))\n....print(\"Fast code result:\", fast_sum(numbers))\n\nprint(\"Profiling Report:\")\ncProfile.run(\"main()\")\n\nnumbers = list(range(1, 1000000))\nslow_time = timeit.timeit(lambda: slow_sum(numbers), number=10)\nfast_time = timeit.timeit(lambda: fast_sum(numbers), number=10)\nprint(\"Slow code time:\", slow_time)\nprint(\"Fast code time:\", fast_time)"
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Output (har computer par waqt ki qeematein mukhtalif ho sakti hain)",
+            "text": "Profiling Report:\nSlow code result: 499999500000\nFast code result: 499999500000\n\n6 function calls in 0.080 seconds\n\nOrdered by: standard name\n\nncalls  tottime  percall  cumtime  percall  function\n1       0.060    0.060    0.080    0.080    <module>\n1       0.050    0.050    0.050    0.050    slow_sum\n1       0.010    0.010    0.010    0.010    {built-in sum}\n1       0.010    0.010    0.010    0.010    fast_sum\n1       0.000    0.000    0.080    0.080    main\n\nTime Comparison Report:\nSlow code time: 0.42\nFast code time: 0.09"
           },
           {
             "type": "list",
@@ -75,17 +99,9 @@
           },
           {
             "type": "diagram",
-            "$asset": "c12-cs-ch5-fig-profiling",
-            "alt": "Baen: namoona cProfile report table, columns function, calls, tottime aur cumtime: main 1, 0.000, 0.080; slow_sum 1, 0.050, 0.050 (bottleneck ke taur par numayan); fast_sum 1, 0.010, 0.010; built-in sum 1, 0.010, 0.010. Daen: har aik ke 10 runs ka timeit bar chart, slow_sum (loop) 0.42 s aur fast_sum (sum()) 0.09 s. Note: dono 499999500000 dete aur waqt har computer par mukhtalif.",
-            "caption": "Profiling bottleneck dhoondti hai (Fig 5.3 aur profiling misal ke mutabiq asal khaaka).",
-            "long_description": "tottime function ke andar khud guzra waqt hai; cumtime mein woh functions bhi shamil hain jinhein yeh call karta hai, isi liye main ka tottime bohat kam magar cumtime sab se zyada hai."
-          },
-          {
-            "type": "diagram",
-            "$asset": "c12-cs-ch5-fig-perf-cycle",
-            "alt": "Daire ke gird chhe dabbe, teer ghari ki simt mein: benchmark run, program profile karein, bottleneck dhoondein, theek karein, tune aur behtar karein, nataij ki tasdeeq, phir wapas benchmark run. Darmiyan: napo, theek karo, dobara napo.",
-            "caption": "Karkardagi testing ka chakkar (Fig 5.4 ke mutabiq asal khaaka).",
-            "long_description": "Har durusti ko dobara napna zaroori hai: jo tabdeeli tez lagti hai woh kabhi sust bhi ho sakti hai, ya program ke nataij tor sakti hai."
+            "$asset": "c12-cs-ch5-fig-time-comparison",
+            "alt": "Time Comparison Report ke bars: slow code (slow_sum) 0.42 ka lamba laal bar, fast code (fast_sum) 0.09 ka chhota sabz bar.",
+            "caption": "Kitab ke sample output ka waqt ka muwazna (hamara apna khaaka; kitab mein yeh figure nahi)."
           },
           {
             "type": "checkpoint",
