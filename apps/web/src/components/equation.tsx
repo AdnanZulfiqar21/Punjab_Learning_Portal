@@ -1,6 +1,7 @@
 "use client";
 
 import { type ReactNode, useEffect, useState } from "react";
+import { paintBookErrors } from "@/lib/book-errors";
 import { KATEX_OPTIONS } from "@/lib/katex-options";
 
 // P01.S4.T2 (RENDERER-SPIKE-01): typeset equations and chemistry notation (mhchem `\ce{…}`) on the web.
@@ -21,7 +22,7 @@ function typesetter(): Promise<Typeset> {
   loading ??= Promise.all([import("katex"), import("katex/contrib/mhchem"), import("katex/dist/katex-swap.min.css")]).then(
     ([{ default: katex }]): Typeset =>
       (latex, display) =>
-        katex.renderToString(latex, { ...KATEX_OPTIONS, displayMode: display }),
+        paintBookErrors(katex.renderToString(latex, { ...KATEX_OPTIONS, displayMode: display })),
     (e: unknown) => {
       loading = null; // a failed download is retried by the next formula; a formula that fails to parse is not
       throw e;
@@ -34,6 +35,7 @@ export function Equation({
   latex,
   display,
   textAlt,
+  textView,
   fallback,
   typeset,
   dataSaver = false,
@@ -41,6 +43,8 @@ export function Equation({
   latex: string;
   display: boolean;
   textAlt: string;
+  /** How the text equivalent is shown where the formula isn't typeset (e.g. with a book error marked). */
+  textView?: ReactNode;
   /** The reviewed static rendering, if the block has one. */
   fallback: ReactNode;
   /** Typeset on the server: the markup, or null when it couldn't be typeset. Undefined: typeset here if needed. */
@@ -77,7 +81,7 @@ export function Equation({
   return (
     <figure className="space-y-2 rounded-lg border border-border bg-surface px-4 py-3" data-typeset={failed ? "failed" : asked ? "loading" : "off"}>
       {(failed || !asked) && fallback}
-      <p>{textAlt}</p>
+      <p>{textView ?? textAlt}</p>
       <figcaption className="font-mono text-xs text-muted">{latex}</figcaption>
       {!asked && (
         <button type="button" onClick={() => setAsked(true)} className="rounded-lg border border-border bg-surface px-3 py-1.5 text-sm font-medium hover:border-accent">

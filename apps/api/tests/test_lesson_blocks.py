@@ -50,7 +50,8 @@ def test_book_errors_mark_printed_passages_and_a_correction_follows() -> None:
     assert ok.errors == []
     table = {"type": "table", "caption": "Fixture", "header": ["A"], "rows": [["C10H14"]], "book_errors": ["C10H14"]}
     example = {**EXAMPLE, "steps": ["Fixture step 41 N."], "book_errors": ["41 N"]}
-    eq = {"type": "equation", "latex": "x", "text_alt": "Fixture Kp = Kn N", "book_errors": ["Kn N"]}
+    eq = {"type": "equation", "latex": r"K_p = K_n N", "text_alt": "Fixture Kp = Kn N"}
+    eq["book_errors"] = ["Kn N", "K_n N"]  # in the text equivalent and in the LaTeX
     assert blocks.validate_body({"blocks": [table, example, eq]}, for_publication=False).errors == []
     # A printed box (Do You Know) may carry marks; a mark must be text the block shows; a correction box carries none.
     box = {"type": "callout", "tone": "note", "title": "Do You Know?", "text": "Fixture 7.6 on reactor scale."}

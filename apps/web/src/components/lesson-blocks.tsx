@@ -3,7 +3,7 @@ import { Checkpoint } from "@/components/checkpoint";
 import { Equation } from "@/components/equation";
 import { Model3DFigure } from "@/components/model3d-figure";
 import { SaverImage } from "@/components/saver-image";
-import { bookErrors, markPieces } from "@/lib/book-errors";
+import { bookErrors, markLatex, markPieces } from "@/lib/book-errors";
 
 // Renders content blocks (schema v1, roadmap §5.4). Web renderer version 2: comparison tables fold into cards on narrow
 // screens and `model3d` blocks show a poster render with a turntable. Unknown block types never crash the page: they
@@ -218,13 +218,15 @@ function BlockView({
       );
     case "equation": {
       // Typeset on the web (P01.S4.T2), always with the text equivalent. The reviewed static rendering (§5.4: required
-      // before publication while the apps have no equation renderer) shows when typesetting is off or fails.
+      // before publication while the apps have no equation renderer) shows when typesetting is off or fails. A printed
+      // error is shown once, in red inside the formula (BOOK-CORRECTION-01); the text equivalent marks it too.
       const fb = (b.fallback ?? {}) as Fallback;
-      const equation = (
+      return (
         <Equation
-          latex={str(b.latex)}
+          latex={markLatex(str(b.latex), marks)}
           display={b.display !== false}
           textAlt={str(b.text_alt)}
+          textView={marks.length ? <Marked text={str(b.text_alt)} marks={marks} /> : undefined}
           dataSaver={dataSaver}
           typeset={typeset}
           fallback={
@@ -233,16 +235,6 @@ function BlockView({
             ) : null
           }
         />
-      );
-      // A printed equation with an error: outlined in red, its wrong part marked in the text equivalent.
-      if (!marks.length) return equation;
-      return (
-        <div className="space-y-1 rounded-lg border-2 border-danger px-3 py-2">
-          {equation}
-          <p dir="auto" className="text-sm">
-            <Marked text={str(b.text_alt)} marks={marks} />
-          </p>
-        </div>
       );
     }
     case "example":

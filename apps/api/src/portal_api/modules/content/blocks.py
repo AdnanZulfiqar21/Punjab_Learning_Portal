@@ -190,7 +190,8 @@ class Equation(_Marked):
     fallback: Fallback | None = None
 
     def _texts(self) -> list[str]:
-        return [self.text_alt]
+        # A mark in the LaTeX is typeset in red on the web; one in the text equivalent is marked where that is shown.
+        return [self.text_alt, self.latex]
 
 
 class CheckpointOption(BaseModel):

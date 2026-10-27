@@ -4,7 +4,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { describe, it } from "node:test";
 
-import { bookErrors, markPieces } from "../src/lib/book-errors.ts";
+import { bookErrors, markLatex, markPieces, paintBookErrors } from "../src/lib/book-errors.ts";
 
 describe("book error marks", () => {
   it("marks the printed passage and keeps the rest plain", () => {
@@ -32,6 +32,14 @@ describe("book error marks", () => {
   it("reads only string marks from a block", () => {
     assert.deepEqual(bookErrors(["C10H14", 3, "", null]), ["C10H14"]);
     assert.deepEqual(bookErrors(undefined), []);
+  });
+
+  it("colours the printed error inside a formula once, and only marks that occur in it", () => {
+    const latex = String.raw`\ce{2H2_{(g)} + 2NO_{(g)} -> N2_{(g)} + H2O_{(g)}}`;
+    const marked = markLatex(latex, ["H2O_{(g)}", "H₂O(g)"]);
+    assert.equal(marked, String.raw`\ce{2H2_{(g)} + 2NO_{(g)} -> N2_{(g)} + \textcolor{#a31d1e}{H2O_{(g)}}}`);
+    assert.equal(markLatex(latex, ["H₂O(g)"]), latex);
+    assert.equal(paintBookErrors('<span style="color:#a31d1e;">H</span>'), '<span style="color:var(--danger);background-color:var(--danger-soft);">H</span>');
   });
 
   it("is the same code on web and mobile", () => {
