@@ -13,7 +13,7 @@ import { Radius, Space } from "@/constants/theme";
 import { useTheme } from "@/hooks/use-theme";
 import { bookErrors, markPieces } from "@/lib/book-errors";
 import { comparisonCards } from "@/lib/lesson-tables";
-import { fillMerged, mergedColumns } from "@/lib/table-merge";
+import { fillMerged, mergedColumns, mergeStarts } from "@/lib/table-merge";
 
 export const NATIVE_RENDERER_VERSION = 2;
 
@@ -263,7 +263,11 @@ function BlockView({ block: b, assetSource, dataSaver }: { block: Block; assetSo
     case "table": {
       const header = strs(b.header);
       // TABLE-MERGE-01: a cell the book merges over several rows is repeated in each card, so every card is complete.
-      const rows = fillMerged(Array.isArray(b.rows) ? (b.rows as unknown[]).map(strs) : [], mergedColumns(b.merged_columns));
+      const rows = fillMerged(
+        Array.isArray(b.rows) ? (b.rows as unknown[]).map(strs) : [],
+        mergedColumns(b.merged_columns),
+        mergeStarts(b.merge_starts),
+      );
       const cards = comparisonCards(header, rows);
       return (
         <View style={{ gap: Space.sm }} accessibilityLabel={`Table: ${str(b.caption)}`}>
