@@ -3,7 +3,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 
-import { continuesInto, headingOnly } from "../src/lib/book-heading.ts";
+import { continuesInto, headingOnly, isMainHeading } from "../src/lib/book-heading.ts";
 
 const topic = (number: string, blocks: string[] | null, availability = "private_preview") => ({
   number,
@@ -36,5 +36,12 @@ describe("book-heading helper", () => {
     const mobile = readFileSync(new URL("../src/lib/book-heading.ts", import.meta.url), "utf8");
     const web = readFileSync(new URL("../../web/src/lib/book-heading.ts", import.meta.url), "utf8");
     assert.equal(web, mobile);
+  });
+});
+
+describe("main headings", () => {
+  it("are a chapter's numbered sections, not their subtopics", () => {
+    for (const n of ["14.4", "2.9", "7.4", "33.7", "2.5b"]) assert.equal(isMainHeading(n), true, n);
+    for (const n of ["14.4.1", "2.7.2b", "1.4.10", "", null, undefined]) assert.equal(isMainHeading(n), false, String(n));
   });
 });

@@ -7,7 +7,7 @@ import { chooseReadingLanguage } from "@/app/actions/learn";
 import { KeepPlace } from "@/components/keep-place";
 import { LectureView } from "@/components/lecture-view";
 import { LessonBlocks } from "@/components/lesson-blocks";
-import { continuesInto, headingOnly as isHeadingOnly } from "@/lib/book-heading";
+import { continuesInto, headingOnly as isHeadingOnly, isMainHeading } from "@/lib/book-heading";
 import { typesetEquations } from "@/lib/typeset";
 import { placeSignature, type PlaceBlock } from "@/lib/variant-place";
 import { Notice, SkeletonLines } from "@/components/ui";
@@ -144,7 +144,7 @@ async function TopicView({ id, view }: { id: string; view: "read" | "lecture" })
             </span>
           )}
         </p>
-        <h1 className="text-3xl font-semibold tracking-tight">{reading.number ? `${reading.number} ${reading.title}` : reading.title}</h1>
+        <h1 className={`text-3xl font-semibold tracking-tight${isMainHeading(reading.number) ? " text-accent" : ""}`}>{reading.number ? `${reading.number} ${reading.title}` : reading.title}</h1>
         <p className="text-sm text-muted">{reading.chapter_title}</p>
       </header>
       {view === "lecture" && readable && (

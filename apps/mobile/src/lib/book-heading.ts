@@ -8,6 +8,12 @@ type Reading = {
   lesson: { body: { [key: string]: unknown } | null } | null;
 };
 
+/** A main heading of the chapter (14.4), not a subtopic under one (14.4.1): it is shown in the accent colour, every
+ * other heading in the text colour (owner, 2026-10-27). */
+export function isMainHeading(number: string | null | undefined): boolean {
+  return /^\d+\.\d+[a-z]?$/.test(number ?? "");
+}
+
 /** The lesson is the book's heading alone, so the page should continue with the next topic if it is a subtopic. */
 export function headingOnly(reading: Reading): boolean {
   const blocks = reading.lesson?.body?.blocks;

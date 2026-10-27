@@ -15,7 +15,7 @@ import { useRequest } from "@/hooks/use-request";
 import { SubjectAccent, useTheme } from "@/hooks/use-theme";
 import { api, GRADE_LABEL, lessonAsset, previewAsset, type TopicLecture, type TopicReading } from "@/lib/api";
 import { useAuth } from "@/lib/auth";
-import { continuesInto, headingOnly } from "@/lib/book-heading";
+import { continuesInto, headingOnly, isMainHeading } from "@/lib/book-heading";
 import { useDisplay } from "@/lib/display";
 import { usePrefs } from "@/lib/prefs";
 import { missingLanguageNote, preferredLanguage, READING_LANGUAGES, type ReadingLanguage } from "@/lib/reading-language-core";
@@ -182,7 +182,7 @@ function Reader({
           </Pressable>
           {reading.availability === "private_preview" ? <Chip label="Draft preview: not yet reviewed or published">Draft preview</Chip> : null}
         </View>
-        <T variant="title" accessibilityRole="header">
+        <T variant="title" accessibilityRole="header" style={isMainHeading(reading.number) ? { color: c.accent } : undefined}>
           {reading.number ? `${reading.number} ${reading.title}` : reading.title}
         </T>
         <T variant="small">{reading.chapter_title}</T>
