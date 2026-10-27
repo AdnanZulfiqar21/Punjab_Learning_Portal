@@ -72,6 +72,26 @@ def clean_title(t: str) -> str:
     return re.sub(r"\s+", " ", t).strip()
 
 
+# Notes the indexers left in titles about the print ("(printed as 5.2)", "(sic: Warming)", "(duplicate number)") are for
+# reviewers; students see the heading as the book prints it. Natural keys still use clean_title, so IDs never change.
+_NOTE_WORDS = (
+    r"printed|sic|duplicate|number repeated|repeated on PDF|running header|chapter banner|numbering error|"
+    r"no title page|UNVERIFIED"
+)
+_NOTE = re.compile(r"\s*\((?:[^()]*\b(?:" + _NOTE_WORDS + r")\b[^()]*|intro|Recall|Fig \d+(?:\.\d+)*)\)", re.I)
+
+
+def display_title(t: str) -> str:
+    t = clean_title(t)
+    noted = bool(_NOTE.search(t))
+    t = _NOTE.sub("", t)
+    if re.match(r"Introduction\s*\(", t):  # "Introduction (halothane, classification)": what it covers, not printed
+        t = "Introduction"
+    if noted:  # "Dynamic Programming (as printed); Fibonacci sequence": the rest was the indexer's note too
+        t = t.split(";")[0]
+    return re.sub(r"\s+", " ", t).strip().rstrip(";:").strip()
+
+
 def topic_key(t: dict, seen: dict[str, int]) -> tuple[str, str | None]:
     """Natural-key fragment for a topic, plus the printed heading number (if any)."""
     raw = str(t.get("id") or "").strip()
@@ -95,7 +115,7 @@ def build_topics(topics: list, parent_key: str, depth: int, seen: dict[str, int]
             "id": None,  # assigned by identity.reconcile against the ID registry
             "natural_key": key,
             "number": number,
-            "title": clean_title(str(t.get("title", ""))),
+            "title": display_title(str(t.get("title", ""))),
             "depth": depth,
             "pdf_page": t.get("pdf_page") if isinstance(t.get("pdf_page"), int) else None,
             "points": points,
@@ -226,7 +246,7 @@ def main() -> int:
                 "order": order,
                 "number": ch["number"],
                 "contents_number": ch.get("contents_number"),
-                "title": clean_title(ch["title"]),
+                "title": display_title(ch["title"]),
                 "status": ch.get("status") or "complete",
                 "printed_start": ch.get("printed_start"),
                 "printed_end": ch.get("printed_end"),
