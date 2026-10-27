@@ -251,7 +251,22 @@ function BlockView({
         </table>
       );
     }
-    case "checkpoint":
+    case "checkpoint": {
+      // ANSWER-FIGURE-01: a drawn answer sits inside the check and appears only with the revealed answer.
+      const af = (b.answer_figure ?? null) as { asset_version_id?: unknown; alt?: unknown; caption?: unknown; long_description?: unknown } | null;
+      const answerFigure =
+        af && str(af.asset_version_id) ? (
+          <figure className="space-y-2 rounded-lg border border-border bg-surface p-3">
+            <ArchivedImage id={str(af.asset_version_id)} alt={str(af.alt)} assetUrl={assetUrl} dataSaver={dataSaver} />
+            {str(af.caption) && <figcaption className="text-sm text-muted">{str(af.caption)}</figcaption>}
+            {str(af.long_description) && (
+              <details className="text-sm">
+                <summary className="cursor-pointer">Describe this diagram</summary>
+                <p className="mt-1 whitespace-pre-line">{str(af.long_description)}</p>
+              </details>
+            )}
+          </figure>
+        ) : undefined;
       return (
         <Checkpoint
           mode={b.mode === "self_check" ? "self_check" : "question"}
@@ -259,8 +274,10 @@ function BlockView({
           options={Array.isArray(b.options) ? (b.options as { id: string; text: string }[]) : []}
           answerId={typeof b.answer_id === "string" ? b.answer_id : null}
           explanation={str(b.explanation)}
+          answerFigure={answerFigure}
         />
       );
+    }
     case "equation": {
       // Typeset on the web (P01.S4.T2), always with the text equivalent. The reviewed static rendering (§5.4: required
       // before publication while the apps have no equation renderer) shows when typesetting is off or fails. A printed

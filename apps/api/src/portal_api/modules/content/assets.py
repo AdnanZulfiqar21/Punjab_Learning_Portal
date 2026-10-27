@@ -485,6 +485,9 @@ def block_refs(body: object) -> list[tuple[str, str, str]]:
             fb = node.get("fallback")
             if isinstance(fb, dict) and isinstance(fb.get("image_asset_id"), str):
                 out.append((f"{kind} fallback", fb["image_asset_id"], "image"))
+            af = node.get("answer_figure")  # ANSWER-FIGURE-01: a checkpoint's drawn answer is an archived image too
+            if isinstance(af, dict) and isinstance(af.get("asset_version_id"), str):
+                out.append(("checkpoint answer figure", af["asset_version_id"], "image"))
             stack.extend(v for k, v in node.items() if k != "fallback")
     return out
 

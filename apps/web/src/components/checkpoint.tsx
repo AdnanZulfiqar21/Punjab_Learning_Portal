@@ -1,7 +1,7 @@
 "use client";
 
 // A formative checkpoint inside a lesson (P07.S1.T3). Self-check only: nothing is sent, stored or scored.
-import { useId, useState } from "react";
+import { type ReactNode, useId, useState } from "react";
 
 type Option = { id: string; text: string };
 
@@ -11,12 +11,15 @@ export function Checkpoint({
   options,
   answerId,
   explanation,
+  answerFigure,
 }: {
   mode: "question" | "self_check";
   prompt: string;
   options: Option[];
   answerId: string | null;
   explanation: string;
+  /** ANSWER-FIGURE-01: the drawn answer, shown with the explanation once revealed, never before. */
+  answerFigure?: ReactNode;
 }) {
   const [chosen, setChosen] = useState<string | null>(null);
   const [revealed, setRevealed] = useState(false);
@@ -55,6 +58,7 @@ export function Checkpoint({
           {explanation}
         </p>
       )}
+      {done && answerFigure}
     </aside>
   );
 }
