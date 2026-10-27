@@ -71,7 +71,7 @@ export function Equation({
   const current = fromServer ? { latex, html: typeset } : result?.latex === latex ? result : null;
   if (current?.html) {
     return (
-      <figure className="space-y-2 rounded-lg border border-border bg-surface px-4 py-3" data-typeset="ok">
+      <figure className="space-y-2 rounded-xl border border-border/70 bg-surface px-4 py-4 shadow-sm" data-typeset="ok">
         <div aria-hidden="true" className="overflow-x-auto overflow-y-hidden py-1" dangerouslySetInnerHTML={{ __html: current.html }} />
         <figcaption className="sr-only">{textAlt}</figcaption>
       </figure>

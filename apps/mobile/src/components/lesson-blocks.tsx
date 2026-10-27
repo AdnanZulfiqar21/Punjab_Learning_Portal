@@ -51,6 +51,32 @@ function Marked({ text, marks }: { text: string; marks: string[] }) {
   );
 }
 
+/** READER-STYLE-01: the book's printed boxes by their title (same rule as the web). */
+function bookBox(title: string): "keep" | "know" | null {
+  if (/^keep in mind/i.test(title)) return "keep";
+  if (/^(do you know|did you know|for your information|interesting information|tidbits?|point to ponder|ponder upon)/i.test(title)) return "know";
+  return null;
+}
+
+/** A printed "Quick Check" heading followed by its questions: one card, as the book prints it. */
+function isQuickCheck(b: Block | undefined, next: Block | undefined) {
+  return b?.type === "heading" && /^(quick check|self[- ]assessment)\b/i.test(str(b.text)) && next?.type === "list";
+}
+
+function QuickCheck({ title, children }: { title: string; children: ReactNode }) {
+  const c = useTheme();
+  return (
+    <View style={{ borderWidth: 1, borderColor: c.ok, borderRadius: Radius.md, overflow: "hidden" }}>
+      <View style={{ backgroundColor: c.okSoft, paddingHorizontal: Space.md, paddingVertical: Space.sm }}>
+        <T accessibilityRole="header" style={{ fontWeight: "700", color: c.ok }}>
+          {title}
+        </T>
+      </View>
+      <View style={{ padding: Space.md }}>{children}</View>
+    </View>
+  );
+}
+
 export function LessonBlocks({
   blocks,
   assetSource,
@@ -69,14 +95,36 @@ export function LessonBlocks({
 }) {
   return (
     <View style={{ gap: Space.lg }}>
-      {blocks.map((b, i) => (
-        <Fragment key={i}>
-          <View onLayout={onBlockLayout ? (e) => onBlockLayout(i, e.nativeEvent.layout.y) : undefined}>
-            <BlockView block={b} assetSource={assetSource} dataSaver={dataSaver} />
-          </View>
-          {b.type === "equation" && equationAction?.(i)}
-        </Fragment>
-      ))}
+      {blocks.map((b, i) => {
+        if (isQuickCheck(blocks[i - 1], b)) return null; // drawn inside the card above
+        if (isQuickCheck(b, blocks[i + 1])) {
+          // Both blocks report the card's place, so a language switch still lands on it.
+          return (
+            <View
+              key={i}
+              onLayout={
+                onBlockLayout
+                  ? (e) => {
+                      onBlockLayout(i, e.nativeEvent.layout.y);
+                      onBlockLayout(i + 1, e.nativeEvent.layout.y);
+                    }
+                  : undefined
+              }>
+              <QuickCheck title={str(b.text)}>
+                <BlockView block={blocks[i + 1]} assetSource={assetSource} dataSaver={dataSaver} />
+              </QuickCheck>
+            </View>
+          );
+        }
+        return (
+          <Fragment key={i}>
+            <View onLayout={onBlockLayout ? (e) => onBlockLayout(i, e.nativeEvent.layout.y) : undefined}>
+              <BlockView block={b} assetSource={assetSource} dataSaver={dataSaver} />
+            </View>
+            {b.type === "equation" && equationAction?.(i)}
+          </Fragment>
+        );
+      })}
     </View>
   );
 }
@@ -137,11 +185,12 @@ function ArchivedImage({
 }
 
 function Lines({ items, ordered, marks = [] }: { items: string[]; ordered: boolean; marks?: string[] }) {
+  const c = useTheme();
   return (
-    <View style={{ gap: Space.xs }} accessibilityRole="list">
+    <View style={{ gap: Space.sm }} accessibilityRole="list">
       {items.map((item, i) => (
         <View key={i} style={{ flexDirection: "row", gap: Space.sm }}>
-          <T style={{ width: 22, textAlign: "right" }}>{ordered ? `${i + 1}.` : "•"}</T>
+          <T style={{ width: 24, textAlign: "right", color: c.accent, fontWeight: "700" }}>{ordered ? `${i + 1}.` : "•"}</T>
           <T style={{ flex: 1 }}>
             <Marked text={item} marks={marks} />
           </T>
@@ -157,7 +206,11 @@ function BlockView({ block: b, assetSource, dataSaver }: { block: Block; assetSo
   switch (b.type) {
     case "heading":
       return (
-        <T variant={b.level === 3 ? "subheading" : "heading"} accessibilityRole="header" style={{ marginTop: b.level === 3 ? 0 : Space.sm }}>
+        // READER-STYLE-01: a sub-heading printed inside a topic stands out in the accent colour, as in the book.
+        <T
+          variant={b.level === 3 ? "subheading" : "heading"}
+          accessibilityRole="header"
+          style={{ marginTop: b.level === 3 ? Space.xs : Space.sm, color: b.level === 3 ? c.accent : undefined }}>
           <Marked text={str(b.text)} marks={marks} />
         </T>
       );
@@ -179,13 +232,20 @@ function BlockView({ block: b, assetSource, dataSaver }: { block: Block; assetSo
       const label = CALLOUT_LABEL[tone] ?? "Note";
       // A title that only repeats the label ("Book correction") is shown once.
       const title = str(b.title).trim().toLowerCase() === label.toLowerCase() ? "" : str(b.title);
+      // READER-STYLE-01: a titled note is one of the book's printed boxes; its title is the header, in the book's colour.
+      const printed = tone === "note" && !!title;
+      const box = printed ? bookBox(title) : null;
+      const boxBorder = box === "keep" ? c.warn : box === "know" ? c.accent : border;
+      const boxBg = box === "keep" ? c.warnSoft : box === "know" ? c.accentSoft : bg;
       return (
-        <View style={{ borderLeftWidth: 4, borderLeftColor: border, backgroundColor: bg, borderRadius: Radius.sm, padding: Space.md, gap: Space.xs }}>
-          <T variant="eyebrow" style={{ color: tone === "warning" ? c.warn : tone === "definition" ? c.accent : green ? c.ok : c.muted }}>
-            {label}
-          </T>
+        <View style={{ borderLeftWidth: 4, borderLeftColor: boxBorder, backgroundColor: boxBg, borderRadius: Radius.md, padding: Space.md, gap: Space.xs }}>
+          {printed ? null : (
+            <T variant="eyebrow" style={{ color: tone === "warning" ? c.warn : tone === "definition" ? c.accent : green ? c.ok : c.muted }}>
+              {label}
+            </T>
+          )}
           {title ? (
-            <T style={{ fontWeight: "600" }}>
+            <T style={{ fontWeight: "700", color: box === "keep" ? c.warn : box === "know" ? c.accent : undefined }}>
               <Marked text={title} marks={marks} />
             </T>
           ) : null}
