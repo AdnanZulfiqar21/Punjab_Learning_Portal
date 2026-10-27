@@ -4,7 +4,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { describe, it } from "node:test";
 
-import { fillMerged, mergedColumns, rowSpans } from "../src/lib/table-merge.ts";
+import { fillMerged, mergedColumns, mergeStarts, rowSpans } from "../src/lib/table-merge.ts";
 
 // Shaped like Chemistry XI Table 2.4: shell and n merged down, subshells one per row.
 const rows = [
@@ -36,6 +36,16 @@ describe("merged table cells", () => {
     assert.deepEqual(rowSpans([["", "a"], ["", "b"]], [0]).map((r) => r[0]), [1, 1]);
     assert.deepEqual(fillMerged([["x", ""], ["", ""]], [0]), [["x", ""], ["x", ""]]);
     assert.deepEqual(mergedColumns([0, "1", -1, 2.5, 3]), [0, 3]);
+  });
+
+  it("starts a new, empty cell where the book leaves one under a merged cell", () => {
+    // Shaped like Table 10.2's Trend column: the arrow covers the first rows; the reference row has its own empty cell
+    // and the last rows share another.
+    const trend = [["Li", "arrow"], ["K", ""], ["H2", ""], ["Cu", ""], ["Hg", ""]];
+    const starts = mergeStarts([[2, 1], [3, 1], ["4", 1]]);
+    assert.deepEqual([...starts], ["2:1", "3:1"]);
+    assert.deepEqual(rowSpans(trend, [1], starts).map((r) => r[1]), [2, 0, 1, 2, 0]);
+    assert.deepEqual(fillMerged(trend, [1], starts).map((r) => r[1]), ["arrow", "arrow", "", "", ""]);
   });
 
   it("is the same code on web and mobile", () => {

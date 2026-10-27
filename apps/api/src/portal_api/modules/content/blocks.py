@@ -180,10 +180,17 @@ class Table(_Marked):
     # TABLE-MERGE-01: columns where the book merges a cell down over several rows; there a blank cell continues the
     # filled cell above it.
     merged_columns: list[Annotated[int, Field(ge=0)]] | None = Field(default=None, max_length=12)
+    # [row, column] cells of a merged column that begin a new cell although blank (the book's empty cell).
+    merge_starts: list[tuple[Annotated[int, Field(ge=0)], Annotated[int, Field(ge=0)]]] | None = Field(
+        default=None, max_length=60
+    )
 
     def _texts(self) -> list[str]:
         if self.merged_columns and max(self.merged_columns) >= len(self.header):
             raise ValueError("merged_columns names a column the table doesn't have")
+        for r, c in self.merge_starts or []:
+            if c not in (self.merged_columns or []) or r >= len(self.rows):
+                raise ValueError("merge_starts names a cell outside the table's merged columns")
         return [self.caption, *self.header, *(c for r in self.rows for c in r)]
 
 
