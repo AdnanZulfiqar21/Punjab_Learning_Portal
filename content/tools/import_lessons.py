@@ -112,8 +112,8 @@ def resolve(block: dict[str, Any], versions: dict[str, str], frames_per_turn: in
             out["frames"] = [versions[f"{value}-{n:02d}"] for n in range(1, frames_per_turn + 1)]
         elif key == "$image":
             out["image_asset_id"] = versions[value]
-        elif key == "fallback" and isinstance(value, dict):
-            out["fallback"] = resolve(value, versions, frames_per_turn)
+        elif key in ("fallback", "answer_figure") and isinstance(value, dict):  # nested images (ANSWER-FIGURE-01)
+            out[key] = resolve(value, versions, frames_per_turn)
         else:
             out[key] = value
     return out

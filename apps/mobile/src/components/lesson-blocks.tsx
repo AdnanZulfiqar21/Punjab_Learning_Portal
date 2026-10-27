@@ -292,7 +292,17 @@ function BlockView({ block: b, assetSource, dataSaver }: { block: Block; assetSo
         </View>
       );
     }
-    case "checkpoint":
+    case "checkpoint": {
+      // ANSWER-FIGURE-01: a drawn answer sits inside the check and appears only with the revealed answer.
+      const af = (b.answer_figure ?? null) as { asset_version_id?: unknown; alt?: unknown; caption?: unknown; long_description?: unknown } | null;
+      const answerFigure =
+        af && str(af.asset_version_id) ? (
+          <View style={{ gap: Space.xs }}>
+            <ArchivedImage id={str(af.asset_version_id)} alt={str(af.alt)} caption={str(af.caption)} assetSource={assetSource} dataSaver={dataSaver} />
+            {str(af.caption) ? <T variant="small">{str(af.caption)}</T> : null}
+            {str(af.long_description) ? <Description text={str(af.long_description)} /> : null}
+          </View>
+        ) : undefined;
       return (
         <Checkpoint
           mode={b.mode === "self_check" ? "self_check" : "question"}
@@ -300,8 +310,10 @@ function BlockView({ block: b, assetSource, dataSaver }: { block: Block; assetSo
           options={Array.isArray(b.options) ? (b.options as { id: string; text: string }[]) : []}
           answerId={typeof b.answer_id === "string" ? b.answer_id : null}
           explanation={str(b.explanation)}
+          answerFigure={answerFigure}
         />
       );
+    }
     case "equation": {
       // Native renderer 2 has no typeset equations: show the reviewed static rendering and the text equivalent (§5.4).
       const fb = (b.fallback ?? {}) as Fallback;

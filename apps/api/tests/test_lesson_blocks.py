@@ -103,8 +103,24 @@ def test_diagrams_and_handouts_reach_learners_only_through_their_lesson(client: 
     errors = " ".join(refused.json()["errors"])
     assert "Class XII" in errors and "isn't an image" in errors
 
+    # ANSWER-FIGURE-01: a self-check's drawn answer is an archived image of the same class, served with the lesson.
+    drawn = _upload(client, team["author"], _asset(client, team["author"], "image")["id"], _jpeg_with_gps()).json()
+    check = {
+        "type": "checkpoint",
+        "mode": "self_check",
+        "prompt": "Fixture: sketch the graph.",
+        "explanation": "Fixture: what the graph shows.",
+        "answer_figure": {"asset_version_id": drawn["id"], "alt": "Fixture answer graph", "caption": "Fixture answer"},
+    }
+    misnamed = _create(client, team["author"], chapter, title="Fixture lesson with a misnamed answer figure")
+    wrong_answer = {**check, "answer_figure": {**check["answer_figure"], "asset_version_id": handout["id"]}}
+    saved = _save(client, team["author"], misnamed, body={"blocks": [wrong_answer]}, refs=_refs(chapter, doc))
+    assert saved.status_code == 200
+    refused = _publish(client, team, misnamed)
+    assert refused.status_code == 422 and "isn't an image" in " ".join(refused.json()["errors"]), refused.text
+
     lesson = _create(client, team["author"], chapter, title="Fixture lesson with a diagram")
-    good = {"blocks": [{"type": "paragraph", "text": "Fixture explanation."}, EXAMPLE, diagram, sheet]}
+    good = {"blocks": [{"type": "paragraph", "text": "Fixture explanation."}, EXAMPLE, diagram, sheet, check]}
     assert _save(client, team["author"], lesson, body=good, refs=_refs(chapter, doc)).status_code == 200
     assert _publish(client, team, lesson).status_code == 200
     url = f"/v1/lessons/{lesson['id']}/assets"
@@ -117,10 +133,12 @@ def test_diagrams_and_handouts_reach_learners_only_through_their_lesson(client: 
     pdf = client.get(f"{url}/{handout['id']}", headers=learner.headers)
     assert pdf.status_code == 200 and pdf.headers["content-disposition"].startswith("attachment")
     assert client.get(f"{url}/{unrelated['id']}", headers=learner.headers).status_code == 404  # not in this lesson
+    answer = client.get(f"{url}/{drawn['id']}", headers=learner.headers)
+    assert answer.status_code == 200 and answer.headers["content-type"] == "image/png", answer.text
     # P07.S3.T3 (LESSON-SIZE-01): the lesson says what its images and handouts cost to download, before they load.
     listed = client.get(f"/v1/chapters/{chapter.id}/lessons", headers=learner.headers).json()
     mine = next(x for x in listed if x["id"] == lesson["id"])
-    assert mine["download_bytes"] == len(img.content) + len(pdf.content)
+    assert mine["download_bytes"] == len(img.content) + len(pdf.content) + len(answer.content)
     anonymous = next(x for x in client.get(f"/v1/chapters/{chapter.id}/lessons").json() if x["id"] == lesson["id"])
     assert anonymous["locked"] is True and anonymous["download_bytes"] is None  # nothing to download while locked
 

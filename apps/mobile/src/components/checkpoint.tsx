@@ -1,5 +1,5 @@
 // A formative checkpoint inside a lesson (P07.S1.T3), native. Self-check only: nothing is sent, stored or scored.
-import { useState } from "react";
+import { type ReactNode, useState } from "react";
 import { Pressable, Text, View } from "react-native";
 
 import { T } from "@/components/ui";
@@ -14,12 +14,15 @@ export function Checkpoint({
   options,
   answerId,
   explanation,
+  answerFigure,
 }: {
   mode: "question" | "self_check";
   prompt: string;
   options: Option[];
   answerId: string | null;
   explanation: string;
+  /** ANSWER-FIGURE-01: the drawn answer, shown with the explanation once revealed, never before. */
+  answerFigure?: ReactNode;
 }) {
   const c = useTheme();
   const [chosen, setChosen] = useState<string | null>(null);
@@ -62,6 +65,7 @@ export function Checkpoint({
           {explanation}
         </T>
       )}
+      {done ? answerFigure : null}
     </View>
   );
 }
