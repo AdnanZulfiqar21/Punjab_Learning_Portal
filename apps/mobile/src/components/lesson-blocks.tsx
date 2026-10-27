@@ -242,8 +242,8 @@ function BlockView({ block: b, assetSource, dataSaver }: { block: Block; assetSo
       // Native renderer 2 has no typeset equations: show the reviewed static rendering and the text equivalent (§5.4).
       const fb = (b.fallback ?? {}) as Fallback;
       return (
-        // A printed equation with an error is outlined in red, its wrong part marked (BOOK-CORRECTION-01).
-        <View style={{ borderWidth: marks.length ? 2 : 1, borderColor: marks.length ? c.danger : c.border, borderRadius: Radius.sm, padding: Space.md, gap: Space.sm }}>
+        // A printed equation with an error shows its wrong part in red (BOOK-CORRECTION-01).
+        <View style={{ borderWidth: 1, borderColor: c.border, borderRadius: Radius.sm, padding: Space.md, gap: Space.sm }}>
           {str(fb.image_asset_id) ? <ArchivedImage id={str(fb.image_asset_id)} alt={str(fb.alt) || str(b.text_alt)} assetSource={assetSource} dataSaver={dataSaver} /> : null}
           <T>
             <Marked text={str(b.text_alt)} marks={marks} />

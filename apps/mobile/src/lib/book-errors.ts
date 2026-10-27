@@ -8,6 +8,52 @@ export function bookErrors(v: unknown): string[] {
   return Array.isArray(v) ? v.filter((m): m is string => typeof m === "string" && m.length > 0) : [];
 }
 
+// A printed equation is shown once, its wrong part in red inside the typeset formula. The marks that occur in the LaTeX
+// are coloured with a sentinel colour (KaTeX runs untrusted, so no classes); the typeset HTML's sentinel is then
+// swapped for the theme's danger colours, so the red follows light and dark mode.
+const SENTINEL = "#a31d1e";
+
+/** The LaTeX with each mark that occurs in it wrapped in the sentinel colour. Inside chemistry (`\ce{…}`) the mark is
+ * wrapped as chemistry again, so H2O keeps its subscript instead of turning into italic maths. */
+export function markLatex(latex: string, marks: string[]): string {
+  const inLatex = marks.filter((m) => latex.includes(m)).sort((a, b) => b.length - a.length);
+  if (!inLatex.length) return latex;
+  let out = "";
+  let i = 0;
+  const groups: boolean[] = []; // open brace groups, true where the group is a \ce{…}
+  while (i < latex.length) {
+    const hit = inLatex.find((m) => latex.startsWith(m, i));
+    if (hit) {
+      const chem = groups.includes(true);
+      out += `\\textcolor{${SENTINEL}}{${chem ? `\\ce{${hit}}` : hit}}`;
+      i += hit.length;
+      continue;
+    }
+    if (latex.startsWith("\\ce{", i)) {
+      groups.push(true);
+      out += "\\ce{";
+      i += 4;
+      continue;
+    }
+    const ch = latex[i];
+    if (ch === "\\" && i + 1 < latex.length) {
+      out += ch + latex[i + 1]; // an escaped character, e.g. \{ or \\, never opens or closes a group
+      i += 2;
+      continue;
+    }
+    if (ch === "{") groups.push(false);
+    if (ch === "}") groups.pop();
+    out += ch;
+    i += 1;
+  }
+  return out;
+}
+
+/** Typeset HTML with the sentinel colour replaced by the theme's book-error colours. */
+export function paintBookErrors(html: string): string {
+  return html.replaceAll(`color:${SENTINEL};`, "color:var(--danger);background-color:var(--danger-soft);");
+}
+
 /** Splits text into plain and marked pieces. Every occurrence of a mark is marked; where marks overlap, the one that
  * starts first wins, and of two starting together the longer. */
 export function markPieces(text: string, marks: string[]): Piece[] {
