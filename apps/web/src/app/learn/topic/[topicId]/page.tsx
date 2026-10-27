@@ -7,6 +7,7 @@ import { chooseReadingLanguage } from "@/app/actions/learn";
 import { KeepPlace } from "@/components/keep-place";
 import { LectureView } from "@/components/lecture-view";
 import { LessonBlocks } from "@/components/lesson-blocks";
+import { continuesInto, headingOnly as isHeadingOnly } from "@/lib/book-heading";
 import { typesetEquations } from "@/lib/typeset";
 import { placeSignature, type PlaceBlock } from "@/lib/variant-place";
 import { Notice, SkeletonLines } from "@/components/ui";
@@ -82,9 +83,19 @@ async function TopicView({ id, view }: { id: string; view: "read" | "lecture" })
   const res = await api<TopicReading>(`/v1/topics/${id}/lesson${language === "en" ? "" : `?language=${language}`}`, token ? { token } : {});
   if (!res.ok) notFound();
   const reading = res.data;
-  const lesson = reading.lesson;
+  // BOOK-HEADING-01: where the book prints only this topic's heading and runs straight into its first subtopic
+  // (Chemistry XI 14.4 into 14.4.1), the page goes on with that subtopic under its own heading instead of staying empty.
+  const headingOnly = isHeadingOnly(reading);
+  let cont: TopicReading | null = null;
+  if (headingOnly && reading.next_topic_id) {
+    const next = await api<TopicReading>(`/v1/topics/${reading.next_topic_id}/lesson${language === "en" ? "" : `?language=${language}`}`, token ? { token } : {});
+    if (next.ok && continuesInto(reading, next.data)) cont = next.data;
+  }
+  const shown = cont ?? reading; // the topic whose lesson is on the page
+  const lesson = shown.lesson;
   const grade = GRADE_LABEL[reading.grade_number] ?? `Class ${reading.grade_number}`;
-  const readable = Boolean(lesson?.body) && !lesson?.locked && reading.availability !== "unavailable";
+  const empty = headingOnly && !cont; // a heading with nothing to go on with is not a lesson yet
+  const readable = Boolean(lesson?.body) && !empty && !lesson?.locked && reading.availability !== "unavailable";
   const note = lesson && readable ? missingLanguageNote(language, lesson.language) : null;
   const display = parseDisplay(jar.get(DISPLAY_COOKIE)?.value);
   const dataSaver = display ? display.dataSaver : (await headers()).get("save-data") === "on";
@@ -165,7 +176,7 @@ async function TopicView({ id, view }: { id: string; view: "read" | "lecture" })
           )}
         </section>
       )}
-      {view === "lecture" && readable ? null : reading.availability === "unavailable" || !lesson?.body ? (
+      {view === "lecture" && readable ? null : reading.availability === "unavailable" || !lesson?.body || empty ? (
         <Notice title="This topic’s lesson isn’t ready yet">The chapter outline lists the topic, but its lesson has not been published.</Notice>
       ) : lesson.locked ? (
         <Notice title="Included with a plan or the free 30-day trial">
@@ -176,6 +187,7 @@ async function TopicView({ id, view }: { id: string; view: "read" | "lecture" })
         </Notice>
       ) : (
         <div className="space-y-4 text-[1.0625rem] leading-7 sm:text-[1.125rem] sm:leading-8" lang={lesson.language === "ur" ? "ur" : "en"} dir={lesson.language === "ur" ? "rtl" : undefined}>
+          {cont && <h2 className="text-2xl font-semibold tracking-tight">{`${cont.number} ${cont.title}`}</h2>}
           <LessonBlocks
             blocks={lesson.body.blocks}
             typeset={typesetEquations(lesson.body.blocks)}
@@ -183,7 +195,7 @@ async function TopicView({ id, view }: { id: string; view: "read" | "lecture" })
             dataSaver={dataSaver}
             assetUrl={(versionId) =>
               lesson.private_preview
-                ? `/learn/topics/${reading.topic_id}/preview-assets/${versionId}`
+                ? `/learn/topics/${shown.topic_id}/preview-assets/${versionId}`
                 : `/learn/lessons/${lesson.id}/assets/${versionId}`
             }
           />
@@ -197,8 +209,8 @@ async function TopicView({ id, view }: { id: string; view: "read" | "lecture" })
         ) : (
           <span />
         )}
-        {reading.next_topic_id && (
-          <Link href={`/learn/topic/${reading.next_topic_id}`} className="font-medium text-accent">
+        {shown.next_topic_id && (
+          <Link href={`/learn/topic/${shown.next_topic_id}`} className="font-medium text-accent">
             Next topic →
           </Link>
         )}

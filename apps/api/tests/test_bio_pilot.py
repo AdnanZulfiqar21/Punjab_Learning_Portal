@@ -197,3 +197,45 @@ def test_a_roman_urdu_variant_imports_against_its_english_base_and_the_reader_pi
     for params in ({}, {"language": "roman_ur"}):
         seen = client.get(path, headers=learner.headers, params=params).json()
         assert seen["lesson"] is None or seen["availability"] == "published"
+
+
+def test_a_language_with_only_the_books_heading_is_shown_not_replaced(client: TestClient, db: Session) -> None:
+    # Where the book prints only a heading (the topic's text is in its subtopics), the draft is that heading; the
+    # reader shows it in the language asked for, rather than saying it is missing (BOOK-HEADING-01).
+    chapter, doc = _chapter(db, 11, "biology", 10)
+    topic = db.scalars(
+        select(Topic)
+        .where(Topic.chapter_id == chapter.id, Topic.parent_id.is_(None), Topic.retired_at.is_(None))
+        .order_by(Topic.display_order)
+    ).first()
+    assert topic is not None
+    author = Staff(client, db, ["content_author"], BIO)
+    tag = uuid.uuid4().hex[:6]
+    base = {
+        "external_id": f"FX-{tag}-EN",
+        "chapter": chapter.natural_key,
+        "topic": str(topic.id),
+        "title": f"Fixture heading-only lesson {tag}",
+        "source_refs": _refs(chapter, doc),
+        "body": {"blocks": [{"type": "heading", "level": 2, "text": "Fixture heading"}]},
+    }
+    assert _import(client, author, base)["status"] == "committed"
+    path = f"/v1/topics/{topic.id}/lesson"
+    alone = client.get(path, headers=author.headers).json()
+    assert alone["availability"] == "private_preview"
+    assert [b["text"] for b in alone["lesson"]["body"]["blocks"]] == ["Fixture heading"]
+
+    roman = {
+        **base,
+        "external_id": f"FX-{tag}-RU",
+        "title": f"Fixture heading-only lesson {tag} (Roman Urdu)",
+        "language": "roman_ur",
+        "variant_of": f"FX-{tag}-EN",
+        "body": {"blocks": [{"type": "paragraph", "text": "Fixture explanation."}]},
+    }
+    del roman["topic"]
+    assert _import(client, author, roman)["status"] == "committed"
+    en = client.get(path, headers=author.headers, params={"language": "en"}).json()["lesson"]
+    assert en["language"] == "en" and en["requested_language_missing"] is False
+    assert en["available_languages"] == ["en", "roman_ur"]
+    assert [b["type"] for b in en["body"]["blocks"]] == ["heading"]
