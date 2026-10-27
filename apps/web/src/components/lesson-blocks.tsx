@@ -173,10 +173,11 @@ function BlockView({
     case "heading": {
       const level = Math.min(6, (b.level === 3 ? 3 : 2) + headingOffset);
       const Tag = `h${level}` as "h2" | "h3" | "h4" | "h5" | "h6";
-      // A sub-heading printed inside a topic (e.g. "Zero Order Reaction") is set apart by size; headings stay in the text
-      // colour, as only a chapter's main headings (14.4) take the accent (owner, 2026-10-27).
+      // Headings inside a topic ("Carbon monoxide (CO)" in 14.4.1) take their own colour, apart from the chapter's main
+      // heading (14.4, accent) and the topic's title (14.4.1, text colour), so the three levels read apart (owner,
+      // 2026-10-27).
       return (
-        <Tag dir="auto" className={b.level === 3 ? "pt-1 text-lg font-semibold" : "pt-2 text-xl font-semibold tracking-tight"}>
+        <Tag dir="auto" className={b.level === 3 ? "pt-1 text-lg font-semibold text-subheading" : "pt-2 text-xl font-semibold tracking-tight text-subheading"}>
           <Marked text={str(b.text)} marks={marks} />
         </Tag>
       );

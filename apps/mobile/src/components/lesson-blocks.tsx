@@ -211,12 +211,12 @@ function BlockView({ block: b, assetSource, dataSaver }: { block: Block; assetSo
   switch (b.type) {
     case "heading":
       return (
-        // READER-STYLE-01: a sub-heading printed inside a topic is set apart by size; headings stay in the text colour, as
-        // only a chapter's main headings (14.4) take the accent (owner, 2026-10-27).
+        // Headings inside a topic take their own colour, apart from the chapter's main heading (accent) and the topic's
+        // title (text colour), so the three levels read apart (owner, 2026-10-27).
         <T
           variant={b.level === 3 ? "subheading" : "heading"}
           accessibilityRole="header"
-          style={{ marginTop: b.level === 3 ? Space.xs : Space.sm }}>
+          style={{ marginTop: b.level === 3 ? Space.xs : Space.sm, color: c.subheading }}>
           <Marked text={str(b.text)} marks={marks} />
         </T>
       );
