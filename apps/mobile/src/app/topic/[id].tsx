@@ -15,6 +15,7 @@ import { useRequest } from "@/hooks/use-request";
 import { SubjectAccent, useTheme } from "@/hooks/use-theme";
 import { api, GRADE_LABEL, lessonAsset, previewAsset, type TopicLecture, type TopicReading } from "@/lib/api";
 import { useAuth } from "@/lib/auth";
+import { continuesInto, headingOnly, isMainHeading } from "@/lib/book-heading";
 import { useDisplay } from "@/lib/display";
 import { usePrefs } from "@/lib/prefs";
 import { missingLanguageNote, preferredLanguage, READING_LANGUAGES, type ReadingLanguage } from "@/lib/reading-language-core";
@@ -23,6 +24,7 @@ import { mapPlace, placeSignature, type PlaceBlock } from "@/lib/variant-place";
 type Segment = ReadingLanguage | "lecture";
 /** The block the reader was on when switching language, kept by the screen while the other variant loads. */
 type Place = { lessonId: string; index: number; signatures: string[]; target?: number };
+type Shown = TopicReading & { continued?: TopicReading };
 const SEGMENTS: readonly (readonly [Segment, string])[] = [...READING_LANGUAGES, ["lecture", "Lecture"]];
 
 export default function TopicScreen() {
@@ -33,7 +35,13 @@ export default function TopicScreen() {
   const me = auth.state.status === "signed_in" ? auth.state.me : null;
   const language = preferredLanguage(prefs.language, me?.profile?.explanation_language);
   const view = prefs.view === "lecture" ? "lecture" : "read";
-  const { state, retry } = useRequest((signal) => api.topicLesson(id, token, signal, language), [id, token, language]);
+  const { state, retry } = useRequest(async (signal): Promise<Shown> => {
+    const reading = await api.topicLesson(id, token, signal, language);
+    // BOOK-HEADING-01: the book's heading alone goes on with its first subtopic (lib/book-heading.ts).
+    if (!headingOnly(reading) || !reading.next_topic_id) return reading;
+    const next = await api.topicLesson(reading.next_topic_id, token, signal, language);
+    return continuesInto(reading, next) ? { ...reading, continued: next } : reading;
+  }, [id, token, language]);
   const lecture = useRequest((signal) => api.topicLecture(id, token, signal), [id, token]);
   const c = useTheme();
   const placeRef = useRef<Place | null>(null);
@@ -89,7 +97,7 @@ function Reader({
   background,
   placeRef,
 }: {
-  reading: TopicReading;
+  reading: Shown;
   token: string | null;
   language: ReadingLanguage;
   view: "read" | "lecture";
@@ -100,7 +108,9 @@ function Reader({
   placeRef: RefObject<Place | null>;
 }) {
   const c = useTheme();
-  const lesson = reading.lesson;
+  const shown = reading.continued ?? reading; // the topic whose lesson is on the screen
+  // A heading with nothing to go on with is not a lesson yet.
+  const lesson = headingOnly(reading) && !reading.continued ? null : shown.lesson;
   const scroll = useRef<ScrollView>(null);
   const offset = useRef(0);
   const bodyTop = useRef(0);
@@ -163,20 +173,48 @@ function Reader({
         </View>
       ) : null}
       {note && view !== "lecture" ? <T variant="small" accessibilityLiveRegion="polite">{note}</T> : null}
-      <View style={{ gap: Space.xs }}>
-        <View style={{ flexDirection: "row", alignItems: "center", gap: Space.sm, flexWrap: "wrap" }}>
-          <Pressable accessibilityRole="button" accessibilityLabel={`Back to chapter ${reading.chapter_number}: ${reading.chapter_title}`} onPress={() => router.push({ pathname: "/chapter/[id]", params: { id: reading.chapter_id } })}>
-            <T variant="eyebrow">
-              {GRADE_LABEL[reading.grade_number] ?? `Class ${reading.grade_number}`} · {reading.subject_name} · Chapter {reading.chapter_number}
+      {reading.chapter_start ? (
+        // CHAPTER-OPENING-01 (owner-approved for every book, 2026-10-27): the chapter's first topic opens with
+        // the chapter itself, its name large in the subject colour on a tinted panel; the topic's own title follows.
+        <View style={{ gap: Space.md }}>
+          <View style={{ overflow: "hidden", borderRadius: 16, borderWidth: 1, borderColor: c.border, backgroundColor: c.accentSoft, padding: Space.lg, gap: Space.sm }}>
+            <T aria-hidden importantForAccessibility="no-hide-descendants" style={{ position: "absolute", right: Space.md, bottom: -24, fontSize: 112, lineHeight: 120, fontWeight: "800", color: c.accent, opacity: 0.1 }}>
+              {reading.chapter_number}
             </T>
-          </Pressable>
-          {reading.availability === "private_preview" ? <Chip label="Draft preview: not yet reviewed or published">Draft preview</Chip> : null}
+            <View style={{ flexDirection: "row", alignItems: "center", gap: Space.sm, flexWrap: "wrap" }}>
+              <Pressable accessibilityRole="button" accessibilityLabel={`Back to chapter ${reading.chapter_number}: ${reading.chapter_title}`} onPress={() => router.push({ pathname: "/chapter/[id]", params: { id: reading.chapter_id } })}>
+                <T variant="eyebrow">
+                  {GRADE_LABEL[reading.grade_number] ?? `Class ${reading.grade_number}`} · {reading.subject_name}
+                </T>
+              </Pressable>
+              {reading.availability === "private_preview" ? <Chip label="Draft preview: not yet reviewed or published">Draft preview</Chip> : null}
+            </View>
+            <T variant="eyebrow" style={{ color: c.accent, letterSpacing: 2 }}>{`CHAPTER ${reading.chapter_number}`}</T>
+            <T accessibilityRole="header" style={{ fontSize: 36, lineHeight: 42, fontWeight: "800", color: c.accent, letterSpacing: -0.5 }}>
+              {reading.chapter_title}
+            </T>
+            <View style={{ height: 4, width: 56, borderRadius: 2, backgroundColor: c.accent }} />
+          </View>
+          <T variant="heading" accessibilityRole="header" style={isMainHeading(reading.number) ? { color: c.accent } : undefined}>
+            {reading.number ? `${reading.number} ${reading.title}` : reading.title}
+          </T>
         </View>
-        <T variant="title" accessibilityRole="header">
-          {reading.number ? `${reading.number} ${reading.title}` : reading.title}
-        </T>
-        <T variant="small">{reading.chapter_title}</T>
-      </View>
+      ) : (
+        <View style={{ gap: Space.xs }}>
+          <View style={{ flexDirection: "row", alignItems: "center", gap: Space.sm, flexWrap: "wrap" }}>
+            <Pressable accessibilityRole="button" accessibilityLabel={`Back to chapter ${reading.chapter_number}: ${reading.chapter_title}`} onPress={() => router.push({ pathname: "/chapter/[id]", params: { id: reading.chapter_id } })}>
+              <T variant="eyebrow">
+                {GRADE_LABEL[reading.grade_number] ?? `Class ${reading.grade_number}`} · {reading.subject_name} · Chapter {reading.chapter_number}
+              </T>
+            </Pressable>
+            {reading.availability === "private_preview" ? <Chip label="Draft preview: not yet reviewed or published">Draft preview</Chip> : null}
+          </View>
+          <T variant="title" accessibilityRole="header" style={isMainHeading(reading.number) ? { color: c.accent } : undefined}>
+            {reading.number ? `${reading.number} ${reading.title}` : reading.title}
+          </T>
+          <T variant="small">{reading.chapter_title}</T>
+        </View>
+      )}
       {view === "lecture" && lesson?.body && !lesson.locked ? (
         lecture ? <LectureView data={lecture} token={token} /> : <Loading label="Checking for a lecture" />
       ) : reading.availability === "unavailable" || !lesson?.body ? (
@@ -185,10 +223,13 @@ function Reader({
         <Notice title="Included with a plan or the free 30-day trial">Start your free trial from the Account tab to read this lesson.</Notice>
       ) : (
         <View onLayout={(e) => (bodyTop.current = e.nativeEvent.layout.y)}>
+          {reading.continued ? (
+            <T variant="heading" accessibilityRole="header">{`${reading.continued.number} ${reading.continued.title}`}</T>
+          ) : null}
           <LessonBody
             key={lesson.id}
             chapterId={reading.chapter_id}
-            topicId={reading.topic_id}
+            topicId={shown.topic_id}
             lessonId={lesson.id}
             token={token}
             privatePreview={lesson.private_preview}
@@ -203,7 +244,7 @@ function Reader({
         ) : (
           <View />
         )}
-        {reading.next_topic_id ? <LinkButton label="Next topic →" onPress={() => router.replace({ pathname: "/topic/[id]", params: { id: reading.next_topic_id! } })} /> : null}
+        {shown.next_topic_id ? <LinkButton label="Next topic →" onPress={() => router.replace({ pathname: "/topic/[id]", params: { id: shown.next_topic_id! } })} /> : null}
       </View>
     </ScrollView>
   );
