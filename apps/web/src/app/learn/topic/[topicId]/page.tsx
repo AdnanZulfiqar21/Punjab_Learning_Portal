@@ -95,8 +95,8 @@ async function TopicView({ id, view }: { id: string; view: "read" | "lecture" })
   const shown = cont ?? reading; // the topic whose lesson is on the page
   const lesson = shown.lesson;
   const grade = GRADE_LABEL[reading.grade_number] ?? `Class ${reading.grade_number}`;
-  // CHAPTER-OPENING-01: owner-approved for both Chemistry books (2026-10-27); other subjects keep the plain header.
-  const chapterOpening = reading.chapter_start === true && subjectKey(reading.subject_name) === "chemistry";
+  // CHAPTER-OPENING-01: owner-approved for every book after Chemistry (2026-10-27).
+  const chapterOpening = reading.chapter_start === true;
   const empty = headingOnly && !cont; // a heading with nothing to go on with is not a lesson yet
   const readable = Boolean(lesson?.body) && !empty && !lesson?.locked && reading.availability !== "unavailable";
   const note = lesson && readable ? missingLanguageNote(language, lesson.language) : null;
@@ -156,13 +156,14 @@ async function TopicView({ id, view }: { id: string; view: "read" | "lecture" })
                 )}
               </p>
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">Chapter {reading.chapter_number}</p>
-              <h1 className="text-4xl font-bold tracking-tight text-accent sm:text-5xl">{reading.chapter_title}</h1>
+              <p className="text-4xl font-bold tracking-tight text-accent sm:text-5xl">{reading.chapter_title}</p>
               <div aria-hidden className="h-1 w-16 rounded-full bg-accent" />
             </div>
           </div>
-          <h2 className={`text-2xl font-semibold tracking-tight${isMainHeading(reading.number) ? " text-accent" : ""}`}>
+          {/* The page's heading stays the topic; the chapter above is its setting. */}
+          <h1 className={`text-2xl font-semibold tracking-tight${isMainHeading(reading.number) ? " text-accent" : ""}`}>
             {reading.number ? `${reading.number} ${reading.title}` : reading.title}
-          </h2>
+          </h1>
         </header>
       ) : (
         <header className="space-y-2">

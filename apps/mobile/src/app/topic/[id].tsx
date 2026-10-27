@@ -10,7 +10,7 @@ import { LectureView } from "@/components/lecture-view";
 import { LessonBlocks } from "@/components/lesson-blocks";
 import { CompletionToggle, LessonNote, SaveFormula } from "@/components/lesson-study";
 import { Chip, ErrorState, LinkButton, Loading, Notice, Segmented, T } from "@/components/ui";
-import { Space, subjectKey } from "@/constants/theme";
+import { Space } from "@/constants/theme";
 import { useRequest } from "@/hooks/use-request";
 import { SubjectAccent, useTheme } from "@/hooks/use-theme";
 import { api, GRADE_LABEL, lessonAsset, previewAsset, type TopicLecture, type TopicReading } from "@/lib/api";
@@ -173,8 +173,8 @@ function Reader({
         </View>
       ) : null}
       {note && view !== "lecture" ? <T variant="small" accessibilityLiveRegion="polite">{note}</T> : null}
-      {reading.chapter_start && subjectKey(reading.subject_name) === "chemistry" ? (
-        // CHAPTER-OPENING-01 (owner-approved for both Chemistry books, 2026-10-27): the chapter's first topic opens with
+      {reading.chapter_start ? (
+        // CHAPTER-OPENING-01 (owner-approved for every book, 2026-10-27): the chapter's first topic opens with
         // the chapter itself, its name large in the subject colour on a tinted panel; the topic's own title follows.
         <View style={{ gap: Space.md }}>
           <View style={{ overflow: "hidden", borderRadius: 16, borderWidth: 1, borderColor: c.border, backgroundColor: c.accentSoft, padding: Space.lg, gap: Space.sm }}>
