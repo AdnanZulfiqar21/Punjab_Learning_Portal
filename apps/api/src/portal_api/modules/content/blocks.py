@@ -200,6 +200,17 @@ class CheckpointOption(BaseModel):
     text: Short
 
 
+class AnswerFigure(BaseModel):
+    """A drawn answer shown with a checkpoint's explanation, only once the learner reveals it (ANSWER-FIGURE-01): a
+    self-check that asks the student to draw a graph, cycle or structure answers with the drawing, not words alone."""
+
+    model_config = ConfigDict(extra="forbid")
+    asset_version_id: AssetRef
+    alt: Annotated[str, Field(min_length=3, max_length=500)]
+    caption: Short | None = None
+    long_description: Text | None = None
+
+
 class Checkpoint(_Block):
     """A formative check at a lesson point (P07.S1.T3; CHECKPOINTS-01). `question`: 2 to 6 options, one key, and the
     explanation shown after answering. `self_check`: a prompt and what a good answer contains; no key. The key travels
@@ -212,6 +223,7 @@ class Checkpoint(_Block):
     options: list[CheckpointOption] = Field(default_factory=list, max_length=6)
     answer_id: str | None = None
     explanation: Text
+    answer_figure: AnswerFigure | None = None
 
     @model_validator(mode="after")
     def _shape(self) -> Checkpoint:
