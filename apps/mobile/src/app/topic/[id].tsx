@@ -10,7 +10,7 @@ import { LectureView } from "@/components/lecture-view";
 import { LessonBlocks } from "@/components/lesson-blocks";
 import { CompletionToggle, LessonNote, SaveFormula } from "@/components/lesson-study";
 import { Chip, ErrorState, LinkButton, Loading, Notice, Segmented, T } from "@/components/ui";
-import { Space } from "@/constants/theme";
+import { Space, subjectKey } from "@/constants/theme";
 import { useRequest } from "@/hooks/use-request";
 import { SubjectAccent, useTheme } from "@/hooks/use-theme";
 import { api, GRADE_LABEL, lessonAsset, previewAsset, type TopicLecture, type TopicReading } from "@/lib/api";
@@ -173,20 +173,48 @@ function Reader({
         </View>
       ) : null}
       {note && view !== "lecture" ? <T variant="small" accessibilityLiveRegion="polite">{note}</T> : null}
-      <View style={{ gap: Space.xs }}>
-        <View style={{ flexDirection: "row", alignItems: "center", gap: Space.sm, flexWrap: "wrap" }}>
-          <Pressable accessibilityRole="button" accessibilityLabel={`Back to chapter ${reading.chapter_number}: ${reading.chapter_title}`} onPress={() => router.push({ pathname: "/chapter/[id]", params: { id: reading.chapter_id } })}>
-            <T variant="eyebrow">
-              {GRADE_LABEL[reading.grade_number] ?? `Class ${reading.grade_number}`} · {reading.subject_name} · Chapter {reading.chapter_number}
+      {reading.chapter_start && subjectKey(reading.subject_name) === "chemistry" ? (
+        // CHAPTER-OPENING-01 (owner-approved for both Chemistry books, 2026-10-27): the chapter's first topic opens with
+        // the chapter itself, its name large in the subject colour on a tinted panel; the topic's own title follows.
+        <View style={{ gap: Space.md }}>
+          <View style={{ overflow: "hidden", borderRadius: 16, borderWidth: 1, borderColor: c.border, backgroundColor: c.accentSoft, padding: Space.lg, gap: Space.sm }}>
+            <T aria-hidden importantForAccessibility="no-hide-descendants" style={{ position: "absolute", right: Space.md, bottom: -24, fontSize: 112, lineHeight: 120, fontWeight: "800", color: c.accent, opacity: 0.1 }}>
+              {reading.chapter_number}
             </T>
-          </Pressable>
-          {reading.availability === "private_preview" ? <Chip label="Draft preview: not yet reviewed or published">Draft preview</Chip> : null}
+            <View style={{ flexDirection: "row", alignItems: "center", gap: Space.sm, flexWrap: "wrap" }}>
+              <Pressable accessibilityRole="button" accessibilityLabel={`Back to chapter ${reading.chapter_number}: ${reading.chapter_title}`} onPress={() => router.push({ pathname: "/chapter/[id]", params: { id: reading.chapter_id } })}>
+                <T variant="eyebrow">
+                  {GRADE_LABEL[reading.grade_number] ?? `Class ${reading.grade_number}`} · {reading.subject_name}
+                </T>
+              </Pressable>
+              {reading.availability === "private_preview" ? <Chip label="Draft preview: not yet reviewed or published">Draft preview</Chip> : null}
+            </View>
+            <T variant="eyebrow" style={{ color: c.accent, letterSpacing: 2 }}>{`CHAPTER ${reading.chapter_number}`}</T>
+            <T accessibilityRole="header" style={{ fontSize: 36, lineHeight: 42, fontWeight: "800", color: c.accent, letterSpacing: -0.5 }}>
+              {reading.chapter_title}
+            </T>
+            <View style={{ height: 4, width: 56, borderRadius: 2, backgroundColor: c.accent }} />
+          </View>
+          <T variant="heading" accessibilityRole="header" style={isMainHeading(reading.number) ? { color: c.accent } : undefined}>
+            {reading.number ? `${reading.number} ${reading.title}` : reading.title}
+          </T>
         </View>
-        <T variant="title" accessibilityRole="header" style={isMainHeading(reading.number) ? { color: c.accent } : undefined}>
-          {reading.number ? `${reading.number} ${reading.title}` : reading.title}
-        </T>
-        <T variant="small">{reading.chapter_title}</T>
-      </View>
+      ) : (
+        <View style={{ gap: Space.xs }}>
+          <View style={{ flexDirection: "row", alignItems: "center", gap: Space.sm, flexWrap: "wrap" }}>
+            <Pressable accessibilityRole="button" accessibilityLabel={`Back to chapter ${reading.chapter_number}: ${reading.chapter_title}`} onPress={() => router.push({ pathname: "/chapter/[id]", params: { id: reading.chapter_id } })}>
+              <T variant="eyebrow">
+                {GRADE_LABEL[reading.grade_number] ?? `Class ${reading.grade_number}`} · {reading.subject_name} · Chapter {reading.chapter_number}
+              </T>
+            </Pressable>
+            {reading.availability === "private_preview" ? <Chip label="Draft preview: not yet reviewed or published">Draft preview</Chip> : null}
+          </View>
+          <T variant="title" accessibilityRole="header" style={isMainHeading(reading.number) ? { color: c.accent } : undefined}>
+            {reading.number ? `${reading.number} ${reading.title}` : reading.title}
+          </T>
+          <T variant="small">{reading.chapter_title}</T>
+        </View>
+      )}
       {view === "lecture" && lesson?.body && !lesson.locked ? (
         lecture ? <LectureView data={lecture} token={token} /> : <Loading label="Checking for a lecture" />
       ) : reading.availability === "unavailable" || !lesson?.body ? (

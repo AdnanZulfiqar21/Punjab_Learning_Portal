@@ -52,6 +52,7 @@ def reading(
             subject_name=book.subject.name,
             previous_topic_id=previous_id,
             next_topic_id=next_id,
+            chapter_start=topic.parent_id is None and previous_id is None,
             availability=availability,
             lesson=lesson,
         )
