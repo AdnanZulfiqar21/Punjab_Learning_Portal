@@ -37,8 +37,11 @@ describe("book error marks", () => {
   it("colours the printed error inside a formula once, and only marks that occur in it", () => {
     const latex = String.raw`\ce{2H2_{(g)} + 2NO_{(g)} -> N2_{(g)} + H2O_{(g)}}`;
     const marked = markLatex(latex, ["H2O_{(g)}", "H₂O(g)"]);
-    assert.equal(marked, String.raw`\ce{2H2_{(g)} + 2NO_{(g)} -> N2_{(g)} + \textcolor{#a31d1e}{H2O_{(g)}}}`);
+    // Inside \ce{…} the mark stays chemistry, so its subscripts survive the colour.
+    assert.equal(marked, String.raw`\ce{2H2_{(g)} + 2NO_{(g)} -> N2_{(g)} + \textcolor{#a31d1e}{\ce{H2O_{(g)}}}}`);
     assert.equal(markLatex(latex, ["H₂O(g)"]), latex);
+    assert.equal(markLatex(String.raw`K_p = K_n N^{\Delta n}`, ["K_n N"]), String.raw`K_p = \textcolor{#a31d1e}{K_n N}^{\Delta n}`);
+    assert.equal(markLatex(String.raw`\text{rate} = k[\ce{H2}]`, ["k"]), String.raw`\text{rate} = \textcolor{#a31d1e}{k}[\ce{H2}]`);
     assert.equal(paintBookErrors('<span style="color:#a31d1e;">H</span>'), '<span style="color:var(--danger);background-color:var(--danger-soft);">H</span>');
   });
 
