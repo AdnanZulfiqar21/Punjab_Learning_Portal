@@ -192,9 +192,21 @@ html {
   padding-top: 0.25rem;
 }
 
+/* TABLE-MERGE-01: a merged cell spans its rows on wide screens; its copies in the following rows only show in the
+   folded cards below 40rem, where each card must be complete. */
+.lesson-table .merged-repeat {
+  display: none;
+}
+
 /* Lesson tables (renderer 2): below 40rem each row becomes a card. The first cell names the card; every other cell is
    labelled by its column header, so a five-column comparison reads top to bottom instead of scrolling sideways. */
 @media (max-width: 40rem) {
+  .lesson-table td.merged-repeat {
+    display: grid;
+  }
+  .lesson-table td.merged-repeat:first-child {
+    display: block;
+  }
   .lesson-table thead {
     position: absolute;
     width: 1px;
