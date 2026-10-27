@@ -177,8 +177,13 @@ class Table(_Marked):
     caption: Short
     header: list[Annotated[str, Field(max_length=200)]] = Field(min_length=1, max_length=12)
     rows: list[list[Annotated[str, Field(max_length=500)]]] = Field(min_length=1, max_length=60)
+    # TABLE-MERGE-01: columns where the book merges a cell down over several rows; there a blank cell continues the
+    # filled cell above it.
+    merged_columns: list[Annotated[int, Field(ge=0)]] | None = Field(default=None, max_length=12)
 
     def _texts(self) -> list[str]:
+        if self.merged_columns and max(self.merged_columns) >= len(self.header):
+            raise ValueError("merged_columns names a column the table doesn't have")
         return [self.caption, *self.header, *(c for r in self.rows for c in r)]
 
 
