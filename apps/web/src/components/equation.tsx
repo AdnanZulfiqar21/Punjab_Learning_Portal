@@ -11,7 +11,8 @@ import { KATEX_OPTIONS } from "@/lib/katex-options";
 //
 // The reviewed static rendering stays in four cases: without JavaScript on those client surfaces, with data saver on
 // (until asked), when a formula can't be typeset, and in the apps, which have no equation renderer yet. The typeset copy
-// is hidden from screen readers, which read the reviewed text equivalent instead.
+// is hidden from screen readers, which read the reviewed text equivalent instead; once typeset, that equivalent is for
+// screen readers only, so a displayed equation isn't printed twice (EQUATION-TEXT-01).
 
 type Typeset = (latex: string, display: boolean) => string;
 let loading: Promise<Typeset> | null = null;
@@ -68,7 +69,7 @@ export function Equation({
     return (
       <figure className="space-y-2 rounded-lg border border-border bg-surface px-4 py-3" data-typeset="ok">
         <div aria-hidden="true" className="overflow-x-auto overflow-y-hidden py-1" dangerouslySetInnerHTML={{ __html: current.html }} />
-        <figcaption>{textAlt}</figcaption>
+        <figcaption className="sr-only">{textAlt}</figcaption>
       </figure>
     );
   }

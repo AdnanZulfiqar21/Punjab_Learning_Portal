@@ -51,10 +51,12 @@ test("structured blocks reach learners: worked example, diagram, formula renderi
   const img = lessons.getByRole("img", { name: "A synthetic fixture image with a box and a label" });
   await img.scrollIntoViewIfNeeded();
   await expect.poll(() => img.evaluate((el: HTMLImageElement) => el.complete && el.naturalWidth > 0), AUTH).toBe(true);
-  // P01.S4.T2: the formula is typeset on the web, with its text equivalent; its reviewed static rendering isn't needed.
+  // P01.S4.T2: the formula is typeset on the web, its text equivalent kept for screen readers only (EQUATION-TEXT-01);
+  // its reviewed static rendering isn't needed.
   const formula = lessons.getByRole("article", { name: "[FIXTURE] Structured blocks lesson" }).locator('figure[data-typeset="ok"]');
   await expect(formula.locator(".katex")).toBeVisible(AUTH);
-  await expect(formula.getByText("v equals u plus a t (fixture)")).toBeVisible();
+  await expect(formula.getByText("v equals u plus a t (fixture)")).toHaveClass(/sr-only/);
+  await expect(formula).toHaveAccessibleName("v equals u plus a t (fixture)");
   await lessons.getByText("Describe this diagram").click();
   await expect(lessons.getByText("A grey box with the words 'Technical fixture diagram'.")).toBeVisible();
   // P11.S2.T1: the lesson's checkpoint is a self-check: nothing is sent or scored, the explanation appears on request.
