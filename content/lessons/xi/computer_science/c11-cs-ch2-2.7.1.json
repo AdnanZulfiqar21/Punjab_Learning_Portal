@@ -13,7 +13,7 @@
           "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
           "pdf_from": 55,
           "pdf_to": 56,
-          "note": "Topic 2.7.1 Working with Modules (PDF 55-56, printed 52-53). The book's function name say_As-Salaam-Alaikum is invalid Python; the conversion fractions print as '|'. Long question 7 is answered. Recorded."
+          "note": "Topic 2.7.1 Working with Modules (PDF 55-56, printed 52-53). The invalid name say_As-Salaam-Alaikum is shown as printed, marked, with a Book correction box. Long question 7 (formulas print '|' for 9/5, 5/9) is answered and corrected in Roman Urdu only."
         }
       ],
       "body": {
@@ -26,7 +26,16 @@
             "type": "callout",
             "tone": "note",
             "title": "Python code (each .... is one 4-space indent)",
-            "text": "# greetings.py\ndef say_salaam():\n....return \"As-Salaam-Alaikum, everyone!\"\n\n# main.py\nimport greetings\n\ndef main():\n....print(greetings.say_salaam())\n\nif __name__ == \"__main__\":\n....main()"
+            "text": "# greetings.py\ndef say_As-Salaam-Alaikum():\n....return \"As-Salaam-Alaikum, everyone!\"\n\n# main.py\nimport greetings\ndef main():\n....message = greetings.say_As-Salaam-Alaikum()\n....print(message)\nif __name__ == \"__main__\": main()\n# Output: As-Salaam-Alaikum, everyone!",
+            "book_errors": [
+              "say_As-Salaam-Alaikum"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book's function name say_As-Salaam-Alaikum is not valid Python: a name may contain only letters, digits and underscores, and the hyphens make Python stop with a SyntaxError. Working code uses a valid name such as say_salaam:\n# greetings.py\ndef say_salaam():\n....return \"As-Salaam-Alaikum, everyone!\"\n\n# main.py\nimport greetings\ndef main():\n....message = greetings.say_salaam()\n....print(message)\nif __name__ == \"__main__\": main()"
           },
           {
             "type": "paragraph",
