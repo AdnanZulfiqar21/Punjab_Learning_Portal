@@ -63,6 +63,24 @@ def test_book_errors_mark_printed_passages_and_a_correction_follows() -> None:
     assert blocks.validate_body({"blocks": [marked_correction]}, for_publication=False).errors
 
 
+def test_tables_name_the_columns_whose_cells_the_book_merges() -> None:
+    # TABLE-MERGE-01: shell L spans 2s and 2p; a blank cell in a merged column continues the one above.
+    table = {
+        "type": "table",
+        "caption": "Fixture shells",
+        "header": ["Shell", "Subshell"],
+        "rows": [["K", "1s"], ["L", "2s"], ["", "2p"]],
+        "merged_columns": [0],
+    }
+    assert blocks.validate_body({"blocks": [table]}, for_publication=True).errors == []
+    assert blocks.validate_body({"blocks": [{**table, "merged_columns": [2]}]}, for_publication=False).errors
+    assert blocks.validate_body({"blocks": [{**table, "merged_columns": [-1]}]}, for_publication=False).errors
+    # The book's own empty cell under a merged one starts a new cell; only merged columns inside the table qualify.
+    assert blocks.validate_body({"blocks": [{**table, "merge_starts": [[2, 0]]}]}, for_publication=True).errors == []
+    for bad in ([[2, 1]], [[3, 0]], [[-1, 0]]):
+        assert blocks.validate_body({"blocks": [{**table, "merge_starts": bad}]}, for_publication=False).errors, bad
+
+
 def _staff(client: TestClient, db: Session) -> dict[str, Staff]:
     return {
         "author": Staff(client, db, ["content_author"], BIO11),

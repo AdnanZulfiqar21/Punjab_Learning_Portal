@@ -4,6 +4,7 @@ import { Equation } from "@/components/equation";
 import { Model3DFigure } from "@/components/model3d-figure";
 import { SaverImage } from "@/components/saver-image";
 import { bookErrors, markLatex, markPieces } from "@/lib/book-errors";
+import { fillMerged, mergedColumns, mergeStarts, rowSpans } from "@/lib/table-merge";
 
 // Renders content blocks (schema v1, roadmap §5.4). Web renderer version 2: comparison tables fold into cards on narrow
 // screens and `model3d` blocks show a poster render with a turntable. Unknown block types never crash the page: they
@@ -223,6 +224,11 @@ function BlockView({
       // `.lesson-table`), with the first column naming the card and every other cell labelled by its column.
       const header = strs(b.header);
       const rows = Array.isArray(b.rows) ? (b.rows as unknown[]).map(strs) : [];
+      // TABLE-MERGE-01: a merged cell spans its rows on wide screens; a hidden copy repeats it in each folded card.
+      const merged = mergedColumns(b.merged_columns);
+      const starts = mergeStarts(b.merge_starts);
+      const spans = rowSpans(rows, merged, starts);
+      const filled = fillMerged(rows, merged, starts);
       return (
         <table className="lesson-table w-full border-collapse text-sm">
           <caption className="mb-2 text-left font-medium">
@@ -240,11 +246,21 @@ function BlockView({
           <tbody>
             {rows.map((r, i) => (
               <tr key={i}>
-                {r.map((c, j) => (
-                  <td key={j} data-label={header[j] ?? ""} className="border border-border px-3 py-2 align-top">
-                    <Marked text={c} marks={marks} />
-                  </td>
-                ))}
+                {r.map((c, j) =>
+                  spans[i][j] === 0 ? (
+                    <td key={j} data-label={header[j] ?? ""} className="merged-repeat border border-border px-3 py-2 align-top">
+                      <Marked text={filled[i][j]} marks={marks} />
+                    </td>
+                  ) : (
+                    <td
+                      key={j}
+                      rowSpan={spans[i][j] > 1 ? spans[i][j] : undefined}
+                      data-label={header[j] ?? ""}
+                      className={`border border-border px-3 py-2 ${spans[i][j] > 1 ? "align-middle font-medium" : "align-top"}`}>
+                      <Marked text={c} marks={marks} />
+                    </td>
+                  ),
+                )}
               </tr>
             ))}
           </tbody>
