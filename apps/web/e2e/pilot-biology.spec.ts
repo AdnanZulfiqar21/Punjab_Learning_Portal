@@ -94,6 +94,8 @@ test("staff who cover the subject read the draft in English, then in Roman Urdu 
   await expect(page.getByText(/Roman Urdu isn’t available/)).toHaveCount(0);
   await expect(page.locator(`[data-block] img[src="${src}"]`).first()).toBeInViewport(AUTH);
   await expect(page.locator("[data-block]").nth(0)).not.toBeInViewport();
+  // Let the return to place settle first, or it would rightly stop (the reader moved) or race the scroll below.
+  await expect(page.locator('[data-place="settled"]')).toHaveCount(1, AUTH);
   // Renderer 2: a model shows its poster, then a turntable (3D models are ours, so they are in the Roman Urdu lesson).
   const model = page.locator("figure").filter({ hasText: "3D model" }).first();
   await model.scrollIntoViewIfNeeded();
