@@ -13,21 +13,38 @@ export function bookErrors(v: unknown): string[] {
 // swapped for the theme's danger colours, so the red follows light and dark mode.
 const SENTINEL = "#a31d1e";
 
-/** The LaTeX with each mark that occurs in it wrapped in the sentinel colour. */
+/** The LaTeX with each mark that occurs in it wrapped in the sentinel colour. Inside chemistry (`\ce{…}`) the mark is
+ * wrapped as chemistry again, so H2O keeps its subscript instead of turning into italic maths. */
 export function markLatex(latex: string, marks: string[]): string {
   const inLatex = marks.filter((m) => latex.includes(m)).sort((a, b) => b.length - a.length);
   if (!inLatex.length) return latex;
   let out = "";
   let i = 0;
+  const groups: boolean[] = []; // open brace groups, true where the group is a \ce{…}
   while (i < latex.length) {
     const hit = inLatex.find((m) => latex.startsWith(m, i));
     if (hit) {
-      out += `\\textcolor{${SENTINEL}}{${hit}}`;
+      const chem = groups.includes(true);
+      out += `\\textcolor{${SENTINEL}}{${chem ? `\\ce{${hit}}` : hit}}`;
       i += hit.length;
-    } else {
-      out += latex[i];
-      i += 1;
+      continue;
     }
+    if (latex.startsWith("\\ce{", i)) {
+      groups.push(true);
+      out += "\\ce{";
+      i += 4;
+      continue;
+    }
+    const ch = latex[i];
+    if (ch === "\\" && i + 1 < latex.length) {
+      out += ch + latex[i + 1]; // an escaped character, e.g. \{ or \\, never opens or closes a group
+      i += 2;
+      continue;
+    }
+    if (ch === "{") groups.push(false);
+    if (ch === "}") groups.pop();
+    out += ch;
+    i += 1;
   }
   return out;
 }
