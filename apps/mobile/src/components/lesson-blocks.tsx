@@ -116,9 +116,13 @@ export function LessonBlocks({
             </View>
           );
         }
+        // READER-STYLE-01: a run of equations printed together sits close, like one card.
+        const joined = b.type === "equation" && blocks[i - 1]?.type === "equation" && !equationAction;
         return (
           <Fragment key={i}>
-            <View onLayout={onBlockLayout ? (e) => onBlockLayout(i, e.nativeEvent.layout.y) : undefined}>
+            <View
+              style={joined ? { marginTop: Space.xs - Space.lg } : undefined}
+              onLayout={onBlockLayout ? (e) => onBlockLayout(i, e.nativeEvent.layout.y) : undefined}>
               <BlockView block={b} assetSource={assetSource} dataSaver={dataSaver} />
             </View>
             {b.type === "equation" && equationAction?.(i)}
