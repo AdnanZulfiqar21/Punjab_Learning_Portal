@@ -96,16 +96,18 @@ export function LessonBlocks({
     <BlockView block={b} headingOffset={headingOffset} assetUrl={assetUrl} dataSaver={dataSaver} typeset={typeset?.[i]} />
   );
   // Each block keeps its own id (b0, b1, …), also inside a Quick Check card, so the language switch finds its place.
+  // `data-kind` lets consecutive equations join into one card (globals.css `.lesson-flow`), as the book prints a run of
+  // equations together.
   const wrap = (i: number, node: ReactNode) =>
     blockIds ? (
-      <div id={`b${i}`} data-block="" className="scroll-mt-20">
+      <div id={`b${i}`} data-block="" data-kind={blocks[i]?.type} className="scroll-mt-20">
         {node}
       </div>
     ) : (
-      node
+      <div data-kind={blocks[i]?.type}>{node}</div>
     );
   return (
-    <div className="space-y-5 leading-relaxed">
+    <div className="lesson-flow space-y-5 leading-relaxed">
       {blocks.map((b, i) => {
         if (isQuickCheck(blocks[i - 1], b)) return null; // drawn inside the card above
         if (isQuickCheck(b, blocks[i + 1])) {
