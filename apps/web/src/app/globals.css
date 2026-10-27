@@ -171,6 +171,27 @@ html {
   --accent-soft: #3c1532;
 }
 
+/* READER-STYLE-01: a run of equations printed together reads as one card, not a stack of separate boxes. */
+.lesson-flow > [data-kind="equation"]:has(+ [data-kind="equation"]) {
+  margin-bottom: 0;
+}
+.lesson-flow > [data-kind="equation"]:has(+ [data-kind="equation"]) figure {
+  border-bottom-width: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  padding-bottom: 0.25rem;
+  box-shadow: none;
+}
+.lesson-flow > [data-kind="equation"] + [data-kind="equation"] {
+  margin-top: 0;
+}
+.lesson-flow > [data-kind="equation"] + [data-kind="equation"] figure {
+  border-top-width: 0;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  padding-top: 0.25rem;
+}
+
 /* Lesson tables (renderer 2): below 40rem each row becomes a card. The first cell names the card; every other cell is
    labelled by its column header, so a five-column comparison reads top to bottom instead of scrolling sideways. */
 @media (max-width: 40rem) {
