@@ -339,6 +339,56 @@ body {
   font-size: 125%;
 }
 
+/* CODE-HIGHLIGHT-01: colours for the parts of a printed program (lib/code-highlight.ts); the app keeps the same values
+   (apps/mobile/src/constants/theme.ts CodeColors). Each is at least 4.5:1 on the code card. */
+:root {
+  --code-comment: #5f636a;
+  --code-keyword: #7c3aed;
+  --code-constant: #be185d;
+  --code-string: #166534;
+  --code-function: #1d4ed8;
+  --code-variable: #8a4f05;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --code-comment: #8f9a93;
+    --code-keyword: #c792ea;
+    --code-constant: #f78ca8;
+    --code-string: #c3e88d;
+    --code-function: #82aaff;
+    --code-variable: #ffcb6b;
+  }
+}
+:root[data-theme="dark"] {
+  --code-comment: #8f9a93;
+  --code-keyword: #c792ea;
+  --code-constant: #f78ca8;
+  --code-string: #c3e88d;
+  --code-function: #82aaff;
+  --code-variable: #ffcb6b;
+}
+.code-comment {
+  color: var(--code-comment);
+  font-style: italic;
+}
+.code-keyword {
+  color: var(--code-keyword);
+  font-weight: 600;
+}
+.code-constant,
+.code-number {
+  color: var(--code-constant);
+}
+.code-string {
+  color: var(--code-string);
+}
+.code-function {
+  color: var(--code-function);
+}
+.code-variable {
+  color: var(--code-variable);
+}
+
 /* BOOK-STYLE-01: tables in a premium-styled book (lib/book-style.ts) get a tinted header in the subject colour and
    banded rows on wide screens; below 40rem the folded cards above stay as they are. */
 [data-style="premium"] .lesson-table caption {
