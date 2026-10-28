@@ -20,26 +20,35 @@
       "body": {
         "blocks": [
           {
-            "type": "callout",
-            "tone": "definition",
-            "title": "Code duplication",
-            "text": "Code duplication ka matlab ek hi code ka kai jagah dohraya jana hai; yeh dekh bhaal mushkil aur bugs paida karta hai, is liye ise dhoond kar hatana modular programming ka aham hissa hai."
-          },
-          {
-            "type": "callout",
-            "tone": "definition",
-            "title": "main function",
-            "text": "main function batata hai ke program kahan se shuru hota hai. Ise aam taur par aise block mein bulaya jata hai jo jaanchta hai ke file seedhi chalayi ja rahi hai ya module ke taur par import ho rahi hai."
-          },
-          {
-            "type": "callout",
-            "tone": "note",
-            "title": "Python code (har .... ek 4-space indent hai)",
-            "text": "def main():\n....print(\"This is the main function.\")\n\nif __name__ == \"__main__\":\n....main()"
+            "type": "heading",
+            "level": 3,
+            "text": "Code duplication pehchanna"
           },
           {
             "type": "paragraph",
-            "text": "main() sirf tab chalta hai jab file seedhi chalayi jaye, kahin aur import hone par nahi; yeh tareeqa kai modules wale bare projects mein mufeed hai."
+            "text": "Code duplication (code ka dohraya jana) tab hota hai jab ek hi code kai jagah baar baar likha ho. Is se code sambhalna mushkil hota hai aur ghaltiyan (bugs) aati hain, kyunke ek tabdeeli har jagah karni parti hai. Dohraya hua code pehchan kar usay ek function ya module mein rakhna achhi modular programming ke liye zaroori hai."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "main function"
+          },
+          {
+            "type": "paragraph",
+            "text": "Python mein main function batata hai ke program kahan se shuru ho. Isay aam taur par aise block mein bulaya jata hai jo check karta hai ke file seedhi chalayi gayi hai ya kisi aur file mein module ki tarah import hui hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Misaal:"
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "# main.py\ndef main ( ) :\n    print(\"This is the main function.\")\nif __name__ == \"__main__\" :\n    main()"
+          },
+          {
+            "type": "paragraph",
+            "text": "Wazahat: file seedhi chalayi jaye (python main.py) to __name__ ki value \"__main__\" hoti hai, shart sach hoti hai aur main() chal kar \"This is the main function.\" print karta hai. Agar yahi file kahin import ki jaye to main() khud nahi chalta. Kai modules wale bare projects mein yeh tareeqa mufeed hai."
           },
           {
             "type": "checkpoint",
@@ -50,13 +59,14 @@
           {
             "type": "heading",
             "level": 2,
-            "text": "Fauri khulasa"
+            "text": "Mukhtasar khulasa"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "Dohraya code na rakhein; if __name__ == \"__main__\": main() program sirf seedha chalne par shuru karta hai."
+              "Code duplication se bachein; dohraya code function/module mein rakhein.",
+              "if __name__ == \"__main__\": main() sirf seedha chalane par chalta hai."
             ]
           }
         ]

@@ -22,17 +22,30 @@
             "type": "list",
             "ordered": false,
             "items": [
-              "Unit testing: tests individual parts such as functions or classes in isolation; Python's unittest module is often used.",
-              "Integration testing: checks how parts of the code work together.",
-              "Functional testing: checks that the software behaves as expected from the user's point of view.",
-              "Regression testing: makes sure new changes do not break existing features."
+              "Unit Testing: Tests individual parts of the code (like functions or classes) in isolation. Python's unittest module is commonly used for this.",
+              "Integration Testing: Checks how different parts of the code work together.",
+              "Functional Testing: Validates that the software behaves as expected from the user's perspective.",
+              "Regression Testing: Ensures that new changes don't break existing functionality. Example: In this example, we use the unittest module to test the add function. This ensures that the function returns the correct results by checking various input values."
+            ]
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "import unittest\ndef add (a , b) :\n return a + b\nclass TestMathOperations(unittest.TestCase):\ndef test_add(self):\nself.assertEqual(add(2, 3), 5)\nself.assertEqual(add(-1, 1), 0)\nif __name__ == ’__main__’:\nunittest.main()",
+            "book_errors": [
+              "def test_add(self):\nself.assertEqual(add(2, 3), 5)\nself.assertEqual(add(-1, 1), 0)",
+              "’__main__’:\nunittest.main()"
             ]
           },
           {
             "type": "callout",
-            "tone": "note",
-            "title": "Python code (each .... is one 4-space indent)",
-            "text": "import unittest\n\ndef add(a, b):\n....return a + b\n\nclass TestMathOperations(unittest.TestCase):\n....def test_add(self):\n........self.assertEqual(add(2, 3), 5)\n........self.assertEqual(add(-1, 1), 0)\n\nif __name__ == \"__main__\":\n....unittest.main()"
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The listing is printed without indentation: def test_add must be indented inside the class and its two assertEqual lines inside def test_add (IndentationError as printed), and unittest.main() inside the if. The quotes in ’__main__’ are curly; Python needs '__main__'. Corrected, the test runs and reports OK."
+          },
+          {
+            "type": "paragraph",
+            "text": "Explanation: This code defines a unit test for the 'add' function, which sums two numbers. The 'TestMathOperations' class checks that 'add' correctly returns expected results for given inputs."
           }
         ]
       }

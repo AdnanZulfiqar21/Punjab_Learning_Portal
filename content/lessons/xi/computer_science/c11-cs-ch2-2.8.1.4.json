@@ -19,24 +19,59 @@
       "body": {
         "blocks": [
           {
-            "type": "callout",
-            "tone": "definition",
-            "title": "Association",
-            "text": "Association is a relationship between two classes. It has two kinds: aggregation and composition."
+            "type": "paragraph",
+            "text": "Association represents a relationship between two classes. There are two types of association:"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "Aggregation: one class (Library) contains another (Book) but does not own it; books can exist without the library.",
-              "Composition: one class (House) contains and owns another (Room); the rooms cannot exist without the house."
+              "Aggregation: Represents a relationship where one class (e.g., Library) contains another class (e.g., Book) but does not own it. Books can exist independently of the library."
+            ]
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "class Book :\n    def __init__(self , title):\n        self.title = title\nclass Library :\n    def __init__(self ) :\n        self, books = [ ]\ndef add_book(self, book):\n    self.books.append(book)\n        print(\"Book \", book.title, \"added to the library.”)",
+            "book_errors": [
+              "self, books = [ ]",
+              "def add_book(self, book):",
+              "added to the library.”)"
             ]
           },
           {
             "type": "callout",
-            "tone": "note",
-            "title": "Python code (each .... is one 4-space indent)",
-            "text": "class Book:\n....def __init__(self, title):\n........self.title = title\n\nclass Library:\n....def __init__(self):\n........self.books = []\n....def add_book(self, book):\n........self.books.append(book)\n\nclass Room:\n....def __init__(self, name):\n........self.name = name\n\nclass House:\n....def __init__(self):\n........self.rooms = [Room(\"Living Room\"), Room(\"Bedroom\")]"
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "As printed this code does not work: self, books = [ ] should be self.books = [ ] (the comma makes a ValueError); def add_book must be indented inside class Library, with its two lines indented under it (the print line is over-indented); and the string \"added to the library.” ends with a curly quote, so it is never closed. Corrected, lib.add_book(Book(\"...\")) prints Book  ... added to the library."
+          },
+          {
+            "type": "paragraph",
+            "text": "Explanation: The above code made association by passing an instance of the 'Book' class to the 'Library' class through the 'add_book' method, which appends the book to the library's list of books."
+          },
+          {
+            "type": "paragraph",
+            "text": "Composition: Represents a relationship where one class (e.g., House) contains and owns another class (e.g.. Room). Rooms cannot exist without a house."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "class Room:\n    def __init__(self, name):\nself.name = name\nclass House :\n    def __init__(self) :\n        self.rooms = [Room(\"Living Room\"), Room( \" Bedroom\")]\n        print (“House with rooms created”)\n\nprint(\"House with rooms created.\")",
+            "book_errors": [
+              "\nself.name = name",
+              "print (“House with rooms created”)",
+              "\nprint(\"House with rooms created.\")"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "self.name = name is printed at the margin; it must be indented inside __init__ (IndentationError). The print inside House uses curly quotes (“House with rooms created”), which Python does not accept; use straight quotes. The last line, print(\"House with rooms created.\"), is an extra copy outside the class. The house is made with house = House(), which prints House with rooms created."
+          },
+          {
+            "type": "paragraph",
+            "text": "Explanation: The code demonstrates composition by creating a 'House' object that contains a list of 'Rooms' objects, each representing a room (like 'Living Room' and 'Bedroom'). The 'House' class depends on the 'Room' class to define its components."
           }
         ]
       }

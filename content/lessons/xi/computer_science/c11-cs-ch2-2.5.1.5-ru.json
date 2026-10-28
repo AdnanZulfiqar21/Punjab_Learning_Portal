@@ -20,16 +20,33 @@
       "body": {
         "blocks": [
           {
-            "type": "callout",
-            "tone": "definition",
-            "title": "Arbitrary arguments",
-            "text": "Jab arguments ki tadaad pehle se maloom na ho to *args kitne bhi positional arguments (aur **kwargs kitne bhi keyword arguments) jama karta hai."
+            "type": "paragraph",
+            "text": "Kabhi pehle se maloom nahi hota ke function ko kitne arguments milenge. Aise mein *args aur **kwargs istemal hote hain: *args jitni bhi values hon unhein ek tuple mein ikattha kar leta hai, aur **kwargs naam wale (keyword) arguments ko dictionary mein."
+          },
+          {
+            "type": "paragraph",
+            "text": "Misaal: kitne bhi adad jorne wala function."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "def add_numbers(*args):\n    return sum(args)  # sum( ) is a python function used to add the values of given arguments\nprint(add_numbers(1, 2, 3))  # Output : 6\nprint(add_numbers(4, 5))    # Output : 9"
+          },
+          {
+            "type": "paragraph",
+            "text": "Wazahat: add_numbers *args ke zariye kitne bhi arguments leta hai aur sum() se un ka jor wapas karta hai: 1 + 2 + 3 = 6 aur 4 + 5 = 9."
           },
           {
             "type": "callout",
             "tone": "note",
-            "title": "Python code (har .... ek 4-space indent hai)",
-            "text": "def add_numbers(*args):\n....return sum(args)    # sum() adds the values\n\nprint(add_numbers(1, 2, 3))    # 6\nprint(add_numbers(4, 5))       # 9"
+            "title": "Class Activity",
+            "text": "1. Aisa function banayein jo adad ki list le kar sab se bari value wapas kare.\n2. *args aur **kwargs wale functions bana kar tajurba karein jo kam ya zyada arguments lete hon."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Class activity: aisa function banayein jo adad ki list le kar sab se bara lautaye.",
+            "explanation": "def biggest(nums): big = nums[0]; for n in nums: if n > big: big = n; return big. Python ka built-in max(nums) bhi yahi karta hai."
           },
           {
             "type": "checkpoint",
@@ -40,13 +57,13 @@
           {
             "type": "heading",
             "level": 2,
-            "text": "Fauri khulasa"
+            "text": "Mukhtasar khulasa"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "*args: kitne bhi positional arguments (tuple); **kwargs: kitne bhi keyword arguments (dictionary)."
+              "*args: kitni bhi values (tuple); **kwargs: kitne bhi naam=value (dictionary)."
             ]
           }
         ]

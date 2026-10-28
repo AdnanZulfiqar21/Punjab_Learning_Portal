@@ -23,16 +23,29 @@
             "type": "list",
             "ordered": false,
             "items": [
-              "Print statements: code ke mukhtalif marahil par variables ki qeematein print karna.",
-              "Debugging tools: pdb, Python Debugger, code qadam ba qadam chalata, variables dikhata aur chalne ka bahao batata hai.",
-              "Error messages: masle ki jagah dhoondne ke liye inhein parhna aur samajhna."
+              "Print statements: code ke mukhtalif marahil par print laga kar variables ki values dekhna.",
+              "Debugging tools: pdb (Python Debugger) jaise tools se code qadam ba qadam chalana, variables dekhna aur program ka bahao samajhna.",
+              "Error messages: ghalti ke paighaam parh kar samajhna ke masla kahan hai."
             ]
           },
           {
-            "type": "callout",
-            "tone": "note",
-            "title": "Python code (har .... ek 4-space indent hai)",
-            "text": "def divide(a, b):\n....return a / b\n\ntry:\n....result = divide(10, 0)\nexcept ZeroDivisionError as e:\n....print(\"Error occurred:\", e)"
+            "type": "paragraph",
+            "text": "Misaal: divide function ko sifar nasab (denominator) ke saath bulaya jata hai, jis se ZeroDivisionError aata hai. try-except block ghalti pakar kar paighaam print karta hai, jis se masla pehchanne aur sambhalne mein madad milti hai."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "def divide(a, b) :\n    return a / b\ntry :\n    result = divide (10 , 0)\nexcept ZeroDivisionError as e:\n    print(\"Error occurred:\", e)"
+          },
+          {
+            "type": "code",
+            "language": "text",
+            "text": "Error occurred: division by zero",
+            "caption": "Output"
+          },
+          {
+            "type": "paragraph",
+            "text": "Wazahat: divide do adad taqseem karta hai. 10 ko 0 se taqseem karne par ZeroDivisionError aata hai; except usay e naam se pakar kar Python ka apna paighaam (\"division by zero\") ke saath print karta hai."
           },
           {
             "type": "checkpoint",
@@ -43,13 +56,14 @@
           {
             "type": "heading",
             "level": 2,
-            "text": "Fauri khulasa"
+            "text": "Mukhtasar khulasa"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "Debugging ke tareeqe: print statements, pdb, error messages parhna; try-except ghalti wazeh dikhata hai."
+              "Debugging ke tareeqe: print, pdb, error messages.",
+              "except ... as e: ghalti ka paighaam e mein."
             ]
           }
         ]

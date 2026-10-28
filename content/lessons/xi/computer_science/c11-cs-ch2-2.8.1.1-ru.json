@@ -20,37 +20,69 @@
       "body": {
         "blocks": [
           {
-            "type": "callout",
-            "tone": "note",
-            "title": "Python code (har .... ek 4-space indent hai)",
-            "text": "class ToyCar:\n....def __init__(self, color, size, wheels):\n........self.color = color\n........self.size = size\n........self.wheels = wheels\n\n....def describe(self):\n........return f\"This toy car is {self.color}, {self.size} and has {self.wheels} wheels.\"\n\ncar1 = ToyCar(\"red\", \"small\", 4)\ncar2 = ToyCar(\"blue\", \"large\", 6)\nprint(car1.describe())\nprint(car2.describe())"
+            "type": "paragraph",
+            "text": "Programming mein class se tay kiya jata hai ke object kaisa hoga."
           },
           {
-            "type": "list",
-            "ordered": false,
-            "items": [
-              "Class definition: ToyCar saancha hai, attributes color, size aur wheels batata hai.",
-              "Objects banana: car1 aur car2 saanche se bani khaas gariyan hain, har ek ke apne attributes.",
-              "Methods istemal: describe() gari ka bayan lautata hai.",
-              "self: methods ke andar us khaas object ki taraf ishara karta hai."
-            ]
+            "type": "code",
+            "language": "python",
+            "text": "# Define a class called ToyCar\nclass ToyCar:\n    # The __init__ method in idealizes the object with specific attributes\n    def __init__(self , color, size , wheels) :\n        self.color = color # Color of the toy car\n        self.size = size    # Size of the toy car\n        self.wheels = wheels # Number of wheels in toy car\n    # Method to describe the\n    def describe(self) :\n        return \"This toy car is\" , self.color , \"size\", self.size, \"and has \" , self.wheels , \"Wheels.\"\n# Create objects of the ToyCar class\ncar1 = ToyCar(\"red\", \"small\", 4)\ncar2 = ToyCar(\"blue\", \"large\", 6)\n# Print descriptions of the\nprint(car1.describe( ))\nprint(car2.describe( ))"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab ke code mein teen ghaltiyan hain: (1) __init__ ki qausain mein faltu \"self.color = color\" chhapa hai; sahi def __init__(self, color, size, wheels): hai. (2) \"large” tirchhi quote par khatam hota hai, is liye string band nahi hoti; sahi \"large\". (3) print(carl.describe()) mein carl (chhota L) hai, jabke object car1 (ek) hai; NameError aata hai. Wazahat mein bhi \"carl\" chhapa hai."
+          },
+          {
+            "type": "code",
+            "language": "text",
+            "text": "('This toy car is', 'red', 'size', 'small', 'and has ', 4, 'Wheels.')\n('This toy car is', 'blue', 'size', 'large', 'and has ', 6, 'Wheels.')",
+            "caption": "Output (theek kiye code ka)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Dhyan dein",
+            "text": "describe() mein return ke baad values comma se alag hain, is liye Python ek tuple wapas karti hai aur output qausain aur quotes ke saath aata hai, jaise oopar. Ek saaf jumla chahiye ho to f-string istemal karein: return f\"This toy car is {self.color}, size {self.size} and has {self.wheels} wheels.\""
+          },
+          {
+            "type": "paragraph",
+            "text": "Wazahat:"
+          },
+          {
+            "type": "paragraph",
+            "text": "Class definition: ToyCar class khilona gaariyan banane ka saancha hai. Yeh batati hai ke har gaari ke attributes (khasoosiyat) kya hain: color, size aur wheels. __init__ method object bante waqt yeh values set karta hai (initialize karta hai; kitab ke comment mein \"idealizes\" chhapa hai)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Objects banana: car1 aur car2 ToyCar saanche se bani do khaas gaariyan hain; har ek ki apni values hain (laal, chhoti, 4 pahiye; neeli, bari, 6 pahiye)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Methods istemal karna: describe method gaari ki tafseel deta hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "self: self OOP ka tareeqa hai jis se method ke andar class ka woh khaas object (instance) murad hota hai jis par method chal raha hai."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
-            "prompt": "car2.describe() kya lautata hai?",
-            "explanation": "\"This toy car is blue, large and has 6 wheels.\""
+            "prompt": "Theek kiye code mein car2.describe() kya wapas karta hai?",
+            "explanation": "Ek tuple: ('This toy car is', 'blue', 'size', 'large', 'and has ', 6, 'Wheels.'). print() isay isi shakal mein dikhata hai."
           },
           {
             "type": "heading",
             "level": 2,
-            "text": "Fauri khulasa"
+            "text": "Mukhtasar khulasa"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "class ToyCar __init__(self, ...) se attributes rakhti hai; objects ToyCar(...); methods self istemal karte hain."
+              "class ToyCar: __init__ values set karta hai, describe() tafseel deta hai.",
+              "car1 = ToyCar(\"red\", \"small\", 4) object banata hai; self us object ki taraf ishara hai."
             ]
           }
         ]

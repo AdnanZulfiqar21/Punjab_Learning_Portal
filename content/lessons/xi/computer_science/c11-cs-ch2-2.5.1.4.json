@@ -19,20 +19,31 @@
       "body": {
         "blocks": [
           {
-            "type": "callout",
-            "tone": "definition",
-            "title": "Keyword arguments",
-            "text": "Functions can be called with keyword arguments, naming each parameter, which makes the code more readable."
-          },
-          {
-            "type": "callout",
-            "tone": "note",
-            "title": "Python code (each .... is one 4-space indent)",
-            "text": "def introduce(name, age):\n....return \"My name is \" + name + \" and I am \" + str(age) + \" years old.\"\n\nprint(introduce(age=20, name=\"Ali\"))"
+            "type": "paragraph",
+            "text": "You can call functions using keyword arguments, which makes the code more readable."
           },
           {
             "type": "paragraph",
-            "text": "Output: My name is Ali and I am 20 years old."
+            "text": "Example: Define a function with keyword arguments."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "def introduce(name , age) :\nreturn \"My name is  \" + name + \"and I am\" + str(age) + “years old.\"\n\nprint(introduce(age =20, name =  “Ali\" )) # Output : My name is Ali  and I am 20 years old.",
+            "book_errors": [
+              "\nreturn \"My name is  \" + name + \"and I am\" + str(age) + “years old.\"",
+              "“Ali\""
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "As printed the program does not run: return is not indented, and “years old.\" and “Ali\" open with a curly quote (SyntaxError). Even with these fixed, the strings lack spaces, so it prints My name is  Aliand I am20years old. The return line should be: return \"My name is \" + name + \" and I am \" + str(age) + \" years old.\""
+          },
+          {
+            "type": "paragraph",
+            "text": "Explanation: In this example, the introduce function is called using keyword arguments, specifying age first and then name."
           }
         ]
       }

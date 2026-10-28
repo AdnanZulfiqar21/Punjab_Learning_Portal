@@ -19,16 +19,35 @@
       "body": {
         "blocks": [
           {
-            "type": "callout",
-            "tone": "definition",
-            "title": "Defining and calling a function",
-            "text": "A function is defined with the def keyword, the function name and parentheses that may hold parameters; the body is indented. Invoking (calling) a function means using its name to make it do its task."
+            "type": "paragraph",
+            "text": "Functions are defined using the def keyword, followed by the function name and parentheses which may include parameters. The body of the function contains the code to be executed and must be indented."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "def function_name (parameters): # code to be executed"
+          },
+          {
+            "type": "paragraph",
+            "text": "Example: Define a function to greet a person."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "def greet(name):\n    print(\"As-Salaam-Alaikum\", name)\n    # Function invoking means call the function by name and perform the required task For example.\n    greet (‘AH’)",
+            "book_errors": [
+              "    greet (‘AH’)"
+            ]
           },
           {
             "type": "callout",
-            "tone": "note",
-            "title": "Python code (each .... is one 4-space indent)",
-            "text": "def greet(name):\n....print(\"As-Salaam-Alaikum\", name)\n\ngreet(\"Ali\")    # As-Salaam-Alaikum Ali"
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The call greet (‘AH’) is printed indented inside the function body, so it never runs and the program prints nothing. It must start at the left margin, after the function. The argument should be 'Ali' (as the explanation says) in straight quotes: greet('Ali')."
+          },
+          {
+            "type": "paragraph",
+            "text": "Explanation: In this example, the greet function accepts a single parameter, name, with the value 'Ali'. It then prints a greeting message: 'As-Salaam-Alaikum  Ali'."
           }
         ]
       }

@@ -20,33 +20,48 @@
       "body": {
         "blocks": [
           {
-            "type": "callout",
-            "tone": "definition",
-            "title": "Custom exception",
-            "text": "Custom exception aap ki apni banayi ghalti ki qism hai, ta ke use khaas taur par raise aur handle kiya ja sake."
+            "type": "paragraph",
+            "text": "Custom exceptions se aap apni qism ki ghaltiyan (error types) bana sakte hain jinhein raise (khara) aur khaas tareeqe se handle kiya ja sake."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "class CustomError(Exception):\n    pass # pass statement is a placeholder that does nothing when executed\ndef check_value(value):\n    if value < 0:\n        raise CustomError(\"Value must be non-negative ! \" )\ntry :\n    check_value(-1)\nexcept CustomError as e:\n    print(\"Error :\" , e)"
           },
           {
             "type": "callout",
-            "tone": "note",
-            "title": "Python code (har .... ek 4-space indent hai)",
-            "text": "class CustomError(Exception):\n....pass    # pass does nothing\n\ndef check_value(value):\n....if value < 0:\n........raise CustomError(\"Value must be non-negative!\")\n\ntry:\n....check_value(-1)\nexcept CustomError as e:\n....print(\"Error:\", e)"
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab check_value(-1) ko try : ke neeche margin par chhapti hai; aise IndentationError aata hai. Yeh line try block ke andar indented honi chahiye."
           },
           {
-            "type": "checkpoint",
-            "mode": "self_check",
-            "prompt": "Program kya print karta hai?",
-            "explanation": "Error: Value must be non-negative!"
-          },
-          {
-            "type": "heading",
-            "level": 2,
-            "text": "Fauri khulasa"
+            "type": "paragraph",
+            "text": "Wazahat:"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "class MyError(Exception): pass; raise MyError(\"message\"); except MyError as e se pakrein."
+              "CustomError user ki banayi hui exception hai (Exception class se bani).",
+              "check_value() value manfi ho to raise se CustomError khari karta hai; except usay pakar kar \"Error : Value must be non-negative ! \" print karta hai."
+            ]
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Program kya print karta hai?",
+            "explanation": "Error : Value must be non-negative ! "
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Mukhtasar khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "class MyError(Exception): pass se nayi exception; raise se khari, except se pakri jati hai."
             ]
           }
         ]

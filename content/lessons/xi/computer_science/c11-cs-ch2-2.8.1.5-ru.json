@@ -20,20 +20,23 @@
       "body": {
         "blocks": [
           {
-            "type": "callout",
-            "tone": "definition",
-            "title": "Inheritance",
-            "text": "Inheritance ek class ko doosri class ke attributes aur methods lene deti hai. Yeh code ke dobara istemal ko barhati aur classes ki darja-bandi banati hai."
+            "type": "paragraph",
+            "text": "Inheritance (wirasat) mein ek class doosri class ke attributes aur methods le leti hai. Is se code dobara istemal hota hai aur classes mein khandani (hierarchical) rishta banta hai: Animal parent hai, Dog aur Cat us ki subclasses."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "class Animal:\n    def make_sound(self): print(\"Animal sound\")\nclass Dog(Animal):\n    def make_sound(self):\n        print(\"Bark!\")\nclass Cat(Animal):\n    def make_sound(self):\n        print(\"Meow ! \")"
           },
           {
             "type": "callout",
-            "tone": "note",
-            "title": "Python code (har .... ek 4-space indent hai)",
-            "text": "class Animal:\n....def make_sound(self):\n........print(\"Animal sound\")\n\nclass Dog(Animal):\n....def make_sound(self):\n........print(\"Bark!\")\n\nclass Cat(Animal):\n....def make_sound(self):\n........print(\"Meow!\")"
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab Dog aur Cat classes ko bina indentation ke chhapti hai; aise IndentationError aata hai. def make_sound class ke andar aur print() def ke andar indented hona chahiye, jaise oopar."
           },
           {
             "type": "paragraph",
-            "text": "Dog aur Cat Animal se inherit karti hain, aur har subclass make_sound() ko override kar ke apni awaz nikalti hai."
+            "text": "Wazahat: Dog aur Cat, Animal se inherit karti hain. Har subclass make_sound() ko apne tareeqe se dobara likhti (override karti) hai: Dog().make_sound() \"Bark!\" aur Cat().make_sound() \"Meow ! \" print karta hai."
           },
           {
             "type": "checkpoint",
@@ -44,13 +47,14 @@
           {
             "type": "heading",
             "level": 2,
-            "text": "Fauri khulasa"
+            "text": "Mukhtasar khulasa"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "Inheritance: class Dog(Animal) Animal ko dobara istemal karti hai; subclasses methods override kar sakti hain."
+              "class Dog(Animal): Dog, Animal ki cheezein wirasat mein leti hai.",
+              "Override: subclass method apne tareeqe se likhti hai."
             ]
           }
         ]
