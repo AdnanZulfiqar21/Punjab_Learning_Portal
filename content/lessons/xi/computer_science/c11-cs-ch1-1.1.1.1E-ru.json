@@ -20,44 +20,57 @@
       "body": {
         "blocks": [
           {
-            "type": "callout",
-            "tone": "definition",
-            "title": "Waterfall model",
-            "text": "Waterfall model ek seedha tareeqa hai jis mein project ka har marhala agle ke shuru hone se pehle mukammal hona chahiye, jaise aabshar (waterfall) ek satah se agli par girti hai. Yeh linear aur tarteeb-war hai: aap marahil se tarteeb mein guzarte hain aur marhala mukammal hone ke baad wapas nahi jate (Fig. 1.2)."
+            "type": "paragraph",
+            "text": "Waterfall Model software banane ka ek seedha tareeqa hai jis mein project ki har phase agli phase shuru hone se pehle mukammal honi chahiye. Ise aabshar (waterfall) samjhein jis ka paani ek satah se agli satah par girta hai. Yeh model linear aur sequential (ek seedh mein, tarteeb se) hai: aap har phase se tarteeb se guzarte hain aur mukammal ho chuki phase par wapas nahi jate, jaisa Figure 1.2 mein dikhaya gaya hai. Waterfall Model ki main phases yeh hain:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Requirements: software ko kya karna hai, yeh jama karna aur likhna.",
+              "Design: plan karna ke software kaise banega aur kaisa dikhega.",
+              "Implementation: software banane ke liye asal code likhna.",
+              "Testing: software mein masle ya bugs check kar ke theek karna.",
+              "Deployment: software users ke istemal ke liye jaari (release) karna.",
+              "Maintenance: software istemal mein aane ke baad updates karna aur naye masle theek karna."
+            ]
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Fawaid aur hudood (Benefits and Limitations)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Fawaid (Benefits):"
           },
           {
             "type": "list",
             "ordered": true,
             "items": [
-              "Requirements: software ko kya karna hai, jama aur darj karna.",
-              "Design: mansooba ke software kaise banega aur dikhega.",
-              "Implementation: code likhna.",
-              "Testing: masail ya bugs jaanchna aur theek karna.",
-              "Deployment: software users ke liye jaari karna.",
-              "Maintenance: istemal ke baad update aur masail theek karna."
+              "Saada aur samajhne mein aasan: is ki phases saaf aur alag alag hain, is liye is par chalna aasan hai.",
+              "Sequential process: har phase ek waqt mein ek mukammal hoti hai, is liye kaam sambhalna aur progress dekhna aasan hai.",
+              "Chhote projects ke liye munasib: un projects ke liye acha hai jin ki requirements saaf aur pakki hon aur tabdeeli ka imkaan kam ho."
             ]
           },
           {
-            "type": "table",
-            "caption": "Waterfall: fawaid aur hudood",
-            "header": [
-              "Fawaid",
-              "Hudood"
-            ],
-            "rows": [
-              [
-                "Saada aur samajhne mein aasan: wazeh, alag marahil",
-                "Be-lachak: mukammal marhale mein tabdeeli ke liye wapas jana mushkil aur mehnga"
-              ],
-              [
-                "Tarteeb-war amal: ek waqt mein ek marhala, sambhalna aur track karna aasan",
-                "Pecheeda projects ke liye munasib nahi jin ki requirements badalti hon"
-              ],
-              [
-                "Wazeh, mustaqil requirements wale chhote projects ke liye munasib",
-                "Khatra aur ghair yaqeeni: farz karta hai ke sab requirements shuru mein maloom hain"
-              ]
+            "type": "paragraph",
+            "text": "Hudood (Limitations):"
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "Lachak nahi (Inflexibility): phase mukammal hone ke baad wapas ja kar tabdeeli karna mushkil aur mehnga hai.",
+              "Complex projects ke liye theek nahi: jin projects ki requirements badalti rehti hon ya design pecheeda ho, un mein yeh model achi tarah chalana mushkil hai.",
+              "Risk aur ghair yaqeeni: yeh model farz karta hai ke saari requirements shuru se maloom hain; agar baad mein nayi zaroorat ya masla aaye to nuqsan ho sakta hai."
             ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Note",
+            "text": "Kitab mein Limitations ki list mein number 3 khali chhapa hai aur 'Risk and Uncertainty' number 4 par hai. Yahan teen hudood hain; koi bhi baat chhooti nahi."
           },
           {
             "type": "diagram",
@@ -73,26 +86,22 @@
             "text": "Teer sirf aage aur neeche jate hain, koi teer wapas oopar nahi jata: har marhala mukammal ho kar hi agla shuru hota hai, jaise aabshar (waterfall) ka pani sirf neeche girta hai. Neeche ka Project Timeline teer waqt (time) dikhata hai, yani Requirements sab se pehle aur Maintenance sab se aakhir mein aata hai. Figure ka 'Delivery' marhala wohi hai jise upar deployment kaha gaya hai."
           },
           {
-            "type": "paragraph",
-            "text": "Waterfall ki istilah sab se pehle Dr. Winston W. Royce ne 1970 mein pesh ki, magar unhon ne ise baghair dohrao (iteration) ke istemal karne ki himayat nahi ki."
-          },
-          {
             "type": "checkpoint",
             "mode": "self_check",
-            "prompt": "Jis project ki requirements badalne ka imkan ho, us ke liye Waterfall model khatarnak kyun hai?",
-            "explanation": "Yeh farz karta hai ke sab requirements shuru mein maloom hain aur mukammal marahil par wapas nahi jata, to der se aane wali tabdeeli design, code aur tests ka mehnga dobara kaam karwati hai; yeh wazeh, mustaqil requirements wale chhote projects ke liye munasib hai."
+            "prompt": "Jis project ki requirements badalne ka imkaan ho, us ke liye Waterfall Model khatarnak kyun hai?",
+            "explanation": "Yeh farz karta hai ke saari requirements shuru mein maloom hain aur mukammal phase par wapas nahi jata. Baad mein aane wali tabdeeli ke liye design, code aur tests dobara karne parte hain jo mushkil aur mehnga hai. Yeh saaf aur pakki requirements wale chhote projects ke liye munasib hai."
           },
           {
             "type": "heading",
             "level": 2,
-            "text": "Fauri khulasa"
+            "text": "Mukhtasar khulasa"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "Waterfall: linear, tarteeb-war marahil (requirements, design, implementation, testing, deployment, maintenance), wapsi nahi (Fig. 1.2).",
-              "Fawaid: saada, track karna aasan, chhote mustaqil projects ke liye acha; hudood: be-lachak, pecheeda ya badalte projects ke liye kamzor. Istilah Royce (1970) se."
+              "Waterfall: linear aur sequential phases (requirements, design, implementation, testing, deployment, maintenance); wapas nahi jate (Fig. 1.2).",
+              "Fawaid: saada, progress dekhna aasan, chhote pakke projects ke liye acha; hudood: lachak nahi, complex projects ke liye mushkil, risk."
             ]
           }
         ]

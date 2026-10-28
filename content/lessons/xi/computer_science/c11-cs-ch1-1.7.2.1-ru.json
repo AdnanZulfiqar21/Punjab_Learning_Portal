@@ -20,31 +20,52 @@
       "body": {
         "blocks": [
           {
-            "type": "callout",
-            "tone": "definition",
-            "title": "Unit testing",
-            "text": "Unit testing testing ki pehli satah hai: alag alag hisse ya modules akele test hote hain. Har unit software ka chhota, test hone qabil hissa hai, jaise function ya method, aur maqsad yeh jaanchna hai ke har ek apne design ke mutabiq theek kaam kare."
+            "type": "paragraph",
+            "text": "Unit Testing testing ka pehla level hai, jis mein software ke alag alag components ya modules ko akela (in isolation) test kiya jata hai. Har \"unit\" software ka chhota sa hissa hai jise test kiya ja sake, jaise koi function ya method. Unit testing ka asal maqsad yeh tasdeeq karna hai ke har component apne design ke mutabiq theek kaam kare aur tawaqqo ke mutabiq chale."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Class Activity"
           },
           {
             "type": "paragraph",
-            "text": "Class activity: apni pasandeeda programming language mein kisi saade function ka unit test likhne ki koshish karein."
+            "text": "Apni pasandeeda programming language mein kisi saade function ka unit test likhne ki koshish karein."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Asaan alfaaz mein",
+            "text": "Misal ke taur par Python mein add() function ka ek saada unit test aisa ho sakta hai. assert check karta hai ke nateeja sahi hai; agar koi nateeja ghalat ho to program AssertionError de kar ruk jata hai."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "def add(a, b):\n    return a + b\n\n\ndef test_add():\n    assert add(2, 3) == 5\n    assert add(-1, 1) == 0\n    assert add(0, 0) == 0\n    print(\"Sab tests pass ho gaye\")\n\n\ntest_add()",
+            "caption": "add() function ka unit test"
+          },
+          {
+            "type": "code",
+            "language": "text",
+            "text": "Sab tests pass ho gaye",
+            "caption": "Output"
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
-            "prompt": "add(a, b) function jo jama lautaye, us ka unit test kya jaanchega?",
-            "explanation": "Yeh function ko akele maloom inputs ke saath chala kar nateeja tawaqqo shuda jawab se milata hai, maslan add(2, 3) ka 5 aur add(-1, 1) ka 0 aana chahiye; koi nateeja mukhtalif ho to unit mein bug hai."
+            "prompt": "add(a, b) function jo do numbers ka jama deta hai, us ka unit test kya check karega?",
+            "explanation": "Function ko akela, maloom inputs ke saath chala kar nateeja sahi jawab se milaya jata hai: add(2, 3) ka 5, add(-1, 1) ka 0 aur add(0, 0) ka 0 aana chahiye. Agar koi nateeja mukhtalif aaye to us unit mein bug hai."
           },
           {
             "type": "heading",
             "level": 2,
-            "text": "Fauri khulasa"
+            "text": "Mukhtasar khulasa"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "Unit testing: pehli satah; har chhoti unit (function ya method) apne design ke muqable akele test."
+              "Unit testing: pehla level; har chhota unit (function ya method) akela test hota hai."
             ]
           }
         ]
