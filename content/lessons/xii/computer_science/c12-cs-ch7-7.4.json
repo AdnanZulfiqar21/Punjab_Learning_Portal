@@ -13,74 +13,180 @@
           "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
           "pdf_from": 97,
           "pdf_to": 100,
-          "note": "Topic 7.4 with the Tidbit, Fig 7.1, the F-test and the numerical example (PDF 97-100), all checked against the page images and recomputed. The one-tailed p-value note, the marks figure and the check question are added. Short Q7, Long Q4 and MCQ 5 are answered here."
+          "note": "Topic 7.4 as printed (PDF 97-100, printed 93-96): Tidbit, Figure 7.1, steps, simple and advanced tests, the F-test example and the numerical example with its seven steps."
         }
       ],
       "body": {
         "blocks": [
           {
             "type": "paragraph",
-            "text": "Performing a hypothesis test follows a clear process (Fig 7.1): define the hypotheses, collect data carefully, calculate the test statistic, compare the result with the criterion and make a decision. Following the steps reduces errors and keeps the test fair."
+            "text": "Performing hypothesis tests follows a clear process (as shown in Figure 7.1). The process starts with defining hypotheses. Data is collected carefully. Test statistics are calculated. Results are compared with criteria. A decision is then made. Proper steps reduce errors. This process ensures fair testing. Hypothesis testing supports reliable conclusions."
           },
           {
             "type": "callout",
             "tone": "note",
             "title": "Tidbit",
-            "text": "Testing follows clear steps: data is collected and analysed, results are compared with criteria, and conclusions are drawn carefully."
-          },
-          {
-            "type": "list",
-            "ordered": true,
-            "items": [
-              "State the null and alternative hypotheses.",
-              "Choose the significance level alpha.",
-              "Collect sample data.",
-              "Calculate the test statistic and find the p-value.",
-              "Compare the p-value with alpha.",
-              "Decide: if p < alpha, reject H0; otherwise do not reject H0."
-            ]
+            "text": "Testing follows clear steps. Data is collected and analyzed. Results are compared with criteria. Conclusions are drawn carefully. Correct tests give reliable outcomes."
           },
           {
             "type": "diagram",
             "$asset": "c12-cs-ch7-fig-process",
             "alt": "Four stacked boxes joined by arrows: 1 state H0 and H1, 2 set significance level alpha, 3 collect sample data, 4 compute test statistic and p-value. Two arrows lead to the decisions: p-value < alpha, reject H0 (evidence for H1); and p-value >= alpha, fail to reject H0. A note says 'fail to reject' is safer wording than 'accept'.",
-            "caption": "The steps of hypothesis testing (original diagram after Fig 7.1).",
+            "caption": "Figure 7.1: Hypothesis Testing Process (original drawing after the textbook's Figure 7.1)",
             "long_description": "The book's figure says 'accept' when p > alpha; statisticians prefer 'fail to reject H0', because a test can only show that the evidence was not strong enough."
           },
           {
+            "type": "heading",
+            "level": 3,
+            "text": "Steps in Hypothesis Testing"
+          },
+          {
             "type": "paragraph",
-            "text": "Simple examples, such as testing exam results or checking an average height, help build understanding: data is collected from samples, analysed with basic tests and conclusions are drawn clearly."
+            "text": "First, null and alternative hypotheses are defined. Next, a significance level is selected. Data is collected from samples. Test statistics are calculated. The p-value is found. Results are compared with the significance level. A decision is made to accept or reject."
           },
           {
             "type": "heading",
-            "level": 2,
-            "text": "Advanced tests: F-test and chi-square test"
+            "level": 3,
+            "text": "Simple Hypothesis Testing Examples"
           },
           {
             "type": "paragraph",
-            "text": "Advanced tests handle more complex data. The F-test compares the variances of two groups and is used in analysis of variance (ANOVA): F = s1^2 / s2^2, where s1^2 and s2^2 are the two sample variances. For two groups of students with variances 16 and 9, F = 16 / 9 = 1.78, which is compared with a critical value from the F-table to decide whether the variances differ significantly. The chi-square test checks relationships in categorical data."
+            "text": "Simple examples help understand testing. One example is testing exam results. Another example is checking average height. Data is collected from samples. Results are analyzed using basic tests. Conclusions are drawn clearly. Simple examples build confidence. They explain concept easily."
           },
           {
             "type": "heading",
-            "level": 2,
-            "text": "Numerical example: has a new teaching method improved marks?"
+            "level": 3,
+            "text": "Advanced Tests: F-Test and Chi-Square Test"
           },
           {
             "type": "paragraph",
-            "text": "The previous average was 70. A sample of 10 students taught with the new method scored 72, 75, 78, 74, 77, 80, 76, 79, 81 and 78."
+            "text": "Advanced tests handle complex data. The F-test compares variances. It is used in analysis of variance. The Chi-Square test checks relationships. It is used with categorical data. These tests support deeper analysis. They follow strict rules. Understanding them improves skills. Advanced tests expand knowledge."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "F-test Example:"
+          },
+          {
+            "type": "equation",
+            "latex": "F=\\frac{S_1^2}{S_2^2}",
+            "text_alt": "F = S₁² / S₂²"
+          },
+          {
+            "type": "paragraph",
+            "text": "Where:"
           },
           {
             "type": "list",
-            "ordered": true,
+            "ordered": false,
             "items": [
-              "Hypotheses: H0: mu = 70 (no improvement); H1: mu > 70 (improvement).",
-              "Significance level: alpha = 0.05.",
-              "Sample mean: 770 / 10 = 77.",
-              "Standard deviation: the squared deviations from 77 add up to 70, so s = sqrt(70 / 9) = 2.79.",
-              "t-value: t = (77 - 70) / (2.79 / sqrt(10)) = 7 / 0.88 = 7.93, with df = 9.",
-              "Decision: the p-value for t = 7.93 with 9 degrees of freedom is approximately p = 0.00002, far below 0.05, so H0 is rejected.",
-              "Conclusion: the new teaching method significantly improved students' marks."
-            ],
+              "S₁² = Variance of sample1",
+              "S₂² = Variance of sample 2"
+            ]
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Example:"
+          },
+          {
+            "type": "paragraph",
+            "text": "Suppose we have two groups of students:"
+          },
+          {
+            "type": "paragraph",
+            "text": "Sample 1 variance = 16"
+          },
+          {
+            "type": "paragraph",
+            "text": "Sample 2 variance = 9"
+          },
+          {
+            "type": "equation",
+            "latex": "F=16/9=1.78",
+            "text_alt": "F = 16/9 = 1.78"
+          },
+          {
+            "type": "paragraph",
+            "text": "The calculated F-value (1.78) is compared with a critical value from the F-table to decide whether the variances are significantly different."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Numerical Example: Hypothesis Testing"
+          },
+          {
+            "type": "paragraph",
+            "text": "A school wants to check whether a new teaching method has improved students' marks. The previous average marks were 70."
+          },
+          {
+            "type": "paragraph",
+            "text": "A sample of 10 students taught with the new method obtained the following marks:"
+          },
+          {
+            "type": "paragraph",
+            "text": "72, 75, 78, 74, 77, 80, 76, 79, 81, 78"
+          },
+          {
+            "type": "paragraph",
+            "text": "Step 1: State the Hypotheses"
+          },
+          {
+            "type": "paragraph",
+            "text": "Null Hypothesis (H₀): The new method does not improve marks ( μ = 70)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Alternative Hypothesis (H₁): The new method improves marks ( μ > 70))"
+          },
+          {
+            "type": "paragraph",
+            "text": "Step 2: Set Significance Level"
+          },
+          {
+            "type": "equation",
+            "latex": "\\alpha=0.05",
+            "text_alt": "α = 0.05"
+          },
+          {
+            "type": "paragraph",
+            "text": "Step 3: Calculate Sample Mean"
+          },
+          {
+            "type": "equation",
+            "latex": "\\bar{x}=\\frac{\\text{Sum of all values}}{n}=\\frac{770}{10}=77",
+            "text_alt": "x̄ = Sum of all values / n = 770/10 = 77"
+          },
+          {
+            "type": "paragraph",
+            "text": "Step 4: Calculate Standard Deviation"
+          },
+          {
+            "type": "equation",
+            "latex": "s=\\sqrt{\\frac{\\sum\\left(x_i-\\bar{x}\\right)^2}{n-1}}=\\sqrt{\\frac{70}{9}}\\approx 2.79",
+            "text_alt": "s = √(Σ(xᵢ − x̄)² / (n − 1)) = √(70/9) ≈ 2.79"
+          },
+          {
+            "type": "paragraph",
+            "text": "Step 5: Calculate t-value"
+          },
+          {
+            "type": "equation",
+            "latex": "t=\\frac{\\bar{x}-\\mu}{s/\\sqrt{n}}=\\frac{77-70}{2.79/\\sqrt{10}}\\approx\\frac{7}{0.88}\\approx 7.93",
+            "text_alt": "t = (x̄ − μ) / (s/√n) = (77 − 70) / (2.79/√10) ≈ 7/0.88 ≈ 7.93"
+          },
+          {
+            "type": "paragraph",
+            "text": "Step 6: Decision Rule"
+          },
+          {
+            "type": "equation",
+            "latex": "df=n-1=10-1=9",
+            "text_alt": "df = n − 1 = 10 − 1 = 9"
+          },
+          {
+            "type": "paragraph",
+            "text": "Using the t-distribution table or statistical software, the p-value for t = 7.93 and df = 9 is approximately: p = 0.00002",
             "book_errors": [
               "p = 0.00002"
             ]
@@ -89,7 +195,31 @@
             "type": "callout",
             "tone": "correction",
             "title": "Book correction",
-            "text": "The book prints p = 0.00002, which is the two-tailed value. The test is one-tailed (H1: mu > 70), so the p-value for t = 7.93 and df = 9 is about 0.000012 (about 0.00001). The decision, reject H0, is unchanged."
+            "text": "The printed p = 0.00002 is the two-tailed p-value. The test is one-tailed (H₁: μ > 70), so the p-value for t = 7.93 and df = 9 is about 0.000012 (1.2 × 10⁻⁵). The decision, reject H₀, is unchanged."
+          },
+          {
+            "type": "paragraph",
+            "text": "For (df = 9), the p-value is very small (p < 0.05)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Step 7: Conclusion"
+          },
+          {
+            "type": "paragraph",
+            "text": "Since p-value < α"
+          },
+          {
+            "type": "paragraph",
+            "text": "We reject the null hypothesis."
+          },
+          {
+            "type": "paragraph",
+            "text": "Final Conclusion"
+          },
+          {
+            "type": "paragraph",
+            "text": "The new teaching method significantly improves students' marks."
           }
         ]
       }

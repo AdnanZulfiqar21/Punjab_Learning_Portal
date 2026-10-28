@@ -14,69 +14,86 @@
           "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
           "pdf_from": 93,
           "pdf_to": 94,
-          "note": "Roman Urdu introduction to hypothesis testing (PDF 93-94)."
+          "note": "Roman Urdu of the chapter introduction and topic 7.1 (PDF 93-94)."
         }
       ],
       "body": {
         "blocks": [
           {
-            "type": "paragraph",
-            "text": "Yeh chapter hypothesis testing aur data ke tajzie mein us ka kirdar samjhata hai: hypothesis kya hai aur research ke sawal kaise test ke qabil hypotheses bante hain; null aur alternative hypotheses; test statistics, critical regions aur p-values; saade hisabi misalon ke saath qadam ba qadam testing; nataij pesh karne aur hypotheses se jorne ke liye data visualisation; bias jaise akhlaqi masail; aur nataij ki tashreeh aur nataij ka abalagh."
-          },
-          {
-            "type": "callout",
-            "tone": "definition",
-            "title": "Hypothesis testing",
-            "text": "Hypothesis testing aik shumariyati tareeqa hai jo namoone ke data se tay karta hai ke kisi daawe (mafrooze) ki tayeed ya radd ke liye kafi saboot hai ya nahi."
+            "type": "heading",
+            "level": 3,
+            "text": "Introduction (taaruf)"
           },
           {
             "type": "paragraph",
-            "text": "Hypothesis testing research aur tajzie mein aam use hoti hai. Yeh wazeh amal par chalti hai: data ehtiyat se jama aur tajzia hota hai, phir mafrooza qabool ya radd hota hai, is liye faisle andaze ke bajaye saboot par hote hain."
+            "text": "Is chapter mein talaba hypothesis testing ka concept aur data analysis (data ka tajzia) mein is ka kirdar seekhenge. Woh samjhenge ke hypothesis kya hota hai aur research questions (tehqeeq ke sawal) ko aise hypotheses mein kaise badla jata hai jinhein test kiya ja sake. Chapter mukhtalif qism ke hypotheses batata hai, jin mein null hypothesis (H₀) bhi hai, aur yeh bhi ke durust hypothesis kaise banaya jata hai. Talaba test statistics, critical regions aur p-values jaise aham concepts parhenge aur faisla karne mein in ki ahmiyat seekhenge. Woh saadi numerical examples (hisabi misalon) se hypothesis testing ka qadam ba qadam tareeqa dekhenge. Chapter yeh bhi batata hai ke nataij pesh karne aur unhein hypotheses se jorne mein data visualization (data ko graph aur chart mein dikhana) ka kya kirdar hai. Is ke ilawa talaba bias (janibdari) aur data ke zimmedarana istemal jaise ethical (akhlaqi) masail seekhenge. Chapter ke aakhir tak talaba nataij ka matlab samajh kar unhein wazeh tareeqe se bata sakenge."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "7.1 Hypothesis testing ka taaruf"
+          },
+          {
+            "type": "paragraph",
+            "text": "Hypothesis testing ek tareeqa hai jis se data ki madad se faisle kiye jate hain. Yeh check karta hai ke koi assumption (farz ki hui baat) sach hai ya ghalat. Yeh tareeqa research aur analysis mein bohat istemal hota hai. Hypothesis testing ek wazeh process par chalti hai jo assumptions ko accept (qabool) ya reject (radd) karne mein madad deti hai. Data dhyan se jama aur analyze kiya jata hai. Yeh tareeqa andaze (guesswork) ko kam karta hai kyunke faisle saboot (evidence) par hote hain."
           },
           {
             "type": "callout",
             "tone": "note",
-            "title": "Dilchasp baat",
-            "text": "Hypothesis testing data se mafroozat jaanchti aur tay karne mein madad deti hai ke daawa sach hai ya nahi; yeh research aur tajrubaat mein use hoti, aur is ke nataij theek testing par munhasir hain."
+            "title": "Tidbit",
+            "text": "Hypothesis testing data se assumptions check karti hai. Yeh faisla karne mein madad deti hai ke koi daawa (claim) sach hai ya nahi. Yeh research aur experiments (tajrubat) mein use hoti hai. Yeh andaze kam karti hai. Nataij sahi testing par depend karte hain."
           },
           {
             "type": "heading",
-            "level": 2,
+            "level": 3,
             "text": "Hypothesis ka matlab"
           },
           {
-            "type": "callout",
-            "tone": "definition",
-            "title": "Hypothesis",
-            "text": "Hypothesis testing shuru hone se pehle kiya gaya test ke qabil bayan ya mafrooza hai, kisi population, surat-e-haal ya variables ke rishte ke baare mein."
+            "type": "paragraph",
+            "text": "Hypothesis research mein ek assumption ya statement (bayan) hai jo testing shuru hone se pehle banaya jata hai. Is statement ko data se test kiya ja sakta hai. Hypothesis kisi nateeje ki prediction (peshgoi) karta hai, is liye use wazeh aur measurable (napne ke qabil) hona chahiye. Data se use check kiya jata hai. Durust hypothesis analysis ko sahi raste par rakhta hai aur study ko focused rakhta hai."
+          },
+          {
+            "type": "equation",
+            "latex": "h_\\theta(x)=y",
+            "text_alt": "hθ(x) = y"
           },
           {
             "type": "paragraph",
-            "text": "Hypothesis kisi nateeje ki peshgoi karta hai, is liye use wazeh aur qabil-e-paimaish hona chahiye, aur data use jaanchne ke liye use hota hai. Achha hypothesis tehqeeq ko markooz aur tajzie ki rehnumai karta hai."
+            "text": "Yahan:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "hθ(x): hypothesis function, jis ke parameters θ hain aur jo input x par lagta hai.",
+              "x: input features ya data points (maslan dataset ki khasiyat, attributes).",
+              "y: predicted output ya target value (diye gaye input par model ka andaza).",
+              "θ: model ke parameters ya weights (maslan linear regression model ke coefficients)."
+            ]
           },
           {
             "type": "callout",
             "tone": "note",
             "title": "Machine learning mein doosra matlab",
-            "text": "Kitab h_theta(x) = y bhi likhti hai, jahan h_theta(x) parameters theta (maslan linear regression ke coefficients) wala 'hypothesis function' hai jo input x par lagta hai, aur y andaza shuda output hai. Yeh machine learning wala matlab hai: model ka andaze ka qaida, jaise 6.6 ka Exam Score = 0.6552 x Hours + 0.1466. Yeh is chapter mein test hone wale shumariyati hypothesis se mukhtalif hai."
+            "text": "Yahan 'hypothesis' ka machine learning wala matlab hai: hθ(x) model ka andaza lagane wala qaida (prediction function) hai, jaise Chapter 6 ka Exam Score = 0.6552 × Hours + 0.1466. Is chapter mein jo hypothesis test hota hai woh statistics wala hypothesis hai (H₀ aur H₁), yani data ke baare mein ek daawa. Dono ka naam ek hai magar kaam alag."
           },
           {
             "type": "heading",
-            "level": 2,
-            "text": "Research ke sawal aur hypotheses"
+            "level": 3,
+            "text": "Research questions aur hypotheses"
           },
           {
             "type": "paragraph",
-            "text": "Research ka sawal tay karta hai ke kya parha ja raha hai aur data jama karne ki rehnumai karta hai; hypothesis sawal se banta aur mumkina jawab deta hai. Wazeh sawal wazeh hypotheses tak le jate hain, aur mil kar tehqeeq ko markooz simt dete hain."
+            "text": "Research questions batate hain ke kis cheez ki study ho rahi hai. Hypothesis research question se banta hai. Sawal data jama karne ki rehnumai karte hain, aur hypotheses un sawalon ke mumkin jawab dete hain. Wazeh sawal se wazeh hypothesis banta hai; dono aapas mein qareebi tor par jure hain. Achhi research achhe sawalon se shuru hoti hai. Hypotheses analysis ko focused rakhte hain aur study ko sahi simt (direction) dete hain."
           },
           {
             "type": "heading",
-            "level": 2,
-            "text": "Data tajzie mein hypothesis testing ka kirdar"
+            "level": 3,
+            "text": "Data analysis mein hypothesis testing ka kirdar"
           },
           {
             "type": "paragraph",
-            "text": "Hypothesis testing data ka mantiqi tajzia kar ke dekhti hai ke nataij ba-maani hain ya ittifaq ho sakte hain. Yeh nataij ko tawaqqoat se mila kar be-tukke nataij se bachati, tajrubaat aur surveys mein durusti barhati, aur saboot par mabni faislon par aitmad barhati hai."
+            "text": "Hypothesis testing data ko mantiqi (logical) tareeqe se analyze karne mein madad deti hai, taake pata chale ke nataij ba-maani (meaningful) hain ya nahi. Testing be-tarteeb (random) nateejon se bachati hai. Yeh nataij ko tawaqqo (expectation) se milati hai. Hypothesis testing durusti (accuracy) barhati hai aur experiments aur surveys mein use hoti hai. Faisle saboot par hote hain, aur is tareeqe se nataij par aitmad (confidence) barhta hai."
           },
           {
             "type": "checkpoint",
@@ -87,15 +104,15 @@
           {
             "type": "heading",
             "level": 2,
-            "text": "Fauri khulasa"
+            "text": "Mukhtasar khulasa"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "Hypothesis testing data se tay karti ke daawa radd ho ya nahi.",
-              "Hypothesis testing se pehle wazeh, qabil-e-paimaish, qabil-e-test bayan.",
-              "Pehle research sawal, phir hypothesis."
+              "Hypothesis testing: data se faisla ke koi assumption sach hai ya ghalat.",
+              "Hypothesis: testing se pehle bana wazeh aur measurable bayan.",
+              "Pehle research question, phir us se hypothesis."
             ]
           }
         ]

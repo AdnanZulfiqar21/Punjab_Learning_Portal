@@ -14,147 +14,222 @@
           "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
           "pdf_from": 95,
           "pdf_to": 97,
-          "note": "Roman Urdu explanation of the concepts in hypothesis testing (PDF 95-97)."
+          "note": "Roman Urdu of topic 7.3 (PDF 95-97), with the decisions the book leaves out as tips."
         }
       ],
       "body": {
         "blocks": [
           {
             "type": "paragraph",
-            "text": "Hypothesis testing durust faislon tak pohanchne ke liye chand kaleedi tasawwurat saath use karti hai: test statistics, critical region, significance level aur p-value."
+            "text": "Hypothesis testing durust faisle karne ke liye kai aham concepts use karti hai. Har concept ka testing mein apna kaam hai. Inhein samajhne se uljhan nahi hoti, aur yahi batate hain ke hypothesis accept ho ya reject. Yeh concepts mil kar use hote hain aur data analysis mein lagaye jate hain. Inhein sahi samajhna durusti barhata hai, is liye inhein seekhna zaroori hai."
           },
           {
             "type": "heading",
-            "level": 2,
+            "level": 3,
             "text": "Test statistics"
           },
           {
             "type": "paragraph",
-            "text": "Test statistic namoone ke data se nikla number hai jo batata hai ke nataij H0 ki tawaqqo se kitne door hain. Mukhtalif tests mukhtalif statistics use karte hain, maslan t-value, chi-square value aur F-value."
+            "text": "Test statistics numbers (adadi qeematein) hain jo sample data (namoone ke data) se nikali jati hain. Yeh qeematein data ke rawaiye ka khulasa deti hain, nataij ka muqabla karne aur faisla karne mein madad deti hain, aur batati hain ke nataij tawaqqo se kitne door hain. Mukhtalif tests mukhtalif statistics use karte hain, maslan t-value aur chi-square value."
           },
           {
-            "type": "table",
-            "caption": "Do test statistics",
-            "header": [
-              "Test",
-              "Formula",
-              "Alamat"
-            ],
-            "rows": [
-              [
-                "t-test",
-                "t = (x_bar - mu_0) / (s / sqrt(n))",
-                "x_bar: namoone ka mean; mu_0: H0 ke tehat population mean; s: namoone ka standard deviation; n: namoone ka size"
-              ],
-              [
-                "Chi-square test",
-                "chi^2 = (O_i - E_i)^2 / E_i ka jama",
-                "O_i: har category ki mushahida frequency; E_i: har category ki mutawaqqa frequency"
-              ]
+            "type": "heading",
+            "level": 3,
+            "text": "t-value test:"
+          },
+          {
+            "type": "equation",
+            "latex": "t=\\frac{\\bar{x}-\\mu_0}{\\frac{s}{\\sqrt{n}}}",
+            "text_alt": "t = (x̄ − μ₀) / (s / √n)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yahan:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "x̄: sample mean (namoone ka average)",
+              "μ₀: null hypothesis ke mutabiq population mean (poori abadi ka average)",
+              "s: sample standard deviation (namoone ka phailao)",
+              "n: sample size (namoone mein kitni cheezein)"
             ]
           },
           {
             "type": "heading",
-            "level": 2,
-            "text": "Hal shuda misal: t-test"
+            "level": 3,
+            "text": "Misaal:"
           },
           {
             "type": "paragraph",
-            "text": "25 talaba ke namoone ka mean score 80 hai. Agar namoone ka standard deviation 10 ho to kya yeh population mean 75 se numayan mukhtalif hai? t = (80 - 75) / (10 / sqrt(25)) = 5 / (10 / 5) = 5 / 2 = 2.5. 24 degrees of freedom par alpha = 0.05 ki two-tailed critical value taqreeban 2.06 hai, is liye t = 2.5 critical region mein hai aur H0 radd hota hai: mean 75 se waqai mukhtalif hai."
+            "text": "Farz karein 25 talaba ke sample ka average score 80 hai, aur hum dekhna chahte hain ke kya yeh average population mean 75 se numayan (significantly) mukhtalif hai. Sample standard deviation 10 hai."
+          },
+          {
+            "type": "equation",
+            "latex": "t=\\frac{80-75}{\\frac{10}{\\sqrt{25}}}=\\frac{5}{\\frac{10}{5}}=\\frac{5}{2}=2.5",
+            "text_alt": "t = (80 − 75) / (10/√25) = 5 / (10/5) = 5/2 = 2.5"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Asaan alfaaz mein",
+            "text": "Kitab yahan faisla nahi likhti. df = 25 − 1 = 24 aur α = 0.05 par two-tailed critical value taqreeban 2.06 hai. Kyunke 2.5 > 2.06, t critical region mein hai, is liye H₀ reject hoga: average 80 asal mein 75 se numayan mukhtalif hai."
           },
           {
             "type": "heading",
-            "level": 2,
-            "text": "Hal shuda misal: chi-square test"
+            "level": 3,
+            "text": "Chi-square test:"
+          },
+          {
+            "type": "equation",
+            "latex": "\\chi^2=\\sum\\frac{(O_i-E_i)^2}{E_i}",
+            "text_alt": "χ² = Σ (Oᵢ − Eᵢ)² / Eᵢ"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab chi-square ki alamat ko x² (angrezi harf x) chhapti hai, formula mein bhi aur misaal ke hal mein bhi. Sahi alamat Greek harf chi hai: χ². Formula mein chhota oᵢ bhi chhapa hai; yeh wahi Oᵢ (observed frequency) hai jo neeche ki list mein hai. Misaal ka hisab (3.4) durust hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Yahan:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Oᵢ: har category (qism) mein observed frequency (jitni dafa asal mein hua)",
+              "Eᵢ: har category mein expected frequency (jitni dafa hona chahiye tha)"
+            ]
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Misaal:"
+          },
+          {
+            "type": "paragraph",
+            "text": "Farz karein aap ek munsif (fair) pansa (die) 60 dafa phenkte hain aur yeh frequencies dekhte hain:"
           },
           {
             "type": "table",
-            "caption": "Pansa 60 dafa phenka gaya",
+            "caption": "Pansa 60 dafa phenkne par observed aur expected frequencies",
             "header": [
-              "Rukh",
-              "Mushahida O",
-              "Mutawaqqa E",
-              "(O - E)^2 / E"
+              "Pansay ka rukh (face)",
+              "Observed frequency (Oᵢ)",
+              "Expected frequency (Eᵢ)"
             ],
             "rows": [
               [
                 "1",
                 "10",
-                "10",
-                "0"
+                "10"
               ],
               [
                 "2",
                 "12",
-                "10",
-                "0.4"
+                "10"
               ],
               [
                 "3",
                 "8",
-                "10",
-                "0.4"
+                "10"
               ],
               [
                 "4",
                 "14",
-                "10",
-                "1.6"
+                "10"
               ],
               [
                 "5",
                 "9",
-                "10",
-                "0.1"
+                "10"
               ],
               [
                 "6",
                 "7",
-                "10",
-                "0.9"
-              ],
-              [
-                "Kul",
-                "60",
-                "60",
-                "3.4"
+                "10"
               ]
             ]
           },
           {
+            "type": "equation",
+            "latex": "\\chi^2=\\frac{(10-10)^2}{10}+\\frac{(12-10)^2}{10}+\\frac{(8-10)^2}{10}+\\frac{(14-10)^2}{10}+\\frac{(9-10)^2}{10}+\\frac{(7-10)^2}{10}",
+            "text_alt": "χ² = (10−10)²/10 + (12−10)²/10 + (8−10)²/10 + (14−10)²/10 + (9−10)²/10 + (7−10)²/10"
+          },
+          {
+            "type": "equation",
+            "latex": "\\chi^2=0+\\frac{4}{10}+\\frac{4}{10}+\\frac{16}{10}+\\frac{1}{10}+\\frac{9}{10}",
+            "text_alt": "χ² = 0 + 4/10 + 4/10 + 16/10 + 1/10 + 9/10"
+          },
+          {
+            "type": "equation",
+            "latex": "\\chi^2=0+0.4+0.4+1.6+0.1+0.9=3.4",
+            "text_alt": "χ² = 0 + 0.4 + 0.4 + 1.6 + 0.1 + 0.9 = 3.4"
+          },
+          {
             "type": "paragraph",
-            "text": "Yun chi^2 = 3.4 hai. Ise chuni hui significance level (alpha = 0.05) aur degrees of freedom (6 rukh - 1 = 5) ke liye chi-square table ki critical value se milaya jata hai. Woh critical value 11.07 hai; kyunke 3.4 < 11.07, H0 (pansa munsif hai) radd nahi hota."
+            "text": "Ab nikali hui χ² value 3.4 hai. Faisla karne ke liye is value ko Chi-Square distribution table ki critical value se milaya jata hai, kisi chuni hui significance level (maslan α = 0.05) aur degrees of freedom par."
           },
           {
             "type": "diagram",
             "$asset": "c12-cs-ch7-fig-chi-square",
             "alt": "60 phenkon mein chhe rukhon ki mushahida frequencies (10, 12, 8, 14, 9 aur 7) ka bar chart, mutawaqqa 10 par dashed line. Dabba hal dikhata: 0 + 0.4 + 0.4 + 1.6 + 0.1 + 0.9 = 3.4; df = 5; alpha 0.05 par critical value = 11.07. Note: 3.4 < 11.07, is liye H0 (pansa munsif) radd nahi hota.",
-            "caption": "Pansay ka chi-square test (pansay ki misal ke mutabiq asal khaaka).",
+            "caption": "Pansay ka chi-square test (kitab ki misaal par apna khaaka).",
             "long_description": "Munsif pansa bhi 60 phenkon mein har rukh bilkul 10 dafa nahi deta; test poochta hai ke kya farq us se bare hain jo ittifaq aam taur par paida karta hai."
           },
           {
-            "type": "heading",
-            "level": 2,
-            "text": "Critical region, significance level aur p-value"
+            "type": "callout",
+            "tone": "tip",
+            "title": "Asaan alfaaz mein",
+            "text": "Pansay ke 6 rukh hain, is liye degrees of freedom = 6 − 1 = 5. α = 0.05 aur df = 5 par critical value 11.07 hai. Kyunke 3.4 < 11.07, H₀ (pansa munsif hai) reject nahi hota: farq itna chhota hai ke ittifaq (chance) se ho sakta hai."
           },
           {
-            "type": "list",
-            "ordered": true,
-            "items": [
-              "Critical region: test statistic ki intehai qeematon ki had jin par H0 radd hota hai. Yeh testing se pehle tay hoti aur significance level par munhasir hai; graphs aksar ise dikhate hain.",
-              "Significance level (alpha): H0 ke sach hote hue use radd karne ka zyada se zyada khatra jo hum qabool karte hain; aam qeemat 0.05. Kam alpha ka matlab sakht test. Ise tajzie se pehle chuna jata hai.",
-              "p-value: H0 sach hone ki soorat mein mushahida nateeja, ya us se intehai nateeja, milne ka imkaan. Chhoti p-value H0 ke khilaf mazboot saboot hai, kyunke aisa nateeja ittifaqan kam hi hota. Agar p-value alpha se kam ho to H0 radd hota hai."
-            ]
+            "type": "heading",
+            "level": 3,
+            "text": "Critical region"
           },
           {
             "type": "paragraph",
-            "text": "Maslan ustad jaanchta hai ke kya naya tareeqa-e-tadrees number behtar karta hai; H0 kehta hai koi asar nahi. Agar tajzie se p = 0.03 aaye to kyunke 0.03 < 0.05, H0 radd hota hai: shumariyati saboot hai ke tareeqe ne karkardagi behtar ki. Tib mein nayi dawa ka purani se muwazna karte hue 0.01 ki p-value mazboot saboot deti hai ke behtari sirf ittifaq nahi. p-values samajhna baghair munasib saboot ke hypothesis radd ya qabool karne se bachata hai."
+            "text": "Critical region qeematon ki ek had (range) hai. Agar test statistic is region mein aa jaye to null hypothesis reject ho jata hai. Yeh testing se pehle tay ki jati hai aur significance level par depend karti hai. Yeh intehai (extreme) nataij dikhati hai. Critical regions faisla karne mein madad deti aur ghair-yaqeeni (uncertainty) kam karti hain. Graphs aksar critical region dikhate hain. Is concept ko samajhna zaroori hai."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Significance level"
+          },
+          {
+            "type": "paragraph",
+            "text": "Significance level ghalti ka khatra (risk of error) dikhata hai. Ise alpha (α) likhte hain. Aam qeemat 0.05 hai. Yeh batata hai ke test kitna sakht (strict) hai: kam qeemat ka matlab zyada sakht test. Yeh analysis se pehle chuna jata hai. Significance level ghalat nataij ko control karta aur faisle par asar dalta hai. Sahi chunao se nataij zyada qabil-e-bharosa hote hain."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "p-value aur is ki ahmiyat"
+          },
+          {
+            "type": "paragraph",
+            "text": "p-value null hypothesis ke khilaf saboot ki taqat batati hai. Yeh probability (imkaan) hai ke agar null hypothesis sach ho to hamein yahi nataij, ya in se bhi zyada intehai nataij, milein. Chhoti p-value null hypothesis ko reject karne ki taraf le jati hai, kyunke is ka matlab hai ke nateeja sirf ittifaq se aana mushkil hai. Faisla karne ke liye p-value ko significance level, maslan 0.05, se milaya jata hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Maslan ek ustad dekhna chahta hai ke kya parhane ka naya tareeqa talaba ke marks behtar karta hai. Null hypothesis kehta hai ke naye tareeqe ka koi asar nahi. Test scores analyze karne par p-value 0.03 aati hai. Kyunke 0.03 < 0.05, null hypothesis reject kiya ja sakta hai. Is ka matlab hai ke statistics ka saboot hai ke naye tareeqe ne talaba ki karkardagi (performance) behtar ki hogi."
+          },
+          {
+            "type": "paragraph",
+            "text": "Isi tarah medicine (tib) mein researchers test kar sakte hain ke kya nayi dawa purani dawa se zyada asar rakhti hai. Agar p-value 0.01 ho to yeh mazboot saboot hai ke behtari sirf ittifaq se nahi."
+          },
+          {
+            "type": "paragraph",
+            "text": "p-values statistics ke faisle aasan banati hain aur data par mabni nateejon ko support karti hain. p-value ko achhi tarah samajhna ghaltiyon se bachata hai, jaise baghair munasib saboot ke kisi hypothesis ko reject ya accept kar dena."
           },
           {
             "type": "diagram",
             "$asset": "c12-cs-ch7-fig-critical-region",
             "alt": "Ghante jaisi curve H0 sach hone par test statistic ki mutawaqqa qeematein dikhati. Dashed 'critical value' line se aage daen dum surkh: critical region, raqba alpha = 0.05. Purple line critical region ke andar test statistic, aur us se aage chhota purple raqba p-value hai. Note: test statistic critical region mein (p-value < alpha) to H0 radd; warna H0 radd nahi.",
-            "caption": "Critical region aur p-value (7.3 ke mutabiq asal khaaka).",
+            "caption": "Critical region aur p-value (7.3 par apna khaaka).",
             "long_description": "Dono qawaid aik hi faisla hain: critical value se aage ke test statistic ki p-value hamesha alpha se kam hoti hai."
           },
           {
@@ -166,15 +241,15 @@
           {
             "type": "heading",
             "level": 2,
-            "text": "Fauri khulasa"
+            "text": "Mukhtasar khulasa"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "Test statistic: namoone se number, maslan t = (x_bar - mu_0) / (s / sqrt(n)), chi^2 = (O - E)^2 / E ka jama.",
-              "Critical region: qeematein jo H0 radd karwati hain; alpha (aksar 0.05) is ka size tay karta.",
-              "p-value < alpha: H0 radd."
+              "Test statistic: sample data se nikla number, maslan t = (x̄ − μ₀)/(s/√n) aur χ² = Σ (O − E)²/E.",
+              "Critical region: woh qeematein jin par H₀ reject hota hai; α (aksar 0.05) is ka size tay karta hai.",
+              "p-value < α ho to H₀ reject; warna reject nahi (is se H₀ sabit nahi hota)."
             ]
           }
         ]
