@@ -9,9 +9,10 @@ import { Checkpoint } from "@/components/checkpoint";
 import { FigureViewer } from "@/components/figure-viewer";
 import { Model3D } from "@/components/model3d";
 import { LinkButton, T } from "@/components/ui";
-import { Fonts, Radius, Space } from "@/constants/theme";
-import { useTheme } from "@/hooks/use-theme";
+import { CodeColors, Fonts, Radius, Space } from "@/constants/theme";
+import { useScheme, useTheme } from "@/hooks/use-theme";
 import { bookErrors, markPieces } from "@/lib/book-errors";
+import { codeRuns } from "@/lib/code-highlight";
 import { comparisonCards } from "@/lib/lesson-tables";
 import { fillMerged, mergedColumns, mergeStarts } from "@/lib/table-merge";
 
@@ -32,6 +33,31 @@ const CALLOUT_LABEL: Record<string, string> = {
   warning: "Take care",
   correction: "Book correction",
 };
+
+/** A program with its parts coloured (CODE-HIGHLIGHT-01, theme.ts `CodeColors`) and the book's errors still in red. */
+function Code({ text, language, marks }: { text: string; language: string; marks: string[] }) {
+  const c = useTheme();
+  const k = CodeColors[useScheme()];
+  return (
+    <>
+      {codeRuns(text, language, markPieces(text, marks)).map((r, i) =>
+        r.error ? (
+          <Text key={i} style={{ color: c.danger, backgroundColor: c.dangerSoft, fontWeight: "600" }}>
+            {r.text}
+          </Text>
+        ) : r.kind === "plain" ? (
+          <Fragment key={i}>{r.text}</Fragment>
+        ) : (
+          <Text
+            key={i}
+            style={{ color: k[r.kind], fontStyle: r.kind === "comment" ? "italic" : "normal", fontWeight: r.kind === "keyword" ? "600" : "normal" }}>
+            {r.text}
+          </Text>
+        ),
+      )}
+    </>
+  );
+}
 
 /** Text with the textbook's wrong passages marked in red (BOOK-CORRECTION-01). Nested Text keeps it one paragraph. */
 function Marked({ text, marks }: { text: string; marks: string[] }) {
@@ -368,7 +394,7 @@ function BlockView({ block: b, assetSource, dataSaver }: { block: Block; assetSo
           ) : null}
           <ScrollView horizontal style={{ borderWidth: 1, borderColor: c.border, borderRadius: Radius.md, backgroundColor: c.surfaceMuted }} contentContainerStyle={{ padding: Space.md }}>
             <Text selectable style={{ fontFamily: Fonts?.mono, fontSize: 14, lineHeight: 21, color: c.text }}>
-              <Marked text={str(b.text)} marks={marks} />
+              <Code text={str(b.text)} language={str(b.language)} marks={marks} />
             </Text>
           </ScrollView>
         </View>

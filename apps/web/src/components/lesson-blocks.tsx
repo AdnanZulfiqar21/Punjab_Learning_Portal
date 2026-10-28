@@ -4,6 +4,7 @@ import { Equation } from "@/components/equation";
 import { Model3DFigure } from "@/components/model3d-figure";
 import { SaverImage } from "@/components/saver-image";
 import { bookErrors, markLatex, markPieces } from "@/lib/book-errors";
+import { codeRuns } from "@/lib/code-highlight";
 import { fillMerged, mergedColumns, mergeStarts, rowSpans } from "@/lib/table-merge";
 
 // Renders content blocks (schema v1, roadmap §5.4). Web renderer version 2: comparison tables fold into cards on narrow
@@ -60,6 +61,25 @@ function Marked({ text, marks }: { text: string; marks: string[] }) {
           </mark>
         ) : (
           <Vectors key={i} text={p.text} />
+        ),
+      )}
+    </>
+  );
+}
+
+/** A program with its parts coloured (CODE-HIGHLIGHT-01, globals.css `.code-*`) and the book's errors still in red. */
+function Code({ text, language, marks }: { text: string; language: string; marks: string[] }) {
+  return (
+    <>
+      {codeRuns(text, language, markPieces(text, marks)).map((r, i) =>
+        r.error ? (
+          <mark key={i} title="Printed in the book; see the book correction" className="rounded-sm bg-danger-soft px-0.5 text-danger">
+            {r.text}
+          </mark>
+        ) : (
+          <span key={i} className={r.kind === "plain" ? undefined : `code-${r.kind}`}>
+            {r.text}
+          </span>
         ),
       )}
     </>
@@ -371,14 +391,22 @@ function BlockView({
               <Marked text={str(b.caption)} marks={marks} />
             </figcaption>
           )}
-          <pre
-            className="overflow-x-auto rounded-xl border border-border bg-surface-muted px-4 py-3 font-mono text-[0.9rem] leading-6"
-            tabIndex={0}
-            aria-label={`${str(b.language) || "Program"} code${str(b.caption) ? `: ${str(b.caption)}` : ""}`}>
-            <code>
-              <Marked text={str(b.text)} marks={marks} />
-            </code>
-          </pre>
+          <div className="overflow-hidden rounded-xl border border-border bg-surface-muted shadow-sm">
+            {str(b.language) && str(b.language) !== "text" && (
+              <div className="flex items-center gap-2 border-b border-border bg-surface px-4 py-1.5 text-xs font-semibold tracking-wide text-muted uppercase">
+                <span aria-hidden className="size-2 rounded-full bg-accent" />
+                {str(b.language)}
+              </div>
+            )}
+            <pre
+              className="overflow-x-auto px-4 py-3 font-mono text-[0.9rem] leading-6"
+              tabIndex={0}
+              aria-label={`${str(b.language) || "Program"} code${str(b.caption) ? `: ${str(b.caption)}` : ""}`}>
+              <code>
+                <Code text={str(b.text)} language={str(b.language)} marks={marks} />
+              </code>
+            </pre>
+          </div>
         </figure>
       );
     case "diagram":
