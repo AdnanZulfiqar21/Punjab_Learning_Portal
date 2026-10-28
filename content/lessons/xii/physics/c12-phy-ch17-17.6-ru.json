@@ -14,18 +14,103 @@
           "source_document_id": "bfc68b7f-dac5-5e57-a286-814710fe09bc",
           "pdf_from": 94,
           "pdf_to": 96,
-          "note": "Roman Urdu explanation of AC through an inductor (PDF 94-96)."
+          "note": "Roman Urdu explanation of topic 17.6 and Example 17.4 (PDF 94-96)."
         }
       ],
       "body": {
         "blocks": [
           {
             "type": "paragraph",
-            "text": "Inductor (jise coil ya choke bhi kehte hain) do siron wala hissa hai jis ki self-inductance zyada aur resistance na-qabil-e-zikr hai; current guzarne par yeh tawanai magnetic field mein jama karta hai. Yeh current ke achanak ubhar (surges ya spikes) ko tawanai waqti taur par jama kar ke aur circuit mein wapas de kar dheema karta hai."
+            "text": "Inductor (jise coil ya choke bhi kehte hain) do siron (terminals) wala passive hissa hai. Is ki self-inductance bohat zyada aur resistance na hone ke barabar hoti hai. Jab is mein current guzarta hai to yeh energy magnetic field mein jama karta hai. Current mein achanak uchhal (surges ya spikes) ko yeh dheema karta hai: energy thori der jama karta hai aur phir circuit ko wapas de deta hai."
           },
           {
             "type": "paragraph",
-            "text": "Farz karein inductor L frequency f ke AC source se jura hai (Fig 17.7 a) aur current I = Io sin(wt) (17.13) hai. Badalta current coil mein L dI/dt miqdar ki ulti emf (back emf) banata hai, aur lagaya voltage is ke barabar hona chahiye: V = L (d/dt)(Io sin(wt)) = L Io w cos(wt) (17.14). Vo = w L Io ke saath V = Vo cos(wt) = Vo sin(wt + pi/2) (17.15). Yun inductor par voltage current se 90 darje (pi/2 rad) aage hai; yani inductor mein current voltage se 90 darje peeche hai (Figs 17.7 b aur c)."
+            "text": "Farz karein inductance L wala inductor (resistance na hone ke barabar) frequency f wale AC source se jura hai (Fig. 17.7(a)), aur current yeh hai:"
+          },
+          {
+            "type": "equation",
+            "latex": "I = I_o \\sin\\omega t \\tag{17.13}",
+            "text_alt": "I = Iₒ sin ωt   (17.13)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Coil ki inductance L ho to badalta current coil mein ulti emf (back emf) paida karta hai, jis ki miqdar:"
+          },
+          {
+            "type": "equation",
+            "latex": "V = L\\frac{\\Delta I}{\\Delta t}",
+            "text_alt": "V = L ΔI/Δt"
+          },
+          {
+            "type": "paragraph",
+            "text": "Current chalta rakhne ke liye lagaya gaya voltage is back emf ke barabar hona chahiye. Is liye coil par voltage:"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{As} \\qquad I = I_o \\sin\\omega t, \\; \\text{so}",
+            "text_alt": "As   I = Iₒ sin ωt, so"
+          },
+          {
+            "type": "equation",
+            "latex": "V = L\\frac{\\Delta}{\\Delta t}(I_o \\sin\\omega t)",
+            "text_alt": "V = L (Δ/Δt)(Iₒ sin ωt)"
+          },
+          {
+            "type": "equation",
+            "latex": "V = LI_o\\frac{\\Delta}{\\Delta t}\\sin\\omega t \\tag{17.14}",
+            "text_alt": "V = LIₒ (Δ/Δt) sin ωt   (17.14)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab is equation ka number '(7.14)' chhapti hai; chapter ke hisaab se yeh 17.14 hai (17.13 ke baad aur 17.15 se pehle)."
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{As} \\qquad \\frac{\\Delta}{\\Delta t}\\sin(\\omega t) = \\omega\\cos(\\omega t), \\; \\text{therefore,}",
+            "text_alt": "As   (Δ/Δt) sin(ωt) = ω cos(ωt), therefore,"
+          },
+          {
+            "type": "equation",
+            "latex": "V = \\omega LI_o \\cos(\\omega t)",
+            "text_alt": "V = ωLIₒ cos(ωt)"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{As} \\qquad \\omega LI_o = V_o, \\; \\text{so}",
+            "text_alt": "As   ωLIₒ = Vₒ, so"
+          },
+          {
+            "type": "equation",
+            "latex": "V = V_o \\cos(\\omega t)",
+            "text_alt": "V = Vₒ cos(ωt)"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{As} \\qquad \\cos\\omega t = \\sin\\left(\\omega t + \\frac{\\pi}{2}\\right), \\; \\text{so}",
+            "text_alt": "As   cos ωt = sin (ωt + π/2), so"
+          },
+          {
+            "type": "equation",
+            "latex": "V = V_o \\sin\\left(\\omega t + \\frac{\\pi}{2}\\right) \\tag{17.15}",
+            "text_alt": "V = Vₒ sin (ωt + π/2)   (17.15)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Asaan alfaaz mein",
+            "text": "Δ/Δt ka matlab hai 'waqt ke saath kitni tezi se badal raha hai'. sin ωt ki tabdeeli ki raftar ω cos ωt hoti hai. Akhir mein cos ko sin (ωt + π/2) likh kar pata chalta hai ke voltage current se π/2 aage hai."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Aap ki maloomat ke liye (For your information)",
+            "text": "ΔI/Δt waqt ke saath current badalne ki raftar (rate) hai. Yahi I-t graph ki dhalwan (slope) bhi hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Eq. 17.15 se pata chalta hai ke inductor L par voltage current se aage (leading) hai; doosre lafzon mein inductor wale AC circuit mein current voltage se peeche (lagging) hai (Figs. 17.7(b) aur 17.7(c)). Inductor mein current hamesha voltage se 90° (π/2 rad) peeche rehta hai. Inductor jo rukawat dalta hai use inductive reactance X_L kehte hain:"
           },
           {
             "type": "diagram",
@@ -35,68 +120,95 @@
           },
           {
             "type": "callout",
-            "tone": "tip",
-            "title": "Diagram ko samjhein",
-            "text": "Kitab ki Fig 17.7 (a) mein current 'I = Io sin(w + t)' chhapa hai; durust I = Io sin wt hai (w aur t ka hasil-e-zarb, jor nahi). Graph mein dekhein: jab current sifar se barhna shuru karta hai, us waqt voltage pehle hi chotti par hai, yani voltage pi/2 (90 darje) aage hai."
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab ki Fig. 17.7(a) mein current 'I = Iₒ sin(ω + t)' chhapa hai; sahi I = Iₒ sin ωt hai (ω aur t ka zarb, jama nahi). Graph mein dekhein: jab current zero se barhna shuru karta hai, voltage pehle hi peak par hota hai, yani voltage π/2 (90°) aage hai."
           },
           {
-            "type": "callout",
-            "tone": "definition",
-            "title": "Inductive reactance",
-            "text": "Inductor ki mukhalfat us ki inductive reactance hai, XL = Vrms / Irms (17.16). Kyunke Vrms = 0.707 Vo, Irms = 0.707 Io aur Vo = w L Io, XL = w L = 2 pi f L (17.17). Is ki ikai ohm hai."
+            "type": "equation",
+            "latex": "X_L = \\frac{V_{rms}}{I_{rms}} \\tag{17.16}",
+            "text_alt": "X_L = Vᵣₘₛ/Iᵣₘₛ   (17.16)"
           },
           {
             "type": "paragraph",
-            "text": "XL frequency aur inductance dono ke barah-e-raast mutanasib hai. DC ke liye f = 0, is liye XL = 0; zyada frequency par XL bara hai. Is liye inductor DC guzarta lekin zyada frequency ke AC ki mukhalfat (rokta) karta hai."
+            "text": "Yahan Vᵣₘₛ inductor par alternating voltage ki rms qeemat aur Iᵣₘₛ us mein guzarne wala rms current hai."
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{As} \\quad V_{rms} = 0.707\\,V_o \\quad \\text{and} \\quad I_{rms} = 0.707\\,I_o, \\; \\text{so}",
+            "text_alt": "As Vᵣₘₛ = 0.707 Vₒ and Iᵣₘₛ = 0.707 Iₒ, so"
+          },
+          {
+            "type": "equation",
+            "latex": "X_L = \\frac{0.707\\,V_o}{0.707\\,I_o} = \\frac{V_o}{I_o}",
+            "text_alt": "X_L = 0.707Vₒ/0.707Iₒ = Vₒ/Iₒ"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{As} \\quad V_o = \\omega LI_o, \\quad \\text{so} \\quad X_L = \\frac{\\omega LI_o}{I_o}",
+            "text_alt": "As Vₒ = ωLIₒ, so X_L = ωLIₒ/Iₒ"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{Hence} \\qquad X_L = \\omega L = 2\\pi fL \\tag{17.17}",
+            "text_alt": "Hence   X_L = ωL = 2πfL   (17.17)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yani X_L frequency aur inductance L dono ke seedha mutabiq (directly proportional) hai: f ya L dugna to X_L dugna. DC mein f = 0 hai, is liye X_L = 0; zyada frequency wale AC mein X_L bhi bara hota hai. Natija: inductor DC ko guzarne deta hai lekin AC ko rokta hai. X_L ki unit ohm hai."
           },
           {
             "type": "heading",
-            "level": 2,
-            "text": "Inductor mein taqat ka zayaa"
+            "level": 3,
+            "text": "Inductor mein power ka kharch"
           },
           {
             "type": "paragraph",
-            "text": "Khalis inductor mein aust zaya taqat sifar hai. Inductor taqat kharch nahi karta: yeh har chakkar ke kuch hisse mein tawanai magnetic field mein jama karta aur field khatam hone par source ko wapas deta hai. Kyunke V aur I mein 90 darje ka phase farq hai, fi chakkar aust taqat sifar hai. Is liye inductor tawanai kharch kiye baghair AC qaboo kar sakta hai."
+            "text": "Khalis (pure) inductor mein average power zero hoti hai. Inductor power kharch nahi karta: yeh energy magnetic field mein jama karta hai aur field khatam hone par (demagnetisation) source ko wapas kar deta hai. Har lamhe ki power upar neeche hoti hai (kabhi energy andar, kabhi bahar), lekin ek cycle ki average power zero hoti hai, kyunke V aur I mein 90° ka phase difference hai. Is liye inductor energy kharch kiye baghair AC ko control karne ke kaam aata hai."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab kehti hai ke inductive circuit mein instantaneous power zero hai. Yeh sahi nahi: P = VI = ½VₒIₒ sin 2ωt hai, jo ek chauthai cycle positive (energy field mein jati hai) aur agli chauthai negative (energy wapas aati hai) hoti hai. Sirf poori cycle ka average zero hai."
+          },
+          {
+            "type": "example",
+            "title": "Example 17.4",
+            "problem": "400 mH ki coil (resistance na hone ke barabar) AC circuit mein lagi hai jis mein 6 mA rms current beh raha hai. Frequency 1 kHz ho to coil par rms voltage nikalein.",
+            "steps": [
+              "Diya gaya: L = 400 mH = 400 × 10⁻³ H = 0.4 H",
+              "Iᵣₘₛ = 6 mA = 6 × 10⁻³ A, f = 1 kHz = 1000 Hz; Vᵣₘₛ = ?",
+              "Formula: Vᵣₘₛ = IᵣₘₛX_L aur X_L = 2πfL",
+              "X_L = 2 × 3.14 × 1000 Hz × 0.4 H = 2512 Ω",
+              "Vᵣₘₛ = 6 × 10⁻³ A × 2512 Ω = 15.07 V"
+            ],
+            "answer": "Vᵣₘₛ ≈ 15 V"
           },
           {
             "type": "callout",
             "tone": "note",
-            "title": "Taqat ka phase",
-            "text": "Kitab kehti hai ke inductive circuit mein lamhati taqat sifar hai. Asal mein lamhati taqat VI musbat aur manfi hoti rehti hai (tawanai magnetic field mein aati jati hai); chakkar ka aust sifar hai."
-          },
-          {
-            "type": "heading",
-            "level": 2,
-            "text": "Misal 17.4"
-          },
-          {
-            "type": "paragraph",
-            "text": "Na-qabil-e-zikr resistance wali 400 mH coil mein 1 kHz par 6 mA rms current hai. Is par rms voltage maloom karein. Hal: XL = 2 pi f L = 2 x 3.14 x 1000 Hz x 0.400 H = 2512 ohm, is liye Vrms = Irms XL = (6 x 10^-3 A)(2512 ohm) = 15 V."
-          },
-          {
-            "type": "callout",
-            "tone": "note",
-            "title": "Aap ki maloomat ke liye",
-            "text": "dI/dt waqt ke saath current ki tabdeeli ki sharah, yani I-t graph ki dhalwan hai. Chokes ki kai qismein hain: filter chokes, high-frequency chokes, radio-frequency chokes aur AC qaboo karne wale chokes (kitab mein tasaveer)."
+            "title": "Aap ki maloomat ke liye (For your information)",
+            "text": "Chokes ki qismein (kitab mein tasveerein): filter choke, high frequency choke, radio frequency choke aur AC controlling choke."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "Frequency dugni karne par inductor ki reactance ka kya hota hai?",
-            "explanation": "Yeh dugni ho jati hai, kyunke XL = 2 pi f L, f ke mutanasib hai."
+            "explanation": "Yeh bhi dugni ho jati hai, kyunke X_L = 2πfL, yani X_L frequency f ke seedha mutabiq hai."
           },
           {
             "type": "heading",
             "level": 2,
-            "text": "Fauri khulasa"
+            "text": "Mukhtasar khulasa"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "Inductor: V, I se 90 darje aage (I peeche).",
-              "XL = wL = 2 pi f L: DC ke liye sifar, zyada f par bara.",
-              "Khalis inductor mein aust taqat = 0."
+              "Inductor: V = Vₒ sin (ωt + π/2); voltage current se 90° aage (current peeche).",
+              "X_L = ωL = 2πfL: DC (f = 0) par zero, zyada f par bara.",
+              "Pure inductor mein average power = 0."
             ]
           }
         ]

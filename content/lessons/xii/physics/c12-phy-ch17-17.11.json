@@ -13,14 +13,41 @@
           "source_document_id": "bfc68b7f-dac5-5e57-a286-814710fe09bc",
           "pdf_from": 100,
           "pdf_to": 102,
-          "note": "Topic 17.11 with boxes and the solar Brain Teaser, answered (PDF 100-102); Fig 17.10 redrawn in the rc-rl figure; photographs described. The coil question is added; answers need review."
+          "note": "Topic 17.11 as printed with the three boxes (PDF 100-102, printed 96-98); Fig 17.10 redrawn."
         }
       ],
       "body": {
         "blocks": [
           {
             "type": "paragraph",
-            "text": "A resistor R and an inductor L are connected in series with an AC source V (Fig 17.10 a), so the same current I = Io sin(theta) flows through both. The rms voltage across R is VR = Irms R, in phase with the current (line OA in Fig 17.10 c). The rms voltage across L is VL = Irms XL, ahead of the current by 90 degrees (line OB). The resultant voltage V is their vector sum (line OP): Vrms = square root of (VR^2 + VL^2) = Irms square root of (R^2 + (wL)^2). So the impedance is Z = Vrms / Irms = square root of (R^2 + (wL)^2) (17.23), and the phase angle is theta = tan^-1(wL/R). Here the voltage leads the current by theta (Fig 17.10 b)."
+            "text": "Consider an AC circuit containing a resistor R and inductor L connected in series with an AC source V as shown in Fig.17.10(a). As R and L are in series, therefore, same current I flows through both R and L."
+          },
+          {
+            "type": "equation",
+            "latex": "I = I_o \\sin\\theta",
+            "text_alt": "I = Iₒ sin θ"
+          },
+          {
+            "type": "paragraph",
+            "text": "Let rms value of current through R is I. Then rms value of voltage V_R across R will be:"
+          },
+          {
+            "type": "equation",
+            "latex": "V_R = I_{rms}R",
+            "text_alt": "V_R = IᵣₘₛR"
+          },
+          {
+            "type": "paragraph",
+            "text": "V will be in phase with the current I in the circuit, as R is shown vectorially by line OA in Fig.17.10(c). The value of rms voltage V_L across L will be:"
+          },
+          {
+            "type": "equation",
+            "latex": "V_L = I_{rms}X_L",
+            "text_alt": "V_L = IᵣₘₛX_L"
+          },
+          {
+            "type": "paragraph",
+            "text": "Voltage V across L is ahead of current I through L by 90° as shown in Fig.17.10 (b) and vectorially by line OB in Fig.17.10(c). The resultant voltage V will be the vector sum of V_R and V_L shown vectorially by line OP, thus in Fig.17.10(c):"
           },
           {
             "type": "diagram",
@@ -32,34 +59,96 @@
             "type": "callout",
             "tone": "correction",
             "title": "Book correction",
-            "text": "The printed Figure 17.10(b) draws voltage and current 90 degrees apart and at different frequencies, and (c) labels OA 'V'. Both have the same frequency, the voltage leads by theta (tan theta = wL/R), and OA is VR, as drawn above."
+            "text": "The printed Figure 17.10(b) draws voltage and current 90° apart and at different frequencies, and (c) labels OA 'V'. Both have the same frequency, the voltage leads by θ (tan θ = ωL/R), and OA is V_R, as drawn above."
           },
           {
-            "type": "heading",
-            "level": 2,
-            "text": "Power in an RL series circuit"
+            "type": "equation",
+            "latex": "V_{rms} = \\sqrt{V_R^2 + V_L^2}",
+            "text_alt": "Vᵣₘₛ = √(V_R² + V_L²)"
+          },
+          {
+            "type": "equation",
+            "latex": "V_{rms} = \\sqrt{(I_{rms}R^2) + (I_{rms}X_L^2)}",
+            "text_alt": "Vᵣₘₛ = √((IᵣₘₛR²) + (IᵣₘₛX_L²))",
+            "book_errors": [
+              "(IᵣₘₛR²) + (IᵣₘₛX_L²)",
+              "(I_{rms}R^2) + (I_{rms}X_L^2)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The squares belong outside the brackets: Vᵣₘₛ = √((IᵣₘₛR)² + (IᵣₘₛX_L)²) = Iᵣₘₛ√(R² + X_L²), as the next line uses."
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{As} \\quad X_L = \\omega L, \\; \\text{so} \\quad V_{rms} = I_{rms}\\sqrt{R^2 + (\\omega L)^2}",
+            "text_alt": "As X_L = ωL, so Vᵣₘₛ = Iᵣₘₛ √(R² + (ωL)²)"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{Impedance} \\quad Z = \\frac{V_{rms}}{I_{rms}} = \\sqrt{R^2 + (\\omega L)^2} \\tag{17.23}",
+            "text_alt": "Impedance Z = Vᵣₘₛ/Iᵣₘₛ = √(R² + (ωL)²)   (17.23)"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{Angle} \\qquad \\theta = \\tan^{-1}\\left(\\frac{\\omega L}{R}\\right)",
+            "text_alt": "Angle   θ = tan⁻¹(ωL/R)"
           },
           {
             "type": "paragraph",
-            "text": "The power consumed is due to the resistor, because the inductor stores energy but ideally does not dissipate it: P = I^2 R = VI cos(theta). The factor cos(theta) is called the power factor. When DC power (for example from solar panels) is converted into AC power by an inverter, the inverter efficiency, usually 85 to 90 per cent, must be included: Pac = (inverter efficiency) x Pdc."
+            "text": "The angle θ which Z makes with R line, gives the phase difference between the applied voltage and current."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "For your information",
+            "text": "Electric Eels create powerful shocks by its 3 main organs consisting of 80% of Eels body length through specialized cells called electrolytes.",
+            "book_errors": [
+              "electrolytes"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The specialised cells of the electric eel are called electrocytes, not electrolytes (an electrolyte is a solution that conducts electricity)."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Power dissipation in RL-Series circuit"
+          },
+          {
+            "type": "paragraph",
+            "text": "Power consumed in RL- series circuit is primarily due to the resistor, as the inductor stores energy but ideally does not dissipate it. The power consumed by the resistor is given by the formula:"
+          },
+          {
+            "type": "equation",
+            "latex": "P = I^2R = VI\\cos\\theta",
+            "text_alt": "P = I²R = VI cos θ"
+          },
+          {
+            "type": "paragraph",
+            "text": "where I, R and V represents current, resistance, and voltage respectively whereas θ is the phase angle between voltage and current. The factor cos θ is known as power factor. It is to be noted that when we convert DC power P_dc, into AC power P_ac, we have to take an account of a quantity known as inverter efficiency. It usually may be 85 % to 90%. So, we can find AC power from DC power by using the following conversion as:"
+          },
+          {
+            "type": "equation",
+            "latex": "P_{ac} = (\\text{Inverter efficiency}) \\times P_{dc}",
+            "text_alt": "P_ac = (Inverter efficiency) × P_dc"
           },
           {
             "type": "callout",
             "tone": "note",
             "title": "Do you know?",
-            "text": "A 1.5-ton air conditioner uses about 1.2 to 1.5 units (kWh) of electricity per hour. Electric eels produce powerful shocks with three organs that make up about 80 per cent of the eel's body length, built from specialised cells called electrocytes."
+            "text": "The electricity consumption of a 1.5 ton A.C is approximately 1.2 to 1.5 units per hour."
           },
           {
-            "type": "heading",
-            "level": 2,
-            "text": "Brain teaser"
-          },
-          {
-            "type": "list",
-            "ordered": true,
-            "items": [
-              "How much AC power will be received from a solar panel rated 575 W (DC) through an inverter of 75 per cent efficiency?"
-            ]
+            "type": "callout",
+            "tone": "note",
+            "title": "Brain teaser",
+            "text": "How much AC power will be received from a DC solar panel rating 575 DC watt-75% inverting efficiency?"
           }
         ]
       }

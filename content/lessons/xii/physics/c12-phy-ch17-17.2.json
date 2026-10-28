@@ -13,18 +13,29 @@
           "source_document_id": "bfc68b7f-dac5-5e57-a286-814710fe09bc",
           "pdf_from": 89,
           "pdf_to": 90,
-          "note": "Topic 17.2 with Example 17.2 and boxes (PDF 89-90); Fig 17.4 redrawn; clamp meter and blood-sugar photographs described. A note gives the rms reading of Example 17.2. The check question is added."
+          "note": "Topic 17.2 as printed with Example 17.2 and the boxes (PDF 89-90, printed 85-86); Fig 17.4 redrawn."
         }
       ],
       "body": {
         "blocks": [
           {
             "type": "paragraph",
-            "text": "An alternating current periodically reverses direction, so the voltage and current vary sinusoidally. A resistive load is one that does not store energy (as a capacitor or inductor does) but simply dissipates it as heat. The instantaneous power in a circuit is the power at any moment: P = VI (17.5). The maximum (peak) power occurs when the current and voltage are at their peak values Io and Vo; the mean power is the average over one complete cycle (Fig 17.4)."
+            "text": "An alternating current is a current that periodically reverses direction, causing the voltage and current to fluctuate sinusoidally. A resistive load is one that does not store energy (like a capacitor or inductor) and simply dissipates energy as heat."
+          },
+          {
+            "type": "callout",
+            "tone": "definition",
+            "title": "Instantaneous power",
+            "text": "The instantaneous power P in a circuit is the power at any given moment in time t."
+          },
+          {
+            "type": "equation",
+            "latex": "P = VI \\tag{17.5}",
+            "text_alt": "P = VI   (17.5)"
           },
           {
             "type": "paragraph",
-            "text": "For a sinusoidal AC in a resistor R, the maximum power is Pmax = Io^2 R (17.6) and the mean power is Pmean = Irms^2 R (17.7). Since Io = square root of 2 x Irms, Pmax = 2 Irms^2 R = 2 Pmean, so Pmean = Pmax / 2 (17.8). The mean power in a resistive load is half the maximum power: the instantaneous power reaches its maximum at certain points of the cycle but spends a lot of time at lower values, down to zero."
+            "text": "where V is the instantaneous voltage and I is the instantaneous current. The maximum or peak Pₘₐₓ occurs when the current and voltage are at their peak values, Iₒ and Vₒ respectively. Also the mean power Pₘₑₐₙ is the average power over one complete cycle of the AC waveform as shown in Fig.17.4."
           },
           {
             "type": "diagram",
@@ -39,19 +50,89 @@
             "text": "The printed Figure 17.4 also points a 'Peak voltage' arrow at VoIo. VoIo is the peak power, not a voltage, so that label is left out above."
           },
           {
-            "type": "heading",
-            "level": 2,
-            "text": "Example 17.2"
+            "type": "paragraph",
+            "text": "For a sinusoidal AC, let Iₒ be the maximum or peak value of the current while voltage Vₒ is the maximum or peak value of the voltage, then the maximum or peak power Pₘₐₓ is given by"
+          },
+          {
+            "type": "equation",
+            "latex": "P_{max} = I_o^2 R \\tag{17.6}",
+            "text_alt": "Pₘₐₓ = Iₒ²R   (17.6)"
           },
           {
             "type": "paragraph",
-            "text": "An alternating voltage of 220 V is applied across a 50 ohm resistor. Find the mean power in kilowatts. Solution: Pmax = V^2 / R = (220 V)^2 / 50 ohm = 968 W. The mean power is half: Pmean = 968 W / 2 = 484 W = 0.484 kW."
+            "text": "Also we have expression for the mean power Pₘₑₐₙ represented by"
+          },
+          {
+            "type": "equation",
+            "latex": "P_{mean} = I_{rms}^2 R \\tag{17.7}",
+            "text_alt": "Pₘₑₐₙ = Iᵣₘₛ²R   (17.7)"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{As} \\qquad I_o = \\sqrt{2}\\,I_{rms}",
+            "text_alt": "As   Iₒ = √2 Iᵣₘₛ"
+          },
+          {
+            "type": "paragraph",
+            "text": "so, using Eq. 17.6 becomes:"
+          },
+          {
+            "type": "equation",
+            "latex": "P_{max} = (\\sqrt{2}\\,I_{rms})^2 R = 2I_{rms}^2 R",
+            "text_alt": "Pₘₐₓ = (√2 Iᵣₘₛ)²R = 2Iᵣₘₛ²R"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{From Eq. 17.7;} \\quad IR_{rms}^2 = P_{mean}, \\quad \\text{thus}",
+            "text_alt": "From Eq. 17.7; IR²ᵣₘₛ = Pₘₑₐₙ, thus",
+            "book_errors": [
+              "IR²ᵣₘₛ",
+              "IR_{rms}^2"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book prints IR²ᵣₘₛ here; from Eq. 17.7 it is I²ᵣₘₛR = Pₘₑₐₙ (the square is on the current, not on R)."
+          },
+          {
+            "type": "equation",
+            "latex": "P_{max} = 2P_{mean}",
+            "text_alt": "Pₘₐₓ = 2Pₘₑₐₙ"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{or} \\qquad P_{mean} = \\frac{P_{max}}{2} \\tag{17.8}",
+            "text_alt": "or   Pₘₑₐₙ = Pₘₐₓ/2   (17.8)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Therefore, it can be concluded that the mean power in a resistive load is half the maximum power for a sinusoidal alternating current or voltage because the instantaneous power in an AC circuit varies over time. While the instantaneous power reaches at maximum value at certain points in the cycle, it spends significant time at zero or lower values, resulting in an average power that is half the peak value."
           },
           {
             "type": "callout",
             "tone": "note",
-            "title": "Interesting information",
-            "text": "A digital clamp meter is used for measuring AC and DC. Fascinating fact: scientists have converted human blood sugar into electricity."
+            "title": "Interesting Information",
+            "text": "Digital Clamp Meter For Measuring AC and DC"
+          },
+          {
+            "type": "example",
+            "title": "Example 17.2",
+            "problem": "An alternating voltage supplied across a resistor of 50 Ω has a voltage of 220 V. Calculate the mean power in kilo watt of the system.",
+            "steps": [
+              "R = 50 Ω and V = 220 V",
+              "We know that;\nPₘₐₓ = V²/R",
+              "Putting the values\nPₘₐₓ = (220 V)²/50 Ω = 968 W",
+              "As the mean power is half of the maximum (peak) power,\nPₘₑₐₙ = Pₘₐₓ/2 = 968 W/2"
+            ],
+            "answer": "= 484 W or 0.484 kW"
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Fascinating Fact",
+            "text": "Scientists have converted human blood sugar into electricity"
           }
         ]
       }
