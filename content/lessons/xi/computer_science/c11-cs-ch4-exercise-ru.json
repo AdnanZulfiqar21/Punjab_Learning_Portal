@@ -325,61 +325,55 @@
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "1. Explain how the ' extend() ' function works in python lists. Provide an example.\nPython list mein extend() kaise kaam karta hai? Misal dein.",
-            "explanation": "extend() list ka function hai jo ek hi baar mein kai items list ke aakhir mein jorta hai. Yeh doosri list (ya koi sequence) leta hai aur us ka har item usi order mein ek ek kar ke jorta hai.\n- Asal list badal jati hai (jitne items jure utni bari ho jati hai).\n- append() sirf ek item jorta hai; extend() ek call mein kai items jorta hai.\nMisal (kitab, 4.1.1.3):\nparty_list = [\"Invite friends\", \"Buy decorations\", \"Buy snacks\", \"Buy cold drinks\"]\nparty_list.extend([\"Party hats\", \"Streamers\"])   # add many items at once\nprint(party_list)\nprint(len(party_list))\nOutput:\n['Invite friends', 'Buy decorations', 'Buy snacks', 'Buy cold drinks', 'Party hats', 'Streamers']\n6\nDo naye items \"Party hats\" aur \"Streamers\" aakhir mein jur gaye aur list mein ab 6 items hain."
+            "explanation": "extend() doosri list (ya sequence) ke saare items usi order mein list ke aakhir mein jorta hai; asal list bari ho jati hai.\nappend() sirf ek item jorta hai; extend() ek call mein kai items.\nMisal: party_list.extend([\"Party hats\", \"Streamers\"]) dono items aakhir mein jorta hai, 4 items wali list 6 ki ho jati hai."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "2. Explain the potential issues which could arise when two variables reference the same list in a program? Provide an example.\nJab do variables ek hi list ko reference karein to kya problems ho sakti hain? Misal dein.",
-            "explanation": "(Yeh chapter se aage ki baat hai.) Python mein list_b = list_a nayi list nahi banata. Dono naam memory mein ek hi list ki taraf ishara (reference) karte hain; ise aliasing kehte hain.\nMasail (problems):\n- Ek naam se ki gayi tabdeeli (append, remove, update) doosre naam mein bhi nazar aati hai.\n- Program ke kisi aur hisse mein data ghalti se badal sakta hai, aur aise bugs (ghaltiyan) mushkil se milte hain.\n- Agar asal list bachani thi to woh bhi badal jati hai.\nHal: alag copy banayein: list_a.copy() ya list(list_a).\nMisal:\nlist_a = [10, 20, 30]\nlist_b = list_a          # list_b refers to the SAME list\nlist_b.append(40)\nprint(\"list_a:\", list_a)\nprint(\"list_b:\", list_b)\nlist_c = list_a.copy()   # a separate copy\nlist_c.append(50)\nprint(\"list_a:\", list_a)\nprint(\"list_c:\", list_c)\nOutput:\nlist_a: [10, 20, 30, 40]\nlist_b: [10, 20, 30, 40]\nlist_a: [10, 20, 30, 40]\nlist_c: [10, 20, 30, 40, 50]\nlist_b mein 40 jorne se list_a bhi badal gayi, magar copy list_c akeli badli."
+            "explanation": "(Chapter se aage ki baat.) list_b = list_a nayi list nahi banata; dono naam ek hi list ki taraf ishara karte hain (aliasing).\nEk naam se tabdeeli (maslan append) doosre mein bhi nazar aati hai, is liye data ghalti se badal kar bugs (ghaltiyan) bana sakta hai.\nMisal: list_a = [10, 20]; list_b = list_a; list_b.append(30) se list_a bhi [10, 20, 30] ho jati hai.\nHal: alag list ke liye list_a.copy() likhein."
           },
           {
             "type": "callout",
             "tone": "tip",
             "title": "Wazahat",
-            "text": "Socho ek hi ghar ke do naam hain: \"Ali ka ghar\" aur \"Number 5\". Kisi bhi naam se ghar mein naya kamra banao, ghar ek hi hai, dono naamon se badla hua nazar aayega. list_b = list_a bhi aisa hi hai: list ek hai, naam do. Alag ghar (copy) chahiye to .copy() likhna parta hai."
+            "text": "Socho ek ghar ke do naam hain: kisi bhi naam se kamra banao, ghar ek hi hai. list_b = list_a bhi aisa hai: list ek, naam do. Alag ghar chahiye to .copy() likho."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "3. Define a stack and explain the Last-In, First-Out (LIFO) principle.\nStack ki definition (tareef) bataiye aur LIFO principle (usool) samjhaiye.",
-            "explanation": "Stack aisa saada data structure hai jis mein items sirf ek sire (end) se, jise top kehte hain, jore aur nikale jate hain. Insertion (push) aur deletion (pop) dono top par hote hain.\nLIFO principle (Last-In, First-Out, yaani aakhir mein aaya, pehle gaya): jo item sab se aakhir mein jora gaya woh sab se pehle nikalta hai.\n- Push top par item jorta hai; pop top wala item nikalta hai.\n- Misal: mez par kitabon ke dher mein sirf oopar kitab rakh sakte hain ya oopar wali utha sakte hain. Book A, Book B aur Book C push hon to Book C (jo aakhir mein aayi) sab se pehle pop hogi."
+            "explanation": "Stack aisa data structure hai jis mein items sirf ek sire (top) par jore (push) aur nikale (pop) jate hain.\nLIFO (Last-In, First-Out, yaani aakhir mein aaya pehle gaya): jo item sab se aakhir mein jora woh sab se pehle nikalta hai.\nMisal: kitabon ke dher mein sab se oopar rakhi kitab pehle uthti hai."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "4. How does the stack help in balancing parentheses in an expression? Describe the process.\nStack expression mein brackets ka balance check karne mein kaise madad deta hai? Tareeqa bataiye.",
-            "explanation": "Balanced parentheses ka matlab hai ke har khulne wale bracket ( ka band karne wala bracket ) mojood ho. Stack khulne wale brackets ka hisaab rakhta hai (4.1.3.4).\nTareeqa:\n1. Expression ko baen se daen parhein.\n2. ( mile to use stack par push karein.\n3. ) mile to stack ka top pop karein.\n4. Agar khali stack se pop karna pare to brackets balanced nahi.\n5. Aakhir mein stack khali ho to balanced; khali na ho to balanced nahi.\nMisal: (3 + 4) * (5 - 2): push, pop, push, pop, aakhir mein stack khali, is liye balanced. ((3 + 4) * 2 mein ek ( stack par reh jata hai, is liye balanced nahi."
-          },
-          {
-            "type": "callout",
-            "tone": "tip",
-            "title": "Wazahat",
-            "text": "Yeh chhota program wahi steps chalata hai (output chala kar check kiya):\ndef is_balanced(expr):\n    stack = []\n    for ch in expr:\n        if ch == \"(\":\n            stack.append(ch)          # push every opening bracket\n        elif ch == \")\":\n            if not stack:             # nothing to match\n                return False\n            stack.pop()               # pop its matching (\n    return len(stack) == 0            # empty stack = balanced\n\nprint(is_balanced(\"(3 + 4) * (5 - 2)\"))\nprint(is_balanced(\"((3 + 4) * 2\"))\nprint(is_balanced(\"(3 + 4)) * 2\"))\nOutput:\nTrue\nFalse\nFalse\nPehla expression balanced (True) hai; doosre mein ek ( bach gaya aur teesre mein ek ) ke liye stack khali tha, is liye dono False hain."
+            "explanation": "Stack khulne wale brackets ka hisaab rakhta hai: expression baen se daen parhein, har ( push karein aur har ) par ek pop karein.\nAgar ) aaye aur stack khali ho to balanced nahi.\nAakhir mein stack khali ho to balanced; koi ( bach jaye to balanced nahi."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "5. Differentiate between the Enqueue and Dequeue operations of queue.\nQueue ke Enqueue aur Dequeue operations mein farq bataiye.",
-            "explanation": "Enqueue aur Dequeue queue ke do bunyadi operations hain (4.1.4.2); queue FIFO (First-In, First-Out, yaani pehle aaya pehle gaya) par chalti hai.\n- Enqueue item jorta hai; Dequeue item nikalta hai.\n- Enqueue queue ke peeche (rear) kaam karta hai; Dequeue aage (front) se.\n- Enqueue aisa hai jaise line ke aakhir mein naya banda khara ho jaye; Dequeue aisa hai jaise aage wale bande ki baari aa jaye.\n- Enqueue se queue bari hoti hai; Dequeue se chhoti hoti hai aur nikala hua item wapas milta hai.\n- Python ke queue module mein q.put(item) enqueue aur q.get() dequeue hai."
+            "explanation": "Enqueue queue ke peeche (rear) item jorta hai; queue bari hoti hai.\nDequeue aage (front) wala item nikal kar deta hai; queue chhoti hoti hai.\nDono FIFO (pehle aaya pehle gaya) par chalte hain, jaise line ke aakhir mein log lagte hain aur aage wale ki baari aati hai."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "6. Explain how the concept of a queue is applied in a computer's job scheduling system?\nComputer ke job scheduling system mein queue ka concept (idea) kaise lagta hai?",
-            "explanation": "Job (task) scheduling mein computer intezar karte kaamon ko queue mein rakhta hai, ta ke woh aane ke order (FIFO) se hon, bilkul doctor ki waiting list ke mareezon ki tarah (4.1.5.3).\n- Enqueue: naya kaam aaye (maslan aap Print dabayein) to woh queue ke aakhir mein jurta hai.\n- Dequeue: jab computer (processor ya printer) tayyar ho, woh sab se aage wala kaam nikal kar chalata hai.\n- Queue kyun: kaam aane ke order mein hote hain, koi reh nahi jata, aur sab ke saath barabar (fair) aur tez kaam hota hai.\nMisal: print spooling, jahan printer ko bheje gaye documents bhejne ke order mein ek ek kar ke chhapte hain."
+            "explanation": "Processor ya printer ke intezar mein kaam queue mein rakhe jate hain aur aane ke order (FIFO) se hote hain.\nNaya kaam (maslan print job) peeche enqueue hota hai; device faarigh ho to aage wala kaam dequeue ho kar chalta hai.\nIs tarah har kaam barabar (fair) aur tarteeb se hota hai, jaise print spooling."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "7. How can lists be utilized to implement other data structures?\nLists se doosre data structures kaise banaye ja sakte hain?",
-            "explanation": "List lachakdar (flexible) aur tarteeb wala collection hai, is liye doosre data structures isi se banaye jate hain (4.1.1.4, 4.2.3).\n- Stack (LIFO): append() top par push karta hai aur pop() top wala item nikalta hai.\n- Queue (FIFO): append() peeche jorta hai aur pop(0) aage se nikalta hai.\n- Tree: har node apne children ki list rakhta hai (4.1.6.1 ki FamilyMember class mein self.children = []).\n- Graph: har vertex apne neighbours (parosiyon) ki list rakhta hai (adjacency list).\n- Matrix: lists ki list, jis ki har andar wali list ek row (qatar) hai.\nMisal: stack = []; stack.append(5); stack.append(8); stack.pop() 8 wapas deta hai."
+            "explanation": "List lachakdar (flexible) aur tarteeb wala collection hai, is liye doosre data structures is se bante hain.\nStack: append() se push, pop() se top wala item nikalna.\nQueue: append() se peeche jorna, pop(0) se aage se nikalna.\nTree/graph: har node apne children ya neighbours (parosiyon) ki list rakhta hai."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "8. Differentiate between the Depth-First Search (DFS) and Breadth-First Search (BFS).\nDepth-First Search (DFS) aur Breadth-First Search (BFS) mein farq bataiye.",
-            "explanation": "DFS aur BFS graph ya tree ko traverse karne (saare nodes dekhne) ke do tareeqe hain (4.1.8.3, 4.3.2, 4.3.3).\n- Tareeqa: DFS har branch (shaakh) mein jitna gehra ja sake jata hai, phir wapas (backtrack) aata hai; BFS agle level par jane se pehle vertex ke saare qareebi neighbours (poora level) dekhta hai.\n- Data structure: DFS stack (LIFO) istemal karta hai; BFS queue (FIFO).\n- Figure 4.13 ke tree par order: DFS 1, 2, 5, 6, 3, 7, 4, 8, 9; BFS 1, 2, 3, 4, 5, 6, 7, 8, 9.\n- Istemal: DFS gehri talaash aur backtracking wale masail (jaise maze) ke liye; BFS unweighted graph mein sab se chhota raasta dhoondta hai aur level ba level dekhta hai."
+            "explanation": "DFS har branch (shaakh) mein jitna gehra ja sake jata hai, phir wapas (backtrack) aata hai; stack istemal karta hai.\nBFS aage jane se pehle vertex ke saare neighbours (level ba level) dekhta hai; queue istemal karta hai.\nBFS unweighted graph mein sab se chhota raasta dhoondta hai; DFS maze aur backtracking ke liye munasib hai."
           },
           {
             "type": "heading",

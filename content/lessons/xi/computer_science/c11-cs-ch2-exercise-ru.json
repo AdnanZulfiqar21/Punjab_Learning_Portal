@@ -365,61 +365,55 @@
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "1. Explain the purpose of using comments in Python code?\n(Python code mein comments ka maqsad samjhaiye.)",
-            "explanation": "Comments program ki woh lines hain jinhein Python interpreter chalata (execute) nahi. Yeh code ke baare mein wazahat ya notes dene ke liye hoti hain.\nMaqsad:\n1. Batana ke code kya karta hai, taake program parhna aur samajhna aasan ho.\n2. Doosre programmers (aur baad mein khud hamein) code samajhne aur maintain karne mein madad.\n3. Output note karna, ya testing ke dauran koi line aarzi taur par band karna.\nQismein:\n- Single-line comment: # se shuru\n- Multi-line comment: shuru aur aakhir mein triple quotes (''' ... ''')\nMisal:\n# This is a single-line comment\nprint(\"K2 is the second-highest mountain in the world\")\n'''\nThis is a multi-line comment.\n'''"
+            "explanation": "Comments program ki woh lines hain jinhein Python interpreter chalata (execute) nahi. Yeh code ke baare mein wazahat ya notes dene ke liye hoti hain.\nComments program ki woh lines hain jo Python interpreter chalata (execute) nahi; yeh code ke baare mein notes hain.\nMaqsad: batana ke code kya karta hai, taake program parhna, samajhna aur maintain karna aasan ho (doosre programmers ke liye bhi).\nSingle-line comment # se shuru hota hai; multi-line comment triple quotes (''' ... ''') ke darmiyan likha jata hai."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "2. Describe the difference between integer and float data types in Python. Provide an example of each.\n(Integer aur float data types ka farq misaal ke saath.)",
-            "explanation": "1. Integer (int): poore (whole) numbers, bina decimal point ke, positive ya negative. Misal: age = 17\n2. Float (float): decimal point wale numbers. Misal: price = 19.99\nFarq:\n- int mein fraction (kasar) nahi; float mein hota hai.\n- / se division hamesha float deta hai (7 / 2 = 3.5), aur // poora number (7 // 2 = 3).\n- Input ko poore number ke liye int() aur decimal ke liye float() se badalte hain, maslan int(input(\"Enter your age: \")) aur float(input(\"Enter your height in meters: \")).\nMisal:\nx = 10\ny = 2.5\nprint(type(x), type(y))\nOutput: <class 'int'> <class 'float'>"
+            "explanation": "1. Integer (int): poore (whole) numbers, bina decimal point ke, positive ya negative. Misal: age = 17\nint: poore (whole) numbers, bina decimal point ke, maslan age = 17.\nfloat: decimal point wale numbers, maslan price = 19.99.\nint mein fraction (kasar) nahi hota, float mein hota hai (aur / hamesha float deta hai: 7 / 2 = 3.5)."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "3. Define operator precedence and give an example of an expression where operator precedence affects the result.\n(Operator precedence ki definition aur misaal.)",
-            "explanation": "Operator precedence woh tarteeb hai jis mein expression ke operations hote hain; zyada precedence wala operator pehle chalta hai.\nPython mein tarteeb (sab se pehle oopar):\n1. Brackets ()\n2. Exponentiation (power) **\n3. Multiplication *, Division /, Floor division // aur Modulus %\n4. Addition + aur Subtraction -\nMisal:\n3 + 2 * 5 = 3 + 10 = 13 (pehle zarb)\n(3 + 2) * 5 = 5 * 5 = 25 (pehle bracket)\nWohi numbers precedence ki wajah se 13 ya 25 dete hain, is liye apni marzi ki tarteeb ke liye brackets lagate hain."
-          },
-          {
-            "type": "callout",
-            "tone": "tip",
-            "title": "Wazahat",
-            "text": "Yaad rakhne ka tareeqa: pehle bracket, phir power, phir zarb/taqseem/modulus, aakhir mein jama/tafreeq. Isi liye 3 + 2 * 5 mein pehle 2 * 5 = 10 hota hai, phir 3 + 10 = 13."
+            "explanation": "Operator precedence woh tarteeb hai jis mein expression ke operations hote hain; zyada precedence wala operator pehle chalta hai.\nOperator precedence woh tarteeb hai jis mein expression ke operators chalte hain; zyada precedence wala pehle chalta hai.\nTarteeb: () phir ** phir *, /, //, % phir +, -.\nMisal: 3 + 2 * 5 = 13 (pehle zarb), magar (3 + 2) * 5 = 25 (pehle bracket)."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "4. How does the short hand if-else statement differ from the regular if-else statement?\n(Short hand if-else aam if-else se kaise alag hai?)",
-            "explanation": "Dono condition ke mutabiq do kaamon mein se ek chunte hain, magar likhne ka tareeqa alag hai.\nAam (regular) if-else:\n- Kai lines mein, if aur else ke indented blocks ke saath.\n- Har block mein kai statements, aur zyada conditions ke liye elif.\ntemperature = 15\nif temperature > 30:\n    print(\"It's a hot day\")\nelse:\n    print(\"It's not a hot day\")\nShort hand if-else:\n- Ek line mein: action_if_true if condition else action_if_false\n- Sirf ek saada kaam (ya value) ke liye; code chhota (compact) ho jata hai.\nprint(\"It's a hot day\") if temperature > 30 else print(\"It's not a hot day\")\nDono ka output: It's not a hot day"
+            "explanation": "Dono condition ke mutabiq do kaamon mein se ek chunte hain, magar likhne ka tareeqa alag hai.\nDono condition ke mutabiq do kaamon mein se ek chunte hain.\nAam (regular) if-else: kai lines mein, indented blocks ke saath; har block mein kai statements (aur elif) ho sakte hain.\nShort hand if-else: ek line mein, har taraf sirf ek saada kaam, maslan print(\"It's a hot day\") if temperature > 30 else print(\"It's not a hot day\")."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "5. Explain the use of the range() function in a for loop?\n(for loop mein range() ka istemal.)",
-            "explanation": "range() function numbers ki sequence banata hai, aur for loop is se kisi block ko fixed martaba dohrata hai.\nShaklein:\n- range(stop): 0 se stop - 1 tak\n- range(start, stop): start se stop - 1 tak\n- range(start, stop, step): start se, har dafa step barha kar, stop se pehle tak\nstop wala number khud kabhi shamil nahi hota.\nMisal:\nfor i in range(5):\n    print(i)\nOutput: 0 1 2 3 4 (har ek nayi line par)\nfor i in range(2, 11, 2):\n    print(i)\nOutput: 2 4 6 8 10 (even numbers)"
+            "explanation": "range() function numbers ki sequence banata hai, aur for loop is se kisi block ko fixed martaba dohrata hai.\nrange() numbers ki sequence banata hai jis se for loop kisi block ko fixed martaba dohrata hai.\nShaklein: range(stop), range(start, stop), range(start, stop, step); stop wala number khud kabhi shamil nahi hota.\nMisal: for i in range(5): print(i) se 0 1 2 3 4 print hote hain."
           },
           {
             "type": "callout",
             "tone": "tip",
             "title": "Wazahat",
-            "text": "range(2, 11, 2) ka matlab: 2 se shuru karo, har dafa 2 barhao, aur 11 se pehle ruk jao. Is liye 2, 4, 6, 8, 10 aate hain; 11 khud kabhi nahi aata."
+            "text": "range(2, 11, 2): 2 se shuru karo, har dafa 2 barhao, 11 se pehle ruk jao, yani 2, 4, 6, 8, 10; 11 khud kabhi nahi aata."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "6. Explain how default parameters work in Python functions.\n(Default parameters kaise kaam karte hain?)",
-            "explanation": "Default parameter woh parameter hai jise function banate waqt hi value de di jaye. Function call karte waqt agar us ka argument na diya jaye to default value istemal hoti hai; agar diya jaye to woh default ki jagah le leta hai.\nMisal:\ndef greet(name=\"Student\"):\n    return \"As-Salaam-Alaikum, \" + name + \"!\"\n\nprint(greet())\nprint(greet(\"Ali\"))\nOutput:\nAs-Salaam-Alaikum, Student!\nAs-Salaam-Alaikum, Ali!\nPehli call default \"Student\" leti hai; doosri \"Ali\" bhejti hai. Default parameters argument ko optional (ikhtiyari) aur function ko flexible banate hain."
+            "explanation": "Default parameter woh parameter hai jise function banate waqt hi value de di jaye. Function call karte waqt agar us ka argument na diya jaye to default value istemal hoti hai; agar diya jaye to woh default ki jagah le leta hai.\nDefault parameter ko function banate waqt hi value di jati hai, maslan def greet(name=\"Student\").\nArgument na diya jaye to default value istemal hoti hai: greet() deta hai \"As-Salaam-Alaikum, Student!\".\nArgument diya jaye to woh default ki jagah le leta hai: greet(\"Ali\") deta hai \"As-Salaam-Alaikum, Ali!\"."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "7. Explain why modular programming is useful in Python.\n(Modular programming kyun faida mand hai?)",
-            "explanation": "Modular programming program ko chhote, sambhalne ke qabil aur dobara kaam aane wale hisson (modules) mein baantna hai. Module ek .py file hai jis mein functions, variables aur classes hoti hain.\nFaide:\n1. Complex program sambhalna aasan: har module ek hissa sambhalta hai.\n2. Code reuse: module ek dafa likh kar jahan chahein import (import greetings); code duplication (dohrao) nahi hota.\n3. Mukhtalif developers alag modules par alag alag kaam kar sakte hain.\n4. Program parhna, test, debug aur maintain karna aasan; ghalti ek module tak rehti hai.\n5. Mile jule modules packages mein rakhe ja sakte hain (maslan ecommerce package mein products.py, orders.py).\nMisal: greetings.py mein greeting function hai aur main.py use import kar ke main() function se call karta hai."
+            "explanation": "Modular programming program ko chhote, sambhalne ke qabil aur dobara kaam aane wale hisson (modules) mein baantna hai. Module ek .py file hai jis mein functions, variables aur classes hoti hain.\nModular programming program ko chhote, dobara kaam aane wale hisson (modules, .py files) mein baantna hai.\n1. Complex program sambhalna aasan, har module ek hissa sambhalta hai.\n2. Code ek dafa likh kar import se dobara istemal hota hai; duplication (dohrao) nahi hota.\n3. Test, debug aur maintain karna aasan, aur team ke log alag modules par kaam kar sakte hain."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "8. Explain the difference between a class and an object in Python.\n(Class aur object ka farq.)",
-            "explanation": "Class ek template ya blueprint (naqsha) hai jo batata hai ke object kaisa ho (attributes aur methods). Object us class se bani asal cheez hai; yeh class ka instance hai jis ki apni values hoti hain.\nMisal: toy car ka plan (rang, size, wheels) class hai; us se bani har asal gari, jaise laal gari aur neeli gari, object hai.\n- Class ek dafa class keyword se banti hai; us se kai objects bante hain.\n- Class sirf plan hai; objects asal data rakhte hain.\nclass ToyCar:\n    def __init__(self, color):\n        self.color = color\n    def describe(self):\n        return \"This toy car is \" + self.color\n\ncar1 = ToyCar(\"red\")\ncar2 = ToyCar(\"blue\")\nprint(car1.describe())\nprint(car2.describe())\nOutput:\nThis toy car is red\nThis toy car is blue"
+            "explanation": "Class ek template ya blueprint (naqsha) hai jo batata hai ke object kaisa ho (attributes aur methods). Object us class se bani asal cheez hai; yeh class ka instance hai jis ki apni values hoti hain.\nClass ek blueprint (naqsha) hai jo objects ke attributes aur methods tay karta hai; yeh class keyword se ek dafa banti hai.\nObject class se bani asal cheez (instance) hai jis ki apni values hoti hain; ek class se kai objects bante hain.\nMisal: toy car ka plan class hai; us se bani laal aur neeli gari objects hain."
           },
           {
             "type": "heading",

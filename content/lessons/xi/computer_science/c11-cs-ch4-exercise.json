@@ -320,49 +320,49 @@
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "1. Explain how the ' extend() ' function works in python lists. Provide an example.",
-            "explanation": "extend() is a list function that adds several items at once to the end of a list. It takes another list (or any sequence) and adds each of its items one by one, in the same order.\n- The original list is changed (it grows by the number of items added).\n- append() adds only one item; extend() adds many items in one call.\nExample (book, 4.1.1.3):\nparty_list = [\"Invite friends\", \"Buy decorations\", \"Buy snacks\", \"Buy cold drinks\"]\nparty_list.extend([\"Party hats\", \"Streamers\"])   # add many items at once\nprint(party_list)\nprint(len(party_list))\nOutput:\n['Invite friends', 'Buy decorations', 'Buy snacks', 'Buy cold drinks', 'Party hats', 'Streamers']\n6\nThe two new items \"Party hats\" and \"Streamers\" are added at the end, and the list now has 6 items."
+            "explanation": "extend() adds all the items of another list (or sequence) to the end of a list, in the same order; the original list grows.\nappend() adds only one item; extend() adds many items in one call.\nExample: party_list.extend([\"Party hats\", \"Streamers\"]) adds both items at the end, so the 4-item list becomes 6 items."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "2. Explain the potential issues which could arise when two variables reference the same list in a program? Provide an example.",
-            "explanation": "(Beyond the chapter.) In Python, list_b = list_a does not make a new list. Both names now refer to the same list in memory (aliasing).\nIssues:\n- A change made through one name (append, remove, update) also appears through the other name.\n- Data can be changed by mistake in another part of the program, which causes bugs that are hard to find.\n- If a copy was wanted to keep the original safe, the original is lost.\nSolution: make a separate copy with list_a.copy() or list(list_a).\nExample:\nlist_a = [10, 20, 30]\nlist_b = list_a          # list_b refers to the SAME list\nlist_b.append(40)\nprint(\"list_a:\", list_a)\nprint(\"list_b:\", list_b)\nlist_c = list_a.copy()   # a separate copy\nlist_c.append(50)\nprint(\"list_a:\", list_a)\nprint(\"list_c:\", list_c)\nOutput:\nlist_a: [10, 20, 30, 40]\nlist_b: [10, 20, 30, 40]\nlist_a: [10, 20, 30, 40]\nlist_c: [10, 20, 30, 40, 50]\nAppending 40 through list_b also changed list_a, but the copy list_c changed alone."
+            "explanation": "(Beyond the chapter.) list_b = list_a does not copy the list; both names refer to the same list (aliasing).\nA change through one name (e.g. append) also appears through the other, so data can change by mistake and cause hard-to-find bugs.\nExample: list_a = [10, 20]; list_b = list_a; list_b.append(30) makes list_a [10, 20, 30] too.\nFix: use list_a.copy() to make a separate list."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "3. Define a stack and explain the Last-In, First-Out (LIFO) principle.",
-            "explanation": "A stack is a simple data structure in which items are added and removed only at one end, called the top. Both insertion (push) and deletion (pop) happen at the top.\nLIFO principle (Last-In, First-Out): the item added last is the first one to be removed.\n- Push adds an item on the top; pop removes the top item.\n- Example: in a stack of books on a desk you can only put a book on top or take the top book off. If Book A, Book B and Book C are pushed, Book C (the last in) is popped first."
+            "explanation": "A stack is a data structure in which items are added (push) and removed (pop) only at one end, called the top.\nLIFO (Last-In, First-Out): the item added last is removed first.\nExample: in a pile of books, the book put on top last is taken off first."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "4. How does the stack help in balancing parentheses in an expression? Describe the process.",
-            "explanation": "Balanced parentheses means every opening parenthesis ( has a matching closing parenthesis ). A stack keeps track of the opening parentheses (4.1.3.4).\nProcess:\n1. Read the expression from left to right.\n2. When ( is found, push it onto the stack.\n3. When ) is found, pop the top of the stack.\n4. If you try to pop from an empty stack, the parentheses are not balanced.\n5. At the end, if the stack is empty they are balanced; if it is not empty they are not balanced.\nExample: (3 + 4) * (5 - 2): push, pop, push, pop, the stack ends empty, so it is balanced. In ((3 + 4) * 2 one ( is left on the stack, so it is not balanced."
+            "explanation": "A stack keeps track of the opening parentheses: read the expression left to right, push each ( and pop one for each ).\nIf a ) comes when the stack is empty, the expression is not balanced.\nAt the end, an empty stack means balanced; any ( left on the stack means not balanced."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "5. Differentiate between the Enqueue and Dequeue operations of queue.",
-            "explanation": "Enqueue and Dequeue are the two primary operations of a queue (4.1.4.2), which follows FIFO (First-In, First-Out).\n- Enqueue adds an item; Dequeue removes an item.\n- Enqueue works at the back (rear) of the queue; Dequeue works at the front.\n- Enqueue is like a new person joining the end of a line; Dequeue is like serving the person at the front.\n- Enqueue increases the size of the queue; Dequeue decreases it and returns the removed item.\n- In Python's queue module: q.put(item) enqueues and q.get() dequeues."
+            "explanation": "Enqueue adds an item at the rear (back) of the queue, so the queue grows.\nDequeue removes and returns the item at the front, so the queue shrinks.\nBoth follow FIFO, like people joining the end of a line and being served from the front."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "6. Explain how the concept of a queue is applied in a computer's job scheduling system?",
-            "explanation": "In job (task) scheduling, the computer keeps the tasks waiting to be processed in a queue, so they are handled in the order they arrive (FIFO), like patients on a doctor's waiting list (4.1.5.3).\n- Enqueue: when a new task arrives (e.g. you press Print), it is added to the end of the queue.\n- Dequeue: when the computer (processor or printer) is ready, it removes the first task from the front and processes it.\n- Why a queue: tasks are processed in order of arrival, none is skipped, and every task is treated fairly and efficiently.\nExample: print spooling, where documents sent to a printer are printed one by one in the order they were sent."
+            "explanation": "Tasks waiting for the processor or printer are kept in a queue and handled in order of arrival (FIFO).\nA new task (e.g. a print job) is enqueued at the rear; when the device is free, the front task is dequeued and processed.\nSo every task is handled fairly and in order, e.g. print spooling."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "7. How can lists be utilized to implement other data structures?",
-            "explanation": "A list is a flexible, ordered collection, so it is used as the building block of other data structures (4.1.1.4, 4.2.3).\n- Stack (LIFO): append() pushes an item on the top and pop() removes the top item.\n- Queue (FIFO): append() adds at the back and pop(0) removes from the front.\n- Tree: each node keeps a list of its children (self.children = [] in the FamilyMember class, 4.1.6.1).\n- Graph: each vertex keeps a list of its neighbours (adjacency list).\n- Matrix: a list of lists, where each inner list is a row.\nExample: stack = []; stack.append(5); stack.append(8); stack.pop() returns 8."
+            "explanation": "A list is a flexible, ordered collection, so other data structures can be built on it.\nStack: append() pushes and pop() removes the top item.\nQueue: append() adds at the back and pop(0) removes from the front.\nTree/graph: each node keeps a list of its children or neighbours."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "8. Differentiate between the Depth-First Search (DFS) and Breadth-First Search (BFS).",
-            "explanation": "DFS and BFS are the two ways to traverse a graph or tree (4.1.8.3, 4.3.2, 4.3.3).\n- Method: DFS goes as far (deep) as possible along each branch before backtracking; BFS visits all immediate neighbours of a vertex (the whole level) before moving to the next level.\n- Data structure: DFS uses a stack (LIFO); BFS uses a queue (FIFO).\n- Order on the tree of Figure 4.13: DFS gives 1, 2, 5, 6, 3, 7, 4, 8, 9; BFS gives 1, 2, 3, 4, 5, 6, 7, 8, 9.\n- Use: DFS suits deep exploration and backtracking problems such as mazes; BFS finds the shortest path in unweighted graphs and explores level by level."
+            "explanation": "DFS goes as deep as possible along one branch before backtracking; it uses a stack.\nBFS visits all neighbours of a vertex (level by level) before going deeper; it uses a queue.\nBFS finds the shortest path in unweighted graphs; DFS suits mazes and backtracking."
           },
           {
             "type": "heading",

@@ -358,49 +358,49 @@
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "1. Explain the purpose of using comments in Python code?",
-            "explanation": "Comments are lines in a program that the Python interpreter does not execute. They are used to give explanations or notes about the code.\nPurpose:\n1. They explain what the code does, so the program is easy to read and understand.\n2. They help other programmers (and ourselves later) to understand and maintain the code.\n3. They can be used to note the output or to temporarily switch off a line while testing.\nTypes:\n- Single-line comment: starts with #\n- Multi-line comment: written between triple quotes (''' ... ''') at the beginning and end.\nExample:\n# This is a single-line comment\nprint(\"K2 is the second-highest mountain in the world\")\n'''\nThis is a multi-line comment.\n'''"
+            "explanation": "Comments are lines that the Python interpreter does not execute; they are notes about the code.\nPurpose: they explain what the code does, so the program is easy to read, understand and maintain (also for other programmers).\nA single-line comment starts with #; a multi-line comment is written between triple quotes (''' ... ''')."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "2. Describe the difference between integer and float data types in Python. Provide an example of each.",
-            "explanation": "1. Integer (int) stores whole numbers without a decimal point, positive or negative. Example: age = 17\n2. Float (float) stores numbers with a decimal point (decimal numbers). Example: price = 19.99\nDifferences:\n- int has no fractional part; float has a fractional part.\n- Dividing with / always gives a float (7 / 2 = 3.5), while // gives a whole-number result (7 // 2 = 3).\n- Input is converted with int() for whole numbers and float() for decimal numbers, e.g. int(input(\"Enter your age: \")) and float(input(\"Enter your height in meters: \")).\nExample:\nx = 10\ny = 2.5\nprint(type(x), type(y))\nOutput: <class 'int'> <class 'float'>"
+            "explanation": "int stores whole numbers without a decimal point, e.g. age = 17.\nfloat stores numbers with a decimal point, e.g. price = 19.99.\nint has no fractional part; float has one (and / always gives a float: 7 / 2 = 3.5)."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "3. Define operator precedence and give an example of an expression where operator precedence affects the result.",
-            "explanation": "Operator precedence is the order in which operations are performed in an expression; operators with higher precedence are evaluated first.\nOrder in Python (highest first):\n1. Parentheses ()\n2. Exponentiation **\n3. Multiplication *, Division /, Floor division // and Modulus %\n4. Addition + and Subtraction -\nExample:\n3 + 2 * 5 = 3 + 10 = 13 (multiplication first)\n(3 + 2) * 5 = 5 * 5 = 25 (parentheses first)\nThe same numbers give 13 or 25 depending on precedence, so parentheses are used to make the desired order clear."
+            "explanation": "Operator precedence is the order in which the operators of an expression are evaluated; higher precedence is evaluated first.\nOrder: () then ** then *, /, //, % then +, -.\nExample: 3 + 2 * 5 = 13 (multiplication first), but (3 + 2) * 5 = 25 (parentheses first)."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "4. How does the short hand if-else statement differ from the regular if-else statement?",
-            "explanation": "Both choose between two actions depending on a condition, but they are written differently.\nRegular if-else:\n- Written on several lines with an indented block for if and for else.\n- Each block can contain many statements, and elif can be added for more conditions.\ntemperature = 15\nif temperature > 30:\n    print(\"It's a hot day\")\nelse:\n    print(\"It's not a hot day\")\nShort hand if-else:\n- Written on one line: action_if_true if condition else action_if_false\n- Suitable only for one simple action (or value) each way; it makes code compact.\nprint(\"It's a hot day\") if temperature > 30 else print(\"It's not a hot day\")\nBoth print: It's not a hot day"
+            "explanation": "Both choose between two actions depending on a condition.\nRegular if-else: written on several lines with indented blocks; each block can hold many statements (and elif can be added).\nShort hand if-else: written on one line for one simple action each way, e.g. print(\"It's a hot day\") if temperature > 30 else print(\"It's not a hot day\")."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "5. Explain the use of the range() function in a for loop?",
-            "explanation": "The range() function generates a sequence of numbers, and a for loop uses it to repeat a block a fixed number of times.\nForms:\n- range(stop): from 0 up to stop - 1\n- range(start, stop): from start up to stop - 1\n- range(start, stop, step): from start, increasing by step, stopping before stop\nThe stop value itself is never included.\nExample:\nfor i in range(5):\n    print(i)\nOutput: 0 1 2 3 4 (each on a new line)\nfor i in range(2, 11, 2):\n    print(i)\nOutput: 2 4 6 8 10 (even numbers)"
+            "explanation": "range() generates a sequence of numbers that a for loop uses to repeat a block a fixed number of times.\nForms: range(stop), range(start, stop), range(start, stop, step); the stop value itself is never included.\nExample: for i in range(5): print(i) prints 0 1 2 3 4."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "6. Explain how default parameters work in Python functions.",
-            "explanation": "A default parameter is a parameter that is given a value in the function definition. If no argument is passed for it when the function is called, the default value is used; if an argument is passed, it replaces the default.\nExample:\ndef greet(name=\"Student\"):\n    return \"As-Salaam-Alaikum, \" + name + \"!\"\n\nprint(greet())\nprint(greet(\"Ali\"))\nOutput:\nAs-Salaam-Alaikum, Student!\nAs-Salaam-Alaikum, Ali!\nThe first call uses the default \"Student\"; the second call passes \"Ali\". Default parameters make arguments optional and the function more flexible."
+            "explanation": "A default parameter is given a value in the function definition, e.g. def greet(name=\"Student\").\nIf no argument is passed, the default is used: greet() gives \"As-Salaam-Alaikum, Student!\".\nIf an argument is passed, it replaces the default: greet(\"Ali\") gives \"As-Salaam-Alaikum, Ali!\"."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "7. Explain why modular programming is useful in Python.",
-            "explanation": "Modular programming divides a program into smaller, manageable and reusable pieces called modules. A module is a .py file that contains functions, variables and classes.\nIt is useful because:\n1. Complex programs become simpler to manage: each module handles one part.\n2. Code is reused: a module is written once and imported wherever needed (import greetings), avoiding code duplication.\n3. Different developers can work on different modules independently.\n4. Programs are easier to read, test, debug and maintain, as errors stay within one module.\n5. Related modules can be organized into packages (e.g. an ecommerce package with products.py and orders.py).\nExample: greetings.py holds the greeting function and main.py imports it and calls it from its main() function."
+            "explanation": "Modular programming divides a program into smaller, reusable files called modules (.py files).\n1. Complex programs become easier to manage, as each module handles one part.\n2. Code is written once and reused with import, avoiding duplication.\n3. Programs are easier to test, debug and maintain, and team members can work on different modules."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "8. Explain the difference between a class and an object in Python.",
-            "explanation": "A class is a template or blueprint that describes what an object should be like (its attributes and methods). An object is an actual thing created from that class; it is an instance of the class with its own values.\nExample: the plan of a toy car (colour, size, wheels) is the class; each actual toy car made from it, such as a red car and a blue car, is an object.\n- A class is defined once with the keyword class; many objects can be created from it.\n- A class is only a plan; objects hold real data.\nclass ToyCar:\n    def __init__(self, color):\n        self.color = color\n    def describe(self):\n        return \"This toy car is \" + self.color\n\ncar1 = ToyCar(\"red\")\ncar2 = ToyCar(\"blue\")\nprint(car1.describe())\nprint(car2.describe())\nOutput:\nThis toy car is red\nThis toy car is blue"
+            "explanation": "A class is a blueprint (template) that defines the attributes and methods of objects; it is defined once with the keyword class.\nAn object is an actual instance created from a class, with its own values; many objects can be created from one class.\nExample: the plan of a toy car is the class; a red car and a blue car made from it are objects."
           },
           {
             "type": "heading",

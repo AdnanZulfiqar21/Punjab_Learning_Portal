@@ -323,61 +323,61 @@
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "1. Differentiate between well-defined and ill-defined problems within the realm of computational problem-solving.\n(Computational problem-solving mein well-defined aur ill-defined problems mein farq bataiye.)",
-            "explanation": "1. Well-defined problems: goals, inputs, process aur outputs saaf hote hain, is liye un ka algorithm likha ja sakta hai.\n   Misal: number even hai ya nahi: goal (even hai?), input (ek integer), process (2 se taqseem check), output (even ya odd).\n2. Ill-defined problems: in ki definition saaf nahi hoti; goals aur requirements gol mol (vague) hote hain, is liye jab tak saaf na kiye jayen algorithm se seedha hal nahi hote.\n   Misal: \"Pakistan mein taleem behtar karna\": goal bohat wasee hai; yeh tay nahi ke kitna fund, kaise teachers ya kaunsa material chahiye.\nAham farq: well-defined masla exact steps mein badal sakta hai; ill-defined masle ko pehle saaf aur napne ke qabil goals mein torna parta hai."
+            "explanation": "1. Well-defined problems: goals, inputs, process aur outputs saaf hote hain, is liye un ka algorithm likha ja sakta hai.\nWell-defined problems: goals, inputs, process aur outputs saaf hote hain, is liye algorithm seedha likha ja sakta hai, maslan number even hai ya nahi.\nIll-defined problems: goals aur requirements gol mol (vague) hote hain, maslan \"Pakistan mein taleem behtar karna\".\nIll-defined masle ko pehle saaf aur napne ke qabil goals mein torna parta hai, phir woh hal hota hai."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "2. Outline the main steps involved in the Generate and Test algorithm.\n(Generate and Test algorithm ke basic qadam bayan kijiye.)",
-            "explanation": "Generate and Test algorithm mumkina hal bana kar aur har ek ko check kar ke jawab dhoondta hai. Steps:\n1. Generate: ek mumkina hal banao (random, tarteeb se ya kisi heuristic (andaze ke qaide) se).\n2. Test: is hal ko masle ki requirements ya constraints (shartein) se check karo.\n3. Agar sab shartein poori hon to isay sahi hal maan kar ruk jao.\n4. Agar nahi, to naya mumkina hal banao aur steps 1-3 dohrao.\n5. Tab ruko jab tasalli bakhsh hal mil jaye ya tamam mumkina hal check ho chukein.\n(Figure 3.2: Generator, possible solution, Tester, aur sahi hal par Stop.)\nMisal: 3-digit lock kholne ke liye 000, 001, 002 ... aazmao aur har code test karo jab tak lock na khule.\nYeh saada aur mukammal (exhaustive) hai magar bare maslon mein bohat slow ho sakta hai aur behtareen (optimal) hal ki guarantee nahi deta."
+            "explanation": "Generate and Test algorithm mumkina hal bana kar aur har ek ko check kar ke jawab dhoondta hai. Steps:\nGenerate and Test mumkina hal bana kar aur har ek ko check kar ke jawab dhoondta hai.\n1. Generate: ek mumkina hal banao.\n2. Test: use masle ki requirements (shartein) se check karo.\n3. Sahi ho to qabool kar ke ruk jao; warna naya hal bana kar dohrao, jab tak hal na mile ya sab aazma liye jayen."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "3. Compare tractable and intractable problems in the context of computational complexity.\n(Computational complexity ke hawale se tractable aur intractable problems ko compare kijiye.)",
-            "explanation": "Tractable problems:\n- Polynomial time (class P) mein hal ho jate hain; input barhne par waqt qaabil-e-intezam raftaar se barhta hai.\n- \"Efficiently solvable\" samjhe jate hain, bare input par bhi.\n- Misal: Merge Sort ya Quick Sort se list sort karna, O(n log n).\nIntractable problems:\n- Super-polynomial waqt chahiye, aksar input ke saath exponential ya factorial raftaar se barhta hai.\n- Bare input par exact hal amli taur par mumkin nahi, kyunke waqt be-qaboo ho jata hai.\n- Misal: Travelling Salesman Problem (NP-hard): 4 cities ke 4! = 24 routes, 10 cities ke 3,628,800 routes.\nDono qismein solvable hain; farq yeh hai ke zaroori waqt aur resources kitni tezi se barhte hain."
+            "explanation": "Tractable problems:\nTractable problems: polynomial time (class P) mein hal ho jate hain; waqt qaabil-e-intezam raftaar se barhta hai, maslan Merge Sort se sorting, O(n log n).\nIntractable problems: super-polynomial (aksar exponential ya factorial) waqt chahiye, is liye bare input par amli taur par hal mumkin nahi, maslan Travelling Salesman Problem.\nFarq yeh hai ke input barhne par zaroori waqt kitni tezi se barhta hai."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "4. Summarize the key idea behind Greedy Algorithms.\n(Greedy Algorithms ka basic khayal mukhtasar bayan kijiye.)",
-            "explanation": "Greedy algorithm hal ko faislon ki ek lari (sequence) se banata hai; har qadam par woh choice leta hai jo us waqt sab se achhi lage (locally optimal), is umeed par ke yeh choices mil kar sab se behtar mukammal (globally optimal) hal dein. Yeh tab istemal hota hai jab masle mein optimal substructure ho.\nMisal (coin change): Rs 10, 5, 2 aur 1 ke sikkon se Rs 18 dene hain to har dafa sab se bara sikka lo jo poora aaye: 10, phir 5, phir 2, phir 1: chaar sikke.\nGreedy algorithms aam taur par tez aur banane mein aasan hain, magar hamesha behtareen hal ki guarantee nahi dete, is liye pehle masla check karna zaroori hai."
+            "explanation": "Greedy algorithm hal ko faislon ki ek lari (sequence) se banata hai; har qadam par woh choice leta hai jo us waqt sab se achhi lage (locally optimal), is umeed par ke yeh choices mil kar sab se behtar mukammal (globally optimal) hal dein. Yeh tab istemal hota hai jab masle mein optimal substructure ho.\nGreedy algorithm har qadam par woh choice leta hai jo us waqt sab se achhi lage (locally optimal), is umeed par ke aakhir mein sab se behtar (globally optimal) hal mile.\nYeh tez aur banane mein aasan hai, magar hamesha behtareen hal ki guarantee nahi deta."
           },
           {
             "type": "callout",
             "tone": "tip",
             "title": "Wazahat",
-            "text": "Greedy ko aise samjhein: dukandaar change dete waqt pehle sab se bara note/sikka deta hai jo poora aaye, phir us se chhota. Har qadam par \"abhi sab se achha\" faisla. Aksar yeh sahi hota hai, magar har masle mein nahi."
+            "text": "Dukandaar change dete waqt pehle sab se bara sikka deta hai jo poora aaye: Rs 18 = 10 + 5 + 2 + 1. Har qadam par \"abhi sab se achha\" faisla; aksar sahi, magar har masle mein nahi."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "5. Discuss the advantages of using Dynamic Programming.\n(Dynamic Programming istemal karne ke faidon par baat kijiye.)",
-            "explanation": "Dynamic Programming (DP) masle ko chhote (simpler) subproblems mein tor kar hal karta hai aur un ke jawab store karta hai taake dobara hisaab na lagana pare.\nFaide:\n1. Faltu dohrao nahi: har subproblem sirf ek dafa hal hota hai aur us ka mehfooz jawab dobara kaam aata hai.\n2. Bohat tez: jo masle seedhe tareeqe se exponential waqt lete hain woh aksar polynomial waqt mein hal ho jate hain.\n3. Overlapping subproblems aur optimal substructure wale maslon aur optimization problems ke liye behtareen.\n4. Subproblems ke behtareen jawabon se poore masle ka exact (optimal) jawab banta hai.\nMisal: Fibonacci numbers: DP har value (0, 1, 1, 2, 3, 5, 8, ...) store karta hai aur sirf aakhri do ko jorta hai. 20wan Fibonacci number (6765) DP se taqreeban 20 additions mein milta hai, jab ke seedha recursive tareeqa 21,891 function calls karta hai (Python mein check kiya)."
+            "explanation": "Dynamic Programming (DP) masle ko chhote (simpler) subproblems mein tor kar hal karta hai aur un ke jawab store karta hai taake dobara hisaab na lagana pare.\nDynamic Programming (DP) masle ko overlapping subproblems mein torta hai aur un ke jawab store karta hai taake dobara hisaab na lagana pare.\n1. Faltu dohrao nahi: har subproblem sirf ek dafa hal hota hai.\n2. Bohat tez: exponential waqt wale masle aksar polynomial waqt mein hal ho jate hain.\n3. Optimization problems ka optimal jawab deta hai, maslan Fibonacci mein pichhli do stored values jor kar agla number."
           },
           {
             "type": "callout",
             "tone": "tip",
             "title": "Wazahat",
-            "text": "Seedha recursive Fibonacci fib(5) nikalne ke liye fib(3) do dafa, fib(2) teen dafa wagera dobara dobara hisaab karta hai. DP har jawab ek table mein likh leta hai; zaroorat par wahan se utha leta hai. Is liye 21,891 calls ki jagah sirf ~20 additions."
+            "text": "Seedha recursive Fibonacci wohi values (fib(3), fib(2)) baar baar hisaab karta hai; DP har jawab table mein likh kar wahan se utha leta hai. Is liye 20wan number 21,891 calls ki jagah ~20 additions mein milta hai."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "6. Compare the advantages of Breadth-First Search (BFS) with Depth-First Search (DFS) in graph traversal.\n(Graph traversal mein Breadth-First Search (BFS) ke faidon ka Depth-First Search (DFS) se comparison kijiye.)",
-            "explanation": "BFS graph ko level by level queue ki madad se dekhta hai; DFS ek branch mein jitna gehra ja sake jata hai, phir wapas (backtrack) aata hai, stack ki madad se. Dono ka waqt O(V + E) hai.\nBFS ke faide:\n- Qareeb wale nodes pehle dekhta hai, is liye do nodes ke darmiyan shortest path (sab se kam edges) dhoondta hai, maslan social network mein do logon ke darmiyan degree of separation.\n- Shallow (kam gehre) graphs ke liye behtar.\nDFS ke faide:\n- Deep (gehre) graphs mein memory kam leta hai, kyunke stack par sirf mojooda raasta rehta hai.\n- Puzzles aur mazes (bhool bhulaiyan) ke liye munasib: ek raasta aakhir tak, band gali par wapas.\nMisal (Figure 3.8 ka tree): BFS 0, 1, 2, 3, 4, 5, 6, 7; DFS 0, 1, 4, 5, 2, 6, 3, 7."
+            "explanation": "BFS graph ko level by level queue ki madad se dekhta hai; DFS ek branch mein jitna gehra ja sake jata hai, phir wapas (backtrack) aata hai, stack ki madad se. Dono ka waqt O(V + E) hai.\nBFS graph ko level by level queue se dekhta hai; DFS ek branch mein gehra ja kar wapas (backtrack) aata hai, stack se.\nBFS ka faida: shortest path (sab se kam edges) dhoondta hai; shallow (kam gehre) graphs ke liye behtar.\nDFS ka faida: gehre graphs mein memory kam leta hai; puzzles aur mazes (bhool bhulaiyan) ke liye munasib."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "7. Explain the importance of breaking down a problem into smaller components in algorithmic thinking.\n(Algorithmic soch mein masle ko chhote hisson mein torne ki ahmiyat samjhaiye.)",
-            "explanation": "Algorithmic thinking ka matlab hai masle ko tarteeb se, qadam ba qadam hal karna. Bare masle ko chhote hisson mein torna (decomposition) is liye aham hai:\n1. Chhote hisse poore masle ke muqable mein samajhna aur hal karna aasan.\n2. Har hissa alag hal aur test ho sakta hai, ghalti dhoondna aasan.\n3. Hisson ke hal jor kar asal masla hal hota hai; yahi Divide and Conquer ka khayal hai (maslan Merge Sort list ko aadha aadha kar ke sort aur merge karta hai).\n4. Hisse doosre maslon mein dobara kaam aate hain aur team mein baante ja sakte hain.\n5. Complex kaam qaabil-e-intezam ban jata hai aur aakhri algorithm saaf aur efficient hota hai.\nMisal: student result program ke hisse: marks input, total aur percentage, grade tay karna, result print."
+            "explanation": "Algorithmic thinking ka matlab hai masle ko tarteeb se, qadam ba qadam hal karna. Bare masle ko chhote hisson mein torna (decomposition) is liye aham hai:\nBare masle ko chhote hisson mein torna (decomposition) use qadam ba qadam hal karna aasan banata hai.\n1. Chhote hisse samajhna, hal karna aur alag test karna aasan; ghalti jaldi milti hai.\n2. Hisson ke hal jor kar poora masla hal hota hai (Divide and Conquer, maslan Merge Sort).\n3. Hisse dobara kaam aate hain aur team mein baante ja sakte hain."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "8. Identify the key factors used to evaluate the performance of an algorithm.\n(Algorithm ki performance parakhne ke aham factors bataiye.)",
-            "explanation": "1. Time complexity: input barhne par chalne ka waqt kaise barhta hai, Big O notation mein, maslan O(1), O(log n), O(n), O(n²).\n2. Space complexity: input barhne par kitni memory chahiye, maslan O(1) constant ya O(n) linear space.\n3. Efficiency: algorithm waqt aur memory kitni achhi tarah istemal karta hai; maslan bare data par Merge Sort O(n log n), Bubble Sort O(n²) se behtar.\n4. Scalability: input bohat bara hone par bhi efficiency qaim rehti hai ya nahi.\n5. Masle ke liye munasib hona: data aur zaroorat se mel khata hai ya nahi, maslan Binary Search ko sorted data chahiye, Linear Search unsorted par bhi chalti hai.\nBig O aam taur par worst case (sab se buri soorat) batata hai, jis se bare input par performance ka andaza hota hai."
+            "explanation": "1. Time complexity: input barhne par chalne ka waqt kaise barhta hai, Big O notation mein, maslan O(1), O(log n), O(n), O(n²).\n1. Time complexity: input barhne par chalne ka waqt kaise barhta hai (Big O, maslan O(n), O(n log n)).\n2. Space complexity: input barhne par kitni memory chahiye.\n3. Efficiency aur scalability: waqt aur memory ka achha istemal, aur bare input par bhi efficient rehna.\n4. Munasib hona: masle ke data se mel, maslan Binary Search ko sorted data chahiye."
           },
           {
             "type": "heading",

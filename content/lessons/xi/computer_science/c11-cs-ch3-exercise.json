@@ -312,49 +312,49 @@
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "1. Differentiate between well-defined and ill-defined problems within the realm of computational problem-solving.",
-            "explanation": "1. Well-defined problems have clear goals, inputs, processes and outputs, so an algorithm can be written for them.\n   Example: deciding whether a number is even: goal (is it even?), input (one integer), process (check divisibility by 2), output (even or odd).\n2. Ill-defined problems lack clear definitions; their goals and requirements are ambiguous or vague, so they cannot be solved directly by an algorithm until they are made clear.\n   Example: \"improving education in Pakistan\": the goal is broad, and it is not specified how much funding, what kind of teachers or which materials are needed.\nKey difference: a well-defined problem can be turned into exact steps; an ill-defined problem must first be broken into clear, measurable goals."
+            "explanation": "Well-defined problems have clear goals, inputs, processes and outputs, so an algorithm can be written directly, e.g. checking whether a number is even.\nIll-defined problems have vague or unclear goals and requirements, e.g. \"improving education in Pakistan\".\nAn ill-defined problem must first be broken into clear, measurable goals before it can be solved."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "2. Outline the main steps involved in the Generate and Test algorithm.",
-            "explanation": "The Generate and Test algorithm finds a solution by producing possible solutions and testing each one. Steps:\n1. Generate: produce a possible solution (randomly, systematically or by a heuristic rule).\n2. Test: check the possible solution against the problem's requirements or constraints.\n3. If it satisfies all conditions, accept it as a valid solution and stop.\n4. If not, generate a new possible solution and repeat steps 1-3.\n5. Stop when a satisfactory solution is found or all possible solutions have been tried.\n(Figure 3.2: Generator, possible solution, Tester, and Stop when the solution is correct.)\nExample: to open a 3-digit lock, try 000, 001, 002 ... and test each code until the lock opens.\nIt is simple and exhaustive but can be very slow for large problem spaces and does not guarantee the optimal solution."
+            "explanation": "Generate and Test finds a solution by producing possible solutions and checking each one.\n1. Generate: produce a possible solution.\n2. Test: check it against the problem's requirements.\n3. If it is correct, accept it and stop; otherwise generate another and repeat until a solution is found or all are tried."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "3. Compare tractable and intractable problems in the context of computational complexity.",
-            "explanation": "Tractable problems:\n- Can be solved in polynomial time (class P); the time grows at a manageable rate as the input grows.\n- Are considered \"efficiently solvable\", even for large inputs.\n- Example: sorting a list with Merge Sort or Quick Sort, O(n log n).\nIntractable problems:\n- Need super-polynomial time, often growing exponentially or factorially with the input size.\n- Are impractical to solve exactly for large inputs, because the time becomes unmanageable.\n- Example: the Travelling Salesman Problem (NP-hard): 4 cities give 4! = 24 routes, 10 cities give 3,628,800 routes.\nBoth kinds are solvable; the difference is how fast the required time and resources grow."
+            "explanation": "Tractable problems can be solved in polynomial time (class P); the time grows at a manageable rate, e.g. sorting with Merge Sort, O(n log n).\nIntractable problems need super-polynomial (often exponential or factorial) time, so large inputs are impractical, e.g. the Travelling Salesman Problem.\nThe difference is how fast the required time grows with the input size."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "4. Summarize the key idea behind Greedy Algorithms.",
-            "explanation": "A greedy algorithm builds a solution through a sequence of choices, making at each step the choice that looks best at that moment (locally optimal), in the hope that these choices lead to the best overall (globally optimal) solution. It is used when the problem has optimal substructure.\nExample (coin change): to pay Rs 18 with coins of Rs 10, 5, 2 and 1, always take the largest coin that fits: 10, then 5, then 2, then 1: four coins.\nGreedy algorithms are usually fast and easy to implement, but they do not always guarantee the optimal solution, so the problem must be checked first."
+            "explanation": "A greedy algorithm makes the choice that looks best at each step (locally optimal), hoping to reach the best overall (globally optimal) solution.\nIt is fast and easy to implement, but it does not always guarantee the optimal solution."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "5. Discuss the advantages of using Dynamic Programming.",
-            "explanation": "Dynamic Programming (DP) solves a problem by breaking it into simpler subproblems and storing their results so that they are not calculated again.\nAdvantages:\n1. No redundant calculations: each subproblem is solved only once and its stored result is reused.\n2. Much faster: problems that take exponential time when solved naively can often be solved in polynomial time.\n3. Well suited to problems with overlapping subproblems and optimal substructure, and to optimization problems.\n4. Gives an exact (optimal) answer built from the optimal answers of the subproblems.\nExample: Fibonacci numbers: DP stores each value (0, 1, 1, 2, 3, 5, 8, ...) and simply adds the last two. Computing the 20th Fibonacci number (6765) takes about 20 additions with DP, while the plain recursive method makes 21,891 function calls (checked in Python)."
+            "explanation": "Dynamic Programming breaks a problem into overlapping subproblems and stores their results so they are not calculated again.\n1. No repeated calculations: each subproblem is solved only once.\n2. Much faster: exponential-time problems often become polynomial-time.\n3. Gives the optimal answer to optimization problems, e.g. Fibonacci numbers by adding the two stored previous values."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "6. Compare the advantages of Breadth-First Search (BFS) with Depth-First Search (DFS) in graph traversal.",
-            "explanation": "BFS explores a graph level by level using a queue; DFS goes as deep as possible along a branch, then backtracks, using a stack. Both take O(V + E) time.\nAdvantages of BFS:\n- Visits the nearest nodes first, so it finds the shortest path (fewest edges) between two nodes, e.g. the degree of separation between two people in a social network.\n- Better suited to shallow graphs.\nAdvantages of DFS:\n- More memory-efficient for deep graphs, since it keeps only the current path on the stack.\n- Suited to puzzles and mazes: it follows one path to the end and backtracks at a dead end.\nExample (Figure 3.8 tree): BFS visits 0, 1, 2, 3, 4, 5, 6, 7; DFS visits 0, 1, 4, 5, 2, 6, 3, 7."
+            "explanation": "BFS visits nodes level by level using a queue; DFS goes deep along one branch and backtracks, using a stack.\nBFS advantage: finds the shortest path (fewest edges) and suits shallow graphs.\nDFS advantage: uses less memory on deep graphs and suits puzzles and mazes."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "7. Explain the importance of breaking down a problem into smaller components in algorithmic thinking.",
-            "explanation": "Algorithmic thinking means solving problems systematically, step by step. Breaking a large problem into smaller components (decomposition) is important because:\n1. Small parts are easier to understand and solve than the whole problem.\n2. Each part can be solved and tested independently, so errors are easy to find.\n3. The solutions of the parts are combined to solve the original problem; this is the idea of Divide and Conquer (e.g. Merge Sort divides a list into halves, sorts them and merges them).\n4. Parts can be reused in other problems and shared among team members.\n5. Complex tasks become manageable and the final algorithm is clearer and more efficient.\nExample: a student result program can be broken into: input marks, calculate total and percentage, decide grade, print result."
+            "explanation": "Breaking a problem into smaller parts (decomposition) makes it easier to solve step by step.\n1. Small parts are easier to understand, solve and test separately, so errors are found quickly.\n2. Their solutions are combined to solve the whole problem (Divide and Conquer, e.g. Merge Sort).\n3. Parts can be reused and shared among team members."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "8. Identify the key factors used to evaluate the performance of an algorithm.",
-            "explanation": "1. Time complexity: how the running time grows as the input size grows, written in Big O notation, e.g. O(1), O(log n), O(n), O(n²).\n2. Space complexity: how much memory the algorithm needs as the input grows, e.g. O(1) constant or O(n) linear space.\n3. Efficiency: how well the algorithm uses time and memory; e.g. Merge Sort O(n log n) is more efficient than Bubble Sort O(n²) for large data.\n4. Scalability: whether it keeps its efficiency when the input becomes much larger.\n5. Suitability for the problem: whether it fits the data and requirements, e.g. Binary Search needs sorted data while Linear Search works on unsorted data.\nBig O usually describes the worst case, which lets us predict performance for large inputs."
+            "explanation": "1. Time complexity: how the running time grows with input size (Big O, e.g. O(n), O(n log n)).\n2. Space complexity: how much memory the algorithm needs as the input grows.\n3. Efficiency and scalability: how well it uses time and memory, and whether it stays efficient for large inputs.\n4. Suitability: whether it fits the problem's data, e.g. Binary Search needs sorted data."
           },
           {
             "type": "heading",
