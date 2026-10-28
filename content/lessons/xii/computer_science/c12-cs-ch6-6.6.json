@@ -13,20 +13,20 @@
           "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
           "pdf_from": 81,
           "pdf_to": 85,
-          "note": "Topic 6.6 with the Tidbit (PDF 81-85); Figs 6.6 and 6.7 redrawn and a data-split figure added. The listing and its printed output were checked by recomputing the split and fit; one print line is added. Short Q7, Long Q5 and MCQs 7 and 9 are answered here."
+          "note": "Topic 6.6 as printed (PDF 81-85, printed 77-81): text, Tidbit, the Example program as a code block, its notes and printed output. Figs 6.6 and 6.7 are our original drawings."
         }
       ],
       "body": {
         "blocks": [
           {
             "type": "paragraph",
-            "text": "Building a machine learning model follows clear steps (Fig 6.6). Take predicting students' grades. First, data about students is collected, such as attendance, quiz marks, assignment scores, study hours and previous exam results. The data is cleaned and prepared. Input values, called features, are chosen because they help the model understand what affects performance. The model is then trained on the prepared data; once trained, it can predict a student's likely grade from new data, which helps teachers find students who need extra support before the examination."
+            "text": "Building a machine learning model involves several clear steps (as shown in Figure 6.6). A simple example of machine learning is student grade prediction. In this example, data about students is first collected, such as attendance, quiz marks, assignment scores, study hours, and previous exam results. The data is then cleaned and prepared so that it can be used for learning. Important values, also called features, are selected because they help the model understand the factors that affect student performance. After this, the machine learning model is trained using the prepared data. Once trained, the model can predict a student's possible grade based on new input data. This helps teachers identify students who may need extra support before the final examination."
           },
           {
             "type": "callout",
             "tone": "note",
             "title": "Tidbit",
-            "text": "Building a model means choosing data and features carefully: training data teaches the model patterns, testing data checks its performance, and good feature selection improves results, so a well-built model gives reliable predictions."
+            "text": "Building a model involves selecting data and features carefully. Training data teaches the model patterns. Testing data checks performance. Feature selection improves results. A well-built model gives reliable predictions."
           },
           {
             "type": "diagram",
@@ -37,17 +37,16 @@
           },
           {
             "type": "heading",
-            "level": 2,
-            "text": "Example: linear regression in Python"
+            "level": 3,
+            "text": "Example:"
           },
           {
             "type": "paragraph",
-            "text": "Exam scores are often affected by the number of hours studied. The program below builds a simple linear regression model that predicts exam scores from study hours. The data is split into training and testing sets, the model is trained on the training data, and its performance is measured with the mean squared error (MSE). Finally the data points and the fitted line are plotted (Fig 6.7)."
+            "text": "Students' exam scores are often affected by the number of hours they study. The purpose of the following program is to build a simple linear regression model that predicts exam scores based on study hours. The dataset contains examples of hours studied and corresponding exam scores. The data is divided into training and testing sets, the model is trained using the training data, and its performance is evaluated using Mean Squared Error (MSE). Finally, the actual data points and the predicted regression line are plotted to show the relationship between study hours and exam scores."
           },
           {
-            "type": "callout",
-            "tone": "note",
-            "title": "Example: predicting exam scores from study hours (Python code; each .... is one 4-space indent)",
+            "type": "code",
+            "language": "python",
             "text": "# Import necessary libraries\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LinearRegression\nfrom sklearn.metrics import mean_squared_error\n\n# Example data (Hours studied vs. Exam scores)\nX = np.array([[1], [2], [3], [4], [5], [6], [7], [8], [9], [10]])  # Hours studied\n\ny = np.array([1, 2, 2, 3, 3, 4, 5, 5, 6, 7])  # Exam scores\n\n# Step 1: Split the data into training and testing sets\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)\n\n# Step 2: Create and train the model\nmodel = LinearRegression()\nmodel.fit(X_train, y_train)\n\n# Step 3: Make predictions\ny_pred = model.predict(X_test)\n\n# Step 4: Evaluate the model\nmse = mean_squared_error(y_test, y_pred)\nprint(f\"Mean Squared Error: {mse}\")\n\n# Step 5: Plotting the results\nplt.scatter(X, y, color='blue')  # Actual data points\nplt.plot(X, model.predict(X), color='red')  # Predicted line\nplt.xlabel('Hours Studied')\nplt.ylabel('Exam Scores')\nplt.title('Linear Regression: Hours vs. Scores')\nplt.show()",
             "book_errors": [
               "{mse}"
@@ -57,15 +56,17 @@
             "type": "list",
             "ordered": false,
             "items": [
-              "Data preparation: X holds the hours studied and y the matching exam scores.",
-              "Model training: a linear regression model is created and trained on the training data (X_train, y_train).",
-              "Testing: the model is tested on the test data (X_test) and the MSE is calculated to measure its performance; a lower MSE is better, because the predictions are closer to the actual values.",
-              "Improvement: as more data is gathered or adjusted, the model becomes more accurate."
+              "Data Preparation: The X values represent hours studied, and y values represent the corresponding exam scores (as shown in Figure 6.7).",
+              "Model Training: A linear regression model is created and trained on the training data (X_train, y_train).",
+              "Testing: The model is tested on the test data (X_test) and the mean squared error (MSE) is calculated to evaluate its performance. A lower MSE indicates better model performance because it means the predicted values are closer to the actual values",
+              "Improvement: As more data is gathered or adjusted, the model's accuracy improves."
             ]
           },
           {
-            "type": "paragraph",
-            "text": "Output:\nMean Squared Error: 0.1484\nModel equation: Exam Score = 0.6552 × Hours Studied + 0.1466",
+            "type": "code",
+            "language": "text",
+            "text": "Mean Squared Error: 0.1484\nModel equation: Exam Score = 0.6552 × Hours Studied + 0.1466",
+            "caption": "Output:",
             "book_errors": [
               "Model equation: Exam Score = 0.6552 × Hours Studied + 0.1466"
             ]
@@ -74,7 +75,7 @@
             "type": "callout",
             "tone": "correction",
             "title": "Book correction",
-            "text": "The printed program cannot give the printed output. It has no line that prints the model equation, so the second output line never appears, and print(f\"Mean Squared Error: {mse}\") prints the unrounded value (0.148409631...), not 0.1484. The output numbers themselves are right (slope 0.6552, intercept 0.1466, MSE 0.1484). Working code:\n\n# Import necessary libraries\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LinearRegression\nfrom sklearn.metrics import mean_squared_error\n\n# Example data (Hours studied vs. Exam scores)\nX = np.array([[1], [2], [3], [4], [5], [6], [7], [8], [9], [10]])  # Hours studied\n\ny = np.array([1, 2, 2, 3, 3, 4, 5, 5, 6, 7])  # Exam scores\n\n# Step 1: Split the data into training and testing sets\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)\n\n# Step 2: Create and train the model\nmodel = LinearRegression()\nmodel.fit(X_train, y_train)\n\n# Step 3: Make predictions\ny_pred = model.predict(X_test)\n\n# Step 4: Evaluate the model\nmse = mean_squared_error(y_test, y_pred)\nprint(f\"Mean Squared Error: {mse:.4f}\")\nprint(f\"Model equation: Exam Score = {model.coef_[0]:.4f} × Hours Studied + {model.intercept_:.4f}\")\n\n# Step 5: Plotting the results\nplt.scatter(X, y, color='blue')  # Actual data points\nplt.plot(X, model.predict(X), color='red')  # Predicted line\nplt.xlabel('Hours Studied')\nplt.ylabel('Exam Scores')\nplt.title('Linear Regression: Hours vs. Scores')\nplt.show()"
+            "text": "The printed program cannot give the printed output. Run as printed, it prints only one line, Mean Squared Error: 0.14840963139120109 (the unrounded value), and nothing prints the model equation. The numbers in the printed output are right (test points 9 and 2 hours; slope 0.6552, intercept 0.1466, MSE 0.1484). To get that output, write {mse:.4f} in the print line and add the line print(f\"Model equation: Exam Score = {model.coef_[0]:.4f} × Hours Studied + {model.intercept_:.4f}\") after it."
           },
           {
             "type": "diagram",
@@ -85,30 +86,39 @@
           },
           {
             "type": "heading",
-            "level": 2,
-            "text": "Features and target values"
+            "level": 3,
+            "text": "Selecting Features and Target Values"
           },
           {
             "type": "paragraph",
-            "text": "Features are the input values a model uses; target values are the outputs it must predict. Choosing the right features improves learning, while unnecessary features can reduce accuracy, so features must be relevant and the target clearly defined. When predicting marks, study hours is a feature and the marks are the target."
+            "text": "Features are input values used by the model. Target values are the outputs to be predicted. Correct feature selection improves learning. Unnecessary features can reduce accuracy. Features must be relevant to the problem. Target values must be clearly defined. Example: When predicting student marks, study hours would be the feature, and the target value would be the marks."
           },
           {
             "type": "heading",
-            "level": 2,
-            "text": "Feature engineering basics"
+            "level": 3,
+            "text": "Feature Engineering Basics"
           },
           {
             "type": "paragraph",
-            "text": "Feature engineering improves data for better learning by selecting, changing and creating features. Raw data is often not ready: it may need cleaning and scaling. Good features highlight the important information and give better predictions, and the step needs a good understanding of the data. For example, when predicting marks, study-hour records can be cleaned and scaled, and a new feature such as 'study hours per day' can be created."
+            "text": "Feature engineering means improving data for better learning. It includes selecting, modifying, and creating features. Raw data is often not ready for models. Data may need cleaning and scaling. Feature engineering improves model performance. It helps highlight important information. Good features produce better predictions. This step requires an understanding of data. Feature engineering strengthens the model. Example: In predicting student marks, feature engineering might involve cleaning raw data like study hours, scaling it, and creating new features like \"study hours per day\" to improve model performance and make better predictions."
           },
           {
             "type": "heading",
-            "level": 2,
-            "text": "Train-test split and a simple predictive model"
+            "level": 3,
+            "text": "Train-Test Split Of Data"
           },
           {
             "type": "paragraph",
-            "text": "The data is divided into a training set, which teaches the model, and a testing set of unseen data, which checks its real performance. The split prevents overfitting. A common split is 80 percent training and 20 percent testing. A simple predictive model uses a basic algorithm to learn from the training data and predict new cases; such models are easy to understand, and their test results guide improvements."
+            "text": "Data is divided into training and testing sets. Training data teaches the model patterns. Testing data checks model performance as it uses unseen data. Results show real performance. This split prevents overfitting. Common splits include 80 percent training and 20 percent testing."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Building a Simple Predictive Model"
+          },
+          {
+            "type": "paragraph",
+            "text": "A simple predictive model uses basic algorithms to learn from training data. It analyses the data to understand patterns and then makes predictions for new, unseen data. These models are easy to understand and are especially helpful for beginners. Their performance is measured using test data and the results guide improvements."
           }
         ]
       }
