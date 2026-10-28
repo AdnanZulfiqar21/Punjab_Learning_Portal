@@ -13,14 +13,14 @@
           "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
           "pdf_from": 68,
           "pdf_to": 69,
-          "note": "Unnumbered heading 'Exception Handling' (PDF 68-69) with the Tidbit, Class Activity and listing checked against the page images. The warning about a failed connection, the two-exception example and the check question are added. Short Q9 and Long Q8 are answered here."
+          "note": "'Exception Handling' as printed (PDF 68-69, printed 64-65); rewritten 2026-10-28 in the book's wording, programs as code blocks."
         }
       ],
       "body": {
         "blocks": [
           {
             "type": "paragraph",
-            "text": "Exception handling manages errors that happen while a program runs. It prevents the program from crashing and lets it respond gracefully to unexpected situations, which improves reliability and the user's experience. Python provides built-in tools to catch and handle exceptions."
+            "text": "Exception handling is used to manage errors that occur during program execution. It prevents the program from crashing and allows it to respond gracefully to unexpected situations. Proper exception handling improves program reliability and user experience. Python provides built-in tools to catch and handle exceptions efficiently."
           },
           {
             "type": "callout",
@@ -29,35 +29,38 @@
             "text": "Exception handling helps programs manage unexpected problems without stopping suddenly."
           },
           {
-            "type": "callout",
-            "tone": "note",
-            "title": "Example: a database insert protected by try, except and finally (Python code; each .... is one 4-space indent)",
-            "text": "import sqlite3\n\ntry:\n....connection = sqlite3.connect(\"school.db\")\n....cursor = connection.cursor()\n....cursor.execute(\"INSERT INTO students (ID, Name, Age) VALUES (?, ?, ?)\", (1, \"Ali\", 20))\n....connection.commit()             # save changes (keeps data correct)\n....print(\"Data inserted successfully\")\nexcept sqlite3.Error as e:\n....print(\"Error occurred:\", e)\n....connection.rollback()           # undo changes if an error occurs\nfinally:\n....if connection:\n........connection.close()\n........print(\"Connection closed\")"
+            "type": "paragraph",
+            "text": "Example:"
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "import sqlite3\n\ntry:\n    # Connect to database\n    connection = sqlite3.connect(\"school.db\")\n    cursor = connection.cursor()\n\n    # Insert data into table\n    cursor.execute(\"INSERT INTO students (ID, Name, Age) VALUES (?, ?, ?)\", (1, \"Ali\", 20))\n\n    # Save changes (ensures data integrity)\n    connection.commit()\n    print(\"Data inserted successfully\")\n\nexcept sqlite3.Error as e:\n    # Handle database errors\n    print(\"Error occurred:\", e)\n    connection.rollback()  # Undo changes if error occurs\n\nfinally:\n    # Close connection\n    if connection:\n        connection.close()\n        print(\"Connection closed\")"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "try-except handles errors and prevents crashes.",
-              "commit() saves the correct data, keeping the database consistent.",
-              "rollback() cancels the changes if an error occurs.",
-              "finally safely closes the database."
+              "try-except → handles errors and prevents crashes",
+              "commit() → saves correct data (ensures integrity)",
+              "rollback() → cancels changes if error occurs",
+              "finally → safely closes the database"
             ]
           },
           {
             "type": "callout",
-            "tone": "tip",
-            "title": "Class activity",
-            "text": "Write a Python program that takes two numbers from the user and uses exception handling to show an error message if the input is invalid or the user tries to divide by zero."
+            "tone": "note",
+            "title": "Class Activity",
+            "text": "Class Activity: Write a Python program that takes two numbers from the user and uses exception handling to display an error message if the user enters invalid input or tries to divide by zero."
           },
           {
             "type": "heading",
-            "level": 2,
-            "text": "Handling several exception types"
+            "level": 3,
+            "text": "Handling multiple exception types effectively"
           },
           {
             "type": "paragraph",
-            "text": "A program may meet different kinds of exception. Python lets one try block have several except blocks, each giving the right response to one exception type. This prevents unexpected crashes, allows proper recovery and gives better control over errors."
+            "text": "A single program may encounter different types of exceptions. Python allows catching multiple exceptions in one try–except block. Each exception type can be handled with a specific response. This approach prevents unexpected crashes and ensures proper error recovery. Handling multiple exceptions improves program stability and control over errors."
           }
         ]
       }

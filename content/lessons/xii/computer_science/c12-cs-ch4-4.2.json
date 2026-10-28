@@ -12,82 +12,91 @@
         {
           "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
           "pdf_from": 56,
-          "pdf_to": 61,
-          "note": "Topic 4.2 (PDF 56-61) with the Do You Know, Class Activity, Table 4.1 and code listings checked against the page images; Figs 4.3 and 4.4 redrawn, plus ER and database-steps figures. Warnings, a tip and check questions are added. Short Q9-10 and Long Q8 are answered here."
+          "pdf_to": 60,
+          "note": "Topic 4.2 as printed (PDF 56-60, printed 52-56); rewritten 2026-10-28 in the book's wording, programs as code blocks."
         }
       ],
       "body": {
         "blocks": [
           {
             "type": "paragraph",
-            "text": "Working with databases in Python means storing and managing data in a database system. Python programs can connect to databases to insert, retrieve, update and delete data. Databases let applications handle large amounts of information efficiently and keep data accurate and consistent. Python supports database work through built-in and external libraries."
+            "text": "Working with databases in Python involves storing and managing data using database systems. Python programs can connect to databases to insert, retrieve, update, and delete data. Databases allow applications to handle large amounts of information efficiently. Using databases helps maintain data accuracy and consistency. Python supports database operations through built-in and external libraries."
           },
           {
             "type": "callout",
             "tone": "note",
-            "title": "Do you know?",
-            "text": "Databases let programs store large amounts of information safely and retrieve it quickly when needed."
+            "title": "Do You Know?",
+            "text": "Databases allow programs to store large amounts of information safely and retrieve it quickly when needed."
           },
           {
             "type": "heading",
-            "level": 2,
-            "text": "Introduction to databases"
-          },
-          {
-            "type": "callout",
-            "tone": "definition",
-            "title": "Database",
-            "text": "A database is an organised collection of data stored in a structured format, so that the data can be accessed and managed easily."
+            "level": 3,
+            "text": "Introduction to Databases"
           },
           {
             "type": "paragraph",
-            "text": "Databases reduce duplicated data, improve reliability and support secure storage, and they are used in many kinds of software."
+            "text": "A database is an organized collection of data stored in a structured format. It allows data to be accessed and managed easily. Databases reduce data duplication and improve reliability. They support secure storage of information. Databases are commonly used in many types of software applications."
           },
           {
-            "type": "table",
-            "caption": "Basic database ideas",
-            "header": [
-              "Idea",
-              "Meaning",
-              "Example"
-            ],
-            "rows": [
-              [
-                "Entity",
-                "A real-world object, person, place, event or concept about which data is stored",
-                "Student, Teacher, Course, Book, Employee"
-              ],
-              [
-                "Attribute",
-                "A property or characteristic of an entity",
-                "For Student: name, roll number, class, age"
-              ],
-              [
-                "Relationship",
-                "How two or more entities are connected",
-                "A Student enrols in a Course"
-              ],
-              [
-                "Identifier",
-                "An attribute that uniquely identifies each record of an entity",
-                "Roll number, because each student's is unique"
-              ]
-            ]
+            "type": "paragraph",
+            "text": "Entity: An entity is a real-world object, person, place, event, or concept about which data is stored in a database."
           },
           {
-            "type": "heading",
-            "level": 2,
-            "text": "Understanding relational databases"
+            "type": "paragraph",
+            "text": "Example: Student, Teacher, Course, Book, Employee"
+          },
+          {
+            "type": "paragraph",
+            "text": "Attribute: An attribute is a property or characteristic of an entity. It describes specific information about an entity."
+          },
+          {
+            "type": "paragraph",
+            "text": "Example: For the entity Student, attributes can be:"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "Relational database: stores data in tables of rows and columns and links the tables through relationships.",
-              "Table: a collection of related data organised in rows (records) and columns (fields).",
-              "Column: a property of an entity, such as name or age.",
-              "Primary key: a unique identifier for each record in a table.",
-              "Foreign key: a field that links one table to another by referring to the other table's primary key."
+              "Student Name",
+              "Roll Number",
+              "Class",
+              "Age"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Relationship: A relationship shows how two or more entities are connected with each other."
+          },
+          {
+            "type": "paragraph",
+            "text": "Example: A Student enrols in a Course. Here, enrols in is the relationship between Student and Course."
+          },
+          {
+            "type": "paragraph",
+            "text": "Identifier: An identifier is an attribute that uniquely identifies each record or object of an entity."
+          },
+          {
+            "type": "paragraph",
+            "text": "Example: For the entity Student, Roll Number can be used as an identifier because each student has a unique roll number."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Understanding Databases"
+          },
+          {
+            "type": "paragraph",
+            "text": "Databases store important data required for application operation. They allow applications to manage large data sets effectively. Key database concepts are:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Relational Database: A database that stores data in tables (rows and columns) and links them using relationships.",
+              "Table: A collection of related data organised in rows (records) and columns (fields). (as shown in Figure 4.3).",
+              "Column: A property or characteristic of an entity (e.g., name, age).",
+              "Primary Key: A unique identifier for each record in a table.",
+              "Foreign Key: A field that links one table to another by referring to the primary key of another table."
             ]
           },
           {
@@ -97,44 +106,65 @@
             "caption": "Figure 4.3: Tables, Columns, Records, Fields, Primary Key, and Foreign Key Relationship (original drawing after the textbook's Figure 4.3)."
           },
           {
+            "type": "heading",
+            "level": 3,
+            "text": "Overview of Relational Databases and SQL Structure"
+          },
+          {
             "type": "paragraph",
-            "text": "SQL (Structured Query Language) is the language used to work with relational databases; its commands create, read, update and delete data."
+            "text": "Relational databases organize data into tables made of rows and columns. Each table stores related data in a structured manner. Relationships between tables are maintained using keys. SQL stands for Structured Query Language and is used to interact with databases. SQL commands help create, read, update, and delete data."
           },
           {
             "type": "heading",
-            "level": 2,
-            "text": "Connecting Python to a database"
+            "level": 3,
+            "text": "Connecting Python to a Database"
           },
           {
             "type": "paragraph",
-            "text": "A connection to the database is needed before any data operation. The sqlite3 library is built into Python and suits small databases: it keeps the whole database in a single file. MySQL is used for larger, more complex systems; its connection needs details such as the database name and credentials. Once connected, Python can add, retrieve and modify data, and the connection should be closed properly afterwards."
+            "text": "Connecting Python to a database allows programs to work with stored data. A database connection is required before performing any data operation. Python provides libraries that help establish this connection easily. Once connected, data can be added, retrieved, or modified. Proper connection handling ensures smooth communication between Python and the database."
           },
           {
-            "type": "callout",
-            "tone": "note",
-            "title": "Example: create a table, insert and read with sqlite3 (Python code; each .... is one 4-space indent)",
-            "text": "import sqlite3\n\n# Connect to school.db (created automatically if missing)\nconnection = sqlite3.connect(\"school.db\")\ncursor = connection.cursor()     # runs SQL queries\n\ncursor.execute(\"\"\"CREATE TABLE IF NOT EXISTS students\n....(id INTEGER PRIMARY KEY, name TEXT, age INTEGER, grade TEXT)\"\"\")\n\n# (Optional) insert sample data\ncursor.execute(\"INSERT INTO students (name, age, grade) VALUES ('Ali', 14, '8th')\")\ncursor.execute(\"INSERT INTO students (name, age, grade) VALUES ('Sara', 15, '9th')\")\nconnection.commit()               # save changes\n\ncursor.execute(\"SELECT * FROM students\")\nrecords = cursor.fetchall()       # list of rows\nfor row in records:\n....print(row)\n\nconnection.close()"
+            "type": "heading",
+            "level": 3,
+            "text": "Using sqlite3 or MySQL to Establish a Database Connection"
+          },
+          {
+            "type": "paragraph",
+            "text": "The sqlite3 library is built into Python and is used for small databases. It stores data in a single file on the system. MySQL is used for larger and more complex database systems. A connection is created by providing database details such as name and credentials. A successful connection allows Python to access the database."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "# Import sqlite3 module\nimport sqlite3\n# Connect to the database file named \"school.db\"\n# If the file does not exist, SQLite will create it automatically\nconnection = sqlite3.connect(\"school.db\")\n# Create a cursor object\n# Cursor is used to execute SQL queries\ncursor = connection.cursor()\n# Create \"students\" table if it does not exist\ncursor.execute(\"\"\" CREATE TABLE IF NOT EXISTS students\n ( id INTEGER PRIMARY KEY,  name TEXT, age INTEGER, grade TEXT ) \"\"\")\n# (Optional) Insert sample data\ncursor.execute (\"INSERT INTO students (name, age, grade) VALUES ('Ali', 14, '8th')\")\ncursor.execute (\"INSERT INTO students (name, age, grade) VALUES ('Sara', 15, '9th')\")\n# Save changes\nconnection.commit()\n# This query selects all columns (*) from the table named \"students\"\ncursor.execute(\"SELECT * FROM students\")\n# Fetch all records returned by the query\n# fetchall() returns a list of rows/records\nrecords = cursor.fetchall()\n# Display all records\n# Loop through each row in the records list\nfor row in records:\n    # Print each row of the table\n    print(row)\n# Close the database connection\nconnection.close()"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "Connect to the database: sqlite3.connect() opens the school.db SQLite database.",
-              "Create a cursor: the cursor object runs SQL commands.",
-              "Execute a query: cursor.execute() runs the SQL query that fetches all records from the students table.",
-              "Save: connection.commit() saves the changes.",
-              "Fetch and display: fetchall() returns all the rows, which are printed one by one.",
-              "Close the connection when finished."
+              "Connect to Database: Establishes a connection to the school.db SQLite database.",
+              "Create Cursor: Creates a cursor object to execute SQL commands.",
+              "Execute Query: Executes a SQL query to fetch all records from the students table.",
+              "Fetch and Display Data: Fetches all records and prints each row in the result.",
+              "Close Connection: Closes the database connection after the operation."
             ]
           },
           {
             "type": "heading",
-            "level": 2,
-            "text": "CRUD operations"
+            "level": 3,
+            "text": "Executing SQL Commands From Python"
           },
           {
             "type": "paragraph",
-            "text": "CRUD stands for Create, Read, Update and Delete, the basic actions on stored data (Fig 4.4 and Table 4.1). Every database application depends on them to keep information accurate and up to date, and Python performs them by sending SQL commands through a cursor."
+            "text": "SQL commands are used to interact with the database from Python. Python sends these commands using a database cursor. Commands can be used to create tables or insert data. Data can also be retrieved using select queries. Executing SQL commands allows Python programs to manage database data effectively."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "CRUD Operations"
+          },
+          {
+            "type": "paragraph",
+            "text": "CRUD stands for Create, Read, Update, and Delete and defines basic database actions. These operations are used to manage data stored in a database (as shown in Figure 4.4 and Table 4.1). Every database-based application depends on CRUD operations. They help maintain accurate and up-to-date information. Python uses SQL commands to perform these operations on databases."
           },
           {
             "type": "diagram",
@@ -144,56 +174,94 @@
           },
           {
             "type": "table",
-            "caption": "Table 4.1 CRUD operations",
+            "caption": "Table 4.1: CRUD operations",
             "header": [
-              "Operation",
-              "SQL example",
-              "What it does"
+              "Command",
+              "Command Example",
+              "Description"
             ],
             "rows": [
               [
-                "Create",
+                "INSERT",
                 "INSERT INTO students (ID, Name, Age) VALUES (1, 'John', 20);",
-                "Adds a new record to a table"
+                "Adds a new record to a table."
               ],
               [
-                "Read",
+                "READ",
                 "SELECT * FROM students;",
-                "Retrieves data from a table; the data is not changed"
+                "Retrieves data from a table."
               ],
               [
-                "Update",
+                "UPDATE",
                 "UPDATE students SET Age = 21 WHERE ID = 1;",
-                "Modifies an existing record; only the rows matching the condition change"
+                "Modifies an existing record in a table."
               ],
               [
-                "Delete",
+                "DELETE",
                 "DELETE FROM students WHERE ID = 1;",
-                "Removes a record; the condition limits which rows are removed"
+                "Removes a record from a table."
               ]
             ]
           },
           {
-            "type": "list",
-            "ordered": true,
-            "items": [
-              "Create (adding new records): SQL INSERT commands store new data, which becomes part of the table once executed.",
-              "Read (retrieving and displaying data): SQL SELECT commands fetch stored records; Python processes the results.",
-              "Update (modifying existing records): SQL UPDATE commands change selected records when stored information needs correction; only the specified data changes.",
-              "Delete (removing data safely): SQL DELETE commands with conditions remove only the selected records; careful use prevents losing important data."
-            ]
+            "type": "heading",
+            "level": 3,
+            "text": "Create: Adding New Records"
           },
           {
-            "type": "callout",
-            "tone": "tip",
-            "title": "Class activity",
-            "text": "Update a student's marks and display the updated data."
+            "type": "paragraph",
+            "text": "The Create operation is used to add new data to a database table. It stores information such as names, values, or records. SQL insert commands are used for this purpose. Python sends these commands to the database. New records become part of the stored data after execution."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Read: Retrieving and Displaying Data"
+          },
+          {
+            "type": "paragraph",
+            "text": "The Read operation is used to fetch data from the database. It helps display stored records when needed. SQL select commands are commonly used for reading data. Python retrieves the results and processes them. This operation does not change the stored data."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Update: Modifying Existing Records"
+          },
+          {
+            "type": "paragraph",
+            "text": "The Update operation changes existing data in a database. It is used when stored information needs correction. SQL update commands modify selected records. Python executes these commands based on conditions. Only the specified data is changed during this process."
           },
           {
             "type": "callout",
             "tone": "note",
-            "title": "Example: deleting a record (Python code; each .... is one 4-space indent)",
-            "text": "import sqlite3\n\nconnection = sqlite3.connect(\"school.db\")\ncursor = connection.cursor()\n\n# Delete the student with ID = 1\ncursor.execute(\"DELETE FROM students WHERE ID = 1\")\nconnection.commit()               # without commit() the delete is not permanent\nprint(\"Record deleted successfully\")\n\nconnection.close()"
+            "title": "Class Activity",
+            "text": "Update a student's marks and display updated data."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Delete: Removing Data Safely"
+          },
+          {
+            "type": "paragraph",
+            "text": "The Delete operation removes unwanted data from a database. It helps keep the database clean and accurate. SQL delete commands are used with conditions. Python ensures only selected records are removed. Careful use prevents loss of important data."
+          },
+          {
+            "type": "paragraph",
+            "text": "Example:"
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "import sqlite3\n# Connect to the database\nconnection = sqlite3.connect(\"school.db\")\n# Create a cursor object\ncursor = connection.cursor()\n# Execute DELETE query (example: delete student with ID = 1)\ncursor.execute(\"DELETE FROM students WHERE ID = 1\")\n# Save changes\nconnection.commit()\n# Display confirmation\nprint(\"Record deleted successfully\")\n# Close the connection\nconnection.close()"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "DELETE FROM students WHERE ID = 1 → removes a specific record",
+              "connection.commit() → saves the changes in database",
+              "Without commit(), deletion will not be permanent"
+            ]
           }
         ]
       }
