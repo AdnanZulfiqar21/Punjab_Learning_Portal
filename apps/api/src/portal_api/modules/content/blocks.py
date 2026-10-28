@@ -20,7 +20,7 @@ from contextvars import ContextVar
 from dataclasses import dataclass
 from typing import Annotated, Any, Literal
 
-from pydantic import BaseModel, ConfigDict, Field, TypeAdapter, ValidationError, model_validator
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, TypeAdapter, ValidationError, model_validator
 
 CONTENT_SCHEMA_VERSION = 1
 PLATFORMS = ("web", "android", "ios")
@@ -275,6 +275,9 @@ class Code(_Marked):
     language: Literal["python", "c", "cpp", "java", "javascript", "html", "css", "sql", "pseudocode", "text"] = "python"
     text: Annotated[str, Field(min_length=1, max_length=8000)]
     caption: Short | None = None
+    # CODE-RUNNER-01: set by the content tools only after the program ran cleanly and printed something
+    # (content/tools/mark_runnable.py); a syntax outline or a fragment never gets the reader's "Run" button.
+    runnable: StrictBool = False
 
     def _texts(self) -> list[str]:
         return [*([self.caption] if self.caption else []), self.text]

@@ -36,7 +36,8 @@
           {
             "type": "code",
             "language": "python",
-            "text": "import sqlite3\n\ntry:\n    # Connect to database\n    connection = sqlite3.connect(\"school.db\")\n    cursor = connection.cursor()\n\n    # Insert data into table\n    cursor.execute(\"INSERT INTO students (ID, Name, Age) VALUES (?, ?, ?)\", (1, \"Ali\", 20))\n\n    # Save changes (ensures data integrity)\n    connection.commit()\n    print(\"Data inserted successfully\")\n\nexcept sqlite3.Error as e:\n    # Handle database errors\n    print(\"Error occurred:\", e)\n    connection.rollback()  # Undo changes if error occurs\n\nfinally:\n    # Close connection\n    if connection:\n        connection.close()\n        print(\"Connection closed\")"
+            "text": "import sqlite3\n\ntry:\n    # Connect to database\n    connection = sqlite3.connect(\"school.db\")\n    cursor = connection.cursor()\n\n    # Insert data into table\n    cursor.execute(\"INSERT INTO students (ID, Name, Age) VALUES (?, ?, ?)\", (1, \"Ali\", 20))\n\n    # Save changes (ensures data integrity)\n    connection.commit()\n    print(\"Data inserted successfully\")\n\nexcept sqlite3.Error as e:\n    # Handle database errors\n    print(\"Error occurred:\", e)\n    connection.rollback()  # Undo changes if error occurs\n\nfinally:\n    # Close connection\n    if connection:\n        connection.close()\n        print(\"Connection closed\")",
+            "runnable": true
           },
           {
             "type": "list",
@@ -85,7 +86,8 @@
             "type": "code",
             "language": "python",
             "text": "try:\n    a = int(input(\"First number: \"))\n    b = int(input(\"Second number: \"))\n    print(\"Result:\", a / b)\nexcept ValueError:\n    print(\"Please enter whole numbers only.\")\nexcept ZeroDivisionError:\n    print(\"You cannot divide by zero.\")",
-            "caption": "Izafi misal (kitab mein nahi): class activity, do qism ke exceptions ke saath"
+            "caption": "Izafi misal (kitab mein nahi): class activity, do qism ke exceptions ke saath",
+            "runnable": true
           },
           {
             "type": "checkpoint",

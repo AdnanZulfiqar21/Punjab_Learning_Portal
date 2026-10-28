@@ -1,5 +1,6 @@
 import { Fragment, type ReactNode } from "react";
 import { Checkpoint } from "@/components/checkpoint";
+import { CodeRunner } from "@/components/code-runner";
 import { Equation } from "@/components/equation";
 import { Model3DFigure } from "@/components/model3d-figure";
 import { SaverImage } from "@/components/saver-image";
@@ -122,6 +123,7 @@ export function LessonBlocks({
   blockIds = false,
   typeset,
   premium = false,
+  runnable = false,
 }: {
   blocks: Block[];
   headingOffset?: number;
@@ -136,9 +138,19 @@ export function LessonBlocks({
   typeset?: Record<number, string | null>;
   /** BOOK-STYLE-01: the premium style of a chosen book (lib/book-style.ts `premiumBook`). */
   premium?: boolean;
+  /** CODE-RUNNER-01: Python programs get "Run karein" (the Roman Urdu lesson). */
+  runnable?: boolean;
 }) {
   const view = (b: Block, i: number) => (
-    <BlockView block={b} headingOffset={headingOffset} assetUrl={assetUrl} dataSaver={dataSaver} typeset={typeset?.[i]} premium={premium} />
+    <BlockView
+      block={b}
+      headingOffset={headingOffset}
+      assetUrl={assetUrl}
+      dataSaver={dataSaver}
+      typeset={typeset?.[i]}
+      premium={premium}
+      runnable={runnable}
+    />
   );
   // Each block keeps its own id (b0, b1, …), also inside a Quick Check card, so the language switch finds its place.
   // `data-kind` lets consecutive equations join into one card (globals.css `.lesson-flow`), as the book prints a run of
@@ -206,6 +218,7 @@ function BlockView({
   dataSaver,
   typeset,
   premium = false,
+  runnable = false,
 }: {
   block: Block;
   headingOffset: number;
@@ -213,6 +226,7 @@ function BlockView({
   dataSaver?: boolean;
   typeset?: string | null;
   premium?: boolean;
+  runnable?: boolean;
 }) {
   const marks = bookErrors(b.book_errors);
   switch (b.type) {
@@ -444,6 +458,8 @@ function BlockView({
               </code>
             </pre>
           </div>
+          {/* Only a listing the content tools ran cleanly (content/tools/mark_runnable.py), never an outline or fragment. */}
+          {runnable && b.runnable === true && <CodeRunner code={str(b.text)} />}
         </figure>
       );
     case "diagram":

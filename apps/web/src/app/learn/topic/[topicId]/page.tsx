@@ -232,6 +232,7 @@ async function TopicView({ id, view }: { id: string; view: "read" | "lecture" })
             blockIds
             dataSaver={dataSaver}
             premium={premiumBook(subjectKey(reading.subject_name), reading.grade_number)}
+            runnable={lesson.language === "roman_ur"}
             assetUrl={(versionId) =>
               lesson.private_preview
                 ? `/learn/topics/${shown.topic_id}/preview-assets/${versionId}`
