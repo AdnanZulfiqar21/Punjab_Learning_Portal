@@ -13,84 +13,155 @@
           "source_document_id": "779562c7-0658-5de6-b1a6-2ee025d3b016",
           "pdf_from": 189,
           "pdf_to": 191,
-          "note": "Topic 22.2.1 with both worked examples (PDF 189-191). The book's table labels its totals 'Median = 24' and '4601' (a footnote mark run in); read as total frequency 24 and total 460."
+          "note": "Topic 22.2.1 as printed (PDF 189-191) with both worked examples. The summation signs, missing from the PDF's formulas (only their limits print), are restored; the totals row printed 'Median' and '4601' is marked."
         }
       ],
       "body": {
         "blocks": [
           {
             "type": "paragraph",
-            "text": "The mean, or average, is a measure of central tendency giving the central value of a dataset. In biology it summarises large datasets with one typical value, such as an average size or growth rate. For ungrouped data, mean = (sum of all values) / n, where n is the number of values. For grouped data, mean = sum of (fi x xi) / sum of fi, where xi is the midpoint of the ith class and fi its frequency."
+            "text": "The mean, also known as the average, is a measure of central tendency that gives an idea of the central value in a dataset. From a biological perspective, it can be used to summarize large datasets, providing a central value that represents typical characteristics, such as average size or growth rate."
           },
           {
             "type": "heading",
-            "level": 2,
-            "text": "Worked example: ungrouped data"
+            "level": 3,
+            "text": "Formula"
           },
           {
             "type": "paragraph",
-            "text": "A biologist weighed five birds of one species in a park: 400 g, 420 g, 470 g, 390 g and 460 g. Step 1: add the weights: 400 + 420 + 470 + 390 + 460 = 2140 g. Step 2: count the birds: n = 5. Step 3: divide: 2140 / 5 = 428 g. The average weight is 428 g."
+            "text": "For ungrouped data"
           },
           {
-            "type": "heading",
-            "level": 2,
-            "text": "Worked example: grouped data"
+            "type": "equation",
+            "latex": "\\text{Mean} = \\frac{\\sum x}{n}",
+            "text_alt": "Mean = Σx / n"
           },
           {
             "type": "paragraph",
-            "text": "Plant heights (cm) from plots with different soils are grouped into class intervals. Steps: organise the classes, find each midpoint, multiply each midpoint by its frequency, add the products, and divide by the total frequency."
+            "text": "Where,"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Σx = sum of all the values.",
+              "n = number of values in the dataset."
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "For grouped data"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{Mean} = \\frac{\\sum_{i=1}^{n} f_i x_i}{\\sum_{i=1}^{n} f_i}",
+            "text_alt": "Mean = Σᵢ₌₁ⁿ fᵢxᵢ / Σᵢ₌₁ⁿ fᵢ"
+          },
+          {
+            "type": "paragraph",
+            "text": "Where:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "xᵢ = midpoint of the ith class interval.",
+              "fᵢ = frequency of the ith class.",
+              "Σfᵢ = sum of all the frequencies."
+            ]
+          },
+          {
+            "type": "example",
+            "title": "Steps to calculate the Mean (for ungrouped data)",
+            "problem": "A biologist measured the average weight of a specific species of bird in a park. He recorded the weights (g) of five birds from the same species. The bird’s weights are 400g, 420g, 470g, 390g and 460g.",
+            "steps": [
+              "Step 1: Add all the weights together (ΣX)",
+              "ΣX = 400+420+470+390+460 = 2140 g",
+              "Step 2: Count the total number of birds (n)",
+              "n = 5 birds",
+              "Step 3: Divide the sum of bird’s weights by the number of birds",
+              "Mean = ΣX/n = 2140/5 = 428g"
+            ],
+            "answer": "The average weight of a specific species of birds is 428g."
+          },
+          {
+            "type": "example",
+            "title": "Steps to calculate the Mean (for grouped data)",
+            "problem": "A biologist studied the growth of a certain plant species under different soil conditions. The plant heights (cm) are grouped into class intervals based on measurements from different plots of land with varying soil types.",
+            "steps": [
+              "Step 1: Organize the data set into class intervals.",
+              "Step 2: Calculate the midpoint of each class interval.",
+              "Step 3: Multiply each midpoint by its corresponding frequency.",
+              "Step 4: Sum the products of midpoints and frequencies.",
+              "Step 5: Divide the result of the step 4 by the total frequency."
+            ]
           },
           {
             "type": "table",
-            "caption": "Mean plant height from grouped data",
+            "caption": "Table: Mean plant height (cm) calculation using grouped data across soil types.",
             "header": [
-              "Soil",
-              "Height class (cm)",
-              "Frequency fi",
-              "Midpoint xi",
-              "fi x xi"
+              "Soil Type",
+              "Class Interval (Height in cm)",
+              "Frequency (fᵢ)",
+              "Midpoint (xᵢ = lower limit + upper limit / 2)",
+              "fᵢ,xᵢ"
             ],
             "rows": [
               [
-                "Sandy",
-                "0-10",
+                "Sandy Soil",
+                "0 – 10",
                 "5",
                 "5",
                 "25"
               ],
               [
-                "Loamy",
-                "10-20",
+                "Loamy Soil",
+                "10 – 20",
                 "8",
                 "15",
                 "120"
               ],
               [
-                "Clayey",
-                "20-30",
+                "Clayey Soil",
+                "20 – 30",
                 "7",
                 "25",
                 "175"
               ],
               [
-                "Peaty",
-                "30-40",
+                "Peaty Soil",
+                "30 – 40",
                 "4",
                 "35",
                 "140"
               ],
               [
-                "Total",
+                "Median",
                 "",
-                "24",
+                "Σfᵢ = 24",
                 "",
-                "460"
+                "Σfᵢxᵢ = 4601"
               ]
+            ],
+            "book_errors": [
+              "Median",
+              "4601"
             ]
           },
           {
+            "type": "callout",
+            "tone": "correction",
+            "text": "The last row of the table gives the totals, not the median: Σfᵢ = 24 and Σfᵢxᵢ = 25 + 120 + 175 + 140 = 460 (the book prints the label 'Median' and the value 4601). The calculation below uses 460.",
+            "title": "Book correction"
+          },
+          {
+            "type": "equation",
+            "latex": "\\begin{aligned} \\text{Mean} &= \\frac{\\sum f_i x_i}{\\sum f_i} \\\\ &= \\frac{460}{24} = 19.16667 \\approx 19.17\\,(\\text{cm}) \\end{aligned}",
+            "text_alt": "Mean = Σfᵢxᵢ / Σfᵢ = 460/24 = 19.16667 ≈ 19.17 (cm)"
+          },
+          {
             "type": "paragraph",
-            "text": "Mean = 460 / 24 = 19.17 cm. The average growth of the plants is 19.17 cm."
+            "text": "The average growth of a certain plant species under different soil conditions is 19.17cm."
           }
         ]
       }
