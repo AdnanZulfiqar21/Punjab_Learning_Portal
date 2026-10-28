@@ -2,7 +2,7 @@
 // natively, comparison tables become cards, and `model3d` blocks show a poster render with a drag-to-rotate turntable.
 // An unknown or unsupported block shows its reviewed fallback, or an explicit "update required" note instead of failing.
 import { Image } from "expo-image";
-import { Fragment, useState, type ReactNode } from "react";
+import { createContext, Fragment, useContext, useState, type ReactNode } from "react";
 import { Pressable, ScrollView, Text, View } from "react-native";
 
 import { Checkpoint } from "@/components/checkpoint";
@@ -12,6 +12,7 @@ import { LinkButton, T } from "@/components/ui";
 import { Fonts, Radius, Space } from "@/constants/theme";
 import { useTheme } from "@/hooks/use-theme";
 import { bookErrors, markPieces } from "@/lib/book-errors";
+import { leadIn, leadTerm } from "@/lib/book-style";
 import { comparisonCards } from "@/lib/lesson-tables";
 import { fillMerged, mergedColumns, mergeStarts } from "@/lib/table-merge";
 
@@ -78,12 +79,16 @@ function QuickCheck({ title, children }: { title: string; children: ReactNode })
   );
 }
 
+/** BOOK-STYLE-01: the premium style of a chosen book (lib/book-style.ts `premiumBook`), read by every block. */
+const Premium = createContext(false);
+
 export function LessonBlocks({
   blocks,
   assetSource,
   equationAction,
   dataSaver = false,
   onBlockLayout,
+  premium = false,
 }: {
   blocks: Block[];
   assetSource?: AssetSource;
@@ -93,8 +98,10 @@ export function LessonBlocks({
   equationAction?: (index: number) => ReactNode;
   /** Where each block sits (y within this list), so a language switch can return to the same place. */
   onBlockLayout?: (index: number, y: number) => void;
+  premium?: boolean;
 }) {
   return (
+    <Premium.Provider value={premium}>
     <View style={{ gap: Space.lg }}>
       {blocks.map((b, i) => {
         if (isQuickCheck(blocks[i - 1], b)) return null; // drawn inside the card above
@@ -131,6 +138,7 @@ export function LessonBlocks({
         );
       })}
     </View>
+    </Premium.Provider>
   );
 }
 
@@ -191,13 +199,14 @@ function ArchivedImage({
 
 function Lines({ items, ordered, marks = [] }: { items: string[]; ordered: boolean; marks?: string[] }) {
   const c = useTheme();
+  const premium = useContext(Premium);
   return (
     <View style={{ gap: Space.sm }} accessibilityRole="list">
       {items.map((item, i) => (
         <View key={i} style={{ flexDirection: "row", gap: Space.sm }}>
           <T style={{ width: 24, textAlign: "right", color: c.accent, fontWeight: "700" }}>{ordered ? `${i + 1}.` : "•"}</T>
           <T style={{ flex: 1 }}>
-            <Marked text={item} marks={marks} />
+            <Item text={item} marks={premium ? marks : null} />
           </T>
         </View>
       ))}
@@ -205,8 +214,24 @@ function Lines({ items, ordered, marks = [] }: { items: string[]; ordered: boole
   );
 }
 
+/** BOOK-STYLE-01: "Term: what it means" shows the term bold in the subject colour (premium books; `marks` null = plain). */
+function Item({ text, marks }: { text: string; marks: string[] | null }) {
+  const c = useTheme();
+  const lead = marks ? leadTerm(text, marks) : null;
+  if (!lead) return <Marked text={text} marks={marks ?? []} />;
+  return (
+    <>
+      <Text style={{ fontWeight: "600", color: c.accent }}>
+        <Marked text={`${lead[0]}:`} marks={marks ?? []} />
+      </Text>{" "}
+      <Marked text={lead[1]} marks={marks ?? []} />
+    </>
+  );
+}
+
 function BlockView({ block: b, assetSource, dataSaver }: { block: Block; assetSource?: AssetSource; dataSaver?: boolean }) {
   const c = useTheme();
+  const premium = useContext(Premium);
   const marks = bookErrors(b.book_errors);
   switch (b.type) {
     case "heading":
@@ -221,6 +246,23 @@ function BlockView({ block: b, assetSource, dataSaver }: { block: Block; assetSo
         </T>
       );
     case "paragraph":
+      // BOOK-STYLE-01: a printed "Example:" becomes a label, and a lead-in line a small heading with an accent bar.
+      if (premium && /^example\s*:$/i.test(str(b.text).trim()) && !marks.length)
+        return (
+          <View style={{ alignSelf: "flex-start", backgroundColor: c.accentSoft, borderRadius: 999, paddingHorizontal: Space.md, paddingVertical: 2 }}>
+            <T variant="eyebrow" style={{ color: c.accent }}>
+              {str(b.text).trim().replace(/\s*:$/, "")}
+            </T>
+          </View>
+        );
+      if (premium && leadIn(str(b.text)))
+        return (
+          <View style={{ borderLeftWidth: 4, borderLeftColor: c.accent, borderRadius: 2, paddingLeft: Space.sm }}>
+            <T style={{ fontWeight: "600" }}>
+              <Marked text={str(b.text)} marks={marks} />
+            </T>
+          </View>
+        );
       return (
         <T>
           <Marked text={str(b.text)} marks={marks} />
@@ -272,7 +314,7 @@ function BlockView({ block: b, assetSource, dataSaver }: { block: Block; assetSo
       const cards = comparisonCards(header, rows);
       return (
         <View style={{ gap: Space.sm }} accessibilityLabel={`Table: ${str(b.caption)}`}>
-          <T style={{ fontWeight: "600" }}>
+          <T style={{ fontWeight: "600", color: premium ? c.accent : c.text }}>
             <Marked text={str(b.caption)} marks={marks} />
           </T>
           {cards ? (
@@ -338,8 +380,15 @@ function BlockView({ block: b, assetSource, dataSaver }: { block: Block; assetSo
       return (
         <View
           accessibilityLabel={`Worked example: ${str(b.title)}`}
-          style={{ borderWidth: 1, borderColor: c.border, borderRadius: Radius.sm, padding: Space.md, gap: Space.xs }}>
-          <T variant="eyebrow" style={{ color: c.muted }}>
+          style={{
+            borderWidth: 1,
+            borderColor: c.border,
+            borderRadius: Radius.sm,
+            padding: Space.md,
+            gap: Space.xs,
+            ...(premium ? { borderLeftWidth: 4, borderLeftColor: c.accent } : null),
+          }}>
+          <T variant="eyebrow" style={{ color: premium ? c.accent : c.muted }}>
             Worked example
           </T>
           <T style={{ fontWeight: "600" }}>
