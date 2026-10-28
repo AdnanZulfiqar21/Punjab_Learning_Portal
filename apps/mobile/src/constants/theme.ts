@@ -38,7 +38,7 @@ export const Colors = {
     okSoft: "#13301f",
     danger: "#f19a9a",
     dangerSoft: "#3d1717",
-    subheading: "#8fbfe8",
+    subheading: "#6b9cff", // dark mode: an azure apart from every subject accent (owner, 2026-10-28)
   },
 } as const;
 
@@ -48,9 +48,9 @@ export type Palette = { [K in keyof (typeof Colors)["light"]]: string };
 export const SubjectAccents: Record<string, { light: { accent: string; accentSoft: string }; dark: { accent: string; accentSoft: string } }> = {
   biology: { light: { accent: "#0f7a62", accentSoft: "#e1f3ec" }, dark: { accent: "#5fcfae", accentSoft: "#123a30" } },
   chemistry: { light: { accent: "#9a4b00", accentSoft: "#fdeee0" }, dark: { accent: "#f3b06a", accentSoft: "#3c2410" } },
-  physics: { light: { accent: "#3f46b5", accentSoft: "#e8e9fb" }, dark: { accent: "#a4a9f5", accentSoft: "#1f2250" } },
+  physics: { light: { accent: "#3f46b5", accentSoft: "#e8e9fb" }, dark: { accent: "#c3a6ff", accentSoft: "#2a1f50" } },
   mathematics: { light: { accent: "#8a2a6a", accentSoft: "#f9e6f3" }, dark: { accent: "#e9a1d3", accentSoft: "#3c1532" } },
-  computer_science: { light: { accent: "#0b5d73", accentSoft: "#e3f1f5" }, dark: { accent: "#6cc4dc", accentSoft: "#143440" } },
+  computer_science: { light: { accent: "#0b5d73", accentSoft: "#e3f1f5" }, dark: { accent: "#4dd8e6", accentSoft: "#0f3640" } },
 };
 
 /** The subject code for an API subject name or code ("Biology" → "biology"); unknown subjects keep the default accent. */
