@@ -56,10 +56,30 @@ function Marked({ text, marks }: { text: string; marks: string[] }) {
       {markPieces(text, marks).map((p, i) =>
         p.error ? (
           <mark key={i} title="Printed in the book; see the book correction" className="rounded-sm bg-danger-soft px-0.5 text-danger">
-            {p.text}
+            <Vectors text={p.text} />
           </mark>
         ) : (
-          <Fragment key={i}>{p.text}</Fragment>
+          <Vectors key={i} text={p.text} />
+        ),
+      )}
+    </>
+  );
+}
+
+/** INLINE-VECTOR-01: a vector written in a sentence as a letter plus U+20D7 ("v⃗") gets its arrow drawn above the
+ * letter (globals.css `.vec`): the reading font has no glyph for the combining arrow and showed an empty box. */
+function Vectors({ text }: { text: string }) {
+  const parts = text.split(/(\S\u20D7)/u);
+  if (parts.length === 1) return <>{text}</>;
+  return (
+    <>
+      {parts.map((part, i) =>
+        i % 2 ? (
+          <span key={i} className="vec" aria-label={`vector ${part[0]}`}>
+            {part[0]}
+          </span>
+        ) : (
+          <Fragment key={i}>{part}</Fragment>
         ),
       )}
     </>
