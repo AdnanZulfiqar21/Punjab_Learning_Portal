@@ -298,6 +298,6 @@ function LessonBody({
 }
 
 /** BOOK-HEADING-01: a heading's colour by its depth (lib/book-heading.ts `headingTone`). */
-function toneColor(tone: ReturnType<typeof headingTone>, c: { accent: string; text: string; subheading: string }): string {
-  return tone === "main" ? c.accent : tone === "sub" ? c.subheading : c.text;
+function toneColor(tone: ReturnType<typeof headingTone>, c: { accent: string; heading: string; subheading: string }): string {
+  return tone === "main" ? c.accent : tone === "sub" ? c.subheading : c.heading;
 }

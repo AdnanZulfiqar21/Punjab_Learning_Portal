@@ -9,6 +9,7 @@ export const Colors = {
     surface: "#ffffff",
     surfaceMuted: "#f1ede6",
     text: "#1c1a17",
+    heading: "#1c1a17",
     muted: "#5b5750",
     border: "#e2ddd4",
     accent: "#0b5d73",
@@ -27,6 +28,7 @@ export const Colors = {
     surface: "#1b1e1b",
     surfaceMuted: "#242824",
     text: "#ece9e3",
+    heading: "#e6d3b3", // dark mode: topic titles in a muted champagne above the white text (owner, 2026-10-28)
     muted: "#aaa69e",
     border: "#333832",
     accent: "#6cc4dc",
@@ -38,7 +40,7 @@ export const Colors = {
     okSoft: "#13301f",
     danger: "#f19a9a",
     dangerSoft: "#3d1717",
-    subheading: "#8fbfe8",
+    subheading: "#8fadde", // dark mode: a muted steel blue apart from every subject accent (owner, 2026-10-28)
   },
 } as const;
 
@@ -46,11 +48,11 @@ export type Palette = { [K in keyof (typeof Colors)["light"]]: string };
 
 /** Per-subject accents (text contrast ≥ 4.5:1 on the matching surface). Keys are the API's subject codes. */
 export const SubjectAccents: Record<string, { light: { accent: string; accentSoft: string }; dark: { accent: string; accentSoft: string } }> = {
-  biology: { light: { accent: "#0f7a62", accentSoft: "#e1f3ec" }, dark: { accent: "#5fcfae", accentSoft: "#123a30" } },
-  chemistry: { light: { accent: "#9a4b00", accentSoft: "#fdeee0" }, dark: { accent: "#f3b06a", accentSoft: "#3c2410" } },
-  physics: { light: { accent: "#3f46b5", accentSoft: "#e8e9fb" }, dark: { accent: "#a4a9f5", accentSoft: "#1f2250" } },
-  mathematics: { light: { accent: "#8a2a6a", accentSoft: "#f9e6f3" }, dark: { accent: "#e9a1d3", accentSoft: "#3c1532" } },
-  computer_science: { light: { accent: "#0b5d73", accentSoft: "#e3f1f5" }, dark: { accent: "#6cc4dc", accentSoft: "#143440" } },
+  biology: { light: { accent: "#0f7a62", accentSoft: "#e1f3ec" }, dark: { accent: "#7fc9ad", accentSoft: "#123a30" } },
+  chemistry: { light: { accent: "#9a4b00", accentSoft: "#fdeee0" }, dark: { accent: "#e3a376", accentSoft: "#3c2410" } },
+  physics: { light: { accent: "#3f46b5", accentSoft: "#e8e9fb" }, dark: { accent: "#b4a6ea", accentSoft: "#2a1f50" } },
+  mathematics: { light: { accent: "#8a2a6a", accentSoft: "#f9e6f3" }, dark: { accent: "#dca5c6", accentSoft: "#3c1532" } },
+  computer_science: { light: { accent: "#0b5d73", accentSoft: "#e3f1f5" }, dark: { accent: "#7cc6cf", accentSoft: "#0f3640" } },
 };
 
 /** The subject code for an API subject name or code ("Biology" → "biology"); unknown subjects keep the default accent. */

@@ -12,7 +12,14 @@ type Variant = "title" | "heading" | "subheading" | "body" | "muted" | "small" |
 export function T({ variant = "body", style, ...rest }: TextProps & { variant?: Variant }) {
   const c = useTheme();
   const { scale } = useDisplay(); // SETTINGS-01: larger text on this device; the system text size still applies on top
-  const color = variant === "muted" || variant === "small" ? c.muted : variant === "eyebrow" ? c.accent : c.text;
+  const color =
+    variant === "muted" || variant === "small"
+      ? c.muted
+      : variant === "eyebrow"
+        ? c.accent
+        : variant === "title" || variant === "heading" || variant === "subheading"
+          ? c.heading
+          : c.text;
   const v = text[variant];
   const sized = scale === 1 ? v : { ...v, fontSize: v.fontSize * scale, lineHeight: v.lineHeight * scale };
   return <Text style={[{ color }, sized, style]} {...rest} />;
