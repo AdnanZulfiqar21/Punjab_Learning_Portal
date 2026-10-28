@@ -14,14 +14,23 @@
           "source_document_id": "bfc68b7f-dac5-5e57-a286-814710fe09bc",
           "pdf_from": 99,
           "pdf_to": 100,
-          "note": "Roman Urdu explanation of AC through an RC series circuit (PDF 99-100)."
+          "note": "Roman Urdu explanation of topic 17.10 and Example 17.6 (PDF 99-100)."
         }
       ],
       "body": {
         "blocks": [
           {
             "type": "paragraph",
-            "text": "Resistance R aur capacitor C AC source V se series mein jure hain (Fig 17.9 a). Dono se aik hi current guzarta hai. R par voltage VR = Irms R hai, current ke saath in phase; C par voltage VC = Irms XC = Irms / (wC), current se 90 darje peeche. Current ko hawala le kar VR current ki lakeer ke saath aur VC us ke amudan banaya jata hai (Fig 17.9 b). Lagaya voltage vector jor hai: Vrms = (VR^2 + VC^2) ka square root = Irms x (R^2 + (1/wC)^2) ka square root. Is liye impedance Z = Vrms / Irms = (R^2 + (1/wC)^2) ka square root (17.21)."
+            "text": "Resistance R aur capacitor C series mein alternating voltage source V se jure hain (Fig. 17.9(a)). Series mein hone ki wajah se dono mein ek hi current behta hai. R par voltage V_R = Iᵣₘₛ R hai aur yeh current ke saath in phase hai. Voltage aur current ka vector diagram Fig. 17.9(b) mein hai. Current ko reference (hawala) maan kar V_R ko current wali lakeer ke saath hi banate hain. Capacitor par voltage:"
+          },
+          {
+            "type": "equation",
+            "latex": "V_C = I_{rms}X_C = \\frac{I_{rms}}{\\omega C}",
+            "text_alt": "V_C = IᵣₘₛX_C = Iᵣₘₛ/ωC"
+          },
+          {
+            "type": "paragraph",
+            "text": "Capacitor par voltage current se π/2 rad (90°) peeche hota hai, is liye Iᵣₘₛ X_C wala vector current ki lakeer par seedha khara (90° par) banate hain (Fig. 17.9(b))."
           },
           {
             "type": "diagram",
@@ -31,7 +40,42 @@
           },
           {
             "type": "paragraph",
-            "text": "Yeh impedance diagram (Fig 17.9 c) R ko hawala simt mein aur XC ko amudan dikhata hai; Z un ka vector jor hai. Z aur R ke darmiyan zawiya theta voltage aur current ka phase farq hai: yahan current voltage se theta aage hai (Fig 17.9 d), jahan theta = tan^-1(XC/R) = tan^-1(1/(wCR)) = tan^-1(1/(2 pi f C R))."
+            "text": "Circuit mein current chalane wala kul voltage Vᵣₘₛ in do vectors, Iᵣₘₛ R aur Iᵣₘₛ/ωC, ka resultant hai. Dono 90° par hain, is liye Pythagoras se:"
+          },
+          {
+            "type": "equation",
+            "latex": "V_{rms} = \\sqrt{(V_R)^2 + (V_C)^2}",
+            "text_alt": "Vᵣₘₛ = √((V_R)² + (V_C)²)"
+          },
+          {
+            "type": "equation",
+            "latex": "V_{rms} = \\sqrt{(I_{rms}R)^2 + \\left(\\frac{I_{rms}}{\\omega C}\\right)^2}",
+            "text_alt": "Vᵣₘₛ = √((IᵣₘₛR)² + (Iᵣₘₛ/ωC)²)"
+          },
+          {
+            "type": "equation",
+            "latex": "V_{rms} = I_{rms}\\sqrt{R^2 + \\left(\\frac{1}{\\omega C}\\right)^2}",
+            "text_alt": "Vᵣₘₛ = Iᵣₘₛ √(R² + (1/ωC)²)"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{Impedance} \\quad Z = \\frac{V_{rms}}{I_{rms}} = \\sqrt{R^2 + \\left(\\frac{1}{\\omega C}\\right)^2} \\tag{17.21}",
+            "text_alt": "Impedance Z = Vᵣₘₛ/Iᵣₘₛ = √(R² + (1/ωC)²)   (17.21)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Eq. 17.21 batati hai ke series AC circuit ki impedance vectors jama kar ke milti hai. R ko current (reference) ki simt mein ek horizontal lakeer se dikhate hain. Reactance X_C = 1/ωC ko R wali lakeer se 90° peeche (neeche) ki lakeer se dikhate hain (Fig. 17.9(c)). Z in dono ka vector sum hai; Fig. 17.9(c) circuit ka impedance diagram kehlata hai. Z wali lakeer R wali lakeer se jo angle θ banati hai, wahi voltage aur current ka phase difference hai: RC circuit mein current lagaye gaye voltage se θ angle aage hota hai (Fig. 17.9(d)):"
+          },
+          {
+            "type": "equation",
+            "latex": "\\theta = \\tan^{-1}\\left(\\frac{X_C}{R}\\right) = \\tan^{-1}\\left(\\frac{1}{\\omega CR}\\right) = \\tan^{-1}\\left(\\frac{1}{2\\pi fCR}\\right)",
+            "text_alt": "θ = tan⁻¹(X_C/R) = tan⁻¹(1/ωCR) = tan⁻¹(1/2πfCR)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab aakhri hissa tan⁻¹(1/2πfC) chhapti hai, R reh gaya hai. Sahi tan⁻¹(1/2πfCR) hai (ω = 2πf rakhein). Example 17.6 bhi yahi sahi formula istemal karti hai."
           },
           {
             "type": "diagram",
@@ -41,41 +85,64 @@
           },
           {
             "type": "callout",
-            "tone": "tip",
-            "title": "Diagram ko samjhein",
-            "text": "Kitab ki Fig 17.9 (d) mein current poora 90 darje aage aur voltage se mukhtalif frequency par bana hai. Series circuit mein dono ki frequency aik hi hoti hai, aur RC circuit mein current voltage se sirf zawiya theta aage hota hai (0 aur 90 darje ke darmiyan), jaisa impedance diagram (c) dikhata hai. Khaake mein yahi durust surat hai."
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab ki Fig. 17.9(d) mein current voltage se poora 90° aage aur alag frequency par bana hai. Series circuit mein dono ki frequency ek hi hoti hai, aur RC circuit mein current voltage se sirf angle θ aage hota hai (0° aur 90° ke darmiyan), jaisa impedance diagram (c) dikhata hai; khaake mein yahi sahi surat hai."
           },
           {
             "type": "paragraph",
-            "text": "RC series circuit mein kharch taqat resistor ki wajah se hai, kyunke capacitor sirf tawanai jama karta aur zaya nahi karta: P = I^2 R, ya P = VI cos(theta) (17.22), jahan theta voltage aur current ka phase zawiya hai."
+            "text": "RC series circuit mein power asal mein resistor kharch karta hai; capacitor sirf energy jama karta hai, kharch nahi karta. Resistor ki power:"
           },
           {
-            "type": "heading",
-            "level": 2,
-            "text": "Misal 17.6"
+            "type": "equation",
+            "latex": "P = I^2R",
+            "text_alt": "P = I²R"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{or} \\qquad P = VI\\cos\\theta \\tag{17.22}",
+            "text_alt": "or   P = VI cos θ   (17.22)"
           },
           {
             "type": "paragraph",
-            "text": "5 kilo-ohm resistor 5 uF capacitor ke saath series mein 220 V, 50 Hz AC source par jura hai. Phase zawiya maloom karein. Hal: theta = tan^-1(1/(2 pi f C R)) = tan^-1[1/(2 x 3.14 x 50 Hz x 5 x 10^-6 F x 5000 ohm)] = tan^-1(0.1273) = 7.25 darje."
+            "text": "Yahan I current, R resistance, V voltage aur θ voltage aur current ka phase angle hai. cos θ ko power factor kehte hain."
+          },
+          {
+            "type": "example",
+            "title": "Example 17.6",
+            "problem": "5 kΩ ka resistor aur 5 μF ka capacitor series mein 220 V, 50 Hz ke AC source se jure hain. Phase angle nikalein.",
+            "steps": [
+              "Diya gaya: R = 5 kΩ = 5000 Ω, C = 5 μF = 5 × 10⁻⁶ F, f = 50 Hz",
+              "Phase angle θ = tan⁻¹(1/ωCR), aur ω = 2πf, is liye θ = tan⁻¹(1/2πfCR)",
+              "2πfCR = 2 × 3.14 × 50 Hz × 5 × 10⁻⁶ F × 5000 Ω = 7.85",
+              "1/7.85 = 0.1273"
+            ],
+            "answer": "θ = tan⁻¹(0.1273) ≈ 7.25°"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab sawal mein capacitance '5 F' likhti hai lekin hal mein 5 μF (5 × 10⁻⁶ F) istemal karti hai; sahi 5 μF hai. Aakhri line mein resistance '5000 W' chhapi hai; sahi 5000 Ω hai."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
-            "prompt": "Misal 17.6 mein impedance aur rms current maloom karein.",
-            "explanation": "XC = 1/(2 x 3.14 x 50 x 5 x 10^-6) = 637 ohm; Z = (5000^2 + 637^2) ka square root = 5040 ohm; Irms = 220 V / 5040 ohm = 0.044 A (44 mA)."
+            "prompt": "Example 17.6 ke circuit (R = 5000 Ω, C = 5 μF, 220 V, 50 Hz) ki impedance aur rms current nikalein.",
+            "explanation": "X_C = 1/(2 × 3.14 × 50 Hz × 5 × 10⁻⁶ F) ≈ 637 Ω; Z = √(5000² + 637²) Ω ≈ 5040 Ω; Iᵣₘₛ = 220 V / 5040 Ω ≈ 0.044 A (44 mA)."
           },
           {
             "type": "heading",
             "level": 2,
-            "text": "Fauri khulasa"
+            "text": "Mukhtasar khulasa"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "RC series: Z = sqrt(R^2 + (1/wC)^2).",
-              "Current voltage se theta = tan^-1(1/(wCR)) aage.",
-              "Taqat sirf R mein: P = I^2 R = VI cos(theta)."
+              "RC series: Z = √(R² + (1/ωC)²).",
+              "Current voltage se θ = tan⁻¹(1/ωCR) aage.",
+              "Power sirf R mein: P = I²R = VI cos θ."
             ]
           }
         ]

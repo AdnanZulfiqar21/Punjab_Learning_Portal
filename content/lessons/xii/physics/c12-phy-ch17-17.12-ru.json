@@ -14,14 +14,28 @@
           "source_document_id": "bfc68b7f-dac5-5e57-a286-814710fe09bc",
           "pdf_from": 102,
           "pdf_to": 105,
-          "note": "Roman Urdu explanation of AC through an RLC series circuit (PDF 102-105)."
+          "note": "Roman Urdu explanation of topic 17.12, Example 17.7 and an extra resonance example of ours (PDF 102-104)."
         }
       ],
       "body": {
         "blocks": [
           {
             "type": "paragraph",
-            "text": "Badalne wali frequency ke AC source se jura RLC series circuit lein (Fig 17.11 a). Is ke impedance diagram (Fig 17.11 b) mein inductive reactance XL = wL aur capacitive reactance XC = 1/(wC) mukhalif simton mein hain. Is liye impedance Z = (R^2 + (XL - XC)^2) ka square root (17.24) = (R^2 + (wL - 1/(wC))^2) ka square root (17.25)."
+            "text": "Ek RLC series circuit lein jis ka AC source ki frequency badli ja sakti hai (Fig. 17.11(a)). Is ka impedance diagram Fig. 17.11(b) mein hai, jahan inductive reactance X_L = ωL aur capacitive reactance X_C = 1/ωC ek doosre ki ulti simt mein hain (ek upar, ek neeche)."
+          },
+          {
+            "type": "paragraph",
+            "text": "RLC series circuit ki impedance:"
+          },
+          {
+            "type": "equation",
+            "latex": "Z = \\sqrt{R^2 + (X_L - X_C)^2} \\tag{17.24}",
+            "text_alt": "Z = √(R² + (X_L − X_C)²)   (17.24)"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{or} \\qquad Z = \\sqrt{R^2 + \\left(\\omega L - \\frac{1}{\\omega C}\\right)^2} \\tag{17.25}",
+            "text_alt": "or   Z = √(R² + (ωL − 1/ωC)²)   (17.25)"
           },
           {
             "type": "diagram",
@@ -33,11 +47,65 @@
             "type": "callout",
             "tone": "tip",
             "title": "Diagram ko samjhein",
-            "text": "XL aur XC aik doosre ke ulat simt mein hain (aik +90 darje, doosri -90 darje), is liye un ka farq XL - XC hi R ke saath milta hai: Z = (R^2 + (XL - XC)^2) ka square root. Agar XL bari ho to circuit RL jaisa, XC bari ho to RC jaisa."
+            "text": "X_L aur X_C ek doosre ki ulti simt mein hain (ek +90°, doosri −90°), is liye un ka farq X_L − X_C hi R ke saath milta hai: Z = √(R² + (X_L − X_C)²). X_L bari ho to circuit RL jaisa, X_C bari ho to RC jaisa."
           },
           {
             "type": "paragraph",
-            "text": "Zyada frequency par XL = wL, XC = 1/(wC) se kaheen zyada hai, is liye inductance ghalib aur circuit RL series ki tarah bartao karta hai. Kam frequency par XC ghalib aur yeh RC series ki tarah bartao karta hai. Darmiyan aik frequency wr hai jis par XL = XC: barabar aur mukhalif reactances aik doosre ko khatam karti hain, aur circuit sirf resistance wale circuit ki tarah bartao karta hai (Fig 17.11 c). Yeh halat resonance kehlati hai. wr L = 1/(wr C) se: wr^2 = 1/(LC), wr = 1/(LC) ka square root, aur kyunke wr = 2 pi fr, resonant frequency fr = 1/(2 pi x (LC) ka square root) (17.26)."
+            "text": "Zyada frequency par X_L = ωL, X_C = 1/ωC se bohat bari hoti hai; inductance ghalib (dominant) hoti hai aur circuit RL series circuit jaisa bartao karta hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Kam frequency par X_C = 1/ωC, X_L = ωL se bohat bari hoti hai; capacitance ghalib hoti hai aur circuit RC series circuit jaisa bartao karta hai (Fig. 17.11(b))."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Brain teaser",
+            "text": "Kitab ceiling fan ki wiring ki tasveer dikhati hai (live wire, switch, running winding, capacitor ke saath starting winding, rotor) aur poochti hai: ceiling fan mein kaunsa AC circuit istemal hota hai?"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Brain teaser ka jawab: ceiling fan mein kaunsa AC circuit hota hai?",
+            "explanation": "Capacitor-start (split-phase) motor circuit. Starting winding ke saath series mein capacitor laga hai, is liye us ka current running winding ke current se phase mein aage khisak jata hai. Do windings ke alag phase wale currents mil kar ghoomta (rotating) magnetic field banate hain jo rotor ko ghumata hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "In dono ke darmiyan ek frequency ωᵣ aati hai jis par X_L = X_C. Is halat mein RLC series circuit sirf resistor (R) wale circuit jaisa ban jata hai (Fig. 17.11(c))."
+          },
+          {
+            "type": "paragraph",
+            "text": "Is halat ko resonance kehte hain. Resonance par X_L aur X_C barabar aur ulti simt mein hain, is liye ek doosre ko khatam (cancel) kar deti hain. Resonance frequency fᵣ is shart se milti hai:"
+          },
+          {
+            "type": "equation",
+            "latex": "X_L = X_C",
+            "text_alt": "X_L = X_C"
+          },
+          {
+            "type": "equation",
+            "latex": "\\omega_r L = \\frac{1}{\\omega_r C}",
+            "text_alt": "ωᵣL = 1/ωᵣC"
+          },
+          {
+            "type": "equation",
+            "latex": "\\omega_r^2 = \\frac{1}{LC}",
+            "text_alt": "ωᵣ² = 1/LC"
+          },
+          {
+            "type": "equation",
+            "latex": "\\omega_r = \\frac{1}{\\sqrt{LC}} \\qquad \\text{As } \\omega_r = 2\\pi f_r, \\text{ so}",
+            "text_alt": "ωᵣ = 1/√LC   As ωᵣ = 2πfᵣ, so"
+          },
+          {
+            "type": "equation",
+            "latex": "2\\pi f_r = \\frac{1}{\\sqrt{LC}}",
+            "text_alt": "2πfᵣ = 1/√LC"
+          },
+          {
+            "type": "equation",
+            "latex": "f_r = \\frac{1}{2\\pi\\sqrt{LC}} \\tag{17.26}",
+            "text_alt": "fᵣ = 1/(2π√LC)   (17.26)"
           },
           {
             "type": "diagram",
@@ -47,68 +115,97 @@
           },
           {
             "type": "heading",
-            "level": 2,
-            "text": "RLC series circuit ki ahem khasiyatein"
+            "level": 3,
+            "text": "RLC series circuit ki khaas baatein"
           },
           {
-            "type": "list",
-            "ordered": true,
-            "items": [
-              "Impedance aur resonance: resonance par impedance kam se kam, Z = R, aur fr = 1/(2 pi x (LC) ka square root).",
-              "Current: resonance par impedance kam se kam hone ki wajah se current zyada se zyada hai (Fig 17.11 d).",
-              "Phase zawiya: resonance par sifar; voltage aur current in phase aur power factor 1.",
-              "Damping: resistor current ke jhoolne ko damp karta hai; zyada resistance zyada damping. Gari ka suspension mechanical misal hai: shock absorber resistance ki tarah tawanai zaya karta, aur kamiyat aur spring resonant frequency tay karte hain (Fig 17.11 e, tasveer).",
-              "Tuning aur filtering: resonance par RLC series circuits radio receivers tune karne aur doosre rabte ke aalaat mein, aur band-pass filters ke taur par use hote hain jo chuni hui frequencies guzar kar baqi kamzor karte hain.",
-              "Voltage ka barhna: resonance par inductor aur capacitor par alag alag voltage lagaye gaye voltage se kaheen zyada ho sakta hai.",
-              "Taqat: haqeeqi taqat P = VI cos(theta) (17.27), sab se zyada jab theta = 0, yani resonance par ya khalis resistance ke liye. Apparent power VI ke barabar hai."
-            ]
+            "type": "paragraph",
+            "text": "Series RLC circuit aisa circuit hai jise alag alag frequencies par khaas bartao ke liye banaya ja sakta hai; is liye electronics mein bohat kaam aata hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "1. Impedance aur resonance: resonance par impedance sab se kam (Z = R) hoti hai, aur resonant frequency:"
+          },
+          {
+            "type": "equation",
+            "latex": "f_r = \\frac{1}{2\\pi\\sqrt{LC}}",
+            "text_alt": "fᵣ = 1/(2π√LC)"
+          },
+          {
+            "type": "paragraph",
+            "text": "2. Current: resonance par impedance sab se kam hai, is liye current sab se zyada hota hai (Fig. 17.11(d))."
+          },
+          {
+            "type": "paragraph",
+            "text": "3. Phase angle: resonance par phase angle zero hai: voltage aur current in phase hain aur power factor 1 hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "4. Damping: resistor current ke jhoolne (oscillations) ko damp karta hai (dheema kar ke khatam karta hai). Zyada resistance = zyada damping, oscillations jaldi khatam. Gari ke spring par pahiye ki harkat RLC series circuit jaisi hai: shock absorber harkat ko damp karta aur energy kharch karta hai (resistance ki tarah), aur mass aur spring resonant frequency tay karte hain (Fig. 17.11(e), kitab mein tasveer)."
+          },
+          {
+            "type": "paragraph",
+            "text": "5. Tuning aur filtering: RLC series circuits, khaas kar resonance par, radio receivers aur communication devices mein tuning (station pakarne) ke liye istemal hote hain. Yeh band-pass filter ban kar ek khaas frequency range ke signals guzarne dete hain aur baqi ko kamzor (attenuate) kar dete hain."
+          },
+          {
+            "type": "paragraph",
+            "text": "6. Voltage amplification: resonance par inductor aur capacitor par voltage lagaye gaye voltage se kahin zyada ho sakta hai, kyunke un ke darmiyan current ghoomta rehta hai. Ise voltage amplification kehte hain."
+          },
+          {
+            "type": "paragraph",
+            "text": "7. Power ka kharch: RLC series circuit mein power:"
+          },
+          {
+            "type": "equation",
+            "latex": "P = VI\\cos\\theta \\tag{17.27}",
+            "text_alt": "P = VI cos θ   (17.27)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Ise true power (asal power) kehte hain. Sab se zyada power θ = 0 par kharch hoti hai, jo sirf resistor mein mumkin hai. Apparent power (zahiri power) sirf VI hoti hai (unit volt-ampere); power factor cos θ = true power / apparent power."
           },
           {
             "type": "callout",
             "tone": "correction",
             "title": "Kitab ki ghalti",
-            "text": "Kitab kehti hai ke apparent power 'VI cos(theta) ke barabar hai'. Apparent power hasil-e-zarb VI (volt-ampere mein) hai; haqeeqi taqat VI cos(theta) hai, aur power factor cos(theta) in ka tanasub hai."
+            "text": "Kitab kehti hai ke apparent power 'VI cos θ ke barabar' hai. Sahi: apparent power VI (volt-ampere) hai; VI cos θ to true power hai (Eq. 17.27)."
+          },
+          {
+            "type": "example",
+            "title": "Example 17.7",
+            "problem": "LCR series circuit mein inductor par 20 V, capacitor par 11 V aur resistor par 12 V hain. Kul voltage aur current ka phase difference, aur AC source ka Vᵣₘₛ nikalein.",
+            "steps": [
+              "Diya gaya: V_L = 20 V, V_C = 11 V, V_R = 12 V",
+              "tan θ = (V_L − V_C)/V_R = (20 V − 11 V)/12 V = 9/12 = 0.75",
+              "θ = tan⁻¹(0.75) ≈ 36.8° (voltage current se aage, kyunke V_L > V_C)",
+              "Vᵣₘₛ = √((V_R)² + (V_L − V_C)²) = √((12 V)² + (9 V)²)",
+              "= √(144 V² + 81 V²) = √(225 V²)"
+            ],
+            "answer": "θ ≈ 36.8° aur Vᵣₘₛ = 15 V"
+          },
+          {
+            "type": "example",
+            "title": "Izafi misal (kitab mein nahi)",
+            "problem": "L = 10 mH aur C = 1.0 μF wale series circuit ki resonant frequency nikalein.",
+            "steps": [
+              "fᵣ = 1/(2π√LC)",
+              "LC = 10 × 10⁻³ H × 1.0 × 10⁻⁶ F = 1.0 × 10⁻⁸ s², √LC = 1.0 × 10⁻⁴ s",
+              "fᵣ = 1/(2 × 3.14 × 1.0 × 10⁻⁴ s)"
+            ],
+            "answer": "fᵣ ≈ 1.59 × 10³ Hz ≈ 1.6 kHz"
           },
           {
             "type": "heading",
             "level": 2,
-            "text": "Misal 17.7"
-          },
-          {
-            "type": "paragraph",
-            "text": "LCR circuit mein inductor, capacitor aur resistor par voltages VL = 20 V, VC = 11 V aur VR = 12 V hain. Nateeja voltage aur current ka phase farq, aur source ka rms voltage maloom karein. Hal: tan(theta) = (VL - VC)/VR = (20 V - 11 V)/12 V = 0.75, is liye theta = tan^-1(0.75) = 36.9 darje. Vrms = [VR^2 + (VL - VC)^2] ka square root = [(12 V)^2 + (9 V)^2] ka square root = 225 V^2 ka square root = 15 V."
-          },
-          {
-            "type": "heading",
-            "level": 2,
-            "text": "Hal shuda misal (izafi)"
-          },
-          {
-            "type": "paragraph",
-            "text": "L = 10 mH aur C = 1.0 uF wale series circuit ki resonant frequency maloom karein. Hal: fr = 1/(2 pi x (LC) ka square root) = 1/(2 x 3.14 x (10 x 10^-3 x 1.0 x 10^-6) ka square root) = 1/(2 x 3.14 x 1.0 x 10^-4) = 1.59 x 10^3 Hz, taqreeban 1.6 kHz."
-          },
-          {
-            "type": "heading",
-            "level": 2,
-            "text": "Dimagh ki kasrat"
-          },
-          {
-            "type": "checkpoint",
-            "mode": "self_check",
-            "prompt": "Kitab ceiling fan ki wiring dikhati hai: switch, running winding, capacitor ke saath series mein starting winding, aur rotor. Yeh kis qism ka AC circuit hai?",
-            "explanation": "Capacitor-start (split-phase) motor circuit: series capacitor ke saath starting winding RLC jaisi shaakh banati hai jis ka current running winding ke current se phase mein khiska hai, is liye dono windings mil kar ghoomta magnetic field banati hain."
-          },
-          {
-            "type": "heading",
-            "level": 2,
-            "text": "Fauri khulasa"
+            "text": "Mukhtasar khulasa"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "RLC series: Z = sqrt(R^2 + (XL - XC)^2).",
-              "XL = XC par resonance: fr = 1/(2 pi sqrt(LC)); Z = R, current zyada se zyada, power factor 1.",
+              "RLC series: Z = √(R² + (X_L − X_C)²).",
+              "X_L = X_C par resonance: fᵣ = 1/(2π√LC); Z = R, current sab se zyada, power factor 1.",
+              "True power = VI cos θ; apparent power = VI.",
               "Istemal: radio tuning, band-pass filters."
             ]
           }

@@ -13,14 +13,23 @@
           "source_document_id": "bfc68b7f-dac5-5e57-a286-814710fe09bc",
           "pdf_from": 99,
           "pdf_to": 100,
-          "note": "Topic 17.10 with Example 17.6 (PDF 99-100); Fig 17.9 (a)-(d) redrawn in the rc-rl figure. The example's capacitance printed '5 F' is read as 5 uF. The check question is added."
+          "note": "Topic 17.10 as printed with Example 17.6 (PDF 99-100, printed 95-96); Fig 17.9 (a)-(d) redrawn. The line Vrms = Irms sqrt(R^2 + (1/wC)^2) is printed twice."
         }
       ],
       "body": {
         "blocks": [
           {
             "type": "paragraph",
-            "text": "A resistance R and a capacitor C are connected in series to an AC source V (Fig 17.9 a). The same current flows through both. The voltage across R is VR = Irms R, in phase with the current; the voltage across C is VC = Irms XC = Irms / (wC), lagging the current by 90 degrees. Taking the current as the reference, VR is drawn along the current line and VC at right angles to it (Fig 17.9 b). The applied voltage is the vector sum: Vrms = square root of (VR^2 + VC^2) = Irms square root of (R^2 + (1/wC)^2). So the impedance is Z = Vrms / Irms = square root of (R^2 + (1/wC)^2) (17.21)."
+            "text": "Consider a network of resistance R and a capacitor C connected in series by an alternating voltage source V as shown in Fig.17.9 (a). As R and C are in series, so same current would flow through each of them. The potential difference V across the resistance R would be Iᵣₘₛ R and it would be in phase with the current. The vector diagram of the voltage and current is shown in Fig.17.9 (b). Taking the current as reference, potential difference V_R = Iᵣₘₛ R across the resistance is represented by a line along the current line because potential drop Iᵣₘₛ R is in phase with current. The potential difference across the capacitor will be:"
+          },
+          {
+            "type": "equation",
+            "latex": "V_C = I_{rms}X_C = \\frac{I_{rms}}{\\omega C}",
+            "text_alt": "V_C = IᵣₘₛX_C = Iᵣₘₛ/ωC"
+          },
+          {
+            "type": "paragraph",
+            "text": "As this, voltage lags behinds the current by π / 2 rad or 90°, so the line representing the vector Iᵣₘₛ X_C is drawn at right angles to the current line Fig.17.9 (b)."
           },
           {
             "type": "diagram",
@@ -30,7 +39,51 @@
           },
           {
             "type": "paragraph",
-            "text": "This impedance diagram (Fig 17.9 c) shows R along the reference direction and XC at right angles; Z is their vector sum. The angle theta between Z and R is the phase difference between the voltage and the current: here the current leads the voltage by theta (Fig 17.9 d), where theta = tan^-1(XC/R) = tan^-1(1/(wCR)) = tan^-1(1/(2 pi f C R))."
+            "text": "The applied voltage Vᵣₘₛ that will send the current I in the circuit is obtained by resultant of the vectors Iᵣₘₛ R and Iᵣₘₛ/ωC i.e;"
+          },
+          {
+            "type": "equation",
+            "latex": "V_{rms} = \\sqrt{(V_R)^2 + (V_C)^2}",
+            "text_alt": "Vᵣₘₛ = √((V_R)² + (V_C)²)"
+          },
+          {
+            "type": "equation",
+            "latex": "V_{rms} = \\sqrt{(I_{rms}R)^2 + \\left(\\frac{I_{rms}}{\\omega C}\\right)^2}",
+            "text_alt": "Vᵣₘₛ = √((IᵣₘₛR)² + (Iᵣₘₛ/ωC)²)"
+          },
+          {
+            "type": "equation",
+            "latex": "V_{rms} = I_{rms}\\sqrt{R^2 + \\left(\\frac{1}{\\omega C}\\right)^2}",
+            "text_alt": "Vᵣₘₛ = Iᵣₘₛ √(R² + (1/ωC)²)"
+          },
+          {
+            "type": "equation",
+            "latex": "V_{rms} = I_{rms}\\sqrt{R^2 + \\left(\\frac{1}{\\omega C}\\right)^2}",
+            "text_alt": "Vᵣₘₛ = Iᵣₘₛ √(R² + (1/ωC)²)"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{Impedance} \\quad Z = \\frac{V_{rms}}{I_{rms}} = \\sqrt{R^2 + \\left(\\frac{1}{\\omega C}\\right)^2} \\tag{17.21}",
+            "text_alt": "Impedance Z = Vᵣₘₛ/Iᵣₘₛ = √(R² + (1/ωC)²)   (17.21)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Equation 17.21 suggests that we can find the impedance of a series AC circuit by vector addition. The resistance R is represented by a horizontal line in the direction of current which is taken as reference. The reactance X_C = 1 / ω C is shown by a line lagging the R-Q line by 90° as shown in Fig.17.9(c). The impedance Z of the circuit is obtained by the vector summation of resistance and reactance. Figure 17.9(c) is known as impedance diagram of the circuit. The angle which the line representing the impedance Z makes with R line gives the phase difference between the voltage and current I in Fig. 17.9(c), the current is leading the voltage applied by the angle θ as shown in Fig.17.9(d) and is given by"
+          },
+          {
+            "type": "equation",
+            "latex": "\\theta = \\tan^{-1}\\left(\\frac{X_C}{R}\\right) = \\tan^{-1}\\left(\\frac{1}{\\omega CR}\\right) = \\tan^{-1}\\left(\\frac{1}{2\\pi fC}\\right)",
+            "text_alt": "θ = tan⁻¹(X_C/R) = tan⁻¹(1/ωCR) = tan⁻¹(1/2πfC)",
+            "book_errors": [
+              "tan⁻¹(1/2πfC)",
+              "\\frac{1}{2\\pi fC}"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The last form is printed without R: it is θ = tan⁻¹(1/2πfCR), since ω = 2πf and X_C/R = 1/ωCR (Example 17.6 uses 1/2πfCR)."
           },
           {
             "type": "diagram",
@@ -42,20 +95,47 @@
             "type": "callout",
             "tone": "correction",
             "title": "Book correction",
-            "text": "The printed Figure 17.9(d) draws voltage and current 90 degrees apart and at different frequencies. In a series RC circuit both have the same frequency and the current leads the voltage by the angle theta, as drawn above."
+            "text": "The printed Figure 17.9(d) draws voltage and current 90° apart and at different frequencies. In a series RC circuit both have the same frequency and the current leads the voltage by the angle θ, as drawn above."
           },
           {
             "type": "paragraph",
-            "text": "The power consumed in an RC series circuit is due to the resistor, because the capacitor only stores energy and does not dissipate it: P = I^2 R, or P = VI cos(theta) (17.22), where theta is the phase angle between voltage and current."
+            "text": "The power consumed in RC-series circuit is primarily due to the resistor, as the capacitor only stores energy and does not dissipate it. The power consumed by the resistor can be calculated by using the formula:"
           },
           {
-            "type": "heading",
-            "level": 2,
-            "text": "Example 17.6"
+            "type": "equation",
+            "latex": "P = I^2R",
+            "text_alt": "P = I²R"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{or} \\qquad P = VI\\cos\\theta \\tag{17.22}",
+            "text_alt": "or   P = VI cos θ   (17.22)"
           },
           {
             "type": "paragraph",
-            "text": "A 5 kilo-ohm resistor is connected in series with a 5 uF capacitor across a 220 V, 50 Hz AC source. Find the phase angle. Solution: theta = tan^-1(1/(2 pi f C R)) = tan^-1[1/(2 x 3.14 x 50 Hz x 5 x 10^-6 F x 5000 ohm)] = tan^-1(0.1273) = 7.25 degrees."
+            "text": "where I is the current, R is the resistance, V is the voltage, and θ is the phase angle between voltage and current."
+          },
+          {
+            "type": "example",
+            "title": "Example 17.6",
+            "problem": "A resistor of resistance 5 kΩ is connected in series with capacitor of capacitance 5 F across the AC source of 220 V that has frequency 50 Hz. Calculate the phase angle.",
+            "steps": [
+              "Resistance R = 5 kΩ = 5000 Ω,\nCapacitance C = 5 μF = 5 × 10⁻⁶ F\nand Frequency f = 50 Hz",
+              "We know that;\nPhase angle θ = tan⁻¹(1/ωCR)",
+              "As ω = 2πf, so\nθ = tan⁻¹(1/2πf CR)",
+              "Putting the values\nθ = tan⁻¹(1/(2 × 3.14 × 50 Hz × 0.000005 F × 5000 W))"
+            ],
+            "answer": "θ = tan⁻¹(0.1273) = 7.25°",
+            "book_errors": [
+              "5 F",
+              "5000 W"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The capacitance is 5 μF (5 × 10⁻⁶ F), as the solution uses; the problem prints '5 F'. In the last line the resistance is 5000 Ω, printed '5000 W'."
           }
         ]
       }
