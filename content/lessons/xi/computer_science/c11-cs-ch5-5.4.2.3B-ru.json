@@ -21,7 +21,7 @@
         "blocks": [
           {
             "type": "paragraph",
-            "text": "Model banate waqt akhlaqi pehluon (ethical implications) ka khayal rakhna zaroori hai, jaise insaf (fairness) aur privacy."
+            "text": "Model banate waqt ethical implications (sahi aur ghalat ke pehlu) ka khayal rakhna zaroori hai, jaise fairness (insaf, sab ke saath barabar sulook) aur privacy (logon ki zaati baatein chhupi rehna)."
           },
           {
             "type": "heading",
@@ -30,7 +30,7 @@
           },
           {
             "type": "paragraph",
-            "text": "Model munsif ho aur tarafdari (bias) na kare. Maslan agar model se tay ho raha ho ke qarz (loan) kis ko mile, to woh kisi ek group ke logon ko doosron par be-ja tarjeeh na de."
+            "text": "Model fair ho aur bias (tarafdari, kisi ek ki taraf jhukao) na kare. Maslan agar model se tay ho raha ho ke loan (qarz) kis ko mile, to woh kisi ek group ke logon ko doosron se ghalat tareeqe se aage na rakhe."
           },
           {
             "type": "heading",
@@ -39,13 +39,13 @@
           },
           {
             "type": "paragraph",
-            "text": "Zaati (personal) data se model banate waqt privacy ka ehtiram zaroori hai. Maslan agar company customers ka data istemal karti hai to use data mehfooz rakhna chahiye aur ijazat ke baghair share nahi karna chahiye."
+            "text": "Personal (zaati) data se model banate waqt privacy ki izzat karna zaroori hai. Maslan agar company customers ka data istemal karti hai to use data secure (mehfooz) rakhna chahiye aur ijazat ke baghair share nahi karna chahiye."
           },
           {
             "type": "callout",
             "tone": "note",
             "title": "Tidbits",
-            "text": "Model banane se pehle hamesha data ka graph bana kar dekhein, aur behtar durusti ke liye nataij ko naye data par aazmayein."
+            "text": "Model banane se pehle hamesha data ka graph bana kar dekhein (visualize karein), aur behtar accuracy ke liye results ko naye data par test karein."
           },
           {
             "type": "heading",
@@ -54,7 +54,7 @@
           },
           {
             "type": "paragraph",
-            "text": "Neeche data students ke parhai ke ghanton aur test mein haasil marks ka taluq dikhata hai. Aap ka kaam: aisa linear regression model banana jo parhai ke ghanton se marks ka andaza lagaye."
+            "text": "Neeche data students ke parhai ke ghanton aur test mein haasil marks ka relation (taluq) dikhata hai. Aap ka kaam: aisa linear regression model banana jo parhai ke ghanton se marks ka andaza lagaye."
           },
           {
             "type": "table",
@@ -101,19 +101,19 @@
               "Data points graph par lagayein (x-axis par parhai ke ghante, y-axis par marks).",
               "Linear regression se line ki equation nikalein.",
               "Equation se 7 ghante parhne wale student ke marks ka andaza lagayein.",
-              "Model data par kitna achha baithta hai? Asal aur andaze wale marks ka farq (error) nikal kar jawab dein."
+              "Model data par kitna achha fit hota hai? Asal aur andaze wale marks ka farq (error) nikal kar jawab dein."
             ]
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
-            "prompt": "Class activity (linear regression) hal karein: data points graph par lagayein (x-axis par ghante, y-axis par marks), linear regression se line ki equation nikalein, 7 ghante ke marks ka andaza lagayein aur asal aur andaze ke farq se bataiye ke line data par kitni achhi baithti hai.",
-            "explanation": "Graph banayein (neeche jawab ka diagram). Ghanton ka mean = 3.5 aur marks ka mean = 215 ÷ 6 ≈ 35.83. Least squares se slope β₁ = Σ(x − x̄)(y − ȳ) ÷ Σ(x − x̄)² = 107.5 ÷ 17.5 ≈ 6.14 aur intercept β₀ = 35.83 − 6.14 × 3.5 ≈ 14.33. Line: Marks = 14.33 + 6.14 × Hours. 7 ghante par: 14.33 + 6.14 × 7 ≈ 57.3 marks. Error (asal − andaza) 1 se 6 ghante tak: −0.48, −1.62, 2.24, 1.10, −0.05, −1.19; sab taqreeban 2 marks ke andar hain, is liye line data par achhi baithti hai.",
+            "prompt": "Class activity (linear regression) hal karein: data points graph par lagayein (x-axis par ghante, y-axis par marks), linear regression se line ki equation nikalein, 7 ghante ke marks ka andaza lagayein aur asal aur andaze ke farq se bataiye ke line data par kitni achhi fit hoti hai.",
+            "explanation": "Graph banayein (neeche jawab ka diagram). Ghanton ka mean = 3.5 aur marks ka mean = 215 ÷ 6 ≈ 35.83. Least squares se slope β₁ = Σ(x − x̄)(y − ȳ) ÷ Σ(x − x̄)² = 107.5 ÷ 17.5 ≈ 6.14 aur intercept β₀ = 35.83 − 6.14 × 3.5 ≈ 14.33. Line: Marks = 14.33 + 6.14 × Hours. 7 ghante par: 14.33 + 6.14 × 7 ≈ 57.3 marks. Error (asal − andaza) 1 se 6 ghante tak: −0.48, −1.62, 2.24, 1.10, −0.05, −1.19; sab taqreeban 2 marks ke andar hain, is liye line data par achhi fit hoti hai.",
             "answer_figure": {
               "$asset": "c11-cs-ch5-fig-answer-hours-marks-line",
-              "alt": "Graph: x-axis par parhai ke ghante (0 se 8), y-axis par haasil marks (0 se 70). Chhe neele nuqte (1, 20), (2, 25), (3, 35), (4, 40), (5, 45), (6, 50). Un ke beech se guzarti seedhi line Marks = 14.33 + 6.14 × Hours. 7 ghante par hara nuqta 57.3 marks ka andaza dikhata hai.",
+              "alt": "Graph: x-axis par parhai ke ghante (0 se 8), y-axis par haasil marks (0 se 70). Chhe neele points (1, 20), (2, 25), (3, 35), (4, 40), (5, 45), (6, 50). Un ke beech se guzarti seedhi line Marks = 14.33 + 6.14 × Hours. 7 ghante par hara point 57.3 marks ka andaza dikhata hai.",
               "caption": "Jawab ka diagram (pehle khud banayein, phir milayein): data points aur least-squares line Marks = 14.33 + 6.14 × Hours, 7 ghante par andaza 57.3.",
-              "long_description": "Graph mein x-axis par parhai ke ghante 0 se 8 tak aur y-axis par haasil marks 0 se 70 tak hain. Class activity ke chhe data points neele nuqton se dikhaye gaye hain: 1 ghante par 20, 2 par 25, 3 par 35, 4 par 40, 5 par 45 aur 6 par 50 marks. Laal seedhi line least squares se nikali gayi line hai: Marks = 14.33 + 6.14 × Hours; yeh x = 0 par 14.33 se shuru hoti hai. Har nuqta line ke bohat qareeb hai (sab se zyada farq 3 ghante par taqreeban 2.2 marks). 7 ghante par hara nuqta line par 57.3 marks ka andaza dikhata hai, aur dotted lakeerein use dono axes se jorti hain."
+              "long_description": "Graph mein x-axis par parhai ke ghante 0 se 8 tak aur y-axis par haasil marks 0 se 70 tak hain. Class activity ke chhe data points neele points se dikhaye gaye hain: 1 ghante par 20, 2 par 25, 3 par 35, 4 par 40, 5 par 45 aur 6 par 50 marks. Laal seedhi line least squares se nikali gayi line hai: Marks = 14.33 + 6.14 × Hours; yeh x = 0 par 14.33 se shuru hoti hai. Har point line ke bohat qareeb hai (sab se zyada farq 3 ghante par taqreeban 2.2 marks). 7 ghante par hara point line par 57.3 marks ka andaza dikhata hai, aur dotted lines use dono axes se jorti hain."
             }
           },
           {
@@ -123,7 +123,7 @@
           },
           {
             "type": "paragraph",
-            "text": "Aap college ke administrator hain aur midterm marks se andaza lagana chahte hain ke students final exam mein pass honge ya fail. Neeche students ke midterm marks aur final ka nateeja hai. Aap ka kaam: midterm marks se pass hone ka imkan batane wala logistic regression model banana."
+            "text": "Aap college ke administrator (intezam chalane wale afsar) hain aur midterm marks se andaza lagana chahte hain ke students final exam mein pass honge ya fail. Neeche students ke midterm marks aur final ka nateeja hai. Aap ka kaam: midterm marks se pass hone ka imkan batane wala logistic regression model banana."
           },
           {
             "type": "table",
@@ -174,19 +174,19 @@
               "Data points graph par lagayein (x-axis par midterm marks, y-axis par pass/fail).",
               "Data par logistic regression model fit karein.",
               "Model se andaza lagayein ke midterm mein 55 lene wale student ke pass hone ka imkan kitna hai.",
-              "Bahas karein ke logistic regression yeh andaza lagane mein kaise madad karta hai aur kya yeh durust hai."
+              "Discuss karein (baat karein) ke logistic regression yeh andaza lagane mein kaise madad karta hai aur kya yeh andaza sahi hai."
             ]
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
-            "prompt": "Class activity (logistic regression) hal karein: points graph par lagayein (x-axis par midterm marks, y-axis par pass/fail), logistic curve ka khaaka banayein, midterm mein 55 wale student ke pass hone ka imkan bataiye aur bataiye ke andaza kitna durust hai.",
-            "explanation": "Graph banayein (neeche jawab ka diagram): 30, 40, 50 par 0 aur 60, 70, 80, 90 par 1. Data 50 aur 60 ke darmiyan bilkul do hisson mein bant jata hai (perfect separation), is liye fit kiya hua logistic curve apna 0.5 wala nuqta 50 aur 60 ke beech rakhta hai; dono taraf barabar data ho to yeh nuqta 55 par aata hai. Is liye 55 par pass ka imkan taqreeban 0.5 (50%) hai. Lekin yeh andaza ghair yaqeeni hai: perfect separation mein data curve ki dhalaan tay nahi karta (fit karte karte curve ek seedhi seerhi (step) jaisa ban jata hai), aur 50 se 60 ke darmiyan koi data nahi. Is range mein zyada students ka data model ko qabil-e-aitbaar banayega.",
+            "prompt": "Class activity (logistic regression) hal karein: points graph par lagayein (x-axis par midterm marks, y-axis par pass/fail), logistic curve ka rough sketch (kachcha diagram) banayein, midterm mein 55 wale student ke pass hone ka imkan bataiye aur bataiye ke andaza kitna sahi hai.",
+            "explanation": "Graph banayein (neeche jawab ka diagram): 30, 40, 50 par 0 aur 60, 70, 80, 90 par 1. Data 50 aur 60 ke beech bilkul do hisson mein bant jata hai (perfect separation: neeche sab fail, oopar sab pass), is liye fit kiya hua logistic curve apna 0.5 wala point 50 aur 60 ke beech rakhta hai; dono taraf barabar data ho to yeh point 55 par aata hai. Is liye 55 par pass ki probability taqreeban 0.5 (50%) hai. Lekin yeh andaza pakka nahi (uncertain) hai: perfect separation mein data curve ki dhalaan (slope) tay nahi karta (fit karte karte curve ek seerhi ke ek step jaisa ban jata hai), aur 50 se 60 ke beech koi data nahi. Is range mein zyada students ka data model ko reliable (bharose ke qabil) banayega.",
             "answer_figure": {
               "$asset": "c11-cs-ch5-fig-answer-midterm-logistic",
-              "alt": "Graph: x-axis par midterm marks (20 se 100), y-axis par pass hone ka imkan (0 se 1). 30, 40, 50 par laal nuqte 0 (fail) par aur 60, 70, 80, 90 par hare nuqte 1 (pass) par. Ek S-shakal curve 50 aur 60 ke darmiyan 0 se 1 ki taraf uthta hai aur 55 par 0.5 se guzarta hai.",
+              "alt": "Graph: x-axis par midterm marks (20 se 100), y-axis par pass hone ka imkan (0 se 1). 30, 40, 50 par laal points 0 (fail) par aur 60, 70, 80, 90 par hare points 1 (pass) par. Ek S-shape curve 50 aur 60 ke beech 0 se 1 ki taraf uthta hai aur 55 par 0.5 se guzarta hai.",
               "caption": "Jawab ka diagram (pehle khud banayein, phir milayein): pass/fail points aur ek logistic curve jo 55 marks par 0.5 se guzarta hai (curve ki dhalaan sirf misal ke liye).",
-              "long_description": "Graph mein x-axis par midterm marks 20 se 100 tak aur y-axis par pass hone ki probability 0 se 1 tak hai. Fail hone wale students (30, 40 aur 50 marks) laal nuqton se 0 par, aur pass hone wale (60, 70, 80 aur 90 marks) hare nuqton se 1 par dikhaye gaye hain. Jamni S-shakal logistic curve kam marks par 0 ke qareeb hai, 50 aur 60 ke darmiyan tezi se uthta hai aur zyada marks par 1 ke qareeb pahunchta hai. Dotted lakeerein dikhati hain ke 55 marks par curve 0.5 (50%) se guzarta hai. Data 50 aur 60 ke darmiyan bilkul do hisson mein bata hua hai, is liye curve ki asal dhalaan data se tay nahi hoti; yahan dhalaan sirf misal ke liye hai."
+              "long_description": "Graph mein x-axis par midterm marks 20 se 100 tak aur y-axis par pass hone ki probability 0 se 1 tak hai. Fail hone wale students (30, 40 aur 50 marks) laal points se 0 par, aur pass hone wale (60, 70, 80 aur 90 marks) hare points se 1 par dikhaye gaye hain. Purple S-shape logistic curve kam marks par 0 ke qareeb hai, 50 aur 60 ke beech tezi se uthta hai aur zyada marks par 1 ke qareeb pahunchta hai. Dotted lines dikhati hain ke 55 marks par curve 0.5 (50%) se guzarta hai. Data 50 aur 60 ke beech bilkul do hisson mein bata hua hai, is liye curve ki asal dhalaan data se tay nahi hoti; yahan dhalaan sirf misal ke liye hai."
             }
           },
           {
@@ -196,11 +196,11 @@
           },
           {
             "type": "paragraph",
-            "text": "Aap ek dukaan mein kaam karte hain aur customers ko do groups mein baantna chahte hain, un ke mahana kharche ki bunyad par do cheezon mein: groceries aur kapre. Neeche chhe customers ka mahana kharcha hai. Aap ka kaam: K-means clustering se inhein do clusters mein baantna."
+            "text": "Aap ek dukaan mein kaam karte hain aur customers ko do groups mein baantna (segment karna) chahte hain, un ke mahine ke kharche ki bunyad par do cheezon mein: groceries aur kapre. Neeche chhe customers ka mahine ka kharcha hai. Aap ka kaam: K-means clustering se inhein do clusters mein baantna."
           },
           {
             "type": "table",
-            "caption": "Chhe customers ka mahana kharcha",
+            "caption": "Chhe customers ka mahine ka kharcha",
             "header": [
               "Customer",
               "Groceries par kharcha ($)",
@@ -248,17 +248,17 @@
             "ordered": true,
             "items": [
               "K = 2 clusters chunein aur randomly do shuruati centers chunein.",
-              "Har customer ko kharche ke hisab se qareeb tareen cluster mein rakhein.",
-              "Har cluster mein har category ka ausat kharcha nikal kar centers dobara nikalein.",
-              "Yeh amal dohrayein jab tak centers ruk na jayein.",
-              "Clusters ka jaiza lein aur har group ke customers ki kharch ki aadatein bayan karein."
+              "Har customer ko kharche ke hisab se sab se qareeb cluster mein rakhein.",
+              "Har cluster mein har category ka average kharcha nikal kar centers dobara nikalein.",
+              "Yeh process (kaam) dohrayein jab tak centers ruk na jayein (stable ho jayein).",
+              "Clusters ko analyze karein (jaanchein) aur har group ke customers ki kharch ki aadatein likhein."
             ]
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "Class activity (K-means): customers ke groceries aur kapron ke kharche (150, 100), (200, 150), (100, 50), (80, 20), (160, 90) aur (40, 10) ko do clusters mein baantein. Asal duniya mein K-means kahan lag sakta hai? (Long question 6)",
-            "explanation": "Customer 2 (200, 150) aur Customer 6 (40, 10) ko shuruati centers banayein. Faasle se Customers 1, 2 aur 5 pehle cluster mein aur 3, 4 aur 6 doosre mein jate hain. Naye centers (170, 113.3) aur (73.3, 26.7) hain, aur dobara faasle nikalne par koi customer group nahi badalta, is liye clusters mustahkam hain: zyada kharch karne wale (1, 2, 5) aur kam kharch karne wale (3, 4, 6). Asal misal: dukaan ke customers. Data saaf karein, kharche ek paimane par layein, K karobari zaroorat ya kai qeematein aazma kar chunein, K-means chalayein, phir har cluster bayan kar ke us ke liye offers tay karein."
+            "explanation": "Customer 2 (200, 150) aur Customer 6 (40, 10) ko shuruati centers banayein. Faasle se Customers 1, 2 aur 5 pehle cluster mein aur 3, 4 aur 6 doosre mein jate hain. Naye centers (170, 113.3) aur (73.3, 26.7) hain, aur dobara faasle nikalne par koi customer group nahi badalta, is liye clusters stable hain: zyada kharch karne wale (1, 2, 5) aur kam kharch karne wale (3, 4, 6). Asal misal: dukaan ke customers. Data preprocess karein (pehle saaf karein), kharchon ko ek hi scale (paimane) par layein, K business ki zaroorat dekh kar ya kai values try kar ke chunein, K-means chalayein, phir har cluster ki khoobiyan likh kar us ke liye offers tay karein."
           },
           {
             "type": "heading",
@@ -269,7 +269,7 @@
             "type": "list",
             "ordered": false,
             "items": [
-              "Akhlaqiyat: fairness (tarafdari nahi) aur data privacy.",
+              "Ethics (sahi aur ghalat): fairness (tarafdari nahi) aur data privacy.",
               "Activities: Marks = 14.33 + 6.14 × ghante (7 ghante ≈ 57.3); midterm 55 par imkan ≈ 0.5; customers zyada kharch (1, 2, 5) aur kam kharch (3, 4, 6) wale groups mein."
             ]
           }

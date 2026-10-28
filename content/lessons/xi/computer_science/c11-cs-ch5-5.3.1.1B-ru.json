@@ -21,26 +21,26 @@
         "blocks": [
           {
             "type": "paragraph",
-            "text": "Kabhi data adhoora hota hai ya us mein qeematein ghayab (missing values) hoti hain. Ise sambhalne ke mukhtalif tareeqe hain. Agar ghayab qeematon wali qataarein (rows) bohat kam hon to unhein hata sakte hain. Doosra tareeqa yeh hai ke ghayab qeemat ausat se ya milte julte cases ke data se bhar di jaye. Kaunsa tareeqa chunna hai, yeh data ki qism aur ghayab maloomat ki miqdar par depend karta hai."
+            "text": "Kabhi data adhoora hota hai ya us mein missing values (ghayab qeematein) hoti hain. Inhein handle karne (sambhalne) ke alag alag tareeqe hain. Agar missing values wali rows (lines) bohat kam hon to unhein hata sakte hain. Doosra tareeqa yeh hai ke ghayab qeemat average se ya milte julte cases ke data se bhar di jaye. Kaunsa tareeqa chunna hai, yeh data ki qism aur is baat par depend karta hai ke kitna data ghayab hai."
           },
           {
             "type": "paragraph",
-            "text": "Misal: Students ke grades ke dataset mein agar Sara ka grade ghayab ho to us ki karkardagi ka andaza lagana mushkil hai. Is ke liye yeh tareeqe istemal ho sakte hain:"
+            "text": "Misal: Students ke grades ke dataset mein agar Sara ka grade ghayab ho to us ki performance (kitna achha kiya) ka andaza lagana mushkil hai. Is ke liye yeh tareeqe istemal ho sakte hain:"
           },
           {
             "type": "list",
             "ordered": true,
             "items": [
-              "Imputation (andaze se bharna): maujooda data se ghayab qeemat ka andaza lagaya jata hai. Misal: school Sara ki class ke sab students ka ausat grade nikalta hai. Agar ausat 82 ho to filhal yahi qeemat Sara ke record mein likh di jaye. Is tarah dataset mukammal rehta hai aur Sara ki karkardagi ke bare mein ek maqool andaza lagta hai.",
-              "Flagging (nishan lagana): school dataset mein note laga deta hai ke Sara ka grade dastiyab nahi. Is se analysts ko pata rehta hai ke data adhoora hai. Yeh tareeqa saaf shaffaf (transparent) hai aur khali jagah bhare baghair analysis jari rehta hai.",
-              "Removal (nikal dena): agar ghayab entries kam hon to school kuch khaas analyses se Sara ka record nikal sakta hai. Yeh tab theek hai jab is se students ki majmooi karkardagi ki samajh par zyada asar na pade. Lekin is se Sara ke bare mein qeemti maloomat zaya ho sakti hai."
+              "Imputation (andaze se bharna): jo data paas hai us se ghayab qeemat ka andaza lagaya jata hai. Misal: school Sara ki class ke sab students ka average grade nikalta hai. Agar average 82 ho to filhal yahi qeemat Sara ke record mein likh di jaye. Is tarah dataset poora (complete) rehta hai aur Sara ki performance ke bare mein ek reasonable (theek lagne wala) andaza lagta hai.",
+              "Flagging (nishan lagana): school dataset mein note laga deta hai ke Sara ka grade available (maujood) nahi. Is se analysts ko pata rehta hai ke data adhoora hai. Yeh tareeqa transparent (sab ke saamne saaf) hai aur khali jagah bhare baghair analysis chalta rehta hai.",
+              "Removal (nikal dena): agar ghayab entries kam hon to school kuch khaas analyses se Sara ka record nikal sakta hai. Yeh tab theek hai jab is se students ki overall performance (sab ki mili juli karkardagi) ki samajh par zyada asar na pade. Lekin is se Sara ke bare mein qeemti information zaya (khatam) ho sakti hai."
             ]
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
-            "prompt": "Sara ke liye class ka ausat 82 bharna gumrah kun kyun ho sakta hai?",
-            "explanation": "Sara ka asal grade class ausat se kahin zyada ya kam ho sakta hai. Is liye bhari hui qeemat ko andaza likh kar nishan lagana (flag) chahiye aur asal grade milne par badal dena chahiye."
+            "prompt": "Sara ke liye class ka average 82 bharna misleading (ghalat raah dikhane wala) kyun ho sakta hai?",
+            "explanation": "Sara ka asal grade class average se kahin zyada ya kam ho sakta hai. Is liye bhari hui qeemat ko andaza likh kar nishan lagana (flag) chahiye aur asal grade milne par badal dena chahiye."
           },
           {
             "type": "heading",
@@ -51,7 +51,7 @@
             "type": "list",
             "ordered": false,
             "items": [
-              "Ghayab data: imputation (maslan class ka ausat), flagging ya removal; har ek ke faide aur nuqsan."
+              "Missing data: imputation (maslan class ka average), flagging ya removal; har ek ke faide aur nuqsan."
             ]
           }
         ]

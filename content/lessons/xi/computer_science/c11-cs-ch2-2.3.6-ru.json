@@ -21,42 +21,42 @@
         "blocks": [
           {
             "type": "paragraph",
-            "text": "Operator precedence (tarteeb ki tarjeeh) batati hai ke expression mein kaunsa amal pehle hoga. Python mein bhi, riyazi (Mathematics) ki tarah, kuch operators ki tarjeeh zyada hai aur woh pehle hal hote hain. Yeh samajhna zaroori hai ta ke hisaab theek ho."
+            "text": "Operator precedence (pehle kaun hoga, is ka rule) batati hai ke expression mein kaunsa operation pehle hoga. Python mein bhi, Mathematics (riyazi) ki tarah, kuch operators ki precedence zyada hai aur woh pehle hal hote hain. Yeh samajhna zaroori hai ta ke hisaab theek ho."
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "Qausain '( )': sab se zyada tarjeeh; andar ka hisaab sab se pehle. (3 + 2) * 4 = 20.",
+              "Parentheses (brackets) '( )': sab se zyada precedence; andar ka hisaab sab se pehle. (3 + 2) * 4 = 20.",
               "Exponentiation (**, power): is ke baad. 2³, yani 2 ** 3 = 8.",
-              "Zarb '*', taqseem '/' aur modulus '%': phir yeh. 4*3 = 12, 10/2 = 5.0 aur 11%3 = 2.",
-              "Jama '+' aur tafreeq '-': in ki tarjeeh zarb aur taqseem se kam hai. 5 + 2 = 7 aur 10-4 = 6.",
-              "Misaal: 3 + 2*5 mein zarb jama se pehle hogi: 3 + 2*5 = 3 + 10 = 13."
+              "Multiplication '*', division '/' aur modulus '%': phir yeh. 4*3 = 12, 10/2 = 5.0 aur 11%3 = 2.",
+              "Addition '+' aur subtraction '-': in ki precedence multiplication aur division se kam hai. 5 + 2 = 7 aur 10-4 = 6.",
+              "Misaal: 3 + 2*5 mein multiplication addition se pehle hogi: 3 + 2*5 = 3 + 10 = 13."
             ]
           },
           {
             "type": "diagram",
             "$asset": "c11-cs-ch2-fig-precedence-ladder",
-            "alt": "Chaar khaanon ki seerhi: sab se oopar qausain ( ), phir power **, phir zarb, taqseem aur modulus * / %, aur sab se neeche jama aur tafreeq + -. Baen taraf teer 'pehle' se 'baad mein' ki taraf. Neeche misalein: 3 + 2 * 5 -> 3 + 10 -> 13 aur (3 + 2) * 4 -> 5 * 4 -> 20.",
+            "alt": "Chaar khaanon ki seerhi: sab se oopar brackets ( ), phir power **, phir multiplication, division aur modulus * / %, aur sab se neeche addition aur subtraction + -. Baen taraf teer 'pehle' se 'baad mein' ki taraf. Neeche misalein: 3 + 2 * 5 -> 3 + 10 -> 13 aur (3 + 2) * 4 -> 5 * 4 -> 20.",
             "caption": "Operator precedence ki seerhi: jo oopar hai woh pehle hota hai (asal khaaka; kitab mein figure nahi)."
           },
           {
             "type": "callout",
             "tone": "note",
             "title": "Class Activity",
-            "text": "Neeche ki expressions hal karein aur nateeje class fellows aur teacher se milayein.\n1. 10 + 3*2 **2-5/5\n2. (10 + 3) * (2 ** (2 - 1)) / 5\nIn ko Python syntax mein likhein (kitab mein kasar (fraction) ki lakeer beech mein chhapi hai):\n1. 5 + 3 x4-7 2² +1\n2. 10 x (2 + 3) - 4² 8 :  2 +5"
+            "text": "Neeche ki expressions hal karein aur results class fellows aur teacher se milayein.\n1. 10 + 3*2 **2-5/5\n2. (10 + 3) * (2 ** (2 - 1)) / 5\nIn ko Python syntax mein likhein (kitab mein fraction (kasar) ki lakeer beech mein chhapi hai):\n1. 5 + 3 x4-7 2² +1\n2. 10 x (2 + 3) - 4² 8 :  2 +5"
           },
           {
             "type": "callout",
             "tone": "tip",
             "title": "Dhyan dein",
-            "text": "Kitab mein \"translate\" wali dono expressions ki kasar (fraction) ki shakal chhapai mein bigar gayi hai, is liye un ka theek matlab yaqeeni nahi. Pehli ko agar 5 + (3 x 4 - 7) / (2² + 1) parha jaye to Python mein 5 + (3 * 4 - 7) / (2 ** 2 + 1) likhenge, jis ka jawab 6.0 hai. Yaad rakhein: x ki jagah *, power ke liye ** aur kasar ke upar aur neeche wale hisson ko qausain mein rakhein."
+            "text": "Kitab mein \"translate\" wali dono expressions ki fraction wali shakal chhapai mein bigar gayi hai, is liye un ka theek matlab pakka nahi. Pehli ko agar 5 + (3 x 4 - 7) / (2² + 1) parha jaye to Python mein 5 + (3 * 4 - 7) / (2 ** 2 + 1) likhenge, jis ka jawab 6.0 hai. Yaad rakhein: x ki jagah *, power ke liye ** aur fraction ke upar aur neeche wale hisson ko brackets mein rakhein."
           },
           {
             "type": "callout",
             "tone": "note",
             "title": "Did You Know?",
-            "text": "Qausain laga kar lambi expressions saaf ho jati hain aur hisaab usi tarteeb se hota hai jo aap chahte hain."
+            "text": "Brackets laga kar lambi expressions saaf ho jati hain aur hisaab usi order (tarteeb) se hota hai jo aap chahte hain."
           },
           {
             "type": "checkpoint",
@@ -67,14 +67,14 @@
           {
             "type": "checkpoint",
             "mode": "self_check",
-            "prompt": "Operator precedence ki tareef kijiye aur aisi misal dijiye jahan yeh nateeja badle (short question 3).",
-            "explanation": "Yeh qaida hai ke kaunsa amal pehle hoga. 2 + 3 * 4 ka jawab 14 hai kyunke * + se pehle hota hai, jabke (2 + 3) * 4 ka 20."
+            "prompt": "Operator precedence ki definition (matlab) bataiye aur aisi misal dijiye jahan yeh nateeja badle (short question 3).",
+            "explanation": "Yeh rule hai ke kaunsa operation pehle hoga. 2 + 3 * 4 ka jawab 14 hai kyunke * + se pehle hota hai, jabke (2 + 3) * 4 ka 20."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "Long question 1: paanch expressions nikalein, maslan (b) (25 + 3 * 4 ** 2 - 6) / (2 ** 3 + 1) - 7 aur (d) 45 / (2 ** 2 + 3 * 4) + 8 * (7 - 3).",
-            "explanation": "(b) 4 ** 2 = 16, 3 * 16 = 48, 25 + 48 - 6 = 67; 2 ** 3 + 1 = 9; 67 / 9 = 7.444..; 7 ghata kar 0.444... (d) 2 ** 2 + 12 = 16, 45 / 16 = 2.8125; 8 * 4 = 32; kul 34.8125. (c) (12 + 6 * (5 - 2)) ** 2 / ((4 ** 2 - 7) + 10) = 30 ** 2 / 19 = 900 / 19 = 47.37. Hisse (a) aur (e) mein tooti alamat chhapi hai ('9 7, 4' aur '10 7. 3'); ise % maan kar, (a) (18 / 3 + 4 ** 2) - (2 * (7 - 3)) / (9 % 4) = 22.0 - 8.0 = 14.0 aur (e) (14 * 3 + 5 ** 2 - 28) / (4 + 2 ** 3) + 10 % 3 = 39 / 12 + 1 = 4.25."
+            "explanation": "(b) 4 ** 2 = 16, 3 * 16 = 48, 25 + 48 - 6 = 67; 2 ** 3 + 1 = 9; 67 / 9 = 7.444..; 7 ghata kar 0.444... (d) 2 ** 2 + 12 = 16, 45 / 16 = 2.8125; 8 * 4 = 32; kul 34.8125. (c) (12 + 6 * (5 - 2)) ** 2 / ((4 ** 2 - 7) + 10) = 30 ** 2 / 19 = 900 / 19 = 47.37. Hisse (a) aur (e) mein toota hua symbol (nishan) chhapa hai ('9 7, 4' aur '10 7. 3'); ise % maan kar, (a) (18 / 3 + 4 ** 2) - (2 * (7 - 3)) / (9 % 4) = 22.0 - 8.0 = 14.0 aur (e) (14 * 3 + 5 ** 2 - 28) / (4 + 2 ** 3) + 10 % 3 = 39 / 12 + 1 = 4.25."
           },
           {
             "type": "heading",
@@ -85,7 +85,7 @@
             "type": "list",
             "ordered": false,
             "items": [
-              "Tarteeb: ( ) phir ** phir * / % phir + -.",
+              "Order: ( ) phir ** phir * / % phir + -.",
               "3 + 2*5 = 13 magar (3 + 2)*5 = 25."
             ]
           }
