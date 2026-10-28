@@ -21,7 +21,7 @@
         "blocks": [
           {
             "type": "paragraph",
-            "text": "Depth-First Search (DFS) ek aur graph traversal algorithm hai jo kisi shaakh (branch) mein jitna neeche ja sake jata hai, phir wapas mur kar (backtrack kar ke) doosri shaakhein dekhta hai. Dekhne wale nodes sambhalne ke liye yeh stack (dher: jo aakhir mein rakha woh pehle utha) istemal karta hai."
+            "text": "Depth-First Search (DFS) ek aur graph traversal algorithm hai jo kisi branch (shaakh) mein jitna neeche ja sake jata hai, phir wapas mur kar (backtrack kar ke) doosri branches (shaakhein) dekhta hai. Dekhne wale nodes sambhalne ke liye yeh stack (dher: jo aakhir mein rakha woh pehle utha) istemal karta hai."
           },
           {
             "type": "paragraph",
@@ -32,51 +32,51 @@
             "ordered": false,
             "items": [
               "Root node se shuru karein aur use stack par rakhein (push).",
-              "Stack se ek node uthayein (pop), use process karein, aur us ke tamam na dekhe gaye parosi stack par rakh dein.",
-              "Yeh amal stack khali hone tak dohrayein."
+              "Stack se ek node uthayein (pop), use process karein, aur us ke tamam na dekhe gaye neighbors (saath jure nodes) stack par rakh dein.",
+              "Yeh process stack khali hone tak dohrayein."
             ]
           },
           {
             "type": "diagram",
             "$asset": "c11-cs-ch3-fig-3-8-bfs-dfs",
-            "alt": "Ek hi darakht do dafa, BFS aur DFS: node 0 (source node) ke bachche 1, 2, 3; 1 ke 4 aur 5; 2 ka 6; 3 ka 7. BFS mein dashed teer satah ba satah (Layer 0, 1, 2) chalte hain: Output 0, 1, 2, 3, 4, 5, 6, 7. DFS mein dashed teer har shaakh mein neeche ja kar wapas oopar aate hain: Output 0, 1, 4, 5, 2, 6, 3, 7.",
-            "caption": "Figure 3.8: BFS aur DFS ka muwazna (kitab ki Figure 3.8 ke mutabiq asal khaaka)."
+            "alt": "Ek hi darakht do dafa, BFS aur DFS: node 0 (source node) ke bachche 1, 2, 3; 1 ke 4 aur 5; 2 ka 6; 3 ka 7. BFS mein dashed teer layer ba layer (Layer 0, 1, 2) chalte hain: Output 0, 1, 2, 3, 4, 5, 6, 7. DFS mein dashed teer har branch mein neeche ja kar wapas oopar aate hain: Output 0, 1, 4, 5, 2, 6, 3, 7.",
+            "caption": "Figure 3.8: BFS aur DFS ka comparison (kitab ki Figure 3.8 ke mutabiq asal khaaka)."
           },
           {
             "type": "callout",
             "tone": "tip",
             "title": "Diagram ko samjhein",
-            "text": "BFS pehle ek satah (layer) ke tamam nodes dekhta hai, phir agli satah: 0, phir 1, 2, 3, phir 4, 5, 6, 7. DFS ek shaakh mein aakhir tak neeche jata hai (0, 1, 4), wapas mur kar (5), phir agli shaakh (2, 6) aur phir (3, 7)."
+            "text": "BFS pehle ek layer ke tamam nodes dekhta hai, phir agli layer: 0, phir 1, 2, 3, phir 4, 5, 6, 7. DFS ek branch mein aakhir tak neeche jata hai (0, 1, 4), wapas mur kar (5), phir agli branch (2, 6) aur phir (3, 7)."
           },
           {
             "type": "paragraph",
-            "text": "Misal: DFS mazes (bhool bhulaiyan) jaise puzzles hal karne mein kaam aata hai: algorithm ek mumkina raasta aakhir tak chalta hai, aur agar band gali (dead end) aa jaye to wapas mur kar doosra raasta aazmata hai."
+            "text": "Misal: DFS mazes (bhool bhulaiyan) jaise puzzles hal karne mein kaam aata hai: algorithm ek mumkin raasta aakhir tak chalta hai, aur agar band gali (dead end) aa jaye to wapas mur kar doosra raasta aazmata hai."
           },
           {
             "type": "paragraph",
-            "text": "Complexity: DFS ki time complexity O(V+E) hai, BFS jaisi. Kitab ke mutabiq DFS gehre (deep) graphs ke liye memory mein zyada kifayati hai, jabke BFS uthle (shallow) graphs ke liye zyada munasib hai."
+            "text": "Complexity: DFS ki time complexity O(V+E) hai, BFS jaisi. Kitab ke mutabiq gehre (deep) graphs mein DFS kam memory leta hai, jabke BFS uthle (shallow) graphs ke liye zyada munasib hai."
           },
           {
             "type": "callout",
             "tone": "tip",
             "title": "Asaan alfaaz mein",
-            "text": "Memory ki wajah: DFS ko sirf maujooda raasta (root se neeche tak) yaad rakhna hota hai, to us ki memory graph ki gehrai ke saath barhti hai; BFS ko poori satah (level) ek saath queue mein rakhni hoti hai, to us ki memory graph ki chaurai ke saath barhti hai."
+            "text": "Memory ki wajah: DFS ko sirf abhi wala raasta (root se neeche tak) yaad rakhna hota hai, to us ki memory graph ki gehrai ke saath barhti hai; BFS ko poora level ek saath queue mein rakhna hota hai, to us ki memory graph ki chaurai ke saath barhti hai."
           },
           {
             "type": "paragraph",
-            "text": "Figure 3.8 BFS aur DFS ka muwazna dikhati hai: BFS graph ko level ba level dekhta hai, jabke DFS har shaakh mein jitna ho sake neeche ja kar phir wapas murta hai."
+            "text": "Figure 3.8 BFS aur DFS ka comparison dikhati hai: BFS graph ko level ba level dekhta hai, jabke DFS har branch mein jitna ho sake neeche ja kar phir wapas murta hai."
           },
           {
             "type": "callout",
             "tone": "correction",
             "title": "Kitab ki ghalti",
-            "text": "Kitab ka text is figure ko “Figure 3.9” kehta hai, magar BFS aur DFS ka muwazna Figure 3.8 (“Comparison of BFS and DFS”) ke naam se chhapa hai; is chapter mein Figure 3.9 koi nahi."
+            "text": "Kitab ka text is figure ko “Figure 3.9” kehta hai, magar BFS aur DFS ka comparison Figure 3.8 (“Comparison of BFS and DFS”) ke naam se chhapa hai; is chapter mein Figure 3.9 koi nahi."
           },
           {
             "type": "callout",
             "tone": "note",
             "title": "Class Activity",
-            "text": "BFS aur DFS dono algorithms bana kar ek graph traverse karein. Mukhtalif qism ke graphs (maslan uthle aur gehre graphs) par dono ki performance ka muwazna karein aur class mein baat karein ke kis soorat mein kaunsa algorithm behtar hai."
+            "text": "BFS aur DFS dono algorithms bana kar ek graph traverse karein. Alag alag qism ke graphs (maslan uthle aur gehre graphs) par dono ki performance ko compare karein aur class mein baat karein ke kis soorat mein kaunsa algorithm behtar hai."
           },
           {
             "type": "code",
@@ -99,8 +99,8 @@
           {
             "type": "checkpoint",
             "mode": "self_check",
-            "prompt": "Class activity: BFS aur DFS bana kar muwazna karein. DFS ki time complexity kya hai (MCQ 8)? BFS ke faidon ka DFS se muwazna kijiye (short question 6).",
-            "explanation": "MCQ 8: (c) O(V + E). Oopar wala code (kitab se nahi) dono tarteebein deta hai. BFS be-wazan (unweighted) graph mein sab se chhota raasta dhoondta hai aur jab matlooba node root ke qareeb ho ya graph uthla ho to munasib hai; DFS sirf maujooda raste ke liye memory leta hai, gehre matlooba node tak jaldi pohanchta hai aur mazes, puzzles aur har raasta dekhne ke liye munasib hai. Dono har node aur edge ek dafa dekhte hain."
+            "prompt": "Class activity: BFS aur DFS bana kar comparison karein. DFS ki time complexity kya hai (MCQ 8)? BFS ke faidon ka DFS se comparison kijiye (short question 6).",
+            "explanation": "MCQ 8: (c) O(V + E). Oopar wala code (kitab se nahi) dono tarteebein deta hai. BFS be-wazan (unweighted) graph mein sab se chhota raasta dhoondta hai aur jab dhoonda jane wala node root ke qareeb ho ya graph uthla ho to munasib hai; DFS sirf abhi wale raste ke liye memory leta hai, gehre node tak jaldi pohanchta hai aur mazes, puzzles aur har raasta dekhne ke liye munasib hai. Dono har node aur edge ek dafa dekhte hain."
           },
           {
             "type": "heading",
@@ -112,7 +112,7 @@
             "ordered": false,
             "items": [
               "DFS: stack, pehle gehrai phir wapsi; tarteeb 0, 1, 4, 5, 2, 6, 3, 7; O(V + E).",
-              "Shortest path aur qareebi matlooba ke liye BFS; mazes aur gehri talash ke liye DFS."
+              "Shortest path aur qareeb wale node ke liye BFS; mazes aur gehri talash ke liye DFS."
             ]
           }
         ]

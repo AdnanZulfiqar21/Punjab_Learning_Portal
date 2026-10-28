@@ -21,7 +21,7 @@
         "blocks": [
           {
             "type": "paragraph",
-            "text": "Big O notation algorithm ki time complexity bayan karne ka riyazi (mathematical) tareeqa hai. Yeh batata hai ke input size barhne par algorithm ko mukammal hone mein zyada se zyada kitna waqt lagega (upper bound, oopri had). Is notation se mukhtalif algorithms ki efficiency ka muwazna aasan ho jata hai, kyun ke un ki performance ki saaf tasveer milti hai."
+            "text": "Big O notation algorithm ki time complexity bayan karne ka mathematical (math wala) tareeqa hai. Yeh batata hai ke input size barhne par algorithm ko mukammal hone mein zyada se zyada kitna waqt lagega (upper bound, oopri had). Is notation se alag alag algorithms ki efficiency ka comparison aasan ho jata hai, kyun ke un ki performance ki saaf tasveer milti hai."
           },
           {
             "type": "heading",
@@ -37,22 +37,22 @@
             "ordered": false,
             "items": [
               "O(1) Constant Time: runtime input ke size ke saath nahi badalta. Maslan array mein kisi khaas item ko us ke index se parhna constant time hai, kyun ke array chhota ho ya bara, waqt utna hi lagta hai.",
-              "O(n) Linear Time: runtime input ke size ke saath seedha (linearly) barhta hai. Misal: college mein n students hain, har ek ki alag student ID hai. Kisi khaas student ko tamam n students ki list mein dhoondna ho to waqt is par munhasir hai ke kitne students check karne parte hain. Worst case (sab se buri soorat) mein matlooba student list mein bilkul aakhri ho sakta hai, yani tamam n students check karne honge. Har student ko ek ek kar ke dekhna parta hai, is liye waqt n ke mutanasib (proportional) hai. Is liye yeh linear time complexity O(n) hai: students barhne ke saath waqt seedha barhta hai.",
-              "O(n²) Quadratic Time: input barhne par runtime quadratically (n ke murabba, square, ki tarah) barhta hai. Misal: college ke n students programming competition mein hain aur behtareen team chunne ke liye har do students (har pair) ki performance ka muwazna karna hai. Is ke liye har student ko baqi har student se compare karna hoga. Zaroori muwaznon ki tadaad pehle n − 1 integers ka majmooa (sum) hai: 1 + 2 + … + (n − 1) = n(n − 1)/2. Is liye is kaam ki time complexity quadratic, O(n²), hai: students barhne par waqt n² ki tarah barhta hai.",
-              "O(log n) Logarithmic Time: runtime logarithmically barhta hai, yani input ke muqable mein bohat aahista. Misal: college ke n students ke saath andaza lagane (guessing) ka khel. Ek student 1 se n ke darmiyan koi number sochta hai aur aap ko woh number boojhna hai. Har andaze ke baad student batata hai ke asal number aap ke andaze se bara hai ya chhota. Range ke beech se shuru kar ke aur jawab ke mutabiq andaza badal kar aap mumkina numbers jaldi kam kar lete hain. Durust number tak pohanchne ke andazon ki tadaad is ke mutanasib hai ke range kitni dafa aadhi ho sakti hai, jo logarithmic hai. Is liye is khel ki time complexity O(log n) hai."
+              "O(n) Linear Time: runtime input ke size ke saath seedha (linearly) barhta hai. Misal: college mein n students hain, har ek ki alag student ID hai. Kisi khaas student ko tamam n students ki list mein dhoondna ho to waqt is par depend karta hai ke kitne students check karne parte hain. Worst case (sab se buri soorat) mein jo student hum dhoond rahe hain woh list mein bilkul aakhri ho sakta hai, yani tamam n students check karne honge. Har student ko ek ek kar ke dekhna parta hai, is liye waqt n ke proportional (saath saath barhne wala) hai. Is liye yeh linear time complexity O(n) hai: students barhne ke saath waqt seedha barhta hai.",
+              "O(n²) Quadratic Time: input barhne par runtime quadratically (n ke square, yani n x n, ki tarah) barhta hai. Misal: college ke n students programming competition mein hain aur behtareen team chunne ke liye har do students (har pair) ki performance ko compare karna hai. Is ke liye har student ko baqi har student se compare karna hoga. Zaroori comparisons ki ginti pehle n − 1 integers ka sum (jor) hai: 1 + 2 + … + (n − 1) = n(n − 1)/2. Is liye is kaam ki time complexity quadratic, O(n²), hai: students barhne par waqt n² ki tarah barhta hai.",
+              "O(log n) Logarithmic Time: runtime logarithmically barhta hai, yani input ke muqable mein bohat aahista. Misal: college ke n students ke saath andaza lagane (guessing) ka khel. Ek student 1 se n ke darmiyan koi number sochta hai aur aap ko woh number boojhna hai. Har andaze ke baad student batata hai ke asal number aap ke andaze se bara hai ya chhota. Range ke beech se shuru kar ke aur jawab ke mutabiq andaza badal kar aap mumkin numbers jaldi kam kar lete hain. Sahi number tak pohanchne ke andazon ki ginti is ke proportional hai ke range kitni dafa aadhi ho sakti hai, jo logarithmic hai. Is liye is khel ki time complexity O(log n) hai."
             ]
           },
           {
             "type": "callout",
             "tone": "correction",
             "title": "Kitab ki ghalti",
-            "text": "Kitab ne heading mein “O(n2)” chhapa hai; matlab O(n²) yani n ka square hai. Kitab muwaznon ki tadaad “n(n − 1)” likhti hai, magar pehle n − 1 integers ka majmooa theek n(n − 1)/2 hai, kyun ke har jora sirf ek dafa compare hota hai. Maslan 4 students: 3 + 2 + 1 = 6 = 4 x 3 / 2. Time complexity phir bhi O(n²) hi hai."
+            "text": "Kitab ne heading mein “O(n2)” chhapa hai; matlab O(n²) yani n ka square hai. Kitab comparisons ki ginti “n(n − 1)” likhti hai, magar pehle n − 1 integers ka sum theek n(n − 1)/2 hai, kyun ke har jora sirf ek dafa compare hota hai. Maslan 4 students: 3 + 2 + 1 = 6 = 4 x 3 / 2. Time complexity phir bhi O(n²) hi hai."
           },
           {
             "type": "diagram",
             "$asset": "c11-cs-ch3-fig-big-o-notation",
-            "alt": "Big O Notation unwan wala graph: amudi mehwar (vertical axis) par Time aur ufuqi mehwar par Input Size. O(1) seedhi barabar lakeer; O(log n) pehle tezi se uthti phir taqreeban barabar ho jati hai; O(n) seedhi uthti lakeer; O(n²) tezi se oopar murti hai.",
-            "caption": "Big O Notation: O(1), O(log n), O(n) aur O(n²) ki barhotri (kitab ke graph ke mutabiq asal khaaka; kitab mein is ke neeche ghalti se 'Figure 1.1: System development life cycle stages' likha hai)."
+            "alt": "Big O Notation title wala graph: vertical axis (khari line) par Time aur horizontal axis (leti line) par Input Size. O(1) seedhi barabar lakeer; O(log n) pehle tezi se uthti phir taqreeban barabar ho jati hai; O(n) seedhi uthti lakeer; O(n²) tezi se oopar murti hai.",
+            "caption": "Big O Notation: O(1), O(log n), O(n) aur O(n²) ka barhna (growth) (kitab ke graph ke mutabiq asal khaaka; kitab mein is ke neeche ghalti se 'Figure 1.1: System development life cycle stages' likha hai)."
           },
           {
             "type": "callout",
@@ -62,13 +62,13 @@
           },
           {
             "type": "paragraph",
-            "text": "Mukhtalif time complexities ka muwazna karte waqt yeh samajhna zaroori hai ke input n ka size barhne par algorithm ka zaroori waqt kaise barhta hai. Constant time O(1) n ke size se nahi badalta: input jitna bhi bara ho, waqt utna hi lagta hai; graph mein yeh seedhi barabar (flat) lakeer hai."
+            "text": "Alag alag time complexities ka comparison karte waqt yeh samajhna zaroori hai ke input n ka size barhne par algorithm ka zaroori waqt kaise barhta hai. Constant time O(1) n ke size se nahi badalta: input jitna bhi bara ho, waqt utna hi lagta hai; graph mein yeh seedhi barabar (flat) lakeer hai."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
-            "prompt": "1,000 students ke liye andaze ke khel mein taqreeban kitne andaze, aur har pair ke muwazne wale O(n²) kaam mein kitne muwazne chahiyein?",
-            "explanation": "Taqreeban 10 andaze, kyun ke 2¹⁰ = 1024 (range har dafa aadhi hoti hai). Aur 1000 x 999 / 2 = 499,500 muwazne."
+            "prompt": "1,000 students ke liye andaze ke khel mein taqreeban kitne andaze, aur har pair ke comparisons wale O(n²) kaam mein kitne comparisons chahiyein?",
+            "explanation": "Taqreeban 10 andaze, kyun ke 2¹⁰ = 1024 (range har dafa aadhi hoti hai). Aur 1000 x 999 / 2 = 499,500 comparisons."
           },
           {
             "type": "heading",

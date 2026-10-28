@@ -21,7 +21,7 @@
         "blocks": [
           {
             "type": "paragraph",
-            "text": "Depth-First Search (DFS) ek buniyadi algorithm hai jo graph ya tree ko explore (har node dekhna) karta hai. Jin vertices ya nodes ko abhi dekhna baqi hai, unhein yeh stack mein rakhta hai. Yeh tab mufeed hai jab ek shaakh mein jitna gehra ja sakein jana ho aur phir wapas aana (backtrack) ho, yaani gehrai tak dekhne wale kaamon ke liye."
+            "text": "Depth-First Search (DFS) ek basic (bunyadi) algorithm hai jo graph ya tree ko explore (har node dekhna) karta hai. Jin vertices ya nodes ko abhi dekhna baqi hai, unhein yeh stack mein rakhta hai. Yeh tab useful (faidemand) hai jab ek shaakh mein jitna gehra ja sakein jana ho aur phir wapas aana (backtrack) ho, yaani gehrai tak dekhne wale kaamon ke liye."
           },
           {
             "type": "paragraph",
@@ -30,8 +30,8 @@
           {
             "type": "diagram",
             "$asset": "c11-cs-ch4-fig-4-13-numeric-graph-tree",
-            "alt": "Teeron wala dairon ka tree: oopar 1 se 2, 3 aur 4; 2 se 5 aur 6; 3 se 7; 4 se 8 aur 9.",
-            "caption": "Figure 4.13: Adadi nodes wale tree ki graph shakal (kitab ki Figure 4.13 ke mutabiq asal khaaka)."
+            "alt": "Teeron se jure circles ka tree: oopar 1 se 2, 3 aur 4; 2 se 5 aur 6; 3 se 7; 4 se 8 aur 9.",
+            "caption": "Figure 4.13: Numbers wale nodes ke tree ki graph shakal (kitab ki Figure 4.13 ke mutabiq asal khaaka)."
           },
           {
             "type": "paragraph",
@@ -57,7 +57,7 @@
             "ordered": true,
             "items": [
               "Khali stack se shuru kar ke root node (1) push karein.",
-              "Qadam 1: node 1 pop kar ke visited (dekha gaya) mark karein. Us ke children 4, 3, 2 is tarteeb se push karein taake 2 top par aaye. Stack: [4, 3, 2].",
+              "Qadam 1: node 1 pop kar ke visited (dekha gaya) mark karein. Us ke children 4, 3, 2 is order mein push karein taake 2 top par aaye. Stack: [4, 3, 2].",
               "Qadam 2: top (node 2) pop karein, visited mark karein, us ke children 6, 5 push karein. Stack: [4, 3, 6, 5].",
               "Qadam 3: node 5 pop karein, visited mark karein; is ke children nahi. Stack: [4, 3, 6].",
               "Qadam 4: node 6 pop karein, visited mark karein; children nahi. Stack: [4, 3].",
@@ -70,7 +70,7 @@
           },
           {
             "type": "paragraph",
-            "text": "Is misal mein DFS ki tarteeb: 1, 2, 5, 6, 3, 7, 4, 8, 9."
+            "text": "Is misal mein DFS ka order (tarteeb): 1, 2, 5, 6, 3, 7, 4, 8, 9."
           },
           {
             "type": "paragraph",
@@ -128,15 +128,15 @@
               [
                 "9",
                 "9",
-                "[] (mukammal)"
+                "[] (kaam poora)"
               ]
             ]
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
-            "prompt": "Long question 7(a): exercise ke graph mein A se B, C aur D ki taraf, B se E aur F, C se G, aur D se H aur I ki taraf teer hain. A se shuru kar ke DFS mein nodes kis tarteeb mein dekhe jayenge?",
-            "explanation": "Parosiyon ko baen se daen (A, B, C ... ki tarteeb) lein: A, B, E, F, C, G, D, H, I."
+            "prompt": "Long question 7(a): exercise ke graph mein A se B, C aur D ki taraf, B se E aur F, C se G, aur D se H aur I ki taraf teer hain. A se shuru kar ke DFS mein nodes kis order mein dekhe jayenge?",
+            "explanation": "Neighbours (parosi) ko baen se daen (A, B, C ... ke order mein) lein: A, B, E, F, C, G, D, H, I."
           },
           {
             "type": "heading",
