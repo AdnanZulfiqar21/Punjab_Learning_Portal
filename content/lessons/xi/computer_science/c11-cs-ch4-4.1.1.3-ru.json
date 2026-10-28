@@ -20,72 +20,183 @@
       "body": {
         "blocks": [
           {
-            "type": "heading",
-            "level": 3,
-            "text": "Insertion (dakhil karna)"
-          },
-          {
-            "type": "callout",
-            "tone": "note",
-            "title": "Python code (har .... ek 4-space indent hai)",
-            "text": "party_list = [\"Buy drinks\", \"Buy decorations\", \"Buy snacks\", \"Buy cold drinks\"]\nparty_list.insert(0, \"Invite friends\")      # add at the start\nparty_list.append(\"Order cake\")            # add at the end\nparty_list.extend([\"Party hats\", \"Streamers\"])    # add several at once\nprint(party_list)"
+            "type": "paragraph",
+            "text": "Aaiye list par kiye jane wale aam operations (kaam) asal zindagi ki misalon aur Python code se dekhein."
           },
           {
             "type": "heading",
             "level": 3,
-            "text": "Deletion (hatana)"
+            "text": "1. Insertion (item dakhil karna)"
+          },
+          {
+            "type": "paragraph",
+            "text": "List mein naya item jorna aisa hai jaise to-do list mein naya kaam likhna. Item list ki mukhtalif jagahon par dala ja sakta hai. Is ke kuch tareeqe yeh hain:"
+          },
+          {
+            "type": "paragraph",
+            "text": "a. Khaas jagah par dalna: insert() function se item list ki kisi bhi jagah (index) par dala ja sakta hai. insert(0, ...) item ko sab se pehli jagah par dalta hai."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "party_list = [\"Buy drinks\", \"Buy decorations\", \"Buy snacks\", \"Buy cold drinks \"]\nparty_list.insert(0, \"Invite friends\")  # add Invite friends at start\nprint(party_list)\n# Output: ['Invite friends', 'Buy drinks', 'Buy decorations', 'Buy snacks', 'Buy cold drinks ']",
+            "caption": "Sahi code"
           },
           {
             "type": "callout",
-            "tone": "note",
-            "title": "Python code (har .... ek 4-space indent hai)",
-            "text": "party_list = [\"Invite friends\", \"Buy decorations\", \"Buy snacks\", \"Buy cold drinks\"]\nparty_list.remove(\"Buy snacks\")    # removes the first match\nparty_list.pop(0)                  # removes the item at index 0\nprint(party_list)                  # ['Buy decorations', 'Buy cold drinks']\nparty_list.clear()                 # removes all items\nprint(party_list)                  # []"
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab mein function ka naam 'insertf()' chhapa hai; sahi naam insert() hai. Kitab ke code mein tirchhe quotes “ ” ’ aur 0 ke baad ek faltu ’ hai, is liye chhapa hua code SyntaxError deta hai. Kitab ka Output comment bhi ghalat hai: us mein \"Invite friends\" nahi; asal output upar likha hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "b. Aakhir mein jorna: item ko list ke bilkul aakhir mein jorne ke liye append() function istemal hota hai."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "party_list = [\"Invite friends\", \"Buy cold drinks\", \"Buy decorations\", \"Buy snacks\"]\nparty_list.append(\"Order cake\")  # Adds 'Order cake' at the end\nprint(party_list)\n# Output: ['Invite friends', 'Buy cold drinks', 'Buy decorations', 'Buy snacks', 'Order cake']",
+            "caption": "Sahi code"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab mein 'append!)' chhapa hai; sahi naam append() hai. Kitab ke code mein bhi tirchhe quotes hain (“Invite friends”, \"Order cake”), is liye woh SyntaxError deta hai; upar seedhe quotes ke saath sahi code hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "c. List ko lamba karna (extend): extend() function ek hi baar mein kai items list ke aakhir mein jor deta hai."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "party_list = [\"Invite friends\", \"Buy decorations \", \"Buy snacks\", \"Buy cold drinks\"]\nparty_list.extend([\"Party hats\", \"Streamers\"])  # Add multiple items at once\nprint(party_list)\n# Output: ['Invite friends', 'Buy decorations ', 'Buy snacks', 'Buy cold drinks', 'Party hats', 'Streamers']",
+            "caption": "Sahi code"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab ke code mein \"Buy snacks” ke aakhir mein tirchha quote ” hai, is liye Python string ka khatma nahi pehchanta aur SyntaxError deta hai."
           },
           {
             "type": "heading",
             "level": 3,
-            "text": "Searching (talash)"
+            "text": "2. Deletion (item nikalna)"
+          },
+          {
+            "type": "paragraph",
+            "text": "List se item nikalna aisa hai jaise poora ho chuka kaam list se kaat dena. Item nikalne ke kai tareeqe hain:"
+          },
+          {
+            "type": "paragraph",
+            "text": "a. Value se nikalna: remove() function kisi khaas value ko list mein jahan pehli baar mile, wahan se nikal deta hai."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "party_list = [\"Invite friends \", \"Buy decorations\", \"Buy snacks\", \"Buy cold drinks\"]\nparty_list.remove(\"Buy snacks\")  # Removes 'Buy snacks' from the list\nprint(party_list)\n# Output: ['Invite friends ', 'Buy decorations', 'Buy cold drinks']",
+            "caption": "Sahi code"
           },
           {
             "type": "callout",
-            "tone": "note",
-            "title": "Python code (har .... ek 4-space indent hai)",
-            "text": "party_list = [\"Invite friends\", \"Buy decorations\", \"Buy cold drinks\"]\nif \"Buy cold drinks\" in party_list:\n....print(\"Buy cold drinks is on the list.\")\nindex = party_list.index(\"Buy decorations\")\nprint(\"Index of Buy decorations:\", index)    # 1"
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab ke code mein \"Buy decorations” aur \"Buy snacks” ke aakhir mein tirchhe quotes ” hain, is liye SyntaxError aata hai; upar sahi code hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "b. Index se nikalna: pop() function kisi khaas index wala item nikal deta hai. pop(0) pehla item nikalta hai."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "party_list = [\"Invite friends \", \"Buy decorations\", \"Buy cold drinks \" ]\nparty_list.pop (0) # Removes the item at index 0\nprint(party_list)\n# Output: [’Buy decorations’, ’Buy cold drinks’]"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab mein function ka naam 'popO' chhapa hai; sahi naam pop() hai, jaisa code mein hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "c. Saare items nikalna: clear() function list ke tamam items nikal deta hai aur khali list [] reh jati hai."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "party_list = [\"Invite friends\" , \"Buy decorations\", \"Buy cold drinks \" ]\n# Removes all items from the list\nparty_list.clear ()\nprint(party_list) # Output : []"
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "3. Searching (talash)"
+          },
+          {
+            "type": "paragraph",
+            "text": "List mein item dhoondna aisa hai jaise to-do list mein koi khaas kaam dhoondna. Is ke liye mukhtalif tareeqe hain:"
+          },
+          {
+            "type": "paragraph",
+            "text": "a. Maujoodgi check karna: 'in' keyword batata hai ke item list mein hai ya nahi. Agar hai to if wala hissa chalta hai, warna else wala."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "party_list = [\"Invite friends\", \"Buy decorations\", \"Buy cold drinks\"]\nif \"Buy cold drinks\" in party_list:\n         print(\"Buy cold drinks is on the list.\")  # Prints if 'Buy cold drinks' is found\nelse:\n        print(\"Buy cold drinks is not on the list.\")\n# Output: Buy cold drinks is on the list."
+          },
+          {
+            "type": "paragraph",
+            "text": "b. Index maloom karna: index() function batata hai ke item list mein kis jagah (index) par hai. \"Buy decorations\" doosri jagah par hai, is liye index 1 hai."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "party_list = [\"Invite friends\", \"Buy decorations\", \"Buy cold drinks \" ]\nindex = party_list.index(\"Buy decorations\") # Finds the position of ’Buy decorations’\nprint(\"Index of ’Buy decorations’:\", index)\n# Output: Index of ’Buy decorations’: 1"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab mein function ka naam 'indexO' chhapa hai; sahi naam index() hai, jaisa code mein hai."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
-            "prompt": "Kaunsa function list ke aakhir mein cheez jorta hai (MCQ 1)? List ke saath 'in' kya karta hai (MCQ 2)?",
-            "explanation": "(b) append(); (c) yeh jaanchta hai ke cheez list mein maujood hai ya nahi."
+            "prompt": "Kaunsa function list ke aakhir mein item jorta hai (MCQ 1)? List ke saath 'in' keyword kya karta hai (MCQ 2)?",
+            "explanation": "(b) append(). (c) 'in' check karta hai ke item list mein maujood hai ya nahi."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
-            "prompt": "extend() kaise kaam karta hai, misal ke saath bataiye (short question 1).",
-            "explanation": "extend() doosri list (ya sequence) ki har cheez list ke aakhir mein ek ek kar ke jorta hai: a = [1, 2]; a.extend([3, 4]) se a = [1, 2, 3, 4]. Is ke bar-aks append([3, 4]) poori list ko ek cheez bana kar jorta: [1, 2, [3, 4]]."
+            "prompt": "extend() function kaise kaam karta hai? Misal dein (short question 1).",
+            "explanation": "extend() doosri list (ya sequence) ka har item ek ek kar ke list ke aakhir mein jorta hai: a = [1, 2]; a.extend([3, 4]) ke baad a = [1, 2, 3, 4]. Is ke muqable mein a.append([3, 4]) poori list ko ek hi item bana kar jorta hai: [1, 2, [3, 4]]."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
-            "prompt": "Jab do variables ek hi list ki taraf ishara karein to kya masail ho sakte hain, misal ke saath (short question 2)?",
-            "explanation": "b = a list ki copy nahi banata; dono naam ek hi list ki taraf ishara karte hain, to ek naam se tabdeeli doosre se bhi nazar aati hai: a = [1, 2]; b = a; b.append(3) se a bhi [1, 2, 3] ho jata hai, jo ghair mutawaqqo bugs paida kar sakta hai. Alag copy ke liye b = a.copy() ya b = list(a) istemal karein. Yeh aam Python ilm hai; chapter mein nahi."
+            "prompt": "Jab do variables ek hi list ki taraf ishara (reference) karein to kya masla ho sakta hai? Misal dein (short question 2).",
+            "explanation": "b = a list ki copy nahi banata; dono naam ek hi list ko dekhte hain. Ek naam se tabdeeli doosre mein bhi nazar aati hai: a = [1, 2]; b = a; b.append(3) ke baad a bhi [1, 2, 3] ho jata hai. Is se aise bugs ban sakte hain jin ki tawaqqo na ho. Alag copy ke liye b = a.copy() ya b = list(a) likhein. (Yeh baat chapter mein nahi; yeh aam Python ka ilm hai.)"
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
-            "prompt": "Long question 2: tasks = [design, development, testing, deployment] se shuru karein; aakhir mein 'review' jorein, teesri jagah 'planning' dakhil karein, 'testing' ko 'quality assurance' badlein, 'development' hatayein, index 1 wala kaam hatayein, 'deployment' ka index dhoondein, aur aakhri list aur us ki lambai print karein.",
-            "explanation": "tasks.append(\"review\"); tasks.insert(2, \"planning\"); tasks[tasks.index(\"testing\")] = \"quality assurance\"; tasks.remove(\"development\"); tasks.pop(1) 'planning' hatata hai; tasks.index(\"deployment\") 2 hai; aakhri list design, quality assurance, deployment, review, aur len(tasks) 4."
+            "prompt": "Long question 2: tasks = [design, development, testing, deployment] se shuru karein. Aakhir mein 'review' jorein, teesri jagah 'planning' dalein, 'testing' ko 'quality assurance' se badlein, 'development' value se nikalein, index 1 wala kaam nikalein, 'deployment' ka index print karein, aakhri list aur kaamon ki tadaad print karein.",
+            "explanation": "tasks.append(\"review\"); tasks.insert(2, \"planning\"); tasks[tasks.index(\"testing\")] = \"quality assurance\"; tasks.remove(\"development\"); tasks.pop(1) 'planning' nikalta hai; print(tasks.index(\"deployment\")) 2 dikhata hai; print(tasks) ['design', 'quality assurance', 'deployment', 'review'] dikhata hai; print(len(tasks)) 4 dikhata hai. (Python 3.13 mein chala kar check kiya gaya.)"
           },
           {
             "type": "heading",
             "level": 2,
-            "text": "Fauri khulasa"
+            "text": "Mukhtasar khulasa"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "Dakhil: insert(), append(), extend(); hatana: remove(), pop(), clear(); talash: in, index()."
+              "Dalna: insert(), append(), extend(); nikalna: remove(), pop(), clear(); dhoondna: in, index().",
+              "Code mein hamesha seedhe quotes \" ya ' istemal karein."
             ]
           }
         ]

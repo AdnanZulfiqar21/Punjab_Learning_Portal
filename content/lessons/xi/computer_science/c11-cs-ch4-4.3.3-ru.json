@@ -21,11 +21,39 @@
         "blocks": [
           {
             "type": "paragraph",
-            "text": "BFS queue istemal kar ke agle level se pehle maujooda gehrai ke tamam nodes dekhta hai, jo be-wazan graphs mein sab se chhote raaste dhoondne ya level ba level rabte dekhne ke liye behtareen hai. Usi tree par (Figure 4.13):"
+            "text": "Breadth-First Search (BFS) bhi graph ya tree ko explore karne ka buniyadi algorithm hai. DFS ke bar-aks BFS dekhne wale nodes ko queue mein rakhta hai. Yeh tab mufeed hai jab agle level par jane se pehle maujooda gehrai (level) ke saare nodes dekhne hon, maslan sab se chhota raasta dhoondna ho ya level ba level saare raaste dekhne hon."
+          },
+          {
+            "type": "paragraph",
+            "text": "Misal: wohi Figure 4.13 wala tree lein (4.3.2 mein)."
+          },
+          {
+            "type": "paragraph",
+            "text": "BFS queue ki madad se is graph ko aise traverse karta hai (queue ko [aage ... peeche] likha gaya hai):"
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "Khali queue se shuru kar ke root node (1) enqueue karein.",
+              "Qadam 1: node 1 dequeue kar ke visited mark karein, us ke children 2, 3, 4 enqueue karein. Queue: [2, 3, 4].",
+              "Qadam 2: aage wala node 2 dequeue karein, visited mark karein, us ke children 5, 6 enqueue karein. Queue: [3, 4, 5, 6].",
+              "Qadam 3: node 3 dequeue karein, visited mark karein, us ka child 7 enqueue karein. Queue: [4, 5, 6, 7].",
+              "Qadam 4: node 4 dequeue karein, visited mark karein, children 8, 9 enqueue karein. Queue: [5, 6, 7, 8, 9].",
+              "Qadam 5: node 5 dequeue karein, visited mark karein; children nahi. Queue: [6, 7, 8, 9].",
+              "Qadam 6: node 6 dequeue karein; children nahi. Queue: [7, 8, 9].",
+              "Qadam 7: node 7 dequeue karein; children nahi. Queue: [8, 9].",
+              "Qadam 8: node 8 dequeue karein; children nahi. Queue: [9].",
+              "Qadam 9: node 9 dequeue karein; children nahi. Ab queue khali hai."
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Is misal mein BFS ki tarteeb: 1, 2, 3, 4, 5, 6, 7, 8, 9. Queue ki wajah se agle level par jane se pehle maujooda level ke saare nodes dekhe jate hain. Yeh tareeqa be-wazan (unweighted) graphs mein sab se chhota raasta dhoondne ya har level ke saare rabte dekhne ke liye khaas taur par achha hai."
           },
           {
             "type": "table",
-            "caption": "BFS queue ka safar",
+            "caption": "BFS mein queue ka safar",
             "header": [
               "Qadam",
               "Dequeue aur visit",
@@ -34,22 +62,22 @@
             "rows": [
               [
                 "1",
-                "1, 2, 3, 4 enqueue",
+                "1; 2, 3, 4 enqueue",
                 "[2, 3, 4]"
               ],
               [
                 "2",
-                "2, 5, 6 enqueue",
+                "2; 5, 6 enqueue",
                 "[3, 4, 5, 6]"
               ],
               [
                 "3",
-                "3, 7 enqueue",
+                "3; 7 enqueue",
                 "[4, 5, 6, 7]"
               ],
               [
                 "4",
-                "4, 8, 9 enqueue",
+                "4; 8, 9 enqueue",
                 "[5, 6, 7, 8, 9]"
               ],
               [
@@ -80,25 +108,22 @@
             ]
           },
           {
-            "type": "paragraph",
-            "text": "BFS tarteeb 1, 2, 3, 4, 5, 6, 7, 8, 9 hai."
-          },
-          {
             "type": "checkpoint",
             "mode": "self_check",
-            "prompt": "DFS aur BFS mein farq bataiye (short question 8). Long question 7(b): exercise graph ke liye A se BFS tarteeb dijiye.",
-            "explanation": "DFS stack (ya recursion) istemal karta aur wapas aane se pehle ek shaakh mein gehrai tak jata hai; BFS queue istemal karta aur agle level se pehle ek level ke tamam nodes dekhta hai, be-wazan graphs mein sab se chhote raaste dhoondta hai. Dono O(V + E) waqt lete hain. Exercise graph ke liye A se BFS: A, B, C, D, E, F, G, H, I."
+            "prompt": "DFS aur BFS mein farq bataiye (short question 8). Long question 7(b): exercise ke graph mein A se BFS ki tarteeb kya hai?",
+            "explanation": "DFS stack (ya recursion) istemal karta hai aur wapas aane se pehle ek shaakh mein gehrai tak jata hai. BFS queue istemal karta hai aur agle level se pehle ek level ke saare nodes dekhta hai; be-wazan graphs mein sab se chhota raasta isi se milta hai. Exercise ke graph mein A se BFS: A, B, C, D, E, F, G, H, I."
           },
           {
             "type": "heading",
             "level": 2,
-            "text": "Fauri khulasa"
+            "text": "Mukhtasar khulasa"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "9 nodes wale tree par queue wala BFS: 1 se 9 tarteeb se; DFS gehra jata, BFS chaura."
+              "9 nodes wale tree par queue wala BFS: 1 se 9 tak tarteeb se.",
+              "DFS gehra jata hai (stack), BFS chaura (queue)."
             ]
           }
         ]

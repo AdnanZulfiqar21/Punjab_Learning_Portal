@@ -23,21 +23,45 @@
             "type": "list",
             "ordered": true,
             "items": [
-              "Root node: pehla ya sab se oopar wala node, jaise woh markazi folder jis mein baqi tamam folders aur files hon.",
-              "Edges aur nodes: nodes elements hain aur edges unhein jorne wali lines; jis node ke bachche na hon woh leaf hai, jaise folder mein file.",
-              "Height: root se sab se door leaf tak sab se lamba raasta, jo batata hai ke tree kitna uncha hai.",
-              "Mutawazin trees: baen aur daen shaakhein taqreeban barabar unchi (topic 4.1.7)."
+              "Root node: tree ka sab se pehla ya sab se oopar wala node, jaise computer ka main folder jis ke andar baqi saare folders aur files hote hain.",
+              "Edges aur nodes: tree ke alag alag elements nodes hain, aur unhein jorne wali lines edges kehlati hain. Jis node ka koi child node na ho use leaf (patta) kehte hain, jaise folder mein rakhi file jis ke andar aur kuch nahi.",
+              "Height (unchai): root node se sab se door leaf tak ka sab se lamba raasta tree ki height hai. Yeh batati hai ke tree kitna gehra ya uncha hai.",
+              "Balanced trees: jab baen aur daen shaakhon ki height taqreeban barabar ho to tree balanced kehlata hai. Tafseel section 4.1.7 mein hai."
             ]
           },
           {
+            "type": "paragraph",
+            "text": "Neeche Python classes se family tree banane ki saada misal hai. Is mein family members (nodes) banaye jate hain aur un ke children (aulad) jore jate hain."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "class FamilyMember:\n    def __init__(self, name):\n        self.name = name\n        self.children = []\n\nclass FamilyTree:\n    def __init__(self, ancestor_name):\n        self.root = FamilyMember(ancestor_name)\n\n    def add_child(self, parent_name, child_name):\n        parent_node = self._find_member(self.root, parent_name)\n        if parent_node:\n            parent_node.children.append(FamilyMember(child_name))\n\n    def _find_member(self, current_member, name):\n        if current_member.name == name:\n            return current_member\n        for child in current_member.children:\n            result = self._find_member(child, name)\n            if result:\n                return result\n        return None\n\n# Example usage\nfamily_tree = FamilyTree('Grandparent')\nfamily_tree.add_child('Grandparent', 'Parent1')\nfamily_tree.add_child('Grandparent', 'Parent2')\nfamily_tree.add_child('Parent1', 'Child1')\nfamily_tree.add_child('Parent1', 'Child2')",
+            "caption": "Sahi code"
+          },
+          {
             "type": "callout",
-            "tone": "note",
-            "title": "Python code (har .... ek 4-space indent hai)",
-            "text": "class FamilyMember:\n....def __init__(self, name):\n........self.name = name\n........self.children = []\n\nclass FamilyTree:\n....def __init__(self, ancestor_name):\n........self.root = FamilyMember(ancestor_name)\n\n....def add_child(self, parent_name, child_name):\n........parent = self._find_member(self.root, parent_name)\n........if parent:\n............parent.children.append(FamilyMember(child_name))\n\n....def _find_member(self, current, name):\n........if current.name == name:\n............return current\n........for child in current.children:\n............result = self._find_member(child, name)\n............if result:\n................return result\n........return None\n\nfamily = FamilyTree(\"Grandparent\")\nfamily.add_child(\"Grandparent\", \"Parent1\")\nfamily.add_child(\"Grandparent\", \"Parent2\")\nfamily.add_child(\"Parent1\", \"Child1\")\nfamily.add_child(\"Parent1\", \"Child2\")"
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab mein chhapa hua code nahi chalta (pehli ghalti par hi SyntaxError). Is mein: Fami1yMember (1 ke saath), _ _init_ _ (space ke saath), ek line par do statements, FamilyTre e, naamon ke beech spaces (an c e s t o r _ n am e, ctii 1 d_name), parent_name ke baad ) ghayab, current.member (sahi current_member), ghalat indentation, # ki jagah •, tirchhe quotes ’, aur Parenti/Childl (sahi Parent1/Child1). Upar sahi code hai, jo Python 3.13 mein chala kar check kiya gaya."
           },
           {
             "type": "paragraph",
-            "text": "FamilyMember ek shakhs hai jis ka naam aur bachchon ki list hai; FamilyTree root wale buzurg se poora tree sambhalta, bachche jorta aur tree mein recursive talash se afraad dhoondta hai. Nateeja: Grandparent ke Parent1 aur Parent2, aur Parent1 ke Child1 aur Child2 (Figure 4.6)."
+            "text": "Is code mein:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "FamilyMember class ek shakhs ko dikhati hai. Har shakhs ka naam (name) aur bachchon ki list (children) hoti hai.",
+              "FamilyTree class poore tree ko sambhalti hai, jo root par buzurg (ancestor) se shuru hota hai. Is mein bachche jorne (add_child) aur kisi fard ko dhoondne (_find_member) ke functions hain.",
+              "add_child pehle _find_member se walid (parent) dhoondta hai, phir us ki children list mein naya FamilyMember jor deta hai.",
+              "_find_member root se shuru kar ke har node dekhta hai; naam mil jaye to wohi node lauta deta hai, warna har bachche ke andar dobara (recursion se) dhoondta hai, aur kahin na mile to None lautata hai."
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Code chalne ke baad yeh tree banta hai: Grandparent ke do bachche Parent1 aur Parent2, aur Parent1 ke do bachche Child1 aur Child2. Figure 4.6 mein har node ek daira (circle) hai aur teer walid se aulad ki taraf hain."
           },
           {
             "type": "diagram",
@@ -49,18 +73,19 @@
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "Tree ki height ke baare mein kya sach hai (MCQ 8)?",
-            "explanation": "(a) root se sab se gehre node tak edges ki tadaad, jo 'root se sab se door leaf tak sab se lamba raasta' se mel khata hai."
+            "explanation": "(a) Root se sab se gehre node tak edges ki tadaad. Yeh kitab ki tareef 'root se sab se door leaf tak sab se lamba raasta' se milti hai."
           },
           {
             "type": "heading",
             "level": 2,
-            "text": "Fauri khulasa"
+            "text": "Mukhtasar khulasa"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "Tree ki istilahat: root, nodes, edges, leaf, height; FamilyTree class bachchon ko lists mein rakhti hai."
+              "Tree ki istilahat: root, nodes, edges, leaf, height.",
+              "FamilyTree class har shakhs ke bachche children list mein rakhti hai."
             ]
           }
         ]

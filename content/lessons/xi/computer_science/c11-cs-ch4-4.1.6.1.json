@@ -13,7 +13,7 @@
           "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
           "pdf_from": 106,
           "pdf_to": 108,
-          "note": "Topic 4.1.6.1 Properties of Trees (PDF 106-108, printed 103-105). The printed class code is garbled ('Fami1yMember', 'ctii 1 d_name', 'Parenti', 'Childl', a missing bracket); a working version is carried. MCQ 8 is answered (a); the answer key gives (c). Recorded."
+          "note": "Topic 4.1.6.1 Properties of Trees (PDF 106-108, printed 103-105), as printed: the family tree program as printed with its errors marked, the corrected program in the Book correction, and Figure 4.6."
         }
       ],
       "body": {
@@ -22,21 +22,60 @@
             "type": "list",
             "ordered": true,
             "items": [
-              "Root node: the first or top node, like the main folder that contains all other folders and files.",
-              "Edges and nodes: nodes are the elements and edges are the lines joining them; a node with no children is a leaf, like a file in a folder.",
-              "Height: the longest path from the root down to the farthest leaf, showing how tall the tree is.",
-              "Balanced trees: the left and right branches are nearly the same height (topic 4.1.7)."
+              "Root Node: The root is the very first or top node in a tree, like the main folder in a computer where all other folders and files are contained.",
+              "Edges and Nodes: Nodes are the individual elements in the tree, and they are connected by lines called edges. A node without any child nodes is called a leaf, similar to a file in a folder that doesn't contain any other files.",
+              "Height: The height of a tree is the longest path from the root node down to the farthest leaf. It tells us how deep or tall the tree is.",
+              "Balanced Trees: A tree is considered balanced if the branches on the left and right sides are nearly the same height. See the details in Section 4.1.7"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Here's a simple example of how to create a family tree structure in Python using classes. This implementation shows how to create family members (nodes) and how to add children (descendants) to them."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "class Fami1yMember :\n    def _ _init_ _ (self , name): self.name = name self.children = []\nclass FamilyTre e:\n    def _ _init_ _ (self , an c e s t o r _ n am e ) :\n        self.root = Fami1yMember(ancestor_name)\n    def add_child(self , parent_name , ctii 1 d_name ) :\n        parent_node = self._find_member(self.root, parent_name\n       if parent_node:\n           parent_node.children.append(FamilyMember( child_name))\n   def _find_member (self , current.member, name):\n       if current.member.name == name:\n           return current.member\n      for child in current_member.children:\n           result = self._find_member(child, name)\n           if result :\n           return result\n     return None\n• Example usage\nfamily_tree = FamilyTree (’Grandparent ’)\nfamily_tree.add_child(’Grandparent’ , ’Parenti’)\nfamily_tree.add_child(’Grandparent’, ’Parent2’) family_tree.add_child(’Parenti’,\n’Childl’) family_tree.add_child(’Parenti’, ’Child2’)",
+            "book_errors": [
+              "Fami1yMember",
+              "_ _init_ _",
+              "self.name = name self.children = []",
+              "FamilyTre e",
+              "an c e s t o r _ n am e",
+              "ctii 1 d_name",
+              "self._find_member(self.root, parent_name",
+              "current.member",
+              "• Example usage",
+              "Parenti"
             ]
           },
           {
             "type": "callout",
-            "tone": "note",
-            "title": "Python code (each .... is one 4-space indent)",
-            "text": "class FamilyMember:\n....def __init__(self, name):\n........self.name = name\n........self.children = []\n\nclass FamilyTree:\n....def __init__(self, ancestor_name):\n........self.root = FamilyMember(ancestor_name)\n\n....def add_child(self, parent_name, child_name):\n........parent = self._find_member(self.root, parent_name)\n........if parent:\n............parent.children.append(FamilyMember(child_name))\n\n....def _find_member(self, current, name):\n........if current.name == name:\n............return current\n........for child in current.children:\n............result = self._find_member(child, name)\n............if result:\n................return result\n........return None\n\nfamily = FamilyTree(\"Grandparent\")\nfamily.add_child(\"Grandparent\", \"Parent1\")\nfamily.add_child(\"Grandparent\", \"Parent2\")\nfamily.add_child(\"Parent1\", \"Child1\")\nfamily.add_child(\"Parent1\", \"Child2\")"
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "As printed this program does not run: Python stops with SyntaxError: invalid character '•' (U+2022) before it reaches the other errors. The listing has: Fami1yMember for FamilyMember; _ _init_ _ for __init__; two statements on one line (self.name = name self.children = []); FamilyTre e for FamilyTree; the names ancestor_name and child_name broken by spaces; a missing ) after parent_name; current.member for current_member; wrong indentation (return result must be inside if result:, and _find_member, its for loop and return None must line up with the other parts of the class); a bullet • for the comment sign #; curly quotes ’ for straight quotes; Parenti and Childl for Parent1 and Child1; and two add_child calls on one line. The program as it should be printed is given below; it builds the tree of Figure 4.6."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "class FamilyMember:\n    def __init__(self, name):\n        self.name = name\n        self.children = []\n\nclass FamilyTree:\n    def __init__(self, ancestor_name):\n        self.root = FamilyMember(ancestor_name)\n\n    def add_child(self, parent_name, child_name):\n        parent_node = self._find_member(self.root, parent_name)\n        if parent_node:\n            parent_node.children.append(FamilyMember(child_name))\n\n    def _find_member(self, current_member, name):\n        if current_member.name == name:\n            return current_member\n        for child in current_member.children:\n            result = self._find_member(child, name)\n            if result:\n                return result\n        return None\n\n# Example usage\nfamily_tree = FamilyTree('Grandparent')\nfamily_tree.add_child('Grandparent', 'Parent1')\nfamily_tree.add_child('Grandparent', 'Parent2')\nfamily_tree.add_child('Parent1', 'Child1')\nfamily_tree.add_child('Parent1', 'Child2')",
+            "caption": "Book correction: the family tree program written correctly"
           },
           {
             "type": "paragraph",
-            "text": "FamilyMember represents one person with a name and a list of children; FamilyTree manages the whole tree from the ancestor at the root, adding children and finding members by searching the tree recursively. The result is Grandparent with Parent1 and Parent2, and Parent1 with Child1 and Child2 (Figure 4.6)."
+            "text": "The above code shows:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "The 'FamilyMember' class represents a single person in the family tree. Each person has a name and can have children (descendants).",
+              "The 'FamilyTree' class manages the entire tree, starting with an ancestor at the root. It includes functions to add children and find family members."
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Therefore, the code generate the following tree in which each node (family member) is represented by a circle, and arrows indicate the parent-child relationships as shown in Figure 4.6."
           },
           {
             "type": "diagram",

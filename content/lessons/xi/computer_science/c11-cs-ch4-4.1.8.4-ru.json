@@ -20,10 +20,14 @@
       "body": {
         "blocks": [
           {
+            "type": "paragraph",
+            "text": "Graphs ko un ki banawat aur khasusiyat ke hisab se kai qismon mein baanta jata hai. Aham qismein directed, undirected aur weighted hain. Har qisam saada misalon se achhi tarah samajh aati hai."
+          },
+          {
             "type": "list",
             "ordered": false,
             "items": [
-              "Directed graph: edges ki simt hoti hai; shehar A se B tabhi ja sakte hain jab edge usi taraf ho (Figure 4.11)."
+              "Directed graph: is mein edges ki simt (direction) hoti hai, yaani edge ek vertex se doosre vertex ki taraf ek khaas taraf jati hai, jaisa Figure 4.11 mein teer (arrows) dikhate hain."
             ]
           },
           {
@@ -33,11 +37,19 @@
             "caption": "Figure 4.11: Directed weighted graph (kitab ki Figure 4.11 ke mutabiq asal khaaka)."
           },
           {
+            "type": "paragraph",
+            "text": "Misal: Figure 4.11 dekhein. Shehar A se shehar B jana ho to sirf usi taraf ja sakte hain jis ki sign ijazat de. Agar A se B ki taraf one-way sarak nahi to A se seedha B nahi ja sakte. (Figure mein teer B se A ki taraf hai, A se B ki taraf nahi.)"
+          },
+          {
             "type": "list",
             "ordered": false,
             "items": [
-              "Undirected graph: edges dono taraf; A B ka dost hai to B A ka dost hai (Figure 4.12)."
+              "Undirected graph: is mein edges ki koi simt nahi; agar do vertices jure hain to dono taraf aa ja sakte hain."
             ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Misal: Figure 4.12 mein agar Person A, Person B ka dost hai to Person B bhi Person A ka dost hai. Dosti ki koi ek taraf nahi, is liye doston ke darmiyan dono taraf aa ja sakte hain."
           },
           {
             "type": "diagram",
@@ -49,8 +61,12 @@
             "type": "list",
             "ordered": false,
             "items": [
-              "Weighted graph: har edge ka weight jaise faasla, waqt ya laagat, jo sab se chhota ya tez raasta dhoondne mein madad deta hai (Figure 4.11)."
+              "Weighted graph: is mein har edge ka ek weight ya cost hota hai, jo ek vertex se doosre tak jane ka faasla, waqt ya kharcha batata hai, jaise Figure 4.11 mein teeron par likhe numbers."
             ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Misal: shehar ka naqsha sochiye jis mein har sarak ka faasla ya safar ka waqt alag hai. Ek jagah se doosri jagah jane ke liye naqsha har sarak ka faasla ya waqt batata hai, jis se sab se chhota ya sab se tez raasta maloom hota hai."
           },
           {
             "type": "heading",
@@ -58,31 +74,56 @@
             "text": "Python mein graph banana"
           },
           {
+            "type": "paragraph",
+            "text": "Python mein graphs NetworkX jaisi libraries (tayyar code ke majmooe) se banaye ja sakte hain. Saada misal:"
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "import networkx as nx\nimport matplotlib.pyplot as plt\n# Create a graph object\nG = nx.Graph()\n# Add vertices (nodes)\nG.add_node('A')\nG.add_node('B')\nG.add_node('C')\n# Add edges (links) between vertices\nG.add_edge('A', 'B')\nG.add_edge('B', 'C')\n# Draw the graph\nnx.draw(G, with_labels=True)\nplt.show()",
+            "caption": "Sahi code"
+          },
+          {
             "type": "callout",
-            "tone": "note",
-            "title": "Python code (har .... ek 4-space indent hai)",
-            "text": "import networkx as nx\nimport matplotlib.pyplot as plt\nG = nx.Graph()          # create a graph\nG.add_node(\"A\")\nG.add_node(\"B\")\nG.add_node(\"C\")\nG.add_edge(\"A\", \"B\")     # add edges\nG.add_edge(\"B\", \"C\")\nnx.draw(G, with_labels=True)\nplt.show()"
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab ke code mein nodes ke naam tirchhe quotes ’ ’ mein hain (maslan ’ A ’), jinhein Python nahi maanta, is liye SyntaxError aata hai. Naamon ke andar spaces bhi hain; agar seedhe quotes ke saath ' A ' aur 'A' likha jaye to yeh do alag nodes ban jate hain. Upar seedhe quotes aur bina space ke naam hain. Kitab ne matplotlib.pyplot ko pit naam diya hai; yeh chal jata hai kyunke dono jagah pit hai, magar aam taur par plt likhte hain. (Yeh code chalane ke liye networkx aur matplotlib install hone chahiyein.)"
           },
           {
             "type": "paragraph",
-            "text": "Code NetworkX library se teen nodes aur do edges wala graph banata aur Matplotlib se banata hai (dono install hone chahiyein)."
-          },
-          {
-            "type": "checkpoint",
-            "mode": "self_check",
-            "prompt": "Directed weighted graph (B se A 10, A se C 12, C se B 20, A se D 60, C se D 32, E se A 7) mein E se D tak sab se sasta raasta kya hai?",
-            "explanation": "E se A se C se D: 7 + 12 + 32 = 51, jo E se A se D, 7 + 60 = 67, se sasta hai."
-          },
-          {
-            "type": "heading",
-            "level": 2,
-            "text": "Fauri khulasa"
+            "text": "Is code mein:"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "Graph ki qismein: directed (ek taraf), undirected (dono taraf), weighted (laagat); NetworkX graphs banata aur khenchta hai."
+              "Pehle graph object banaya jata hai: G = nx.Graph().",
+              "Nodes 'A', 'B' aur 'C' graph mein jore jate hain.",
+              "In nodes ko edges se jora jata hai: A-B aur B-C.",
+              "Graph Matplotlib se bana kar screen par dikhaya jata hai."
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh misal teen nodes aur do edges wala saada graph dikhati hai, aur batati hai ke program mein vertices aur edges kaise likhe jate hain."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Directed weighted graph (B se A 10, A se C 12, C se B 20, A se D 60, C se D 32, E se A 7) mein E se D tak sab se sasta raasta kaunsa hai?",
+            "explanation": "E se A se C se D: 7 + 12 + 32 = 51. Yeh E se A se D (7 + 60 = 67) se sasta hai."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Mukhtasar khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Graph ki qismein: directed (ek taraf), undirected (dono taraf), weighted (har edge ka wazan).",
+              "NetworkX: add_node(), add_edge(), draw()."
             ]
           }
         ]

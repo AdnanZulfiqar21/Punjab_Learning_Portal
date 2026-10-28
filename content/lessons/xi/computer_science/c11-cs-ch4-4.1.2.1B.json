@@ -13,34 +13,59 @@
           "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
           "pdf_from": 96,
           "pdf_to": 97,
-          "note": "Topic printed 4.1.2.1 Stack Operations (PDF 96-97, printed 93-94); the number 4.1.2.1 is repeated. Figure 4.2 (stack of books photo) is replaced by the original diagram. MCQ 3 is answered."
+          "note": "Topic 4.1.2.1 Stack Operations, second 4.1.2.1 (PDF 96-97, printed 93-94), as printed; Figure 4.2 where printed; the code's commented-out stack_of_books = [] and curly quotes are marked."
         }
       ],
       "body": {
         "blocks": [
           {
-            "type": "list",
-            "ordered": false,
-            "items": [
-              "Push: add an item to the top. In Python a list is used as the stack and append() pushes.",
-              "Pop: remove the item from the top with the list's pop()."
-            ]
-          },
-          {
-            "type": "callout",
-            "tone": "note",
-            "title": "Python code (each .... is one 4-space indent)",
-            "text": "stack_of_books = []\nstack_of_books.append(\"Book A\")\nstack_of_books.append(\"Book B\")\nstack_of_books.append(\"Book C\")\nprint(\"Stack:\", stack_of_books)        # Book A, Book B, Book C\ntop_book = stack_of_books.pop()\nprint(\"Removed book:\", top_book)       # Book C\nprint(\"Stack now:\", stack_of_books)    # Book A, Book B"
-          },
-          {
-            "type": "paragraph",
-            "text": "Like a stack of books on a desk, you can only add a book on top or take the top book off. Stacks are also used in depth-first search (DFS) to manage the nodes to explore in LIFO order (Did You Know)."
-          },
-          {
             "type": "diagram",
             "$asset": "c11-cs-ch4-fig-4-2-stack-of-books",
             "alt": "A pile of seven books lying flat one on top of another, in yellow, blue, red, orange, purple, lilac and green.",
             "caption": "Figure 4.2: Stack of Books (original drawing after the textbook's Figure 4.2)."
+          },
+          {
+            "type": "paragraph",
+            "text": "There are two basic operations in a stack:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Push Operation: Push means adding an item to the top of the stack. In Python, we use list data structure to implement the stack. Therefore, we use the list function append () to add an element to the top of the stack.",
+              "Pop Operation: Pop means removing the item from the top of the stack. We use list pop() function to remove the element from the top of the stack."
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Example: Imagine a stack of books shown in Figure 4.2, on a desk, you can only add a book on top of the stack or take the top book off. Here is a Python implementation of the book stack described above."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "#    Create an empty stack of books stack_of_books = []\nprint(\"Initial stack:\", stack_of_books)          # Empty stack\n#    Add books to the stack (push operation)\nprint(\"\\n Adding books to the stack (push operation):\")\nstack_of_books.append(’Book A’)\nprint(\"Stack after pushing ’Book A’:\", stack_of_books)\nstack_of_books.append(’Book B’)\nprint(\"Stack after pushing ’Book B’:\", stack_of_books)\nstack_of_books.append(’Book C’)\nprint(\"Stack after pushing ’Book C’:\", stack_of_books)\n# Remove the top book from the stack (pop operation)\nprint(\"\\nDeletion of top book (pop operation):\")\ntop_book = stack_of_books.pop()\nprint(\"Removed book:\", top_book)\nprint(\"Stack after popping the top book:\", stack_of_books)",
+            "book_errors": [
+              "stack_of_books = []",
+              "append(’Book A’)",
+              "append(’Book B’)",
+              "append(’Book C’)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "Two errors in the printed code. The three append() calls use curly quotes, append(’Book A’), which Python rejects with SyntaxError: invalid character '’' (U+2019); write append('Book A'). With that fixed, the program still stops at once with NameError: name 'stack_of_books' is not defined, because the first line puts stack_of_books = [] on the comment line; it must be on its own line after the comment. Corrected, the program ends with Removed book: Book C and Stack after popping the top book: ['Book A', 'Book B']."
+          },
+          {
+            "type": "paragraph",
+            "text": "The code creates an empty stack to hold books. It then adds three books (“Book A”, “Book B”, and “Book C”) one by one to the top of the stack. Finally, it removes the top book “Book C” from the stack, showing how the last book added is the first one taken off."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Did You Know?",
+            "text": "Did you know that stacks are used in algorithms like depth-first search (DFS) in graph traversal? They help manage the nodes to be explored in a LIFO manner."
           }
         ]
       }

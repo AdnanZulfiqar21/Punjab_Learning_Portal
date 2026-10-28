@@ -21,13 +21,41 @@
         "blocks": [
           {
             "type": "paragraph",
-            "text": "Mutawazin binary tree par BFS jis ki jarr 1, bachche 2 aur 3, aur 2 ke neeche patte 4, 5 aur 3 ke neeche 6, 7 (Figure 4.4)."
+            "text": "Breadth-First Search (BFS) ek algorithm hai jo tree ke nodes ko level ba level (pehle oopar wali qataar, phir us se neeche wali) dekhta hai. Jin nodes ko abhi dekhna baqi hai unhein queue mein rakha jata hai. Neeche numbers wale tree ki misal hai; Figure 4.4 woh tree dikhati hai:"
           },
           {
             "type": "diagram",
             "$asset": "c11-cs-ch4-fig-4-4-balanced-binary-tree",
             "alt": "Saat halke hare nodes ka binary tree: oopar 1; us ke neeche 2 aur 3; 2 ke neeche 4 aur 5; 3 ke neeche 6 aur 7.",
             "caption": "Figure 4.4: Mutawazin binary tree (kitab ki Figure 4.4 ke mutabiq asal khaaka)."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Queue ke saath BFS ke qadam:"
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "Root se shuru: root node (1) se shuru karein aur use queue mein daal dein.",
+              "Queue: [1]",
+              "Node 1 dekhna: node 1 ko queue se nikalein (dequeue) aur dekhein. Us ke children (nodes 2 aur 3) queue mein jorein.",
+              "Node 1 ke baad queue: [2, 3]",
+              "Node 2 dekhna: node 2 nikalein aur dekhein. Us ke children (nodes 4 aur 5) queue mein jorein.",
+              "Node 2 ke baad queue: [3, 4, 5]",
+              "Node 3 dekhna: node 3 nikalein aur dekhein. Us ke children (nodes 6 aur 7) queue mein jorein.",
+              "Node 3 ke baad queue: [4, 5, 6, 7]",
+              "Node 4 dekhna: node 4 nikalein aur dekhein. Node 4 ke children nahi, is liye queue mein kuch nahi jurta.",
+              "Node 4 ke baad queue: [5, 6, 7]",
+              "Node 5 dekhna: node 5 nikalein aur dekhein. Is ke children nahi, kuch nahi jurta.",
+              "Node 5 ke baad queue: [6, 7]",
+              "Node 6 dekhna: node 6 nikalein aur dekhein. Is ke children nahi, kuch nahi jurta.",
+              "Node 6 ke baad queue: [7]",
+              "Node 7 dekhna: node 7 nikalein aur dekhein. Is ke children nahi, ab queue khali hai.",
+              "Node 7 ke baad queue: []",
+              "Mukammal: queue khali hai, yaani saare nodes level ba level dekhe ja chuke: 1, 2, 3, 4, 5, 6, 7."
+            ]
           },
           {
             "type": "table",
@@ -83,19 +111,19 @@
           {
             "type": "checkpoint",
             "mode": "self_check",
-            "prompt": "Tree par BFS mein level ba level nodes dekhne ke liye queue ka kaunsa amal istemal hota hai (MCQ 6)?",
-            "explanation": "(c) nodes ko queue mein enqueue karna (aur usi tarteeb se aage se dequeue karna)."
+            "prompt": "Tree par BFS mein level ba level nodes dekhne ke liye queue ka kaunsa operation istemal hota hai (MCQ 6)?",
+            "explanation": "(c) Enqueueing nodes to a queue: nodes queue mein jore jate hain aur usi tarteeb se aage se nikale jate hain."
           },
           {
             "type": "heading",
             "level": 2,
-            "text": "Fauri khulasa"
+            "text": "Mukhtasar khulasa"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "7 nodes wale tree par BFS 1, 2, 3, 4, 5, 6, 7 dekhta hai; sab dekhe jane par queue khali."
+              "7 nodes wale tree par BFS ki tarteeb: 1, 2, 3, 4, 5, 6, 7; sab dekhne ke baad queue khali."
             ]
           }
         ]

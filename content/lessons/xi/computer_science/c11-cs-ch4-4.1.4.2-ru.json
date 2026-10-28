@@ -20,19 +20,35 @@
       "body": {
         "blocks": [
           {
+            "type": "paragraph",
+            "text": "Queue ke do buniyadi operations hain:"
+          },
+          {
             "type": "list",
             "ordered": false,
             "items": [
-              "Enqueue: peeche cheez jorna, jaise koi qataar ke aakhir mein lage.",
-              "Dequeue: aage wali cheez nikalna, jaise pehle shakhs ki khidmat.",
-              "Doosre amal: queue khali hai ya nahi, aage wali cheez nikale baghair dekhna (peek), aur size maloom karna."
+              "Enqueue (item jorna): jaise line ke aakhir mein naya shakhs lag jaye. Queue mein item peeche (back) jorte hain.",
+              "Dequeue (item nikalna): jaise line mein sab se aage wale shakhs ka kaam kar ke use farigh karna. Queue mein item aage (front) se nikalte hain.",
+              "Kuch aur operations bhi ho sakte hain: check karna ke queue khali hai ya nahi, aage wala item nikale baghair dekhna (peek), aur queue ka size maloom karna."
             ]
           },
           {
+            "type": "code",
+            "language": "python",
+            "text": "# Built-in module to implement queues in python\nfrom queue import Queue\n# Create a new queue\nq = Queue()\n# Add people to the queue (Enqueue)\nq.put(\"Ahmed\")    # Adds Ahmed to the end of the queue\nq.put(\"Fatima\")   # Adds Fatima to the end of the queue\nq.put(\"Ali\")      # Adds Ali to the end of the queue\n# View the person at the front of the queue (Peek)\nfront_person = q.queue[0]  # Looks at the person at the front without removing them\nprint(front_person)\n# Remove a person from the front of the queue (Dequeue)\nremoved_person = q.get()   # Removes and returns the person at the front of the queue\nprint(removed_person)\n# Add another person to the queue (Enqueue)\nq.put(\"Sara\")     # Adds Sara to the end of the queue\n# View the updated queue\nupdated_queue = list(q.queue)\nprint(updated_queue)",
+            "caption": "Sahi code"
+          },
+          {
+            "type": "code",
+            "language": "text",
+            "text": "Ahmed\nAhmed\n['Fatima', 'Ali', 'Sara']",
+            "caption": "Output (sahi code chalane par)"
+          },
+          {
             "type": "callout",
-            "tone": "note",
-            "title": "Python code (har .... ek 4-space indent hai)",
-            "text": "from queue import Queue    # built-in module\nq = Queue()\nq.put(\"Ahmed\")    # enqueue\nq.put(\"Fatima\")\nq.put(\"Ali\")\nprint(q.queue[0])    # peek: Ahmed\nprint(q.get())       # dequeue: Ahmed\nq.put(\"Sara\")\nprint(list(q.queue)) # ['Fatima', 'Ali', 'Sara']"
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab ke code mein do ghaltiyan hain: (1) q.getO likha hai; aisa koi method nahi, is liye AttributeError aata hai; sahi q.get() hai. (2) updated_queue = list(q.queue) comment wali line par hi chhapa hai, is liye chalta nahi aur print(updated_queue) par NameError aata hai; upar ise alag line par likha gaya hai. Kitab mein \" Ahmed\" ke shuru mein ek space bhi hai, jo naam ke saath print hota hai; upar use hata diya gaya hai."
           },
           {
             "type": "diagram",
@@ -41,21 +57,31 @@
             "caption": "Queue mein put() aur get(): pehle aane wala pehle nikalta hai (asal khaaka; kitab mein figure nahi)."
           },
           {
-            "type": "checkpoint",
-            "mode": "self_check",
-            "prompt": "Queue mein cheez kaunsa amal jorta hai (MCQ 5)? Enqueue aur dequeue mein farq bataiye (short question 5).",
-            "explanation": "(c) Enqueue. Enqueue queue ke peeche cheez jorta hai; dequeue aage wali cheez nikal kar lautata hai. Dono mil kar first-in, first-out tarteeb qaim rakhte hain."
+            "type": "paragraph",
+            "text": "Yeh code logon ki line ko queue se sambhalta hai. Pehle teen log line ke aakhir mein jorta hai (put), phir dekhta hai ke sab se aage kaun hai (q.queue[0], yaani peek), phir aage wale ko nikal deta hai (get). Aakhir mein ek aur shakhs (Sara) jor kar nayi line dikhata hai."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Tidbits",
+            "text": "'peek' operation se queue ka sab se aage wala item nikale baghair dekha ja sakta hai. Yeh aisa hai jaise shelf par pehli kitab dekh lena ke agli baar kaunsi uthegi."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
-            "prompt": "Long question 5: print jobs ki queue ka Python code likhein: banayein, teen jobs jorein, aage wali dikhayein, nikalein, ek aur jorein aur queue dikhayein.",
-            "explanation": "from queue import Queue; jobs = Queue(); jobs.put(\"Report.pdf\"); jobs.put(\"Notes.docx\"); jobs.put(\"Photo.png\"); print(\"Front:\", jobs.queue[0]); print(\"Printed:\", jobs.get()); jobs.put(\"Slides.pptx\"); print(list(jobs.queue)) Notes.docx, Photo.png, Slides.pptx dikhata hai. Files ke naam misal hain."
+            "prompt": "Queue mein item jorne ke liye kaunsa operation istemal hota hai (MCQ 5)? Enqueue aur dequeue mein farq bataiye (short question 5).",
+            "explanation": "(c) Enqueue. Enqueue item ko queue ke peeche jorta hai; dequeue sab se aage wala item nikal kar wapas deta hai. Dono mil kar pehle aao, pehle pao (FIFO) wali tarteeb qaim rakhte hain."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Long question 5: print jobs ki queue ka Python code likhein: khali queue banayein, teen print jobs jorein, aage wala job nikale baghair dikhayein, aage wala job nikalein, ek aur job jorein, aur nayi queue dikhayein.",
+            "explanation": "from queue import Queue; jobs = Queue(); jobs.put(\"Report.pdf\"); jobs.put(\"Notes.docx\"); jobs.put(\"Photo.png\"); print(\"Front:\", jobs.queue[0]) Report.pdf dikhata hai; print(\"Printed:\", jobs.get()) Report.pdf nikalta hai; jobs.put(\"Slides.pptx\"); print(list(jobs.queue)) ['Notes.docx', 'Photo.png', 'Slides.pptx'] dikhata hai. Files ke naam sirf misal hain. (Python 3.13 mein chala kar check kiya gaya.)"
           },
           {
             "type": "heading",
             "level": 2,
-            "text": "Fauri khulasa"
+            "text": "Mukhtasar khulasa"
           },
           {
             "type": "list",

@@ -20,11 +20,28 @@
       "body": {
         "blocks": [
           {
+            "type": "paragraph",
+            "text": "Trees kai qisam ke hote hain, aur har qisam ki apni banawat aur maqsad hai. Do aam qismein hain: Binary Trees aur AVL Trees. Yeh data ko achhi tarah tarteeb dene aur sambhalne mein madad deti hain."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "1. Binary tree"
+          },
+          {
+            "type": "paragraph",
+            "text": "Binary tree aisa darja-bandi (hierarchy) wala data structure hai jis mein har node ke zyada se zyada do children hote hain: left child aur right child, jaisa Figure 4.9 mein hai. Yeh family tree jaisa hai jahan har shakhs ki zyada se zyada do aulad hon."
+          },
+          {
+            "type": "paragraph",
+            "text": "Misal (Figure 4.9):"
+          },
+          {
             "type": "list",
             "ordered": true,
             "items": [
-              "Binary tree: har node ke zyada se zyada do bachche, baen aur daen. Khandani misal mein Grandparent jarr hai jis ke bachche Parent1 aur Parent2, aur har parent ke apne bachche jaise Child1 aur Child2 ho sakte hain (Figure 4.9).",
-              "AVL tree: aisa binary tree jo khud ko mutawazin rakhta hai. Ek taraf doosri se bohat oonchi ho jaye to tree khud ko dobara tarteeb deta hai. 20 jarr wali misal mein baen taraf 15, 10 aur 18 aur daen taraf 30 hai, aur height ka farq kam se kam rehta hai (Figure 4.10)."
+              "\"Grandparent\" root hai, aur us ke do children hain: \"Parent1\" aur \"Parent2\".",
+              "Har parent ke apne children ho sakte hain (jaise \"Child1\", \"Child2\" waghaira)."
             ]
           },
           {
@@ -32,6 +49,19 @@
             "$asset": "c11-cs-ch4-fig-4-9-binary-family-tree",
             "alt": "Teeron se jure dairon ka binary tree: oopar Grandparent se Parent2 aur Parent1; Parent2 se Child4 aur Child3; Parent1 se Child2 aur Child1.",
             "caption": "Figure 4.9: Khandani tree ki binary tree shakal (kitab ki Figure 4.9 ke mutabiq asal khaaka)."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "2. AVL tree"
+          },
+          {
+            "type": "paragraph",
+            "text": "AVL tree binary tree ki aisi qisam hai jo khud ko balanced rakhta hai, yaani us ki height ka khayal rakha jata hai. Agar ek taraf doosri taraf se bohat oonchi hone lage to tree khud ko dobara tarteeb de kar balance kar leta hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Misal: sochiye aap shelves par kitabein rakh rahe hain aur chahte hain ke shelves balanced rahein, ek taraf zyada bhaari na ho. AVL tree aisa hi hai, jaisa Figure 4.10 mein hai."
           },
           {
             "type": "diagram",
@@ -43,24 +73,37 @@
             "type": "callout",
             "tone": "tip",
             "title": "Diagram ko samjhein",
-            "text": "Kitab ki Figure 4.10 mein 30 baen taraf aur 15 daen taraf hai, aur 15 ke neeche 18 baen aur 10 daen. Magar kitab ka matan kehta hai ke baen taraf 15, 10, 18 aur daen taraf 30 hai; aur AVL tree mein chhoti qeemat baen aur bari daen jati hai. Is liye durust shakal yeh hai: 20 ke baen 15 (us ke baen 10, daen 18) aur daen 30. Baen shaakh ki height 2 aur daen ki 1 hai; farq sirf 1, is liye tree mutawazin (balanced) hai."
+            "text": "Kitab ki Figure 4.10 mein 30 baen taraf aur 15 daen taraf hai, aur 15 ke neeche 18 baen aur 10 daen. Magar kitab ka matan kehta hai ke baen taraf 15, 10, 18 aur daen taraf 30 hai; aur aise tree mein chhoti value baen aur bari daen jati hai. Is liye sahi shakal yeh hai: 20 ke baen 15 (us ke baen 10, daen 18) aur daen 30. Edges gin kar baen subtree ki height 1 aur daen subtree ki 0 hai; farq sirf 1, is liye tree balanced hai."
           },
           {
-            "type": "checkpoint",
-            "mode": "self_check",
-            "prompt": "AVL misal mein 20 ki dono shaakhon ki heights kya hain?",
-            "explanation": "Baen shaakh (15 aur us ke bachche 10 aur 18) ki height 1 aur daen shaakh (30) ki 0; farq 1 hai, to tree mutawazin hai."
-          },
-          {
-            "type": "heading",
-            "level": 2,
-            "text": "Fauri khulasa"
+            "type": "paragraph",
+            "text": "Is misal mein:"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "Binary tree: har node ke zyada se zyada do bachche. AVL tree: khud ko mutawazin rakhne wala binary tree."
+              "Har naya number (shelf par nayi kitab ki tarah) jorne ke baad bhi tree balanced rehta hai.",
+              "Baen taraf (nodes 15, 10, 18) aur daen taraf (node 30) ki height mein farq kam se kam rehta hai, is liye tree balanced hai."
+            ]
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "AVL misal mein 20 ki dono subtrees ki heights kya hain?",
+            "explanation": "Edges gin kar: baen subtree (15 aur us ke children 10 aur 18) ki height 1, daen subtree (sirf 30) ki height 0. Farq 1 hai, is liye tree balanced hai."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Mukhtasar khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Binary tree: har node ke zyada se zyada do children.",
+              "AVL tree: khud ko balanced rakhne wala binary tree."
             ]
           }
         ]

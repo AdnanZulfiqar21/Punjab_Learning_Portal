@@ -20,14 +20,23 @@
       "body": {
         "blocks": [
           {
+            "type": "paragraph",
+            "text": "Tree mein kuch buniyadi operations hain jo data sambhalne aur us par kaam karne mein madad dete hain:"
+          },
+          {
             "type": "list",
             "ordered": false,
             "items": [
-              "Insertion: durust jagah dhoond kar naya node us ke walid se jorna, jaise khandan mein naya fard.",
-              "Deletion: node ehtiyat se hatana ta ke baqi tree jura rahe.",
-              "Traversal: har node muqarrar tarteeb mein dekhna: in-order, pre-order ya post-order.",
-              "Searching: matlooba node milne tak tree ke nodes jaanchna."
+              "Insertion (dalna): sochiye aap family tree mein naya fard jor rahe hain. Tree mein sahi jagah dhoond kar naya member wahan jorte hain, yaani naye shakhs ko us ke walid (parent) se jor dete hain taake woh khandan ka hissa ban jaye.",
+              "Deletion (nikalna): kabhi kisi member ko tree se hatana parta hai. Use ehtiyat se nikala jata hai taake baqi tree jura rahe aur sahi rahe.",
+              "Traversal (har node dekhna): yeh family tree mein har fard ke paas ja kar milne jaisa hai. Is ke kai tareeqe hain, jaise oopar se shuru kar ke ek ek fard dekhna, ya agli shaakh par jane se pehle kisi shakhs ke saare bachche dekhna. Teen aam traversals hain: In-order, Pre-order aur Post-order. Inhein samajhne ke liye neeche numbers wala saada tree istemal hoga."
             ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab likhti hai “Here's how you can insert a new member into the Family Tree:” magar is ke baad koi code nahi diya. 4.1.6.1 ke family tree program mein naya member add_child() se jurta hai, maslan family_tree.add_child('Parent1', 'Child3')."
           },
           {
             "type": "diagram",
@@ -42,8 +51,106 @@
             "text": "Kitab ki Figure 4.8 ulti (mirror) chhapi hai: us mein 3 baen taraf (neeche 7, 6) aur 2 daen taraf (neeche 5, 4) hai. Magar kitab ke apne jawab, maslan in-order 4, 2, 5, 1, 6, 3, 7, tabhi sahi hain jab 2 baen aur 3 daen ho. Is liye yahan durust tree banaya gaya hai. In-order: pehle baen shaakh (4, 2, 5), phir jarr 1, phir daen shaakh (6, 3, 7)."
           },
           {
+            "type": "paragraph",
+            "text": "Is tree ki root node ki value 1 hai. Is ke do child nodes 2 aur 3 hain, aur un ke bhi children hain, jaisa Figure 4.8 mein hai: 2 ke neeche 4 aur 5, aur 3 ke neeche 6 aur 7."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "1. In-order traversal"
+          },
+          {
+            "type": "paragraph",
+            "text": "In-order mein pehle baen (left) subtree, phir root node, aur aakhir mein daen (right) subtree dekhte hain."
+          },
+          {
+            "type": "paragraph",
+            "text": "Misal: upar wale tree ka in-order traversal:"
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "Node 4 (2 ke sab se baen wala node)",
+              "Node 2",
+              "Node 5 (2 ka daen child)",
+              "Node 1 (root)",
+              "Node 6 (3 ke sab se baen wala node)",
+              "Node 3",
+              "Node 7 (3 ka daen child)"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "In-order output: 4, 2, 5, 1, 6, 3, 7."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "2. Pre-order traversal"
+          },
+          {
+            "type": "paragraph",
+            "text": "Pre-order mein pehle root node, phir baen subtree, phir daen subtree dekhte hain."
+          },
+          {
+            "type": "paragraph",
+            "text": "Misal: upar wale tree ka pre-order traversal:"
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "Node 1 (root)",
+              "Node 2",
+              "Node 4 (2 ke sab se baen wala node)",
+              "Node 5 (2 ka daen child)",
+              "Node 3",
+              "Node 6 (3 ke sab se baen wala node)",
+              "Node 7 (3 ka daen child)"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Pre-order output: 1, 2, 4, 5, 3, 6, 7."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "3. Post-order traversal"
+          },
+          {
+            "type": "paragraph",
+            "text": "Post-order mein pehle baen subtree, phir daen subtree, aur aakhir mein root node dekhte hain. (Kitab mein yahan jumla “For our” adhoora reh gaya hai.)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Misal: upar wale tree ka post-order traversal:"
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "Node 4 (2 ke sab se baen wala node)",
+              "Node 5 (2 ka daen child)",
+              "Node 2",
+              "Node 6 (3 ke sab se baen wala node)",
+              "Node 7 (3 ka daen child)",
+              "Node 3",
+              "Node 1 (root)"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Post-order output: 4, 5, 2, 6, 7, 3, 1."
+          },
+          {
+            "type": "paragraph",
+            "text": "Searching (dhoondna): yeh family tree mein kisi khaas fard ko dhoondne jaisa hai. Hum tree mein ek ek shakhs check karte hain jab tak matlooba shakhs na mil jaye. Is se tree mein maloomat jaldi mil jati hai."
+          },
+          {
             "type": "table",
-            "caption": "Jarr 1, bachche 2 aur 3, aur patte 4, 5, 6, 7 wale tree ke traversals",
+            "caption": "Teeno traversals ek nazar mein",
             "header": [
               "Traversal",
               "Qaida",
@@ -52,17 +159,17 @@
             "rows": [
               [
                 "In-order",
-                "baen shaakh, jarr, daen shaakh",
+                "baen subtree, root, daen subtree",
                 "4, 2, 5, 1, 6, 3, 7"
               ],
               [
                 "Pre-order",
-                "jarr, baen shaakh, daen shaakh",
+                "root, baen subtree, daen subtree",
                 "1, 2, 4, 5, 3, 6, 7"
               ],
               [
                 "Post-order",
-                "baen shaakh, daen shaakh, jarr",
+                "baen subtree, daen subtree, root",
                 "4, 5, 2, 6, 7, 3, 1"
               ]
             ]
@@ -70,25 +177,26 @@
           {
             "type": "checkpoint",
             "mode": "self_check",
-            "prompt": "Kaunsa traversal bachchon se pehle jarr dekhta hai (MCQ 7)?",
+            "prompt": "Kaunsa traversal root node ko us ke children se pehle dekhta hai (MCQ 7)?",
             "explanation": "(b) Pre-order."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
-            "prompt": "In-order, pre-order aur post-order traversal misal ke saath samjhaiye (long question 6).",
-            "explanation": "Har ek har shaakh ke liye recursive taur par tay hai. In-order pehle baen shaakh, phir node, phir daen shaakh: oopar wale tree par 4, 2, 5, 1, 6, 3, 7. Pre-order node ko shaakhon se pehle: 1, 2, 4, 5, 3, 6, 7, oopar se neeche copy ya backup ke liye mufeed. Post-order node ko shaakhon ke baad: 4, 5, 2, 6, 7, 3, 1, folder se pehle us ka mawad mitane ke liye mufeed."
+            "prompt": "In-order, pre-order aur post-order traversals ko misal ke saath samjhaiye (long question 6).",
+            "explanation": "Har ek tareeqa har subtree par dobara (recursively) lagta hai. In-order: pehle baen subtree, phir node, phir daen subtree; upar wale tree par 4, 2, 5, 1, 6, 3, 7. Pre-order: node pehle, phir dono subtrees; 1, 2, 4, 5, 3, 6, 7; oopar se neeche copy ya backup ke liye mufeed. Post-order: dono subtrees pehle, node aakhir mein; 4, 5, 2, 6, 7, 3, 1; folder mitane se pehle us ka andar ka saman mitane ke liye mufeed."
           },
           {
             "type": "heading",
             "level": 2,
-            "text": "Fauri khulasa"
+            "text": "Mukhtasar khulasa"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "Tree ke amal: insert, delete, traverse, search; in-order 4,2,5,1,6,3,7; pre-order 1,2,4,5,3,6,7; post-order 4,5,2,6,7,3,1."
+              "Tree ke operations: insert, delete, traverse, search.",
+              "In-order 4, 2, 5, 1, 6, 3, 7; pre-order 1, 2, 4, 5, 3, 6, 7; post-order 4, 5, 2, 6, 7, 3, 1."
             ]
           }
         ]
