@@ -13,88 +13,133 @@
           "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
           "pdf_from": 15,
           "pdf_to": 16,
-          "note": "Topic 1.8 with the IPv4 and IPv6 breakdown tables and three Do You Know boxes (PDF 15-16); Fig 1.15 redrawn with NAT. Long Q8 (with 1.10) is answered here. The /24 and /25 address ranges and the example public address are added."
+          "note": "Topic 1.8 as printed: IPv4 and IPv6 with their example lines, the two breakdown tables and three Do You Know boxes, Subnetting with Figure 1.15, and NAT (PDF 15-16, printed 10-11)."
         }
       ],
       "body": {
         "blocks": [
           {
             "type": "paragraph",
-            "text": "An IP (Internet Protocol) address is a unique number assigned to a device. It identifies the device on a network, and data uses IP addresses to find its destination. Every network device must have an IP address; without one, communication is not possible."
+            "text": "An IP address is a unique number assigned to a device. IP stands for Internet Protocol. It helps identify devices on a network. Data uses IP addresses to find its destination. Every network device must have an IP address. Communication is not possible without it."
           },
           {
             "type": "heading",
-            "level": 2,
+            "level": 3,
             "text": "IPv4 and IPv6"
           },
           {
             "type": "paragraph",
-            "text": "IPv4 is the older version and uses 32-bit numeric addresses, so it has a limited number of addresses. IPv6 is the newer version with 128-bit addresses; it provides far more address space and supports modern Internet needs."
+            "text": "IPv4 is an older version of IP addressing. It uses 32-bit numeric addresses. IPv4 has a limited number of addresses. IPv6 is the newer version with 128-bit addresses. IPv6 provides more address space. It supports modern Internet needs."
           },
           {
-            "type": "list",
-            "ordered": false,
-            "items": [
-              "IPv4 example: 192.168.1.10. It has 4 numbers, each from 0 to 255, separated by dots; each number is 1 byte (8 bits), so the total is 32 bits.",
-              "IPv6 example: 2001:0db8:85a3:0000:0000:8a2e:0370:7334. It has 8 groups of 4 hexadecimal digits separated by colons; each group is 16 bits, so the total is 128 bits."
-            ]
+            "type": "heading",
+            "level": 3,
+            "text": "IPv4"
+          },
+          {
+            "type": "paragraph",
+            "text": "Example: 192.168.1.10"
+          },
+          {
+            "type": "paragraph",
+            "text": "IPv4 has 4 numbers, each 0–255, separated by dots."
+          },
+          {
+            "type": "paragraph",
+            "text": "Each number = 1 Byte = 8 bits"
+          },
+          {
+            "type": "paragraph",
+            "text": "Total = 32 bits"
           },
           {
             "type": "table",
-            "caption": "Breakdown of IPv4 and IPv6 addresses",
+            "caption": "Breakdown of IPv4",
             "header": [
-              "Address",
               "Part",
               "Value",
               "What it means"
             ],
             "rows": [
               [
-                "IPv4",
                 "Network part",
                 "192.168.1",
-                "Identifies your local network, like a street address"
+                "Identifies your local network, like “Gulshan Block Street 3”"
               ],
               [
-                "IPv4",
                 "Host part",
                 "10",
-                "Identifies your device on that network, like a house number"
-              ],
-              [
-                "IPv6",
-                "Global routing prefix",
-                "2001:0db8:85a3",
-                "The ISP or region, like 'Pakistan, Sindh, Karachi'"
-              ],
-              [
-                "IPv6",
-                "Subnet ID",
-                "0000",
-                "Your local network inside the ISP, like an area of the city"
-              ],
-              [
-                "IPv6",
-                "Interface ID",
-                "0000:8a2e:0370:7334",
-                "Your specific device, like your laptop"
+                "Identifies your specific device on that network, like “House #10”"
               ]
             ]
           },
           {
             "type": "callout",
             "tone": "note",
-            "title": "Do you know?",
-            "text": "About 4.29 billion IPv4 addresses are possible. IPv6 gives 2^128, about 3.4 x 10^38 addresses, an astronomically large number that will never run out."
+            "title": "Do You Know?",
+            "text": "Total IPv4 addresses possible: 4.29 billion"
           },
           {
             "type": "heading",
-            "level": 2,
+            "level": 3,
+            "text": "IPv6"
+          },
+          {
+            "type": "paragraph",
+            "text": "Example: 2001:0db8:85a3:0000:0000:8a2e:0370:7334"
+          },
+          {
+            "type": "paragraph",
+            "text": "IPv6 has 8 groups of 4 hexadecimal digits, separated by colons."
+          },
+          {
+            "type": "paragraph",
+            "text": "Each group = 16 bits"
+          },
+          {
+            "type": "paragraph",
+            "text": "Total = 128 bits"
+          },
+          {
+            "type": "table",
+            "caption": "Breakdown of IPv6",
+            "header": [
+              "Part",
+              "Value",
+              "What it means"
+            ],
+            "rows": [
+              [
+                "Global routing prefix",
+                "2001:0db8:85a3",
+                "ISP/region, like “Pakistan, Sindh, Karachi”"
+              ],
+              [
+                "Subnet ID",
+                "0000",
+                "Your local network inside the ISP, like “Gulshan area”"
+              ],
+              [
+                "Interface ID",
+                "0000:8a2e:0370:7334",
+                "Your specific device, like “Your laptop”"
+              ]
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Do You Know?",
+            "text": "• IPv6 addresses comprise: 2¹²⁸ ≈ 3.4 × 10³⁸ total addresses.\n• IPv6 will never run out; it is an astronomically massive number."
+          },
+          {
+            "type": "heading",
+            "level": 3,
             "text": "Subnetting"
           },
           {
             "type": "paragraph",
-            "text": "Subnetting divides a network into smaller parts, each called a subnet (Fig 1.15). It reduces network traffic, improves performance and increases security, so large networks use it for management. For example, the network 192.168.1.0/24 can be split into the subnets 192.168.1.0/25 and 192.168.1.128/25."
+            "text": "Subnetting divides a network into smaller parts. Each part is called a subnet (as shown in Figure 1.15). It reduces network traffic. Subnetting improves performance. It increases security. Large networks use subnetting for management."
           },
           {
             "type": "diagram",
@@ -104,12 +149,12 @@
           },
           {
             "type": "heading",
-            "level": 2,
+            "level": 3,
             "text": "Network Address Translation (NAT)"
           },
           {
             "type": "paragraph",
-            "text": "NAT lets many devices share one public IP address. It is performed by routers and hides the private IP addresses of the devices inside, which improves security. NAT is commonly used in networks."
+            "text": "NAT stands for Network Address Translation. It allows many devices to share one public IP address. NAT is performed by routers. It hides private IP addresses. This improves network security. NAT is commonly used in networks."
           }
         ]
       }

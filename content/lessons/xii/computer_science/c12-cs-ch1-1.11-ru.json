@@ -13,38 +13,44 @@
         {
           "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
           "pdf_from": 17,
-          "pdf_to": 19,
-          "note": "Roman Urdu explanation of network diagnostic tools and commands (PDF 17-19)."
+          "pdf_to": 18,
+          "note": "Roman Urdu of topic 1.11 (PDF 17-18), paragraph for paragraph, the same code blocks, a reading of the output lines, a self-check and a recap."
         }
       ],
       "body": {
         "blocks": [
           {
             "type": "paragraph",
-            "text": "Network diagnostic tools network ke masail dhoondne ke liye use hote hain. Yeh Internet aur network connections check karte aur dikhate hain ke devices theek tarah baat kar sakte hain ya nahi. Commands command prompt ya terminal par likhi jati hain, aur sust ya toote connections pehchanne mein madad deti hain."
+            "text": "Network diagnostic tools network ke masail dhoondne ke liye istemal hote hain. Yeh Internet aur network ke connections check karne mein madad dete hain. Yeh tools dikhate hain ke devices theek tarah baat kar sakte hain ya nahi. Commands command prompt ya terminal mein likhi jati hain. Is se sust ya toote hue connections pehchanne mein madad milti hai."
           },
           {
             "type": "paragraph",
-            "text": "Network troubleshooting network ke masail, jaise connection aur raftar ke masle, dhoondne aur theek karne ka amal hai. Is mein cables, devices aur settings check hoti hain, rukawat ka waqt (downtime) aur ghaltiyan kam hoti hain, aur baat-cheet hamwaar rehti hai."
+            "text": "Network troubleshooting (masla dhoond kar theek karna) network ke masail dhoondne aur theek karne ke liye kiya jata hai. Is se connection aur raftar ke masle pakre jate hain. Troubleshooting mein cables, devices aur settings check hoti hain. Is se network ke band rehne ka waqt (downtime) aur ghaltiyan kam hoti hain. Is se baat-cheet hamwaar rehti hai. Sahi troubleshooting network ki performance behtar karti hai."
           },
           {
             "type": "heading",
-            "level": 2,
+            "level": 3,
             "text": "Ping command"
           },
           {
             "type": "paragraph",
-            "text": "Ping command network ka rabta test karti hai: yeh check karti hai ke device tak pohancha ja sakta hai ya nahi. Ping doosre device ko chhote data packets (ICMP echo requests) bhejti aur napti hai ke jawab mein kitna waqt laga, is liye deri pakarne mein madad deti hai. Yeh Internet connection check karne ke liye aam use hoti hai."
+            "text": "Ping command network connectivity (rabta) test karne ke liye istemal hoti hai. Yeh check karti hai ke koi device network par pohanch mein hai ya nahi. Ping doosre device ko chhote data packets bhejti hai (jaise Figure 1.16 mein). Yeh manzil se jawab aane ka waqt (response time) napti hai. Yeh command network mein deri (delay) pakarne mein madad deti hai. Internet connection check karne ke liye yeh aam istemal hoti hai."
           },
           {
-            "type": "callout",
-            "tone": "note",
-            "title": "Command aur namoona output (kitab se)",
-            "text": "ping google.com\n\nPinging google.com [142.250.190.14] with 32 bytes of data:\nReply from 142.250.190.14: bytes=32 time=25ms TTL=118\nReply from 142.250.190.14: bytes=32 time=24ms TTL=118\nReply from 142.250.190.14: bytes=32 time=26ms TTL=118\nReply from 142.250.190.14: bytes=32 time=25ms TTL=118"
+            "type": "code",
+            "language": "text",
+            "text": "C:\\> ping google.com",
+            "caption": "Ping Command:"
+          },
+          {
+            "type": "code",
+            "language": "text",
+            "text": "Pinging google.com [142.250.190.14] with 32 bytes of data:\nReply from 142.250.190.14: bytes=32 time=25ms TTL=118\nReply from 142.250.190.14: bytes=32 time=24ms TTL=118\nReply from 142.250.190.14: bytes=32 time=26ms TTL=118\nReply from 142.250.190.14: bytes=32 time=25ms TTL=118",
+            "caption": "Sample Output:"
           },
           {
             "type": "paragraph",
-            "text": "Har reply line manzil ka IP address, packet ka size (32 bytes), milliseconds mein aane jane ka waqt aur TTL (time to live, hops ki had) dikhati hai. Taqreeban 25 ms ke mustaqil waqt sehatmand connection batate hain; 'Request timed out' ka matlab hai ke jawab wapas nahi aaya."
+            "text": "Output ki har Reply line mein manzil ka IP address, packet ka size (32 bytes), milliseconds mein aane jane ka waqt (time) aur TTL (time to live: packet zyada se zyada kitne routers se guzar sakta hai) hota hai. Taqreeban 25 ms ke barabar waqt achhe connection ki nishani hain; \"Request timed out\" ka matlab hai ke jawab wapas nahi aaya."
           },
           {
             "type": "diagram",
@@ -54,27 +60,27 @@
           },
           {
             "type": "callout",
-            "tone": "tip",
-            "title": "Class activity",
-            "text": "Do muqamat ke darmiyan packets ke raste ka naqsha banayein."
+            "tone": "note",
+            "title": "Class Activity",
+            "text": "Do jaghon (locations) ke darmiyan packets ke raaste ka naqsha banayein."
           },
           {
             "type": "heading",
-            "level": 2,
-            "text": "Ipconfig aur ifconfig"
+            "level": 3,
+            "text": "Ipconfig aur ifconfig commands"
           },
           {
             "type": "paragraph",
-            "text": "Ipconfig Windows mein use hoti hai; ifconfig Linux aur macOS mein. Yeh commands network settings dikhati hain: IP address, subnet mask, default gateway aur network ki halat, jo troubleshooting mein madad deti hai."
+            "text": "Ipconfig Windows operating system mein istemal hoti hai. Ifconfig Linux aur macOS systems mein istemal hoti hai. Yeh commands network ki settings dikhati hain. Yeh IP address aur subnet mask dikhati hain. Yeh gateway aur network ki halat (status) bhi dikhati hain. Yeh commands network troubleshooting mein madad deti hain."
           },
           {
             "type": "heading",
-            "level": 2,
+            "level": 3,
             "text": "Telnet, PuTTY aur Secure Shell (SSH)"
           },
           {
             "type": "paragraph",
-            "text": "Telnet kisi device tak door se rasai ke liye use hota hai lekin data be-encryption bhejta hai. PuTTY door se login ka mashhoor program hai. SSH door se rasai ka mehfooz tareeqa hai jo data encrypt karta hai. Yeh tools doosre computer se network devices sambhalne mein madad dete hain."
+            "text": "Telnet door se (remote) kisi device tak pohanchne ke liye istemal hota hai. Yeh data encryption ke baghair bhejta hai. PuTTY remote login ka mashhoor tool hai. SSH remote access ka mehfooz tareeqa hai. SSH hifazat ke liye data ko encrypt karta hai. Yeh tools network devices sambhalne mein madad dete hain."
           },
           {
             "type": "checkpoint",
@@ -85,15 +91,15 @@
           {
             "type": "heading",
             "level": 2,
-            "text": "Fauri khulasa"
+            "text": "Mukhtasar khulasa"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "Diagnostic tools network ke masail dhoondte; commands command prompt ya terminal par.",
-              "ping: pohanch aur aane jane ka waqt (ICMP echo).",
-              "ipconfig (Windows) / ifconfig (Linux, macOS): IP settings; SSH: encrypted door ki rasai (Telnet nahi)."
+              "Diagnostic tools network ke masail dhoondte hain; commands command prompt ya terminal par.",
+              "ping: device tak pohanch aur jawab ka waqt; har Reply line mein bytes, time aur TTL.",
+              "ipconfig (Windows) / ifconfig (Linux, macOS): IP settings; SSH: encrypted remote access, Telnet nahi."
             ]
           }
         ]
