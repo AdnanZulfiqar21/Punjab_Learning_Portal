@@ -14,18 +14,29 @@
           "source_document_id": "bfc68b7f-dac5-5e57-a286-814710fe09bc",
           "pdf_from": 89,
           "pdf_to": 90,
-          "note": "Roman Urdu explanation of mean and maximum power in AC (PDF 89-90)."
+          "note": "Roman Urdu explanation of topic 17.2 and Example 17.2 (PDF 89-90)."
         }
       ],
       "body": {
         "blocks": [
           {
             "type": "paragraph",
-            "text": "Alternating current dauri taur par simt badalta hai, is liye voltage aur current sine ki shakal mein badalte hain. Resistive load woh hai jo tawanai jama nahi karta (jaise capacitor ya inductor karte hain) balke seedhi hararat mein zaya karta hai. Circuit mein lamhati taqat kisi lamhe ki taqat hai: P = VI (17.5). Zyada se zyada (peak) taqat tab hoti hai jab current aur voltage apni peak qeematon Io aur Vo par hon; mean taqat aik mukammal chakkar ka aust hai (Fig 17.4)."
+            "text": "Alternating current woh current hai jo baar baar apni simt (direction) ulat'ta hai, is liye voltage aur current sine wave ki tarah upar neeche hote rehte hain. Resistive load woh hai jo energy jama (store) nahi karta (jaise capacitor ya inductor karte hain) balke seedha garmi (heat) ki shakal mein kharch kar deta hai."
+          },
+          {
+            "type": "callout",
+            "tone": "definition",
+            "title": "Instantaneous power",
+            "text": "Kisi bhi lamhe t par circuit mein jo power ho, woh instantaneous power P hai."
+          },
+          {
+            "type": "equation",
+            "latex": "P = VI \\tag{17.5}",
+            "text_alt": "P = VI   (17.5)"
           },
           {
             "type": "paragraph",
-            "text": "Resistor R mein sine ki shakal ke AC ke liye zyada se zyada taqat Pmax = Io^2 R (17.6) aur mean taqat Pmean = Irms^2 R (17.7) hai. Kyunke Io = 2 ka square root x Irms, Pmax = 2 Irms^2 R = 2 Pmean, is liye Pmean = Pmax / 2 (17.8). Resistive load mein mean taqat zyada se zyada taqat ki aadhi hai: lamhati taqat chakkar ke kuch nuqton par inteha tak pohanchti lekin kafi waqt kam qeematon par, sifar tak, guzarti hai."
+            "text": "Yahan V us lamhe ka voltage aur I us lamhe ka current hai. Sab se zyada (peak) power Pₘₐₓ tab hoti hai jab current aur voltage dono apni peak qeemat Iₒ aur Vₒ par hon. Mean power Pₘₑₐₙ AC waveform ki ek poori cycle ki average power hai (Fig. 17.4)."
           },
           {
             "type": "diagram",
@@ -35,48 +46,115 @@
           },
           {
             "type": "callout",
-            "tone": "tip",
-            "title": "Diagram ko samjhein",
-            "text": "Kitab ki Fig 17.4 mein VoIo ki taraf do teer hain: 'Peak value' aur 'Peak voltage'. VoIo taqat ki peak hai, voltage ki nahi, is liye khaake mein sirf 'Peak value' hai. Taqat P = VI hamesha musbat rehti hai kyunke V aur I aik saath simt badalte hain, aur is ki average chotti ki aadhi, (1/2) VoIo, hai."
-          },
-          {
-            "type": "heading",
-            "level": 2,
-            "text": "Misal 17.2"
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab ki Fig. 17.4 mein VₒIₒ wali lakeer ki taraf do teer hain: 'Peak value' aur 'Peak voltage'. VₒIₒ power ki peak hai, voltage ki nahi; is liye khaake mein 'Peak voltage' nahi likha. Power P = VI hamesha positive rehti hai kyunke V aur I ek saath simt badalte hain, aur is ki average peak ki aadhi, ½VₒIₒ, hai."
           },
           {
             "type": "paragraph",
-            "text": "50 ohm resistor par 220 V ka alternating voltage lagaya jata hai. Kitab ki tarah 220 V ko peak qeemat maan kar mean taqat kilowatt mein maloom karein. Hal: Pmax = V^2 / R = (220 V)^2 / 50 ohm = 968 W. Mean taqat aadhi hai: Pmean = 968 W / 2 = 484 W = 0.484 kW."
+            "text": "Sine wave wale AC mein Iₒ current ki peak qeemat aur Vₒ voltage ki peak qeemat ho to sab se zyada power:"
+          },
+          {
+            "type": "equation",
+            "latex": "P_{max} = I_o^2 R \\tag{17.6}",
+            "text_alt": "Pₘₐₓ = Iₒ²R   (17.6)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Mean power Pₘₑₐₙ ka formula:"
+          },
+          {
+            "type": "equation",
+            "latex": "P_{mean} = I_{rms}^2 R \\tag{17.7}",
+            "text_alt": "Pₘₑₐₙ = Iᵣₘₛ²R   (17.7)"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{As} \\qquad I_o = \\sqrt{2}\\,I_{rms}",
+            "text_alt": "As   Iₒ = √2 Iᵣₘₛ"
+          },
+          {
+            "type": "paragraph",
+            "text": "Is ko Eq. 17.6 mein rakhein:"
+          },
+          {
+            "type": "equation",
+            "latex": "P_{max} = (\\sqrt{2}\\,I_{rms})^2 R = 2I_{rms}^2 R",
+            "text_alt": "Pₘₐₓ = (√2 Iᵣₘₛ)²R = 2Iᵣₘₛ²R"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{Eq. 17.7 se} \\quad I_{rms}^2 R = P_{mean}, \\quad \\text{is liye}",
+            "text_alt": "Eq. 17.7 se Iᵣₘₛ²R = Pₘₑₐₙ, is liye"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab yahan IR²ᵣₘₛ chhapti hai. Sahi Iᵣₘₛ²R = Pₘₑₐₙ hai (Eq. 17.7): square current par hai, R par nahi."
+          },
+          {
+            "type": "equation",
+            "latex": "P_{max} = 2P_{mean}",
+            "text_alt": "Pₘₐₓ = 2Pₘₑₐₙ"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{or} \\qquad P_{mean} = \\frac{P_{max}}{2} \\tag{17.8}",
+            "text_alt": "or   Pₘₑₐₙ = Pₘₐₓ/2   (17.8)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yani resistive load mein sine wave wale AC ki mean power, maximum power ki aadhi hoti hai. Wajah yeh hai ke instantaneous power waqt ke saath badalti hai: cycle ke kuch points par maximum hoti hai lekin kaafi waqt zero ya kam qeemat par rehti hai, is liye average peak ka aadha banta hai."
           },
           {
             "type": "callout",
             "tone": "note",
+            "title": "Dilchasp maloomat (Interesting Information)",
+            "text": "Kitab digital clamp meter ki tasveer dikhati hai, jo AC aur DC naapta hai. Is ka jabra (clamp) taar ke gird band ho kar current ka magnetic field mehsoos karta hai, is liye circuit kaatna nahi parta."
+          },
+          {
+            "type": "example",
+            "title": "Example 17.2",
+            "problem": "50 Ω ke resistor par 220 V ka alternating voltage lagaya gaya hai. System ki mean power kilowatt mein nikalein.",
+            "steps": [
+              "Diya gaya: R = 50 Ω aur V = 220 V (kitab is 220 V ko peak qeemat le rahi hai).",
+              "Formula: Pₘₐₓ = V²/R",
+              "Qeematen rakhein: Pₘₐₓ = (220 V)²/50 Ω = 48400/50 W = 968 W",
+              "Mean power, peak power ki aadhi hai: Pₘₑₐₙ = Pₘₐₓ/2 = 968 W/2"
+            ],
+            "answer": "Pₘₑₐₙ = 484 W = 0.484 kW"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
             "title": "Peak ya rms?",
-            "text": "Mains voltages aam taur par rms qeematon mein batayi jati hain. Agar Misal 17.2 ka 220 V rms qeemat ho to mean taqat Vrms^2 / R = (220 V)^2 / 50 ohm = 968 W, aur peak taqat 1936 W hogi."
+            "text": "Ghar ki bijli ka voltage (220 V) aam taur par rms qeemat hoti hai. Agar is sawal ka 220 V rms ho to mean power = Vᵣₘₛ²/R = (220 V)²/50 Ω = 968 W hogi aur peak power 1936 W. Kitab ne 220 V ko peak maan kar hal kiya hai."
           },
           {
             "type": "callout",
             "tone": "note",
-            "title": "Dilchasp maloomat",
-            "text": "Digital clamp meter circuit tore baghair AC aur DC current napta hai: is ke jabre aik taar ke gird band ho kar current ka magnetic field mehsoos karte hain. (Kitab aik tasveer bhi dikhati hai jis par likha hai 'scientists ne insani khoon ki shakkar ko bijli mein badla'.)"
+            "title": "Hairat angez baat (Fascinating Fact)",
+            "text": "Scientists ne insani khoon ki shakkar (blood sugar) ko bijli mein badal diya hai."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
-            "prompt": "AC circuit mein aik resistor 200 W peak taqat zaya karta hai. Is ki mean taqat kya hai?",
-            "explanation": "Pmean = Pmax / 2 = 100 W."
+            "prompt": "AC circuit mein ek resistor ki peak power 200 W hai. Is ki mean power kitni hai?",
+            "explanation": "Pₘₑₐₙ = Pₘₐₓ/2 = 200 W/2 = 100 W."
           },
           {
             "type": "heading",
             "level": 2,
-            "text": "Fauri khulasa"
+            "text": "Mukhtasar khulasa"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "Har lamhe P = VI; Pmax = Io^2 R; Pmean = Irms^2 R.",
-              "Resistor mein Pmean = Pmax / 2."
+              "Har lamhe P = VI.",
+              "Pₘₐₓ = Iₒ²R aur Pₘₑₐₙ = Iᵣₘₛ²R.",
+              "Resistor mein Pₘₑₐₙ = Pₘₐₓ/2."
             ]
           }
         ]

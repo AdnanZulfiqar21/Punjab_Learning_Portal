@@ -13,14 +13,20 @@
           "source_document_id": "bfc68b7f-dac5-5e57-a286-814710fe09bc",
           "pdf_from": 110,
           "pdf_to": 113,
-          "note": "Topic 17.16 (there is no 17.15) with Example 17.8 and the inductor-energy derivation (PDF 110-113); Figs 17.18-17.19 redrawn. Printed slips are noted. The energy question is added; answer needs review."
+          "note": "Topic 17.16 as printed with Example 17.8 (PDF 110-113, printed 106-109); Figs 17.18 and 17.19 redrawn. There is no section 17.15 in the book."
         }
       ],
       "body": {
         "blocks": [
           {
             "type": "paragraph",
-            "text": "A coil is connected in series with a battery, a switch and a rheostat (Fig 17.18). If the rheostat is moved quickly, the current through the coil changes, so the magnetic flux through the coil changes, which induces an emf in the coil itself."
+            "text": "Consider a circuit in which a coil is connected in series with a battery, a switch and a rheostat as shown in Fig.17.18. If we move the rheostat quickly, the primary current through the coil will change. The magnetic flux through the coil will also change, which finally induces an emf in the coil itself."
+          },
+          {
+            "type": "callout",
+            "tone": "definition",
+            "title": "Self-induction",
+            "text": "The phenomenon, in which changing current induces an emf inside the coil itself, is called self-induction."
           },
           {
             "type": "diagram",
@@ -29,42 +35,136 @@
             "caption": "Figure 17.18: A coil showing production of induced current and induced emf in itself (original drawing after the textbook's Figure 17.18)."
           },
           {
-            "type": "callout",
-            "tone": "definition",
-            "title": "Self-induction",
-            "text": "Self-induction is the phenomenon in which a changing current induces an emf in the coil itself."
+            "type": "paragraph",
+            "text": "Let φ represents flux passing through one loop of the coil. The flux passing through the coil of N turns would be Nφ. As this flux φ is proportional to the magnetic field produced which is in turn proportional to the current I, therefore,"
+          },
+          {
+            "type": "equation",
+            "latex": "N\\phi \\propto I",
+            "text_alt": "Nφ ∝ I"
+          },
+          {
+            "type": "equation",
+            "latex": "N\\phi = LI \\tag{17.29}",
+            "text_alt": "Nφ = LI   (17.29)"
           },
           {
             "type": "paragraph",
-            "text": "Let phi be the flux through one loop of the coil; the flux through N turns is N phi. As phi is proportional to the magnetic field, which is proportional to the current I, N phi is proportional to I: N phi = LI (17.29), where the constant L is the self-inductance of the coil. L depends on the number of turns, the area of cross-section of the coil and the core material: winding the coil around a ferromagnetic iron core increases the flux, and so the inductance, greatly compared with an air core."
+            "text": "where L is proportionality constant and is called self -inductance of the coil."
           },
           {
             "type": "paragraph",
-            "text": "By Faraday's law the induced emf is eL = -N d(phi)/dt (17.30) = -d(N phi)/dt = -d(LI)/dt, so eL = -L dI/dt (17.31), or L = -eL / (dI/dt) (17.32). The minus sign shows that the induced emf opposes the change in current. Equating 17.30 and 17.31 also gives L = N d(phi)/dI (17.33)."
+            "text": "The self-inductance L depends upon the following factors:"
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "Number of turns of the coil.",
+              "Area of cross-section of the coil.",
+              "Core material, by winding the coil around ferromagnetic iron core, the magnetic flux and hence inductance can be increased significantly relative to that for an air core."
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "By Faraday's law, the emf induced in the coil is given by"
+          },
+          {
+            "type": "equation",
+            "latex": "\\varepsilon_L = -N\\frac{\\Delta\\phi}{\\Delta t} \\tag{17.30}",
+            "text_alt": "ε_L = −N Δφ/Δt   (17.30)"
+          },
+          {
+            "type": "equation",
+            "latex": "\\varepsilon_L = -\\frac{\\Delta(N\\phi)}{\\Delta t}",
+            "text_alt": "ε_L = −Δ(Nφ)/Δt"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{Using Eq. (17.28);} \\quad \\varepsilon_L = -\\frac{\\Delta(LI)}{\\Delta t}",
+            "text_alt": "Using Eq. (17.28); ε_L = −Δ(LI)/Δt",
+            "book_errors": [
+              "(17.28)",
+              "\\text{Using Eq. (17.28);}"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The equation used here is Nφ = LI, numbered (17.29); the book refers to it as (17.28)."
+          },
+          {
+            "type": "equation",
+            "latex": "\\varepsilon_L = -L\\frac{\\Delta I}{\\Delta t} \\tag{17.31}",
+            "text_alt": "ε_L = −L ΔI/Δt   (17.31)"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{or} \\qquad L = \\frac{-\\varepsilon_L}{\\Delta I/\\Delta t} \\tag{17.32}",
+            "text_alt": "or   L = −ε_L/(ΔI/Δt)   (17.32)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Here L is self-inductance of the coil and minus sign indicates that the induced emf opposes the applied voltage. In the above expression, If we take ε_L = 1 volt and ΔI/Δt = 1 A s⁻¹, then L = 1 henry (H), defined as:"
           },
           {
             "type": "callout",
             "tone": "definition",
-            "title": "The henry",
-            "text": "A coil has a self-inductance of 1 henry (H) if an emf of 1 V is induced in it when the current through it changes at the rate of 1 A s^-1. The SI unit of self-inductance is V s A^-1 (the henry), with dimensions [M L^2 T^-2 A^-2]."
+            "title": "Henry",
+            "text": "If the emf induced in the coil is 1 V when the current flowing through it changes at the rate of 1 A s⁻¹, the coil has self-induce in a coil of 1 henry (H)."
+          },
+          {
+            "type": "paragraph",
+            "text": "The self-inductance of the coil can also be defined as ratio of the emf to the rate of change of current in the same coil. The SI unit of self-inductance L is Vs A⁻¹ having dimensions [ML²T⁻²A⁻²]."
+          },
+          {
+            "type": "paragraph",
+            "text": "By equating Eqs.17.30 and 17.31, we have"
+          },
+          {
+            "type": "equation",
+            "latex": "-N\\frac{\\Delta\\phi}{\\Delta t} = -L\\frac{\\Delta I}{\\Delta t}",
+            "text_alt": "−N Δφ/Δt = −L ΔI/Δt"
+          },
+          {
+            "type": "equation",
+            "latex": "L = N\\frac{\\Delta\\phi}{\\Delta I} \\tag{17.33}",
+            "text_alt": "L = N Δφ/ΔI   (17.33)"
+          },
+          {
+            "type": "paragraph",
+            "text": "which gives another form of equation for self-inductance of the coil."
+          },
+          {
+            "type": "example",
+            "title": "Example 17.8",
+            "problem": "A coil has an inductance reactance of 160 Ω at a frequency of 50 Hz. Calculate self-inductance of the coil.",
+            "steps": [
+              "Induced reaction X_L = 160 Ω, Frequency f = 59 Hz",
+              "We know that; X_L = 2πfL",
+              "or L = X_L/2πf"
+            ],
+            "answer": "L = 160 Ω/(2 × 3.14 × 50 Hz) = 0.509 H",
+            "book_errors": [
+              "Induced reaction",
+              "f = 59 Hz"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The data line should read 'Inductive reactance X_L = 160 Ω, Frequency f = 50 Hz', as in the question; the solution uses 50 Hz and its answer 0.509 H is right."
           },
           {
             "type": "heading",
-            "level": 2,
-            "text": "Example 17.8"
+            "level": 3,
+            "text": "Energy Stored in an Inductor"
           },
           {
             "type": "paragraph",
-            "text": "A coil has an inductive reactance of 160 ohm at 50 Hz. Find its self-inductance. Solution: XL = 2 pi f L, so L = XL / (2 pi f) = 160 ohm / (2 x 3.14 x 50 Hz) = 0.509 H."
-          },
-          {
-            "type": "heading",
-            "level": 2,
-            "text": "Energy stored in an inductor"
-          },
-          {
-            "type": "paragraph",
-            "text": "A coil is connected to a battery and a switch (Fig 17.19). When the switch is closed the current rises from zero to its final value I, and the changing current induces an emf opposing the battery; the battery must do work to move charge against it. The work to move a small charge dq is W = dq eL (17.34), with eL = L dI/dt, so W = dq L (dI/dt) = (dq/dt) L dI (17.35). Here dq/dt is the average current, (0 + I)/2 = I/2, and dI = I - 0 = I. So W = (I/2) L I = (1/2) L I^2 (17.36). This work is stored as potential energy in the magnetic field: Um = (1/2) L I^2 (17.37). It can never be negative, because it depends on the square of the current; the inductor absorbs energy while the current grows and returns it when the current falls."
+            "text": "Consider a coil connected to a battery and a switch in series as shown in Fig.17.19. When the switch is turned ON, voltage is applied across the ends of coil and current increases from zero to maximum value. Due to change of current, an emf is induced, which is opposite to that of battery. Work is done by battery to move charges against the induced emf."
           },
           {
             "type": "diagram",
@@ -74,7 +174,140 @@
           },
           {
             "type": "paragraph",
-            "text": "For a solenoid with n turns per unit length, cross-section A and length l, B = mu_o n I and L = mu_o n^2 A l. Substituting gives Um = (1/2) mu_o n^2 A l (B / mu_o n)^2 = (B^2 / 2 mu_o)(A l), where A l is the volume. So the energy density of the magnetic field is Um / volume = B^2 / (2 mu_o) (17.38)."
+            "text": "Work done by battery in moving a small charge Δq is given by"
+          },
+          {
+            "type": "equation",
+            "latex": "W = \\Delta q\\,\\varepsilon_L \\tag{17.34}",
+            "text_alt": "W = Δq ε_L   (17.34)"
+          },
+          {
+            "type": "paragraph",
+            "text": "where ε_L is the magnitude of self-induced emf and is given by"
+          },
+          {
+            "type": "equation",
+            "latex": "\\varepsilon_L = L\\frac{\\Delta I}{\\Delta t}",
+            "text_alt": "ε_L = L ΔI/Δt"
+          },
+          {
+            "type": "paragraph",
+            "text": "So, putting values in Eq.17.34, we have"
+          },
+          {
+            "type": "equation",
+            "latex": "W = \\Delta q L\\frac{\\Delta I}{\\Delta t} = \\frac{\\Delta q}{\\Delta t}L\\Delta I \\tag{17.35}",
+            "text_alt": "W = Δq L ΔI/Δt = (Δq/Δt) L ΔI   (17.35)"
+          },
+          {
+            "type": "paragraph",
+            "text": "where Δq/Δt represents average current and is given by"
+          },
+          {
+            "type": "equation",
+            "latex": "\\frac{\\Delta q}{\\Delta t} = \\left(\\frac{0+1}{2}\\right) = \\frac{1}{2}I",
+            "text_alt": "Δq/Δt = ((0+1)/2) = ½I",
+            "book_errors": [
+              "(0+1)/2",
+              "\\frac{0+1}{2}"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The average current while the current rises from 0 to I is (0 + I)/2 = ½I; the book prints (0+1)/2."
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{And} \\qquad \\Delta I = I - 0 = I",
+            "text_alt": "And   ΔI = I − 0 = I"
+          },
+          {
+            "type": "paragraph",
+            "text": "Putting the values in Eq.17.35, we have"
+          },
+          {
+            "type": "equation",
+            "latex": "W = \\left(\\frac{1}{2}I\\right)LI = \\frac{1}{2}LI^2 \\tag{17.36}",
+            "text_alt": "W = (½I)LI = ½LI²   (17.36)"
+          },
+          {
+            "type": "paragraph",
+            "text": "This work is stored as potential energy in the inductor. Hence,"
+          },
+          {
+            "type": "equation",
+            "latex": "U_m = \\frac{1}{2}LI^2 \\tag{17.37}",
+            "text_alt": "Uₘ = ½LI²   (17.37)"
+          },
+          {
+            "type": "paragraph",
+            "text": "It is to be noted that in an inductor, energy is stored in the magnetic field and can never be negative because it is proportional to square of current. The inductor stores energy while absorbing power, returns the previous stored energy when delivering power, so the net energy transfer can never be negative. Using the Eq.17.37 expressed in terms of magnetic field B of solenoid can be found having:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "n = number of turns per unit length",
+              "A = Area of cross section of coil",
+              "B = Magnetic field strength = μₒnI (Negative field due to solenoid)",
+              "I = current in solenoid = B/μₒnI",
+              "L = Self Inductance = μₒn²Al where l is the length of solenoid"
+            ],
+            "book_errors": [
+              "Negative field",
+              "B/μₒnI"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "In this list, B = μₒnI is the magnetic field due to the solenoid (printed 'Negative field'), and the current is I = B/μₒn (printed B/μₒnI, with an extra I)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Putting the values in Eq.17.37 we have"
+          },
+          {
+            "type": "equation",
+            "latex": "U_m = \\frac{1}{2}\\mu_o n^2 Al\\left(\\frac{B}{\\mu_o n}\\right)^2",
+            "text_alt": "Uₘ = ½ μₒn²Al (B/μₒn)²"
+          },
+          {
+            "type": "equation",
+            "latex": "U_m = \\frac{B^2}{2\\mu_o}(Al)",
+            "text_alt": "Uₘ = (B²/2μₒ)(Al)"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{As } Al = \\text{volume, so} \\quad U_m = B^2\\frac{1}{2\\mu_o}(\\text{volume})",
+            "text_alt": "As Al = volume, so Uₘ = B² (1/2μₒ)(volume)"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{or} \\qquad \\frac{U_m}{\\text{volume}} = \\frac{1}{\\mu_o}B^2",
+            "text_alt": "or   Uₘ/volume = (1/μₒ)B²",
+            "book_errors": [
+              "(1/μₒ)B²",
+              "\\frac{1}{\\mu_o}B^2"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "From the line above, Uₘ/volume = B²/(2μₒ); the factor 2 is missing in the printed line. Eq. 17.38 below gives the correct B²/(2μₒ)."
+          },
+          {
+            "type": "paragraph",
+            "text": "The energy stored Uₘ, per unit volume inside the solenoid is called energy density, and for an inductor it is given by"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{Energy density} = B^2\\frac{1}{2\\mu_o} \\tag{17.38}",
+            "text_alt": "Energy density = B² (1/2μₒ)   (17.38)"
           }
         ]
       }
