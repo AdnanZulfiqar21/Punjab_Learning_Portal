@@ -93,6 +93,8 @@ export type TopicReading = {
   lesson: (Lesson & { status: string; private_preview: boolean }) | null;
   previous_topic_id: string | null;
   next_topic_id: string | null;
+  /** CHAPTER-OPENING-01: the chapter's first topic. */
+  chapter_start?: boolean;
 };
 
 function origin(): string {

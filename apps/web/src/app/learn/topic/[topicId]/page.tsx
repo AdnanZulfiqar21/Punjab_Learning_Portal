@@ -7,6 +7,7 @@ import { chooseReadingLanguage } from "@/app/actions/learn";
 import { KeepPlace } from "@/components/keep-place";
 import { LectureView } from "@/components/lecture-view";
 import { LessonBlocks } from "@/components/lesson-blocks";
+import { continuesInto, headingOnly as isHeadingOnly, isMainHeading } from "@/lib/book-heading";
 import { typesetEquations } from "@/lib/typeset";
 import { placeSignature, type PlaceBlock } from "@/lib/variant-place";
 import { Notice, SkeletonLines } from "@/components/ui";
@@ -44,6 +45,7 @@ type TopicReading = {
   lesson: TopicLesson | null;
   previous_topic_id: string | null;
   next_topic_id: string | null;
+  chapter_start?: boolean;
 };
 
 /**
@@ -82,9 +84,21 @@ async function TopicView({ id, view }: { id: string; view: "read" | "lecture" })
   const res = await api<TopicReading>(`/v1/topics/${id}/lesson${language === "en" ? "" : `?language=${language}`}`, token ? { token } : {});
   if (!res.ok) notFound();
   const reading = res.data;
-  const lesson = reading.lesson;
+  // BOOK-HEADING-01: where the book prints only this topic's heading and runs straight into its first subtopic
+  // (Chemistry XI 14.4 into 14.4.1), the page goes on with that subtopic under its own heading instead of staying empty.
+  const headingOnly = isHeadingOnly(reading);
+  let cont: TopicReading | null = null;
+  if (headingOnly && reading.next_topic_id) {
+    const next = await api<TopicReading>(`/v1/topics/${reading.next_topic_id}/lesson${language === "en" ? "" : `?language=${language}`}`, token ? { token } : {});
+    if (next.ok && continuesInto(reading, next.data)) cont = next.data;
+  }
+  const shown = cont ?? reading; // the topic whose lesson is on the page
+  const lesson = shown.lesson;
   const grade = GRADE_LABEL[reading.grade_number] ?? `Class ${reading.grade_number}`;
-  const readable = Boolean(lesson?.body) && !lesson?.locked && reading.availability !== "unavailable";
+  // CHAPTER-OPENING-01: owner-approved for every book after Chemistry (2026-10-27).
+  const chapterOpening = reading.chapter_start === true;
+  const empty = headingOnly && !cont; // a heading with nothing to go on with is not a lesson yet
+  const readable = Boolean(lesson?.body) && !empty && !lesson?.locked && reading.availability !== "unavailable";
   const note = lesson && readable ? missingLanguageNote(language, lesson.language) : null;
   const display = parseDisplay(jar.get(DISPLAY_COOKIE)?.value);
   const dataSaver = display ? display.dataSaver : (await headers()).get("save-data") === "on";
@@ -122,20 +136,51 @@ async function TopicView({ id, view }: { id: string; view: "read" | "lecture" })
           )}
         </form>
       )}
-      <header className="space-y-2">
-        <p className="flex flex-wrap items-center gap-2 text-sm font-medium text-accent">
-          <Link href={`/learn/chapter/${reading.chapter_id}`} className="underline underline-offset-2">
-            {grade} · {reading.subject_name} · Chapter {reading.chapter_number}
-          </Link>
-          {reading.availability === "private_preview" && (
-            <span className="rounded-full border border-border bg-surface-muted px-2 py-0.5 text-xs font-semibold text-muted" title="Not yet reviewed or published">
-              Draft preview
+      {chapterOpening ? (
+        // CHAPTER-OPENING-01 (owner trial, 2026-10-27): a chapter's introduction opens with the chapter itself: its name
+        // large in the subject colour on a tinted panel, then the introduction's own title.
+        <header className="space-y-5">
+          <div className="relative overflow-hidden rounded-2xl border border-border bg-accent-soft px-6 py-7 sm:px-9 sm:py-10">
+            <span aria-hidden className="pointer-events-none absolute -bottom-6 right-4 select-none text-[8rem] font-bold leading-none text-accent opacity-10 sm:text-[10rem]">
+              {reading.chapter_number}
             </span>
-          )}
-        </p>
-        <h1 className="text-3xl font-semibold tracking-tight">{reading.number ? `${reading.number} ${reading.title}` : reading.title}</h1>
-        <p className="text-sm text-muted">{reading.chapter_title}</p>
-      </header>
+            <div className="relative space-y-3">
+              <p className="flex flex-wrap items-center gap-2 text-sm font-medium text-accent">
+                <Link href={`/learn/chapter/${reading.chapter_id}`} className="underline underline-offset-2">
+                  {grade} · {reading.subject_name}
+                </Link>
+                {reading.availability === "private_preview" && (
+                  <span className="rounded-full border border-border bg-surface-muted px-2 py-0.5 text-xs font-semibold text-muted" title="Not yet reviewed or published">
+                    Draft preview
+                  </span>
+                )}
+              </p>
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">Chapter {reading.chapter_number}</p>
+              <p className="text-4xl font-bold tracking-tight text-accent sm:text-5xl">{reading.chapter_title}</p>
+              <div aria-hidden className="h-1 w-16 rounded-full bg-accent" />
+            </div>
+          </div>
+          {/* The page's heading stays the topic; the chapter above is its setting. */}
+          <h1 className={`text-2xl font-semibold tracking-tight${isMainHeading(reading.number) ? " text-accent" : ""}`}>
+            {reading.number ? `${reading.number} ${reading.title}` : reading.title}
+          </h1>
+        </header>
+      ) : (
+        <header className="space-y-2">
+          <p className="flex flex-wrap items-center gap-2 text-sm font-medium text-accent">
+            <Link href={`/learn/chapter/${reading.chapter_id}`} className="underline underline-offset-2">
+              {grade} · {reading.subject_name} · Chapter {reading.chapter_number}
+            </Link>
+            {reading.availability === "private_preview" && (
+              <span className="rounded-full border border-border bg-surface-muted px-2 py-0.5 text-xs font-semibold text-muted" title="Not yet reviewed or published">
+                Draft preview
+              </span>
+            )}
+          </p>
+          <h1 className={`text-3xl font-semibold tracking-tight${isMainHeading(reading.number) ? " text-accent" : ""}`}>{reading.number ? `${reading.number} ${reading.title}` : reading.title}</h1>
+          <p className="text-sm text-muted">{reading.chapter_title}</p>
+        </header>
+      )}
       {view === "lecture" && readable && (
         <section aria-label="Lecture" className="space-y-3">
           {lecture?.availability === "available" && lecture.lectures.length > 0 ? (
@@ -165,7 +210,7 @@ async function TopicView({ id, view }: { id: string; view: "read" | "lecture" })
           )}
         </section>
       )}
-      {view === "lecture" && readable ? null : reading.availability === "unavailable" || !lesson?.body ? (
+      {view === "lecture" && readable ? null : reading.availability === "unavailable" || !lesson?.body || empty ? (
         <Notice title="This topic’s lesson isn’t ready yet">The chapter outline lists the topic, but its lesson has not been published.</Notice>
       ) : lesson.locked ? (
         <Notice title="Included with a plan or the free 30-day trial">
@@ -176,6 +221,7 @@ async function TopicView({ id, view }: { id: string; view: "read" | "lecture" })
         </Notice>
       ) : (
         <div className="space-y-4 text-[1.0625rem] leading-7 sm:text-[1.125rem] sm:leading-8" lang={lesson.language === "ur" ? "ur" : "en"} dir={lesson.language === "ur" ? "rtl" : undefined}>
+          {cont && <h2 className="text-2xl font-semibold tracking-tight">{`${cont.number} ${cont.title}`}</h2>}
           <LessonBlocks
             blocks={lesson.body.blocks}
             typeset={typesetEquations(lesson.body.blocks)}
@@ -183,7 +229,7 @@ async function TopicView({ id, view }: { id: string; view: "read" | "lecture" })
             dataSaver={dataSaver}
             assetUrl={(versionId) =>
               lesson.private_preview
-                ? `/learn/topics/${reading.topic_id}/preview-assets/${versionId}`
+                ? `/learn/topics/${shown.topic_id}/preview-assets/${versionId}`
                 : `/learn/lessons/${lesson.id}/assets/${versionId}`
             }
           />
@@ -197,8 +243,8 @@ async function TopicView({ id, view }: { id: string; view: "read" | "lecture" })
         ) : (
           <span />
         )}
-        {reading.next_topic_id && (
-          <Link href={`/learn/topic/${reading.next_topic_id}`} className="font-medium text-accent">
+        {shown.next_topic_id && (
+          <Link href={`/learn/topic/${shown.next_topic_id}`} className="font-medium text-accent">
             Next topic →
           </Link>
         )}

@@ -20,6 +20,7 @@ export const Colors = {
     okSoft: "#e7f5ec",
     danger: "#a31d1d",
     dangerSoft: "#fdecec",
+    subheading: "#2a5d8f", // headings inside a lesson (owner, 2026-10-27); same value as globals.css --subheading
   },
   dark: {
     background: "#121412",
@@ -37,6 +38,7 @@ export const Colors = {
     okSoft: "#13301f",
     danger: "#f19a9a",
     dangerSoft: "#3d1717",
+    subheading: "#8fbfe8",
   },
 } as const;
 

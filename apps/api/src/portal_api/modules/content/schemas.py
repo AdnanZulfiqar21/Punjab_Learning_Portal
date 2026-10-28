@@ -285,6 +285,8 @@ class TopicReadingOut(BaseModel):
     lesson: TopicLessonOut | None
     previous_topic_id: uuid.UUID | None
     next_topic_id: uuid.UUID | None
+    # CHAPTER-OPENING-01: the chapter's first topic, where the reader opens with the chapter itself.
+    chapter_start: bool = False
 
 
 class VariantOut(BaseModel):

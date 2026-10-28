@@ -39,24 +39,39 @@ export function KeepPlace({ lessonId, signatures }: { lessonId: string; signatur
     if (!note || note.lessonId === lessonId) return;
     const id = `b${mapPlace(note.signatures, signatures, note.index)}`;
     // The router may scroll on arrival after this effect, and the lesson may still be streaming in: keep returning
-    // to the block for a moment, and stop as soon as it sits at the top.
+    // to the block for a moment, and stop once it has sat at the top on two checks in a row, or as soon as the reader
+    // scrolls, taps or types (never pull them back from where they went). The marker says when it is settled.
     const timers: ReturnType<typeof setTimeout>[] = [];
+    let frame = 0;
+    let atTop = 0;
+    const inputs = ["wheel", "touchstart", "pointerdown", "keydown"] as const;
+    const finish = () => {
+      cancelAnimationFrame(frame);
+      timers.forEach(clearTimeout);
+      inputs.forEach((t) => window.removeEventListener(t, finish, true));
+      marker.current?.setAttribute("data-place", "settled");
+    };
     const go = () => {
       const el = document.getElementById(id);
       if (!el) return;
-      if (Math.abs(el.getBoundingClientRect().top - 80) > 4) el.scrollIntoView({ block: "start" });
       try {
         window.sessionStorage.removeItem(KEY);
       } catch {
         // see above
       }
+      if (Math.abs(el.getBoundingClientRect().top - 80) > 4) {
+        atTop = 0;
+        el.scrollIntoView({ block: "start" });
+      } else if (++atTop >= 2) {
+        finish();
+      }
     };
-    const frame = requestAnimationFrame(go);
-    for (const ms of [150, 350, 700, 1200, 2000]) timers.push(setTimeout(go, ms));
-    return () => {
-      cancelAnimationFrame(frame);
-      timers.forEach(clearTimeout);
-    };
+    marker.current?.setAttribute("data-place", "returning");
+    inputs.forEach((t) => window.addEventListener(t, finish, { capture: true, passive: true }));
+    frame = requestAnimationFrame(go);
+    for (const ms of [150, 350, 700, 1200]) timers.push(setTimeout(go, ms));
+    timers.push(setTimeout(finish, 2000));
+    return finish;
   }, [lessonId, signatures]);
 
   // Listen on the document: the form's DOM node is replaced after each switch, while this component is kept.

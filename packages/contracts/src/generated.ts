@@ -11748,6 +11748,11 @@ export interface components {
             chapter_id: string;
             /** Chapter Number */
             chapter_number: number;
+            /**
+             * Chapter Start
+             * @default false
+             */
+            chapter_start: boolean;
             /** Chapter Title */
             chapter_title: string;
             /** Grade Number */
