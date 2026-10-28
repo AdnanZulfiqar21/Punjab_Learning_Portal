@@ -7,7 +7,9 @@ import type { NextConfig } from "next";
 const isDev = process.env.NODE_ENV === "development";
 const csp = [
   "default-src 'self'",
-  `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""}`,
+  // CODE-RUNNER-01: 'wasm-unsafe-eval' lets the lesson code runner compile Python's WebAssembly (served from /pyodide/);
+  // it allows WebAssembly only, not JavaScript eval.
+  `script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'${isDev ? " 'unsafe-eval'" : ""}`,
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' blob: data: https:",
   "font-src 'self' data:",

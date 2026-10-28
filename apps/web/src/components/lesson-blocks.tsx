@@ -1,5 +1,6 @@
 import { Fragment, type ReactNode } from "react";
 import { Checkpoint } from "@/components/checkpoint";
+import { CodeRunner } from "@/components/code-runner";
 import { Equation } from "@/components/equation";
 import { Model3DFigure } from "@/components/model3d-figure";
 import { SaverImage } from "@/components/saver-image";
@@ -120,6 +121,7 @@ export function LessonBlocks({
   dataSaver = false,
   blockIds = false,
   typeset,
+  runnable = false,
 }: {
   blocks: Block[];
   headingOffset?: number;
@@ -132,9 +134,11 @@ export function LessonBlocks({
   blockIds?: boolean;
   /** P01.S4.T2: equations already typeset on the server (`lib/typeset.ts`), by block index. */
   typeset?: Record<number, string | null>;
+  /** CODE-RUNNER-01: Python programs get "Run karein" (the Roman Urdu lesson). */
+  runnable?: boolean;
 }) {
   const view = (b: Block, i: number) => (
-    <BlockView block={b} headingOffset={headingOffset} assetUrl={assetUrl} dataSaver={dataSaver} typeset={typeset?.[i]} />
+    <BlockView block={b} headingOffset={headingOffset} assetUrl={assetUrl} dataSaver={dataSaver} typeset={typeset?.[i]} runnable={runnable} />
   );
   // Each block keeps its own id (b0, b1, …), also inside a Quick Check card, so the language switch finds its place.
   // `data-kind` lets consecutive equations join into one card (globals.css `.lesson-flow`), as the book prints a run of
@@ -201,12 +205,14 @@ function BlockView({
   assetUrl,
   dataSaver,
   typeset,
+  runnable = false,
 }: {
   block: Block;
   headingOffset: number;
   assetUrl?: AssetUrl;
   dataSaver?: boolean;
   typeset?: string | null;
+  runnable?: boolean;
 }) {
   const marks = bookErrors(b.book_errors);
   switch (b.type) {
@@ -407,6 +413,7 @@ function BlockView({
               </code>
             </pre>
           </div>
+          {runnable && /^py(thon)?\d?$/i.test(str(b.language).trim()) && <CodeRunner code={str(b.text)} />}
         </figure>
       );
     case "diagram":

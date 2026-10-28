@@ -230,6 +230,7 @@ async function TopicView({ id, view }: { id: string; view: "read" | "lecture" })
             typeset={typesetEquations(lesson.body.blocks)}
             blockIds
             dataSaver={dataSaver}
+            runnable={lesson.language === "roman_ur"}
             assetUrl={(versionId) =>
               lesson.private_preview
                 ? `/learn/topics/${shown.topic_id}/preview-assets/${versionId}`
