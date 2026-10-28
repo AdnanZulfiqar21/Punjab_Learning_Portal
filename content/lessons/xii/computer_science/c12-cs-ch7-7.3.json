@@ -13,148 +13,201 @@
           "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
           "pdf_from": 95,
           "pdf_to": 97,
-          "note": "Topic 7.3 (PDF 95-97) with the t-test and chi-square examples checked against the page images; no book figure. The decisions for both examples (critical values 2.06 and 11.07) are added, with original figures for the critical region and the die. Short Q4-6, Long Q3 and MCQs 4-7 are answered here."
+          "note": "Topic 7.3 as printed (PDF 95-97, printed 91-93): the t-value and chi-square formulas with their Where lists, both examples with the die table, critical region, significance level and p-value."
         }
       ],
       "body": {
         "blocks": [
           {
             "type": "paragraph",
-            "text": "Hypothesis testing uses a few key concepts together to reach correct decisions: test statistics, the critical region, the significance level and the p-value."
+            "text": "Hypothesis testing uses several important concepts to make correct decisions. Each concept has a specific role in testing. Understanding them avoids confusion. They guide acceptance or rejection of hypotheses. These concepts are used together. Proper knowledge improves accuracy. They are applied in data analysis. Learning these concepts is essential."
           },
           {
             "type": "heading",
-            "level": 2,
-            "text": "Test statistics"
+            "level": 3,
+            "text": "Test Statistics"
           },
           {
             "type": "paragraph",
-            "text": "A test statistic is a number calculated from sample data that summarises how far the results are from what H0 expects. Different tests use different statistics, for example the t-value, the chi-square value and the F-value."
+            "text": "Test statistics are numerical values. They are calculated from sample data. These values summarize data behavior. Test statistics help compare results and support decisions. They show how far results are from expectations. Different tests use different statistics. Examples include t-value and chi-square value."
           },
           {
-            "type": "table",
-            "caption": "Two test statistics",
-            "header": [
-              "Test",
-              "Formula",
-              "Symbols"
-            ],
-            "rows": [
-              [
-                "t-test",
-                "t = (x_bar - mu_0) / (s / sqrt(n))",
-                "x_bar: sample mean; mu_0: population mean under H0; s: sample standard deviation; n: sample size"
-              ],
-              [
-                "Chi-square test",
-                "chi^2 = sum of (O_i - E_i)^2 / E_i",
-                "O_i: observed frequency in each category; E_i: expected frequency in each category"
-              ]
+            "type": "heading",
+            "level": 3,
+            "text": "T-value Test:"
+          },
+          {
+            "type": "equation",
+            "latex": "t=\\frac{\\bar{x}-\\mu_0}{\\frac{s}{\\sqrt{n}}}",
+            "text_alt": "t = (x̄ − μ₀) / (s / √n)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Where:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "x̄: Sample mean",
+              "μ₀: Population mean under the null hypothesis",
+              "s: Sample standard deviation",
+              "n: Sample size"
             ]
           },
           {
             "type": "heading",
-            "level": 2,
-            "text": "Worked example: t-test"
+            "level": 3,
+            "text": "Example:"
           },
           {
             "type": "paragraph",
-            "text": "A sample of 25 students has a mean score of 80. Is this significantly different from the population mean of 75, if the sample standard deviation is 10? t = (80 - 75) / (10 / sqrt(25)) = 5 / (10 / 5) = 5 / 2 = 2.5."
+            "text": "Suppose we have a sample of 25 students with an average score of 80, and we want to test if the mean score is significantly different from the population mean of 75. The sample standard deviation is 10."
+          },
+          {
+            "type": "equation",
+            "latex": "t=\\frac{80-75}{\\frac{10}{\\sqrt{25}}}=\\frac{5}{\\frac{10}{5}}=\\frac{5}{2}=2.5",
+            "text_alt": "t = (80 − 75) / (10/√25) = 5 / (10/5) = 5/2 = 2.5"
           },
           {
             "type": "heading",
-            "level": 2,
-            "text": "Worked example: chi-square test"
+            "level": 3,
+            "text": "Chi-Square Test:"
+          },
+          {
+            "type": "equation",
+            "latex": "x^2=\\sum\\frac{(o_i-E_i)^2}{E_i}",
+            "text_alt": "x² = Σ (oᵢ − Eᵢ)² / Eᵢ",
+            "book_errors": [
+              "x²",
+              "x^2"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The chi-square symbol is printed as x² (the letter x), here and in the working of the example below; it is the Greek letter chi: χ² = Σ (Oᵢ − Eᵢ)² / Eᵢ, with Oᵢ the observed frequency as in the Where list (the formula prints a small oᵢ). The arithmetic of the example (3.4) is right."
+          },
+          {
+            "type": "paragraph",
+            "text": "Where:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Oᵢ : Observed frequency in each category",
+              "Eᵢ : Expected frequency in each category"
+            ]
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Example:"
+          },
+          {
+            "type": "paragraph",
+            "text": "Suppose you roll a fair die 60 times and observe the following frequencies:"
           },
           {
             "type": "table",
-            "caption": "A die rolled 60 times",
+            "caption": "Observed and expected frequencies of a fair die rolled 60 times",
             "header": [
-              "Face",
-              "Observed O",
-              "Expected E",
-              "(O - E)^2 / E"
+              "Face of Die",
+              "Observed Frequency ((Oᵢ))",
+              "Expected Frequency ((Eᵢ))"
             ],
             "rows": [
               [
                 "1",
                 "10",
-                "10",
-                "0"
+                "10"
               ],
               [
                 "2",
                 "12",
-                "10",
-                "0.4"
+                "10"
               ],
               [
                 "3",
                 "8",
-                "10",
-                "0.4"
+                "10"
               ],
               [
                 "4",
                 "14",
-                "10",
-                "1.6"
+                "10"
               ],
               [
                 "5",
                 "9",
-                "10",
-                "0.1"
+                "10"
               ],
               [
                 "6",
                 "7",
-                "10",
-                "0.9"
-              ],
-              [
-                "Total",
-                "60",
-                "60",
-                "3.4"
+                "10"
               ]
             ]
           },
           {
-            "type": "paragraph",
-            "text": "So chi^2 = 3.4. This value is compared with the critical value from the chi-square table at a chosen significance level (for example alpha = 0.05) and the degrees of freedom to make a decision."
+            "type": "equation",
+            "latex": "x^2=\\frac{(10-10)^2}{10}+\\frac{(12-10)^2}{10}+\\frac{(8-10)^2}{10}+\\frac{(14-10)^2}{10}+\\frac{(9-10)^2}{10}+\\frac{(7-10)^2}{10}",
+            "text_alt": "x² = (10−10)²/10 + (12−10)²/10 + (8−10)²/10 + (14−10)²/10 + (9−10)²/10 + (7−10)²/10"
           },
           {
-            "type": "diagram",
-            "$asset": "c12-cs-ch7-fig-chi-square",
-            "alt": "A bar chart of the observed frequencies of the six faces in 60 rolls (10, 12, 8, 14, 9 and 7) with a dashed line at the expected 10. A box shows the working: 0 + 0.4 + 0.4 + 1.6 + 0.1 + 0.9 = 3.4; df = 5; critical value at alpha 0.05 = 11.07. A note says 3.4 < 11.07, so H0 (the die is fair) is not rejected.",
-            "caption": "A chi-square test of a die (original diagram after the die example).",
-            "long_description": "Even a fair die never gives exactly 10 of each face in 60 rolls; the test asks whether the differences are bigger than chance would usually produce."
+            "type": "equation",
+            "latex": "x^2=0+\\frac{4}{10}+\\frac{4}{10}+\\frac{16}{10}+\\frac{1}{10}+\\frac{9}{10}",
+            "text_alt": "x² = 0 + 4/10 + 4/10 + 16/10 + 1/10 + 9/10"
+          },
+          {
+            "type": "equation",
+            "latex": "x^2=0+0.4+0.4+1.6+0.1+0.9=3.4",
+            "text_alt": "x² = 0 + 0.4 + 0.4 + 1.6 + 0.1 + 0.9 = 3.4"
+          },
+          {
+            "type": "paragraph",
+            "text": "Now, the calculated x² value is 3.4, and we would compare this value against the critical value from the Chi-Square distribution table at a certain significance level (e.g., α = 0.05) and degrees of freedom to make a decision."
           },
           {
             "type": "heading",
-            "level": 2,
-            "text": "Critical region, significance level and p-value"
-          },
-          {
-            "type": "list",
-            "ordered": true,
-            "items": [
-              "Critical region: the range of extreme values of the test statistic for which H0 is rejected. It is fixed before testing and depends on the significance level; graphs often show it.",
-              "Significance level (alpha): the largest risk we accept of rejecting H0 when it is actually true; a common value is 0.05. A lower alpha means a stricter test. It is chosen before the analysis.",
-              "p-value: the probability of getting the observed result, or a more extreme one, if H0 is true. A small p-value is strong evidence against H0, because such a result would rarely happen by chance. If the p-value is less than alpha, H0 is rejected."
-            ]
+            "level": 3,
+            "text": "Critical Region"
           },
           {
             "type": "paragraph",
-            "text": "For example, a teacher tests whether a new teaching method improves marks; H0 says it has no effect. If the analysis gives p = 0.03, then since 0.03 < 0.05, H0 is rejected: there is statistical evidence that the method improved performance. In medicine, a p-value of 0.01 when comparing a new drug with an old one gives strong evidence that the improvement is not due to chance alone. Understanding p-values helps avoid rejecting or accepting a hypothesis without proper evidence."
+            "text": "The critical region is a range of values. If test statistics fall in this region, the null hypothesis is rejected. It is defined before testing. The region depends on the significance level. It shows extreme outcomes. Critical regions help make decisions. They reduce uncertainty. Graphs often show critical regions. Understanding this concept is important."
           },
           {
-            "type": "diagram",
-            "$asset": "c12-cs-ch7-fig-critical-region",
-            "alt": "A bell-shaped curve shows the values of the test statistic expected if H0 is true. Beyond a dashed line marked critical value, the right tail is shaded red as the critical region with area alpha = 0.05. A purple line marks the test statistic inside the critical region, and the small purple area beyond it is the p-value. A note: test statistic in the critical region (p-value < alpha) means reject H0; otherwise do not reject H0.",
-            "caption": "The critical region and the p-value (original diagram after 7.3).",
-            "long_description": "The two rules are the same decision: a test statistic beyond the critical value always has a p-value smaller than alpha."
+            "type": "heading",
+            "level": 3,
+            "text": "Significance Level"
+          },
+          {
+            "type": "paragraph",
+            "text": "The significance level shows risk of error. It is written as alpha. Common values include 0.05. It defines how strict a test is. Lower values mean stricter testing. It is chosen before analysis. Significance level controls false results and affects decision-making. Proper choice improves reliability."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "P-value and its Importance"
+          },
+          {
+            "type": "paragraph",
+            "text": "The p-value shows the strength of evidence against the null hypothesis. It measures the probability of getting the observed results, or more extreme results, if the null hypothesis is true. A small p-value supports the rejection of the null hypothesis because it suggests that the result is unlikely to have occurred by chance. The p-value is compared with the significance level, such as (0.05), to make a decision."
+          },
+          {
+            "type": "paragraph",
+            "text": "For example, suppose a teacher wants to test whether a new teaching method improves students' marks. The null hypothesis states that the new method has no effect. After analysing the test scores, the p-value is found to be (0.03). Since (0.03 < 0.05), the null hypothesis may be rejected. This means there is statistical evidence that the new teaching method may have improved students' performance."
+          },
+          {
+            "type": "paragraph",
+            "text": "Similarly, in medicine, researchers may test whether a new drug is more effective than an old drug. If the p-value is (0.01), it gives strong evidence that the improvement is unlikely to be due to chance alone."
+          },
+          {
+            "type": "paragraph",
+            "text": "P-values help simplify statistical decisions and support data-driven conclusions. A clear understanding of p-values helps avoid mistakes, such as rejecting or accepting a hypothesis without proper evidence."
           }
         ]
       }
