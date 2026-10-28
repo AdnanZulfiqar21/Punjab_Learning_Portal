@@ -10,12 +10,13 @@ import { LectureView } from "@/components/lecture-view";
 import { LessonBlocks } from "@/components/lesson-blocks";
 import { CompletionToggle, LessonNote, SaveFormula } from "@/components/lesson-study";
 import { Chip, ErrorState, LinkButton, Loading, Notice, Segmented, T } from "@/components/ui";
-import { Space } from "@/constants/theme";
+import { Space, subjectKey } from "@/constants/theme";
 import { useRequest } from "@/hooks/use-request";
 import { SubjectAccent, useTheme } from "@/hooks/use-theme";
 import { api, GRADE_LABEL, lessonAsset, previewAsset, type TopicLecture, type TopicReading } from "@/lib/api";
 import { useAuth } from "@/lib/auth";
 import { continuesInto, headingOnly, headingTone } from "@/lib/book-heading";
+import { premiumBook } from "@/lib/book-style";
 import { useDisplay } from "@/lib/display";
 import { usePrefs } from "@/lib/prefs";
 import { missingLanguageNote, preferredLanguage, READING_LANGUAGES, type ReadingLanguage } from "@/lib/reading-language-core";
@@ -235,6 +236,7 @@ function Reader({
             privatePreview={lesson.private_preview}
             blocks={lesson.body.blocks as { type: string }[]}
             onBlockLayout={onBlockLayout}
+            premium={premiumBook(subjectKey(reading.subject_name), reading.grade_number)}
           />
         </View>
       )}
@@ -258,6 +260,7 @@ function LessonBody({
   privatePreview,
   blocks,
   onBlockLayout,
+  premium,
 }: {
   chapterId: string;
   topicId: string;
@@ -266,6 +269,7 @@ function LessonBody({
   privatePreview: boolean;
   blocks: { type: string }[];
   onBlockLayout: (index: number, y: number) => void;
+  premium: boolean;
 }) {
   const { dataSaver } = useDisplay().display;
   useEffect(() => {
@@ -286,6 +290,7 @@ function LessonBody({
         dataSaver={dataSaver}
         equationAction={token && study && !privatePreview ? (index) => <SaveFormula token={token} lessonId={lessonId} index={index} /> : undefined}
         onBlockLayout={onBlockLayout}
+        premium={premium}
       />
       {token && !privatePreview ? (
         <View style={{ gap: Space.sm }}>
