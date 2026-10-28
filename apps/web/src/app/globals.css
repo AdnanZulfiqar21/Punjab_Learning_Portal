@@ -197,6 +197,25 @@ html {
   padding-top: 0.25rem;
 }
 
+/* INLINE-VECTOR-01: the arrow over a vector letter in running text ("v⃗" in a lesson), drawn as a plain
+   arrow so no font needs the combining glyph. */
+.vec {
+  position: relative;
+  display: inline-block;
+  font-style: italic;
+}
+.vec::after {
+  content: "\2192";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -0.62em;
+  font-size: 0.7em;
+  font-style: normal;
+  line-height: 1;
+  text-align: center;
+}
+
 /* TABLE-MERGE-01: a merged cell spans its rows on wide screens; its copies in the following rows only show in the
    folded cards below 40rem, where each card must be complete. */
 .lesson-table .merged-repeat {
