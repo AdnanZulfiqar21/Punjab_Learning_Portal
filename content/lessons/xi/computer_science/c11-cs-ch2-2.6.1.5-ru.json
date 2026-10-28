@@ -21,19 +21,51 @@
         "blocks": [
           {
             "type": "paragraph",
-            "text": "Lists slicing (list ka hissa lena) aur concatenation (+ se lists jorna) jaise amal bhi karti hain."
+            "text": "Lists par kuch operations bhi hote hain, jaise slicing (list ka ek hissa kaatna) aur concatenation (do lists jorna, + se)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Misaal: list ka ek hissa kaat kar doosri list ke saath jorein."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "numbers = [1, 2, 3, 4, 5]\nslice = numbers [1:4]  # Gets items from index 1 to 3\nextra_numbers = [6, 7]\ncombined = slice + extra_numbers\nprint(combined)\n# Output : [2, 3, 4, 6, 7]"
+          },
+          {
+            "type": "paragraph",
+            "text": "Wazahat: numbers[1:4] index 1 se 3 tak items deta hai ([2, 3, 4]); 4 shamil nahi hota. Phir + se [6, 7] jur kar [2, 3, 4, 6, 7] print hota hai. (Variable ka naam slice Python ke ek built-in naam jaisa hai; code chalta hai, magar apne variables ke liye aise naam na rakhna behtar hai.)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Misaal: students ke naam sort karein aur ek naam hatayein."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "student_names= [\"Ahmed\", \"Sara\", \"Ali\", \"Hina\"]\nstudent_names .sort ()\nstudent_names . remove(\"Sara\")\nprint(student_names)\n# Output: ['Ahmed', 'Ali', 'Hina']"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab hatane wala naam \"Sara \" (aakhir mein space) chhapti hai. List mein \"Sara\" hai, \"Sara \" nahi, is liye remove() ValueError deta hai (x not in list). Sahi: student_names.remove(\"Sara\"), jis ka output ['Ahmed', 'Ali', 'Hina'] hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Wazahat: code list ko alphabet ke hisaab se sort karta hai, 'Sara' ko hatata hai aur nayi list print karta hai."
           },
           {
             "type": "callout",
             "tone": "note",
-            "title": "Python code (har .... ek 4-space indent hai)",
-            "text": "numbers = [1, 2, 3, 4, 5]\npart = numbers[1:4]    # items at index 1 to 3\ncombined = part + [6, 7]\nprint(combined)    # [2, 3, 4, 6, 7]"
+            "title": "Class Activity",
+            "text": "Farz karein aap apni pasandeeda kitabon ki list rakhte hain: [\"To Kill a Mockingbird\", \"1984\", \"The Great Gatsby\", \"Pride and Prejudice\"]. Python se yeh kaam karein:\n1. Nayi kitab \"Moby Dick\" jorein.\n2. \"1984\" ki jagah \"Brave New World\" rakhein.\n3. \"The Great Gatsby\" hatayein.\n4. Is list ko [\"War and Peace\", \"Hamlet\"] ke saath milayein.\n5. Aakhri list print karein."
           },
           {
             "type": "callout",
             "tone": "note",
-            "title": "Python code (har .... ek 4-space indent hai)",
-            "text": "student_names = [\"Ahmed\", \"Sara\", \"Ali\", \"Hina\"]\nstudent_names.sort()\nstudent_names.remove(\"Sara\")\nprint(student_names)    # ['Ahmed', 'Ali', 'Hina']"
+            "title": "Tidbits",
+            "text": "Lists sambhalne ke liye append() aur remove() jaise methods istemal karein. Bare projects mein data ko lists mein rakhne se code saaf aur aasan rehta hai."
           },
           {
             "type": "checkpoint",
@@ -50,13 +82,14 @@
           {
             "type": "heading",
             "level": 2,
-            "text": "Fauri khulasa"
+            "text": "Mukhtasar khulasa"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "Slicing list[a:b] (b shamil nahi); + lists jorta hai; sort aur remove saath chal sakte hain."
+              "Slicing: list[start:stop] (stop shamil nahi); + se lists jurti hain.",
+              "remove() mein value bilkul wahi honi chahiye jo list mein hai."
             ]
           }
         ]

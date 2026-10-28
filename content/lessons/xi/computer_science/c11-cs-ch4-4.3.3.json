@@ -13,74 +13,42 @@
           "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
           "pdf_from": 120,
           "pdf_to": 121,
-          "note": "Topic 4.3.3 (PDF 120-121, printed 117-118). Short question 8 and long question 7(b) are answered. Recorded."
+          "note": "Topic 4.3.3 Combining Queue and Graph to Perform BFS (PDF 120-121, printed 117-118), as printed: the ten numbered steps on the tree of Figure 4.13."
         }
       ],
       "body": {
         "blocks": [
           {
             "type": "paragraph",
-            "text": "BFS uses a queue to explore all nodes at the present depth before the next level, which makes it ideal for finding shortest paths in unweighted graphs or exploring connections level by level. On the same tree (Figure 4.13):"
+            "text": "Breadth-First Search (BFS) is another fundamental algorithm used to explore or traverse through a graph or tree structure. Unlike Depth-First Search, BFS uses a queue data structure to keep track of the vertices or nodes that need to be visited. This method is particularly useful when we need to explore all nodes at the present depth level before moving on to nodes at the next depth level, making it ideal for situations where we need to find the shortest path or explore all possible paths level by level."
           },
           {
-            "type": "table",
-            "caption": "BFS queue trace",
-            "header": [
-              "Step",
-              "Dequeue and visit",
-              "Queue after (front on the left)"
-            ],
-            "rows": [
-              [
-                "1",
-                "1, enqueue 2, 3, 4",
-                "[2, 3, 4]"
-              ],
-              [
-                "2",
-                "2, enqueue 5, 6",
-                "[3, 4, 5, 6]"
-              ],
-              [
-                "3",
-                "3, enqueue 7",
-                "[4, 5, 6, 7]"
-              ],
-              [
-                "4",
-                "4, enqueue 8, 9",
-                "[5, 6, 7, 8, 9]"
-              ],
-              [
-                "5",
-                "5",
-                "[6, 7, 8, 9]"
-              ],
-              [
-                "6",
-                "6",
-                "[7, 8, 9]"
-              ],
-              [
-                "7",
-                "7",
-                "[8, 9]"
-              ],
-              [
-                "8",
-                "8",
-                "[9]"
-              ],
-              [
-                "9",
-                "9",
-                "[] (done)"
-              ]
+            "type": "paragraph",
+            "text": "Example: Consider the same graph represented in Figure 4.13, as a tree with numeric nodes:"
+          },
+          {
+            "type": "paragraph",
+            "text": "Here's how the BFS algorithm uses a queue to traverse this graph:"
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "Start with an empty queue and enqueue the root node (1).",
+              "Step 1: Dequeue node 1 and mark it as visited. Enqueue all of its unvisited children (nodes 2, 3, 4). The queue now contains nodes [2, 3, 4],",
+              "Step 2: Dequeue the front of the queue (node 2). Mark node 2 as visited and enqueue its unvisited children (nodes 5, 6). The queue now contains nodes [3, 4, 5, 6],",
+              "Step 3: Dequeue the front of the queue (node 3). Mark node 3 as visited and enqueue its unvisited child (node 7). The queue now contains nodes [4, 5, 6, 7],",
+              "Step 4: Dequeue the front of the queue (node 4). Mark node 4 as visited and enqueue its unvisited children (nodes 8, 9). The queue now contains nodes [5, 6, 7. 8, 9],",
+              "Step 5: Dequeue the front of the queue (node 5). Mark node 5 as visited. Since node 5 has no children, nothing is added to the queue. The queue now contains nodes [6, 7, 8, 9],",
+              "Step 6: Dequeue the front of the queue (node 6). Mark node 6 as visited. Since node 6 has no children, nothing is added to the queue. The queue now contains nodes [7, 8, 9],",
+              "Step 7: Dequeue the front of the queue (node 7). Mark node 7 as visited. Since node 7 has no children, nothing is added to the queue. The queue now contains nodes [8, 9].",
+              "Step 8: Dequeue the front of the queue (node 8). Mark node 8 as visited. Since node 8 has no children, nothing is added to the queue. The queue now contains node [9].",
+              "Step 9: Dequeue the front of the queue (node 9). Mark node 9 as visited. Since node 9 has no children, the queue is now empty."
             ]
           },
           {
             "type": "paragraph",
-            "text": "The BFS order is 1, 2, 3, 4, 5, 6, 7, 8, 9."
+            "text": "The traversal order of the nodes using BFS in this example would be: 1, 2, 3, 4, 5, 6, 7, 8, 9. In this example, the BFS algorithm, using a queue, guarantees that all nodes at the current level of the tree or graph are explored before proceeding to the next level. This approach is particularly effective for finding the shortest path in unweighted graphs or exploring all possible connections at each level of depth."
           }
         ]
       }

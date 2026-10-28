@@ -22,15 +22,51 @@
             "type": "list",
             "ordered": false,
             "items": [
-              "Constructor: a special method that initializes an object's attributes when it is created; in Python it is __init__().",
-              "Destructor: __del__() is called when an object is deleted and is used for clean-up."
+              "Constructor: Constructor is a special type of function which is used to initialize the class variables. In Python the __init__() method is used to initialize an object's properties when it is created."
+            ]
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "class Car: def __init__(self , color): self . color = color",
+            "book_errors": [
+              "class Car: def __init__(self , color): self . color = color"
             ]
           },
           {
             "type": "callout",
-            "tone": "note",
-            "title": "Python code (each .... is one 4-space indent)",
-            "text": "class Car:\n....def __init__(self, color):\n........self.color = color\n\n....def __del__(self):\n........print(\"Car with color\", self.color, \"is being deleted.\")"
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The constructor example is printed on one line, which is a SyntaxError (a def cannot follow class Car: on the same line). Written out: class Car:, then def __init__(self , color): indented, then self.color = color indented once more."
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Destructor: The __del__() method is called when an object is deleted. It is used for cleanup purposes."
+            ]
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "class Car:\n    def __init__(self, color):\n        self . color = color\n    def __del__(self) :\n        print(\"Car with color\", self.color ,  is being deleted . \")",
+            "book_errors": [
+              ",  is being deleted . \")"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The message string has no opening quote (self.color ,  is being deleted . \")), a SyntaxError. It should be print(\"Car with color\", self.color, \"is being deleted.\")."
+          },
+          {
+            "type": "paragraph",
+            "text": "The destructor here prints a message when the object is deleted, indicating cleanup."
+          },
+          {
+            "type": "paragraph",
+            "text": "Explanation: The 'Car' class initializes with a 'color' attribute and prints a message when an instance is deleted, indicating the car with the given color is being removed."
           }
         ]
       }

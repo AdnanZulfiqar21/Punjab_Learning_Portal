@@ -13,23 +13,51 @@
           "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
           "pdf_from": 139,
           "pdf_to": 140,
-          "note": "Topic printed 5.4.2.2 Logistic Regression (PDF 139-140, printed 136-137); Table 5.1 is carried. With b0 = 1 and b1 = 0.6 the book's 0.83 (5 h) and 0.73 (4 h) are wrong (0.98 and 0.97): shown as printed, marked, with a Book correction box. Recorded."
+          "note": "Topic 5.4.2.2 as printed (PDF 139-140, printed 136-137); printed as 5.4.2.2 before 5.4.2; Table 5.1; book errors marked: first formula without e^-, 0.83/83% and 0.73/73% (0.98 and 0.97)."
         }
       ],
       "body": {
         "blocks": [
           {
-            "type": "callout",
-            "tone": "definition",
-            "title": "Logistic regression",
-            "text": "Logistic regression predicts an outcome that is yes or no. Instead of an exact number, it gives a probability between 0 and 1: P = 1 / (1 + e^-(b0 + b1 x)), where e is the base of natural logarithms, b0 the intercept (log-odds when x = 0) and b1 how much the log-odds change per unit of x."
+            "type": "paragraph",
+            "text": "Logistic regression is a powerful tool used when we want to predict an outcome that can be categorized as “yes” or “no”."
+          },
+          {
+            "type": "paragraph",
+            "text": "Example: Let's say we want to determine whether a student will pass or fail an exam based on the number of hours they study. Instead of giving a specific score, logistic regression helps us find the probability of passing."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Understanding Logistic Regression"
+          },
+          {
+            "type": "paragraph",
+            "text": "Logistic regression is different from linear regression because it doesn't predict exact numbers. Instead, it provides a probability value between 0 and 1. This means it tells us how likely something is to happen."
+          },
+          {
+            "type": "paragraph",
+            "text": "Example: If the model predicts a probability of 0.85 for passing the exam, it means there's an 85% chance the student will pass based on their study hours."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Step-by-Step Example"
+          },
+          {
+            "type": "paragraph",
+            "text": "Let's walk through an example with some real data:"
+          },
+          {
+            "type": "paragraph",
+            "text": "Suppose we have the following data on students and their study hours:"
           },
           {
             "type": "table",
-            "caption": "Study hours and exam results",
+            "caption": "Table 5.1: Study Hours vs. Exam Outcomes",
             "header": [
-              "Hours studied",
-              "Passed (1) or failed (0)"
+              "Hours Studied",
+              "Passed (1) / Failed (0)"
             ],
             "rows": [
               [
@@ -59,12 +87,112 @@
             ]
           },
           {
+            "type": "heading",
+            "level": 3,
+            "text": "Building the Model"
+          },
+          {
             "type": "paragraph",
-            "text": "A predicted probability of 0.85 means an 85% chance of passing. Suppose b0 = 1 and b1 = 0.6: for each hour studied the likelihood of passing increases. A student who studies for 5 hours has P(Pass) = 1 / (1 + e^-(1 + 0.6 x 5)), about 0.83, an 83% chance of passing. For a new student who studies for 4 hours, P(Pass) = 1 / (1 + e^-(1 + 0.6 x 4)), about 0.73, a 73% chance of passing.",
+            "text": "To create a logistic regression model, we first need to understand our data. Here, the independent variable is the Hours Studied, and the dependent variable is whether the student Passed or Failed."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Creating the Logistic Function"
+          },
+          {
+            "type": "paragraph",
+            "text": "The logistic regression model gives us an equation like this:"
+          },
+          {
+            "type": "equation",
+            "latex": "P(pass) = \\frac{1}{1 + (\\beta_0 + \\beta_1 \\times \\text{Hours Studied})}",
+            "text_alt": "P(pass) = 1 / (1 + (β₀ + β₁ × Hours Studied))",
             "book_errors": [
-              "0.83",
-              "83%",
-              "0.73",
+              "(β₀ + β₁ × Hours Studied)",
+              "(\\beta_0 + \\beta_1 \\times \\text{Hours Studied})"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The printed equation leaves out e and the minus sign in the denominator. The logistic function is P(pass) = 1 / (1 + e^−(β₀ + β₁ × Hours Studied)), as the next equations use it."
+          },
+          {
+            "type": "paragraph",
+            "text": "In this equation:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "P(Pass) is the probability of passing the exam.",
+              "e is the base of the natural logarithm.",
+              "β₀ is the intercept of the model, which represents the log-odds of passing when no hours are studied.",
+              "β₁ is the coefficient for the number of hours studied, showing how much the log-odds of passing changes with each additional hour."
+            ]
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Interpreting the Coefficients"
+          },
+          {
+            "type": "paragraph",
+            "text": "After fitting the model to our data, suppose we find:"
+          },
+          {
+            "type": "equation",
+            "latex": "P(pass) = \\frac{1}{1 + e^{-(1 + 0.6 \\times \\text{Hours Studied})}}",
+            "text_alt": "P(pass) = 1 / (1 + e^−(1 + 0.6 × Hours Studied))"
+          },
+          {
+            "type": "paragraph",
+            "text": "Here, β₀ = 1 and β₁ = 0.6. This means that for each hour studied, the likelihood of passing the exam increases. If a student studies for 5 hours, we can calculate their passing probability:"
+          },
+          {
+            "type": "equation",
+            "latex": "P(\\text{Pass}) = \\frac{1}{1 + e^{-(1 + 0.6 \\times 5)}} \\approx 0.83",
+            "text_alt": "P(Pass) = 1 / (1 + e^−(1 + 0.6 × 5)) ≈ 0.83",
+            "book_errors": [
+              "0.83"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "This means there is an 83% chance that the student will pass after studying for 5 hours.",
+            "book_errors": [
+              "83%"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "With β₀ = 1 and β₁ = 0.6, 1 + 0.6 × 5 = 4 and P = 1 / (1 + e⁻⁴) ≈ 0.98, a 98% chance. The book's 0.83 is the value for 1 hour of study (1 + 0.6 × 1 = 1.6)."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Testing the Model"
+          },
+          {
+            "type": "paragraph",
+            "text": "Once the model is built, we can use it to make predictions. Let's say a new student studies for 4 hours. We can use our model to find the probability of passing:"
+          },
+          {
+            "type": "equation",
+            "latex": "P(pass) = \\frac{1}{1 + e^{-(1 + 0.6 \\times 4)}} \\approx 0.73",
+            "text_alt": "P(pass) = 1 / (1 + e^−(1 + 0.6 × 4)) ≈ 0.73",
+            "book_errors": [
+              "0.73"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "This indicates a 73% chance of passing.",
+            "book_errors": [
               "73%"
             ]
           },
@@ -72,7 +200,7 @@
             "type": "callout",
             "tone": "correction",
             "title": "Book correction",
-            "text": "With b0 = 1 and b1 = 0.6 the book's values are wrong. For 5 hours, 1 + 0.6 x 5 = 4 and P = 1 / (1 + e^-4), about 0.98 (a 98% chance); for 4 hours, 1 + 0.6 x 4 = 3.4 and P is about 0.97 (97%). The book's 0.83 and 0.73 are the values for 1 hour and 0 hours."
+            "text": "For 4 hours, 1 + 0.6 × 4 = 3.4 and P = 1 / (1 + e^−3.4) ≈ 0.97, a 97% chance. The book's 0.73 is the value for 0 hours (1 / (1 + e⁻¹))."
           }
         ]
       }

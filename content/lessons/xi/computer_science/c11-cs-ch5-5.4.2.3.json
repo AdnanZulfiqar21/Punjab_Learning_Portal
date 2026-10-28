@@ -13,24 +13,30 @@
           "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
           "pdf_from": 140,
           "pdf_to": 143,
-          "note": "Topic printed 5.4.2.3 Clustering (K-means) (PDF 140-143, printed 137-140). The book's step 3 puts Maliha with Tallat, but she is nearer Basim (26.9 vs 32.0); its final result agrees with this. Recalculated. MCQs 8, 9 (key a, c) and long question 5 answered."
+          "note": "Topic 5.4.2.3 as printed (PDF 140-143, printed 137-140); printed as 5.4.2.3 before 5.4.2; book errors marked: centre names, five distances, Maliha's cluster, step-4 centres, step-5 sentence."
         }
       ],
       "body": {
         "blocks": [
           {
-            "type": "callout",
-            "tone": "definition",
-            "title": "Clustering",
-            "text": "Clustering groups similar things together by their characteristics. K-means is one of the simplest and most popular methods: we choose the number of groups, K, and the algorithm groups points by their distance from cluster centres."
+            "type": "paragraph",
+            "text": "Clustering is a way of grouping similar things together based on their characteristics. Imagine you have a group of students in your class, and you want to divide them into groups based on their performance in different subjects like math, science, and English. Clustering helps us do that by creating groups of students who perform similarly."
+          },
+          {
+            "type": "paragraph",
+            "text": "Example: Clustering of Students by Performance"
+          },
+          {
+            "type": "paragraph",
+            "text": "Let's say we have data for five students, showing their scores in math and English:"
           },
           {
             "type": "table",
-            "caption": "Math and English scores",
+            "caption": "Math and English scores of five students",
             "header": [
               "Student",
-              "Math",
-              "English"
+              "Math Score",
+              "English Score"
             ],
             "rows": [
               [
@@ -61,19 +67,240 @@
             ]
           },
           {
+            "type": "paragraph",
+            "text": "We can use clustering to group these students based on their performance in these two subjects."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "K-means Clustering"
+          },
+          {
+            "type": "paragraph",
+            "text": "K-means clustering is one of the simplest and most popular techniques to group data. In K-means, we need to decide how many groups (clusters) we want. For this example, let's say we want to divide the students into two clusters: one for students who are strong in math and one for students who are strong in English. The algorithm will group students with similar performance in math and English together by calculating the distance between their scores and finding patterns. It will assign students like Basim and Umer (who are good at math) to one group and students like Anie and Tallat (who are good at English) to another group."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Step-by-step Working of K-means"
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Step 1: Select the number of clusters (K)"
+          },
+          {
+            "type": "paragraph",
+            "text": "We decide on K = 2, meaning we want to divide the students into two clusters. One cluster will group students who are stronger in math, and the other will group students stronger in English."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Step 2: Place initial group centers"
+          },
+          {
+            "type": "paragraph",
+            "text": "We need to start with two initial cluster centers, chosen randomly from the students' scores."
+          },
+          {
+            "type": "paragraph",
+            "text": "For simplicity, let's pick two students to act as the centers:"
+          },
+          {
             "type": "list",
             "ordered": true,
             "items": [
-              "Choose K = 2: one cluster for students stronger in Math, one for students stronger in English.",
-              "Place initial centres: Basim (85, 70) and Tallat (40, 85).",
-              "Assign each student to the nearest centre using Euclidean distance. Umer is 7.1 from Basim; Anie is 11.2 from Tallat; Maliha is 26.9 from Basim and 32.0 from Tallat, so she joins Basim. Cluster 1 is Basim, Umer, Maliha; cluster 2 is Anie, Tallat.",
-              "Recalculate each centre as the average of its members: cluster 1 (78.3, 65), cluster 2 (45, 82.5).",
-              "Repeat assigning and recalculating until the centres stop moving. Here nobody changes cluster, so the result is stable."
+              "Initial Center 1: Basim (85,70) - for students strong in math.",
+              "Initial Center 2: Tallat (40,85) - for students strong in English."
+            ]
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Step 3: Assign each student to the nearest center"
+          },
+          {
+            "type": "paragraph",
+            "text": "We calculate the distance of each student's scores from both cluster centers. The most common way to calculate this is using the Euclidean distance formula:"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{Distance} = \\sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}",
+            "text_alt": "Distance = √((x₂ − x₁)² + (y₂ − y₁)²)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Let’s calculate the distance for each student from Center 1 (Ali) and Center 2 (Ayesha):",
+            "book_errors": [
+              "Center 1 (Ali)",
+              "Center 2 (Ayesha)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "Center 1 is Basim (85,70) and Center 2 is Tallat (40,85), as chosen in Step 2; there is no Ali or Ayesha in this data."
+          },
+          {
+            "type": "paragraph",
+            "text": "Basim: Distance to Center 1 = 0 (Since he is the center)"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{Basim: Distance to Center 2} = \\sqrt{(40 - 85)^2 + (85 - 70)^2} = 46.1",
+            "text_alt": "Basim: Distance to Center 2 = √((40 − 85)² + (85 − 70)²) = 46.1",
+            "book_errors": [
+              "46.1"
+            ]
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{Umer: Distance to Center 1} = \\sqrt{(85 - 90)^2 + (70 - 65)^2} = 46.1",
+            "text_alt": "Umer: Distance to Center 1 = √((85 − 90)² + (70 − 65)²) = 46.1",
+            "book_errors": [
+              "46.1"
+            ]
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{Umer: Distance to Center 2} = \\sqrt{(40 - 90)^2 + (85 - 65)^2} = 57.01",
+            "text_alt": "Umer: Distance to Center 2 = √((40 − 90)² + (85 − 65)²) = 57.01",
+            "book_errors": [
+              "57.01"
+            ]
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{Anie: Distance to Center 1} = \\sqrt{(85 - 50)^2 + (70 - 80)^2} = 36.4",
+            "text_alt": "Anie: Distance to Center 1 = √((85 − 50)² + (70 − 80)²) = 36.4"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{Anie: Distance to Center 2} = \\sqrt{(40 - 50)^2 + (85 - 80)^2} = 10.29",
+            "text_alt": "Anie: Distance to Center 2 = √((40 − 50)² + (85 − 80)²) = 10.29",
+            "book_errors": [
+              "10.29"
             ]
           },
           {
             "type": "paragraph",
-            "text": "Euclidean distance between (x1, y1) and (x2, y2) is the square root of (x1 - x2)^2 + (y1 - y2)^2; for Maliha and Basim it is the square root of 25^2 + 10^2 = 725, about 26.9."
+            "text": "Tallat: Distance to Center 1 = 46.1 (Since she is the center)",
+            "book_errors": [
+              "46.1 (Since she is the center)"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Tallat: Distance to Center 2 = 0 (Since she is the center)"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{Maliha: Distance to Center 1} = \\sqrt{(85 - 60)^2 + (70 - 60)^2} = 26.92",
+            "text_alt": "Maliha: Distance to Center 1 = √((85 − 60)² + (70 − 60)²) = 26.92"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{Maliha: Distance to Center 2} = \\sqrt{(40 - 60)^2 + (85 - 60)^2} = 32.02",
+            "text_alt": "Maliha: Distance to Center 2 = √((40 − 60)² + (85 − 60)²) = 32.02"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "Worked out with the formula, the marked distances are: Basim to Center 2 = √2250 ≈ 47.43; Umer to Center 1 = √50 ≈ 7.07; Umer to Center 2 = √2900 ≈ 53.85; Anie to Center 2 = √125 ≈ 11.18; Tallat to Center 1 = √2250 ≈ 47.43 (Tallat is Center 2, not Center 1)."
+          },
+          {
+            "type": "paragraph",
+            "text": "After calculating these distances, we assign each student to the nearest center. Based on the calculations:"
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "Basim and Umer are closer to Center 1 (Basim), so they join Cluster 1 (Math-strong).",
+              "Anie, Tallat, and Maliha are closer to Center 2 (Tallat), so they join Cluster 2 (English-strong)."
+            ],
+            "book_errors": [
+              "Anie, Tallat, and Maliha are closer to Center 2"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "Maliha is closer to Center 1 (26.92 against 32.02 in the book's own working), so she joins Cluster 1. After Step 3, Cluster 1 is Basim, Umer and Maliha, and Cluster 2 is Anie and Tallat."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Step 4: Recalculate the centers."
+          },
+          {
+            "type": "paragraph",
+            "text": "Now that the students have been assigned to clusters, we need to recalculate the centers by finding the average position (average scores) of the students in each cluster."
+          },
+          {
+            "type": "paragraph",
+            "text": "For Cluster 1 (Basim and Umer), the new center will be the average of their math and English scores:",
+            "book_errors": [
+              "(Basim and Umer)"
+            ]
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{New Center 1} = \\frac{85+90}{2}, \\frac{70+65}{2} = (87.5, 67.5)",
+            "text_alt": "New Center 1 = (85+90)/2, (70+65)/2 = (87.5, 67.5)",
+            "book_errors": [
+              "(87.5, 67.5)"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "For Cluster 2 (Anie, Tallat, and Maliha), the new center will be:",
+            "book_errors": [
+              "(Anie, Tallat, and Maliha)"
+            ]
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{New Center 2} = \\frac{50+40+60}{3}, \\frac{80+85+60}{3} = (50,75)",
+            "text_alt": "New Center 2 = (50+40+60)/3, (80+85+60)/3 = (50,75)",
+            "book_errors": [
+              "(50,75)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "With Maliha in Cluster 1, the new centers are: Center 1 = ((85 + 90 + 60)/3, (70 + 65 + 60)/3) ≈ (78.3, 65) for Basim, Umer and Maliha, and Center 2 = ((50 + 40)/2, (80 + 85)/2) = (45, 82.5) for Anie and Tallat."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Step 5: Repeat steps 3 and 4 until the centers stop moving."
+          },
+          {
+            "type": "paragraph",
+            "text": "Now that the centers are updated, we will again calculate the distance between each student and the new centers and reassign them if needed. This process continues until the centers no longer change, which means the clusters are stable."
+          },
+          {
+            "type": "paragraph",
+            "text": "For this example, after recalculating, the cluster centers are already quite stable. Basim and Umer still be closer to the math-strong cluster, and Anie, Tallat, and maliha would remain in the English-strong cluster.",
+            "book_errors": [
+              "Anie, Tallat, and maliha would remain in the English-strong cluster"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "With the corrected centers (78.3, 65) and (45, 82.5), Maliha is about 19.0 from Center 1 and 27.0 from Center 2, so she stays in the math-strong cluster with Basim and Umer, and nobody changes cluster. The final result below is right."
+          },
+          {
+            "type": "paragraph",
+            "text": "After these steps, we will get two clusters: Cluster 1: Basim, Umer, and Maliha (good in math) Cluster: 2 Anie and Tallat (good in English)"
           }
         ]
       }

@@ -20,8 +20,30 @@
       "body": {
         "blocks": [
           {
+            "type": "paragraph",
+            "text": "Maths aur computer science mein expressions (hisabi jumle) mukhtalif notations (likhne ke tareeqon) mein likhe ja sakte hain. Teen aham notations hain: infix, postfix aur prefix."
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Infix notation: operator (jaise +, x) do operands (values, jaise A aur B) ke darmiyan hota hai. Hum aam hisab aur algebra isi tarah likhte hain. Misal: A + B ya (A + B) x C.",
+              "A + B mein operator + operands A aur B ke beech mein hai. Kaunsa kaam pehle ho, yeh dikhane ke liye parentheses (brackets) lagaye ja sakte hain.",
+              "Postfix notation (Reverse Polish Notation, RPN): operator operands ke baad aata hai. Is mein kaam ki tarteeb dikhane ke liye brackets ki zaroorat nahi. Misal: A + B postfix mein AB+ aur (A + B) x C postfix mein AB+C x.",
+              "AB+ mein pehle operands A aur B aate hain, phir operator +, yaani A aur B ko jorna hai. AB+C x mein pehle A aur B jorte hain, phir nateeje ko C se zarb (multiply) karte hain.",
+              "Prefix notation (Polish Notation): operator operands se pehle aata hai. Postfix ki tarah is mein bhi brackets ki zaroorat nahi. Misal: +AB ya +A x BC.",
+              "+AB mein + operands A aur B se pehle hai, yaani A aur B ko jorna hai. +A x BC mein pehle B aur C ki zarb hoti hai, phir nateeje mein A jorte hain."
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab mein “In -\\-AB” chhapa hai; yahan +AB hona chahiye (operator + operands A aur B se pehle)."
+          },
+          {
             "type": "table",
-            "caption": "Teen notations",
+            "caption": "Teen notations ek nazar mein",
             "header": [
               "Notation",
               "Operator ki jagah",
@@ -50,52 +72,74 @@
             ]
           },
           {
-            "type": "paragraph",
-            "text": "Postfix aur prefix ko amal ki tarteeb dikhane ke liye qausain nahi chahiyein; + A x B C mein pehle B aur C ki zarb hoti phir A jorta hai."
-          },
-          {
             "type": "heading",
             "level": 3,
-            "text": "Stack se infix ko postfix banana"
+            "text": "Infix ko postfix mein badalna"
+          },
+          {
+            "type": "paragraph",
+            "text": "Infix expression (jaise 3 + 4 * 5) ko postfix (jaise 3 4 5 * +) mein badalne se computer ke liye hisab aasan ho jata hai. Is kaam mein stack madad karta hai. Tareeqa yeh hai:"
           },
           {
             "type": "list",
             "ordered": true,
             "items": [
-              "Khali stack aur khali output list se shuru karein, aur expression baen se daen parhein.",
-              "Operand: output mein jorein.",
-              "Operator: pehle stack par barabar ya zyada tarjeeh wale operators output mein pop karein, phir naya operator push karein.",
-              "Baen qaus: push karein.",
-              "Daen qaus: baen qaus tak operators output mein pop karein, phir qaus chhor dein.",
-              "Aakhir mein baqi tamam operators output mein pop karein."
+              "Khali stack aur khali output list se shuru karein.",
+              "Infix expression ko baen se daen (left to right) parhein."
             ]
-          },
-          {
-            "type": "paragraph",
-            "text": "Misal: 3 + 4 * 2. 3 parha: output [3]. + parha: stack [+]. 4 parha: output [3, 4]. * parha: + se zyada tarjeeh, to push: stack [+, *]. 2 parha: output [3, 4, 2]. Aakhir: sab pop: 3 4 2 * +."
-          },
-          {
-            "type": "checkpoint",
-            "mode": "self_check",
-            "prompt": "Infix se postfix banate waqt stack kis cheez ko sambhalta hai (MCQ 4)?",
-            "explanation": "(d) operators ki tarjeeh aur qausain dono."
-          },
-          {
-            "type": "checkpoint",
-            "mode": "self_check",
-            "prompt": "Long question 4: (5 + 2) * (3 - 1) ko stack se postfix banayein, har token ke baad stack aur output dikhate hue.",
-            "explanation": "( stack [(], output []; 5 output [5]; + stack [(, +]; 2 output [5, 2]; ) + pop: stack [], output [5, 2, +]; * stack [*]; ( stack [*, (]; 3 output [5, 2, +, 3]; - stack [*, (, -]; 1 output [5, 2, +, 3, 1]; ) - pop: stack [*], output [5, 2, +, 3, 1, -]; aakhir: * pop: postfix 5 2 + 3 1 - *, jis ka jawab 7 x 2 = 14."
-          },
-          {
-            "type": "heading",
-            "level": 2,
-            "text": "Fauri khulasa"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "Infix A + B, postfix A B +, prefix + A B; badalte waqt stack operators aur qausain rakhta hai: 3 + 4 * 2 se 3 4 2 * +."
+              "Operand (number ya letter) mile to seedha output list mein likh dein.",
+              "Operator (+, -, *) mile to use stack par push karein. Lekin agar stack par pehle se barabar ya zyada priority (pehle hone ka haq) wala operator ho, to pehle use pop kar ke output mein likhein, phir naya operator push karein.",
+              "Left parenthesis ( mile to use stack par push karein.",
+              "Right parenthesis ) mile to stack se operators pop kar ke output mein likhte jayein jab tak ( na mil jaye. Phir ( ko stack se hata dein, magar output mein na likhein."
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Poora expression parh lene ke baad stack mein bache saare operators pop kar ke output mein likh dein."
+          },
+          {
+            "type": "example",
+            "title": "Misal:",
+            "problem": "Infix expression 3 + 4 * 2 ko postfix mein badlein.",
+            "steps": [
+              "Khali stack aur khali output list se shuru karein.",
+              "3 parha: output mein likha: [3].",
+              "+ parha: stack par push kiya: [+].",
+              "4 parha: output mein likha: [3, 4].",
+              "* parha: * ki priority + se zyada hai, is liye push kiya: [+, *].",
+              "2 parha: output mein likha: [3, 4, 2].",
+              "Aakhir mein stack ke saare operators pop kiye (pehle *, phir +): [3, 4, 2, *, +]."
+            ],
+            "answer": "Nateeja: postfix expression 3 4 2 * + hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Infix se postfix banate waqt stack kis cheez ko sambhalta hai (MCQ 4)?",
+            "explanation": "(d) Both b and c: operators ki priority aur parentheses dono."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Long question 4: (5 + 2) * (3 - 1) ko stack se postfix mein badlein, aur har token ke baad stack aur output dikhayein.",
+            "explanation": "( : stack [(], output []\n5 : stack [(], output [5]\n+ : stack [(, +], output [5]\n2 : stack [(, +], output [5, 2]\n) : + pop; stack [], output [5, 2, +]\n* : stack [*], output [5, 2, +]\n( : stack [*, (], output [5, 2, +]\n3 : stack [*, (], output [5, 2, +, 3]\n- : stack [*, (, -], output [5, 2, +, 3]\n1 : stack [*, (, -], output [5, 2, +, 3, 1]\n) : - pop; stack [*], output [5, 2, +, 3, 1, -]\nAakhir: * pop; postfix 5 2 + 3 1 - *, jis ki value 7 x 2 = 14 hai."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Mukhtasar khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Infix A + B, postfix A B +, prefix + A B.",
+              "Infix se postfix: operand output mein, operators aur ( stack par; 3 + 4 * 2 ka postfix 3 4 2 * + hai."
             ]
           }
         ]

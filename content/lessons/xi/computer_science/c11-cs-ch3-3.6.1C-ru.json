@@ -20,43 +20,83 @@
       "body": {
         "blocks": [
           {
-            "type": "callout",
-            "tone": "definition",
-            "title": "Dynamic programming",
-            "text": "Dynamic Programming (DP) masle ko saade zimni masail mein torta aur un ke nataij mehfooz karta hai ta ke hisab dohraya na jaye. Yeh overlapping subproblems aur optimal substructure wale masail ke liye munasib hai."
+            "type": "paragraph",
+            "text": "Dynamic Programming (DP) ek optimization technique hai jo masle ko saade chhote masail (subproblems) mein torti hai aur un ke nataij (results) store (mehfooz) kar leti hai taake ek hi hisab baar baar na karna pare. DP khaas taur par un masail ke liye mufeed hai jin mein overlapping subproblems (wohi chhote masail baar baar aate hon) aur optimal substructure (bare masle ka behtareen hal chhote masail ke behtareen hal se banta ho) dono hon."
           },
           {
             "type": "paragraph",
-            "text": "Fibonacci sequence 0 aur 1 se shuru hota hai, aur har agla adad pichhle do ka jama hai: 0 + 1 = 1, 1 + 1 = 2, 1 + 2 = 3, yun 0, 1, 1, 2, 3, 5, 8, 13, 21, 34 waghaira. Iska naam Leonardo of Pisa (Fibonacci) par hai aur yeh fitrat mein, patton ki tarteeb, darakhton ki shaakhon aur pine cone ke chhilkon mein nazar aata hai. DP har Fibonacci adad nikalne ke baad mehfooz kar leta hai bajaye dobara hisab karne ke."
+            "text": "Misal: Fibonacci sequence mashhoor misal hai jahan DP lagti hai. Fibonacci numbers baar baar dobara nikalne ke bajaye DP har Fibonacci number nikalte hi store kar leti hai, aur zaroorat par seedha wahi qeemat utha leti hai; is se hisab (calculations) bohat kam ho jate hain."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Fibonacci sequence"
+          },
+          {
+            "type": "paragraph",
+            "text": "Fibonacci sequence numbers ka silsila hai jo 0 aur 1 se shuru hota hai. Har agla number pichhle do numbers jama kar ke milta hai. Yeh aise kaam karta hai:"
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "0 aur 1 se shuru karein.",
+              "Dono ko jama kar ke agla number lein: 0 + 1 = 1.",
+              "Ab sequence ke aakhri do numbers jama karein: 1 + 1 = 2.",
+              "Yahi tareeqa jari rakhein: 1 + 2 = 3, aur isi tarah aage."
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Is tarah Fibonacci sequence yun shuru hota hai: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, waghaira. Is ka naam Leonardo of Pisa par hai jinhein Fibonacci bhi kehte hain. Yeh fitrat (nature) mein kai dilchasp jagahon par nazar aata hai, jaise tehni par patton ki tarteeb, darakhton ki shaakhein, aur pine cone ke chhilkon (scales) ki tarteeb."
           },
           {
             "type": "callout",
             "tone": "note",
-            "title": "Python code (har .... ek 4-space indent hai)",
-            "text": "fib = [0, 1]\nfor i in range(2, 20):\n....fib.append(fib[i - 1] + fib[i - 2])    # use stored values\nprint(fib)       # 20 terms\nprint(fib[19])   # 4181, the 20th term"
+            "title": "Class Activity",
+            "text": "Dynamic programming algorithm bana kar Fibonacci sequence 20wein term tak nikalein."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "fib = [0, 1]\nfor i in range(2, 20):\n    fib.append(fib[i - 1] + fib[i - 2])    # use stored values\nprint(fib)       # 20 terms\nprint(fib[19])   # 4181, the 20th term",
+            "caption": "Python code (kitab se nahi; chala kar jaancha gaya)"
+          },
+          {
+            "type": "code",
+            "language": "text",
+            "text": "[0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181]\n4181",
+            "caption": "Output"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Asaan alfaaz mein",
+            "text": "List fib har nikala hua term store karti hai. Har naya term list mein pehle se maujood aakhri do terms (fib[i - 1] aur fib[i - 2]) jama kar ke banta hai; koi term dobara nahi nikalna parta. Yahi DP hai. 0 ko pehla term gin kar 20wan term fib[19] = 4181 hai."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "Class activity: DP se Fibonacci sequence 20wein term tak banayein. 20wan term kya hai?",
-            "explanation": "Oopar wala code har term list mein rakhta aur agla aakhri do se nikalta hai, kul 18 jama; 0 ko pehla term gin kar 20wan term 4181 hai. Code kitab se nahi."
+            "explanation": "Oopar wala code har term list mein rakhta hai aur agla term aakhri do terms se nikalta hai (kul 18 jama). 0 ko pehla term gin kar 20wan term 4181 hai."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
-            "prompt": "DP kis soorat mein khaas mufeed hai (MCQ 6)? DP ke faide bataiye (short question 5).",
-            "explanation": "(c) jab masail mein overlapping subproblems aur optimal substructure hon. Faide: har zimni masla ek baar hal hota hai, to hisab bohat kam (Fibonacci linear waqt mein, exponential dohrai calls ki bajaye); durust behtareen jawab milte hain; aur mehfooz nataij dobara istemal hote hain."
+            "prompt": "DP kis soorat mein khaas taur par mufeed hai (MCQ 6)? DP ke faide bataiye (short question 5).",
+            "explanation": "(c) Jab masail mein overlapping subproblems aur optimal substructure hon. Faide: har subproblem sirf ek dafa hal hota hai, is liye hisab bohat kam ho jata hai (Fibonacci linear waqt mein, exponential dohrai calls ke bajaye); durust behtareen jawab milte hain; aur store kiye nataij dobara istemal ho jate hain."
           },
           {
             "type": "heading",
             "level": 2,
-            "text": "Fauri khulasa"
+            "text": "Mukhtasar khulasa"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "DP: zimni masail ek baar hal kar ke mehfooz karo; Fibonacci 0, 1, 1, 2, 3, 5, 8, ...; 20wan term 4181."
+              "DP: subproblems ek dafa hal kar ke store karo, dobara hisab nahi.",
+              "Fibonacci: 0, 1, 1, 2, 3, 5, 8, ...; 20wan term 4181."
             ]
           }
         ]

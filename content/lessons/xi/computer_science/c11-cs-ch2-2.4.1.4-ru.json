@@ -20,20 +20,32 @@
       "body": {
         "blocks": [
           {
-            "type": "callout",
-            "tone": "definition",
-            "title": "Nested conditionals",
-            "text": "Ek shart ke andar doosri shart jaanchna nesting kehlata hai: ek if statement doosre if ya else ke block ke andar rakha jata hai."
+            "type": "paragraph",
+            "text": "Kabhi ek shart ke andar doosri shart check karni parti hai. Isay nesting (ek ke andar doosra) kehte hain."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "# Syntax of nested if statement\nif condition1:\n    if condition2:\n        # code to run if both condition1 and condition2 are true\n    else:\n        # code to run if condition1 is true but condition2 is false\nelse:\n    # code to run if condition1 is false"
           },
           {
             "type": "callout",
-            "tone": "note",
-            "title": "Python code (har .... ek 4-space indent hai)",
-            "text": "weather = \"rainy\"\ntemperature = 10\nif weather == \"rainy\":\n....if temperature < 15:\n........print(\"Wear a raincoat\")\n....else:\n........print(\"Take an umbrella\")\nelse:\n....print(\"Enjoy your day!\")"
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab ke syntax mein andar wala if condition2: aur us ka else: bhi bahar wale if ke barabar margin par chhape hain. Nested if mein yeh dono if condition1: ke andar (4 spaces aage) hone chahiyein, jaise oopar diya gaya hai."
           },
           {
             "type": "paragraph",
-            "text": "Agar barish ho aur 15 degree se kam ho to raincoat pehnein; sirf barish ho to chhatri lein; barish na ho to bas din enjoy karein. In qeematon ke saath program \"Wear a raincoat\" print karta hai."
+            "text": "Misaal: barish ho aur temperature 15 degree se kam ho to raincoat pehnein. Sirf barish ho to chhatri lein. Barish na ho to din ka maza lein."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "weather = \"rainy\"\ntemperature = 10\nif weather == \"rainy\":\n    if temperature < 15:\n        print(\"Wear a raincoat\")\n    else :\n        print(\"Take an umbrella\")\nelse :\n    print(\"Enjoy your day!\")"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yahan weather = \"rainy\" aur temperature = 10 hai: bahar wali shart sach, andar wali (10 < 15) bhi sach, is liye \"Wear a raincoat\" print hota hai."
           },
           {
             "type": "checkpoint",
@@ -44,13 +56,13 @@
           {
             "type": "heading",
             "level": 2,
-            "text": "Fauri khulasa"
+            "text": "Mukhtasar khulasa"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "Nested conditionals: if ke andar if; andar ka jaanch tabhi chalta hai jab bahar wala ijazat de."
+              "Nested if: if ke andar if; andar wala block aur aage indented hota hai."
             ]
           }
         ]

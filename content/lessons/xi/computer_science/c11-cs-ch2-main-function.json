@@ -19,26 +19,35 @@
       "body": {
         "blocks": [
           {
-            "type": "callout",
-            "tone": "definition",
-            "title": "Code duplication",
-            "text": "Code duplication means the same code is repeated in several places; it makes maintenance harder and causes bugs, so finding and removing it is an important part of modular programming."
-          },
-          {
-            "type": "callout",
-            "tone": "definition",
-            "title": "The main function",
-            "text": "The main function marks where a program starts. It is usually called inside a block that checks whether the file is being run directly or imported as a module."
-          },
-          {
-            "type": "callout",
-            "tone": "note",
-            "title": "Python code (each .... is one 4-space indent)",
-            "text": "def main():\n....print(\"This is the main function.\")\n\nif __name__ == \"__main__\":\n....main()"
+            "type": "heading",
+            "level": 3,
+            "text": "Identifying Code Duplication"
           },
           {
             "type": "paragraph",
-            "text": "main() runs only when the file is executed directly, not when it is imported elsewhere; this setup is useful in large projects with many modules."
+            "text": "Code duplication occurs when the same code is repeated in multiple places. This redundancy can lead to maintenance challenges and bugs. Identifying and eliminating code duplication is crucial for efficient modular programming."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "The main Function"
+          },
+          {
+            "type": "paragraph",
+            "text": "The main function in Python defines where the program should start. It's usually placed in a block that checks if the script is being run directly or imported as a module."
+          },
+          {
+            "type": "paragraph",
+            "text": "Example: Here's a simple example:"
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "# main.py\ndef main ( ) :\n    print(\"This is the main function.\")\nif __name__ == \"__main__\" :\n    main()"
+          },
+          {
+            "type": "paragraph",
+            "text": "Explanation: In this example, the main() function will only run if the script is executed directly, not when it's imported elsewhere. This setup is useful in larger projects that have multiple modules."
           }
         ]
       }

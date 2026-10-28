@@ -13,25 +13,48 @@
           "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
           "pdf_from": 101,
           "pdf_to": 102,
-          "note": "Topic 4.1.4.2 Queue Operations (PDF 101-102, printed 98-99). The printed code shows 'q.getO' and broken comment lines; a cleaned version is carried. MCQ 5, short question 5 and long question 5 are answered."
+          "note": "Topic 4.1.4.2 Queue Operations (PDF 101-102, printed 98-99), as printed with the Tidbits box; q.getO and the commented-out updated_queue line are marked; wrapped comments joined."
         }
       ],
       "body": {
         "blocks": [
           {
+            "type": "paragraph",
+            "text": "Queues support two primary operations:"
+          },
+          {
             "type": "list",
             "ordered": false,
             "items": [
-              "Enqueue: add an item at the back, like a person joining the end of the line.",
-              "Dequeue: remove the item at the front, like serving the first person.",
-              "Other operations: check whether the queue is empty, peek at the front item without removing it, and find the size."
+              "Enqueue (Add an Item): This is like adding a person to the end of the line. In a queue, you add items to the back.",
+              "Dequeue (Remove an Item): This is like serving the person at the front of the line. In a queue, you take items out from the front.",
+              "Additional operations might include checking if the queue is empty, retrieving the element at the front without removing it, and determining the size of the queue."
+            ]
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "#    Built-in module to implement queues in python\nfrom queue import Queue\n#    Create a new queue\nq = Queue ()\n# Add people to the queue (Enqueue)\nq. put (\" Ahmed\") # Adds Ahmed to the end of the queue\nq.put (\"Fatima\")   # Adds Fatima to the end of the queue\nq.put (\"Ali\")    # Adds Ali to the end of the queue\n# View the person at the front of the queue (Peek)\nfront_person = q. queue [0] # Looks at the person at the front without removing them\nprint(front_person)  #Remove a person from the front of the queue (Dequeue)\nremoved_person = q.getO  # Removes and returns the person at the front of the queue\nprint(removed_person)\n#    Add another person to the queue (Enqueue)\nq.put(\"Sara\") # Adds Sara to the end of the queue\n#    View the updated queue updated_queue = list(q.queue)\nprint(updated_queue)",
+            "book_errors": [
+              "q.getO",
+              "updated_queue = list(q.queue)"
             ]
           },
           {
             "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "Two errors in the printed code. q.getO is not a queue method: Python stops with AttributeError: 'Queue' object has no attribute 'getO'; the dequeue is removed_person = q.get(). Once that is fixed, the line updated_queue = list(q.queue), printed on the comment line, never runs, and print(updated_queue) gives NameError: name 'updated_queue' is not defined; it must be on its own line. Corrected, the program prints Ahmed (peek), Ahmed (dequeue) and ['Fatima', 'Ali', 'Sara']."
+          },
+          {
+            "type": "paragraph",
+            "text": "The code manages a line of people using a queue. It adds people to the end of the line, checks who is at the front without removing them, and then serves (removes) the person at the front. Finally, it adds another person to the end and shows the updated line."
+          },
+          {
+            "type": "callout",
             "tone": "note",
-            "title": "Python code (each .... is one 4-space indent)",
-            "text": "from queue import Queue    # built-in module\nq = Queue()\nq.put(\"Ahmed\")    # enqueue\nq.put(\"Fatima\")\nq.put(\"Ali\")\nprint(q.queue[0])    # peek: Ahmed\nprint(q.get())       # dequeue: Ahmed\nq.put(\"Sara\")\nprint(list(q.queue)) # ['Fatima', 'Ali', 'Sara']"
+            "title": "Tidbits",
+            "text": "The 'peek' operation allows you to view the element at the front of the queue without removing it. It's similar to looking at the first book on the shelf to see which one will be picked next."
           }
         ]
       }

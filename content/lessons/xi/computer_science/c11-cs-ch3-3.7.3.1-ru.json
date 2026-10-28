@@ -20,40 +20,46 @@
       "body": {
         "blocks": [
           {
-            "type": "callout",
-            "tone": "definition",
-            "title": "Breadth-First Search (BFS)",
-            "text": "BFS graph ke tamam nodes level ba level, diye gaye root node se shuru kar ke, khangalta hai, aur baqi nodes ka hisab rakhne ke liye queue istemal karta hai."
-          },
-          {
-            "type": "list",
-            "ordered": true,
-            "items": [
-              "Root node se shuru kar ke use queue mein dalein.",
-              "Queue se node nikal kar process karein aur us ke tamam na dekhe gaye parosi queue mein dalein.",
-              "Queue khali hone tak dohrayein."
-            ]
+            "type": "paragraph",
+            "text": "Breadth-First Search (BFS) graph traversal algorithm hai jo graph ke tamam nodes level ba level (satah ba satah) dekhta hai, ek diye gaye node se shuru kar ke (jise aksar root kehte hain). Jin nodes ko abhi dekhna baqi hai un ka hisab rakhne ke liye yeh queue (qataar: jo pehle aaye woh pehle nikle) istemal karta hai."
           },
           {
             "type": "paragraph",
-            "text": "Social network mein, jahan nodes log aur edges dostiyan hain, BFS do logon ke darmiyan sab se chhota raasta, yaani degree of separation, dhoond sakta hai. BFS O(V + E) waqt leta hai, jahan V vertices aur E edges ki tadaad hai."
-          },
-          {
-            "type": "checkpoint",
-            "mode": "self_check",
-            "prompt": "Jarr 0, bachche 1, 2, 3 aur pote 4, 5 (1 ke neeche), 6 (2 ke neeche) aur 7 (3 ke neeche) wale darakht mein BFS kis tarteeb se jata hai?",
-            "explanation": "0, 1, 2, 3, 4, 5, 6, 7: level 2 se pehle poora level 1."
-          },
-          {
-            "type": "heading",
-            "level": 2,
-            "text": "Fauri khulasa"
+            "text": "Process (tareeqa):"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "BFS: queue, level ba level; be-wazan graphs mein sab se chhote raaste; O(V + E)."
+              "Root node se shuru karein aur use queue mein dalein (enqueue).",
+              "Queue se ek node nikalein (dequeue), use process karein, aur us ke tamam na dekhe gaye (unvisited) parosi (neighbors) queue mein dal dein.",
+              "Yeh amal queue khali hone tak dohrayein."
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Misal: social network graph mein har node ek insaan aur har edge dosti hai. BFS se do logon ke darmiyan sab se chhota raasta (shortest path) dhoonda ja sakta hai, maslan do users ke darmiyan degree of separation (kitne doston ke zariye jure hain)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Complexity: BFS ki time complexity O(V + E) hai, jahan V vertices (nodes) ki tadaad aur E edges ki tadaad hai. Is liye yeh bare graphs dekhne ke liye efficient hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Root 0, us ke bachche 1, 2, 3, aur pote 4, 5 (1 ke neeche), 6 (2 ke neeche) aur 7 (3 ke neeche) wale tree (Figure 3.8) mein BFS kis tarteeb se nodes dekhta hai?",
+            "explanation": "0, 1, 2, 3, 4, 5, 6, 7: level 2 se pehle poora level 1."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Mukhtasar khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "BFS: queue, level ba level; do logon ke darmiyan shortest path; O(V + E)."
             ]
           }
         ]

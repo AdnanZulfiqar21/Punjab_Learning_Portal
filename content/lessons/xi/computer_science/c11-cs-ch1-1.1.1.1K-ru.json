@@ -20,14 +20,22 @@
       "body": {
         "blocks": [
           {
-            "type": "callout",
-            "tone": "definition",
-            "title": "Sequence diagram",
-            "text": "Sequence diagrams dikhate hain ke nizam ke objects ek khaas tarteeb mein aapas mein kaise taamul karte hain. Yeh waqt ke saath objects ke darmiyan paighamat ka bahao samajhne mein madad dete hain."
+            "type": "paragraph",
+            "text": "Sequence Diagrams dikhate hain ke system ke objects ek khaas tarteeb (sequence) mein aapas mein kaise kaam (interact) karte hain. In se samajh aata hai ke waqt ke saath objects ke darmiyan messages kis tarah aate jate hain."
           },
           {
-            "type": "paragraph",
-            "text": "Figure 1.11 kamre ki misal jaari rakhti hai. User aur teen dabbon (toys box, books box aur clothes box) ki apni amudi lifeline hai. Oopar se neeche parhe jane wale paigham yeh hain: har dabba open() karna; khilone, kitabein aur kapre apne dabbon mein daalna; phir har dabba close() karna."
+            "type": "heading",
+            "level": 3,
+            "text": "Interactions"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "open(): user har dabba kholta hai.",
+              "put toys/books/clothes inside: user khilone, kitabein aur kapre apne apne dabbe mein daalta hai.",
+              "close(): user har dabba band karta hai."
+            ]
           },
           {
             "type": "diagram",
@@ -42,21 +50,34 @@
             "text": "Sequence diagram oopar se neeche waqt ki tarteeb mein parha jata hai, aur teer paigham bhejne wale se paigham lene wale ki taraf jata hai. Kitab ki figure mein 'put toys/books/clothes inside' ke teer ulte, yani dabbon se User ki taraf, bane hain, jab ke kitab ka apna matan (text) kehta hai ke User cheezein dabbon mein daalta hai. Is liye yahan yeh teer User se dabbon ki taraf banaye gaye hain, jo durust hai. Kitab mein aakhri close() teer lifelines khatam hone ke baad bana hai; yahan lifelines aakhri paigham tak barhai gayi hain."
           },
           {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab ki Figure 1.11 mein 'put toys/books/clothes inside' ke teer dabbon se User ki taraf bane hain, halan ke kitab ka apna text kehta hai ke User cheezein dabbon mein daalta hai. Sahi yeh hai ke yeh teer User se har dabbe ki taraf jayein, jaisa upar ki figure mein bana hai."
+          },
+          {
             "type": "checkpoint",
             "mode": "self_check",
-            "prompt": "Long question 5: food delivery app mein items chunne se delivery tak order dene ka sequence diagram bayan kijiye.",
-            "explanation": "Lifelines: customer, app, restaurant, payment service, rider. Tarteeb se paigham: customer items chun kar order deta hai; app payment service ko payment ki darkhwast bhej kar tasdeeq leti hai; app order restaurant ko bhejti hai, jo manzoor kar ke khana tayyar karta hai; app rider muqarrar karti hai; restaurant app ko batata hai ke khana tayyar hai; rider utha kar deliver karta hai; app customer ko batati hai ke order pohanch gaya."
+            "prompt": "Food delivery application ke liye Sequence Diagram banayein jo order dene ka process dikhaye: customer ke items chunne se le kar order ki delivery tak. (Long Question 5)",
+            "explanation": "Lifelines (objects): Customer, App, Payment Service, Restaurant, Rider. Upar se neeche messages: 1) Customer App ko order deta hai (order items); 2) App Payment Service se payment maangti hai; 3) Payment Service jawab mein payment confirm karti hai; 4) App order Restaurant ko bhejti hai; 5) Restaurant jawab mein order accept karta hai; 6) App Rider ko delivery assign karti hai; 7) Restaurant khana Rider ke hawale karta hai; 8) Rider order Customer tak pohanchata hai; 9) App Customer ko batati hai ke order deliver ho gaya. Jawab (return) wale messages tooti lakeer se dikhaye jate hain.",
+            "answer_figure": {
+              "$asset": "c11-cs-ch1-fig-answer-food-delivery-sequence",
+              "alt": "Sequence diagram: oopar paanch dabbe Customer, App, Payment Service, Restaurant, Rider aur un ki tooti lifelines. Upar se neeche 9 numbered messages: order items, request payment, payment confirmed, send order, order accepted, assign delivery, hand over food, deliver order, order delivered.",
+              "caption": "Jawab ka diagram (pehle khud banayein, phir milayein): food delivery order ka sequence diagram",
+              "long_description": "Paanch lifelines baen se daen: Customer, App, Payment Service, Restaurant, Rider. Messages upar se neeche: 1. Customer se App: order items. 2. App se Payment Service: request payment. 3. Payment Service se App (tooti lakeer, jawab): payment confirmed. 4. App se Restaurant: send order. 5. Restaurant se App (tooti lakeer, jawab): order accepted. 6. App se Rider: assign delivery. 7. Restaurant se Rider: hand over food. 8. Rider se Customer: deliver order. 9. App se Customer: order delivered."
+            }
           },
           {
             "type": "heading",
             "level": 2,
-            "text": "Fauri khulasa"
+            "text": "Mukhtasar khulasa"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "Sequence diagram: lifelines wale objects aur waqt ki tarteeb mein paigham (Fig. 1.11: har dabba open, andar daalna, close)."
+              "Sequence diagram: objects (lifelines) aur waqt ki tarteeb mein un ke messages.",
+              "Fig. 1.11: user har dabba open karta hai, cheezein andar daalta hai, phir close karta hai."
             ]
           }
         ]

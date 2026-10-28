@@ -20,39 +20,96 @@
         "blocks": [
           {
             "type": "paragraph",
-            "text": "When a module is imported, Python looks for it in order: first the current directory where the script is, then the standard library of built-in modules."
-          },
-          {
-            "type": "callout",
-            "tone": "note",
-            "title": "Python code (each .... is one 4-space indent)",
-            "text": "# helper.py\ndef greet():\n....return \"As-Salaam-Alaikum from helper.py!\"\n\n# main.py (same folder)\nimport helper\nprint(helper.greet())"
+            "text": "When you import a module in Python, the interpreter looks for it in a specific order. Let's explore each step with simple examples."
           },
           {
             "type": "paragraph",
-            "text": "If the module is not in the current directory, Python looks in the standard library. random is part of the standard library, so it is found without any issue. The f before the string places the value of a variable inside the string."
-          },
-          {
-            "type": "callout",
-            "tone": "note",
-            "title": "Python code (each .... is one 4-space indent)",
-            "text": "# main.py\nimport random\nnumber = random.randint(1, 10)\nprint(f\"Random number: {number}\")    # any number from 1 to 10"
-          },
-          {
-            "type": "callout",
-            "tone": "definition",
-            "title": "Package",
-            "text": "A package is a directory of related modules. For an e-commerce platform you could make a package ecommerce with modules products.py, customers.py and orders.py, and import with: from ecommerce import products."
-          },
-          {
-            "type": "callout",
-            "tone": "note",
-            "title": "Python code (each .... is one 4-space indent)",
-            "text": "# ecommerce/products.py\ndef list_products():\n....return [\"Laptop\", \"Mobile\", \"Tablet\"]\n\n# main script\nfrom ecommerce import products\navailable_products = products.list_products()\nprint(available_products)    # ['Laptop', 'Mobile', 'Tablet']"
+            "text": "1. Current Directory: Python first checks the current directory where your script is located. Suppose you have a script named main. py in your folder along with a module helper. py."
           },
           {
             "type": "paragraph",
-            "text": "Organizing modules into packages is like arranging books into sections of a library: it makes code easier to find and maintain."
+            "text": "Example: In helper.py:"
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "def greet () :\n    return \" As – Salaam Alaikum from helper.py!\""
+          },
+          {
+            "type": "paragraph",
+            "text": "In main.py:"
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "import helper\nmessage = helper.greet()\nprint(message) # Output : As - Salaam-Alaikum from helper.py!"
+          },
+          {
+            "type": "paragraph",
+            "text": "Explanation: Since helper .py is in the same directory as main.py. Python successfully finds and imports it."
+          },
+          {
+            "type": "paragraph",
+            "text": "1. Standard Library: If Python doesn't find the module in the current directory, it moves on to the standard library, which contains many built-in modules. For example, if you want to generate random numbers, you can use the random module from the standard library."
+          },
+          {
+            "type": "paragraph",
+            "text": "Example: In main.py:"
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "import random\nnumber = random.randint(1, 10)\nprint(f\"Random number: {number}\")  # ‘f’ is used to place the value of a variable in a string\n# Output:\n# Random number:  7 (or any number between 1 and 10)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Explanation: Here, random is part of Python's standard library, so it is found without any issues."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Package Structure:"
+          },
+          {
+            "type": "paragraph",
+            "text": "To manage large projects, you can organize modules into packages. A package is simply a directory containing related modules. For example, if you're building an e-commerce platform, you could create a package named ecommerce with modules like products .py, customers .py, and orders.py."
+          },
+          {
+            "type": "paragraph",
+            "text": "Example: In ecommerce/products.py:"
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "def 1ist_products () :\n    return [\"Laptop\",\"Mobile\", \"Tablet\"]",
+            "book_errors": [
+              "1ist_products"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The function name is printed as 1ist_products, beginning with the digit 1. A name cannot start with a digit (SyntaxError), and the main script calls list_products(). It should be def list_products():"
+          },
+          {
+            "type": "paragraph",
+            "text": "In your main Script"
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "from ecommerce import products\navailable_products = products.list_products()\nprint(available_products)\n#    Output :\n#    [’Laptop’, ’Mobile’, ’Tablet’]"
+          },
+          {
+            "type": "paragraph",
+            "text": "Explanation: In this case, ecommerce is the package, and products.py is the module. This structure helps you keep your code organized and manageable."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Tidbits",
+            "text": "Organizing your modules into packages is like organizing books into sections of a library—it makes finding and maintaining your code much easier."
           }
         ]
       }

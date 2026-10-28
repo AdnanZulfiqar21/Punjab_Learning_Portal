@@ -20,24 +20,49 @@
       "body": {
         "blocks": [
           {
-            "type": "callout",
-            "tone": "definition",
-            "title": "Association",
-            "text": "Association do classes ka rishta hai. Is ki do qismein hain: aggregation aur composition."
+            "type": "paragraph",
+            "text": "Association do classes ke darmiyan rishta hai. Is ki do qismein hain:"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "Aggregation: ek class (Library) doosri (Book) rakhti hai magar us ki malik nahi; kitabein library ke baghair reh sakti hain.",
-              "Composition: ek class (House) doosri (Room) rakhti aur us ki malik hai; kamre ghar ke baghair nahi reh sakte."
+              "Aggregation: ek class (maslan Library) doosri class (maslan Book) ko rakhti hai magar us ki maalik nahi. Kitabein library ke baghair bhi maujood reh sakti hain."
             ]
           },
           {
+            "type": "code",
+            "language": "python",
+            "text": "class Book :\n    def __init__(self , title):\n        self.title = title\nclass Library :\n    def __init__(self ) :\n        self.books = [ ]\n    def add_book(self, book):\n        self.books.append(book)\n        print(\"Book \", book.title, \"added to the library.\")"
+          },
+          {
             "type": "callout",
-            "tone": "note",
-            "title": "Python code (har .... ek 4-space indent hai)",
-            "text": "class Book:\n....def __init__(self, title):\n........self.title = title\n\nclass Library:\n....def __init__(self):\n........self.books = []\n....def add_book(self, book):\n........self.books.append(book)\n\nclass Room:\n....def __init__(self, name):\n........self.name = name\n\nclass House:\n....def __init__(self):\n........self.rooms = [Room(\"Living Room\"), Room(\"Bedroom\")]"
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab ke code mein yeh ghaltiyan hain: self, books = [ ] (comma) ki jagah self.books = [ ] (dot) hona chahiye, warna ValueError aata hai; def add_book Library class ke andar indented hona chahiye aur us ki dono lines us ke neeche (print line zyada khiski hui hai); aur \"added to the library.” tirchhi quote par khatam hai, is liye string band nahi hoti. Theek code oopar hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Wazahat: Book ka object add_book method ke zariye Library ko diya jata hai aur woh library ki books list mein jur jata hai. Maslan lib = Library(); lib.add_book(Book(\"Python Basics\")) se \"Book  Python Basics added to the library.\" print hota hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Composition: ek class (maslan House) doosri class (maslan Room) ko rakhti bhi hai aur us ki maalik bhi hai. Kamre ghar ke baghair maujood nahi hote."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "class Room:\n    def __init__(self, name):\n        self.name = name\nclass House :\n    def __init__(self) :\n        self.rooms = [Room(\"Living Room\"), Room( \" Bedroom\")]\n        print (\"House with rooms created\")\n\nhouse = House()   # prints: House with rooms created"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab self.name = name ko margin par chhapti hai; yeh __init__ ke andar indented honi chahiye (IndentationError). House ke andar print mein tirchhe quotes (“ ”) hain jo Python nahi maanti; seedhe quotes lagayein. Aakhri line print(\"House with rooms created.\") class ke bahar ek faltu nakal hai. Ghar house = House() se banta hai, aur yeh \"House with rooms created\" print karta hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Wazahat: House object ke andar Room objects ki list hai ('Living Room' aur ' Bedroom'). House apne kamre khud banata hai, is liye kamre ghar ka hissa hain; yahi composition hai."
           },
           {
             "type": "checkpoint",
@@ -48,13 +73,14 @@
           {
             "type": "heading",
             "level": 2,
-            "text": "Fauri khulasa"
+            "text": "Mukhtasar khulasa"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "Association: aggregation (rakhta hai, malik nahi: Library aur Book) aur composition (malik: House aur Room)."
+              "Aggregation: rakhti hai, maalik nahi (Library-Book).",
+              "Composition: rakhti bhi aur maalik bhi (House-Room)."
             ]
           }
         ]

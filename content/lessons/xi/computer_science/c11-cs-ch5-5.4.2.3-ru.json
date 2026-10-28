@@ -14,24 +14,30 @@
           "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
           "pdf_from": 140,
           "pdf_to": 143,
-          "note": "Roman Urdu explanation of K-means clustering (PDF 140-143)."
+          "note": "Roman Urdu explanation of Topic 5.4.2.3 (PDF 140-143, printed 137-140)."
         }
       ],
       "body": {
         "blocks": [
           {
-            "type": "callout",
-            "tone": "definition",
-            "title": "Clustering",
-            "text": "Clustering milti julti cheezon ko un ki khasusiyat se group karta hai. K-means sab se saade aur mashhoor tareeqon mein se hai: hum groups ki tadaad, K, chunte hain aur algorithm nuqton ko cluster ke markazon se faasle ki bunyad par group karta hai."
+            "type": "paragraph",
+            "text": "Clustering milti julti cheezon ko un ki khasusiyat (characteristics) ki bunyad par groups mein jama karne ka tareeqa hai. Socho class ke students ko maths, science aur English mein karkardagi ke hisab se groups mein baantna hai. Clustering aise groups banati hai jin mein milti julti karkardagi wale students hon."
+          },
+          {
+            "type": "paragraph",
+            "text": "Misal: Karkardagi ke hisab se students ki clustering"
+          },
+          {
+            "type": "paragraph",
+            "text": "Farz karein paanch students ke maths aur English ke scores yeh hain:"
           },
           {
             "type": "table",
-            "caption": "Math aur English scores",
+            "caption": "Paanch students ke Maths aur English scores",
             "header": [
               "Student",
-              "Math",
-              "English"
+              "Maths score",
+              "English score"
             ],
             "rows": [
               [
@@ -62,19 +68,177 @@
             ]
           },
           {
-            "type": "list",
-            "ordered": true,
-            "items": [
-              "K = 2 chunein: ek cluster Math mein mazboot students ke liye, ek English mein mazboot ke liye.",
-              "Shuru ke markaz rakhein: Basim (85, 70) aur Tallat (40, 85).",
-              "Euclidean faasle se har student ko qareeb tareen markaz se jorein. Umer Basim se 7.1; Anie Tallat se 11.2; Maliha Basim se 26.9 aur Tallat se 32.0, to woh Basim ke saath. Cluster 1: Basim, Umer, Maliha; cluster 2: Anie, Tallat.",
-              "Har markaz ko us ke arkaan ke ausat se dobara nikalein: cluster 1 (78.3, 65), cluster 2 (45, 82.5).",
-              "Markaz ruk jane tak jorna aur dobara nikalna dohrayein. Yahan koi cluster nahi badalta, to nateeja mustahkam hai."
-            ]
+            "type": "paragraph",
+            "text": "Clustering se in students ko in do subjects ki karkardagi ke hisab se group kar sakte hain."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "K-means Clustering"
           },
           {
             "type": "paragraph",
-            "text": "(x1, y1) aur (x2, y2) ka Euclidean faasla (x1 - x2)^2 + (y1 - y2)^2 ka square root hai; Maliha aur Basim ke liye 25^2 + 10^2 = 725 ka square root, taqreeban 26.9."
+            "text": "K-means clustering data ko group karne ka sab se saada aur mashhoor tareeqa hai. Is mein pehle tay karna hota hai ke kitne groups (clusters) chahiye. Is misal mein do clusters: ek maths mein mazboot students ka, ek English mein mazboot students ka. Algorithm scores ke darmiyan faasla (distance) naap kar milti julti karkardagi wale students ko ek group mein rakhta hai. Basim aur Umer (maths mein achhe) ek group mein, aur Anie aur Tallat (English mein achhi) doosre group mein jayenge."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "K-means qadam ba qadam"
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Step 1: Clusters ki tadaad (K) chunein"
+          },
+          {
+            "type": "paragraph",
+            "text": "K = 2 rakhte hain, yani students ko do clusters mein baantna hai: ek maths mein mazboot, ek English mein mazboot."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Step 2: Shuruati markaz (initial centers) rakhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Do shuruati cluster centers chahiye, jo students ke scores mein se randomly (kisi bhi tarah) chune jate hain. Aasani ke liye do students ko center bana lete hain:"
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "Center 1: Basim (85, 70), maths mein mazboot students ke liye.",
+              "Center 2: Tallat (40, 85), English mein mazboot students ke liye."
+            ]
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Step 3: Har student ko qareeb tareen center se jorein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Har student ke scores ka dono centers se faasla nikalte hain. Is ka aam tareeqa Euclidean distance formula hai:"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{Distance} = \\sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}",
+            "text_alt": "Distance = √((x₂ − x₁)² + (y₂ − y₁)²)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Har student ka Center 1 (Basim) aur Center 2 (Tallat) se faasla:"
+          },
+          {
+            "type": "paragraph",
+            "text": "Basim: Center 1 tak faasla = 0 (woh khud center hai)"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{Basim: Center 2 tak faasla} = \\sqrt{(40 - 85)^2 + (85 - 70)^2} \\approx 47.43",
+            "text_alt": "Basim: Center 2 tak faasla = √((40 − 85)² + (85 − 70)²) ≈ 47.43"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{Umer: Center 1 tak faasla} = \\sqrt{(85 - 90)^2 + (70 - 65)^2} \\approx 7.07",
+            "text_alt": "Umer: Center 1 tak faasla = √((85 − 90)² + (70 − 65)²) ≈ 7.07"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{Umer: Center 2 tak faasla} = \\sqrt{(40 - 90)^2 + (85 - 65)^2} \\approx 53.85",
+            "text_alt": "Umer: Center 2 tak faasla = √((40 − 90)² + (85 − 65)²) ≈ 53.85"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{Anie: Center 1 tak faasla} = \\sqrt{(85 - 50)^2 + (70 - 80)^2} \\approx 36.40",
+            "text_alt": "Anie: Center 1 tak faasla = √((85 − 50)² + (70 − 80)²) ≈ 36.40"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{Anie: Center 2 tak faasla} = \\sqrt{(40 - 50)^2 + (85 - 80)^2} \\approx 11.18",
+            "text_alt": "Anie: Center 2 tak faasla = √((40 − 50)² + (85 − 80)²) ≈ 11.18"
+          },
+          {
+            "type": "paragraph",
+            "text": "Tallat: Center 1 tak faasla ≈ 47.43 (Basim se uska faasla); Center 2 tak faasla = 0 (woh khud center hai)"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{Maliha: Center 1 tak faasla} = \\sqrt{(85 - 60)^2 + (70 - 60)^2} \\approx 26.93",
+            "text_alt": "Maliha: Center 1 tak faasla = √((85 − 60)² + (70 − 60)²) ≈ 26.93"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{Maliha: Center 2 tak faasla} = \\sqrt{(40 - 60)^2 + (85 - 60)^2} \\approx 32.02",
+            "text_alt": "Maliha: Center 2 tak faasla = √((40 − 60)² + (85 − 60)²) ≈ 32.02"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab mein yeh ghaltiyan hain: (1) centers ko “Center 1 (Ali)” aur “Center 2 (Ayesha)” likha hai, jabke centers Basim aur Tallat hain. (2) Kai faasle ghalat hain: Basim–Center 2 aur Tallat–Center 1 dono 46.1 likhe (sahi 47.43), Umer–Center 1 = 46.1 (sahi 7.07), Umer–Center 2 = 57.01 (sahi 53.85), Anie–Center 2 = 10.29 (sahi 11.18). Tallat ke liye “woh center hai” Center 1 par likha hai, jabke woh Center 2 hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Faasle nikalne ke baad har student ko qareeb tareen center ke saath rakhte hain:"
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "Basim, Umer aur Maliha Center 1 (Basim) ke qareeb hain, is liye Cluster 1 (maths mein mazboot) mein.",
+              "Anie aur Tallat Center 2 (Tallat) ke qareeb hain, is liye Cluster 2 (English mein mazboot) mein."
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab Maliha ko Cluster 2 (Tallat wala) mein rakhti hai. Lekin kitab ke apne hisab mein Maliha ka Center 1 se faasla 26.92 aur Center 2 se 32.02 hai, yani woh Center 1 ke qareeb hai. Is liye Maliha Cluster 1 mein jati hai."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Step 4: Centers dobara nikalein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab har cluster ke students ke scores ka ausat (average position) nikal kar naye centers bante hain:"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{New Center 1} = \\left(\\frac{85+90+60}{3}, \\frac{70+65+60}{3}\\right) \\approx (78.3, 65)",
+            "text_alt": "New Center 1 = ((85+90+60)/3, (70+65+60)/3) ≈ (78.3, 65)"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{New Center 2} = \\left(\\frac{50+40}{2}, \\frac{80+85}{2}\\right) = (45, 82.5)",
+            "text_alt": "New Center 2 = ((50+40)/2, (80+85)/2) = (45, 82.5)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab Maliha ko ghalat cluster mein rakhne ki wajah se naye centers (87.5, 67.5) aur (50, 75) likhti hai. Sahi clusters se naye centers (78.3, 65) aur (45, 82.5) hain."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Step 5: Step 3 aur 4 dohrayein jab tak centers ruk na jayein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Naye centers se har student ka faasla dobara nikalte hain aur zaroorat ho to group badalte hain. Yeh tab tak chalta hai jab tak centers badalna band na kar dein; tab clusters mustahkam (stable) hain."
+          },
+          {
+            "type": "paragraph",
+            "text": "Is misal mein naye centers se Maliha Center 1 se taqreeban 19.0 aur Center 2 se 27.0 door hai, is liye woh Cluster 1 mein hi rehti hai; koi student group nahi badalta. Aakhri clusters: Cluster 1: Basim, Umer aur Maliha (maths mein achhe); Cluster 2: Anie aur Tallat (English mein achhe)."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab Step 5 mein likhti hai ke Maliha English wale cluster mein rehti hai, lekin agle hi jumle mein aakhri nateeja Cluster 1: Basim, Umer aur Maliha deti hai. Aakhri nateeja sahi hai; Step 5 wala jumla ghalat hai."
           },
           {
             "type": "diagram",
@@ -85,19 +249,20 @@
           {
             "type": "checkpoint",
             "mode": "self_check",
-            "prompt": "K-means ka bunyadi maqsad kya hai (MCQ 8)? K kya dikhata hai (MCQ 9)? Algorithm qadam ba qadam samjhaiye (long question 5).",
-            "explanation": "(b) data ko milte julte pan se clusters mein group karna; (b) clusters ki tadaad. Qadam: K chunein; K shuru ke centroids, aksar tasadufi chune K data points (yahan Basim aur Tallat); har nuqte ko Euclidean faasle se qareeb tareen centroid se jorein; har centroid ko us ke nuqton ke ausat par le jayein; centroids na badalne tak jorna aur update dohrayein. Aakhri clusters milte julte nuqton ke groups hain."
+            "prompt": "K-Means Clustering ka bunyadi maqsad kya hai? (MCQ 8) K-Means mein “K” kya hai? (MCQ 9) Algorithm qadam ba qadam samjhaiye. (Long question 5)",
+            "explanation": "(b) data ko milte julte pan ki bunyad par clusters mein group karna; (b) banne wale clusters ki tadaad. Qadam: K chunein; K shuruati centers (centroids) rakhein, aksar data mein se randomly chune hue K points (yahan Basim aur Tallat); har point ko Euclidean distance se qareeb tareen centroid se jorein; har centroid ko us ke points ke ausat par le jayein; jab tak centroids badalna band na karein, jorna aur update dohrate rahein."
           },
           {
             "type": "heading",
             "level": 2,
-            "text": "Fauri khulasa"
+            "text": "Mukhtasar khulasa"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "K-means (K = 2): Basim, Umer, Maliha (78.3, 65) ke gird; Anie, Tallat (45, 82.5) ke gird."
+              "K-means (K = 2): Cluster 1 Basim, Umer, Maliha, center ≈ (78.3, 65); Cluster 2 Anie, Tallat, center (45, 82.5).",
+              "Kitab ke Step 3 aur 4 mein faasle, naam aur Maliha ka cluster ghalat; aakhri nateeja sahi."
             ]
           }
         ]

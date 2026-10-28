@@ -19,16 +19,31 @@
       "body": {
         "blocks": [
           {
-            "type": "callout",
-            "tone": "definition",
-            "title": "Polymorphism",
-            "text": "Polymorphism is the ability of different objects to respond to the same method call in their own way: one interface, with specific behaviour for each object."
+            "type": "paragraph",
+            "text": "Polymorphism refers to the ability of different objects to respond to the same method or function call in their own unique way. It allows one interface to be used for a general class of actions, with specific implementations based on the object."
+          },
+          {
+            "type": "paragraph",
+            "text": "This is useful for calling methods in a uniform way, even if different classes implement them differently."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "def animal_sound(animal):\n        animal.make_sound( )\n    dog = Dog( )\n    cat = Cat( )\n    anima1_sound(dog)  # Output: Bark!\n    anima1_sound(cat)   # Output: Meow!",
+            "book_errors": [
+              "    dog = Dog( )\n    cat = Cat( )",
+              "anima1_sound"
+            ]
           },
           {
             "type": "callout",
-            "tone": "note",
-            "title": "Python code (each .... is one 4-space indent)",
-            "text": "def animal_sound(animal):\n....animal.make_sound()\n\nanimal_sound(Dog())    # Bark!\nanimal_sound(Cat())    # Meow!"
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The calls are printed as anima1_sound (digit 1), but the function is animal_sound, so Python raises NameError. The lines dog = Dog( ) onwards are also printed half-indented (IndentationError); they belong at the margin. With the Dog and Cat classes of 2.8.1.5, the program prints Bark! and Meow ! ."
+          },
+          {
+            "type": "paragraph",
+            "text": "Explanation: In the above code, animal_sound() can handle objects of different classes (Dog and Cat) uniformly."
           }
         ]
       }

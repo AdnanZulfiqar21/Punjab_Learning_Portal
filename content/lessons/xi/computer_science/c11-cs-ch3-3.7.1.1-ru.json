@@ -20,16 +20,32 @@
       "body": {
         "blocks": [
           {
-            "type": "callout",
-            "tone": "definition",
-            "title": "Bubble sort",
-            "text": "Bubble Sort baar baar list se guzarta, saath wali cheezon ka muwazna karta aur ghalat tarteeb mein hon to jagah badalta hai, jab tak mazeed tabadla zaroori na rahe."
+            "type": "paragraph",
+            "text": "Bubble Sort sab se saade sorting algorithms mein se hai. Yeh list mein baar baar shuru se aakhir tak chalta hai, saath saath wale (adjacent) elements ka muwazna karta hai, aur agar woh ghalat tarteeb mein hon to unhein swap karta hai (jagah badal deta hai). Yeh amal list sort hone tak dohraya jata hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Process (tareeqa):"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "List ke shuru se chalein.",
+              "Har saath wale jore (adjacent pair) ka muwazna karein.",
+              "Agar woh ghalat tarteeb mein hon to swap karein.",
+              "Yeh amal tab tak jari rakhein jab tak mazeed swap ki zaroorat na rahe."
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Misal: list [5,3,8,4,2] lein. Bubble Sort 5 aur 3 ka muwazna kar ke unhein swap karega, phir agle jore par jayega, aur isi tarah. List mein se kai chakkar (passes) ke baad algorithm list ko [2,3,4,5,8] bana dega."
           },
           {
             "type": "table",
-            "caption": "[5, 3, 8, 4, 2] par bubble sort ke chakkar",
+            "caption": "[5, 3, 8, 4, 2] par Bubble Sort ke chakkar (hamara hal kiya hua, chala kar jaancha gaya)",
             "header": [
-              "Chakkar",
+              "Chakkar (pass)",
               "Chakkar ke baad list"
             ],
             "rows": [
@@ -51,36 +67,48 @@
               ],
               [
                 "5",
-                "koi tabadla nahi: tarteeb mukammal"
+                "koi swap nahi: list sort ho chuki"
               ]
             ]
           },
           {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Asaan alfaaz mein",
+            "text": "Har chakkar mein baqi elements mein se sab se bara element bulbule (bubble) ki tarah aakhir tak pohanch jata hai: pehle chakkar ke baad 8 aakhir mein hai, doosre ke baad 5 apni jagah par, waghaira."
+          },
+          {
             "type": "paragraph",
-            "text": "Bubble Sort O(n^2) hai, to bare datasets ke liye na-kaarkard hai, magar samajhna aasan aur taleem aur chhote datasets ke liye mufeed hai. Bare datasets ke liye Quick Sort ya Merge Sort jaise zyada kaarkard algorithms istemal karein (Tip)."
+            "text": "Complexity: Bubble Sort ki time complexity O(n²) hai, is liye bare datasets ke liye yeh efficient nahi. Lekin yeh samajhna aur banana aasan hai, is liye parhai (educational) ke maqsad aur chhote datasets ke liye mufeed hai."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Tidbits",
+            "text": "Bubble Sort banana aasan hai, magar bare datasets ke liye waqt aur wasail bachane ki khatir Quick Sort ya Merge Sort jaise zyada efficient sorting algorithms istemal karein."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
-            "prompt": "Kaunsa algorithm list se baar baar guzar kar ghalat tarteeb wali saath wali cheezein badal kar tarteeb deta hai (MCQ 7)?",
+            "prompt": "Kaunsa algorithm list mein baar baar chal kar ghalat tarteeb wale saath wale elements swap kar ke data sort karta hai (MCQ 7)?",
             "explanation": "(c) Bubble Sort."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
-            "prompt": "Bubble Sort ka amal aur time complexity samjhaiye aur kisi aur sorting algorithm se muwazna kijiye (long question 6).",
-            "explanation": "Har chakkar har saath wale jore ka muwazna kar ke ghalat tarteeb wale badalta hai, to baqi sab se bari qeemat aakhir tak pohanchti hai; zyada se zyada n - 1 chakkar, har ek mein zyada se zyada n - 1 muwazne, to O(n^2) waqt. Merge Sort list ko aadhon mein baant kar tarteeb deta aur jorta hai, O(n log n). 1,000 cheezon ke liye bubble sort ko taqreeban 500,000 muwazne, merge sort ko sirf taqreeban 10,000, to bari lists ke liye merge sort kahin behtar hai; bubble sort saada hai aur izafi memory nahi chahta."
+            "prompt": "Bubble Sort ka amal aur time complexity samjhaiye aur kisi aur sorting algorithm se efficiency ka muwazna kijiye (long question 6).",
+            "explanation": "Har chakkar har saath wale jore ka muwazna kar ke ghalat tarteeb wale swap karta hai, is liye baqi elements mein sab se bari qeemat aakhir tak pohanch jati hai; zyada se zyada n − 1 chakkar, har ek mein zyada se zyada n − 1 muwazne, to O(n²) waqt. Merge Sort list ko aadhon mein baant kar sort karta aur jorta hai: O(n log n). 1,000 elements par Bubble Sort ko taqreeban 500,000 muwazne, Merge Sort ko sirf taqreeban 10,000; is liye bari lists ke liye Merge Sort kahin behtar hai, jabke Bubble Sort saada hai aur izafi memory nahi leta."
           },
           {
             "type": "heading",
             "level": 2,
-            "text": "Fauri khulasa"
+            "text": "Mukhtasar khulasa"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "Bubble sort: chakkar ba chakkar saath wale jore badlo; [5, 3, 8, 4, 2] se [2, 3, 4, 5, 8]; O(n^2)."
+              "Bubble Sort: chakkar ba chakkar saath wale jore swap karo; [5, 3, 8, 4, 2] se [2, 3, 4, 5, 8]; O(n²)."
             ]
           }
         ]

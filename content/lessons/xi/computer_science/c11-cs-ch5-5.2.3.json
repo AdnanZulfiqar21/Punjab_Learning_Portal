@@ -13,80 +13,288 @@
           "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
           "pdf_from": 129,
           "pdf_to": 131,
-          "note": "Topic 5.2.3 with 5.2.3.2 Standard Deviation and the class activity (PDF 129-132, printed 126-129). The formulas print garbled; Class B's root prints '456' and SD 21.26 (correct 454 and 21.31); Class A's SD 3.55 is 3.54. Recorded."
+          "note": "Topic 5.2.3 as printed (PDF 129-131, printed 126-128); with 5.2.3.2; book errors marked: formula index t=1 and x1, root 456 = 21.26 and 3.55 (correct: xi, i=1; root 454 = 21.31; 3.54)."
         }
       ],
       "body": {
         "blocks": [
           {
             "type": "paragraph",
-            "text": "Measures of dispersion tell how spread out the data are. Variance shows how much the values differ from the mean: variance = (1/N) x sum of (xi - mean)^2, where xi is each value, the mean is written mu and N is the number of values. Standard deviation is the square root of the variance."
+            "text": "Measures of dispersion tell us how spread out or scattered the data is. Two common measures of dispersion are variance and standard deviation. These help us understand whether the data points are close to the average (mean) or far from it."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Variance"
+          },
+          {
+            "type": "paragraph",
+            "text": "The variance shows how much the numbers in a data set differ from the mean. A higher variance means that the numbers are more spread out, while a lower variance means that the numbers are closer to the mean. To calculate variance, we use the following mathematical formula."
+          },
+          {
+            "type": "equation",
+            "latex": "\\sigma^2 = \\frac{1}{N}\\sum_{t=1}^{N}(x_1 - \\mu)^2",
+            "text_alt": "σ² = (1/N) Σ from t=1 to N of (x₁ − μ)²",
+            "book_errors": [
+              "t=1",
+              "x₁",
+              "x_1"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The printed formula sums (x₁ − μ)² from t = 1 to N, which would repeat the first value only. The sum runs over every value xᵢ, with i from 1 to N, as the line below it says: σ² = (1/N) Σᵢ₌₁ᴺ (xᵢ − μ)²."
+          },
+          {
+            "type": "paragraph",
+            "text": "Where: xᵢ represents each individual value in the data set, μ is the mean of the data set, N is the total number of values in the data set."
+          },
+          {
+            "type": "paragraph",
+            "text": "Example: Imagine two classes, Class A and Class B, took the same exam."
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "In Class A, the scores are: 50, 52, 55, 57, and 60.",
+              "In Class B, the scores are: 30, 45, 55, 75, and 90."
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Steps are involved in variance calculations:"
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Step 1: Variance for Class A"
+          },
+          {
+            "type": "paragraph",
+            "text": "Given Score = 50,52,55,57,60"
+          },
+          {
+            "type": "paragraph",
+            "text": "Step 1.1: Compute the Mean (μ)"
+          },
+          {
+            "type": "equation",
+            "latex": "(\\mu) = \\frac{50+52+55+57+60}{5} = \\frac{274}{5} = 54.8",
+            "text_alt": "(μ) = (50 + 52 + 55 + 57 + 60)/5 = 274/5 = 54.8"
+          },
+          {
+            "type": "paragraph",
+            "text": "Step 1.2: Compute Each Squared Deviation ((xᵢ−μ)²)"
           },
           {
             "type": "table",
-            "caption": "Two classes on the same exam",
+            "caption": "Class A: each score, its deviation from the mean and the squared deviation",
             "header": [
-              "Class A score",
-              "x - 54.8",
-              "squared",
-              "Class B score",
-              "x - 59",
-              "squared"
+              "xᵢ",
+              "xᵢ−μ",
+              "(xᵢ−μ)²"
             ],
             "rows": [
               [
                 "50",
-                "-4.8",
-                "23.04",
-                "30",
-                "-29",
-                "841"
+                "50−54.8=−4.8",
+                "23.04"
               ],
               [
                 "52",
-                "-2.8",
-                "7.84",
-                "45",
-                "-14",
-                "196"
+                "52−54.8=−2.8",
+                "7.84"
               ],
               [
                 "55",
-                "0.2",
-                "0.04",
-                "55",
-                "-4",
-                "16"
+                "55−54.8=0.2",
+                ".04"
               ],
               [
                 "57",
-                "2.2",
-                "4.84",
-                "75",
-                "16",
-                "256"
+                "57−54.8=2.2",
+                "4.84"
               ],
               [
                 "60",
-                "5.2",
-                "27.04",
-                "90",
-                "31",
-                "961"
-              ],
-              [
-                "sum",
-                "",
-                "62.8",
-                "sum",
-                "",
-                "2270"
+                "60−54.8=5.2",
+                "27.04"
               ]
             ]
           },
           {
             "type": "paragraph",
-            "text": "Class A: mean 274 / 5 = 54.8, variance 62.8 / 5 = 12.56, standard deviation about 3.54. Class B: mean 295 / 5 = 59, variance 2270 / 5 = 454, standard deviation about 21.31. Class B's scores are far more spread out, while Class A's are packed closely around the mean."
+            "text": "Step 1.3: Compute Variance"
+          },
+          {
+            "type": "equation",
+            "latex": "\\sigma^2 = \\frac{23.04+7.84+0.04+4.84+27.04}{5}",
+            "text_alt": "σ² = (23.04 + 7.84 + 0.04 + 4.84 + 27.04)/5"
+          },
+          {
+            "type": "equation",
+            "latex": "62.8/5 = 12.56",
+            "text_alt": "62.8/5 = 12.56"
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Step 2: Variance for Class B"
+          },
+          {
+            "type": "paragraph",
+            "text": "Given Scores: 30,45,55,75,90"
+          },
+          {
+            "type": "equation",
+            "latex": "\\mu = \\frac{30+45+55+75+90}{5} = \\frac{295}{5} = 59",
+            "text_alt": "μ = (30 + 45 + 55 + 75 + 90)/5 = 295/5 = 59"
+          },
+          {
+            "type": "table",
+            "caption": "Class B: each score, its deviation from the mean and the squared deviation",
+            "header": [
+              "xᵢ",
+              "xᵢ−μ",
+              "(xᵢ−μ)²"
+            ],
+            "rows": [
+              [
+                "30",
+                "30−59 = −29",
+                "841"
+              ],
+              [
+                "45",
+                "45−59 = −14",
+                "196"
+              ],
+              [
+                "55",
+                "55−59 = −4",
+                "16"
+              ],
+              [
+                "75",
+                "75−59 = 16",
+                "256"
+              ],
+              [
+                "90",
+                "90−59 = 31",
+                "961"
+              ]
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Step 2.3: Compute Variance"
+          },
+          {
+            "type": "equation",
+            "latex": "\\sigma^2 = \\frac{841+196+16+256+961}{5}",
+            "text_alt": "σ² = (841 + 196 + 16 + 256 + 961)/5"
+          },
+          {
+            "type": "equation",
+            "latex": "= 2270/5 = 454",
+            "text_alt": "= 2270/5 = 454"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Variance of Class A: 12.56",
+              "Variance of Class B: 454"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "This confirms that Class B has a much higher variance, meaning the scores are more spread out compared to Class A."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "5.2.3.2 Standard Deviation"
+          },
+          {
+            "type": "paragraph",
+            "text": "The standard deviation is similar to variance but provides a more practical number. It tells us how spread out the numbers are in relation to the mean. The standard deviation is simply the square root of the variance. To calculate standard deviation, we use the following mathematical formula."
+          },
+          {
+            "type": "equation",
+            "latex": "\\sigma = \\sqrt{\\frac{1}{N}\\sum_{t=1}^{N}(x_1 - \\mu)^2}",
+            "text_alt": "σ = √((1/N) Σ from t=1 to N of (x₁ − μ)²)",
+            "book_errors": [
+              "t=1",
+              "x₁",
+              "x_1"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The printed formula sums (x₁ − μ)² from t = 1 to N, which would repeat the first value only. The sum runs over every value xᵢ, with i from 1 to N, as the line below it says: σ = √((1/N) Σᵢ₌₁ᴺ (xᵢ − μ)²)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Where:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "xᵢ represents each individual value in the data set,",
+              "μ is the mean of the data set,",
+              "N is the total number of values in the data set."
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Calculating Standard Deviation:"
+          },
+          {
+            "type": "paragraph",
+            "text": "Class A:"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{Standard Deviation} = \\sqrt{12.56} = 3.55",
+            "text_alt": "Standard Deviation = √12.56 = 3.55",
+            "book_errors": [
+              "3.55"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Class B:"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{Standard Deviation} = \\sqrt{456} = 21.26",
+            "text_alt": "Standard Deviation = √456 = 21.26",
+            "book_errors": [
+              "456",
+              "21.26"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "The standard deviation for Class A is approximately 3.55, while for Class B, it is about 21.26. This means that Class A's scores are closely packed around the mean, whereas Class B's scores are more widely scattered. The standard deviation helps us easily understand how much variation there is in the scores.",
+            "book_errors": [
+              "3.55",
+              "21.26"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "Class B's variance is 454 (Step 2.3), so its standard deviation is √454 ≈ 21.31; the book prints √456 and 21.26 (√456 is about 21.35). Class A's standard deviation is √12.56 ≈ 3.54, not 3.55."
           }
         ]
       }

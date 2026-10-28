@@ -21,36 +21,68 @@
         "blocks": [
           {
             "type": "paragraph",
-            "text": "Notepad aur Microsoft Word jaisi applications undo ke liye stack istemal karti hain. Har amal, jaise likhna ya mitana, stack par push hota hai. Undo dabane se sab se taaza amal pop ho kar ulat jata hai; dobara dabane se us se pehle wala. Agar aap ne 'Hello' phir 'World' likha to undo pehle 'World' phir 'Hello' hatata hai."
+            "text": "Notepad aur Microsoft Word jaisi applications mein undo stack se banta hai. Aap jo bhi kaam (action) karte hain woh stack par save ho jata hai. Undo karne par sab se taaza action stack se nikal kar ulat diya jata hai. Is tarah aap pichhli halat mein wapas aa jate hain."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab mein “Not Pad” chhapa hai; sahi naam Notepad hai (Windows ka text editor)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Misal: sochiye aap text editor mein document mein kai tabdeeliyan karte hain, jaise naya text likhna ya purana mitana. Undo aise kaam karta hai:"
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "Kaam karna: har tabdeeli (likhna ya mitana) stack par save hoti hai. Maslan aap ne “Hello” likha to yeh action stack par push ho gaya.",
+              "Undo karna: undo dabane par sab se taaza action (jaise “Hello” likhna) stack se nikalta hai, aur editor use ulat deta hai, yaani document se “Hello” mita deta hai.",
+              "Kai baar undo: baar baar undo dabane se pichhle actions ulti tarteeb mein ek ek kar ke ulatte jate hain. Agar “Hello” ke baad “World” likha tha, to undo pehle “World” hatayega, phir “Hello”."
+            ]
           },
           {
             "type": "callout",
             "tone": "note",
-            "title": "Python code (har .... ek 4-space indent hai)",
-            "text": "class Stack:\n....def __init__(self):\n........self.items = []\n....def push(self, item):\n........self.items.append(item)\n....def pop(self):\n........return self.items.pop()\n....def peek(self):\n........return self.items[-1]\n\nplates = Stack()\nfor plate in [\"Plate 1\", \"Plate 2\", \"Plate 3\"]:\n....plates.push(plate)\n....print(plates.items)\nprint(\"Removed:\", plates.pop(), \"Stack:\", plates.items)\nprint(\"Top plate:\", plates.peek())    # Plate 2"
+            "title": "Class Activity",
+            "text": "Restaurant ki kitchen mein plates ke dher (stack) ka intezam sochiye. Python code likhein jo plates rakhne aur uthane ka amal dikhaye.\nZaroorat:\n1. Stack class banayein:\n• list se plates ka stack dikhane wali Stack class banayein.\n• push (plate rakhna), pop (plate uthana) aur peek (top plate dekhna, nikale baghair) methods banayein.\n2. Stack operations dikhayein:\n• Plate 1, Plate 2, Plate 3 push karein.\n• Har plate ke baad stack dikhayein.\n• Ek plate pop karein, aur nikali hui plate aur stack dono print karein.\n• Top plate peek kar ke print karein."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "class Stack:\n    def __init__(self):\n        self.items = []\n\n    def push(self, item):\n        self.items.append(item)\n\n    def pop(self):\n        return self.items.pop()\n\n    def peek(self):\n        return self.items[-1]\n\n\nplates = Stack()\nfor plate in [\"Plate 1\", \"Plate 2\", \"Plate 3\"]:\n    plates.push(plate)\n    print(\"Stack:\", plates.items)\nremoved = plates.pop()\nprint(\"Removed:\", removed, \"Stack:\", plates.items)\nprint(\"Top plate:\", plates.peek())",
+            "caption": "Class Activity ka ek mumkin hal (kitab mein hal nahi diya; yeh hamara code hai)"
+          },
+          {
+            "type": "code",
+            "language": "text",
+            "text": "Stack: ['Plate 1']\nStack: ['Plate 1', 'Plate 2']\nStack: ['Plate 1', 'Plate 2', 'Plate 3']\nRemoved: Plate 3 Stack: ['Plate 1', 'Plate 2']\nTop plate: Plate 2",
+            "caption": "Output (Python 3.13 mein chala kar)"
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
-            "prompt": "Class activity: restaurant kitchen ki plates ke liye push, pop aur peek wali Stack class likhein; Plate 1, 2, 3 push, ek pop, phir peek. Aakhir mein kya print hota hai?",
-            "explanation": "Oopar ka code (kitab se nahi) stack ko Plate 1, Plate 2, Plate 3 tak barhta dikhata hai; pop Plate 3 hatata, Plate 1, Plate 2 bachti hain; peek Plate 2 dikhata hai."
+            "prompt": "Class activity ke code mein aakhir mein peek kya dikhata hai, aur kyun?",
+            "explanation": "Plate 2. Plate 3 sab se oopar thi aur pop ho gayi; ab Plate 2 top par hai, aur peek use nikale baghair dikhata hai."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
-            "prompt": "Stacks ke do asal duniya ke istemal aur un mein amal kaise chalte hain, bataiye (long question 3).",
-            "explanation": "Text editor ka undo: har tabdeeli push hoti hai; undo taaza tareen pop kar ke ulat deta hai, to tabdeeliyan naye se purane ki tarteeb mein wapas hoti hain. Browser ka Back button: har dekha page push hota hai; Back maujooda page pop kar ke neeche wala dikhata hai. Plates ka dher bhi aisa hi hai: nayi plate oopar aur oopar wali pehle uthti hai."
+            "prompt": "Do asal zindagi ki misalein bataiye jahan stack istemal hota hai, aur in mein stack ke operations kaise chalte hain (long question 3).",
+            "explanation": "Text editor ka undo: har tabdeeli push hoti hai; undo sab se taaza tabdeeli pop kar ke ulat deta hai, is liye tabdeeliyan nayi se purani ki tarteeb mein wapas hoti hain. Browser ka Back button: har khola hua page push hota hai; Back maujooda page pop kar ke us se neeche wala page dikhata hai. Plates ka dher bhi aisa hi hai: nayi plate oopar aati hai aur oopar wali pehle uthti hai."
           },
           {
             "type": "heading",
             "level": 2,
-            "text": "Fauri khulasa"
+            "text": "Mukhtasar khulasa"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "Undo: amal push, undo taaza tareen pop karta hai; Stack class ko push, pop aur peek chahiyein."
+              "Undo: har action push, undo sab se taaza action pop kar ke ulat deta hai.",
+              "Stack class ko push, pop aur peek chahiyein."
             ]
           }
         ]

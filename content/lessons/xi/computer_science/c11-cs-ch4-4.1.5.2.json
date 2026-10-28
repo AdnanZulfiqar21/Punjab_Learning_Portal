@@ -13,14 +13,14 @@
           "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
           "pdf_from": 103,
           "pdf_to": 104,
-          "note": "Topic 4.1.5.2 (PDF 103-104, printed 100-101); Figure 4.4 is replaced by the original diagram with the same tree. MCQ 6 is answered (c); the answer key gives (b). Recorded."
+          "note": "Topic 4.1.5.2 How We Traverse a Tree Using BFS (PDF 103-104, printed 100-101), as printed: Figure 4.4 and the 17 numbered steps (sub-points joined into their step)."
         }
       ],
       "body": {
         "blocks": [
           {
             "type": "paragraph",
-            "text": "BFS on the balanced binary tree with root 1, children 2 and 3, and leaves 4, 5 under 2 and 6, 7 under 3 (Figure 4.4)."
+            "text": "Breadth-First Search (BFS) is an algorithm used to explore and traverse tree structures by visiting nodes level by level. This approach uses a queue to manage the nodes that need to be visited. Below is a detailed explanation using a numeric tree example. The figure 4.4 illustrates the tree structure used in our BFS example:"
           },
           {
             "type": "diagram",
@@ -29,54 +29,31 @@
             "caption": "Figure 4.4: Balanced Binary Tree (original drawing after the textbook's Figure 4.4)."
           },
           {
-            "type": "table",
-            "caption": "Queue after each visit",
-            "header": [
-              "Visit",
-              "Added",
-              "Queue"
-            ],
-            "rows": [
-              [
-                "start",
-                "1",
-                "[1]"
-              ],
-              [
-                "1",
-                "2, 3",
-                "[2, 3]"
-              ],
-              [
-                "2",
-                "4, 5",
-                "[3, 4, 5]"
-              ],
-              [
-                "3",
-                "6, 7",
-                "[4, 5, 6, 7]"
-              ],
-              [
-                "4",
-                "none",
-                "[5, 6, 7]"
-              ],
-              [
-                "5",
-                "none",
-                "[6, 7]"
-              ],
-              [
-                "6",
-                "none",
-                "[7]"
-              ],
-              [
-                "7",
-                "none",
-                "[] (done)"
-              ]
+            "type": "heading",
+            "level": 3,
+            "text": "BFS Process with Queue Operations:"
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "Start at the Root: Begin at the root node (1). This node is placed into the queue.",
+              "Queue: [1]",
+              "Visit Node 1: Dequeue node 1 and visit it. Add its children (nodes 2 and 3) to the queue.",
+              "Queue after visiting 1: [2, 3]",
+              "Visit Node 2: Dequeue node 2 and visit it. Add its children (nodes 4 and 5) to the queue.",
+              "Queue after visiting 2: [3, 4, 5]",
+              "Visit Node 3: Dequeue node 3 and visit it. Add its children (nodes 6 and 7) to the queue.",
+              "Queue after visiting 3: [4, 5, 6, 7]",
+              "Visit Node 4: Dequeue node 4 and visit it. Node 4 has no children, so the queue remains unchanged.",
+              "Queue after visiting 4: [5, 6, 7]",
+              "Visit Node 5: Dequeue node 5 and visit it. Node 5 has no children, so the queue remains unchanged.",
+              "Queue after visiting 5: [6, 7]",
+              "Visit Node 6: Dequeue node 6 and visit it. Node 6 has no children, so the queue remains unchanged.",
+              "Queue after visiting 6: [7]",
+              "Visit Node 7: Dequeue node 7 and visit it. Node 7 has no children, so the queue is now empty.",
+              "Queue after visiting 7: []",
+              "Completion: The queue is empty, indicating that all nodes have been visited in a level-by-level order."
             ]
           }
         ]

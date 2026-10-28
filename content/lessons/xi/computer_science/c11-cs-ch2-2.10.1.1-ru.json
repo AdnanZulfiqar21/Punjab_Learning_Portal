@@ -23,17 +23,32 @@
             "type": "list",
             "ordered": false,
             "items": [
-              "Unit testing: functions ya classes jaise alag hisse akele aazmati hai; Python ka unittest module aam istemal hota hai.",
-              "Integration testing: jaanchti hai ke code ke hisse mil kar kaise kaam karte hain.",
-              "Functional testing: jaanchti hai ke software user ke nuqta-e-nazar se tawaqqo ke mutabiq chale.",
-              "Regression testing: yaqeeni banati hai ke nayi tabdeeliyan purani features na torein."
+              "Unit testing: code ke chhote hisse (jaise functions ya classes) alag alag test karna. Python ka unittest module is ke liye aam hai.",
+              "Integration testing: dekhna ke code ke mukhtalif hisse mil kar theek kaam karte hain.",
+              "Functional testing: user ki nazar se dekhna ke software tawaqqo ke mutabiq chalta hai.",
+              "Regression testing: yaqeen karna ke nayi tabdeeliyon ne pehle se chalta kaam kharab nahi kiya. Misaal: neeche unittest module se add function test kiya gaya hai, mukhtalif inputs de kar."
             ]
           },
           {
+            "type": "code",
+            "language": "python",
+            "text": "import unittest\ndef add (a , b) :\n    return a + b\nclass TestMathOperations(unittest.TestCase):\n    def test_add(self):\n        self.assertEqual(add(2, 3), 5)\n        self.assertEqual(add(-1, 1), 0)\nif __name__ == '__main__':\n    unittest.main()"
+          },
+          {
             "type": "callout",
-            "tone": "note",
-            "title": "Python code (har .... ek 4-space indent hai)",
-            "text": "import unittest\n\ndef add(a, b):\n....return a + b\n\nclass TestMathOperations(unittest.TestCase):\n....def test_add(self):\n........self.assertEqual(add(2, 3), 5)\n........self.assertEqual(add(-1, 1), 0)\n\nif __name__ == \"__main__\":\n....unittest.main()"
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab yeh code bina indentation ke chhapti hai: def test_add class ke andar, assertEqual wali lines def ke andar, aur unittest.main() if ke andar indented honi chahiyein (warna IndentationError). '__main__' ke quotes bhi tirchhe (’ ’) chhape hain; seedhe quotes chahiyein."
+          },
+          {
+            "type": "code",
+            "language": "text",
+            "text": ".\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nOK",
+            "caption": "Output (theek kiye code ka)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Wazahat: yeh code add function ka unit test hai. TestMathOperations class assertEqual se check karti hai ke add(2, 3) = 5 aur add(-1, 1) = 0 ho. Dono theek hon to test pass (OK); warna test fail ho kar farq batata hai."
           },
           {
             "type": "checkpoint",
@@ -44,13 +59,14 @@
           {
             "type": "heading",
             "level": 2,
-            "text": "Fauri khulasa"
+            "text": "Mukhtasar khulasa"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "Qismein: unit, integration, functional, regression; unittest.TestCase aur assertEqual functions aazmate hain."
+              "Unit, integration, functional, regression testing.",
+              "unittest: assertEqual(nateeja, tawaqqo)."
             ]
           }
         ]

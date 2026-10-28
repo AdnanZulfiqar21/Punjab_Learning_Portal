@@ -20,53 +20,61 @@
       "body": {
         "blocks": [
           {
-            "type": "callout",
-            "tone": "definition",
-            "title": "NP-hard",
-            "text": "NP-hard masail kam az kam NP ke sab se mushkil masail jitne mushkil hain. In ke liye koi kaarkard algorithm maloom nahi, aur yeh aam taur par zyada bare na hone wale cases mein bhi bohat waqt lete hain."
+            "type": "paragraph",
+            "text": "NP-hard masail woh class hai jo NP (Non-deterministic Polynomial time) ke sab se mushkil masail jitne, ya un se bhi zyada, mushkil hain. NP-hard masla hal karna mushkil hai, aur in ka hal dhoondne ka koi efficient algorithm maloom nahi. Yeh masail aam taur par bohat mushkil hote hain aur hal hone mein bohat waqt lete hain, chahe cases zyada bare na hon."
           },
           {
             "type": "paragraph",
-            "text": "Travelling Salesman Problem NP-hard hai: koi maloom algorithm ise bohat se shehron ke liye jaldi hal nahi karta, kyunke raaston ki tadaad factorial ke hisab se barhti hai."
-          },
-          {
-            "type": "table",
-            "caption": "TSP raaston ki barhotri (n!)",
-            "header": [
-              "Shehar",
-              "Mumkina raaste"
-            ],
-            "rows": [
-              [
-                "5",
-                "120"
-              ],
-              [
-                "10",
-                "3,628,800"
-              ],
-              [
-                "20",
-                "taqreeban 2.43 x 10^18"
-              ]
-            ]
-          },
-          {
-            "type": "checkpoint",
-            "mode": "self_check",
-            "prompt": "Agar computer ek second mein ek arab raaste jaanche to 20 shehron ke liye taqreeban kitna waqt lagega?",
-            "explanation": "2.43 x 10^18 / 10^9 = 2.43 x 10^9 seconds, taqreeban 77 saal, jo dikhata hai ke mukammal brute force kyun na-qabil-e-amal hai."
+            "text": "Misal: NP-hard masle ki mashhoor misal Travelling Salesman Problem (TSP) hai, jo hum ne Section 3.3.2 mein parha."
           },
           {
             "type": "heading",
-            "level": 2,
-            "text": "Fauri khulasa"
+            "level": 3,
+            "text": "TSP NP-Hard kyun hai"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "NP-hard: kam az kam NP ke mushkil tareen masail jitna; TSP raaste: 5 shehar 120, 10 shehar 3,628,800, 20 shehar taqreeban 2.43 x 10^18."
+              "No Known Efficient Solution (koi efficient hal maloom nahi): aisa koi algorithm maloom nahi jo bohat se shehron ke liye TSP jaldi hal kar de. Shehar barhne par mumkina raaston ki tadaad factorially barhti hai, is liye masle ko bilkul durust hal karna intehai mushkil ho jata hai.",
+              "Computational Complexity: TSP hal karne ka waqt shehron ki tadaad ke saath itni tezi se barhta hai ke bare cases ka durust hal nikalna amalan mumkin nahi rehta. Maslan sirf 10 shehron ke liye 3,628,800 mumkina raaste hain."
+            ]
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Complexity ki wazahat"
+          },
+          {
+            "type": "paragraph",
+            "text": "Complexity ko samjhane ke liye:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "5 shehar: 120 mumkina raaste (5! = 120).",
+              "10 shehar: 3,628,800 mumkina raaste (10!).",
+              "20 shehar: taqreeban 2.43 x 10¹⁸ mumkina raaste (20!), jo intehai bari tadaad hai."
+            ]
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Agar computer ek second mein ek arab (10⁹) raaste jaanche to 20 shehron ke tamam raaste jaanchne mein taqreeban kitna waqt lagega?",
+            "explanation": "2.43 x 10¹⁸ ÷ 10⁹ = 2.43 x 10⁹ seconds, yani taqreeban 77 saal. Is se pata chalta hai ke har raasta aazmana (brute force) kyun na-qabil-e-amal hai. (Ek arab raaste fi second hamara farz kiya hua andaza hai.)"
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Mukhtasar khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "NP-hard: kam az kam NP ke sab se mushkil masail jitna mushkil; koi efficient algorithm maloom nahi.",
+              "TSP raaste: 5 shehar 120, 10 shehar 3,628,800, 20 shehar taqreeban 2.43 x 10¹⁸."
             ]
           }
         ]

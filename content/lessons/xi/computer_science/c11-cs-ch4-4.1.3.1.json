@@ -13,65 +13,81 @@
           "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
           "pdf_from": 97,
           "pdf_to": 98,
-          "note": "Topic 4.1.3.1 with 'Converting an Infix Expression to Postfix' (PDF 97-98, printed 94-95). The prefix example prints as '-\\-AB' and 'x' is used for multiplication; the prefix form of (A + B) x C is worked here (general knowledge, flagged). MCQ 4 and long question 4 are answered."
+          "note": "Topic 4.1.3.1 Infix, Postfix and Prefix Notations with Converting an Infix Expression to Postfix (PDF 97-98, printed 94-95), as printed; '-\\-AB' is marked."
         }
       ],
       "body": {
         "blocks": [
           {
-            "type": "table",
-            "caption": "Three notations",
-            "header": [
-              "Notation",
-              "Operator position",
-              "A + B",
-              "(A + B) x C"
+            "type": "paragraph",
+            "text": "In mathematics and computer science, expressions can be written in different notations. The three main notations are infix, postfix, and prefix notations."
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Infix Notation: The operator is placed between the operands. This is the standard notation used in most arithmetic and algebraic expressions. Example: A + B or (A+ B) x C",
+              "In A + B, the operator + is between the operands A and B. Parentheses may be used to clarify the order of operations.",
+              "Postfix Notation (Reverse Polish Notation, RPN): The operator is placed after the operands. This notation does not require parentheses to denote the order of operations. Examples: A + B = AB+ and (A + B) x C = (AB+) x C = AB + Cx",
+              "In AB+, you first encounter the operands A and B, followed by the operator +, indicating that A and B are to be added. In AB + Cx, you first add A and B, then multiply the result to C.",
+              "Prefix Notation (Polish Notation): The operator is placed before the operands. Like postfix notation, prefix notation also does not require parentheses to indicate the order of operations. Example: +AB or +A x BC",
+              "In -\\-AB, the operator + comes before the operands A and B, indicating that A and B are to be added. In +A x BC, you first multiply B and C, then add A to the result."
             ],
-            "rows": [
-              [
-                "Infix",
-                "between the operands",
-                "A + B",
-                "(A + B) x C"
-              ],
-              [
-                "Postfix (Reverse Polish)",
-                "after the operands",
-                "A B +",
-                "A B + C x"
-              ],
-              [
-                "Prefix (Polish)",
-                "before the operands",
-                "+ A B",
-                ""
-              ]
+            "book_errors": [
+              "-\\-AB"
             ]
           },
           {
-            "type": "paragraph",
-            "text": "Postfix and prefix need no parentheses to show the order of operations; in + A x B C, B and C are multiplied first and then A is added."
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book prints “In -\\-AB”; the prefix expression it explains is +AB, the operator + before the operands A and B."
           },
           {
             "type": "heading",
             "level": 3,
-            "text": "Converting infix to postfix with a stack"
+            "text": "Converting an Infix Expression to Postfix"
+          },
+          {
+            "type": "paragraph",
+            "text": "Converting an infix expression (like 3 + 4 * 5) to postfix notation (like 3 4 5 *+) can make calculations easier for computers. We use a stack to help with this conversion. Here's a simple explanation:"
           },
           {
             "type": "list",
             "ordered": true,
             "items": [
-              "Start with an empty stack and an empty output list, and read the expression from left to right.",
-              "Operand: add it to the output.",
-              "Operator: first pop to the output any operator on the stack with higher or equal priority, then push the new operator.",
-              "Left parenthesis: push it.",
-              "Right parenthesis: pop operators to the output until the left parenthesis, then discard the parenthesis.",
-              "At the end, pop all remaining operators to the output."
+              "Start with an empty stack and an empty output list.",
+              "Read the infix expression from left to right."
+            ]
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "If you find an operand, add it directly to the output list.",
+              "If you find an operator (like +, -, *), push it onto the stack. But, if there is already an operator on the stack with higher or equal priority, pop it from the stack to the output list before pushing the new operator.",
+              "If you find a left parenthesis (, push it onto the stack.",
+              "If you find a right parenthesis), pop operators from the stack to the output list until you find a left parenthesis. Remove the left parenthesis from the stack but do not add it to the output list."
             ]
           },
           {
             "type": "paragraph",
-            "text": "Example: 3 + 4 * 2. Read 3: output [3]. Read +: stack [+]. Read 4: output [3, 4]. Read *: higher priority than +, so push: stack [+, *]. Read 2: output [3, 4, 2]. End: pop all: 3 4 2 * +."
+            "text": "When you have processed the entire infix expression, pop any remaining operators from the stack to the output list."
+          },
+          {
+            "type": "example",
+            "title": "Example:",
+            "problem": "Convert the infix expression 3 + 4 * 2 to postfix notation.",
+            "steps": [
+              "Start with an empty stack and output list.",
+              "Read 3: Add to the output list: [3].",
+              "Read +: Push to the stack: [+].",
+              "Read 4: Add to the output list: [3, 4].",
+              "Read *: Push to the stack (since * has higher priority than +): [+, *].",
+              "Read 2: Add to the output list: [3, 4, 2].",
+              "Pop all operators from the stack to the output list: [3, 4, 2, *, +]."
+            ],
+            "answer": "Result: The postfix expression is 3 4 2 * +."
           }
         ]
       }

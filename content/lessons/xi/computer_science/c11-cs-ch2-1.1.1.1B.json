@@ -19,42 +19,61 @@
       "body": {
         "blocks": [
           {
-            "type": "callout",
-            "tone": "definition",
-            "title": "Access modifiers",
-            "text": "Access modifiers set who can reach a class's attributes and methods. Python marks them by naming: public (no underscore), protected (one underscore) and private (two underscores)."
+            "type": "paragraph",
+            "text": "Access modifiers are keywords or mechanisms that define the accessibility of classes, methods, and variables. In python there are following access modifiers:"
           },
           {
-            "type": "table",
-            "caption": "Access modifiers in Python",
-            "header": [
-              "Kind",
-              "Written as",
-              "Reachable from"
-            ],
-            "rows": [
-              [
-                "Public",
-                "self.color",
-                "anywhere, including outside the class"
-              ],
-              [
-                "Protected",
-                "self._protected_var",
-                "the class and its subclasses"
-              ],
-              [
-                "Private",
-                "self.__color",
-                "only inside the class; use a method such as get_color()"
-              ]
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Public: Attributes and methods that are accessible from outside the class."
+            ]
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "class Car:\n    def __init__(self , color): self.color = color # Public property"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Protected:  Attributes and methods are accessible within the class and its subclasses (derived classes)."
+            ]
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "class Car:\n    def __init__(self): self._protected_var = 20 # Protected variable"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Private: Attributes and methods that are not accessible from outside the class. Use double underscores for private attributes."
+            ]
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "class Car: def __init__(self , color):\nself.__color = color # Private property\n    def get_color(self): return self.__color",
+            "book_errors": [
+              "class Car: def __init__(self , color):\nself.__color = color"
             ]
           },
           {
             "type": "callout",
-            "tone": "note",
-            "title": "Python code (each .... is one 4-space indent)",
-            "text": "class Car:\n....def __init__(self, color):\n........self.__color = color    # private\n\n....def get_color(self):\n........return self.__color"
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The private example is printed run into the text, with class Car: and def __init__ on one line and the attribute line at the margin; that is a SyntaxError. Written out: class Car: on its own line, then def __init__(self , color): indented, then self.__color = color indented once more, then def get_color(self): return self.__color inside the class."
+          },
+          {
+            "type": "paragraph",
+            "text": "color is private, meaning it cannot be accessed directly outside the class. The method get_color () is used to access the private property."
+          },
+          {
+            "type": "paragraph",
+            "text": "Explanation: The first code snippet defines a 'Car' class with a public property 'color', accessible directly. The second snippet defines a 'Car' class with a private property '_ _color', which can only be accessed via the 'get_ _color()' method."
           }
         ]
       }

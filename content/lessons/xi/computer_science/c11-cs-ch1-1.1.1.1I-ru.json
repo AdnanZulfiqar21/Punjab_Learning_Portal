@@ -21,36 +21,48 @@
         "blocks": [
           {
             "type": "paragraph",
-            "text": "Use case diagrams UML ka bunyadi hissa hain jo dikhate hain ke users, jinhein actors kehte hain, nizam ke saath kin tareeqon se taamul karte hain. Yeh user ke nuqta-e-nazar se nizam ki functionality ki tasweer dete hain, aur requirements aur users aur nizam ke taamul pehchanne mein madad dete hain."
+            "text": "Use Case Diagrams Unified Modeling Language (UML) ka bunyadi hissa hain. Yeh dikhate hain ke users, jinhein actors kaha jata hai, system ke saath kin kin tareeqon se kaam (interact) karte hain. Yeh diagrams user ki nazar se system ki functionality (system kya kya kar sakta hai) ki tasveer dete hain, aur requirements aur users aur system ke darmiyan len den pehchanne mein madad karte hain."
           },
           {
-            "type": "callout",
-            "tone": "definition",
-            "title": "Use case",
-            "text": "Use case user (actor) aur nizam ke darmiyan kisi khaas maqsad tak pohanchne ke taamulat ka bayan hai. Har use case user ke nuqta-e-nazar se ek mukammal workflow hai, jo kisi khaas kaam ko poora karne ke qadmon ki tafseel deta hai."
-          },
-          {
-            "type": "list",
-            "ordered": true,
-            "items": [
-              "Functional requirements pakarna: pehchanna aur darj karna ke nizam ko kya karna hai.",
-              "User ke taamul samajhna: mukhtalif users nizam kaise istemal karenge.",
-              "Planning aur testing: development ki planning aur nizam ke kaam jaanchne ke test cases banana."
-            ]
-          },
-          {
-            "type": "list",
-            "ordered": true,
-            "items": [
-              "Actors pehchanein: users ki qismein, log ya doosre nizam, jo nizam se taamul karenge.",
-              "Maqasid tay karein: har actor ko nizam se kya hasil karna hai.",
-              "Taamulat ka khaka: un maqasid tak pohanchne wale taamulat bayan karein; aham nateeja dene wala har taamul mumkina use case hai.",
-              "Use cases ki tasdeeq: stakeholders ke saath jaaiza le kar dekhein ke zaroori kaam aur taamulat shamil hain."
-            ]
+            "type": "heading",
+            "level": 3,
+            "text": "Tareef aur maqsad (Definition and Purpose)"
           },
           {
             "type": "paragraph",
-            "text": "Figure 1.9 mein library system ka use case diagram do actors, librarian aur student, dikhata hai, dono nizam ki had ke andar Borrow book aur Return book use cases se jure hain. Kitab ki online shopping platform wali class activity mein actors customer, administrator aur delivery personnel hain, aur use cases browse products, cart mein items daalna, khareedari karna, product listings sambhalna, orders process karna, customer ke sawalat nimtana aur delivery status update karna hain."
+            "text": "Use case user (actor) aur system ke darmiyan un interactions (len den) ka bayan hai jin se koi khaas maqsad (goal) poora hota hai. Use cases un functionalities ki bunyad par pehchane jate hain jo user ki zarooratein poori karne ke liye system mein honi chahiye. Har use case user ki nazar se ek mukammal workflow (kaam ka silsila) hai, jo kisi khaas kaam ko poora karne ke steps batata hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Use Case Diagrams kai maqasid ke liye istemal hote hain:"
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "Functional requirements pakarna: system ki functional requirements pehchanne aur likhne mein madad dete hain.",
+              "User interactions samajhna: dikhate hain ke mukhtalif users system ke saath kaise kaam karenge.",
+              "Planning aur testing: development ke process ki planning mein aur system ke features check karne ke test cases banane mein madad dete hain."
+            ]
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Use cases kaise pehchanein (Identifying Use Cases)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Use cases pehchanne ke process mein yeh steps hain:"
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "Actors pehchanein: dekhein ke kis kis qism ke users system ke saath kaam karenge. Actors insaan bhi ho sakte hain aur doosre systems bhi.",
+              "Goals tay karein: har actor ke liye maloom karein ke us ka maqsad kya hai, yani woh system se kya kaam karwana chahta hai.",
+              "Interactions likhein: un goals tak pohanchne ke liye actors aur system ke darmiyan len den bayan karein. Har woh interaction jis ka koi aham nateeja nikle, ek mumkina use case hai.",
+              "Use cases ki tasdeeq (Validate): pehchane gaye use cases stakeholders ke saath dekhein ta ke yaqeen ho ke zaroori features aur interactions sahi tarah shamil hain."
+            ]
           },
           {
             "type": "diagram",
@@ -59,28 +71,101 @@
             "caption": "Figure 1.9: Library system ka use case diagram (kitab ki Figure 1.9 ke mutabiq asal khaaka)."
           },
           {
-            "type": "checkpoint",
-            "mode": "self_check",
-            "prompt": "Use case diagrams ka maqsad kya hai (MCQ 10)? Use case diagram ka maqsad samjhaiye (short question 6).",
-            "explanation": "Nizam ki functional requirements pehchanna aur darj karna, option (b). Use case diagram dikhata hai ke nizam kaun istemal karta hai (actors) aur har ek us se kya hasil karta hai (use cases), to yeh zaroori kaam pakarta, development ki planning mein madad deta aur test cases ki bunyad deta hai."
-          },
-          {
-            "type": "checkpoint",
-            "mode": "self_check",
-            "prompt": "Long question 4: online banking system ke use case diagram ke actors aur use cases bataiye.",
-            "explanation": "Actors: customer, bank staff (aur shayad bairooni nizam ke taur par payment network). Customer ke use cases: log in, balance dekhna, statement dekhna, paisa muntaqil karna, bills ada karna. Staff ke use cases: account kholna, customer ki tasdeeq, qarzon ki manzoori, shikayat nimtana. Actors ko nizam ke dabbe ke bahar bana kar har ek ko andar ke use-case ovals se joriye."
+            "type": "callout",
+            "tone": "tip",
+            "title": "Diagram ko samjhein",
+            "text": "Figure 1.9 mein bara dabba system ki hadd (system boundary) hai. Andar ke oval (anday ki shakal) use cases hain: Borrow book aur Return book. Bahar khare stick figures actors hain: Librarian aur Student. Lakeer batati hai ke kaun sa actor kis use case mein hissa leta hai; yahan dono actors dono use cases se jure hain."
           },
           {
             "type": "heading",
-            "level": 2,
-            "text": "Fauri khulasa"
+            "level": 3,
+            "text": "Class Activity"
+          },
+          {
+            "type": "paragraph",
+            "text": "Maqsad (Objective): system ke bare mein diye gaye bayan (statement) se actors aur use cases pehchanna seekhna."
+          },
+          {
+            "type": "paragraph",
+            "text": "Hidayaat (Instructions):"
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "Neeche diya gaya statement ghaur se parhein.",
+              "System mein shamil actors pehchanein.",
+              "Woh use cases pehchanein jo actors aur system ke darmiyan interactions batate hain.",
+              "Apne nataij likhein aur class mein un par baat karne ke liye tayyar rahein."
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Statement: farz karein aap ek online shopping platform design kar rahe hain. Is platform par customers products dekh (browse) sakte hain, items cart mein daal sakte hain aur khareedari kar sakte hain. Is ke ilawa administrators ke liye features hain: product listings sambhalna, orders process karna aur customers ke sawalon (inquiries) ka jawab dena. Delivery personnel (delivery karne wale afraad) ke liye delivery ka status update karne ka feature bhi hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Upar wali class activity mein aap apne nataij in se mila sakte hain:"
+          },
+          {
+            "type": "paragraph",
+            "text": "Actors:"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "Use case diagram: actors aur woh use cases (maqasid) jo woh nizam se hasil karte hain; functional requirements, taamul, planning aur testing.",
-              "Qadam: actors pehchanna, maqasid, taamulat, tasdeeq; Fig. 1.9 library (librarian, student; kitab udhaar, wapas)."
+              "Customer",
+              "Administrator",
+              "Delivery Personnel"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Use Cases:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Browse Products (products dekhna)",
+              "Add Items to Cart (items cart mein daalna)",
+              "Make Purchase (khareedari karna)",
+              "Manage Product Listings (product listings sambhalna)",
+              "Process Orders (orders process karna)",
+              "Handle Customer Inquiries (customers ke sawalon ka jawab)",
+              "Update Delivery Status (delivery ka status update karna)"
+            ]
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Use Case Diagrams ka ek maqsad kya hai? (Exercise MCQ 10) Software development mein Use Case Diagram ka maqsad samjhayein. (Short Question 6)",
+            "explanation": "System ki functional requirements pehchanna aur likhna, option (b). Use case diagram dikhata hai ke system kaun istemal karta hai (actors) aur har actor system se kya karwata hai (use cases). Is se zaroori features pakre jate hain, development ki planning hoti hai aur test cases banane ki bunyad milti hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Online banking system ka Use Case Diagram banayein jo customers, bank staff aur system ke darmiyan interactions dikhaye. (Long Question 4) Is ke actors aur use cases likhein.",
+            "explanation": "Actors (system ki hadd ke bahar): Customer aur Bank Staff. Customer ke use cases: Log in, Check Balance, View Statement, Transfer Money, Pay Bills. Bank Staff ke use cases: Open Account, Verify Customer, Approve Loan, Handle Complaints. Diagram mein ek bara dabba (system boundary) banayein, use cases ko andar oval mein likhein, actors ko bahar stick figure ki shakal mein, aur har actor ko lakeer se apne use cases se jorein.",
+            "answer_figure": {
+              "$asset": "c11-cs-ch1-fig-answer-banking-use-case",
+              "alt": "Use case diagram: bara dabba 'Online Banking System'. Baen taraf actor Customer, lakeeron se Log in, Check Balance, View Statement, Transfer Money, Pay Bills se jura. Daen taraf actor Bank Staff, Open Account, Verify Customer, Approve Loan, Handle Complaints se jura.",
+              "caption": "Jawab ka diagram (pehle khud banayein, phir milayein): online banking system ka use case diagram",
+              "long_description": "Beech mein gol kinaron wala dabba system ki hadd hai, oopar 'Online Banking System' likha hai. Andar baen column mein paanch neele oval: Log in, Check Balance, View Statement, Transfer Money, Pay Bills; daen column mein chaar hare oval: Open Account, Verify Customer, Approve Loan, Handle Complaints. Dabbe ke bahar baen taraf stick figure 'Customer' paanchon neele ovals se lakeeron se jura hai; daen taraf stick figure 'Bank Staff' chaaron hare ovals se jura hai."
+            }
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Mukhtasar khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Use case diagram: actors aur woh use cases jo woh system se karwate hain; functional requirements, interactions, planning aur testing.",
+              "Steps: actors pehchanna, goals, interactions, validate; Fig. 1.9 library (Librarian, Student; Borrow book, Return book)."
             ]
           }
         ]

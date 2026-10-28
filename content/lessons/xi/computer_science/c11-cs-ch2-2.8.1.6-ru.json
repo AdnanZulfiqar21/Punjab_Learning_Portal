@@ -20,16 +20,27 @@
       "body": {
         "blocks": [
           {
-            "type": "callout",
-            "tone": "definition",
-            "title": "Polymorphism",
-            "text": "Polymorphism mukhtalif objects ki woh salahiyat hai ke ek hi method call ka apne tareeqe se jawab dein: ek interface, har object ka khaas rawayya."
+            "type": "paragraph",
+            "text": "Polymorphism (kai shaklein) ka matlab hai ke mukhtalif objects ek hi method ya function call ka jawab apne apne tareeqe se dete hain. Ek hi interface (bulane ka tareeqa) har object ke liye kaam karta hai, magar kaam object ke mutabiq hota hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh tab mufeed hai jab mukhtalif classes ek method ko alag tareeqe se likhein aur hum sab ko ek hi tarah bulana chahein."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "def animal_sound(animal):\n    animal.make_sound( )\ndog = Dog( )\ncat = Cat( )\nanimal_sound(dog)  # Output: Bark!\nanimal_sound(cat)   # Output: Meow!"
           },
           {
             "type": "callout",
-            "tone": "note",
-            "title": "Python code (har .... ek 4-space indent hai)",
-            "text": "def animal_sound(animal):\n....animal.make_sound()\n\nanimal_sound(Dog())    # Bark!\nanimal_sound(Cat())    # Meow!"
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab calls mein anima1_sound (L ki jagah 1) chhapti hai, jabke function ka naam animal_sound hai; NameError aata hai. dog = Dog( ) se neeche ki lines bhi aadhi khiski hui chhapi hain (IndentationError); yeh margin se shuru hoti hain."
+          },
+          {
+            "type": "paragraph",
+            "text": "Wazahat: yeh code 2.8.1.5 wali Animal, Dog aur Cat classes ke saath chalta hai. animal_sound() Dog aur Cat dono ko ek tarah sambhalta hai: animal_sound(dog) \"Bark!\" aur animal_sound(cat) \"Meow ! \" print karta hai."
           },
           {
             "type": "checkpoint",
@@ -40,13 +51,13 @@
           {
             "type": "heading",
             "level": 2,
-            "text": "Fauri khulasa"
+            "text": "Mukhtasar khulasa"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "Polymorphism: ek method ka naam, har class ka alag rawayya; animal_sound(Dog()) bhonkta, animal_sound(Cat()) meow."
+              "Polymorphism: ek call, har object ka apna jawab (Bark!, Meow !)."
             ]
           }
         ]

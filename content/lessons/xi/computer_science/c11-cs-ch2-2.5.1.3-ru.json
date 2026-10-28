@@ -20,16 +20,27 @@
       "body": {
         "blocks": [
           {
-            "type": "callout",
-            "tone": "definition",
-            "title": "Default parameter",
-            "text": "Parameter ki default qeemat ho sakti hai, jo call mein argument na dene par istemal hoti hai."
+            "type": "paragraph",
+            "text": "Function ke parameter ki default (pehle se tay) value ho sakti hai. Call mein argument na diya jaye to yahi value istemal hoti hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Misaal: default parameter wala function."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "def greet(name = \"Student\") :\n    return \"As-Salaam-Alaikum,\"+ name +\"!\"\nprint(greet( ))              # Output: As-Salaam-Alaikum,Student!\nprint(greet(\"Umer\"))              # Output: As-Salaam-Alaikum,Umer!"
           },
           {
             "type": "callout",
-            "tone": "note",
-            "title": "Python code (har .... ek 4-space indent hai)",
-            "text": "def greet(name=\"Student\"):\n....return \"As-Salaam-Alaikum, \" + name + \"!\"\n\nprint(greet())          # As-Salaam-Alaikum, Student!\nprint(greet(\"Umer\"))    # As-Salaam-Alaikum, Umer!"
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab return wali line baen margin par chhapti hai; yeh function ke andar indented honi chahiye, warna IndentationError aata hai. Doosri call mein \"Umer \" (aakhir mein space) chhapa hai, jis se output \"As-Salaam-Alaikum,Umer !\" aata hai; comment wala output pane ke liye \"Umer\" likhein."
+          },
+          {
+            "type": "paragraph",
+            "text": "Wazahat: greet ka parameter name default taur par \"Student\" hai. greet() bina argument ke bulane par \"As-Salaam-Alaikum,Student!\" aata hai; greet(\"Umer\") par \"As-Salaam-Alaikum,Umer!\"."
           },
           {
             "type": "checkpoint",
@@ -40,13 +51,13 @@
           {
             "type": "heading",
             "level": 2,
-            "text": "Fauri khulasa"
+            "text": "Mukhtasar khulasa"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "Default parameters: argument na ho to istemal: greet() par 'Student'."
+              "Default parameter: argument na ho to default value (name = \"Student\")."
             ]
           }
         ]
