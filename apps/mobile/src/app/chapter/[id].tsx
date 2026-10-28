@@ -109,7 +109,7 @@ function TopicRow({ topic, depth = 0, token, starred }: { topic: TopicNode; dept
   const c = useTheme();
   const [open, setOpen] = useState(false);
   // Subtopics are always listed under their topic, as the book's contents show them (owner, 2026-10-28); only bullet
-  // points fold under "Outline". A main topic's number takes the accent, a subtopic's the text colour.
+  // points fold under "Outline". The contents stay plain: every number in the text colour (owner, 2026-10-28).
   const expandable = topic.points.length > 0;
   return (
     <View>
@@ -119,7 +119,7 @@ function TopicRow({ topic, depth = 0, token, starred }: { topic: TopicNode; dept
           accessibilityLabel={topic.number ? `${topic.number} ${topic.title}` : topic.title}
           onPress={() => router.push({ pathname: "/topic/[id]", params: { id: topic.id } })}
           style={({ pressed }) => ({ flex: 1, flexDirection: "row", alignItems: "center", gap: Space.sm, paddingVertical: Space.md, minHeight: 52, opacity: pressed ? 0.7 : 1 })}>
-          <T variant="eyebrow" style={{ width: depth ? 56 : 40, color: depth ? c.text : undefined }}>
+          <T variant="eyebrow" style={{ width: depth ? 56 : 40, color: c.text }}>
             {topic.number ?? ""}
           </T>
           <T style={{ flex: 1, fontWeight: depth ? "400" : "500" }}>{topic.title}</T>

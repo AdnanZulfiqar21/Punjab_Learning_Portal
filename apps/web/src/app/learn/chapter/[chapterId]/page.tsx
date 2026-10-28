@@ -286,7 +286,7 @@ function TopicList({ topics, favourites }: { topics: TopicNode[]; favourites: Se
 
 /** Each topic opens its own lesson page. Subtopics are always listed under their topic, indented, as the book's
  * contents show them (owner, 2026-10-28: "baki ka sb topics ... kaha hain"); only bullet points fold under "Outline".
- * A main topic's number takes the accent, a subtopic's the text colour (BOOK-HEADING-01). */
+ * The contents stay plain: every number in the text colour (owner, 2026-10-28). */
 function TopicItem({ topic, favourites, depth = 0 }: { topic: TopicNode; favourites: Set<string> | null; depth?: number }) {
   const star = favourites && (
     <FavouriteButton topicId={topic.id} label={topic.number ? `${topic.number} ${topic.title}` : topic.title} initial={favourites.has(topic.id)} />
@@ -296,7 +296,9 @@ function TopicItem({ topic, favourites, depth = 0 }: { topic: TopicNode; favouri
       <div className="flex items-center gap-2">
         <Link href={`/learn/topic/${topic.id}`} className="flex min-w-0 flex-1 items-baseline gap-3 py-1.5 hover:text-accent">
           {topic.number && (
-            <span className={`shrink-0 text-sm font-semibold ${depth ? "w-14 text-foreground sm:w-16" : "w-12 text-accent"}`}>{topic.number}</span>
+            <span className={`shrink-0 text-sm font-semibold text-foreground ${depth ? "w-14 sm:w-16" : "w-12"}`}>
+              {topic.number}
+            </span>
           )}
           <span className={depth ? "" : "font-medium"}>{topic.title}</span>
         </Link>
