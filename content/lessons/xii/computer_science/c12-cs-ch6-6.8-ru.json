@@ -14,54 +14,86 @@
           "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
           "pdf_from": 86,
           "pdf_to": 87,
-          "note": "Roman Urdu explanation of validation and model improvement (PDF 86-87)."
+          "note": "Roman Urdu explanation of topic 6.8 (PDF 86-87)."
         }
       ],
       "body": {
         "blocks": [
           {
             "type": "paragraph",
-            "text": "Validation jaanchti hai ke model naye data par kitna achha chalta hai, training aur testing ke baad, taake us ka qabil-e-aitbaar hona tasdeeq ho. Yeh model ko sirf data ratt lene se rokti aur munsifana jaanch mein madad deti hai; validation ka feedback batata hai ke asal istemal se pehle kaun se hisse behtar karne hain."
+            "text": "Validation se jaancha jata hai ke model naye data par kitna achha kaam karta hai. Yeh training aur testing ke baad kiya jata hai taake model ki reliability (qabil-e-bharosa hona) pakki ho. Yeh model ko data ratt lene (memorize karne) se bachati hai aur munsifana jaanch mein madad deti hai. Validation ke results se feedback milta hai jis se model behtar kiya jata hai: kamzor hisse pehchan kar theek kiye jate hain. Asal istemal se pehle validation zaroori hai."
           },
           {
             "type": "callout",
             "tone": "note",
-            "title": "Dilchasp baat",
-            "text": "Validation jaanchti hai ke model naye data par kaise chalta hai aur overfitting rokti hai; phir tuning aur tabdeeliyan model behtar karti hain, aur achhi validation use haqeeqi halaat mein qabil-e-aitbaar banati hai."
+            "title": "Tidbit",
+            "text": "Validation dekhti hai ke model naye data par kaise chalta hai, aur overfitting (training data ratt lena) se bachati hai. Model ko tuning aur chhoti tabdeeliyon se behtar kiya jata hai. Achhi validation se bharosa barhta hai, aur mazboot models asal halaat mein achha kaam karte hain."
           },
           {
-            "type": "list",
-            "ordered": true,
-            "items": [
-              "Validation dataset: training aur test data se alag rakha jata aur karkardagi jaanchne ke liye use hota hai. Yeh saaf aur haqeeqi halaat ka numainda hona chahiye; model is se nahi seekhta. Yeh overfitting pakarne mein madad deta aur jaanch ko zyada qabil-e-bharosa banata hai.",
-              "Robustness aur reliability: robust model mukhtalif halaat mein achha chalta, data ka shor (noise) sambhalta aur chhoti tabdeeliyon se nakam nahi hota; reliable model yaksan nataij deta hai. Mukhtalif halaat mein testing ise jaanchti aur system par bharosa banati hai.",
-              "Hyperparameter tuning: model ki settings (hyperparameters), jo us ke seekhne ko control karti hain, mukhtalif qeematein aazma kar aur validation data par muwazna kar ke badalna. Achhi tuning durusti barhati aur ghaltiyan kam karti; buri tuning model ko kam asar-dar banati hai."
-            ]
+            "type": "heading",
+            "level": 3,
+            "text": "Validation Data Set Preparation (validation data tayyar karna)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Validation dataset training aur testing data se alag hota hai aur model ki performance jaanchne ke liye istemal hota hai. Validation data saaf aur durust hona chahiye taake asal halaat ki numainda (sahi tasveer) ho. Model validation data se seekhta nahi. Validation overfitting pakarne mein madad deti hai aur jaanch behtar banati hai. Balanced data behtar results deta hai. Is qadam se model par bharosa barhta hai."
           },
           {
             "type": "callout",
-            "tone": "note",
-            "title": "Tashbeeh: speaker ki awaz",
-            "text": "Hyperparameter tuning speaker ki awaz set karne jaisi hai. Bohat oonchi ho to awaz bigar jati; bohat dheemi ho to sunai nahi deti; sahi darje par saaf aur mutawazin hoti hai. Isi tarah ghalat set hyperparameters model ko kamzor banate hain, aur sahi qeematein use achha seekhne aur durust andaza lagane deti hain."
+            "tone": "tip",
+            "title": "Asaan alfaaz mein",
+            "text": "Teen hisse yaad rakhein: training data se model seekhta hai; validation data se settings (hyperparameters) chuni jati hain aur overfitting dekhi jati hai; test data bilkul aakhir mein ek dafa asal performance batata hai. Aam taqseem 70% training, 15% validation aur 15% test hai (6.6 ki figure dekhein)."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Model Robustness and Reliability (mazbooti aur bharosa)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Robustness (mazbooti) ka matlab hai model mukhtalif halaat mein achha chale. Reliable (qabil-e-bharosa) model har dafa ek jaise results deta hai. Robust models data ke noise (shor, yani faltu ya ghalat values) ko sambhal lete hain aur chhoti tabdeeliyon se fail nahi hote. Asal duniya mein istemal ke liye reliability zaroori hai. Mukhtalif halaat mein testing se robustness jaanchi jati hai. Mazboot models apni accuracy barqarar rakhte hain, reliability systems par bharosa banati hai, aur robust models zyada kaam ke hote hain."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Improving Models Using Hyperparameter Tuning (settings theek karna)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Hyperparameter tuning ka matlab hai model ki settings badalna. Yeh settings (hyperparameters) control karti hain ke model kaise seekhe. Tuning accuracy barhati hai aur andazon ki ghaltiyan kam karti hai. Parameters ko mukhtalif values ke saath aazmaya jata hai, aur validation data batata hai ke kaun si value behtar hai. Theek tuning se performance barhti hai; buri tuning se model kam asar-dar hota hai."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Simple Analogy: Adjusting the Volume of a Speaker (speaker ki awaz ki misal)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Hyperparameter tuning speaker ki awaz (volume) theek karne jaisi hai. Awaz bohat oonchi ho to bigar jati hai aur saaf nahi rehti. Bohat dheemi ho to theek se sunai nahi deti. Lekin jab volume sahi darje par ho to awaz saaf aur mutawazin hoti hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Isi tarah machine learning mein agar hyperparameters theek set na hon to model kharab chal sakta hai. Sahi hyperparameter values se model behtar seekhta hai aur zyada durust results deta hai."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
-            "prompt": "Validation data training data se mukhtalif kyun hona chahiye?",
-            "explanation": "Agar model ko us data par jaancha jaye jis se woh pehle seekh chuka hai to woh sirf ratt kar achha score kar sakta hai; alag validation data dikhata hai ke woh naye cases kaise sambhalta aur settings tune karte waqt overfitting zahir karta hai."
+            "prompt": "Validation data training data se alag kyun hona chahiye?",
+            "explanation": "Agar model ko usi data par jaancha jaye jis se woh seekh chuka hai to woh sirf ratt kar achha score kar sakta hai. Alag validation data dikhata hai ke model naye cases kaise sambhalta hai, aur settings tune karte waqt overfitting pakarta hai."
           },
           {
             "type": "heading",
             "level": 2,
-            "text": "Fauri khulasa"
+            "text": "Mukhtasar khulasa"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "Validation: naye data par alag jaanch jo overfitting se bachati.",
-              "Robust aur reliable models mukhtalif halaat mein durust rehte.",
-              "Hyperparameter tuning seekhne ki settings badalti, validation data ki rehnumai mein."
+              "Validation: naye data par alag jaanch; overfitting pakarti hai.",
+              "Validation data saaf, durust aur training/testing se alag; model is se seekhta nahi.",
+              "Robust aur reliable models mukhtalif halaat mein ek jaise achhe results dete hain.",
+              "Hyperparameter tuning: speaker ki awaz ki tarah settings sahi darje par lana, validation data ki madad se."
             ]
           }
         ]

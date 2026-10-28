@@ -14,20 +14,20 @@
           "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
           "pdf_from": 81,
           "pdf_to": 85,
-          "note": "Roman Urdu explanation of building a machine learning model (PDF 81-85)."
+          "note": "Roman Urdu explanation of topic 6.6 (PDF 81-85) with the working program."
         }
       ],
       "body": {
         "blocks": [
           {
             "type": "paragraph",
-            "text": "Machine learning model banana wazeh qadmon par chalta hai (Fig 6.6). Talaba ke grades ke andaze ko lein. Pehle talaba ka data jama hota hai, jaise hazri, quiz number, assignment score, parhai ke ghante aur pichhle imtihani nataij. Data saaf aur tayyar kiya jata hai. Input qeematein, jinhein features kehte hain, is liye chuni jati hain ke yeh model ko samjhati hain ke karkardagi par kya asar dalta hai. Phir model tayyar data par train hota hai; train hone ke baad woh naye data se talib-e-ilm ke mumkina grade ka andaza laga sakta hai, jo asatiza ko imtihan se pehle izafi madad ke mohtaj talaba pehchanne mein madad deta hai."
+            "text": "Machine learning model banana kuch wazeh qadmon (steps) mein hota hai (Figure 6.6). Ek saada misal talaba ke grade ka andaza (prediction) hai. Is misal mein pehle talaba ka data jama kiya jata hai, jaise hazri, quiz ke marks, assignment ke scores, parhai ke ghante aur pichhle imtihanon ke results. Phir data ko saaf aur tayyar kiya jata hai taake seekhne ke kaam aa sake. Aham values, jinhein features kehte hain, chuni jati hain, kyunke yeh model ko samjhati hain ke talib-e-ilm ki performance par kin cheezon ka asar hai. Is ke baad model ko tayyar data par train kiya jata hai. Train hone ke baad model naye input data se talib-e-ilm ke mumkina grade ka andaza laga sakta hai. Is se asatiza (teachers) aakhri imtihan se pehle un talaba ko pehchan lete hain jinhein izafi madad chahiye."
           },
           {
             "type": "callout",
             "tone": "note",
-            "title": "Dilchasp baat",
-            "text": "Model banane ka matlab data aur features ehtiyat se chunna hai: training data model ko naqsh sikhata, testing data karkardagi jaanchta, aur achhe features ka intikhab nataij behtar karta hai, is liye achha bana model qabil-e-aitbaar andaze deta hai."
+            "title": "Tidbit",
+            "text": "Model banate waqt data aur features ehtiyat se chune jate hain. Training data model ko patterns sikhata hai, testing data us ki performance jaanchta hai, aur achhe features chunne se results behtar hote hain. Achha bana model qabil-e-bharosa andaze deta hai."
           },
           {
             "type": "diagram",
@@ -38,35 +38,40 @@
           },
           {
             "type": "heading",
-            "level": 2,
-            "text": "Misal: Python mein linear regression"
+            "level": 3,
+            "text": "Example (misal):"
           },
           {
             "type": "paragraph",
-            "text": "Imtihani score aksar parhai ke ghanton se mutasir hote hain. Neeche ka program saada linear regression model banata hai jo parhai ke ghanton se imtihani score ka andaza lagata hai. Data training aur testing sets mein bata jata, model training data par train hota, aur us ki karkardagi mean squared error (MSE) se napi jati hai. Aakhir mein data ke nuqte aur fit ki hui line plot hoti hai (Fig 6.7)."
+            "text": "Talaba ke imtihani scores aksar is baat se mutasir hote hain ke woh kitne ghante parhte hain. Neeche wale program ka maqsad ek saada linear regression model banana hai (seedhi line wala model) jo parhai ke ghanton se imtihani score ka andaza lagaye. Dataset mein parhai ke ghante aur un ke mutabiq scores hain. Data training aur testing sets mein baanta jata hai, model training data par train hota hai, aur us ki performance Mean Squared Error (MSE) se jaanchi jati hai. Aakhir mein asal data points aur model ki predicted line ka graph banaya jata hai taake parhai ke ghanton aur scores ka rishta nazar aaye."
           },
           {
-            "type": "callout",
-            "tone": "note",
-            "title": "Misal: parhai ke ghanton se imtihani score ka andaza (Python code; har .... ek 4-space indent hai)",
-            "text": "import numpy as np\nimport matplotlib.pyplot as plt\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LinearRegression\nfrom sklearn.metrics import mean_squared_error\n\n# Hours studied (X) and exam scores (y)\nX = np.array([[1], [2], [3], [4], [5], [6], [7], [8], [9], [10]])\ny = np.array([1, 2, 2, 3, 3, 4, 5, 5, 6, 7])\n\n# Step 1: split into training and testing sets\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)\n\n# Step 2: create and train the model\nmodel = LinearRegression()\nmodel.fit(X_train, y_train)\n\n# Step 3: make predictions; Step 4: evaluate\ny_pred = model.predict(X_test)\nmse = mean_squared_error(y_test, y_pred)\nprint(f\"Mean Squared Error: {mse:.4f}\")\nprint(f\"Model equation: Exam Score = {model.coef_[0]:.4f} x Hours Studied + {model.intercept_:.4f}\")   # kitab mein yeh line nahi\n\n# Step 5: plot the data and the fitted line\nplt.scatter(X, y, color='blue')\nplt.plot(X, model.predict(X), color='red')\nplt.xlabel('Hours Studied')\nplt.ylabel('Exam Scores')\nplt.title('Linear Regression: Hours vs. Scores')\nplt.show()"
-          },
-          {
-            "type": "callout",
-            "tone": "correction",
-            "title": "Kitab ki ghalti",
-            "text": "Kitab ke output mein do lines hain: \"Mean Squared Error: 0.1484\" aur \"Model equation: Exam Score = 0.6552 x Hours Studied + 0.1466\". Lekin kitab ke code mein sirf MSE print karne wali line hai; equation print karne wali line ghayab hai, is liye woh code doosri line kabhi nahi dikhata. Sahi code mein upar wali print line honi chahiye (model.coef_ dhalaan (slope) aur model.intercept_ intercept deta hai). Isi tarah {mse} poora lamba number chhapta hai, is liye 0.1484 dikhane ke liye {mse:.4f} likha gaya hai. Jaanch: random_state=42 ke saath test nuqte 9 ghante (score 6) aur 2 ghante (score 2) hain; baqi aath nuqton se slope 0.6552, intercept 0.1466 aur test MSE 0.1484 aate hain, yani kitab ke number durust hain."
+            "type": "code",
+            "language": "python",
+            "text": "# Import necessary libraries\nimport numpy as np\nimport matplotlib.pyplot as plt\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.linear_model import LinearRegression\nfrom sklearn.metrics import mean_squared_error\n\n# Example data (Hours studied vs. Exam scores)\nX = np.array([[1], [2], [3], [4], [5], [6], [7], [8], [9], [10]])  # Hours studied\n\ny = np.array([1, 2, 2, 3, 3, 4, 5, 5, 6, 7])  # Exam scores\n\n# Step 1: Split the data into training and testing sets\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)\n\n# Step 2: Create and train the model\nmodel = LinearRegression()\nmodel.fit(X_train, y_train)\n\n# Step 3: Make predictions\ny_pred = model.predict(X_test)\n\n# Step 4: Evaluate the model\nmse = mean_squared_error(y_test, y_pred)\nprint(f\"Mean Squared Error: {mse:.4f}\")\nprint(f\"Model equation: Exam Score = {model.coef_[0]:.4f} × Hours Studied + {model.intercept_:.4f}\")\n\n# Step 5: Plotting the results\nplt.scatter(X, y, color='blue')  # Actual data points\nplt.plot(X, model.predict(X), color='red')  # Predicted line\nplt.xlabel('Hours Studied')\nplt.ylabel('Exam Scores')\nplt.title('Linear Regression: Hours vs. Scores')\nplt.show()",
+            "caption": "Sahi chalne wala program (kitab wale program mein do tabdeeliyan: {mse:.4f} aur model equation wali print line)"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "Data ki tayyari: X mein parhai ke ghante aur y mein mutabiq imtihani score.",
-              "Model training: linear regression model X_train aur y_train (10 mein se 8 nuqte) par train hota hai.",
-              "Testing: model 2 test nuqton ka andaza lagata hai, aur MSE (andaze aur asal score ke farq ke murabbon ka average) ghalti napta hai; kam MSE behtar hai.",
-              "Output: Mean Squared Error: 0.1484, aur fit ki hui line Exam Score = 0.6552 x Hours + 0.1466.",
-              "Behtari: zyada ya behtar data aam taur par model ko zyada durust banata hai."
+              "Data Preparation (data ki tayyari): X values parhai ke ghante hain aur y values un ke mutabiq imtihani scores (Figure 6.7).",
+              "Model Training: linear regression model banaya jata hai aur training data (X_train, y_train) par train kiya jata hai, yani 10 mein se 8 points par.",
+              "Testing: model ko test data (X_test, baqi 2 points) par aazmaya jata hai aur mean squared error (MSE) nikala jata hai: har andaze aur asal score ke farq ka murabba (square) le kar un ka average. MSE jitna kam ho, model utna behtar, kyunke andaze asal values ke zyada qareeb hain.",
+              "Improvement (behtari): jitna zyada ya behtar data milta hai, model ki accuracy utni barhti hai."
             ]
+          },
+          {
+            "type": "code",
+            "language": "text",
+            "text": "Mean Squared Error: 0.1484\nModel equation: Exam Score = 0.6552 × Hours Studied + 0.1466",
+            "caption": "Output (sahi program ka)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab ka program woh output nahi deta jo kitab ne chhapa hai. Kitab wala program chalayen to sirf ek line aati hai: Mean Squared Error: 0.14840963139120109 (poora lamba number), aur model equation wali line aati hi nahi, kyunke program mein use print karne wali line hai hi nahi. Upar wale sahi program mein {mse:.4f} (chaar decimal tak) aur model equation print karne wali line daali gayi hai; model.coef_[0] slope (dhalaan) aur model.intercept_ intercept deta hai. Kitab ke output ke numbers khud sahi hain: random_state=42 se test points 9 ghante (score 6) aur 2 ghante (score 2) bante hain, aur baqi 8 points se slope 0.6552, intercept 0.1466 aur MSE 0.1484 aate hain."
           },
           {
             "type": "diagram",
@@ -77,30 +82,30 @@
           },
           {
             "type": "heading",
-            "level": 2,
-            "text": "Features aur target qeematein"
+            "level": 3,
+            "text": "Selecting Features and Target Values (features aur target chunna)"
           },
           {
             "type": "paragraph",
-            "text": "Features woh input qeematein hain jo model use karta hai; target qeematein woh outputs hain jin ka andaza lagana hai. Sahi features chunna seekhna behtar karta hai, jab ke ghair zaroori features durusti kam kar sakte hain, is liye features mutalliq aur target wazeh hona chahiye. Number ke andaze mein parhai ke ghante feature aur number target hain."
+            "text": "Features woh input values hain jo model istemal karta hai. Target values woh outputs hain jin ka andaza lagana hai. Sahi features chunne se seekhna behtar hota hai, aur ghair zaroori features accuracy kam kar sakte hain. Features masle se juray hue (relevant) hone chahiyen, aur target values saaf tay honi chahiyen. Misal: talaba ke marks ka andaza lagate waqt parhai ke ghante feature hain aur marks target value."
           },
           {
             "type": "heading",
-            "level": 2,
-            "text": "Feature engineering ki bunyadein"
+            "level": 3,
+            "text": "Feature Engineering Basics (feature engineering ki bunyad)"
           },
           {
             "type": "paragraph",
-            "text": "Feature engineering features chun kar, badal kar aur nayi bana kar data ko behtar seekhne ke qabil banati hai. Kacha data aksar tayyar nahi hota: use safai aur scaling chahiye hoti hai. Achhe features ahem maloomat numayan karte aur behtar andaze dete hain, aur is qadam ke liye data ki achhi samajh chahiye. Maslan number ke andaze mein parhai ke ghanton ka record saaf aur scale kiya ja sakta hai, aur 'rozana parhai ke ghante' jaisi nayi feature banai ja sakti hai."
+            "text": "Feature engineering ka matlab hai data ko behtar seekhne ke qabil banana. Is mein features chunna, badalna aur naye features banana shamil hai. Raw data aksar model ke liye tayyar nahi hota; use cleaning (safai) aur scaling (values ko ek jaise paimane par lana) chahiye hoti hai. Feature engineering model ki performance barhati hai aur aham maloomat ko numayan karti hai. Achhe features behtar andaze dete hain. Is qadam ke liye data ki samajh zaroori hai, aur yeh model ko mazboot banata hai. Misal: marks ke andaze mein parhai ke ghanton ka raw data saaf karna, use scale karna, aur \"study hours per day\" (rozana parhai ke ghante) jaisa naya feature banana, taake model behtar andaze lagaye."
           },
           {
             "type": "heading",
-            "level": 2,
-            "text": "Train-test split aur saada predictive model"
+            "level": 3,
+            "text": "Train-Test Split Of Data (data ko do hisson mein baantna)"
           },
           {
             "type": "paragraph",
-            "text": "Data training set, jo model ko sikhata hai, aur na-dekhe data ke testing set, jo asal karkardagi jaanchta hai, mein bata jata hai. Na-dekhe data par testing overfitting zahir karti hai, jab model training data ratt leta magar naye data par kharab karta hai. Aam taqseem 80 feesad training aur 20 feesad testing hai. Saada predictive model training data se seekhne aur naye case ka andaza lagane ke liye bunyadi algorithm use karta hai; aise models samajhne mein asan hote hain, aur un ke test nataij behtari ki rehnumai karte hain."
+            "text": "Data ko training aur testing sets mein baanta jata hai. Training data model ko patterns sikhata hai. Testing data model ki performance jaanchta hai, kyunke yeh unseen (model ka na dekha hua) data hai; is ke results asal performance dikhate hain. Kitab kehti hai ke yeh split overfitting se bachata hai. Overfitting ka matlab hai model ne training data ratt liya, magar naye data par kharab chalta hai; split is ko pakarne mein madad deta hai. Aam taur par 80 feesad training aur 20 feesad testing rakhi jati hai."
           },
           {
             "type": "diagram",
@@ -110,23 +115,33 @@
             "long_description": "Regression misal 10 nuqton ki 80/20 taqseem use karti hai: 8 training aur 2 testing ke liye."
           },
           {
+            "type": "heading",
+            "level": 3,
+            "text": "Building a Simple Predictive Model (saada predictive model banana)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Saada predictive model (andaza lagane wala model) training data se seekhne ke liye bunyadi algorithms istemal karta hai. Yeh data parakh kar patterns samajhta hai aur phir naye, unseen data ke liye andaze lagata hai. Aise models samajhne mein asaan aur khaas taur par naye seekhne walon (beginners) ke liye mufeed hain. Test data se in ki performance napi jati hai, aur results batate hain ke kya behtar karna hai."
+          },
+          {
             "type": "checkpoint",
             "mode": "self_check",
-            "prompt": "Model training data par 99% aur test data par sirf 60% score karta hai. Masla kya hai, aur use kam karne ka aik tareeqa batayein.",
-            "explanation": "Overfitting: model ne aam naqsh seekhne ke bajaye training data ratt liya hai. Kam karne ke tareeqe: zyada training data, ghair zaroori features hatana, saada model chunna, ya validation data se tune karna."
+            "prompt": "Ek model training data par 99% aur test data par sirf 60% score karta hai. Masla kya hai, aur use kam karne ka ek tareeqa batayein.",
+            "explanation": "Overfitting: model ne aam patterns seekhne ki bajaye training data ratt liya hai. Kam karne ke tareeqe: zyada training data, ghair zaroori features hatana, saada model chunna, ya validation data se tuning."
           },
           {
             "type": "heading",
             "level": 2,
-            "text": "Fauri khulasa"
+            "text": "Mukhtasar khulasa"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "Qadam: jama, safai, features, taqseem, train, test, andaza.",
-              "Features inputs, target output; feature engineering safai, scaling aur nayi features.",
-              "Train-test split (aksar 80/20) asal karkardagi aur overfitting dikhata; regression misal: MSE 0.1484."
+              "Qadam: data jama, safai, features chunna, train, test, phir naye data par andaza.",
+              "Features input hain, target output; feature engineering: safai, scaling, naye features.",
+              "Train-test split (aam taur par 80/20) asal performance dikhata hai.",
+              "Regression misal: test MSE 0.1484, line: score = 0.6552 × ghante + 0.1466; kitab ke program mein equation print karne wali line nahi."
             ]
           }
         ]
