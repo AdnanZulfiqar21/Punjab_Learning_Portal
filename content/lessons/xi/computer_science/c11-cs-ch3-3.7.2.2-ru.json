@@ -21,7 +21,7 @@
         "blocks": [
           {
             "type": "paragraph",
-            "text": "Binary Search sorted (tarteeb wali) list mein item dhoondne ka efficient algorithm hai. Yeh talash ke daire (search interval) ko baar baar aadha karta hai aur woh aadha chhor deta hai jahan item ho hi nahi sakta, jab tak item mil na jaye ya daira khali na ho jaye."
+            "text": "Binary Search sorted (tarteeb wali) list mein item dhoondne ka efficient algorithm hai. Yeh search interval (jis hisse mein dhoondna hai) ko baar baar aadha karta hai aur woh aadha chhor deta hai jahan item ho hi nahi sakta, jab tak item mil na jaye ya interval khali na ho jaye."
           },
           {
             "type": "paragraph",
@@ -31,9 +31,9 @@
             "type": "list",
             "ordered": false,
             "items": [
-              "Sorted list ke darmiyani (middle) element se shuru karein.",
-              "Agar darmiyani element hi target (matlooba item) hai to us ki position (jagah) lauta dein.",
-              "Agar target darmiyani element se chhota hai to baen (left) aadhe mein talash dohrayein.",
+              "Sorted list ke middle (beech wale) element se shuru karein.",
+              "Agar beech ka element hi target (jo item dhoondna hai) hai to us ki position (jagah) lauta dein.",
+              "Agar target beech wale element se chhota hai to baen (left) aadhe mein talash dohrayein.",
               "Agar target bara hai to daen (right) aadhe mein talash dohrayein."
             ]
           },
@@ -45,24 +45,24 @@
             "type": "list",
             "ordered": false,
             "items": [
-              "Binary Search darmiyani element (7) se shuru karegi aur target foran mil jayega."
+              "Binary Search beech ka element (7) se shuru karegi aur target foran mil jayega."
             ]
           },
           {
             "type": "callout",
             "tone": "correction",
             "title": "Kitab ki ghalti",
-            "text": "Kitab ne woh number likha hi nahi jo dhoonda ja raha hai (“searching for the number” par jumla adhoora hai). Kyun ke target darmiyani element (7) par foran mil jata hai, is liye dhoonda jane wala number 7 hai."
+            "text": "Kitab ne woh number likha hi nahi jo dhoonda ja raha hai (“searching for the number” par jumla adhoora hai). Kyun ke target beech ka element (7) par foran mil jata hai, is liye dhoonda jane wala number 7 hai."
           },
           {
             "type": "paragraph",
-            "text": "Complexity: Binary Search ki time complexity O(log n) hai, is liye yeh linear search se kahin tez hai, khaas taur par bare datasets mein. Figure 3.7 Binary Search ka amal dikhati hai: har qadam par talash ka daira aadha hota hai, jis se talash zyada efficient ho jati hai."
+            "text": "Complexity: Binary Search ki time complexity O(log n) hai, is liye yeh linear search se kahin tez hai, khaas taur par bare datasets mein. Figure 3.7 Binary Search ka process dikhati hai: har qadam par search interval aadha hota hai, jis se talash zyada efficient ho jati hai."
           },
           {
             "type": "diagram",
             "$asset": "c11-cs-ch3-fig-3-7-binary-search",
             "alt": "BINARY SEARCH: tarteeb wali list 21, 34, 43, 57, 66, 78 paanch dafa, qadmon ke notes ke saath. 78 dhoondo, beech se baanto aur mid (43) jaancho; 78 > 43, daen aadhe mein dekho; naya mid = 66; 78 > 66, daen aadhe mein dekho; naya mid = 78, cheez mid par mil gayi (gol nishan).",
-            "caption": "Figure 3.7: Binary search ka amal (kitab ki Figure 3.7 ke mutabiq asal khaaka)."
+            "caption": "Figure 3.7: Binary search ka process (kitab ki Figure 3.7 ke mutabiq asal khaaka)."
           },
           {
             "type": "callout",
@@ -79,8 +79,8 @@
           {
             "type": "checkpoint",
             "mode": "self_check",
-            "prompt": "Search problems ki khasusiyat bataiye aur Linear Search aur Binary Search ki efficiency ka muwazna kijiye (long question 3).",
-            "explanation": "Search problem ek majmooa (list) aur matlooba item deta hai aur poochta hai ke item hai ya nahi, aur kahan; jawab position ya 'nahi mila' hota hai. Linear Search items ek ek kar ke dekhti hai, har list par chalti hai aur worst case mein O(n) leti hai. Binary Search ko sorted list chahiye, har qadam par daira aadha karti hai aur O(log n) leti hai. 10 lakh sorted items mein Linear Search ko 10 lakh jaanchein lag sakti hain, Binary Search ko taqreeban 20. Chhoti ya be-tarteeb lists ke liye Linear Search saada hai; bari sorted lists ke liye Binary Search kahin behtar."
+            "prompt": "Search problems ki characteristics (khoobiyan) bataiye aur Linear Search aur Binary Search ki efficiency ko compare kijiye (long question 3).",
+            "explanation": "Search problem ek collection (list) aur dhoondne wala item deta hai aur poochta hai ke item hai ya nahi, aur kahan; jawab position ya 'nahi mila' hota hai. Linear Search items ek ek kar ke dekhti hai, har list par chalti hai aur worst case mein O(n) leti hai. Binary Search ko sorted list chahiye, har qadam par interval aadha karti hai aur O(log n) leti hai. 10 lakh sorted items mein Linear Search ko 10 lakh jaanchein lag sakti hain, Binary Search ko taqreeban 20. Chhoti ya be-tarteeb lists ke liye Linear Search saada hai; bari sorted lists ke liye Binary Search kahin behtar."
           },
           {
             "type": "heading",
@@ -91,7 +91,7 @@
             "type": "list",
             "ordered": false,
             "items": [
-              "Binary Search: har qadam par sorted daira aadha; 21 ... 78 mein 78 teen qadmon mein; O(log n).",
+              "Binary Search: har qadam par sorted interval aadha; 21 ... 78 mein 78 teen qadmon mein; O(log n).",
               "Sirf sorted list par chalti hai."
             ]
           }

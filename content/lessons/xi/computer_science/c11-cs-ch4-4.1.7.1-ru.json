@@ -21,15 +21,15 @@
         "blocks": [
           {
             "type": "paragraph",
-            "text": "Tree mein kuch buniyadi operations hain jo data sambhalne aur us par kaam karne mein madad dete hain:"
+            "text": "Tree mein kuch basic (bunyadi) operations hain jo data sambhalne aur us par kaam karne mein madad dete hain:"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "Insertion (dalna): sochiye aap family tree mein naya fard jor rahe hain. Tree mein sahi jagah dhoond kar naya member wahan jorte hain, yaani naye shakhs ko us ke walid (parent) se jor dete hain taake woh khandan ka hissa ban jaye.",
-              "Deletion (nikalna): kabhi kisi member ko tree se hatana parta hai. Use ehtiyat se nikala jata hai taake baqi tree jura rahe aur sahi rahe.",
-              "Traversal (har node dekhna): yeh family tree mein har fard ke paas ja kar milne jaisa hai. Is ke kai tareeqe hain, jaise oopar se shuru kar ke ek ek fard dekhna, ya agli shaakh par jane se pehle kisi shakhs ke saare bachche dekhna. Teen aam traversals hain: In-order, Pre-order aur Post-order. Inhein samajhne ke liye neeche numbers wala saada tree istemal hoga."
+              "Insertion (dalna): sochiye aap family tree mein naya member jor rahe hain. Tree mein sahi jagah dhoond kar naya member wahan jorte hain, yaani naye shakhs ko us ke parent (maa ya baap) se jor dete hain taake woh khandan ka hissa ban jaye.",
+              "Deletion (nikalna): kabhi kisi member ko tree se hatana parta hai. Use dhyan se nikala jata hai taake baqi tree jura rahe aur sahi rahe.",
+              "Traversal (har node dekhna): yeh family tree mein har member ke paas ja kar milne jaisa hai. Is ke kai tareeqe hain, jaise oopar se shuru kar ke ek ek member dekhna, ya agli shaakh par jane se pehle kisi shakhs ke saare bachche dekhna. Teen aam traversals hain: In-order, Pre-order aur Post-order. Inhein samajhne ke liye neeche numbers wala saada tree istemal hoga."
             ]
           },
           {
@@ -42,13 +42,13 @@
             "type": "diagram",
             "$asset": "c11-cs-ch4-fig-4-8-numeric-tree",
             "alt": "Teeron wala binary tree: oopar 1; us ka baen bachcha 2 aur daen bachcha 3; 2 ke neeche 4 aur 5; 3 ke neeche 6 aur 7.",
-            "caption": "Figure 4.8: Adadi data wala tree (kitab ki Figure 4.8 ke mutabiq asal khaaka; traversals ke mutabiq 2 baen taraf)."
+            "caption": "Figure 4.8: Numeric data (numbers) wala tree (kitab ki Figure 4.8 ke mutabiq asal khaaka; traversals ke mutabiq 2 baen taraf)."
           },
           {
             "type": "callout",
             "tone": "tip",
             "title": "Diagram ko samjhein",
-            "text": "Kitab ki Figure 4.8 ulti (mirror) chhapi hai: us mein 3 baen taraf (neeche 7, 6) aur 2 daen taraf (neeche 5, 4) hai. Magar kitab ke apne jawab, maslan in-order 4, 2, 5, 1, 6, 3, 7, tabhi sahi hain jab 2 baen aur 3 daen ho. Is liye yahan durust tree banaya gaya hai. In-order: pehle baen shaakh (4, 2, 5), phir jarr 1, phir daen shaakh (6, 3, 7)."
+            "text": "Kitab ki Figure 4.8 ulti (mirror) chhapi hai: us mein 3 baen taraf (neeche 7, 6) aur 2 daen taraf (neeche 5, 4) hai. Magar kitab ke apne jawab, maslan in-order 4, 2, 5, 1, 6, 3, 7, tabhi sahi hain jab 2 baen aur 3 daen ho. Is liye yahan durust tree banaya gaya hai. In-order: pehle baen shaakh (4, 2, 5), phir root 1, phir daen shaakh (6, 3, 7)."
           },
           {
             "type": "paragraph",
@@ -146,14 +146,14 @@
           },
           {
             "type": "paragraph",
-            "text": "Searching (dhoondna): yeh family tree mein kisi khaas fard ko dhoondne jaisa hai. Hum tree mein ek ek shakhs check karte hain jab tak matlooba shakhs na mil jaye. Is se tree mein maloomat jaldi mil jati hai."
+            "text": "Searching (dhoondna): yeh family tree mein kisi khaas member ko dhoondne jaisa hai. Hum tree mein ek ek shakhs check karte hain jab tak woh shakhs na mil jaye jise dhoond rahe hain. Is se tree mein information jaldi mil jati hai."
           },
           {
             "type": "table",
             "caption": "Teeno traversals ek nazar mein",
             "header": [
               "Traversal",
-              "Qaida",
+              "Rule (qaida)",
               "Output"
             ],
             "rows": [
@@ -184,7 +184,7 @@
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "In-order, pre-order aur post-order traversals ko misal ke saath samjhaiye (long question 6).",
-            "explanation": "Har ek tareeqa har subtree par dobara (recursively) lagta hai. In-order: pehle baen subtree, phir node, phir daen subtree; upar wale tree par 4, 2, 5, 1, 6, 3, 7. Pre-order: node pehle, phir dono subtrees; 1, 2, 4, 5, 3, 6, 7; oopar se neeche copy ya backup ke liye mufeed. Post-order: dono subtrees pehle, node aakhir mein; 4, 5, 2, 6, 7, 3, 1; folder mitane se pehle us ka andar ka saman mitane ke liye mufeed."
+            "explanation": "Har ek tareeqa har subtree par dobara (recursively) lagta hai. In-order: pehle baen subtree, phir node, phir daen subtree; upar wale tree par 4, 2, 5, 1, 6, 3, 7. Pre-order: node pehle, phir dono subtrees; 1, 2, 4, 5, 3, 6, 7; oopar se neeche copy ya backup ke liye useful (faidemand). Post-order: dono subtrees pehle, node aakhir mein; 4, 5, 2, 6, 7, 3, 1; folder mitane se pehle us ka andar ka saman mitane ke liye useful."
           },
           {
             "type": "heading",

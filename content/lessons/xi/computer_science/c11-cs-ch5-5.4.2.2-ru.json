@@ -21,11 +21,11 @@
         "blocks": [
           {
             "type": "paragraph",
-            "text": "Logistic regression ek taqatwar tool hai jo tab istemal hota hai jab nateeja “haan” ya “nahi” (yes ya no) ki shakal mein ho."
+            "text": "Logistic regression ek powerful (taqatwar) tool hai jo tab istemal hota hai jab nateeja sirf “haan” ya “nahi” (yes ya no) ho sakta ho."
           },
           {
             "type": "paragraph",
-            "text": "Misal: Hum jaanna chahte hain ke student parhai ke ghanton ki bunyad par exam mein pass hoga ya fail. Theek score batane ki bajaye logistic regression pass hone ki probability (imkan) batata hai."
+            "text": "Misal: Hum jaanna chahte hain ke student parhai ke ghanton ki bunyad par exam mein pass hoga ya fail. Koi exact score batane ki bajaye logistic regression pass hone ki probability (chance, imkan) batata hai."
           },
           {
             "type": "heading",
@@ -34,16 +34,16 @@
           },
           {
             "type": "paragraph",
-            "text": "Logistic regression linear regression se mukhtalif hai kyun ke yeh theek number nahi batata. Is ki bajaye yeh 0 aur 1 ke darmiyan probability deta hai, yani batata hai ke koi cheez hone ka kitna imkan hai."
+            "text": "Logistic regression linear regression se alag hai kyun ke yeh exact (bilkul theek) number nahi batata. Is ki bajaye yeh 0 aur 1 ke beech probability deta hai, yani batata hai ke koi cheez hone ka kitna chance hai."
           },
           {
             "type": "paragraph",
-            "text": "Misal: Agar model pass hone ki probability 0.85 bataye to matlab hai ke parhai ke ghanton ke hisab se student ke pass hone ka 85% imkan hai."
+            "text": "Misal: Agar model pass hone ki probability 0.85 bataye to matlab hai ke parhai ke ghanton ke hisab se student ke pass hone ka 85% chance hai."
           },
           {
             "type": "heading",
             "level": 3,
-            "text": "Qadam ba qadam misal"
+            "text": "Step by step misal"
           },
           {
             "type": "paragraph",
@@ -110,7 +110,7 @@
             "type": "callout",
             "tone": "correction",
             "title": "Kitab ki ghalti",
-            "text": "Kitab ki pehli equation ke neeche (denominator) mein e aur minus ka nishan chhoot gaya hai; wahan sirf “1 + (β₀ + β₁ × Hours Studied)” chhapa hai. Sahi logistic function upar likha hai. Kitab ki formula tasveeron mein “+” ki jagah “|” jaisa nishan bhi chhapa hai."
+            "text": "Kitab ki pehli equation ke neeche wale hisse (denominator) mein e aur minus ka nishan chhoot gaya hai; wahan sirf “1 + (β₀ + β₁ × Hours Studied)” chhapa hai. Sahi logistic function upar likha hai. Kitab ki formula wali images mein “+” ki jagah “|” jaisa nishan bhi chhapa hai."
           },
           {
             "type": "paragraph",
@@ -122,15 +122,15 @@
             "items": [
               "P(Pass) exam pass karne ki probability hai.",
               "e natural logarithm ki base hai (taqreeban 2.718).",
-              "β₀ model ka intercept hai: jab student bilkul na parhe (0 ghante) to pass hone ke log-odds.",
-              "β₁ parhai ke ghanton ka coefficient hai: har izafi ghante par pass hone ke log-odds kitne badalte hain."
+              "β₀ model ka intercept hai: jab student bilkul na parhe (0 ghante) to pass hone ke log-odds (odds ka log, neeche box dekhein).",
+              "β₁ parhai ke ghanton ka coefficient (ghanton ke saath lagne wala number) hai: har ek extra ghante par pass hone ke log-odds kitne badalte hain."
             ]
           },
           {
             "type": "callout",
             "tone": "tip",
             "title": "Asaan alfaaz mein",
-            "text": "Odds = pass hone ka imkan ÷ fail hone ka imkan, aur log-odds us ka natural log hai. Logistic function kisi bhi number ko 0 aur 1 ke darmiyan probability mein badal deta hai: β₀ + β₁ × ghante jitna bara (positive) ho, probability utni 1 ke qareeb; jitna chhota (negative) ho, utni 0 ke qareeb."
+            "text": "Odds = pass hone ka imkan ÷ fail hone ka imkan, aur log-odds us ka natural log hai. Logistic function kisi bhi number ko 0 aur 1 ke beech probability mein badal deta hai: β₀ + β₁ × ghante jitna bara (positive) ho, probability utni 1 ke qareeb; jitna chhota (negative) ho, utni 0 ke qareeb."
           },
           {
             "type": "heading",
@@ -148,7 +148,7 @@
           },
           {
             "type": "paragraph",
-            "text": "Yani β₀ = 1 aur β₁ = 0.6. Har ghanta parhne se pass hone ka imkan barhta hai. Agar student 5 ghante parhe to:"
+            "text": "Yani β₀ = 1 aur β₁ = 0.6. Har extra ghanta parhne se pass hone ka chance barhta hai. Agar student 5 ghante parhe to:"
           },
           {
             "type": "equation",
@@ -157,7 +157,7 @@
           },
           {
             "type": "paragraph",
-            "text": "Yani 5 ghante parhne wale student ke pass hone ka taqreeban 98% imkan hai."
+            "text": "Yani 5 ghante parhne wale student ke pass hone ka taqreeban 98% chance hai."
           },
           {
             "type": "callout",
@@ -172,7 +172,7 @@
           },
           {
             "type": "paragraph",
-            "text": "Model ban gaya to is se andaza laga sakte hain. Farz karein naya student 4 ghante parhta hai:"
+            "text": "Model ban gaya to is se prediction (andaza) laga sakte hain. Farz karein naya student 4 ghante parhta hai:"
           },
           {
             "type": "equation",
@@ -181,7 +181,7 @@
           },
           {
             "type": "paragraph",
-            "text": "Yani pass hone ka taqreeban 97% imkan."
+            "text": "Yani pass hone ka taqreeban 97% chance."
           },
           {
             "type": "callout",
@@ -192,20 +192,20 @@
           {
             "type": "diagram",
             "$asset": "c11-cs-ch5-fig-logistic-curve",
-            "alt": "Graph: ufuqi mehwar par parhai ke ghante (0 se 7), amudi par pass ka imkan (0 se 1). 1, 2, 3 ghante wale surkh nuqte 0 (fail) par aur 4, 5, 6 ghante wale hare nuqte 1 (pass) par. Jamni curve kitab ke b0 = 1, b1 = 0.6 se bana hai: 0 ghante par taqreeban 0.73 se shuru ho kar 1 ki taraf barhta hai.",
-            "caption": "Pass ya fail ka data aur kitab ke b0 = 1, b1 = 0.6 wala logistic curve (asal khaaka; kitab mein figure nahi)."
+            "alt": "Graph: x-axis par parhai ke ghante (0 se 7), y-axis par pass ki probability (0 se 1). 1, 2, 3 ghante wale laal points 0 (fail) par aur 4, 5, 6 ghante wale hare points 1 (pass) par. Purple curve kitab ke b0 = 1, b1 = 0.6 se bana hai: 0 ghante par taqreeban 0.73 se shuru ho kar 1 ki taraf barhta hai.",
+            "caption": "Pass ya fail ka data aur kitab ke b0 = 1, b1 = 0.6 wala logistic curve (hamara apna diagram; kitab mein figure nahi)."
           },
           {
             "type": "callout",
             "tone": "tip",
             "title": "Diagram ko samjhein",
-            "text": "Graph dekhein: kitab ke β₀ = 1 aur β₁ = 0.6 wala curve 0 ghante par bhi taqreeban 0.73 hai, yani 1, 2 aur 3 ghante parhne walon ko bhi pass ka bara imkan deta hai, halanke woh fail hue. Is liye yeh farz kiye gaye coefficients is data par poore nahi utarte; data par theek baitha curve 3 aur 4 ghante ke darmiyan 0 se 1 ki taraf tezi se uthega."
+            "text": "Graph dekhein: kitab ke β₀ = 1 aur β₁ = 0.6 wala curve 0 ghante par bhi taqreeban 0.73 hai, yani 1, 2 aur 3 ghante parhne walon ko bhi pass ka bara chance deta hai, halanke woh fail hue. Is liye yeh maan liye gaye (assumed) coefficients is data par theek fit nahi hote; data par sahi fit hone wala curve 3 aur 4 ghante ke beech 0 se 1 ki taraf tezi se uthega."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
-            "prompt": "Logistic regression linear regression se kaise mukhtalif hai?",
-            "explanation": "Linear regression seedhi line se koi number (jaise kamai) batata hai; logistic regression S-shakal curve se haan/nahi wale nateeje ki probability (0 se 1 tak) batata hai."
+            "prompt": "Logistic regression linear regression se kaise alag hai?",
+            "explanation": "Linear regression seedhi line se koi number (jaise kamai) batata hai; logistic regression S-shape (S jaisa) curve se haan/nahi wale nateeje ki probability (0 se 1 tak) batata hai."
           },
           {
             "type": "heading",
@@ -216,7 +216,7 @@
             "type": "list",
             "ordered": false,
             "items": [
-              "Logistic regression: P(pass) = 1 / (1 + e^−(β₀ + β₁ × ghante)), 0 aur 1 ke darmiyan probability.",
+              "Logistic regression: P(pass) = 1 / (1 + e^−(β₀ + β₁ × ghante)), 0 aur 1 ke beech probability.",
               "β₀ = 1, β₁ = 0.6 se: 5 ghante ≈ 0.98, 4 ghante ≈ 0.97 (kitab: 0.83 aur 0.73)."
             ]
           }
