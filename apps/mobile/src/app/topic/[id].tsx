@@ -237,6 +237,7 @@ function Reader({
             blocks={lesson.body.blocks as { type: string }[]}
             onBlockLayout={onBlockLayout}
             premium={premiumBook(subjectKey(reading.subject_name), reading.grade_number)}
+            runnable={lesson.language === "roman_ur"}
           />
         </View>
       )}
@@ -261,6 +262,7 @@ function LessonBody({
   blocks,
   onBlockLayout,
   premium,
+  runnable,
 }: {
   chapterId: string;
   topicId: string;
@@ -270,6 +272,7 @@ function LessonBody({
   blocks: { type: string }[];
   onBlockLayout: (index: number, y: number) => void;
   premium: boolean;
+  runnable: boolean;
 }) {
   const { dataSaver } = useDisplay().display;
   useEffect(() => {
@@ -291,6 +294,7 @@ function LessonBody({
         equationAction={token && study && !privatePreview ? (index) => <SaveFormula token={token} lessonId={lessonId} index={index} /> : undefined}
         onBlockLayout={onBlockLayout}
         premium={premium}
+        runnable={runnable}
       />
       {token && !privatePreview ? (
         <View style={{ gap: Space.sm }}>
