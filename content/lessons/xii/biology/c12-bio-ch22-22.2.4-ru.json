@@ -14,14 +14,14 @@
           "source_document_id": "779562c7-0658-5de6-b1a6-2ee025d3b016",
           "pdf_from": 194,
           "pdf_to": 195,
-          "note": "Roman Urdu explanation of the standard deviation (PDF 194-195)."
+          "note": "Roman Urdu explanation of topic 22.2.4 (PDF 194-195) with the book's calculation table."
         }
       ],
       "body": {
         "blocks": [
           {
             "type": "paragraph",
-            "text": "Standard deviation naapti hai ke data mean ke gird kitna bikhra hai. Kam standard deviation ka matlab data mean ke gird ghana hai; zyada ka matlab phaila hai; sifar ke qareeb qeemat ka matlab nuqte mean ke bohat qareeb hain. Hayatiyat mein yeh paudon ki barhne ki raftaar ya enzymes ki miqdar jaise naap ka farq jaanchne ke liye use hoti hai."
+            "text": "Standard deviation (SD) yeh naapti hai ke data mean (ausat) ke ird gird kitna bikhra (dispersed) hua hai. Kam (chhoti) standard deviation ka matlab hai ke qeematein mean ke qareeb ghani jama hain; zyada (bari) standard deviation ka matlab hai ke qeematein door door tak phaili hain. Agar standard deviation sifar (zero) ke qareeb ho to tamam qeematein mean ke bohat qareeb hain; bari standard deviation ka matlab hai ke qeematein mean se door tak phaili hain."
           },
           {
             "type": "diagram",
@@ -32,96 +32,188 @@
           {
             "type": "callout",
             "tone": "tip",
-            "title": "Diagram ko samjhein",
-            "text": "Dono curves mein sigma ka teer dekhein: (a) mein mean se aik SD ka faasla bara hai, is liye data door tak phaila hai; (b) mein yeh faasla chhota hai, is liye qeematein mean ke qareeb jama hain aur curve ooncha aur tang hai."
+            "text": "Dono curves mein σ (sigma) ka teer dekhein: (a) mein mean se aik SD ka faasla bara hai, is liye data door tak phaila hai aur curve chaura aur neecha hai; (b) mein yeh faasla chhota hai, is liye qeematein mean ke qareeb jama hain aur curve tang aur ooncha hai.",
+            "title": "Diagram ko samjhein"
           },
           {
             "type": "paragraph",
-            "text": "Formula: standard deviation (sigma) = [(xi - mu) ke murabbon ka jama / N] ka jazr, jahan xi har data nuqta, mu mean aur N data nuqton ki tadaad hai. Qadam: mean nikalein; har qeemat se use tafreeq karein; har inhiraaf ka murabba lein; murabbon ki ausat lein (yeh variance hai); jazr lein."
-          },
-          {
-            "type": "table",
-            "caption": "Nau paudon ki unchai ki standard deviation (kitab ki misaal)",
-            "header": [
-              "Unchai xi (cm)",
-              "xi - mean",
-              "(xi - mean) ka murabba"
-            ],
-            "rows": [
-              [
-                "56",
-                "-19",
-                "361"
-              ],
-              [
-                "65",
-                "-10",
-                "100"
-              ],
-              [
-                "74",
-                "-1",
-                "1"
-              ],
-              [
-                "75",
-                "0",
-                "0"
-              ],
-              [
-                "76",
-                "1",
-                "1"
-              ],
-              [
-                "77",
-                "2",
-                "4"
-              ],
-              [
-                "80",
-                "5",
-                "25"
-              ],
-              [
-                "81",
-                "6",
-                "36"
-              ],
-              [
-                "91",
-                "16",
-                "256"
-              ],
-              [
-                "jama 675; mean 75",
-                "",
-                "jama 784"
-              ]
-            ]
-          },
-          {
-            "type": "paragraph",
-            "text": "Variance = 784 / 9 = 87.11, aur standard deviation = 87.11 ka jazr = 9.33 cm."
-          },
-          {
-            "type": "checkpoint",
-            "mode": "self_check",
-            "prompt": "Paudon ke do set ki ausat unchai aik hai. Set X ki SD 2 cm aur set Y ki 9 cm hai. Kaun sa set zyada yaksan hai?",
-            "explanation": "Set X: kam standard deviation ka matlab us ki unchaiyan mean ke zyada qareeb hain."
+            "text": "Biology mein standard deviation aam taur par naap (measurements) ka farq (variability) jaanchne ke liye istemal hoti hai, jaise paudon ki growth rate, kisi sample mein enzymes ki miqdar (concentration), ya koi bhi doosra biological data."
           },
           {
             "type": "heading",
-            "level": 2,
-            "text": "Fauri khulasa"
+            "level": 3,
+            "text": "Formula"
+          },
+          {
+            "type": "equation",
+            "latex": "\\sigma = \\sqrt{\\frac{\\sum (x_i - \\mu)^2}{N}}",
+            "text_alt": "σ = √[Σ(xᵢ − µ)² / N]"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yahan:"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "SD = mean se inhiraaf ke murabbon ki ausat ka jazr.",
+              "σ (sigma) = standard deviation",
+              "xᵢ = data ki har alag qeemat",
+              "µ (mu) = mean",
+              "N = data ki kul qeematon ki tadaad."
+            ]
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Standard deviation nikalne ke qadam (misaal)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Aik biologist ne aik hi species ke 9 paudon ki unchai naapi: 56, 65, 74, 75, 76, 77, 80, 81 aur 91 cm."
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Qadam 1: mean nikalein: (56 + 65 + 74 + 75 + 76 + 77 + 80 + 81 + 91)/9 = 675/9 = 75 cm.",
+              "Qadam 2: har qeemat se mean manfi (subtract) karein; is se har qeemat ka deviation (farq) milta hai.",
+              "Qadam 3: har deviation ka murabba (square) lein; is se minus nishan khatam ho jate hain aur bare farq zyada numayan ho jate hain.",
+              "Qadam 4: in murabbon ki average lein; isi ko variance kehte hain.",
+              "Qadam 5: qadam 4 ke jawab ka square root (jazr) lein; yahi standard deviation hai."
+            ]
+          },
+          {
+            "type": "table",
+            "caption": "Paudon ki unchai ki standard deviation ka hisaab (kitab ka table)",
+            "header": [
+              "Unchai (cm) xᵢ",
+              "Mean µ",
+              "Har qeemat se mean manfi (xᵢ - µ)",
+              "Deviation ka murabba (xᵢ - µ)²",
+              "Murabbon ka jama ∑(xᵢ - µ)²",
+              "Variance (murabbon ki average) ∑(xᵢ - µ)²/N",
+              "Standard deviation σ = √(∑(xᵢ - µ)²/N)"
+            ],
+            "rows": [
+              [
+                "56",
+                "75",
+                "56 – 75 = -19",
+                "361",
+                "784",
+                "87.11",
+                "9.33"
+              ],
+              [
+                "65",
+                "",
+                "65 – 75 = -10",
+                "100",
+                "",
+                "",
+                ""
+              ],
+              [
+                "74",
+                "",
+                "74 – 75 = -1",
+                "1",
+                "",
+                "",
+                ""
+              ],
+              [
+                "75",
+                "",
+                "75 – 75 = 0",
+                "0",
+                "",
+                "",
+                ""
+              ],
+              [
+                "76",
+                "",
+                "76 – 75 = 1",
+                "1",
+                "",
+                "",
+                ""
+              ],
+              [
+                "77",
+                "",
+                "77 – 75 = 2",
+                "4",
+                "",
+                "",
+                ""
+              ],
+              [
+                "80",
+                "",
+                "80 – 75 = 5",
+                "25",
+                "",
+                "",
+                ""
+              ],
+              [
+                "81",
+                "",
+                "81 – 75 = 6",
+                "36",
+                "",
+                "",
+                ""
+              ],
+              [
+                "91",
+                "",
+                "91 – 75 = 16",
+                "256",
+                "",
+                "",
+                ""
+              ]
+            ],
+            "merged_columns": [
+              1,
+              4,
+              5,
+              6
+            ]
+          },
+          {
+            "type": "equation",
+            "latex": "\\sigma = \\sqrt{\\frac{784}{9}} = \\sqrt{87.11} = 9.33\\ \\text{cm}",
+            "text_alt": "σ = √(784/9) = √87.11 = 9.33 cm"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "text": "Murabbon ka jama 784 hai; 9 qeematon par taqseem karne se variance 87.11 aata hai, aur us ka square root 9.33 cm hai. Yani in paudon ki unchai aam taur par ausat (75 cm) se taqreeban 9 cm upar ya neeche hai.",
+            "title": "Asaan alfaaz mein"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Paudon ke do set ki ausat unchai barabar hai. Set X ki SD 2 cm aur set Y ki SD 9 cm hai. Kis set ke paude unchai mein zyada aik jaise (yaksaan) hain?",
+            "explanation": "Set X ke, kyunke kam standard deviation ka matlab hai ke us ki unchaiyan mean ke zyada qareeb hain."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Mukhtasar khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "SD = √[Σ(xᵢ − µ)² / N]: mean se farq ka murabba, un ki average (variance), phir square root.",
               "Paudon ki misaal: mean 75 cm, variance 87.11, SD 9.33 cm.",
-              "Kam SD: ghana data; zyada SD: phaila data."
+              "Kam SD: data ghana (mean ke qareeb); zyada SD: data phaila hua."
             ]
           }
         ]

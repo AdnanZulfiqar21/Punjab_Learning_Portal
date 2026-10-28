@@ -14,44 +14,89 @@
           "source_document_id": "779562c7-0658-5de6-b1a6-2ee025d3b016",
           "pdf_from": 196,
           "pdf_to": 197,
-          "note": "Roman Urdu explanation of percentiles (PDF 196-197)."
+          "note": "Roman Urdu explanation of topic 22.2.6 (PDF 196-197) with the worked example."
         }
       ],
       "body": {
         "blocks": [
           {
             "type": "paragraph",
-            "text": "Percentile woh qeemat hai jis se neeche mushahidat ka diya gaya feesad aata hai. 25th percentile pehla quartile (Q1), 50th percentile median, aur 75th percentile teesra quartile (Q3) hai. Percentiles hayati data ki taqseem samajhne mein madad dete hain, chahe tirchhi (skewed) ho ya normal."
-          },
-          {
-            "type": "paragraph",
-            "text": "Pth percentile ka rank R = (P / 100) x (n + 1) hai, jahan n mushahidat ki tadaad hai. Agar R poora adad ho to percentile tarteeb wale data mein usi jagah ki qeemat hai; warna do qareebi ranks ke darmiyan interpolation karein. R = 4.4 ke liye: qeemat = chauthi qeemat + 0.4 x (paanchwi qeemat - chauthi qeemat)."
+            "text": "Percentile woh qeemat hai jis se neeche data ki diye gaye feesad (percentage) qeematein aati hain. Maslan 25th percentile, jise first quartile (Q1, pehla chautha hissa) bhi kehte hain, woh qeemat hai jis se neeche 25% data hai. Isi tarah 50th percentile, yani median, woh qeemat hai jis se neeche 50% data hai, aur 75th percentile, yani third quartile (Q3), woh qeemat hai jis se neeche 75% data hai. Biostatistics mein percentiles khaas taur par faidamand hain kyunke in se biological data ki taqseem samajh aati hai, chahe data aik taraf jhuka hua (skewed) ho ya normal (ghanti numa) ho."
           },
           {
             "type": "heading",
-            "level": 2,
-            "text": "Hal shuda misaal"
+            "level": 3,
+            "text": "Formula"
+          },
+          {
+            "type": "equation",
+            "latex": "R = \\frac{P}{100}\\,(n + 1)",
+            "text_alt": "R = P/100 (n + 1)"
           },
           {
             "type": "paragraph",
-            "text": "10 logon ki unchaiyan (cm): 160, 162, 168, 165, 170, 175, 172, 178, 180, 182. 40th percentile ke liye: tarteeb, 160, 162, 165, 168, 170, 172, 175, 178, 180, 182; n = 10; R = 40 / 100 x (10 + 1) = 4.4, chauthi (168) aur paanchwi (170) qeemat ke darmiyan. Percentile = 168 + 0.4 x (170 - 168) = 168 + 0.8 = 168.8 cm, yaani 40% mushahidat 168.8 cm ya us se kam hain."
-          },
-          {
-            "type": "checkpoint",
-            "mode": "self_check",
-            "prompt": "Kaun sa percentile median hai, aur Q1 aur Q3 kya hain?",
-            "explanation": "Median 50th percentile hai; Q1 25th aur Q3 75th percentile hai."
-          },
-          {
-            "type": "heading",
-            "level": 2,
-            "text": "Fauri khulasa"
+            "text": "Yahan:"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "R = (P / 100) x (n + 1); R poora na ho to interpolation.",
+              "R = rank (tarteeb wale data mein jagah ka number)",
+              "P = jo percentile chahiye (maslan 40)",
+              "n = data mein qeematon ki tadaad"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "text": "Kitab mein formula 'R = R = P/100 (n + 1)' chhapa hai; 'R =' do baar ghalti se aa gaya hai. Formula sirf R = (P/100)(n + 1) hai.",
+            "title": "Kitab ki likhai"
+          },
+          {
+            "type": "paragraph",
+            "text": "Agar R poora adad (integer) ho to tarteeb wale data mein Rth jagah wali qeemat hi percentile hai. Agar R poora adad na ho (maslan 4.4), to do qareebi jaghon ke darmiyan interpolation (beech ki qeemat ka andaza) se percentile nikalte hain. Maslan agar R chauthi aur paanchwi qeemat ke darmiyan ho to:"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{Value at } 4^{\\text{th}} + 0.4 \\times (\\text{value at } 5^{\\text{th}} - \\text{value at } 4^{\\text{th}})",
+            "text_alt": "Value at 4th + 0.4 × (value at 5th − value at 4th)"
+          },
+          {
+            "type": "example",
+            "title": "Percentile nikalne ke qadam (misaal)",
+            "problem": "10 logon ki unchaiyan (cm): 160, 162, 168, 165, 170, 175, 172, 178, 180, 182. 40th percentile nikalein.",
+            "steps": [
+              "Qadam 1: barhti tarteeb: 160, 162, 165, 168, 170, 172, 175, 178, 180, 182.",
+              "Qadam 2: kul qeematein: n = 10.",
+              "Qadam 3: rank: R = 40/100 × (10 + 1) = 0.4 × 11 = 4.4.",
+              "Qadam 4: R = 4.4 poora adad nahi, is liye 40th percentile chauthi (168) aur paanchwi (170) qeemat ke darmiyan hai. Interpolation: 168 + 0.4 × (170 − 168) = 168 + 0.4 × 2 = 168 + 0.8 = 168.8.",
+              "Qadam 5: nateeja samjhein."
+            ],
+            "answer": "40th percentile 168.8 cm hai, yani 40% logon ki unchai 168.8 cm ya us se kam hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "text": "4.4 ka matlab hai: chauthi jagah se 0.4 hissa aage. Chauthi aur paanchwi qeemat mein 2 cm ka farq hai; us ka 0.4 hissa 0.8 cm hai, jo 168 mein jama hota hai.",
+            "title": "Asaan alfaaz mein"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Kaun sa percentile median hai, aur Q1 aur Q3 kaun se percentiles hain?",
+            "explanation": "Median 50th percentile hai; Q1 25th percentile aur Q3 75th percentile hai."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Mukhtasar khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Percentile: woh qeemat jis se neeche diya gaya feesad data ho.",
+              "R = (P/100)(n + 1); R poora na ho to do qareebi qeematon ke darmiyan interpolation.",
               "Misaal: unchaiyon ka 40th percentile = 168.8 cm.",
               "Q1 = 25th, median = 50th, Q3 = 75th percentile."
             ]

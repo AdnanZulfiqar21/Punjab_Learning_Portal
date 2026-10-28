@@ -13,27 +13,67 @@
           "source_document_id": "779562c7-0658-5de6-b1a6-2ee025d3b016",
           "pdf_from": 196,
           "pdf_to": 197,
-          "note": "Topic 22.2.6 with the worked example (PDF 196-197)."
+          "note": "Topic 22.2.6 as printed (PDF 196-197): the rank formula (printed 'R = R =') and the interpolation as equation blocks, and the worked example of the 40th percentile."
         }
       ],
       "body": {
         "blocks": [
           {
             "type": "paragraph",
-            "text": "A percentile is the value below which a given percentage of observations falls. The 25th percentile is the first quartile (Q1), the 50th percentile is the median, and the 75th percentile is the third quartile (Q3). Percentiles help in understanding the distribution of biological data, whether skewed or normally distributed."
-          },
-          {
-            "type": "paragraph",
-            "text": "The rank of the Pth percentile is R = (P / 100) x (n + 1), where n is the number of observations. If R is a whole number, the percentile is the value at that position in the ordered data; if not, interpolate between the two nearest ranks. For R = 4.4: value = value at 4th + 0.4 x (value at 5th - value at 4th)."
+            "text": "A percentile is a measure that indicates the value in a dataset below which a given percentage of observations in a group of data falls. For instance, the 25th percentile, also known as the first quartile (Q1), is the value below which 25% of the data points lie. Similarly, the 50th percentile, or the median, is the value below which 50% of the data points lie, and the 75th percentile, or the third quartile (Q3), is the value below which 75% of the data points lie. Percentiles are particularly useful in biostatistics as they help in understanding the distribution of biological data which is skewed or normally distributed."
           },
           {
             "type": "heading",
-            "level": 2,
-            "text": "Worked example"
+            "level": 3,
+            "text": "Formula"
+          },
+          {
+            "type": "equation",
+            "latex": "R = R = \\frac{P}{100}\\,(n + 1)",
+            "text_alt": "R = R = P/100 (n + 1)"
           },
           {
             "type": "paragraph",
-            "text": "Heights (cm) of 10 people: 160, 162, 168, 165, 170, 175, 172, 178, 180, 182. To find the 40th percentile: ordered, 160, 162, 165, 168, 170, 172, 175, 178, 180, 182; n = 10; R = 40 / 100 x (10 + 1) = 4.4, between the 4th (168) and 5th (170) values. Percentile = 168 + 0.4 x (170 - 168) = 168 + 0.8 = 168.8 cm, so 40% of the observations are at or below 168.8 cm."
+            "text": "Where"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "R = rank",
+              "P = desired percentile",
+              "n = number of observations in the data set"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "If R is an integer, the value at the Rth position in the ordered dataset is the percentile. If R is not an integer (e.g., 4.4), interpolation between the two nearest ranks is used to estimate the percentile value. For example, if it lies between 4th and 5th data points, percentile value="
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{Value at } 4^{\\text{th}} + 0.4 \\times (\\text{value at } 5^{\\text{th}} - \\text{value at } 4^{\\text{th}})",
+            "text_alt": "Value at 4th + 0.4 × (value at 5th − value at 4th)"
+          },
+          {
+            "type": "example",
+            "title": "Steps to calculate percentile with example",
+            "problem": "Suppose we have the following dataset representing the heights (cm) of 10 individuals: 160, 162, 168, 165, 170, 175, 172, 178, 180, 182. To calculate the 40th percentile:",
+            "steps": [
+              "Step 1: Arrange the data in ascending order.",
+              "160, 162, 165, 168, 170, 172, 175, 178, 180, 182.",
+              "Step 2: Determine the total number of observations.",
+              "n = 10",
+              "Step 3: Calculate the rank.",
+              "R = P/100 X (n+1)",
+              "R = 40/100 X (10+1) = 4.4",
+              "Step 4: Locate the rank in the dataset and interpolate if necessary.",
+              "The rank is 4.4, which is not an integer. This means that the 40th percentile lies between 4th (168) and 5th (170) data points.",
+              "Interpolate between the 4th and 5th values:",
+              "Percentile value = value at 4th + 0.4 X (value at 5th - value at 4th)",
+              "Percentile value = 168 + 0.4 X (170-168) = 168 + 0.4 X 2 = 168 + 0.8 = 168.8",
+              "Step 5: Interpret the result."
+            ],
+            "answer": "The 40th percentile value is 168.8. This means that 40% of the observations fall below or equal to 168.8 in this data set."
           }
         ]
       }
