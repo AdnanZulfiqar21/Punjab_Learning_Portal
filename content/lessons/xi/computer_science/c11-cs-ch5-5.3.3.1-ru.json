@@ -14,54 +14,101 @@
           "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
           "pdf_from": 133,
           "pdf_to": 134,
-          "note": "Roman Urdu explanation of data cleaning (PDF 133-134)."
+          "note": "Roman Urdu explanation of Topic 5.3.3.1 (PDF 133-134, printed 130-131)."
         }
       ],
       "body": {
         "blocks": [
           {
-            "type": "callout",
-            "tone": "definition",
-            "title": "Data cleaning",
-            "text": "Data cleaning ka matlab data ke masail theek karna ya hatana hai, jaise ghalat andraj, ghayab qeematein ya dohrai; warna analysis ke nataij gumrah kun honge."
+            "type": "paragraph",
+            "text": "Data cleaning ka matlab hai data ke masail theek karna ya hatana. Yeh masail ghalat entries, ghayab qeematein ya dohraya hua (duplicate) data ho sakte hain. Agar yeh ghaltiyan theek na hon to analysis ke nataij gumrah kun honge."
+          },
+          {
+            "type": "paragraph",
+            "text": "Misal: Ek school students ke grades ka data jama karta hai. Kuch students ne apna naam ghalat likh diya, ya kuch grades record mein nahi hain. Yahan data cleaning ka matlab hai ghalat naam theek karna aur ghayab grades dhoond kar dataset mukammal karna. Neeche Table 5.2 (kitab ki ibarat ise “Figure 5.2” kehti hai) yeh amal dikhata hai: ghalat naam, ghayab grade aur duplicate entries jaise aam masail."
           },
           {
             "type": "table",
-            "caption": "Students ke grades ke record ki safai",
+            "caption": "Table 5.2: Grades ke record ki safai. Asal data (ghaltiyon ke saath)",
             "header": [
-              "Pehle",
-              "Masla",
-              "Baad"
+              "Naam (Name)",
+              "Grade",
+              "Class",
+              "Section"
             ],
             "rows": [
               [
-                "Alie, 90, class 10, section A",
-                "ghalat naam",
-                "Ali, 90, class 10, section A"
+                "Ali",
+                "85",
+                "10",
+                "A"
               ],
               [
-                "Sara, (khali), class 10, section A",
-                "ghayab grade",
-                "Sara, 75, class 10, section A"
+                "Alie",
+                "90",
+                "10",
+                "A"
+              ],
+              [
+                "Sara",
+                "",
+                "10",
+                "A"
               ]
             ]
+          },
+          {
+            "type": "table",
+            "caption": "Table 5.2 (jari): Saaf kiya hua data",
+            "header": [
+              "Naam (Name)",
+              "Grade",
+              "Class",
+              "Section"
+            ],
+            "rows": [
+              [
+                "Ali",
+                "85",
+                "10",
+                "A"
+              ],
+              [
+                "Ali",
+                "90",
+                "10",
+                "A"
+              ],
+              [
+                "Sara",
+                "75",
+                "10",
+                "A"
+              ]
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Asaan alfaaz mein",
+            "text": "Pehle table mein “Alie” naam ki spelling ghalat hai aur Sara ka grade khali hai. Saaf table mein naam “Ali” kar diya gaya aur Sara ka grade 75 bhar diya gaya. Kitab yeh nahi batati ke 75 kahan se aaya; asal kaam mein ghayab grade record se dhoond kar likha jata hai (ya topic “Handling Missing Data” ke tareeqe istemal hote hain)."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "Teen masail bataiye jo data cleaning theek karti hai.",
-            "explanation": "Ghalat andraj (ghalat naam), ghayab qeematein (khali grade) aur dohraye records."
+            "explanation": "Ghalat entries (maslan ghalat naam “Alie”), ghayab qeematein (Sara ka khali grade) aur dohraye hue records."
           },
           {
             "type": "heading",
             "level": 2,
-            "text": "Fauri khulasa"
+            "text": "Mukhtasar khulasa"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "Safai: ghalat andraj theek, ghayab qeematein bharna ya sambhalna, dohrai hatana (Alie se Ali, Sara ka grade)."
+              "Data cleaning: ghalat entry theek, ghayab qeemat bharna, duplicate hatana (Alie se Ali, Sara ka grade)."
             ]
           }
         ]

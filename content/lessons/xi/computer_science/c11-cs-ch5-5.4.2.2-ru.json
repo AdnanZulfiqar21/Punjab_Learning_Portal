@@ -14,23 +14,47 @@
           "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
           "pdf_from": 139,
           "pdf_to": 140,
-          "note": "Roman Urdu explanation of logistic regression (PDF 139-140)."
+          "note": "Roman Urdu explanation of Topic 5.4.2.2 (PDF 139-140, printed 136-137)."
         }
       ],
       "body": {
         "blocks": [
           {
-            "type": "callout",
-            "tone": "definition",
-            "title": "Logistic regression",
-            "text": "Logistic regression haan ya nahi wale nateeje ki pesh-goi karta hai. Theek adad ki bajaye 0 aur 1 ke darmiyan imkan deta hai: P = 1 / (1 + e^-(b0 + b1 x)), jahan e natural logarithm ki bunyad, b0 intercept (x = 0 par log-odds) aur b1 x ki har ikai par log-odds ki tabdeeli hai."
+            "type": "paragraph",
+            "text": "Logistic regression ek taqatwar tool hai jo tab istemal hota hai jab nateeja “haan” ya “nahi” (yes ya no) ki shakal mein ho."
+          },
+          {
+            "type": "paragraph",
+            "text": "Misal: Hum jaanna chahte hain ke student parhai ke ghanton ki bunyad par exam mein pass hoga ya fail. Theek score batane ki bajaye logistic regression pass hone ki probability (imkan) batata hai."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Logistic regression ko samajhna"
+          },
+          {
+            "type": "paragraph",
+            "text": "Logistic regression linear regression se mukhtalif hai kyun ke yeh theek number nahi batata. Is ki bajaye yeh 0 aur 1 ke darmiyan probability deta hai, yani batata hai ke koi cheez hone ka kitna imkan hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Misal: Agar model pass hone ki probability 0.85 bataye to matlab hai ke parhai ke ghanton ke hisab se student ke pass hone ka 85% imkan hai."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Qadam ba qadam misal"
+          },
+          {
+            "type": "paragraph",
+            "text": "Ek misal dekhte hain. Farz karein students aur un ke parhai ke ghanton ka yeh data hai:"
           },
           {
             "type": "table",
-            "caption": "Parhai ke ghante aur exam nataij",
+            "caption": "Table 5.1: Parhai ke ghante aur exam ka nateeja",
             "header": [
               "Parhai ke ghante",
-              "Pass (1) ya fail (0)"
+              "Pass (1) / Fail (0)"
             ],
             "rows": [
               [
@@ -60,14 +84,110 @@
             ]
           },
           {
+            "type": "heading",
+            "level": 3,
+            "text": "Model banana"
+          },
+          {
             "type": "paragraph",
-            "text": "0.85 ka andaza pass hone ka 85% imkan hai. Kitab b0 = 1 aur b1 = 0.6 farz karti hai. In qeematon se 5 ghante par P = 1 / (1 + e^-4), taqreeban 0.98, aur 4 ghante par 1 / (1 + e^-3.4), taqreeban 0.97. Yeh farz shuda coefficients data par bhi poore nahi utarte, kyunke 1 ghanta parh kar fail hone wale ke liye bhi pass ka andaza dete hain. Is data par baitha model manfi intercept rakhega, to us ka imkan 3 aur 4 ghante ke darmiyan 0.5 paar karega."
+            "text": "Logistic regression model banane ke liye pehle data samajhna zaroori hai. Yahan independent variable parhai ke ghante (Hours Studied) hain, aur dependent variable yeh hai ke student pass hua ya fail."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Logistic function banana"
+          },
+          {
+            "type": "paragraph",
+            "text": "Logistic regression model is tarah ki equation deta hai:"
+          },
+          {
+            "type": "equation",
+            "latex": "P(pass) = \\frac{1}{1 + e^{-(\\beta_0 + \\beta_1 \\times \\text{Hours Studied})}}",
+            "text_alt": "P(pass) = 1 / (1 + e^−(β₀ + β₁ × Hours Studied))"
           },
           {
             "type": "callout",
             "tone": "correction",
             "title": "Kitab ki ghalti",
-            "text": "Kitab 5 ghante ke liye P(Pass) taqreeban 0.83 (83% imkan) aur 4 ghante ke liye 73% imkan chhapti hai. b0 = 1 aur b1 = 0.6 se 5 ghante par b0 + b1 x = 1 + 3 = 4, to P = 1 / (1 + e^-4), taqreeban 0.98 (98%); 4 ghante par 1 + 2.4 = 3.4, to P taqreeban 0.97 (97%). Kitab ke 0.83 aur 0.73 asal mein 1 ghante (1.6) aur 0 ghante (1) ki qeematein hain."
+            "text": "Kitab ki pehli equation ke neeche (denominator) mein e aur minus ka nishan chhoot gaya hai; wahan sirf “1 + (β₀ + β₁ × Hours Studied)” chhapa hai. Sahi logistic function upar likha hai. Kitab ki formula tasveeron mein “+” ki jagah “|” jaisa nishan bhi chhapa hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Is equation mein:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "P(Pass) exam pass karne ki probability hai.",
+              "e natural logarithm ki base hai (taqreeban 2.718).",
+              "β₀ model ka intercept hai: jab student bilkul na parhe (0 ghante) to pass hone ke log-odds.",
+              "β₁ parhai ke ghanton ka coefficient hai: har izafi ghante par pass hone ke log-odds kitne badalte hain."
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Asaan alfaaz mein",
+            "text": "Odds = pass hone ka imkan ÷ fail hone ka imkan, aur log-odds us ka natural log hai. Logistic function kisi bhi number ko 0 aur 1 ke darmiyan probability mein badal deta hai: β₀ + β₁ × ghante jitna bara (positive) ho, probability utni 1 ke qareeb; jitna chhota (negative) ho, utni 0 ke qareeb."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Coefficients ko samajhna"
+          },
+          {
+            "type": "paragraph",
+            "text": "Model ko data par fit karne ke baad farz karein yeh mila:"
+          },
+          {
+            "type": "equation",
+            "latex": "P(pass) = \\frac{1}{1 + e^{-(1 + 0.6 \\times \\text{Hours Studied})}}",
+            "text_alt": "P(pass) = 1 / (1 + e^−(1 + 0.6 × Hours Studied))"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yani β₀ = 1 aur β₁ = 0.6. Har ghanta parhne se pass hone ka imkan barhta hai. Agar student 5 ghante parhe to:"
+          },
+          {
+            "type": "equation",
+            "latex": "P(\\text{Pass}) = \\frac{1}{1 + e^{-(1 + 0.6 \\times 5)}} = \\frac{1}{1 + e^{-4}} \\approx 0.98",
+            "text_alt": "P(Pass) = 1 / (1 + e^−(1 + 0.6 × 5)) = 1 / (1 + e⁻⁴) ≈ 0.98"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yani 5 ghante parhne wale student ke pass hone ka taqreeban 98% imkan hai."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab 5 ghante ke liye P(Pass) ≈ 0.83 (83%) likhti hai. Lekin 1 + 0.6 × 5 = 4, aur 1 / (1 + e⁻⁴) ≈ 0.98 (98%). Kitab ka 0.83 asal mein 1 ghante ki qeemat hai (1 + 0.6 × 1 = 1.6)."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Model ko aazmana"
+          },
+          {
+            "type": "paragraph",
+            "text": "Model ban gaya to is se andaza laga sakte hain. Farz karein naya student 4 ghante parhta hai:"
+          },
+          {
+            "type": "equation",
+            "latex": "P(pass) = \\frac{1}{1 + e^{-(1 + 0.6 \\times 4)}} = \\frac{1}{1 + e^{-3.4}} \\approx 0.97",
+            "text_alt": "P(pass) = 1 / (1 + e^−(1 + 0.6 × 4)) = 1 / (1 + e^−3.4) ≈ 0.97"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yani pass hone ka taqreeban 97% imkan."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab 4 ghante ke liye ≈ 0.73 (73%) likhti hai. Sahi: 1 + 0.6 × 4 = 3.4, aur 1 / (1 + e^−3.4) ≈ 0.97 (97%). Kitab ka 0.73 asal mein 0 ghante ki qeemat hai (1 / (1 + e⁻¹))."
           },
           {
             "type": "diagram",
@@ -79,24 +199,25 @@
             "type": "callout",
             "tone": "tip",
             "title": "Diagram ko samjhein",
-            "text": "Graph dekhein: kitab ke b0 = 1 aur b1 = 0.6 wala curve 0 ghante par bhi taqreeban 0.73 hai, yani 1, 2 aur 3 ghante parhne walon ko bhi pass ka bara imkan deta hai, halanke woh fail hue. Is liye yeh coefficients is data par poore nahi utarte; data par theek baitha curve 3 aur 4 ghante ke darmiyan 0 se 1 ki taraf tezi se uthega."
+            "text": "Graph dekhein: kitab ke β₀ = 1 aur β₁ = 0.6 wala curve 0 ghante par bhi taqreeban 0.73 hai, yani 1, 2 aur 3 ghante parhne walon ko bhi pass ka bara imkan deta hai, halanke woh fail hue. Is liye yeh farz kiye gaye coefficients is data par poore nahi utarte; data par theek baitha curve 3 aur 4 ghante ke darmiyan 0 se 1 ki taraf tezi se uthega."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "Logistic regression linear regression se kaise mukhtalif hai?",
-            "explanation": "Linear regression seedhi line par adad ki pesh-goi karta hai; logistic regression S-shakal curve par haan ya nahi nateeje ka imkan (0 se 1) batata hai."
+            "explanation": "Linear regression seedhi line se koi number (jaise kamai) batata hai; logistic regression S-shakal curve se haan/nahi wale nateeje ki probability (0 se 1 tak) batata hai."
           },
           {
             "type": "heading",
             "level": 2,
-            "text": "Fauri khulasa"
+            "text": "Mukhtasar khulasa"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "Logistic regression: P = 1 / (1 + e^-(b0 + b1 x)) pass ka imkan 0 aur 1 ke darmiyan deta hai."
+              "Logistic regression: P(pass) = 1 / (1 + e^−(β₀ + β₁ × ghante)), 0 aur 1 ke darmiyan probability.",
+              "β₀ = 1, β₁ = 0.6 se: 5 ghante ≈ 0.98, 4 ghante ≈ 0.97 (kitab: 0.83 aur 0.73)."
             ]
           }
         ]

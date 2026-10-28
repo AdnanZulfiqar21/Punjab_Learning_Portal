@@ -14,23 +14,34 @@
           "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
           "pdf_from": 136,
           "pdf_to": 139,
-          "note": "Roman Urdu explanation of linear regression (PDF 136-139)."
+          "note": "Roman Urdu explanation of Topic 5.4.1.2 (PDF 136-139, printed 133-136)."
         }
       ],
       "body": {
         "blocks": [
           {
-            "type": "callout",
-            "tone": "definition",
-            "title": "Linear regression",
-            "text": "Linear regression do variables ke rishte ka model hai ta ke ek se doosre ki pesh-goi ho: Y = b0 + b1 X + error, jahan Y dependent variable, X independent variable, b0 intercept (X = 0 par Y), b1 slope (X ki har ikai par Y ki tabdeeli) aur error asal aur andaze ka farq hai."
+            "type": "paragraph",
+            "text": "Linear regression ek aam statistical model hai jo do variables ka aapas mein taluq (relationship) samajhne ke liye istemal hota hai. Aksar ek variable se doosre ka andaza lagaya jata hai. Aayein ek misal se samjhein."
+          },
+          {
+            "type": "paragraph",
+            "text": "Misal: Socho aap ke shehar mein phal ka chhota stall hai aur aap andaza lagana chahte hain ke roz kitni kamai hogi, is bunyad par ke kitne customers aate hain. Customers ki tadaad independent variable (wajah, cause) hai aur kamai dependent variable (asar, effect) hai. Linear regression se hum yeh taluq samjhenge aur aane wali kamai ka andaza lagayenge."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Step 1: Data jama karna"
+          },
+          {
+            "type": "paragraph",
+            "text": "Linear regression model ke liye data chahiye. Farz karein aap ne pichhle 5 din ke customers aur kamai likhi:"
           },
           {
             "type": "table",
-            "caption": "Phal ka stall: customers aur rozana kamai",
+            "caption": "Pichhle 5 din: customers ki tadaad aur rozana kamai",
             "header": [
-              "Customers (X)",
-              "Kamai rupay mein (Y)"
+              "Customers ki tadaad",
+              "Rozana kamai (rupay)"
             ],
             "rows": [
               [
@@ -57,7 +68,204 @@
           },
           {
             "type": "paragraph",
-            "text": "Har 5 izafi customers 200 rupay barhate hain, to slope b1 = 200 / 5 = 40 rupay fi customer. 10 customers aur 500 rupay se: 500 = b0 + 40 x 10, to b0 = 100, baghair customers ke bunyadi kamai. Model: earnings = 100 + 40 x customers. 22 customers par andaza 100 + 880 = 980 rupay. Chhatay din 28 customers se 1,250 rupay mile jabke model ne 100 + 1,120 = 1,220 kaha; ghalti 30 rupay (asal minus andaza), jo dikhata hai ke asal data badalta hai."
+            "text": "Yahan customers ki tadaad independent variable (X) aur rozana kamai dependent variable (Y) hai."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Step 2: Linear regression ka formula samajhna"
+          },
+          {
+            "type": "paragraph",
+            "text": "Simple linear regression ka formula:"
+          },
+          {
+            "type": "equation",
+            "latex": "Y = \\beta_0 + \\beta_1 x + \\epsilon",
+            "text_alt": "Y = β₀ + β₁x + ϵ"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yahan:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Y dependent variable hai (hamari misal mein rozana kamai),",
+              "X independent variable hai (customers ki tadaad),",
+              "β₀ intercept hai: jab X = 0 ho to Y ki shuruati qeemat,",
+              "β₁ slope (dhalaan) hai: X ek barhe to Y kitna badalta hai,",
+              "ε error term hai: andaze (predicted) aur asal (actual) qeemat ka farq."
+            ]
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Step 3: Linear regression model banana"
+          },
+          {
+            "type": "paragraph",
+            "text": "Model banate waqt hamara maqsad woh behtareen seedhi line dhoondna hai jo do cheezon ka taluq bataye, yahan customers ki tadaad aur rozana kamai. Neeche dekhein slope (40) aur intercept (100) kaise nikalte hain."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab yahan aur heading “Understanding the Intercept” mein intercept β₀ = 300 likhti hai, lekin aage khud hisab kar ke β₀ = 100 nikalti hai. Sahi 100 hai: 500 = β₀ + 40 × 10 se β₀ = 100, aur Earnings = 100 + 40 × Customers paanchon din ke data par poora utarta hai."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Slope samajhna (β₁ = 40)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Slope batata hai ke har naye customer se kitne zyada paise milte hain. Data dekhein:"
+          },
+          {
+            "type": "table",
+            "caption": "Customers aur kamai (rupay)",
+            "header": [
+              "Customers",
+              "Kamai (rupay)"
+            ],
+            "rows": [
+              [
+                "10",
+                "500"
+              ],
+              [
+                "15",
+                "700"
+              ],
+              [
+                "20",
+                "900"
+              ],
+              [
+                "25",
+                "1,100"
+              ],
+              [
+                "30",
+                "1,300"
+              ]
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Ghaur karein: har 5 zyada customers par kamai 200 rupay barhti hai. Is liye ek customer par:"
+          },
+          {
+            "type": "equation",
+            "latex": "\\beta_1 = 200/5 = 40",
+            "text_alt": "β₁ = 200/5 = 40"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yani har naya customer kamai mein 40 rupay ka izafa karta hai."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Intercept samajhna (β₀ = 100)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Intercept (β₀) woh kamai hai jab koi customer na aaye. Ise dhoondne ke liye dekhte hain ke line amudi (vertical) axis ko kahan kaatti hai, jab customers zero hon. Saada alfaaz mein: koi na aaye to bhi bunyadi kamai kitni hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Data dobara dekhein:"
+          },
+          {
+            "type": "table",
+            "caption": "Customers aur kamai (rupay)",
+            "header": [
+              "Customers",
+              "Kamai (rupay)"
+            ],
+            "rows": [
+              [
+                "10",
+                "500"
+              ],
+              [
+                "15",
+                "700"
+              ],
+              [
+                "20",
+                "900"
+              ],
+              [
+                "25",
+                "1,100"
+              ],
+              [
+                "30",
+                "1,300"
+              ]
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Is data se slope β₁ = 40 nikla, yani har izafi customer par kamai 40 rupay barhti hai. Ab intercept ke liye sochna hai ke customers na hon to kitna kamate hain. Yeh equation istemal karein:"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{Earnings} = \\beta_0 + \\beta_1 \\times \\text{Customers}",
+            "text_alt": "Earnings = β₀ + β₁ × Customers"
+          },
+          {
+            "type": "paragraph",
+            "text": "Koi bhi data point lein, maslan 10 customers par kamai 500 rupay. Yeh qeematein equation mein rakhein:"
+          },
+          {
+            "type": "equation",
+            "latex": "500 = \\beta_0 + (40 \\times 10)",
+            "text_alt": "500 = β₀ + (40 × 10)"
+          },
+          {
+            "type": "equation",
+            "latex": "500 = \\beta_0 + 400",
+            "text_alt": "500 = β₀ + 400"
+          },
+          {
+            "type": "paragraph",
+            "text": "Hal karne se:"
+          },
+          {
+            "type": "equation",
+            "latex": "\\beta_0 = 500 - 400 = 100",
+            "text_alt": "β₀ = 500 − 400 = 100"
+          },
+          {
+            "type": "paragraph",
+            "text": "Matlab data ke mutabiq agar koi customer na aaye to bhi taqreeban 100 rupay ki umeed hai, shayad mustaqil customers ya kisi aur fixed aamdani se. Intercept ke 100 rupay woh kam se kam kamai hai jo zero customers wale din hogi."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Aakhri equation (Final Equation)"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{Earnings} = 100 + 40 \\times \\text{Customers}",
+            "text_alt": "Earnings = 100 + 40 × Customers"
+          },
+          {
+            "type": "paragraph",
+            "text": "Is equation ka matlab:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Koi na aaye tab bhi 100 rupay ki kamai hogi.",
+              "Har naya customer kul kamai mein 40 rupay jorta hai."
+            ]
           },
           {
             "type": "diagram",
@@ -66,21 +274,73 @@
             "caption": "Customers aur kamai: kamai = 100 + 40 x customers wali lakeer (asal khaaka; kitab mein figure nahi)."
           },
           {
+            "type": "heading",
+            "level": 3,
+            "text": "Step 4: Model se nateeja nikalna (Interpreting)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Model ban jane ke baad is se aane wali kamai ka andaza laga sakte hain. Misal: kal 22 customers ki umeed hai to andaza:"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{Earnings} = 100 + (40 \\times 22) = 100 + 880 = 980\\ \\text{rupees}",
+            "text_alt": "Earnings = 100 + (40 × 22) = 100 + 880 = 980 rupees"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yani 22 customers par taqreeban 980 rupay kamai ki umeed hai."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Step 5: Model ko aazmana (Testing)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Model banane ke baad naye data se aazmana zaroori hai. Farz karein chhatay din 28 customers aaye aur 1,250 rupay kamaye. Model se 28 customers ka andaza:"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{Predicted Earnings} = 100 + (40 \\times 28) = 100 + 1{,}120 = 1{,}220\\ \\text{rupees}",
+            "text_alt": "Predicted Earnings = 100 + (40 × 28) = 100 + 1,120 = 1,220 rupees"
+          },
+          {
+            "type": "paragraph",
+            "text": "Lekin asal kamai 1,250 rupay thi. Andaze (predicted) aur asal (actual) kamai ka farq error kehlata hai:"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{Error} = 1{,}220 - 1{,}250 = -30\\ \\text{rupees}",
+            "text_alt": "Error = 1,220 − 1,250 = −30 rupees"
+          },
+          {
+            "type": "paragraph",
+            "text": "Andaza qareeb tha lekin bilkul theek nahi; asal duniya ke data mein hamesha kuch farq (variation) hota hai. Kitab ne error “andaza minus asal” likha hai, is liye minus 30 aaya; matlab model ne 30 rupay kam bataye."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Tidbits",
+            "text": "Apna statistical model behtar karne ke liye: 1. Zyada data points istemal karein ta ke durusti barhe. 2. Mutalliqa awamil shamil karein, jaise khandan ka size ya khaas mauqe jo kharche par asar dalte hain. 3. Model ko naye data se baqaidagi se update karein. 4. Apne andazon ko asal kharche se mila kar tareeqa behtar karein."
+          },
+          {
             "type": "checkpoint",
             "mode": "self_check",
-            "prompt": "Bunyadi statistical model kaunsa hai (MCQ 1)? Slope kya dikhata hai (MCQ 5)? Pesh-goi ka ek bunyadi model bata kar us ka maqsad samjhaiye (short question 2).",
-            "explanation": "(a) linear regression; (b) independent variable ki ek ikai badalne par dependent variable ki tabdeeli. Linear regression seedhi line baitha kar ek variable se doosre adadi nateeje ki pesh-goi karta hai, maslan customers ki tadaad se stall ki kamai."
+            "prompt": "Bunyadi statistical model ki misal kaunsi hai: Linear Regression, Neural Networks, Decision Trees ya Support Vector Machines? (MCQ 1) Linear regression mein slope kya dikhata hai? (MCQ 5) Pesh-goi ka ek bunyadi model bata kar us ka maqsad samjhaiye. (Short question 2)",
+            "explanation": "(a) Linear Regression; slope: (b) independent variable ki ek unit badalne par dependent variable mein tabdeeli. Linear regression data par seedhi line baitha kar ek variable se doosre numeric nateeje ka andaza lagata hai, maslan customers ki tadaad se stall ki kamai (Earnings = 100 + 40 × Customers)."
           },
           {
             "type": "heading",
             "level": 2,
-            "text": "Fauri khulasa"
+            "text": "Mukhtasar khulasa"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "Linear regression: earnings = 100 + 40 x customers; 22 customers par Rs 980; chhatay din ki ghalti Rs 30."
+              "Linear regression: Y = β₀ + β₁x + ϵ; yahan Earnings = 100 + 40 × Customers (kitab ka 300 ghalat, sahi 100).",
+              "22 customers par 980 rupay; chhatay din error = 1,220 − 1,250 = −30 rupay."
             ]
           }
         ]
