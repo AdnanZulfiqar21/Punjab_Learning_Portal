@@ -52,6 +52,7 @@ def reading(
             subject_name=book.subject.name,
             previous_topic_id=previous_id,
             next_topic_id=next_id,
+            chapter_start=topic.parent_id is None and previous_id is None,
             availability=availability,
             lesson=lesson,
         )
@@ -188,6 +189,8 @@ def _published_lesson(
 
 
 def _draft_lesson(variants: list[ContentItem], language: Language | None) -> TopicLessonOut | None:
+    # A draft may be the book's heading alone (Chemistry XI 14.4 runs straight into 14.4.1); it is still that topic's
+    # lesson, and the reader goes on with the first subtopic under it (BOOK-HEADING-01). An empty draft is not.
     usable = [item for item in variants if _has_body(_working(item))]
     if not usable:
         return None
@@ -230,6 +233,4 @@ def _working(item: ContentItem) -> ContentVersion:
 
 def _has_body(version: ContentVersion) -> bool:
     blocks = version.body.get("blocks") if isinstance(version.body, dict) else None
-    return isinstance(blocks, list) and any(
-        isinstance(block, dict) and block.get("type") != "heading" for block in blocks
-    )
+    return isinstance(blocks, list) and any(isinstance(block, dict) for block in blocks)

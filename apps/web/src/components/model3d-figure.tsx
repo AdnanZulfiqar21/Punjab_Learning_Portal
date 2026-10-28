@@ -57,8 +57,10 @@ export function Model3DFigure({
       {mode === "poster" ? (
         shown ? (
           <div className={plate}>
+            {/* A lazy image with no size is 0×0 until it loads, so whether it ever starts loading is a matter of timing
+                (it made the pilot e2e journey flaky). Full width and a minimum height give it a box from the start. */}
             {/* eslint-disable-next-line @next/next/no-img-element -- an authenticated, immutable archive copy; no optimiser */}
-            <img src={poster} alt={alt} loading="lazy" className="mx-auto h-auto max-w-full" />
+            <img src={poster} alt={alt} loading="lazy" className="mx-auto h-auto min-h-40 w-full max-w-full object-contain" />
           </div>
         ) : (
           <div className="space-y-2 rounded-lg border border-dashed border-border px-3 py-4 text-center text-sm">

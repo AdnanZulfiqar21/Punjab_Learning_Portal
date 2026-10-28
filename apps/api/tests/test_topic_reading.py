@@ -49,6 +49,10 @@ def test_a_draft_is_not_a_learner_lesson_and_two_drafts_are_not_picked(client: T
     shown = client.get(path, headers=author.headers)
     assert shown.status_code == 200, shown.text
     preview = shown.json()
+    # CHAPTER-OPENING-01: the chapter's first topic opens the chapter; the one after it does not.
+    assert preview["chapter_start"] is True and preview["previous_topic_id"] is None
+    after = client.get(f"/v1/topics/{preview['next_topic_id']}/lesson").json()
+    assert after["chapter_start"] is False
     assert preview["availability"] == "private_preview"
     assert preview["lesson"]["private_preview"] is True
     assert preview["lesson"]["status"] == "draft"
