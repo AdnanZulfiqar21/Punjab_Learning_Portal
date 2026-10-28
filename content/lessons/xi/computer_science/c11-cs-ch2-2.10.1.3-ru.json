@@ -45,8 +45,10 @@
             "caption": "Output"
           },
           {
-            "type": "paragraph",
-            "text": "Wazahat: divide do numbers ko divide karta hai. 10 ko 0 se divide karne par ZeroDivisionError aata hai; except usay e naam se pakar kar Python ka apna message (\"division by zero\") ke saath print karta hai."
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"def divide(a, b) :\" aur \"return a / b\": divide function a ko b se taqseem (divide) kar ke jawab wapas karta hai.\n\"try :\": jis code mein ghalti aa sakti hai, usay try block mein rakha jata hai.\n\"result = divide (10 , 0)\": 10 ko 0 se divide karna mumkin nahi, is liye yahan ZeroDivisionError aata hai aur result kabhi banta hi nahi.\n\"except ZeroDivisionError as e:\": yeh block isi ghalti ko pakarta hai; e mein Python ka ghalti wala message aa jata hai.\n\"print(\"Error occurred:\", e)\": message print hota hai aur program crash (achanak band) hone ki bajaye aaram se khatam hota hai.\nOutput: \"Error occurred: division by zero\"; \"division by zero\" Python ka apna message hai jo e mein tha.\nKhud try karein: divide (10 , 0) ko divide (10 , 2) kar ke Run karein: ab koi ghalti nahi aati, aur screen par kuch nahi aata kyunke result kahin print nahi kiya gaya."
           },
           {
             "type": "checkpoint",
@@ -68,6 +70,12 @@
             "language": "python",
             "text": "marks = [70, 85, 90]\ntotal, count = 0, 0\nfor mark in marks:\n    total = total + mark\n    count = count + 1\n    print(\"DEBUG: mark =\", mark, \" total =\", total, \" count =\", count)\naverage = total / count\nprint(\"Average =\", average)",
             "runnable": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"marks = [70, 85, 90]\": teen marks ki list banti hai.\n\"total, count = 0, 0\": total aur count dono ek saath 0 se shuru hote hain.\n\"for mark in marks:\": loop (baar baar chalne wala hissa) list ke har mark par ek baar chalta hai.\n\"total = total + mark\": har chakkar mein us mark ko total mein jor diya jata hai.\n\"count = count + 1\": har chakkar mein ginti ek barh jati hai.\n\"print(\"DEBUG: mark =\", ...)\": har qadam par teeno values dikhata hai; yahi print statements se debugging hai: ghalti ho to pata chal jata hai kis qadam par value ghalat hui. (\" total =\" khud space se shuru hota hai, is liye output mein values ke beech do spaces nazar aate hain.)\n\"average = total / count\": aakhir mein 245 / 3 se average (ausat) nikalta hai.\nOutput: teen DEBUG lines aati hain: \"DEBUG: mark = 70  total = 70  count = 1\", phir mark 85 par total 155 aur count 2, phir mark 90 par total 245 aur count 3; aakhir mein \"Average = 81.66666666666667\" (245 / 3 ka decimal jawab).\nKhud try karein: marks = [50, 60] kar ke Run karein: ab do DEBUG lines aur \"Average = 55.0\" aayega."
           },
           {
             "type": "heading",

@@ -59,6 +59,12 @@
             "runnable": true
           },
           {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"expression = \"(3 + 4) * (5 - 2)\"\": jis expression ke brackets check karne hain.\n\"stack, balanced = list(), True\": khali stack, aur shuru mein maan lete hain ke brackets balanced (barabar) hain.\n\"for ch in expression:\": expression ka har character (harf) baari baari dekhta hai.\n\"if ch == \"(\": stack.append(ch)\": har khulne wala bracket push.\n\"elif ch == \")\": ...\": band bracket par agar stack khali hai to matlab is ka koi joda nahi: balanced = False aur break se loop foran ruk jata hai. Warna ek \"(\" pop kar ke joda mila deta hai.\n\"if stack: balanced = False\": aakhir mein bhi koi \"(\" bacha ho to woh band nahi hua, is liye NOT balanced.\nAakhri print: \"a if shart else b\" ka matlab hai: shart True ho to a, warna b. balanced True hai to \"-> balanced\" chhapta hai.\nOutput: (3 + 4) * (5 - 2) -> balanced — do brackets khule, dono band hue, stack aakhir mein khali.\nKhud try karein: expression = \"((3 + 4)\" kar ke Run karein: aakhir mein ek \"(\" stack mein bach jata hai, is liye \"((3 + 4) -> NOT balanced\" aayega."
+          },
+          {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "Stack brackets ka balance kaise check karta hai (short question 4)? (a + b)) * (c ko check karein.",

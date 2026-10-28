@@ -47,6 +47,12 @@
           },
           {
             "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"from queue import Queue\": Python ke built-in (pehle se mojood) queue module se Queue class laata hai.\n\"q = Queue()\": ek khali queue banti hai.\n\"q.put(\"Ahmed\")\" (phir Fatima, Ali): put enqueue hai: har shakhs line ke peeche (back) lagta hai. Ab queue: Ahmed, Fatima, Ali.\n\"front_person = q.queue[0]\": q.queue andar ki list hai; [0] sab se aage wala shakhs dikhata hai bina nikale (peek). Yeh \"Ahmed\" hai.\n\"removed_person = q.get()\": get dequeue hai: sab se aage wala (Ahmed) nikal kar wapas deta hai. FIFO (First In, First Out: jo pehle aaya woh pehle gaya).\n\"q.put(\"Sara\")\": Sara line ke peeche lagti hai.\n\"updated_queue = list(q.queue)\": queue ko aam list bana kar print karta hai.\nOutput: pehli line Ahmed (peek), doosri line Ahmed (jo nikala gaya), teesri line ['Fatima', 'Ali', 'Sara'].\nKhud try karein: q.put(\"Sara\") ke baad ek aur q.get() jor kar Run karein: Fatima bhi nikal jayegi aur aakhri line ['Ali', 'Sara'] hogi."
+          },
+          {
+            "type": "callout",
             "tone": "correction",
             "title": "Kitab ki ghalti",
             "text": "Kitab ke code mein do ghaltiyan hain: (1) q.getO likha hai; aisa koi method nahi, is liye AttributeError aata hai; sahi q.get() hai. (2) updated_queue = list(q.queue) comment wali line par hi chhapa hai, is liye chalta nahi aur print(updated_queue) par NameError aata hai; upar ise alag line par likha gaya hai. Kitab mein \" Ahmed\" ke shuru mein ek space bhi hai, jo naam ke saath print hota hai; upar use hata diya gaya hai."
@@ -75,6 +81,12 @@
             "language": "python",
             "text": "from queue import Queue\npeople = [\"Ahmed\", \"Fatima\", \"Ali\", \"Sara\"]\nserved = 2         # how many people leave from the front\n\nq = Queue()\nfor person in people:\n    q.put(person)                         # enqueue at the back\nfor i in range(served):\n    if not q.empty():\n        print(\"Served:\", q.get())         # dequeue from the front\nprint(\"Still waiting:\", list(q.queue))",
             "runnable": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"from queue import Queue\": Queue class laata hai.\n\"people = [...]\": line mein lagne wale 4 log.\n\"served = 2\": kitne logon ka kaam kar ke aage se nikalna hai.\n\"for person in people: q.put(person)\": har shakhs peeche se queue mein (enqueue).\n\"for i in range(served):\": served jitni baar loop chalta hai.\n\"if not q.empty(): print(\"Served:\", q.get())\": queue khali nahi to aage wala nikalta hai (dequeue) aur us ka naam chhapta hai.\n\"print(\"Still waiting:\", list(q.queue))\": jo ab bhi line mein hain.\nOutput: \"Served: Ahmed\", \"Served: Fatima\", phir \"Still waiting: ['Ali', 'Sara']\" — jo pehle aaya woh pehle gaya (FIFO).\nKhud try karein: served = 5 kar ke Run karein: chaaron log serve honge, paanchvi baar queue khali hai is liye kuch nahi chhapta, aur \"Still waiting: []\" aayega."
           },
           {
             "type": "callout",

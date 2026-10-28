@@ -50,6 +50,12 @@
           },
           {
             "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"coins = [10, 5, 2, 1]\" aur \"amount = 18\": kaun se sikke (coins) hain aur kitni raqam deni hai.\n\"def greedy_change(left):\": left woh raqam hai jo abhi deni baqi hai.\n\"for coin in sorted(coins, reverse=True):\": sikke bare se chhote ki tarteeb mein; greedy (lalchi) tareeqa hamesha sab se bara pehle leta hai.\n\"while coin <= left:\": jab tak yeh sikka baqi raqam mein samata hai, use lete raho.\n\"used.append(coin)\" aur \"left = left - coin\": sikka list mein jorta hai aur raqam kam karta hai; har dafa \"Take ...\" print hota hai.\n\"if left > 0:\": aakhir mein bhi raqam bache to bata deta hai ke poori raqam nahi ban saki.\nOutput: \"Take 10 -> left 8\", \"Take 5 -> left 3\", \"Take 2 -> left 1\", \"Take 1 -> left 0\", phir \"Coins used: [10, 5, 2, 1] | count: 4\".\nKhud try karein: coins = [4, 3, 1] aur amount = 6 kar ke Run karein: greedy [4, 1, 1] yani 3 sikke deta hai, jabke 3 + 3 sirf 2 sikke hain; greedy hamesha optimal (sab se behtar) nahi."
+          },
+          {
+            "type": "callout",
             "tone": "note",
             "title": "Tidbits",
             "text": "Greedy algorithms aksar doosri techniques se tez aur banane mein aasan hote hain, magar har masle mein sab se behtar (optimal) hal ki guarantee (pakka wada) nahi dete. Hamesha masle ko ghaur se dekhein taake yaqeen ho ke greedy tareeqa munasib hai."

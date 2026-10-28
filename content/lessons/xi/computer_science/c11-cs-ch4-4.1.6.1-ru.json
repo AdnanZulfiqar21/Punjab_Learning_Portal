@@ -41,6 +41,12 @@
           },
           {
             "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"class FamilyMember:\": har family member ek node hai. \"__init__\" mein us ka name aur children ki khali list banti hai.\n\"class FamilyTree:\": poora tree. \"__init__\" mein ancestor (sab se bara buzurg) ka node root banta hai.\n\"def add_child(self, parent_name, child_name):\": pehle _find_member se parent dhoondta hai; mil jaye to us ke children mein naya FamilyMember jorta hai. Parent na mile (None) to kuch nahi karta.\n\"def _find_member(self, current_member, name):\": recursion (function ka khud ko dobara bulana) se dhoondta hai: agar maujooda member ka naam mil gaya to wahi wapas; warna har child ke andar dhoondta hai; kahin na mile to None.\n\"family_tree = FamilyTree('Grandparent')\": root Grandparent ke saath tree banta hai.\n\"add_child(...)\" wali chaar lines: Grandparent ke neeche Parent1 aur Parent2, aur Parent1 ke neeche Child1 aur Child2 jorte hain (Figure 4.6 wala tree).\nYeh code sirf tree banata hai; is mein koi print nahi, is liye chalane par screen par kuch nahi aata (output khali). Tree dekhna ho to aakhir mein print([c.name for c in family_tree.root.children]) jaisi line likhni paregi, jo ['Parent1', 'Parent2'] dikhayegi."
+          },
+          {
+            "type": "callout",
             "tone": "correction",
             "title": "Kitab ki ghalti",
             "text": "Kitab mein chhapa hua code nahi chalta (pehli ghalti par hi SyntaxError). Is mein: Fami1yMember (1 ke saath), _ _init_ _ (space ke saath), ek line par do statements, FamilyTre e, naamon ke beech spaces (an c e s t o r _ n am e, ctii 1 d_name), parent_name ke baad ) ghayab, current.member (sahi current_member), ghalat indentation, # ki jagah •, tirchhe quotes ’, aur Parenti/Childl (sahi Parent1/Child1). Upar sahi code hai, jo Python 3.13 mein chala kar check kiya gaya."
@@ -83,6 +89,12 @@
             "language": "python",
             "text": "parent = {\"Parent1\": \"Grandparent\", \"Parent2\": \"Grandparent\", \"Child1\": \"Parent1\", \"Child2\": \"Parent1\"}\n\nheights = list()\nfor member in parent:\n    if member not in parent.values():     # nobody's parent: a leaf\n        print(\"Leaf:\", member)\n    node, edges = member, 0\n    while node in parent:                 # climb up to the root\n        node = parent[node]\n        edges = edges + 1\n    heights.append(edges)\nprint(\"Root:\", node)\nprint(\"Edges:\", len(parent), \" Height:\", max(heights))",
             "runnable": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"parent = {...}\": dictionary jo har member ka parent batati hai, maslan \"Child1\" ka parent \"Parent1\". Root (Grandparent) ka koi parent nahi, is liye woh key nahi.\n\"heights = list()\": har member ki root se doori (edges) jama hogi.\n\"for member in parent:\": har member baari baari.\n\"if member not in parent.values():\": jo kisi ka parent nahi, woh leaf (aakhri node, jis ke children nahi) hai; use chhapta hai.\n\"node, edges = member, 0\" aur \"while node in parent:\": member se oopar parent, phir us ka parent... root tak chadhta hai aur har qadam par edges 1 barhata hai.\n\"heights.append(edges)\": is member ki root se doori.\n\"print(\"Root:\", node)\": loop ke baad node mein root hi bachta hai (jis ka koi parent nahi).\n\"print(\"Edges:\", len(parent), \" Height:\", max(heights))\": har member (root ke siwa) ki ek edge hoti hai, is liye edges = 4; height sab se gehri doori hai.\nOutput: \"Leaf: Parent2\", \"Leaf: Child1\", \"Leaf: Child2\", \"Root: Grandparent\", aur \"Edges: 4  Height: 2\" (label mein space ki wajah se Height se pehle do spaces aati hain).\nKhud try karein: parent mein \"Baby\": \"Child1\" jor kar Run karein: Child1 ab leaf nahi rahega, Baby leaf banega, aur \"Edges: 5  Height: 3\" aayega."
           },
           {
             "type": "checkpoint",

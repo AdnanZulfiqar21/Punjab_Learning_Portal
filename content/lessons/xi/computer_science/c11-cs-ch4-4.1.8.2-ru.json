@@ -48,6 +48,12 @@
             "runnable": true
           },
           {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"edges = [...]\": Figure 4.12 ki 7 edges, har ek \"A-B\" jaisi string.\n\"degree = dict()\": har vertex ki degree (us se judi edges ki ginti) rakhne ke liye khali dictionary.\n\"for edge in edges: u, v = edge.split(\"-\")\": \"A-B\" ko \"-\" par tor kar u = \"A\" aur v = \"B\".\n\"degree[u] = degree.get(u, 0) + 1\" (aur v ke liye bhi): undirected (bina teer wali) edge dono siron ko ginti mein 1 deti hai. .get(u, 0) pehli baar 0 deta hai.\n\"for vertex in sorted(degree):\": vertices alphabet ki tarteeb mein (A, B, C, D, E) chhapne ke liye.\nAakhri print: saari degrees ka jor aur edges ka double dikhata hai; yeh hamesha barabar hote hain kyun ke har edge do baar ginti hoti hai.\nOutput: \"Degree of A = 2\", \"Degree of B = 4\", \"Degree of C = 2\", \"Degree of D = 3\", \"Degree of E = 3\", phir \"Total of degrees: 14 = 2 x 7 edges\".\nKhud try karein: edges mein \"A-C\" jor kar Run karein: A aur C ki degree 3 ho jayegi aur \"Total of degrees: 16 = 2 x 8 edges\" aayega."
+          },
+          {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "Undirected graph jis ki edges A-B, A-E, B-E, B-D, B-C, C-D aur E-D hain (Figure 4.12), us mein har vertex ki degree kya hai?",

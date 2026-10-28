@@ -87,6 +87,12 @@
             "runnable": true
           },
           {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"postfix = \"3 4 5 * +\"\": postfix expression; har token ke beech space hai.\n\"stack = list()\": numbers rakhne ke liye khali stack.\n\"for token in postfix.split():\": har token baari baari.\n\"if token in \"+-*/\":\": token operator hai to stack se do numbers pop hote hain. Pehle pop wala b (right wala number) aur doosre pop wala a (left wala) hai; yeh order - aur / ke liye zaroori hai.\n\"if token == \"+\": result = a + b\" (aur baaqi elif): operator ke mutabiq hisab hota hai.\n\"print(a, token, b, \"=\", result)\" aur \"stack.append(result)\": hisab dikhata hai aur jawab wapas stack par push karta hai.\n\"else: stack.append(int(token))\": number ho to int() se text ko integer bana kar push karta hai.\n\"print(\"Stack:\", stack)\": har token ke baad stack dikhata hai.\n\"print(\"Answer:\", stack[0])\": aakhir mein stack mein sirf ek number bachta hai, wahi jawab hai.\nOutput: Stack [3], [3, 4], [3, 4, 5]; phir \"4 * 5 = 20\", Stack [3, 20]; phir \"3 + 20 = 23\", Stack [23]; aakhir mein \"Answer: 23\".\nKhud try karein: postfix = \"6 2 /\" kar ke Run karein: \"Answer: 3.0\" aayega; Python mein / hamesha decimal (float) jawab deta hai."
+          },
+          {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "3 4 2 * + ko stack se hal karein.",

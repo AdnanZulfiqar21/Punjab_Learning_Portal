@@ -45,6 +45,12 @@
             "runnable": true
           },
           {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"n = 4\": n x n board par n queens rakhni hain, aisi ke koi do ek doosre ko attack na karein.\n\"def safe(cols, col):\": cols mein har pehle wali row ki queen ka column hai; nayi queen usi column ya kisi diagonal (tirchhi lakeer) par ho to False.\n\"abs(cols[r] - col) == row - r\": column ka faasla aur row ka faasla barabar ho to dono ek hi diagonal par hain.\n\"def place(cols, back):\": har row mein ek queen rakhne ki koshish; \"len(cols) == n\" ho jaye to sab queens rakh di gayin, True.\n\"cols.append(col)\" phir \"if place(cols, back): return True\": queen rakh kar agli row par jata hai.\n\"cols.pop()\" aur \"back[0] += 1\": aage raasta band (dead end) ho to queen utha kar wapas aata hai (backtrack) aur ginti barhata hai, phir agla column aazmata hai.\n\"print(\\\". \\\" * c + \\\"Q \\\" + ...)\": har row mein queen ki jagah Q aur baqi khane (squares) \".\".\nOutput: board \". Q . .\", \". . . Q\", \"Q . . .\", \". . Q .\" aur \"Backtracks: 4\".\nKhud try karein: n = 6 kar ke Run karein: 6 x 6 ka hal aur \"Backtracks: 25\". n = 3 karein to \"No solution for n = 3\" aayega, kyun ke 3 x 3 par koi hal hai hi nahi."
+          },
+          {
             "type": "heading",
             "level": 2,
             "text": "Mukhtasar khulasa"

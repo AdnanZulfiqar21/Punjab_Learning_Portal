@@ -55,6 +55,12 @@
             "runnable": true
           },
           {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"scores = [...]\": das scores; list puri sorted nahi (75 aur 74 ulte hain), is liye pehle sort zaroori hai.\n\"data = sorted(scores)\": chhote se bari tarteeb: [62, 65, 66, 68, 69, 70, 72, 74, 75, 95].\n\"half = len(data) // 2\": 10 // 2 = 5, yani aadha hissa.\n\"q1 = statistics.median(data[:half])\": neeche wale aadhe [62, 65, 66, 68, 69] ka median = 66 (Q1, pehla quartile).\n\"q3 = statistics.median(data[half + len(data) % 2:])\": oopar wale aadhe [70, 72, 74, 75, 95] ka median = 74 (Q3). \"len(data) % 2\" odd ginti par beech wali value ko chhorne ke liye hai; yahan ginti even hai is liye 0.\n\"iqr = q3 - q1\": 74 - 66 = 8, box ki chaurai.\n\"outliers = [...]\": woh values jo Q1 - 1.5 x IQR (54) se kam ya Q3 + 1.5 x IQR (86) se zyada hon; sirf 95.\nOutput: \"Sorted : [62, 65, 66, 68, 69, 70, 72, 74, 75, 95]\", \"Min = 62  Q1 = 66  Median = 69.5  Q3 = 74  Max = 95\", \"Box (Q1 to Q3) width, IQR = 8\" aur \"Outliers: [95]\". Median 69.5 hai kyun ke beech ki do values 69 aur 70 hain.\nKhud try karein: 95 ko 78 kar dein: ab 78 had (86) ke andar hai, is liye \"Outliers: []\" (koi outlier nahi) aayega."
+          },
+          {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "Class A aur Class B dono ka median 55 hai. Boxplot aisa kya dikhata hai jo sirf median nahi dikhata?",

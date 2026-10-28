@@ -50,6 +50,12 @@
             "runnable": true
           },
           {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"import hashlib\": Python ki library jo hash (data ka chhota fingerprint) banati hai.\n\"blocks\": teen transactions, har ek ek block ka data. \"changed_block = 1\" aur \"changed_data\": kis block ka data chupke se badla jayega aur kis se.\n\"def block_hash(data, parent_hash):\": pichhle block ka hash aur apna data jor kar sha256 hash banata hai; \".encode()\" text ko bytes mein badalta hai, \".hexdigest()[:10]\" hash ke pehle 10 harf leta hai.\n\"saved = list()\" aur pehla loop: asal chain ke har block ka hash bana kar saved mein yaad rakhta hai. \"parent = \"0\" * 10\" pehle block ka nakli parent hai (das zero).\n\"if 0 <= changed_block < len(blocks):\": number sahi ho to us block ka data badal diya jata hai; -1 par kuch nahi badalta.\nDoosra loop: badli hui chain ke hash dobara banata hai aur har ek ko saved wale se milata hai: barabar ho to \"theek\", warna \"TABDEELI PAKRI GAYI\".\nOutput: teen lines. Block 0 \"theek\" (dono hash 9624d3db43); Block 1 aur Block 2 dono \"TABDEELI PAKRI GAYI\". Block 2 ka data nahi badla, phir bhi us ka hash badal gaya kyun ke us mein Block 1 ka (naya) hash shamil hai.\nKhud try karein: changed_block = 2 kar ke Run karein: ab sirf Block 2 mein tabdeeli pakri jayegi; changed_block = -1 par teeno \"theek\" aayenge."
+          },
+          {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "Distributed ledger ki structure samjhaiye aur bataiye ke ise decentralized kyun rakha jata hai (exercise long question 1).",

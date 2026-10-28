@@ -60,6 +60,12 @@
             "runnable": true
           },
           {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"friends = {...}\": dictionary (naam se list) jis mein har shakhs ke dost hain; yeh ek graph hai.\n\"start = \\\"Ali\\\"\": BFS kahan se shuru ho.\n\"distance = {start: 0}\": har shakhs ki degree of separation; Ali khud 0 par. Yeh \"visited\" ka record bhi hai.\n\"queue = [start]\": queue (qatar) mein pehle Ali.\n\"person = queue.pop(0)\": qatar ke aage wale ko nikalta hai (dequeue) aur \"Visit ...\" print karta hai.\n\"for friend in friends[person]: if friend not in distance:\": jo dost abhi tak dekha nahi gaya, us ki degree = is shakhs ki degree + 1, aur use qatar ke peeche daal do (append).\n\"if start in friends:\": start ka naam network mein na ho to message deta hai.\nOutput: \"Visit Ali - degree 0\", \"Visit Sara - degree 1\", \"Visit Bilal - degree 1\", \"Visit Hina - degree 2\", \"Visit Omar - degree 2\", \"Visit Zara - degree 3\". Pehle tamam degree 1 wale, phir degree 2, phir 3: level ba level.\nKhud try karein: start = \"Omar\" kar ke Run karein: Omar 0, Bilal 1, Ali aur Hina 2, Sara aur Zara 3."
+          },
+          {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "Root 0, us ke bachche 1, 2, 3, aur pote 4, 5 (1 ke neeche), 6 (2 ke neeche) aur 7 (3 ke neeche) wale tree (Figure 3.8) mein BFS kis tarteeb se nodes dekhta hai?",

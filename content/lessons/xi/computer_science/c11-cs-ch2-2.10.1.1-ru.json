@@ -36,6 +36,12 @@
           },
           {
             "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"import unittest\": Python ka built-in testing module program mein laata hai.\n\"def add (a , b) :\" aur \"return a + b\": yeh woh function hai jise test karna hai; dono numbers ka jor wapas karta hai.\n\"class TestMathOperations(unittest.TestCase):\": tests ki class banti hai jo unittest.TestCase se inherit karti hai (wirasat mein us ke methods le leti hai), jaise assertEqual.\n\"def test_add(self):\": method ka naam test_ se shuru hota hai, is liye unittest isay khud dhoond kar test ki tarah chalata hai.\n\"self.assertEqual(add(2, 3), 5)\": check karta hai ke add(2, 3) ka jawab 5 hai; na ho to test fail ho jata hai.\n\"self.assertEqual(add(-1, 1), 0)\": negative number ke saath doosra check: -1 + 1 = 0.\n\"if __name__ == '__main__':\" aur \"unittest.main()\": file seedhi chalayi jaye to unittest.main() saare tests chala kar nateeja (result) dikhata hai.\nOutput: pehle ek dot (.) aata hai, yani ek test pass hua; phir dashes ki line, \"Ran 1 test in 0.000s\" aur aakhir mein \"OK\", kyunke dono checks sahi nikle. Dono assertEqual ek hi method mein hain, is liye ginti 1 test hai. Waqt (0.000s) har computer par thora alag ho sakta hai.\nKhud try karein: pehle check mein 5 ki jagah 6 likh kar Run karein: ab dot ki jagah F aayega, FAIL ki tafseel (detail) aayegi aur aakhir mein \"FAILED (failures=1)\"."
+          },
+          {
+            "type": "callout",
             "tone": "correction",
             "title": "Kitab ki ghalti",
             "text": "Kitab yeh code bina indentation ke chhapti hai: def test_add class ke andar, assertEqual wali lines def ke andar, aur unittest.main() if ke andar indented honi chahiyein (warna IndentationError). '__main__' ke quotes bhi tirchhe (’ ’) chhape hain; seedhe quotes chahiyein."
@@ -45,10 +51,6 @@
             "language": "text",
             "text": ".\n----------------------------------------------------------------------\nRan 1 test in 0.000s\n\nOK",
             "caption": "Output (theek kiye code ka)"
-          },
-          {
-            "type": "paragraph",
-            "text": "Wazahat: yeh code add function ka unit test hai. TestMathOperations class assertEqual se check karti hai ke add(2, 3) = 5 aur add(-1, 1) = 0 ho. Dono theek hon to test pass (OK); warna test fail ho kar farq batata hai."
           },
           {
             "type": "checkpoint",

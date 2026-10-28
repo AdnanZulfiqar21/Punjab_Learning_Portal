@@ -262,6 +262,12 @@
             "runnable": true
           },
           {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"students = {...}\": dictionary; har naam ke saath (maths, english) scores ka jora (tuple).\n\"center_1 = (85, 70)\" aur \"center_2 = (40, 85)\": dono clusters (groups) ke shuru wale center.\n\"cluster_1, cluster_2 = [], []\": do khali lists jin mein naam jayenge.\n\"for name, (x, y) in students.items():\": har student ka naam aur dono scores (x = maths, y = english) nikalta hai.\n\"d1 = math.sqrt(...)\" aur \"d2 = ...\": Euclidean distance (seedha faasla) = farq ke squares ke jama ka square root, dono centers se.\n\"group = 1 if d1 <= d2 else 2\": jo center qareeb ho, student usi cluster mein; barabar faasle par cluster 1.\n\"(cluster_1 if group == 1 else cluster_2).append(name)\": naam sahi list mein jor diya jata hai. f-string mein \":<7\" aur \":6.2f\" sirf columns seedhe rakhne aur 2 decimal dikhane ke liye hain.\nDoosra loop: har cluster ke members ke maths aur english ka average nikal kar naya center banata hai (\"if members:\" khali cluster par taqseem se bachata hai).\nOutput: Basim (0.00 / 47.43), Umer (7.07 / 53.85) aur Maliha (26.93 / 32.02) cluster 1 mein; Anie (36.40 / 11.18) aur Tallat (47.43 / 0.00) cluster 2 mein. Aakhir mein \"Cluster 1 ['Basim', 'Umer', 'Maliha'] new center = (78.3, 65.0)\" aur \"Cluster 2 ['Anie', 'Tallat'] new center = (45.0, 82.5)\".\nKhud try karein: center_2 = (60, 60) kar ke Run karein: ab Maliha cluster 2 mein chali jayegi; cluster 1 ka naya center (87.5, 67.5) aur cluster 2 ka (50.0, 75.0) aayega."
+          },
+          {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "K-Means Clustering ka main (sab se bara) maqsad kya hai? (MCQ 8) K-Means mein “K” kya hai? (MCQ 9) Algorithm step by step samjhaiye. (Long question 5)",

@@ -34,13 +34,15 @@
           },
           {
             "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"def animal_sound(animal):\": ek function jo koi bhi janwar object leta hai.\n\"animal.make_sound( )\": jo object aaye, usi ka make_sound() chalta hai; function ko pata hona zaroori nahi ke woh Dog hai ya Cat. Yahi polymorphism (kai shaklein) hai.\n\"dog = Dog( )\" aur \"cat = Cat( )\": dono classes se ek ek object.\n\"animal_sound(dog)\" aur \"animal_sound(cat)\": ek hi function, magar har object apni awaz deta hai.\nYeh tukra (fragment) akele nahi chalta: is mein Dog aur Cat classes nahi hain, is liye \"NameError: name 'Dog' is not defined\" aata hai. Pichhle topic (Inheritance) ki Animal, Dog aur Cat classes is ke oopar likh kar chalayein to \"Bark!\" aur phir \"Meow ! \" aata hai (kitab ki Cat class mein spaces hain; comment mein \"Meow!\" likha hai)."
+          },
+          {
+            "type": "callout",
             "tone": "correction",
             "title": "Kitab ki ghalti",
             "text": "Kitab calls mein anima1_sound (L ki jagah 1) chhapti hai, jabke function ka naam animal_sound hai; NameError aata hai. dog = Dog( ) se neeche ki lines bhi aadhi khiski hui chhapi hain (IndentationError); yeh margin se shuru hoti hain."
-          },
-          {
-            "type": "paragraph",
-            "text": "Wazahat: yeh code 2.8.1.5 wali Animal, Dog aur Cat classes ke saath chalta hai. animal_sound() Dog aur Cat dono ko ek tarah sambhalta hai: animal_sound(dog) \"Bark!\" aur animal_sound(cat) \"Meow ! \" print karta hai."
           },
           {
             "type": "checkpoint",
@@ -62,6 +64,12 @@
             "language": "python",
             "text": "animals = [\"dog\", \"cat\", \"dog\"]\nclass Animal:\n    def make_sound(self):\n        print(\"Animal sound\")\nclass Dog(Animal):\n    def make_sound(self):\n        print(\"Bark!\")\nclass Cat(Animal):\n    def make_sound(self):\n        print(\"Meow!\")\ndef animal_sound(animal):\n    animal.make_sound()\nfor kind in animals:\n    if kind == \"dog\":\n        animal_sound(Dog())\n    elif kind == \"cat\":\n        animal_sound(Cat())\n    else:\n        animal_sound(Animal())",
             "runnable": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"animals = [\"dog\", \"cat\", \"dog\"]\": janwaron ki qism (kind) ki list.\n\"class Animal:\", \"class Dog(Animal):\", \"class Cat(Animal):\": teeno ka make_sound() alag message print karta hai.\n\"def animal_sound(animal):\" aur \"animal.make_sound()\": ek hi function har object ka apna make_sound() chalata hai (polymorphism).\n\"for kind in animals:\": list ke har naam par loop chalta hai.\n\"if kind == \"dog\": ... elif kind == \"cat\": ... else: ...\": naam ke hisaab se Dog(), Cat() ya Animal() object bana kar function ko diya jata hai.\nOutput: teen lines: \"Bark!\", \"Meow!\" aur \"Bark!\".\nKhud try karein: aakhri \"dog\" ko \"cow\" kar ke Run karein: teesri line \"Animal sound\" aayegi, kyunke \"cow\" else wale hisse mein jata hai."
           },
           {
             "type": "heading",

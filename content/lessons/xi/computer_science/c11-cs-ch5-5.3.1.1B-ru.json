@@ -52,6 +52,12 @@
             "runnable": true
           },
           {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"names\" aur \"grades\": paanch students aur un ke grades; None ka matlab hai grade ghayab (missing) hai.\n\"known = [g for g in grades if g is not None]\": sirf woh grades jo maujood hain: [80, 85, 78, 85].\n\"average = sum(known) / len(known)\": 328 / 4 = 82.0; yahi ghayab grade ki jagah bhara jayega (imputation).\n\"for name, grade in zip(names, grades):\": zip() dono lists ko jor kar har student ka naam aur grade saath saath deta hai.\n\"if grade is None:\": grade ghayab ho to average (round se 1 decimal) print hota hai aur saath note \"<- missing, filled with class average\" (flagging, yani nishan lagana).\n\"else:\": grade maujood ho to wohi grade print hota hai.\nOutput: \"Ali : 80\", \"Hina : 85\", \"Sara : 82.0  <- missing, filled with class average\", \"Bilal : 78\", \"Zara : 85\". print() har hisse ke beech space lagata hai, is liye naam aur \":\" ke beech space aata hai.\nKhud try karein: Hina ka 85 bhi None kar dein: ab average [80, 78, 85] se 81.0 banega aur Hina aur Sara dono ko 81.0 milega."
+          },
+          {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "Sara ke liye class ka average 82 bharna misleading (ghalat raah dikhane wala) kyun ho sakta hai?",

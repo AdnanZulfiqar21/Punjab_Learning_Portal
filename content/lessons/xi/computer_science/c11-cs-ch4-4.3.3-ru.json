@@ -123,6 +123,12 @@
             "runnable": true
           },
           {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"children = {...}\": wohi Figure 4.13 wala graph.\n\"start = 1\": BFS yahan se shuru.\n\"queue = [start]\" aur \"order = list()\": queue mein shuru wala node, order mein visit ki tarteeb.\n\"while queue:\": jab tak queue khali na ho.\n\"node = queue.pop(0)\": aage (front) se nikalta hai: dequeue.\n\"queue.extend(children.get(node, []))\": node ke children peeche se queue mein (enqueue), apni asal tarteeb mein.\n\"print(\"Visit\", node, \"-> queue:\", queue)\": har visit ke baad queue.\nOutput: 9 \"Visit\" lines (pehli \"Visit 1 -> queue: [2, 3, 4]\"), aur aakhir mein \"BFS order: [1, 2, 3, 4, 5, 6, 7, 8, 9]\" — pehle saare padosi, phir agla level. DFS ke [1, 2, 5, 6, 3, 7, 4, 8, 9] se farq dekhein.\nKhud try karein: start = 2 kar ke Run karein: \"BFS order: [2, 5, 6]\" aayega."
+          },
+          {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "DFS aur BFS mein farq bataiye (short question 8). Long question 7(b): exercise ke graph mein A se BFS ka order kya hai?",

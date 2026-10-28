@@ -85,6 +85,12 @@
           },
           {
             "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"import networkx as nx\": NetworkX library (graph banane ka tayyar code) laata hai aur use chhota naam nx deta hai.\n\"import matplotlib.pyplot as plt\": Matplotlib ka pyplot hissa, jo tasveer (drawing) dikhata hai, naam plt.\n\"G = nx.Graph()\": ek khali undirected graph banta hai.\n\"G.add_node('A')\" (aur B, C): teen vertices (nodes) jorte hain.\n\"G.add_edge('A', 'B')\" aur \"G.add_edge('B', 'C')\": A-B aur B-C ke beech edges (links).\n\"nx.draw(G, with_labels=True)\": graph ki drawing banata hai; with_labels=True se har node par us ka naam likha aata hai.\n\"plt.show()\": drawing ko alag window mein dikhata hai.\nIs program ka output text nahi balke ek tasveer hai: teen gol nodes A, B, C aur do lakeerein A-B aur B-C. Yeh sirf us computer par chalega jahan networkx aur matplotlib install hon (pip install networkx matplotlib); browser mein yeh nahi chalta, is liye is par Run button nahi."
+          },
+          {
+            "type": "callout",
             "tone": "correction",
             "title": "Kitab ki ghalti",
             "text": "Kitab ke code mein nodes ke naam tirchhe quotes ’ ’ mein hain (maslan ’ A ’), jinhein Python nahi maanta, is liye SyntaxError aata hai. Naamon ke andar spaces bhi hain; agar seedhe quotes ke saath ' A ' aur 'A' likha jaye to yeh do alag nodes ban jate hain. Upar seedhe quotes aur bina space ke naam hain. Kitab ne matplotlib.pyplot ko pit naam diya hai; yeh chal jata hai kyunke dono jagah pit hai, magar aam taur par plt likhte hain. (Yeh code chalane ke liye networkx aur matplotlib install hone chahiyein.)"
@@ -121,6 +127,12 @@
             "language": "python",
             "text": "roads = {\"B-A\": 10, \"A-C\": 12, \"C-B\": 20, \"E-A\": 7, \"A-D\": 60, \"C-D\": 32}   # Figure 4.11\npath = [\"E\", \"A\", \"C\", \"D\"]\n\ncost, possible = 0, True\nfor i in range(len(path) - 1):\n    road = path[i] + \"-\" + path[i + 1]\n    if road in roads:\n        cost = cost + roads[road]\n        print(road, \"costs\", roads[road])\n    else:\n        print(\"No one-way road\", road)\n        possible = False\nif possible:\n    print(\"Total cost of\", \"-\".join(path), \"=\", cost)",
             "runnable": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"roads = {...}\": Figure 4.11 ki har one-way edge aur us ka weight (cost). \"B-A\": 10 ka matlab B se A jane ka kharcha 10.\n\"path = [\"E\", \"A\", \"C\", \"D\"]\": jis raaste ka kharcha nikalna hai.\n\"cost, possible = 0, True\": shuru mein kharcha 0, aur maan lete hain ke raasta mumkin hai.\n\"for i in range(len(path) - 1):\": path ke har do lagataar vertices ka joda (E-A, A-C, C-D).\n\"road = path[i] + \"-\" + path[i + 1]\": joda \"E-A\" jaisi string banata hai.\n\"if road in roads: ...\": yeh one-way road maujood hai to us ka weight cost mein jorta hai aur chhapta hai.\n\"else: ... possible = False\": road nahi (ya ulti taraf hai) to message aur raasta na-mumkin.\n\"if possible:\": raasta poora mumkin ho to kul cost chhapta hai.\nOutput: \"E-A costs 7\", \"A-C costs 12\", \"C-D costs 32\", aur \"Total cost of E-A-C-D = 51\".\nKhud try karein: path = [\"E\", \"A\", \"D\"] kar ke Run karein: \"Total cost of E-A-D = 67\" aayega, jo 51 se mehnga hai. path = [\"E\", \"D\"] par \"No one-way road E-D\" aayega aur total nahi chhapega."
           },
           {
             "type": "checkpoint",

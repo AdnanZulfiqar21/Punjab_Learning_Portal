@@ -35,21 +35,15 @@
           },
           {
             "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"a = int(input(\"Enter a number: \"))\": user se number likhwata hai aur int() usay poore number (integer) mein badalta hai.\n\"try :\": jis line mein ghalti aa sakti hai woh try ke andar hai.\n\"result =10/a\": 10 ko a se divide karta hai; a 0 ho to ZeroDivisionError aata hai. Isi line par # wala hissa comment hai.\n\"except ZeroDivisionError:\": yeh ghalti pakar kar program ko crash hone se bachata hai.\n\"print(\"You can’t divide by zero!\")\": message print hota hai; kitab ne can’t mein tirchha apostrophe (’) chhapa hai, string ke andar Python isay qubool karti hai aur waise hi print karti hai.\nOutput: 0 likhne par \"Enter a number: \" ke baad \"You can’t divide by zero!\" aata hai. Koi aur number (maslan 5) likhne par kuch print nahi hota, kyunke result bana to hai magar print nahi kiya gaya.\nNumber ki jagah koi word likhein to int() wali pehli line hi ValueError deti hai aur program ruk jata hai, kyunke woh line try ke bahar hai."
+          },
+          {
+            "type": "callout",
             "tone": "correction",
             "title": "Kitab ki ghalti",
             "text": "Kitab pehli line \"Input a\" chhapti hai; yeh Python nahi (SyntaxError). Number lene ke liye: a = int(input(\"Enter a number: \"))."
-          },
-          {
-            "type": "paragraph",
-            "text": "Wazahat:"
-          },
-          {
-            "type": "list",
-            "ordered": false,
-            "items": [
-              "try block mein woh code hai jis mein ghalti ho sakti hai (10/a, agar a zero ho).",
-              "except block ZeroDivisionError (zero se divide karne ki ghalti) pakar kar message print karta hai: \"You can’t divide by zero!\"."
-            ]
           },
           {
             "type": "checkpoint",
@@ -71,6 +65,12 @@
             "language": "python",
             "text": "a = 0\ntry:\n    result = 10 / a\n    print(\"Result:\", result)\nexcept ZeroDivisionError:\n    print(\"You can't divide by zero!\")",
             "runnable": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"a = 0\": input() ki jagah value seedhi likhi hai.\n\"try:\": ghalti wala code try mein.\n\"result = 10 / a\": a 0 hai, is liye yahan ZeroDivisionError aata hai aur agli line (print) chhoot jati hai.\n\"except ZeroDivisionError:\": ghalti pakri jati hai aur us ka message print hota hai.\nOutput: You can't divide by zero!\nKhud try karein: a = 5 kar ke Run karein: koi ghalti nahi, \"Result: 2.0\" aayega (/ se divide ka jawab hamesha decimal mein aata hai)."
           },
           {
             "type": "heading",
