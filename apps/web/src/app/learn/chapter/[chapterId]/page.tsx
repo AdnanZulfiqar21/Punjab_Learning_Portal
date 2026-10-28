@@ -296,7 +296,7 @@ function TopicItem({ topic, favourites, depth = 0 }: { topic: TopicNode; favouri
       <div className="flex items-center gap-2">
         <Link href={`/learn/topic/${topic.id}`} className="flex min-w-0 flex-1 items-baseline gap-3 py-1.5 hover:text-accent">
           {topic.number && (
-            <span className={`shrink-0 text-sm font-semibold ${depth ? "w-16 text-foreground" : "w-12 text-accent"}`}>{topic.number}</span>
+            <span className={`shrink-0 text-sm font-semibold ${depth ? "w-14 text-foreground sm:w-16" : "w-12 text-accent"}`}>{topic.number}</span>
           )}
           <span className={depth ? "" : "font-medium"}>{topic.title}</span>
         </Link>
@@ -313,7 +313,7 @@ function TopicItem({ topic, favourites, depth = 0 }: { topic: TopicNode; favouri
         </details>
       )}
       {topic.children.length > 0 && (
-        <ol className="mt-1 ml-15 border-l-2 border-border pl-3">
+        <ol className="mt-1 ml-3 border-l-2 border-border pl-2 sm:ml-15 sm:pl-3">
           {topic.children.map((c) => (
             <TopicItem key={c.id} topic={c} favourites={favourites} depth={depth + 1} />
           ))}
