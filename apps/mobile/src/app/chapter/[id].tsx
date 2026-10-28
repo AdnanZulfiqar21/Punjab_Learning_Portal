@@ -10,6 +10,7 @@ import { ErrorState, LinkButton, Loading, Notice, T } from "@/components/ui";
 import { Space } from "@/constants/theme";
 import { useRequest } from "@/hooks/use-request";
 import { SubjectAccent, useTheme } from "@/hooks/use-theme";
+import { headingTone } from "@/lib/book-heading";
 import { api, GRADE_LABEL } from "@/lib/api";
 import { useAuth } from "@/lib/auth";
 
@@ -119,7 +120,7 @@ function TopicRow({ topic, depth = 0, token, starred }: { topic: TopicNode; dept
           accessibilityLabel={topic.number ? `${topic.number} ${topic.title}` : topic.title}
           onPress={() => router.push({ pathname: "/topic/[id]", params: { id: topic.id } })}
           style={({ pressed }) => ({ flex: 1, flexDirection: "row", alignItems: "center", gap: Space.sm, paddingVertical: Space.md, minHeight: 52, opacity: pressed ? 0.7 : 1 })}>
-          <T variant="eyebrow" style={{ width: depth ? 56 : 40, color: depth ? c.text : undefined }}>
+          <T variant="eyebrow" style={{ width: depth ? 56 : 40, color: { main: c.accent, topic: c.text, sub: c.subheading }[headingTone(topic.number) ?? "topic"] }}>
             {topic.number ?? ""}
           </T>
           <T style={{ flex: 1, fontWeight: depth ? "400" : "500" }}>{topic.title}</T>

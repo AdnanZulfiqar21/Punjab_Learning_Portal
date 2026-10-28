@@ -15,7 +15,7 @@ import { useRequest } from "@/hooks/use-request";
 import { SubjectAccent, useTheme } from "@/hooks/use-theme";
 import { api, GRADE_LABEL, lessonAsset, previewAsset, type TopicLecture, type TopicReading } from "@/lib/api";
 import { useAuth } from "@/lib/auth";
-import { continuesInto, headingOnly, isMainHeading } from "@/lib/book-heading";
+import { continuesInto, headingOnly, headingTone } from "@/lib/book-heading";
 import { useDisplay } from "@/lib/display";
 import { usePrefs } from "@/lib/prefs";
 import { missingLanguageNote, preferredLanguage, READING_LANGUAGES, type ReadingLanguage } from "@/lib/reading-language-core";
@@ -195,7 +195,7 @@ function Reader({
             </T>
             <View style={{ height: 4, width: 56, borderRadius: 2, backgroundColor: c.accent }} />
           </View>
-          <T variant="heading" accessibilityRole="header" style={isMainHeading(reading.number) ? { color: c.accent } : undefined}>
+          <T variant="heading" accessibilityRole="header" style={{ color: toneColor(headingTone(reading.number), c) }}>
             {reading.number ? `${reading.number} ${reading.title}` : reading.title}
           </T>
         </View>
@@ -209,7 +209,7 @@ function Reader({
             </Pressable>
             {reading.availability === "private_preview" ? <Chip label="Draft preview: not yet reviewed or published">Draft preview</Chip> : null}
           </View>
-          <T variant="title" accessibilityRole="header" style={isMainHeading(reading.number) ? { color: c.accent } : undefined}>
+          <T variant="title" accessibilityRole="header" style={{ color: toneColor(headingTone(reading.number), c) }}>
             {reading.number ? `${reading.number} ${reading.title}` : reading.title}
           </T>
           <T variant="small">{reading.chapter_title}</T>
@@ -295,4 +295,9 @@ function LessonBody({
       ) : null}
     </View>
   );
+}
+
+/** BOOK-HEADING-01: a heading's colour by its depth (lib/book-heading.ts `headingTone`). */
+function toneColor(tone: ReturnType<typeof headingTone>, c: { accent: string; text: string; subheading: string }): string {
+  return tone === "main" ? c.accent : tone === "sub" ? c.subheading : c.text;
 }

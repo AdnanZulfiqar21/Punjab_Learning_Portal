@@ -7,7 +7,7 @@ import { chooseReadingLanguage } from "@/app/actions/learn";
 import { KeepPlace } from "@/components/keep-place";
 import { LectureView } from "@/components/lecture-view";
 import { LessonBlocks } from "@/components/lesson-blocks";
-import { continuesInto, headingOnly as isHeadingOnly, isMainHeading } from "@/lib/book-heading";
+import { continuesInto, headingOnly as isHeadingOnly, headingTone } from "@/lib/book-heading";
 import { typesetEquations } from "@/lib/typeset";
 import { placeSignature, type PlaceBlock } from "@/lib/variant-place";
 import { Notice, SkeletonLines } from "@/components/ui";
@@ -17,6 +17,9 @@ import { LANGUAGE_COOKIE, missingLanguageNote, preferredLanguage, READING_LANGUA
 import { api, currentUser } from "@/lib/session";
 
 export const metadata: Metadata = { title: "Lesson" };
+
+// BOOK-HEADING-01: a heading's colour by its depth (lib/book-heading.ts `headingTone`).
+const TONE = { main: "text-accent", topic: "", sub: "text-subheading" } as const;
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
@@ -161,7 +164,7 @@ async function TopicView({ id, view }: { id: string; view: "read" | "lecture" })
             </div>
           </div>
           {/* The page's heading stays the topic; the chapter above is its setting. */}
-          <h1 className={`text-2xl font-semibold tracking-tight${isMainHeading(reading.number) ? " text-accent" : ""}`}>
+          <h1 className={`text-2xl font-semibold tracking-tight ${TONE[headingTone(reading.number) ?? "topic"]}`}>
             {reading.number ? `${reading.number} ${reading.title}` : reading.title}
           </h1>
         </header>
@@ -177,7 +180,7 @@ async function TopicView({ id, view }: { id: string; view: "read" | "lecture" })
               </span>
             )}
           </p>
-          <h1 className={`text-3xl font-semibold tracking-tight${isMainHeading(reading.number) ? " text-accent" : ""}`}>{reading.number ? `${reading.number} ${reading.title}` : reading.title}</h1>
+          <h1 className={`text-3xl font-semibold tracking-tight ${TONE[headingTone(reading.number) ?? "topic"]}`}>{reading.number ? `${reading.number} ${reading.title}` : reading.title}</h1>
           <p className="text-sm text-muted">{reading.chapter_title}</p>
         </header>
       )}

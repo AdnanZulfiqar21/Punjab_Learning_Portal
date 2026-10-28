@@ -14,6 +14,16 @@ export function isMainHeading(number: string | null | undefined): boolean {
   return /^\d+\.\d+[a-z]?$/.test(number ?? "");
 }
 
+/** A heading's colour by its depth (owner, 2026-10-28, after Chemistry's three levels): a main heading (1.2, 14.4)
+ * takes the subject accent, a topic under it (1.2.2, 14.4.1) the text colour, and anything deeper (1.2.2.1) the
+ * subheading blue, as the headings inside a Chemistry lesson. */
+export function headingTone(number: string | null | undefined): "main" | "topic" | "sub" | null {
+  const n = (number ?? "").trim();
+  if (!/^\d+(\.\d+)+[a-z]?$/i.test(n)) return null;
+  const depth = n.split(".").length;
+  return depth <= 2 ? "main" : depth === 3 ? "topic" : "sub";
+}
+
 /** The lesson is the book's heading alone, so the page should continue with the next topic if it is a subtopic. */
 export function headingOnly(reading: Reading): boolean {
   const blocks = reading.lesson?.body?.blocks;
