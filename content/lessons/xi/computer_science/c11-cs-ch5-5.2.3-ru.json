@@ -14,80 +14,202 @@
           "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
           "pdf_from": 129,
           "pdf_to": 131,
-          "note": "Roman Urdu explanation of variance and standard deviation (PDF 129-132)."
+          "note": "Roman Urdu explanation of Topic 5.2.3 (PDF 129-131, printed 126-128)."
         }
       ],
       "body": {
         "blocks": [
           {
             "type": "paragraph",
-            "text": "Phailao (dispersion) ke paimane batate hain ke data kitna phaila hai. Variance qeematon ka mean se murabba faasle ka ausat hai: variance = (1/N) x (xi - mean)^2 ka jama, jahan xi har qeemat, mean ko mu likhte hain aur N qeematon ki tadaad hai. Standard deviation variance ka square root hai, data ki ikaiyon mein."
+            "text": "Measures of dispersion batate hain ke data kitna phaila hua (spread out) ya bikhra hua hai. Do aam measures hain: variance aur standard deviation. In se pata chalta hai ke data points ausat (mean) ke qareeb hain ya us se door."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Variance"
+          },
+          {
+            "type": "paragraph",
+            "text": "Variance batata hai ke data ke numbers mean se kitne mukhtalif hain. Zyada variance ka matlab numbers zyada phaile hue hain; kam variance ka matlab numbers mean ke qareeb hain. Variance is formula se nikalte hain:"
+          },
+          {
+            "type": "equation",
+            "latex": "\\sigma^2 = \\frac{1}{N}\\sum_{i=1}^{N}(x_i - \\mu)^2",
+            "text_alt": "σ² = (1/N) Σᵢ₌₁ᴺ (xᵢ − μ)²"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab ke formula mein sum ka index t = 1 likha hai aur andar x₁ (pehli qeemat). Is tarah sirf pehli qeemat baar baar jama hogi. Sahi yeh hai ke har qeemat xᵢ jama ho, i = 1 se N tak: σ² = (1/N) Σᵢ₌₁ᴺ (xᵢ − μ)²."
+          },
+          {
+            "type": "paragraph",
+            "text": "Yahan xᵢ data ki har alag qeemat hai, μ (mu) data ka mean hai aur N qeematon ki kul tadaad hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Misal: Do classes, Class A aur Class B, ne ek hi exam diya."
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "Class A ke scores: 50, 52, 55, 57 aur 60.",
+              "Class B ke scores: 30, 45, 55, 75 aur 90."
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Variance nikalne ke qadam (steps):"
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Step 1: Class A ka variance"
+          },
+          {
+            "type": "paragraph",
+            "text": "Diye gaye scores: 50, 52, 55, 57, 60"
+          },
+          {
+            "type": "paragraph",
+            "text": "Step 1.1: Mean (μ) nikalein"
+          },
+          {
+            "type": "equation",
+            "latex": "\\mu = \\frac{50+52+55+57+60}{5} = \\frac{274}{5} = 54.8",
+            "text_alt": "μ = (50 + 52 + 55 + 57 + 60)/5 = 274/5 = 54.8"
+          },
+          {
+            "type": "paragraph",
+            "text": "Step 1.2: Har qeemat ka mean se farq (deviation) nikal kar us ka square karein, yani (xᵢ − μ)²"
           },
           {
             "type": "table",
-            "caption": "Ek hi exam par do classes",
+            "caption": "Class A: har score, mean se farq aur us ka square",
             "header": [
-              "Class A score",
-              "x - 54.8",
-              "murabba",
-              "Class B score",
-              "x - 59",
-              "murabba"
+              "xᵢ",
+              "xᵢ − μ",
+              "(xᵢ − μ)²"
             ],
             "rows": [
               [
                 "50",
-                "-4.8",
-                "23.04",
-                "30",
-                "-29",
-                "841"
+                "50 − 54.8 = −4.8",
+                "23.04"
               ],
               [
                 "52",
-                "-2.8",
-                "7.84",
-                "45",
-                "-14",
-                "196"
+                "52 − 54.8 = −2.8",
+                "7.84"
               ],
               [
                 "55",
-                "0.2",
-                "0.04",
-                "55",
-                "-4",
-                "16"
+                "55 − 54.8 = 0.2",
+                "0.04"
               ],
               [
                 "57",
-                "2.2",
-                "4.84",
-                "75",
-                "16",
-                "256"
+                "57 − 54.8 = 2.2",
+                "4.84"
               ],
               [
                 "60",
-                "5.2",
-                "27.04",
-                "90",
-                "31",
-                "961"
-              ],
-              [
-                "jama",
-                "",
-                "62.8",
-                "jama",
-                "",
-                "2270"
+                "60 − 54.8 = 5.2",
+                "27.04"
               ]
             ]
           },
           {
             "type": "paragraph",
-            "text": "Class A: mean 274 / 5 = 54.8, variance 62.8 / 5 = 12.56, standard deviation taqreeban 3.54. Class B: mean 295 / 5 = 59, variance 2270 / 5 = 454, standard deviation taqreeban 21.31. Class B ke scores kahin zyada phaile hain, jabke Class A ke mean ke gird qareeb qareeb hain."
+            "text": "Step 1.3: Variance nikalein (squares ka ausat)"
+          },
+          {
+            "type": "equation",
+            "latex": "\\sigma^2 = \\frac{23.04+7.84+0.04+4.84+27.04}{5}",
+            "text_alt": "σ² = (23.04 + 7.84 + 0.04 + 4.84 + 27.04)/5"
+          },
+          {
+            "type": "equation",
+            "latex": "62.8/5 = 12.56",
+            "text_alt": "62.8/5 = 12.56"
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Step 2: Class B ka variance"
+          },
+          {
+            "type": "paragraph",
+            "text": "Diye gaye scores: 30, 45, 55, 75, 90"
+          },
+          {
+            "type": "equation",
+            "latex": "\\mu = \\frac{30+45+55+75+90}{5} = \\frac{295}{5} = 59",
+            "text_alt": "μ = (30 + 45 + 55 + 75 + 90)/5 = 295/5 = 59"
+          },
+          {
+            "type": "table",
+            "caption": "Class B: har score, mean se farq aur us ka square",
+            "header": [
+              "xᵢ",
+              "xᵢ − μ",
+              "(xᵢ − μ)²"
+            ],
+            "rows": [
+              [
+                "30",
+                "30 − 59 = −29",
+                "841"
+              ],
+              [
+                "45",
+                "45 − 59 = −14",
+                "196"
+              ],
+              [
+                "55",
+                "55 − 59 = −4",
+                "16"
+              ],
+              [
+                "75",
+                "75 − 59 = 16",
+                "256"
+              ],
+              [
+                "90",
+                "90 − 59 = 31",
+                "961"
+              ]
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Step 2.3: Variance nikalein"
+          },
+          {
+            "type": "equation",
+            "latex": "\\sigma^2 = \\frac{841+196+16+256+961}{5}",
+            "text_alt": "σ² = (841 + 196 + 16 + 256 + 961)/5"
+          },
+          {
+            "type": "equation",
+            "latex": "= 2270/5 = 454",
+            "text_alt": "= 2270/5 = 454"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Class A ka variance: 12.56",
+              "Class B ka variance: 454"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Is se sabit hota hai ke Class B ka variance kahin zyada hai, yani us ke scores Class A ke muqable mein zyada phaile hue hain."
           },
           {
             "type": "diagram",
@@ -96,21 +218,87 @@
             "caption": "Class A aur Class B ke scores ka phailao ek number line par (asal khaaka; kitab mein figure nahi)."
           },
           {
-            "type": "checkpoint",
-            "mode": "self_check",
-            "prompt": "Class activity: homework ke ghante 3, 5, 8, 8, 10, 12, 15, 15, 16, 18 ka mean, median, mode, variance aur standard deviation nikalein.",
-            "explanation": "Mean 110 / 10 = 11; median (10 + 12) / 2 = 11; modes 8 aur 15; murabba farq 64, 36, 9, 9, 1, 1, 16, 16, 25, 49 ka jama 226, to variance 22.6 aur standard deviation taqreeban 4.75. Zyada students taqreeban 11 ghante lagate hain, magar aadat dono taraf taqreeban 5 ghante badalti hai."
+            "type": "heading",
+            "level": 3,
+            "text": "5.2.3.2 Standard Deviation"
           },
           {
-            "type": "heading",
-            "level": 2,
-            "text": "Fauri khulasa"
+            "type": "paragraph",
+            "text": "Standard deviation variance jaisa hi hai, lekin zyada kaam ka (practical) number deta hai. Yeh batata hai ke numbers mean ke lihaz se kitne phaile hain. Standard deviation sirf variance ka square root hai, aur yeh data ki apni unit (jaise marks) mein hota hai. Formula:"
+          },
+          {
+            "type": "equation",
+            "latex": "\\sigma = \\sqrt{\\frac{1}{N}\\sum_{i=1}^{N}(x_i - \\mu)^2}",
+            "text_alt": "σ = √((1/N) Σᵢ₌₁ᴺ (xᵢ − μ)²)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab ke formula mein sum ka index t = 1 likha hai aur andar x₁ (pehli qeemat). Is tarah sirf pehli qeemat baar baar jama hogi. Sahi yeh hai ke har qeemat xᵢ jama ho, i = 1 se N tak: σ = √((1/N) Σᵢ₌₁ᴺ (xᵢ − μ)²)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Yahan:"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "Variance: murabba farq ka ausat; SD: us ka square root. Class A 12.56 aur 3.54; Class B 454 aur 21.31."
+              "xᵢ data ki har alag qeemat hai,",
+              "μ data ka mean hai,",
+              "N qeematon ki kul tadaad hai."
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Standard deviation ka hisab:"
+          },
+          {
+            "type": "paragraph",
+            "text": "Class A:"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{Standard Deviation} = \\sqrt{12.56} \\approx 3.54",
+            "text_alt": "Standard Deviation = √12.56 ≈ 3.54"
+          },
+          {
+            "type": "paragraph",
+            "text": "Class B:"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{Standard Deviation} = \\sqrt{454} \\approx 21.31",
+            "text_alt": "Standard Deviation = √454 ≈ 21.31"
+          },
+          {
+            "type": "paragraph",
+            "text": "Class A ka standard deviation taqreeban 3.54 aur Class B ka taqreeban 21.31 hai. Matlab Class A ke scores mean ke qareeb qareeb hain, jabke Class B ke scores door door bikhre hue hain. Standard deviation se aasani se pata chalta hai ke scores mein kitna farq (variation) hai."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab Class B ke liye √456 = 21.26 likhti hai. Lekin Class B ka variance 454 hai (Step 2.3), is liye standard deviation √454 ≈ 21.31 hai (√456 bhi taqreeban 21.35 banta hai, 21.26 nahi). Class A ke liye kitab 3.55 likhti hai; √12.56 ≈ 3.54 hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Variance aur standard deviation mein kya taluq hai, aur standard deviation zyada kaam ka kyun hai?",
+            "explanation": "Standard deviation variance ka square root hai (σ = √σ²). Variance squared units mein hota hai (marks²), jabke standard deviation data ki apni unit (marks) mein hota hai, is liye use samajhna aasan hai: Class A ke scores mean se aam taur par taqreeban 3.5 marks door hain aur Class B ke taqreeban 21 marks."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Mukhtasar khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Variance: mean se farq ke squares ka ausat; standard deviation: us ka square root.",
+              "Class A: variance 12.56, SD ≈ 3.54. Class B: variance 454, SD ≈ 21.31 (kitab: 3.55 aur 21.26)."
             ]
           }
         ]

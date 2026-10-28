@@ -13,23 +13,34 @@
           "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
           "pdf_from": 136,
           "pdf_to": 139,
-          "note": "Topic 5.4.1.2 (PDF 136-139, printed 133-136). The book first states the intercept as 300 and then derives 100; 100 is correct. It writes the error as 1,220 - 1,250 = -30 (predicted minus actual). MCQ 1 (a, key b), MCQ 5 (b) and short question 2 are answered. Recorded."
+          "note": "Topic 5.4.1.2 as printed (PDF 136-139, printed 133-136); with the Tidbits box printed at the top of PDF 139; book error marked: intercept printed 300 (100)."
         }
       ],
       "body": {
         "blocks": [
           {
-            "type": "callout",
-            "tone": "definition",
-            "title": "Linear regression",
-            "text": "Linear regression models the relationship between two variables to predict one from the other: Y = b0 + b1 X + error, where Y is the dependent variable, X the independent variable, b0 the intercept (Y when X = 0), b1 the slope (change in Y per unit of X) and the error term the gap between predicted and actual values."
+            "type": "paragraph",
+            "text": "Linear regression is a common statistical model used to understand the relationship between two variables. It is often used to predict one variable based on another. Let's go through a practical example to explain how it works."
+          },
+          {
+            "type": "paragraph",
+            "text": "Example: Imagine you run a small fruit stall in your town, and you want to predict how much money you will make each day based on the number of customers who visit your stall. The number of customers is the independent variable (the cause), and the money you earn is the dependent variable (the effect). We will use linear regression to understand this relationship and help you predict future earnings."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Step 1: Collecting Data"
+          },
+          {
+            "type": "paragraph",
+            "text": "To build a linear regression model, we need data. Let's assume you've recorded the number of customers and your daily earnings for the last 5 days:"
           },
           {
             "type": "table",
-            "caption": "Fruit stall: customers and daily earnings",
+            "caption": "Number of customers and daily earnings for the last 5 days",
             "header": [
-              "Customers (X)",
-              "Earnings in rupees (Y)"
+              "Number of Customers",
+              "Daily Earnings (in Rupees)"
             ],
             "rows": [
               [
@@ -56,7 +67,271 @@
           },
           {
             "type": "paragraph",
-            "text": "Every 5 extra customers add 200 rupees, so the slope b1 = 200 / 5 = 40 rupees per customer. Using 10 customers and 500 rupees: 500 = b0 + 40 x 10, so b0 = 100, the base earnings with no customers. The model is earnings = 100 + 40 x customers. For 22 customers it predicts 100 + 880 = 980 rupees. On day 6, 28 customers gave 1,250 rupees while the model predicted 100 + 1,120 = 1,220; the error is 30 rupees, showing real data vary."
+            "text": "Here, the number of customers is our independent variable (X), and the daily earnings are the dependent variable (Y)."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Step 2: Understanding the Linear Regression Formula"
+          },
+          {
+            "type": "paragraph",
+            "text": "The formula for simple linear regression is:"
+          },
+          {
+            "type": "equation",
+            "latex": "Y = \\beta_0 + \\beta_1 x + \\epsilon",
+            "text_alt": "Y = β₀ + β₁x + ϵ"
+          },
+          {
+            "type": "paragraph",
+            "text": "Where:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Y is the dependent variable (in our case, daily earnings),",
+              "X is the independent variable (the number of customers),",
+              "β₀ is the intercept, which is the starting value of Y when X = 0,",
+              "β₁ is the slope, which shows how much Y changes with each unit increase in X,",
+              "ε is the error term, which accounts for the difference between the predicted and actual values."
+            ]
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Step 3: Building the Linear Regression Model"
+          },
+          {
+            "type": "paragraph",
+            "text": "When building a linear regression model, our goal is to find the best line that explains how two things are related in this case, the number of customers and daily earnings. Here's how we get the values for the slope (40) and intercept (300):",
+            "book_errors": [
+              "intercept (300)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The intercept worked out below is 100, not 300: 500 = β₀ + 40 × 10 gives β₀ = 100, and Earnings = 100 + 40 × Customers fits all five days of data."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Understanding the Slope (β₁ = 40)"
+          },
+          {
+            "type": "paragraph",
+            "text": "The slope shows how much extra money we make for every new customer. Let's use our data to figure it out:"
+          },
+          {
+            "type": "table",
+            "caption": "Customers and earnings (Rupees)",
+            "header": [
+              "Customers",
+              "Earnings (Rupees)"
+            ],
+            "rows": [
+              [
+                "10",
+                "500"
+              ],
+              [
+                "15",
+                "700"
+              ],
+              [
+                "20",
+                "900"
+              ],
+              [
+                "25",
+                "1,100"
+              ],
+              [
+                "30",
+                "1,300"
+              ]
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "If you notice, for every 5 extra customers, earnings go up by 200 rupees. So, for each new customer:"
+          },
+          {
+            "type": "equation",
+            "latex": "\\beta_1 = 200/5 = 40",
+            "text_alt": "β₁ = 200/5 = 40"
+          },
+          {
+            "type": "paragraph",
+            "text": "This means every new customer adds 40 rupees to our earnings."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Understanding the Intercept (β₀ = 300)",
+            "book_errors": [
+              "β₀ = 300"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The heading prints β₀ = 300; the intercept is β₀ = 100, as worked out below."
+          },
+          {
+            "type": "paragraph",
+            "text": "The intercept (β₀) represents the earnings when no customers visit. To find this value, we look at where the line crosses the vertical axis when the number of customers is zero. In simpler terms, it tells us what the base earnings are, even if no one shows up."
+          },
+          {
+            "type": "paragraph",
+            "text": "Let's look at the data:"
+          },
+          {
+            "type": "table",
+            "caption": "Customers and earnings (Rupees)",
+            "header": [
+              "Customers",
+              "Earnings (Rupees)"
+            ],
+            "rows": [
+              [
+                "10",
+                "500"
+              ],
+              [
+                "15",
+                "700"
+              ],
+              [
+                "20",
+                "900"
+              ],
+              [
+                "25",
+                "1,100"
+              ],
+              [
+                "30",
+                "1,300"
+              ]
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Using this data, we calculate the slope (β₁ = 40) means for every additional customer, earnings increase by 40 rupees. Now, to find the intercept, we need to consider how much we earn when there are no customers."
+          },
+          {
+            "type": "paragraph",
+            "text": "We can use the equation:"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{Earnings} = \\beta_0 + \\beta_1 \\times \\text{Customers}",
+            "text_alt": "Earnings = β₀ + β₁ × Customers"
+          },
+          {
+            "type": "paragraph",
+            "text": "If we take any data point, say when there are 10 customers, the earnings are 500 rupees. Substituting these values into the equation:"
+          },
+          {
+            "type": "equation",
+            "latex": "500 = \\beta_0 + (40 \\times 10)",
+            "text_alt": "500 = β₀ + (40 × 10)"
+          },
+          {
+            "type": "equation",
+            "latex": "500 = \\beta_0 + 400",
+            "text_alt": "500 = β₀ + 400"
+          },
+          {
+            "type": "paragraph",
+            "text": "Solving this gives:"
+          },
+          {
+            "type": "equation",
+            "latex": "\\beta_0 = 500 - 400 = 100",
+            "text_alt": "β₀ = 500 − 400 = 100"
+          },
+          {
+            "type": "paragraph",
+            "text": "This means that, based on the data, if no customers show up, you'd still expect to make 100 rupees, maybe from regular customers or other fixed earnings. So, the intercept value of 100 rupees represents the minimum amount you'd make on a day with zero customers."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Final Equation"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{Earnings} = 100 + 40 \\times \\text{Customers}",
+            "text_alt": "Earnings = 100 + 40 × Customers"
+          },
+          {
+            "type": "paragraph",
+            "text": "This equation means:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "You'll always earn 100 rupees, even if no one comes.",
+              "Each new customer adds 40 rupees to your total."
+            ]
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Step 4: Interpreting the Model"
+          },
+          {
+            "type": "paragraph",
+            "text": "Once the model is built, we can use it to predict future earnings. For example, if you expect 22 customers tomorrow, the predicted earnings would be:"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{Earnings} = 100 + (40 \\times 22) = 100 + 880 = 980\\ \\text{rupees}",
+            "text_alt": "Earnings = 100 + (40 × 22) = 100 + 880 = 980 rupees"
+          },
+          {
+            "type": "paragraph",
+            "text": "This means that with 22 customers, you can expect to earn around 980 rupees."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Step 5: Testing the Model"
+          },
+          {
+            "type": "paragraph",
+            "text": "After building the model, it's important to test it using new data. Let's say on the 6th day, 28 customers visited your stall, and you earned 1,250 rupees. Using the model, we can predict the earnings for 28 customers:"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{Predicted Earnings} = 100 + (40 \\times 28) = 100 + 1{,}120 = 1{,}220\\ \\text{rupees}",
+            "text_alt": "Predicted Earnings = 100 + (40 × 28) = 100 + 1,120 = 1,220 rupees"
+          },
+          {
+            "type": "paragraph",
+            "text": "However, you actually earned 1,250 rupees. The difference between the predicted and actual earnings is called the error:"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{Error} = 1{,}220 - 1{,}250 = -30\\ \\text{rupees}",
+            "text_alt": "Error = 1,220 − 1,250 = −30 rupees"
+          },
+          {
+            "type": "paragraph",
+            "text": "While the prediction was close, it's not perfect, showing that real-world data often has some variation."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Tidbits",
+            "text": "To improve your statistical model, consider these suggestions: 1. Use more data points for better accuracy. 2. Include relevant factors like family size or special events that may affect spending's. 3. Regularly update your model with new data to keep it relevant. 4. Test your predictions against actual spending to refine your approach."
           }
         ]
       }
