@@ -21,6 +21,7 @@ import type {
   AssistedAccess,
   AttemptResult,
   Book,
+  BookExercises,
   Catalogue,
   Chapter,
   Discovery,
@@ -95,6 +96,8 @@ export type TopicReading = {
   next_topic_id: string | null;
   /** CHAPTER-OPENING-01: the chapter's first topic. */
   chapter_start?: boolean;
+  /** BOOK-EXERCISES-01: "exercise" is the chapter's end-of-chapter exercise, read in Practice. */
+  kind?: "topic" | "exercise";
 };
 
 function origin(): string {
@@ -241,6 +244,9 @@ export const api = {
   /** LECTURE-READ-01: the topic's approved lecture (locked without a plan or trial), or that it is coming. */
   topicLecture: (topicId: string, token: string | null, signal?: AbortSignal) =>
     request<TopicLecture>(`/v1/topics/${encodeURIComponent(topicId)}/lecture`, { token, signal, cache: "no-store" }),
+  /** BOOK-EXERCISES-01: each chapter's end-of-chapter exercise in one class's book, and whether it can be read. */
+  bookExercises: (grade: number, subject: string, token: string | null, signal?: AbortSignal) =>
+    request<BookExercises>(`/v1/grades/${grade}/subjects/${encodeURIComponent(subject)}/exercises`, { token, signal, cache: "no-store" }),
   lessons: (chapterId: string, token: string | null, signal?: AbortSignal, language?: string) =>
     request<Lesson[]>(
       `/v1/chapters/${encodeURIComponent(chapterId)}/lessons${language && language !== "en" ? `?language=${encodeURIComponent(language)}` : ""}`,

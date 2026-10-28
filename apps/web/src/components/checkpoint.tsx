@@ -12,6 +12,7 @@ export function Checkpoint({
   answerId,
   explanation,
   answerFigure,
+  revealLabel = "Show what a good answer contains",
 }: {
   mode: "question" | "self_check";
   prompt: string;
@@ -20,6 +21,8 @@ export function Checkpoint({
   explanation: string;
   /** ANSWER-FIGURE-01: the drawn answer, shown with the explanation once revealed, never before. */
   answerFigure?: ReactNode;
+  /** BOOK-EXERCISES-01: the self-check button's words ("Show answer" / "Answer dekhein" on a book exercise). */
+  revealLabel?: string;
 }) {
   const [chosen, setChosen] = useState<string | null>(null);
   const [revealed, setRevealed] = useState(false);
@@ -28,7 +31,8 @@ export function Checkpoint({
   return (
     <aside aria-label="Check your understanding" className="space-y-3 rounded-xl border border-accent/40 bg-accent-soft p-4">
       <p className="text-sm font-semibold">Check your understanding</p>
-      <p>{prompt}</p>
+      {/* Prompts and answers keep their line breaks and indentation: book exercises quote and answer with programs. */}
+      <p className="whitespace-pre-wrap">{prompt}</p>
       {mode === "question" ? (
         <fieldset className="space-y-2" disabled={chosen !== null}>
           <legend className="sr-only">{prompt}</legend>
@@ -48,14 +52,14 @@ export function Checkpoint({
       ) : (
         !revealed && (
           <button type="button" onClick={() => setRevealed(true)} className="rounded-lg border border-border bg-surface px-3 py-1.5 text-sm font-medium hover:border-accent">
-            Show what a good answer contains
+            {revealLabel}
           </button>
         )
       )}
       {done && (
         <p role="status" className="text-sm">
           {mode === "question" && (chosen === answerId ? "Right. " : "Not quite. ")}
-          {explanation}
+          <span className="whitespace-pre-wrap">{explanation}</span>
         </p>
       )}
       {done && answerFigure}

@@ -138,6 +138,11 @@ def _chapter_summaries(session: Session, book: BookEdition) -> list[ChapterSumma
 
 
 def get_book_for(session: Session, grade: int, subject: str) -> BookOut:
+    return _book_out(session, book_for(session, grade, subject))
+
+
+def book_for(session: Session, grade: int, subject: str) -> BookEdition:
+    """The one edition of this class's book in this subject that is effective today."""
     code = normalise_subject(subject)
     books = (
         session.scalars(
@@ -152,10 +157,9 @@ def get_book_for(session: Session, grade: int, subject: str) -> BookOut:
     current = _current(list(books), _today(session))
     if len(current) > 1:
         raise Conflict("More than one edition of this book is effective today, so none is chosen.")
-    book = current[0] if current else None
-    if book is None:
+    if not current:
         raise NotFound(f"No Class {grade} book is available for subject '{subject}'.")
-    return _book_out(session, book)
+    return current[0]
 
 
 def get_book(session: Session, book_id: uuid.UUID) -> BookOut:
@@ -191,7 +195,14 @@ def get_chapter(session: Session, chapter_id: uuid.UUID) -> ChapterOut:
         if t.retired_at is not None:
             continue
         node = TopicNode(
-            id=t.id, number=t.number, title=t.title, depth=t.depth, pdf_page=t.pdf_page, points=t.points, children=[]
+            id=t.id,
+            number=t.number,
+            title=t.title,
+            kind=t.kind,
+            depth=t.depth,
+            pdf_page=t.pdf_page,
+            points=t.points,
+            children=[],
         )
         nodes[t.id] = node
         if t.parent_id and t.parent_id in nodes:

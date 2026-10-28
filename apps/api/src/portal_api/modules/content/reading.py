@@ -18,9 +18,10 @@ from portal_api.modules.access import service as access
 from portal_api.modules.content import assets, kinds
 from portal_api.modules.content.models import Availability as ItemAvailability
 from portal_api.modules.content.models import ContentItem, ContentVersion
-from portal_api.modules.content.schemas import TopicLessonOut, TopicReadingOut
+from portal_api.modules.content.schemas import BookExerciseOut, BookExercisesOut, TopicLessonOut, TopicReadingOut
 from portal_api.modules.content.workflow import roles_in_scope
-from portal_api.modules.curriculum.models import BookEdition, Chapter, Topic
+from portal_api.modules.curriculum import service as curriculum
+from portal_api.modules.curriculum.models import EXERCISE_KEY_SUFFIX, BookEdition, Chapter, Topic
 from portal_api.modules.curriculum.regions import book_is_released
 from portal_api.modules.identity.deps import Principal
 from portal_api.modules.identity.permissions import Permission, Role, permissions_for
@@ -52,7 +53,8 @@ def reading(
             subject_name=book.subject.name,
             previous_topic_id=previous_id,
             next_topic_id=next_id,
-            chapter_start=topic.parent_id is None and previous_id is None,
+            chapter_start=topic.parent_id is None and previous_id is None and topic.kind == "topic",
+            kind=topic.kind,
             availability=availability,
             lesson=lesson,
         )
@@ -71,6 +73,54 @@ def reading(
             if draft is not None:
                 return out("private_preview", draft)
     return out("unavailable", None)
+
+
+def book_exercises(db: Session, who: Principal | None, grade: int, subject: str) -> BookExercisesOut:
+    """BOOK-EXERCISES-01: each chapter's end-of-chapter exercise in this class's book, in chapter order, with whether
+    its lesson can be read by this caller (the same rule as `reading`, without sending any lesson text)."""
+    book = curriculum.book_for(db, grade, subject)
+    preview = _can_preview(db, who, book.grade.number, book.subject.code)
+    rows = db.execute(
+        select(Topic, Chapter)
+        .join(Chapter, Topic.chapter_id == Chapter.id)
+        .where(
+            Chapter.book_id == book.id,
+            Chapter.retired_at.is_(None),
+            Topic.retired_at.is_(None),
+            Topic.natural_key.endswith(EXERCISE_KEY_SUFFIX, autoescape=True),
+        )
+        .order_by(Chapter.display_order, Topic.display_order)
+    ).all()
+    exercises: list[BookExerciseOut] = []
+    for topic, chapter in rows:
+        availability: Availability = "unavailable"
+        languages: list[str] = []
+        published = _concepts(db, topic.id, published_only=True)
+        if len(published) == 1:
+            availability, languages = "published", [item.language for item in published[0]]
+        elif not published and preview:
+            drafts = _concepts(db, topic.id, published_only=False)
+            variants = drafts[0] if len(drafts) == 1 else []
+            usable = [item for item in variants if item.working is not None and _has_body(item.working)]
+            if usable:
+                availability, languages = "private_preview", [item.language for item in usable]
+        exercises.append(
+            BookExerciseOut(
+                topic_id=topic.id,
+                chapter_id=chapter.id,
+                chapter_number=chapter.number,
+                chapter_title=chapter.title,
+                availability=availability,
+                available_languages=sorted(set(languages)),  # type: ignore[arg-type]
+            )
+        )
+    return BookExercisesOut(
+        grade_number=book.grade.number,
+        subject_code=book.subject.code,
+        subject_name=book.subject.name,
+        chapter_label=book.chapter_label,
+        exercises=exercises,
+    )
 
 
 def preview_asset(db: Session, who: Principal, topic_id: uuid.UUID, version_id: uuid.UUID) -> tuple[bytes, str]:
@@ -112,7 +162,12 @@ def _place(db: Session, topic_id: uuid.UUID) -> tuple[Topic, Chapter, BookEditio
 
 def _neighbours(db: Session, topic: Topic) -> tuple[uuid.UUID | None, uuid.UUID | None]:
     """The topics before and after this one in the book's reading order: each topic, then its subtopics, then the next
-    topic (1.2, 1.2.1, 1.2.2, 1.2.2.1, …, 1.3). Siblings alone skipped every subtopic (owner, 2026-10-28)."""
+    topic (1.2, 1.2.1, 1.2.2, 1.2.2.1, …, 1.3). Siblings alone skipped every subtopic (owner, 2026-10-28).
+
+    BOOK-EXERCISES-01: the end-of-chapter exercise (and anything under it) is not in that order, so Learn never leads
+    into it, and the exercise itself has no neighbours: it is opened from Practice."""
+    if topic.kind == "exercise":
+        return None, None
     rows = list(
         db.scalars(
             select(Topic)
@@ -127,6 +182,8 @@ def _neighbours(db: Session, topic: Topic) -> tuple[uuid.UUID | None, uuid.UUID 
 
     def walk(parent: uuid.UUID | None) -> None:
         for row in children.get(parent, []):
+            if row.kind == "exercise":
+                continue
             ids.append(row.id)
             walk(row.id)
 

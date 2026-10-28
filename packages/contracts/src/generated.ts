@@ -1003,6 +1003,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/grades/{grade}/subjects/{subject}/exercises": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Each chapter's end-of-chapter exercise in one class's book, for Practice (BOOK-EXERCISES-01)
+         * @description Which exercises can be opened depends on the caller (a staff preview of a draft), so it is not shared-cached.
+         */
+        get: operations["book_exercises_v1_grades__grade__subjects__subject__exercises_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/help/articles": {
         parameters: {
             query?: never;
@@ -5543,6 +5563,46 @@ export interface components {
             state: "lessons" | "practice_only" | "not_yet_published";
             /** Subject */
             subject: string;
+            /** Subject Name */
+            subject_name: string;
+        };
+        /**
+         * BookExerciseOut
+         * @description BOOK-EXERCISES-01: one chapter's end-of-chapter exercise, as Practice lists it.
+         */
+        BookExerciseOut: {
+            /**
+             * Availability
+             * @enum {string}
+             */
+            availability: "published" | "private_preview" | "unavailable";
+            /** Available Languages */
+            available_languages: ("en" | "ur" | "roman_ur")[];
+            /**
+             * Chapter Id
+             * Format: uuid
+             */
+            chapter_id: string;
+            /** Chapter Number */
+            chapter_number: number;
+            /** Chapter Title */
+            chapter_title: string;
+            /**
+             * Topic Id
+             * Format: uuid
+             */
+            topic_id: string;
+        };
+        /** BookExercisesOut */
+        BookExercisesOut: {
+            /** Chapter Label */
+            chapter_label: string;
+            /** Exercises */
+            exercises: components["schemas"]["BookExerciseOut"][];
+            /** Grade Number */
+            grade_number: number;
+            /** Subject Code */
+            subject_code: string;
             /** Subject Name */
             subject_name: string;
         };
@@ -11725,6 +11785,11 @@ export interface components {
              * Format: uuid
              */
             id: string;
+            /**
+             * Kind
+             * @enum {string}
+             */
+            kind: "topic" | "exercise";
             /** Number */
             number: string | null;
             /** Pdf Page */
@@ -11757,6 +11822,12 @@ export interface components {
             chapter_title: string;
             /** Grade Number */
             grade_number: number;
+            /**
+             * Kind
+             * @default topic
+             * @enum {string}
+             */
+            kind: "topic" | "exercise";
             lesson: components["schemas"]["TopicLessonOut"] | null;
             /** Next Topic Id */
             next_topic_id: string | null;
@@ -14765,6 +14836,38 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["BookOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    book_exercises_v1_grades__grade__subjects__subject__exercises_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                grade: number;
+                subject: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BookExercisesOut"];
                 };
             };
             /** @description Validation Error */

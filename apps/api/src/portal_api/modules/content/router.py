@@ -21,6 +21,7 @@ from portal_api.modules.content.schemas import (
     AccessTierIn,
     Actions,
     AssignIn,
+    BookExercisesOut,
     ChangeReasonIn,
     DraftIn,
     HistoryEvent,
@@ -672,6 +673,24 @@ def topic_lesson(
     response.headers["Cache-Control"] = "private, no-store"
     response.headers["Vary"] = "Authorization"
     return reading.reading(db, who, topic_id, language)
+
+
+@public.get(
+    "/grades/{grade}/subjects/{subject}/exercises",
+    response_model=BookExercisesOut,
+    summary="Each chapter's end-of-chapter exercise in one class's book, for Practice (BOOK-EXERCISES-01)",
+)
+def book_exercises(
+    db: DB,
+    who: OptionalPrincipal,
+    response: Response,
+    grade: Annotated[int, Path(ge=11, le=12)],
+    subject: Annotated[str, Path(min_length=2, max_length=40)],
+) -> BookExercisesOut:
+    """Which exercises can be opened depends on the caller (a staff preview of a draft), so it is not shared-cached."""
+    response.headers["Cache-Control"] = "private, no-store"
+    response.headers["Vary"] = "Authorization"
+    return reading.book_exercises(db, who, grade, subject)
 
 
 @public.get(

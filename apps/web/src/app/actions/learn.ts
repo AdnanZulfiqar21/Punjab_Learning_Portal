@@ -62,7 +62,9 @@ export async function chooseLearnContext(form: FormData): Promise<void> {
 export async function chooseReadingLanguage(form: FormData): Promise<void> {
   const topicId = String(form.get("topic") ?? "");
   const language = form.get("language");
-  const back = UUID.test(topicId) ? `/learn/topic/${topicId}` : "/learn";
+  // BOOK-EXERCISES-01: a book exercise is read in Practice, with the same language choice as a topic.
+  const exercise = form.get("place") === "exercise";
+  const back = UUID.test(topicId) ? (exercise ? `/practice/exercises/${topicId}` : `/learn/topic/${topicId}`) : exercise ? "/practice/exercises" : "/learn";
   if (!isReadingLanguage(language)) redirect(back);
   const lang: ReadingLanguage = language;
   (await cookies()).set(LANGUAGE_COOKIE, lang, cookieOptions());

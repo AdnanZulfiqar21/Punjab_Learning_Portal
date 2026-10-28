@@ -110,6 +110,8 @@ function QuickCheck({ title, children }: { title: string; children: ReactNode })
 const Premium = createContext(false);
 /** CODE-RUNNER-01: Python programs marked runnable get "Run karein" (the Roman Urdu lesson). */
 const Runnable = createContext(false);
+/** BOOK-EXERCISES-01: the words on each self-check's reveal button (the checkpoint's own label otherwise). */
+const RevealLabel = createContext<string | undefined>(undefined);
 
 export function LessonBlocks({
   blocks,
@@ -119,6 +121,7 @@ export function LessonBlocks({
   onBlockLayout,
   premium = false,
   runnable = false,
+  revealLabel,
 }: {
   blocks: Block[];
   assetSource?: AssetSource;
@@ -130,8 +133,10 @@ export function LessonBlocks({
   onBlockLayout?: (index: number, y: number) => void;
   premium?: boolean;
   runnable?: boolean;
+  revealLabel?: string;
 }) {
   return (
+    <RevealLabel.Provider value={revealLabel}>
     <Runnable.Provider value={runnable}>
     <Premium.Provider value={premium}>
     <View style={{ gap: Space.lg }}>
@@ -172,6 +177,7 @@ export function LessonBlocks({
     </View>
     </Premium.Provider>
     </Runnable.Provider>
+    </RevealLabel.Provider>
   );
 }
 
@@ -266,6 +272,7 @@ function BlockView({ block: b, assetSource, dataSaver }: { block: Block; assetSo
   const c = useTheme();
   const premium = useContext(Premium);
   const runnable = useContext(Runnable);
+  const revealLabel = useContext(RevealLabel);
   const marks = bookErrors(b.book_errors);
   switch (b.type) {
     case "heading":
@@ -394,6 +401,7 @@ function BlockView({ block: b, assetSource, dataSaver }: { block: Block; assetSo
           answerId={typeof b.answer_id === "string" ? b.answer_id : null}
           explanation={str(b.explanation)}
           answerFigure={answerFigure}
+          revealLabel={revealLabel}
         />
       );
     }
