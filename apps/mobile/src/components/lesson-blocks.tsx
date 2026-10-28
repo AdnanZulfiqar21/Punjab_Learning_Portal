@@ -6,6 +6,7 @@ import { createContext, Fragment, useContext, useState, type ReactNode } from "r
 import { Pressable, ScrollView, Text, View } from "react-native";
 
 import { Checkpoint } from "@/components/checkpoint";
+import { CodeRunner } from "@/components/code-runner";
 import { FigureViewer } from "@/components/figure-viewer";
 import { Model3D } from "@/components/model3d";
 import { LinkButton, T } from "@/components/ui";
@@ -107,6 +108,8 @@ function QuickCheck({ title, children }: { title: string; children: ReactNode })
 
 /** BOOK-STYLE-01: the premium style of a chosen book (lib/book-style.ts `premiumBook`), read by every block. */
 const Premium = createContext(false);
+/** CODE-RUNNER-01: Python programs marked runnable get "Run karein" (the Roman Urdu lesson). */
+const Runnable = createContext(false);
 
 export function LessonBlocks({
   blocks,
@@ -115,6 +118,7 @@ export function LessonBlocks({
   dataSaver = false,
   onBlockLayout,
   premium = false,
+  runnable = false,
 }: {
   blocks: Block[];
   assetSource?: AssetSource;
@@ -125,8 +129,10 @@ export function LessonBlocks({
   /** Where each block sits (y within this list), so a language switch can return to the same place. */
   onBlockLayout?: (index: number, y: number) => void;
   premium?: boolean;
+  runnable?: boolean;
 }) {
   return (
+    <Runnable.Provider value={runnable}>
     <Premium.Provider value={premium}>
     <View style={{ gap: Space.lg }}>
       {blocks.map((b, i) => {
@@ -165,6 +171,7 @@ export function LessonBlocks({
       })}
     </View>
     </Premium.Provider>
+    </Runnable.Provider>
   );
 }
 
@@ -258,6 +265,7 @@ function Item({ text, marks }: { text: string; marks: string[] | null }) {
 function BlockView({ block: b, assetSource, dataSaver }: { block: Block; assetSource?: AssetSource; dataSaver?: boolean }) {
   const c = useTheme();
   const premium = useContext(Premium);
+  const runnable = useContext(Runnable);
   const marks = bookErrors(b.book_errors);
   switch (b.type) {
     case "heading":
@@ -446,6 +454,7 @@ function BlockView({ block: b, assetSource, dataSaver }: { block: Block; assetSo
               <Code text={str(b.text)} language={str(b.language)} marks={marks} />
             </Text>
           </ScrollView>
+          {runnable && b.runnable === true ? <CodeRunner code={str(b.text)} /> : null}
         </View>
       );
     case "diagram":
