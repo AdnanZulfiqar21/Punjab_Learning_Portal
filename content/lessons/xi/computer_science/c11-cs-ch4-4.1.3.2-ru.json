@@ -72,6 +72,21 @@
             "caption": "Postfix 3 4 5 * + ka hisab karte hue stack ki states (halat) (asal khaaka; kitab mein figure nahi)."
           },
           {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh program postfix expression ko stack se hal karta hai: number push, operator par do pop, hisab, aur result push. postfix badal kar Run karein, maslan \"3 4 2 * +\" (jawab 11); har token ke beech space rakhein."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "postfix = \"3 4 5 * +\"   # put a space between every token\n\nstack = list()\nfor token in postfix.split():\n    if token in \"+-*/\":\n        b = stack.pop()\n        a = stack.pop()\n        if token == \"+\": result = a + b\n        elif token == \"-\": result = a - b\n        elif token == \"*\": result = a * b\n        else: result = a / b\n        print(a, token, b, \"=\", result)\n        stack.append(result)\n    else:\n        stack.append(int(token))\n    print(\"Stack:\", stack)\nprint(\"Answer:\", stack[0])",
+            "runnable": true
+          },
+          {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "3 4 2 * + ko stack se hal karein.",

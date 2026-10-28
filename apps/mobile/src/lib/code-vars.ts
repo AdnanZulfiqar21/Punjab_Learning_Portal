@@ -34,7 +34,7 @@ export function isPlainValue(text: string): boolean {
 /** The values a student may change, in program order. Lines inside a block (indented) are left alone. */
 export function editableVars(code: string): EditableVar[] {
   const out: EditableVar[] = [];
-  code.split("\n").forEach((text, line) => {
+  code.split(/\r?\n/).forEach((text, line) => {
     const m = /^([A-Za-z_]\w*)(\s*=\s*)(.*)$/.exec(text);
     if (!m) return;
     const start = m[1].length + m[2].length;
@@ -61,7 +61,7 @@ export function editableVars(code: string): EditableVar[] {
 
 /** The program with the given values (by line) put in; a value that is not plain keeps the printed one. */
 export function withValues(code: string, vars: EditableVar[], values: Record<number, string>): string {
-  const lines = code.split("\n");
+  const lines = code.split(/\r?\n/);
   for (const v of vars) {
     const next = values[v.line];
     if (next === undefined || !isPlainValue(next)) continue;

@@ -175,6 +175,21 @@
             ]
           },
           {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh program Figure 4.8 wale tree ke teeno traversals chhapta hai. left aur right batate hain ke har node ka baen aur daen child kaun hai. root badal kar (maslan 2) ya naya child jor kar Run karein aur naye orders dekhein."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "left = {1: 2, 2: 4, 3: 6}    # left child of each node\nright = {1: 3, 2: 5, 3: 7}   # right child of each node\nroot = 1\n\ndef in_order(node):\n    if node is None: return []\n    return in_order(left.get(node)) + [node] + in_order(right.get(node))\n\ndef pre_order(node):\n    if node is None: return []\n    return [node] + pre_order(left.get(node)) + pre_order(right.get(node))\n\ndef post_order(node):\n    if node is None: return []\n    return post_order(left.get(node)) + post_order(right.get(node)) + [node]\n\nprint(\"In-order:  \", in_order(root))\nprint(\"Pre-order: \", pre_order(root))\nprint(\"Post-order:\", post_order(root))",
+            "runnable": true
+          },
+          {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "Kaunsa traversal root node ko us ke children se pehle dekhta hai (MCQ 7)?",

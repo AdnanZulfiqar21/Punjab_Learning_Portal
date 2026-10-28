@@ -71,6 +71,21 @@
             "text": "Code pehle kitabon ke liye khali stack banata hai. Phir teen kitabein (\"Book A\", \"Book B\" aur \"Book C\") ek ek kar ke top par dalta hai. Aakhir mein top wali kitab \"Book C\" nikalta hai. Is se pata chalta hai ke jo kitab aakhir mein rakhi gayi, wohi pehle nikli."
           },
           {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh program books ki saari kitabein stack par push karta hai aur phir pops jitni baar pop karta hai. books mein kitabein jorein ya pops badal kar Run karein; dekhein ke hamesha aakhir mein dali gayi kitab pehle nikalti hai (LIFO)."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "books = [\"Book A\", \"Book B\", \"Book C\", \"Book D\"]\npops = 2           # how many times to pop\n\nstack_of_books = list()\nfor book in books:\n    stack_of_books.append(book)          # push\nprint(\"Full stack (top on the right):\", stack_of_books)\nfor i in range(pops):\n    if stack_of_books:\n        print(\"Popped:\", stack_of_books.pop())\n    else:\n        print(\"Stack is empty, nothing to pop\")\nprint(\"Stack now:\", stack_of_books)",
+            "runnable": true
+          },
+          {
             "type": "callout",
             "tone": "note",
             "title": "Did You Know?",

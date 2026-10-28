@@ -34,6 +34,21 @@
             "text": "Misal (hamari taraf se): 1, 2, 5 aur 10 ke sikkon se 18 banana: 10 lo (baqi 8), 5 lo (baqi 3), 2 lo (baqi 1), 1 lo (baqi 0). Kul chaar sikke: 18 = 10 + 5 + 2 + 1."
           },
           {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh program greedy tareeqe se har dafa sab se bara munasib sikka leta hai. amount badal kar Run karein. Phir coins = [4, 3, 1] aur amount = 6 kar ke dekhein: greedy teen sikke deta hai, jabke 3 + 3 sirf do hain."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "coins = [10, 5, 2, 1]   # coin values\namount = 18\n\ndef greedy_change(left):\n    used = []\n    for coin in sorted(coins, reverse=True):    # biggest coin first\n        while coin <= left:\n            used.append(coin)\n            left = left - coin\n            print(\"Take\", coin, \"-> left\", left)\n    return used, left\n\nused, left = greedy_change(amount)\nprint(\"Coins used:\", used, \"| count:\", len(used))\nif left > 0:\n    print(\"Exact amount not possible; left over:\", left)",
+            "runnable": true
+          },
+          {
             "type": "callout",
             "tone": "note",
             "title": "Tidbits",

@@ -78,6 +78,21 @@
             "text": "Har chakkar mein baqi elements mein se sab se bara element bulbule (bubble) ki tarah aakhir tak pohanch jata hai: pehle chakkar ke baad 8 aakhir mein hai, doosre ke baad 5 apni jagah par, waghaira."
           },
           {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh program har chakkar (pass) ke baad list print karta hai, jaise upar wali table mein. numbers list badal kar Run karein aur dekhein kitne chakkar lagte hain."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "numbers = [5, 3, 8, 4, 2]\n\ndef bubble_sort(items):\n    pass_no = 0\n    swapped = True\n    while swapped:\n        swapped = False\n        pass_no += 1\n        for i in range(len(items) - 1):\n            if items[i] > items[i + 1]:                           # wrong order?\n                items[i], items[i + 1] = items[i + 1], items[i]   # swap\n                swapped = True\n        if swapped:\n            print(\"Pass\", pass_no, \":\", items)\n        else:\n            print(\"Pass\", pass_no, \": no swap, list is sorted\")\n    return items\n\nprint(\"Sorted:\", bubble_sort(list(numbers)))",
+            "runnable": true
+          },
+          {
             "type": "paragraph",
             "text": "Complexity: Bubble Sort ki time complexity O(n²) hai, is liye bare datasets ke liye yeh efficient nahi. Lekin yeh samajhna aur banana aasan hai, is liye parhai (educational) ke maqsad aur chhote datasets ke liye faidemand hai."
           },

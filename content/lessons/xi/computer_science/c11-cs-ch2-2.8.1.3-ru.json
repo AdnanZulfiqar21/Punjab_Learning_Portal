@@ -71,6 +71,21 @@
           },
           {
             "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Object bante hi constructor __init__ chalta hai aur del se delete hote waqt destructor __del__. color badal kar Run karein aur dekhein dono messages kis tarteeb (order) mein aate hain."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "color = \"red\"\nclass Car:\n    def __init__(self, color):\n        self.color = color\n        print(\"Constructor: car with color\", self.color, \"created.\")\n    def __del__(self):\n        print(\"Destructor: car with color\", self.color, \"is being deleted.\")\nmy_car = Car(color)\nprint(\"Car is in use. Color:\", my_car.color)\ndel my_car\nprint(\"Program finished.\")",
+            "runnable": true
+          },
+          {
+            "type": "heading",
             "level": 2,
             "text": "Mukhtasar khulasa"
           },

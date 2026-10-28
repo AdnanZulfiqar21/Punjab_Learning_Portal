@@ -202,6 +202,21 @@
             "text": "Graph dekhein: kitab ke β₀ = 1 aur β₁ = 0.6 wala curve 0 ghante par bhi taqreeban 0.73 hai, yani 1, 2 aur 3 ghante parhne walon ko bhi pass ka bara chance deta hai, halanke woh fail hue. Is liye yeh maan liye gaye (assumed) coefficients is data par theek fit nahi hote; data par sahi fit hone wala curve 3 aur 4 ghante ke beech 0 se 1 ki taraf tezi se uthega."
           },
           {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh program logistic function se pass hone ki probability nikalta hai. hours badal kar Run karein, ya beta_0 aur beta_1 badal kar dekhein ke curve kaise badalta hai. Probability 0.5 ya zyada ho to andaza “pass” hai."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "beta_0 = 1      # intercept\nbeta_1 = 0.6    # coefficient of hours studied\nhours = 5\n\nimport math\n\nz = beta_0 + beta_1 * hours\np_pass = 1 / (1 + math.exp(-z))\n\nprint(\"beta_0 + beta_1 x hours =\", round(z, 2))\nprint(\"P(pass) =\", round(p_pass, 2), \"=\", round(p_pass * 100), \"%\")\nprint(\"Prediction:\", \"pass\" if p_pass >= 0.5 else \"fail\")",
+            "runnable": true
+          },
+          {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "Logistic regression linear regression se kaise alag hai?",

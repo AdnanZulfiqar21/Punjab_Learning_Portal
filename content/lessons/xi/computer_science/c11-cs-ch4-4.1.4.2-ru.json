@@ -62,6 +62,21 @@
             "text": "Yeh code logon ki line ko queue se sambhalta hai. Pehle teen log line ke aakhir mein jorta hai (put), phir dekhta hai ke sab se aage kaun hai (q.queue[0], yaani peek), phir aage wale ko nikal deta hai (get). Aakhir mein ek aur shakhs (Sara) jor kar nayi line dikhata hai."
           },
           {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh program people ko queue mein enqueue karta hai aur phir served jitne logon ko aage se dequeue karta hai. people ya served badal kar Run karein; dekhein ke jo pehle aaya woh pehle nikalta hai (FIFO)."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "from queue import Queue\npeople = [\"Ahmed\", \"Fatima\", \"Ali\", \"Sara\"]\nserved = 2         # how many people leave from the front\n\nq = Queue()\nfor person in people:\n    q.put(person)                         # enqueue at the back\nfor i in range(served):\n    if not q.empty():\n        print(\"Served:\", q.get())         # dequeue from the front\nprint(\"Still waiting:\", list(q.queue))",
+            "runnable": true
+          },
+          {
             "type": "callout",
             "tone": "note",
             "title": "Tidbits",

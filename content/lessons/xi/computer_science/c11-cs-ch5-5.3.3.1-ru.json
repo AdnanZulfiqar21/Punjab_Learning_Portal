@@ -94,6 +94,21 @@
             "text": "Pehle table mein “Alie” naam ki spelling ghalat hai aur Sara ka grade khali hai. Saaf table mein naam “Ali” kar diya gaya aur Sara ka grade 75 bhar diya gaya. Kitab yeh nahi batati ke 75 kahan se aaya; asal kaam mein ghayab grade record se dhoond kar likha jata hai (ya topic “Handling Missing Data” ke tareeqe istemal hote hain)."
           },
           {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh program record ki safai karta hai: ghalat naam theek karta hai (corrections), duplicate (do baar aayi) line hatata hai aur ghayab grade par nishan lagata hai. records ya corrections badal kar Run karein."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "records = [[\"Ali\", 85], [\"Alie\", 90], [\"Sara\", None], [\"Ali\", 85]]\ncorrections = {\"Alie\": \"Ali\"}  # wrong spelling -> right spelling\n\nclean = list()   # cleaned rows go here\nfor name, grade in records:\n    name = corrections.get(name, name)      # fix the name\n    if [name, grade] in clean:\n        print(\"Duplicate removed:\", name, grade)\n        continue\n    clean.append([name, grade])\n\nprint(\"Clean data:\")\nfor name, grade in clean:\n    print(\" \", name, grade if grade is not None else \"(grade missing - find it in the record)\")",
+            "runnable": true
+          },
+          {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "Teen problems bataiye jo data cleaning theek karti hai.",

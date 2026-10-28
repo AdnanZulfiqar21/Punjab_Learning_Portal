@@ -40,6 +40,21 @@
             "text": "Kitab mein is histogram ka title 'Maltis Test Results' chhapa hai, jo printing ki ghalti hai; yahan 'Maths Test Results' likha gaya hai. Histogram mein bars aapas mein jure hote hain kyunke bins lagataar (bina gap ke) hain: 50-55, 56-60, waghaira. Sab se oonchi bar 61-65 ki hai (5 students)."
           },
           {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh program scores ko bins (ranges) mein gin kar text histogram banata hai: har * ek student hai. scores ya bin_width badal kar Run karein aur distribution ki shakal badalte dekhein."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "scores = [50, 65, 75, 80, 85, 90, 95, 60, 70, 88]\nstart = 50\nbin_width = 10    # 10 means bins 50-59, 60-69, ...\n\nlow = start\nwhile low <= max(scores):\n    high = low + bin_width - 1\n    count = 0\n    for s in scores:\n        if low <= s <= high:\n            count = count + 1\n    print(f\"{low:>3}-{high:<3} |\", \"*\" * count, count)\n    low = low + bin_width",
+            "runnable": true
+          },
+          {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "Das scores 50, 65, 75, 80, 85, 90, 95, 60, 70, 88 ko 50s, 60s, 70s, 80s aur 90s ke bins mein rakhein.",

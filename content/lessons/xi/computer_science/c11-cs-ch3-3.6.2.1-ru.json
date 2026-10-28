@@ -70,6 +70,21 @@
             "text": "Python mein list ki ginti 0 se shuru hoti hai: Karachi 0, Lahore 1, Islamabad 2. Is liye function 2 lautata hai, yani Islamabad teesri jagah par hai. Item na mile to -1 lautata hai."
           },
           {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh program har comparison print karta hai. target ko \"Faisalabad\" ya \"Quetta\" kar ke Run karein aur dekhein kitne comparisons lagte hain; cities list bhi badal sakte hain."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "cities = [\"Karachi\", \"Lahore\", \"Islamabad\", \"Faisalabad\"]\ntarget = \"Islamabad\"\n\ndef linear_search():\n    for i in range(len(cities)):\n        print(\"Check position\", i, \":\", cities[i])\n        if cities[i] == target:\n            return i\n    return -1\n\nposition = linear_search()\nif position == -1:\n    print(target, \"is not in the list;\", len(cities), \"comparisons done.\")\nelse:\n    print(target, \"found at position\", position, \"after\", position + 1, \"comparisons.\")",
+            "runnable": true
+          },
+          {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "Faisalabad dhoondne aur yeh tay karne ke liye ke Quetta list mein nahi, linear search kitne comparisons karti hai?",

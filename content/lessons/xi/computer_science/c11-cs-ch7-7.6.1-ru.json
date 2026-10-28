@@ -32,6 +32,21 @@
             ]
           },
           {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh saada program password mein letters, numbers aur symbols ginta hai aur lambai (length) dekh kar batata hai ke password kamzor hai ya mazboot. password ki value badal kar Run karein (maslan Lahore@2026), magar apna asli password yahan kabhi na likhein."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "password = \"password123\"\n\nletters = digits = symbols = 0\nfor ch in password:\n    if ch.isalpha():\n        letters += 1\n    elif ch.isdigit():\n        digits += 1\n    else:\n        symbols += 1\n\n# Har shart (condition) poori hone par 1 point: lambai 8+, letters, numbers, symbols\nscore = sum([len(password) >= 8, letters > 0, digits > 0, symbols > 0])\nif password.lower() in [\"password\", \"password123\", \"123456\", \"12345678\", \"qwerty\"]:\n    score = 0                     # bohat aam password, foran guess ho jata hai\n\nprint(\"Letters:\", letters, \"| Numbers:\", digits, \"| Symbols:\", symbols, \"| Lambai:\", len(password))\nif score == 4:\n    print(\"Mazboot (strong) password\")\nelif score == 3:\n    print(\"Theek hai, magar aur mazboot ho sakta hai\")\nelse:\n    print(\"Kamzor (weak) password\")",
+            "runnable": true
+          },
+          {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "MCQ 10: In mein se kaunsa kaam responsible digital behavior (zimmedari wala rawayya) NAHI?",

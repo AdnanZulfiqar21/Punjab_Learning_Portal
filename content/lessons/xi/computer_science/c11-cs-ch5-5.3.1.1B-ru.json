@@ -37,6 +37,21 @@
             ]
           },
           {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh program ghayab grade (None) ko baqi students ke average se bharta hai (imputation) aur saath note bhi lagata hai (flagging). grades mein koi aur qeemat None kar ke ya numbers badal kar Run karein."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "names = [\"Ali\", \"Hina\", \"Sara\", \"Bilal\", \"Zara\"]\ngrades = [80, 85, None, 78, 85]  # None = grade missing\n\nknown = [g for g in grades if g is not None]\naverage = sum(known) / len(known)\n\nfor name, grade in zip(names, grades):\n    if grade is None:\n        print(name, \":\", round(average, 1), \" <- missing, filled with class average\")\n    else:\n        print(name, \":\", grade)",
+            "runnable": true
+          },
+          {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "Sara ke liye class ka average 82 bharna misleading (ghalat raah dikhane wala) kyun ho sakta hai?",

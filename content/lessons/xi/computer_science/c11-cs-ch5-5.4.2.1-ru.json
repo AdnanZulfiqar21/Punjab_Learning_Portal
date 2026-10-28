@@ -42,6 +42,21 @@
             "text": "Accuracy metrics batate hain ke model ke kitne andaze sahi the. Maslan agar model batata hai ke student pass hoga ya fail, to accuracy naapti hai ke model kitni baar sahi tha."
           },
           {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh program pehle grocery bill ka error nikalta hai, phir pass/fail andazon ki accuracy. predicted_bill, actual_bill ya predictions aur actual ki lists badal kar Run karein."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "predicted_bill = 8000\nactual_bill = 10000\npredictions = [\"pass\", \"pass\", \"fail\", \"pass\", \"fail\"]  # what the model said\nactual = [\"pass\", \"fail\", \"fail\", \"pass\", \"fail\"]       # what really happened\n\nerror = actual_bill - predicted_bill\nprint(\"Error metric: bill error =\", error, \"rupees\")\n\ncorrect = len([p for p, a in zip(predictions, actual) if p == a])  # matching answers\naccuracy = correct / len(actual) * 100\nprint(\"Accuracy metric:\", correct, \"out of\", len(actual), \"correct =\", round(accuracy, 1), \"%\")",
+            "runnable": true
+          },
+          {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "Ek pass/fail model 20 andaze lagata hai aur un mein se 17 sahi hain. Accuracy kya hai?",

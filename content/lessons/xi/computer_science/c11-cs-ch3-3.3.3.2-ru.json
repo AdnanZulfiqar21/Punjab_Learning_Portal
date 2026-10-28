@@ -70,6 +70,21 @@
             ]
           },
           {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh program 4 x 4 ki chhoti Sudoku (har row, column aur 2 x 2 box mein 1 se 4) ka diya gaya hal jaanchta (verify karta) hai. grid mein koi number badal kar Run karein aur dekhein kaunsi row, column ya box WRONG ho jata hai; jaanch phir bhi foran ho jati hai."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "grid = [[1, 2, 3, 4], [3, 4, 1, 2], [2, 1, 4, 3], [4, 3, 2, 1]]   # a 4 x 4 mini Sudoku\n\ndef check(name, numbers):\n    good = sorted(numbers) == [1, 2, 3, 4]\n    print(name, numbers, \"OK\" if good else \"WRONG\")\n    return good\n\ndef verify():\n    results = list()\n    for r in range(4):\n        results.append(check(\"Row\", grid[r]))\n    for c in range(4):\n        results.append(check(\"Column\", [grid[r][c] for r in range(4)]))\n    for r in (0, 2):\n        for c in (0, 2):\n            results.append(check(\"Box\", [grid[r][c], grid[r][c + 1], grid[r + 1][c], grid[r + 1][c + 1]]))\n    return all(results)\n\nprint(\"Solution is correct!\" if verify() else \"Solution is wrong.\")",
+            "runnable": true
+          },
+          {
             "type": "paragraph",
             "text": "Solving the Puzzle (puzzle hal karna): Sudoku ke numbers ki sahi tarteeb dhoondna mushkil ho sakta hai. Bohat si mumkin tarteebein (configurations) hoti hain, aur sahi tarteeb tak pohanchne ke liye kaafi trial and error (aazma kar ghalti sudharna) ya advanced algorithm chahiye hota hai."
           },

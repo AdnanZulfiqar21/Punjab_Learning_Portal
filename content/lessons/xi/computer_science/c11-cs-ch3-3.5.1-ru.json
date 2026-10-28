@@ -28,6 +28,21 @@
             "text": "Misal: do sorting algorithms lein: Bubble Sort aur Merge Sort. Bubble Sort ki time complexity O(n²) hai, yani input size dugna karne se waqt chaar guna ho jata hai (2² = 4). Merge Sort ki time complexity O(n log n) hai, jo input barhne par kahin aahista barhti hai, is liye bare datasets ke liye Merge Sort zyada efficient hai."
           },
           {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh program n aur dugne n ke liye Bubble Sort (n²) aur Merge Sort (n log n) ke taqreeban kaam ka comparison karta hai. n ki value badal kar Run karein aur dekhein n dugna hone par kaam kitne guna barhta hai."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "import math\n\nn = 1000   # number of items\n\ndef work(size):\n    return size * size, round(size * math.log2(size))\n\nbubble, merge = work(n)\nbubble2, merge2 = work(2 * n)\nprint(\"n =\", n, \"| Bubble Sort ~\", bubble, \"| Merge Sort ~\", merge)\nprint(\"n =\", 2 * n, \"| Bubble Sort ~\", bubble2, \"| Merge Sort ~\", merge2)\nprint(\"When n doubles: Bubble Sort x\", round(bubble2 / bubble, 2), \"| Merge Sort x\", round(merge2 / merge, 2))",
+            "runnable": true
+          },
+          {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "Bare datasets ke liye kaunsa zyada efficient hai: Bubble Sort, Merge Sort, Selection Sort ya Quick Sort (MCQ 5)?",

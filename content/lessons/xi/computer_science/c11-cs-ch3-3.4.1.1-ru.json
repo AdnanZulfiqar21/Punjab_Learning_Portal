@@ -65,6 +65,21 @@
             "text": "Alag alag time complexities ka comparison karte waqt yeh samajhna zaroori hai ke input n ka size barhne par algorithm ka zaroori waqt kaise barhta hai. Constant time O(1) n ke size se nahi badalta: input jitna bhi bara ho, waqt utna hi lagta hai; graph mein yeh seedhi barabar (flat) lakeer hai."
           },
           {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh program input size n ke liye har complexity ke taqreeban qadam (steps) print karta hai. n ki value 16 se 32, 1000 waghaira kar ke Run karein aur dekhein kaun tezi se barhta hai."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "n = 16   # input size\n\ndef halving_steps(size):\n    steps = 0\n    while size > 1:\n        size = size // 2      # cut the work in half each time\n        steps += 1\n    return steps\n\nprint(\"Input size n =\", n)\nprint(\"O(1)     :\", 1, \"step\")\nprint(\"O(log n) :\", halving_steps(n), \"steps\")\nprint(\"O(n)     :\", n, \"steps\")\nprint(\"O(n^2)   :\", n * n, \"steps\")",
+            "runnable": true
+          },
+          {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "1,000 students ke liye andaze ke khel mein taqreeban kitne andaze, aur har pair ke comparisons wale O(n²) kaam mein kitne comparisons chahiyein?",

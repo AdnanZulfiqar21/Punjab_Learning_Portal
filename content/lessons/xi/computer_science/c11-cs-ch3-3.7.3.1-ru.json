@@ -45,6 +45,21 @@
             "text": "Complexity: BFS ki time complexity O(V + E) hai, jahan V vertices (nodes) ki ginti aur E edges ki ginti hai. Is liye yeh bare graphs dekhne ke liye efficient hai."
           },
           {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh program doston ke chhote network par BFS chalata hai aur har shakhs ki degree of separation (kitne doston ke zariye jura hai) print karta hai. start ko kisi aur naam (maslan \"Omar\") se badal kar Run karein."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "friends = {\"Ali\": [\"Sara\", \"Bilal\"], \"Sara\": [\"Ali\", \"Hina\"], \"Bilal\": [\"Ali\", \"Hina\", \"Omar\"], \"Hina\": [\"Sara\", \"Bilal\", \"Zara\"], \"Omar\": [\"Bilal\"], \"Zara\": [\"Hina\"]}\nstart = \"Ali\"\n\ndef bfs():\n    distance = {start: 0}\n    queue = [start]                          # enqueue the start node\n    while queue:\n        person = queue.pop(0)                # dequeue from the front\n        print(\"Visit\", person, \"- degree\", distance[person])\n        for friend in friends[person]:\n            if friend not in distance:       # not visited yet\n                distance[friend] = distance[person] + 1\n                queue.append(friend)\n\nif start in friends:\n    bfs()\nelse:\n    print(start, \"is not in the network\")",
+            "runnable": true
+          },
+          {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "Root 0, us ke bachche 1, 2, 3, aur pote 4, 5 (1 ke neeche), 6 (2 ke neeche) aur 7 (3 ke neeche) wale tree (Figure 3.8) mein BFS kis tarteeb se nodes dekhta hai?",

@@ -47,6 +47,21 @@
             "text": "Budget ka asal kharchon se comparison (muqabla) kar ke bakery dekh sakti hai ke woh zyada kharch (overspending) kar rahi hai ya paisa bacha rahi hai."
           },
           {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh program bakery ke budget ka asal kharchon (actual) se muqabla (comparison) karta hai. actual mein kisi item ki raqam badal kar Run karein aur dekhein ke kahan zyada kharch (overspending) hua aur kahan bachat."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "budget = {\"Rent\": 200000, \"Ingredients\": 150000, \"Salaries\": 250000, \"Utilities\": 150000}\nactual = {\"Rent\": 200000, \"Ingredients\": 150000, \"Salaries\": 250000, \"Utilities\": 180000}\n\nfor item in budget:\n    difference = actual[item] - budget[item]\n    if difference > 0:\n        note = \"zyada kharch\"\n    elif difference < 0:\n        note = \"bachat\"\n    else:\n        note = \"budget ke mutabiq\"\n    print(f\"{item}: budget Rs. {budget[item]:,}, asal Rs. {actual[item]:,} -> {note}\")\n\ntotal_budget = sum(budget.values())\ntotal_actual = sum(actual.values())\nprint(f\"Kul budget: Rs. {total_budget:,} | Kul asal kharcha: Rs. {total_actual:,}\")\nif total_actual > total_budget:\n    print(f\"Overspending (zyada kharch): Rs. {total_actual - total_budget:,}\")\nelse:\n    print(f\"Bachat: Rs. {total_budget - total_actual:,}\")",
+            "runnable": true
+          },
+          {
             "type": "callout",
             "tone": "note",
             "title": "Class Activity",

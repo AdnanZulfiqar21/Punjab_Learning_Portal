@@ -43,6 +43,21 @@
             ]
           },
           {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh program har likha hua lafz undo stack par push karta hai, phir undo_presses jitni baar undo karta hai. undo_presses ya typed_words badal kar Run karein; dekhein ke sab se taaza lafz sab se pehle mitta hai."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "typed_words = [\"Hello\", \"World\", \"Pakistan\"]\nundo_presses = 1\n\nactions = list()                          # the undo stack\nfor word in typed_words:\n    actions.append(word)                  # every action is pushed\nprint(\"Document:\", \" \".join(actions))\nfor i in range(undo_presses):\n    if actions:\n        print(\"Undo removes:\", actions.pop())\nprint(\"Document now:\", \" \".join(actions))",
+            "runnable": true
+          },
+          {
             "type": "callout",
             "tone": "note",
             "title": "Class Activity",

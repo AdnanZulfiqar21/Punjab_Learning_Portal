@@ -46,6 +46,21 @@
             "text": "Wazahat: Book ka object add_book method ke zariye Library ko diya jata hai aur woh library ki books list mein jur jata hai. Maslan lib = Library(); lib.add_book(Book(\"Python Basics\")) se \"Book  Python Basics added to the library.\" print hota hai."
           },
           {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh aggregation ki misaal hai: Book objects alag bante hain aur phir Library mein jorte hain. titles ki list mein kitabon ke naam badal kar ya barha kar Run karein."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "titles = [\"Python Basics\", \"Computer Science XI\"]\nclass Book:\n    def __init__(self, title):\n        self.title = title\nclass Library:\n    def __init__(self):\n        self.books = []\n    def add_book(self, book):\n        self.books.append(book)\n        print(\"Book\", book.title, \"added to the library.\")\nlibrary = Library()\nfor title in titles:\n    library.add_book(Book(title))\nprint(\"Library mein kul books:\", len(library.books))",
+            "runnable": true
+          },
+          {
             "type": "paragraph",
             "text": "Composition: ek class (maslan House) doosri class (maslan Room) ko rakhti bhi hai aur us ki maalik bhi hai. Rooms (kamre) ghar ke baghair nahi reh sakte."
           },

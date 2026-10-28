@@ -80,6 +80,21 @@
             "text": "Mode data mein sab se zyada aane wali (sab se aam) qeemat pehchanne mein madad deta hai."
           },
           {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh program scores ka mean, median aur mode nikalta hai. scores ki list badal kar Run karein (maslan ek number aur jor dein ya 70 ki jagah 60 likhein) aur dekhein teeno qeematein kaise badalti hain."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "scores = [50, 60, 70, 70, 90]  # test scores\n\nimport statistics\n\nmean = sum(scores) / len(scores)\nmedian = statistics.median(scores)\nmodes = statistics.multimode(scores)  # all values that come most often\n\nprint(\"Scores:\", scores)\nprint(\"Mean   =\", sum(scores), \"/\", len(scores), \"=\", round(mean, 2))\nprint(\"Median =\", median)\nprint(\"Mode(s) =\", modes)",
+            "runnable": true
+          },
+          {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "4, 7, 7, 9, 13 ka mean, median aur mode nikalein.",

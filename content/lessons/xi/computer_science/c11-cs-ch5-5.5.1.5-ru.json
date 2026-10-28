@@ -40,6 +40,21 @@
             "text": "Har box beech ke aadhe students dikhata hai (pehle quartile se teesre quartile tak), laal line median hai, dashed lines (whiskers) baqi phailao aur chhote circles outliers. Class 3 ka median sab se ooncha hai, is liye us ki performance behtar hai; Class 3 ke whiskers bhi sab se lambe hain (taqreeban 57 se 98), yani us ke scores sab se zyada phaile hain. Class 2 ka box sab se patla hai, yani us ke beech wale scores sab se qareeb qareeb hain."
           },
           {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh program boxplot ke numbers nikalta hai: minimum, Q1 (pehla quartile), median, Q3 (teesra quartile) aur maximum, aur outliers dhoondta hai. Quartile ke liye neeche aur oopar wale aadhe hisse ka median liya gaya hai, aur outlier ke liye aam rule 1.5 × IQR (Q3 − Q1). scores badal kar Run karein."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "scores = [62, 65, 68, 69, 70, 72, 75, 74, 66, 95]\n\nimport statistics\n\ndata = sorted(scores)\nhalf = len(data) // 2\nq1 = statistics.median(data[:half])                   # median of lower half\nmed = statistics.median(data)\nq3 = statistics.median(data[half + len(data) % 2:])   # median of upper half\niqr = q3 - q1\noutliers = [x for x in data if x < q1 - 1.5 * iqr or x > q3 + 1.5 * iqr]\n\nprint(\"Sorted :\", data)\nprint(\"Min =\", data[0], \" Q1 =\", q1, \" Median =\", med, \" Q3 =\", q3, \" Max =\", data[-1])\nprint(\"Box (Q1 to Q3) width, IQR =\", iqr)\nprint(\"Outliers:\", outliers)",
+            "runnable": true
+          },
+          {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "Class A aur Class B dono ka median 55 hai. Boxplot aisa kya dikhata hai jo sirf median nahi dikhata?",

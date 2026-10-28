@@ -35,6 +35,21 @@
             ]
           },
           {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh program kaamon ko aane ke order mein (pehle aao, pehle pao) chalata hai aur batata hai ke har kaam kitni der intezar karta hai aur kab khatam hota hai. durations ki values ya tasks ka order badal kar Run karein."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "tasks = [\"Print report\", \"Save file\", \"Send email\"]\ndurations = [3, 1, 2]   # seconds each task needs\n\nfor i in range(len(tasks)):              # first come, first served\n    wait = sum(durations[:i])             # time of all tasks before this one\n    print(tasks[i], \"waits\", wait, \"s, finishes at\", wait + durations[i], \"s\")\nprint(\"All tasks done at\", sum(durations), \"s\")",
+            "runnable": true
+          },
+          {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "Computer ke job scheduling system mein queue ka concept (idea) kaise lagta hai (short question 6)?",

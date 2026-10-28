@@ -108,6 +108,21 @@
             "text": "Yeh misal teen nodes aur do edges wala saada graph dikhati hai, aur batati hai ke program mein vertices aur edges kaise likhe jate hain."
           },
           {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Upar wala NetworkX code browser mein nahi chalta, is liye yahan graph ko saada dictionary se likha gaya hai: roads mein Figure 4.11 ki har one-way edge ka weight hai. path badal kar Run karein, maslan [\"E\", \"A\", \"D\"], aur raaste ka total weight (cost) dekhein."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "roads = {\"B-A\": 10, \"A-C\": 12, \"C-B\": 20, \"E-A\": 7, \"A-D\": 60, \"C-D\": 32}   # Figure 4.11\npath = [\"E\", \"A\", \"C\", \"D\"]\n\ncost, possible = 0, True\nfor i in range(len(path) - 1):\n    road = path[i] + \"-\" + path[i + 1]\n    if road in roads:\n        cost = cost + roads[road]\n        print(road, \"costs\", roads[road])\n    else:\n        print(\"No one-way road\", road)\n        possible = False\nif possible:\n    print(\"Total cost of\", \"-\".join(path), \"=\", cost)",
+            "runnable": true
+          },
+          {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "Directed weighted graph (B se A 10, A se C 12, C se B 20, A se D 60, C se D 32, E se A 7) mein E se D tak sab se sasta raasta kaunsa hai?",

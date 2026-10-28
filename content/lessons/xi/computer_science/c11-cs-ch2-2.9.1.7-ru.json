@@ -41,6 +41,21 @@
           },
           {
             "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "scores.txt mein pehle se do scores hain. mode ko \"w\" aur phir \"a\" kar ke Run karein aur dekhein purane scores rehte hain ya mit jate hain; new_score bhi badal sakte hain."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "mode = \"w\"\nnew_score = 90\nwith open(\"scores.txt\", \"w\") as file:\n    file.write(\"75\\n80\\n\")    # purane scores\nwith open(\"scores.txt\", mode) as file:\n    file.write(str(new_score) + \"\\n\")\nwith open(\"scores.txt\", \"r\") as file:\n    print(\"File mein ab yeh hai:\")\n    print(file.read())",
+            "runnable": true
+          },
+          {
+            "type": "heading",
             "level": 2,
             "text": "Mukhtasar khulasa"
           },

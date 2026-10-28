@@ -54,6 +54,21 @@
             "text": "Dono bars barabar oonche hain kyunke saari kamai (revenue) do hisson mein batti hai: pehle kharche (costs) poore kiye jate hain, jo bachta hai woh profit hai. Is liye profit = revenue - kharche = 50,000 - 30,000 = Rs 20,000."
           },
           {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh program school bags wali dukaan ka revenue aur profit nikalta hai, aur yeh bhi batata hai ke kam az kam kitne bags bechne se kharche poore hote hain (break-even, yaani na munafa na nuqsan). bags_sold, price_per_bag ya costs badal kar Run karein; kharche revenue se zyada hon to nuqsan (loss) dikhega."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "import math\n\nbags_sold = 100\nprice_per_bag = 500      # Rs.\ncosts = 30000            # kiraya, tankhwahein, maal ki qeemat waghera\n\nrevenue = bags_sold * price_per_bag\nprofit = revenue - costs\nprint(f\"Revenue: Rs. {revenue:,}\")\nif profit >= 0:\n    print(f\"Profit: Rs. {profit:,}\")\nelse:\n    print(f\"Nuqsan (loss): Rs. {-profit:,}\")\nprint(\"Kharche poore karne ke liye kam az kam\", math.ceil(costs / price_per_bag), \"bags bechne honge\")",
+            "runnable": true
+          },
+          {
             "type": "callout",
             "tone": "note",
             "title": "Did You Know?",

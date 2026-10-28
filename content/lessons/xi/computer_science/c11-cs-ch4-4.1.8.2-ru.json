@@ -33,6 +33,21 @@
             ]
           },
           {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh program Figure 4.12 ki edges se har vertex ki degree ginta hai. edges mein nayi edge jorein, maslan \"A-C\", aur Run kar ke dekhein ke degrees aur un ka total kaise badalte hain."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "edges = [\"A-B\", \"A-E\", \"B-E\", \"B-D\", \"B-C\", \"C-D\", \"E-D\"]   # Figure 4.12\n\ndegree = dict()\nfor edge in edges:\n    u, v = edge.split(\"-\")\n    degree[u] = degree.get(u, 0) + 1      # an undirected edge counts at both ends\n    degree[v] = degree.get(v, 0) + 1\nfor vertex in sorted(degree):\n    print(\"Degree of\", vertex, \"=\", degree[vertex])\nprint(\"Total of degrees:\", sum(degree.values()), \"= 2 x\", len(edges), \"edges\")",
+            "runnable": true
+          },
+          {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "Undirected graph jis ki edges A-B, A-E, B-E, B-D, B-C, C-D aur E-D hain (Figure 4.12), us mein har vertex ki degree kya hai?",

@@ -32,6 +32,21 @@
             ]
           },
           {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh program aise do whole numbers (poore number) dhoondta hai jin ka jama total aur zarb product ho: har qadam par ek jora generate karta hai (banata hai) aur phir test karta hai (jaanchta hai). total aur product ki values badal kar Run karein aur dekhein kitni koshishein lagti hain."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "total = 10     # a + b must equal this\nproduct = 21   # a x b must equal this\n\ndef generate_and_test():\n    for a in range(total + 1):\n        b = total - a                          # generate a possible answer\n        print(\"Try a =\", a, \"b =\", b, \"-> a x b =\", a * b)\n        if a * b == product:                   # test it\n            return a, b\n    return None\n\nanswer = generate_and_test()\nif answer:\n    print(\"Found:\", answer)\nelse:\n    print(\"No pair of whole numbers works.\")",
+            "runnable": true
+          },
+          {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "Generate and Test algorithm ke basic qadam bataiye (short question 2).",
