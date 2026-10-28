@@ -111,18 +111,26 @@ def _place(db: Session, topic_id: uuid.UUID) -> tuple[Topic, Chapter, BookEditio
 
 
 def _neighbours(db: Session, topic: Topic) -> tuple[uuid.UUID | None, uuid.UUID | None]:
+    """The topics before and after this one in the book's reading order: each topic, then its subtopics, then the next
+    topic (1.2, 1.2.1, 1.2.2, 1.2.2.1, …, 1.3). Siblings alone skipped every subtopic (owner, 2026-10-28)."""
     rows = list(
         db.scalars(
             select(Topic)
-            .where(
-                Topic.chapter_id == topic.chapter_id,
-                Topic.parent_id == topic.parent_id,
-                Topic.retired_at.is_(None),
-            )
+            .where(Topic.chapter_id == topic.chapter_id, Topic.retired_at.is_(None))
             .order_by(Topic.display_order, Topic.id)
         )
     )
-    ids = [row.id for row in rows]
+    children: dict[uuid.UUID | None, list[Topic]] = {}
+    for row in rows:
+        children.setdefault(row.parent_id, []).append(row)
+    ids: list[uuid.UUID] = []
+
+    def walk(parent: uuid.UUID | None) -> None:
+        for row in children.get(parent, []):
+            ids.append(row.id)
+            walk(row.id)
+
+    walk(None)
     if topic.id not in ids:
         return None, None
     index = ids.index(topic.id)

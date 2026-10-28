@@ -83,3 +83,43 @@ def test_a_draft_is_not_a_learner_lesson_and_two_drafts_are_not_picked(client: T
 
 def response_text(payload: dict) -> str:
     return str(payload["lesson"]["body"])
+
+
+def test_next_and_previous_follow_the_books_reading_order(client: TestClient) -> None:
+    # A topic is followed by its subtopics, depth first, then by the next topic (1.2, 1.2.1, 1.2.2, 1.2.2.1, …, 1.3);
+    # siblings alone skipped every subtopic (owner, 2026-10-28).
+    with get_sessionmaker()() as db:
+        live = [t for t in db.scalars(select(Topic).where(Topic.retired_at.is_(None))) if t.parent_id is not None]
+        by_parent: dict = {}
+        for t in live:
+            by_parent.setdefault(t.parent_id, []).append(t)
+        top = next(
+            t
+            for t in db.scalars(
+                select(Topic).where(Topic.parent_id.is_(None), Topic.retired_at.is_(None)).order_by(Topic.display_order)
+            )
+            if t.id in by_parent
+        )
+        first_child = min(by_parent[top.id], key=lambda t: (t.display_order, t.id))
+        siblings = sorted(
+            db.scalars(
+                select(Topic).where(
+                    Topic.chapter_id == top.chapter_id, Topic.parent_id.is_(None), Topic.retired_at.is_(None)
+                )
+            ),
+            key=lambda t: (t.display_order, t.id),
+        )
+        after = siblings[siblings.index(top) + 1] if siblings.index(top) + 1 < len(siblings) else None
+
+        def last_descendant(t: Topic) -> Topic:
+            kids = sorted(by_parent.get(t.id, []), key=lambda k: (k.display_order, k.id))
+            return last_descendant(kids[-1]) if kids else t
+
+        last = last_descendant(top)
+
+    reading = client.get(f"/v1/topics/{top.id}/lesson").json()
+    assert reading["next_topic_id"] == str(first_child.id)
+    child = client.get(f"/v1/topics/{first_child.id}/lesson").json()
+    assert child["previous_topic_id"] == str(top.id) and child["chapter_start"] is False
+    end = client.get(f"/v1/topics/{last.id}/lesson").json()
+    assert end["next_topic_id"] == (str(after.id) if after else None)
