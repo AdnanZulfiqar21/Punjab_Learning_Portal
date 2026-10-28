@@ -380,6 +380,34 @@ function BlockView({
             )}
           </figure>
         ) : undefined;
+      // CHECKPOINT-TABLE-01: a comparison answer side by side, also shown only with the revealed answer.
+      const at = (b.answer_table ?? null) as { header?: unknown; rows?: unknown } | null;
+      const head = strs(at?.header);
+      const answerTable =
+        head.length && Array.isArray(at?.rows) ? (
+          <table className="lesson-table answer-table w-full border-collapse text-sm">
+            <thead>
+              <tr>
+                {head.map((h, i) => (
+                  <th key={i} scope="col" className="border border-border bg-surface px-3 py-2 text-left">
+                    {h}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {(at.rows as unknown[]).map(strs).map((r, i) => (
+                <tr key={i}>
+                  {r.map((c, j) => (
+                    <td key={j} data-label={head[j] ?? ""} className="border border-border bg-surface px-3 py-2 align-top">
+                      {c}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        ) : null;
       return (
         <Checkpoint
           mode={b.mode === "self_check" ? "self_check" : "question"}
@@ -387,7 +415,14 @@ function BlockView({
           options={Array.isArray(b.options) ? (b.options as { id: string; text: string }[]) : []}
           answerId={typeof b.answer_id === "string" ? b.answer_id : null}
           explanation={str(b.explanation)}
-          answerFigure={answerFigure}
+          answerFigure={
+            answerTable || answerFigure ? (
+              <>
+                {answerTable}
+                {answerFigure}
+              </>
+            ) : undefined
+          }
           revealLabel={revealLabel}
         />
       );

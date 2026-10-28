@@ -226,6 +226,21 @@ class AnswerFigure(BaseModel):
     long_description: Text | None = None
 
 
+class AnswerTable(BaseModel):
+    """CHECKPOINT-TABLE-01: a comparison answered side by side (owner, 2026-10-28: "functional" one side, "non
+    functional" the other, point by point), shown with the revealed answer like an answer figure."""
+
+    model_config = ConfigDict(extra="forbid")
+    header: list[Short] = Field(min_length=2, max_length=4)
+    rows: list[list[Short]] = Field(min_length=1, max_length=20)
+
+    @model_validator(mode="after")
+    def _shape(self) -> AnswerTable:
+        if any(len(row) != len(self.header) for row in self.rows):
+            raise ValueError("every answer-table row has one cell per header")
+        return self
+
+
 class Checkpoint(_Block):
     """A formative check at a lesson point (P07.S1.T3; CHECKPOINTS-01). `question`: 2 to 6 options, one key, and the
     explanation shown after answering. `self_check`: a prompt and what a good answer contains; no key. The key travels
@@ -239,6 +254,7 @@ class Checkpoint(_Block):
     answer_id: str | None = None
     explanation: Text
     answer_figure: AnswerFigure | None = None
+    answer_table: AnswerTable | None = None
 
     @model_validator(mode="after")
     def _shape(self) -> Checkpoint:

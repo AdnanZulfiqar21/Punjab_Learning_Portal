@@ -92,6 +92,13 @@ def test_code_listings_keep_their_indentation() -> None:
     assert blocks.validate_body({"blocks": [{**block, "language": "cobol"}]}, for_publication=False).errors
     assert blocks.validate_body({"blocks": [{**block, "text": ""}]}, for_publication=False).errors
     assert blocks.validate_body({"blocks": [{**block, "book_errors": ["print("]}]}, for_publication=False).errors
+    # CHECKPOINT-TABLE-01: a comparison answer may carry a side-by-side table, one cell per header in every row.
+    check = {"type": "checkpoint", "mode": "self_check", "prompt": "Differentiate A and B.", "explanation": "A; B."}
+    table = {"header": ["A", "B"], "rows": [["does this", "does that"], ["fast", "slow"]]}
+    ok_table = blocks.validate_body({"blocks": [{**check, "answer_table": table}]}, for_publication=True)
+    assert ok_table.errors == []
+    for bad in ({**table, "rows": [["only one"]]}, {**table, "header": ["A"]}):
+        assert blocks.validate_body({"blocks": [{**check, "answer_table": bad}]}, for_publication=False).errors
     # CODE-RUNNER-01: a program the content tools ran cleanly carries `runnable`; it must be a real boolean.
     assert blocks.validate_body({"blocks": [{**block, "runnable": True}]}, for_publication=True).errors == []
     assert blocks.validate_body({"blocks": [{**block, "runnable": "yes"}]}, for_publication=False).errors
