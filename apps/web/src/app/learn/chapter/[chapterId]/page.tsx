@@ -284,41 +284,40 @@ function TopicList({ topics, favourites }: { topics: TopicNode[]; favourites: Se
   );
 }
 
-/** Each topic opens its own lesson page. The outline (if any) folds under it; the link never sits inside the toggle. */
-function TopicItem({ topic, favourites }: { topic: TopicNode; favourites: Set<string> | null }) {
+/** Each topic opens its own lesson page. Subtopics are always listed under their topic, indented, as the book's
+ * contents show them (owner, 2026-10-28: "baki ka sb topics ... kaha hain"); only bullet points fold under "Outline".
+ * A main topic's number takes the accent, a subtopic's the text colour (BOOK-HEADING-01). */
+function TopicItem({ topic, favourites, depth = 0 }: { topic: TopicNode; favourites: Set<string> | null; depth?: number }) {
   const star = favourites && (
     <FavouriteButton topicId={topic.id} label={topic.number ? `${topic.number} ${topic.title}` : topic.title} initial={favourites.has(topic.id)} />
   );
-  const hasDetail = topic.points.length > 0 || topic.children.length > 0;
   return (
-    <li className="px-4 py-2">
+    <li className={depth ? "py-0.5" : "px-4 py-2"}>
       <div className="flex items-center gap-2">
         <Link href={`/learn/topic/${topic.id}`} className="flex min-w-0 flex-1 items-baseline gap-3 py-1.5 hover:text-accent">
-          {topic.number && <span className="w-12 shrink-0 text-sm font-semibold text-accent">{topic.number}</span>}
-          <span className="font-medium">{topic.title}</span>
+          {topic.number && (
+            <span className={`shrink-0 text-sm font-semibold ${depth ? "w-14 text-foreground sm:w-16" : "w-12 text-accent"}`}>{topic.number}</span>
+          )}
+          <span className={depth ? "" : "font-medium"}>{topic.title}</span>
         </Link>
         {star}
       </div>
-      {hasDetail && (
+      {topic.points.length > 0 && (
         <details className="text-sm">
           <summary className="cursor-pointer list-none py-1 pl-15 text-muted hover:text-foreground">Outline</summary>
-          <div className="mt-1 ml-15 space-y-2">
-            {topic.points.length > 0 && (
-              <ul className="list-disc space-y-1 pl-5 text-muted">
-                {topic.points.map((p) => (
-                  <li key={p}>{p}</li>
-                ))}
-              </ul>
-            )}
-            {topic.children.length > 0 && (
-              <ol className="divide-y divide-border rounded-lg border border-border">
-                {topic.children.map((c) => (
-                  <TopicItem key={c.id} topic={c} favourites={favourites} />
-                ))}
-              </ol>
-            )}
-          </div>
+          <ul className="mt-1 ml-15 list-disc space-y-1 pl-5 text-muted">
+            {topic.points.map((p) => (
+              <li key={p}>{p}</li>
+            ))}
+          </ul>
         </details>
+      )}
+      {topic.children.length > 0 && (
+        <ol className="mt-1 ml-3 border-l-2 border-border pl-2 sm:ml-15 sm:pl-3">
+          {topic.children.map((c) => (
+            <TopicItem key={c.id} topic={c} favourites={favourites} depth={depth + 1} />
+          ))}
+        </ol>
       )}
     </li>
   );
