@@ -7,6 +7,7 @@
   --surface: #ffffff;
   --surface-muted: #f1ede6;
   --foreground: #1c1a17;
+  --heading: #1c1a17;
   --muted: #5b5750;
   --border: #e2ddd4;
   --accent: #0b5d73;
@@ -28,7 +29,8 @@
     --background: #121412;
     --surface: #1b1e1b;
     --surface-muted: #242824;
-    --foreground: #ece9e3;
+    --foreground: #cfcbc3;
+    --heading: #ffffff;
     --muted: #aaa69e;
     --border: #333832;
     --accent: #6cc4dc;
@@ -48,7 +50,8 @@
   --background: #121412;
   --surface: #1b1e1b;
   --surface-muted: #242824;
-  --foreground: #ece9e3;
+  --foreground: #cfcbc3;
+  --heading: #ffffff;
   --muted: #aaa69e;
   --border: #333832;
   --accent: #6cc4dc;
@@ -277,6 +280,16 @@ html {
   }
   .lesson-table td:first-child::before {
     content: none;
+  }
+}
+
+/* Headings take --heading (dark mode: brighter than the body text); a colour class such as text-accent still wins. */
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4 {
+    color: var(--heading);
   }
 }
 

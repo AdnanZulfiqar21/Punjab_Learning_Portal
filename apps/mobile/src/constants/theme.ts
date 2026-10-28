@@ -9,6 +9,7 @@ export const Colors = {
     surface: "#ffffff",
     surfaceMuted: "#f1ede6",
     text: "#1c1a17",
+    heading: "#1c1a17",
     muted: "#5b5750",
     border: "#e2ddd4",
     accent: "#0b5d73",
@@ -26,7 +27,8 @@ export const Colors = {
     background: "#121412",
     surface: "#1b1e1b",
     surfaceMuted: "#242824",
-    text: "#ece9e3",
+    text: "#cfcbc3", // dark mode: body text a softer grey so headings (full white) stand out (owner, 2026-10-28)
+    heading: "#ffffff",
     muted: "#aaa69e",
     border: "#333832",
     accent: "#6cc4dc",
