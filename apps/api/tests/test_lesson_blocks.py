@@ -92,6 +92,9 @@ def test_code_listings_keep_their_indentation() -> None:
     assert blocks.validate_body({"blocks": [{**block, "language": "cobol"}]}, for_publication=False).errors
     assert blocks.validate_body({"blocks": [{**block, "text": ""}]}, for_publication=False).errors
     assert blocks.validate_body({"blocks": [{**block, "book_errors": ["print("]}]}, for_publication=False).errors
+    # CODE-RUNNER-01: a program the content tools ran cleanly carries `runnable`; it must be a real boolean.
+    assert blocks.validate_body({"blocks": [{**block, "runnable": True}]}, for_publication=True).errors == []
+    assert blocks.validate_body({"blocks": [{**block, "runnable": "yes"}]}, for_publication=False).errors
 
 
 def _staff(client: TestClient, db: Session) -> dict[str, Staff]:

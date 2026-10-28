@@ -95,6 +95,8 @@ jobs:
       - run: pip install pytest==9.1.1
       - name: Stable catalogue identity rules
         run: python -m pytest content/tools -q
+      - name: Roman Urdu program listings are marked runnable only when they run (CODE-RUNNER-01)
+        run: python content/tools/mark_runnable.py --check
       - name: Catalogue is reproducible from the committed indexes (same IDs, nothing retired)
         run: |
           python content/tools/build_catalogue.py --today 2026-10-07

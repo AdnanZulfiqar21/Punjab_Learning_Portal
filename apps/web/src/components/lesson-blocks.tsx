@@ -458,7 +458,8 @@ function BlockView({
               </code>
             </pre>
           </div>
-          {runnable && /^py(thon)?\d?$/i.test(str(b.language).trim()) && <CodeRunner code={str(b.text)} />}
+          {/* Only a listing the content tools ran cleanly (content/tools/mark_runnable.py), never an outline or fragment. */}
+          {runnable && b.runnable === true && <CodeRunner code={str(b.text)} />}
         </figure>
       );
     case "diagram":

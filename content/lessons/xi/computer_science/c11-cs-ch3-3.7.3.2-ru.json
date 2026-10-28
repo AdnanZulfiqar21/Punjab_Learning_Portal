@@ -82,7 +82,8 @@
             "type": "code",
             "language": "python",
             "text": "tree = {0: [1, 2, 3], 1: [4, 5], 2: [6], 3: [7], 4: [], 5: [], 6: [], 7: []}\n\ndef bfs(start):\n    order, queue = [], [start]\n    while queue:\n        node = queue.pop(0)          # take from the front\n        order.append(node)\n        queue.extend(tree[node])\n    return order\n\ndef dfs(node, order=None):\n    order = [] if order is None else order\n    order.append(node)\n    for child in tree[node]:\n        dfs(child, order)            # go deep first\n    return order\n\nprint(bfs(0))    # [0, 1, 2, 3, 4, 5, 6, 7]\nprint(dfs(0))    # [0, 1, 4, 5, 2, 6, 3, 7]",
-            "caption": "Python code (kitab se nahi; chala kar jaancha gaya)"
+            "caption": "Python code (kitab se nahi; chala kar jaancha gaya)",
+            "runnable": true
           },
           {
             "type": "code",
