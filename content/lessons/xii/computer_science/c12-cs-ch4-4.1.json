@@ -13,14 +13,28 @@
           "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
           "pdf_from": 49,
           "pdf_to": 56,
-          "note": "Chapter opening and 4.1 (PDF 49-56) with the Tidbit, Class Activities and code listings checked against the page images; Figs 4.1 and 4.2 redrawn, plus frames and login figures. Warnings and check questions are added. Short Q1-8 and Long Q1-7 are answered here."
+          "note": "Topic 4.1 as printed (PDF 49-56, printed 45-52); rewritten 2026-10-28 in the book's wording, programs as code blocks."
         }
       ],
       "body": {
         "blocks": [
           {
+            "type": "heading",
+            "level": 3,
+            "text": "Introduction"
+          },
+          {
             "type": "paragraph",
-            "text": "This chapter teaches how to build user-friendly Graphical User Interfaces (GUIs) with Tkinter, Python's built-in GUI toolkit: windows, frames, labels, buttons and entry fields, layouts with pack(), grid() and place(), and event handling that links user actions to functions, ending with a simple login form. It then introduces databases, SQL, connecting Python to a database, and the basic CRUD operations with SQLite or MySQL."
+            "text": "In this chapter, students will learn to develop user-friendly Graphical User Interfaces (GUIs) using Tkinter, Python's built-in GUI toolkit. They will create windows, frames, labels, buttons, entry fields, and manage layouts using pack(), grid(), and place(). They will practice event handling by linking user actions with functions and developing a simple login form. The chapter also introduces database concepts, SQL, Python database connectivity, and basic CRUD operations using SQLite or MySQL."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "4.1 Graphical User Interface (GUI) Development with Tkinter"
+          },
+          {
+            "type": "paragraph",
+            "text": "Graphical User Interface (GUI) development allows programs to interact with users through visual elements like windows, buttons, labels, and text boxes (as shown in Figure 4.1). GUIs make applications more user-friendly and easier to use compared to command-line interfaces. Python provides tools to create GUI applications efficiently. Tkinter is Python's built-in library for creating GUI programs. It is simple, widely used, and allows developers to design interactive applications quickly."
           },
           {
             "type": "diagram",
@@ -30,33 +44,30 @@
           },
           {
             "type": "heading",
-            "level": 2,
-            "text": "What is a GUI, and why is it important?"
-          },
-          {
-            "type": "callout",
-            "tone": "definition",
-            "title": "Graphical User Interface (GUI)",
-            "text": "A GUI is a visual interface that lets users interact with software through elements such as windows, buttons, labels, menus, text boxes and forms."
+            "level": 3,
+            "text": "What is a GUI? Why is it important?"
           },
           {
             "type": "paragraph",
-            "text": "GUIs make programs easier to understand and use than command-line interfaces, especially for non-technical users. They improve usability by giving visual feedback and removing the need to remember complex commands. GUI applications are used in desktop software, web applications and mobile apps (Fig 4.1)."
+            "text": "A GUI, or Graphical User Interface, is a visual interface that allows users to interact with software using elements like buttons, menus, and forms. GUIs are important because they make programs easier to understand and operate, especially for non-technical users. They improve usability by providing visual feedback and reducing the need to remember complex commands. GUI applications are widely used in desktop software, web applications, and mobile apps."
           },
           {
             "type": "heading",
-            "level": 2,
-            "text": "Tkinter: Python's built-in GUI toolkit"
+            "level": 3,
+            "text": "Overview of Tkinter as Python's built-in GUI toolkit"
           },
           {
             "type": "paragraph",
-            "text": "Tkinter is Python's standard GUI toolkit and comes pre-installed with the language. It provides classes and functions for windows, buttons, labels, entry fields and other widgets. It is easy to learn and lightweight, supports event-driven programming (actions are triggered by user events), and suits small to medium GUI applications."
+            "text": "Tkinter is Python's standard GUI toolkit that comes pre-installed with the language. It provides a set of classes and functions to create windows, buttons, labels, entry fields, and other widgets. Tkinter is easy to learn, lightweight, and supports event-driven programming, where actions are triggered by user events. It is suitable for building small to medium-sized GUI applications quickly and efficiently."
           },
           {
-            "type": "callout",
-            "tone": "note",
-            "title": "Example: a simple GUI (Python code; each .... is one 4-space indent)",
-            "text": "import tkinter as tk\n\n# Create main window\nwindow = tk.Tk()\nwindow.title(\"Simple GUI Example\")\nwindow.geometry(\"300x200\")\n\n# Function to handle the button click (event)\ndef on_click():\n....print(\"Button Clicked!\")\n\nlabel = tk.Label(window, text=\"Welcome to Tkinter\")\nlabel.pack(pady=10)\n\nentry = tk.Entry(window)\nentry.pack(pady=10)\n\nbutton = tk.Button(window, text=\"Click Me\", command=on_click)\nbutton.pack(pady=10)\n\n# Run the application\nwindow.mainloop()"
+            "type": "paragraph",
+            "text": "Example:"
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "import tkinter as tk\n# Create main window\nwindow = tk.Tk()\nwindow.title(\"Simple GUI Example\")\nwindow.geometry(\"300x200\")\n\n# Function to handle button click (event)\ndef on_click():\n    label.config(text=\"Button Clicked!\")\n\n# Create a label\nlabel = tk.Label(window, text=\"Welcome to Tkinter\")\nlabel.pack(pady=10)\n\n# Create an entry field\nentry = tk.Entry(window)\nentry.pack(pady=10)\n\n# Create a button\nbutton = tk.Button(window, text=\"Click Me\", command=on_click)\nbutton.pack(pady=10)\n\n# Run the application\nwindow.mainloop()"
           },
           {
             "type": "diagram",
@@ -68,41 +79,46 @@
             "type": "list",
             "ordered": false,
             "items": [
-              "tk.Tk() creates the main window.",
-              "Label displays text; Entry takes user input; Button performs an action.",
-              "command=on_click is event handling (a button click).",
-              "mainloop() runs the GUI."
+              "Tk() → creates main window",
+              "Label → displays text",
+              "Entry → takes user input",
+              "Button → performs action",
+              "command=on_click → event handling (button click)",
+              "mainloop() → runs the GUI"
             ]
           },
           {
             "type": "heading",
-            "level": 2,
-            "text": "Tkinter components and widgets"
+            "level": 3,
+            "text": "Tkinter Components and Widgets"
           },
           {
             "type": "paragraph",
-            "text": "Tkinter's components, called widgets, are the visual elements of an application: windows, frames, buttons, text fields and more. Widgets let users enter data, choose options or perform actions; each has its own purpose, and combining them builds a complete interface. Tkinter also manages layout, so widgets can be arranged neatly."
-          },
-          {
-            "type": "callout",
-            "tone": "tip",
-            "title": "Class activity",
-            "text": "Create a main window and divide it into two frames. Add different widgets to each frame to organise the layout."
-          },
-          {
-            "type": "heading",
-            "level": 2,
-            "text": "Creating windows and adding frames"
-          },
-          {
-            "type": "paragraph",
-            "text": "A Tkinter program begins with a main window, the base for every other element; it can be resized, given a title and filled with widgets. Frames are sections inside the window that group related widgets, which keeps the interface clear and well arranged."
+            "text": "Tkinter provides many components, called widgets, that help build interactive graphical applications. A program can contain multiple visual elements such as windows, frames, buttons, and text fields. These widgets allow users to enter data, choose options, or perform actions. Each widget has its own purpose, and combining them creates a complete interface. Tkinter also supports layout management, so widgets can be arranged neatly on the screen."
           },
           {
             "type": "callout",
             "tone": "note",
-            "title": "Example: two frames (Python code; each .... is one 4-space indent)",
-            "text": "import tkinter as tk\n\nwindow = tk.Tk()\nwindow.title(\"Tkinter Frames Example\")\nwindow.geometry(\"400x300\")\n\ntop_frame = tk.Frame(window, bg=\"lightblue\", height=100)\ntop_frame.pack(fill=\"x\")\n\nbottom_frame = tk.Frame(window, bg=\"lightgreen\", height=200)\nbottom_frame.pack(fill=\"both\", expand=True)\n\ntk.Label(top_frame, text=\"Top Frame\", bg=\"lightblue\").pack(pady=20)\ntk.Label(bottom_frame, text=\"Bottom Frame\", bg=\"lightgreen\").pack(pady=20)\n\nwindow.mainloop()"
+            "title": "Class Activity",
+            "text": "Create a main window and divide it into two frames. Add different widgets in each frame to organize layout."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Creating Windows and Adding Frames"
+          },
+          {
+            "type": "paragraph",
+            "text": "A Tkinter program begins by creating a main window, which serves as the base for all other elements. The window can be resized, given a title, and designed to hold different widgets. Frames are sections within the window that help organize content. Frames divide the window into smaller parts, making it easier to group related widgets. This structure improves clarity and keeps the interface well-arranged."
+          },
+          {
+            "type": "paragraph",
+            "text": "Example:"
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "import tkinter as tk\n\n# Create main window\nwindow = tk.Tk()\nwindow.title(\"Tkinter Frames Example\")\nwindow.geometry(\"400x300\")\n\n# Create top frame\ntop_frame = tk.Frame(window, bg=\"lightblue\", height=100)\ntop_frame.pack(fill=\"x\")\n\n# Create bottom frame\nbottom_frame = tk.Frame(window, bg=\"lightgreen\", height=200)\nbottom_frame.pack(fill=\"both\", expand=True)\n\n# Add widgets to top frame\nlabel_top = tk.Label(top_frame, text=\"Top Frame\", bg=\"lightblue\")\nlabel_top.pack(pady=20)\n\n# Add widgets to bottom frame\nlabel_bottom = tk.Label(bottom_frame, text=\"Bottom Frame\", bg=\"lightgreen\")\nlabel_bottom.pack(pady=50)\n\n# Run the application\nwindow.mainloop()"
           },
           {
             "type": "diagram",
@@ -111,63 +127,48 @@
             "caption": "Output of the frames example (original drawing after the output window printed beside the textbook's code)."
           },
           {
-            "type": "heading",
-            "level": 2,
-            "text": "Common widgets"
-          },
-          {
-            "type": "table",
-            "caption": "Common Tkinter widgets",
-            "header": [
-              "Widget",
-              "Use"
-            ],
-            "rows": [
-              [
-                "Label",
-                "Displays text or messages"
-              ],
-              [
-                "Button",
-                "Performs an action when clicked"
-              ],
-              [
-                "Entry",
-                "A one-line field for typing text such as a name or password"
-              ],
-              [
-                "Menu",
-                "A list of options at the top of the window"
-              ],
-              [
-                "Listbox",
-                "Shows a list of items and lets the user select from it"
-              ]
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Tk() → creates main window",
+              "Frame → divides window into sections",
+              "top_frame and bottom_frame → organize layout",
+              "pack() → places frames and widgets",
+              "Frames help keep the GUI clean and well-structured"
             ]
           },
           {
             "type": "heading",
-            "level": 2,
-            "text": "Layout management"
+            "level": 3,
+            "text": "Common Widgets: Labels, Buttons, Entry Fields, Menus, and List boxes"
           },
           {
             "type": "paragraph",
-            "text": "Layout management arranges widgets inside a window, deciding the position and size of each. Good layout makes the interface clear, easy to use and organised. Tkinter has three layout methods, each placing widgets in its own way (Fig 4.2)."
+            "text": "Widgets are the basic elements used to build a graphical user interface. A Label is used to display text or messages on the screen. A Button allows the user to perform an action when it is clicked. An Entry field is used to enter text, such as a name or password. A Menu provides a list of options at the top of the window. A Listbox shows a list of items and allows selection from the list."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Layout Management"
+          },
+          {
+            "type": "paragraph",
+            "text": "Layout management is used to arrange widgets inside a window in a proper way. It decides the position and size of each widget on the screen. Good layout management makes the interface clear and easy to use. It also helps in keeping the window organized. Tkinter provides different methods to manage layout. Each method has its own way of placing widgets."
           },
           {
             "type": "callout",
             "tone": "note",
             "title": "Tidbit",
-            "text": "Proper layout management makes applications look neat and work well on different screen sizes."
+            "text": "Proper layout management helps make applications look neat and work well on different screen sizes."
           },
           {
-            "type": "list",
-            "ordered": true,
-            "items": [
-              "pack(): places widgets one after another, vertically or horizontally. It is simple and good for small applications.",
-              "grid(): arranges widgets in rows and columns like a table. It suits forms and structured layouts; columnspan lets one widget stretch across columns.",
-              "place(): positions widgets at exact x and y coordinates. It gives the most control but needs careful adjustment."
-            ]
+            "type": "heading",
+            "level": 3,
+            "text": "Organizing Elements using pack(), grid(), and place()"
+          },
+          {
+            "type": "paragraph",
+            "text": "The pack() method places widgets in a simple vertical or horizontal order. It is easy to use and works well for small applications. The grid() method arranges widgets in rows and columns like a table. It is useful for forms and structured layouts. The place() method positions widgets at exact locations on the window (as shown in Figure 4.2). It gives more control but needs careful adjustment."
           },
           {
             "type": "diagram",
@@ -176,59 +177,85 @@
             "caption": "Figure 4.2: Diagram showing Tkinter Layout Managers: pack(), grid(), place() (original drawing after the textbook's Figure 4.2)."
           },
           {
-            "type": "callout",
-            "tone": "note",
-            "title": "Example: pack() (Python code; each .... is one 4-space indent)",
-            "text": "button1 = tk.Button(window, text=\"Button 1\", width=12)\nbutton2 = tk.Button(window, text=\"Button 2\", width=12)\nbutton3 = tk.Button(window, text=\"Button 3\", width=12)\nbutton1.pack(pady=10)\nbutton2.pack(pady=10)\nbutton3.pack(pady=10)"
+            "type": "paragraph",
+            "text": "Example pack():"
           },
           {
-            "type": "callout",
-            "tone": "note",
-            "title": "Example: grid() (Python code; each .... is one 4-space indent)",
-            "text": "button1.grid(row=0, column=0, padx=10, pady=20)\nbutton2.grid(row=0, column=1, padx=10, pady=20)\n# Button 3 spans two columns\nbutton3.grid(row=1, column=0, columnspan=2, padx=10, pady=10)\n# Keep content centred\nwindow.grid_columnconfigure(0, weight=1)\nwindow.grid_columnconfigure(1, weight=1)"
-          },
-          {
-            "type": "callout",
-            "tone": "note",
-            "title": "Example: place() (Python code; each .... is one 4-space indent)",
-            "text": "button1.place(x=30, y=40)\nbutton2.place(x=170, y=85)\nbutton3.place(x=30, y=140)"
+            "type": "code",
+            "language": "python",
+            "text": "import tkinter as tk\n\n# Create main window\nwindow = tk.Tk()\nwindow.title(\"pack()\")\nwindow.geometry(\"300x220\")\n\n# Create buttons\nbutton1 = tk.Button(window, text=\"Button 1\", width=12)\nbutton2 = tk.Button(window, text=\"Button 2\", width=12)\nbutton3 = tk.Button(window, text=\"Button 3\", width=12)\n\n# Arrange buttons using pack()\nbutton1.pack(pady=10)\nbutton2.pack(pady=10)\nbutton3.pack(pady=10)\n\n# Run the application\nwindow.mainloop()"
           },
           {
             "type": "paragraph",
-            "text": "Each example starts like the frames example (import tkinter, create a 300 by 220 window with a title, create three buttons) and ends with window.mainloop()."
+            "text": "Example grid():"
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "import tkinter as tk\n\n# Create main window\nwindow = tk.Tk()\nwindow.title(\"grid()\")\nwindow.geometry(\"300x220\")\n\n# Create buttons\nbutton1 = tk.Button(window, text=\"Button 1\", width=10)\nbutton2 = tk.Button(window, text=\"Button 2\", width=10)\nbutton3 = tk.Button(window, text=\"Button 3\", width=24)\n\n# Arrange buttons using grid()\nbutton1.grid(row=0, column=0, padx=10, pady=20)\nbutton2.grid(row=0, column=1, padx=10, pady=20)\n\n# Button 3 spans two columns\nbutton3.grid(row=1, column=0, columnspan=2, padx=10, pady=10)\n\n# Keep content centred\nwindow.grid_columnconfigure(0, weight=1)\nwindow.grid_columnconfigure(1, weight=1)\n\n# Run the application\nwindow.mainloop()"
+          },
+          {
+            "type": "paragraph",
+            "text": "Example place():"
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "import tkinter as tk\n\n# Create main window\nwindow = tk.Tk()\nwindow.title(\"place()\")\nwindow.geometry(\"300x220\")\n\n# Create buttons\nbutton1 = tk.Button(window, text=\"Button 1\", width=10)\nbutton2 = tk.Button(window, text=\"Button 2\", width=10)\nbutton3 = tk.Button(window, text=\"Button 3\", width=10)\n\n# Arrange buttons using place()\nbutton1.place(x=30, y=40)\nbutton2.place(x=170, y=85)\nbutton3.place(x=30, y=140)\n\n# Run the application\nwindow.mainloop()"
           },
           {
             "type": "heading",
-            "level": 2,
-            "text": "Designing clean and responsive interfaces"
+            "level": 3,
+            "text": "Designing Clean and Responsive Interfaces"
           },
           {
             "type": "paragraph",
-            "text": "A clean interface has well-arranged widgets with enough space between them, and clear, readable text and buttons. A responsive interface adjusts its layout when the window size changes, so the program works on different screens. Proper alignment and a simple design make the interface user-friendly."
+            "text": "A clean interface has well-arranged widgets and enough space between them. Text and buttons should be clear and easy to read. Responsive interfaces adjust their layout when the window size changes. This helps the program work well on different screen sizes. Proper alignment improves the overall look of the application. Simple design makes the interface user-friendly."
           },
           {
             "type": "heading",
-            "level": 2,
-            "text": "Event handling and interactivity"
+            "level": 3,
+            "text": "Event Handling and Interactivity"
           },
           {
             "type": "paragraph",
-            "text": "Event handling lets a program respond to user actions. An event is an action such as clicking a button or typing text. The program waits for events instead of running all the time; when an event occurs, a specific task is performed."
-          },
-          {
-            "type": "paragraph",
-            "text": "In event-driven programming the program stays idle until an event, such as a button click or key press, occurs. Each event is linked to a function that runs only when the event happens, which saves system resources; this approach is widely used in GUIs. User input comes through widgets such as entry fields and buttons; widgets are connected to functions, and when a widget is used, its function runs and processes the input."
+            "text": "Event handling and interactivity allow a program to respond to user actions. An event is an action, such as clicking a button or typing text. The program waits for an event instead of running all the time. When an event occurs, a specific task is performed. This makes the application active and useful. Event handling is important in graphical programs. It helps control how the program behaves."
           },
           {
             "type": "heading",
-            "level": 2,
-            "text": "Example: a simple login form"
+            "level": 3,
+            "text": "Understanding Event-Driven Programming"
           },
           {
-            "type": "callout",
-            "tone": "note",
-            "title": "Example: login form (Python code; each .... is one 4-space indent)",
-            "text": "import tkinter as tk\nfrom tkinter import messagebox\n\nwindow = tk.Tk()\nwindow.title(\"Login Form\")\nwindow.geometry(\"300x200\")\n\ndef check_login():\n....username = entry_user.get()\n....password = entry_pass.get()\n....if username == \"admin\" and password == \"1234\":\n........messagebox.showinfo(\"Success\", \"Login Successful!\")\n....else:\n........messagebox.showerror(\"Error\", \"Invalid Username or Password\")\n\ntk.Label(window, text=\"Username\").pack()\nentry_user = tk.Entry(window)\nentry_user.pack()\n\ntk.Label(window, text=\"Password\").pack()\nentry_pass = tk.Entry(window, show=\"*\")\nentry_pass.pack()\n\ntk.Button(window, text=\"Login\", command=check_login).pack(pady=10)\n\nwindow.mainloop()"
+            "type": "paragraph",
+            "text": "Event-driven programming is based on actions called events. The program remains idle until an event occurs. Common events include button clicks and key presses. Each event is linked to a specific function. The function runs only when the event happens. This approach saves system resources. It is widely used in graphical user interfaces."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Handling User Input and Connecting Widgets to Functions"
+          },
+          {
+            "type": "paragraph",
+            "text": "User input is given through widgets like entry fields and buttons. Widgets are connected to functions in the program. When the widget is used, the connected function executes. This allows the program to process the input. For example, a button click can display a message. Proper connections ensure correct program behavior. This interaction improves user experience."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Example: Simple Login Form"
+          },
+          {
+            "type": "paragraph",
+            "text": "A simple login form allows a user to enter a username and password. Entry fields are used to take the input from the user. A button is provided to submit the information. When the button is clicked, the program checks the entered data. A message is then shown for success or error."
+          },
+          {
+            "type": "paragraph",
+            "text": "Example:"
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "import tkinter as tk\nfrom tkinter import messagebox\n\n# Create main window\nwindow = tk.Tk()\nwindow.title(\"Login Form\")\nwindow.geometry(\"300x200\")\n\n# Function to check login\ndef check_login():\n    username = entry_user.get()\n    password = entry_pass.get()\n\n    # simple check\n    if username == \"admin\" and password == \"1234\":\n        messagebox.showinfo(\"Success\", \"Login Successful!\")\n    else:\n        messagebox.showerror(\"Error\", \"Invalid Username or Password\")\n\n# Username label and entry\ntk.Label(window, text=\"Username\").pack()\nentry_user = tk.Entry(window)\nentry_user.pack()\n\n# Password label and entry\ntk.Label(window, text=\"Password\").pack()\nentry_pass = tk.Entry(window, show=\"*\")\nentry_pass.pack()\n\n# Login button\ntk.Button(window, text=\"Login\", command=check_login).pack(pady=10)\n\n# Run application\nwindow.mainloop()"
           },
           {
             "type": "diagram",
@@ -240,18 +267,18 @@
             "type": "list",
             "ordered": false,
             "items": [
-              "Entry widgets take the username and password.",
-              "The Login button submits the data.",
-              "check_login() checks the input.",
-              "messagebox shows success or an error.",
-              "The whole program works by event-driven programming."
+              "Entry → takes username and password",
+              "Button → submits data",
+              "check_login() → checks input",
+              "messagebox → shows success or error",
+              "Works on event-driven programming"
             ]
           },
           {
             "type": "callout",
-            "tone": "tip",
-            "title": "Class activity",
-            "text": "Explain event-driven ideas, then add a button that updates a label's text when it is clicked."
+            "tone": "note",
+            "title": "Class Activity",
+            "text": "Explain event-driven concepts and have students add a button that triggers a label update on click."
           }
         ]
       }
