@@ -5,7 +5,10 @@ import type { BookExercises } from "@portal/contracts";
 import { Badge, Breadcrumbs, Notice, SkeletonLines } from "@/components/ui";
 import { exerciseStatus } from "@/lib/exercises";
 import { GRADE_LABEL } from "@/lib/format";
-import { SUBJECTS } from "@/lib/practice";
+import { SUBJECTS as ALL_SUBJECTS } from "@/lib/practice";
+
+// The book exercises cover the textbooks the portal teaches; Mathematics is not taught (owner, 2026-10-19).
+const SUBJECTS = ALL_SUBJECTS.filter(([code]) => code !== "mathematics");
 import { api, currentUser } from "@/lib/session";
 
 export const metadata: Metadata = { title: "Book exercises", robots: { index: false } };

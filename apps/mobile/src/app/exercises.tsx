@@ -9,9 +9,12 @@ import { ErrorState, Loading, Notice, T } from "@/components/ui";
 import { Radius, Space } from "@/constants/theme";
 import { useRequest } from "@/hooks/use-request";
 import { useTheme } from "@/hooks/use-theme";
-import { api, GRADE_LABEL, SUBJECTS, type SubjectCode } from "@/lib/api";
+import { api, GRADE_LABEL, SUBJECTS as ALL_SUBJECTS, type SubjectCode } from "@/lib/api";
 import { useAuth } from "@/lib/auth";
 import { exerciseStatus } from "@/lib/exercises";
+
+// The book exercises cover the textbooks the portal teaches; Mathematics is not taught (owner, 2026-10-19).
+const SUBJECTS = ALL_SUBJECTS.filter(([code]) => code !== "mathematics");
 
 export default function ExercisesScreen() {
   const c = useTheme();
