@@ -50,6 +50,12 @@
             "runnable": true
           },
           {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"tasks = [...]\": 3 kaam jo aane ki tarteeb mein queue mein hain.\n\"durations = [3, 1, 2]\": har kaam kitne second leta hai (usi tarteeb mein).\n\"for i in range(len(tasks)):\": har kaam ka index 0, 1, 2 baari baari.\n\"wait = sum(durations[:i])\": durations[:i] is kaam se pehle wale kaamon ke time hain; sum un ka jor hai, yani is kaam ka intezar.\n\"print(tasks[i], \"waits\", wait, ...)\": kaam ka naam, intezar, aur khatam hone ka waqt (wait + apna time).\n\"print(\"All tasks done at\", sum(durations), \"s\")\": saare kaamon ka kul time.\nOutput: \"Print report waits 0 s, finishes at 3 s\", \"Save file waits 3 s, finishes at 4 s\", \"Send email waits 4 s, finishes at 6 s\", aur \"All tasks done at 6 s\".\nKhud try karein: durations = [1, 2, 3] kar ke Run karein: ab Save file 1 s aur Send email 3 s intezar karega, lekin kul time phir bhi 6 s rahega."
+          },
+          {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "Computer ke job scheduling system mein queue ka concept (idea) kaise lagta hai (short question 6)?",

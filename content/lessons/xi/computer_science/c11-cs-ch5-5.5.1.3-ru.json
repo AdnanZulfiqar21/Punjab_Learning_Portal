@@ -55,6 +55,12 @@
             "runnable": true
           },
           {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"scores\": das scores; \"start = 50\" pehle bin (khana / range) ka shuru; \"bin_width = 10\" har bin ki chaurai.\n\"low = start\": abhi wale bin ki neeche wali had.\n\"while low <= max(scores):\": jab tak bin sab se bare score (95) tak na pohanch jaye, loop chalta rehta hai.\n\"high = low + bin_width - 1\": bin ki oopar wali had, maslan 50 se 59.\nAndar wala \"for s in scores:\" loop har score dekhta hai; \"if low <= s <= high:\" score is bin mein ho to count 1 barhata hai.\nprint: bin ki range, phir utne * jitne students, phir ginti. \":>3\" aur \":<3\" range ko seedh mein rakhte hain.\n\"low = low + bin_width\": agle bin par chale jao (60, 70, ...).\nOutput: paanch lines: \"50-59 | * 1\", \"60-69 | ** 2\", \"70-79 | ** 2\", \"80-89 | *** 3\" aur \"90-99 | ** 2\" (range ke aas paas seedh ke liye kuch extra spaces ke saath). 80s wala bin sab se lamba hai.\nKhud try karein: bin_width = 20 kar ke Run karein: sirf teen bins banenge: 50-69 (3), 70-89 (5) aur 90-109 (2)."
+          },
+          {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "Das scores 50, 65, 75, 80, 85, 90, 95, 60, 70, 88 ko 50s, 60s, 70s, 80s aur 90s ke bins mein rakhein.",

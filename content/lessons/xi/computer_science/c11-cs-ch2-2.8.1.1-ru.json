@@ -31,6 +31,12 @@
           },
           {
             "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"class ToyCar:\": ToyCar naam ki class (saancha) banti hai.\n\"def __init__(self , color, size , wheels) :\": constructor; har naya object bante waqt chalta hai aur teen values leta hai.\n\"self.color = color\" waghera: di hui values object ke apne attributes (khasiyatein) ban jati hain.\n\"def describe(self) :\": describe method commas se alag kai cheezein wapas karta hai; Python inhein ek tuple (round brackets wala majmua) bana deti hai.\n\"car1 = ToyCar(\"red\", \"small\", 4)\" aur \"car2 = ToyCar(\"blue\", \"large\", 6)\": ek hi class se do alag objects bante hain.\n\"print(car1.describe( ))\": tuple print hota hai, is liye output mein brackets, quotes aur commas bhi aate hain. # wali lines comments hain.\nOutput: ('This toy car is', 'red', 'size', 'small', 'and has ', 4, 'Wheels.') aur doosri line ('This toy car is', 'blue', 'size', 'large', 'and has ', 6, 'Wheels.').\nKhud try karein: car1 mein \"red\" ko \"green\" kar ke Run karein: pehli line mein 'green' aayega, doosri wahi rahegi."
+          },
+          {
+            "type": "callout",
             "tone": "correction",
             "title": "Kitab ki ghalti",
             "text": "Kitab ke code mein teen ghaltiyan hain: (1) __init__ ke brackets mein faltu \"self.color = color\" chhapa hai; sahi def __init__(self, color, size, wheels): hai. (2) \"large” tirchhi quote par khatam hota hai, is liye string band nahi hoti; sahi \"large\". (3) print(carl.describe()) mein carl (chhota L) hai, jabke object car1 (ek) hai; NameError aata hai. Wazahat mein bhi \"carl\" chhapa hai."
@@ -46,10 +52,6 @@
             "tone": "tip",
             "title": "Dhyan dein",
             "text": "describe() mein return ke baad values comma se alag hain, is liye Python ek tuple wapas karti hai aur output brackets aur quotes ke saath aata hai, jaise oopar. Ek saaf sentence chahiye ho to f-string istemal karein: return f\"This toy car is {self.color}, size {self.size} and has {self.wheels} wheels.\""
-          },
-          {
-            "type": "paragraph",
-            "text": "Wazahat:"
           },
           {
             "type": "paragraph",
@@ -87,6 +89,12 @@
             "language": "python",
             "text": "color = \"green\"\nsize = \"medium\"\nwheels = 4\nclass ToyCar:\n    def __init__(self, color, size, wheels):\n        self.color = color\n        self.size = size\n        self.wheels = wheels\n    def describe(self):\n        return \"This toy car is \" + self.color + \", size \" + self.size + \", and has \" + str(self.wheels) + \" wheels.\"\nmy_car = ToyCar(color, size, wheels)\nprint(my_car.describe())",
             "runnable": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"color = \"green\"\", \"size = \"medium\"\", \"wheels = 4\": object ke liye teen values.\n\"class ToyCar:\" aur \"def __init__(self, color, size, wheels):\": class aur us ka constructor jo values ko self.color, self.size aur self.wheels mein rakhta hai.\n\"def describe(self):\": + se strings jor kar ek hi saaf sentence banata hai; wheels number hai, is liye str(self.wheels) se usay text banaya jata hai (number aur string seedhe nahi jurte).\n\"my_car = ToyCar(color, size, wheels)\": class se my_car object banta hai.\n\"print(my_car.describe())\": sentence print hota hai.\nOutput: This toy car is green, size medium, and has 4 wheels.\nKhud try karein: size = \"small\" aur wheels = 3 kar ke Run karein: \"This toy car is green, size small, and has 3 wheels.\" aayega."
           },
           {
             "type": "heading",

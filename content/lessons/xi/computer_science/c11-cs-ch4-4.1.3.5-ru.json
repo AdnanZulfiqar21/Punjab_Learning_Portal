@@ -59,6 +59,12 @@
           },
           {
             "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"typed_words = [...]\": user ne baari baari yeh 3 lafz likhe.\n\"undo_presses = 1\": Undo kitni baar dabana hai.\n\"actions = list()\": undo stack; har action is mein push hota hai.\n\"for word in typed_words: actions.append(word)\": har likha hua lafz stack par push.\n\"print(\"Document:\", \" \".join(actions))\": \" \".join list ke lafzon ko beech mein space rakh kar ek sentence bana deta hai.\n\"for i in range(undo_presses): ...\": har Undo par stack khali na ho to pop: sab se taaza lafz nikalta hai (LIFO).\n\"print(\"Document now:\", ...)\": undo ke baad bacha hua document.\nOutput: \"Document: Hello World Pakistan\", phir \"Undo removes: Pakistan\", aur aakhir mein \"Document now: Hello World\".\nKhud try karein: undo_presses = 3 kar ke Run karein: Pakistan, World, Hello ulti tarteeb mein mitenge aur \"Document now:\" ke baad kuch nahi bachega."
+          },
+          {
+            "type": "callout",
             "tone": "note",
             "title": "Class Activity",
             "text": "Restaurant ki kitchen mein plates ke dher (stack) ko sambhalne ka kaam sochiye. Python code likhein jo plates rakhne aur uthane ka kaam dikhaye.\nRequirements (kya karna hai):\n1. Stack class banayein:\n• list se plates ka stack dikhane wali Stack class banayein.\n• push (plate rakhna), pop (plate uthana) aur peek (top plate dekhna, nikale baghair) methods banayein.\n2. Stack operations dikhayein:\n• Plate 1, Plate 2, Plate 3 push karein.\n• Har plate ke baad stack dikhayein.\n• Ek plate pop karein, aur nikali hui plate aur stack dono print karein.\n• Top plate peek kar ke print karein."
@@ -75,6 +81,12 @@
             "language": "text",
             "text": "Stack: ['Plate 1']\nStack: ['Plate 1', 'Plate 2']\nStack: ['Plate 1', 'Plate 2', 'Plate 3']\nRemoved: Plate 3 Stack: ['Plate 1', 'Plate 2']\nTop plate: Plate 2",
             "caption": "Output (Python 3.13 mein chala kar)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"class Stack:\": Stack naam ki class (naya data type banane ka naqsha) banti hai.\n\"def __init__(self): self.items = []\": jab naya Stack banta hai to us ke andar plates rakhne ke liye khali list items banti hai.\n\"def push(self, item): self.items.append(item)\": push plate ko list ke aakhir (top) par rakhta hai.\n\"def pop(self): return self.items.pop()\": pop top wali plate nikal kar wapas deta hai.\n\"def peek(self): return self.items[-1]\": peek top wali plate sirf dekhta hai, nikalta nahi. Index -1 ka matlab hai aakhri item.\n\"plates = Stack()\": ek naya khali stack banta hai.\n\"for plate in [...]: plates.push(plate); print(...)\": teen plates baari baari rakhi jati hain aur har baar stack dikhaya jata hai.\n\"removed = plates.pop()\": top wali \"Plate 3\" uthai jati hai.\n\"print(\"Top plate:\", plates.peek())\": ab top par \"Plate 2\" hai.\nOutput: Stack ['Plate 1'], ['Plate 1', 'Plate 2'], ['Plate 1', 'Plate 2', 'Plate 3']; phir \"Removed: Plate 3 Stack: ['Plate 1', 'Plate 2']\"; aakhir mein \"Top plate: Plate 2\".\nKhud try karein: list mein \"Plate 4\" jor kar Run karein: ab \"Removed: Plate 4\" aur \"Top plate: Plate 3\" aayega."
           },
           {
             "type": "checkpoint",

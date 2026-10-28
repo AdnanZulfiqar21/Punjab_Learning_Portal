@@ -33,6 +33,12 @@
           },
           {
             "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"class Car:\": Car naam ki class banti hai.\n\"def __init__(self , color):\": constructor; jab bhi Car ka naya object banega, yeh khud chalega aur color lega.\n\"self . color = color\": di hui color object ke andar mehfooz (save) ho jati hai. Dot ke aas paas spaces ka koi asar nahi.\nYeh sirf class ki shakal (definition) hai; koi object nahi banaya gaya, is liye chalane par screen par kuch nahi aata. Misaal ke taur par my_car = Car(\"red\") likhne se object banega aur my_car.color \"red\" hoga."
+          },
+          {
+            "type": "callout",
             "tone": "correction",
             "title": "Kitab ki ghalti",
             "text": "Kitab constructor ki misaal ek hi line mein chhapti hai (class Car: def __init__... ); aise SyntaxError aata hai. Sahi shakal oopar hai."
@@ -48,6 +54,12 @@
             "type": "code",
             "language": "python",
             "text": "class Car:\n    def __init__(self, color):\n        self . color = color\n    def __del__(self) :\n        print(\"Car with color\", self.color ,  \"is being deleted . \")"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"class Car:\" aur \"def __init__(self, color):\": pehle jaisa constructor jo object bante waqt color rakhta hai.\n\"def __del__(self) :\": destructor; jab object delete hota hai (maslan del se, ya program khatam hone par) to yeh khud chalta hai.\n\"print(\"Car with color\", self.color , \"is being deleted . \")\": delete hote waqt message dikhata hai, jaise cleanup (safai) ki khabar.\nYeh sirf class ki definition hai; koi object nahi bana, is liye chalane par kuch print nahi hota. Agar c = Car(\"red\") aur phir del c likhein to \"Car with color red is being deleted . \" aayega (kitab ki spacing ke saath)."
           },
           {
             "type": "callout",
@@ -83,6 +95,12 @@
             "language": "python",
             "text": "color = \"red\"\nclass Car:\n    def __init__(self, color):\n        self.color = color\n        print(\"Constructor: car with color\", self.color, \"created.\")\n    def __del__(self):\n        print(\"Destructor: car with color\", self.color, \"is being deleted.\")\nmy_car = Car(color)\nprint(\"Car is in use. Color:\", my_car.color)\ndel my_car\nprint(\"Program finished.\")",
             "runnable": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"color = \"red\"\": car ka rang.\n\"def __init__(self, color):\": constructor; color rakhta hai aur foran \"Constructor: ...\" wala message print karta hai.\n\"def __del__(self):\": destructor; object delete hote waqt \"Destructor: ...\" wala message print karta hai.\n\"my_car = Car(color)\": object banta hai, is liye constructor chalta hai.\n\"print(\"Car is in use. Color:\", my_car.color)\": object istemal ho raha hai.\n\"del my_car\": object delete hota hai, is liye isi waqt destructor chalta hai.\n\"print(\"Program finished.\")\": aakhri line.\nOutput: chaar lines is tarteeb se: \"Constructor: car with color red created.\", \"Car is in use. Color: red\", \"Destructor: car with color red is being deleted.\" aur \"Program finished.\".\nKhud try karein: color = \"blue\" kar ke Run karein: dono messages mein red ki jagah blue aayega, tarteeb wahi rahegi."
           },
           {
             "type": "heading",

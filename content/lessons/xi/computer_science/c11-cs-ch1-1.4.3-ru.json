@@ -144,6 +144,12 @@
           },
           {
             "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"weeks = 24\": project 24 hafte chalega. \"#\" ke baad wali baat comment hai; Python use nahi chalata, sirf parhne wale ke liye hai.\n\"pm_rate = 5000\" se \"tester_rate = 2500\" tak: har kaam karne wale ka ek ghante ka rate (PKR) variables mein rakha gaya hai.\n\"operational_costs = 1000000\" aur \"contingency_percent = 10\": baqi kharche (dafter, bijli waghera) aur hangami fund (mushkil waqt ke liye bachaya paisa) ka feesad (percent).\n\"pm = pm_rate * 20 * weeks\": project manager har hafte 20 ghante kaam karta hai, is liye rate x 20 x hafte = 5000 x 20 x 24 = 2,400,000.\n\"frontend = 2 * frontend_rate * 30 * weeks\": shuru mein 2 ka matlab hai 2 developers, har ek 30 ghante har hafta. Backend aur testers mein bhi 2 log hain; designer akela hai (20 ghante).\n\"subtotal = pm + ... + operational_costs\": sab kharche jama (add) kiye: 2,400,000 + 5,040,000 + 5,760,000 + 1,440,000 + 2,400,000 + 1,000,000 = 18,040,000.\n\"contingency = subtotal * contingency_percent / 100\": subtotal ka 10% = 1,804,000. \"/\" hamesha decimal number (float) deta hai.\nprint(f\"...\"): f-string mein {} ke andar variable ki value aa jati hai. \":,\" number mein comma lagata hai (18,040,000) aur \":,.0f\" decimal ke baad koi digit nahi dikhata.\nOutput: teen lines aati hain: \"Jama (subtotal): PKR 18,040,000\", \"Contingency fund (10%): PKR 1,804,000\" aur \"Total Estimated Cost: PKR 19,844,000\" (18,040,000 + 1,804,000).\nKhud try karein: weeks = 12 kar ke Run karein: subtotal PKR 9,520,000 aur Total Estimated Cost PKR 10,472,000 ho jayega, kyun ke tankhwahein aadhi ho jati hain magar operational_costs wohi 1,000,000 rehte hain."
+          },
+          {
+            "type": "callout",
             "tone": "note",
             "title": "Tidbits",
             "text": "Software development project shuru karne ke liye programming aana zaroori nahi! Aap apna idea freelancing platforms par daal sakte hain jahan developers aap ke project par boli (bid) lagate hain. Ghar walon ki madad se aap investors (paisa lagane wale) bhi dhoond sakte hain jo aap ke idea ke liye paisa dein. Is tarah professional madad se aap apne naye ideas ko haqeeqat bana sakte hain!"

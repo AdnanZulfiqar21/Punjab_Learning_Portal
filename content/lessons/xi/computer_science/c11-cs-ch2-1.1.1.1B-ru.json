@@ -36,6 +36,12 @@
             "text": "class Car:\n    def __init__(self , color): self.color = color # Public property"
           },
           {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"class Car:\": Car naam ki class banti hai. Class ek blueprint (naqsha) hai jis se objects bante hain.\n\"def __init__(self , color):\": yeh constructor (object bante waqt khud chalne wala method) hai. self naya banne wala object hai aur color woh value jo object banate waqt di jati hai.\n\"self.color = color\": di gayi value object ke andar color naam ki attribute (property) mein rakh di jati hai.\ncolor ke naam ke shuru mein koi underscore nahi, is liye yeh public hai: class ke bahar se bhi car.color likh kar parhi ja sakti hai.\nOutput: kuch print nahi hota, kyun ke yahan sirf class define hui hai; na koi object bana na print hua. Maslan car = Car(\"red\") aur print(car.color) likhein to red print hoga."
+          },
+          {
             "type": "list",
             "ordered": false,
             "items": [
@@ -46,6 +52,12 @@
             "type": "code",
             "language": "python",
             "text": "class Car:\n    def __init__(self): self._protected_var = 20 # Protected variable"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"class Car:\": Car naam ki class banti hai.\n\"def __init__(self):\": constructor jo object bante waqt khud chalta hai; yahan self ke ilawa koi parameter nahi.\n\"self._protected_var = 20\": object mein _protected_var naam ki attribute banti hai jis ki value 20 hai.\nNaam ke shuru mein ek underscore (_) ka matlab hai protected: yeh programmers ke liye ishara hai ke isay class aur us ki subclasses ke andar hi istemal karein. Python zabardasti nahi rokti.\nOutput: kuch print nahi hota, kyun ke sirf class define hui hai, koi object nahi bana aur koi print nahi."
           },
           {
             "type": "callout",
@@ -64,6 +76,12 @@
             "type": "code",
             "language": "python",
             "text": "class Car:\n    def __init__(self , color):\n        self.__color = color # Private property\n    def get_color(self): return self.__color"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"class Car:\": Car naam ki class banti hai.\n\"def __init__(self , color):\": constructor jo object bante waqt color ki value leta hai.\n\"self.__color = color\": naam ke shuru mein do underscores (__) hain, is liye yeh private attribute hai. Python is ka naam andar hi andar badal deti hai, is liye bahar se car.__color likhne par AttributeError aata hai.\n\"def get_color(self): return self.__color\": yeh method class ke andar hai, is liye private value parh sakta hai aur usay wapas (return) kar deta hai. Bahar se color lene ka sahi raasta yahi method hai.\nOutput: kuch print nahi hota, kyun ke sirf class define hui hai. Maslan car = Car(\"blue\") aur print(car.get_color()) likhein to blue print hoga."
           },
           {
             "type": "callout",
@@ -99,6 +117,12 @@
             "language": "python",
             "text": "brand = \"Suzuki\"\nspeed = 60\ncolor = \"white\"\nclass Car:\n    def __init__(self, brand, speed, color):\n        self.brand = brand      # public\n        self._speed = speed     # protected (sirf ishara)\n        self.__color = color    # private\n    def get_color(self):\n        return self.__color\ncar = Car(brand, speed, color)\nprint(\"Public brand:\", car.brand)\nprint(\"Protected speed:\", car._speed)\nprint(\"Private color (method se):\", car.get_color())\ntry:\n    print(car.__color)\nexcept AttributeError:\n    print(\"car.__color bahar se seedha nahi milta (AttributeError)\")",
             "runnable": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"brand = \"Suzuki\"\", \"speed = 60\", \"color = \"white\"\": teen variables jin ki values object banate waqt di jayengi.\n\"class Car:\" aur \"def __init__(self, brand, speed, color):\": Car class aur us ka constructor (object bante waqt chalne wala method) jo teen values leta hai.\n\"self.brand = brand\": public attribute (koi underscore nahi), bahar se seedhi parhi ja sakti hai.\n\"self._speed = speed\": protected attribute (ek underscore); bahar se parhi ja sakti hai, magar yeh sirf ishara hai ke isay andar hi istemal karein.\n\"self.__color = color\": private attribute (do underscores); bahar se seedhi nahi milti.\n\"def get_color(self): return self.__color\": private color ko wapas dene wala method.\n\"car = Car(brand, speed, color)\": Car ka ek object banta hai.\nTeen print lines: car.brand, car._speed aur car.get_color() ki values dikhati hain.\n\"try:\" ... \"except AttributeError:\": car.__color seedha parhne ki koshish AttributeError deti hai; except wala hissa us error ko pakar kar apna message print kar deta hai, is liye program crash nahi hota.\nOutput: \"Public brand: Suzuki\", \"Protected speed: 60\", \"Private color (method se): white\" aur aakhir mein \"car.__color bahar se seedha nahi milta (AttributeError)\".\nKhud try karein: color = \"black\" kar ke Run karein: teesri line \"Private color (method se): black\" ho jayegi, magar aakhri line wahi rahegi."
           },
           {
             "type": "heading",

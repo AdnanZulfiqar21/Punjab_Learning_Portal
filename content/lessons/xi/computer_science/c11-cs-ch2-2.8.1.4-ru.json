@@ -37,13 +37,15 @@
           },
           {
             "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"class Book :\" aur \"self.title = title\": Book class har kitab ka title rakhti hai.\n\"class Library :\" aur \"self.books = [ ]\": Library bante waqt kitabon ki khaali list banti hai.\n\"def add_book(self, book):\": bahar bane hue Book object ko list mein jorta hai (append).\n\"print(\"Book \", book.title, \"added to the library.\")\": kitab jurne ka message; \"Book \" ke andar bhi space hai, is liye output mein \"Book\" ke baad do spaces aate hain.\nYeh aggregation hai: Book objects Library se alag bante hain aur Library ke baghair bhi reh sakte hain.\nYahan sirf classes define hui hain; koi object nahi bana aur add_book bulaya nahi gaya, is liye chalane par kuch print nahi hota. Agla \"Khud chala kar dekhein\" program inhein istemal karta hai."
+          },
+          {
+            "type": "callout",
             "tone": "correction",
             "title": "Kitab ki ghalti",
             "text": "Kitab ke code mein yeh ghaltiyan hain: self, books = [ ] (comma) ki jagah self.books = [ ] (dot) hona chahiye, warna ValueError aata hai; def add_book Library class ke andar indented hona chahiye aur us ki dono lines us ke neeche (print line zyada aage khiski hui hai); aur \"added to the library.” tirchhi quote par khatam hai, is liye string band nahi hoti. Theek code oopar hai."
-          },
-          {
-            "type": "paragraph",
-            "text": "Wazahat: Book ka object add_book method ke zariye Library ko diya jata hai aur woh library ki books list mein jur jata hai. Maslan lib = Library(); lib.add_book(Book(\"Python Basics\")) se \"Book  Python Basics added to the library.\" print hota hai."
           },
           {
             "type": "heading",
@@ -61,6 +63,12 @@
             "runnable": true
           },
           {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"titles = [\"Python Basics\", \"Computer Science XI\"]\": kitabon ke naamon ki list.\n\"class Book:\" aur \"class Library:\": Book title rakhti hai; Library ke paas books ki list aur add_book method hai jo kitab jor kar message print karta hai.\n\"library = Library()\": ek library object banta hai jis ki list khaali hai.\n\"for title in titles:\": har naam par loop ek baar chalta hai.\n\"library.add_book(Book(title))\": pehle us naam se Book object banta hai, phir library mein jurta hai; har dafa message print hota hai.\n\"print(\"Library mein kul books:\", len(library.books))\": list mein kitabein ginta hai.\nOutput: \"Book Python Basics added to the library.\", \"Book Computer Science XI added to the library.\" aur \"Library mein kul books: 2\".\nKhud try karein: titles mein \"Physics XI\" bhi jor kar Run karein: teesri \"added\" line aayegi aur \"Library mein kul books: 3\"."
+          },
+          {
             "type": "paragraph",
             "text": "Composition: ek class (maslan House) doosri class (maslan Room) ko rakhti bhi hai aur us ki maalik bhi hai. Rooms (kamre) ghar ke baghair nahi reh sakte."
           },
@@ -72,13 +80,15 @@
           },
           {
             "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"class Room:\" aur \"self.name = name\": Room class kamre ka naam rakhti hai.\n\"class House :\" aur \"def __init__(self) :\": House ka constructor.\n\"self.rooms = [Room(\"Living Room\"), Room( \" Bedroom\")]\": House khud apne andar do Room objects banata hai. Yahi composition hai: ghar kamron ka maalik hai, kamre ghar ke saath bante hain aur ghar ke baghair nahi rehte. (Kitab ke \" Bedroom\" mein shuru mein ek space hai; output par is ka asar nahi.)\n\"print (\"House with rooms created\")\": ghar banne ka message.\n\"house = House()\": House object banta hai, is liye constructor chalta hai; aakhir wala \"# prints: ...\" comment hai.\nOutput: House with rooms created\nKhud try karein: aakhir mein print(house.rooms[0].name) jor kar Run karein: \"Living Room\" bhi aayega."
+          },
+          {
+            "type": "callout",
             "tone": "correction",
             "title": "Kitab ki ghalti",
             "text": "Kitab self.name = name ko margin par chhapti hai; yeh __init__ ke andar indented honi chahiye (IndentationError). House ke andar print mein tirchhe quotes (“ ”) hain jo Python nahi maanti; seedhe quotes lagayein. Aakhri line print(\"House with rooms created.\") class ke bahar ek faltu copy hai. Ghar house = House() se banta hai, aur yeh \"House with rooms created\" print karta hai."
-          },
-          {
-            "type": "paragraph",
-            "text": "Wazahat: House object ke andar Room objects ki list hai ('Living Room' aur ' Bedroom'). House apne kamre khud banata hai, is liye kamre ghar ka hissa hain; yahi composition hai."
           },
           {
             "type": "checkpoint",

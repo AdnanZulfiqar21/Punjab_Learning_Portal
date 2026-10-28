@@ -66,6 +66,12 @@
           {
             "type": "callout",
             "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"def linear_search(items, target):\": list items mein target dhoondne wala function.\n\"for i in range(len(items)):\": position 0 se aakhir tak har item baari baari.\n\"if items[i] == target: return i\": mil jaye to foran us ki position lautata hai.\n\"return -1\": poori list dekh li aur nahi mila to -1 (matlab list mein nahi).\n\"print(linear_search([...], \\\"Islamabad\\\"))\": char shehron ki list mein Islamabad dhoondta hai.\nOutput: \"2\", kyun ke ginti 0 se hai: Karachi 0, Lahore 1, Islamabad 2.\nKhud try karein: \"Islamabad\" ko \"Quetta\" kar ke Run karein: jawab -1 aayega, kyun ke Quetta list mein nahi."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
             "title": "Asaan alfaaz mein",
             "text": "Python mein list ki ginti 0 se shuru hoti hai: Karachi 0, Lahore 1, Islamabad 2. Is liye function 2 lautata hai, yani Islamabad teesri jagah par hai. Item na mile to -1 lautata hai."
           },
@@ -83,6 +89,12 @@
             "language": "python",
             "text": "cities = [\"Karachi\", \"Lahore\", \"Islamabad\", \"Faisalabad\"]\ntarget = \"Islamabad\"\n\ndef linear_search():\n    for i in range(len(cities)):\n        print(\"Check position\", i, \":\", cities[i])\n        if cities[i] == target:\n            return i\n    return -1\n\nposition = linear_search()\nif position == -1:\n    print(target, \"is not in the list;\", len(cities), \"comparisons done.\")\nelse:\n    print(target, \"found at position\", position, \"after\", position + 1, \"comparisons.\")",
             "runnable": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"cities = [...]\" aur \"target = \\\"Islamabad\\\"\": list aur dhoondne wala naam.\n\"for i in range(len(cities)):\": shuru se har position baari baari.\n\"print(\\\"Check position\\\", i, \\\":\\\", cities[i])\": har comparison screen par dikhata hai.\n\"if cities[i] == target: return i\": mil jaye to wahin ruk jata hai.\n\"return -1\": nahi mila to -1.\n\"position + 1\": position 0 se ginti hai, is liye comparisons = position + 1.\nOutput: \"Check position 0 : Karachi\", \"Check position 1 : Lahore\", \"Check position 2 : Islamabad\", phir \"Islamabad found at position 2 after 3 comparisons.\"\nKhud try karein: target = \"Quetta\" kar ke Run karein: char positions check hongi aur \"Quetta is not in the list; 4 comparisons done.\" aayega."
           },
           {
             "type": "checkpoint",

@@ -37,6 +37,12 @@
             "text": "def greet () :\n    return \" As – Salaam Alaikum from helper.py!\""
           },
           {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "Yeh helper.py naam ki file (module) ka code hai.\n\"def greet () :\": greet naam ka function banta hai jo koi parameter nahi leta.\n\"return \" As – Salaam Alaikum from helper.py!\"\": ek string wapas karta hai. Kitab ke text mein shuru mein ek space aur lamba dash (–) hai, woh bhi string ka hissa hai.\nOutput: yeh file akeli chalayein to kuch print nahi hota, kyun ke function sirf define hua hai, call nahi. Isay doosri file (main.py) import kar ke istemal karti hai."
+          },
+          {
             "type": "paragraph",
             "text": "main.py mein:"
           },
@@ -46,8 +52,10 @@
             "text": "import helper\nmessage = helper.greet()\nprint(message) # Output : As - Salaam-Alaikum from helper.py!"
           },
           {
-            "type": "paragraph",
-            "text": "Wazahat: helper.py usi folder mein hai jahan main.py hai, is liye Python usay dhoond kar import kar leti hai. Asal output helper.py ki string hai: \" As – Salaam Alaikum from helper.py!\" (comment mein likhe words se thora alag)."
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "Yeh main.py ka code hai, jo helper.py ko istemal karta hai.\n\"import helper\": usi folder mein rakhi helper.py ko module ke taur par laata hai (.py likhe baghair).\n\"message = helper.greet()\": helper module ka greet() function call hota hai aur us ki string message mein aati hai.\n\"print(message)\": woh string print hoti hai.\nAkela chalane par (helper.py usi folder mein na ho) ModuleNotFoundError aata hai, is liye yeh website par akela nahi chal sakta.\nOutput: dono files saath hon to helper.py wali string chhapti hai: \" As – Salaam Alaikum from helper.py!\" (shuru mein space aur lamba dash). Comment ka \"As - Salaam-Alaikum from helper.py!\" is se thora mukhtalif hai."
           },
           {
             "type": "paragraph",
@@ -64,8 +72,10 @@
             "runnable": true
           },
           {
-            "type": "paragraph",
-            "text": "Wazahat: random Python ki standard library ka hissa hai, is liye baghair kisi mushkil ke mil jata hai. f\"...\" string mein { } ke andar variable ki value aa jati hai."
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"import random\": random Python ki standard library ka hissa hai, is liye alag file ki zaroorat nahi.\n\"number = random.randint(1, 10)\": 1 se 10 tak (dono shamil) koi number chunta hai.\n\"print(f\"Random number: {number}\")\": f-string mein { } ke andar variable ki value aa jati hai.\n\"# Output:\" wali lines sirf comments hain.\nOutput: \"Random number: \" ke baad 1 se 10 tak koi number, har Run par alag ho sakta hai. Comment mein colon ke baad do spaces dikhaye gaye hain, asal output mein sirf ek space hota hai (maslan \"Random number: 7\")."
           },
           {
             "type": "heading",
@@ -87,6 +97,12 @@
           },
           {
             "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "Yeh ecommerce folder (package) ke andar products.py file (module) ka code hai.\n\"def list_products () :\": list_products naam ka function banta hai.\n\"return [\"Laptop\",\"Mobile\", \"Tablet\"]\": teen products ki list wapas karta hai.\nOutput: yeh file akeli kuch print nahi karti; function sirf define hota hai. Main script isay import kar ke call karti hai."
+          },
+          {
+            "type": "callout",
             "tone": "correction",
             "title": "Kitab ki ghalti",
             "text": "Kitab function ka naam 1ist_products chhapti hai, yani shuru mein digit 1. Naam digit se shuru nahi ho sakta (SyntaxError), aur main script list_products() bulata hai. Sahi: def list_products():"
@@ -101,8 +117,10 @@
             "text": "from ecommerce import products\navailable_products = products.list_products()\nprint(available_products)\n#    Output :\n#    ['Laptop', 'Mobile', 'Tablet']"
           },
           {
-            "type": "paragraph",
-            "text": "Wazahat: yahan ecommerce package hai aur products.py module. from ecommerce import products se module aata hai aur output ['Laptop', 'Mobile', 'Tablet'] hai. Is structure (banawat) se code organized aur sambhalne mein aasan rehta hai."
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "Yeh main script ka code hai jo ecommerce package ko istemal karta hai.\n\"from ecommerce import products\": ecommerce folder ke andar se products module laata hai.\n\"available_products = products.list_products()\": function call; list available_products mein aati hai.\n\"print(available_products)\": list ko brackets aur single quotes samet print karta hai.\n\"# Output :\" wali lines sirf comments hain.\nAkela chalane par (ecommerce folder aur products.py maujood na hon) ModuleNotFoundError aata hai, is liye yeh website par akela nahi chal sakta.\nOutput: dono files sahi jagah hon to ['Laptop', 'Mobile', 'Tablet']."
           },
           {
             "type": "callout",

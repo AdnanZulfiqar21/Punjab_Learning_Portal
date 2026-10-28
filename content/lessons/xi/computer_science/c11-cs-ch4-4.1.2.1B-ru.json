@@ -56,6 +56,12 @@
           },
           {
             "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"stack_of_books = []\": khali list banti hai jo stack (dher) ka kaam karegi. List ka aakhri item stack ka top (sab se oopar) hai.\n\"print(\"Initial stack:\", stack_of_books)\": shuru mein khali stack [] dikhata hai.\n\"print(\"\\n Adding books ...\")\": \\n nayi line banata hai, is liye pehle ek khali line aati hai. \\n ke baad wali space bhi chhapti hai, is liye yeh line ek space se shuru hoti hai.\n\"stack_of_books.append('Book A')\" (aur B, C): append push operation hai: kitab dher ke oopar rakhi jati hai. Har push ke baad stack print hota hai.\n\"top_book = stack_of_books.pop()\": pop bina index ke aakhri item nikalta hai, yani sab se oopar wali kitab \"Book C\". Yahi LIFO (Last In, First Out: jo aakhir mein aaya woh pehle nikla) hai.\nAakhri do print nikali gayi kitab aur bacha hua stack dikhate hain.\nOutput: shuru mein \"Initial stack: []\", phir teen push ke baad stack ['Book A', 'Book B', 'Book C'], phir \"Removed book: Book C\" aur aakhir mein \"Stack after popping the top book: ['Book A', 'Book B']\".\nKhud try karein: top_book = stack_of_books.pop() wali line do baar likh kar Run karein: ab \"Removed book: Book B\" aayega aur stack ['Book A'] bachega."
+          },
+          {
+            "type": "callout",
             "tone": "correction",
             "title": "Kitab ki ghalti",
             "text": "Kitab ke code mein do ghaltiyan hain: (1) pehli line mein stack_of_books = [] comment ke saath hi likha hai, is liye list banti hi nahi aur NameError aata hai; upar ise alag line par likha gaya hai. (2) append(’Book A’) waghaira mein tirchhe quotes ’ hain, jinhein Python nahi maanta (SyntaxError); sahi append('Book A') hai."
@@ -84,6 +90,12 @@
             "language": "python",
             "text": "books = [\"Book A\", \"Book B\", \"Book C\", \"Book D\"]\npops = 2           # how many times to pop\n\nstack_of_books = list()\nfor book in books:\n    stack_of_books.append(book)          # push\nprint(\"Full stack (top on the right):\", stack_of_books)\nfor i in range(pops):\n    if stack_of_books:\n        print(\"Popped:\", stack_of_books.pop())\n    else:\n        print(\"Stack is empty, nothing to pop\")\nprint(\"Stack now:\", stack_of_books)",
             "runnable": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"books = [...]\": 4 kitabein jo stack par rakhni hain.\n\"pops = 2\": kitni baar pop karna hai.\n\"stack_of_books = list()\": khali stack banta hai (list() aur [] ek hi cheez hain).\n\"for book in books: stack_of_books.append(book)\": har kitab baari baari push hoti hai; aakhri kitab \"Book D\" top par aati hai.\n\"print(\"Full stack ...\")\": poora stack dikhata hai; right side wala item top hai.\n\"for i in range(pops):\": loop (baar baar chalne wala hissa) pops jitni baar chalta hai.\n\"if stack_of_books:\": khali list False hoti hai, is liye yeh check karta hai ke stack khali to nahi. Khali ho to else wala message aata hai, warna pop.\n\"print(\"Stack now:\", ...)\": aakhir mein bacha hua stack.\nOutput: pehle Full stack ['Book A', 'Book B', 'Book C', 'Book D'], phir \"Popped: Book D\", \"Popped: Book C\" aur aakhir mein \"Stack now: ['Book A', 'Book B']\".\nKhud try karein: pops = 5 kar ke Run karein: chaar kitabein D, C, B, A nikalengi, paanchvi baar \"Stack is empty, nothing to pop\" aayega aur Stack now: [] dikhega."
           },
           {
             "type": "callout",

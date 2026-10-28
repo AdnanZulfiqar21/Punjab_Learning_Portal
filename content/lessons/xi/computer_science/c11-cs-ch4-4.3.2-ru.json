@@ -148,6 +148,12 @@
             "runnable": true
           },
           {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"children = {...}\": Figure 4.13 ka graph: 1 se 2, 3, 4; 2 se 5, 6; 3 se 7; 4 se 8, 9.\n\"start = 1\": DFS yahan se shuru.\n\"stack = [start]\" aur \"order = list()\": stack mein shuru wala node, order mein visit ki tarteeb.\n\"while stack:\": jab tak stack khali na ho.\n\"node = stack.pop()\": top (aakhri) item nikalta hai.\n\"order.append(node)\": node visit ho gaya.\n\"for child in reversed(children.get(node, [])): stack.append(child)\": children ulti tarteeb mein push hote hain taake pehla child (maslan 2) top par aaye aur pehle visit ho. Is tarah DFS pehle gehrai mein jata hai.\n\"print(\"Visit\", node, \"-> stack:\", stack)\": har visit ke baad stack.\nOutput: 9 \"Visit\" lines (pehli \"Visit 1 -> stack: [4, 3, 2]\"), aur aakhir mein \"DFS order: [1, 2, 5, 6, 3, 7, 4, 8, 9]\".\nKhud try karein: start = 4 kar ke Run karein: sirf 4 aur us ke neeche wale dekhe jayenge: \"DFS order: [4, 8, 9]\"."
+          },
+          {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "Long question 7(a): exercise ke graph mein A se B, C aur D ki taraf, B se E aur F, C se G, aur D se H aur I ki taraf teer hain. A se shuru kar ke DFS mein nodes kis order mein dekhe jayenge?",

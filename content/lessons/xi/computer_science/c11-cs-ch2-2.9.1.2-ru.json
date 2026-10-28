@@ -31,22 +31,15 @@
           },
           {
             "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"try :\": poora khatre wala kaam try ke andar hai.\n\"number = int(input(\"Enter a number\"))\": user se number leta hai; prompt ke aakhir mein space ya colon nahi, is liye jo likha jaye woh \"Enter a number\" ke saath chipka nazar aata hai. Word likhne par int() ValueError deta hai.\n\"result = 10 / number\": 0 likhne par ZeroDivisionError.\n\"except ZeroDivisionError:\": 0 wali ghalti pakar kar \"You can’t divide by zero ! \" print karta hai (kitab ki spacing aur tirchhe apostrophe ke saath).\n\"except ValueError:\": number ki jagah text likhne wali ghalti pakar kar \"Invalid input! Please enter a valid number.\" print karta hai.\n\"else :\": sirf tab chalta hai jab try mein koi ghalti na aaye: \"The result is\" ke saath jawab.\n\"finally :\": har haal mein chalta hai: \"Execution completed.\".\nOutput: 4 likhne par \"The result is 2.5\" aur \"Execution completed.\"; 0 likhne par zero wala message aur \"Execution completed.\"; \"abc\" likhne par \"Invalid input! Please enter a valid number.\" aur \"Execution completed.\"."
+          },
+          {
+            "type": "callout",
             "tone": "correction",
             "title": "Kitab ki ghalti",
             "text": "Kitab mein yeh code bikhra hua chhapa hai: kai lines ke tukre alag alag columns mein hain (maslan \"Ent er a\", \"number\" aur \"\"))\" alag, \"f inally\" toota hua). Oopar tukron ko sahi order mein jor kar code diya gaya hai."
-          },
-          {
-            "type": "paragraph",
-            "text": "Wazahat:"
-          },
-          {
-            "type": "list",
-            "ordered": false,
-            "items": [
-              "User 5 likhe: try bina ghalti ke chalta hai, else chalta hai (\"The result is 2.0\"), phir finally (\"Execution completed.\").",
-              "User 0 likhe: ZeroDivisionError, \"You can’t divide by zero ! \", phir finally.",
-              "User abc likhe: int() ValueError deta hai, \"Invalid input! Please enter a valid number.\", phir finally."
-            ]
           },
           {
             "type": "paragraph",
@@ -72,6 +65,12 @@
             "language": "python",
             "text": "number_text = \"4\"\ntry:\n    number = int(number_text)\n    result = 10 / number\nexcept ZeroDivisionError:\n    print(\"You can't divide by zero!\")\nexcept ValueError:\n    print(\"Invalid input! Please enter a valid number.\")\nelse:\n    print(\"The result is\", result)\nfinally:\n    print(\"Execution completed.\")",
             "runnable": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"number_text = \"4\"\": woh text jo user likhta; abhi yeh \"4\" hai.\n\"number = int(number_text)\": text ko number mein badalta hai; text number na ho to ValueError.\n\"result = 10 / number\": 10 / 4 = 2.5; number 0 ho to ZeroDivisionError.\n\"except ZeroDivisionError:\" aur \"except ValueError:\": dono ghaltiyon ke apne apne message.\n\"else:\": koi ghalti na ho to \"The result is 2.5\" print hota hai.\n\"finally:\": har haal mein \"Execution completed.\" print hota hai.\nOutput: \"The result is 2.5\" aur \"Execution completed.\".\nKhud try karein: number_text = \"0\" kar ke Run karein: \"You can't divide by zero!\" aur \"Execution completed.\" aayega; \"abc\" par \"Invalid input! Please enter a valid number.\" aur phir \"Execution completed.\"."
           },
           {
             "type": "heading",

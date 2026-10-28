@@ -124,6 +124,12 @@
             "runnable": true
           },
           {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"children = {...}\": dictionary jo batati hai ke har node ke children kaun hain: 1 ke 2 aur 3, 2 ke 4 aur 5, 3 ke 6 aur 7; 4 se 7 leaf hain (khali list).\n\"start = 1\": BFS root node 1 se shuru hoga.\n\"queue = [start]\" aur \"order = list()\": queue mein shuru wala node, aur order mein visit ki tarteeb jama hogi.\n\"while queue:\": jab tak queue khali na ho, loop chalta rahe.\n\"node = queue.pop(0)\": pop(0) list ke aage se nikalta hai, yani dequeue.\n\"order.append(node)\": yeh node visit ho gaya.\n\"queue.extend(children.get(node, []))\": node ke saare children peeche se queue mein (enqueue). .get(node, []) node na mile to khali list deta hai, taake ghalti na aaye.\n\"print(\"Visit\", node, \"-> queue:\", queue)\": har visit ke baad queue dikhata hai.\nOutput: 7 \"Visit\" lines, pehli \"Visit 1 -> queue: [2, 3]\" aur aakhri \"Visit 7 -> queue: []\"; phir \"BFS order: [1, 2, 3, 4, 5, 6, 7]\" — level ba level.\nKhud try karein: start = 3 kar ke Run karein: sirf 3 aur us ke children dekhe jayenge: \"BFS order: [3, 6, 7]\"."
+          },
+          {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "Tree par BFS mein level ba level nodes dekhne ke liye queue ka kaunsa operation istemal hota hai (MCQ 6)?",

@@ -190,6 +190,12 @@
             "runnable": true
           },
           {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"left = {...}\" aur \"right = {...}\": har node ka baen (left) aur daen (right) child. Node 1 ke children 2 aur 3, 2 ke 4 aur 5, 3 ke 6 aur 7 (Figure 4.8).\n\"root = 1\": traversal (har node par ja kar dekhna) yahan se shuru.\n\"def in_order(node):\": node None ho (child nahi) to khali list. Warna: pehle left subtree, phir node khud, phir right subtree. left.get(node) child na ho to None deta hai.\n\"def pre_order(node):\": pehle node khud, phir left, phir right.\n\"def post_order(node):\": pehle left, phir right, aakhir mein node khud.\nTeeno functions recursion (khud ko dobara bulana) istemal karte hain aur lists ko + se jorte hain.\nTeen print lines: har traversal ka order chhapti hain.\nOutput: \"In-order:   [4, 2, 5, 1, 6, 3, 7]\", \"Pre-order:  [1, 2, 4, 5, 3, 6, 7]\", \"Post-order: [4, 5, 2, 6, 7, 3, 1]\".\nKhud try karein: root = 2 kar ke Run karein: sirf 2 wala subtree dekha jayega: in-order [4, 2, 5], pre-order [2, 4, 5], post-order [4, 5, 2]."
+          },
+          {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "Kaunsa traversal root node ko us ke children se pehle dekhta hai (MCQ 7)?",

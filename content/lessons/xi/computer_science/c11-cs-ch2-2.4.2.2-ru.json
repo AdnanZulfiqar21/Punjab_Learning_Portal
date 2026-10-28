@@ -29,6 +29,12 @@
             "text": "# Syntax of for loop\nfor variable in sequence:\n    # code to run for each element in the sequence"
           },
           {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "Yeh for loop ki shakal (syntax) hai, poora program nahi.\n\"for\": keyword, chhote letters mein.\n\"variable\": aap ka chuna hua naam; har chakkar mein sequence ki agli cheez is mein aa jati hai.\n\"in sequence\": jis list, tuple, string ya range par chalna hai.\n\":\": aakhir mein colon.\n\"# code to run for each element in the sequence\": yahan indented code aata hai jo har cheez ke liye ek baar chalta hai. Sirf comment rakhne par IndentationError aata hai."
+          },
+          {
             "type": "paragraph",
             "text": "Misaal 1: dosto ki list mein har dost ko \"As-Salaam-Alaikum\" kahein."
           },
@@ -39,8 +45,10 @@
             "runnable": true
           },
           {
-            "type": "paragraph",
-            "text": "Wazahat: loop list ke har dost par baari baari chalta hai aur har ek ke liye salaam print karta hai: \"As-Salaam-Alaikum Ahmad\", phir \"As-Salaam-Alaikum All\", phir \"As-Salaam-Alaikum Hassan\". (Kitab mein naam \"All\" chhapa hai; shayad \"Ali\" likhna tha. Code dono tarah chalta hai.)"
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"friends = [\"Ahmad\", \"All\", \"Hassan\"]\": teen naamon ki list. Kitab \"All\" chhapti hai (shayad \"Ali\" ki jagah chhapai ki ghalti); program wahi chhapta hai jo list mein likha hai.\n\"for friend in friends:\": loop list ki har cheez par ek ek kar ke chalta hai; har chakkar mein agla naam friend mein aata hai.\n\"print(\"As-Salaam-Alaikum\", friend)\": har dost ke liye salaam; comma ki wajah se beech mein space.\nOutput: \"As-Salaam-Alaikum Ahmad\", \"As-Salaam-Alaikum All\", \"As-Salaam-Alaikum Hassan\".\nKhud try karein: list mein \"Sara\" bhi jor dein ([\"Ahmad\", \"All\", \"Hassan\", \"Sara\"]) aur Run karein: chauthi line \"As-Salaam-Alaikum Sara\" aayegi."
           },
           {
             "type": "paragraph",
@@ -51,6 +59,12 @@
             "language": "python",
             "text": "cart = [\n    {\"item\": \"Apple\", \"price\": 0.5, \"quantity\": 4},\n    {\"item\": \"Banana\", \"price\": 0.2, \"quantity\": 10},\n    {\"item\": \"Orange\", \"price\": 0.75, \"quantity\": 3}\n    ]\ntotal_price = 0\nfor product in cart:\n    item_total = product[\"price\"] * product[\"quantity\"]\n    total_price += item_total\n    print(f\"{product['item']} total: ${item_total:.2f}\")\nprint(f\"Total price of all items: ${total_price:.2f}\")",
             "runnable": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"cart = [ ... ]\": list jis ki har cheez dictionary (key aur value ke jore) hai: item (naam), price (ek ki qeemat) aur quantity (kitne).\n\"total_price = 0\": kul qeemat 0 se shuru.\n\"for product in cart:\": har chakkar mein ek dictionary product mein aati hai.\n\"item_total = product[\"price\"] * product[\"quantity\"]\": us cheez ki qeemat: Apple 0.5 * 4 = 2.0, Banana 0.2 * 10 = 2.0, Orange 0.75 * 3 = 2.25.\n\"total_price += item_total\": har item ki qeemat kul mein jurti jati hai.\n\"print(f\"{product['item']} total: ${item_total:.2f}\")\": f-string mein { } ke andar value aati hai; :.2f number ko do decimal places tak dikhata hai; $ sirf nishan hai.\nAakhri print loop ke baad ek baar chalti hai: 2.0 + 2.0 + 2.25 = 6.25.\nOutput: \"Apple total: $2.00\", \"Banana total: $2.00\", \"Orange total: $2.25\", \"Total price of all items: $6.25\".\nKhud try karein: Apple ki quantity 6 kar ke Run karein: \"Apple total: $3.00\" aur kul \"$7.25\" ho jayega."
           },
           {
             "type": "callout",

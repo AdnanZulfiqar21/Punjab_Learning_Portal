@@ -72,6 +72,12 @@
           {
             "type": "callout",
             "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"fib = [0, 1]\": pehle do terms list mein rakh diye.\n\"for i in range(2, 20):\": i = 2 se 19 tak, yani 18 naye terms bante hain; kul 20 terms.\n\"fib.append(fib[i - 1] + fib[i - 2])\": naya term pichhle do stored (rakhe hue) terms ko jama kar ke banta hai; koi term dobara nahi nikalna parta. Yahi dynamic programming hai.\n\"print(fib)\": poori list (20 terms) print karta hai.\n\"print(fib[19])\": index 0 se shuru hota hai, is liye fib[19] 20wan term hai.\nOutput: \"[0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181]\" aur phir \"4181\".\nKhud try karein: range(2, 20) ko range(2, 25) kar ke Run karein: list mein 25 terms (aakhri 46368) aayenge, magar doosri line phir bhi 4181 hogi kyun ke woh fib[19] hi print karti hai. 20 se chhota number na likhein, warna fib[19] maujood nahi hoga aur IndexError aayega."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
             "title": "Asaan alfaaz mein",
             "text": "List fib har nikala hua term store karti hai. Har naya term list mein pehle se maujood aakhri do terms (fib[i - 1] aur fib[i - 2]) jama kar ke banta hai; koi term dobara nahi nikalna parta. Yahi DP hai. 0 ko pehla term gin kar 20wan term fib[19] = 4181 hai."
           },
@@ -89,6 +95,12 @@
             "language": "python",
             "text": "term = 20   # which term (0 is the 1st term)\n\ndef fib_plain(k, calls):\n    calls[0] += 1                                    # count every call\n    if k < 2:\n        return k\n    return fib_plain(k - 1, calls) + fib_plain(k - 2, calls)\n\ndef fib_dp(count):\n    fib = [0, 1]\n    for i in range(2, count):\n        fib.append(fib[i - 1] + fib[i - 2])          # use stored values\n    return fib[count - 1], max(count - 2, 0)\n\nif term < 1:\n    print(\"term must be 1 or more\")\nelse:\n    value, additions = fib_dp(term)\n    print(\"Term\", term, \"=\", value)\n    print(\"With DP: additions =\", additions)\n    if term <= 25:\n        calls = [0]\n        fib_plain(term - 1, calls)\n        print(\"Without DP: function calls =\", calls[0])\n    else:\n        print(\"Without DP it would be too slow; keep term 25 or less to compare.\")",
             "runnable": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"term = 20\": kaunsa term chahiye (0 ko pehla term gin kar).\n\"def fib_plain(k, calls):\": DP ke baghair seedha recursion: har term ke liye fib(k - 1) aur fib(k - 2) dobara nikalta hai; \"calls[0] += 1\" har call ginta hai.\n\"if k < 2: return k\": pehle do terms 0 aur 1 seedhe wapas.\n\"def fib_dp(count):\": DP wala tareeqa: terms list mein rakh kar agla term pichhle do se banata hai; additions (jama) ki ginti count - 2 hai.\n\"if term < 1:\": 0 ya manfi (negative) term ghalat hai, is liye message.\n\"value, additions = fib_dp(term)\": DP se jawab aur jama ki ginti print hoti hai.\n\"if term <= 25:\": baghair DP ke calls bohat tezi se barhti hain, is liye sirf 25 tak compare karta hai; \"fib_plain(term - 1, calls)\" 20wan term (index 19) nikalta hai.\nOutput: \"Term 20 = 4181\", \"With DP: additions = 18\" aur \"Without DP: function calls = 13529\". DP mein 18 jama, baghair DP 13529 calls.\nKhud try karein: term = 10 kar ke Run karein: \"Term 10 = 34\", additions 8 aur calls 109. term = 30 karein to jawab 514229 aayega magar baghair DP wali ginti chhor di jayegi (\"too slow\" wala message)."
           },
           {
             "type": "checkpoint",

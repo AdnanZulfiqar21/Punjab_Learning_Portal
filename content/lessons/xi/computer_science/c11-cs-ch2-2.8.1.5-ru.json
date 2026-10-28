@@ -30,13 +30,15 @@
           },
           {
             "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"class Animal:\": parent (bari) class.\n\"def make_sound(self): print(\"Animal sound\")\": method ki sirf ek line ho to woh colon ke baad usi line par likhi ja sakti hai; yeh \"Animal sound\" print karta hai.\n\"class Dog(Animal):\": Dog class bracket mein Animal likhne se Animal se inherit karti hai (us ki cheezein wirasat mein leti hai).\n\"def make_sound(self):\" aur \"print(\"Bark!\")\": Dog make_sound ka apna version likhti hai; is ko method overriding (parent ka method apne tareeqe se dobara likhna) kehte hain.\n\"class Cat(Animal):\": Cat bhi Animal se inherit karti hai aur \"Meow ! \" print karti hai (kitab ki spacing ke saath).\nYahan sirf classes define hui hain; koi object nahi bana aur method bulaya nahi gaya, is liye chalane par kuch print nahi hota. Misaal: Dog().make_sound() likhne se \"Bark!\" aayega."
+          },
+          {
+            "type": "callout",
             "tone": "correction",
             "title": "Kitab ki ghalti",
             "text": "Kitab Dog aur Cat classes ko bina indentation ke chhapti hai; aise IndentationError aata hai. def make_sound class ke andar aur print() def ke andar indented hona chahiye, jaise oopar."
-          },
-          {
-            "type": "paragraph",
-            "text": "Wazahat: Dog aur Cat, Animal se inherit karti hain. Har subclass make_sound() ko apne tareeqe se dobara likhti (override karti) hai: Dog().make_sound() \"Bark!\" aur Cat().make_sound() \"Meow ! \" print karta hai."
           },
           {
             "type": "checkpoint",
@@ -58,6 +60,12 @@
             "language": "python",
             "text": "pet_name = \"Moti\"\nclass Animal:\n    def __init__(self, name):\n        self.name = name\n    def introduce(self):\n        print(\"My name is\", self.name)\n    def make_sound(self):\n        print(\"Animal sound\")\nclass Dog(Animal):\n    def make_sound(self):\n        print(\"Bark!\")\npet = Dog(pet_name)\npet.introduce()     # Animal se inherit hua method\npet.make_sound()    # Dog ka apna method",
             "runnable": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"pet_name = \"Moti\"\": paltu janwar ka naam.\n\"class Animal:\": is mein __init__ (naam rakhta hai), introduce() (naam batata hai) aur make_sound() hain.\n\"class Dog(Animal):\": Dog Animal se inherit karti hai aur sirf make_sound() apna likhti hai (\"Bark!\").\n\"pet = Dog(pet_name)\": Dog ka apna __init__ nahi, is liye Animal wala __init__ chalta hai aur naam rakhta hai.\n\"pet.introduce()\": Dog mein yeh method nahi, magar Animal se wirasat mein mila hai: \"My name is Moti\".\n\"pet.make_sound()\": Dog ka apna method chalta hai, Animal wala nahi: \"Bark!\".\nOutput: \"My name is Moti\" aur \"Bark!\".\nKhud try karein: pet_name = \"Sheru\" kar ke Run karein: \"My name is Sheru\" aayega; doosri line \"Bark!\" hi rahegi."
           },
           {
             "type": "heading",

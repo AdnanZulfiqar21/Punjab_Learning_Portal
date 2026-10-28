@@ -217,6 +217,12 @@
             "runnable": true
           },
           {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"beta_0 = 1\" aur \"beta_1 = 0.6\": model ke numbers; beta_1 batata hai ke har ghante parhai ka kitna asar hai.\n\"hours = 5\": student ne 5 ghante parha.\n\"z = beta_0 + beta_1 * hours\": seedha hisab = 1 + 0.6 x 5 = 4.0.\n\"p_pass = 1 / (1 + math.exp(-z))\": logistic (S-shape) function; math.exp(-z) ka matlab e ki power -z hai. Yeh kisi bhi z ko 0 aur 1 ke beech ki probability (imkaan) mein badal deta hai.\n\"round(p_pass * 100)\": probability ko feesad (percent) mein dikhata hai.\n\"pass\" if p_pass >= 0.5 else \"fail\": probability 0.5 ya zyada ho to andaza pass, warna fail.\nOutput: \"beta_0 + beta_1 x hours = 4.0\", \"P(pass) = 0.98 = 98 %\" aur \"Prediction: pass\".\nKhud try karein: beta_0 = -5 kar ke Run karein: z = -2.0, P(pass) = 0.12 = 12 % aur Prediction fail ho jayegi."
+          },
+          {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "Logistic regression linear regression se kaise alag hai?",

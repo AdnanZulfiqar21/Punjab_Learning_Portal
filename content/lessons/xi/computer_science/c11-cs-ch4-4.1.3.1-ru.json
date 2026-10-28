@@ -133,6 +133,12 @@
             "runnable": true
           },
           {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"expression = \"( 5 + 2 ) * ( 3 - 1 )\"\": infix expression; har token (number, operator ya bracket) ke beech space hai taake split() unhein alag kar sake.\n\"priority = {...}\": har operator ki priority (pehle hal hone ka darja): * aur / ki 2, + aur - ki 1.\n\"stack, output = list(), list()\": operators ke liye stack aur postfix jawab ke liye output list.\n\"for token in expression.split():\": expression ko spaces par tor kar har token baari baari dekhta hai.\n\"if token == \"(\": stack.append(token)\": khulne wala bracket seedha stack par push.\n\"elif token == \")\": ...\": band bracket aaye to \"(\" milne tak stack ke operators pop kar ke output mein dalta hai, phir \"(\" ko pop kar ke phenk deta hai (woh output mein nahi jata).\n\"elif token in priority: ...\": operator aaye to stack ke top par jitne operators barabar ya zyada priority ke hain (aur \"(\" nahi), unhein pehle output mein bhejta hai, phir naya operator push karta hai.\n\"else: output.append(token)\": number (operand) seedha output mein.\n\"print(token.ljust(3), ...)\": har qadam ke baad token, stack aur output dikhata hai; ljust(3) token ko 3 khanon jitna chaura kar deta hai taake columns seedhe rahen.\n\"while stack: ...\" aur aakhri print: bache hue operators output mein dal kar postfix ko spaces ke saath jor kar chhapta hai.\nOutput: 11 qadam wali lines (har token ki ek), aur aakhir mein \"Postfix: 5 2 + 3 1 - *\".\nKhud try karein: expression = \"3 + 4 * 2\" kar ke Run karein: * ki priority + se zyada hai, is liye \"Postfix: 3 4 2 * +\" aayega."
+          },
+          {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "Infix se postfix banate waqt stack kis cheez ko sambhalta hai (MCQ 4)?",

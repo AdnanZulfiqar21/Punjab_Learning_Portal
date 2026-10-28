@@ -83,6 +83,12 @@
             "runnable": true
           },
           {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"from itertools import combinations\": tayyar function jo items ke tamam mel (combinations) banata hai.\n\"weights\", \"values\", \"capacity = 5\": char items ke wazan aur qeemat; bag zyada se zyada 5 wazan utha sakta hai.\n\"best, best_value, tried = (), 0, 0\": ab tak ka behtareen mel, us ki qeemat, aur aazmaye gaye mel ki ginti.\n\"for size in range(len(weights) + 1):\": 0 items, 1 item, 2 items ... 4 items wale mel.\n\"for chosen in combinations(...)\": generate: us size ka har mel; \"tried += 1\" ginti barhata hai.\n\"weight = sum(...)\" aur \"value = sum(...)\": chune hue items ka kul wazan aur kul qeemat.\n\"if weight <= capacity and value > best_value:\": test: bag mein samaye aur pehle se behtar ho to yaad rakho.\n\"[i + 1 for i in best]\": Python ginti 0 se karta hai; insaanon ke liye item numbers 1 se dikhata hai.\nOutput: \"Combinations tried: 16\" (2 ki power 4 = 16), \"Best items (numbered from 1): [1, 2]\" aur \"Total value: 7\" (wazan 2 + 3 = 5, qeemat 3 + 4 = 7).\nKhud try karein: capacity = 7 kar ke Run karein: ab items [1, 4] (wazan 2 + 5) aur \"Total value: 9\" aayega; mel phir bhi 16 hi aazmaye jate hain."
+          },
+          {
             "type": "diagram",
             "$asset": "c11-cs-ch3-fig-3-4-complexity-venn",
             "alt": "Venn diagram: oopar bara daira NP-Hard neeche wale daire NP par chadha hua hai; dono ka common (saanjha) hissa NP-Complete hai. NP ke andar neeche chhota oval (ande jaisa) daira P hai.",

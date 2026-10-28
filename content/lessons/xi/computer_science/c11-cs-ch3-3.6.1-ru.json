@@ -55,6 +55,12 @@
             "runnable": true
           },
           {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"numbers = [14, 7, 3, 12]\": sort karne wali list.\n\"def merge_sort(items, depth=0):\": depth sirf print ke liye hai taake har level aage khisak kar (indent ho kar) dikhe.\n\"print(\\\"  \\\" * depth + \\\"Divide:\\\", items)\": jo hissa abhi baanta ja raha hai woh dikhata hai.\n\"if len(items) <= 1: return items\": ek item wali list pehle se sorted hai; yahan recursion (function ka khud ko bulana) rukta hai.\n\"mid = len(items) // 2\" aur do \"merge_sort(...)\" calls: list ko do aadhon mein baant kar har aadha alag sort hota hai (divide).\n\"while i < len(left) and j < len(right):\": dono sorted aadhon ke aage wale items mein se chhota uthaya jata hai (merge).\n\"merged = merged + left[i:] + right[j:]\": jis aadhe mein items bach gaye woh aakhir mein jor diye jate hain.\n\"print(... \\\"Merge:\\\" ...)\": dikhata hai kaun se do hisse jure aur nateeja kya bana.\nOutput: pehle \"Divide: [14, 7, 3, 12]\", phir [14, 7] aur [3, 12] ke divide/merge, \"Merge: [7, 14] + [3, 12] -> [3, 7, 12, 14]\" aur aakhir mein \"Sorted: [3, 7, 12, 14]\".\nKhud try karein: numbers = [14, 7, 3, 12, 5] kar ke Run karein: ab baayan hissa [14, 7] aur daayan [3, 12, 5] banega aur nateeja [3, 5, 7, 12, 14] hoga."
+          },
+          {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "Kis algorithm ki time complexity O(n log n) hai: Bubble Sort, Binary Search, Merge Sort ya Insertion Sort (MCQ 10)?",

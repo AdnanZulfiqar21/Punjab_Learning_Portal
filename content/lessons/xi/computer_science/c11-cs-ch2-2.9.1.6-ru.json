@@ -29,16 +29,10 @@
             "text": "#    Writing to a file\nwith open(\"example.txt\", \"w\") as file:\n    file.write(\"As-Salaam-Alaikum, World!\\n\")\n#    Appending to a file\nwith open(\"example.txt\", \"a\") as file:\n    file.write(\"Appending new line.\\n\")"
           },
           {
-            "type": "paragraph",
-            "text": "Wazahat:"
-          },
-          {
-            "type": "list",
-            "ordered": false,
-            "items": [
-              "\"w\" mode file ka purana content (andar likha data) mita kar naya likhta hai, yani overwrite karta hai (file na ho to bana deta hai).",
-              "\"a\" mode purana content rakh kar naya data aakhir mein jorta hai. \\n ka matlab nayi line hai."
-            ]
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"#    Writing to a file\" aur \"#    Appending to a file\": comments.\n\"with open(\"example.txt\", \"w\") as file:\": \"w\" (write) mode file banata hai, aur pehle se ho to us ka purana data mita deta hai.\n\"file.write(\"As-Salaam-Alaikum, World!\\n\")\": yeh line file mein likhta hai; \"\\n\" ka matlab hai nayi line.\n\"with open(\"example.txt\", \"a\") as file:\": \"a\" (append) mode purana data rakhta hai aur naya data aakhir mein jorta hai.\n\"file.write(\"Appending new line.\\n\")\": doosri line aakhir mein jurti hai.\nIs program mein print nahi, is liye screen par kuch nahi aata; nateeja example.txt file mein hai jis mein ab do lines hain: \"As-Salaam-Alaikum, World!\" aur \"Appending new line.\"."
           },
           {
             "type": "checkpoint",
@@ -60,6 +54,12 @@
             "language": "python",
             "text": "first_line = \"As-Salaam-Alaikum, World!\"\nsecond_line = \"Python is fun.\"\nwith open(\"example.txt\", \"w\") as file:\n    file.write(first_line + \"\\n\")\nwith open(\"example.txt\", \"a\") as file:\n    file.write(second_line + \"\\n\")\nwith open(\"example.txt\", \"r\") as file:\n    print(file.read())",
             "runnable": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"first_line\" aur \"second_line\": file mein likhne ke liye do lines.\n\"with open(\"example.txt\", \"w\") as file:\" aur \"file.write(first_line + \"\\n\")\": file nayi bana kar (ya purani mita kar) pehli line likhta hai; \"\\n\" line khatam karta hai.\n\"with open(\"example.txt\", \"a\") as file:\" aur \"file.write(second_line + \"\\n\")\": purani line rehti hai aur doosri aakhir mein jurti hai.\n\"with open(\"example.txt\", \"r\") as file:\" aur \"print(file.read())\": file parh kar poora text dikhata hai.\nOutput: \"As-Salaam-Alaikum, World!\" aur \"Python is fun.\", phir ek khaali line: file ki aakhri \"\\n\" aur print ki apni nayi line mil kar yeh khaali line banati hain.\nKhud try karein: second_line = \"I like coding.\" kar ke Run karein: doosri line \"I like coding.\" ho jayegi."
           },
           {
             "type": "heading",

@@ -109,6 +109,12 @@
             "runnable": true
           },
           {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"records\": chaar rows; \"Alie\" ghalat spelling hai, Sara ka grade None (ghayab) hai aur [\"Ali\", 85] do baar hai (duplicate).\n\"corrections = {\"Alie\": \"Ali\"}\": dictionary (ghalat naam -> sahi naam ka jor).\n\"clean = list()\": khali list jis mein saaf rows jama hongi.\n\"name = corrections.get(name, name)\": agar naam corrections mein ho to sahi naam milta hai, warna naam waisa hi rehta hai. Is tarah \"Alie\" ban jata hai \"Ali\".\n\"if [name, grade] in clean:\": agar yeh row pehle hi clean mein hai to \"Duplicate removed\" print hota hai aur \"continue\" loop ko agle record par bhej deta hai (row dobara nahi judti).\n\"clean.append([name, grade])\": nayi row clean list mein jor di jati hai.\nAakhri loop: har saaf row print karta hai; grade None ho to number ki jagah \"(grade missing - find it in the record)\" likha aata hai.\nOutput: \"Duplicate removed: Ali 85\", phir \"Clean data:\" aur neeche \"Ali 85\", \"Ali 90\", \"Sara (grade missing - find it in the record)\". Dhyan dein: \"Alie\" ka naam theek ho kar \"Ali 90\" bana, magar grade 90 alag hai is liye duplicate nahi gina gaya.\nKhud try karein: corrections = {} kar ke Run karein: ab ghalat naam theek nahi hoga aur clean data mein \"Alie 90\" hi aayega."
+          },
+          {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "Teen problems bataiye jo data cleaning theek karti hai.",

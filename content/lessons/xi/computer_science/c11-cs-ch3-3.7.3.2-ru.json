@@ -94,6 +94,12 @@
           {
             "type": "callout",
             "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"tree = {0: [1, 2, 3], ...}\": Figure 3.8 wala tree: har node ke saath us ke bachche (children); 4 se 7 ke koi bachche nahi.\n\"def bfs(start):\": \"order\" mein visit ki tarteeb, \"queue\" mein aage dekhne wale nodes.\n\"node = queue.pop(0)\": qatar ke aage se nikalta hai, phir \"queue.extend(tree[node])\" us ke bachche peeche jor deta hai; is liye level ba level chalta hai.\n\"def dfs(node, order=None):\": \"order = [] if order is None else order\" pehli call par nayi khali list banata hai.\n\"for child in tree[node]: dfs(child, order)\": har bachche par khud ko dobara bulata hai (recursion), is liye agle bachche se pehle poori gehrai (depth) mein jata hai.\nOutput: \"[0, 1, 2, 3, 4, 5, 6, 7]\" (BFS) aur \"[0, 1, 4, 5, 2, 6, 3, 7]\" (DFS), wahi jo comments mein likha hai.\nKhud try karein: bfs(0) aur dfs(0) ko bfs(1) aur dfs(1) kar ke Run karein: node 1 ke neeche sirf 4 aur 5 hain, is liye dono [1, 4, 5] denge."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
             "title": "Asaan alfaaz mein",
             "text": "Yeh code Figure 3.8 wala tree istemal karta hai. bfs list ko queue ki tarah chalata hai: pop(0) aage se nikalta hai, is liye level ba level tarteeb aati hai. dfs khud ko har bachche par dobara bulata hai (recursion); yeh chhupa hua stack hai, is liye pehle gehrai mein jata hai. Dono outputs Figure 3.8 ke outputs se milte hain."
           },

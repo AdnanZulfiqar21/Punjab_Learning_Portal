@@ -71,6 +71,12 @@
             "caption": "Output"
           },
           {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"total = 0\": jama (sum) rakhne ke liye ek variable, shuru mein zero.\n\"for n in [4, 5, 6]:\": loop (baar baar chalne wala hissa) list ke har number ko baari baari n mein rakhta hai: pehle 4, phir 5, phir 6.\n\"total = total + n\": har chakkar mein purane total mein naya number jor diya jata hai.\n\"print(\"n =\", n, \"total =\", total)\": yeh debugging wali line hai; har step par n aur total ki value screen par dikhati hai, taa ke pata chale program andar kya kar raha hai.\n\"print(\"Final total:\", total)\": yeh line loop ke bahar hai (indentation nahi), is liye sirf aakhir mein ek baar chalti hai.\nOutput: \"n = 4 total = 4\", \"n = 5 total = 9\", \"n = 6 total = 15\" aur aakhir mein \"Final total: 15\", bilkul neeche wale Output box jaisa.\nKhud try karein: list ko [4, 5, 6, 10] kar ke Run karein: ek nayi line \"n = 10 total = 25\" aayegi aur \"Final total: 25\"."
+          },
+          {
             "type": "heading",
             "level": 3,
             "text": "Khud chala kar dekhein"
@@ -84,6 +90,12 @@
             "language": "python",
             "text": "marks = [72, 85, 64]   # teen subjects ke marks\n\n# Bug wala version: hamesha 2 se taqseem (divide) karta hai\nwrong_average = sum(marks) / 2\n# Debugging: print se values dekhein\nprint(\"sum =\", sum(marks), \"| marks ki ginti =\", len(marks))\n# Fix: jitne marks hain utni ginti se taqseem karein\nright_average = sum(marks) / len(marks)\n\nprint(\"Bug wala average:\", wrong_average)\nprint(\"Theek kiya hua average:\", round(right_average, 2))",
             "runnable": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"marks = [72, 85, 64]\": teen subjects ke marks ki list.\n\"wrong_average = sum(marks) / 2\": yeh bug (ghalti) hai: sum() sab marks jama karta hai (221) magar taqseem hamesha 2 se ho rahi hai, jab ke marks 3 hain.\n\"print(\"sum =\", sum(marks), \"| marks ki ginti =\", len(marks))\": debugging ke liye print: jama aur len() se marks ki ginti (count) dikhata hai. Isi se pata chalta hai ke ginti 3 hai, 2 nahi.\n\"right_average = sum(marks) / len(marks)\": fix (durusti): ab utni ginti se taqseem jitne marks list mein hain.\n\"round(right_average, 2)\": jawab ko decimal ke baad 2 digits tak gol (round) karta hai.\nOutput: \"sum = 221 | marks ki ginti = 3\", phir \"Bug wala average: 110.5\" (221 / 2, jo 100 se bhi zyada hai, is liye saaf ghalat) aur \"Theek kiya hua average: 73.67\" (221 / 3).\nKhud try karein: list ko [72, 85, 64, 90] kar ke Run karein: ginti 4 ho jayegi, bug wala average 155.5 aur theek average 77.75 aayega."
           },
           {
             "type": "checkpoint",
