@@ -21,7 +21,12 @@
         "blocks": [
           {
             "type": "paragraph",
-            "text": "Dhund ke pani ke qatre jaisa amoodi girta qatra lein; qatre par hawa ka drag speed ke saath barhta hai. Qatra gravity ki ghalib force ke tahat tezi se acceleration pata hai, jo use tezi se neeche kheenchti hai; magar qatre ki speed barhne ke saath us par oopar ki drag force barhti hai. Qatre par khalis force = wazan - drag force ... (5.29). Jaise speed barhti rehti hai drag force miqdar mein wazan ke qareeb pohnchti hai; aakhir jab drag force ki miqdar wazan ke barabar ho jaye to qatre par khalis force sifr hai aur qatra mustaqil speed se girta hai jo terminal velocity kehlati hai."
+            "text": "Dhund (fog) ke pani ke qatre jaisa ek qatra lein jo seedha neeche gir raha hai. Qatre par hawa ka drag speed ke saath barhta hai. Shuru mein gravity ki force ghalib hoti hai aur qatre ko tezi se neeche kheenchti hai, is liye qatre ki speed tezi se barhti hai (acceleration). Lekin speed barhne ke saath qatre par oopar ki taraf drag force bhi barhti jati hai. Qatre par net (kul) force:"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{Net force} = \\text{Weight} - \\text{Drag force} \\qquad (5.29)",
+            "text_alt": "Net force = Weight − Drag force   (5.29)"
           },
           {
             "type": "diagram",
@@ -33,27 +38,54 @@
             "type": "callout",
             "tone": "tip",
             "title": "Diagram ko samjhein",
-            "text": "Shuru mein drag chhota hai aur qatra tez hota jata hai. Speed barhne se drag F = 6 pi eta r v barhta hai, yahan tak ke F wazan mg ke barabar ho jaye; tab khalis force sifr aur qatra terminal velocity se girta hai."
-          },
-          {
-            "type": "callout",
-            "tone": "definition",
-            "title": "Terminal velocity",
-            "text": "Terminal velocity v_t nikalne ko hum drag force ke liye Stokes ka qanoon istemal karte hain aur use qatre ke wazan ke barabar rakhte hain: 0 = m g - 6 pi eta r v_t, ya v_t = m g / (6 pi eta r) ... (5.30). Qatre ka mass rho V hai, jahan V = (4/3) pi r^3 sphere ka volume hai; rakhne par v_t = 2 g r^2 rho / (9 eta) ... (5.31)."
-          },
-          {
-            "type": "callout",
-            "tone": "note",
-            "title": "Example 5.5",
-            "text": "0.010 cm radius ka pani ka nanha qatra oonchi imarat se hawa mein utarta hai. Us ki terminal velocity nikalein, hawa ke liye eta = 19 x 10^-6 kg m^-1 s^-1 aur pani ki density rho = 1000 kg m^-3 diye hue. Hal: r = 1.0 x 10^-4 m, rho = 1000 kg m^-3, eta = 19 x 10^-6 kg m^-1 s^-1. Eq. 5.31 mein qeematein rakhte hue v_t = 2 x 9.8 m s^-2 x (1.0 x 10^-4 m)^2 x 1000 kg m^-3 / (9 x 19 x 10^-6 kg m^-1 s^-1); terminal velocity = 1.1 m s^-1."
+            "text": "Shuru mein drag chhota hai aur qatra tez hota jata hai. Speed barhne se drag F = 6πηrv barhta hai, yahan tak ke F weight mg ke barabar ho jaye; tab net force zero aur qatra terminal velocity se girta hai."
           },
           {
             "type": "paragraph",
-            "text": "Parachutes bara raqba bana kar hawa ki rukawat (drag) barhate hain, jo gravity ki force ka muqabla karti hai; yeh shakhs ki girawat sust karta hai, use mehfooz utarne deta hua (Tidbits)."
+            "text": "Speed barhti rehti hai to drag force aakhir kaar weight ke barabar ho jati hai. Jab drag force weight ke barabar ho jaye to qatre par net force zero ho jati hai, aur qatra ek constant speed se girta hai. Is speed ko terminal velocity (aakhri, mustaqil speed) kehte hain."
+          },
+          {
+            "type": "paragraph",
+            "text": "Terminal velocity vₜ nikalne ke liye drag force ke liye Stokes' law lete hain aur use qatre ke weight ke barabar rakhte hain:"
+          },
+          {
+            "type": "equation",
+            "latex": "0 = mg - 6\\pi\\eta r v_t",
+            "text_alt": "0 = mg − 6πηrvₜ"
+          },
+          {
+            "type": "equation",
+            "latex": "v_t = \\frac{mg}{6\\pi\\eta r} \\qquad (5.30)",
+            "text_alt": "vₜ = mg/(6πηr)   (5.30)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Qatre ka mass ρV hai, jahan V = (4/3)πr³ sphere ka volume hai, yani m = (4/3)πr³ρ."
+          },
+          {
+            "type": "paragraph",
+            "text": "Ise Eq. (5.30) mein rakhein: vₜ = (4/3)πr³ρg / (6πηr); π aur ek r kat jate hain aur 4/(3 × 6) = 2/9 bachta hai:"
+          },
+          {
+            "type": "equation",
+            "latex": "v_t = \\frac{2gr^2\\rho}{9\\eta} \\qquad (5.31)",
+            "text_alt": "vₜ = 2gr²ρ/(9η)   (5.31)"
+          },
+          {
+            "type": "example",
+            "title": "Example 5.5",
+            "problem": "0.010 cm radius ka pani ka nanha qatra ek oonchi imarat se hawa mein neeche aata hai. Us ki terminal velocity nikalein. Hawa ke liye η = 19 × 10⁻⁶ kg m⁻¹ s⁻¹ aur pani ki density ρ = 1000 kg m⁻³ hai.",
+            "steps": [
+              "r = 0.010 cm = 1.0 × 10⁻⁴ m, ρ = 1000 kg m⁻³, η = 19 × 10⁻⁶ kg m⁻¹ s⁻¹",
+              "Eq. (5.31) mein values rakhein: vₜ = (2 × 9.8 × (1.0 × 10⁻⁴)² × 1000) / (9 × 19 × 10⁻⁶)",
+              "Upar = 2 × 9.8 × 10⁻⁸ × 1000 = 1.96 × 10⁻⁴; neeche = 1.71 × 10⁻⁴",
+              "vₜ = 1.96 × 10⁻⁴ / 1.71 × 10⁻⁴ ≈ 1.15"
+            ],
+            "answer": "Terminal velocity ≈ 1.1 m s⁻¹."
           },
           {
             "type": "table",
-            "caption": "Terminal velocity tak pohnchna",
+            "caption": "Terminal velocity tak pohanchna",
             "header": [
               "Marhala",
               "Forces",
@@ -61,27 +93,27 @@
             ],
             "rows": [
               [
-                "Chhorna",
-                "sirf wazan, drag sifr",
-                "g se tez"
+                "Chhorte waqt",
+                "sirf weight, drag zero",
+                "g se tez hota hai"
               ],
               [
-                "Tez hona",
-                "drag speed se barhta, khalis force = wazan - drag",
-                "acceleration ghatta"
+                "Tez hote hue",
+                "drag speed ke saath barhta hai; net force = weight − drag",
+                "acceleration kam hota jata hai"
               ],
               [
                 "Terminal velocity",
-                "drag = wazan, khalis force sifr",
-                "mustaqil speed v_t = 2 g r^2 rho / (9 eta)"
+                "drag = weight, net force zero",
+                "constant speed vₜ = 2gr²ρ/(9η)"
               ]
             ]
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
-            "prompt": "Hawa mein girte 0.5 mm radius ke gol barish ke qatre ki terminal velocity nikalein (numerical 5.8), aur dikhayein ke yeh radius ke muraba ke tanasub mein hai (comprehensive 5.9).",
-            "explanation": "v_t = 2 g r^2 rho / (9 eta) = 2 x 9.8 x (5 x 10^-4)^2 x 1000 / (9 x 19 x 10^-6) = 4.9 x 10^-3 / 1.71 x 10^-4 = 28.7 m s^-1 Stokes ke qanoon se (chhapa jawab 9.90 m s^-1 hai; is size par bahao aahista nahi rehta, to Stokes ka qanoon zyada deta hai). Wazan r^3 se barhta hai jabke Stokes drag r se, to un ka tawazun v_t ko r^2 ke tanasub mein deta hai."
+            "prompt": "Hawa mein girte 0.5 mm radius ke barish ke qatre ki terminal velocity Stokes' law (Eq. 5.31) se nikalein, aur batayein ke vₜ radius ke square (r²) ke proportional kyun hai.",
+            "explanation": "vₜ = 2gr²ρ/(9η) = 2 × 9.8 × (5 × 10⁻⁴)² × 1000 / (9 × 19 × 10⁻⁶) = 4.9 × 10⁻³ / 1.71 × 10⁻⁴ ≈ 28.7 m s⁻¹. (Itne bare qatre par bahao aahista nahi rehta, is liye asal speed is se kafi kam hoti hai; Stokes' law sirf aahista chalte chhote spheres ke liye theek hai.) Weight r³ ke saath barhta hai jab ke Stokes drag r ke saath; dono barabar karne se vₜ r³/r = r² ke proportional aata hai."
           },
           {
             "type": "heading",
@@ -92,7 +124,9 @@
             "type": "list",
             "ordered": false,
             "items": [
-              "Girta qatra: khalis force = wazan - drag; drag speed se barhta hai jab tak wazan ke barabar na ho, phir speed mustaqil: terminal velocity. m g = 6 pi eta r v_t, v_t = m g/(6 pi eta r) = 2 g r^2 rho/(9 eta). Example 5.5: r = 0.010 cm ke liye 1.1 m s^-1. Parachutes bare raqbe se drag barhate hain."
+              "Girta qatra: net force = weight − drag; drag speed ke saath barhta hai jab tak weight ke barabar na ho; phir speed constant: terminal velocity.",
+              "mg = 6πηrvₜ, vₜ = mg/(6πηr) = 2gr²ρ/(9η).",
+              "Example 5.5: r = 0.010 cm ke liye vₜ ≈ 1.1 m s⁻¹."
             ]
           }
         ]
