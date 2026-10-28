@@ -19,29 +19,54 @@
       "body": {
         "blocks": [
           {
-            "type": "callout",
-            "tone": "definition",
-            "title": "Depth-First Search (DFS)",
-            "text": "DFS explores as far down a branch as possible before backtracking to explore other branches, using a stack to manage the nodes to be explored."
-          },
-          {
-            "type": "list",
-            "ordered": true,
-            "items": [
-              "Start from the root node and push it onto the stack.",
-              "Pop a node, process it, and push all its unvisited neighbours onto the stack.",
-              "Repeat until the stack is empty."
-            ]
+            "type": "paragraph",
+            "text": "Depth-First Search (DFS) is another graph traversal algorithm that explores as far down a branch as possible before backtracking to explore other branches. It uses a stack to manage the nodes to be explored."
           },
           {
             "type": "paragraph",
-            "text": "DFS suits puzzles such as mazes: it follows one path to the end and backtracks at a dead end. Its time is O(V + E), like BFS. DFS is more memory-efficient for deep graphs, while BFS is more suited to shallow graphs."
+            "text": "Process:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Start from the root node and push it onto the stack.",
+              "Pop a node, process it, and push all its unvisited neighbors onto the stack.",
+              "Repeat the process until the stack is empty."
+            ]
           },
           {
             "type": "diagram",
             "$asset": "c11-cs-ch3-fig-3-8-bfs-dfs",
             "alt": "Two copies of the same tree side by side, BFS and DFS: node 0 (source node) has children 1, 2 and 3; 1 has 4 and 5; 2 has 6; 3 has 7. In BFS, dashed arrows go layer by layer (Layer 0, 1, 2): Output 0, 1, 2, 3, 4, 5, 6, 7. In DFS, dashed arrows go down each branch and back up: Output 0, 1, 4, 5, 2, 6, 3, 7.",
             "caption": "Figure 3.8: Comparison of BFS and DFS (original drawing after the textbook's Figure 3.8)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Example: DFS can be used in solving puzzles like mazes, where the algorithm explores one possible path to the end, and if it hits a dead end, it backtracks and tries another path."
+          },
+          {
+            "type": "paragraph",
+            "text": "Complexity: The time complexity of DFS is O(V+E), similar to BFS. However, DFS is more memory-efficient for deep graphs, while BFS is more suited for shallow graphs."
+          },
+          {
+            "type": "paragraph",
+            "text": "Figure 3.9 compares the BFS and DFS algorithms, showing how BFS explores a graph level by level, while DFS explores as far as possible down each branch before backtracking.",
+            "book_errors": [
+              "Figure 3.9"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The BFS and DFS comparison is printed as Figure 3.8 (“Comparison of BFS and DFS”); there is no Figure 3.9 in this chapter."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Class Activity",
+            "text": "Implement both BFS and DFS algorithms to traverse a graph. Compare their performance on different types of graphs (e.g., shallow vs. deep graphs) and discuss in class which algorithm is better suited for specific scenarios."
           }
         ]
       }

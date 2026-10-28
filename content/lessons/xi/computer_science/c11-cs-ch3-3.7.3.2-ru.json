@@ -20,23 +20,21 @@
       "body": {
         "blocks": [
           {
-            "type": "callout",
-            "tone": "definition",
-            "title": "Depth-First Search (DFS)",
-            "text": "DFS kisi shaakh mein jitna neeche ja sake jata hai, phir wapas mur kar doosri shaakhein dekhta hai, aur nodes sambhalne ke liye stack istemal karta hai."
-          },
-          {
-            "type": "list",
-            "ordered": true,
-            "items": [
-              "Root node se shuru kar ke use stack par rakhein.",
-              "Stack se node utha kar process karein aur us ke tamam na dekhe gaye parosi stack par rakhein.",
-              "Stack khali hone tak dohrayein."
-            ]
+            "type": "paragraph",
+            "text": "Depth-First Search (DFS) ek aur graph traversal algorithm hai jo kisi shaakh (branch) mein jitna neeche ja sake jata hai, phir wapas mur kar (backtrack kar ke) doosri shaakhein dekhta hai. Dekhne wale nodes sambhalne ke liye yeh stack (dher: jo aakhir mein rakha woh pehle utha) istemal karta hai."
           },
           {
             "type": "paragraph",
-            "text": "DFS mazes jaise puzzles ke liye munasib hai: yeh ek raasta aakhir tak chalta aur band gali par wapas murta hai. Is ka waqt BFS ki tarah O(V + E) hai. Kitab kehti hai ke DFS gehre graphs ke liye memory mein kifayati aur BFS uthle graphs ke liye munasib hai; zyada durust yeh ke DFS sirf maujooda raasta rakhta hai, to is ki memory gehrai ke saath barhti hai, jabke BFS poora level rakhta hai, to us ki memory chaurai ke saath barhti hai."
+            "text": "Process (tareeqa):"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Root node se shuru karein aur use stack par rakhein (push).",
+              "Stack se ek node uthayein (pop), use process karein, aur us ke tamam na dekhe gaye parosi stack par rakh dein.",
+              "Yeh amal stack khali hone tak dohrayein."
+            ]
           },
           {
             "type": "diagram",
@@ -48,31 +46,73 @@
             "type": "callout",
             "tone": "tip",
             "title": "Diagram ko samjhein",
-            "text": "Kitab ka matan (text) is figure ko Figure 3.9 kehta hai, magar chhapa hua number Figure 3.8 hai. BFS pehle ek satah (layer) ke tamam nodes dekhta hai, phir agli satah. DFS ek shaakh mein aakhir tak neeche jata hai (0, 1, 4), wapas murta hai (5), phir agli shaakh (2, 6) aur phir (3, 7)."
+            "text": "BFS pehle ek satah (layer) ke tamam nodes dekhta hai, phir agli satah: 0, phir 1, 2, 3, phir 4, 5, 6, 7. DFS ek shaakh mein aakhir tak neeche jata hai (0, 1, 4), wapas mur kar (5), phir agli shaakh (2, 6) aur phir (3, 7)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Misal: DFS mazes (bhool bhulaiyan) jaise puzzles hal karne mein kaam aata hai: algorithm ek mumkina raasta aakhir tak chalta hai, aur agar band gali (dead end) aa jaye to wapas mur kar doosra raasta aazmata hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Complexity: DFS ki time complexity O(V+E) hai, BFS jaisi. Kitab ke mutabiq DFS gehre (deep) graphs ke liye memory mein zyada kifayati hai, jabke BFS uthle (shallow) graphs ke liye zyada munasib hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Asaan alfaaz mein",
+            "text": "Memory ki wajah: DFS ko sirf maujooda raasta (root se neeche tak) yaad rakhna hota hai, to us ki memory graph ki gehrai ke saath barhti hai; BFS ko poori satah (level) ek saath queue mein rakhni hoti hai, to us ki memory graph ki chaurai ke saath barhti hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Figure 3.8 BFS aur DFS ka muwazna dikhati hai: BFS graph ko level ba level dekhta hai, jabke DFS har shaakh mein jitna ho sake neeche ja kar phir wapas murta hai."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab ka text is figure ko “Figure 3.9” kehta hai, magar BFS aur DFS ka muwazna Figure 3.8 (“Comparison of BFS and DFS”) ke naam se chhapa hai; is chapter mein Figure 3.9 koi nahi."
           },
           {
             "type": "callout",
             "tone": "note",
-            "title": "Python code (har .... ek 4-space indent hai)",
-            "text": "tree = {0: [1, 2, 3], 1: [4, 5], 2: [6], 3: [7], 4: [], 5: [], 6: [], 7: []}\n\ndef bfs(start):\n....order, queue = [], [start]\n....while queue:\n........node = queue.pop(0)          # take from the front\n........order.append(node)\n........queue.extend(tree[node])\n....return order\n\ndef dfs(node, order=None):\n....order = [] if order is None else order\n....order.append(node)\n....for child in tree[node]:\n........dfs(child, order)            # go deep first\n....return order\n\nprint(bfs(0))    # [0, 1, 2, 3, 4, 5, 6, 7]\nprint(dfs(0))    # [0, 1, 4, 5, 2, 6, 3, 7]"
+            "title": "Class Activity",
+            "text": "BFS aur DFS dono algorithms bana kar ek graph traverse karein. Mukhtalif qism ke graphs (maslan uthle aur gehre graphs) par dono ki performance ka muwazna karein aur class mein baat karein ke kis soorat mein kaunsa algorithm behtar hai."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "tree = {0: [1, 2, 3], 1: [4, 5], 2: [6], 3: [7], 4: [], 5: [], 6: [], 7: []}\n\ndef bfs(start):\n    order, queue = [], [start]\n    while queue:\n        node = queue.pop(0)          # take from the front\n        order.append(node)\n        queue.extend(tree[node])\n    return order\n\ndef dfs(node, order=None):\n    order = [] if order is None else order\n    order.append(node)\n    for child in tree[node]:\n        dfs(child, order)            # go deep first\n    return order\n\nprint(bfs(0))    # [0, 1, 2, 3, 4, 5, 6, 7]\nprint(dfs(0))    # [0, 1, 4, 5, 2, 6, 3, 7]",
+            "caption": "Python code (kitab se nahi; chala kar jaancha gaya)"
+          },
+          {
+            "type": "code",
+            "language": "text",
+            "text": "[0, 1, 2, 3, 4, 5, 6, 7]\n[0, 1, 4, 5, 2, 6, 3, 7]",
+            "caption": "Output"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Asaan alfaaz mein",
+            "text": "Yeh code Figure 3.8 wala tree istemal karta hai. bfs list ko queue ki tarah chalata hai: pop(0) aage se nikalta hai, is liye level ba level tarteeb aati hai. dfs khud ko har bachche par dobara bulata hai (recursion); yeh chhupa hua stack hai, is liye pehle gehrai mein jata hai. Dono outputs Figure 3.8 ke outputs se milte hain."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
-            "prompt": "Class activity: BFS aur DFS bana kar muwazna karein. DFS ki time complexity kya hai (MCQ 8)? Un ke faidon ka muwazna kijiye (short question 6).",
-            "explanation": "MCQ 8: (c) O(V + E). Oopar ka code (kitab se nahi) dono tarteebein deta hai. BFS be-wazan graph mein sab se chhota raasta dhoondta aur shuru ke qareeb matlooba ya uthle graphs ke liye munasib hai; DFS sirf maujooda raste ke liye memory leta, gehre matlooba tak jaldi pohanchta aur mazes, puzzles aur har raasta khangalne ke liye munasib hai. Dono har node aur edge ek baar dekhte hain."
+            "prompt": "Class activity: BFS aur DFS bana kar muwazna karein. DFS ki time complexity kya hai (MCQ 8)? BFS ke faidon ka DFS se muwazna kijiye (short question 6).",
+            "explanation": "MCQ 8: (c) O(V + E). Oopar wala code (kitab se nahi) dono tarteebein deta hai. BFS be-wazan (unweighted) graph mein sab se chhota raasta dhoondta hai aur jab matlooba node root ke qareeb ho ya graph uthla ho to munasib hai; DFS sirf maujooda raste ke liye memory leta hai, gehre matlooba node tak jaldi pohanchta hai aur mazes, puzzles aur har raasta dekhne ke liye munasib hai. Dono har node aur edge ek dafa dekhte hain."
           },
           {
             "type": "heading",
             "level": 2,
-            "text": "Fauri khulasa"
+            "text": "Mukhtasar khulasa"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
               "DFS: stack, pehle gehrai phir wapsi; tarteeb 0, 1, 4, 5, 2, 6, 3, 7; O(V + E).",
-              "Chhote raaston aur qareebi matlooba ke liye BFS; mazes aur gehri talash ke liye DFS."
+              "Shortest path aur qareebi matlooba ke liye BFS; mazes aur gehri talash ke liye DFS."
             ]
           }
         ]

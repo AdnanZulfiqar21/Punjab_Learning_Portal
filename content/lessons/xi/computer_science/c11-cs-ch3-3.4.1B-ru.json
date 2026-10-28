@@ -20,41 +20,63 @@
       "body": {
         "blocks": [
           {
-            "type": "callout",
-            "tone": "definition",
-            "title": "Space complexity",
-            "text": "Space complexity naapti hai ke input ka size barhne par algorithm ki istemal shuda memory kaise badalti hai. Ise bhi Big O notation mein oopri had ke taur par likha jata hai."
+            "type": "paragraph",
+            "text": "Space complexity naapti hai ke input data ka size barhne par algorithm jitni memory (space) istemal karta hai woh kaise badalti hai. Is se samajh aata hai ke zyada data hone par algorithm memory ko kitni efficiency se istemal karta hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Misal: agar algorithm ko numbers ki list store karni ho, to us ki space complexity batati hai ke numbers barhne par kitni memory chahiye hogi."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Space complexity kyun ahem hai"
+          },
+          {
+            "type": "paragraph",
+            "text": "Space complexity samajhna is liye ahem hai ke is se algorithm ki memory ki zaroorat ka andaza hota hai. Memory ka efficient istemal bohat zaroori hai, khaas taur par bare (large-scale) applications ya aise systems mein jin ke paas memory kam hai."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Space complexity ka jaiza kaise liya jata hai"
+          },
+          {
+            "type": "paragraph",
+            "text": "Space complexity bhi aam taur par time complexity ki tarah Big O notation mein likhi jati hai. Yeh batati hai ke input size barhne par algorithm zyada se zyada (upper limit) kitni memory istemal karega. Kuch aam misalein:"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "O(1) constant space: muqarrar miqdar, jaise darmiyani qeematon ke liye chand variables.",
-              "O(n) linear space: memory input ke saath barhti hai, jaise cheezon ki list rakhna.",
-              "O(n^2) quadratic space: n x n matrix rakhna.",
-              "O(log n) logarithmic space: kuch divide-and-conquer algorithms har qadam par data ka chhota hissa rakhte hain."
+              "O(1) Constant Space: algorithm input ke size se qata-e-nazar muqarrar (fixed) memory istemal karta hai. Maslan aisa saada algorithm jise darmiyani (intermediate) qeematein rakhne ke liye sirf chand variables chahiyein.",
+              "O(n) Linear Space: memory ka istemal input ke size ke saath seedha barhta hai. Maslan algorithm ko items ki list store karni ho to memory items ki tadaad ke saath barhti hai.",
+              "O(n²) Quadratic Space: input barhne par memory quadratically barhti hai. Maslan n x n size ki matrix (khaanon ki jadwal) store karne wala algorithm, kyun ke matrix ke elements n ke square ke saath barhte hain.",
+              "O(log n) Logarithmic Space: memory logarithmically, yani input ke muqable mein bohat aahista, barhti hai. Maslan divide-and-conquer strategies istemal karne wale kuch algorithms ki space complexity logarithmic ho sakti hai, kyun ke unhein har qadam par data ka sirf chhota hissa rakhna hota hai."
             ]
           },
           {
-            "type": "paragraph",
-            "text": "Memory ka kaarkard istemal bare applications aur kam memory wale nizamon mein sab se ahem hai. Big O bad-tareen soorat bayan karta hai, aur batata hai ke input barhne par algorithm kaisa chalega (Did You Know)."
+            "type": "callout",
+            "tone": "note",
+            "title": "Did You Know?",
+            "text": "Big O notation computer scientists ko worst case (sab se buri soorat) mein algorithm ki efficiency samajhne mein madad deta hai, taake woh andaza laga sakein ke input data barhne par algorithm kaisa chalega."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
-            "prompt": "Time aur space complexity ke farq aur algorithm ke intikhab par un ke asar par baat kijiye (long question 7).",
-            "explanation": "Time complexity naapti hai ke input ke saath waqt kaise barhta hai; space complexity ke memory ka istemal kaise barhta hai. Algorithm tez magar zyada memory wala, ya kam memory wala magar sust ho sakta hai, to intikhab hadon par munhasir hai: tez server par bohat bare data ke liye waqt sab se ahem, jabke kam memory wale aale par O(1)-space algorithm behtar ho sakta hai chahe sust ho. Maslan merge sort O(n log n) waqt leta magar jorne ke liye izafi memory chahta hai, jabke bubble sort sirf O(1) izafi jagah leta magar O(n^2) waqt."
+            "prompt": "Time aur space complexity ke farq aur algorithm chunne par un ke asar par baat kijiye (long question 7).",
+            "explanation": "Time complexity naapti hai ke input ke saath waqt kaise barhta hai; space complexity naapti hai ke memory ka istemal kaise barhta hai. Koi algorithm tez magar zyada memory wala, ya kam memory wala magar sust ho sakta hai, is liye intikhab hadon (limits) par munhasir hai: tez server par bohat bare data ke liye waqt sab se ahem hai, jabke kam memory wale aale (device) par O(1)-space algorithm behtar ho sakta hai chahe sust ho. Maslan Merge Sort O(n log n) waqt leta hai magar merge karne ke liye izafi memory chahta hai, jabke Bubble Sort sirf O(1) izafi memory leta hai magar O(n²) waqt."
           },
           {
             "type": "heading",
             "level": 2,
-            "text": "Fauri khulasa"
+            "text": "Mukhtasar khulasa"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "Space complexity: memory ki barhotri (O(1) chand variables, O(n) list, O(n^2) matrix, O(log n)).",
+              "Space complexity: memory ki barhotri (O(1) chand variables, O(n) list, O(n²) n x n matrix, O(log n)).",
               "Waqt aur memory ki hadon mein tawazun kar ke algorithm chunein."
             ]
           }

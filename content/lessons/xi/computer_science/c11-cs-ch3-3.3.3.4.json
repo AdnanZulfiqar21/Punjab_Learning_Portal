@@ -19,14 +19,52 @@
       "body": {
         "blocks": [
           {
-            "type": "callout",
-            "tone": "definition",
-            "title": "NP-complete",
-            "text": "NP-complete problems are both in NP and as hard as the hardest problems in NP. If any NP-complete problem could be solved efficiently, every NP problem could be."
+            "type": "paragraph",
+            "text": "NP-Complete problems are a special subset of NP problems that are both in NP and as hard as the hardest problems in NP. This means that these problems are particularly challenging, and if you can solve one NP-Complete problem efficiently, you can solve all problems in NP efficiently."
           },
           {
             "type": "paragraph",
-            "text": "Example: the knapsack problem. A knapsack has a maximum weight capacity and each item has a weight and a value; the goal is the most valuable combination that does not exceed the capacity. Verifying a proposed set is easy (add the weights and values), but finding the best combination is hard because the number of combinations grows exponentially with the number of items, so brute force soon becomes impractical."
+            "text": "Example: A classic example of an NP-Complete problem is the Knapsack Problem."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "The Knapsack Problem"
+          },
+          {
+            "type": "paragraph",
+            "text": "In the Knapsack Problem, you have a knapsack with a maximum weight capacity and a set of items, each with a weight and a value. The goal is to determine the most valuable combination of items to put in the knapsack without exceeding its weight capacity."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Why the Knapsack Problem is NP-Complete"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Verification is Easy: If you are given a set of items and a proposed solution, you can quickly check if the total weight is within the knapsack's capacity and if the total value is correct.",
+              "Solving the Problem is Hard: Finding the optimal combination of items to maximize the total value while staying within the weight limit is challenging, especially as the number of items increases.",
+              "NP-Completeness: The Knapsack Problem is NP-Complete because it is both in NP (you can verify a solution quickly) and as hard as the hardest problems in NP. If you could solve the Knapsack Problem efficiently, you could solve all NP problems efficiently."
+            ]
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Illustration of Complexity"
+          },
+          {
+            "type": "paragraph",
+            "text": "To illustrate why the Knapsack Problem is NP-Complete:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Small Instances: For a small number of items, it might be feasible to find the optimal solution by checking all possible combinations.",
+              "Larger Instances: As the number of items grows, the number of possible combinations increases exponentially, making it impractical to solve the problem by brute force"
+            ]
           },
           {
             "type": "diagram",
@@ -36,7 +74,13 @@
           },
           {
             "type": "paragraph",
-            "text": "Whether P equals NP is one of the most important unsolved problems in computer science, with major implications for cryptography, algorithm design and computational complexity (Did You Know)."
+            "text": "Figure 3.4 shows a Venn diagram of the complexity classes P, NP, NP-hard, and NP-complete. It visually represents the relationships between these classes, highlighting how some problems can be solved efficiently, while others pose significant challenges to computational theory."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Did You Know?",
+            "text": "The question of whether P equals NP is one of the most important unsolved problems in computer science. It has significant implications for cryptography, algorithm design, and the overall understanding of computational complexity."
           }
         ]
       }
