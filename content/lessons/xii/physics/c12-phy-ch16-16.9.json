@@ -13,14 +13,19 @@
           "source_document_id": "bfc68b7f-dac5-5e57-a286-814710fe09bc",
           "pdf_from": 78,
           "pdf_to": 80,
-          "note": "Topic 16.9 (printed 14.9) with Example 16.10 and the box (PDF 78-80); Figs 16.14-16.16 are redrawn. The ln 2 value and the misprinted references are noted. The check question is added; answer needs review."
+          "note": "Topic 16.9 (printed as 14.9) with Figs. 16.14-16.16, the box and Example 16.10 (PDF 78-80, printed 18-20), as printed; '−0.6', 'Eq. 4.45' and 'Fig. 4.17' marked."
         }
       ],
       "body": {
         "blocks": [
           {
             "type": "paragraph",
-            "text": "When a capacitor discharges through a resistor (Fig 16.13 a), its charge decreases exponentially with time (Fig 16.14). An exponential function has the form f(x) = a^x, where the variable appears as an exponent. The general decay formula for a discharging capacitor in an RC circuit is x = xo exp(-t/RC), or x = xo e^(-t/RC) (16.43), where x is the quantity (charge, voltage or current) at time t, xo its initial value at t = 0, R the resistance in ohms, C the capacitance in farads, t the time in seconds and RC the time constant tau. The number e, about 2.718, is the base of natural logarithms (Euler's number). The negative exponent shows that the quantity decreases with time."
+            "text": "An RC circuit for the discharging capacitor through a resistor was shown in Fig. 16.13(a) in the previous section. A graph charge vs time for that is shown in Fig. 16.14. The charge (Q) decreases exponentially overtime (t). In general, exponential means increasing or decreasing very rapidly. It can also refer to a mathematical functions involving exponents where a variable appears as an exponent. We can write this function in the form,"
+          },
+          {
+            "type": "equation",
+            "latex": "f(x) = a^x",
+            "text_alt": "f(x) = aˣ"
           },
           {
             "type": "diagram",
@@ -30,7 +35,50 @@
           },
           {
             "type": "paragraph",
-            "text": "So the charge, voltage and current all fall in the same way: Q = Qo e^(-t/RC), V = Vo e^(-t/RC) and I = Io e^(-t/RC). The graphs start steeply (fast discharge) and gradually flatten out. In equal intervals of time, the amount of charge lost gets smaller as the discharge goes on (Fig 16.15). This is like water flowing out of a tank through a narrow pipe: when the tank is full the pressure is high and the water flows fast; as the level falls, the flow slows down."
+            "text": "where a is a constant and x is the exponent (variable). The general exponential decay formula for a discharging capacitor in an RC circuit is of the form;"
+          },
+          {
+            "type": "equation",
+            "latex": "x = x_0\\left[\\exp\\left(\\frac{-t}{RC}\\right)\\right] \\tag{16.43}",
+            "text_alt": "x = x₀[exp(−t/RC)]   (16.43)"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{or}\\quad x = x_0e^{\\frac{-t}{RC}}",
+            "text_alt": "or x = x₀e^(−t/RC)"
+          },
+          {
+            "type": "paragraph",
+            "text": "where x = quantity (such as charge, voltage or current) at time t."
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "x₀ = initial value of the quantity at t = 0.",
+              "R = resistance in ohms (Ω).",
+              "C = capacitance in farads (F).",
+              "t = time in seconds.",
+              "RC = time constant (τ) which determines how quickly the capacitor discharges.",
+              "e = a mathematical constant called Euler's constant which is also used as of the natural logarithm (logₑ). Its value is approximately 2.718."
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "The negative exponent (−t/RC) in the formula indicates that the quantity decreases exponentially over time."
+          },
+          {
+            "type": "paragraph",
+            "text": "Using Eq.16.43, the decrease in charge, voltage and current at any time t, can be described by the following equations."
+          },
+          {
+            "type": "equation",
+            "latex": "Q = Q_0e^{-t/RC},\\; V = V_0e^{-t/RC} \\;\\text{and}\\; I = I_0e^{-t/RC}.",
+            "text_alt": "Q = Q₀e^(−t/RC), V = V₀e^(−t/RC) and I = I₀e^(−t/RC)."
+          },
+          {
+            "type": "paragraph",
+            "text": "In the graph for the decrease in all the three quantities, they start with a steep slope (fast discharge) and gradually flattens out as the time progresses, indicating a slower discharge rate. This is shown in Fig. 16.15 by the charge decay graph."
           },
           {
             "type": "diagram",
@@ -39,23 +87,64 @@
             "caption": "Figure 16.15: Charge decay in equal intervals of time t (original drawing after the textbook's Figure 16.15)."
           },
           {
+            "type": "paragraph",
+            "text": "The initial charge is Q₀ at t = 0 and it drops to Q after a time interval t. Now, if at another stage during the discharging of capacitor, let the charge be Q₀′. After the same interval of time t, it drops to Q′. We can see that the rate of decrease of charge in the beginning was (Q₀ − Q), but as the process goes on, the rate of decrease of charge becomes (Q′₀ − Q′) which is less than (Q₀ − Q)."
+          },
+          {
+            "type": "paragraph",
+            "text": "The decay of charge is very much similar to flow of water out of a tank through a narrow pipe. When the tank is full of water, its level and pressure is analogous to charge and voltage, and flow rate of water analogous to the current. In the beginning, the water level is high and it decreases rapidly and the flow of water through the pipe is fast. As the water level comes down, the rate of flow slows down. This flowing down is due to the decreasing pressure."
+          },
+          {
             "type": "callout",
             "tone": "note",
             "title": "For your information",
-            "text": "Exponential functions describe many processes in physics, such as radioactive decay, in which the rate of change of a quantity depends directly on its current value."
+            "text": "Exponential functions frequently and quantitatively describe a number of phenomena in physics, such as radioactive decay, in which the rate of change in a process or substance depends directly on its current value."
           },
           {
             "type": "heading",
-            "level": 2,
-            "text": "Role of the time constant"
+            "level": 3,
+            "text": "Role of Time Constant"
           },
           {
             "type": "paragraph",
-            "text": "Putting t = RC in Q = Qo e^(-t/RC) gives Q = Qo e^-1 = Qo / 2.718 = 0.37 Qo. So the time constant is the time in which the initial charge Qo drops to about 0.37 Qo: after one time constant the charge (and likewise the voltage and current) has fallen to 37 per cent of its initial value. A smaller time constant means the circuit responds faster (Fig 16.16)."
+            "text": "The time constant RC = τ plays very important role in charging and discharge a capacitor through a resistance. Consider the exponential decay of the charge stored in a capacitor. It is given by the equation"
+          },
+          {
+            "type": "equation",
+            "latex": "Q = Q_0e^{-t/RC}",
+            "text_alt": "Q = Q₀e^(−t/RC)"
           },
           {
             "type": "paragraph",
-            "text": "The time t1/2 for the charge to fall to half its initial value. Putting Q = Qo/2: 1/2 = e^(-t1/2 / RC), so ln(1/2) = -t1/2 / RC and t1/2 = -RC ln(1/2) = RC ln 2 (16.44). Since ln 2 = 0.693, t1/2 = 0.69 RC (16.45)."
+            "text": "If we put t = RC, we will get the quantity of charge remained after 1 time constant. Therefore,"
+          },
+          {
+            "type": "equation",
+            "latex": "Q = Q_0e^{-RC/RC} = Q_0e^{-1} = Q_0 \\times 1/e",
+            "text_alt": "Q = Q₀e^(−RC/RC) = Q₀e⁻¹ = Q₀ × 1/e"
+          },
+          {
+            "type": "paragraph",
+            "text": "Substituting the value of e, we get"
+          },
+          {
+            "type": "equation",
+            "latex": "Q = Q_0 \\times \\frac{1}{2.718} = 0.37Q_0",
+            "text_alt": "Q = Q₀ × 1/2.718 = 0.37Q₀"
+          },
+          {
+            "type": "paragraph",
+            "text": "This gives the definition of time constant;"
+          },
+          {
+            "type": "callout",
+            "tone": "definition",
+            "title": "Time constant",
+            "text": "The time constant (τ) is the duration of time in which, the initial charge Q₀ drops to about 0.37 Q₀."
+          },
+          {
+            "type": "paragraph",
+            "text": "This means that after one time constant, the charge drops to 37% of its initial value. Likewise the voltage and current also drops to the same extent. The exponential decay equation also shows that a smaller time constant (τ = RC) means the circuit responds faster, while a larger time constant means, it responds more slowly. This effect is shown in Fig. 16.16. Let us now determine (t₁/₂) taken in terms of time constant (RC) during which the charge Q₀ drops to one half of its initial value. Putting the value of Q = 1/2 Q₀ in the exponential decay equation of the charge, we get"
           },
           {
             "type": "diagram",
@@ -64,13 +153,94 @@
             "caption": "Figure 16.16: Charge falls to one half of Qo in 0.69RC and to 0.37Qo in one time constant RC (original drawing after the textbook's Figure 16.16)."
           },
           {
-            "type": "heading",
-            "level": 2,
-            "text": "Example 16.10"
+            "type": "equation",
+            "latex": "\\frac{1}{2}Q_0 = Q_0e^{\\frac{-t_{1/2}}{RC}}",
+            "text_alt": "½Q₀ = Q₀e^(−t₁/₂/RC)"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{or}\\quad \\frac{1}{2} = e^{\\frac{-t_{1/2}}{RC}}",
+            "text_alt": "or ½ = e^(−t₁/₂/RC)"
           },
           {
             "type": "paragraph",
-            "text": "In an RC circuit R = 1 kilo-ohm, C = 100 uF and Vo = 10 V. Find the voltage across the capacitor after 0.2 s. Solution: tau = RC = (1000 ohm)(100 x 10^-6 F) = 0.1 s. V = Vo e^(-t/RC) = 10 e^(-0.2/0.1) = 10 e^-2 = 10 / (2.718)^2 = 1.35 V."
+            "text": "By definition of natural logarithm,"
+          },
+          {
+            "type": "equation",
+            "latex": "\\ln\\left(\\frac{1}{2}\\right) = \\frac{-t_{1/2}}{RC}",
+            "text_alt": "ln(1/2) = −t₁/₂/RC"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{or}\\quad -(RC)\\left[\\ln\\left(\\frac{1}{2}\\right)\\right] = t_{1/2} \\tag{16.44}",
+            "text_alt": "or −(RC)[ln(1/2)] = t₁/₂   (16.44)"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{Now}\\quad \\ln\\left(\\frac{1}{2}\\right) = \\ln(1) - \\ln(2)",
+            "text_alt": "Now ln(1/2) = ln(1) − ln(2)"
+          },
+          {
+            "type": "equation",
+            "latex": "= 0 - \\ln(2)",
+            "text_alt": "= 0 − ln(2)"
+          },
+          {
+            "type": "paragraph",
+            "text": "From calculator, the value of – ln (2) = – 0.6",
+            "book_errors": [
+              "– 0.6"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Putting the value of ln (1/2) in Eq. 4.45, we get",
+            "book_errors": [
+              "Eq. 4.45"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "ln 2 = 0.693, so −ln(2) = −0.693 ≈ −0.69 (the value used in the next line), not −0.6. The value is put into Eq. (16.44); there is no Eq. 4.45 in this chapter."
+          },
+          {
+            "type": "equation",
+            "latex": "-RC(-0.69) = t_{1/2}",
+            "text_alt": "−RC(−0.69) = t₁/₂"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{or}\\quad t_{1/2} = 0.69\\,RC \\tag{16.45}",
+            "text_alt": "or t₁/₂ = 0.69 RC   (16.45)"
+          },
+          {
+            "type": "paragraph",
+            "text": "we can show this in the graph of Fig. 4.17.",
+            "book_errors": [
+              "Fig. 4.17"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The graph is Fig. 16.16 (charge falls to ½Q₀ at 0.69RC); there is no Fig. 4.17 in this chapter."
+          },
+          {
+            "type": "example",
+            "title": "Example 16.10",
+            "problem": "In an RC circuit R = 1kΩ, C = 100μF and V₀ = 10V. Determine the voltage across the capacitor after 0.2 s.",
+            "steps": [
+              "The constant τ = RC = 1000Ω × 100 × 10⁻⁶ F\n= 0.1 s",
+              "Voltage after 0.2 s = V(t) = ?",
+              "Using exponential decay equation for voltage,\nV = V₀e⁻ᵗᐟᴿᶜ",
+              "V = 10 × e⁻⁰·²ᐟ⁰·¹ = 10 × e⁻² = 10 × 1/e²",
+              "or V = 10 × 1/(2.718)²"
+            ],
+            "answer": "V = 1.35V"
           }
         ]
       }
