@@ -20,18 +20,50 @@
       "body": {
         "blocks": [
           {
+            "type": "paragraph",
+            "text": "Upar wale 3 4 2 * + jaise postfix expressions ko stack se hal kiya ja sakta hai. Qadam ba qadam tareeqa yeh hai. Misal: postfix expression 3 4 5 * + ko stack se hal karein."
+          },
+          {
             "type": "list",
             "ordered": true,
             "items": [
-              "Khali stack se shuru kar ke postfix expression baen se daen parhein.",
-              "Adad: stack par push karein.",
-              "Operator: zaroori operands pop kar ke amal karein aur nateeja push karein.",
-              "Aakhir mein stack par bachi qeemat jawab hai."
+              "Khali stack se shuru karein.",
+              "Expression ko baen se daen parhein.",
+              "Number mile to use stack par push karein."
             ]
           },
           {
-            "type": "paragraph",
-            "text": "Misal: 3 4 5 * +. 3, 4 aur 5 push: [3, 4, 5]. * parha: 5 aur 4 pop, 4 x 5 = 20, push: [3, 20]. + parha: 20 aur 3 pop, 3 + 20 = 23, push: [23]. Jawab 23."
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "3 push kiya: [3]",
+              "4 push kiya: [3, 4]",
+              "5 push kiya: [3, 4, 5]"
+            ]
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "Operator mile to zaroorat ke mutabiq items (yahan do) stack se pop karein, operation karein, aur nateeja wapas stack par push karein."
+            ]
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "* mila: 5 aur 4 pop kiye, zarb ki: 4 * 5 = 20",
+              "Nateeja 20 wapas push kiya: [3, 20]",
+              "+ mila: 20 aur 3 pop kiye, jama kiya: 3 + 20 = 23",
+              "Nateeja 23 wapas push kiya: [23]",
+              "Aakhir mein stack par jo value bachti hai, wohi jawab hai: 23."
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Asaan alfaaz mein",
+            "text": "Kitab ke numbering mein chauthe qadam ko phir se 1 likha gaya hai; asal mein yeh chautha qadam hai: operator mile to do numbers pop karo, hisab karo, nateeja push karo."
           },
           {
             "type": "diagram",
@@ -42,19 +74,19 @@
           {
             "type": "checkpoint",
             "mode": "self_check",
-            "prompt": "3 4 2 * + stack se nikalein.",
-            "explanation": "3, 4, 2 push; * se 4 x 2 = 8, stack [3, 8]; + se 3 + 8 = 11. Jawab 11."
+            "prompt": "3 4 2 * + ko stack se hal karein.",
+            "explanation": "3, 4, 2 push: [3, 4, 2]. * mila: 4 * 2 = 8, stack [3, 8]. + mila: 3 + 8 = 11, stack [11]. Jawab 11."
           },
           {
             "type": "heading",
             "level": 2,
-            "text": "Fauri khulasa"
+            "text": "Mukhtasar khulasa"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "Postfix nikalna: adad push; operator do pop kar ke hisab kar ke push; 3 4 5 * + = 23."
+              "Postfix hal karna: number push; operator par do pop, hisab, nateeja push; 3 4 5 * + = 23."
             ]
           }
         ]

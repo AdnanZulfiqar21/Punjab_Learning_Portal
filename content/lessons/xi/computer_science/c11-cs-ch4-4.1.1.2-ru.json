@@ -20,43 +20,66 @@
       "body": {
         "blocks": [
           {
+            "type": "paragraph",
+            "text": "List ki yeh properties (khasusiyat) hain:"
+          },
+          {
             "type": "list",
             "ordered": true,
             "items": [
-              "Dynamic size: cheezein jorne ya hatane par list barh ya ghat sakti hai.",
-              "Index se pohanch: pehli cheez ka index 0, doosri ka 1, waghaira.",
-              "Tarteeb wala majmooa: cheezein usi tarteeb mein rehti hain jis mein jori gayin.",
-              "Mukhtalif qismein: ek list mein adad, alfaaz aur doosri lists bhi ho sakti hain.",
-              "Mutability: banne ke baad cheezein badli, jori ya hatayi ja sakti hain.",
-              "Duplicates: ek hi qeemat ek se zyada baar aa sakti hai."
+              "Dynamic Size (badalne wala size): Python ki list ka size badal sakta hai. Aap naye items jor sakte hain ya purane nikal sakte hain, aur list khud ba khud chhoti ya bari ho jati hai.",
+              "Index-Based Access (index se pohanch): List ke har item ki ek jagah hoti hai jise index kehte hain. Pehle item ka index 0, doosre ka 1, aur isi tarah aage. Index se aap koi bhi khaas item nikal sakte hain.",
+              "Ordered Collection (tarteeb wala majmooa): Items jis tarteeb se jore jayen, usi tarteeb mein rehte hain. Jo item pehle jora, woh pehli jagah par hi rahega jab tak aap khud na badlein.",
+              "Heterogeneous Elements (mukhtalif qisam ke items): Ek hi list mein mukhtalif qisam ke items ho sakte hain, maslan numbers, words aur doosri lists bhi.",
+              "Mutability (badle ja sakna): List banane ke baad bhi us ke items badle, jore ya nikale ja sakte hain.",
+              "Supports Duplicates (ek item kai baar): List mein ek hi item ek se zyada baar aa sakta hai."
             ]
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "# Example List\nitems = [\"Decorations\", \"Snacks\", \"Cold drinks\", \"Plates\", \"Balloons\"]\n# Characteristics of Lists:\n# Nature of the Data Structure\nprint(\"List of items:\", items)\n# Mutability\nitems.append(\"Party Hats\")\nitems.remove(\"Snacks\")\nprint(\"After modifications:\", items)\n# Homogeneous vs. Heterogeneous\nprint(\"Homogeneous List:\", [1, 2, 3, 4])\nprint(\"Heterogeneous List:\", [\"Apple\", 42, 3.14, True])\n# Properties of Lists:\n# Length\nprint(\"Number of items:\", len(items))\n# Indexing\nprint(\"Item at index 2:\", items[2])\n# Ordering\nprint(\"Order maintained:\", items)\n# Duplication\nprint(\"List with duplicates:\", [\"Decorations\", \"Snacks\", \"cold drinks\", \"Snacks\"])",
+            "caption": "Sahi code"
+          },
+          {
+            "type": "code",
+            "language": "text",
+            "text": "List of items: ['Decorations', 'Snacks', 'Cold drinks', 'Plates', 'Balloons']\nAfter modifications: ['Decorations', 'Cold drinks', 'Plates', 'Balloons', 'Party Hats']\nHomogeneous List: [1, 2, 3, 4]\nHeterogeneous List: ['Apple', 42, 3.14, True]\nNumber of items: 5\nItem at index 2: Plates\nOrder maintained: ['Decorations', 'Cold drinks', 'Plates', 'Balloons', 'Party Hats']\nList with duplicates: ['Decorations', 'Snacks', 'cold drinks', 'Snacks']",
+            "caption": "Output (sahi code chalane par)"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab ke code mein teen ghaltiyan hain: (1) \"Plates\" \"Balloons\" ke darmiyan comma nahi; Python dono strings ko jor kar 'PlatesBalloons' bana deta hai aur list mein chaar items reh jate hain. (2) 3. 14 mein number ke andar space hai, is liye SyntaxError aata hai; sahi 3.14 hai. (3) Indexing aur Ordering wale print() comment wali line par hi chhape hain, is liye woh comment ban gaye aur kabhi nahi chalte. Upar wale code mein har print() alag line par hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Upar wala code list ki mukhtalif khasusiyat dikhata hai. Pehle yeh 'items' naam ki list banata hai jis mein party ka saman hai, aur items usi tarteeb mein rehte hain jis mein jore gaye. Phir 'Party Hats' jor kar aur 'Snacks' nikal kar dikhaya gaya hai ke list badal sakti hai, yaani list dynamic hai."
           },
           {
             "type": "callout",
             "tone": "note",
-            "title": "Python code (har .... ek 4-space indent hai)",
-            "text": "items = [\"Decorations\", \"Snacks\", \"Cold drinks\", \"Plates\", \"Balloons\"]\nitems.append(\"Party Hats\")\nitems.remove(\"Snacks\")\nprint(\"After modifications:\", items)\nprint(\"Heterogeneous list:\", [\"Apple\", 42, 3.14, True])\nprint(\"Number of items:\", len(items))    # 5\nprint(\"Item at index 2:\", items[2])      # Plates"
-          },
-          {
-            "type": "paragraph",
-            "text": "Tabdeeliyon ke baad list Decorations, Cold drinks, Plates, Balloons, Party Hats hai: tarteeb qaim rahi aur list zaroorat ke mutabiq barhi aur ghati. Lists nested ho sakti hain, list ke andar list, jo pecheeda data ke liye mufeed hai (Did You Know)."
+            "title": "Did You Know?",
+            "text": "Python mein lists nested ho sakti hain, yaani list ke andar list. Yeh pecheeda (complex) data ko dikhane mein kaam aata hai, maslan [[1, 2], [3, 4]]."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
-            "prompt": "Lists ki dynamic size ki khasusiyat aur yeh unhein kaise lachakdar banati hai, bataiye (long question 1).",
-            "explanation": "Python list ka size pehle se muqarrar nahi karna parta: append(), insert() aur extend() ise barhate aur remove(), pop() aur clear() ghatate hain, aur Python memory khud adjust karti hai. Is liye program aisa data rakh sakta hai jis ki miqdar maloom na ho, jaise user input, shopping cart ki cheezein ya kaam, baghair jagah zaya kiye ya kam pare."
+            "prompt": "Lists ki dynamic size wali property bataiye. Yeh lists ko lachakdar (flexible) kaise banati hai? (Long question 1)",
+            "explanation": "Python list ka size pehle se tay nahi karna parta. append(), insert() aur extend() list ko bara karte hain; remove(), pop() aur clear() chhota karte hain; memory Python khud sambhalta hai. Is liye program aisa data bhi rakh sakta hai jis ki tadaad pehle maloom na ho, maslan user ka input, shopping cart ki cheezein ya kaamon ki list."
           },
           {
             "type": "heading",
             "level": 2,
-            "text": "Fauri khulasa"
+            "text": "Mukhtasar khulasa"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "List ki khasusiyat: dynamic size, 0 se index, tarteeb wali, mukhtalif qismein, badalne qabil, duplicates ki ijazat."
+              "List ki khasusiyat: dynamic size, 0 se index, tarteeb qaim, mukhtalif qisam ke items, badle ja sakna, duplicates ki ijazat.",
+              "Code mein har item ke baad comma, number mein space nahi, aur print() alag line par."
             ]
           }
         ]

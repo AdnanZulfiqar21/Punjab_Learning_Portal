@@ -21,30 +21,66 @@
         "blocks": [
           {
             "type": "paragraph",
-            "text": "List data lachak se rakhti aur stack Last-In, First-Out tarteeb lagata hai, to mil kar woh kaam karte hain jin mein taaza tareen element pehle process karna ho. [10, 20, 30, 40, 50] ulatne ke liye: har element khali stack par push karein, phir ek ek pop kar ke wapas list mein dalein. Stack LIFO hai, is liye list [50, 40, 30, 20, 10] ban jati hai."
+            "text": "Lists aur stacks buniyadi data structures hain jo mil kar data ko ek control wali tarteeb mein sambhalne ka taqatwar tareeqa dete hain. List data ko lachak ke saath rakhti aur us tak pohanch deti hai, jabke stack Last-In-First-Out (LIFO) tarteeb lagata hai; is liye yeh un kaamon mein mufeed hai jahan sab se taaza element pehle process karna ho."
           },
           {
-            "type": "callout",
-            "tone": "note",
-            "title": "Python code (har .... ek 4-space indent hai)",
-            "text": "numbers = [10, 20, 30, 40, 50]\nstack = []\nfor n in numbers:\n....stack.append(n)          # push\nnumbers = []\nwhile stack:\n....numbers.append(stack.pop())    # pop back into the list\nprint(numbers)    # [50, 40, 30, 20, 10]"
+            "type": "paragraph",
+            "text": "Misal: numbers ki list ki tarteeb stack se ulti karni hai. Yeh list lein:"
+          },
+          {
+            "type": "paragraph",
+            "text": "Asal list: [10, 20, 30, 40, 50]"
+          },
+          {
+            "type": "paragraph",
+            "text": "Is list ko stack se ulatne ke qadam:"
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "Khali stack banayein.",
+              "Qadam 1: list ka har element stack par push karein. Sab push hone ke baad stack: [10 20 30 40 50] (50 top par).",
+              "Qadam 2: stack se elements ek ek kar ke pop karein aur wapas list mein dalein. Stack LIFO hai, is liye pehle 50, phir 40 ... nikalte hain, yaani ulti tarteeb.",
+              "Qadam 3: saare elements pop ho kar list mein aa jayen to list yeh ban jati hai:"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Ulti list: [50, 40, 30, 20, 10]"
+          },
+          {
+            "type": "paragraph",
+            "text": "Is misal mein stack list ke elements ko thori der ke liye rakhta hai, aur us ki LIFO aadat se tarteeb ulat jati hai. List aur stack mil kar ulatne (reversing), undo aur backtracking jaise kaam aasani se karte hain, jo bohat se algorithms aur applications mein aam hain."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "numbers = [10, 20, 30, 40, 50]\nstack = []\nfor n in numbers:\n    stack.append(n)          # push\nnumbers = []\nwhile stack:\n    numbers.append(stack.pop())    # pop back into the list\nprint(numbers)    # [50, 40, 30, 20, 10]",
+            "caption": "Yahi kaam Python mein (kitab mein code nahi; yeh hamara code hai)"
+          },
+          {
+            "type": "code",
+            "language": "text",
+            "text": "[50, 40, 30, 20, 10]",
+            "caption": "Output (Python 3.13 mein chala kar)"
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "Do aur kaam bataiye jin mein list aur stack mil kar kaam karte hain.",
-            "explanation": "Undo (document ki halaton ki list aur taaza amal ka stack) aur backtracking (intikhabaat ki list aur ab tak aazmaye raste ka stack)."
+            "explanation": "Undo (document ki halaton ki list aur taaza actions ka stack) aur backtracking (options ki list aur ab tak aazmaye gaye raaste ka stack)."
           },
           {
             "type": "heading",
             "level": 2,
-            "text": "Fauri khulasa"
+            "text": "Mukhtasar khulasa"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "List aur stack: sab push, sab pop, aur tarteeb ulat: [50, 40, 30, 20, 10]."
+              "List aur stack: sab push, phir sab pop, aur tarteeb ulat: [50, 40, 30, 20, 10]."
             ]
           }
         ]

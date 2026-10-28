@@ -13,14 +13,18 @@
           "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
           "pdf_from": 118,
           "pdf_to": 120,
-          "note": "Topic 4.3.2 (PDF 118-120, printed 115-117); Figure 4.13 is replaced by the original diagram with the same tree. Long question 7 (its number is not printed) uses the exercise graph on PDF 125, read from the page image; part (a) is answered here, taking neighbours alphabetically. Recorded."
+          "note": "Topic 4.3.2 Combining Stack and Graph to perform DFS (PDF 118-120, printed 115-117), as printed: Figure 4.13 and the ten numbered steps."
         }
       ],
       "body": {
         "blocks": [
           {
             "type": "paragraph",
-            "text": "DFS explores a graph or tree as far as possible along a branch before backtracking, using a stack to keep the nodes still to visit. Example: a tree with root 1; children 2, 3 and 4; 5 and 6 under 2; 7 under 3; 8 and 9 under 4 (Figure 4.13)."
+            "text": "Depth-First Search (DFS) is a fundamental algorithm used to explore or traverse through a graph or tree structure. It uses a stack data structure to keep track of the vertices or nodes that need to be visited. This method is particularly useful when we need to explore as far as possible along a branch before backtracking, making it ideal for situations where deep exploration is required."
+          },
+          {
+            "type": "paragraph",
+            "text": "Example: Consider the graph shown in Figure 4.13, as a tree with numeric nodes:"
           },
           {
             "type": "diagram",
@@ -29,64 +33,47 @@
             "caption": "Figure 4.13: Graph Representation of a Tree with Numeric Nodes (original drawing after the textbook's Figure 4.13)."
           },
           {
-            "type": "table",
-            "caption": "DFS stack trace",
-            "header": [
-              "Step",
-              "Pop and visit",
-              "Stack after (top on the right)"
-            ],
-            "rows": [
-              [
-                "1",
-                "1, push 4, 3, 2",
-                "[4, 3, 2]"
-              ],
-              [
-                "2",
-                "2, push 6, 5",
-                "[4, 3, 6, 5]"
-              ],
-              [
-                "3",
-                "5",
-                "[4, 3, 6]"
-              ],
-              [
-                "4",
-                "6",
-                "[4, 3]"
-              ],
-              [
-                "5",
-                "3, push 7",
-                "[4, 7]"
-              ],
-              [
-                "6",
-                "7",
-                "[4]"
-              ],
-              [
-                "7",
-                "4, push 9, 8",
-                "[9, 8]"
-              ],
-              [
-                "8",
-                "8",
-                "[9]"
-              ],
-              [
-                "9",
-                "9",
-                "[] (done)"
-              ]
+            "type": "paragraph",
+            "text": "In this graph:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Node 1 is the root.",
+              "Nodes 2, 3, and 4 are children of node 1.",
+              "Nodes 5 and 6 are children of node 2.",
+              "Node 7 is a child of node 3.",
+              "Nodes 8 and 9 are children of node 4."
             ]
           },
           {
             "type": "paragraph",
-            "text": "The DFS order is 1, 2, 5, 6, 3, 7, 4, 8, 9."
+            "text": "Here's how the DFS algorithm uses a stack to traverse this graph:"
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "Start with an empty stack and push the root node (1) onto the stack.",
+              "Step 1: Pop node 1 from the stack and mark it as visited. Push all of its unvisited children (nodes 2, 3, 4) onto the stack. The stack now contains nodes [4, 3, 2].",
+              "Step 2: Pop the top of the stack (node 2). Mark node 2 as visited and push its unvisited children (nodes 5, 6) onto the stack. The stack now contains nodes [4, 3, 6, 5].",
+              "Step 3: Pop the top of the stack (node 5). Mark node 5 as visited. Since node 5 has no children, nothing is added to the stack. The stack now contains nodes [4, 3, 6].",
+              "Step 4: Pop the top of the stack (node 6). Mark node 6 as visited. Since node 6 has no children, nothing is added to the stack. The stack now contains nodes [4. 3].",
+              "Step 5: Pop the top of the stack (node 3). Mark node 3 as visited and push its unvisited child (node 7) onto the stack. The stack now contains nodes [4, 7].",
+              "Step 6: Pop the top of the stack (node 7). Mark node 7 as visited. Since node 7 has no children, nothing is added to the stack. The stack now contains node [4].",
+              "Step 7: Pop the top of the stack (node 4). Mark node 4 as visited and push its unvisited children (nodes 8, 9) onto the stack. The stack now contains nodes [9, 8].",
+              "Step 8: Pop the top of the stack (node 8). Mark node 8 as visited. Since node 8 has no children, nothing is added to the stack. The stack now contains node [9].",
+              "Step 9: Pop the top of the stack (node 9). Mark node 9 as visited. Since node 9 has no children, the stack is now empty."
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "The traversal order of the nodes using DFS in this example would be: 1, 2, 5, 6, 3, 7, 4, 8, 9."
+          },
+          {
+            "type": "paragraph",
+            "text": "In this example, the DFS algorithm starts at the root node (1) and explores as far as possible along each branch before backtracking. By using a stack, the algorithm traverses the graph depth-first, visiting nodes in the order: 1, 2, 5, 6, 3, 7, 4, 8, 9. The stack helps manage the nodes to visit next, ensuring a complete exploration of each branch before moving to the next."
           }
         ]
       }

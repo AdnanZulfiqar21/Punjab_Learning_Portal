@@ -20,18 +20,44 @@
       "body": {
         "blocks": [
           {
+            "type": "diagram",
+            "$asset": "c11-cs-ch4-fig-4-2-stack-of-books",
+            "alt": "Saat kitabein ek ke oopar ek leti hui: peeli, neeli, surkh, naranji, jamni, halki jamni aur hari.",
+            "caption": "Figure 4.2: Kitabon ka dher (kitab ki Figure 4.2 ke mutabiq asal khaaka)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Stack mein do buniyadi operations hote hain:"
+          },
+          {
             "type": "list",
             "ordered": false,
             "items": [
-              "Push: top par cheez jorna. Python mein list ko stack banaya jata hai aur append() push karta hai.",
-              "Pop: list ke pop() se top wali cheez hatana."
+              "Push: stack ke top par item dalna. Python mein stack banane ke liye list istemal hoti hai, is liye list ka append() function top par item dalta hai.",
+              "Pop: stack ke top wala item nikalna. Is ke liye list ka pop() function istemal hota hai."
             ]
           },
           {
+            "type": "paragraph",
+            "text": "Misal: Figure 4.2 jaisa mez par kitabon ka dher sochiye. Aap sirf sab se oopar kitab rakh sakte hain ya sab se oopar wali kitab utha sakte hain. Neeche isi kitabon ke stack ka Python code hai."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "# Create an empty stack of books\nstack_of_books = []\nprint(\"Initial stack:\", stack_of_books)          # Empty stack\n# Add books to the stack (push operation)\nprint(\"\\n Adding books to the stack (push operation):\")\nstack_of_books.append('Book A')\nprint(\"Stack after pushing 'Book A':\", stack_of_books)\nstack_of_books.append('Book B')\nprint(\"Stack after pushing 'Book B':\", stack_of_books)\nstack_of_books.append('Book C')\nprint(\"Stack after pushing 'Book C':\", stack_of_books)\n# Remove the top book from the stack (pop operation)\nprint(\"\\nDeletion of top book (pop operation):\")\ntop_book = stack_of_books.pop()\nprint(\"Removed book:\", top_book)\nprint(\"Stack after popping the top book:\", stack_of_books)",
+            "caption": "Sahi code"
+          },
+          {
+            "type": "code",
+            "language": "text",
+            "text": "Initial stack: []\n\n Adding books to the stack (push operation):\nStack after pushing 'Book A': ['Book A']\nStack after pushing 'Book B': ['Book A', 'Book B']\nStack after pushing 'Book C': ['Book A', 'Book B', 'Book C']\n\nDeletion of top book (pop operation):\nRemoved book: Book C\nStack after popping the top book: ['Book A', 'Book B']",
+            "caption": "Output (sahi code chalane par)"
+          },
+          {
             "type": "callout",
-            "tone": "note",
-            "title": "Python code (har .... ek 4-space indent hai)",
-            "text": "stack_of_books = []\nstack_of_books.append(\"Book A\")\nstack_of_books.append(\"Book B\")\nstack_of_books.append(\"Book C\")\nprint(\"Stack:\", stack_of_books)        # Book A, Book B, Book C\ntop_book = stack_of_books.pop()\nprint(\"Removed book:\", top_book)       # Book C\nprint(\"Stack now:\", stack_of_books)    # Book A, Book B"
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab ke code mein do ghaltiyan hain: (1) pehli line mein stack_of_books = [] comment ke saath hi likha hai, is liye list banti hi nahi aur NameError aata hai; upar ise alag line par likha gaya hai. (2) append(’Book A’) waghaira mein tirchhe quotes ’ hain, jinhein Python nahi maanta (SyntaxError); sahi append('Book A') hai."
           },
           {
             "type": "diagram",
@@ -41,30 +67,31 @@
           },
           {
             "type": "paragraph",
-            "text": "Mez par kitabon ke dher ki tarah, aap sirf oopar kitab rakh sakte ya oopar wali utha sakte hain. Stacks depth-first search (DFS) mein bhi khangalne wale nodes ko LIFO tarteeb mein sambhalne ke liye istemal hote hain (Did You Know)."
+            "text": "Code pehle kitabon ke liye khali stack banata hai. Phir teen kitabein (\"Book A\", \"Book B\" aur \"Book C\") ek ek kar ke top par dalta hai. Aakhir mein top wali kitab \"Book C\" nikalta hai. Is se pata chalta hai ke jo kitab aakhir mein rakhi gayi, wohi pehle nikli."
           },
           {
-            "type": "diagram",
-            "$asset": "c11-cs-ch4-fig-4-2-stack-of-books",
-            "alt": "Saat kitabein ek ke oopar ek leti hui: peeli, neeli, surkh, naranji, jamni, halki jamni aur hari.",
-            "caption": "Figure 4.2: Kitabon ka dher (kitab ki Figure 4.2 ke mutabiq asal khaaka)."
+            "type": "callout",
+            "tone": "note",
+            "title": "Did You Know?",
+            "text": "Stacks depth-first search (DFS) jaise algorithms mein bhi istemal hote hain, jo graph ko traverse (har node par ja kar dekhna) karte hain. Stack aage dekhne wale nodes ko LIFO tarteeb mein sambhalta hai."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
-            "prompt": "Stack ke top se cheez kaunsa amal hatata hai (MCQ 3)?",
+            "prompt": "Stack ke top se item kaunsa operation nikalta hai (MCQ 3)?",
             "explanation": "(b) Pop."
           },
           {
             "type": "heading",
             "level": 2,
-            "text": "Fauri khulasa"
+            "text": "Mukhtasar khulasa"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "push = append(), pop = pop(); A, B, C push kar ke pop karne par C milta hai."
+              "push = append(), pop = pop().",
+              "A, B, C push kar ke pop karein to C nikalta hai (LIFO)."
             ]
           }
         ]

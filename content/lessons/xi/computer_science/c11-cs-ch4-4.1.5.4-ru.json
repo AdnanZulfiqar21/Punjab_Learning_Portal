@@ -21,24 +21,33 @@
         "blocks": [
           {
             "type": "paragraph",
-            "text": "Print spooling printer ko bheje gaye print jobs sambhalti hai. Documents aane ki tarteeb mein queue mein rakhe jate hain, to pehle bheja document pehle chhapta aur baqi apni baari ka intezar karte hain. Is se documents be-tarteeb chhapne ya ek saath bhejne par takrane se bachte hain."
-          },
-          {
-            "type": "checkpoint",
-            "mode": "self_check",
-            "prompt": "Teen log 9:00, 9:01 aur 9:02 par ek printer ko documents bhejte hain. Pehle kaunsa chhapta hai?",
-            "explanation": "9:00 wala document, kyunke print queue first in, first out hai."
-          },
-          {
-            "type": "heading",
-            "level": 2,
-            "text": "Fauri khulasa"
+            "text": "Print spooling woh nizam hai jo printer ko bheje gaye print jobs (chhapne ke kaam) sambhalta hai, taake woh usi tarteeb mein chhapein jis mein mile. Is mein tarteeb aur raftaar ke liye queue istemal hoti hai."
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "Print spooling: print jobs FIFO queue mein intezar kar ke aane ki tarteeb se chhapte hain."
+              "Print jobs sambhalna: jab kai documents printer ko bheje jayen to woh queue mein rakhe jate hain, jaise kisi counter par logon ki line. Har document queue ke aakhir mein jurta hai, is liye aane ki tarteeb qaim rehti hai.",
+              "Chhapne ki tarteeb: queue yaqeeni banati hai ke documents ek ke baad ek, bheje jane ki tarteeb se chhapein. Jo pehle bheja woh pehle chhapega, baqi apni baari ka intezar karenge.",
+              "Queue ke faide: queue ki wajah se documents be-tarteeb nahi chhapte, aur ek hi waqt mein kai print requests aane se gar-bar nahi hoti. Printer kai kaam achhi tarah aur insaf se karta hai."
+            ]
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Teen log 9:00, 9:01 aur 9:02 par ek hi printer ko documents bhejte hain. Pehle kaunsa chhapega?",
+            "explanation": "9:00 wala, kyunke print queue FIFO hai: pehle aao, pehle pao."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Mukhtasar khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Print spooling: print jobs FIFO queue mein intezar karte hain aur aane ki tarteeb se chhapte hain."
             ]
           }
         ]

@@ -13,32 +13,53 @@
           "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
           "pdf_from": 92,
           "pdf_to": 93,
-          "note": "Topic 4.1.1.2 List Properties (PDF 92-93, printed 89-90). The printed list omits a comma ('\"Plates\" \"Balloons\"'), and 'Homogeneous vs. Heterogeneous' code prints '3. 14'; a cleaned version is carried. Long question 1 is answered."
+          "note": "Topic 4.1.1.2 List Properties (PDF 92-93, printed 89-90), as printed; the code's missing comma, '3. 14' and the print() calls inside comments are marked."
         }
       ],
       "body": {
         "blocks": [
           {
+            "type": "paragraph",
+            "text": "List has following properties:"
+          },
+          {
             "type": "list",
             "ordered": true,
             "items": [
-              "Dynamic size: a list can grow or shrink as items are added or removed.",
-              "Index-based access: the first item has index 0, the second 1, and so on.",
-              "Ordered collection: items keep the order in which they were added.",
-              "Heterogeneous elements: one list can hold numbers, words and even other lists.",
-              "Mutability: items can be updated, added or removed after creation.",
-              "Supports duplicates: the same value can appear more than once."
+              "Dynamic Size: A list in Python can change its size. You can add new items to the list or remove items without any problem. The list will automatically adjust to fit the changes.",
+              "Index-Based Access: Every item in a list has a position, called an index. The first item has an index of 0, the second item has an index of 1, and so on. You can use these indexes to get specific items from the list.",
+              "Ordered Collection: The order in which you add items to a list is preserved. This means that if you add an item first, it will stay in that position unless you change it.",
+              "Heterogeneous Elements: A list can hold different types of items together. For example, you can have numbers, words, and even other lists all in one list.",
+              "Mutability: Lists are changeable, meaning you can update, add, or remove items from the list after you create it.",
+              "Supports Duplicates: A list can contain the same item more than once. This means you can repeat values in the list if needed."
+            ]
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "# Example List\nitems = [\"Decorations\", \"Snacks\", \"Cold drinks\", \"Plates\" \"Balloons\"]\n# Characteristics of Lists:\n# Nature of the Data Structure\nprint(\"List of items:\", items)\n# Mutability\nitems.append(\"Party Hats\")\nitems.remove(\"Snacks\")\nprint(\"After modifications:\", items)\n# Homogeneous vs. Heterogeneous\nprint(\"Homogeneous List:\", [1, 2, 3, 4])\nprint(\"Heterogeneous List:\", [\"Apple\", 42, 3. 14, True] )\n# Properties of Lists:\n# Length\nprint(\"Number of items:\", len(items))\n# Indexing print(\"Item at index 2:\", items [2])\n# Ordering print(\"Order maintained:\", items)\n# Duplication\nprint(\"List with duplicates:\", [\"Decorations\", \"Snacks\",  \"cold drinks\", \"Snacks\"])",
+            "book_errors": [
+              "\"Plates\" \"Balloons\"",
+              "3. 14",
+              "# Indexing print",
+              "# Ordering print"
             ]
           },
           {
             "type": "callout",
-            "tone": "note",
-            "title": "Python code (each .... is one 4-space indent)",
-            "text": "items = [\"Decorations\", \"Snacks\", \"Cold drinks\", \"Plates\", \"Balloons\"]\nitems.append(\"Party Hats\")\nitems.remove(\"Snacks\")\nprint(\"After modifications:\", items)\nprint(\"Heterogeneous list:\", [\"Apple\", 42, 3.14, True])\nprint(\"Number of items:\", len(items))    # 5\nprint(\"Item at index 2:\", items[2])      # Plates"
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "Three slips in the printed code. (1) A comma is missing in \"Plates\" \"Balloons\": Python joins the two strings, so the list has four items, the last one 'PlatesBalloons'. (2) 3. 14 has a space inside the number, so Python stops with SyntaxError: invalid syntax. Perhaps you forgot a comma?; the number is 3.14. (3) The Indexing and Ordering print() calls are printed on their comment lines, so they are part of the comment and never run; each print() must start on its own line. Corrected, the program also prints Item at index 2: Plates."
           },
           {
             "type": "paragraph",
-            "text": "The code keeps the items in the order they were added; adding 'Party Hats' and removing 'Snacks' shows that lists can be changed and are dynamic. Lists can be nested, lists inside lists, which is useful for complex data (Did You Know)."
+            "text": "The code above shows different features of lists. First, it creates a list called 'items' with party essentials, keeping the items in the order they were added. We then demonstrate that lists can be changed by adding 'Party Hats' as a new item and removing 'Snacks', which shows that lists are dynamic."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Did You Know?",
+            "text": "Did you know that lists in Python can be nested, meaning you can have lists within lists? This feature is useful for representing complex data structures."
           }
         ]
       }

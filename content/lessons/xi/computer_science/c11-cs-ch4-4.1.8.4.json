@@ -13,16 +13,20 @@
           "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
           "pdf_from": 114,
           "pdf_to": 116,
-          "note": "Topic 4.1.8.4 Types of Graphs with 'Graph Implementation Using Python' (PDF 114-116, printed 111-113). Figures 4.11 and 4.12 are replaced by the original diagram with the same edges and weights. The printed code imports matplotlib as 'pit'; corrected to plt."
+          "note": "Topic 4.1.8.4 Types of Graphs and Graph Implementation Using Python (PDF 114-116, printed 111-113), as printed with Figures 4.11 and 4.12; the code's curly quotes are marked."
         }
       ],
       "body": {
         "blocks": [
           {
+            "type": "paragraph",
+            "text": "Graphs can be classified into several types based on their structure and properties. The main types of graphs are directed, undirected, and weighted. Each type has its own characteristics, which can be better understood through simple examples."
+          },
+          {
             "type": "list",
             "ordered": false,
             "items": [
-              "Directed graph: edges have a direction; you can travel from city A to city B only if an edge points that way (Figure 4.11)."
+              "Directed Graphs: In a directed graph, edges have a direction, which means they go from one vertex to another in a specific way as shown in Figure 4.11."
             ]
           },
           {
@@ -32,11 +36,19 @@
             "caption": "Figure 4.11: Directed Weighted Graph (original drawing after the textbook's Figure 4.11)."
           },
           {
+            "type": "paragraph",
+            "text": "Example: Consider a graph shown in figure 4.11 . If you want to travel from city A to city B, you can only go in the direction permitted by the city's sign. If there's no one-way street going from city A to city B, you cannot travel directly from city A to B."
+          },
+          {
             "type": "list",
             "ordered": false,
             "items": [
-              "Undirected graph: edges work both ways; if A is friends with B, B is friends with A (Figure 4.12)."
+              "Undirected Graphs: In an undirected graph, edges do not have a direction. This means that if there is a connection between two vertices, you can travel in both directions."
             ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Example: Consider a graph that shown in Figure 4.12, if Person A is friends with Person B, then Person B is also friends with Person A. There is no restriction on the direction of the friendship, so you can move freely between friends."
           },
           {
             "type": "diagram",
@@ -48,23 +60,53 @@
             "type": "list",
             "ordered": false,
             "items": [
-              "Weighted graph: each edge has a weight such as distance, time or cost, which helps find the shortest or quickest route (Figure 4.11)."
+              "Weighted Graphs: In a weighted graph, each edge has a weight or cost associated with it. This weight represents the distance, time, or cost required to travel from one vertex to another as shown in Figure 4.11."
             ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Example: Imagine a map of a city where each road has a different distance or travel time. If you want to travel from one landmark to another, the map provides the distance or travel time for each road. This information helps you determine the shortest or quickest route between landmarks."
           },
           {
             "type": "heading",
             "level": 3,
-            "text": "Graph implementation using Python"
-          },
-          {
-            "type": "callout",
-            "tone": "note",
-            "title": "Python code (each .... is one 4-space indent)",
-            "text": "import networkx as nx\nimport matplotlib.pyplot as plt\nG = nx.Graph()          # create a graph\nG.add_node(\"A\")\nG.add_node(\"B\")\nG.add_node(\"C\")\nG.add_edge(\"A\", \"B\")     # add edges\nG.add_edge(\"B\", \"C\")\nnx.draw(G, with_labels=True)\nplt.show()"
+            "text": "Graph Implementation Using Python"
           },
           {
             "type": "paragraph",
-            "text": "The code creates a graph with three nodes and two edges using the NetworkX library and draws it with Matplotlib."
+            "text": "Graphs can be implemented in Python using libraries such as NetworkX. Here's a basic example:"
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "import networkx as nx\nimport matplotlib.pyplot as pit\n#    Create a graph object\nG = nx.Graph()\n#    Add vertices (nodes)\nG . add_node( ’ A ’ )\nG.add_node( ’B ’ )\nG . add_node( ’ C ’)\n#    Add edges (links) between vertices\nG. add_edge(’A’ , ’B ’)\nG . add_edge(’B ’, ’ C ’)\n#    Draw the graph\nnx.draw(G , with_labels=True)\npit.show ()",
+            "book_errors": [
+              "’"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The node names are printed between curly quotes (’ A ’), which Python does not accept: SyntaxError: invalid character '’' (U+2019). Use straight quotes and no spaces inside the names, so that the nodes and the edges use the same names: G.add_node('A'), G.add_node('B'), G.add_node('C'), G.add_edge('A', 'B'), G.add_edge('B', 'C'). The short name pit for matplotlib.pyplot works because it is used in both places; it is usually written plt."
+          },
+          {
+            "type": "paragraph",
+            "text": "In the above code:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "We first create a graph object.",
+              "Nodes 'A', 'B', and 'C' are added to the graph.",
+              "Edges are added to connect these nodes.",
+              "The graph is drawn and displayed using Matplotlib."
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "This example demonstrates a simple graph with three nodes and two edges, visualizing how vertices and edges are represented programmatically."
           }
         ]
       }

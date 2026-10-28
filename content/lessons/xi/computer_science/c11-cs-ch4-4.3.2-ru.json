@@ -21,7 +21,11 @@
         "blocks": [
           {
             "type": "paragraph",
-            "text": "DFS graph ya tree ko shaakh mein jitna aage ja sake khangalta phir wapas aata hai, aur baqi nodes rakhne ke liye stack istemal karta hai. Misal: tree jis ki jarr 1; bachche 2, 3 aur 4; 2 ke neeche 5 aur 6; 3 ke neeche 7; 4 ke neeche 8 aur 9 (Figure 4.13)."
+            "text": "Depth-First Search (DFS) ek buniyadi algorithm hai jo graph ya tree ko explore (har node dekhna) karta hai. Jin vertices ya nodes ko abhi dekhna baqi hai, unhein yeh stack mein rakhta hai. Yeh tab mufeed hai jab ek shaakh mein jitna gehra ja sakein jana ho aur phir wapas aana (backtrack) ho, yaani gehrai tak dekhne wale kaamon ke liye."
+          },
+          {
+            "type": "paragraph",
+            "text": "Misal: Figure 4.13 ka graph dekhein, jo numbers wale tree ki shakal mein hai:"
           },
           {
             "type": "diagram",
@@ -30,8 +34,51 @@
             "caption": "Figure 4.13: Adadi nodes wale tree ki graph shakal (kitab ki Figure 4.13 ke mutabiq asal khaaka)."
           },
           {
+            "type": "paragraph",
+            "text": "Is graph mein:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Node 1 root hai.",
+              "Nodes 2, 3 aur 4 node 1 ke children hain.",
+              "Nodes 5 aur 6 node 2 ke children hain.",
+              "Node 7 node 3 ka child hai.",
+              "Nodes 8 aur 9 node 4 ke children hain."
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "DFS stack ki madad se is graph ko aise traverse karta hai (stack ko [neeche ... top] likha gaya hai, yaani sab se daen wala number top par hai):"
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "Khali stack se shuru kar ke root node (1) push karein.",
+              "Qadam 1: node 1 pop kar ke visited (dekha gaya) mark karein. Us ke children 4, 3, 2 is tarteeb se push karein taake 2 top par aaye. Stack: [4, 3, 2].",
+              "Qadam 2: top (node 2) pop karein, visited mark karein, us ke children 6, 5 push karein. Stack: [4, 3, 6, 5].",
+              "Qadam 3: node 5 pop karein, visited mark karein; is ke children nahi. Stack: [4, 3, 6].",
+              "Qadam 4: node 6 pop karein, visited mark karein; children nahi. Stack: [4, 3].",
+              "Qadam 5: node 3 pop karein, visited mark karein, us ka child 7 push karein. Stack: [4, 7].",
+              "Qadam 6: node 7 pop karein, visited mark karein; children nahi. Stack: [4].",
+              "Qadam 7: node 4 pop karein, visited mark karein, children 9, 8 push karein. Stack: [9, 8].",
+              "Qadam 8: node 8 pop karein, visited mark karein; children nahi. Stack: [9].",
+              "Qadam 9: node 9 pop karein, visited mark karein; ab stack khali hai."
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Is misal mein DFS ki tarteeb: 1, 2, 5, 6, 3, 7, 4, 8, 9."
+          },
+          {
+            "type": "paragraph",
+            "text": "DFS root (1) se shuru ho kar har shaakh mein jitna gehra ja sake jata hai, phir wapas aata hai. Stack agle dekhne wale nodes sambhalta hai, is liye agli shaakh par jane se pehle har shaakh poori dekh li jati hai."
+          },
+          {
             "type": "table",
-            "caption": "DFS stack ka safar",
+            "caption": "DFS mein stack ka safar",
             "header": [
               "Qadam",
               "Pop aur visit",
@@ -40,12 +87,12 @@
             "rows": [
               [
                 "1",
-                "1, 4, 3, 2 push",
+                "1; 4, 3, 2 push",
                 "[4, 3, 2]"
               ],
               [
                 "2",
-                "2, 6, 5 push",
+                "2; 6, 5 push",
                 "[4, 3, 6, 5]"
               ],
               [
@@ -60,7 +107,7 @@
               ],
               [
                 "5",
-                "3, 7 push",
+                "3; 7 push",
                 "[4, 7]"
               ],
               [
@@ -70,7 +117,7 @@
               ],
               [
                 "7",
-                "4, 9, 8 push",
+                "4; 9, 8 push",
                 "[9, 8]"
               ],
               [
@@ -86,19 +133,15 @@
             ]
           },
           {
-            "type": "paragraph",
-            "text": "DFS tarteeb 1, 2, 5, 6, 3, 7, 4, 8, 9 hai. Bachche ulti tarteeb mein push hote hain ta ke sab se baen bachcha top par ho aur pehle dekha jaye."
-          },
-          {
             "type": "checkpoint",
             "mode": "self_check",
-            "prompt": "Long question 7(a): jis graph mein A se B, C aur D, B se E aur F, C se G, aur D se H aur I ki taraf teer hain, A se DFS tarteeb dijiye.",
-            "explanation": "Parosiyon ko haroof-e-tahaji ki tarteeb mein le kar: A, B, E, F, C, G, D, H, I."
+            "prompt": "Long question 7(a): exercise ke graph mein A se B, C aur D ki taraf, B se E aur F, C se G, aur D se H aur I ki taraf teer hain. A se shuru kar ke DFS mein nodes kis tarteeb mein dekhe jayenge?",
+            "explanation": "Parosiyon ko baen se daen (A, B, C ... ki tarteeb) lein: A, B, E, F, C, G, D, H, I."
           },
           {
             "type": "heading",
             "level": 2,
-            "text": "Fauri khulasa"
+            "text": "Mukhtasar khulasa"
           },
           {
             "type": "list",

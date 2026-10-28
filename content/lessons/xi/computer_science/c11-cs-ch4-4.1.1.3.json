@@ -13,43 +13,176 @@
           "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
           "pdf_from": 93,
           "pdf_to": 95,
-          "note": "Topic 4.1.1.3 List Operations (PDF 93-95, printed 90-92). The printed insert() output omits the inserted item and several function names are garbled; cleaned listings are carried. MCQs 1-2, short questions 1-2 (2 is general knowledge, flagged) and long question 2 are answered."
+          "note": "Topic 4.1.1.3 List Operations (PDF 93-95, printed 90-92), as printed: eight code blocks; curly quotes, the stray quote and wrong Output, and the printed names insertf(), append!), popO, indexO are marked."
         }
       ],
       "body": {
         "blocks": [
           {
-            "type": "heading",
-            "level": 3,
-            "text": "Insertion"
+            "type": "paragraph",
+            "text": "Let's explore some common operations we can perform on a list using real-world examples and Python code."
+          },
+          {
+            "type": "paragraph",
+            "text": "1. Insertion: Adding a new item to your list is like adding a new task to your to-do list. You can insert an item at different positions in the list. Here are several ways to do this:"
+          },
+          {
+            "type": "paragraph",
+            "text": "a. Inserting at a Specific Position: You can insert an item at any position in the list using the 'insertf()' function.",
+            "book_errors": [
+              "'insertf()'"
+            ]
           },
           {
             "type": "callout",
-            "tone": "note",
-            "title": "Python code (each .... is one 4-space indent)",
-            "text": "party_list = [\"Buy drinks\", \"Buy decorations\", \"Buy snacks\", \"Buy cold drinks\"]\nparty_list.insert(0, \"Invite friends\")      # add at the start\nparty_list.append(\"Order cake\")            # add at the end\nparty_list.extend([\"Party hats\", \"Streamers\"])    # add several at once\nprint(party_list)"
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book prints 'insertf()'; the list function is insert(), as the code below uses."
           },
           {
-            "type": "heading",
-            "level": 3,
-            "text": "Deletion"
-          },
-          {
-            "type": "callout",
-            "tone": "note",
-            "title": "Python code (each .... is one 4-space indent)",
-            "text": "party_list = [\"Invite friends\", \"Buy decorations\", \"Buy snacks\", \"Buy cold drinks\"]\nparty_list.remove(\"Buy snacks\")    # removes the first match\nparty_list.pop(0)                  # removes the item at index 0\nprint(party_list)                  # ['Buy decorations', 'Buy cold drinks']\nparty_list.clear()                 # removes all items\nprint(party_list)                  # []"
-          },
-          {
-            "type": "heading",
-            "level": 3,
-            "text": "Searching"
+            "type": "code",
+            "language": "python",
+            "text": "party_list = [\"Buy drinks”, “Buy decorations\", \"Buy snacks\", “Buy cold drinks \"]\nparty_list.insert (0 ’ , “Invite friends”) # add Invite friends at start\nprint(party_list)\n# Output: [\"Buy drinks, “Buy decorations\", \"Buy snacks\", “Buy cold drinks \"]",
+            "book_errors": [
+              "\"Buy drinks”, “Buy decorations\"",
+              "“Buy cold drinks \"]",
+              "(0 ’ , “Invite friends”)",
+              "# Output: [\"Buy drinks, “Buy decorations\", \"Buy snacks\", “Buy cold drinks \"]"
+            ]
           },
           {
             "type": "callout",
-            "tone": "note",
-            "title": "Python code (each .... is one 4-space indent)",
-            "text": "party_list = [\"Invite friends\", \"Buy decorations\", \"Buy cold drinks\"]\nif \"Buy cold drinks\" in party_list:\n....print(\"Buy cold drinks is on the list.\")\nindex = party_list.index(\"Buy decorations\")\nprint(\"Index of Buy decorations:\", index)    # 1"
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "As printed this code does not run: curly quotation marks (“ ” ’) stand where Python needs straight quotes, and a stray ’ follows the 0; Python stops with SyntaxError: invalid character '“' (U+201C). Written correctly: party_list = [\"Buy drinks\", \"Buy decorations\", \"Buy snacks\", \"Buy cold drinks \"] and party_list.insert(0, \"Invite friends\"). The printed Output also leaves out \"Invite friends\"; the program prints ['Invite friends', 'Buy drinks', 'Buy decorations', 'Buy snacks', 'Buy cold drinks ']."
+          },
+          {
+            "type": "paragraph",
+            "text": "b. Appending to the End: If you want to add an item to the end of the list, use the 'append!)' function.",
+            "book_errors": [
+              "'append!)'"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book prints 'append!)'; the list function is append(), as the code below uses."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "party_list = [“Invite friends”, \"Buy cold drinks”, “Buy decorations\", \"Buy snacks\",]\nparty_list.append (\"Order cake”) # Adds ’Order cake’ at the end\nprint(party_list)\n\n# Output: [’’Invite friends’’, ‘’Buy cold drinks’’, ’’Buy decorations’’, ‘’Buy snacks’’, “Order cake”]",
+            "book_errors": [
+              "“Invite friends”",
+              "\"Buy cold drinks”, “Buy decorations\"",
+              "(\"Order cake”)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "Curly quotes again: “Invite friends”, \"Buy cold drinks” followed by “Buy decorations\", and \"Order cake”. Python stops with SyntaxError: invalid character '“' (U+201C). With straight quotes the program prints ['Invite friends', 'Buy cold drinks', 'Buy decorations', 'Buy snacks', 'Order cake'], as the Output comment says."
+          },
+          {
+            "type": "paragraph",
+            "text": "c. Extending the List: You can also add multiple items at once using the 'extend()' functions."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "party_list = [\"Invite friends\", \"Buy decorations \", \"Buy snacks”, \"Buy cold drinks\"]\nparty_list.extend([\"Party hats\", \"Streamers\"]) # Add multiple items at once\nprint(party_list)\n# Output: [’’Invite friends’’, ’’Buy decorations’’, ‘’Buy snacks ‘’, ‘’Buy cold drinks’’, ’’Party hats’’, ‘’Streamers’’]",
+            "book_errors": [
+              "\"Buy snacks”"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "\"Buy snacks” ends with a curly quote, so Python does not see the string end and stops with SyntaxError: unterminated string literal. With \"Buy snacks\" the program prints ['Invite friends', 'Buy decorations ', 'Buy snacks', 'Buy cold drinks', 'Party hats', 'Streamers']."
+          },
+          {
+            "type": "paragraph",
+            "text": "2. Deletion: Removing an item from your list is like crossing off a task you've completed. You can remove items in various ways"
+          },
+          {
+            "type": "paragraph",
+            "text": "a. Removing by Value: Use the 'remove()' function to delete the first occurrence of a specific item."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "party_list = [\"Invite friends \",\"Buy decorations”, \"Buy snacks”, \"Buy cold drinks\"]\nparty_list.remove (\"Buy snacks”) # Removes ’Buy snacks ’ from the list\nprint(party_list)\n# Output: [’Invite friends’, ’Buy decorations’, ’Buy cold drinks ’]",
+            "book_errors": [
+              "\"Buy decorations”",
+              "\"Buy snacks”"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "\"Buy decorations” and \"Buy snacks” end with curly quotes; Python stops with SyntaxError: invalid character '”' (U+201D). With straight quotes the program prints ['Invite friends ', 'Buy decorations', 'Buy cold drinks']."
+          },
+          {
+            "type": "paragraph",
+            "text": "b. Removing by Index: Use the 'popO' function to remove an item at a specific index.",
+            "book_errors": [
+              "'popO'"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book prints 'popO'; the list function is pop(), as the code below uses."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "party_list = [\"Invite friends \", \"Buy decorations\", \"Buy cold drinks \" ]\nparty_list.pop (0) # Removes the item at index 0\nprint(party_list)\n# Output: [’Buy decorations’, ’Buy cold drinks’]"
+          },
+          {
+            "type": "paragraph",
+            "text": "c. Removing All Items: Use the 'clear()' function to remove all items from the list."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "party_list = [\"Invite friends\" , \"Buy decorations\", \"Buy cold drinks \" ]\n# Removes all items from the list\nparty_list.clear ()\nprint(party_list) # Output : []"
+          },
+          {
+            "type": "paragraph",
+            "text": "3. Searching: Finding an item in a list is similar to looking for a specific task in your to-do list. You can search for an item using different functions:"
+          },
+          {
+            "type": "paragraph",
+            "text": "a. Checking for Existence: Use the 'in' keyword to check if an item exists in the list."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "party_list = [\"Invite friends\", \"Buy decorations\", \"Buy cold drinks\"]\nif \"Buy cold drinks\" in party_list:\n         print(\"Buy cold drinks is on the list.\")  # Prints if 'Buy cold drinks' is found\nelse:\n        print(\"Buy cold drinks is not on the list.\")\n# Output: Buy cold drinks is on the list."
+          },
+          {
+            "type": "paragraph",
+            "text": "b. Finding the Index: Use the 'indexO' function to find the position of an item in the list.",
+            "book_errors": [
+              "'indexO'"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book prints 'indexO'; the list function is index(), as the code below uses."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "party_list = [\"Invite friends\", \"Buy decorations\", \"Buy cold drinks \" ]\nindex = party_list.index(\"Buy decorations\") # Finds the position of ’Buy decorations’\nprint(\"Index of ’Buy decorations’:\", index)\n# Output: Index of ’Buy decorations’: 1"
           }
         ]
       }
