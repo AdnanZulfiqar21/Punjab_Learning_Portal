@@ -5,6 +5,7 @@ import { Model3DFigure } from "@/components/model3d-figure";
 import { SaverImage } from "@/components/saver-image";
 import { bookErrors, markLatex, markPieces } from "@/lib/book-errors";
 import { codeRuns } from "@/lib/code-highlight";
+import { leadIn, leadTerm } from "@/lib/book-style";
 import { fillMerged, mergedColumns, mergeStarts, rowSpans } from "@/lib/table-merge";
 
 // Renders content blocks (schema v1, roadmap §5.4). Web renderer version 2: comparison tables fold into cards on narrow
@@ -120,6 +121,7 @@ export function LessonBlocks({
   dataSaver = false,
   blockIds = false,
   typeset,
+  premium = false,
 }: {
   blocks: Block[];
   headingOffset?: number;
@@ -132,9 +134,11 @@ export function LessonBlocks({
   blockIds?: boolean;
   /** P01.S4.T2: equations already typeset on the server (`lib/typeset.ts`), by block index. */
   typeset?: Record<number, string | null>;
+  /** BOOK-STYLE-01: the premium style of a chosen book (lib/book-style.ts `premiumBook`). */
+  premium?: boolean;
 }) {
   const view = (b: Block, i: number) => (
-    <BlockView block={b} headingOffset={headingOffset} assetUrl={assetUrl} dataSaver={dataSaver} typeset={typeset?.[i]} />
+    <BlockView block={b} headingOffset={headingOffset} assetUrl={assetUrl} dataSaver={dataSaver} typeset={typeset?.[i]} premium={premium} />
   );
   // Each block keeps its own id (b0, b1, …), also inside a Quick Check card, so the language switch finds its place.
   // `data-kind` lets consecutive equations join into one card (globals.css `.lesson-flow`), as the book prints a run of
@@ -148,7 +152,7 @@ export function LessonBlocks({
       <div data-kind={blocks[i]?.type}>{node}</div>
     );
   return (
-    <div className="lesson-flow space-y-5 leading-relaxed">
+    <div className="lesson-flow space-y-5 leading-relaxed" data-style={premium ? "premium" : undefined}>
       {blocks.map((b, i) => {
         if (isQuickCheck(blocks[i - 1], b)) return null; // drawn inside the card above
         if (isQuickCheck(b, blocks[i + 1])) {
@@ -201,12 +205,14 @@ function BlockView({
   assetUrl,
   dataSaver,
   typeset,
+  premium = false,
 }: {
   block: Block;
   headingOffset: number;
   assetUrl?: AssetUrl;
   dataSaver?: boolean;
   typeset?: string | null;
+  premium?: boolean;
 }) {
   const marks = bookErrors(b.book_errors);
   switch (b.type) {
@@ -223,17 +229,46 @@ function BlockView({
       );
     }
     case "paragraph":
+      // BOOK-STYLE-01: a printed "Example:" (Roman Urdu "Misal:") becomes a label, and a lead-in line a small heading with an accent bar.
+      if (premium && /^(example|misal)\s*:$/i.test(str(b.text).trim()) && !marks.length)
+        return (
+          <p className="inline-flex rounded-full bg-accent-soft px-3 py-0.5 text-xs font-semibold tracking-wide text-accent-strong uppercase">
+            {str(b.text).trim().replace(/\s*:$/, "")}
+          </p>
+        );
+      if (premium && leadIn(str(b.text)))
+        return (
+          <p dir="auto" className="flex items-baseline gap-2 font-semibold">
+            <span aria-hidden className="h-[0.9em] w-1 shrink-0 translate-y-[0.1em] self-start rounded-full bg-accent" />
+            <span>
+              <Marked text={str(b.text)} marks={marks} />
+            </span>
+          </p>
+        );
       return (
         <p dir="auto" className="whitespace-pre-line">
           <Marked text={str(b.text)} marks={marks} />
         </p>
       );
     case "list": {
-      const items = strs(b.items).map((t, i) => (
-        <li key={i} dir="auto">
-          <Marked text={t} marks={marks} />
-        </li>
-      ));
+      const items = strs(b.items).map((t, i) => {
+        // BOOK-STYLE-01: "Term: what it means" shows the term bold in the subject colour.
+        const lead = premium ? leadTerm(t, marks) : null;
+        return (
+          <li key={i} dir="auto">
+            {lead ? (
+              <>
+                <span className="font-semibold text-accent">
+                  <Marked text={`${lead[0]}:`} marks={marks} />
+                </span>{" "}
+                <Marked text={lead[1]} marks={marks} />
+              </>
+            ) : (
+              <Marked text={t} marks={marks} />
+            )}
+          </li>
+        );
+      });
       return b.ordered ? (
         <ol className="list-decimal space-y-2 pl-7 marker:font-semibold marker:text-accent">{items}</ol>
       ) : (
@@ -359,8 +394,10 @@ function BlockView({
     }
     case "example":
       return (
-        <section className="space-y-2 rounded-lg border border-border bg-surface px-4 py-3" aria-label={`Worked example: ${str(b.title)}`}>
-          <p className="text-xs font-semibold tracking-wide text-muted uppercase">Worked example</p>
+        <section
+          className={`space-y-2 rounded-lg border border-border bg-surface px-4 py-3 ${premium ? "border-l-4 border-l-accent shadow-sm" : ""}`}
+          aria-label={`Worked example: ${str(b.title)}`}>
+          <p className={`text-xs font-semibold tracking-wide uppercase ${premium ? "text-accent" : "text-muted"}`}>Worked example</p>
           <p className="font-semibold">
             <Marked text={str(b.title)} marks={marks} />
           </p>

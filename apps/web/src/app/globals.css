@@ -388,3 +388,19 @@ body {
 .code-variable {
   color: var(--code-variable);
 }
+
+/* BOOK-STYLE-01: tables in a premium-styled book (lib/book-style.ts) get a tinted header in the subject colour and
+   banded rows on wide screens; below 40rem the folded cards above stay as they are. */
+[data-style="premium"] .lesson-table caption {
+  color: var(--accent-strong);
+  font-weight: 600;
+}
+@media (min-width: 40.0625rem) {
+  [data-style="premium"] .lesson-table th {
+    background: var(--accent-soft);
+    color: var(--accent-strong);
+  }
+  [data-style="premium"] .lesson-table tbody tr:nth-child(even) td {
+    background: var(--surface);
+  }
+}

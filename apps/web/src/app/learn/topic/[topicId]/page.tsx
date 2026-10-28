@@ -8,6 +8,7 @@ import { KeepPlace } from "@/components/keep-place";
 import { LectureView } from "@/components/lecture-view";
 import { LessonBlocks } from "@/components/lesson-blocks";
 import { continuesInto, headingOnly as isHeadingOnly, headingTone } from "@/lib/book-heading";
+import { premiumBook } from "@/lib/book-style";
 import { typesetEquations } from "@/lib/typeset";
 import { placeSignature, type PlaceBlock } from "@/lib/variant-place";
 import { Notice, SkeletonLines } from "@/components/ui";
@@ -230,6 +231,7 @@ async function TopicView({ id, view }: { id: string; view: "read" | "lecture" })
             typeset={typesetEquations(lesson.body.blocks)}
             blockIds
             dataSaver={dataSaver}
+            premium={premiumBook(subjectKey(reading.subject_name), reading.grade_number)}
             assetUrl={(versionId) =>
               lesson.private_preview
                 ? `/learn/topics/${shown.topic_id}/preview-assets/${versionId}`
