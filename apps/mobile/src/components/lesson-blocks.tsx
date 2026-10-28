@@ -3,13 +3,13 @@
 // An unknown or unsupported block shows its reviewed fallback, or an explicit "update required" note instead of failing.
 import { Image } from "expo-image";
 import { Fragment, useState, type ReactNode } from "react";
-import { Pressable, Text, View } from "react-native";
+import { Pressable, ScrollView, Text, View } from "react-native";
 
 import { Checkpoint } from "@/components/checkpoint";
 import { FigureViewer } from "@/components/figure-viewer";
 import { Model3D } from "@/components/model3d";
 import { LinkButton, T } from "@/components/ui";
-import { Radius, Space } from "@/constants/theme";
+import { Fonts, Radius, Space } from "@/constants/theme";
 import { useTheme } from "@/hooks/use-theme";
 import { bookErrors, markPieces } from "@/lib/book-errors";
 import { comparisonCards } from "@/lib/lesson-tables";
@@ -355,6 +355,22 @@ function BlockView({ block: b, assetSource, dataSaver }: { block: Block; assetSo
               <Marked text={str(b.answer)} marks={marks} />
             </T>
           ) : null}
+        </View>
+      );
+    case "code":
+      // CODE-BLOCK-01: a program as printed; spaces and line breaks are kept, long lines scroll sideways.
+      return (
+        <View style={{ gap: Space.xs }} accessibilityLabel={`${str(b.language) || "Program"} code${str(b.caption) ? `: ${str(b.caption)}` : ""}`}>
+          {str(b.caption) ? (
+            <T variant="small" style={{ fontWeight: "600", color: c.muted }}>
+              <Marked text={str(b.caption)} marks={marks} />
+            </T>
+          ) : null}
+          <ScrollView horizontal style={{ borderWidth: 1, borderColor: c.border, borderRadius: Radius.md, backgroundColor: c.surfaceMuted }} contentContainerStyle={{ padding: Space.md }}>
+            <Text selectable style={{ fontFamily: Fonts?.mono, fontSize: 14, lineHeight: 21, color: c.text }}>
+              <Marked text={str(b.text)} marks={marks} />
+            </Text>
+          </ScrollView>
         </View>
       );
     case "diagram":

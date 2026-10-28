@@ -75,6 +75,9 @@ REGISTRY: dict[str, BlockSpec] = {
         BlockSpec("example", 1, {"web": 1, "android": 1, "ios": 1}, True, "Worked example: problem, steps, answer."),
         BlockSpec("diagram", 1, {"web": 1, "android": 1, "ios": 1}, True, "Archived image with alt text and caption."),
         BlockSpec("handout", 1, {"web": 1, "android": 1, "ios": 1}, True, "Downloadable archived PDF handout."),
+        # CODE-BLOCK-01: Computer Science listings, as printed, in a monospaced box that keeps indentation. Joins
+        # renderer v1 like the blocks above, as no native build has shipped yet (B07).
+        BlockSpec("code", 1, {"web": 1, "android": 1, "ios": 1}, True, "Program listing, monospaced, as printed."),
         # Constrained original scenes (TOPIC-READER-01). Geometry lives in the app, not in a downloaded script.
         # A still diagram in the same lesson is the readable fallback if the scene cannot start.
         BlockSpec(
@@ -265,6 +268,18 @@ class Example(_Marked):
         return [self.title, self.problem, *self.steps, *([self.answer] if self.answer else [])]
 
 
+class Code(_Marked):
+    """CODE-BLOCK-01: a program listing as printed; whitespace and indentation are kept exactly."""
+
+    type: Literal["code"]
+    language: Literal["python", "c", "cpp", "java", "javascript", "html", "css", "sql", "pseudocode", "text"] = "python"
+    text: Annotated[str, Field(min_length=1, max_length=8000)]
+    caption: Short | None = None
+
+    def _texts(self) -> list[str]:
+        return [*([self.caption] if self.caption else []), self.text]
+
+
 class Diagram(_Block):
     """An archived image (labelled diagram, graph, photo). Alt text and a caption are required; a long description
     carries what a complex diagram shows for learners who can't see it."""
@@ -320,6 +335,7 @@ AnyBlock = (
     | Equation
     | Checkpoint
     | Example
+    | Code
     | Diagram
     | Handout
     | Scene
