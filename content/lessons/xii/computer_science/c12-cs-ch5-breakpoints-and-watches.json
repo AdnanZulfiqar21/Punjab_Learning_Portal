@@ -13,39 +13,109 @@
           "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
           "pdf_from": 66,
           "pdf_to": 68,
-          "note": "Unnumbered heading 'Using Breakpoints and Watches' (PDF 66-68) with the listing checked against the page image; Fig 5.2 (an IDE screenshot) redrawn. Short Q6-8 and Long Q5-7 are answered here. The check question is added."
+          "note": "'Using Breakpoints and Watches' as printed (PDF 66-68, printed 62-64); rewritten 2026-10-28 in the book's wording, programs as code blocks."
         }
       ],
       "body": {
         "blocks": [
           {
             "type": "paragraph",
-            "text": "Breakpoints and watches are debugging tools that pause a program and let us examine its data at chosen points. They help find errors and show how the code flows, making debugging faster and more precise."
+            "text": "Breakpoints and watches are tools used in debugging to analyze program behavior. They allow pausing program execution and examining data at specific points. These tools help identify errors and understand how code flows. Using breakpoints and watches makes debugging faster and more precise."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Setting breakpoints in IDEs like PyCharm or VS Code"
+          },
+          {
+            "type": "paragraph",
+            "text": "Breakpoints are markers that pause program execution at a chosen line of code. IDEs like PyCharm and VS Code allow setting breakpoints with a simple click. When the program reaches a breakpoint, execution stops, and the current state can be examined. Breakpoints help focus on specific sections of code without running the entire program."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Monitoring variable values with watch expressions"
+          },
+          {
+            "type": "paragraph",
+            "text": "Watch expressions track the values of variables while the program is running. They update automatically when variable values change. This helps identify incorrect or unexpected data during execution. Watches allow observing how data changes step by step in real time."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Step-by-step debugging process"
+          },
+          {
+            "type": "paragraph",
+            "text": "Step-by-step debugging executes code one line or function at a time. It helps follow the program's logic and detect where errors occur. Developers can step into functions, step over lines, or continue execution after a breakpoint. This process makes it easier to locate and fix bugs accurately (as shown in Figure 5.2)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Example:"
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "def calculate_area(radius):\n    # Set a breakpoint here to pause and check the value of 'radius'\n    area = 3.14 * radius ** 2\n    return area\n\ndef main():\n    # Step-by-step debugging: starting from here\n    radius = 5\n    print(\"Area of circle:\", calculate_area(radius))  # Set another breakpoint here to monitor return value\n\n    radius = 10  # Change the radius value\n    print(\"Area of circle:\", calculate_area(radius))\n\n# Start the program\nif __name__ == \"__main__\":\n    main()"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "Breakpoint: a marker that pauses execution at a chosen line. In IDEs such as PyCharm or VS Code it is set by clicking in the margin next to the line number. When the program reaches it, execution stops and the current state (variable values) can be examined, so attention can go to one section of code.",
-              "Watch expression: tracks the value of a variable or expression while the program runs, updating automatically when the value changes, so unexpected values can be spotted step by step.",
-              "Step-by-step debugging: runs the code one line or function at a time to follow the program's logic and find exactly where an error occurs."
+              "The function calculate_area(radius) calculates the area of a circle using the formula 3.14 * radius ** 2 and returns the calculated value.",
+              "The main() function tests the area calculation twice by using two different radius values: 5 and 10.",
+              "Breakpoints can be placed inside calculate_area() and near the print() statements to check the value of radius, observe the calculated area, and understand step-by-step debugging."
             ]
           },
           {
-            "type": "callout",
-            "tone": "note",
-            "title": "Example: a program to debug (Python code; each .... is one 4-space indent)",
-            "text": "def calculate_area(radius):\n....# Set a breakpoint here to check the value of radius\n....area = 3.14 * radius ** 2\n....return area\n\ndef main():\n....# Step-by-step debugging starts here\n....radius = 5\n....print(\"Area of circle:\", calculate_area(radius))\n....radius = 10\n....print(\"Area of circle:\", calculate_area(radius))\n\nif __name__ == \"__main__\":\n....main()"
+            "type": "heading",
+            "level": 3,
+            "text": "1. Setting Breakpoints in IDEs like PyCharm:"
           },
           {
             "type": "list",
-            "ordered": true,
+            "ordered": false,
             "items": [
-              "calculate_area(radius) works out 3.14 * radius ** 2 and returns it; main() tests it with radius 5 and then 10.",
-              "Set breakpoints by clicking next to the lines radius = 5 and radius = 10; the program pauses there and the variables can be inspected.",
-              "Add a watch for radius to see it change from 5 to 10 as the program runs.",
-              "Step Into goes inside a function such as calculate_area(); Step Over runs the current line and moves to the next without going inside functions; Continue runs on to the next breakpoint."
+              "In PyCharm, you can set breakpoints by clicking the line number next to the code (in the margin).",
+              "When the program runs and reaches a breakpoint, it pauses. At this point, you can inspect variable values and see the current state of the program.",
+              "Example: Set breakpoints at radius = 5 and radius = 10 to pause the program execution at these lines."
             ]
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "2. Monitoring Variable Values with Watch Expressions:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "In your IDE, you can use watch expressions to track variables like radius during execution.",
+              "When you run the debugger, watch expressions will display how the value of radius changes as the program runs.",
+              "Example: You can add a watch for radius and see its value change from 5 to 10 as the program progresses."
+            ]
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "3. Step-by-Step Debugging Process:"
+          },
+          {
+            "type": "paragraph",
+            "text": "Step-by-step debugging is available in PyCharm. You can choose to:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Step Into: Go inside a function to see how it's working (calculate_area in the example).",
+              "Step Over: Execute the current line and move to the next one without going inside any functions.",
+              "Continue: Continue the execution until the next breakpoint."
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Example: You can step over the line area = 3.14 * radius ** 2 to skip calculating the area, or step into calculate_area() to examine how the area is calculated."
           },
           {
             "type": "diagram",

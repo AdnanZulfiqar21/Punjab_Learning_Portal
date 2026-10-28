@@ -14,39 +14,115 @@
           "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
           "pdf_from": 66,
           "pdf_to": 68,
-          "note": "Roman Urdu explanation of breakpoints, watches and step-by-step debugging (PDF 66-68)."
+          "note": "Roman Urdu explanation of 'Breakpoints aur watches ka istemal' (PDF 66-68), rewritten 2026-10-28 to follow the book paragraph for paragraph."
         }
       ],
       "body": {
         "blocks": [
           {
             "type": "paragraph",
-            "text": "Breakpoints aur watches debugging ke tools hain jo program rok kar chuni hui jagahon par us ka data dekhne dete hain. Yeh ghaltiyan dhoondne aur code ka bahao dikhane mein madad dete aur debugging ko tez aur durust banate hain."
+            "text": "Breakpoints aur watches debugging ke tools hain jin se program ka rawayya (behaviour) samjha jata hai. In se program ko chuni hui jagah par rok kar (pause) data dekha ja sakta hai. Yeh ghaltiyan pehchanne aur code ka bahao (flow) samajhne mein madad dete hain, aur debugging ko tez aur zyada durust banate hain."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "PyCharm ya VS Code jaise IDEs mein breakpoints lagana"
+          },
+          {
+            "type": "paragraph",
+            "text": "Breakpoint aik nishan (marker) hai jo program ko chuni hui line par rok deta hai. PyCharm aur VS Code jaise IDEs (code likhne aur chalane ke programs) mein breakpoint sirf aik click se lagta hai. Program breakpoint par pohanch kar ruk jata hai, aur us waqt ki halat (current state) dekhi ja sakti hai. Breakpoints se poora program chalaye baghair code ke khaas hisse par tawajjo di ja sakti hai."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Watch expressions se variables ki values dekhna"
+          },
+          {
+            "type": "paragraph",
+            "text": "Watch expressions program chalte waqt variables ki values par nazar rakhte hain aur value badalne par khud update ho jate hain. Is se chalte waqt ghalat ya ghair-mutawaqqa (unexpected) data pakra jata hai. Watches dikhate hain ke data qadam ba qadam asal waqt (real time) mein kaise badalta hai."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Step-by-step debugging ka tareeqa"
+          },
+          {
+            "type": "paragraph",
+            "text": "Step-by-step debugging code ko aik line ya aik function ek waqt mein chalati hai. Is se program ki mantiq (logic) ke saath chala jata hai aur pata chalta hai ke ghalti kahan hai. Developer function ke andar ja sakta hai (step into), line ko chala kar aage barh sakta hai (step over), ya breakpoint ke baad program jaari rakh sakta hai (continue). Is se bugs ki jagah dhoondna aur theek karna aasan hota hai (Figure 5.2)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Misal (Example):"
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "def calculate_area(radius):\n    # Set a breakpoint here to pause and check the value of 'radius'\n    area = 3.14 * radius ** 2\n    return area\n\ndef main():\n    # Step-by-step debugging: starting from here\n    radius = 5\n    print(\"Area of circle:\", calculate_area(radius))  # Set another breakpoint here to monitor return value\n\n    radius = 10  # Change the radius value\n    print(\"Area of circle:\", calculate_area(radius))\n\n# Start the program\nif __name__ == \"__main__\":\n    main()"
+          },
+          {
+            "type": "code",
+            "language": "text",
+            "text": "Area of circle: 78.5\nArea of circle: 314.0",
+            "caption": "Output (program chala kar)"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "Breakpoint: nishan jo chuni hui line par program rok deta hai. PyCharm ya VS Code jaise IDEs mein line number ke saath haashiye mein click kar ke lagta hai. Program wahan pohanch kar ruk jata hai aur maujooda halat (variables ki qeematein) dekhi ja sakti hai, is liye code ke aik hisse par tawajjuh di ja sakti hai.",
-              "Watch expression: program chalte waqt variable ya expression ki qeemat par nazar rakhta aur qeemat badalne par khud update hota hai, is liye ghair-mutawaqqa qeematein qadam ba qadam pakri ja sakti hain.",
-              "Qadam ba qadam debugging: code aik line ya function aik waqt mein chalata hai taake program ki mantiq follow ho aur theek pata chale ke ghalti kahan hai."
+              "calculate_area(radius) function 3.14 * radius ** 2 formula se daire (circle) ka area nikal kar wapas deta hai.",
+              "main() function area ka hisab do dafa check karta hai, radius ki do values 5 aur 10 ke saath.",
+              "radius ki value check karne, area dekhne aur step-by-step debugging samajhne ke liye breakpoints calculate_area() ke andar aur print() statements ke paas lagaye ja sakte hain."
             ]
           },
           {
-            "type": "callout",
-            "tone": "note",
-            "title": "Misal: debug karne ke liye program (Python code; har .... ek 4-space indent hai)",
-            "text": "def calculate_area(radius):\n....# Set a breakpoint here to check the value of radius\n....area = 3.14 * radius ** 2\n....return area\n\ndef main():\n....# Step-by-step debugging starts here\n....radius = 5\n....print(\"Area of circle:\", calculate_area(radius))   # 78.5\n....radius = 10\n....print(\"Area of circle:\", calculate_area(radius))   # 314.0\n\nif __name__ == \"__main__\":\n....main()"
+            "type": "heading",
+            "level": 3,
+            "text": "1. PyCharm mein breakpoints lagana:"
           },
           {
             "type": "list",
-            "ordered": true,
+            "ordered": false,
             "items": [
-              "calculate_area(radius) 3.14 * radius ** 2 nikal kar wapas deta hai; main() ise pehle radius 5 aur phir 10 se test karta hai.",
-              "radius = 5 aur radius = 10 wali lines ke saath click kar ke breakpoints lagayein; program wahan rukta aur variables dekhe ja sakte hain.",
-              "radius (aur area) ki watch lagayein taake program chalte hue radius 5 se 10 hota dikhe.",
-              "Step Into function, jaise calculate_area(), ke andar jata hai; Step Over maujooda line chala kar functions ke andar gaye baghair agli line par jata hai; Continue agle breakpoint tak chalata hai."
+              "PyCharm mein code ke saath line number (haashiye, margin) par click kar ke breakpoint lagta hai.",
+              "Program chalte hue breakpoint par pohanch kar ruk jata hai; us waqt variables ki values aur program ki halat dekhi ja sakti hai.",
+              "Misal: radius = 5 aur radius = 10 wali lines par breakpoints lagayein taake program wahan ruke."
             ]
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "2. Watch expressions se variable values dekhna:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "IDE mein watch expressions se chalte waqt radius jaise variables par nazar rakhi jati hai.",
+              "Debugger chalane par watch dikhati hai ke program ke saath radius ki value kaise badalti hai.",
+              "Misal: radius ki watch lagayein aur dekhein ke program aage barhne par us ki value 5 se 10 ho jati hai."
+            ]
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "3. Step-by-step debugging:"
+          },
+          {
+            "type": "paragraph",
+            "text": "PyCharm mein step-by-step debugging maujood hai. Aap yeh chun sakte hain:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Step Into: function ke andar ja kar dekhein ke woh kaise kaam karta hai (misal mein calculate_area).",
+              "Step Over: maujooda line chalayein aur kisi function ke andar gaye baghair agli line par jayein.",
+              "Continue: agle breakpoint tak program chalne dein."
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Misal: area = 3.14 * radius ** 2 wali line ko step over kar ke area ka hisab andar dekhe baghair aage barh sakte hain, ya calculate_area() mein step into kar ke dekh sakte hain ke area kaise nikalta hai."
           },
           {
             "type": "diagram",
@@ -69,15 +145,15 @@
           {
             "type": "heading",
             "level": 2,
-            "text": "Fauri khulasa"
+            "text": "Mukhtasar khulasa"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "Breakpoint: line par program rokta (IDE ke haashiye mein click).",
-              "Watch: variable ki badalti qeemat dikhati.",
-              "Step Into, Step Over, Continue qadam ba qadam debugging chalate."
+              "Breakpoint: line par program rokta hai (IDE ke margin mein click).",
+              "Watch: variable ki badalti value dikhati hai.",
+              "Step Into, Step Over, Continue se step-by-step debugging hoti hai."
             ]
           }
         ]
