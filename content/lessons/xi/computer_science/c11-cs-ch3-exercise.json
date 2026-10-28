@@ -312,7 +312,27 @@
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "1. Differentiate between well-defined and ill-defined problems within the realm of computational problem-solving.",
-            "explanation": "Well-defined problems have clear goals, inputs, processes and outputs, so an algorithm can be written directly, e.g. checking whether a number is even.\nIll-defined problems have vague or unclear goals and requirements, e.g. \"improving education in Pakistan\".\nAn ill-defined problem must first be broken into clear, measurable goals before it can be solved."
+            "explanation": "A well-defined problem has clear goals, inputs and outputs; an ill-defined problem has vague goals and must first be made clear.",
+            "answer_table": {
+              "header": [
+                "Well-defined problems",
+                "Ill-defined problems"
+              ],
+              "rows": [
+                [
+                  "Clear goals, inputs, processes and outputs",
+                  "Vague or unclear goals and requirements"
+                ],
+                [
+                  "An algorithm can be written directly",
+                  "Must first be broken into clear, measurable goals"
+                ],
+                [
+                  "Example: checking whether a number is even",
+                  "Example: \"improving education in Pakistan\""
+                ]
+              ]
+            }
           },
           {
             "type": "checkpoint",
@@ -324,7 +344,27 @@
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "3. Compare tractable and intractable problems in the context of computational complexity.",
-            "explanation": "Tractable problems can be solved in polynomial time (class P); the time grows at a manageable rate, e.g. sorting with Merge Sort, O(n log n).\nIntractable problems need super-polynomial (often exponential or factorial) time, so large inputs are impractical, e.g. the Travelling Salesman Problem.\nThe difference is how fast the required time grows with the input size."
+            "explanation": "Tractable problems can be solved in polynomial time; intractable problems need time that grows so fast that large inputs are impractical.",
+            "answer_table": {
+              "header": [
+                "Tractable problems",
+                "Intractable problems"
+              ],
+              "rows": [
+                [
+                  "Solved in polynomial time (class P)",
+                  "Need super-polynomial time (often exponential or factorial)"
+                ],
+                [
+                  "Time grows at a manageable rate as the input grows",
+                  "Time grows so fast that large inputs are impractical"
+                ],
+                [
+                  "Example: sorting with Merge Sort, O(n log n)",
+                  "Example: the Travelling Salesman Problem"
+                ]
+              ]
+            }
           },
           {
             "type": "checkpoint",
@@ -342,7 +382,31 @@
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "6. Compare the advantages of Breadth-First Search (BFS) with Depth-First Search (DFS) in graph traversal.",
-            "explanation": "BFS visits nodes level by level using a queue; DFS goes deep along one branch and backtracks, using a stack.\nBFS advantage: finds the shortest path (fewest edges) and suits shallow graphs.\nDFS advantage: uses less memory on deep graphs and suits puzzles and mazes."
+            "explanation": "BFS explores level by level and finds the shortest path; DFS goes deep along one branch and uses less memory on deep graphs.",
+            "answer_table": {
+              "header": [
+                "Breadth-First Search (BFS)",
+                "Depth-First Search (DFS)"
+              ],
+              "rows": [
+                [
+                  "Visits nodes level by level",
+                  "Goes deep along one branch, then backtracks"
+                ],
+                [
+                  "Uses a queue",
+                  "Uses a stack"
+                ],
+                [
+                  "Advantage: finds the shortest path (fewest edges)",
+                  "Advantage: uses less memory on deep graphs"
+                ],
+                [
+                  "Suits shallow graphs",
+                  "Suits puzzles and mazes"
+                ]
+              ]
+            }
           },
           {
             "type": "checkpoint",
@@ -377,7 +441,39 @@
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "3. Discuss the characteristics of search problems and compare the efficiency of Linear Search and Binary Search algorithm.",
-            "explanation": "A search problem is a problem in which the task is to find a solution or an item that meets certain criteria.\nCharacteristics:\n- Input: a collection of data (list, database, graph) and the target or criteria.\n- Output: the item or its position, or the answer that it is not present.\n- The search may need many comparisons; efficiency matters for large datasets.\n- Some methods need the data in a particular form (Binary Search needs sorted data).\n- Used in information retrieval, database queries and decision making.\nLinear Search:\n- Checks each item one by one from the start until the item is found or the list ends.\n- Works on unsorted lists.\n- Time complexity O(n): in the worst case all n items are checked.\n- Example: finding Islamabad in [Karachi, Lahore, Islamabad, Faisalabad] takes 3 checks.\nBinary Search:\n- Works only on a sorted list. Check the middle item; if it is the target, stop; if the target is smaller, search the left half, otherwise the right half; repeat.\n- Time complexity O(log n): the search range is halved at each step.\n- Example: in [1, 3, 5, 7, 9, 11, 13] the target 7 is found at the first check.\nComparison: for 1,000,000 sorted items, Linear Search may need up to 1,000,000 comparisons, but Binary Search needs only about 20 (2^20 is about one million). Binary Search is much faster for large sorted data; Linear Search is simpler and is used for small or unsorted data.\nProgram:\ndef linear_search(items, target):\n    for i in range(len(items)):\n        if items[i] == target:\n            return i\n    return -1\n\ndef binary_search(items, target):\n    low, high = 0, len(items) - 1\n    while low <= high:\n        mid = (low + high) // 2\n        if items[mid] == target:\n            return mid\n        elif target < items[mid]:\n            high = mid - 1\n        else:\n            low = mid + 1\n    return -1\n\ncities = [\"Karachi\", \"Lahore\", \"Islamabad\", \"Faisalabad\"]\nprint(linear_search(cities, \"Islamabad\"))\nprint(binary_search([1, 3, 5, 7, 9, 11, 13], 7))\nOutput:\n2\n3"
+            "explanation": "A search problem is a problem in which the task is to find a solution or an item that meets certain criteria.\nCharacteristics:\n- Input: a collection of data (list, database, graph) and the target or criteria.\n- Output: the item or its position, or the answer that it is not present.\n- The search may need many comparisons; efficiency matters for large datasets.\n- Some methods need the data in a particular form (Binary Search needs sorted data).\n- Used in information retrieval, database queries and decision making.\nLinear Search and Binary Search are compared in the table below: Binary Search is much faster on large sorted data, while Linear Search is simpler and also works on unsorted data.\nProgram:\ndef linear_search(items, target):\n    for i in range(len(items)):\n        if items[i] == target:\n            return i\n    return -1\n\ndef binary_search(items, target):\n    low, high = 0, len(items) - 1\n    while low <= high:\n        mid = (low + high) // 2\n        if items[mid] == target:\n            return mid\n        elif target < items[mid]:\n            high = mid - 1\n        else:\n            low = mid + 1\n    return -1\n\ncities = [\"Karachi\", \"Lahore\", \"Islamabad\", \"Faisalabad\"]\nprint(linear_search(cities, \"Islamabad\"))\nprint(binary_search([1, 3, 5, 7, 9, 11, 13], 7))\nOutput:\n2\n3",
+            "answer_table": {
+              "header": [
+                "Linear Search",
+                "Binary Search"
+              ],
+              "rows": [
+                [
+                  "Checks each item one by one from the start until it is found or the list ends",
+                  "Checks the middle item, then searches only the left or right half; repeats"
+                ],
+                [
+                  "Works on unsorted lists",
+                  "Works only on a sorted list"
+                ],
+                [
+                  "Time complexity O(n): in the worst case all n items are checked",
+                  "Time complexity O(log n): the search range is halved at each step"
+                ],
+                [
+                  "1,000,000 items: up to 1,000,000 comparisons",
+                  "1,000,000 sorted items: only about 20 comparisons (2^20 is about one million)"
+                ],
+                [
+                  "Example: Islamabad in [Karachi, Lahore, Islamabad, Faisalabad] takes 3 checks",
+                  "Example: 7 in [1, 3, 5, 7, 9, 11, 13] is found at the first check"
+                ],
+                [
+                  "Simpler; used for small or unsorted data",
+                  "Much faster for large sorted data"
+                ]
+              ]
+            }
           },
           {
             "type": "checkpoint",
@@ -395,13 +491,81 @@
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "6. Explain the process and time complexity of the Bubble Sort algorithm. Compare it with another sorting algorithm of your choice in terms of efficiency.",
-            "explanation": "Bubble Sort is one of the simplest sorting algorithms. It repeatedly steps through the list, compares adjacent elements and swaps them if they are in the wrong order.\nProcess:\n1. Start from the beginning of the list.\n2. Compare each pair of adjacent elements.\n3. Swap them if they are in the wrong order.\n4. Repeat the passes until no more swaps are needed.\nAfter each pass the largest remaining element \"bubbles\" to its correct place at the end.\nExample: [5, 3, 8, 4, 2]\nPass 1: [3, 5, 4, 2, 8]\nPass 2: [3, 4, 2, 5, 8]\nPass 3: [3, 2, 4, 5, 8]\nPass 4: [2, 3, 4, 5, 8]\nProgram:\ndef bubble_sort(data):\n    n = len(data)\n    for i in range(n - 1):\n        for j in range(n - 1 - i):\n            if data[j] > data[j + 1]:\n                data[j], data[j + 1] = data[j + 1], data[j]\n    return data\n\nprint(bubble_sort([5, 3, 8, 4, 2]))\nOutput: [2, 3, 4, 5, 8]\nTime complexity: O(n²), because for n items about n passes are made, each with up to n comparisons. If the input size doubles, the time becomes about four times. It is easy to understand but inefficient for large datasets.\nComparison with Merge Sort:\n- Merge Sort uses Divide and Conquer: divide the list into halves, sort each half and merge the sorted halves (e.g. [14, 7, 3, 12] becomes [3, 7, 12, 14]).\n- Its time complexity is O(n log n), which grows much more slowly.\n- For 1,000 items: Bubble Sort needs about 1,000,000 steps (n²), Merge Sort about 10,000 (n log2 n).\n- Merge Sort is therefore more efficient for large datasets; Bubble Sort is suitable only for small lists and for learning."
+            "explanation": "Bubble Sort is one of the simplest sorting algorithms. It repeatedly steps through the list, compares adjacent elements and swaps them if they are in the wrong order.\nProcess:\n1. Start from the beginning of the list.\n2. Compare each pair of adjacent elements.\n3. Swap them if they are in the wrong order.\n4. Repeat the passes until no more swaps are needed.\nAfter each pass the largest remaining element \"bubbles\" to its correct place at the end.\nExample: [5, 3, 8, 4, 2]\nPass 1: [3, 5, 4, 2, 8]\nPass 2: [3, 4, 2, 5, 8]\nPass 3: [3, 2, 4, 5, 8]\nPass 4: [2, 3, 4, 5, 8]\nProgram:\ndef bubble_sort(data):\n    n = len(data)\n    for i in range(n - 1):\n        for j in range(n - 1 - i):\n            if data[j] > data[j + 1]:\n                data[j], data[j + 1] = data[j + 1], data[j]\n    return data\n\nprint(bubble_sort([5, 3, 8, 4, 2]))\nOutput: [2, 3, 4, 5, 8]\nTime complexity: O(n²), because for n items about n passes are made, each with up to n comparisons. If the input size doubles, the time becomes about four times. It is easy to understand but inefficient for large datasets.\nComparison with Merge Sort (table below): Merge Sort is more efficient for large datasets; Bubble Sort is suitable only for small lists and for learning.",
+            "answer_table": {
+              "header": [
+                "Bubble Sort",
+                "Merge Sort"
+              ],
+              "rows": [
+                [
+                  "Compares adjacent elements and swaps them if they are in the wrong order; repeats the passes",
+                  "Divide and Conquer: splits the list into halves, sorts each half and merges the sorted halves"
+                ],
+                [
+                  "Time complexity O(n²)",
+                  "Time complexity O(n log n)"
+                ],
+                [
+                  "Doubling the input makes the time about four times",
+                  "Time grows much more slowly"
+                ],
+                [
+                  "1,000 items: about 1,000,000 steps (n²)",
+                  "1,000 items: about 10,000 steps (n log2 n)"
+                ],
+                [
+                  "Example: [5, 3, 8, 4, 2] is sorted in 4 passes",
+                  "Example: [14, 7, 3, 12] becomes [3, 7, 12, 14]"
+                ],
+                [
+                  "Suitable only for small lists and for learning",
+                  "More efficient for large datasets"
+                ]
+              ]
+            }
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "7. Discuss the differences between time complexity and space complexity. How do they impact the choice of an algorithm for a specific problem?",
-            "explanation": "Time complexity: a measure of how the running time of an algorithm increases as the input size grows.\nSpace complexity: a measure of how the amount of memory an algorithm uses changes as the input size grows.\nDifferences:\n1. Resource: time complexity measures time (number of steps); space complexity measures memory.\n2. Examples of time: O(1) accessing an array item by index, O(log n) binary search, O(n) linear search, O(n²) comparing every pair of students.\n3. Examples of space: O(1) a few variables only, O(n) storing a list of n items, O(n²) storing an n x n matrix, O(log n) some divide-and-conquer algorithms.\n4. Both are written in Big O notation, which gives an upper bound (worst case).\nImpact on the choice of an algorithm:\n1. Large inputs need low time complexity: Merge Sort O(n log n) instead of Bubble Sort O(n²); Binary Search O(log n) instead of Linear Search O(n) when data is sorted.\n2. Systems with limited memory (small devices) need low space complexity: e.g. DFS is more memory-efficient than BFS for deep graphs.\n3. Trade-off: some algorithms use more memory to save time, e.g. Dynamic Programming stores subproblem results to avoid repeated calculations.\n4. The problem's needs decide: if speed is critical, choose the faster algorithm; if memory is scarce, choose the one that uses less; for small data a simple algorithm may be good enough.\n5. Scalability: an algorithm with good time and space complexity keeps working efficiently as data grows."
+            "explanation": "Time complexity measures how the running time grows with the input size; space complexity measures how the memory used grows. Their differences are in the table below.\nImpact on the choice of an algorithm:\n1. Large inputs need low time complexity: Merge Sort O(n log n) instead of Bubble Sort O(n²); Binary Search O(log n) instead of Linear Search O(n) when data is sorted.\n2. Systems with limited memory (small devices) need low space complexity: e.g. DFS is more memory-efficient than BFS for deep graphs.\n3. Trade-off: some algorithms use more memory to save time, e.g. Dynamic Programming stores subproblem results to avoid repeated calculations.\n4. The problem's needs decide: if speed is critical, choose the faster algorithm; if memory is scarce, choose the one that uses less; for small data a simple algorithm may be good enough.\n5. Scalability: an algorithm with good time and space complexity keeps working efficiently as data grows.",
+            "answer_table": {
+              "header": [
+                "Time complexity",
+                "Space complexity"
+              ],
+              "rows": [
+                [
+                  "Measures how the running time grows as the input size grows",
+                  "Measures how the memory used changes as the input size grows"
+                ],
+                [
+                  "Resource: time (number of steps)",
+                  "Resource: memory"
+                ],
+                [
+                  "O(1): accessing an array item by index",
+                  "O(1): a few variables only"
+                ],
+                [
+                  "O(log n): binary search",
+                  "O(log n): some divide-and-conquer algorithms"
+                ],
+                [
+                  "O(n): linear search",
+                  "O(n): storing a list of n items"
+                ],
+                [
+                  "O(n²): comparing every pair of students",
+                  "O(n²): storing an n x n matrix"
+                ],
+                [
+                  "Written in Big O notation (upper bound, worst case)",
+                  "Written in Big O notation (upper bound, worst case)"
+                ]
+              ]
+            }
           }
         ]
       }

@@ -306,7 +306,27 @@
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "1. Differentiate between functional and non-functional requirements.",
-            "explanation": "Functional requirements: what the system should do (its functions and tasks), e.g. users can search and borrow books.\nNon-functional requirements: how well the system should do it (performance, usability, reliability, security), e.g. handle 1000 users at the same time.\nFunctional requirements relate to user tasks; non-functional requirements relate to quality and constraints."
+            "explanation": "Functional requirements say what the system should do; non-functional requirements say how well it should do it.",
+            "answer_table": {
+              "header": [
+                "Functional requirements",
+                "Non-functional requirements"
+              ],
+              "rows": [
+                [
+                  "Define what the system should do (its functions and tasks)",
+                  "Define how well the system should do it (its quality)"
+                ],
+                [
+                  "Related to user tasks and system functions",
+                  "Related to performance, usability, reliability and security (quality and constraints)"
+                ],
+                [
+                  "Example: users can search and borrow books",
+                  "Example: the system handles 1000 users at the same time"
+                ]
+              ]
+            }
           },
           {
             "type": "checkpoint",
@@ -342,13 +362,61 @@
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "7. Compare and contrast a Sequence Diagram with an Activity Diagram, highlighting the key differences.",
-            "explanation": "Both are UML diagrams that show the behaviour of a system.\nSequence Diagram: shows how objects interact by sending messages to each other over time (lifelines and arrows).\nActivity Diagram: shows the flow of steps in a process, with decisions and loops (start node, action boxes, decision diamonds).\nKey difference: sequence = who sends which message and when; activity = which steps happen in what order."
+            "explanation": "Both are UML diagrams of system behaviour: a Sequence Diagram shows who sends which message and when, while an Activity Diagram shows which steps happen in what order.",
+            "answer_table": {
+              "header": [
+                "Sequence Diagram",
+                "Activity Diagram"
+              ],
+              "rows": [
+                [
+                  "Shows how objects interact by sending messages to each other",
+                  "Shows the flow of steps (activities) in a process"
+                ],
+                [
+                  "Focus: the order of messages over time",
+                  "Focus: the order of steps, with decisions and loops"
+                ],
+                [
+                  "Drawn with lifelines and message arrows",
+                  "Drawn with a start node, action boxes and decision diamonds"
+                ],
+                [
+                  "Answers: who sends which message, and when?",
+                  "Answers: which steps happen, and in what order?"
+                ]
+              ]
+            }
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "8. Describe the Factory Pattern and explain how it differs from directly creating objects, with an example.",
-            "explanation": "Factory Pattern: a design pattern in which a special factory creates objects for us; we only say what kind we need.\nDirect creation: the program names the exact class itself (Car()), so creation code is spread all over the program.\nWith a factory: the program calls vehicle_factory(\"bike\") and the factory returns Bike(); creation code stays in one place, so new types are easy to add."
+            "explanation": "The Factory Pattern is a design pattern in which a factory creates objects for us: we only say what kind we need instead of naming the exact class ourselves.",
+            "answer_table": {
+              "header": [
+                "Factory Pattern",
+                "Directly creating objects"
+              ],
+              "rows": [
+                [
+                  "A factory creates the object; the program only says what kind it needs",
+                  "The program names the exact class itself"
+                ],
+                [
+                  "Creation code stays in one place",
+                  "Creation code is spread all over the program"
+                ],
+                [
+                  "New types are easy to add (only the factory changes)",
+                  "A new type means changing code in many places"
+                ],
+                [
+                  "Example: vehicle_factory(\"bike\") returns Bike()",
+                  "Example: Car() or Bike() written wherever an object is needed"
+                ]
+              ]
+            }
           },
           {
             "type": "heading",

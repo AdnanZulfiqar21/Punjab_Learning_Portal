@@ -554,7 +554,27 @@
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "9. Differentiate between Elasticity and On-Demand access in cloud computing.",
-            "explanation": "On-demand access: the user gets computing resources instantly whenever needed, e.g. renting extra storage for a project.\nElasticity: the system automatically increases or decreases resources with demand, e.g. a store's servers growing during an Eid sale.\nOn-demand is about getting resources quickly; elasticity is about adjusting them automatically."
+            "explanation": "On-demand access is about getting resources quickly when needed; elasticity is about the system adjusting them automatically.",
+            "answer_table": {
+              "header": [
+                "Elasticity",
+                "On-Demand access"
+              ],
+              "rows": [
+                [
+                  "The system automatically increases or decreases resources with demand",
+                  "The user gets computing resources instantly whenever needed"
+                ],
+                [
+                  "About adjusting resources automatically",
+                  "About getting resources quickly"
+                ],
+                [
+                  "Example: a store's servers grow during an Eid sale",
+                  "Example: renting extra storage for a project"
+                ]
+              ]
+            }
           },
           {
             "type": "heading",
@@ -571,13 +591,98 @@
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "2. Define cloud deployment models and assess the differences among them.",
-            "explanation": "Cloud deployment models define how cloud services are made available and used; each offers different levels of control, security and flexibility (6.2.3). The main models are public, private, hybrid and multi-cloud.\n1. Public cloud (6.2.3.1)\n- Offered over the internet and shared among multiple organizations; managed by a third-party provider.\n- Example: Amazon Web Services (AWS).\n2. Private cloud (6.2.3.2)\n- Used exclusively by one organization; hosted on-premises or by a third party but not shared.\n- Example: a bank's private cloud for sensitive customer data.\n3. Hybrid cloud (6.2.3.3)\n- Combines public and private clouds; data and applications can move between them.\n- Example: everyday work on the public cloud, sensitive data on the private cloud, and extra load moved to the public cloud in busy periods.\n4. Multi-cloud (6.2.3.4)\n- Uses cloud services from several different providers to avoid dependence on one.\n- Example: Google Cloud for analytics, Microsoft Azure for enterprise applications and AWS for backup.\nAssessment of differences (6.2.4):\n- Users: public = many organizations; private = one organization; hybrid = one organization using both; multi-cloud = one organization using several providers.\n- Cost: public is the most cost-effective; private is expensive; hybrid and multi-cloud lie in between depending on use.\n- Security and control: private gives the most; public the least; hybrid keeps critical data private.\n- Strength: public = low cost; private = security; hybrid = flexibility; multi-cloud = resilience and reliability (if one provider fails, others still work).\nChoice depends on the organization's needs: a small business may choose public cloud, a bank private or hybrid, and a large company multi-cloud."
+            "explanation": "Cloud deployment models define how cloud services are made available and used; each offers different levels of control, security and flexibility (6.2.3). The main models are public, private, hybrid and multi-cloud.\nTheir differences are assessed in the table below (6.2.4).\nChoice depends on the organization's needs: a small business may choose public cloud, a bank private or hybrid, and a large company multi-cloud.",
+            "answer_table": {
+              "header": [
+                "Public cloud",
+                "Private cloud",
+                "Hybrid cloud",
+                "Multi-cloud"
+              ],
+              "rows": [
+                [
+                  "Offered over the internet and shared among many organizations; run by a third-party provider",
+                  "Used by one organization only; on-premises or with a third party, but not shared",
+                  "Combines public and private clouds; data and applications can move between them",
+                  "Uses cloud services from several different providers"
+                ],
+                [
+                  "Users: many organizations",
+                  "Users: one organization",
+                  "Users: one organization using both",
+                  "Users: one organization using several providers"
+                ],
+                [
+                  "Cost: the most cost-effective",
+                  "Cost: expensive",
+                  "Cost: in between, depending on use",
+                  "Cost: in between, depending on use"
+                ],
+                [
+                  "Security and control: the least",
+                  "Security and control: the most",
+                  "Security and control: critical data kept private",
+                  "Control: no dependence on a single provider"
+                ],
+                [
+                  "Strength: low cost",
+                  "Strength: security",
+                  "Strength: flexibility",
+                  "Strength: resilience and reliability (if one provider fails, others still work)"
+                ],
+                [
+                  "Example: Amazon Web Services (AWS)",
+                  "Example: a bank's private cloud for sensitive customer data",
+                  "Example: everyday work on public, sensitive data on private, extra load moved to public in busy periods",
+                  "Example: Google Cloud for analytics, Microsoft Azure for enterprise apps, AWS for backup"
+                ]
+              ]
+            }
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "3. Classify the various types of cloud services and compare them, highlighting key distinctions.",
-            "explanation": "Cloud services are classified into three main types, each with a different level of control, flexibility and management (6.2.2).\n1. Infrastructure as a Service (IaaS) (6.2.2.1)\n- Provides basic computing infrastructure: servers, storage and networking on a pay-as-you-go basis.\n- The user controls the operating systems, applications and storage, but not the physical hardware.\n- Examples: Amazon Web Services (renting virtual servers), Microsoft Azure, Google Compute Engine.\n2. Platform as a Service (PaaS) (6.2.2.2)\n- Provides a complete development and deployment environment: infrastructure plus middleware, development tools and management services.\n- Developers focus on coding and deploying applications without managing hardware and software layers.\n- Examples: Google App Engine, Microsoft Azure App Services, Heroku.\n3. Software as a Service (SaaS) (6.2.2.3)\n- Provides ready software applications hosted and managed by the provider; users subscribe and use them over the internet.\n- No hardware management or software updates for the user.\n- Examples: Google Workspace (Gmail, Google Docs, Google Drive), Microsoft Office 365, Salesforce.\nComparison / key distinctions:\n- What is provided: IaaS = raw infrastructure; PaaS = a platform to build apps; SaaS = a finished application.\n- Who manages what: in IaaS the user manages the OS, apps and data; in PaaS only the apps and data; in SaaS the provider manages everything.\n- Control and flexibility: highest in IaaS, medium in PaaS, lowest in SaaS.\n- Ease of use: lowest in IaaS, highest in SaaS.\n- Typical users: IaaS = IT administrators; PaaS = developers; SaaS = end-users.\nAll three are paid according to usage or subscription."
+            "explanation": "Cloud services are classified into three main types, each with a different level of control, flexibility and management (6.2.2).\nThey are compared in the table below.\nAll three are paid according to usage or subscription.",
+            "answer_table": {
+              "header": [
+                "Infrastructure as a Service (IaaS)",
+                "Platform as a Service (PaaS)",
+                "Software as a Service (SaaS)"
+              ],
+              "rows": [
+                [
+                  "Provides: basic infrastructure (servers, storage, networking), pay-as-you-go",
+                  "Provides: a development and deployment platform (infrastructure plus middleware, tools and management services)",
+                  "Provides: ready software applications used over the internet"
+                ],
+                [
+                  "User manages: operating system, applications and data (not the physical hardware)",
+                  "User manages: only the applications and data",
+                  "User manages: nothing; the provider manages everything"
+                ],
+                [
+                  "Control and flexibility: highest",
+                  "Control and flexibility: medium",
+                  "Control and flexibility: lowest"
+                ],
+                [
+                  "Ease of use: lowest",
+                  "Ease of use: in between",
+                  "Ease of use: highest"
+                ],
+                [
+                  "Typical users: IT administrators",
+                  "Typical users: developers",
+                  "Typical users: end-users"
+                ],
+                [
+                  "Examples: Amazon Web Services (renting virtual servers), Microsoft Azure, Google Compute Engine",
+                  "Examples: Google App Engine, Microsoft Azure App Services, Heroku",
+                  "Examples: Google Workspace (Gmail, Google Docs, Google Drive), Microsoft Office 365, Salesforce"
+                ]
+              ]
+            }
           },
           {
             "type": "checkpoint",

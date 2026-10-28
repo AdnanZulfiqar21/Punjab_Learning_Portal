@@ -311,7 +311,27 @@
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "1. Differentiate between functional and non-functional requirements.\nFunctional aur non-functional requirements mein farq bataein.",
-            "explanation": "Functional requirements batati hain ke system KYA kare; non-functional requirements batati hain ke system KITNI achhi tarah (kaise) kare.\nFunctional requirements: system KYA kare (us ke kaam aur functions), maslan user kitab search aur borrow kar sake.\nNon-functional requirements: system KITNI achhi tarah kare (performance, usability, reliability, security), maslan ek waqt mein 1000 users sambhale.\nFunctional ka talluq user ke kaam se hai; non-functional ka quality aur pabandiyon (constraints) se."
+            "explanation": "Functional requirements batati hain ke system KYA kare; non-functional requirements batati hain ke KITNI achhi tarah kare.",
+            "answer_table": {
+              "header": [
+                "Functional requirements",
+                "Non-functional requirements"
+              ],
+              "rows": [
+                [
+                  "System KYA kare (us ke kaam aur functions)",
+                  "System KITNI achhi tarah kare (us ki quality)"
+                ],
+                [
+                  "User ke kaam aur system functions se talluq",
+                  "Performance, usability, reliability aur security (quality aur constraints) se talluq"
+                ],
+                [
+                  "Misal: user kitab search aur borrow kar sake",
+                  "Misal: system ek waqt mein 1000 users sambhale"
+                ]
+              ]
+            }
           },
           {
             "type": "checkpoint",
@@ -347,13 +367,61 @@
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "7. Compare and contrast a Sequence Diagram with an Activity Diagram, highlighting the key differences.\nSequence Diagram aur Activity Diagram ka muqabla karein aur aham farq bataein.",
-            "explanation": "Dono UML diagrams system ka behaviour dikhate hain, magar alag cheezein.\nDono UML diagrams system ka behaviour dikhate hain.\nSequence Diagram: objects waqt ke saath aik doosre ko kaun se messages bhejte hain (lifelines aur arrows).\nActivity Diagram: kisi process ke steps ka flow, decisions aur loops samet (start node, action boxes, decision diamond).\nAham farq: sequence = kaun kis ko kab message bhejta hai; activity = kaun se steps kis tarteeb mein hote hain."
+            "explanation": "Dono UML diagrams system ka behaviour dikhate hain: Sequence Diagram batata hai kaun kis ko kab message bhejta hai, Activity Diagram batata hai kaun se steps kis tarteeb mein hote hain.",
+            "answer_table": {
+              "header": [
+                "Sequence Diagram",
+                "Activity Diagram"
+              ],
+              "rows": [
+                [
+                  "Objects aik doosre ko messages bhej kar kaise interact karte hain",
+                  "Kisi process ke steps (activities) ka flow"
+                ],
+                [
+                  "Focus: waqt ke saath messages ki tarteeb",
+                  "Focus: steps ki tarteeb, decisions aur loops samet"
+                ],
+                [
+                  "Lifelines aur message arrows se banta hai",
+                  "Start node, action boxes aur decision diamonds se banta hai"
+                ],
+                [
+                  "Sawal: kaun kis ko kaun sa message kab bhejta hai?",
+                  "Sawal: kaun se steps kis tarteeb mein hote hain?"
+                ]
+              ]
+            }
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "8. Describe the Factory Pattern and explain how it differs from directly creating objects, with an example.\nFactory Pattern bayan karein aur misal ke saath bataein ke yeh objects ko seedha banane se kaise mukhtalif hai.",
-            "explanation": "Factory Pattern ek design pattern hai jis mein ek \"factory\" hamare liye objects banati hai. Workshop ki tarah: hum batate hain ke kya chahiye aur factory tayyar product de deti hai; hamein yeh jaanna zaroori nahi ke woh kaise bana.\nFactory Pattern: design pattern jis mein ek factory hamare liye objects banati hai; hum sirf batate hain ke kis qisam ka chahiye.\nSeedha banana: program khud exact class ka naam leta hai (Car()), is liye banane ka code har jagah bikhar jata hai.\nFactory se: program vehicle_factory(\"bike\") kehta hai aur factory Bike() bana kar deti hai; code ek jagah rehta hai, nayi qisam add karna aasan."
+            "explanation": "Factory Pattern ek design pattern hai jis mein factory hamare liye objects banati hai: hum sirf batate hain ke kis qisam ka chahiye, class ka naam khud nahi lete.",
+            "answer_table": {
+              "header": [
+                "Factory Pattern",
+                "Directly creating objects"
+              ],
+              "rows": [
+                [
+                  "Object factory banati hai; program sirf batata hai ke kis qisam ka chahiye",
+                  "Program khud exact class ka naam leta hai"
+                ],
+                [
+                  "Banane ka code ek jagah rehta hai",
+                  "Banane ka code poore program mein bikhar jata hai"
+                ],
+                [
+                  "Nayi qisam add karna aasan (sirf factory badalti hai)",
+                  "Nayi qisam ke liye kai jagah code badalna parta hai"
+                ],
+                [
+                  "Misal: vehicle_factory(\"bike\") Bike() de deta hai",
+                  "Misal: jahan object chahiye wahan Car() ya Bike() likhna"
+                ]
+              ]
+            }
           },
           {
             "type": "callout",

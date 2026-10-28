@@ -323,7 +323,27 @@
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "1. Differentiate between well-defined and ill-defined problems within the realm of computational problem-solving.\n(Computational problem-solving mein well-defined aur ill-defined problems mein farq bataiye.)",
-            "explanation": "1. Well-defined problems: goals, inputs, process aur outputs saaf hote hain, is liye un ka algorithm likha ja sakta hai.\nWell-defined problems: goals, inputs, process aur outputs saaf hote hain, is liye algorithm seedha likha ja sakta hai, maslan number even hai ya nahi.\nIll-defined problems: goals aur requirements gol mol (vague) hote hain, maslan \"Pakistan mein taleem behtar karna\".\nIll-defined masle ko pehle saaf aur napne ke qabil goals mein torna parta hai, phir woh hal hota hai."
+            "explanation": "Well-defined masle ke goals, inputs aur outputs saaf hote hain; ill-defined masle ke goals gol mol hote hain aur pehle unhein saaf karna parta hai.",
+            "answer_table": {
+              "header": [
+                "Well-defined problems",
+                "Ill-defined problems"
+              ],
+              "rows": [
+                [
+                  "Goals, inputs, process aur outputs saaf",
+                  "Goals aur requirements gol mol (vague)"
+                ],
+                [
+                  "Algorithm seedha likha ja sakta hai",
+                  "Pehle saaf aur napne ke qabil goals mein torna parta hai"
+                ],
+                [
+                  "Misal: number even hai ya nahi",
+                  "Misal: \"Pakistan mein taleem behtar karna\""
+                ]
+              ]
+            }
           },
           {
             "type": "checkpoint",
@@ -335,7 +355,27 @@
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "3. Compare tractable and intractable problems in the context of computational complexity.\n(Computational complexity ke hawale se tractable aur intractable problems ko compare kijiye.)",
-            "explanation": "Tractable problems:\nTractable problems: polynomial time (class P) mein hal ho jate hain; waqt qaabil-e-intezam raftaar se barhta hai, maslan Merge Sort se sorting, O(n log n).\nIntractable problems: super-polynomial (aksar exponential ya factorial) waqt chahiye, is liye bare input par amli taur par hal mumkin nahi, maslan Travelling Salesman Problem.\nFarq yeh hai ke input barhne par zaroori waqt kitni tezi se barhta hai."
+            "explanation": "Tractable masle polynomial time mein hal ho jate hain; intractable masloon ka waqt itni tezi se barhta hai ke bare input par hal amli taur par mumkin nahi.",
+            "answer_table": {
+              "header": [
+                "Tractable problems",
+                "Intractable problems"
+              ],
+              "rows": [
+                [
+                  "Polynomial time (class P) mein hal",
+                  "Super-polynomial (aksar exponential ya factorial) waqt chahiye"
+                ],
+                [
+                  "Input barhne par waqt qaabil-e-intezam raftaar se barhta hai",
+                  "Waqt itna tez barhta hai ke bara input amli taur par hal nahi hota"
+                ],
+                [
+                  "Misal: Merge Sort se sorting, O(n log n)",
+                  "Misal: Travelling Salesman Problem"
+                ]
+              ]
+            }
           },
           {
             "type": "checkpoint",
@@ -365,7 +405,31 @@
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "6. Compare the advantages of Breadth-First Search (BFS) with Depth-First Search (DFS) in graph traversal.\n(Graph traversal mein Breadth-First Search (BFS) ke faidon ka Depth-First Search (DFS) se comparison kijiye.)",
-            "explanation": "BFS graph ko level by level queue ki madad se dekhta hai; DFS ek branch mein jitna gehra ja sake jata hai, phir wapas (backtrack) aata hai, stack ki madad se. Dono ka waqt O(V + E) hai.\nBFS graph ko level by level queue se dekhta hai; DFS ek branch mein gehra ja kar wapas (backtrack) aata hai, stack se.\nBFS ka faida: shortest path (sab se kam edges) dhoondta hai; shallow (kam gehre) graphs ke liye behtar.\nDFS ka faida: gehre graphs mein memory kam leta hai; puzzles aur mazes (bhool bhulaiyan) ke liye munasib."
+            "explanation": "BFS level by level dekhta hai aur shortest path dhoondta hai; DFS ek branch mein gehra jata hai aur gehre graphs mein kam memory leta hai.",
+            "answer_table": {
+              "header": [
+                "Breadth-First Search (BFS)",
+                "Depth-First Search (DFS)"
+              ],
+              "rows": [
+                [
+                  "Nodes level by level dekhta hai",
+                  "Ek branch mein gehra ja kar wapas (backtrack) aata hai"
+                ],
+                [
+                  "Queue istemal karta hai",
+                  "Stack istemal karta hai"
+                ],
+                [
+                  "Faida: shortest path (sab se kam edges) dhoondta hai",
+                  "Faida: gehre graphs mein kam memory leta hai"
+                ],
+                [
+                  "Shallow (kam gehre) graphs ke liye behtar",
+                  "Puzzles aur mazes (bhool bhulaiyan) ke liye munasib"
+                ]
+              ]
+            }
           },
           {
             "type": "checkpoint",
@@ -412,7 +476,39 @@
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "3. Discuss the characteristics of search problems and compare the efficiency of Linear Search and Binary Search algorithm.\n(Search problems ki characteristics par baat kijiye aur Linear Search aur Binary Search ki efficiency ko compare kijiye.)",
-            "explanation": "Search problem woh masla hai jis mein koi hal ya item dhoondna ho jo khaas shartein poori kare.\nKhasusiyat:\n- Input: data ka majmua (list, database, graph) aur target ya shart.\n- Output: item ya us ki position, ya yeh ke item mojood nahi.\n- Kai comparisons lag sakte hain; bare data par efficiency aham hai.\n- Kuch tareeqon ko data khaas shakal mein chahiye (Binary Search ko sorted data).\n- Information retrieval, database queries aur decision making mein istemal.\nLinear Search:\n- Shuru se har item ek ek kar ke check karti hai jab tak item mil na jaye ya list khatam na ho.\n- Unsorted list par bhi chalti hai.\n- Time complexity O(n): worst case mein tamam n items check.\n- Misal: [Karachi, Lahore, Islamabad, Faisalabad] mein Islamabad 3 checks mein milta hai.\nBinary Search:\n- Sirf sorted list par. Darmiyani item check karo; target ho to ruko; target chhota ho to baayan aadha, warna daayan aadha; dohrao.\n- Time complexity O(log n): har qadam par range aadhi.\n- Misal: [1, 3, 5, 7, 9, 11, 13] mein 7 pehle hi check par mil jata hai.\nMuqabla: 1,000,000 sorted items mein Linear Search ko 1,000,000 tak comparisons, Binary Search ko sirf taqreeban 20 (2^20 taqreeban das lakh). Bare sorted data par Binary Search bohat tez; Linear Search saada hai aur chhote ya unsorted data ke liye.\nProgram:\ndef linear_search(items, target):\n    for i in range(len(items)):\n        if items[i] == target:\n            return i\n    return -1\n\ndef binary_search(items, target):\n    low, high = 0, len(items) - 1\n    while low <= high:\n        mid = (low + high) // 2\n        if items[mid] == target:\n            return mid\n        elif target < items[mid]:\n            high = mid - 1\n        else:\n            low = mid + 1\n    return -1\n\ncities = [\"Karachi\", \"Lahore\", \"Islamabad\", \"Faisalabad\"]\nprint(linear_search(cities, \"Islamabad\"))\nprint(binary_search([1, 3, 5, 7, 9, 11, 13], 7))\nOutput:\n2\n3"
+            "explanation": "Search problem woh masla hai jis mein koi hal ya item dhoondna ho jo khaas shartein poori kare.\nKhasusiyat:\n- Input: data ka majmua (list, database, graph) aur target ya shart.\n- Output: item ya us ki position, ya yeh ke item mojood nahi.\n- Kai comparisons lag sakte hain; bare data par efficiency aham hai.\n- Kuch tareeqon ko data khaas shakal mein chahiye (Binary Search ko sorted data).\n- Information retrieval, database queries aur decision making mein istemal.\nLinear Search aur Binary Search ka muqabla neeche table mein hai: bare sorted data par Binary Search bohat tez hai, jab ke Linear Search saada hai aur unsorted data par bhi chalti hai.\nProgram:\ndef linear_search(items, target):\n    for i in range(len(items)):\n        if items[i] == target:\n            return i\n    return -1\n\ndef binary_search(items, target):\n    low, high = 0, len(items) - 1\n    while low <= high:\n        mid = (low + high) // 2\n        if items[mid] == target:\n            return mid\n        elif target < items[mid]:\n            high = mid - 1\n        else:\n            low = mid + 1\n    return -1\n\ncities = [\"Karachi\", \"Lahore\", \"Islamabad\", \"Faisalabad\"]\nprint(linear_search(cities, \"Islamabad\"))\nprint(binary_search([1, 3, 5, 7, 9, 11, 13], 7))\nOutput:\n2\n3",
+            "answer_table": {
+              "header": [
+                "Linear Search",
+                "Binary Search"
+              ],
+              "rows": [
+                [
+                  "Shuru se har item ek ek kar ke check, jab tak item mil na jaye ya list khatam na ho",
+                  "Darmiyani item check, phir sirf baayan ya daayan aadha; dohrao"
+                ],
+                [
+                  "Unsorted list par bhi chalti hai",
+                  "Sirf sorted list par chalti hai"
+                ],
+                [
+                  "Time complexity O(n): worst case mein tamam n items check",
+                  "Time complexity O(log n): har qadam par range aadhi"
+                ],
+                [
+                  "1,000,000 items: 1,000,000 tak comparisons",
+                  "1,000,000 sorted items: sirf taqreeban 20 comparisons (2^20 taqreeban das lakh)"
+                ],
+                [
+                  "Misal: [Karachi, Lahore, Islamabad, Faisalabad] mein Islamabad 3 checks mein",
+                  "Misal: [1, 3, 5, 7, 9, 11, 13] mein 7 pehle hi check par"
+                ],
+                [
+                  "Saada; chhote ya unsorted data ke liye",
+                  "Bare sorted data par bohat tez"
+                ]
+              ]
+            }
           },
           {
             "type": "callout",
@@ -442,7 +538,39 @@
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "6. Explain the process and time complexity of the Bubble Sort algorithm. Compare it with another sorting algorithm of your choice in terms of efficiency.\n(Bubble Sort algorithm ka process aur time complexity samjhaiye. Apni pasand ke kisi aur sorting algorithm se efficiency ko compare kijiye.)",
-            "explanation": "Bubble Sort sab se saada sorting algorithms mein se hai. Yeh list mein baar baar chalta hai, saath wale (adjacent) elements compare karta hai aur ghalat tarteeb hon to swap karta hai.\nProcess:\n1. List ke shuru se chalo.\n2. Har saath wale jore ko compare karo.\n3. Ghalat tarteeb ho to swap karo.\n4. Passes dohrao jab tak koi swap baqi na rahe.\nHar pass ke baad sab se bara baqi element bulbule (bubble) ki tarah aakhir mein apni jagah pohanch jata hai.\nMisal: [5, 3, 8, 4, 2]\nPass 1: [3, 5, 4, 2, 8]\nPass 2: [3, 4, 2, 5, 8]\nPass 3: [3, 2, 4, 5, 8]\nPass 4: [2, 3, 4, 5, 8]\nProgram:\ndef bubble_sort(data):\n    n = len(data)\n    for i in range(n - 1):\n        for j in range(n - 1 - i):\n            if data[j] > data[j + 1]:\n                data[j], data[j + 1] = data[j + 1], data[j]\n    return data\n\nprint(bubble_sort([5, 3, 8, 4, 2]))\nOutput: [2, 3, 4, 5, 8]\nTime complexity: O(n²), kyunke n items ke liye taqreeban n passes, har ek mein n tak comparisons. Input dugna ho to waqt taqreeban chaar guna. Samajhna aasan magar bare data ke liye inefficient.\nMerge Sort se muqabla:\n- Merge Sort Divide and Conquer istemal karta hai: list ko aadha aadha karo, har aadha sort karo aur sorted hisse jor do (maslan [14, 7, 3, 12] se [3, 7, 12, 14]).\n- Is ki time complexity O(n log n) hai jo bohat aahista barhti hai.\n- 1,000 items par: Bubble Sort taqreeban 1,000,000 steps (n²), Merge Sort taqreeban 10,000 (n log2 n).\n- Is liye bare data ke liye Merge Sort zyada efficient hai; Bubble Sort sirf chhoti lists aur seekhne ke liye theek hai."
+            "explanation": "Bubble Sort sab se saada sorting algorithms mein se hai. Yeh list mein baar baar chalta hai, saath wale (adjacent) elements compare karta hai aur ghalat tarteeb hon to swap karta hai.\nProcess:\n1. List ke shuru se chalo.\n2. Har saath wale jore ko compare karo.\n3. Ghalat tarteeb ho to swap karo.\n4. Passes dohrao jab tak koi swap baqi na rahe.\nHar pass ke baad sab se bara baqi element bulbule (bubble) ki tarah aakhir mein apni jagah pohanch jata hai.\nMisal: [5, 3, 8, 4, 2]\nPass 1: [3, 5, 4, 2, 8]\nPass 2: [3, 4, 2, 5, 8]\nPass 3: [3, 2, 4, 5, 8]\nPass 4: [2, 3, 4, 5, 8]\nProgram:\ndef bubble_sort(data):\n    n = len(data)\n    for i in range(n - 1):\n        for j in range(n - 1 - i):\n            if data[j] > data[j + 1]:\n                data[j], data[j + 1] = data[j + 1], data[j]\n    return data\n\nprint(bubble_sort([5, 3, 8, 4, 2]))\nOutput: [2, 3, 4, 5, 8]\nTime complexity: O(n²), kyunke n items ke liye taqreeban n passes, har ek mein n tak comparisons. Input dugna ho to waqt taqreeban chaar guna. Samajhna aasan magar bare data ke liye inefficient.\nMerge Sort se muqabla (neeche table): bare data ke liye Merge Sort zyada efficient hai; Bubble Sort sirf chhoti lists aur seekhne ke liye theek hai.",
+            "answer_table": {
+              "header": [
+                "Bubble Sort",
+                "Merge Sort"
+              ],
+              "rows": [
+                [
+                  "Saath wale (adjacent) elements compare kar ke ghalat tarteeb par swap; passes dohrata hai",
+                  "Divide and Conquer: list ko aadha aadha karo, har aadha sort karo, phir sorted hisse jor do"
+                ],
+                [
+                  "Time complexity O(n²)",
+                  "Time complexity O(n log n)"
+                ],
+                [
+                  "Input dugna ho to waqt taqreeban chaar guna",
+                  "Waqt bohat aahista barhta hai"
+                ],
+                [
+                  "1,000 items: taqreeban 1,000,000 steps (n²)",
+                  "1,000 items: taqreeban 10,000 steps (n log2 n)"
+                ],
+                [
+                  "Misal: [5, 3, 8, 4, 2] 4 passes mein sort",
+                  "Misal: [14, 7, 3, 12] se [3, 7, 12, 14]"
+                ],
+                [
+                  "Sirf chhoti lists aur seekhne ke liye theek",
+                  "Bare data ke liye zyada efficient"
+                ]
+              ]
+            }
           },
           {
             "type": "callout",
@@ -454,7 +582,43 @@
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "7. Discuss the differences between time complexity and space complexity. How do they impact the choice of an algorithm for a specific problem?\n(Time complexity aur space complexity ke farq par baat kijiye. Yeh kisi khaas masle ke liye algorithm ke choice (chunna) par kaise asar dalte hain?)",
-            "explanation": "Time complexity: input barhne par algorithm ka chalne ka waqt kaise barhta hai, us ka paimana.\nSpace complexity: input barhne par algorithm ki memory kaise badalti hai, us ka paimana.\nFarq:\n1. Resource: time complexity waqt (steps ki tadaad) napti hai; space complexity memory.\n2. Time ki misalein: O(1) index se array item lena, O(log n) binary search, O(n) linear search, O(n²) har student jore ka muqabla.\n3. Space ki misalein: O(1) sirf chand variables, O(n) n items ki list, O(n²) n x n matrix, O(log n) kuch divide-and-conquer algorithms.\n4. Dono Big O notation mein likhi jaati hain jo oopri had (worst case) batata hai.\nAlgorithm ke chunao par asar:\n1. Bare input ke liye kam time complexity: Bubble Sort O(n²) ki jagah Merge Sort O(n log n); sorted data par Linear Search O(n) ki jagah Binary Search O(log n).\n2. Kam memory wale systems (chhote devices) ke liye kam space complexity: maslan gehre graphs mein DFS, BFS se kam memory leta hai.\n3. Trade-off (len den): kuch algorithms waqt bachane ke liye zyada memory lete hain, maslan Dynamic Programming subproblems ke jawab store karta hai.\n4. Masle ki zaroorat faisla karti hai: raftaar zaroori ho to tez algorithm, memory kam ho to kam memory wala; chhote data ke liye saada algorithm bhi kaafi.\n5. Scalability: achhi time aur space complexity wala algorithm data barhne par bhi efficient rehta hai."
+            "explanation": "Time complexity batati hai ke input barhne par chalne ka waqt kaise barhta hai; space complexity batati hai ke memory kaise barhti hai. Farq neeche table mein hain.\nAlgorithm ke chunao par asar:\n1. Bare input ke liye kam time complexity: Bubble Sort O(n²) ki jagah Merge Sort O(n log n); sorted data par Linear Search O(n) ki jagah Binary Search O(log n).\n2. Kam memory wale systems (chhote devices) ke liye kam space complexity: maslan gehre graphs mein DFS, BFS se kam memory leta hai.\n3. Trade-off (len den): kuch algorithms waqt bachane ke liye zyada memory lete hain, maslan Dynamic Programming subproblems ke jawab store karta hai.\n4. Masle ki zaroorat faisla karti hai: raftaar zaroori ho to tez algorithm, memory kam ho to kam memory wala; chhote data ke liye saada algorithm bhi kaafi.\n5. Scalability: achhi time aur space complexity wala algorithm data barhne par bhi efficient rehta hai.",
+            "answer_table": {
+              "header": [
+                "Time complexity",
+                "Space complexity"
+              ],
+              "rows": [
+                [
+                  "Input barhne par chalne ka waqt kaise barhta hai, us ka paimana",
+                  "Input barhne par memory kaise badalti hai, us ka paimana"
+                ],
+                [
+                  "Resource: waqt (steps ki tadaad)",
+                  "Resource: memory"
+                ],
+                [
+                  "O(1): index se array item lena",
+                  "O(1): sirf chand variables"
+                ],
+                [
+                  "O(log n): binary search",
+                  "O(log n): kuch divide-and-conquer algorithms"
+                ],
+                [
+                  "O(n): linear search",
+                  "O(n): n items ki list"
+                ],
+                [
+                  "O(n²): har student jore ka muqabla",
+                  "O(n²): n x n matrix"
+                ],
+                [
+                  "Big O notation mein (oopri had, worst case)",
+                  "Big O notation mein (oopri had, worst case)"
+                ]
+              ]
+            }
           },
           {
             "type": "heading",

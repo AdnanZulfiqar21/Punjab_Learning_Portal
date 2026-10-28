@@ -565,7 +565,27 @@
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "9. Differentiate between Elasticity and On-Demand access in cloud computing.\nCloud computing mein elasticity aur on-demand access mein farq bataiye.",
-            "explanation": "On-demand access: user jab chahe foran computing resources le leta hai, maslan project ke liye mazeed storage.\nElasticity: system demand ke mutabiq resources khud barhata ya ghatata hai, maslan Eid sale mein store ke servers.\nOn-demand foran resource lene ke baare mein hai; elasticity khud adjust hone ke baare mein."
+            "explanation": "On-demand foran resource lene ke baare mein hai; elasticity system ke khud resources adjust karne ke baare mein.",
+            "answer_table": {
+              "header": [
+                "Elasticity",
+                "On-Demand access"
+              ],
+              "rows": [
+                [
+                  "System demand ke mutabiq resources khud barhata ya ghatata hai",
+                  "User jab chahe foran computing resources le leta hai"
+                ],
+                [
+                  "Resources khud adjust hona",
+                  "Resources foran milna"
+                ],
+                [
+                  "Misal: Eid sale mein store ke servers barh jate hain",
+                  "Misal: project ke liye mazeed storage kiraye par lena"
+                ]
+              ]
+            }
           },
           {
             "type": "callout",
@@ -594,7 +614,53 @@
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "2. Define cloud deployment models and assess the differences among them.\nCloud deployment models ki tareef kijiye aur un ke farq ko parakhiye.",
-            "explanation": "Cloud deployment models batate hain ke cloud services kaise milti aur istemal hoti hain; har ek control, security aur flexibility (lachak) ka alag darja deta hai (6.2.3). Bare models: public, private, hybrid aur multi-cloud.\n1. Public cloud (6.2.3.1)\n- Internet par milti hai aur kai organizations mein share hoti hai; third-party (bahar ki company) provider chalata hai.\n- Misal: Amazon Web Services (AWS).\n2. Private cloud (6.2.3.2)\n- Sirf ek organization istemal karti hai; apni jagah par ya third party ke paas, magar share nahi hoti.\n- Misal: bank ki private cloud naazuk customer data ke liye.\n3. Hybrid cloud (6.2.3.3)\n- Public aur private ka mel; data aur applications dono ke darmiyan ja sakte hain.\n- Misal: rozmarra kaam public par, naazuk data private par, aur rush ke dino mein zyada load public par.\n4. Multi-cloud (6.2.3.4)\n- Kai alag providers ki cloud services, ta ke ek par mohtaji na ho.\n- Misal: analytics ke liye Google Cloud, karobari apps ke liye Microsoft Azure aur backup ke liye AWS.\nFarq ki parakh (6.2.4):\n- Istemal karne wale: public = kai organizations; private = ek organization; hybrid = ek organization dono ke saath; multi-cloud = ek organization kai providers ke saath.\n- Kharcha: public sab se sasti; private mehngi; hybrid aur multi-cloud istemal ke hisaab se beech mein.\n- Security aur control: private mein sab se zyada; public mein sab se kam; hybrid zaroori data private rakhti hai.\n- Khoobi: public = kam kharcha; private = security; hybrid = flexibility; multi-cloud = resilience (mazbooti) aur reliability (ek provider band ho to doosre chalte rehte hain).\nChunao zaroorat par hai: chhota karobar public, bank private ya hybrid, aur bari company multi-cloud chun sakti hai."
+            "explanation": "Cloud deployment models batate hain ke cloud services kaise milti aur istemal hoti hain; har ek control, security aur flexibility (lachak) ka alag darja deta hai (6.2.3). Bare models: public, private, hybrid aur multi-cloud.\nIn ke farq neeche table mein parakhe gaye hain (6.2.4).\nChunao zaroorat par hai: chhota karobar public, bank private ya hybrid, aur bari company multi-cloud chun sakti hai.",
+            "answer_table": {
+              "header": [
+                "Public cloud",
+                "Private cloud",
+                "Hybrid cloud",
+                "Multi-cloud"
+              ],
+              "rows": [
+                [
+                  "Internet par milti hai aur kai organizations mein share; third-party provider chalata hai",
+                  "Sirf ek organization; apni jagah ya third party ke paas, magar share nahi",
+                  "Public aur private ka mel; data aur applications dono ke darmiyan ja sakte hain",
+                  "Kai alag providers ki cloud services"
+                ],
+                [
+                  "Users: kai organizations",
+                  "Users: ek organization",
+                  "Users: ek organization dono ke saath",
+                  "Users: ek organization kai providers ke saath"
+                ],
+                [
+                  "Kharcha: sab se sasti",
+                  "Kharcha: mehngi",
+                  "Kharcha: istemal ke hisaab se beech mein",
+                  "Kharcha: istemal ke hisaab se beech mein"
+                ],
+                [
+                  "Security aur control: sab se kam",
+                  "Security aur control: sab se zyada",
+                  "Security aur control: zaroori data private",
+                  "Control: kisi ek provider par mohtaji nahi"
+                ],
+                [
+                  "Khoobi: kam kharcha",
+                  "Khoobi: security",
+                  "Khoobi: flexibility (lachak)",
+                  "Khoobi: resilience (mazbooti) aur reliability (ek provider band ho to doosre chalte rehte hain)"
+                ],
+                [
+                  "Misal: Amazon Web Services (AWS)",
+                  "Misal: bank ki private cloud naazuk customer data ke liye",
+                  "Misal: rozmarra kaam public par, naazuk data private par, rush mein zyada load public par",
+                  "Misal: analytics ke liye Google Cloud, karobari apps ke liye Microsoft Azure, backup ke liye AWS"
+                ]
+              ]
+            }
           },
           {
             "type": "callout",
@@ -606,7 +672,46 @@
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "3. Classify the various types of cloud services and compare them, highlighting key distinctions.\nCloud services ki qismein bata kar un ka comparison (saath rakh kar farq dekhna) kijiye, aur aham farq wazeh kijiye.",
-            "explanation": "Cloud services teen bari qismon mein baanti jati hain; har ek mein control, flexibility aur management ka darja alag hai (6.2.2).\n1. Infrastructure as a Service (IaaS) (6.2.2.1)\n- Bunyadi computing infrastructure deta hai: servers, storage aur networking, jitna istemal utni payment (pay-as-you-go).\n- User operating system, applications aur storage sambhalta hai, magar physical hardware nahi.\n- Misalein: Amazon Web Services (virtual servers kiraye par), Microsoft Azure, Google Compute Engine.\n2. Platform as a Service (PaaS) (6.2.2.2)\n- Development aur deployment ka poora mahol: infrastructure ke saath middleware, development tools aur management services.\n- Developers hardware aur software layers sambhale baghair sirf code likhte aur deploy karte hain.\n- Misalein: Google App Engine, Microsoft Azure App Services, Heroku.\n3. Software as a Service (SaaS) (6.2.2.3)\n- Tayyar software jo provider chalata aur sambhalta hai; user subscription le kar internet par istemal karta hai.\n- User ko na hardware sambhalna na updates karne.\n- Misalein: Google Workspace (Gmail, Google Docs, Google Drive), Microsoft Office 365, Salesforce.\nComparison / aham farq:\n- Kya milta hai: IaaS = khaam infrastructure; PaaS = app banane ka platform; SaaS = mukammal app.\n- Kaun kya sambhalta hai: IaaS mein user OS, apps aur data; PaaS mein sirf apps aur data; SaaS mein sab kuch provider.\n- Control aur flexibility: IaaS mein sab se zyada, PaaS mein darmiyana, SaaS mein sab se kam.\n- Aasani: IaaS mein sab se kam, SaaS mein sab se zyada.\n- Aam users: IaaS = IT administrators; PaaS = developers; SaaS = aam istemal karne wale (end-users).\nTeeno ki payment istemal ya subscription ke hisaab se hoti hai."
+            "explanation": "Cloud services teen bari qismon mein baanti jati hain; har ek mein control, flexibility aur management ka darja alag hai (6.2.2).\nIn ka comparison neeche table mein hai.\nTeeno ki payment istemal ya subscription ke hisaab se hoti hai.",
+            "answer_table": {
+              "header": [
+                "Infrastructure as a Service (IaaS)",
+                "Platform as a Service (PaaS)",
+                "Software as a Service (SaaS)"
+              ],
+              "rows": [
+                [
+                  "Kya milta hai: bunyadi infrastructure (servers, storage, networking), pay-as-you-go",
+                  "Kya milta hai: development aur deployment ka platform (infrastructure ke saath middleware, tools, management services)",
+                  "Kya milta hai: tayyar software jo internet par istemal hota hai"
+                ],
+                [
+                  "User sambhalta hai: operating system, applications aur data (physical hardware nahi)",
+                  "User sambhalta hai: sirf applications aur data",
+                  "User sambhalta hai: kuch nahi; sab kuch provider"
+                ],
+                [
+                  "Control aur flexibility: sab se zyada",
+                  "Control aur flexibility: darmiyana",
+                  "Control aur flexibility: sab se kam"
+                ],
+                [
+                  "Aasani: sab se kam",
+                  "Aasani: beech mein",
+                  "Aasani: sab se zyada"
+                ],
+                [
+                  "Aam users: IT administrators",
+                  "Aam users: developers",
+                  "Aam users: end-users (aam istemal karne wale)"
+                ],
+                [
+                  "Misalein: Amazon Web Services (virtual servers kiraye par), Microsoft Azure, Google Compute Engine",
+                  "Misalein: Google App Engine, Microsoft Azure App Services, Heroku",
+                  "Misalein: Google Workspace (Gmail, Google Docs, Google Drive), Microsoft Office 365, Salesforce"
+                ]
+              ]
+            }
           },
           {
             "type": "callout",
