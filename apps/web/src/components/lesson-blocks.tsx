@@ -209,8 +209,8 @@ function BlockView({
       );
     }
     case "paragraph":
-      // BOOK-STYLE-01: a printed "Example:" becomes a label, and a lead-in line a small heading with an accent bar.
-      if (premium && /^example\s*:$/i.test(str(b.text).trim()) && !marks.length)
+      // BOOK-STYLE-01: a printed "Example:" (Roman Urdu "Misal:") becomes a label, and a lead-in line a small heading with an accent bar.
+      if (premium && /^(example|misal)\s*:$/i.test(str(b.text).trim()) && !marks.length)
         return (
           <p className="inline-flex rounded-full bg-accent-soft px-3 py-0.5 text-xs font-semibold tracking-wide text-accent-strong uppercase">
             {str(b.text).trim().replace(/\s*:$/, "")}

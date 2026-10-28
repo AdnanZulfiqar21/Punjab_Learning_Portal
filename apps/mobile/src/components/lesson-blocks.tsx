@@ -246,8 +246,8 @@ function BlockView({ block: b, assetSource, dataSaver }: { block: Block; assetSo
         </T>
       );
     case "paragraph":
-      // BOOK-STYLE-01: a printed "Example:" becomes a label, and a lead-in line a small heading with an accent bar.
-      if (premium && /^example\s*:$/i.test(str(b.text).trim()) && !marks.length)
+      // BOOK-STYLE-01: a printed "Example:" (Roman Urdu "Misal:") becomes a label, and a lead-in line a small heading with an accent bar.
+      if (premium && /^(example|misal)\s*:$/i.test(str(b.text).trim()) && !marks.length)
         return (
           <View style={{ alignSelf: "flex-start", backgroundColor: c.accentSoft, borderRadius: 999, paddingHorizontal: Space.md, paddingVertical: 2 }}>
             <T variant="eyebrow" style={{ color: c.accent }}>
