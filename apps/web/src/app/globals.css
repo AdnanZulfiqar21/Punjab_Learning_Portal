@@ -123,6 +123,11 @@ html {
   --accent-strong: #7a3b00;
   --accent-soft: #fdeee0;
 }
+/* BOOK-HEADING-01: where the accent is blue (Physics, Computer Science) the third heading level is a deep orange. */
+[data-subject="physics"],
+[data-subject="computer_science"] {
+  --subheading: #a14a00;
+}
 [data-subject="physics"] {
   --accent: #3f46b5;
   --accent-strong: #323893;
@@ -144,6 +149,10 @@ html {
     --accent-strong: #f7c892;
     --accent-soft: #3c2410;
   }
+  :root:not([data-theme="light"]) [data-subject="physics"],
+  :root:not([data-theme="light"]) [data-subject="computer_science"] {
+    --subheading: #f0a35e;
+  }
   :root:not([data-theme="light"]) [data-subject="physics"] {
     --accent: #a4a9f5;
     --accent-strong: #c0c3f8;
@@ -164,6 +173,10 @@ html {
   --accent: #f3b06a;
   --accent-strong: #f7c892;
   --accent-soft: #3c2410;
+}
+:root[data-theme="dark"] [data-subject="physics"],
+:root[data-theme="dark"] [data-subject="computer_science"] {
+  --subheading: #f0a35e;
 }
 :root[data-theme="dark"] [data-subject="physics"] {
   --accent: #a4a9f5;
