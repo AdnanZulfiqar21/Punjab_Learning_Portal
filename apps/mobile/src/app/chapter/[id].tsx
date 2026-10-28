@@ -108,19 +108,21 @@ function Topics({ topics }: { topics: TopicNode[] }) {
 function TopicRow({ topic, depth = 0, token, starred }: { topic: TopicNode; depth?: number; token: string | null; starred: Set<string> | null }) {
   const c = useTheme();
   const [open, setOpen] = useState(false);
-  const expandable = topic.children.length > 0 || topic.points.length > 0;
+  // Subtopics are always listed under their topic, as the book's contents show them (owner, 2026-10-28); only bullet
+  // points fold under "Outline". A main topic's number takes the accent, a subtopic's the text colour.
+  const expandable = topic.points.length > 0;
   return (
-    <View style={{ marginLeft: depth * Space.md }}>
+    <View>
       <View style={{ flexDirection: "row", alignItems: "center", gap: Space.xs, borderBottomWidth: 1, borderBottomColor: c.border }}>
         <Pressable
           accessibilityRole="button"
           accessibilityLabel={topic.number ? `${topic.number} ${topic.title}` : topic.title}
           onPress={() => router.push({ pathname: "/topic/[id]", params: { id: topic.id } })}
           style={({ pressed }) => ({ flex: 1, flexDirection: "row", alignItems: "center", gap: Space.sm, paddingVertical: Space.md, minHeight: 52, opacity: pressed ? 0.7 : 1 })}>
-          <T variant="eyebrow" style={{ width: 40 }}>
+          <T variant="eyebrow" style={{ width: depth ? 56 : 40, color: depth ? c.text : undefined }}>
             {topic.number ?? ""}
           </T>
-          <T style={{ flex: 1, fontWeight: "500" }}>{topic.title}</T>
+          <T style={{ flex: 1, fontWeight: depth ? "400" : "500" }}>{topic.title}</T>
           <T variant="muted" accessibilityElementsHidden>
             ›
           </T>
@@ -141,8 +143,12 @@ function TopicRow({ topic, depth = 0, token, starred }: { topic: TopicNode; dept
               • {p}
             </T>
           ))}
+        </View>
+      )}
+      {topic.children.length > 0 && (
+        <View style={{ marginLeft: Space.lg, borderLeftWidth: 2, borderLeftColor: c.border, paddingLeft: Space.sm }}>
           {topic.children.map((child) => (
-            <TopicRow key={child.id} topic={child} depth={1} token={token} starred={starred} />
+            <TopicRow key={child.id} topic={child} depth={depth + 1} token={token} starred={starred} />
           ))}
         </View>
       )}
