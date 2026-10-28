@@ -13,7 +13,7 @@
           "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
           "pdf_from": 122,
           "pdf_to": 125,
-          "note": "Chapter 4 exercise (PDF 122-125, printed 119-122) as printed, questions only. Long question 7 is printed without its number; its graph (PDF 125) is not drawn here. Answer key (PDF 226) is compared in the Roman Urdu lesson."
+          "note": "Chapter 4 exercise (PDF 122-125, printed 119-122): questions as printed, each with its solution. Long question 7 is printed without its number; its graph (PDF 125) is described in words in the question. MCQ answers follow the chapter's text; where the answer key (PDF 226) differs, a Book correction box follows the question."
         }
       ],
       "body": {
@@ -24,44 +24,292 @@
             "text": "Multiple Choice Questions"
           },
           {
-            "type": "paragraph",
-            "text": "1. Which function is used to add an item at the end of the list in python?\na) insert()\nb) append()\nc) remove()\nd) pop()"
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "1. Which function is used to add an item at the end of the list in python?",
+            "options": [
+              {
+                "id": "a",
+                "text": "insert()"
+              },
+              {
+                "id": "b",
+                "text": "append()"
+              },
+              {
+                "id": "c",
+                "text": "remove()"
+              },
+              {
+                "id": "d",
+                "text": "pop()"
+              }
+            ],
+            "answer_id": "b",
+            "explanation": "append() adds an item to the end of a list (4.1.1.3). insert() adds at a given position, while remove() and pop() delete items."
           },
           {
-            "type": "paragraph",
-            "text": "2. What does the 'in' keyword do when used with python list?\na) Adds an item to the list.\nb) Removes an item from the list.\nc) Checks if an item exists in the list.\nd) Returns the length of the list."
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key at the end of the book (Unit 4) gives (c). (c) remove() deletes an item; by the chapter (4.1.1.3) the function that adds an item at the end is append(), so the answer is (b)."
           },
           {
-            "type": "paragraph",
-            "text": "3. Which operation removes an item from the top of the stack?\na) Push\nb) Pop\nc) Peek\nd) Add"
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "2. What does the 'in' keyword do when used with python list?",
+            "options": [
+              {
+                "id": "a",
+                "text": "Adds an item to the list."
+              },
+              {
+                "id": "b",
+                "text": "Removes an item from the list."
+              },
+              {
+                "id": "c",
+                "text": "Checks if an item exists in the list."
+              },
+              {
+                "id": "d",
+                "text": "Returns the length of the list."
+              }
+            ],
+            "answer_id": "c",
+            "explanation": "The 'in' keyword checks whether an item exists in the list and gives True or False, e.g. if \"Buy cold drinks\" in party_list: (4.1.1.3, Searching)."
           },
           {
-            "type": "paragraph",
-            "text": "4. When converting an infix expression to postfix notation, what does a stack help to manage?\na) Order of operands\nb) Priority of operators\nc) Parentheses\nd) Both b and c"
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "3. Which operation removes an item from the top of the stack?",
+            "options": [
+              {
+                "id": "a",
+                "text": "Push"
+              },
+              {
+                "id": "b",
+                "text": "Pop"
+              },
+              {
+                "id": "c",
+                "text": "Peek"
+              },
+              {
+                "id": "d",
+                "text": "Add"
+              }
+            ],
+            "answer_id": "b",
+            "explanation": "Pop removes the item at the top of the stack (4.1.2.2). Push adds an item and peek only looks at the top item without removing it."
           },
           {
-            "type": "paragraph",
-            "text": "5. Which operation is used to add an item to a queue?\na) Dequeue\nb) Peek\nc) Enqueue\nd) Remove"
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "4. When converting an infix expression to postfix notation, what does a stack help to manage?",
+            "options": [
+              {
+                "id": "a",
+                "text": "Order of operands"
+              },
+              {
+                "id": "b",
+                "text": "Priority of operators"
+              },
+              {
+                "id": "c",
+                "text": "Parentheses"
+              },
+              {
+                "id": "d",
+                "text": "Both b and c"
+              }
+            ],
+            "answer_id": "d",
+            "explanation": "In the conversion (4.1.3.1) operands go straight to the output, so their order needs no stack. The stack holds operators so that a higher or equal priority operator is popped first, and it holds '(' until the matching ')' arrives. So it manages both priority and parentheses."
           },
           {
-            "type": "paragraph",
-            "text": "6. In the context of Breadth-First Search (BFS) in a tree, which operation of queue is used to visit nodes level by level?\na) Adding nodes to the end of a stack.\nb) Removing nodes from the end of a list.\nc) Enqueueing nodes to a queue.\nd) Dequeueing nodes from a stack."
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key at the end of the book (Unit 4) gives (c). The chapter's rules (4.1.3.1) use the stack for operator priority as well as for parentheses (in 3 + 4 * 2 there are no brackets, yet * waits on the stack above +), so the full answer is (d) Both b and c."
           },
           {
-            "type": "paragraph",
-            "text": "7. Which of the following tree traversals visits the root node before its children?\na) In-order\nb) Pre-order\nc) Post-order\nd) Level-order"
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "5. Which operation is used to add an item to a queue?",
+            "options": [
+              {
+                "id": "a",
+                "text": "Dequeue"
+              },
+              {
+                "id": "b",
+                "text": "Peek"
+              },
+              {
+                "id": "c",
+                "text": "Enqueue"
+              },
+              {
+                "id": "d",
+                "text": "Remove"
+              }
+            ],
+            "answer_id": "c",
+            "explanation": "Enqueue adds an item at the back (rear) of the queue (4.1.4.2). Dequeue removes the front item and peek only looks at it."
           },
           {
-            "type": "paragraph",
-            "text": "8. Which of the following is true about the height of a tree?\na) The height is the number of edges from the root to the deepest node\nb) The height is the number of nodes from the root to the deepest node\nc) The height is the number of children of the root node\nd) The height is always equal to the number of nodes in the tree"
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "6. In the context of Breadth-First Search (BFS) in a tree, which operation of queue is used to visit nodes level by level?",
+            "options": [
+              {
+                "id": "a",
+                "text": "Adding nodes to the end of a stack."
+              },
+              {
+                "id": "b",
+                "text": "Removing nodes from the end of a list."
+              },
+              {
+                "id": "c",
+                "text": "Enqueueing nodes to a queue."
+              },
+              {
+                "id": "d",
+                "text": "Dequeueing nodes from a stack."
+              }
+            ],
+            "answer_id": "c",
+            "explanation": "In BFS (4.1.5.2) the children of each visited node are enqueued to the queue, and nodes are taken out from the front, so they are visited level by level. A stack is used by DFS, not BFS."
           },
           {
-            "type": "paragraph",
-            "text": "9. Which graph traversal explores all immediate neighbors of a vertex before moving to the next level?\na) Depth-First Search (DFS)\nb) Breadth-First Search (BFS)\nc) Depth-Limited Search (DLS)\nd) Iterative Deepening Search (IDS)"
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key at the end of the book (Unit 4) gives (b). Removing nodes from the end of a list is stack (LIFO) behaviour. BFS (4.1.5.2) enqueues nodes to a queue and removes them from the front, so the answer is (c)."
           },
           {
-            "type": "paragraph",
-            "text": "10. For which scenario would a graph data structure be most appropriate?\na) Managing a to-do list\nb) Modeling a line of customers in a store\nc) Representing connections in a social network"
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "7. Which of the following tree traversals visits the root node before its children?",
+            "options": [
+              {
+                "id": "a",
+                "text": "In-order"
+              },
+              {
+                "id": "b",
+                "text": "Pre-order"
+              },
+              {
+                "id": "c",
+                "text": "Post-order"
+              },
+              {
+                "id": "d",
+                "text": "Level-order"
+              }
+            ],
+            "answer_id": "b",
+            "explanation": "Pre-order visits the root first, then the left subtree, then the right subtree (4.1.7.1): 1, 2, 4, 5, 3, 6, 7. In-order visits the root between its subtrees and post-order visits it last."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key at the end of the book (Unit 4) gives (d). The chapter (4.1.7.1) defines pre-order as the traversal that visits the root node first, so the answer is (b). (Level-order is not among the chapter's three traversals.)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "8. Which of the following is true about the height of a tree?",
+            "options": [
+              {
+                "id": "a",
+                "text": "The height is the number of edges from the root to the deepest node"
+              },
+              {
+                "id": "b",
+                "text": "The height is the number of nodes from the root to the deepest node"
+              },
+              {
+                "id": "c",
+                "text": "The height is the number of children of the root node"
+              },
+              {
+                "id": "d",
+                "text": "The height is always equal to the number of nodes in the tree"
+              }
+            ],
+            "answer_id": "a",
+            "explanation": "The height is the longest path from the root down to the farthest leaf (4.1.6.1), and a path is counted in edges. In Figure 4.8 (1 to 2 to 4) the height is 2."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key at the end of the book (Unit 4) gives (c). The number of children of the root says nothing about depth: by 4.1.6.1 the height is the longest path from the root to the farthest leaf, counted in edges, so the answer is (a)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "9. Which graph traversal explores all immediate neighbors of a vertex before moving to the next level?",
+            "options": [
+              {
+                "id": "a",
+                "text": "Depth-First Search (DFS)"
+              },
+              {
+                "id": "b",
+                "text": "Breadth-First Search (BFS)"
+              },
+              {
+                "id": "c",
+                "text": "Depth-Limited Search (DLS)"
+              },
+              {
+                "id": "d",
+                "text": "Iterative Deepening Search (IDS)"
+              }
+            ],
+            "answer_id": "b",
+            "explanation": "BFS starts from a source vertex and explores all its immediate neighbours before moving to the next level of vertices (4.1.8.3). DFS goes as deep as possible along a branch first."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key at the end of the book (Unit 4) gives (c). Depth-Limited Search is a depth-first method with a depth limit and is not in the chapter. The chapter (4.1.8.3) gives exactly this description for Breadth-First Search, so the answer is (b)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "10. For which scenario would a graph data structure be most appropriate?",
+            "options": [
+              {
+                "id": "a",
+                "text": "Managing a to-do list"
+              },
+              {
+                "id": "b",
+                "text": "Modeling a line of customers in a store"
+              },
+              {
+                "id": "c",
+                "text": "Representing connections in a social network"
+              }
+            ],
+            "answer_id": "c",
+            "explanation": "Graphs are best for networked data such as social networks, where users are vertices and friendships are edges (4.1.8, 4.2.5). A to-do list suits a list and a line of customers suits a queue (4.2.2, 4.2.3). The book prints only three options."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key at the end of the book (Unit 4) gives (a). A to-do list is an ordered collection, the use the chapter gives for lists (4.2.3). Graphs are for networks such as social networks (4.2.5), so the answer is (c)."
           },
           {
             "type": "heading",
@@ -69,18 +317,52 @@
             "text": "Short Questions"
           },
           {
-            "type": "list",
-            "ordered": true,
-            "items": [
-              "Explain how the ' extend() ' function works in python lists. Provide an example.",
-              "Explain the potential issues which could arise when two variables reference the same list in a program? Provide an example.",
-              "Define a stack and explain the Last-In, First-Out (LIFO) principle.",
-              "How does the stack help in balancing parentheses in an expression? Describe the process.",
-              "Differentiate between the Enqueue and Dequeue operations of queue.",
-              "Explain how the concept of a queue is applied in a computer's job scheduling system?",
-              "How can lists be utilized to implement other data structures?",
-              "Differentiate between the Depth-First Search (DFS) and Breadth-First Search (BFS)."
-            ]
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "1. Explain how the ' extend() ' function works in python lists. Provide an example.",
+            "explanation": "extend() is a list function that adds several items at once to the end of a list. It takes another list (or any sequence) and adds each of its items one by one, in the same order.\n- The original list is changed (it grows by the number of items added).\n- append() adds only one item; extend() adds many items in one call.\nExample (book, 4.1.1.3):\nparty_list = [\"Invite friends\", \"Buy decorations\", \"Buy snacks\", \"Buy cold drinks\"]\nparty_list.extend([\"Party hats\", \"Streamers\"])   # add many items at once\nprint(party_list)\nprint(len(party_list))\nOutput:\n['Invite friends', 'Buy decorations', 'Buy snacks', 'Buy cold drinks', 'Party hats', 'Streamers']\n6\nThe two new items \"Party hats\" and \"Streamers\" are added at the end, and the list now has 6 items."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "2. Explain the potential issues which could arise when two variables reference the same list in a program? Provide an example.",
+            "explanation": "(Beyond the chapter.) In Python, list_b = list_a does not make a new list. Both names now refer to the same list in memory (aliasing).\nIssues:\n- A change made through one name (append, remove, update) also appears through the other name.\n- Data can be changed by mistake in another part of the program, which causes bugs that are hard to find.\n- If a copy was wanted to keep the original safe, the original is lost.\nSolution: make a separate copy with list_a.copy() or list(list_a).\nExample:\nlist_a = [10, 20, 30]\nlist_b = list_a          # list_b refers to the SAME list\nlist_b.append(40)\nprint(\"list_a:\", list_a)\nprint(\"list_b:\", list_b)\nlist_c = list_a.copy()   # a separate copy\nlist_c.append(50)\nprint(\"list_a:\", list_a)\nprint(\"list_c:\", list_c)\nOutput:\nlist_a: [10, 20, 30, 40]\nlist_b: [10, 20, 30, 40]\nlist_a: [10, 20, 30, 40]\nlist_c: [10, 20, 30, 40, 50]\nAppending 40 through list_b also changed list_a, but the copy list_c changed alone."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "3. Define a stack and explain the Last-In, First-Out (LIFO) principle.",
+            "explanation": "A stack is a simple data structure in which items are added and removed only at one end, called the top. Both insertion (push) and deletion (pop) happen at the top.\nLIFO principle (Last-In, First-Out): the item added last is the first one to be removed.\n- Push adds an item on the top; pop removes the top item.\n- Example: in a stack of books on a desk you can only put a book on top or take the top book off. If Book A, Book B and Book C are pushed, Book C (the last in) is popped first."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "4. How does the stack help in balancing parentheses in an expression? Describe the process.",
+            "explanation": "Balanced parentheses means every opening parenthesis ( has a matching closing parenthesis ). A stack keeps track of the opening parentheses (4.1.3.4).\nProcess:\n1. Read the expression from left to right.\n2. When ( is found, push it onto the stack.\n3. When ) is found, pop the top of the stack.\n4. If you try to pop from an empty stack, the parentheses are not balanced.\n5. At the end, if the stack is empty they are balanced; if it is not empty they are not balanced.\nExample: (3 + 4) * (5 - 2): push, pop, push, pop, the stack ends empty, so it is balanced. In ((3 + 4) * 2 one ( is left on the stack, so it is not balanced."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "5. Differentiate between the Enqueue and Dequeue operations of queue.",
+            "explanation": "Enqueue and Dequeue are the two primary operations of a queue (4.1.4.2), which follows FIFO (First-In, First-Out).\n- Enqueue adds an item; Dequeue removes an item.\n- Enqueue works at the back (rear) of the queue; Dequeue works at the front.\n- Enqueue is like a new person joining the end of a line; Dequeue is like serving the person at the front.\n- Enqueue increases the size of the queue; Dequeue decreases it and returns the removed item.\n- In Python's queue module: q.put(item) enqueues and q.get() dequeues."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "6. Explain how the concept of a queue is applied in a computer's job scheduling system?",
+            "explanation": "In job (task) scheduling, the computer keeps the tasks waiting to be processed in a queue, so they are handled in the order they arrive (FIFO), like patients on a doctor's waiting list (4.1.5.3).\n- Enqueue: when a new task arrives (e.g. you press Print), it is added to the end of the queue.\n- Dequeue: when the computer (processor or printer) is ready, it removes the first task from the front and processes it.\n- Why a queue: tasks are processed in order of arrival, none is skipped, and every task is treated fairly and efficiently.\nExample: print spooling, where documents sent to a printer are printed one by one in the order they were sent."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "7. How can lists be utilized to implement other data structures?",
+            "explanation": "A list is a flexible, ordered collection, so it is used as the building block of other data structures (4.1.1.4, 4.2.3).\n- Stack (LIFO): append() pushes an item on the top and pop() removes the top item.\n- Queue (FIFO): append() adds at the back and pop(0) removes from the front.\n- Tree: each node keeps a list of its children (self.children = [] in the FamilyMember class, 4.1.6.1).\n- Graph: each vertex keeps a list of its neighbours (adjacency list).\n- Matrix: a list of lists, where each inner list is a row.\nExample: stack = []; stack.append(5); stack.append(8); stack.pop() returns 8."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "8. Differentiate between the Depth-First Search (DFS) and Breadth-First Search (BFS).",
+            "explanation": "DFS and BFS are the two ways to traverse a graph or tree (4.1.8.3, 4.3.2, 4.3.3).\n- Method: DFS goes as far (deep) as possible along each branch before backtracking; BFS visits all immediate neighbours of a vertex (the whole level) before moving to the next level.\n- Data structure: DFS uses a stack (LIFO); BFS uses a queue (FIFO).\n- Order on the tree of Figure 4.13: DFS gives 1, 2, 5, 6, 3, 7, 4, 8, 9; BFS gives 1, 2, 3, 4, 5, 6, 7, 8, 9.\n- Use: DFS suits deep exploration and backtracking problems such as mazes; BFS finds the shortest path in unweighted graphs and explores level by level."
           },
           {
             "type": "heading",
@@ -88,54 +370,52 @@
             "text": "Long Questions"
           },
           {
-            "type": "paragraph",
-            "text": "1. Discuss the dynamic size property of lists in Python. How does this property make lists more flexible?"
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "1. Discuss the dynamic size property of lists in Python. How does this property make lists more flexible?",
+            "explanation": "Dynamic size: a list in Python can change its size while the program runs. Items can be added or removed at any time, and the list automatically adjusts to fit the changes (4.1.1.2). Its size never has to be fixed in advance.\nHow the size changes:\n- Grows: append() adds one item at the end, insert() adds at a position, extend() adds many items.\n- Shrinks: remove() deletes by value, pop() deletes by index, clear() removes all items.\n- len() always gives the current number of items.\nHow it makes lists flexible:\n1. Unknown amount of data: we can store data whose count is not known beforehand, such as user input, a to-do list or a shopping cart.\n2. No wasted memory: the list uses space only for the items it holds; Python manages the memory.\n3. Easy changes: tasks can be added or crossed off at any time, like a to-do list.\n4. Together with mutability, ordering and heterogeneous elements, it lets one list be used to build stacks and queues that grow and shrink.\nExample:\nitems = [\"Decorations\", \"Snacks\"]\nprint(\"Start:\", items, \"Size:\", len(items))\nitems.append(\"Plates\")                      # list grows\nitems.insert(0, \"Balloons\")\nitems.extend([\"Cold drinks\", \"Party hats\"])\nprint(\"After adding:\", items, \"Size:\", len(items))\nitems.remove(\"Snacks\")                      # list shrinks\nitems.pop()\nprint(\"After removing:\", items, \"Size:\", len(items))\nOutput:\nStart: ['Decorations', 'Snacks'] Size: 2\nAfter adding: ['Balloons', 'Decorations', 'Snacks', 'Plates', 'Cold drinks', 'Party hats'] Size: 6\nAfter removing: ['Balloons', 'Decorations', 'Plates', 'Cold drinks'] Size: 4\nThe same list grew from 2 to 6 items and then shrank to 4 without declaring any size."
           },
           {
-            "type": "paragraph",
-            "text": "2. Write a python program to manage a project's task list. Start with an initial list containing the following tasks=[design, development, testing, deployment]. Perform the following operations on the tasks list:"
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "2. Write a python program to manage a project's task list. Start with an initial list containing the following tasks=[design, development, testing, deployment]. Perform the following operations on the tasks list:\n- Add 'review' to the end of the list.\n- Insert 'planning' at the third position in the list.\n- Update 'testing' to quality assurance.\n- Remove 'development ' from the list by its value.\n- Remove the task at index 1 from the list.\n- Find the index of the task 'deployment ' and print it.\n- Print the final list after all modifications.\n- Count and print the number of tasks in the list.",
+            "explanation": "Program (list operations of 4.1.1.3):\ntasks = [\"design\", \"development\", \"testing\", \"deployment\"]\n\ntasks.append(\"review\")                       # 1. add 'review' at the end\ntasks.insert(2, \"planning\")                  # 2. insert at the third position (index 2)\ni = tasks.index(\"testing\")                   # 3. update 'testing'\ntasks[i] = \"quality assurance\"\ntasks.remove(\"development\")                  # 4. remove by value\ntasks.pop(1)                                 # 5. remove the task at index 1\nprint(\"Index of deployment:\", tasks.index(\"deployment\"))   # 6\nprint(\"Final list:\", tasks)                  # 7\nprint(\"Number of tasks:\", len(tasks))        # 8\nOutput:\nIndex of deployment: 2\nFinal list: ['design', 'quality assurance', 'deployment', 'review']\nNumber of tasks: 4\nHow the list changes:\n1. append: ['design', 'development', 'testing', 'deployment', 'review']\n2. insert at index 2 (third position): ['design', 'development', 'planning', 'testing', 'deployment', 'review']\n3. update: ['design', 'development', 'planning', 'quality assurance', 'deployment', 'review']\n4. remove('development'): ['design', 'planning', 'quality assurance', 'deployment', 'review']\n5. pop(1) removes 'planning': ['design', 'quality assurance', 'deployment', 'review']\n6. 'deployment' is at index 2; the final list has 4 tasks."
           },
           {
-            "type": "list",
-            "ordered": false,
-            "items": [
-              "Add 'review' to the end of the list.",
-              "Insert 'planning' at the third position in the list.",
-              "Update 'testing' to quality assurance.",
-              "Remove 'development ' from the list by its value.",
-              "Remove the task at index 1 from the list.",
-              "Find the index of the task 'deployment ' and print it.",
-              "Print the final list after all modifications.",
-              "Count and print the number of tasks in the list."
-            ]
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "3. Discuss two real-world situations where stacks are commonly used. Explain how stack operations function in these contexts.",
+            "explanation": "A stack follows LIFO: the last item pushed is the first popped. Two common real-world uses (4.1.3):\n1. Undo mechanism in text editors (Notepad, Microsoft Word) (4.1.3.5)\n- Performing actions: every change you make (typing or deleting text) is pushed onto the stack. Typing \"Hello\" pushes that action.\n- Undoing: pressing Undo pops the most recent action and the editor reverses it (it deletes \"Hello\").\n- Multiple undos: pressing Undo again pops the action before it. If \"World\" was typed after \"Hello\", the first Undo removes \"World\" and the second removes \"Hello\", in reverse order of performing them.\n2. Function call management in programs (4.1.3.3)\n- When a function is called, its details (what it must do and where to return when finished) are pushed onto the stack, like writing a caller's name on top of a notepad.\n- If that function calls another function, the new details are pushed on top.\n- When a function finishes, its details are popped, like crossing off the name, and the computer returns to the function below it on the stack.\n- So the most recently called function always finishes first.\nOther examples: a browser's Back button (each visited page is pushed; Back pops the current page) and a pile of plates or books."
           },
           {
-            "type": "paragraph",
-            "text": "3. Discuss two real-world situations where stacks are commonly used. Explain how stack operations function in these contexts."
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "4. Consider the following infix expression (5 + 2) * (3 - 1).\n(a) Describe the step-by-step process to convert this infix expression into postfix notation using a stack.\n(b) Illustrate the state of the stack and the output list after processing each token of the infix expression.\nHint: A token is a single element in an expression, such as a number, operator, or parenthesis.",
+            "explanation": "(a) Process (rules of 4.1.3.1):\n1. Start with an empty stack and an empty output list.\n2. Read the infix expression from left to right, one token at a time.\n3. Operand (number): add it directly to the output list.\n4. Operator (+, -, *): if the top of the stack has an operator of higher or equal priority, pop it to the output first; then push the new operator. (A '(' on top is never popped by an operator.)\n5. Left parenthesis (: push it onto the stack.\n6. Right parenthesis ): pop operators to the output until a ( is found; remove the ( but do not add it to the output.\n7. At the end, pop all remaining operators to the output.\n(b) State after each token:\nToken | Action | Stack | Output\n( | push ( | ( | (empty)\n5 | operand to output | ( | 5\n+ | push + (top is '(') | ( + | 5\n2 | operand to output | ( + | 5 2\n) | pop until '(' ; discard '(' | (empty) | 5 2 +\n* | push * (stack empty) | * | 5 2 +\n( | push ( | * ( | 5 2 +\n3 | operand to output | * ( | 5 2 + 3\n- | push - (top is '(') | * ( - | 5 2 + 3\n1 | operand to output | * ( - | 5 2 + 3 1\n) | pop until '(' ; discard '(' | * | 5 2 + 3 1 -\nend | pop remaining operators | (empty) | 5 2 + 3 1 - *\nPostfix expression: 5 2 + 3 1 - *\nCheck by evaluating the postfix with a stack (4.1.3.2): push 5, push 2, + gives 7; push 3, push 1, - gives 2; * gives 7 x 2 = 14, the same as (5 + 2) * (3 - 1) = 14."
           },
           {
-            "type": "paragraph",
-            "text": "4. Consider the following infix expression (5 + 2) * (3 - 1).\n(a) Describe the step-by-step process to convert this infix expression into postfix notation using a stack.\n(b) Illustrate the state of the stack and the output list after processing each token of the infix expression.\nHint: A token is a single element in an expression, such as a number, operator, or parenthesis."
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "5. Write a Python code to simulate a queue of print jobs. The code perform following operations:\n(a) Create an empty queue.\n(b) Add three print jobs to the queue.\n(c) Display the print job at the front of the queue without removing it.\n(d) Remove the print job from the front of the queue.\n(e) Add another print job to the queue.\n(f) Display the updated queue of print jobs.",
+            "explanation": "Program (using Python's built-in queue module, as in 4.1.4.2):\nfrom queue import Queue\n\nprint_queue = Queue()                    # (a) create an empty queue\n\nprint_queue.put(\"Job 1: Report.pdf\")     # (b) add three print jobs (enqueue)\nprint_queue.put(\"Job 2: Notes.docx\")\nprint_queue.put(\"Job 3: Photo.png\")\n\nprint(\"Front job:\", print_queue.queue[0])        # (c) peek at the front job\n\nremoved = print_queue.get()                      # (d) remove the front job (dequeue)\nprint(\"Printed and removed:\", removed)\n\nprint_queue.put(\"Job 4: Slides.pptx\")            # (e) add another job\n\nprint(\"Updated queue:\", list(print_queue.queue)) # (f) display the queue\nOutput:\nFront job: Job 1: Report.pdf\nPrinted and removed: Job 1: Report.pdf\nUpdated queue: ['Job 2: Notes.docx', 'Job 3: Photo.png', 'Job 4: Slides.pptx']\nExplanation:\n- Queue() creates an empty FIFO queue.\n- put() enqueues a job at the back; three jobs are added.\n- print_queue.queue[0] peeks at the front job without removing it.\n- get() dequeues (removes and returns) the front job, Job 1, which was added first.\n- Job 4 joins the back, so the updated queue is Job 2, Job 3, Job 4.\n(The file names are only examples.)"
           },
           {
-            "type": "paragraph",
-            "text": "5. Write a Python code to simulate a queue of print jobs. The code perform following operations:\n(a) Create an empty queue.\n(b) Add three print jobs to the queue.\n(c) Display the print job at the front of the queue without removing it.\n(d) Remove the print job from the front of the queue.\n(e) Add another print job to the queue.\n(f) Display the updated queue of print jobs."
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "6. Explain the different types of tree traversals (In-order, Pre-order, Post-order). Provide an example of each traversal using a given tree structure, and explain how each traversal method processes the nodes.",
+            "explanation": "Tree traversal means visiting every node of a tree exactly once in a fixed order (4.1.7.1). Each method is applied again (recursively) to every subtree.\nExample tree (Figure 4.8): root 1; left child 2 and right child 3; 2 has children 4 (left) and 5 (right); 3 has children 6 (left) and 7 (right).\n1. In-order traversal (Left, Root, Right)\n- Visit the left subtree first, then the root node, and finally the right subtree.\n- Processing: 4 (leftmost node of 2), 2, 5, then the root 1, then 6, 3, 7.\n- Output: 4, 2, 5, 1, 6, 3, 7\n2. Pre-order traversal (Root, Left, Right)\n- Visit the root node first, then the left subtree, then the right subtree.\n- Processing: 1 (root), 2, 4, 5, then 3, 6, 7.\n- Output: 1, 2, 4, 5, 3, 6, 7\n- Use: backing up a file system, since a folder is visited before its contents.\n3. Post-order traversal (Left, Right, Root)\n- Visit the left subtree first, then the right subtree, and the root node last.\n- Processing: 4, 5, 2, then 6, 7, 3, and finally the root 1.\n- Output: 4, 5, 2, 6, 7, 3, 1\n- Use: deleting a file system, since sub-folders and files are deleted before the parent folder.\nProgram that builds the same tree and prints all three traversals:\nclass Node:\n    def __init__(self, value, left=None, right=None):\n        self.value = value\n        self.left = left\n        self.right = right\n\ndef in_order(node):\n    if node:\n        in_order(node.left)\n        print(node.value, end=\" \")\n        in_order(node.right)\n\ndef pre_order(node):\n    if node:\n        print(node.value, end=\" \")\n        pre_order(node.left)\n        pre_order(node.right)\n\ndef post_order(node):\n    if node:\n        post_order(node.left)\n        post_order(node.right)\n        print(node.value, end=\" \")\n\nroot = Node(1, Node(2, Node(4), Node(5)), Node(3, Node(6), Node(7)))\nprint(\"In-order:\", end=\" \"); in_order(root); print()\nprint(\"Pre-order:\", end=\" \"); pre_order(root); print()\nprint(\"Post-order:\", end=\" \"); post_order(root); print()\nOutput:\nIn-order: 4 2 5 1 6 3 7\nPre-order: 1 2 4 5 3 6 7\nPost-order: 4 5 2 6 7 3 1"
           },
           {
-            "type": "paragraph",
-            "text": "6. Explain the different types of tree traversals (In-order, Pre-order, Post-order). Provide an example of each traversal using a given tree structure, and explain how each traversal method processes the nodes."
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "7. Consider the following graph and perform the operations specified below:\n[Graph as printed: A has arrows to B, C and D; B has arrows to E and F; C has an arrow to G; D has arrows to H and I.]\n(a) Start from node A, write down the sequence of nodes visited during a depth-first search traversal of the graph.\n(b) Start from node A, write down the sequence of nodes visited throughout a breadth-first search traversal of the graph.",
+            "explanation": "Neighbours are taken from left to right, as in the book's examples (4.3.2, 4.3.3).\n(a) Depth-first search (DFS) with a stack:\n- Push A. Pop A, visit it, push its children D, C, B (so B is on top). Stack: [D, C, B]\n- Pop B, visit it, push F, E. Stack: [D, C, F, E]\n- Pop E, visit it (no children). Stack: [D, C, F]\n- Pop F, visit it. Stack: [D, C]\n- Pop C, visit it, push G. Stack: [D, G]\n- Pop G, visit it. Stack: [D]\n- Pop D, visit it, push I, H. Stack: [I, H]\n- Pop H, visit it. Stack: [I]\n- Pop I, visit it. Stack: [] (empty, traversal ends)\nDFS order: A, B, E, F, C, G, D, H, I\n(b) Breadth-first search (BFS) with a queue:\n- Enqueue A. Dequeue A, visit it, enqueue B, C, D. Queue: [B, C, D]\n- Dequeue B, visit it, enqueue E, F. Queue: [C, D, E, F]\n- Dequeue C, visit it, enqueue G. Queue: [D, E, F, G]\n- Dequeue D, visit it, enqueue H, I. Queue: [E, F, G, H, I]\n- Dequeue E, F, G, H and I in turn (none has children). Queue: [] (empty, traversal ends)\nBFS order: A, B, C, D, E, F, G, H, I\nDFS finishes each branch (A-B-E-F) before the next, while BFS visits level by level (A; then B, C, D; then E, F, G, H, I)."
           },
           {
-            "type": "paragraph",
-            "text": "Consider the following graph and perform the operations specified below:"
-          },
-          {
-            "type": "paragraph",
-            "text": "Required Operations:\n(a) Start from node A, write down the sequence of nodes visited during a depth-first search traversal of the graph.\n(b) Start from node A, write down the sequence of nodes visited throughout a breadth-first search traversal of the graph."
-          },
-          {
-            "type": "paragraph",
-            "text": "8. Consider the task of organizing a desk. Describe how you can use both a stack and a queue to manage tasks such as sorting papers, putting away books, and cleaning the desk."
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "8. Consider the task of organizing a desk. Describe how you can use both a stack and a queue to manage tasks such as sorting papers, putting away books, and cleaning the desk.",
+            "explanation": "Combining structures (4.3): a queue decides the order of the jobs, and stacks handle the items inside each job.\nQueue for the tasks (FIFO):\n- Enqueue the jobs in the order they should be done: sort papers, put away books, clean the desk.\n- Dequeue them one by one from the front, so each job is done in its planned order and none is skipped (like task scheduling, 4.1.5.3).\nStack for papers and books (LIFO):\n- Papers lie in a pile on the desk; the paper placed last is on top, so it is picked (popped) and filed first.\n- Books are also piled like the stack of books in Figure 4.2; the top book is taken off and put away first.\n- If something is put back by mistake, the most recent action can be undone first, as in an undo stack.\nProgram showing both:\nfrom queue import Queue\n\ntasks = Queue()                       # jobs in the order they must be done (FIFO)\ntasks.put(\"Sort papers\")\ntasks.put(\"Put away books\")\ntasks.put(\"Clean the desk\")\n\npapers = []                           # stack of papers (LIFO)\npapers.append(\"Old test\")\npapers.append(\"Homework\")\npapers.append(\"Notice\")\n\nbooks = [\"Physics\", \"Chemistry\", \"Computer\"]   # stack of books on the desk\n\nwhile not tasks.empty():\n    task = tasks.get()                # dequeue the next task\n    print(\"Task:\", task)\n    if task == \"Sort papers\":\n        while papers:\n            print(\"  File paper:\", papers.pop())   # top paper first\n    elif task == \"Put away books\":\n        while books:\n            print(\"  Shelve book:\", books.pop())   # top book first\n    else:\n        print(\"  Desk is clean\")\nOutput:\nTask: Sort papers\n  File paper: Notice\n  File paper: Homework\n  File paper: Old test\nTask: Put away books\n  Shelve book: Computer\n  Shelve book: Chemistry\n  Shelve book: Physics\nTask: Clean the desk\n  Desk is clean\nThe queue keeps the jobs in order (papers, books, cleaning), and each stack hands over its top item first."
           }
         ]
       }

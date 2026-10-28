@@ -13,7 +13,7 @@
           "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
           "pdf_from": 87,
           "pdf_to": 89,
-          "note": "Chapter 3 exercise as printed: multiple choice, short and long questions (PDF 87-89, printed 84-86); no answers in English."
+          "note": "Chapter 3 exercise as printed (PDF 87-89, printed 84-86), solved: 10 MCQs with keys from the text, 8 short and 7 long questions with model answers; programs run in Python. The printed key (PDF 226, printed 223) gives only MCQs 1-5, and 1, 2, 4, 5 contradict the text; corrected."
         }
       ],
       "body": {
@@ -24,23 +24,147 @@
             "text": "Multiple Choice Questions"
           },
           {
-            "type": "list",
-            "ordered": true,
-            "items": [
-              "Which of the following is a characteristic of a well-defined problem? (a) Ambiguous goals and unclear requirements (b) Vague processes and inputs (c) Clear goals, inputs, processes, and outputs (d) Undefined solutions",
-              "Which complexity class represents problems that can be solved efficiently by a deterministic algorithm? (a) NP (b) NP-hard (c) NP-complete (d) P",
-              "Which of the following is true for unsolvable problems? (a) They can be solved in polynomial time. (b) They cannot be solved by any algorithm. (c) They are always in NP class. (d) They require exponential time to solve.",
-              "What does NP stand for in computational complexity? (a) Non-deterministic Polynomial time (b) Negative Polynomial time (c) Non-trivial Polynomial time (d) Numerical Polynomial time",
-              "Which of the following search algorithm is more efficient for large datasets? (a) Bubble Sort (b) Merge Sort (c) Selection Sort (d) Quick Sort",
-              "In which scenario Dynamic Programming is particularly useful? (a) When problems do not have overlapping subproblems. (b) When a problem can be solved by making a sequence of local choices. (c) When problems have overlapping subproblems and optimal substructure. (d) When a problem can be divided into independent subproblems.",
-              "Which of the following algorithms is used for sorting data by repeatedly stepping through the list and swapping adjacent elements if they are in the wrong order? (a) Selection Sort (b) Quick Sort (c) Bubble Sort (d) Merge Sort",
-              "What is the time complexity of Depth-First Search (DFS) in a graph? (a) O(n log n) (b) O(V²) (c) O(V + E) (d) O(n)",
-              "Which of the following best describes the time complexity? (a) The amount of memory an algorithm needs to execute. (b) The time taken by an algorithm to complete as a function of input size. (c) The algorithm's ability to maintain efficiency as input size grows. (d) The upper bound of an algorithm's space requirements.",
-              "Which of the following algorithms has a time complexity of O(n log n)? (a) Bubble Sort (b) Binary Search (c) Merge Sort (d) Insertion Sort"
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "1. Which of the following is a characteristic of a well-defined problem?",
+            "options": [
+              {
+                "id": "a",
+                "text": "Ambiguous goals and unclear requirements"
+              },
+              {
+                "id": "b",
+                "text": "Vague processes and inputs"
+              },
+              {
+                "id": "c",
+                "text": "Clear goals, inputs, processes, and outputs"
+              },
+              {
+                "id": "d",
+                "text": "Undefined solutions"
+              }
             ],
-            "book_errors": [
-              "search algorithm"
-            ]
+            "answer_id": "c",
+            "explanation": "A well-defined problem has clear goals, inputs, processes and outputs, e.g. checking whether a number is even (3.1.1.2). Ambiguous or vague goals describe an ill-defined problem."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key (printed page 223) gives (b) \"Vague processes and inputs\", which describes an ill-defined problem. Section 3.1.1.2 says a well-defined problem has clear goals, inputs, processes and outputs, so the answer is (c)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "2. Which complexity class represents problems that can be solved efficiently by a deterministic algorithm?",
+            "options": [
+              {
+                "id": "a",
+                "text": "NP"
+              },
+              {
+                "id": "b",
+                "text": "NP-hard"
+              },
+              {
+                "id": "c",
+                "text": "NP-complete"
+              },
+              {
+                "id": "d",
+                "text": "P"
+              }
+            ],
+            "answer_id": "d",
+            "explanation": "Class P contains problems that a computer can solve efficiently (in polynomial time) with a deterministic algorithm, such as sorting (3.3.3.1)."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key gives (a) NP. NP problems can be checked quickly but finding their solution may be hard (3.3.3.2); the class solved efficiently by a deterministic algorithm is P (3.3.3.1), so the answer is (d)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "3. Which of the following is true for unsolvable problems?",
+            "options": [
+              {
+                "id": "a",
+                "text": "They can be solved in polynomial time."
+              },
+              {
+                "id": "b",
+                "text": "They cannot be solved by any algorithm."
+              },
+              {
+                "id": "c",
+                "text": "They are always in NP class."
+              },
+              {
+                "id": "d",
+                "text": "They require exponential time to solve."
+              }
+            ],
+            "answer_id": "b",
+            "explanation": "A problem is unsolvable if no algorithm can be created that solves it for all inputs; the Halting Problem is the example (3.3.1)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "4. What does NP stand for in computational complexity?",
+            "options": [
+              {
+                "id": "a",
+                "text": "Non-deterministic Polynomial time"
+              },
+              {
+                "id": "b",
+                "text": "Negative Polynomial time"
+              },
+              {
+                "id": "c",
+                "text": "Non-trivial Polynomial time"
+              },
+              {
+                "id": "d",
+                "text": "Numerical Polynomial time"
+              }
+            ],
+            "answer_id": "a",
+            "explanation": "NP stands for Non-deterministic Polynomial time (3.3.3.2, 3.3.3.3): a proposed solution can be verified in polynomial time."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key gives (b) \"Negative Polynomial time\". The chapter writes NP as Non-deterministic Polynomial time (3.3.3.3), so the answer is (a)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "5. Which of the following search algorithm is more efficient for large datasets?",
+            "options": [
+              {
+                "id": "a",
+                "text": "Bubble Sort"
+              },
+              {
+                "id": "b",
+                "text": "Merge Sort"
+              },
+              {
+                "id": "c",
+                "text": "Selection Sort"
+              },
+              {
+                "id": "d",
+                "text": "Quick Sort"
+              }
+            ],
+            "answer_id": "b",
+            "explanation": "Merge Sort is O(n log n), which grows much more slowly than the O(n²) of Bubble Sort and Selection Sort, so the chapter calls it more efficient for large datasets (3.5.1). Quick Sort is also O(n log n) on average, but the chapter's own comparison names Merge Sort."
           },
           {
             "type": "callout",
@@ -49,23 +173,188 @@
             "text": "Question 5 asks for a “search algorithm”, but all four options are sorting algorithms; it means a sorting algorithm. Both Merge Sort and Quick Sort (in the average case) take O(n log n) time; the chapter names Merge Sort as more efficient for large datasets (3.5.1)."
           },
           {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key gives (c) Selection Sort, which is O(n²) and \"not efficient for large datasets\" (3.7.1.2). The answer by the text is (b) Merge Sort."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "6. In which scenario Dynamic Programming is particularly useful?",
+            "options": [
+              {
+                "id": "a",
+                "text": "When problems do not have overlapping subproblems."
+              },
+              {
+                "id": "b",
+                "text": "When a problem can be solved by making a sequence of local choices."
+              },
+              {
+                "id": "c",
+                "text": "When problems have overlapping subproblems and optimal substructure."
+              },
+              {
+                "id": "d",
+                "text": "When a problem can be divided into independent subproblems."
+              }
+            ],
+            "answer_id": "c",
+            "explanation": "Dynamic Programming is particularly useful for problems with overlapping subproblems and optimal substructure; it stores the results of subproblems to avoid repeated work (3.6.3)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "7. Which of the following algorithms is used for sorting data by repeatedly stepping through the list and swapping adjacent elements if they are in the wrong order?",
+            "options": [
+              {
+                "id": "a",
+                "text": "Selection Sort"
+              },
+              {
+                "id": "b",
+                "text": "Quick Sort"
+              },
+              {
+                "id": "c",
+                "text": "Bubble Sort"
+              },
+              {
+                "id": "d",
+                "text": "Merge Sort"
+              }
+            ],
+            "answer_id": "c",
+            "explanation": "Bubble Sort repeatedly steps through the list, compares adjacent elements and swaps them if they are in the wrong order (3.7.1.1)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "8. What is the time complexity of Depth-First Search (DFS) in a graph?",
+            "options": [
+              {
+                "id": "a",
+                "text": "O(n log n)"
+              },
+              {
+                "id": "b",
+                "text": "O(V²)"
+              },
+              {
+                "id": "c",
+                "text": "O(V + E)"
+              },
+              {
+                "id": "d",
+                "text": "O(n)"
+              }
+            ],
+            "answer_id": "c",
+            "explanation": "The time complexity of DFS is O(V + E), where V is the number of vertices and E the number of edges, the same as BFS (3.7.3.2)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "9. Which of the following best describes the time complexity?",
+            "options": [
+              {
+                "id": "a",
+                "text": "The amount of memory an algorithm needs to execute."
+              },
+              {
+                "id": "b",
+                "text": "The time taken by an algorithm to complete as a function of input size."
+              },
+              {
+                "id": "c",
+                "text": "The algorithm's ability to maintain efficiency as input size grows."
+              },
+              {
+                "id": "d",
+                "text": "The upper bound of an algorithm's space requirements."
+              }
+            ],
+            "answer_id": "b",
+            "explanation": "Time complexity measures how the running time of an algorithm grows as a function of the input size (3.4.1). Memory needs are space complexity, and keeping efficiency as input grows is scalability."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "10. Which of the following algorithms has a time complexity of O(n log n)?",
+            "options": [
+              {
+                "id": "a",
+                "text": "Bubble Sort"
+              },
+              {
+                "id": "b",
+                "text": "Binary Search"
+              },
+              {
+                "id": "c",
+                "text": "Merge Sort"
+              },
+              {
+                "id": "d",
+                "text": "Insertion Sort"
+              }
+            ],
+            "answer_id": "c",
+            "explanation": "Merge Sort has time complexity O(n log n) (3.5.1). Bubble Sort and Insertion Sort are O(n²), and Binary Search is O(log n)."
+          },
+          {
             "type": "heading",
             "level": 3,
             "text": "Short Questions"
           },
           {
-            "type": "list",
-            "ordered": true,
-            "items": [
-              "Differentiate between well-defined and ill-defined problems within the realm of computational problem-solving.",
-              "Outline the main steps involved in the Generate and Test algorithm.",
-              "Compare tractable and intractable problems in the context of computational complexity.",
-              "Summarize the key idea behind Greedy Algorithms.",
-              "Discuss the advantages of using Dynamic Programming.",
-              "Compare the advantages of Breadth-First Search (BFS) with Depth-First Search (DFS) in graph traversal.",
-              "Explain the importance of breaking down a problem into smaller components in algorithmic thinking.",
-              "Identify the key factors used to evaluate the performance of an algorithm."
-            ]
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "1. Differentiate between well-defined and ill-defined problems within the realm of computational problem-solving.",
+            "explanation": "1. Well-defined problems have clear goals, inputs, processes and outputs, so an algorithm can be written for them.\n   Example: deciding whether a number is even: goal (is it even?), input (one integer), process (check divisibility by 2), output (even or odd).\n2. Ill-defined problems lack clear definitions; their goals and requirements are ambiguous or vague, so they cannot be solved directly by an algorithm until they are made clear.\n   Example: \"improving education in Pakistan\": the goal is broad, and it is not specified how much funding, what kind of teachers or which materials are needed.\nKey difference: a well-defined problem can be turned into exact steps; an ill-defined problem must first be broken into clear, measurable goals."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "2. Outline the main steps involved in the Generate and Test algorithm.",
+            "explanation": "The Generate and Test algorithm finds a solution by producing possible solutions and testing each one. Steps:\n1. Generate: produce a possible solution (randomly, systematically or by a heuristic rule).\n2. Test: check the possible solution against the problem's requirements or constraints.\n3. If it satisfies all conditions, accept it as a valid solution and stop.\n4. If not, generate a new possible solution and repeat steps 1-3.\n5. Stop when a satisfactory solution is found or all possible solutions have been tried.\n(Figure 3.2: Generator, possible solution, Tester, and Stop when the solution is correct.)\nExample: to open a 3-digit lock, try 000, 001, 002 ... and test each code until the lock opens.\nIt is simple and exhaustive but can be very slow for large problem spaces and does not guarantee the optimal solution."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "3. Compare tractable and intractable problems in the context of computational complexity.",
+            "explanation": "Tractable problems:\n- Can be solved in polynomial time (class P); the time grows at a manageable rate as the input grows.\n- Are considered \"efficiently solvable\", even for large inputs.\n- Example: sorting a list with Merge Sort or Quick Sort, O(n log n).\nIntractable problems:\n- Need super-polynomial time, often growing exponentially or factorially with the input size.\n- Are impractical to solve exactly for large inputs, because the time becomes unmanageable.\n- Example: the Travelling Salesman Problem (NP-hard): 4 cities give 4! = 24 routes, 10 cities give 3,628,800 routes.\nBoth kinds are solvable; the difference is how fast the required time and resources grow."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "4. Summarize the key idea behind Greedy Algorithms.",
+            "explanation": "A greedy algorithm builds a solution through a sequence of choices, making at each step the choice that looks best at that moment (locally optimal), in the hope that these choices lead to the best overall (globally optimal) solution. It is used when the problem has optimal substructure.\nExample (coin change): to pay Rs 18 with coins of Rs 10, 5, 2 and 1, always take the largest coin that fits: 10, then 5, then 2, then 1: four coins.\nGreedy algorithms are usually fast and easy to implement, but they do not always guarantee the optimal solution, so the problem must be checked first."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "5. Discuss the advantages of using Dynamic Programming.",
+            "explanation": "Dynamic Programming (DP) solves a problem by breaking it into simpler subproblems and storing their results so that they are not calculated again.\nAdvantages:\n1. No redundant calculations: each subproblem is solved only once and its stored result is reused.\n2. Much faster: problems that take exponential time when solved naively can often be solved in polynomial time.\n3. Well suited to problems with overlapping subproblems and optimal substructure, and to optimization problems.\n4. Gives an exact (optimal) answer built from the optimal answers of the subproblems.\nExample: Fibonacci numbers: DP stores each value (0, 1, 1, 2, 3, 5, 8, ...) and simply adds the last two. Computing the 20th Fibonacci number (6765) takes about 20 additions with DP, while the plain recursive method makes 21,891 function calls (checked in Python)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "6. Compare the advantages of Breadth-First Search (BFS) with Depth-First Search (DFS) in graph traversal.",
+            "explanation": "BFS explores a graph level by level using a queue; DFS goes as deep as possible along a branch, then backtracks, using a stack. Both take O(V + E) time.\nAdvantages of BFS:\n- Visits the nearest nodes first, so it finds the shortest path (fewest edges) between two nodes, e.g. the degree of separation between two people in a social network.\n- Better suited to shallow graphs.\nAdvantages of DFS:\n- More memory-efficient for deep graphs, since it keeps only the current path on the stack.\n- Suited to puzzles and mazes: it follows one path to the end and backtracks at a dead end.\nExample (Figure 3.8 tree): BFS visits 0, 1, 2, 3, 4, 5, 6, 7; DFS visits 0, 1, 4, 5, 2, 6, 3, 7."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "7. Explain the importance of breaking down a problem into smaller components in algorithmic thinking.",
+            "explanation": "Algorithmic thinking means solving problems systematically, step by step. Breaking a large problem into smaller components (decomposition) is important because:\n1. Small parts are easier to understand and solve than the whole problem.\n2. Each part can be solved and tested independently, so errors are easy to find.\n3. The solutions of the parts are combined to solve the original problem; this is the idea of Divide and Conquer (e.g. Merge Sort divides a list into halves, sorts them and merges them).\n4. Parts can be reused in other problems and shared among team members.\n5. Complex tasks become manageable and the final algorithm is clearer and more efficient.\nExample: a student result program can be broken into: input marks, calculate total and percentage, decide grade, print result."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "8. Identify the key factors used to evaluate the performance of an algorithm.",
+            "explanation": "1. Time complexity: how the running time grows as the input size grows, written in Big O notation, e.g. O(1), O(log n), O(n), O(n²).\n2. Space complexity: how much memory the algorithm needs as the input grows, e.g. O(1) constant or O(n) linear space.\n3. Efficiency: how well the algorithm uses time and memory; e.g. Merge Sort O(n log n) is more efficient than Bubble Sort O(n²) for large data.\n4. Scalability: whether it keeps its efficiency when the input becomes much larger.\n5. Suitability for the problem: whether it fits the data and requirements, e.g. Binary Search needs sorted data while Linear Search works on unsorted data.\nBig O usually describes the worst case, which lets us predict performance for large inputs."
           },
           {
             "type": "heading",
@@ -73,17 +362,46 @@
             "text": "Long Questions"
           },
           {
-            "type": "list",
-            "ordered": true,
-            "items": [
-              "Discuss the different complexity classes (P, NP, NP-hard, NP-complete) and their importance in understanding problem difficulty.",
-              "Provide a detailed explanation of why the Halting Problem is considered unsolvable and its implications in computer science.",
-              "Discuss the characteristics of search problems and compare the efficiency of Linear Search and Binary Search algorithm.",
-              "Discuss the nature of optimization problems and provide examples of their applications in real-world scenarios.",
-              "Explain the Backtracking technique with reference to the N-Queens problem. Discuss how the algorithm explores different configurations to solve the problem.",
-              "Explain the process and time complexity of the Bubble Sort algorithm. Compare it with another sorting algorithm of your choice in terms of efficiency.",
-              "Discuss the differences between time complexity and space complexity. How do they impact the choice of an algorithm for a specific problem?"
-            ]
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "1. Discuss the different complexity classes (P, NP, NP-hard, NP-complete) and their importance in understanding problem difficulty.",
+            "explanation": "Complexity classes group problems by how hard they are to solve and how much time they need.\n1. Class P:\n- Problems that a computer can solve efficiently, in polynomial time, with a deterministic algorithm (clear fixed steps).\n- Time grows at a manageable rate as the input grows.\n- Example: sorting [4, 1, 3, 2, 5] into [1, 2, 3, 4, 5].\n2. Class NP (Non-deterministic Polynomial time):\n- Problems whose proposed solution can be verified quickly, although finding the solution may be difficult and slow.\n- Example: Sudoku: checking a filled 9 x 9 grid is easy, solving it from scratch can be hard.\n3. NP-hard:\n- Problems at least as hard as the hardest problems in NP; no efficient algorithm is known.\n- Example: Travelling Salesman Problem: 5 cities give 120 routes, 10 cities 3,628,800 and 20 cities about 2.43 x 10^18.\n4. NP-complete:\n- Problems that are both in NP and as hard as the hardest problems in NP. If one NP-complete problem could be solved efficiently, all NP problems could be.\n- Example: Knapsack problem: a proposed choice of items is easy to check, but finding the most valuable combination within the weight limit becomes very hard as items increase.\nRelationship (Figure 3.4): P lies inside NP; NP-complete is the overlap of NP and NP-hard.\nImportance:\n- Tells us whether a problem can be solved efficiently or whether an exact solution is impractical for large inputs.\n- Helps choose the approach: an exact algorithm for P problems, and approximate or heuristic methods for NP-hard problems.\n- Saves time and resources, and the open question \"Is P equal to NP?\" affects cryptography and algorithm design."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "2. Provide a detailed explanation of why the Halting Problem is considered unsolvable and its implications in computer science.",
+            "explanation": "The Halting Problem asks: given any program and its input, can an algorithm decide whether the program will eventually halt (finish) or run forever?\nWhy it is unsolvable:\n- Alan Turing proved that no general algorithm can answer this for all possible program-input pairs. A problem is unsolvable when no algorithm can solve it in all cases.\n- Idea of the proof (by contradiction):\n1. Suppose an algorithm halts(P, x) exists that always answers correctly whether program P halts on input x.\n2. Build a new program Trouble(P): it calls halts(P, P); if the answer is \"halts\", Trouble loops forever; if the answer is \"runs forever\", Trouble stops.\n3. Now run Trouble on itself. If halts says Trouble halts, Trouble loops forever; if halts says it loops forever, Trouble halts.\n4. Either answer is wrong, so the assumed algorithm cannot exist.\n- Simply running the program does not help: if it has not stopped yet, we can never be sure it will not stop later.\nImplications:\n1. There are limits to what computers can do: some well-stated problems can never be solved by any algorithm.\n2. No tool can perfectly detect every infinite loop or check every program for every bug; real tools give partial or approximate answers.\n3. Before working on a problem, we should first check that it is solvable, to save time and resources.\n4. It led to the classification of problems into solvable and unsolvable, the foundation of computability theory.\n(The proof outline is beyond the chapter, which states Turing's result.)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "3. Discuss the characteristics of search problems and compare the efficiency of Linear Search and Binary Search algorithm.",
+            "explanation": "A search problem is a problem in which the task is to find a solution or an item that meets certain criteria.\nCharacteristics:\n- Input: a collection of data (list, database, graph) and the target or criteria.\n- Output: the item or its position, or the answer that it is not present.\n- The search may need many comparisons; efficiency matters for large datasets.\n- Some methods need the data in a particular form (Binary Search needs sorted data).\n- Used in information retrieval, database queries and decision making.\nLinear Search:\n- Checks each item one by one from the start until the item is found or the list ends.\n- Works on unsorted lists.\n- Time complexity O(n): in the worst case all n items are checked.\n- Example: finding Islamabad in [Karachi, Lahore, Islamabad, Faisalabad] takes 3 checks.\nBinary Search:\n- Works only on a sorted list. Check the middle item; if it is the target, stop; if the target is smaller, search the left half, otherwise the right half; repeat.\n- Time complexity O(log n): the search range is halved at each step.\n- Example: in [1, 3, 5, 7, 9, 11, 13] the target 7 is found at the first check.\nComparison: for 1,000,000 sorted items, Linear Search may need up to 1,000,000 comparisons, but Binary Search needs only about 20 (2^20 is about one million). Binary Search is much faster for large sorted data; Linear Search is simpler and is used for small or unsorted data.\nProgram:\ndef linear_search(items, target):\n    for i in range(len(items)):\n        if items[i] == target:\n            return i\n    return -1\n\ndef binary_search(items, target):\n    low, high = 0, len(items) - 1\n    while low <= high:\n        mid = (low + high) // 2\n        if items[mid] == target:\n            return mid\n        elif target < items[mid]:\n            high = mid - 1\n        else:\n            low = mid + 1\n    return -1\n\ncities = [\"Karachi\", \"Lahore\", \"Islamabad\", \"Faisalabad\"]\nprint(linear_search(cities, \"Islamabad\"))\nprint(binary_search([1, 3, 5, 7, 9, 11, 13], 7))\nOutput:\n2\n3"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "4. Discuss the nature of optimization problems and provide examples of their applications in real-world scenarios.",
+            "explanation": "An optimization problem is a problem in which the goal is to find the best solution according to some criteria, not just any solution.\nNature:\n1. There are many possible (feasible) solutions, and they are compared by a measure such as cost, distance, time or value, which is to be minimized or maximized.\n2. Solutions must satisfy constraints (limits), e.g. a weight capacity or a budget.\n3. The number of possible solutions often grows very fast (factorially or exponentially), so many optimization problems are NP-hard and cannot be solved exactly for large inputs.\n4. They are solved with techniques such as greedy algorithms, dynamic programming, divide and conquer, or approximate/heuristic methods; Generate and Test finds a valid solution but does not guarantee the best one.\nReal-world examples:\n- Travelling Salesman Problem / delivery routes: the shortest route that visits every city (or customer) once and returns to the start, used by courier and food delivery services.\n- Route planning: the shortest or fastest route between two places, as in map apps (and the class activity of visiting five colleges).\n- Knapsack problem: choosing the most valuable items within a weight limit, e.g. loading a truck or choosing projects within a budget.\n- Coin change: paying an amount with the fewest coins (greedy method).\n- Scheduling and timetables: arranging classes, exams or jobs to use the least time and resources (beyond the chapter's examples)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "5. Explain the Backtracking technique with reference to the N-Queens problem. Discuss how the algorithm explores different configurations to solve the problem.",
+            "explanation": "Backtracking builds a solution step by step. If a partial path cannot lead to a solution, the algorithm goes back to the previous step and tries a different choice, like turning back on a wrong road and taking another route. It is used for puzzles and problems with many combinations.\nN-Queens problem (beyond the chapter, which defines backtracking only): place N queens on an N x N chessboard so that no two queens attack each other, i.e. no two share the same row, column or diagonal.\nHow backtracking explores configurations:\n1. Place queens one row at a time, starting with row 1.\n2. In the current row, try columns from left to right; place the queen in the first safe column (no queen in the same column or diagonal above).\n3. Move to the next row and repeat.\n4. If no column in a row is safe, backtrack: remove the queen of the previous row and move it to its next safe column.\n5. Continue until all N queens are placed (a solution) or all configurations have been tried.\nExample (4-Queens):\n- Row 1: column 1. Row 2: column 3 (columns 1 and 2 are attacked). Row 3: no safe column, so backtrack.\n- Row 2 moves to column 4; row 3: column 2; row 4: no safe column, backtrack again. Row 3 has no other safe column and row 2 has no more columns, so backtrack to row 1.\n- Row 1: column 2. Row 2: column 4. Row 3: column 1. Row 4: column 3. All four queens are placed.\nSolution:\n. Q . .\n. . . Q\nQ . . .\n. . Q .\nProgram:\ndef is_safe(queens, row, col):\n    for r, c in enumerate(queens):\n        if c == col or abs(c - col) == row - r:\n            return False\n    return True\n\ndef solve(queens, n):\n    row = len(queens)\n    if row == n:\n        return True\n    for col in range(n):\n        if is_safe(queens, row, col):\n            queens.append(col)\n            if solve(queens, n):\n                return True\n            queens.pop()          # backtrack\n    return False\n\nqueens = []\nsolve(queens, 4)\nprint(\"Queen columns (row 1 to 4):\", [c + 1 for c in queens])\nOutput: Queen columns (row 1 to 4): [2, 4, 1, 3]\nBacktracking rejects a partial configuration as soon as it breaks a rule, so it avoids testing every complete arrangement (for 8 queens it finds the 92 solutions without trying all placements)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "6. Explain the process and time complexity of the Bubble Sort algorithm. Compare it with another sorting algorithm of your choice in terms of efficiency.",
+            "explanation": "Bubble Sort is one of the simplest sorting algorithms. It repeatedly steps through the list, compares adjacent elements and swaps them if they are in the wrong order.\nProcess:\n1. Start from the beginning of the list.\n2. Compare each pair of adjacent elements.\n3. Swap them if they are in the wrong order.\n4. Repeat the passes until no more swaps are needed.\nAfter each pass the largest remaining element \"bubbles\" to its correct place at the end.\nExample: [5, 3, 8, 4, 2]\nPass 1: [3, 5, 4, 2, 8]\nPass 2: [3, 4, 2, 5, 8]\nPass 3: [3, 2, 4, 5, 8]\nPass 4: [2, 3, 4, 5, 8]\nProgram:\ndef bubble_sort(data):\n    n = len(data)\n    for i in range(n - 1):\n        for j in range(n - 1 - i):\n            if data[j] > data[j + 1]:\n                data[j], data[j + 1] = data[j + 1], data[j]\n    return data\n\nprint(bubble_sort([5, 3, 8, 4, 2]))\nOutput: [2, 3, 4, 5, 8]\nTime complexity: O(n²), because for n items about n passes are made, each with up to n comparisons. If the input size doubles, the time becomes about four times. It is easy to understand but inefficient for large datasets.\nComparison with Merge Sort:\n- Merge Sort uses Divide and Conquer: divide the list into halves, sort each half and merge the sorted halves (e.g. [14, 7, 3, 12] becomes [3, 7, 12, 14]).\n- Its time complexity is O(n log n), which grows much more slowly.\n- For 1,000 items: Bubble Sort needs about 1,000,000 steps (n²), Merge Sort about 10,000 (n log2 n).\n- Merge Sort is therefore more efficient for large datasets; Bubble Sort is suitable only for small lists and for learning."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "7. Discuss the differences between time complexity and space complexity. How do they impact the choice of an algorithm for a specific problem?",
+            "explanation": "Time complexity: a measure of how the running time of an algorithm increases as the input size grows.\nSpace complexity: a measure of how the amount of memory an algorithm uses changes as the input size grows.\nDifferences:\n1. Resource: time complexity measures time (number of steps); space complexity measures memory.\n2. Examples of time: O(1) accessing an array item by index, O(log n) binary search, O(n) linear search, O(n²) comparing every pair of students.\n3. Examples of space: O(1) a few variables only, O(n) storing a list of n items, O(n²) storing an n x n matrix, O(log n) some divide-and-conquer algorithms.\n4. Both are written in Big O notation, which gives an upper bound (worst case).\nImpact on the choice of an algorithm:\n1. Large inputs need low time complexity: Merge Sort O(n log n) instead of Bubble Sort O(n²); Binary Search O(log n) instead of Linear Search O(n) when data is sorted.\n2. Systems with limited memory (small devices) need low space complexity: e.g. DFS is more memory-efficient than BFS for deep graphs.\n3. Trade-off: some algorithms use more memory to save time, e.g. Dynamic Programming stores subproblem results to avoid repeated calculations.\n4. The problem's needs decide: if speed is critical, choose the faster algorithm; if memory is scarce, choose the one that uses less; for small data a simple algorithm may be good enough.\n5. Scalability: an algorithm with good time and space complexity keeps working efficiently as data grows."
           }
         ]
       }
