@@ -45,6 +45,9 @@ async function ChapterView({ id, lang }: { id: string; lang: string }) {
   if (!res.ok) notFound();
   const ch = res.data;
   const bc = ch.breadcrumb;
+  // BOOK-EXERCISES-01: the end-of-chapter exercise is solved in Practice, so Learn lists only the book's topics.
+  const topics = ch.topics.filter((t) => t.kind !== "exercise");
+  const exerciseTopics = new Set(ch.topics.filter((t) => t.kind === "exercise").map((t) => t.id));
   const gradeLabel = GRADE_LABEL[bc.grade.number];
   const state = CONTENT_STATE_TEXT[ch.content_state] ?? { label: ch.content_state, detail: "" };
   const exercises = assessmentSummary(ch.assessment_counts);
@@ -76,11 +79,11 @@ async function ChapterView({ id, lang }: { id: string; lang: string }) {
         <h2 id="topics-heading" className="text-lg font-semibold">
           Topics
         </h2>
-        {ch.topics.length === 0 ? (
+        {topics.length === 0 ? (
           <p className="text-muted">No topics are recorded for this chapter.</p>
         ) : (
-          <Suspense fallback={<TopicList topics={ch.topics} favourites={null} />}>
-            <Topics topics={ch.topics} />
+          <Suspense fallback={<TopicList topics={topics} favourites={null} />}>
+            <Topics topics={topics} />
           </Suspense>
         )}
       </section>
@@ -88,7 +91,7 @@ async function ChapterView({ id, lang }: { id: string; lang: string }) {
       <Notice title={state.label}>{state.detail}</Notice>
 
       <Suspense fallback={<SkeletonLines lines={3} label="Loading lessons" />}>
-        <Lessons chapterId={ch.id} topics={ch.topics} lang={lang} />
+        <Lessons chapterId={ch.id} topics={topics} hidden={exerciseTopics} lang={lang} />
       </Suspense>
 
       <section aria-labelledby="source-heading" className="space-y-2 rounded-xl border border-border bg-surface p-4 text-sm">
@@ -139,9 +142,10 @@ const megabytes = (n: number) => (n < 100_000 ? `${Math.max(1, Math.round(n / 10
 const published = (iso: string) => new Date(iso).toLocaleDateString("en-GB", { dateStyle: "medium", timeZone: TIME_ZONE });
 
 /** The chapter's published, independently reviewed lessons (P07), read in place; drafts never appear here. */
-async function Lessons({ chapterId, topics, lang }: { chapterId: string; topics: TopicNode[]; lang: string }) {
+async function Lessons({ chapterId, topics, hidden, lang }: { chapterId: string; topics: TopicNode[]; hidden: Set<string>; lang: string }) {
   const res = await getLessons(chapterId, lang);
-  const lessons: Lesson[] = res.ok ? res.data : [];
+  // BOOK-EXERCISES-01: an exercise's lesson is read in Practice, never in the chapter's run of lessons.
+  const lessons: Lesson[] = res.ok ? res.data.filter((l) => !l.topic_id || !hidden.has(l.topic_id)) : [];
   const token = await sessionToken();
   const doneRes = token && lessons.some((l) => !l.locked) ? await api<string[]>(`/v1/me/chapters/${encodeURIComponent(chapterId)}/completed-lessons`, { token }) : null;
   const done = new Set(doneRes?.ok ? doneRes.data : []);

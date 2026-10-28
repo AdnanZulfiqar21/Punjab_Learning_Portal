@@ -1772,6 +1772,96 @@
         "title": "BookAvailability",
         "type": "object"
       },
+      "BookExerciseOut": {
+        "description": "BOOK-EXERCISES-01: one chapter's end-of-chapter exercise, as Practice lists it.",
+        "properties": {
+          "availability": {
+            "enum": [
+              "published",
+              "private_preview",
+              "unavailable"
+            ],
+            "title": "Availability",
+            "type": "string"
+          },
+          "available_languages": {
+            "items": {
+              "enum": [
+                "en",
+                "ur",
+                "roman_ur"
+              ],
+              "type": "string"
+            },
+            "title": "Available Languages",
+            "type": "array"
+          },
+          "chapter_id": {
+            "format": "uuid",
+            "title": "Chapter Id",
+            "type": "string"
+          },
+          "chapter_number": {
+            "title": "Chapter Number",
+            "type": "integer"
+          },
+          "chapter_title": {
+            "title": "Chapter Title",
+            "type": "string"
+          },
+          "topic_id": {
+            "format": "uuid",
+            "title": "Topic Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "topic_id",
+          "chapter_id",
+          "chapter_number",
+          "chapter_title",
+          "availability",
+          "available_languages"
+        ],
+        "title": "BookExerciseOut",
+        "type": "object"
+      },
+      "BookExercisesOut": {
+        "properties": {
+          "chapter_label": {
+            "title": "Chapter Label",
+            "type": "string"
+          },
+          "exercises": {
+            "items": {
+              "$ref": "#/components/schemas/BookExerciseOut"
+            },
+            "title": "Exercises",
+            "type": "array"
+          },
+          "grade_number": {
+            "title": "Grade Number",
+            "type": "integer"
+          },
+          "subject_code": {
+            "title": "Subject Code",
+            "type": "string"
+          },
+          "subject_name": {
+            "title": "Subject Name",
+            "type": "string"
+          }
+        },
+        "required": [
+          "grade_number",
+          "subject_code",
+          "subject_name",
+          "chapter_label",
+          "exercises"
+        ],
+        "title": "BookExercisesOut",
+        "type": "object"
+      },
       "BookOut": {
         "properties": {
           "authority": {
@@ -16769,6 +16859,14 @@
             "title": "Id",
             "type": "string"
           },
+          "kind": {
+            "enum": [
+              "topic",
+              "exercise"
+            ],
+            "title": "Kind",
+            "type": "string"
+          },
           "number": {
             "anyOf": [
               {
@@ -16807,6 +16905,7 @@
           "id",
           "number",
           "title",
+          "kind",
           "depth",
           "pdf_page",
           "points",
@@ -16847,6 +16946,15 @@
           "grade_number": {
             "title": "Grade Number",
             "type": "integer"
+          },
+          "kind": {
+            "default": "topic",
+            "enum": [
+              "topic",
+              "exercise"
+            ],
+            "title": "Kind",
+            "type": "string"
           },
           "lesson": {
             "anyOf": [
@@ -22519,6 +22627,62 @@
         "summary": "The book for one grade+subject",
         "tags": [
           "curriculum"
+        ]
+      }
+    },
+    "/v1/grades/{grade}/subjects/{subject}/exercises": {
+      "get": {
+        "description": "Which exercises can be opened depends on the caller (a staff preview of a draft), so it is not shared-cached.",
+        "operationId": "book_exercises_v1_grades__grade__subjects__subject__exercises_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "grade",
+            "required": true,
+            "schema": {
+              "maximum": 12,
+              "minimum": 11,
+              "title": "Grade",
+              "type": "integer"
+            }
+          },
+          {
+            "in": "path",
+            "name": "subject",
+            "required": true,
+            "schema": {
+              "maxLength": 40,
+              "minLength": 2,
+              "title": "Subject",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BookExercisesOut"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            },
+            "description": "Validation Error"
+          }
+        },
+        "summary": "Each chapter's end-of-chapter exercise in one class's book, for Practice (BOOK-EXERCISES-01)",
+        "tags": [
+          "lessons"
         ]
       }
     },

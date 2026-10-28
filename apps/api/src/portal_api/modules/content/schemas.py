@@ -287,6 +287,28 @@ class TopicReadingOut(BaseModel):
     next_topic_id: uuid.UUID | None
     # CHAPTER-OPENING-01: the chapter's first topic, where the reader opens with the chapter itself.
     chapter_start: bool = False
+    # BOOK-EXERCISES-01: the chapter's end-of-chapter exercise is read in Practice; Learn never leads into it.
+    kind: Literal["topic", "exercise"] = "topic"
+
+
+class BookExerciseOut(BaseModel):
+    """BOOK-EXERCISES-01: one chapter's end-of-chapter exercise, as Practice lists it."""
+
+    topic_id: uuid.UUID
+    chapter_id: uuid.UUID
+    chapter_number: int
+    chapter_title: str
+    # The same rule as the topic's reading: a published lesson, a staff preview of a draft, or nothing yet.
+    availability: Literal["published", "private_preview", "unavailable"]
+    available_languages: list[Literal["en", "ur", "roman_ur"]]
+
+
+class BookExercisesOut(BaseModel):
+    grade_number: int
+    subject_code: str
+    subject_name: str
+    chapter_label: str
+    exercises: list[BookExerciseOut]
 
 
 class VariantOut(BaseModel):

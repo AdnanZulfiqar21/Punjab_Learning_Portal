@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import uuid
+from typing import Literal
 
 from pydantic import BaseModel, ConfigDict
 
@@ -102,6 +103,8 @@ class TopicNode(BaseModel):
     id: uuid.UUID
     number: str | None
     title: str
+    # BOOK-EXERCISES-01: "exercise" is the chapter's end-of-chapter exercise, listed in Practice, not in Learn.
+    kind: Literal["topic", "exercise"]
     depth: int
     pdf_page: int | None
     points: list[str]

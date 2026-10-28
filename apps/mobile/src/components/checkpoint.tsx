@@ -15,6 +15,7 @@ export function Checkpoint({
   answerId,
   explanation,
   answerFigure,
+  revealLabel = "Show what a good answer contains",
 }: {
   mode: "question" | "self_check";
   prompt: string;
@@ -23,6 +24,8 @@ export function Checkpoint({
   explanation: string;
   /** ANSWER-FIGURE-01: the drawn answer, shown with the explanation once revealed, never before. */
   answerFigure?: ReactNode;
+  /** BOOK-EXERCISES-01: the self-check button's words ("Show answer" / "Answer dekhein" on a book exercise). */
+  revealLabel?: string;
 }) {
   const c = useTheme();
   const [chosen, setChosen] = useState<string | null>(null);
@@ -55,10 +58,12 @@ export function Checkpoint({
       ) : (
         !revealed && (
           <Pressable accessibilityRole="button" onPress={() => setRevealed(true)} style={{ minHeight: 44, justifyContent: "center" }}>
-            <Text style={{ color: c.accent, fontWeight: "600" }}>Show what a good answer contains</Text>
+            <Text style={{ color: c.accent, fontWeight: "600" }}>{revealLabel}</Text>
           </Pressable>
         )
       )}
+      {/* Text keeps line breaks and leading spaces as written (react-native-web: pre-wrap), so a program in an answer
+          keeps its indentation. */}
       {done && (
         <T variant="small" accessibilityLiveRegion="polite">
           {mode === "question" && (chosen === answerId ? "Right. " : "Not quite. ")}

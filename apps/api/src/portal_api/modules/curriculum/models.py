@@ -8,7 +8,7 @@ from __future__ import annotations
 
 import uuid
 from datetime import date, datetime
-from typing import Any
+from typing import Any, Literal
 
 from sqlalchemy import (
     CheckConstraint,
@@ -28,6 +28,9 @@ from sqlalchemy.dialects.postgresql import JSONB, UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from portal_api.db import Base
+
+TopicKind = Literal["topic", "exercise"]
+EXERCISE_KEY_SUFFIX = "/u-exercise"
 
 
 class Region(Base):
@@ -187,6 +190,12 @@ class Topic(Base):
     retired_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
 
     chapter: Mapped[Chapter] = relationship(back_populates="topics")
+
+    @property
+    def kind(self) -> TopicKind:
+        """BOOK-EXERCISES-01: a chapter's end-of-chapter exercise (natural key `…/u-exercise`) is practised in Practice,
+        never read in Learn. The rule is the catalogue key alone, so a book that gains exercise topics just has them."""
+        return "exercise" if self.natural_key.endswith(EXERCISE_KEY_SUFFIX) else "topic"
 
 
 class ImportBatch(Base):

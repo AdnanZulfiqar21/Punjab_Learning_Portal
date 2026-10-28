@@ -21,6 +21,10 @@ export default function PracticePage({ searchParams }: PageProps<"/practice">) {
           Build a test from chapters of your textbook. Only questions approved by an independent subject reviewer are used.
         </p>
         <p className="mt-2 text-sm">
+          <Link href="/practice/exercises" className="text-accent underline-offset-2 hover:underline">
+            Book exercises (each chapter&apos;s exercise, solved) →
+          </Link>
+          {" · "}
           <Link href="/practice/written" className="text-accent underline-offset-2 hover:underline">
             Written practice (answer on paper, teacher-marked) →
           </Link>

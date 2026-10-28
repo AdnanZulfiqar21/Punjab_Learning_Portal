@@ -4,9 +4,10 @@ from __future__ import annotations
 
 from fastapi.testclient import TestClient
 from sqlalchemy import select
+from sqlalchemy.orm import Session
 
 from portal_api.db import get_sessionmaker
-from portal_api.modules.curriculum.models import Topic
+from portal_api.modules.curriculum.models import BookEdition, Chapter, Grade, SourceDocument, Subject, Topic
 from tests.test_content_workflow import FIXTURE_BODY, Staff, _chapter, _refs, _save
 
 
@@ -123,3 +124,101 @@ def test_next_and_previous_follow_the_books_reading_order(client: TestClient) ->
     assert child["previous_topic_id"] == str(top.id) and child["chapter_start"] is False
     end = client.get(f"/v1/topics/{last.id}/lesson").json()
     assert end["next_topic_id"] == (str(after.id) if after else None)
+
+
+def _exercise_topics(db: Session, grade: int, subject: str) -> list[Topic]:
+    return list(
+        db.scalars(
+            select(Topic)
+            .join(Chapter, Chapter.id == Topic.chapter_id)
+            .join(BookEdition, BookEdition.id == Chapter.book_id)
+            .join(Grade, Grade.id == BookEdition.grade_id)
+            .join(Subject, Subject.id == BookEdition.subject_id)
+            .where(
+                Grade.number == grade,
+                Subject.code == subject,
+                Topic.retired_at.is_(None),
+                Topic.natural_key.endswith("/u-exercise"),
+            )
+            .order_by(Chapter.display_order)
+        )
+    )
+
+
+def test_the_end_of_chapter_exercise_is_practice_not_learn(client: TestClient) -> None:
+    # BOOK-EXERCISES-01: the outline marks the exercise, Learn's next/previous never lead into it; it still reads by id.
+    with get_sessionmaker()() as db:
+        exercise = _exercise_topics(db, 11, "computer_science")[0]
+        assert exercise.kind == "exercise"
+        chapter_id, exercise_id = str(exercise.chapter_id), str(exercise.id)
+
+    chapter = client.get(f"/v1/chapters/{chapter_id}").json()
+    kinds = {t["id"]: t["kind"] for t in chapter["topics"]}
+    assert kinds[exercise_id] == "exercise"
+    assert [k for k in kinds.values() if k == "exercise"] == ["exercise"]
+
+    ids: list[str] = []
+    topic_id: str | None = next(t["id"] for t in chapter["topics"] if t["kind"] == "topic")
+    while topic_id:  # walk the whole chapter the way the reader's "Next topic" does
+        ids.append(topic_id)
+        reading = client.get(f"/v1/topics/{topic_id}/lesson").json()
+        assert reading["kind"] == "topic"
+        topic_id = reading["next_topic_id"]
+    assert exercise_id not in ids and len(ids) > 1
+    last = client.get(f"/v1/topics/{ids[-1]}/lesson").json()
+    assert last["next_topic_id"] is None
+
+    shown = client.get(f"/v1/topics/{exercise_id}/lesson")
+    assert shown.status_code == 200, shown.text
+    body = shown.json()
+    assert body["kind"] == "exercise" and body["title"] == "Exercise"
+    assert body["previous_topic_id"] is None and body["next_topic_id"] is None and body["chapter_start"] is False
+
+
+def test_practice_lists_each_chapters_exercise_with_what_the_caller_can_read(client: TestClient) -> None:
+    with get_sessionmaker()() as db:
+        topics = _exercise_topics(db, 12, "computer_science")
+        target = topics[-1]
+        chapter = db.get(Chapter, target.chapter_id)
+        assert chapter is not None
+        book = db.get(BookEdition, chapter.book_id)
+        assert book is not None
+        doc = db.get(SourceDocument, book.source_document_id)
+        assert doc is not None
+        refs = _refs(chapter, doc)
+        scope = {"grades": [12], "subjects": ["computer_science"]}
+        author = Staff(client, db, ["content_author"], scope)
+        expected = [str(t.id) for t in topics]
+        target_id, chapter_id = str(target.id), str(chapter.id)
+
+    path = "/v1/grades/12/subjects/computer_science/exercises"
+    listed = client.get(path)
+    assert listed.status_code == 200, listed.text
+    assert listed.headers["cache-control"] == "private, no-store"
+    body = listed.json()
+    assert body["grade_number"] == 12 and body["subject_code"] == "computer_science"
+    assert [e["topic_id"] for e in body["exercises"]] == expected
+    numbers = [e["chapter_number"] for e in body["exercises"]]
+    assert numbers == sorted(numbers)
+    assert all(e["availability"] == "unavailable" and e["available_languages"] == [] for e in body["exercises"])
+
+    created = client.post(
+        "/v1/studio/items",
+        headers=author.headers,
+        json={"chapter_id": chapter_id, "topic_id": target_id, "title": "Fixture exercise lesson"},
+    )
+    assert created.status_code == 201, created.text
+    assert _save(client, author, created.json(), FIXTURE_BODY, refs).status_code == 200
+
+    staff = {e["topic_id"]: e for e in client.get(path, headers=author.headers).json()["exercises"]}
+    assert staff[target_id]["availability"] == "private_preview"
+    assert staff[target_id]["available_languages"] == ["en"]
+    learner = {e["topic_id"]: e for e in client.get(path).json()["exercises"]}
+    assert learner[target_id]["availability"] == "unavailable"
+
+    # A book with no exercise topics yet lists none; another class's book is never mixed in.
+    assert client.get("/v1/grades/12/subjects/biology/exercises").json()["exercises"] == []
+    assert not set(expected) & {
+        e["topic_id"] for e in client.get("/v1/grades/11/subjects/computer_science/exercises").json()["exercises"]
+    }
+    assert client.get("/v1/grades/11/subjects/english/exercises").status_code == 404

@@ -36,6 +36,7 @@ PUBLIC = {
     "GET /v1/search": "public catalogue search (published content only)",
     "GET /v1/chapters/{chapter_id}/lessons": "optional auth: previews public, premium bodies need access (R07)",
     "GET /v1/topics/{topic_id}/lesson": "optional auth: one published lesson, or unavailable; drafts stay private",
+    "GET /v1/grades/{grade}/subjects/{subject}/exercises": "optional auth: which exercises can be read; no text",
     "GET /v1/topics/{topic_id}/lecture": "optional auth: approved lectures only, locked without entitlement",
     "GET /v1/lectures/{lecture_id}/stream": "optional auth: 404 unless approved, servable and entitled",
     "GET /v1/lessons/{item_id}/assets/{version_id}": "optional auth: the lesson's own files, under its tier (P07.S1)",

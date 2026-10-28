@@ -2,7 +2,7 @@
 // The language choice is kept on this device and, for a signed-in learner, in the profile's explanation language.
 // The variants differ in structure (the English lesson carries only the book; Roman Urdu adds our explanations), so a
 // language switch returns to the matching block of the other variant (READER-PLACE-01, lib/variant-place.ts).
-import { router, Stack, useLocalSearchParams } from "expo-router";
+import { Redirect, router, Stack, useLocalSearchParams } from "expo-router";
 import { useEffect, useMemo, useRef, type RefObject } from "react";
 import { Pressable, ScrollView, View, type NativeScrollEvent, type NativeSyntheticEvent } from "react-native";
 
@@ -11,6 +11,7 @@ import { LessonBlocks } from "@/components/lesson-blocks";
 import { CompletionToggle, LessonNote, SaveFormula } from "@/components/lesson-study";
 import { Chip, ErrorState, LinkButton, Loading, Notice, Segmented, T } from "@/components/ui";
 import { Space, subjectKey } from "@/constants/theme";
+import { useReadingLanguage } from "@/hooks/use-reading-language";
 import { useRequest } from "@/hooks/use-request";
 import { SubjectAccent, useTheme } from "@/hooks/use-theme";
 import { api, GRADE_LABEL, lessonAsset, previewAsset, type TopicLecture, type TopicReading } from "@/lib/api";
@@ -19,7 +20,7 @@ import { continuesInto, headingOnly, headingTone } from "@/lib/book-heading";
 import { premiumBook } from "@/lib/book-style";
 import { useDisplay } from "@/lib/display";
 import { usePrefs } from "@/lib/prefs";
-import { missingLanguageNote, preferredLanguage, READING_LANGUAGES, type ReadingLanguage } from "@/lib/reading-language-core";
+import { missingLanguageNote, READING_LANGUAGES, type ReadingLanguage } from "@/lib/reading-language-core";
 import { mapPlace, placeSignature, type PlaceBlock } from "@/lib/variant-place";
 
 type Segment = ReadingLanguage | "lecture";
@@ -33,8 +34,7 @@ export default function TopicScreen() {
   const auth = useAuth();
   const { prefs, update } = usePrefs();
   const token = auth.state.status === "signed_in" ? auth.state.token : null;
-  const me = auth.state.status === "signed_in" ? auth.state.me : null;
-  const language = preferredLanguage(prefs.language, me?.profile?.explanation_language);
+  const { language, choose } = useReadingLanguage();
   const view = prefs.view === "lecture" ? "lecture" : "read";
   const { state, retry } = useRequest(async (signal): Promise<Shown> => {
     const reading = await api.topicLesson(id, token, signal, language);
@@ -47,28 +47,10 @@ export default function TopicScreen() {
   const c = useTheme();
   const placeRef = useRef<Place | null>(null);
 
-  function choose(next: ReadingLanguage) {
-    update({ language: next });
-    const p = me?.profile;
-    if (token && p?.grade) {
-      // Keep the choice with the account too (existing profile service); the device copy already applies.
-      void api
-        .saveProfile(token, {
-          grade: p.grade,
-          stream: p.stream ?? null,
-          subjects: p.subjects ?? [],
-          target_exams: p.target_exams ?? [],
-          target_year: p.target_year ?? null,
-          explanation_language: next,
-          daily_minutes: p.daily_minutes ?? null,
-        })
-        .then(() => auth.refresh())
-        .catch(auth.handleError);
-    }
-  }
-
   if (auth.state.status === "loading" || state.status === "loading") return <Loading label="Loading lesson" />;
   if (state.status === "error") return <ErrorState error={state.error} onRetry={retry} />;
+  // BOOK-EXERCISES-01: the end-of-chapter exercise is solved in Practice; a favourite or a search hit goes there.
+  if (state.data.kind === "exercise") return <Redirect href={{ pathname: "/exercise/[id]", params: { id: state.data.topic_id } }} />;
   return (
     <SubjectAccent subject={state.data.subject_name}>
       <Stack.Screen options={{ title: state.data.number ?? "Lesson", headerBackTitle: "Chapter" }} />

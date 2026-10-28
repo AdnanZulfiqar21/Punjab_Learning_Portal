@@ -12,6 +12,7 @@ import { useRequest } from "@/hooks/use-request";
 import { SubjectAccent, useTheme } from "@/hooks/use-theme";
 import { api, GRADE_LABEL } from "@/lib/api";
 import { useAuth } from "@/lib/auth";
+import { learnTopics } from "@/lib/exercises";
 
 export default function ChapterScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -45,6 +46,7 @@ function Chapter({ ch }: { ch: Awaited<ReturnType<typeof api.chapter>> }) {
   const bc = ch.breadcrumb;
   const [intro, setIntro] = useState(false);
   const long = (ch.main_concept ?? "").length > 180;
+  const topics = learnTopics(ch.topics); // BOOK-EXERCISES-01: the end-of-chapter exercise is solved in Practice
   return (
     <ScrollView style={{ backgroundColor: c.background }} contentContainerStyle={{ padding: Space.lg, gap: Space.lg }}>
       <View style={{ gap: Space.xs }}>
@@ -70,7 +72,7 @@ function Chapter({ ch }: { ch: Awaited<ReturnType<typeof api.chapter>> }) {
         <T variant="heading" accessibilityRole="header">
           Topics
         </T>
-        {ch.topics.length === 0 ? <T variant="muted">No topics are recorded for this chapter.</T> : <Topics topics={ch.topics} />}
+        {topics.length === 0 ? <T variant="muted">No topics are recorded for this chapter.</T> : <Topics topics={topics} />}
       </View>
       <Offline chapterId={ch.id} />
       <View style={{ flexDirection: "row", justifyContent: "space-between" }}>

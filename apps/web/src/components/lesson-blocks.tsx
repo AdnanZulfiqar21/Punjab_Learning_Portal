@@ -124,6 +124,7 @@ export function LessonBlocks({
   typeset,
   premium = false,
   runnable = false,
+  revealLabel,
 }: {
   blocks: Block[];
   headingOffset?: number;
@@ -140,6 +141,8 @@ export function LessonBlocks({
   premium?: boolean;
   /** CODE-RUNNER-01: Python programs get "Run karein" (the Roman Urdu lesson). */
   runnable?: boolean;
+  /** BOOK-EXERCISES-01: the words on each self-check's reveal button (the checkpoint's own label otherwise). */
+  revealLabel?: string;
 }) {
   const view = (b: Block, i: number) => (
     <BlockView
@@ -150,6 +153,7 @@ export function LessonBlocks({
       typeset={typeset?.[i]}
       premium={premium}
       runnable={runnable}
+      revealLabel={revealLabel}
     />
   );
   // Each block keeps its own id (b0, b1, …), also inside a Quick Check card, so the language switch finds its place.
@@ -219,6 +223,7 @@ function BlockView({
   typeset,
   premium = false,
   runnable = false,
+  revealLabel,
 }: {
   block: Block;
   headingOffset: number;
@@ -227,6 +232,7 @@ function BlockView({
   typeset?: string | null;
   premium?: boolean;
   runnable?: boolean;
+  revealLabel?: string;
 }) {
   const marks = bookErrors(b.book_errors);
   switch (b.type) {
@@ -382,6 +388,7 @@ function BlockView({
           answerId={typeof b.answer_id === "string" ? b.answer_id : null}
           explanation={str(b.explanation)}
           answerFigure={answerFigure}
+          revealLabel={revealLabel}
         />
       );
     }
