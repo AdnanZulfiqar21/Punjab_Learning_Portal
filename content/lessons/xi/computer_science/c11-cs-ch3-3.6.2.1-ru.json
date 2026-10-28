@@ -20,47 +20,70 @@
       "body": {
         "blocks": [
           {
-            "type": "callout",
-            "tone": "definition",
-            "title": "Linear search",
-            "text": "Linear search list ki har cheez shuru se ek ek kar ke dekhti hai, jab tak matlooba cheez na mile ya list khatam na ho."
+            "type": "paragraph",
+            "text": "Linear search list mein koi item dhoondne ka seedha tareeqa hai. Aap har item ek ek kar ke check karte hain jab tak matlooba item na mil jaye. Yeh aise kaam karta hai:"
           },
           {
             "type": "list",
             "ordered": true,
             "items": [
-              "Shuru se: pehli cheez dekhein.",
-              "Har cheez jaanchein: matlooba cheez se muwazna karein.",
-              "Mel na ho to agli par jayein.",
-              "Cheez milne ya list khatam hone tak dohrayein."
+              "Shuru se: list ka pehla item dekhein.",
+              "Har item check karein: jo item dhoond rahe hain us ka maujooda item se muwazna karein.",
+              "Agle par jayein: agar mel na ho to list ke agle item par jayein.",
+              "Dohrayein: yeh amal tab tak jari rakhein jab tak item na mil jaye ya list khatam na ho jaye."
             ]
           },
           {
             "type": "paragraph",
-            "text": "[Karachi, Lahore, Islamabad, Faisalabad] mein Islamabad dhoondna: Karachi nahi, Lahore nahi, teesri jaanch par Islamabad mil gaya. Agar Islamabad list mein na hota to nateeja nikalne se pehle tamam shehar dekhe jate. Linear search O(n) hai."
+            "text": "Misal: farz karein aap ke paas shehron ke naamon ki list hai: [Karachi, Lahore, Islamabad, Faisalabad], aur aap dekhna chahte hain ke Islamabad list mein hai ya nahi."
+          },
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "Karachi se shuru karein. Karachi Islamabad nahi, to agle shehar par jayein.",
+              "Agla Lahore hai. Lahore Islamabad nahi, to agle shehar par jayein.",
+              "Ab Islamabad aa gaya. Yahi woh shehar hai jo aap dhoond rahe the!"
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Is misal mein Islamabad list mein mil gaya. Agar Islamabad list mein na hota to aap tamam shehar check karte aur phir nateeja nikalte ke woh list mein nahi. Ise linear search is liye kehte hain ke har item ek seedhi lakeer (straight line) mein, shuru se aakhir tak, check hota hai. Worst case mein n items ke liye n muwazne, yani O(n)."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "def linear_search(items, target):\n    for i in range(len(items)):\n        if items[i] == target:\n            return i    # position found\n    return -1           # not in the list\n\nprint(linear_search([\"Karachi\", \"Lahore\", \"Islamabad\", \"Faisalabad\"], \"Islamabad\"))    # 2",
+            "caption": "Python code (kitab se nahi; chala kar jaancha gaya)"
+          },
+          {
+            "type": "code",
+            "language": "text",
+            "text": "2",
+            "caption": "Output"
           },
           {
             "type": "callout",
-            "tone": "note",
-            "title": "Python code (har .... ek 4-space indent hai)",
-            "text": "def linear_search(items, target):\n....for i in range(len(items)):\n........if items[i] == target:\n............return i    # position found\n....return -1           # not in the list\n\nprint(linear_search([\"Karachi\", \"Lahore\", \"Islamabad\", \"Faisalabad\"], \"Islamabad\"))    # 2"
+            "tone": "tip",
+            "title": "Asaan alfaaz mein",
+            "text": "Python mein list ki ginti 0 se shuru hoti hai: Karachi 0, Lahore 1, Islamabad 2. Is liye function 2 lautata hai, yani Islamabad teesri jagah par hai. Item na mile to -1 lautata hai."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
-            "prompt": "Faisalabad dhoondne aur yeh tay karne ke liye ke Quetta nahi hai, linear search kitne muwazne karti hai?",
-            "explanation": "Faisalabad ke liye chaar (aakhri cheez) aur Quetta ke liye chaar (har cheez jaanchi)."
+            "prompt": "Faisalabad dhoondne aur yeh tay karne ke liye ke Quetta list mein nahi, linear search kitne muwazne karti hai?",
+            "explanation": "Faisalabad ke liye chaar (woh aakhri item hai) aur Quetta ke liye bhi chaar (har item check karna parta hai, phir -1)."
           },
           {
             "type": "heading",
             "level": 2,
-            "text": "Fauri khulasa"
+            "text": "Mukhtasar khulasa"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "Linear search: tarteeb se cheezein jaancho; be-tarteeb list par chalti hai; O(n)."
+              "Linear search: items tarteeb se ek ek kar ke check karo; be-tarteeb list par bhi chalti hai; O(n)."
             ]
           }
         ]

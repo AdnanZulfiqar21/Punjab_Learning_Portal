@@ -20,62 +20,78 @@
       "body": {
         "blocks": [
           {
-            "type": "callout",
-            "tone": "definition",
-            "title": "Selection sort",
-            "text": "Selection Sort list ke be-tarteeb hisse mein sab se chhoti (ya bari) cheez dhoond kar pehli be-tarteeb cheez se badalta, aur har baar tarteeb shuda aur be-tarteeb hisse ki sarhad ek qadam aage karta hai."
+            "type": "paragraph",
+            "text": "Selection Sort ek aur saada sorting algorithm hai. Yeh list ke unsorted (be-tarteeb) hisse se sab se chhota element (ya sab se bara, jaisi tarteeb chahiye) chunta (select karta) hai aur use unsorted hisse ke pehle element se swap kar deta hai. Yahi amal list ke baqi unsorted hisse par dohraya jata hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Process (tareeqa):"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "List ke unsorted hisse mein sab se chhota (minimum) element dhoondein.",
+              "Use pehle unsorted element se swap karein.",
+              "Sorted aur unsorted hisson ki sarhad (boundary) ek element aage kar dein.",
+              "Baqi elements ke liye yahi amal dohrayein."
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Misal: list [29,10,14,37,13] mein Selection Sort pehle sab se chhota element 10 dhoondega aur use 29 se swap karega. List [10,29,14,37,13] ban jayegi. Yeh amal list poori sort hone tak chalta hai."
           },
           {
             "type": "table",
-            "caption": "[29, 10, 14, 37, 13] par selection sort",
+            "caption": "[29, 10, 14, 37, 13] par Selection Sort (pehla qadam kitab ka, baqi hamare hal kiye hue)",
             "header": [
               "Qadam",
-              "Chuni gayi chhoti qeemat",
+              "Chuna gaya minimum",
               "List"
             ],
             "rows": [
               [
                 "1",
-                "10 ko 29 se badla",
+                "10 ko 29 se swap kiya",
                 "[10, 29, 14, 37, 13]"
               ],
               [
                 "2",
-                "13 ko 29 se badla",
+                "13 ko 29 se swap kiya",
                 "[10, 13, 14, 37, 29]"
               ],
               [
                 "3",
-                "14 pehle se apni jagah",
+                "14 pehle se apni jagah par",
                 "[10, 13, 14, 37, 29]"
               ],
               [
                 "4",
-                "29 ko 37 se badla",
+                "29 ko 37 se swap kiya",
                 "[10, 13, 14, 29, 37]"
               ]
             ]
           },
           {
             "type": "paragraph",
-            "text": "Selection Sort O(n^2) hai; Bubble Sort ki tarah bare datasets ke liye kaarkard nahi magar banana aasan hai."
+            "text": "Complexity: Selection Sort ki time complexity O(n²) hai. Bubble Sort ki tarah yeh bare datasets ke liye efficient nahi, magar banana seedha aur aasan hai."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
-            "prompt": "[29, 10, 14, 37, 13] par selection sort kitne tabadle karta hai?",
-            "explanation": "Teen tabadle (qadam 1, 2 aur 4); qadam 3 mein 14 pehle se apni jagah par hai."
+            "prompt": "[29, 10, 14, 37, 13] par Selection Sort kitne swap karta hai?",
+            "explanation": "Teen swap (qadam 1, 2 aur 4); qadam 3 mein 14 pehle se apni jagah par hai."
           },
           {
             "type": "heading",
             "level": 2,
-            "text": "Fauri khulasa"
+            "text": "Mukhtasar khulasa"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "Selection sort: be-tarteeb hisse ki chhoti qeemat chuno, aage badlo; O(n^2)."
+              "Selection Sort: unsorted hisse ka minimum chuno, aage swap karo; O(n²)."
             ]
           }
         ]

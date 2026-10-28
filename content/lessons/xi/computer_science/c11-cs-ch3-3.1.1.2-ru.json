@@ -20,12 +20,22 @@
       "body": {
         "blocks": [
           {
+            "type": "paragraph",
+            "text": "Masail ko is bunyad par bhi baanta ja sakta hai ke woh kitne saaf (clearly) bayan kiye gaye hain:"
+          },
+          {
             "type": "list",
             "ordered": false,
             "items": [
-              "Wazeh (well-defined) masail ke maqsad, inputs, amal aur outputs saaf hote hain. Adad ke juft hone ka faisla wazeh masla hai: maqsad saaf, input ek integer, amal 2 se taqseem jaanchna, aur output juft ya taaq (Figure 3.1).",
-              "Ghair wazeh (ill-defined) masail ki tareef saaf nahi hoti ya un ke maqsad aur sharait mubham hote hain. 'Pakistan mein taleem behtar karna' mubham aur wasee hai: funding, asatiza aur mawad jaise inputs ka zikr hai magar yeh nahi ke kitni funding, kaise asatiza ya kaunsa mawad sab se mufeed hai."
+              "Well-defined Problems (wazeh masail): in ke goal (maqsad), inputs, process aur outputs saaf hote hain. Misal: yeh maloom karna ke koi adad juft (even) hai ya nahi. Goal saaf hai (adad even hai ya nahi), input saaf hai (ek integer), process saaf hai (dekhna ke adad 2 se poora divide hota hai ya nahi) aur output saaf hai (even ya odd), jaisa Figure 3.1 mein dikhaya gaya hai.",
+              "Ill-defined Problems (ghair wazeh masail): in ki tareef saaf nahi hoti, ya in ke goals aur requirements (zaroorat) mubham (ambiguous, gol mol) hoti hain. Misal: “Pakistan mein taleem behtar karna” ka project. Yeh goal gol mol aur bohat wasee (broad) hai. Input mein funding, teachers aur taleemi mawad (materials) ho sakte hain, magar yeh saaf nahi ke kitni funding chahiye, kaise teachers chahiyein, ya kaunsa mawad sab se zyada faida dega."
             ]
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Class Activity",
+            "text": "Students apne shehar ka naqsha (map) banayenge jis mein kai colleges hon, aur is se route optimization (sab se behtar raasta chunna) seekhenge. Har student naqshe par kam az kam paanch colleges lagaye aur un ke darmiyan faasle (distances) likhe. Maqsad: aisa sab se chhota raasta banana jo har college par theek ek dafa jaye aur wapas shuru wali jagah par aaye."
           },
           {
             "type": "diagram",
@@ -37,31 +47,31 @@
             "type": "callout",
             "tone": "tip",
             "title": "Diagram ko samjhein",
-            "text": "Tircha khaana (parallelogram) input ya output hai: Write screen par likhta hai aur Read x user se adad leta hai. Diamond sawal poochta hai: x MOD 2 yani x ko 2 se taqseem karne par baqi (remainder). Baqi 0 ho to True, adad juft (Even); warna False, adad taaq (Odd). Python mein yahi shart x % 2 == 0 likhi jati hai."
+            "text": "Tircha khaana (parallelogram) input ya output hai: Write screen par likhta hai aur Read x user se adad leta hai. Diamond sawal poochta hai: x MOD 2 yani x ko 2 se divide karne par baqi (remainder). Baqi 0 ho to True, adad even hai; warna False, adad odd hai. Python mein yahi shart x % 2 == 0 likhi jati hai."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
-            "prompt": "Class activity: apne shehar ke naqshe par kam az kam paanch colleges faaslon ke saath lagayein. Har college ek baar ja kar wapas aane ka sab se chhota raasta kaise banayenge?",
-            "explanation": "Shuru ka college muqarrar karein; baqi chaar 4 x 3 x 2 x 1 = 24 tarteebon mein ja sakte hain (rukh ahem na ho to 12 alag chakkar). Har tarteeb ke faasle jama kar ke sab se chhota rakhein. Yeh Travelling Salesman Problem hai, jo colleges barhne par is tareeqe se hal karna na-mumkin sa ho jata hai."
+            "prompt": "Class activity: paanch colleges aur un ke faasle maloom hon to har college par ek dafa ja kar wapas aane ka sab se chhota raasta kaise dhoondenge?",
+            "explanation": "Shuru wala college tay kar lein; baqi chaar colleges 4 x 3 x 2 x 1 = 24 tarteebon (orders) mein ja sakte hain (agar ulta chakkar alag na ginein to 12). Har tarteeb ke faasle jama karein aur sab se chhota chun lein. Yeh Travelling Salesman Problem hai; colleges barhne par is tareeqe se hal karna taqreeban na-mumkin ho jata hai (topic 3.3.2)."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
-            "prompt": "Wazeh masle ki khasusiyat kya hai (MCQ 1)? Wazeh aur ghair wazeh masail mein farq bataiye (short question 1).",
-            "explanation": "(c) saaf maqsad, inputs, amal aur outputs. Wazeh masla theek theek batata hai ke kya diya gaya, kya karna hai aur kya nateeja chahiye, to algorithm likha ja sakta hai; ghair wazeh masle ke maqsad mubham ya sharait adhoori hoti hain, to pehle use durust banana parta hai."
+            "prompt": "Well-defined problem ki khasusiyat kya hai (MCQ 1)? Well-defined aur ill-defined problems mein farq bataiye (short question 1).",
+            "explanation": "(c) Clear goals, inputs, processes and outputs. Well-defined masla theek theek batata hai ke kya diya gaya hai, kya karna hai aur kya nateeja chahiye, is liye us ka algorithm likha ja sakta hai. Ill-defined masle ka goal gol mol ya requirements adhoori hoti hain, is liye pehle use saaf (well-defined) banana parta hai."
           },
           {
             "type": "heading",
             "level": 2,
-            "text": "Fauri khulasa"
+            "text": "Mukhtasar khulasa"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "Wazeh: saaf maqsad, input, amal, output (juft ya taaq).",
-              "Ghair wazeh: mubham maqsad ('taleem behtar karna') pehle durust karna hoga."
+              "Well-defined: saaf goal, input, process, output (even ya odd).",
+              "Ill-defined: gol mol goal ('taleem behtar karna'); pehle use saaf karna hoga."
             ]
           }
         ]

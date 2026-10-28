@@ -19,57 +19,53 @@
       "body": {
         "blocks": [
           {
-            "type": "callout",
-            "tone": "definition",
-            "title": "Big O notation",
-            "text": "Big O notation is a mathematical way to describe time complexity. It gives an upper bound on the time an algorithm will take as the input size grows, so algorithms can be compared."
+            "type": "paragraph",
+            "text": "Big O notation is a mathematical way to describe the time complexity of an algorithm. It provides an upper bound on the time an algorithm will take to complete as the input size grows. This notation helps in comparing the efficiency of different algorithms by giving a clear picture of their performance."
           },
           {
-            "type": "table",
-            "caption": "Common time complexities",
-            "header": [
-              "Notation",
-              "Growth",
-              "Example from the chapter"
-            ],
-            "rows": [
-              [
-                "O(1)",
-                "constant: does not change with n",
-                "reading an array item by its index"
-              ],
-              [
-                "O(log n)",
-                "logarithmic: grows very slowly",
-                "guessing a number from 1 to n by halving the range"
-              ],
-              [
-                "O(n)",
-                "linear: grows in step with n",
-                "finding a student by checking n IDs one by one"
-              ],
-              [
-                "O(n^2)",
-                "quadratic: grows with n squared",
-                "comparing every pair of n students, n(n - 1)/2 comparisons"
-              ]
-            ]
+            "type": "heading",
+            "level": 3,
+            "text": "How Big O Notation Works"
           },
           {
             "type": "paragraph",
-            "text": "In the worst case for O(n), the student we want is the very last on the list, so all n must be checked. In the guessing game, each answer 'higher' or 'lower' narrows the range, and the number of guesses is proportional to the number of times the range can be halved, which is logarithmic. Constant time O(1) appears as a flat line on a graph of time against input size."
+            "text": "Big O notation uses symbols to describe how the runtime of an algorithm changes with the size of the input. Here are some common examples:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "O(1) Constant Time: The runtime does not change with the size of the input. For instance, accessing a specific item in an array by its index is constant time because it takes the same amount of time regardless of the array size.",
+              "O(n) Linear Time: The runtime grows linearly with the size of the input. For example, consider a scenario where there are n students in a college, each with a unique student ID. If we need to find a specific student by searching through the list of all n students, the time it takes to find the student will depend on the number of students we have to check. In the worst-case scenario, the student we are looking for might be the very last one on the list, meaning we would have to check all n students. This process involves examining each student one by one, making the search take a time proportional to n. Therefore, this example represents a linear time complexity O(n), where the time taken increases directly with the number of students.",
+              "O(n2) Quadratic Time: The runtime grows quadratically as the size of the input increases. For instance, consider a scenario where n students in a college are participating in a programming competition, and we want to compare the performance of each pair of students to determine the best team. To do this, we must compare each student with every other student. The number of comparisons required is the sum of the first n - 1 integers, which can be approximated as n(n -1). Thus, the time complexity for this task is quadratic, represented as O(n²). The time taken increases quadratically as the number of students n increases.",
+              "O(log n) Logarithmic Time: The runtime grows logarithmically, meaning it increases very slowly relative to the input size. For example, imagine a scenario where you are playing a guessing game with n students in a college. One student thinks of a number between 1 and n, and your task is to guess the number. After each guess, the student will tell you whether the actual number is higher or lower than your guess. By starting in the middle of the range and adjusting your guess based on the feedback, you can quickly narrow down the possible numbers. The number of guesses required to find the correct number is proportional to the number of times you can halve the range, which is logarithmic in nature. Therefore, the time complexity of this guessing process is O(log n)."
+            ],
+            "book_errors": [
+              "O(n2)",
+              "n(n -1)"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The heading “O(n2)” means O(n²), n squared. The sum of the first n − 1 integers, 1 + 2 + … + (n − 1), is exactly n(n − 1)/2, not n(n − 1): each pair of students is compared once. The time complexity is still O(n²)."
           },
           {
             "type": "diagram",
             "$asset": "c11-cs-ch3-fig-big-o-notation",
-            "alt": "Graph titled Big O Notation with Time on the vertical axis and Input Size on the horizontal axis. O(1) is a flat line; O(log n) rises quickly and then levels off; O(n) is a straight rising line; O(n^2) curves up steeply.",
-            "caption": "Big O Notation: growth of O(1), O(log n), O(n) and O(n^2) (original drawing after the textbook's graph, which is captioned in error 'Figure 1.1: System development life cycle stages')."
+            "alt": "Graph titled Big O Notation with Time on the vertical axis and Input Size on the horizontal axis. O(1) is a flat line; O(log n) rises quickly and then levels off; O(n) is a straight rising line; O(n²) curves up steeply.",
+            "caption": "Big O Notation: growth of O(1), O(log n), O(n) and O(n²) (original drawing after the textbook's graph, which is captioned in error 'Figure 1.1: System development life cycle stages')."
           },
           {
             "type": "callout",
             "tone": "correction",
             "title": "Book correction",
             "text": "The book captions this graph 'Figure 1.1: System development life cycle stages'; it is the Big O Notation graph."
+          },
+          {
+            "type": "paragraph",
+            "text": "When comparing different time complexities, it's essential to understand how the time required for an algorithm grows as the size of the input n increases. Constant time, represented as O(1), remains unchanged regardless of the size of n. This means that no matter how large the input is, the time taken will be the same, as seen by the flat line in the graph."
           }
         ]
       }
