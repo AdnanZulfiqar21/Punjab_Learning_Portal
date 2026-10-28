@@ -19,20 +19,44 @@
       "body": {
         "blocks": [
           {
-            "type": "callout",
-            "tone": "note",
-            "title": "Python code (each .... is one 4-space indent)",
-            "text": "class ToyCar:\n....def __init__(self, color, size, wheels):\n........self.color = color\n........self.size = size\n........self.wheels = wheels\n\n....def describe(self):\n........return f\"This toy car is {self.color}, {self.size} and has {self.wheels} wheels.\"\n\ncar1 = ToyCar(\"red\", \"small\", 4)\ncar2 = ToyCar(\"blue\", \"large\", 6)\nprint(car1.describe())\nprint(car2.describe())"
+            "type": "paragraph",
+            "text": "In programming, we use classes as concepts to define what an object should be like."
           },
           {
-            "type": "list",
-            "ordered": false,
-            "items": [
-              "Class definition: ToyCar is the template, describing the attributes color, size and wheels.",
-              "Creating objects: car1 and car2 are particular toy cars made from the template, each with its own attributes.",
-              "Using methods: describe() returns a description of the car.",
-              "self: refers to the particular object inside its methods."
+            "type": "code",
+            "language": "python",
+            "text": "# Define a class called ToyCar\nclass ToyCar:\n    # The __init__ method in idealizes the object with specific attributes\n    def __init__(self , color self.color = color, size , wheels) :\n        self.color = color # Color of the toy car\n        self.size = size    # Size of the toy car\n        self.wheels = wheels # Number of wheels in toy car\n    # Method to describe the\n    def describe(self) :\n        return \"This toy car is\" , self.color , \"size\", self.size, \"and has \" , self.wheels , \"Wheels.\"\n# Create objects of the ToyCar class\ncar1 = ToyCar(\"red\", \"small\", 4)\ncar2 = ToyCar(\"blue\", \"large”, 6)\n# Print descriptions of the\nprint(carl.describe( ))\nprint(car2.describe( ))",
+            "book_errors": [
+              "color self.color = color, size",
+              "\"large”",
+              "carl.describe"
             ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "Three printing errors stop this program. The __init__ line has a stray self.color = color inside its brackets; it should be def __init__(self, color, size, wheels):. The string \"large” ends with a curly quote, so it is never closed; it should be \"large\". The first print uses carl (letter l) for car1, which is a NameError; it should be print(car1.describe())."
+          },
+          {
+            "type": "paragraph",
+            "text": "Explanation:"
+          },
+          {
+            "type": "paragraph",
+            "text": "Class Definition: The “ToyCar” class is like the template for making toy cars. It describes what attributes a toy car should have: color, size, and wheels."
+          },
+          {
+            "type": "paragraph",
+            "text": "Creating Objects: “carl” and “car2” are specific toy cars created using the ToyCar template.Each has its own unique attributes."
+          },
+          {
+            "type": "paragraph",
+            "text": "Using Methods: The describe method allows us to get a description of the toy car."
+          },
+          {
+            "type": "paragraph",
+            "text": "Self:  self is a convention used in object-oriented programming (OOP) to represent the instance of a class within its methods."
           }
         ]
       }

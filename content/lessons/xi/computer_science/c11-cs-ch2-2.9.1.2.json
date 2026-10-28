@@ -20,13 +20,26 @@
         "blocks": [
           {
             "type": "paragraph",
-            "text": "The finally block always runs, whether or not an exception was raised. The else block runs only if no exception was raised in the try block."
+            "text": "The finally block always executes, regardless of whether an exception was raised. The else block, if used, runs only if no exceptions were raised in the try block. These features are useful for ensuring certain code always runs and for executing additional logic when no errors occur."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "try :\n    number = int(input(\"Enter a number\"))\n    result = 10 / number\nexcept ZeroDivisionError:\n    print(\"You can’t divide by zero ! \" )\nexcept ValueError:\n    print (\"Invalid input! Please enter a valid number.\")\nelse :\n    print (\"The result is\", result)\nfinally :\n    print (\"Execution completed.\")"
           },
           {
             "type": "callout",
-            "tone": "note",
-            "title": "Python code (each .... is one 4-space indent)",
-            "text": "try:\n....number = int(input(\"Enter a number: \"))\n....result = 10 / number\nexcept ZeroDivisionError:\n....print(\"You can't divide by zero!\")\nexcept ValueError:\n....print(\"Invalid input! Please enter a valid number.\")\nelse:\n....print(\"The result is\", result)\nfinally:\n....print(\"Execution completed.\")"
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "In the printed book this listing is scrambled: pieces of several lines are set side by side in separate columns (for example \"Ent er a\", \"number\" and \"\"))\" apart, and \"f inally :\" split). The code block above puts the printed pieces back in reading order."
+          },
+          {
+            "type": "paragraph",
+            "text": "Explanation: In the above code:"
+          },
+          {
+            "type": "paragraph",
+            "text": "The else block runs only if no exceptions are raised, and it displays the result of the division.  The finally block executes regardless of whether an exception occurred, ensuring that the completion message is printed."
           }
         ]
       }

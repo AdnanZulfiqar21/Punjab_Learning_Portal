@@ -19,20 +19,31 @@
       "body": {
         "blocks": [
           {
-            "type": "callout",
-            "tone": "definition",
-            "title": "Nested conditionals",
-            "text": "Checking a condition inside another condition is called nesting: an if statement is placed inside the block of another if or else."
+            "type": "paragraph",
+            "text": "Sometimes, we need to check multiple conditions inside another condition. This is called nesting."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "# Syntax of nested if statement\nif condition1:\nif condition2:\n        # code to run if both condition1 and condition2 are true\nelse:\n        # code to run if conditionl is true but condition2 is false\nelse:\n        # code to run if conditionl is false",
+            "book_errors": [
+              "if condition1:\nif condition2:"
+            ]
           },
           {
             "type": "callout",
-            "tone": "note",
-            "title": "Python code (each .... is one 4-space indent)",
-            "text": "weather = \"rainy\"\ntemperature = 10\nif weather == \"rainy\":\n....if temperature < 15:\n........print(\"Wear a raincoat\")\n....else:\n........print(\"Take an umbrella\")\nelse:\n....print(\"Enjoy your day!\")"
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "In the printed syntax, if condition2: and the else: that belongs to it start at the same margin as if condition1:. For a nested if they must be indented inside if condition1: (four spaces), with their comments indented once more; only the last else: stays at the margin."
           },
           {
             "type": "paragraph",
-            "text": "If it is rainy and below 15 degrees, wear a raincoat; if it is only rainy, take an umbrella; if it is not rainy, just enjoy the day. With these values the program prints \"Wear a raincoat\"."
+            "text": "Example: If the weather is rainy and the temperature is below 15 degrees, we wear a raincoat. If it is only rainy, we take an umbrella. If the weather is not rainy, we just enjoy the day."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "weather = \"rainy\"\ntemperature = 10\nif weather == \"rainy\":\n    if temperature < 15:\n        print(\"Wear a raincoat\")\n    else :\n        print(\"Take an umbrella\")\nelse :\n    print(\"Enjoy your day!\")"
           }
         ]
       }

@@ -23,15 +23,45 @@
             "type": "list",
             "ordered": false,
             "items": [
-              "Constructor: khaas method jo object banne par us ke attributes shuru karta hai; Python mein __init__().",
-              "Destructor: __del__() object delete hone par bulaya jata aur safai ke liye istemal hota hai."
+              "Constructor: ek khaas function jo class ke variables ko shuru ki value deta (initialize karta) hai. Python mein __init__() method object bante hi us ki properties set karta hai."
             ]
           },
           {
+            "type": "code",
+            "language": "python",
+            "text": "class Car:\n    def __init__(self , color):\n        self . color = color"
+          },
+          {
             "type": "callout",
-            "tone": "note",
-            "title": "Python code (har .... ek 4-space indent hai)",
-            "text": "class Car:\n....def __init__(self, color):\n........self.color = color\n\n....def __del__(self):\n........print(\"Car with color\", self.color, \"is being deleted.\")"
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab constructor ki misaal ek hi line mein chhapti hai (class Car: def __init__... ); aise SyntaxError aata hai. Sahi shakal oopar hai."
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Destructor: __del__() method tab chalta hai jab object delete hota hai. Yeh safai (cleanup) ke kaam aata hai."
+            ]
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "class Car:\n    def __init__(self, color):\n        self . color = color\n    def __del__(self) :\n        print(\"Car with color\", self.color ,  \"is being deleted . \")"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab ke print mein \"is being deleted . \" se pehle quote nahi (self.color ,  is being deleted . \")); aise SyntaxError aata hai. Sahi: print(\"Car with color\", self.color, \"is being deleted.\")."
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh destructor object delete hone par paighaam print karta hai, jo safai ki nishani hai. Maslan c = Car(\"red\") ke baad del c likhne par \"Car with color red is being deleted . \" print hota hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Wazahat: Car class color attribute ke saath banti hai, aur jab us ka koi object delete hota hai to paighaam batata hai ke us rang wali car hatayi ja rahi hai."
           },
           {
             "type": "checkpoint",
@@ -42,13 +72,13 @@
           {
             "type": "heading",
             "level": 2,
-            "text": "Fauri khulasa"
+            "text": "Mukhtasar khulasa"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "Constructor __init__ naya object tayyar karta; destructor __del__ delete par safai karta hai."
+              "__init__: object bante waqt; __del__: object delete hote waqt."
             ]
           }
         ]

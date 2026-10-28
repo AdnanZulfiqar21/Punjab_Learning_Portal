@@ -19,16 +19,34 @@
       "body": {
         "blocks": [
           {
-            "type": "callout",
-            "tone": "definition",
-            "title": "Custom exception",
-            "text": "A custom exception is an error type you define yourself, so it can be raised and handled specifically."
+            "type": "paragraph",
+            "text": "Custom exceptions allow you to define your own error types that can be raised and handled specifically."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "class CustomError(Exception):\n    pass # pass statement is a placeholder that does nothing when executed\ndef check_value(value):\n    if value < 0:\n        raise CustomError(\"Value must be non-negative ! \" )\ntry :\ncheck_value(-1)\nexcept CustomError as e:\n    print(\"Error :\" , e)",
+            "book_errors": [
+              "try :\ncheck_value(-1)"
+            ]
           },
           {
             "type": "callout",
-            "tone": "note",
-            "title": "Python code (each .... is one 4-space indent)",
-            "text": "class CustomError(Exception):\n....pass    # pass does nothing\n\ndef check_value(value):\n....if value < 0:\n........raise CustomError(\"Value must be non-negative!\")\n\ntry:\n....check_value(-1)\nexcept CustomError as e:\n....print(\"Error:\", e)"
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "check_value(-1) is printed at the margin under try :, which is an IndentationError. It must be indented inside the try block; the program then prints Error : Value must be non-negative ! ."
+          },
+          {
+            "type": "paragraph",
+            "text": "Explanation: In the above code:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "CustomError is a user-defined exception.",
+              "The check_value () function raises CustomError if the value is negative."
+            ]
           }
         ]
       }

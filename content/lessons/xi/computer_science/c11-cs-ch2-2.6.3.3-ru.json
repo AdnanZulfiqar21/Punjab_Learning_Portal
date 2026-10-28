@@ -21,13 +21,26 @@
         "blocks": [
           {
             "type": "paragraph",
-            "text": "Manfi index sequence ke aakhir se ginte hain: -1 aakhri cheez, -2 aakhri se pehli, waghaira."
+            "text": "Negative (manfi) index sequence ke aakhir se ginta hai: -1 aakhri item, -2 aakhri se pehla, waghera."
           },
           {
-            "type": "callout",
-            "tone": "note",
-            "title": "Python code (har .... ek 4-space indent hai)",
-            "text": "fruits = [\"Apple\", \"Banana\", \"Cherry\", \"Date\", \"Elderberry\"]\nprint(\"First fruit:\", fruits[0])\nprint(\"Last fruit:\", fruits[-1])\nprint(fruits[1:4])    # Banana, Cherry, Date\nprint(fruits[-4:-1])  # Banana, Cherry, Date"
+            "type": "paragraph",
+            "text": "Misaal: list par musbat (positive) aur manfi (negative) dono indexes se indexing aur slicing."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "#    Create a list of fruits\nfruits = [\"Apple\", \"Banana\", \"Cherry\", \"Date\", \"Elderberry \" ]\n#    Indexing\nprint(\"First fruit:\", fruits [0])    # Positive index\nprint(\"Last fruit:\", fruits [-1])   # Negative index\n#    Slicing with positive indices\nprint(\"Fruits from index 1 to 3:\", fruits[1:4])\n#    Slicing with negative indices\nprint(\"Fruits from index -4 to -1:\", fruits [-4 : - 1] )"
+          },
+          {
+            "type": "code",
+            "language": "text",
+            "text": "First fruit: Apple\nLast fruit: Elderberry\nFruits from index 1 to 3: ['Banana', 'Cherry', 'Date']\nFruits from index -4 to -1: ['Banana', 'Cherry', 'Date']",
+            "caption": "Output (program chalane par)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Wazahat: code fruits ki list banata hai, musbat aur manfi index se items nikalta hai, aur dono tarah slicing karta hai. fruits[1:4] aur fruits[-4:-1] ek hi items dete hain. (\"Elderberry \" ke aakhir mein space kitab ke mutabiq hai; is se sirf print mein ek khaali jagah aati hai.)"
           },
           {
             "type": "diagram",
@@ -36,21 +49,33 @@
             "caption": "Musbat aur manfi index: dono tareeqon se ek hi cheezein milti hain (asal khaaka; kitab mein figure nahi)."
           },
           {
+            "type": "callout",
+            "tone": "note",
+            "title": "Class Activity",
+            "text": "Yeh list, tuple aur string lein:\nList: [10, 20, 30, 40, 50, 60, 70, 80]\nTuple: (\"Math\", \"Science\", \"English\", \"History\", \"Geography\")\nString: \"Python Programming\"\nYeh kaam karein:\n1. Har sequence ka teesra item print karein.\n2. List aur tuple se index 2 se 5 tak slice print karein.\n3. String ka index 7 se aakhir tak hissa print karein.\n4. Negative index se list aur tuple ke aakhri do items print karein.\n5. Negative slicing se string ke aakhri se pehle wale character se aakhir tak print karein."
+          },
+          {
             "type": "checkpoint",
             "mode": "self_check",
-            "prompt": "Class activity: string \"Python Programming\" ke liye s[7:] aur s[-2:] kya dete hain?",
-            "explanation": "s[7:] 'Programming' aur s[-2:] 'ng' hai."
+            "prompt": "Class activity ke jawab kya hain?",
+            "explanation": "1. L[2] = 30, T[2] = 'English', s[2] = 't'. 2. L[2:6] = [30, 40, 50, 60], T[2:6] = ('English', 'History', 'Geography') (index 2 se 5, dono shamil). 3. s[7:] = 'Programming'. 4. L[-2:] = [70, 80], T[-2:] = ('History', 'Geography'). 5. s[-2:] = 'ng'."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Tidbits",
+            "text": "Indexing aur slicing sequences ke saath kaam ke taqatwar tools hain. In ki mashq karein ta ke data ke khaas hisse aasani se nikal sakein."
           },
           {
             "type": "heading",
             "level": 2,
-            "text": "Fauri khulasa"
+            "text": "Mukhtasar khulasa"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "-1 aakhri cheez; fruits[-4:-1] se Banana, Cherry, Date; manfi index ke saath bhi slicing waisi hi."
+              "-1 aakhri item; fruits[-4:-1] = fruits[1:4] (paanch items wali list mein)."
             ]
           }
         ]

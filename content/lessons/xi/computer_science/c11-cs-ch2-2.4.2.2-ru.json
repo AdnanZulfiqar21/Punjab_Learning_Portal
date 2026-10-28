@@ -20,26 +20,65 @@
       "body": {
         "blocks": [
           {
-            "type": "callout",
-            "tone": "definition",
-            "title": "for loop",
-            "text": "for loop block ko muqarrar baar dohrata hai, aam taur par list, tuple ya string jaisi sequence ki har cheez ke liye ek baar."
+            "type": "paragraph",
+            "text": "for loop code ke block ko tay shuda baar dohrata hai. Aam taur par yeh kisi sequence (list, tuple ya string) ki har cheez par ek ek kar ke chalta hai."
           },
           {
-            "type": "callout",
-            "tone": "note",
-            "title": "Python code (har .... ek 4-space indent hai)",
-            "text": "friends = [\"Ahmad\", \"Ali\", \"Hassan\"]\nfor friend in friends:\n....print(\"As-Salaam-Alaikum\", friend)"
-          },
-          {
-            "type": "callout",
-            "tone": "note",
-            "title": "Python code (har .... ek 4-space indent hai)",
-            "text": "cart = [\n....{\"item\": \"Apple\", \"price\": 0.5, \"quantity\": 4},\n....{\"item\": \"Banana\", \"price\": 0.2, \"quantity\": 10},\n....{\"item\": \"Orange\", \"price\": 0.75, \"quantity\": 3},\n]\ntotal_price = 0\nfor product in cart:\n....item_total = product[\"price\"] * product[\"quantity\"]\n....total_price += item_total\n....print(f\"{product['item']} total: ${item_total:.2f}\")\nprint(f\"Total price of all items: ${total_price:.2f}\")"
+            "type": "code",
+            "language": "python",
+            "text": "# Syntax of for loop\nfor variable in sequence:\n    # code to run for each element in the sequence"
           },
           {
             "type": "paragraph",
-            "text": "Doosri misal shopping cart jama karti hai: Apple $2.00, Banana $2.00, Orange $2.25, aur tamam cheezon ki kul qeemat $6.25."
+            "text": "Misaal 1: dosto ki list mein har dost ko \"As-Salaam-Alaikum\" kahein."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "friends = [\"Ahmad\", \"All\", \"Hassan\"]\nfor friend in friends:\n    print(\"As-Salaam-Alaikum\", friend)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Wazahat: loop list ke har dost par baari baari chalta hai aur har ek ke liye salaam print karta hai: \"As-Salaam-Alaikum Ahmad\", phir \"As-Salaam-Alaikum All\", phir \"As-Salaam-Alaikum Hassan\". (Kitab mein naam \"All\" chhapa hai; shayad \"Ali\" maqsood hai. Code dono soorton mein chalta hai.)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Misaal 2: shopping cart ki cheezon ki kul qeemat nikalein."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "cart = [\n    {\"item\": \"Apple\", \"price\": 0.5, \"quantity\": 4},\n    {\"item\": \"Banana\", \"price\": 0.2, \"quantity\": 10},\n    {\"item\": \"Orange\", \"price\": 0.75, \"quantity\": 3}\n    ]\ntotal_price = 0\nfor product in cart:\n    item_total = product[\"price\"] * product[\"quantity\"]\n    total_price += item_total\n    print(f\"{product['item']} total: ${item_total:.2f}\")\nprint(f\"Total price of all items: ${total_price:.2f}\")"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab aakhri line print (f \"Total price ...\") chhapti hai, yani f aur quote ke beech space hai. Is se SyntaxError aata hai. f-string mein f bilkul quote ke saath likha jata hai: print(f\"Total price of all items: ${total_price:.2f}\")."
+          },
+          {
+            "type": "code",
+            "language": "text",
+            "text": "Apple total: $2.00\nBanana total: $2.00\nOrange total: $2.25\nTotal price of all items: $6.25",
+            "caption": "Output"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Asaan alfaaz mein",
+            "text": "cart ek list hai jis ki har cheez dictionary (naam aur value ke jore) hai. Har product ke liye price * quantity se item_total banta hai (Apple 0.5 * 4 = 2.00) aur total_price mein jurta jata hai. f\"...\" (f-string) mein { } ke andar variable ki value aa jati hai, aur :.2f ka matlab hai aashariya ke baad do hindse."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Class Activity",
+            "text": "Python program likhein jo temperatures ki list par chale aur 20 degree se zyada par “Warm” aur 20 ya kam par “Cold” print kare."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Class activity: temperatures = [25, 18, 30, 20] ke liye program aur output.",
+            "explanation": "for t in temperatures: (andar) if t > 20: print(\"Warm\") else: print(\"Cold\"). Output: Warm, Cold, Warm, Cold (20 \"Cold\" hai kyunke shart \"20 se zyada\" hai)."
           },
           {
             "type": "checkpoint",
@@ -50,13 +89,14 @@
           {
             "type": "heading",
             "level": 2,
-            "text": "Fauri khulasa"
+            "text": "Mukhtasar khulasa"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "for sequence ki har cheez se guzarta hai; cart ka kul 2.00 + 2.00 + 2.25 = 6.25."
+              "for: sequence ki har cheez par ek baar.",
+              "Cart ka kul $6.25."
             ]
           }
         ]

@@ -20,13 +20,16 @@
         "blocks": [
           {
             "type": "paragraph",
-            "text": "A module is a file of Python code, such as functions, variables and classes, that can be reused in other parts of a program. To create one, write the code in a file and save it with the .py extension."
+            "text": "A module in Python is just a file that contains Python code, such as functions, variables, and classes, which you can reuse in different parts of your program. Creating a module is easy. Just write your Python code in a file and save it with a .py extension. Here's how to create and use a module with the main, function:"
           },
           {
-            "type": "callout",
-            "tone": "note",
-            "title": "Python code (each .... is one 4-space indent)",
-            "text": "# greetings.py\ndef say_As-Salaam-Alaikum():\n....return \"As-Salaam-Alaikum, everyone!\"\n\n# main.py\nimport greetings\ndef main():\n....message = greetings.say_As-Salaam-Alaikum()\n....print(message)\nif __name__ == \"__main__\": main()\n# Output: As-Salaam-Alaikum, everyone!",
+            "type": "paragraph",
+            "text": "Step 1: Create a module file named greetings .py."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "#    greetings.py\ndef say_As-Salaam-Alaikum () :\n    return \"As - Salaam-Alaikum, everyone!\"",
             "book_errors": [
               "say_As-Salaam-Alaikum"
             ]
@@ -35,11 +38,51 @@
             "type": "callout",
             "tone": "correction",
             "title": "Book correction",
-            "text": "The book's function name say_As-Salaam-Alaikum is not valid Python: a name may contain only letters, digits and underscores, and the hyphens make Python stop with a SyntaxError. Working code uses a valid name such as say_salaam:\n# greetings.py\ndef say_salaam():\n....return \"As-Salaam-Alaikum, everyone!\"\n\n# main.py\nimport greetings\ndef main():\n....message = greetings.say_salaam()\n....print(message)\nif __name__ == \"__main__\": main()"
+            "text": "say_As-Salaam-Alaikum is not a valid function name: a name may contain only letters, digits and underscores, and the hyphens make it a SyntaxError. Use a name such as say_salaam, in both files: def say_salaam(): and greetings.say_salaam()."
           },
           {
             "type": "paragraph",
-            "text": "Running main.py imports greetings, calls its function and prints 'As-Salaam-Alaikum, everyone!'."
+            "text": "Explanation: This creates a module called greetings with a function named say_As-Salaam-Alaikum."
+          },
+          {
+            "type": "paragraph",
+            "text": "Step 2: Create another file named main. py to use this module. This file will contain the main function, which is the starting point of your program:"
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "#    main.py\nimport greetings\ndef main () :\n    message = greetings.say_As- Salaam-Alaikum()\n    print(message)\nif __name__ == \"__main__\": main ()\n#    Output : As - Salaam-Alaikum , everyone!",
+            "book_errors": [
+              "say_As- Salaam-Alaikum"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The call greetings.say_As- Salaam-Alaikum() has the same invalid name; with def say_salaam() in greetings.py it is greetings.say_salaam(), and the program prints As - Salaam-Alaikum, everyone!"
+          },
+          {
+            "type": "paragraph",
+            "text": "Explanation: In this example, when you run main.py. Python imports the greetings module, calls the say_As-Salaam-Alaikum function, and prints the message. By organizing your program this way, you can use the greetings module in other parts of your application, and the main function clearly shows where your program begins."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Tidbits",
+            "text": "Using the main function with modules helps keep your code organized, making it easier to maintain. Always use the main function to define the starting point of your program, and use modules to separate different parts of your code."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Did You Know?",
+            "text": "Python's standard library is made up of hundreds of modules that you can use to perform common tasks, like working with dates, generating random numbers, or reading files."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Class Activity",
+            "text": "Create a Python module named calculator .py that includes two functions:\n1. add (a, b) - This function should return the sum of two numbers.\n2. subtract (a, b) - This function should return the difference between two numbers. Then, write a script named main. py that imports your calculator module and uses these functions to perform the following:\n1. Print the result of adding 15 and 8.\n2. Print the result of subtracting 10 from 25.\nMake sure to run your main. py script and verify that the output is correct."
           }
         ]
       }

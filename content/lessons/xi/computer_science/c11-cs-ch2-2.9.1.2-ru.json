@@ -21,13 +21,35 @@
         "blocks": [
           {
             "type": "paragraph",
-            "text": "finally block hamesha chalta hai, exception ho ya na ho. else block sirf tab chalta hai jab try block mein koi exception na ho."
+            "text": "finally block hamesha chalta hai, ghalti aaye ya na aaye. else block (agar likha ho) sirf tab chalta hai jab try mein koi ghalti na aaye. Is se kuch code har haal mein chalaya ja sakta hai, aur ghalti na hone par alag kaam kiya ja sakta hai."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "try :\n    number = int(input(\"Enter a number\"))\n    result = 10 / number\nexcept ZeroDivisionError:\n    print(\"You can’t divide by zero ! \" )\nexcept ValueError:\n    print (\"Invalid input! Please enter a valid number.\")\nelse :\n    print (\"The result is\", result)\nfinally :\n    print (\"Execution completed.\")"
           },
           {
             "type": "callout",
-            "tone": "note",
-            "title": "Python code (har .... ek 4-space indent hai)",
-            "text": "try:\n....number = int(input(\"Enter a number: \"))\n....result = 10 / number\nexcept ZeroDivisionError:\n....print(\"You can't divide by zero!\")\nexcept ValueError:\n....print(\"Invalid input! Please enter a valid number.\")\nelse:\n....print(\"The result is\", result)\nfinally:\n....print(\"Execution completed.\")"
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab mein yeh code bikhra hua chhapa hai: kai lines ke tukre alag alag columns mein hain (maslan \"Ent er a\", \"number\" aur \"\"))\" alag, \"f inally\" toota hua). Oopar tukron ko sahi tarteeb mein jor kar code diya gaya hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Wazahat:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "User 5 likhe: try kaamyaab, else chalta hai (\"The result is 2.0\"), phir finally (\"Execution completed.\").",
+              "User 0 likhe: ZeroDivisionError, \"You can’t divide by zero ! \", phir finally.",
+              "User abc likhe: int() ValueError deta hai, \"Invalid input! Please enter a valid number.\", phir finally."
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Yani else sirf ghalti na hone par chal kar nateeja dikhata hai, aur finally har soorat mein aakhri paighaam print karta hai."
           },
           {
             "type": "checkpoint",
@@ -38,13 +60,14 @@
           {
             "type": "heading",
             "level": 2,
-            "text": "Fauri khulasa"
+            "text": "Mukhtasar khulasa"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "else: ghalti na ho to chalta; finally: hamesha chalta (safai, mukammal hone ka paigham)."
+              "else: ghalti na ho to; finally: hamesha.",
+              "Kai except blocks alag ghaltiyan sambhalte hain."
             ]
           }
         ]

@@ -19,16 +19,31 @@
       "body": {
         "blocks": [
           {
-            "type": "callout",
-            "tone": "definition",
-            "title": "Default parameter",
-            "text": "A parameter can have a default value, which is used when no argument is given in the call."
+            "type": "paragraph",
+            "text": "Functions can have default parameter values, which are used if no argument is provided during the function call."
+          },
+          {
+            "type": "paragraph",
+            "text": "Example: Define a function with a default parameter."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "def greet(name = \"Student\") :\nreturn \"As-Salaam-Alaikum,\"+ name +\"!\"\nprint(greet( ))              # Output: As-Salaam-Alaikum,Student!\nprint(greet(\"Umer \"))              # Output: As-Salaam-Alaikum,Umer!",
+            "book_errors": [
+              "\nreturn \"As-Salaam-Alaikum,\"+ name +\"!\"",
+              "\"Umer \""
+            ]
           },
           {
             "type": "callout",
-            "tone": "note",
-            "title": "Python code (each .... is one 4-space indent)",
-            "text": "def greet(name=\"Student\"):\n....return \"As-Salaam-Alaikum, \" + name + \"!\"\n\nprint(greet())          # As-Salaam-Alaikum, Student!\nprint(greet(\"Umer\"))    # As-Salaam-Alaikum, Umer!"
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The return line is printed at the left margin; it must be indented inside the function (IndentationError otherwise). The second call passes \"Umer \" with a space, which prints As-Salaam-Alaikum,Umer ! and not the Umer! of the comment; the argument should be \"Umer\"."
+          },
+          {
+            "type": "paragraph",
+            "text": "Explanation: In this example, the greet function has a default parameter name set to \"Student\". If no argument is provided, it uses the default value."
           }
         ]
       }

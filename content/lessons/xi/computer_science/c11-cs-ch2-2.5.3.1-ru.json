@@ -21,39 +21,93 @@
         "blocks": [
           {
             "type": "paragraph",
-            "text": "Jab module import hota hai to Python use tarteeb se dhoondti hai: pehle us folder mein jahan script hai, phir built-in modules ki standard library mein."
-          },
-          {
-            "type": "callout",
-            "tone": "note",
-            "title": "Python code (har .... ek 4-space indent hai)",
-            "text": "# helper.py\ndef greet():\n....return \"As-Salaam-Alaikum from helper.py!\"\n\n# main.py (same folder)\nimport helper\nprint(helper.greet())"
+            "text": "Jab aap koi module import karte hain to Python usay ek khaas tarteeb se dhoondti hai. Aayiye har qadam aasan misaal se dekhein."
           },
           {
             "type": "paragraph",
-            "text": "Agar module maujooda folder mein na ho to Python standard library mein dhoondti hai. random standard library ka hissa hai, is liye baghair kisi masle ke mil jata hai. String se pehle f variable ki qeemat string ke andar rakhta hai."
-          },
-          {
-            "type": "callout",
-            "tone": "note",
-            "title": "Python code (har .... ek 4-space indent hai)",
-            "text": "# main.py\nimport random\nnumber = random.randint(1, 10)\nprint(f\"Random number: {number}\")    # any number from 1 to 10"
-          },
-          {
-            "type": "callout",
-            "tone": "definition",
-            "title": "Package",
-            "text": "Package mutalliqa modules ka folder hai. E-commerce platform ke liye aap ecommerce package bana sakte hain jis mein products.py, customers.py aur orders.py modules hon, aur import: from ecommerce import products."
-          },
-          {
-            "type": "callout",
-            "tone": "note",
-            "title": "Python code (har .... ek 4-space indent hai)",
-            "text": "# ecommerce/products.py\ndef list_products():\n....return [\"Laptop\", \"Mobile\", \"Tablet\"]\n\n# main script\nfrom ecommerce import products\navailable_products = products.list_products()\nprint(available_products)    # ['Laptop', 'Mobile', 'Tablet']"
+            "text": "1. Current directory (maujooda folder): Python sab se pehle us folder mein dekhti hai jahan aap ka script rakha hai. Farz karein aap ke folder mein main.py script aur helper.py module dono hain."
           },
           {
             "type": "paragraph",
-            "text": "Modules ko packages mein munazzam karna kitabon ko library ke hisson mein lagane jaisa hai: is se code dhoondna aur sambhalna aasan hota hai."
+            "text": "Misaal: helper.py mein:"
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "def greet () :\n    return \" As – Salaam Alaikum from helper.py!\""
+          },
+          {
+            "type": "paragraph",
+            "text": "main.py mein:"
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "import helper\nmessage = helper.greet()\nprint(message) # Output : As - Salaam-Alaikum from helper.py!"
+          },
+          {
+            "type": "paragraph",
+            "text": "Wazahat: helper.py usi folder mein hai jahan main.py hai, is liye Python usay dhoond kar import kar leti hai. Asal output helper.py ki string hai: \" As – Salaam Alaikum from helper.py!\" (comment mein likhe alfaaz se thora mukhtalif)."
+          },
+          {
+            "type": "paragraph",
+            "text": "2. Standard library: maujooda folder mein module na mile to Python standard library mein dekhti hai, jis mein bohat se built-in modules hain. Maslan random adad ke liye standard library ka random module. (Kitab is qadam ko bhi \"1.\" number deti hai.)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Misaal: main.py mein:"
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "import random\nnumber = random.randint(1, 10)\nprint(f\"Random number: {number}\")  # ‘f’ is used to place the value of a variable in a string\n# Output:\n# Random number:  7 (or any number between 1 and 10)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Wazahat: random Python ki standard library ka hissa hai, is liye baghair kisi mushkil ke mil jata hai. f\"...\" string mein { } ke andar variable ki value aa jati hai."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Package structure"
+          },
+          {
+            "type": "paragraph",
+            "text": "Bare projects mein modules ko packages mein rakha jata hai. Package bas ek folder hai jis mein milte julte modules hon. Maslan e-commerce (online dukaan) platform ke liye ecommerce naam ka package, jis mein products.py, customers.py aur orders.py modules hon."
+          },
+          {
+            "type": "paragraph",
+            "text": "Misaal: ecommerce/products.py mein:"
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "def list_products () :\n    return [\"Laptop\",\"Mobile\", \"Tablet\"]"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab function ka naam 1ist_products chhapti hai, yani shuru mein digit 1. Naam digit se shuru nahi ho sakta (SyntaxError), aur main script list_products() bulata hai. Sahi: def list_products():"
+          },
+          {
+            "type": "paragraph",
+            "text": "Main script mein:"
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "from ecommerce import products\navailable_products = products.list_products()\nprint(available_products)\n#    Output :\n#    ['Laptop', 'Mobile', 'Tablet']"
+          },
+          {
+            "type": "paragraph",
+            "text": "Wazahat: yahan ecommerce package hai aur products.py module. from ecommerce import products se module aata hai aur output ['Laptop', 'Mobile', 'Tablet'] hai. Is banawat se code munazzam rehta hai."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Tidbits",
+            "text": "Modules ko packages mein rakhna aisa hai jaise library mein kitabein alag alag hisson mein rakhna: code dhoondna aur sambhalna aasan ho jata hai."
           },
           {
             "type": "checkpoint",
@@ -64,13 +118,14 @@
           {
             "type": "heading",
             "level": 2,
-            "text": "Fauri khulasa"
+            "text": "Mukhtasar khulasa"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "Module ki talash: maujooda folder, phir standard library. Package: mutalliqa modules ka folder (ecommerce/products.py)."
+              "Python pehle maujooda folder, phir standard library mein module dhoondti hai.",
+              "Package: modules ka folder; from package import module."
             ]
           }
         ]

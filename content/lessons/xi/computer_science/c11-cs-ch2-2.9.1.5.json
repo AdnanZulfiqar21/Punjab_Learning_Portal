@@ -20,13 +20,31 @@
         "blocks": [
           {
             "type": "paragraph",
-            "text": "To read a file, open it with open(), read its contents and close it to free resources. The with statement closes the file automatically, even if an error occurs."
+            "text": "To read a file, open it using the open() function, read its contents, and then close the file to free up resources."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "# Open and read a file\nwith open(\"example.txt\", \"r\") as file:\n    content = file.read ()\n    print(content)"
           },
           {
             "type": "callout",
-            "tone": "note",
-            "title": "Python code (each .... is one 4-space indent)",
-            "text": "with open(\"example.txt\", \"r\") as file:\n....content = file.read()\n....print(content)"
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "In the printed book this listing is scrambled: pieces of lines are set in two columns (\"with open(\"example\" and \".txt\", \"r\") as file:\") and the two body lines start at the margin. The code block puts the pieces in reading order with the body indented under with."
+          },
+          {
+            "type": "paragraph",
+            "text": "Explanation: In the above code:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "The with statement ensures that the file is properly closed after its suite finishes, even if an error occurs.",
+              "The file is opened in read mode (r), read contents into content, and then printed.",
+              "The file opened using 'with' is automatically closed."
+            ]
           }
         ]
       }
