@@ -53,6 +53,12 @@ export const SubjectAccents: Record<string, { light: { accent: string; accentSof
   computer_science: { light: { accent: "#0b5d73", accentSoft: "#e3f1f5" }, dark: { accent: "#6cc4dc", accentSoft: "#143440" } },
 };
 
+/** CODE-HIGHLIGHT-01: colours for the parts of a printed program; same values as globals.css `--code-*`. */
+export const CodeColors = {
+  light: { comment: "#5f636a", keyword: "#7c3aed", constant: "#be185d", number: "#be185d", string: "#166534", function: "#1d4ed8", variable: "#8a4f05" },
+  dark: { comment: "#8f9a93", keyword: "#c792ea", constant: "#f78ca8", number: "#f78ca8", string: "#c3e88d", function: "#82aaff", variable: "#ffcb6b" },
+} as const;
+
 /** The subject code for an API subject name or code ("Biology" → "biology"); unknown subjects keep the default accent. */
 export function subjectKey(nameOrCode: string | null | undefined): string | null {
   const key = (nameOrCode ?? "").trim().toLowerCase().replace(/\s+/g, "_");
