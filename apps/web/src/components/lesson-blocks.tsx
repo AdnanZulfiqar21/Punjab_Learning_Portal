@@ -342,6 +342,25 @@ function BlockView({
           )}
         </section>
       );
+    case "code":
+      // CODE-BLOCK-01: a program as printed; spaces and line breaks are kept, long lines scroll sideways.
+      return (
+        <figure className="space-y-2">
+          {str(b.caption) && (
+            <figcaption className="text-sm font-medium text-muted">
+              <Marked text={str(b.caption)} marks={marks} />
+            </figcaption>
+          )}
+          <pre
+            className="overflow-x-auto rounded-xl border border-border bg-surface-muted px-4 py-3 font-mono text-[0.9rem] leading-6"
+            tabIndex={0}
+            aria-label={`${str(b.language) || "Program"} code${str(b.caption) ? `: ${str(b.caption)}` : ""}`}>
+            <code>
+              <Marked text={str(b.text)} marks={marks} />
+            </code>
+          </pre>
+        </figure>
+      );
     case "diagram":
       return (
         <figure className="space-y-2">

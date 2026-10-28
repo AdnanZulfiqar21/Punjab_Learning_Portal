@@ -81,6 +81,19 @@ def test_tables_name_the_columns_whose_cells_the_book_merges() -> None:
         assert blocks.validate_body({"blocks": [{**table, "merge_starts": bad}]}, for_publication=False).errors, bad
 
 
+def test_code_listings_keep_their_indentation() -> None:
+    # CODE-BLOCK-01: a printed program keeps every space; a book's slip in it can be marked like any other text.
+    listing = "class Student:\n    def __init__(self, name):\n        self.name = name\n"
+    block = {"type": "code", "language": "python", "text": listing, "caption": "Fixture listing"}
+    ok = blocks.validate_body({"blocks": [block]}, for_publication=True)
+    assert ok.errors == [] and ok.block_types == ["code"]
+    parsed = blocks.validate_body({"blocks": [{**block, "book_errors": ["self.name"]}]}, for_publication=False)
+    assert parsed.errors == []
+    assert blocks.validate_body({"blocks": [{**block, "language": "cobol"}]}, for_publication=False).errors
+    assert blocks.validate_body({"blocks": [{**block, "text": ""}]}, for_publication=False).errors
+    assert blocks.validate_body({"blocks": [{**block, "book_errors": ["print("]}]}, for_publication=False).errors
+
+
 def _staff(client: TestClient, db: Session) -> dict[str, Staff]:
     return {
         "author": Staff(client, db, ["content_author"], BIO11),
