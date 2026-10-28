@@ -14,36 +14,45 @@
           "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
           "pdf_from": 68,
           "pdf_to": 69,
-          "note": "Roman Urdu explanation of exception handling (PDF 68-69)."
+          "note": "Roman Urdu explanation of 'Exception handling' (PDF 68-69), rewritten 2026-10-28 to follow the book paragraph for paragraph."
         }
       ],
       "body": {
         "blocks": [
           {
             "type": "paragraph",
-            "text": "Exception handling program chalte waqt hone wali ghaltiyon ko sambhalti hai. Yeh program ko crash hone se rokti aur ghair-mutawaqqa suraton mein saleeqe se jawab dene deti hai, jis se aitbaar aur user ka tajurba behtar hota hai. Python exceptions pakarne aur sambhalne ke built-in tools deta hai."
+            "text": "Exception handling program chalte waqt aane wali ghaltiyon (errors) ko sambhalne ke liye hai. Yeh program ko crash hone (achanak band hone) se rokti hai aur ghair-mutawaqqa halaat mein saleeqe se jawab dene deti hai. Theek exception handling program par bharosa aur user ka tajurba behtar karti hai. Python exceptions pakarne aur sambhalne ke built-in tools deta hai."
           },
           {
             "type": "callout",
             "tone": "note",
-            "title": "Dilchasp baat",
-            "text": "Exception handling programs ko achanak ruke baghair ghair-mutawaqqa masail sambhalne deti hai."
+            "title": "Tidbit (dilchasp baat)",
+            "text": "Exception handling programs ko achanak ruke baghair ghair-mutawaqqa masle sambhalne deti hai."
           },
           {
-            "type": "callout",
-            "tone": "note",
-            "title": "Misal: try, except aur finally se mehfooz database insert (Python code; har .... ek 4-space indent hai)",
-            "text": "import sqlite3\n\ntry:\n....connection = sqlite3.connect(\"school.db\")\n....cursor = connection.cursor()\n....cursor.execute(\"INSERT INTO students (ID, Name, Age) VALUES (?, ?, ?)\", (1, \"Ali\", 20))\n....connection.commit()             # save changes (keeps data correct)\n....print(\"Data inserted successfully\")\nexcept sqlite3.Error as e:\n....print(\"Error occurred:\", e)\n....connection.rollback()           # undo changes if an error occurs\nfinally:\n....if connection:\n........connection.close()\n........print(\"Connection closed\")"
+            "type": "paragraph",
+            "text": "Misal (Example):"
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "import sqlite3\n\ntry:\n    # Connect to database\n    connection = sqlite3.connect(\"school.db\")\n    cursor = connection.cursor()\n\n    # Insert data into table\n    cursor.execute(\"INSERT INTO students (ID, Name, Age) VALUES (?, ?, ?)\", (1, \"Ali\", 20))\n\n    # Save changes (ensures data integrity)\n    connection.commit()\n    print(\"Data inserted successfully\")\n\nexcept sqlite3.Error as e:\n    # Handle database errors\n    print(\"Error occurred:\", e)\n    connection.rollback()  # Undo changes if error occurs\n\nfinally:\n    # Close connection\n    if connection:\n        connection.close()\n        print(\"Connection closed\")"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "try-except ghaltiyan sambhalta aur crash rokta hai.",
-              "commit() durust data mehfooz kar ke database yaksan rakhta hai.",
-              "rollback() ghalti hone par tabdeeliyan mansookh karta hai.",
-              "finally hamesha chalta hai, is liye database mehfooz tareeqe se band hota hai."
+              "try-except → ghaltiyan sambhalta aur crash rokta hai.",
+              "commit() → sahi data mehfooz karta hai (data ki durusti, integrity).",
+              "rollback() → ghalti ho to tabdeeliyan wapas (cancel) karta hai.",
+              "finally → har haal mein chalta hai aur database ko mehfooz tareeqe se band karta hai."
             ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Asaan alfaaz mein",
+            "text": "Agar students table mein ID 1 na ho to output 'Data inserted successfully' aur 'Connection closed' hai. Agar ID 1 pehle se ho (maslan chapter 4 ka program chalane ke baad, jahan Ali ko id 1 mili), to sqlite3 error deta hai (UNIQUE constraint failed: students.id); except use pakar kar 'Error occurred: ...' dikhata hai, rollback() hota hai, aur finally phir bhi 'Connection closed' chhapta hai. Program crash nahi hota."
           },
           {
             "type": "diagram",
@@ -60,23 +69,23 @@
           {
             "type": "callout",
             "tone": "tip",
-            "title": "Class activity",
-            "text": "Aisa Python program likhein jo user se do numbers le aur exception handling se ghalat input ya zero se taqseem ki koshish par ghalti ka paigham dikhaye."
+            "title": "Class Activity",
+            "text": "Aisa Python program likhein jo user se do numbers le, aur exception handling se ghalti ka paigham dikhaye agar user ghalat input de ya zero se taqseem (divide) karne ki koshish kare."
           },
           {
             "type": "heading",
-            "level": 2,
-            "text": "Kai qism ke exceptions sambhalna"
+            "level": 3,
+            "text": "Kai qism ke exceptions achhi tarah sambhalna"
           },
           {
             "type": "paragraph",
-            "text": "Program ko mukhtalif qism ke exceptions pesh aa sakte hain. Python aik try block ke saath kai except blocks rakhne deta hai, har aik aik qism ke exception ka munasib jawab deta hai. Yeh achanak crash rokta, theek bahali mumkin banata aur ghaltiyon par behtar control deta hai."
+            "text": "Aik program ko mukhtalif qism ke exceptions pesh aa sakte hain. Python aik hi try–except block mein kai exceptions pakarne deta hai, aur har qism ke exception ka apna khaas jawab diya ja sakta hai. Is se achanak crash nahi hota aur ghalti ke baad program theek tarah sambhal jata hai (error recovery). Kai exceptions sambhalne se program mazboot hota hai aur ghaltiyon par control barhta hai."
           },
           {
-            "type": "callout",
-            "tone": "note",
-            "title": "Izafi misal: class activity, do qism ke exceptions ke saath (Python code; har .... ek 4-space indent hai)",
-            "text": "try:\n....a = int(input(\"First number: \"))\n....b = int(input(\"Second number: \"))\n....print(\"Result:\", a / b)\nexcept ValueError:\n....print(\"Please enter whole numbers only.\")\nexcept ZeroDivisionError:\n....print(\"You cannot divide by zero.\")"
+            "type": "code",
+            "language": "python",
+            "text": "try:\n    a = int(input(\"First number: \"))\n    b = int(input(\"Second number: \"))\n    print(\"Result:\", a / b)\nexcept ValueError:\n    print(\"Please enter whole numbers only.\")\nexcept ZeroDivisionError:\n    print(\"You cannot divide by zero.\")",
+            "caption": "Izafi misal (kitab mein nahi): class activity, do qism ke exceptions ke saath"
           },
           {
             "type": "checkpoint",
@@ -87,15 +96,15 @@
           {
             "type": "heading",
             "level": 2,
-            "text": "Fauri khulasa"
+            "text": "Mukhtasar khulasa"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "try mein woh code jo nakam ho sakta; except naam wali ghalti sambhalta; finally hamesha chalta.",
-              "commit() achhi tabdeeliyan mehfooz; rollback() ghalti ke baad wapas.",
-              "Kai except blocks kai qism ke exceptions sambhalte."
+              "try mein woh code jo nakam ho sakta hai; except naam wali ghalti sambhalta hai; finally hamesha chalta hai.",
+              "commit() achhi tabdeeli mehfooz karta hai; rollback() ghalti ke baad wapas karta hai.",
+              "Kai except blocks kai qism ke exceptions sambhalte hain."
             ]
           }
         ]

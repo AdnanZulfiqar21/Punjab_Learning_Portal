@@ -14,52 +14,55 @@
           "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
           "pdf_from": 65,
           "pdf_to": 66,
-          "note": "Roman Urdu explanation of unit testing with unittest and pytest (PDF 65-66)."
+          "note": "Roman Urdu explanation of 'Unit testing' (PDF 65-66), rewritten 2026-10-28 to follow the book paragraph for paragraph."
         }
       ],
       "body": {
         "blocks": [
           {
-            "type": "callout",
-            "tone": "definition",
-            "title": "Unit testing",
-            "text": "Unit testing program ke alag alag hisson (units), jaise akele functions, ko alag test karna hai taake har aik ka durust kaam jaancha ja sake."
-          },
-          {
             "type": "paragraph",
-            "text": "Unit testing ghaltiyan jaldi pakarti aur debugging asan banati hai. Python ke modules functions aur methods ki testing khud-kaar karte hain aur jaanchte hain ke har hissa mutawaqqa output deta hai ya nahi; wazeh, saade test cases aitbaar barhate hain."
+            "text": "Unit testing program ke alag alag hisson (units), jaise akele functions, ko test karna hai taake har hissa sahi kaam kare. Is se ghaltiyan jaldi pakri jati hain aur debugging aasan ho jati hai. Python tests likhne aur chalane ke liye unittest aur pytest jaise modules deta hai. Yeh modules functions aur methods ki testing khud-kaar (automated) kar dete hain. Unit tests jaanchte hain ke har hissa (component) wahi output deta hai jis ki tawaqqo (expected output) hai. Saaf aur saada test cases likhne se code par bharosa barhta hai."
           },
           {
             "type": "heading",
-            "level": 2,
-            "text": "Python ke unittest aur pytest"
+            "level": 3,
+            "text": "Python ke unittest aur pytest modules ka ta'aruf"
           },
           {
             "type": "paragraph",
-            "text": "unittest Python mein built-in hai aur test-case classes ka dhaancha deta hai. pytest bahar ka module hai (pip install pytest se install) jo tests likhna aur chalana saada banata hai. Dono jaanchte hain ke code, akele functions, classes ya poore modules, tawaqqo ke mutabiq chalta hai, aur bari applications mein istehkam barhate hain."
+            "text": "unittest module Python mein built-in hai aur test cases banane ka framework (dhaancha) deta hai. pytest bahar ka (external) module hai (pip install pytest se install hota hai) jo tests likhna aur chalana aasan banata hai. Dono jaanchte hain ke code tawaqqo ke mutabiq chalta hai. Yeh akele functions, classes ya poore modules test kar sakte hain. In tools se program mazboot hota hai aur bari applications mein ghaltiyan kam hoti hain."
           },
           {
             "type": "heading",
-            "level": 2,
+            "level": 3,
             "text": "Test cases likhna aur chalana"
           },
           {
             "type": "paragraph",
-            "text": "Test case function ko khaas inputs deta aur mutawaqqa output batata hai; maslan calculator ko jama aur tafreeq par test kiya ja sakta hai. Python tests chala kar har nakami ya ghalti batata hai. Har tabdeeli ke baad tests dobara chalana dikhata hai ke maujooda khusoosiyat ab bhi chalti hain, aur khud-kaar chalana waqt bachata hai."
+            "text": "Test case kisi function ke liye khaas inputs aur un ka tawaqqo wala output tay karta hai. Maslan calculator function ko jama (addition) aur tafreeq (subtraction) ke nataij ke liye test kiya ja sakta hai. Python yeh tests chala kar batata hai ke kaun sa test fail hua ya kahan error aaya. Baar baar testing yaqeeni banati hai ke code ki tabdeeli pehle se chalti functionality ko na tore. Khud-kaar (automated) testing waqt bachati aur kaam ki durusti barhati hai."
           },
           {
-            "type": "callout",
-            "tone": "note",
-            "title": "Misal: functions aur un ke pytest tests (Python code; har .... ek 4-space indent hai)",
-            "text": "# Functions to test\ndef add(a, b):\n....return a + b\n\ndef multiply(a, b):\n....return a * b\n\n# pytest finds and runs functions whose names start with test\ndef test_add():\n....assert add(2, 3) == 5          # passes: 2 + 3 = 5\n\ndef test_multiply():\n....assert multiply(2, 3) == 6     # passes: 2 * 3 = 6"
+            "type": "paragraph",
+            "text": "Misal (Example):"
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "# Function to test\n# This function takes two input values, a and b.\n# It returns the sum of both values.\ndef add(a, b):\n    return a + b\n# This function takes two input values, a and b.\n# It returns the product of both values.\ndef multiply(a, b):\n    return a * b\n# Using pytest to test functions\n# In pytest, every test function usually starts with the word \"test_\".\n# Pytest automatically detects and runs these test functions.\ndef test_add():\n    # This test checks whether the add() function gives the correct result.\n    # Here, 2 and 3 are passed as input values.\n    # The expected output is 5.\n    assert add(2, 3) == 5  # Test passes because 2 + 3 = 5\n\ndef test_multiply():\n    # This test checks whether the multiply() function gives the correct result.\n    # Here, 2 and 3 are passed as input values.\n    # The expected output is 6.\n    assert multiply(2, 3) == 6  # Test passes because 2 * 3 = 6"
+          },
+          {
+            "type": "code",
+            "language": "text",
+            "text": "2 passed",
+            "caption": "Output (file wale folder mein pytest chala kar, khulasa)"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "unittest ke baraks pytest ko test-case classes ya izafi boilerplate nahi chahiye: tests saade functions hain.",
-              "assert jaanchta hai ke output durust hai ya nahi; shart ghalat ho to test fail hota hai.",
-              "Tests chalane ke liye test file wale folder mein command line par pytest likhein."
+              "pytest testing aasan banata hai: is mein unittest ki tarah test case classes ya izafi (boilerplate) code ki zaroorat nahi.",
+              "Tests saade functions hote hain, aur assert check karta hai ke output sahi hai; shart ghalat ho to test fail ho jata hai.",
+              "Tests chalane ke liye us folder mein jahan file rakhi hai, command line par pytest likhein."
             ]
           },
           {
@@ -69,10 +72,10 @@
             "caption": "pytest se unit testing (hamara apna khaaka; kitab mein yeh figure nahi)."
           },
           {
-            "type": "callout",
-            "tone": "note",
-            "title": "Izafi misal: wahi test unittest ke saath (Python code; har .... ek 4-space indent hai)",
-            "text": "import unittest\n\nclass TestCalc(unittest.TestCase):\n....def test_add(self):\n........self.assertEqual(add(2, 3), 5)\n\nif __name__ == \"__main__\":\n....unittest.main()"
+            "type": "code",
+            "language": "python",
+            "text": "import unittest\n\nclass TestCalc(unittest.TestCase):\n    def test_add(self):\n        self.assertEqual(add(2, 3), 5)\n\nif __name__ == \"__main__\":\n    unittest.main()",
+            "caption": "Izafi misal (kitab mein nahi): wahi test unittest ke saath"
           },
           {
             "type": "checkpoint",
@@ -83,15 +86,15 @@
           {
             "type": "heading",
             "level": 2,
-            "text": "Fauri khulasa"
+            "text": "Mukhtasar khulasa"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
               "Unit test: aik waqt mein aik function ya method jaanchna.",
-              "unittest: built-in, class wala; pytest: bahar ka, assert wale saade functions.",
-              "Har tabdeeli ke baad tests chalayein; pytest test_... naam wale functions dhoondta."
+              "unittest: built-in, class wala; pytest: external, assert wale saade functions.",
+              "Har tabdeeli ke baad tests chalayein; pytest test_ se shuru hone wale functions khud dhoondta hai."
             ]
           }
         ]

@@ -12,40 +12,56 @@
         {
           "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
           "pdf_from": 69,
-          "pdf_to": 73,
-          "note": "Topic 5.3 with the Do You Know (PDF 69-72); Figs 5.3 and 5.4 redrawn, with the profiling listing checked against the page images and the book's sample output used in Fig 5.3. Short Q10 is answered here. The tottime note and check question are added."
+          "pdf_to": 72,
+          "note": "Topic 5.3 as printed (PDF 69-72, printed 65-68); rewritten 2026-10-28 in the book's wording, programs as code blocks."
         }
       ],
       "body": {
         "blocks": [
           {
             "type": "paragraph",
-            "text": "Profiling and optimisation improve a program's speed and efficiency. Profiling measures how much time and how many resources each part of the code uses; optimisation makes the slow or resource-heavy parts faster. Regular profiling keeps code efficient as it grows."
+            "text": "Profiling and optimization help improve the speed and efficiency of a program. Profiling measures how much time and resources each part of the code uses. Optimization focuses on making slow or resource-heavy parts faster. These techniques are important for building high-performance applications. Regular profiling ensures that code remains efficient as it grows."
           },
           {
             "type": "callout",
             "tone": "note",
-            "title": "Do you know?",
-            "text": "Profiling helps find the slow parts of a program so that they can be improved for better performance."
-          },
-          {
-            "type": "callout",
-            "tone": "note",
-            "title": "Example: a nested loop (Python code; each .... is one 4-space indent)",
-            "text": "for i in range(10000):\n....for j in range(10000):\n........pass    # some repeated task"
+            "title": "Do You Know?",
+            "text": "Profiling helps identify slow parts of a program so they can be improved for better performance."
           },
           {
             "type": "paragraph",
-            "text": "The outer loop runs 10,000 times, and for every one of those the inner loop runs 10,000 times, so the inner statement runs 10,000 x 10,000 = 100,000,000 (one hundred million) times. Such a slow part of the code is called a performance bottleneck; profiling tools help programmers find bottlenecks so that the code can be optimised."
+            "text": "Example:"
+          },
+          {
+            "type": "paragraph",
+            "text": "The following code shows a nested loop:"
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "for i in range(10000):\n    for j in range(10000):\n        # Some repeated task\n        pass"
+          },
+          {
+            "type": "paragraph",
+            "text": "In this code, the outer loop runs 10,000 times. For every single iteration of the outer loop, the inner loop also runs 10,000 times. Therefore, the total number of executions becomes:"
+          },
+          {
+            "type": "equation",
+            "latex": "10000 \\times 10000 = 100{,}000{,}000",
+            "text_alt": "10000 × 10000=100,000,000"
+          },
+          {
+            "type": "paragraph",
+            "text": "This means the inner statement may run one hundred million times, which can make the program very slow. Such a part of the code is called a performance bottleneck. Profiling tools help programmers identify these slow sections so that they can optimise the code and improve program efficiency."
           },
           {
             "type": "heading",
-            "level": 2,
-            "text": "Measuring performance with profiling tools"
+            "level": 3,
+            "text": "Measuring performance using profiling tools"
           },
           {
             "type": "paragraph",
-            "text": "Profiling tools track the execution time and memory usage of the different functions in a program. Python provides modules such as cProfile and timeit for this. Their reports show which parts of the code are slow or resource-intensive (Fig 5.3), and measuring performance helps decide which areas to optimise first."
+            "text": "Profiling tools track the execution time and memory usage of different functions in a program. Python provides modules like cProfile and timeit for this purpose. These tools generate reports showing which parts of the code are slow or resource-intensive (as shown in Figure 5.3). Measuring performance helps prioritize areas for optimization."
           },
           {
             "type": "diagram",
@@ -61,12 +77,12 @@
           },
           {
             "type": "heading",
-            "level": 2,
-            "text": "Finding and fixing bottlenecks"
+            "level": 3,
+            "text": "Identifying and fixing performance bottlenecks"
           },
           {
             "type": "paragraph",
-            "text": "Bottlenecks are the sections that slow the whole program; profiling reports locate them. They are fixed by improving the algorithm, removing unnecessary operations or using more efficient data structures, which speeds up the whole program. Testing performance is a cycle: run a benchmark, profile, find the bottleneck, fix it, tune, and verify the results (Fig 5.4)."
+            "text": "Performance bottlenecks are sections of code that slow down the program. Profiling reports help locate these bottlenecks. Optimization techniques include improving algorithms, reducing unnecessary operations, or using efficient data structures. Fixing bottlenecks improves overall program speed and responsiveness (as shown in Figure 5.4)."
           },
           {
             "type": "diagram",
@@ -75,25 +91,42 @@
             "caption": "Figure 5.4: Performance Test Cycle (original drawing after the textbook's Figure 5.4)."
           },
           {
-            "type": "callout",
-            "tone": "note",
-            "title": "Example: profiling a slow and a fast sum (Python code; each .... is one 4-space indent)",
-            "text": "import cProfile\nimport timeit\n\ndef slow_sum(numbers):\n....total = 0\n....for num in numbers:          # adds one by one in a loop\n........total = total + num\n....return total\n\ndef fast_sum(numbers):\n....return sum(numbers)          # built-in, already optimised\n\ndef main():\n....numbers = list(range(1, 1000000))\n....print(\"Slow code result:\", slow_sum(numbers))\n....print(\"Fast code result:\", fast_sum(numbers))\n\nprint(\"Profiling Report:\")\ncProfile.run(\"main()\")\n\nnumbers = list(range(1, 1000000))\nslow_time = timeit.timeit(lambda: slow_sum(numbers), number=10)\nfast_time = timeit.timeit(lambda: fast_sum(numbers), number=10)\nprint(\"Slow code time:\", slow_time)\nprint(\"Fast code time:\", fast_time)"
+            "type": "paragraph",
+            "text": "Example:"
           },
           {
-            "type": "callout",
-            "tone": "note",
-            "title": "Output (the exact time values may be different on each computer)",
+            "type": "code",
+            "language": "python",
+            "text": "import cProfile\nimport timeit\n\n\n# Slow code example\ndef slow_sum(numbers):\n    total = 0\n\n    # Adding numbers one by one using a loop\n    for num in numbers:\n        total = total + num\n\n    return total\n\n\n# Fast code example\ndef fast_sum(numbers):\n    # Python built-in sum() is faster and optimised\n    return sum(numbers)\n\n\n# Main function\ndef main():\n    numbers = list(range(1, 1000000))\n\n    print(\"Slow code result:\", slow_sum(numbers))\n    print(\"Fast code result:\", fast_sum(numbers))\n\n\n# Profiling the program using cProfile\nprint(\"Profiling Report:\")\ncProfile.run(\"main()\")\n\n\n# Comparing execution time using timeit\nnumbers = list(range(1, 1000000))\n\nslow_time = timeit.timeit(lambda: slow_sum(numbers), number=10)\nfast_time = timeit.timeit(lambda: fast_sum(numbers), number=10)\n\nprint(\"\\nTime Comparison Report:\")\nprint(\"Slow code time:\", slow_time)\nprint(\"Fast code time:\", fast_time)"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "cProfile generates a profiling report that shows how much time each function takes during program execution.",
+              "slow_sum() is slower because it adds numbers manually using a loop.",
+              "fast_sum() is faster because it uses Python's built-in sum() function, which is already optimised.",
+              "The function taking more execution time is called the bottleneck.",
+              "timeit helps compare the execution time of slow and fast code."
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Output: (The exact time values may be different on each computer, but the output will look like this)"
+          },
+          {
+            "type": "code",
+            "language": "text",
             "text": "Profiling Report:\nSlow code result: 499999500000\nFast code result: 499999500000\n\n6 function calls in 0.080 seconds\n\nOrdered by: standard name\n\nncalls  tottime  percall  cumtime  percall  function\n1       0.060    0.060    0.080    0.080    <module>\n1       0.050    0.050    0.050    0.050    slow_sum\n1       0.010    0.010    0.010    0.010    {built-in sum}\n1       0.010    0.010    0.010    0.010    fast_sum\n1       0.000    0.000    0.080    0.080    main\n\nTime Comparison Report:\nSlow code time: 0.42\nFast code time: 0.09"
           },
           {
             "type": "list",
             "ordered": false,
             "items": [
-              "Both functions give the same result, 499999500000.",
-              "cProfile's report shows how much time each function took; slow_sum() takes the most, so it is the bottleneck.",
-              "timeit compares the execution times; in the sample output the loop took about 0.42 s and sum() about 0.09 s. The exact times may differ on each computer.",
-              "fast_sum() is faster because Python's built-in sum() is already optimised."
+              "Both functions give the same result: 499999500000.",
+              "slow_sum() takes more time because it uses a manual loop.",
+              "fast_sum() takes less time because it uses Python's built-in sum() function.",
+              "Therefore, slow_sum() is the bottleneck in this program."
             ]
           }
         ]
