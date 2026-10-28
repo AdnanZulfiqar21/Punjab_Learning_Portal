@@ -109,6 +109,12 @@ def build_topics(topics: list, parent_key: str, depth: int, seen: dict[str, int]
         if not isinstance(t, dict):
             continue  # plain-text topic phrases stay in the book index; they are not navigable topics
         frag, number = topic_key(t, seen)
+        # Where the book prints a wrong or repeated heading number, the index gives the number the topic carries in
+        # sequence ("display_number"); students see that one. The natural key still uses the printed number, so IDs
+        # never change.
+        shown = str(t.get("display_number") or "").strip()
+        if NUMBERED.match(shown):
+            number = shown
         key = f"{parent_key}/{frag}"
         points = [s for s in (t.get("subtopics") or []) if isinstance(s, str)]
         out.append({
