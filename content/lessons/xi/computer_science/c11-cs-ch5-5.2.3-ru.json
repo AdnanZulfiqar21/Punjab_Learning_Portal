@@ -283,6 +283,21 @@
             "text": "Kitab Class B ke liye √456 = 21.26 likhti hai. Lekin Class B ka variance 454 hai (Step 2.3), is liye standard deviation √454 ≈ 21.31 hai (√456 bhi taqreeban 21.35 banta hai, 21.26 nahi). Class A ke liye kitab 3.55 likhti hai; √12.56 ≈ 3.54 hai."
           },
           {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh program dono classes ka mean, variance aur standard deviation usi formula se nikalta hai (har score ka mean se farq, us ka square, phir average). class_a ya class_b ke scores badal kar Run karein aur dekhein phailao (spread) kaise badalta hai."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "class_a = [50, 52, 55, 57, 60]\nclass_b = [30, 45, 55, 75, 90]\n\nimport math\n\nfor name, scores in [(\"Class A\", class_a), (\"Class B\", class_b)]:\n    mu = sum(scores) / len(scores)                  # mean\n    squares = [(x - mu) ** 2 for x in scores]       # (x - mean) squared\n    variance = sum(squares) / len(scores)\n    sd = math.sqrt(variance)                        # standard deviation\n    print(name, \"scores:\", scores)\n    print(\"  mean =\", round(mu, 2), \" variance =\", round(variance, 2), \" SD =\", round(sd, 2))",
+            "runnable": true
+          },
+          {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "Variance aur standard deviation mein kya relation (taluq) hai, aur standard deviation zyada kaam ka kyun hai?",

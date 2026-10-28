@@ -71,6 +71,21 @@
             "caption": "Output"
           },
           {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh program ek bug aur us ka fix dikhata hai: bug wala hissa marks ka jama hamesha 2 se taqseem (divide) karta hai, jab ke fix marks ki asal ginti se. marks ki list mein number badlein ya ek aur number jorein, Run karein aur dekhein ke bug wala average kaise ghalat aata hai aur print() wali line bug pakarne mein kaise madad karti hai."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "marks = [72, 85, 64]   # teen subjects ke marks\n\n# Bug wala version: hamesha 2 se taqseem (divide) karta hai\nwrong_average = sum(marks) / 2\n# Debugging: print se values dekhein\nprint(\"sum =\", sum(marks), \"| marks ki ginti =\", len(marks))\n# Fix: jitne marks hain utni ginti se taqseem karein\nright_average = sum(marks) / len(marks)\n\nprint(\"Bug wala average:\", wrong_average)\nprint(\"Theek kiya hua average:\", round(right_average, 2))",
+            "runnable": true
+          },
+          {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "Debugging ke teen tools ya tareeqe likhein.",

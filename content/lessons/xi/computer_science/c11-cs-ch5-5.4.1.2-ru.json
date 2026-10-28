@@ -319,6 +319,21 @@
             "text": "Andaza qareeb tha lekin bilkul theek nahi; asal duniya ke data mein hamesha kuch variation (upar neeche farq) hota hai. Kitab ne error “andaza minus asal” likha hai, is liye minus 30 aaya; matlab model ne 30 rupay kam bataye."
           },
           {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh program model Earnings = intercept + slope × Customers se kamai ka andaza lagata hai aur asal kamai se error nikalta hai. customers, actual_earnings, slope ya intercept badal kar Run karein."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "intercept = 100        # beta 0: earnings with zero customers (rupees)\nslope = 40             # beta 1: extra rupees per customer\ncustomers = 28\nactual_earnings = 1250\n\npredicted = intercept + slope * customers\nerror = predicted - actual_earnings   # predicted minus actual, as in the book\n\nprint(\"Model: Earnings =\", intercept, \"+\", slope, \"x Customers\")\nprint(\"Customers:\", customers)\nprint(\"Predicted earnings:\", predicted, \"rupees\")\nprint(\"Actual earnings   :\", actual_earnings, \"rupees\")\nprint(\"Error             :\", error, \"rupees\")",
+            "runnable": true
+          },
+          {
             "type": "callout",
             "tone": "note",
             "title": "Tidbits",

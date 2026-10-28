@@ -40,6 +40,21 @@
           },
           {
             "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh program upar wale lock ki misal chalata hai: 000 se 999 tak har code generate karta hai aur test karta hai ke lock khula ya nahi. secret_code badal kar Run karein aur dekhein kitne codes aazmane pare."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "secret_code = 427   # the lock opens only with this code (0 to 999)\n\ndef open_lock():\n    for guess in range(1000):          # generate: 000, 001, 002, ...\n        if guess == secret_code:       # test: does the lock open?\n            return guess\n    return -1\n\ncode = open_lock()\nif code == -1:\n    print(\"No code from 000 to 999 opened the lock.\")\nelse:\n    print(\"Lock opened with code\", str(code).zfill(3))\n    print(\"Codes tried:\", code + 1)",
+            "runnable": true
+          },
+          {
+            "type": "heading",
             "level": 2,
             "text": "Mukhtasar khulasa"
           },

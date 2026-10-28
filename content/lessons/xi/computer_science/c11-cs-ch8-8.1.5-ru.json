@@ -82,6 +82,21 @@
           {
             "type": "heading",
             "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh program kuch titles ki list mein search engine ki tarah Boolean search karta hai. operator ko \"AND\", \"OR\" ya \"NOT\" kar ke, ya word1 aur word2 badal kar Run karein aur dekhein ke results kaise kam ya zyada hote hain."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "titles = [\"Agriculture and irrigation in Punjab\", \"Irrigation canals of Pakistan\", \"Agriculture of wheat\", \"Winter crops guide\", \"Fresh vegetables at home\", \"Modern farming tools\", \"Farming and pesticides\"]\nword1 = \"agriculture\"\nword2 = \"irrigation\"\noperator = \"AND\"        # \"AND\", \"OR\" ya \"NOT\"\n\nprint(\"Search:\", word1, operator, word2)\nresults = list()\nfor title in titles:\n    has1 = word1.lower() in title.lower()\n    has2 = word2.lower() in title.lower()\n    if operator == \"AND\":\n        match = has1 and has2\n    elif operator == \"OR\":\n        match = has1 or has2\n    else:                          # NOT: word1 ho magar word2 na ho\n        match = has1 and not has2\n    if match:\n        print(\" -\", title)\n        results.append(title)\nprint(\"Kul results:\", len(results))",
+            "runnable": true
+          },
+          {
+            "type": "heading",
+            "level": 3,
             "text": "Advanced Search Features"
           },
           {

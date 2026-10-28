@@ -76,6 +76,21 @@
             "text": "List fib har nikala hua term store karti hai. Har naya term list mein pehle se maujood aakhri do terms (fib[i - 1] aur fib[i - 2]) jama kar ke banta hai; koi term dobara nahi nikalna parta. Yahi DP hai. 0 ko pehla term gin kar 20wan term fib[19] = 4181 hai."
           },
           {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh program DP se term nikalta hai aur DP ke baghair (har term baar baar dobara nikal kar) lagne wali function calls bhi ginta hai. term ki value badal kar (25 tak) Run karein aur dono ginti compare karein."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "term = 20   # which term (0 is the 1st term)\n\ndef fib_plain(k, calls):\n    calls[0] += 1                                    # count every call\n    if k < 2:\n        return k\n    return fib_plain(k - 1, calls) + fib_plain(k - 2, calls)\n\ndef fib_dp(count):\n    fib = [0, 1]\n    for i in range(2, count):\n        fib.append(fib[i - 1] + fib[i - 2])          # use stored values\n    return fib[count - 1], max(count - 2, 0)\n\nif term < 1:\n    print(\"term must be 1 or more\")\nelse:\n    value, additions = fib_dp(term)\n    print(\"Term\", term, \"=\", value)\n    print(\"With DP: additions =\", additions)\n    if term <= 25:\n        calls = [0]\n        fib_plain(term - 1, calls)\n        print(\"Without DP: function calls =\", calls[0])\n    else:\n        print(\"Without DP it would be too slow; keep term 25 or less to compare.\")",
+            "runnable": true
+          },
+          {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "Class activity: DP se Fibonacci sequence 20wein term tak banayein. 20wan term kya hai?",

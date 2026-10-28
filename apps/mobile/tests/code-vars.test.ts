@@ -33,6 +33,16 @@ describe("changing a program's values", () => {
     assert.equal(withValues(code, vars, { 0: "print('hi')" }), code); // not a plain value: the printed one stays
   });
 
+  it("reads Windows line ends too", () => {
+    assert.deepEqual(
+      editableVars("a = 1\r\nb = 2\r\nprint(a + b)").map((v) => [v.name, v.value]),
+      [
+        ["a", "1"],
+        ["b", "2"],
+      ],
+    );
+  });
+
   it("lists input prompts", () => {
     assert.deepEqual(inputPrompts('n = input("Enter your name: ")\nage = int(input())\nh = float(input(\'H: \'))'), ["Enter your name: ", "", "H: "]);
   });

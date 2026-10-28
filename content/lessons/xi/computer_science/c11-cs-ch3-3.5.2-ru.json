@@ -31,6 +31,21 @@
           },
           {
             "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh program sorted list ke size ke liye worst case (sab se buri soorat) mein Linear Search aur Binary Search ki jaanchein (checks) ginta hai. size badal kar Run karein aur dekhein kaunsa behtar scale karta hai."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "size = 1000000   # number of sorted items\n\ndef binary_checks(n):\n    checks = 0\n    while n > 0:\n        n = n // 2        # each check throws away half\n        checks += 1\n    return checks\n\nprint(\"Items:\", size)\nprint(\"Linear Search, worst case:\", size, \"checks\")\nprint(\"Binary Search, worst case:\", binary_checks(size), \"checks\")",
+            "runnable": true
+          },
+          {
+            "type": "heading",
             "level": 2,
             "text": "Mukhtasar khulasa"
           },

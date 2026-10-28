@@ -55,6 +55,21 @@
           },
           {
             "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yahan apni exception AgeError banayi gayi hai jo age negative hone par raise hoti hai. age ko -5 se badal kar 16 karein aur Run karein."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "age = -5\nclass AgeError(Exception):\n    pass\ndef check_age(age):\n    if age < 0:\n        raise AgeError(\"Age negative nahi ho sakti: \" + str(age))\n    print(\"Age theek hai:\", age)\ntry:\n    check_age(age)\nexcept AgeError as e:\n    print(\"AgeError pakri gayi:\", e)",
+            "runnable": true
+          },
+          {
+            "type": "heading",
             "level": 2,
             "text": "Mukhtasar khulasa"
           },

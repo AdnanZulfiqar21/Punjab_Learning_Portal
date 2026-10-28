@@ -68,6 +68,21 @@
             ]
           },
           {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh program Knapsack ka chhota case brute force (har mel aazma kar) se hal karta hai aur batata hai ke kitne mel (combinations) aazmaye gaye. weights, values aur capacity badal kar Run karein; ek item barhane se aazmaye gaye mel dugne ho jate hain (2ⁿ)."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "from itertools import combinations\n\nweights = [2, 3, 4, 5]\nvalues = [3, 4, 5, 6]\ncapacity = 5\n\ndef best_choice():\n    best, best_value, tried = (), 0, 0\n    for size in range(len(weights) + 1):\n        for chosen in combinations(range(len(weights)), size):   # generate every combination\n            tried += 1\n            weight = sum(weights[i] for i in chosen)\n            value = sum(values[i] for i in chosen)\n            if weight <= capacity and value > best_value:        # test it\n                best, best_value = chosen, value\n    return best, best_value, tried\n\nbest, best_value, tried = best_choice()\nprint(\"Combinations tried:\", tried)\nprint(\"Best items (numbered from 1):\", [i + 1 for i in best])\nprint(\"Total value:\", best_value)",
+            "runnable": true
+          },
+          {
             "type": "diagram",
             "$asset": "c11-cs-ch3-fig-3-4-complexity-venn",
             "alt": "Venn diagram: oopar bara daira NP-Hard neeche wale daire NP par chadha hua hai; dono ka common (saanjha) hissa NP-Complete hai. NP ke andar neeche chhota oval (ande jaisa) daira P hai.",

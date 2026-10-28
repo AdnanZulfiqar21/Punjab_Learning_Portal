@@ -99,6 +99,21 @@
           },
           {
             "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh program upar wala secret code (Caesar cipher) chalata hai: key jitne qadam har harf ko aage karta hai (encryption), phir wohi key ulti taraf laga kar asal paigham wapas laata hai (decryption). message aur key badal kar Run karein aur dekhein ke cipher text kaise badalta hai."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "message = \"HELLO\"\nkey = 3          # har harf alphabet mein kitne qadam aage jaye\n\n\ndef shift(text, steps):\n    alphabet = \"ABCDEFGHIJKLMNOPQRSTUVWXYZ\"\n    result = \"\"\n    for ch in text.upper():\n        if ch in alphabet:\n            result += alphabet[(alphabet.index(ch) + steps) % 26]\n        else:\n            result += ch          # space aur numbers waise hi rehte hain\n    return result\n\n\nsecret = shift(message, key)       # encryption\nback = shift(secret, -key)         # decryption (wohi key, ulti taraf)\nprint(\"Plain text :\", message.upper())\nprint(\"Cipher text:\", secret)\nprint(\"Decrypt kar ke:\", back)",
+            "runnable": true
+          },
+          {
+            "type": "heading",
             "level": 2,
             "text": "Mukhtasar khulasa"
           },

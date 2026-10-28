@@ -128,6 +128,21 @@
             "text": "Explanation (wazahat): kul andazan kharcha PKR 19,844,000 development ke tamam hisson ko shamil karta hai: planning aur design se le kar implementation aur testing tak. Yeh misal dikhati hai ke mukhtalif factors kul kharche mein kaise hissa dalte hain aur kharche ke andaze mein detailed planning kitni zaroori hai."
           },
           {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh program upar wala kharche ka hisab khud karta hai. weeks, kisi ka rate ya contingency_percent badal kar Run karein aur dekhein ke subtotal (jama), contingency fund aur Total Estimated Cost kaise badalte hain."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "weeks = 24                 # project kitne hafte chalega\npm_rate = 5000             # PKR fi ghanta\nfrontend_rate = 3500\nbackend_rate = 4000\ndesigner_rate = 3000\ntester_rate = 2500\noperational_costs = 1000000\ncontingency_percent = 10\n\npm = pm_rate * 20 * weeks\nfrontend = 2 * frontend_rate * 30 * weeks\nbackend = 2 * backend_rate * 30 * weeks\ndesigner = designer_rate * 20 * weeks\ntesters = 2 * tester_rate * 20 * weeks\nsubtotal = pm + frontend + backend + designer + testers + operational_costs\ncontingency = subtotal * contingency_percent / 100\n\nprint(f\"Jama (subtotal): PKR {subtotal:,}\")\nprint(f\"Contingency fund ({contingency_percent}%): PKR {contingency:,.0f}\")\nprint(f\"Total Estimated Cost: PKR {subtotal + contingency:,.0f}\")",
+            "runnable": true
+          },
+          {
             "type": "callout",
             "tone": "note",
             "title": "Tidbits",

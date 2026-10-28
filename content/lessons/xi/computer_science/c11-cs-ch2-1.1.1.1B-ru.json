@@ -87,6 +87,21 @@
           },
           {
             "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Is program mein brand public, _speed protected aur __color private hai. brand, speed aur color badal kar Run karein: public aur protected bahar se parhe jate hain, private sirf get_color() method se milta hai."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "brand = \"Suzuki\"\nspeed = 60\ncolor = \"white\"\nclass Car:\n    def __init__(self, brand, speed, color):\n        self.brand = brand      # public\n        self._speed = speed     # protected (sirf ishara)\n        self.__color = color    # private\n    def get_color(self):\n        return self.__color\ncar = Car(brand, speed, color)\nprint(\"Public brand:\", car.brand)\nprint(\"Protected speed:\", car._speed)\nprint(\"Private color (method se):\", car.get_color())\ntry:\n    print(car.__color)\nexcept AttributeError:\n    print(\"car.__color bahar se seedha nahi milta (AttributeError)\")",
+            "runnable": true
+          },
+          {
+            "type": "heading",
             "level": 2,
             "text": "Mukhtasar khulasa"
           },

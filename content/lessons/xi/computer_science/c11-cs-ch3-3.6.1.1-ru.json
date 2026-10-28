@@ -73,6 +73,21 @@
             ]
           },
           {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh program Selection Sort ka har qadam print karta hai, jaise upar wali table mein. numbers list badal kar Run karein aur dekhein har qadam par kaunsa minimum chuna jata hai."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "numbers = [29, 10, 14, 37, 13]\n\nitems = list(numbers)\nfor i in range(len(items) - 1):\n    smallest = i\n    for j in range(i + 1, len(items)):          # find the minimum of the unsorted part\n        if items[j] < items[smallest]:\n            smallest = j\n    if smallest != i:\n        items[i], items[smallest] = items[smallest], items[i]\n        print(\"Step\", i + 1, \": swap\", items[i], \"and\", items[smallest], \"->\", items)\n    else:\n        print(\"Step\", i + 1, \":\", items[i], \"already in place ->\", items)\nprint(\"Sorted:\", items)",
+            "runnable": true
+          },
+          {
             "type": "paragraph",
             "text": "Complexity: Selection Sort ki time complexity O(n²) hai. Bubble Sort ki tarah yeh bare datasets ke liye efficient nahi, magar banana seedha aur aasan hai."
           },

@@ -71,6 +71,21 @@
             "text": "Figure mein list 21, 34, 43, 57, 66, 78 mein 78 dhoonda gaya hai. Pehle mid 43: 78 > 43, to daen aadha. Naya mid 66: 78 > 66, phir daen aadha. Naya mid 78: mil gaya. Sirf teen jaanchon mein jawab mila, jabke linear search ko chhe (6) lagtin."
           },
           {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh program Figure 3.7 wali list mein har qadam ka middle element print karta hai. target badal kar Run karein (maslan 21 ya 50); numbers list sorted (tarteeb wali) honi chahiye."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "numbers = [21, 34, 43, 57, 66, 78]   # must be sorted\ntarget = 78\n\ndef binary_search():\n    low, high = 0, len(numbers) - 1\n    step = 0\n    while low <= high:\n        mid = (low + high) // 2\n        step += 1\n        print(\"Step\", step, \": middle =\", numbers[mid])\n        if numbers[mid] == target:\n            return mid, step\n        elif target > numbers[mid]:\n            low = mid + 1                # search the right half\n        else:\n            high = mid - 1               # search the left half\n    return -1, step\n\nposition, steps = binary_search()\nif position == -1:\n    print(target, \"is not in the list; checks:\", steps)\nelse:\n    print(target, \"found at position\", position, \"in\", steps, \"checks\")",
+            "runnable": true
+          },
+          {
             "type": "callout",
             "tone": "note",
             "title": "Did You Know?",

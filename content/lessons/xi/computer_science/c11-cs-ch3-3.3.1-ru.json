@@ -38,6 +38,21 @@
             "text": "Euclidean algorithm jore (a, b) ko (b, a ko b se divide karne ka remainder) se badalta rehta hai jab tak remainder 0 na ho jaye. GCD(48, 18): 48 = 2 x 18 + 12, 18 = 1 x 12 + 6, 12 = 2 x 6 + 0, to GCD = 6. Yeh misal hamari taraf se hai."
           },
           {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh program Euclidean algorithm ke qadam print karta hai aur aakhir mein GCD batata hai. a aur b ki values badal kar Run karein; har dafa algorithm chand qadmon mein ruk jata hai (finite)."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "a = 48\nb = 18\n\nx, y = a, b\nwhile y != 0:\n    print(x, \"=\", x // y, \"x\", y, \"+\", x % y)\n    x, y = y, x % y              # (a, b) becomes (b, remainder)\nprint(\"GCD of\", a, \"and\", b, \"is\", x)",
+            "runnable": true
+          },
+          {
             "type": "paragraph",
             "text": "Unsolvable Problems (hal na ho sakne wale masle): doosri taraf, masla unsolvable hai agar aisa koi algorithm banaya hi na ja sake jo har soorat (all cases) mein hal de. In maslon ka koi aam tareeqa nahi jo har mumkin input ke liye hal ki guarantee (pakka wada) de."
           },

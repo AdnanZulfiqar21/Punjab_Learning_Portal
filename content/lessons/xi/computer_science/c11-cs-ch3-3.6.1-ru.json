@@ -40,6 +40,21 @@
             "text": "Misal: Merge Sort Divide and Conquer algorithm ki mashhoor misal hai. Algorithm be-tarteeb (unsorted) list ko do aadhon mein baant kar shuru karta hai. Phir har aadha alag se sort hota hai, aur aakhir mein dono sorted aadhe merge (jor) kar ke aakhri sorted list banti hai. Figure 3.6 Merge Sort ka process dikhati hai: list kaise baanti jati hai aur phir jor kar sorted output banta hai. Yeh tasveer dikhati hai ke Divide and Conquer tareeqa kitna efficient hai."
           },
           {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh program Merge Sort ke divide (baantna) aur merge (jorna) ke qadam print karta hai, jaise Figure 3.6 mein. numbers list badal kar Run karein aur har qadam dekhein."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "numbers = [14, 7, 3, 12]\n\ndef merge_sort(items, depth=0):\n    print(\"  \" * depth + \"Divide:\", items)\n    if len(items) <= 1:\n        return items\n    mid = len(items) // 2\n    left = merge_sort(items[:mid], depth + 1)       # sort each half\n    right = merge_sort(items[mid:], depth + 1)\n    merged = []\n    i = j = 0\n    while i < len(left) and j < len(right):         # merge: take the smaller front item\n        if left[i] <= right[j]:\n            merged.append(left[i])\n            i += 1\n        else:\n            merged.append(right[j])\n            j += 1\n    merged = merged + left[i:] + right[j:]\n    print(\"  \" * depth + \"Merge:\", left, \"+\", right, \"->\", merged)\n    return merged\n\nprint(\"Sorted:\", merge_sort(numbers))",
+            "runnable": true
+          },
+          {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "Kis algorithm ki time complexity O(n log n) hai: Bubble Sort, Binary Search, Merge Sort ya Insertion Sort (MCQ 10)?",

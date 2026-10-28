@@ -73,6 +73,21 @@
             "text": "Misal ke liye yeh sample data istemal kar sakte hain: 3, 5, 8, 8, 10, 12, 15, 15, 16, 18. Agar aap class fellows se asal data jama karna chahein to zaroor karein."
           },
           {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh program Class Activity ka poora hisab karta hai: mean, median, mode, variance aur standard deviation. hours ki list mein apne class fellows ke asal ghante likh kar Run karein."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "hours = [3, 5, 8, 8, 10, 12, 15, 15, 16, 18]  # homework hours per week\n\nimport statistics\n\nmean = sum(hours) / len(hours)\nvariance = sum((h - mean) ** 2 for h in hours) / len(hours)  # divide by N, as in the book\n\nprint(\"Data    :\", sorted(hours))\nprint(\"Mean    :\", round(mean, 2))\nprint(\"Median  :\", statistics.median(hours))\nprint(\"Mode(s) :\", statistics.multimode(hours))\nprint(\"Variance:\", round(variance, 2))\nprint(\"SD      :\", round(variance ** 0.5, 2))",
+            "runnable": true
+          },
+          {
             "type": "callout",
             "tone": "note",
             "title": "Tidbits",

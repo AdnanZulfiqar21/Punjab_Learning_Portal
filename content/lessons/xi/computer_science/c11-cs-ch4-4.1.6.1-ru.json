@@ -70,6 +70,21 @@
             "caption": "Figure 4.6: Family tree ki shakal (kitab ki Figure 4.6 ke mutabiq asal khaaka)."
           },
           {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh program Figure 4.6 wale family tree se root, leaf nodes, edges ki ginti aur height nikalta hai. parent mein naya member jorein, maslan \"Baby\": \"Child1\", aur Run kar ke dekhein ke height (unchai) kaise badalti hai."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "parent = {\"Parent1\": \"Grandparent\", \"Parent2\": \"Grandparent\", \"Child1\": \"Parent1\", \"Child2\": \"Parent1\"}\n\nheights = list()\nfor member in parent:\n    if member not in parent.values():     # nobody's parent: a leaf\n        print(\"Leaf:\", member)\n    node, edges = member, 0\n    while node in parent:                 # climb up to the root\n        node = parent[node]\n        edges = edges + 1\n    heights.append(edges)\nprint(\"Root:\", node)\nprint(\"Edges:\", len(parent), \" Height:\", max(heights))",
+            "runnable": true
+          },
+          {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "Tree ki height ke baare mein kya sach hai (MCQ 8)?",

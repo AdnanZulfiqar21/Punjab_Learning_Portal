@@ -108,6 +108,21 @@
             ]
           },
           {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh program wohi Figure 4.13 wala graph queue se BFS mein dekhta hai. 4.3.2 ke DFS order se mila kar dekhein; start badal kar (maslan 2) Run karein."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "children = {1: [2, 3, 4], 2: [5, 6], 3: [7], 4: [8, 9]}   # Figure 4.13\nstart = 1\n\nqueue = [start]\norder = list()\nwhile queue:\n    node = queue.pop(0)                   # dequeue from the front\n    order.append(node)\n    queue.extend(children.get(node, []))  # enqueue the children\n    print(\"Visit\", node, \"-> queue:\", queue)\nprint(\"BFS order:\", order)",
+            "runnable": true
+          },
+          {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "DFS aur BFS mein farq bataiye (short question 8). Long question 7(b): exercise ke graph mein A se BFS ka order kya hai?",

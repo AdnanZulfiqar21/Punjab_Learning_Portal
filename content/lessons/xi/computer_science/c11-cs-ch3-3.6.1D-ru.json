@@ -31,6 +31,21 @@
           },
           {
             "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh program N-Queens backtracking se hal karta hai: har row mein queen rakhta hai, band gali (dead end) par wapas ja kar agla column aazmata hai, aur wapsi (backtracks) ginta hai. n ki value 4 se 6 ya 8 kar ke Run karein."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "n = 4   # board size n x n, and n queens\n\ndef safe(cols, col):\n    row = len(cols)\n    for r in range(row):              # same column or same diagonal?\n        if cols[r] == col or abs(cols[r] - col) == row - r:\n            return False\n    return True\n\ndef place(cols, back):\n    if len(cols) == n:\n        return True\n    for col in range(n):\n        if safe(cols, col):\n            cols.append(col)\n            if place(cols, back):\n                return True\n            cols.pop()                # dead end: go back (backtrack)\n            back[0] += 1\n    return False\n\ncols, back = [], [0]\nif place(cols, back):\n    for c in cols:\n        print(\". \" * c + \"Q \" + \". \" * (n - c - 1))\nelse:\n    print(\"No solution for n =\", n)\nprint(\"Backtracks:\", back[0])",
+            "runnable": true
+          },
+          {
+            "type": "heading",
             "level": 2,
             "text": "Mukhtasar khulasa"
           },

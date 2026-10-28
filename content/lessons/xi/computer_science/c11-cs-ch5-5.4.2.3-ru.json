@@ -247,6 +247,21 @@
             "caption": "K-means (K = 2): paanch students ke do clusters aur un ke centers (hamara apna diagram; kitab mein figure nahi)."
           },
           {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh program K-means ka ek round chalata hai: har student ka dono centers se Euclidean distance (faasla), qareeb wala cluster, phir naye centers. center_1, center_2 ya kisi student ke scores badal kar Run karein."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "students = {\"Basim\": (85, 70), \"Umer\": (90, 65), \"Anie\": (50, 80), \"Tallat\": (40, 85), \"Maliha\": (60, 60)}\ncenter_1 = (85, 70)   # (maths, english)\ncenter_2 = (40, 85)\n\nimport math\n\ncluster_1, cluster_2 = [], []\nfor name, (x, y) in students.items():\n    d1 = math.sqrt((center_1[0] - x) ** 2 + (center_1[1] - y) ** 2)\n    d2 = math.sqrt((center_2[0] - x) ** 2 + (center_2[1] - y) ** 2)\n    group = 1 if d1 <= d2 else 2\n    (cluster_1 if group == 1 else cluster_2).append(name)\n    print(f\"{name:<7} to center 1: {d1:6.2f}  to center 2: {d2:6.2f}  -> cluster {group}\")\n\nfor number, members in [(1, cluster_1), (2, cluster_2)]:\n    if members:\n        mx = sum(students[n][0] for n in members) / len(members)\n        my = sum(students[n][1] for n in members) / len(members)\n        print(\"Cluster\", number, members, \"new center =\", (round(mx, 1), round(my, 1)))",
+            "runnable": true
+          },
+          {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "K-Means Clustering ka main (sab se bara) maqsad kya hai? (MCQ 8) K-Means mein “K” kya hai? (MCQ 9) Algorithm step by step samjhaiye. (Long question 5)",

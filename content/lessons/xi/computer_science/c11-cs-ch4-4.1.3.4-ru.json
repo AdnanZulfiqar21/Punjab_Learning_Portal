@@ -44,6 +44,21 @@
             "text": "Misal: (3 + 4) * (5 - 2) mein brackets balanced hain, kyunke har ( ka apna ) hai."
           },
           {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh program stack se check karta hai ke expression ke brackets balanced hain ya nahi. expression badal kar Run karein, maslan \"(a + b)) * (c\" ya \"((3 + 4)\", aur dekhein jawab kab NOT balanced aata hai."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "expression = \"(3 + 4) * (5 - 2)\"\n\nstack, balanced = list(), True\nfor ch in expression:\n    if ch == \"(\":\n        stack.append(ch)                  # push\n    elif ch == \")\":\n        if not stack:                     # pop from an empty stack\n            balanced = False\n            break\n        stack.pop()\nif stack:                                 # something left at the end\n    balanced = False\nprint(expression, \"-> balanced\" if balanced else \"-> NOT balanced\")",
+            "runnable": true
+          },
+          {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "Stack brackets ka balance kaise check karta hai (short question 4)? (a + b)) * (c ko check karein.",

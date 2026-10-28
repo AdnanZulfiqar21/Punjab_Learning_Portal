@@ -35,6 +35,21 @@
             ]
           },
           {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh program teen blocks ki chhoti si chain banata hai: har block ka hash us ke data aur pichhle block ke hash (parent hash) dono se banta hai (hashlib Python ki library hai jo hash nikalti hai). changed_block ya changed_data badal kar Run karein: jis block ka data badla, us ka aur us ke baad ke har block ka hash badal jata hai, is liye tabdeeli foran pakri jati hai. changed_block = -1 rakhein to sab blocks theek aayenge."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "import hashlib\n\nblocks = [\"Ali -> Sara: 500\", \"Sara -> Bilal: 200\", \"Bilal -> Ali: 100\"]\nchanged_block = 1                  # is number ke block ka data badla jayega (-1 = koi nahi)\nchanged_data = \"Sara -> Bilal: 900\"\n\n\ndef block_hash(data, parent_hash):\n    # Hash block ke data AUR pichhle block ke hash (parent hash) dono se banta hai\n    return hashlib.sha256((parent_hash + data).encode()).hexdigest()[:10]\n\n\n# Asal chain ke hash yaad rakh lein\nsaved = list()\nparent = \"0\" * 10              # pehle block ka koi parent nahi\nfor data in blocks:\n    parent = block_hash(data, parent)\n    saved.append(parent)\n\n# Ab ek block ka data chupke se badlein aur poori chain dobara jaanchein\nif 0 <= changed_block < len(blocks):\n    blocks[changed_block] = changed_data\nparent = \"0\" * 10\nfor i in range(len(blocks)):\n    parent = block_hash(blocks[i], parent)\n    status = \"theek\" if parent == saved[i] else \"TABDEELI PAKRI GAYI\"\n    print(\"Block\", i, \"| asal hash\", saved[i], \"| naya hash\", parent, \"|\", status)",
+            "runnable": true
+          },
+          {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "Distributed ledger ki structure samjhaiye aur bataiye ke ise decentralized kyun rakha jata hai (exercise long question 1).",

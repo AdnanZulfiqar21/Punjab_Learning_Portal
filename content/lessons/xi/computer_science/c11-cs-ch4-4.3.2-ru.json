@@ -133,6 +133,21 @@
             ]
           },
           {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh program Figure 4.13 wale graph par stack se DFS chalata hai aur har visit ke baad stack dikhata hai, bilkul upar wali table ki tarah. start badal kar (maslan 4) ya children badal kar Run karein."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "children = {1: [2, 3, 4], 2: [5, 6], 3: [7], 4: [8, 9]}   # Figure 4.13\nstart = 1\n\nstack = [start]\norder = list()\nwhile stack:\n    node = stack.pop()                    # pop from the top\n    order.append(node)\n    for child in reversed(children.get(node, [])):\n        stack.append(child)               # push so the first child is on top\n    print(\"Visit\", node, \"-> stack:\", stack)\nprint(\"DFS order:\", order)",
+            "runnable": true
+          },
+          {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "Long question 7(a): exercise ke graph mein A se B, C aur D ki taraf, B se E aur F, C se G, aur D se H aur I ki taraf teer hain. A se shuru kar ke DFS mein nodes kis order mein dekhe jayenge?",

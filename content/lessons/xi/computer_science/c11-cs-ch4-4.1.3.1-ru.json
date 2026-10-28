@@ -118,6 +118,21 @@
             "answer": "Result: postfix expression 3 4 2 * + hai."
           },
           {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh program infix expression ko upar wale qadamon se postfix mein badalta hai aur har token ke baad stack aur output dikhata hai. expression badal kar Run karein, maslan \"3 + 4 * 2\"; har token ke beech space zaroor rakhein."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "expression = \"( 5 + 2 ) * ( 3 - 1 )\"   # put a space between every token\n\npriority = {\"+\": 1, \"-\": 1, \"*\": 2, \"/\": 2}\nstack, output = list(), list()\nfor token in expression.split():\n    if token == \"(\":\n        stack.append(token)\n    elif token == \")\":\n        while stack and stack[-1] != \"(\":\n            output.append(stack.pop())\n        if stack:\n            stack.pop()                   # remove \"(\" (not written to output)\n    elif token in priority:\n        while stack and stack[-1] != \"(\" and priority[stack[-1]] >= priority[token]:\n            output.append(stack.pop())\n        stack.append(token)\n    else:\n        output.append(token)              # operand goes straight to output\n    print(token.ljust(3), \"stack:\", stack, \" output:\", output)\nwhile stack:\n    output.append(stack.pop())\nprint(\"Postfix:\", \" \".join(output))",
+            "runnable": true
+          },
+          {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "Infix se postfix banate waqt stack kis cheez ko sambhalta hai (MCQ 4)?",

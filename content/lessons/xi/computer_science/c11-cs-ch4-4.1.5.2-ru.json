@@ -109,6 +109,21 @@
             ]
           },
           {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh program Figure 4.4 wale tree par queue se BFS chalata hai aur har visit ke baad queue dikhata hai, bilkul upar wali table ki tarah. start badal kar Run karein (maslan 3), ya children mein naye nodes jorein, aur naya order dekhein."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "children = {1: [2, 3], 2: [4, 5], 3: [6, 7], 4: [], 5: [], 6: [], 7: []}\nstart = 1          # root node\n\nqueue = [start]\norder = list()\nwhile queue:\n    node = queue.pop(0)                   # dequeue from the front\n    order.append(node)\n    queue.extend(children.get(node, []))  # enqueue its children\n    print(\"Visit\", node, \"-> queue:\", queue)\nprint(\"BFS order:\", order)",
+            "runnable": true
+          },
+          {
             "type": "checkpoint",
             "mode": "self_check",
             "prompt": "Tree par BFS mein level ba level nodes dekhne ke liye queue ka kaunsa operation istemal hota hai (MCQ 6)?",
