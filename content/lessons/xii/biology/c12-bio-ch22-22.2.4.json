@@ -13,14 +13,14 @@
           "source_document_id": "779562c7-0658-5de6-b1a6-2ee025d3b016",
           "pdf_from": 194,
           "pdf_to": 195,
-          "note": "Topic 22.2.4 with the worked example (PDF 194-195); the book's normal curves are redrawn as an original figure after the printed curves, and the formula lost in extraction is written out from its variable list."
+          "note": "Topic 22.2.4 as printed (PDF 194-195): the normal curves (original drawing), the formula as an equation block and the book's calculation table with its merged cells."
         }
       ],
       "body": {
         "blocks": [
           {
             "type": "paragraph",
-            "text": "The standard deviation measures how dispersed data are around the mean. A low standard deviation means the data cluster tightly around the mean; a high one means they are spread out; a value close to zero means the points are very close to the mean. In biology it is used to assess variability in measurements such as plant growth rates or enzyme concentrations."
+            "text": "A standard deviation is a measure of how dispersed the data is in relation to the mean. Low, or small, standard deviation indicates data are clustered tightly around the mean, and high, or large, standard deviation indicates data are more spread out. A standard deviation close to zero indicates that data points are very close to the mean, whereas a larger standard deviation indicates data points are spread further away from the mean."
           },
           {
             "type": "diagram",
@@ -30,72 +30,153 @@
           },
           {
             "type": "paragraph",
-            "text": "Formula: standard deviation (sigma) = square root of [sum of (xi - mu) squared / N], where xi is each data point, mu the mean and N the number of data points. Steps: find the mean; subtract it from each value; square each deviation; average the squares (this is the variance); take the square root."
+            "text": "In biology, standard deviation is commonly used to assess the variability in measurements, such as the growth rates of plants, the concentration of enzymes in a sample, or any other biological data."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Formula"
+          },
+          {
+            "type": "equation",
+            "latex": "\\sigma = \\sqrt{\\frac{\\sum (x_i - \\mu)^2}{N}}",
+            "text_alt": "σ = √[Σ(xᵢ − µ)² / N]"
+          },
+          {
+            "type": "paragraph",
+            "text": "Where:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "σ = standard deviation",
+              "xᵢ = each individual data point in the set",
+              "µ = mean",
+              "N = total number of data points."
+            ]
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Steps to calculate Standard Deviation with example"
+          },
+          {
+            "type": "paragraph",
+            "text": "A biologist studied the heights of 9 different plants of the same species. The heights of the plants are 56cm, 65cm, 74cm, 75cm, 76cm, 77cm, 80cm, 81cm and 91cm."
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Step1: Find the mean.",
+              "Step2: Subtract the mean from each data point to find the deviation of each point.",
+              "Step3: Square the result of each deviation which eliminates negative values and emphasizes larger deviations.",
+              "Step4: Find the average of the squared deviations.",
+              "Step5: Take the square root of the result from step 4. This is the standard deviation."
+            ]
           },
           {
             "type": "table",
-            "caption": "Standard deviation of nine plant heights",
+            "caption": "Table: Calculation of standard deviation for plant heights",
             "header": [
-              "Height xi (cm)",
-              "xi - mean",
-              "(xi - mean) squared"
+              "Height in (cm) xᵢ",
+              "Mean µ",
+              "Subtract mean from each data point (xᵢ - µ)",
+              "Square the result of each deviation (xᵢ - µ)²",
+              "Sum of squared deviations ∑(xᵢ - µ)²",
+              "Variance (Average of the squared deviations) ∑(xᵢ - µ)²/N",
+              "Standard deviation σ = √(∑(xᵢ - µ)²/N)"
             ],
             "rows": [
               [
                 "56",
-                "-19",
-                "361"
+                "75",
+                "56 – 75 = -19",
+                "361",
+                "784",
+                "87.11",
+                "9.33"
               ],
               [
                 "65",
-                "-10",
-                "100"
+                "",
+                "65 – 75 = -10",
+                "100",
+                "",
+                "",
+                ""
               ],
               [
                 "74",
-                "-1",
-                "1"
+                "",
+                "74 – 75 = -1",
+                "1",
+                "",
+                "",
+                ""
               ],
               [
                 "75",
+                "",
+                "75 – 75 = 0",
                 "0",
-                "0"
+                "",
+                "",
+                ""
               ],
               [
                 "76",
+                "",
+                "76 – 75 = 1",
                 "1",
-                "1"
+                "",
+                "",
+                ""
               ],
               [
                 "77",
-                "2",
-                "4"
+                "",
+                "77 – 75 = 2",
+                "4",
+                "",
+                "",
+                ""
               ],
               [
                 "80",
-                "5",
-                "25"
+                "",
+                "80 – 75 = 5",
+                "25",
+                "",
+                "",
+                ""
               ],
               [
                 "81",
-                "6",
-                "36"
+                "",
+                "81 – 75 = 6",
+                "36",
+                "",
+                "",
+                ""
               ],
               [
                 "91",
-                "16",
-                "256"
-              ],
-              [
-                "sum 675; mean 75",
                 "",
-                "sum 784"
+                "91 – 75 = 16",
+                "256",
+                "",
+                "",
+                ""
               ]
+            ],
+            "merged_columns": [
+              1,
+              4,
+              5,
+              6
             ]
-          },
-          {
-            "type": "paragraph",
-            "text": "Variance = 784 / 9 = 87.11, and standard deviation = square root of 87.11 = 9.33 cm."
           }
         ]
       }
