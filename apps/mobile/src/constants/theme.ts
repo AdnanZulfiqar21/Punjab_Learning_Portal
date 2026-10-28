@@ -27,8 +27,8 @@ export const Colors = {
     background: "#121412",
     surface: "#1b1e1b",
     surfaceMuted: "#242824",
-    text: "#cfcbc3", // dark mode: body text a softer grey so headings (full white) stand out (owner, 2026-10-28)
-    heading: "#ffffff",
+    text: "#ece9e3",
+    heading: "#f0e07a", // dark mode: topic titles in a soft gold above the white text (owner, 2026-10-28)
     muted: "#aaa69e",
     border: "#333832",
     accent: "#6cc4dc",
