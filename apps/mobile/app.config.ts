@@ -50,7 +50,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     ...config.ios,
     bundleIdentifier: IDS[variant],
     // Local source of truth (eas.json appVersionSource). Build 1 is the installed preview of 7d1be98.
-    buildNumber: "8",
+    buildNumber: "9",
     icon: "./assets/expo.icon",
     // A preview or development build may call an http API on the same Wi-Fi. Production stays on the default
     // App Transport Security rules, so it does not accept cleartext.
