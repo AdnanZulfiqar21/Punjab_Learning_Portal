@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH3-COMPILE-TIME-POLYMORPHISM-RU",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch3",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch3/u-1-compile-time-polymorphism",
+      "title": "1. Compile-time Polymorphism (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-CS-CH3-COMPILE-TIME-POLYMORPHISM",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 44,
+          "pdf_to": 44,
+          "note": "Roman Urdu: Compile-time Polymorphism with the Calculator program, its output and Code Explanation (PDF 44, printed 40)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Compile-time polymorphism mein yeh faisla ke kaun sa method ya operation chalega, compilation ke dauran hota hai, aam taur par method ya operator overloading se. Java aur C++ yeh dete hain. Lekin Python statically typed languages (Java, C++) ki tarah function signature ki bunyad par asli method overloading nahi deta. Python dynamically typed hai, is liye aik hi function mukhtalif qism ke arguments le sakta hai aur signature wali overloading ki zaroorat nahi rehti. Is ke bajaye default arguments, variable-length arguments (*args, **kwargs) ya function ke andar shart (conditional logic) laga kar milta julta behaviour hasil kiya jata hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Misal: yeh code default aur variable-length arguments se method overloading dikhata hai. multiply() method mukhtalif tadaad ke inputs ke saath kaam karta hai aur compile-time polymorphism ki naqal karta hai."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "class Calculator:\n    def multiply(self, a=1, b=1, *args):\n        result = a * b\n        for num in args:\n            result *= num\n        return result\n\n# Create object\ncalc = Calculator()\n\n# Using default arguments\nprint(calc.multiply())\nprint(calc.multiply(4))\n\n# Using multiple arguments\nprint(calc.multiply(2, 3))\nprint(calc.multiply(2, 3, 4))",
+            "runnable": true
+          },
+          {
+            "type": "code",
+            "language": "text",
+            "text": "1\n4\n6\n24",
+            "caption": "Output"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"class Calculator:\": class jis mein ek method multiply() hai.\n\"def multiply(self, a=1, b=1, *args):\": a aur b ki default value 1 hai, yani na diye jayein to 1 maan liye jate hain. *args baqi tamam extra numbers ko ek tuple (list jaisi) mein jama kar leta hai.\n\"result = a * b\": pehle a aur b ka zarb (multiply). Phir \"for num in args:\" har extra number se result ko zarb deta hai (result *= num).\n\"return result\": jawab wapas karta hai. \"calc = Calculator()\": object bana.\ncalc.multiply(): koi argument nahi, 1 x 1 = 1. calc.multiply(4): a = 4, b = 1, jawab 4. calc.multiply(2, 3): 6. calc.multiply(2, 3, 4): 4 *args mein jata hai, 2 x 3 x 4 = 24.\nEk hi method mukhtalif tadaad ke arguments ke saath chal gaya: yahi overloading ki naqal hai.\nOutput: 1, 4, 6 aur 24 (har ek alag line par), bilkul kitab jaisa.\nKhud try karein: aakhir mein print(calc.multiply(2, 3, 4, 5)) jorein: 120 aayega."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Mukhtasar khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Compile-time: kaun sa method chalega yeh compile ke waqt tay (overloading).",
+              "Python mein asli overloading nahi; default arguments aur *args se naqal."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

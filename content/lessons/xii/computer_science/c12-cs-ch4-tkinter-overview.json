@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH4-TKINTER-OVERVIEW",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch4",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch4/u-overview-of-tkinter-as-python-s-built-in-gui-toolkit",
+      "title": "Overview of Tkinter as Python's built-in GUI toolkit",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 50,
+          "pdf_to": 51,
+          "note": "Unnumbered topic Overview of Tkinter as Python's built-in GUI toolkit as printed (PDF 50-51, printed 46-47); its own lesson since 2026-10-29 (one lesson per book heading), moved from the topic 4.1 lesson."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Tkinter is Python's standard GUI toolkit that comes pre-installed with the language. It provides a set of classes and functions to create windows, buttons, labels, entry fields, and other widgets. Tkinter is easy to learn, lightweight, and supports event-driven programming, where actions are triggered by user events. It is suitable for building small to medium-sized GUI applications quickly and efficiently."
+          },
+          {
+            "type": "paragraph",
+            "text": "Example:"
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "import tkinter as tk\n# Create main window\nwindow = tk.Tk()\nwindow.title(\"Simple GUI Example\")\nwindow.geometry(\"300x200\")\n\n# Function to handle button click (event)\ndef on_click():\n    label.config(text=\"Button Clicked!\")\n\n# Create a label\nlabel = tk.Label(window, text=\"Welcome to Tkinter\")\nlabel.pack(pady=10)\n\n# Create an entry field\nentry = tk.Entry(window)\nentry.pack(pady=10)\n\n# Create a button\nbutton = tk.Button(window, text=\"Click Me\", command=on_click)\nbutton.pack(pady=10)\n\n# Run the application\nwindow.mainloop()"
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch4-fig-gui-window",
+            "alt": "Output window titled Simple GUI Example: the label Welcome to Tkinter, an empty entry field below it, and a Click Me button.",
+            "caption": "Output of the simple GUI example (original drawing after the output window printed beside the textbook's code)."
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Tk() → creates main window",
+              "Label → displays text",
+              "Entry → takes user input",
+              "Button → performs action",
+              "command=on_click → event handling (button click)",
+              "mainloop() → runs the GUI"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

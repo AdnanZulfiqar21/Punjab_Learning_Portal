@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH3-LEVELS-OF-ACCESS-CONTROL-RU",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch3",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch3/u-1-levels-of-access-control",
+      "title": "1. Levels of Access Control (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-CS-CH3-LEVELS-OF-ACCESS-CONTROL",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 39,
+          "pdf_to": 40,
+          "note": "Roman Urdu: Levels of Access Control with Figure 3.2, the BankAccount program and a small access-levels program of ours (PDF 39-40, printed 35-36)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Python mein class ke members (variables aur methods) kahan se nazar aayein, yeh naam ke shuru mein khaas nishan (prefix) laga kar tay kiya jata hai:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Public Members: yeh har jagah se, class ke andar ya bahar, istemal ho sakte hain. Python mein aam taur par (by default) sab members public hote hain (Figure 3.2). Syntax: self.attribute_name",
+              "Protected Members: yeh class aur us ki subclasses ke andar istemal ke liye hain. Yeh sirf aik riwaj (convention) hai, pabandi nahi: doosre programmers ko ishara hai ke is member ko bahar se istemal na karein. Syntax: self._attribute_name (aik underscore)",
+              "Private Members: yeh bohat mehdood (restricted) hain aur class ke bahar se aasani se istemal nahi ho sakte. Python Name Mangling naam ka tareeqa use karta hai jo variable ka andar ka naam badal deta hai taake ghalti se pohanch na ho. Syntax: self.__attribute_name (do underscores)"
+            ]
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch3-fig-encapsulation",
+            "alt": "Encapsulation ka khaaka: User / Outside Class se sabz teer (tick, Access allowed) Class Object ke andar Public Methods / Interface (getValue(), setValue()) tak jata hai; methods se nuqta-daar teer Private Data (__private_variable) tak. User se private data tak laal tooti lakeer par cross aur Direct access restricted likha hai.",
+            "caption": "Figure 3.2: Private aur public variables dikhane wala encapsulation khaaka (kitab ki Figure 3.2 ke mutabiq asal khaaka)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Diagram ko samjhein",
+            "text": "Kitab ki Figure 3.2 mein Private Data ke andar '_private_variable' aik underscore ke saath chhapa hai. Python mein aik underscore (_name) protected ka riwaj hai; private member do underscores (__name) se banta hai, jaise kitab ki table bhi batati hai. Is liye yahan '__private_variable' likha gaya hai. Bahar wala code sirf public methods (getValue(), setValue()) se data tak pohanchta hai; seedhi rasai (direct access) band hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Misal (Example):"
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "class BankAccount:\n    def __init__(self, balance):\n        self.__balance = balance      # Private variable\n\n    def deposit(self, amount):\n        self.__balance += amount\n    def withdraw(self, amount):\n        if amount <= self.__balance:\n            self.__balance -= amount\n        else:\n            print(\"Insufficient balance\")\n\n    def get_balance(self):\n        return self.__balance\n# Usage\naccount = BankAccount(1000)\n\naccount.deposit(500)\naccount.withdraw(300)\n\nprint(account.get_balance())              # Output: 1200\n\n# Direct access will fail\n# print(account.__balance)                # Error",
+            "runnable": true
+          },
+          {
+            "type": "code",
+            "language": "text",
+            "text": "1200",
+            "caption": "Output (program chala kar)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"class BankAccount:\": bank account ki class.\n\"def __init__(self, balance):\": account bante waqt shuru ka balance leta hai aur self.__balance mein rakhta hai. Naam ke shuru mein do underscores (__) hain, is liye yeh private variable hai. \"#\" ke baad wala hissa comment hai.\n\"deposit(self, amount)\": \"+=\" se balance mein amount jama hota hai.\n\"withdraw(self, amount)\": agar amount balance se zyada nahi (amount <= self.__balance) to \"-=\" se balance kam hota hai; warna \"Insufficient balance\" print hota hai.\n\"get_balance(self)\": private balance return karta hai; bahar wala code isi method se balance parhta hai.\n\"account = BankAccount(1000)\": 1000 balance wala account bana. deposit(500) ke baad 1500, withdraw(300) ke baad 1200.\n\"print(account.get_balance())\": 1200 print hota hai.\nAakhri line comment hai, is liye nahi chalti. \"#\" hata kar chalayein to AttributeError aata hai, kyun ke name mangling ne class ke andar naam badal kar _BankAccount__balance kar diya hai.\nOutput: 1200\nKhud try karein: withdraw(300) ki jagah withdraw(2000) likhein: pehle \"Insufficient balance\" print hoga, phir 1500, kyun ke paise nahi nikle."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Teeno levels ek saath dekhein: public (name), protected (_school) aur private (__marks). marks ki value badal kar Run karein."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "marks = 85   # yeh value badal kar dekhein\n\nclass Student:\n    def __init__(self, name, marks):\n        self.name = name          # public\n        self._school = \"GHSS\"     # protected (sirf riwaj)\n        self.__marks = marks      # private (name mangling)\n\n    def get_marks(self):\n        return self.__marks\n\ns = Student(\"Ali\", marks)\nprint(s.name)\nprint(s._school)\nprint(s.get_marks())\nprint(s._Student__marks)\ntry:\n    print(s.__marks)\nexcept AttributeError:\n    print(\"AttributeError: __marks ko bahar se seedha nahi parh sakte\")",
+            "runnable": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"marks = 85\": student ke marks, jo upar badle ja sakte hain.\n\"self.name = name\": public member; kahin se bhi parha ja sakta hai.\n\"self._school = \\\"GHSS\\\"\": protected member (ek underscore). Yeh sirf riwaj (convention) hai; bahar se parhna phir bhi mumkin hai, lekin nahi karna chahiye.\n\"self.__marks = marks\": private member (do underscores). Python iska naam andar se badal kar _Student__marks kar deta hai (name mangling).\n\"get_marks(self)\": private marks parhne ka sahi rasta (public method).\nprint(s.name), print(s._school), print(s.get_marks()): Ali, GHSS aur 85.\nprint(s._Student__marks): badla hua naam istemal karne se private value bhi nazar aa jati hai (85). Is liye kitab kehti hai ke private members “aasani se” bahar se nahi milte; yeh hifazat ghalti se bachane ke liye hai.\ntry/except: print(s.__marks) AttributeError deta hai; except wala hissa error pakad kar apna message print karta hai.\nOutput: paanch lines: \"Ali\", \"GHSS\", \"85\", \"85\" aur \"AttributeError: __marks ko bahar se seedha nahi parh sakte\".\nKhud try karein: marks = 92 likh kar Run karein: teesri aur chauthi line 92 ho jayengi."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "BankAccount class mein agar balance 1200 ho aur program account.withdraw(2000) call kare to kya hoga? Yeh encapsulation ki misal kyun hai?",
+            "explanation": "Yeh 'Insufficient balance' print karega aur balance 1200 rahega. Private balance sirf un methods se badalta hai jo request jaanchte hain, is liye ghalat tabdeeli ruk jati hai."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Mukhtasar khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Public: self.name, har jagah se.",
+              "Protected: self._name, sirf riwaj.",
+              "Private: self.__name, name mangling se naam badal jata hai."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

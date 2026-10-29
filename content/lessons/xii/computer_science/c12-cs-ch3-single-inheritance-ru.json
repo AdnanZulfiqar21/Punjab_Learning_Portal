@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH3-SINGLE-INHERITANCE-RU",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch3",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch3/u-single-inheritance",
+      "title": "Single Inheritance (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-CS-CH3-SINGLE-INHERITANCE",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 40,
+          "pdf_to": 41,
+          "note": "Roman Urdu: Single Inheritance with Figure 3.3, the Animal/Dog program and a runnable super() program of ours (PDF 40-41, printed 36-37)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Single inheritance tab hoti hai jab child class (subclass) sirf aik parent class (superclass) se attributes aur methods leti hai. Yeh Python mein inheritance ki sab se bunyadi shakal hai; child class parent ke behaviour ko barha ya badal sakti hai, is se code dobara istemal hota hai (Figure 3.3)."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch3-fig-3-3-single-inheritance",
+            "alt": "Single inheritance: Child Class ka dabba Parent Class ke neeche hai; dono aik lakeer se jure hain jis ka khokhla (hollow) teer ka sira Parent Class par hai.",
+            "caption": "Figure 3.3: Single Inheritance (kitab ki Figure 3.3 ke mutabiq asal khaaka)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Diagram ko samjhein",
+            "text": "Teer child class se parent class ki taraf jata hai aur us ka khokhla (hollow) sira parent par hai. Matlab: child parent se inherit karti hai, yani parent ke attributes aur methods le leti hai. Neeche wali misal mein Animal parent hai aur Dog child."
+          },
+          {
+            "type": "paragraph",
+            "text": "Misal (Example):"
+          },
+          {
+            "type": "paragraph",
+            "text": "Is misal mein Dog class Animal ki bunyadi functionality le leti hai aur apna khaas kaam bhi shamil karti hai."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "# Parent class (Superclass)\nclass Animal:\n    def __init__(self, name):\n        self.name = name\n\n    def eat(self):\n        print(f\"{self.name} is eating.\")\n\n# Child class (Subclass) inheriting from Animal\nclass Dog(Animal):\n    def bark(self):\n        print(f\"{self.name} says Woof!\")\n\n# Create an object of the child class\nmy_dog = Dog(\"Buddy\")\n\n# Access method from Parent class\nmy_dog.eat()  # Output: Buddy is eating.\n\n# Access method from Child class\nmy_dog.bark() # Output: Buddy says Woof!",
+            "runnable": true
+          },
+          {
+            "type": "code",
+            "language": "text",
+            "text": "Buddy is eating.\nBuddy says Woof!",
+            "caption": "Output (program chala kar)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"#\" se shuru hone wali lines comments hain; Python inhein nahi chalata.\n\"class Animal:\": parent class (superclass). __init__ naam (name) rakhta hai; eat() print karta hai \"<naam> is eating.\". f-string (f\"...\") mein {self.name} ki jagah naam aa jata hai.\n\"class Dog(Animal):\": brackets mein Animal likhne ka matlab hai ke Dog, Animal se inherit karti hai: Animal ka __init__ aur eat() Dog ko mil jate hain. Dog apna naya method bark() bhi jorti hai.\n\"my_dog = Dog(\\\"Buddy\\\")\": Dog ka object bana. Dog ka apna __init__ nahi, is liye Animal wala __init__ chala aur name = \"Buddy\" hua.\n\"my_dog.eat()\": yeh method parent (Animal) se aaya. \"my_dog.bark()\": yeh child (Dog) ka apna method hai.\nOutput: \"Buddy is eating.\" aur \"Buddy says Woof!\" (book ke comments mein bhi yahi likha hai).\nKhud try karein: \"Buddy\" ki jagah \"Moti\" likhein; dono lines mein naya naam aayega."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Tidbit (dilchasp baat)",
+            "text": "self maujooda object ka hawala (reference) hai; Python ise instance methods ko khud bhejta hai."
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Parent Class (Base Class): woh class jis ki properties inherit hoti hain. Oopar wali misal mein Animal parent class hai.",
+              "Child Class (Derived Class): woh class jo parent se inherit karti hai. Is ko banate waqt parent ka naam brackets mein likha jata hai: class Child(Parent):.",
+              "Method Overriding: child class parent mein pehle se maujood method ka apna version de sakti hai. Parent wala version call karne ke liye super() function istemal hota hai."
+            ]
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Method Overriding aur super() ki misal (kitab mein nahi): Puppy class Dog se inherit karti hai, apna eat() deti hai, aur us ke andar super().eat() se pehle parent wala eat() chalati hai. name badal kar Run karein."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "name = \"Moti\"   # puppy ka naam badal kar dekhein\n\nclass Animal:\n    def __init__(self, name):\n        self.name = name\n\n    def eat(self):\n        print(f\"{self.name} is eating.\")\n\nclass Dog(Animal):\n    def bark(self):\n        print(f\"{self.name} says Woof!\")\n\nclass Puppy(Dog):\n    def eat(self):                  # parent ka eat() override kiya\n        super().eat()               # pehle parent wala eat()\n        print(f\"{self.name} wants more milk.\")\n\np = Puppy(name)\np.eat()\np.bark()",
+            "runnable": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"name = \\\"Moti\\\"\": puppy ka naam.\nAnimal aur Dog wahi classes hain jo kitab ki misal mein hain.\n\"class Puppy(Dog):\": Puppy, Dog se inherit karti hai (aur Dog, Animal se).\n\"def eat(self):\" Puppy ke andar: parent ke eat() ko override karta hai, yani Puppy ka apna eat().\n\"super().eat()\": super() parent class ki taraf ishara hai; yeh pehle parent wala eat() chalata hai (\"Moti is eating.\"), phir agli line \"Moti wants more milk.\" print karti hai.\n\"p.bark()\": bark() Dog se inherit hua.\nOutput: teen lines: \"Moti is eating.\", \"Moti wants more milk.\" aur \"Moti says Woof!\".\nKhud try karein: super().eat() wali line hata kar Run karein: \"Moti is eating.\" nahi aayega, kyun ke ab sirf Puppy ka apna eat() chalta hai."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Mukhtasar khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Single inheritance: ek child, ek parent (Dog(Animal)).",
+              "Parent = base class, child = derived class: class Child(Parent):.",
+              "Method overriding: child apna version deti hai; super() parent ka version chalata hai."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

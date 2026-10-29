@@ -1,0 +1,193 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH7-ADVANCED-TESTS",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch7",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch7/u-advanced-tests-f-test-and-chi-square-test",
+      "title": "Advanced Tests: F-Test and Chi-Square Test",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 98,
+          "pdf_to": 100,
+          "note": "'Advanced Tests: F-Test and Chi-Square Test' under topic 7.4, as printed (PDF 98-100, printed 94-96)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Advanced tests handle complex data. The F-test compares variances. It is used in analysis of variance. The Chi-Square test checks relationships. It is used with categorical data. These tests support deeper analysis. They follow strict rules. Understanding them improves skills. Advanced tests expand knowledge."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "F-test Example:"
+          },
+          {
+            "type": "equation",
+            "latex": "F=\\frac{S_1^2}{S_2^2}",
+            "text_alt": "F = S₁² / S₂²"
+          },
+          {
+            "type": "paragraph",
+            "text": "Where:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "S₁² = Variance of sample1",
+              "S₂² = Variance of sample 2"
+            ]
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Example:"
+          },
+          {
+            "type": "paragraph",
+            "text": "Suppose we have two groups of students:"
+          },
+          {
+            "type": "paragraph",
+            "text": "Sample 1 variance = 16"
+          },
+          {
+            "type": "paragraph",
+            "text": "Sample 2 variance = 9"
+          },
+          {
+            "type": "equation",
+            "latex": "F=16/9=1.78",
+            "text_alt": "F = 16/9 = 1.78"
+          },
+          {
+            "type": "paragraph",
+            "text": "The calculated F-value (1.78) is compared with a critical value from the F-table to decide whether the variances are significantly different."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Example:"
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Numerical Example: Hypothesis Testing"
+          },
+          {
+            "type": "paragraph",
+            "text": "A school wants to check whether a new teaching method has improved students' marks. The previous average marks were 70."
+          },
+          {
+            "type": "paragraph",
+            "text": "A sample of 10 students taught with the new method obtained the following marks:"
+          },
+          {
+            "type": "paragraph",
+            "text": "72, 75, 78, 74, 77, 80, 76, 79, 81, 78"
+          },
+          {
+            "type": "paragraph",
+            "text": "Step 1: State the Hypotheses"
+          },
+          {
+            "type": "paragraph",
+            "text": "Null Hypothesis (H₀): The new method does not improve marks ( μ = 70)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Alternative Hypothesis (H₁): The new method improves marks ( μ > 70))"
+          },
+          {
+            "type": "paragraph",
+            "text": "Step 2: Set Significance Level"
+          },
+          {
+            "type": "equation",
+            "latex": "\\alpha=0.05",
+            "text_alt": "α = 0.05"
+          },
+          {
+            "type": "paragraph",
+            "text": "Step 3: Calculate Sample Mean"
+          },
+          {
+            "type": "equation",
+            "latex": "\\bar{x}=\\frac{\\text{Sum of all values}}{n}=\\frac{770}{10}=77",
+            "text_alt": "x̄ = Sum of all values / n = 770/10 = 77"
+          },
+          {
+            "type": "paragraph",
+            "text": "Step 4: Calculate Standard Deviation"
+          },
+          {
+            "type": "equation",
+            "latex": "s=\\sqrt{\\frac{\\sum\\left(x_i-\\bar{x}\\right)^2}{n-1}}=\\sqrt{\\frac{70}{9}}\\approx 2.79",
+            "text_alt": "s = √(Σ(xᵢ − x̄)² / (n − 1)) = √(70/9) ≈ 2.79"
+          },
+          {
+            "type": "paragraph",
+            "text": "Step 5: Calculate t-value"
+          },
+          {
+            "type": "equation",
+            "latex": "t=\\frac{\\bar{x}-\\mu}{s/\\sqrt{n}}=\\frac{77-70}{2.79/\\sqrt{10}}\\approx\\frac{7}{0.88}\\approx 7.93",
+            "text_alt": "t = (x̄ − μ) / (s/√n) = (77 − 70) / (2.79/√10) ≈ 7/0.88 ≈ 7.93"
+          },
+          {
+            "type": "paragraph",
+            "text": "Step 6: Decision Rule"
+          },
+          {
+            "type": "equation",
+            "latex": "df=n-1=10-1=9",
+            "text_alt": "df = n − 1 = 10 − 1 = 9"
+          },
+          {
+            "type": "paragraph",
+            "text": "Using the t-distribution table or statistical software, the p-value for t = 7.93 and df = 9 is approximately: p = 0.00002",
+            "book_errors": [
+              "p = 0.00002"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The printed p = 0.00002 is the two-tailed p-value. The test is one-tailed (H₁: μ > 70), so the p-value for t = 7.93 and df = 9 is about 0.000012 (1.2 × 10⁻⁵). The decision, reject H₀, is unchanged."
+          },
+          {
+            "type": "paragraph",
+            "text": "For (df = 9), the p-value is very small (p < 0.05)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Step 7: Conclusion"
+          },
+          {
+            "type": "paragraph",
+            "text": "Since p-value < α"
+          },
+          {
+            "type": "paragraph",
+            "text": "We reject the null hypothesis."
+          },
+          {
+            "type": "paragraph",
+            "text": "Final Conclusion"
+          },
+          {
+            "type": "paragraph",
+            "text": "The new teaching method significantly improves students' marks."
+          }
+        ]
+      }
+    }
+  ]
+}

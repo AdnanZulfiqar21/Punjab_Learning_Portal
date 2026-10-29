@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH3-RUNTIME-POLYMORPHISM",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch3",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch3/u-2-runtime-polymorphism-overriding",
+      "title": "2. Runtime Polymorphism (Overriding)",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 44,
+          "pdf_to": 45,
+          "note": "Unnumbered heading 2. Runtime Polymorphism (Overriding) under Types of Polymorphism, with the Animal sound example and its printed output (PDF 44-45, printed 40-41)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Runtime polymorphism means that the behavior of a method is decided while program is running, based on the object calling it. This happens through Method Overriding a child class provides its own version of a method already defined in the parent class."
+          },
+          {
+            "type": "paragraph",
+            "text": "Example: This code shows runtime polymorphism using method overriding. The sound() method is defined in base class Animal and overridden in Dog and Cat. At runtime, the correct method is called based on object's class."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "class Animal:\n    def sound(self):\n        return \"Some generic sound\"\n\nclass Dog(Animal):\n    def sound(self):\n        return \"Bark\"\n\nclass Cat(Animal):\n    def sound(self):\n        return \"Meow\"\n\n# Polymorphic behavior\nanimals = [Dog(), Cat(), Animal()]\nfor animal in animals:\n    print(animal.sound())"
+          },
+          {
+            "type": "code",
+            "language": "text",
+            "text": "Bark\nMeow\nSome generic sound",
+            "caption": "Output"
+          },
+          {
+            "type": "paragraph",
+            "text": "Here, sound method behaves differently depending on whether object is a Dog, Cat or Animal and this decision happens at runtime. This dynamic nature makes Python particularly powerful for runtime polymorphism."
+          }
+        ]
+      }
+    }
+  ]
+}

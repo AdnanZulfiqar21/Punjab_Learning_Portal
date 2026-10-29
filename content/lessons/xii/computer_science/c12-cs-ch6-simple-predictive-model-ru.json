@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH6-SIMPLE-PREDICTIVE-MODEL-RU",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch6",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch6/u-building-a-simple-predictive-model",
+      "title": "Building a Simple Predictive Model (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-CS-CH6-SIMPLE-PREDICTIVE-MODEL",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 84,
+          "pdf_to": 85,
+          "note": "Roman Urdu explanation of 'Building a Simple Predictive Model' under topic 6.6 (PDF 84-85, printed 80-81)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Saada predictive model (andaza lagane wala model) training data se seekhne ke liye bunyadi algorithms istemal karta hai. Yeh data parakh kar patterns samajhta hai aur phir naye, unseen data ke liye andaze lagata hai. Aise models samajhne mein asaan aur khaas taur par naye seekhne walon (beginners) ke liye mufeed hain. Test data se in ki performance napi jati hai, aur results batate hain ke kya behtar karna hai."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Neeche wala program 6.6 ki misal wala hi kaam baghair kisi library ke karta hai: training points se seedhi line (slope aur intercept) nikalta hai, test points par MSE napta hai aur naye talib-e-ilm ke score ka andaza lagata hai. test_hours ya new_hours badal kar Run karein."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "hours = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]   # parhai ke ghante (feature)\nscores = [1, 2, 2, 3, 3, 4, 5, 5, 6, 7]   # imtihani score (target)\ntest_hours = [9, 2]                       # yeh do points test ke liye\nnew_hours = 6                             # naye talib-e-ilm ke ghante\n\ntrain = [(h, s) for h, s in zip(hours, scores) if h not in test_hours]\ntest = [(h, s) for h, s in zip(hours, scores) if h in test_hours]\n\nmean_h = sum(h for h, s in train) / len(train)\nmean_s = sum(s for h, s in train) / len(train)\nslope = sum((h - mean_h) * (s - mean_s) for h, s in train) / sum((h - mean_h) ** 2 for h, s in train)\nintercept = mean_s - slope * mean_h\nprint(f\"Model equation: Exam Score = {slope:.4f} x Hours Studied + {intercept:.4f}\")\n\nerrors = [(slope * h + intercept - s) ** 2 for h, s in test]\nprint(f\"Mean Squared Error: {sum(errors) / len(errors):.4f}\")\nprint(f\"{new_hours} ghante parhne par andaza: {slope * new_hours + intercept:.2f}\")",
+            "runnable": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"hours\" aur \"scores\": kitab wala data; ghante feature hain, score target.\n\"test_hours = [9, 2]\": yeh do points testing ke liye alag rakhe (kitab ke program mein bhi yahi do test points bante hain). \"new_hours = 6\": naya input.\n\"train = [... if h not in test_hours]\": baqi 8 jore (ghante, score) training ke liye; \"test\" mein sirf 9 aur 2 ghante wale.\n\"mean_h\", \"mean_s\": training ke ghanton aur scores ka average.\n\"slope = ...\": least squares (sab se kam ghalti wali line) ka formula: (h − average)×(s − average) ka jama ÷ (h − average)² ka jama. \"intercept = mean_s - slope * mean_h\": line kahan se shuru ho.\nPehli print model ki equation dikhati hai.\n\"errors = [...]\": har test point par (andaza − asal score)²; phir un ka average = MSE.\nAakhri print: slope × 6 + intercept = naye talib-e-ilm ka andazan score.\nOutput: teen lines: \"Model equation: Exam Score = 0.6552 x Hours Studied + 0.1466\", \"Mean Squared Error: 0.1484\" aur \"6 ghante parhne par andaza: 4.08\". Yeh wahi numbers hain jo kitab ke output mein hain.\nKhud try karein: test_hours = [5, 10] kar ke Run karein aur dekhein ke line aur MSE kaise badalte hain; new_hours = 12 se aage ka andaza dekhein."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Mukhtasar khulasa: 6.6 Building a Machine Learning Model"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Qadam: data jama, safai, features chunna, train, test, phir naye data par andaza.",
+              "Features input hain, target output; feature engineering: safai, scaling, naye features.",
+              "Train-test split (aam taur par 80/20) asal performance dikhata hai.",
+              "Regression misal: test MSE 0.1484, line: score = 0.6552 × ghante + 0.1466; kitab ke program mein equation print karne wali line nahi."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

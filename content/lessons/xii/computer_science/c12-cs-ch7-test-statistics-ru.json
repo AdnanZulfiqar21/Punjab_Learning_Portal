@@ -1,0 +1,226 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH7-TEST-STATISTICS-RU",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch7",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch7/u-test-statistics",
+      "title": "Test Statistics (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-CS-CH7-TEST-STATISTICS",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 95,
+          "pdf_to": 96,
+          "note": "Roman Urdu explanation of 'Test Statistics' under topic 7.3 (PDF 95-96, printed 91-92)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Test statistics numbers (adadi qeematein) hain jo sample data (namoone ke data) se nikali jati hain. Yeh qeematein data ke rawaiye ka khulasa deti hain, nataij ka muqabla karne aur faisla karne mein madad deti hain, aur batati hain ke nataij tawaqqo se kitne door hain. Mukhtalif tests mukhtalif statistics use karte hain, maslan t-value aur chi-square value."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "t-value test:"
+          },
+          {
+            "type": "equation",
+            "latex": "t=\\frac{\\bar{x}-\\mu_0}{\\frac{s}{\\sqrt{n}}}",
+            "text_alt": "t = (x̄ − μ₀) / (s / √n)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yahan:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "x̄: sample mean (namoone ka average)",
+              "μ₀: null hypothesis ke mutabiq population mean (poori abadi ka average)",
+              "s: sample standard deviation (namoone ka phailao)",
+              "n: sample size (namoone mein kitni cheezein)"
+            ]
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Misaal:"
+          },
+          {
+            "type": "paragraph",
+            "text": "Farz karein 25 talaba ke sample ka average score 80 hai, aur hum dekhna chahte hain ke kya yeh average population mean 75 se numayan (significantly) mukhtalif hai. Sample standard deviation 10 hai."
+          },
+          {
+            "type": "equation",
+            "latex": "t=\\frac{80-75}{\\frac{10}{\\sqrt{25}}}=\\frac{5}{\\frac{10}{5}}=\\frac{5}{2}=2.5",
+            "text_alt": "t = (80 − 75) / (10/√25) = 5 / (10/5) = 5/2 = 2.5"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Asaan alfaaz mein",
+            "text": "Kitab yahan faisla nahi likhti. df = 25 − 1 = 24 aur α = 0.05 par two-tailed critical value taqreeban 2.06 hai. Kyunke 2.5 > 2.06, t critical region mein hai, is liye H₀ reject hoga: average 80 asal mein 75 se numayan mukhtalif hai."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh program upar wali t-value ki misal ka hisab karta hai. x_bar, mu0, s ya n badal kar Run karein."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "import math\n\nx_bar = 80   # sample mean\nmu0 = 75     # null hypothesis wala population mean\ns = 10       # sample standard deviation\nn = 25       # sample size\n\nstandard_error = s / math.sqrt(n)\nt = (x_bar - mu0) / standard_error\nprint(\"s / sqrt(n) =\", standard_error)\nprint(\"t =\", t)",
+            "runnable": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"import math\": square root ke liye math library.\n\"x_bar = 80\": sample ka average; \"mu0 = 75\": H₀ wala population mean; \"s = 10\": sample standard deviation; \"n = 25\": kitne talaba.\n\"standard_error = s / math.sqrt(n)\": 10 ÷ √25 = 10 ÷ 5 = 2.0 (formula ka neeche wala hissa).\n\"t = (x_bar - mu0) / standard_error\": (80 − 75) ÷ 2 = 2.5.\nOutput: \"s / sqrt(n) = 2.0\" aur \"t = 2.5\", wahi jo kitab mein hai.\nKhud try karein: n = 100 karein: standard error 1.0 aur t = 5.0 ho jayega; bare sample mein wahi farq zyada mazboot saboot ban jata hai."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Chi-square test:"
+          },
+          {
+            "type": "equation",
+            "latex": "\\chi^2=\\sum\\frac{(O_i-E_i)^2}{E_i}",
+            "text_alt": "χ² = Σ (Oᵢ − Eᵢ)² / Eᵢ"
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab chi-square ki alamat ko x² (angrezi harf x) chhapti hai, formula mein bhi aur misaal ke hal mein bhi. Sahi alamat Greek harf chi hai: χ². Formula mein chhota oᵢ bhi chhapa hai; yeh wahi Oᵢ (observed frequency) hai jo neeche ki list mein hai. Misaal ka hisab (3.4) durust hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Yahan:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Oᵢ: har category (qism) mein observed frequency (jitni dafa asal mein hua)",
+              "Eᵢ: har category mein expected frequency (jitni dafa hona chahiye tha)"
+            ]
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Misaal:"
+          },
+          {
+            "type": "paragraph",
+            "text": "Farz karein aap ek munsif (fair) pansa (die) 60 dafa phenkte hain aur yeh frequencies dekhte hain:"
+          },
+          {
+            "type": "table",
+            "caption": "Pansa 60 dafa phenkne par observed aur expected frequencies",
+            "header": [
+              "Pansay ka rukh (face)",
+              "Observed frequency (Oᵢ)",
+              "Expected frequency (Eᵢ)"
+            ],
+            "rows": [
+              [
+                "1",
+                "10",
+                "10"
+              ],
+              [
+                "2",
+                "12",
+                "10"
+              ],
+              [
+                "3",
+                "8",
+                "10"
+              ],
+              [
+                "4",
+                "14",
+                "10"
+              ],
+              [
+                "5",
+                "9",
+                "10"
+              ],
+              [
+                "6",
+                "7",
+                "10"
+              ]
+            ]
+          },
+          {
+            "type": "equation",
+            "latex": "\\chi^2=\\frac{(10-10)^2}{10}+\\frac{(12-10)^2}{10}+\\frac{(8-10)^2}{10}+\\frac{(14-10)^2}{10}+\\frac{(9-10)^2}{10}+\\frac{(7-10)^2}{10}",
+            "text_alt": "χ² = (10−10)²/10 + (12−10)²/10 + (8−10)²/10 + (14−10)²/10 + (9−10)²/10 + (7−10)²/10"
+          },
+          {
+            "type": "equation",
+            "latex": "\\chi^2=0+\\frac{4}{10}+\\frac{4}{10}+\\frac{16}{10}+\\frac{1}{10}+\\frac{9}{10}",
+            "text_alt": "χ² = 0 + 4/10 + 4/10 + 16/10 + 1/10 + 9/10"
+          },
+          {
+            "type": "equation",
+            "latex": "\\chi^2=0+0.4+0.4+1.6+0.1+0.9=3.4",
+            "text_alt": "χ² = 0 + 0.4 + 0.4 + 1.6 + 0.1 + 0.9 = 3.4"
+          },
+          {
+            "type": "paragraph",
+            "text": "Ab nikali hui χ² value 3.4 hai. Faisla karne ke liye is value ko Chi-Square distribution table ki critical value se milaya jata hai, kisi chuni hui significance level (maslan α = 0.05) aur degrees of freedom par."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch7-fig-chi-square",
+            "alt": "60 phenkon mein chhe rukhon ki mushahida frequencies (10, 12, 8, 14, 9 aur 7) ka bar chart, mutawaqqa 10 par dashed line. Dabba hal dikhata: 0 + 0.4 + 0.4 + 1.6 + 0.1 + 0.9 = 3.4; df = 5; alpha 0.05 par critical value = 11.07. Note: 3.4 < 11.07, is liye H0 (pansa munsif) radd nahi hota.",
+            "caption": "Pansay ka chi-square test (kitab ki misaal par apna khaaka).",
+            "long_description": "Munsif pansa bhi 60 phenkon mein har rukh bilkul 10 dafa nahi deta; test poochta hai ke kya farq us se bare hain jo ittifaq aam taur par paida karta hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Asaan alfaaz mein",
+            "text": "Pansay ke 6 rukh hain, is liye degrees of freedom = 6 − 1 = 5. α = 0.05 aur df = 5 par critical value 11.07 hai. Kyunke 3.4 < 11.07, H₀ (pansa munsif hai) reject nahi hota: farq itna chhota hai ke ittifaq (chance) se ho sakta hai."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh program pansay wali misal ka chi-square har rukh (face) ka hissa dikha kar jorta hai. observed ki values badal kar Run karein."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "observed = [10, 12, 8, 14, 9, 7]   # pansay ke rukh 1 se 6 tak kitni dafa aaye\nexpected = [10, 10, 10, 10, 10, 10]\n\nchi_square = 0\nfor face, (o, e) in enumerate(zip(observed, expected), start=1):\n    part = (o - e) ** 2 / e\n    chi_square += part\n    print(f\"Face {face}: ({o} - {e})^2 / {e} = {part}\")\nprint(f\"Chi-square = {chi_square:.1f}\")",
+            "runnable": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"observed = [10, 12, 8, 14, 9, 7]\": har rukh kitni dafa aaya (Oᵢ); \"expected\": munsif pansay par har rukh 60 ÷ 6 = 10 dafa (Eᵢ).\n\"chi_square = 0\": jama shuru.\n\"for face, (o, e) in enumerate(zip(observed, expected), start=1):\" zip dono lists ke jore banata hai, enumerate har jore ko number deta hai (1 se shuru).\n\"part = (o - e) ** 2 / e\": (Oᵢ − Eᵢ)² ÷ Eᵢ; \"**\" power hai. \"chi_square += part\": hissa jama mein.\nHar rukh ki line print hoti hai, aakhir mein \":.1f\" ke saath ek decimal tak jama.\nOutput: \"Face 1: (10 - 10)^2 / 10 = 0.0\", \"Face 2: (12 - 10)^2 / 10 = 0.4\", \"Face 3: (8 - 10)^2 / 10 = 0.4\", \"Face 4: (14 - 10)^2 / 10 = 1.6\", \"Face 5: (9 - 10)^2 / 10 = 0.1\", \"Face 6: (7 - 10)^2 / 10 = 0.9\" aur \"Chi-square = 3.4\".\nKhud try karein: observed = [20, 8, 8, 8, 8, 8] karein (jama phir bhi 60): chi-square 12.0 aayega, jo 11.07 se bara hai, yani pansa munsif nahi lagta."
+          }
+        ]
+      }
+    }
+  ]
+}

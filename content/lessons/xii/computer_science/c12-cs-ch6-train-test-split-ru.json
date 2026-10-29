@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH6-TRAIN-TEST-SPLIT-RU",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch6",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch6/u-train-test-split-of-data",
+      "title": "Train-Test Split Of Data (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-CS-CH6-TRAIN-TEST-SPLIT",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 84,
+          "pdf_to": 84,
+          "note": "Roman Urdu explanation of 'Train-Test Split Of Data' under topic 6.6 (PDF 84, printed 80)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Data ko training aur testing sets mein baanta jata hai. Training data model ko patterns sikhata hai. Testing data model ki performance jaanchta hai, kyunke yeh unseen (model ka na dekha hua) data hai; is ke results asal performance dikhate hain. Kitab kehti hai ke yeh split overfitting se bachata hai. Overfitting ka matlab hai model ne training data ratt liya, magar naye data par kharab chalta hai; split is ko pakarne mein madad deta hai. Aam taur par 80 feesad training aur 20 feesad testing rakhi jati hai."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch6-fig-data-split",
+            "alt": "Do patti (bars). Train-test split wali patti 80 feesad training (model naqsh seekhta) aur 20 feesad test. Doosri patti, validation ke saath, 70 feesad training, 15 feesad validation aur 15 feesad test. Note: validation data settings tune karta aur overfitting dikhata, jab ke test data aakhir tak na-dekha rehta; 70/15/15 aik aam intikhab hai.",
+            "caption": "Data ko training, validation aur test sets mein baantna (6.6 aur 6.8 ke mutabiq asal khaaka).",
+            "long_description": "Regression misal 10 nuqton ki 80/20 taqseem use karti hai: 8 training aur 2 testing ke liye."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh program 10 talaba ke marks ko shuffle (ulat pulat) kar ke 80% training aur 20% testing mein baant'ta hai. train_percent ya seed badal kar Run karein."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "import random\n\ndata = [45, 52, 60, 38, 71, 66, 80, 59, 90, 73]   # 10 talaba ke marks\ntrain_percent = 80                                # kitne feesad training ke liye\nseed = 1                                          # shuffle ka beej (same seed = same split)\n\nrandom.seed(seed)\nshuffled = data[:]\nrandom.shuffle(shuffled)\ncut = len(shuffled) * train_percent // 100\ntrain = shuffled[:cut]\ntest = shuffled[cut:]\nprint(\"Training data:\", train)\nprint(\"Testing data:\", test)\nprint(f\"{len(train)} training, {len(test)} testing\")",
+            "runnable": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"import random\": random (tasadufi) numbers wali library.\n\"data = [...]\": 10 marks; \"train_percent = 80\": kitna hissa training ka; \"seed = 1\": shuffle ka beej; ek hi seed se har dafa wahi tarteeb aati hai.\n\"random.seed(seed)\": beej set kiya. \"shuffled = data[:]\": list ki copy, taake asal data na badle. \"random.shuffle(shuffled)\": copy ko ulat pulat kiya, taake training aur testing dono mein har tarah ke marks aayein.\n\"cut = len(shuffled) * train_percent // 100\": 10 × 80 // 100 = 8; \"//\" poora number deta hai.\n\"train = shuffled[:cut]\": pehle 8; \"test = shuffled[cut:]\": baqi 2.\nOutput: \"Training data: [80, 90, 73, 59, 66, 38, 45, 71]\", \"Testing data: [52, 60]\" aur \"8 training, 2 testing\".\nKhud try karein: train_percent = 70 karein (7 training, 3 testing), ya seed = 5 kar ke dekhein ke split badal jata hai magar ginti wahi rehti hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Ek model training data par 99% aur test data par sirf 60% score karta hai. Masla kya hai, aur use kam karne ka ek tareeqa batayein.",
+            "explanation": "Overfitting: model ne aam patterns seekhne ki bajaye training data ratt liya hai. Kam karne ke tareeqe: zyada training data, ghair zaroori features hatana, saada model chunna, ya validation data se tuning."
+          }
+        ]
+      }
+    }
+  ]
+}

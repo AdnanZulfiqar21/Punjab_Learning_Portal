@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH7-P-VALUE-RU",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch7",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch7/u-p-value-and-its-importance",
+      "title": "P-value and its Importance (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-CS-CH7-P-VALUE",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 97,
+          "pdf_to": 97,
+          "note": "Roman Urdu explanation of 'P-value and its Importance' under topic 7.3 (PDF 97, printed 93)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "p-value null hypothesis ke khilaf saboot ki taqat batati hai. Yeh probability (imkaan) hai ke agar null hypothesis sach ho to hamein yahi nataij, ya in se bhi zyada intehai nataij, milein. Chhoti p-value null hypothesis ko reject karne ki taraf le jati hai, kyunke is ka matlab hai ke nateeja sirf ittifaq se aana mushkil hai. Faisla karne ke liye p-value ko significance level, maslan 0.05, se milaya jata hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Maslan ek ustad dekhna chahta hai ke kya parhane ka naya tareeqa talaba ke marks behtar karta hai. Null hypothesis kehta hai ke naye tareeqe ka koi asar nahi. Test scores analyze karne par p-value 0.03 aati hai. Kyunke 0.03 < 0.05, null hypothesis reject kiya ja sakta hai. Is ka matlab hai ke statistics ka saboot hai ke naye tareeqe ne talaba ki karkardagi (performance) behtar ki hogi."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh chhota program p-value aur significance level ko mila kar faisla likhta hai. p_value ya alpha badal kar Run karein."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "p_value = 0.03   # test se mili p-value\nalpha = 0.05     # significance level (pehle se chuna hua)\n\nprint(\"p-value =\", p_value, \"| alpha =\", alpha)\nif p_value < alpha:\n    print(\"Faisla: null hypothesis (H0) reject\")\nelse:\n    print(\"Faisla: H0 reject nahi hota (saboot kafi nahi)\")",
+            "runnable": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"p_value = 0.03\": test se mili p-value (ustad wali misal). \"alpha = 0.05\": pehle se chuna gaya significance level.\nPehli print dono values dikhati hai.\n\"if p_value < alpha:\" p-value alpha se chhoti ho to H₀ reject; \"else:\" warna H₀ reject nahi hota (is ka matlab H₀ sabit hona nahi, sirf saboot kam hai).\nOutput: \"p-value = 0.03 | alpha = 0.05\" aur \"Faisla: null hypothesis (H0) reject\".\nKhud try karein: alpha = 0.01 karein (zyada sakht test): ab 0.03 chhoti nahi, is liye \"Faisla: H0 reject nahi hota (saboot kafi nahi)\" aayega."
+          },
+          {
+            "type": "paragraph",
+            "text": "Isi tarah medicine (tib) mein researchers test kar sakte hain ke kya nayi dawa purani dawa se zyada asar rakhti hai. Agar p-value 0.01 ho to yeh mazboot saboot hai ke behtari sirf ittifaq se nahi."
+          },
+          {
+            "type": "paragraph",
+            "text": "p-values statistics ke faisle aasan banati hain aur data par mabni nateejon ko support karti hain. p-value ko achhi tarah samajhna ghaltiyon se bachata hai, jaise baghair munasib saboot ke kisi hypothesis ko reject ya accept kar dena."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch7-fig-critical-region",
+            "alt": "Ghante jaisi curve H0 sach hone par test statistic ki mutawaqqa qeematein dikhati. Dashed 'critical value' line se aage daen dum surkh: critical region, raqba alpha = 0.05. Purple line critical region ke andar test statistic, aur us se aage chhota purple raqba p-value hai. Note: test statistic critical region mein (p-value < alpha) to H0 radd; warna H0 radd nahi.",
+            "caption": "Critical region aur p-value (7.3 par apna khaaka).",
+            "long_description": "Dono qawaid aik hi faisla hain: critical value se aage ke test statistic ki p-value hamesha alpha se kam hoti hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Test alpha = 0.05 ke saath p = 0.08 deta hai. Faisla kya hai, aur kya yeh H0 ko sach sabit karta hai?",
+            "explanation": "Kyunke 0.08, 0.05 se zyada hai, H0 radd nahi hota. Yeh H0 ko sach sabit nahi karta; sirf yeh ke data ne us ke khilaf kafi mazboot saboot nahi diya."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Mukhtasar khulasa: 7.3 Concepts in Hypothesis Testing"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Test statistic: sample data se nikla number, maslan t = (x̄ − μ₀)/(s/√n) aur χ² = Σ (O − E)²/E.",
+              "Critical region: woh qeematein jin par H₀ reject hota hai; α (aksar 0.05) is ka size tay karta hai.",
+              "p-value < α ho to H₀ reject; warna reject nahi (is se H₀ sabit nahi hota)."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

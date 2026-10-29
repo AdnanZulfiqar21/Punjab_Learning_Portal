@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH1-DNS-RU",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch1",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch1/u-domain-name-system-dns",
+      "title": "Domain Name System (DNS) (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-CS-CH1-DNS",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 14,
+          "pdf_to": 15,
+          "note": "Roman Urdu explanation of 'Domain Name System (DNS)' (PDF 14-15): the same text in simple Roman Urdu with glossed hard words, a self-check and a recap."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "DNS ka matlab hai Domain Name System. Yeh website ke naam ko IP address mein convert (badalta) karta hai. DNS websites tak pohanchna aasan banata hai (jaise Figure 1.14 mein). Users ko numbers yaad rakhne ki zaroorat nahi. DNS servers yeh translation (tarjuma) process karte hain. Internet ke istemal mein is ka key role (bohat ahem kirdar) hai."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch1-fig-dns",
+            "alt": "DNS name resolution aik qatar mein: screen par www.example.com, teer se DNS likha globe, teer se badal (cloud) mein server, aur teer se IP address 93.184.216.34.",
+            "caption": "Figure 1.14: DNS ke zariye naam se IP address tak pohanchne ka amal (kitab ki Figure 1.14 ke mutabiq asal khaaka)."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Do You Know?",
+            "text": "Jab bhi koi website kholi jati hai, DNS parde ke peeche kaam karta hai."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Neeche wala program DNS ki tarah ek chhoti si list (dictionary) mein website ka naam dhoond kar us ka IP address batata hai. website badal kar Run karein."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "website = \"www.example.com\"\n\ndns_records = {\n    \"www.example.com\": \"93.184.216.34\",\n    \"google.com\": \"142.250.190.14\",\n}\n\nif website in dns_records:\n    print(website, \"->\", dns_records[website])\nelse:\n    print(website, \"-> name not found\")",
+            "runnable": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"website = \"www.example.com\"\": woh naam jo browser mein likha gaya.\n\"dns_records = {...}\": dictionary jis mein har naam ke saath us ka IP address rakha hai, jaise DNS server ke paas hota hai (www.example.com ka 93.184.216.34 Figure 1.14 wala hai).\n\"if website in dns_records\": check karta hai ke naam list mein hai ya nahi. Agar hai to \"dns_records[website]\" us ka IP address deta hai.\n\"else\": naam na mile to \"name not found\" print hota hai.\nOutput: \"www.example.com -> 93.184.216.34\".\nKhud try karein: website = \"google.com\" kar ke Run karein: \"google.com -> 142.250.190.14\" aata hai; website = \"abc.pk\" karein to \"abc.pk -> name not found\"."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "DNS ka maqsad kya hai?",
+            "explanation": "Domain names (jaise www.example.com) ko IP addresses mein badalna, taake users ko numbers yaad na rakhne parein."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Mukhtasar khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "DNS: website ka naam -> IP address; DNS servers tarjuma karte hain; har website kholte waqt parde ke peeche kaam."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

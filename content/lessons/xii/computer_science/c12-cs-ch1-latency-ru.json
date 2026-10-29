@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH1-LATENCY-RU",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch1",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch1/u-network-latency",
+      "title": "Network Latency (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-CS-CH1-LATENCY",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 19,
+          "pdf_to": 19,
+          "note": "Roman Urdu explanation of 'Network Latency' (PDF 19): the same text in simple Roman Urdu with glossed hard words, a self-check and a recap."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Network latency woh waqt hai jo data ko travel karne (safar) mein lagta hai. Yeh data bhejne aur receive hone ke darmiyan ki delay (deri) hai. Latency milliseconds (ms, second ka hazarwan hissa) mein napi jati hai. Low (kam) latency ka matlab tez response (jawab) hai. High (zyada) latency se lag (atakna) aur delay hoti hai. Online games aur video calls ko low latency chahiye."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Ek web page kholne mein browser aur server ke darmiyan kai baar data aata jata hai. Yeh program dikhata hai ke har safar ki chhoti si deri mil kar kitni ho jati hai. latency_ms ya round_trips badal kar Run karein."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "latency_ms = 40\nround_trips = 25\n\ntotal_ms = latency_ms * round_trips\nprint(\"Delay for one trip:\", latency_ms, \"ms\")\nprint(\"Total waiting time:\", total_ms, \"ms =\", total_ms / 1000, \"seconds\")",
+            "runnable": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"latency_ms = 40\": ek safar mein 40 milliseconds ki deri. \"round_trips = 25\": page kholne mein 25 baar data aaya gaya (yeh sirf misaal ka number hai).\n\"total_ms = latency_ms * round_trips\": 40 x 25 = 1000 ms.\n\"total_ms / 1000\": 1000 ms = 1.0 second (1 second = 1000 ms).\nOutput: \"Delay for one trip: 40 ms\" aur \"Total waiting time: 1000 ms = 1.0 seconds\".\nKhud try karein: latency_ms = 200 kar ke Run karein: 5000 ms = 5.0 seconds intezar. Isi liye online games aur video calls ko low latency chahiye."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Video call baar baar ruk jati hai halanke bari file tezi se download hoti hai. Masla bandwidth ka zyada lagta hai ya latency ka? Wazahat karein.",
+            "explanation": "Latency (deri). Tez download dikhata hai ke bandwidth kafi hai; live video call ko har packet jaldi chahiye, is liye zyada deri use rok deti hai."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Mukhtasar khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Latency: data ke safar ki deri (ms); kam latency = tez jawab; zyada latency = lag; games aur video calls ko kam latency chahiye."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

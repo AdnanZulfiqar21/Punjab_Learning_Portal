@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH1-BACKUP-TYPES-RU",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch1",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch1/u-types-of-data-backup",
+      "title": "Types of Data Backup (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-CS-CH1-BACKUP-TYPES",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 21,
+          "pdf_to": 21,
+          "note": "Roman Urdu explanation of 'Types of Data Backup' (PDF 21): the same text in simple Roman Urdu with glossed hard words, a self-check and a recap."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Data backup ki mukhtalif types (qismein) hain. Full backup saara data ek hi baar mein save karta hai. Incremental backup sirf changed (badla hua) data save karta hai. Differential backup aakhri full backup ke baad ki saari changes (tabdeeliyan) save karta hai. Backups hard drives par store kiye (rakhe) ja sakte hain. Cloud storage (internet par data rakhne ki jagah) bhi backup ke liye istemal hoti hai."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch1-fig-backup-types",
+            "alt": "Itwar se Budh tak chaar din ka jadwal. Full: har din sara data. Incremental: Itwar sara data, phir har din sirf us din ki tabdeeli. Differential: Itwar sara data, phir har din Itwar ke baad ki tamam tabdeeli.",
+            "caption": "Chaar dinon mein full, incremental aur differential backups (asal khaaka, kitab ki figure nahi)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Diagram ko samjhein",
+            "text": "Incremental backup sirf woh data save karta hai jo pichhle kisi bhi backup (full ya incremental) ke baad badla. Yeh sab se chhota aur tez hai, lekin restore ke liye full backup aur us ke baad ka har incremental backup chahiye. Differential backup roz bara hota jata hai, lekin restore ke liye sirf full backup aur aakhri differential kaafi hai."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh program Itwar ke full backup ke baad teen dinon ke incremental aur differential backups dikhata hai. monday, tuesday ya wednesday ki lists (us din badli files) badal kar Run karein."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "monday = [\"a.txt\"]\ntuesday = [\"b.txt\"]\nwednesday = [\"a.txt\", \"d.txt\"]\n\nprint(\"Sunday full backup: everything\")\nsince_full = []\nfor day, changed in [(\"Monday\", monday), (\"Tuesday\", tuesday), (\"Wednesday\", wednesday)]:\n    for name in changed:\n        if name not in since_full:\n            since_full.append(name)\n    print(day, \"incremental:\", changed, \"| differential:\", since_full)",
+            "runnable": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"monday = [\"a.txt\"]\" waghera: har din kaun si files badlin.\n\"since_full = []\": aakhri full backup ke baad badli hui saari files (differential ke liye).\n\"for day, changed in [...]\": har din ka naam aur us din ki badli files leta hai.\n\"if name not in since_full: since_full.append(name)\": nayi file since_full mein jorta hai, pehle se ho to dobara nahi.\nprint: incremental mein sirf us din ki files (changed), differential mein full backup ke baad ki saari files (since_full).\nOutput: \"Sunday full backup: everything\", \"Monday incremental: ['a.txt'] | differential: ['a.txt']\", \"Tuesday incremental: ['b.txt'] | differential: ['a.txt', 'b.txt']\", \"Wednesday incremental: ['a.txt', 'd.txt'] | differential: ['a.txt', 'b.txt', 'd.txt']\".\nKhud try karein: tuesday = [] kar ke Run karein: Tuesday ka incremental khaali ([]) hai magar differential phir bhi ['a.txt'] hai, kyun ke differential full backup ke baad ki har tabdeeli rakhta hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Itwar ko full backup aur Pir, Mangal aur Budh ko incremental backups liye gaye. Jumeraat ko disk kharab ho gayi. Data wapas lane ke liye kaun se backups chahiye?",
+            "explanation": "Itwar ka full backup aur teenon incremental backups (Pir, Mangal, Budh), tarteeb se. Differential backups hote to sirf Itwar ka full aur Budh ka differential chahiye hota."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Mukhtasar khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Full: sab data. Incremental: sirf badla hua data. Differential: aakhri full ke baad ki saari tabdeeliyan. Hard drive ya cloud par."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

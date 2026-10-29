@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH4-USER-INPUT-AND-FUNCTIONS",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch4",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch4/u-handling-user-input-and-connecting-widgets-to-functions",
+      "title": "Handling User Input and Connecting Widgets to Functions",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 55,
+          "pdf_to": 56,
+          "note": "Unnumbered topic Handling User Input and Connecting Widgets to Functions as printed (PDF 55-56, printed 51-52); its own lesson since 2026-10-29 (one lesson per book heading), moved from the topic 4.1 lesson."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "User input is given through widgets like entry fields and buttons. Widgets are connected to functions in the program. When the widget is used, the connected function executes. This allows the program to process the input. For example, a button click can display a message. Proper connections ensure correct program behavior. This interaction improves user experience."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Example: Simple Login Form"
+          },
+          {
+            "type": "paragraph",
+            "text": "A simple login form allows a user to enter a username and password. Entry fields are used to take the input from the user. A button is provided to submit the information. When the button is clicked, the program checks the entered data. A message is then shown for success or error."
+          },
+          {
+            "type": "paragraph",
+            "text": "Example:"
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "import tkinter as tk\nfrom tkinter import messagebox\n\n# Create main window\nwindow = tk.Tk()\nwindow.title(\"Login Form\")\nwindow.geometry(\"300x200\")\n\n# Function to check login\ndef check_login():\n    username = entry_user.get()\n    password = entry_pass.get()\n\n    # simple check\n    if username == \"admin\" and password == \"1234\":\n        messagebox.showinfo(\"Success\", \"Login Successful!\")\n    else:\n        messagebox.showerror(\"Error\", \"Invalid Username or Password\")\n\n# Username label and entry\ntk.Label(window, text=\"Username\").pack()\nentry_user = tk.Entry(window)\nentry_user.pack()\n\n# Password label and entry\ntk.Label(window, text=\"Password\").pack()\nentry_pass = tk.Entry(window, show=\"*\")\nentry_pass.pack()\n\n# Login button\ntk.Button(window, text=\"Login\", command=check_login).pack(pady=10)\n\n# Run application\nwindow.mainloop()"
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch4-fig-login-form",
+            "alt": "Output of the login program: a window titled Login Form with a Username label and entry field, a Password label and entry field, and a Login button. Overlapping it is a separate message box titled Success with an information icon, the text Login Successful! and an ok button.",
+            "caption": "Output of the login form example: the Login Form window and the Success message box (original drawing after the windows printed beside the textbook's code)."
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Entry → takes username and password",
+              "Button → submits data",
+              "check_login() → checks input",
+              "messagebox → shows success or error",
+              "Works on event-driven programming"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Class Activity",
+            "text": "Explain event-driven concepts and have students add a button that triggers a label update on click."
+          }
+        ]
+      }
+    }
+  ]
+}

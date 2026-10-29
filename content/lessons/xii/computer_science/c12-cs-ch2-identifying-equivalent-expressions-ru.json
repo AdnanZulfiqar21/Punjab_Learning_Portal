@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH2-IDENTIFYING-EQUIVALENT-EXPRESSIONS-RU",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch2",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch2/u-identifying-equivalent-logical-expressions",
+      "title": "Identifying Equivalent Logical Expressions (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-CS-CH2-IDENTIFYING-EQUIVALENT-EXPRESSIONS",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 30,
+          "pdf_to": 30,
+          "note": "Roman Urdu: Identifying Equivalent Logical Expressions with a De Morgan self-check and a small program of ours (PDF 30, printed 26)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Equivalent expressions truth tables se pehchane jate hain. Har expression ko tamam mumkin truth values par test kiya jata hai. Agar har soorat mein nateeje mil jayein to woh equivalent hain. Logical laws (logic ke qanoon) bhi equivalence pehchanne mein madad dete hain aur expressions ko aasan banate hain. Equivalence pehchan kar mushkil expressions chhote kiye ja sakte hain."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Asaan alfaaz mein",
+            "text": "Logical law ki ek misal (kitab se aage): De Morgan ka qanoon kehta hai ke NOT (A AND B) ≡ (NOT A) OR (NOT B). Truth table bana kar check karein: har row mein dono taraf ki value barabar aati hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Truth table se check karein ke kya NOT (A OR B) ≡ (NOT A) AND (NOT B).",
+            "explanation": "Rows (A, B): F F par dono taraf T; F T par dono F; T F par dono F; T T par dono F. Har row mein columns barabar hain, is liye dono expressions equivalent hain (yeh De Morgan ka doosra qanoon hai)."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Figure 2.6 ke do expressions ko computer se check karein: program har row mein dono ki value nikalta hai aur batata hai ke kya har row mein woh barabar hain."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "values = [False, True]\n\nsame = True\nprint(\"A      B      Expr 1  Expr 2\")\nfor A in values:\n    for B in values:\n        e1 = (A and not B) or (B and not A)\n        e2 = (A or B) and (not A or not B)\n        print(f\"{A!s:<6} {B!s:<6} {e1!s:<7} {e2}\")\n        if e1 != e2:\n            same = False\nprint(\"Equivalent:\", same)",
+            "runnable": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"values = [False, True]\": A aur B ki mumkin values.\n\"same = True\": shuru mein maan lete hain ke dono expressions barabar hain.\nDo loops har (A, B) jor banate hain. \"e1 = (A and not B) or (B and not A)\" Expression 1 hai aur \"e2 = (A or B) and (not A or not B)\" Expression 2.\nprint(...) har row mein A, B, e1 aur e2 likhta hai.\n\"if e1 != e2: same = False\": agar kisi bhi row mein dono alag hon to equivalent nahi.\nOutput: heading line \"A      B      Expr 1  Expr 2\" ke baad chaar rows: \"False False False False\", \"False True True True\", \"True False True True\", \"True True False False\", aur aakhir mein \"Equivalent: True\". Yeh Figure 2.6 ke truth table jaisa hai.\nKhud try karein: e2 ko \"e2 = A or B\" kar dein: aakhri row mein e1 False aur e2 True aayega, aur \"Equivalent: False\" print hoga, kyun ke A OR B, XOR ke barabar nahi."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Mukhtasar khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Har mumkin row par dono expressions test karo; har row mein nateeja mile to equivalent.",
+              "Logical laws (jaise De Morgan) bhi equivalence dikhate aur expressions chhote karte hain."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH1-LOAD-BALANCING-METHODS-RU",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch1",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch1/u-basic-load-balancing-methods",
+      "title": "Basic Load Balancing Methods (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-CS-CH1-LOAD-BALANCING-METHODS",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 19,
+          "pdf_to": 19,
+          "note": "Roman Urdu explanation of 'Basic Load Balancing Methods' (PDF 19): the same text in simple Roman Urdu with glossed hard words, a self-check and a recap."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Load balancing ke mukhtalif methods (tareeqe) hain. Round Robin method requests ek ek kar ke (baari baari) servers ko bhejta hai: 1, 2, 3, phir 1, 2, 3. Least Connection method traffic kam busy (kam masroof) servers ko bhejta hai. IP Hash method user ke IP address se decide karta (tay karta) hai ke traffic kis server ko jaye. Yeh methods network ka load (bojh) balance (barabar) karte hain. Simple methods implement karna (lagana) aasan hai."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch1-fig-load-balancing",
+            "alt": "Chaar users ki requests aik load balancer tak aati hain, jo inhein teer ke zariye server 1, server 2 aur server 3 mein baant deta hai.",
+            "caption": "Teen servers mein load balancing (asal khaaka, kitab ki figure nahi)."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh program Round Robin aur Least Connection dono tareeqe dikhata hai. requests ya busy (har server par is waqt kitne connections hain) badal kar Run karein."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "requests = 7\nservers = [\"Server 1\", \"Server 2\", \"Server 3\"]\nbusy = [5, 2, 4]\n\nprint(\"Round Robin:\")\nfor r in range(requests):\n    print(\"  Request\", r + 1, \"->\", servers[r % len(servers)])\n\nleast = busy.index(min(busy))\nprint(\"Least Connection: next request ->\", servers[least])",
+            "runnable": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"requests = 7\": 7 requests aayi hain. \"servers = [...]\": teen servers ki list. \"busy = [5, 2, 4]\": har server par is waqt kitne connections hain.\n\"for r in range(requests)\": r = 0 se 6 tak. \"r % len(servers)\" (r ko 3 se divide karne par jo remainder, yani baqi, bache) 0, 1, 2, 0, 1, 2, 0 deta hai, is liye requests baari baari Server 1, 2, 3, phir 1, 2, 3, phir 1 ko jati hain. Yahi Round Robin hai.\n\"busy.index(min(busy))\": sab se kam connections (2) wale server ka number (index 1) deta hai, yani Server 2. Yahi Least Connection hai.\nOutput: \"Round Robin:\" ke neeche \"Request 1 -> Server 1\" se \"Request 7 -> Server 1\" tak (1, 2, 3, 1, 2, 3, 1) aur aakhir mein \"Least Connection: next request -> Server 2\".\nKhud try karein: busy = [1, 6, 3] kar ke Run karein: ab Least Connection \"Server 1\" chunta hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Kaun sa load balancing method un servers ke liye munasib hoga jo aksar bohat mukhtalif waqt ke liye busy rehte hain, aur kyun?",
+            "explanation": "Least Connection, kyun ke yeh dekhta hai ke har server is waqt kitna busy hai, sirf baari baari nahi deta; is liye lambe kaam mein phansa server mazeed kaam nahi pata."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Mukhtasar khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Round Robin: baari baari. Least Connection: kam busy server. IP Hash: user ke IP address se server tay."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

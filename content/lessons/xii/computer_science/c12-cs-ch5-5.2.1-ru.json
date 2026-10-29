@@ -13,8 +13,8 @@
         {
           "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
           "pdf_from": 64,
-          "pdf_to": 65,
-          "note": "Roman Urdu explanation of topic 5.2.1 (PDF 64-65), rewritten 2026-10-28 to follow the book paragraph for paragraph."
+          "pdf_to": 64,
+          "note": "Roman Urdu explanation of topic 5.2.1 (PDF 64, printed 60), paragraph for paragraph with the English; Code Explanation boxes and runnable examples added 2026-10-29."
         }
       ],
       "body": {
@@ -31,73 +31,6 @@
           },
           {
             "type": "heading",
-            "level": 3,
-            "text": "Qabil-e-bharosa applications ke liye testing kyun zaroori hai"
-          },
-          {
-            "type": "paragraph",
-            "text": "Testing jaanchti hai ke application apni zarooratein (requirements) poori karti hai ya nahi. Yeh yaqeeni banati hai ke har function sahi nateeja de. Testing crash ya ghalat output ka khatra kam karti hai, aur yeh bhi dekhti hai ke nayi tabdeeli ne pehle se chalti khusoosiyat (features) to nahi torein. Achhi tarah test ki hui applications zyada qabil-e-bharosa aur mazboot (stable) hoti hain."
-          },
-          {
-            "type": "heading",
-            "level": 3,
-            "text": "Programming ki aam ghaltiyan aur bugs"
-          },
-          {
-            "type": "paragraph",
-            "text": "Syntax error tab hota hai jab code language ke qawaid (rules) nahi manta. Logic error mein program chalta hai magar ghalat nateeja deta hai. Runtime error program chalte waqt aata hai (jaise zero se taqseem). Doosre aam bugs data ki ghaltiyan (data errors) aur resource leaks (jaise file ya connection band na karna) hain. In ghaltiyon ko pehchanna mazboot applications banane ki kunji hai (Figure 5.1)."
-          },
-          {
-            "type": "table",
-            "caption": "Program ki ghaltiyon ki qismein",
-            "header": [
-              "Ghalti",
-              "Kya hota hai",
-              "Misal"
-            ],
-            "rows": [
-              [
-                "Syntax error",
-                "Code zaban ke qawaid torta hai, is liye program bilkul nahi chalta",
-                "Colon ke baghair if x > 5: SyntaxError"
-              ],
-              [
-                "Runtime error",
-                "Program chalte waqt na-durust amal hota hai aur woh ruk jata hai",
-                "a = 10; b = 0; result = a / b se ZeroDivisionError"
-              ],
-              [
-                "Logic error",
-                "Program chalta hai lekin ghalat nateeja deta hai",
-                "length * width ke bajaye area = length + width"
-              ],
-              [
-                "Doosre bugs",
-                "Data ki ghaltiyan (ghalat ya bigra data) aur resource leaks (files ya connections kabhi band nahi)",
-                "Khuli chhoti file program khatam hone tak memory leti hai"
-              ]
-            ]
-          },
-          {
-            "type": "diagram",
-            "$asset": "c12-cs-ch5-fig-error-types",
-            "alt": "Program errors ki teen qismein. Logic Error: area = length + width se 8 aata hai jo ghalat nateeja hai; durust: area = length * width, output 15. Runtime Error: b = 0 ho to a / b par ZeroDivisionError: division by zero aur program beech mein ruk jata hai. Syntax Error: if x > 5 ke baad colon na ho to SyntaxError: invalid syntax; durust: if x > 5:.",
-            "caption": "Figure 5.1: Logic, runtime aur syntax error ki misal (kitab ki Figure 5.1 ke mutabiq asal khaaka)."
-          },
-          {
-            "type": "callout",
-            "tone": "tip",
-            "title": "Diagram ko samjhein",
-            "text": "Kitab ki Figure 5.1 ke 'Correct logic' khane mein bhi '# Output: 8 (incorrect result)' chhapa hai. Durust formula area = length * width se 5 x 3 = 15 aata hai, is liye yahan '# Output: 15' likha gaya hai. Logic error mein program chalta hai magar nateeja ghalat hota hai; runtime error program ko beech mein rok deta hai; syntax error mein program shuru hi nahi hota."
-          },
-          {
-            "type": "checkpoint",
-            "mode": "self_check",
-            "prompt": "Do number ka average nikalne wala program 60 aur 80 ke liye 140 print karta hai. Yeh kis qism ki ghalti hai, aur ghaliban durusti kya hai?",
-            "explanation": "Logic error: program chalta hai lekin nateeja ghalat hai. Ghaliban yeh jama karta hai aur 2 se taqseem nahi karta; durusti average = (a + b) / 2, jo 70 deta hai."
-          },
-          {
-            "type": "heading",
             "level": 2,
             "text": "Mukhtasar khulasa"
           },
@@ -105,9 +38,8 @@
             "type": "list",
             "ordered": false,
             "items": [
-              "Testing release se pehle ghaltiyan pakarti aur dekhti hai ke tabdeeli kuch na tore.",
-              "Syntax error program chalne nahi deta; runtime error beech mein rokta; logic error ghalat nateeja deta.",
-              "Doosre bugs: data errors, resource leaks."
+              "Testing release se pehle ghaltiyan pakarti hai; debugging un ki wajah dhoond kar theek karti hai.",
+              "Dono mil kar bharosa (reliability) barhate hain."
             ]
           }
         ]

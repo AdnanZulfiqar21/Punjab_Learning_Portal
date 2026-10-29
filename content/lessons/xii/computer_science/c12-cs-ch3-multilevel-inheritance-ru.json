@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH3-MULTILEVEL-INHERITANCE-RU",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch3",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch3/u-multilevel-inheritance",
+      "title": "Multilevel Inheritance (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-CS-CH3-MULTILEVEL-INHERITANCE",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 42,
+          "pdf_to": 43,
+          "note": "Roman Urdu: Multilevel Inheritance with Figure 3.5, the Vehicle/Car/ElectricCar program, its output, Code Explanation and the Class Activity (PDF 42-43, printed 38-39)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Jab aik class aisi class se inherit kare jo khud kisi aur se derived (bani hui) hai, to khandani shajre (family tree) jaisi zanjeer banti hai (Grandparent → Parent → Child). Is mein \"grandchild\" class apne parent aur grandparent dono ke tamam methods aur attributes istemal kar sakti hai (Figure 3.5). (Kitab mein 'derived' ki jagah 'drived' chhapa hai; yeh spelling ki chhoti ghalti hai.)"
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch3-fig-3-5-multilevel-inheritance",
+            "alt": "Multilevel inheritance: teen dabbe aik column mein: oopar Grand Parent Class, beech mein Parent Class, neeche Child Class; har neeche wali class oopar wali se khokhle teer wali lakeer se juri hai.",
+            "caption": "Figure 3.5: Multilevel Inheritance (kitab ki Figure 3.5 ke mutabiq asal khaaka)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Misal (Example):"
+          },
+          {
+            "type": "paragraph",
+            "text": "Is misal mein ElectricCar, Car se inherit karti hai, aur Car khud Vehicle se inherit karti hai."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "# Base Class (Grandparent)\nclass Vehicle:\n    def start_engine(self):\n        print(\"Engine started.\")\n\n# Intermediate Class (Parent)\nclass Car(Vehicle):\n    def drive(self):\n        print(\"Car is driving.\")\n\n# Derived Class (Child)\nclass ElectricCar(Car):\n    def charge(self):\n        print(\"Battery is charging.\")\n\n# Creating an instance of the bottom-most class\nmy_tesla = ElectricCar()\n\n# Accessing methods from all levels\nmy_tesla.start_engine() # Inherited from Vehicle\nmy_tesla.drive()        # Inherited from Car\nmy_tesla.charge()       # Defined in ElectricCar",
+            "runnable": true
+          },
+          {
+            "type": "code",
+            "language": "text",
+            "text": "Engine started.\nCar is driving.\nBattery is charging.",
+            "caption": "Output (program chala kar)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"class Vehicle:\": sab se oopar wali class (grandparent); method start_engine().\n\"class Car(Vehicle):\": Car, Vehicle se inherit karti hai (parent); apna method drive().\n\"class ElectricCar(Car):\": ElectricCar, Car se inherit karti hai (child); apna method charge(). Yun zanjeer banti hai: Vehicle → Car → ElectricCar.\n\"my_tesla = ElectricCar()\": sab se neeche wali class ka object.\n\"my_tesla.start_engine()\" Vehicle se, \"my_tesla.drive()\" Car se, aur \"my_tesla.charge()\" ElectricCar ka apna.\nOutput: teen lines: \"Engine started.\", \"Car is driving.\" aur \"Battery is charging.\".\nKhud try karein: aakhir mein \"Car().charge()\" likh kar Run karein: AttributeError aayega, kyun ke Car ke paas charge() nahi; inheritance oopar se neeche aati hai, neeche se oopar nahi."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Class Activity",
+            "text": "Aik Vehicle class banayein aur us se Car aur Bike subclasses banayein. Har subclass mein apna alag method dalein aur inheritance chala kar dikhayein."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Mukhtasar khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Multilevel: zanjeer Grandparent → Parent → Child (Vehicle → Car → ElectricCar).",
+              "Neeche wali class oopar ki tamam classes ke methods istemal kar sakti hai."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

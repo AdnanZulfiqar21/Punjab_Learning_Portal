@@ -12,8 +12,8 @@
         {
           "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
           "pdf_from": 69,
-          "pdf_to": 72,
-          "note": "Topic 5.3 as printed (PDF 69-72, printed 65-68); rewritten 2026-10-28 in the book's wording, programs as code blocks."
+          "pdf_to": 70,
+          "note": "Topic 5.3 as printed (PDF 69-70, printed 65-66); since 2026-10-29 only the text before its first sub-heading (each sub-heading has its own lesson)."
         }
       ],
       "body": {
@@ -53,81 +53,6 @@
           {
             "type": "paragraph",
             "text": "This means the inner statement may run one hundred million times, which can make the program very slow. Such a part of the code is called a performance bottleneck. Profiling tools help programmers identify these slow sections so that they can optimise the code and improve program efficiency."
-          },
-          {
-            "type": "heading",
-            "level": 3,
-            "text": "Measuring performance using profiling tools"
-          },
-          {
-            "type": "paragraph",
-            "text": "Profiling tools track the execution time and memory usage of different functions in a program. Python provides modules like cProfile and timeit for this purpose. These tools generate reports showing which parts of the code are slow or resource-intensive (as shown in Figure 5.3). Measuring performance helps prioritize areas for optimization."
-          },
-          {
-            "type": "diagram",
-            "$asset": "c12-cs-ch5-fig-5-3-profiler-table",
-            "alt": "A profiler report table with columns Function, Call Count, Time, Cumulative Time and Description. Rows: process_data 10, 2.500, 2.500, Bottleneck; read_file 1, 2.400, 2.400, Bottleneck, highlighted in red with a warning sign; analyze_results 10, 0.100, 0.100. A dashed arrow leads to a magnifying glass over a flame.",
-            "caption": "Figure 5.3: Diagram showing profiling output highlighting bottlenecks (original drawing after the textbook's Figure 5.3)."
-          },
-          {
-            "type": "callout",
-            "tone": "correction",
-            "title": "Book correction",
-            "text": "The printed Figure 5.3 shifts the column headings, with function names under 'Call Count' and call counts under 'Time'; the correct headings are Function, Call Count, Time, Cumulative Time and Description, as drawn above."
-          },
-          {
-            "type": "heading",
-            "level": 3,
-            "text": "Identifying and fixing performance bottlenecks"
-          },
-          {
-            "type": "paragraph",
-            "text": "Performance bottlenecks are sections of code that slow down the program. Profiling reports help locate these bottlenecks. Optimization techniques include improving algorithms, reducing unnecessary operations, or using efficient data structures. Fixing bottlenecks improves overall program speed and responsiveness (as shown in Figure 5.4)."
-          },
-          {
-            "type": "diagram",
-            "$asset": "c12-cs-ch5-fig-perf-cycle",
-            "alt": "Performance Test Cycle: a loop from Benchmark Run (top) to Bottleneck (right), Profile (bottom), Tuning (left) and back. Arc labels: Verifying results, Fixing bottleneck, Collecting component characteristics and Collecting configuration. Inputs: Refining tunings, Infrastructure, Profiling the application. Frame labels: Documentation components; Configuration - Network, CPU, Disks; Monitoring and profiling tool.",
-            "caption": "Figure 5.4: Performance Test Cycle (original drawing after the textbook's Figure 5.4)."
-          },
-          {
-            "type": "paragraph",
-            "text": "Example:"
-          },
-          {
-            "type": "code",
-            "language": "python",
-            "text": "import cProfile\nimport timeit\n\n\n# Slow code example\ndef slow_sum(numbers):\n    total = 0\n\n    # Adding numbers one by one using a loop\n    for num in numbers:\n        total = total + num\n\n    return total\n\n\n# Fast code example\ndef fast_sum(numbers):\n    # Python built-in sum() is faster and optimised\n    return sum(numbers)\n\n\n# Main function\ndef main():\n    numbers = list(range(1, 1000000))\n\n    print(\"Slow code result:\", slow_sum(numbers))\n    print(\"Fast code result:\", fast_sum(numbers))\n\n\n# Profiling the program using cProfile\nprint(\"Profiling Report:\")\ncProfile.run(\"main()\")\n\n\n# Comparing execution time using timeit\nnumbers = list(range(1, 1000000))\n\nslow_time = timeit.timeit(lambda: slow_sum(numbers), number=10)\nfast_time = timeit.timeit(lambda: fast_sum(numbers), number=10)\n\nprint(\"\\nTime Comparison Report:\")\nprint(\"Slow code time:\", slow_time)\nprint(\"Fast code time:\", fast_time)"
-          },
-          {
-            "type": "list",
-            "ordered": false,
-            "items": [
-              "cProfile generates a profiling report that shows how much time each function takes during program execution.",
-              "slow_sum() is slower because it adds numbers manually using a loop.",
-              "fast_sum() is faster because it uses Python's built-in sum() function, which is already optimised.",
-              "The function taking more execution time is called the bottleneck.",
-              "timeit helps compare the execution time of slow and fast code."
-            ]
-          },
-          {
-            "type": "paragraph",
-            "text": "Output: (The exact time values may be different on each computer, but the output will look like this)"
-          },
-          {
-            "type": "code",
-            "language": "text",
-            "text": "Profiling Report:\nSlow code result: 499999500000\nFast code result: 499999500000\n\n6 function calls in 0.080 seconds\n\nOrdered by: standard name\n\nncalls  tottime  percall  cumtime  percall  function\n1       0.060    0.060    0.080    0.080    <module>\n1       0.050    0.050    0.050    0.050    slow_sum\n1       0.010    0.010    0.010    0.010    {built-in sum}\n1       0.010    0.010    0.010    0.010    fast_sum\n1       0.000    0.000    0.080    0.080    main\n\nTime Comparison Report:\nSlow code time: 0.42\nFast code time: 0.09"
-          },
-          {
-            "type": "list",
-            "ordered": false,
-            "items": [
-              "Both functions give the same result: 499999500000.",
-              "slow_sum() takes more time because it uses a manual loop.",
-              "fast_sum() takes less time because it uses Python's built-in sum() function.",
-              "Therefore, slow_sum() is the bottleneck in this program."
-            ]
           }
         ]
       }

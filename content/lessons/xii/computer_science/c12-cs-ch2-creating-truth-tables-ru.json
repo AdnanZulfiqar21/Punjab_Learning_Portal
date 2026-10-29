@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH2-CREATING-TRUTH-TABLES-RU",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch2",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch2/u-creating-truth-tables-for-logical-expressions",
+      "title": "Creating Truth Tables for Logical Expressions (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-CS-CH2-CREATING-TRUTH-TABLES",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 29,
+          "pdf_to": 29,
+          "note": "Roman Urdu: Creating Truth Tables, with a self-check and a small truth-table program of ours (PDF 29, printed 25)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Truth table banane ka pehla step propositions pehchanna hai (maslan A aur B). Har proposition ko true ya false value di jati hai. Truth values ke tamam mumkin combinations likhe jate hain. Phir logical connectives (AND, OR, NOT) qadam ba qadam lagaye jate hain, aur har row (line) ka aakhri nateeja likha jata hai. Is tarah expression saaf samajh aata hai. Truth table saaf suthra aur tarteeb wala hona chahiye; aisa table parhna aur istemal karna aasan hota hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "(A AND B) OR (NOT A) ka truth table likhein. Is ke liye kitni rows chahiye?",
+            "explanation": "Do propositions hain, is liye 2² = 4 rows. A=T, B=T: T OR F = T. A=T, B=F: F OR F = F. A=F, B=T: F OR T = T. A=F, B=F: F OR T = T. Yeh expression sirf tab jhoot hai jab A sach aur B jhoot ho."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh program kitab ki Figure 2.5 wala truth table khud banata hai: do loops A aur B ke saare combinations bana dete hain aur har row mein AND, OR aur NOT lagaye jate hain."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "values = [True, False]   # har proposition ki do mumkin values\n\nprint(\"A      B      A AND B  A OR B  NOT A\")\nfor A in values:\n    for B in values:\n        print(f\"{A!s:<6} {B!s:<6} {A and B!s:<8} {A or B!s:<7} {not A}\")",
+            "runnable": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"values = [True, False]\": har proposition ki do mumkin values ki list.\nPehli print line sirf columns ke naam (heading) likhti hai.\n\"for A in values:\" aur andar \"for B in values:\": loop ke andar loop (nested loop). A ki har value ke saath B ki dono values aati hain, is liye 2 x 2 = 4 rows bante hain.\nprint(f\"...\"): f-string mein {A and B}, {A or B} aur {not A} ka nateeja row mein likha jata hai. \"!s:<6\" ka matlab hai value ko text bana kar 6 khanon ki jagah mein baayen taraf likho, taake columns seedhe rahein.\nOutput: pehle heading line \"A      B      A AND B  A OR B  NOT A\", phir chaar rows: \"True True True True False\", \"True False False True False\", \"False True False True True\" aur \"False False False False True\" (khali jagah ke saath), bilkul Figure 2.5 jaisa.\nKhud try karein: values = [False, True] likh kar Run karein: wohi chaar rows ulti tarteeb mein aayengi (pehle False False)."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Mukhtasar khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Tareeqa: propositions pehchano, saare combinations likho, connectives qadam ba qadam lagao, har row ka nateeja likho.",
+              "Table saaf aur tarteeb wala ho."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH1-ENCRYPTION-RU",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch1",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch1/u-encryption",
+      "title": "Encryption (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-CS-CH1-ENCRYPTION",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 20,
+          "pdf_to": 20,
+          "note": "Roman Urdu explanation of 'Encryption' (PDF 20): the same text in simple Roman Urdu with glossed hard words, a self-check and a recap."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Encryption data ko secret (khufia) form (shakal) mein badal deti hai. Sirf authorized (ijazat wale) users hi encrypted data parh sakte hain. Yeh transfer ke dauran data ki hifazat karti hai. Encryption emails aur online banking mein istemal hoti hai. Strong (mazboot) encryption data security behtar karti hai. Yeh data theft (data ki chori) rokti hai."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Encryption ka sab se purana aur aasan tareeqa Caesar cipher hai: har letter ko key jitna aage khiska do. Yeh program message ko encrypt aur phir decrypt (wapas asal shakal mein) karta hai. message (CAPITAL letters) ya key badal kar Run karein."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "message = \"MEET AT 5\"\nkey = 3\n\nsecret = \"\"\nfor ch in message:\n    if \"A\" <= ch <= \"Z\":\n        secret += chr((ord(ch) - ord(\"A\") + key) % 26 + ord(\"A\"))\n    else:\n        secret += ch\nprint(\"Encrypted:\", secret)\n\nplain = \"\"\nfor ch in secret:\n    if \"A\" <= ch <= \"Z\":\n        plain += chr((ord(ch) - ord(\"A\") - key) % 26 + ord(\"A\"))\n    else:\n        plain += ch\nprint(\"Decrypted:\", plain)",
+            "runnable": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"message = \"MEET AT 5\"\": asal message. \"key = 3\": har letter 3 jagah aage jayega (yeh key sirf bhejne aur lene wale ko pata hai).\n\"for ch in message\": har character ko dekhta hai. \"if \"A\" <= ch <= \"Z\"\": sirf capital letters badalte hain; space aur 5 waise hi rehte hain.\n\"ord(ch) - ord(\"A\")\": letter ka number (A = 0, B = 1 ...). \"+ key\" us mein 3 jorta hai, \"% 26\" Z ke baad wapas A par le aata hai, aur \"chr(... + ord(\"A\"))\" number ko wapas letter banata hai.\nDoosra loop wahi kaam \"- key\" se karta hai, yani decrypt.\nOutput: \"Encrypted: PHHW DW 5\" aur \"Decrypted: MEET AT 5\".\nKhud try karein: key = 1 kar ke Run karein: \"Encrypted: NFFU BU 5\". Key na pata ho to \"PHHW DW 5\" parhna mushkil hai; asal encryption (jaise HTTPS ya WPA2 mein) is se kahin zyada mazboot hoti hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Encryption data ko kaise mehfooz rakhti hai?",
+            "explanation": "Data ko khufia shakal mein badal deti hai jise sirf ijazat wale (key wale) users parh sakte hain; raaste mein koi pakar bhi le to samajh nahi sakta."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Mukhtasar khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Encryption: data ko khufia shakal mein badalna; sirf authorized users parh sakein; emails aur online banking; data ki chori rokti hai."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

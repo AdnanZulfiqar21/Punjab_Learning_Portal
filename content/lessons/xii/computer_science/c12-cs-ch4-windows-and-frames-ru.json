@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH4-WINDOWS-AND-FRAMES-RU",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch4",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch4/u-creating-windows-and-adding-frames",
+      "title": "Creating Windows and Adding Frames (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-CS-CH4-WINDOWS-AND-FRAMES",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 51,
+          "pdf_to": 52,
+          "note": "Roman Urdu explanation of Creating Windows and Adding Frames (PDF 51-52, printed 47-48), paragraph for paragraph with the English; Code Explanation boxes and runnable examples added 2026-10-29."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Tkinter program main window banane se shuru hota hai; yahi baqi sab cheezon ki bunyad hai. Window ka size badla ja sakta hai, us ko title diya ja sakta hai, aur us mein mukhtalif widgets rakhe ja sakte hain. Frames window ke andar hisse (sections) hain jo content ko munazzam karte hain. Frames window ko chhote hisson mein baant dete hain, is liye mutalliq widgets ko aik saath rakhna aasan hota hai. Is banawat se interface saaf aur saleeqe wala rehta hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Misal (Example):"
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "import tkinter as tk\n\n# Create main window\nwindow = tk.Tk()\nwindow.title(\"Tkinter Frames Example\")\nwindow.geometry(\"400x300\")\n\n# Create top frame\ntop_frame = tk.Frame(window, bg=\"lightblue\", height=100)\ntop_frame.pack(fill=\"x\")\n\n# Create bottom frame\nbottom_frame = tk.Frame(window, bg=\"lightgreen\", height=200)\nbottom_frame.pack(fill=\"both\", expand=True)\n\n# Add widgets to top frame\nlabel_top = tk.Label(top_frame, text=\"Top Frame\", bg=\"lightblue\")\nlabel_top.pack(pady=20)\n\n# Add widgets to bottom frame\nlabel_bottom = tk.Label(bottom_frame, text=\"Bottom Frame\", bg=\"lightgreen\")\nlabel_bottom.pack(pady=50)\n\n# Run the application\nwindow.mainloop()"
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch4-fig-frames",
+            "alt": "Tkinter Frames Example window ka output: oopar halke neele rang ka frame jis mein Top Frame likha hai, neeche bara halka sabz frame jis mein Bottom Frame likha hai.",
+            "caption": "Frames wali misal ka output (kitab mein code ke saath chhapi window ke mutabiq asal khaaka)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"window.geometry(\"400x300\")\": window 400 pixel chauri aur 300 pixel oonchi.\n\"top_frame = tk.Frame(window, bg=\"lightblue\", height=100)\": window ke andar aik hissa (frame) banata hai; bg (background, peeche ka rang) halka neela, oonchai 100 pixel.\n\"top_frame.pack(fill=\"x\")\": frame ko oopar rakhta hai aur poori chaurai (x ki taraf) mein phaila deta hai.\n\"bottom_frame = tk.Frame(window, bg=\"lightgreen\", height=200)\" aur \"bottom_frame.pack(fill=\"both\", expand=True)\": neeche halka sabz frame jo bachi hui saari jagah (chaurai aur oonchai dono) bhar leta hai.\n\"label_top = tk.Label(top_frame, text=\"Top Frame\", bg=\"lightblue\")\": label ka pehla argument top_frame hai, is liye label window mein nahi balke oopar wale frame ke andar banta hai; \"pack(pady=20)\" oopar neeche 20 pixel jagah deta hai.\n\"label_bottom = tk.Label(bottom_frame, ...)\" aur \"pack(pady=50)\": neeche wale frame mein \"Bottom Frame\" label, oopar neeche 50 pixel jagah ke saath.\n\"window.mainloop()\": window khuli rakhta hai.\nOutput: koi text print nahi hota; \"Tkinter Frames Example\" naam ki window khulti hai: oopar halka neela patta jis mein \"Top Frame\" likha hai, aur neeche bara halka sabz hissa jis mein \"Bottom Frame\" (oopar wali tasveer). Tkinter browser ke Run mein nahi chalta; yeh program apne computer par Python (IDLE ya VS Code) mein chala kar dekhein.\nKhud try karein: apne computer par bg=\"lightblue\" ko bg=\"yellow\" kar ke dekhein."
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Tk() → main window banata hai.",
+              "Frame → window ko hisson mein baant-ta hai.",
+              "top_frame aur bottom_frame → layout munazzam karte hain (oopar halka neela, neeche halka sabz).",
+              "pack() → frames aur widgets ko rakhta hai; fill=\"x\" frame ko chaurai mein phailata hai, fill=\"both\", expand=True bachi jagah bhar deta hai.",
+              "Frames GUI ko saaf aur munazzam rakhte hain."
+            ]
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Label ko window ke bajaye kisi frame ke andar kaise rakhte hain?",
+            "explanation": "Label banate waqt pehla argument frame ka naam dete hain, jaise tk.Label(top_frame, text=\"Top Frame\"); phir label usi frame ke andar aata hai."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Mukhtasar khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Main window sab widgets ki bunyad hai.",
+              "Frame window ko hisson mein baant kar mutalliq widgets ko aik jagah rakhta hai."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH6-HYPERPARAMETER-TUNING-RU",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch6",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch6/u-improving-models-using-hyperparameter-tuning",
+      "title": "Improving Models Using Hyperparameter Tuning (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-CS-CH6-HYPERPARAMETER-TUNING",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 87,
+          "pdf_to": 87,
+          "note": "Roman Urdu explanation of 'Improving Models Using Hyperparameter Tuning' under topic 6.8 (PDF 87, printed 83)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Hyperparameter tuning ka matlab hai model ki settings badalna. Yeh settings (hyperparameters) control karti hain ke model kaise seekhe. Tuning accuracy barhati hai aur andazon ki ghaltiyan kam karti hai. Parameters ko mukhtalif values ke saath aazmaya jata hai, aur validation data batata hai ke kaun si value behtar hai. Theek tuning se performance barhti hai; buri tuning se model kam asar-dar hota hai."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Hyperparameter tuning ko chhoti si misal se dekhein: ek bohat saada model kehta hai \"jo talib-e-ilm threshold ya zyada ghante parhe woh pass\". Threshold ek hyperparameter hai. Program har threshold ko validation data par aazma kar behtareen chunta hai, jaise speaker ki awaz ka sahi darja."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "# Validation data: (parhai ke ghante, pass hua? True/False)\nvalidation = [(1, False), (2, False), (3, False), (4, False), (5, False),\n              (6, True), (7, True), (8, True), (9, True), (10, True)]\nthresholds = [2, 4, 6, 8]   # hyperparameter ki jo values aazmani hain\n\nbest_t, best_acc = None, -1\nfor t in thresholds:\n    correct = 0\n    for hours, passed in validation:\n        prediction = hours >= t          # model: t ya zyada ghante = pass\n        if prediction == passed:\n            correct += 1\n    acc = correct / len(validation)\n    print(f\"threshold = {t}: accuracy = {acc:.0%}\")\n    if acc > best_acc:\n        best_t, best_acc = t, acc\nprint(f\"Behtareen threshold: {best_t} ({best_acc:.0%})\")",
+            "runnable": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"validation = [...]\": 10 jore (parhai ke ghante, pass hua ya nahi). True = pass, False = fail. Yeh validation data hai; model is se seekhta nahi, sirf is par settings aazmai jati hain.\n\"thresholds = [2, 4, 6, 8]\": hyperparameter ki woh values jo aazmani hain.\n\"best_t, best_acc = None, -1\": abhi tak ka behtareen threshold aur us ki accuracy (shuru mein koi nahi).\n\"for t in thresholds:\": har value ke liye: \"prediction = hours >= t\" (t ya zyada ghante to pass ka andaza), agar andaza asal nateeje (passed) ke barabar ho to \"correct\" mein 1 jama.\n\"acc = correct / len(validation)\": accuracy; \":.0%\" ise feesad mein dikhata hai (0.8 → 80%).\n\"if acc > best_acc:\" zyada accuracy mile to behtareen value yaad rakhi.\nOutput: \"threshold = 2: accuracy = 60%\", \"threshold = 4: accuracy = 80%\", \"threshold = 6: accuracy = 100%\", \"threshold = 8: accuracy = 80%\" aur \"Behtareen threshold: 6 (100%)\". Bohat chhota (2) ya bohat bara (8) threshold dono kharab, darmiyana sahi: speaker ki awaz jaisa.\nKhud try karein: thresholds = [3, 5, 7] kar ke Run karein, ya validation mein (5, False) ko (5, True) kar dein aur dekhein ke behtareen value badalti hai."
+          }
+        ]
+      }
+    }
+  ]
+}

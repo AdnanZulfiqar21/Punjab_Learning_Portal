@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH4-WINDOWS-AND-FRAMES",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch4",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch4/u-creating-windows-and-adding-frames",
+      "title": "Creating Windows and Adding Frames",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 51,
+          "pdf_to": 52,
+          "note": "Unnumbered topic Creating Windows and Adding Frames as printed (PDF 51-52, printed 47-48); its own lesson since 2026-10-29 (one lesson per book heading), moved from the topic 4.1 lesson."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "A Tkinter program begins by creating a main window, which serves as the base for all other elements. The window can be resized, given a title, and designed to hold different widgets. Frames are sections within the window that help organize content. Frames divide the window into smaller parts, making it easier to group related widgets. This structure improves clarity and keeps the interface well-arranged."
+          },
+          {
+            "type": "paragraph",
+            "text": "Example:"
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "import tkinter as tk\n\n# Create main window\nwindow = tk.Tk()\nwindow.title(\"Tkinter Frames Example\")\nwindow.geometry(\"400x300\")\n\n# Create top frame\ntop_frame = tk.Frame(window, bg=\"lightblue\", height=100)\ntop_frame.pack(fill=\"x\")\n\n# Create bottom frame\nbottom_frame = tk.Frame(window, bg=\"lightgreen\", height=200)\nbottom_frame.pack(fill=\"both\", expand=True)\n\n# Add widgets to top frame\nlabel_top = tk.Label(top_frame, text=\"Top Frame\", bg=\"lightblue\")\nlabel_top.pack(pady=20)\n\n# Add widgets to bottom frame\nlabel_bottom = tk.Label(bottom_frame, text=\"Bottom Frame\", bg=\"lightgreen\")\nlabel_bottom.pack(pady=50)\n\n# Run the application\nwindow.mainloop()"
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch4-fig-frames",
+            "alt": "Output window titled Tkinter Frames Example: the upper part is a light-blue frame with the text Top Frame, and the larger lower part is a light-green frame with the text Bottom Frame.",
+            "caption": "Output of the frames example (original drawing after the output window printed beside the textbook's code)."
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Tk() → creates main window",
+              "Frame → divides window into sections",
+              "top_frame and bottom_frame → organize layout",
+              "pack() → places frames and widgets",
+              "Frames help keep the GUI clean and well-structured"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

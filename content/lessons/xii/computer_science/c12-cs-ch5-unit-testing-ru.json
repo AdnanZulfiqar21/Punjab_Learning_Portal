@@ -13,8 +13,8 @@
         {
           "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
           "pdf_from": 65,
-          "pdf_to": 66,
-          "note": "Roman Urdu explanation of 'Unit testing' (PDF 65-66), rewritten 2026-10-28 to follow the book paragraph for paragraph."
+          "pdf_to": 65,
+          "note": "Roman Urdu explanation of Unit Testing (PDF 65, printed 61), paragraph for paragraph with the English; Code Explanation boxes and runnable examples added 2026-10-29."
         }
       ],
       "body": {
@@ -25,66 +25,6 @@
           },
           {
             "type": "heading",
-            "level": 3,
-            "text": "Python ke unittest aur pytest modules ka ta'aruf"
-          },
-          {
-            "type": "paragraph",
-            "text": "unittest module Python mein built-in hai aur test cases banane ka framework (dhaancha) deta hai. pytest bahar ka (external) module hai (pip install pytest se install hota hai) jo tests likhna aur chalana aasan banata hai. Dono jaanchte hain ke code tawaqqo ke mutabiq chalta hai. Yeh akele functions, classes ya poore modules test kar sakte hain. In tools se program mazboot hota hai aur bari applications mein ghaltiyan kam hoti hain."
-          },
-          {
-            "type": "heading",
-            "level": 3,
-            "text": "Test cases likhna aur chalana"
-          },
-          {
-            "type": "paragraph",
-            "text": "Test case kisi function ke liye khaas inputs aur un ka tawaqqo wala output tay karta hai. Maslan calculator function ko jama (addition) aur tafreeq (subtraction) ke nataij ke liye test kiya ja sakta hai. Python yeh tests chala kar batata hai ke kaun sa test fail hua ya kahan error aaya. Baar baar testing yaqeeni banati hai ke code ki tabdeeli pehle se chalti functionality ko na tore. Khud-kaar (automated) testing waqt bachati aur kaam ki durusti barhati hai."
-          },
-          {
-            "type": "paragraph",
-            "text": "Misal (Example):"
-          },
-          {
-            "type": "code",
-            "language": "python",
-            "text": "# Function to test\n# This function takes two input values, a and b.\n# It returns the sum of both values.\ndef add(a, b):\n    return a + b\n# This function takes two input values, a and b.\n# It returns the product of both values.\ndef multiply(a, b):\n    return a * b\n# Using pytest to test functions\n# In pytest, every test function usually starts with the word \"test_\".\n# Pytest automatically detects and runs these test functions.\ndef test_add():\n    # This test checks whether the add() function gives the correct result.\n    # Here, 2 and 3 are passed as input values.\n    # The expected output is 5.\n    assert add(2, 3) == 5  # Test passes because 2 + 3 = 5\n\ndef test_multiply():\n    # This test checks whether the multiply() function gives the correct result.\n    # Here, 2 and 3 are passed as input values.\n    # The expected output is 6.\n    assert multiply(2, 3) == 6  # Test passes because 2 * 3 = 6"
-          },
-          {
-            "type": "code",
-            "language": "text",
-            "text": "2 passed",
-            "caption": "Output (file wale folder mein pytest chala kar, khulasa)"
-          },
-          {
-            "type": "list",
-            "ordered": false,
-            "items": [
-              "pytest testing aasan banata hai: is mein unittest ki tarah test case classes ya izafi (boilerplate) code ki zaroorat nahi.",
-              "Tests saade functions hote hain, aur assert check karta hai ke output sahi hai; shart ghalat ho to test fail ho jata hai.",
-              "Tests chalane ke liye us folder mein jahan file rakhi hai, command line par pytest likhein."
-            ]
-          },
-          {
-            "type": "diagram",
-            "$asset": "c12-cs-ch5-fig-unit-test",
-            "alt": "Baayein test functions: test_add() mein assert add(2, 3) == 5 aur test_multiply() mein assert multiply(2, 3) == 6. Daayein terminal mein pytest command, aur nateeja 2 passed.",
-            "caption": "pytest se unit testing (hamara apna khaaka; kitab mein yeh figure nahi)."
-          },
-          {
-            "type": "code",
-            "language": "python",
-            "text": "import unittest\n\nclass TestCalc(unittest.TestCase):\n    def test_add(self):\n        self.assertEqual(add(2, 3), 5)\n\nif __name__ == \"__main__\":\n    unittest.main()",
-            "caption": "Izafi misal (kitab mein nahi): wahi test unittest ke saath"
-          },
-          {
-            "type": "checkpoint",
-            "mode": "self_check",
-            "prompt": "Aisa pytest test likhein jo jaanche ke function square(n) 7 ke liye 49 deta hai. Agar square ko n * 2 likha gaya ho to kya hoga?",
-            "explanation": "def test_square(): assert square(7) == 49. n * 2 ke saath function 14 deta hai, is liye assert ghalat hai aur pytest test ko fail batata hai, 14 != 49 dikha kar."
-          },
-          {
-            "type": "heading",
             "level": 2,
             "text": "Mukhtasar khulasa"
           },
@@ -92,9 +32,8 @@
             "type": "list",
             "ordered": false,
             "items": [
-              "Unit test: aik waqt mein aik function ya method jaanchna.",
-              "unittest: built-in, class wala; pytest: external, assert wale saade functions.",
-              "Har tabdeeli ke baad tests chalayein; pytest test_ se shuru hone wale functions khud dhoondta hai."
+              "Unit testing: program ke chhote hisse (functions) alag alag jaanchna.",
+              "Python: unittest aur pytest."
             ]
           }
         ]

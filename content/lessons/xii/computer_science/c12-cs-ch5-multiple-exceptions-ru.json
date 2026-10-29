@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH5-MULTIPLE-EXCEPTIONS-RU",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch5",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch5/u-handling-multiple-exception-types-effectively",
+      "title": "Handling multiple exception types effectively (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-CS-CH5-MULTIPLE-EXCEPTIONS",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 69,
+          "pdf_to": 69,
+          "note": "Roman Urdu explanation of Handling multiple exception types effectively (PDF 69, printed 65), paragraph for paragraph with the English; Code Explanation boxes and runnable examples added 2026-10-29."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Aik program ko mukhtalif qism ke exceptions pesh aa sakte hain. Python aik hi try–except block mein kai exceptions pakarne deta hai, aur har qism ke exception ka apna khaas jawab diya ja sakta hai. Is se achanak crash nahi hota aur ghalti ke baad program theek tarah sambhal jata hai (error recovery). Kai exceptions sambhalne se program mazboot hota hai aur ghaltiyon par control barhta hai."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "try:\n    a = int(input(\"First number: \"))\n    b = int(input(\"Second number: \"))\n    print(\"Result:\", a / b)\nexcept ValueError:\n    print(\"Please enter whole numbers only.\")\nexcept ZeroDivisionError:\n    print(\"You cannot divide by zero.\")",
+            "caption": "Izafi misal (kitab mein nahi): class activity, do qism ke exceptions ke saath",
+            "runnable": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"a = int(input(\"First number: \"))\": user se pehla number leta hai; input() text deta hai aur int() use poore number (integer) mein badalta hai. Isi tarah b.\n\"print(\"Result:\", a / b)\": a ko b se taqseem (divide) kar ke nateeja dikhata hai.\n\"except ValueError:\": agar user ne number ki jagah lafz (jaise ten) likha to int() ValueError deta hai, aur \"Please enter whole numbers only.\" aata hai.\n\"except ZeroDivisionError:\": agar b = 0 ho to taqseem na-mumkin hai, aur \"You cannot divide by zero.\" aata hai.\nOutput: dono numbers 5 dein to \"Result: 1.0\" (5 / 5; / hamesha decimal number deta hai). Pehle number mein ten likhein to \"Please enter whole numbers only.\"; 8 aur 0 dein to \"You cannot divide by zero.\"\nKhud try karein: 9 aur 2 dein: \"Result: 4.5\" aayega."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Izafi misal mein agar user pehle number ke liye 'ten' likhe to kya print hoga, aur agar 8 aur 0 likhe to?",
+            "explanation": "'ten' int() se badla nahi ja sakta, is liye ValueError pakra jata aur 'Please enter whole numbers only.' print hota hai. 8 aur 0 par a / b ZeroDivisionError deta hai, is liye 'You cannot divide by zero.' print hota hai. Dono suraton mein program crash ke bajaye theek khatam hota hai."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Aik hi try ke saath do except blocks: har qism ki ghalti ka apna jawab. inputs ki list mein text badal kar Run karein."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "inputs = [\"10\", \"ten\", \"0\", \"4\"]   # user ke likhe hue jawab (text)\n\nfor text in inputs:\n    try:\n        number = int(text)\n        print(text, \"->\", 100 / number)\n    except ValueError:\n        print(text, \"-> ValueError: yeh number nahi\")\n    except ZeroDivisionError:\n        print(text, \"-> ZeroDivisionError: zero se taqseem nahi\")\nprint(\"Program crash nahi hua\")",
+            "runnable": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"inputs = [...]\": chaar jawab jo user ne likhe (sab text hain).\n\"number = int(text)\": text ko number banata hai; \"ten\" jaisa lafz ho to ValueError.\n\"100 / number\": number 0 ho to ZeroDivisionError.\n\"except ValueError:\" aur \"except ZeroDivisionError:\": har ghalti ka apna paigham; jo ghalti hui wahi block chalta hai.\n\"print(\"Program crash nahi hua\")\": loop ke baad bhi program chalta raha.\nOutput: \"10 -> 10.0\", \"ten -> ValueError: yeh number nahi\", \"0 -> ZeroDivisionError: zero se taqseem nahi\", \"4 -> 25.0\" aur \"Program crash nahi hua\".\nKhud try karein: list mein \"2.5\" jorein: int(\"2.5\") bhi ValueError deta hai, kyunke int() decimal wala text nahi badalta."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Mukhtasar khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Aik try ke saath kai except blocks: har exception ka apna jawab.",
+              "Program crash nahi hota aur ghalti ke baad sambhal jata hai."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

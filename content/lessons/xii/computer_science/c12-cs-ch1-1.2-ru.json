@@ -6,7 +6,7 @@
       "external_id": "C12-CS-CH1-1.2-RU",
       "chapter": "pk-punjab/xii/computer_science/c12-cs/ch1",
       "topic": "pk-punjab/xii/computer_science/c12-cs/ch1/1.2",
-      "title": "1.2 Network architecture aur bunyadi tasawwurat (Roman Urdu)",
+      "title": "1.2 Network Architecture and Basic Concepts (Roman Urdu)",
       "language": "roman_ur",
       "variant_of": "C12-CS-CH1-1.2",
       "source_refs": [
@@ -14,14 +14,14 @@
           "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
           "pdf_from": 7,
           "pdf_to": 8,
-          "note": "Roman Urdu of topic 1.2 (PDF 7-8), paragraph for paragraph; our packet figure and a tip on packets, two self-checks and a recap."
+          "note": "Roman Urdu explanation of 'Network Architecture and Basic Concepts' (PDF 7-8): the same text in simple Roman Urdu with glossed hard words, a self-check and a recap."
         }
       ],
       "body": {
         "blocks": [
           {
             "type": "paragraph",
-            "text": "Network architecture computer network ka mukammal design hai. Yeh dikhati hai ke computers, servers aur doosre devices kaise tarteeb diye gaye hain (jaise Figure 1.2 mein). Yeh yeh bhi tay karti hai ke network par data kaise bheja jata hai. Network architecture mein hardware, software aur baat-cheet ke qawaid (rules) shamil hain. Achhi architecture network ko achhi tarah chalne mein madad deti hai. Yeh network ko aage barhane (future expansion) mein bhi madad deti hai."
+            "text": "Network architecture computer network ka poora design (naqsha) hai. Yeh dikhati hai ke computers, servers (doosre computers ko service dene wale bare computers) aur doosre devices kaise arrange (tarteeb se lagaye) kiye gaye hain (jaise Figure 1.2 mein). Yeh yeh bhi tay karti hai ke network par data kaise transmit (bheja) hota hai. Network architecture mein hardware, software aur communication rules (baat-cheet ke qaide) shamil hain. Achhi architecture network ko efficiently (kam waqt aur kam kharche mein achha) chalne mein madad deti hai. Yeh network ki future expansion (aage barhana, naye devices jorna) mein bhi madad deti hai."
           },
           {
             "type": "diagram",
@@ -37,7 +37,7 @@
           },
           {
             "type": "paragraph",
-            "text": "Network ek device se doosre device tak data bhej kar kaam karta hai. Bhejne se pehle data chhote hisson mein toot jata hai jinhein packets kehte hain. Yeh packets cables ya wireless signals se safar karte hain. Networking devices packets ko sahi manzil (destination) tak pohanchate hain. Wusool karne wala device packets ko dobara jor kar asal data bana deta hai. Is tarah baat-cheet hamwaar (smooth) aur tez hoti hai."
+            "text": "Network ek device se doosre device tak data bhej kar kaam karta hai. Transmission (bhejne) se pehle data chhote hisson mein toot jata hai jinhein packets kehte hain. Yeh packets cables ya wireless signals se safar karte hain. Network devices packets ko sahi destination (manzil) tak guide karte hain. Receiving device (wusool karne wala device) packets ko dobara jor kar asal data bana deta hai. Is tarah baat-cheet smooth (baghair rukawat) aur tez hoti hai."
           },
           {
             "type": "diagram",
@@ -52,16 +52,37 @@
             "text": "Data ko packets mein torne ka faida: bohat se devices ek hi link share kar sakte hain, aur agar koi packet raaste mein gum ho jaye to sirf wahi packet dobara bheja jata hai, poora data nahi."
           },
           {
-            "type": "checkpoint",
-            "mode": "self_check",
-            "prompt": "Network architecture kya hai, aur is mein kaun si teen cheezein shamil hain?",
-            "explanation": "Yeh network ka mukammal design hai: devices kaise tarteeb diye gaye aur data kaise bheja jata hai. Is mein hardware, software aur baat-cheet ke qawaid shamil hain."
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Neeche wala program ek message ko 5-5 characters ke packets mein torta hai aur phir unhein jor kar asal message wapas banata hai, bilkul receiving device ki tarah. message ya packet_size badal kar Run karein."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "message = \"Hello from Lahore\"\npacket_size = 5\n\npackets = []\nfor start in range(0, len(message), packet_size):\n    packets.append(message[start:start + packet_size])\n\nfor number, packet in enumerate(packets, start=1):\n    print(\"Packet\", number, \":\", \"[\" + packet + \"]\")\n\nprint(\"Reassembled:\", \"\".join(packets))",
+            "runnable": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"message = ...\": yeh woh data hai jo bhejna hai. \"packet_size = 5\": har packet mein zyada se zyada 5 characters.\n\"packets = []\": khaali list jis mein packets rakhe jayenge.\n\"for start in range(0, len(message), packet_size)\": start 0, 5, 10, 15 hota hai (har baar 5 aage). \"message[start:start + packet_size]\" us jagah se 5 characters kaat leta hai aur append() unhein list mein daal deta hai.\n\"for number, packet in enumerate(packets, start=1)\": har packet ko 1 se number deta hai aur print karta hai. Packet ko [ ] mein dikhaya hai taake space bhi nazar aaye.\n\"\"\".join(packets)\": tamam packets ko baghair kuch daale jor deta hai, yani receiver asal data dobara bana leta hai.\nOutput: \"Packet 1 : [Hello]\", \"Packet 2 : [ from]\", \"Packet 3 : [ Laho]\", \"Packet 4 : [re]\" aur aakhir mein \"Reassembled: Hello from Lahore\".\nKhud try karein: packet_size = 4 kar ke Run karein: ab 5 packets bante hain ([Hell], [o fr], [om L], [ahor], [e]) magar jorne par message wohi rehta hai."
           },
           {
             "type": "checkpoint",
             "mode": "self_check",
-            "prompt": "Bhejne se pehle data packets mein kyun toota jata hai?",
-            "explanation": "Chhote packets network ke links doosre traffic ke saath share kar sakte, har aik ko manzil tak rehnumai mil sakti, aur gum hone par alag se dobara bheje ja sakte hain; receiver unhein jor kar asal data bana deta hai."
+            "prompt": "Network architecture kya hai, aur is mein kaun si teen cheezein shamil hain?",
+            "explanation": "Yeh network ka poora design hai: devices kaise arrange hain aur data kaise bheja jata hai. Is mein hardware, software aur communication rules shamil hain."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Bhejne se pehle data packets mein kyun toota jata hai, aur receiver kya karta hai?",
+            "explanation": "Chhote packets network ke raaste doosre traffic ke saath share kar sakte hain aur gum hone par sirf wahi packet dobara bheja jata hai. Receiver packets ko jor kar asal data bana deta hai."
           },
           {
             "type": "heading",
@@ -72,8 +93,8 @@
             "type": "list",
             "ordered": false,
             "items": [
-              "Architecture: devices ki tarteeb aur data bhejne ka tareeqa; hardware, software aur qawaid.",
-              "Data packets mein toot kar jata hai aur receiver par dobara jurta hai."
+              "Architecture: devices ki tarteeb aur data bhejne ka tareeqa; hardware, software aur rules.",
+              "Data packets mein toot kar jata hai; network devices raasta dikhate hain; receiver dobara jorta hai."
             ]
           }
         ]

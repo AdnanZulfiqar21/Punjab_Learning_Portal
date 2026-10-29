@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH6-F1-SCORE-RU",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch6",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch6/u-f1-score",
+      "title": "F1-Score (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-CS-CH6-F1-SCORE",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 86,
+          "pdf_to": 86,
+          "note": "Roman Urdu explanation of 'F1-Score' under topic 6.7 (PDF 86, printed 82)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "F1-score precision aur recall ke darmiyan tawazun (balance) hai: dono ko mila kar ek hi performance score deta hai. F-measure (yani F1-score) tab khaas mufeed hai jab data unbalanced ho (ek qism ke cases bohat zyada hon). Yeh correctness aur completeness dono ka khayal rakhta hai. Zyada F-measure ka matlab behtar performance. Is se sirf accuracy par bharosa nahi karna parta. F1-score jaanch mein aam istemal hota hai aur models ka munsifana muqabla karata hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "F1-Score ka formula:"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{F1-Score} = 2 \\times \\frac{\\text{Precision} \\times \\text{Recall}}{\\text{Precision} + \\text{Recall}}",
+            "text_alt": "F1-Score = 2 × (Precision × Recall) / (Precision + Recall)"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Precision: positive andazon mein se kitna hissa waqai sahi hai.",
+              "Recall: asal positive cases mein se kitna hissa sahi pehchana gaya."
+            ]
+          },
+          {
+            "type": "example",
+            "title": "Example (misal):",
+            "problem": "Farz karein ye values di gayi hain: TP = 40; TN = 50; FP = 10; FN = 5. In se Precision, Recall aur F1-Score nikalein.",
+            "steps": [
+              "Precision = TP / (TP + FP) = 40 / (40 + 10) = 40 / 50 = 0.8 (positive kahe gaye 50 cases mein se 40 sahi).",
+              "Recall = TP / (TP + FN) = 40 / (40 + 5) = 40 / 45 = 0.8889 (asal 45 positive cases mein se 40 pakre gaye).",
+              "F1-Score = 2 × (0.8 × 0.8889) / (0.8 + 0.8889) = 2 × 0.7111 / 1.6889 = 1.4222 / 1.6889 = 0.8421."
+            ],
+            "answer": "Aakhri nataij: Precision = 0.8; Recall = 0.8889; F1-Score = 0.8421. (Isi misal ki accuracy = (40 + 50) / (40 + 50 + 10 + 5) = 90 / 105 ≈ 0.857.)"
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh program upar wali misal ka hisab khud karta hai: TP, FP aur FN se precision, recall aur F1-score. Values badal kar Run karein."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "TP = 40   # True Positives\nFP = 10   # False Positives\nFN = 5    # False Negatives\n\nprecision = TP / (TP + FP)\nrecall = TP / (TP + FN)\nf1 = 2 * (precision * recall) / (precision + recall)\nprint(f\"Precision = {precision:.4f}\")\nprint(f\"Recall = {recall:.4f}\")\nprint(f\"F1-Score = {f1:.4f}\")",
+            "runnable": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"TP = 40\", \"FP = 10\", \"FN = 5\": misal ke counts (F1 ke liye TN ki zaroorat nahi).\n\"precision = TP / (TP + FP)\": positive kahe gaye 50 mein se 40 sahi = 0.8.\n\"recall = TP / (TP + FN)\": asal 45 positive mein se 40 pakre = 0.8889.\n\"f1 = 2 * (precision * recall) / (precision + recall)\": dono ka balance (harmonic mean).\n\":.4f\" har number 4 decimal tak dikhata hai.\nOutput: \"Precision = 0.8000\", \"Recall = 0.8889\" aur \"F1-Score = 0.8421\", bilkul kitab ke jawab.\nKhud try karein: FP = 0 karein: precision 1.0000 ho jayegi magar recall wahi rahegi; FN = 40 kar ke dekhein ke recall girne se F1 bhi gir jata hai."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch6-fig-metrics",
+            "alt": "Do-ba-do confusion matrix, oopar predicted positive aur negative, pehlu mein actual positive aur negative: TP = 40 (durust positive), FN = 5 (chhoota positive), FP = 10 (jhoota alarm) aur TN = 50 (durust negative). Saath: accuracy = (TP + TN) / sab = 90 / 105 = 0.857; precision = TP / (TP + FP) = 40 / 50 = 0.8; recall = TP / (TP + FN) = 40 / 45 = 0.8889; F1 = 0.8421.",
+            "caption": "Kitab ki misal ke liye confusion matrix aur metrics (6.7 ke mutabiq asal khaaka).",
+            "long_description": "Precision 'predicted positive' column (TP aur FP) use karti; recall 'actual positive' row (TP aur FN) use karti hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Ek bimari ka test 20 bimaron mein se 18 ko pakarta hai aur 980 sehatmand logon mein se 30 ko ghalti se bimar kehta hai. Recall aur precision nikalein. Yahan akeli accuracy kyun dhoka deti hai?",
+            "explanation": "TP = 18, FN = 2, FP = 30, TN = 950. Recall = 18/20 = 0.9; precision = 18/48 = 0.375. Accuracy = 968/1000 = 0.968 sirf is liye bari lagti hai ke zyada tar log sehatmand hain, jab ke zyada tar positive results jhoote alarm hain."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Mukhtasar khulasa: 6.7 Model Evaluation and Performance Metrics"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Model ko aise test data par jaanchein jo training mein istemal na hua ho.",
+              "Accuracy = (TP + TN) / (TP + TN + FP + FN); error rate accuracy ka ulat.",
+              "Precision = TP / (TP + FP); recall = TP / (TP + FN); F1 dono ka balance.",
+              "Kitab ki misal: precision 0.8, recall 0.8889, F1-score 0.8421."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

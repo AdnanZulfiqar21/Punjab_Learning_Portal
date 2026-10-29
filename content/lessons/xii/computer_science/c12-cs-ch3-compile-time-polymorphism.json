@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH3-COMPILE-TIME-POLYMORPHISM",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch3",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch3/u-1-compile-time-polymorphism",
+      "title": "1. Compile-time Polymorphism",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 44,
+          "pdf_to": 44,
+          "note": "Unnumbered heading 1. Compile-time Polymorphism under Types of Polymorphism, with the Calculator example and its printed output (PDF 44, printed 40)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Compile-time polymorphism means deciding which method or operation to run during compilation, usually through method or operator overloading. Languages like Java or C++ support this. But python does not support true method overloading based on function signatures like statically typed languages (e.g., Java or C++). Because Python is dynamically typed, a single function can accept arguments of different types, making signature-based overloading unnecessary. Instead, similar behavior can be achieved using default arguments, variable-length arguments (*args, **kwargs), or conditional logic inside the function."
+          },
+          {
+            "type": "paragraph",
+            "text": "Example: This code demonstrates method overloading using default and variable-length arguments. The multiply() method works with different numbers of inputs, mimicking compile-time polymorphism."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "class Calculator:\n    def multiply(self, a=1, b=1, *args):\n        result = a * b\n        for num in args:\n            result *= num\n        return result\n\n# Create object\ncalc = Calculator()\n\n# Using default arguments\nprint(calc.multiply())\nprint(calc.multiply(4))\n\n# Using multiple arguments\nprint(calc.multiply(2, 3))\nprint(calc.multiply(2, 3, 4))"
+          },
+          {
+            "type": "code",
+            "language": "text",
+            "text": "1\n4\n6\n24",
+            "caption": "Output"
+          }
+        ]
+      }
+    }
+  ]
+}

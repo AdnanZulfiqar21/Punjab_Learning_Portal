@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH1-IPV6-RU",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch1",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch1/u-ipv6",
+      "title": "IPv6 (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-CS-CH1-IPV6",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 15,
+          "pdf_to": 16,
+          "note": "Roman Urdu explanation of 'IPv6' (PDF 15-16): the same text in simple Roman Urdu with glossed hard words, a self-check and a recap."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Misaal: 2001:0db8:85a3:0000:0000:8a2e:0370:7334"
+          },
+          {
+            "type": "paragraph",
+            "text": "IPv6 mein 4 hexadecimal digits (0-9 aur a-f wale digits) ke 8 groups hote hain, aur beech mein colons (:) hote hain."
+          },
+          {
+            "type": "paragraph",
+            "text": "Har group = 16 bits"
+          },
+          {
+            "type": "paragraph",
+            "text": "Kul (total) = 128 bits (8 × 16 = 128)"
+          },
+          {
+            "type": "table",
+            "caption": "IPv6 ke hisse",
+            "header": [
+              "Hissa",
+              "Value",
+              "Matlab"
+            ],
+            "rows": [
+              [
+                "Global routing prefix",
+                "2001:0db8:85a3",
+                "ISP ya ilaqa, jaise “Pakistan, Sindh, Karachi”"
+              ],
+              [
+                "Subnet ID",
+                "0000",
+                "ISP ke andar aap ka local network, jaise “Gulshan area”"
+              ],
+              [
+                "Interface ID",
+                "0000:8a2e:0370:7334",
+                "Aap ka khaas device, jaise “Your laptop”"
+              ]
+            ]
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch1-fig-ip-addresses",
+            "alt": "IPv4 192.168.1.10 ke chaar hisse: 192, 168 aur 1 network part, 10 host part (32 bits). IPv6 ke aath groups: 2001 0db8 85a3 global routing prefix (ISP ya ilaqa), 0000 subnet ID (local network), 0000 8a2e 0370 7334 interface ID (aap ka device) (128 bits).",
+            "caption": "IPv4 aur IPv6 address ke hisse (kitab ki breakdown tables ke mutabiq asal khaaka)."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Do You Know?",
+            "text": "• IPv6 ke kul addresses: 2¹²⁸ ≈ 3.4 × 10³⁸.\n• Yeh itna bara number hai ke IPv6 ke addresses amalan (practically) kabhi khatam nahi honge."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh program IPv6 address ke groups ginta hai, bits ka hisaab lagata hai aur teen hisse alag karta hai. address badal kar Run karein."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "address = \"2001:0db8:85a3:0000:0000:8a2e:0370:7334\"\n\ngroups = address.split(\":\")\nprint(\"Groups:\", len(groups))\nprint(\"Bits in one group:\", len(groups[0]) * 4)\nprint(\"Total bits:\", len(groups) * 16)\nprint(\"Global routing prefix:\", \":\".join(groups[:3]))\nprint(\"Subnet ID:\", groups[3])\nprint(\"Interface ID:\", \":\".join(groups[4:]))\nprint(\"Total IPv6 addresses:\", 2 ** 128)",
+            "runnable": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"groups = address.split(\":\")\": address ko colons par tor kar 8 groups ki list banata hai.\n\"len(groups)\": groups ki ginti = 8.\n\"len(groups[0]) * 4\": ek group mein 4 hexadecimal digits hain aur har hexadecimal digit 4 bits ka hai, is liye 4 x 4 = 16 bits.\n\"len(groups) * 16\": 8 x 16 = 128 bits.\n\"groups[:3]\": pehle teen groups = global routing prefix; \"groups[3]\" = subnet ID; \"groups[4:]\" = aakhri chaar groups = interface ID.\n\"2 ** 128\": 128 bits se ban'ne wale kul addresses.\nOutput: \"Groups: 8\", \"Bits in one group: 16\", \"Total bits: 128\", \"Global routing prefix: 2001:0db8:85a3\", \"Subnet ID: 0000\", \"Interface ID: 0000:8a2e:0370:7334\", \"Total IPv6 addresses: 340282366920938463463374607431768211456\" (taqreeban 3.4 × 10³⁸).\nKhud try karein: address mein aakhri group 7334 ko 0001 kar ke Run karein: sirf Interface ID badalta hai, baqi hisse wohi rehte hain."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "IPv6 address mein kitne groups hain, har group kitne bits ka hai, aur kul bits kitne hain?",
+            "explanation": "8 groups, har group 16 bits (4 hexadecimal digits), kul 8 x 16 = 128 bits."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Mukhtasar khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "IPv6: 4 hexadecimal digits ke 8 groups, colons se alag; har group 16 bits; kul 128 bits; 2¹²⁸ ≈ 3.4 × 10³⁸ addresses."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

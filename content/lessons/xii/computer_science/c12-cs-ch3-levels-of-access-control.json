@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH3-LEVELS-OF-ACCESS-CONTROL",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch3",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch3/u-1-levels-of-access-control",
+      "title": "1. Levels of Access Control",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 39,
+          "pdf_to": 40,
+          "note": "Unnumbered heading 1. Levels of Access Control under Encapsulation, with Figure 3.2 and the BankAccount example (PDF 39-40, printed 35-36)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "In Python, you can control the visibility of class members using specific naming prefixes:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Public Members: These are accessible from anywhere—inside or outside the class. By default, all members in Python are public (as shown in Figure 3.2). Syntax: self.attribute_name",
+              "Protected Members: These are intended for internal use within the class and its subclasses. It is a convention (not a restriction) to signal to other developers that the member should not be accessed from outside. Syntax: self._attribute_name (single underscore)",
+              "Private Members: These are highly restricted and cannot be easily accessed from outside the class. Python uses a mechanism called Name Mangling to change the internal name of the variable to prevent accidental access. Syntax: self.__attribute_name (double underscore)"
+            ]
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch3-fig-encapsulation",
+            "alt": "Encapsulation diagram: a User / Outside Class box. A green arrow with a tick, labelled Access allowed, goes to the Public Methods / Interface box (getValue(), setValue()) inside a Class Object box; a dotted arrow leads from the methods to the Private Data box (__private_variable). A red dashed line with a cross, labelled Direct access restricted, runs from the user to the private data.",
+            "caption": "Figure 3.2: Encapsulation diagram showing private and public variables (original drawing after the textbook's Figure 3.2)."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The printed Figure 3.2 labels the private data _private_variable with one underscore, which in Python marks a protected member; a private member has two underscores, __private_variable, as drawn above."
+          },
+          {
+            "type": "paragraph",
+            "text": "Example:"
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "class BankAccount:\n    def __init__(self, balance):\n        self.__balance = balance      # Private variable\n\n    def deposit(self, amount):\n        self.__balance += amount\n    def withdraw(self, amount):\n        if amount <= self.__balance:\n            self.__balance -= amount\n        else:\n            print(\"Insufficient balance\")\n\n    def get_balance(self):\n        return self.__balance\n# Usage\naccount = BankAccount(1000)\n\naccount.deposit(500)\naccount.withdraw(300)\n\nprint(account.get_balance())              # Output: 1200\n\n# Direct access will fail\n# print(account.__balance)                # Error"
+          }
+        ]
+      }
+    }
+  ]
+}

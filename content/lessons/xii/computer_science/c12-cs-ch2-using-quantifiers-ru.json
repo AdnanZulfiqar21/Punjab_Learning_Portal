@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH2-USING-QUANTIFIERS-RU",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch2",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch2/u-using-quantifiers-in-logical-statements",
+      "title": "Using Quantifiers in Logical Statements (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-CS-CH2-USING-QUANTIFIERS",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 32,
+          "pdf_to": 32,
+          "note": "Roman Urdu: Using Quantifiers in Logical Statements with a self-check and a small all()/any() program of ours (PDF 32, printed 28)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Quantifiers ko predicates ke saath mila kar saaf logical statements bante hain. Maslan “∀x, P(x)” ka matlab hai predicate P(x) har x ke liye sach hai, jabke “∃x, P(x)” ka matlab hai P(x) kam az kam ek x ke liye sach hai. Quantifiers mushkil statements mein ek saath bhi aa sakte hain. Maslan “∀x ∃y, x < y” ka matlab hai har x ke liye koi aisa y maujood hai jo x se bara ho. Quantifiers se qaide, shartein aur rishte saaf likhe ja sakte hain."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Quantifier ki shakal mein likhein: (a) Class ka har student pass hua. (b) Class ke kisi student ne poore marks liye.",
+            "explanation": "(a) ∀x, Student(x) → Passed(x). (b) ∃x, Student(x) ∧ FullMarks(x)."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Python ke all() aur any() functions quantifiers jaisa kaam karte hain: all() “for all” (∀) hai aur any() “there exists” (∃). numbers ki list badal kar dekhein."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "numbers = [2, 4, 6, 7]   # domain: jin cheezon ki baat ho rahi hai\n\nfor_all_positive = all(x > 0 for x in numbers)        # for all x, x > 0\nexists_even = any(x % 2 == 0 for x in numbers)        # there exists x, x is even\nfor_all_even = all(x % 2 == 0 for x in numbers)       # for all x, x is even\n\nprint(\"For all x, x > 0:\", for_all_positive)\nprint(\"There exists an even x:\", exists_even)\nprint(\"For all x, x is even:\", for_all_even)",
+            "runnable": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"numbers = [2, 4, 6, 7]\": domain, yani woh cheezein jin ki baat ho rahi hai.\n\"all(x > 0 for x in numbers)\": har x ke liye x > 0 check karta hai; sab sach hon tabhi True. Yeh ∀x, x > 0 hai.\n\"any(x % 2 == 0 for x in numbers)\": kam az kam ek even number ho to True. Yeh ∃x, x is even hai.\n\"all(x % 2 == 0 for x in numbers)\": kya har number even hai? 7 even nahi, is liye False.\nOutput: \"For all x, x > 0: True\", \"There exists an even x: True\" aur \"For all x, x is even: False\".\nKhud try karein: numbers = [1, 3, 5] likhein: pehli line True, doosri False (koi even nahi) aur teesri False. Phir numbers = [2, 4, 6]: teeno True."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Mukhtasar khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "∀x, P(x): P har x ke liye sach; ∃x, P(x): kam az kam ek x ke liye sach.",
+              "Dono ek saath: ∀x ∃y, x < y (har x se bara koi y hai).",
+              "Python mein all() = ∀ aur any() = ∃."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

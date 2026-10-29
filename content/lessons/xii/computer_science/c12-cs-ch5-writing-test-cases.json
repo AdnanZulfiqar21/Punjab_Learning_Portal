@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH5-WRITING-TEST-CASES",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch5",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch5/u-writing-and-executing-test-cases",
+      "title": "Writing and executing test cases",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 65,
+          "pdf_to": 66,
+          "note": "Unnumbered topic Writing and executing test cases as printed (PDF 65-66, printed 61-62); its own lesson since 2026-10-29 (one lesson per book heading), moved from the Unit Testing lesson."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Test cases define specific inputs and the expected output for a function. For example, a calculator function can be tested for addition and subtraction results. Python executes these tests and reports failures or errors. Repeated testing ensures that changes in code do not break existing functionality. Automated test execution saves time and improves accuracy in development."
+          },
+          {
+            "type": "paragraph",
+            "text": "Example:"
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "# Function to test\n# This function takes two input values, a and b.\n# It returns the sum of both values.\ndef add(a, b):\n    return a + b\n# This function takes two input values, a and b.\n# It returns the product of both values.\ndef multiply(a, b):\n    return a * b\n# Using pytest to test functions\n# In pytest, every test function usually starts with the word \"test_\".\n# Pytest automatically detects and runs these test functions.\ndef test_add():\n    # This test checks whether the add() function gives the correct result.\n    # Here, 2 and 3 are passed as input values.\n    # The expected output is 5.\n    assert add(2, 3) == 5  # Test passes because 2 + 3 = 5\n\ndef test_multiply():\n    # This test checks whether the multiply() function gives the correct result.\n    # Here, 2 and 3 are passed as input values.\n    # The expected output is 6.\n    assert multiply(2, 3) == 6  # Test passes because 2 * 3 = 6"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "pytest simplifies testing. It doesn't require test case classes or boilerplate code like unittest.",
+              "The tests are written as simple functions, and assert is used to check if the output is correct.",
+              "To run the tests, simply execute pytest in the command line in the directory where the file is located."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

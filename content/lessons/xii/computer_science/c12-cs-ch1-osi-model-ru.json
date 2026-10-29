@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH1-OSI-MODEL-RU",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch1",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch1/u-osi-model-open-systems-interconnection",
+      "title": "OSI Model (Open Systems Interconnection) (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-CS-CH1-OSI-MODEL",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 13,
+          "pdf_to": 13,
+          "note": "Roman Urdu explanation of 'OSI Model (Open Systems Interconnection)' (PDF 13): the same text in simple Roman Urdu with glossed hard words, a self-check and a recap."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "OSI ka matlab hai Open Systems Interconnection. Yeh network communication samajhne ka ek standard model hai. OSI model mein saat (7) layers hain. Har layer alag function (kaam) karti hai. Yeh model networks seekhne aur design karne ke liye istemal hota hai. Yeh mukhtalif systems (alag companiyon ke computers) ko sahi tarah communicate karne (baat karne) mein madad deta hai."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch1-fig-osi",
+            "alt": "Bhejne wale (sender) ki taraf OSI model: sender computer ke saath saat tahein (layers) oopar se neeche, Application, Presentation, Session, Transport, Network, Data Link aur Physical, neeche ki taraf teeron ke saath; Physical layer se cable nikalti aur tooti lakeer receiver computer tak jati hai.",
+            "caption": "Figure 1.13: Sender ki taraf OSI model: data Application layer se Physical layer tak (kitab ki Figure 1.13 ke mutabiq asal khaaka)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Diagram ko samjhein",
+            "text": "Figure 1.13 sirf bhejne wale (sender) ki taraf dikhati hai: data Application layer se neeche Physical layer tak aata hai aur phir cable se jata hai. Receiver (wusool karne wale) par yahi data ulti tarteeb mein, Physical se oopar Application tak, jata hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Yaad rakhne ka tareeqa",
+            "text": "Oopar se neeche 7 layers: Application, Presentation, Session, Transport, Network, Data Link, Physical. Jumla yaad karein: \"All People Seem To Need Data Processing\" (har lafz ka pehla harf ek layer)."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh program dikhata hai ke sender par data 7 se 1 tak neeche aata hai aur receiver par 1 se 7 tak oopar jata hai. message badal kar Run karein."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "message = \"Hi\"\n\nlayers = [\"Application\", \"Presentation\", \"Session\", \"Transport\",\n          \"Network\", \"Data Link\", \"Physical\"]\n\nprint(\"Sender side (data goes down):\")\nfor number, layer in zip(range(7, 0, -1), layers):\n    print(\" \", number, layer)\nprint(\"Signals carry\", repr(message), \"over the cable\")\nprint(\"Receiver side (data goes up):\")\nfor number, layer in zip(range(1, 8), reversed(layers)):\n    print(\" \", number, layer)",
+            "runnable": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"message = \"Hi\"\": woh data jo bhejna hai.\n\"layers = [...]\": OSI ki 7 layers ki list, oopar (Application) se neeche (Physical) tak.\n\"zip(range(7, 0, -1), layers)\": number 7, 6, ... 1 ko har layer ke saath jorta hai, is liye sender ki taraf \"7 Application\" se \"1 Physical\" tak print hota hai.\n\"print(\"Signals carry\", repr(message), ...)\": Physical layer par data signals ban kar cable se jata hai; repr() message ko quotes ke saath dikhata hai.\n\"zip(range(1, 8), reversed(layers))\": receiver par ulti tarteeb: \"1 Physical\" se \"7 Application\" tak.\nOutput: \"Sender side (data goes down):\" ke neeche 7 Application, 6 Presentation, 5 Session, 4 Transport, 3 Network, 2 Data Link, 1 Physical; phir \"Signals carry 'Hi' over the cable\"; phir \"Receiver side (data goes up):\" ke neeche 1 Physical se 7 Application tak.\nKhud try karein: message = \"Salam\" kar ke Run karein: beech wali line \"Signals carry 'Salam' over the cable\" ban jati hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "OSI ka poora naam kya hai aur is mein kitni layers hain?",
+            "explanation": "Open Systems Interconnection; 7 layers."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Mukhtasar khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "OSI (Open Systems Interconnection): 7 layers ka standard model; sender par data Application se Physical tak neeche, receiver par oopar."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

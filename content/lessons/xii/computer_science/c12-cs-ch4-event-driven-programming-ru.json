@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH4-EVENT-DRIVEN-PROGRAMMING-RU",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch4",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch4/u-understanding-event-driven-programming",
+      "title": "Understanding Event-Driven Programming (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-CS-CH4-EVENT-DRIVEN-PROGRAMMING",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 55,
+          "pdf_to": 55,
+          "note": "Roman Urdu explanation of Understanding Event-Driven Programming (PDF 55, printed 51), paragraph for paragraph with the English; Code Explanation boxes and runnable examples added 2026-10-29."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Event-driven programming events naam ke kaamon par chalti hai. Program event hone tak khamosh (idle) rehta hai. Aam events button click aur key press hain. Har event aik khaas function se jura hota hai, aur woh function sirf us waqt chalta hai jab event hota hai. Is tareeqe se computer ke wasail (system resources) bachte hain. GUI mein yeh tareeqa bohat istemal hota hai."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch4-fig-event-loop",
+            "alt": "Event loop ka chakkar: mainloop() event ka intezar karta hai; Login dabana event hai; is se check_login() chalta hai; messagebox paigham dikhata hai; phir mainloop() dobara intezar karta hai.",
+            "caption": "Login misal mein event loop (hamara apna khaaka; kitab mein yeh figure nahi)."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Tkinter browser mein nahi chalta, lekin event-driven programming ka khayal (idea) saade Python se dekha ja sakta hai. Neeche events ki list user ke kaam hain; har event apne function se jura hai, aur function sirf us event par chalta hai. events ki list badal kar Run karein."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "events = [\"click\", \"key_press\", \"click\", \"close\"]   # user ke kaam, bari bari\n\ndef on_click():\n    print(\"Button dabaya gaya: label ka text badla\")\n\ndef on_key_press():\n    print(\"Key dabayi gayi: entry mein harf aaya\")\n\n# har event ka jura hua function (jaise command=on_click)\nhandlers = {\"click\": on_click, \"key_press\": on_key_press}\n\nprint(\"Program idle hai, event ka intezar...\")\nfor event in events:\n    if event == \"close\":\n        print(\"Window band: program khatam\")\n        break\n    handlers[event]()   # event se jura function chalao",
+            "runnable": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"events = [...]\": user ke kaamon (events) ki list: click, key_press, click, close.\n\"def on_click():\" aur \"def on_key_press():\": do functions; har aik apna paigham print karta hai.\n\"handlers = {\"click\": on_click, \"key_press\": on_key_press}\": dictionary jo har event ka naam us ke function se jorti hai, bilkul Tkinter ke command=on_click ki tarah. Yahan on_click ke saath () nahi, kyunke hum function khud rakh rahe hain, chala nahi rahe.\n\"for event in events:\": events bari bari aate hain (Tkinter mein yeh kaam mainloop() karta hai).\n\"if event == \"close\":\": close aaye to paigham de kar \"break\" se loop khatam.\n\"handlers[event]()\": event ka function dhoond kar () se chalata hai.\nOutput: \"Program idle hai, event ka intezar...\", \"Button dabaya gaya: label ka text badla\", \"Key dabayi gayi: entry mein harf aaya\", \"Button dabaya gaya: label ka text badla\", \"Window band: program khatam\".\nKhud try karein: list ko [\"key_press\", \"key_press\", \"close\", \"click\"] kar dein: do dafa key ka paigham aayega, phir window band; close ke baad wala click kabhi nahi chalega."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Mukhtasar khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Program idle rehta hai; event aane par us se jura function chalta hai.",
+              "Is se system resources bachte hain; GUI isi par chalti hai."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

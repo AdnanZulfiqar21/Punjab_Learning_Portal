@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH9-TWO-FACTOR-AUTHENTICATION-RU",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch9",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch9/u-two-factor-authentication-2fa",
+      "title": "Two-Factor Authentication (2FA) (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-CS-CH9-TWO-FACTOR-AUTHENTICATION",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 127,
+          "pdf_to": 127,
+          "note": "Roman Urdu explanation of Two-Factor Authentication (2FA) (PDF 127, printed 123)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Two-Factor Authentication (2FA) security ka aisa tareeqa hai jo account kholne se pehle do tarah ki tasdeeq (verification) mangta hai. Misal: password dalne ke baad user ko apni pehchan confirm karne ke liye phone ya email par ek code mil sakta hai. Yeh izafi qadam hackers ke liye andar ghusna bohat mushkil bana deta hai."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch9-fig-2fa-steps",
+            "alt": "Teen qadam upar se neeche: 1. Password (pehli tasdeeq); 2. Phone ya email par aaya code (doosri tasdeeq), phone ke nishan ke saath; phir 'Account khul gaya', dono sahi hon to hi rasai. Neeche: sirf chori ka password kafi nahi.",
+            "caption": "Two-factor authentication (2FA) ke qadam (is sabaq ke liye hamara apna khaaka; kitab mein yeh tasveer nahi)."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "2FA mein password ke baad doosra saboot (phone par code) bhi chahiye. Yeh program isi do qadam wale login ki naqal (simulation) hai; asal mein code SMS ya app se aata hai."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "import random\n\nsaved_password = \"Mehfooz#Ghar2025\"\ntyped_password = \"Mehfooz#Ghar2025\"\ntyped_code_correct = True      # False kar ke dekhein: ghalat code\n\ncode = str(random.randint(100000, 999999))   # phone par bheja gaya 6-digit code\nprint(\"Qadam 1: password check ...\", \"theek\" if typed_password == saved_password else \"ghalat\")\n\nif typed_password == saved_password:\n    print(\"Qadam 2: aap ke phone par code bheja gaya\")\n    typed_code = code if typed_code_correct else \"000000\"\n    if typed_code == code:\n        print(\"Code theek. Login kamyab!\")\n    else:\n        print(\"Code ghalat. Login band.\")\nelse:\n    print(\"Login band.\")",
+            "runnable": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"import random\": random numbers banane ki library.\n\"saved_password\" asal password hai aur \"typed_password\" jo user ne likha. \"typed_code_correct = True\": user ne code sahi likha ya nahi.\n\"code = str(random.randint(100000, 999999))\": 6 digit ka random code (har baar naya) jo phone par bheja jata hai.\nPehla print password check karta hai: dono barabar hon to \"theek\", warna \"ghalat\".\nPassword theek ho tab hi qadam 2 chalta hai: \"typed_code = code if typed_code_correct else \\\"000000\\\"\" sahi ya ghalat code ki naqal karta hai.\n\"if typed_code == code\": code mile to login kamyab, warna band. Yani sirf password chura lene se hacker andar nahi aa sakta.\nOutput: \"Qadam 1: password check ... theek\", \"Qadam 2: aap ke phone par code bheja gaya\" aur \"Code theek. Login kamyab!\" (code har baar alag hota hai magar output wahi rehta hai).\nKhud try karein: typed_code_correct = False karein (aakhri line \"Code ghalat. Login band.\" ho jayegi), ya typed_password badal kar dekhein."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Hacker ne aap ka password chura liya hai, magar aap ke account par 2FA on hai. Kya woh login kar sakega? Kyun?",
+            "explanation": "Nahi. 2FA do tarah ki tasdeeq mangti hai: password ke baad aap ke phone ya email par aane wala code bhi chahiye, jo hacker ke paas nahi."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Mukhtasar khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "2FA: login se pehle do tasdeeq (password + phone/email code).",
+              "Izafi qadam hackers ke liye andar aana bohat mushkil bana deta hai."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
