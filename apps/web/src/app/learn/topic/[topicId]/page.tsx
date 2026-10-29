@@ -11,6 +11,8 @@ import { continuesInto, headingOnly as isHeadingOnly, headingTone } from "@/lib/
 import { premiumBook } from "@/lib/book-style";
 import { typesetEquations } from "@/lib/typeset";
 import { placeSignature, type PlaceBlock } from "@/lib/variant-place";
+import { ButtonLink } from "@/components/button";
+import { Icon } from "@/components/icons";
 import { Notice, SkeletonLines } from "@/components/ui";
 import { DISPLAY_COOKIE, parseDisplay } from "@/lib/display";
 import { practiceOnly } from "@/lib/exercises";
@@ -21,6 +23,7 @@ import { api, currentUser } from "@/lib/session";
 export const metadata: Metadata = { title: "Lesson" };
 
 // BOOK-HEADING-01: a heading's colour by its depth (lib/book-heading.ts `headingTone`).
+// DESIGN-01: the page's chrome (switch, header, chapter opening, navigation) is glass; the lesson stays on a solid card.
 const TONE = { main: "text-accent", topic: "", sub: "text-subheading" } as const;
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
@@ -113,16 +116,25 @@ async function TopicView({ id, view }: { id: string; view: "read" | "lecture" })
   const dataSaver = display ? display.dataSaver : (await headers()).get("save-data") === "on";
   const lectureRes = readable ? await api<TopicLecture>(`/v1/topics/${id}/lecture`, token ? { token } : {}) : null;
   const lecture = lectureRes?.ok ? lectureRes.data : null;
-  const segment = "rounded-md px-4 py-1.5 text-sm";
-  const on = `${segment} bg-surface font-semibold shadow-sm`;
-  const off = `${segment} text-muted hover:text-foreground`;
+  // DESIGN-01: a pill segmented control; the chosen segment is the dark primary pill.
+  const segment = "inline-flex min-h-11 items-center justify-center gap-1.5 rounded-full px-4 text-sm transition duration-200 sm:px-5";
+  const on = `${segment} bg-foreground font-semibold text-background shadow-glass`;
+  const off = `${segment} font-medium text-muted hover:bg-surface-muted hover:text-foreground`;
+  const draft = (
+    <span
+      className="inline-flex items-center rounded-full border border-warn/30 bg-warn-soft px-2.5 py-0.5 text-xs font-semibold text-foreground"
+      title="Not yet reviewed or published"
+    >
+      Draft preview
+    </span>
+  );
   return (
     <article className="mx-auto max-w-3xl space-y-6" data-subject={subjectKey(reading.subject_name)}>
       {readable && (
-        <form action={chooseReadingLanguage} className="sticky top-0 z-10 -mx-4 space-y-2 bg-background/95 px-4 py-2 backdrop-blur" aria-label="Explanation language">
+        <form data-reading-bar action={chooseReadingLanguage} className="sticky top-0 z-10 -mx-4 space-y-2 bg-background/90 px-4 py-2.5 backdrop-blur" aria-label="Explanation language">
           <input type="hidden" name="topic" value={reading.topic_id} />
           <KeepPlace lessonId={lesson?.id ?? ""} signatures={(lesson?.body?.blocks ?? []).map((b) => placeSignature(b as PlaceBlock))} />
-          <div role="group" aria-label="Read or watch" className="inline-flex rounded-lg border border-border bg-surface-muted p-0.5">
+          <div role="group" aria-label="Read or watch" className="glass inline-flex max-w-full gap-1 rounded-full p-1">
             {READING_LANGUAGES.map(([code, label]) =>
               view === "lecture" ? (
                 <Link key={code} href={`/learn/topic/${reading.topic_id}`} aria-current={undefined} className={off}>
@@ -135,6 +147,7 @@ async function TopicView({ id, view }: { id: string; view: "read" | "lecture" })
               ),
             )}
             <Link href={`/learn/topic/${reading.topic_id}?view=lecture`} aria-current={view === "lecture" ? "page" : undefined} className={view === "lecture" ? on : off}>
+              <Icon name="play" size={14} />
               Lecture
             </Link>
           </div>
@@ -149,8 +162,9 @@ async function TopicView({ id, view }: { id: string; view: "read" | "lecture" })
         // CHAPTER-OPENING-01 (owner trial, 2026-10-27): a chapter's introduction opens with the chapter itself: its name
         // large in the subject colour on a tinted panel, then the introduction's own title.
         <header className="space-y-5">
-          <div className="relative overflow-hidden rounded-2xl border border-border bg-accent-soft px-6 py-7 sm:px-9 sm:py-10">
-            <span aria-hidden className="pointer-events-none absolute -bottom-6 right-4 select-none text-[8rem] font-bold leading-none text-accent opacity-10 sm:text-[10rem]">
+          <div className="glass relative overflow-hidden rounded-card px-6 py-8 sm:px-9 sm:py-11">
+            <span aria-hidden className="pointer-events-none absolute inset-0 bg-accent-soft opacity-80" />
+            <span aria-hidden className="pointer-events-none absolute -bottom-6 right-4 select-none font-display text-[8rem] font-bold leading-none text-accent opacity-10 sm:text-[10rem]">
               {reading.chapter_number}
             </span>
             <div className="relative space-y-3">
@@ -158,35 +172,30 @@ async function TopicView({ id, view }: { id: string; view: "read" | "lecture" })
                 <Link href={`/learn/chapter/${reading.chapter_id}`} className="underline underline-offset-2">
                   {grade} · {reading.subject_name}
                 </Link>
-                {reading.availability === "private_preview" && (
-                  <span className="rounded-full border border-border bg-surface-muted px-2 py-0.5 text-xs font-semibold text-muted" title="Not yet reviewed or published">
-                    Draft preview
-                  </span>
-                )}
+                {reading.availability === "private_preview" && draft}
               </p>
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">Chapter {reading.chapter_number}</p>
-              <p className="text-4xl font-bold tracking-tight text-accent sm:text-5xl">{reading.chapter_title}</p>
+              <p className="font-display text-4xl font-bold tracking-tight text-accent sm:text-5xl">{reading.chapter_title}</p>
               <div aria-hidden className="h-1 w-16 rounded-full bg-accent" />
             </div>
           </div>
           {/* The page's heading stays the topic; the chapter above is its setting. */}
-          <h1 className={`text-2xl font-semibold tracking-tight ${TONE[headingTone(reading.number) ?? "topic"]}`}>
+          <h1 className={`font-display text-[26px] leading-8 font-semibold tracking-tight sm:text-3xl ${TONE[headingTone(reading.number) ?? "topic"]}`}>
             {reading.number ? `${reading.number} ${reading.title}` : reading.title}
           </h1>
         </header>
       ) : (
-        <header className="space-y-2">
-          <p className="flex flex-wrap items-center gap-2 text-sm font-medium text-accent">
-            <Link href={`/learn/chapter/${reading.chapter_id}`} className="underline underline-offset-2">
+        <header className="glass space-y-3 rounded-card px-6 py-6 sm:px-8 sm:py-7">
+          <p className="flex flex-wrap items-center gap-2 text-sm font-semibold text-accent">
+            <Link href={`/learn/chapter/${reading.chapter_id}`} className="inline-flex items-center gap-1.5 underline underline-offset-2">
+              <Icon name="book-open" size={16} />
               {grade} · {reading.subject_name} · Chapter {reading.chapter_number}
             </Link>
-            {reading.availability === "private_preview" && (
-              <span className="rounded-full border border-border bg-surface-muted px-2 py-0.5 text-xs font-semibold text-muted" title="Not yet reviewed or published">
-                Draft preview
-              </span>
-            )}
+            {reading.availability === "private_preview" && draft}
           </p>
-          <h1 className={`text-3xl font-semibold tracking-tight ${TONE[headingTone(reading.number) ?? "topic"]}`}>{reading.number ? `${reading.number} ${reading.title}` : reading.title}</h1>
+          <h1 className={`font-display text-[28px] leading-9 font-bold tracking-tight sm:text-[36px] sm:leading-[2.75rem] ${TONE[headingTone(reading.number) ?? "topic"]}`}>
+            {reading.number ? `${reading.number} ${reading.title}` : reading.title}
+          </h1>
           <p className="text-sm text-muted">{reading.chapter_title}</p>
         </header>
       )}
@@ -229,8 +238,9 @@ async function TopicView({ id, view }: { id: string; view: "read" | "lecture" })
           to read it.
         </Notice>
       ) : (
-        <div className="space-y-4 text-[1.0625rem] leading-7 sm:text-[1.125rem] sm:leading-8" lang={lesson.language === "ur" ? "ur" : "en"} dir={lesson.language === "ur" ? "rtl" : undefined}>
-          {cont && <h2 className="text-2xl font-semibold tracking-tight">{`${cont.number} ${cont.title}`}</h2>}
+        // Owner rule 5: the lesson is read on a solid surface, never on glass.
+        <div className="space-y-4 rounded-card border border-border bg-surface px-4 py-5 text-[1.0625rem] leading-7 shadow-glass sm:px-8 sm:py-8 sm:text-[1.125rem] sm:leading-8" lang={lesson.language === "ur" ? "ur" : "en"} dir={lesson.language === "ur" ? "rtl" : undefined}>
+          {cont && <h2 className="font-display text-2xl font-semibold tracking-tight">{`${cont.number} ${cont.title}`}</h2>}
           <LessonBlocks
             blocks={lesson.body.blocks}
             typeset={typesetEquations(lesson.body.blocks)}
@@ -246,18 +256,20 @@ async function TopicView({ id, view }: { id: string; view: "read" | "lecture" })
           />
         </div>
       )}
-      <nav className="flex justify-between gap-3 border-t border-border pt-4 text-sm" aria-label="Topic navigation">
+      <nav className="flex flex-wrap justify-between gap-3 pt-2" aria-label="Topic navigation">
         {reading.previous_topic_id ? (
-          <Link href={`/learn/topic/${reading.previous_topic_id}`} className="font-medium text-accent">
-            ← Previous topic
-          </Link>
+          <ButtonLink href={`/learn/topic/${reading.previous_topic_id}`} variant="secondary">
+            <Icon name="arrow-right" size={18} className="rotate-180" />
+            Previous topic
+          </ButtonLink>
         ) : (
           <span />
         )}
         {shown.next_topic_id && (
-          <Link href={`/learn/topic/${shown.next_topic_id}`} className="font-medium text-accent">
-            Next topic →
-          </Link>
+          <ButtonLink href={`/learn/topic/${shown.next_topic_id}`} variant="secondary" className="ml-auto">
+            Next topic
+            <Icon name="arrow-right" size={18} />
+          </ButtonLink>
         )}
       </nav>
     </article>

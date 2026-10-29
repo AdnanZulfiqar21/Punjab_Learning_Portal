@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 import type { WrittenResult } from "@portal/contracts";
 import { requestRecheck } from "@/app/actions/support";
+import { buttonClasses } from "@/components/button";
 import { Notice } from "@/components/ui";
 import { TIME_ZONE } from "@/lib/dates";
 
@@ -35,7 +36,7 @@ export function RecheckPanel({ attemptId, result, marks }: { attemptId: string; 
   return (
     <div className="space-y-3">
       {result.versions.length > 1 && (
-        <div className="rounded-lg bg-surface-muted p-3 text-sm">
+        <div className="rounded-inner bg-surface-muted p-4 text-sm">
           <p className="font-semibold">Mark history</p>
           <ol className="space-y-1">
             {result.versions.map((h, i) => {
@@ -78,8 +79,8 @@ export function RecheckPanel({ attemptId, result, marks }: { attemptId: string; 
         </p>
       )}
       {rc.status === "available" && (
-        <details className="rounded-xl border border-border bg-surface p-4">
-          <summary className="cursor-pointer font-medium">Ask for a recheck</summary>
+        <details className="glass rounded-card px-5 py-4">
+          <summary className="flex min-h-11 cursor-pointer items-center font-display font-semibold">Ask for a recheck</summary>
           <div className="mt-3 space-y-3">
             <p className="text-sm text-muted">
               A different teacher will mark the questions you choose again. Marks can go up or down, and your other questions keep
@@ -132,7 +133,7 @@ export function RecheckPanel({ attemptId, result, marks }: { attemptId: string; 
               <label htmlFor="recheck-reason" className="font-medium">
                 Why should it be marked again?
               </label>
-              <textarea id="recheck-reason" value={reason} onChange={(e) => setReason(e.target.value)} rows={3} minLength={10} maxLength={2000} className="w-full rounded-lg border border-border bg-surface px-3 py-2" />
+              <textarea id="recheck-reason" value={reason} onChange={(e) => setReason(e.target.value)} rows={3} minLength={10} maxLength={2000} className="min-h-11 w-full rounded-inner border border-border bg-surface px-3.5 py-2" />
             </div>
             {error && (
               <p role="alert" className="text-sm text-danger">
@@ -150,7 +151,7 @@ export function RecheckPanel({ attemptId, result, marks }: { attemptId: string; 
                   else setError(out.error ?? null);
                 })
               }
-              className="rounded-lg bg-accent px-4 py-2 font-medium text-white hover:bg-accent-strong disabled:opacity-60 dark:text-background"
+              className={buttonClasses()}
             >
               {pending ? "Sending…" : "Request recheck"}
             </button>

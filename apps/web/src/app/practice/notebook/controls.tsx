@@ -2,6 +2,8 @@
 
 import { useRef, useState, useTransition } from "react";
 import { saveNote, startReview } from "@/app/actions/practice";
+import { buttonClasses } from "@/components/button";
+import { FIELD, SMALL_PILL } from "@/components/practice-ui";
 
 export function NoteEditor({ id, initial }: { id: string; initial: string }) {
   const [note, setNote] = useState(initial);
@@ -22,7 +24,7 @@ export function NoteEditor({ id, initial }: { id: string; initial: string }) {
         placeholder="Your note (only you see it)"
         rows={2}
         maxLength={2000}
-        className="min-w-0 flex-1 rounded-lg border border-border bg-surface px-3 py-2"
+        className={`${FIELD} min-w-0 flex-1`}
       />
       <button
         type="button"
@@ -33,7 +35,7 @@ export function NoteEditor({ id, initial }: { id: string; initial: string }) {
             setSaved(out.ok);
           })
         }
-        className="rounded-lg border border-border bg-surface px-3 py-1.5 font-medium hover:border-accent disabled:opacity-60"
+        className={SMALL_PILL}
       >
         {saved ? "Saved" : pending ? "Saving…" : "Save note"}
       </button>
@@ -60,12 +62,12 @@ export function StartReview({ grade, subject }: { grade: number; subject: string
             }
           })
         }
-        className="rounded-lg bg-accent px-3 py-1.5 font-medium text-white hover:bg-accent-strong disabled:opacity-60 dark:text-background"
+        className={buttonClasses()}
       >
         {pending ? "Preparing…" : "Review now"}
       </button>
       {error && (
-        <p role="alert" className="text-sm text-danger">
+        <p role="alert" className="rounded-inner border border-danger/30 bg-danger-soft px-3 py-2 text-sm">
           {error}
         </p>
       )}

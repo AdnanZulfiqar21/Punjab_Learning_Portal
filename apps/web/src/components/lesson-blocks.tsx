@@ -175,7 +175,7 @@ export function LessonBlocks({
           const level = Math.min(6, (b.level === 3 ? 3 : 2) + headingOffset);
           const Tag = `h${level}` as "h2" | "h3" | "h4" | "h5" | "h6";
           return (
-            <section key={i} className="overflow-hidden rounded-xl border border-ok/40 bg-surface shadow-sm" aria-label={str(b.text)}>
+            <section key={i} className="overflow-hidden rounded-inner border border-ok/40 bg-surface shadow-sm" aria-label={str(b.text)}>
               {wrap(
                 i,
                 <Tag dir="auto" className="bg-ok-soft px-4 py-2 text-base font-semibold text-ok">
@@ -208,7 +208,7 @@ function ArchivedImage({ id, alt, assetUrl, dataSaver }: { id: string; alt: stri
 /** §5.4 rule 5: the reviewed fallback for a block this renderer can't show natively. */
 function FallbackView({ fb, assetUrl, dataSaver }: { fb: Fallback; assetUrl?: AssetUrl; dataSaver?: boolean }) {
   return (
-    <figure className="space-y-2 rounded-lg border border-border bg-surface px-4 py-3">
+    <figure className="space-y-2 rounded-inner border border-border bg-surface px-4 py-3">
       {str(fb.image_asset_id) && <ArchivedImage id={str(fb.image_asset_id)} alt={str(fb.alt) || str(fb.text)} assetUrl={assetUrl} dataSaver={dataSaver} />}
       {str(fb.text) && <figcaption>{str(fb.text)}</figcaption>}
     </figure>
@@ -303,7 +303,7 @@ function BlockView({
       const box = tone === "note" && title ? bookBox(title) : null;
       const printed = tone === "note" && title; // a printed box: its title is the header
       return (
-        <aside className={`rounded-xl border-l-4 px-5 py-4 shadow-sm ${box ? BOOK_BOX_STYLE[box] : (CALLOUT_STYLE[tone] ?? CALLOUT_STYLE.note)}`}>
+        <aside className={`rounded-inner border-l-4 px-5 py-4 shadow-sm ${box ? BOOK_BOX_STYLE[box] : (CALLOUT_STYLE[tone] ?? CALLOUT_STYLE.note)}`}>
           {!printed && <p className="text-xs font-semibold tracking-wide text-muted uppercase">{label}</p>}
           {title && (
             <p dir="auto" className={printed ? `mb-1 font-semibold ${box ? BOOK_BOX_HEAD[box] : ""}` : "font-semibold"}>
@@ -369,7 +369,7 @@ function BlockView({
       const af = (b.answer_figure ?? null) as { asset_version_id?: unknown; alt?: unknown; caption?: unknown; long_description?: unknown } | null;
       const answerFigure =
         af && str(af.asset_version_id) ? (
-          <figure className="space-y-2 rounded-lg border border-border bg-surface p-3">
+          <figure className="space-y-2 rounded-inner border border-border bg-surface p-3">
             <ArchivedImage id={str(af.asset_version_id)} alt={str(af.alt)} assetUrl={assetUrl} dataSaver={dataSaver} />
             {str(af.caption) && <figcaption className="text-sm text-muted">{str(af.caption)}</figcaption>}
             {str(af.long_description) && (
@@ -451,7 +451,7 @@ function BlockView({
     case "example":
       return (
         <section
-          className={`space-y-2 rounded-lg border border-border bg-surface px-4 py-3 ${premium ? "border-l-4 border-l-accent shadow-sm" : ""}`}
+          className={`space-y-2 rounded-inner border border-border bg-surface px-4 py-3 ${premium ? "border-l-4 border-l-accent shadow-sm" : ""}`}
           aria-label={`Worked example: ${str(b.title)}`}>
           <p className={`text-xs font-semibold tracking-wide uppercase ${premium ? "text-accent" : "text-muted"}`}>Worked example</p>
           <p className="font-semibold">
@@ -484,7 +484,7 @@ function BlockView({
               <Marked text={str(b.caption)} marks={marks} />
             </figcaption>
           )}
-          <div className="overflow-hidden rounded-xl border border-border bg-surface-muted shadow-sm">
+          <div className="overflow-hidden rounded-inner border border-border bg-surface-muted shadow-sm">
             {str(b.language) && str(b.language) !== "text" && (
               <div className="flex items-center gap-2 border-b border-border bg-surface px-4 py-1.5 text-xs font-semibold tracking-wide text-muted uppercase">
                 <span aria-hidden className="size-2 rounded-full bg-accent" />

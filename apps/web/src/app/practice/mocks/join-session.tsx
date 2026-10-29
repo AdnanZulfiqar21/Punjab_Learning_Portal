@@ -1,5 +1,6 @@
 "use client";
 
+import { buttonClasses } from "@/components/button";
 import { useState, useTransition } from "react";
 import { joinSession } from "@/app/actions/practice";
 
@@ -17,12 +18,12 @@ export function JoinSession({ id }: { id: string }) {
             if (out?.error) setError(out.error);
           })
         }
-        className="rounded-lg bg-accent px-4 py-2 font-medium text-white hover:bg-accent-strong disabled:opacity-60 dark:text-background"
+        className={buttonClasses()}
       >
         {pending ? "Joining…" : "Join now"}
       </button>
       {error && (
-        <p role="alert" className="text-sm text-danger">
+        <p role="alert" className="rounded-inner border border-danger/30 bg-danger-soft px-3 py-2 text-sm">
           {error}
         </p>
       )}

@@ -240,6 +240,8 @@ jobs:
           git diff --exit-code -- packages/contracts/src/generated.ts
       - run: pnpm --filter web lint
       - run: pnpm --filter web typecheck
+      - name: Web unit tests (pure helpers in src/lib, node --test)
+        run: pnpm --filter web test
       - name: Production build (no API needed at build time)
         run: pnpm --filter web build
       - name: Browser bundle ships no source maps, credentials or server configuration names (P18.S2.T3)

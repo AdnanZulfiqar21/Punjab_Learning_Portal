@@ -14,9 +14,9 @@ export function ScreenshotList({ ticketId, shots }: { ticketId: string; shots: S
     <ul className="flex flex-wrap gap-3" aria-label="Screenshots">
       {shots.map((s, i) => (
         <li key={s.id}>
-          <a href={`/help/${ticketId}/screenshots/${s.id}`} target="_blank" rel="noopener" className="block rounded-lg border border-border hover:border-accent">
+          <a href={`/help/${ticketId}/screenshots/${s.id}`} target="_blank" rel="noopener" className="block rounded-inner border border-border bg-surface p-1 transition duration-200 hover:border-accent">
             {/* eslint-disable-next-line @next/next/no-img-element -- private, uncached evidence served by our own route */}
-            <img src={`/help/${ticketId}/screenshots/${s.id}`} alt={`Screenshot ${i + 1}`} width={s.width} height={s.height} className="h-24 w-auto rounded-lg object-contain" />
+            <img src={`/help/${ticketId}/screenshots/${s.id}`} alt={`Screenshot ${i + 1}`} width={s.width} height={s.height} className="h-24 w-auto rounded-[12px] object-contain" />
           </a>
         </li>
       ))}
@@ -30,7 +30,7 @@ export function AddScreenshot({ ticketId, remaining }: { ticketId: string; remai
   const input = useRef<HTMLInputElement>(null);
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
-  if (remaining <= 0) return <p className="text-sm text-muted">This request has the most screenshots it can hold.</p>;
+  if (remaining <= 0) return <p className="glass rounded-card p-[22px] text-sm text-muted">This request has the most screenshots it can hold.</p>;
   async function upload(file: File) {
     setError(null);
     if (!["image/png", "image/jpeg"].includes(file.type)) return setError("Choose a PNG or JPEG screenshot.");
@@ -48,8 +48,8 @@ export function AddScreenshot({ ticketId, remaining }: { ticketId: string; remai
     }
   }
   return (
-    <div className="space-y-1">
-      <label htmlFor="screenshot" className="font-medium">
+    <div className="glass space-y-2 rounded-card p-[22px]">
+      <label htmlFor="screenshot" className="block text-sm font-semibold">
         Add a screenshot <span className="text-sm font-normal text-muted">(PNG or JPEG, up to 5 MB; {remaining} left)</span>
       </label>
       <input
@@ -62,7 +62,7 @@ export function AddScreenshot({ ticketId, remaining }: { ticketId: string; remai
           const f = e.target.files?.[0];
           if (f) void upload(f);
         }}
-        className="block text-sm"
+        className="block w-full text-sm text-muted file:mr-3 file:min-h-11 file:cursor-pointer file:rounded-full file:border file:border-border file:bg-surface file:px-4 file:text-sm file:font-semibold file:text-foreground hover:file:border-accent"
       />
       {pending && <p className="text-sm text-muted">Checking and adding your screenshot…</p>}
       {error && (

@@ -4,7 +4,10 @@ import { notFound, redirect } from "next/navigation";
 import { Suspense } from "react";
 import type { LinkedForm } from "@portal/contracts";
 import { startLinkedPractice } from "@/app/actions/written";
-import { Notice, SkeletonLines } from "@/components/ui";
+import { buttonClasses } from "@/components/button";
+import { GlassCard } from "@/components/glass-card";
+import { PageHero } from "@/components/page-hero";
+import { Breadcrumbs, Notice, SkeletonLines } from "@/components/ui";
 import { api, currentUser } from "@/lib/session";
 
 export const metadata: Metadata = { title: "New practice test", robots: { index: false } };
@@ -35,14 +38,17 @@ async function Confirm({ formId, failed }: { formId: string; failed: boolean }) 
   if (f.started_attempt_id) redirect(`/practice/written/${f.started_attempt_id}`);
   const enough = f.allowance_available >= f.allowance_units;
   return (
-    <div className="mx-auto max-w-2xl space-y-4">
-      <h1 className="text-2xl font-semibold tracking-tight">New practice test</h1>
-      <p>{REASON[f.linked_from.reason]}</p>
-      <dl className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-1 text-sm">
+    <div className="mx-auto max-w-2xl space-y-6">
+      <div>
+        <Breadcrumbs items={[{ href: "/practice", label: "Practice" }, { href: "/practice/written", label: "Written practice" }, { label: "New practice test" }]} />
+        <PageHero align="start" eyebrow="Written practice" title="New practice test" lead={REASON[f.linked_from.reason]} />
+      </div>
+      <GlassCard>
+      <dl className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-2 text-sm">
         <dt className="text-muted">Questions</dt>
         <dd>
           {f.question_count} (question {f.linked_from.positions.join(", ")} of{" "}
-          <Link className="text-accent underline" href={`/practice/written/${f.linked_from.attempt_id}`}>
+          <Link className="font-medium text-accent underline underline-offset-2" href={`/practice/written/${f.linked_from.attempt_id}`}>
             your earlier test
           </Link>
           )
@@ -52,6 +58,7 @@ async function Confirm({ formId, failed }: { formId: string; failed: boolean }) 
           {f.allowance_units} unit{f.allowance_units === 1 ? "" : "s"} (you have {f.allowance_available})
         </dd>
       </dl>
+      </GlassCard>
       <Notice title="Your earlier result stays as it is">
         This is a separate test with its own marks. It doesn&apos;t replace or change the marks on your earlier test, and it isn&apos;t a recheck.
       </Notice>
@@ -62,16 +69,13 @@ async function Confirm({ formId, failed }: { formId: string; failed: boolean }) 
       )}
       {enough ? (
         <form action={startLinkedPractice.bind(null, f.form_id)}>
-          <button
-            type="submit"
-            className="rounded-lg bg-accent px-4 py-2 font-medium text-white hover:bg-accent-strong disabled:opacity-60 dark:text-background"
-          >
+          <button type="submit" className={buttonClasses({ size: "lg" })}>
             Start the new test
           </button>
         </form>
       ) : (
         <Notice tone="warn" title="Not enough written allowance">
-          Starting this test needs {f.allowance_units} unit{f.allowance_units === 1 ? "" : "s"}. <Link href="/account" className="underline">See your plan</Link>.
+          Starting this test needs {f.allowance_units} unit{f.allowance_units === 1 ? "" : "s"}. <Link href="/account" className="font-medium text-accent underline underline-offset-2">See your plan</Link>.
         </Notice>
       )}
     </div>

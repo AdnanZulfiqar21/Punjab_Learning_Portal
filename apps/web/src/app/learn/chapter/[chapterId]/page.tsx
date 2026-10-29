@@ -15,6 +15,9 @@ import { DISPLAY_COOKIE, parseDisplay } from "@/lib/display";
 import { practiceOnly } from "@/lib/exercises";
 import { CONTENT_STATE_TEXT, GRADE_LABEL, assessmentSummary, pageRange } from "@/lib/format";
 import { LANGUAGE_NAME, subjectKey } from "@/lib/learn-context";
+import { ButtonLink, buttonClasses } from "@/components/button";
+import { Icon, SubjectIcon } from "@/components/icons";
+import { StatChip } from "@/components/stat-chip";
 import { Breadcrumbs, Notice, SkeletonLines } from "@/components/ui";
 import { api, currentUser, deviceScope, features, sessionToken } from "@/lib/session";
 import { TIME_ZONE } from "@/lib/dates";
@@ -63,12 +66,39 @@ async function ChapterView({ id, lang }: { id: string; lang: string }) {
             { label: `${bc.chapter_label} ${ch.number}` },
           ]}
         />
-        <p className="text-sm font-medium text-accent">
-          {gradeLabel} · {bc.subject.name} · {bc.chapter_label} {ch.number}
-          {ch.contents_number != null && ch.contents_number !== ch.number && ` (Contents page: ${ch.contents_number})`}
-        </p>
-        <h1 className="mt-1 text-2xl font-semibold tracking-tight sm:text-3xl">{ch.title}</h1>
-        {ch.main_concept && <p className="mt-3 max-w-3xl text-muted">{ch.main_concept}</p>}
+        {/* DESIGN-01: the chapter opens on a glass hero in the subject colour, like its book (BOOK-PAGE-01). Only
+            figures the API gives are shown. */}
+        <header className="glass relative overflow-hidden rounded-card px-6 py-8 sm:px-9 sm:py-10">
+          <span aria-hidden className="pointer-events-none absolute inset-0 bg-accent-soft opacity-60" />
+          <span
+            aria-hidden
+            className="pointer-events-none absolute -bottom-8 right-4 select-none font-display text-[8rem] leading-none font-bold text-accent opacity-10 sm:text-[10rem]"
+          >
+            {ch.number}
+          </span>
+          <div className="relative space-y-4">
+            <p className="flex items-center gap-3 text-sm font-semibold text-accent">
+              <SubjectIcon subject={bc.subject.code} size={40} />
+              <span>
+                {gradeLabel} · {bc.subject.name} · {bc.chapter_label} {ch.number}
+                {ch.contents_number != null && ch.contents_number !== ch.number && ` (Contents page: ${ch.contents_number})`}
+              </span>
+            </p>
+            <h1 className="font-display text-[30px] leading-9 font-bold tracking-tight sm:text-[42px] sm:leading-[3.25rem]">{ch.title}</h1>
+            <div aria-hidden className="h-1 w-16 rounded-full bg-accent" />
+            {ch.main_concept && <p className="max-w-3xl text-muted sm:text-lg">{ch.main_concept}</p>}
+            <ul className="flex flex-wrap gap-2 pt-1">
+              <li>
+                <StatChip icon="file-text">Pages {pageRange(ch.source.printed_start, ch.source.printed_end)}</StatChip>
+              </li>
+              {ch.visual_count > 0 && (
+                <li>
+                  <StatChip icon="image">{ch.visual_count} figures and tables</StatChip>
+                </li>
+              )}
+            </ul>
+          </div>
+        </header>
       </div>
 
       {ch.status !== "complete" && (
@@ -78,7 +108,7 @@ async function ChapterView({ id, lang }: { id: string; lang: string }) {
       )}
 
       <section aria-labelledby="topics-heading" className="space-y-3">
-        <h2 id="topics-heading" className="text-lg font-semibold">
+        <h2 id="topics-heading" className="font-display text-2xl font-semibold tracking-tight">
           Topics
         </h2>
         {topics.length === 0 ? (
@@ -96,8 +126,9 @@ async function ChapterView({ id, lang }: { id: string; lang: string }) {
         <Lessons chapterId={ch.id} topics={topics} hidden={exerciseTopics} lang={lang} />
       </Suspense>
 
-      <section aria-labelledby="source-heading" className="space-y-2 rounded-xl border border-border bg-surface p-4 text-sm">
-        <h2 id="source-heading" className="font-semibold">
+      <section aria-labelledby="source-heading" className="glass space-y-3 rounded-card p-[22px] text-sm">
+        <h2 id="source-heading" className="flex items-center gap-2 font-display text-lg font-semibold">
+          <Icon name="book-open" size={18} className="text-accent" />
           In your textbook
         </h2>
         <dl className="grid gap-x-6 gap-y-1 sm:grid-cols-[max-content_1fr]">
@@ -114,18 +145,20 @@ async function ChapterView({ id, lang }: { id: string; lang: string }) {
         </dl>
       </section>
 
-      <nav aria-label="Chapter navigation" className="flex justify-between gap-3 text-sm">
+      <nav aria-label="Chapter navigation" className="flex flex-wrap justify-between gap-3">
         {ch.previous_chapter_id ? (
-          <Link href={`/learn/chapter/${ch.previous_chapter_id}`} className="rounded-lg border border-border bg-surface px-4 py-2 hover:border-accent">
-            ← Previous {bc.chapter_label.toLowerCase()}
-          </Link>
+          <ButtonLink href={`/learn/chapter/${ch.previous_chapter_id}`} variant="secondary">
+            <Icon name="arrow-right" size={18} className="rotate-180" />
+            Previous {bc.chapter_label.toLowerCase()}
+          </ButtonLink>
         ) : (
           <span />
         )}
         {ch.next_chapter_id && (
-          <Link href={`/learn/chapter/${ch.next_chapter_id}`} className="rounded-lg border border-border bg-surface px-4 py-2 hover:border-accent">
-            Next {bc.chapter_label.toLowerCase()} →
-          </Link>
+          <ButtonLink href={`/learn/chapter/${ch.next_chapter_id}`} variant="secondary">
+            Next {bc.chapter_label.toLowerCase()}
+            <Icon name="arrow-right" size={18} />
+          </ButtonLink>
         )}
       </nav>
     </article>
@@ -169,18 +202,18 @@ async function Lessons({ chapterId, topics, hidden, lang }: { chapterId: string;
   return (
     <section aria-labelledby="lessons-heading" className="space-y-4">
       <div className="flex flex-wrap items-center justify-between gap-2">
-        <h2 id="lessons-heading" className="text-lg font-semibold">
+        <h2 id="lessons-heading" className="font-display text-2xl font-semibold tracking-tight">
           Lessons
         </h2>
         {lessons.length > 0 && (
-          <nav aria-label="Lesson language" className="flex gap-1 text-sm">
+          <nav aria-label="Lesson language" className="glass inline-flex gap-1 rounded-full p-1 text-sm">
             {LANGUAGES.map(([k, label]) => (
               <Link
                 key={k}
                 href={`/learn/chapter/${chapterId}${k === "en" ? "" : `?lang=${k}`}`}
                 aria-current={k === lang ? "true" : undefined}
                 lang={k === "ur" ? "ur" : "en"}
-                className={`rounded-lg border px-3 py-1 ${k === lang ? "border-accent font-medium" : "border-border bg-surface hover:border-accent"}`}
+                className={`inline-flex min-h-11 items-center rounded-full px-4 transition duration-200 ${k === lang ? "bg-foreground font-semibold text-background shadow-glass" : "text-muted hover:bg-surface-muted hover:text-foreground"}`}
               >
                 {label}
               </Link>
@@ -189,7 +222,8 @@ async function Lessons({ chapterId, topics, hidden, lang }: { chapterId: string;
         )}
       </div>
       {place && place.lesson_id !== lessons[0]?.id && (
-        <p className="rounded-lg bg-surface-muted px-3 py-2 text-sm">
+        <p className="glass flex items-center gap-2 rounded-inner px-4 py-3 text-sm">
+          <Icon name="play" size={16} className="shrink-0 text-accent" />
           <a href={`#lesson-${place.lesson_id}`} className="font-medium text-accent underline underline-offset-2">
             Continue where you left off: {place.lesson_title}
           </a>
@@ -203,14 +237,14 @@ async function Lessons({ chapterId, topics, hidden, lang }: { chapterId: string;
         </p>
       ) : (
         lessons.map((l, i) => (
-          <article key={l.id} aria-labelledby={`lesson-${l.id}`} className="space-y-4 rounded-xl border border-border bg-surface p-5">
+          <article key={l.id} aria-labelledby={`lesson-${l.id}`} className="space-y-4 rounded-card border border-border bg-surface p-5 shadow-glass sm:p-7">
             {l.requested_language_missing && (
               <p className="rounded-lg bg-surface-muted px-3 py-2 text-sm">
                 This lesson isn&apos;t available in {LANGUAGE_NAME[lang]} yet, so it&apos;s shown in {LANGUAGE_NAME[l.language]}.
               </p>
             )}
             <header className="space-y-1" lang={l.language === "ur" ? "ur" : "en"} dir={l.language === "ur" ? "rtl" : undefined}>
-              <h3 id={`lesson-${l.id}`} className="text-xl font-semibold tracking-tight">
+              <h3 id={`lesson-${l.id}`} className="font-display text-2xl font-semibold tracking-tight">
                 {l.title}
               </h3>
               <p className="text-sm text-muted">
@@ -227,7 +261,7 @@ async function Lessons({ chapterId, topics, hidden, lang }: { chapterId: string;
               )}
             </header>
             {l.locked || !l.body ? (
-              <div className="rounded-lg bg-surface-muted p-4 text-sm">
+              <div className="rounded-inner bg-surface-muted p-4 text-sm">
                 <p className="font-medium">This lesson is included with a plan or the free 30-day trial.</p>
                 <p className="text-muted">
                   <Link href="/account" className="text-accent underline underline-offset-2">
@@ -251,7 +285,7 @@ async function Lessons({ chapterId, topics, hidden, lang }: { chapterId: string;
             )}
             {token && !l.locked && l.body && (
               <form action={setLessonCompleted.bind(null, l.id, chapterId, !done.has(l.id))} className="flex flex-wrap items-center gap-3">
-                <button type="submit" className="rounded-lg border border-border bg-surface px-4 py-2 text-sm font-medium hover:border-accent">
+                <button type="submit" className={buttonClasses({ variant: "secondary" })}>
                   {done.has(l.id) ? "✓ Completed: undo" : "Mark as completed"}
                 </button>
                 <span className="text-xs text-muted">Completion tracks your reading only. It isn&apos;t evidence of what you know.</span>
@@ -282,7 +316,7 @@ async function Topics({ topics }: { topics: TopicNode[] }) {
 
 function TopicList({ topics, favourites }: { topics: TopicNode[]; favourites: Set<string> | null }) {
   return (
-    <ol className="divide-y divide-border overflow-hidden rounded-xl border border-border bg-surface">
+    <ol className="glass divide-y divide-border overflow-hidden rounded-card">
       {topics.map((t) => (
         <TopicItem key={t.id} topic={t} favourites={favourites} />
       ))}
@@ -298,7 +332,7 @@ function TopicItem({ topic, favourites, depth = 0 }: { topic: TopicNode; favouri
     <FavouriteButton topicId={topic.id} label={topic.number ? `${topic.number} ${topic.title}` : topic.title} initial={favourites.has(topic.id)} />
   );
   return (
-    <li className={depth ? "py-0.5" : "px-4 py-2"}>
+    <li className={depth ? "py-0.5" : "px-4 py-2 sm:px-5"}>
       <div className="flex items-center gap-2">
         <Link href={`/learn/topic/${topic.id}`} className="flex min-w-0 flex-1 items-baseline gap-3 py-1.5 hover:text-accent">
           {topic.number && (

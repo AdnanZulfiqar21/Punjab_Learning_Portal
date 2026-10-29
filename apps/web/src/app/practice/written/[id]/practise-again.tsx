@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState, useTransition } from "react";
 import type { WrittenResult } from "@portal/contracts";
 import { prepareLinkedPractice } from "@/app/actions/written";
+import { buttonClasses } from "@/components/button";
 import { TIME_ZONE } from "@/lib/dates";
 
 const date = (s: string) => new Date(s).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short", timeZone: TIME_ZONE });
@@ -23,8 +24,8 @@ export function PractiseAgain({ attemptId, result }: { attemptId: string; result
   const [pending, start] = useTransition();
   const linked = result.linked_attempts ?? [];
   return (
-    <div className="space-y-3 rounded-xl border border-border bg-surface p-4">
-      <h3 className="font-semibold">Practise these questions again</h3>
+    <div className="glass space-y-3 rounded-card px-5 py-5">
+      <h3 className="font-display text-lg font-semibold">Practise these questions again</h3>
       <p className="text-sm text-muted">
         Write fresh answers as a new practice test. It is marked on its own and uses your written allowance like any test (you&apos;ll see how much
         before it starts). The marks above stay as they are; if you think a teacher misread this script, a recheck is the right route.
@@ -32,7 +33,7 @@ export function PractiseAgain({ attemptId, result }: { attemptId: string; result
       <fieldset className="flex flex-wrap gap-3 text-sm">
         <legend className="sr-only">Questions to practise again</legend>
         {result.questions.map((q) => (
-          <label key={q.position} className="inline-flex items-center gap-1.5">
+          <label key={q.position} className="inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-full border border-border bg-surface px-4 has-checked:border-accent has-checked:bg-accent-soft has-checked:font-semibold has-checked:text-accent">
             <input
               type="checkbox"
               checked={picked.includes(q.position)}
@@ -49,7 +50,7 @@ export function PractiseAgain({ attemptId, result }: { attemptId: string; result
       )}
       <button
         type="button"
-        className="rounded-lg bg-accent px-4 py-2 font-medium text-white hover:bg-accent-strong disabled:opacity-60 dark:text-background"
+        className={buttonClasses()}
         disabled={pending || picked.length === 0}
         onClick={() =>
           start(async () => {
@@ -67,7 +68,7 @@ export function PractiseAgain({ attemptId, result }: { attemptId: string; result
           <ul>
             {linked.map((l) => (
               <li key={l.form_id}>
-                <Link className="text-accent underline" href={l.attempt_id ? `/practice/written/${l.attempt_id}` : `/practice/written/linked/${l.form_id}`}>
+                <Link className="font-medium text-accent underline underline-offset-2" href={l.attempt_id ? `/practice/written/${l.attempt_id}` : `/practice/written/linked/${l.form_id}`}>
                   Questions {l.positions.join(", ")}
                 </Link>{" "}
                 · {REASON[l.reason]} · {STATUS[l.status]} · {date(l.created_at)}

@@ -3,6 +3,8 @@
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 import { replyTicket } from "@/app/actions/support";
+import { buttonClasses } from "@/components/button";
+import { FIELD, LABEL, PageIcon } from "@/components/learner-pages";
 
 export function ReplyBox({ id }: { id: string }) {
   const router = useRouter();
@@ -10,11 +12,11 @@ export function ReplyBox({ id }: { id: string }) {
   const [error, setError] = useState<string | null>(null);
   const [pending, start] = useTransition();
   return (
-    <div className="space-y-2">
-      <label htmlFor="reply" className="font-medium">
+    <div className="glass space-y-3 rounded-card p-[22px]">
+      <label htmlFor="reply" className={LABEL}>
         Add a reply
       </label>
-      <textarea id="reply" value={text} onChange={(e) => setText(e.target.value)} rows={3} maxLength={4000} className="w-full rounded-lg border border-border bg-surface px-3 py-2" />
+      <textarea id="reply" value={text} onChange={(e) => setText(e.target.value)} rows={3} maxLength={4000} className={FIELD} />
       {error && (
         <p role="alert" className="text-sm text-danger">
           {error}
@@ -33,8 +35,9 @@ export function ReplyBox({ id }: { id: string }) {
             } else setError(out.error ?? null);
           })
         }
-        className="rounded-lg border border-border bg-surface px-4 py-2 font-medium hover:border-accent disabled:opacity-60"
+        className={buttonClasses()}
       >
+        <PageIcon name="send" size={16} />
         {pending ? "Sending…" : "Send reply"}
       </button>
     </div>

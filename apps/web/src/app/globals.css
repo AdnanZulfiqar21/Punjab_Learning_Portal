@@ -78,6 +78,43 @@
   color-scheme: dark;
 }
 
+/* DESIGN-01 (owner, 2026-10-29: draft C · Soft Glass, design-system/punjab-learning-portal/MASTER.md): frosted glass
+   for chrome, cards, heroes and navigation only. Lesson text stays on a solid surface (owner rule 5). These are new
+   tokens; every colour token above keeps its value. */
+:root {
+  --glass-bg: rgb(255 255 255 / 0.62);
+  --glass-border: rgb(255 255 255 / 0.75);
+  --shadow-glass: 0 8px 30px rgb(15 29 43 / 0.06);
+  --shadow-glass-hover: 0 14px 36px rgb(15 29 43 / 0.1);
+  --glass-blur: 16px;
+  --mesh-1: #bfe3ee; /* teal, top left */
+  --mesh-2: #d9d6f7; /* lavender, top right */
+  --mesh-3: #fbe3cf; /* peach, bottom */
+  --track: rgb(15 29 43 / 0.08); /* the empty part of a progress bar */
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --glass-bg: rgb(27 30 27 / 0.62);
+    --glass-border: rgb(255 255 255 / 0.08);
+    --shadow-glass: 0 8px 30px rgb(0 0 0 / 0.35);
+    --shadow-glass-hover: 0 14px 36px rgb(0 0 0 / 0.45);
+    --mesh-1: rgb(108 196 220 / 0.14);
+    --mesh-2: rgb(120 112 222 / 0.12);
+    --mesh-3: rgb(243 183 101 / 0.1);
+    --track: rgb(255 255 255 / 0.1);
+  }
+}
+:root[data-theme="dark"] {
+  --glass-bg: rgb(27 30 27 / 0.62);
+  --glass-border: rgb(255 255 255 / 0.08);
+  --shadow-glass: 0 8px 30px rgb(0 0 0 / 0.35);
+  --shadow-glass-hover: 0 14px 36px rgb(0 0 0 / 0.45);
+  --mesh-1: rgb(108 196 220 / 0.14);
+  --mesh-2: rgb(120 112 222 / 0.12);
+  --mesh-3: rgb(243 183 101 / 0.1);
+  --track: rgb(255 255 255 / 0.1);
+}
+
 @custom-variant dark {
   @media (prefers-color-scheme: dark) {
     &:not(:where([data-theme="light"], [data-theme="light"] *)) {
@@ -108,6 +145,38 @@
   --color-subheading: var(--subheading);
   --font-sans: var(--font-sans-ui);
   --font-mono: var(--font-mono-ui);
+  /* DESIGN-01: Outfit for headings, display text and the brand (`font-display`). */
+  --font-display: var(--font-heading), var(--font-sans-ui), system-ui, sans-serif;
+}
+
+/* DESIGN-01: `rounded-card` (cards, header, heroes) and `rounded-inner` (elements inside a card). */
+@theme {
+  --radius-card: 24px;
+  --radius-inner: 16px;
+}
+
+/* DESIGN-01: one glass surface. Where the browser cannot blur, or the reader asked for less transparency, it is the
+   solid surface instead, so text never sits on a see-through layer it cannot be read through. */
+@utility glass {
+  background-color: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-glass);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(140%);
+  backdrop-filter: blur(var(--glass-blur)) saturate(140%);
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    background-color: var(--surface);
+    border-color: var(--border);
+  }
+  @media (prefers-reduced-transparency: reduce) {
+    background-color: var(--surface);
+    border-color: var(--border);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+
+@utility shadow-glass {
+  box-shadow: var(--shadow-glass);
 }
 
 html {
@@ -290,6 +359,8 @@ html {
   h3,
   h4 {
     color: var(--heading);
+    /* DESIGN-01: headings in Outfit, body and UI in Inter. */
+    font-family: var(--font-heading), var(--font-sans-ui), system-ui, sans-serif;
   }
 }
 
@@ -298,6 +369,45 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans-ui), system-ui, sans-serif;
   line-height: 1.55;
+}
+
+/* DESIGN-01: the soft gradient mesh fixed behind every page (light: teal, lavender, peach; dark: the same shapes faint).
+   Reading pages (a lesson's blocks, or the sticky language bar of a topic or exercise) keep the plain solid background
+   as before, so lesson text never sits on the mesh (owner rule 5). */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(900px 500px at 10% -10%, var(--mesh-1) 0, transparent 60%),
+    radial-gradient(700px 500px at 100% 0, var(--mesh-2) 0, transparent 55%),
+    radial-gradient(800px 600px at 50% 110%, var(--mesh-3) 0, transparent 60%),
+    var(--background);
+}
+body:has(.lesson-flow, [data-reading-bar])::before {
+  content: none;
+}
+
+/* DESIGN-01: the header floats and stays in view; a reading page keeps it in the flow, because there its own language
+   bar is the bar that stays at the top (READER tabs). Anchored targets clear the floating header. */
+.site-header {
+  position: sticky;
+  top: 12px;
+  z-index: 40;
+}
+body:has(.lesson-flow, [data-reading-bar]) .site-header {
+  position: relative;
+  top: 0;
+}
+html {
+  scroll-padding-top: 6rem;
+}
+/* Reading pages: the header scrolls away and the reading bar is sticky, so lesson blocks keep their own scroll margin
+   (the reading bar's height) — READER-PLACE-01 returns to a block by that margin. */
+html:has(.lesson-flow, [data-reading-bar]) {
+  scroll-padding-top: 0;
 }
 
 /* P02.S2.T1 (TOKENS-01): Urdu text (lang="ur") in Nastaliq, with the taller lines Nastaliq's stacked letters need. */

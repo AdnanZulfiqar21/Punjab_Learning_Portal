@@ -1,5 +1,7 @@
 "use client";
 
+import { buttonClasses } from "@/components/button";
+import { PracticeIcon } from "@/components/practice-ui";
 import { useRef, useState, useTransition } from "react";
 import { startMock } from "@/app/actions/practice";
 
@@ -25,12 +27,13 @@ export function StartMock({ code }: { code: string }) {
             }
           })
         }
-        className="rounded-lg bg-accent px-4 py-2 font-medium text-white hover:bg-accent-strong disabled:opacity-60 dark:text-background"
+        className={buttonClasses()}
       >
+        <PracticeIcon name="timer" size={18} />
         {pending ? "Preparing your mock…" : "Start mock (timed)"}
       </button>
       {error && (
-        <p role="alert" className="text-sm text-danger">
+        <p role="alert" className="rounded-inner border border-danger/30 bg-danger-soft px-3 py-2 text-sm">
           {error}
         </p>
       )}

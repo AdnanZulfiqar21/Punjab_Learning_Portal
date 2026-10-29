@@ -85,7 +85,7 @@ export function PendingAction({ attemptId, q }: { attemptId: string; q: Question
         </p>
       ))}
       {open && (
-        <div className="space-y-2 rounded-lg border border-warn bg-warn-soft p-3" role="group" aria-label={`Action for question ${q.position}`}>
+        <div className="space-y-2 rounded-inner border border-warn bg-warn-soft p-4" role="group" aria-label={`Action for question ${q.position}`}>
           <p>
             {q.learner_action === "confirm_or_rescan"
               ? "This answer looks blank to the teacher. Send a clearer photo of it, or tell us you didn't answer it."
@@ -93,7 +93,7 @@ export function PendingAction({ attemptId, q }: { attemptId: string; q: Question
             Please act by {when(q.action_deadline!)}; after that the question is left unmarked and its allowance returned.{" "}
             <HelpLink slug="written-clearer-copy">About clearer copies</HelpLink>
           </p>
-          <label className="inline-flex cursor-pointer items-center gap-2 rounded-lg border border-border bg-surface px-3 py-1.5 font-medium">
+          <label className="inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-full border border-border bg-surface px-4 font-medium hover:border-accent focus-within:border-accent focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-accent">
             <input type="file" accept="image/jpeg,image/png,application/pdf" className="sr-only" disabled={busy} onChange={(e) => e.target.files?.[0] && void send(e.target.files[0])} />
             {busy ? "Sending…" : "Send a clearer copy"}
           </label>
@@ -108,7 +108,7 @@ export function PendingAction({ attemptId, q }: { attemptId: string; q: Question
                   else setError(out.error ?? null);
                 })
               }
-              className="ml-2 rounded-lg border border-border bg-surface px-3 py-1.5 font-medium"
+              className="ml-2 inline-flex min-h-11 items-center rounded-full border border-border bg-surface px-4 font-medium hover:border-accent"
             >
               I didn&apos;t answer this question
             </button>

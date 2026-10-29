@@ -2,27 +2,35 @@ import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
 import type { StudyPlan } from "@portal/contracts";
+import { Button } from "@/components/button";
+import { GlassCard } from "@/components/glass-card";
+import { PageHero } from "@/components/page-hero";
+import { FIELD } from "@/components/practice-ui";
+import { SectionHeader } from "@/components/section-header";
 import { Breadcrumbs, Notice, SkeletonLines } from "@/components/ui";
 import { SUBJECTS } from "@/lib/practice";
+import { taughtSubjects } from "@/lib/practice-filters";
 import { api, currentUser } from "@/lib/session";
 import { daysFromToday } from "@/lib/dates";
 
 export const metadata: Metadata = { title: "Study plan", robots: { index: false } };
 
-const field = "rounded-lg border border-border bg-surface px-3 py-2";
+const field = FIELD;
 const hours = (m: number) => (m >= 60 ? `${Math.floor(m / 60)} h ${m % 60} min` : `${m} min`);
 const inDays = daysFromToday; // the Pakistan day, not the UTC day (P12.S4.T3)
 
 export default function PlanPage({ searchParams }: PageProps<"/practice/plan">) {
   return (
-    <div className="space-y-6">
-      <Breadcrumbs items={[{ href: "/practice", label: "Practice" }, { label: "Study plan" }]} />
+    <div className="space-y-8">
       <div>
-        <h1 className="text-2xl font-semibold tracking-tight">Study plan</h1>
-        <p className="text-muted">
-          A plan for one book up to your target date, weakest topics first. If there isn&apos;t enough time, it says so and shows what matters most. It doesn&apos;t predict exam
-          results.
-        </p>
+        <Breadcrumbs items={[{ href: "/practice", label: "Practice" }, { label: "Study plan" }]} />
+        <PageHero
+          align="start"
+          eyebrow="Practice · Planning"
+          title="Study plan"
+          lead="A plan for one book up to your target date, weakest topics first. If there isn't enough time, it says so and shows what matters most. It doesn't predict exam results."
+          backdrop={<span aria-hidden="true" className="pointer-events-none absolute inset-0 bg-accent-soft opacity-50" />}
+        />
       </div>
       <Suspense fallback={<SkeletonLines lines={6} label="Planning" />}>
         {searchParams.then((sp) => {
@@ -39,30 +47,36 @@ async function Plan({ grade, subject, target, minutes }: { grade: string; subjec
   if (!user) redirect("/signin?next=/practice/plan");
   const daily = minutes || String(user.me.profile?.daily_minutes ?? "");
   const form = (
-    <form method="get" className="flex flex-wrap items-end gap-2" aria-label="Plan settings">
-      <select name="grade" defaultValue={grade} aria-label="Class" className={field}>
-        <option value="11">Class 11</option>
-        <option value="12">Class 12</option>
-      </select>
-      <select name="subject" defaultValue={subject} aria-label="Subject" className={field}>
-        {SUBJECTS.map(([k, v]) => (
-          <option key={k} value={k}>
-            {v}
-          </option>
-        ))}
-      </select>
+    <GlassCard padded={false} className="px-5 py-4">
+    <form method="get" className="flex flex-wrap items-end gap-3" aria-label="Plan settings">
       <label className="space-y-1 text-sm">
-        <span className="block">Target date</span>
+        <span className="block font-medium">Class</span>
+        <select name="grade" defaultValue={grade} className={field}>
+          <option value="11">Class 11</option>
+          <option value="12">Class 12</option>
+        </select>
+      </label>
+      <label className="space-y-1 text-sm">
+        <span className="block font-medium">Subject</span>
+        <select name="subject" defaultValue={subject} className={field}>
+          {taughtSubjects(SUBJECTS).map(([k, v]) => (
+            <option key={k} value={k}>
+              {v}
+            </option>
+          ))}
+        </select>
+      </label>
+      <label className="space-y-1 text-sm">
+        <span className="block font-medium">Target date</span>
         <input type="date" name="target_date" defaultValue={target || inDays(60)} className={field} />
       </label>
       <label className="space-y-1 text-sm">
-        <span className="block">Minutes a day</span>
+        <span className="block font-medium">Minutes a day</span>
         <input type="number" name="daily_minutes" min={10} max={600} defaultValue={daily || "60"} className={`${field} w-28`} />
       </label>
-      <button type="submit" className="rounded-lg border border-border bg-surface px-4 py-2 font-medium hover:border-accent">
-        Make my plan
-      </button>
+      <Button type="submit">Make my plan</Button>
     </form>
+    </GlassCard>
   );
   if (!target) return form;
   const qs = new URLSearchParams({ grade, subject, target_date: target, ...(daily ? { daily_minutes: daily } : {}) });
@@ -79,7 +93,7 @@ async function Plan({ grade, subject, target, minutes }: { grade: string; subjec
   }
   const p = res.data;
   return (
-    <div className="space-y-4">
+    <div className="space-y-6">
       {form}
       {p.feasible ? (
         <Notice title="This fits your time">
@@ -91,10 +105,12 @@ async function Plan({ grade, subject, target, minutes }: { grade: string; subjec
           important {p.schedule.length} topics; {p.unscheduled_topics} more won&apos;t fit unless you add time or move the date.
         </Notice>
       )}
-      <ol className="divide-y divide-border rounded-xl border border-border bg-surface text-sm" aria-label="Plan">
+      <section aria-labelledby="plan-h">
+      <SectionHeader id="plan-h" title="Your plan" description={`${p.schedule.length} topic${p.schedule.length === 1 ? "" : "s"} over ${p.days} days.`} />
+      <ol className="glass divide-y divide-border overflow-hidden rounded-card text-sm" aria-label="Plan">
         {p.schedule.map((x, i) => (
-          <li key={i} className="flex flex-wrap items-center justify-between gap-2 px-3 py-2">
-            <span>
+          <li key={i} className="flex flex-wrap items-center justify-between gap-2 px-5 py-3">
+            <span className="font-medium">
               {new Date(String(x.date)).toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "short", timeZone: "UTC" })} · Chapter {String(x.chapter_number)} · {String(x.label)}
             </span>
             <span className="text-muted">
@@ -103,6 +119,7 @@ async function Plan({ grade, subject, target, minutes }: { grade: string; subjec
           </li>
         ))}
       </ol>
+      </section>
       <p className="text-xs text-muted">
         Estimates: {String(p.assumptions.developing_minutes)} minutes for a developing topic, {String(p.assumptions.no_evidence_minutes)} for one without evidence; order:{" "}
         {String(p.assumptions.order)}. The plan updates from your latest answers, so a missed day simply replans.

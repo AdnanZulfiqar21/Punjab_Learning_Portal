@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
+import { CenteredCard } from "@/components/learner-pages";
 import { Notice, SkeletonLines } from "@/components/ui";
 import { signInMethods } from "@/lib/session";
 import { DevPasswordForm } from "./sign-in-form";
@@ -8,20 +9,19 @@ export const metadata: Metadata = { title: "Sign in", robots: { index: false } }
 
 export default function SignInPage({ searchParams }: PageProps<"/signin">) {
   return (
-    <div className="mx-auto max-w-md space-y-6">
-      <h1 className="text-2xl font-semibold tracking-tight">Sign in</h1>
+    <CenteredCard icon="user" title="Sign in" lead="Sign in to keep your place in each book and to practise. A new account can start the free 30-day trial.">
       <Suspense fallback={<SkeletonLines lines={4} label="Loading sign-in options" />}>
         {searchParams.then((sp) => (
-          <>
+          <div className="space-y-4">
             {sp.reason === "reauth" && (
               // P04.S3.T3 (REAUTH-01): downloading your data or asking to delete your account needs a recent sign-in.
               <Notice title="Sign in again to continue">For your safety, this needs a recent sign-in. You&apos;ll go straight back afterwards.</Notice>
             )}
             <Methods next={typeof sp.next === "string" ? sp.next : "/account"} />
-          </>
+          </div>
         ))}
       </Suspense>
-    </div>
+    </CenteredCard>
   );
 }
 

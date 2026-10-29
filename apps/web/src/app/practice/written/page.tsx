@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
-import { Notice, SkeletonLines } from "@/components/ui";
+import { GlassCard } from "@/components/glass-card";
+import { PageHero } from "@/components/page-hero";
+import { ClassSubjectFilter } from "@/components/practice-ui";
+import { Breadcrumbs, Notice, SkeletonCards, SkeletonLines } from "@/components/ui";
 import { GRADE_LABEL } from "@/lib/format";
 import { SUBJECTS } from "@/lib/practice";
+import { taughtSubjects } from "@/lib/practice-filters";
 import { currentUser } from "@/lib/session";
 import { getWrittenAvailability } from "@/lib/written";
 import { getAccess } from "@/lib/access";
@@ -15,15 +18,25 @@ export const metadata: Metadata = { title: "Written practice", robots: { index: 
 
 export default function WrittenPracticePage({ searchParams }: PageProps<"/practice/written">) {
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       <div>
-        <h1 className="text-2xl font-semibold tracking-tight">Written practice</h1>
-        <p className="text-muted">
-          Answer short and long questions on paper, photograph or scan your pages, and submit them for a teacher to mark. Only questions
-          with an approved marking rubric are used.
-        </p>
+        <Breadcrumbs items={[{ href: "/practice", label: "Practice" }, { label: "Written practice" }]} />
+        <PageHero
+          align="start"
+          eyebrow="Practice · Teacher-marked"
+          title="Written practice"
+          lead="Answer short and long questions on paper, photograph or scan your pages, and submit them for a teacher to mark. Only questions with an approved marking rubric are used."
+          backdrop={<span aria-hidden="true" className="pointer-events-none absolute inset-0 bg-accent-soft opacity-50" />}
+        />
       </div>
-      <Suspense fallback={<SkeletonLines lines={6} label="Loading written practice" />}>
+      <Suspense
+        fallback={
+          <div className="space-y-4">
+            <SkeletonCards count={2} label="Loading written practice" />
+            <SkeletonLines lines={6} label="Loading chapters" />
+          </div>
+        }
+      >
         {searchParams.then((sp) => (
           <Builder grade={typeof sp.grade === "string" ? sp.grade : undefined} subject={typeof sp.subject === "string" ? sp.subject : undefined} />
         ))}
@@ -43,23 +56,7 @@ async function Builder({ grade: rawGrade, subject: rawSubject }: { grade?: strin
   const name = SUBJECTS.find(([c]) => c === subject)?.[1];
   return (
     <div className="space-y-6">
-      <nav aria-label="Choose class and subject" className="flex flex-wrap gap-2">
-        {[11, 12].map((g) =>
-          SUBJECTS.map(([code, label]) => {
-            const active = g === grade && code === subject;
-            return (
-              <Link
-                key={`${g}-${code}`}
-                href={`/practice/written?grade=${g}&subject=${code}`}
-                aria-current={active ? "page" : undefined}
-                className={`rounded-full border px-3 py-1.5 text-sm ${active ? "border-accent bg-accent-soft font-medium text-accent" : "border-border bg-surface hover:border-accent"}`}
-              >
-                {GRADE_LABEL[g]} {label}
-              </Link>
-            );
-          }),
-        )}
-      </nav>
+      <ClassSubjectFilter path="/practice/written" grade={grade} subject={subject} subjects={taughtSubjects(SUBJECTS)} />
       {access && <PlanStatus access={access} purpose="Written practice" />}
       {access && !access.has_access ? null : av?.pilot_only && !av.in_pilot ? (
         // PILOT-R0-01: during the R0 pilot only invited pilot learners can start written tests.
@@ -103,7 +100,9 @@ async function Builder({ grade: rawGrade, subject: rawSubject }: { grade?: strin
               </p>
             )
           )}
-          <WrittenBuilder grade={grade} subject={subject} chapters={av.chapters} uploadAllowanceS={av.upload_allowance_s} caps={av.caps} />
+          <GlassCard className="sm:p-7">
+            <WrittenBuilder grade={grade} subject={subject} chapters={av.chapters} uploadAllowanceS={av.upload_allowance_s} caps={av.caps} />
+          </GlassCard>
         </>
       )}
     </div>

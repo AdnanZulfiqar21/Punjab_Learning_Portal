@@ -6,6 +6,11 @@ import type { NotebookEntry } from "@portal/contracts";
 import { LessonBlocks } from "@/components/lesson-blocks";
 import { typesetEquations } from "@/lib/typeset";
 import { MockRunningNotice } from "@/components/mock-running";
+import { GlassCard } from "@/components/glass-card";
+import { PageHero } from "@/components/page-hero";
+import { PracticeIcon } from "@/components/practice-ui";
+import { SectionHeader } from "@/components/section-header";
+import { StatChip } from "@/components/stat-chip";
 import { Badge, Breadcrumbs, Notice, SkeletonLines } from "@/components/ui";
 import { GRADE_LABEL } from "@/lib/format";
 import { api, currentUser } from "@/lib/session";
@@ -15,13 +20,16 @@ export const metadata: Metadata = { title: "Mistake notebook", robots: { index: 
 
 export default function NotebookPage() {
   return (
-    <div className="space-y-6">
-      <Breadcrumbs items={[{ href: "/practice", label: "Practice" }, { label: "Mistake notebook" }]} />
+    <div className="space-y-8">
       <div>
-        <h1 className="text-2xl font-semibold tracking-tight">Mistake notebook</h1>
-        <p className="text-muted">
-          Questions you answered wrongly, and questions you flagged as unsure, come back for review after 1, 3, 7 and 14 days. Get one right at every step without flagging it and it&apos;s marked as mastered; miss it again and it starts over.
-        </p>
+        <Breadcrumbs items={[{ href: "/practice", label: "Practice" }, { label: "Mistake notebook" }]} />
+        <PageHero
+          align="start"
+          eyebrow="Practice · Review"
+          title="Mistake notebook"
+          lead="Questions you answered wrongly, and questions you flagged as unsure, come back for review after 1, 3, 7 and 14 days. Get one right at every step without flagging it and it's marked as mastered; miss it again and it starts over."
+          backdrop={<span aria-hidden="true" className="pointer-events-none absolute inset-0 bg-accent-soft opacity-50" />}
+        />
       </div>
       <Suspense fallback={<SkeletonLines lines={6} label="Loading your notebook" />}>
         <Entries />
@@ -43,7 +51,7 @@ async function Entries() {
     return (
       <Notice title="Nothing here yet">
         Questions you get wrong or flag as unsure in a practice test appear here.{" "}
-        <Link href="/practice" className="underline">
+        <Link href="/practice" className="font-medium text-accent underline underline-offset-2">
           Build a practice test
         </Link>
         .
@@ -53,18 +61,28 @@ async function Entries() {
   const due = new Map<string, number>();
   for (const e of res.data) if (e.due) due.set(`${e.grade}:${e.subject}`, (due.get(`${e.grade}:${e.subject}`) ?? 0) + 1);
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
+      <p className="flex flex-wrap gap-2">
+        <StatChip>
+          <PracticeIcon name="bookmark" size={16} className="text-accent" />
+          {res.data.length} {res.data.length === 1 ? "entry" : "entries"}
+        </StatChip>
+        <StatChip>
+          <PracticeIcon name="calendar" size={16} className="text-accent" />
+          {res.data.filter((e) => e.due).length} due now
+        </StatChip>
+      </p>
       {due.size > 0 && (
-        <section aria-labelledby="due-h" className="space-y-2 rounded-xl border border-border bg-surface p-4">
-          <h2 id="due-h" className="font-semibold">
+        <GlassCard as="section" aria-labelledby="due-h" className="space-y-3">
+          <h2 id="due-h" className="font-display text-lg font-semibold">
             Due for review
           </h2>
-          <ul className="space-y-2">
+          <ul className="divide-y divide-border">
             {[...due.entries()].map(([key, n]) => {
               const [grade, subject] = key.split(":");
               return (
-                <li key={key} className="flex flex-wrap items-center justify-between gap-3">
-                  <span>
+                <li key={key} className="flex flex-wrap items-center justify-between gap-3 py-2.5 first:pt-0 last:pb-0">
+                  <span className="font-medium capitalize">
                     {GRADE_LABEL[Number(grade)]} {subject.replace("_", " ")}: {n} due
                   </span>
                   <StartReview grade={Number(grade)} subject={subject} />
@@ -72,11 +90,14 @@ async function Entries() {
               );
             })}
           </ul>
-        </section>
+        </GlassCard>
       )}
-      <ol className="space-y-3" aria-label="Notebook entries">
+      <section aria-labelledby="entries-h">
+        <SectionHeader id="entries-h" title="Your entries" />
+        <ol className="space-y-4" aria-label="Notebook entries">
         {res.data.map((e) => (
-          <li key={e.id} className="space-y-2 rounded-xl border border-border bg-surface p-4 text-sm">
+          // The question itself is read on a solid surface (owner rule 5).
+          <li key={e.id} className="space-y-3 rounded-card border border-border bg-surface p-5 text-sm shadow-glass">
             <p className="flex flex-wrap items-center gap-2">
               <Badge tone={e.status === "mastered" ? "ok" : e.status === "voided" ? "info" : e.due ? "warn" : "info"}>
                 {e.status === "open" ? (e.due ? "Due now" : "Waiting") : e.status}
@@ -96,7 +117,8 @@ async function Entries() {
             <NoteEditor id={e.id} initial={e.note} />
           </li>
         ))}
-      </ol>
+        </ol>
+      </section>
     </div>
   );
 }

@@ -10,6 +10,7 @@ import { premiumBook } from "@/lib/book-style";
 import { practiceOnly, practiceTitle, revealLabel } from "@/lib/exercises";
 import { typesetEquations } from "@/lib/typeset";
 import { placeSignature, type PlaceBlock } from "@/lib/variant-place";
+import { Icon } from "@/components/icons";
 import { Breadcrumbs, Notice, SkeletonLines } from "@/components/ui";
 import { DISPLAY_COOKIE, parseDisplay } from "@/lib/display";
 import { GRADE_LABEL } from "@/lib/format";
@@ -74,7 +75,10 @@ async function ExerciseView({ id }: { id: string }) {
   const display = parseDisplay(jar.get(DISPLAY_COOKIE)?.value);
   const dataSaver = display ? display.dataSaver : (await headers()).get("save-data") === "on";
   const back = `/practice/exercises?grade=${reading.grade_number}${subject ? `&subject=${subject}` : ""}`;
-  const segment = "rounded-md px-4 py-1.5 text-sm";
+  // DESIGN-01: the same pill switch as a topic; the chosen language is the dark primary pill.
+  const segment = "inline-flex min-h-11 items-center justify-center rounded-full px-4 text-sm transition duration-200 sm:px-5";
+  const on = `${segment} bg-foreground font-semibold text-background shadow-glass`;
+  const off = `${segment} font-medium text-muted hover:bg-surface-muted hover:text-foreground`;
   return (
     <article className="mx-auto max-w-3xl space-y-6" data-subject={subject}>
       <Breadcrumbs
@@ -85,11 +89,11 @@ async function ExerciseView({ id }: { id: string }) {
         ]}
       />
       {readable && (
-        <form action={chooseReadingLanguage} className="sticky top-0 z-10 -mx-4 space-y-2 bg-background/95 px-4 py-2 backdrop-blur" aria-label="Explanation language">
+        <form data-reading-bar action={chooseReadingLanguage} className="sticky top-0 z-10 -mx-4 space-y-2 bg-background/90 px-4 py-2.5 backdrop-blur" aria-label="Explanation language">
           <input type="hidden" name="topic" value={reading.topic_id} />
           <input type="hidden" name="place" value="exercise" />
           <KeepPlace lessonId={lesson?.id ?? ""} signatures={(lesson?.body?.blocks ?? []).map((b) => placeSignature(b as PlaceBlock))} />
-          <div role="group" aria-label="Exercise language" className="inline-flex rounded-lg border border-border bg-surface-muted p-0.5">
+          <div role="group" aria-label="Exercise language" className="glass inline-flex max-w-full gap-1 rounded-full p-1">
             {READING_LANGUAGES.map(([code, label]) => (
               <button
                 key={code}
@@ -97,7 +101,7 @@ async function ExerciseView({ id }: { id: string }) {
                 name="language"
                 value={code}
                 aria-pressed={code === language}
-                className={code === language ? `${segment} bg-surface font-semibold shadow-sm` : `${segment} text-muted hover:text-foreground`}
+                className={code === language ? on : off}
               >
                 {label}
               </button>
@@ -110,18 +114,22 @@ async function ExerciseView({ id }: { id: string }) {
           )}
         </form>
       )}
-      <header className="space-y-2">
-        <p className="flex flex-wrap items-center gap-2 text-sm font-medium text-accent">
-          <span>
+      <header className="glass space-y-3 rounded-card px-6 py-6 sm:px-8 sm:py-7">
+        <p className="flex flex-wrap items-center gap-2 text-sm font-semibold text-accent">
+          <span className="inline-flex items-center gap-1.5">
+            <Icon name={paper ? "file-text" : "list-checks"} size={16} />
             {grade} · {reading.subject_name}
           </span>
           {reading.availability === "private_preview" && (
-            <span className="rounded-full border border-border bg-surface-muted px-2 py-0.5 text-xs font-semibold text-muted" title="Not yet reviewed or published">
+            <span
+              className="inline-flex items-center rounded-full border border-warn/30 bg-warn-soft px-2.5 py-0.5 text-xs font-semibold text-foreground"
+              title="Not yet reviewed or published"
+            >
               Draft preview
             </span>
           )}
         </p>
-        <h1 className="text-3xl font-semibold tracking-tight">{title}</h1>
+        <h1 className="font-display text-[28px] leading-9 font-bold tracking-tight sm:text-[36px] sm:leading-[2.75rem]">{title}</h1>
         <p className="text-sm text-muted">{paper ? "Board model paper" : reading.chapter_title}</p>
       </header>
       {reading.availability === "unavailable" || !lesson?.body ? (
@@ -138,7 +146,8 @@ async function ExerciseView({ id }: { id: string }) {
           to read it.
         </Notice>
       ) : (
-        <div className="space-y-4 text-[1.0625rem] leading-7 sm:text-[1.125rem] sm:leading-8" lang={lesson.language === "ur" ? "ur" : "en"} dir={lesson.language === "ur" ? "rtl" : undefined}>
+        // Owner rule 5: the worked exercise is read on a solid surface, never on glass.
+        <div className="space-y-4 rounded-card border border-border bg-surface px-4 py-5 text-[1.0625rem] leading-7 shadow-glass sm:px-8 sm:py-8 sm:text-[1.125rem] sm:leading-8" lang={lesson.language === "ur" ? "ur" : "en"} dir={lesson.language === "ur" ? "rtl" : undefined}>
           <LessonBlocks
             blocks={lesson.body.blocks}
             typeset={typesetEquations(lesson.body.blocks)}
@@ -153,8 +162,11 @@ async function ExerciseView({ id }: { id: string }) {
           />
         </div>
       )}
-      <nav className="border-t border-border pt-4 text-sm" aria-label="Exercise navigation">
-        <Link href={back} className="font-medium text-accent">
+      <nav className="pt-2 text-sm" aria-label="Exercise navigation">
+        <Link
+          href={back}
+          className="glass inline-flex min-h-11 items-center gap-2 rounded-full px-5 font-semibold text-foreground shadow-none transition duration-200 hover:border-accent hover:text-accent"
+        >
           ← All book exercises
         </Link>
       </nav>

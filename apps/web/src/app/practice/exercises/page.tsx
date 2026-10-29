@@ -1,33 +1,59 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { Suspense } from "react";
+import { Suspense, type ReactNode } from "react";
 import type { BookExercises } from "@portal/contracts";
-import { Badge, Breadcrumbs, Notice, SkeletonLines } from "@/components/ui";
+import { GlassCard, GlassCardLink } from "@/components/glass-card";
+import { Icon } from "@/components/icons";
+import { PageHero } from "@/components/page-hero";
+import { ClassSubjectFilter } from "@/components/practice-ui";
+import { SectionHeader } from "@/components/section-header";
+import { Badge, Breadcrumbs, Notice, SkeletonCards } from "@/components/ui";
 import { exerciseStatus } from "@/lib/exercises";
 import { GRADE_LABEL } from "@/lib/format";
+import { subjectKey } from "@/lib/learn-context";
 import { SUBJECTS as ALL_SUBJECTS } from "@/lib/practice";
-
-// The book exercises cover the textbooks the portal teaches; Mathematics is not taught (owner, 2026-10-19).
-const SUBJECTS = ALL_SUBJECTS.filter(([code]) => code !== "mathematics");
+import { taughtSubjects } from "@/lib/practice-filters";
 import { api, currentUser } from "@/lib/session";
 
+// The book exercises cover the textbooks the portal teaches; Mathematics is not taught (owner, 2026-10-19).
+const SUBJECTS = taughtSubjects(ALL_SUBJECTS);
+
 export const metadata: Metadata = { title: "Book exercises", robots: { index: false } };
+
+const tone = (availability: string): "ok" | "info" | "warn" => (availability === "published" ? "ok" : availability === "private_preview" ? "info" : "warn");
 
 /** BOOK-EXERCISES-01: each chapter's end-of-chapter exercise from the textbook, solved here rather than in Learn. */
 export default function BookExercisesPage({ searchParams }: PageProps<"/practice/exercises">) {
   return (
-    <div className="space-y-6">
-      <Breadcrumbs items={[{ href: "/practice", label: "Practice" }, { label: "Book exercises" }]} />
+    <div className="space-y-8">
       <div>
-        <h1 className="text-2xl font-semibold tracking-tight">Book exercises</h1>
-        <p className="text-muted">The exercise at the end of each chapter of your textbook, solved in English and Roman Urdu.</p>
+        <Breadcrumbs items={[{ href: "/practice", label: "Practice" }, { label: "Book exercises" }]} />
+        <PageHero
+          align="start"
+          eyebrow="Practice · From your textbook"
+          title="Book exercises"
+          lead="The exercise at the end of each chapter of your textbook, solved in English and Roman Urdu."
+          backdrop={<span aria-hidden="true" className="pointer-events-none absolute inset-0 bg-accent-soft opacity-50" />}
+        />
       </div>
-      <Suspense fallback={<SkeletonLines lines={6} label="Loading book exercises" />}>
+      <Suspense fallback={<SkeletonCards count={6} label="Loading book exercises" />}>
         {searchParams.then((sp) => (
           <Exercises grade={typeof sp.grade === "string" ? sp.grade : undefined} subject={typeof sp.subject === "string" ? sp.subject : undefined} />
         ))}
       </Suspense>
     </div>
+  );
+}
+
+/** One exercise or Board paper as a glass card: a link when it can be opened, a muted card when not. */
+function UnitCard({ href, open, children }: { href: string; open: boolean; children: ReactNode }) {
+  return open ? (
+    <GlassCardLink href={href} padded={false} className="group flex h-full gap-4 p-5">
+      {children}
+    </GlassCardLink>
+  ) : (
+    <GlassCard padded={false} className="flex h-full gap-4 p-5 text-muted">
+      {children}
+    </GlassCard>
   );
 }
 
@@ -39,24 +65,8 @@ async function Exercises({ grade: rawGrade, subject: rawSubject }: { grade?: str
   const res = await api<BookExercises>(`/v1/grades/${grade}/subjects/${encodeURIComponent(subject)}/exercises`, user ? { token: user.token } : {});
   const name = SUBJECTS.find(([c]) => c === subject)?.[1];
   return (
-    <div className="space-y-6">
-      <nav aria-label="Choose class and subject" className="flex flex-wrap gap-2">
-        {[11, 12].map((g) =>
-          SUBJECTS.map(([code, label]) => {
-            const active = g === grade && code === subject;
-            return (
-              <Link
-                key={`${g}-${code}`}
-                href={`/practice/exercises?grade=${g}&subject=${code}`}
-                aria-current={active ? "page" : undefined}
-                className={`rounded-full border px-3 py-1.5 text-sm ${active ? "border-accent bg-accent-soft font-medium text-accent" : "border-border bg-surface hover:border-accent"}`}
-              >
-                {GRADE_LABEL[g]} {label}
-              </Link>
-            );
-          }),
-        )}
-      </nav>
+    <div className="space-y-8" data-subject={subjectKey(subject)}>
+      <ClassSubjectFilter path="/practice/exercises" grade={grade} subject={subject} subjects={SUBJECTS} />
       {!res.ok ? (
         <Notice tone="warn" title="Couldn't load the book exercises">
           {res.problem?.detail ?? "Please try again."}
@@ -66,56 +76,58 @@ async function Exercises({ grade: rawGrade, subject: rawSubject }: { grade?: str
           The end-of-chapter exercises of the {GRADE_LABEL[grade]} {name} book are added chapter by chapter. They appear here once they are.
         </Notice>
       ) : (
-        <ol className="divide-y divide-border overflow-hidden rounded-xl border border-border bg-surface">
-          {res.data.exercises.map((e) => {
-            const status = exerciseStatus(e.availability, e.available_languages);
-            const label = (
-              <>
-                <span className="w-24 shrink-0 text-sm font-semibold">
-                  {res.data.chapter_label} {e.chapter_number}
-                </span>
-                <span className="min-w-0 flex-1 font-medium">{e.chapter_title}</span>
-                <Badge tone={e.availability === "published" ? "ok" : e.availability === "private_preview" ? "info" : "warn"}>{status.label}</Badge>
-              </>
-            );
-            return (
-              <li key={e.topic_id}>
-                {status.open ? (
-                  <Link href={`/practice/exercises/${e.topic_id}`} className="flex flex-wrap items-center gap-3 px-4 py-3 hover:text-accent">
-                    {label}
-                  </Link>
-                ) : (
-                  <div className="flex flex-wrap items-center gap-3 px-4 py-3 text-muted">{label}</div>
-                )}
-              </li>
-            );
-          })}
-        </ol>
+        <section aria-labelledby="chapter-exercises">
+          <SectionHeader id="chapter-exercises" title={`${GRADE_LABEL[grade]} ${name}`} description="The exercise of each chapter, in the book's order." />
+          <ol className="grid gap-4 sm:grid-cols-2">
+            {res.data.exercises.map((e) => {
+              const status = exerciseStatus(e.availability, e.available_languages);
+              return (
+                <li key={e.topic_id}>
+                  <UnitCard href={`/practice/exercises/${e.topic_id}`} open={status.open}>
+                    <span
+                      aria-hidden="true"
+                      className="flex size-12 shrink-0 items-center justify-center rounded-inner bg-accent-soft font-display text-xl font-bold text-accent ring-1 ring-accent/20"
+                    >
+                      {e.chapter_number}
+                    </span>
+                    <span className="flex min-w-0 flex-1 flex-col gap-1.5">
+                      <span className="text-xs font-semibold tracking-wide text-muted uppercase">
+                        {res.data.chapter_label} {e.chapter_number}
+                      </span>
+                      <span className={`font-display text-lg leading-snug font-semibold ${status.open ? "text-foreground group-hover:text-accent" : ""}`}>
+                        {e.chapter_title}
+                      </span>
+                      <span className="mt-auto pt-1">
+                        <Badge tone={tone(e.availability)}>{status.label}</Badge>
+                      </span>
+                    </span>
+                  </UnitCard>
+                </li>
+              );
+            })}
+          </ol>
+        </section>
       )}
       {res.ok && res.data.papers.length > 0 && (
-        <section aria-labelledby="board-papers" className="space-y-3">
-          <h2 id="board-papers" className="text-lg font-semibold">
-            Board model paper
-          </h2>
+        <section id="board-papers-section" aria-labelledby="board-papers" className="scroll-mt-28">
           {/* BOOK-PAPERS-01: the Board's paper pattern and model paper printed at the end of the book, solved. */}
-          <ol className="divide-y divide-border overflow-hidden rounded-xl border border-border bg-surface">
+          <SectionHeader id="board-papers" title="Board model paper" description="Printed at the end of the book, solved here." />
+          <ol className="grid gap-4 sm:grid-cols-2">
             {res.data.papers.map((p) => {
               const status = exerciseStatus(p.availability, p.available_languages);
-              const label = (
-                <>
-                  <span className="min-w-0 flex-1 font-medium">{p.title}</span>
-                  <Badge tone={p.availability === "published" ? "ok" : p.availability === "private_preview" ? "info" : "warn"}>{status.label}</Badge>
-                </>
-              );
               return (
                 <li key={p.topic_id}>
-                  {status.open ? (
-                    <Link href={`/practice/exercises/${p.topic_id}`} className="flex flex-wrap items-center gap-3 px-4 py-3 hover:text-accent">
-                      {label}
-                    </Link>
-                  ) : (
-                    <div className="flex flex-wrap items-center gap-3 px-4 py-3 text-muted">{label}</div>
-                  )}
+                  <UnitCard href={`/practice/exercises/${p.topic_id}`} open={status.open}>
+                    <span aria-hidden="true" className="inline-grid size-12 shrink-0 place-items-center rounded-inner bg-accent-soft text-accent ring-1 ring-accent/20">
+                      <Icon name="file-text" size={22} />
+                    </span>
+                    <span className="flex min-w-0 flex-1 flex-col gap-1.5">
+                      <span className={`font-display text-lg leading-snug font-semibold ${status.open ? "text-foreground group-hover:text-accent" : ""}`}>{p.title}</span>
+                      <span className="mt-auto pt-1">
+                        <Badge tone={tone(p.availability)}>{status.label}</Badge>
+                      </span>
+                    </span>
+                  </UnitCard>
                 </li>
               );
             })}
