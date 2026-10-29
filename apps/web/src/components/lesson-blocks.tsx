@@ -237,13 +237,25 @@ function BlockView({
   const marks = bookErrors(b.book_errors);
   switch (b.type) {
     case "heading": {
-      const level = Math.min(6, (b.level === 3 ? 3 : 2) + headingOffset);
+      const depth = b.level === 4 ? 4 : b.level === 3 ? 3 : 2;
+      const level = Math.min(6, depth + headingOffset);
       const Tag = `h${level}` as "h2" | "h3" | "h4" | "h5" | "h6";
       // Headings inside a topic ("Carbon monoxide (CO)" in 14.4.1) take their own colour, apart from the chapter's main
       // heading (14.4, accent) and the topic's title (14.4.1, text colour), so the three levels read apart (owner,
-      // 2026-10-27).
+      // 2026-10-27). Inside the lesson the levels read apart too (owner, 2026-10-29: "same colour same size"): a section
+      // (2) is large, bold and blue with a rule under it; a heading inside it (3) is blue and smaller; a numbered
+      // sub-heading (4) is smaller again, in the heading colour (--heading, the default for headings), with a blue bar.
       return (
-        <Tag dir="auto" className={b.level === 3 ? "pt-1 text-lg font-semibold text-subheading" : "pt-2 text-xl font-semibold tracking-tight text-subheading"}>
+        <Tag
+          dir="auto"
+          className={
+            depth === 4
+              ? "border-l-[3px] border-subheading pl-3 text-[1.1875rem] leading-snug font-semibold"
+              : depth === 3
+                ? "pt-2 text-[1.375rem] leading-snug font-bold tracking-tight text-subheading"
+                : "border-b border-border pt-3 pb-1.5 text-[1.75rem] leading-tight font-bold tracking-tight text-subheading"
+          }
+        >
           <Marked text={str(b.text)} marks={marks} />
         </Tag>
       );

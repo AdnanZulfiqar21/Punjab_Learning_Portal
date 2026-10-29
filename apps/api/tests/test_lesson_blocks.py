@@ -63,6 +63,17 @@ def test_book_errors_mark_printed_passages_and_a_correction_follows() -> None:
     assert blocks.validate_body({"blocks": [marked_correction]}, for_publication=False).errors
 
 
+def test_headings_have_three_levels_inside_a_lesson() -> None:
+    # A section (2), its heading (3) and a numbered sub-heading under it (4), as the books print them (2026-10-29).
+    def heading(level: int) -> dict[str, Any]:
+        return {"blocks": [{"type": "heading", "level": level, "text": "Fixture"}]}
+
+    for level in (2, 3, 4):
+        assert blocks.validate_body(heading(level), for_publication=False).errors == [], level
+    for level in (1, 5):
+        assert blocks.validate_body(heading(level), for_publication=False).errors, level
+
+
 def test_tables_name_the_columns_whose_cells_the_book_merges() -> None:
     # TABLE-MERGE-01: shell L spans 2s and 2p; a blank cell in a merged column continues the one above.
     table = {
