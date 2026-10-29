@@ -247,8 +247,8 @@ PAPERS = (("u-paper-pattern", "Paper Pattern"), ("u-model-paper", "Model Paper")
 
 
 def test_the_board_papers_are_practice_not_learn(client: TestClient) -> None:
-    # BOOK-PAPERS-01: the content PR adds the two papers to Computer Science 12's last unit. The catalogue here may not
-    # have them yet, so this test adds them after the unit's last topic and removes them again.
+    # BOOK-PAPERS-01: the content adds the two papers to Computer Science 12's last unit. A catalogue that doesn't have
+    # them yet gets them after the unit's last topic for this test only; ones already there are used as they are.
     with get_sessionmaker()() as db:
         book = db.scalars(
             select(BookEdition)
@@ -263,25 +263,29 @@ def test_the_board_papers_are_practice_not_learn(client: TestClient) -> None:
         ).first()
         assert chapter is not None
         live = [t for t in chapter.topics if t.retired_at is None]
+        by_key = {t.natural_key: t for t in live}
         last = max(t.display_order for t in live)
-        added = [
-            Topic(
-                id=uuid.uuid4(),
-                natural_key=f"{chapter.natural_key}/{key}",
-                chapter_id=chapter.id,
-                display_order=last + n,
-                title=title,
-                depth=1,
-                points=[],
-            )
-            for n, (key, title) in enumerate(PAPERS, 1)
-        ]
-        exists = {t.natural_key for t in chapter.topics}
-        assert not exists & {t.natural_key for t in added}, "the catalogue has the papers now: test the real ones"
+        papers: list[Topic] = []
+        added: list[Topic] = []
+        for n, (key, title) in enumerate(PAPERS, 1):
+            topic = by_key.get(f"{chapter.natural_key}/{key}")
+            if topic is None:
+                topic = Topic(
+                    id=uuid.uuid4(),
+                    natural_key=f"{chapter.natural_key}/{key}",
+                    chapter_id=chapter.id,
+                    display_order=last + n,
+                    title=title,
+                    depth=1,
+                    points=[],
+                )
+                added.append(topic)
+            papers.append(topic)
         db.add_all(added)
         db.commit()
         chapter_id = str(chapter.id)
-        paper_ids = [str(t.id) for t in added]
+        paper_ids = [str(t.id) for t in papers]
+        added_ids = [str(t.id) for t in added]
         first_id = str(next(t.id for t in sorted(live, key=lambda t: t.display_order) if t.kind == "topic"))
 
     try:
@@ -316,6 +320,6 @@ def test_the_board_papers_are_practice_not_learn(client: TestClient) -> None:
         assert client.get("/v1/grades/12/subjects/biology/exercises").json()["papers"] == []
     finally:
         with get_sessionmaker()() as db:
-            for paper_id in paper_ids:
+            for paper_id in added_ids:
                 db.delete(db.get(Topic, uuid.UUID(paper_id)))
             db.commit()
