@@ -10,7 +10,9 @@ import { SubjectIcon } from "./icons";
 
 type Tile = { code: string; name: string; grades: number[] };
 
-const ORDER = ["biology", "chemistry", "physics", "computer_science", "mathematics"];
+const ORDER = ["biology", "chemistry", "physics", "computer_science"];
+// The portal teaches these four; Mathematics books are indexed but not taught (owner, 2026-10-19).
+const TAUGHT = new Set(ORDER);
 const FALLBACK: Tile[] = [
   { code: "biology", name: "Biology", grades: [11, 12] },
   { code: "chemistry", name: "Chemistry", grades: [11, 12] },
@@ -21,11 +23,12 @@ const FALLBACK: Tile[] = [
 function tilesFrom(books: Discovery["books"]): Tile[] {
   const by = new Map<string, Tile>();
   for (const b of books) {
+    if (!TAUGHT.has(b.subject)) continue;
     const t = by.get(b.subject) ?? { code: b.subject, name: b.subject_name, grades: [] };
     if (!t.grades.includes(b.grade)) t.grades.push(b.grade);
     by.set(b.subject, t);
   }
-  const rank = (c: string) => (ORDER.indexOf(c) < 0 ? ORDER.length : ORDER.indexOf(c));
+  const rank = (c: string) => ORDER.indexOf(c);
   return [...by.values()].map((t) => ({ ...t, grades: t.grades.sort((a, b) => a - b) })).sort((a, b) => rank(a.code) - rank(b.code));
 }
 
