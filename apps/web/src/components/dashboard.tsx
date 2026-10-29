@@ -101,7 +101,7 @@ export function DashboardView({
           )}
         </GlassCard>
       </PageHero>
-      <SubjectTiles books={mine && mine.length > 0 ? mine : books} label="Your subjects" />
+      <SubjectTiles books={mine && mine.length > 0 ? mine : books} label="Your subjects" grade={d.profile?.grade ?? undefined} />
       {!d.profile && (
         <Notice title="Choose your class and subjects">
           Your dashboard follows one class at a time.{" "}
