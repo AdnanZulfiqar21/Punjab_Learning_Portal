@@ -393,6 +393,25 @@ function BlockView({ block: b, assetSource, dataSaver }: { block: Block; assetSo
             {str(af.long_description) ? <Description text={str(af.long_description)} /> : null}
           </View>
         ) : undefined;
+      // CHECKPOINT-TABLE-01: a comparison answer side by side, also shown only with the revealed answer.
+      const at = (b.answer_table ?? null) as { header?: unknown; rows?: unknown } | null;
+      const head = strs(at?.header);
+      const answerTable =
+        head.length && Array.isArray(at?.rows) ? (
+          <View style={{ borderWidth: 1, borderColor: c.border, borderRadius: Radius.sm, overflow: "hidden", backgroundColor: c.surface }}>
+            {[head, ...(at.rows as unknown[]).map(strs)].map((r, i) => (
+              <View key={i} style={{ flexDirection: "row", borderTopWidth: i ? 1 : 0, borderTopColor: c.border, backgroundColor: i ? c.surface : c.surfaceMuted }}>
+                {r.map((cell, j) => (
+                  <View key={j} style={{ flex: 1, padding: Space.sm, borderLeftWidth: j ? 1 : 0, borderLeftColor: c.border }}>
+                    <T variant="small" style={{ fontWeight: i ? "400" : "700", color: c.text }}>
+                      {cell}
+                    </T>
+                  </View>
+                ))}
+              </View>
+            ))}
+          </View>
+        ) : null;
       return (
         <Checkpoint
           mode={b.mode === "self_check" ? "self_check" : "question"}
@@ -400,7 +419,14 @@ function BlockView({ block: b, assetSource, dataSaver }: { block: Block; assetSo
           options={Array.isArray(b.options) ? (b.options as { id: string; text: string }[]) : []}
           answerId={typeof b.answer_id === "string" ? b.answer_id : null}
           explanation={str(b.explanation)}
-          answerFigure={answerFigure}
+          answerFigure={
+            answerTable || answerFigure ? (
+              <View style={{ gap: Space.sm }}>
+                {answerTable}
+                {answerFigure}
+              </View>
+            ) : undefined
+          }
           revealLabel={revealLabel}
         />
       );

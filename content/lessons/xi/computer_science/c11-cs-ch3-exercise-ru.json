@@ -14,31 +14,162 @@
           "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
           "pdf_from": 87,
           "pdf_to": 89,
-          "note": "Roman Urdu version of the Chapter 3 exercise (PDF 87-89) with the multiple choice answers from the text and the printed key (PDF 226, printed 223)."
+          "note": "Roman Urdu: the Chapter 3 exercise solved (PDF 87-89), MCQ keys from the text checked against the printed key (PDF 226, printed 223); programs run in Python."
         }
       ],
       "body": {
         "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Yeh chapter 3 ki exercise hai, hal ke saath. Har MCQ ke saath sahi jawab aur wajah hai; short aur long sawalon ke model jawab (poore number wale) diye gaye hain. Mushkil jagah \"Wazahat\" box aasan alfaaz mein samjhata hai."
+          },
           {
             "type": "heading",
             "level": 3,
             "text": "Multiple Choice Questions"
           },
           {
-            "type": "list",
-            "ordered": true,
-            "items": [
-              "In mein se well-defined problem ki characteristics (khoobiyan) kaunsi hai? (a) Gol mol goals aur gair wazeh requirements (b) Vague (gol mol) process aur inputs (c) Saaf goals, inputs, process aur outputs (d) Undefined (jo tay na ho) hal",
-              "Kaunsi complexity class un maslon ki hai jo deterministic algorithm se efficiently hal ho sakte hain? (a) NP (b) NP-hard (c) NP-complete (d) P",
-              "Unsolvable problems ke baare mein kya sach hai? (a) Woh polynomial time mein hal ho sakte hain. (b) Unhein koi algorithm hal nahi kar sakta. (c) Woh hamesha NP class mein hote hain. (d) Unhein hal karne mein exponential waqt lagta hai.",
-              "Computational complexity mein NP ka matlab kya hai? (a) Non-deterministic Polynomial time (b) Negative Polynomial time (c) Non-trivial Polynomial time (d) Numerical Polynomial time",
-              "Bare datasets ke liye in mein se kaunsa (sorting) algorithm zyada efficient hai? (a) Bubble Sort (b) Merge Sort (c) Selection Sort (d) Quick Sort",
-              "Dynamic Programming kis soorat mein khaas taur par faidemand hai? (a) Jab maslon mein overlapping subproblems na hon. (b) Jab masla local (us waqt ke) faislon ke sequence (lari) se hal ho sake. (c) Jab maslon mein overlapping subproblems aur optimal substructure hon. (d) Jab masla independent (aik doosre se alag) subproblems mein baanta ja sake.",
-              "Kaunsa algorithm list mein baar baar chal kar aur ghalat tarteeb wale saath wale elements swap kar ke data sort karta hai? (a) Selection Sort (b) Quick Sort (c) Bubble Sort (d) Merge Sort",
-              "Graph mein Depth-First Search (DFS) ki time complexity kya hai? (a) O(n log n) (b) O(V²) (c) O(V + E) (d) O(n)",
-              "Time complexity ki behtareen definition kaunsi hai? (a) Algorithm ko chalne ke liye zaroori memory. (b) Algorithm ke mukammal hone ka waqt, input size ke function ke taur par. (c) Input barhne par efficiency qaim rakhne ki ability. (d) Algorithm ki space ki zaroorat ki oopri had.",
-              "Kis algorithm ki time complexity O(n log n) hai? (a) Bubble Sort (b) Binary Search (c) Merge Sort (d) Insertion Sort"
-            ]
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "1. Which of the following is a characteristic of a well-defined problem?\n(In mein se well-defined problem ki characteristics (khoobiyan) kaunsi hai?)",
+            "options": [
+              {
+                "id": "a",
+                "text": "Gol mol goals aur gair wazeh requirements"
+              },
+              {
+                "id": "b",
+                "text": "Vague (gol mol) process aur inputs"
+              },
+              {
+                "id": "c",
+                "text": "Saaf goals, inputs, process aur outputs"
+              },
+              {
+                "id": "d",
+                "text": "Undefined (jo tay na ho) hal"
+              }
+            ],
+            "answer_id": "c",
+            "explanation": "Well-defined masle ke goals, inputs, process aur outputs saaf hote hain, maslan number even hai ya nahi (3.1.1.2). Gol mol goals ill-defined masle ki nishani hain."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab ki answer key (page 223) (b) deti hai jo ill-defined masle ki nishani hai. 3.1.1.2 ke mutabiq well-defined masle ke goals, inputs, process aur outputs saaf hote hain, is liye jawab (c) hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "2. Which complexity class represents problems that can be solved efficiently by a deterministic algorithm?\n(Kaunsi complexity class un maslon ki hai jo deterministic algorithm se efficiently hal ho sakte hain?)",
+            "options": [
+              {
+                "id": "a",
+                "text": "NP"
+              },
+              {
+                "id": "b",
+                "text": "NP-hard"
+              },
+              {
+                "id": "c",
+                "text": "NP-complete"
+              },
+              {
+                "id": "d",
+                "text": "P"
+              }
+            ],
+            "answer_id": "d",
+            "explanation": "Class P mein woh masle hain jo computer deterministic (tay shuda qadamon wale) algorithm se efficiently (polynomial time mein) hal kar le, maslan sorting (3.3.3.1)."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab ki key (a) NP deti hai. NP masle ka hal jaldi check ho sakta hai magar dhoondna mushkil ho sakta hai (3.3.3.2); deterministic algorithm se efficiently hal hone wali class P hai (3.3.3.1), is liye jawab (d) hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "3. Which of the following is true for unsolvable problems?\n(Unsolvable problems ke baare mein kya sach hai?)",
+            "options": [
+              {
+                "id": "a",
+                "text": "Woh polynomial time mein hal ho sakte hain."
+              },
+              {
+                "id": "b",
+                "text": "Unhein koi algorithm hal nahi kar sakta."
+              },
+              {
+                "id": "c",
+                "text": "Woh hamesha NP class mein hote hain."
+              },
+              {
+                "id": "d",
+                "text": "Unhein hal karne mein exponential waqt lagta hai."
+              }
+            ],
+            "answer_id": "b",
+            "explanation": "Masla unsolvable hai agar koi aisa algorithm ban hi na sake jo har input ke liye hal de; misal Halting Problem hai (3.3.1)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "4. What does NP stand for in computational complexity?\n(Computational complexity mein NP ka matlab kya hai?)",
+            "options": [
+              {
+                "id": "a",
+                "text": "Non-deterministic Polynomial time"
+              },
+              {
+                "id": "b",
+                "text": "Negative Polynomial time"
+              },
+              {
+                "id": "c",
+                "text": "Non-trivial Polynomial time"
+              },
+              {
+                "id": "d",
+                "text": "Numerical Polynomial time"
+              }
+            ],
+            "answer_id": "a",
+            "explanation": "NP ka matlab Non-deterministic Polynomial time hai (3.3.3.2, 3.3.3.3): diya gaya hal polynomial time mein check ho sakta hai."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab ki key (b) \"Negative Polynomial time\" deti hai. Chapter NP ko Non-deterministic Polynomial time likhta hai (3.3.3.3), is liye jawab (a) hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "5. Which of the following search algorithm is more efficient for large datasets?\n(Bare datasets ke liye in mein se kaunsa (sorting) algorithm zyada efficient hai?)",
+            "options": [
+              {
+                "id": "a",
+                "text": "Bubble Sort"
+              },
+              {
+                "id": "b",
+                "text": "Merge Sort"
+              },
+              {
+                "id": "c",
+                "text": "Selection Sort"
+              },
+              {
+                "id": "d",
+                "text": "Quick Sort"
+              }
+            ],
+            "answer_id": "b",
+            "explanation": "Merge Sort O(n log n) hai jo Bubble Sort aur Selection Sort ke O(n²) se bohat aahista barhta hai, is liye chapter (3.5.1) usay bare datasets ke liye zyada efficient kehta hai. Quick Sort bhi average mein O(n log n) hai, magar chapter ki apni misal Merge Sort ki hai."
           },
           {
             "type": "callout",
@@ -47,23 +178,270 @@
             "text": "Sawal 5 mein “search algorithm” likha hai, magar charon options sorting algorithms hain; matlab sorting algorithm hai. Merge Sort aur Quick Sort (average case) dono O(n log n) hain; chapter (3.5.1) bare datasets ke liye Merge Sort ko efficient kehta hai."
           },
           {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab ki key (c) Selection Sort deti hai jo O(n²) hai aur bare datasets ke liye efficient nahi (3.7.1.2). Text ke mutabiq jawab (b) Merge Sort hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "6. In which scenario Dynamic Programming is particularly useful?\n(Dynamic Programming kis soorat mein khaas taur par faidemand hai?)",
+            "options": [
+              {
+                "id": "a",
+                "text": "Jab maslon mein overlapping subproblems na hon."
+              },
+              {
+                "id": "b",
+                "text": "Jab masla local (us waqt ke) faislon ke sequence (lari) se hal ho sake."
+              },
+              {
+                "id": "c",
+                "text": "Jab maslon mein overlapping subproblems aur optimal substructure hon."
+              },
+              {
+                "id": "d",
+                "text": "Jab masla independent (aik doosre se alag) subproblems mein baanta ja sake."
+              }
+            ],
+            "answer_id": "c",
+            "explanation": "Dynamic Programming khaas taur par un maslon ke liye hai jin mein overlapping subproblems (bar bar aane wale chhote masle) aur optimal substructure hon; yeh chhote maslon ke jawab store kar ke dobara hisaab se bachata hai (3.6.3)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "7. Which of the following algorithms is used for sorting data by repeatedly stepping through the list and swapping adjacent elements if they are in the wrong order?\n(Kaunsa algorithm list mein baar baar chal kar aur ghalat tarteeb wale saath wale elements swap kar ke data sort karta hai?)",
+            "options": [
+              {
+                "id": "a",
+                "text": "Selection Sort"
+              },
+              {
+                "id": "b",
+                "text": "Quick Sort"
+              },
+              {
+                "id": "c",
+                "text": "Bubble Sort"
+              },
+              {
+                "id": "d",
+                "text": "Merge Sort"
+              }
+            ],
+            "answer_id": "c",
+            "explanation": "Bubble Sort list mein baar baar chalta hai, saath wale (adjacent) elements compare karta hai aur ghalat tarteeb hon to swap karta hai (3.7.1.1)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "8. What is the time complexity of Depth-First Search (DFS) in a graph?\n(Graph mein Depth-First Search (DFS) ki time complexity kya hai?)",
+            "options": [
+              {
+                "id": "a",
+                "text": "O(n log n)"
+              },
+              {
+                "id": "b",
+                "text": "O(V²)"
+              },
+              {
+                "id": "c",
+                "text": "O(V + E)"
+              },
+              {
+                "id": "d",
+                "text": "O(n)"
+              }
+            ],
+            "answer_id": "c",
+            "explanation": "DFS ki time complexity O(V + E) hai, jahan V vertices (nodes) aur E edges ki tadaad hai, bilkul BFS ki tarah (3.7.3.2)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "9. Which of the following best describes the time complexity?\n(Time complexity ki behtareen definition kaunsi hai?)",
+            "options": [
+              {
+                "id": "a",
+                "text": "Algorithm ko chalne ke liye zaroori memory."
+              },
+              {
+                "id": "b",
+                "text": "Algorithm ke mukammal hone ka waqt, input size ke function ke taur par."
+              },
+              {
+                "id": "c",
+                "text": "Input barhne par efficiency qaim rakhne ki ability."
+              },
+              {
+                "id": "d",
+                "text": "Algorithm ki space ki zaroorat ki oopri had."
+              }
+            ],
+            "answer_id": "b",
+            "explanation": "Time complexity batati hai ke input size barhne par algorithm ka chalne ka waqt kaise barhta hai (3.4.1). Memory space complexity hai, aur input barhne par efficiency qaim rehna scalability hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "10. Which of the following algorithms has a time complexity of O(n log n)?\n(Kis algorithm ki time complexity O(n log n) hai?)",
+            "options": [
+              {
+                "id": "a",
+                "text": "Bubble Sort"
+              },
+              {
+                "id": "b",
+                "text": "Binary Search"
+              },
+              {
+                "id": "c",
+                "text": "Merge Sort"
+              },
+              {
+                "id": "d",
+                "text": "Insertion Sort"
+              }
+            ],
+            "answer_id": "c",
+            "explanation": "Merge Sort ki time complexity O(n log n) hai (3.5.1). Bubble Sort aur Insertion Sort O(n²) hain, aur Binary Search O(log n)."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Kitab ki ghalti",
+            "text": "Kitab ke aakhir (page 223) par Unit 3 ki key sirf paanch jawab deti hai (1 B, 2 A, 3 B, 4 B, 5 C); sawal 6 se 10 ki key chhapi hi nahi. Upar har sawal ka jawab chapter ke text se diya gaya hai."
+          },
+          {
             "type": "heading",
             "level": 3,
             "text": "Short Questions"
           },
           {
-            "type": "list",
-            "ordered": true,
-            "items": [
-              "Computational problem-solving mein well-defined aur ill-defined problems mein farq bataiye.",
-              "Generate and Test algorithm ke basic qadam bayan kijiye.",
-              "Computational complexity ke hawale se tractable aur intractable problems ko compare kijiye.",
-              "Greedy Algorithms ka basic khayal mukhtasar bayan kijiye.",
-              "Dynamic Programming istemal karne ke faidon par baat kijiye.",
-              "Graph traversal mein Breadth-First Search (BFS) ke faidon ka Depth-First Search (DFS) se comparison kijiye.",
-              "Algorithmic soch mein masle ko chhote hisson mein torne ki ahmiyat samjhaiye.",
-              "Algorithm ki performance parakhne ke aham factors bataiye."
-            ]
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "1. Differentiate between well-defined and ill-defined problems within the realm of computational problem-solving.\n(Computational problem-solving mein well-defined aur ill-defined problems mein farq bataiye.)",
+            "explanation": "Well-defined masle ke goals, inputs aur outputs saaf hote hain; ill-defined masle ke goals gol mol hote hain aur pehle unhein saaf karna parta hai.",
+            "answer_table": {
+              "header": [
+                "Well-defined problems",
+                "Ill-defined problems"
+              ],
+              "rows": [
+                [
+                  "Goals, inputs, process aur outputs saaf",
+                  "Goals aur requirements gol mol (vague)"
+                ],
+                [
+                  "Algorithm seedha likha ja sakta hai",
+                  "Pehle saaf aur napne ke qabil goals mein torna parta hai"
+                ],
+                [
+                  "Misal: number even hai ya nahi",
+                  "Misal: \"Pakistan mein taleem behtar karna\""
+                ]
+              ]
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "2. Outline the main steps involved in the Generate and Test algorithm.\n(Generate and Test algorithm ke basic qadam bayan kijiye.)",
+            "explanation": "Generate and Test algorithm mumkina hal bana kar aur har ek ko check kar ke jawab dhoondta hai. Steps:\nGenerate and Test mumkina hal bana kar aur har ek ko check kar ke jawab dhoondta hai.\n1. Generate: ek mumkina hal banao.\n2. Test: use masle ki requirements (shartein) se check karo.\n3. Sahi ho to qabool kar ke ruk jao; warna naya hal bana kar dohrao, jab tak hal na mile ya sab aazma liye jayen."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "3. Compare tractable and intractable problems in the context of computational complexity.\n(Computational complexity ke hawale se tractable aur intractable problems ko compare kijiye.)",
+            "explanation": "Tractable masle polynomial time mein hal ho jate hain; intractable masloon ka waqt itni tezi se barhta hai ke bare input par hal amli taur par mumkin nahi.",
+            "answer_table": {
+              "header": [
+                "Tractable problems",
+                "Intractable problems"
+              ],
+              "rows": [
+                [
+                  "Polynomial time (class P) mein hal",
+                  "Super-polynomial (aksar exponential ya factorial) waqt chahiye"
+                ],
+                [
+                  "Input barhne par waqt qaabil-e-intezam raftaar se barhta hai",
+                  "Waqt itna tez barhta hai ke bara input amli taur par hal nahi hota"
+                ],
+                [
+                  "Misal: Merge Sort se sorting, O(n log n)",
+                  "Misal: Travelling Salesman Problem"
+                ]
+              ]
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "4. Summarize the key idea behind Greedy Algorithms.\n(Greedy Algorithms ka basic khayal mukhtasar bayan kijiye.)",
+            "explanation": "Greedy algorithm hal ko faislon ki ek lari (sequence) se banata hai; har qadam par woh choice leta hai jo us waqt sab se achhi lage (locally optimal), is umeed par ke yeh choices mil kar sab se behtar mukammal (globally optimal) hal dein. Yeh tab istemal hota hai jab masle mein optimal substructure ho.\nGreedy algorithm har qadam par woh choice leta hai jo us waqt sab se achhi lage (locally optimal), is umeed par ke aakhir mein sab se behtar (globally optimal) hal mile.\nYeh tez aur banane mein aasan hai, magar hamesha behtareen hal ki guarantee nahi deta."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Wazahat",
+            "text": "Dukandaar change dete waqt pehle sab se bara sikka deta hai jo poora aaye: Rs 18 = 10 + 5 + 2 + 1. Har qadam par \"abhi sab se achha\" faisla; aksar sahi, magar har masle mein nahi."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "5. Discuss the advantages of using Dynamic Programming.\n(Dynamic Programming istemal karne ke faidon par baat kijiye.)",
+            "explanation": "Dynamic Programming (DP) masle ko chhote (simpler) subproblems mein tor kar hal karta hai aur un ke jawab store karta hai taake dobara hisaab na lagana pare.\nDynamic Programming (DP) masle ko overlapping subproblems mein torta hai aur un ke jawab store karta hai taake dobara hisaab na lagana pare.\n1. Faltu dohrao nahi: har subproblem sirf ek dafa hal hota hai.\n2. Bohat tez: exponential waqt wale masle aksar polynomial waqt mein hal ho jate hain.\n3. Optimization problems ka optimal jawab deta hai, maslan Fibonacci mein pichhli do stored values jor kar agla number."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Wazahat",
+            "text": "Seedha recursive Fibonacci wohi values (fib(3), fib(2)) baar baar hisaab karta hai; DP har jawab table mein likh kar wahan se utha leta hai. Is liye 20wan number 21,891 calls ki jagah ~20 additions mein milta hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "6. Compare the advantages of Breadth-First Search (BFS) with Depth-First Search (DFS) in graph traversal.\n(Graph traversal mein Breadth-First Search (BFS) ke faidon ka Depth-First Search (DFS) se comparison kijiye.)",
+            "explanation": "BFS level by level dekhta hai aur shortest path dhoondta hai; DFS ek branch mein gehra jata hai aur gehre graphs mein kam memory leta hai.",
+            "answer_table": {
+              "header": [
+                "Breadth-First Search (BFS)",
+                "Depth-First Search (DFS)"
+              ],
+              "rows": [
+                [
+                  "Nodes level by level dekhta hai",
+                  "Ek branch mein gehra ja kar wapas (backtrack) aata hai"
+                ],
+                [
+                  "Queue istemal karta hai",
+                  "Stack istemal karta hai"
+                ],
+                [
+                  "Faida: shortest path (sab se kam edges) dhoondta hai",
+                  "Faida: gehre graphs mein kam memory leta hai"
+                ],
+                [
+                  "Shallow (kam gehre) graphs ke liye behtar",
+                  "Puzzles aur mazes (bhool bhulaiyan) ke liye munasib"
+                ]
+              ]
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "7. Explain the importance of breaking down a problem into smaller components in algorithmic thinking.\n(Algorithmic soch mein masle ko chhote hisson mein torne ki ahmiyat samjhaiye.)",
+            "explanation": "Algorithmic thinking ka matlab hai masle ko tarteeb se, qadam ba qadam hal karna. Bare masle ko chhote hisson mein torna (decomposition) is liye aham hai:\nBare masle ko chhote hisson mein torna (decomposition) use qadam ba qadam hal karna aasan banata hai.\n1. Chhote hisse samajhna, hal karna aur alag test karna aasan; ghalti jaldi milti hai.\n2. Hisson ke hal jor kar poora masla hal hota hai (Divide and Conquer, maslan Merge Sort).\n3. Hisse dobara kaam aate hain aur team mein baante ja sakte hain."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "8. Identify the key factors used to evaluate the performance of an algorithm.\n(Algorithm ki performance parakhne ke aham factors bataiye.)",
+            "explanation": "1. Time complexity: input barhne par chalne ka waqt kaise barhta hai, Big O notation mein, maslan O(1), O(log n), O(n), O(n²).\n1. Time complexity: input barhne par chalne ka waqt kaise barhta hai (Big O, maslan O(n), O(n log n)).\n2. Space complexity: input barhne par kitni memory chahiye.\n3. Efficiency aur scalability: waqt aur memory ka achha istemal, aur bare input par bhi efficient rehna.\n4. Munasib hona: masle ke data se mel, maslan Binary Search ko sorted data chahiye."
           },
           {
             "type": "heading",
@@ -71,90 +449,176 @@
             "text": "Long Questions"
           },
           {
-            "type": "list",
-            "ordered": true,
-            "items": [
-              "Alag alag complexity classes (P, NP, NP-hard, NP-complete) aur masle ki mushkil samajhne mein un ki ahmiyat par baat kijiye.",
-              "Detail se samjhaiye ke Halting Problem unsolvable kyun hai aur computer science mein is ke implications (asar) kya hain.",
-              "Search problems ki characteristics par baat kijiye aur Linear Search aur Binary Search ki efficiency ko compare kijiye.",
-              "Optimization problems ki nature (kis qisam ka hai) par baat kijiye aur asal zindagi mein un ke istemal ki misalein dijiye.",
-              "N-Queens problem ke hawale se Backtracking technique samjhaiye. Bataiye ke algorithm hal ke liye alag alag configurations kaise dekhta hai.",
-              "Bubble Sort algorithm ka process aur time complexity samjhaiye. Apni pasand ke kisi aur sorting algorithm se efficiency ko compare kijiye.",
-              "Time complexity aur space complexity ke farq par baat kijiye. Yeh kisi khaas masle ke liye algorithm ke choice (chunna) par kaise asar dalte hain?"
-            ]
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "1. Discuss the different complexity classes (P, NP, NP-hard, NP-complete) and their importance in understanding problem difficulty.\n(Alag alag complexity classes (P, NP, NP-hard, NP-complete) aur masle ki mushkil samajhne mein un ki ahmiyat par baat kijiye.)",
+            "explanation": "Complexity classes maslon ko is hisaab se groups mein rakhti hain ke woh kitne mushkil hain aur kitna waqt lete hain.\n1. Class P:\n- Woh masle jo computer deterministic (tay qadamon wale) algorithm se polynomial time mein efficiently hal kar le.\n- Input barhne par waqt qaabil-e-intezam raftaar se barhta hai.\n- Misal: [4, 1, 3, 2, 5] ko [1, 2, 3, 4, 5] mein sort karna.\n2. Class NP (Non-deterministic Polynomial time):\n- Woh masle jin ka diya gaya hal jaldi check (verify) ho sakta hai, chahe hal dhoondna mushkil aur lamba ho.\n- Misal: Sudoku: bhari hui 9 x 9 grid check karna aasan, khaali se hal karna mushkil.\n3. NP-hard:\n- NP ke sab se mushkil maslon jitne ya un se zyada mushkil; koi efficient algorithm maloom nahi.\n- Misal: Travelling Salesman Problem: 5 cities ke 120 routes, 10 ke 3,628,800 aur 20 ke taqreeban 2.43 x 10^18.\n4. NP-complete:\n- Jo NP mein bhi hon aur NP ke sab se mushkil maslon jitne mushkil bhi. Agar ek NP-complete masla efficiently hal ho jaye to tamam NP masle ho jayenge.\n- Misal: Knapsack problem: items ka diya gaya chunao check karna aasan, magar weight limit ke andar sab se qeemti combination dhoondna items barhne par bohat mushkil.\nRishta (Figure 3.4): P, NP ke andar hai; NP-complete NP aur NP-hard ka mushtarka (overlap) hissa hai.\nAhmiyat:\n- Pata chalta hai ke masla efficiently hal ho sakta hai ya bare input par exact hal amli nahi.\n- Tareeqa chunne mein madad: P maslon ke liye exact algorithm, NP-hard ke liye approximate ya heuristic tareeqe.\n- Waqt aur resources bachte hain; \"kya P = NP?\" ka khula sawal cryptography aur algorithm design par asar rakhta hai."
           },
           {
             "type": "callout",
             "tone": "tip",
-            "title": "Asaan alfaaz mein",
-            "text": "Har short aur long question apne topic ke Roman Urdu lesson mein self-check ke taur par hal hai (maslan long question 5, N-Queens, topic 3.6.1 Backtracking mein). Neeche multiple choice ke jawab text se, aur kitab ke aakhir (page 223) par chhapi key ke saath diye gaye hain."
+            "title": "Wazahat",
+            "text": "Aasan misal: Sudoku ka hal koi de de to check karna 1 minute ka kaam (NP: verify aasan), magar khud hal karna ghanton le sakta hai. Sorting jaisa kaam jaldi ho jata hai (P). TSP jaise masle mein shehar barhne par raaste itne barh jate hain ke computer bhi saalon laga de (NP-hard)."
           },
           {
-            "type": "table",
-            "caption": "Multiple choice ke jawab",
-            "header": [
-              "Sawal",
-              "Text se jawab",
-              "Kitab ki key"
-            ],
-            "rows": [
-              [
-                "1 Well-defined masla",
-                "(c) saaf goals, inputs, process aur outputs",
-                "b (mel nahi)"
-              ],
-              [
-                "2 Deterministic, efficient hal",
-                "(d) P",
-                "a (mel nahi)"
-              ],
-              [
-                "3 Unsolvable masle",
-                "(b) koi algorithm hal nahi kar sakta",
-                "b"
-              ],
-              [
-                "4 NP ka matlab",
-                "(a) Non-deterministic Polynomial time",
-                "b (mel nahi)"
-              ],
-              [
-                "5 Bare datasets ke liye efficient",
-                "(b) Merge Sort ((d) Quick Sort bhi O(n log n))",
-                "c (mel nahi)"
-              ],
-              [
-                "6 Dynamic programming",
-                "(c) overlapping subproblems aur optimal substructure",
-                "nahi di"
-              ],
-              [
-                "7 Saath wali cheezein badalna",
-                "(c) Bubble Sort",
-                "nahi di"
-              ],
-              [
-                "8 DFS ka waqt",
-                "(c) O(V + E)",
-                "nahi di"
-              ],
-              [
-                "9 Time complexity",
-                "(b) input size ke function ke taur par waqt",
-                "nahi di"
-              ],
-              [
-                "10 O(n log n)",
-                "(c) Merge Sort",
-                "nahi di"
-              ]
-            ]
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "2. Provide a detailed explanation of why the Halting Problem is considered unsolvable and its implications in computer science.\n(Detail se samjhaiye ke Halting Problem unsolvable kyun hai aur computer science mein is ke implications (asar) kya hain.)",
+            "explanation": "Halting Problem poochta hai: koi bhi program aur us ka input diya ho, kya koi algorithm bata sakta hai ke program kabhi ruk (halt) jayega ya hamesha chalta rahega?\nUnsolvable kyun:\n- Alan Turing ne sabit kiya ke koi general algorithm tamam program-input pairs ke liye yeh jawab nahi de sakta. Masla unsolvable hai jab koi algorithm har soorat mein hal na de sake.\n- Saboot ka khayal (contradiction se):\n1. Farz karein algorithm halts(P, x) mojood hai jo hamesha sahi batata hai ke program P input x par rukega ya nahi.\n2. Naya program Trouble(P) banayein: yeh halts(P, P) bulata hai; jawab \"rukega\" ho to Trouble hamesha chalta rahe; jawab \"nahi rukega\" ho to Trouble ruk jaye.\n3. Ab Trouble ko khud apne aap par chalayein. Agar halts kahe Trouble rukega to Trouble hamesha chalega; agar kahe nahi rukega to Trouble ruk jayega.\n4. Har jawab ghalat sabit hota hai, is liye aisa algorithm ho hi nahi sakta.\n- Program chala kar dekhna bhi kaafi nahi: agar abhi tak nahi ruka to yaqeen nahi ho sakta ke baad mein nahi rukega.\nAsraat (implications):\n1. Computers ki bhi had hai: kuch saaf bayan kiye gaye masle koi algorithm kabhi hal nahi kar sakta.\n2. Koi tool har infinite loop ya har bug yaqeeni taur par nahi pakar sakta; asal tools adhoore ya andaze wale jawab dete hain.\n3. Masle par kaam se pehle check karein ke woh solvable hai, taake waqt aur resources bachein.\n4. Is se maslon ki solvable aur unsolvable mein taqseem hui, jo computability theory ki bunyad hai.\n(Saboot ka khaka chapter se aage hai; chapter sirf Turing ka natija batata hai.)"
           },
           {
             "type": "callout",
-            "tone": "correction",
-            "title": "Kitab ki ghalti",
-            "text": "Kitab ke aakhir (page 223) par Unit 3 ki key sirf paanch jawab deti hai: 1 B, 2 A, 3 B, 4 B, 5 C. Chapter ke text ke mutabiq sahi jawab 1 (c), 2 (d), 3 (b), 4 (a), 5 (b) hain; sirf sawal 3 key se milta hai. Sawal 6 se 10 ki key chhapi hi nahi."
+            "tone": "tip",
+            "title": "Wazahat",
+            "text": "Seedhi baat: koi aisa \"jadoo ka program\" nahi ban sakta jo har program dekh kar bata de ke woh kabhi rukega ya nahi. Agar banaya jaye to hum ek ulta program bana kar usay ghalat sabit kar sakte hain. Is liye compilers bhi har infinite loop nahi pakar sakte."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "3. Discuss the characteristics of search problems and compare the efficiency of Linear Search and Binary Search algorithm.\n(Search problems ki characteristics par baat kijiye aur Linear Search aur Binary Search ki efficiency ko compare kijiye.)",
+            "explanation": "Search problem woh masla hai jis mein koi hal ya item dhoondna ho jo khaas shartein poori kare.\nKhasusiyat:\n- Input: data ka majmua (list, database, graph) aur target ya shart.\n- Output: item ya us ki position, ya yeh ke item mojood nahi.\n- Kai comparisons lag sakte hain; bare data par efficiency aham hai.\n- Kuch tareeqon ko data khaas shakal mein chahiye (Binary Search ko sorted data).\n- Information retrieval, database queries aur decision making mein istemal.\nLinear Search aur Binary Search ka muqabla neeche table mein hai: bare sorted data par Binary Search bohat tez hai, jab ke Linear Search saada hai aur unsorted data par bhi chalti hai.\nProgram:\ndef linear_search(items, target):\n    for i in range(len(items)):\n        if items[i] == target:\n            return i\n    return -1\n\ndef binary_search(items, target):\n    low, high = 0, len(items) - 1\n    while low <= high:\n        mid = (low + high) // 2\n        if items[mid] == target:\n            return mid\n        elif target < items[mid]:\n            high = mid - 1\n        else:\n            low = mid + 1\n    return -1\n\ncities = [\"Karachi\", \"Lahore\", \"Islamabad\", \"Faisalabad\"]\nprint(linear_search(cities, \"Islamabad\"))\nprint(binary_search([1, 3, 5, 7, 9, 11, 13], 7))\nOutput:\n2\n3",
+            "answer_table": {
+              "header": [
+                "Linear Search",
+                "Binary Search"
+              ],
+              "rows": [
+                [
+                  "Shuru se har item ek ek kar ke check, jab tak item mil na jaye ya list khatam na ho",
+                  "Darmiyani item check, phir sirf baayan ya daayan aadha; dohrao"
+                ],
+                [
+                  "Unsorted list par bhi chalti hai",
+                  "Sirf sorted list par chalti hai"
+                ],
+                [
+                  "Time complexity O(n): worst case mein tamam n items check",
+                  "Time complexity O(log n): har qadam par range aadhi"
+                ],
+                [
+                  "1,000,000 items: 1,000,000 tak comparisons",
+                  "1,000,000 sorted items: sirf taqreeban 20 comparisons (2^20 taqreeban das lakh)"
+                ],
+                [
+                  "Misal: [Karachi, Lahore, Islamabad, Faisalabad] mein Islamabad 3 checks mein",
+                  "Misal: [1, 3, 5, 7, 9, 11, 13] mein 7 pehle hi check par"
+                ],
+                [
+                  "Saada; chhote ya unsorted data ke liye",
+                  "Bare sorted data par bohat tez"
+                ]
+              ]
+            }
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Wazahat",
+            "text": "Binary Search ko dictionary mein lafz dhoondne jaisa samjhein: beech se kholo, dekho lafz pehle hai ya baad mein, aur aadhi kitaab chhor do. Har dafa aadha kaam khatam, is liye das lakh mein bhi sirf ~20 qadam. Magar shart yeh hai ke data pehle se sorted ho."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "4. Discuss the nature of optimization problems and provide examples of their applications in real-world scenarios.\n(Optimization problems ki nature (kis qisam ka hai) par baat kijiye aur asal zindagi mein un ke istemal ki misalein dijiye.)",
+            "explanation": "Optimization problem woh masla hai jis mein koi bhi nahi balke kisi meyaar (criteria) ke mutabiq sab se behtar hal dhoondna ho.\nNature (fitrat):\n1. Bohat se mumkina (feasible) hal hote hain; unhein kisi paimane jaise kharcha, faasla, waqt ya qeemat se compare kiya jata hai jise kam (minimize) ya zyada (maximize) karna ho.\n2. Hal ko constraints (hadood) poori karni hoti hain, maslan weight capacity ya budget.\n3. Mumkina hal aksar bohat tezi se (factorial ya exponential) barhte hain, is liye kai optimization masle NP-hard hain aur bare input par exact hal nahi hote.\n4. Inhein greedy algorithms, dynamic programming, divide and conquer, ya approximate/heuristic tareeqon se hal kiya jata hai; Generate and Test sahi hal to deta hai magar behtareen ki guarantee nahi.\nAsal zindagi ki misalein:\n- Travelling Salesman Problem / delivery routes: har shehar (ya customer) ko ek dafa ja kar wapas aane ka sab se chhota raasta; courier aur food delivery services.\n- Route planning: do jagahon ke darmiyan sab se chhota ya tez raasta, jaise map apps (aur paanch colleges wali class activity).\n- Knapsack problem: weight limit ke andar sab se qeemti cheezein chunna, maslan truck load karna ya budget ke andar projects chunna.\n- Coin change: kam se kam sikkon mein raqam dena (greedy).\n- Scheduling aur timetable: classes, exams ya kaam ko kam waqt aur resources mein tarteeb dena (chapter ki misalon se aage)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "5. Explain the Backtracking technique with reference to the N-Queens problem. Discuss how the algorithm explores different configurations to solve the problem.\n(N-Queens problem ke hawale se Backtracking technique samjhaiye. Bataiye ke algorithm hal ke liye alag alag configurations kaise dekhta hai.)",
+            "explanation": "Backtracking hal ko qadam ba qadam banata hai. Agar koi adhoora raasta hal tak nahi le jata to algorithm pichhle qadam par wapas ja kar doosri choice aazmata hai, jaise ghalat sarak par mur kar doosra raasta lena. Yeh puzzles aur kai combinations wale maslon mein kaam aata hai.\nN-Queens problem (chapter se aage; chapter sirf backtracking batata hai): N x N chessboard par N queens aise rakhni hain ke koi do queens aik doosre par hamla na karein, yani koi do ek row, column ya diagonal mein na hon.\nBacktracking configurations kaise dekhta hai:\n1. Queens ek ek row mein rakho, row 1 se shuru.\n2. Mojooda row mein baayein se daayein columns aazmao; pehle safe column (oopar ki kisi queen ke column ya diagonal mein nahi) mein queen rakho.\n3. Agli row par jao aur dohrao.\n4. Agar row mein koi column safe nahi, to backtrack: pichhli row ki queen utha kar us ke agle safe column mein rakho.\n5. Jab tak N queens rakh na di jayen (hal) ya tamam configurations aazma na li jayen, jaari rakho.\nMisal (4-Queens):\n- Row 1: column 1. Row 2: column 3 (1 aur 2 par hamla). Row 3: koi safe column nahi, backtrack.\n- Row 2 column 4 par; row 3: column 2; row 4: koi safe nahi, phir backtrack. Row 3 ka koi aur safe column nahi aur row 2 ke columns khatam, is liye row 1 par wapas.\n- Row 1: column 2. Row 2: column 4. Row 3: column 1. Row 4: column 3. Chaaron queens rakh di gayin.\nHal:\n. Q . .\n. . . Q\nQ . . .\n. . Q .\nProgram:\ndef is_safe(queens, row, col):\n    for r, c in enumerate(queens):\n        if c == col or abs(c - col) == row - r:\n            return False\n    return True\n\ndef solve(queens, n):\n    row = len(queens)\n    if row == n:\n        return True\n    for col in range(n):\n        if is_safe(queens, row, col):\n            queens.append(col)\n            if solve(queens, n):\n                return True\n            queens.pop()          # backtrack\n    return False\n\nqueens = []\nsolve(queens, 4)\nprint(\"Queen columns (row 1 to 4):\", [c + 1 for c in queens])\nOutput: Queen columns (row 1 to 4): [2, 4, 1, 3]\nBacktracking adhoori configuration ko qaida tootte hi chhor deta hai, is liye har mukammal arrangement aazmana nahi parta (8 queens ke 92 hal bina tamam placements aazmaye mil jate hain)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Wazahat",
+            "text": "Backtracking ko bhool bhulaiyan (maze) jaisa samjhein: ek raasta chuno, band gali aaye to pichhle mor par wapas aa kar agla raasta lo. N-Queens mein \"band gali\" woh row hai jahan koi bhi column safe na ho; wahan se ek row peeche ja kar queen ko agle column mein khiskate hain."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "6. Explain the process and time complexity of the Bubble Sort algorithm. Compare it with another sorting algorithm of your choice in terms of efficiency.\n(Bubble Sort algorithm ka process aur time complexity samjhaiye. Apni pasand ke kisi aur sorting algorithm se efficiency ko compare kijiye.)",
+            "explanation": "Bubble Sort sab se saada sorting algorithms mein se hai. Yeh list mein baar baar chalta hai, saath wale (adjacent) elements compare karta hai aur ghalat tarteeb hon to swap karta hai.\nProcess:\n1. List ke shuru se chalo.\n2. Har saath wale jore ko compare karo.\n3. Ghalat tarteeb ho to swap karo.\n4. Passes dohrao jab tak koi swap baqi na rahe.\nHar pass ke baad sab se bara baqi element bulbule (bubble) ki tarah aakhir mein apni jagah pohanch jata hai.\nMisal: [5, 3, 8, 4, 2]\nPass 1: [3, 5, 4, 2, 8]\nPass 2: [3, 4, 2, 5, 8]\nPass 3: [3, 2, 4, 5, 8]\nPass 4: [2, 3, 4, 5, 8]\nProgram:\ndef bubble_sort(data):\n    n = len(data)\n    for i in range(n - 1):\n        for j in range(n - 1 - i):\n            if data[j] > data[j + 1]:\n                data[j], data[j + 1] = data[j + 1], data[j]\n    return data\n\nprint(bubble_sort([5, 3, 8, 4, 2]))\nOutput: [2, 3, 4, 5, 8]\nTime complexity: O(n²), kyunke n items ke liye taqreeban n passes, har ek mein n tak comparisons. Input dugna ho to waqt taqreeban chaar guna. Samajhna aasan magar bare data ke liye inefficient.\nMerge Sort se muqabla (neeche table): bare data ke liye Merge Sort zyada efficient hai; Bubble Sort sirf chhoti lists aur seekhne ke liye theek hai.",
+            "answer_table": {
+              "header": [
+                "Bubble Sort",
+                "Merge Sort"
+              ],
+              "rows": [
+                [
+                  "Saath wale (adjacent) elements compare kar ke ghalat tarteeb par swap; passes dohrata hai",
+                  "Divide and Conquer: list ko aadha aadha karo, har aadha sort karo, phir sorted hisse jor do"
+                ],
+                [
+                  "Time complexity O(n²)",
+                  "Time complexity O(n log n)"
+                ],
+                [
+                  "Input dugna ho to waqt taqreeban chaar guna",
+                  "Waqt bohat aahista barhta hai"
+                ],
+                [
+                  "1,000 items: taqreeban 1,000,000 steps (n²)",
+                  "1,000 items: taqreeban 10,000 steps (n log2 n)"
+                ],
+                [
+                  "Misal: [5, 3, 8, 4, 2] 4 passes mein sort",
+                  "Misal: [14, 7, 3, 12] se [3, 7, 12, 14]"
+                ],
+                [
+                  "Sirf chhoti lists aur seekhne ke liye theek",
+                  "Bare data ke liye zyada efficient"
+                ]
+              ]
+            }
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Wazahat",
+            "text": "Bubble Sort mein har pass ke baad sab se bara number aakhir mein chala jata hai, jaise paani mein bara bulbula oopar aata hai. 5 items ke liye 4 passes lage. Items 1000 hon to taqreeban das lakh comparisons, is liye bare data par Merge Sort behtar hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "7. Discuss the differences between time complexity and space complexity. How do they impact the choice of an algorithm for a specific problem?\n(Time complexity aur space complexity ke farq par baat kijiye. Yeh kisi khaas masle ke liye algorithm ke choice (chunna) par kaise asar dalte hain?)",
+            "explanation": "Time complexity batati hai ke input barhne par chalne ka waqt kaise barhta hai; space complexity batati hai ke memory kaise barhti hai. Farq neeche table mein hain.\nAlgorithm ke chunao par asar:\n1. Bare input ke liye kam time complexity: Bubble Sort O(n²) ki jagah Merge Sort O(n log n); sorted data par Linear Search O(n) ki jagah Binary Search O(log n).\n2. Kam memory wale systems (chhote devices) ke liye kam space complexity: maslan gehre graphs mein DFS, BFS se kam memory leta hai.\n3. Trade-off (len den): kuch algorithms waqt bachane ke liye zyada memory lete hain, maslan Dynamic Programming subproblems ke jawab store karta hai.\n4. Masle ki zaroorat faisla karti hai: raftaar zaroori ho to tez algorithm, memory kam ho to kam memory wala; chhote data ke liye saada algorithm bhi kaafi.\n5. Scalability: achhi time aur space complexity wala algorithm data barhne par bhi efficient rehta hai.",
+            "answer_table": {
+              "header": [
+                "Time complexity",
+                "Space complexity"
+              ],
+              "rows": [
+                [
+                  "Input barhne par chalne ka waqt kaise barhta hai, us ka paimana",
+                  "Input barhne par memory kaise badalti hai, us ka paimana"
+                ],
+                [
+                  "Resource: waqt (steps ki tadaad)",
+                  "Resource: memory"
+                ],
+                [
+                  "O(1): index se array item lena",
+                  "O(1): sirf chand variables"
+                ],
+                [
+                  "O(log n): binary search",
+                  "O(log n): kuch divide-and-conquer algorithms"
+                ],
+                [
+                  "O(n): linear search",
+                  "O(n): n items ki list"
+                ],
+                [
+                  "O(n²): har student jore ka muqabla",
+                  "O(n²): n x n matrix"
+                ],
+                [
+                  "Big O notation mein (oopri had, worst case)",
+                  "Big O notation mein (oopri had, worst case)"
+                ]
+              ]
+            }
           },
           {
             "type": "heading",
@@ -166,7 +630,8 @@
             "ordered": false,
             "items": [
               "Text se MCQ jawab: 1c 2d 3b 4a 5b 6c 7c 8c 9b 10c.",
-              "Kitab ki key Unit 3 ke sirf paanch jawab deti hai aur sirf sawal 3 par sahi hai."
+              "Kitab ki key Unit 3 ke sirf paanch jawab deti hai aur sirf sawal 3 par sahi hai.",
+              "Short aur long sawalon ke model jawab upar har sawal ke saath hain."
             ]
           }
         ]

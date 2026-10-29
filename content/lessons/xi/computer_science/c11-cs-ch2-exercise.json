@@ -13,7 +13,7 @@
           "source_document_id": "8edd9572-2b0a-521f-a398-b6e8104a4eb3",
           "pdf_from": 64,
           "pdf_to": 67,
-          "note": "Chapter 2 exercise as printed: 10 MCQs, 8 short and 7 long questions (PDF 64-67, printed 61-64). No answers in English."
+          "note": "Chapter 2 exercise as printed (PDF 64-67, printed 61-64), solved: 10 MCQs with keys from the text, 8 short and 7 long questions with model answers; every program and expression was run in Python. Answer key PDF 226 (printed 223): eight of ten entries contradict the text and are corrected."
         }
       ],
       "body": {
@@ -24,50 +24,91 @@
             "text": "Multiple Choice Questions"
           },
           {
-            "type": "paragraph",
-            "text": "1. Which of the following steps is NOT part of the basic programming process?"
-          },
-          {
-            "type": "list",
-            "ordered": false,
-            "items": [
-              "a) Write Code",
-              "b) Compile/Interpret",
-              "c) Execute",
-              "d) Ignore Errors"
-            ]
-          },
-          {
-            "type": "paragraph",
-            "text": "2. What should you do when installing Python to run it from the command line more easily?"
-          },
-          {
-            "type": "list",
-            "ordered": false,
-            "items": [
-              "a) Uncheck \"Add Python to PATH\"",
-              "b) Choose a different IDE",
-              "c) Check \"Add Python to PATH\"",
-              "d) Install only the IDE"
-            ]
-          },
-          {
-            "type": "paragraph",
-            "text": "3. Which of the following is a valid variable name in Python?"
-          },
-          {
-            "type": "list",
-            "ordered": false,
-            "items": [
-              "(a) variablel",
-              "(b) Ivariable",
-              "(c) variable-name",
-              "(d) variable name"
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "1. Which of the following steps is NOT part of the basic programming process?",
+            "options": [
+              {
+                "id": "a",
+                "text": "Write Code"
+              },
+              {
+                "id": "b",
+                "text": "Compile/Interpret"
+              },
+              {
+                "id": "c",
+                "text": "Execute"
+              },
+              {
+                "id": "d",
+                "text": "Ignore Errors"
+              }
             ],
-            "book_errors": [
-              "variablel",
-              "Ivariable"
-            ]
+            "answer_id": "d",
+            "explanation": "Ignore Errors is not a step. The basic steps of programming in 2.1.1.1 are Write Code, Compile/Interpret, Execute and Output; errors are found and fixed, never ignored."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key (printed page 223) gives (a) \"Write Code\", but Write Code is the first step of the programming process (2.1.1.1). The step that is NOT part of it is (d) Ignore Errors."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "2. What should you do when installing Python to run it from the command line more easily?",
+            "options": [
+              {
+                "id": "a",
+                "text": "Uncheck \"Add Python to PATH\""
+              },
+              {
+                "id": "b",
+                "text": "Choose a different IDE"
+              },
+              {
+                "id": "c",
+                "text": "Check \"Add Python to PATH\""
+              },
+              {
+                "id": "d",
+                "text": "Install only the IDE"
+              }
+            ],
+            "answer_id": "c",
+            "explanation": "While installing Python, tick the box \"Add Python to PATH\"; this makes it easy to run Python from the command line (2.1.1.2, Tidbits)."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key gives (b) \"Choose a different IDE\". The chapter's tip (2.1.1.2) says to check \"Add Python to PATH\", so the answer is (c)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "3. Which of the following is a valid variable name in Python?",
+            "options": [
+              {
+                "id": "a",
+                "text": "variablel"
+              },
+              {
+                "id": "b",
+                "text": "Ivariable"
+              },
+              {
+                "id": "c",
+                "text": "variable-name"
+              },
+              {
+                "id": "d",
+                "text": "variable name"
+              }
+            ],
+            "answer_id": "a",
+            "explanation": "A name must start with a letter or underscore and may contain only letters, digits and underscores (2.2.1.2). variable1 (option a) is valid; 1variable starts with a digit, variable-name has a hyphen and variable name has a space."
           },
           {
             "type": "callout",
@@ -76,41 +117,65 @@
             "text": "Options (a) and (b) are printed as variablel (letter l) and Ivariable (capital I), which are both valid names. They are meant to be variable1 and 1variable; then only (a) is valid, because a name cannot start with a digit."
           },
           {
-            "type": "paragraph",
-            "text": "4. What is the output of the below code?"
-          },
-          {
             "type": "code",
             "language": "python",
             "text": "age = 25; print (\" Age : \" , age)"
           },
           {
-            "type": "list",
-            "ordered": false,
-            "items": [
-              "(a) Age: 25",
-              "(b) 25",
-              "(c) Age",
-              "(d) age"
-            ]
-          },
-          {
-            "type": "paragraph",
-            "text": "5. Which of the following operators is used for exponentiation in Python?"
-          },
-          {
-            "type": "list",
-            "ordered": false,
-            "items": [
-              "(a) *",
-              "(b) **",
-              "(c) (O //",
-              "(d) 7."
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "4. What is the output of the code above?",
+            "options": [
+              {
+                "id": "a",
+                "text": "Age: 25"
+              },
+              {
+                "id": "b",
+                "text": "25"
+              },
+              {
+                "id": "c",
+                "text": "Age"
+              },
+              {
+                "id": "d",
+                "text": "age"
+              }
             ],
-            "book_errors": [
-              "(O //",
-              "7."
-            ]
+            "answer_id": "a",
+            "explanation": "print() shows its items separated by a space, so the program prints \" Age :  25\": the text and then the value of age, i.e. Age: 25 (only the spacing differs)."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key gives (b) \"25\". print(\" Age : \", age) prints the label as well as the value, so the output is (a) Age: 25."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "5. Which of the following operators is used for exponentiation in Python?",
+            "options": [
+              {
+                "id": "a",
+                "text": "*"
+              },
+              {
+                "id": "b",
+                "text": "**"
+              },
+              {
+                "id": "c",
+                "text": "(O //"
+              },
+              {
+                "id": "d",
+                "text": "7."
+              }
+            ],
+            "answer_id": "b",
+            "explanation": "** is the exponentiation (power) operator, e.g. 2 ** 3 = 8 (2.3.1 and 2.3.6). * multiplies, // is floor division and % is modulus."
           },
           {
             "type": "callout",
@@ -119,50 +184,97 @@
             "text": "Options (c) and (d) are damaged in print: (c) \"(O //\" is the floor-division operator //, and (d) \"7.\" is most likely the modulus operator % (the same misprint turns % into 7 in Long Question 1)."
           },
           {
-            "type": "paragraph",
-            "text": "6. Which loop type in Python is used to iterate over a collection such as lists?"
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key gives (c), which is the floor-division operator //. Exponentiation is ** (2.3.1), so the answer is (b)."
           },
           {
-            "type": "list",
-            "ordered": false,
-            "items": [
-              "(a) while",
-              "(b) for",
-              "(c) do-while",
-              "(d) repeat"
-            ]
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "6. Which loop type in Python is used to iterate over a collection such as lists?",
+            "options": [
+              {
+                "id": "a",
+                "text": "while"
+              },
+              {
+                "id": "b",
+                "text": "for"
+              },
+              {
+                "id": "c",
+                "text": "do-while"
+              },
+              {
+                "id": "d",
+                "text": "repeat"
+              }
+            ],
+            "answer_id": "b",
+            "explanation": "A for loop is used to iterate over a sequence such as a list, tuple or string (2.4.2.2). A while loop repeats while a condition is true; do-while and repeat are not Python loops."
           },
           {
-            "type": "paragraph",
-            "text": "7. What does the range () function do in Python?"
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key gives (a) \"while\". Section 2.4.2.2 says the for loop is used to iterate over a sequence like a list, so the answer is (b)."
           },
           {
-            "type": "list",
-            "ordered": false,
-            "items": [
-              "(a) Generates a list of numbers",
-              "(b) Creates a sequence of numbers",
-              "(c) Calculates the sum of numbers",
-              "(d) Prints a range of numbers"
-            ]
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "7. What does the range () function do in Python?",
+            "options": [
+              {
+                "id": "a",
+                "text": "Generates a list of numbers"
+              },
+              {
+                "id": "b",
+                "text": "Creates a sequence of numbers"
+              },
+              {
+                "id": "c",
+                "text": "Calculates the sum of numbers"
+              },
+              {
+                "id": "d",
+                "text": "Prints a range of numbers"
+              }
+            ],
+            "answer_id": "b",
+            "explanation": "range() generates a sequence of numbers, often used in for loops (2.4.2.3); e.g. range(5) gives 0, 1, 2, 3, 4. It does not add or print the numbers."
           },
           {
-            "type": "paragraph",
-            "text": "8. Which keyword is used to define a function in Python?"
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "8. Which keyword is used to define a function in Python?",
+            "options": [
+              {
+                "id": "a",
+                "text": "define"
+              },
+              {
+                "id": "b",
+                "text": "function"
+              },
+              {
+                "id": "c",
+                "text": "def"
+              },
+              {
+                "id": "d",
+                "text": "func"
+              }
+            ],
+            "answer_id": "c",
+            "explanation": "Functions are defined with the def keyword, followed by the function name and parentheses (2.5.1.1), e.g. def greet(name):."
           },
           {
-            "type": "list",
-            "ordered": false,
-            "items": [
-              "a) define",
-              "b) function",
-              "c) def",
-              "d) func"
-            ]
-          },
-          {
-            "type": "paragraph",
-            "text": "9. What is the output of the below code?"
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key gives (a) \"define\", which is not a Python keyword. Section 2.5.1.1 uses def, so the answer is (c)."
           },
           {
             "type": "code",
@@ -170,31 +282,60 @@
             "text": "temperature, humidity, wind_speed =25, 60, 15\nprint(\"Hot and humid\" if temperature > 30 and humidity > 50 else\n\"Warm and breezy\" if temperature == 25 and wind_speed > 10 else\n\"Cool and dry\" if temperature < 20 and humidity < 30 else\n\"Moderate \")"
           },
           {
-            "type": "list",
-            "ordered": false,
-            "items": [
-              "(a) Hot",
-              "(b) Warm",
-              "(c) Cool",
-              "(d) Nothing"
-            ]
-          },
-          {
-            "type": "paragraph",
-            "text": "10. Which operation is used to combine two lists?"
-          },
-          {
-            "type": "list",
-            "ordered": false,
-            "items": [
-              "(a) combine()",
-              "(b) concatO",
-              "(c) +",
-              "(d) merge ()"
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "9. What is the output of the code above?",
+            "options": [
+              {
+                "id": "a",
+                "text": "Hot"
+              },
+              {
+                "id": "b",
+                "text": "Warm"
+              },
+              {
+                "id": "c",
+                "text": "Cool"
+              },
+              {
+                "id": "d",
+                "text": "Nothing"
+              }
             ],
-            "book_errors": [
-              "concatO"
-            ]
+            "answer_id": "b",
+            "explanation": "temperature > 30 is False, so \"Hot and humid\" is skipped; temperature == 25 and wind_speed > 10 (15 > 10) are both True, so the program prints \"Warm and breezy\" (checked by running it)."
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key gives (a) \"Hot\". With temperature 25 the first condition (> 30) is False and the second is True, so the output is \"Warm and breezy\", option (b)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "10. Which operation is used to combine two lists?",
+            "options": [
+              {
+                "id": "a",
+                "text": "combine()"
+              },
+              {
+                "id": "b",
+                "text": "concatO"
+              },
+              {
+                "id": "c",
+                "text": "+"
+              },
+              {
+                "id": "d",
+                "text": "merge ()"
+              }
+            ],
+            "answer_id": "c",
+            "explanation": "Two lists are combined (concatenated) with the + operator, e.g. slice + extra_numbers in 2.6.1.5. Python lists have no combine(), concat() or merge() method."
           },
           {
             "type": "callout",
@@ -203,23 +344,131 @@
             "text": "Option (b) is printed as concatO; it is concat(), the brackets printed as the letter O."
           },
           {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The answer key gives (a) \"combine()\", which is not a list operation in Python. Section 2.6.1.5 joins lists with +, so the answer is (c)."
+          },
+          {
             "type": "heading",
             "level": 3,
             "text": "Short Questions"
           },
           {
-            "type": "list",
-            "ordered": true,
-            "items": [
-              "Explain the purpose of using comments in Python code?",
-              "Describe the difference between integer and float data types in Python. Provide an example of each.",
-              "Define operator precedence and give an example of an expression where operator precedence affects the result.",
-              "How does the short hand if-else statement differ from the regular if-else statement?",
-              "Explain the use of the range() function in a for loop?",
-              "Explain how default parameters work in Python functions.",
-              "Explain why modular programming is useful in Python.",
-              "Explain the difference between a class and an object in Python."
-            ]
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "1. Explain the purpose of using comments in Python code?",
+            "explanation": "Comments are lines that the Python interpreter does not execute; they are notes about the code.\nPurpose: they explain what the code does, so the program is easy to read, understand and maintain (also for other programmers).\nA single-line comment starts with #; a multi-line comment is written between triple quotes (''' ... ''')."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "2. Describe the difference between integer and float data types in Python. Provide an example of each.",
+            "explanation": "An integer is a whole number without a decimal point; a float is a number with a decimal point.",
+            "answer_table": {
+              "header": [
+                "Integer",
+                "Float"
+              ],
+              "rows": [
+                [
+                  "Stores whole numbers (positive or negative) without a decimal point",
+                  "Stores numbers with a decimal point"
+                ],
+                [
+                  "No fractional part",
+                  "Has a fractional part"
+                ],
+                [
+                  "Python type: int",
+                  "Python type: float (/ always gives a float: 7 / 2 = 3.5)"
+                ],
+                [
+                  "Example: age = 17",
+                  "Example: price = 19.99"
+                ]
+              ]
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "3. Define operator precedence and give an example of an expression where operator precedence affects the result.",
+            "explanation": "Operator precedence is the order in which the operators of an expression are evaluated; higher precedence is evaluated first.\nOrder: () then ** then *, /, //, % then +, -.\nExample: 3 + 2 * 5 = 13 (multiplication first), but (3 + 2) * 5 = 25 (parentheses first)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "4. How does the short hand if-else statement differ from the regular if-else statement?",
+            "explanation": "Both choose between two actions by a condition; the short hand form fits on one line, while the regular form uses indented blocks.",
+            "answer_table": {
+              "header": [
+                "Short hand if-else",
+                "Regular if-else"
+              ],
+              "rows": [
+                [
+                  "Written on one line",
+                  "Written on several lines with indented blocks"
+                ],
+                [
+                  "One simple action for each case",
+                  "Each block can hold many statements"
+                ],
+                [
+                  "No elif part",
+                  "elif can be added for more conditions"
+                ],
+                [
+                  "Example: print(\"It's a hot day\") if temperature > 30 else print(\"It's not a hot day\")",
+                  "Example: if temperature > 30: with an indented print(...) below it, then else: with its own indented print(...)"
+                ]
+              ]
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "5. Explain the use of the range() function in a for loop?",
+            "explanation": "range() generates a sequence of numbers that a for loop uses to repeat a block a fixed number of times.\nForms: range(stop), range(start, stop), range(start, stop, step); the stop value itself is never included.\nExample: for i in range(5): print(i) prints 0 1 2 3 4."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "6. Explain how default parameters work in Python functions.",
+            "explanation": "A default parameter is given a value in the function definition, e.g. def greet(name=\"Student\").\nIf no argument is passed, the default is used: greet() gives \"As-Salaam-Alaikum, Student!\".\nIf an argument is passed, it replaces the default: greet(\"Ali\") gives \"As-Salaam-Alaikum, Ali!\"."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "7. Explain why modular programming is useful in Python.",
+            "explanation": "Modular programming divides a program into smaller, reusable files called modules (.py files).\n1. Complex programs become easier to manage, as each module handles one part.\n2. Code is written once and reused with import, avoiding duplication.\n3. Programs are easier to test, debug and maintain, and team members can work on different modules."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "8. Explain the difference between a class and an object in Python.",
+            "explanation": "A class is a blueprint; an object is an actual instance made from that blueprint.",
+            "answer_table": {
+              "header": [
+                "Class",
+                "Object"
+              ],
+              "rows": [
+                [
+                  "A blueprint (template) that defines attributes and methods",
+                  "An actual instance created from a class, with its own values"
+                ],
+                [
+                  "Defined once with the keyword class",
+                  "Many objects can be created from one class"
+                ],
+                [
+                  "Example: the plan of a toy car",
+                  "Example: a red car and a blue car made from that plan"
+                ]
+              ]
+            }
           },
           {
             "type": "heading",
@@ -252,6 +501,36 @@
             "text": "In parts (a) and (e) the operator is lost in print (\"9 7, 4\", \"10 7. 3\"); as printed they are not Python. Read with the modulus operator %: (9 % 4) and 10 % 3."
           },
           {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "1(a) Evaluate (18 / 3 + 4 ** 2) - (2 * (7 - 3)) / (9 % 4) (printed \"(9 7, 4)\", read with %).",
+            "explanation": "Step 1 (brackets first): 18 / 3 + 4 ** 2 = 6.0 + 16 = 22.0\nStep 2: 2 * (7 - 3) = 2 * 4 = 8\nStep 3: 9 % 4 = 1 (remainder)\nStep 4: 8 / 1 = 8.0\nStep 5: 22.0 - 8.0 = 14.0\nAnswer: 14.0 (checked in Python)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "1(b) Evaluate (25 + 3 * 4 ** 2 - 6) / (2 ** 3 + 1) - 7",
+            "explanation": "Step 1: 4 ** 2 = 16, so 3 * 16 = 48\nStep 2: 25 + 48 - 6 = 67\nStep 3: 2 ** 3 + 1 = 8 + 1 = 9\nStep 4: 67 / 9 = 7.444...\nStep 5: 7.444... - 7 = 0.444...\nAnswer: 0.444... (4/9). Python prints 0.44444444444444464 (the last digits come from floating-point rounding)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "1(c) Evaluate (12 + 6 * (5 - 2)) ** 2 / ((4 ** 2 - 7) + 10)",
+            "explanation": "Step 1: 5 - 2 = 3, 6 * 3 = 18, 12 + 18 = 30\nStep 2: 30 ** 2 = 900\nStep 3: 4 ** 2 - 7 = 16 - 7 = 9, 9 + 10 = 19\nStep 4: 900 / 19 = 47.368...\nAnswer: 47.36842105263158 (Python output)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "1(d) Evaluate 45 / (2 ** 2 + 3 * 4) + 8 * (7 - 3)",
+            "explanation": "Step 1: 2 ** 2 + 3 * 4 = 4 + 12 = 16\nStep 2: 45 / 16 = 2.8125\nStep 3: 7 - 3 = 4, 8 * 4 = 32\nStep 4: 2.8125 + 32 = 34.8125\nAnswer: 34.8125 (checked in Python)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "1(e) Evaluate (14 * 3 + 5 ** 2 - 28) / (4 + 2 ** 3) + 10 % 3 (printed \"10 7. 3\", read with %).",
+            "explanation": "Step 1: 14 * 3 = 42, 5 ** 2 = 25, 42 + 25 - 28 = 39\nStep 2: 2 ** 3 = 8, 4 + 8 = 12\nStep 3: 39 / 12 = 3.25\nStep 4: 10 % 3 = 1\nStep 5: 3.25 + 1 = 4.25\nAnswer: 4.25 (checked in Python)"
+          },
+          {
             "type": "paragraph",
             "text": "2. Translating the following Mathematical Expressions to Python Syntax"
           },
@@ -265,8 +544,16 @@
             "text_alt": "15 x (3 + 2²) / (6 - 2x3)"
           },
           {
-            "type": "paragraph",
-            "text": "(b) 7 + 2²   1   7"
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "2(a) Write the expression (a) above in Python syntax.",
+            "explanation": "Python: 15 * (3 + 2 ** 2) / (6 - 2 * 3)\nRules used: x becomes *, the square becomes ** 2, and the numerator and denominator each go in brackets.\nValue: numerator 15 * (3 + 4) = 105; denominator 6 - 6 = 0. Dividing by zero is not allowed, so Python stops with ZeroDivisionError: division by zero (checked by running it)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "2(b) 7 + 2²   1   7 (printed damaged)",
+            "explanation": "This part is printed too damaged to read: only \"7 + 2²\" and the stray numbers 1 and 7 are visible, so the full expression cannot be known and no exact answer can be given.\nThe readable part, 7 + 2², is written in Python as 7 + 2 ** 2, which gives 11. The rest is translated with the same rules: x becomes *, a power becomes **, and a fraction becomes (numerator) / (denominator)."
           },
           {
             "type": "paragraph",
@@ -276,6 +563,12 @@
             "type": "equation",
             "latex": "\\frac{12 + 5 \\times 4 - (3 + 7)^2}{2 \\times (5^2 - 24)}",
             "text_alt": "(12 + 5x4 - (3+7)²) / (2 x (5² - 24))"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "2(c) Write the expression (c) above in Python syntax and evaluate it.",
+            "explanation": "Python: (12 + 5 * 4 - (3 + 7) ** 2) / (2 * (5 ** 2 - 24))\nSteps: numerator 12 + 20 - 10 ** 2 = 32 - 100 = -68; denominator 2 * (25 - 24) = 2 * 1 = 2; -68 / 2 = -34.0\nAnswer: -34.0 (checked in Python)"
           },
           {
             "type": "paragraph",
@@ -296,12 +589,22 @@
             "text": "Part (b) is printed too damaged to read. In part (d) \"l\" (letter) stands for the digit 1: 9 × (2³ + 1). The question numbers \"2.\" and \"3.\" are printed for one question."
           },
           {
-            "type": "paragraph",
-            "text": "4. Explain the concept of variables in Python."
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "2(d) Write the expression (d) above in Python syntax (with 1 for the printed \"l\") and evaluate it.",
+            "explanation": "Python: (9 * (2 ** 3 + 1) - 15 + 3) / ((5 + 4) * (2 + 3))\nSteps: 2 ** 3 + 1 = 9; 9 * 9 = 81; 81 - 15 + 3 = 69; denominator 9 * 5 = 45; 69 / 45 = 1.533...\nAnswer: 1.5333333333333334 (Python output)"
           },
           {
-            "type": "paragraph",
-            "text": "5. Write a Python program that takes a number as input and checks whether it is positive, negative, or zero using an if-elif-else statement."
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "4. Explain the concept of variables in Python.",
+            "explanation": "A variable is a named storage container in the computer's memory that holds data, which can be used and changed later in the program. It is called a variable because its value can change while the program runs.\n1. Creating: a value is assigned with =, e.g. age = 71. Python decides the type from the value.\n2. Changing: assigning a new value replaces the old one.\n3. Types of variables:\n- int (whole numbers): age = 17\n- float (decimal numbers): price = 19.99\n- str (text, in quotes): name = \"Ali\"\n- bool (True or False): is_student = True\n4. Naming rules:\n- must begin with a letter (a-z, A-Z) or an underscore _\n- may then contain letters, digits (0-9) and underscores\n- names are case-sensitive (age and Age are different)\n- keywords such as for, while, if cannot be used\n- use meaningful names in snake_case, e.g. student_name\nExample:\nage = 71\nprint(\"Quaid-i-Azam lived for\", age, \"years\")\nage = 60\nprint(\"Allama Iqbal lived for\", age, \"years\")\nOutput:\nQuaid-i-Azam lived for 71 years\nAllama Iqbal lived for 60 years"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "5. Write a Python program that takes a number as input and checks whether it is positive, negative, or zero using an if-elif-else statement.",
+            "explanation": "Program:\nnumber = float(input(\"Enter a number: \"))\nif number > 0:\n    print(\"The number is positive\")\nelif number < 0:\n    print(\"The number is negative\")\nelse:\n    print(\"The number is zero\")\nSample runs (checked):\nEnter a number: 7\nThe number is positive\nEnter a number: -3\nThe number is negative\nEnter a number: 0\nThe number is zero\nWorking: the if checks number > 0; if that is false, elif checks number < 0; if both are false the number must be 0, so else runs."
           },
           {
             "type": "paragraph",
@@ -315,6 +618,12 @@
             "tone": "correction",
             "title": "Book correction",
             "text": "Question 6 leaves out the upper limit (\"between 1 and Also\"); the number after \"and\" is missing. The matching class activity in 2.4.2.1 uses 1 to 20."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "6. Write the program of Question 6 above (odd numbers from 1 to 20 with a while loop, and their count).",
+            "explanation": "The upper limit is missing in print; the matching class activity (2.4.2.1) uses 1 to 20, so 20 is used here (change the 20 for another limit).\nProgram:\nnumber = 1\ncount = 0\nwhile number <= 20:\n    if number % 2 != 0:\n        print(number)\n        count += 1\n    number += 1\nprint(\"Total odd numbers:\", count)\nOutput (checked):\n1\n3\n5\n7\n9\n11\n13\n15\n17\n19\nTotal odd numbers: 10\nWorking: the loop runs while number <= 20; number % 2 != 0 is true for odd numbers, which are printed and counted; number += 1 moves to the next number so the loop ends."
           },
           {
             "type": "paragraph",
@@ -349,6 +658,12 @@
               "(a) Convert 25 °C to Fahrenheit and print the result.",
               "(b) Convert 77°F to Celsius and print the result."
             ]
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "7. Write the module temperature_converter.py with functions (a) and (b), and the script main.py described above.",
+            "explanation": "File 1: temperature_converter.py\n# temperature_converter.py\ndef celsius_to_fahrenheit(c):\n    return 9 / 5 * c + 32\n\ndef fahrenheit_to_celsius(f):\n    return 5 / 9 * (f - 32)\n\nFile 2: main.py (saved in the same folder)\n# main.py\nimport temperature_converter\n\ndef main():\n    f = temperature_converter.celsius_to_fahrenheit(25)\n    print(\"25 C in Fahrenheit:\", f)\n    c = temperature_converter.fahrenheit_to_celsius(77)\n    print(\"77 F in Celsius:\", c)\n\nif __name__ == \"__main__\":\n    main()\n\nRun from the command line: python main.py\nOutput (checked):\n25 C in Fahrenheit: 77.0\n77 F in Celsius: 25.0\nCheck: F = 9/5 x 25 + 32 = 45 + 32 = 77; C = 5/9 x (77 - 32) = 5/9 x 45 = 25."
           }
         ]
       }
