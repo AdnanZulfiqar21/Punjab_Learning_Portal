@@ -250,10 +250,10 @@ function BlockView({
           dir="auto"
           className={
             depth === 4
-              ? "border-l-[3px] border-subheading pl-3 text-base leading-snug font-semibold"
+              ? "border-l-[3px] border-subheading pl-3 text-[1.1875rem] leading-snug font-semibold"
               : depth === 3
-                ? "pt-1 text-lg leading-snug font-semibold text-subheading"
-                : "border-b border-border pt-3 pb-1.5 text-[22px] leading-tight font-bold tracking-tight text-subheading"
+                ? "pt-2 text-[1.375rem] leading-snug font-bold tracking-tight text-subheading"
+                : "border-b border-border pt-3 pb-1.5 text-[1.75rem] leading-tight font-bold tracking-tight text-subheading"
           }
         >
           <Marked text={str(b.text)} marks={marks} />

@@ -282,12 +282,12 @@ function BlockView({ block: b, assetSource, dataSaver }: { block: Block; assetSo
       // smaller, a numbered sub-heading (4) in the heading colour with a blue bar at its start.
       return b.level === 4 ? (
         <View style={{ marginTop: Space.xs, borderLeftWidth: 3, borderLeftColor: c.subheading, paddingLeft: Space.sm }}>
-          <T variant="body" accessibilityRole="header" style={{ color: c.heading, fontWeight: "600" }}>
+          <T variant="body" accessibilityRole="header" style={{ color: c.heading, fontSize: 17, fontWeight: "600" }}>
             <Marked text={str(b.text)} marks={marks} />
           </T>
         </View>
       ) : b.level === 3 ? (
-        <T variant="subheading" accessibilityRole="header" style={{ marginTop: Space.xs, color: c.subheading }}>
+        <T variant="subheading" accessibilityRole="header" style={{ marginTop: Space.xs, color: c.subheading, fontSize: 18, lineHeight: 25, fontWeight: "700" }}>
           <Marked text={str(b.text)} marks={marks} />
         </T>
       ) : (
