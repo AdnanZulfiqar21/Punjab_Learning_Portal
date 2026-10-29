@@ -46,7 +46,7 @@ function Chapter({ ch }: { ch: Awaited<ReturnType<typeof api.chapter>> }) {
   const bc = ch.breadcrumb;
   const [intro, setIntro] = useState(false);
   const long = (ch.main_concept ?? "").length > 180;
-  const topics = learnTopics(ch.topics); // BOOK-EXERCISES-01: the end-of-chapter exercise is solved in Practice
+  const topics = learnTopics(ch.topics); // BOOK-EXERCISES-01/BOOK-PAPERS-01: exercises and Board papers are in Practice
   return (
     <ScrollView style={{ backgroundColor: c.background }} contentContainerStyle={{ padding: Space.lg, gap: Space.lg }}>
       <View style={{ gap: Space.xs }}>

@@ -19,6 +19,7 @@ import { useAuth } from "@/lib/auth";
 import { continuesInto, headingOnly, headingTone } from "@/lib/book-heading";
 import { premiumBook } from "@/lib/book-style";
 import { useDisplay } from "@/lib/display";
+import { practiceOnly } from "@/lib/exercises";
 import { usePrefs } from "@/lib/prefs";
 import { missingLanguageNote, READING_LANGUAGES, type ReadingLanguage } from "@/lib/reading-language-core";
 import { mapPlace, placeSignature, type PlaceBlock } from "@/lib/variant-place";
@@ -49,8 +50,9 @@ export default function TopicScreen() {
 
   if (auth.state.status === "loading" || state.status === "loading") return <Loading label="Loading lesson" />;
   if (state.status === "error") return <ErrorState error={state.error} onRetry={retry} />;
-  // BOOK-EXERCISES-01: the end-of-chapter exercise is solved in Practice; a favourite or a search hit goes there.
-  if (state.data.kind === "exercise") return <Redirect href={{ pathname: "/exercise/[id]", params: { id: state.data.topic_id } }} />;
+  // BOOK-EXERCISES-01: the end-of-chapter exercise (and BOOK-PAPERS-01 a Board paper) is solved in Practice; a
+  // favourite or a search hit goes there.
+  if (practiceOnly(state.data.kind)) return <Redirect href={{ pathname: "/exercise/[id]", params: { id: state.data.topic_id } }} />;
   return (
     <SubjectAccent subject={state.data.subject_name}>
       <Stack.Screen options={{ title: state.data.number ?? "Lesson", headerBackTitle: "Chapter" }} />

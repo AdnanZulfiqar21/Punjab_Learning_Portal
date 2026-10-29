@@ -1,6 +1,7 @@
 // BOOK-EXERCISES-01: a chapter's end-of-chapter exercise, solved, opened from Practice. "English | Roman Urdu" only (no
 // lecture), the same lesson renderer and language choice as a topic, and the self-check answers revealed as "Show
 // answer" / "Answer dekhein". A language switch returns to the matching block of the other variant (READER-PLACE-01).
+// BOOK-PAPERS-01: a Board paper at the end of the book (paper pattern, model paper) opens here too, under its own title.
 import { Redirect, router, Stack, useLocalSearchParams } from "expo-router";
 import { useMemo, useRef } from "react";
 import { ScrollView, View, type NativeScrollEvent, type NativeSyntheticEvent } from "react-native";
@@ -15,7 +16,7 @@ import { api, GRADE_LABEL, lessonAsset, previewAsset, type TopicReading } from "
 import { useAuth } from "@/lib/auth";
 import { premiumBook } from "@/lib/book-style";
 import { useDisplay } from "@/lib/display";
-import { exerciseTitle, revealLabel } from "@/lib/exercises";
+import { practiceOnly, practiceTitle, revealLabel } from "@/lib/exercises";
 import { missingLanguageNote, READING_LANGUAGES, type ReadingLanguage } from "@/lib/reading-language-core";
 import { mapPlace, placeSignature, type PlaceBlock } from "@/lib/variant-place";
 
@@ -32,10 +33,10 @@ export default function ExerciseScreen() {
   if (auth.state.status === "loading" || state.status === "loading") return <Loading label="Loading exercise" />;
   if (state.status === "error") return <ErrorState error={state.error} onRetry={retry} />;
   // A book topic is read in Learn.
-  if (state.data.kind !== "exercise") return <Redirect href={{ pathname: "/topic/[id]", params: { id: state.data.topic_id } }} />;
+  if (!practiceOnly(state.data.kind)) return <Redirect href={{ pathname: "/topic/[id]", params: { id: state.data.topic_id } }} />;
   return (
     <SubjectAccent subject={state.data.subject_name}>
-      <Stack.Screen options={{ title: exerciseTitle("Chapter", state.data.chapter_number), headerBackTitle: "Exercises" }} />
+      <Stack.Screen options={{ title: practiceTitle(state.data), headerBackTitle: "Exercises" }} />
       <Reader reading={state.data} token={token} language={language} onLanguage={choose} placeRef={placeRef} />
     </SubjectAccent>
   );
@@ -64,6 +65,7 @@ function Reader({
   const blocks = useMemo(() => (lesson?.body?.blocks ?? []) as PlaceBlock[], [lesson?.body?.blocks]);
   const signatures = useMemo(() => blocks.map(placeSignature), [blocks]);
   const readable = Boolean(lesson?.body) && !lesson?.locked && reading.availability !== "unavailable";
+  const paper = reading.kind === "paper";
 
   function switchLanguage(next: ReadingLanguage) {
     if (next === language) return;
@@ -115,14 +117,20 @@ function Reader({
           {reading.availability === "private_preview" ? <Chip label="Draft preview: not yet reviewed or published">Draft preview</Chip> : null}
         </View>
         <T variant="title" accessibilityRole="header">
-          {exerciseTitle("Chapter", reading.chapter_number)}
+          {practiceTitle(reading)}
         </T>
-        <T variant="small">{reading.chapter_title}</T>
+        <T variant="small">{paper ? "Board model paper" : reading.chapter_title}</T>
       </View>
       {reading.availability === "unavailable" || !lesson?.body ? (
-        <Notice title="This exercise isn’t solved here yet">The chapter&apos;s exercise is in your textbook; its worked answers have not been published yet.</Notice>
+        paper ? (
+          <Notice title="This paper isn’t solved here yet">The paper is at the end of your textbook; its worked answers have not been published yet.</Notice>
+        ) : (
+          <Notice title="This exercise isn’t solved here yet">The chapter&apos;s exercise is in your textbook; its worked answers have not been published yet.</Notice>
+        )
       ) : lesson.locked ? (
-        <Notice title="Included with a plan or the free 30-day trial">Start your free trial from the Account tab to read this exercise.</Notice>
+        <Notice title="Included with a plan or the free 30-day trial">
+          Start your free trial from the Account tab to read this {paper ? "paper" : "exercise"}.
+        </Notice>
       ) : (
         <View onLayout={(e) => (bodyTop.current = e.nativeEvent.layout.y)}>
           <LessonBlocks

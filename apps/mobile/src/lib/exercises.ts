@@ -1,15 +1,26 @@
 // Book exercises (BOOK-EXERCISES-01): each chapter's end-of-chapter exercise is solved in Practice, in English or
 // Roman Urdu, and never listed in Learn. The API marks it (`kind: "exercise"`, from the catalogue key `…/u-exercise`).
+// BOOK-PAPERS-01: so are the Board papers at the end of a book (`kind: "paper"`, `…/u-paper-pattern`, `…/u-model-paper`).
 // Pure rules for host tests; the same words as the web (apps/web/src/lib/exercises.ts).
 
-/** A chapter's topics as Learn lists them: without the end-of-chapter exercise. */
+/** Whether a topic is opened from Practice only (a chapter's exercise or a Board paper); Learn never leads into it. */
+export function practiceOnly(kind: string | undefined): boolean {
+  return kind !== undefined && kind !== "topic";
+}
+
+/** A chapter's topics as Learn lists them: without the end-of-chapter exercise or the Board papers. */
 export function learnTopics<T extends { kind?: string }>(topics: readonly T[]): T[] {
-  return topics.filter((t) => t.kind !== "exercise");
+  return topics.filter((t) => !practiceOnly(t.kind));
 }
 
 /** "Chapter 2 · Exercise" */
 export function exerciseTitle(chapterLabel: string, chapterNumber: number): string {
   return `${chapterLabel} ${chapterNumber} · Exercise`;
+}
+
+/** A Practice screen's title: a Board paper's own ("Model Paper", "Paper Pattern"), else "Chapter 2 · Exercise". */
+export function practiceTitle(reading: { kind?: string; title: string; chapter_number: number }): string {
+  return reading.kind === "paper" ? reading.title : exerciseTitle("Chapter", reading.chapter_number);
 }
 
 /** The self-check button's words on an exercise, in the lesson's own language. */

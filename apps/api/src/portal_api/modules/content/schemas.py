@@ -288,7 +288,8 @@ class TopicReadingOut(BaseModel):
     # CHAPTER-OPENING-01: the chapter's first topic, where the reader opens with the chapter itself.
     chapter_start: bool = False
     # BOOK-EXERCISES-01: the chapter's end-of-chapter exercise is read in Practice; Learn never leads into it.
-    kind: Literal["topic", "exercise"] = "topic"
+    # BOOK-PAPERS-01: so is a Board paper at the end of the book.
+    kind: Literal["topic", "exercise", "paper"] = "topic"
 
 
 class BookExerciseOut(BaseModel):
@@ -303,12 +304,23 @@ class BookExerciseOut(BaseModel):
     available_languages: list[Literal["en", "ur", "roman_ur"]]
 
 
+class BookPaperOut(BaseModel):
+    """BOOK-PAPERS-01: one of the Board papers printed at the end of the book (paper pattern, model paper)."""
+
+    topic_id: uuid.UUID
+    title: str
+    availability: Literal["published", "private_preview", "unavailable"]
+    available_languages: list[Literal["en", "ur", "roman_ur"]]
+
+
 class BookExercisesOut(BaseModel):
     grade_number: int
     subject_code: str
     subject_name: str
     chapter_label: str
     exercises: list[BookExerciseOut]
+    # BOOK-PAPERS-01: in book order (paper pattern, then model paper); empty when the book prints none.
+    papers: list[BookPaperOut]
 
 
 class VariantOut(BaseModel):

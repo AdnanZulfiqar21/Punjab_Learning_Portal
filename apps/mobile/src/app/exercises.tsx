@@ -1,5 +1,6 @@
 // BOOK-EXERCISES-01: each chapter's end-of-chapter exercise from the textbook, solved in English and Roman Urdu. Learn
-// no longer lists it; Practice opens it here.
+// no longer lists it; Practice opens it here. BOOK-PAPERS-01: the Board papers at the end of the book follow the units.
+import type { BookPaper } from "@portal/contracts";
 import { router, Stack } from "expo-router";
 import { useState } from "react";
 import { Pressable, ScrollView, View } from "react-native";
@@ -94,6 +95,51 @@ function List({ token, initialGrade, initialSubject }: { token: string | null; i
           })}
         </View>
       )}
+      {book && book.papers.length > 0 ? <Papers papers={book.papers} /> : null}
+    </View>
+  );
+}
+
+/** BOOK-PAPERS-01: the Board's paper pattern and model paper printed at the end of the book, solved. */
+function Papers({ papers }: { papers: BookPaper[] }) {
+  const c = useTheme();
+  return (
+    <View style={{ gap: Space.xs }}>
+      <T variant="heading" accessibilityRole="header">
+        Board model paper
+      </T>
+      {papers.map((p) => {
+        const status = exerciseStatus(p.availability, p.available_languages);
+        return (
+          <Pressable
+            key={p.topic_id}
+            accessibilityRole="button"
+            accessibilityLabel={`${p.title}. ${status.label}`}
+            aria-disabled={!status.open}
+            disabled={!status.open}
+            onPress={() => router.push({ pathname: "/exercise/[id]", params: { id: p.topic_id } })}
+            style={({ pressed }) => ({
+              flexDirection: "row",
+              alignItems: "center",
+              gap: Space.sm,
+              padding: Space.md,
+              minHeight: 52,
+              borderWidth: 1,
+              borderRadius: Radius.sm,
+              borderColor: c.border,
+              backgroundColor: c.surface,
+              opacity: !status.open ? 0.6 : pressed ? 0.7 : 1,
+            })}>
+            <T style={{ flex: 1, fontWeight: "500" }}>{p.title}</T>
+            <T variant="small">{status.label}</T>
+            {status.open ? (
+              <T variant="muted" accessibilityElementsHidden>
+                ›
+              </T>
+            ) : null}
+          </Pressable>
+        );
+      })}
     </View>
   );
 }

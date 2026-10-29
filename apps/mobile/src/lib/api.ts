@@ -96,8 +96,9 @@ export type TopicReading = {
   next_topic_id: string | null;
   /** CHAPTER-OPENING-01: the chapter's first topic. */
   chapter_start?: boolean;
-  /** BOOK-EXERCISES-01: "exercise" is the chapter's end-of-chapter exercise, read in Practice. */
-  kind?: "topic" | "exercise";
+  /** BOOK-EXERCISES-01: "exercise" is the chapter's end-of-chapter exercise, read in Practice; BOOK-PAPERS-01: so is
+   * a "paper", one of the Board papers at the end of the book. */
+  kind?: "topic" | "exercise" | "paper";
 };
 
 function origin(): string {

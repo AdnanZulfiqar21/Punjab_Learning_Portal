@@ -678,7 +678,7 @@ def topic_lesson(
 @public.get(
     "/grades/{grade}/subjects/{subject}/exercises",
     response_model=BookExercisesOut,
-    summary="Each chapter's end-of-chapter exercise in one class's book, for Practice (BOOK-EXERCISES-01)",
+    summary="Each chapter's end-of-chapter exercise and the Board papers in one class's book, for Practice",
 )
 def book_exercises(
     db: DB,
