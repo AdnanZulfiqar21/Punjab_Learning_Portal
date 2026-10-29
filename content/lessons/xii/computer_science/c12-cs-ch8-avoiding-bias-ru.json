@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH8-AVOIDING-BIAS-RU",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch8",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch8/u-avoiding-bias-and-ensuring-inclusivity-in-ai-design",
+      "title": "Avoiding Bias and Ensuring Inclusivity in AI Design (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-CS-CH8-AVOIDING-BIAS",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 114,
+          "pdf_to": 114,
+          "note": "Roman Urdu explanation of Avoiding Bias and Ensuring Inclusivity in AI Design (PDF 114, printed 110)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "AI systems aksar bare datasets se seekhte hain jin mein chhupa hua bias ho sakta hai. Maslan agar bharti ka system zyada tar aise purane records par train ho jin mein mard auraton se zyada chune gaye, to AI mard umeedwaron ko na-insafi se tarjeeh de sakti hai. Isi tarah agar chehra pehchanne wala system zyada tar ek umar, ek rang (skin tone) ya ek ilaqe ki tasveeron par train ho to doosre groups ke logon ke liye kharab kaam kar sakta hai. Developers ko yeh datasets ghaur se dekh kar theek karne chahiye taake kisi fard ya group se na-insafi na ho. AI design mein inclusivity (sab ko shamil karna) ka matlab mukhtalif nazariye shamil karna aur yaqeeni banana hai ke technology jins, nasal ya pas-e-manzar se qata-e-nazar sab ki barabar khidmat kare."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "AI purane data se seekhti hai. Agar purane data mein na-insafi ho to AI bhi wahi seekh leti hai. Yeh program bharti (hiring) ke purane records mein har group ki selection rate ginta hai, taake bias nazar aaye."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "past_records = [(\"mard\", True), (\"mard\", True), (\"mard\", False), (\"mard\", True),\n                (\"aurat\", False), (\"aurat\", True), (\"aurat\", False), (\"aurat\", False)]\n\nfor group in [\"mard\", \"aurat\"]:\n    total = 0\n    selected = 0\n    for person, chosen in past_records:\n        if person == group:\n            total += 1\n            if chosen:\n                selected += 1\n    rate = selected / total * 100\n    print(f\"{group}: {total} mein se {selected} chune gaye ({rate:.0f}%)\")\n\nprint(\"Is data se seekhne wala AI bhi isi farq ko dohraye ga.\")",
+            "runnable": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"past_records = [...]\": har tuple mein (group, chuna gaya ya nahi) hai; True ka matlab chuna gaya.\n\"for group in [\\\"mard\\\", \\\"aurat\\\"]\": dono groups ke liye bari bari ginti.\n\"total\" us group ke kul log ginta hai aur \"selected\" un mein se chune gaye.\n\"rate = selected / total * 100\": feesad (percent); \":.0f\" decimal ke baghair dikhata hai.\nOutput: \"mard: 4 mein se 3 chune gaye (75%)\", \"aurat: 4 mein se 1 chune gaye (25%)\" aur \"Is data se seekhne wala AI bhi isi farq ko dohraye ga.\"\nKhud try karein: aurat wale do records ko True kar dein (data balanced karein) aur dekhein ke farq kam ho jata hai. Developers yahi karte hain: dataset ko jaanch kar theek (adjust) karna."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Chehra pehchanne wala system zyada tar aik hi umar aur rang ki tasveeron par train hua. Kya masla hoga aur hal kya hai?",
+            "explanation": "Doosre groups ke logon ke liye woh kharab kaam karega (bias). Hal: dataset ko jaanch kar har umar, rang aur ilaqe ki tasveerein shamil karna, yani inclusivity."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Mukhtasar khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Bias: data mein chhupi na-insafi jo AI seekh leti hai (hiring, face recognition).",
+              "Inclusivity: technology gender, nasal ya pas-e-manzar se qata-e-nazar sab ki barabar khidmat kare."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

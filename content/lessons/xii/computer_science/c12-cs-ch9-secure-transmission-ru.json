@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH9-SECURE-TRANSMISSION-RU",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch9",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch9/u-secure-methods-for-transmitting-and-storing-data",
+      "title": "Secure Methods for Transmitting and Storing Data (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-CS-CH9-SECURE-TRANSMISSION",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 127,
+          "pdf_to": 128,
+          "note": "Roman Urdu explanation of Secure Methods for Transmitting and Storing Data (PDF 127-128, printed 123-124)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Data ko sirf computer par store karte waqt hi nahi balkay internet par bhejte waqt bhi bachana zaroori hai. Encrypted connections (jaise HTTPS) jaise mehfooz tareeqe bhejte waqt maloomat mehfooz rakhte hain. Cloud storage services bhi save ki gayi files tak unauthorized access rokne ke liye encryption use karti hain. Baqaida backups (data ki izafi copy) system kharab hone ya hamle se data zaya hone se bachate hain. Mehfooz storage aur transfer ke tareeqe apnane se zaroori data mehfooz aur bharosemand rehta hai."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Store karte waqt bhi data mehfooz hona chahiye. Websites aap ka asal password nahi rakhtein; woh us ka hash (aik taraf ka code) rakhti hain. Login par likhe hue password ka hash bana kar milaya jata hai. Yeh program yahi idea dikhata hai."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "import hashlib\n\nsaved_password = \"Pakistan@123\"\nlogin_try = \"pakistan@123\"\n\nstored = hashlib.sha256(saved_password.encode()).hexdigest()\nprint(\"Database mein rakha hash:\", stored[:16], \"...\")\n\nattempt = hashlib.sha256(login_try.encode()).hexdigest()\nif attempt == stored:\n    print(\"Password theek: login\")\nelse:\n    print(\"Password ghalat: login nahi\")",
+            "runnable": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"import hashlib\": hash banane wali library.\n\"saved_password\" sign-up ke waqt ka password hai aur \"login_try\" jo user ne login par likha.\n\"hashlib.sha256(saved_password.encode()).hexdigest()\": encode() matn ko bytes banata hai, sha256 us ka hash banata hai, hexdigest() use parhne layak code mein deta hai. Database mein sirf yahi hash rakha jata hai.\n\"stored[:16]\": hash ke pehle 16 characters dikhata hai.\nLogin par likhe password ka hash bana kar stored hash se milaya jata hai; asal password kahin save nahi hota.\nOutput: \"Database mein rakha hash: 2080964fffeaa63c ...\" aur \"Password ghalat: login nahi\" (kyunke \"pakistan\" chhote p se likha; aik harf ka farq bhi poora hash badal deta hai).\nKhud try karein: login_try = \"Pakistan@123\" likhein to \"Password theek: login\" aayega."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Data bhejte waqt aur store karte waqt hifazat ka aik aik tareeqa batayein. Backups kyun zaroori hain?",
+            "explanation": "Bhejte waqt: encrypted connection (HTTPS). Store karte waqt: cloud storage ki encryption. Backups system failure ya hamle ke baad data ke nuqsan se bachate hain."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Mukhtasar khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Transmission: HTTPS jaise encrypted connections; storage: encryption.",
+              "Regular backups data ko nuqsan se bachate hain."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

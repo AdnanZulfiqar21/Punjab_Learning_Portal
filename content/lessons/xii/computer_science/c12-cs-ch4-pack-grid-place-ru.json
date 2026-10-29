@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH4-PACK-GRID-PLACE-RU",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch4",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch4/u-organizing-elements-using-pack-grid-and-place",
+      "title": "Organizing Elements using pack(), grid(), and place() (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-CS-CH4-PACK-GRID-PLACE",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 52,
+          "pdf_to": 54,
+          "note": "Roman Urdu explanation of Organizing Elements using pack(), grid(), and place() (PDF 52-54, printed 48-50), paragraph for paragraph with the English; Code Explanation boxes and runnable examples added 2026-10-29."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "pack() method widgets ko saade tareeqe se aik ke neeche aik (vertical) ya aik ke saath aik (horizontal) rakhta hai; yeh aasan hai aur chhoti applications ke liye theek hai. grid() method widgets ko table ki tarah rows aur columns mein rakhta hai; yeh forms aur munazzam layouts ke liye mufeed hai. place() method widgets ko window par bilkul theek jagah (x aur y coordinates) par rakhta hai (Figure 4.2); is mein control zyada hai lekin ehtiyat se adjust karna parta hai."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch4-fig-layouts",
+            "alt": "Teen windows saath saath. Pack(): Button 1, 2 aur 3 beech mein aik ke neeche aik. Grid(): Button 1 aur Button 2 aik row mein, neeche chaura Button 3 dono columns par phaila hua. Place(): Button 1 oopar baayein, Button 2 neeche daayein, Button 3 neeche baayein.",
+            "caption": "Figure 4.2: Tkinter ke layout managers: pack(), grid(), place() (kitab ki Figure 4.2 ke mutabiq asal khaaka)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Misal pack():"
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "import tkinter as tk\n\n# Create main window\nwindow = tk.Tk()\nwindow.title(\"pack()\")\nwindow.geometry(\"300x220\")\n\n# Create buttons\nbutton1 = tk.Button(window, text=\"Button 1\", width=12)\nbutton2 = tk.Button(window, text=\"Button 2\", width=12)\nbutton3 = tk.Button(window, text=\"Button 3\", width=12)\n\n# Arrange buttons using pack()\nbutton1.pack(pady=10)\nbutton2.pack(pady=10)\nbutton3.pack(pady=10)\n\n# Run the application\nwindow.mainloop()"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"window.title(\"pack()\")\" aur \"window.geometry(\"300x220\")\": window ka naam pack() aur size 300 x 220 pixel.\n\"button1 = tk.Button(window, text=\"Button 1\", width=12)\": teen buttons bante hain; width=12 har button ko taqreeban 12 huroof (characters) jitna chaura rakhta hai.\n\"button1.pack(pady=10)\": pack() har button ko pichhle widget ke neeche rakhta hai; pady=10 oopar neeche 10 pixel jagah chhorta hai.\n\"window.mainloop()\": window khuli rakhta hai.\nOutput: \"pack()\" naam ki window jis mein Button 1, Button 2 aur Button 3 beech mein aik ke neeche aik hain (Figure 4.2 ka Pack() hissa). Koi text print nahi hota. Tkinter browser ke Run mein nahi chalta; yeh program apne computer par Python (IDLE ya VS Code) mein chala kar dekhein."
+          },
+          {
+            "type": "paragraph",
+            "text": "Misal grid():"
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "import tkinter as tk\n\n# Create main window\nwindow = tk.Tk()\nwindow.title(\"grid()\")\nwindow.geometry(\"300x220\")\n\n# Create buttons\nbutton1 = tk.Button(window, text=\"Button 1\", width=10)\nbutton2 = tk.Button(window, text=\"Button 2\", width=10)\nbutton3 = tk.Button(window, text=\"Button 3\", width=24)\n\n# Arrange buttons using grid()\nbutton1.grid(row=0, column=0, padx=10, pady=20)\nbutton2.grid(row=0, column=1, padx=10, pady=20)\n\n# Button 3 spans two columns\nbutton3.grid(row=1, column=0, columnspan=2, padx=10, pady=10)\n\n# Keep content centred\nwindow.grid_columnconfigure(0, weight=1)\nwindow.grid_columnconfigure(1, weight=1)\n\n# Run the application\nwindow.mainloop()"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"button3 = tk.Button(window, text=\"Button 3\", width=24)\": teesra button baqi dono (width=10) se dugne se bhi zyada chaura hai.\n\"button1.grid(row=0, column=0, padx=10, pady=20)\": Button 1 pehli row aur pehle column mein (Python mein ginti 0 se shuru hoti hai); padx daayein baayein aur pady oopar neeche jagah deta hai.\n\"button2.grid(row=0, column=1, ...)\": Button 2 usi row ke doosre column mein, yani Button 1 ke saath.\n\"button3.grid(row=1, column=0, columnspan=2, ...)\": Button 3 doosri row mein; columnspan=2 ki wajah se woh dono columns par phaila hota hai.\n\"window.grid_columnconfigure(0, weight=1)\" aur \"(1, weight=1)\": dono columns ko barabar hissa (weight) deta hai, is liye buttons window ke beech mein rehte hain.\nOutput: \"grid()\" window: oopar wali row mein Button 1 aur Button 2 saath saath, neeche chaura Button 3 (Figure 4.2 ka Grid() hissa). Tkinter browser ke Run mein nahi chalta; yeh program apne computer par Python (IDLE ya VS Code) mein chala kar dekhein."
+          },
+          {
+            "type": "paragraph",
+            "text": "Misal place():"
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "import tkinter as tk\n\n# Create main window\nwindow = tk.Tk()\nwindow.title(\"place()\")\nwindow.geometry(\"300x220\")\n\n# Create buttons\nbutton1 = tk.Button(window, text=\"Button 1\", width=10)\nbutton2 = tk.Button(window, text=\"Button 2\", width=10)\nbutton3 = tk.Button(window, text=\"Button 3\", width=10)\n\n# Arrange buttons using place()\nbutton1.place(x=30, y=40)\nbutton2.place(x=170, y=85)\nbutton3.place(x=30, y=140)\n\n# Run the application\nwindow.mainloop()"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"button1.place(x=30, y=40)\": place() button ko bilkul theek jagah par rakhta hai: x = window ke baayein kinare se 30 pixel, y = oopar ke kinare se 40 pixel.\n\"button2.place(x=170, y=85)\": Button 2 daayein taraf aur thora neeche.\n\"button3.place(x=30, y=140)\": Button 3 baayein taraf, sab se neeche.\nOutput: \"place()\" window jis mein Button 1 oopar baayein, Button 2 beech mein daayein aur Button 3 neeche baayein (Figure 4.2 ka Place() hissa). Window chhoti ya bari karne par yeh buttons apni jagah se nahi hilte, is liye place() mein ehtiyat chahiye. Tkinter browser ke Run mein nahi chalta; yeh program apne computer par Python (IDLE ya VS Code) mein chala kar dekhein.\nKhud try karein: apne computer par button2.place(x=170, y=85) ko place(x=100, y=100) kar ke dekhein ke button kahan chala jata hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Asaan alfaaz mein",
+            "text": "Teeno programs ka output (window) Figure 4.2 jaisa hai: pack() mein teeno buttons aik ke neeche aik; grid() mein Button 1 aur Button 2 aik row mein aur chaura Button 3 neeche dono columns par (columnspan=2); place() mein har button apne x, y par. Aik hi container (window ya frame) ke widgets ke liye pack() aur grid() ko na milayein, warna program atak sakta hai."
+          },
+          {
+            "type": "table",
+            "caption": "Teen layout methods ka muqabla",
+            "header": [
+              "pack()",
+              "grid()",
+              "place()"
+            ],
+            "rows": [
+              [
+                "Widgets aik ke neeche aik ya saath saath",
+                "Widgets rows aur columns mein (table ki tarah)",
+                "Widgets bilkul x, y jagah par"
+              ],
+              [
+                "Chhoti applications ke liye aasan",
+                "Forms ke liye behtar",
+                "Zyada control, magar ehtiyat se adjust"
+              ]
+            ]
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Aise form ke liye kaun sa layout method use karenge jis mein labels aik column aur entry fields agle column mein hon? Kyun?",
+            "explanation": "grid(), kyunke yeh widgets rows aur columns mein rakhta hai, is liye har label aur us ki entry aik hi row mein seedh mein aate hain."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Mukhtasar khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "pack(): aik ke baad aik; grid(): rows aur columns; place(): bilkul x, y.",
+              "Aik container mein pack() aur grid() na milayein."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH2-SATISFIABLE-EXAMPLES-RU",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch2",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch2/u-examples-of-satisfiable-and-unsatisfiable-expressions",
+      "title": "Examples of Satisfiable and Unsatisfiable Expressions (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-CS-CH2-SATISFIABLE-EXAMPLES",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 30,
+          "pdf_to": 30,
+          "note": "Roman Urdu: Examples of Satisfiable and Unsatisfiable Expressions with the Class Activity, a self-check and a small program of ours (PDF 30, printed 26)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Satisfiable expression ki misal “P OR Q” hai: yeh tab sach hai jab P ya Q mein se koi sach ho. Doosri misal “P AND Q” hai, jo tab sach hai jab P aur Q dono sach hon. Unsatisfiable expression ki misal “P AND NOT P” hai: yeh kabhi sach nahi hota, kyunke P ek hi waqt mein sach aur jhoot dono nahi ho sakta. Satisfiable expressions ka kam az kam ek nateeja true hota hai, aur unsatisfiable ka koi bhi nahi. In misalon se logic aur problem solving samajh aati hai."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Class Activity",
+            "text": "Teacher kuch expressions de aur students har ek ko satisfiable ya unsatisfiable mein classify karein (alag alag karein)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Kya (P OR Q) AND (NOT P) AND (NOT Q) satisfiable hai? Wajah batayein.",
+            "explanation": "Nahi. NOT P aur NOT Q dono sach hone ke liye P aur Q dono jhoot hone chahiyein, lekin tab P OR Q jhoot ho jata hai. Is liye har row jhoot hai aur expression unsatisfiable hai."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh program kisi bhi expression ko P aur Q ki chaaron rows par aazmata hai aur batata hai ke woh satisfiable hai ya nahi. expression wali line mein kitab ki misalein (\"P or Q\", \"P and Q\", \"P and not P\") likh kar dekhein."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "expression = \"P and not P\"   # yahan apna expression likhein (P, Q, and, or, not)\n\nfound = []\nfor P in [True, False]:\n    for Q in [True, False]:\n        if eval(expression, {}, {\"P\": P, \"Q\": Q}):\n            found.append((P, Q))\n\nif found:\n    print(\"Satisfiable. True for (P, Q):\", found)\nelse:\n    print(\"Unsatisfiable. No row makes it true.\")",
+            "runnable": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"expression = \\\"P and not P\\\"\": jis expression ko check karna hai, woh text (string) ki shakal mein. Python ke lafz and, or, not istemal karein.\n\"found = []\": khali list jis mein woh rows jama hongi jin par expression sach ho.\nDo loops P aur Q ki chaaron combinations banate hain.\neval(expression, {}, {\"P\": P, \"Q\": Q}): eval text wale expression ko P aur Q ki maujooda values ke saath chala kar True ya False deta hai. True ho to row found mein daal di jati hai.\nAakhir mein: agar found khali nahi to \"Satisfiable\" aur woh rows; khali ho to \"Unsatisfiable\".\nOutput: \"Unsatisfiable. No row makes it true.\", kyun ke P ek hi waqt mein sach aur jhoot nahi ho sakta.\nKhud try karein: expression = \"P or Q\" likhein: \"Satisfiable. True for (P, Q): [(True, True), (True, False), (False, True)]\" aayega. \"P and Q\" par sirf [(True, True)]."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Mukhtasar khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Satisfiable misalein: P OR Q, P AND Q.",
+              "Unsatisfiable misal: P AND NOT P (kabhi sach nahi)."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

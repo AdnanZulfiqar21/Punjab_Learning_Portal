@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH4-UNDERSTANDING-DATABASES-RU",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch4",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch4/u-understanding-databases",
+      "title": "Understanding Databases (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-CS-CH4-UNDERSTANDING-DATABASES",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 57,
+          "pdf_to": 57,
+          "note": "Roman Urdu explanation of Understanding Databases (PDF 57, printed 53), paragraph for paragraph with the English; Code Explanation boxes and runnable examples added 2026-10-29."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Databases woh zaroori data rakhte hain jo application chalane ke liye chahiye, aur applications ko bare data sets achhi tarah sambhalne dete hain. Database ke aham concepts yeh hain:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Relational Database: aisa database jo data tables (rows aur columns) mein rakhta hai aur tables ko relationships se jorta hai.",
+              "Table: mutalliq data ka majmua jo rows (records) aur columns (fields) mein munazzam hota hai (Figure 4.3).",
+              "Column: entity ki koi khusoosiyat (maslan name, age).",
+              "Primary Key: table ke har record ki alag (unique) pehchan.",
+              "Foreign Key: aisi field jo doosre table ki primary key ka hawala de kar aik table ko doosre se jorti hai."
+            ]
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch4-fig-tables-keys",
+            "alt": "Do tables. Table: Student ke columns RollNo, Name, Age, DeptID; rows 101 Kiran 20 1; 102 Ibrahim 21 2; 103 M Kamal 20 1; 104 Zainab 22 3. Table: Department ke columns DeptID, DeptName; rows 1 Computer Science; 2 Electronics; 3 Mechanical. Nishanat: Column (Attribute), Field (Attribute Value), Record (Tuple), RollNo aur Department DeptID ke neeche Primary Key, aur Student DeptID se Department ki primary key tak lakeer par Foreign Key.",
+            "caption": "Figure 4.3: Tables, columns, records, fields, primary key aur foreign key ka rishta (kitab ki Figure 4.3 ke mutabiq asal khaaka)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Primary key aur foreign key mein kya farq hai?",
+            "explanation": "Primary key apne table ke har record ki munfarid pehchan hai (jaise RollNo); foreign key aik table ki field hai jo tables jorne ke liye doosre table ki primary key rakhti hai (jaise Student mein DeptID)."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Figure 4.3 ke do tables Python mein: Student table aik list hai jis ki har row aik dictionary (record) hai, aur Department table aik dictionary. roll_no badal kar Run karein: primary key se record milta hai aur foreign key (DeptID) se doosre table ka department."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "roll_no = 102   # Student table mein dhoondne wala RollNo (primary key)\n\nstudents = [\n    {\"RollNo\": 101, \"Name\": \"Kiran\", \"Age\": 20, \"DeptID\": 1},\n    {\"RollNo\": 102, \"Name\": \"Ibrahim\", \"Age\": 21, \"DeptID\": 2},\n    {\"RollNo\": 103, \"Name\": \"M Kamal\", \"Age\": 20, \"DeptID\": 1},\n    {\"RollNo\": 104, \"Name\": \"Zainab\", \"Age\": 22, \"DeptID\": 3},\n]\ndepartments = {1: \"Computer Science\", 2: \"Electronics\", 3: \"Mechanical\"}\n\nfound = False\nfor record in students:\n    if record[\"RollNo\"] == roll_no:\n        print(\"Record:\", record)\n        dept = departments[record[\"DeptID\"]]   # foreign key se Department table tak\n        print(record[\"Name\"], \"ka department:\", dept)\n        found = True\nif not found:\n    print(\"Is RollNo ka koi record nahi\")",
+            "runnable": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"roll_no = 102\": jis student ko dhoondna hai us ka RollNo; yeh primary key hai, is liye har student ka alag hai.\n\"students = [...]\": Student table: har row aik record hai, aur \"RollNo\", \"Name\", \"Age\", \"DeptID\" columns (fields) hain.\n\"departments = {1: \"Computer Science\", ...}\": Department table: DeptID (is table ki primary key) se department ka naam.\n\"for record in students:\" aur \"if record[\"RollNo\"] == roll_no:\": har row dekh kar woh record dhoondta hai jis ka RollNo barabar ho.\n\"departments[record[\"DeptID\"]]\": student ki DeptID (foreign key) se Department table mein naam nikalta hai.\n\"if not found:\": koi record na mile to yeh paigham.\nOutput: \"Record: {'RollNo': 102, 'Name': 'Ibrahim', 'Age': 21, 'DeptID': 2}\" aur \"Ibrahim ka department: Electronics\".\nKhud try karein: roll_no = 104 par \"Zainab ka department: Mechanical\" aayega; roll_no = 110 par \"Is RollNo ka koi record nahi\"."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Mukhtasar khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Relational database: tables (rows = records, columns = fields).",
+              "Primary key har record ki pehchan; foreign key doosre table ki primary key se jorti hai."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

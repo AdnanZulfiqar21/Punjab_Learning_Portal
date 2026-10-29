@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH3-SINGLE-INHERITANCE",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch3",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch3/u-single-inheritance",
+      "title": "Single Inheritance",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 40,
+          "pdf_to": 41,
+          "note": "Run-in heading Single Inheritance under Inheritance, with Figure 3.3, the Animal/Dog example, the Tidbit and the notes on parent class, child class and overriding (PDF 40-41, printed 36-37)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Single inheritance occurs when a child class (subclass) inherits attributes and methods from exactly one parent class (superclass). This is the most fundamental form of inheritance in Python, promoting code reusability by allowing the child class to extend or modify the behavior of the parent (as shown in Figure 3.3)."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch3-fig-3-3-single-inheritance",
+            "alt": "Single inheritance: a Child Class box below a Parent Class box, joined by a line with a hollow arrowhead at the Parent Class.",
+            "caption": "Figure 3.3: Single Inheritance (original drawing after the textbook's Figure 3.3)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Example:"
+          },
+          {
+            "type": "paragraph",
+            "text": "In this example, the Dog class inherits the basic functionality of an Animal but adds its own specific behavior."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "# Parent class (Superclass)\nclass Animal:\n    def __init__(self, name):\n        self.name = name\n\n    def eat(self):\n        print(f\"{self.name} is eating.\")\n\n# Child class (Subclass) inheriting from Animal\nclass Dog(Animal):\n    def bark(self):\n        print(f\"{self.name} says Woof!\")\n\n# Create an object of the child class\nmy_dog = Dog(\"Buddy\")\n\n# Access method from Parent class\nmy_dog.eat()  # Output: Buddy is eating.\n\n# Access method from Child class\nmy_dog.bark() # Output: Buddy says Woof!"
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Tidbit",
+            "text": "self is the reference to the current object, passed automatically to instance methods."
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Parent Class (Base Class): The class whose properties are inherited. In the example above, Animal is the parent class.",
+              "Child Class (Derived Class): The class that inherits from the parent. It is defined by passing the parent class name in parentheses: class Child(Parent):.",
+              "Method Overriding: A child class can provide a specific implementation of a method that is already provided by its parent. You can use the super() function to call the parent's version of that method."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

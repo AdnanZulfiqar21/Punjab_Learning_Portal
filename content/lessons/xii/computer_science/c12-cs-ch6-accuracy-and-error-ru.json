@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH6-ACCURACY-AND-ERROR-RU",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch6",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch6/u-accuracy-and-error",
+      "title": "Accuracy and Error (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-CS-CH6-ACCURACY-AND-ERROR",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 85,
+          "pdf_to": 85,
+          "note": "Roman Urdu explanation of 'Accuracy and Error' under topic 6.7 (PDF 85, printed 81)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Accuracy batati hai ke kul andazon mein se kitne sahi hain. Ise aam taur par percentage (feesad) mein likhte hain. Zyada accuracy ka matlab behtar performance. Error ghalat andaze dikhata hai; error rate accuracy ka ulat hai (error rate = 1 − accuracy). Kabhi kabhi akeli accuracy dhoka de sakti hai, is liye balanced (mutawazin, har qism ke barabar cases wala) data behtar accuracy results deta hai. Error analysis (ghaltiyon ka jaiza) ghaltiyan dhoondne mein madad deta hai. Jaanch ke liye dono aham hain. Accuracy ka formula:"
+          },
+          {
+            "type": "equation",
+            "latex": "\\text{Accuracy} = \\frac{\\text{TP} + \\text{TN}}{\\text{TP} + \\text{TN} + \\text{FP} + \\text{FN}}",
+            "text_alt": "Accuracy = (TP + TN) / (TP + TN + FP + FN)"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "TP (True Positives): positive cases jinhein model ne sahi taur par positive kaha.",
+              "TN (True Negatives): negative cases jinhein model ne sahi taur par negative kaha.",
+              "FP (False Positives): negative cases jinhein model ne ghalti se positive kaha (jhoota alarm).",
+              "FN (False Negatives): positive cases jinhein model ne ghalti se negative kaha (chhoote hue cases)."
+            ]
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh program kitab ki 6.7 wali misal ke counts (TP, TN, FP, FN) se accuracy aur error rate nikalta hai. Counts badal kar Run karein."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "TP = 40   # True Positives\nTN = 50   # True Negatives\nFP = 10   # False Positives\nFN = 5    # False Negatives\n\ntotal = TP + TN + FP + FN\naccuracy = (TP + TN) / total\nerror_rate = (FP + FN) / total\nprint(\"Total predictions:\", total)\nprint(f\"Accuracy: {accuracy:.4f} ({accuracy * 100:.1f}%)\")\nprint(f\"Error rate: {error_rate:.4f} ({error_rate * 100:.1f}%)\")",
+            "runnable": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"TP = 40\" se \"FN = 5\" tak: chaar counts (kitab ki misal wale).\n\"total = TP + TN + FP + FN\": kul predictions = 105.\n\"accuracy = (TP + TN) / total\": sahi predictions (40 + 50 = 90) ÷ 105.\n\"error_rate = (FP + FN) / total\": ghalat predictions (10 + 5 = 15) ÷ 105; yeh accuracy ka ulat hai (dono ka jama 1).\n\":.4f\" 4 decimal tak; \"accuracy * 100\" ko \":.1f\" se feesad (percent) mein dikhaya.\nOutput: \"Total predictions: 105\", \"Accuracy: 0.8571 (85.7%)\" aur \"Error rate: 0.1429 (14.3%)\".\nKhud try karein: TN = 950 aur FP = 30, TP = 18, FN = 2 rakhein (bimari wala sawal): accuracy bohat bari aayegi halanke zyada tar positive jhoote hain; isi liye akeli accuracy dhoka de sakti hai."
+          }
+        ]
+      }
+    }
+  ]
+}

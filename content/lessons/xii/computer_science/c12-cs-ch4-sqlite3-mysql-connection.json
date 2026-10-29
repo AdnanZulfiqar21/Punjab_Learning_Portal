@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH4-SQLITE3-MYSQL-CONNECTION",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch4",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch4/u-using-sqlite3-or-mysql-to-establish-a-database-connection",
+      "title": "Using sqlite3 or MySQL to Establish a Database Connection",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 58,
+          "pdf_to": 59,
+          "note": "Unnumbered topic Using sqlite3 or MySQL to Establish a Database Connection as printed (PDF 58-59, printed 54-55); its own lesson since 2026-10-29 (one lesson per book heading), moved from the topic 4.2 lesson."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "The sqlite3 library is built into Python and is used for small databases. It stores data in a single file on the system. MySQL is used for larger and more complex database systems. A connection is created by providing database details such as name and credentials. A successful connection allows Python to access the database."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "# Import sqlite3 module\nimport sqlite3\n# Connect to the database file named \"school.db\"\n# If the file does not exist, SQLite will create it automatically\nconnection = sqlite3.connect(\"school.db\")\n# Create a cursor object\n# Cursor is used to execute SQL queries\ncursor = connection.cursor()\n# Create \"students\" table if it does not exist\ncursor.execute(\"\"\" CREATE TABLE IF NOT EXISTS students\n ( id INTEGER PRIMARY KEY,  name TEXT, age INTEGER, grade TEXT ) \"\"\")\n# (Optional) Insert sample data\ncursor.execute (\"INSERT INTO students (name, age, grade) VALUES ('Ali', 14, '8th')\")\ncursor.execute (\"INSERT INTO students (name, age, grade) VALUES ('Sara', 15, '9th')\")\n# Save changes\nconnection.commit()\n# This query selects all columns (*) from the table named \"students\"\ncursor.execute(\"SELECT * FROM students\")\n# Fetch all records returned by the query\n# fetchall() returns a list of rows/records\nrecords = cursor.fetchall()\n# Display all records\n# Loop through each row in the records list\nfor row in records:\n    # Print each row of the table\n    print(row)\n# Close the database connection\nconnection.close()"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Connect to Database: Establishes a connection to the school.db SQLite database.",
+              "Create Cursor: Creates a cursor object to execute SQL commands.",
+              "Execute Query: Executes a SQL query to fetch all records from the students table.",
+              "Fetch and Display Data: Fetches all records and prints each row in the result.",
+              "Close Connection: Closes the database connection after the operation."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

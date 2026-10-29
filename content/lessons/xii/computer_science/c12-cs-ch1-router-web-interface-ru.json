@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH1-ROUTER-WEB-INTERFACE-RU",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch1",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch1/u-router-web-interface",
+      "title": "Router Web Interface (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-CS-CH1-ROUTER-WEB-INTERFACE",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 17,
+          "pdf_to": 17,
+          "note": "Roman Urdu explanation of 'Router Web Interface' (PDF 17): the same text in simple Roman Urdu with glossed hard words, a self-check and a recap."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "list",
+            "ordered": true,
+            "items": [
+              "Router Configuration (router ki settings): router web interface router ki settings manage karne (sambhalne) ke liye istemal hota hai. Yeh web browser mein khulta hai. User router ka IP address likh kar is tak pohanchta hai. Login ke liye username aur password chahiye. Is interface se Wi-Fi ka naam aur password badla ja sakta hai. Yeh security settings control karne mein bhi madad deta hai.",
+              "Wi-Fi Encryption (data ko khufia code mein badalna): network par bheje gaye data ki hifazat karti hai. Yeh data ko secure (mehfooz) shakal mein badal deti hai. WPA2 aur WPA3 aam security protocols (hifazat ke qaide) hain. WEP jaise purane protocols secure nahi. Strong encryption data ki chori rokti hai. Users ko hamesha latest (sab se naya) encryption method chunna chahiye.",
+              "Default Gateway: default gateway local network ko doosre networks se jorta hai. Aam taur par yeh router hota hai. Jo data bahar ke networks ke liye ho, woh gateway se guzarta hai. Gateway data ko sahi network ki taraf forward (aage bhejna) karta hai. Internet access isi par depend karti hai. Gateway ki sahi setting zaroori hai."
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Asaan alfaaz mein",
+            "text": "Aksar ghar ke router ka IP address 192.168.0.1 ya 192.168.1.1 hota hai (router ke neeche sticker par likha hota hai). Browser mein yeh likhne se router ka web interface khulta hai."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Class Activity",
+            "text": "Aath (8) characters ka ek mazboot namoona password banayein jis mein huroof (letters) aur numbers dono hon (alpha-numeric)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Lambe passwords zyada mazboot hain",
+            "text": "Kitab ki activity aath characters kehti hai. Aaj kal ki rehnumai is se lambe password ya passphrase, taqreeban 12 ya zyada characters, pasand karti hai, jin mein chhote bare huroof, numbers aur symbols mile hon; aur router ka default password kabhi waisa hi na chhorein."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Class activity ke liye yeh program check karta hai ke password kam az kam 8 characters ka hai aur us mein letters aur numbers dono hain (alpha-numeric). password badal kar Run karein."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "password = \"Lahore2025\"\nmin_length = 8\n\nhas_letter = False\nhas_digit = False\nfor ch in password:\n    if ch.isalpha():\n        has_letter = True\n    if ch.isdigit():\n        has_digit = True\n\nprint(\"Length:\", len(password))\nif len(password) >= min_length and has_letter and has_digit:\n    print(\"Strong alpha-numeric password\")\nelse:\n    print(\"Weak: use at least\", min_length, \"letters and numbers\")",
+            "runnable": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"password = \"Lahore2025\"\": check hone wala password. \"min_length = 8\": kam az kam 8 characters.\n\"has_letter = False\", \"has_digit = False\": shuru mein maan lete hain ke na letter hai na number.\n\"for ch in password\": har character ko dekhta hai. \"ch.isalpha()\" letter ho to True, \"ch.isdigit()\" number ho to True.\n\"print(\"Length:\", len(password))\": password ki lambai.\n\"if len(password) >= min_length and has_letter and has_digit\": teeno shartein poori hon to strong, warna weak.\nOutput: \"Length: 10\" aur \"Strong alpha-numeric password\".\nKhud try karein: password = \"lahore\" kar ke Run karein: \"Length: 6\" aur \"Weak: use at least 8 letters and numbers\" aata hai. min_length = 12 kar ke \"Lahore2025\" bhi weak ho jata hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "WEP ke bajaye WPA2 ya WPA3 kyun chunna chahiye?",
+            "explanation": "WEP purana protocol hai jo ab mehfooz nahi; WPA2 aur WPA3 mazboot encryption dete hain, is liye data churana mushkil hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Default gateway kya hai?",
+            "explanation": "Woh device (aam taur par router) jis ke zariye local network doosre networks, jaise Internet, ko data bhejta hai."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Mukhtasar khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Router web interface: browser mein router ka IP address, username/password; Wi-Fi naam, password, security settings.",
+              "Encryption: WPA2/WPA3 istemal karein, WEP nahi. Default gateway (aam taur par router): bahar ke networks ka darwaza."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH4-PACK-GRID-PLACE",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch4",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch4/u-organizing-elements-using-pack-grid-and-place",
+      "title": "Organizing Elements using pack(), grid(), and place()",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 52,
+          "pdf_to": 54,
+          "note": "Unnumbered topic Organizing Elements using pack(), grid(), and place() as printed (PDF 52-54, printed 48-50); its own lesson since 2026-10-29 (one lesson per book heading), moved from the topic 4.1 lesson."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "The pack() method places widgets in a simple vertical or horizontal order. It is easy to use and works well for small applications. The grid() method arranges widgets in rows and columns like a table. It is useful for forms and structured layouts. The place() method positions widgets at exact locations on the window (as shown in Figure 4.2). It gives more control but needs careful adjustment."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch4-fig-layouts",
+            "alt": "Three windows side by side. Pack(): Button 1, Button 2 and Button 3 stacked one below another in the centre. Grid(): Button 1 and Button 2 side by side in a row, with a wide Button 3 spanning both columns below. Place(): Button 1 at the top left, Button 2 lower down on the right, and Button 3 at the bottom left.",
+            "caption": "Figure 4.2: Diagram showing Tkinter Layout Managers: pack(), grid(), place() (original drawing after the textbook's Figure 4.2)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Example pack():"
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "import tkinter as tk\n\n# Create main window\nwindow = tk.Tk()\nwindow.title(\"pack()\")\nwindow.geometry(\"300x220\")\n\n# Create buttons\nbutton1 = tk.Button(window, text=\"Button 1\", width=12)\nbutton2 = tk.Button(window, text=\"Button 2\", width=12)\nbutton3 = tk.Button(window, text=\"Button 3\", width=12)\n\n# Arrange buttons using pack()\nbutton1.pack(pady=10)\nbutton2.pack(pady=10)\nbutton3.pack(pady=10)\n\n# Run the application\nwindow.mainloop()"
+          },
+          {
+            "type": "paragraph",
+            "text": "Example grid():"
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "import tkinter as tk\n\n# Create main window\nwindow = tk.Tk()\nwindow.title(\"grid()\")\nwindow.geometry(\"300x220\")\n\n# Create buttons\nbutton1 = tk.Button(window, text=\"Button 1\", width=10)\nbutton2 = tk.Button(window, text=\"Button 2\", width=10)\nbutton3 = tk.Button(window, text=\"Button 3\", width=24)\n\n# Arrange buttons using grid()\nbutton1.grid(row=0, column=0, padx=10, pady=20)\nbutton2.grid(row=0, column=1, padx=10, pady=20)\n\n# Button 3 spans two columns\nbutton3.grid(row=1, column=0, columnspan=2, padx=10, pady=10)\n\n# Keep content centred\nwindow.grid_columnconfigure(0, weight=1)\nwindow.grid_columnconfigure(1, weight=1)\n\n# Run the application\nwindow.mainloop()"
+          },
+          {
+            "type": "paragraph",
+            "text": "Example place():"
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "import tkinter as tk\n\n# Create main window\nwindow = tk.Tk()\nwindow.title(\"place()\")\nwindow.geometry(\"300x220\")\n\n# Create buttons\nbutton1 = tk.Button(window, text=\"Button 1\", width=10)\nbutton2 = tk.Button(window, text=\"Button 2\", width=10)\nbutton3 = tk.Button(window, text=\"Button 3\", width=10)\n\n# Arrange buttons using place()\nbutton1.place(x=30, y=40)\nbutton2.place(x=170, y=85)\nbutton3.place(x=30, y=140)\n\n# Run the application\nwindow.mainloop()"
+          }
+        ]
+      }
+    }
+  ]
+}

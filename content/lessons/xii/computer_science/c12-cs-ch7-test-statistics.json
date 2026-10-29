@@ -1,0 +1,168 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH7-TEST-STATISTICS",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch7",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch7/u-test-statistics",
+      "title": "Test Statistics",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 95,
+          "pdf_to": 96,
+          "note": "'Test Statistics' under topic 7.3, as printed (PDF 95-96, printed 91-92)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Test statistics are numerical values. They are calculated from sample data. These values summarize data behavior. Test statistics help compare results and support decisions. They show how far results are from expectations. Different tests use different statistics. Examples include t-value and chi-square value."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "T-value Test:"
+          },
+          {
+            "type": "equation",
+            "latex": "t=\\frac{\\bar{x}-\\mu_0}{\\frac{s}{\\sqrt{n}}}",
+            "text_alt": "t = (x̄ − μ₀) / (s / √n)"
+          },
+          {
+            "type": "paragraph",
+            "text": "Where:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "x̄: Sample mean",
+              "μ₀: Population mean under the null hypothesis",
+              "s: Sample standard deviation",
+              "n: Sample size"
+            ]
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Example:"
+          },
+          {
+            "type": "paragraph",
+            "text": "Suppose we have a sample of 25 students with an average score of 80, and we want to test if the mean score is significantly different from the population mean of 75. The sample standard deviation is 10."
+          },
+          {
+            "type": "equation",
+            "latex": "t=\\frac{80-75}{\\frac{10}{\\sqrt{25}}}=\\frac{5}{\\frac{10}{5}}=\\frac{5}{2}=2.5",
+            "text_alt": "t = (80 − 75) / (10/√25) = 5 / (10/5) = 5/2 = 2.5"
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Chi-Square Test:"
+          },
+          {
+            "type": "equation",
+            "latex": "x^2=\\sum\\frac{(o_i-E_i)^2}{E_i}",
+            "text_alt": "x² = Σ (oᵢ − Eᵢ)² / Eᵢ",
+            "book_errors": [
+              "x²",
+              "x^2"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The chi-square symbol is printed as x² (the letter x), here and in the working of the example below; it is the Greek letter chi: χ² = Σ (Oᵢ − Eᵢ)² / Eᵢ, with Oᵢ the observed frequency as in the Where list (the formula prints a small oᵢ). The arithmetic of the example (3.4) is right."
+          },
+          {
+            "type": "paragraph",
+            "text": "Where:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Oᵢ : Observed frequency in each category",
+              "Eᵢ : Expected frequency in each category"
+            ]
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Example:"
+          },
+          {
+            "type": "paragraph",
+            "text": "Suppose you roll a fair die 60 times and observe the following frequencies:"
+          },
+          {
+            "type": "table",
+            "caption": "Observed and expected frequencies of a fair die rolled 60 times",
+            "header": [
+              "Face of Die",
+              "Observed Frequency ((Oᵢ))",
+              "Expected Frequency ((Eᵢ))"
+            ],
+            "rows": [
+              [
+                "1",
+                "10",
+                "10"
+              ],
+              [
+                "2",
+                "12",
+                "10"
+              ],
+              [
+                "3",
+                "8",
+                "10"
+              ],
+              [
+                "4",
+                "14",
+                "10"
+              ],
+              [
+                "5",
+                "9",
+                "10"
+              ],
+              [
+                "6",
+                "7",
+                "10"
+              ]
+            ]
+          },
+          {
+            "type": "equation",
+            "latex": "x^2=\\frac{(10-10)^2}{10}+\\frac{(12-10)^2}{10}+\\frac{(8-10)^2}{10}+\\frac{(14-10)^2}{10}+\\frac{(9-10)^2}{10}+\\frac{(7-10)^2}{10}",
+            "text_alt": "x² = (10−10)²/10 + (12−10)²/10 + (8−10)²/10 + (14−10)²/10 + (9−10)²/10 + (7−10)²/10"
+          },
+          {
+            "type": "equation",
+            "latex": "x^2=0+\\frac{4}{10}+\\frac{4}{10}+\\frac{16}{10}+\\frac{1}{10}+\\frac{9}{10}",
+            "text_alt": "x² = 0 + 4/10 + 4/10 + 16/10 + 1/10 + 9/10"
+          },
+          {
+            "type": "equation",
+            "latex": "x^2=0+0.4+0.4+1.6+0.1+0.9=3.4",
+            "text_alt": "x² = 0 + 0.4 + 0.4 + 1.6 + 0.1 + 0.9 = 3.4"
+          },
+          {
+            "type": "paragraph",
+            "text": "Now, the calculated x² value is 3.4, and we would compare this value against the critical value from the Chi-Square distribution table at a certain significance level (e.g., α = 0.05) and degrees of freedom to make a decision."
+          }
+        ]
+      }
+    }
+  ]
+}

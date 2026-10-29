@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH3-POLYMORPHISM-RU",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch3",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch3/u-polymorphism",
+      "title": "Polymorphism (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-CS-CH3-POLYMORPHISM",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 43,
+          "pdf_to": 43,
+          "note": "Roman Urdu: Polymorphism with the payment-system example and a runnable payment program of ours (PDF 43, printed 39)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Polymorphism ka matlab hai \"kai shaklein\" (many forms). Yani koi cheez (jaise function ya object) halaat (context) ke mutabiq mukhtalif kaam kar sakti hai. Takneeki taur par polymorphism aik hi method, function ya operator ko us object ke mutabiq mukhtalif behaviour dene deta hai jis par woh kaam kar raha ho. Is se code zyada lachakdar (flexible) aur dobara istemal ke qabil banta hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Misal: aik backend payment system mein payment ke kai tareeqe hain, jaise Credit Card, UPI (fauri bank transfer service; Pakistan mein is jaisi service Raast hai), NetBanking aur Wallet. Sab ek hi naam ka method processPayment() istemal karte hain, lekin har aik ka kaam (implementation) alag hai:"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "NetBanking Payment: user ko bank ke login page par le jati hai."
+            ]
+          },
+          {
+            "type": "paragraph",
+            "text": "Method ka naam wahi rehta hai, lekin kaam payment ki qism ke mutabiq badal jata hai. (Kitab sirf NetBanking ka kaam batati hai; neeche wali izafi misal do qismon ko code mein dikhati hai.)"
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Payment ki misal code mein (kitab mein nahi): teeno classes ka method ek hi naam processPayment() ka hai, lekin har ek ka kaam alag hai. amount badal kar Run karein."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "amount = 500   # raqam badal kar dekhein\n\nclass Payment:\n    def processPayment(self, amount):\n        print(\"Processing\", amount)\n\nclass CreditCard(Payment):\n    def processPayment(self, amount):\n        print(\"Charging card:\", amount)\n\nclass NetBanking(Payment):\n    def processPayment(self, amount):\n        print(\"Redirecting to bank login for\", amount)\n\nfor method in [CreditCard(), NetBanking(), Payment()]:\n    method.processPayment(amount)",
+            "runnable": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"amount = 500\": kitni raqam ki payment.\n\"class Payment:\": parent class; processPayment() sirf \"Processing\" likhta hai.\n\"class CreditCard(Payment):\" aur \"class NetBanking(Payment):\": dono Payment se inherit karti hain aur processPayment() ko apne tareeqe se dobara likhti (override karti) hain.\n\"for method in [CreditCard(), NetBanking(), Payment()]:\": teen mukhtalif objects ki list; loop har ek par wohi line method.processPayment(amount) chalata hai.\nNaam ek hai, lekin har object apna version chalata hai: yahi polymorphism hai.\nOutput: \"Charging card: 500\", \"Redirecting to bank login for 500\" aur \"Processing 500\".\nKhud try karein: amount = 1200 likhein: teeno lines mein 1200 aayega. Ek nayi class Wallet(Payment) bana kar list mein Wallet() bhi daal kar dekhein."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Mukhtasar khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Polymorphism: “kai shaklein”; ek hi method ka naam, object ke mutabiq alag kaam.",
+              "Payment ki misal: processPayment() har payment type mein alag kaam karta hai."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

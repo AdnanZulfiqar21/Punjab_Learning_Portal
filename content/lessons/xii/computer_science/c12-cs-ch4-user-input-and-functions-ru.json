@@ -1,0 +1,129 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH4-USER-INPUT-AND-FUNCTIONS-RU",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch4",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch4/u-handling-user-input-and-connecting-widgets-to-functions",
+      "title": "Handling User Input and Connecting Widgets to Functions (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-CS-CH4-USER-INPUT-AND-FUNCTIONS",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 55,
+          "pdf_to": 56,
+          "note": "Roman Urdu explanation of Handling User Input and Connecting Widgets to Functions (PDF 55-56, printed 51-52), paragraph for paragraph with the English; Code Explanation boxes and runnable examples added 2026-10-29."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "User entry fields aur buttons jaise widgets se input deta hai. Widgets program ke functions se jure hote hain; widget istemal hone par jura hua function chal jata hai aur input process karta hai. Maslan button click par paigham dikhaya ja sakta hai. Theek connections se program sahi chalta hai aur user ka tajurba behtar hota hai."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Misal: saada Login Form"
+          },
+          {
+            "type": "paragraph",
+            "text": "Saada login form user ko username aur password likhne deta hai. Entry fields user se input lete hain. Maloomat bhejne (submit) ke liye button hota hai. Button dabane par program likha hua data check karta hai, phir kamyabi (success) ya ghalti (error) ka paigham dikhata hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Misal (Example):"
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "import tkinter as tk\nfrom tkinter import messagebox\n\n# Create main window\nwindow = tk.Tk()\nwindow.title(\"Login Form\")\nwindow.geometry(\"300x200\")\n\n# Function to check login\ndef check_login():\n    username = entry_user.get()\n    password = entry_pass.get()\n\n    # simple check\n    if username == \"admin\" and password == \"1234\":\n        messagebox.showinfo(\"Success\", \"Login Successful!\")\n    else:\n        messagebox.showerror(\"Error\", \"Invalid Username or Password\")\n\n# Username label and entry\ntk.Label(window, text=\"Username\").pack()\nentry_user = tk.Entry(window)\nentry_user.pack()\n\n# Password label and entry\ntk.Label(window, text=\"Password\").pack()\nentry_pass = tk.Entry(window, show=\"*\")\nentry_pass.pack()\n\n# Login button\ntk.Button(window, text=\"Login\", command=check_login).pack(pady=10)\n\n# Run application\nwindow.mainloop()"
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch4-fig-login-form",
+            "alt": "Login program ka output: Login Form window jis mein Username aur Password ke labels aur entry fields aur Login button hain. Us ke oopar alag Success message box hai: maloomat (information) ka nishan, Login Successful! aur ok button.",
+            "caption": "Login form misal ka output: Login Form window aur Success message box (kitab mein code ke saath chhapi windows ke mutabiq asal khaaka)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"from tkinter import messagebox\": chhoti pop-up paigham wali windows (message box) ke liye.\n\"def check_login():\": Login dabane par chalne wala function. \"entry_user.get()\" aur \"entry_pass.get()\" dono entry fields mein likha hua text parhte hain.\n\"if username == \"admin\" and password == \"1234\":\": and ka matlab hai dono shartein (conditions) sach hon. Tab \"messagebox.showinfo(\"Success\", \"Login Successful!\")\" kamyabi ka paigham dikhata hai; warna (else) \"messagebox.showerror(\"Error\", \"Invalid Username or Password\")\" ghalti ka paigham.\n\"tk.Label(window, text=\"Username\").pack()\": label bana kar usi line mein pack kar diya.\n\"entry_pass = tk.Entry(window, show=\"*\")\": password likhte waqt har harf ki jagah * nazar aata hai.\n\"tk.Button(window, text=\"Login\", command=check_login).pack(pady=10)\": Login button jo check_login function se jura hai.\nOutput: \"Login Form\" window khulti hai (Username, Password aur Login button). admin aur 1234 likh kar Login dabane par \"Success\" window mein \"Login Successful!\" aata hai; kuch aur likhne par \"Error\" window mein \"Invalid Username or Password\". Tkinter browser ke Run mein nahi chalta; yeh program apne computer par Python (IDLE ya VS Code) mein chala kar dekhein.\nKhud try karein: neeche wala \"Khud chala kar dekhein\" program yahi check browser mein chala kar dikhata hai."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Diagram ko samjhein",
+            "text": "Login button dabane par check_login() chalta hai. Username 'admin' aur password '1234' hon to messagebox.showinfo() aik alag chhoti window (pop-up) kholta hai jis ka unwan Success hai aur jis mein Login Successful! likha hota hai; ok dabane par yeh band ho jati hai. Ghalat ho to showerror() Error wali window dikhata hai. Paigham form ke andar nahi, alag window mein aata hai."
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Entry → username aur password leta hai; show=\"*\" likhte waqt password chhupata hai.",
+              "Button → data bhejta hai: command=check_login click par check chalata hai.",
+              "check_login() → get() se input parh kar check karta hai.",
+              "messagebox → kamyabi (showinfo) ya ghalti (showerror) ka paigham alag window mein dikhata hai.",
+              "Poora program event-driven programming par chalta hai."
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Asli passwords kabhi code mein na rakhein",
+            "text": "Seekhne ke liye program mein 'admin' aur '1234' likhna theek hai, lekin asli applications passwords kabhi code mein nahi rakhtin. Woh har password ka mehfooz hash, aam taur par database mein, rakhti aur hashes ka muqabla karti hain."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Class Activity",
+            "text": "Event-driven concepts samjhayein, phir students aisa button banayein jo click par label ka text badal de."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Button command=greet ke bajaye command=greet() se banaya gaya. Kya ghalat hota hai?",
+            "explanation": "Qausain ke saath greet() button bante waqt aik dafa chal jata hai aur us ki wapas aane wali qeemat (aam taur par None) command ban jati hai, is liye click par kuch nahi hota. command= ko function khud, qausain ke baghair, dena chahiye."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Login form ka check (check_login) saade Python mein: username aur password ki qeematein badal kar Run karein aur dekhein ke kab Success aur kab Error aata hai."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "username = \"admin\"   # user ne Username field mein kya likha\npassword = \"1234\"    # user ne Password field mein kya likha\n\ndef check_login(user, pwd):\n    if user == \"admin\" and pwd == \"1234\":\n        return \"Success: Login Successful!\"\n    else:\n        return \"Error: Invalid Username or Password\"\n\nprint(\"Login button dabaya gaya...\")\nprint(\"Password screen par:\", \"*\" * len(password))\nprint(check_login(username, password))",
+            "runnable": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"username\" aur \"password\": woh qeematein jo user ne form mein likhin (Tkinter mein yeh entry_user.get() aur entry_pass.get() se aati hain).\n\"def check_login(user, pwd):\": dono sahi hon (and) to Success wala paigham return karta hai, warna (else) Error wala.\n\"\"*\" * len(password)\": password ki lambai (len) jitne * banata hai, jaise show=\"*\" screen par dikhata hai.\n\"print(check_login(username, password))\": function bula kar jawab print karta hai.\nOutput: \"Login button dabaya gaya...\", \"Password screen par: ****\" aur \"Success: Login Successful!\".\nKhud try karein: password = \"12345\" kar dein: \"Password screen par: *****\" aur \"Error: Invalid Username or Password\" aayega. username = \"Admin\" (bara A) par bhi Error aata hai, kyunke == chhote bare huroof mein farq karta hai."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Mukhtasar khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Widgets functions se jure hote hain: command=check_login.",
+              "get() entry ka text parhta hai; messagebox paigham alag window mein dikhata hai."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH2-REASONING-AND-CONCLUSIONS-RU",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch2",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch2/u-reasoning-and-drawing-conclusions",
+      "title": "Reasoning and drawing conclusions (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-CS-CH2-REASONING-AND-CONCLUSIONS",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 33,
+          "pdf_to": 33,
+          "note": "Roman Urdu: Reasoning and drawing conclusions with our deduction diagram and a small program of ours (PDF 33, printed 29)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Predicate logic se hum diye gaye facts se nateeje nikal sakte hain. Maslan agar “∀x, Student(x) → HasLibraryCard(x)” (har student ke paas library card hai) aur “Ali student hai,” to hum nateeja nikalte hain “Ali ke paas library card hai.”"
+          },
+          {
+            "type": "paragraph",
+            "text": "Is tarah ki logical reasoning faisle karne mein madad deti hai, jaise yeh check karna ke koi student kitab le sakta hai ya nahi. Is se nateeje sahi aur hamesha ek jaise aate hain, aur system qabil-e-aitbaar (reliable) aur sambhalne mein aasan rehta hai."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch2-fig-deduction",
+            "alt": "Teen box: qaida (rule) 'for all x, Student(x) -> HasLibraryCard(x)', yani har talib-e-ilm ke paas library card hai; haqeeqat (fact) 'Student(Ali)', yani Ali talib-e-ilm hai; lakeer ke neeche 'is liye' nateeja (conclusion) 'HasLibraryCard(Ali)', yani Ali ke paas library card hai.",
+            "caption": "Qaide aur haqeeqat se nateeja: library card ki misal (asal khaaka, kitab ki figure nahi)."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh program kitab ka qaida chalata hai: “har student ke paas library card hai”. person badal kar dekhein ke nateeja kab nikalta hai aur kab nahi."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "students = [\"Ali\", \"Sara\", \"Hina\"]   # Student(x) in sab ke liye sach hai\nperson = \"Ali\"                        # kis ke baare mein nateeja nikalna hai\n\n# Rule: for all x, Student(x) -> HasLibraryCard(x)\ndef has_library_card(x):\n    return x in students\n\nif person in students:\n    print(person, \"is a student.\")\n    print(\"Conclusion:\", person, \"has a library card:\", has_library_card(person))\nelse:\n    print(person, \"is not in the student list, so the rule gives no conclusion.\")",
+            "runnable": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"students = [...]\": un logon ki list jin ke liye Student(x) sach hai.\n\"person = \\\"Ali\\\"\": jis ke baare mein nateeja nikalna hai.\n\"def has_library_card(x)\": qaida ∀x, Student(x) → HasLibraryCard(x): jo bhi student list mein hai us ke paas card hai.\n\"if person in students:\": pehle fact check hota hai (kya person student hai?). Sach ho to qaide se nateeja print hota hai.\nelse: student na ho to qaida kuch nahi batata.\nOutput: \"Ali is a student.\" aur \"Conclusion: Ali has a library card: True\".\nKhud try karein: person = \"Bilal\" likhein: \"Bilal is not in the student list, so the rule gives no conclusion.\" aayega. Phir \"Bilal\" ko students list mein daal kar dobara Run karein."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Mukhtasar khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Qaida + fact = nateeja: har student ka card hai, Ali student hai, is liye Ali ka card hai.",
+              "Is se system ke faisle sahi aur ek jaise rehte hain."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

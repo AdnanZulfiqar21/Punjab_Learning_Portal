@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH1-SUBNETTING-RU",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch1",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch1/u-subnetting",
+      "title": "Subnetting (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-CS-CH1-SUBNETTING",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 16,
+          "pdf_to": 16,
+          "note": "Roman Urdu explanation of 'Subnetting' (PDF 16): the same text in simple Roman Urdu with glossed hard words, a self-check and a recap."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Subnetting ek network ko chhote hisson mein divide karti (baant'ti) hai. Har hissa subnet kehlata hai (jaise Figure 1.15 mein). Is se network traffic (network par chalne wala data) kam hota hai. Subnetting performance behtar karti hai. Yeh security barhati hai. Bare networks management (intizam) ke liye subnetting istemal karte hain."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch1-fig-1-15-subnetting",
+            "alt": "Oopar network 192.168.1.0/24 tooti lakeeron se do hisson mein bantta hai: Subnet 1 (192.168.1.0/25) jis mein desktop computer, network device aur laptop hain, aur Subnet 2 (192.168.1.128/25) jis mein mobile phone aur printer hain.",
+            "caption": "Figure 1.15: Subnetting ki misal (kitab ki Figure 1.15 ke mutabiq asal khaaka)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Diagram ko samjhein",
+            "text": "Figure 1.15 mein network 192.168.1.0/24 (addresses .0 se .255) do subnets mein bata hai: 192.168.1.0/25 (.0 se .127) aur 192.168.1.128/25 (.128 se .255). Slash (/) ke baad wala number batata hai ke address ke kitne bits network wale hisse ke hain."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Python ka ipaddress module network ko subnets mein baant sakta hai. Yeh program Figure 1.15 wala kaam karta hai. network ya new_prefix badal kar Run karein."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "network = \"192.168.1.0/24\"\nnew_prefix = 25\n\nimport ipaddress\n\nnet = ipaddress.ip_network(network)\nprint(\"Network:\", net, \"has\", net.num_addresses, \"addresses\")\nfor subnet in net.subnets(new_prefix=new_prefix):\n    print(\"Subnet:\", subnet, \"from\", subnet[0], \"to\", subnet[-1])",
+            "runnable": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"network = \"192.168.1.0/24\"\": Figure 1.15 wala network; /24 ka matlab pehle 24 bits network ke hain.\n\"new_prefix = 25\": har subnet /25 ka hoga (ek bit zyada network ke liye).\n\"import ipaddress\": Python ka module jo IP addresses aur networks samajhta hai.\n\"ipaddress.ip_network(network)\": text se network object banata hai; \"net.num_addresses\" us ke kul addresses deta hai.\n\"net.subnets(new_prefix=new_prefix)\": network ko /25 ke subnets mein baant'ta hai. \"subnet[0]\" pehla aur \"subnet[-1]\" aakhri address hai.\nOutput: \"Network: 192.168.1.0/24 has 256 addresses\", \"Subnet: 192.168.1.0/25 from 192.168.1.0 to 192.168.1.127\", \"Subnet: 192.168.1.128/25 from 192.168.1.128 to 192.168.1.255\".\nKhud try karein: new_prefix = 26 kar ke Run karein: 4 subnets bante hain (.0, .64, .128, .192), har ek mein 64 addresses."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Figure 1.15 mein 192.168.1.0/24 kitne subnets mein bata hai, aur subnetting ke do fawaid batayein.",
+            "explanation": "Do subnets: 192.168.1.0/25 aur 192.168.1.128/25. Fawaid: network traffic kam, performance behtar, security zyada (aur bare network ka intizam aasan)."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Mukhtasar khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Subnetting: network ko subnets mein baantna; traffic kam, performance aur security behtar; bare networks ka intizam."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

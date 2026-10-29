@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH3-RUNTIME-POLYMORPHISM-RU",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch3",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch3/u-2-runtime-polymorphism-overriding",
+      "title": "2. Runtime Polymorphism (Overriding) (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-CS-CH3-RUNTIME-POLYMORPHISM",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 44,
+          "pdf_to": 45,
+          "note": "Roman Urdu: Runtime Polymorphism with the Animal sound program, its output and Code Explanation (PDF 44-45, printed 40-41)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Runtime polymorphism mein method ka behaviour program chalte waqt tay hota hai, is bunyad par ke method kis object ne call kiya. Yeh Method Overriding se hota hai: child class parent mein pehle se maujood method ka apna version deti hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Misal: yeh code method overriding se runtime polymorphism dikhata hai. sound() method base class Animal mein bana hai aur Dog aur Cat mein override hua hai. Program chalte waqt object ki class ke mutabiq sahi method chalta hai."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "class Animal:\n    def sound(self):\n        return \"Some generic sound\"\n\nclass Dog(Animal):\n    def sound(self):\n        return \"Bark\"\n\nclass Cat(Animal):\n    def sound(self):\n        return \"Meow\"\n\n# Polymorphic behavior\nanimals = [Dog(), Cat(), Animal()]\nfor animal in animals:\n    print(animal.sound())",
+            "runnable": true
+          },
+          {
+            "type": "code",
+            "language": "text",
+            "text": "Bark\nMeow\nSome generic sound",
+            "caption": "Output"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"class Animal:\": parent class; sound() \"Some generic sound\" return karta hai.\n\"class Dog(Animal):\" aur \"class Cat(Animal):\": dono Animal se inherit karti hain aur sound() ko override karti hain: Dog \"Bark\" aur Cat \"Meow\" return karti hai.\n\"animals = [Dog(), Cat(), Animal()]\": teen mukhtalif objects ki list.\n\"for animal in animals: print(animal.sound())\": har object par wohi line chalti hai, lekin program chalte waqt (runtime par) object ki class dekh kar sahi sound() chuna jata hai.\nOutput: teen lines: \"Bark\", \"Meow\" aur \"Some generic sound\".\nKhud try karein: \"class Cow(Animal):\" banayein jis ka sound() \"Moo\" return kare, aur list mein Cow() jor dein: chauthi line \"Moo\" aayegi."
+          },
+          {
+            "type": "paragraph",
+            "text": "Yahan sound method ka behaviour is baat par munhasir hai ke object Dog hai, Cat hai ya Animal, aur yeh faisla runtime par hota hai. Yahi dynamic tabiyat Python ko runtime polymorphism ke liye khaas taur par taqatwar banati hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Inheritance, encapsulation aur polymorphism mil kar behtar software design kaise dete hain?",
+            "explanation": "Encapsulation har class ka data mehfooz aur interface wazeh rakhti hai; inheritance code copy karne ke bajaye jaanchi parkhi classes dobara use aur wasee karti hai; polymorphism aik code ko bohat si mutalliq classes ke saath chalne deti hai. Nateeja modular code hai jise barhana, test karna aur sambhalna asan hai."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Mukhtasar khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Runtime: kaun sa method chalega yeh program chalte waqt object dekh kar tay hota hai.",
+              "Method overriding: child class parent ka method apne tareeqe se dobara likhti hai (Dog, Cat ka sound())."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

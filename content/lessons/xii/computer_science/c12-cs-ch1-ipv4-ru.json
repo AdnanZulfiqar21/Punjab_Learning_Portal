@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH1-IPV4-RU",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch1",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch1/u-ipv4",
+      "title": "IPv4 (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-CS-CH1-IPV4",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 15,
+          "pdf_to": 15,
+          "note": "Roman Urdu explanation of 'IPv4' (PDF 15): the same text in simple Roman Urdu with glossed hard words, a self-check and a recap."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Misaal: 192.168.1.10"
+          },
+          {
+            "type": "paragraph",
+            "text": "IPv4 mein 4 numbers hote hain, har ek 0 se 255 tak, aur beech mein dots (nuqte) hote hain."
+          },
+          {
+            "type": "paragraph",
+            "text": "Har number = 1 Byte = 8 bits"
+          },
+          {
+            "type": "paragraph",
+            "text": "Kul (total) = 32 bits (4 × 8 = 32)"
+          },
+          {
+            "type": "table",
+            "caption": "IPv4 ke hisse",
+            "header": [
+              "Hissa",
+              "Value",
+              "Matlab"
+            ],
+            "rows": [
+              [
+                "Network part",
+                "192.168.1",
+                "Aap ka local network batata hai, jaise “Gulshan Block Street 3”"
+              ],
+              [
+                "Host part",
+                "10",
+                "Us network par aap ka khaas device batata hai, jaise “House #10”"
+              ]
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Do You Know?",
+            "text": "IPv4 ke kul mumkin addresses: taqreeban 4.29 billion (2³² = 4,294,967,296)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Asaan alfaaz mein",
+            "text": "8 bits mein sab se bara number 11111111 = 255 hai, is liye har hissa 0 se 255 tak hota hai. 192.168.1.10 mein \"192.168.1\" gali ka naam aur \"10\" makan number jaisa hai."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Yeh program IPv4 address ke chaaron numbers ko 8-bit binary mein dikhata hai aur network aur host part alag karta hai. address badal kar Run karein."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "address = \"192.168.1.10\"\n\nnumbers = address.split(\".\")\nfor number in numbers:\n    print(number, \"=\", format(int(number), \"08b\"))\n\nprint(\"Network part:\", \".\".join(numbers[:3]))\nprint(\"Host part:\", numbers[3])\nprint(\"Total bits:\", len(numbers) * 8)\nprint(\"Total IPv4 addresses:\", 2 ** 32)",
+            "runnable": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"address = \"192.168.1.10\"\": kitab wala IPv4 address.\n\"numbers = address.split(\".\")\": address ko dots par tor kar list banata hai: ['192', '168', '1', '10'].\n\"for number in numbers\": har number ke liye \"format(int(number), \"08b\")\" use 8 binary digits mein likhta hai (\"08b\" = 8 jagah, shuru mein zero, binary).\n\"\".\".join(numbers[:3])\": pehle teen numbers ko dots se jor kar network part banata hai; \"numbers[3]\" chautha number yani host part.\n\"len(numbers) * 8\": 4 x 8 = 32 bits. \"2 ** 32\": 32 bits se ban'ne wale kul addresses.\nOutput: \"192 = 11000000\", \"168 = 10101000\", \"1 = 00000001\", \"10 = 00001010\", \"Network part: 192.168.1\", \"Host part: 10\", \"Total bits: 32\", \"Total IPv4 addresses: 4294967296\" (yani taqreeban 4.29 billion).\nKhud try karein: address = \"10.0.0.255\" kar ke Run karein: \"255 = 11111111\" aata hai, yani 8 bits ka sab se bara number."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "192.168.1.10 mein network part aur host part kaun se hain, aur IPv4 mein kul kitne bits hain?",
+            "explanation": "Network part 192.168.1, host part 10. Kul 4 x 8 = 32 bits."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Mukhtasar khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "IPv4: 4 numbers (0-255), dots se alag; har number 8 bits; kul 32 bits; network part + host part; taqreeban 4.29 billion addresses."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

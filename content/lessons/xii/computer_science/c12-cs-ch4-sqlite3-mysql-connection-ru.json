@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH4-SQLITE3-MYSQL-CONNECTION-RU",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch4",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch4/u-using-sqlite3-or-mysql-to-establish-a-database-connection",
+      "title": "Using sqlite3 or MySQL to Establish a Database Connection (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-CS-CH4-SQLITE3-MYSQL-CONNECTION",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 58,
+          "pdf_to": 59,
+          "note": "Roman Urdu explanation of Using sqlite3 or MySQL to Establish a Database Connection (PDF 58-59, printed 54-55), paragraph for paragraph with the English; Code Explanation boxes and runnable examples added 2026-10-29."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "sqlite3 library Python mein built-in hai aur chhote databases ke liye istemal hoti hai. Yeh sara data system par aik hi file mein rakhti hai. MySQL bare aur pecheeda database systems ke liye istemal hota hai. Connection banane ke liye database ki tafseelat di jati hain, jaise naam aur credentials (username, password). Connection kamyab ho to Python database istemal kar sakta hai."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "# Import sqlite3 module\nimport sqlite3\n# Connect to the database file named \"school.db\"\n# If the file does not exist, SQLite will create it automatically\nconnection = sqlite3.connect(\"school.db\")\n# Create a cursor object\n# Cursor is used to execute SQL queries\ncursor = connection.cursor()\n# Create \"students\" table if it does not exist\ncursor.execute(\"\"\" CREATE TABLE IF NOT EXISTS students\n ( id INTEGER PRIMARY KEY,  name TEXT, age INTEGER, grade TEXT ) \"\"\")\n# (Optional) Insert sample data\ncursor.execute (\"INSERT INTO students (name, age, grade) VALUES ('Ali', 14, '8th')\")\ncursor.execute (\"INSERT INTO students (name, age, grade) VALUES ('Sara', 15, '9th')\")\n# Save changes\nconnection.commit()\n# This query selects all columns (*) from the table named \"students\"\ncursor.execute(\"SELECT * FROM students\")\n# Fetch all records returned by the query\n# fetchall() returns a list of rows/records\nrecords = cursor.fetchall()\n# Display all records\n# Loop through each row in the records list\nfor row in records:\n    # Print each row of the table\n    print(row)\n# Close the database connection\nconnection.close()",
+            "runnable": true
+          },
+          {
+            "type": "code",
+            "language": "text",
+            "text": "(1, 'Ali', 14, '8th')\n(2, 'Sara', 15, '9th')",
+            "caption": "Output (pehli dafa chalane par)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"import sqlite3\": Python ki built-in (pehle se shamil) SQLite library.\n\"connection = sqlite3.connect(\"school.db\")\": school.db naam ki database file se jorta hai; file na ho to nayi ban jati hai.\n\"cursor = connection.cursor()\": cursor aik madadgar object hai jo SQL commands database tak le jata hai.\n\"CREATE TABLE IF NOT EXISTS students (...)\": students table banata hai (agar pehle se na ho) jis ke columns id, name, age aur grade hain. \"id INTEGER PRIMARY KEY\" har nayi row ko khud 1, 2, 3 ... number deta hai.\nDo \"INSERT INTO students ...\" lines: Ali (14, 8th) aur Sara (15, 9th) ke records dalti hain.\n\"connection.commit()\": tabdeeliyan file mein pakki (save) karta hai.\n\"cursor.execute(\"SELECT * FROM students\")\" aur \"records = cursor.fetchall()\": saari rows nikal kar aik list mein laata hai; har row aik tuple (qausain wali qeematon ki line) hai.\n\"for row in records: print(row)\": har row print karta hai. \"connection.close()\": connection band karta hai.\nOutput (pehli dafa chalane par): \"(1, 'Ali', 14, '8th')\" aur \"(2, 'Sara', 15, '9th')\". Isi folder mein doosri dafa chalane par Ali aur Sara dobara dal jate hain, is liye chaar rows aati hain: \"(3, 'Ali', 14, '8th')\" aur \"(4, 'Sara', 15, '9th')\" bhi.\nKhud try karein: aik aur INSERT line likh kar apna naam, umar aur grade dalein aur dobara chalayein."
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Connect to Database: school.db SQLite database se connection banata hai.",
+              "Create Cursor: cursor object banata hai jo SQL commands chalata hai.",
+              "Execute Query: SQL query chala kar students table ke tamam records lata hai.",
+              "Fetch and Display Data: fetchall() tamam records le aata hai aur har row print hoti hai.",
+              "Close Connection: kaam ke baad database connection band karta hai."
+            ]
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch4-fig-db-steps",
+            "alt": "sqlite3 misal ke chhe qadam do rows mein: 1 connect (sqlite3.connect('school.db')), 2 cursor (connection.cursor()), 3 execute (cursor.execute(sql)), 4 commit (connection.commit()), 5 fetch (cursor.fetchall()), 6 close (connection.close()).",
+            "caption": "Python se database use karne ke qadam (hamara apna khaaka; kitab mein yeh figure nahi)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Misal do dafa chalana",
+            "text": "INSERT lines har dafa program chalne par chalti hain, is liye doosri dafa chalane par Ali aur Sara naye ids ke saath dobara shamil ho jate hain. Asli programs dalne se pehle jaanchte hain, ya sirf user ke kehne par dalte hain."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Mukhtasar khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "sqlite3: Python mein built-in, aik file wala chhota database; MySQL: bare systems.",
+              "Qadam: connect, cursor, execute, commit, fetchall, close."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

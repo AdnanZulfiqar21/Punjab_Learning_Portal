@@ -14,7 +14,7 @@
           "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
           "pdf_from": 68,
           "pdf_to": 69,
-          "note": "Roman Urdu explanation of 'Exception handling' (PDF 68-69), rewritten 2026-10-28 to follow the book paragraph for paragraph."
+          "note": "Roman Urdu explanation of Exception Handling (PDF 68-69, printed 64-65), paragraph for paragraph with the English; Code Explanation boxes and runnable examples added 2026-10-29."
         }
       ],
       "body": {
@@ -38,6 +38,12 @@
             "language": "python",
             "text": "import sqlite3\n\ntry:\n    # Connect to database\n    connection = sqlite3.connect(\"school.db\")\n    cursor = connection.cursor()\n\n    # Insert data into table\n    cursor.execute(\"INSERT INTO students (ID, Name, Age) VALUES (?, ?, ?)\", (1, \"Ali\", 20))\n\n    # Save changes (ensures data integrity)\n    connection.commit()\n    print(\"Data inserted successfully\")\n\nexcept sqlite3.Error as e:\n    # Handle database errors\n    print(\"Error occurred:\", e)\n    connection.rollback()  # Undo changes if error occurs\n\nfinally:\n    # Close connection\n    if connection:\n        connection.close()\n        print(\"Connection closed\")",
             "runnable": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"try:\": is block mein woh code hai jis mein ghalti ho sakti hai: database se jorna, cursor banana aur data dalna (INSERT).\n\"VALUES (?, ?, ?)\", (1, \"Ali\", 20)\": teen ? placeholders (khaali jagahen) hain; qeematein 1, \"Ali\" aur 20 alag tuple mein di gayi hain aur sqlite3 inhein khud sahi jagah rakhta hai.\n\"connection.commit()\" aur \"print(\"Data inserted successfully\")\": sab theek ho to data save hota hai aur yeh paigham aata hai.\n\"except sqlite3.Error as e:\": database ki koi bhi ghalti yahan pakri jati hai; e mein ghalti ka paigham hota hai. \"connection.rollback()\" adhoori tabdeeli wapas (undo) karta hai.\n\"finally:\": ghalti ho ya na ho, yeh hissa hamesha chalta hai: connection band kar ke \"Connection closed\" print karta hai.\nOutput (khaali folder mein, jahan school.db mein students table nahi): \"Error occurred: no such table: students\" phir \"Connection closed\". Agar chapter 4 ka connection program pehle chal chuka ho (Ali ko id 1 mil chuki), to \"Error occurred: UNIQUE constraint failed: students.id\" aur \"Connection closed\". Agar table ho magar ID 1 na ho, to \"Data inserted successfully\" aur \"Connection closed\". Teenon suraton mein program crash nahi hota."
           },
           {
             "type": "list",
@@ -75,28 +81,6 @@
           },
           {
             "type": "heading",
-            "level": 3,
-            "text": "Kai qism ke exceptions achhi tarah sambhalna"
-          },
-          {
-            "type": "paragraph",
-            "text": "Aik program ko mukhtalif qism ke exceptions pesh aa sakte hain. Python aik hi try–except block mein kai exceptions pakarne deta hai, aur har qism ke exception ka apna khaas jawab diya ja sakta hai. Is se achanak crash nahi hota aur ghalti ke baad program theek tarah sambhal jata hai (error recovery). Kai exceptions sambhalne se program mazboot hota hai aur ghaltiyon par control barhta hai."
-          },
-          {
-            "type": "code",
-            "language": "python",
-            "text": "try:\n    a = int(input(\"First number: \"))\n    b = int(input(\"Second number: \"))\n    print(\"Result:\", a / b)\nexcept ValueError:\n    print(\"Please enter whole numbers only.\")\nexcept ZeroDivisionError:\n    print(\"You cannot divide by zero.\")",
-            "caption": "Izafi misal (kitab mein nahi): class activity, do qism ke exceptions ke saath",
-            "runnable": true
-          },
-          {
-            "type": "checkpoint",
-            "mode": "self_check",
-            "prompt": "Izafi misal mein agar user pehle number ke liye 'ten' likhe to kya print hoga, aur agar 8 aur 0 likhe to?",
-            "explanation": "'ten' int() se badla nahi ja sakta, is liye ValueError pakra jata aur 'Please enter whole numbers only.' print hota hai. 8 aur 0 par a / b ZeroDivisionError deta hai, is liye 'You cannot divide by zero.' print hota hai. Dono suraton mein program crash ke bajaye theek khatam hota hai."
-          },
-          {
-            "type": "heading",
             "level": 2,
             "text": "Mukhtasar khulasa"
           },
@@ -104,9 +88,8 @@
             "type": "list",
             "ordered": false,
             "items": [
-              "try mein woh code jo nakam ho sakta hai; except naam wali ghalti sambhalta hai; finally hamesha chalta hai.",
-              "commit() achhi tabdeeli mehfooz karta hai; rollback() ghalti ke baad wapas karta hai.",
-              "Kai except blocks kai qism ke exceptions sambhalte hain."
+              "try mein khatre wala code; except ghalti sambhalta; finally hamesha chalta hai.",
+              "commit() achhi tabdeeli save; rollback() ghalti par wapas."
             ]
           }
         ]

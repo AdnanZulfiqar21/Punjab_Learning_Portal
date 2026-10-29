@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH3-MULTIPLE-INHERITANCE-RU",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch3",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch3/u-multiple-inheritance",
+      "title": "Multiple Inheritance (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-CS-CH3-MULTIPLE-INHERITANCE",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 41,
+          "pdf_to": 42,
+          "note": "Roman Urdu: Multiple Inheritance with Figure 3.4, the Father/Mother/Child program, its output and Code Explanation (PDF 41-42, printed 37-38)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Python mein aik class aik se zyada parent classes se features (attributes aur methods) le sakti hai. Is tarah child class mukhtalif jagahon ka behaviour mila leti hai, maslan Smartphone class jo Camera aur Computer dono classes se inherit kare (Figure 3.4)."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch3-fig-3-4-multiple-inheritance",
+            "alt": "Multiple inheritance: Child Class ke oopar do dabbe, Parent Class 1 aur Parent Class 2; child se dono parents tak lakeerein, har aik ke sire par parent ki taraf khokhla teer.",
+            "caption": "Figure 3.4: Multiple Inheritance (kitab ki Figure 3.4 ke mutabiq asal khaaka)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Misal (Example):"
+          },
+          {
+            "type": "paragraph",
+            "text": "Is misal mein Child class Father aur Mother dono classes se inherit karti hai, is liye dono parents ke methods istemal kar sakti hai."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "class Father:\n    def skill1(self):\n        print(\"Father's skill: Gardening\")\nclass Mother:\n    def skill2(self):\n        print(\"Mother's skill: Cooking\")\n\n# Derived class inheriting from two base classes\nclass Child(Father, Mother):\n    def own_skill(self):\n        print(\"Child's skill: Coding\")\n# Creating an instance of Child\nc = Child()\nc.skill1()                  # Accessing Father's method\nc.skill2()                  # Accessing Mother's method\nc.own_skill()               # Accessing its own method",
+            "runnable": true
+          },
+          {
+            "type": "code",
+            "language": "text",
+            "text": "Father's skill: Gardening\nMother's skill: Cooking\nChild's skill: Coding",
+            "caption": "Output (program chala kar)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"class Father:\" aur \"class Mother:\": do parent classes; Father ka method skill1() aur Mother ka skill2().\n\"# Derived class ...\": comment.\n\"class Child(Father, Mother):\": brackets mein do classes, yani Child dono se inherit karti hai (multiple inheritance). Is ka apna method own_skill() hai.\n\"c = Child()\": Child ka object.\n\"c.skill1()\" Father se aaya, \"c.skill2()\" Mother se aaya, \"c.own_skill()\" Child ka apna hai.\nOutput: teen lines: \"Father's skill: Gardening\", \"Mother's skill: Cooking\" aur \"Child's skill: Coding\".\nKhud try karein: Father class mein \"def skill3(self): print(\\\"Father's skill: Driving\\\")\" jor kar aakhir mein c.skill3() likhein: chauthi line \"Father's skill: Driving\" aayegi."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Mukhtasar khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Multiple inheritance: ek child, do ya zyada parents: class Child(Father, Mother).",
+              "Child dono parents ke methods istemal kar sakti hai."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

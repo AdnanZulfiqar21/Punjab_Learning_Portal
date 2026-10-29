@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH8-IOT-DATA-AUTOMATION-RU",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch8",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch8/u-data-collection-communication-and-automation",
+      "title": "Data Collection, Communication, and Automation (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-CS-CH8-IOT-DATA-AUTOMATION",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 110,
+          "pdf_to": 111,
+          "note": "Roman Urdu explanation of Data Collection, Communication, and Automation (PDF 110-111, printed 106-107)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "IoT teen bare kaamon se chalta hai: data jama karna, communication (rabta) aur automation. Sensors mahol se data jama karte hain, jaise darja hararat, harkat ya nami (humidity). Yeh data cloud par mabni systems ya servers ko bheja jata hai jahan is ko process aur analyze kiya jata hai. Analyze kiya hua data khud ba khud koi kaam shuru kar sakta hai, maslan kamre mein koi na ho to lights band kar dena, ya zameen sookh jaye to pani dena shuru kar dena."
+          },
+          {
+            "type": "paragraph",
+            "text": "Devices ka aapas mein rabta systems ko ek doosre ke saath hum-aahang (synchronized) aur kaar-amad rakhta hai. Automation haath se control ki zaroorat kam karti hai, waqt bachati aur insani ghalti kam karti hai. Foran milne wale data aur zaheen faislon ko mila kar IoT gharon, industries aur bastiyon ke liye zyada smart, mehfooz aur kaar-amad mahol banata hai."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Class Activity",
+            "text": "IoT devices (lights, pankhe, sensors) wale smart ghar ka khaaka (sketch) banayein. Label karein ke har device data kaise jama aur aage bhejta hai."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "IoT ka kaam teen qadam hai: sensor reading (data collection), us par faisla, aur khud kaam (automation). Neeche wala chhota program zameen ki nami (soil moisture) ki readings dekh kar pump on/off karta hai aur garmi mein parde band karta hai."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "soil_moisture = [45, 38, 29, 22, 41]   # har ghante sensor ki reading (%)\ndry_limit = 30                         # is se kam nami = zameen sookhi\nroom_temp = 36                         # kamre ka darja hararat (°C)\n\nfor hour, reading in enumerate(soil_moisture, start=1):\n    if reading < dry_limit:\n        print(f\"Ghanta {hour}: nami {reading}% -> pump ON (pani shuru)\")\n    else:\n        print(f\"Ghanta {hour}: nami {reading}% -> pump OFF\")\n\nif room_temp > 35:\n    print(\"Darja hararat\", room_temp, \"-> parde band\")\nelse:\n    print(\"Darja hararat\", room_temp, \"-> parde khule\")",
+            "runnable": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"soil_moisture = [45, 38, 29, 22, 41]\": yeh list sensor ki paanch readings hain (har ghante aik), nami feesad (%) mein.\n\"dry_limit = 30\": agar nami 30% se kam ho to zameen sookhi maani jayegi. \"room_temp = 36\": kamre ka darja hararat.\n\"for hour, reading in enumerate(soil_moisture, start=1)\": har reading ko bari bari leta hai; enumerate saath mein ginti (1, 2, 3...) bhi deta hai jo ghanta ban jati hai.\n\"if reading < dry_limit\": nami 30 se kam ho to \"pump ON\" print hota hai, warna \"pump OFF\". Yahi automation hai: insan ke baghair faisla.\n\"if room_temp > 35\": kitab ki misal ki tarah 35°C se zyada garmi par parde band.\nOutput: chhe lines aati hain: \"Ghanta 1: nami 45% -> pump OFF\", \"Ghanta 2: nami 38% -> pump OFF\", \"Ghanta 3: nami 29% -> pump ON (pani shuru)\", \"Ghanta 4: nami 22% -> pump ON (pani shuru)\", \"Ghanta 5: nami 41% -> pump OFF\" aur \"Darja hararat 36 -> parde band\".\nKhud try karein: dry_limit ko 40 kar dein (ab ghanta 2 par bhi pump ON hoga), ya room_temp = 30 kar ke dekhein ke parde khule rehte hain."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "IoT ke teen bare kaam (functions) kaun se hain? Har aik ki misal dein.",
+            "explanation": "Data collection: sensor darja hararat, harkat ya nami napta hai. Communication: data cloud ya server ko jata hai aur devices aapas mein synchronized rehte hain. Automation: analyze kiya data khud kaam shuru karta hai, jaise kamra khali ho to lights band, zameen sookhe to pani (irrigation) shuru."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Mukhtasar khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Data collection (sensors) -> communication (cloud/server) -> automation (khud kaam).",
+              "Automation waqt bachati aur insani ghalti kam karti hai."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

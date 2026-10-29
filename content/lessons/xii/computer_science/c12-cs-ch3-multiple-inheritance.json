@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH3-MULTIPLE-INHERITANCE",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch3",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch3/u-multiple-inheritance",
+      "title": "Multiple Inheritance",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 41,
+          "pdf_to": 42,
+          "note": "Run-in heading Multiple Inheritance under Inheritance, with Figure 3.4 and the Father/Mother/Child example (PDF 41-42, printed 37-38)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Multiple inheritance in Python allows a single class to inherit features (attributes and methods) from more than one parent class. This enables a child class to combine behaviors from different sources, such as a Smartphone class inheriting from both a Camera and a Computer class (as shown in Figure 3.4)."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch3-fig-3-4-multiple-inheritance",
+            "alt": "Multiple inheritance: a Child Class box below two boxes, Parent Class 1 and Parent Class 2; lines from the child go to both parents, each ending in a hollow arrowhead at the parent.",
+            "caption": "Figure 3.4: Multiple Inheritance (original drawing after the textbook's Figure 3.4)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Example:"
+          },
+          {
+            "type": "paragraph",
+            "text": "In this example, the Child class inherits from both Father and Mother classes. It can access methods from both parent classes."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "class Father:\n    def skill1(self):\n        print(\"Father's skill: Gardening\")\nclass Mother:\n    def skill2(self):\n        print(\"Mother's skill: Cooking\")\n\n# Derived class inheriting from two base classes\nclass Child(Father, Mother):\n    def own_skill(self):\n        print(\"Child's skill: Coding\")\n# Creating an instance of Child\nc = Child()\nc.skill1()                  # Accessing Father's method\nc.skill2()                  # Accessing Mother's method\nc.own_skill()               # Accessing its own method"
+          }
+        ]
+      }
+    }
+  ]
+}

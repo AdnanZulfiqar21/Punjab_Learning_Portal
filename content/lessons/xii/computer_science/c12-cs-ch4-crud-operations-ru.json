@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH4-CRUD-OPERATIONS-RU",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch4",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch4/u-crud-operations",
+      "title": "CRUD Operations (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-CS-CH4-CRUD-OPERATIONS",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 59,
+          "pdf_to": 59,
+          "note": "Roman Urdu explanation of CRUD Operations (PDF 59, printed 55), paragraph for paragraph with the English; Code Explanation boxes and runnable examples added 2026-10-29."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "CRUD ka matlab Create, Read, Update aur Delete hai; yeh database ke bunyadi kaam hain. Inhi se database mein rakha data sambhala jata hai (Figure 4.4 aur Table 4.1). Har database wali application CRUD operations par chalti hai; yeh maloomat ko durust aur taaza (up-to-date) rakhte hain. Python yeh kaam SQL commands se karta hai."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch4-fig-crud",
+            "alt": "students naam ka table, columns ID, Name, Age; rows 1 Ibrahim 25; 2 Zainab 30; 3 Kiran 28. Chaar buttons us ki taraf ishara karte hain: Create (INSERT...), Read (SELECT...), Update (UPDATE...) aur Delete (DELETE...).",
+            "caption": "Figure 4.4: Table par Create, Read, Update aur Delete operations (kitab ki Figure 4.4 ke mutabiq asal khaaka)."
+          },
+          {
+            "type": "table",
+            "caption": "Table 4.1: CRUD operations",
+            "header": [
+              "Command",
+              "Command ki misal",
+              "Wazahat"
+            ],
+            "rows": [
+              [
+                "INSERT",
+                "INSERT INTO students (ID, Name, Age) VALUES (1, 'John', 20);",
+                "Table mein naya record dalta hai."
+              ],
+              [
+                "READ",
+                "SELECT * FROM students;",
+                "Table se data nikalta hai (SQL mein yeh kaam SELECT command karti hai)."
+              ],
+              [
+                "UPDATE",
+                "UPDATE students SET Age = 21 WHERE ID = 1;",
+                "Table ka maujooda record badalta hai."
+              ],
+              [
+                "DELETE",
+                "DELETE FROM students WHERE ID = 1;",
+                "Table se record mitata hai."
+              ]
+            ]
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Figure 4.4 wala students table Python ki list mein, aur us par chaaron CRUD kaam bina database ke. Oopar ki qeematein badal kar Run karein aur dekhein ke table kaise badalta hai."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "new_name = \"Hina\"   # Create: naye student ka naam\nnew_age = 19        # Create: naye student ki umar\nupdate_id = 2       # Update: kis ID ki umar badalni hai\nupdated_age = 31    # Update: nayi umar\ndelete_id = 3       # Delete: kis ID ka record mitana hai\n\nstudents = [\n    {\"ID\": 1, \"Name\": \"Ibrahim\", \"Age\": 25},\n    {\"ID\": 2, \"Name\": \"Zainab\", \"Age\": 30},\n    {\"ID\": 3, \"Name\": \"Kiran\", \"Age\": 28},\n]\n\ndef show(title):\n    print(title)\n    for row in students:\n        print(\"  \", row[\"ID\"], row[\"Name\"], row[\"Age\"])\n\nshow(\"Read (shuru mein):\")\n\n# Create (INSERT): naya record\nnext_id = max(row[\"ID\"] for row in students) + 1\nstudents.append({\"ID\": next_id, \"Name\": new_name, \"Age\": new_age})\n\n# Update (UPDATE ... WHERE ID = update_id)\nfor row in students:\n    if row[\"ID\"] == update_id:\n        row[\"Age\"] = updated_age\n\n# Delete (DELETE ... WHERE ID = delete_id)\nstudents = [row for row in students if row[\"ID\"] != delete_id]\n\nshow(\"Read (CRUD ke baad):\")",
+            "runnable": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "Oopar ki paanch lines: woh qeematein jo aap badal sakte hain (naya naam aur umar, kis ID ko update aur kis ko delete karna hai).\n\"students = [...]\": table: har dictionary aik record (row) hai jis mein ID, Name, Age hain.\n\"def show(title):\": Read: table ki har row print karta hai (SQL mein SELECT * FROM students).\n\"next_id = max(...) + 1\" aur \"students.append(...)\": Create: sab se bari ID se agli ID (4) bana kar naya record aakhir mein jorta hai (INSERT).\n\"for row in students: if row[\"ID\"] == update_id: row[\"Age\"] = updated_age\": Update: sirf us row ki umar badalta hai jis ki ID barabar ho, bilkul WHERE ki tarah.\n\"students = [row for row in students if row[\"ID\"] != delete_id]\": Delete: aisi nayi list banata hai jis mein woh row nahi jis ki ID delete_id hai.\nOutput: \"Read (shuru mein):\" ke neeche \"1 Ibrahim 25\", \"2 Zainab 30\", \"3 Kiran 28\"; phir \"Read (CRUD ke baad):\" ke neeche \"1 Ibrahim 25\", \"2 Zainab 31\", \"4 Hina 19\" (Kiran mit gaya, Zainab ki umar 31, Hina nayi).\nKhud try karein: delete_id = 5 kar dein (aisi ID hai hi nahi): koi row nahi mitegi, jaise WHERE ID = 5 kuch nahi mitata."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Mukhtasar khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "CRUD: Create (INSERT), Read (SELECT), Update (UPDATE), Delete (DELETE).",
+              "Har database wali application inhi chaar kaamon par chalti hai."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

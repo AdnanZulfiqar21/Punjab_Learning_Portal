@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH3-MULTILEVEL-INHERITANCE",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch3",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch3/u-multilevel-inheritance",
+      "title": "Multilevel Inheritance",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 42,
+          "pdf_to": 43,
+          "note": "Run-in heading Multilevel Inheritance under Inheritance, with Figure 3.5, the Vehicle/Car/ElectricCar example and the Class Activity (PDF 42-43, printed 38-39)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Multilevel inheritance in Python occurs when a class inherits from another drived class, creating a chain of inheritance similar to a family tree (Grandparent → Parent → Child). In this structure, the \"grandchild\" class has access to all methods and attributes from both its immediate parent and its grandparent (as shown in Figure 3.5)."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch3-fig-3-5-multilevel-inheritance",
+            "alt": "Multilevel inheritance: three boxes in a column, Grand Parent Class at the top, Parent Class in the middle and Child Class at the bottom; each lower class is joined to the one above by a line with a hollow arrowhead at the upper class.",
+            "caption": "Figure 3.5: Multilevel Inheritance (original drawing after the textbook's Figure 3.5)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Example:"
+          },
+          {
+            "type": "paragraph",
+            "text": "In this example, ElectricCar inherits from Car, which in turn inherits from Vehicle."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "# Base Class (Grandparent)\nclass Vehicle:\n    def start_engine(self):\n        print(\"Engine started.\")\n\n# Intermediate Class (Parent)\nclass Car(Vehicle):\n    def drive(self):\n        print(\"Car is driving.\")\n\n# Derived Class (Child)\nclass ElectricCar(Car):\n    def charge(self):\n        print(\"Battery is charging.\")\n\n# Creating an instance of the bottom-most class\nmy_tesla = ElectricCar()\n\n# Accessing methods from all levels\nmy_tesla.start_engine() # Inherited from Vehicle\nmy_tesla.drive()        # Inherited from Car\nmy_tesla.charge()       # Defined in ElectricCar"
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Class Activity",
+            "text": "Create a Vehicle class and extend it with Car and Bike subclasses. Add unique methods to each subclass and demonstrate inheritance."
+          }
+        ]
+      }
+    }
+  ]
+}

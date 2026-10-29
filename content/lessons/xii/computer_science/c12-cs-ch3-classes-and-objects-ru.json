@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH3-CLASSES-AND-OBJECTS-RU",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch3",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch3/u-classes-and-objects-representing-real-world-entities-in-code",
+      "title": "Classes and Objects – Representing Real-World Entities in Code (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-CS-CH3-CLASSES-AND-OBJECTS",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 38,
+          "pdf_to": 38,
+          "note": "Roman Urdu: Classes and Objects with Figure 3.1, the Student program, its output and Code Explanation (PDF 38, printed 34)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Class aik blueprint ya template (saancha) hai jo kisi cheez (entity) ki properties (attributes) aur kaam (methods) tay karti hai. Object class ka aik instance (namoona) hai jis ke attributes ki asal values hoti hain (Figure 3.1 dekhein). Classes aur objects ki madad se programmer asal duniya ki cheezon ka code mein model banata hai. Is se data aur us se jura kaam (functionality) aik jagah ikattha rehta hai aur program zyada munazzam ho jata hai."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch3-fig-class-object",
+            "alt": "Class aur object ka khaaka: Class: Person ke dabbe mein Attributes (name, age, gender) aur Methods (eat(), sleep(), work()) likhe hain, saath insaan ka saaya. Teer Object P1 (name = Bob, age = 34, gender = Male) aur Object P2 (name = Jenny, age = 27, gender = Female) tak jate hain; dono mein wohi teen methods hain.",
+            "caption": "Figure 3.1: Class aur Object ka rishta (kitab ki Figure 3.1 ke mutabiq asal khaaka)."
+          },
+          {
+            "type": "paragraph",
+            "text": "Misal (Example):"
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "class Student:\n    def __init__(self, name):\n        self.name = name\n\n    def display(self):\n        print(\"Student Name:\", self.name)\n\n# Creating objects\nobject1 = Student(\"Ali\")\nobject2 = Student(\"Ahmed\")\n\n# Using objects\nobject1.display()\nobject2.display()",
+            "runnable": true
+          },
+          {
+            "type": "code",
+            "language": "text",
+            "text": "Student Name: Ali\nStudent Name: Ahmed",
+            "caption": "Output (program chala kar)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"class Student:\": Student naam ki class (blueprint, naqsha) banti hai.\n\"def __init__(self, name):\": constructor (banane wala method). Jab bhi naya object bane yeh khud chalta hai aur name leta hai.\n\"self.name = name\": diya gaya naam object ke apne attribute name mein rakh diya jata hai. self us object ki taraf ishara hai jo ban raha hai.\n\"def display(self):\": method jo print(\"Student Name:\", self.name) se object ka naam dikhata hai. print() mein comma do cheezon ke beech ek space daal deta hai.\n\"# Creating objects\": comment. object1 = Student(\"Ali\") aur object2 = Student(\"Ahmed\") se do alag objects bante hain; har ek ka apna name hai.\nobject1.display() aur object2.display(): har object apna hi naam print karta hai.\nOutput: do lines: \"Student Name: Ali\" aur \"Student Name: Ahmed\".\nKhud try karein: aakhir mein object3 = Student(\"Sara\") aur object3.display() jor kar Run karein: teesri line \"Student Name: Sara\" aayegi."
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "class Student → students ka blueprint (naqsha) banati hai.",
+              "__init__ → object bante hi khud chalta hai aur naam set karta hai (yeh constructor hai).",
+              "self.name → har student ka naam rakhta hai; self khud us object ki taraf ishara hai.",
+              "display() → student ka naam print karta hai.",
+              "object1 aur object2 → do alag Student objects.",
+              "Har object ka apna data hai (Ali, Ahmed)."
+            ]
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Python class mein __init__ ka maqsad kya hai?",
+            "explanation": "__init__ constructor hai. Yeh object bante hi khud chalta aur object ke ibtidai attributes, jaise self.name = name, set karta hai."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Mukhtasar khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Class: blueprint jo attributes aur methods tay karti hai.",
+              "Object: class ka instance jis ki apni values hain.",
+              "__init__ object bante waqt values set karta hai."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

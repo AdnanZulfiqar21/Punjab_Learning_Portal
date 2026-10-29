@@ -13,8 +13,8 @@
         {
           "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
           "pdf_from": 85,
-          "pdf_to": 86,
-          "note": "Roman Urdu explanation of topic 6.7 (PDF 85-86)."
+          "pdf_to": 85,
+          "note": "Roman Urdu explanation of topic 6.7 before its first sub-heading (PDF 85-85); each sub-heading has its own lesson."
         }
       ],
       "body": {
@@ -28,138 +28,6 @@
             "tone": "note",
             "title": "Do You Know? (Kya aap jante hain?)",
             "text": "Zyada accuracy wala model bhi kuch cases mein ghalat results de sakta hai. Isi liye precision aur recall jaise doosre pemaane bhi istemal hote hain. Theek jaanch se model ki asal performance samajh aati hai."
-          },
-          {
-            "type": "heading",
-            "level": 3,
-            "text": "Accuracy and Error (durusti aur ghalti)"
-          },
-          {
-            "type": "paragraph",
-            "text": "Accuracy batati hai ke kul andazon mein se kitne sahi hain. Ise aam taur par percentage (feesad) mein likhte hain. Zyada accuracy ka matlab behtar performance. Error ghalat andaze dikhata hai; error rate accuracy ka ulat hai (error rate = 1 − accuracy). Kabhi kabhi akeli accuracy dhoka de sakti hai, is liye balanced (mutawazin, har qism ke barabar cases wala) data behtar accuracy results deta hai. Error analysis (ghaltiyon ka jaiza) ghaltiyan dhoondne mein madad deta hai. Jaanch ke liye dono aham hain. Accuracy ka formula:"
-          },
-          {
-            "type": "equation",
-            "latex": "\\text{Accuracy} = \\frac{\\text{TP} + \\text{TN}}{\\text{TP} + \\text{TN} + \\text{FP} + \\text{FN}}",
-            "text_alt": "Accuracy = (TP + TN) / (TP + TN + FP + FN)"
-          },
-          {
-            "type": "list",
-            "ordered": false,
-            "items": [
-              "TP (True Positives): positive cases jinhein model ne sahi taur par positive kaha.",
-              "TN (True Negatives): negative cases jinhein model ne sahi taur par negative kaha.",
-              "FP (False Positives): negative cases jinhein model ne ghalti se positive kaha (jhoota alarm).",
-              "FN (False Negatives): positive cases jinhein model ne ghalti se negative kaha (chhoote hue cases)."
-            ]
-          },
-          {
-            "type": "heading",
-            "level": 3,
-            "text": "Precision and Recall"
-          },
-          {
-            "type": "paragraph",
-            "text": "Precision napti hai ke jin results ko model ne positive kaha un mein se kitne waqai sahi hain. Recall napti hai ke asal positive cases mein se kitne model ne sahi pehchane. Precision correctness (durusti) par dhyan deti hai, aur recall completeness (poora pakarne) par. Zyada precision se jhoote positive results kam hote hain; zyada recall se chhoote hue cases kam hote hain."
-          },
-          {
-            "type": "paragraph",
-            "text": "Precision ka formula:"
-          },
-          {
-            "type": "equation",
-            "latex": "\\text{Precision} = \\frac{\\text{TP}}{\\text{TP} + \\text{FP}}",
-            "text_alt": "Precision = TP / (TP + FP)"
-          },
-          {
-            "type": "list",
-            "ordered": false,
-            "items": [
-              "TP (True Positives): sahi pehchane gaye positive cases.",
-              "FP (False Positives): ghalti se positive kahe gaye cases."
-            ]
-          },
-          {
-            "type": "paragraph",
-            "text": "Recall ka formula:"
-          },
-          {
-            "type": "equation",
-            "latex": "\\text{Recall} = \\frac{\\text{TP}}{\\text{TP} + \\text{FN}}",
-            "text_alt": "Recall = TP / (TP + FN)"
-          },
-          {
-            "type": "list",
-            "ordered": false,
-            "items": [
-              "TP (True Positives): sahi pehchane gaye positive cases.",
-              "FN (False Negatives): ghalti se negative kahe gaye cases."
-            ]
-          },
-          {
-            "type": "heading",
-            "level": 3,
-            "text": "F1-Score"
-          },
-          {
-            "type": "paragraph",
-            "text": "F1-score precision aur recall ke darmiyan tawazun (balance) hai: dono ko mila kar ek hi performance score deta hai. F-measure (yani F1-score) tab khaas mufeed hai jab data unbalanced ho (ek qism ke cases bohat zyada hon). Yeh correctness aur completeness dono ka khayal rakhta hai. Zyada F-measure ka matlab behtar performance. Is se sirf accuracy par bharosa nahi karna parta. F1-score jaanch mein aam istemal hota hai aur models ka munsifana muqabla karata hai."
-          },
-          {
-            "type": "paragraph",
-            "text": "F1-Score ka formula:"
-          },
-          {
-            "type": "equation",
-            "latex": "\\text{F1-Score} = 2 \\times \\frac{\\text{Precision} \\times \\text{Recall}}{\\text{Precision} + \\text{Recall}}",
-            "text_alt": "F1-Score = 2 × (Precision × Recall) / (Precision + Recall)"
-          },
-          {
-            "type": "list",
-            "ordered": false,
-            "items": [
-              "Precision: positive andazon mein se kitna hissa waqai sahi hai.",
-              "Recall: asal positive cases mein se kitna hissa sahi pehchana gaya."
-            ]
-          },
-          {
-            "type": "example",
-            "title": "Example (misal):",
-            "problem": "Farz karein ye values di gayi hain: TP = 40; TN = 50; FP = 10; FN = 5. In se Precision, Recall aur F1-Score nikalein.",
-            "steps": [
-              "Precision = TP / (TP + FP) = 40 / (40 + 10) = 40 / 50 = 0.8 (positive kahe gaye 50 cases mein se 40 sahi).",
-              "Recall = TP / (TP + FN) = 40 / (40 + 5) = 40 / 45 = 0.8889 (asal 45 positive cases mein se 40 pakre gaye).",
-              "F1-Score = 2 × (0.8 × 0.8889) / (0.8 + 0.8889) = 2 × 0.7111 / 1.6889 = 1.4222 / 1.6889 = 0.8421."
-            ],
-            "answer": "Aakhri nataij: Precision = 0.8; Recall = 0.8889; F1-Score = 0.8421. (Isi misal ki accuracy = (40 + 50) / (40 + 50 + 10 + 5) = 90 / 105 ≈ 0.857.)"
-          },
-          {
-            "type": "diagram",
-            "$asset": "c12-cs-ch6-fig-metrics",
-            "alt": "Do-ba-do confusion matrix, oopar predicted positive aur negative, pehlu mein actual positive aur negative: TP = 40 (durust positive), FN = 5 (chhoota positive), FP = 10 (jhoota alarm) aur TN = 50 (durust negative). Saath: accuracy = (TP + TN) / sab = 90 / 105 = 0.857; precision = TP / (TP + FP) = 40 / 50 = 0.8; recall = TP / (TP + FN) = 40 / 45 = 0.8889; F1 = 0.8421.",
-            "caption": "Kitab ki misal ke liye confusion matrix aur metrics (6.7 ke mutabiq asal khaaka).",
-            "long_description": "Precision 'predicted positive' column (TP aur FP) use karti; recall 'actual positive' row (TP aur FN) use karti hai."
-          },
-          {
-            "type": "checkpoint",
-            "mode": "self_check",
-            "prompt": "Ek bimari ka test 20 bimaron mein se 18 ko pakarta hai aur 980 sehatmand logon mein se 30 ko ghalti se bimar kehta hai. Recall aur precision nikalein. Yahan akeli accuracy kyun dhoka deti hai?",
-            "explanation": "TP = 18, FN = 2, FP = 30, TN = 950. Recall = 18/20 = 0.9; precision = 18/48 = 0.375. Accuracy = 968/1000 = 0.968 sirf is liye bari lagti hai ke zyada tar log sehatmand hain, jab ke zyada tar positive results jhoote alarm hain."
-          },
-          {
-            "type": "heading",
-            "level": 2,
-            "text": "Mukhtasar khulasa"
-          },
-          {
-            "type": "list",
-            "ordered": false,
-            "items": [
-              "Model ko aise test data par jaanchein jo training mein istemal na hua ho.",
-              "Accuracy = (TP + TN) / (TP + TN + FP + FN); error rate accuracy ka ulat.",
-              "Precision = TP / (TP + FP); recall = TP / (TP + FN); F1 dono ka balance.",
-              "Kitab ki misal: precision 0.8, recall 0.8889, F1-score 0.8421."
-            ]
           }
         ]
       }

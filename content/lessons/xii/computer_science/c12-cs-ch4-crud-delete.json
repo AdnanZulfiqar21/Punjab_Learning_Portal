@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH4-CRUD-DELETE",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch4",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch4/u-delete-removing-data-safely",
+      "title": "Delete: Removing Data Safely",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 60,
+          "pdf_to": 60,
+          "note": "Unnumbered topic Delete: Removing Data Safely as printed (PDF 60, printed 56); its own lesson since 2026-10-29 (one lesson per book heading), moved from the topic 4.2 lesson."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "The Delete operation removes unwanted data from a database. It helps keep the database clean and accurate. SQL delete commands are used with conditions. Python ensures only selected records are removed. Careful use prevents loss of important data."
+          },
+          {
+            "type": "paragraph",
+            "text": "Example:"
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "import sqlite3\n# Connect to the database\nconnection = sqlite3.connect(\"school.db\")\n# Create a cursor object\ncursor = connection.cursor()\n# Execute DELETE query (example: delete student with ID = 1)\ncursor.execute(\"DELETE FROM students WHERE ID = 1\")\n# Save changes\nconnection.commit()\n# Display confirmation\nprint(\"Record deleted successfully\")\n# Close the connection\nconnection.close()"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "DELETE FROM students WHERE ID = 1 → removes a specific record",
+              "connection.commit() → saves the changes in database",
+              "Without commit(), deletion will not be permanent"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH9-VULNERABILITIES-RU",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch9",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch9/u-identifying-vulnerabilities-and-suspicious-activities",
+      "title": "Identifying Vulnerabilities and Suspicious Activities (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-CS-CH9-VULNERABILITIES",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 128,
+          "pdf_to": 128,
+          "note": "Roman Urdu explanation of Identifying Vulnerabilities and Suspicious Activities (PDF 128, printed 124)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Vulnerabilities software, hardware ya user ke rawaiye ki woh kamzoriyan hain jin se hackers faida utha sakte hain. Mashkook sargarmiyon mein system ka achanak slow hona, na-maloom programs ka chalna ya network ka ajeeb traffic shamil ho sakta hai. System logs baqaida check karna aur scanning tools use karna yeh khatre ke nishan dhoondne mein madad deta hai. Ghair-mamooli rawaiye ke patterns pehchan kar user jaldi qadam utha sakta hai. Kamzoriyan jaldi pehchan kar theek karna kamyab hamlon ka imkaan kam karta hai."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Class Activity mein system logs (record) dekh kar mashkook kaam dhoondna hai. Yeh program aik namoone ke log mein har user ki ghalat login koshishein ginta hai: bohat si ghalat koshishein mashkook sargarmi ki alamat hain."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "log = [\n    \"09:00 ali login OK\",\n    \"09:05 sara login FAILED\",\n    \"09:05 sara login FAILED\",\n    \"09:06 sara login FAILED\",\n    \"09:06 sara login FAILED\",\n    \"09:30 hamza login OK\",\n    \"02:10 admin login FAILED\",\n]\nlimit = 3          # itni ya zyada ghalat koshishein = mashkook\n\nfailed = {}\nfor line in log:\n    time, user, action, result = line.split()\n    if result == \"FAILED\":\n        failed[user] = failed.get(user, 0) + 1\n\nfor user, count in failed.items():\n    if count >= limit:\n        print(f\"Khatra: {user} ki {count} ghalat koshishein -> account lock karein\")\n    else:\n        print(f\"{user}: {count} ghalat koshish (nazar rakhein)\")",
+            "runnable": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"log = [...]\": har line mein waqt, user, kaam aur nateeja (OK ya FAILED) hai.\n\"limit = 3\": itni ya zyada ghalat koshishein mashkook maani jayengi.\n\"failed = {}\": dictionary jis mein har user ki ghalat koshishon ki ginti hogi.\n\"time, user, action, result = line.split()\": split() line ko spaces par char hisson mein torta hai.\n\"failed[user] = failed.get(user, 0) + 1\": get(user, 0) purani ginti deta hai (na ho to 0) aur 1 jama hota hai.\nAakhri loop har user ki ginti dekh kar \"Khatra\" ya \"nazar rakhein\" print karta hai.\nOutput: \"Khatra: sara ki 4 ghalat koshishein -> account lock karein\" aur \"admin: 1 ghalat koshish (nazar rakhein)\".\nKhud try karein: limit = 1 kar dein; ab admin ki aik koshish bhi khatra dikhegi (raat 02:10 baje admin ka login bhi mashkook ho sakta hai)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Teen mashkook sargarmiyan (suspicious activities) batayein jo kitab likhti hai, aur unhein dhoondne ka tareeqa.",
+            "explanation": "System ka achanak slow hona, na-maloom programs chalna, ajeeb network traffic. Tareeqa: system logs baqaida check karna aur scanning tools use karna."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Mukhtasar khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Vulnerabilities: software, hardware ya user ke rawaiye ki kamzoriyan.",
+              "Logs aur scanning tools se warning signs dhoondein aur jaldi theek karein."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

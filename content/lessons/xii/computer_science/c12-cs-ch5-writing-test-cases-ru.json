@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH5-WRITING-TEST-CASES-RU",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch5",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch5/u-writing-and-executing-test-cases",
+      "title": "Writing and executing test cases (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-CS-CH5-WRITING-TEST-CASES",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 65,
+          "pdf_to": 66,
+          "note": "Roman Urdu explanation of Writing and executing test cases (PDF 65-66, printed 61-62), paragraph for paragraph with the English; Code Explanation boxes and runnable examples added 2026-10-29."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Test case kisi function ke liye khaas inputs aur un ka tawaqqo wala output tay karta hai. Maslan calculator function ko jama (addition) aur tafreeq (subtraction) ke nataij ke liye test kiya ja sakta hai. Python yeh tests chala kar batata hai ke kaun sa test fail hua ya kahan error aaya. Baar baar testing yaqeeni banati hai ke code ki tabdeeli pehle se chalti functionality ko na tore. Khud-kaar (automated) testing waqt bachati aur kaam ki durusti barhati hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Misal (Example):"
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "# Function to test\n# This function takes two input values, a and b.\n# It returns the sum of both values.\ndef add(a, b):\n    return a + b\n# This function takes two input values, a and b.\n# It returns the product of both values.\ndef multiply(a, b):\n    return a * b\n# Using pytest to test functions\n# In pytest, every test function usually starts with the word \"test_\".\n# Pytest automatically detects and runs these test functions.\ndef test_add():\n    # This test checks whether the add() function gives the correct result.\n    # Here, 2 and 3 are passed as input values.\n    # The expected output is 5.\n    assert add(2, 3) == 5  # Test passes because 2 + 3 = 5\n\ndef test_multiply():\n    # This test checks whether the multiply() function gives the correct result.\n    # Here, 2 and 3 are passed as input values.\n    # The expected output is 6.\n    assert multiply(2, 3) == 6  # Test passes because 2 * 3 = 6"
+          },
+          {
+            "type": "code",
+            "language": "text",
+            "text": "2 passed",
+            "caption": "Output (file wale folder mein pytest chala kar, khulasa)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"def add(a, b): return a + b\": do qeematein jama karta hai. \"def multiply(a, b): return a * b\": do qeematon ko zarb (multiply) karta hai.\n# wali lines comments hain.\n\"def test_add():\": test function; naam test_ se shuru hota hai taake pytest isay khud dhoond le. \"assert add(2, 3) == 5\": assert check karta hai ke shart sach hai; 2 + 3 = 5 sach hai, is liye test pass hota hai.\n\"def test_multiply():\" aur \"assert multiply(2, 3) == 6\": 2 x 3 = 6, yeh test bhi pass.\nOutput: is file ko seedha python se chalane par kuch print nahi hota, kyunke functions sirf bante hain, bulaye nahi jate. File ko test_ se shuru hone wala naam dein (maslan test_calc.py) aur usi folder mein command line par pytest likhein: dono tests chalte hain aur aakhri line \"2 passed\" aati hai (saath waqt bhi, jaise \"2 passed in 0.12s\"). pytest browser ke Run mein nahi chalta; neeche wala \"Khud chala kar dekhein\" program yahi checks saade Python se dikhata hai.\nKhud try karein: apne computer par add mein a + b ko a - b kar ke pytest chalayein: test_add fail hoga aur pytest \"assert -1 == 5\" dikhayega."
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "pytest testing aasan banata hai: is mein unittest ki tarah test case classes ya izafi (boilerplate) code ki zaroorat nahi.",
+              "Tests saade functions hote hain, aur assert check karta hai ke output sahi hai; shart ghalat ho to test fail ho jata hai.",
+              "Tests chalane ke liye us folder mein jahan file rakhi hai, command line par pytest likhein."
+            ]
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch5-fig-unit-test",
+            "alt": "Baayein test functions: test_add() mein assert add(2, 3) == 5 aur test_multiply() mein assert multiply(2, 3) == 6. Daayein terminal mein pytest command, aur nateeja 2 passed.",
+            "caption": "pytest se unit testing (hamara apna khaaka; kitab mein yeh figure nahi)."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "import unittest\n\ndef add(a, b):\n    return a + b\n\nclass TestCalc(unittest.TestCase):\n    def test_add(self):\n        self.assertEqual(add(2, 3), 5)\n\nif __name__ == \"__main__\":\n    unittest.main()",
+            "caption": "Izafi misal (kitab mein nahi): wahi test unittest ke saath"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"import unittest\": Python ka built-in testing module.\n\"def add(a, b):\": jis function ko test karna hai.\n\"class TestCalc(unittest.TestCase):\": unittest mein tests aik class ke andar likhe jate hain jo unittest.TestCase se banti hai.\n\"def test_add(self):\" aur \"self.assertEqual(add(2, 3), 5)\": check karta hai ke add(2, 3) aur 5 barabar hain.\n\"unittest.main()\": file ke saare tests chalata hai.\nOutput: aik nuqta \".\" (aik test pass), aik lambi lakeer, \"Ran 1 test in 0.000s\" aur \"OK\". Yeh report error stream (stderr) par aati hai aur waqt har dafa thora alag ho sakta hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Aisa pytest test likhein jo jaanche ke function square(n) 7 ke liye 49 deta hai. Agar square ko n * 2 likha gaya ho to kya hoga?",
+            "explanation": "def test_square(): assert square(7) == 49. n * 2 ke saath function 14 deta hai, is liye assert ghalat hai aur pytest test ko fail batata hai, 14 != 49 dikha kar."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "pytest browser mein nahi chalta, lekin test case ka khayal saade Python se dekha ja sakta hai: function ka asal jawab umeed wale jawab (expected output) se milaya jata hai. Qeematein badal kar Run karein aur dekhein ke test kab fail hota hai."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "a = 2                  # pehla input\nb = 3                  # doosra input\nexpected_sum = 5       # add(a, b) se kya umeed hai\nexpected_product = 6   # multiply(a, b) se kya umeed hai\n\ndef add(x, y):\n    return x + y\n\ndef multiply(x, y):\n    return x * y\n\ndef check(name, got, expected):\n    if got == expected:\n        print(\"PASSED\", name, \"->\", got)\n        return 1\n    print(\"FAILED\", name, \"-> mila\", got, \"lekin umeed thi\", expected)\n    return 0\n\npassed = 0\npassed += check(\"test_add\", add(a, b), expected_sum)\npassed += check(\"test_multiply\", multiply(a, b), expected_product)\nprint(passed, \"passed,\", 2 - passed, \"failed\")",
+            "runnable": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "Oopar ki chaar lines: test ke inputs (a, b) aur un ke umeed wale jawab (expected output).\n\"def add\" aur \"def multiply\": jin functions ko test karna hai.\n\"def check(name, got, expected):\": assert ka kaam karta hai: jawab barabar ho to \"PASSED\" aur 1 return; warna \"FAILED\", mila hua aur umeed wala jawab dikha kar 0 return. (assert ghalat hone par program rok deta; yahan hum ginti jaari rakhte hain.)\n\"passed += check(...)\": har pass hone wale test par ginti 1 barhti hai.\n\"print(passed, \"passed,\", 2 - passed, \"failed\")\": pytest ki tarah aakhir mein khulasa.\nOutput: \"PASSED test_add -> 5\", \"PASSED test_multiply -> 6\" aur \"2 passed, 0 failed\".\nKhud try karein: expected_sum = 6 kar dein: \"FAILED test_add -> mila 5 lekin umeed thi 6\" aur \"1 passed, 1 failed\" aayega."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Mukhtasar khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Test case: input + umeed wala output.",
+              "pytest test_ wale functions khud dhoond kar chalata hai; assert ghalat ho to test fail."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

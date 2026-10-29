@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH4-TKINTER-OVERVIEW-RU",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch4",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch4/u-overview-of-tkinter-as-python-s-built-in-gui-toolkit",
+      "title": "Overview of Tkinter as Python's built-in GUI toolkit (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-CS-CH4-TKINTER-OVERVIEW",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 50,
+          "pdf_to": 51,
+          "note": "Roman Urdu explanation of Overview of Tkinter as Python's built-in GUI toolkit (PDF 50-51, printed 46-47), paragraph for paragraph with the English; Code Explanation boxes and runnable examples added 2026-10-29."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Tkinter Python ka standard GUI toolkit hai jo Python ke saath hi install hota hai. Is mein classes aur functions hain jin se windows, buttons, labels, entry fields aur doosre widgets bante hain. Tkinter seekhna aasan hai, halka (lightweight) hai, aur event-driven programming deta hai, yani kaam user ke events (jaise click) se shuru hote hain. Yeh chhoti aur darmiyani GUI applications jaldi banane ke liye munasib hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Misal (Example):"
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "import tkinter as tk\n# Create main window\nwindow = tk.Tk()\nwindow.title(\"Simple GUI Example\")\nwindow.geometry(\"300x200\")\n\n# Function to handle button click (event)\ndef on_click():\n    label.config(text=\"Button Clicked!\")\n\n# Create a label\nlabel = tk.Label(window, text=\"Welcome to Tkinter\")\nlabel.pack(pady=10)\n\n# Create an entry field\nentry = tk.Entry(window)\nentry.pack(pady=10)\n\n# Create a button\nbutton = tk.Button(window, text=\"Click Me\", command=on_click)\nbutton.pack(pady=10)\n\n# Run the application\nwindow.mainloop()"
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch4-fig-gui-window",
+            "alt": "Simple GUI Example window ka output: Welcome to Tkinter label, us ke neeche khaali entry field, aur Click Me button.",
+            "caption": "Saada GUI misal ka output (kitab mein code ke saath chhapi window ke mutabiq asal khaaka)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"import tkinter as tk\": Tkinter library ko chhote naam tk se laata hai.\n\"window = tk.Tk()\": main window (asal khirki) banata hai. \"window.title(...)\" us ke oopar naam \"Simple GUI Example\" likhta hai aur \"window.geometry(\"300x200\")\" size 300 pixel chaura aur 200 pixel ooncha rakhta hai.\n\"def on_click():\": yeh function button dabane par chalta hai; \"label.config(text=\"Button Clicked!\")\" label ka text badal deta hai.\n\"label = tk.Label(window, text=\"Welcome to Tkinter\")\": window mein text dikhane wala label. \"label.pack(pady=10)\" use window mein rakhta hai aur oopar neeche 10 pixel khaali jagah (padding) chhorta hai.\n\"entry = tk.Entry(window)\": aik khaali dabba (entry field) jis mein user likh sakta hai.\n\"button = tk.Button(window, text=\"Click Me\", command=on_click)\": \"Click Me\" button. command= batata hai ke click par on_click chale (function ka naam qausain () ke baghair).\n\"window.mainloop()\": window khuli rakhta hai aur events (click, typing) ka intezar karta rehta hai.\nOutput: yeh program koi text print nahi karta, balke aik window kholta hai: oopar \"Welcome to Tkinter\", us ke neeche khaali entry field aur \"Click Me\" button (oopar wali tasveer). Button dabane par label ka text \"Button Clicked!\" ho jata hai. Tkinter browser ke Run mein nahi chalta; yeh program apne computer par Python (IDLE ya VS Code) mein chala kar dekhein.\nKhud try karein: apne computer par title ka text ya geometry(\"400x250\") badlein, aur on_click mein text \"Shabash!\" likh kar dobara chalayein."
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Tk() → main window banata hai; title() aur geometry() us ka naam aur size (300 x 200 pixels) set karte hain.",
+              "Label → text dikhata hai.",
+              "Entry → user se input leta hai.",
+              "Button → kaam karta hai.",
+              "command=on_click → event handling: button dabane par on_click() chalta hai aur label ka text 'Button Clicked!' ho jata hai.",
+              "mainloop() → GUI chalata hai aur window khuli rakh kar events ka intezar karta hai."
+            ]
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Mukhtasar khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Tkinter Python ke saath install hota hai; Tk() window, widgets aur mainloop().",
+              "command=function widget ko function se jorta hai (event handling)."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

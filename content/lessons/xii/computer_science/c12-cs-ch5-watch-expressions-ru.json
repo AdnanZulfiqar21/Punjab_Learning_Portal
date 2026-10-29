@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH5-WATCH-EXPRESSIONS-RU",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch5",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch5/u-monitoring-variable-values-with-watch-expressions",
+      "title": "Monitoring variable values with watch expressions (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-CS-CH5-WATCH-EXPRESSIONS",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 66,
+          "pdf_to": 66,
+          "note": "Roman Urdu explanation of Monitoring variable values with watch expressions (PDF 66, printed 62), paragraph for paragraph with the English; Code Explanation boxes and runnable examples added 2026-10-29."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Watch expressions program chalte waqt variables ki values par nazar rakhte hain aur value badalne par khud update ho jate hain. Is se chalte waqt ghalat ya ghair-mutawaqqa (unexpected) data pakra jata hai. Watches dikhate hain ke data qadam ba qadam asal waqt (real time) mein kaise badalta hai."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Watch expression IDE mein variable ki badalti value dikhati hai. Browser mein IDE nahi, is liye yahan har qadam par print() se wahi values dekhte hain. numbers ki list badal kar Run karein."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "numbers = [4, 7, 1, 9]   # in ka jama nikalna hai\n\ntotal = 0\nstep = 0\nfor n in numbers:\n    step = step + 1\n    total = total + n\n    # \"watch\": har qadam par n aur total ki value\n    print(\"Qadam\", step, \"| n =\", n, \"| total =\", total)\nprint(\"Aakhri total:\", total)",
+            "runnable": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"numbers = [4, 7, 1, 9]\": jin numbers ka jama karna hai.\n\"total = 0\" aur \"step = 0\": jama aur qadam ki ginti shuru mein 0.\n\"for n in numbers:\": har number bari bari n mein aata hai; \"total = total + n\" use jama karta hai.\n\"print(\"Qadam\", step, ...)\": har qadam par n aur total dikhata hai, jaise IDE ka watch pane.\nOutput: \"Qadam 1 | n = 4 | total = 4\", \"Qadam 2 | n = 7 | total = 11\", \"Qadam 3 | n = 1 | total = 12\", \"Qadam 4 | n = 9 | total = 21\" aur \"Aakhri total: 21\".\nKhud try karein: \"total = total + n\" ko ghalti se \"total = n\" kar dein: watch dikhayegi ke total har qadam par pichhla jama bhool jata hai aur aakhir mein 9 aata hai. Aise hi watch se bug pakra jata hai."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Mukhtasar khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Watch: chalte program mein variable ki value, khud update hoti hai.",
+              "Ghalat ya ghair-mutawaqqa value se bug pakra jata hai."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

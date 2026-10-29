@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH2-TRUTH-VALUES-OF-PROPOSITIONS-RU",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch2",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch2/u-truth-values-of-propositions",
+      "title": "Truth Values of Propositions (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-CS-CH2-TRUTH-VALUES-OF-PROPOSITIONS",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 29,
+          "pdf_to": 29,
+          "note": "Roman Urdu: Truth Values of Propositions with a small program of ours that counts the 2^n rows (PDF 29, printed 25)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Har proposition, jaise P ya Q, ki value True (T) ya False (F) ho sakti hai. Truth table tamam mumkin combinations likhta hai: n propositions ke liye 2ⁿ rows. Maslan 2 propositions ke liye 2² = 4 rows aur 3 ke liye 2³ = 8 rows. Compound proposition ki truth value us ke hisson (components) ki values se tay hoti hai."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "n propositions ke liye 2ⁿ rows kyun? Yeh program saari rows gin kar aur likh kar dikhata hai. n badal kar Run karein."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "from itertools import product\n\nn = 3   # propositions ki tadaad (P, Q, R)\n\nrows = list(product([True, False], repeat=n))\nprint(\"Propositions:\", n)\nprint(\"Rows:\", len(rows), \"= 2 ki power\", n)\nfor row in rows:\n    print(\" \".join(\"T\" if v else \"F\" for v in row))",
+            "runnable": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"from itertools import product\": Python ki standard library se product function, jo saare combinations bana deta hai.\n\"n = 3\": teen propositions (maslan P, Q, R).\n\"product([True, False], repeat=n)\": True/False ke saare mumkin jor (combinations) banata hai; list() se un ki list ban jati hai.\nlen(rows): rows ki tadaad; n = 3 ke liye 2 x 2 x 2 = 8.\nAakhri loop har row ko T aur F mein likhta hai (\"T\" if v else \"F\").\nOutput: \"Propositions: 3\", \"Rows: 8 = 2 ki power 3\", phir 8 rows: T T T, T T F, T F T, T F F, F T T, F T F, F F T, F F F.\nKhud try karein: n = 2 kar ke Run karein: \"Rows: 4\" aur chaar rows (T T, T F, F T, F F). n = 4 par 16 rows aayengi."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Mukhtasar khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Har proposition T ya F hota hai.",
+              "n propositions ke liye 2ⁿ rows (2 ke liye 4, 3 ke liye 8).",
+              "Compound proposition ki value us ke hisson ki values se tay hoti hai."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

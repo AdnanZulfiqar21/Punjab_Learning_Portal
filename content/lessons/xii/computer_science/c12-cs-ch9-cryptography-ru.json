@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH9-CRYPTOGRAPHY-RU",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch9",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch9/u-data-protection-and-cryptography",
+      "title": "Data Protection and Cryptography (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-CS-CH9-CRYPTOGRAPHY",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 127,
+          "pdf_to": 127,
+          "note": "Roman Urdu explanation of Data Protection and Cryptography (PDF 127, printed 123)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Data protection ka matlab hai digital maloomat ko unauthorized access, zaya hone ya nuqsan se bachana. Yeh yaqeeni banata hai ke sirf sahi log hi data dekh ya use kar sakein."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Tidbit",
+            "text": "Mehfooz storage aur transmission (data bhejna) unauthorized access aur breaches ko rokte hain."
+          },
+          {
+            "type": "paragraph",
+            "text": "Cryptography maloomat ko is tarah mehfooz karne ka ilm hai ke sirf authorized (ijazat wale) users hi use samajh sakein. Is ke do bunyadi concepts hain: encryption aur decryption. Encryption ek khaas key ki madad se parhne ke qabil data ko coded text mein badal deta hai, aur decryption zaroorat par use wapas asal shakal mein le aata hai. Misal: online message bhejte waqt encryption use har us shakhs ke liye na-qabil-e-faham bana deti hai jo use raaste mein pakarne (intercept) ki koshish kare. Is tarah bhejte waqt maloomat private rehti hai. Cryptography mehfooz websites, online banking aur messaging apps mein aam use hoti hai."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch9-fig-encryption",
+            "alt": "Upar se neeche: HELLO (parhne ke qabil data, plaintext) se teer 'Encryption (key se)' KHOOR (coded matn, ciphertext) tak, phir teer 'Decryption (key se)' wapas HELLO tak. KHOOR se aik dotted teer 'raaste mein pakarne wale' tak jo sirf KHOOR dekhta hai.",
+            "caption": "Key se encryption aur decryption (is sabaq ke liye hamara apna khaaka; kitab mein yeh tasveer nahi)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Diagram ko samjhein",
+            "text": "Yeh aik chhoti si misal hai: har harf ko alphabet mein teen qadam aage kar diya (H se K, E se H, L se O), yani yahan key 3 hai. Asal systems is se kahin lambi khufia keys aur mazboot riyazi tareeqe use karte hain. Asal baat wahi hai jo kitab kehti hai: key ke baghair raaste mein pakarne wala coded matn parh nahi sakta."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Upar wali tasveer mein har harf teen qadam aage kiya gaya tha (Caesar cipher). Yeh program wahi kaam karta hai: key se encryption aur ulti key se decryption. Asal systems is se kahin mazboot tareeqe use karte hain; yeh sirf idea samjhane ke liye hai."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "message = \"HELLO\"\nkey = 3\n\ndef encrypt(text, k):\n    result = \"\"\n    for ch in text:\n        if ch.isalpha():\n            result += chr((ord(ch.upper()) - 65 + k) % 26 + 65)\n        else:\n            result += ch\n    return result\n\nsecret = encrypt(message, key)\nprint(\"Asal message :\", message)\nprint(\"Encrypted    :\", secret)\nprint(\"Decrypted    :\", encrypt(secret, -key))\nprint(\"Ghalat key 5 :\", encrypt(secret, -5))",
+            "runnable": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"message = \\\"HELLO\\\"\" asal (readable) matn hai aur \"key = 3\" khufia key.\n\"def encrypt(text, k)\": har character (ch) ko bari bari leta hai.\n\"ord(ch.upper()) - 65\": ord() harf ka number deta hai (A = 65); 65 ghata kar A = 0, B = 1 ... Z = 25.\n\"+ k\" key jitna aage le jata hai; \"% 26\" Z ke baad wapas A par le aata hai; \"+ 65\" aur chr() number ko dobara harf bana dete hain.\nJo harf nahi (space, number) woh waisa hi rehta hai.\n\"encrypt(secret, -key)\": ulti key (-3) se peeche le ja kar decryption.\nOutput: \"Asal message : HELLO\", \"Encrypted    : KHOOR\", \"Decrypted    : HELLO\" aur \"Ghalat key 5 : FCJJM\" (ghalat key se matn samajh nahi aata; yahi hifazat hai).\nKhud try karein: message = \"PAKISTAN\" aur key = 5 likh kar dekhein."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Encryption aur decryption mein farq likhein, aur cryptography kahan use hoti hai?",
+            "explanation": "Encryption readable data ko key ke zariye coded text mein badalti hai; decryption coded text ko wapas asal shakal mein laati hai. Yeh secure websites, online banking aur messaging apps mein use hoti hai."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Mukhtasar khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Data protection: data ko unauthorized access, loss ya damage se bachana.",
+              "Cryptography: encryption (coded banana) + decryption (wapas parhne layak)."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

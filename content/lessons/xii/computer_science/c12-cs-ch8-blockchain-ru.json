@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C12-CS-CH8-BLOCKCHAIN-RU",
+      "chapter": "pk-punjab/xii/computer_science/c12-cs/ch8",
+      "topic": "pk-punjab/xii/computer_science/c12-cs/ch8/u-blockchain-technology",
+      "title": "Blockchain Technology (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C12-CS-CH8-BLOCKCHAIN",
+      "source_refs": [
+        {
+          "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
+          "pdf_from": 112,
+          "pdf_to": 112,
+          "note": "Roman Urdu explanation of Blockchain Technology (PDF 112, printed 108)."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Blockchain technology ek digital system hai jo maloomat ek central server ke bajaye bohat se computers par mehfooz tareeqe se store aur share karta hai. Har tasdeeq shuda (verified) record, yani block, apne se pichhle block se jura hota hai, aur yun ek aisi zanjeer (chain) banti hai jo badli nahi ja sakti. Kyunke har computer ke paas is ki copy hoti hai, is liye data ko chupke se badalna taqreeban na-mumkin hai. Yeh decentralized (kisi ek markaz ke baghair) banawat banks ya hukoomat jaise darmiyani idaron (intermediaries) ki zaroorat khatam kar ke transparency, hifazat aur bharosa barhati hai. Is se logon aur idaron ke darmiyan seedha, durust aur jawabdeh len-den hota hai."
+          },
+          {
+            "type": "paragraph",
+            "text": "Blockchain ke bohat si industries mein istemal hain. Finance mein yeh Bitcoin jaisi cryptocurrencies chalata hai taake log seedha aur mehfooz len-den (peer-to-peer transactions) kar sakein. Supply chain mein yeh maal ko us ki asal jagah se gahak tak track karta aur asli hone ki tasdeeq karta hai. Data ki hifazat mein yeh qanooni kaghzaat, medical files aur certificates jaise records ke liye aisi storage deta hai jis mein chhed-chhaar (tamper) nahi ho sakti. Hukoomatein, companies aur schools zameen ke records, supply chains aur taleemi asnaad (academic credentials) sambhalne ke liye blockchain use karte hain. Mukhtasar yeh ke blockchain digital systems mein bharosa, transparency aur efficiency barhata hai."
+          },
+          {
+            "type": "diagram",
+            "$asset": "c12-cs-ch8-fig-blockchain",
+            "alt": "Teeron se jure chaar blocks. Har aik mein data, apna hash aur pichhle block ka hash (block 1 prev 0000, hash 7a3f; block 2 prev 7a3f; block 3 prev c91e; block 4 prev 05bd). Block 3 surkh, note: ise badalne se is ka hash badalta, is liye block 4 ka prev mel nahi khata. Neeche paanch computers har aik ke paas poori nakal; koi wahid malik nahi, is liye chhupi tabdeeli taqreeban na-mumkin.",
+            "caption": "Jure hue blocks record ko badalna mushkil kaise banate hain (blockchain par apna khaaka).",
+            "long_description": "Hash block ke mawad se nikla mukhtasar fingerprint hai; mawad mein koi bhi tabdeeli bilkul alag fingerprint deti hai. Dikhaye gaye hashes banawati mukhtasar misalein hain."
+          },
+          {
+            "type": "callout",
+            "tone": "note",
+            "title": "Tidbit",
+            "text": "Cryptocurrency se supply chain tracking tak, blockchain transparency ke zariye bharosa banata hai."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Khud chala kar dekhein"
+          },
+          {
+            "type": "paragraph",
+            "text": "Blockchain mein har block apne pichhle block ka hash (data ka chhota fingerprint) saath rakhta hai. Agar koi purana record badle to us ka hash badal jata hai aur chain toot jati hai. Yeh program Python ki hashlib library se teen blocks ki chain bana kar dikhata hai ke chhed-chhaar (tampering) foran pakri jati hai."
+          },
+          {
+            "type": "code",
+            "language": "python",
+            "text": "import hashlib\n\nrecords = [\"Ali ne Sara ko 500 diye\", \"Sara ne Hamza ko 200 diye\", \"Hamza ne Ali ko 100 diye\"]\ntamper_block = 1        # kaun sa block badla jaye (0, 1, 2) ya None\n\ndef make_hash(data, prev_hash):\n    return hashlib.sha256((data + prev_hash).encode()).hexdigest()[:10]\n\nchain = []\nprev = \"0000000000\"\nfor data in records:\n    h = make_hash(data, prev)\n    chain.append([data, prev, h])\n    prev = h\n\nfor i, block in enumerate(chain):\n    print(\"Block\", i, \"| hash:\", block[2], \"| pichhla:\", block[1])\n\nif tamper_block is not None:\n    chain[tamper_block][0] = \"Sara ne Hamza ko 9000 diye\"\n\nok = True\nfor i, (data, prev_hash, saved) in enumerate(chain):\n    if make_hash(data, prev_hash) != saved:\n        print(\"Block\", i, \"badla gaya hai! Chain toot gayi.\")\n        ok = False\nif ok:\n    print(\"Chain theek hai: koi record nahi badla.\")",
+            "runnable": true
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Code Explanation (Wazahat)",
+            "text": "\"import hashlib\": Python ki library jo hash banati hai. Hash kisi bhi data ka chhota code hai; data mein aik harf bhi badle to hash bilkul badal jata hai.\n\"records = [...]\": teen len-den (transactions). \"tamper_block = 1\": kaun sa block hum chupke se badlenge (None likhein to koi nahi).\n\"def make_hash(data, prev_hash)\": data aur pichhle block ka hash jor kar sha256 hash banata hai; [:10] sirf pehle 10 characters rakhta hai taake parhna aasan ho.\n\"prev = \\\"0000000000\\\"\": pehle block se pehle koi block nahi, is liye sifar wala hash.\nPehla for loop har record ka hash bana kar [data, pichhla hash, apna hash] chain mein dalta hai aur prev ko naya hash bana deta hai. Isi se blocks jurte hain.\nDoosra for loop har block ki line print karta hai.\n\"chain[tamper_block][0] = ...\": block 1 ka record 200 se 9000 kar diya (dhoka).\nAakhri loop har block ka hash dobara banata hai; jo saved hash se na mile woh block badla hua hai.\nOutput: \"Block 0 | hash: 206b97346c | pichhla: 0000000000\", \"Block 1 | hash: cb2fa8cd00 | pichhla: 206b97346c\", \"Block 2 | hash: 91867913d1 | pichhla: cb2fa8cd00\" aur phir \"Block 1 badla gaya hai! Chain toot gayi.\"\nKhud try karein: tamper_block = None likhein: aakhri line \"Chain theek hai: koi record nahi badla.\" ho jayegi. Ya tamper_block = 2 kar ke dekhein."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Blockchain mein data ko chupke se badalna taqreeban na-mumkin kyun hai? Do wajah batayein.",
+            "explanation": "(1) Har block pichhle block se jura hai, is liye aik block badalne se chain toot jati hai. (2) Har computer ke paas poori chain ki copy hoti hai, to aik jagah ki tabdeeli baqi copies se mel nahi khati aur pakri jati hai."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "Poore section 8.1 ka jaiza: Har zaroorat ko technology se milayein: (a) ghar se mareez ki dil ki dharkan check karna, (b) aise school certificates rakhna jo jaali na ban sakein, (c) barhti company ko foran storage barhane dena, (d) hazaron gahakon ke sawalon ke aik saath jawab.",
+            "explanation": "(a) IoT (data bhejne wala pehna jane wala sensor). (b) Blockchain (na-qabil-e-tabdeel records). (c) Cloud computing (scalability). (d) AI (chatbot)."
+          },
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "Mukhtasar khulasa"
+          },
+          {
+            "type": "list",
+            "ordered": false,
+            "items": [
+              "Blockchain: bohat se computers par jure blocks; decentralized, transparent aur mehfooz.",
+              "Istemal: Bitcoin (finance), supply chain tracking, tamper-proof records (land records, certificates)."
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
