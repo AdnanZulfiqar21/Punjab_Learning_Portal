@@ -20,7 +20,7 @@ export function CodeRunner({ code }: { code: string }) {
   const k = CodeColors[useScheme()];
   const vars = useMemo(() => editableVars(code), [code]);
   const prompts = useMemo(() => inputPrompts(code), [code]);
-  const [values, setValues] = useState<Record<number, string>>({});
+  const [values, setValues] = useState<Record<string, string>>({});
   const [answers, setAnswers] = useState<string[]>([]);
   const [phase, setPhase] = useState<Phase>("idle");
   const [result, setResult] = useState<Result | null>(null);
@@ -32,7 +32,7 @@ export function CodeRunner({ code }: { code: string }) {
   // The WebView needs a native build; the Expo web preview has none, so the button is not offered there.
   if (Platform.OS === "web") return null;
 
-  const changed = Object.entries(values).some(([line, v]) => vars.find((x) => x.line === Number(line))?.value !== v);
+  const changed = Object.entries(values).some(([key, v]) => vars.find((x) => x.key === key)?.value !== v);
   const invalid = Object.values(values).some((v) => !isPlainValue(v));
   const busy = phase !== "idle";
 
@@ -94,16 +94,16 @@ export function CodeRunner({ code }: { code: string }) {
         <View style={{ gap: Space.xs }}>
           <T style={{ fontWeight: "600" }}>Values badal kar dekhein</T>
           {vars.map((v) => {
-            const value = values[v.line] ?? v.value;
+            const value = values[v.key] ?? v.value;
             return (
-              <View key={v.line} style={{ flexDirection: "row", alignItems: "center", gap: Space.xs }}>
-                <Text style={[mono, { color: k.variable }]}>{v.name} =</Text>
+              <View key={v.key} style={{ flexDirection: "row", alignItems: "center", gap: Space.xs }}>
+                <Text style={[mono, { color: k.variable }]}>{v.label} =</Text>
                 <TextInput
                   value={value}
-                  onChangeText={(t) => setValues((s) => ({ ...s, [v.line]: t }))}
+                  onChangeText={(t) => setValues((s) => ({ ...s, [v.key]: t }))}
                   autoCapitalize="none"
                   autoCorrect={false}
-                  accessibilityLabel={`${v.name} ki value`}
+                  accessibilityLabel={`${v.label} ki value`}
                   style={[box, mono, { flex: 1, borderColor: isPlainValue(value) ? c.border : c.danger }]}
                 />
               </View>

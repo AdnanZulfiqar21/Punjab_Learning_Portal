@@ -16,7 +16,7 @@ export function CodeRunner({ code }: { code: string }) {
   const id = useId();
   const vars = useMemo(() => editableVars(code), [code]);
   const prompts = useMemo(() => inputPrompts(code), [code]);
-  const [values, setValues] = useState<Record<number, string>>({});
+  const [values, setValues] = useState<Record<string, string>>({});
   const [answers, setAnswers] = useState<string[]>([]);
   const [phase, setPhase] = useState<Phase>("idle");
   const [result, setResult] = useState<Result | null>(null);
@@ -32,7 +32,7 @@ export function CodeRunner({ code }: { code: string }) {
     [],
   );
 
-  const changed = Object.entries(values).some(([line, v]) => vars.find((x) => x.line === Number(line))?.value !== v);
+  const changed = Object.entries(values).some(([key, v]) => vars.find((x) => x.key === key)?.value !== v);
   const invalid = Object.values(values).some((v) => !isPlainValue(v));
 
   function stop(next: Result | null) {
@@ -108,15 +108,15 @@ export function CodeRunner({ code }: { code: string }) {
           <legend className="text-sm font-semibold">Values badal kar dekhein</legend>
           <div className="grid gap-2 sm:grid-cols-2">
             {vars.map((v) => {
-              const value = values[v.line] ?? v.value;
+              const value = values[v.key] ?? v.value;
               const bad = !isPlainValue(value);
               return (
-                <label key={v.line} className="flex items-center gap-2 font-mono text-sm">
-                  <span className="code-variable shrink-0">{v.name}</span>
+                <label key={v.key} className="flex items-center gap-2 font-mono text-sm">
+                  <span className="code-variable shrink-0">{v.label}</span>
                   <span aria-hidden>=</span>
                   <input
                     value={value}
-                    onChange={(e) => setValues((s) => ({ ...s, [v.line]: e.target.value }))}
+                    onChange={(e) => setValues((s) => ({ ...s, [v.key]: e.target.value }))}
                     aria-invalid={bad}
                     aria-describedby={bad ? `${id}-bad` : undefined}
                     spellCheck={false}

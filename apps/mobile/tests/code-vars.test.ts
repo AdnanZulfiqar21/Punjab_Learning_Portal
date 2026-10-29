@@ -29,8 +29,28 @@ describe("changing a program's values", () => {
   it("puts new values in and nothing else", () => {
     const code = "a = 10\nb = 5  # five\nprint(a + b)";
     const vars = editableVars(code);
-    assert.equal(withValues(code, vars, { 0: "7", 1: " 2 " }), "a = 7\nb = 2  # five\nprint(a + b)");
-    assert.equal(withValues(code, vars, { 0: "print('hi')" }), code); // not a plain value: the printed one stays
+    const [a, b] = vars.map((v) => v.key);
+    assert.equal(withValues(code, vars, { [a]: "7", [b]: " 2 " }), "a = 7\nb = 2  # five\nprint(a + b)");
+    assert.equal(withValues(code, vars, { [a]: "print('hi')" }), code); // not a plain value: the printed one stays
+  });
+
+  it("lets plain arguments of an object being made change too", () => {
+    const code = 'object1 = Student("Ali")\ncar = Car("red", wheels=4)  # toy\nx = make(y, "z")\np = Point(1, (2, 3)\nprint(object1)';
+    const vars = editableVars(code);
+    assert.deepEqual(
+      vars.map((v) => [v.line, v.label, v.value]),
+      [
+        [0, "object1 → Student", '"Ali"'],
+        [1, "car → Car (1)", '"red"'],
+        [1, "car → Car wheels", "4"],
+        [2, "x → make (2)", '"z"'],
+      ],
+    );
+    const keys = Object.fromEntries(vars.map((v) => [v.label, v.key]));
+    assert.equal(
+      withValues(code, vars, { [keys["object1 → Student"]]: '"Sara"', [keys["car → Car (1)"]]: '"blue"', [keys["car → Car wheels"]]: "6" }),
+      'object1 = Student("Sara")\ncar = Car("blue", wheels=6)  # toy\nx = make(y, "z")\np = Point(1, (2, 3)\nprint(object1)',
+    );
   });
 
   it("reads Windows line ends too", () => {
