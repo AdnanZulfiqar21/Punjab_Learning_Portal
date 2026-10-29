@@ -121,13 +121,13 @@ function TopicRow({ topic, depth = 0, token, starred }: { topic: TopicNode; dept
           accessibilityLabel={topic.number ? `${topic.number} ${topic.title}` : topic.title}
           onPress={() => router.push({ pathname: "/topic/[id]", params: { id: topic.id } })}
           style={({ pressed }) => ({ flex: 1, flexDirection: "row", alignItems: "center", gap: Space.sm, paddingVertical: Space.md, minHeight: 52, opacity: pressed ? 0.7 : 1 })}>
-          <View style={{ width: depth ? 56 : 40 }}>
+          <View style={{ width: depth ? 64 : 48 }}>
             <T variant="eyebrow" style={{ color: c.text }}>
               {topic.number ?? ""}
             </T>
             {/* BOOK-NUMBER-01: where the book misprints the number, its own number to find the page. */}
             {topic.book_number ? (
-              <T variant="small" style={{ color: c.muted, fontSize: 11 }}>
+              <T variant="small" numberOfLines={1} style={{ color: c.muted, fontSize: 10 }}>
                 Book# {topic.book_number}
               </T>
             ) : null}
