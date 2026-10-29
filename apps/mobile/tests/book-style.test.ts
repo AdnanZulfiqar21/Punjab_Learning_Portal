@@ -6,7 +6,7 @@ import { describe, it } from "node:test";
 import { leadIn, leadTerm, premiumBook } from "../src/lib/book-style.ts";
 
 describe("premium book style", () => {
-  it("is on for Class XI Computer Science only", () => {
+  it("is on for Class 11 Computer Science only", () => {
     assert.equal(premiumBook("computer_science", 11), true);
     assert.equal(premiumBook("computer_science", 12), false);
     assert.equal(premiumBook("chemistry", 11), false);

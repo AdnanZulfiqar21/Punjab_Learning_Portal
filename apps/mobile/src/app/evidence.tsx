@@ -18,8 +18,8 @@ const STATE: Record<string, { label: string; tone: "info" | "warn" }> = {
   insufficient_evidence: { label: "Not enough evidence yet", tone: "info" },
 };
 const GRADES = [
-  [11, "Class XI"],
-  [12, "Class XII"],
+  [11, "Class 11"],
+  [12, "Class 12"],
 ] as const;
 
 export default function EvidenceScreen() {

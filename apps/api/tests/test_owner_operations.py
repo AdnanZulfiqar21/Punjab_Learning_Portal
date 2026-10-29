@@ -3,7 +3,7 @@
 Import → review → publish → a learner answers → quarantine → reviewed correction → regrade → refund (a withdrawn
 staff grant until payments exist, B06) → suspension → a trial appeal → the learner's data export. At every handoff
 the next person's action is refused to the previous one, so no step relies on a super-admin. Questions, accounts,
-grants and appeals are labelled technical fixtures in an otherwise unused Physics XI chapter.
+grants and appeals are labelled technical fixtures in an otherwise unused Physics 11 chapter.
 """
 
 from __future__ import annotations

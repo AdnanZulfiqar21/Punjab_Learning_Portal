@@ -13,7 +13,7 @@ test("a signed-out visit to a new help request goes to sign-in, not round in cir
   await expect(page).toHaveURL(/\/signin\?next=%2Fhelp%2Fnew%3Fcategory%3Daccount$/, AUTH);
 });
 
-// The first Class XI Biology chapter (stable catalogue ID) carries the structured-blocks fixture lesson (P07.S1.T1).
+// The first Class 11 Biology chapter (stable catalogue ID) carries the structured-blocks fixture lesson (P07.S1.T1).
 for (const path of ["/", "/learn", "/learn/chapter/317f2726-31a1-55f5-bd13-a955154033e2", "/search?q=cell", "/help", "/signin"]) {
   test(`signed out: ${path} has no serious accessibility violations`, async ({ page }) => {
     await audit(page, path);

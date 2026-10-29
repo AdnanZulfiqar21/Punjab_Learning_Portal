@@ -53,7 +53,7 @@ test("data saver holds lesson diagrams until tapped", async ({ page }) => {
   const settings = await signIn(page, email, true);
   await settings.getByRole("checkbox", { name: /Data saver/ }).check();
   await page.goto("/learn");
-  await page.getByRole("region", { name: "Class XI", exact: true }).getByRole("link", { name: /Biology/ }).click();
+  await page.getByRole("region", { name: "Class 11", exact: true }).getByRole("link", { name: /Biology/ }).click();
   await page.getByRole("link", { name: /Chapter 1(?!\d)/ }).first().click();
   const lessons = page.getByRole("region", { name: "Lessons" });
   const show = lessons.getByRole("button", { name: "Show diagram (data saver is on)" }).first();

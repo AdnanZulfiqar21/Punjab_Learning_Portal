@@ -4,7 +4,7 @@
     portal-dev-fixture-rubric-correction correct RUBRIC_ID --kind scoring|notes   # publishes a corrected version
 
 In development and CI, publication rights stay unverified, so a corrected rubric can't be published through the
-editorial workflow there. This command stands in for that step only, in an isolated Class XI Biology chapter (the
+editorial workflow there. This command stands in for that step only, in an isolated Class 11 Biology chapter (the
 second one), so the rest of the journey (an MFA adjudicator approving and applying the correction, the worker, the
 teacher's regrade and the learner's result) runs through the real UI and API. ``setup`` retires earlier copies of the
 fixture so a test always gets exactly one question. Every write is audited as a technical fixture. The text says it is

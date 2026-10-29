@@ -1,7 +1,7 @@
 """W01.S1.T1 (TAXONOMY-01): numerical and derivation written questions are modelled with what each needs (an expected
 equation; a numerical answer's unit) and guides that state the matching rules (units and significant figures; carried
 -forward errors). They can be reviewed and published, but learners are offered short and long questions only until
-each new slice is qualified (WA-D11). Technical fixture questions in their own Class XII Chemistry chapter."""
+each new slice is qualified (WA-D11). Technical fixture questions in their own Class 12 Chemistry chapter."""
 
 from __future__ import annotations
 
@@ -60,7 +60,7 @@ def test_a_published_numerical_question_is_not_offered_to_learners(client: TestC
         reviewer = Staff(client, db, ["subject_reviewer"], scope)
         publisher = Staff(client, db, ["publisher"], scope, mfa=True)
         # Index 5 is Hydroxy Compounds, where test_w06_review.py publishes a short fixture. Index 7
-        # (Organic Nitrogen) is the Class XII Chemistry chapter no other written fixture uses.
+        # (Organic Nitrogen) is the Class 12 Chemistry chapter no other written fixture uses.
         chapter, doc = _chapter(db, 12, "chemistry", 7)
         _confirm_rights(client, db, doc)
     q = client.post(

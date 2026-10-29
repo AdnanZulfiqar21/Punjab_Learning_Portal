@@ -60,9 +60,9 @@ function SearchForm() {
         Class
       </label>
       <select id="grade" name="grade" defaultValue="" className="rounded-lg border border-border bg-surface px-3 py-3">
-        <option value="">Class XI and XII</option>
-        <option value="11">Class XI only</option>
-        <option value="12">Class XII only</option>
+        <option value="">Class 11 and 12</option>
+        <option value="11">Class 11 only</option>
+        <option value="12">Class 12 only</option>
       </select>
       <label className="sr-only" htmlFor="subject">
         Subject

@@ -1,14 +1,14 @@
 import { expect, test, type Page } from "@playwright/test";
 
 // Lesson access (review R07): premium lessons need a plan or the free trial; previews are open to everyone. Uses the two
-// labelled fixture lessons from `portal-dev-seed-practice` (Class XI Biology, first chapter). Not academic content.
+// labelled fixture lessons from `portal-dev-seed-practice` (Class 11 Biology, first chapter). Not academic content.
 const AUTH = { timeout: 20_000 };
 const PREVIEW = "Technical fixture preview lesson text.";
 const PREMIUM = "Technical fixture premium lesson text.";
 
 async function openFirstBiologyChapter(page: Page) {
   await page.goto("/learn");
-  await page.getByRole("region", { name: "Class XI", exact: true }).getByRole("link", { name: /Biology/ }).click();
+  await page.getByRole("region", { name: "Class 11", exact: true }).getByRole("link", { name: /Biology/ }).click();
   await expect(page).toHaveURL(/\/learn\/11\/biology$/, AUTH);
   await page.getByRole("link", { name: /Chapter 1(?!\d)/ }).first().click();
   await expect(page.getByRole("region", { name: "Lessons" })).toBeVisible(AUTH);

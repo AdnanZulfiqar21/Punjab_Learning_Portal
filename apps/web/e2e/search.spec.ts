@@ -2,13 +2,13 @@ import { expect, test } from "@playwright/test";
 
 // P11.S2.T3 (SEARCH-01): search finds published lessons. Lesson text is matched and quoted only where the learner may
 // read it; anyone finds a lesson by its title. Uses the labelled fixture lessons from `portal-dev-seed-practice`
-// (Class XI Biology, first chapter). Not academic content.
+// (Class 11 Biology, first chapter). Not academic content.
 const AUTH = { timeout: 20_000 };
 
 test("a guest finds a free preview by its text, and a premium lesson only by its title", async ({ page }) => {
   await page.goto("/search?q=preview+lesson+text");
   const preview = page.getByRole("link", { name: /\[FIXTURE\] Preview lesson/ });
-  await expect(preview).toContainText("Class XI · Biology · Lesson · Free preview");
+  await expect(preview).toContainText("Class 11 · Biology · Lesson · Free preview");
   await expect(preview.locator("mark").first()).toContainText(/preview/i);
 
   await page.goto("/search?q=premium+lesson");
@@ -41,7 +41,7 @@ test("a learner on the free trial finds premium lesson text", async ({ page, isM
   const premium = page.getByRole("link", { name: /\[FIXTURE\] Premium lesson/ });
   await expect(premium.locator("mark").first()).toContainText(/premium/i, AUTH);
   await expect(premium).not.toContainText("Included with a plan");
-  // Filters narrow results: Class XII has no Class XI lesson.
+  // Filters narrow results: Class 12 has no Class 11 lesson.
   await page.goto("/search?q=premium+lesson+text&grade=12");
   await expect(page.getByRole("link", { name: /\[FIXTURE\] Premium lesson/ })).toHaveCount(0);
 });

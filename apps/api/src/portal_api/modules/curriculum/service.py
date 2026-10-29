@@ -1,4 +1,4 @@
-"""Read-side curriculum queries. Grade is always part of the identity of a book; nothing merges XI and XII."""
+"""Read-side curriculum queries. Grade is always part of the identity of a book; nothing merges 11 and 12."""
 
 from __future__ import annotations
 

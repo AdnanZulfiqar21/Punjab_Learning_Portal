@@ -25,7 +25,7 @@ POOL = 6
 
 
 def publish_physics_pool(client: TestClient, index: int = 0, subject: str = "physics") -> dict[str, Any]:
-    """Publish POOL fixture questions in Class XI `subject` (default Physics), chapter `index` (keys rotate o1..o4)."""
+    """Publish POOL fixture questions in Class 11 `subject` (default Physics), chapter `index` (keys rotate o1..o4)."""
     with get_sessionmaker()() as db:
         scope = {"grades": [11], "subjects": [subject]}
         author = Staff(client, db, ["content_author"], scope)

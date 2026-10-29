@@ -41,7 +41,7 @@ export function PlanStatus({ access, purpose }: { access: Access; purpose?: stri
     return (
       <Notice title={purpose ? `${purpose} needs a plan` : "Start your free trial"}>
         <span className="block">
-          Your free 30-day trial covers practice tests{pilotOnly ? "" : ", written practice"} and every subject in Class XI and XII. It starts
+          Your free 30-day trial covers practice tests{pilotOnly ? "" : ", written practice"} and every subject in Class 11 and 12. It starts
           when you press the button and ends exactly 30 days later. It doesn&apos;t ask for payment details.
           {pilotOnly && ` Written practice is in a teacher-reviewed pilot for invited learners for now.`}
         </span>

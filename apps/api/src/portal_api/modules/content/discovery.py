@@ -3,7 +3,7 @@
 What a visitor can actually study, per book: live reviewed lessons (one per concept, whatever its languages), free
 previews and practice question families, counted only from published content (drafts, quarantined and retired items
 never count). A book with nothing published says so (`not_yet_published`) instead of looking empty or "coming soon".
-Filters: class, track, subject, published exam pattern and availability. Class XI and XII are listed separately and
+Filters: class, track, subject, published exam pattern and availability. Class 11 and 12 are listed separately and
 never merged.
 
 Tracks come from the launch manifest (docs/project/LAUNCH_MANIFEST.md, "Tracks"): Pre-Medical = Biology, Chemistry,

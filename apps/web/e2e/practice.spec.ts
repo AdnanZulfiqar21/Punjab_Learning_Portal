@@ -2,7 +2,7 @@ import { expect, test, type Page } from "@playwright/test";
 import { audit } from "./helpers/a11y";
 
 // Learner practice journeys (P09/P10) against the development fixtures from `portal-dev-seed-practice`: technical
-// fixture questions in Class XI Biology, chapter 1, whose stems say which option is the key. Not academic content.
+// fixture questions in Class 11 Biology, chapter 1, whose stems say which option is the key. Not academic content.
 const AUTH = { timeout: 20_000 };
 
 async function newLearner(page: Page) {

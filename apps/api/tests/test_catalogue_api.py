@@ -1,4 +1,4 @@
-"""Curriculum API behaviour on the real imported catalogue (10 owner books, Class XI and XII separate)."""
+"""Curriculum API behaviour on the real imported catalogue (10 owner books, Class 11 and 12 separate)."""
 
 from __future__ import annotations
 
@@ -25,7 +25,7 @@ def test_catalogue_has_two_separate_grades_with_one_book_per_subject(client: Tes
             book = s["books"][0]
             assert book["source_id"].startswith(f"C{g['grade']['number']}-")
             book_ids[(g["grade"]["number"], s["subject"]["code"])] = book["id"]
-    # The same subject in XI and XII is never the same book.
+    # The same subject in 11 and 12 is never the same book.
     for subj in SUBJECTS:
         assert book_ids[(11, subj)] != book_ids[(12, subj)]
     assert "public" in r.headers["cache-control"]
@@ -47,7 +47,7 @@ def test_class12_science_chapter_numbers_continue_from_class11(client: TestClien
     for subj, (first, last) in expect.items():
         nums = [c["number"] for c in client.get(f"/v1/grades/12/subjects/{subj}/book").json()["chapters"]]
         assert nums[0] == first and nums[-1] == last, (subj, nums)
-    # Mathematics and Computer Science restart at 1 in Class XII.
+    # Mathematics and Computer Science restart at 1 in Class 12.
     for subj in ("mathematics", "computer_science"):
         assert client.get(f"/v1/grades/12/subjects/{subj}/book").json()["chapters"][0]["number"] == 1
 

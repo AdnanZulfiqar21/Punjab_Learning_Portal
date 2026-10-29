@@ -16,7 +16,7 @@ DB = Annotated[Session, Depends(get_session)]
 PUBLIC_CACHE = "public, max-age=60, stale-while-revalidate=300"
 
 
-@router.get("/catalogue", response_model=CatalogueOut, summary="Grades → subjects → books (Class XI and XII separate)")
+@router.get("/catalogue", response_model=CatalogueOut, summary="Grades → subjects → books (Class 11 and 12 separate)")
 def catalogue(db: DB, response: Response) -> CatalogueOut:
     response.headers["Cache-Control"] = PUBLIC_CACHE
     return service.get_catalogue(db)

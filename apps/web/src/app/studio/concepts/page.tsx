@@ -20,7 +20,7 @@ export default function ConceptsPage({ searchParams }: PageProps<"/studio/concep
       <div>
         <h1 className="text-2xl font-semibold tracking-tight">Concepts</h1>
         <p className="text-muted">
-          Each learning outcome is written once and mapped to the topics that teach it, in Class XI and XII books alike. A concept is
+          Each learning outcome is written once and mapped to the topics that teach it, in Class 11 and 12 books alike. A concept is
           published only after an independent subject reviewer approves it with its source pages.
         </p>
       </div>
@@ -72,8 +72,8 @@ async function Board({ subject, grade }: { subject: string; grade: string }) {
             Taught in
             <select name="grade" defaultValue={grade} className="rounded-lg border border-border bg-surface px-2 py-2">
               <option value="">Either class</option>
-              <option value="11">Class XI</option>
-              <option value="12">Class XII</option>
+              <option value="11">Class 11</option>
+              <option value="12">Class 12</option>
             </select>
           </label>
           <button type="submit" className="rounded-lg border border-border bg-surface px-3 py-2 hover:border-accent">

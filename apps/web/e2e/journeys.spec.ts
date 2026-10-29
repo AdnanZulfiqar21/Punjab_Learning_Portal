@@ -2,7 +2,7 @@ import AxeBuilder from "@axe-core/playwright";
 import { expect, test, type Browser, type Page } from "@playwright/test";
 
 // P19.S1.T1 (JOURNEYS-01): new-to-returning learner journeys across two devices, on the free trial and on staff-granted
-// access. Uses the technical fixture questions and lessons from `portal-dev-seed-practice` (Class XI Biology, chapter
+// access. Uses the technical fixture questions and lessons from `portal-dev-seed-practice` (Class 11 Biology, chapter
 // 1, whose stems say which option is the key) and synthetic accounts. Not academic content.
 const API = process.env.PORTAL_API_INTERNAL_ORIGIN ?? "http://127.0.0.1:8100";
 const AUTH = { timeout: 20_000 };
@@ -35,7 +35,7 @@ async function signInElsewhere(browser: Browser, email: string, next = "/"): Pro
 
 async function onboardBiologyXI(page: Page) {
   await page.goto("/onboarding");
-  await page.getByLabel("Class XI", { exact: true }).check();
+  await page.getByLabel("Class 11", { exact: true }).check();
   await page.getByLabel("Biology", { exact: true }).check();
   await page.getByLabel("Minutes per day").fill("30");
   await page.getByRole("button", { name: "Save and continue" }).click();
@@ -44,7 +44,7 @@ async function onboardBiologyXI(page: Page) {
 
 async function openFirstBiologyChapter(page: Page) {
   await page.goto("/learn");
-  await page.getByRole("region", { name: "Class XI", exact: true }).getByRole("link", { name: /Biology/ }).click();
+  await page.getByRole("region", { name: "Class 11", exact: true }).getByRole("link", { name: /Biology/ }).click();
   await page.getByRole("link", { name: /Chapter 1(?!\d)/ }).first().click();
   await expect(page.getByRole("region", { name: "Lessons" })).toBeVisible(AUTH);
 }

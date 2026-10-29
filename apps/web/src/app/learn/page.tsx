@@ -86,7 +86,7 @@ function Chooser({ partial, tracks }: { partial: Partial<LearnContext>; tracks: 
         <h2 id="choose-heading" className="text-lg font-semibold">
           What are you studying?
         </h2>
-        <p className="text-sm text-muted">Class XI and Class XII use different textbooks, so choose both.</p>
+        <p className="text-sm text-muted">Class 11 and Class 12 use different textbooks, so choose both.</p>
       </div>
       <fieldset className="space-y-2">
         <legend className="font-medium">1. Your class</legend>
@@ -241,7 +241,7 @@ async function Subjects({ context }: { context: LearnContext }) {
 }
 
 /**
- * Every published book, Class XI and Class XII kept separate (DISCOVERY-01), while no class and group are chosen.
+ * Every published book, Class 11 and Class 12 kept separate (DISCOVERY-01), while no class and group are chosen.
  * A group or class already named (a track link from the home page, a half-made choice) narrows the list.
  */
 async function AllBooks({ partial }: { partial: Partial<LearnContext> }) {

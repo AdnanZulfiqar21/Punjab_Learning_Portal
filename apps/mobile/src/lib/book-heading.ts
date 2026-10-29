@@ -1,5 +1,5 @@
 // BOOK-HEADING-01: where the book prints only a topic's heading and runs straight into its first subtopic (Chemistry
-// XI 14.4 into 14.4.1), the reader goes on with that subtopic under its own heading instead of an empty page.
+// 11 14.4 into 14.4.1), the reader goes on with that subtopic under its own heading instead of an empty page.
 
 type Reading = {
   number: string | null;

@@ -46,7 +46,7 @@ test("terms are drafted and published by two people, and the pricing page shows 
   const made = await (
     await request.post(`${API}/v1/admin/products`, {
       headers: h,
-      data: { code, name: `[FIXTURE] Biology XI plan ${tag}`, kind: "subject_package", scope: { grades: [11], subjects: ["biology"] }, duration_days: 90, written_units: 2 },
+      data: { code, name: `[FIXTURE] Biology 11 plan ${tag}`, kind: "subject_package", scope: { grades: [11], subjects: ["biology"] }, duration_days: 90, written_units: 2 },
     })
   ).json();
   await request.post(`${API}/v1/admin/products/${made.id}/activate`, { headers: h, data: { reason: "[FIXTURE] on sale for a test" } });
@@ -57,7 +57,7 @@ test("terms are drafted and published by two people, and the pricing page shows 
   await expect(page.getByText("Buying isn't available yet")).toBeVisible();
   const plan = page.getByRole("list", { name: "Plans on sale" }).getByRole("listitem").filter({ hasText: code.slice(-6) });
   await expect(plan.getByText("PKR 1,999.00")).toBeVisible(AUTH);
-  await expect(plan.getByText("Class XI Biology")).toBeVisible();
+  await expect(plan.getByText("Class 11 Biology")).toBeVisible();
   await expect(plan.getByText("90 days (see the purchase terms below)")).toBeVisible();
   const terms = page.getByRole("region", { name: "Purchase terms" });
   await expect(terms.getByText(`[FIXTURE ${tag}] Refunds wording for an end-to-end check.`)).toBeVisible();

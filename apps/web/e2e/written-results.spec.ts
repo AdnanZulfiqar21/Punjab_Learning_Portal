@@ -22,7 +22,7 @@ async function teacher(browser: Browser, email = "studio-reviewer@example.com", 
   return page;
 }
 
-/** A new learner submits a written test on the first Class XI Biology chapter; returns the attempt id. */
+/** A new learner submits a written test on the first Class 11 Biology chapter; returns the attempt id. */
 async function submitScript(page: Page, label: string): Promise<string> {
   await page.goto("/signin?next=/practice?grade=11%26subject=biology");
   await page.getByRole("button", { name: "New here? Create an account" }).click();

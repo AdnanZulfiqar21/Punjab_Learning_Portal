@@ -1,20 +1,20 @@
 import { expect, test } from "@playwright/test";
 
-test("learner browses Class XII Biology to a chapter and its topics", async ({ page }) => {
+test("learner browses Class 12 Biology to a chapter and its topics", async ({ page }) => {
   await page.goto("/learn");
-  const xii = page.getByRole("region", { name: "Class XII", exact: true });
+  const xii = page.getByRole("region", { name: "Class 12", exact: true });
   await expect(xii).toBeVisible();
   await xii.getByRole("link", { name: /Biology/ }).click();
 
   await expect(page).toHaveURL(/\/learn\/12\/biology$/);
   await expect(page.getByRole("heading", { level: 1, name: "Biology" })).toBeVisible();
-  // Class XII Biology continues the book's numbering from Class XI: it starts at Chapter 13.
+  // Class 12 Biology continues the book's numbering from Class 11: it starts at Chapter 13.
   const first = page.getByRole("link", { name: /Chapter 13/ });
   await expect(first).toContainText("Thermoregulation");
   await first.click();
 
   await expect(page.getByRole("heading", { level: 1 })).toContainText("Thermoregulation");
-  await expect(page.getByText("Class XII · Biology · Chapter 13")).toBeVisible();
+  await expect(page.getByText("Class 12 · Biology · Chapter 13")).toBeVisible();
   await expect(page.getByRole("note").filter({ hasText: "Textbook indexed" })).toBeVisible();
   const topics = page.getByRole("region", { name: "Topics" });
   await expect(topics.getByText("13.1", { exact: true })).toBeVisible();
@@ -24,11 +24,11 @@ test("learner browses Class XII Biology to a chapter and its topics", async ({ p
   await expect(lessons).toContainText("No reviewed lessons are published for this chapter yet");
 });
 
-test("Class XI and Class XII lists stay separate", async ({ page }) => {
+test("Class 11 and Class 12 lists stay separate", async ({ page }) => {
   await page.goto("/learn");
   for (const [grade, count] of [
-    ["Class XI", "16 chapters"],
-    ["Class XII", "17 chapters"],
+    ["Class 11", "16 chapters"],
+    ["Class 12", "17 chapters"],
   ] as const) {
     const chem = page.getByRole("region", { name: grade, exact: true }).getByRole("link", { name: /Chemistry/ });
     await expect(chem).toContainText(count);
@@ -41,7 +41,7 @@ test("search tolerates a typo and labels the class of each result", async ({ pag
   await page.getByRole("button", { name: "Search" }).click();
   await expect(page).toHaveURL(/q=photosyntesis/);
   const hit = page.getByRole("link", { name: /Photosynthesis/ }).first();
-  await expect(hit).toContainText("Class XI · Biology");
+  await expect(hit).toContainText("Class 11 · Biology");
 });
 
 test("search keeps the query typed while results are still streaming and reflects the URL", async ({ page }) => {
@@ -77,7 +77,7 @@ test("routes that match no page return a real HTTP 404", async ({ page }) => {
   }
 });
 
-test("the maths alias resolves to the Class XI Mathematics book", async ({ page }) => {
+test("the maths alias resolves to the Class 11 Mathematics book", async ({ page }) => {
   await page.goto("/learn/11/maths");
   await expect(page.getByRole("heading", { level: 1, name: "Mathematics" })).toBeVisible();
   await expect(page.getByRole("link", { name: /Unit 7/ })).toContainText("Permutation");

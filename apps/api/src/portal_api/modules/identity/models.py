@@ -59,7 +59,7 @@ class StudentProfile(Base):
 
 
 class StaffRoleGrant(Base):
-    """A role held by a person, optionally scoped (e.g. subject reviewer for Class XI Chemistry). Never deleted:
+    """A role held by a person, optionally scoped (e.g. subject reviewer for Class 11 Chemistry). Never deleted:
     revocation is recorded, so the history of who could do what stays auditable (P04.S2.T2)."""
 
     __tablename__ = "staff_role_grant"

@@ -12,9 +12,9 @@ import { api, GRADE_LABEL } from "@/lib/api";
 import { useAuth } from "@/lib/auth";
 
 const GRADES: { value: number | undefined; label: string }[] = [
-  { value: undefined, label: "XI + XII" },
-  { value: 11, label: "Class XI" },
-  { value: 12, label: "Class XII" },
+  { value: undefined, label: "11 + 12" },
+  { value: 11, label: "Class 11" },
+  { value: 12, label: "Class 12" },
 ];
 
 export default function SearchScreen() {

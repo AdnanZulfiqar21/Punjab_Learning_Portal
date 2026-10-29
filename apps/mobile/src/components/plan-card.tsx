@@ -20,7 +20,7 @@ function coverage(entitlements: Access["entitlements"]): string | null {
     const s = (e.scope ?? {}) as { grades?: number[]; subjects?: string[]; exams?: string[] };
     if (!s.grades?.length && !s.subjects?.length && !s.exams?.length) return null;
     const name = (code: string) => code.charAt(0).toUpperCase() + code.slice(1).replaceAll("_", " ");
-    for (const g of s.grades ?? []) for (const sub of s.subjects ?? []) parts.push(`Class ${g === 11 ? "XI" : "XII"} ${name(sub)}`);
+    for (const g of s.grades ?? []) for (const sub of s.subjects ?? []) parts.push(`Class ${g === 11 ? "11" : "12"} ${name(sub)}`);
     for (const x of s.exams ?? []) parts.push(`${x} mocks`);
   }
   return [...new Set(parts)].join(", ") || null;
@@ -82,8 +82,8 @@ export function PlanCard({ access, token, onChange, purpose }: { access: Access;
     return (
       <View style={{ gap: Space.sm }}>
         <Notice title={purpose ? `${purpose} needs a plan` : "Start your free trial"}>
-          Your free 30-day trial covers practice tests{access.written_pilot_only ? "" : ", written practice"} and every subject in Class XI and
-          XII. It starts now and ends exactly 30 days later. No payment details are needed.
+          Your free 30-day trial covers practice tests{access.written_pilot_only ? "" : ", written practice"} and every subject in Class 11 and
+          12. It starts now and ends exactly 30 days later. No payment details are needed.
           {access.written_pilot_only ? " Written practice is in a teacher-reviewed pilot for invited learners for now." : ""}
         </Notice>
         {/* P14.S8.T2 (TRIAL-CONTROLS-01): what the one-trial rule checks, said before anyone starts. */}

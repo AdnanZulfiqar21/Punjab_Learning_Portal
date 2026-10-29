@@ -1,4 +1,4 @@
-"""A topic's lecture for learners (LECTURE-READ-01; Class XI Biology Chapter 1 pilot).
+"""A topic's lecture for learners (LECTURE-READ-01; Class 11 Biology Chapter 1 pilot).
 
 A topic offers a lecture only when an *academically approved* lecture (LECTURE-01: independent review, every check
 passed) is pinned to a storyboard for that topic and its master video can be served. Everything else is "coming":

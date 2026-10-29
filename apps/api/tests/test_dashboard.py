@@ -57,7 +57,7 @@ def test_the_dashboard_reflects_real_records(client: TestClient, physics: dict[s
     assert meters["syllabus_coverage"]["percent"] is None and "verified" in meters["syllabus_coverage"]["unavailable"]
     demonstrated = meters["demonstrated_knowledge"]  # one chapter-level test classifies no topic: no invented 0%
     assert demonstrated["percent"] is None and demonstrated["unavailable"].startswith("Not enough evidence yet")
-    assert meters["content_completed"]["percent"] is None  # no live Physics XI lessons: unavailable, not 0%
+    assert meters["content_completed"]["percent"] is None  # no live Physics 11 lessons: unavailable, not 0%
 
     notebook = client.get("/v1/me/notebook", headers=learner.headers).json()
     assert body["revision"]["due"] == sum(1 for e in notebook if e["due"]) and body["revision"]["due"] > 0
@@ -92,4 +92,4 @@ def test_continue_learning_and_content_completed_follow_lessons(
     client.delete(f"/v1/me/lessons/{item['id']}/complete", headers=learner.headers)
     client.put("/v1/me/profile", headers=learner.headers, json={"grade": 12, "subjects": ["biology"]})
     body = client.get(URL, headers=learner.headers).json()
-    assert body["continue_learning"] is None  # a Class XI lesson never appears on a Class XII dashboard
+    assert body["continue_learning"] is None  # a Class 11 lesson never appears on a Class 12 dashboard
