@@ -1,11 +1,12 @@
-// BOOK-STYLE-01: a premium reading style for one book at a time (owner, 2026-10-28: Class 11 Computer Science first).
+// BOOK-STYLE-01: a premium reading style for one book at a time (owner, 2026-10-28: Class 11 Computer Science first;
+// 2026-10-29: Class 12 Computer Science too).
 // The printed words never change; only how they are drawn: a list item that starts with a term and a colon
 // ("Interviews and Surveys: Asking questions …") shows the term bold in the subject colour, and a short lead-in line
 // ("Key activities in this phase include:", "Example:") is set as a small heading. Identical in apps/web and
 // apps/mobile (a host test compares the two files).
 
 /** The books drawn in the premium style, as subject key and class. */
-const STYLED = new Set(["computer_science:11"]);
+const STYLED = new Set(["computer_science:11", "computer_science:12"]);
 
 export function premiumBook(subject: string | null | undefined, grade: number | null | undefined): boolean {
   return STYLED.has(`${subject ?? ""}:${grade ?? ""}`);
