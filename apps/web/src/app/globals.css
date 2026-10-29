@@ -517,7 +517,7 @@ html:has(.lesson-flow, [data-reading-bar]) {
 
 /* BOOK-BOX-01: the book's printed boxes (lesson-blocks.tsx). A header in the colour of the box's kind, as printed, a tinted
    body, and on a wide screen a short box at the side of the text like the book's margin column; on a phone, and for a
-   long box, full width. Headings and wide content start below a side box. Header text is white on each colour (≥ 4.5:1). */
+   long box, full width. Header text is white on each colour (≥ 4.5:1). */
 .book-box {
   --bb-head: #2f6db5;
   --bb-body: #eef4fb;
@@ -560,8 +560,8 @@ html:has(.lesson-flow, [data-reading-bar]) {
     margin: 0.25rem 0 1rem 1.5rem;
     font-size: 0.94em;
   }
-  .lesson-flow > :is([data-kind="heading"], [data-kind="figure"], [data-kind="diagram"], [data-kind="table"],
-    [data-kind="equation"], [data-kind="code"], [data-kind="example"], [data-kind="model3d"]) {
+  /* Text and headings flow beside a side box, as in the book; anything wider or boxed starts below it. */
+  .lesson-flow > [data-kind]:not([data-kind="paragraph"], [data-kind="list"], [data-kind="heading"]) {
     clear: both;
   }
 }
