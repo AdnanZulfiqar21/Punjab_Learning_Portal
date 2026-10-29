@@ -338,9 +338,16 @@ function BlockView({
               <p className="border-b border-border bg-surface-muted px-3 py-2 font-semibold">
                 <Marked text={header[0]} marks={marks} />
               </p>
-              <ul className="columns-2 gap-0">
+              {/* Down the first column, then the second, as the book reads; rows stay level across both columns. */}
+              <ul
+                className="-mb-px grid grid-flow-col grid-cols-2"
+                style={{ gridTemplateRows: `repeat(${Math.ceil(filled.length / 2)}, auto)` }}
+              >
                 {filled.map((r, i) => (
-                  <li key={i} className="break-inside-avoid border-b border-border px-3 py-2">
+                  <li
+                    key={i}
+                    className={`border-b border-border px-3 py-2 [overflow-wrap:anywhere] ${i < Math.ceil(filled.length / 2) ? "border-r" : ""}`}
+                  >
                     <Marked text={r[0] ?? ""} marks={marks} />
                   </li>
                 ))}
