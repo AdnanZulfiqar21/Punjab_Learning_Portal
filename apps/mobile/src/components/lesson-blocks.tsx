@@ -376,6 +376,22 @@ function BlockView({ block: b, assetSource, dataSaver }: { block: Block; assetSo
                 ))}
               </View>
             ))
+          ) : header.length === 1 ? (
+            // A one-column table is a boxed list in the book: its items sit in two columns (owner, 2026-10-29).
+            <View style={{ borderWidth: 1, borderColor: c.border, backgroundColor: c.surface, borderRadius: Radius.md, overflow: "hidden" }}>
+              <T style={{ fontWeight: "700", padding: Space.sm, backgroundColor: c.surfaceMuted }}>
+                <Marked text={header[0]} marks={marks} />
+              </T>
+              <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
+                {rows.map((r, i) => (
+                  <View key={i} style={{ width: "50%", padding: Space.sm, borderTopWidth: 1, borderColor: c.border }}>
+                    <T variant="small">
+                      <Marked text={r[0] ?? ""} marks={marks} />
+                    </T>
+                  </View>
+                ))}
+              </View>
+            </View>
           ) : (
             <Lines items={rows.flat()} ordered={false} marks={marks} />
           )}

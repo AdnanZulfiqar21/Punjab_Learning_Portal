@@ -326,6 +326,29 @@ function BlockView({
       const starts = mergeStarts(b.merge_starts);
       const spans = rowSpans(rows, merged, starts);
       const filled = fillMerged(rows, merged, starts);
+      // A one-column table is a boxed list in the book (e.g. Physics 11 "Areas of Physics"): its items flow into two
+      // columns instead of one long narrow column (owner, 2026-10-29).
+      if (header.length === 1) {
+        return (
+          <figure className="lesson-list-table space-y-2 text-sm">
+            <figcaption className="font-medium">
+              <Marked text={str(b.caption)} marks={marks} />
+            </figcaption>
+            <div className="overflow-hidden rounded-inner border border-border bg-surface">
+              <p className="border-b border-border bg-surface-muted px-3 py-2 font-semibold">
+                <Marked text={header[0]} marks={marks} />
+              </p>
+              <ul className="columns-2 gap-0">
+                {filled.map((r, i) => (
+                  <li key={i} className="break-inside-avoid border-b border-border px-3 py-2">
+                    <Marked text={r[0] ?? ""} marks={marks} />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </figure>
+        );
+      }
       return (
         <table className="lesson-table w-full border-collapse text-sm">
           <caption className="mb-2 text-left font-medium">
