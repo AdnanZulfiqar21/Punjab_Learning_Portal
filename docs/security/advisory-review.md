@@ -34,6 +34,7 @@ Versions looked up:
 |---|---|---|---|---|
 | GHSA-86w9-cpqp-85rv | node-forge via `@expo/cli` | High | No: mobile build tooling | Reviewed exception (SUPPLY-CHAIN-01); no patched version listed |
 | GHSA-vfj7-8cjw-p6xm | braces via Metro | High | No: mobile bundler | Reviewed exception (SUPPLY-CHAIN-01); no patched version listed |
+| GHSA-qr28-fpjm-wq7f | decode-uri-component ≤0.5.0 via `expo-router` → `query-string` 7.1.3 (published 2026-10-29) | High | Yes: the mobile app parses links with it | Reviewed exception (SUPPLY-CHAIN-01, 2026-10-29), below |
 | GHSA-vcc3-ghjq-m6fr | decode-uri-component ≤0.4.2 via `expo-router` → `query-string` 7.1.3 | Moderate | Yes: the mobile app parses links with it | Residual risk, below |
 | GHSA-w5hq-g745-h8pq | uuid <11.1.1 via `expo` → `@expo/config-plugins` → `xcode` | Moderate | No: runs only while generating native projects | Residual risk, below |
 
@@ -44,6 +45,12 @@ Versions looked up:
 - *Why not patched now:* the fixed release (0.5.0) is an ES module only, while `query-string` 7.1.3 loads it with `require()`. Forcing it through an override would probably break link parsing in the app, and that cannot be verified without a device (B09, B14).
 - *Owner:* engineering (mobile).
 - *Target:* the first Expo SDK update that ships a fixed `query-string`, and in any case before the mobile release candidate (P19). Proposed date 2026-12-31.
+
+**decode-uri-component (GHSA-qr28-fpjm-wq7f, high; reviewed exception added 2026-10-29).**
+- *What:* quadratic time in the fallback decoder on malformed input with many distinct percent-encoded runs (about 224 KB to block for ~20 s). Availability only. Same package, path and exposure as GHSA-vcc3-ghjq-m6fr above.
+- *Exposure:* only a malformed link of that size opened in the mobile app, which could freeze the app on that one device. The server, other learners and stored data are not affected; the API does not use this package and the web app does not either (`pnpm audit` lists only `apps__mobile>expo-router>query-string`).
+- *Why an exception and not an override:* the only fixed release, 0.5.1 (published 2026-10-23), is an ES module only, while `query-string` 7.1.3 loads it with `require()` and asks for `^0.2.2`, so forcing it would probably break link parsing in the app, which cannot be verified without a device (B09, B14).
+- *Re-check:* remove the ignore as soon as `expo-router` ships a `query-string` that works with a fixed release, at every Expo SDK update, and in any case before the mobile release candidate (P19). Proposed date 2026-12-31.
 
 **uuid (GHSA-w5hq-g745-h8pq).**
 - *Exposure:* none for users. The `xcode` package uses uuid while `expo prebuild` writes the iOS project. The flaw is in v3/v5/v6 called with an output buffer; `xcode` 3.0.1 only calls `uuid.v4()` with no arguments.
