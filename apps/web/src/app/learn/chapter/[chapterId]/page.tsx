@@ -302,6 +302,8 @@ function TopicItem({ topic, favourites, depth = 0 }: { topic: TopicNode; favouri
           {topic.number && (
             <span className={`shrink-0 text-sm font-semibold text-foreground ${depth ? "w-14 sm:w-16" : "w-12"}`}>
               {topic.number}
+              {/* BOOK-NUMBER-01: where the book misprints the number, its own number to find the page. */}
+              {topic.book_number && <span className="block text-xs font-normal whitespace-nowrap text-muted">Book# {topic.book_number}</span>}
             </span>
           )}
           <span className={depth ? "" : "font-medium"}>{topic.title}</span>
