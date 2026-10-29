@@ -38,24 +38,71 @@ TOC/actual mismatches: none in page numbers; only the "Neworks" misprint. Chapte
 - Pages: printed 1–19 · PDF 6–24
 - SLOs (printed, 3 bullets, no codes): explain network architecture, fundamental concepts, diagnostic tools/commands; set up and configure home networks, troubleshoot, differentiate connection types; understand/measure bandwidth and latency, appreciate load balancing, security, backup and recovery.
 - Main concept: How devices are connected and communicate — network types, devices, topologies, the OSI layered model, core protocols (TCP/IP, HTTP/HTTPS, FTP, DNS), IP addressing/subnetting/NAT, home Wi-Fi setup and security, diagnostic commands, and performance/security/backup concerns.
-- Navigation tree:
+- Navigation tree (every heading as printed, in book order; nesting follows the printed heading levels):
   - Introduction (unnumbered) — PDF 6
-  - 1.1 Introduction to Computer Networks — PDF 6 (Uses of Computer Network, PDF 7)
-  - 1.2 Network Architecture and Basic Concepts — PDF 7 (packets, Fig 1.2)
-  - 1.3 Types of Computer Networks — PDF 8 (LAN, WAN, The Internet (Public WAN))
-  - 1.4 Networking Devices — PDF 9 (Network Interface Card (NIC), Switch, Router, Modem, Wireless access point)
-  - 1.5 Network Topologies — PDF 10 (Bus, Star — PDF 10; Ring, Mesh, Tree — PDF 11; Advantages and Disadvantages of Network Topologies — PDF 11–12, Table 1.1)
-  - 1.6 Network Models and Layers — PDF 12 (Network Layers; OSI Model (Open Systems Interconnection) — PDF 13; Functions of OSI Model Layers — numbered list 1–7 Physical…Application, PDF 13–14)
-  - 1.7 Network Protocols and Services — PDF 14 (TCP/IP, HTTP (+HTTPS, SSL/TLS), FTP, DNS — PDF 14–15)
-  - 1.8 IP Addressing and Subnetting — PDF 15 (IPv4 and IPv6 with breakdown tables, PDF 15–16; Subnetting; Network Address Translation (NAT) — PDF 16)
-  - 1.9 Home Network Setup and Configuration — PDF 16 (Components of a Home Network, Wired Network Connections, Wireless Network Connections — PDF 17)
-  - 1.10 Wi-Fi Security and Router Configuration — PDF 17 (Router Web Interface: 1. Router Configuration, 2. Wi-Fi Encryption (WPA2/WPA3/WEP), 3. Default Gateway; Guest Networks)
-  - 1.11 Network Diagnostic Tools and Commands — PDF 17 (troubleshooting; Ping Command — PDF 18; Ipconfig and ifconfig Commands; Telnet, PuTTY, and Secure Shell (SSH) — PDF 18)
-  - 1.12 Network Performance — PDF 19 (Network Bandwidth (Mbps), Network Latency (ms), Causes of Network Delay)
-  - 1.13 Network Load Balancing — PDF 19 (Benefits; Basic Load Balancing Methods: Round Robin, Least Connection, IP Hash)
-  - 1.14 Network Security — PDF 19–20 (Firewalls, Encryption, Access Control, Common Network Security Threats — PDF 20)
-  - 1.15 Data Backup and Recovery — PDF 20 (Types of Data Backup: full/incremental/differential; Data Recovery Methods — PDF 21)
-  - 1.16 Usability and Security Tradeoffs — PDF 21 (Tradeoffs Between Usability and Security)
+  - 1.1 Introduction to Computer Networks — PDF 6
+    - Uses of Computer Network (unnumbered) — PDF 7
+  - 1.2 Network Architecture and Basic Concepts — PDF 7 (packets; Fig 1.2)
+  - 1.3 Types of Computer Networks — PDF 8
+    - Local Area Network (LAN) (unnumbered) — PDF 8
+    - Wide Area Network (WAN) (unnumbered) — PDF 8
+    - The Internet (Public WAN) (unnumbered) — PDF 8
+  - 1.4 Networking Devices — PDF 9
+    - Network Interface Card (NIC) (unnumbered) — PDF 9
+    - Switch (unnumbered) — PDF 9
+    - Router (unnumbered) — PDF 9
+    - Modem (unnumbered) — PDF 9
+    - Wireless access point (unnumbered) — PDF 9
+  - 1.5 Network Topologies — PDF 10
+    - Bus Topology (unnumbered) — PDF 10
+    - Star Topology (unnumbered) — PDF 10
+    - Ring Topology (unnumbered) — PDF 11
+    - Mesh Topology (unnumbered) — PDF 11
+    - Tree Topology (unnumbered) — PDF 11
+    - Advantages and Disadvantages of Network Topologies (unnumbered) — PDF 11 (Table 1.1 (PDF 12))
+  - 1.6 Network Models and Layers — PDF 12
+    - Network Layers (unnumbered) — PDF 12
+    - OSI Model (Open Systems Interconnection) (unnumbered) — PDF 13
+    - Functions of OSI Model Layers (unnumbered) — PDF 13 (1 Physical ... 7 Application (PDF 13-14))
+  - 1.7 Network Protocols and Services — PDF 14
+    - Transmission Control Protocol and Internet Protocol (TCP/IP) (unnumbered) — PDF 14
+    - Hypertext Transfer Protocol (HTTP) (unnumbered) — PDF 14 (HTTPS (SSL/TLS))
+    - File Transfer Protocol (FTP) (unnumbered) — PDF 14
+    - Domain Name System (DNS) (unnumbered) — PDF 14
+  - 1.8 IP Addressing and Subnetting — PDF 15
+    - IPv4 and IPv6 (unnumbered) — PDF 15
+      - IPv4 (unnumbered) — PDF 15 (breakdown table)
+      - IPv6 (unnumbered) — PDF 15 (breakdown table (PDF 16))
+    - Subnetting (unnumbered) — PDF 16
+    - Network Address Translation (NAT) (unnumbered) — PDF 16
+  - 1.9 Home Network Setup and Configuration — PDF 16
+    - Components of a Home Network (unnumbered) — PDF 17
+    - Wired Network Connections (unnumbered) — PDF 17
+    - Wireless Network Connections (unnumbered) — PDF 17
+  - 1.10 Wi-Fi Security and Router Configuration — PDF 17
+    - Router Web Interface (unnumbered) — PDF 17 (1. Router Configuration; 2. Wi-Fi Encryption (WEP/WPA2/WPA3); 3. Default Gateway)
+    - Guest Networks (unnumbered) — PDF 17
+  - 1.11 Network Diagnostic Tools and Commands — PDF 17 (Network troubleshooting)
+    - Ping Command (unnumbered) — PDF 18
+    - Ipconfig and ifconfig Commands (unnumbered) — PDF 18
+    - Telnet, PuTTY, and Secure Shell (SSH) (unnumbered) — PDF 18
+  - 1.12 Network Performance — PDF 19
+    - Network Bandwidth (unnumbered) — PDF 19
+    - Network Latency (unnumbered) — PDF 19
+    - Causes of Network Delay (unnumbered) — PDF 19
+  - 1.13 Network Load Balancing — PDF 19
+    - Benefits of Load Balancing (unnumbered) — PDF 19
+    - Basic Load Balancing Methods (unnumbered) — PDF 19 (Round Robin, Least Connection, IP Hash)
+  - 1.14 Network Security — PDF 19
+    - Firewalls (unnumbered) — PDF 20
+    - Encryption (unnumbered) — PDF 20
+    - Access Control (unnumbered) — PDF 20
+    - Common Network Security Threats (unnumbered) — PDF 20
+  - 1.15 Data Backup and Recovery — PDF 20
+    - Types of Data Backup (unnumbered) — PDF 21 (full, incremental, differential)
+    - Data Recovery Methods (unnumbered) — PDF 21
+  - 1.16 Usability and Security Tradeoffs — PDF 21
+    - Tradeoffs Between Usability and Security (unnumbered) — PDF 21
   - Summary — PDF 22; Exercise — PDF 23–24
 - Key terms: computer network, network architecture, packet, LAN, WAN, Internet (public WAN), NIC, MAC address, switch, router, modem, DSL, ISP, wireless access point, topology (physical/logical; bus, star, ring, mesh, tree), terminator, hub, backbone, OSI model, physical/data link/network/transport/session/presentation/application layer, protocol, TCP/IP, HTTP, HTTPS, SSL/TLS, FTP, DNS, IP address, IPv4 (32-bit), IPv6 (128-bit), subnet, subnetting, NAT, home network, Ethernet, Wi-Fi, router web interface, Wi-Fi encryption (WEP, WPA2, WPA3), default gateway, guest network, ping, ICMP echo, ipconfig/ifconfig, Telnet, PuTTY, SSH, bandwidth, latency, load balancing (Round Robin, Least Connection, IP Hash), firewall, encryption, access control, virus/malware, phishing, Denial of Service, backup (full, incremental, differential), recovery, usability.
 - Laws/rules/principles: OSI seven-layer model (PDF 13–14); IPv4 = 4 numbers 0–255, 1 byte each, 32 bits total; IPv6 = 8 groups of 4 hex digits, 16 bits each, 128 bits (PDF 15–16); total IPv4 addresses ≈ 4.29 billion; IPv6 ≈ 2^128 ≈ 3.4×10^38 (PDF 16).
@@ -96,20 +143,44 @@ TOC/actual mismatches: none in page numbers; only the "Neworks" misprint. Chapte
 - Pages: printed 20–32 (printed 21 MISSING) · PDF 25–36
 - SLOs (printed, 2 bullets): apply problem solving by identifying, decomposing and creating solutions using computational thinking, evaluate and refine solutions; understand computational artifacts/algorithms, primitive structures (lists, stacks, queues, trees, graphs), use knowledge representation and reasoning with propositional and predicate logic.
 - Main concept: Computational thinking as a structured way to decompose and solve problems, then logic as a knowledge-representation framework — propositions, connectives, truth tables, equivalence, satisfiability, predicate logic with quantifiers, and logical inference/deduction.
-- Navigation tree:
+- Navigation tree (every heading as printed, in book order; nesting follows the printed heading levels):
   - Introduction (unnumbered) — PDF 25
-  - 2.1 Introduction to Computational Thinking — PDF 25 (Computational Thinking)
+  - 2.1 Introduction to Computational Thinking — PDF 25
+    - Computational Thinking (unnumbered) — PDF 25
   - [2.2 — on missing printed p.21; title UNVERIFIED. Text resumes PDF 26 mid-sentence about following steps in the correct order; Figure 2.1 also lost]
-  - (unnumbered) Evaluating and Improving Solutions — PDF 26
-  - 2.3 Logic as a Knowledge Representation Framework — PDF 26 (Logic in Computer Science; Role of Logic in Reasoning and Decision Making)
-  - 2.4 Propositional Logic — PDF 27 (Proposition; Simple and Compound Propositions; Logical connectives: AND, OR, NOT — PDF 28)
-  - 2.5 Truth Tables — PDF 28 (Purpose of Truth Tables; Creating Truth Tables for Logical Expressions; Truth Values of Propositions (2^n rows) — PDF 29)
-  - 2.6 Propositional Equivalence — PDF 29 (Identifying Equivalent Logical Expressions; Importance of Equivalence in Logic — PDF 30)
-  - 2.7 Propositional Satisfiability — PDF 30 (Conditions for a Proposition to be Satisfiable; Examples of Satisfiable and Unsatisfiable Expressions)
-  - 2.8 Predicate Logic — PDF 31 (Introduction to Predicate Logic; Difference Between Propositional and Predicate Logic; Predicates and Variables)
-  - 2.9 Quantifiers in Predicate Logic — PDF 31 (Universal Quantifier (for all) ∀; Existential Quantifier (there exists) ∃; Using Quantifiers in Logical Statements — PDF 32)
-  - 2.10 Applying Predicate Logic to Real-World Problems — PDF 32 (Representing Relationships Using Predicates — library example Borrows(x,y), Teaches(t,s); Writing Logical Statements With Quantifiers — PDF 33; Reasoning and drawing conclusions)
-  - 2.11 Logic-Based Reasoning and Inference — PDF 33 (Logical Inference; Deduction Using Logical Rules)
+  - Evaluating and Improving Solutions (unnumbered) — PDF 26
+  - 2.3 Logic as a Knowledge Representation Framework — PDF 26
+    - Logic in Computer Science (unnumbered) — PDF 26
+    - Role of Logic in Reasoning and Decision Making (unnumbered) — PDF 26
+  - 2.4 Propositional Logic — PDF 27
+    - Proposition (unnumbered) — PDF 27
+    - Simple and Compound Propositions (unnumbered) — PDF 27
+    - Logical connectives: AND, OR, NOT (unnumbered) — PDF 28
+  - 2.5 Truth Tables — PDF 28
+    - Purpose of Truth Tables (unnumbered) — PDF 29
+    - Creating Truth Tables for Logical Expressions (unnumbered) — PDF 29
+    - Truth Values of Propositions (unnumbered) — PDF 29 (2^n rows)
+  - 2.6 Propositional Equivalence — PDF 29
+    - Identifying Equivalent Logical Expressions (unnumbered) — PDF 30
+    - Importance of Equivalence in Logic (unnumbered) — PDF 30
+  - 2.7 Propositional Satisfiability — PDF 30
+    - Conditions for a Proposition to be Satisfiable (unnumbered) — PDF 30
+    - Examples of Satisfiable and Unsatisfiable Expressions (unnumbered) — PDF 30
+  - 2.8 Predicate Logic — PDF 31
+    - Introduction to Predicate Logic (unnumbered) — PDF 31
+    - Difference Between Propositional and Predicate Logic (unnumbered) — PDF 31
+    - Predicates and Variables (unnumbered) — PDF 31
+  - 2.9 Quantifiers in Predicate Logic — PDF 31
+    - Universal Quantifier (for all) (unnumbered) — PDF 32
+    - Existential Quantifier (there exists) (unnumbered) — PDF 32
+    - Using Quantifiers in Logical Statements (unnumbered) — PDF 32
+  - 2.10 Applying Predicate Logic to Real-World Problems — PDF 32
+    - Representing Relationships Using Predicates (unnumbered) — PDF 32
+    - Writing Logical Statements With Quantifiers (unnumbered) — PDF 33
+    - Reasoning and drawing conclusions (unnumbered) — PDF 33
+  - 2.11 Logic-Based Reasoning and Inference — PDF 33
+    - Logical Inference (unnumbered) — PDF 33
+    - Deduction Using Logical Rules (unnumbered) — PDF 33
   - Summary — PDF 34; Exercise — PDF 35–36
 - Key terms: computational thinking, decomposition, pattern, abstraction (removing unnecessary detail), algorithm, evaluation, logic, knowledge representation, proposition, simple/compound proposition, logical connectives AND/OR/NOT, truth value, truth table, propositional equivalence (≡), satisfiable/unsatisfiable, predicate, variable, domain of discourse, quantifier, universal quantifier ∀, existential quantifier ∃, inference, premise, deduction, if-then rule.
 - Laws/rules/principles: a proposition is either true or false, never both (PDF 27); truth table has 2^n rows for n propositions (PDF 29); two expressions are equivalent if their truth values agree in all cases (PDF 29); satisfiable = at least one true assignment, "P AND NOT P" unsatisfiable (PDF 30); deduction: premises true ⇒ conclusion true (PDF 33).
@@ -138,14 +209,23 @@ TOC/actual mismatches: none in page numbers; only the "Neworks" misprint. Chapte
 - Pages: printed 33–44 · PDF 37–48
 - SLOs (printed, 1 bullet): develop Python applications using OOP principles.
 - Main concept: Modelling real-world entities with classes and objects in Python, and applying encapsulation (public/protected/private naming), inheritance (single, multiple, multilevel) and polymorphism (overloading via default/*args, overriding at runtime) to write modular, reusable code.
-- Navigation tree:
+- Navigation tree (every heading as printed, in book order; nesting follows the printed heading levels):
   - Introduction (unnumbered) — PDF 37
-  - 3.1 Object-Oriented Programming (OOP) Using Python — PDF 37 (Benefits of OOP: Modularity, Reusability, and Easier Maintenance)
+  - 3.1 Object-Oriented Programming (OOP) Using Python — PDF 37
+    - Benefits of OOP: Modularity, Reusability, and Easier Maintenance (unnumbered) — PDF 37
   - 3.2 Core Concepts of OOP — PDF 37
-    - (unnumbered) Classes and Objects — Representing Real-World Entities in Code — PDF 38 (Student class example)
-    - (unnumbered) Encapsulation — PDF 39 (Why Encapsulation is important; bank-account analogy; 1. Levels of Access Control: Public, Protected (_name), Private (__name, name mangling); BankAccount example — PDF 40)
-    - (unnumbered) Inheritance — Reusing and Extending Functionality — PDF 40 (Single Inheritance; Animal/Dog example — PDF 41; Parent Class, Child Class, Method Overriding, super(); Multiple Inheritance — PDF 41, Father/Mother/Child example — PDF 42; Multilevel Inheritance — PDF 42, Vehicle/Car/ElectricCar example — PDF 42–43)
-    - (unnumbered) Polymorphism — PDF 43 (payment-system example; Types of Polymorphism; 1. Compile-time Polymorphism — PDF 44, Calculator.multiply example; 2. Runtime Polymorphism (Overriding) — PDF 44, Animal/Dog/Cat sound example — PDF 44–45)
+    - Classes and Objects – Representing Real-World Entities in Code (unnumbered) — PDF 38
+    - Encapsulation (unnumbered) — PDF 39
+      - Why Encapsulation is important (unnumbered) — PDF 39
+      - 1. Levels of Access Control (unnumbered) — PDF 39 (Public, Protected and Private members; BankAccount example (PDF 40))
+    - Inheritance – Reusing and Extending Functionality (unnumbered) — PDF 40 (Parent Class, Child Class, Method Overriding, super() (PDF 41))
+      - Single Inheritance (unnumbered) — PDF 40
+      - Multiple Inheritance (unnumbered) — PDF 41
+      - Multilevel Inheritance (unnumbered) — PDF 42
+    - Polymorphism (unnumbered) — PDF 43
+      - Types of Polymorphism (unnumbered) — PDF 43
+        - 1. Compile-time Polymorphism (unnumbered) — PDF 44
+        - 2. Runtime Polymorphism (Overriding) (unnumbered) — PDF 44
   - Summary — PDF 46; Exercise — PDF 47–48
 - Key terms: OOP, class, object, instance, attribute, method, blueprint, modularity, reusability, maintainability, __init__, self, encapsulation, public/protected/private members, name mangling, getter/setter, inheritance, superclass/parent/base class, subclass/child/derived class, method overriding, super(), single/multiple/multilevel inheritance, polymorphism, compile-time polymorphism, method overloading, default arguments, *args/**kwargs, runtime polymorphism.
 - Laws/rules/principles: Python has no strict private keyword — naming conventions (_ protected, __ private) (PDF 39); Python does not support true signature-based method overloading (PDF 44); child class syntax class Child(Parent): (PDF 41).
@@ -178,18 +258,32 @@ TOC/actual mismatches: none in page numbers; only the "Neworks" misprint. Chapte
 - Pages: printed 45–59 · PDF 49–63
 - SLOs (printed, 2 bullets): design interactive GUI-based programs using Tkinter; connect Python applications to databases and perform CRUD operations.
 - Main concept: Building desktop interfaces with Tkinter (windows, frames, widgets, pack/grid/place layout, event-driven programming, a login form) and then persisting data by connecting Python to SQLite/MySQL, understanding relational tables/keys and performing CRUD with SQL.
-- Navigation tree:
+- Navigation tree (every heading as printed, in book order; nesting follows the printed heading levels):
   - Introduction (unnumbered) — PDF 49
   - 4.1 Graphical User Interface (GUI) Development with Tkinter — PDF 49
-    - What is a GUI? Why is it important? — PDF 50; Overview of Tkinter as Python's built-in GUI toolkit — PDF 50 (Simple GUI Example code + output)
-    - Tkinter Components and Widgets — PDF 51; Creating Windows and Adding Frames — PDF 51 (Tkinter Frames Example code, PDF 51–52)
-    - Common Widgets: Labels, Buttons, Entry Fields, Menus, and List boxes — PDF 52
-    - Layout Management — PDF 52; Organizing Elements using pack(), grid(), and place() — PDF 52 (examples pack() PDF 53, grid() PDF 53–54, place() PDF 54); Designing Clean and Responsive Interfaces — PDF 54
-    - Event Handling and Interactivity — PDF 55; Understanding Event-Driven Programming; Handling User Input and Connecting Widgets to Functions; Example: Simple Login Form (code PDF 55–56, messagebox)
+    - What is a GUI? Why is it important? (unnumbered) — PDF 50
+    - Overview of Tkinter as Python's built-in GUI toolkit (unnumbered) — PDF 50
+    - Tkinter Components and Widgets (unnumbered) — PDF 51
+      - Creating Windows and Adding Frames (unnumbered) — PDF 51
+    - Common Widgets: Labels, Buttons, Entry Fields, Menus, and List boxes (unnumbered) — PDF 52
+    - Layout Management (unnumbered) — PDF 52
+    - Organizing Elements using pack(), grid(), and place() (unnumbered) — PDF 52 (pack(), grid() and place() examples (PDF 53-54))
+    - Designing Clean and Responsive Interfaces (unnumbered) — PDF 54
+    - Event Handling and Interactivity (unnumbered) — PDF 55
+    - Understanding Event-Driven Programming (unnumbered) — PDF 55
+    - Handling User Input and Connecting Widgets to Functions (unnumbered) — PDF 55 (Example: Simple Login Form (PDF 55-56))
   - 4.2 Working with Databases in Python — PDF 56
-    - Introduction to Databases — PDF 56 (Entity, Attribute, Relationship, Identifier — PDF 57); Understanding Databases — PDF 57 (Relational Database, Table, Column, Primary Key, Foreign Key; Fig 4.3)
-    - Overview of Relational Databases and SQL Structure — PDF 58; Connecting Python to a Database; Using sqlite3 or MySQL to Establish a Database Connection (school.db code, PDF 58–59)
-    - Executing SQL Commands From Python — PDF 59; CRUD Operations — PDF 59 (Fig 4.4, Table 4.1); Create: Adding New Records — PDF 59; Read: Retrieving and Displaying Data — PDF 60; Update: Modifying Existing Records; Delete: Removing Data Safely (DELETE example code, PDF 60)
+    - Introduction to Databases (unnumbered) — PDF 56 (Entity, Attribute, Relationship, Identifier (PDF 57))
+      - Understanding Databases (unnumbered) — PDF 57 (Relational Database, Table, Column, Primary Key, Foreign Key)
+    - Overview of Relational Databases and SQL Structure (unnumbered) — PDF 58
+    - Connecting Python to a Database (unnumbered) — PDF 58
+      - Using sqlite3 or MySQL to Establish a Database Connection (unnumbered) — PDF 58
+      - Executing SQL Commands From Python (unnumbered) — PDF 59
+    - CRUD Operations (unnumbered) — PDF 59
+      - Create: Adding New Records (unnumbered) — PDF 59
+      - Read: Retrieving and Displaying Data (unnumbered) — PDF 60
+      - Update: Modifying Existing Records (unnumbered) — PDF 60
+      - Delete: Removing Data Safely (unnumbered) — PDF 60
   - Summary — PDF 61; Exercise — PDF 62–63
 - Key terms: GUI, Tkinter, Tk(), window, title(), geometry(), frame, widget, Label, Button, Entry, Menu, Listbox, pack(), grid() (row, column, columnspan), place() (x, y), padx/pady, grid_columnconfigure, mainloop(), event, event-driven programming, command=, messagebox (showinfo, showerror), show="*", database, entity, attribute, relationship, identifier, relational database, table, record/tuple, field, column, primary key, foreign key, SQL, sqlite3, MySQL, connect(), cursor, execute(), fetchall(), commit(), close(), CRUD, INSERT, SELECT, UPDATE, DELETE, CREATE TABLE IF NOT EXISTS.
 - Laws/rules/principles: event-driven model — program idles until an event fires its bound function (PDF 55); without commit() changes are not permanent (PDF 60).
@@ -222,14 +316,24 @@ TOC/actual mismatches: none in page numbers; only the "Neworks" misprint. Chapte
 - Pages: printed 60–71 · PDF 64–75
 - SLOs (printed, 1 bullet): use advanced techniques such as unit tests, breakpoints, and watches for testing and debugging Python applications.
 - Main concept: Ensuring program correctness through testing (error types, unit tests with unittest/pytest), debugging in IDEs (breakpoints, watch expressions, step into/over/continue), handling exceptions with try/except/finally (incl. database rollback), and finding performance bottlenecks with cProfile/timeit.
-- Navigation tree:
+- Navigation tree (every heading as printed, in book order; nesting follows the printed heading levels):
   - 5.1 Introduction — PDF 64
   - 5.2 Testing and Debugging Techniques — PDF 64
-    - 5.2.1 Importance of Testing and Debugging — PDF 64 (Why testing is essential for reliable applications; Common types of programming errors and bugs — syntax, logic, runtime, data errors, resource leaks; Fig 5.1 PDF 65)
-    - (unnumbered) Unit Testing — PDF 65 (Introduction to Python's unittest and pytest modules; Writing and executing test cases; add/multiply + pytest example PDF 65–66)
-    - (unnumbered) Using Breakpoints and Watches — PDF 66 (Setting breakpoints in IDEs like PyCharm or VS Code; Monitoring variable values with watch expressions; Step-by-step debugging process; calculate_area example PDF 67; 1. Setting Breakpoints in IDEs like PyCharm, 2. Monitoring Variable Values with Watch Expressions, 3. Step-by-Step Debugging Process: Step Into, Step Over, Continue — PDF 67–68; Fig 5.2)
-    - (unnumbered) Exception Handling — PDF 68 (sqlite3 try/except/finally example PDF 68–69; Handling multiple exception types effectively — PDF 69)
-  - 5.3 Profiling and Optimization — PDF 69 (nested-loop example 10000×10000 = 100,000,000; Measuring performance using profiling tools — cProfile, timeit, Fig 5.3 PDF 70; Identifying and fixing performance bottlenecks — Fig 5.4; slow_sum/fast_sum example PDF 71 with output PDF 72)
+    - 5.2.1 Importance of Testing and Debugging — PDF 64
+      - Why testing is essential for reliable applications (unnumbered) — PDF 64
+      - Common types of programming errors and bugs (unnumbered) — PDF 64 (Fig 5.1 (PDF 65))
+    - Unit Testing (unnumbered) — PDF 65
+      - Introduction to Python's unittest and pytest modules (unnumbered) — PDF 65
+        - Writing and executing test cases (unnumbered) — PDF 65 (PDF 65-66)
+    - Using Breakpoints and Watches (unnumbered) — PDF 66
+      - Setting breakpoints in IDEs like PyCharm or VS Code (unnumbered) — PDF 66
+      - Monitoring variable values with watch expressions (unnumbered) — PDF 66
+      - Step-by-step debugging process (unnumbered) — PDF 66 (Step Into, Step Over, Continue (PDF 67-68))
+    - Exception Handling (unnumbered) — PDF 68 (sqlite3 try/except/finally example (PDF 68-69))
+      - Handling multiple exception types effectively (unnumbered) — PDF 69
+  - 5.3 Profiling and Optimization — PDF 69 (nested loop 10000x10000 (PDF 69-70); slow_sum/fast_sum example and output (PDF 71-72))
+    - Measuring performance using profiling tools (unnumbered) — PDF 70 (cProfile, timeit)
+    - Identifying and fixing performance bottlenecks (unnumbered) — PDF 70
   - Summary — PDF 73; Exercise — PDF 74–75
 - Key terms: testing, debugging, bug, syntax error, logic error, runtime error, ZeroDivisionError, SyntaxError, data error, resource leak, unit testing, test case, unittest, pytest, assert, breakpoint, watch expression, step into, step over, continue, PyCharm, VS Code, exception handling, try/except/finally, sqlite3.Error, commit, rollback, profiling, optimization, cProfile, timeit, performance bottleneck, ncalls/tottime/percall/cumtime.
 - Laws/rules/principles: pytest auto-discovers functions starting with "test_" (PDF 66); nested loops multiply iteration counts (PDF 70); built-in sum() faster than manual loop (PDF 71–72).
@@ -259,18 +363,47 @@ TOC/actual mismatches: none in page numbers; only the "Neworks" misprint. Chapte
 - Pages: printed 72–88 · PDF 76–92
 - SLOs (printed, 1 bullet): grasp interdisciplinary nature of data science, data types, collection and storage; demonstrate proficiency in data science, machine learning and data visualization applied to real-world business challenges.
 - Main concept: Data science workflow and data types, then machine learning — supervised/unsupervised/reinforcement mechanisms, applications, building a model (features, train-test split, linear regression example), evaluating it (accuracy, precision, recall, F1), validating/tuning it, prediction vs causation, and tools (Excel, R, Python/Jupyter).
-- Navigation tree:
+- Navigation tree (every heading as printed, in book order; nesting follows the printed heading levels):
   - Introduction (unnumbered) — PDF 76
-  - 6.1 Introduction to Data Science — PDF 76 (Fig 6.1 workflow; interdisciplinary nature — PDF 77)
-  - 6.2 Understanding Data — PDF 77 (Types of Data: Structured and Unstructured; Data Sources and Data Collection Methods — PDF 78; Data Storage and Management Concepts)
-  - 6.3 Overview of Machine Learning — PDF 78 (Learning From Data; Difference Between Traditional Programming and Machine Learning — Fig 6.3 PDF 79)
-  - 6.4 Machine Learning Mechanisms — PDF 79 (Fig 6.4 labeled vs unlabeled; Supervised, Unsupervised, Reinforcement Machine Learning — PDF 80)
-  - 6.5 Applications of Machine Learning — PDF 80 (Healthcare; Business, Education, Everyday Applications — PDF 81; Fig 6.5)
-  - 6.6 Building a Machine Learning Model — PDF 81 (student-grade example; Fig 6.6 PDF 82; linear-regression code PDF 82–83; Fig 6.7 PDF 84; Selecting Features and Target Values; Feature Engineering Basics; Train-Test Split Of Data (80/20); Building a Simple Predictive Model — PDF 84–85)
-  - 6.7 Model Evaluation and Performance Metrics — PDF 85 (Accuracy and Error; Precision and Recall; F1-Score — PDF 86 with worked example)
-  - 6.8 Validation and Model Improvement — PDF 86 (Validation Data Set Preparation; Model Robustness and Reliability; Improving Models Using Hyperparameter Tuning; Simple Analogy: Adjusting the Volume of a Speaker — PDF 87)
-  - 6.9 Predictive Modeling and Causality — PDF 87 (Predictive Outcomes in Machine Learning; Understanding Causality; Difference Between Prediction and Causation — PDF 88)
-  - 6.10 Machine Learning Tools and Platforms — PDF 88 (Using Excel for Data Analysis; Introduction to R for Data Science — PDF 89; Python and Jupyter Notebooks for Machine Learning)
+  - 6.1 Introduction to Data Science — PDF 76 (Data Science Work Flow (Fig 6.1); interdisciplinary nature (PDF 77))
+  - 6.2 Understanding Data — PDF 77
+    - Types of Data: Structured and Unstructured (unnumbered) — PDF 77
+    - Data Sources and Data Collection Methods (unnumbered) — PDF 78
+    - Data Storage and Management Concepts (unnumbered) — PDF 78
+  - 6.3 Overview of Machine Learning — PDF 78
+    - Learning From Data (unnumbered) — PDF 78
+    - Difference Between Traditional Programming and Machine Learning (unnumbered) — PDF 78 (Fig 6.3 (PDF 79))
+  - 6.4 Machine Learning Mechanisms — PDF 79 (Labeled vs Unlabeled Data (Fig 6.4, PDF 79))
+    - Supervised Machine Learning (unnumbered) — PDF 80
+    - Unsupervised Machine Learning (unnumbered) — PDF 80
+    - Reinforcement Machine Learning (unnumbered) — PDF 80
+  - 6.5 Applications of Machine Learning — PDF 80
+    - Use of Machine Learning in Healthcare (unnumbered) — PDF 80
+    - Use of Machine Learning in Business (unnumbered) — PDF 81
+    - Use of Machine Learning In Education (unnumbered) — PDF 81
+    - Everyday Applications of Machine Learning (unnumbered) — PDF 81
+  - 6.6 Building a Machine Learning Model — PDF 81 (student grade prediction example; Model Building Process (Fig 6.6, PDF 82); linear regression code example (PDF 82-83); Fig 6.7 (PDF 84))
+    - Selecting Features and Target Values (unnumbered) — PDF 84
+    - Feature Engineering Basics (unnumbered) — PDF 84
+    - Train-Test Split Of Data (unnumbered) — PDF 84 (80/20)
+    - Building a Simple Predictive Model (unnumbered) — PDF 84
+  - 6.7 Model Evaluation and Performance Metrics — PDF 85
+    - Accuracy and Error (unnumbered) — PDF 85
+    - Precision and Recall (unnumbered) — PDF 85
+    - F1-Score (unnumbered) — PDF 86 (worked example (PDF 86))
+  - 6.8 Validation and Model Improvement — PDF 86
+    - Validation Data Set Preparation (unnumbered) — PDF 87
+    - Model Robustness and Reliability (unnumbered) — PDF 87
+    - Improving Models Using Hyperparameter Tuning (unnumbered) — PDF 87
+    - Simple Analogy: Adjusting the Volume of a Speaker (unnumbered) — PDF 87
+  - 6.9 Predictive Modeling and Causality — PDF 87
+    - Predictive Outcomes in Machine Learning (unnumbered) — PDF 88
+    - Understanding Causality (unnumbered) — PDF 88
+    - Difference Between Prediction and Causation (unnumbered) — PDF 88
+  - 6.10 Machine Learning Tools and Platforms — PDF 88
+    - Using Excel for Data Analysis (unnumbered) — PDF 88
+    - Introduction to R for Data Science (unnumbered) — PDF 89
+    - Python and Jupyter Notebooks for Machine Learning (unnumbered) — PDF 89
   - Summary — PDF 90; Exercise — PDF 91–92
 - Key terms: data science, interdisciplinary, data, structured/unstructured data, data source, data collection (manual/automatic, real-time), data storage, data management, machine learning, model, training, labeled/unlabeled data, supervised/unsupervised/reinforcement learning, clustering, reward/penalty, feature, target value, feature engineering, scaling, train-test split, overfitting, predictive model, linear regression, Mean Squared Error (MSE), model evaluation, accuracy, error rate, TP/TN/FP/FN, precision, recall, F1-score, validation dataset, robustness, reliability, hyperparameter tuning, prediction, causality/causation, Excel, R, Python, Pandas, NumPy, Jupyter notebook, IDE.
 - Laws/rules/principles: common split 80% train / 20% test (PDF 84); lower MSE = better fit (PDF 83); accuracy alone can mislead on unbalanced data (PDF 85–86).
@@ -299,15 +432,37 @@ TOC/actual mismatches: none in page numbers; only the "Neworks" misprint. Chapte
 - Pages: printed 89–102 · PDF 93–106
 - SLOs (printed, 2 bullets): form hypotheses and perform hypothesis testing; communicate findings using advanced data visuals tied back to hypotheses.
 - Main concept: Turning research questions into null/alternative hypotheses, using test statistics (t, chi-square, F), significance level, critical region and p-value to accept/reject them, following a step-by-step numerical example, visualizing results, and handling bias/ethics and clear communication of conclusions.
-- Navigation tree:
+- Navigation tree (every heading as printed, in book order; nesting follows the printed heading levels):
   - Introduction (unnumbered) — PDF 93
-  - 7.1 Introduction to Hypothesis Testing — PDF 93 (Meaning of Hypothesis, hθ(x)=y notation; Research Questions and Hypotheses — PDF 94; Role of Hypothesis Testing in Data Analysis)
-  - 7.2 Types of Hypotheses — PDF 94 (Null Hypothesis (H0); Alternative Hypothesis (H1 or Ha); Example research question on study time — PDF 95; Formulating correct hypotheses)
-  - 7.3 Concepts in Hypothesis Testing — PDF 95 (Test Statistics: T-value Test formula, example t = 2.5 — PDF 96; Chi-Square Test formula, die example χ² = 3.4; Critical Region — PDF 96; Significance Level (α, 0.05) — PDF 97; P-value and its Importance)
-  - 7.4 Performing Hypothesis Tests — PDF 97 (Fig 7.1 PDF 98; Steps in Hypothesis Testing; Simple Hypothesis Testing Examples; Advanced Tests: F-Test and Chi-Square Test, F = S1²/S2², F = 16/9 = 1.78 — PDF 98–99; Numerical Example: Hypothesis Testing, Steps 1–7 — PDF 99–100)
-  - 7.5 Data Visualization For Hypothesis Testing — PDF 100 (Fig 7.2; Importance of Data Visualization; Graphs and Charts for Presenting Results — PDF 101; Linking Data Visuals With Hypotheses)
-  - 7.6 Ethical Issues in Data Science and Analysis — PDF 101 (Bias in Data Collection and Analysis: 1 Survey, 2 Sampling, 3 Gender, 4 Geographical, 5 Confirmation bias — PDF 101–102; Ethical Use of Data and Models; Responsible Communication of Findings — PDF 102)
-  - 7.7 Communicating Results and Conclusions — PDF 102 (Interpreting Test Results; Presenting Findings Clearly — PDF 103; Connecting Conclusions to Hypotheses)
+  - 7.1 Introduction to Hypothesis Testing — PDF 93
+    - Meaning of Hypothesis (unnumbered) — PDF 93 (h_theta(x) = y)
+    - Research Questions and Hypotheses (unnumbered) — PDF 94
+    - Role of Hypothesis Testing in Data Analysis (unnumbered) — PDF 94
+  - 7.2 Types of Hypotheses — PDF 94 (Example research question (PDF 95))
+    - Null Hypothesis (H0) (unnumbered) — PDF 94
+    - Alternative Hypothesis (H1 or Ha) (unnumbered) — PDF 94
+    - Formulating correct hypotheses (unnumbered) — PDF 95
+  - 7.3 Concepts in Hypothesis Testing — PDF 95
+    - Test Statistics (unnumbered) — PDF 95 (T-value Test (PDF 95-96), Chi-Square Test (PDF 96))
+    - Critical Region (unnumbered) — PDF 96
+    - Significance Level (unnumbered) — PDF 97
+    - P-value and its Importance (unnumbered) — PDF 97
+  - 7.4 Performing Hypothesis Tests — PDF 97 (Numerical Example: Hypothesis Testing Steps 1-7 (PDF 99-100))
+    - Steps in Hypothesis Testing (unnumbered) — PDF 98 (Hypothesis Testing Process (Fig 7.1))
+    - Simple Hypothesis Testing Examples (unnumbered) — PDF 98
+    - Advanced Tests: F-Test and Chi-Square Test (unnumbered) — PDF 98 (F-test example (PDF 98-99))
+  - 7.5 Data Visualization For Hypothesis Testing — PDF 100
+    - Importance of Data Visualization (unnumbered) — PDF 100
+    - Graphs and Charts for Presenting Results (unnumbered) — PDF 101
+    - Linking Data Visuals With Hypotheses (unnumbered) — PDF 101
+  - 7.6 Ethical Issues in Data Science and Analysis — PDF 101
+    - Bias in Data Collection and Analysis (unnumbered) — PDF 101 (Survey, Sampling, Gender, Geographical, Confirmation bias (PDF 101-102))
+    - Ethical Use of Data and Models (unnumbered) — PDF 102
+    - Responsible Communication of Findings (unnumbered) — PDF 102
+  - 7.7 Communicating Results and Conclusions — PDF 102
+    - Interpreting Test Results (unnumbered) — PDF 102
+    - Presenting Findings Clearly (unnumbered) — PDF 103
+    - Connecting Conclusions to Hypotheses (unnumbered) — PDF 103
   - Summary — PDF 104; Exercise — PDF 105–106
 - Key terms: hypothesis, hypothesis testing, research question, null hypothesis H0, alternative hypothesis H1/Ha, test statistic, t-value, chi-square, F-test, variance, observed/expected frequency, degrees of freedom, critical region, significance level α, p-value, sample mean, standard deviation, decision rule, data visualization, bar chart, line graph, pie chart, scatter plot, outlier, bias (survey, sampling, gender, geographical, confirmation), ethical use of data, consent, responsible communication, interpretation.
 - Laws/rules/principles: reject H0 when p-value < α, accept when p-value > α (Fig 7.1, PDF 98); common α = 0.05 (PDF 97); conclusions must be linked to original hypotheses (PDF 103).
@@ -332,12 +487,39 @@ TOC/actual mismatches: none in page numbers; only the "Neworks" misprint. Chapte
 - Pages: printed 103–117 · PDF 107–121
 - SLOs (printed, 2 bullets): evaluate how stakeholders' cultures, values and conflicting interests affect AI system design and assess protective policies; design innovative applications for Pakistan using AI, IoT, Cloud Computing and Blockchain.
 - Main concept: Survey of emerging technologies (AI, IoT, cloud, blockchain) and their applications/benefits/challenges, the cultural and ethical dimensions of AI (stakeholders, fairness, bias, conflicts, policy), designing technology solutions for Pakistan's national challenges (smart-agriculture case study), and governance/responsible innovation.
-- Navigation tree:
+- Navigation tree (every heading as printed, in book order; nesting follows the printed heading levels):
   - Introduction (unnumbered) — PDF 107
-  - 8.1 Understanding Emerging Technologies — PDF 107 (Artificial Intelligence (AI) — PDF 108: Common AI Applications, Benefits and Challenges of AI in Society — PDF 108–109; Internet of Things (IoT) — PDF 109: smart-home/healthcare/agriculture examples PDF 110, Fig 8.3, Data Collection, Communication, and Automation; Cloud Computing — PDF 111: Advantages: Scalability, Accessibility, and Cost-effectiveness, Examples: AWS, Microsoft Azure, Fig 8.4 PDF 112; Blockchain Technology — PDF 112)
-  - 8.2 Cultural and Ethical Implications of AI Systems — PDF 112 (Fig 8.5 PDF 113; Stakeholders in AI Systems: Developers, Users, Governments, Communities; Cultural Awareness and Diversity; Ethical Principles in AI — PDF 114: Fairness, Accountability, Transparency, and Safety; Avoiding Bias and Ensuring Inclusivity in AI Design; Conflict of Interests Among Stakeholders; Policy and Legal Frameworks (GDPR) — PDF 115)
-  - 8.3 Designing Applications for Pakistan Using Emerging Technologies — PDF 115 (Fig 8.6; Identifying National Challenges — PDF 115–116; Innovative Application Design — PDF 116; Technology Integration (smart irrigation); Ethical and Cultural Considerations — PDF 116–117; Case Study: Smart Agriculture in Pakistan — PDF 117: Using IoT Sensors for Soil Monitoring, AI for Predictive Weather Analysis, Cloud for Data Storage and Blockchain for Supply Chain Transparency)
-  - 8.4 Policies, Regulations, and Responsible Innovation — PDF 117 (Fig 8.7 PDF 118; Understanding AI Governance; Developing Responsible Technology; Collaboration Across Disciplines)
+  - 8.1 Understanding Emerging Technologies — PDF 107
+    - Artificial Intelligence (AI) (unnumbered) — PDF 108
+      - Common AI Applications (e.g., voice assistants, chatbots, image recognition) (unnumbered) — PDF 108
+      - Benefits and Challenges of AI in Society (unnumbered) — PDF 108
+    - Internet of Things (IoT) (unnumbered) — PDF 109 (smart home, healthcare and agriculture uses (PDF 110))
+      - Data Collection, Communication, and Automation (unnumbered) — PDF 110
+    - Cloud Computing (unnumbered) — PDF 111
+      - Advantages: Scalability, Accessibility, and Cost-effectiveness (unnumbered) — PDF 111
+      - Examples: AWS, Microsoft Azure (unnumbered) — PDF 111
+    - Blockchain Technology (unnumbered) — PDF 112
+  - 8.2 Cultural and Ethical Implications of AI Systems — PDF 112
+    - Stakeholders in AI Systems (unnumbered) — PDF 113 (Developers, Users, Governments, Communities)
+    - Cultural Awareness and Diversity (unnumbered) — PDF 113
+    - Ethical Principles in AI (unnumbered) — PDF 114
+      - Fairness, Accountability, Transparency, and Safety in AI Systems (unnumbered) — PDF 114
+      - Avoiding Bias and Ensuring Inclusivity in AI Design (unnumbered) — PDF 114
+      - Conflict of Interests Among Stakeholders (unnumbered) — PDF 114
+      - Policy and Legal Frameworks (unnumbered) — PDF 115 (GDPR)
+  - 8.3 Designing Applications for Pakistan Using Emerging Technologies — PDF 115
+    - Identifying National Challenges (unnumbered) — PDF 115
+    - Innovative Application Design (unnumbered) — PDF 116
+    - Technology Integration (unnumbered) — PDF 116
+    - Ethical and Cultural Considerations (unnumbered) — PDF 116
+    - Case Study: Smart Agriculture in Pakistan (unnumbered) — PDF 117
+      - Using IoT Sensors for Soil Monitoring (unnumbered) — PDF 117
+      - AI for Predictive Weather Analysis (unnumbered) — PDF 117
+      - Cloud for Data Storage and Blockchain for Supply Chain Transparency (unnumbered) — PDF 117
+  - 8.4 Policies, Regulations, and Responsible Innovation — PDF 117
+    - Understanding AI Governance (unnumbered) — PDF 118
+    - Developing Responsible Technology (unnumbered) — PDF 118
+    - Collaboration Across Disciplines (unnumbered) — PDF 118
   - Summary — PDF 119–120; Exercise — PDF 120–121
 - Key terms: emerging technologies, Artificial Intelligence, machine learning, Neural Networks (NN), Natural Language Processing (NLP), voice assistant, chatbot, image recognition, recommendation system, self-driving car, Internet of Things, sensor, actuator, microcontroller (ESP32/NodeMCU), automation, cloud computing, scalability, accessibility, cost-effectiveness, pay-as-you-go, AWS, Microsoft Azure, SaaS/PaaS/IaaS, public/private/hybrid cloud, blockchain, block, decentralized, cryptocurrency, Bitcoin, supply chain, stakeholders (developers, users, governments, communities), cultural diversity, fairness, accountability, transparency, safety, bias, inclusivity, conflict of interest, consent, GDPR, AI Ethics Guidelines, national AI policy, design thinking, technology integration, smart agriculture, smart irrigation, AI governance, responsible innovation, interdisciplinary collaboration.
 - Laws/rules/principles: four ethical principles of AI — fairness, accountability, transparency, safety (PDF 114); GDPR as data-protection framework (PDF 115, 118); IoT three functions — data collection, communication, automation (PDF 110).
@@ -364,13 +546,72 @@ TOC/actual mismatches: none in page numbers; only the "Neworks" misprint. Chapte
 - Pages: printed 118–136 · PDF 122–140
 - SLOs (printed, 4 bullets): apply safe practices when collaborating online; understand common cybersecurity problems, 2FA, biometric verification, secure data transmission; collaborate on digital applications and design for equity/equal access; explore digital entrepreneurship and develop simple technology-based business ideas.
 - Main concept: Safe, responsible digital behaviour (passwords, updates, privacy settings, etiquette), cyber threats and defences (2FA, biometrics, firewalls/IDS/antivirus, cryptography, intrusion detection), equitable digital collaboration, digital entrepreneurship in Pakistan, and the ethical, legal (GDPR, PECA 2016) and environmental (e-waste) dimensions of computing.
-- Navigation tree:
-  - Introduction (unnumbered) — PDF 122 (Fig 9.1)
-  - 9.1 Safe and Responsible Digital Practices — PDF 123 (Fig 9.2; Importance of Online Safety; Understanding Strong Passwords and Their Role in Data Protection; Risks of Downloading Suspicious Software and Unsafe Browsing Habits — PDF 124; Software Maintenance and Updates; Privacy and Security Settings; Reading and Managing Privacy Policies; Customizing Privacy and Security Settings for Online Platforms — PDF 125; Safe Online Collaboration; Identifying Secure Collaboration Platforms (e.g., Google Workspace, MS Teams); Practicing Digital Etiquette and Responsible Communication)
-  - 9.2 Cybersecurity Awareness and Threat Management — PDF 125 (Understanding Cyber Threats — PDF 126; Common Types of Cyberattacks: virus, phishing, ransomware, spyware, DDoS; How Cyberattacks Affect Individuals and Organizations; Security Tools and Techniques; Two-Factor Authentication (2FA) — PDF 127; Biometric Verification; Use of Firewalls, Intrusion Detection Systems (IDS), and Antivirus Tools; Data Protection and Cryptography (encryption/decryption); Secure Methods for Transmitting and Storing Data (HTTPS) — PDF 127–128; Detecting and Preventing Intrusions — PDF 128; Identifying Vulnerabilities and Suspicious Activities; Applying Troubleshooting and Preventive Measures)
-  - 9.3 Digital Collaboration and Equity in Computing — PDF 128 (Fig 9.3 PDF 129; Working Together Online; Importance of Teamwork and Communication in Digital Environments; Tools and Platforms for Real-Time Collaboration; Designing for Equity and Accessibility — PDF 129–130; Creating Inclusive Applications for Diverse Users — PDF 130; Strategies for Effective Collaboration: Assigning Roles, Managing Tasks, Setting Team Goals; Reflecting on Collaborative Experiences — PDF 131; Discussion to Improve Teamwork)
-  - 9.4 Digital Entrepreneurship and Innovation — PDF 131 (Characteristics of Successful Entrepreneurs; Entrepreneurship in Pakistan and the Digital Economy; Identifying Business Opportunities; Solving Real-World Problems Through Technology — PDF 132, Fig 9.4; Recognizing Market Needs and Customer Demands; Digital Platforms for Entrepreneurship — Fig 9.5; Using Social Media for Business Promotion — PDF 133; E-commerce Platforms and Online Marketplaces; Freelancing and Remote Work Opportunities; Planning a Small Digital Business; Basic Business Planning Concepts; Budgeting and Resource Management — PDF 134; Teamwork and Communication in Startups; Innovation and Future Opportunities; Emerging Technologies and Entrepreneurship; Role of AI, Apps, and Digital Services in Business; Career Pathways in Technology Entrepreneurship — PDF 135)
-  - 9.5 Ethical, Legal, and Environmental Impacts of Computing — PDF 135 (Ethical Use of Technology; Respecting Intellectual Property and Data Ownership; Understanding Consequences of Unethical Digital Behavior; Legal Aspects and Data Privacy Laws — PDF 135–136; Overview of International Frameworks (e.g., GDPR) — PDF 136; Cybercrime Laws and Data Protection Policies in Pakistan (PECA 2016); Environmental and Social Impacts; E-waste Management and Sustainable Computing; The Role of Technology in Cultural and Societal Change — PDF 136–137)
+- Navigation tree (every heading as printed, in book order; nesting follows the printed heading levels):
+  - Introduction (Fig 9.1) (unnumbered) — PDF 122
+  - 9.1 Safe and Responsible Digital Practices — PDF 123
+    - Importance of Online Safety (unnumbered) — PDF 123
+    - Understanding Strong Passwords and Their Role in Data Protection (unnumbered) — PDF 123
+    - Risks of Downloading Suspicious Software and Unsafe Browsing Habits (unnumbered) — PDF 124
+    - Software Maintenance and Updates (unnumbered) — PDF 124
+    - Privacy and Security Settings (unnumbered) — PDF 124
+      - Reading and Managing Privacy Policies (unnumbered) — PDF 124
+      - Customizing Privacy and Security Settings for Online Platforms (unnumbered) — PDF 125
+    - Safe Online Collaboration (unnumbered) — PDF 125
+      - Identifying Secure Collaboration Platforms (e.g., Google Workspace, MS Teams) (unnumbered) — PDF 125
+      - Practicing Digital Etiquette and Responsible Communication (unnumbered) — PDF 125
+  - 9.2 Cybersecurity Awareness and Threat Management — PDF 125
+    - Understanding Cyber Threats (unnumbered) — PDF 126
+      - Common Types of Cyberattacks (unnumbered) — PDF 126 (virus, phishing, ransomware, spyware, DDoS)
+      - How Cyberattacks Affect Individuals and Organizations (unnumbered) — PDF 126
+    - Security Tools and Techniques (unnumbered) — PDF 126
+      - Two-Factor Authentication (2FA) (unnumbered) — PDF 127
+      - Biometric Verification (unnumbered) — PDF 127
+      - Use of Firewalls, Intrusion Detection Systems (IDS), and Antivirus Tools (unnumbered) — PDF 127
+    - Data Protection and Cryptography (unnumbered) — PDF 127
+      - Secure Methods for Transmitting and Storing Data (unnumbered) — PDF 127 (PDF 127-128)
+    - Detecting and Preventing Intrusions (unnumbered) — PDF 128
+      - Identifying Vulnerabilities and Suspicious Activities (unnumbered) — PDF 128
+      - Applying Troubleshooting and Preventive Measures (unnumbered) — PDF 128
+  - 9.3 Digital Collaboration and Equity in Computing — PDF 128
+    - Working Together Online (unnumbered) — PDF 129
+      - Importance of Teamwork and Communication in Digital Environments (unnumbered) — PDF 129
+      - Tools and Platforms for Real-Time Collaboration (unnumbered) — PDF 129
+    - Designing for Equity and Accessibility (unnumbered) — PDF 129
+    - Creating Inclusive Applications for Diverse Users (unnumbered) — PDF 130
+    - Strategies for Effective Collaboration (unnumbered) — PDF 130
+      - Assigning Roles (unnumbered) — PDF 130
+      - Managing Tasks (unnumbered) — PDF 130
+      - Setting Team Goals (unnumbered) — PDF 130
+      - Reflecting on Collaborative Experiences (unnumbered) — PDF 131
+      - Discussion to Improve Teamwork (unnumbered) — PDF 131
+  - 9.4 Digital Entrepreneurship and Innovation — PDF 131
+    - Characteristics of Successful Entrepreneurs (unnumbered) — PDF 131
+    - Entrepreneurship in Pakistan and the Digital Economy (unnumbered) — PDF 131
+    - Identifying Business Opportunities (unnumbered) — PDF 131
+    - Solving Real-World Problems Through Technology (unnumbered) — PDF 132
+    - Recognizing Market Needs and Customer Demands (unnumbered) — PDF 132
+    - Digital Platforms for Entrepreneurship (unnumbered) — PDF 132
+    - Using Social Media for Business Promotion (unnumbered) — PDF 133
+    - E-commerce Platforms and Online Marketplaces (unnumbered) — PDF 133
+    - Freelancing and Remote Work Opportunities (unnumbered) — PDF 133
+    - Planning a Small Digital Business (unnumbered) — PDF 133
+    - Basic Business Planning Concepts (unnumbered) — PDF 133
+    - Budgeting and Resource Management (unnumbered) — PDF 134
+    - Teamwork and Communication in Startups (unnumbered) — PDF 134
+    - Innovation and Future Opportunities (unnumbered) — PDF 134
+    - Emerging Technologies and Entrepreneurship (unnumbered) — PDF 134
+    - Role of AI, Apps, and Digital Services in Business (unnumbered) — PDF 134
+    - Career Pathways in Technology Entrepreneurship (unnumbered) — PDF 135
+  - 9.5 Ethical, Legal, and Environmental Impacts of Computing — PDF 135
+    - Ethical Use of Technology (unnumbered) — PDF 135
+      - Respecting Intellectual Property and Data Ownership (unnumbered) — PDF 135
+      - Understanding Consequences of Unethical Digital Behavior (unnumbered) — PDF 135
+    - Legal Aspects and Data Privacy Laws (unnumbered) — PDF 135
+      - Overview of International Frameworks (e.g., GDPR) (unnumbered) — PDF 136
+      - Cybercrime Laws and Data Protection Policies in Pakistan (unnumbered) — PDF 136 (PECA 2016)
+    - Environmental and Social Impacts (unnumbered) — PDF 136
+      - E-waste Management and Sustainable Computing (unnumbered) — PDF 136
+    - The Role of Technology in Cultural and Societal Change (unnumbered) — PDF 136
   - Summary — PDF 137–138; Exercise — PDF 139–140
 - Key terms: online safety, digital footprint, strong password, spyware, unsafe browsing, software update/patch, privacy settings, privacy policy, two-factor authentication (2FA), read receipts, secure collaboration platform (Google Workspace, Microsoft Teams, Google Meet, Zoom), digital etiquette, cybersecurity, cyber threat, virus, phishing, ransomware, spyware, DDoS, data breach, biometric verification, firewall, intrusion detection system (IDS), antivirus, data protection, cryptography, encryption, decryption, key, HTTPS, backup, intrusion, vulnerability, system log, troubleshooting, digital collaboration, equity, accessibility, inclusive application, screen reader, roles/tasks/goals, reflection, digital entrepreneurship, innovation, entrepreneur, digital economy, business opportunity, market need, social media, e-commerce (Daraz, Amazon), freelancing (Fiverr, Upwork), remote work, business plan, budget, startup, career pathways, ethical use, intellectual property, data ownership, cybercrime, data privacy law, GDPR, PECA 2016, e-waste, sustainable computing, digital divide.
 - Laws/rules/principles: Prevention of Electronic Crimes Act (PECA) 2016 — Pakistan's main cybercrime law (PDF 136); GDPR — EU data-protection law (PDF 136); 12-character password takes "millions of years" to crack (DYK, PDF 123).
