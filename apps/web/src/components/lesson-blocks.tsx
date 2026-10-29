@@ -172,8 +172,7 @@ export function LessonBlocks({
       {blocks.map((b, i) => {
         if (isQuickCheck(blocks[i - 1], b)) return null; // drawn inside the card above
         if (isQuickCheck(b, blocks[i + 1])) {
-          const depth = b.level === 4 ? 4 : b.level === 3 ? 3 : 2;
-      const level = Math.min(6, depth + headingOffset);
+          const level = Math.min(6, (b.level === 3 ? 3 : 2) + headingOffset);
           const Tag = `h${level}` as "h2" | "h3" | "h4" | "h5" | "h6";
           return (
             <section key={i} className="overflow-hidden rounded-inner border border-ok/40 bg-surface shadow-sm" aria-label={str(b.text)}>
@@ -238,7 +237,8 @@ function BlockView({
   const marks = bookErrors(b.book_errors);
   switch (b.type) {
     case "heading": {
-      const level = Math.min(6, (b.level === 3 ? 3 : 2) + headingOffset);
+      const depth = b.level === 4 ? 4 : b.level === 3 ? 3 : 2;
+      const level = Math.min(6, depth + headingOffset);
       const Tag = `h${level}` as "h2" | "h3" | "h4" | "h5" | "h6";
       // Headings inside a topic ("Carbon monoxide (CO)" in 14.4.1) take their own colour, apart from the chapter's main
       // heading (14.4, accent) and the topic's title (14.4.1, text colour), so the three levels read apart (owner,
