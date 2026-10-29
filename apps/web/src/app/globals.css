@@ -404,6 +404,11 @@ body:has(.lesson-flow, [data-reading-bar]) .site-header {
 html {
   scroll-padding-top: 6rem;
 }
+/* Reading pages: the header scrolls away and the reading bar is sticky, so lesson blocks keep their own scroll margin
+   (the reading bar's height) — READER-PLACE-01 returns to a block by that margin. */
+html:has(.lesson-flow, [data-reading-bar]) {
+  scroll-padding-top: 0;
+}
 
 /* P02.S2.T1 (TOKENS-01): Urdu text (lang="ur") in Nastaliq, with the taller lines Nastaliq's stacked letters need. */
 :lang(ur) {
