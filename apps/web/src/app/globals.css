@@ -514,3 +514,54 @@ html:has(.lesson-flow, [data-reading-bar]) {
     background: var(--surface);
   }
 }
+
+/* BOOK-BOX-01: the book's printed boxes (lesson-blocks.tsx). A header in the colour of the box's kind, as printed, a tinted
+   body, and on a wide screen a short box at the side of the text like the book's margin column; on a phone, and for a
+   long box, full width. Headings and wide content start below a side box. Header text is white on each colour (≥ 4.5:1). */
+.book-box {
+  --bb-head: #2f6db5;
+  --bb-body: #eef4fb;
+  overflow: hidden;
+  border: 1px solid var(--bb-head);
+  border-radius: 0.75rem;
+  background: var(--bb-body);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.05);
+}
+.book-box[data-book-box="rule"] { --bb-head: #2f6db5; --bb-body: #eef4fb; }
+.book-box[data-book-box="know"] { --bb-head: #237a49; --bb-body: #ecf6f0; }
+.book-box[data-book-box="info"] { --bb-head: #0e6f78; --bb-body: #e8f4f5; }
+.book-box[data-book-box="ponder"] { --bb-head: #7a3d9c; --bb-body: #f4edf8; }
+.book-box[data-book-box="keep"] { --bb-head: #a3480a; --bb-body: #fcf2e6; }
+.book-box[data-book-box="activity"] { --bb-head: #b23a0e; --bb-body: #fcefe8; }
+.book-box-head {
+  background: var(--bb-head);
+  color: #fff;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  line-height: 1.35;
+}
+.book-box-body {
+  padding: 0.75rem 1rem 0.9rem;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .book-box {
+    --bb-body: color-mix(in srgb, var(--bb-head) 16%, #161916);
+    border-color: color-mix(in srgb, var(--bb-head) 70%, #161916);
+  }
+}
+:root[data-theme="dark"] .book-box {
+  --bb-body: color-mix(in srgb, var(--bb-head) 16%, #161916);
+  border-color: color-mix(in srgb, var(--bb-head) 70%, #161916);
+}
+@media (min-width: 64rem) {
+  .book-box-side {
+    float: right;
+    width: 17.5rem;
+    margin: 0.25rem 0 1rem 1.5rem;
+    font-size: 0.94em;
+  }
+  .lesson-flow > :is([data-kind="heading"], [data-kind="figure"], [data-kind="diagram"], [data-kind="table"],
+    [data-kind="equation"], [data-kind="code"], [data-kind="example"], [data-kind="model3d"]) {
+    clear: both;
+  }
+}

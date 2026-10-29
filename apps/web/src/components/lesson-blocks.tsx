@@ -4,6 +4,7 @@ import { CodeRunner } from "@/components/code-runner";
 import { Equation } from "@/components/equation";
 import { Model3DFigure } from "@/components/model3d-figure";
 import { SaverImage } from "@/components/saver-image";
+import { bookBoxKind, sideBox } from "@/lib/book-box";
 import { bookErrors, markLatex, markPieces } from "@/lib/book-errors";
 import { codeRuns } from "@/lib/code-highlight";
 import { leadIn, leadTerm } from "@/lib/book-style";
@@ -36,16 +37,6 @@ const CALLOUT_LABEL: Record<string, string> = {
   correction: "Book correction",
 };
 
-// READER-STYLE-01 (owner, 2026-10-27: "professional or premium"): the book's own boxes keep their printed names and a
-// colour of their own, as in the textbook: Keep in Mind amber, Do You Know / For Your Information teal. A titled note is
-// one of those printed boxes, so its title is its header and the generic "Note" label is dropped.
-function bookBox(title: string): "keep" | "know" | null {
-  if (/^keep in mind/i.test(title)) return "keep";
-  if (/^(do you know|did you know|for your information|interesting information|tidbits?|point to ponder|ponder upon)/i.test(title)) return "know";
-  return null;
-}
-const BOOK_BOX_STYLE = { keep: "border-warn bg-warn-soft", know: "border-accent bg-accent-soft" } as const;
-const BOOK_BOX_HEAD = { keep: "text-warn", know: "text-accent-strong" } as const;
 
 /** A printed "Quick Check" heading followed by its questions: one card, as the book prints it. */
 function isQuickCheck(b: Block | undefined, next: Block | undefined) {
@@ -300,13 +291,25 @@ function BlockView({
       const label = CALLOUT_LABEL[tone] ?? "Note";
       // A title that only repeats the label ("Book correction") is shown once.
       const title = str(b.title).trim().toLowerCase() === label.toLowerCase() ? "" : str(b.title);
-      const box = tone === "note" && title ? bookBox(title) : null;
-      const printed = tone === "note" && title; // a printed box: its title is the header
+      // BOOK-BOX-01 (READER-STYLE-01 before it): a titled note is one of the book's printed boxes. It keeps the book's
+      // look: its title on a header in the colour of its kind, a tinted body, and a short box at the side of the text on
+      // a wide screen, as in the book's margin (owner, 2026-10-29). Styles in globals.css (.book-box).
+      if (tone === "note" && title)
+        return (
+          <aside data-book-box={bookBoxKind(title)} className={`book-box ${sideBox(str(b.text)) ? "book-box-side" : ""}`}>
+            <p dir="auto" className="book-box-head">
+              <Marked text={title} marks={marks} />
+            </p>
+            <p dir="auto" className="book-box-body whitespace-pre-line">
+              <Marked text={str(b.text)} marks={marks} />
+            </p>
+          </aside>
+        );
       return (
-        <aside className={`rounded-inner border-l-4 px-5 py-4 shadow-sm ${box ? BOOK_BOX_STYLE[box] : (CALLOUT_STYLE[tone] ?? CALLOUT_STYLE.note)}`}>
-          {!printed && <p className="text-xs font-semibold tracking-wide text-muted uppercase">{label}</p>}
+        <aside className={`rounded-inner border-l-4 px-5 py-4 shadow-sm ${CALLOUT_STYLE[tone] ?? CALLOUT_STYLE.note}`}>
+          <p className="text-xs font-semibold tracking-wide text-muted uppercase">{label}</p>
           {title && (
-            <p dir="auto" className={printed ? `mb-1 font-semibold ${box ? BOOK_BOX_HEAD[box] : ""}` : "font-semibold"}>
+            <p dir="auto" className="font-semibold">
               <Marked text={title} marks={marks} />
             </p>
           )}
