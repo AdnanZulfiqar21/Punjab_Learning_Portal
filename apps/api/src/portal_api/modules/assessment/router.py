@@ -974,6 +974,9 @@ class ContinueLesson(BaseModel):
     chapter_number: int
     chapter_title: str
     opened_at: datetime
+    # Published lessons of this chapter in the lesson's language, and how many the learner has completed.
+    chapter_done: int
+    chapter_total: int
 
 
 class Revision(BaseModel):

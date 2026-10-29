@@ -80,6 +80,9 @@ def test_continue_learning_and_content_completed_follow_lessons(
 
     body = client.get(URL, headers=learner.headers).json()
     assert body["continue_learning"]["lesson_id"] == item["id"]
+    # The chapter's own progress, counted from published lessons in the lesson's language (never invented).
+    chapter = body["continue_learning"]
+    assert chapter["chapter_total"] >= 1 and chapter["chapter_done"] == 0
     before = _meters(body)["content_completed"]
     assert before["denominator"] >= 1
 
