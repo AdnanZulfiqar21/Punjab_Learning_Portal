@@ -3,7 +3,9 @@ import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { Suspense } from "react";
 import { MockRunningNotice } from "@/components/mock-running";
-import { Notice, SkeletonLines } from "@/components/ui";
+import { buttonClasses } from "@/components/button";
+import { Icon } from "@/components/icons";
+import { Breadcrumbs, Notice, SkeletonLines } from "@/components/ui";
 import { getAttempt } from "@/lib/practice";
 import { currentUser } from "@/lib/session";
 import { AttemptRunner } from "./attempt-runner";
@@ -35,8 +37,14 @@ async function Attempt({ id }: { id: string }) {
   }
   if (attempt.status !== "active") {
     return (
-      <div className="mx-auto max-w-2xl space-y-4">
-        <h1 className="text-2xl font-semibold tracking-tight">Test submitted</h1>
+      <div className="mx-auto max-w-2xl space-y-6">
+        <div>
+          <Breadcrumbs items={[{ href: "/practice", label: "Practice" }, { label: "Test submitted" }]} />
+          <div className="glass rounded-card px-6 py-6 sm:px-8">
+            <p className="text-xs font-semibold tracking-[0.15em] text-accent uppercase">Practice test</p>
+            <h1 className="mt-2 font-display text-[28px] leading-9 font-bold tracking-tight sm:text-[36px] sm:leading-[2.75rem]">Test submitted</h1>
+          </div>
+        </div>
         <Notice tone="ok" title={attempt.receipt?.reason === "expiry" ? "Time is up" : "Submitted"}>
           {attempt.receipt
             ? `${attempt.receipt.answered_count} of ${attempt.receipt.question_count} questions answered. Receipt ${attempt.receipt.id.slice(0, 8)}.`
@@ -49,8 +57,9 @@ async function Attempt({ id }: { id: string }) {
             before it, if any, was marked. Your result explains why.
           </Notice>
         )}
-        <Link href={`/practice/attempt/${id}/result`} className="inline-block rounded-lg bg-accent px-4 py-2.5 font-medium text-white dark:text-background">
+        <Link href={`/practice/attempt/${id}/result`} className={buttonClasses({ size: "lg" })}>
           See your result
+          <Icon name="arrow-right" size={18} />
         </Link>
       </div>
     );

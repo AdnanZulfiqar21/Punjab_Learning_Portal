@@ -3,6 +3,8 @@
 import { useActionState, useRef, useState } from "react";
 import type { PracticeAvailability } from "@portal/contracts";
 import { createPractice, type BuilderState } from "@/app/actions/practice";
+import { buttonClasses } from "@/components/button";
+import { CHOICE_PILL, FIELD } from "@/components/practice-ui";
 
 const newKey = () => crypto.randomUUID().replaceAll("-", "");
 
@@ -39,7 +41,8 @@ export function PracticeBuilder({
   // P09.S1.T2: halves follow the book's chapter order (first half = the first ceil(n/2) chapters).
   const [scope, setScope] = useState<"chapters" | "half_1" | "half_2" | "full_book" | "combined" | "multi_subject">("chapters");
   // P09.S1.T3: a custom mix of this class's subjects, each with its own count (0 leaves a subject out).
-  const [mix, setMix] = useState<Record<string, number>>({ [subject]: 5 });
+  // A subject that isn't offered in the mix (not taught) never starts in it unseen.
+  const [mix, setMix] = useState<Record<string, number>>(() => (subjects.some(([c]) => c === subject) ? { [subject]: 5 } : {}));
   const mixTotal = Object.values(mix).reduce((n, v) => n + v, 0);
   const mixSubjects = Object.values(mix).filter((v) => v > 0).length;
   const split = Math.ceil(chapters.length / 2);
@@ -58,16 +61,16 @@ export function PracticeBuilder({
   // A measured median, never a guess (PRACTICE-CONFIG-01); rounded up to whole minutes.
   const estimate = secondsPerQuestion ? Math.max(1, Math.ceil((asked * secondsPerQuestion) / 60)) : null;
   const ready = scope === "chapters" ? selected.length > 0 : scope === "multi_subject" ? mixSubjects >= 2 && mixTotal <= 100 : true;
-  const field = "rounded-lg border border-border bg-surface px-3 py-2";
+  const field = FIELD;
 
   return (
-    <form action={action} className="space-y-6">
+    <form action={action} className="space-y-7">
       <input type="hidden" name="grade" value={grade} />
       <input type="hidden" name="subject" value={subject} />
       <input type="hidden" name="scope" value={scope.startsWith("half") ? "half_book" : scope} />
       {scope.startsWith("half") && <input type="hidden" name="half" value={scope === "half_1" ? "1" : "2"} />}
       <fieldset className="space-y-2">
-        <legend className="font-medium">What to cover</legend>
+        <legend className="mb-2 font-display text-lg font-semibold">What to cover</legend>
         <div className="flex flex-wrap gap-2">
           {(
             [
@@ -79,19 +82,20 @@ export function PracticeBuilder({
               ["multi_subject", "Several subjects (custom mix)"],
             ] as const
           ).map(([value, label]) => (
-            <label key={value} className="flex items-center gap-2 rounded-lg border border-border bg-surface px-3 py-2">
-              <input type="radio" name="scope_choice" value={value} checked={scope === value} onChange={() => setScope(value)} /> {label}
+            <label key={value} className={CHOICE_PILL}>
+              <input type="radio" className="size-4 accent-[var(--accent)]" name="scope_choice" value={value} checked={scope === value} onChange={() => setScope(value)} /> {label}
             </label>
           ))}
         </div>
       </fieldset>
       <fieldset className="space-y-2" hidden={scope !== "chapters"}>
-        <legend className="font-medium">Chapters</legend>
-        <ul className="divide-y divide-border rounded-xl border border-border bg-surface">
+        <legend className="mb-2 font-display text-lg font-semibold">Chapters</legend>
+        <ul className="divide-y divide-border overflow-hidden rounded-inner border border-border bg-surface">
           {chapters.map((c) => (
             <li key={c.chapter_id}>
-              <label className={`flex items-center gap-3 px-4 py-3 ${c.questions === 0 ? "text-muted" : ""}`}>
+              <label className={`flex min-h-12 items-center gap-3 px-4 py-3 transition has-checked:bg-accent-soft ${c.questions === 0 ? "text-muted" : "cursor-pointer hover:bg-surface-muted"}`}>
                 <input
+                  className="size-[18px] shrink-0 accent-[var(--accent)]"
                   type="checkbox"
                   name="chapter_ids"
                   value={c.chapter_id}
@@ -102,18 +106,19 @@ export function PracticeBuilder({
                     if (!e.target.checked) setTopics((ts) => ts.filter((t) => !(c.topics ?? []).some((x) => x.topic_id === t)));
                   }}
                 />
-                <span className="flex-1">
+                <span className="flex-1 font-medium">
                   Chapter {c.number}: {c.title}
                 </span>
-                <span className="text-sm text-muted">{c.questions === 0 ? "no questions yet" : `${c.questions} question${c.questions === 1 ? "" : "s"}`}</span>
+                <span className="shrink-0 rounded-full bg-[var(--track)] px-2.5 py-0.5 text-xs text-muted">{c.questions === 0 ? "no questions yet" : `${c.questions} question${c.questions === 1 ? "" : "s"}`}</span>
               </label>
               {selected.includes(c.chapter_id) && (c.topics ?? []).length > 0 && (
                 <fieldset className="space-y-1 px-4 pb-3 pl-11 text-sm">
                   <legend className="sr-only">Topics in chapter {c.number}</legend>
                   <p className="text-muted">Only some topics? (optional; choosing any limits the whole test to the topics you choose)</p>
                   {(c.topics ?? []).map((t) => (
-                    <label key={t.topic_id} className="flex items-center gap-2">
+                    <label key={t.topic_id} className="flex min-h-11 cursor-pointer items-center gap-2 rounded-inner px-2 hover:bg-surface-muted">
                       <input
+                        className="size-4 shrink-0 accent-[var(--accent)]"
                         type="checkbox"
                         name="topic_ids"
                         value={t.topic_id}
@@ -136,15 +141,15 @@ export function PracticeBuilder({
         </ul>
       </fieldset>
       <fieldset className="space-y-2" hidden={scope !== "multi_subject"}>
-        <legend className="font-medium">Questions per subject</legend>
+        <legend className="mb-2 font-display text-lg font-semibold">Questions per subject</legend>
         <p className="text-sm text-muted">
           Custom practice from each subject&apos;s whole book in this class. It isn&apos;t an official test pattern; for those, use
-          a mock test. Choose two to five subjects.
+          a mock test. Choose at least two subjects.
         </p>
         <div className="flex flex-wrap gap-3">
           {subjects.map(([code, name]) => (
             <label key={code} className="space-y-1">
-              <span className="block text-sm">{name}</span>
+              <span className="block text-sm font-medium">{name}</span>
               <input
                 type="number"
                 name={`mix_${code}`}
@@ -162,7 +167,7 @@ export function PracticeBuilder({
           {mixTotal > 100 ? " (at most 100 in one test)" : ""}.
         </p>
       </fieldset>
-      <div className="flex flex-wrap items-end gap-4">
+      <div className="flex flex-wrap items-end gap-4 rounded-inner border border-border bg-surface-muted/60 p-4">
         <label className="space-y-1" hidden={scope === "multi_subject"}>
           <span className="block font-medium">Questions</span>
           <input
@@ -182,8 +187,8 @@ export function PracticeBuilder({
             <option value="immediate">After each question</option>
           </select>
         </label>
-        <label className="flex items-center gap-2 pb-2">
-          <input type="checkbox" name="timed" checked={timed} onChange={(e) => setTimed(e.target.checked)} />
+        <label className={CHOICE_PILL}>
+          <input className="size-4 accent-[var(--accent)]" type="checkbox" name="timed" checked={timed} onChange={(e) => setTimed(e.target.checked)} />
           Timed
         </label>
         {timed && (
@@ -210,7 +215,7 @@ export function PracticeBuilder({
           : "No time estimate yet: not enough submitted tests in this subject to measure one."}
       </p>
       {state?.error && (
-        <p role="alert" className="rounded-lg border border-danger/30 bg-danger-soft px-3 py-2 text-sm">
+        <p role="alert" className="rounded-inner border border-danger/30 bg-danger-soft px-4 py-3 text-sm">
           {state.error}
           {state.available !== undefined ? ` You can ask for up to ${state.available}.` : ""}
         </p>
@@ -218,7 +223,7 @@ export function PracticeBuilder({
       <button
         type="submit"
         disabled={pending || !ready}
-        className="rounded-lg bg-accent px-5 py-3 font-medium text-white hover:bg-accent-strong disabled:opacity-60 dark:text-background"
+        className={buttonClasses({ size: "lg" })}
       >
         {pending ? "Preparing…" : "Start test"}
       </button>

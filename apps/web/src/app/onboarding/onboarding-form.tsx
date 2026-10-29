@@ -3,6 +3,8 @@
 import { useActionState } from "react";
 import type { Profile } from "@portal/contracts";
 import { saveProfile, type FormState } from "@/app/actions/auth";
+import { buttonClasses } from "@/components/button";
+import { CHOICE_PILL, FIELD, LABEL } from "@/components/learner-pages";
 
 const SUBJECTS: [string, string][] = [
   ["biology", "Biology"],
@@ -21,17 +23,18 @@ const EXAMS: [string, string][] = [
   ["ecat", "ECAT"],
 ];
 
-const field = "w-full rounded-lg border border-border bg-surface px-3 py-2.5";
+const field = FIELD;
+const legend = "mb-2 font-display text-base font-semibold";
 
 export function OnboardingForm({ profile }: { profile: Profile | null }) {
   const [state, action, pending] = useActionState<FormState, FormData>(saveProfile, undefined);
   return (
-    <form action={action} className="space-y-6">
+    <form action={action} className="space-y-7">
       <fieldset className="space-y-2">
-        <legend className="font-medium">Which class are you in?</legend>
-        <div className="flex gap-3">
+        <legend className={legend}>Which class are you in?</legend>
+        <div className="grid grid-cols-2 gap-3">
           {[11, 12].map((g) => (
-            <label key={g} className="flex items-center gap-2 rounded-lg border border-border bg-surface px-4 py-2.5">
+            <label key={g} className={`${CHOICE_PILL} justify-center`}>
               <input type="radio" name="grade" value={g} defaultChecked={profile?.grade === g} required />
               Class {g === 11 ? "11" : "12"}
             </label>
@@ -39,8 +42,8 @@ export function OnboardingForm({ profile }: { profile: Profile | null }) {
         </div>
       </fieldset>
 
-      <div className="space-y-1">
-        <label htmlFor="stream" className="font-medium">
+      <div className="space-y-1.5">
+        <label htmlFor="stream" className={LABEL}>
           Group
         </label>
         <select id="stream" name="stream" defaultValue={profile?.stream ?? ""} className={field}>
@@ -54,10 +57,10 @@ export function OnboardingForm({ profile }: { profile: Profile | null }) {
       </div>
 
       <fieldset className="space-y-2">
-        <legend className="font-medium">Subjects</legend>
+        <legend className={legend}>Subjects</legend>
         <div className="grid gap-2 sm:grid-cols-2">
           {SUBJECTS.map(([v, l]) => (
-            <label key={v} className="flex items-center gap-2 rounded-lg border border-border bg-surface px-3 py-2">
+            <label key={v} className={CHOICE_PILL}>
               <input type="checkbox" name="subjects" value={v} defaultChecked={profile?.subjects?.includes(v as never)} />
               {l}
             </label>
@@ -66,10 +69,10 @@ export function OnboardingForm({ profile }: { profile: Profile | null }) {
       </fieldset>
 
       <fieldset className="space-y-2">
-        <legend className="font-medium">Preparing for an entry test?</legend>
+        <legend className={legend}>Preparing for an entry test?</legend>
         <div className="flex flex-wrap gap-3">
           {EXAMS.map(([v, l]) => (
-            <label key={v} className="flex items-center gap-2 rounded-lg border border-border bg-surface px-3 py-2">
+            <label key={v} className={CHOICE_PILL}>
               <input type="checkbox" name="target_exams" value={v} defaultChecked={profile?.target_exams?.includes(v as never)} />
               {l}
             </label>
@@ -82,14 +85,14 @@ export function OnboardingForm({ profile }: { profile: Profile | null }) {
       </fieldset>
 
       <div className="grid gap-4 sm:grid-cols-3">
-        <div className="space-y-1">
-          <label htmlFor="target_year" className="font-medium">
+        <div className="space-y-1.5">
+          <label htmlFor="target_year" className={LABEL}>
             Test year
           </label>
           <input id="target_year" name="target_year" type="number" min={2026} max={2035} defaultValue={profile?.target_year ?? ""} className={field} />
         </div>
-        <div className="space-y-1">
-          <label htmlFor="explanation_language" className="font-medium">
+        <div className="space-y-1.5">
+          <label htmlFor="explanation_language" className={LABEL}>
             Explanations in
           </label>
           <select id="explanation_language" name="explanation_language" defaultValue={profile?.explanation_language ?? "en"} className={field}>
@@ -98,8 +101,8 @@ export function OnboardingForm({ profile }: { profile: Profile | null }) {
             <option value="roman_ur">Roman Urdu</option>
           </select>
         </div>
-        <div className="space-y-1">
-          <label htmlFor="daily_minutes" className="font-medium">
+        <div className="space-y-1.5">
+          <label htmlFor="daily_minutes" className={LABEL}>
             Minutes per day
           </label>
           <input id="daily_minutes" name="daily_minutes" type="number" min={10} max={600} step={5} defaultValue={profile?.daily_minutes ?? ""} className={field} />
@@ -107,14 +110,14 @@ export function OnboardingForm({ profile }: { profile: Profile | null }) {
       </div>
 
       {state?.error && (
-        <p role="alert" className="rounded-lg border border-danger/30 bg-danger-soft px-3 py-2 text-sm">
+        <p role="alert" className="rounded-inner border border-danger/30 bg-danger-soft px-4 py-2.5 text-sm">
           {state.error}
         </p>
       )}
       <button
         type="submit"
         disabled={pending}
-        className="rounded-lg bg-accent px-5 py-3 font-medium text-white hover:bg-accent-strong disabled:opacity-60 dark:text-background"
+        className={buttonClasses({ size: "lg", className: "w-full sm:w-auto" })}
       >
         {pending ? "Saving…" : "Save and continue"}
       </button>

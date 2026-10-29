@@ -42,13 +42,13 @@ export function AreaPicker({
   const usable = box !== null && box[2] >= MIN && box[3] >= MIN;
 
   return (
-    <div role="group" aria-label={`Mark the area of ${answerLabel} on ${pageLabel}`} className="space-y-2 rounded-lg border border-border bg-surface-muted p-3">
+    <div role="group" aria-label={`Mark the area of ${answerLabel} on ${pageLabel}`} className="space-y-3 rounded-inner border border-border bg-surface-muted p-4">
       <p className="text-sm">
         Choose where {answerLabel} is on {pageLabel}: pick a part of the page, or drag a box over the picture.
       </p>
       <div className="flex flex-wrap gap-2 text-sm">
         {PRESETS.map((p) => (
-          <button key={p.label} type="button" onClick={() => setBox(p.box)} className="rounded border border-border bg-surface px-2 py-1 hover:bg-surface-muted">
+          <button key={p.label} type="button" onClick={() => setBox(p.box)} className="inline-flex min-h-11 items-center rounded-full border border-border bg-surface px-3.5 hover:border-accent hover:text-accent">
             {p.label}
           </button>
         ))}
@@ -80,7 +80,7 @@ export function AreaPicker({
           type="button"
           disabled={!usable}
           onClick={() => box && onSave(box)}
-          className="rounded bg-accent px-3 py-1 font-medium text-white disabled:opacity-60 dark:text-background"
+          className="inline-flex min-h-11 items-center rounded-full bg-foreground px-5 font-semibold text-background disabled:opacity-60"
         >
           Save this area
         </button>

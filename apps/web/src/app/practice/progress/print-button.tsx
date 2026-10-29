@@ -1,9 +1,13 @@
 "use client";
 
+import { Button } from "@/components/button";
+import { PracticeIcon } from "@/components/practice-ui";
+
 export function PrintButton() {
   return (
-    <button type="button" onClick={() => window.print()} className="rounded-lg border border-border bg-surface px-3 py-1.5 text-sm font-medium hover:border-accent print:hidden">
+    <Button variant="secondary" onClick={() => window.print()} className="print:hidden">
+      <PracticeIcon name="printer" size={18} />
       Print or save as PDF
-    </button>
+    </Button>
   );
 }

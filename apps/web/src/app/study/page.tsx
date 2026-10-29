@@ -4,6 +4,9 @@ import { redirect } from "next/navigation";
 import { Suspense } from "react";
 import type { FavouriteTopic, SavedFormula, StudyNoteListed } from "@portal/contracts";
 import { removeFormula } from "@/app/actions/study";
+import { GlassCard } from "@/components/glass-card";
+import { Icon, type IconName } from "@/components/icons";
+import { PageHero } from "@/components/page-hero";
 import { Breadcrumbs, Notice, SkeletonLines } from "@/components/ui";
 import { GRADE_LABEL } from "@/lib/format";
 import { api, currentUser, features } from "@/lib/session";
@@ -14,13 +17,34 @@ export const metadata: Metadata = { title: "My study tools", robots: { index: fa
 const subject = (s: string) => s.replace("_", " ");
 const day = (iso: string | null | undefined) => (iso ? new Date(iso).toLocaleDateString("en-GB", { dateStyle: "medium", timeZone: TIME_ZONE }) : "");
 
-/** P11.S2.T2 (STUDY-TOOLS-01): everything a learner kept, in one private place. */
+const LINK = "font-medium text-accent underline underline-offset-2";
+
+/** A section's heading with its icon (DESIGN-01). */
+function ToolHeading({ id, icon, children }: { id: string; icon: IconName; children: string }) {
+  return (
+    <h2 id={id} className="flex items-center gap-2.5 font-display text-2xl font-semibold tracking-tight">
+      <span aria-hidden className="grid size-9 place-items-center rounded-inner bg-accent-soft text-accent">
+        <Icon name={icon} size={18} />
+      </span>
+      {children}
+    </h2>
+  );
+}
+
+/** P11.S2.T2 (STUDY-TOOLS-01): everything a learner kept, in one private place. DESIGN-01: a glass hero and cards. */
 export default function StudyPage() {
   return (
-    <div className="space-y-6">
-      <Breadcrumbs items={[{ href: "/", label: "Dashboard" }, { label: "My study tools" }]} />
-      <h1 className="text-2xl font-semibold tracking-tight">My study tools</h1>
-      <p className="text-sm text-muted">Your notes, favourite topics and saved formulas. Only you can see them.</p>
+    <div className="space-y-8">
+      <div>
+        <Breadcrumbs items={[{ href: "/", label: "Dashboard" }, { label: "My study tools" }]} />
+        <PageHero
+          align="start"
+          eyebrow="Private to you"
+          title="My study tools"
+          lead="Your notes, favourite topics and saved formulas. Only you can see them."
+          backdrop={<span aria-hidden className="pointer-events-none absolute inset-0 bg-accent-soft opacity-50" />}
+        />
+      </div>
       <Suspense fallback={<SkeletonLines lines={6} label="Loading your study tools" />}>
         <Tools />
       </Suspense>
@@ -43,42 +67,45 @@ async function Tools() {
     return <Notice tone="warn" title="Couldn't load your study tools">Please try again.</Notice>;
   }
   return (
-    <div className="space-y-8">
-      <section aria-labelledby="notes-h" className="space-y-2">
-        <h2 id="notes-h" className="text-lg font-semibold">
+    <div className="space-y-10">
+      <section aria-labelledby="notes-h" className="space-y-3">
+        <ToolHeading id="notes-h" icon="file-text">
           Notes
-        </h2>
+        </ToolHeading>
         {notes.data.length === 0 ? (
           <p className="text-sm text-muted">No notes yet. Add a private note under any lesson you can read.</p>
         ) : (
-          <ul className="divide-y divide-border rounded-xl border border-border bg-surface text-sm">
+          <GlassCard as="div" padded={false} className="overflow-hidden">
+          <ul className="divide-y divide-border text-sm">
             {notes.data.map((n) => (
-              <li key={n.lesson_id} className="space-y-1 px-4 py-3">
-                <Link href={`/learn/chapter/${n.chapter_id}#lesson-${n.lesson_id}`} className="font-medium text-accent underline underline-offset-2">
+              <li key={n.lesson_id} className="space-y-1.5 px-5 py-4">
+                <Link href={`/learn/chapter/${n.chapter_id}#lesson-${n.lesson_id}`} className={LINK}>
                   {n.lesson_title}
                 </Link>
                 <span className="text-muted">
                   {" "}
                   · {GRADE_LABEL[n.grade]} <span className="capitalize">{subject(n.subject)}</span> · Chapter {n.chapter_number} · {day(n.updated_at)}
                 </span>
-                <p className="whitespace-pre-wrap">{n.text}</p>
+                <p className="rounded-inner bg-surface px-3 py-2 whitespace-pre-wrap">{n.text}</p>
               </li>
             ))}
           </ul>
+          </GlassCard>
         )}
       </section>
 
-      <section aria-labelledby="favs-h" className="space-y-2">
-        <h2 id="favs-h" className="text-lg font-semibold">
+      <section aria-labelledby="favs-h" className="space-y-3">
+        <ToolHeading id="favs-h" icon="list-checks">
           Favourite topics
-        </h2>
+        </ToolHeading>
         {favs.data.length === 0 ? (
           <p className="text-sm text-muted">No favourites yet. Star a topic in any chapter&apos;s topic list.</p>
         ) : (
-          <ul className="divide-y divide-border rounded-xl border border-border bg-surface text-sm">
+          <GlassCard as="div" padded={false} className="overflow-hidden">
+          <ul className="divide-y divide-border text-sm">
             {favs.data.map((f) => (
-              <li key={f.topic_id} className="px-4 py-3">
-                <Link href={`/learn/chapter/${f.chapter_id}`} className="text-accent underline underline-offset-2">
+              <li key={f.topic_id} className="px-5 py-3.5">
+                <Link href={`/learn/chapter/${f.chapter_id}`} className={LINK}>
                   {f.number ? `${f.number} ` : ""}
                   {f.title}
                 </Link>
@@ -89,37 +116,40 @@ async function Tools() {
               </li>
             ))}
           </ul>
+          </GlassCard>
         )}
       </section>
 
-      <section aria-labelledby="formulas-h" className="space-y-2">
-        <h2 id="formulas-h" className="text-lg font-semibold">
+      <section aria-labelledby="formulas-h" className="space-y-3">
+        <ToolHeading id="formulas-h" icon="layers">
           Saved formulas
-        </h2>
+        </ToolHeading>
         {formulas.data.length === 0 ? (
           <p className="text-sm text-muted">No formulas yet. Use &quot;Save formula&quot; under a formula in a lesson.</p>
         ) : (
-          <ul className="grid gap-3 sm:grid-cols-2">
+          <ul className="grid gap-4 sm:grid-cols-2">
             {formulas.data.map((f) => (
-              <li key={f.id} className="space-y-2 rounded-xl border border-border bg-surface p-4 text-sm">
-                <p className="text-base">{f.text_alt}</p>
-                <p className="font-mono text-xs text-muted">{f.latex}</p>
+              <GlassCard as="li" key={f.id} className="flex flex-col gap-3 text-sm">
+                <div className="space-y-1 rounded-inner border border-border bg-surface px-4 py-3">
+                  <p className="text-base">{f.text_alt}</p>
+                  <p className="font-mono text-xs text-muted">{f.latex}</p>
+                </div>
                 {f.updated_since && (
-                  <p className="rounded-lg border border-warn bg-warn-soft px-2 py-1">
+                  <p className="rounded-inner border border-warn bg-warn-soft px-3 py-2">
                     This lesson has been updated since you saved this formula. Check the lesson for the current version.
                   </p>
                 )}
-                <div className="flex flex-wrap items-center justify-between gap-2">
-                  <Link href={`/learn/chapter/${f.chapter_id}#lesson-${f.lesson_id}`} className="text-accent underline underline-offset-2">
+                <div className="mt-auto flex flex-wrap items-center justify-between gap-2">
+                  <Link href={`/learn/chapter/${f.chapter_id}#lesson-${f.lesson_id}`} className={LINK}>
                     {f.lesson_title}
                   </Link>
                   <form action={removeFormula.bind(null, f.id)}>
-                    <button type="submit" className="text-muted underline-offset-2 hover:text-danger hover:underline">
+                    <button type="submit" className="inline-flex min-h-11 items-center rounded-full px-3 font-medium text-muted underline-offset-2 hover:bg-danger-soft hover:text-danger hover:underline">
                       Remove
                     </button>
                   </form>
                 </div>
-              </li>
+              </GlassCard>
             ))}
           </ul>
         )}

@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
 import type { CommerceTermsState, Product } from "@portal/contracts";
+import { GlassCard } from "@/components/glass-card";
+import { CardTitle, IconTile, PageIcon } from "@/components/learner-pages";
+import { PageHero } from "@/components/page-hero";
 import { Notice, SkeletonLines } from "@/components/ui";
 import { formatMinor } from "@/lib/money";
 import { api } from "@/lib/session";
@@ -29,12 +32,11 @@ function covers(p: Product): string {
 export default function PricingPage() {
   return (
     <div className="space-y-8">
-      <div className="space-y-2">
-        <h1 className="text-2xl font-semibold tracking-tight">Plans and prices</h1>
-        <p className="max-w-2xl text-muted">
-          Every new account can start one free 30-day trial of everything published, without payment details. Prices below are the full price for the whole period shown.
-        </p>
-      </div>
+      <PageHero
+        eyebrow="Class 11 · Class 12"
+        title="Plans and prices"
+        lead="Every new account can start one free 30-day trial of everything published, without payment details. Prices below are the full price for the whole period shown."
+      />
       <Suspense fallback={<SkeletonLines lines={6} label="Loading plans" />}>
         <Plans />
       </Suspense>
@@ -50,7 +52,7 @@ async function Plans() {
   const priced = products.data.filter((p) => p.price !== null);
   const published = terms.data.published;
   return (
-    <div className="space-y-8">
+    <div className="mx-auto max-w-5xl space-y-8">
       <Notice title="Buying isn't available yet">
         Payments aren&apos;t connected, so no plan can be bought here yet. You can{" "}
         <Link href="/signin" className="text-accent underline underline-offset-2">
@@ -59,27 +61,39 @@ async function Plans() {
         now.
       </Notice>
       {priced.length === 0 ? (
-        <p className="text-muted">No plans are on sale yet. They&apos;ll appear here with their full price when they are.</p>
+        <GlassCard className="text-center text-muted">No plans are on sale yet. They&apos;ll appear here with their full price when they are.</GlassCard>
       ) : (
-        <ul className="grid gap-4 sm:grid-cols-2" aria-label="Plans on sale">
+        <ul className="grid gap-4 md:grid-cols-2" aria-label="Plans on sale">
           {priced.map((p) => (
-            <li key={p.code} className="space-y-3 rounded-xl border border-border bg-surface p-5">
-              <div>
-                <p className="text-sm text-muted">{KIND[p.kind] ?? p.kind}</p>
-                <h2 className="text-lg font-semibold">{p.name}</h2>
+            <GlassCard as="li" key={p.code} className="flex flex-col gap-4">
+              <div className="flex items-start gap-3">
+                <IconTile icon={p.kind === "platform" ? "graduation-cap" : "credit-card"} />
+                <div className="min-w-0">
+                  <p className="text-xs font-semibold tracking-[0.15em] text-accent uppercase">{KIND[p.kind] ?? p.kind}</p>
+                  <h2 className="font-display text-xl font-semibold tracking-tight break-words">{p.name}</h2>
+                </div>
               </div>
-              <p className="text-2xl font-semibold">{formatMinor(p.price!.amount_minor ?? 0, p.price!.currency)}</p>
-              <dl className="space-y-1 text-sm">
+              <p className="font-display text-[34px] leading-10 font-bold tracking-tight">{formatMinor(p.price!.amount_minor ?? 0, p.price!.currency)}</p>
+              <dl className="space-y-2 border-t border-border pt-4 text-sm">
+                {(
+                  [
+                    ["Valid for: ", `${p.duration_days} days (see the purchase terms below)`],
+                    ["Covers: ", covers(p)],
+                  ] as const
+                ).map(([term, value]) => (
+                  <div key={term}>
+                    <dt className="inline font-medium">
+                      <PageIcon name="check" size={16} className="mr-1.5 inline-block align-[-3px] text-accent" />
+                      {term}
+                    </dt>
+                    <dd className="inline">{value}</dd>
+                  </div>
+                ))}
                 <div>
-                  <dt className="inline font-medium">Valid for: </dt>
-                  <dd className="inline">{p.duration_days} days (see the purchase terms below)</dd>
-                </div>
-                <div>
-                  <dt className="inline font-medium">Covers: </dt>
-                  <dd className="inline">{covers(p)}</dd>
-                </div>
-                <div>
-                  <dt className="inline font-medium">Written answers marked by teachers: </dt>
+                  <dt className="inline font-medium">
+                    <PageIcon name="check" size={16} className="mr-1.5 inline-block align-[-3px] text-accent" />
+                    Written answers marked by teachers:{" "}
+                  </dt>
                   <dd className="inline">
                     {p.written_units} units included
                     {/* PILOT-R0-01: said before anything is bought, never after */}
@@ -88,18 +102,19 @@ async function Plans() {
                 </div>
               </dl>
               {p.description && <p className="text-sm text-muted">{p.description}</p>}
-            </li>
+            </GlassCard>
           ))}
         </ul>
       )}
-      <section aria-labelledby="terms-heading" className="space-y-3">
-        <h2 id="terms-heading" className="text-lg font-semibold">
+      {/* The terms are reading text: a glass card with the text itself on the solid surface. */}
+      <GlassCard as="section" aria-labelledby="terms-heading" className="space-y-4">
+        <CardTitle id="terms-heading" icon="file-text">
           Purchase terms
-        </h2>
+        </CardTitle>
         {published === null ? (
           <p className="text-muted">The purchase terms haven&apos;t been published yet. They will be here, in full, before anything can be bought.</p>
         ) : (
-          <div className="max-w-3xl space-y-3 text-sm">
+          <div className="space-y-3 rounded-inner border border-border bg-surface p-5 text-sm sm:p-6">
             <dl className="space-y-3">
               {(
                 [
@@ -111,7 +126,7 @@ async function Plans() {
               ).map(([label, text]) => (
                 <div key={label}>
                   <dt className="font-medium">{label}</dt>
-                  <dd className="whitespace-pre-line text-muted">{text}</dd>
+                  <dd className="max-w-3xl whitespace-pre-line text-muted">{text}</dd>
                 </div>
               ))}
             </dl>
@@ -121,7 +136,7 @@ async function Plans() {
             </p>
           </div>
         )}
-      </section>
+      </GlassCard>
     </div>
   );
 }

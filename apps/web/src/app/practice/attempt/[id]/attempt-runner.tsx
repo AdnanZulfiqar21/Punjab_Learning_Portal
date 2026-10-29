@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import type { AnswerOpResult, PracticeAttempt, RevealResult } from "@portal/contracts";
 import { continueHere, revealItem, saveAnswers, setFlags, submitAttempt, type Op } from "@/app/actions/practice";
+import { buttonClasses } from "@/components/button";
 import { LessonBlocks } from "@/components/lesson-blocks";
 import { HelpLink } from "@/components/help-link";
 import { answerState, PALETTE_LABEL, stateLine, type AnswerState, type ItemStatus } from "@/lib/answer-state";
@@ -317,7 +318,7 @@ export function AttemptRunner({ attempt }: { attempt: PracticeAttempt }) {
   return (
     <div className="space-y-6">
       {elsewhere && (
-        <div role="alert" className="space-y-2 rounded-xl border border-warn/40 bg-warn-soft p-4 text-sm">
+        <div role="alert" className="space-y-3 rounded-card border border-warn/40 bg-warn-soft p-5 text-sm">
           <p className="font-medium">This test is open on another device.</p>
           <p>
             Only one device can answer at a time. Anything you change here stays on this device and isn&apos;t sent until you
@@ -327,17 +328,18 @@ export function AttemptRunner({ attempt }: { attempt: PracticeAttempt }) {
             type="button"
             onClick={() => void moveHere()}
             disabled={moving}
-            className="rounded-lg bg-accent px-4 py-2 font-medium text-white hover:bg-accent-strong disabled:opacity-60 dark:text-background"
+            className={buttonClasses()}
           >
             {moving ? "Moving…" : "Continue here"}
           </button>
         </div>
       )}
-      <header className="flex flex-wrap items-center justify-between gap-3">
-        <h1 className="text-xl font-semibold tracking-tight">
+      {/* DESIGN-01: the test's chrome on glass; the question and its options stay on a solid surface (owner rule 5). */}
+      <header className="glass flex flex-wrap items-center justify-between gap-3 rounded-card px-5 py-4 sm:px-6">
+        <h1 className="font-display text-xl font-semibold tracking-tight sm:text-2xl">
           Question {current} of {total}
         </h1>
-        <div className="flex items-center gap-4 text-sm">
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
           <span role="status" aria-live="polite" className={connection === "retrying" ? "text-warn" : "text-muted"}>
             {connection === "retrying"
               ? "Offline: answers are kept on this device and will be sent again"
@@ -347,7 +349,7 @@ export function AttemptRunner({ attempt }: { attempt: PracticeAttempt }) {
           </span>
           {connection === "retrying" && <HelpLink slug="practice-timer-and-saving">About saving</HelpLink>}
           {deadline !== null && (
-            <span aria-label="Time remaining" className={`font-mono tabular-nums ${remaining !== null && remaining < 60_000 ? "text-danger" : ""}`}>
+            <span aria-label="Time remaining" className={`inline-flex min-h-9 items-center rounded-full border border-border bg-surface px-3 font-mono font-semibold tabular-nums ${remaining !== null && remaining < 60_000 ? "border-danger text-danger" : ""}`}>
               {remaining === null
                 ? "--:--"
                 : closed
@@ -358,7 +360,7 @@ export function AttemptRunner({ attempt }: { attempt: PracticeAttempt }) {
         </div>
       </header>
 
-      <nav aria-label="Questions" className="flex flex-wrap gap-1.5">
+      <nav aria-label="Questions" className="flex flex-wrap gap-2">
         {attempt.items.map((it) => {
           const s = shown(it.position);
           return (
@@ -368,7 +370,7 @@ export function AttemptRunner({ attempt }: { attempt: PracticeAttempt }) {
               onClick={() => setCurrent(it.position)}
               aria-current={it.position === current ? "step" : undefined}
               aria-label={`Question ${it.position}: ${PALETTE_LABEL[s]}${flagged.has(it.position) ? ", flagged" : ""}`}
-              className={`relative h-9 w-9 rounded-md border text-sm ${TONE[s]} ${it.position === current ? "ring-2 ring-accent" : ""}`}
+              className={`relative size-11 rounded-full border text-sm font-semibold tabular-nums transition duration-200 ${TONE[s]} ${it.position === current ? "ring-2 ring-accent ring-offset-2 ring-offset-background" : ""}`}
             >
               {it.position}
               {flagged.has(it.position) && (
@@ -381,12 +383,12 @@ export function AttemptRunner({ attempt }: { attempt: PracticeAttempt }) {
         })}
       </nav>
 
-      <section aria-labelledby="q-heading" className="space-y-4 rounded-xl border border-border bg-surface p-5">
+      <section aria-labelledby="q-heading" className="space-y-4 rounded-card border border-border bg-surface p-5 shadow-glass sm:p-7">
         <h2 id="q-heading" className="sr-only">
           Question {current}
         </h2>
         {item.passage && (
-          <section aria-label="Passage" className="rounded-lg border border-border bg-surface-muted px-4 py-3">
+          <section aria-label="Passage" className="rounded-inner border border-border bg-surface-muted px-4 py-3">
             <p className="mb-2 text-xs font-semibold tracking-wide text-muted uppercase">Read the passage</p>
             <LessonBlocks blocks={item.passage.blocks as { type: string }[]} headingOffset={2} assetUrl={assetUrl} />
           </section>
@@ -398,8 +400,8 @@ export function AttemptRunner({ attempt }: { attempt: PracticeAttempt }) {
             const reveal = revealed[current];
             const mark = reveal ? (o.id === reveal.correct_option_id ? "border-ok bg-ok-soft" : o.id === reveal.chosen ? "border-danger bg-danger-soft" : "") : "";
             return (
-              <label key={o.id} className={`flex cursor-pointer items-start gap-3 rounded-lg border px-3 py-2.5 ${mark || (state.option === o.id ? "border-accent bg-accent-soft" : "border-border")}`}>
-                <input type="radio" name={`q${current}`} value={o.id} checked={state.option === o.id} onChange={() => choose(current, o.id)} className="mt-1" />
+              <label key={o.id} className={`flex min-h-12 cursor-pointer items-start gap-3 rounded-inner border px-4 py-3 transition duration-200 ${mark || (state.option === o.id ? "border-accent bg-accent-soft" : "border-border hover:border-accent")}`}>
+                <input type="radio" name={`q${current}`} value={o.id} checked={state.option === o.id} onChange={() => choose(current, o.id)} className="mt-1 size-4 accent-[var(--accent)]" />
                 <span className="w-5 font-medium text-muted">{String.fromCharCode(65 + idx)}</span>
                 <span className="min-w-0 flex-1 break-words">
                   <LessonBlocks blocks={o.blocks as { type: string }[]} headingOffset={2} assetUrl={assetUrl} />
@@ -410,7 +412,7 @@ export function AttemptRunner({ attempt }: { attempt: PracticeAttempt }) {
         </fieldset>
         <div className="flex flex-wrap items-center gap-3 text-sm">
           {state.option !== null && !closed && !locked.has(current) && (
-            <button type="button" onClick={() => choose(current, null)} className="text-accent underline-offset-2 hover:underline">
+            <button type="button" onClick={() => choose(current, null)} className="inline-flex min-h-11 items-center px-1 font-medium text-accent underline-offset-2 hover:underline">
               Clear answer
             </button>
           )}
@@ -420,7 +422,7 @@ export function AttemptRunner({ attempt }: { attempt: PracticeAttempt }) {
               onClick={() => void toggleFlag(current)}
               aria-pressed={flagged.has(current)}
               disabled={submitting || elsewhere}
-              className={`rounded-lg border px-3 py-1.5 disabled:opacity-60 ${flagged.has(current) ? "border-warn bg-warn-soft" : "border-border hover:border-accent"}`}
+              className={`inline-flex min-h-11 items-center rounded-full border px-4 font-medium transition duration-200 disabled:opacity-60 ${flagged.has(current) ? "border-warn bg-warn-soft" : "border-border hover:border-accent hover:text-accent"}`}
             >
               {flagged.has(current) ? "⚑ Flagged for review" : "Flag for review"}
             </button>
@@ -431,7 +433,7 @@ export function AttemptRunner({ attempt }: { attempt: PracticeAttempt }) {
             </span>
           )}
           {attempt.feedback_mode === "immediate" && state.status === "saved" && state.option !== null && !revealed[current] && !locked.has(current) && (
-            <button type="button" onClick={() => void check(current)} className="rounded-lg border border-border px-3 py-1.5 hover:border-accent">
+            <button type="button" onClick={() => void check(current)} className="inline-flex min-h-11 items-center rounded-full border border-border px-4 font-medium hover:border-accent hover:text-accent">
               Check answer
             </button>
           )}
@@ -440,7 +442,7 @@ export function AttemptRunner({ attempt }: { attempt: PracticeAttempt }) {
           </span>
         </div>
         {revealed[current] && (
-          <div role="status" className="space-y-2 rounded-lg border border-border bg-surface-muted p-3 text-sm">
+          <div role="status" className="space-y-2 rounded-inner border border-border bg-surface-muted p-4 text-sm">
             <p className="font-semibold">{revealed[current].correct ? "Correct" : "Not quite"}</p>
             <LessonBlocks blocks={((revealed[current].explanation as { correct?: unknown[] }).correct ?? []) as { type: string }[]} headingOffset={2} assetUrl={assetUrl} />
           </div>
@@ -449,21 +451,21 @@ export function AttemptRunner({ attempt }: { attempt: PracticeAttempt }) {
 
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="flex gap-2">
-          <button type="button" disabled={current === 1} onClick={() => setCurrent(current - 1)} className="rounded-lg border border-border bg-surface px-4 py-2 disabled:opacity-40">
+          <button type="button" disabled={current === 1} onClick={() => setCurrent(current - 1)} className={buttonClasses({ variant: "secondary" })}>
             ← Previous
           </button>
-          <button type="button" disabled={current === total} onClick={() => setCurrent(current + 1)} className="rounded-lg border border-border bg-surface px-4 py-2 disabled:opacity-40">
+          <button type="button" disabled={current === total} onClick={() => setCurrent(current + 1)} className={buttonClasses({ variant: "secondary" })}>
             Next →
           </button>
         </div>
-        <button type="button" onClick={() => setConfirming(true)} disabled={submitting} className="rounded-lg bg-accent px-5 py-2.5 font-medium text-white hover:bg-accent-strong disabled:opacity-60 dark:text-background">
+        <button type="button" onClick={() => setConfirming(true)} disabled={submitting} className={buttonClasses({ size: "lg" })}>
           Finish test
         </button>
       </div>
 
       {confirming && (
-        <section role="dialog" aria-modal="false" aria-labelledby="confirm-h" className="space-y-3 rounded-xl border border-accent bg-surface p-5">
-          <h2 id="confirm-h" className="font-semibold">
+        <section role="dialog" aria-modal="false" aria-labelledby="confirm-h" className="space-y-4 rounded-card border border-accent bg-surface p-6 shadow-[var(--shadow-glass-hover)]">
+          <h2 id="confirm-h" className="font-display text-xl font-semibold">
             Submit your test?
           </h2>
           <ul className="text-sm">
@@ -485,7 +487,7 @@ export function AttemptRunner({ attempt }: { attempt: PracticeAttempt }) {
                       setCurrent(p);
                       setConfirming(false);
                     }}
-                    className="rounded-md border border-warn bg-warn-soft px-2 py-1"
+                    className="inline-flex min-h-11 items-center rounded-full border border-warn bg-warn-soft px-4 font-medium"
                   >
                     Question {p}
                   </button>
@@ -494,12 +496,12 @@ export function AttemptRunner({ attempt }: { attempt: PracticeAttempt }) {
           )}
           <p className="text-sm text-muted">After you submit you can&apos;t change any answer.</p>
           {submitError && (
-            <p role="alert" className="rounded-lg border border-danger/30 bg-danger-soft px-3 py-2 text-sm">
+            <p role="alert" className="rounded-inner border border-danger/30 bg-danger-soft px-4 py-3 text-sm">
               {submitError}
             </p>
           )}
-          <div className="flex gap-2">
-            <button type="button" onClick={() => void submit()} disabled={submitting} className="rounded-lg bg-accent px-4 py-2 font-medium text-white disabled:opacity-60 dark:text-background">
+          <div className="flex flex-wrap gap-2">
+            <button type="button" onClick={() => void submit()} disabled={submitting} className={buttonClasses()}>
               {submitting ? "Submitting…" : submitError ? "Try again" : "Submit"}
             </button>
             <button
@@ -509,7 +511,7 @@ export function AttemptRunner({ attempt }: { attempt: PracticeAttempt }) {
                 setSubmitError(null); // an old failure isn't shown again when the dialog reopens
               }}
               disabled={submitting}
-              className="rounded-lg border border-border px-4 py-2"
+              className={buttonClasses({ variant: "secondary" })}
             >
               Keep working
             </button>

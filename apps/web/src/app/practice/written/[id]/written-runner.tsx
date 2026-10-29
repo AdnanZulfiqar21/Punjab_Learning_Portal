@@ -10,7 +10,9 @@ import { LessonBlocks } from "@/components/lesson-blocks";
 import { PendingAction } from "./pending-action";
 import { PractiseAgain } from "./practise-again";
 import { RecheckPanel } from "./recheck-panel";
-import { Notice } from "@/components/ui";
+import { buttonClasses } from "@/components/button";
+import { PracticeIcon } from "@/components/practice-ui";
+import { Breadcrumbs, Notice } from "@/components/ui";
 import { HelpLink } from "@/components/help-link";
 import { TIME_ZONE } from "@/lib/dates";
 import { reach } from "@/lib/reach";
@@ -324,13 +326,21 @@ export function WrittenRunner({
   const remaining = now === null ? null : Math.max(0, cutoff - now);
 
   return (
-    <div className="space-y-6">
-      <header className="space-y-2">
-        <h1 className="text-2xl font-semibold tracking-tight">{attempt.linked_from ? "New practice test" : "Written test"}</h1>
+    <div className="space-y-8">
+      <Breadcrumbs items={[{ href: "/practice", label: "Practice" }, { href: "/practice/written", label: "Written practice" }, { label: attempt.linked_from ? "New practice test" : "Written test" }]} />
+      {/* DESIGN-01: the test's chrome (title, deadlines, notices) on glass; the questions and marks stay on solid surfaces. */}
+      <header className="glass space-y-3 rounded-card px-6 py-6 sm:px-8">
+        <p className="inline-flex items-center gap-1.5 text-xs font-semibold tracking-[0.15em] text-accent uppercase">
+          <PracticeIcon name="pen-line" size={14} />
+          Written practice
+        </p>
+        <h1 className="font-display text-[28px] leading-9 font-bold tracking-tight sm:text-[36px] sm:leading-[2.75rem]">
+          {attempt.linked_from ? "New practice test" : "Written test"}
+        </h1>
         {attempt.linked_from && (
           <Notice title="Linked to an earlier test">
             New answers to question {attempt.linked_from.positions.join(", ")} of{" "}
-            <a className="text-accent underline" href={`/practice/written/${attempt.linked_from.attempt_id}`}>
+            <a className="font-medium text-accent underline underline-offset-2" href={`/practice/written/${attempt.linked_from.attempt_id}`}>
               your earlier test
             </a>
             . This test is marked on its own; the earlier result doesn&apos;t change.
@@ -356,7 +366,7 @@ export function WrittenRunner({
           </Notice>
         )}
         {active && (
-          <dl className="grid gap-x-6 gap-y-1 text-sm sm:grid-cols-[max-content_1fr]">
+          <dl className="grid gap-x-6 gap-y-1.5 rounded-inner border border-border bg-surface/70 px-4 py-3 text-sm sm:grid-cols-[max-content_1fr]">
             {attempt.writing_deadline_at && (
               <>
                 <dt className="text-muted">Stop writing at</dt>
@@ -366,7 +376,7 @@ export function WrittenRunner({
             <dt className="text-muted">Upload and submit by</dt>
             <dd>
               {when(attempt.upload_cutoff_at)}
-              {remaining !== null && <span className="ml-2 font-mono tabular-nums text-muted">({Math.floor(remaining / 60000)}:{String(Math.floor((remaining % 60000) / 1000)).padStart(2, "0")} left)</span>}
+              {remaining !== null && <span className="ml-2 font-mono font-semibold tabular-nums text-accent">({Math.floor(remaining / 60000)}:{String(Math.floor((remaining % 60000) / 1000)).padStart(2, "0")} left)</span>}
             </dd>
             <dt className="text-muted">Total</dt>
             <dd>{marks(attempt.max_units)} marks</dd>
@@ -383,17 +393,17 @@ export function WrittenRunner({
 
       {attempt.status === "sealed" && (
         <section aria-labelledby="result-h" className="space-y-3">
-          <h2 id="result-h" className="text-lg font-semibold">
+          <h2 id="result-h" className="font-display text-2xl font-semibold tracking-tight">
             Your marks
           </h2>
           {result && (result.status === "released" || result.work_status === "delayed") && <WorkStatus status={result.work_status} />}
           {!result || result.status === "pending" ? (
             <Notice title="Waiting for a teacher">Your script is in the marking queue. Marks appear here once a teacher releases them.</Notice>
           ) : (
-            <div className="space-y-3">
+            <div className="space-y-4">
               {result.completeness === "complete" ? (
-                <p className="text-lg">
-                  <span className="text-3xl font-semibold tabular-nums">{marks(result.total_units ?? 0)}</span> / {marks(result.max_units)}
+                <p className="glass rounded-card px-6 py-5 text-lg">
+                  <span className="font-display text-4xl font-bold tabular-nums">{marks(result.total_units ?? 0)}</span> / {marks(result.max_units)}
                   <span className="ml-2 text-sm text-muted">
                     {(result.awaiting_regrade ?? []).length > 0
                       ? `marked by a teacher; question ${(result.awaiting_regrade ?? []).join(", ")} is waiting to be re-marked under a corrected marking guide`
@@ -417,7 +427,7 @@ export function WrittenRunner({
                 </Notice>
               ))}
               {result.questions.map((q) => (
-                <div key={q.position} className="space-y-2 rounded-xl border border-border bg-surface p-4">
+                <div key={q.position} className="space-y-2 rounded-card border border-border bg-surface p-5 shadow-glass">
                   <p className="font-semibold">
                     Question {q.position}:{" "}
                     {q.status === "scored" ? `${marks(q.earned_units ?? 0)} / ${marks(q.max_units)}` : q.status === "pending" ? "pending" : "couldn't be assessed"}
@@ -458,8 +468,8 @@ export function WrittenRunner({
                   {q.next_steps && <NextSteps steps={q.next_steps} />}
                   {/* MODEL-ANSWER-01 (W07.S1.T3): released with the mark, from the marking guide that marked it. */}
                   {q.model_answer && q.model_answer.length > 0 && (
-                    <details className="rounded-lg border border-border p-3 text-sm">
-                      <summary className="cursor-pointer font-medium text-accent">Worked answer for question {q.position}</summary>
+                    <details className="rounded-inner border border-border p-3 text-sm">
+                      <summary className="flex min-h-11 cursor-pointer items-center font-medium text-accent">Worked answer for question {q.position}</summary>
                       <div className="mt-2 space-y-2">
                         {q.model_answer_note && <p className="text-muted">{q.model_answer_note}</p>}
                         <LessonBlocks blocks={q.model_answer as { type: string }[]} headingOffset={4} />
@@ -476,14 +486,15 @@ export function WrittenRunner({
       )}
 
       <section aria-labelledby="questions-h" className="space-y-4">
-        <h2 id="questions-h" className="text-lg font-semibold">
+        <h2 id="questions-h" className="font-display text-2xl font-semibold tracking-tight">
           Questions
         </h2>
         {attempt.items.map((it) => (
-          <article key={it.position} className="space-y-3 rounded-xl border border-border bg-surface p-5">
+          // Owner rule 5: the questions are read on a solid surface.
+          <article key={it.position} className="space-y-3 rounded-card border border-border bg-surface p-5 shadow-glass sm:p-6">
             <div className="flex justify-between gap-3">
-              <h3 className="font-semibold">Question {it.position}</h3>
-              <span className="text-sm text-muted">{marks(it.max_units)} marks</span>
+              <h3 className="font-display text-lg font-semibold">Question {it.position}</h3>
+              <span className="shrink-0 rounded-full bg-[var(--track)] px-2.5 py-0.5 text-sm text-muted">{marks(it.max_units)} marks</span>
             </div>
             <LessonBlocks blocks={it.stem as { type: string }[]} headingOffset={3} />
             {(it.subparts as { id: string; label: string; blocks: { type: string }[]; max_units: number }[]).map((s) => (
@@ -500,11 +511,11 @@ export function WrittenRunner({
       </section>
 
       <section aria-labelledby="pages-h" className="space-y-3">
-        <h2 id="pages-h" className="text-lg font-semibold">
+        <h2 id="pages-h" className="font-display text-2xl font-semibold tracking-tight">
           Your pages
         </h2>
         {active && (
-          <label className="inline-flex cursor-pointer items-center gap-2 rounded-lg border border-border bg-surface px-4 py-2.5 font-medium hover:border-accent">
+          <label className={buttonClasses({ variant: "secondary", size: "lg", className: "cursor-pointer focus-within:border-accent focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-accent" })}>
             <input
               type="file"
               accept="image/jpeg,image/png,application/pdf"
@@ -516,12 +527,13 @@ export function WrittenRunner({
                 e.target.value = "";
               }}
             />
+            <PracticeIcon name="upload" size={18} />
             Add photos or a PDF
           </label>
         )}
         <ul className="grid gap-3 sm:grid-cols-3" aria-label="Uploaded pages">
           {pages.map((p, i) => (
-            <li key={p.id} className="space-y-1 rounded-lg border border-border bg-surface p-2 text-sm">
+            <li key={p.id} className="space-y-1.5 rounded-inner border border-border bg-surface p-3 text-sm shadow-glass">
               {/* eslint-disable-next-line @next/next/no-img-element -- private, uncached preview served by our own route */}
               <img
                 src={previewOf(p)}
@@ -577,7 +589,7 @@ export function WrittenRunner({
             </li>
           ))}
           {uploads.map((u) => (
-            <li key={u.id} className="rounded-lg border border-dashed border-border p-2 text-sm" role="status">
+            <li key={u.id} className="rounded-inner border border-dashed border-border bg-surface/70 p-3 text-sm" role="status">
               <p className="truncate">{u.name}</p>
               {u.status === "uploading" ? (
                 <progress max={100} value={u.progress} className="w-full" aria-label={`Uploading ${u.name}`} />
@@ -619,7 +631,7 @@ export function WrittenRunner({
       {active && (
         <section aria-labelledby="map-h" className="space-y-3">
           <div className="flex items-center justify-between gap-3">
-            <h2 id="map-h" className="text-lg font-semibold">
+            <h2 id="map-h" className="font-display text-2xl font-semibold tracking-tight">
               Which pages answer which question?
             </h2>
             <span role="status" aria-live="polite" className={`text-sm ${mapState === "error" || mapState === "conflict" ? "text-danger" : "text-muted"}`}>
@@ -633,20 +645,20 @@ export function WrittenRunner({
           )}
           {attempt.items.flatMap((it) =>
             it.slots.map((s) => (
-              <fieldset key={s.key} className="space-y-2 rounded-xl border border-border bg-surface p-3">
-                <legend className="px-1 font-medium">
+              <fieldset key={s.key} className="glass space-y-2 rounded-card px-5 py-4">
+                <legend className="px-1 font-display font-semibold">
                   {s.label} · {marks(s.max_units)} marks
                 </legend>
                 <div className="flex flex-wrap gap-3 text-sm">
                   {pages.length === 0 && <span className="text-muted">Upload your pages first.</span>}
                   {pages.map((p) => (
-                    <label key={p.id} className="flex items-center gap-2">
-                      <input type="checkbox" checked={slots[s.key]?.pages.includes(p.id) ?? false} onChange={(e) => togglePage(s.key, p.id, e.target.checked)} />
+                    <label key={p.id} className="flex min-h-11 cursor-pointer items-center gap-2 rounded-full border border-border bg-surface px-4 has-checked:border-accent has-checked:bg-accent-soft has-checked:font-semibold has-checked:text-accent">
+                      <input className="size-4 accent-[var(--accent)]" type="checkbox" checked={slots[s.key]?.pages.includes(p.id) ?? false} onChange={(e) => togglePage(s.key, p.id, e.target.checked)} />
                       {pageLabel(p.id)}
                     </label>
                   ))}
-                  <label className="flex items-center gap-2 text-muted">
-                    <input type="checkbox" checked={slots[s.key]?.unanswered ?? false} onChange={(e) => toggleUnanswered(s.key, e.target.checked)} />I didn&apos;t answer this
+                  <label className="flex min-h-11 cursor-pointer items-center gap-2 rounded-full border border-border bg-surface px-4 text-muted has-checked:border-warn has-checked:bg-warn-soft has-checked:text-foreground">
+                    <input className="size-4 accent-[var(--accent)]" type="checkbox" checked={slots[s.key]?.unanswered ?? false} onChange={(e) => toggleUnanswered(s.key, e.target.checked)} />I didn&apos;t answer this
                   </label>
                 </div>
                 {(slots[s.key]?.pages ?? []).map((pid) => {
@@ -679,22 +691,22 @@ export function WrittenRunner({
             )),
           )}
           {shared.length > 0 && (
-            <fieldset className="space-y-2 rounded-xl border border-warn/40 bg-surface p-3 text-sm">
+            <fieldset className="space-y-2 rounded-card border border-warn/40 bg-warn-soft px-5 py-4 text-sm">
               <legend className="px-1 font-medium">Pages with more than one answer</legend>
               <p className="text-muted">
                 A teacher needs to know which part of these pages answers which question. Mark each answer&apos;s area above, or confirm that you wrote the
                 question number beside each answer.
               </p>
               {shared.map((pid) => (
-                <label key={pid} className="flex items-center gap-2">
-                  <input type="checkbox" checked={confirmed.includes(pid)} onChange={(e) => confirmNumbering(pid, e.target.checked)} />
+                <label key={pid} className="flex min-h-11 cursor-pointer items-center gap-2">
+                  <input className="size-4 accent-[var(--accent)]" type="checkbox" checked={confirmed.includes(pid)} onChange={(e) => confirmNumbering(pid, e.target.checked)} />
                   I wrote the question numbers clearly on {pageLabel(pid).toLowerCase()}
                 </label>
               ))}
             </fieldset>
           )}
           {sealError && (
-            <p role="alert" className="rounded-lg border border-danger/30 bg-danger-soft px-3 py-2 text-sm">
+            <p role="alert" className="rounded-inner border border-danger/30 bg-danger-soft px-4 py-3 text-sm">
               {sealError}
             </p>
           )}
@@ -702,7 +714,7 @@ export function WrittenRunner({
             type="button"
             onClick={() => void submit()}
             disabled={sealing || !complete || unconfirmed.length > 0 || uploads.some((u) => u.status === "uploading")}
-            className="rounded-lg bg-accent px-5 py-3 font-medium text-white hover:bg-accent-strong disabled:opacity-60 dark:text-background"
+            className={buttonClasses({ size: "lg" })}
           >
             {sealing ? "Submitting…" : "Submit for marking"}
           </button>
@@ -803,7 +815,7 @@ function EvidencePlace({ attemptId, place }: { attemptId: string; place: Evidenc
 // this question's topic. When none is published yet it says so and points to the chapter page; nothing is generated.
 function NextSteps({ steps }: { steps: Steps }) {
   return (
-    <section aria-label="Next steps" className="space-y-2 rounded-lg border border-border bg-surface-muted p-3 text-sm">
+    <section aria-label="Next steps" className="space-y-2 rounded-inner border border-border bg-surface-muted p-4 text-sm">
       <p className="font-medium">Next steps</p>
       {steps.focus.length > 0 && (
         <ul className="list-disc space-y-1 pl-5">
@@ -875,7 +887,7 @@ function PageAdjust({
     else setError(r.error);
   };
   const keep = { rotate: t.rotate, crop: t.crop ?? null, enhance: t.enhance, straighten: angle, shown_crop: t.shown_crop ?? null };
-  const small = "rounded border border-border bg-surface px-2 py-1 hover:border-accent disabled:opacity-60";
+  const small = "inline-flex min-h-11 items-center rounded-full border border-border bg-surface px-3.5 text-sm font-medium hover:border-accent hover:text-accent disabled:opacity-60";
   return (
     <div role="group" aria-label={`Adjust page ${number}`} className="space-y-1">
       <div className="flex flex-wrap items-center gap-1">

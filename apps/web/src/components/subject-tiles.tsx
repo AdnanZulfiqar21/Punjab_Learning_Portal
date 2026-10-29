@@ -5,14 +5,13 @@ import Link from "next/link";
 import type { Discovery } from "@portal/contracts";
 import { GRADE_LABEL } from "@/lib/format";
 import { subjectKey } from "@/lib/learn-context";
+import { TAUGHT_SUBJECTS, taughtBooks } from "@/lib/subjects";
 import { GlassCard } from "./glass-card";
 import { SubjectIcon } from "./icons";
 
 type Tile = { code: string; name: string; grades: number[] };
 
-const ORDER = ["biology", "chemistry", "physics", "computer_science"];
-// The portal teaches these four; Mathematics books are indexed but not taught (owner, 2026-10-19).
-const TAUGHT = new Set(ORDER);
+const ORDER: readonly string[] = TAUGHT_SUBJECTS;
 const FALLBACK: Tile[] = [
   { code: "biology", name: "Biology", grades: [11, 12] },
   { code: "chemistry", name: "Chemistry", grades: [11, 12] },
@@ -22,8 +21,7 @@ const FALLBACK: Tile[] = [
 
 function tilesFrom(books: Discovery["books"]): Tile[] {
   const by = new Map<string, Tile>();
-  for (const b of books) {
-    if (!TAUGHT.has(b.subject)) continue;
+  for (const b of taughtBooks(books)) {
     const t = by.get(b.subject) ?? { code: b.subject, name: b.subject_name, grades: [] };
     if (!t.grades.includes(b.grade)) t.grades.push(b.grade);
     by.set(b.subject, t);

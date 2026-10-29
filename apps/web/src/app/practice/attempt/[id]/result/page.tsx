@@ -5,7 +5,11 @@ import { Suspense } from "react";
 import type { AttemptResult, ItemReview } from "@portal/contracts";
 import { LessonBlocks } from "@/components/lesson-blocks";
 import { typesetEquations } from "@/lib/typeset";
-import { Badge, Notice, SkeletonLines } from "@/components/ui";
+import { buttonClasses } from "@/components/button";
+import { GlassCard } from "@/components/glass-card";
+import { ProgressBar } from "@/components/progress-bar";
+import { SectionHeader } from "@/components/section-header";
+import { Badge, Breadcrumbs, Notice, SkeletonLines } from "@/components/ui";
 import { MockRunningNotice } from "@/components/mock-running";
 import { getResult } from "@/lib/practice";
 import { currentUser } from "@/lib/session";
@@ -58,7 +62,7 @@ async function Result({ id }: { id: string }) {
   if (result === "pending") {
     return (
       <Notice title="Not submitted yet">
-        <Link href={`/practice/attempt/${id}`} className="underline">
+        <Link href={`/practice/attempt/${id}`} className="font-medium text-accent underline underline-offset-2">
           Return to the test
         </Link>{" "}
         to finish it.
@@ -66,24 +70,33 @@ async function Result({ id }: { id: string }) {
     );
   }
   return (
-    <div className="space-y-6">
-      <div className="space-y-2">
-        <h1 className="text-2xl font-semibold tracking-tight">Your result</h1>
+    <div className="space-y-8">
+      <div className="space-y-4">
+        <Breadcrumbs items={[{ href: "/practice", label: "Practice" }, { href: "/practice/progress", label: "Progress report" }, { label: "Your result" }]} />
+        <GlassCard className="space-y-3 sm:px-8 sm:py-7">
+        <p className="text-xs font-semibold tracking-[0.15em] text-accent uppercase">Practice</p>
+        <h1 className="font-display text-[28px] leading-9 font-bold tracking-tight sm:text-[36px] sm:leading-[2.75rem]">Your result</h1>
         {result.status === "not_scorable" ? (
           <Notice tone="warn" title="This test can't be scored">
             Every question was withdrawn after review, so there is nothing to score.
           </Notice>
         ) : (
-          <p className="text-lg">
-            <span className="text-3xl font-semibold tabular-nums">{result.raw}</span> / {result.maximum}
-            {result.percentage !== null && <span className="ml-2 text-muted">({String(result.percentage)}%)</span>}
-          </p>
+          <>
+            <p className="text-lg">
+              <span className="font-display text-5xl font-bold tabular-nums">{result.raw}</span> / {result.maximum}
+              {result.percentage !== null && <span className="ml-2 text-muted">({String(result.percentage)}%)</span>}
+            </p>
+            {result.maximum > 0 && (
+              <ProgressBar value={result.raw} max={result.maximum} label="Your score" valueText={`${result.raw} of ${result.maximum}`} className="h-2 max-w-md" />
+            )}
+          </>
         )}
         {result.revised_at && (
           <Notice title={`Updated ${new Date(result.revised_at).toLocaleDateString("en-GB", { dateStyle: "medium", timeZone: TIME_ZONE })}`}>
             {result.revision_reason} Your earlier result stays in your history.
           </Notice>
         )}
+        </GlassCard>
         <p className="text-sm text-muted">
           {result.answered} of {result.question_count} answered · {result.finalise_reason === "expiry" ? "submitted when time ran out" : "submitted by you"}
           {result.timing?.seconds_used != null && ` · ${Math.max(1, Math.round(result.timing.seconds_used / 60))} min`}
@@ -105,7 +118,7 @@ async function Result({ id }: { id: string }) {
         {(result.sections ?? []).length > 1 && (
           <ul className="flex flex-wrap gap-2 text-sm" aria-label="Sections">
             {(result.sections ?? []).map((s) => (
-              <li key={s.from_position} className="rounded-lg border border-border bg-surface px-3 py-1">
+              <li key={s.from_position} className="glass rounded-full px-3.5 py-1.5 font-medium shadow-none">
                 {s.label}: {s.raw} / {s.maximum}
               </li>
             ))}
@@ -114,7 +127,7 @@ async function Result({ id }: { id: string }) {
         {result.comparison && <Comparison c={result.comparison} />}
         {(result.history ?? []).length > 1 && (
           <details className="text-sm">
-            <summary className="cursor-pointer text-muted">Score history ({(result.history ?? []).length} versions)</summary>
+            <summary className="flex min-h-11 cursor-pointer items-center text-muted">Score history ({(result.history ?? []).length} versions)</summary>
             <ol className="mt-1 space-y-1">
               {(result.history ?? []).map((h) => (
                 <li key={h.version}>
@@ -125,12 +138,15 @@ async function Result({ id }: { id: string }) {
           </details>
         )}
       </div>
-      <ol className="space-y-4">
-        {result.items.map((it) => (
-          <ReviewItem key={it.position} item={it} attemptId={id} />
-        ))}
-      </ol>
-      <Link href="/practice" className="inline-block rounded-lg border border-border bg-surface px-4 py-2 hover:border-accent">
+      <section aria-labelledby="review-h">
+        <SectionHeader id="review-h" title="Question by question" />
+        <ol className="space-y-4">
+          {result.items.map((it) => (
+            <ReviewItem key={it.position} item={it} attemptId={id} />
+          ))}
+        </ol>
+      </section>
+      <Link href="/practice" className={buttonClasses({ variant: "secondary", size: "lg" })}>
         Practise again
       </Link>
     </div>
@@ -141,8 +157,8 @@ async function Result({ id }: { id: string }) {
 function Comparison({ c }: { c: NonNullable<AttemptResult["comparison"]> }) {
   const day = (iso: string) => new Date(iso).toLocaleDateString("en-GB", { dateStyle: "medium", timeZone: TIME_ZONE });
   return (
-    <section aria-labelledby="compare" className="space-y-1 rounded-lg border border-border bg-surface p-4 text-sm">
-      <h2 id="compare" className="font-semibold">
+    <section aria-labelledby="compare" className="glass space-y-1 rounded-card p-5 text-sm">
+      <h2 id="compare" className="font-display text-lg font-semibold">
         How you compare
       </h2>
       {c.state === "published" && c.percentile != null ? (
@@ -171,9 +187,10 @@ function ReviewItem({ item, attemptId }: { item: ItemReview; attemptId: string }
   const assetUrl = (v: string) => `/practice/attempt/${attemptId}/assets/${v}`; // QUESTION-DIAGRAMS-01
   const explanation = item.explanation as { correct?: Blocks; distractors?: Record<string, string>; worked_steps?: Blocks };
   return (
-    <li className="space-y-3 rounded-xl border border-border bg-surface p-5">
+    // The question, options and explanation are read on a solid surface (owner rule 5).
+    <li className="space-y-3 rounded-card border border-border bg-surface p-5 shadow-glass sm:p-6">
       <div className="flex items-center justify-between gap-2">
-        <h2 className="font-semibold">Question {item.position}</h2>
+        <h3 className="font-display text-lg font-semibold">Question {item.position}</h3>
         {item.treatment !== "NONE" ? (
           <Badge tone="warn">{item.treatment === "EXCLUDE" ? "Excluded after review" : item.treatment === "CREDIT_ALL" ? "Credited to everyone" : "Key corrected"}</Badge>
         ) : item.chosen === null ? (
@@ -185,7 +202,7 @@ function ReviewItem({ item, attemptId }: { item: ItemReview; attemptId: string }
         )}
       </div>
       {item.passage && (
-        <section aria-label="Passage" className="rounded-lg border border-border bg-surface-muted px-4 py-3">
+        <section aria-label="Passage" className="rounded-inner border border-border bg-surface-muted px-4 py-3">
           <p className="mb-2 text-xs font-semibold tracking-wide text-muted uppercase">Passage</p>
           <LessonBlocks blocks={item.passage.blocks as Blocks} typeset={typesetEquations(item.passage.blocks as Blocks)} headingOffset={3} assetUrl={assetUrl} />
         </section>
@@ -196,7 +213,7 @@ function ReviewItem({ item, attemptId }: { item: ItemReview; attemptId: string }
           const isKey = o.id === item.correct_option_id;
           const isChosen = o.id === item.chosen;
           return (
-            <li key={o.id} className={`rounded-lg border px-3 py-2 break-words ${isKey ? "border-ok bg-ok-soft" : isChosen ? "border-danger bg-danger-soft" : "border-border"}`}>
+            <li key={o.id} className={`rounded-inner border px-4 py-2.5 break-words ${isKey ? "border-ok bg-ok-soft" : isChosen ? "border-danger bg-danger-soft" : "border-border"}`}>
               <span className="mr-2 font-medium text-muted">{String.fromCharCode(65 + i)}</span>
               {isKey && <span className="mr-2 text-xs font-semibold text-ok">Correct answer</span>}
               {isChosen && !isKey && <span className="mr-2 text-xs font-semibold text-danger">Your answer</span>}
@@ -207,7 +224,7 @@ function ReviewItem({ item, attemptId }: { item: ItemReview; attemptId: string }
         })}
       </ul>
       {(explanation.correct?.length ?? 0) > 0 && (
-        <div className="rounded-lg bg-surface-muted p-3 text-sm">
+        <div className="rounded-inner bg-surface-muted p-4 text-sm">
           <p className="font-semibold">Why</p>
           <LessonBlocks blocks={explanation.correct ?? []} typeset={typesetEquations(explanation.correct)} headingOffset={3} assetUrl={assetUrl} />
           {(explanation.worked_steps?.length ?? 0) > 0 && <LessonBlocks blocks={explanation.worked_steps ?? []} headingOffset={3} assetUrl={assetUrl} />}
@@ -228,7 +245,7 @@ function ReviewItem({ item, attemptId }: { item: ItemReview; attemptId: string }
       )}
       <Link
         href={`/help/new?category=academic_report&kind=attempt&id=${attemptId}&position=${item.position}`}
-        className="inline-block text-sm text-muted underline underline-offset-2 hover:text-foreground"
+        className="inline-flex min-h-11 items-center text-sm text-muted underline underline-offset-2 hover:text-foreground"
       >
         Report a problem with question {item.position}
       </Link>

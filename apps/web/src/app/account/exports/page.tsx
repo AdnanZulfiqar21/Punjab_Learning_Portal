@@ -3,6 +3,10 @@ import { redirect } from "next/navigation";
 import { Suspense } from "react";
 import type { ExportJob } from "@portal/contracts";
 import { cancelExport, retryExport } from "@/app/actions/exports";
+import { buttonClasses } from "@/components/button";
+import { GlassCard } from "@/components/glass-card";
+import { CardTitle, PageIcon } from "@/components/learner-pages";
+import { PageHero } from "@/components/page-hero";
 import { Badge, Breadcrumbs, Notice, SkeletonLines } from "@/components/ui";
 import { api, currentUser } from "@/lib/session";
 import { ExportRequestForm } from "./request-form";
@@ -25,12 +29,12 @@ export default function ExportsPage() {
   return (
     <div className="space-y-6">
       <Breadcrumbs items={[{ href: "/account", label: "Account" }, { label: "Exports" }]} />
-      <div>
-        <h1 className="text-2xl font-semibold tracking-tight">Exports</h1>
-        <p className="text-muted">
-          Exports are prepared in the background. Only you can see or download yours, and each download is recorded. A file is kept for 24 hours.
-        </p>
-      </div>
+      <PageHero
+        eyebrow="Account"
+        title="Exports"
+        lead="Exports are prepared in the background. Only you can see or download yours, and each download is recorded. A file is kept for 24 hours."
+        className="pt-2! pb-2! sm:pt-6!"
+      />
       <Suspense fallback={<SkeletonLines lines={5} label="Loading your exports" />}>
         <Exports />
       </Suspense>
@@ -44,18 +48,22 @@ async function Exports() {
   const res = await api<ExportJob[]>("/v1/exports", { token: user.token });
   const canAudit = user.me.roles.includes("owner_admin");
   return (
-    <div className="space-y-6">
+    <div className="mx-auto max-w-3xl space-y-6">
       <ExportRequestForm canAudit={canAudit} />
       {!res.ok ? (
         <Notice tone="warn" title="Couldn't load your exports">
           Please try again.
         </Notice>
       ) : res.data.length === 0 ? (
-        <p className="text-muted">You haven&apos;t requested any exports yet.</p>
+        <GlassCard className="text-center text-muted">You haven&apos;t requested any exports yet.</GlassCard>
       ) : (
-        <ul className="divide-y divide-border rounded-xl border border-border bg-surface" aria-label="Your exports">
+        <GlassCard as="section" aria-labelledby="exports-heading" className="space-y-4">
+        <CardTitle id="exports-heading" icon="file-text">
+          Your exports
+        </CardTitle>
+        <ul className="divide-y divide-border rounded-inner border border-border bg-surface" aria-label="Your exports">
           {res.data.map((j) => (
-            <li key={j.id} className="flex flex-wrap items-center justify-between gap-3 p-3 text-sm">
+            <li key={j.id} className="flex flex-wrap items-center justify-between gap-3 px-4 py-3 text-sm">
               <div className="space-y-1">
                 <p className="flex flex-wrap items-center gap-2">
                   <Badge tone={STATUS[j.status].tone}>{STATUS[j.status].label}</Badge>
@@ -71,20 +79,22 @@ async function Exports() {
               </div>
               <div className="flex gap-2">
                 {j.status === "ready" && (
-                  <a href={`/account/exports/${j.id}/download`} className="rounded-lg border border-border bg-surface px-3 py-1.5 font-medium hover:border-accent">
+                  <a href={`/account/exports/${j.id}/download`} className={buttonClasses()}>
+                    <PageIcon name="download" size={16} />
                     Download
                   </a>
                 )}
                 {(j.status === "queued" || j.status === "running") && (
                   <form action={cancelExport.bind(null, j.id)}>
-                    <button type="submit" className="rounded-lg border border-border bg-surface px-3 py-1.5 hover:border-accent">
+                    <button type="submit" className={buttonClasses({ variant: "secondary" })}>
                       Cancel
                     </button>
                   </form>
                 )}
                 {j.status === "failed" && (
                   <form action={retryExport.bind(null, j.id)}>
-                    <button type="submit" className="rounded-lg border border-border bg-surface px-3 py-1.5 hover:border-accent">
+                    <button type="submit" className={buttonClasses({ variant: "secondary" })}>
+                      <PageIcon name="rotate-cw" size={16} />
                       Try again
                     </button>
                   </form>
@@ -93,6 +103,7 @@ async function Exports() {
             </li>
           ))}
         </ul>
+        </GlassCard>
       )}
     </div>
   );
