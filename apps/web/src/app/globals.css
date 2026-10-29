@@ -279,6 +279,34 @@ html {
   padding-top: 0.25rem;
 }
 
+/* EQUATION-TAG-01: KaTeX pins an equation number (\tag) to the right edge of the card, so a formula wider than the card
+   (a phone) scrolls under it. The number flows after the formula instead: equal spare space before the formula and
+   around the number keeps the formula centred and the number at the right end, and once the formula fills the card the
+   spare space is gone and the number scrolls along after it. (KaTeX's CSS loads after this file, so these selectors
+   are one class more specific than its own.) */
+.katex-display > .katex > .katex-html:has(> .katex-tag) {
+  display: flex;
+  align-items: baseline;
+  width: max-content;
+  min-width: 100%;
+}
+.katex-display > .katex > .katex-html:has(> .katex-tag)::before {
+  content: "";
+  flex: 1 1 0;
+}
+.katex-display > .katex > .katex-html:has(> .katex-tag) > .katex-tag {
+  position: static;
+  flex: 1 0 0;
+  min-width: max-content;
+  text-align: right;
+}
+/* The space before the number is part of the number, so it never shifts the formula off centre. */
+.katex-display > .katex > .katex-html > .katex-tag::before {
+  content: "";
+  display: inline-block;
+  width: 1em;
+}
+
 /* INLINE-VECTOR-01: the arrow over a vector letter in running text ("v⃗" in a lesson), drawn as a plain
    arrow so no font needs the combining glyph. */
 .vec {
