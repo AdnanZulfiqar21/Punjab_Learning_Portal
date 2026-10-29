@@ -241,9 +241,18 @@ function BlockView({
       const Tag = `h${level}` as "h2" | "h3" | "h4" | "h5" | "h6";
       // Headings inside a topic ("Carbon monoxide (CO)" in 14.4.1) take their own colour, apart from the chapter's main
       // heading (14.4, accent) and the topic's title (14.4.1, text colour), so the three levels read apart (owner,
-      // 2026-10-27).
+      // 2026-10-27). Inside the lesson the two levels read apart too (owner, 2026-10-29: "same colour same size"): a
+      // section heading is larger and blue with a rule under it; its sub-heading is smaller, in the heading colour
+      // (--heading, the default for headings), with a blue bar at its start.
       return (
-        <Tag dir="auto" className={b.level === 3 ? "pt-1 text-lg font-semibold text-subheading" : "pt-2 text-xl font-semibold tracking-tight text-subheading"}>
+        <Tag
+          dir="auto"
+          className={
+            b.level === 3
+              ? "border-l-[3px] border-subheading pl-3 text-[17px] leading-snug font-semibold"
+              : "border-b border-border pt-3 pb-1.5 text-[22px] leading-tight font-bold tracking-tight text-subheading"
+          }
+        >
           <Marked text={str(b.text)} marks={marks} />
         </Tag>
       );

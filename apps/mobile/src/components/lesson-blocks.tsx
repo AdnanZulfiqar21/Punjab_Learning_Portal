@@ -276,15 +276,22 @@ function BlockView({ block: b, assetSource, dataSaver }: { block: Block; assetSo
   const marks = bookErrors(b.book_errors);
   switch (b.type) {
     case "heading":
-      return (
-        // Headings inside a topic take their own colour, apart from the chapter's main heading (accent) and the topic's
-        // title (text colour), so the three levels read apart (owner, 2026-10-27).
-        <T
-          variant={b.level === 3 ? "subheading" : "heading"}
-          accessibilityRole="header"
-          style={{ marginTop: b.level === 3 ? Space.xs : Space.sm, color: c.subheading }}>
-          <Marked text={str(b.text)} marks={marks} />
-        </T>
+      // Headings inside a topic take their own colour, apart from the chapter's main heading (accent) and the topic's
+      // title (text colour), so the three levels read apart (owner, 2026-10-27). Inside the lesson the two levels read
+      // apart too (owner, 2026-10-29): a section heading is blue and bold with a rule under it; its sub-heading is
+      // smaller, in the heading colour, with a blue bar at its start.
+      return b.level === 3 ? (
+        <View style={{ marginTop: Space.xs, borderLeftWidth: 3, borderLeftColor: c.subheading, paddingLeft: Space.sm }}>
+          <T variant="subheading" accessibilityRole="header" style={{ color: c.heading }}>
+            <Marked text={str(b.text)} marks={marks} />
+          </T>
+        </View>
+      ) : (
+        <View style={{ marginTop: Space.sm, borderBottomWidth: 1, borderBottomColor: c.border, paddingBottom: Space.xs }}>
+          <T variant="heading" accessibilityRole="header" style={{ color: c.subheading, fontWeight: "700" }}>
+            <Marked text={str(b.text)} marks={marks} />
+          </T>
+        </View>
       );
     case "paragraph":
       // BOOK-STYLE-01: a printed "Example:" (Roman Urdu "Misal:") becomes a label, and a lead-in line a small heading with an accent bar.
