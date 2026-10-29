@@ -106,7 +106,8 @@ class TopicNode(BaseModel):
     book_number: str | None = None
     title: str
     # BOOK-EXERCISES-01: "exercise" is the chapter's end-of-chapter exercise, listed in Practice, not in Learn.
-    kind: Literal["topic", "exercise"]
+    # BOOK-PAPERS-01: "paper" is a Board paper at the end of the book (paper pattern, model paper), likewise.
+    kind: Literal["topic", "exercise", "paper"]
     depth: int
     pdf_page: int | None
     points: list[str]

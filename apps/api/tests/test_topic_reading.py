@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import uuid
+
 from fastapi.testclient import TestClient
 from sqlalchemy import select
 from sqlalchemy.orm import Session
@@ -222,3 +224,98 @@ def test_practice_lists_each_chapters_exercise_with_what_the_caller_can_read(cli
         e["topic_id"] for e in client.get("/v1/grades/11/subjects/computer_science/exercises").json()["exercises"]
     }
     assert client.get("/v1/grades/11/subjects/english/exercises").status_code == 404
+
+
+def test_the_topic_kind_rule_is_the_catalogue_key() -> None:
+    # BOOK-PAPERS-01: the Board papers at the end of a book are a third, Practice-only kind.
+    cs12 = "pk-punjab/xii/computer_science/c12-cs/ch9"
+    kinds = {
+        key: (Topic(natural_key=f"{cs12}/{key}").kind, Topic(natural_key=f"{cs12}/{key}").practice_only)
+        for key in ("9.1", "u-business-plan-tools", "u-exercise", "u-paper-pattern", "u-model-paper", "u-paper")
+    }
+    assert kinds == {
+        "9.1": ("topic", False),
+        "u-business-plan-tools": ("topic", False),
+        "u-exercise": ("exercise", True),
+        "u-paper-pattern": ("paper", True),
+        "u-model-paper": ("paper", True),
+        "u-paper": ("topic", False),
+    }
+
+
+PAPERS = (("u-paper-pattern", "Paper Pattern"), ("u-model-paper", "Model Paper"))
+
+
+def test_the_board_papers_are_practice_not_learn(client: TestClient) -> None:
+    # BOOK-PAPERS-01: the content PR adds the two papers to Computer Science 12's last unit. The catalogue here may not
+    # have them yet, so this test adds them after the unit's last topic and removes them again.
+    with get_sessionmaker()() as db:
+        book = db.scalars(
+            select(BookEdition)
+            .join(Grade, Grade.id == BookEdition.grade_id)
+            .join(Subject, Subject.id == BookEdition.subject_id)
+            .where(Grade.number == 12, Subject.code == "computer_science")
+        ).one()
+        chapter = db.scalars(
+            select(Chapter)
+            .where(Chapter.book_id == book.id, Chapter.retired_at.is_(None))
+            .order_by(Chapter.display_order.desc())
+        ).first()
+        assert chapter is not None
+        live = [t for t in chapter.topics if t.retired_at is None]
+        last = max(t.display_order for t in live)
+        added = [
+            Topic(
+                id=uuid.uuid4(),
+                natural_key=f"{chapter.natural_key}/{key}",
+                chapter_id=chapter.id,
+                display_order=last + n,
+                title=title,
+                depth=1,
+                points=[],
+            )
+            for n, (key, title) in enumerate(PAPERS, 1)
+        ]
+        exists = {t.natural_key for t in chapter.topics}
+        assert not exists & {t.natural_key for t in added}, "the catalogue has the papers now: test the real ones"
+        db.add_all(added)
+        db.commit()
+        chapter_id = str(chapter.id)
+        paper_ids = [str(t.id) for t in added]
+        first_id = str(next(t.id for t in sorted(live, key=lambda t: t.display_order) if t.kind == "topic"))
+
+    try:
+        outline = client.get(f"/v1/chapters/{chapter_id}").json()
+        kinds = {t["id"]: t["kind"] for t in outline["topics"]}
+        assert [kinds[i] for i in paper_ids] == ["paper", "paper"]
+
+        ids: list[str] = []
+        topic_id: str | None = first_id
+        while topic_id:  # Learn's "Next topic" walks the unit and never reaches a paper
+            ids.append(topic_id)
+            reading = client.get(f"/v1/topics/{topic_id}/lesson").json()
+            assert reading["kind"] == "topic"
+            topic_id = reading["next_topic_id"]
+        assert not set(paper_ids) & set(ids) and len(ids) > 1
+
+        for paper_id, title in zip(paper_ids, [title for _key, title in PAPERS], strict=True):
+            body = client.get(f"/v1/topics/{paper_id}/lesson").json()
+            assert body["kind"] == "paper" and body["title"] == title
+            assert body["previous_topic_id"] is None and body["next_topic_id"] is None
+            assert body["chapter_start"] is False
+
+        listed = client.get("/v1/grades/12/subjects/computer_science/exercises").json()
+        assert [(p["topic_id"], p["title"]) for p in listed["papers"]] == list(
+            zip(paper_ids, [title for _key, title in PAPERS], strict=True)
+        )
+        assert all(p["availability"] == "unavailable" and p["available_languages"] == [] for p in listed["papers"])
+        assert not set(paper_ids) & {e["topic_id"] for e in listed["exercises"]}
+        # Class 11 and Class 12 are never mixed: the Class 11 book lists no Class 12 paper.
+        other = client.get("/v1/grades/11/subjects/computer_science/exercises").json()
+        assert not set(paper_ids) & {p["topic_id"] for p in other["papers"]}
+        assert client.get("/v1/grades/12/subjects/biology/exercises").json()["papers"] == []
+    finally:
+        with get_sessionmaker()() as db:
+            for paper_id in paper_ids:
+                db.delete(db.get(Topic, uuid.UUID(paper_id)))
+            db.commit()

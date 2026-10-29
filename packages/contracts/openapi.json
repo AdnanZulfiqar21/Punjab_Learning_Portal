@@ -1843,6 +1843,13 @@
             "title": "Grade Number",
             "type": "integer"
           },
+          "papers": {
+            "items": {
+              "$ref": "#/components/schemas/BookPaperOut"
+            },
+            "title": "Papers",
+            "type": "array"
+          },
           "subject_code": {
             "title": "Subject Code",
             "type": "string"
@@ -1857,7 +1864,8 @@
           "subject_code",
           "subject_name",
           "chapter_label",
-          "exercises"
+          "exercises",
+          "papers"
         ],
         "title": "BookExercisesOut",
         "type": "object"
@@ -1917,6 +1925,49 @@
           "chapters"
         ],
         "title": "BookOut",
+        "type": "object"
+      },
+      "BookPaperOut": {
+        "description": "BOOK-PAPERS-01: one of the Board papers printed at the end of the book (paper pattern, model paper).",
+        "properties": {
+          "availability": {
+            "enum": [
+              "published",
+              "private_preview",
+              "unavailable"
+            ],
+            "title": "Availability",
+            "type": "string"
+          },
+          "available_languages": {
+            "items": {
+              "enum": [
+                "en",
+                "ur",
+                "roman_ur"
+              ],
+              "type": "string"
+            },
+            "title": "Available Languages",
+            "type": "array"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "topic_id": {
+            "format": "uuid",
+            "title": "Topic Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "topic_id",
+          "title",
+          "availability",
+          "available_languages"
+        ],
+        "title": "BookPaperOut",
         "type": "object"
       },
       "BookSummary": {
@@ -16873,7 +16924,8 @@
           "kind": {
             "enum": [
               "topic",
-              "exercise"
+              "exercise",
+              "paper"
             ],
             "title": "Kind",
             "type": "string"
@@ -16962,7 +17014,8 @@
             "default": "topic",
             "enum": [
               "topic",
-              "exercise"
+              "exercise",
+              "paper"
             ],
             "title": "Kind",
             "type": "string"
@@ -22691,7 +22744,7 @@
             "description": "Validation Error"
           }
         },
-        "summary": "Each chapter's end-of-chapter exercise in one class's book, for Practice (BOOK-EXERCISES-01)",
+        "summary": "Each chapter's end-of-chapter exercise and the Board papers in one class's book, for Practice",
         "tags": [
           "lessons"
         ]

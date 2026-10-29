@@ -8,9 +8,10 @@ draft text, asset ids or page numbers. Several lesson concepts for one topic are
 from __future__ import annotations
 
 import uuid
+from collections.abc import Sequence
 from typing import Literal
 
-from sqlalchemy import select
+from sqlalchemy import or_, select
 from sqlalchemy.orm import Session
 
 from portal_api.errors import Conflict, NotFound
@@ -18,10 +19,16 @@ from portal_api.modules.access import service as access
 from portal_api.modules.content import assets, kinds
 from portal_api.modules.content.models import Availability as ItemAvailability
 from portal_api.modules.content.models import ContentItem, ContentVersion
-from portal_api.modules.content.schemas import BookExerciseOut, BookExercisesOut, TopicLessonOut, TopicReadingOut
+from portal_api.modules.content.schemas import (
+    BookExerciseOut,
+    BookExercisesOut,
+    BookPaperOut,
+    TopicLessonOut,
+    TopicReadingOut,
+)
 from portal_api.modules.content.workflow import roles_in_scope
 from portal_api.modules.curriculum import service as curriculum
-from portal_api.modules.curriculum.models import EXERCISE_KEY_SUFFIX, BookEdition, Chapter, Topic
+from portal_api.modules.curriculum.models import EXERCISE_KEY_SUFFIX, PAPER_KEY_SUFFIXES, BookEdition, Chapter, Topic
 from portal_api.modules.curriculum.regions import book_is_released
 from portal_api.modules.identity.deps import Principal
 from portal_api.modules.identity.permissions import Permission, Role, permissions_for
@@ -53,7 +60,7 @@ def reading(
             subject_name=book.subject.name,
             previous_topic_id=previous_id,
             next_topic_id=next_id,
-            chapter_start=topic.parent_id is None and previous_id is None and topic.kind == "topic",
+            chapter_start=topic.parent_id is None and previous_id is None and not topic.practice_only,
             kind=topic.kind,
             availability=availability,
             lesson=lesson,
@@ -77,33 +84,28 @@ def reading(
 
 def book_exercises(db: Session, who: Principal | None, grade: int, subject: str) -> BookExercisesOut:
     """BOOK-EXERCISES-01: each chapter's end-of-chapter exercise in this class's book, in chapter order, with whether
-    its lesson can be read by this caller (the same rule as `reading`, without sending any lesson text)."""
+    its lesson can be read by this caller (the same rule as `reading`, without sending any lesson text).
+
+    BOOK-PAPERS-01: the Board papers printed at the end of the same book come with them, in book order."""
     book = curriculum.book_for(db, grade, subject)
     preview = _can_preview(db, who, book.grade.number, book.subject.code)
-    rows = db.execute(
-        select(Topic, Chapter)
-        .join(Chapter, Topic.chapter_id == Chapter.id)
-        .where(
-            Chapter.book_id == book.id,
-            Chapter.retired_at.is_(None),
-            Topic.retired_at.is_(None),
-            Topic.natural_key.endswith(EXERCISE_KEY_SUFFIX, autoescape=True),
-        )
-        .order_by(Chapter.display_order, Topic.display_order)
-    ).all()
+
+    def rows(*suffixes: str) -> Sequence[tuple[Topic, Chapter]]:
+        return db.execute(
+            select(Topic, Chapter)
+            .join(Chapter, Topic.chapter_id == Chapter.id)
+            .where(
+                Chapter.book_id == book.id,
+                Chapter.retired_at.is_(None),
+                Topic.retired_at.is_(None),
+                or_(*(Topic.natural_key.endswith(suffix, autoescape=True) for suffix in suffixes)),
+            )
+            .order_by(Chapter.display_order, Topic.display_order)
+        ).all()
+
     exercises: list[BookExerciseOut] = []
-    for topic, chapter in rows:
-        availability: Availability = "unavailable"
-        languages: list[str] = []
-        published = _concepts(db, topic.id, published_only=True)
-        if len(published) == 1:
-            availability, languages = "published", [item.language for item in published[0]]
-        elif not published and preview:
-            drafts = _concepts(db, topic.id, published_only=False)
-            variants = drafts[0] if len(drafts) == 1 else []
-            usable = [item for item in variants if item.working is not None and _has_body(item.working)]
-            if usable:
-                availability, languages = "private_preview", [item.language for item in usable]
+    for topic, chapter in rows(EXERCISE_KEY_SUFFIX):
+        availability, languages = _listed_availability(db, topic, preview)
         exercises.append(
             BookExerciseOut(
                 topic_id=topic.id,
@@ -111,7 +113,18 @@ def book_exercises(db: Session, who: Principal | None, grade: int, subject: str)
                 chapter_number=chapter.number,
                 chapter_title=chapter.title,
                 availability=availability,
-                available_languages=sorted(set(languages)),  # type: ignore[arg-type]
+                available_languages=languages,  # type: ignore[arg-type]
+            )
+        )
+    papers: list[BookPaperOut] = []
+    for topic, _chapter in rows(*PAPER_KEY_SUFFIXES):
+        availability, languages = _listed_availability(db, topic, preview)
+        papers.append(
+            BookPaperOut(
+                topic_id=topic.id,
+                title=topic.title,
+                availability=availability,
+                available_languages=languages,  # type: ignore[arg-type]
             )
         )
     return BookExercisesOut(
@@ -120,7 +133,22 @@ def book_exercises(db: Session, who: Principal | None, grade: int, subject: str)
         subject_name=book.subject.name,
         chapter_label=book.chapter_label,
         exercises=exercises,
+        papers=papers,
     )
+
+
+def _listed_availability(db: Session, topic: Topic, preview: bool) -> tuple[Availability, list[str]]:
+    """Whether a listed Practice topic's lesson can be read, and in which languages, without loading any text."""
+    published = _concepts(db, topic.id, published_only=True)
+    if len(published) == 1:
+        return "published", sorted({item.language for item in published[0]})
+    if not published and preview:
+        drafts = _concepts(db, topic.id, published_only=False)
+        variants = drafts[0] if len(drafts) == 1 else []
+        usable = [item for item in variants if item.working is not None and _has_body(item.working)]
+        if usable:
+            return "private_preview", sorted({item.language for item in usable})
+    return "unavailable", []
 
 
 def preview_asset(db: Session, who: Principal, topic_id: uuid.UUID, version_id: uuid.UUID) -> tuple[bytes, str]:
@@ -165,8 +193,9 @@ def _neighbours(db: Session, topic: Topic) -> tuple[uuid.UUID | None, uuid.UUID 
     topic (1.2, 1.2.1, 1.2.2, 1.2.2.1, …, 1.3). Siblings alone skipped every subtopic (owner, 2026-10-28).
 
     BOOK-EXERCISES-01: the end-of-chapter exercise (and anything under it) is not in that order, so Learn never leads
-    into it, and the exercise itself has no neighbours: it is opened from Practice."""
-    if topic.kind == "exercise":
+    into it, and the exercise itself has no neighbours: it is opened from Practice. BOOK-PAPERS-01: the same for the
+    Board papers at the end of the book (every Practice-only kind)."""
+    if topic.practice_only:
         return None, None
     rows = list(
         db.scalars(
@@ -182,7 +211,7 @@ def _neighbours(db: Session, topic: Topic) -> tuple[uuid.UUID | None, uuid.UUID 
 
     def walk(parent: uuid.UUID | None) -> None:
         for row in children.get(parent, []):
-            if row.kind == "exercise":
+            if row.practice_only:
                 continue
             ids.append(row.id)
             walk(row.id)

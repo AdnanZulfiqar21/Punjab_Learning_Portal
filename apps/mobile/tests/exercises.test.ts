@@ -3,7 +3,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 
-import { exerciseStatus, exerciseTitle, learnTopics, revealLabel } from "../src/lib/exercises.ts";
+import { exerciseStatus, exerciseTitle, learnTopics, practiceOnly, practiceTitle, revealLabel } from "../src/lib/exercises.ts";
 
 describe("book exercises", () => {
   it("leaves the exercise out of Learn's topic list", () => {
@@ -12,6 +12,22 @@ describe("book exercises", () => {
       learnTopics(topics).map((t) => t.id),
       ["1.1", "1.2"],
     );
+  });
+
+  it("leaves the Board papers out of Learn too (BOOK-PAPERS-01)", () => {
+    const topics = [{ id: "9.1", kind: "topic" }, { id: "ex", kind: "exercise" }, { id: "pp", kind: "paper" }, { id: "mp", kind: "paper" }];
+    assert.deepEqual(
+      learnTopics(topics).map((t) => t.id),
+      ["9.1"],
+    );
+    assert.equal(practiceOnly(undefined), false);
+    assert.equal(practiceOnly("topic"), false);
+    assert.equal(practiceOnly("paper"), true);
+  });
+
+  it("names a Board paper by its own title and an exercise by its chapter", () => {
+    assert.equal(practiceTitle({ kind: "paper", title: "Model Paper", chapter_number: 9 }), "Model Paper");
+    assert.equal(practiceTitle({ kind: "exercise", title: "Exercise", chapter_number: 9 }), "Chapter 9 · Exercise");
   });
 
   it("names the exercise by its chapter", () => {

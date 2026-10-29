@@ -1,9 +1,23 @@
 // Book exercises (BOOK-EXERCISES-01): each chapter's end-of-chapter exercise is solved in Practice, in English or
-// Roman Urdu, and never listed in Learn. Same words as the app (apps/mobile/src/lib/exercises.ts).
+// Roman Urdu, and never listed in Learn; so are the Board papers at the end of a book (BOOK-PAPERS-01). Same words as
+// the app (apps/mobile/src/lib/exercises.ts).
 
 /** "Chapter 2 · Exercise" */
 export function exerciseTitle(chapterLabel: string, chapterNumber: number): string {
   return `${chapterLabel} ${chapterNumber} · Exercise`;
+}
+
+/**
+ * Whether a topic is opened from Practice only: a chapter's exercise, or (BOOK-PAPERS-01) one of the Board papers at
+ * the end of the book. Learn neither lists nor links into it.
+ */
+export function practiceOnly(kind: string | undefined): boolean {
+  return kind !== undefined && kind !== "topic";
+}
+
+/** A Practice screen's title: a Board paper's own ("Model Paper", "Paper Pattern"), else "Chapter 2 · Exercise". */
+export function practiceTitle(reading: { kind?: string; title: string; chapter_number: number }): string {
+  return reading.kind === "paper" ? reading.title : exerciseTitle("Chapter", reading.chapter_number);
 }
 
 /** The self-check button's words on an exercise, in the lesson's own language. */

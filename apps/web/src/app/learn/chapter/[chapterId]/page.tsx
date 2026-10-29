@@ -12,6 +12,7 @@ import { ReadingTracker } from "@/components/reading-tracker";
 import { FavouriteButton, LessonNote, SaveFormulaButton } from "@/components/study-tools";
 import { getChapter, getLessons } from "@/lib/api";
 import { DISPLAY_COOKIE, parseDisplay } from "@/lib/display";
+import { practiceOnly } from "@/lib/exercises";
 import { CONTENT_STATE_TEXT, GRADE_LABEL, assessmentSummary, pageRange } from "@/lib/format";
 import { LANGUAGE_NAME, subjectKey } from "@/lib/learn-context";
 import { Breadcrumbs, Notice, SkeletonLines } from "@/components/ui";
@@ -45,9 +46,10 @@ async function ChapterView({ id, lang }: { id: string; lang: string }) {
   if (!res.ok) notFound();
   const ch = res.data;
   const bc = ch.breadcrumb;
-  // BOOK-EXERCISES-01: the end-of-chapter exercise is solved in Practice, so Learn lists only the book's topics.
-  const topics = ch.topics.filter((t) => t.kind !== "exercise");
-  const exerciseTopics = new Set(ch.topics.filter((t) => t.kind === "exercise").map((t) => t.id));
+  // BOOK-EXERCISES-01: the end-of-chapter exercise (and BOOK-PAPERS-01 the Board papers) is solved in Practice, so
+  // Learn lists only the book's topics.
+  const topics = ch.topics.filter((t) => !practiceOnly(t.kind));
+  const exerciseTopics = new Set(ch.topics.filter((t) => practiceOnly(t.kind)).map((t) => t.id));
   const gradeLabel = GRADE_LABEL[bc.grade.number];
   const state = CONTENT_STATE_TEXT[ch.content_state] ?? { label: ch.content_state, detail: "" };
   const exercises = assessmentSummary(ch.assessment_counts);

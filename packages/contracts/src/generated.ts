@@ -1011,7 +1011,7 @@ export interface paths {
             cookie?: never;
         };
         /**
-         * Each chapter's end-of-chapter exercise in one class's book, for Practice (BOOK-EXERCISES-01)
+         * Each chapter's end-of-chapter exercise and the Board papers in one class's book, for Practice
          * @description Which exercises can be opened depends on the caller (a staff preview of a draft), so it is not shared-cached.
          */
         get: operations["book_exercises_v1_grades__grade__subjects__subject__exercises_get"];
@@ -5601,6 +5601,8 @@ export interface components {
             exercises: components["schemas"]["BookExerciseOut"][];
             /** Grade Number */
             grade_number: number;
+            /** Papers */
+            papers: components["schemas"]["BookPaperOut"][];
             /** Subject Code */
             subject_code: string;
             /** Subject Name */
@@ -5619,6 +5621,26 @@ export interface components {
             edition: string | null;
             /** Missing Pages */
             missing_pages: string[];
+        };
+        /**
+         * BookPaperOut
+         * @description BOOK-PAPERS-01: one of the Board papers printed at the end of the book (paper pattern, model paper).
+         */
+        BookPaperOut: {
+            /**
+             * Availability
+             * @enum {string}
+             */
+            availability: "published" | "private_preview" | "unavailable";
+            /** Available Languages */
+            available_languages: ("en" | "ur" | "roman_ur")[];
+            /** Title */
+            title: string;
+            /**
+             * Topic Id
+             * Format: uuid
+             */
+            topic_id: string;
         };
         /** BookSummary */
         BookSummary: {
@@ -11791,7 +11813,7 @@ export interface components {
              * Kind
              * @enum {string}
              */
-            kind: "topic" | "exercise";
+            kind: "topic" | "exercise" | "paper";
             /** Number */
             number: string | null;
             /** Pdf Page */
@@ -11829,7 +11851,7 @@ export interface components {
              * @default topic
              * @enum {string}
              */
-            kind: "topic" | "exercise";
+            kind: "topic" | "exercise" | "paper";
             lesson: components["schemas"]["TopicLessonOut"] | null;
             /** Next Topic Id */
             next_topic_id: string | null;

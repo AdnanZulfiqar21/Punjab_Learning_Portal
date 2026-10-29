@@ -13,6 +13,7 @@ import { typesetEquations } from "@/lib/typeset";
 import { placeSignature, type PlaceBlock } from "@/lib/variant-place";
 import { Notice, SkeletonLines } from "@/components/ui";
 import { DISPLAY_COOKIE, parseDisplay } from "@/lib/display";
+import { practiceOnly } from "@/lib/exercises";
 import { GRADE_LABEL } from "@/lib/format";
 import { LANGUAGE_COOKIE, missingLanguageNote, preferredLanguage, READING_LANGUAGES, subjectKey } from "@/lib/learn-context";
 import { api, currentUser } from "@/lib/session";
@@ -50,7 +51,7 @@ type TopicReading = {
   previous_topic_id: string | null;
   next_topic_id: string | null;
   chapter_start?: boolean;
-  kind?: "topic" | "exercise";
+  kind?: "topic" | "exercise" | "paper";
 };
 
 /**
@@ -89,8 +90,9 @@ async function TopicView({ id, view }: { id: string; view: "read" | "lecture" })
   const res = await api<TopicReading>(`/v1/topics/${id}/lesson${language === "en" ? "" : `?language=${language}`}`, token ? { token } : {});
   if (!res.ok) notFound();
   const reading = res.data;
-  // BOOK-EXERCISES-01: the end-of-chapter exercise is solved in Practice; an old link or a search hit goes there.
-  if (reading.kind === "exercise") redirect(`/practice/exercises/${reading.topic_id}`);
+  // BOOK-EXERCISES-01: the end-of-chapter exercise (and BOOK-PAPERS-01 a Board paper) is solved in Practice; an old
+  // link or a search hit goes there.
+  if (practiceOnly(reading.kind)) redirect(`/practice/exercises/${reading.topic_id}`);
   // BOOK-HEADING-01: where the book prints only this topic's heading and runs straight into its first subtopic
   // (Chemistry 11 14.4 into 14.4.1), the page goes on with that subtopic under its own heading instead of staying empty.
   const headingOnly = isHeadingOnly(reading);

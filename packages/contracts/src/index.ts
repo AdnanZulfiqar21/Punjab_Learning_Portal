@@ -12,6 +12,7 @@ export type Chapter = S["ChapterOut"];
 export type TopicNode = S["TopicNode"];
 export type BookExercises = S["BookExercisesOut"];
 export type BookExercise = S["BookExerciseOut"];
+export type BookPaper = S["BookPaperOut"];
 export type SourceRef = S["SourceRef"];
 export type SearchResult = S["SearchOut"];
 export type SearchHit = S["SearchHit"];

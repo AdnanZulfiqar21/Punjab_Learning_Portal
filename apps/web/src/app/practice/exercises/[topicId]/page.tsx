@@ -7,7 +7,7 @@ import { chooseReadingLanguage } from "@/app/actions/learn";
 import { KeepPlace } from "@/components/keep-place";
 import { LessonBlocks } from "@/components/lesson-blocks";
 import { premiumBook } from "@/lib/book-style";
-import { exerciseTitle, revealLabel } from "@/lib/exercises";
+import { practiceOnly, practiceTitle, revealLabel } from "@/lib/exercises";
 import { typesetEquations } from "@/lib/typeset";
 import { placeSignature, type PlaceBlock } from "@/lib/variant-place";
 import { Breadcrumbs, Notice, SkeletonLines } from "@/components/ui";
@@ -22,13 +22,14 @@ const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 type ExerciseReading = {
   topic_id: string;
+  title: string;
   chapter_id: string;
   chapter_number: number;
   chapter_title: string;
   grade_number: number;
   subject_name: string;
   availability: "published" | "private_preview" | "unavailable";
-  kind?: "topic" | "exercise";
+  kind?: "topic" | "exercise" | "paper";
   lesson: {
     id: string;
     language: string;
@@ -41,6 +42,7 @@ type ExerciseReading = {
 /**
  * BOOK-EXERCISES-01: a chapter's end-of-chapter exercise, solved. "English | Roman Urdu" only (no lecture), the same
  * lesson renderer and language choice as a topic, and the self-check answers revealed as "Show answer".
+ * BOOK-PAPERS-01: a Board paper at the end of the book (paper pattern, model paper) opens here too, under its own title.
  */
 export default function ExercisePage({ params }: PageProps<"/practice/exercises/[topicId]">) {
   return (
@@ -61,7 +63,9 @@ async function ExerciseView({ id }: { id: string }) {
   const res = await api<ExerciseReading>(`/v1/topics/${id}/lesson${language === "en" ? "" : `?language=${language}`}`, token ? { token } : {});
   if (!res.ok) notFound();
   const reading = res.data;
-  if (reading.kind !== "exercise") redirect(`/learn/topic/${reading.topic_id}`); // a book topic is read in Learn
+  if (!practiceOnly(reading.kind)) redirect(`/learn/topic/${reading.topic_id}`); // a book topic is read in Learn
+  const paper = reading.kind === "paper";
+  const title = practiceTitle(reading);
   const lesson = reading.lesson;
   const grade = GRADE_LABEL[reading.grade_number] ?? `Class ${reading.grade_number}`;
   const subject = subjectKey(reading.subject_name);
@@ -77,7 +81,7 @@ async function ExerciseView({ id }: { id: string }) {
         items={[
           { href: "/practice", label: "Practice" },
           { href: back, label: "Book exercises" },
-          { label: exerciseTitle("Chapter", reading.chapter_number) },
+          { label: title },
         ]}
       />
       {readable && (
@@ -117,11 +121,15 @@ async function ExerciseView({ id }: { id: string }) {
             </span>
           )}
         </p>
-        <h1 className="text-3xl font-semibold tracking-tight">{exerciseTitle("Chapter", reading.chapter_number)}</h1>
-        <p className="text-sm text-muted">{reading.chapter_title}</p>
+        <h1 className="text-3xl font-semibold tracking-tight">{title}</h1>
+        <p className="text-sm text-muted">{paper ? "Board model paper" : reading.chapter_title}</p>
       </header>
       {reading.availability === "unavailable" || !lesson?.body ? (
-        <Notice title="This exercise isn’t solved here yet">The chapter&apos;s exercise is in your textbook; its worked answers have not been published yet.</Notice>
+        paper ? (
+          <Notice title="This paper isn’t solved here yet">The paper is at the end of your textbook; its worked answers have not been published yet.</Notice>
+        ) : (
+          <Notice title="This exercise isn’t solved here yet">The chapter&apos;s exercise is in your textbook; its worked answers have not been published yet.</Notice>
+        )
       ) : lesson.locked ? (
         <Notice title="Included with a plan or the free 30-day trial">
           <Link href="/account" className="underline underline-offset-2">

@@ -92,6 +92,36 @@ async function Exercises({ grade: rawGrade, subject: rawSubject }: { grade?: str
           })}
         </ol>
       )}
+      {res.ok && res.data.papers.length > 0 && (
+        <section aria-labelledby="board-papers" className="space-y-3">
+          <h2 id="board-papers" className="text-lg font-semibold">
+            Board model paper
+          </h2>
+          {/* BOOK-PAPERS-01: the Board's paper pattern and model paper printed at the end of the book, solved. */}
+          <ol className="divide-y divide-border overflow-hidden rounded-xl border border-border bg-surface">
+            {res.data.papers.map((p) => {
+              const status = exerciseStatus(p.availability, p.available_languages);
+              const label = (
+                <>
+                  <span className="min-w-0 flex-1 font-medium">{p.title}</span>
+                  <Badge tone={p.availability === "published" ? "ok" : p.availability === "private_preview" ? "info" : "warn"}>{status.label}</Badge>
+                </>
+              );
+              return (
+                <li key={p.topic_id}>
+                  {status.open ? (
+                    <Link href={`/practice/exercises/${p.topic_id}`} className="flex flex-wrap items-center gap-3 px-4 py-3 hover:text-accent">
+                      {label}
+                    </Link>
+                  ) : (
+                    <div className="flex flex-wrap items-center gap-3 px-4 py-3 text-muted">{label}</div>
+                  )}
+                </li>
+              );
+            })}
+          </ol>
+        </section>
+      )}
     </div>
   );
 }
