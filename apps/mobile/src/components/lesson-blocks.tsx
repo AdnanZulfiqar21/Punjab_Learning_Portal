@@ -12,6 +12,7 @@ import { Model3D } from "@/components/model3d";
 import { LinkButton, T } from "@/components/ui";
 import { CodeColors, Fonts, Radius, Space } from "@/constants/theme";
 import { useScheme, useTheme } from "@/hooks/use-theme";
+import { bookBoxKind, type BookBoxKind } from "@/lib/book-box";
 import { bookErrors, markPieces } from "@/lib/book-errors";
 import { codeRuns } from "@/lib/code-highlight";
 import { leadIn, leadTerm } from "@/lib/book-style";
@@ -81,11 +82,6 @@ function Marked({ text, marks }: { text: string; marks: string[] }) {
 }
 
 /** READER-STYLE-01: the book's printed boxes by their title (same rule as the web). */
-function bookBox(title: string): "keep" | "know" | null {
-  if (/^keep in mind/i.test(title)) return "keep";
-  if (/^(do you know|did you know|for your information|interesting information|tidbits?|point to ponder|ponder upon)/i.test(title)) return "know";
-  return null;
-}
 
 /** A printed "Quick Check" heading followed by its questions: one card, as the book prints it. */
 function isQuickCheck(b: Block | undefined, next: Block | undefined) {
@@ -236,6 +232,16 @@ function ArchivedImage({
   );
 }
 
+// BOOK-BOX-01: the header colour of each kind of printed box; the same values as globals.css (.book-box).
+const BOOK_BOX_HEAD: Record<BookBoxKind, string> = {
+  rule: "#2f6db5",
+  know: "#237a49",
+  info: "#0e6f78",
+  ponder: "#7a3d9c",
+  keep: "#a3480a",
+  activity: "#b23a0e",
+};
+
 function Lines({ items, ordered, marks = [] }: { items: string[]; ordered: boolean; marks?: string[] }) {
   const c = useTheme();
   const premium = useContext(Premium);
@@ -270,6 +276,7 @@ function Item({ text, marks }: { text: string; marks: string[] | null }) {
 
 function BlockView({ block: b, assetSource, dataSaver }: { block: Block; assetSource?: AssetSource; dataSaver?: boolean }) {
   const c = useTheme();
+  const scheme = useScheme();
   const premium = useContext(Premium);
   const runnable = useContext(Runnable);
   const revealLabel = useContext(RevealLabel);
@@ -332,20 +339,28 @@ function BlockView({ block: b, assetSource, dataSaver }: { block: Block; assetSo
       const label = CALLOUT_LABEL[tone] ?? "Note";
       // A title that only repeats the label ("Book correction") is shown once.
       const title = str(b.title).trim().toLowerCase() === label.toLowerCase() ? "" : str(b.title);
-      // READER-STYLE-01: a titled note is one of the book's printed boxes; its title is the header, in the book's colour.
-      const printed = tone === "note" && !!title;
-      const box = printed ? bookBox(title) : null;
-      const boxBorder = box === "keep" ? c.warn : box === "know" ? c.accent : border;
-      const boxBg = box === "keep" ? c.warnSoft : box === "know" ? c.accentSoft : bg;
-      return (
-        <View style={{ borderLeftWidth: 4, borderLeftColor: boxBorder, backgroundColor: boxBg, borderRadius: Radius.md, padding: Space.md, gap: Space.xs }}>
-          {printed ? null : (
-            <T variant="eyebrow" style={{ color: tone === "warning" ? c.warn : tone === "definition" ? c.accent : green ? c.ok : c.muted }}>
-              {label}
+      // BOOK-BOX-01 (READER-STYLE-01 before it): a titled note is one of the book's printed boxes. It keeps the book's
+      // look: its title on a header in the colour of its kind and a tinted body, full width on a phone (owner, 2026-10-29).
+      if (tone === "note" && title) {
+        const head = BOOK_BOX_HEAD[bookBoxKind(title)];
+        return (
+          <View style={{ borderWidth: 1, borderColor: head, borderRadius: Radius.md, overflow: "hidden", backgroundColor: scheme === "dark" ? c.surfaceMuted : `${head}14` }}>
+            <T style={{ backgroundColor: head, color: "#ffffff", fontWeight: "700", paddingHorizontal: Space.md, paddingVertical: Space.xs }}>
+              <Marked text={title} marks={marks} />
             </T>
-          )}
+            <T style={{ padding: Space.md }}>
+              <Marked text={str(b.text)} marks={marks} />
+            </T>
+          </View>
+        );
+      }
+      return (
+        <View style={{ borderLeftWidth: 4, borderLeftColor: border, backgroundColor: bg, borderRadius: Radius.md, padding: Space.md, gap: Space.xs }}>
+          <T variant="eyebrow" style={{ color: tone === "warning" ? c.warn : tone === "definition" ? c.accent : green ? c.ok : c.muted }}>
+            {label}
+          </T>
           {title ? (
-            <T style={{ fontWeight: "700", color: box === "keep" ? c.warn : box === "know" ? c.accent : undefined }}>
+            <T style={{ fontWeight: "700" }}>
               <Marked text={title} marks={marks} />
             </T>
           ) : null}
