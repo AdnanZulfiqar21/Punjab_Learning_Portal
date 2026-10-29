@@ -1,4 +1,4 @@
-"""P09.S1.T2: half-book, full-book and XI+XII combined practice scopes, defined by the book's chapter order."""
+"""P09.S1.T2: half-book, full-book and 11+12 combined practice scopes, defined by the book's chapter order."""
 
 from __future__ import annotations
 

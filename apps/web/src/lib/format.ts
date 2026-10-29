@@ -1,6 +1,6 @@
 import type { ChapterSummary } from "@portal/contracts";
 
-export const GRADE_LABEL: Record<number, string> = { 11: "Class XI", 12: "Class XII" };
+export const GRADE_LABEL: Record<number, string> = { 11: "Class 11", 12: "Class 12" };
 
 export function parseGrade(raw: string): 11 | 12 | null {
   return raw === "11" ? 11 : raw === "12" ? 12 : null;

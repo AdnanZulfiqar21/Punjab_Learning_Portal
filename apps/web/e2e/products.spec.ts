@@ -21,15 +21,15 @@ test("finance staff define, price and list a product", async ({ page, request })
   const code = `fx-e2e-${crypto.randomUUID().slice(0, 8)}`;
   const form = page.getByRole("form", { name: "New product" });
   await form.getByLabel("Code", { exact: true }).fill(code);
-  await form.getByLabel("Name", { exact: true }).fill("[FIXTURE] Biology XI package (not a real offer)");
-  await form.getByLabel("Class XI", { exact: true }).check();
+  await form.getByLabel("Name", { exact: true }).fill("[FIXTURE] Biology 11 package (not a real offer)");
+  await form.getByLabel("Class 11", { exact: true }).check();
   await form.getByLabel("Biology", { exact: true }).check();
   await form.getByLabel("Written answers included").fill("4");
   await form.getByRole("button", { name: "Save draft product" }).click();
 
   const card = page.getByRole("listitem").filter({ hasText: code });
   await expect(card.getByText("Draft", { exact: true })).toBeVisible(AUTH);
-  await expect(card.getByText("Subject package · Class XI · Biology · 180 days · 4 written answers")).toBeVisible();
+  await expect(card.getByText("Subject package · Class 11 · Biology · 180 days · 4 written answers")).toBeVisible();
   const activate = card.getByRole("form", { name: "Put on sale" });
   await activate.getByLabel(/Why put it on sale/).fill("[FIXTURE] end-to-end check");
   await activate.getByRole("button", { name: "Put on sale" }).click();

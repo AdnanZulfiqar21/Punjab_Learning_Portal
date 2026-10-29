@@ -51,8 +51,8 @@ export function LogNoticeForm() {
       <h3 className="font-medium">Log an official notice</h3>
       <div className="grid gap-2 sm:grid-cols-2">
         <select aria-label="Notice class" value={v.grade} onChange={(e) => setV({ ...v, grade: e.target.value })} className={field}>
-          <option value="11">Class XI</option>
-          <option value="12">Class XII</option>
+          <option value="11">Class 11</option>
+          <option value="12">Class 12</option>
         </select>
         <select aria-label="Notice subject" value={v.subject} onChange={(e) => setV({ ...v, subject: e.target.value })} className={field}>
           {["biology", "chemistry", "physics", "computer_science", "mathematics"].map((s) => (

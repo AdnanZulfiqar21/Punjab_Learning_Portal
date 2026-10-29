@@ -345,7 +345,7 @@ def _summary(db: Session, attempt: Any, form: PracticeForm, score: Any) -> dict[
     sections = []
     for sec in scope.get("sections", []):  # mocks and multi-subject custom practice
         part = [rows[p] for p in range(int(sec["from"]), int(sec["to"]) + 1) if p in rows]
-        grades = " + ".join({11: "Class XI", 12: "Class XII"}.get(int(g), str(g)) for g in sec["grades"])
+        grades = " + ".join({11: "Class 11", 12: "Class 12"}.get(int(g), str(g)) for g in sec["grades"])
         sections.append(
             ResultSection(
                 label=f"{str(sec['subject']).replace('_', ' ').title()} · {grades}",

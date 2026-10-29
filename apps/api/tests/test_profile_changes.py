@@ -293,7 +293,7 @@ def test_conflicting_or_missing_book_editions_are_named(
 
     source_id, book_id, chapter_id = _second_edition("physics", 11)
     try:
-        conflict = "Section 1: the catalogue has 2 Class XI Physics book editions ("
+        conflict = "Section 1: the catalogue has 2 Class 11 Physics book editions ("
         ready = client.get(f"/v1/mocks/{code}/readiness", headers=learner.headers).json()
         assert ready["ready"] is False and ready["problems"][0].startswith(conflict)
         assert "Fixture: technical second edition" in ready["problems"][0]
@@ -329,5 +329,5 @@ def test_conflicting_or_missing_book_editions_are_named(
         problems = profiles.catalogue_problems(s, [{"subject": "physics", "grades": [11, 12], "questions": 3}])
         s.rollback()
     assert problems == [
-        "Section 1: the catalogue has no Class XII Physics book, so this section has nothing to draw from."
+        "Section 1: the catalogue has no Class 12 Physics book, so this section has nothing to draw from."
     ]

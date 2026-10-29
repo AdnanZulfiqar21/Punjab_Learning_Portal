@@ -36,7 +36,7 @@ def _passage(db: Session, item: ContentItem, passage_id: str, *, for_publication
         return ["The question names a passage that doesn't exist."]
     errors = []
     if (p.grade_number, p.subject_code) != (item.grade_number, item.subject_code):
-        errors.append("The passage belongs to another class or subject; Class XI and XII are never mixed.")
+        errors.append("The passage belongs to another class or subject; Class 11 and 12 are never mixed.")
     if for_publication and p.availability != Availability.live.value:
         errors.append("Publish the passage first: a question can only use a reviewed, live passage.")
     return errors

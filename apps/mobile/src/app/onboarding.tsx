@@ -16,8 +16,8 @@ type Stream = NonNullable<ProfileInput["stream"]>;
 type Language = NonNullable<ProfileInput["explanation_language"]>;
 
 const GRADES = [
-  [11, "Class XI"],
-  [12, "Class XII"],
+  [11, "Class 11"],
+  [12, "Class 12"],
 ] as const;
 const STREAMS: readonly (readonly [Stream | "", string])[] = [
   ["pre_medical", "Pre-Medical"],

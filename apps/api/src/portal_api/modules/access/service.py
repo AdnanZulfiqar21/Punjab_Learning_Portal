@@ -114,7 +114,7 @@ def _label(db: Session, need: Need) -> str:
     from portal_api.modules.curriculum.models import Subject
 
     names = {s.code: s.name for s in db.scalars(select(Subject).where(Subject.code.in_({s for _, s in need.pairs})))}
-    return " and ".join(f"Class {'XI' if g == 11 else 'XII'} {names.get(s, s.title())}" for g, s in sorted(need.pairs))
+    return " and ".join(f"Class {'11' if g == 11 else '12'} {names.get(s, s.title())}" for g, s in sorted(need.pairs))
 
 
 def entitled_for(db: Session, user_id: uuid.UUID, need: Need | None) -> bool:

@@ -84,7 +84,7 @@ async function Products() {
                   {p.kind === "platform"
                     ? "everything in the active scope"
                     : [
-                        scope.grades?.length ? `Class ${scope.grades.map((g) => (g === 11 ? "XI" : "XII")).join(" and ")}` : "",
+                        scope.grades?.length ? `Class ${scope.grades.map((g) => (g === 11 ? "11" : "12")).join(" and ")}` : "",
                         (scope.subjects ?? []).map((s) => subjects.get(s) ?? s).join(", "),
                         (scope.exams ?? []).join(", "),
                       ]

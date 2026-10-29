@@ -9,7 +9,7 @@ and the three progress meters, each with its definition. The meters stay separat
 * **Demonstrated knowledge** = topics classified `demonstrated` under `evidence_rules_v2` ÷ topics in those books;
   "not enough evidence yet" until at least one of those topics has enough evidence to be classified.
 
-A missing profile or a zero denominator gives an explanation instead of a percentage. Class XI and XII are never
+A missing profile or a zero denominator gives an explanation instead of a percentage. Class 11 and 12 are never
 mixed: the scope is the profile's one class.
 """
 
@@ -260,7 +260,7 @@ def build(db: Session, user_id: uuid.UUID) -> dict[str, Any]:
     report = progress.report(db, user_id)  # also syncs the notebook, so the revision counts below are current
     now: datetime = db.execute(select(func.now())).scalar_one()
     p = db.get(StudentProfile, user_id)
-    grade = p.grade if p is not None and p.subjects else None  # one class only: XI and XII are never mixed
+    grade = p.grade if p is not None and p.subjects else None  # one class only: 11 and 12 are never mixed
     subjects = list(p.subjects) if p is not None and grade else []
     chapters = [c for s in subjects for c in forms._book_chapters(db, grade, s)] if grade else []
     return {

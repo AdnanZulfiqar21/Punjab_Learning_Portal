@@ -43,10 +43,10 @@ async function Welcome() {
   return (
     <div className="space-y-10">
       <section className="space-y-4">
-        <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">Study Class XI and XII the way your textbook does.</h1>
+        <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">Study Class 11 and 12 the way your textbook does.</h1>
         <p className="max-w-2xl text-lg text-muted">
           Every chapter and topic is organised from the official Punjab textbooks, with page references back to the book.
-          Class XI and Class XII stay separate, so you always know exactly which book you are studying.
+          Class 11 and Class 12 stay separate, so you always know exactly which book you are studying.
         </p>
         <div className="flex flex-wrap gap-3">
           <Link
@@ -63,7 +63,7 @@ async function Welcome() {
       {(d?.ambiguous_editions.length ?? 0) > 0 && (
         <Notice tone="warn" title="More than one edition is effective today">
           {d?.ambiguous_editions
-            .map((a) => `${a.grade === 11 ? "Class XI" : a.grade === 12 ? "Class XII" : `Class ${a.grade}`} ${a.subject_name}`)
+            .map((a) => `${a.grade === 11 ? "Class 11" : a.grade === 12 ? "Class 12" : `Class ${a.grade}`} ${a.subject_name}`)
             .join("; ")}
           . None of those books is shown, because the portal does not choose an edition for you.
         </Notice>

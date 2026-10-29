@@ -92,7 +92,7 @@ async function TopicView({ id, view }: { id: string; view: "read" | "lecture" })
   // BOOK-EXERCISES-01: the end-of-chapter exercise is solved in Practice; an old link or a search hit goes there.
   if (reading.kind === "exercise") redirect(`/practice/exercises/${reading.topic_id}`);
   // BOOK-HEADING-01: where the book prints only this topic's heading and runs straight into its first subtopic
-  // (Chemistry XI 14.4 into 14.4.1), the page goes on with that subtopic under its own heading instead of staying empty.
+  // (Chemistry 11 14.4 into 14.4.1), the page goes on with that subtopic under its own heading instead of staying empty.
   const headingOnly = isHeadingOnly(reading);
   let cont: TopicReading | null = null;
   if (headingOnly && reading.next_topic_id) {

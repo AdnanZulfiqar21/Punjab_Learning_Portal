@@ -80,7 +80,7 @@ def test_without_a_covering_plan_a_pack_has_previews_only(
     crew: dict[str, Staff],  # noqa: F811
     pack_pool: dict[str, Any],
 ) -> None:
-    premium, chapter = _published(client, db, crew)  # a premium Class XI Biology lesson
+    premium, chapter = _published(client, db, crew)  # a premium Class 11 Biology lesson
     preview, _ = _published(client, db, crew)
     tier = _post(
         client, crew["publisher"], preview["id"], "access-tier", {"tier": "preview", "reason": "Fixture: free preview"}

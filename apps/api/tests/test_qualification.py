@@ -20,7 +20,7 @@ from portal_api import qualification as q
 from tests import test_content_workflow
 from tests.test_content_workflow import FIXTURE_BODY, Staff, _confirm_rights, _post, _refs, _save, _submitted
 
-team = test_content_workflow.team  # the Class XI Biology staff fixture
+team = test_content_workflow.team  # the Class 11 Biology staff fixture
 
 APPROVE = {"decision": "approve", "comment": "Checked against source pages"}
 COMMIT = "a" * 40  # a fixture commit, not a real measured build

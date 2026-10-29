@@ -18,7 +18,7 @@ const urdu = Noto_Nastaliq_Urdu({ variable: "--font-urdu", subsets: ["arabic"], 
 export const metadata: Metadata = {
   title: { default: "Punjab Learning Portal", template: "%s · Punjab Learning Portal" },
   description:
-    "Class XI and Class XII Biology, Chemistry, Physics, Computer Science and Mathematics for Punjab, organised by the official textbooks.",
+    "Class 11 and Class 12 Biology, Chemistry, Physics, Computer Science and Mathematics for Punjab, organised by the official textbooks.",
 };
 
 export const viewport: Viewport = {
@@ -93,7 +93,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </main>
         <footer className="border-t border-border bg-surface">
           <p className="mx-auto max-w-5xl px-4 py-5 text-sm text-muted">
-            Organised by the official Punjab Class XI and XII textbooks. Lessons, videos and tests are published only after
+            Organised by the official Punjab Class 11 and 12 textbooks. Lessons, videos and tests are published only after
             academic review.
           </p>
         </footer>

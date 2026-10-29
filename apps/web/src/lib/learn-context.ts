@@ -1,4 +1,4 @@
-// Learn context on the web (Class XI Biology Chapter 1 pilot): which class and study group the Learn page shows, and
+// Learn context on the web (Class 11 Biology Chapter 1 pilot): which class and study group the Learn page shows, and
 // the reader language. Same rules as the app (apps/mobile/src/lib/learn-context-core.ts): class and group are separate
 // choices, a signed-in learner's profile wins, and a guest's choice is kept in a small cookie with no personal data.
 
@@ -12,8 +12,8 @@ export const LANGUAGE_COOKIE = "portal-reading-language";
 export const PREFS_MAX_AGE_S = 60 * 60 * 24 * 365;
 
 export const GRADES: readonly (readonly [Grade, string])[] = [
-  [11, "Class XI"],
-  [12, "Class XII"],
+  [11, "Class 11"],
+  [12, "Class 12"],
 ];
 export const STREAMS: readonly (readonly [Stream, string, string])[] = [
   ["pre_medical", "Pre-Medical", "Biology, Chemistry, Physics"],
@@ -25,7 +25,7 @@ export const STREAM_SUBJECTS: Record<Stream, string[]> = {
   pre_engineering: ["mathematics", "chemistry", "physics"],
   ics: ["computer_science", "mathematics", "physics"],
 };
-export const GRADE_LABEL: Record<Grade, string> = { 11: "Class XI", 12: "Class XII" };
+export const GRADE_LABEL: Record<Grade, string> = { 11: "Class 11", 12: "Class 12" };
 export const STREAM_LABEL: Record<Stream, string> = { pre_medical: "Pre-Medical", pre_engineering: "Pre-Engineering", ics: "ICS" };
 export const READING_LANGUAGES: readonly (readonly [ReadingLanguage, string])[] = [
   ["en", "English"],

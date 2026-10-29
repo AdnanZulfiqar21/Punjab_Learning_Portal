@@ -33,7 +33,7 @@ export function OnboardingForm({ profile }: { profile: Profile | null }) {
           {[11, 12].map((g) => (
             <label key={g} className="flex items-center gap-2 rounded-lg border border-border bg-surface px-4 py-2.5">
               <input type="radio" name="grade" value={g} defaultChecked={profile?.grade === g} required />
-              Class {g === 11 ? "XI" : "XII"}
+              Class {g === 11 ? "11" : "12"}
             </label>
           ))}
         </div>

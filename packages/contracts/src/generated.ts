@@ -781,7 +781,7 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Grades → subjects → books (Class XI and XII separate) */
+        /** Grades → subjects → books (Class 11 and 12 separate) */
         get: operations["catalogue_v1_catalogue_get"];
         put?: never;
         post?: never;
@@ -6995,7 +6995,7 @@ export interface components {
             question_count: number;
             /**
              * Scope
-             * @description chapters: the chosen chapters; half_book: first or second half of the book by chapter order; full_book: every chapter of this class's book; combined: the same subject's Class XI and XII books; multi_subject: custom practice from two to five subjects' whole books in this class, counts from `mix`
+             * @description chapters: the chosen chapters; half_book: first or second half of the book by chapter order; full_book: every chapter of this class's book; combined: the same subject's Class 11 and 12 books; multi_subject: custom practice from two to five subjects' whole books in this class, counts from `mix`
              * @default chapters
              * @enum {string}
              */
@@ -11776,6 +11776,8 @@ export interface components {
         };
         /** TopicNode */
         TopicNode: {
+            /** Book Number */
+            book_number?: string | null;
             /** Children */
             children: components["schemas"]["TopicNode"][];
             /** Depth */

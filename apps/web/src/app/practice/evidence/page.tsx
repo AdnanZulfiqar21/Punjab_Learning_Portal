@@ -43,8 +43,8 @@ async function Report({ grade, subject }: { grade: number; subject: string }) {
     <div className="space-y-4">
       <form method="get" className="flex flex-wrap items-end gap-2" aria-label="Choose class and subject">
         <select name="grade" defaultValue={String(grade)} aria-label="Class" className="rounded-lg border border-border bg-surface px-3 py-2">
-          <option value="11">Class XI</option>
-          <option value="12">Class XII</option>
+          <option value="11">Class 11</option>
+          <option value="12">Class 12</option>
         </select>
         <select name="subject" defaultValue={subject} aria-label="Subject" className="rounded-lg border border-border bg-surface px-3 py-2">
           {SUBJECTS.map(([k, v]) => (

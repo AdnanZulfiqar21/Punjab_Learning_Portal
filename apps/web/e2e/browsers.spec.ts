@@ -7,7 +7,7 @@ const AUTH = { timeout: 20_000 };
 
 test("browse to a chapter and read a free preview lesson", async ({ page }) => {
   await page.goto("/learn");
-  await page.getByRole("region", { name: "Class XI", exact: true }).getByRole("link", { name: /Biology/ }).click();
+  await page.getByRole("region", { name: "Class 11", exact: true }).getByRole("link", { name: /Biology/ }).click();
   await expect(page).toHaveURL(/\/learn\/11\/biology$/, AUTH);
   await page.getByRole("link", { name: /Chapter 1(?!\d)/ }).first().click();
   const lessons = page.getByRole("region", { name: "Lessons" });

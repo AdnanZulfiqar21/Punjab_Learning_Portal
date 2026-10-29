@@ -1,4 +1,4 @@
-// Reader language (Class XI Biology Chapter 1 pilot): English or Roman Urdu explanations. Pure rules for tests.
+// Reader language (Class 11 Biology Chapter 1 pilot): English or Roman Urdu explanations. Pure rules for tests.
 //
 // A lesson's Roman Urdu variant is a full explanation written for the topic, stored as its own content item and
 // version (language `roman_ur`, grouped with the English item by concept). The API answers in the requested language

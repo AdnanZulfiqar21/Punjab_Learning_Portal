@@ -1,8 +1,8 @@
 """Learning concepts (outcomes) and prerequisites (roadmap P05.S1.T2; CONCEPTS-01).
 
 A **concept** is a canonical learning outcome: written once (stable `code`, title, outcome statement, subject) and
-**mapped** to the topics that teach it in any edition or course, so a concept taught in Class XI and revisited in Class
-XII is one record with two mappings, never a duplicate. Mapping a topic needs a content role in that topic's class and
+**mapped** to the topics that teach it in any edition or course, so a concept taught in Class 11 and revisited in Class
+12 is one record with two mappings, never a duplicate. Mapping a topic needs a content role in that topic's class and
 subject, and only topics of the concept's subject can be mapped.
 
 **Prerequisites** are edges "concept A needs concept B". The graph stays acyclic (an edge that would close a cycle is

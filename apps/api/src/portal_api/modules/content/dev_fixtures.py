@@ -1,6 +1,6 @@
 """Development/test-only practice fixtures (portal-dev-seed-practice).
 
-Creates a handful of clearly labelled technical-fixture MCQs in one Class XI Biology chapter and marks them live, so
+Creates a handful of clearly labelled technical-fixture MCQs in one Class 11 Biology chapter and marks them live, so
 the learner practice journey (form → attempt → saves → submit → results) can be exercised end to end in local
 development and in CI's disposable database. The text says it is a technical fixture and is not academic content.
 
@@ -62,7 +62,7 @@ def _fixture_pdf() -> bytes:
 
 
 def _fixture_asset(db: Session, author_id: uuid.UUID, kind: str, title: str, data: bytes) -> str:
-    """Archive a synthetic fixture file as Class XI Biology (ASSETS-01) and return its version ID."""
+    """Archive a synthetic fixture file as Class 11 Biology (ASSETS-01) and return its version ID."""
     from portal_api.modules.content import assets
 
     asset = assets.Asset(kind=kind, title=f"{FIXTURE_PREFIX} {title}", grade_number=11, subject_code="biology",
@@ -382,7 +382,7 @@ def main(argv: list[str] | None = None) -> int:
         )
         db.commit()
     total = COUNT + 2 * WRITTEN_COUNT + 5
-    print(f"practice fixtures: {created} created, {total - created} already present (Class XI Biology, first chapter)")
+    print(f"practice fixtures: {created} created, {total - created} already present (Class 11 Biology, first chapter)")
     return 0
 
 

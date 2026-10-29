@@ -41,8 +41,8 @@ async function Plan({ grade, subject, target, minutes }: { grade: string; subjec
   const form = (
     <form method="get" className="flex flex-wrap items-end gap-2" aria-label="Plan settings">
       <select name="grade" defaultValue={grade} aria-label="Class" className={field}>
-        <option value="11">Class XI</option>
-        <option value="12">Class XII</option>
+        <option value="11">Class 11</option>
+        <option value="12">Class 12</option>
       </select>
       <select name="subject" defaultValue={subject} aria-label="Subject" className={field}>
         {SUBJECTS.map(([k, v]) => (

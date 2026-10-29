@@ -461,7 +461,7 @@ def main() -> None:  # pragma: no cover - thin CLI wrapper
 # ------------------------------------------------------------------ references from content (P07.S1.T1)
 REF_KIND = {"diagram": "image", "handout": "handout"}
 _KIND_NAME = {"image": "an image", "handout": "a PDF handout"}
-_CLASS = {11: "Class XI", 12: "Class XII"}
+_CLASS = {11: "Class 11", 12: "Class 12"}
 
 
 def block_refs(body: object) -> list[tuple[str, str, str]]:
@@ -494,7 +494,7 @@ def block_refs(body: object) -> list[tuple[str, str, str]]:
 
 def check_references(db: Session, grade: int, subject: str, body: object) -> list[str]:
     """Every archived asset a body names must exist, be the right kind, have a ready delivery copy and belong to the
-    same class and subject as the content: Class XI and XII material is never mixed."""
+    same class and subject as the content: Class 11 and 12 material is never mixed."""
     problems = []
     for where, vid, kind in block_refs(body):
         v = resolve(db, vid)
@@ -507,7 +507,7 @@ def check_references(db: Session, grade: int, subject: str, body: object) -> lis
         if (asset.grade_number, asset.subject_code) != (grade, subject):
             problems.append(
                 f"The {where} names '{asset.title}' from {_CLASS.get(asset.grade_number, asset.grade_number)} "
-                f"{asset.subject_code}; Class XI and XII (and different subjects) are never mixed."
+                f"{asset.subject_code}; Class 11 and 12 (and different subjects) are never mixed."
             )
         if v.delivery_state != "ready":
             problems.append(f"The {where} names '{asset.title}' version {v.number}, which has no delivery copy.")

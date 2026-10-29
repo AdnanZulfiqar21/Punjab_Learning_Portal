@@ -8,7 +8,7 @@ channel**, so a price change never rewrites what was sold, and an entitlement ke
   never touches entitlements already granted. To change what an active product contains, retire it and define a new
   one.
 * Scope is checked against the live catalogue: grades 11 and 12 only, subjects that have a book in that grade, and
-  exam codes that have an exam profile. Class XI and XII stay distinct (a package names its grades).
+  exam codes that have an exam profile. Class 11 and 12 stay distinct (a package names its grades).
 * Prices are append-only versions in integer minor units with an ISO 4217 currency code, per channel. Today the only
   channel is `web` (decision D02 default: fixed-duration one-time purchases on the web; store subscriptions wait on
   D04). The current price is the latest version that has started; a version can withdraw the product from sale.

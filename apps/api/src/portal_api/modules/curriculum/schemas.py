@@ -102,6 +102,8 @@ class BookOut(BaseModel):
 class TopicNode(BaseModel):
     id: uuid.UUID
     number: str | None
+    # BOOK-NUMBER-01: the number the book prints, only when it differs from `number` (a misprinted heading).
+    book_number: str | None = None
     title: str
     # BOOK-EXERCISES-01: "exercise" is the chapter's end-of-chapter exercise, listed in Practice, not in Learn.
     kind: Literal["topic", "exercise"]

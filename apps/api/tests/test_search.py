@@ -98,7 +98,7 @@ def test_lesson_text_is_searched_only_where_the_caller_may_read_it(client: TestC
     no_plan = Staff(client, db, [])
     assert _lesson_hits(_search(client, f"bodyword{tok}", no_plan), item["id"]) == []
 
-    # A learner whose plan covers Class XI Biology finds the text, with a snippet that marks the match.
+    # A learner whose plan covers Class 11 Biology finds the text, with a snippet that marks the match.
     learner = Staff(client, db, [])
     assert client.post("/v1/me/trial", headers=learner.headers).status_code == 200
     found = _lesson_hits(_search(client, f"bodyword{tok}", learner), item["id"])
@@ -117,7 +117,7 @@ def test_lesson_text_is_searched_only_where_the_caller_may_read_it(client: TestC
     assert _lesson_hits(_search(client, f"bodyword{tok}", physics_only), item["id"]) == []
     assert _lesson_hits(_search(client, f"searchtitle{tok}", physics_only), item["id"])[0]["locked"]
 
-    # Filters: Class XII never shows a Class XI lesson; older clients that don't ask for lessons get none.
+    # Filters: Class 12 never shows a Class 11 lesson; older clients that don't ask for lessons get none.
     assert _lesson_hits(_search(client, f"bodyword{tok}", learner, grade=12), item["id"]) == []
     assert _lesson_hits(_search(client, f"bodyword{tok}", learner, subject="physics"), item["id"]) == []
     old = client.get("/v1/search", params={"q": f"searchtitle{tok}"}, headers=learner.headers)
@@ -188,7 +188,7 @@ def test_alias_groups_need_a_second_person_and_then_widen_search(client: TestCli
         {"language": "roman_ur", "text": roman},
         {"language": "ur", "text": urdu},
     ]
-    # Script must match the language, a form can't repeat, and staff outside Class XI Biology can't propose.
+    # Script must match the language, a form can't repeat, and staff outside Class 11 Biology can't propose.
     assert _propose(client, crew["author"], [forms[0], {"language": "ur", "text": "latin"}]).status_code == 422
     assert _propose(client, crew["author"], [forms[0], {"language": "roman_ur", "text": urdu}]).status_code == 422
     assert _propose(client, crew["author"], [forms[0], {"language": "en", "text": english}]).status_code == 422
