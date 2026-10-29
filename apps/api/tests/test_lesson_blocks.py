@@ -121,21 +121,21 @@ def test_diagrams_and_handouts_reach_learners_only_through_their_lesson(client: 
     handout = _upload(client, team["author"], _asset(client, team["author"], "handout")["id"], _pdf(1)).json()
     unrelated = _upload(client, team["author"], _asset(client, team["author"], "image")["id"], _jpeg_with_gps()).json()
     other = Staff(client, db, ["content_author"], {"grades": [12], "subjects": ["biology"]})
-    body = {"kind": "image", "title": "Fixture XII", "grade": 12, "subject": "biology"}
+    body = {"kind": "image", "title": "Fixture 12", "grade": 12, "subject": "biology"}
     xii_asset = client.post("/v1/studio/assets", headers=other.headers, json=body).json()
     xii = _upload(client, other, xii_asset["id"], _jpeg_with_gps()).json()
 
     diagram = {"type": "diagram", "asset_version_id": image["id"], "alt": "Fixture labelled cell", "caption": "Fig."}
     sheet = {"type": "handout", "asset_version_id": handout["id"], "title": "Fixture worksheet"}
 
-    # Class XI and XII are never mixed, and a diagram must name an image (not a handout).
+    # Class 11 and 12 are never mixed, and a diagram must name an image (not a handout).
     wrong = _create(client, team["author"], chapter, title="Fixture lesson with wrong assets")
     bad = [{**diagram, "asset_version_id": xii["id"]}, {**diagram, "asset_version_id": handout["id"]}]
     assert _save(client, team["author"], wrong, body={"blocks": bad}, refs=_refs(chapter, doc)).status_code == 200
     refused = _publish(client, team, wrong)
     assert refused.status_code == 422, refused.text
     errors = " ".join(refused.json()["errors"])
-    assert "Class XII" in errors and "isn't an image" in errors
+    assert "Class 12" in errors and "isn't an image" in errors
 
     # ANSWER-FIGURE-01: a self-check's drawn answer is an archived image of the same class, served with the lesson.
     drawn = _upload(client, team["author"], _asset(client, team["author"], "image")["id"], _jpeg_with_gps()).json()

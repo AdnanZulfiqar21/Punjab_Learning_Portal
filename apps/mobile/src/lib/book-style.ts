@@ -1,4 +1,4 @@
-// BOOK-STYLE-01: a premium reading style for one book at a time (owner, 2026-10-28: Class XI Computer Science first).
+// BOOK-STYLE-01: a premium reading style for one book at a time (owner, 2026-10-28: Class 11 Computer Science first).
 // The printed words never change; only how they are drawn: a list item that starts with a term and a colon
 // ("Interviews and Surveys: Asking questions …") shows the term bold in the subject colour, and a short lead-in line
 // ("Key activities in this phase include:", "Example:") is set as a small heading. Identical in apps/web and

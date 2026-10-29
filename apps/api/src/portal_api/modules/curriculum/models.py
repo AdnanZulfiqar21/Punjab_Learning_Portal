@@ -1,6 +1,6 @@
 """Curriculum and source domain (roadmap §5.2 Curriculum/Mapping, P05.S1).
 
-Class XI and Class XII are separate BookEdition rows with separate stable IDs; a chapter number or subject name
+Class 11 and Class 12 are separate BookEdition rows with separate stable IDs; a chapter number or subject name
 alone is never an identifier. Every chapter/topic keeps its source reference (PDF page; printed pages where known).
 """
 

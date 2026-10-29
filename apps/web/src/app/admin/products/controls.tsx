@@ -99,7 +99,7 @@ export function NewProduct({ subjects }: { subjects: { code: string; name: strin
           {[11, 12].map((g) => (
             <label key={g} className="flex items-center gap-2">
               <input type="checkbox" checked={grades.includes(g)} onChange={() => setGrades(toggle(grades, g))} />
-              Class {g === 11 ? "XI" : "XII"}
+              Class {g === 11 ? "11" : "12"}
             </label>
           ))}
         </div>

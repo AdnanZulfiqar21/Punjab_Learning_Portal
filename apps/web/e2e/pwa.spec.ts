@@ -21,7 +21,7 @@ test("the manifest is installable and its icons exist", async ({ request }) => {
 test("offline: the banner says so, pages fall back to the offline page, and only that page is cached", async ({ page, context }) => {
   test.setTimeout(90_000);
   await page.goto("/learn");
-  await expect(page.getByRole("region", { name: "Class XI", exact: true })).toBeVisible({ timeout: 20_000 });
+  await expect(page.getByRole("region", { name: "Class 11", exact: true })).toBeVisible({ timeout: 20_000 });
   const ready = await page
     .evaluate(() =>
       Promise.race([
@@ -47,5 +47,5 @@ test("offline: the banner says so, pages fall back to the offline page, and only
   expect(cached).toEqual(["/offline.html"]);
   await context.setOffline(false);
   await page.goto("/learn");
-  await expect(page.getByRole("region", { name: "Class XI", exact: true })).toBeVisible({ timeout: 20_000 });
+  await expect(page.getByRole("region", { name: "Class 11", exact: true })).toBeVisible({ timeout: 20_000 });
 });

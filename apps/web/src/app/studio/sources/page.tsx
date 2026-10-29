@@ -57,7 +57,7 @@ async function Body() {
                   <span className="font-medium">{n.title}</span>
                   <Badge tone={n.status === "open" ? "warn" : n.status === "accepted" ? "ok" : "info"}>{n.status}</Badge>
                   <span className="text-muted">
-                    Class {n.grade === 11 ? "XI" : "XII"} {n.subject.replace("_", " ")} · logged {date(n.logged_at)} · {n.live_items_in_scope} live items in scope
+                    Class {n.grade === 11 ? "11" : "12"} {n.subject.replace("_", " ")} · logged {date(n.logged_at)} · {n.live_items_in_scope} live items in scope
                   </span>
                 </p>
                 <p>{n.summary}</p>
@@ -95,7 +95,7 @@ async function Body() {
                   {s.original_stored ? <Badge tone="ok">original stored</Badge> : <Badge>original not stored</Badge>}
                 </p>
                 <p className="text-muted">
-                  {s.source_id} · Class {s.grade_number === 11 ? "XI" : "XII"} {s.subject_code.replace("_", " ")} · {s.pdf_pages} pages ·{" "}
+                  {s.source_id} · Class {s.grade_number === 11 ? "11" : "12"} {s.subject_code.replace("_", " ")} · {s.pdf_pages} pages ·{" "}
                   {s.last_reviewed_at ? `last reviewed ${date(s.last_reviewed_at)}` : "never reviewed"}
                 </p>
                 {reviewer && <ReviewSourceButton id={s.id} label={s.source_id} />}

@@ -1,5 +1,5 @@
 """OCT9-03: progress buckets use each frozen question's class and subject, not the form's label. A mixed mock or a
-combined XI+XII test counts in every bucket it touches, with its overall result kept separately.
+combined 11+12 test counts in every bucket it touches, with its overall result kept separately.
 Fixture questions only."""
 
 from __future__ import annotations
@@ -79,7 +79,7 @@ def test_a_mixed_mock_counts_in_each_class_and_subject(
 def test_a_combined_test_reports_each_class(client: TestClient, physics: dict[str, Any]) -> None:
     _publish(client, 12, "physics", 2)
     learner = _learner(client)
-    for _ in range(20):  # sampling is random: use the first combined test that includes Class XII questions
+    for _ in range(20):  # sampling is random: use the first combined test that includes Class 12 questions
         form = client.post(
             "/v1/practice/forms",
             headers={**learner.headers, "Idempotency-Key": uuid.uuid4().hex},

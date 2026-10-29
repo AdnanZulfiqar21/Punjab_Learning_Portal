@@ -70,7 +70,7 @@ def test_every_book_is_listed_with_what_is_published(client: TestClient, db: Ses
 
 def test_filters(client: TestClient) -> None:
     xii = client.get(URL, params={"grade": 12}).json()
-    assert xii["books"] and {b["grade"] for b in xii["books"]} == {12}  # Class XI and XII never mixed
+    assert xii["books"] and {b["grade"] for b in xii["books"]} == {12}  # Class 11 and 12 never mixed
     eng = client.get(URL, params={"track": "pre_engineering"}).json()
     assert {b["subject"] for b in eng["books"]} == {"mathematics", "chemistry", "physics"}
     bio = client.get(URL, params={"subject": "biology", "grade": 11}).json()

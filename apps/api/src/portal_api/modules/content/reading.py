@@ -254,7 +254,7 @@ def _published_lesson(
 
 
 def _draft_lesson(variants: list[ContentItem], language: Language | None) -> TopicLessonOut | None:
-    # A draft may be the book's heading alone (Chemistry XI 14.4 runs straight into 14.4.1); it is still that topic's
+    # A draft may be the book's heading alone (Chemistry 11 14.4 runs straight into 14.4.1); it is still that topic's
     # lesson, and the reader goes on with the first subtopic under it (BOOK-HEADING-01). An empty draft is not.
     usable = [item for item in variants if _has_body(_working(item))]
     if not usable:

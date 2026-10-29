@@ -7,8 +7,8 @@ staff notes are never included.
 
 Schema version 2 (P06.S4.T2, EXPORT-02) adds the mappings and media references:
 
-* `concepts`: the subject's concepts mapped to this book's topics, each with its topic keys in this book only (Class XI
-  and XII are never mixed), its prerequisites by concept code (and bridging lesson) and its syllabus inclusion records;
+* `concepts`: the subject's concepts mapped to this book's topics, each with its topic keys in this book only (Class 11
+  and 12 are never mixed), its prerequisites by concept code (and bridging lesson) and its syllabus inclusion records;
 * `assets`: every archived asset version an exported version's body names (diagrams, handouts, fallback images), with
   its kind, checksum, size, media type, delivery state and provenance. Files themselves are not in the document.
 """

@@ -79,7 +79,7 @@ function Builder({ token, initialGrade, initialSubject }: { token: string; initi
   const [chapters, setChapters] = useState<string[]>([]);
   // P11.S3.T1 (PRACTICE-CONFIG-01): optional topics inside the chosen chapters; any chosen limits the test to them.
   const [topics, setTopics] = useState<string[]>([]);
-  // P09.S1.T2 (SCOPES-01): halves follow the book's chapter order; "combined" is this subject's XI and XII books.
+  // P09.S1.T2 (SCOPES-01): halves follow the book's chapter order; "combined" is this subject's 11 and 12 books.
   const [cover, setCover] = useState<"chapters" | "half_1" | "half_2" | "full_book" | "combined">("chapters");
   const [count, setCount] = useState("10");
   const [immediate, setImmediate] = useState(false);
@@ -175,7 +175,7 @@ function Builder({ token, initialGrade, initialSubject }: { token: string; initi
                 ["half_1", "First half"],
                 ["half_2", "Second half"],
                 ["full_book", "Whole book"],
-                ["combined", "XI and XII together"],
+                ["combined", "11 and 12 together"],
               ] as const
             }
             selected={[cover]}

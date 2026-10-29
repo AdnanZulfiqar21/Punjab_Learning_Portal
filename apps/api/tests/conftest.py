@@ -96,7 +96,7 @@ def client(loaded_db: None) -> Iterator[TestClient]:
 
 @pytest.fixture(scope="session")
 def published_written(client: TestClient) -> dict[str, Any]:
-    """Publish two written questions (with rubrics) in one Class XII Chemistry chapter, plus a scoped reviewer.
+    """Publish two written questions (with rubrics) in one Class 12 Chemistry chapter, plus a scoped reviewer.
     Shared by the written-attempt, marking and access tests (technical fixtures in the test database only)."""
     from tests.test_content_workflow import Staff, _chapter, _confirm_rights, _post, _refs
     from tests.test_written_records import QUESTION, R_CHECKS, W_CHECKS, _rubric
@@ -165,7 +165,7 @@ def published_written(client: TestClient) -> dict[str, Any]:
 
 @pytest.fixture(scope="session")
 def physics(client: TestClient) -> dict[str, Any]:
-    """POOL fixture questions in the first Class XI Physics chapter, published once per test session.
+    """POOL fixture questions in the first Class 11 Physics chapter, published once per test session.
 
     OCT9-05: this used to be module-scoped and re-imported by many modules, so every module published another POOL
     questions into the same chapter and exact pool counts depended on module order. Tests that change these items

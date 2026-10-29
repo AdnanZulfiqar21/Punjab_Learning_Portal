@@ -1,7 +1,7 @@
 import { expect, test, type Page } from "@playwright/test";
 import { audit } from "./helpers/a11y";
 
-// Class XI Biology Chapter 1 pilot: choose class then group on Learn; a topic page that is honest when nothing is
+// Class 11 Biology Chapter 1 pilot: choose class then group on Learn; a topic page that is honest when nothing is
 // published; and, for staff who cover the subject, the draft read in English and Roman Urdu at the same place.
 // The chapter and topic IDs are stable catalogue IDs. The pilot drafts come from content/tools/import_lessons.py
 // (CI runs it after the development seed); they are private drafts, never published by these tests.
@@ -21,23 +21,23 @@ async function signInStaff(page: Page, email: string) {
 test("a guest chooses a class and a study group and sees only that class's books for it", async ({ page }) => {
   await page.goto("/learn");
   const chooser = page.getByRole("form", { name: "What are you studying?" });
-  await expect(chooser.getByRole("radio", { name: "Class XI", exact: true })).toBeVisible();
-  // Every book is still listed, Class XI and XII apart, until a class and group are chosen.
-  await expect(page.getByRole("region", { name: "Class XI", exact: true })).toBeVisible();
-  await chooser.getByRole("radio", { name: "Class XI", exact: true }).check();
+  await expect(chooser.getByRole("radio", { name: "Class 11", exact: true })).toBeVisible();
+  // Every book is still listed, Class 11 and 12 apart, until a class and group are chosen.
+  await expect(page.getByRole("region", { name: "Class 11", exact: true })).toBeVisible();
+  await chooser.getByRole("radio", { name: "Class 11", exact: true }).check();
   await chooser.getByRole("radio", { name: "Pre-Medical" }).check();
   await chooser.getByRole("button", { name: "Show my subjects" }).click();
 
-  await expect(page.getByText("Class XI · Pre-Medical")).toBeVisible(AUTH);
+  await expect(page.getByText("Class 11 · Pre-Medical")).toBeVisible(AUTH);
   const subjects = page.getByRole("region", { name: "Your subjects" });
   for (const name of ["Biology", "Chemistry", "Physics"]) await expect(subjects.getByRole("link", { name: new RegExp(`^${name}`) })).toBeVisible();
   await expect(subjects.getByRole("link", { name: /Computer Science/ })).toHaveCount(0);
-  await expect(page.getByRole("region", { name: "Class XII", exact: true })).toHaveCount(0);
+  await expect(page.getByRole("region", { name: "Class 12", exact: true })).toHaveCount(0);
   await expect(page.getByText("Chosen on this device")).toBeVisible();
 
   // The choice is kept on this device, and can be changed.
   await page.goto("/learn");
-  await expect(page.getByText("Class XI · Pre-Medical")).toBeVisible();
+  await expect(page.getByText("Class 11 · Pre-Medical")).toBeVisible();
   await page.getByRole("link", { name: "Change class or study group" }).click();
   await expect(page.getByRole("form", { name: "What are you studying?" })).toBeVisible();
   await expect(page.getByRole("radio", { name: "Pre-Medical" })).toBeChecked();

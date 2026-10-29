@@ -2,7 +2,7 @@ import { readFile } from "node:fs/promises";
 import { expect, test, type Browser, type Page } from "@playwright/test";
 import { png, zip } from "./helpers/zip";
 
-// Staff studio journeys (P06) using the development fixtures from `portal-dev-seed-staff` (Class XI Biology scope).
+// Staff studio journeys (P06) using the development fixtures from `portal-dev-seed-staff` (Class 11 Biology scope).
 // Lesson text here is a technical fixture. Publication rights stay UNVERIFIED in development, so nothing published
 // here can reach learners; the publish attempt is expected to be blocked by the rights gate.
 const PASSWORD = "studio-fixture-pass-1";
@@ -41,7 +41,7 @@ test("an author drafts with autosave and submits for review", async ({ browser }
   title = `Fixture lesson ${Date.now()}`; // unique per run; later tests in this serial group use it
   const page = await signIn(browser, "studio-author@example.com");
   await page.getByRole("link", { name: "New draft" }).click();
-  await page.getByLabel("Book").selectOption({ label: "Class XI Biology" });
+  await page.getByLabel("Book").selectOption({ label: "Class 11 Biology" });
   await page.getByLabel("Chapter", { exact: true }).selectOption({ index: 1 });
   await page.getByLabel("Title").fill(title);
   await page.getByRole("button", { name: "Create draft" }).click();
@@ -98,7 +98,7 @@ test("an independent reviewer approves; the rights gate blocks publication", asy
 test("concurrent edits never overwrite each other", async ({ browser }) => {
   const a = await signIn(browser, "studio-author@example.com");
   await a.getByRole("link", { name: "New draft" }).click();
-  await a.getByLabel("Book").selectOption({ label: "Class XI Biology" });
+  await a.getByLabel("Book").selectOption({ label: "Class 11 Biology" });
   await a.getByLabel("Chapter", { exact: true }).selectOption({ index: 2 });
   await a.getByLabel("Title").fill(`${title} (concurrency)`);
   await a.getByRole("button", { name: "Create draft" }).click();
@@ -127,7 +127,7 @@ test("a question needs every review check before it can be approved", async ({ b
   const author = await signIn(browser, "studio-author@example.com");
   await author.getByRole("link", { name: "New draft" }).click();
   await author.getByLabel("Multiple-choice question").check();
-  await author.getByLabel("Book").selectOption({ label: "Class XI Biology" });
+  await author.getByLabel("Book").selectOption({ label: "Class 11 Biology" });
   await author.getByLabel("Chapter", { exact: true }).selectOption({ index: 1 });
   await author.getByLabel("Title").fill(qTitle);
   await author.getByRole("button", { name: "Create draft" }).click();
@@ -171,7 +171,7 @@ test("a written question gets a rubric that must reconcile with its marks", asyn
   const author = await signIn(browser, "studio-author@example.com");
   await author.getByRole("link", { name: "New draft" }).click();
   await author.getByLabel("Written question").check();
-  await author.getByLabel("Book").selectOption({ label: "Class XI Biology" });
+  await author.getByLabel("Book").selectOption({ label: "Class 11 Biology" });
   await author.getByLabel("Chapter", { exact: true }).selectOption({ index: 3 });
   await author.getByLabel("Title").fill(wTitle);
   await author.getByRole("button", { name: "Create draft" }).click();

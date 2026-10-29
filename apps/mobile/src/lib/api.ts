@@ -221,7 +221,7 @@ function getJSON<T>(path: string, signal?: AbortSignal): Promise<T> {
 
 export const api = {
   catalogue: (signal?: AbortSignal) => getJSON<Catalogue>("/v1/catalogue", signal),
-  /** P13.S2.T1: published lessons, previews and practice per book. Class XI and XII stay separate. */
+  /** P13.S2.T1: published lessons, previews and practice per book. Class 11 and 12 stay separate. */
   discovery: (filters: DiscoveryFilters, signal?: AbortSignal) => getJSON<Discovery>(discoveryPath(filters), signal),
   bookFor: (grade: number, subject: string, signal?: AbortSignal) =>
     getJSON<Book>(`/v1/grades/${grade}/subjects/${encodeURIComponent(subject)}/book`, signal),
@@ -501,7 +501,7 @@ export const api = {
     }),
 };
 
-export const GRADE_LABEL: Record<number, string> = { 11: "Class XI", 12: "Class XII" };
+export const GRADE_LABEL: Record<number, string> = { 11: "Class 11", 12: "Class 12" };
 
 export const SUBJECTS = [
   ["biology", "Biology"],

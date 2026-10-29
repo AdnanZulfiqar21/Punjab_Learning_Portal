@@ -1,6 +1,6 @@
 """PR #36/#38 review (NEW-11 to NEW-15): MFA on recheck rebase/expansion, crash-safe regrade job progress, open
 regrade cases under a superseding correction, explicit descendant policy when an ancestor is superseded, and
-order-independent cumulative chains. Real PostgreSQL; technical fixtures only (Class XII Physics chapters, so the
+order-independent cumulative chains. Real PostgreSQL; technical fixtures only (Class 12 Physics chapters, so the
 chemistry fixtures used elsewhere are untouched)."""
 
 from __future__ import annotations

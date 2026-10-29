@@ -29,7 +29,7 @@ test("an operator sees the written script lifecycle with the count behind every 
 // W06.S3.T2 (STAFFING-01): an operator's staffing figures decide whether new written tests can start, and the learner
 // is told honestly: "Marking is full" with no room, the promised turnaround with room. The figures are put back after.
 // This file runs in the staffing Playwright project, after every other project: the closed window is shared by every
-// Class XI Biology written start.
+// Class 11 Biology written start.
 test("staffing decides whether written tests start, and learners are told", async ({ page, browser, request }) => {
   test.slow();
   const API = process.env.PORTAL_API_INTERNAL_ORIGIN ?? "http://127.0.0.1:8100";
@@ -60,7 +60,7 @@ test("staffing decides whether written tests start, and learners are told", asyn
   await learner.getByRole("button", { name: "Start my free 30-day trial" }).click();
   await expect(learner.getByText(/Free trial until/)).toBeVisible(AUTH);
 
-  const form = page.getByRole("form", { name: "Change review staffing for Class XI Biology" });
+  const form = page.getByRole("form", { name: "Change review staffing for Class 11 Biology" });
   async function save(hours: string, fixed: string, minutes: string, reason: string) {
     await form.getByLabel("Productive marking hours a week").fill(hours);
     await form.getByLabel("Fixed obligations (hours a week)").fill(fixed);

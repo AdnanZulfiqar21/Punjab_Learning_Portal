@@ -21,7 +21,7 @@ def test_a_question_the_oldest_client_cannot_render_never_reaches_a_test(client:
         author = Staff(client, db, ["content_author"], scope)
         reviewer = Staff(client, db, ["subject_reviewer"], scope)
         publisher = Staff(client, db, ["publisher"], scope, mfa=True)
-        chapter, doc = _chapter(db, 11, "biology", 9)  # not Chemistry XI: its rights must stay unverified
+        chapter, doc = _chapter(db, 11, "biology", 9)  # not Chemistry 11: its rights must stay unverified
         _confirm_rights(client, db, doc)
     learner = _learner(client)
 

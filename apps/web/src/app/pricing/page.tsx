@@ -12,7 +12,7 @@ import { TIME_ZONE } from "@/lib/dates";
 // checkout: payments aren't connected (BLOCKERS B06), so nothing here can be bought yet, and the page says so.
 export const metadata: Metadata = {
   title: "Plans and prices",
-  description: "Plans for Class XI and XII, their full prices, what each covers, and the purchase terms.",
+  description: "Plans for Class 11 and 12, their full prices, what each covers, and the purchase terms.",
 };
 
 type Scope = { grades?: number[]; subjects?: string[]; exams?: string[] };
@@ -21,8 +21,8 @@ const subjectName = (code: string) => code.charAt(0).toUpperCase() + code.slice(
 
 function covers(p: Product): string {
   const s = p.scope as Scope;
-  if (p.kind === "platform") return "Every subject published for Class XI and Class XII, and every exam pattern";
-  const parts = (s.grades ?? []).flatMap((g) => (s.subjects ?? []).map((sub) => `Class ${g === 11 ? "XI" : "XII"} ${subjectName(sub)}`));
+  if (p.kind === "platform") return "Every subject published for Class 11 and Class 12, and every exam pattern";
+  const parts = (s.grades ?? []).flatMap((g) => (s.subjects ?? []).map((sub) => `Class ${g === 11 ? "11" : "12"} ${subjectName(sub)}`));
   return [...parts, ...(s.exams ?? []).map((x) => `${x} mock tests`)].join(", ");
 }
 

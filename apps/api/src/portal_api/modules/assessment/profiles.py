@@ -149,7 +149,7 @@ def parse_rules(raw: object, active_subjects: set[str]) -> tuple[ProfileRules | 
     return (rules if not errors else None), errors
 
 
-GRADE_NAMES = {11: "XI", 12: "XII"}
+GRADE_NAMES = {11: "11", 12: "12"}
 
 
 def catalogue_problems(db: Session, sections: list[dict[str, Any]]) -> list[str]:

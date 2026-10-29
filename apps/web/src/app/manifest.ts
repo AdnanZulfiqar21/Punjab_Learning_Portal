@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "Punjab Learning Portal",
     short_name: "Learning Portal",
-    description: "Class XI and XII Biology, Chemistry, Physics, Computer Science and Mathematics, organised by the official Punjab textbooks.",
+    description: "Class 11 and 12 Biology, Chemistry, Physics, Computer Science and Mathematics, organised by the official Punjab textbooks.",
     start_url: "/",
     scope: "/",
     display: "standalone",

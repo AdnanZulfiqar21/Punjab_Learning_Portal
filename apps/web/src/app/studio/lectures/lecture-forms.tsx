@@ -98,7 +98,7 @@ export function VoiceDecision({ id, status }: { id: string; status: string }) {
     <span className="flex w-full flex-wrap items-center gap-2">
       <input
         aria-label="Evidence for the decision"
-        placeholder="Evidence (e.g. listened to the sample; chosen for Class XI Biology)"
+        placeholder="Evidence (e.g. listened to the sample; chosen for Class 11 Biology)"
         value={evidence}
         onChange={(e) => setEvidence(e.target.value)}
         className={`${field} min-w-60 flex-1 py-1`}

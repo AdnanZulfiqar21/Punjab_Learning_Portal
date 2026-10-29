@@ -1,6 +1,6 @@
 """P16.S1.T2 (ACADEMIC-OVERVIEW-01): per-chapter coverage, pipeline, quarantines and pool sufficiency.
 
-Publishes its own fixture question in a Class XI Mathematics chapter so other modules' exact pool counts are not
+Publishes its own fixture question in a Class 11 Mathematics chapter so other modules' exact pool counts are not
 disturbed."""
 
 from __future__ import annotations

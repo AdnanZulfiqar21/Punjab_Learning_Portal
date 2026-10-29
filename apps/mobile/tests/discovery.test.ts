@@ -20,7 +20,7 @@ describe("discovery filters", () => {
     assert.equal(filtersActive({ availability: "all" }), false);
   });
 
-  it("keeps class XI and XII as separate known values and drops anything else", () => {
+  it("keeps class 11 and 12 as separate known values and drops anything else", () => {
     assert.equal(
       discoveryPath({ grade: "12", track: "ics", subject: "computer_science", exam: "mdcat", availability: "lessons" }),
       "/v1/discovery?grade=12&track=ics&subject=computer_science&exam=mdcat&availability=lessons",

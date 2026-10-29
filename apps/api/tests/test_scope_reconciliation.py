@@ -1,6 +1,6 @@
 """P19.S1.T2 (SCOPES-01): every assessment scope and correction rule, reconciled against the ledgers.
 
-For topic, chapter, selected-chapter, half-book, full-book, combined XI+XII and full-mock tests, an independent check
+For topic, chapter, selected-chapter, half-book, full-book, combined 11+12 and full-mock tests, an independent check
 from the database (not the screen) confirms the count, that every question comes from the scope and is published and
 live, the timing and cutoff, that results wait for submission, and that the score equals the application's scoring
 of the final-answer ledger with the receipt's ledger hash. The three correction treatments (EXCLUDE, CREDIT_ALL,

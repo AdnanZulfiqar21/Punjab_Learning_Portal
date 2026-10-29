@@ -3,7 +3,7 @@ import { expect, test } from "@playwright/test";
 // P11.S2.T1 (LESSON-PROGRESS-01): the chapter page remembers the lesson a learner reached and offers to continue there,
 // on this or another device. Technical fixture lessons (the structured-blocks fixture chapter) and a fixture account.
 const AUTH = { timeout: 20_000 };
-const CHAPTER = "/learn/chapter/317f2726-31a1-55f5-bd13-a955154033e2"; // Class XI Biology chapter 1 (stable ID)
+const CHAPTER = "/learn/chapter/317f2726-31a1-55f5-bd13-a955154033e2"; // Class 11 Biology chapter 1 (stable ID)
 
 test("a chapter offers to continue at the lesson the learner reached", async ({ page, browser }) => {
   test.slow();

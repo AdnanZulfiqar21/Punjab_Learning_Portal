@@ -1,6 +1,6 @@
 "use server";
 
-// Class XI Biology Chapter 1 pilot: the Learn page's class and group, and the reader language. Both are remembered on
+// Class 11 Biology Chapter 1 pilot: the Learn page's class and group, and the reader language. Both are remembered on
 // this device in small cookies (no personal data) and, for a signed-in learner, in the profile through the existing
 // profile service. A guest's choice never creates an account or a server-side record.
 import { revalidatePath } from "next/cache";
