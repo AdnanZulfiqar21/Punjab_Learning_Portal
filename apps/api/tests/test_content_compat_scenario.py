@@ -31,7 +31,7 @@ from tests.test_content_workflow import Staff, _chapter, _confirm_rights, _post,
 from tests.test_mcq_items import CHECKS, VALID, _new_mcq, _save
 
 SCOPE = {"grades": [11], "subjects": ["biology"]}
-CHAPTER_INDEX = 10  # no other module publishes into this Biology XI chapter
+CHAPTER_INDEX = 10  # no other module publishes into this Biology 11 chapter
 
 
 def _publish(client: TestClient, team: dict[str, Staff], chapter: Any, doc: Any, body: dict[str, Any]) -> str:

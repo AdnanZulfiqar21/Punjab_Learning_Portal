@@ -31,5 +31,5 @@ test("the public home shows tracks and what is published so far", async ({ page 
   await expect(coverage).toContainText(/reviewed lesson/);
   await tracks.getByRole("link", { name: "Pre-Engineering" }).click();
   await expect(page).toHaveURL(/\/learn\?track=pre_engineering$/);
-  await expect(page.getByRole("region", { name: "Class XI", exact: true }).getByRole("link", { name: /Biology/ })).toHaveCount(0);
+  await expect(page.getByRole("region", { name: "Class 11", exact: true }).getByRole("link", { name: /Biology/ })).toHaveCount(0);
 });

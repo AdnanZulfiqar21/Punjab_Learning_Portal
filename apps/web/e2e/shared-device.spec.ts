@@ -20,7 +20,7 @@ async function register(page: Page, tag: string): Promise<string> {
 
 async function openLesson(page: Page) {
   await page.goto("/learn");
-  await page.getByRole("region", { name: "Class XI", exact: true }).getByRole("link", { name: /Biology/ }).click();
+  await page.getByRole("region", { name: "Class 11", exact: true }).getByRole("link", { name: /Biology/ }).click();
   await expect(page).toHaveURL(/\/learn\/11\/biology$/, AUTH);
   await page.getByRole("link", { name: /Chapter 1(?!\d)/ }).first().click();
   const lesson = page.getByRole("region", { name: "Lessons" }).getByRole("article", { name: LESSON });

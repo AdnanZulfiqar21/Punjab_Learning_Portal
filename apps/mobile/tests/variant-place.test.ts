@@ -8,7 +8,7 @@ import { mapPlace, placeSignature, type PlaceBlock } from "../src/lib/variant-pl
 
 const sigs = (blocks: PlaceBlock[]) => blocks.map(placeSignature);
 
-// Shaped like Biology XII 19.8: the book's text and box in English; the same plus our self-check and recap in Roman Urdu.
+// Shaped like Biology 12 19.8: the book's text and box in English; the same plus our self-check and recap in Roman Urdu.
 const english: PlaceBlock[] = [
   { type: "paragraph", text: "A mutation is a change in the content of the genetic message, from nucleotides to a whole chromosome." },
   { type: "list", ordered: false, items: ["Point mutations: change only one or a few nucleotides.", "Chromosomal mutations: changes in the structure or number of chromosomes."] },

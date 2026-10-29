@@ -11,7 +11,7 @@ export function coverage(entitlements: Access["entitlements"]): string | null {
   for (const e of entitlements) {
     const s = (e.scope ?? {}) as Scope;
     if (!s.grades?.length && !s.subjects?.length && !s.exams?.length) return null;
-    for (const g of s.grades ?? []) for (const sub of s.subjects ?? []) parts.push(`Class ${g === 11 ? "XI" : "XII"} ${subjectName(sub)}`);
+    for (const g of s.grades ?? []) for (const sub of s.subjects ?? []) parts.push(`Class ${g === 11 ? "11" : "12"} ${subjectName(sub)}`);
     for (const x of s.exams ?? []) parts.push(`${x} mocks`);
   }
   return [...new Set(parts)].join(", ") || null;

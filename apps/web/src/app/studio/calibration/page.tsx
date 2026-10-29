@@ -53,8 +53,8 @@ async function Board({ grade, subject }: { grade: string; subject: string }) {
         <label className="flex flex-col gap-1">
           Class
           <select name="grade" defaultValue={grade} className="rounded-lg border border-border bg-surface px-2 py-2">
-            <option value="11">Class XI</option>
-            <option value="12">Class XII</option>
+            <option value="11">Class 11</option>
+            <option value="12">Class 12</option>
           </select>
         </label>
         <label className="flex flex-col gap-1">

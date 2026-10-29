@@ -80,7 +80,7 @@ def test_a_subject_package_opens_only_its_classes_and_subjects(
 
     b = Staff(client, db, [])
     assert _grant(client, finance, b, bio).status_code == 201
-    _refused(_form(client, b, physics["chapter"]), "Class XI Physics")
+    _refused(_form(client, b, physics["chapter"]), "Class 11 Physics")
     mine = client.get("/v1/me/access", headers=b.headers).json()
     assert mine["has_access"] is True  # a plan exists; it just doesn't cover physics
     assert [(e["product_code"], e["scope"]["subjects"]) for e in mine["entitlements"]] == [(bio, ["biology"])]
@@ -92,7 +92,7 @@ def test_a_subject_package_opens_only_its_classes_and_subjects(
 
 
 def test_premium_lessons_follow_the_package(client: TestClient, db: Session, crew: dict[str, Staff]) -> None:  # noqa: F811
-    item, chapter = _published(client, db, crew)  # a premium Class XI Biology lesson
+    item, chapter = _published(client, db, crew)  # a premium Class 11 Biology lesson
     finance = _finance(client, db)
     bio = _product(client, finance, "subject_package", {"grades": [11], "subjects": ["biology"]})
     phy12 = _product(client, finance, "subject_package", {"grades": [12], "subjects": ["physics"]})
@@ -116,7 +116,7 @@ def test_an_exam_package_opens_its_mocks_only(client: TestClient, db: Session, p
 
     assert client.get(f"/v1/mocks/{code}/readiness", headers=candidate.headers).json()["entitled"] is True
     assert _mock(client, candidate, code).status_code == 201
-    _refused(_form(client, candidate, physics["chapter"]), "Class XI Physics")  # an exam pass isn't a subject plan
+    _refused(_form(client, candidate, physics["chapter"]), "Class 11 Physics")  # an exam pass isn't a subject plan
 
     assert client.get(f"/v1/mocks/{code}/readiness", headers=student.headers).json()["entitled"] is False
     _refused(_mock(client, student, code), code)
@@ -128,7 +128,7 @@ def test_package_marking_units_fund_only_that_package(
     finance = _finance(client, db)
     chem12 = _product(client, finance, "subject_package", {"grades": [12], "subjects": ["chemistry"]})
     bio11 = _product(client, finance, "subject_package", {"grades": [11], "subjects": ["biology"]})
-    chapter = published_written["chapter"]  # Class XII Chemistry written questions
+    chapter = published_written["chapter"]  # Class 12 Chemistry written questions
 
     funded = Staff(client, db, [])
     _grant(client, finance, funded, chem12, units=10)

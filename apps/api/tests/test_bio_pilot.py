@@ -1,4 +1,4 @@
-"""Class XI Biology Chapter 1 pilot: language variants through the import, `model3d` figure references, and the topic
+"""Class 11 Biology Chapter 1 pilot: language variants through the import, `model3d` figure references, and the topic
 reader's language choice. Technical fixture bodies only; nothing here is academic content or a publication."""
 
 from __future__ import annotations

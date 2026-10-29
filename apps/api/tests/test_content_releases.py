@@ -23,7 +23,7 @@ from tests.test_content_workflow import (
     _submitted,
 )
 
-team = test_content_workflow.team  # the Class XI Biology staff fixture
+team = test_content_workflow.team  # the Class 11 Biology staff fixture
 
 APPROVE = {"decision": "approve", "comment": "Checked against source pages"}
 
@@ -36,7 +36,7 @@ def _approved(client: TestClient, db: Session, team: dict[str, Staff]) -> tuple[
 
 
 def _approved_in(client: TestClient, db: Session, team: dict[str, Staff], index: int) -> tuple[dict[str, Any], Any]:
-    """An approved lesson in another Class XI Biology chapter (by index)."""
+    """An approved lesson in another Class 11 Biology chapter (by index)."""
     chapter, doc = _chapter(db, 11, "biology", index)
     item = _create(client, team["author"], chapter)
     assert _save(client, team["author"], item, refs=_refs(chapter, doc)).status_code == 200

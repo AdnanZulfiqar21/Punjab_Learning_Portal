@@ -1,6 +1,6 @@
 """P05.S4.T2 (REGION-01): another region's records exist without becoming discoverable.
 
-A labelled technical second region (one Class XI Physics book with a chapter and a topic) is committed for this test
+A labelled technical second region (one Class 11 Physics book with a chapter and a topic) is committed for this test
 only and removed afterwards; no other province's academic catalogue is created. Learners still see only Punjab:
 the catalogue, the book, chapter and lesson pages, search, offline packs and the practice and pattern builders
 ignore it. Before this fix the catalogue listed every region's classes.
@@ -27,7 +27,7 @@ def _second_region(tag: str) -> dict[str, uuid.UUID]:
         s.add(Region(id=ids["region"], code=f"fixture-region-{tag}", name="Fixture region (technical)"))
         s.flush()
         s.add(
-            Grade(id=ids["grade"], region_id=ids["region"], number=11, code=f"FX{tag[:5]}", name="Class XI (fixture)")
+            Grade(id=ids["grade"], region_id=ids["region"], number=11, code=f"FX{tag[:5]}", name="Class 11 (fixture)")
         )
         s.add(
             SourceDocument(

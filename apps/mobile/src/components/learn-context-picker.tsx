@@ -1,5 +1,5 @@
-// Choose class, then study group (pilot). Two separate questions: a group never implies a class, and Class XI and
-// Class XII books are never mixed. The ICS note comes from the API's track list, which also decides which books the
+// Choose class, then study group (pilot). Two separate questions: a group never implies a class, and Class 11 and
+// Class 12 books are never mixed. The ICS note comes from the API's track list, which also decides which books the
 // group actually shows.
 import { View } from "react-native";
 
@@ -30,7 +30,7 @@ export function LearnContextPicker({
           <T variant="heading" accessibilityRole="header">
             What are you studying?
           </T>
-          <T variant="small">Class XI and Class XII use different textbooks, so choose both.</T>
+          <T variant="small">Class 11 and Class 12 use different textbooks, so choose both.</T>
         </View>
         <Choices label="1. Your class" options={GRADES} selected={value.grade ? [value.grade] : []} onToggle={(grade) => onChange({ ...value, grade })} />
         <View style={{ gap: Space.xs }}>

@@ -2,7 +2,7 @@
 
     portal-grant-role --email owner@example.org --role owner_admin --reason "initial owner account"
     portal-grant-role --email reviewer@example.org --role subject_reviewer --grades 11 --subjects chemistry \
-        --reason "named Class XI Chemistry reviewer"
+        --reason "named Class 11 Chemistry reviewer"
 
 The person must already have signed in once (so their account exists). The grant is audited with actor=None and
 via=cli. Every later grant goes through the MFA-protected admin API.

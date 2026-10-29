@@ -13,7 +13,7 @@
           "source_document_id": "87425af6-17db-594c-b23b-b9351886313c",
           "pdf_from": 74,
           "pdf_to": 75,
-          "note": "The exercise as printed (PDF 74-75, printed 70-71); rewritten 2026-10-28 in the book's wording, programs as code blocks."
+          "note": "Chapter 5 exercise as printed (PDF 74-75, printed 70-71), solved: 10 MCQs with keys from the text, 10 short and 8 long questions with model answers; every program and test was run in Python. The answer key (PDF 75) agrees with the text on all ten."
         }
       ],
       "body": {
@@ -24,20 +24,254 @@
             "text": "Multiple Choice Questions"
           },
           {
-            "type": "list",
-            "ordered": true,
-            "items": [
-              "Testing is essential for reliable applications because it helps to: (a) Optimise code performance (b) Identify and fix bugs (c) Reduce the program size (d) Make code run faster",
-              "Common types of programming errors include: (a) Syntax error (b) Logic error (c) Runtime error (d) All of the above",
-              "Unit testing focuses on: (a) Testing the entire application (b) Testing individual components or functions (c) Testing the user interface (d) Testing database connections",
-              "The Python module used for unit testing is: (a) numpy (b) matplotlib (c) unittest (d) os",
-              "The main purpose of using testing tools like unittest and pytest: (a) to increase program size (b) to verify code works correctly (c) to design layouts (d) to compile programs",
-              "Breakpoints in debugging are used to: (a) Run the program faster (b) Pause the program at specific points and inspect its state (c) Skip certain code sections (d) Optimise the code",
-              "Watch expressions in debugging are used to: (a) Change variable values (b) Monitor variable values during program execution (c) Pause the program (d) Display output messages",
-              "Step-by-step debugging is used to: (a) Run the program faster (b) Execute code one line at a time for easier error identification (c) Increase the program's performance (d) Compile the code",
-              "The Python keyword pair used for exception handling is: (a) try-except (b) try-finally (c) try-catch (d) handle-throw",
-              "Profiling in programming is used to: (a) Improve the user interface design (b) Measure performance and identify bottlenecks (c) Optimise memory usage only (d) Test for security vulnerabilities"
-            ]
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "1. Testing is essential for reliable applications because it helps to:",
+            "options": [
+              {
+                "id": "a",
+                "text": "Optimise code performance"
+              },
+              {
+                "id": "b",
+                "text": "Identify and fix bugs"
+              },
+              {
+                "id": "c",
+                "text": "Reduce the program size"
+              },
+              {
+                "id": "d",
+                "text": "Make code run faster"
+              }
+            ],
+            "answer_id": "b",
+            "explanation": "Testing and debugging detect and remove errors before the software is released, which makes applications reliable (5.2.1)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "2. Common types of programming errors include:",
+            "options": [
+              {
+                "id": "a",
+                "text": "Syntax error"
+              },
+              {
+                "id": "b",
+                "text": "Logic error"
+              },
+              {
+                "id": "c",
+                "text": "Runtime error"
+              },
+              {
+                "id": "d",
+                "text": "All of the above"
+              }
+            ],
+            "answer_id": "d",
+            "explanation": "The chapter names syntax, logic and runtime errors as common programming errors (5.2.1, Figure 5.1)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "3. Unit testing focuses on:",
+            "options": [
+              {
+                "id": "a",
+                "text": "Testing the entire application"
+              },
+              {
+                "id": "b",
+                "text": "Testing individual components or functions"
+              },
+              {
+                "id": "c",
+                "text": "Testing the user interface"
+              },
+              {
+                "id": "d",
+                "text": "Testing database connections"
+              }
+            ],
+            "answer_id": "b",
+            "explanation": "Unit testing tests individual parts (units) of a program, such as single functions, separately (Unit Testing)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "4. The Python module used for unit testing is:",
+            "options": [
+              {
+                "id": "a",
+                "text": "numpy"
+              },
+              {
+                "id": "b",
+                "text": "matplotlib"
+              },
+              {
+                "id": "c",
+                "text": "unittest"
+              },
+              {
+                "id": "d",
+                "text": "os"
+              }
+            ],
+            "answer_id": "c",
+            "explanation": "unittest is Python's built-in module for creating and running test cases (Unit Testing)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "5. The main purpose of using testing tools like unittest and pytest:",
+            "options": [
+              {
+                "id": "a",
+                "text": "to increase program size"
+              },
+              {
+                "id": "b",
+                "text": "to verify code works correctly"
+              },
+              {
+                "id": "c",
+                "text": "to design layouts"
+              },
+              {
+                "id": "d",
+                "text": "to compile programs"
+              }
+            ],
+            "answer_id": "b",
+            "explanation": "Both modules help verify that code behaves as expected (Unit Testing)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "6. Breakpoints in debugging are used to:",
+            "options": [
+              {
+                "id": "a",
+                "text": "Run the program faster"
+              },
+              {
+                "id": "b",
+                "text": "Pause the program at specific points and inspect its state"
+              },
+              {
+                "id": "c",
+                "text": "Skip certain code sections"
+              },
+              {
+                "id": "d",
+                "text": "Optimise the code"
+              }
+            ],
+            "answer_id": "b",
+            "explanation": "A breakpoint pauses execution at a chosen line so the current state (variable values) can be examined (Using Breakpoints and Watches)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "7. Watch expressions in debugging are used to:",
+            "options": [
+              {
+                "id": "a",
+                "text": "Change variable values"
+              },
+              {
+                "id": "b",
+                "text": "Monitor variable values during program execution"
+              },
+              {
+                "id": "c",
+                "text": "Pause the program"
+              },
+              {
+                "id": "d",
+                "text": "Display output messages"
+              }
+            ],
+            "answer_id": "b",
+            "explanation": "Watch expressions track the values of variables while the program runs and update automatically when they change (Using Breakpoints and Watches)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "8. Step-by-step debugging is used to:",
+            "options": [
+              {
+                "id": "a",
+                "text": "Run the program faster"
+              },
+              {
+                "id": "b",
+                "text": "Execute code one line at a time for easier error identification"
+              },
+              {
+                "id": "c",
+                "text": "Increase the program's performance"
+              },
+              {
+                "id": "d",
+                "text": "Compile the code"
+              }
+            ],
+            "answer_id": "b",
+            "explanation": "Step-by-step debugging executes code one line or function at a time to follow the logic and find where errors occur (Using Breakpoints and Watches)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "9. The Python keyword pair used for exception handling is:",
+            "options": [
+              {
+                "id": "a",
+                "text": "try-except"
+              },
+              {
+                "id": "b",
+                "text": "try-finally"
+              },
+              {
+                "id": "c",
+                "text": "try-catch"
+              },
+              {
+                "id": "d",
+                "text": "handle-throw"
+              }
+            ],
+            "answer_id": "a",
+            "explanation": "Python catches exceptions with try-except; try-catch is used in languages such as Java and C++, not Python (Exception Handling)."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "question",
+            "prompt": "10. Profiling in programming is used to:",
+            "options": [
+              {
+                "id": "a",
+                "text": "Improve the user interface design"
+              },
+              {
+                "id": "b",
+                "text": "Measure performance and identify bottlenecks"
+              },
+              {
+                "id": "c",
+                "text": "Optimise memory usage only"
+              },
+              {
+                "id": "d",
+                "text": "Test for security vulnerabilities"
+              }
+            ],
+            "answer_id": "b",
+            "explanation": "Profiling measures how much time and resources each part of the code uses and finds the slow parts (bottlenecks) (5.3)."
           },
           {
             "type": "heading",
@@ -45,20 +279,64 @@
             "text": "Short Questions"
           },
           {
-            "type": "list",
-            "ordered": true,
-            "items": [
-              "Why is testing essential for ensuring reliable applications?",
-              "What are some common types of programming errors and bugs?",
-              "What is unit testing, and why is it important in programming?",
-              "How do Python's unittest and pytest modules help in unit testing?",
-              "What is the purpose of writing and executing test cases?",
-              "How do you set breakpoints in IDEs like PyCharm or VS Code?",
-              "What is the role of monitoring variable values with watch expressions during debugging?",
-              "What is the step-by-step debugging process in IDEs?",
-              "How does exception handling help in managing multiple exception types effectively?",
-              "What tools can be used for profiling and measuring performance in Python?"
-            ]
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "1. Why is testing essential for ensuring reliable applications?",
+            "explanation": "Testing checks that an application meets its requirements and every function gives correct results. It finds errors before release, reduces crashes and wrong outputs, and confirms that changes do not break existing features, so the software is stable and trustworthy."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "2. What are some common types of programming errors and bugs?",
+            "explanation": "1. Syntax error: code breaks language rules (if x > 5 without a colon).\n2. Logic error: program runs but gives a wrong result (length + width instead of length * width).\n3. Runtime error: occurs while running (division by zero).\nOthers: data errors and resource leaks."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "3. What is unit testing, and why is it important in programming?",
+            "explanation": "Unit testing tests individual parts (units) of a program, such as single functions or methods, separately. It catches errors early, makes debugging easier, checks that each component gives the expected output and improves reliability."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "4. How do Python's unittest and pytest modules help in unit testing?",
+            "explanation": "Both provide a framework to write and run automated test cases and report which tests pass or fail. unittest is built into Python and uses test classes (unittest.TestCase); pytest is an external module that lets tests be simple test_ functions with assert."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "5. What is the purpose of writing and executing test cases?",
+            "explanation": "A test case gives specific inputs and the expected output for a function, e.g. add(2, 3) should be 5. Running it checks that the function works correctly; repeated, automated runs show that code changes have not broken existing functionality and save time."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "6. How do you set breakpoints in IDEs like PyCharm or VS Code?",
+            "explanation": "Click in the margin next to the line number of the chosen line; a red dot marks the breakpoint. Then run the program in Debug mode: execution pauses at that line so the variable values and program state can be inspected."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "7. What is the role of monitoring variable values with watch expressions during debugging?",
+            "explanation": "Watch expressions track the values of chosen variables while the program runs and update automatically when they change. This shows how data changes step by step and helps find incorrect or unexpected values, e.g. radius changing from 5 to 10."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "8. What is the step-by-step debugging process in IDEs?",
+            "explanation": "After a breakpoint pauses the program, code is executed one line or function at a time:\n- Step Into: go inside a function.\n- Step Over: run the current line and move to the next.\n- Continue: run until the next breakpoint."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "9. How does exception handling help in managing multiple exception types effectively?",
+            "explanation": "One try block can have several except blocks, each catching a specific exception type (e.g. ValueError, ZeroDivisionError) with its own response. The program shows a suitable message and recovers instead of crashing; finally runs clean-up code in every case."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "10. What tools can be used for profiling and measuring performance in Python?",
+            "explanation": "1. cProfile: gives a report of how many times each function is called and how much time it takes, showing bottlenecks.\n2. timeit: measures and compares the execution time of small pieces of code (e.g. slow_sum vs fast_sum)."
           },
           {
             "type": "heading",
@@ -66,18 +344,104 @@
             "text": "Long Questions"
           },
           {
-            "type": "list",
-            "ordered": true,
-            "items": [
-              "Why is testing essential for reliable applications, and what role does it play in ensuring program stability?",
-              "Discuss the common types of programming errors and bugs that occur during software development.",
-              "What is unit testing, and how do Python's unittest and pytest modules support effective testing?",
-              "Explain the process of writing and executing test cases using Python's unittest or pytest modules.",
-              "How do breakpoints and watch expressions help in debugging? Discuss their role in identifying issues in the code.",
-              "Describe how to set breakpoints in IDEs like PyCharm or VS Code, and explain their significance in the debugging process.",
-              "What is step-by-step debugging, and how does it help in identifying and fixing bugs in Python programs?",
-              "How does exception handling work in Python? Explain how to handle multiple exception types effectively to prevent program crashes."
-            ]
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "1. Why is testing essential for reliable applications, and what role does it play in ensuring program stability?",
+            "explanation": "Testing is the process of checking a program to make sure it works correctly and produces the expected output. Testing and debugging are essential so that applications work correctly under all conditions.\n\nWhy testing is essential:\n1. It checks whether the application meets its requirements.\n2. It ensures that all functions produce correct results.\n3. It detects errors before the software is released, so users do not face them.\n4. It reduces the risk of crashes and incorrect outputs.\n5. Thoroughly tested applications are trustworthy and increase user confidence.\n\nRole in program stability:\n- Regular testing prevents unexpected failures during operation.\n- Repeated (regression) testing verifies that changes do not break existing features.\n- Debugging then locates the cause of each error and fixes it efficiently.\n- Unit tests catch errors early in individual functions, before they spread.\n- Exception handling, checked by tests, keeps the program from stopping suddenly.\n- Tested code is easier to maintain and extend in future.\n\nExample: a test assert add(2, 3) == 5 run after every change confirms that add() still works; if someone breaks it, the test fails immediately."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "2. Discuss the common types of programming errors and bugs that occur during software development.",
+            "explanation": "A bug is an error, mistake or fault in a program that makes it give a wrong result or behave unexpectedly. The main types are compared in the table; other common bugs are data errors (wrong or unexpected input data) and resource leaks (files or connections not closed).\n\nExample program (logic and runtime errors):\nlength = 5\nwidth = 3\narea = length + width        # logic error: should be length * width\nprint(area)\narea = length * width        # correct\nprint(area)\ntry:\n    print(10 / 0)            # runtime error\nexcept ZeroDivisionError as e:\n    print(\"ZeroDivisionError:\", e)\n\nOutput:\n8\n15\nZeroDivisionError: division by zero\n\nThe first result 8 is wrong (logic error); 15 is correct. Identifying these errors is key to building stable applications.",
+            "answer_table": {
+              "header": [
+                "Error type",
+                "What it is",
+                "Example (Figure 5.1)"
+              ],
+              "rows": [
+                [
+                  "Syntax error",
+                  "Code does not follow the language rules; the program does not run",
+                  "if x > 5 (missing colon) gives SyntaxError: invalid syntax; correct: if x > 5:"
+                ],
+                [
+                  "Logic error",
+                  "Program runs but produces an incorrect result; no error message",
+                  "area = length + width gives 8; correct: area = length * width gives 15"
+                ],
+                [
+                  "Runtime error",
+                  "Appears while the program is running and stops it",
+                  "a = 10; b = 0; a / b gives ZeroDivisionError: division by zero"
+                ]
+              ]
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "3. What is unit testing, and how do Python's unittest and pytest modules support effective testing?",
+            "explanation": "Unit testing is the process of testing individual parts (units) of a program, such as functions and methods, separately to make sure each works correctly. It catches errors early, makes debugging easier and improves reliability. Python provides unittest and pytest for writing and running automated tests.\n\nHow they support effective testing:\n- Both verify that code behaves as expected and can test individual functions, classes or entire modules.\n- Tests are automated: one command runs all tests and reports failures and errors.\n- Repeated runs show that changes have not broken existing functionality.\n- They improve stability and reduce errors in larger applications.\nThe two modules are compared in the table.",
+            "answer_table": {
+              "header": [
+                "unittest",
+                "pytest"
+              ],
+              "rows": [
+                [
+                  "Built into Python (no installation)",
+                  "External module (installed separately, e.g. pip install pytest)"
+                ],
+                [
+                  "Tests are methods inside a class that inherits unittest.TestCase",
+                  "Tests are simple functions whose names start with test_"
+                ],
+                [
+                  "Checks with methods such as assertEqual() and assertRaises()",
+                  "Checks with the plain assert statement"
+                ],
+                [
+                  "Run with unittest.main() or python -m unittest",
+                  "Run by typing pytest in the folder; it finds test_ functions itself"
+                ],
+                [
+                  "More boilerplate code",
+                  "Less code; simpler to write"
+                ]
+              ]
+            }
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "4. Explain the process of writing and executing test cases using Python's unittest or pytest modules.",
+            "explanation": "A test case is a set of inputs, expected outputs and conditions used to check whether a function works properly.\n\nSteps with unittest:\n1. Write the function to be tested.\n2. import unittest and create a class that inherits unittest.TestCase.\n3. Write test methods whose names start with test_; in each, call the function with known inputs and compare with the expected output using assertEqual(), assertTrue() or assertRaises().\n4. Add unittest.main() and run the file; Python runs every test and reports a dot for each pass, F for a failure and E for an error.\n5. Fix the code if a test fails and run the tests again after every change.\n\nExample (unittest):\nimport unittest\n\ndef add(a, b):\n    return a + b\n\ndef divide(a, b):\n    return a / b\n\nclass TestCalculator(unittest.TestCase):\n    def test_add(self):\n        self.assertEqual(add(2, 3), 5)\n\n    def test_divide(self):\n        self.assertEqual(divide(10, 2), 5)\n\n    def test_divide_by_zero(self):\n        with self.assertRaises(ZeroDivisionError):\n            divide(5, 0)\n\nif __name__ == \"__main__\":\n    unittest.main()\n\nOutput (python test_calc.py):\n...\n----------------------------------------------------------------------\nRan 3 tests in 0.000s\n\nOK\n\nSteps with pytest: write test functions named test_... that use assert, save the file as test_something.py, and type pytest in the command line in that folder; pytest finds and runs the tests automatically.\n\nExample (pytest, as in the book):\n# file: test_math_pytest.py\ndef add(a, b):\n    return a + b\n\ndef multiply(a, b):\n    return a * b\n\ndef test_add():\n    assert add(2, 3) == 5\n\ndef test_multiply():\n    assert multiply(2, 3) == 6\n\nOutput (pytest test_math_pytest.py):\ntest_math_pytest.py ..   [100%]\n2 passed in 0.02s (the time may differ)"
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "5. How do breakpoints and watch expressions help in debugging? Discuss their role in identifying issues in the code.",
+            "explanation": "Debugging is the process of finding and fixing errors (bugs). Breakpoints and watches are debugging tools that pause the program and let the programmer examine data at specific points.\n\nBreakpoints:\n- A breakpoint is a marker that pauses execution at a chosen line.\n- When the program reaches it, execution stops and the current state (variable values) can be examined.\n- It lets the programmer focus on a specific section without going through the whole program.\n\nWatch expressions:\n- Track the values of chosen variables or expressions while the program runs.\n- Update automatically when the values change, showing how data changes step by step in real time.\n- Help spot incorrect or unexpected data.\n\nRole in identifying issues:\n1. Pause just before the suspected error and check whether the values are what you expected.\n2. Watch a variable change line by line to find exactly where it goes wrong.\n3. Combined with stepping, they show the flow of the code and which branch runs.\n4. They make debugging faster and more precise than adding print statements.\n\nExample:\ndef calculate_area(radius):\n    area = 3.14 * radius ** 2      # breakpoint here: watch radius and area\n    return area\n\ndef main():\n    radius = 5                     # breakpoint here\n    print(\"Area of circle:\", calculate_area(radius))\n    radius = 10\n    print(\"Area of circle:\", calculate_area(radius))\n\nif __name__ == \"__main__\":\n    main()\n\nOutput:\nArea of circle: 78.5\nArea of circle: 314.0\n\nWith breakpoints at radius = 5 and inside calculate_area() and watches on radius and area, the debugger shows radius = 5, area = 78.5, then radius = 10, area = 314.0. If the formula were wrong (e.g. 3.14 * radius * 2), the watch on area would show the wrong value at once."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "6. Describe how to set breakpoints in IDEs like PyCharm or VS Code, and explain their significance in the debugging process.",
+            "explanation": "A breakpoint is a point in a program where execution is paused so the programmer can check the values of variables and understand program behaviour.\n\nSetting breakpoints:\n1. Open the program in the IDE (PyCharm or VS Code).\n2. Click in the margin (gutter) next to the line number of the line where you want to stop; a red dot appears. (Clicking it again removes it; in VS Code F9 also toggles a breakpoint, beyond the chapter.)\n3. Start the debugger instead of a normal run (PyCharm: Debug button; VS Code: Run and Debug / F5).\n4. The program runs and pauses at the first breakpoint; the line is highlighted.\n5. Inspect the variables (Variables/Watches pane), then use Step Into, Step Over or Continue (to the next breakpoint).\nExample: set breakpoints at radius = 5 and radius = 10 in the calculate_area program to pause at these lines.\n\nSignificance in debugging:\n- Pauses the program exactly where a problem is suspected.\n- Shows the current state: variable values, the call and the line being run.\n- Lets the programmer focus on one section without running or reading the entire program.\n- Works with watch expressions and step-by-step execution to locate the faulty line.\n- Makes debugging faster and more precise; no extra print statements need to be added or removed."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "7. What is step-by-step debugging, and how does it help in identifying and fixing bugs in Python programs?",
+            "explanation": "Step-by-step debugging executes code one line or one function at a time, usually after a breakpoint has paused the program. It lets the programmer follow the program's logic and see exactly where an error occurs.\n\nDebugger controls (PyCharm, VS Code):\n1. Step Into: go inside a function to see how it works (e.g. into calculate_area()).\n2. Step Over: execute the current line and move to the next one without going inside functions.\n3. Continue: run until the next breakpoint.\n\nHow it helps identify and fix bugs:\n- Shows the order in which lines run and which branch of an if is taken.\n- After each step, variable values (and watch expressions) can be checked against the expected values.\n- The first line where a value becomes wrong is the location of the bug.\n- Stepping into a function shows whether the bug is inside it or in the values passed to it.\n- After fixing, the same steps confirm that the values are now correct.\n\nExample: in the calculate_area program, set a breakpoint at radius = 5, Step Over to the print line, Step Into calculate_area() and watch area become 78.5; Continue to the next call where radius = 10 and area = 314.0. If area were wrong, the line area = 3.14 * radius ** 2 would be found as the faulty line and corrected."
+          },
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "prompt": "8. How does exception handling work in Python? Explain how to handle multiple exception types effectively to prevent program crashes.",
+            "explanation": "Exception handling is a method of managing runtime errors (exceptions) so that a program does not stop suddenly. It lets the program respond gracefully to unexpected situations and improves reliability and user experience.\n\nHow it works:\n1. try: the code that may cause an error is written in the try block.\n2. except: if an error occurs, Python jumps to the matching except block, which handles it (e.g. shows a message or rolls back a database change); the program continues instead of crashing.\n3. else: runs only if no exception occurred.\n4. finally: always runs, error or not; used for clean-up such as closing a file or database connection.\n\nHandling multiple exception types:\n- One try block can be followed by several except blocks, each for a specific exception type with its own response (ValueError, ZeroDivisionError, sqlite3.Error ...).\n- Several types can also share one handler: except (ValueError, ZeroDivisionError) as e:.\n- Put specific exceptions first; a general except Exception as e: at the end catches anything unexpected.\n- This prevents crashes and ensures proper error recovery.\n\nExample (class activity: two numbers from the user):\ntry:\n    a = int(input(\"Enter first number: \"))\n    b = int(input(\"Enter second number: \"))\n    result = a / b\nexcept ValueError:\n    print(\"Error: please enter whole numbers only.\")\nexcept ZeroDivisionError:\n    print(\"Error: cannot divide by zero.\")\nelse:\n    print(\"Result:\", result)\nfinally:\n    print(\"Program finished.\")\n\nSample runs:\nInput 10 and 2 -> Result: 5.0 / Program finished.\nInput 10 and abc -> Error: please enter whole numbers only. / Program finished.\nInput 10 and 0 -> Error: cannot divide by zero. / Program finished."
           }
         ]
       }

@@ -18,8 +18,8 @@ URL = "/v1/practice/forms"
 
 @pytest.fixture(scope="module")
 def biology(client: TestClient) -> dict[str, Any]:
-    # Biology XI: its rights are confirmed by other fixtures too. Chemistry XI rights must stay unverified for
-    # test_content_workflow, so Chemistry XI only appears here with nothing published (the shortage case).
+    # Biology 11: its rights are confirmed by other fixtures too. Chemistry 11 rights must stay unverified for
+    # test_content_workflow, so Chemistry 11 only appears here with nothing published (the shortage case).
     return publish_physics_pool(client, index=10, subject="biology")
 
 

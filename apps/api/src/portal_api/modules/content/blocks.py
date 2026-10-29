@@ -83,7 +83,7 @@ REGISTRY: dict[str, BlockSpec] = {
         BlockSpec(
             "scene", 1, {"web": 1, "android": 1, "ios": 1}, True, "Named original scene with a text alternative."
         ),
-        # Biology XI pilot (MODEL3D-01): an original 3D model rendered to archived stills. Renderer 2 shows the poster
+        # Biology 11 pilot (MODEL3D-01): an original 3D model rendered to archived stills. Renderer 2 shows the poster
         # and a drag-to-turn sequence of stills (native) or the live scene (web). Older clients show the reviewed
         # fallback image, which every model3d block must carry.
         BlockSpec(

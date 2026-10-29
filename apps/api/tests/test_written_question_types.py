@@ -1,6 +1,6 @@
 """W04.S1.T1 (QUESTION-TYPES-01): a written test built for short questions only, long questions only or a mix draws
 from that part of the pool, and starting it reserves the weighted allowance (short 1, long 2). Technical fixture
-questions in their own Class XII Chemistry chapter, so other tests' pools don't mix in."""
+questions in their own Class 12 Chemistry chapter, so other tests' pools don't mix in."""
 
 from __future__ import annotations
 

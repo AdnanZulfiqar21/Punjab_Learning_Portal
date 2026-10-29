@@ -72,8 +72,8 @@ export default function StudioPage({ searchParams }: PageProps<"/studio">) {
         </Link>
         <form action="/studio/export" method="get" className="flex items-center gap-1" aria-label="Export content">
           <select name="grade" aria-label="Export class" className="rounded-lg border border-border bg-surface px-2 py-2.5">
-            <option value="11">XI</option>
-            <option value="12">XII</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
           </select>
           <select name="subject" aria-label="Export subject" className="rounded-lg border border-border bg-surface px-2 py-2.5">
             <option value="biology">Biology</option>
@@ -198,8 +198,8 @@ function Filters({ filters }: { filters: QueueFilters }) {
         <span className="block text-muted">Class</span>
         <select name="grade" defaultValue={filters.grade ?? ""} className={select}>
           <option value="">Both</option>
-          <option value="11">Class XI</option>
-          <option value="12">Class XII</option>
+          <option value="11">Class 11</option>
+          <option value="12">Class 12</option>
         </select>
       </label>
       <label className="space-y-1 text-sm">

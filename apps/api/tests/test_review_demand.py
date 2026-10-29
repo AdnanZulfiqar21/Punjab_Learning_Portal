@@ -25,7 +25,7 @@ from tests.test_written_attempts import _learner, _start
 
 
 def _cases(attempt_id: uuid.UUID, subject: str, rows: list[tuple[str, str, int]]) -> None:
-    """(kind, status, days ago) per case, all in the fixture scope Class XI <subject>."""
+    """(kind, status, days ago) per case, all in the fixture scope Class 11 <subject>."""
     with get_sessionmaker()() as db:
         now = db.scalar(select(func.now()))
         assert now is not None

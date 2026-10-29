@@ -1,7 +1,7 @@
-// Learn context (Class XI Biology Chapter 1 pilot): which class and which study group the Learn tab shows. Pure rules,
+// Learn context (Class 11 Biology Chapter 1 pilot): which class and which study group the Learn tab shows. Pure rules,
 // free of storage and React, so they run on the host in tests.
 //
-// Class and group are separate choices. Class XI Pre-Medical and Class XII Pre-Medical use different textbooks, and a
+// Class and group are separate choices. Class 11 Pre-Medical and Class 12 Pre-Medical use different textbooks, and a
 // group never implies a class. The subjects a group covers come from the API's discovery tracks (the `track` filter is
 // what actually selects the books); the list here only labels the choice before the API has answered.
 
@@ -10,8 +10,8 @@ export type Stream = "pre_medical" | "pre_engineering" | "ics";
 export type LearnContext = { grade: Grade; stream: Stream };
 
 export const GRADES: readonly (readonly [Grade, string])[] = [
-  [11, "Class XI"],
-  [12, "Class XII"],
+  [11, "Class 11"],
+  [12, "Class 12"],
 ];
 
 export const STREAMS: readonly (readonly [Stream, string, string])[] = [
@@ -21,7 +21,7 @@ export const STREAMS: readonly (readonly [Stream, string, string])[] = [
 ];
 
 export const STREAM_LABEL: Record<Stream, string> = { pre_medical: "Pre-Medical", pre_engineering: "Pre-Engineering", ics: "ICS" };
-export const GRADE_LABEL: Record<Grade, string> = { 11: "Class XI", 12: "Class XII" };
+export const GRADE_LABEL: Record<Grade, string> = { 11: "Class 11", 12: "Class 12" };
 
 export function isGrade(value: unknown): value is Grade {
   return value === 11 || value === 12;
@@ -52,7 +52,7 @@ export function resolveContext(
   return { context: { grade, stream }, partial, source };
 }
 
-/** "Class XI · Pre-Medical" */
+/** "Class 11 · Pre-Medical" */
 export function contextLine(ctx: LearnContext): string {
   return `${GRADE_LABEL[ctx.grade]} · ${STREAM_LABEL[ctx.stream]}`;
 }

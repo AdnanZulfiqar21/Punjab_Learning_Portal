@@ -35,7 +35,7 @@ test("register, onboard, see the profile and session, then sign out", async ({ p
   await expect(page.getByRole("link", { name: "Account", exact: true })).toBeVisible();
 
   await page.getByRole("link", { name: "Set up learning preferences" }).click();
-  await page.getByLabel("Class XII").check();
+  await page.getByLabel("Class 12").check();
   await page.getByLabel("Physics").check();
   await page.getByLabel("Mathematics").check();
   await page.getByLabel("ECAT").check();

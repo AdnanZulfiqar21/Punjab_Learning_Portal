@@ -11,7 +11,7 @@ import { ROLE_LABEL } from "./roles";
 export const metadata: Metadata = { title: "Staff", robots: { index: false } };
 
 const scopeText = (scope: Record<string, unknown>) => {
-  const grades = Array.isArray(scope.grades) ? scope.grades.map((g) => (g === 11 ? "XI" : "XII")).join(", ") : "";
+  const grades = Array.isArray(scope.grades) ? scope.grades.map((g) => (g === 11 ? "11" : "12")).join(", ") : "";
   const subjects = Array.isArray(scope.subjects) ? scope.subjects.map((s) => String(s).replace("_", " ")).join(", ") : "";
   return grades || subjects ? `Class ${grades || "any"} · ${subjects || "any subject"}` : "Everything this role allows";
 };

@@ -347,7 +347,7 @@ async function ReviewStaffing() {
       ) : (
         <ul className="space-y-3">
           {res.data.map((r) => {
-            const label = `Class ${r.grade === 11 ? "XI" : "XII"} ${SUBJECT_NAME[r.subject] ?? r.subject}`;
+            const label = `Class ${r.grade === 11 ? "11" : "12"} ${SUBJECT_NAME[r.subject] ?? r.subject}`;
             const s = r.staffing;
             return (
               <li key={`${r.grade}-${r.subject}`} className="space-y-3 rounded-xl border border-border bg-surface p-4 text-sm">

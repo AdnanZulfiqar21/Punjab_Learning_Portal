@@ -75,7 +75,7 @@ export function PracticeBuilder({
               ["half_1", "First half of the book"],
               ["half_2", "Second half of the book"],
               ["full_book", "Whole book"],
-              ["combined", "Class XI and XII together"],
+              ["combined", "Class 11 and 12 together"],
               ["multi_subject", "Several subjects (custom mix)"],
             ] as const
           ).map(([value, label]) => (

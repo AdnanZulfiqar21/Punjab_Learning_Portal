@@ -130,7 +130,7 @@ def test_a_lecture_is_approved_only_by_an_independent_review(client: TestClient,
     other = client.post(
         "/v1/studio/assets",
         headers=xii.headers,
-        json={"kind": "caption", "title": "Fixture XII", "grade": 12, "subject": "biology"},
+        json={"kind": "caption", "title": "Fixture 12", "grade": 12, "subject": "biology"},
     ).json()
     other_v = _upload(client, xii, other["id"], VTT).json()
     caption = _upload(client, team["author"], _asset(client, team["author"], "caption")["id"], VTT).json()
@@ -139,7 +139,7 @@ def test_a_lecture_is_approved_only_by_an_independent_review(client: TestClient,
         headers=team["author"].headers,
         json={"language": "roman_ur", "asset_version_id": other_v["id"]},
     )
-    assert mixed.status_code == 422  # Class XII captions never attach to a Class XI lecture
+    assert mixed.status_code == 422  # Class 12 captions never attach to a Class 11 lecture
     ok = client.put(
         f"{url}/captions",
         headers=team["author"].headers,

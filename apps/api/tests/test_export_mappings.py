@@ -1,6 +1,6 @@
 """P06.S4.T2 (EXPORT-02): the portable content export (schema version 2) carries the concept mappings, prerequisites
 and syllabus inclusion records of the book it exports, and a reference for every archived asset version its items name.
-Class XI and XII are never mixed. Technical fixture concepts, records, images and lessons only."""
+Class 11 and 12 are never mixed. Technical fixture concepts, records, images and lessons only."""
 
 from __future__ import annotations
 
@@ -19,7 +19,7 @@ from tests.test_content_workflow import Staff, _chapter, _create, _refs, _save
 from tests.test_inclusion import _record
 from tests.test_written_attempts import _png
 
-team = test_content_workflow.team  # the Class XI Biology staff fixture
+team = test_content_workflow.team  # the Class 11 Biology staff fixture
 
 
 def _key(db: Session, topic_id: str) -> str:
@@ -78,8 +78,8 @@ def test_the_export_carries_concepts_inclusion_and_asset_references(
     assert out["schema_version"] == 2
     concepts = {c["code"]: c for c in out["concepts"]}
     assert base["code"] in concepts and later["code"] in concepts
-    assert only_xii["code"] not in concepts  # mapped only to the Class XII book
-    assert concepts[base["code"]]["topics"] == [_key(db, xi)]  # its Class XII topic stays out of a Class XI file
+    assert only_xii["code"] not in concepts  # mapped only to the Class 12 book
+    assert concepts[base["code"]]["topics"] == [_key(db, xi)]  # its Class 12 topic stays out of a Class 11 file
     assert concepts[later["code"]]["requires"] == [{"code": base["code"], "bridging_lesson_id": None}]
     [rec] = concepts[base["code"]]["inclusion"]
     assert (rec["scope"], rec["year"], rec["state"], rec["status"]) == ("mdcat", 2026, "included", "draft")

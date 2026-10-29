@@ -50,7 +50,7 @@ class FormCreateIn(BaseModel):
     scope: Literal["chapters", "half_book", "full_book", "combined", "multi_subject"] = Field(
         default="chapters",
         description="chapters: the chosen chapters; half_book: first or second half of the book by chapter order; "
-        "full_book: every chapter of this class's book; combined: the same subject's Class XI and XII books; "
+        "full_book: every chapter of this class's book; combined: the same subject's Class 11 and 12 books; "
         "multi_subject: custom practice from two to five subjects' whole books in this class, counts from `mix`",
     )
     mix: list[SubjectShare] = Field(

@@ -52,7 +52,7 @@ def test_a_scoped_reviewer_never_sees_another_scopes_scripts(
 ) -> None:
     from tests.test_written_marking import _sealed_script
 
-    _, a = _sealed_script(client, published_written["chapter"])  # Class XII Chemistry
+    _, a = _sealed_script(client, published_written["chapter"])  # Class 12 Chemistry
     with get_sessionmaker()() as db:
         inside = Staff(client, db, ["subject_reviewer"], {"grades": [12], "subjects": ["chemistry"]})
         other_subject = Staff(client, db, ["subject_reviewer"], {"grades": [12], "subjects": ["physics"]})

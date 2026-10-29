@@ -1,4 +1,4 @@
-// Class XI Biology Chapter 1 pilot: the Learn tab's class/group rules and the reader language rules, on the host.
+// Class 11 Biology Chapter 1 pilot: the Learn tab's class/group rules and the reader language rules, on the host.
 // Not device evidence.
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
@@ -23,7 +23,7 @@ describe("learn context", () => {
     assert.equal(mixed.source, "device");
     const guest = resolveContext(null, { grade: 11, stream: "pre_medical" });
     assert.equal(guest.source, "device");
-    assert.equal(contextLine(guest.context!), "Class XI · Pre-Medical");
+    assert.equal(contextLine(guest.context!), "Class 11 · Pre-Medical");
   });
 
   it("drops stored values it doesn't know", () => {

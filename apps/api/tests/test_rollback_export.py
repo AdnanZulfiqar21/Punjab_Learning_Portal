@@ -14,7 +14,7 @@ from portal_api.modules.audit.models import AuditEvent
 from tests import test_content_workflow
 from tests.test_content_workflow import FIXTURE_BODY, Staff, _confirm_rights, _post, _refs, _save, _submitted
 
-team = test_content_workflow.team  # the Class XI Biology staff fixture
+team = test_content_workflow.team  # the Class 11 Biology staff fixture
 
 
 def _publish_two_versions(client: TestClient, db: Session, team: dict[str, Staff]) -> tuple[dict[str, Any], Any]:

@@ -6,7 +6,7 @@ import { describe, it } from "node:test";
 
 import { fillMerged, mergedColumns, mergeStarts, rowSpans } from "../src/lib/table-merge.ts";
 
-// Shaped like Chemistry XI Table 2.4: shell and n merged down, subshells one per row.
+// Shaped like Chemistry 11 Table 2.4: shell and n merged down, subshells one per row.
 const rows = [
   ["K", "1", "0", "1s", "1"],
   ["L", "2", "0", "2s", "2"],

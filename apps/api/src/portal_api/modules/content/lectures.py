@@ -8,7 +8,7 @@ traceable record that makes one academically approvable, separate from platform 
   the tool's voice reference. Only the owner approves a voice (MFA, with evidence), so every lecture in a language
   sounds consistent; a retired voice can't start new lectures;
 * a **lecture** pins one *published* storyboard version (its scenes, claims and textbook source references) and
-  inherits its class, subject and chapter, so Class XI and XII never mix. It names its narration language and an
+  inherits its class, subject and chapter, so Class 11 and 12 never mix. It names its narration language and an
   approved voice in that language;
 * the **master video** is registered by file name, SHA-256, size and duration, and where the owner keeps it. Storing
   and serving video waits on object storage and the media provider (B03, B05);
@@ -280,7 +280,7 @@ def _caption_problems(db: Session, lec: Lecture, version_id: str) -> list[str]:
     if a.kind != "caption":
         problems.append(f"'{a.title}' isn't a captions file.")
     if (a.grade_number, a.subject_code) != (lec.grade_number, lec.subject_code):
-        problems.append(f"'{a.title}' belongs to another class or subject; Class XI and XII are never mixed.")
+        problems.append(f"'{a.title}' belongs to another class or subject; Class 11 and 12 are never mixed.")
     if v.delivery_state != "ready":
         problems.append(f"'{a.title}' version {v.number} has no ready copy.")
     return problems

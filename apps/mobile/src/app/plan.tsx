@@ -13,8 +13,8 @@ import { useAuth } from "@/lib/auth";
 import { daysFromToday } from "@/lib/dates";
 
 const GRADES = [
-  [11, "Class XI"],
-  [12, "Class XII"],
+  [11, "Class 11"],
+  [12, "Class 12"],
 ] as const;
 const hours = (m: number) => (m >= 60 ? `${Math.floor(m / 60)} h ${m % 60} min` : `${m} min`);
 const inDays = daysFromToday; // the Pakistan day, not the UTC day (P12.S4.T3)

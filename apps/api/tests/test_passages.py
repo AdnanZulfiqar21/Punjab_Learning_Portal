@@ -125,12 +125,12 @@ def test_a_question_names_a_published_passage_of_its_own_class(client: TestClien
     }
     chapter12, doc12 = _chapter(db, 12, "biology", 1)
     _confirm_rights(client, db, doc12)
-    other = _passage(client, xii, chapter12, doc12, [{"type": "paragraph", "text": "Fixture Class XII passage."}])
+    other = _passage(client, xii, chapter12, doc12, [{"type": "paragraph", "text": "Fixture Class 12 passage."}])
     mixed = _new_mcq(client, team["author"], str(chapter.id))
     body = {**copy.deepcopy(VALID), "passage_id": other["id"]}
     assert _save(client, team["author"], mixed, body, _refs(chapter, doc)).status_code == 200
     refused = _post(client, team["author"], mixed["id"], "submit")  # caught at submission already
-    assert refused.status_code == 422 and "Class XI and XII" in " ".join(refused.json()["errors"]), refused.text
+    assert refused.status_code == 422 and "Class 11 and 12" in " ".join(refused.json()["errors"]), refused.text
     missing = str(uuid.uuid4())
     item = _new_mcq(client, team["author"], str(chapter.id))
     body = {**copy.deepcopy(VALID), "passage_id": missing}
