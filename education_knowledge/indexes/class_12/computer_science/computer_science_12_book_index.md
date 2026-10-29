@@ -9,7 +9,7 @@ Credits (PDF 4): Authors Dr. Abdul Sattar (Asst. Prof. CS, Lahore Garrison Unive
 ## Completeness check
 - First pages present: PDF 1 outer cover (PECTAA, academic year 2026-2027, security sticker/QR), PDF 2 Quaid-e-Azam quote + security-sticker instructions, PDF 3 inner title, PDF 4 credits, PDF 5 copyright note + Table of Contents.
 - TOC present (PDF 5). Chapter sequence matches TOC; TOC misprints Ch 1 as "Computer Neworks".
-- MISSING PAGE: printed page 21 (Chapter 2) is absent. PDF 25 = printed 20 (chapter opener, ends mid-section 2.1), PDF 26 = printed 22 (begins mid-sentence "…correct order. This prevents errors…"). Lost content: end of 2.1, the whole of heading 2.2 (title UNVERIFIED — context and the chapter summary/long Q2 suggest problem-solving steps / decomposition), Figure 2.1 (never appears), and probably one activity/box.
+- MISSING PAGE (read from a second copy): printed page 21 (Chapter 2) is absent from this scan. PDF 25 = printed 20 (chapter opener, ends mid-section 2.1), PDF 26 = printed 22 (begins mid-sentence "…correct order. This prevents errors…"). On 2026-10-29 printed 21 was read from a second copy of the book (Study++ scan "12 Computer Science Book PECTAA (Study++).pdf", PDF 24 = printed 21; not a project source document): end of 2.1 (Real-life examples of Computational Thinking), Figure 2.1 Computational Thinking in Daily Life, 2.2 Problem Solving Using Computational Thinking with its intro and a DO YOU KNOW? box, and the sub-headings Identifying a Problem Clearly, Breaking a Problem into Smaller Parts (Decomposition) and Creating Step-by-Step Solutions (continues on PDF 26).
 - DUPLICATED PAGE: printed page 141 (model paper, last page) is scanned twice — PDF 145 and PDF 146 are identical.
 - PDF 147 = back cover (Qaumi Tarana / national anthem in Urdu + PECTAA logo), not a content page.
 - No blank or out-of-order pages otherwise. Every chapter has Summary, Exercise (MCQ, Short, Long) and an Answer Key.
@@ -109,7 +109,7 @@ TOC/actual mismatches: none in page numbers; only the "Neworks" misprint. Chapte
 - Formulas: none beyond the address-size arithmetic above. Example CIDR: 192.168.1.0/24 split into 192.168.1.0/25 and 192.168.1.128/25 (PDF 16).
 - Named processes/comparisons: packet transmission & reassembly (PDF 7–8); LAN vs WAN vs Internet (PDF 8); topology advantages/disadvantages (Table 1.1, PDF 12); DNS name resolution (PDF 14–15); wired vs wireless connections (PDF 17); ping output reading (PDF 18); load-balancing methods (PDF 19); backup types (PDF 21); usability vs security trade-off (PDF 21).
 - Worked examples: 1 command demonstration — "ping google.com" with sample output (PDF 18); IPv4/IPv6 breakdown examples 192.168.1.10 and 2001:0db8:85a3:0000:0000:8a2e:0370:7334 (PDF 15–16).
-- In-text features: TIDBIT ×4 (PDF 7, 9, 12, 13); DO YOU KNOW? ×6 (PDF 8, 12, 14, 15 ×2, 16); CLASS ACTIVITY ×8 (PDF 7, 9 ×2, 11, 17, 18, 19 ×2).
+- In-text features: TIDBIT ×4 (PDF 25, 26, 29, 32); DO YOU KNOW? ×4 (printed 21 from the second copy, PDF 27, 30, 32); CLASS ACTIVITY ×3 (PDF 27, 30, 33).
 - VISUALS IN THIS CHAPTER:
   | Visual ID | Type | PDF p | Printed p | Caption/identifier |
   |---|---|---|---|---|
@@ -140,15 +140,19 @@ TOC/actual mismatches: none in page numbers; only the "Neworks" misprint. Chapte
 - Issues: Fig 1.9 caption OCR'd as "Figure I Star Topology" but printed "Figure 1.9: Star Topology" (PDF 10). Printed page 9 footer shows "9" at an odd position (PDF 15 top), cosmetic only.
 
 ### Chapter 2 — Computational Thinking & Algorithms
-- Pages: printed 20–32 (printed 21 MISSING) · PDF 25–36
+- Pages: printed 20–32 (printed 21 missing from this scan; read from the second copy) · PDF 25–36
 - SLOs (printed, 2 bullets): apply problem solving by identifying, decomposing and creating solutions using computational thinking, evaluate and refine solutions; understand computational artifacts/algorithms, primitive structures (lists, stacks, queues, trees, graphs), use knowledge representation and reasoning with propositional and predicate logic.
 - Main concept: Computational thinking as a structured way to decompose and solve problems, then logic as a knowledge-representation framework — propositions, connectives, truth tables, equivalence, satisfiability, predicate logic with quantifiers, and logical inference/deduction.
 - Navigation tree (every heading as printed, in book order; nesting follows the printed heading levels):
   - Introduction (unnumbered) — PDF 25
   - 2.1 Introduction to Computational Thinking — PDF 25
     - Computational Thinking (unnumbered) — PDF 25
-  - [2.2 — on missing printed p.21; title UNVERIFIED. Text resumes PDF 26 mid-sentence about following steps in the correct order; Figure 2.1 also lost]
-  - Evaluating and Improving Solutions (unnumbered) — PDF 26
+    - Real-life examples of Computational Thinking (unnumbered) — printed 21 (second copy; not in this scan); Figure 2.1
+  - 2.2 Problem Solving Using Computational Thinking — printed 21 (second copy; not in this scan); DO YOU KNOW? box
+    - Identifying a Problem Clearly (unnumbered) — printed 21 (second copy)
+    - Breaking a Problem into Smaller Parts (Decomposition) (unnumbered) — printed 21 (second copy)
+    - Creating Step-by-Step Solutions (unnumbered) — printed 21 (second copy), continues PDF 26 with Figure 2.2
+    - Evaluating and Improving Solutions (unnumbered) — PDF 26
   - 2.3 Logic as a Knowledge Representation Framework — PDF 26
     - Logic in Computer Science (unnumbered) — PDF 26
     - Role of Logic in Reasoning and Decision Making (unnumbered) — PDF 26
@@ -191,7 +195,7 @@ TOC/actual mismatches: none in page numbers; only the "Neworks" misprint. Chapte
 - VISUALS IN THIS CHAPTER:
   | Visual ID | Type | PDF p | Printed p | Caption/identifier |
   |---|---|---|---|---|
-  | C12-CS/Ch2/Fig2.1 | — | — | 21 (missing) | NOT PRESENT in scan (page lost) |
+  | C12-CS/Ch2/Fig2.1 | Illustration | — (second copy PDF 24) | 21 (not in this scan) | Computational Thinking in Daily Life (four steps: 1. Decomposition – Break Down the Problem; 2. Pattern Recognition – Find Patterns; 3. Abstraction – Focus on What's Important; 4. Algorithm Design – Create Step-by-Step Solution) |
   | C12-CS/Ch2/Fig2.2 | Flowchart | 26 | 22 | Step by Step Algorithm Example |
   | C12-CS/Ch2/Fig2.3 | Diagram | 27 | 23 | Propositional Logic Statements |
   | C12-CS/Ch2/Fig2.4 | Venn diagrams | 28 | 24 | Logical Connectives |
@@ -203,7 +207,7 @@ TOC/actual mismatches: none in page numbers; only the "Neworks" misprint. Chapte
 - ASSESSMENT (Exercise, PDF 35–36): Multiple Choice Questions ×10 (PDF 35; Q6 and Q9 use logic symbols (P), (Q), (P∧Q), ∃, →, ∧, ∀ — symbol-based); Short Questions ×10 (PDF 35–36); Long Questions ×8 (PDF 36). Long Q5 asks to create truth tables (table-based answer).
 - Answer availability: MCQ Answer Key (PDF 36): 1 B, 2 C, 3 B, 4 C, 5 C, 6 C, 7 C, 8 C, 9 D, 10 B — verified.
 - Cross-chapter links: logic/if-then → conditional logic in Python code (Ch 3–5); decomposition → unit testing of small functions (Ch 5); predicate statements → hypothesis formulation (Ch 7).
-- Issues: printed page 21 missing (heading 2.2, Figure 2.1, part of 2.1 lost) — PDF 25/26 boundary. OCR of Fig 2.5 caption reads "Figure 15" (should be 2.5). Short Q1–5 on PDF 35, Q6–10 on PDF 36.
+- Issues: printed page 21 missing from this scan (PDF 25/26 boundary); read from the second copy (2026-10-29). OCR of Fig 2.5 caption reads "Figure 15" (should be 2.5). Short Q1–5 on PDF 35, Q6–10 on PDF 36.
 
 ### Chapter 3 — Object Oriented Programming Using Python
 - Pages: printed 33–44 · PDF 37–48
@@ -661,7 +665,7 @@ TOC/actual mismatches: none in page numbers; only the "Neworks" misprint. Chapte
 Chapter totals (excluding model paper): MCQ 90, Short 90, Long 72.
 
 ## BOOK ISSUES
-1. Missing printed page 21 (Chapter 2): PDF 25 (printed 20) → PDF 26 (printed 22). Lost: end of 2.1, heading 2.2 (title unknown), Figure 2.1, continuation into "…correct order". Page rule shifts from pdf = printed+5 to pdf = printed+4 at PDF 26.
+1. Missing printed page 21 (Chapter 2): PDF 25 (printed 20) → PDF 26 (printed 22). Page rule shifts from pdf = printed+5 to pdf = printed+4 at PDF 26. The page's content (end of 2.1, Figure 2.1, heading 2.2 Problem Solving Using Computational Thinking and its first three sub-headings) was read 2026-10-29 from a second copy of the book (Study++ scan "12 Computer Science Book PECTAA (Study++).pdf", PDF 24 = printed 21; not a project source document).
 2. Duplicate scan: PDF 145 and PDF 146 are both printed page 141 (model paper Section II). PDF 147 is the back cover.
 3. Answer-key error: Chapter 9 MCQ Q10 key says "C" (CPU); correct answer is (b) GDPR (PDF 139–140).
 4. TOC misprint "Computer Neworks" (PDF 5).
