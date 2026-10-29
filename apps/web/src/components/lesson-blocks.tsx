@@ -172,7 +172,8 @@ export function LessonBlocks({
       {blocks.map((b, i) => {
         if (isQuickCheck(blocks[i - 1], b)) return null; // drawn inside the card above
         if (isQuickCheck(b, blocks[i + 1])) {
-          const level = Math.min(6, (b.level === 3 ? 3 : 2) + headingOffset);
+          const depth = b.level === 4 ? 4 : b.level === 3 ? 3 : 2;
+      const level = Math.min(6, depth + headingOffset);
           const Tag = `h${level}` as "h2" | "h3" | "h4" | "h5" | "h6";
           return (
             <section key={i} className="overflow-hidden rounded-inner border border-ok/40 bg-surface shadow-sm" aria-label={str(b.text)}>
@@ -241,16 +242,18 @@ function BlockView({
       const Tag = `h${level}` as "h2" | "h3" | "h4" | "h5" | "h6";
       // Headings inside a topic ("Carbon monoxide (CO)" in 14.4.1) take their own colour, apart from the chapter's main
       // heading (14.4, accent) and the topic's title (14.4.1, text colour), so the three levels read apart (owner,
-      // 2026-10-27). Inside the lesson the two levels read apart too (owner, 2026-10-29: "same colour same size"): a
-      // section heading is larger and blue with a rule under it; its sub-heading is smaller, in the heading colour
-      // (--heading, the default for headings), with a blue bar at its start.
+      // 2026-10-27). Inside the lesson the levels read apart too (owner, 2026-10-29: "same colour same size"): a section
+      // (2) is large, bold and blue with a rule under it; a heading inside it (3) is blue and smaller; a numbered
+      // sub-heading (4) is smaller again, in the heading colour (--heading, the default for headings), with a blue bar.
       return (
         <Tag
           dir="auto"
           className={
-            b.level === 3
-              ? "border-l-[3px] border-subheading pl-3 text-[17px] leading-snug font-semibold"
-              : "border-b border-border pt-3 pb-1.5 text-[22px] leading-tight font-bold tracking-tight text-subheading"
+            depth === 4
+              ? "border-l-[3px] border-subheading pl-3 text-base leading-snug font-semibold"
+              : depth === 3
+                ? "pt-1 text-lg leading-snug font-semibold text-subheading"
+                : "border-b border-border pt-3 pb-1.5 text-[22px] leading-tight font-bold tracking-tight text-subheading"
           }
         >
           <Marked text={str(b.text)} marks={marks} />

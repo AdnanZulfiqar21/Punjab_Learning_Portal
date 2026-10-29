@@ -277,15 +277,19 @@ function BlockView({ block: b, assetSource, dataSaver }: { block: Block; assetSo
   switch (b.type) {
     case "heading":
       // Headings inside a topic take their own colour, apart from the chapter's main heading (accent) and the topic's
-      // title (text colour), so the three levels read apart (owner, 2026-10-27). Inside the lesson the two levels read
-      // apart too (owner, 2026-10-29): a section heading is blue and bold with a rule under it; its sub-heading is
-      // smaller, in the heading colour, with a blue bar at its start.
-      return b.level === 3 ? (
+      // title (text colour), so the three levels read apart (owner, 2026-10-27). Inside the lesson the levels read apart
+      // too (owner, 2026-10-29): a section (2) is blue and bold with a rule under it, a heading inside it (3) blue and
+      // smaller, a numbered sub-heading (4) in the heading colour with a blue bar at its start.
+      return b.level === 4 ? (
         <View style={{ marginTop: Space.xs, borderLeftWidth: 3, borderLeftColor: c.subheading, paddingLeft: Space.sm }}>
-          <T variant="subheading" accessibilityRole="header" style={{ color: c.heading }}>
+          <T variant="body" accessibilityRole="header" style={{ color: c.heading, fontWeight: "600" }}>
             <Marked text={str(b.text)} marks={marks} />
           </T>
         </View>
+      ) : b.level === 3 ? (
+        <T variant="subheading" accessibilityRole="header" style={{ marginTop: Space.xs, color: c.subheading }}>
+          <Marked text={str(b.text)} marks={marks} />
+        </T>
       ) : (
         <View style={{ marginTop: Space.sm, borderBottomWidth: 1, borderBottomColor: c.border, paddingBottom: Space.xs }}>
           <T variant="heading" accessibilityRole="header" style={{ color: c.subheading, fontWeight: "700" }}>

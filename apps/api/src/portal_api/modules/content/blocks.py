@@ -137,7 +137,8 @@ class _Marked(_Block):
 
 class Heading(_Marked):
     type: Literal["heading"]
-    level: Literal[2, 3] = 2
+    # 2 a section, 3 a heading inside it, 4 a numbered sub-heading under that (owner, 2026-10-29).
+    level: Literal[2, 3, 4] = 2
     text: Short
 
     def _texts(self) -> list[str]:
