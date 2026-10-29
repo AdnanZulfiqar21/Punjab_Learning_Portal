@@ -4,7 +4,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 
-import { bookBoxKind, sideBox } from "../src/lib/book-box.ts";
+import { BOOK_BOX_KINDS, bookBoxKind, sideBox } from "../src/lib/book-box.ts";
 
 describe("book boxes", () => {
   it("know their kind from the printed title, in English or Roman Urdu", () => {
@@ -14,14 +14,26 @@ describe("book boxes", () => {
     assert.equal(bookBoxKind("Did you Know!"), "know");
     assert.equal(bookBoxKind("Kya aap jante hain? (Do You Know?)"), "know");
     assert.equal(bookBoxKind("For Your Information"), "info");
-    assert.equal(bookBoxKind("Interesting Information!"), "info");
-    assert.equal(bookBoxKind("Tid-bits"), "info");
-    assert.equal(bookBoxKind("Brain Teaser!"), "ponder");
+    assert.equal(bookBoxKind("Aap ki maloomat ke liye"), "info");
+    assert.equal(bookBoxKind("Interesting Information!"), "interesting");
+    assert.equal(bookBoxKind("Dilchasp maloomat"), "interesting");
+    assert.equal(bookBoxKind("Fascinating Fact"), "interesting");
+    assert.equal(bookBoxKind("Tid-bits"), "tidbit");
+    assert.equal(bookBoxKind("Tidbit!"), "tidbit");
     assert.equal(bookBoxKind("Point to ponder"), "ponder");
-    assert.equal(bookBoxKind("Quick Quiz"), "ponder");
+    assert.equal(bookBoxKind("Ponder Upon"), "ponder");
+    assert.equal(bookBoxKind("Brain Teaser!"), "teaser");
+    assert.equal(bookBoxKind("Quick Quiz"), "quiz");
     assert.equal(bookBoxKind("Keep in Mind!"), "keep");
     assert.equal(bookBoxKind("Class Activity"), "activity");
+    assert.equal(bookBoxKind("A Scientific Fact"), "fact");
+    assert.equal(bookBoxKind("Interesting Application"), "fact");
     assert.equal(bookBoxKind("Significance of Archaea"), "info"); // any other printed box
+  });
+
+  it("gives the common kinds different colours", () => {
+    assert.equal(new Set(BOOK_BOX_KINDS).size, BOOK_BOX_KINDS.length);
+    assert.ok(BOOK_BOX_KINDS.length >= 10);
   });
 
   it("puts only a short box at the side", () => {
