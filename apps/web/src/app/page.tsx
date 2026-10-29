@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { cookies } from "next/headers";
 import { Suspense } from "react";
 import type { Dashboard, Discovery } from "@portal/contracts";
 import { ButtonLink } from "@/components/button";
@@ -10,6 +11,7 @@ import { SectionHeader } from "@/components/section-header";
 import { SubjectTiles } from "@/components/subject-tiles";
 import { Notice, SkeletonCards, SkeletonLines } from "@/components/ui";
 import { getDiscovery } from "@/lib/api";
+import { LEARN_COOKIE, parseLearnCookie } from "@/lib/learn-context";
 import { api, currentUser, features } from "@/lib/session";
 
 const SUBJECTS = ["Biology", "Chemistry", "Physics", "Computer Science", "Mathematics"];
@@ -42,7 +44,7 @@ async function discovery(): Promise<Discovery | null> {
 /** Signed-in learners get their dashboard (P11.S1.T2); everyone else sees the introduction. */
 async function HomeFor() {
   const user = await currentUser();
-  if (!user) return <Welcome d={await discovery()} />;
+  if (!user) return <Welcome d={await discovery()} grade={parseLearnCookie((await cookies()).get(LEARN_COOKIE)?.value).grade} />;
   const [res, d] = await Promise.all([api<Dashboard>("/v1/me/dashboard", { token: user.token }), discovery()]);
   if (!res.ok) {
     return <Notice tone="warn" title="Couldn't load your dashboard">{res.problem?.detail ?? "Please try again."}</Notice>;
@@ -59,7 +61,7 @@ const FEATURES: { icon: IconName; label: string; title: string; text: string }[]
 ];
 
 /** P11.S1.T1 (PUBLIC-SITE-01): courses, tracks and honest coverage from what is actually published (DISCOVERY-01). */
-function Welcome({ d }: { d: Discovery | null }) {
+function Welcome({ d, grade }: { d: Discovery | null; grade?: number }) {
   const lessons = d?.books.reduce((n, b) => n + b.live_lessons, 0) ?? 0;
   const previews = d?.books.reduce((n, b) => n + b.preview_lessons, 0) ?? 0;
   const outlineOnly = d?.books.filter((b) => b.state === "not_yet_published").length ?? 0;
@@ -101,7 +103,7 @@ function Welcome({ d }: { d: Discovery | null }) {
         </Notice>
       )}
 
-      <SubjectTiles books={d?.books ?? null} />
+      <SubjectTiles books={d?.books ?? null} grade={grade} />
 
       <section aria-labelledby="features-heading">
         <h2 id="features-heading" className="sr-only">

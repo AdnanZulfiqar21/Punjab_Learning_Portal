@@ -8,3 +8,8 @@ const TAUGHT = new Set<string>(TAUGHT_SUBJECTS);
 export function taughtBooks<T extends { subject: string }>(books: readonly T[]): T[] {
   return books.filter((b) => TAUGHT.has(b.subject));
 }
+
+/** The class a whole subject tile opens: the learner's own class when the subject has it, else its first class. */
+export function tileGrade(grades: readonly number[], preferred: number | undefined): number {
+  return preferred !== undefined && grades.includes(preferred) ? preferred : grades[0];
+}
