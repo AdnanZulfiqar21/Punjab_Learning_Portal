@@ -6,6 +6,7 @@ alone is never an identifier. Every chapter/topic keeps its source reference (PD
 
 from __future__ import annotations
 
+import re
 import uuid
 from datetime import date, datetime
 from typing import Any, Literal
@@ -31,6 +32,8 @@ from portal_api.db import Base
 
 TopicKind = Literal["topic", "exercise"]
 EXERCISE_KEY_SUFFIX = "/u-exercise"
+# A printed heading number in a natural key fragment ("1.1.1.1", or "1.1.1.1~2" for the book's second 1.1.1.1).
+PRINTED_NUMBER = re.compile(r"^(\d+(?:\.\d+)+[A-Za-z]?)(?:~\d+)?$")
 
 
 class Region(Base):
@@ -196,6 +199,15 @@ class Topic(Base):
         """BOOK-EXERCISES-01: a chapter's end-of-chapter exercise (natural key `…/u-exercise`) is practised in Practice,
         never read in Learn. The rule is the catalogue key alone, so a book that gains exercise topics just has them."""
         return "exercise" if self.natural_key.endswith(EXERCISE_KEY_SUFFIX) else "topic"
+
+    @property
+    def book_number(self) -> str | None:
+        """BOOK-NUMBER-01: the heading number printed in the book, when the topic shows another one. Where the book
+        misprints a number (Computer Science 11: 1.1.1.1 Requirement Gathering sits at 1.2.2.1), students see the
+        number in sequence and, beside it, the book's own to find the page. The natural key keeps the printed number."""
+        m = PRINTED_NUMBER.match(self.natural_key.rsplit("/", 1)[-1])
+        printed = m.group(1) if m else None
+        return printed if printed and printed != self.number else None
 
 
 class ImportBatch(Base):

@@ -197,6 +197,7 @@ def get_chapter(session: Session, chapter_id: uuid.UUID) -> ChapterOut:
         node = TopicNode(
             id=t.id,
             number=t.number,
+            book_number=t.book_number,
             title=t.title,
             kind=t.kind,
             depth=t.depth,

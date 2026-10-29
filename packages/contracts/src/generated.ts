@@ -11776,6 +11776,8 @@ export interface components {
         };
         /** TopicNode */
         TopicNode: {
+            /** Book Number */
+            book_number?: string | null;
             /** Children */
             children: components["schemas"]["TopicNode"][];
             /** Depth */
