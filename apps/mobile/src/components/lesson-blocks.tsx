@@ -234,12 +234,17 @@ function ArchivedImage({
 
 // BOOK-BOX-01: the header colour of each kind of printed box; the same values as globals.css (.book-box).
 const BOOK_BOX_HEAD: Record<BookBoxKind, string> = {
-  rule: "#2f6db5",
-  know: "#237a49",
+  rule: "#2f5fb3",
+  know: "#1f7a52",
   info: "#0e6f78",
-  ponder: "#7a3d9c",
+  interesting: "#9a5b06",
+  tidbit: "#b0245a",
+  ponder: "#6d3aa8",
+  teaser: "#4338ca",
+  quiz: "#9d1b9f",
   keep: "#a3480a",
-  activity: "#b23a0e",
+  activity: "#b4380f",
+  fact: "#0f5f8a",
 };
 
 function Lines({ items, ordered, marks = [] }: { items: string[]; ordered: boolean; marks?: string[] }) {
