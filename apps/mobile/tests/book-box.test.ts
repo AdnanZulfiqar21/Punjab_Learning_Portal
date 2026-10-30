@@ -24,6 +24,8 @@ describe("book boxes", () => {
     assert.equal(bookBoxKind("Ponder Upon"), "ponder");
     assert.equal(bookBoxKind("Brain Teaser!"), "teaser");
     assert.equal(bookBoxKind("Quick Quiz"), "quiz");
+    assert.equal(bookBoxKind("Quick Check 3.2"), "check");
+    assert.equal(bookBoxKind("Self-Assessment"), "check");
     assert.equal(bookBoxKind("Keep in Mind!"), "keep");
     assert.equal(bookBoxKind("Class Activity"), "activity");
     assert.equal(bookBoxKind("A Scientific Fact"), "fact");
