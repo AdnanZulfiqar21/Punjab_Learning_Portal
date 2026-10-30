@@ -599,6 +599,11 @@ html:has(.lesson-flow, [data-reading-bar]) {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
+/* Two boxes side by side never look alike: the second in each pair shifts to a neighbouring hue (black text stays black,
+   the white header text keeps its contrast). */
+.book-box-row > :nth-child(even) .book-box {
+  filter: hue-rotate(32deg);
+}
 .book-box-row .book-box-side {
   float: none !important;
   width: auto !important;
