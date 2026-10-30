@@ -242,6 +242,7 @@ const BOOK_BOX_HEAD: Record<BookBoxKind, string> = {
   ponder: "#6d3aa8",
   teaser: "#4338ca",
   quiz: "#9d1b9f",
+  check: "#2e6b30",
   keep: "#a3480a",
   activity: "#b4380f",
   fact: "#0f5f8a",
