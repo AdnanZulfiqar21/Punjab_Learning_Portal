@@ -42,7 +42,7 @@ export function sideBox(text: string): boolean {
   return text.length <= 420;
 }
 
-type BlockLike = { type?: unknown; tone?: unknown; title?: unknown };
+type BlockLike = { type?: unknown; tone?: unknown; title?: unknown; [field: string]: unknown };
 
 /** A printed box: a titled note callout (our tips, corrections and untitled notes are not the book's boxes). */
 export function isBookBox(b: BlockLike | undefined): boolean {
