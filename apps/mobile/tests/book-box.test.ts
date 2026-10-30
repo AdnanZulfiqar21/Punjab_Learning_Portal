@@ -4,7 +4,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 
-import { BOOK_BOX_KINDS, bookBoxKind, boxRun, isBookBox, sideBox } from "../src/lib/book-box.ts";
+import { BOOK_BOX_KINDS, bookBoxKind, boxRow, boxRun, isBookBox, sideBox } from "../src/lib/book-box.ts";
 
 describe("book boxes", () => {
   it("know their kind from the printed title, in English or Roman Urdu", () => {
@@ -51,6 +51,17 @@ describe("book boxes", () => {
     assert.equal(isBookBox({ type: "callout", tone: "note", text: "x" }), false); // an untitled note is not a printed box
     const blocks = [para, box, box, para, box, box, box, tip];
     assert.deepEqual(blocks.map((_, i) => boxRun(blocks, i)), [0, 2, 0, 0, 3, 0, 0, 0]);
+  });
+
+  it("puts a run side by side only when no text would flow beside it", () => {
+    const box = { type: "callout", tone: "note", title: "For your information", text: "x" };
+    const para = { type: "paragraph", text: "x" };
+    const fig = { type: "diagram", alt: "x" };
+    assert.equal(boxRow([para, box, box], 1), 2); // lesson ends after the boxes
+    assert.equal(boxRow([para, box, box, fig], 1), 2); // a figure follows: nothing flows beside
+    assert.equal(boxRow([para, box, box, para], 1), 0); // text follows: it flows beside the boxes in the margin
+    assert.equal(boxRow([para, box, box, { type: "heading", text: "x" }], 1), 0);
+    assert.equal(boxRow([para, box, para], 1), 0); // a single box stays in the margin
   });
 
   it("is the same file on web and app", async () => {

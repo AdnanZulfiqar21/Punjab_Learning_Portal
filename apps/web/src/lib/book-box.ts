@@ -58,3 +58,15 @@ export function boxRun(blocks: readonly BlockLike[], i: number): number {
   while (isBookBox(blocks[i + n])) n++;
   return n;
 }
+
+const FLOWS = new Set(["paragraph", "list", "heading"]);
+
+/** A run of printed boxes is drawn side by side in one row only when no text would flow beside it on the left (the
+ * block after the run is not a paragraph, list or heading, or the lesson ends); otherwise the boxes keep to the margin
+ * with the text beside them (owner, 2026-10-29). Returns the run's length for such a row, else 0. */
+export function boxRow(blocks: readonly BlockLike[], i: number): number {
+  const run = boxRun(blocks, i);
+  if (run < 2) return 0;
+  const after = blocks[i + run];
+  return after && FLOWS.has(String(after.type)) ? 0 : run;
+}

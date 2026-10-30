@@ -4,7 +4,7 @@ import { CodeRunner } from "@/components/code-runner";
 import { Equation } from "@/components/equation";
 import { Model3DFigure } from "@/components/model3d-figure";
 import { SaverImage } from "@/components/saver-image";
-import { bookBoxKind, boxRun, isBookBox, sideBox } from "@/lib/book-box";
+import { bookBoxKind, boxRow, isBookBox, sideBox } from "@/lib/book-box";
 import { bookErrors, markLatex, markPieces } from "@/lib/book-errors";
 import { codeRuns } from "@/lib/code-highlight";
 import { leadIn, leadTerm } from "@/lib/book-style";
@@ -37,6 +37,13 @@ const CALLOUT_LABEL: Record<string, string> = {
   correction: "Book correction",
 };
 
+
+/** How many printed boxes come right before block i (0 when i starts a run). */
+function boxBack(blocks: Block[], i: number) {
+  let n = 0;
+  while (isBookBox(blocks[i - n - 1])) n++;
+  return n;
+}
 
 /** A printed "Quick Check" heading followed by its questions: one card, as the book prints it. */
 function isQuickCheck(b: Block | undefined, next: Block | undefined) {
@@ -162,10 +169,10 @@ export function LessonBlocks({
     <div className="lesson-flow space-y-5 leading-relaxed" data-style={premium ? "premium" : undefined}>
       {blocks.map((b, i) => {
         if (isQuickCheck(blocks[i - 1], b)) return null; // drawn inside the card above
-        // BOOK-BOX-01: printed boxes that follow each other sit side by side in one row on a wide screen, instead of
-        // stacking in the margin with empty space beside them (owner, 2026-10-29). Each keeps its own block id.
-        if (isBookBox(b) && isBookBox(blocks[i - 1])) return null; // drawn in the row above
-        const run = boxRun(blocks, i);
+        // BOOK-BOX-01: printed boxes that follow each other, with no text to flow beside them on the left, sit side by
+        // side in one row instead of stacking in the margin over empty space (owner, 2026-10-29). Each keeps its id.
+        if (isBookBox(b) && boxRow(blocks, i - boxBack(blocks, i)) > 0 && boxBack(blocks, i) > 0) return null; // in the row above
+        const run = boxRow(blocks, i);
         if (run > 1)
           return (
             <div key={i} className="book-box-row">
