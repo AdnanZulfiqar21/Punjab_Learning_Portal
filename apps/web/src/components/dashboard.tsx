@@ -2,13 +2,14 @@ import Link from "next/link";
 import type { Dashboard, Discovery } from "@portal/contracts";
 import { ButtonLink } from "@/components/button";
 import { GlassCard } from "@/components/glass-card";
-import { Icon } from "@/components/icons";
+import { Icon, SubjectIcon } from "@/components/icons";
 import { PageHero } from "@/components/page-hero";
 import { ProgressBar } from "@/components/progress-bar";
 import { SectionHeader } from "@/components/section-header";
 import { SubjectTiles } from "@/components/subject-tiles";
 import { Notice } from "@/components/ui";
 import { GRADE_LABEL } from "@/lib/format";
+import { subjectKey } from "@/lib/learn-context";
 import { TIME_ZONE } from "@/lib/dates";
 
 const METER_LABEL: Record<Dashboard["meters"][number]["key"], string> = {
@@ -74,24 +75,57 @@ export function DashboardView({
           </>
         }
       >
-        <GlassCard as="section" aria-labelledby="continue-h" className="mx-auto max-w-xl text-left">
-          <h2 id="continue-h" className="font-sans text-sm font-normal text-muted">
-            Continue learning
-          </h2>
+        <GlassCard as="section" aria-labelledby="continue-h" className="mx-auto max-w-xl text-left" data-subject={next ? subjectKey(next.subject) : undefined}>
           {next ? (
-            <>
-              <p className="mt-1 font-display text-xl leading-snug font-semibold">
-                <Link href={`/learn/chapter/${next.chapter_id}#lesson-${next.lesson_id}`} className="text-foreground underline-offset-4 hover:text-accent hover:underline">
-                  {next.title}
-                </Link>
-              </p>
-              <p className="text-sm text-muted">
-                {GRADE_LABEL[next.grade] ?? `Class ${next.grade}`} · <span className="capitalize">{subject(next.subject)}</span> · Chapter{" "}
-                {next.chapter_number}: {next.chapter_title}
-              </p>
-            </>
+            // The lesson in the subject's colour, with the chapter's real progress (completed of published lessons,
+            // from the API) and a Continue button. No streak or other figure the API doesn't give (owner rule 6).
+            <div className="space-y-4">
+              <div className="flex items-start gap-4">
+                <SubjectIcon subject={next.subject} size={48} />
+                <div className="min-w-0 flex-1">
+                  <h2 id="continue-h" className="text-xs font-semibold tracking-[0.14em] text-accent uppercase">
+                    Continue learning
+                  </h2>
+                  <p className="mt-1 font-display text-xl leading-snug font-semibold">
+                    <Link href={`/learn/chapter/${next.chapter_id}#lesson-${next.lesson_id}`} className="text-foreground underline-offset-4 hover:text-accent hover:underline">
+                      {next.title}
+                    </Link>
+                  </p>
+                  <p className="text-sm text-muted">
+                    {GRADE_LABEL[next.grade] ?? `Class ${next.grade}`} · <span className="capitalize">{subject(next.subject)}</span> · Chapter{" "}
+                    {next.chapter_number}: {next.chapter_title}
+                  </p>
+                </div>
+              </div>
+              {next.chapter_total > 0 && (
+                <div className="space-y-1.5">
+                  <div className="flex items-baseline justify-between gap-3 text-sm">
+                    <span className="text-muted">Chapter {next.chapter_number} progress</span>
+                    <span className="font-semibold">
+                      {next.chapter_done} of {next.chapter_total} {next.chapter_total === 1 ? "lesson" : "lessons"}
+                    </span>
+                  </div>
+                  <ProgressBar
+                    value={next.chapter_done}
+                    max={next.chapter_total}
+                    label={`Chapter ${next.chapter_number} progress`}
+                    valueText={`${next.chapter_done} of ${next.chapter_total} lessons completed`}
+                    className="h-2"
+                  />
+                </div>
+              )}
+              <div className="flex justify-end">
+                <ButtonLink href={`/learn/chapter/${next.chapter_id}#lesson-${next.lesson_id}`}>
+                  Continue
+                  <Icon name="arrow-right" size={16} />
+                </ButtonLink>
+              </div>
+            </div>
           ) : (
-            <div className="mt-1 flex flex-wrap items-center justify-between gap-3">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <h2 id="continue-h" className="sr-only">
+                Continue learning
+              </h2>
               <p className="text-sm">Nothing in progress. Open any lesson and it will appear here.</p>
               <ButtonLink href="/learn">
                 Start learning
