@@ -41,3 +41,20 @@ export function bookBoxKind(title: string): BookBoxKind {
 export function sideBox(text: string): boolean {
   return text.length <= 420;
 }
+
+type BlockLike = { type?: unknown; tone?: unknown; title?: unknown };
+
+/** A printed box: a titled note callout (our tips, corrections and untitled notes are not the book's boxes). */
+export function isBookBox(b: BlockLike | undefined): boolean {
+  const title = typeof b?.title === "string" ? b.title.trim() : "";
+  return b?.type === "callout" && (b.tone ?? "note") === "note" && title !== "" && title.toLowerCase() !== "note";
+}
+
+/** At the first box of a run of printed boxes next to each other, the run's length; 0 anywhere else. Boxes in a run
+ * sit side by side on a wide screen instead of stacking in the margin (owner, 2026-10-29). */
+export function boxRun(blocks: readonly BlockLike[], i: number): number {
+  if (!isBookBox(blocks[i]) || isBookBox(blocks[i - 1])) return 0;
+  let n = 1;
+  while (isBookBox(blocks[i + n])) n++;
+  return n;
+}

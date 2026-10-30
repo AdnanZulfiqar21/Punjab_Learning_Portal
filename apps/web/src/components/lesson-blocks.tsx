@@ -4,7 +4,7 @@ import { CodeRunner } from "@/components/code-runner";
 import { Equation } from "@/components/equation";
 import { Model3DFigure } from "@/components/model3d-figure";
 import { SaverImage } from "@/components/saver-image";
-import { bookBoxKind, sideBox } from "@/lib/book-box";
+import { bookBoxKind, boxRun, isBookBox, sideBox } from "@/lib/book-box";
 import { bookErrors, markLatex, markPieces } from "@/lib/book-errors";
 import { codeRuns } from "@/lib/code-highlight";
 import { leadIn, leadTerm } from "@/lib/book-style";
@@ -162,6 +162,18 @@ export function LessonBlocks({
     <div className="lesson-flow space-y-5 leading-relaxed" data-style={premium ? "premium" : undefined}>
       {blocks.map((b, i) => {
         if (isQuickCheck(blocks[i - 1], b)) return null; // drawn inside the card above
+        // BOOK-BOX-01: printed boxes that follow each other sit side by side in one row on a wide screen, instead of
+        // stacking in the margin with empty space beside them (owner, 2026-10-29). Each keeps its own block id.
+        if (isBookBox(b) && isBookBox(blocks[i - 1])) return null; // drawn in the row above
+        const run = boxRun(blocks, i);
+        if (run > 1)
+          return (
+            <div key={i} className="book-box-row">
+              {blocks.slice(i, i + run).map((_, k) => (
+                <Fragment key={i + k}>{wrap(i + k, view(blocks[i + k], i + k))}</Fragment>
+              ))}
+            </div>
+          );
         if (isQuickCheck(b, blocks[i + 1])) {
           const level = Math.min(6, (b.level === 3 ? 3 : 2) + headingOffset);
           const Tag = `h${level}` as "h2" | "h3" | "h4" | "h5" | "h6";

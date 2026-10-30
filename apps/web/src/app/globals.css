@@ -586,6 +586,24 @@ html:has(.lesson-flow, [data-reading-bar]) {
   --bb-body: color-mix(in srgb, var(--bb-head) 16%, #161916);
   border-color: color-mix(in srgb, var(--bb-head) 70%, #161916);
 }
+/* Printed boxes next to each other: one row, side by side on a wide screen (two to a line), stacked on a phone. In a
+   row a box never floats. */
+.book-box-row {
+  display: grid;
+  gap: 1rem;
+  clear: both;
+  align-items: start;
+}
+@media (min-width: 40rem) {
+  .book-box-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+.book-box-row .book-box-side {
+  float: none !important;
+  width: auto !important;
+  margin: 0 !important;
+}
 /* A side box at the end of a lesson stays inside the lesson card. */
 .lesson-flow {
   display: flow-root;

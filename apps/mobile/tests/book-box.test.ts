@@ -4,7 +4,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 
-import { BOOK_BOX_KINDS, bookBoxKind, sideBox } from "../src/lib/book-box.ts";
+import { BOOK_BOX_KINDS, bookBoxKind, boxRun, isBookBox, sideBox } from "../src/lib/book-box.ts";
 
 describe("book boxes", () => {
   it("know their kind from the printed title, in English or Roman Urdu", () => {
@@ -40,6 +40,17 @@ describe("book boxes", () => {
     assert.equal(sideBox("Mean deviation from an average value."), true);
     assert.equal(sideBox("x".repeat(420)), true);
     assert.equal(sideBox("x".repeat(421)), false);
+  });
+
+  it("knows a printed box and a run of boxes next to each other", () => {
+    const box = { type: "callout", tone: "note", title: "For your information", text: "x" };
+    const para = { type: "paragraph", text: "x" };
+    const tip = { type: "callout", tone: "tip", title: "Diagram ko samjhein", text: "x" };
+    assert.equal(isBookBox(box), true);
+    assert.equal(isBookBox(tip), false);
+    assert.equal(isBookBox({ type: "callout", tone: "note", text: "x" }), false); // an untitled note is not a printed box
+    const blocks = [para, box, box, para, box, box, box, tip];
+    assert.deepEqual(blocks.map((_, i) => boxRun(blocks, i)), [0, 2, 0, 0, 3, 0, 0, 0]);
   });
 
   it("is the same file on web and app", async () => {
