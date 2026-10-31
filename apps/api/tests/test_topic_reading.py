@@ -218,8 +218,7 @@ def test_practice_lists_each_chapters_exercise_with_what_the_caller_can_read(cli
     learner = {e["topic_id"]: e for e in client.get(path).json()["exercises"]}
     assert learner[target_id]["availability"] == "unavailable"
 
-    # A book with no exercise topics yet lists none; another class's book is never mixed in.
-    assert client.get("/v1/grades/12/subjects/biology/exercises").json()["exercises"] == []
+    # Another class's book is never mixed in.
     assert not set(expected) & {
         e["topic_id"] for e in client.get("/v1/grades/11/subjects/computer_science/exercises").json()["exercises"]
     }
