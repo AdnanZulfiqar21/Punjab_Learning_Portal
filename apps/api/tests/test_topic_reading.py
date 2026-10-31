@@ -105,10 +105,14 @@ def test_next_and_previous_follow_the_books_reading_order(client: TestClient) ->
         )
         first_child = min(by_parent[top.id], key=lambda t: (t.display_order, t.id))
         siblings = sorted(
-            db.scalars(
-                select(Topic).where(
-                    Topic.chapter_id == top.chapter_id, Topic.parent_id.is_(None), Topic.retired_at.is_(None)
+            (
+                t
+                for t in db.scalars(
+                    select(Topic).where(
+                        Topic.chapter_id == top.chapter_id, Topic.parent_id.is_(None), Topic.retired_at.is_(None)
+                    )
                 )
+                if t.kind == "topic"  # the chapter's exercise and papers are not in the reading order
             ),
             key=lambda t: (t.display_order, t.id),
         )
