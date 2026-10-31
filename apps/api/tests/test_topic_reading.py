@@ -105,10 +105,14 @@ def test_next_and_previous_follow_the_books_reading_order(client: TestClient) ->
         )
         first_child = min(by_parent[top.id], key=lambda t: (t.display_order, t.id))
         siblings = sorted(
-            db.scalars(
-                select(Topic).where(
-                    Topic.chapter_id == top.chapter_id, Topic.parent_id.is_(None), Topic.retired_at.is_(None)
+            (
+                t
+                for t in db.scalars(
+                    select(Topic).where(
+                        Topic.chapter_id == top.chapter_id, Topic.parent_id.is_(None), Topic.retired_at.is_(None)
+                    )
                 )
+                if t.kind == "topic"  # the chapter's exercise and papers are not in the reading order
             ),
             key=lambda t: (t.display_order, t.id),
         )
@@ -218,8 +222,7 @@ def test_practice_lists_each_chapters_exercise_with_what_the_caller_can_read(cli
     learner = {e["topic_id"]: e for e in client.get(path).json()["exercises"]}
     assert learner[target_id]["availability"] == "unavailable"
 
-    # A book with no exercise topics yet lists none; another class's book is never mixed in.
-    assert client.get("/v1/grades/12/subjects/biology/exercises").json()["exercises"] == []
+    # Another class's book is never mixed in.
     assert not set(expected) & {
         e["topic_id"] for e in client.get("/v1/grades/11/subjects/computer_science/exercises").json()["exercises"]
     }

@@ -168,6 +168,23 @@ def _continue(db: Session, user_id: uuid.UUID, grade: int | None) -> dict[str, A
     if row is None:
         return None
     item, chapter, at = row
+    # The chapter's own progress for the "continue" card: published lessons of the chapter in the lesson's language,
+    # and how many of them this learner marked completed. Counted, never estimated.
+    chapter_lessons = select(ContentItem.id).where(
+        ContentItem.kind == "lesson",
+        ContentItem.availability == Availability.live.value,
+        ContentItem.chapter_id == chapter.id,
+        ContentItem.language == item.language,
+    )
+    total = int(db.scalar(select(func.count()).select_from(chapter_lessons.subquery())) or 0)
+    finished = int(
+        db.scalar(
+            select(func.count()).where(
+                LessonCompletion.user_id == user_id, LessonCompletion.item_id.in_(chapter_lessons)
+            )
+        )
+        or 0
+    )
     return {
         "lesson_id": item.id,
         "title": item.title,
@@ -177,6 +194,8 @@ def _continue(db: Session, user_id: uuid.UUID, grade: int | None) -> dict[str, A
         "chapter_number": chapter.number,
         "chapter_title": chapter.title,
         "opened_at": at,
+        "chapter_done": finished,
+        "chapter_total": total,
     }
 
 

@@ -6304,6 +6304,8 @@ export interface components {
         };
         /** ContinueLesson */
         ContinueLesson: {
+            /** Chapter Done */
+            chapter_done: number;
             /**
              * Chapter Id
              * Format: uuid
@@ -6313,6 +6315,8 @@ export interface components {
             chapter_number: number;
             /** Chapter Title */
             chapter_title: string;
+            /** Chapter Total */
+            chapter_total: number;
             /** Grade */
             grade: number;
             /**

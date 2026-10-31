@@ -32,6 +32,7 @@ Versions looked up:
 
 | Advisory | Package and path | Severity | Ships to users? | Decision |
 |---|---|---|---|---|
+| GHSA-7wch-p9px-956x, GHSA-jc66-7q78-782g, GHSA-8hrf-8g6f-7xwp, GHSA-hqq3-7jhf-c5jx, GHSA-5x38-2vff-x55p | node-forge ≤1.4.0 via `@expo/cli` (published 2026-10-31) | High | No: mobile build tooling | Fixed (#456): override `@expo/cli>node-forge` ^1.4.1, resolves to 1.4.2. With it, GHSA-86w9-cpqp-85rv and GHSA-vfj7-8cjw-p6xm no longer match any installed package; their ignores can be dropped |
 | GHSA-86w9-cpqp-85rv | node-forge via `@expo/cli` | High | No: mobile build tooling | Reviewed exception (SUPPLY-CHAIN-01); no patched version listed |
 | GHSA-vfj7-8cjw-p6xm | braces via Metro | High | No: mobile bundler | Reviewed exception (SUPPLY-CHAIN-01); no patched version listed |
 | GHSA-qr28-fpjm-wq7f | decode-uri-component ≤0.5.0 via `expo-router` → `query-string` 7.1.3 (published 2026-10-29) | High | Yes: the mobile app parses links with it | Reviewed exception (SUPPLY-CHAIN-01, 2026-10-29), below |

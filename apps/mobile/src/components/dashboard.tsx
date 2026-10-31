@@ -6,6 +6,7 @@ import { View } from "react-native";
 
 import { Card, ErrorState, Loading, Notice, T } from "@/components/ui";
 import { Space } from "@/constants/theme";
+import { useTheme } from "@/hooks/use-theme";
 import { useRequest } from "@/hooks/use-request";
 import { api, GRADE_LABEL } from "@/lib/api";
 import { TIME_ZONE } from "@/lib/dates";
@@ -19,6 +20,7 @@ const METER_LABEL: Record<Dashboard["meters"][number]["key"], string> = {
 const when = (iso: string) => new Date(iso).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short", timeZone: TIME_ZONE });
 
 export function DashboardSection({ token }: { token: string }) {
+  const c = useTheme();
   const req = useRequest((signal) => api.dashboard(token, signal), [token]);
   const feats = useRequest((signal) => api.features(token, signal), [token]);
   const studyTools = feats.state.status === "success" && feats.state.data.study_tools === true; // ROLLOUT-01
@@ -66,6 +68,17 @@ export function DashboardSection({ token }: { token: string }) {
           <T variant="small">
             {GRADE_LABEL[next.grade]} · Chapter {next.chapter_number}: {next.chapter_title}
           </T>
+          {next.chapter_total > 0 && (
+            // The chapter's real progress (completed of published lessons, from the API); no invented figure.
+            <View style={{ gap: 4, marginTop: Space.xs }} accessibilityLabel={`${next.chapter_done} of ${next.chapter_total} lessons completed`}>
+              <T variant="small" style={{ fontWeight: "600" }}>
+                {next.chapter_done} of {next.chapter_total} {next.chapter_total === 1 ? "lesson" : "lessons"}
+              </T>
+              <View style={{ height: 8, borderRadius: 999, backgroundColor: c.border, overflow: "hidden" }}>
+                <View style={{ height: 8, borderRadius: 999, backgroundColor: c.accent, width: `${Math.round((100 * next.chapter_done) / next.chapter_total)}%` }} />
+              </View>
+            </View>
+          )}
         </Card>
       ) : null}
       <Card label={`Today's revision: ${d.revision.due} due`} onPress={() => router.push("/notebook")}>
