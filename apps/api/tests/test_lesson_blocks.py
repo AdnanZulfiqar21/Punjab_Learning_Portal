@@ -63,6 +63,18 @@ def test_book_errors_mark_printed_passages_and_a_correction_follows() -> None:
     assert blocks.validate_body({"blocks": [marked_correction]}, for_publication=False).errors
 
 
+def test_running_text_carries_the_books_bold_terms() -> None:
+    # BOOK-BOLD-01: a paragraph, list, box or table names the terms the book prints in bold; each must be in its text.
+    para = {"type": "paragraph", "text": "Fixture a nucleotide called fixture ATP.", "bold": ["nucleotide", "ATP"]}
+    items = {"type": "list", "items": ["Fixture photolysis of water", "Fixture step"], "bold": ["photolysis"]}
+    box = {"type": "callout", "tone": "note", "text": "Fixture Karl Lohmann found it.", "bold": ["Karl Lohmann"]}
+    table = {"type": "table", "caption": "Fixture", "header": ["A"], "rows": [["Fixture ribose"]], "bold": ["ribose"]}
+    assert blocks.validate_body({"blocks": [para, items, box, table]}, for_publication=False).errors == []
+    assert blocks.validate_body({"blocks": [{**para, "bold": ["adenine"]}]}, for_publication=False).errors
+    heading = {"type": "heading", "text": "Fixture", "bold": ["Fixture"]}  # a heading is bold already
+    assert blocks.validate_body({"blocks": [heading]}, for_publication=False).errors
+
+
 def test_headings_have_three_levels_inside_a_lesson() -> None:
     # A section (2), its heading (3) and a numbered sub-heading under it (4), as the books print them (2026-10-29).
     def heading(level: int) -> dict[str, Any]:

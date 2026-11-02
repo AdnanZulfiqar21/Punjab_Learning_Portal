@@ -135,6 +135,25 @@ class _Marked(_Block):
         return self
 
 
+# BOOK-BOLD-01: the terms the book prints in bold inside running text (owner, 2026-11-02: "jasa sb book ma hy wasa kr
+# do"). Clients draw every occurrence of each term in bold. Each term must occur in the block's own text.
+Bold = Annotated[list[Short] | None, Field(max_length=40)]
+
+
+class _Emphasised(_Marked):
+    """A block of running text that can carry the book's bold terms (BOOK-BOLD-01)."""
+
+    bold: Bold = None  # absent, not empty, so stored bodies stay as authored
+
+    @model_validator(mode="after")
+    def _bold_in_text(self) -> _Emphasised:
+        texts = self._texts()
+        for term in self.bold or []:
+            if not any(term in t for t in texts):
+                raise ValueError(f"bold term {term!r} does not occur in the block's text")
+        return self
+
+
 class Heading(_Marked):
     type: Literal["heading"]
     # 2 a section, 3 a heading inside it, 4 a numbered sub-heading under that (owner, 2026-10-29).
@@ -145,7 +164,7 @@ class Heading(_Marked):
         return [self.text]
 
 
-class Paragraph(_Marked):
+class Paragraph(_Emphasised):
     type: Literal["paragraph"]
     text: Text
 
@@ -153,7 +172,7 @@ class Paragraph(_Marked):
         return [self.text]
 
 
-class ListBlock(_Marked):
+class ListBlock(_Emphasised):
     type: Literal["list"]
     ordered: bool = False
     items: list[Annotated[str, Field(min_length=1, max_length=1000)]] = Field(min_length=1, max_length=50)
@@ -162,7 +181,7 @@ class ListBlock(_Marked):
         return list(self.items)
 
 
-class Callout(_Marked):
+class Callout(_Emphasised):
     type: Literal["callout"]
     # `correction`: the right version of a book error marked in the block before it (BOOK-CORRECTION-01). A printed
     # box (Do You Know, For Your Information) may itself carry marks; a correction box never does.
@@ -176,7 +195,7 @@ class Callout(_Marked):
         return [*([self.title] if self.title else []), self.text]
 
 
-class Table(_Marked):
+class Table(_Emphasised):
     type: Literal["table"]
     caption: Short
     header: list[Annotated[str, Field(max_length=200)]] = Field(min_length=1, max_length=12)

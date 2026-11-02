@@ -4,7 +4,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { describe, it } from "node:test";
 
-import { bookErrors, markLatex, markPieces, paintBookErrors } from "../src/lib/book-errors.ts";
+import { bookErrors, markLatex, markPieces, paintBookErrors, styledPieces } from "../src/lib/book-errors.ts";
 
 describe("book error marks", () => {
   it("marks the printed passage and keeps the rest plain", () => {
@@ -43,6 +43,24 @@ describe("book error marks", () => {
     assert.equal(markLatex(String.raw`K_p = K_n N^{\Delta n}`, ["K_n N"]), String.raw`K_p = \textcolor{#a31d1e}{K_n N}^{\Delta n}`);
     assert.equal(markLatex(String.raw`\text{rate} = k[\ce{H2}]`, ["k"]), String.raw`\text{rate} = \textcolor{#a31d1e}{k}[\ce{H2}]`);
     assert.equal(paintBookErrors('<span style="color:#a31d1e;">H</span>'), '<span style="color:var(--danger);background-color:var(--danger-soft);">H</span>');
+  });
+
+  it("draws the book's bold terms bold, inside and outside a marked error (BOOK-BOLD-01)", () => {
+    const text = "a nucleotide called ATP; ATP again";
+    assert.deepEqual(styledPieces(text, [], ["nucleotide", "ATP"]), [
+      { text: "a ", error: false, bold: false },
+      { text: "nucleotide", error: false, bold: true },
+      { text: " called ", error: false, bold: false },
+      { text: "ATP", error: false, bold: true },
+      { text: "; ", error: false, bold: false },
+      { text: "ATP", error: false, bold: true },
+      { text: " again", error: false, bold: false },
+    ]);
+    assert.deepEqual(styledPieces("called ATP", ["called ATP"], ["ATP"]), [
+      { text: "called ", error: true, bold: false },
+      { text: "ATP", error: true, bold: true },
+    ]);
+    assert.deepEqual(styledPieces("plain", [], []), [{ text: "plain", error: false, bold: false }]);
   });
 
   it("is the same code on web and mobile", () => {

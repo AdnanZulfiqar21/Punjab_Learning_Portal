@@ -13,7 +13,7 @@ import { LinkButton, T } from "@/components/ui";
 import { CodeColors, Fonts, Radius, Space } from "@/constants/theme";
 import { useScheme, useTheme } from "@/hooks/use-theme";
 import { bookBoxKind, isMarginNote, type BookBoxKind } from "@/lib/book-box";
-import { bookErrors, markPieces } from "@/lib/book-errors";
+import { bookErrors, markPieces, styledPieces } from "@/lib/book-errors";
 import { codeRuns } from "@/lib/code-highlight";
 import { leadIn, leadTerm } from "@/lib/book-style";
 import { comparisonCards } from "@/lib/lesson-tables";
@@ -63,14 +63,19 @@ function Code({ text, language, marks }: { text: string; language: string; marks
 }
 
 /** Text with the textbook's wrong passages marked in red (BOOK-CORRECTION-01). Nested Text keeps it one paragraph. */
-function Marked({ text, marks }: { text: string; marks: string[] }) {
+function Marked({ text, marks, bold = [] }: { text: string; marks: string[]; bold?: string[] }) {
   const c = useTheme();
-  if (!marks.length) return <>{text}</>;
+  if (!marks.length && !bold.length) return <>{text}</>;
   return (
     <>
-      {markPieces(text, marks).map((p, i) =>
+      {styledPieces(text, marks, bold).map((p, i) =>
         p.error ? (
-          <Text key={i} style={{ color: c.danger, backgroundColor: c.dangerSoft, fontWeight: "600" }}>
+          <Text key={i} style={{ color: c.danger, backgroundColor: c.dangerSoft, fontWeight: p.bold ? "700" : "600" }}>
+            {p.text}
+          </Text>
+        ) : p.bold ? (
+          // BOOK-BOLD-01: a term the book prints in bold
+          <Text key={i} style={{ fontWeight: "700" }}>
             {p.text}
           </Text>
         ) : (
@@ -250,7 +255,7 @@ const BOOK_BOX_HEAD: Record<BookBoxKind, string> = {
 // An untitled margin note: a gold edge and a pale yellow body, as on the web.
 const MARGIN_NOTE = "#c9a227";
 
-function Lines({ items, ordered, marks = [] }: { items: string[]; ordered: boolean; marks?: string[] }) {
+function Lines({ items, ordered, marks = [], bold = [] }: { items: string[]; ordered: boolean; marks?: string[]; bold?: string[] }) {
   const c = useTheme();
   const premium = useContext(Premium);
   return (
@@ -259,7 +264,7 @@ function Lines({ items, ordered, marks = [] }: { items: string[]; ordered: boole
         <View key={i} style={{ flexDirection: "row", gap: Space.sm }}>
           <T style={{ width: 24, textAlign: "right", color: c.accent, fontWeight: "700" }}>{ordered ? `${i + 1}.` : "•"}</T>
           <T style={{ flex: 1 }}>
-            <Item text={item} marks={premium ? marks : null} />
+            <Item text={item} marks={premium ? marks : null} bold={bold} />
           </T>
         </View>
       ))}
@@ -268,16 +273,16 @@ function Lines({ items, ordered, marks = [] }: { items: string[]; ordered: boole
 }
 
 /** BOOK-STYLE-01: "Term: what it means" shows the term bold in the subject colour (premium books; `marks` null = plain). */
-function Item({ text, marks }: { text: string; marks: string[] | null }) {
+function Item({ text, marks, bold }: { text: string; marks: string[] | null; bold: string[] }) {
   const c = useTheme();
   const lead = marks ? leadTerm(text, marks) : null;
-  if (!lead) return <Marked text={text} marks={marks ?? []} />;
+  if (!lead) return <Marked text={text} marks={marks ?? []} bold={bold} />;
   return (
     <>
       <Text style={{ fontWeight: "600", color: c.accent }}>
         <Marked text={`${lead[0]}:`} marks={marks ?? []} />
       </Text>{" "}
-      <Marked text={lead[1]} marks={marks ?? []} />
+      <Marked text={lead[1]} marks={marks ?? []} bold={bold} />
     </>
   );
 }
@@ -289,6 +294,7 @@ function BlockView({ block: b, assetSource, dataSaver }: { block: Block; assetSo
   const runnable = useContext(Runnable);
   const revealLabel = useContext(RevealLabel);
   const marks = bookErrors(b.book_errors);
+  const bold = bookErrors(b.bold); // BOOK-BOLD-01: the terms the book prints in bold
   switch (b.type) {
     case "heading":
       // Headings inside a topic take their own colour, apart from the chapter's main heading (accent) and the topic's
@@ -298,17 +304,17 @@ function BlockView({ block: b, assetSource, dataSaver }: { block: Block; assetSo
       return b.level === 4 ? (
         <View style={{ marginTop: Space.xs, borderLeftWidth: 3, borderLeftColor: c.subheading, paddingLeft: Space.sm }}>
           <T variant="body" accessibilityRole="header" style={{ color: c.heading, fontSize: 17, fontWeight: "600" }}>
-            <Marked text={str(b.text)} marks={marks} />
+            <Marked text={str(b.text)} marks={marks} bold={bold} />
           </T>
         </View>
       ) : b.level === 3 ? (
         <T variant="subheading" accessibilityRole="header" style={{ marginTop: Space.xs, color: c.subheading, fontSize: 18, lineHeight: 25, fontWeight: "700" }}>
-          <Marked text={str(b.text)} marks={marks} />
+          <Marked text={str(b.text)} marks={marks} bold={bold} />
         </T>
       ) : (
         <View style={{ marginTop: Space.sm, borderBottomWidth: 1, borderBottomColor: c.border, paddingBottom: Space.xs }}>
           <T variant="heading" accessibilityRole="header" style={{ color: c.subheading, fontWeight: "700" }}>
-            <Marked text={str(b.text)} marks={marks} />
+            <Marked text={str(b.text)} marks={marks} bold={bold} />
           </T>
         </View>
       );
@@ -326,17 +332,17 @@ function BlockView({ block: b, assetSource, dataSaver }: { block: Block; assetSo
         return (
           <View style={{ borderLeftWidth: 4, borderLeftColor: c.accent, borderRadius: 2, paddingLeft: Space.sm }}>
             <T style={{ fontWeight: "600" }}>
-              <Marked text={str(b.text)} marks={marks} />
+              <Marked text={str(b.text)} marks={marks} bold={bold} />
             </T>
           </View>
         );
       return (
         <T>
-          <Marked text={str(b.text)} marks={marks} />
+          <Marked text={str(b.text)} marks={marks} bold={bold} />
         </T>
       );
     case "list":
-      return <Lines items={strs(b.items)} ordered={b.ordered === true} marks={marks} />;
+      return <Lines items={strs(b.items)} ordered={b.ordered === true} marks={marks} bold={bold} />;
     case "callout": {
       const tone = str(b.tone) || "note";
       // A tip is green, as on the web: the diagram explanations ("Understanding the diagram") use it. So is a book
@@ -354,10 +360,10 @@ function BlockView({ block: b, assetSource, dataSaver }: { block: Block; assetSo
         return (
           <View style={{ borderWidth: 1, borderColor: head, borderRadius: Radius.md, overflow: "hidden", backgroundColor: scheme === "dark" ? c.surfaceMuted : `${head}14` }}>
             <T style={{ backgroundColor: head, color: "#ffffff", fontWeight: "700", paddingHorizontal: Space.md, paddingVertical: Space.xs }}>
-              <Marked text={title} marks={marks} />
+              <Marked text={title} marks={marks} bold={bold} />
             </T>
             <T style={{ padding: Space.md }}>
-              <Marked text={str(b.text)} marks={marks} />
+              <Marked text={str(b.text)} marks={marks} bold={bold} />
             </T>
           </View>
         );
@@ -367,7 +373,7 @@ function BlockView({ block: b, assetSource, dataSaver }: { block: Block; assetSo
         return (
           <View style={{ borderWidth: 1, borderColor: MARGIN_NOTE, borderRadius: Radius.md, backgroundColor: scheme === "dark" ? c.surfaceMuted : `${MARGIN_NOTE}1f`, padding: Space.md }}>
             <T>
-              <Marked text={str(b.text)} marks={marks} />
+              <Marked text={str(b.text)} marks={marks} bold={bold} />
             </T>
           </View>
         );
@@ -378,11 +384,11 @@ function BlockView({ block: b, assetSource, dataSaver }: { block: Block; assetSo
           </T>
           {title ? (
             <T style={{ fontWeight: "700" }}>
-              <Marked text={title} marks={marks} />
+              <Marked text={title} marks={marks} bold={bold} />
             </T>
           ) : null}
           <T>
-            <Marked text={str(b.text)} marks={marks} />
+            <Marked text={str(b.text)} marks={marks} bold={bold} />
           </T>
         </View>
       );
@@ -399,13 +405,13 @@ function BlockView({ block: b, assetSource, dataSaver }: { block: Block; assetSo
       return (
         <View style={{ gap: Space.sm }} accessibilityLabel={`Table: ${str(b.caption)}`}>
           <T style={{ fontWeight: "600", color: premium ? c.accent : c.text }}>
-            <Marked text={str(b.caption)} marks={marks} />
+            <Marked text={str(b.caption)} marks={marks} bold={bold} />
           </T>
           {cards ? (
             cards.map((card, i) => (
               <View key={i} style={{ borderWidth: 1, borderColor: c.border, backgroundColor: c.surface, borderRadius: Radius.md, padding: Space.md, gap: Space.xs }}>
                 <T style={{ fontWeight: "700", color: c.accent }}>
-                  <Marked text={card.title} marks={marks} />
+                  <Marked text={card.title} marks={marks} bold={bold} />
                 </T>
                 {card.fields.map((f) => (
                   <View key={f.label} style={{ flexDirection: "row", gap: Space.sm }}>
@@ -413,7 +419,7 @@ function BlockView({ block: b, assetSource, dataSaver }: { block: Block; assetSo
                       {f.label}
                     </T>
                     <T style={{ flex: 1 }}>
-                      <Marked text={f.value} marks={marks} />
+                      <Marked text={f.value} marks={marks} bold={bold} />
                     </T>
                   </View>
                 ))}
@@ -423,20 +429,20 @@ function BlockView({ block: b, assetSource, dataSaver }: { block: Block; assetSo
             // A one-column table is a boxed list in the book: its items sit in two columns (owner, 2026-10-29).
             <View style={{ borderWidth: 1, borderColor: c.border, backgroundColor: c.surface, borderRadius: Radius.md, overflow: "hidden" }}>
               <T style={{ fontWeight: "700", padding: Space.sm, backgroundColor: c.surfaceMuted }}>
-                <Marked text={header[0]} marks={marks} />
+                <Marked text={header[0]} marks={marks} bold={bold} />
               </T>
               <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
                 {rows.map((r, i) => (
                   <View key={i} style={{ width: "50%", padding: Space.sm, borderTopWidth: 1, borderColor: c.border }}>
                     <T variant="small">
-                      <Marked text={r[0] ?? ""} marks={marks} />
+                      <Marked text={r[0] ?? ""} marks={marks} bold={bold} />
                     </T>
                   </View>
                 ))}
               </View>
             </View>
           ) : (
-            <Lines items={rows.flat()} ordered={false} marks={marks} />
+            <Lines items={rows.flat()} ordered={false} marks={marks} bold={bold} />
           )}
         </View>
       );
@@ -498,7 +504,7 @@ function BlockView({ block: b, assetSource, dataSaver }: { block: Block; assetSo
         <View style={{ borderWidth: 1, borderColor: c.border, borderRadius: Radius.sm, padding: Space.md, gap: Space.sm }}>
           {str(fb.image_asset_id) ? <ArchivedImage id={str(fb.image_asset_id)} alt={str(fb.alt) || str(b.text_alt)} assetSource={assetSource} dataSaver={dataSaver} /> : null}
           <T>
-            <Marked text={str(b.text_alt)} marks={marks} />
+            <Marked text={str(b.text_alt)} marks={marks} bold={bold} />
           </T>
         </View>
       );
@@ -519,16 +525,16 @@ function BlockView({ block: b, assetSource, dataSaver }: { block: Block; assetSo
             Worked example
           </T>
           <T style={{ fontWeight: "600" }}>
-            <Marked text={str(b.title)} marks={marks} />
+            <Marked text={str(b.title)} marks={marks} bold={bold} />
           </T>
           <T>
-            <Marked text={str(b.problem)} marks={marks} />
+            <Marked text={str(b.problem)} marks={marks} bold={bold} />
           </T>
-          <Lines items={strs(b.steps)} ordered marks={marks} />
+          <Lines items={strs(b.steps)} ordered marks={marks} bold={bold} />
           {str(b.answer) ? (
             <T style={{ fontWeight: "600" }}>
               {"Answer: "}
-              <Marked text={str(b.answer)} marks={marks} />
+              <Marked text={str(b.answer)} marks={marks} bold={bold} />
             </T>
           ) : null}
         </View>
@@ -539,7 +545,7 @@ function BlockView({ block: b, assetSource, dataSaver }: { block: Block; assetSo
         <View style={{ gap: Space.xs }} accessibilityLabel={`${str(b.language) || "Program"} code${str(b.caption) ? `: ${str(b.caption)}` : ""}`}>
           {str(b.caption) ? (
             <T variant="small" style={{ fontWeight: "600", color: c.muted }}>
-              <Marked text={str(b.caption)} marks={marks} />
+              <Marked text={str(b.caption)} marks={marks} bold={bold} />
             </T>
           ) : null}
           <ScrollView horizontal style={{ borderWidth: 1, borderColor: c.border, borderRadius: Radius.md, backgroundColor: c.surfaceMuted }} contentContainerStyle={{ padding: Space.md }}>
