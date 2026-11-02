@@ -4,7 +4,7 @@ import { CodeRunner } from "@/components/code-runner";
 import { Equation } from "@/components/equation";
 import { Model3DFigure } from "@/components/model3d-figure";
 import { SaverImage } from "@/components/saver-image";
-import { bookBoxKind, boxRow, isBookBox, isMarginNote, sideBox } from "@/lib/book-box";
+import { bookBoxKind, boxRow, isBookBox, isMarginNote, sideBox, sideOrder } from "@/lib/book-box";
 import { bookErrors, markLatex, markPieces } from "@/lib/book-errors";
 import { codeRuns } from "@/lib/code-highlight";
 import { leadIn, leadTerm } from "@/lib/book-style";
@@ -167,7 +167,8 @@ export function LessonBlocks({
     );
   return (
     <div className="lesson-flow space-y-5 leading-relaxed" data-style={premium ? "premium" : undefined}>
-      {blocks.map((b, i) => {
+      {sideOrder(blocks).map((i) => {
+        const b = blocks[i];
         if (isQuickCheck(blocks[i - 1], b)) return null; // drawn inside the card above
         // BOOK-BOX-01: printed boxes that follow each other, with no text to flow beside them on the left, sit side by
         // side in one row instead of stacking in the margin over empty space (owner, 2026-10-29). Each keeps its id.

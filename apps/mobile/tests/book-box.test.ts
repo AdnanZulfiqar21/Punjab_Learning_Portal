@@ -4,7 +4,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 
-import { BOOK_BOX_KINDS, bookBoxKind, boxRow, boxRun, isBookBox, isMarginNote, sideBox } from "../src/lib/book-box.ts";
+import { BOOK_BOX_KINDS, bookBoxKind, boxRow, boxRun, isBookBox, isMarginNote, sideBox, sideOrder } from "../src/lib/book-box.ts";
 
 describe("book boxes", () => {
   it("know their kind from the printed title, in English or Roman Urdu", () => {
@@ -62,6 +62,20 @@ describe("book boxes", () => {
     assert.equal(isMarginNote({ type: "callout", tone: "note", title: "Do You Know?", text: "x" }), false); // a printed box
     assert.equal(isMarginNote({ type: "callout", tone: "tip", text: "x" }), false); // our own tip
     assert.equal(isMarginNote({ type: "paragraph", text: "x" }), false);
+  });
+
+  it("draws a side box before the text in front of it when no text follows it", () => {
+    const box = { type: "callout", tone: "note", title: "Recalling", text: "short" };
+    const note = { type: "callout", tone: "note", text: "short" };
+    const para = { type: "paragraph", text: "x" };
+    const fig = { type: "diagram", alt: "x" };
+    assert.deepEqual(sideOrder([para, box, fig]), [1, 0, 2]); // the paragraph flows beside the box
+    assert.deepEqual(sideOrder([para, note]), [1, 0]); // lesson ends after the note
+    assert.deepEqual(sideOrder([para, box, para]), [0, 1, 2]); // text already follows the box
+    assert.deepEqual(sideOrder([fig, box, fig]), [0, 1, 2]); // no text before it either
+    assert.deepEqual(sideOrder([para, box, box, fig]), [0, 1, 2, 3]); // a row of boxes is not moved
+    const long = { type: "callout", tone: "note", title: "Recalling", text: "x".repeat(421) };
+    assert.deepEqual(sideOrder([para, long, fig]), [0, 1, 2]); // a long box is full width, nothing to flow beside
   });
 
   it("puts a run side by side only when no text would flow beside it", () => {
