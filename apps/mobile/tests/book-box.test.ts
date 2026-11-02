@@ -4,7 +4,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 
-import { BOOK_BOX_KINDS, bookBoxKind, boxRow, boxRun, isBookBox, sideBox } from "../src/lib/book-box.ts";
+import { BOOK_BOX_KINDS, bookBoxKind, boxRow, boxRun, isBookBox, isMarginNote, sideBox } from "../src/lib/book-box.ts";
 
 describe("book boxes", () => {
   it("know their kind from the printed title, in English or Roman Urdu", () => {
@@ -53,6 +53,15 @@ describe("book boxes", () => {
     assert.equal(isBookBox({ type: "callout", tone: "note", text: "x" }), false); // an untitled note is not a printed box
     const blocks = [para, box, box, para, box, box, box, tip];
     assert.deepEqual(blocks.map((_, i) => boxRun(blocks, i)), [0, 2, 0, 0, 3, 0, 0, 0]);
+  });
+
+  it("knows a margin note the book prints without a title", () => {
+    assert.equal(isMarginNote({ type: "callout", tone: "note", text: "x" }), true);
+    assert.equal(isMarginNote({ type: "callout", text: "x" }), true); // tone defaults to note
+    assert.equal(isMarginNote({ type: "callout", tone: "note", title: "  ", text: "x" }), true);
+    assert.equal(isMarginNote({ type: "callout", tone: "note", title: "Do You Know?", text: "x" }), false); // a printed box
+    assert.equal(isMarginNote({ type: "callout", tone: "tip", text: "x" }), false); // our own tip
+    assert.equal(isMarginNote({ type: "paragraph", text: "x" }), false);
   });
 
   it("puts a run side by side only when no text would flow beside it", () => {

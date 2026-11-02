@@ -4,7 +4,7 @@ import { CodeRunner } from "@/components/code-runner";
 import { Equation } from "@/components/equation";
 import { Model3DFigure } from "@/components/model3d-figure";
 import { SaverImage } from "@/components/saver-image";
-import { bookBoxKind, boxRow, isBookBox, sideBox } from "@/lib/book-box";
+import { bookBoxKind, boxRow, isBookBox, isMarginNote, sideBox } from "@/lib/book-box";
 import { bookErrors, markLatex, markPieces } from "@/lib/book-errors";
 import { codeRuns } from "@/lib/code-highlight";
 import { leadIn, leadTerm } from "@/lib/book-style";
@@ -331,6 +331,15 @@ function BlockView({
             <p dir="auto" className="book-box-head">
               <Marked text={title} marks={marks} />
             </p>
+            <p dir="auto" className="book-box-body whitespace-pre-line">
+              <Marked text={str(b.text)} marks={marks} />
+            </p>
+          </aside>
+        );
+      // A margin note the book prints without a title: the same tinted box with no header, at the side when short.
+      if (isMarginNote(b))
+        return (
+          <aside data-book-box="note" className={`book-box ${sideBox(str(b.text)) ? "book-box-side" : ""}`}>
             <p dir="auto" className="book-box-body whitespace-pre-line">
               <Marked text={str(b.text)} marks={marks} />
             </p>

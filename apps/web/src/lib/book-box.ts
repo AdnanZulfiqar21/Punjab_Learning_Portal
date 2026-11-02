@@ -52,6 +52,13 @@ export function isBookBox(b: BlockLike | undefined): boolean {
   return b?.type === "callout" && (b.tone ?? "note") === "note" && title !== "" && title.toLowerCase() !== "note";
 }
 
+/** A margin note the book prints without a title (an untitled note callout): drawn like a printed box but with no header,
+ * and at the side of the text when it is short, as in the book's margin (owner, 2026-11-02). */
+export function isMarginNote(b: BlockLike | undefined): boolean {
+  const title = typeof b?.title === "string" ? b.title.trim() : "";
+  return b?.type === "callout" && (b.tone ?? "note") === "note" && title === "";
+}
+
 /** At the first box of a run of printed boxes next to each other, the run's length; 0 anywhere else. Boxes in a run
  * sit side by side on a wide screen instead of stacking in the margin (owner, 2026-10-29). */
 export function boxRun(blocks: readonly BlockLike[], i: number): number {

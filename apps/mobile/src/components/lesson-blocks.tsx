@@ -12,7 +12,7 @@ import { Model3D } from "@/components/model3d";
 import { LinkButton, T } from "@/components/ui";
 import { CodeColors, Fonts, Radius, Space } from "@/constants/theme";
 import { useScheme, useTheme } from "@/hooks/use-theme";
-import { bookBoxKind, type BookBoxKind } from "@/lib/book-box";
+import { bookBoxKind, isMarginNote, type BookBoxKind } from "@/lib/book-box";
 import { bookErrors, markPieces } from "@/lib/book-errors";
 import { codeRuns } from "@/lib/code-highlight";
 import { leadIn, leadTerm } from "@/lib/book-style";
@@ -247,6 +247,8 @@ const BOOK_BOX_HEAD: Record<BookBoxKind, string> = {
   activity: "#b4380f",
   fact: "#0f5f8a",
 };
+// An untitled margin note: a gold edge and a pale yellow body, as on the web.
+const MARGIN_NOTE = "#c9a227";
 
 function Lines({ items, ordered, marks = [] }: { items: string[]; ordered: boolean; marks?: string[] }) {
   const c = useTheme();
@@ -360,6 +362,15 @@ function BlockView({ block: b, assetSource, dataSaver }: { block: Block; assetSo
           </View>
         );
       }
+      // A margin note the book prints without a title: the same tinted box with no header (full width on a phone).
+      if (isMarginNote(b))
+        return (
+          <View style={{ borderWidth: 1, borderColor: MARGIN_NOTE, borderRadius: Radius.md, backgroundColor: scheme === "dark" ? c.surfaceMuted : `${MARGIN_NOTE}1f`, padding: Space.md }}>
+            <T>
+              <Marked text={str(b.text)} marks={marks} />
+            </T>
+          </View>
+        );
       return (
         <View style={{ borderLeftWidth: 4, borderLeftColor: border, backgroundColor: bg, borderRadius: Radius.md, padding: Space.md, gap: Space.xs }}>
           <T variant="eyebrow" style={{ color: tone === "warning" ? c.warn : tone === "definition" ? c.accent : green ? c.ok : c.muted }}>
