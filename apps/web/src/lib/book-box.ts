@@ -70,9 +70,14 @@ export function boxRun(blocks: readonly BlockLike[], i: number): number {
 
 const FLOWS = new Set(["paragraph", "list", "heading"]);
 
-/** A short printed box or margin note: it floats at the side of the text on a wide screen. */
+/** A figure the book prints beside the text rather than across the page (BOOK-LAYOUT-01, owner 2026-11-03). */
+export function isSideFigure(b: BlockLike | undefined): boolean {
+  return b?.type === "diagram" && b.side === true;
+}
+
+/** A short printed box, a margin note or a side figure: it floats at the side of the text on a wide screen. */
 function floats(b: BlockLike | undefined): boolean {
-  return (isBookBox(b) || isMarginNote(b)) && typeof b?.text === "string" && sideBox(b.text);
+  return ((isBookBox(b) || isMarginNote(b)) && typeof b?.text === "string" && sideBox(b.text)) || isSideFigure(b);
 }
 
 /** The order to draw a lesson's blocks in. Side boxes that come right after a paragraph or list are drawn just before

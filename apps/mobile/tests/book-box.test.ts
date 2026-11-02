@@ -4,7 +4,17 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 
-import { BOOK_BOX_KINDS, bookBoxKind, boxRow, boxRun, isBookBox, isMarginNote, sideBox, sideOrder } from "../src/lib/book-box.ts";
+import {
+  BOOK_BOX_KINDS,
+  bookBoxKind,
+  boxRow,
+  boxRun,
+  isBookBox,
+  isMarginNote,
+  isSideFigure,
+  sideBox,
+  sideOrder,
+} from "../src/lib/book-box.ts";
 
 describe("book boxes", () => {
   it("know their kind from the printed title, in English or Roman Urdu", () => {
@@ -78,6 +88,10 @@ describe("book boxes", () => {
     assert.deepEqual(sideOrder([para, box, box, fig]), [0, 1, 2, 3]); // boxes side by side in a row are not moved
     const long = { type: "callout", tone: "note", title: "Recalling", text: "x".repeat(421) };
     assert.deepEqual(sideOrder([para, long, fig]), [0, 1, 2]); // a long box is full width, nothing flows beside it
+    const sideFig = { type: "diagram", alt: "x", side: true };
+    assert.deepEqual(sideOrder([para, sideFig, head]), [1, 0, 2]); // a figure printed beside the text floats like a box
+    assert.equal(isSideFigure(sideFig), true);
+    assert.equal(isSideFigure(fig), false);
   });
 
   it("puts a run side by side only when no text would flow beside it", () => {

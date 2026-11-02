@@ -4,7 +4,7 @@ import { CodeRunner } from "@/components/code-runner";
 import { Equation } from "@/components/equation";
 import { Model3DFigure } from "@/components/model3d-figure";
 import { SaverImage } from "@/components/saver-image";
-import { bookBoxKind, boxRow, isBookBox, isMarginNote, sideBox, sideOrder } from "@/lib/book-box";
+import { bookBoxKind, boxRow, isBookBox, isMarginNote, isSideFigure, sideBox, sideOrder } from "@/lib/book-box";
 import { bookErrors, markLatex, markPieces, styledPieces } from "@/lib/book-errors";
 import { codeRuns } from "@/lib/code-highlight";
 import { leadIn, leadTerm } from "@/lib/book-style";
@@ -588,7 +588,7 @@ function BlockView({
       );
     case "diagram":
       return (
-        <figure className="space-y-2">
+        <figure className={`space-y-2 ${isSideFigure(b) ? "figure-side" : ""}`}>
           <ArchivedImage id={str(b.asset_version_id)} alt={str(b.alt)} assetUrl={assetUrl} dataSaver={dataSaver} />
           <figcaption className="text-sm text-muted">{str(b.caption)}</figcaption>
           {str(b.long_description) && (

@@ -636,7 +636,14 @@ html:has(.lesson-flow, [data-reading-bar]) {
   }
   /* Text flows beside a side box, as in the book; anything wider or boxed starts below it, and so does a new section's
      heading, so a box never runs into the next section. Side boxes stack at the side of the same text. */
-  .lesson-flow > [data-kind]:not([data-kind="paragraph"], [data-kind="list"]):not(:has(> .book-box-side)) {
+  .lesson-flow > [data-kind]:not([data-kind="paragraph"], [data-kind="list"]):not(:has(> .book-box-side, > .figure-side)) {
     clear: both;
+  }
+  /* A figure the book prints beside the text (BOOK-LAYOUT-01): at the side of its paragraph, about half the width. */
+  .figure-side {
+    float: right;
+    clear: right;
+    width: 48%;
+    margin: 0.25rem 0 0.75rem 1.25rem;
   }
 }

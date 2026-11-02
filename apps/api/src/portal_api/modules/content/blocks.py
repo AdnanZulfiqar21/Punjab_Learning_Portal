@@ -328,6 +328,9 @@ class Diagram(_Block):
     alt: Annotated[str, Field(min_length=3, max_length=500)]
     caption: Short
     long_description: Text | None = None
+    # BOOK-LAYOUT-01: printed beside the text rather than across the page; on a wide screen it sits at the side of the
+    # paragraph it is printed with, as in the book (owner, 2026-11-03). Absent means across the page.
+    side: bool | None = None
 
 
 class Handout(_Block):
