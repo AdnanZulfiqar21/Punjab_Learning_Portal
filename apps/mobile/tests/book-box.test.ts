@@ -64,18 +64,20 @@ describe("book boxes", () => {
     assert.equal(isMarginNote({ type: "paragraph", text: "x" }), false);
   });
 
-  it("draws a side box before the text in front of it when no text follows it", () => {
+  it("draws side boxes beside the paragraph in front of them", () => {
     const box = { type: "callout", tone: "note", title: "Recalling", text: "short" };
     const note = { type: "callout", tone: "note", text: "short" };
     const para = { type: "paragraph", text: "x" };
+    const head = { type: "heading", text: "x" };
     const fig = { type: "diagram", alt: "x" };
     assert.deepEqual(sideOrder([para, box, fig]), [1, 0, 2]); // the paragraph flows beside the box
     assert.deepEqual(sideOrder([para, note]), [1, 0]); // lesson ends after the note
-    assert.deepEqual(sideOrder([para, box, para]), [0, 1, 2]); // text already follows the box
-    assert.deepEqual(sideOrder([fig, box, fig]), [0, 1, 2]); // no text before it either
-    assert.deepEqual(sideOrder([para, box, box, fig]), [0, 1, 2, 3]); // a row of boxes is not moved
+    assert.deepEqual(sideOrder([para, box, para]), [1, 0, 2]); // both paragraphs flow beside it
+    assert.deepEqual(sideOrder([para, box, box, head, para]), [1, 2, 0, 3, 4]); // two stacked boxes move together
+    assert.deepEqual(sideOrder([fig, box, fig]), [0, 1, 2]); // no text before it: not moved
+    assert.deepEqual(sideOrder([para, box, box, fig]), [0, 1, 2, 3]); // boxes side by side in a row are not moved
     const long = { type: "callout", tone: "note", title: "Recalling", text: "x".repeat(421) };
-    assert.deepEqual(sideOrder([para, long, fig]), [0, 1, 2]); // a long box is full width, nothing to flow beside
+    assert.deepEqual(sideOrder([para, long, fig]), [0, 1, 2]); // a long box is full width, nothing flows beside it
   });
 
   it("puts a run side by side only when no text would flow beside it", () => {

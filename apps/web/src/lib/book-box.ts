@@ -70,26 +70,29 @@ export function boxRun(blocks: readonly BlockLike[], i: number): number {
 
 const FLOWS = new Set(["paragraph", "list", "heading"]);
 
-/** A box that floats at the side of the text on a wide screen: a short printed box or margin note on its own. */
-function floats(blocks: readonly BlockLike[], i: number): boolean {
-  const b = blocks[i];
-  if (!(isBookBox(b) || isMarginNote(b)) || typeof b?.text !== "string" || !sideBox(b.text)) return false;
-  return !isBookBox(blocks[i - 1]) && !isBookBox(blocks[i + 1]);
+/** A short printed box or margin note: it floats at the side of the text on a wide screen. */
+function floats(b: BlockLike | undefined): boolean {
+  return (isBookBox(b) || isMarginNote(b)) && typeof b?.text === "string" && sideBox(b.text);
 }
 
-/** The order to draw a lesson's blocks in. A side box with no text after it to flow beside (a figure, a box, an
- * equation … follows, or the lesson ends) is drawn just before the paragraph or list in front of it, so that text
- * flows beside the box instead of leaving an empty column on the left (owner, 2026-11-02). */
+/** The order to draw a lesson's blocks in. Side boxes that come right after a paragraph or list are drawn just before
+ * it, so that the paragraph (and any text after the boxes) flows beside them, as the book prints a margin box beside the
+ * text it belongs to; otherwise the boxes would float below the paragraph and often leave an empty column on the left
+ * (owner, 2026-11-02). Boxes drawn side by side in one row are not moved. */
 export function sideOrder(blocks: readonly BlockLike[]): number[] {
-  const order = blocks.map((_, i) => i);
-  for (let i = 1; i < blocks.length; i++) {
-    const before = blocks[i - 1];
-    const after = blocks[i + 1];
-    const textBefore = before?.type === "paragraph" || before?.type === "list";
-    const textAfter = after !== undefined && FLOWS.has(String(after.type));
-    if (floats(blocks, i) && textBefore && !textAfter && order[i - 1] === i - 1) {
-      order[i - 1] = i;
-      order[i] = i - 1;
+  const order: number[] = [];
+  let i = 0;
+  while (i < blocks.length) {
+    let n = 0;
+    while (floats(blocks[i + 1 + n])) n++;
+    const text = blocks[i]?.type === "paragraph" || blocks[i]?.type === "list";
+    if (text && n > 0 && boxRow(blocks, i + 1) === 0) {
+      for (let k = 1; k <= n; k++) order.push(i + k);
+      order.push(i);
+      i += n + 1;
+    } else {
+      order.push(i);
+      i++;
     }
   }
   return order;
