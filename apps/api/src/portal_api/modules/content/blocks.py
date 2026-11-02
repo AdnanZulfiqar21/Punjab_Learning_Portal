@@ -175,6 +175,9 @@ class Paragraph(_Emphasised):
 class ListBlock(_Emphasised):
     type: Literal["list"]
     ordered: bool = False
+    # BOOK-LAYOUT-01: a numbered list the book interrupts (a figure or box printed between two steps) continues from
+    # this number, so the steps keep the book's numbers (owner, 2026-11-03).
+    start: Annotated[int, Field(ge=1, le=999)] | None = None
     items: list[Annotated[str, Field(min_length=1, max_length=1000)]] = Field(min_length=1, max_length=50)
 
     def _texts(self) -> list[str]:

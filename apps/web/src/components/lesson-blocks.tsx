@@ -321,7 +321,9 @@ function BlockView({
         );
       });
       return b.ordered ? (
-        <ol className="list-decimal space-y-2 pl-7 marker:font-semibold marker:text-accent">{items}</ol>
+        <ol start={typeof b.start === "number" ? b.start : undefined} className="list-decimal space-y-2 pl-7 marker:font-semibold marker:text-accent">
+          {items}
+        </ol>
       ) : (
         <ul className="list-disc space-y-2 pl-7 marker:text-accent">{items}</ul>
       );

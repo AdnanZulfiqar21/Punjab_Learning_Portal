@@ -255,14 +255,26 @@ const BOOK_BOX_HEAD: Record<BookBoxKind, string> = {
 // An untitled margin note: a gold edge and a pale yellow body, as on the web.
 const MARGIN_NOTE = "#c9a227";
 
-function Lines({ items, ordered, marks = [], bold = [] }: { items: string[]; ordered: boolean; marks?: string[]; bold?: string[] }) {
+function Lines({
+  items,
+  ordered,
+  marks = [],
+  bold = [],
+  start = 1,
+}: {
+  items: string[];
+  ordered: boolean;
+  marks?: string[];
+  bold?: string[];
+  start?: number;
+}) {
   const c = useTheme();
   const premium = useContext(Premium);
   return (
     <View style={{ gap: Space.sm }} accessibilityRole="list">
       {items.map((item, i) => (
         <View key={i} style={{ flexDirection: "row", gap: Space.sm }}>
-          <T style={{ width: 24, textAlign: "right", color: c.accent, fontWeight: "700" }}>{ordered ? `${i + 1}.` : "•"}</T>
+          <T style={{ width: 24, textAlign: "right", color: c.accent, fontWeight: "700" }}>{ordered ? `${start + i}.` : "•"}</T>
           <T style={{ flex: 1 }}>
             <Item text={item} marks={premium ? marks : null} bold={bold} />
           </T>
@@ -342,7 +354,7 @@ function BlockView({ block: b, assetSource, dataSaver }: { block: Block; assetSo
         </T>
       );
     case "list":
-      return <Lines items={strs(b.items)} ordered={b.ordered === true} marks={marks} bold={bold} />;
+      return <Lines items={strs(b.items)} ordered={b.ordered === true} marks={marks} bold={bold} start={typeof b.start === "number" ? b.start : 1} />;
     case "callout": {
       const tone = str(b.tone) || "note";
       // A tip is green, as on the web: the diagram explanations ("Understanding the diagram") use it. So is a book
