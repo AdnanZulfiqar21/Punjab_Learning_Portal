@@ -4,8 +4,8 @@ import { CodeRunner } from "@/components/code-runner";
 import { Equation } from "@/components/equation";
 import { Model3DFigure } from "@/components/model3d-figure";
 import { SaverImage } from "@/components/saver-image";
-import { bookBoxKind, boxRow, isBookBox, sideBox } from "@/lib/book-box";
-import { bookErrors, markLatex, markPieces } from "@/lib/book-errors";
+import { bookBoxKind, boxRow, isBookBox, isMarginNote, isSideFigure, sideBox, sideOrder } from "@/lib/book-box";
+import { bookErrors, markLatex, markPieces, styledPieces } from "@/lib/book-errors";
 import { codeRuns } from "@/lib/code-highlight";
 import { leadIn, leadTerm } from "@/lib/book-style";
 import { fillMerged, mergedColumns, mergeStarts, rowSpans } from "@/lib/table-merge";
@@ -51,18 +51,25 @@ function isQuickCheck(b: Block | undefined, next: Block | undefined) {
 }
 
 /** Text with the textbook's wrong passages marked in red (BOOK-CORRECTION-01). */
-function Marked({ text, marks }: { text: string; marks: string[] }) {
+function Marked({ text, marks, bold = [] }: { text: string; marks: string[]; bold?: string[] }) {
   return (
     <>
-      {markPieces(text, marks).map((p, i) =>
-        p.error ? (
-          <mark key={i} title="Printed in the book; see the book correction" className="rounded-sm bg-danger-soft px-0.5 text-danger">
+      {styledPieces(text, marks, bold).map((p, i) => {
+        const inner = p.bold ? (
+          <strong className="font-semibold">
             <Vectors text={p.text} />
+          </strong>
+        ) : (
+          <Vectors text={p.text} />
+        );
+        return p.error ? (
+          <mark key={i} title="Printed in the book; see the book correction" className="rounded-sm bg-danger-soft px-0.5 text-danger">
+            {inner}
           </mark>
         ) : (
-          <Vectors key={i} text={p.text} />
-        ),
-      )}
+          <Fragment key={i}>{inner}</Fragment>
+        );
+      })}
     </>
   );
 }
@@ -167,7 +174,8 @@ export function LessonBlocks({
     );
   return (
     <div className="lesson-flow space-y-5 leading-relaxed" data-style={premium ? "premium" : undefined}>
-      {blocks.map((b, i) => {
+      {sideOrder(blocks).map((i) => {
+        const b = blocks[i];
         if (isQuickCheck(blocks[i - 1], b)) return null; // drawn inside the card above
         // BOOK-BOX-01: printed boxes that follow each other, with no text to flow beside them on the left, sit side by
         // side in one row instead of stacking in the margin over empty space (owner, 2026-10-29). Each keeps its id.
@@ -245,6 +253,7 @@ function BlockView({
   revealLabel?: string;
 }) {
   const marks = bookErrors(b.book_errors);
+  const bold = bookErrors(b.bold); // BOOK-BOLD-01: the terms the book prints in bold
   switch (b.type) {
     case "heading": {
       const depth = b.level === 4 ? 4 : b.level === 3 ? 3 : 2;
@@ -266,7 +275,7 @@ function BlockView({
                 : "border-b border-border pt-3 pb-1.5 text-[1.75rem] leading-tight font-bold tracking-tight text-subheading"
           }
         >
-          <Marked text={str(b.text)} marks={marks} />
+          <Marked text={str(b.text)} marks={marks} bold={bold} />
         </Tag>
       );
     }
@@ -283,13 +292,13 @@ function BlockView({
           <p dir="auto" className="flex items-baseline gap-2 font-semibold">
             <span aria-hidden className="h-[0.9em] w-1 shrink-0 translate-y-[0.1em] self-start rounded-full bg-accent" />
             <span>
-              <Marked text={str(b.text)} marks={marks} />
+              <Marked text={str(b.text)} marks={marks} bold={bold} />
             </span>
           </p>
         );
       return (
         <p dir="auto" className="whitespace-pre-line">
-          <Marked text={str(b.text)} marks={marks} />
+          <Marked text={str(b.text)} marks={marks} bold={bold} />
         </p>
       );
     case "list": {
@@ -301,18 +310,20 @@ function BlockView({
             {lead ? (
               <>
                 <span className="font-semibold text-accent">
-                  <Marked text={`${lead[0]}:`} marks={marks} />
+                  <Marked text={`${lead[0]}:`} marks={marks} bold={bold} />
                 </span>{" "}
-                <Marked text={lead[1]} marks={marks} />
+                <Marked text={lead[1]} marks={marks} bold={bold} />
               </>
             ) : (
-              <Marked text={t} marks={marks} />
+              <Marked text={t} marks={marks} bold={bold} />
             )}
           </li>
         );
       });
       return b.ordered ? (
-        <ol className="list-decimal space-y-2 pl-7 marker:font-semibold marker:text-accent">{items}</ol>
+        <ol start={typeof b.start === "number" ? b.start : undefined} className="list-decimal space-y-2 pl-7 marker:font-semibold marker:text-accent">
+          {items}
+        </ol>
       ) : (
         <ul className="list-disc space-y-2 pl-7 marker:text-accent">{items}</ul>
       );
@@ -329,10 +340,19 @@ function BlockView({
         return (
           <aside data-book-box={bookBoxKind(title)} className={`book-box ${sideBox(str(b.text)) ? "book-box-side" : ""}`}>
             <p dir="auto" className="book-box-head">
-              <Marked text={title} marks={marks} />
+              <Marked text={title} marks={marks} bold={bold} />
             </p>
             <p dir="auto" className="book-box-body whitespace-pre-line">
-              <Marked text={str(b.text)} marks={marks} />
+              <Marked text={str(b.text)} marks={marks} bold={bold} />
+            </p>
+          </aside>
+        );
+      // A margin note the book prints without a title: the same tinted box with no header, at the side when short.
+      if (isMarginNote(b))
+        return (
+          <aside data-book-box="note" className={`book-box ${sideBox(str(b.text)) ? "book-box-side" : ""}`}>
+            <p dir="auto" className="book-box-body whitespace-pre-line">
+              <Marked text={str(b.text)} marks={marks} bold={bold} />
             </p>
           </aside>
         );
@@ -341,11 +361,11 @@ function BlockView({
           <p className="text-xs font-semibold tracking-wide text-muted uppercase">{label}</p>
           {title && (
             <p dir="auto" className="font-semibold">
-              <Marked text={title} marks={marks} />
+              <Marked text={title} marks={marks} bold={bold} />
             </p>
           )}
           <p dir="auto" className="whitespace-pre-line">
-            <Marked text={str(b.text)} marks={marks} />
+            <Marked text={str(b.text)} marks={marks} bold={bold} />
           </p>
         </aside>
       );
@@ -366,11 +386,11 @@ function BlockView({
         return (
           <figure className="lesson-list-table space-y-2 text-sm">
             <figcaption className="font-medium">
-              <Marked text={str(b.caption)} marks={marks} />
+              <Marked text={str(b.caption)} marks={marks} bold={bold} />
             </figcaption>
             <div className="overflow-hidden rounded-inner border border-border bg-surface">
               <p className="border-b border-border bg-surface-muted px-3 py-2 font-semibold">
-                <Marked text={header[0]} marks={marks} />
+                <Marked text={header[0]} marks={marks} bold={bold} />
               </p>
               {/* Down the first column, then the second, as the book reads; rows stay level across both columns. */}
               <ul
@@ -382,7 +402,7 @@ function BlockView({
                     key={i}
                     className={`border-b border-border px-3 py-2 [overflow-wrap:anywhere] ${i < Math.ceil(filled.length / 2) ? "border-r" : ""}`}
                   >
-                    <Marked text={r[0] ?? ""} marks={marks} />
+                    <Marked text={r[0] ?? ""} marks={marks} bold={bold} />
                   </li>
                 ))}
               </ul>
@@ -393,13 +413,13 @@ function BlockView({
       return (
         <table className="lesson-table w-full border-collapse text-sm">
           <caption className="mb-2 text-left font-medium">
-            <Marked text={str(b.caption)} marks={marks} />
+            <Marked text={str(b.caption)} marks={marks} bold={bold} />
           </caption>
           <thead>
             <tr>
               {header.map((h, i) => (
                 <th key={i} scope="col" className="border border-border bg-surface-muted px-3 py-2 text-left">
-                  <Marked text={h} marks={marks} />
+                  <Marked text={h} marks={marks} bold={bold} />
                 </th>
               ))}
             </tr>
@@ -410,7 +430,7 @@ function BlockView({
                 {r.map((c, j) =>
                   spans[i][j] === 0 ? (
                     <td key={j} data-label={header[j] ?? ""} className="merged-repeat border border-border px-3 py-2 align-top">
-                      <Marked text={filled[i][j]} marks={marks} />
+                      <Marked text={filled[i][j]} marks={marks} bold={bold} />
                     </td>
                   ) : (
                     <td
@@ -418,7 +438,7 @@ function BlockView({
                       rowSpan={spans[i][j] > 1 ? spans[i][j] : undefined}
                       data-label={header[j] ?? ""}
                       className={`border border-border px-3 py-2 ${spans[i][j] > 1 ? "align-middle font-medium" : "align-top"}`}>
-                      <Marked text={c} marks={marks} />
+                      <Marked text={c} marks={marks} bold={bold} />
                     </td>
                   ),
                 )}
@@ -501,7 +521,7 @@ function BlockView({
           latex={markLatex(str(b.latex), marks)}
           display={b.display !== false}
           textAlt={str(b.text_alt)}
-          textView={marks.length ? <Marked text={str(b.text_alt)} marks={marks} /> : undefined}
+          textView={marks.length ? <Marked text={str(b.text_alt)} marks={marks} bold={bold} /> : undefined}
           dataSaver={dataSaver}
           typeset={typeset}
           fallback={
@@ -519,22 +539,22 @@ function BlockView({
           aria-label={`Worked example: ${str(b.title)}`}>
           <p className={`text-xs font-semibold tracking-wide uppercase ${premium ? "text-accent" : "text-muted"}`}>Worked example</p>
           <p className="font-semibold">
-            <Marked text={str(b.title)} marks={marks} />
+            <Marked text={str(b.title)} marks={marks} bold={bold} />
           </p>
           <p className="whitespace-pre-line">
-            <Marked text={str(b.problem)} marks={marks} />
+            <Marked text={str(b.problem)} marks={marks} bold={bold} />
           </p>
           <ol className="list-decimal space-y-1 pl-6">
             {strs(b.steps).map((step, i) => (
               <li key={i} className="whitespace-pre-line">
-                <Marked text={step} marks={marks} />
+                <Marked text={step} marks={marks} bold={bold} />
               </li>
             ))}
           </ol>
           {str(b.answer) && (
             <p className="whitespace-pre-line">
               <span className="font-semibold">Answer: </span>
-              <Marked text={str(b.answer)} marks={marks} />
+              <Marked text={str(b.answer)} marks={marks} bold={bold} />
             </p>
           )}
         </section>
@@ -545,7 +565,7 @@ function BlockView({
         <figure className="space-y-2">
           {str(b.caption) && (
             <figcaption className="text-sm font-medium text-muted">
-              <Marked text={str(b.caption)} marks={marks} />
+              <Marked text={str(b.caption)} marks={marks} bold={bold} />
             </figcaption>
           )}
           <div className="overflow-hidden rounded-inner border border-border bg-surface-muted shadow-sm">
@@ -570,7 +590,7 @@ function BlockView({
       );
     case "diagram":
       return (
-        <figure className="space-y-2">
+        <figure className={`space-y-2 ${isSideFigure(b) ? "figure-side" : ""}`}>
           <ArchivedImage id={str(b.asset_version_id)} alt={str(b.alt)} assetUrl={assetUrl} dataSaver={dataSaver} />
           <figcaption className="text-sm text-muted">{str(b.caption)}</figcaption>
           {str(b.long_description) && (

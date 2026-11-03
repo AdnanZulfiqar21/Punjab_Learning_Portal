@@ -567,6 +567,8 @@ html:has(.lesson-flow, [data-reading-bar]) {
 .book-box[data-book-box="keep"] { --bb-head: #a3480a; --bb-body: #fcf1e6; }
 .book-box[data-book-box="activity"] { --bb-head: #b4380f; --bb-body: #fcede6; }
 .book-box[data-book-box="fact"] { --bb-head: #0f5f8a; --bb-body: #e8f2f8; }
+/* An untitled margin note: no header, a pale yellow body with a gold edge, like the book's margin notes. */
+.book-box[data-book-box="note"] { --bb-head: #c9a227; --bb-body: #fdf8e1; }
 .book-box-head {
   background: var(--bb-head);
   color: #fff;
@@ -617,12 +619,31 @@ html:has(.lesson-flow, [data-reading-bar]) {
 @media (min-width: 64rem) {
   .book-box-side {
     float: right;
-    width: 17.5rem;
-    margin: 0.25rem 0 1rem 1.5rem;
-    font-size: 0.94em;
+    clear: right; /* a second side box goes below the first, not beside it */
+    /* The book's margin column: under half the width, smaller type, so the boxes end beside the paragraph they belong to
+       (owner, 2026-11-02). */
+    width: 45%;
+    max-width: 22rem;
+    margin: 0.25rem 0 0.75rem 1.25rem;
+    font-size: 0.8em;
+    line-height: 1.5;
   }
-  /* Text and headings flow beside a side box, as in the book; anything wider or boxed starts below it. */
-  .lesson-flow > [data-kind]:not([data-kind="paragraph"], [data-kind="list"], [data-kind="heading"]) {
+  .book-box-side .book-box-head {
+    padding: 0.4rem 0.85rem;
+  }
+  .book-box-side .book-box-body {
+    padding: 0.55rem 0.85rem 0.65rem;
+  }
+  /* Text flows beside a side box, as in the book; anything wider or boxed starts below it, and so does a new section's
+     heading, so a box never runs into the next section. Side boxes stack at the side of the same text. */
+  .lesson-flow > [data-kind]:not([data-kind="paragraph"], [data-kind="list"]):not(:has(> .book-box-side, > .figure-side)) {
     clear: both;
+  }
+  /* A figure the book prints beside the text (BOOK-LAYOUT-01): at the side of its paragraph, about half the width. */
+  .figure-side {
+    float: right;
+    clear: right;
+    width: 48%;
+    margin: 0.25rem 0 0.75rem 1.25rem;
   }
 }

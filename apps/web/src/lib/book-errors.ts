@@ -77,3 +77,16 @@ export function markPieces(text: string, marks: string[]): Piece[] {
   if (plain) pieces.push({ text: plain, error: false });
   return pieces;
 }
+
+export type StyledPiece = Piece & { bold: boolean };
+
+/** BOOK-BOLD-01: text split into pieces that are marked as a book error, drawn bold as the book prints the term, both,
+ * or neither (owner, 2026-11-02). Every occurrence of a bold term is bold. */
+export function styledPieces(text: string, marks: string[], bold: string[]): StyledPiece[] {
+  const out: StyledPiece[] = [];
+  for (const p of markPieces(text, marks)) {
+    if (!bold.length) out.push({ ...p, bold: false });
+    else for (const q of markPieces(p.text, bold)) out.push({ text: q.text, error: p.error, bold: q.error });
+  }
+  return out;
+}

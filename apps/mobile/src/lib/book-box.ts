@@ -52,6 +52,13 @@ export function isBookBox(b: BlockLike | undefined): boolean {
   return b?.type === "callout" && (b.tone ?? "note") === "note" && title !== "" && title.toLowerCase() !== "note";
 }
 
+/** A margin note the book prints without a title (an untitled note callout): drawn like a printed box but with no header,
+ * and at the side of the text when it is short, as in the book's margin (owner, 2026-11-02). */
+export function isMarginNote(b: BlockLike | undefined): boolean {
+  const title = typeof b?.title === "string" ? b.title.trim() : "";
+  return b?.type === "callout" && (b.tone ?? "note") === "note" && title === "";
+}
+
 /** At the first box of a run of printed boxes next to each other, the run's length; 0 anywhere else. Boxes in a run
  * sit side by side on a wide screen instead of stacking in the margin (owner, 2026-10-29). */
 export function boxRun(blocks: readonly BlockLike[], i: number): number {
@@ -62,6 +69,39 @@ export function boxRun(blocks: readonly BlockLike[], i: number): number {
 }
 
 const FLOWS = new Set(["paragraph", "list", "heading"]);
+
+/** A figure the book prints beside the text rather than across the page (BOOK-LAYOUT-01, owner 2026-11-03). */
+export function isSideFigure(b: BlockLike | undefined): boolean {
+  return b?.type === "diagram" && b.side === true;
+}
+
+/** A short printed box, a margin note or a side figure: it floats at the side of the text on a wide screen. */
+function floats(b: BlockLike | undefined): boolean {
+  return ((isBookBox(b) || isMarginNote(b)) && typeof b?.text === "string" && sideBox(b.text)) || isSideFigure(b);
+}
+
+/** The order to draw a lesson's blocks in. Side boxes that come right after a paragraph or list are drawn just before
+ * it, so that the paragraph (and any text after the boxes) flows beside them, as the book prints a margin box beside the
+ * text it belongs to; otherwise the boxes would float below the paragraph and often leave an empty column on the left
+ * (owner, 2026-11-02). Boxes drawn side by side in one row are not moved. */
+export function sideOrder(blocks: readonly BlockLike[]): number[] {
+  const order: number[] = [];
+  let i = 0;
+  while (i < blocks.length) {
+    let n = 0;
+    while (floats(blocks[i + 1 + n])) n++;
+    const text = blocks[i]?.type === "paragraph" || blocks[i]?.type === "list";
+    if (text && n > 0 && boxRow(blocks, i + 1) === 0) {
+      for (let k = 1; k <= n; k++) order.push(i + k);
+      order.push(i);
+      i += n + 1;
+    } else {
+      order.push(i);
+      i++;
+    }
+  }
+  return order;
+}
 
 /** A run of printed boxes is drawn side by side in one row only when no text would flow beside it on the left (the
  * block after the run is not a paragraph, list or heading, or the lesson ends); otherwise the boxes keep to the margin
