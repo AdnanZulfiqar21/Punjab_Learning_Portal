@@ -45,7 +45,7 @@ describe("book error marks", () => {
     assert.equal(paintBookErrors('<span style="color:#a31d1e;">H</span>'), '<span style="color:var(--danger);background-color:var(--danger-soft);">H</span>');
   });
 
-  it("draws the book's bold terms bold, inside and outside a marked error (BOOK-BOLD-01)", () => {
+  it("draws the book's bold terms bold where they first occur, inside and outside a marked error (BOOK-BOLD-01)", () => {
     const text = "a nucleotide called ATP; ATP again";
     assert.deepEqual(styledPieces(text, [], ["nucleotide", "ATP"]), [
       { text: "a ", error: false, bold: false },
@@ -53,7 +53,7 @@ describe("book error marks", () => {
       { text: " called ", error: false, bold: false },
       { text: "ATP", error: false, bold: true },
       { text: "; ", error: false, bold: false },
-      { text: "ATP", error: false, bold: true },
+      { text: "ATP", error: false, bold: false }, // only the first occurrence, as the book prints it
       { text: " again", error: false, bold: false },
     ]);
     assert.deepEqual(styledPieces("called ATP", ["called ATP"], ["ATP"]), [
