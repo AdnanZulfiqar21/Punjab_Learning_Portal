@@ -36,6 +36,9 @@ EXERCISE_KEY_SUFFIX = "/u-exercise"
 PAPER_KEY_SUFFIXES = ("/u-paper-pattern", "/u-model-paper")
 # A printed heading number in a natural key fragment ("1.1.1.1", or "1.1.1.1~2" for the book's second 1.1.1.1).
 PRINTED_NUMBER = re.compile(r"^(\d+(?:\.\d+)+[A-Za-z]?)(?:~\d+)?$")
+# A heading the index keys by its title because the book numbers it in another chapter's sequence, e.g. Biology 11
+# chapter 6 "Photosynthesis (printed as 5.1)" → "u-photosynthesis-printed-as-5-1".
+PRINTED_AS = re.compile(r"-printed-as-(\d+(?:-\d+)+)(?:~\d+)?$")
 
 
 class Region(Base):
@@ -219,8 +222,11 @@ class Topic(Base):
         """BOOK-NUMBER-01: the heading number printed in the book, when the topic shows another one. Where the book
         misprints a number (Computer Science 11: 1.1.1.1 Requirement Gathering sits at 1.2.2.1), students see the
         number in sequence and, beside it, the book's own to find the page. The natural key keeps the printed number."""
-        m = PRINTED_NUMBER.match(self.natural_key.rsplit("/", 1)[-1])
+        frag = self.natural_key.rsplit("/", 1)[-1]
+        m = PRINTED_NUMBER.match(frag)
         printed = m.group(1) if m else None
+        if printed is None and (a := PRINTED_AS.search(frag)):
+            printed = a.group(1).replace("-", ".")
         return printed if printed and printed != self.number else None
 
 
