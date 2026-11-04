@@ -59,12 +59,23 @@ export function isMarginNote(b: BlockLike | undefined): boolean {
   return b?.type === "callout" && (b.tone ?? "note") === "note" && title === "";
 }
 
+/** A box the book prints across the full page width (BOOK-LAYOUT-02, owner 2026-11-04): it never moves to the side
+ * of the text or into a row of boxes, however short it is. */
+export function isWide(b: BlockLike | undefined): boolean {
+  return b?.type === "callout" && b.wide === true;
+}
+
+/** A printed box that may share a row with the boxes next to it (not one printed across the page). */
+export function isRowBox(b: BlockLike | undefined): boolean {
+  return isBookBox(b) && !isWide(b);
+}
+
 /** At the first box of a run of printed boxes next to each other, the run's length; 0 anywhere else. Boxes in a run
  * sit side by side on a wide screen instead of stacking in the margin (owner, 2026-10-29). */
 export function boxRun(blocks: readonly BlockLike[], i: number): number {
-  if (!isBookBox(blocks[i]) || isBookBox(blocks[i - 1])) return 0;
+  if (!isRowBox(blocks[i]) || isRowBox(blocks[i - 1])) return 0;
   let n = 1;
-  while (isBookBox(blocks[i + n])) n++;
+  while (isRowBox(blocks[i + n])) n++;
   return n;
 }
 
@@ -75,9 +86,14 @@ export function isSideFigure(b: BlockLike | undefined): boolean {
   return b?.type === "diagram" && b.side === true;
 }
 
+/** A short printed box or margin note that the book does not print across the page: it sits at the side of the text. */
+export function isSideBox(b: BlockLike | undefined): boolean {
+  return (isBookBox(b) || isMarginNote(b)) && !isWide(b) && typeof b?.text === "string" && sideBox(b.text);
+}
+
 /** A short printed box, a margin note or a side figure: it floats at the side of the text on a wide screen. */
 function floats(b: BlockLike | undefined): boolean {
-  return ((isBookBox(b) || isMarginNote(b)) && typeof b?.text === "string" && sideBox(b.text)) || isSideFigure(b);
+  return isSideBox(b) || isSideFigure(b);
 }
 
 /** The order to draw a lesson's blocks in. Side boxes that come right after a paragraph or list are drawn just before

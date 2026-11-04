@@ -191,6 +191,9 @@ class Callout(_Emphasised):
     tone: Literal["definition", "note", "tip", "warning", "correction"] = "note"
     title: Short | None = None
     text: Text
+    # BOOK-LAYOUT-02: a printed box the book prints across the full page width; it is never drawn at the side of the
+    # text, however short (owner, 2026-11-04). Absent means the reader decides from the box's length.
+    wide: bool | None = None
 
     def _texts(self) -> list[str]:
         if self.tone == "correction" and self.book_errors:
