@@ -4,7 +4,7 @@ import { CodeRunner } from "@/components/code-runner";
 import { Equation } from "@/components/equation";
 import { Model3DFigure } from "@/components/model3d-figure";
 import { SaverImage } from "@/components/saver-image";
-import { bookBoxKind, boxRow, isBookBox, isMarginNote, isSideFigure, sideBox, sideOrder } from "@/lib/book-box";
+import { bookBoxKind, boxRow, isMarginNote, isRowBox, isSideBox, isSideFigure, sideOrder } from "@/lib/book-box";
 import { bookErrors, markLatex, markPieces, styledPieces } from "@/lib/book-errors";
 import { codeRuns } from "@/lib/code-highlight";
 import { leadIn, leadTerm } from "@/lib/book-style";
@@ -41,7 +41,7 @@ const CALLOUT_LABEL: Record<string, string> = {
 /** How many printed boxes come right before block i (0 when i starts a run). */
 function boxBack(blocks: Block[], i: number) {
   let n = 0;
-  while (isBookBox(blocks[i - n - 1])) n++;
+  while (isRowBox(blocks[i - n - 1])) n++;
   return n;
 }
 
@@ -179,7 +179,7 @@ export function LessonBlocks({
         if (isQuickCheck(blocks[i - 1], b)) return null; // drawn inside the card above
         // BOOK-BOX-01: printed boxes that follow each other, with no text to flow beside them on the left, sit side by
         // side in one row instead of stacking in the margin over empty space (owner, 2026-10-29). Each keeps its id.
-        if (isBookBox(b) && boxRow(blocks, i - boxBack(blocks, i)) > 0 && boxBack(blocks, i) > 0) return null; // in the row above
+        if (isRowBox(b) && boxRow(blocks, i - boxBack(blocks, i)) > 0 && boxBack(blocks, i) > 0) return null; // in the row above
         const run = boxRow(blocks, i);
         if (run > 1)
           return (
@@ -338,7 +338,7 @@ function BlockView({
       // a wide screen, as in the book's margin (owner, 2026-10-29). Styles in globals.css (.book-box).
       if (tone === "note" && title)
         return (
-          <aside data-book-box={bookBoxKind(title)} className={`book-box ${sideBox(str(b.text)) ? "book-box-side" : ""}`}>
+          <aside data-book-box={bookBoxKind(title)} className={`book-box ${isSideBox(b) ? "book-box-side" : ""}`}>
             <p dir="auto" className="book-box-head">
               <Marked text={title} marks={marks} bold={bold} />
             </p>
@@ -350,7 +350,7 @@ function BlockView({
       // A margin note the book prints without a title: the same tinted box with no header, at the side when short.
       if (isMarginNote(b))
         return (
-          <aside data-book-box="note" className={`book-box ${sideBox(str(b.text)) ? "book-box-side" : ""}`}>
+          <aside data-book-box="note" className={`book-box ${isSideBox(b) ? "book-box-side" : ""}`}>
             <p dir="auto" className="book-box-body whitespace-pre-line">
               <Marked text={str(b.text)} marks={marks} bold={bold} />
             </p>

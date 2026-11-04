@@ -11,7 +11,10 @@ import {
   boxRun,
   isBookBox,
   isMarginNote,
+  isRowBox,
+  isSideBox,
   isSideFigure,
+  isWide,
   sideBox,
   sideOrder,
 } from "../src/lib/book-box.ts";
@@ -103,6 +106,22 @@ describe("book boxes", () => {
     assert.equal(boxRow([para, box, box, para], 1), 0); // text follows: it flows beside the boxes in the margin
     assert.equal(boxRow([para, box, box, { type: "heading", text: "x" }], 1), 0);
     assert.equal(boxRow([para, box, para], 1), 0); // a single box stays in the margin
+  });
+
+  it("never moves a box the book prints across the page (BOOK-LAYOUT-02)", () => {
+    const wide = { type: "callout", tone: "note", title: "Did You Know?", text: "short", wide: true };
+    const box = { type: "callout", tone: "note", title: "Tidbits", text: "short" };
+    const para = { type: "paragraph", text: "x" };
+    const fig = { type: "diagram", alt: "x" };
+    assert.equal(isWide(wide), true);
+    assert.equal(isWide(box), false);
+    assert.equal(isSideBox(wide), false); // short, but printed across the page
+    assert.equal(isSideBox(box), true);
+    assert.equal(isRowBox(wide), false);
+    assert.deepEqual(sideOrder([para, wide, para]), [0, 1, 2]); // stays where printed, full width
+    assert.deepEqual(sideOrder([para, box, para]), [1, 0, 2]);
+    assert.equal(boxRow([para, wide, box, fig], 1), 0); // a wide box never joins a row
+    assert.equal(isSideBox({ type: "callout", tone: "note", text: "short", wide: true }), false); // margin note too
   });
 
   it("is the same file on web and app", async () => {
