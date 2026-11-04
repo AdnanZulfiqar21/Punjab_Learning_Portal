@@ -26,3 +26,8 @@ def test_a_heading_printed_in_another_chapters_numbers_shows_both() -> None:
     bio = "pk-punjab/xi/biology/c11-bio"
     assert Topic(natural_key=f"{bio}/ch6/u-photosynthesis-printed-as-5-1", number="6.1").book_number == "5.1"
     assert Topic(natural_key=f"{bio}/ch8/u-vernalisation-printed-as-7-12", number="8.12").book_number == "7.12"
+    b12 = "pk-punjab/xii/biology/c12-bio"
+    kidney = f"{b12}/ch14/u-hormonal-control-of-kidney-functions-printed-as-14-1-2-numbe"
+    assert Topic(natural_key=kidney, number="14.2.2").book_number == "14.1.2"
+    design = f"{b12}/ch22/u-experimental-design-printed-as-a-second-22-3-numbering-error"
+    assert Topic(natural_key=design, number="22.4").book_number == "22.3"

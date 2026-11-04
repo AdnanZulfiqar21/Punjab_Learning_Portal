@@ -37,8 +37,9 @@ PAPER_KEY_SUFFIXES = ("/u-paper-pattern", "/u-model-paper")
 # A printed heading number in a natural key fragment ("1.1.1.1", or "1.1.1.1~2" for the book's second 1.1.1.1).
 PRINTED_NUMBER = re.compile(r"^(\d+(?:\.\d+)+[A-Za-z]?)(?:~\d+)?$")
 # A heading the index keys by its title because the book numbers it in another chapter's sequence, e.g. Biology 11
-# chapter 6 "Photosynthesis (printed as 5.1)" → "u-photosynthesis-printed-as-5-1".
-PRINTED_AS = re.compile(r"-printed-as-(\d+(?:-\d+)+)(?:~\d+)?$")
+# chapter 6 "Photosynthesis (printed as 5.1)" → "u-photosynthesis-printed-as-5-1"; Biology 12 keys go on
+# after the number ("…-printed-as-14-1-2-numbe", "…-printed-as-a-second-22-3-numbering-error").
+PRINTED_AS = re.compile(r"-printed-as-(?:a-second-)?(\d+(?:-\d+)+)(?=-|~|$)")
 
 
 class Region(Base):
