@@ -8,7 +8,9 @@ import { audit } from "./helpers/a11y";
 const AUTH = { timeout: 20_000 };
 const CHAPTER = "/learn/chapter/317f2726-31a1-55f5-bd13-a955154033e2";
 const TOPIC_1_1 = "/learn/topic/255b5a9d-355f-56ca-adb6-10fc6d2825fb";
-const TOPIC_1_4 = "/learn/topic/76f9dd82-42bb-53e0-870a-c80135498adc";
+// 1.4's main subheadings are their own subtopic pages (owner 2026-11-04); "1- Phylum Porifera" holds a figure in both
+// languages and a 3D model in Roman Urdu.
+const PORIFERA = "/learn/topic/c9715b49-8d55-5553-be66-bd4da2c3fd4d";
 
 async function signInStaff(page: Page, email: string) {
   await page.goto("/signin?next=/learn");
@@ -69,8 +71,8 @@ test("a topic without a published lesson says so and offers no language choice",
 test("staff who cover the subject read the draft in English, then in Roman Urdu at the same place", async ({ page, isMobile }) => {
   test.skip(isMobile && !process.env.E2E_FULL_MATRIX, "The staff preview journey runs on desktop");
   await signInStaff(page, "studio-author@example.com");
-  await page.goto(TOPIC_1_4);
-  await expect(page.getByRole("heading", { level: 1, name: /^1\.4 / })).toBeVisible();
+  await page.goto(PORIFERA);
+  await expect(page.getByRole("heading", { level: 1, name: /Phylum Porifera/ })).toBeVisible();
   await expect(page.getByText("Draft preview", { exact: true })).toBeVisible();
   const languages = page.getByRole("group", { name: "Read or watch" });
   // The staff fixture account may have saved Roman Urdu on an earlier run; start from English, and let the page
