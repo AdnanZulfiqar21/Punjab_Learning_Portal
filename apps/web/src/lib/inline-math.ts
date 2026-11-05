@@ -7,6 +7,11 @@ export type MathPiece = { kind: "text"; text: string } | { kind: "math"; latex: 
 
 const MATH = /\\\(([\s\S]+?)\\\)|\\\[([\s\S]+?)\\\]/g;
 
+/** The key of a formula's typeset markup ("D:" a line of its own, "I:" in the line). */
+export function mathKey(latex: string, display: boolean): string {
+  return `${display ? "D" : "I"}:${latex}`;
+}
+
 /** Whether a text carries any formula. */
 export function hasMath(text: string): boolean {
   return text.includes("\\(") || text.includes("\\[");

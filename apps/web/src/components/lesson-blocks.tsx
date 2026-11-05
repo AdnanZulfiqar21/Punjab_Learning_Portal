@@ -2,7 +2,7 @@ import { Fragment, type ReactNode } from "react";
 import { Checkpoint } from "@/components/checkpoint";
 import { CodeRunner } from "@/components/code-runner";
 import { Equation } from "@/components/equation";
-import { MathText } from "@/components/math-text";
+import { MathText, type MathHtml } from "@/components/math-text";
 import { Model3DFigure } from "@/components/model3d-figure";
 import { SaverImage } from "@/components/saver-image";
 import { bookBoxKind, boxRow, isMarginNote, isRowBox, isSideBox, isSideFigure, sideOrder } from "@/lib/book-box";
@@ -54,16 +54,16 @@ function isQuickCheck(b: Block | undefined, next: Block | undefined) {
 }
 
 /** Text with the textbook's wrong passages marked in red (BOOK-CORRECTION-01). */
-function Marked({ text, marks, bold = [] }: { text: string; marks: string[]; bold?: string[] }) {
+function Marked({ text, marks, bold = [], math }: { text: string; marks: string[]; bold?: string[]; math?: MathHtml }) {
   return (
     <>
       {styledPieces(text, marks, bold).map((p, i) => {
         const inner = p.bold ? (
           <strong className="font-semibold">
-            <Vectors text={p.text} />
+            <Vectors text={p.text} math={math} />
           </strong>
         ) : (
-          <Vectors text={p.text} />
+          <Vectors text={p.text} math={math} />
         );
         return p.error ? (
           <mark key={i} title="Printed in the book; see the book correction" className="rounded-sm bg-danger-soft px-0.5 text-danger">
@@ -98,8 +98,8 @@ function Code({ text, language, marks }: { text: string; language: string; marks
 
 /** INLINE-VECTOR-01: a vector written in a sentence as a letter plus U+20D7 ("v⃗") gets its arrow drawn above the
  * letter (globals.css `.vec`): the reading font has no glyph for the combining arrow and showed an empty box. */
-function Vectors({ text }: { text: string }) {
-  if (hasMath(text)) return <MathText text={text} />; // INLINE-MATH-01
+function Vectors({ text, math }: { text: string; math?: MathHtml }) {
+  if (hasMath(text)) return <MathText text={text} html={math} />; // INLINE-MATH-01
   const parts = text.split(/(\S\u20D7)/u);
   if (parts.length === 1) return <>{text}</>;
   return (
@@ -135,6 +135,7 @@ export function LessonBlocks({
   runnable = false,
   revealLabel,
   solvedLabels,
+  math,
 }: {
   blocks: Block[];
   headingOffset?: number;
@@ -155,6 +156,8 @@ export function LessonBlocks({
   revealLabel?: string;
   /** SOLVED-QUESTION-01: the words of a solved book question in the lesson's language. */
   solvedLabels?: SolvedLabels;
+  /** INLINE-MATH-01: the formulas written in the text, typeset on the server (`lib/typeset.ts` `typesetMath`). */
+  math?: MathHtml;
 }) {
   const view = (b: Block, i: number) => (
     <BlockView
@@ -167,6 +170,7 @@ export function LessonBlocks({
       runnable={runnable}
       revealLabel={revealLabel}
       solvedLabels={solvedLabels}
+      math={math}
     />
   );
   // Each block keeps its own id (b0, b1, …), also inside a Quick Check card, so the language switch finds its place.
@@ -251,6 +255,7 @@ function BlockView({
   runnable = false,
   revealLabel,
   solvedLabels = SOLVED_LABELS_EN,
+  math,
 }: {
   block: Block;
   headingOffset: number;
@@ -261,6 +266,7 @@ function BlockView({
   runnable?: boolean;
   revealLabel?: string;
   solvedLabels?: SolvedLabels;
+  math?: MathHtml;
 }) {
   const marks = bookErrors(b.book_errors);
   const bold = bookErrors(b.bold); // BOOK-BOLD-01: the terms the book prints in bold
@@ -285,7 +291,7 @@ function BlockView({
                 : "border-b border-border pt-3 pb-1.5 text-[1.75rem] leading-tight font-bold tracking-tight text-subheading"
           }
         >
-          <Marked text={str(b.text)} marks={marks} bold={bold} />
+          <Marked math={math} text={str(b.text)} marks={marks} bold={bold} />
         </Tag>
       );
     }
@@ -302,13 +308,13 @@ function BlockView({
           <p dir="auto" className="flex items-baseline gap-2 font-semibold">
             <span aria-hidden className="h-[0.9em] w-1 shrink-0 translate-y-[0.1em] self-start rounded-full bg-accent" />
             <span>
-              <Marked text={str(b.text)} marks={marks} bold={bold} />
+              <Marked math={math} text={str(b.text)} marks={marks} bold={bold} />
             </span>
           </p>
         );
       return (
         <p dir="auto" className="whitespace-pre-line">
-          <Marked text={str(b.text)} marks={marks} bold={bold} />
+          <Marked math={math} text={str(b.text)} marks={marks} bold={bold} />
         </p>
       );
     case "list": {
@@ -320,12 +326,12 @@ function BlockView({
             {lead ? (
               <>
                 <span className="font-semibold text-accent">
-                  <Marked text={`${lead[0]}:`} marks={marks} bold={bold} />
+                  <Marked math={math} text={`${lead[0]}:`} marks={marks} bold={bold} />
                 </span>{" "}
-                <Marked text={lead[1]} marks={marks} bold={bold} />
+                <Marked math={math} text={lead[1]} marks={marks} bold={bold} />
               </>
             ) : (
-              <Marked text={t} marks={marks} bold={bold} />
+              <Marked math={math} text={t} marks={marks} bold={bold} />
             )}
           </li>
         );
@@ -350,10 +356,10 @@ function BlockView({
         return (
           <aside data-book-box={bookBoxKind(title)} className={`book-box ${isSideBox(b) ? "book-box-side" : ""}`}>
             <p dir="auto" className="book-box-head">
-              <Marked text={title} marks={marks} bold={bold} />
+              <Marked math={math} text={title} marks={marks} bold={bold} />
             </p>
             <p dir="auto" className="book-box-body whitespace-pre-line">
-              <Marked text={str(b.text)} marks={marks} bold={bold} />
+              <Marked math={math} text={str(b.text)} marks={marks} bold={bold} />
             </p>
           </aside>
         );
@@ -362,7 +368,7 @@ function BlockView({
         return (
           <aside data-book-box="note" className={`book-box ${isSideBox(b) ? "book-box-side" : ""}`}>
             <p dir="auto" className="book-box-body whitespace-pre-line">
-              <Marked text={str(b.text)} marks={marks} bold={bold} />
+              <Marked math={math} text={str(b.text)} marks={marks} bold={bold} />
             </p>
           </aside>
         );
@@ -371,11 +377,11 @@ function BlockView({
           <p className="text-xs font-semibold tracking-wide text-muted uppercase">{label}</p>
           {title && (
             <p dir="auto" className="font-semibold">
-              <Marked text={title} marks={marks} bold={bold} />
+              <Marked math={math} text={title} marks={marks} bold={bold} />
             </p>
           )}
           <p dir="auto" className="whitespace-pre-line">
-            <Marked text={str(b.text)} marks={marks} bold={bold} />
+            <Marked math={math} text={str(b.text)} marks={marks} bold={bold} />
           </p>
         </aside>
       );
@@ -396,11 +402,11 @@ function BlockView({
         return (
           <figure className="lesson-list-table space-y-2 text-sm">
             <figcaption className="font-medium">
-              <Marked text={str(b.caption)} marks={marks} bold={bold} />
+              <Marked math={math} text={str(b.caption)} marks={marks} bold={bold} />
             </figcaption>
             <div className="overflow-hidden rounded-inner border border-border bg-surface">
               <p className="border-b border-border bg-surface-muted px-3 py-2 font-semibold">
-                <Marked text={header[0]} marks={marks} bold={bold} />
+                <Marked math={math} text={header[0]} marks={marks} bold={bold} />
               </p>
               {/* Down the first column, then the second, as the book reads; rows stay level across both columns. */}
               <ul
@@ -412,7 +418,7 @@ function BlockView({
                     key={i}
                     className={`border-b border-border px-3 py-2 [overflow-wrap:anywhere] ${i < Math.ceil(filled.length / 2) ? "border-r" : ""}`}
                   >
-                    <Marked text={r[0] ?? ""} marks={marks} bold={bold} />
+                    <Marked math={math} text={r[0] ?? ""} marks={marks} bold={bold} />
                   </li>
                 ))}
               </ul>
@@ -423,13 +429,13 @@ function BlockView({
       return (
         <table className="lesson-table w-full border-collapse text-sm">
           <caption className="mb-2 text-left font-medium">
-            <Marked text={str(b.caption)} marks={marks} bold={bold} />
+            <Marked math={math} text={str(b.caption)} marks={marks} bold={bold} />
           </caption>
           <thead>
             <tr>
               {header.map((h, i) => (
                 <th key={i} scope="col" className="border border-border bg-surface-muted px-3 py-2 text-left">
-                  <Marked text={h} marks={marks} bold={bold} />
+                  <Marked math={math} text={h} marks={marks} bold={bold} />
                 </th>
               ))}
             </tr>
@@ -440,7 +446,7 @@ function BlockView({
                 {r.map((c, j) =>
                   spans[i][j] === 0 ? (
                     <td key={j} data-label={header[j] ?? ""} className="merged-repeat border border-border px-3 py-2 align-top">
-                      <Marked text={filled[i][j]} marks={marks} bold={bold} />
+                      <Marked math={math} text={filled[i][j]} marks={marks} bold={bold} />
                     </td>
                   ) : (
                     <td
@@ -448,7 +454,7 @@ function BlockView({
                       rowSpan={spans[i][j] > 1 ? spans[i][j] : undefined}
                       data-label={header[j] ?? ""}
                       className={`border border-border px-3 py-2 ${spans[i][j] > 1 ? "align-middle font-medium" : "align-top"}`}>
-                      <Marked text={c} marks={marks} bold={bold} />
+                      <Marked math={math} text={c} marks={marks} bold={bold} />
                     </td>
                   ),
                 )}
@@ -503,19 +509,19 @@ function BlockView({
           </table>
         ) : null;
       // INLINE-MATH-01 / SOLVED-QUESTION-01: formulas typeset here, so the client component gets ready markup.
-      const steps = Array.isArray(b.steps) ? strs(b.steps).map((s, i) => <Marked key={i} text={stepText(s)} marks={[]} />) : undefined;
+      const steps = Array.isArray(b.steps) ? strs(b.steps).map((s, i) => <Marked math={math} key={i} text={stepText(s)} marks={[]} />) : undefined;
       return (
         <Checkpoint
           mode={b.mode === "self_check" ? "self_check" : "question"}
           prompt={str(b.prompt)}
-          promptView={hasMath(str(b.prompt)) ? <MathText text={str(b.prompt)} /> : undefined}
+          promptView={hasMath(str(b.prompt)) ? <MathText text={str(b.prompt)} html={math} /> : undefined}
           options={Array.isArray(b.options) ? (b.options as { id: string; text: string }[]) : []}
           answerId={typeof b.answer_id === "string" ? b.answer_id : null}
           explanation={str(b.explanation)}
-          explanationView={hasMath(str(b.explanation)) ? <MathText text={str(b.explanation)} /> : undefined}
+          explanationView={hasMath(str(b.explanation)) ? <MathText text={str(b.explanation)} html={math} /> : undefined}
           qref={str(b.ref) || undefined}
           steps={steps}
-          finalAnswer={str(b.final_answer) ? <Marked text={str(b.final_answer)} marks={[]} /> : undefined}
+          finalAnswer={str(b.final_answer) ? <Marked math={math} text={str(b.final_answer)} marks={[]} /> : undefined}
           labels={solvedLabels}
           answerFigure={
             answerTable || answerFigure ? (
@@ -539,7 +545,7 @@ function BlockView({
           latex={markLatex(str(b.latex), marks)}
           display={b.display !== false}
           textAlt={str(b.text_alt)}
-          textView={marks.length ? <Marked text={str(b.text_alt)} marks={marks} bold={bold} /> : undefined}
+          textView={marks.length ? <Marked math={math} text={str(b.text_alt)} marks={marks} bold={bold} /> : undefined}
           dataSaver={dataSaver}
           typeset={typeset}
           fallback={
@@ -557,22 +563,22 @@ function BlockView({
           aria-label={`Worked example: ${str(b.title)}`}>
           <p className={`text-xs font-semibold tracking-wide uppercase ${premium ? "text-accent" : "text-muted"}`}>Worked example</p>
           <p className="font-semibold">
-            <Marked text={str(b.title)} marks={marks} bold={bold} />
+            <Marked math={math} text={str(b.title)} marks={marks} bold={bold} />
           </p>
           <p className="whitespace-pre-line">
-            <Marked text={str(b.problem)} marks={marks} bold={bold} />
+            <Marked math={math} text={str(b.problem)} marks={marks} bold={bold} />
           </p>
           <ol className="list-decimal space-y-1 pl-6">
             {strs(b.steps).map((step, i) => (
               <li key={i} className="whitespace-pre-line">
-                <Marked text={stepText(step)} marks={marks} bold={bold} />
+                <Marked math={math} text={stepText(step)} marks={marks} bold={bold} />
               </li>
             ))}
           </ol>
           {str(b.answer) && (
             <p className="whitespace-pre-line">
               <span className="font-semibold">Answer: </span>
-              <Marked text={str(b.answer)} marks={marks} bold={bold} />
+              <Marked math={math} text={str(b.answer)} marks={marks} bold={bold} />
             </p>
           )}
         </section>
@@ -583,7 +589,7 @@ function BlockView({
         <figure className="space-y-2">
           {str(b.caption) && (
             <figcaption className="text-sm font-medium text-muted">
-              <Marked text={str(b.caption)} marks={marks} bold={bold} />
+              <Marked math={math} text={str(b.caption)} marks={marks} bold={bold} />
             </figcaption>
           )}
           <div className="overflow-hidden rounded-inner border border-border bg-surface-muted shadow-sm">

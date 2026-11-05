@@ -12,7 +12,7 @@ import { continuesInto, headingOnly as isHeadingOnly, headingTone } from "@/lib/
 import { premiumBook } from "@/lib/book-style";
 import { revealLabel } from "@/lib/exercises";
 import { solvedLabels } from "@/lib/solved-labels";
-import { typesetEquations } from "@/lib/typeset";
+import { typesetEquations, typesetMath } from "@/lib/typeset";
 import { placeSignature, type PlaceBlock } from "@/lib/variant-place";
 import { ButtonLink } from "@/components/button";
 import { Icon } from "@/components/icons";
@@ -265,6 +265,7 @@ async function TopicView({ id, view: asked }: { id: string; view: "read" | "lect
           <LessonBlocks
             blocks={lesson.body.blocks}
             typeset={typesetEquations(lesson.body.blocks)}
+            math={typesetMath(lesson.body.blocks)}
             blockIds
             dataSaver={dataSaver}
             premium={premiumBook(subjectKey(reading.subject_name), reading.grade_number)}
