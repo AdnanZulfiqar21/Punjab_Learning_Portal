@@ -1,13 +1,14 @@
-import katex from "katex";
-import "katex/dist/katex-swap.min.css";
 import { Fragment } from "react";
-import { mathPieces } from "@/lib/inline-math";
-import { KATEX_OPTIONS } from "@/lib/katex-options";
+import { mathKey, mathPieces } from "@/lib/inline-math";
 
-// INLINE-MATH-01: a sentence with formulas typeset where they stand (KaTeX, the options every equation uses). The
-// typeset copy carries its own MathML for screen readers. A formula that can't be typeset shows its LaTeX as written,
-// never an empty gap. A line of its own (\[ … \]) scrolls sideways on a narrow phone instead of widening the page.
-export function MathText({ text }: { text: string }) {
+// INLINE-MATH-01: a sentence with formulas typeset where they stand. The formulas are typeset on the server
+// (`lib/typeset.ts` `typesetMath`, the options every equation uses) and handed down as markup, so no page ships KaTeX's
+// JavaScript for them (the payload budget). The typeset copy carries its own MathML for screen readers. A formula
+// without markup (a surface that didn't typeset its lesson) shows its LaTeX as written, never an empty gap. A line of
+// its own (\[ … \]) scrolls sideways on a narrow phone instead of widening the page.
+export type MathHtml = Record<string, string | null>;
+
+export function MathText({ text, html }: { text: string; html?: MathHtml }) {
   return (
     <>
       {mathPieces(text).map((p, i, all) => {
@@ -20,19 +21,14 @@ export function MathText({ text }: { text: string }) {
           if (nextLine) t = t.replace(/\n[ \t]*$/, "");
           return <Fragment key={i}>{t}</Fragment>;
         }
-        let html: string | null = null;
-        try {
-          html = katex.renderToString(p.latex, { ...KATEX_OPTIONS, displayMode: p.display });
-        } catch {
-          html = null;
-        }
-        if (html === null)
+        const markup = html?.[mathKey(p.latex, p.display)];
+        if (!markup)
           return (
-            <code key={i} className="font-mono text-[0.9em]">
+            <code key={i} className={`font-mono text-[0.9em] ${p.display ? "math-display" : ""}`}>
               {p.latex}
             </code>
           );
-        return <span key={i} className={p.display ? "math-display" : "math-inline"} dangerouslySetInnerHTML={{ __html: html }} />;
+        return <span key={i} className={p.display ? "math-display" : "math-inline"} dangerouslySetInnerHTML={{ __html: markup }} />;
       })}
     </>
   );

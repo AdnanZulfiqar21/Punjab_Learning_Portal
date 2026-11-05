@@ -8,7 +8,7 @@ import { KeepPlace } from "@/components/keep-place";
 import { LessonBlocks } from "@/components/lesson-blocks";
 import { premiumBook } from "@/lib/book-style";
 import { practiceOnly, practiceTitle, revealLabel } from "@/lib/exercises";
-import { typesetEquations } from "@/lib/typeset";
+import { typesetEquations, typesetMath } from "@/lib/typeset";
 import { placeSignature, type PlaceBlock } from "@/lib/variant-place";
 import { Icon } from "@/components/icons";
 import { Breadcrumbs, Notice, SkeletonLines } from "@/components/ui";
@@ -151,6 +151,7 @@ async function ExerciseView({ id }: { id: string }) {
           <LessonBlocks
             blocks={lesson.body.blocks}
             typeset={typesetEquations(lesson.body.blocks)}
+            math={typesetMath(lesson.body.blocks)}
             blockIds
             dataSaver={dataSaver}
             premium={premiumBook(subject, reading.grade_number)}
