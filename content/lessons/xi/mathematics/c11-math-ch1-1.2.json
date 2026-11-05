@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH1-1.2",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch1",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch1/1.2",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 10,
+          "pdf_to": 11,
+          "note": "Book p. 5-6: 1.2 Equality of Two Complex Numbers, Example 4"
+        }
+      ],
+      "title": "1.2 Equality of Two Complex Numbers",
+      "language": "en",
+      "body": {
+        "blocks": [
+          {
+            "type": "paragraph",
+            "text": "Two real numbers are equal when they are the same number. For complex numbers we need a rule, because a complex number has two parts. The two complex numbers \\(z_{1} = a + bi\\) and \\(z_{2} = c + di\\) are said to be equal iff their real parts are equal and their imaginary parts are equal, i.e."
+          },
+          {
+            "type": "equation",
+            "latex": "a + bi = c + di \\iff a = c \\ \\text{and}\\ b = d",
+            "text_alt": "a plus b i equals c plus d i if and only if a equals c and b equals d"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "\"iff\" means \"if and only if\": the rule works in both directions. Think of \\(a + bi\\) as the point \\((a, b)\\) on the Argand diagram. Two points are the same point only when both their coordinates are the same. Because one complex equation gives two real equations, this rule lets us find two unknowns, such as \\(x\\) and \\(y\\), from a single complex equation."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Remember",
+            "text": "Before comparing, bring each side to the form (real part) + (imaginary part)\\(i\\). For example \\(x + 3i = 7 - yi\\) gives \\(x = 7\\) and \\(3 = -y\\), so \\(y = -3\\)."
+          },
+          {
+            "type": "example",
+            "title": "Example 4",
+            "problem": "If \\((3+2i)(x+iy) = 5+12i\\), where \\(x, y \\in \\mathbb{R}\\), then find the values of \\(x\\) and \\(y\\).",
+            "steps": [
+              "Given: \\((3+2i)(x+iy) = 5+12i\\), where \\(x\\) and \\(y\\) are real numbers.\nTo find: the values of \\(x\\) and \\(y\\).\nMethod: multiply out the left side and write it in the form (real part) + (imaginary part)\\(i\\). Then use the equality of two complex numbers: equal real parts and equal imaginary parts give two ordinary equations, which we solve together.",
+              "Step 1: Multiply out the left side\n\\[(3+2i)(x+iy)\\]\n\\[= 3x + 3iy + 2ix + 2yi^{2}\\]\nWhy: every term of the first bracket multiplies every term of the second bracket, exactly as in \\((a+b)(c+d) = ac + ad + bc + bd\\).",
+              "Step 2: Use \\(i^{2} = -1\\) and group the parts\n\\[2yi^{2} = 2y(-1) = -2y\\]\n\\[(3x - 2y) + (2x + 3y)i = 5 + 12i\\]\nWhy: \\(i^{2} = -1\\) turns \\(2yi^{2}\\) into a real term. Collecting the terms without \\(i\\) and the terms with \\(i\\) shows the real part \\(3x - 2y\\) and the imaginary part \\(2x + 3y\\).",
+              "Step 3: Compare real and imaginary parts\n\\[3x - 2y = 5 \\quad \\text{...(i)}\\]\n\\[2x + 3y = 12 \\quad \\text{...(ii)}\\]\nWhy: two complex numbers are equal if and only if their real parts are equal and their imaginary parts are equal. One complex equation therefore gives two real equations.",
+              "Step 4: Make the y-terms opposite\nMultiply equation (i) by 3 and equation (ii) by 2:\n\\[9x - 6y = 15\\]\n\\[4x + 6y = 24\\]\nWhy: now the \\(y\\)-terms are \\(-6y\\) and \\(+6y\\), so they cancel when the equations are added (elimination method).",
+              "Step 5: Add the equations\n\\[9x - 6y + 4x + 6y = 15 + 24\\]\n\\[13x = 39\\]\n\\[x = 3\\]\nWhy: adding removes \\(y\\) and leaves one equation in \\(x\\) only; dividing by 13 gives \\(x\\).",
+              "Step 6: Find \\(y\\)\nSubstitute \\(x = 3\\) in \\(9x - 6y = 15\\) (this is equation (i) multiplied by 3, as the book uses it):\n\\[9(3) - 6y = 15\\]\n\\[27 - 6y = 15\\]\n\\[-6y = -12\\]\n\\[y = 2\\]\nWhy: once \\(x\\) is known, any equation that contains \\(y\\) gives \\(y\\). Using (i) directly, \\(3(3) - 2y = 5\\) also gives \\(y = 2\\).",
+              "Check:\n\\[(3+2i)(3+2i) = 9 + 6i + 6i + 4i^{2}\\]\n\\[= 9 + 12i - 4 = 5 + 12i\\]\nThis is the given right side, so \\(x = 3,\\ y = 2\\) is correct."
+            ],
+            "answer": "\\(x = 3,\\ y = 2\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "1. \\(a + bi = c + di\\) exactly when \\(a = c\\) and \\(b = d\\).\n2. One complex equation gives two real equations (real parts, imaginary parts).\n3. First expand and use \\(i^{2} = -1\\); then compare.\n4. Solve the two real equations by elimination or substitution, then check by substituting back."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "1. Forgetting that \\(i^{2} = -1\\): the term \\(2yi^{2}\\) is real (\\(-2y\\)), it does not belong to the imaginary part.\n2. Comparing \\(2x + 3y\\) with \\(12i\\) instead of with \\(12\\): the imaginary part is the coefficient of \\(i\\), without the \\(i\\).\n3. Writing a sign wrongly when moving terms; always check the answer in the original equation."
+          }
+        ]
+      }
+    }
+  ]
+}

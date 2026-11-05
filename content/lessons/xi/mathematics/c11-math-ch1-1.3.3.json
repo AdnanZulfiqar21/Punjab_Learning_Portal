@@ -1,0 +1,187 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH1-1.3.3",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch1",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch1/1.3.3",
+      "title": "1.3.3 Operations on Complex Numbers in Polar Form",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 21,
+          "pdf_to": 23,
+          "note": "Book pp. 16-18: printed heading \"1.3.3 Operations on Complex Numbers in Polar Form\" (out of sequence), addition/subtraction, multiplication (Example 13), division (Example 14), then Examples 15 and 16"
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "heading",
+            "level": 2,
+            "text": "1.3.3 Operations on Complex Numbers in Polar Form",
+            "book_errors": [
+              "1.3.3"
+            ]
+          },
+          {
+            "type": "callout",
+            "tone": "correction",
+            "title": "Book correction",
+            "text": "The book prints this heading as 1.3.3, which is out of sequence: it comes after 1.4.1 and continues the polar-form work. We keep the printed number so you can find it in your textbook; only the numbering is wrong."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Addition and Subtraction of Complex number in Polar form"
+          },
+          {
+            "type": "paragraph",
+            "text": "Let \\(z_1 = r_1(\\cos\\theta_1 + i\\sin\\theta_1)\\) and \\(z_2 = r_2(\\cos\\theta_2 + i\\sin\\theta_2)\\) be two complex numbers in polar form. Their sum and difference can be written simply as\n\\[z_1 + z_2 = r_1(\\cos\\theta_1 + i\\sin\\theta_1)\\]\n\\[\\qquad + r_2(\\cos\\theta_2 + i\\sin\\theta_2)\\]\n\\[z_1 - z_2 = r_1(\\cos\\theta_1 + i\\sin\\theta_1)\\]\n\\[\\qquad - r_2(\\cos\\theta_2 + i\\sin\\theta_2)\\]"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "There is no shortcut for adding in polar form. Do not add the moduli and the angles. To get a single complex number, go back to rectangular form and collect real and imaginary parts:\n\\[z_1 + z_2 = (r_1\\cos\\theta_1 + r_2\\cos\\theta_2)\\]\n\\[\\qquad + i(r_1\\sin\\theta_1 + r_2\\sin\\theta_2)\\]\nThen, if needed, convert the answer to polar form again.\nWhy the shortcut fails: \\(1(\\cos 0 + i\\sin 0) = 1\\) and \\(1(\\cos\\pi + i\\sin\\pi) = -1\\) add to \\(0\\), not to \\(2(\\cos\\pi + i\\sin\\pi) = -2\\)."
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Multiplication of Complex number in Polar form"
+          },
+          {
+            "type": "paragraph",
+            "text": "Let \\(z_1 = r_1(\\cos\\theta_1 + i\\sin\\theta_1)\\) and \\(z_2 = r_2(\\cos\\theta_2 + i\\sin\\theta_2)\\) be two complex numbers in polar form. The product can be derived by multiplying them directly and simplifying:\n\\[z_1 z_2 = r_1(\\cos\\theta_1 + i\\sin\\theta_1)\\]\n\\[\\qquad \\times r_2(\\cos\\theta_2 + i\\sin\\theta_2)\\]\nOpen the brackets (four products):\n\\[\\cos\\theta_1\\cos\\theta_2 + i\\cos\\theta_1\\sin\\theta_2\\]\n\\[+\\ i\\sin\\theta_1\\cos\\theta_2 + i^2\\sin\\theta_1\\sin\\theta_2\\]\nUse \\(i^2 = -1\\) and collect the real and imaginary parts:\n\\[(\\cos\\theta_1\\cos\\theta_2 - \\sin\\theta_1\\sin\\theta_2)\\]\n\\[+\\ i(\\cos\\theta_1\\sin\\theta_2 + \\sin\\theta_1\\cos\\theta_2)\\]\nUsing the trigonometric identities (see Remember below):\n\\[z_1 z_2 = r_1 r_2[\\cos(\\theta_1 + \\theta_2)\\]\n\\[\\qquad + i\\sin(\\theta_1 + \\theta_2)]\\]"
+          },
+          {
+            "type": "equation",
+            "latex": "z_1 z_2 = r_1 r_2\\left[\\cos(\\theta_1 + \\theta_2) + i\\sin(\\theta_1 + \\theta_2)\\right]",
+            "text_alt": "z one times z two equals r one r two times open bracket cos of theta one plus theta two plus i sin of theta one plus theta two close bracket"
+          },
+          {
+            "type": "paragraph",
+            "text": "Thus, multiplying two complex numbers in polar form means multiplying their moduli and adding their arguments, i.e. \\(\\arg(z_1 z_2) = \\arg(z_1) + \\arg(z_2)\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Remember",
+            "text": "The two identities used above:\n\\[\\cos(A + B) = \\cos A\\cos B - \\sin A\\sin B\\]\n\\[\\sin(A + B) = \\sin A\\cos B + \\cos A\\sin B\\]\nThe real part of the product matched the first one, and the imaginary part matched the second one."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "Picture it: multiplying by \\(z_2\\) stretches \\(z_1\\) by the factor \\(r_2\\) and turns it through the angle \\(\\theta_2\\).\nThe rule \\(\\arg(z_1 z_2) = \\arg z_1 + \\arg z_2\\) is true up to a multiple of \\(2\\pi\\). If you need the principal argument, add or subtract \\(2\\pi\\) to bring the sum into \\((-\\pi, \\pi]\\)."
+          },
+          {
+            "type": "example",
+            "title": "Example 13",
+            "problem": "Find the product of \\(5\\left(\\cos\\frac{\\pi}{6} + i\\sin\\frac{\\pi}{6}\\right)\\) and \\(4\\left(\\cos\\frac{3\\pi}{2} + i\\sin\\frac{3\\pi}{2}\\right)\\).",
+            "steps": [
+              "Given: \\(z_1 = 5\\left(\\cos\\frac{\\pi}{6} + i\\sin\\frac{\\pi}{6}\\right)\\) and \\(z_2 = 4\\left(\\cos\\frac{3\\pi}{2} + i\\sin\\frac{3\\pi}{2}\\right)\\).\nTo find: \\(z_1 z_2\\).\nMethod: both numbers are already in polar form, so use the product formula: multiply the moduli, add the arguments.",
+              "Read off r and θ\n\\[r_1 = 5,\\quad \\theta_1 = \\dfrac{\\pi}{6}\\]\n\\[r_2 = 4,\\quad \\theta_2 = \\dfrac{3\\pi}{2}\\]\nWhy: compare each number with \\(r(\\cos\\theta + i\\sin\\theta)\\).",
+              "Substitute in the product formula\n\\[z_1 z_2 = r_1 r_2[\\cos(\\theta_1 + \\theta_2)\\]\n\\[\\qquad + i\\sin(\\theta_1 + \\theta_2)]\\]\nwith\n\\[r_1 r_2 = 5 \\times 4\\]\n\\[\\theta_1 + \\theta_2 = \\dfrac{\\pi}{6} + \\dfrac{3\\pi}{2}\\]\nWhy: this is exactly the formula derived above.",
+              "Simplify the modulus and the angle\n\\[5 \\times 4 = 20\\]\n\\[\\dfrac{\\pi}{6} + \\dfrac{3\\pi}{2} = \\dfrac{\\pi}{6} + \\dfrac{9\\pi}{6}\\]\n\\[= \\dfrac{10\\pi}{6} = \\dfrac{5\\pi}{3}\\]\nSo\n\\[z_1 z_2 = 20\\left(\\cos\\dfrac{5\\pi}{3} + i\\sin\\dfrac{5\\pi}{3}\\right)\\]\nWhy: to add fractions, write them with the common denominator 6.",
+              "Check (multiply in rectangular form)\n\\[z_1 = 5\\left(\\tfrac{\\sqrt{3}}{2} + \\tfrac{1}{2}i\\right)\\]\n\\[z_2 = 4(0 - i) = -4i\\]\n\\[z_1 z_2 = -4i \\cdot \\left(\\tfrac{5\\sqrt{3}}{2} + \\tfrac{5}{2}i\\right)\\]\n\\[= -10\\sqrt{3}\\,i - 10i^2\\]\n\\[= 10 - 10\\sqrt{3}\\,i\\]\nAnd \\(20\\left(\\cos\\frac{5\\pi}{3} + i\\sin\\frac{5\\pi}{3}\\right) = 20\\left(\\tfrac{1}{2} - \\tfrac{\\sqrt{3}}{2}i\\right) = 10 - 10\\sqrt{3}\\,i\\). Both agree.\nNote: \\(5\\pi/3\\) is not in \\((-\\pi, \\pi]\\); the principal argument of the product is \\(5\\pi/3 - 2\\pi = -\\pi/3\\), so the same answer is \\(20\\left(\\cos\\left(-\\frac{\\pi}{3}\\right) + i\\sin\\left(-\\frac{\\pi}{3}\\right)\\right)\\)."
+            ],
+            "answer": "\\(z_1 z_2 = 20\\left(\\cos\\frac{5\\pi}{3} + i\\sin\\frac{5\\pi}{3}\\right) = 10 - 10\\sqrt{3}\\,i\\)"
+          },
+          {
+            "type": "heading",
+            "level": 3,
+            "text": "Division of Complex Number in Polar Form"
+          },
+          {
+            "type": "paragraph",
+            "text": "Let \\(z_1 = r_1(\\cos\\theta_1 + i\\sin\\theta_1)\\) and \\(z_2 = r_2(\\cos\\theta_2 + i\\sin\\theta_2)\\) be two complex numbers in polar form. The formula for dividing them can be derived by rationalizing the denominator (\\(z_2 \\ne 0\\), so \\(r_2 \\ne 0\\)):\n\\[\\dfrac{z_1}{z_2} = \\dfrac{r_1(\\cos\\theta_1 + i\\sin\\theta_1)}{r_2(\\cos\\theta_2 + i\\sin\\theta_2)}\\]\nMultiply the numerator and the denominator by the conjugate of \\(\\cos\\theta_2 + i\\sin\\theta_2\\), which is \\(\\cos\\theta_2 - i\\sin\\theta_2\\). Work out each part separately.\nDenominator:\n\\[\\cos^2\\theta_2 - i^2\\sin^2\\theta_2\\]\n\\[= \\cos^2\\theta_2 + \\sin^2\\theta_2 = 1\\]\nNumerator:\n\\[\\cos\\theta_1\\cos\\theta_2 - i\\cos\\theta_1\\sin\\theta_2\\]\n\\[+\\ i\\sin\\theta_1\\cos\\theta_2 - i^2\\sin\\theta_1\\sin\\theta_2\\]\n\\[= (\\cos\\theta_1\\cos\\theta_2 + \\sin\\theta_1\\sin\\theta_2)\\]\n\\[\\ + i(\\sin\\theta_1\\cos\\theta_2 - \\cos\\theta_1\\sin\\theta_2)\\]\nUsing the trigonometric identities (see Remember below):\n\\[\\dfrac{z_1}{z_2} = \\dfrac{r_1}{r_2}[\\cos(\\theta_1 - \\theta_2)\\]\n\\[\\qquad + i\\sin(\\theta_1 - \\theta_2)]\\]"
+          },
+          {
+            "type": "equation",
+            "latex": "\\dfrac{z_1}{z_2} = \\dfrac{r_1}{r_2}\\left[\\cos(\\theta_1 - \\theta_2) + i\\sin(\\theta_1 - \\theta_2)\\right]",
+            "text_alt": "z one over z two equals r one over r two times open bracket cos of theta one minus theta two plus i sin of theta one minus theta two close bracket"
+          },
+          {
+            "type": "paragraph",
+            "text": "Thus, when dividing two complex numbers, the modulus of the result is the quotient of their moduli, and the argument of the result is the difference between their arguments, i.e. \\(\\arg\\left(\\frac{z_1}{z_2}\\right) = \\arg(z_1) - \\arg(z_2)\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Remember",
+            "text": "The identities used for division:\n\\[\\cos(A - B) = \\cos A\\cos B + \\sin A\\sin B\\]\n\\[\\sin(A - B) = \\sin A\\cos B - \\cos A\\sin B\\]\nAnd the denominator became 1 because \\(\\cos^2\\theta + \\sin^2\\theta = 1\\)."
+          },
+          {
+            "type": "example",
+            "title": "Example 14",
+            "problem": "Divide \\(\\frac{2}{7}\\left(\\cos\\frac{7\\pi}{6} + i\\sin\\frac{7\\pi}{6}\\right)\\) by \\(\\frac{3}{5}\\left(\\cos\\left(-\\frac{\\pi}{2}\\right) + i\\sin\\left(-\\frac{\\pi}{2}\\right)\\right)\\).",
+            "steps": [
+              "Given: \\(z_1 = \\frac{2}{7}\\left(\\cos\\frac{7\\pi}{6} + i\\sin\\frac{7\\pi}{6}\\right)\\), \\(z_2 = \\frac{3}{5}\\left(\\cos\\left(-\\frac{\\pi}{2}\\right) + i\\sin\\left(-\\frac{\\pi}{2}\\right)\\right)\\).\nTo find: \\(\\dfrac{z_1}{z_2}\\).\nMethod: both are in polar form, so use the quotient formula: divide the moduli, subtract the arguments.",
+              "Read off r and θ\n\\[r_1 = \\dfrac{2}{7},\\quad \\theta_1 = \\dfrac{7\\pi}{6}\\]\n\\[r_2 = \\dfrac{3}{5},\\quad \\theta_2 = -\\dfrac{\\pi}{2}\\]\nWhy: compare each number with \\(r(\\cos\\theta + i\\sin\\theta)\\). Keep the minus sign of \\(\\theta_2\\).",
+              "Substitute in the quotient formula\n\\[\\dfrac{z_1}{z_2} = \\dfrac{r_1}{r_2}[\\cos(\\theta_1 - \\theta_2)\\]\n\\[\\qquad + i\\sin(\\theta_1 - \\theta_2)]\\]\nwith\n\\[\\dfrac{r_1}{r_2} = \\dfrac{2}{7} \\times \\dfrac{5}{3}\\]\n\\[\\theta_1 - \\theta_2 = \\dfrac{7\\pi}{6} - \\left(-\\dfrac{\\pi}{2}\\right)\\]\nWhy: dividing by \\(\\frac{3}{5}\\) is multiplying by \\(\\frac{5}{3}\\).",
+              "Simplify the modulus and the angle\n\\[\\dfrac{2}{7} \\times \\dfrac{5}{3} = \\dfrac{10}{21}\\]\n\\[\\dfrac{7\\pi}{6} + \\dfrac{\\pi}{2} = \\dfrac{7\\pi}{6} + \\dfrac{3\\pi}{6}\\]\n\\[= \\dfrac{10\\pi}{6} = \\dfrac{5\\pi}{3}\\]\nSo\n\\[\\dfrac{z_1}{z_2} = \\dfrac{10}{21}\\left(\\cos\\dfrac{5\\pi}{3} + i\\sin\\dfrac{5\\pi}{3}\\right)\\]\nWhy: subtracting a negative angle means adding it: \\(-(-\\pi/2) = +\\pi/2\\).",
+              "Check (divide in rectangular form)\n\\[z_1 = \\tfrac{2}{7}\\left(-\\tfrac{\\sqrt{3}}{2} - \\tfrac{1}{2}i\\right) = -\\tfrac{\\sqrt{3} + i}{7}\\]\n\\[z_2 = \\tfrac{3}{5}(0 - i) = -\\tfrac{3}{5}i\\]\n\\[\\dfrac{z_1}{z_2} = \\dfrac{5(\\sqrt{3} + i)}{21i}\\]\n\\[= \\dfrac{5(\\sqrt{3} + i)(-i)}{21}\\]\n\\[= \\dfrac{5}{21} - \\dfrac{5\\sqrt{3}}{21}i\\]\nAnd \\(\\frac{10}{21}\\left(\\tfrac{1}{2} - \\tfrac{\\sqrt{3}}{2}i\\right) = \\frac{5}{21} - \\frac{5\\sqrt{3}}{21}i\\). Both agree, so the book's answer is correct. (Principal argument: \\(5\\pi/3 - 2\\pi = -\\pi/3\\).)"
+            ],
+            "answer": "\\(\\dfrac{z_1}{z_2} = \\frac{10}{21}\\left(\\cos\\frac{5\\pi}{3} + i\\sin\\frac{5\\pi}{3}\\right) = \\frac{5}{21} - \\frac{5\\sqrt{3}}{21}i\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "The book prints Examples 15 and 16 here. They do not use the polar formulas; they practise the modulus, the conjugate and the argument with \\(z = x + iy\\), and lead to the equation of a line and of a circle."
+          },
+          {
+            "type": "example",
+            "title": "Example 15",
+            "problem": "If \\(z = x + iy\\), then write the equation \\(|3z - i| = |3\\overline{z} + 7|\\) in terms of \\(x\\) and \\(y\\).",
+            "steps": [
+              "Given: \\(|3z - i| = |3\\overline{z} + 7|\\) ... (i), with \\(z = x + iy\\).\nTo find: the same equation using only \\(x\\) and \\(y\\).\nMethod: write each side as \\(a + ib\\), use \\(|a + ib| = \\sqrt{a^2 + b^2}\\), then square and simplify.",
+              "Left side\n\\[3z - i = 3(x + iy) - i\\]\n\\[= 3x + i(3y - 1)\\]\n\\[|3z - i| = \\sqrt{(3x)^2 + (3y - 1)^2}\\]\nWhy: collect the real part \\(3x\\) and the imaginary part \\(3y - 1\\) before taking the modulus.",
+              "Right side\n\\[\\overline{z} = x - iy\\]\n\\[3\\overline{z} + 7 = 3x - 3iy + 7\\]\n\\[= (3x + 7) + i(-3y)\\]\n\\[|3\\overline{z} + 7| = \\sqrt{(3x + 7)^2 + (-3y)^2}\\]\nWhy: the conjugate changes the sign of the imaginary part.",
+              "Substitute in (i) and square both sides\n\\[\\sqrt{(3x)^2 + (3y - 1)^2} = \\sqrt{(3x + 7)^2 + (-3y)^2}\\]\n\\[(3x)^2 + (3y - 1)^2 = (3x + 7)^2 + (-3y)^2\\]\nWhy: squaring removes the square roots; both sides are non-negative, so nothing is lost.",
+              "Expand and simplify\n\\[9x^2 + 9y^2 - 6y + 1\\]\n\\[= 9x^2 + 42x + 49 + 9y^2\\]\n\\[-6y + 1 = 42x + 49\\]\n\\[-6y = 42x + 48\\]\n\\[y = -7x - 8\\]\nWhy: \\(9x^2\\) and \\(9y^2\\) cancel from both sides; then divide by \\(-6\\).",
+              "Check\nTake \\(x = -1\\): then \\(y = -7(-1) - 8 = -1\\), so \\(z = -1 - i\\).\n\\[3z - i = -3 - 4i,\\quad |{-3} - 4i| = 5\\]\n\\[3\\overline{z} + 7 = 4 + 3i,\\quad |4 + 3i| = 5\\]\nBoth sides are equal, as expected. The equation \\(y = -7x - 8\\) represents a straight line in the complex plane."
+            ],
+            "answer": "\\(y = -7x - 8\\) (equivalently \\(7x + y + 8 = 0\\)), a straight line"
+          },
+          {
+            "type": "example",
+            "title": "Example 16",
+            "problem": "Show that \\((x + 2)^2 + y^2 = 8\\) if \\(\\arg\\left(\\frac{z + 2i}{z - 2i}\\right) = \\frac{3\\pi}{4}\\) for \\(z = x + iy\\).",
+            "steps": [
+              "Given: \\(z = x + iy\\) and \\(\\arg\\left(\\frac{z + 2i}{z - 2i}\\right) = \\frac{3\\pi}{4}\\).\nTo prove: \\((x + 2)^2 + y^2 = 8\\).\nMethod: write the fraction in the form \\(a + ib\\) (multiply by the conjugate of the denominator), then use \\(\\tan(\\arg) = \\dfrac{\\text{imaginary part}}{\\text{real part}}\\).",
+              "Substitute z\n\\[\\dfrac{z + 2i}{z - 2i} = \\dfrac{x + iy + 2i}{x + iy - 2i}\\]\n\\[= \\dfrac{x + i(y + 2)}{x + i(y - 2)}\\]\nWhy: group the imaginary terms together.",
+              "Multiply by the conjugate of the denominator\n\\[= \\dfrac{x + i(y + 2)}{x + i(y - 2)} \\times \\dfrac{x - i(y - 2)}{x - i(y - 2)}\\]\nNumerator:\n\\[x^2 - ix(y - 2) + ix(y + 2)\\]\n\\[\\ - i^2(y + 2)(y - 2)\\]\n\\[= (x^2 + y^2 - 4) + 4ix\\]\nDenominator:\n\\[x^2 + (y - 2)^2\\]\nWhy: \\((a + ib)(a - ib) = a^2 + b^2\\) is real, so the fraction separates into real and imaginary parts. Here \\(-i^2 = +1\\) and \\((y + 2)(y - 2) = y^2 - 4\\).",
+              "Separate the parts\n\\[\\dfrac{z + 2i}{z - 2i} = \\dfrac{x^2 + y^2 - 4}{x^2 + (y - 2)^2} + i\\,\\dfrac{4x}{x^2 + (y - 2)^2}\\]\nWhy: now the real part and the imaginary part are clear.",
+              "Use the argument\n\\[\\tan^{-1}\\left(\\dfrac{\\text{Im}}{\\text{Re}}\\right) = \\dfrac{3\\pi}{4}\\]\nThe common denominator \\(x^2 + (y - 2)^2\\) cancels:\n\\[\\dfrac{4x}{x^2 + y^2 - 4} = \\tan\\dfrac{3\\pi}{4} = -1\\]\nWhy: for an argument \\(\\theta\\), \\(\\tan\\theta = \\dfrac{\\text{imaginary part}}{\\text{real part}}\\), and \\(\\tan\\frac{3\\pi}{4} = -1\\).",
+              "Simplify and complete the square\n\\[4x = -1(x^2 + y^2 - 4)\\]\n\\[x^2 + 4x + y^2 = 4\\]\nAdd 4 to both sides:\n\\[x^2 + 4x + 4 + y^2 = 8\\]\n\\[(x + 2)^2 + y^2 = 8\\]\nWhy: \\(x^2 + 4x + 4 = (x + 2)^2\\); half of the coefficient 4 is 2, and \\(2^2 = 4\\).",
+              "Check\nTake a point of this circle with \\(x > 0\\): \\(x = \\tfrac{1}{2}\\), \\(y = \\tfrac{\\sqrt{7}}{2}\\) (then \\((2.5)^2 + 1.75 = 8\\)). For it, \\(x^2 + y^2 - 4 = -2 < 0\\) and \\(4x = 2 > 0\\), so \\(\\frac{z + 2i}{z - 2i}\\) lies in the second quadrant with \\(\\tan = 2/(-2) = -1\\): its argument is \\(\\frac{3\\pi}{4}\\). Correct."
+            ],
+            "answer": "Hence proved: \\((x + 2)^2 + y^2 = 8\\)"
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Teaching note",
+            "text": "A careful point about Example 16 (it links to the Principal Argument rule). \\(\\tan\\theta = -1\\) is true for \\(\\theta = \\frac{3\\pi}{4}\\) and also for \\(\\theta = -\\frac{\\pi}{4}\\). The argument is \\(\\frac{3\\pi}{4}\\) (second quadrant) only when the real part is negative and the imaginary part positive, i.e. \\(4x > 0\\), so \\(x > 0\\).\nSo every \\(z\\) with this argument lies on the circle \\((x + 2)^2 + y^2 = 8\\), which is what the example asks us to show. But not every point of the circle works: for \\(x = -1\\), \\(y = \\sqrt{7}\\) the argument is \\(-\\frac{\\pi}{4}\\). The exact locus is the part of the circle with \\(x > 0\\)."
+          },
+          {
+            "type": "callout",
+            "tone": "tip",
+            "title": "Key points",
+            "text": "• Addition and subtraction: no polar shortcut; add the real parts and the imaginary parts.\n• Multiplication: multiply the moduli, add the arguments: \\(z_1 z_2 = r_1 r_2\\operatorname{cis}(\\theta_1 + \\theta_2)\\).\n• Division: divide the moduli, subtract the arguments: \\(\\dfrac{z_1}{z_2} = \\dfrac{r_1}{r_2}\\operatorname{cis}(\\theta_1 - \\theta_2)\\), \\(z_2 \\ne 0\\).\n• Adjust a result angle by \\(\\pm 2\\pi\\) if the principal argument is needed.\n• For \\(|\\ldots| = |\\ldots|\\) equations: write each side as \\(a + ib\\), take moduli, square."
+          },
+          {
+            "type": "callout",
+            "tone": "warning",
+            "title": "Common mistake",
+            "text": "• Adding moduli and angles when adding complex numbers. That rule is only for multiplication (with multiplied moduli).\n• Dividing the angles or multiplying the angles. Angles are added (product) or subtracted (quotient).\n• Losing the minus sign: \\(\\theta_1 - \\theta_2\\) with \\(\\theta_2 = -\\pi/2\\) becomes \\(\\theta_1 + \\pi/2\\).\n• In Example 15, forgetting that \\(\\overline{z} = x - iy\\) changes the sign of \\(y\\).\n• In Example 16, using \\(\\tan\\theta = -1\\) without checking the quadrant of the argument."
+          }
+        ]
+      }
+    }
+  ]
+}
