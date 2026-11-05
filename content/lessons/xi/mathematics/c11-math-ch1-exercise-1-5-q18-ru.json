@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH1-EXERCISE-1-5-Q18-RU",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch1",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch1/u-exercise-1-5-q18",
+      "title": "Question 18 (Roman Urdu)",
+      "language": "roman_ur",
+      "variant_of": "C11-MATH-CH1-EXERCISE-1-5-Q18",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 25,
+          "pdf_to": 26,
+          "note": "Exercise 1.5, Question 18: Roman Urdu: Exercise 1.5, all 19 questions (book pages 20-21), solved step by step; answers checked against the answer key (PDF 297-298) and recomputed independently."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "18",
+            "prompt": "18. Consider the complex encryption key \\(k = 3 - 3i\\). Encrypt the word \"QUIZ\", and then recover the original word using the inverse of the key.",
+            "explanation": "Yeh bilkul Sawal 17 wala tareeqa hai, bas key ab \\(k = 3 - 3i\\) hai. Encrypt: har letter ki value ko k se zarb. Asal lafz wapas: inverse \\(k^{-1}\\) se zarb, jaisa sawal khud kehta hai. Is key mein ek khoobsurti hai: \\(3 - 3i = 3(1 - i)\\), jis se hisaab bohat chhota ho jata hai.",
+            "steps": [
+              "Given (diya gaya hai): lafz QUIZ, key \\(k = 3 - 3i\\), A = 1, ..., Z = 26.\nTo find (maloom karna hai): encrypted numbers, phir \\(k^{-1}\\) se asal lafz.\nMethod (tareeqa): encrypted \\(= z \\times k\\); wapas \\(= (z \\times k) \\times k^{-1}\\).",
+              "Qadam 1: Letters ko complex numbers banayein\n\\[Q = 17 + 0i, \\quad U = 21 + 0i\\]\n\\[I = 9 + 0i, \\quad Z = 26 + 0i\\]\nKyun: Q satrahwan letter hai, U ikkeeswan, I nawan, Z chhabbeeswan (aakhri). Ginti mein ghalti na ho, is liye alphabet ungliyon par gin kar check kar lein.",
+              "Qadam 2: Encrypt (k se zarb)\n\\[17(3 - 3i) = 51 - 51i\\]\n\\[21(3 - 3i) = 63 - 63i\\]\n\\[9(3 - 3i) = 27 - 27i\\]\n\\[26(3 - 3i) = 78 - 78i\\]\nKyun: letter ki value ko k ke dono parts se zarb kiya.",
+              "Qadam 3: Key ka inverse\n\\[k^{-1} = \\dfrac{1}{3 - 3i} \\times \\dfrac{3 + 3i}{3 + 3i}\\]\n\\[= \\dfrac{3 + 3i}{9 + 9} = \\dfrac{3 + 3i}{18}\\]\n\\[= \\dfrac{1 + i}{6}\\]\nKyun: conjugate \\(3 + 3i\\) se upar neeche zarb kiya taake neeche real ho jaye: \\(9 + 9 = 18\\). Phir upar neeche se common factor 3 cancel kiya.",
+              "Qadam 4: Pehla letter wapas laayein\n\\[(51 - 51i)\\cdot\\dfrac{1 + i}{6} = \\dfrac{51(1 - i)(1 + i)}{6}\\]\n\\[= \\dfrac{51 \\times 2}{6} = 17 \\;\\Rightarrow\\; Q\\]\nKyun: \\(51 - 51i = 51(1 - i)\\), aur \\((1 - i)(1 + i) = 1 - i^{2} = 1 + 1 = 2\\). Phir \\(\\frac{102}{6} = 17\\), yani Q.",
+              "Qadam 5: Baqi letters\n\\[(63 - 63i)\\cdot\\dfrac{1 + i}{6} = \\dfrac{126}{6} = 21 \\Rightarrow U\\]\n\\[(27 - 27i)\\cdot\\dfrac{1 + i}{6} = \\dfrac{54}{6} = 9 \\Rightarrow I\\]\n\\[(78 - 78i)\\cdot\\dfrac{1 + i}{6} = \\dfrac{156}{6} = 26 \\Rightarrow Z\\]\nKyun: har encrypted number (value)\\((1 - i)\\cdot 3\\) hai, is liye har baar wohi factor \\(\\frac{2}{6}\\) aata hai aur nateeja \\(\\text{value} \\times 3 \\times \\frac{2}{6} = \\text{value}\\).",
+              "Tasdeeq (check): \\(k \\cdot k^{-1} = (3 - 3i)\\cdot\\frac{1 + i}{6} = \\frac{3(1 - i)(1 + i)}{6} = \\frac{6}{6} = 1\\).\nKyun: inverse ki pehchaan yahi hai ke key se zarb karne par 1 aaye; isi liye wapas asal values milti hain."
+            ],
+            "final_answer": "Encrypted: \\(51 - 51i,\\ 63 - 63i,\\ 27 - 27i,\\ 78 - 78i\\). \\(k^{-1} = \\frac{1 + i}{6}\\) se yeh \\(17, 21, 9, 26\\) dete hain = QUIZ.",
+            "answer_table": {
+              "header": [
+                "Letter and z",
+                "Encrypted: z × k",
+                "Decrypted: (z × k) × k⁻¹",
+                "Letter"
+              ],
+              "rows": [
+                [
+                  "Q: 17 + 0i",
+                  "17(3 − 3i) = 51 − 51i",
+                  "(51 − 51i)(1 + i)/6 = 102/6 = 17",
+                  "Q"
+                ],
+                [
+                  "U: 21 + 0i",
+                  "21(3 − 3i) = 63 − 63i",
+                  "(63 − 63i)(1 + i)/6 = 126/6 = 21",
+                  "U"
+                ],
+                [
+                  "I: 9 + 0i",
+                  "9(3 − 3i) = 27 − 27i",
+                  "(27 − 27i)(1 + i)/6 = 54/6 = 9",
+                  "I"
+                ],
+                [
+                  "Z: 26 + 0i",
+                  "26(3 − 3i) = 78 − 78i",
+                  "(78 − 78i)(1 + i)/6 = 156/6 = 26",
+                  "Z"
+                ]
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

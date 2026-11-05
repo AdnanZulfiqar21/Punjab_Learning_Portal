@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH1-EXERCISE-1-5-Q17",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch1",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch1/u-exercise-1-5-q17",
+      "title": "Question 17",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 25,
+          "pdf_to": 26,
+          "note": "Exercise 1.5, Question 17: Exercise 1.5, all 19 questions (book pages 20-21), solved step by step; answers checked against the answer key (PDF 297-298) and recomputed independently."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "17",
+            "prompt": "17. Encrypt the word \"CODE\" by multiplying the complex encryption key \\(k = 2 - i\\). Then decrypt it back to the original word.",
+            "explanation": "Cryptography as in Example 18: each letter becomes a number (A = 1, B = 2, ..., Z = 26), written as a complex number with zero imaginary part.\nEncrypt: multiply by the key \\(k\\). Decrypt: divide by \\(k\\), i.e. multiply by its multiplicative inverse \\(k^{-1}\\).",
+            "steps": [
+              "Given: the word CODE, key \\(k = 2 - i\\), and A = 1, B = 2, ..., Z = 26 (as in Example 18).\nTo find: the encrypted numbers, and then the word back again.\nMethod: encrypted \\(= z \\times k\\); decrypted \\(= (z \\times k) \\div k = (z \\times k) \\times k^{-1}\\).",
+              "Step 1: Letters to complex numbers\n\\[C = 3 + 0i, \\quad O = 15 + 0i\\]\n\\[D = 4 + 0i, \\quad E = 5 + 0i\\]\nWhy: C is the 3rd letter, O the 15th, D the 4th, E the 5th; the book gives each a zero imaginary part.",
+              "Step 2: Encrypt (multiply by k)\n\\[(3 + 0i)(2 - i) = 6 - 3i\\]\n\\[(15 + 0i)(2 - i) = 30 - 15i\\]\n\\[(4 + 0i)(2 - i) = 8 - 4i\\]\n\\[(5 + 0i)(2 - i) = 10 - 5i\\]\nWhy: a real number times \\(2 - i\\) multiplies both parts. The secret message is \\(6 - 3i,\\ 30 - 15i,\\ 8 - 4i,\\ 10 - 5i\\).",
+              "Step 3: Find the inverse of the key\n\\[k^{-1} = \\dfrac{1}{2 - i} \\times \\dfrac{2 + i}{2 + i}\\]\n\\[= \\dfrac{2 + i}{4 + 1} = \\dfrac{2 + i}{5}\\]\nWhy: dividing by \\(k\\) is the same as multiplying by \\(k^{-1}\\); multiplying by the conjugate makes the bottom real.",
+              "Step 4: Decrypt the first number fully\n\\[(6 - 3i) \\cdot \\dfrac{2 + i}{5}\\]\n\\[= \\dfrac{12 + 6i - 6i - 3i^{2}}{5}\\]\n\\[= \\dfrac{12 + 3}{5} = 3 \\;\\Rightarrow\\; C\\]\nWhy: \\(i^{2} = -1\\); the imaginary parts cancel, so we get back a real number, the letter's value.",
+              "Step 5: Decrypt the others\n\\[(30 - 15i)\\cdot\\dfrac{2 + i}{5} = \\dfrac{75}{5} = 15 \\Rightarrow O\\]\n\\[(8 - 4i)\\cdot\\dfrac{2 + i}{5} = \\dfrac{20}{5} = 4 \\Rightarrow D\\]\n\\[(10 - 5i)\\cdot\\dfrac{2 + i}{5} = \\dfrac{25}{5} = 5 \\Rightarrow E\\]\nWhy: the same working as Step 4 (e.g. \\(30 \\cdot 2 + 15 = 75\\)). The full table is shown below the answer.",
+              "Check: \\(k \\cdot k^{-1} = (2 - i)\\cdot\\frac{2 + i}{5} = \\frac{4 + 1}{5} = 1\\) ✓, so multiplying by \\(k^{-1}\\) exactly undoes multiplying by \\(k\\)."
+            ],
+            "final_answer": "Encrypted: \\(6 - 3i,\\ 30 - 15i,\\ 8 - 4i,\\ 10 - 5i\\). Decrypted: \\(3, 15, 4, 5\\) = CODE.",
+            "answer_table": {
+              "header": [
+                "Letter and z",
+                "Encrypted: z × k",
+                "Decrypted: (z × k) ÷ k",
+                "Letter"
+              ],
+              "rows": [
+                [
+                  "C: 3 + 0i",
+                  "3(2 − i) = 6 − 3i",
+                  "(6 − 3i)(2 + i)/5 = 15/5 = 3",
+                  "C"
+                ],
+                [
+                  "O: 15 + 0i",
+                  "15(2 − i) = 30 − 15i",
+                  "(30 − 15i)(2 + i)/5 = 75/5 = 15",
+                  "O"
+                ],
+                [
+                  "D: 4 + 0i",
+                  "4(2 − i) = 8 − 4i",
+                  "(8 − 4i)(2 + i)/5 = 20/5 = 4",
+                  "D"
+                ],
+                [
+                  "E: 5 + 0i",
+                  "5(2 − i) = 10 − 5i",
+                  "(10 − 5i)(2 + i)/5 = 25/5 = 5",
+                  "E"
+                ]
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

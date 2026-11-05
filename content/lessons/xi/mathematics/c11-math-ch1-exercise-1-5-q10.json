@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH1-EXERCISE-1-5-Q10",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch1",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch1/u-exercise-1-5-q10",
+      "title": "Question 10",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 25,
+          "pdf_to": 26,
+          "note": "Exercise 1.5, Question 10: Exercise 1.5, all 19 questions (book pages 20-21), solved step by step; answers checked against the answer key (PDF 297-298) and recomputed independently."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "10",
+            "prompt": "10. If \\(z = x + iy\\) and \\(\\arg\\left(\\frac{\\overline{z} - 1 + 2i}{\\overline{z} + 1 - 2i}\\right) = \\frac{9\\pi}{4}\\), show that \\(x^{2} + y^{2} - 4x + 2y - 5 = 0\\).",
+            "explanation": "A \"show that\" locus question with the argument of a fraction.\nPlan: write the top and the bottom in a + ib form, multiply by the conjugate of the bottom, and use the fact that \\(\\frac{9\\pi}{4}\\) points in the same direction as \\(\\frac{\\pi}{4}\\), where real part = imaginary part.",
+            "steps": [
+              "Given: \\(z = x + iy\\) and \\(\\arg\\left(\\frac{\\overline{z} - 1 + 2i}{\\overline{z} + 1 - 2i}\\right) = \\frac{9\\pi}{4}\\).\nTo prove: \\(x^{2} + y^{2} - 4x + 2y - 5 = 0\\).\nMethod: if \\(\\arg w = \\frac{\\pi}{4}\\) then \\(w = a + ib\\) with \\(\\tan\\frac{\\pi}{4} = \\frac{b}{a} = 1\\), so \\(a = b\\) (both positive).",
+              "Step 1: What does 9π/4 mean?\n\\[\\dfrac{9\\pi}{4} = 2\\pi + \\dfrac{\\pi}{4}\\]\nWhy: \\(2\\pi\\) is one full turn, which brings us back to the same direction. So the fraction points in the direction \\(\\frac{\\pi}{4}\\) (first quadrant). Note: \\(\\frac{9\\pi}{4}\\) is not a principal value; its principal value is \\(\\frac{\\pi}{4}\\).",
+              "Step 2: Write top and bottom in a + ib form\n\\[\\overline{z} = x - iy\\]\n\\[\\text{Top} = (x - 1) + (2 - y)i\\]\n\\[\\text{Bottom} = (x + 1) - (y + 2)i\\]\nWhy: put \\(\\overline{z} = x - iy\\), then group real and imaginary parts.",
+              "Step 3: Multiply by the conjugate of the bottom\nConjugate of the bottom: \\((x + 1) + (y + 2)i\\).\nNew bottom: \\((x + 1)^{2} + (y + 2)^{2}\\), a positive real number.\nWhy: after this the fraction is (new top)/(positive number), so its direction is decided by the new top alone.",
+              "Step 4: Real part of the new top\nUse \\((a + bi)(c + di)\\): real part \\(= ac - bd\\), with \\(a = x - 1\\), \\(b = 2 - y\\), \\(c = x + 1\\), \\(d = y + 2\\).\n\\[\\text{Re} = (x - 1)(x + 1) - (2 - y)(2 + y)\\]\n\\[= x^{2} - 1 - (4 - y^{2})\\]\n\\[= x^{2} + y^{2} - 5\\]\nWhy: \\((x-1)(x+1)\\) and \\((2-y)(2+y)\\) are both \"difference of squares\".",
+              "Step 5: Imaginary part of the new top\nImaginary part \\(= ad + bc\\):\n\\[\\text{Im} = (x - 1)(y + 2) + (2 - y)(x + 1)\\]\n\\[= xy + 2x - y - 2\\]\n\\[\\quad + 2x + 2 - xy - y\\]\n\\[= 4x - 2y\\]\nWhy: expand both brackets; \\(xy\\) and \\(-xy\\) cancel, and \\(-2\\), \\(+2\\) cancel.",
+              "Step 6: Use real part = imaginary part\n\\[x^{2} + y^{2} - 5 = 4x - 2y\\]\n\\[x^{2} + y^{2} - 4x + 2y - 5 = 0\\]\nWhy: direction \\(\\frac{\\pi}{4}\\) means \\(\\tan\\frac{\\pi}{4} = \\frac{\\text{Im}}{\\text{Re}} = 1\\). (Strictly, the points must also have \\(4x - 2y > 0\\), so the locus is an arc of this circle.)",
+              "Check: \\(x = 5, y = 0\\) is on the circle (\\(25 - 20 - 5 = 0\\)). Then \\(\\overline{z} = 5\\):\n\\[\\dfrac{5 - 1 + 2i}{5 + 1 - 2i} = \\dfrac{4 + 2i}{6 - 2i}\\]\n\\[= \\dfrac{(4 + 2i)(6 + 2i)}{40} = \\dfrac{20 + 20i}{40}\\]\n\\[= \\dfrac{1}{2} + \\dfrac{1}{2}i\\]\nReal part = imaginary part > 0, so the argument is \\(\\frac{\\pi}{4}\\) (same direction as \\(\\frac{9\\pi}{4}\\)). ✓"
+            ],
+            "final_answer": "Hence proved: \\(x^{2} + y^{2} - 4x + 2y - 5 = 0\\)."
+          }
+        ]
+      }
+    }
+  ]
+}

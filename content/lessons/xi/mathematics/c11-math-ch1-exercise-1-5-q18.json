@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "kind": "lesson",
+  "items": [
+    {
+      "external_id": "C11-MATH-CH1-EXERCISE-1-5-Q18",
+      "chapter": "pk-punjab/xi/mathematics/c11-math/ch1",
+      "topic": "pk-punjab/xi/mathematics/c11-math/ch1/u-exercise-1-5-q18",
+      "title": "Question 18",
+      "language": "en",
+      "source_refs": [
+        {
+          "source_document_id": "7d4b9c56-dd40-5f3a-bc3e-209e6769bd8e",
+          "pdf_from": 25,
+          "pdf_to": 26,
+          "note": "Exercise 1.5, Question 18: Exercise 1.5, all 19 questions (book pages 20-21), solved step by step; answers checked against the answer key (PDF 297-298) and recomputed independently."
+        }
+      ],
+      "body": {
+        "blocks": [
+          {
+            "type": "checkpoint",
+            "mode": "self_check",
+            "ref": "18",
+            "prompt": "18. Consider the complex encryption key \\(k = 3 - 3i\\). Encrypt the word \"QUIZ\", and then recover the original word using the inverse of the key.",
+            "explanation": "The same method as Question 17 with the key \\(k = 3 - 3i\\).\nEncrypt by multiplying by \\(k\\); recover the word by multiplying by the inverse \\(k^{-1}\\), as the question asks.",
+            "steps": [
+              "Given: the word QUIZ, key \\(k = 3 - 3i\\), A = 1, ..., Z = 26.\nTo find: the encrypted numbers, then the original word using \\(k^{-1}\\).\nMethod: encrypted \\(= z \\times k\\); recovered \\(= (z \\times k) \\times k^{-1}\\).",
+              "Step 1: Letters to complex numbers\n\\[Q = 17 + 0i, \\quad U = 21 + 0i\\]\n\\[I = 9 + 0i, \\quad Z = 26 + 0i\\]\nWhy: Q is the 17th letter, U the 21st, I the 9th, Z the 26th.",
+              "Step 2: Encrypt (multiply by k)\n\\[17(3 - 3i) = 51 - 51i\\]\n\\[21(3 - 3i) = 63 - 63i\\]\n\\[9(3 - 3i) = 27 - 27i\\]\n\\[26(3 - 3i) = 78 - 78i\\]\nWhy: multiply both parts of \\(k\\) by the letter's value.",
+              "Step 3: Inverse of the key\n\\[k^{-1} = \\dfrac{1}{3 - 3i} \\times \\dfrac{3 + 3i}{3 + 3i}\\]\n\\[= \\dfrac{3 + 3i}{9 + 9} = \\dfrac{3 + 3i}{18}\\]\n\\[= \\dfrac{1 + i}{6}\\]\nWhy: multiply by the conjugate to make the bottom real, then cancel the common factor 3.",
+              "Step 4: Recover the first letter\n\\[(51 - 51i)\\cdot\\dfrac{1 + i}{6} = \\dfrac{51(1 - i)(1 + i)}{6}\\]\n\\[= \\dfrac{51 \\times 2}{6} = 17 \\;\\Rightarrow\\; Q\\]\nWhy: \\((1 - i)(1 + i) = 1 - i^{2} = 2\\).",
+              "Step 5: Recover the others\n\\[(63 - 63i)\\cdot\\dfrac{1 + i}{6} = \\dfrac{126}{6} = 21 \\Rightarrow U\\]\n\\[(27 - 27i)\\cdot\\dfrac{1 + i}{6} = \\dfrac{54}{6} = 9 \\Rightarrow I\\]\n\\[(78 - 78i)\\cdot\\dfrac{1 + i}{6} = \\dfrac{156}{6} = 26 \\Rightarrow Z\\]\nWhy: each encrypted number is (value)\\((1 - i)\\cdot 3\\), so the same factor \\(2/6\\) appears.",
+              "Check: \\(k \\cdot k^{-1} = (3 - 3i)\\cdot\\frac{1 + i}{6} = \\frac{3(1 - i)(1 + i)}{6} = \\frac{6}{6} = 1\\) ✓"
+            ],
+            "final_answer": "Encrypted: \\(51 - 51i,\\ 63 - 63i,\\ 27 - 27i,\\ 78 - 78i\\). With \\(k^{-1} = \\frac{1 + i}{6}\\) these give \\(17, 21, 9, 26\\) = QUIZ.",
+            "answer_table": {
+              "header": [
+                "Letter and z",
+                "Encrypted: z × k",
+                "Decrypted: (z × k) × k⁻¹",
+                "Letter"
+              ],
+              "rows": [
+                [
+                  "Q: 17 + 0i",
+                  "17(3 − 3i) = 51 − 51i",
+                  "(51 − 51i)(1 + i)/6 = 102/6 = 17",
+                  "Q"
+                ],
+                [
+                  "U: 21 + 0i",
+                  "21(3 − 3i) = 63 − 63i",
+                  "(63 − 63i)(1 + i)/6 = 126/6 = 21",
+                  "U"
+                ],
+                [
+                  "I: 9 + 0i",
+                  "9(3 − 3i) = 27 − 27i",
+                  "(27 − 27i)(1 + i)/6 = 54/6 = 9",
+                  "I"
+                ],
+                [
+                  "Z: 26 + 0i",
+                  "26(3 − 3i) = 78 − 78i",
+                  "(78 − 78i)(1 + i)/6 = 156/6 = 26",
+                  "Z"
+                ]
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
