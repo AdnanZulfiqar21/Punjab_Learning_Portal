@@ -299,8 +299,6 @@ class BookExerciseOut(BaseModel):
     chapter_id: uuid.UUID
     chapter_number: int
     chapter_title: str
-    # MATHS-11-01: the exercise's own printed title ("Exercise", or "Exercise 1.3" where a unit prints several).
-    title: str
     # The same rule as the topic's reading: a published lesson, a staff preview of a draft, or nothing yet.
     availability: Literal["published", "private_preview", "unavailable"]
     available_languages: list[Literal["en", "ur", "roman_ur"]]

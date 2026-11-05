@@ -31,10 +31,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from portal_api.db import Base
 
 TopicKind = Literal["topic", "exercise", "paper"]
-# BOOK-EXERCISES-01: a chapter's end-of-chapter exercise is keyed `…/u-exercise`; MATHS-11-01: a unit that prints
-# several exercises keys each by its number (`…/u-exercise-1-3` for Exercise 1.3). One pattern for Python (`re`) and
-# PostgreSQL (`~`).
-EXERCISE_KEY_PATTERN = r"/u-exercise(-[0-9]+)*$"
+EXERCISE_KEY_SUFFIX = "/u-exercise"
 # BOOK-PAPERS-01: the Board's paper pattern (pairing scheme) and model paper printed at the end of a book.
 PAPER_KEY_SUFFIXES = ("/u-paper-pattern", "/u-model-paper")
 # A printed heading number in a natural key fragment ("1.1.1.1", or "1.1.1.1~2" for the book's second 1.1.1.1).
@@ -205,13 +202,12 @@ class Topic(Base):
 
     @property
     def kind(self) -> TopicKind:
-        """BOOK-EXERCISES-01: a chapter's end-of-chapter exercise (natural key `…/u-exercise`; MATHS-11-01: or a
-        numbered one, `…/u-exercise-1-3`) is practised in Practice, never read in Learn. The rule is the catalogue key
-        alone, so a book that gains exercise topics just has them.
+        """BOOK-EXERCISES-01: a chapter's end-of-chapter exercise (natural key `…/u-exercise`) is practised in Practice,
+        never read in Learn. The rule is the catalogue key alone, so a book that gains exercise topics just has them.
 
         BOOK-PAPERS-01: the Board papers at the end of a book (`…/u-paper-pattern`, `…/u-model-paper`) are practised
         the same way. Every kind other than "topic" is Practice-only (`practice_only`)."""
-        if re.search(EXERCISE_KEY_PATTERN, self.natural_key):
+        if self.natural_key.endswith(EXERCISE_KEY_SUFFIX):
             return "exercise"
         if self.natural_key.endswith(PAPER_KEY_SUFFIXES):
             return "paper"

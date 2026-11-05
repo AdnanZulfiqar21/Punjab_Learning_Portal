@@ -36,19 +36,6 @@ describe("plainMath", () => {
   });
 });
 
-describe("Mathematics exercises (MATHS-11-01)", () => {
-  it("are listed for Class 11 only, titled by their own number, with the video view", async () => {
-    const { exerciseSubjects, hasVideoSolutions, practiceTitle } = await import("../src/lib/exercises.ts");
-    const all = [["physics", "Physics"], ["mathematics", "Mathematics"]] as const;
-    assert.deepEqual(exerciseSubjects(all, 11).map(([c]) => c), ["physics", "mathematics"]);
-    assert.deepEqual(exerciseSubjects(all, 12).map(([c]) => c), ["physics"]);
-    assert.equal(practiceTitle({ kind: "exercise", title: "Exercise 1.5", chapter_number: 1 }), "Exercise 1.5");
-    assert.equal(hasVideoSolutions("mathematics", "exercise"), true);
-    assert.equal(hasVideoSolutions("mathematics", "topic"), false);
-    assert.equal(hasVideoSolutions("physics", "exercise"), false);
-  });
-});
-
 describe("stepText", () => {
   it("drops a written step number the list already draws", async () => {
     const { stepText } = await import("../src/lib/solved-labels.ts");
