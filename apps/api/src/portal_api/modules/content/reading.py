@@ -28,7 +28,7 @@ from portal_api.modules.content.schemas import (
 )
 from portal_api.modules.content.workflow import roles_in_scope
 from portal_api.modules.curriculum import service as curriculum
-from portal_api.modules.curriculum.models import EXERCISE_KEY_PATTERN, PAPER_KEY_SUFFIXES, BookEdition, Chapter, Topic
+from portal_api.modules.curriculum.models import EXERCISE_KEY_SUFFIX, PAPER_KEY_SUFFIXES, BookEdition, Chapter, Topic
 from portal_api.modules.curriculum.regions import book_is_released
 from portal_api.modules.identity.deps import Principal
 from portal_api.modules.identity.permissions import Permission, Role, permissions_for
@@ -90,10 +90,7 @@ def book_exercises(db: Session, who: Principal | None, grade: int, subject: str)
     book = curriculum.book_for(db, grade, subject)
     preview = _can_preview(db, who, book.grade.number, book.subject.code)
 
-    def rows(*suffixes: str, pattern: str | None = None) -> Sequence[tuple[Topic, Chapter]]:
-        keys = [Topic.natural_key.endswith(suffix, autoescape=True) for suffix in suffixes]
-        if pattern:
-            keys.append(Topic.natural_key.regexp_match(pattern))
+    def rows(*suffixes: str) -> Sequence[tuple[Topic, Chapter]]:
         return db.execute(
             select(Topic, Chapter)
             .join(Chapter, Topic.chapter_id == Chapter.id)
@@ -101,14 +98,13 @@ def book_exercises(db: Session, who: Principal | None, grade: int, subject: str)
                 Chapter.book_id == book.id,
                 Chapter.retired_at.is_(None),
                 Topic.retired_at.is_(None),
-                or_(*keys),
+                or_(*(Topic.natural_key.endswith(suffix, autoescape=True) for suffix in suffixes)),
             )
             .order_by(Chapter.display_order, Topic.display_order)
         ).all()
 
     exercises: list[BookExerciseOut] = []
-    # MATHS-11-01: a unit may print several exercises (`…/u-exercise-1-1` … `…/u-exercise-1-5`), each listed apart.
-    for topic, chapter in rows(pattern=EXERCISE_KEY_PATTERN):
+    for topic, chapter in rows(EXERCISE_KEY_SUFFIX):
         availability, languages = _listed_availability(db, topic, preview)
         exercises.append(
             BookExerciseOut(
@@ -116,7 +112,6 @@ def book_exercises(db: Session, who: Principal | None, grade: int, subject: str)
                 chapter_id=chapter.id,
                 chapter_number=chapter.number,
                 chapter_title=chapter.title,
-                title=topic.title,
                 availability=availability,
                 available_languages=languages,  # type: ignore[arg-type]
             )

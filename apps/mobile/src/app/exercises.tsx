@@ -12,24 +12,24 @@ import { useRequest } from "@/hooks/use-request";
 import { useTheme } from "@/hooks/use-theme";
 import { api, GRADE_LABEL, SUBJECTS as ALL_SUBJECTS, type SubjectCode } from "@/lib/api";
 import { useAuth } from "@/lib/auth";
-import { exerciseStatus, exerciseSubjects } from "@/lib/exercises";
+import { exerciseStatus } from "@/lib/exercises";
 
-// The book exercises cover the textbooks the portal teaches: Mathematics in Class 11 only (MATHS-11-01).
+// The book exercises cover the textbooks the portal teaches; Mathematics is not taught (owner, 2026-10-19).
+const SUBJECTS = ALL_SUBJECTS.filter(([code]) => code !== "mathematics");
 
 export default function ExercisesScreen() {
   const c = useTheme();
   const { state } = useAuth();
   if (state.status === "loading") return <Loading label="Checking your sign-in" />;
   const me = state.status === "signed_in" ? state.me : null;
-  const initialGrade = me?.profile?.grade === 12 ? 12 : 11;
-  const subjects = exerciseSubjects(ALL_SUBJECTS, initialGrade).map(([code]) => code as string);
+  const subjects = SUBJECTS.map(([code]) => code as string);
   return (
     <ScrollView style={{ backgroundColor: c.background }} contentContainerStyle={{ padding: Space.lg, gap: Space.lg }}>
       <Stack.Screen options={{ title: "Book exercises" }} />
-      <T variant="muted">The exercises of each chapter of your textbook, solved step by step in English and Roman Urdu.</T>
+      <T variant="muted">The exercise at the end of each chapter of your textbook, solved in English and Roman Urdu.</T>
       <List
         token={state.status === "signed_in" ? state.token : null}
-        initialGrade={initialGrade}
+        initialGrade={me?.profile?.grade === 12 ? 12 : 11}
         initialSubject={(me?.profile?.subjects?.find((s) => subjects.includes(s)) as SubjectCode | undefined) ?? "computer_science"}
       />
     </ScrollView>
@@ -40,15 +40,12 @@ function List({ token, initialGrade, initialSubject }: { token: string | null; i
   const c = useTheme();
   const [grade, setGrade] = useState<11 | 12>(initialGrade);
   const [subject, setSubject] = useState<SubjectCode>(initialSubject);
-  const SUBJECTS = exerciseSubjects(ALL_SUBJECTS, grade);
-  // Class 12 has no Mathematics exercises: switching class from Class 11 Mathematics shows Computer Science.
-  const shown: SubjectCode = SUBJECTS.some(([code]) => code === subject) ? subject : "computer_science";
-  const req = useRequest((signal) => api.bookExercises(grade, shown, token, signal), [grade, shown, token]);
+  const req = useRequest((signal) => api.bookExercises(grade, subject, token, signal), [grade, subject, token]);
   const book = req.state.status === "success" ? req.state.data : null;
   return (
     <View style={{ gap: Space.lg }}>
       <Choices label="Class" options={[[11, GRADE_LABEL[11]], [12, GRADE_LABEL[12]]] as const} selected={[grade]} onToggle={setGrade} />
-      <Choices label="Subject" options={SUBJECTS} selected={[shown]} onToggle={setSubject} />
+      <Choices label="Subject" options={SUBJECTS} selected={[subject]} onToggle={setSubject} />
       {req.state.status === "loading" && <Loading label="Loading book exercises" />}
       {req.state.status === "error" && <ErrorState error={req.state.error} onRetry={req.retry} />}
       {book && book.exercises.length === 0 && (
@@ -60,15 +57,12 @@ function List({ token, initialGrade, initialSubject }: { token: string | null; i
         <View style={{ gap: Space.xs }}>
           {book.exercises.map((e) => {
             const status = exerciseStatus(e.availability, e.available_languages);
-            // MATHS-11-01: a unit that prints several exercises shows each by its own title ("Exercise 1.3").
-            const own = /^exercise\s+\d/i.test(e.title);
-            const label = own ? `${book.chapter_label} ${e.chapter_number} · ${e.chapter_title}` : `${book.chapter_label} ${e.chapter_number}`;
-            const name = own ? e.title : e.chapter_title;
+            const label = `${book.chapter_label} ${e.chapter_number}`;
             return (
               <Pressable
                 key={e.topic_id}
                 accessibilityRole="button"
-                accessibilityLabel={`${label}: ${name}. ${status.label}`}
+                accessibilityLabel={`${label}: ${e.chapter_title}. ${status.label}`}
                 aria-disabled={!status.open}
                 disabled={!status.open}
                 onPress={() => router.push({ pathname: "/exercise/[id]", params: { id: e.topic_id } })}
@@ -88,7 +82,7 @@ function List({ token, initialGrade, initialSubject }: { token: string | null; i
                   <T variant="eyebrow" style={{ color: c.text }}>
                     {label}
                   </T>
-                  <T style={{ fontWeight: "500" }}>{name}</T>
+                  <T style={{ fontWeight: "500" }}>{e.chapter_title}</T>
                 </View>
                 <T variant="small">{status.label}</T>
                 {status.open ? (

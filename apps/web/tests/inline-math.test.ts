@@ -1,11 +1,10 @@
 // INLINE-MATH-01 (MATHS-11-01): formulas inside lesson text, between \( \) or \[ \] (src/lib/inline-math.ts), and the
-// Mathematics book exercises (src/lib/practice-filters.ts, src/lib/exercises.ts). Host-side tests.
+// Mathematics practice filters (src/lib/practice-filters.ts). Host-side tests.
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 
-import { practiceTitle } from "../src/lib/exercises.ts";
 import { hasMath, mathPieces } from "../src/lib/inline-math.ts";
-import { exerciseSubjects, taughtSubjects } from "../src/lib/practice-filters.ts";
+import { taughtSubjects } from "../src/lib/practice-filters.ts";
 import { solvedLabels } from "../src/lib/solved-labels.ts";
 
 describe("mathPieces", () => {
@@ -35,15 +34,8 @@ describe("Mathematics exercises", () => {
     ["mathematics", "Mathematics"],
   ];
 
-  it("offer Mathematics book exercises in Class 11 only, and no Mathematics question practice", () => {
-    assert.deepEqual(exerciseSubjects(ALL, 11).map(([c]) => c), ["physics", "mathematics"]);
-    assert.deepEqual(exerciseSubjects(ALL, 12).map(([c]) => c), ["physics"]);
+  it("offer no Mathematics question practice (its exercises are read in Learn)", () => {
     assert.deepEqual(taughtSubjects(ALL).map(([c]) => c), ["physics"]);
-  });
-
-  it("title a numbered exercise by its own number and a chapter's single exercise by the chapter", () => {
-    assert.equal(practiceTitle({ kind: "exercise", title: "Exercise 1.3", chapter_number: 1 }), "Exercise 1.3");
-    assert.equal(practiceTitle({ kind: "exercise", title: "Exercise", chapter_number: 2 }), "Chapter 2 · Exercise");
   });
 
   it("label a solved question in the lesson's language", () => {

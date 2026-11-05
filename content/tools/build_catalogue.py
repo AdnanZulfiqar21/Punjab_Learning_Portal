@@ -99,6 +99,10 @@ def topic_key(t: dict, seen: dict[str, int]) -> tuple[str, str | None]:
     unnumbered = "unnumbered" in str(t.get("title", "")).lower()
     number = raw if NUMBERED.match(raw) and not unnumbered else None
     base = number if number else "u-" + slug(clean_title(str(t.get("title", ""))))
+    # MATHS-11-01: a node the index keys itself ("u-exercise-1-1-q3" for Exercise 1.1 Question 3), where many share a
+    # title ("Question 3") and a title-made key would change with their order.
+    if re.fullmatch(r"u-[a-z0-9-]+", str(t.get("key") or "")):
+        base = str(t["key"])
     seen[base] = seen.get(base, 0) + 1
     return (base if seen[base] == 1 else f"{base}~{seen[base]}"), number
 

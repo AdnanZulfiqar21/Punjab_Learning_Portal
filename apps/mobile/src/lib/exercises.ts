@@ -18,23 +18,9 @@ export function exerciseTitle(chapterLabel: string, chapterNumber: number): stri
   return `${chapterLabel} ${chapterNumber} · Exercise`;
 }
 
-/**
- * A Practice screen's title: a Board paper's own ("Model Paper", "Paper Pattern"), a numbered exercise's own
- * ("Exercise 1.3", MATHS-11-01: a unit that prints several), else "Chapter 2 · Exercise".
- */
+/** A Practice screen's title: a Board paper's own ("Model Paper", "Paper Pattern"), else "Chapter 2 · Exercise". */
 export function practiceTitle(reading: { kind?: string; title: string; chapter_number: number }): string {
-  if (reading.kind === "paper" || /^exercise\s+\d/i.test(reading.title)) return reading.title;
-  return exerciseTitle("Chapter", reading.chapter_number);
-}
-
-/** MATHS-11-01: the subjects whose book exercises a class has: every practised subject, and Mathematics in Class 11. */
-export function exerciseSubjects<T extends readonly [string, string]>(subjects: readonly T[], grade: number): T[] {
-  return subjects.filter(([code]) => code !== "mathematics" || grade === 11);
-}
-
-/** VIDEO-SOLUTION-01 (owner, 2026-11-05): only a Mathematics exercise has the "Video Solution" view. */
-export function hasVideoSolutions(subject: string | null | undefined, kind: string | undefined): boolean {
-  return subject === "mathematics" && kind === "exercise";
+  return reading.kind === "paper" ? reading.title : exerciseTitle("Chapter", reading.chapter_number);
 }
 
 /** The self-check button's words on an exercise, in the lesson's own language. */
