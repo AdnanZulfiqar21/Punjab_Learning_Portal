@@ -129,6 +129,8 @@ def build_topics(topics: list, parent_key: str, depth: int, seen: dict[str, int]
             "depth": depth,
             "pdf_page": t.get("pdf_page") if isinstance(t.get("pdf_page"), int) else None,
             "points": points,
+            # BOOK-NUMBER-02: where the index records the number the book prints ("1.2", "missing"), shown beside ours.
+            **({"book_number": str(t["book_number"])} if t.get("book_number") else {}),
             "children": build_topics([s for s in (t.get("subtopics") or []) if isinstance(s, dict)], parent_key, depth + 1, seen),
         })
     return out
