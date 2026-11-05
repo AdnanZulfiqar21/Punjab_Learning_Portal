@@ -28,7 +28,20 @@ export const SMALL_PILL =
  * The class and subject filter of a Practice page: one row per class, the subjects as pills in their own accent. The
  * chosen pill carries `aria-current="page"`; each link's name is "Class 11 Biology".
  */
-export function ClassSubjectFilter({ path, grade, subject, subjects }: { path: string; grade: number; subject: string; subjects: [string, string][] }) {
+export function ClassSubjectFilter({
+  path,
+  grade,
+  subject,
+  subjects,
+  subjectsFor,
+}: {
+  path: string;
+  grade: number;
+  subject: string;
+  subjects: [string, string][];
+  /** MATHS-11-01: a class's own subjects where they differ (Book exercises: Mathematics in Class 11 only). */
+  subjectsFor?: Partial<Record<number, [string, string][]>>;
+}) {
   return (
     <nav aria-label="Choose class and subject" className="glass rounded-card px-4 py-3 sm:px-5">
       <div className="divide-y divide-border/60">
@@ -38,7 +51,7 @@ export function ClassSubjectFilter({ path, grade, subject, subjects }: { path: s
               {GRADE_LABEL[g]}
             </span>
             <ul className="flex flex-wrap gap-2">
-              {subjects.map(([code, label]) => {
+              {(subjectsFor?.[g] ?? subjects).map(([code, label]) => {
                 const active = g === grade && code === subject;
                 return (
                   <li key={code} data-subject={subjectKey(code)}>

@@ -9,3 +9,8 @@ export const SOLVED_LABELS_RU: SolvedLabels = { question: "Sawal", think: "Sochn
 export function solvedLabels(language: string): SolvedLabels {
   return language === "roman_ur" ? SOLVED_LABELS_RU : SOLVED_LABELS_EN;
 }
+
+/** A numbered step's own text: the list draws the number, so a written "Step 2:" / "Qadam 2:" lead is dropped. */
+export function stepText(step: string): string {
+  return step.replace(/^\s*(?:step|qadam)\s*\d+\s*[:.)-]\s*/i, "");
+}

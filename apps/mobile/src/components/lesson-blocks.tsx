@@ -18,7 +18,7 @@ import { codeRuns } from "@/lib/code-highlight";
 import { leadIn, leadTerm } from "@/lib/book-style";
 import { comparisonCards } from "@/lib/lesson-tables";
 import { plainBlocks } from "@/lib/inline-math";
-import { SOLVED_LABELS_EN, type SolvedLabels } from "@/lib/solved-labels";
+import { SOLVED_LABELS_EN, stepText, type SolvedLabels } from "@/lib/solved-labels";
 import { fillMerged, mergedColumns, mergeStarts } from "@/lib/table-merge";
 
 export const NATIVE_RENDERER_VERSION = 2;
@@ -508,7 +508,7 @@ function BlockView({ block: b, assetSource, dataSaver }: { block: Block; assetSo
           answerId={typeof b.answer_id === "string" ? b.answer_id : null}
           explanation={str(b.explanation)}
           qref={str(b.ref) || undefined}
-          steps={Array.isArray(b.steps) ? strs(b.steps) : undefined}
+          steps={Array.isArray(b.steps) ? strs(b.steps).map(stepText) : undefined}
           finalAnswer={str(b.final_answer) || undefined}
           labels={solvedLabels}
           answerFigure={
@@ -557,7 +557,7 @@ function BlockView({ block: b, assetSource, dataSaver }: { block: Block; assetSo
           <T>
             <Marked text={str(b.problem)} marks={marks} bold={bold} />
           </T>
-          <Lines items={strs(b.steps)} ordered marks={marks} bold={bold} />
+          <Lines items={strs(b.steps).map(stepText)} ordered marks={marks} bold={bold} />
           {str(b.answer) ? (
             <T style={{ fontWeight: "600" }}>
               {"Answer: "}

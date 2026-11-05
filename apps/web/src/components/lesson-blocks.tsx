@@ -10,7 +10,7 @@ import { bookErrors, markLatex, markPieces, styledPieces } from "@/lib/book-erro
 import { codeRuns } from "@/lib/code-highlight";
 import { leadIn, leadTerm } from "@/lib/book-style";
 import { hasMath } from "@/lib/inline-math";
-import { SOLVED_LABELS_EN, type SolvedLabels } from "@/lib/solved-labels";
+import { SOLVED_LABELS_EN, stepText, type SolvedLabels } from "@/lib/solved-labels";
 import { fillMerged, mergedColumns, mergeStarts, rowSpans } from "@/lib/table-merge";
 
 // Renders content blocks (schema v1, roadmap §5.4). Web renderer version 2: comparison tables fold into cards on narrow
@@ -503,7 +503,7 @@ function BlockView({
           </table>
         ) : null;
       // INLINE-MATH-01 / SOLVED-QUESTION-01: formulas typeset here, so the client component gets ready markup.
-      const steps = Array.isArray(b.steps) ? strs(b.steps).map((s, i) => <Marked key={i} text={s} marks={[]} />) : undefined;
+      const steps = Array.isArray(b.steps) ? strs(b.steps).map((s, i) => <Marked key={i} text={stepText(s)} marks={[]} />) : undefined;
       return (
         <Checkpoint
           mode={b.mode === "self_check" ? "self_check" : "question"}
@@ -565,7 +565,7 @@ function BlockView({
           <ol className="list-decimal space-y-1 pl-6">
             {strs(b.steps).map((step, i) => (
               <li key={i} className="whitespace-pre-line">
-                <Marked text={step} marks={marks} bold={bold} />
+                <Marked text={stepText(step)} marks={marks} bold={bold} />
               </li>
             ))}
           </ol>

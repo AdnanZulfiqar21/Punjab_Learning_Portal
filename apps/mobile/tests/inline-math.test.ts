@@ -48,3 +48,12 @@ describe("Mathematics exercises (MATHS-11-01)", () => {
     assert.equal(hasVideoSolutions("physics", "exercise"), false);
   });
 });
+
+describe("stepText", () => {
+  it("drops a written step number the list already draws", async () => {
+    const { stepText } = await import("../src/lib/solved-labels.ts");
+    assert.equal(stepText("Step 2: Multiply by the conjugate"), "Multiply by the conjugate");
+    assert.equal(stepText("Qadam 3. Upar expand karein"), "Upar expand karein");
+    assert.equal(stepText("Check: substitute back"), "Check: substitute back");
+  });
+});

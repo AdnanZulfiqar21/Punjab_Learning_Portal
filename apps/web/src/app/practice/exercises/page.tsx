@@ -66,7 +66,13 @@ async function Exercises({ grade: rawGrade, subject: rawSubject }: { grade?: str
   const name = SUBJECTS.find(([c]) => c === subject)?.[1];
   return (
     <div className="space-y-8" data-subject={subjectKey(subject)}>
-      <ClassSubjectFilter path="/practice/exercises" grade={grade} subject={subject} subjects={SUBJECTS} />
+      <ClassSubjectFilter
+        path="/practice/exercises"
+        grade={grade}
+        subject={subject}
+        subjects={SUBJECTS}
+        subjectsFor={{ 11: exerciseSubjects(ALL_SUBJECTS, 11), 12: exerciseSubjects(ALL_SUBJECTS, 12) }}
+      />
       {!res.ok ? (
         <Notice tone="warn" title="Couldn't load the book exercises">
           {res.problem?.detail ?? "Please try again."}
