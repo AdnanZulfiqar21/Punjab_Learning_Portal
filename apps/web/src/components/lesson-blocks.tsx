@@ -2,12 +2,15 @@ import { Fragment, type ReactNode } from "react";
 import { Checkpoint } from "@/components/checkpoint";
 import { CodeRunner } from "@/components/code-runner";
 import { Equation } from "@/components/equation";
+import { MathText } from "@/components/math-text";
 import { Model3DFigure } from "@/components/model3d-figure";
 import { SaverImage } from "@/components/saver-image";
 import { bookBoxKind, boxRow, isMarginNote, isRowBox, isSideBox, isSideFigure, sideOrder } from "@/lib/book-box";
 import { bookErrors, markLatex, markPieces, styledPieces } from "@/lib/book-errors";
 import { codeRuns } from "@/lib/code-highlight";
 import { leadIn, leadTerm } from "@/lib/book-style";
+import { hasMath } from "@/lib/inline-math";
+import { SOLVED_LABELS_EN, type SolvedLabels } from "@/lib/solved-labels";
 import { fillMerged, mergedColumns, mergeStarts, rowSpans } from "@/lib/table-merge";
 
 // Renders content blocks (schema v1, roadmap §5.4). Web renderer version 2: comparison tables fold into cards on narrow
@@ -96,6 +99,7 @@ function Code({ text, language, marks }: { text: string; language: string; marks
 /** INLINE-VECTOR-01: a vector written in a sentence as a letter plus U+20D7 ("v⃗") gets its arrow drawn above the
  * letter (globals.css `.vec`): the reading font has no glyph for the combining arrow and showed an empty box. */
 function Vectors({ text }: { text: string }) {
+  if (hasMath(text)) return <MathText text={text} />; // INLINE-MATH-01
   const parts = text.split(/(\S\u20D7)/u);
   if (parts.length === 1) return <>{text}</>;
   return (
@@ -130,6 +134,7 @@ export function LessonBlocks({
   premium = false,
   runnable = false,
   revealLabel,
+  solvedLabels,
 }: {
   blocks: Block[];
   headingOffset?: number;
@@ -148,6 +153,8 @@ export function LessonBlocks({
   runnable?: boolean;
   /** BOOK-EXERCISES-01: the words on each self-check's reveal button (the checkpoint's own label otherwise). */
   revealLabel?: string;
+  /** SOLVED-QUESTION-01: the words of a solved book question in the lesson's language. */
+  solvedLabels?: SolvedLabels;
 }) {
   const view = (b: Block, i: number) => (
     <BlockView
@@ -159,6 +166,7 @@ export function LessonBlocks({
       premium={premium}
       runnable={runnable}
       revealLabel={revealLabel}
+      solvedLabels={solvedLabels}
     />
   );
   // Each block keeps its own id (b0, b1, …), also inside a Quick Check card, so the language switch finds its place.
@@ -242,6 +250,7 @@ function BlockView({
   premium = false,
   runnable = false,
   revealLabel,
+  solvedLabels = SOLVED_LABELS_EN,
 }: {
   block: Block;
   headingOffset: number;
@@ -251,6 +260,7 @@ function BlockView({
   premium?: boolean;
   runnable?: boolean;
   revealLabel?: string;
+  solvedLabels?: SolvedLabels;
 }) {
   const marks = bookErrors(b.book_errors);
   const bold = bookErrors(b.bold); // BOOK-BOLD-01: the terms the book prints in bold
@@ -492,13 +502,21 @@ function BlockView({
             </tbody>
           </table>
         ) : null;
+      // INLINE-MATH-01 / SOLVED-QUESTION-01: formulas typeset here, so the client component gets ready markup.
+      const steps = Array.isArray(b.steps) ? strs(b.steps).map((s, i) => <Marked key={i} text={s} marks={[]} />) : undefined;
       return (
         <Checkpoint
           mode={b.mode === "self_check" ? "self_check" : "question"}
           prompt={str(b.prompt)}
+          promptView={hasMath(str(b.prompt)) ? <MathText text={str(b.prompt)} /> : undefined}
           options={Array.isArray(b.options) ? (b.options as { id: string; text: string }[]) : []}
           answerId={typeof b.answer_id === "string" ? b.answer_id : null}
           explanation={str(b.explanation)}
+          explanationView={hasMath(str(b.explanation)) ? <MathText text={str(b.explanation)} /> : undefined}
+          qref={str(b.ref) || undefined}
+          steps={steps}
+          finalAnswer={str(b.final_answer) ? <Marked text={str(b.final_answer)} marks={[]} /> : undefined}
+          labels={solvedLabels}
           answerFigure={
             answerTable || answerFigure ? (
               <>

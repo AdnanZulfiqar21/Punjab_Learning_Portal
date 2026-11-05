@@ -2,7 +2,7 @@
 // natively, comparison tables become cards, and `model3d` blocks show a poster render with a drag-to-rotate turntable.
 // An unknown or unsupported block shows its reviewed fallback, or an explicit "update required" note instead of failing.
 import { Image } from "expo-image";
-import { createContext, Fragment, useContext, useState, type ReactNode } from "react";
+import { createContext, Fragment, useContext, useMemo, useState, type ReactNode } from "react";
 import { Pressable, ScrollView, Text, View } from "react-native";
 
 import { Checkpoint } from "@/components/checkpoint";
@@ -17,6 +17,8 @@ import { bookErrors, markPieces, styledPieces } from "@/lib/book-errors";
 import { codeRuns } from "@/lib/code-highlight";
 import { leadIn, leadTerm } from "@/lib/book-style";
 import { comparisonCards } from "@/lib/lesson-tables";
+import { plainBlocks } from "@/lib/inline-math";
+import { SOLVED_LABELS_EN, type SolvedLabels } from "@/lib/solved-labels";
 import { fillMerged, mergedColumns, mergeStarts } from "@/lib/table-merge";
 
 export const NATIVE_RENDERER_VERSION = 2;
@@ -113,9 +115,10 @@ const Premium = createContext(false);
 const Runnable = createContext(false);
 /** BOOK-EXERCISES-01: the words on each self-check's reveal button (the checkpoint's own label otherwise). */
 const RevealLabel = createContext<string | undefined>(undefined);
+const Solved = createContext<SolvedLabels>(SOLVED_LABELS_EN);
 
 export function LessonBlocks({
-  blocks,
+  blocks: authored,
   assetSource,
   equationAction,
   dataSaver = false,
@@ -123,6 +126,7 @@ export function LessonBlocks({
   premium = false,
   runnable = false,
   revealLabel,
+  solvedLabels = SOLVED_LABELS_EN,
 }: {
   blocks: Block[];
   assetSource?: AssetSource;
@@ -135,8 +139,13 @@ export function LessonBlocks({
   premium?: boolean;
   runnable?: boolean;
   revealLabel?: string;
+  /** SOLVED-QUESTION-01: the words of a solved book question in the lesson's language. */
+  solvedLabels?: SolvedLabels;
 }) {
+  // INLINE-MATH-01: formulas written in the text (\( … \), \[ … \]) read as plain text here.
+  const blocks = useMemo(() => plainBlocks(authored) as Block[], [authored]);
   return (
+    <Solved.Provider value={solvedLabels}>
     <RevealLabel.Provider value={revealLabel}>
     <Runnable.Provider value={runnable}>
     <Premium.Provider value={premium}>
@@ -179,6 +188,7 @@ export function LessonBlocks({
     </Premium.Provider>
     </Runnable.Provider>
     </RevealLabel.Provider>
+    </Solved.Provider>
   );
 }
 
@@ -305,6 +315,7 @@ function BlockView({ block: b, assetSource, dataSaver }: { block: Block; assetSo
   const premium = useContext(Premium);
   const runnable = useContext(Runnable);
   const revealLabel = useContext(RevealLabel);
+  const solvedLabels = useContext(Solved);
   const marks = bookErrors(b.book_errors);
   const bold = bookErrors(b.bold); // BOOK-BOLD-01: the terms the book prints in bold
   switch (b.type) {
@@ -496,6 +507,10 @@ function BlockView({ block: b, assetSource, dataSaver }: { block: Block; assetSo
           options={Array.isArray(b.options) ? (b.options as { id: string; text: string }[]) : []}
           answerId={typeof b.answer_id === "string" ? b.answer_id : null}
           explanation={str(b.explanation)}
+          qref={str(b.ref) || undefined}
+          steps={Array.isArray(b.steps) ? strs(b.steps) : undefined}
+          finalAnswer={str(b.final_answer) || undefined}
+          labels={solvedLabels}
           answerFigure={
             answerTable || answerFigure ? (
               <View style={{ gap: Space.sm }}>

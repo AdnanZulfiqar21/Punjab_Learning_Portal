@@ -279,6 +279,13 @@ class Checkpoint(_Block):
     options: list[CheckpointOption] = Field(default_factory=list, max_length=6)
     answer_id: str | None = None
     explanation: Text
+    # SOLVED-QUESTION-01 (owner, 2026-11-05, Mathematics): a book exercise question solved step by step. `ref` is the
+    # printed question number ("3(ii)"), the same in both languages, so a language switch and the question's video
+    # solution find the same question; `steps` are the numbered working shown with the revealed answer, and
+    # `final_answer` is set apart from them. `explanation` then says how to think about the question.
+    ref: Annotated[str, Field(min_length=1, max_length=40)] | None = None
+    steps: list[Annotated[str, Field(min_length=1, max_length=2000)]] | None = Field(default=None, max_length=30)
+    final_answer: Text | None = None
     answer_figure: AnswerFigure | None = None
     answer_table: AnswerTable | None = None
 
@@ -470,6 +477,7 @@ def text_of(block_list: list[AnyBlock]) -> str:
             "explanation",
             "problem",
             "answer",
+            "final_answer",
             "alt",
         ):
             v = getattr(b, attr, None)

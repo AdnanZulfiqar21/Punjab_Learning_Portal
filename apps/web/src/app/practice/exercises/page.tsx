@@ -11,11 +11,10 @@ import { exerciseStatus } from "@/lib/exercises";
 import { GRADE_LABEL } from "@/lib/format";
 import { subjectKey } from "@/lib/learn-context";
 import { SUBJECTS as ALL_SUBJECTS } from "@/lib/practice";
-import { taughtSubjects } from "@/lib/practice-filters";
+import { exerciseSubjects } from "@/lib/practice-filters";
 import { api, currentUser } from "@/lib/session";
 
-// The book exercises cover the textbooks the portal teaches; Mathematics is not taught (owner, 2026-10-19).
-const SUBJECTS = taughtSubjects(ALL_SUBJECTS);
+// The book exercises cover the textbooks the portal teaches: Mathematics in Class 11 only (MATHS-11-01).
 
 export const metadata: Metadata = { title: "Book exercises", robots: { index: false } };
 
@@ -31,7 +30,7 @@ export default function BookExercisesPage({ searchParams }: PageProps<"/practice
           align="start"
           eyebrow="Practice · From your textbook"
           title="Book exercises"
-          lead="The exercise at the end of each chapter of your textbook, solved in English and Roman Urdu."
+          lead="The exercises of each chapter of your textbook, solved step by step in English and Roman Urdu."
           backdrop={<span aria-hidden="true" className="pointer-events-none absolute inset-0 bg-accent-soft opacity-50" />}
         />
       </div>
@@ -61,6 +60,7 @@ async function Exercises({ grade: rawGrade, subject: rawSubject }: { grade?: str
   const user = await currentUser();
   const profile = user?.me.profile;
   const grade = rawGrade === "11" || rawGrade === "12" ? Number(rawGrade) : (profile?.grade ?? 11);
+  const SUBJECTS = exerciseSubjects(ALL_SUBJECTS, grade);
   const subject = SUBJECTS.some(([c]) => c === rawSubject) ? rawSubject! : (profile?.subjects?.find((s) => SUBJECTS.some(([c]) => c === s)) ?? "computer_science");
   const res = await api<BookExercises>(`/v1/grades/${grade}/subjects/${encodeURIComponent(subject)}/exercises`, user ? { token: user.token } : {});
   const name = SUBJECTS.find(([c]) => c === subject)?.[1];
@@ -81,6 +81,9 @@ async function Exercises({ grade: rawGrade, subject: rawSubject }: { grade?: str
           <ol className="grid gap-4 sm:grid-cols-2">
             {res.data.exercises.map((e) => {
               const status = exerciseStatus(e.availability, e.available_languages);
+              // MATHS-11-01: a unit that prints several exercises ("Exercise 1.1" … "Exercise 1.5") shows each by its
+              // own number; a chapter's single "Exercise" shows the chapter.
+              const own = /^exercise\s+\d/i.test(e.title) ? e.title.replace(/^exercise\s+/i, "") : null;
               return (
                 <li key={e.topic_id}>
                   <UnitCard href={`/practice/exercises/${e.topic_id}`} open={status.open}>
@@ -88,14 +91,15 @@ async function Exercises({ grade: rawGrade, subject: rawSubject }: { grade?: str
                       aria-hidden="true"
                       className="flex size-12 shrink-0 items-center justify-center rounded-inner bg-accent-soft font-display text-xl font-bold text-accent ring-1 ring-accent/20"
                     >
-                      {e.chapter_number}
+                      {own ?? e.chapter_number}
                     </span>
                     <span className="flex min-w-0 flex-1 flex-col gap-1.5">
                       <span className="text-xs font-semibold tracking-wide text-muted uppercase">
                         {res.data.chapter_label} {e.chapter_number}
+                        {own && ` · ${e.chapter_title}`}
                       </span>
                       <span className={`font-display text-lg leading-snug font-semibold ${status.open ? "text-foreground group-hover:text-accent" : ""}`}>
-                        {e.chapter_title}
+                        {own ? e.title : e.chapter_title}
                       </span>
                       <span className="mt-auto pt-1">
                         <Badge tone={tone(e.availability)}>{status.label}</Badge>

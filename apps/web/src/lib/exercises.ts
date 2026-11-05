@@ -15,9 +15,13 @@ export function practiceOnly(kind: string | undefined): boolean {
   return kind !== undefined && kind !== "topic";
 }
 
-/** A Practice screen's title: a Board paper's own ("Model Paper", "Paper Pattern"), else "Chapter 2 · Exercise". */
+/**
+ * A Practice screen's title: a Board paper's own ("Model Paper", "Paper Pattern"), a numbered exercise's own
+ * ("Exercise 1.3", MATHS-11-01: a unit that prints several), else "Chapter 2 · Exercise".
+ */
 export function practiceTitle(reading: { kind?: string; title: string; chapter_number: number }): string {
-  return reading.kind === "paper" ? reading.title : exerciseTitle("Chapter", reading.chapter_number);
+  if (reading.kind === "paper" || /^exercise\s+\d/i.test(reading.title)) return reading.title;
+  return exerciseTitle("Chapter", reading.chapter_number);
 }
 
 /** The self-check button's words on an exercise, in the lesson's own language. */

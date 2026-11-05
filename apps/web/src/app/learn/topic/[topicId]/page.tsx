@@ -84,7 +84,7 @@ export default function TopicPage({ params, searchParams }: PageProps<"/learn/to
   );
 }
 
-async function TopicView({ id, view }: { id: string; view: "read" | "lecture" }) {
+async function TopicView({ id, view: asked }: { id: string; view: "read" | "lecture" }) {
   if (!UUID.test(id)) notFound();
   const user = await currentUser();
   const token = user?.token;
@@ -114,7 +114,11 @@ async function TopicView({ id, view }: { id: string; view: "read" | "lecture" })
   const note = lesson && readable ? missingLanguageNote(language, lesson.language) : null;
   const display = parseDisplay(jar.get(DISPLAY_COOKIE)?.value);
   const dataSaver = display ? display.dataSaver : (await headers()).get("save-data") === "on";
-  const lectureRes = readable ? await api<TopicLecture>(`/v1/topics/${id}/lecture`, token ? { token } : {}) : null;
+  // VIDEO-SOLUTION-01 (owner, 2026-11-05): a Mathematics topic page (its theory and worked examples) has English and
+  // Roman Urdu only; videos belong to the exercise questions alone.
+  const lectures = subjectKey(reading.subject_name) !== "mathematics";
+  const view = lectures ? asked : "read";
+  const lectureRes = readable && lectures ? await api<TopicLecture>(`/v1/topics/${id}/lecture`, token ? { token } : {}) : null;
   const lecture = lectureRes?.ok ? lectureRes.data : null;
   // DESIGN-01: a pill segmented control; the chosen segment is the dark primary pill.
   const segment = "inline-flex min-h-11 items-center justify-center gap-1.5 rounded-full px-4 text-sm transition duration-200 sm:px-5";
@@ -134,7 +138,7 @@ async function TopicView({ id, view }: { id: string; view: "read" | "lecture" })
         <form data-reading-bar action={chooseReadingLanguage} className="sticky top-0 z-10 -mx-4 space-y-2 bg-background/90 px-4 py-2.5 backdrop-blur" aria-label="Explanation language">
           <input type="hidden" name="topic" value={reading.topic_id} />
           <KeepPlace lessonId={lesson?.id ?? ""} signatures={(lesson?.body?.blocks ?? []).map((b) => placeSignature(b as PlaceBlock))} />
-          <div role="group" aria-label="Read or watch" className="glass inline-flex max-w-full gap-1 rounded-full p-1">
+          <div role="group" aria-label={lectures ? "Read or watch" : "Explanation language"} className="glass inline-flex max-w-full gap-1 rounded-full p-1">
             {READING_LANGUAGES.map(([code, label]) =>
               view === "lecture" ? (
                 <Link key={code} href={`/learn/topic/${reading.topic_id}`} aria-current={undefined} className={off}>
@@ -146,10 +150,12 @@ async function TopicView({ id, view }: { id: string; view: "read" | "lecture" })
                 </button>
               ),
             )}
-            <Link href={`/learn/topic/${reading.topic_id}?view=lecture`} aria-current={view === "lecture" ? "page" : undefined} className={view === "lecture" ? on : off}>
-              <Icon name="play" size={14} />
-              Lecture
-            </Link>
+            {lectures && (
+              <Link href={`/learn/topic/${reading.topic_id}?view=lecture`} aria-current={view === "lecture" ? "page" : undefined} className={view === "lecture" ? on : off}>
+                <Icon name="play" size={14} />
+                Lecture
+              </Link>
+            )}
           </div>
           {note && view !== "lecture" && (
             <p className="text-sm text-muted" role="status">

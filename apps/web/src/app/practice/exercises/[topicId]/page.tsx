@@ -6,8 +6,10 @@ import { Suspense } from "react";
 import { chooseReadingLanguage } from "@/app/actions/learn";
 import { KeepPlace } from "@/components/keep-place";
 import { LessonBlocks } from "@/components/lesson-blocks";
+import { MathText } from "@/components/math-text";
 import { premiumBook } from "@/lib/book-style";
 import { practiceOnly, practiceTitle, revealLabel } from "@/lib/exercises";
+import { solvedLabels } from "@/lib/solved-labels";
 import { typesetEquations } from "@/lib/typeset";
 import { placeSignature, type PlaceBlock } from "@/lib/variant-place";
 import { Icon } from "@/components/icons";
@@ -44,18 +46,22 @@ type ExerciseReading = {
  * BOOK-EXERCISES-01: a chapter's end-of-chapter exercise, solved. "English | Roman Urdu" only (no lecture), the same
  * lesson renderer and language choice as a topic, and the self-check answers revealed as "Show answer".
  * BOOK-PAPERS-01: a Board paper at the end of the book (paper pattern, model paper) opens here too, under its own title.
+ * VIDEO-SOLUTION-01 (owner, 2026-11-05): a Mathematics exercise adds a third view, "Video Solution": every question
+ * with its own video solution, or "Video not available yet" until its video is added. Worked examples never get one.
  */
-export default function ExercisePage({ params }: PageProps<"/practice/exercises/[topicId]">) {
+export default function ExercisePage({ params, searchParams }: PageProps<"/practice/exercises/[topicId]">) {
   return (
     <Suspense fallback={<SkeletonLines lines={8} label="Loading exercise" />}>
-      {params.then(({ topicId }) => (
-        <ExerciseView id={topicId} />
+      {Promise.all([params, searchParams]).then(([{ topicId }, sp]) => (
+        <ExerciseView id={topicId} video={sp.view === "video"} />
       ))}
     </Suspense>
   );
 }
 
-async function ExerciseView({ id }: { id: string }) {
+type QuestionBlock = { type: string; ref?: unknown; prompt?: unknown };
+
+async function ExerciseView({ id, video: wantsVideo }: { id: string; video: boolean }) {
   if (!UUID.test(id)) notFound();
   const user = await currentUser();
   const token = user?.token;
@@ -71,6 +77,10 @@ async function ExerciseView({ id }: { id: string }) {
   const grade = GRADE_LABEL[reading.grade_number] ?? `Class ${reading.grade_number}`;
   const subject = subjectKey(reading.subject_name);
   const readable = Boolean(lesson?.body) && !lesson?.locked && reading.availability !== "unavailable";
+  // VIDEO-SOLUTION-01: Mathematics exercises only (never a worked example, never another book's exercise).
+  const videoTab = subject === "mathematics" && reading.kind === "exercise" && readable;
+  const video = videoTab && wantsVideo;
+  const questions = ((lesson?.body?.blocks ?? []) as QuestionBlock[]).filter((b) => b.type === "checkpoint");
   const note = lesson && readable ? missingLanguageNote(language, lesson.language) : null;
   const display = parseDisplay(jar.get(DISPLAY_COOKIE)?.value);
   const dataSaver = display ? display.dataSaver : (await headers()).get("save-data") === "on";
@@ -93,21 +103,27 @@ async function ExerciseView({ id }: { id: string }) {
           <input type="hidden" name="topic" value={reading.topic_id} />
           <input type="hidden" name="place" value="exercise" />
           <KeepPlace lessonId={lesson?.id ?? ""} signatures={(lesson?.body?.blocks ?? []).map((b) => placeSignature(b as PlaceBlock))} />
-          <div role="group" aria-label="Exercise language" className="glass inline-flex max-w-full gap-1 rounded-full p-1">
+          <div role="group" aria-label={videoTab ? "Read or watch" : "Exercise language"} className="glass inline-flex max-w-full gap-1 rounded-full p-1">
             {READING_LANGUAGES.map(([code, label]) => (
               <button
                 key={code}
                 type="submit"
                 name="language"
                 value={code}
-                aria-pressed={code === language}
-                className={code === language ? on : off}
+                aria-pressed={!video && code === language}
+                className={!video && code === language ? on : off}
               >
                 {label}
               </button>
             ))}
+            {videoTab && (
+              <Link href={`/practice/exercises/${reading.topic_id}?view=video`} aria-current={video ? "page" : undefined} className={`${video ? on : off} gap-1.5`}>
+                <Icon name="play" size={14} />
+                Video Solution
+              </Link>
+            )}
           </div>
-          {note && (
+          {note && !video && (
             <p className="text-sm text-muted" role="status">
               {note}
             </p>
@@ -132,7 +148,31 @@ async function ExerciseView({ id }: { id: string }) {
         <h1 className="font-display text-[28px] leading-9 font-bold tracking-tight sm:text-[36px] sm:leading-[2.75rem]">{title}</h1>
         <p className="text-sm text-muted">{paper ? "Board model paper" : reading.chapter_title}</p>
       </header>
-      {reading.availability === "unavailable" || !lesson?.body ? (
+      {video ? (
+        <section aria-labelledby="video-solutions" className="space-y-4">
+          <h2 id="video-solutions" className="sr-only">
+            Video solutions
+          </h2>
+          <Notice title="Video solutions are not available yet">
+            Every question of this exercise will get its own video solution, explained step by step. Until a question&apos;s video is added, its
+            worked solution is in the English and Roman Urdu views.
+          </Notice>
+          <ol className="space-y-3">
+            {questions.map((q, i) => (
+              <li key={i} className="rounded-card border border-border bg-surface px-4 py-4 shadow-sm" data-ref={typeof q.ref === "string" ? q.ref : undefined}>
+                {typeof q.ref === "string" && <p className="text-xs font-semibold tracking-wide text-accent-strong uppercase">Question {q.ref}</p>}
+                <p className="mt-1 whitespace-pre-wrap">
+                  <MathText text={typeof q.prompt === "string" ? q.prompt : ""} />
+                </p>
+                <p className="mt-3 inline-flex items-center gap-2 rounded-full border border-border bg-surface-muted px-3 py-1 text-sm font-medium text-muted" role="status">
+                  <Icon name="play" size={14} />
+                  Video not available yet
+                </p>
+              </li>
+            ))}
+          </ol>
+        </section>
+      ) : reading.availability === "unavailable" || !lesson?.body ? (
         paper ? (
           <Notice title="This paper isn’t solved here yet">The paper is at the end of your textbook; its worked answers have not been published yet.</Notice>
         ) : (
@@ -156,6 +196,7 @@ async function ExerciseView({ id }: { id: string }) {
             premium={premiumBook(subject, reading.grade_number)}
             runnable={lesson.language === "roman_ur"}
             revealLabel={revealLabel(lesson.language)}
+            solvedLabels={solvedLabels(lesson.language)}
             assetUrl={(versionId) =>
               lesson.private_preview ? `/learn/topics/${reading.topic_id}/preview-assets/${versionId}` : `/learn/lessons/${lesson.id}/assets/${versionId}`
             }

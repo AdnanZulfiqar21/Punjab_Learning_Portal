@@ -5587,6 +5587,8 @@ export interface components {
             chapter_number: number;
             /** Chapter Title */
             chapter_title: string;
+            /** Title */
+            title: string;
             /**
              * Topic Id
              * Format: uuid

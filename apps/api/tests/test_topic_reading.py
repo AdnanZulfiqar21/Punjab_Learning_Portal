@@ -207,6 +207,7 @@ def test_practice_lists_each_chapters_exercise_with_what_the_caller_can_read(cli
     numbers = [e["chapter_number"] for e in body["exercises"]]
     assert numbers == sorted(numbers)
     assert all(e["availability"] == "unavailable" and e["available_languages"] == [] for e in body["exercises"])
+    assert all(e["title"] == "Exercise" for e in body["exercises"])  # MATHS-11-01: each exercise's own title
 
     created = client.post(
         "/v1/studio/items",
@@ -244,6 +245,17 @@ def test_the_topic_kind_rule_is_the_catalogue_key() -> None:
         "u-model-paper": ("paper", True),
         "u-paper": ("topic", False),
     }
+
+
+def test_a_unit_may_print_several_numbered_exercises() -> None:
+    # MATHS-11-01: "Exercise 1.1" … "Exercise 1.5" in one unit are keyed by their numbers; each is an exercise. A topic
+    # whose title only starts with "Exercise" (e.g. "Exercise physiology") stays a topic.
+    unit = "pk-punjab/xi/biology/c11-bio/ch1"
+    kinds = {
+        key: Topic(natural_key=f"{unit}/{key}").kind
+        for key in ("u-exercise-1-1", "u-exercise-1-5", "u-exercise-physiology")
+    }
+    assert kinds == {"u-exercise-1-1": "exercise", "u-exercise-1-5": "exercise", "u-exercise-physiology": "topic"}
 
 
 PAPERS = (("u-paper-pattern", "Paper Pattern"), ("u-model-paper", "Model Paper"))

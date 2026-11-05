@@ -2,8 +2,10 @@
 // lecture), the same lesson renderer and language choice as a topic, and the self-check answers revealed as "Show
 // answer" / "Answer dekhein". A language switch returns to the matching block of the other variant (READER-PLACE-01).
 // BOOK-PAPERS-01: a Board paper at the end of the book (paper pattern, model paper) opens here too, under its own title.
+// VIDEO-SOLUTION-01 (owner, 2026-11-05): a Mathematics exercise adds "Video Solution": every question with its own video
+// solution, or "Video not available yet" until its video is added. Worked examples never get one.
 import { Redirect, router, Stack, useLocalSearchParams } from "expo-router";
-import { useMemo, useRef } from "react";
+import { useMemo, useRef, useState } from "react";
 import { ScrollView, View, type NativeScrollEvent, type NativeSyntheticEvent } from "react-native";
 
 import { LessonBlocks } from "@/components/lesson-blocks";
@@ -16,7 +18,9 @@ import { api, GRADE_LABEL, lessonAsset, previewAsset, type TopicReading } from "
 import { useAuth } from "@/lib/auth";
 import { premiumBook } from "@/lib/book-style";
 import { useDisplay } from "@/lib/display";
-import { practiceOnly, practiceTitle, revealLabel } from "@/lib/exercises";
+import { hasVideoSolutions, practiceOnly, practiceTitle, revealLabel } from "@/lib/exercises";
+import { plainMath } from "@/lib/inline-math";
+import { solvedLabels } from "@/lib/solved-labels";
 import { missingLanguageNote, READING_LANGUAGES, type ReadingLanguage } from "@/lib/reading-language-core";
 import { mapPlace, placeSignature, type PlaceBlock } from "@/lib/variant-place";
 
@@ -66,6 +70,10 @@ function Reader({
   const signatures = useMemo(() => blocks.map(placeSignature), [blocks]);
   const readable = Boolean(lesson?.body) && !lesson?.locked && reading.availability !== "unavailable";
   const paper = reading.kind === "paper";
+  const videoTab = readable && hasVideoSolutions(subjectKey(reading.subject_name), reading.kind);
+  const [video, setVideo] = useState(false);
+  const questions = blocks.filter((b) => b.type === "checkpoint") as { type: string; ref?: unknown; prompt?: unknown }[];
+  const views: readonly (readonly [ReadingLanguage | "video", string])[] = videoTab ? [...READING_LANGUAGES, ["video", "Video Solution"]] : READING_LANGUAGES;
 
   function switchLanguage(next: ReadingLanguage) {
     if (next === language) return;
@@ -105,10 +113,19 @@ function Reader({
       contentContainerStyle={{ padding: Space.lg, gap: Space.md }}>
       {readable ? (
         <View style={{ backgroundColor: c.background, paddingBottom: Space.xs }}>
-          <Segmented label="Exercise language" options={READING_LANGUAGES} value={language} onChange={switchLanguage} />
+          <Segmented
+            label={videoTab ? "Read or watch" : "Exercise language"}
+            options={views}
+            value={video ? "video" : language}
+            onChange={(v) => {
+              if (v === "video") return setVideo(true);
+              setVideo(false);
+              switchLanguage(v);
+            }}
+          />
         </View>
       ) : null}
-      {note ? <T variant="small" accessibilityLiveRegion="polite">{note}</T> : null}
+      {note && !video ? <T variant="small" accessibilityLiveRegion="polite">{note}</T> : null}
       <View style={{ gap: Space.xs }}>
         <View style={{ flexDirection: "row", alignItems: "center", gap: Space.sm, flexWrap: "wrap" }}>
           <T variant="eyebrow">
@@ -121,7 +138,23 @@ function Reader({
         </T>
         <T variant="small">{paper ? "Board model paper" : reading.chapter_title}</T>
       </View>
-      {reading.availability === "unavailable" || !lesson?.body ? (
+      {video ? (
+        <View style={{ gap: Space.sm }}>
+          <Notice title="Video solutions are not available yet">
+            Every question of this exercise will get its own video solution, explained step by step. Until a question&apos;s video is added, its worked
+            solution is in the English and Roman Urdu views.
+          </Notice>
+          {questions.map((q, i) => (
+            <View key={i} style={{ gap: Space.xs, borderWidth: 1, borderColor: c.border, borderRadius: 12, backgroundColor: c.surface, padding: Space.md }}>
+              {typeof q.ref === "string" ? <T variant="eyebrow" style={{ color: c.accent }}>{`Question ${q.ref}`}</T> : null}
+              <T>{plainMath(typeof q.prompt === "string" ? q.prompt : "")}</T>
+              <T variant="small" accessibilityLiveRegion="polite">
+                ▶ Video not available yet
+              </T>
+            </View>
+          ))}
+        </View>
+      ) : reading.availability === "unavailable" || !lesson?.body ? (
         paper ? (
           <Notice title="This paper isn’t solved here yet">The paper is at the end of your textbook; its worked answers have not been published yet.</Notice>
         ) : (
@@ -144,6 +177,7 @@ function Reader({
             premium={premiumBook(subjectKey(reading.subject_name), reading.grade_number)}
             runnable={lesson.language === "roman_ur"}
             revealLabel={revealLabel(lesson.language)}
+            solvedLabels={solvedLabels(lesson.language)}
           />
         </View>
       )}
