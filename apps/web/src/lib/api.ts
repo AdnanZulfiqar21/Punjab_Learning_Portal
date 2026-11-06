@@ -1,8 +1,9 @@
 // Server-side API client. The API origin is read from the runtime environment on every request, never baked into
 // the build (roadmap §5.5: one immutable artifact promoted between environments).
+import { cacheLife, cacheTag } from "next/cache";
 import { connection } from "next/server";
 import { cache } from "react";
-import type { Book, Catalogue, Chapter, Discovery, Lesson, Problem, SearchResult } from "@portal/contracts";
+import type { Book, Catalogue, Chapter, Discovery, Lesson, Problem, SearchResult, ServiceStatus } from "@portal/contracts";
 import { readRuntimeConfig } from "@/lib/runtime-config";
 import { sessionToken } from "@/lib/session";
 
@@ -25,6 +26,29 @@ function apiOrigin(): string {
 
 async function getJSON<T>(path: string, token?: string): Promise<Result<T>> {
   await connection(); // request-time data: builds never depend on a live API
+  return fetchJSON<T>(path, token);
+}
+
+/** PUBLIC-CACHE-01: the catalogue tags; a publish or rollback in the Studio refreshes them at once. */
+export const PUBLIC_CATALOGUE_TAG = "public-catalogue";
+
+/** PUBLIC-CACHE-01: an anonymous, public API read (the same for every visitor, and already sent by the API as
+ * `public, max-age=60`), shared by every page view on this server for up to a minute instead of one API call per view.
+ * Never pass a session token here: personal and premium reads stay on `getJSON`. Callers reach it only after
+ * `connection()`, so it runs at request time and never at build time. An error is not cached. */
+async function publicJSON<T>(path: string, tag: string, seconds: number): Promise<Result<T>> {
+  "use cache";
+  cacheLife({ stale: seconds, revalidate: seconds, expire: 3600 });
+  cacheTag(tag);
+  return fetchJSON<T>(path);
+}
+
+async function getPublic<T>(path: string, tag = PUBLIC_CATALOGUE_TAG, seconds = 60): Promise<Result<T>> {
+  await connection(); // request-time data: builds never depend on a live API
+  return publicJSON<T>(path, tag, seconds);
+}
+
+async function fetchJSON<T>(path: string, token?: string): Promise<Result<T>> {
   const correlationId = crypto.randomUUID().replaceAll("-", "");
   let res: Response;
   try {
@@ -50,16 +74,18 @@ async function getJSON<T>(path: string, token?: string): Promise<Result<T>> {
   return { ok: true, data: (await res.json()) as T };
 }
 
-export const getCatalogue = cache(() => getJSON<Catalogue>("/v1/catalogue"));
+export const getCatalogue = cache(() => getPublic<Catalogue>("/v1/catalogue"));
 /** P11.S1.T3 (DISCOVERY-01): what is published per book, filtered. Only known filter values are passed in. */
 export const getDiscovery = cache((f: { grade?: string; track?: string; subject?: string; exam?: string; availability?: string }) => {
   const q = new URLSearchParams(Object.entries(f).filter((e): e is [string, string] => Boolean(e[1])));
-  return getJSON<Discovery>(`/v1/discovery${q.size ? `?${q}` : ""}`);
+  return getPublic<Discovery>(`/v1/discovery${q.size ? `?${q}` : ""}`);
 });
 export const getBookFor = cache((grade: number, subject: string) =>
-  getJSON<Book>(`/v1/grades/${grade}/subjects/${encodeURIComponent(subject)}/book`),
+  getPublic<Book>(`/v1/grades/${grade}/subjects/${encodeURIComponent(subject)}/book`),
 );
-export const getChapter = cache((id: string) => getJSON<Chapter>(`/v1/chapters/${encodeURIComponent(id)}`));
+export const getChapter = cache((id: string) => getPublic<Chapter>(`/v1/chapters/${encodeURIComponent(id)}`));
+/** P15.S2.T3: known incidents for the banner on every page, shared for 30 seconds. */
+export const getServiceStatus = cache(() => getPublic<ServiceStatus>("/v1/status", "service-status", 30));
 /** Published, live lessons for a chapter. Premium bodies come back only for a learner with an active plan or
  * trial (review R07), so the learner's session is forwarded when present. */
 export const getLessons = cache(async (chapterId: string, language?: string) =>

@@ -1,5 +1,4 @@
-import type { ServiceStatus } from "@portal/contracts";
-import { api } from "@/lib/session";
+import { getServiceStatus } from "@/lib/api";
 
 // P15.S2.T3: known outages and recoveries, shown on every page above the content (never replacing it, so a
 // submission receipt or result stays visible). A status page hosted apart from the app needs its own hosting (B03).
@@ -11,7 +10,7 @@ const LABEL: Record<string, string> = {
 };
 
 export async function IncidentBanner() {
-  const res = await api<ServiceStatus>("/v1/status").catch(() => null);
+  const res = await getServiceStatus().catch(() => null);
   if (!res || !res.ok) return null;
   const open = res.data.incidents.filter((i) => i.status !== "resolved");
   if (open.length === 0) return null;
